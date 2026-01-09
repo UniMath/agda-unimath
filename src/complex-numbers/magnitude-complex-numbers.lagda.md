@@ -335,10 +335,10 @@ abstract
 
 ```agda
 abstract
-  eq-magnitude-ℂ-norm-ℝ² :
+  magnitude-complex-ℝ² :
     {l : Level} (z : ℂ l) →
-    magnitude-ℂ z ＝ euclidean-norm-ℝ^ 2 (map-ℂ-ℝ² z)
-  eq-magnitude-ℂ-norm-ℝ² {l} z =
+    magnitude-ℂ z ＝ euclidean-norm-ℝ-Fin (complex-ℝ² z)
+  magnitude-complex-ℝ² {l} z =
     ap real-sqrt-ℝ⁰⁺ (inv (eq-ℝ⁰⁺ _ _ (compute-sum-two-ℝ _)))
 ```
 
@@ -352,13 +352,13 @@ abstract
   triangular-level-magnitude-ℂ l z w =
     binary-tr
       ( leq-ℝ)
-      ( ( ap (euclidean-norm-ℝ^ 2) (inv (map-add-ℂ-ℝ² z w))) ∙
-        ( inv (eq-magnitude-ℂ-norm-ℝ² _)))
+      ( ( ap euclidean-norm-ℝ-Fin (inv (add-complex-ℝ² z w))) ∙
+        ( inv (magnitude-complex-ℝ² _)))
       ( inv
         ( ap-add-ℝ
-          ( eq-magnitude-ℂ-norm-ℝ² z)
-          ( eq-magnitude-ℂ-norm-ℝ² w)))
-      ( triangular-euclidean-norm-ℝ^ 2 (map-ℂ-ℝ² z) (map-ℂ-ℝ² w))
+          ( magnitude-complex-ℝ² z)
+          ( magnitude-complex-ℝ² w)))
+      ( triangular-euclidean-norm-ℝ-Fin 2 (complex-ℝ² z) (complex-ℝ² w))
 
   triangular-magnitude-ℂ :
     {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
@@ -384,12 +384,12 @@ abstract
     {l : Level} (z : ℂ l) → is-zero-ℝ (magnitude-ℂ z) → is-zero-ℂ z
   is-extensional-magnitude-ℂ z |z|=0 =
     is-zero-eq-raise-zero-ℂ
-      ( ( inv (is-retraction-map-inv-ℂ-ℝ² z)) ∙
+      ( ( inv (is-retraction-inv-complex-ℝ² z)) ∙
         ( ap
-          ( map-inv-ℂ-ℝ²)
-          ( is-extensional-euclidean-norm-ℝ^ 2
-            ( map-ℂ-ℝ² z)
-            ( tr is-zero-ℝ (eq-magnitude-ℂ-norm-ℝ² z) |z|=0))))
+          ( inv-complex-ℝ²)
+          ( is-extensional-euclidean-norm-ℝ-Fin 2
+            ( complex-ℝ² z)
+            ( tr is-zero-ℝ (magnitude-complex-ℝ² z) |z|=0))))
 ```
 
 ## See also

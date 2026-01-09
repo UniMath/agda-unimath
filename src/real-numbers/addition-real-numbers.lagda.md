@@ -578,7 +578,7 @@ abstract
     similarity-reasoning-ℝ
       y
       ~ℝ y +ℝ neg-ℝ zero-ℝ
-      `  by sim-eq-ℝ (inv (ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ y))
+        by sim-eq-ℝ (inv (ap-add-ℝ refl neg-zero-ℝ ∙ right-unit-law-add-ℝ y))
       ~ℝ y +ℝ neg-ℝ (x +ℝ y)
         by
           preserves-sim-left-add-ℝ y _ _

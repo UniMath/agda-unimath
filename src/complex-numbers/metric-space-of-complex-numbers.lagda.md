@@ -26,6 +26,8 @@ open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import functional-analysis.standard-euclidean-hilbert-spaces
+
 open import linear-algebra.standard-euclidean-inner-product-spaces
 
 open import metric-spaces.complete-metric-spaces
@@ -85,24 +87,24 @@ isometric-equiv-metric-space-ℂ-euclidean-metric-space-ℝ² :
   (l : Level) →
   isometric-equiv-Metric-Space
     ( metric-space-ℂ l)
-    ( euclidean-metric-space-ℝ^ 2 l)
+    ( euclidean-metric-space-ℝ-Fin 2 l)
 isometric-equiv-metric-space-ℂ-euclidean-metric-space-ℝ² l =
   ( equiv-ℂ-ℝ² l ,
     λ d z w →
       iff-equiv
         ( equiv-tr
           ( λ x → leq-ℝ x (real-ℚ⁺ d))
-          ( ( eq-magnitude-ℂ-norm-ℝ² (z -ℂ w)) ∙
-            ( ap (euclidean-norm-ℝ^ 2) (map-diff-ℂ-ℝ² z w)))))
+          ( ( magnitude-complex-ℝ² (z -ℂ w)) ∙
+            ( ap euclidean-norm-ℝ-Fin (diff-complex-ℝ² z w)))))
 
 abstract
   eq-metric-space-ℂ-metric-space-ℝ² :
     (l : Level) →
-    metric-space-ℂ l ＝ euclidean-metric-space-ℝ^ 2 l
+    metric-space-ℂ l ＝ euclidean-metric-space-ℝ-Fin 2 l
   eq-metric-space-ℂ-metric-space-ℝ² l =
     eq-isometric-equiv-Metric-Space
       ( metric-space-ℂ l)
-      ( euclidean-metric-space-ℝ^ 2 l)
+      ( euclidean-metric-space-ℝ-Fin 2 l)
       ( isometric-equiv-metric-space-ℂ-euclidean-metric-space-ℝ² l)
 ```
 
@@ -116,7 +118,7 @@ abstract
     inv-tr
       ( is-complete-Metric-Space)
       ( eq-metric-space-ℂ-metric-space-ℝ² l)
-      ( is-complete-euclidean-metric-space-ℝ^ 2 l)
+      ( is-complete-euclidean-metric-space-ℝ-Fin 2 l)
 
 complete-metric-space-ℂ : (l : Level) → Complete-Metric-Space (lsuc l) l
 complete-metric-space-ℂ l =

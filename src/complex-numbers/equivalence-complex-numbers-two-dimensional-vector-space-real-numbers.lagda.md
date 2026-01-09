@@ -39,48 +39,50 @@ The [complex numbers](complex-numbers.complex-numbers.md) are
 ## Definition
 
 ```agda
-map-ℂ-ℝ² : {l : Level} → ℂ l → type-ℝ^ 2 l
-map-ℂ-ℝ² (a +iℂ b) (inl (inr star)) = a
-map-ℂ-ℝ² (a +iℂ b) (inr star) = b
+complex-ℝ² : {l : Level} → ℂ l → type-ℝ-Fin 2 l
+complex-ℝ² (a +iℂ b) (inl (inr star)) = a
+complex-ℝ² (a +iℂ b) (inr star) = b
 
-map-inv-ℂ-ℝ² : {l : Level} → type-ℝ^ 2 l → ℂ l
-map-inv-ℂ-ℝ² v = v (zero-Fin 1) +iℂ v (one-Fin 1)
+inv-complex-ℝ² : {l : Level} → type-ℝ-Fin 2 l → ℂ l
+inv-complex-ℝ² v = v (zero-Fin 1) +iℂ v (one-Fin 1)
 
 abstract
-  is-section-map-inv-ℂ-ℝ² :
-    {l : Level} (z : type-ℝ^ 2 l) → map-ℂ-ℝ² (map-inv-ℂ-ℝ² z) ＝ z
-  is-section-map-inv-ℂ-ℝ² z =
+  is-section-inv-complex-ℝ² :
+    {l : Level} (z : type-ℝ-Fin 2 l) → complex-ℝ² (inv-complex-ℝ² z) ＝ z
+  is-section-inv-complex-ℝ² z =
     eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
 
-  is-retraction-map-inv-ℂ-ℝ² :
-    {l : Level} (z : ℂ l) → map-inv-ℂ-ℝ² (map-ℂ-ℝ² z) ＝ z
-  is-retraction-map-inv-ℂ-ℝ² z = refl
+  is-retraction-inv-complex-ℝ² :
+    {l : Level} (z : ℂ l) → inv-complex-ℝ² (complex-ℝ² z) ＝ z
+  is-retraction-inv-complex-ℝ² z = refl
 
-is-equiv-ℂ-ℝ² : (l : Level) → is-equiv (map-ℂ-ℝ² {l})
+is-equiv-ℂ-ℝ² : (l : Level) → is-equiv (complex-ℝ² {l})
 is-equiv-ℂ-ℝ² l =
   is-equiv-is-invertible
-    ( map-inv-ℂ-ℝ²)
-    ( is-section-map-inv-ℂ-ℝ²)
-    ( is-retraction-map-inv-ℂ-ℝ²)
+    ( inv-complex-ℝ²)
+    ( is-section-inv-complex-ℝ²)
+    ( is-retraction-inv-complex-ℝ²)
 
-equiv-ℂ-ℝ² : (l : Level) → ℂ l ≃ type-ℝ^ 2 l
-equiv-ℂ-ℝ² l = (map-ℂ-ℝ² , is-equiv-ℂ-ℝ² l)
+equiv-ℂ-ℝ² : (l : Level) → ℂ l ≃ type-ℝ-Fin 2 l
+equiv-ℂ-ℝ² l = (complex-ℝ² , is-equiv-ℂ-ℝ² l)
 
 abstract
-  map-add-ℂ-ℝ² :
+  add-complex-ℝ² :
     {l : Level} (z w : ℂ l) →
-    map-ℂ-ℝ² (z +ℂ w) ＝ add-ℝ^ 2 (map-ℂ-ℝ² z) (map-ℂ-ℝ² w)
-  map-add-ℂ-ℝ² z w = eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
+    complex-ℝ² (z +ℂ w) ＝ add-ℝ-Fin (complex-ℝ² z) (complex-ℝ² w)
+  add-complex-ℝ² z w =
+    eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
 
-  map-neg-ℂ-ℝ² : {l : Level} (z : ℂ l) →
-    map-ℂ-ℝ² (neg-ℂ z) ＝ neg-ℝ^ 2 (map-ℂ-ℝ² z)
-  map-neg-ℂ-ℝ² z = eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
+  neg-complex-ℝ² : {l : Level} (z : ℂ l) →
+    complex-ℝ² (neg-ℂ z) ＝ neg-ℝ-Fin (complex-ℝ² z)
+  neg-complex-ℝ² z = eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
 
-  map-diff-ℂ-ℝ² :
+  diff-complex-ℝ² :
     {l : Level} (z w : ℂ l) →
-    map-ℂ-ℝ² (z -ℂ w) ＝ diff-ℝ^ 2 (map-ℂ-ℝ² z) (map-ℂ-ℝ² w)
-  map-diff-ℂ-ℝ² z w =
-    map-add-ℂ-ℝ² z (neg-ℂ w) ∙ ap (add-ℝ^ 2 (map-ℂ-ℝ² z)) (map-neg-ℂ-ℝ² w)
+    complex-ℝ² (z -ℂ w) ＝ diff-ℝ-Fin (complex-ℝ² z) (complex-ℝ² w)
+  diff-complex-ℝ² z w =
+    ( add-complex-ℝ² z (neg-ℂ w)) ∙
+    ( ap (add-ℝ-Fin (complex-ℝ² z)) (neg-complex-ℝ² w))
 ```
 
 ## See also
