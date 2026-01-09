@@ -56,7 +56,7 @@ open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
-open import real-numbers.limits-of-functions-real-numbers public
+open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
@@ -90,7 +90,7 @@ open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
-open import real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers public
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public

@@ -19,8 +19,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.maps-metric-spaces
 open import metric-spaces.limits-of-maps-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 

@@ -9,6 +9,7 @@ module real-numbers.limits-of-endomaps-real-numbers where
 ```agda
 open import foundation.propositions
 open import foundation.universe-levels
+
 open import metric-spaces.limits-of-maps-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
@@ -23,7 +24,7 @@ A
 {{#concept "limit" Disambiguation="of a function from ℝ to ℝ" Agda=is-limit-endomap-ℝ}}
 of an [endomap](foundation.endomorphisms.md) `f` on the
 [real numbers](real-numbers.dedekind-real-numbers.md) at `x : ℝ` is the
-[limit](metric-spaces.limits-of-functions-metric-spaces.md) of `f` at `x` in the
+[limit](metric-spaces.limits-of-maps-metric-spaces.md) of `f` at `x` in the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ## Definition

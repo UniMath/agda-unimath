@@ -32,6 +32,7 @@ open import foundation.universe-levels
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.lipschitz-maps-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import order-theory.large-posets

@@ -8,11 +8,11 @@ module real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers whe
 
 ```agda
 open import foundation.axiom-of-countable-choice
-open import foundation.propositions
-open import foundation.universe-levels
 open import foundation.dependent-pair-types
-
+open import foundation.propositions
 open import foundation.subtypes
+open import foundation.universe-levels
+
 open import metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces
 
 open import real-numbers.dedekind-real-numbers

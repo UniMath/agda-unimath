@@ -100,7 +100,7 @@ open import metric-spaces.dependent-products-complete-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
-open import metric-spaces.epsilon-delta-limits-of-functions-metric-spaces public
+open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
@@ -150,7 +150,7 @@ open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
 open import metric-spaces.pointwise-continuous-maps-metric-spaces public
-open import metric-spaces.pointwise-epsilon-delta-continuous-functions-metric-spaces public
+open import metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-maps public
