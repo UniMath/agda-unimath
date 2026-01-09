@@ -42,7 +42,7 @@ abstract
     (n : ℕ) (l : Level) →
     is-complete-Metric-Space (euclidean-metric-space-ℝ-Fin n l)
   is-complete-euclidean-metric-space-ℝ-Fin n l =
-    preserves-is-complete-uniform-homeo-Metric-Space
+    is-complete-metric-space-uniform-homeo-Metric-Space
       ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ-Fin n l)
       ( uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin
