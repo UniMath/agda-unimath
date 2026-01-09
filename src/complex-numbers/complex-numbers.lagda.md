@@ -115,6 +115,14 @@ neg-ℂ : {l : Level} → ℂ l → ℂ l
 neg-ℂ (a , b) = (neg-ℝ a , neg-ℝ b)
 ```
 
+### `complex-ℝ zero-ℝ` is equal to `zero-ℂ`
+
+```agda
+abstract
+  eq-complex-zero-ℝ : complex-ℝ zero-ℝ ＝ zero-ℂ
+  eq-complex-zero-ℝ = eq-ℂ refl (inv (eq-raise-ℝ zero-ℝ))
+```
+
 ### `complex-ℝ one-ℝ` is equal to `one-ℂ`
 
 ```agda

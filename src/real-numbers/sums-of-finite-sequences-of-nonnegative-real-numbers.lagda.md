@@ -142,3 +142,14 @@ abstract
         ( leq-zero-is-zero-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n a) ∑aᵢ=0)
         ( leq-term-sum-fin-sequence-ℝ⁰⁺ n a i))
 ```
+
+### The sum of a finite sequence of two nonnegative real numbers is the result of adding them
+
+```agda
+abstract
+  compute-sum-two-ℝ⁰⁺ :
+    {l : Level} (f : fin-sequence (ℝ⁰⁺ l) 2) →
+    sum-fin-sequence-ℝ⁰⁺ 2 f ＝ f (zero-Fin 1) +ℝ⁰⁺ f (one-Fin 1)
+  compute-sum-two-ℝ⁰⁺ f =
+    eq-ℝ⁰⁺ _ _ (compute-sum-two-ℝ (real-ℝ⁰⁺ ∘ f))
+```
