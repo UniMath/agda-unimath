@@ -14,6 +14,8 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.complete-metric-spaces
@@ -50,6 +52,12 @@ module _
       ( metric-space-Complete-Metric-Space M)
       ( x)
       ( l)
+
+  sequence-cauchy-sequence-Complete-Metric-Space :
+    cauchy-sequence-Complete-Metric-Space →
+    sequence (type-Complete-Metric-Space M)
+  sequence-cauchy-sequence-Complete-Metric-Space =
+    sequence-cauchy-sequence-Metric-Space (metric-space-Complete-Metric-Space M)
 ```
 
 ## Properties
