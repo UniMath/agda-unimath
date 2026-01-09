@@ -31,12 +31,11 @@ open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.nets-metric-spaces
-
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.uniform-homeomorphisms-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
-open import metric-spaces.short-maps-metric-spaces
-open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>

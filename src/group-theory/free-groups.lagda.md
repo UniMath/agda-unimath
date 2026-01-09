@@ -7,8 +7,8 @@ module group-theory.free-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
 open import foundation.binary-relations
+open import foundation.universe-levels
 ```
 
 </details>
