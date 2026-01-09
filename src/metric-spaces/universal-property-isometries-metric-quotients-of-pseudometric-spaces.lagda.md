@@ -63,11 +63,11 @@ pseudometric space to a metric space are
 {{#concept "equivalent" Disambiguation="isometries of metric quotients of pseudometric spaces Agda=equiv-isometry-metric-quotient-Pseudometric-Space}}
 to isometries from its metric quotient.
 
-Equivalently, the metric quotient satisfies the following
-{{#concept "universal property" Disambiguation="of metric quotients and isometries" Agda=is-contr-coh-isometry-metric-quotient-Pseudometric-Space}}:
-for any isometry `f : P → M` from a pseudometric space in a metric space, there
-[exists a unique](foundation-core.contractible-types.md) isometry `g : [P] → M`
-such that
+Equivalently, the metric quotient satisfies the
+{{#concept "universal property" Disambiguation="of metric quotients and isometries" Agda=is-contr-coh-isometry-metric-quotient-Pseudometric-Space}}
+of metric quotients and isometries: for any isometry `f : P → M` into a metric
+space `M`, there [uniquely exists](foundation.uniqueness-quantification.md)
+an extension of `f` along `q`, i.e., an isometry `g : [P] → M` such that
 
 ```text
 g ∘ q ~ f.
