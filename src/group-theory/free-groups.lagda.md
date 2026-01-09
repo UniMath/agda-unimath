@@ -9,36 +9,51 @@ module group-theory.free-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation.binary-relations
-open import foundation.sets
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.sections
-open import foundation.retractions
-open import foundation.action-on-identifications-functions
-open import foundation.function-extensionality
-open import foundation.unital-binary-operations
-open import group-theory.semigroups
-open import foundation.equivalences
-open import group-theory.monoids
-open import foundation.homotopies
-open import group-theory.homomorphisms-groups
-open import group-theory.groups
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.binary-functoriality-set-quotients
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functoriality-propositional-truncation
+open import foundation.functoriality-set-quotients
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.functoriality-propositional-truncation
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retractions
+open import foundation.sections
 open import foundation.set-quotients
-open import foundation.dependent-pair-types
+open import foundation.sets
 open import foundation.truncation-equivalence-relations
-open import foundation.binary-functoriality-set-quotients
-open import foundation.functoriality-set-quotients
-open import foundation.equivalence-relations
+open import foundation.unital-binary-operations
+open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 </details>
 
 ## Idea
+
+The {{#concept "free group" WDID=Q431078 WD="free group" Agda=free-Group}} on a
+type `A` is the [group](group-theory.groups.md) `FA` satisfying the universal
+property that for any group `G`, there is an
+[equivalence](foundation.equivalences.md) between the functions `f : A → G` and
+the [group homomorphisms](group-theory.homomorphisms-groups.md) from `FA` to
+`G`.
+
+The free group is constructed here by taking the type of
+{{#concept "words" WDID=Q10944557 WD="word" Agda=word-free-Group}} on `A`, built
+of an embedding of `A` and the fundamental group operations, and taking the
+[quotient](foundation.set-quotients.md) by the
+[equivalence relation](foundation.equivalence-relations.md) induced by the group
+laws.
 
 ## Definition
 
@@ -565,3 +580,8 @@ module _
     ( hom-universal-property-free-Group A G ,
       is-equiv-hom-universal-property-free-Group)
 ```
+
+## External links
+
+- [Free group](https://en.wikipedia.org/wiki/Free_group) on Wikipedia
+- [Free group](https://ncatlab.org/nlab/show/free+group) on $n$Lab

@@ -468,6 +468,8 @@ open import foundation.truncated-addition-truncation-levels public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
+open import foundation.truncation-binary-relations public
+open import foundation.truncation-equivalence-relations public
 open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
