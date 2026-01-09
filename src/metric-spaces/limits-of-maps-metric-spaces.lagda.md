@@ -76,7 +76,7 @@ module _
 
 ## See also
 
-- [ε-δ limits of functions in metric spaces](metric-spaces.limits-of-functions-metric-spaces.md)
+- [ε-δ limits of functions in metric spaces](metric-spaces.epsilon-delta-limits-of-maps-metric-spaces.md)
 
 ## External links
 

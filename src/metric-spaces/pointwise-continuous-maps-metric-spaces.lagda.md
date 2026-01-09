@@ -39,7 +39,7 @@ A
 {{#concept "pointwise continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
 from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space `Y`
 is a map `f : X → Y` which is
-[continuous at every point](metric-spaces.continuity-of-maps-at-points-in-metric-spaces.md)
+[continuous at every point](metric-spaces.continuity-of-maps-at-points-metric-spaces.md)
 in `X`.
 
 ## Definition
