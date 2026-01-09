@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
@@ -47,6 +47,7 @@ open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -58,7 +59,7 @@ The
 of a [real number](real-numbers.dedekind-real-numbers.md) is the
 [binary maximum](real-numbers.binary-maximum-real-numbers.md) of it and its
 [negation](real-numbers.negation-real-numbers.md). The absolute value is a
-[short function](metric-spaces.short-functions-metric-spaces.md) of the
+[short map](metric-spaces.short-maps-metric-spaces.md) of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
 ```agda
@@ -212,12 +213,12 @@ module _
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (|x|~0 : sim-ℝ (abs-ℝ x) zero-ℝ)
+  {l : Level} (x : ℝ l) (|x|~0 : is-zero-ℝ (abs-ℝ x))
   where
 
   abstract
-    sim-zero-sim-zero-abs-ℝ : sim-ℝ x zero-ℝ
-    sim-zero-sim-zero-abs-ℝ =
+    is-zero-is-zero-abs-ℝ : is-zero-ℝ x
+    is-zero-is-zero-abs-ℝ =
       sim-sim-leq-ℝ
         ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (leq-abs-ℝ x) ,
           binary-tr
@@ -228,58 +229,48 @@ module _
               ( transitive-leq-ℝ _ _ _ (leq-sim-ℝ |x|~0) (neg-leq-abs-ℝ x))))
 
 abstract
-  eq-raise-zero-eq-raise-zero-abs-ℝ :
-    {l : Level} (x : ℝ l) → abs-ℝ x ＝ raise-ℝ l zero-ℝ → x ＝ raise-ℝ l zero-ℝ
-  eq-raise-zero-eq-raise-zero-abs-ℝ {l} x |x|=0 =
+  eq-zero-eq-zero-abs-ℝ :
+    {l : Level} (x : ℝ l) → abs-ℝ x ＝ raise-zero-ℝ l → x ＝ raise-zero-ℝ l
+  eq-zero-eq-zero-abs-ℝ {l} x |x|=0 =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
         ( sim-raise-ℝ l zero-ℝ)
-        ( sim-zero-sim-zero-abs-ℝ x
+        ( is-zero-is-zero-abs-ℝ x
           ( transitive-sim-ℝ _ _ _
             ( sim-raise-ℝ' l zero-ℝ)
             ( sim-eq-ℝ |x|=0))))
-
-module _
-  (x : ℝ lzero) (|x|=0 : abs-ℝ x ＝ zero-ℝ)
-  where
-
-  abstract
-    is-zero-is-zero-abs-ℝ : x ＝ zero-ℝ
-    is-zero-is-zero-abs-ℝ =
-      eq-sim-ℝ (sim-zero-sim-zero-abs-ℝ x (sim-eq-ℝ |x|=0))
 ```
 
 ### If `|x| ≤ 0` then `|x| ＝ 0` and `x ＝ 0`
 
 ```agda
 module _
-  (x : ℝ lzero) (|x|≤0 : leq-ℝ (abs-ℝ x) zero-ℝ)
+  {l : Level}
+  (x : ℝ l)
   where
 
   abstract
-    is-zero-abs-leq-zero-abs-ℝ : abs-ℝ x ＝ zero-ℝ
-    is-zero-abs-leq-zero-abs-ℝ =
-      antisymmetric-leq-ℝ
-        ( abs-ℝ x)
-        ( zero-ℝ)
-        ( |x|≤0)
-        ( is-nonnegative-abs-ℝ x)
+    is-zero-abs-leq-zero-abs-ℝ :
+      leq-ℝ (abs-ℝ x) zero-ℝ → is-zero-ℝ (abs-ℝ x)
+    is-zero-abs-leq-zero-abs-ℝ |x|≤0 =
+      sim-sim-leq-ℝ (|x|≤0 , is-nonnegative-abs-ℝ x)
 
-    is-zero-leq-zero-abs-ℝ : x ＝ zero-ℝ
-    is-zero-leq-zero-abs-ℝ =
-      is-zero-is-zero-abs-ℝ x is-zero-abs-leq-zero-abs-ℝ
+    is-zero-leq-zero-abs-ℝ : leq-ℝ (abs-ℝ x) zero-ℝ → is-zero-ℝ x
+    is-zero-leq-zero-abs-ℝ |x|≤0 =
+      is-zero-is-zero-abs-ℝ x (is-zero-abs-leq-zero-abs-ℝ |x|≤0)
 ```
 
 ### If `|x| ≤ ε` for all `ε : ℚ⁺` then `x ＝ 0`
 
 ```agda
 module _
-  (x : ℝ lzero)
+  {l : Level}
+  (x : ℝ l)
   (is-infinitesimal-x : (ε : ℚ⁺) → leq-ℝ (abs-ℝ x) (real-ℚ⁺ ε))
   where
 
   abstract
-    is-zero-is-infinitesimal-abs-ℝ : x ＝ zero-ℝ
+    is-zero-is-infinitesimal-abs-ℝ : is-zero-ℝ x
     is-zero-is-infinitesimal-abs-ℝ =
       is-zero-leq-zero-abs-ℝ
         ( x)
@@ -307,6 +298,20 @@ module _
     leq-abs-leq-leq-neg-ℝ = leq-max-leq-leq-ℝ x (neg-ℝ x) y
 ```
 
+### If `x < y` and `-x < y`, then `|x| < y`
+
+```agda
+module _
+  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2}
+  where
+
+  abstract opaque
+    unfolding abs-ℝ
+
+    le-abs-le-le-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ x) y → le-ℝ (abs-ℝ x) y
+    le-abs-le-le-neg-ℝ = le-max-le-le-ℝ
+```
+
 ### Triangle inequality
 
 ```agda
@@ -325,7 +330,7 @@ module _
           ( preserves-leq-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
 ```
 
-### The absolute value is a short function
+### The absolute value is a short map
 
 ```agda
 module _
@@ -333,12 +338,12 @@ module _
   where
 
   abstract
-    is-short-abs-ℝ :
-      is-short-function-Metric-Space
+    is-short-map-abs-ℝ :
+      is-short-map-Metric-Space
         ( metric-space-ℝ l)
         ( metric-space-ℝ l)
         ( abs-ℝ)
-    is-short-abs-ℝ d x y I =
+    is-short-map-abs-ℝ d x y I =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( abs-ℝ x)
@@ -394,9 +399,9 @@ module _
               ( y)
               ( left-leq-real-bound-neighborhood-ℝ d x y I))))
 
-  short-abs-ℝ :
-    short-function-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
-  short-abs-ℝ = (abs-ℝ , is-short-abs-ℝ)
+  short-map-abs-ℝ :
+    short-map-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l)
+  short-map-abs-ℝ = (abs-ℝ , is-short-map-abs-ℝ)
 ```
 
 ### The absolute value of `x` is the square root of `x²`
@@ -491,4 +496,14 @@ abstract opaque
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) x)
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) (neg-ℝ x))
   approximate-below-abs-ℝ x = approximate-below-max-ℝ x (neg-ℝ x)
+```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℝ : {l : Level} (x : ℝ l) → square-ℝ (abs-ℝ x) ＝ square-ℝ x
+  square-abs-ℝ x =
+    ( ap square-ℝ (eq-abs-sqrt-square-ℝ x)) ∙
+    ( eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
 ```

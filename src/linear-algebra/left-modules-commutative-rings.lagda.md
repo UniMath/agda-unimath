@@ -8,6 +8,7 @@ module linear-algebra.left-modules-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 
 open import foundation.identity-types
 open import foundation.propositions
@@ -235,4 +236,43 @@ make-left-module-Commutative-Ring :
   left-module-Commutative-Ring l2 R
 make-left-module-Commutative-Ring R =
   make-left-module-Ring (ring-Commutative-Ring R)
+```
+
+### Given a left module over `S`, a commutative ring homomorphism `R → S` induces a left module over `R`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (S : Commutative-Ring l2)
+  (h : hom-Commutative-Ring R S)
+  (M : left-module-Commutative-Ring l3 S)
+  where
+
+  left-module-hom-left-module-Commutative-Ring :
+    left-module-Commutative-Ring l3 R
+  left-module-hom-left-module-Commutative-Ring =
+    left-module-hom-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( ring-Commutative-Ring S)
+      ( h)
+      ( M)
+```
+
+### A commutative ring homomorphism `R → S` induces the structure of an `R`-left module on `S`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (S : Commutative-Ring l2)
+  (h : hom-Commutative-Ring R S)
+  where
+
+  left-module-hom-Commutative-Ring : left-module-Commutative-Ring l2 R
+  left-module-hom-Commutative-Ring =
+    left-module-hom-Ring
+      ( ring-Commutative-Ring R)
+      ( ring-Commutative-Ring S)
+      ( h)
 ```

@@ -80,6 +80,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -596,6 +597,9 @@ module _
 
 mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 mul-ℝ' y x = mul-ℝ x y
+
+mul-pair-ℝ : {l1 l2 : Level} → ℝ l1 × ℝ l2 → ℝ (l1 ⊔ l2)
+mul-pair-ℝ = rec-product mul-ℝ
 
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
@@ -1147,7 +1151,7 @@ module _
   where
 
   abstract
-    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
+    left-zero-law-mul-ℝ : is-zero-ℝ (zero-ℝ *ℝ x)
     left-zero-law-mul-ℝ =
       inv-tr
         ( λ y → sim-ℝ y zero-ℝ)
@@ -1178,7 +1182,7 @@ module _
           ~ℝ raise-zero-ℝ l
             by sim-raise-ℝ l zero-ℝ)
 
-    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
+    right-zero-law-mul-ℝ : is-zero-ℝ (x *ℝ zero-ℝ)
     right-zero-law-mul-ℝ =
       tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
 

@@ -18,6 +18,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -26,7 +27,7 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
@@ -45,7 +46,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.uniformly-continuous-functions-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -218,7 +219,7 @@ module _
                           ( refl)))))
           ( equational-reasoning
             ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)) *ℝ
-            ( one-ℝ -ℝ raise-ℝ l zero-ℝ)
+            ( one-ℝ -ℝ raise-zero-ℝ l)
             ＝
               ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)) *ℝ
               ( one-ℝ -ℝ zero-ℝ)
@@ -233,15 +234,22 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( preserves-limits-sequence-uniformly-continuous-function-ℝ
-            ( comp-uniformly-continuous-function-ℝ
-              ( uniformly-continuous-right-mul-ℝ
+          ( preserves-limits-sequence-uniformly-continuous-endomap-ℝ
+            ( comp-uniformly-continuous-endomap-ℝ
+              ( uniformly-continuous-map-right-mul-ℝ
                 ( l)
                 ( a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)))
-              ( uniformly-continuous-diff-ℝ one-ℝ))
+              ( uniformly-continuous-map-left-diff-ℝ one-ℝ))
             ( λ n → power-ℝ n r)
-            ( raise-ℝ l zero-ℝ)
+            ( raise-zero-ℝ l)
             ( is-zero-lim-power-le-one-abs-ℝ r |r|<1))
+
+  convergent-standard-geometric-series-ℝ :
+    le-ℝ (abs-ℝ r) one-ℝ → convergent-series-ℝ l
+  convergent-standard-geometric-series-ℝ |r|<1 =
+    ( standard-geometric-series-ℝ ,
+      a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1) ,
+      compute-sum-standard-geometric-series-ℝ |r|<1)
 ```
 
 ## References
