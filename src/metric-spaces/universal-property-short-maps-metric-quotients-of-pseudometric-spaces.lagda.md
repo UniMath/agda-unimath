@@ -118,11 +118,11 @@ module _
       ( set-Metric-Space M)
       ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
 
-  is-extension-exten-metric-quotient-Pseudometric-Space :
+  is-extension-exten-short-map-metric-quotient-Pseudometric-Space :
     map-exten-short-map-metric-quotient-Pseudometric-space ∘
     map-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
-  is-extension-exten-metric-quotient-Pseudometric-Space =
+  is-extension-exten-short-map-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space P)
       ( set-Metric-Space M)
@@ -147,7 +147,7 @@ module _
         ( equivalence-relation-sim-Pseudometric-Space P)
         ( X)
         ( x∈X))
-      ( is-extension-exten-metric-quotient-Pseudometric-Space x)
+      ( is-extension-exten-short-map-metric-quotient-Pseudometric-Space x)
 ```
 
 ### Extensions of short maps along the natural inclusion into the metric quotient
@@ -344,7 +344,7 @@ module _
     extension-short-map-metric-quotient-Pseudometric-Space P M f
   exten-short-map-metric-quotient-Pseudometric-Space =
     ( short-map-exten-short-map-metric-quotient-Pseudometric-Space ,
-      is-extension-exten-metric-quotient-Pseudometric-Space P M f)
+      is-extension-exten-short-map-metric-quotient-Pseudometric-Space P M f)
 ```
 
 ### All extensions are homotopic to the induced extension
