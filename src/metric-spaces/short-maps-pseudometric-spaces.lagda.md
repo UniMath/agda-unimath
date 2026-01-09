@@ -132,19 +132,20 @@ module _
   (f g : short-map-Pseudometric-Space A B)
   where
 
+  htpy-map-short-map-Pseudometric-Space : UU (l1 ⊔ l1')
+  htpy-map-short-map-Pseudometric-Space =
+    map-short-map-Pseudometric-Space A B f ~
+    map-short-map-Pseudometric-Space A B g
+
   equiv-eq-htpy-map-short-map-Pseudometric-Space :
-    ( f ＝ g) ≃
-    ( map-short-map-Pseudometric-Space A B f ~
-      map-short-map-Pseudometric-Space A B g)
+    (f ＝ g) ≃ htpy-map-short-map-Pseudometric-Space
   equiv-eq-htpy-map-short-map-Pseudometric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
       ( is-short-map-prop-Pseudometric-Space A B) f g
 
   eq-htpy-map-short-map-Pseudometric-Space :
-    ( map-short-map-Pseudometric-Space A B f ~
-      map-short-map-Pseudometric-Space A B g) →
-    ( f ＝ g)
+    htpy-map-short-map-Pseudometric-Space → f ＝ g
   eq-htpy-map-short-map-Pseudometric-Space =
     map-inv-equiv equiv-eq-htpy-map-short-map-Pseudometric-Space
 ```
