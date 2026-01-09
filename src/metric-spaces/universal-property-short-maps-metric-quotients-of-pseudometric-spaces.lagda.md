@@ -111,17 +111,17 @@ module _
     map-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-  map-short-map-metric-quotient-Pseudometric-space =
+  map-exten-short-map-metric-quotient-Pseudometric-space =
     inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space P)
       ( set-Metric-Space M)
       ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
 
   is-extension-exten-metric-quotient-Pseudometric-Space :
-    map-short-map-metric-quotient-Pseudometric-space ∘
+    map-exten-short-map-metric-quotient-Pseudometric-space ∘
     map-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
-  htpy-map-short-map-metric-quotient-Pseudometric-Space =
+  is-extension-exten-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space P)
       ( set-Metric-Space M)
@@ -131,12 +131,12 @@ module _
     (X : type-metric-quotient-Pseudometric-Space P) →
     {x : type-Pseudometric-Space P} →
     is-in-class-metric-quotient-Pseudometric-Space P X x →
-    map-short-map-metric-quotient-Pseudometric-space X ＝
+    map-exten-short-map-metric-quotient-Pseudometric-space X ＝
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f x
-  compute-map-short-map-metric-quotient-Pseudometric-Space X {x} x∈X =
+  compute-map-exten-short-map-metric-quotient-Pseudometric-Space X {x} x∈X =
     tr
       ( λ Y →
-        map-short-map-metric-quotient-Pseudometric-space Y ＝
+        map-exten-short-map-metric-quotient-Pseudometric-space Y ＝
         map-short-map-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
@@ -146,7 +146,7 @@ module _
         ( equivalence-relation-sim-Pseudometric-Space P)
         ( X)
         ( x∈X))
-      ( htpy-map-short-map-metric-quotient-Pseudometric-Space x)
+      ( is-extension-exten-metric-quotient-Pseudometric-Space x)
 ```
 
 ### Extensions of short maps along the natural inclusion into the metric quotient
@@ -276,8 +276,8 @@ module _
     is-short-map-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-      ( map-short-map-metric-quotient-Pseudometric-space P M f)
-  is-short-map-short-map-metric-quotient-Pseudometric-Space
+      ( map-exten-short-map-metric-quotient-Pseudometric-space P M f)
+  is-short-map-exten-short-map-metric-quotient-Pseudometric-Space
     d X Y N⟨X,Y⟩ =
     let
       open
@@ -285,8 +285,8 @@ module _
           ( neighborhood-prop-Metric-Space
             ( M)
             ( d)
-            ( map-short-map-metric-quotient-Pseudometric-space P M f X)
-            ( map-short-map-metric-quotient-Pseudometric-space P M f Y))
+            ( map-exten-short-map-metric-quotient-Pseudometric-space P M f X)
+            ( map-exten-short-map-metric-quotient-Pseudometric-space P M f Y))
       in do
         ( x , x∈X) ←
           is-inhabited-subtype-set-quotient
@@ -300,14 +300,14 @@ module _
         binary-tr
           ( neighborhood-Metric-Space M d)
           ( inv
-            ( compute-map-short-map-metric-quotient-Pseudometric-Space
+            ( compute-map-exten-short-map-metric-quotient-Pseudometric-Space
               ( P)
               ( M)
               ( f)
               ( X)
               ( x∈X)))
           ( inv
-            ( compute-map-short-map-metric-quotient-Pseudometric-Space
+            ( compute-map-exten-short-map-metric-quotient-Pseudometric-Space
               ( P)
               ( M)
               ( f)
@@ -335,15 +335,15 @@ module _
 
   short-map-exten-short-map-metric-quotient-Pseudometric-Space :
     short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M
-  short-map-short-map-metric-quotient-Pseudometric-Space =
-    ( map-short-map-metric-quotient-Pseudometric-space P M f ,
-      is-short-map-short-map-metric-quotient-Pseudometric-Space P M f)
+  short-map-exten-short-map-metric-quotient-Pseudometric-Space =
+    ( map-exten-short-map-metric-quotient-Pseudometric-space P M f ,
+      is-short-map-exten-short-map-metric-quotient-Pseudometric-Space P M f)
 
   exten-short-map-metric-quotient-Pseudometric-Space :
     extension-short-map-metric-quotient-Pseudometric-Space P M f
-  extension-short-map-short-map-metric-quotient-Pseudometric-Space =
-    ( short-map-short-map-metric-quotient-Pseudometric-Space ,
-      htpy-map-short-map-metric-quotient-Pseudometric-Space P M f)
+  exten-short-map-metric-quotient-Pseudometric-Space =
+    ( short-map-exten-short-map-metric-quotient-Pseudometric-Space ,
+      is-extension-exten-metric-quotient-Pseudometric-Space P M f)
 ```
 
 ### All extensions are homotopic to the induced extension
@@ -361,7 +361,7 @@ module _
     htpy-map-short-map-Metric-Space
       ( metric-quotient-Pseudometric-Space P)
       ( M)
-      ( short-map-short-map-metric-quotient-Pseudometric-Space P M f)
+      ( short-map-exten-short-map-metric-quotient-Pseudometric-Space P M f)
       ( short-map-extension-short-map-metric-quotient-Pseudometric-Space
         ( P)
         ( M)
@@ -372,7 +372,7 @@ module _
       open
         do-syntax-trunc-Prop
           ( eq-prop-Metric-Space M
-            ( map-short-map-metric-quotient-Pseudometric-space P M f X)
+            ( map-exten-short-map-metric-quotient-Pseudometric-space P M f X)
             ( map-extension-short-map-metric-quotient-Pseudometric-Space
               ( P)
               ( M)
@@ -386,7 +386,12 @@ module _
 
       let
         lemma-lhs =
-          compute-map-short-map-metric-quotient-Pseudometric-Space P M f X x∈X
+          compute-map-exten-short-map-metric-quotient-Pseudometric-Space
+            ( P)
+            ( M)
+            ( f)
+            ( X)
+            ( x∈X)
 
         lemma-mhs =
           htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
@@ -420,14 +425,14 @@ module _
 
   contraction-extension-short-map-metric-quotient-Pseudometric-Space :
     (g : extension-short-map-metric-quotient-Pseudometric-Space P M f) →
-    extension-short-map-short-map-metric-quotient-Pseudometric-Space P M f ＝ g
+    exten-short-map-metric-quotient-Pseudometric-Space P M f ＝ g
   contraction-extension-short-map-metric-quotient-Pseudometric-Space g =
     eq-type-subtype
       ( is-extension-prop-short-map-metric-quotient-Pseudometric-Space P M f)
       ( eq-htpy-map-short-map-Metric-Space
         ( metric-quotient-Pseudometric-Space P)
         ( M)
-        ( short-map-short-map-metric-quotient-Pseudometric-Space P M f)
+        ( short-map-exten-short-map-metric-quotient-Pseudometric-Space P M f)
         ( short-map-extension-short-map-metric-quotient-Pseudometric-Space
           ( P)
           ( M)
@@ -454,7 +459,7 @@ module _
     is-contr
       ( extension-short-map-metric-quotient-Pseudometric-Space P M f)
   is-contr-extension-short-map-metric-quotient-Pseudometric-Space =
-    ( extension-short-map-short-map-metric-quotient-Pseudometric-Space P M f ,
+    ( exten-short-map-metric-quotient-Pseudometric-Space P M f ,
       contraction-extension-short-map-metric-quotient-Pseudometric-Space P M f)
 ```
 
