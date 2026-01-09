@@ -27,8 +27,9 @@ open import real-numbers.metric-space-of-real-numbers
 ## Idea
 
 A
-{{#concept "pointwise continuous endomap" Disambiguation="from ℝ to ℝ" Agda=pointwise-continuous-endomap-ℝ}}
-on the [real numbers](real-numbers.dedekind-real-numbers.md)
+{{#concept "pointwise continuous" Disambiguation="endomap on ℝ" Agda=pointwise-continuous-endomap-ℝ}}
+[endomorphism](foundation.endomorphisms.md) on the
+[real numbers](real-numbers.dedekind-real-numbers.md)
 [pointwise continuous map](metric-spaces.pointwise-continuous-maps-metric-spaces.md)
 from the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md) to
@@ -68,4 +69,4 @@ module _
 
 ## See also
 
-- [Classically pointwise continuous functions on the real numbers](real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers.md)
+- [Pointwise ε-δ continuous endomaps on the real numbers](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)

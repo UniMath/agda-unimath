@@ -113,4 +113,4 @@ module _
 
 ## See also
 
-- [Constructively pointwise continuous functions on the real numbers](real-numbers.pointwise-continuous-endomaps-real-numbers.md)
+- [Pointwise continuous endomaps on the real numbers](real-numbers.pointwise-continuous-endomaps-real-numbers.md)
