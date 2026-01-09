@@ -497,8 +497,8 @@ module _
   where
 
   equiv-isometry-metric-quotient-Pseudometric-Space :
-    ( isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M) ≃
-    ( isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
+    isometry-Metric-Space (metric-quotient-Pseudometric-Space P) M ≃
+    isometry-Pseudometric-Space P (pseudometric-Metric-Space M)
   equiv-isometry-metric-quotient-Pseudometric-Space =
     ( precomp-isometry-metric-quotient-Pseudometric-Space P M ,
       is-equiv-precomp-isometry-metric-quotient-Pseudometric-Space P M)
