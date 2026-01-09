@@ -18,6 +18,8 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 ```
 
 </details>
@@ -156,4 +158,17 @@ module _
         ＝ x +ℂ (y +ℂ (z +ℂ w)) by associative-add-ℂ _ _ _
         ＝ x +ℂ (z +ℂ (y +ℂ w)) by ap (x +ℂ_) (left-swap-add-ℂ y z w)
         ＝ (x +ℂ z) +ℂ (y +ℂ w) by inv (associative-add-ℂ x z (y +ℂ w))
+```
+
+### The inclusion of real numbers preserves addition
+
+```agda
+abstract
+  add-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x +ℂ complex-ℝ y ＝ complex-ℝ (x +ℝ y)
+  add-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( refl)
+      ( add-raise-ℝ ∙ ap (raise-ℝ _) (left-unit-law-add-ℝ _))
 ```

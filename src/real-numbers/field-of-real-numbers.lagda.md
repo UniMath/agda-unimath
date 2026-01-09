@@ -46,11 +46,11 @@ The [real numbers](real-numbers.dedekind-real-numbers.md) form a
 
 ```agda
 abstract
-  eq-zero-is-noninvertible-commutative-ring-ℝ :
+  eq-zero-is-not-invertible-ℝ :
     (l : Level) (x : ℝ l) →
     ¬ is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
     x ＝ raise-ℝ l zero-ℝ
-  eq-zero-is-noninvertible-commutative-ring-ℝ l x ¬inv-x =
+  eq-zero-is-not-invertible-ℝ l x ¬inv-x =
     eq-sim-ℝ
       ( sim-nonapart-ℝ _ _
         ( λ x#raise-l-zero →
@@ -64,19 +64,19 @@ abstract
                 ( sim-raise-ℝ' l zero-ℝ)
                 ( x#raise-l-zero)))))
 
-  is-zero-is-noninvertible-commutative-ring-ℝ :
+  is-zero-is-not-invertible-ℝ :
     (l : Level) (x : ℝ l) →
     ¬ is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x →
     is-zero-ℝ x
-  is-zero-is-noninvertible-commutative-ring-ℝ l x H =
-    is-zero-eq-raise-zero-ℝ (eq-zero-is-noninvertible-commutative-ring-ℝ l x H)
+  is-zero-is-not-invertible-ℝ l x H =
+    is-zero-eq-raise-zero-ℝ (eq-zero-is-not-invertible-ℝ l x H)
 
   is-heyting-field-local-commutative-ring-ℝ :
     (l : Level) →
     is-heyting-field-Local-Commutative-Ring (local-commutative-ring-ℝ l)
   is-heyting-field-local-commutative-ring-ℝ l =
     ( neq-raise-zero-one-ℝ l ,
-      eq-zero-is-noninvertible-commutative-ring-ℝ l)
+      eq-zero-is-not-invertible-ℝ l)
 
 heyting-field-ℝ : (l : Level) → Heyting-Field (lsuc l)
 heyting-field-ℝ l =

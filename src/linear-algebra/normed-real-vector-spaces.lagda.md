@@ -32,8 +32,10 @@ open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -208,29 +210,55 @@ module _
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
-  is-extensional-norm-Normed-ℝ-Vector-Space :
-    (v : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
-    v ＝ zero-Normed-ℝ-Vector-Space
-  is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
+  abstract
+    is-extensional-norm-Normed-ℝ-Vector-Space :
+      (v : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
+      v ＝ zero-Normed-ℝ-Vector-Space
+    is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
 
-  is-extensional-dist-Normed-ℝ-Vector-Space :
-    (v w : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
-    v ＝ w
-  is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
-    eq-is-zero-right-subtraction-Ab
-      ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
-      ( is-extensional-norm-Normed-ℝ-Vector-Space
-        ( diff-Normed-ℝ-Vector-Space v w)
-        ( |v-w|=0))
+    is-extensional-dist-Normed-ℝ-Vector-Space :
+      (v w : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
+      v ＝ w
+    is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
+      eq-is-zero-right-subtraction-Ab
+        ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
+        ( is-extensional-norm-Normed-ℝ-Vector-Space
+          ( diff-Normed-ℝ-Vector-Space v w)
+          ( |v-w|=0))
 
-  symmetric-dist-Normed-ℝ-Vector-Space :
-    (v w : type-Normed-ℝ-Vector-Space) →
-    dist-Normed-ℝ-Vector-Space v w ＝ dist-Normed-ℝ-Vector-Space w v
-  symmetric-dist-Normed-ℝ-Vector-Space =
-    symmetric-dist-Seminormed-ℝ-Vector-Space
-      ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+    refl-dist-Normed-ℝ-Vector-Space :
+      (v : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (dist-Normed-ℝ-Vector-Space v v)
+    refl-dist-Normed-ℝ-Vector-Space =
+      is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+    symmetric-dist-Normed-ℝ-Vector-Space :
+      (v w : type-Normed-ℝ-Vector-Space) →
+      dist-Normed-ℝ-Vector-Space v w ＝ dist-Normed-ℝ-Vector-Space w v
+    symmetric-dist-Normed-ℝ-Vector-Space =
+      symmetric-dist-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+    triangular-norm-Normed-ℝ-Vector-Space :
+      (v w : type-Normed-ℝ-Vector-Space) →
+      leq-ℝ
+        ( map-norm-Normed-ℝ-Vector-Space (add-Normed-ℝ-Vector-Space v w))
+        ( map-norm-Normed-ℝ-Vector-Space v +ℝ map-norm-Normed-ℝ-Vector-Space w)
+    triangular-norm-Normed-ℝ-Vector-Space =
+      triangular-seminorm-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+    triangular-dist-Normed-ℝ-Vector-Space :
+      (u v w : type-Normed-ℝ-Vector-Space) →
+      leq-ℝ
+        ( dist-Normed-ℝ-Vector-Space u w)
+        ( dist-Normed-ℝ-Vector-Space u v +ℝ dist-Normed-ℝ-Vector-Space v w)
+    triangular-dist-Normed-ℝ-Vector-Space =
+      triangular-dist-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 ```
 
 ### The metric space of a normed vector space
@@ -240,21 +268,21 @@ module _
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2)
   where
 
-  refl-norm-Normed-ℝ-Vector-Space :
-    (v : type-Normed-ℝ-Vector-Space V) →
-    is-zero-ℝ (dist-Normed-ℝ-Vector-Space V v v)
-  refl-norm-Normed-ℝ-Vector-Space =
-    is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space
-      ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+  abstract
+    is-metric-dist-Normed-ℝ-Vector-Space :
+      is-metric-distance-function
+        ( set-Normed-ℝ-Vector-Space V)
+        ( nonnegative-dist-Normed-ℝ-Vector-Space V)
+    is-metric-dist-Normed-ℝ-Vector-Space =
+      ( refl-dist-Normed-ℝ-Vector-Space V ,
+        ( λ v w → eq-ℝ⁰⁺ _ _ (symmetric-dist-Normed-ℝ-Vector-Space V v w)) ,
+        triangular-dist-Normed-ℝ-Vector-Space V ,
+        is-extensional-dist-Normed-ℝ-Vector-Space V)
 
   metric-Normed-ℝ-Vector-Space : Metric l1 (set-Normed-ℝ-Vector-Space V)
   metric-Normed-ℝ-Vector-Space =
     ( nonnegative-dist-Normed-ℝ-Vector-Space V ,
-      refl-norm-Normed-ℝ-Vector-Space ,
-      ( λ v w → eq-ℝ⁰⁺ _ _ (symmetric-dist-Normed-ℝ-Vector-Space V v w)) ,
-      triangular-dist-Seminormed-ℝ-Vector-Space
-        ( seminormed-vector-space-Normed-ℝ-Vector-Space V) ,
-      is-extensional-dist-Normed-ℝ-Vector-Space V)
+      is-metric-dist-Normed-ℝ-Vector-Space)
 
   metric-space-Normed-ℝ-Vector-Space : Metric-Space l2 l1
   metric-space-Normed-ℝ-Vector-Space =
@@ -376,10 +404,27 @@ module _
                   ( w)))))
 ```
 
+### The norm of the zero vector is zero
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space :
+      map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
+      raise-ℝ l1 zero-ℝ
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space =
+      eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+```
+
 ## See also
 
-- [Real Banach spaces](linear-algebra.real-banach-spaces.md), normed real vector
-  spaces for which the induced metric space is
+- [Real Banach spaces](functional-analysis.real-banach-spaces.md), normed real
+  vector spaces for which the induced metric space is
   [complete](metric-spaces.complete-metric-spaces.md)
 
 ## External links
