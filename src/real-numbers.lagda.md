@@ -65,6 +65,7 @@ open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numb
 open import real-numbers.maximum-lower-dedekind-real-numbers public
 open import real-numbers.maximum-upper-dedekind-real-numbers public
 open import real-numbers.metric-additive-group-of-real-numbers public
+open import real-numbers.metric-space-of-functions-into-real-numbers public
 open import real-numbers.metric-space-of-nonnegative-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
 open import real-numbers.minimum-finite-families-real-numbers public
@@ -112,6 +113,7 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.subsets-real-numbers public
+open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
@@ -119,5 +121,6 @@ open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-n
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
+open import real-numbers.zero-nonnegative-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```
