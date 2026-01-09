@@ -1,7 +1,7 @@
-# Pointwise ε-δ continuous functions in metric spaces
+# Pointwise ε-δ continuous maps in metric spaces
 
 ```agda
-module metric-spaces.pointwise-epsilon-delta-continuous-functions-metric-spaces where
+module metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -11,10 +11,10 @@ open import foundation.axiom-of-countable-choice
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import metric-spaces.epsilon-delta-limits-of-functions-metric-spaces
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.pointwise-continuous-functions-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -22,11 +22,11 @@ open import metric-spaces.pointwise-continuous-functions-metric-spaces
 ## Idea
 
 An
-{{#concept "ε-δ pointwise continuous function" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
+{{#concept "ε-δ pointwise continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
 from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space `Y`
-is a function `f : X → Y` such that for every `x : X`, the
-[ε-δ limit](metric-spaces.epsilon-delta-limits-of-functions-metric-spaces.md) of
-`f` as it approaches `x` is `f x`.
+is a map `f : X → Y` such that for every `x : X`, the
+[ε-δ limit](metric-spaces.epsilon-delta-limits-of-maps-metric-spaces.md) of `f`
+as it approaches `x` is `f x`.
 
 ## Definition
 
@@ -35,7 +35,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   is-pointwise-ε-δ-continuous-prop-map-Metric-Space :
@@ -52,7 +52,7 @@ module _
 
 ## Properties
 
-### Pointwise continuous functions are ε-δ pointwise continuous
+### Pointwise continuous maps are ε-δ pointwise continuous
 
 ```agda
 module _
@@ -83,7 +83,7 @@ module _
           ( x))
 ```
 
-### Assuming countable choice, ε-δ pointwise continuous functions are pointwise continuous
+### Assuming countable choice, ε-δ pointwise continuous maps are pointwise continuous
 
 ```agda
 module _
@@ -91,7 +91,7 @@ module _
   (acω : ACω)
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   abstract
@@ -112,4 +112,4 @@ module _
 
 ## See also
 
-- [Pointwise continuous functions in metric spaces](metric-spaces.pointwise-continuous-functions-metric-spaces.md)
+- [Pointwise continuous maps in metric spaces](metric-spaces.pointwise-continuous-maps-metric-spaces.md)

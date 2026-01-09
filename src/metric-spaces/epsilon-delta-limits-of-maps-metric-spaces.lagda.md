@@ -1,7 +1,7 @@
-# ε-δ limits of functions between metric spaces
+# ε-δ limits of maps between metric spaces
 
 ```agda
-module metric-spaces.epsilon-delta-limits-of-functions-metric-spaces where
+module metric-spaces.epsilon-delta-limits-of-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,8 +19,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.functions-metric-spaces
-open import metric-spaces.limits-of-functions-metric-spaces
+open import metric-spaces.maps-metric-spaces
+open import metric-spaces.limits-of-maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -36,10 +36,10 @@ such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and 
 are in a `ε`-neighborhood of each other.
 
 This contrasts the definition of a
-[limit](metric-spaces.limits-of-functions-metric-spaces.md) of a function in a
-metric space, where there must exist a modulus function `μ : ℚ⁺ → ℚ⁺` assigning
-an appropriate `δ` for each possible value of `ε`. A limit is an ε-δ limit, but
-the converse requires the
+[limit](metric-spaces.limits-of-maps-metric-spaces.md) of a map in a metric
+space, where there must exist a modulus map `μ : ℚ⁺ → ℚ⁺` assigning an
+appropriate `δ` for each possible value of `ε`. A limit is an ε-δ limit, but the
+converse requires the
 [axiom of countable choice](foundation.axiom-of-countable-choice.md).
 
 ## Definition
@@ -49,7 +49,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   (x : type-Metric-Space X)
   (y : type-Metric-Space Y)
   where
@@ -81,14 +81,14 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   (x : type-Metric-Space X)
   (y : type-Metric-Space Y)
   where
 
   abstract
     is-ε-δ-limit-is-limit-map-Metric-Space :
-      is-limit-map-Metric-Space X Y f x y →
+      is-point-limit-map-Metric-Space X Y f x y →
       is-ε-δ-limit-map-Metric-Space X Y f x y
     is-ε-δ-limit-is-limit-map-Metric-Space H ε =
       map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
@@ -102,7 +102,7 @@ module _
   (acω : ACω)
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   (x : type-Metric-Space X)
   (y : type-Metric-Space Y)
   where
@@ -110,12 +110,12 @@ module _
   abstract
     is-limit-is-ε-δ-limit-map-ACω-Metric-Space :
       is-ε-δ-limit-map-Metric-Space X Y f x y →
-      is-limit-map-Metric-Space X Y f x y
+      is-point-limit-map-Metric-Space X Y f x y
     is-limit-is-ε-δ-limit-map-ACω-Metric-Space H =
       let
         open
           do-syntax-trunc-Prop
-            ( is-point-limit-prop-function-Metric-Space X Y f x y)
+            ( is-point-limit-prop-map-Metric-Space X Y f x y)
       in do
         μ ←
           choice-countable-discrete-set-ACω
@@ -139,4 +139,4 @@ module _
 
 ## See also
 
-- [Limits of functions in metric spaces](metric-spaces.limits-of-functions-metric-spaces.md)
+- [Limits of maps in metric spaces](metric-spaces.limits-of-maps-metric-spaces.md)

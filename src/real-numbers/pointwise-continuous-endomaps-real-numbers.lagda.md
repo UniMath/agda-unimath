@@ -18,7 +18,7 @@ open import foundation.universe-levels
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.limits-of-functions-real-numbers
+open import real-numbers.limits-of-endomaps-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 ```
 

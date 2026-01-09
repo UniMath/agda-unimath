@@ -38,7 +38,7 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.pointwise-continuous-endomaps-real-numbers
-open import real-numbers.pointwise-epsilon-delta-continuous-functions-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -74,10 +74,10 @@ is-increasing-endomap-ℝ :
   {l1 l2 : Level} → (ℝ l1 → ℝ l2) → UU (lsuc l1 ⊔ l2)
 is-increasing-endomap-ℝ f = type-Prop (is-increasing-prop-endomap-ℝ f)
 
-is-increasing-on-subset-function-ℝ :
+is-increasing-on-subset-endomap-ℝ :
   {l1 l2 l3 : Level} (f : ℝ l1 → ℝ l2) (S : subset-ℝ l3 l1) →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-is-increasing-on-subset-function-ℝ f S =
+is-increasing-on-subset-endomap-ℝ f S =
   preserves-order-Poset
     ( poset-Subposet (ℝ-Poset _) S)
     ( ℝ-Poset _)
@@ -118,7 +118,7 @@ module _
     is-increasing-is-increasing-on-strict-inequalities-on-subset-endomap-ℝ :
       ( ((x y : type-subset-ℝ S) →
         le-ℝ (pr1 x) (pr1 y) → leq-ℝ (f (pr1 x)) (f (pr1 y)))) →
-      is-increasing-on-subset-function-ℝ f S
+      is-increasing-on-subset-endomap-ℝ f S
     is-increasing-is-increasing-on-strict-inequalities-on-subset-endomap-ℝ
       H (x , x∈S) (y , y∈S) x≤y =
       double-negation-elim-leq-ℝ
@@ -131,29 +131,29 @@ module _
           ( irrefutable-sim-or-le-leq-ℝ x y x≤y))
 ```
 
-### If a pointwise continuous function `f` is increasing on a dense subset of `ℝ`, then it is increasing on `ℝ`
+### If a pointwise ε-δ continuous function `f` is increasing on a dense subset of `ℝ`, then it is increasing on `ℝ`
 
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (f : pointwise-continuous-endomap-ℝ l1 l2)
+  (f : pointwise-ε-δ-continuous-endomap-ℝ l1 l2)
   (S : dense-subset-ℝ l3 l1)
   where
 
   abstract
     is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ :
-      is-increasing-on-subset-function-ℝ
-        ( map-pointwise-continuous-endomap-ℝ f)
+      is-increasing-on-subset-endomap-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
         ( subset-dense-subset-ℝ S) →
-      is-increasing-endomap-ℝ (map-pointwise-continuous-endomap-ℝ f)
+      is-increasing-endomap-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f)
     is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ H =
       let
-        f' = map-pointwise-continuous-endomap-ℝ f
+        f' = map-pointwise-ε-δ-continuous-endomap-ℝ f
         open do-syntax-trunc-Prop empty-Prop
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
         is-increasing-is-increasing-on-strict-inequalities-endomap-ℝ
-          ( map-pointwise-continuous-endomap-ℝ f)
+          ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
           ( λ x y x<y →
             leq-not-le-ℝ
               ( f' y)
@@ -164,12 +164,12 @@ module _
                     exists-positive-rational-separation-le-ℝ f'y<f'x
                   let (εx , εy , εx+εy=ε) = split-ℚ⁺ ε
                   (δx , Hδx) ←
-                    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ
+                    is-pointwise-ε-δ-continuous-map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( x)
                       ( εx)
                   (δy , Hδy) ←
-                    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ
+                    is-pointwise-ε-δ-continuous-map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( y)
                       ( εy)
@@ -227,7 +227,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (f : pointwise-continuous-endomap-ℝ l1 l2)
+  (f : pointwise-ε-δ-continuous-endomap-ℝ l1 l2)
   where
 
   abstract
@@ -235,8 +235,8 @@ module _
       preserves-order-Poset
         ( ℚ-Poset)
         ( ℝ-Poset l2)
-        ( map-pointwise-continuous-endomap-ℝ f ∘ raise-real-ℚ l1) →
-      is-increasing-endomap-ℝ (map-pointwise-continuous-endomap-ℝ f)
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ f ∘ raise-real-ℚ l1) →
+      is-increasing-endomap-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f)
     is-increasing-is-increasing-rational-ℝ H =
       is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ
         ( f)
@@ -245,10 +245,10 @@ module _
           binary-tr
             ( leq-ℝ)
             ( ap
-              ( map-pointwise-continuous-endomap-ℝ f)
+              ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ x~p)))
             ( ap
-              ( map-pointwise-continuous-endomap-ℝ f)
+              ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
               ( inv (eq-raise-real-rational-is-rational-ℝ y~q)))
             ( H
               ( p)

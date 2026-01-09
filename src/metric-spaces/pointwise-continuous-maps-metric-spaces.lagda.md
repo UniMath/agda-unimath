@@ -230,6 +230,32 @@ module _
       is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space)
 ```
 
+### Short maps are pointwise continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  where
+
+  abstract
+    is-pointwise-continuous-map-is-short-map-Metric-Space :
+      (f : map-Metric-Space X Y) →
+      is-short-map-Metric-Space X Y f →
+      is-pointwise-continuous-map-Metric-Space X Y f
+    is-pointwise-continuous-map-is-short-map-Metric-Space
+      f H ε =
+      intro-exists id (λ x → H x ε)
+
+  pointwise-continuous-map-short-map-Metric-Space :
+    short-map-Metric-Space X Y →
+    pointwise-continuous-map-Metric-Space X Y
+  pointwise-continuous-map-short-map-Metric-Space (f , H) =
+    ( f ,
+      is-pointwise-continuous-map-is-short-map-Metric-Space f H)
+```
+
 ### Isometries are pointwise continuous
 
 ```agda
@@ -246,11 +272,11 @@ module _
       is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-map-is-isometry-Metric-Space
       f H =
-      is-pointwise-continuous-is-uniformly-continuous-map-Metric-Space
+      is-pointwise-continuous-map-is-short-map-Metric-Space
         ( X)
         ( Y)
         ( f)
-        ( is-uniformly-continuous-is-isometry-Metric-Space X Y f H)
+        ( is-short-map-is-isometry-Metric-Space X Y f H)
 
   pointwise-continuous-map-isometry-Metric-Space :
     isometry-Metric-Space X Y →
@@ -258,33 +284,6 @@ module _
   pointwise-continuous-map-isometry-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-map-is-isometry-Metric-Space f H)
-```
-
-### Constant maps between metric spaces are pointwise continuous
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (y : type-Metric-Space Y)
-  where
-
-  abstract
-    is-pointwise-continuous-map-const-Metric-Space :
-      is-pointwise-continuous-map-Metric-Space
-        ( X)
-        ( Y)
-        ( const-map-Metric-Space X y)
-    is-pointwise-continuous-map-const-Metric-Space =
-      is-pointwise-continuous-map-is-short-map-Metric-Space X Y _
-        ( is-short-constant-map-Metric-Space X Y y)
-
-  const-pointwise-continuous-map-Metric-Space :
-    pointwise-continuous-map-Metric-Space X Y
-  const-pointwise-continuous-map-Metric-Space =
-    pointwise-continuous-map-short-map-Metric-Space X Y
-      ( short-constant-map-Metric-Space X Y y)
 ```
 
 ### The identity map is a pointwise continuous map on any metric space
@@ -308,30 +307,31 @@ module _
     ( id , is-pointwise-continuous-map-id-Metric-Space)
 ```
 
-### Short maps are pointwise continuous
+### Constant maps between metric spaces are pointwise continuous
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
+  (y : type-Metric-Space Y)
   where
 
   abstract
-    is-pointwise-continuous-map-is-short-map-Metric-Space :
-      (f : map-Metric-Space X Y) →
-      is-short-map-Metric-Space X Y f →
-      is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-map-is-short-map-Metric-Space
-      f H =
-      ?
+    is-pointwise-continuous-map-const-Metric-Space :
+      is-pointwise-continuous-map-Metric-Space
+        ( X)
+        ( Y)
+        ( const-map-Metric-Space X Y y)
+    is-pointwise-continuous-map-const-Metric-Space =
+      is-pointwise-continuous-map-is-short-map-Metric-Space X Y _
+        ( is-short-map-const-Metric-Space X Y y)
 
-  pointwise-continuous-map-short-map-Metric-Space :
-    short-map-Metric-Space X Y →
+  const-pointwise-continuous-map-Metric-Space :
     pointwise-continuous-map-Metric-Space X Y
-  pointwise-continuous-map-short-map-Metric-Space (f , H) =
-    ( f ,
-      is-pointwise-continuous-map-is-short-map-Metric-Space f H)
+  const-pointwise-continuous-map-Metric-Space =
+    pointwise-continuous-map-short-map-Metric-Space X Y
+      ( const-short-map-Metric-Space X Y y)
 ```
 
 ## See also
