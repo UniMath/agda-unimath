@@ -310,12 +310,12 @@ abstract
 ### The identity is a uniform homeomorphism between the product metric space `ℝⁿ` and the Euclidean metric space `ℝⁿ`
 
 ```agda
-uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin :
+uniform-homeo-id-product-euclidean-metric-space-ℝ-Fin :
   (n : ℕ) (l : Level) →
   uniform-homeo-Metric-Space
     ( function-into-ℝ-Metric-Space (Fin n) l)
     ( euclidean-metric-space-ℝ-Fin n l)
-uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin n l =
+uniform-homeo-id-product-euclidean-metric-space-ℝ-Fin n l =
   ( id ,
     is-equiv-id ,
     is-uniformly-continuous-map-id-product-euclidean-metric-space-ℝ-Fin

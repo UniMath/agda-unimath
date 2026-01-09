@@ -45,7 +45,7 @@ abstract
     is-complete-metric-space-uniform-homeo-Metric-Space
       ( function-into-ℝ-Metric-Space (Fin n) l)
       ( euclidean-metric-space-ℝ-Fin n l)
-      ( uniform-homeomorphism-id-product-euclidean-metric-space-ℝ-Fin
+      ( uniform-homeo-id-product-euclidean-metric-space-ℝ-Fin
         ( n)
         ( l))
       ( is-complete-function-into-ℝ-Metric-Space (Fin n) l)
