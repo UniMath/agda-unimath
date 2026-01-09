@@ -191,7 +191,7 @@ module _
       ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
 ```
 
-### Strict inequality on the real numbers is invariant under raising universe levels
+### Raising the universe level of either side of a strict inequality
 
 ```agda
 abstract
@@ -347,6 +347,18 @@ module _
 
     leq-real-is-in-upper-cut-ℝ : is-in-upper-cut-ℝ x q → leq-ℝ x (real-ℚ q)
     leq-real-is-in-upper-cut-ℝ x<q = leq-le-ℝ (le-real-is-in-upper-cut-ℝ x<q)
+
+module _
+  {l : Level} (l1 : Level) {q : ℚ} (x : ℝ l)
+  where
+
+  abstract
+    le-raise-real-is-in-upper-cut-ℝ :
+      is-in-upper-cut-ℝ x q → le-ℝ x (raise-real-ℚ l1 q)
+    le-raise-real-is-in-upper-cut-ℝ x<q =
+      preserves-le-right-sim-ℝ _ _ _
+        ( sim-raise-ℝ l1 (real-ℚ q))
+        ( le-real-is-in-upper-cut-ℝ x x<q)
 ```
 
 ### The real numbers are located
@@ -723,9 +735,6 @@ abstract
 
 ### If `q ≤ x ⇒ q ≤ y` for every rational `q`, then `x ≤ y`
 
-TODO: this is a property of inequality, not strict inequality, but is much
-easier to prove with strict inequality.
-
 ```agda
 module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
@@ -762,10 +771,10 @@ strict-preorder-ℝ l =
     transitive-le-ℝ)
 
 abstract
-  extensionality-principle-strict-preorder-ℝ :
+  extensionality-strict-preorder-ℝ :
     (l : Level) →
     extensionality-principle-Strict-Preorder (strict-preorder-ℝ l)
-  extensionality-principle-strict-preorder-ℝ l x y (_ , x~y) =
+  extensionality-strict-preorder-ℝ l x y (_ , x~y) =
     eq-sim-ℝ
       ( sim-le-same-rational-ℝ x y
         ( λ q →
@@ -776,7 +785,7 @@ abstract
 strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
 strict-order-ℝ l =
   ( strict-preorder-ℝ l ,
-    extensionality-principle-strict-preorder-ℝ l)
+    extensionality-strict-preorder-ℝ l)
 ```
 
 ## References
