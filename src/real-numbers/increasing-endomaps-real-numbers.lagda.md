@@ -141,12 +141,12 @@ module _
   where
 
   abstract
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ :
+    is-increasing-is-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ :
       is-increasing-on-subset-endomap-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
         ( subset-dense-subset-ℝ S) →
       is-increasing-endomap-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f)
-    is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ H =
+    is-increasing-is-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ H =
       let
         f' = map-pointwise-ε-δ-continuous-endomap-ℝ f
         open do-syntax-trunc-Prop empty-Prop
@@ -231,14 +231,14 @@ module _
   where
 
   abstract
-    is-increasing-is-increasing-rational-ℝ :
+    is-increasing-is-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ :
       preserves-order-Poset
         ( ℚ-Poset)
         ( ℝ-Poset l2)
         ( map-pointwise-ε-δ-continuous-endomap-ℝ f ∘ raise-real-ℚ l1) →
       is-increasing-endomap-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f)
-    is-increasing-is-increasing-rational-ℝ H =
-      is-increasing-is-increasing-dense-subset-pointwise-continuous-endomap-ℝ
+    is-increasing-is-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ H =
+      is-increasing-is-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ
         ( f)
         ( dense-subset-rational-ℝ l1)
         ( λ (x , p , x~p) (y , q , y~q) x≤y →
