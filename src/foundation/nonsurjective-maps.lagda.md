@@ -41,8 +41,9 @@ open import logic.propositionally-decidable-maps
 
 ## Idea
 
-A map `f : A → B` is {{#concept "nonsurjective"}} if there
-[exists](foundation.existential-quantification.md) a
+A map `f : A → B` is
+{{#concept "nonsurjective" Disambiguation="map of types" Agda=is-nonsurjective Agda=nonsurjective-map}}
+if there [exists](foundation.existential-quantification.md) a
 [fiber](foundation-core.fibers-of-maps.md) that is [not](foundation.negation.md)
 inhabited.
 
