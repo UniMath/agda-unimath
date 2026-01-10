@@ -74,7 +74,7 @@ module _
 
 ## Properties
 
-### Constructive limits are classical limits
+### Limits are ε-δ limits
 
 ```agda
 module _
