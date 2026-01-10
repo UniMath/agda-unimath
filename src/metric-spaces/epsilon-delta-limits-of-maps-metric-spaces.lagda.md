@@ -35,7 +35,7 @@ states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for a
 such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
 are in an `ε`-neighborhood of each other.
 
-This contrasts the definition of a
+This contrasts to the definition of a
 [limit](metric-spaces.limits-of-maps-metric-spaces.md) of a map in a metric
 space, where there must exist a modulus map `μ : ℚ⁺ → ℚ⁺` assigning an
 appropriate `δ` for each possible value of `ε`. A limit is an ε-δ limit, but the
