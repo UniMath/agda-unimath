@@ -308,6 +308,7 @@ open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public
 open import foundation.maybe public
+open import foundation.mere-decidable-embeddings public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
