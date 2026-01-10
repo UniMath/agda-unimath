@@ -467,7 +467,7 @@ module _
   equiv-unit-trunc-set = equiv-unit-trunc A
 ```
 
-### Distributivity of set truncation over coproduct
+### Distributivity of set truncation over coproducts
 
 ```agda
 module _
