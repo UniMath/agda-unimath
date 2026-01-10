@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -66,14 +67,14 @@ eq-ℂ = eq-pair
 
 ```agda
 complex-ℝ : {l : Level} → ℝ l → ℂ l
-complex-ℝ {l} a = (a , raise-ℝ l zero-ℝ)
+complex-ℝ {l} a = (a , raise-zero-ℝ l)
 ```
 
 ### The imaginary embedding of real numbers into the complex numbers
 
 ```agda
 im-complex-ℝ : {l : Level} → ℝ l → ℂ l
-im-complex-ℝ {l} a = (raise-ℝ l zero-ℝ , a)
+im-complex-ℝ {l} a = (raise-zero-ℝ l , a)
 ```
 
 ### The canonical embedding of Gaussian integers into the complex numbers
@@ -97,6 +98,14 @@ neg-one-ℂ = (neg-one-ℝ , zero-ℝ)
 
 i-ℂ : ℂ lzero
 i-ℂ = (zero-ℝ , one-ℝ)
+```
+
+### `0 ≠ 1` in the complex numbers
+
+```agda
+abstract
+  neq-zero-one-ℂ : zero-ℂ ≠ one-ℂ
+  neq-zero-one-ℂ 0=1ℂ = neq-zero-one-ℝ (ap re-ℂ 0=1ℂ)
 ```
 
 ### Negation of complex numbers

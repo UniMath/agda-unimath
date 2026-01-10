@@ -12,8 +12,10 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -39,18 +41,31 @@ and negation operation are
 ## Definition
 
 ```agda
+is-metric-ab-prop-Ab-Pseudometric-Structure :
+  {l1 l2 : Level} (G : Ab l1) (M : Pseudometric-Structure l2 (type-Ab G)) →
+  Prop (l1 ⊔ l2)
+is-metric-ab-prop-Ab-Pseudometric-Structure G M =
+  let
+    MS = (type-Ab G , M)
+  in
+    is-extensional-prop-Pseudometric-Space MS ∧
+    is-isometry-prop-Pseudometric-Space MS MS (neg-Ab G) ∧
+    Π-Prop
+      ( type-Ab G)
+      ( λ x → is-isometry-prop-Pseudometric-Space MS MS (add-Ab G x))
+
+is-metric-ab-Ab-Pseudometric-Structure :
+  {l1 l2 : Level} (G : Ab l1) (M : Pseudometric-Structure l2 (type-Ab G)) →
+  UU (l1 ⊔ l2)
+is-metric-ab-Ab-Pseudometric-Structure G M =
+  type-Prop (is-metric-ab-prop-Ab-Pseudometric-Structure G M)
+
 Metric-Ab : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Metric-Ab l1 l2 =
   Σ ( Ab l1)
     ( λ G →
       Σ ( Pseudometric-Structure l2 (type-Ab G))
-        ( λ M →
-          let MS = (type-Ab G , M)
-          in
-            is-extensional-Pseudometric-Space MS ×
-            is-isometry-Pseudometric-Space MS MS (neg-Ab G) ×
-            ( (x : type-Ab G) →
-              is-isometry-Pseudometric-Space MS MS (add-Ab G x))))
+        ( is-metric-ab-Ab-Pseudometric-Structure G))
 
 module _
   {l1 l2 : Level} (MG : Metric-Ab l1 l2)
@@ -98,6 +113,11 @@ module _
   commutative-add-Metric-Ab :
     (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
   commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
+
+  is-identity-right-conjugation-Metric-Ab :
+    (x y : type-Metric-Ab MG) → add-Metric-Ab x (diff-Metric-Ab y x) ＝ y
+  is-identity-right-conjugation-Metric-Ab =
+    is-identity-right-conjugation-Ab (ab-Metric-Ab MG)
 ```
 
 ### Metric properties of metric abelian groups

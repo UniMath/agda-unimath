@@ -9,6 +9,7 @@ open import commutative-algebra.binomial-theorem-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
 open import commutative-algebra.category-of-commutative-rings public
+open import commutative-algebra.centers-rings public
 open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
 open import commutative-algebra.convolution-sequences-commutative-rings public
@@ -25,8 +26,10 @@ open import commutative-algebra.function-commutative-semirings public
 open import commutative-algebra.geometric-sequences-commutative-rings public
 open import commutative-algebra.geometric-sequences-commutative-semirings public
 open import commutative-algebra.groups-of-units-commutative-rings public
+open import commutative-algebra.heyting-fields public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.homomorphisms-commutative-semirings public
+open import commutative-algebra.homomorphisms-heyting-fields public
 open import commutative-algebra.ideals-commutative-rings public
 open import commutative-algebra.ideals-commutative-semirings public
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public

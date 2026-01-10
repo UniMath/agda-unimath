@@ -345,6 +345,19 @@ abstract
     is-zero-mul-ℕ-is-zero-right-summand x y H
 ```
 
+### Swapping laws
+
+```agda
+abstract
+  right-swap-mul-ℕ : (x y z : ℕ) → (x *ℕ y) *ℕ z ＝ (x *ℕ z) *ℕ y
+  right-swap-mul-ℕ x y z =
+    equational-reasoning
+      x *ℕ y *ℕ z
+      ＝ x *ℕ (y *ℕ z) by associative-mul-ℕ x y z
+      ＝ x *ℕ (z *ℕ y) by ap (x *ℕ_) (commutative-mul-ℕ y z)
+      ＝ x *ℕ z *ℕ y by inv (associative-mul-ℕ x z y)
+```
+
 ## See also
 
 - [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
