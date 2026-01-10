@@ -146,7 +146,8 @@ module _
         ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
         ( subset-dense-subset-ℝ S) →
       is-increasing-endomap-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f)
-    is-increasing-is-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ H =
+    is-increasing-is-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ
+      H =
       let
         f' = map-pointwise-ε-δ-continuous-endomap-ℝ f
         open do-syntax-trunc-Prop empty-Prop
