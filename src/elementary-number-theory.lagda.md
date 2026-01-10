@@ -158,6 +158,7 @@ open import elementary-number-theory.multiplicative-units-standard-cyclic-rings 
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.negation-closed-intervals-rational-numbers public
+open import elementary-number-theory.negative-closed-intervals-rational-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public
@@ -177,6 +178,7 @@ open import elementary-number-theory.poset-closed-intervals-rational-numbers pub
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
 open import elementary-number-theory.positive-and-negative-rational-numbers public
+open import elementary-number-theory.positive-closed-intervals-rational-numbers public
 open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
@@ -235,6 +237,7 @@ open import elementary-number-theory.unit-similarity-standard-finite-types publi
 open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public
+open import elementary-number-theory.unsolvability-of-squaring-to-two-in-rational-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

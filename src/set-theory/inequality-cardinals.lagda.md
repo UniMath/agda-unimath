@@ -33,17 +33,18 @@ open import set-theory.equality-cardinals
 
 ## Idea
 
-We say a [cardinal of sets](set-theory.cardinals.md) `X` is
-{{#concept "less than or equal to" Agda=leq-Cardinal}} a cardinal `Y` if any
-[set](foundation-core.sets.md) in the isomorphism class represented by `X`
-embeds into any set in the isomorphism class represented by `Y`. This defines
-the {{#concept "standard ordering" Disambiguation="on cardinalities of sets"}}
-on cardinalities of sets.
+We say a [cardinal](set-theory.cardinals.md) `X` is
+{{#concept "less than or equal to" Disambiguation="set-cardinals" Agda=leq-Cardinal}}
+a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
+`X` embeds into any set in the isomorphism class of `Y`. This defines the
+{{#concept "standard ordering" Disambiguation="on cardinalities of sets" Agda=large-preorder-Cardinal}}
+on cardinals.
 
 Under the assumption of the
-[law of excluded middle](foundation.law-of-excluded-middle.md), this relation is
-antisymmetric and hence defines a [partial order](order-theory.posets.md) on
-cardinalites.
+[law of excluded middle](foundation.law-of-excluded-middle.md) this relation is
+antisymmetric and hence defines a [partial order](order-theory.posets.md), due
+to
+[the Cantor–Schröder–Bernstein theorem](foundation.cantor-schroder-bernstein-escardo.md).
 
 ## Definition
 
@@ -231,3 +232,7 @@ large-poset-Cardinal lem =
   .large-preorder-Large-Poset → large-preorder-Cardinal
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-Cardinal lem
 ```
+
+## See also
+
+- [Complemented inequality of cardinals](set-theory.complemented-inequality-cardinals.md)

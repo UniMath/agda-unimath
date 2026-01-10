@@ -23,6 +23,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -90,6 +91,9 @@ module _
 
   int-positive-ℤ : ℤ
   int-positive-ℤ = pr1 p
+
+  int-ℤ⁺ : ℤ
+  int-ℤ⁺ = int-positive-ℤ
 
   is-positive-int-positive-ℤ : is-positive-ℤ int-positive-ℤ
   is-positive-int-positive-ℤ = pr2 p
@@ -192,6 +196,11 @@ abstract
 positive-int-ℕ : ℕ → positive-ℤ
 positive-int-ℕ = rec-ℕ one-positive-ℤ (λ _ → succ-positive-ℤ)
 
+abstract
+  int-positive-int-ℕ : (n : ℕ) → int-positive-ℤ (positive-int-ℕ n) ＝ in-pos-ℤ n
+  int-positive-int-ℕ 0 = refl
+  int-positive-int-ℕ (succ-ℕ n) = ap succ-ℤ (int-positive-int-ℕ n)
+
 nat-positive-ℤ : positive-ℤ → ℕ
 nat-positive-ℤ (inr (inr x) , H) = x
 
@@ -237,6 +246,13 @@ is-countable-positive-ℤ =
     ( intro-exists
       ( positive-int-ℕ)
       ( is-surjective-is-equiv is-equiv-positive-int-ℕ))
+```
+
+### Zero is not positive
+
+```agda
+not-is-positive-zero-ℤ : ¬ (is-positive-ℤ zero-ℤ)
+not-is-positive-zero-ℤ ()
 ```
 
 ## See also

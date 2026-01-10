@@ -55,6 +55,7 @@ open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinality-projective-sets public
 open import set-theory.cardinality-recursive-sets public
 open import set-theory.cardinals public
+open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
 open import set-theory.dependent-products-cardinals public

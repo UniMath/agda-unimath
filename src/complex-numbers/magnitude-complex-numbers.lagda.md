@@ -12,11 +12,14 @@ module complex-numbers.magnitude-complex-numbers where
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.multiplication-complex-numbers
+open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -25,6 +28,7 @@ open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -224,4 +228,68 @@ abstract
             ( eq-ℝ⁰⁺ _ _ (distributive-squared-magnitude-mul-ℂ z w))
       ＝ magnitude-ℂ z *ℝ magnitude-ℂ w
         by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
+```
+
+### The magnitude of a real number as a complex number is its absolute value
+
+```agda
+abstract
+  magnitude-complex-ℝ :
+    {l : Level} (x : ℝ l) → magnitude-ℂ (complex-ℝ x) ＝ abs-ℝ x
+  magnitude-complex-ℝ {l} x =
+    equational-reasoning
+      real-sqrt-ℝ⁰⁺
+        ( nonnegative-square-ℝ x +ℝ⁰⁺ nonnegative-square-ℝ (raise-zero-ℝ l))
+      ＝
+        real-sqrt-ℝ⁰⁺
+          ( nonnegative-square-ℝ x +ℝ⁰⁺ nonnegative-square-ℝ zero-ℝ)
+        by
+          ap
+            ( real-sqrt-ℝ⁰⁺)
+            ( eq-ℝ⁰⁺ _ _
+              ( eq-sim-ℝ
+                ( preserves-sim-left-add-ℝ _ _ _
+                  ( preserves-sim-square-ℝ
+                    ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))))))
+      ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x +ℝ⁰⁺ zero-ℝ⁰⁺)
+        by ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (ap-add-ℝ refl square-zero-ℝ))
+      ＝ real-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x)
+        by ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (right-unit-law-add-ℝ _))
+      ＝ abs-ℝ x
+        by inv (eq-abs-sqrt-square-ℝ x)
+```
+
+### Similar complex numbers have similar magnitudes
+
+```agda
+abstract
+  preserves-sim-squared-magnitude-ℂ :
+    {l1 l2 : Level} {z : ℂ l1} {w : ℂ l2} →
+    sim-ℂ z w → sim-ℝ (squared-magnitude-ℂ z) (squared-magnitude-ℂ w)
+  preserves-sim-squared-magnitude-ℂ (a~c , b~d) =
+    preserves-sim-add-ℝ
+      ( preserves-sim-square-ℝ a~c)
+      ( preserves-sim-square-ℝ b~d)
+
+  preserves-sim-magnitude-ℂ :
+    {l1 l2 : Level} {z : ℂ l1} {w : ℂ l2} →
+    sim-ℂ z w → sim-ℝ (magnitude-ℂ z) (magnitude-ℂ w)
+  preserves-sim-magnitude-ℂ z~w =
+    preserves-sim-sqrt-ℝ⁰⁺ _ _ (preserves-sim-squared-magnitude-ℂ z~w)
+```
+
+### The magnitude of `one-ℂ` is `one-ℝ`
+
+```agda
+abstract
+  magnitude-one-ℂ : magnitude-ℂ one-ℂ ＝ one-ℝ
+  magnitude-one-ℂ =
+    equational-reasoning
+      magnitude-ℂ one-ℂ
+      ＝ magnitude-ℂ (complex-ℝ one-ℝ)
+        by ap magnitude-ℂ (inv eq-complex-one-ℝ)
+      ＝ abs-ℝ one-ℝ
+        by magnitude-complex-ℝ one-ℝ
+      ＝ one-ℝ
+        by abs-real-ℝ⁺ one-ℝ⁺
 ```
