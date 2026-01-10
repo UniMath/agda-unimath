@@ -53,14 +53,13 @@ Precomposition with the natural
 q : P → [P]
 ```
 
-maps [isometries](metric-spaces.isometries-metric-spaces.md) `[P] → M` to a
-[metric space](metric-spaces.metric-spaces.md) to
+maps [isometries](metric-spaces.isometries-metric-spaces.md) into a metric space `[P] → M` to
 [isometries](metric-spaces.isometries-pseudometric-spaces.md) from `P` to the
 underlying pseudometric space of `M`.
 
 This action is an [equivalence](foundation.equivalences.md) so isometries from a
 pseudometric space to a metric space are
-{{#concept "equivalent" Disambiguation="isometries of metric quotients of pseudometric spaces Agda=equiv-isometry-metric-quotient-Pseudometric-Space}}
+{{#concept "equivalent" Disambiguation="isometries of metric quotients of pseudometric spaces" Agda=equiv-isometry-metric-quotient-Pseudometric-Space}}
 to isometries from its metric quotient.
 
 Equivalently, the metric quotient satisfies the
@@ -243,7 +242,7 @@ module _
 
 ## Properties
 
-### Extensions are fibers of the precomposition by the natural inclusion of metric quotients
+### Extensions are fibers of precomposition map of the natural inclusion of metric quotients
 
 ```agda
 module _
@@ -266,7 +265,7 @@ module _
           ( f))
 ```
 
-### The extension if an isometry is an isometry
+### The extension of an isometry is an isometry
 
 ```agda
 module _
