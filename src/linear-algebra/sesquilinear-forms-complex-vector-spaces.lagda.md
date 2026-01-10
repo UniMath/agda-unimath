@@ -37,9 +37,10 @@ if it:
 - is right additive: $f(x,y+z) = f(x,y) + f(x,z)$
 - conjugates scalar multiplication on the right: $f(x,ay) = \bar{a}f(x,y)$
 
-(Conjugating multiplication on the right is consistent with Wikipedia and what
-$n$Lab calls the "mathematician's convention," as opposed to what $n$Lab calls
-the "physicist's convention.")
+**Convention.** We follow the convention of conjugating multiplication on the
+right, as opposed to on the left. This is consistent with what is called the
+"mathematician's convention" on $n$Lab, as opposed to what is called the
+"physicist's convention".
 
 ## Definition
 
