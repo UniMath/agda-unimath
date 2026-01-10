@@ -1,7 +1,7 @@
-# Continuous maps between metric spaces
+# Continuity of maps at points in metric spaces
 
 ```agda
-module metric-spaces.continuous-maps-metric-spaces where
+module metric-spaces.continuity-of-maps-at-points-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -70,21 +70,4 @@ module _
   modulus-of-continuity-at-point-map-Metric-Space =
     type-subtype
       is-modulus-of-continuity-at-point-prop-map-Metric-Space
-
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (f : map-Metric-Space X Y)
-  where
-
-  is-pointwise-continuous-prop-map-Metric-Space : Prop (l1 ⊔ l2 ⊔ l4)
-  is-pointwise-continuous-prop-map-Metric-Space =
-    Π-Prop
-      ( type-Metric-Space X)
-      ( is-continuous-at-point-prop-map-Metric-Space X Y f)
-
-  is-pointwise-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
-  is-pointwise-continuous-map-Metric-Space =
-    type-Prop is-pointwise-continuous-prop-map-Metric-Space
 ```
