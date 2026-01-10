@@ -23,6 +23,15 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
+An [endomorphism](foundation.endomorphisms.md) `f` on the
+[real numbers](real-numbers.dedekind-real-numbers.md) is
+
+- {{#concept "unbounded above" Disambiguation="endomap on ℝ" Agda=is-unbounded-above-endomap-ℝ}}
+  if for every [rational](elementary-number-theory.rational-numbers.md) `q`,
+  there exists `x` such that `q ≤ f x`
+- {{#concept "unbounded below" Disambiguation="endomap on ℝ" Agda=is-unbounded-below-endomap-ℝ}}
+  if for every rational `q`, there exists `x` such that `f x ≤ q`
+
 ## Definition
 
 ```agda

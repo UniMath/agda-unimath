@@ -69,7 +69,8 @@ If an [endomap](foundation.endomorphisms.md) on the
 - [strictly increasing](real-numbers.strictly-increasing-endomaps-real-numbers.md)
 - [pointwise ε-δ continuous](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
 
-then it is an [automorphism](foundation.automorphisms.md) of the real numbers.
+then it is an [automorphism](foundation.automorphisms.md) of the real numbers,
+and its inverse also has those properties.
 
 ## Definition
 
