@@ -94,7 +94,7 @@ module _
       map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
 ```
 
-### Assuming countable choice, classical limits are constructive limits
+### Assuming countable choice, ε-δ limits are limits
 
 ```agda
 module _
