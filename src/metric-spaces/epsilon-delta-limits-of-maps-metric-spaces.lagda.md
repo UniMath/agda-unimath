@@ -33,7 +33,7 @@ The
 states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for any
 `ε : ℚ⁺`, there [exists](foundation.existential-quantification.md) a `δ : ℚ⁺`
 such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
-are in a `ε`-neighborhood of each other.
+are in an `ε`-neighborhood of each other.
 
 This contrasts the definition of a
 [limit](metric-spaces.limits-of-maps-metric-spaces.md) of a map in a metric
