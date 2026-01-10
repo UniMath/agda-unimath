@@ -12,6 +12,7 @@ module real-numbers.addition-positive-real-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -77,12 +78,22 @@ abstract opaque
   unfolding add-ℝ le-ℝ
 
   le-left-add-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (x +ℝ real-ℝ⁺ d)
   le-left-add-real-ℝ⁺ x d⁺@(d , pos-d) =
     tr
       ( λ y → le-ℝ y (x +ℝ d))
       ( right-unit-law-add-ℝ x)
       ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
+
+  le-left-add-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) → le-ℝ x (x +ℝ real-ℚ⁺ d)
+  le-left-add-real-ℚ⁺ x d =
+    le-left-add-real-ℝ⁺ x (positive-real-ℚ⁺ d)
+
+le-right-add-real-ℝ⁺ :
+  {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ x (real-ℝ⁺ d +ℝ x)
+le-right-add-real-ℝ⁺ x d =
+  tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
 
 abstract
   le-right-add-real-ℝ⁺ :
@@ -91,12 +102,16 @@ abstract
     tr (le-ℝ x) (commutative-add-ℝ x (real-ℝ⁺ d)) (le-left-add-real-ℝ⁺ x d)
 
   leq-left-add-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁺ d)
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁺ d)
   leq-left-add-real-ℝ⁺ x d = leq-le-ℝ (le-left-add-real-ℝ⁺ x d)
 
   leq-right-add-real-ℝ⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ x (real-ℝ⁺ d +ℝ x)
   leq-right-add-real-ℝ⁺ x d = leq-le-ℝ (le-right-add-real-ℝ⁺ x d)
+
+  leq-left-add-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) → leq-ℝ x (x +ℝ real-ℚ⁺ d)
+  leq-left-add-real-ℚ⁺ x d = leq-left-add-real-ℝ⁺ x (positive-real-ℚ⁺ d)
 ```
 
 ### Subtraction by a positive real number is a strictly deflationary map
@@ -104,7 +119,7 @@ abstract
 ```agda
 abstract
   le-diff-real-ℝ⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ (x -ℝ real-ℝ⁺ d) x
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ (x -ℝ real-ℝ⁺ d) x
   le-diff-real-ℝ⁺ x d⁺@(d , _) =
     preserves-le-right-sim-ℝ
       ( x -ℝ d)
@@ -115,6 +130,18 @@ abstract
         ( right-swap-add-ℝ x d (neg-ℝ d))
         ( cancel-right-add-diff-ℝ x d))
       ( le-left-add-real-ℝ⁺ (x -ℝ d) d⁺)
+
+  leq-diff-real-ℝ⁺ :
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → leq-ℝ (x -ℝ real-ℝ⁺ d) x
+  leq-diff-real-ℝ⁺ x d = leq-le-ℝ (le-diff-real-ℝ⁺ x d)
+
+  le-diff-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) → le-ℝ (x -ℝ real-ℚ⁺ d) x
+  le-diff-real-ℚ⁺ x d = le-diff-real-ℝ⁺ x (positive-real-ℚ⁺ d)
+
+  leq-diff-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) → leq-ℝ (x -ℝ real-ℚ⁺ d) x
+  leq-diff-real-ℚ⁺ x d = leq-le-ℝ (le-diff-real-ℚ⁺ x d)
 ```
 
 ### If the sum of two real numbers is positive, one of them is positive

@@ -9,6 +9,9 @@ module real-numbers.strict-inequality-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -284,6 +287,7 @@ module _
     le-real-iff-is-in-lower-cut-ℝ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
     le-real-iff-is-in-lower-cut-ℝ = is-rounded-lower-cut-ℝ x q
 
+  abstract
     le-real-is-in-lower-cut-ℝ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
     le-real-is-in-lower-cut-ℝ =
       forward-implication le-real-iff-is-in-lower-cut-ℝ
@@ -327,6 +331,7 @@ module _
       iff-tot-exists (λ _ → iff-equiv commutative-product) ∘iff
       is-rounded-upper-cut-ℝ x q
 
+  abstract
     le-real-is-in-upper-cut-ℝ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
     le-real-is-in-upper-cut-ℝ =
       forward-implication le-real-iff-is-in-upper-cut-ℝ
@@ -691,6 +696,65 @@ module _
     ( irrefutable-sim-or-le-leq-ℝ , leq-irrefutable-sim-or-le-ℝ)
 ```
 
+### `0 < 1`
+
+```agda
+le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
+le-zero-one-ℝ = preserves-le-real-ℚ le-zero-one-ℚ
+```
+
+### For any real number, there exists a greater positive rational number
+
+```agda
+abstract
+  exists-greater-positive-rational-ℝ :
+    {l : Level} (x : ℝ l) → exists ℚ⁺ (λ q → le-prop-ℝ x (real-ℚ⁺ q))
+  exists-greater-positive-rational-ℝ x =
+    let open do-syntax-trunc-Prop (∃ ℚ⁺ (λ q → le-prop-ℝ x (real-ℚ⁺ q)))
+    in do
+      (p , x<p) ← is-inhabited-upper-cut-ℝ x
+      let q = max-ℚ p one-ℚ
+      intro-exists
+        ( q ,
+          is-positive-le-zero-ℚ
+            ( concatenate-le-leq-ℚ
+              ( zero-ℚ)
+              ( one-ℚ)
+              ( q)
+              ( le-zero-one-ℚ)
+              ( leq-right-max-ℚ p one-ℚ)))
+        ( le-real-is-in-upper-cut-ℝ
+          ( x)
+          ( leq-upper-cut-ℝ x (leq-left-max-ℚ p one-ℚ) x<p))
+```
+
+### If `q ≤ x ⇒ q ≤ y` for every rational `q`, then `x ≤ y`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract opaque
+    unfolding leq-ℝ
+
+    leq-leq-rational-ℝ' :
+      ((q : ℚ) → leq-ℝ (real-ℚ q) x → leq-ℝ (real-ℚ q) y) → x ≤-ℝ y
+    leq-leq-rational-ℝ' H q q<x =
+      let
+        open do-syntax-trunc-Prop (lower-cut-ℝ y q)
+      in do
+        (r , q<r , r<x) ← forward-implication (is-rounded-lower-cut-ℝ x q) q<x
+        is-in-lower-cut-le-real-ℚ
+          ( y)
+          ( concatenate-le-leq-ℝ
+            ( real-ℚ q)
+            ( real-ℚ r)
+            ( y)
+            ( preserves-le-real-ℚ q<r)
+            ( H r (leq-real-is-in-lower-cut-ℝ x r<x)))
+```
+
 ### Strict inequality of real numbers at a universe level is a strict order
 
 ```agda
@@ -702,10 +766,10 @@ strict-preorder-ℝ l =
     transitive-le-ℝ)
 
 abstract
-  extensionality-principle-strict-preorder-ℝ :
+  extensionality-strict-preorder-ℝ :
     (l : Level) →
     extensionality-principle-Strict-Preorder (strict-preorder-ℝ l)
-  extensionality-principle-strict-preorder-ℝ l x y (_ , x~y) =
+  extensionality-strict-preorder-ℝ l x y (_ , x~y) =
     eq-sim-ℝ
       ( sim-le-same-rational-ℝ x y
         ( λ q →
@@ -716,7 +780,7 @@ abstract
 strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
 strict-order-ℝ l =
   ( strict-preorder-ℝ l ,
-    extensionality-principle-strict-preorder-ℝ l)
+    extensionality-strict-preorder-ℝ l)
 ```
 
 ## References

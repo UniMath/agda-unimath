@@ -607,6 +607,23 @@ abstract
   twice-one-half-ℝ = add-real-ℚ _ _ ∙ ap real-ℚ twice-one-half-ℚ
 ```
 
+### Adding raised real numbers
+
+```agda
+abstract
+  add-raise-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {y : ℝ l2} →
+    raise-ℝ l3 x +ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+  add-raise-ℝ {l3 = l3} {l4 = l4} {x = x} {y = y} =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 x +ℝ raise-ℝ l4 y
+        ~ℝ x +ℝ y
+          by preserves-sim-add-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)
+        ~ℝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+          by sim-raise-ℝ (l3 ⊔ l4) (x +ℝ y))
+```
+
 ## See also
 
 - In
