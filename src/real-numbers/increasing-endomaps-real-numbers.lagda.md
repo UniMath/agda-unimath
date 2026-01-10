@@ -55,7 +55,7 @@ A function `f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
 themselves is
 {{#concept "increasing" Disambiguation="function from ℝ to ℝ" Agda=is-increasing-endomap-ℝ}}
 if for all `x ≤ y`, `f x ≤ f y`; in other words, it is an
-[order-preserving map](order-theory.order-preserving-maps-posets.md) on the
+[order-preserving](order-theory.order-preserving-maps-posets.md) endomap on the
 [poset of real numbers](real-numbers.inequality-real-numbers.md).
 
 Several arguments on this page are due to

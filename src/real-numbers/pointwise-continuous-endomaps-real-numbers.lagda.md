@@ -28,7 +28,7 @@ open import real-numbers.metric-space-of-real-numbers
 
 A
 {{#concept "pointwise continuous" Disambiguation="endomap on ℝ" Agda=pointwise-continuous-endomap-ℝ}}
-[endomorphism](foundation.endomorphisms.md) on the
+[endomap](foundation.endomorphisms.md) on the
 [real numbers](real-numbers.dedekind-real-numbers.md)
 [pointwise continuous map](metric-spaces.pointwise-continuous-maps-metric-spaces.md)
 from the

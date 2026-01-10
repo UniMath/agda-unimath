@@ -223,10 +223,10 @@ module _
     is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space
       f H x = map-trunc-Prop (λ (μ , is-mod-μ) → (μ , is-mod-μ x)) H
 
-  pointwise-continuous-uniformly-continuous-map-Metric-Space :
+  pointwise-continuous-map-uniformly-continuous-map-Metric-Space :
     uniformly-continuous-map-Metric-Space X Y →
     pointwise-continuous-map-Metric-Space X Y
-  pointwise-continuous-uniformly-continuous-map-Metric-Space (f , H) =
+  pointwise-continuous-map-uniformly-continuous-map-Metric-Space (f , H) =
     ( f ,
       is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space f H)
 ```
