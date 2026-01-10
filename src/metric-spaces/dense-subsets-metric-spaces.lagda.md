@@ -20,7 +20,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.closure-subsets-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.pointwise-continuous-functions-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
 

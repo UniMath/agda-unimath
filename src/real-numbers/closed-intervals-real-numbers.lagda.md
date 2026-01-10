@@ -40,6 +40,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.short-map-binary-maximum-real-numbers
 open import real-numbers.short-map-binary-minimum-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>

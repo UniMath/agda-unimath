@@ -61,7 +61,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.pointwise-continuous-functions-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -100,16 +100,27 @@ is the [79th](literature.100-theorems.md#79) theorem on
 
 This proof is adapted from {{#cite Frank2020}}.
 
+We define sequences `aₙ` and `bₙ` such that `a₀ = a` and `b₀ = b`. `aₙ` is
+[increasing](real-numbers.increasing-sequences-real-numbers.md) and `bₙ` is
+[decreasing](real-numbers.decreasing-sequences-real-numbers.md), and their
+difference `bₙ - aₙ` is `(b-a)/2ⁿ`. We define `cₙ = (aₙ + bₙ)/2`, so it
+satisfies the bound `aₙ ≤ cₙ ≤ bₙ`, and `cₙ` is a
+[Cauchy sequence](real-numbers.cauchy-sequences-real-numbers.md). The key lemma
+is that for all `n`, there is an `m ≤ n` with `|f(cₘ)| ≤ ε`
+[or](foundation.disjunction.md) `f(aₙ) < 0 < f(bₙ)`. Using the pointwise
+continuity of `f` at the [limit](real-numbers.limits-sequences-real-numbers.md)
+of the `cₙ`, we show that either case implies the intermediate value theorem.
+
 ### Defining the sequences `aₙ`, `bₙ`, `cₙ`
 
 ```agda
 module _
   {l : Level}
-  (f : pointwise-continuous-map-ℝ l l)
+  (f : pointwise-ε-δ-continuous-endomap-ℝ l l)
   (a b : ℝ l)
   (a≤b : leq-ℝ a b)
-  (fa<0 : is-negative-ℝ (map-pointwise-continuous-map-ℝ f a))
-  (0<fb : is-positive-ℝ (map-pointwise-continuous-map-ℝ f b))
+  (fa<0 : is-negative-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f a))
+  (0<fb : is-positive-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f b))
   (ε : ℚ⁺)
   where
 
@@ -131,7 +142,7 @@ module _
       clamp-closed-interval-ℝ
         ( unit-closed-interval-ℝ)
         ( ( one-half-ℝ) +ℝ
-          ( ( map-pointwise-continuous-map-ℝ
+          ( ( map-pointwise-ε-δ-continuous-endomap-ℝ
               ( f)
               ( seq-intermediate-value-theorem-ℝ n)) *ℝ
             ( real-ℚ⁺ (inv-ℚ⁺ ε))))
@@ -389,19 +400,17 @@ module _
     has-limit-seq-intermediate-value-theorem-ℝ :
       has-limit-sequence-ℝ seq-intermediate-value-theorem-ℝ
     has-limit-seq-intermediate-value-theorem-ℝ =
-      rec-trunc-Prop
-        ( has-limit-prop-sequence-ℝ seq-intermediate-value-theorem-ℝ)
-        ( λ μ →
-          has-limit-cauchy-sequence-ℝ (seq-intermediate-value-theorem-ℝ , μ))
-        ( is-cauchy-squeeze-theorem-sequence-ℝ
-          ( lower-bound-seq-intermediate-value-theorem-ℝ)
-          ( seq-intermediate-value-theorem-ℝ)
-          ( upper-bound-seq-intermediate-value-theorem-ℝ)
-          ( is-lower-bound-seq-intermediate-value-theorem-ℝ)
-          ( is-upper-bound-seq-intermediate-value-theorem-ℝ)
-          ( is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ)
-          ( is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ)
-          ( is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ))
+      has-limit-cauchy-sequence-ℝ
+        ( seq-intermediate-value-theorem-ℝ ,
+          is-cauchy-squeeze-theorem-sequence-ℝ
+            ( lower-bound-seq-intermediate-value-theorem-ℝ)
+            ( seq-intermediate-value-theorem-ℝ)
+            ( upper-bound-seq-intermediate-value-theorem-ℝ)
+            ( is-lower-bound-seq-intermediate-value-theorem-ℝ)
+            ( is-upper-bound-seq-intermediate-value-theorem-ℝ)
+            ( is-increasing-lower-bound-seq-intermediate-value-theorem-ℝ)
+            ( is-decreasing-upper-bound-seq-intermediate-value-theorem-ℝ)
+            ( is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ))
 
   lim-seq-intermediate-value-theorem-ℝ : ℝ l
   lim-seq-intermediate-value-theorem-ℝ =
@@ -444,7 +453,7 @@ module _
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n)) →
       sim-ℝ
@@ -456,7 +465,9 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         ε' = one-half-ℚ⁺ *ℚ⁺ ε
         fcₙ =
-          map-pointwise-continuous-map-ℝ f (seq-intermediate-value-theorem-ℝ n)
+          map-pointwise-ε-δ-continuous-endomap-ℝ
+            ( f)
+            ( seq-intermediate-value-theorem-ℝ n)
       in
         clamp-leq-upper-bound-closed-interval-ℝ
           ( unit-closed-interval-ℝ)
@@ -490,7 +501,7 @@ module _
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n)) →
       lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
@@ -537,7 +548,7 @@ module _
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n)) →
       upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
@@ -580,7 +591,7 @@ module _
     sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n))
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
@@ -593,7 +604,7 @@ module _
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         ε' = one-half-ℚ⁺ *ℚ⁺ ε
         fcₙ =
-          map-pointwise-continuous-map-ℝ
+          map-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( seq-intermediate-value-theorem-ℝ n)
       in
@@ -625,7 +636,7 @@ module _
     is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n))
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
@@ -647,7 +658,7 @@ module _
     eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n))
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
@@ -672,7 +683,7 @@ module _
     succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( seq-intermediate-value-theorem-ℝ n))
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
@@ -710,16 +721,16 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
         ( leq-ℕ-Prop n m) ∧
         ( leq-prop-ℝ
           ( abs-ℝ
-            ( map-pointwise-continuous-map-ℝ
+            ( map-pointwise-ε-δ-continuous-endomap-ℝ
               ( f)
               ( seq-intermediate-value-theorem-ℝ n)))
           ( real-ℚ⁺ ε)))) ∨
     ( ( is-negative-prop-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( lower-bound-seq-intermediate-value-theorem-ℝ m))) ∧
       ( is-positive-prop-ℝ
-        ( map-pointwise-continuous-map-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
           ( f)
           ( upper-bound-seq-intermediate-value-theorem-ℝ m))))
 
@@ -734,7 +745,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
         ε' = one-half-ℚ⁺ *ℚ⁺ ε
         ε'<ε = le-left-mul-less-than-one-ℚ⁺ one-half-ℚ⁺ le-one-half-one-ℚ ε
         fcₘ =
-          map-pointwise-continuous-map-ℝ
+          map-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( seq-intermediate-value-theorem-ℝ m)
       in
@@ -755,14 +766,14 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                     inr-disjunction
                       ( inv-tr
                           ( ( is-negative-ℝ) ∘
-                            ( map-pointwise-continuous-map-ℝ f))
+                            ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
                           ( eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
                             ( m)
                             ( leq-le-ℝ ε'<fcₘ))
                           ( faₘ<0) ,
                         inv-tr
                           ( ( is-positive-ℝ) ∘
-                            ( map-pointwise-continuous-map-ℝ f))
+                            ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
                           ( succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
                             ( m)
                             ( leq-le-ℝ ε'<fcₘ))
@@ -787,7 +798,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 inr-disjunction
                   ( inv-tr
                       ( ( is-negative-ℝ) ∘
-                        ( map-pointwise-continuous-map-ℝ f))
+                        ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
                       ( succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
                         ( m)
                         ( leq-le-ℝ fcₘ<-ε'))
@@ -797,7 +808,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                         ( fcₘ<-ε')) ,
                     inv-tr
                       ( ( is-positive-ℝ) ∘
-                        ( map-pointwise-continuous-map-ℝ f))
+                        ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
                       ( eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
                         ( m)
                         ( leq-le-ℝ fcₘ<-ε'))
@@ -819,7 +830,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
         ( type-closed-interval-ℝ l ((a , b) , a≤b))
         ( λ (c , _) →
           leq-prop-ℝ
-            ( abs-ℝ (map-pointwise-continuous-map-ℝ f c))
+            ( abs-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f c))
             ( real-ℚ⁺ ε))
     intermediate-value-theorem-ℝ =
       let
@@ -827,16 +838,17 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
           ∃ ( type-closed-interval-ℝ l ((a , b) , a≤b))
             ( λ (c , _) →
               leq-prop-ℝ
-                ( abs-ℝ (map-pointwise-continuous-map-ℝ f c))
+                ( abs-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f c))
                 ( real-ℚ⁺ ε))
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         open do-syntax-trunc-Prop motive
       in do
-        (μf , is-mod-μf) ←
-          is-pointwise-continuous-map-pointwise-continuous-map-ℝ
+        (δ , H) ←
+          is-pointwise-ε-δ-continuous-map-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( lim-seq-intermediate-value-theorem-ℝ)
-        let (δ₁ , δ₂ , δ₁+δ₂=δ) = split-ℚ⁺ (μf ε)
+            ( ε)
+        let (δ₁ , δ₂ , δ₁+δ₂=δ) = split-ℚ⁺ δ
         (μseq , is-mod-μseq) ←
           is-limit-lim-seq-intermediate-value-theorem-ℝ
         (μba , is-mod-μba) ← is-zero-limit-⟨b-a⟩/2^1+
@@ -931,13 +943,13 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 ( δ₁)
                 ( m)
                 ( left-leq-max-ℕ (μseq δ₁) (μba δ₂)))
-          Nμfεcbₘ :
+          Nδcbₘ :
             neighborhood-ℝ
               ( l)
-              ( μf ε)
+              ( δ)
               ( lim-seq-intermediate-value-theorem-ℝ)
               ( upper-bound-seq-intermediate-value-theorem-ℝ m)
-          Nμfεcbₘ =
+          Nδcbₘ =
             tr
               ( λ θ →
                 neighborhood-ℝ l
@@ -953,13 +965,13 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 ( δ₂)
                 ( Nδ₂cₘbₘ)
                 ( Nδ₁ccₘ))
-          Nμfεcaₘ :
+          Nδcaₘ :
             neighborhood-ℝ
               ( l)
-              ( μf ε)
+              ( δ)
               ( lim-seq-intermediate-value-theorem-ℝ)
               ( lower-bound-seq-intermediate-value-theorem-ℝ m)
-          Nμfεcaₘ =
+          Nδcaₘ =
             tr
               ( λ θ →
                 neighborhood-ℝ l
@@ -991,26 +1003,25 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 upper-bound-lim-seq-intermediate-value-theorem-ℝ)
               ( leq-abs-leq-leq-neg-ℝ'
                 ( chain-of-inequalities
-                  map-pointwise-continuous-map-ℝ
+                  map-pointwise-ε-δ-continuous-endomap-ℝ
                     ( f)
                     ( lim-seq-intermediate-value-theorem-ℝ)
-                  ≤ ( map-pointwise-continuous-map-ℝ
+                  ≤ ( map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( lower-bound-seq-intermediate-value-theorem-ℝ m)) +ℝ
                     ( real-ℚ⁺ ε)
                     by
                       left-leq-real-bound-neighborhood-ℝ
                         ( ε)
-                        ( map-pointwise-continuous-map-ℝ
+                        ( map-pointwise-ε-δ-continuous-endomap-ℝ
                           ( f)
                           ( lim-seq-intermediate-value-theorem-ℝ))
-                        ( map-pointwise-continuous-map-ℝ
+                        ( map-pointwise-ε-δ-continuous-endomap-ℝ
                           ( f)
                           ( lower-bound-seq-intermediate-value-theorem-ℝ m))
-                        ( is-mod-μf
-                          ( ε)
+                        ( H
                           ( lower-bound-seq-intermediate-value-theorem-ℝ m)
-                          ( Nμfεcaₘ))
+                          ( Nδcaₘ))
                   ≤ zero-ℝ +ℝ real-ℚ⁺ ε
                     by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ faₘ<0)
                   ≤ real-ℚ⁺ ε
@@ -1019,28 +1030,27 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                   neg-ℝ (real-ℚ⁺ ε)
                   ≤ zero-ℝ -ℝ real-ℚ⁺ ε
                     by leq-eq-ℝ (inv (left-unit-law-add-ℝ _))
-                  ≤ ( map-pointwise-continuous-map-ℝ
+                  ≤ ( map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( upper-bound-seq-intermediate-value-theorem-ℝ m)) -ℝ
                     ( real-ℚ⁺ ε)
                     by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ 0<fbₘ)
-                  ≤ map-pointwise-continuous-map-ℝ
+                  ≤ map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( lim-seq-intermediate-value-theorem-ℝ)
                     by
                       leq-transpose-right-add-ℝ _ _ _
                         ( right-leq-real-bound-neighborhood-ℝ
                           ( ε)
-                          ( map-pointwise-continuous-map-ℝ
+                          ( map-pointwise-ε-δ-continuous-endomap-ℝ
                             ( f)
                             ( lim-seq-intermediate-value-theorem-ℝ))
-                          ( map-pointwise-continuous-map-ℝ
+                          ( map-pointwise-ε-δ-continuous-endomap-ℝ
                             ( f)
                             ( upper-bound-seq-intermediate-value-theorem-ℝ m))
-                          ( is-mod-μf
-                            ( ε)
+                          ( H
                             ( upper-bound-seq-intermediate-value-theorem-ℝ m)
-                            ( Nμfεcbₘ))))))
+                            ( Nδcbₘ))))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```
 

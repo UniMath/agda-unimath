@@ -88,7 +88,7 @@ abstract
       ( preserves-limits-sequence-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ lzero)
-        ( isometry-metric-space-real-ℚ)
+        ( isometry-real-ℚ)
         ( u)
         ( zero-ℚ)
         ( H))
@@ -159,8 +159,8 @@ abstract
             by right-zero-law-mul-ℝ c
           ~ℝ raise-zero-ℝ (l1 ⊔ l2)
             by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ))
-      ( preserves-limits-sequence-uniformly-continuous-function-ℝ
-        ( uniformly-continuous-right-mul-ℝ l2 c)
+      ( preserves-limits-sequence-uniformly-continuous-endomap-ℝ
+        ( uniformly-continuous-map-right-mul-ℝ l2 c)
         ( u)
         ( _)
         ( u→0))
