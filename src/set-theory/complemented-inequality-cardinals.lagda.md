@@ -45,10 +45,17 @@ second. This defines the
 on cardinals.
 
 Under the assumption of the
-[weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md),
+[weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 this relation is antisymmetric and hence defines a
-[partial order](order-theory.posets.md) on cardinals, due to the
+[partial order](order-theory.posets.md) on cardinals due to the
 [Cantor–Schröder–Bernstein theorem for decidable embeddings](foundation.cantor-schroder-bernstein-decidable-embeddings.md).
+
+**Terminology.** The term "complemented" as it is used here is borrowed from
+topology. A subspace X of a space Y is _complemented_ if it is closed and there
+is another closed subspace X̅ of Y such that X ∩ X̅ = ∅ and X ∪ X̅ = Y.
+Analogously, a cardinal X is complemented less than a cardinal Y if there is
+such a decomposition of any set in the isomorphism class of X identified as a
+subset of any set in the isomorphism class of Y.
 
 ## Definition
 
