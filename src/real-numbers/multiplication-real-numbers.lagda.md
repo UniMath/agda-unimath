@@ -1143,6 +1143,20 @@ abstract
       ( preserves-sim-left-mul-ℝ a b b' b~b')
 ```
 
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → raise-one-ℝ l *ℝ x ＝ x
+  left-raise-one-law-mul-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (raise-one-ℝ l *ℝ x))
+        ( left-unit-law-mul-ℝ x)
+        ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l one-ℝ)))
+```
+
 ### Zero laws
 
 ```agda
@@ -1333,4 +1347,21 @@ abstract
           by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
         ~ℝ raise-ℝ l (x *ℝ y)
           by sim-raise-ℝ l (x *ℝ y))
+```
+
+### Multiplication by negative one
+
+```agda
+abstract
+  left-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → neg-one-ℝ *ℝ x ＝ neg-ℝ x
+  left-neg-one-law-mul-ℝ x =
+    ( ap-mul-ℝ (inv (neg-real-ℤ one-ℤ)) refl) ∙
+    ( left-negative-law-mul-ℝ one-ℝ x) ∙
+    ( ap neg-ℝ (left-unit-law-mul-ℝ x))
+
+  right-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ neg-one-ℝ ＝ neg-ℝ x
+  right-neg-one-law-mul-ℝ x =
+    commutative-mul-ℝ x neg-one-ℝ ∙ left-neg-one-law-mul-ℝ x
 ```
