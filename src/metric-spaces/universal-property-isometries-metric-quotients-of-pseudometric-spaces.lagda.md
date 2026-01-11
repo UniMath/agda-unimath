@@ -53,9 +53,9 @@ Precomposition with the natural
 q : P → [P]
 ```
 
-maps [isometries](metric-spaces.isometries-metric-spaces.md) into a metric space `[P] → M` to
-[isometries](metric-spaces.isometries-pseudometric-spaces.md) from `P` to the
-underlying pseudometric space of `M`.
+maps [isometries](metric-spaces.isometries-metric-spaces.md) into a metric space
+`[P] → M` to [isometries](metric-spaces.isometries-pseudometric-spaces.md) from
+`P` to the underlying pseudometric space of `M`.
 
 This action is an [equivalence](foundation.equivalences.md) so isometries from a
 pseudometric space to a metric space are
