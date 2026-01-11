@@ -17,6 +17,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.sections
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -357,6 +358,19 @@ module _
     has-decidable-equality (A + B) → has-decidable-equality B
   has-decidable-equality-right-summand d x y =
     is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
+```
+
+### A subtype of a type with decidable equality has decidable equality
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  where
+
+  has-decidable-equality-subtype :
+    has-decidable-equality A → has-decidable-equality (type-subtype B)
+  has-decidable-equality-subtype =
+    has-decidable-equality-emb (emb-subtype B)
 ```
 
 ## See also

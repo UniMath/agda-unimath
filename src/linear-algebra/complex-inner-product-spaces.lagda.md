@@ -52,7 +52,9 @@ open import real-numbers.square-roots-nonnegative-real-numbers
 A {{#concept "complex inner product space" Agda=ℂ-Inner-Product-Space}} is a
 [complex vector space](linear-algebra.complex-vector-spaces.md) with a
 [sesquilinear form](linear-algebra.sesquilinear-forms-complex-vector-spaces.md),
-called its inner product, satisfying the following properties:
+called its
+{{#concept "inner product" Disambiguation="on a complex vector space" Agda=inner-product-ℂ-Vector-Space}},
+satisfying the following properties:
 
 - [**Conjugate symmetry**](linear-algebra.conjugate-symmetric-sesquilinear-forms-complex-vector-spaces.md):
   for all `u` and `v`, the inner product of `u` and `v` is the
@@ -114,13 +116,16 @@ module _
   is-inner-product-sesquilinear-form-ℂ-Vector-Space =
     type-Prop is-inner-product-prop-sesquilinear-form-ℂ-Vector-Space
 
-ℂ-Inner-Product-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+inner-product-ℂ-Vector-Space :
+  {l1 l2 : Level} → ℂ-Vector-Space l1 l2 → UU (lsuc l1 ⊔ l2)
+inner-product-ℂ-Vector-Space V =
+  Σ ( sesquilinear-form-ℂ-Vector-Space V)
+    ( is-inner-product-sesquilinear-form-ℂ-Vector-Space V)
+
+ℂ-Inner-Product-Space : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 ℂ-Inner-Product-Space l1 l2 =
-  Σ
-    ( ℂ-Vector-Space l1 l2)
-    ( λ V →
-      Σ ( sesquilinear-form-ℂ-Vector-Space V)
-        ( is-inner-product-sesquilinear-form-ℂ-Vector-Space V))
+  Σ ( ℂ-Vector-Space l1 l2)
+    ( inner-product-ℂ-Vector-Space)
 
 module _
   {l1 l2 : Level}

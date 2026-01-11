@@ -46,7 +46,7 @@ is-real-ℂ = is-in-subtype is-real-prop-ℂ
 
 ## Properties
 
-### `z` is a real complex number if and only if it equals its conjugate
+### A complex number is real if and only if it equals its conjugate
 
 ```agda
 abstract
@@ -59,7 +59,7 @@ abstract
   eq-conjugate-is-real-ℂ (a +iℂ b) b=0 = eq-ℂ refl (eq-neg-is-zero-ℝ b=0)
 ```
 
-### `x` is a real complex number if and only if it is in the image of `complex-ℝ`
+### A complex number is real if and only if it is in the image of `complex-ℝ`
 
 ```agda
 abstract
