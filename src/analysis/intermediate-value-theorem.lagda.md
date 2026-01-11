@@ -79,12 +79,12 @@ open import real-numbers.strict-inequality-real-numbers
 The
 {{#concept "constructive intermediate value theorem" Agda=intermediate-value-theorem-ℝ}}
 states that for a
-[pointwise continuous function](real-numbers.pointwise-continuous-functions-real-numbers.md)
-`f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
-themselves, real numbers `a` and `b` with `a`
-[less than or equal to](real-numbers.inequality-real-numbers.md) `b` such that
-`f a` is [negative](real-numbers.negative-real-numbers.md) and `f b` is
-[positive](real-numbers.positive-real-numbers.md), and a
+[pointwise ε-δ continuous](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
+[endomorphism](foundation.endomorphisms.md) `f` on the
+[real numbers](real-numbers.dedekind-real-numbers.md), real numbers `a` and `b`
+with `a` [less than or equal to](real-numbers.inequality-real-numbers.md) `b`
+such that `f a` is [negative](real-numbers.negative-real-numbers.md) and `f b`
+is [positive](real-numbers.positive-real-numbers.md), and a
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
 there exists a `c` with `a ≤ c ≤ b` such that the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of `f c` is at
@@ -584,7 +584,7 @@ module _
         by eq-sim-ℝ (cancel-right-add-diff-ℝ _ _)
 ```
 
-### If `ε/2 ≤ f cₙ`, then `aₙ₊₁ = aₙ` and `bₙ₊₁ = cₙ`
+### If `f cₙ ≤ -ε/2`, then `aₙ₊₁ = cₙ` and `bₙ₊₁ = bₙ`
 
 ```agda
   abstract
