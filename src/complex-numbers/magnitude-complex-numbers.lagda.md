@@ -252,7 +252,7 @@ abstract
         by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
 ```
 
-### The magnitude of a complex number multiplied on the left by an embedded real number
+### The magnitude of a complex number multiplied on the left by a real number as a complex number
 
 ```agda
 abstract
