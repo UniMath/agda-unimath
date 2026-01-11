@@ -23,26 +23,19 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.pointwise-continuous-functions-metric-spaces
-
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.increasing-functions-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
-open import real-numbers.lipschitz-continuity-multiplication-real-numbers
-open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -50,7 +43,6 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
-open import real-numbers.pointwise-continuous-functions-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -59,7 +51,6 @@ open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.strictly-increasing-functions-real-numbers
 ```
 
 </details>
@@ -84,34 +75,6 @@ power-ℝ = power-Large-Commutative-Ring large-commutative-ring-ℝ
 
 ## Properties
 
-### The power operation preserves similarity
-
-```agda
-abstract
-  preserves-sim-power-ℝ :
-    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
-    sim-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-sim-power-ℝ n =
-    preserves-sim-power-Large-Commutative-Ring large-commutative-ring-ℝ n _ _
-```
-
-### The power operation commutes with raising universe level
-
-```agda
-abstract
-  power-raise-ℝ :
-    {l0 : Level} (l : Level) (n : ℕ) (x : ℝ l0) →
-    power-ℝ n (raise-ℝ l x) ＝ raise-ℝ l (power-ℝ n x)
-  power-raise-ℝ l n x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        power-ℝ n (raise-ℝ l x)
-        ~ℝ power-ℝ n x
-          by preserves-sim-power-ℝ n (sim-raise-ℝ' l x)
-        ~ℝ raise-ℝ l (power-ℝ n x)
-          by sim-raise-ℝ l _)
-```
-
 ### The canonical embedding of rational numbers preserves powers
 
 ```agda
@@ -125,13 +88,6 @@ abstract
         ( hom-ring-real-ℚ)
         ( n)
         ( q))
-
-  raise-power-real-ℚ :
-    (l : Level) (n : ℕ) (q : ℚ) →
-    power-ℝ n (raise-real-ℚ l q) ＝ raise-real-ℚ l (power-ℚ n q)
-  raise-power-real-ℚ l n q =
-    ( power-raise-ℝ l n (real-ℚ q)) ∙
-    ( ap (raise-ℝ l) (power-real-ℚ n q))
 ```
 
 ### `1ⁿ ＝ 1`
@@ -474,112 +430,4 @@ abstract
               by leq-eq-ℝ (power-real-ℚ n ε)
             ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
               by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
-```
-
-### For any `n`, `power-ℝ n` is pointwise continuous
-
-```agda
-abstract
-  is-pointwise-continuous-power-ℝ :
-    {l : Level} (n : ℕ) → is-pointwise-continuous-map-ℝ {l} (power-ℝ n)
-  is-pointwise-continuous-power-ℝ 0 =
-    is-pointwise-continuous-const-Metric-Space _ _ _
-  is-pointwise-continuous-power-ℝ 1 =
-    is-pointwise-continuous-map-id-Metric-Space _
-  is-pointwise-continuous-power-ℝ {l} (succ-ℕ n@(succ-ℕ _)) =
-    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
-      ( metric-space-ℝ l)
-      ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-      ( metric-space-ℝ l)
-      ( ind-Σ mul-ℝ , is-pointwise-continuous-mul-ℝ l l)
-      ( comp-pointwise-continuous-map-Metric-Space
-        ( metric-space-ℝ l)
-        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-        ( pointwise-continuous-map-product-Metric-Space
-          ( metric-space-ℝ l)
-          ( metric-space-ℝ l)
-          ( metric-space-ℝ l)
-          ( metric-space-ℝ l)
-          ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
-          ( id-pointwise-continuous-map-Metric-Space (metric-space-ℝ l)))
-        ( pointwise-continuous-isometry-Metric-Space
-          ( metric-space-ℝ l)
-          ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
-          ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))
-
-pointwise-continuous-map-power-ℝ :
-  (l : Level) (n : ℕ) → pointwise-continuous-map-ℝ l l
-pointwise-continuous-map-power-ℝ l n =
-  ( power-ℝ n , is-pointwise-continuous-power-ℝ n)
-```
-
-### Odd powers of real numbers preserve strict inequality
-
-```agda
-abstract
-  is-strictly-increasing-power-is-odd-ℝ :
-    (l : Level) (n : ℕ) → is-odd-ℕ n →
-    is-strictly-increasing-function-ℝ (power-ℝ {l} n)
-  is-strictly-increasing-power-is-odd-ℝ l n odd-n =
-    is-strictly-increasing-is-strictly-increasing-rational-ℝ
-      ( pointwise-continuous-map-power-ℝ l n)
-      ( λ p q p<q →
-        binary-tr
-          ( le-ℝ)
-          ( inv (raise-power-real-ℚ l n p))
-          ( inv (raise-power-real-ℚ l n q))
-          ( le-raise-le-ℝ l
-            ( preserves-le-real-ℚ (preserves-le-odd-power-ℚ n p q odd-n p<q))))
-
-  preserves-le-power-is-odd-ℝ :
-    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → is-odd-ℕ n → le-ℝ x y →
-    le-ℝ (power-ℝ n x) (power-ℝ n y)
-  preserves-le-power-is-odd-ℝ {l1} {l2} n {x} {y} odd-n x<y =
-    le-le-raise-ℝ
-      ( l1 ⊔ l2)
-      ( binary-tr
-        ( le-ℝ)
-        ( power-raise-ℝ (l1 ⊔ l2) n x)
-        ( power-raise-ℝ (l1 ⊔ l2) n y)
-        ( is-strictly-increasing-power-is-odd-ℝ
-          ( l1 ⊔ l2)
-          ( n)
-          ( odd-n)
-          ( raise-ℝ (l1 ⊔ l2) x)
-          ( raise-ℝ (l1 ⊔ l2) y)
-          ( le-raise-le-ℝ (l1 ⊔ l2) x<y)))
-```
-
-### Odd powers of real numbers preserve inequality
-
-```agda
-module _
-  (n : ℕ)
-  (odd-n : is-odd-ℕ n)
-  where
-
-  abstract
-    is-increasing-power-is-odd-ℝ :
-      (l : Level) → is-increasing-function-ℝ (power-ℝ {l} n)
-    is-increasing-power-is-odd-ℝ l =
-      is-increasing-is-strictly-increasing-function-ℝ
-        ( power-ℝ n)
-        ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
-
-    preserves-leq-power-is-odd-ℝ :
-      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-      leq-ℝ x y → leq-ℝ (power-ℝ n x) (power-ℝ n y)
-    preserves-leq-power-is-odd-ℝ {l1} {l2} {x} {y} x≤y =
-      leq-leq-raise-ℝ
-        ( l1 ⊔ l2)
-        ( binary-tr
-          ( leq-ℝ)
-          ( power-raise-ℝ (l1 ⊔ l2) n x)
-          ( power-raise-ℝ (l1 ⊔ l2) n y)
-          ( is-increasing-power-is-odd-ℝ
-            ( l1 ⊔ l2)
-            ( raise-ℝ (l1 ⊔ l2) x)
-            ( raise-ℝ (l1 ⊔ l2) y)
-            ( leq-raise-leq-ℝ (l1 ⊔ l2) x≤y)))
 ```
