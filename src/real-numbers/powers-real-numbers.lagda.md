@@ -30,7 +30,10 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+open import metric-spaces.cartesian-products-metric-spaces
+open import real-numbers.metric-space-of-real-numbers
 
+open import foundation.constant-maps
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
@@ -46,11 +49,18 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.pointwise-continuous-endomaps-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
+open import real-numbers.strictly-increasing-endomaps-real-numbers
+open import real-numbers.unbounded-endomaps-real-numbers
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
+open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -430,4 +440,56 @@ abstract
               by leq-eq-ℝ (power-real-ℚ n ε)
             ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
               by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
+```
+
+### For any `n`, `x ↦ xⁿ` is pointwise continuous
+
+```agda
+abstract
+  is-pointwise-continuous-power-ℝ :
+    (l : Level) (n : ℕ) →
+    is-pointwise-continuous-endomap-ℝ (power-ℝ {l} n)
+  is-pointwise-continuous-power-ℝ l 0 =
+    is-pointwise-continuous-endomap-const-ℝ l (raise-one-ℝ l)
+  is-pointwise-continuous-power-ℝ l 1 =
+    is-pointwise-continuous-endomap-id-ℝ l
+  is-pointwise-continuous-power-ℝ l (succ-ℕ n@(succ-ℕ _)) =
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
+      ( metric-space-ℝ l)
+      ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+      ( metric-space-ℝ l)
+      ( pointwise-continuous-map-mul-pair-ℝ l l)
+      ( comp-pointwise-continuous-map-Metric-Space
+        ( metric-space-ℝ l)
+        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+        ( pointwise-continuous-map-product-Metric-Space _ _ _ _
+          ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+          ( pointwise-continuous-endomap-id-ℝ l))
+        ( pointwise-continuous-map-isometry-Metric-Space _ _
+          ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))
+
+pointwise-continuous-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-continuous-endomap-ℝ l l
+pointwise-continuous-power-ℝ l n =
+  ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+
+abstract
+  is-pointwise-ε-δ-continuous-power-ℝ :
+    (l : Level) (n : ℕ) →
+    is-pointwise-ε-δ-continuous-endomap-ℝ (power-ℝ {l} n)
+  is-pointwise-ε-δ-continuous-power-ℝ l n =
+    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ
+      ( pointwise-continuous-power-ℝ l n)
+```
+
+### For odd n, `x ↦ xⁿ` is strictly increasing
+
+```agda
+abstract
+  is-strictly-increasing-power-is-odd-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-strictly-increasing-endomap-ℝ (power-ℝ {l} n)
+  is-strictly-increasing-power-is-odd-ℝ l n odd-n =
+    ?
 ```

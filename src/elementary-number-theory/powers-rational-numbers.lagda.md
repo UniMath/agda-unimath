@@ -1,6 +1,8 @@
 # Powers of rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.powers-rational-numbers where
 ```
 
@@ -10,10 +12,12 @@ module elementary-number-theory.powers-rational-numbers where
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.maximum-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
@@ -23,12 +27,16 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.powers-nonnegative-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
+open import logic.functoriality-existential-quantification
 open import elementary-number-theory.rational-numbers
+open import foundation.existential-quantification
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.empty-types
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
@@ -43,6 +51,9 @@ open import group-theory.powers-of-elements-monoids
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
+
+open import order-theory.unbounded-maps-posets
+open import order-theory.posets
 ```
 
 </details>
@@ -243,9 +254,9 @@ abstract
 
 ```agda
 abstract
-  odd-power-neg-ℚ :
+  power-is-odd-neg-ℚ :
     (n : ℕ) (q : ℚ) → is-odd-ℕ n → power-ℚ n (neg-ℚ q) ＝ neg-ℚ (power-ℚ n q)
-  odd-power-neg-ℚ n q odd-n =
+  power-is-odd-neg-ℚ n q odd-n =
     let (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
       equational-reasoning
@@ -263,16 +274,16 @@ abstract
         ＝ neg-ℚ (power-ℚ n q)
           by ap (λ m → neg-ℚ (power-ℚ m q)) k2+1=n
 
-  neg-odd-power-neg-ℚ :
+  neg-power-is-odd-neg-ℚ :
     (n : ℕ) (q : ℚ) → is-odd-ℕ n → neg-ℚ (power-ℚ n (neg-ℚ q)) ＝ power-ℚ n q
-  neg-odd-power-neg-ℚ n q odd-n =
-    ap neg-ℚ (odd-power-neg-ℚ n q odd-n) ∙ neg-neg-ℚ _
+  neg-power-is-odd-neg-ℚ n q odd-n =
+    ap neg-ℚ (power-is-odd-neg-ℚ n q odd-n) ∙ neg-neg-ℚ _
 
-  neg-odd-power-neg-ℚ⁻ :
+  neg-power-is-odd-neg-ℚ⁻ :
     (n : ℕ) (q : ℚ⁻) → is-odd-ℕ n →
     neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q))) ＝ power-ℚ n (rational-ℚ⁻ q)
-  neg-odd-power-neg-ℚ⁻ n q⁻@(q , _) odd-n =
-    ap neg-ℚ (inv (power-rational-ℚ⁺ n _)) ∙ neg-odd-power-neg-ℚ n q odd-n
+  neg-power-is-odd-neg-ℚ⁻ n q⁻@(q , _) odd-n =
+    ap neg-ℚ (inv (power-rational-ℚ⁺ n _)) ∙ neg-power-is-odd-neg-ℚ n q odd-n
 ```
 
 ### `|q|ⁿ=|qⁿ|`
@@ -326,8 +337,8 @@ abstract
             in
               binary-tr
                 ( leq-ℚ)
-                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
+                ( neg-power-is-odd-neg-ℚ⁻ n p⁻ odd-n)
+                ( neg-power-is-odd-neg-ℚ⁻ n q⁻ odd-n)
                 ( neg-leq-ℚ
                   ( preserves-leq-power-ℚ⁺
                     ( n)
@@ -360,10 +371,10 @@ abstract
 
 ```agda
 abstract
-  preserves-le-odd-power-ℚ :
+  preserves-le-power-is-odd-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → le-ℚ p q →
     le-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-le-odd-power-ℚ n p q odd-n p<q =
+  preserves-le-power-is-odd-ℚ n p q odd-n p<q =
     rec-coproduct
       ( λ is-neg-p →
         rec-coproduct
@@ -374,8 +385,8 @@ abstract
             in
               binary-tr
                 ( le-ℚ)
-                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
+                ( neg-power-is-odd-neg-ℚ⁻ n p⁻ odd-n)
+                ( neg-power-is-odd-neg-ℚ⁻ n q⁻ odd-n)
                 ( neg-le-ℚ
                   ( preserves-le-power-ℚ⁺
                     ( n)
@@ -460,6 +471,68 @@ abstract
               ( λ q → le-ℚ q one-ℚ)
               ( rational-abs-rational-ℚ⁺ (ε , is-pos-ε))
               ( |ε|<1))))
+```
+
+### If `1 ≤ q` and `n` is nonzero, `q ≤ qⁿ`
+
+```agda
+abstract
+  leq-power-nonzero-leq-one-ℚ :
+    (n : ℕ) → is-nonzero-ℕ n → (q : ℚ) → leq-ℚ one-ℚ q → leq-ℚ q (power-ℚ n q)
+  leq-power-nonzero-leq-one-ℚ 0 H q 1≤q = ex-falso (H refl)
+  leq-power-nonzero-leq-one-ℚ 1 _ q 1≤q = refl-leq-ℚ q
+  leq-power-nonzero-leq-one-ℚ (succ-ℕ n@(succ-ℕ n')) _ q 1≤q =
+    let
+      open inequality-reasoning-Poset ℚ-Poset
+      q⁰⁺ = (q , is-nonnegative-leq-ℚ⁰⁺ one-ℚ⁰⁺ q 1≤q)
+    in
+      chain-of-inequalities
+        q
+        ≤ power-ℚ n q
+          by leq-power-nonzero-leq-one-ℚ n (is-nonzero-succ-ℕ n') q 1≤q
+        ≤ rational-ℚ⁰⁺ (power-ℚ⁰⁺ n q⁰⁺)
+          by leq-eq-ℚ (power-rational-ℚ⁰⁺ n q⁰⁺)
+        ≤ rational-ℚ⁰⁺ (power-ℚ⁰⁺ n q⁰⁺) *ℚ q
+          by is-inflationary-right-mul-geq-one-ℚ⁰⁺ (power-ℚ⁰⁺ n q⁰⁺) q⁰⁺ 1≤q
+        ≤ power-ℚ n q *ℚ q
+          by leq-eq-ℚ (ap-mul-ℚ (inv (power-rational-ℚ⁰⁺ n q⁰⁺)) refl)
+```
+
+### If `n` is odd, `q ↦ qⁿ` is unbounded above and below
+
+```agda
+abstract
+  is-unbounded-above-power-is-odd-ℚ :
+    (n : ℕ) → is-odd-ℕ n → is-unbounded-above-map-Poset ℚ-Poset (power-ℚ n)
+  is-unbounded-above-power-is-odd-ℚ n odd-n q =
+    let
+      q' = max-ℚ q one-ℚ
+    in
+      intro-exists
+        ( q')
+        ( transitive-leq-ℚ
+          ( q)
+          ( q')
+          ( power-ℚ n q')
+          ( leq-power-nonzero-leq-one-ℚ
+            ( n)
+            ( is-nonzero-is-odd-ℕ odd-n)
+            ( q')
+            ( leq-right-max-ℚ q one-ℚ))
+          ( leq-left-max-ℚ q one-ℚ))
+
+  is-unbounded-below-power-is-odd-ℚ :
+    (n : ℕ) → is-odd-ℕ n → is-unbounded-below-map-Poset ℚ-Poset (power-ℚ n)
+  is-unbounded-below-power-is-odd-ℚ n odd-n q =
+    map-exists _
+      ( neg-ℚ)
+      ( λ p pⁿ≤-q →
+        binary-tr
+          ( leq-ℚ)
+          ( inv (power-is-odd-neg-ℚ n p odd-n))
+          ( neg-neg-ℚ q)
+          ( neg-leq-ℚ pⁿ≤-q))
+      ( is-unbounded-above-power-is-odd-ℚ n odd-n (neg-ℚ q))
 ```
 
 ## See also

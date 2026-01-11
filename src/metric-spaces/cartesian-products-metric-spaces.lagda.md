@@ -29,6 +29,8 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
+open import metric-spaces.isometries-metric-spaces
+open import foundation.diagonal-maps-cartesian-products-of-types
 ```
 
 </details>
@@ -143,4 +145,19 @@ module _
       ( Y)
       ( pr2)
   is-short-map-pr2-product-Metric-Space _ _ _ = pr2
+```
+
+### The diagonal isometry from `X` to `X × X`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  where
+
+  diagonal-product-isometry-Metric-Space :
+    isometry-Metric-Space X (product-Metric-Space X X)
+  diagonal-product-isometry-Metric-Space =
+    ( diagonal-product (type-Metric-Space X) ,
+      ( λ _ _ _ → ((λ N → (N , N)) , pr1)))
 ```
