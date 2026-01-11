@@ -162,7 +162,7 @@ module _
             ＝
               a *ℚ rational-inv-ℚˣ (invertible-diff-neq-ℚ r one-ℚ r≠1)
               by right-unit-law-mul-ℚ _)
-          ( preserves-limits-sequences-uniformly-continuous-map-Metric-Space
+          ( is-limit-map-sequence-uniformly-continuous-map-Metric-Space
             ( metric-space-ℚ)
             ( metric-space-ℚ)
             ( comp-uniformly-continuous-map-Metric-Space
