@@ -60,7 +60,7 @@ module _
         ( sequence-map-convergent-sequence-modulated-ucont-map-Metric-Space)
         ( limit-sequence-map-convergent-sequence-modulated-ucont-map-Metric-Space)
     is-limit-sequence-map-convergent-sequence-modulated-ucont-map-Metric-Space =
-      preserves-limits-sequence-modulated-ucont-map-Metric-Space
+      is-limit-map-sequence-modulated-ucont-map-Metric-Space
         ( A)
         ( B)
         ( f)

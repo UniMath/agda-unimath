@@ -35,7 +35,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.isometry-difference-real-numbers
 open import real-numbers.large-ring-of-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -234,7 +234,7 @@ module _
               by ap-mul-ℝ refl (right-unit-law-diff-ℝ one-ℝ)
             ＝ a *ℝ real-inv-nonzero-ℝ (nonzero-diff-le-abs-ℝ |r|<1)
               by right-unit-law-mul-ℝ _)
-          ( preserves-limits-sequence-uniformly-continuous-endomap-ℝ
+          ( is-limit-map-sequence-uniformly-continuous-endomap-ℝ
             ( comp-uniformly-continuous-endomap-ℝ
               ( uniformly-continuous-map-right-mul-ℝ
                 ( l)

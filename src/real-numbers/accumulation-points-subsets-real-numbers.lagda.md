@@ -21,7 +21,7 @@ open import metric-spaces.accumulation-points-subsets-located-metric-spaces
 
 open import real-numbers.apartness-real-numbers
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
 open import real-numbers.subsets-real-numbers
 ```

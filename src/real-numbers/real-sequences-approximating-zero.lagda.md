@@ -37,7 +37,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
