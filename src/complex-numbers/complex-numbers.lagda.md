@@ -90,7 +90,7 @@ complex-ℤ[i] : ℤ[i] → ℂ lzero
 complex-ℤ[i] (a , b) = (real-ℤ a , real-ℤ b)
 ```
 
-### The canonical embedding of natural numbers into the complex numbers
+### The inclusion of the natural numbers into the complex numbers
 
 ```agda
 complex-ℕ : ℕ → ℂ lzero
