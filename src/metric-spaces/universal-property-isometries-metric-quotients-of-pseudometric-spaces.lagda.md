@@ -118,19 +118,6 @@ module _
         ( pseudometric-Metric-Space B)
         ( f))
 
-  is-extension-exten-isometry-metric-quotient-Pseudometric-Space :
-    ( ( map-exten-isometry-metric-quotient-Pseudometric-Space) ∘
-      ( map-metric-quotient-Pseudometric-Space A)) ~
-    ( map-isometry-Pseudometric-Space A (pseudometric-Metric-Space B) f)
-  is-extension-exten-isometry-metric-quotient-Pseudometric-Space =
-    is-extension-exten-short-map-metric-quotient-Pseudometric-Space
-      ( A)
-      ( B)
-      ( short-map-isometry-Pseudometric-Space
-        ( A)
-        ( pseudometric-Metric-Space B)
-        ( f))
-
   compute-map-exten-isometry-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space A) →
     {x : type-Pseudometric-Space A} →
@@ -367,11 +354,23 @@ module _
     ( map-exten-isometry-metric-quotient-Pseudometric-Space P M f ,
       is-isometry-map-exten-isometry-metric-quotient-Pseudometric-Space P M f)
 
+  is-extension-exten-isometry-metric-quotient-Pseudometric-Space :
+    is-extension-isometry-metric-quotient-Pseudometric-Space P M f
+      isometry-exten-isometry-metric-quotient-Pseudometric-Space
+  is-extension-exten-isometry-metric-quotient-Pseudometric-Space =
+    is-extension-exten-short-map-metric-quotient-Pseudometric-Space
+      ( P)
+      ( M)
+      ( short-map-isometry-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( f))
+
   exten-isometry-metric-quotient-Pseudometric-Space :
     extension-isometry-metric-quotient-Pseudometric-Space P M f
   exten-isometry-metric-quotient-Pseudometric-Space =
     ( isometry-exten-isometry-metric-quotient-Pseudometric-Space ,
-      is-extension-exten-isometry-metric-quotient-Pseudometric-Space P M f)
+      is-extension-exten-isometry-metric-quotient-Pseudometric-Space)
 ```
 
 ### All extensions are homotopic to the induced extension
