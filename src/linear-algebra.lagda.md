@@ -6,6 +6,7 @@
 module linear-algebra where
 
 open import linear-algebra.bilinear-forms-real-vector-spaces public
+open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces public
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces public
 open import linear-algebra.complex-inner-product-spaces public
 open import linear-algebra.complex-vector-spaces public
