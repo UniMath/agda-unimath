@@ -114,13 +114,16 @@ module _
   is-inner-product-sesquilinear-form-ℂ-Vector-Space =
     type-Prop is-inner-product-prop-sesquilinear-form-ℂ-Vector-Space
 
-ℂ-Inner-Product-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+inner-product-ℂ-Vector-Space :
+  {l1 l2 : Level} → ℂ-Vector-Space l1 l2 → UU (lsuc l1 ⊔ l2)
+inner-product-ℂ-Vector-Space V =
+  Σ ( sesquilinear-form-ℂ-Vector-Space V)
+    ( is-inner-product-sesquilinear-form-ℂ-Vector-Space V)
+
+ℂ-Inner-Product-Space : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 ℂ-Inner-Product-Space l1 l2 =
-  Σ
-    ( ℂ-Vector-Space l1 l2)
-    ( λ V →
-      Σ ( sesquilinear-form-ℂ-Vector-Space V)
-        ( is-inner-product-sesquilinear-form-ℂ-Vector-Space V))
+  Σ ( ℂ-Vector-Space l1 l2)
+    ( inner-product-ℂ-Vector-Space)
 
 module _
   {l1 l2 : Level}
