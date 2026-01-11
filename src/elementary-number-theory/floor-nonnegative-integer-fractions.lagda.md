@@ -56,16 +56,14 @@ The constraint that `q` is nonnegative guarantees that `x` is
 
 ```agda
 module _
-  (x : fraction-ℤ)
+  (x@(p , q⁺) : fraction-ℤ)
   (0≤x : is-nonnegative-fraction-ℤ x)
   where
 
   opaque
     nat-floor-is-nonnegative-fraction-ℤ : ℕ
     nat-floor-is-nonnegative-fraction-ℤ =
-      let
-        (p , q⁺) = x
-      in quotient-euclidean-division-ℕ (nat-ℤ⁺ q⁺) (nat-nonnegative-ℤ (p , 0≤x))
+      quotient-euclidean-division-ℕ (nat-ℤ⁺ q⁺) (nat-nonnegative-ℤ (p , 0≤x))
 
   floor-is-nonnegative-fraction-ℤ : ℤ
   floor-is-nonnegative-fraction-ℤ = int-ℕ nat-floor-is-nonnegative-fraction-ℤ
@@ -77,7 +75,7 @@ module _
 
 ```agda
 module _
-  (x : fraction-ℤ)
+  (x@(p , q⁺@(q , _)) : fraction-ℤ)
   (0≤x : is-nonnegative-fraction-ℤ x)
   where
 
@@ -88,7 +86,6 @@ module _
       leq-fraction-ℤ (in-fraction-ℤ (floor-is-nonnegative-fraction-ℤ x 0≤x)) x
     leq-floor-is-nonnegative-fraction-ℤ =
       let
-        (p , q⁺@(q , _)) = x
         pℕ = nat-nonnegative-ℤ (p , 0≤x)
         (qℕ , qℕ≠0) = positive-nat-ℤ⁺ q⁺
         n = quotient-euclidean-division-ℕ qℕ pℕ
@@ -119,7 +116,7 @@ module _
 
 ```agda
 module _
-  (x : fraction-ℤ)
+  (x@(p , q⁺@(q , _)) : fraction-ℤ)
   (0≤x : is-nonnegative-fraction-ℤ x)
   where
 
@@ -132,7 +129,6 @@ module _
         ( int-fraction-ℕ (succ-ℕ (nat-floor-is-nonnegative-fraction-ℤ x 0≤x)))
     le-succ-nat-floor-is-nonnegative-fraction-ℤ =
       let
-        (p , q⁺@(q , _)) = x
         pℕ = nat-nonnegative-ℤ (p , 0≤x)
         (qℕ , qℕ≠0) = positive-nat-ℤ⁺ q⁺
         n = quotient-euclidean-division-ℕ qℕ pℕ

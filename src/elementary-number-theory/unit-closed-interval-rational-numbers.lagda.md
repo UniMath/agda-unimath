@@ -238,7 +238,7 @@ abstract
   ... | ((0 , H) , _) = ex-falso (H refl)
   ... | ((succ-ℕ n , _) , ε<1/n+1) =
     ( finitely-enumerable-subtype-partition-unit-closed-interval-ℚ n ,
-      preserves-is-approximation-leq-Metric-Space
+      is-approximation-is-approximation-leq-Metric-Space
         ( metric-space-unit-closed-interval-ℚ)
         ( positive-reciprocal-rational-succ-ℕ n)
         ( ε)
