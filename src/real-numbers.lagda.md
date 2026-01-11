@@ -35,6 +35,7 @@ open import real-numbers.extensionality-multiplication-bilinear-form-real-number
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
+open import real-numbers.increasing-endomaps-real-numbers public
 open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
@@ -56,6 +57,7 @@ open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
+open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
@@ -88,6 +90,8 @@ open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.pointwise-continuous-endomaps-real-numbers public
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
