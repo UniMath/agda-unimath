@@ -1,4 +1,4 @@
-# Pointwise continuous maps in metric spaces
+# Pointwise continuous maps between metric spaces
 
 ```agda
 module metric-spaces.pointwise-continuous-maps-metric-spaces where
@@ -336,4 +336,4 @@ module _
 
 ## See also
 
-- [ε-δ pointwise continuous maps in metric spaces](metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces.md)
+- [Pointwise ε-δ continuous maps between metric spaces](metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces.md)
