@@ -98,11 +98,11 @@ module _
 
 ```agda
 abstract
-  preserves-is-limit-zero-alternation-sequence-ℝ :
+  is-limit-zero-alternation-sequence-ℝ :
     {l : Level} {u : sequence (ℝ l)} →
     is-limit-sequence-ℝ u (raise-zero-ℝ l) →
     is-limit-sequence-ℝ (alternation-sequence-ℝ u) (raise-zero-ℝ l)
-  preserves-is-limit-zero-alternation-sequence-ℝ {l} {u} =
+  is-limit-zero-alternation-sequence-ℝ {l} {u} =
     is-limit-zero-alternation-sequence-Metric-Ab
       ( metric-ab-add-ℝ l)
 ```
