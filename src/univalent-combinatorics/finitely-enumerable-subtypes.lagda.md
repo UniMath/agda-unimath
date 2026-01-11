@@ -115,6 +115,10 @@ module _
   subtype-im-finitely-enumerable-subtype =
     im-subtype f (subtype-finitely-enumerable-subtype S)
 
+  type-im-finitely-enumerable-subtype : UU (l1 ⊔ l2 ⊔ l3)
+  type-im-finitely-enumerable-subtype =
+    type-subtype subtype-im-finitely-enumerable-subtype
+
   abstract
     is-finitely-enumerable-subtype-im-finitely-enumerable-subtype :
       is-finitely-enumerable-subtype subtype-im-finitely-enumerable-subtype

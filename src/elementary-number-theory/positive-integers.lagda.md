@@ -171,6 +171,9 @@ positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n
 positive-nat-ℤ⁺ : positive-ℤ → ℕ⁺
 positive-nat-ℤ⁺ (inr (inr x) , k>0) = succ-nonzero-ℕ' x
 
+nat-ℤ⁺ : positive-ℤ → ℕ
+nat-ℤ⁺ x = nat-ℕ⁺ (positive-nat-ℤ⁺ x)
+
 abstract
   is-section-positive-nat-ℤ⁺ :
     (k : ℤ⁺) → positive-int-ℕ⁺ (positive-nat-ℤ⁺ k) ＝ k
