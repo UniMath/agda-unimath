@@ -10,19 +10,19 @@ module real-numbers.pointwise-continuous-endomaps-real-numbers where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.axiom-of-countable-choice
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.propositions
 open import foundation.function-types
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.constant-maps
 
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.limits-of-endomaps-real-numbers
 open import real-numbers.metric-space-of-real-numbers
-open import metric-spaces.isometries-metric-spaces
 ```
 
 </details>

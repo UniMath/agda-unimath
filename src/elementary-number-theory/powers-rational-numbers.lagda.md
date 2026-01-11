@@ -12,35 +12,34 @@ module elementary-number-theory.powers-rational-numbers where
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequalities-positive-and-negative-rational-numbers
-open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-nonnegative-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.powers-nonnegative-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
-open import logic.functoriality-existential-quantification
 open import elementary-number-theory.rational-numbers
-open import foundation.existential-quantification
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.empty-types
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -48,12 +47,14 @@ open import foundation.transport-along-identifications
 open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.powers-of-elements-monoids
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
 
-open import order-theory.unbounded-maps-posets
 open import order-theory.posets
+open import order-theory.unbounded-maps-posets
 ```
 
 </details>

@@ -23,22 +23,28 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import order-theory.large-posets
-open import metric-spaces.cartesian-products-metric-spaces
-open import real-numbers.metric-space-of-real-numbers
+open import logic.functoriality-existential-quantification
 
-open import foundation.constant-maps
+open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
+
+open import order-theory.large-posets
+
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -46,21 +52,20 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.pointwise-continuous-endomaps-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
-open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.pointwise-continuous-endomaps-real-numbers
-open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.strictly-increasing-endomaps-real-numbers
-open import real-numbers.unbounded-endomaps-real-numbers
-open import metric-spaces.pointwise-continuous-maps-metric-spaces
+open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
+open import real-numbers.unbounded-endomaps-real-numbers
 ```
 
 </details>
@@ -262,10 +267,10 @@ abstract
 
 ```agda
 abstract
-  even-power-neg-ℝ :
+  power-is-even-neg-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ power-ℝ n x
-  even-power-neg-ℝ _ x (k , refl) =
+  power-is-even-neg-ℝ _ x (k , refl) =
     equational-reasoning
       power-ℝ (k *ℕ 2) (neg-ℝ x)
       ＝ power-ℝ k (square-ℝ (neg-ℝ x))
@@ -280,10 +285,10 @@ abstract
 
 ```agda
 abstract
-  odd-power-neg-ℝ :
+  power-is-odd-neg-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-odd-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ neg-ℝ (power-ℝ n x)
-  odd-power-neg-ℝ n x odd-n =
+  power-is-odd-neg-ℝ n x odd-n =
     let (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
       equational-reasoning
@@ -293,7 +298,7 @@ abstract
         ＝ power-ℝ (k *ℕ 2) (neg-ℝ x) *ℝ neg-ℝ x
           by power-succ-ℝ _ _
         ＝ power-ℝ (k *ℕ 2) x *ℝ neg-ℝ x
-          by ap-mul-ℝ (even-power-neg-ℝ _ x (k , refl)) refl
+          by ap-mul-ℝ (power-is-even-neg-ℝ _ x (k , refl)) refl
         ＝ neg-ℝ (power-ℝ (k *ℕ 2) x *ℝ x)
           by right-negative-law-mul-ℝ _ _
         ＝ neg-ℝ (power-ℝ (succ-ℕ (k *ℕ 2)) x)
@@ -442,6 +447,29 @@ abstract
               by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
 ```
 
+### The power operation preserves similarity
+
+```agda
+abstract
+  preserves-sim-power-ℝ :
+    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℝ (power-ℝ n x) (power-ℝ n y)
+  preserves-sim-power-ℝ {l1} {l2} 0 _ =
+    transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 one-ℝ) (sim-raise-ℝ' l1 one-ℝ)
+  preserves-sim-power-ℝ 1 x~y = x~y
+  preserves-sim-power-ℝ (succ-ℕ n@(succ-ℕ _)) x~y =
+    preserves-sim-mul-ℝ (preserves-sim-power-ℝ n x~y) x~y
+
+  power-raise-ℝ :
+    {l1 : Level} (l2 : Level) (n : ℕ) (x : ℝ l1) →
+    power-ℝ n (raise-ℝ l2 x) ＝ raise-ℝ l2 (power-ℝ n x)
+  power-raise-ℝ l n x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ l _)
+        ( preserves-sim-power-ℝ n (sim-raise-ℝ' l x)))
+```
+
 ### For any `n`, `x ↦ xⁿ` is pointwise continuous
 
 ```agda
@@ -481,9 +509,14 @@ abstract
   is-pointwise-ε-δ-continuous-power-ℝ l n =
     is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ
       ( pointwise-continuous-power-ℝ l n)
+
+pointwise-ε-δ-continuous-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-ε-δ-continuous-endomap-ℝ l l
+pointwise-ε-δ-continuous-power-ℝ l n =
+  ( power-ℝ n , is-pointwise-ε-δ-continuous-power-ℝ l n)
 ```
 
-### For odd n, `x ↦ xⁿ` is strictly increasing
+### For odd `n`, `x ↦ xⁿ` is strictly increasing
 
 ```agda
 abstract
@@ -491,5 +524,52 @@ abstract
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-strictly-increasing-endomap-ℝ (power-ℝ {l} n)
   is-strictly-increasing-power-is-odd-ℝ l n odd-n =
-    ?
+    is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
+      ( pointwise-ε-δ-continuous-power-ℝ l n)
+      ( λ p q p<q →
+        binary-tr
+          ( le-ℝ)
+          ( inv (power-raise-ℝ l n (real-ℚ p)))
+          ( inv (power-raise-ℝ l n (real-ℚ q)))
+          ( le-raise-le-ℝ
+            ( l)
+            ( binary-tr
+              ( le-ℝ)
+              ( inv (power-real-ℚ n p))
+              ( inv (power-real-ℚ n q))
+              ( preserves-le-real-ℚ
+                ( preserves-le-power-is-odd-ℚ n p q odd-n p<q)))))
+```
+
+### For odd `n`, `x ↦ xⁿ` is unbounded above and below
+
+```agda
+abstract
+  is-unbounded-above-power-is-odd-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-unbounded-above-endomap-ℝ (power-ℝ {l} n)
+  is-unbounded-above-power-is-odd-ℝ l n odd-n q =
+    map-exists _
+      ( raise-real-ℚ l)
+      ( λ p q≤pⁿ →
+        preserves-leq-right-sim-ℝ
+          ( transitive-sim-ℝ _ _ _
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
+            ( sim-eq-ℝ (inv (power-real-ℚ n p))))
+          ( preserves-leq-real-ℚ q≤pⁿ))
+      ( is-unbounded-above-power-is-odd-ℚ n odd-n q)
+
+  is-unbounded-below-power-is-odd-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-unbounded-below-endomap-ℝ (power-ℝ {l} n)
+  is-unbounded-below-power-is-odd-ℝ l n odd-n q =
+    map-exists _
+      ( raise-real-ℚ l)
+      ( λ p pⁿ≤q →
+        preserves-leq-left-sim-ℝ
+          ( transitive-sim-ℝ _ _ _
+            ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
+            ( sim-eq-ℝ (inv (power-real-ℚ n p))))
+          ( preserves-leq-real-ℚ pⁿ≤q))
+      ( is-unbounded-below-power-is-odd-ℚ n odd-n q)
 ```

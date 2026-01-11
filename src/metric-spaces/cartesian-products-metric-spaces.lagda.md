@@ -10,6 +10,7 @@ module metric-spaces.cartesian-products-metric-spaces where
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
 open import foundation.function-extensionality
@@ -20,6 +21,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
@@ -29,8 +31,6 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
-open import metric-spaces.isometries-metric-spaces
-open import foundation.diagonal-maps-cartesian-products-of-types
 ```
 
 </details>
