@@ -198,22 +198,22 @@ module _
             ( k , le-succ-leq-ℕ k (succ-ℕ n) k≤n+1))
           ( ( chain-of-inequalities
               q
-              ≤ (q *ℚ rational-ℕ (succ-ℕ n)) *ℚ 1/n+1
+              ≤ (q *ℚ rational-ℕ (succ-ℕ n)) *ℚ 1/⟨n+1⟩
                 by leq-eq-ℚ (inv (is-retraction-right-div-ℚ⁺ _ _))
-              ≤ succ-ℚ (rational-ℕ k) *ℚ 1/n+1
+              ≤ succ-ℚ (rational-ℕ k) *ℚ 1/⟨n+1⟩
                 by
                   preserves-leq-right-mul-ℚ⁺
-                    ( 1/n+1⁺)
+                    ( 1/⟨n+1⟩⁺)
                     ( q *ℚ rational-ℕ (succ-ℕ n))
                     ( succ-ℚ (rational-ℕ k))
                     ( leq-le-ℚ
                       ( le-succ-rational-floor-ℚ⁰⁺
                         ( q⁰⁺ *ℚ⁰⁺ nonnegative-rational-ℕ (succ-ℕ n))))
-              ≤ rational-ℕ k *ℚ 1/n+1 +ℚ 1/n+1
+              ≤ rational-ℕ k *ℚ 1/⟨n+1⟩ +ℚ 1/⟨n+1⟩
                 by leq-eq-ℚ (mul-left-succ-ℚ _ _ ∙ commutative-add-ℚ _ _)) ,
             ( chain-of-inequalities
-              rational-ℕ k *ℚ 1/n+1
-              ≤ (q *ℚ rational-ℕ (succ-ℕ n)) *ℚ 1/n+1
+              rational-ℕ k *ℚ 1/⟨n+1⟩
+              ≤ (q *ℚ rational-ℕ (succ-ℕ n)) *ℚ 1/⟨n+1⟩
                 by
                   preserves-leq-right-mul-ℚ⁺
                     ( positive-reciprocal-rational-succ-ℕ n)
@@ -223,8 +223,8 @@ module _
                       ( q⁰⁺ *ℚ⁰⁺ nonnegative-rational-ℕ (succ-ℕ n)))
               ≤ q
                 by leq-eq-ℚ (is-retraction-right-div-ℚ⁺ _ _)
-              ≤ q +ℚ 1/n+1
-                by leq-right-add-rational-ℚ⁺ q 1/n+1⁺))
+              ≤ q +ℚ 1/⟨n+1⟩
+                by leq-right-add-rational-ℚ⁺ q 1/⟨n+1⟩⁺))
 ```
 
 ### `[0, 1]` is totally bounded as a metric space
@@ -236,13 +236,13 @@ abstract
   modulus-of-total-boundedness-unit-closed-interval-ℚ ε
     with smaller-reciprocal-ℚ⁺ ε
   ... | ((0 , H) , _) = ex-falso (H refl)
-  ... | ((succ-ℕ n , _) , ε<1/n+1) =
+  ... | ((succ-ℕ n , _) , ε<1/⟨n+1⟩) =
     ( finitely-enumerable-subtype-partition-unit-closed-interval-ℚ n ,
       is-approximation-is-approximation-leq-Metric-Space
         ( metric-space-unit-closed-interval-ℚ)
         ( positive-reciprocal-rational-succ-ℕ n)
         ( ε)
-        ( leq-le-ℚ ε<1/n+1)
+        ( leq-le-ℚ ε<1/⟨n+1⟩)
         ( subtype-partition-unit-closed-interval-ℚ n)
         ( is-approximation-subtype-partition-unit-closed-interval-ℚ n))
 
