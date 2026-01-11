@@ -171,7 +171,8 @@ module _
           ( map-pointwise-ε-δ-continuous-endomap-ℝ f (raise-real-ℚ l1 q))) →
       is-strictly-increasing-endomap-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ f)
-    is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ H =
+    is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
+      H =
       is-strictly-increasing-is-strictly-increasing-dense-subset-pointwise-ε-δ-continuous-endomap-ℝ
         ( f)
         ( dense-subset-rational-ℝ l1)
