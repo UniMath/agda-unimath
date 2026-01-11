@@ -33,9 +33,9 @@ The
 states that the limit of `f x` as `x` approaches `x₀` is a `y` such that for any
 `ε : ℚ⁺`, there [exists](foundation.existential-quantification.md) a `δ : ℚ⁺`
 such that if `x` and `x₀` are in a `δ`-neighborhood of each other, `f x` and `y`
-are in a `ε`-neighborhood of each other.
+are in an `ε`-neighborhood of each other.
 
-This contrasts the definition of a
+This contrasts to the definition of a
 [limit](metric-spaces.limits-of-maps-metric-spaces.md) of a map in a metric
 space, where there must exist a modulus map `μ : ℚ⁺ → ℚ⁺` assigning an
 appropriate `δ` for each possible value of `ε`. A limit is an ε-δ limit, but the
@@ -74,7 +74,7 @@ module _
 
 ## Properties
 
-### Constructive limits are classical limits
+### Limits are ε-δ limits
 
 ```agda
 module _
@@ -94,7 +94,7 @@ module _
       map-trunc-Prop (λ (μ , is-mod-μ) → (μ ε , is-mod-μ ε)) H
 ```
 
-### Assuming countable choice, classical limits are constructive limits
+### Assuming countable choice, ε-δ limits are limits
 
 ```agda
 module _

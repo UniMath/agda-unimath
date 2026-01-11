@@ -1,4 +1,4 @@
-# Pointwise ε-δ continuous maps in metric spaces
+# Pointwise ε-δ continuous maps between metric spaces
 
 ```agda
 module metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces where
@@ -52,7 +52,7 @@ module _
 
 ## Properties
 
-### Pointwise continuous maps are ε-δ pointwise continuous
+### Pointwise continuous maps are pointwise ε-δ continuous
 
 ```agda
 module _
@@ -83,7 +83,7 @@ module _
           ( x))
 ```
 
-### Assuming countable choice, ε-δ pointwise continuous maps are pointwise continuous
+### Assuming countable choice, pointwise ε-δ continuous maps are pointwise continuous
 
 ```agda
 module _
@@ -112,4 +112,4 @@ module _
 
 ## See also
 
-- [Pointwise continuous maps in metric spaces](metric-spaces.pointwise-continuous-maps-metric-spaces.md)
+- [Pointwise continuous maps between metric spaces](metric-spaces.pointwise-continuous-maps-metric-spaces.md)
