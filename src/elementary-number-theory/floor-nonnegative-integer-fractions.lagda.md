@@ -112,7 +112,7 @@ module _
           by leq-eq-ℤ (inv (right-unit-law-mul-ℤ p))
 ```
 
-### A nonnegative integer fraction is less than or equal to successor of its floor
+### A nonnegative integer fraction is less than or equal to the successor of its floor
 
 ```agda
 module _

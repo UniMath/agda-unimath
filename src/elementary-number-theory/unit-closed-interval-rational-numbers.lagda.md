@@ -176,7 +176,7 @@ module _
         q⁰⁺ = (q , is-nonnegative-leq-zero-ℚ 0≤q)
         k = nat-floor-ℚ⁰⁺ (q⁰⁺ *ℚ⁰⁺ nonnegative-rational-ℕ (succ-ℕ n))
         open inequality-reasoning-Poset ℚ-Poset
-        1/n+1⁺@(1/n+1 , _) = positive-reciprocal-rational-succ-ℕ n
+        1/⟨n+1⟩⁺@(1/⟨n+1⟩ , _) = positive-reciprocal-rational-succ-ℕ n
         k≤n+1 =
           reflects-leq-rational-ℕ
             ( k)
