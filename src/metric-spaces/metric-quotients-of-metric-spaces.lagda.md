@@ -39,7 +39,7 @@ open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 
 The [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 of the underlying [pseudometric space](metric-spaces.pseudometric-spaces.md) of
-a [metric space](meric-spaces.metric-spaces.md) `M` is
+a [metric space](metric-spaces.metric-spaces.md) `M` is
 [isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to `M`.
 
 ## Definitions
