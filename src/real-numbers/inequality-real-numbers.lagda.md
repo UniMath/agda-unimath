@@ -403,11 +403,23 @@ abstract
   preserves-leq-left-raise-ℝ l {x} =
     preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
 
+  reflects-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ (raise-ℝ l x) y → leq-ℝ x y
+  reflects-leq-left-raise-ℝ l {x} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ' l x)
+
   preserves-leq-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
   preserves-leq-right-raise-ℝ l {x} {y} =
     preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+
+  reflects-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x (raise-ℝ l y) → leq-ℝ x y
+  reflects-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ' l y)
 ```
 
 ### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
