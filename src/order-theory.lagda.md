@@ -150,12 +150,12 @@ open import order-theory.spans-closed-intervals-total-orders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-orders public
 open import order-theory.strict-preorders public
+open import order-theory.strict-subpreorders public
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
-open import order-theory.subtypes-strict-preorders public
 open import order-theory.suplattices public
 open import order-theory.supremum-preserving-maps-posets public
 open import order-theory.top-elements-large-posets public

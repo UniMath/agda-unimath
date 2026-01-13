@@ -107,7 +107,7 @@ module _
 
 ## Properties
 
-### If a classically pointwise continuous function is strictly increasing on a dense subset of ℝ, then it is strictly increasing on ℝ
+### If a pointwise ε-δ continuous function is strictly increasing on a dense subset of ℝ, then it is strictly increasing on ℝ
 
 ```agda
 module _
@@ -155,7 +155,7 @@ module _
             ( H' b y (leq-le-ℝ b<y)))
 ```
 
-### If `f` is classically pointwise continuous and strictly increasing on the rational real numbers, it is strictly increasing on the real numbers
+### If `f` is pointwise ε-δ continuous and strictly increasing on the rational real numbers, it is strictly increasing on the real numbers
 
 ```agda
 module _
@@ -197,7 +197,7 @@ module _
                     ( x<y))))))
 ```
 
-### Strictly increasing, pointwise ε-δ continuous maps reflect strict inequality
+### Strictly increasing pointwise ε-δ continuous maps reflect strict inequality
 
 ```agda
 module _

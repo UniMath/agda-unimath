@@ -1,6 +1,8 @@
 # Unbounded above and below, strictly increasing, pointwise ε-δ continuous endomaps on the real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers where
 ```
 
@@ -568,7 +570,7 @@ module _
                     ( preserves-leq-right-raise-ℝ l x≤q))
                   ( is-in-lower-cut-le-real-ℚ _ fq<fx)))
 
-    leq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ' :
+    geq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
       leq-ℝ
         ( x)
         ( map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
@@ -576,7 +578,7 @@ module _
           ( map-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( x)))
-    leq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ' =
+    geq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ =
       let
         map-f =
           map-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
@@ -607,7 +609,7 @@ module _
     is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ =
       antisymmetric-leq-ℝ _ _
         ( leq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ)
-        ( leq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ')
+        ( geq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ)
 ```
 
 ### The inverse function is strictly increasing
