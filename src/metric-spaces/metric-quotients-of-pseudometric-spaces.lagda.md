@@ -324,6 +324,9 @@ module _
 ## See also
 
 - The
+  [unit map](metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces.md)
+  from a pseudometric space into its metric quotient;
+- the
   [universal property of metric quotients and short maps](metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces.md);
 - the
   [universal property of metric quotients and isometries](metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces.md).

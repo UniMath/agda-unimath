@@ -63,6 +63,7 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 ```
 
 </details>
@@ -111,7 +112,7 @@ module _
     short-map-cauchy-approximation-short-map-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
-      ( short-map-metric-quotient-Pseudometric-Space M)
+      ( unit-short-map-metric-quotient-Pseudometric-Space M)
 
   map-cauchy-approximation-metric-quotient-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space M →
@@ -211,7 +212,7 @@ module _
     is-limit-cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
       ( map-cauchy-approximation-metric-quotient-Pseudometric-Space M u)
-      ( map-metric-quotient-Pseudometric-Space M lim)
+      ( unit-map-metric-quotient-Pseudometric-Space M lim)
   preserves-limits-map-cauchy-approximation-metric-quotient-Pseudometric-Space
     ε δ (x , x∈uε) (y , y∈lim) =
     let
@@ -297,12 +298,12 @@ module _
         ( lim))
       ( const-cauchy-approximation-Pseudometric-Space
         ( pseudometric-metric-quotient-Pseudometric-Space A)
-        ( map-metric-quotient-Pseudometric-Space A x))
+        ( unit-map-metric-quotient-Pseudometric-Space A x))
       ( λ d α β →
         sim-eq-Pseudometric-Space
           ( pseudometric-metric-quotient-Pseudometric-Space A)
           ( lim)
-          ( map-metric-quotient-Pseudometric-Space A x)
+          ( unit-map-metric-quotient-Pseudometric-Space A x)
           ( inv
             ( eq-set-quotient-equivalence-class-set-quotient
               ( equivalence-relation-sim-Pseudometric-Space A)

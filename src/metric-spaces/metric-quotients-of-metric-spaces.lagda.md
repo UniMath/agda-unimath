@@ -9,57 +9,28 @@ module metric-spaces.metric-quotients-of-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-positive-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-
-open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.binary-transport
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
 open import foundation.equivalences
-open import foundation.existential-quantification
 open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.retractions
-open import foundation.sections
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
-open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.isometries-pseudometric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
-open import metric-spaces.maps-metric-spaces
-open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-maps-metric-spaces
-open import metric-spaces.short-maps-pseudometric-spaces
-open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 ```
 
 </details>

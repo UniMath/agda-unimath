@@ -40,7 +40,7 @@ of the
 construction is the [quotient map](foundation.set-quotients.md)
 
 ```text
-  η : P → [P].
+  q : P → [P].
 ```
 
 It is an [isometry](metric-spaces.isometries-pseudometric-spaces.md) from the
@@ -260,8 +260,3 @@ module _
   [universal property of metric quotients and short maps](metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces.md);
 - the
   [universal property of metric quotients and isometries](metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces.md).
-
-## External links
-
-- [Metric identification](https://en.wikipedia.org/wiki/Pseudometric_space#Metric_identification)
-  on pseudometric spaces at Wikipedia
