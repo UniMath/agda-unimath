@@ -275,7 +275,8 @@ abstract
             ( euclidean-metric-space-ℝ-Fin n l)
             ( id))
     in do
-      (α , √n<α) ← le-some-rational-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ n))
+      (α , √n<α) ←
+        exists-greater-rational-ℝ (real-sqrt-ℝ⁰⁺ (nonnegative-real-ℕ n))
       let
         α⁺ =
           ( α ,
