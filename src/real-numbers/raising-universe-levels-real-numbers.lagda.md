@@ -191,3 +191,37 @@ abstract
 eq-raise-ℝ : {l : Level} → (x : ℝ l) → x ＝ raise-ℝ l x
 eq-raise-ℝ {l} x = eq-sim-ℝ (sim-raise-ℝ l x)
 ```
+
+### `x` and `y` are similar if and only if `x` raised to `y`'s universe level equals `y` raised to `x`'s universe level
+
+```agda
+module _
+  {l1 l2 : Level}
+  {x : ℝ l1}
+  {y : ℝ l2}
+  where
+
+  abstract
+    eq-raise-sim-ℝ : sim-ℝ x y → raise-ℝ l2 x ＝ raise-ℝ l1 y
+    eq-raise-sim-ℝ x~y =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          raise-ℝ l2 x
+          ~ℝ x
+            by sim-raise-ℝ' l2 x
+          ~ℝ y
+            by x~y
+          ~ℝ raise-ℝ l1 y
+            by sim-raise-ℝ l1 y)
+
+    sim-eq-raise-ℝ : raise-ℝ l2 x ＝ raise-ℝ l1 y → sim-ℝ x y
+    sim-eq-raise-ℝ l2x=l1y =
+      similarity-reasoning-ℝ
+        x
+        ~ℝ raise-ℝ l2 x
+          by sim-raise-ℝ l2 x
+        ~ℝ raise-ℝ l1 y
+          by sim-eq-ℝ l2x=l1y
+        ~ℝ y
+          by sim-raise-ℝ' l1 y
+```
