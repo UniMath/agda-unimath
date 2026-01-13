@@ -72,6 +72,20 @@ module _
   unit-map-metric-quotient-Metric-Space =
     unit-map-metric-quotient-Pseudometric-Space
       (pseudometric-Metric-Space M)
+
+  compute-unit-map-metric-quotient-Metric-Space :
+    ( X :
+      type-metric-quotient-Pseudometric-Space
+        ( pseudometric-Metric-Space M)) →
+    { x : type-Metric-Space M} →
+    is-in-class-metric-quotient-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( X)
+      ( x) →
+    unit-map-metric-quotient-Metric-Space x ＝ X
+  compute-unit-map-metric-quotient-Metric-Space =
+    compute-unit-map-metric-quotient-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
 ## Theorem
@@ -98,30 +112,28 @@ module _
             ( equivalence-relation-sim-Metric-Space M)
             ( X)
 
-        ( ( x ,
-            eq-set-quotient-equivalence-class-set-quotient
-              ( equivalence-relation-sim-Metric-Space M)
-              ( X)
-              ( x∈X)) ,
-          ( λ (y , Y＝X) →
+        let
+          center-fiber : fiber (unit-map-metric-quotient-Metric-Space M) X
+          center-fiber =
+            ( x , compute-unit-map-metric-quotient-Metric-Space M X x∈X)
+
+          contraction-fiber :
+            ( y : fiber (unit-map-metric-quotient-Metric-Space M) X) →
+            center-fiber ＝ y
+          contraction-fiber (y , [y]=X) =
             eq-type-subtype
               ( λ z →
-                Id-Prop
-                  ( set-metric-quotient-Pseudometric-Space
-                    ( pseudometric-Metric-Space M))
-                    ( unit-map-metric-quotient-Metric-Space M z)
-                    ( X))
-              ( eq-sim-Metric-Space
-                ( M)
-                ( x)
-                ( y)
+                eq-prop-Metric-Space
+                  ( metric-quotient-Metric-Space M)
+                  ( unit-map-metric-quotient-Metric-Space M z)
+                  ( X))
+              ( eq-sim-Metric-Space M x y
                 ( apply-effectiveness-quotient-map
                   ( equivalence-relation-sim-Metric-Space M)
-                  ( ( eq-set-quotient-equivalence-class-set-quotient
-                      ( equivalence-relation-sim-Metric-Space M)
-                      ( X)
-                      ( x∈X)) ∙
-                    ( inv Y＝X))))))
+                  ( compute-unit-map-metric-quotient-Metric-Space M X x∈X ∙
+                    inv [y]=X)))
+
+        ( center-fiber , contraction-fiber)
 
   is-equiv-unit-map-metric-quotient-Metric-Space :
     is-equiv (unit-map-metric-quotient-Metric-Space M)
