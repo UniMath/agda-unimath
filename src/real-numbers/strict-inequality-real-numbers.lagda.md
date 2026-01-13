@@ -380,11 +380,17 @@ module _
   where
 
   abstract
-    le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
-    le-some-rational-ℝ =
+    exists-greater-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
+    exists-greater-rational-ℝ =
       map-tot-exists
         ( λ q → le-real-is-in-upper-cut-ℝ x)
         ( is-inhabited-upper-cut-ℝ x)
+
+    exists-lesser-rational-ℝ : exists ℚ (λ q → le-prop-ℝ (real-ℚ q) x)
+    exists-lesser-rational-ℝ =
+      map-tot-exists
+        ( λ q → le-real-is-in-lower-cut-ℝ x)
+        ( is-inhabited-lower-cut-ℝ x)
 ```
 
 ### The reals have no lower or upper bound

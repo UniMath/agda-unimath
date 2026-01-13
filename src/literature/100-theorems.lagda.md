@@ -191,6 +191,8 @@ open import elementary-number-theory.natural-numbers using
 [malarbol](http://www.github.com/malarbol)
 
 ```agda
+open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℂ-Inner-Product-Space)
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
   ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
 ```

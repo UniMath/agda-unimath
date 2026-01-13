@@ -23,6 +23,7 @@ open import complex-numbers.multiplication-complex-numbers public
 open import complex-numbers.multiplicative-inverses-nonzero-complex-numbers public
 open import complex-numbers.nonzero-complex-numbers public
 open import complex-numbers.raising-universe-levels-complex-numbers public
+open import complex-numbers.real-complex-numbers public
 open import complex-numbers.similarity-complex-numbers public
 open import complex-numbers.zero-complex-numbers public
 ```

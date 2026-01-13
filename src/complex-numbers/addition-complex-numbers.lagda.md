@@ -8,6 +8,7 @@ module complex-numbers.addition-complex-numbers where
 
 ```agda
 open import complex-numbers.complex-numbers
+open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
@@ -119,6 +120,59 @@ abstract
       ( transitive-sim-ℂ _ _ _
         ( sim-raise-ℂ (l3 ⊔ l4) (z +ℂ w))
         ( preserves-sim-add-ℂ (sim-raise-ℂ' l3 z) (sim-raise-ℂ' l4 w)))
+```
+
+### The sum of `z` and `conjugate-ℂ z` is double `re-ℂ z`
+
+```agda
+abstract
+  right-add-conjugate-ℂ :
+    {l : Level} (z : ℂ l) → z +ℂ conjugate-ℂ z ＝ complex-ℝ (re-ℂ z +ℝ re-ℂ z)
+  right-add-conjugate-ℂ (a +iℂ b) = eq-ℂ refl (eq-right-inverse-law-add-ℝ b)
+```
+
+### Swapping laws for addition on complex numbers
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3)
+  where
+
+  abstract
+    right-swap-add-ℂ :
+      (x +ℂ y) +ℂ z ＝ (x +ℂ z) +ℂ y
+    right-swap-add-ℂ =
+      equational-reasoning
+        (x +ℂ y) +ℂ z
+        ＝ x +ℂ (y +ℂ z) by associative-add-ℂ x y z
+        ＝ x +ℂ (z +ℂ y) by ap (x +ℂ_) (commutative-add-ℂ y z)
+        ＝ (x +ℂ z) +ℂ y by inv (associative-add-ℂ x z y)
+
+    left-swap-add-ℂ :
+      x +ℂ (y +ℂ z) ＝ y +ℂ (x +ℂ z)
+    left-swap-add-ℂ =
+      equational-reasoning
+        x +ℂ (y +ℂ z)
+        ＝ (x +ℂ y) +ℂ z by inv (associative-add-ℂ x y z)
+        ＝ (y +ℂ x) +ℂ z by ap (_+ℂ z) (commutative-add-ℂ x y)
+        ＝ y +ℂ (x +ℂ z) by associative-add-ℂ y x z
+```
+
+### Interchange laws for addition on complex numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) (w : ℂ l4)
+  where
+
+  abstract
+    interchange-law-add-add-ℂ : (x +ℂ y) +ℂ (z +ℂ w) ＝ (x +ℂ z) +ℂ (y +ℂ w)
+    interchange-law-add-add-ℂ =
+      equational-reasoning
+        (x +ℂ y) +ℂ (z +ℂ w)
+        ＝ x +ℂ (y +ℂ (z +ℂ w)) by associative-add-ℂ _ _ _
+        ＝ x +ℂ (z +ℂ (y +ℂ w)) by ap (x +ℂ_) (left-swap-add-ℂ y z w)
+        ＝ (x +ℂ z) +ℂ (y +ℂ w) by inv (associative-add-ℂ x z (y +ℂ w))
 ```
 
 ### The inclusion of real numbers preserves addition

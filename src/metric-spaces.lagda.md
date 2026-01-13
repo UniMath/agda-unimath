@@ -92,7 +92,7 @@ open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
-open import metric-spaces.continuous-maps-metric-spaces public
+open import metric-spaces.continuity-of-maps-at-points-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dense-subsets-metric-spaces public
@@ -100,6 +100,7 @@ open import metric-spaces.dependent-products-complete-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
+open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
@@ -148,6 +149,8 @@ open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
+open import metric-spaces.pointwise-continuous-maps-metric-spaces public
+open import metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-maps public
@@ -171,6 +174,7 @@ open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniform-homeomorphisms-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
 ```
 
