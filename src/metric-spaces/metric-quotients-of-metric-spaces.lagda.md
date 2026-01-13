@@ -1,0 +1,180 @@
+# Metric quotients of metric spaces
+
+```agda
+{-# OPTIONS --lossy-unification #-}
+
+module metric-spaces.metric-quotients-of-metric-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
+open import foundation.binary-transport
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalence-classes
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retractions
+open import foundation.sections
+open import foundation.set-quotients
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.transport-along-identifications
+open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
+open import metric-spaces.maps-pseudometric-spaces
+open import metric-spaces.metric-quotients-of-pseudometric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
+```
+
+</details>
+
+## Idea
+
+The [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
+of the underlying [pseudometric space](metric-spaces.pseudometric-spaces.md) of
+a [metric space](meric-spaces.metric-spaces.md) `M` is
+[isometrically equivalent](metric-spaces.equality-of-metric-spaces.md) to `M`.
+
+## Definitions
+
+### The isometric equivalence between a metric space and the quotient metric space of its pseudometric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Metric-Space l1 l2)
+  where
+
+  unit-map-metric-quotient-Metric-Space :
+    type-Metric-Space M →
+    type-metric-quotient-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+  unit-map-metric-quotient-Metric-Space =
+    unit-map-metric-quotient-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+
+  abstract
+    is-contr-unit-map-metric-quotient-Metric-Space :
+      is-contr-map unit-map-metric-quotient-Metric-Space
+    is-contr-unit-map-metric-quotient-Metric-Space X =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( is-contr-Prop
+              ( fiber unit-map-metric-quotient-Metric-Space X))
+        in do
+          ( x , x∈X) ←
+            is-inhabited-subtype-set-quotient
+              ( equivalence-relation-sim-Metric-Space M)
+              ( X)
+
+          ( ( x ,
+              eq-set-quotient-equivalence-class-set-quotient
+                ( equivalence-relation-sim-Metric-Space M)
+                ( X)
+                ( x∈X)) ,
+            ( λ (y , Y＝X) →
+              eq-type-subtype
+                ( λ z →
+                  Id-Prop
+                    ( set-metric-quotient-Pseudometric-Space
+                      ( pseudometric-Metric-Space M))
+                      ( unit-map-metric-quotient-Metric-Space z)
+                      ( X))
+                ( eq-sim-Metric-Space
+                  ( M)
+                  ( x)
+                  ( y)
+                  ( apply-effectiveness-quotient-map
+                    ( equivalence-relation-sim-Metric-Space M)
+                    ( ( eq-set-quotient-equivalence-class-set-quotient
+                        ( equivalence-relation-sim-Metric-Space M)
+                        ( X)
+                        ( x∈X)) ∙
+                      ( inv Y＝X))))))
+
+    is-equiv-unit-map-metric-quotient-Metric-Space :
+      is-equiv unit-map-metric-quotient-Metric-Space
+    is-equiv-unit-map-metric-quotient-Metric-Space =
+      is-equiv-is-contr-map
+        ( is-contr-unit-map-metric-quotient-Metric-Space)
+
+    is-isometry-unit-map-metric-quotient-Metric-Space :
+      is-isometry-Metric-Space
+        ( M)
+        ( metric-quotient-Pseudometric-Space
+          ( pseudometric-Metric-Space M))
+        ( unit-map-metric-quotient-Metric-Space)
+    is-isometry-unit-map-metric-quotient-Metric-Space =
+      is-isometry-unit-map-metric-quotient-Pseudometric-Space
+        ( pseudometric-Metric-Space M)
+
+  isometric-equiv-metric-quotient-Metric-Space' :
+    isometric-equiv-Metric-Space'
+      ( M)
+      ( metric-quotient-Pseudometric-Space
+        ( pseudometric-Metric-Space M))
+  isometric-equiv-metric-quotient-Metric-Space' =
+    ( unit-map-metric-quotient-Metric-Space ,
+      is-equiv-unit-map-metric-quotient-Metric-Space ,
+      is-isometry-unit-map-metric-quotient-Metric-Space)
+```
+
+### The construction of the quotient metric space of a pseudometric space is idempotent
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  where
+
+  is-idempotent-metric-quotient-Pseudometric-Space :
+    metric-quotient-Pseudometric-Space
+      ( pseudometric-Metric-Space
+        ( metric-quotient-Pseudometric-Space M)) ＝
+    metric-quotient-Pseudometric-Space M
+  is-idempotent-metric-quotient-Pseudometric-Space =
+    inv
+      ( eq-isometric-equiv-Metric-Space'
+        ( metric-quotient-Pseudometric-Space M)
+        ( metric-quotient-Pseudometric-Space
+          ( pseudometric-Metric-Space
+            ( metric-quotient-Pseudometric-Space M)))
+        ( isometric-equiv-metric-quotient-Metric-Space'
+          ( metric-quotient-Pseudometric-Space M)))
+```
