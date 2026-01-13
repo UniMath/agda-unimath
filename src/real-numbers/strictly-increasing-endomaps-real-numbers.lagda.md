@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.strict-order-preserving-maps
-open import order-theory.subtypes-strict-preorders
+open import order-theory.strict-subpreorders
 
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
@@ -61,7 +61,7 @@ is-strictly-increasing-on-subset-endomap-ℝ :
   {l1 l2 l3 : Level} → (ℝ l1 → ℝ l2) → subset-ℝ l3 l1 → UU (lsuc l1 ⊔ l2 ⊔ l3)
 is-strictly-increasing-on-subset-endomap-ℝ {l1} {l2} f S =
   preserves-strict-order-map-Strict-Preorder
-    ( strict-preorder-subtype-Strict-Preorder (strict-preorder-ℝ l1) S)
+    ( strict-preorder-Strict-Subpreorder (strict-preorder-ℝ l1) S)
     ( strict-preorder-ℝ l2)
     ( f ∘ inclusion-subset-ℝ S)
 ```
@@ -151,6 +151,6 @@ module _
       is-strictly-increasing-endomap-ℝ f →
       is-strictly-increasing-endomap-ℝ g →
       is-strictly-increasing-endomap-ℝ (f ∘ g)
-    is-strictly-increasing-comp-is-strictly-increasing-endomap-ℝ H K x y x<y =
+    is-strictly-increasing-endomap-comp-ℝ H K x y x<y =
       H (g x) (g y) (K x y x<y)
 ```
