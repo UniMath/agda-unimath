@@ -26,7 +26,7 @@ strict preorder.
 ## Definition
 
 ```agda
-subtype-Strict-Preorder :
+Strict-Subpreorder :
   {l1 l2 : Level} (l : Level) → Strict-Preorder l1 l2 → UU (l1 ⊔ lsuc l)
 subtype-Strict-Preorder l P = subtype l (type-Strict-Preorder P)
 

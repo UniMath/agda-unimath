@@ -23,7 +23,7 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
-An [endomorphism](foundation.endomorphisms.md) `f` on the
+An [endomap](foundation.endomorphisms.md) `f` on the
 [real numbers](real-numbers.dedekind-real-numbers.md) is
 
 - {{#concept "unbounded above" Disambiguation="endomap on ℝ" Agda=is-unbounded-above-endomap-ℝ}}

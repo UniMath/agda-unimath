@@ -147,7 +147,7 @@ module _
   where
 
   abstract
-    is-strictly-increasing-comp-is-strictly-increasing-endomap-ℝ :
+    is-strictly-increasing-endomap-comp-ℝ :
       is-strictly-increasing-endomap-ℝ f →
       is-strictly-increasing-endomap-ℝ g →
       is-strictly-increasing-endomap-ℝ (f ∘ g)

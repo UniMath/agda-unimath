@@ -568,7 +568,7 @@ module _
                     ( preserves-leq-right-raise-ℝ l x≤q))
                   ( is-in-lower-cut-le-real-ℚ _ fq<fx)))
 
-    leq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ' :
+    geq-is-retraction-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
       leq-ℝ
         ( x)
         ( map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
