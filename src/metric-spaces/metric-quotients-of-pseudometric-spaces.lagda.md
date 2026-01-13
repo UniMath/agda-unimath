@@ -47,11 +47,6 @@ neighborhoods of inhabitants of the quotient classes: two quotient classes `X`,
 `Y` are in a `d`-neighborhood if for all `x ∈ X` and `y ∈ Y`, `x` and `y` are
 `d`-neighbors in the pseudometric space.
 
-Any pseudometric space `M` has an
-[isometry](metric-spaces.isometries-pseudometric-spaces.md) into its metric
-quotient; if `M` is a metric space, this is an
-[isometric equivalence](metric-spaces.equality-of-metric-spaces.md).
-
 ## Definitions
 
 ```agda
