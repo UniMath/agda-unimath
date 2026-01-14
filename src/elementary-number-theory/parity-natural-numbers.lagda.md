@@ -25,6 +25,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -61,6 +62,23 @@ is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
 
 is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
 is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
+```
+
+### Being even or odd is a proposition
+
+```agda
+abstract
+  is-prop-is-even-ℕ : (n : ℕ) → is-prop (is-even-ℕ n)
+  is-prop-is-even-ℕ n = is-prop-div-ℕ 2 n (is-nonzero-nat-nonzero-ℕ two-ℕ⁺)
+
+  is-prop-is-odd-ℕ : (n : ℕ) → is-prop (is-odd-ℕ n)
+  is-prop-is-odd-ℕ n = is-prop-neg
+
+is-even-prop-ℕ : ℕ → Prop lzero
+is-even-prop-ℕ n = (is-even-ℕ n , is-prop-is-even-ℕ n)
+
+is-odd-prop-ℕ : ℕ → Prop lzero
+is-odd-prop-ℕ n = (is-odd-ℕ n , is-prop-is-odd-ℕ n)
 ```
 
 ### `0` is an even natural number

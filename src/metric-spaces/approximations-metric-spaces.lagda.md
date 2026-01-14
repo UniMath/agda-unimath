@@ -339,9 +339,9 @@ module _
   where
 
   abstract
-    preserves-is-approximation-leq-Metric-Space :
+    is-approximation-is-approximation-leq-Metric-Space :
       is-approximation-Metric-Space X δ S → is-approximation-Metric-Space X ε S
-    preserves-is-approximation-leq-Metric-Space H x =
+    is-approximation-is-approximation-leq-Metric-Space H x =
       map-tot-exists
         ( λ (s , s∈S) Nδxs →
           weakly-monotonic-neighborhood-Metric-Space X s x δ ε δ≤ε Nδxs)
