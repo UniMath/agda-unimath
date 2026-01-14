@@ -216,7 +216,7 @@ abstract
               by ap-mul-ℝ⁺ (eq-ℝ⁺ _ _ (inv (eq-raise-sim-ℝ x~y))) refl)))
 ```
 
-### The embedding of positive rational numbers in the positive real numbers preserves multiplicative inverses
+### The inclusion of positive rational numbers in the positive real numbers preserves multiplicative inverses
 
 ```agda
 abstract
