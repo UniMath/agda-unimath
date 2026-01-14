@@ -238,44 +238,6 @@ module _
               by right-leq-real-bound-neighborhood-ℝ d z y Ndzy)
 ```
 
-### If both endpoints of a closed interval `[x, y]` are in a `d`-neighborhood of `z`, then `[x, y] ⊆ neighborhood d z`
-
-```agda
-module _
-  {l : Level}
-  ([x,y] : closed-interval-ℝ l l)
-  (d : ℚ⁺)
-  (z : ℝ l)
-  (Ndzx : neighborhood-ℝ l d z (lower-bound-closed-interval-ℝ [x,y]))
-  (Ndzy : neighborhood-ℝ l d z (upper-bound-closed-interval-ℝ [x,y]))
-  where
-
-  abstract
-    subset-closed-interval-neighborhood-ℝ :
-      subtype-closed-interval-ℝ l [x,y] ⊆ neighborhood-prop-ℝ l d z
-    subset-closed-interval-neighborhood-ℝ w (x≤w , w≤y) =
-      let
-        ((x , y) , x≤y) = [x,y]
-        open inequality-reasoning-Large-Poset ℝ-Large-Poset
-      in
-        neighborhood-real-bound-each-leq-ℝ
-          ( d)
-          ( z)
-          ( w)
-          ( chain-of-inequalities
-            z
-            ≤ x +ℝ real-ℚ⁺ d
-              by left-leq-real-bound-neighborhood-ℝ d z x Ndzx
-            ≤ w +ℝ real-ℚ⁺ d
-              by preserves-leq-right-add-ℝ (real-ℚ⁺ d) x w x≤w)
-          ( chain-of-inequalities
-            w
-            ≤ y
-              by w≤y
-            ≤ z +ℝ real-ℚ⁺ d
-              by right-leq-real-bound-neighborhood-ℝ d z y Ndzy)
-```
-
 ### Raising elements of closed intervals of rational numbers
 
 ```agda

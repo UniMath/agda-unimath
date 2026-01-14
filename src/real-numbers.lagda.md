@@ -129,9 +129,9 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
-open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.unbounded-endomaps-real-numbers public
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public

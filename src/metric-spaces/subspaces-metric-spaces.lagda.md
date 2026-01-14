@@ -215,7 +215,7 @@ module _
       ( isometry-inclusion-subspace-Metric-Space A S)
 ```
 
-### If the images of a uniformly continuous function `f : X → Y` satisfy `P`, then `f` is a uniformly continuous function to the subspace of `Y` defined by `P`
+### If the image of a uniformly continuous function `f : X → Y` is a subset of `P`, then `f` is a uniformly continuous function to the subspace of `Y` induced by `P`
 
 ```agda
 module _
@@ -225,14 +225,14 @@ module _
   (P : subset-Metric-Space l5 Y)
   where
 
-  uniformly-continuous-function-subspace-Metric-Space :
-    (f : uniformly-continuous-function-Metric-Space X Y) →
+  uniformly-continuous-map-into-subspace-Metric-Space :
+    (f : uniformly-continuous-map-Metric-Space X Y) →
     (Pf :
       (x : type-Metric-Space X) →
       is-in-subtype
         ( P)
-        ( map-uniformly-continuous-function-Metric-Space X Y f x)) →
-    uniformly-continuous-function-Metric-Space X (subspace-Metric-Space Y P)
-  uniformly-continuous-function-subspace-Metric-Space (f , is-ucont-f) Pf =
+        ( map-uniformly-continuous-map-Metric-Space X Y f x)) →
+    uniformly-continuous-map-Metric-Space X (subspace-Metric-Space Y P)
+  uniformly-continuous-map-into-subspace-Metric-Space (f , is-ucont-f) Pf =
     ( ( λ x → (f x , Pf x)) , is-ucont-f)
 ```

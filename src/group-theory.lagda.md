@@ -73,7 +73,6 @@ open import group-theory.equivalences-semigroups public
 open import group-theory.exponents-abelian-groups public
 open import group-theory.exponents-groups public
 open import group-theory.free-concrete-group-actions public
-open import group-theory.free-groups public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.full-subgroups public
 open import group-theory.full-subsemigroups public

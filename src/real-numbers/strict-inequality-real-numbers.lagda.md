@@ -336,11 +336,6 @@ module _
     le-real-is-in-upper-cut-ℝ =
       forward-implication le-real-iff-is-in-upper-cut-ℝ
 
-    le-raise-real-is-in-upper-cut-ℝ :
-      (l' : Level) → is-in-upper-cut-ℝ x q → le-ℝ x (raise-real-ℚ l' q)
-    le-raise-real-is-in-upper-cut-ℝ l' x<q =
-      preserves-le-right-raise-ℝ l' (le-real-is-in-upper-cut-ℝ x<q)
-
     is-in-upper-cut-le-real-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
     is-in-upper-cut-le-real-ℚ =
       backward-implication le-real-iff-is-in-upper-cut-ℝ
