@@ -176,3 +176,12 @@ abstract
   is-not-negative-and-nonnegative-ℝ {x = x} (x<0 , 0≤x) =
     not-leq-le-ℝ x zero-ℝ x<0 0≤x
 ```
+
+### Real numbers are not both negative and positive
+
+```agda
+abstract
+  is-not-negative-and-positive-ℝ :
+    {l : Level} {x : ℝ l} → ¬ (is-negative-ℝ x × is-positive-ℝ x)
+  is-not-negative-and-positive-ℝ (x<0 , 0<x) = asymmetric-le-ℝ x<0 0<x
+```

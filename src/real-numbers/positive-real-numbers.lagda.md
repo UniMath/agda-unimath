@@ -356,6 +356,9 @@ abstract
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
+raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
 ```
 
 ### Raising a positive real to its own level is the identity

@@ -18,6 +18,7 @@ open import metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.pointwise-continuous-endomaps-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -88,6 +89,34 @@ module _
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)
         ( f)
+
+  pointwise-ε-δ-continuous-endomap-pointwise-continuous-endomap-ℝ :
+    pointwise-ε-δ-continuous-endomap-ℝ l1 l2
+  pointwise-ε-δ-continuous-endomap-pointwise-continuous-endomap-ℝ =
+    ( map-pointwise-continuous-endomap-ℝ f ,
+      is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ)
+```
+
+### Uniformly continuous endomaps on the real numbers are pointwise ε-δ continuous
+
+```agda
+module _
+  {l1 l2 : Level}
+  (f : uniformly-continuous-endomap-ℝ l1 l2)
+  where
+
+  pointwise-ε-δ-continuous-endomap-uniformly-continuous-endomap-ℝ :
+    pointwise-ε-δ-continuous-endomap-ℝ l1 l2
+  pointwise-ε-δ-continuous-endomap-uniformly-continuous-endomap-ℝ =
+    pointwise-ε-δ-continuous-endomap-pointwise-continuous-endomap-ℝ
+      ( pointwise-continuous-endomap-uniformly-continuous-endomap-ℝ f)
+
+  abstract
+    is-pointwise-ε-δ-continuous-map-uniformly-continuous-endomap-ℝ :
+      is-pointwise-ε-δ-continuous-endomap-ℝ
+        ( map-uniformly-continuous-endomap-ℝ f)
+    is-pointwise-ε-δ-continuous-map-uniformly-continuous-endomap-ℝ =
+      pr2 pointwise-ε-δ-continuous-endomap-uniformly-continuous-endomap-ℝ
 ```
 
 ### Assuming countable choice, pointwise ε-δ continuous functions are pointwise continuous

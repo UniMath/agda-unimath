@@ -16,10 +16,12 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.limits-of-endomaps-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -65,6 +67,25 @@ module _
   is-pointwise-continuous-map-pointwise-continuous-endomap-ℝ :
     is-pointwise-continuous-endomap-ℝ map-pointwise-continuous-endomap-ℝ
   is-pointwise-continuous-map-pointwise-continuous-endomap-ℝ = pr2 f
+```
+
+## Properties
+
+### A uniformly continuous endomap on the real numbers is pointwise continuous
+
+```agda
+module _
+  {l1 l2 : Level}
+  (f : uniformly-continuous-endomap-ℝ l1 l2)
+  where
+
+  pointwise-continuous-endomap-uniformly-continuous-endomap-ℝ :
+    pointwise-continuous-endomap-ℝ l1 l2
+  pointwise-continuous-endomap-uniformly-continuous-endomap-ℝ =
+    pointwise-continuous-map-uniformly-continuous-map-Metric-Space
+      ( metric-space-ℝ l1)
+      ( metric-space-ℝ l2)
+      ( f)
 ```
 
 ## See also
