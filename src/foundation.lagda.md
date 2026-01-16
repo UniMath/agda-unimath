@@ -210,6 +210,7 @@ open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.finitely-truncated-types public
 open import foundation.fixed-points-endofunctions public
+open import foundation.free-type-families public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
