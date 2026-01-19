@@ -39,6 +39,8 @@ open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.iterating-functions public
 open import foundation-core.negation public
+open import foundation-core.operations-cospan-diagrams public
+open import foundation-core.operations-cospans public
 open import foundation-core.operations-span-diagrams public
 open import foundation-core.operations-spans public
 open import foundation-core.path-split-maps public
