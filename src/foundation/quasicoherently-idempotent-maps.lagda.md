@@ -9,16 +9,23 @@ module foundation.quasicoherently-idempotent-maps where
 ```agda
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-homotopies
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.idempotent-maps
 open import foundation.identity-types
+open import foundation.iterate-confluent-maps
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -502,6 +509,58 @@ module _
     htpy-is-quasicoherently-idempotent p q → p ＝ q
   eq-htpy-is-quasicoherently-idempotent p q =
     map-inv-is-equiv (is-equiv-htpy-eq-is-quasicoherently-idempotent p q)
+```
+
+### Pullback presentation of quasicoherently idempotent maps
+
+Let `Idem₍₃,₂₎(A)` denote the type of (3,2)-iterate-confluent maps, then the
+type of quasicoherently idempotent maps `QIdem(A)` may be displayed as the
+pullback
+
+```text
+    QIdem(A) -----------------> Idem(A)
+       | ⌟                        |
+       |                          |
+       |                          | (Hf , fH)
+       |                          |
+       ∨                          ∨
+  Idem₍₃,₂₎(A) ----> Idem₍₃,₂₎(A) × Idem₍₃,₂₎(A).
+                 Δ
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  vertical-map-cospan-diagram-quasicoherently-idempotent-map :
+    idempotent-map A → iterate-confluent-map 3 2 A × iterate-confluent-map 3 2 A
+  vertical-map-cospan-diagram-quasicoherently-idempotent-map (f , H) =
+    (f , H ·r f) , (f , f ·l H)
+
+  cone-quasicoherently-idempotent-map :
+    cone
+      {A = idempotent-map A}
+      { iterate-confluent-map 3 2 A}
+      { iterate-confluent-map 3 2 A × iterate-confluent-map 3 2 A}
+      ( vertical-map-cospan-diagram-quasicoherently-idempotent-map)
+      ( λ g → g , g)
+      ( quasicoherently-idempotent-map A)
+  cone-quasicoherently-idempotent-map =
+    ( idempotent-map-quasicoherently-idempotent-map ,
+      ( λ q →
+        ( map-quasicoherently-idempotent-map q ,
+          is-idempotent-quasicoherently-idempotent-map q ·r
+          map-quasicoherently-idempotent-map q)) ,
+      λ (f , H , K) →
+      eq-pair refl (eq-pair-eq-fiber (eq-htpy K)))
+
+  compute-gap-cone-quasicoherently-idempotent-map :
+    gap
+      ( vertical-map-cospan-diagram-quasicoherently-idempotent-map)
+      ( λ g → g , g)
+      ( cone-quasicoherently-idempotent-map) ~
+    {!   !}
 ```
 
 ## See also
