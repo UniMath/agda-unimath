@@ -53,7 +53,7 @@ module _
 
   equiv-cospan : cospan l3 A B → cospan l4 A B → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   equiv-cospan c d =
-    Σ ( codomain-cospan c ≃ codomain-cospan d)
+    Σ ( cospanning-type-cospan c ≃ cospanning-type-cospan d)
       ( λ e → coherence-hom-cospan c d (map-equiv e))
 ```
 
@@ -87,7 +87,7 @@ module _
   is-torsorial-equiv-cospan c =
     is-torsorial-Eq-structure
       ( is-torsorial-equiv (pr1 c))
-      ( codomain-cospan c , id-equiv)
+      ( cospanning-type-cospan c , id-equiv)
       ( is-torsorial-Eq-structure
         ( is-torsorial-htpy' (left-map-cospan c))
         ( left-map-cospan c , refl-htpy)
