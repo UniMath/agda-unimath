@@ -139,7 +139,7 @@ module _
     inv-distributive-Π-Σ ∘e equiv-fiberwise-equiv-equiv-slice
 ```
 
-### Logically equivalent embeddings into a type are equivalent slices over that type
+### Logically equivalent injections into a type are equivalent slices over that type
 
 ```agda
 module _
@@ -147,32 +147,47 @@ module _
   where
 
   abstract
-    is-equiv-hom-slice-emb :
-      (f : A ↪ X) (g : B ↪ X)
-      (h : hom-slice (map-emb f) (map-emb g)) →
-      hom-slice (map-emb g) (map-emb f) →
-      is-equiv-hom-slice (map-emb f) (map-emb g) h
-    is-equiv-hom-slice-emb f g h i =
+    is-equiv-hom-slice-is-injective :
+      {f : A → X} {g : B → X} →
+      is-injective f → is-injective g →
+      (h : hom-slice f g) →
+      hom-slice g f →
+      is-equiv-hom-slice f g h
+    is-equiv-hom-slice-is-injective {f} {g} F G h i =
       is-equiv-is-invertible
-        ( map-hom-slice (map-emb g) (map-emb f) i)
+        ( map-hom-slice g f i)
         ( λ y →
-          is-injective-emb g
-            ( inv
-              ( ( triangle-hom-slice (map-emb g) (map-emb f) i y) ∙
-                ( triangle-hom-slice
-                  ( map-emb f)
-                  ( map-emb g)
-                  ( h)
-                  ( map-hom-slice (map-emb g) (map-emb f) i y)))))
+          G ( inv
+              ( ( triangle-hom-slice g f i y) ∙
+                ( triangle-hom-slice f g h (map-hom-slice g f i y)))))
         ( λ x →
-          is-injective-emb f
-            ( inv
-              ( ( triangle-hom-slice (map-emb f) (map-emb g) h x) ∙
-                ( triangle-hom-slice
-                  ( map-emb g)
-                  ( map-emb f)
-                  ( i)
-                  ( map-hom-slice (map-emb f) (map-emb g) h x)))))
+          F ( inv
+              ( ( triangle-hom-slice f g h x) ∙
+                ( triangle-hom-slice g f i (map-hom-slice f g h x)))))
+
+  is-equiv-hom-slice-injection :
+    (f : injection A X) (g : injection B X)
+    (h : hom-slice (map-injection f) (map-injection g)) →
+    hom-slice (map-injection g) (map-injection f) →
+    is-equiv-hom-slice (map-injection f) (map-injection g) h
+  is-equiv-hom-slice-injection (f , F) (g , G) =
+    is-equiv-hom-slice-is-injective F G
+```
+
+### Logically equivalent embeddings into a type are equivalent slices over that type
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  is-equiv-hom-slice-emb :
+    (f : A ↪ X) (g : B ↪ X)
+    (h : hom-slice (map-emb f) (map-emb g)) →
+    hom-slice (map-emb g) (map-emb f) →
+    is-equiv-hom-slice (map-emb f) (map-emb g) h
+  is-equiv-hom-slice-emb f g =
+    is-equiv-hom-slice-injection (injection-emb f) (injection-emb g)
 ```
 
 ### Characterization of the identity type of `Slice l A`

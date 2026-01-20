@@ -167,7 +167,7 @@ is-tight-restriction-Relation-Prop :
   (R : Relation-Prop l3 Y) → is-tight R →
   is-tight (restriction-Relation-Prop (map-injection f) R)
 is-tight-restriction-Relation-Prop f R H x x' np =
-  is-injective-injection f (H (map-injection f x) (map-injection f x') np)
+  is-injective-map-injection f (H (map-injection f x) (map-injection f x') np)
 
 restriction-Tight-Apartness-Relation :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
