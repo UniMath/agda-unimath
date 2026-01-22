@@ -296,6 +296,24 @@ module _
     is-decidable-equiv' (compute-fiber-inr-map-coproduct f g y) (G y)
 ```
 
+### The inclusion maps of coproducts are decidable
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-map-inl :
+    is-decidable-map (inl {A = A} {B = B})
+  is-decidable-map-inl (inl x) = inl (x , refl)
+  is-decidable-map-inl (inr x) = inr (λ (y , p) → neq-inl-inr p)
+
+  is-decidable-map-inr :
+    is-decidable-map (inr {A = A} {B = B})
+  is-decidable-map-inr (inl x) = inr (λ (y , p) → neq-inr-inl p)
+  is-decidable-map-inr (inr x) = inl (x , refl)
+```
+
 ### Decidable maps are closed under base change
 
 ```agda

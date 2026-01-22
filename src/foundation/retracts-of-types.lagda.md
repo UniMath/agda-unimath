@@ -79,21 +79,23 @@ module _
   htpy-eq-retract : (R S : A retract-of B) → R ＝ S → htpy-retract R S
   htpy-eq-retract R .R refl = refl-htpy-retract R
 
-  is-torsorial-htpy-retract :
-    (R : A retract-of B) → is-torsorial (htpy-retract R)
-  is-torsorial-htpy-retract R =
-    is-torsorial-Eq-structure
-      ( is-torsorial-htpy (inclusion-retract R))
-      ( inclusion-retract R , refl-htpy)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (map-retraction-retract R))
-        ( map-retraction-retract R , refl-htpy)
-        ( is-torsorial-htpy (is-retraction-map-retraction-retract R)))
+  abstract
+    is-torsorial-htpy-retract :
+      (R : A retract-of B) → is-torsorial (htpy-retract R)
+    is-torsorial-htpy-retract R =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy (inclusion-retract R))
+        ( inclusion-retract R , refl-htpy)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-htpy (map-retraction-retract R))
+          ( map-retraction-retract R , refl-htpy)
+          ( is-torsorial-htpy (is-retraction-map-retraction-retract R)))
 
-  is-equiv-htpy-eq-retract :
-    (R S : A retract-of B) → is-equiv (htpy-eq-retract R S)
-  is-equiv-htpy-eq-retract R =
-    fundamental-theorem-id (is-torsorial-htpy-retract R) (htpy-eq-retract R)
+  abstract
+    is-equiv-htpy-eq-retract :
+      (R S : A retract-of B) → is-equiv (htpy-eq-retract R S)
+    is-equiv-htpy-eq-retract R =
+      fundamental-theorem-id (is-torsorial-htpy-retract R) (htpy-eq-retract R)
 
   extensionality-retract : (R S : A retract-of B) → (R ＝ S) ≃ htpy-retract R S
   extensionality-retract R S =
@@ -132,35 +134,40 @@ module _
   equiv-eq-retracts : (R S : retracts l2 A) → R ＝ S → equiv-retracts R S
   equiv-eq-retracts R .R refl = refl-equiv-retracts R
 
-  is-torsorial-equiv-retracts :
-    (R : retracts l2 A) → is-torsorial (equiv-retracts R)
-  is-torsorial-equiv-retracts R =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-retracts R))
-      ( type-retracts R , id-equiv)
-      ( is-contr-equiv
-        ( Σ (retract A (type-retracts R)) (htpy-retract (retract-retracts R)))
-        ( equiv-tot
-          ( λ S →
-            equiv-tot
-              ( λ I →
-                equiv-tot
-                  ( λ J →
-                    equiv-concat-htpy'
-                      ( is-retraction-map-retraction-retracts R)
-                      ( ap-concat-htpy
-                        ( horizontal-concat-htpy J I)
-                        ( right-unit-htpy ∙h
-                          left-unit-law-left-whisker-comp
-                            ( is-retraction-map-retraction-retract S)))))))
-        ( is-torsorial-htpy-retract (retract-retracts R)))
+  abstract
+    is-torsorial-equiv-retracts :
+      (R : retracts l2 A) → is-torsorial (equiv-retracts {l2} R)
+    is-torsorial-equiv-retracts R =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (type-retracts R))
+        ( type-retracts R , id-equiv)
+        ( is-contr-equiv
+          ( Σ (retract A (type-retracts R)) (htpy-retract (retract-retracts R)))
+          ( equiv-tot
+            ( λ S →
+              equiv-tot
+                ( λ I →
+                  equiv-tot
+                    ( λ J →
+                      equiv-concat-htpy'
+                        ( is-retraction-map-retraction-retracts R)
+                        ( ap-concat-htpy
+                          ( horizontal-concat-htpy J I)
+                          ( right-unit-htpy ∙h
+                            left-unit-law-left-whisker-comp
+                              ( is-retraction-map-retraction-retract S)))))))
+          ( is-torsorial-htpy-retract (retract-retracts R)))
 
-  is-equiv-equiv-eq-retracts :
-    (R S : retracts l2 A) → is-equiv (equiv-eq-retracts R S)
-  is-equiv-equiv-eq-retracts R =
-    fundamental-theorem-id (is-torsorial-equiv-retracts R) (equiv-eq-retracts R)
+  abstract
+    is-equiv-equiv-eq-retracts :
+      (R S : retracts l2 A) → is-equiv (equiv-eq-retracts R S)
+    is-equiv-equiv-eq-retracts R =
+      fundamental-theorem-id
+        ( is-torsorial-equiv-retracts R)
+        ( equiv-eq-retracts R)
 
-  extensionality-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
+  extensionality-retracts :
+    (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
   extensionality-retracts R S =
     ( equiv-eq-retracts R S , is-equiv-equiv-eq-retracts R S)
 
