@@ -24,9 +24,9 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
+open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
-open import universal-algebra.homomorphisms-of-algebras
 ```
 
 </details>
