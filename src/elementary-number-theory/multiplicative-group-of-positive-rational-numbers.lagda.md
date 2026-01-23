@@ -26,6 +26,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -199,7 +200,7 @@ abstract
     equational-reasoning
       p *ℚ (rational-inv-ℚ⁺ p⁺ *ℚ q)
       ＝ (p *ℚ rational-inv-ℚ⁺ p⁺) *ℚ q
-        by inv (associative-mul-ℚ _ _ _)
+        by inv (associative-mul-ℚ p _ q)
       ＝ one-ℚ *ℚ q
         by ap-mul-ℚ (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ p⁺)) refl
       ＝ q
@@ -264,4 +265,25 @@ abstract
 abstract
   inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
   inv-one-ℚ⁺ = inv-unit-Group group-mul-ℚ⁺
+```
+
+### Multiplication by a positive rational number is unbounded above and below
+
+```agda
+abstract
+  is-unbounded-above-left-mul-rational-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) →
+    exists ℚ (λ r → leq-ℚ-Prop q (rational-ℚ⁺ p *ℚ r))
+  is-unbounded-above-left-mul-rational-ℚ⁺ p q =
+    intro-exists
+      ( rational-inv-ℚ⁺ p *ℚ q)
+      ( leq-eq-ℚ (inv (is-section-left-div-ℚ⁺ p q)))
+
+  is-unbounded-below-left-mul-rational-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) →
+    exists ℚ (λ r → leq-ℚ-Prop (rational-ℚ⁺ p *ℚ r) q)
+  is-unbounded-below-left-mul-rational-ℚ⁺ p q =
+    intro-exists
+      ( rational-inv-ℚ⁺ p *ℚ q)
+      ( leq-eq-ℚ (is-section-left-div-ℚ⁺ p q))
 ```
