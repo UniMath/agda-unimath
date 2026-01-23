@@ -476,16 +476,18 @@ module _
 
   abstract
     is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ :
-      is-ucont-map-proper-closed-interval-ℝ [a,b] f'
+      is-uniformly-continuous-real-function-proper-closed-interval-ℝ [a,b] f'
     is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ =
       let
         open
           do-syntax-trunc-Prop
-            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f')
+            ( is-uniformly-continuous-prop-map-real-function-proper-closed-interval-ℝ
+              ( [a,b])
+              ( f'))
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in do
         (δf , is-mod-δf) ← is-derivative-f-f'
-        is-ucont-map-modulus-apart-map-proper-closed-interval-ℝ
+        is-uniformly-continuous-real-function-modulus-apart-map-proper-closed-interval-ℝ
           { l3 = l1}
           ( [a,b])
           ( f')
@@ -592,7 +594,7 @@ abstract
   is-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
     {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
     (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]) →
-    is-ucont-map-proper-closed-interval-ℝ
+    is-uniformly-continuous-real-function-proper-closed-interval-ℝ
       ( [a,b])
       ( map-derivative-differentiable-real-function-proper-closed-interval-ℝ
         ( [a,b])
@@ -608,7 +610,7 @@ abstract
 ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
   differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
-  ucont-map-proper-closed-interval-ℝ l1 (l1 ⊔ l2) [a,b]
+  uniformly-continuous-real-function-proper-closed-interval-ℝ l1 (l1 ⊔ l2) [a,b]
 ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ
   [a,b] f =
   ( map-derivative-differentiable-real-function-proper-closed-interval-ℝ
@@ -626,16 +628,15 @@ module _
   {l1 l2 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
   (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
-  (is-differentiable-f :
+  (is-differentiable-f@(f' , Df=f') :
     is-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
   where
 
   abstract
     is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ :
-      is-ucont-map-proper-closed-interval-ℝ [a,b] f
+      is-uniformly-continuous-real-function-proper-closed-interval-ℝ [a,b] f
     is-ucont-map-is-differentiable-real-function-proper-closed-interval-ℝ =
       let
-        (f' , Df=f') = is-differentiable-f
         is-ucont-f' =
           is-ucont-map-is-derivative-real-function-proper-closed-interval-ℝ
             ( [a,b])
@@ -644,10 +645,12 @@ module _
             ( Df=f')
         open
           do-syntax-trunc-Prop
-            ( is-ucont-prop-map-proper-closed-interval-ℝ [a,b] f)
+            ( is-uniformly-continuous-prop-map-real-function-proper-closed-interval-ℝ
+              ( [a,b])
+              ( f))
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         (max-|f'|⁰⁺@(max-|f'| , 0≤max-|f'|) , is-max-|f'|) =
-          nonnegative-upper-bound-abs-im-ucont-map-proper-closed-interval-ℝ
+          nonnegative-upper-bound-abs-im-uniformly-continuous-real-function-proper-closed-interval-ℝ
             ( [a,b])
             ( f' , is-ucont-f')
       in do
@@ -718,7 +721,7 @@ abstract
   is-ucont-map-differentiable-real-function-proper-closed-interval-ℝ :
     {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
     (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]) →
-    is-ucont-map-proper-closed-interval-ℝ
+    is-uniformly-continuous-real-function-proper-closed-interval-ℝ
       ( [a,b])
       ( map-differentiable-real-function-proper-closed-interval-ℝ [a,b] f)
   is-ucont-map-differentiable-real-function-proper-closed-interval-ℝ
@@ -731,7 +734,7 @@ abstract
 ucont-map-differentiable-real-function-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
   differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
-  ucont-map-proper-closed-interval-ℝ l1 l2 [a,b]
+  uniformly-continuous-real-function-proper-closed-interval-ℝ l1 l2 [a,b]
 ucont-map-differentiable-real-function-proper-closed-interval-ℝ
   [a,b] f =
   ( map-differentiable-real-function-proper-closed-interval-ℝ [a,b] f ,
