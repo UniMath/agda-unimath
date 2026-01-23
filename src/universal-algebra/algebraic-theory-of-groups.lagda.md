@@ -10,7 +10,6 @@ module universal-algebra.algebraic-theory-of-groups where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.binary-transport
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
