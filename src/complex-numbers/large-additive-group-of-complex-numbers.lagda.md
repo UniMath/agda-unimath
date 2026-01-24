@@ -106,6 +106,6 @@ ab-add-ℂ = ab-Large-Ab large-ab-add-ℂ
 ### The canonical abelian group homomorphism from the additive group of `ℝ` to the additive group of `ℂ`
 
 ```agda
-hom-ab-add-ℝ-ℂ : (l : Level) → hom-Ab (ab-add-ℝ l) (ab-add-ℂ l)
-hom-ab-add-ℝ-ℂ l = (complex-ℝ , inv (add-complex-ℝ _ _))
+hom-add-ab-complex-ℝ : (l : Level) → hom-Ab (ab-add-ℝ l) (ab-add-ℂ l)
+hom-add-ab-complex-ℝ l = (complex-ℝ , inv (add-complex-ℝ _ _))
 ```

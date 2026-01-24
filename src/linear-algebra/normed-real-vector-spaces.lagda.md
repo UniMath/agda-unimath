@@ -210,24 +210,24 @@ module _
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
-  is-extensional-norm-Normed-ℝ-Vector-Space :
-    (v : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
-    v ＝ zero-Normed-ℝ-Vector-Space
-  is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
-
-  is-extensional-dist-Normed-ℝ-Vector-Space :
-    (v w : type-Normed-ℝ-Vector-Space) →
-    is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
-    v ＝ w
-  is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
-    eq-is-zero-right-subtraction-Ab
-      ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
-      ( is-extensional-norm-Normed-ℝ-Vector-Space
-        ( diff-Normed-ℝ-Vector-Space v w)
-        ( |v-w|=0))
-
   abstract
+    is-extensional-norm-Normed-ℝ-Vector-Space :
+      (v : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space v) →
+      v ＝ zero-Normed-ℝ-Vector-Space
+    is-extensional-norm-Normed-ℝ-Vector-Space = pr2 norm-Normed-ℝ-Vector-Space
+
+    is-extensional-dist-Normed-ℝ-Vector-Space :
+      (v w : type-Normed-ℝ-Vector-Space) →
+      is-zero-ℝ (dist-Normed-ℝ-Vector-Space v w) →
+      v ＝ w
+    is-extensional-dist-Normed-ℝ-Vector-Space v w |v-w|=0 =
+      eq-is-zero-right-subtraction-Ab
+        ( ab-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space)
+        ( is-extensional-norm-Normed-ℝ-Vector-Space
+          ( diff-Normed-ℝ-Vector-Space v w)
+          ( |v-w|=0))
+
     refl-dist-Normed-ℝ-Vector-Space :
       (v : type-Normed-ℝ-Vector-Space) →
       is-zero-ℝ (dist-Normed-ℝ-Vector-Space v v)
@@ -404,10 +404,27 @@ module _
                   ( w)))))
 ```
 
+### The norm of the zero vector is zero
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space :
+      map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
+      raise-ℝ l1 zero-ℝ
+    eq-zero-norm-zero-Normed-ℝ-Vector-Space =
+      eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+```
+
 ## See also
 
-- [Real Banach spaces](linear-algebra.real-banach-spaces.md), normed real vector
-  spaces for which the induced metric space is
+- [Real Banach spaces](functional-analysis.real-banach-spaces.md), normed real
+  vector spaces for which the induced metric space is
   [complete](metric-spaces.complete-metric-spaces.md)
 
 ## External links

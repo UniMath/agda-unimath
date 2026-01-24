@@ -131,7 +131,7 @@ abstract
   eq-neg-one-ℝ = neg-real-ℚ one-ℚ ∙ ap real-ℚ eq-neg-one-ℚ
 ```
 
-### The negation of the embeddings of integers in the real numbers
+### The negation of the inclusion of integers in the real numbers
 
 ```agda
 abstract

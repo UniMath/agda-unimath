@@ -28,6 +28,7 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.decreasing-sequences-posets public
 open import order-theory.deflationary-maps-posets public
 open import order-theory.deflationary-maps-preorders public
 open import order-theory.dependent-products-large-frames public
@@ -149,6 +150,7 @@ open import order-theory.spans-closed-intervals-total-orders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-orders public
 open import order-theory.strict-preorders public
+open import order-theory.strict-subpreorders public
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public

@@ -1,6 +1,8 @@
 # The standard Euclidean vector space
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module linear-algebra.standard-euclidean-vector-spaces where
 ```
 
@@ -26,7 +28,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "standard Euclidean space" WDID=Q17295 WD="Euclidean space"}}
+The
+{{#concept "standard Euclidean space" WDID=Q17295 WD="Euclidean space" Agda=vector-space-ℝ-Fin}}
 `ℝⁿ` is the [real vector space](linear-algebra.real-vector-spaces.md) of
 [finite sequences](lists.finite-sequences.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) of length `n`.
@@ -34,32 +37,41 @@ The {{#concept "standard Euclidean space" WDID=Q17295 WD="Euclidean space"}}
 ## Definition
 
 ```agda
-vector-space-ℝ^ : ℕ → (l : Level) → ℝ-Vector-Space l (lsuc l)
-vector-space-ℝ^ n l =
+vector-space-ℝ-Fin : ℕ → (l : Level) → ℝ-Vector-Space l (lsuc l)
+vector-space-ℝ-Fin n l =
   Π-left-module-Commutative-Ring
     ( commutative-ring-ℝ l)
     ( Fin n)
     ( λ _ →
       left-module-commutative-ring-Commutative-Ring (commutative-ring-ℝ l))
 
-set-ℝ^ : ℕ → (l : Level) → Set (lsuc l)
-set-ℝ^ n l = set-ℝ-Vector-Space (vector-space-ℝ^ n l)
+set-ℝ-Fin : ℕ → (l : Level) → Set (lsuc l)
+set-ℝ-Fin n l = set-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-type-ℝ^ : ℕ → (l : Level) → UU (lsuc l)
-type-ℝ^ n l = type-ℝ-Vector-Space (vector-space-ℝ^ n l)
+type-ℝ-Fin : ℕ → (l : Level) → UU (lsuc l)
+type-ℝ-Fin n l = type-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-add-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l → type-ℝ^ n l
-add-ℝ^ n {l} = add-ℝ-Vector-Space (vector-space-ℝ^ n l)
+add-ℝ-Fin :
+  {n : ℕ} {l : Level} →
+  type-ℝ-Fin n l → type-ℝ-Fin n l → type-ℝ-Fin n l
+add-ℝ-Fin {n} {l} =
+  add-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-mul-ℝ^ : (n : ℕ) {l : Level} → ℝ l → type-ℝ^ n l → type-ℝ^ n l
-mul-ℝ^ n {l} = mul-ℝ-Vector-Space (vector-space-ℝ^ n l)
+mul-ℝ-Fin :
+  {n : ℕ} {l : Level} → ℝ l → type-ℝ-Fin n l → type-ℝ-Fin n l
+mul-ℝ-Fin {n} {l} =
+  mul-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-zero-ℝ^ : (n : ℕ) (l : Level) → type-ℝ^ n l
-zero-ℝ^ n l = zero-ℝ-Vector-Space (vector-space-ℝ^ n l)
+zero-ℝ-Fin : (n : ℕ) (l : Level) → type-ℝ-Fin n l
+zero-ℝ-Fin n l = zero-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-neg-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l
-neg-ℝ^ n {l} = neg-ℝ-Vector-Space (vector-space-ℝ^ n l)
+neg-ℝ-Fin :
+  {n : ℕ} {l : Level} → type-ℝ-Fin n l → type-ℝ-Fin n l
+neg-ℝ-Fin {n} {l} =
+  neg-ℝ-Vector-Space (vector-space-ℝ-Fin n l)
 
-diff-ℝ^ : (n : ℕ) {l : Level} → type-ℝ^ n l → type-ℝ^ n l → type-ℝ^ n l
-diff-ℝ^ n u v = add-ℝ^ n u (neg-ℝ^ n v)
+diff-ℝ-Fin :
+  {n : ℕ} {l : Level} →
+  type-ℝ-Fin n l → type-ℝ-Fin n l → type-ℝ-Fin n l
+diff-ℝ-Fin u v = add-ℝ-Fin u (neg-ℝ-Fin v)
 ```

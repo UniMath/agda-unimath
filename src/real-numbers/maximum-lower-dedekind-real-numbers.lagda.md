@@ -33,6 +33,7 @@ open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
+open import real-numbers.addition-lower-dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 ```

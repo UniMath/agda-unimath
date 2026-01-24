@@ -283,7 +283,7 @@ abstract
         by ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _)
 ```
 
-### The magnitude of a complex number multiplied on the left by an embedded real number
+### The magnitude of a complex number multiplied on the left by a real number as a complex number
 
 ```agda
 abstract
@@ -474,6 +474,20 @@ abstract
       ( magnitude-ℂ z)
       ( leq-abs-re-magnitude-ℂ z)
       ( leq-abs-ℝ a)
+```
+
+### The magnitude of `-z` is equal to the magnitude of `z`
+
+```agda
+abstract
+  squared-magnitude-neg-ℂ :
+    {l : Level} (z : ℂ l) →
+    squared-magnitude-ℂ (neg-ℂ z) ＝ squared-magnitude-ℂ z
+  squared-magnitude-neg-ℂ (a +iℂ b) = ap-add-ℝ (square-neg-ℝ a) (square-neg-ℝ b)
+
+  magnitude-neg-ℂ :
+    {l : Level} (z : ℂ l) → magnitude-ℂ (neg-ℂ z) ＝ magnitude-ℂ z
+  magnitude-neg-ℂ z = ap real-sqrt-ℝ⁰⁺ (eq-ℝ⁰⁺ _ _ (squared-magnitude-neg-ℂ z))
 ```
 
 ## See also

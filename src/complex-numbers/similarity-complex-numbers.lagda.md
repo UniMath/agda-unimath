@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
+open import foundation.locally-small-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -104,6 +105,16 @@ large-similarity-relation-ℂ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℂ)
     ( λ _ _ → eq-sim-ℂ)
+```
+
+### The complex numbers at universe `l` are locally small with respect to `UU l`
+
+```agda
+abstract
+  is-locally-small-ℂ : (l : Level) → is-locally-small l (ℂ l)
+  is-locally-small-ℂ =
+    is-locally-small-type-Large-Similarity-Relation
+      ( large-similarity-relation-ℂ)
 ```
 
 ### The canonical embedding of real numbers in the complex numbers preserves similarity

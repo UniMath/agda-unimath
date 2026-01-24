@@ -72,7 +72,7 @@ heyting-field-ℂ l =
 ### The canonical field homomorphism from the real numbers to the complex numbers
 
 ```agda
-hom-heyting-field-ℝ-ℂ :
+hom-heyting-field-complex-ℝ :
   (l : Level) → hom-Heyting-Field (heyting-field-ℝ l) (heyting-field-ℂ l)
-hom-heyting-field-ℝ-ℂ l = hom-ring-ℝ-ℂ l
+hom-heyting-field-complex-ℝ l = hom-ring-complex-ℝ l
 ```

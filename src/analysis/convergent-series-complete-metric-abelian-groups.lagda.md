@@ -14,6 +14,7 @@ open import analysis.series-complete-metric-abelian-groups
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-sequences-complete-metric-spaces
@@ -55,6 +56,11 @@ module _
 
   is-convergent-series-Complete-Metric-Ab : UU (l1 ⊔ l2)
   is-convergent-series-Complete-Metric-Ab = is-convergent-series-Metric-Ab σ
+
+convergent-series-Complete-Metric-Ab :
+  {l1 l2 : Level} (G : Complete-Metric-Ab l1 l2) → UU (l1 ⊔ l2)
+convergent-series-Complete-Metric-Ab G =
+  type-subtype (is-convergent-prop-series-Complete-Metric-Ab G)
 ```
 
 ## Properties
@@ -68,18 +74,19 @@ module _
   (σ : series-Complete-Metric-Ab G)
   where
 
-  is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab :
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab :
     is-cauchy-sequence-Metric-Space
       ( metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ) →
     is-convergent-series-Complete-Metric-Ab G σ
-  is-convergent-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab H =
+  is-convergent-series-is-cauchy-sequence-partial-sum-series-Complete-Metric-Ab
+    H =
     has-limit-cauchy-sequence-Complete-Metric-Space
       ( complete-metric-space-Complete-Metric-Ab G)
       ( partial-sum-series-Complete-Metric-Ab G σ , H)
 ```
 
-### If a series converges, there exists a modulus making its partial sums a Cauchy sequence
+### If a series converges, its partial sums are a Cauchy sequence
 
 ```agda
 module _
@@ -88,18 +95,13 @@ module _
   (σ : series-Complete-Metric-Ab G)
   where
 
-  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab :
-    is-convergent-series-Complete-Metric-Ab G σ →
-    is-inhabited
-      ( is-cauchy-sequence-Metric-Space
-        ( metric-space-Complete-Metric-Ab G)
-        ( partial-sum-series-Complete-Metric-Ab G σ))
-  is-cauchy-sequence-partial-sum-is-convergent-series-Complete-Metric-Ab
-    (lim , is-lim) =
-    map-is-inhabited
-      ( is-cauchy-has-limit-modulus-sequence-Metric-Space
+  abstract
+    is-cauchy-sequence-partial-sum-series-is-convergent-series-Complete-Metric-Ab :
+      is-convergent-series-Complete-Metric-Ab G σ →
+      is-cauchy-sequence-Metric-Space
         ( metric-space-Complete-Metric-Ab G)
         ( partial-sum-series-Complete-Metric-Ab G σ)
-        ( lim))
-      ( is-lim)
+    is-cauchy-sequence-partial-sum-series-is-convergent-series-Complete-Metric-Ab =
+      is-cauchy-has-limit-sequence-Metric-Space
+        ( metric-space-Complete-Metric-Ab G)
 ```

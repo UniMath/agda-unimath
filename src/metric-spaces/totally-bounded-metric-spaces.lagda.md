@@ -17,17 +17,17 @@ open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
 open import metric-spaces.images-metric-spaces
-open import metric-spaces.images-short-functions-metric-spaces
-open import metric-spaces.images-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.images-short-maps-metric-spaces
+open import metric-spaces.images-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.nets-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -83,24 +83,24 @@ module _
 
 ## Properties
 
-### The image of a totally bounded metric space under a uniformly continuous function is totally bounded
+### The image of a totally bounded metric space under a uniformly continuous map is totally bounded
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (μX : modulus-of-total-boundedness-Metric-Space l5 X)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   {μf : ℚ⁺ → ℚ⁺}
-  (is-muc-μf : is-modulus-of-uniform-continuity-function-Metric-Space X Y f μf)
+  (is-muc-μf : is-modulus-of-uniform-continuity-map-Metric-Space X Y f μf)
   where
 
-  modulus-of-total-boundedness-im-modulated-uniformly-continuous-function-Metric-Space :
+  modulus-of-total-boundedness-im-modulated-uniformly-continuous-map-Metric-Space :
     modulus-of-total-boundedness-Metric-Space
       ( l1 ⊔ l3 ⊔ l5)
       ( im-Metric-Space X Y f)
-  modulus-of-total-boundedness-im-modulated-uniformly-continuous-function-Metric-Space
+  modulus-of-total-boundedness-im-modulated-uniformly-continuous-map-Metric-Space
     ε =
-      net-im-uniformly-continuous-function-net-Metric-Space X Y f
+      net-im-uniformly-continuous-map-net-Metric-Space X Y f
         ( is-muc-μf)
         ( ε)
         ( μX (μf ε))
@@ -108,57 +108,57 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (tbX : is-totally-bounded-Metric-Space l5 X)
-  (f : uniformly-continuous-function-Metric-Space X Y)
+  (f : uniformly-continuous-map-Metric-Space X Y)
   where
 
   abstract
-    is-totally-bounded-im-uniformly-continuous-function-is-totally-bounded-Metric-Space :
+    is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space :
       is-totally-bounded-Metric-Space
         ( l1 ⊔ l3 ⊔ l5)
-        ( im-uniformly-continuous-function-Metric-Space X Y f)
-    is-totally-bounded-im-uniformly-continuous-function-is-totally-bounded-Metric-Space =
+        ( im-uniformly-continuous-map-Metric-Space X Y f)
+    is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space =
       let
         open
           do-syntax-trunc-Prop
             ( is-totally-bounded-prop-Metric-Space
               ( l1 ⊔ l3 ⊔ l5)
-              ( im-uniformly-continuous-function-Metric-Space X Y f))
+              ( im-uniformly-continuous-map-Metric-Space X Y f))
       in do
         (_ , μf) ←
-          is-uniformly-continuous-map-uniformly-continuous-function-Metric-Space
+          is-uniformly-continuous-map-uniformly-continuous-map-Metric-Space
             ( X)
             ( Y)
             ( f)
         μX ← tbX
         unit-trunc-Prop
-          ( modulus-of-total-boundedness-im-modulated-uniformly-continuous-function-Metric-Space
+          ( modulus-of-total-boundedness-im-modulated-uniformly-continuous-map-Metric-Space
             ( X)
             ( Y)
             ( μX)
-            ( map-uniformly-continuous-function-Metric-Space X Y f)
+            ( map-uniformly-continuous-map-Metric-Space X Y f)
             ( μf))
 ```
 
-### The image of a totally bounded metric space under a short function is totally bounded
+### The image of a totally bounded metric space under a short map is totally bounded
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
   (tbX : is-totally-bounded-Metric-Space l5 X)
-  (f : short-function-Metric-Space X Y)
+  (f : short-map-Metric-Space X Y)
   where
 
   abstract
-    is-totally-bounded-im-short-function-is-totally-bounded-Metric-Space :
+    is-totally-bounded-im-short-map-is-totally-bounded-Metric-Space :
       is-totally-bounded-Metric-Space
         ( l1 ⊔ l3 ⊔ l5)
-        ( im-short-function-Metric-Space X Y f)
-    is-totally-bounded-im-short-function-is-totally-bounded-Metric-Space =
-      is-totally-bounded-im-uniformly-continuous-function-is-totally-bounded-Metric-Space
+        ( im-short-map-Metric-Space X Y f)
+    is-totally-bounded-im-short-map-is-totally-bounded-Metric-Space =
+      is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space
         ( X)
         ( Y)
         ( tbX)
-        ( uniformly-continuous-short-function-Metric-Space X Y f)
+        ( uniformly-continuous-map-short-map-Metric-Space X Y f)
 ```
 
 ### The image of a totally bounded metric space under an isometry is totally bounded
@@ -176,11 +176,11 @@ module _
         ( l1 ⊔ l3 ⊔ l5)
         ( im-isometry-Metric-Space X Y f)
     is-totally-bounded-im-isometry-is-totally-bounded-Metric-Space =
-      is-totally-bounded-im-short-function-is-totally-bounded-Metric-Space
+      is-totally-bounded-im-short-map-is-totally-bounded-Metric-Space
         ( X)
         ( Y)
         ( tbX)
-        ( short-isometry-Metric-Space X Y f)
+        ( short-map-isometry-Metric-Space X Y f)
 ```
 
 ### Total boundedness is preserved by isometric equivalences

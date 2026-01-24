@@ -12,7 +12,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.centers-semigroups
 open import group-theory.central-elements-monoids
+open import group-theory.commutative-monoids
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 open import group-theory.submonoids
@@ -22,8 +24,11 @@ open import group-theory.submonoids
 
 ## Idea
 
-The **center** of a [monoid](group-theory.monoids.md) consists of those elements
-that are central.
+The {{#concept "center" Disambiguation="of a monoid" Agda=center-Monoid}} of a
+[monoid](group-theory.monoids.md) `M` is the
+[submonoid](group-theory.submonoids.md) consisting of those elements of `M`
+which are [central](group-theory.central-elements-monoids.md). The center is
+always a [commutative monoid](group-theory.commutative-monoids.md).
 
 ## Definition
 
@@ -76,4 +81,16 @@ module _
     hom-Monoid monoid-center-Monoid M
   hom-inclusion-center-Monoid =
     hom-inclusion-Submonoid M center-Monoid
+
+  abstract
+    commutative-mul-center-Monoid :
+      (x y : type-center-Monoid) →
+      mul-center-Monoid x y ＝ mul-center-Monoid y x
+    commutative-mul-center-Monoid =
+      commutative-mul-center-Semigroup (semigroup-Monoid M)
+
+  commutative-monoid-center-Monoid : Commutative-Monoid l
+  commutative-monoid-center-Monoid =
+    ( monoid-center-Monoid ,
+      commutative-mul-center-Monoid)
 ```

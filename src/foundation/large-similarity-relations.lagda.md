@@ -7,11 +7,15 @@ module foundation.large-similarity-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-equivalence-relations
+open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
 
@@ -79,10 +83,52 @@ record
     transitive-sim-Large-Equivalence-Relation
       ( large-equivalence-relation-Large-Similarity-Relation)
 
+  eq-iff-sim-Large-Similarity-Relation :
+    {l : Level} (x y : X l) →
+    (x ＝ y) ↔ (sim-Large-Similarity-Relation x y)
+  eq-iff-sim-Large-Similarity-Relation x y =
+    ( sim-eq-Large-Similarity-Relation ,
+      eq-sim-Large-Similarity-Relation x y)
+
+  abstract
+    is-set-type-Large-Similarity-Relation : (l : Level) → is-set (X l)
+    is-set-type-Large-Similarity-Relation l =
+      is-set-prop-in-id
+        ( sim-Large-Similarity-Relation)
+        ( is-prop-type-Relation-Prop sim-prop-Large-Similarity-Relation)
+        ( refl-sim-Large-Similarity-Relation)
+        ( eq-sim-Large-Similarity-Relation)
+
+  set-type-Large-Similarity-Relation : (l : Level) → Set (α l)
+  set-type-Large-Similarity-Relation l =
+    ( X l , is-set-type-Large-Similarity-Relation l)
+
 open Large-Similarity-Relation public
 ```
 
 ## Properties
+
+### Local smallness of types with large similarity relations
+
+Given a `Large-Similarity-Relation β X`, `X l` is locally small with respect to
+`UU (β l l)`.
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {X : (l : Level) → UU (α l)}
+  (R : Large-Similarity-Relation β X)
+  where
+
+  is-locally-small-type-Large-Similarity-Relation :
+    (l : Level) → is-locally-small (β l l) (X l)
+  is-locally-small-type-Large-Similarity-Relation l x y =
+    ( sim-Large-Similarity-Relation R x y ,
+      equiv-iff'
+        ( Id-Prop (set-type-Large-Similarity-Relation R l) x y)
+        ( sim-prop-Large-Similarity-Relation R x y)
+        ( eq-iff-sim-Large-Similarity-Relation R x y))
+```
 
 ### Similarity reasoning
 
