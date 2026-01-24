@@ -60,7 +60,7 @@ module _
         ( sequence-map-convergent-sequence-uniformly-continuous-map-Metric-Space)
         ( limit-map-convergent-sequence-uniformly-continuous-map-Metric-Space)
     is-limit-limit-map-convergent-sequence-uniformly-continuous-map-Metric-Space =
-      preserves-limits-sequence-uniformly-continuous-map-Metric-Space
+      is-limit-map-sequence-uniformly-continuous-map-Metric-Space
         ( A)
         ( B)
         ( f)

@@ -83,6 +83,8 @@ open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
+open import elementary-number-theory.floor-nonnegative-integer-fractions public
+open import elementary-number-theory.floor-nonnegative-rational-numbers public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.geometric-sequences-rational-numbers public
@@ -231,6 +233,7 @@ open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
+open import elementary-number-theory.unit-closed-interval-rational-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-fractions-rational-numbers public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
