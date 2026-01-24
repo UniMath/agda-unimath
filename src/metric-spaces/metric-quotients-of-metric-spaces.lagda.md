@@ -151,7 +151,7 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  isometric-equiv-metric-quotient-Metric-Space' :
+  isometric-equiv-unit-metric-quotient-Metric-Space' :
     isometric-equiv-Metric-Space'
       ( M)
       ( metric-quotient-Pseudometric-Space
