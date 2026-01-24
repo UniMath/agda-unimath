@@ -162,7 +162,7 @@ module _
 
 ## Properties
 
-### The unit map from a pseudometric space its quotient metric space is an isometry
+### The unit map is an isometry
 
 ```agda
 module _
