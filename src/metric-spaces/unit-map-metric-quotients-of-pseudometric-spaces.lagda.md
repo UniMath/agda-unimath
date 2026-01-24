@@ -1,4 +1,4 @@
-# Unit map of metric quotients of pseudometric spaces
+# The unit map of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
