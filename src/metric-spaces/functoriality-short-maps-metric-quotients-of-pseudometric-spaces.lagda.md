@@ -265,12 +265,12 @@ module _
     ( coh-square-map-metric-quotient-short-map-Pseudometric-Space Q R g) ·r
     ( map-short-map-Pseudometric-Space P Q f)
 
-  htpy-comp-map-hom-comp-short-map-metric-quotient-Pseudometric-Space :
+  htpy-comp-map-metric-quotient-short-map-Pseudometric-Space :
     ( map-metric-quotient-short-map-Pseudometric-Space P R
       ( comp-short-map-Pseudometric-Space P Q R g f)) ~
     ( map-metric-quotient-short-map-Pseudometric-Space Q R g ∘
       map-metric-quotient-short-map-Pseudometric-Space P Q f)
-  htpy-comp-map-hom-comp-short-map-metric-quotient-Pseudometric-Space =
+  htpy-comp-map-metric-quotient-short-map-Pseudometric-Space =
     all-htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space R)
@@ -299,5 +299,5 @@ module _
         ( metric-quotient-Pseudometric-Space R)
         ( short-map-metric-quotient-short-map-Pseudometric-Space Q R g)
         ( short-map-metric-quotient-short-map-Pseudometric-Space P Q f))
-      ( htpy-comp-map-hom-comp-short-map-metric-quotient-Pseudometric-Space)
+      ( htpy-comp-map-metric-quotient-short-map-Pseudometric-Space)
 ```
