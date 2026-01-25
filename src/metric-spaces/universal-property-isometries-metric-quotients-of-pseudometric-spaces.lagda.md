@@ -93,7 +93,7 @@ module _
       ( pseudometric-metric-quotient-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
       ( f)
-      ( unit-isometry-metric-quotient-Pseudometric-Space P)
+      ( isometry-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ### Induced isometry from the quotient metric space into a metric space
@@ -222,7 +222,7 @@ module _
 
   is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space :
     map-extension-isometry-metric-quotient-Pseudometric-Space ∘
-    unit-map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space
     = pr2 g
