@@ -26,6 +26,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -100,6 +101,21 @@ module _
     ℚ⁺ → Relation (l1 ⊔ l2) type-metric-quotient-Pseudometric-Space
   neighborhood-metric-quotient-Pseudometric-Space ε X Y =
     type-Prop (neighborhood-prop-metric-quotient-Pseudometric-Space ε X Y)
+```
+
+### The type of maps between metric quotients of pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (Q : Pseudometric-Space l1' l2')
+  where
+
+  map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  map-metric-quotient-Pseudometric-Space =
+    type-metric-quotient-Pseudometric-Space P →
+    type-metric-quotient-Pseudometric-Space Q
 ```
 
 ## Properties
