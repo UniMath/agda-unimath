@@ -205,11 +205,11 @@ module _
     id-short-map-Metric-Space (metric-quotient-Pseudometric-Space P)
   pr2 exten-id-short-map-metric-quotient-Pseudometric-Space = refl-htpy
 
-  htpy-id-hom-id-short-map-metric-quotient-Pseudometric-Space :
+  htpy-id-short-map-metric-quotient-short-map-Pseudometric-Space :
     ( map-short-map-metric-quotient-short-map-Pseudometric-Space P P
       ( id-short-map-Pseudometric-Space P)) ~
     ( id)
-  htpy-id-hom-id-short-map-metric-quotient-Pseudometric-Space =
+  htpy-id-short-map-metric-quotient-short-map-Pseudometric-Space =
     all-htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space P)
@@ -228,7 +228,7 @@ module _
       ( short-map-metric-quotient-short-map-Pseudometric-Space P P
         ( id-short-map-Pseudometric-Space P))
       ( id-short-map-Metric-Space (metric-quotient-Pseudometric-Space P))
-      ( htpy-id-hom-id-short-map-metric-quotient-Pseudometric-Space)
+      ( htpy-id-short-map-metric-quotient-short-map-Pseudometric-Space)
 ```
 
 ### The action on short maps of metric quotients preserves composition
