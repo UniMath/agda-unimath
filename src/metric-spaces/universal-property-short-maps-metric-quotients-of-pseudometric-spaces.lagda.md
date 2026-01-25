@@ -96,7 +96,7 @@ module _
       ( pseudometric-metric-quotient-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
       ( f)
-      ( unit-short-map-metric-quotient-Pseudometric-Space P)
+      ( short-map-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ### The induced map from the quotient metric space by a short map in a metric space
@@ -121,7 +121,7 @@ module _
 
   is-extension-exten-short-map-metric-quotient-Pseudometric-Space :
     map-exten-short-map-metric-quotient-Pseudometric-space ∘
-    unit-map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-exten-short-map-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
@@ -234,7 +234,7 @@ module _
 
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space :
     map-extension-short-map-metric-quotient-Pseudometric-Space ∘
-    unit-map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space
     = pr2 g
@@ -411,7 +411,7 @@ module _
               ( M)
               ( f)
               ( g))
-            ( compute-unit-map-metric-quotient-Pseudometric-Space P X x∈X)
+            ( compute-map-unit-metric-quotient-Pseudometric-Space P X x∈X)
 
       lemma-lhs ∙ (inv lemma-mhs) ∙ lemma-rhs
 ```

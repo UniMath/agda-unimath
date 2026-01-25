@@ -66,14 +66,14 @@ module _
   (M : Metric-Space l1 l2)
   where
 
-  unit-map-metric-quotient-Metric-Space :
+  map-unit-metric-quotient-Metric-Space :
     map-Metric-Space M
       (metric-quotient-Metric-Space M)
-  unit-map-metric-quotient-Metric-Space =
-    unit-map-metric-quotient-Pseudometric-Space
+  map-unit-metric-quotient-Metric-Space =
+    map-unit-metric-quotient-Pseudometric-Space
       (pseudometric-Metric-Space M)
 
-  compute-unit-map-metric-quotient-Metric-Space :
+  compute-map-unit-metric-quotient-Metric-Space :
     ( X :
       type-metric-quotient-Pseudometric-Space
         ( pseudometric-Metric-Space M)) →
@@ -82,9 +82,9 @@ module _
       ( pseudometric-Metric-Space M)
       ( X)
       ( x) →
-    unit-map-metric-quotient-Metric-Space x ＝ X
-  compute-unit-map-metric-quotient-Metric-Space =
-    compute-unit-map-metric-quotient-Pseudometric-Space
+    map-unit-metric-quotient-Metric-Space x ＝ X
+  compute-map-unit-metric-quotient-Metric-Space =
+    compute-map-unit-metric-quotient-Pseudometric-Space
       ( pseudometric-Metric-Space M)
 ```
 
@@ -98,14 +98,14 @@ module _
   (M : Metric-Space l1 l2)
   where abstract
 
-  is-contr-map-unit-map-metric-quotient-Metric-Space :
-    is-contr-map (unit-map-metric-quotient-Metric-Space M)
-  is-contr-map-unit-map-metric-quotient-Metric-Space X =
+  is-contr-map-map-unit-metric-quotient-Metric-Space :
+    is-contr-map (map-unit-metric-quotient-Metric-Space M)
+  is-contr-map-map-unit-metric-quotient-Metric-Space X =
     let
       open
         do-syntax-trunc-Prop
           ( is-contr-Prop
-            ( fiber (unit-map-metric-quotient-Metric-Space M) X))
+            ( fiber (map-unit-metric-quotient-Metric-Space M) X))
       in do
         ( x , x∈X) ←
           is-inhabited-subtype-set-quotient
@@ -113,33 +113,33 @@ module _
             ( X)
 
         let
-          center-fiber : fiber (unit-map-metric-quotient-Metric-Space M) X
+          center-fiber : fiber (map-unit-metric-quotient-Metric-Space M) X
           center-fiber =
-            ( x , compute-unit-map-metric-quotient-Metric-Space M X x∈X)
+            ( x , compute-map-unit-metric-quotient-Metric-Space M X x∈X)
 
           contraction-fiber :
-            ( y : fiber (unit-map-metric-quotient-Metric-Space M) X) →
+            ( y : fiber (map-unit-metric-quotient-Metric-Space M) X) →
             center-fiber ＝ y
           contraction-fiber (y , [y]=X) =
             eq-type-subtype
               ( λ z →
                 eq-prop-Metric-Space
                   ( metric-quotient-Metric-Space M)
-                  ( unit-map-metric-quotient-Metric-Space M z)
+                  ( map-unit-metric-quotient-Metric-Space M z)
                   ( X))
               ( eq-sim-Metric-Space M x y
                 ( apply-effectiveness-quotient-map
                   ( equivalence-relation-sim-Metric-Space M)
-                  ( compute-unit-map-metric-quotient-Metric-Space M X x∈X ∙
+                  ( compute-map-unit-metric-quotient-Metric-Space M X x∈X ∙
                     inv [y]=X)))
 
         ( center-fiber , contraction-fiber)
 
-  is-equiv-unit-map-metric-quotient-Metric-Space :
-    is-equiv (unit-map-metric-quotient-Metric-Space M)
-  is-equiv-unit-map-metric-quotient-Metric-Space =
+  is-equiv-map-unit-metric-quotient-Metric-Space :
+    is-equiv (map-unit-metric-quotient-Metric-Space M)
+  is-equiv-map-unit-metric-quotient-Metric-Space =
     is-equiv-is-contr-map
-      is-contr-map-unit-map-metric-quotient-Metric-Space
+      is-contr-map-map-unit-metric-quotient-Metric-Space
 ```
 
 ## Applications
@@ -151,15 +151,15 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  isometric-equiv-metric-quotient-Metric-Space' :
+  isometric-equiv-unit-metric-quotient-Metric-Space' :
     isometric-equiv-Metric-Space'
       ( M)
       ( metric-quotient-Pseudometric-Space
         ( pseudometric-Metric-Space M))
-  isometric-equiv-metric-quotient-Metric-Space' =
-    ( unit-map-metric-quotient-Metric-Space M ,
-      is-equiv-unit-map-metric-quotient-Metric-Space M ,
-      is-isometry-unit-map-metric-quotient-Pseudometric-Space
+  isometric-equiv-unit-metric-quotient-Metric-Space' =
+    ( map-unit-metric-quotient-Metric-Space M ,
+      is-equiv-map-unit-metric-quotient-Metric-Space M ,
+      is-isometry-map-unit-metric-quotient-Pseudometric-Space
         ( pseudometric-Metric-Space M))
 ```
 
@@ -182,6 +182,6 @@ module _
         ( metric-quotient-Pseudometric-Space
           ( pseudometric-Metric-Space
             ( metric-quotient-Pseudometric-Space M)))
-        ( isometric-equiv-metric-quotient-Metric-Space'
+        ( isometric-equiv-unit-metric-quotient-Metric-Space'
           ( metric-quotient-Pseudometric-Space M)))
 ```

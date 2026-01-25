@@ -1,4 +1,4 @@
-# Unit map of metric quotients of pseudometric spaces
+# The unit map of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -34,7 +34,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 ## Idea
 
 The
-{{#concept "unit map" Disambiguation="of metric quotients" Agda=unit-map-metric-quotient-Pseudometric-Space}}
+{{#concept "unit map" Disambiguation="of metric quotients" Agda=map-unit-metric-quotient-Pseudometric-Space}}
 of the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 construction is the [quotient map](foundation.set-quotients.md)
@@ -49,74 +49,6 @@ pseudometric space `P` to the underlying pseudometric space of the
 
 ## Definitions
 
-### Homomorphisms from pseudometric spaces to metric quotients
-
-#### Maps
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (P : Pseudometric-Space l1 l2)
-  (Q : Pseudometric-Space l3 l4)
-  where
-
-  map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l3 ⊔ l4)
-  map-metric-quotient-Pseudometric-Space =
-    map-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-```
-
-#### Short maps
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (P : Pseudometric-Space l1 l2)
-  (Q : Pseudometric-Space l3 l4)
-  where
-
-  short-map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  short-map-metric-quotient-Pseudometric-Space =
-    short-map-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-
-  map-short-map-metric-quotient-Pseudometric-Space :
-    short-map-metric-quotient-Pseudometric-Space →
-    map-metric-quotient-Pseudometric-Space P Q
-  map-short-map-metric-quotient-Pseudometric-Space =
-    map-short-map-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-```
-
-#### Isometries
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (P : Pseudometric-Space l1 l2)
-  (Q : Pseudometric-Space l3 l4)
-  where
-
-  isometry-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  isometry-metric-quotient-Pseudometric-Space =
-    isometry-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-
-  short-map-isometry-metric-quotient-Pseudometric-Space :
-    isometry-metric-quotient-Pseudometric-Space →
-    short-map-metric-quotient-Pseudometric-Space P Q
-  short-map-isometry-metric-quotient-Pseudometric-Space =
-    short-map-isometry-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-
-  map-isometry-metric-quotient-Pseudometric-Space :
-    isometry-metric-quotient-Pseudometric-Space →
-    map-metric-quotient-Pseudometric-Space P Q
-  map-isometry-metric-quotient-Pseudometric-Space =
-    map-isometry-Pseudometric-Space P
-      (pseudometric-metric-quotient-Pseudometric-Space Q)
-```
-
 ### The unit map from a pseudometric space to its quotient metric space
 
 ```agda
@@ -125,35 +57,37 @@ module _
   (P : Pseudometric-Space l1 l2)
   where
 
-  unit-map-metric-quotient-Pseudometric-Space :
-    map-metric-quotient-Pseudometric-Space P P
-  unit-map-metric-quotient-Pseudometric-Space =
+  map-unit-metric-quotient-Pseudometric-Space :
+    map-Pseudometric-Space
+      ( P)
+      ( pseudometric-metric-quotient-Pseudometric-Space P)
+  map-unit-metric-quotient-Pseudometric-Space =
     quotient-map (equivalence-relation-sim-Pseudometric-Space P)
 
-  is-in-class-unit-map-metric-quotient-Pseudometric-Space :
+  is-in-class-map-unit-metric-quotient-Pseudometric-Space :
     (x : type-Pseudometric-Space P) →
     is-in-class-metric-quotient-Pseudometric-Space
       ( P)
-      ( unit-map-metric-quotient-Pseudometric-Space x)
+      ( map-unit-metric-quotient-Pseudometric-Space x)
       ( x)
-  is-in-class-unit-map-metric-quotient-Pseudometric-Space =
+  is-in-class-map-unit-metric-quotient-Pseudometric-Space =
     is-in-equivalence-class-quotient-map-set-quotient
       (equivalence-relation-sim-Pseudometric-Space P)
 
-  map-subtype-unit-map-metric-quotient-Pseudometric-Space :
+  map-subtype-map-unit-metric-quotient-Pseudometric-Space :
     (x : type-Pseudometric-Space P) →
     type-subtype-metric-quotient-Pseudometric-Space P
-      (unit-map-metric-quotient-Pseudometric-Space x)
-  map-subtype-unit-map-metric-quotient-Pseudometric-Space =
+      (map-unit-metric-quotient-Pseudometric-Space x)
+  map-subtype-map-unit-metric-quotient-Pseudometric-Space =
     inhabitant-equivalence-class-quotient-map-set-quotient
       (equivalence-relation-sim-Pseudometric-Space P)
 
-  compute-unit-map-metric-quotient-Pseudometric-Space :
+  compute-map-unit-metric-quotient-Pseudometric-Space :
     (X : type-metric-quotient-Pseudometric-Space P) →
     {x : type-Pseudometric-Space P} →
     is-in-class-metric-quotient-Pseudometric-Space P X x →
-    unit-map-metric-quotient-Pseudometric-Space x ＝ X
-  compute-unit-map-metric-quotient-Pseudometric-Space X {x} x∈X =
+    map-unit-metric-quotient-Pseudometric-Space x ＝ X
+  compute-map-unit-metric-quotient-Pseudometric-Space X {x} x∈X =
     eq-set-quotient-equivalence-class-set-quotient
       ( equivalence-relation-sim-Pseudometric-Space P)
       ( X)
@@ -162,7 +96,7 @@ module _
 
 ## Properties
 
-### The unit map from a pseudometric space its quotient metric space is an isometry
+### The unit map is an isometry
 
 ```agda
 module _
@@ -170,15 +104,15 @@ module _
   (P : Pseudometric-Space l1 l2)
   where abstract
 
-  preserves-neighborhoods-unit-map-metric-quotient-Pseudometric-Space :
+  preserves-neighborhoods-map-unit-metric-quotient-Pseudometric-Space :
     (d : ℚ⁺) (x y : type-Pseudometric-Space P) →
     neighborhood-Pseudometric-Space P d x y →
     neighborhood-metric-quotient-Pseudometric-Space
       ( P)
       ( d)
-      ( unit-map-metric-quotient-Pseudometric-Space P x)
-      ( unit-map-metric-quotient-Pseudometric-Space P y)
-  preserves-neighborhoods-unit-map-metric-quotient-Pseudometric-Space
+      ( map-unit-metric-quotient-Pseudometric-Space P x)
+      ( map-unit-metric-quotient-Pseudometric-Space P y)
+  preserves-neighborhoods-map-unit-metric-quotient-Pseudometric-Space
     d x y d⟨x,y⟩ (x' , x≈x') (y' , y≈y') =
     let
       x~x' =
@@ -204,29 +138,29 @@ module _
           ( y)
           ( d⟨x,y⟩))
 
-  reflects-neighborhoods-unit-map-metric-quotient-Pseudometric-Space :
+  reflects-neighborhoods-map-unit-metric-quotient-Pseudometric-Space :
     (d : ℚ⁺) (x y : type-Pseudometric-Space P) →
     neighborhood-metric-quotient-Pseudometric-Space
       ( P)
       ( d)
-      ( unit-map-metric-quotient-Pseudometric-Space P x)
-      ( unit-map-metric-quotient-Pseudometric-Space P y) →
+      ( map-unit-metric-quotient-Pseudometric-Space P x)
+      ( map-unit-metric-quotient-Pseudometric-Space P y) →
     neighborhood-Pseudometric-Space P d x y
-  reflects-neighborhoods-unit-map-metric-quotient-Pseudometric-Space
+  reflects-neighborhoods-map-unit-metric-quotient-Pseudometric-Space
     d x y Nxy =
       Nxy
-        ( map-subtype-unit-map-metric-quotient-Pseudometric-Space P x)
-        ( map-subtype-unit-map-metric-quotient-Pseudometric-Space P y)
+        ( map-subtype-map-unit-metric-quotient-Pseudometric-Space P x)
+        ( map-subtype-map-unit-metric-quotient-Pseudometric-Space P y)
 
-  is-isometry-unit-map-metric-quotient-Pseudometric-Space :
+  is-isometry-map-unit-metric-quotient-Pseudometric-Space :
     is-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-metric-quotient-Pseudometric-Space P)
-      ( unit-map-metric-quotient-Pseudometric-Space P)
-  pr1 (is-isometry-unit-map-metric-quotient-Pseudometric-Space d x y) =
-    preserves-neighborhoods-unit-map-metric-quotient-Pseudometric-Space d x y
-  pr2 (is-isometry-unit-map-metric-quotient-Pseudometric-Space d x y) =
-    reflects-neighborhoods-unit-map-metric-quotient-Pseudometric-Space d x y
+      ( map-unit-metric-quotient-Pseudometric-Space P)
+  pr1 (is-isometry-map-unit-metric-quotient-Pseudometric-Space d x y) =
+    preserves-neighborhoods-map-unit-metric-quotient-Pseudometric-Space d x y
+  pr2 (is-isometry-map-unit-metric-quotient-Pseudometric-Space d x y) =
+    reflects-neighborhoods-map-unit-metric-quotient-Pseudometric-Space d x y
 ```
 
 ### The unit isometry from a pseudometric space to its quotient metric space
@@ -236,11 +170,13 @@ module _
   {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
   where
 
-  unit-isometry-metric-quotient-Pseudometric-Space :
-    isometry-metric-quotient-Pseudometric-Space P P
-  unit-isometry-metric-quotient-Pseudometric-Space =
-    ( unit-map-metric-quotient-Pseudometric-Space P ,
-      is-isometry-unit-map-metric-quotient-Pseudometric-Space P)
+  isometry-unit-metric-quotient-Pseudometric-Space :
+    isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-metric-quotient-Pseudometric-Space P)
+  isometry-unit-metric-quotient-Pseudometric-Space =
+    ( map-unit-metric-quotient-Pseudometric-Space P ,
+      is-isometry-map-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ### The unit short map from a pseudometric space to its quotient metric space
@@ -250,11 +186,15 @@ module _
   {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
   where
 
-  unit-short-map-metric-quotient-Pseudometric-Space :
-    short-map-metric-quotient-Pseudometric-Space P P
-  unit-short-map-metric-quotient-Pseudometric-Space =
-    short-map-isometry-metric-quotient-Pseudometric-Space P P
-      (unit-isometry-metric-quotient-Pseudometric-Space P)
+  short-map-unit-metric-quotient-Pseudometric-Space :
+    short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-metric-quotient-Pseudometric-Space P)
+  short-map-unit-metric-quotient-Pseudometric-Space =
+    short-map-isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-metric-quotient-Pseudometric-Space P)
+      (isometry-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ## See also
