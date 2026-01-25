@@ -77,7 +77,7 @@ numbers, `g` is a
 of `f` if there [exists](foundation.existential-quantification.md) a modulus
 function `μ` such that for `ε : ℚ⁺` and any `x` and `y` in `[a, b]` within a
 `μ(ε)`-[neighborhood](real-numbers.metric-space-of-real-numbers.md) of each
-other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|$$
+other, we have $$|f(y) - f(x) - g(x)(y - x)| ≤ ε|y - x|.$$
 
 ## Definition
 
@@ -591,7 +591,7 @@ module _
                             ( leq-le-ℚ ε'+ε'<ε)))))
 
 abstract
-  is-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+  is-ucont-map-derivative-differentiable-real-function-proper-closed-interval-ℝ :
     {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
     (f : differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]) →
     is-uniformly-continuous-real-function-proper-closed-interval-ℝ
@@ -607,7 +607,7 @@ abstract
       ( f')
       ( Df=f')
 
-ucont-derivative-differentiable-real-function-proper-closed-interval-ℝ :
+ucont-map-derivative-differentiable-real-function-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
   differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
   uniformly-continuous-real-function-proper-closed-interval-ℝ l1 (l1 ⊔ l2) [a,b]

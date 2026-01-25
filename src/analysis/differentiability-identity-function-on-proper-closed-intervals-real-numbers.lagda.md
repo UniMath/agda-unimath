@@ -54,7 +54,7 @@ module _
   where
 
   abstract
-    derivative-id-real-function-proper-closed-interval-ℝ :
+    is-derivative-const-one-id-real-function-proper-closed-interval-ℝ :
       is-derivative-real-function-proper-closed-interval-ℝ
         ( [a,b])
         ( pr1)
@@ -87,7 +87,7 @@ module _
                     is-nonnegative-real-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
 
-differentiable-id-function-proper-closed-interval-ℝ :
+id-differentiable-function-proper-closed-interval-ℝ :
   {l : Level} ([a,b] : proper-closed-interval-ℝ l l) →
   differentiable-real-function-proper-closed-interval-ℝ l [a,b]
 differentiable-id-function-proper-closed-interval-ℝ {l} [a,b] =

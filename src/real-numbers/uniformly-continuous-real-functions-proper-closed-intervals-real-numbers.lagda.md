@@ -174,7 +174,7 @@ module _
                   ( is-symmetric-neighborhood-ℝ (μ ε') (pr1 z) (pr1 x) Nεzx))))
 ```
 
-### The image of a proper closed interval under a a uniformly continuous real function is inhabited and totally bounded
+### The image of a proper closed interval under a uniformly continuous real function is inhabited and totally bounded
 
 ```agda
 module _

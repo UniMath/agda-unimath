@@ -207,7 +207,7 @@ short-map-clamp-proper-closed-interval-ℝ [a,b] =
     ( closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
-### The subtype of a proper closed interval is inhabited
+### The underlying subtype of a proper closed interval is inhabited
 
 ```agda
 abstract
