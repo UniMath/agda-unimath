@@ -9,6 +9,7 @@ module complex-numbers.addition-complex-numbers where
 ```agda
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -105,6 +106,20 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x +ℂ y) (x' +ℂ y')
   preserves-sim-add-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-add-ℝ a~a' c~c' , preserves-sim-add-ℝ b~b' d~d')
+```
+
+### Adding raised complex numbers
+
+```agda
+abstract
+  add-raise-ℂ :
+    {l1 l2 : Level} {z : ℂ l1} {w : ℂ l2} (l3 l4 : Level) →
+    raise-ℂ l3 z +ℂ raise-ℂ l4 w ＝ raise-ℂ (l3 ⊔ l4) (z +ℂ w)
+  add-raise-ℂ {_} {_} {z} {w} l3 l4 =
+    eq-sim-ℂ
+      ( transitive-sim-ℂ _ _ _
+        ( sim-raise-ℂ (l3 ⊔ l4) (z +ℂ w))
+        ( preserves-sim-add-ℂ (sim-raise-ℂ' l3 z) (sim-raise-ℂ' l4 w)))
 ```
 
 ### The sum of `z` and `conjugate-ℂ z` is double `re-ℂ z`

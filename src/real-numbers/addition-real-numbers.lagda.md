@@ -612,6 +612,19 @@ abstract
       ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
 ```
 
+### Addition preserves the property of being zero
+
+```agda
+abstract
+  preserves-is-zero-add-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    is-zero-ℝ x → is-zero-ℝ y → is-zero-ℝ (x +ℝ y)
+  preserves-is-zero-add-ℝ x~0 y~0 =
+    transitive-sim-ℝ _ _ _
+      ( sim-eq-ℝ (right-unit-law-add-ℝ _))
+      ( preserves-sim-add-ℝ x~0 y~0)
+```
+
 ### Adding raised real numbers
 
 ```agda
