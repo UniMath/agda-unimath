@@ -115,22 +115,23 @@ module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
   (Q : Pseudometric-Space l1' l2')
-  (f : short-map-Pseudometric-Space P Q)
   where
 
   short-map-metric-quotient-short-map-Pseudometric-Space :
+    short-map-Pseudometric-Space P Q →
     short-map-metric-quotient-Pseudometric-Space P Q
-  short-map-metric-quotient-short-map-Pseudometric-Space =
+  short-map-metric-quotient-short-map-Pseudometric-Space f =
     short-map-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space Q)
       ( postcomp-short-map-unit-metric-quotient-Pseudometric-Space P Q f)
 
-  map-short-map-metric-quotient-short-map-Pseudometric-Space :
+  map-metric-quotient-short-map-Pseudometric-Space :
+    short-map-Pseudometric-Space P Q →
     map-metric-quotient-Pseudometric-Space P Q
-  map-short-map-metric-quotient-short-map-Pseudometric-Space =
-    map-short-map-metric-quotient-Pseudometric-Space P Q
-      short-map-metric-quotient-short-map-Pseudometric-Space
+  map-metric-quotient-short-map-Pseudometric-Space =
+    map-short-map-metric-quotient-Pseudometric-Space P Q ∘
+    short-map-metric-quotient-short-map-Pseudometric-Space
 ```
 
 ## Properties
@@ -145,12 +146,12 @@ module _
   (f : short-map-Pseudometric-Space P Q)
   where
 
-  coh-square-map-short-map-metric-quotient-short-map-Pseudometric-Space :
-    ( map-short-map-metric-quotient-short-map-Pseudometric-Space P Q f ∘
+  coh-square-map-metric-quotient-short-map-Pseudometric-Space :
+    ( map-metric-quotient-short-map-Pseudometric-Space P Q f ∘
       map-unit-metric-quotient-Pseudometric-Space P) ~
     ( map-unit-metric-quotient-Pseudometric-Space Q ∘
       map-short-map-Pseudometric-Space P Q f)
-  coh-square-map-short-map-metric-quotient-short-map-Pseudometric-Space =
+  coh-square-map-metric-quotient-short-map-Pseudometric-Space =
     is-extension-exten-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space Q)
@@ -185,7 +186,7 @@ module _
         ( pseudometric-metric-quotient-Pseudometric-Space Q)
         ( short-map-unit-metric-quotient-Pseudometric-Space Q)
         ( f))
-      ( coh-square-map-short-map-metric-quotient-short-map-Pseudometric-Space)
+      ( coh-square-map-metric-quotient-short-map-Pseudometric-Space)
 ```
 
 ### The action on short maps of metric quotients preserves the identity
@@ -206,7 +207,7 @@ module _
   pr2 exten-id-short-map-metric-quotient-Pseudometric-Space = refl-htpy
 
   htpy-id-short-map-metric-quotient-short-map-Pseudometric-Space :
-    ( map-short-map-metric-quotient-short-map-Pseudometric-Space P P
+    ( map-metric-quotient-short-map-Pseudometric-Space P P
       ( id-short-map-Pseudometric-Space P)) ~
     ( id)
   htpy-id-short-map-metric-quotient-short-map-Pseudometric-Space =
@@ -259,29 +260,21 @@ module _
       ( short-map-metric-quotient-short-map-Pseudometric-Space Q R g)
       ( short-map-metric-quotient-short-map-Pseudometric-Space P Q f)
   pr2 exten-comp-short-map-metric-quotient-Pseudometric-Space =
-    ( map-short-map-metric-quotient-short-map-Pseudometric-Space Q R g) ·l
-    ( coh-square-map-short-map-metric-quotient-short-map-Pseudometric-Space
-      ( P)
-      ( Q)
-      ( f)) ∙h
-    ( coh-square-map-short-map-metric-quotient-short-map-Pseudometric-Space
-      ( Q)
-      ( R)
-      ( g)) ·r
+    ( map-metric-quotient-short-map-Pseudometric-Space Q R g) ·l
+    ( coh-square-map-metric-quotient-short-map-Pseudometric-Space P Q f) ∙h
+    ( coh-square-map-metric-quotient-short-map-Pseudometric-Space Q R g) ·r
     ( map-short-map-Pseudometric-Space P Q f)
 
   htpy-comp-map-hom-comp-short-map-metric-quotient-Pseudometric-Space :
-    ( map-short-map-metric-quotient-short-map-Pseudometric-Space P R
+    ( map-metric-quotient-short-map-Pseudometric-Space P R
       ( comp-short-map-Pseudometric-Space P Q R g f)) ~
-    ( map-short-map-metric-quotient-short-map-Pseudometric-Space Q R g ∘
-      map-short-map-metric-quotient-short-map-Pseudometric-Space P Q f)
+    ( map-metric-quotient-short-map-Pseudometric-Space Q R g ∘
+      map-metric-quotient-short-map-Pseudometric-Space P Q f)
   htpy-comp-map-hom-comp-short-map-metric-quotient-Pseudometric-Space =
     all-htpy-map-extension-short-map-metric-quotient-Pseudometric-Space
       ( P)
       ( metric-quotient-Pseudometric-Space R)
-      ( postcomp-short-map-unit-metric-quotient-Pseudometric-Space
-        ( P)
-        ( R)
+      ( postcomp-short-map-unit-metric-quotient-Pseudometric-Space P R
         ( comp-short-map-Pseudometric-Space P Q R g f))
       ( exten-comp-short-map-metric-quotient-Pseudometric-Space)
 
