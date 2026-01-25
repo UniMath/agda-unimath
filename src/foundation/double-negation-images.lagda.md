@@ -13,7 +13,7 @@ open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.hilbert-epsilon-operators-maps
-open import foundation.slice
+open import foundation.morphisms-slice
 open import foundation.split-surjective-maps
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels

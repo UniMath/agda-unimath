@@ -9,15 +9,16 @@ module foundation.functoriality-set-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-slice
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-truncation
 open import foundation.images
 open import foundation.injective-maps
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-truncations
