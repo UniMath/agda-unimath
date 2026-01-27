@@ -35,6 +35,13 @@ open import real-numbers.similarity-real-numbers
 
 ## Idea
 
+The
+{{#concept "binary mean" Disambiguation="of real numbers" Agda=binary-mean-ℝ}}
+of two [real numbers](real-numbers.dedekind-real-numbers.md) `x` and `y` is
+$\frac{x + y}{2}$.
+
+## Definition
+
 ```agda
 module _
   {l1 l2 : Level}

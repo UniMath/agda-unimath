@@ -20,11 +20,11 @@ The
 {{#concept "classical intermediate value theorem" WDID=Q245098 WD="intermediate value theorem"}}
 states that for a
 [pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
-`f` on the
-[real numbers](real-numbers.dedekind-real-numbers.md), real numbers `a` and `b`
-with `a` [less than or equal to](real-numbers.inequality-real-numbers.md) `b`
-such that `f a` is [negative](real-numbers.negative-real-numbers.md) and `f b`
-is [positive](real-numbers.positive-real-numbers.md), there exists a `c` with
+`f` on the [real numbers](real-numbers.dedekind-real-numbers.md), real numbers
+`a` and `b` with `a`
+[less than or equal to](real-numbers.inequality-real-numbers.md) `b` such that
+`f a` is [negative](real-numbers.negative-real-numbers.md) and `f b` is
+[positive](real-numbers.positive-real-numbers.md), there exists a `c` with
 `a ≤ c ≤ b` such that `f c` is zero.
 
 $n$Lab states that this theorem is known to be invalid in constructive contexts.

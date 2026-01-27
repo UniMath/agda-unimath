@@ -4,8 +4,8 @@
 module analysis where
 
 open import analysis.absolute-convergence-series-real-numbers public
-open import analysis.classical-intermediate-value-theorem public
 open import analysis.alternation-sequences-metric-abelian-groups public
+open import analysis.classical-intermediate-value-theorem public
 open import analysis.comparison-test-series-real-numbers public
 open import analysis.complete-metric-abelian-groups public
 open import analysis.convergent-series-complete-metric-abelian-groups public

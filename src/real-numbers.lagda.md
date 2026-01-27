@@ -56,6 +56,7 @@ open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-difference-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
+open import real-numbers.iterated-halving-difference-real-numbers public
 open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
@@ -123,6 +124,7 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.strictly-increasing-endomaps-real-numbers public
+open import real-numbers.strictly-increasing-functions-real-numbers public
 open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public

@@ -40,8 +40,8 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.limits-of-sequences-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -85,7 +85,7 @@ abstract
     tr
       ( is-limit-sequence-ℝ (real-ℚ ∘ u))
       ( eq-raise-ℝ zero-ℝ)
-      ( preserves-limits-sequence-isometry-Metric-Space
+      ( is-limit-map-sequence-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ lzero)
         ( isometry-real-ℚ)
@@ -134,8 +134,7 @@ abstract
                       ( inv (right-zero-law-dist-ℚ (b n))))
               ≤ real-ℚ⁺ ε
                 by
-                  preserves-leq-real-ℚ
-                    ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
+                  preserves-leq-real-ℚ ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
         ( lim-b=0)
 ```
 
@@ -150,16 +149,8 @@ abstract
   preserves-is-zero-limit-left-mul-sequence-ℝ {l1} {l2} c u u→0 =
     tr
       ( is-limit-sequence-ℝ (mul-ℝ c ∘ u))
-      ( eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          c *ℝ raise-zero-ℝ l2
-          ~ℝ c *ℝ zero-ℝ
-            by preserves-sim-left-mul-ℝ c _ _ (sim-raise-ℝ' l2 zero-ℝ)
-          ~ℝ zero-ℝ
-            by right-zero-law-mul-ℝ c
-          ~ℝ raise-zero-ℝ (l1 ⊔ l2)
-            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ))
-      ( preserves-limits-sequence-uniformly-continuous-endomap-ℝ
+      ( right-raise-zero-law-mul-ℝ c)
+      ( is-limit-map-sequence-uniformly-continuous-endomap-ℝ
         ( uniformly-continuous-map-right-mul-ℝ l2 c)
         ( u)
         ( _)

@@ -54,7 +54,8 @@ open import real-numbers.distance-real-numbers
 open import real-numbers.increasing-sequences-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.iterated-halving-difference-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -70,6 +71,7 @@ open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.unit-closed-interval-real-numbers
 ```
 
 </details>
@@ -80,11 +82,11 @@ The
 {{#concept "constructive intermediate value theorem" Agda=intermediate-value-theorem-ℝ}}
 states that for a
 [pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
-`f` on the
-[real numbers](real-numbers.dedekind-real-numbers.md), real numbers `a` and `b`
-with `a` [less than or equal to](real-numbers.inequality-real-numbers.md) `b`
-such that `f a` is [negative](real-numbers.negative-real-numbers.md) and `f b`
-is [positive](real-numbers.positive-real-numbers.md), then for every
+`f` on the [real numbers](real-numbers.dedekind-real-numbers.md), real numbers
+`a` and `b` with `a`
+[less than or equal to](real-numbers.inequality-real-numbers.md) `b` such that
+`f a` is [negative](real-numbers.negative-real-numbers.md) and `f b` is
+[positive](real-numbers.positive-real-numbers.md), then for every
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`
 there exists a `c` with `a ≤ c ≤ b` such that the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of `f c` is at
@@ -206,28 +208,19 @@ module _
 ### `bₙ - aₙ = (b - a)/2ⁿ`
 
 ```agda
-  private
-    ⟨b-a⟩/2^ : ℕ → ℝ⁰⁺ l
-    ⟨b-a⟩/2^ n =
-      nonnegative-diff-leq-ℝ a≤b *ℝ⁰⁺
-      nonnegative-real-ℚ⁺ (power-ℚ⁺ n one-half-ℚ⁺)
-
-    ⟨b-a⟩/2^1+ : ℕ → ℝ⁰⁺ l
-    ⟨b-a⟩/2^1+ n = ⟨b-a⟩/2^ (succ-ℕ n)
-
   abstract
     interleaved mutual
       diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ :
         (n : ℕ) →
         ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
           ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
-        ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ n one-half-ℚ⁺))
+        ( iterated-half-diff-leq-ℝ a≤b n)
 
       diff-upper-bound-seq-intermediate-value-theorem-ℝ :
         (n : ℕ) →
         ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
           ( seq-intermediate-value-theorem-ℝ n)) ＝
-        ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
+        ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
 
       diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ 0 =
         inv (right-unit-law-mul-ℝ (b -ℝ a))
@@ -248,27 +241,21 @@ module _
               ( upper-bound-seq-intermediate-value-theorem-ℝ n)
               ( neg-ℝ (lower-bound-seq-intermediate-value-theorem-ℝ n))
             by diff-right-binary-mean-ℝ _ _
-          ＝ one-half-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^ n)
+          ＝ one-half-ℝ *ℝ iterated-half-diff-leq-ℝ a≤b n
             by
               ap-mul-ℝ
                 ( refl {x = one-half-ℝ})
                 ( diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ
                   ( n))
-          ＝
-            ( b -ℝ a) *ℝ
-            ( one-half-ℝ *ℝ real-ℚ (rational-power-ℚ⁺ n one-half-ℚ⁺))
-            by left-swap-mul-ℝ one-half-ℝ (b -ℝ a) _
-          ＝ (b -ℝ a) *ℝ real-ℚ (one-half-ℚ *ℚ rational-power-ℚ⁺ n one-half-ℚ⁺)
-            by ap-mul-ℝ refl (mul-real-ℚ _ _)
-          ＝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n)
-            by ap-mul-ℝ refl (ap real-ℚ⁺ (inv (power-succ-ℚ⁺' n one-half-ℚ⁺)))
+          ＝ iterated-half-diff-leq-ℝ a≤b (succ-ℕ n)
+            by mul-one-half-iterated-half-diff-leq-ℝ a≤b n
 
   abstract
     diff-lower-bound-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
         ( lower-bound-seq-intermediate-value-theorem-ℝ n)) ＝
-      ( (b -ℝ a) *ℝ real-ℚ⁺ (power-ℚ⁺ (succ-ℕ n) one-half-ℚ⁺))
+      ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
     diff-lower-bound-seq-intermediate-value-theorem-ℝ n =
       ( diff-left-binary-mean-ℝ _ _) ∙
       ( inv (diff-right-binary-mean-ℝ _ _)) ∙
@@ -367,25 +354,6 @@ module _
 ### The `cₙ` are a Cauchy sequence with a limit `c`
 
 ```agda
-  private abstract
-    is-zero-limit-⟨b-a⟩/2^ :
-      is-zero-limit-sequence-ℝ (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^)
-    is-zero-limit-⟨b-a⟩/2^ =
-      preserves-is-zero-limit-left-mul-sequence-ℝ
-        ( b -ℝ a)
-        ( _)
-        ( is-zero-limit-real-is-zero-limit-sequence-ℚ _
-          ( is-zero-limit-power-le-one-ℚ⁺
-            ( one-half-ℚ⁺)
-            ( le-one-half-one-ℚ)))
-
-    is-zero-limit-⟨b-a⟩/2^1+ :
-      is-zero-limit-sequence-ℝ (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^1+)
-    is-zero-limit-⟨b-a⟩/2^1+ =
-      preserves-is-limit-subsequence-ℝ
-        ( tail-subsequence (real-ℝ⁰⁺ ∘ ⟨b-a⟩/2^))
-        ( is-zero-limit-⟨b-a⟩/2^)
-
   abstract
     is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ :
       is-zero-limit-sequence-ℝ
@@ -395,7 +363,7 @@ module _
     is-zero-limit-diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ =
       preserves-is-zero-limit-htpy-sequence-ℝ
         ( inv-htpy diff-upper-lower-bound-seq-intermediate-value-theorem-ℝ)
-        ( is-zero-limit-⟨b-a⟩/2^)
+        ( is-zero-limit-iterated-half-diff-leq-ℝ a≤b)
 
     has-limit-seq-intermediate-value-theorem-ℝ :
       has-limit-sequence-ℝ seq-intermediate-value-theorem-ℝ
@@ -513,7 +481,7 @@ module _
           lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n)
           ~ℝ
             ( seq-intermediate-value-theorem-ℝ n) -ℝ
-            ( one-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+            ( one-ℝ *ℝ iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
             by
               preserves-sim-diff-ℝ
                 ( refl-sim-ℝ _)
@@ -525,15 +493,15 @@ module _
             ( ( lower-bound-seq-intermediate-value-theorem-ℝ n) +ℝ
               ( ( seq-intermediate-value-theorem-ℝ n) -ℝ
                 ( lower-bound-seq-intermediate-value-theorem-ℝ n))) -ℝ
-            ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+            ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
             by
               preserves-sim-diff-ℝ
                 ( symmetric-sim-ℝ (add-right-diff-ℝ _ _))
                 ( sim-eq-ℝ (left-unit-law-mul-ℝ _))
           ~ℝ
             ( ( lower-bound-seq-intermediate-value-theorem-ℝ n) +ℝ
-              ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))) -ℝ
-            ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+              ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))) -ℝ
+            ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
             by
               sim-eq-ℝ
                 ( ap-diff-ℝ
@@ -561,7 +529,7 @@ module _
         ( ( seq-intermediate-value-theorem-ℝ n) +ℝ
           ( ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
             ( seq-intermediate-value-theorem-ℝ n))) -ℝ
-        ( one-ℝ *ℝ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+        ( one-ℝ *ℝ iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
         by
           ap-diff-ℝ
             ( inv (eq-sim-ℝ (add-right-diff-ℝ _ _)))
@@ -572,8 +540,8 @@ module _
                   ( ε/2≤fcₙ))))
       ＝
         ( ( seq-intermediate-value-theorem-ℝ n) +ℝ
-          ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))) -ℝ
-        ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ n))
+          ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))) -ℝ
+        ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ n))
         by
           ap-diff-ℝ
             ( ap-add-ℝ
@@ -851,25 +819,28 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
         let (δ₁ , δ₂ , δ₁+δ₂=δ) = split-ℚ⁺ δ
         (μseq , is-mod-μseq) ←
           is-limit-lim-seq-intermediate-value-theorem-ℝ
-        (μba , is-mod-μba) ← is-zero-limit-⟨b-a⟩/2^1+
+        (μba , is-mod-μba) ←
+          is-limit-subsequence-ℝ
+            ( tail-subsequence (iterated-half-diff-leq-ℝ a≤b))
+            ( is-zero-limit-iterated-half-diff-leq-ℝ a≤b)
         let
           m = max-ℕ (μseq δ₁) (μba δ₂)
           ⟨b-a⟩/2¹⁺ᵐ≤δ₂ =
             chain-of-inequalities
-              real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
-              ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m) -ℝ zero-ℝ
+              iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)
+              ≤ iterated-half-diff-leq-ℝ a≤b (succ-ℕ m) -ℝ zero-ℝ
                 by leq-eq-ℝ (inv (right-unit-law-diff-ℝ _))
-              ≤ dist-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)) zero-ℝ
+              ≤ dist-ℝ (iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)) zero-ℝ
                 by leq-abs-ℝ _
-              ≤ dist-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)) (raise-zero-ℝ l)
-                by
-                  leq-sim-ℝ
-                    ( preserves-dist-right-sim-ℝ (sim-raise-ℝ l zero-ℝ))
+              ≤ dist-ℝ
+                  ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ m))
+                  ( raise-zero-ℝ l)
+                by leq-sim-ℝ (preserves-dist-right-sim-ℝ (sim-raise-ℝ l zero-ℝ))
               ≤ real-ℚ⁺ δ₂
                 by
                   leq-dist-neighborhood-ℝ
                     ( δ₂)
-                    ( real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                    ( iterated-half-diff-leq-ℝ a≤b (succ-ℕ m))
                     ( raise-zero-ℝ l)
                     ( is-mod-μba
                       ( δ₂)
@@ -894,14 +865,17 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                     ( upper-bound-seq-intermediate-value-theorem-ℝ m)
                     ( seq-intermediate-value-theorem-ℝ m)
                   by leq-eq-ℝ (commutative-dist-ℝ _ _)
-                ≤ abs-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ abs-ℝ (iterated-half-diff-leq-ℝ a≤b (succ-ℕ m))
                   by
                     leq-eq-ℝ
                       ( ap
                         ( abs-ℝ)
                         ( diff-upper-bound-seq-intermediate-value-theorem-ℝ m))
-                ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
-                  by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)
+                  by
+                    leq-eq-ℝ
+                      ( abs-real-ℝ⁰⁺
+                        ( nonnegative-iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)))
                 ≤ real-ℚ⁺ δ₂
                   by ⟨b-a⟩/2¹⁺ᵐ≤δ₂)
           Nδ₂cₘaₘ :
@@ -919,14 +893,17 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 dist-ℝ
                   ( seq-intermediate-value-theorem-ℝ m)
                   ( lower-bound-seq-intermediate-value-theorem-ℝ m)
-                ≤ abs-ℝ (real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ abs-ℝ (iterated-half-diff-leq-ℝ a≤b (succ-ℕ m))
                   by
                     leq-eq-ℝ
                       ( ap
                         ( abs-ℝ)
                         ( diff-lower-bound-seq-intermediate-value-theorem-ℝ m))
-                ≤ real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m)
-                  by leq-eq-ℝ (abs-real-ℝ⁰⁺ (⟨b-a⟩/2^1+ m))
+                ≤ iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)
+                  by
+                    leq-eq-ℝ
+                      ( abs-real-ℝ⁰⁺
+                        ( nonnegative-iterated-half-diff-leq-ℝ a≤b (succ-ℕ m)))
                 ≤ real-ℚ⁺ δ₂
                   by ⟨b-a⟩/2¹⁺ᵐ≤δ₂)
           Nδ₁ccₘ :

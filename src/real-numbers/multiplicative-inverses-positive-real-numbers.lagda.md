@@ -236,6 +236,11 @@ abstract
             by ap positive-real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)
           ＝ raise-one-ℝ⁺ lzero
             by eq-raise-ℝ⁺ one-ℝ⁺))
+
+  real-inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
+  real-inv-positive-real-ℚ⁺ q =
+    ap real-ℝ⁺ (inv-positive-real-ℚ⁺ q)
 ```
 
 ### The multiplicative inverse operation reverses inequality
@@ -432,25 +437,4 @@ module _
         ( λ z → sim-ℝ z y)
         ( right-swap-mul-ℝ _ _ _)
         ( cancel-right-mul-div-ℝ⁺)
-```
-
-### The inclusion of rational numbers preserves multiplicative inverses
-
-```agda
-abstract
-  real-inv-positive-real-ℚ⁺ :
-    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
-  real-inv-positive-real-ℚ⁺ q =
-    eq-sim-ℝ
-      ( symmetric-sim-ℝ
-        ( unique-right-inv-ℝ⁺
-          ( positive-real-ℚ⁺ q)
-          ( positive-real-ℚ⁺ (inv-ℚ⁺ q))
-          ( sim-eq-ℝ
-            ( mul-real-ℚ _ _ ∙ ap real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)))))
-
-  inv-positive-real-ℚ⁺ :
-    (q : ℚ⁺) → inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ positive-real-ℚ⁺ (inv-ℚ⁺ q)
-  inv-positive-real-ℚ⁺ q =
-    eq-ℝ⁺ _ _ (real-inv-positive-real-ℚ⁺ q)
 ```
