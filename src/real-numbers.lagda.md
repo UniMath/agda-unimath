@@ -133,7 +133,7 @@ open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise
 open import real-numbers.unbounded-endomaps-real-numbers public
 open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
-open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
+open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-nonnegative-real-numbers public

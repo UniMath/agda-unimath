@@ -2,13 +2,13 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-module analysis.addition-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
+module analysis.addition-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
@@ -39,7 +39,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 Given two
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
+[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 functions `f` and `g` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real
@@ -57,22 +57,22 @@ module _
   (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
   (g' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l3))
   (is-derivative-f-f' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f')
+    is-derivative-real-map-proper-closed-interval-ℝ [a,b] f f')
   (is-derivative-g-g' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] g g')
+    is-derivative-real-map-proper-closed-interval-ℝ [a,b] g g')
   where
 
   abstract
-    is-derivative-add-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
+    is-derivative-add-real-map-proper-closed-interval-ℝ :
+      is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( λ x → f x +ℝ g x)
         ( λ x → f' x +ℝ g' x)
-    is-derivative-add-real-function-proper-closed-interval-ℝ =
+    is-derivative-add-real-map-proper-closed-interval-ℝ =
       let
         open
           do-syntax-trunc-Prop
-            ( is-derivative-prop-real-function-proper-closed-interval-ℝ
+            ( is-derivative-prop-real-map-proper-closed-interval-ℝ
               ( [a,b])
               ( λ x → f x +ℝ g x)
               ( λ x → f' x +ℝ g' x))
@@ -80,7 +80,7 @@ module _
       in do
         (μ , is-mod-μ) ← is-derivative-f-f'
         (ν , is-mod-ν) ← is-derivative-g-g'
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+        is-derivative-modulus-of-real-map-proper-closed-interval-ℝ [a,b]
           ( _)
           ( _)
           ( λ ε →
@@ -142,16 +142,16 @@ module _
                   ≤ real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 y)
                     by leq-eq-ℝ (ap-mul-ℝ (ap real-ℚ⁺ ε₁+ε₂=ε) refl)))
 
-add-differentiable-real-function-proper-closed-interval-ℝ :
+add-differentiable-real-map-proper-closed-interval-ℝ :
   {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
-  differentiable-real-function-proper-closed-interval-ℝ l2 [a,b] →
-  differentiable-real-function-proper-closed-interval-ℝ l3 [a,b] →
-  differentiable-real-function-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
-add-differentiable-real-function-proper-closed-interval-ℝ
+  differentiable-real-map-proper-closed-interval-ℝ l2 [a,b] →
+  differentiable-real-map-proper-closed-interval-ℝ l3 [a,b] →
+  differentiable-real-map-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
+add-differentiable-real-map-proper-closed-interval-ℝ
   [a,b] (f , f' , Df=f') (g , g' , Dg=g') =
   ( ( λ x → f x +ℝ g x) ,
     ( λ x → f' x +ℝ g' x) ,
-    is-derivative-add-real-function-proper-closed-interval-ℝ
+    is-derivative-add-real-map-proper-closed-interval-ℝ
       ( [a,b])
       ( f)
       ( g)

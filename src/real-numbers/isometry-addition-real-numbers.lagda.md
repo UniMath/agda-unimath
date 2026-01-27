@@ -108,8 +108,9 @@ module _
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-left-add-ℝ)
 
-  uniformly-continuous-map-right-add-ℝ : uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
-  uniformly-continuous-right-add-ℝ =
+  uniformly-continuous-map-right-add-ℝ :
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-map-right-add-ℝ =
     uniformly-continuous-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))

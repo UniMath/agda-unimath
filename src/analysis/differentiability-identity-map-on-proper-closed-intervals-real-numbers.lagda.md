@@ -1,15 +1,15 @@
-# Differentiability of the identity function on proper closed intervals in the real numbers
+# Differentiability of the identity map on proper closed intervals in the real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-identity-function-on-proper-closed-intervals-real-numbers where
+module analysis.differentiability-identity-map-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import elementary-number-theory.positive-rational-numbers
 
@@ -41,7 +41,7 @@ Given a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` on the [real numbers](real-numbers.dedekind-real-numbers.md), the
 [identity function](foundation.function-types.md) on `[a, b]` is
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md),
+[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
 and its derivative is the [constant](foundation.constant-maps.md)
 [one](real-numbers.rational-real-numbers.md) function.
 
@@ -54,16 +54,16 @@ module _
   where
 
   abstract
-    is-derivative-const-one-id-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
+    is-derivative-const-one-id-real-map-proper-closed-interval-ℝ :
+      is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( pr1)
         ( const (type-proper-closed-interval-ℝ l [a,b]) (raise-one-ℝ l))
-    derivative-id-real-function-proper-closed-interval-ℝ =
+    is-derivative-const-one-id-real-map-proper-closed-interval-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+        is-derivative-modulus-of-real-map-proper-closed-interval-ℝ [a,b]
           ( _)
           ( _)
           ( λ ε →
@@ -87,11 +87,11 @@ module _
                     is-nonnegative-real-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
 
-id-differentiable-function-proper-closed-interval-ℝ :
+id-differentiable-map-proper-closed-interval-ℝ :
   {l : Level} ([a,b] : proper-closed-interval-ℝ l l) →
-  differentiable-real-function-proper-closed-interval-ℝ l [a,b]
-differentiable-id-function-proper-closed-interval-ℝ {l} [a,b] =
+  differentiable-real-map-proper-closed-interval-ℝ l [a,b]
+id-differentiable-map-proper-closed-interval-ℝ {l} [a,b] =
   ( pr1 ,
     ( λ _ → raise-one-ℝ l) ,
-    derivative-id-real-function-proper-closed-interval-ℝ [a,b])
+    is-derivative-const-one-id-real-map-proper-closed-interval-ℝ [a,b])
 ```

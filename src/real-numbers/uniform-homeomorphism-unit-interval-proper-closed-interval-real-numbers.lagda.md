@@ -324,7 +324,7 @@ module _
               ( metric-space-ℝ (l1 ⊔ l2 ⊔ l3))
               ( metric-space-ℝ (l1 ⊔ l2 ⊔ l3))
               ( comp-uniformly-continuous-endomap-ℝ
-                ( uniformly-continuous-right-add-ℝ a)
+                ( uniformly-continuous-map-right-add-ℝ a)
                 ( uniformly-continuous-map-right-mul-ℝ (l1 ⊔ l2 ⊔ l3) (b -ℝ a)))
               ( uniformly-continuous-inclusion-subspace-Metric-Space
                 ( metric-space-ℝ (l1 ⊔ l2 ⊔ l3))
@@ -360,7 +360,7 @@ module _
                 ( uniformly-continuous-map-right-mul-ℝ
                   ( l1 ⊔ l2 ⊔ l3)
                   ( real-inv-ℝ⁺ (positive-diff-le-ℝ a<b)))
-                ( uniformly-continuous-right-add-ℝ (neg-ℝ a)))
+                ( uniformly-continuous-map-right-add-ℝ (neg-ℝ a)))
               ( uniformly-continuous-inclusion-subspace-Metric-Space
                 ( metric-space-ℝ (l1 ⊔ l2 ⊔ l3))
                 ( subtype-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])))

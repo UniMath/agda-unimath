@@ -3,13 +3,13 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.scalar-multiplication-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
+module analysis.scalar-multiplication-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
@@ -42,7 +42,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 Given a
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
+[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 function `f` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real numbers
@@ -58,21 +58,21 @@ module _
   (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
   (f' : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
   (is-derivative-f-f' :
-    is-derivative-real-function-proper-closed-interval-ℝ [a,b] f f')
+    is-derivative-real-map-proper-closed-interval-ℝ [a,b] f f')
   (c : ℝ l3)
   where
 
   abstract
-    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
+    is-derivative-scalar-mul-real-map-proper-closed-interval-ℝ :
+      is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( λ x → c *ℝ f x)
         ( λ x → c *ℝ f' x)
-    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ =
+    is-derivative-scalar-mul-real-map-proper-closed-interval-ℝ =
       let
         open
           do-syntax-trunc-Prop
-            ( is-derivative-prop-real-function-proper-closed-interval-ℝ
+            ( is-derivative-prop-real-map-proper-closed-interval-ℝ
               ( [a,b])
               ( λ x → c *ℝ f x)
               ( λ x → c *ℝ f' x))
@@ -80,7 +80,7 @@ module _
       in do
         (μ , is-mod-μ) ← is-derivative-f-f'
         (q , |c|<q) ← exists-greater-positive-rational-ℝ (abs-ℝ c)
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+        is-derivative-modulus-of-real-map-proper-closed-interval-ℝ [a,b]
           ( _)
           ( _)
           ( λ ε →
@@ -125,15 +125,15 @@ module _
                                 ( ε))))
                           ( refl)))))
 
-scalar-mul-differentiable-real-function-proper-closed-interval-ℝ :
+scalar-mul-differentiable-real-map-proper-closed-interval-ℝ :
   {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
-  ℝ l2 → differentiable-real-function-proper-closed-interval-ℝ l3 [a,b] →
-  differentiable-real-function-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
-scalar-mul-differentiable-real-function-proper-closed-interval-ℝ
+  ℝ l2 → differentiable-real-map-proper-closed-interval-ℝ l3 [a,b] →
+  differentiable-real-map-proper-closed-interval-ℝ (l2 ⊔ l3) [a,b]
+scalar-mul-differentiable-real-map-proper-closed-interval-ℝ
   [a,b] c (f , f' , Df=f') =
   ( ( λ x → c *ℝ f x) ,
     ( λ x → c *ℝ f' x) ,
-    is-derivative-scalar-mul-real-function-proper-closed-interval-ℝ
+    is-derivative-scalar-mul-real-map-proper-closed-interval-ℝ
       ( [a,b])
       ( f)
       ( f')

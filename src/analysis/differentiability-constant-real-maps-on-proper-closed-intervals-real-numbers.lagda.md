@@ -3,13 +3,13 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-constant-real-functions-on-proper-closed-intervals-real-numbers where
+module analysis.differentiability-constant-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import elementary-number-theory.positive-rational-numbers
 
@@ -41,7 +41,7 @@ Given a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` on the [real numbers](real-numbers.dedekind-real-numbers.md), any
 [constant function](foundation.constant-maps.md) on `[a, b]`, `x ↦ c`, is
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md),
+[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
 with derivative the constant [zero](real-numbers.zero-real-numbers.md) function.
 
 ## Proof
@@ -54,18 +54,18 @@ module _
   where
 
   abstract
-    derivative-constant-real-function-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
+    is-derivative-const-zero-const-real-map-proper-closed-interval-ℝ :
+      is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( const (type-proper-closed-interval-ℝ l1 [a,b]) c)
         ( const
           ( type-proper-closed-interval-ℝ l1 [a,b])
           ( raise-zero-ℝ (l1 ⊔ l2)))
-    derivative-constant-real-function-proper-closed-interval-ℝ =
+    is-derivative-const-zero-const-real-map-proper-closed-interval-ℝ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        is-derivative-modulus-of-real-function-proper-closed-interval-ℝ [a,b]
+        is-derivative-modulus-of-real-map-proper-closed-interval-ℝ [a,b]
           ( _)
           ( _)
           ( λ ε →
@@ -93,11 +93,11 @@ module _
                     is-nonnegative-real-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
 
-const-differentiable-real-function-proper-closed-interval-ℝ :
+differentiable-const-real-map-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) (c : ℝ l2) →
-  differentiable-real-function-proper-closed-interval-ℝ l2 [a,b]
-differentiable-const-real-function-proper-closed-interval-ℝ {l1} {l2} [a,b] c =
+  differentiable-real-map-proper-closed-interval-ℝ l2 [a,b]
+differentiable-const-real-map-proper-closed-interval-ℝ {l1} {l2} [a,b] c =
   ( const (type-proper-closed-interval-ℝ l1 [a,b]) c ,
     const (type-proper-closed-interval-ℝ l1 [a,b]) (raise-zero-ℝ (l1 ⊔ l2)) ,
-    derivative-constant-real-function-proper-closed-interval-ℝ [a,b] c)
+    is-derivative-const-zero-const-real-map-proper-closed-interval-ℝ [a,b] c)
 ```
