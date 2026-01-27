@@ -59,7 +59,8 @@ module _
       ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ)
 
 root-is-odd-exponent-ℝ : {l : Level} (n : ℕ) → is-odd-ℕ n → ℝ l → ℝ l
-root-is-odd-exponent-ℝ {l} n odd-n = map-inv-equiv (aut-power-is-odd-exponent-ℝ l n odd-n)
+root-is-odd-exponent-ℝ {l} n odd-n =
+  map-inv-equiv (aut-power-is-odd-exponent-ℝ l n odd-n)
 ```
 
 ## Properties

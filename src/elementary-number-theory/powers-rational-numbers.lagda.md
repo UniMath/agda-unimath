@@ -401,7 +401,8 @@ abstract
               ( le-ℚ (power-ℚ n p))
               ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
               ( le-negative-nonnegative-ℚ
-                ( power-ℚ n p , is-negative-power-is-odd-exponent-ℚ⁻ n (p , is-neg-p) odd-n)
+                ( power-ℚ n p ,
+                  is-negative-power-is-odd-exponent-ℚ⁻ n (p , is-neg-p) odd-n)
                 ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
           ( decide-is-negative-is-nonnegative-ℚ q))
       ( λ is-nonneg-p →
