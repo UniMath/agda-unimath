@@ -53,8 +53,9 @@ open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
 
+open import order-theory.cofinal-maps-posets
+open import order-theory.coinitial-maps-posets
 open import order-theory.posets
-open import order-theory.unbounded-maps-posets
 ```
 
 </details>
@@ -506,7 +507,7 @@ abstract
 ```agda
 abstract
   is-unbounded-above-power-is-odd-ℚ :
-    (n : ℕ) → is-odd-ℕ n → is-unbounded-above-map-Poset ℚ-Poset (power-ℚ n)
+    (n : ℕ) → is-odd-ℕ n → is-cofinal-map-Poset ℚ-Poset (power-ℚ n)
   is-unbounded-above-power-is-odd-ℚ n odd-n q =
     let
       q' = max-ℚ q one-ℚ
@@ -525,7 +526,7 @@ abstract
           ( leq-left-max-ℚ q one-ℚ))
 
   is-unbounded-below-power-is-odd-ℚ :
-    (n : ℕ) → is-odd-ℕ n → is-unbounded-below-map-Poset ℚ-Poset (power-ℚ n)
+    (n : ℕ) → is-odd-ℕ n → is-coinitial-map-Poset ℚ-Poset (power-ℚ n)
   is-unbounded-below-power-is-odd-ℚ n odd-n q =
     map-exists _
       ( neg-ℚ)
