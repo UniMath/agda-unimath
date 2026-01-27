@@ -125,15 +125,22 @@ module _
   is-derivative-real-map-proper-closed-interval-ℝ =
     type-Prop is-derivative-prop-real-map-proper-closed-interval-ℝ
 
-differentiable-real-map-proper-closed-interval-ℝ :
-  {l1 : Level} (l2 : Level) ([a,b] : proper-closed-interval-ℝ l1 l1) →
-  UU (lsuc (l1 ⊔ l2))
-differentiable-real-map-proper-closed-interval-ℝ {l1} l2 [a,b] =
-  Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
-    ( λ f →
-      Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
-        ( λ f' →
-          is-derivative-real-map-proper-closed-interval-ℝ [a,b] f f'))
+module _
+  {l1 : Level}
+  (l2 : Level)
+  ([a,b] : proper-closed-interval-ℝ l1 l1)
+  where
+
+  derivative-real-map-proper-closed-interval-ℝ :
+    (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) → UU (lsuc (l1 ⊔ l2))
+  derivative-real-map-proper-closed-interval-ℝ f =
+    Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
+      ( λ f' → is-derivative-real-map-proper-closed-interval-ℝ [a,b] f f')
+
+  differentiable-real-map-proper-closed-interval-ℝ : UU (lsuc (l1 ⊔ l2))
+  differentiable-real-map-proper-closed-interval-ℝ =
+    Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
+      ( derivative-real-map-proper-closed-interval-ℝ)
 
 module _
   {l1 l2 : Level}
