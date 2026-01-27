@@ -9,6 +9,7 @@ module real-numbers.closed-intervals-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
@@ -90,14 +91,6 @@ upper-bound-closed-interval-ℝ =
 
 ## Properties
 
-### The unit interval on the real numbers
-
-```agda
-unit-closed-interval-ℝ : closed-interval-ℝ lzero lzero
-unit-closed-interval-ℝ =
-  ((zero-ℝ , one-ℝ) , preserves-leq-real-ℚ leq-zero-one-ℚ)
-```
-
 ### Closed intervals in the real numbers are closed in the metric space of real numbers
 
 ```agda
@@ -165,16 +158,6 @@ complete-metric-space-closed-interval-ℝ l [a,b] =
   complete-closed-subspace-Complete-Metric-Space
     ( complete-metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
-
-metric-space-unit-closed-interval-ℝ :
-  (l : Level) → Metric-Space (lsuc l) l
-metric-space-unit-closed-interval-ℝ l =
-  metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
-
-complete-metric-space-unit-interval-ℝ :
-  (l : Level) → Complete-Metric-Space (lsuc l) l
-complete-metric-space-unit-interval-ℝ l =
-  complete-metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
 ```
 
 ### The clamping function
@@ -294,4 +277,21 @@ abstract
         by preserves-sim-right-max-ℝ _ _ _ (left-leq-right-min-ℝ b≤x)
       ~ℝ b
         by left-leq-right-max-ℝ a≤b
+```
+
+### Raising elements of closed intervals of rational numbers
+
+```agda
+real-closed-interval-ℚ : closed-interval-ℚ → closed-interval-ℝ lzero lzero
+real-closed-interval-ℚ ((a , b) , a≤b) =
+  ((real-ℚ a , real-ℚ b) , preserves-leq-real-ℚ a≤b)
+
+raise-real-type-closed-interval-ℚ :
+  (l : Level) ([a,b] : closed-interval-ℚ) →
+  type-closed-interval-ℚ [a,b] →
+  type-closed-interval-ℝ l (real-closed-interval-ℚ [a,b])
+raise-real-type-closed-interval-ℚ l ((a , b) , a≤b) (x , a≤x , x≤b) =
+  ( raise-real-ℚ l x ,
+    preserves-leq-right-raise-ℝ l (preserves-leq-real-ℚ a≤x) ,
+    preserves-leq-left-raise-ℝ l (preserves-leq-real-ℚ x≤b))
 ```

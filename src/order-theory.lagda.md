@@ -150,6 +150,7 @@ open import order-theory.spans-closed-intervals-total-orders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-orders public
 open import order-theory.strict-preorders public
+open import order-theory.strict-subpreorders public
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public

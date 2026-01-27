@@ -298,6 +298,20 @@ abstract
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
 ```
 
+### Raised unit laws for addition
+
+```agda
+abstract
+  right-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ raise-zero-ℝ l ＝ x
+  right-raise-zero-law-add-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (x +ℝ raise-zero-ℝ l))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
+```
+
 ### Swapping laws for addition on real numbers
 
 ```agda
