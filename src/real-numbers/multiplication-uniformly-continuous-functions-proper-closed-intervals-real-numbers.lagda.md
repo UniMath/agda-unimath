@@ -42,28 +42,28 @@ of [real numbers](real-numbers.dedekind-real-numbers.md) `[a, b]`, the map
 module _
   {l1 l2 l3 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : ucont-map-proper-closed-interval-ℝ l1 l2 [a,b])
-  (g : ucont-map-proper-closed-interval-ℝ l1 l3 [a,b])
+  (f : uniformly-continuous-map-proper-closed-interval-ℝ l1 l2 [a,b])
+  (g : uniformly-continuous-map-proper-closed-interval-ℝ l1 l3 [a,b])
   where
 
-  map-mul-ucont-map-proper-closed-interval-ℝ :
+  map-mul-uniformly-continuous-map-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l2 ⊔ l3)
-  map-mul-ucont-map-proper-closed-interval-ℝ x =
+  map-mul-uniformly-continuous-map-proper-closed-interval-ℝ x =
     pr1 f x *ℝ pr1 g x
 
   abstract
-    is-ucont-map-mul-ucont-map-proper-closed-interval-ℝ :
-      is-ucont-map-proper-closed-interval-ℝ
+    is-ucont-map-mul-uniformly-continuous-map-proper-closed-interval-ℝ :
+      is-uniformly-continuous-map-proper-closed-interval-ℝ
         ( [a,b])
-        ( map-mul-ucont-map-proper-closed-interval-ℝ)
-    is-ucont-map-mul-ucont-map-proper-closed-interval-ℝ =
+        ( map-mul-uniformly-continuous-map-proper-closed-interval-ℝ)
+    is-ucont-map-mul-uniformly-continuous-map-proper-closed-interval-ℝ =
       is-uniformly-continuous-comp-function-Metric-Space
         ( metric-space-proper-closed-interval-ℝ l1 [a,b])
         ( product-Metric-Space
-          ( subspace-im-ucont-map-proper-closed-interval-ℝ
+          ( subspace-im-uniformly-continuous-map-proper-closed-interval-ℝ
             ( [a,b])
             ( f))
-          ( subspace-im-ucont-map-proper-closed-interval-ℝ
+          ( subspace-im-uniformly-continuous-map-proper-closed-interval-ℝ
             ( [a,b])
             ( g)))
         ( metric-space-ℝ (l2 ⊔ l3))
@@ -71,19 +71,19 @@ module _
         ( _)
         ( is-uniformly-continuous-is-lipschitz-function-Metric-Space
           ( product-Metric-Space
-            ( subspace-im-ucont-map-proper-closed-interval-ℝ
+            ( subspace-im-uniformly-continuous-map-proper-closed-interval-ℝ
               ( [a,b])
               ( f))
-            ( subspace-im-ucont-map-proper-closed-interval-ℝ
+            ( subspace-im-uniformly-continuous-map-proper-closed-interval-ℝ
               ( [a,b])
               ( g)))
           ( metric-space-ℝ (l2 ⊔ l3))
           ( _)
           ( is-lipschitz-mul-inhabited-totally-bounded-subset-ℝ
-            ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ
+            ( inhabited-totally-bounded-subset-im-uniformly-continuous-map-proper-closed-interval-ℝ
               ( [a,b])
               ( f))
-            ( inhabited-totally-bounded-subset-im-ucont-map-proper-closed-interval-ℝ
+            ( inhabited-totally-bounded-subset-im-uniformly-continuous-map-proper-closed-interval-ℝ
               ( [a,b])
               ( g))))
         ( is-uniformly-continuous-map-uniformly-continuous-function-Metric-Space
@@ -99,9 +99,9 @@ module _
               ( diagonal-product-isometry-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l1 [a,b])))))
 
-  mul-ucont-map-proper-closed-interval-ℝ :
-    ucont-map-proper-closed-interval-ℝ l1 (l2 ⊔ l3) [a,b]
-  mul-ucont-map-proper-closed-interval-ℝ =
-    ( map-mul-ucont-map-proper-closed-interval-ℝ ,
-      is-ucont-map-mul-ucont-map-proper-closed-interval-ℝ)
+  mul-uniformly-continuous-map-proper-closed-interval-ℝ :
+    uniformly-continuous-map-proper-closed-interval-ℝ l1 (l2 ⊔ l3) [a,b]
+  mul-uniformly-continuous-map-proper-closed-interval-ℝ =
+    ( map-mul-uniformly-continuous-map-proper-closed-interval-ℝ ,
+      is-ucont-map-mul-uniformly-continuous-map-proper-closed-interval-ℝ)
 ```
