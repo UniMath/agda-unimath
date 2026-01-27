@@ -225,3 +225,20 @@ module _
         ~ℝ y
           by sim-raise-ℝ' l1 y
 ```
+
+### Raising a real by two universe levels is equivalent to raising by the least upper bound of the universe levels
+
+```agda
+abstract
+  raise-raise-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) →
+    raise-ℝ l2 (raise-ℝ l3 x) ＝ raise-ℝ (l2 ⊔ l3) x
+  raise-raise-ℝ {l1} {l2} {l3} x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l2 (raise-ℝ l3 x)
+        ~ℝ raise-ℝ l3 x
+          by sim-raise-ℝ' l2 _
+        ~ℝ raise-ℝ (l2 ⊔ l3) x
+          by sim-raise-raise-ℝ l3 (l2 ⊔ l3) x)
+```

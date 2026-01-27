@@ -531,10 +531,10 @@ pointwise-ε-δ-continuous-power-ℝ l n =
 
 ```agda
 abstract
-  is-strictly-increasing-power-is-odd-ℝ :
+  is-strictly-increasing-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-strictly-increasing-endomap-ℝ (power-ℝ {l} n)
-  is-strictly-increasing-power-is-odd-ℝ l n odd-n =
+  is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n =
     is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
       ( pointwise-ε-δ-continuous-power-ℝ l n)
       ( λ p q p<q →
@@ -549,7 +549,7 @@ abstract
               ( inv (power-real-ℚ n p))
               ( inv (power-real-ℚ n q))
               ( preserves-le-real-ℚ
-                ( preserves-le-power-is-odd-ℚ n p q odd-n p<q)))))
+                ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))))
 ```
 
 ### For odd `n`, `x ↦ xⁿ` is injective
@@ -569,10 +569,10 @@ abstract
 
 ```agda
 abstract
-  is-unbounded-above-power-is-odd-ℝ :
+  is-unbounded-above-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-unbounded-above-endomap-ℝ (power-ℝ {l} n)
-  is-unbounded-above-power-is-odd-ℝ l n odd-n q =
+  is-unbounded-above-power-is-odd-exponent-ℝ l n odd-n q =
     map-exists _
       ( raise-real-ℚ l)
       ( λ p q≤pⁿ →
@@ -583,10 +583,10 @@ abstract
           ( preserves-leq-real-ℚ q≤pⁿ))
       ( is-unbounded-above-power-is-odd-ℚ n odd-n q)
 
-  is-unbounded-below-power-is-odd-ℝ :
+  is-unbounded-below-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-unbounded-below-endomap-ℝ (power-ℝ {l} n)
-  is-unbounded-below-power-is-odd-ℝ l n odd-n q =
+  is-unbounded-below-power-is-odd-exponent-ℝ l n odd-n q =
     map-exists _
       ( raise-real-ℚ l)
       ( λ p pⁿ≤q →

@@ -51,23 +51,24 @@ module _
   (odd-n : is-odd-ℕ n)
   where
 
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-ℝ :
+  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ :
     unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( l)
       ( l)
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-ℝ =
+  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ =
     ( ( pointwise-ε-δ-continuous-power-ℝ l n ,
-        is-strictly-increasing-power-is-odd-ℝ l n odd-n) ,
-      is-unbounded-above-power-is-odd-ℝ l n odd-n ,
-      is-unbounded-below-power-is-odd-ℝ l n odd-n)
+        is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n) ,
+      is-unbounded-above-power-is-odd-exponent-ℝ l n odd-n ,
+      is-unbounded-below-power-is-odd-exponent-ℝ l n odd-n)
 
-  aut-power-is-odd-ℝ : Aut (ℝ l)
-  aut-power-is-odd-ℝ =
+  aut-power-is-odd-exponent-ℝ : Aut (ℝ l)
+  aut-power-is-odd-exponent-ℝ =
     aut-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-      ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-ℝ)
+      ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ)
 
-root-is-odd-ℝ : {l : Level} (n : ℕ) → is-odd-ℕ n → ℝ l → ℝ l
-root-is-odd-ℝ {l} n odd-n = map-inv-equiv (aut-power-is-odd-ℝ l n odd-n)
+root-is-odd-exponent-ℝ : {l : Level} (n : ℕ) → is-odd-ℕ n → ℝ l → ℝ l
+root-is-odd-exponent-ℝ {l} n odd-n =
+  map-inv-equiv (aut-power-is-odd-exponent-ℝ l n odd-n)
 ```
 
 ## Properties
@@ -83,13 +84,15 @@ module _
   where
 
   abstract
-    is-section-root-is-odd-ℝ : power-ℝ n (root-is-odd-ℝ n odd-n x) ＝ x
-    is-section-root-is-odd-ℝ =
-      is-section-map-inv-equiv (aut-power-is-odd-ℝ l n odd-n) x
+    is-section-root-is-odd-exponent-ℝ :
+      power-ℝ n (root-is-odd-exponent-ℝ n odd-n x) ＝ x
+    is-section-root-is-odd-exponent-ℝ =
+      is-section-map-inv-equiv (aut-power-is-odd-exponent-ℝ l n odd-n) x
 
-    is-retraction-root-is-odd-ℝ : root-is-odd-ℝ n odd-n (power-ℝ n x) ＝ x
-    is-retraction-root-is-odd-ℝ =
-      is-retraction-map-inv-equiv (aut-power-is-odd-ℝ l n odd-n) x
+    is-retraction-root-is-odd-exponent-ℝ :
+      root-is-odd-exponent-ℝ n odd-n (power-ℝ n x) ＝ x
+    is-retraction-root-is-odd-exponent-ℝ =
+      is-retraction-map-inv-equiv (aut-power-is-odd-exponent-ℝ l n odd-n) x
 ```
 
 ### `n`th roots preserve similarity
@@ -138,11 +141,11 @@ module _
   where
 
   abstract
-    is-strictly-increasing-root-is-odd-ℝ :
-      {l : Level} → is-strictly-increasing-endomap-ℝ (root-is-odd-ℝ {l} n odd-n)
-    is-strictly-increasing-root-is-odd-ℝ {l} =
+    is-strictly-increasing-root-is-odd-exponent-ℝ :
+      is-strictly-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
+    is-strictly-increasing-root-is-odd-exponent-ℝ =
       is-strictly-increasing-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-        ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-ℝ
+        ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ
           ( l)
           ( n)
           ( odd-n))
@@ -169,24 +172,12 @@ module _
   where
 
   abstract
-    is-increasing-root-is-odd-ℝ :
-      {l : Level} → is-increasing-endomap-ℝ (root-is-odd-ℝ {l} n odd-n)
-    is-increasing-root-is-odd-ℝ =
+    is-increasing-root-is-odd-exponent-ℝ :
+      is-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
+    is-increasing-root-is-odd-exponent-ℝ =
       is-increasing-is-strictly-increasing-endomap-ℝ
-        ( root-is-odd-ℝ n odd-n)
-        ( is-strictly-increasing-root-is-odd-ℝ n odd-n)
-
-    preserves-leq-root-is-odd-ℝ :
-      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-      leq-ℝ x y → leq-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
-    preserves-leq-root-is-odd-ℝ {l1} {l2} {x} {y} x≤y =
-      preserves-leq-sim-ℝ
-        ( preserves-sim-root-is-odd-ℝ n odd-n (sim-raise-ℝ' l2 x))
-        ( preserves-sim-root-is-odd-ℝ n odd-n (sim-raise-ℝ' l1 y))
-        ( is-increasing-root-is-odd-ℝ
-          ( raise-ℝ l2 x)
-          ( raise-ℝ l1 y)
-          ( preserves-leq-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x≤y))
+        ( root-is-odd-exponent-ℝ n odd-n)
+        ( is-strictly-increasing-root-is-odd-exponent-ℝ n odd-n)
 ```
 
 ### For odd `n`, the `n`th root of 0 is 0
