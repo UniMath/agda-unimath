@@ -38,7 +38,7 @@ open import real-numbers.subsets-real-numbers
 A function `f` from the [real numbers](real-numbers.dedekind-real-numbers.md) to
 themselves is
 {{#concept "strictly increasing" Disambiguation="function from ℝ to ℝ" Agda=is-strictly-increasing-function-ℝ}}
-if for all `x < y`, `f x < f y`.
+if for all `x < y` we also have `f x < f y`.
 
 Several arguments on this page are due to
 [Mark Saving](https://math.stackexchange.com/users/798694/mark-saving) in this

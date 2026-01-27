@@ -826,7 +826,7 @@ abstract
       ( tr (λ z → sim-ℝ z one-ℝ) (commutative-mul-ℝ _ _) xy~1)
 ```
 
-### The canonical embedding of rational numbers preserves multiplicative inverses
+### The inclusion of rational numbers preserves multiplicative inverses
 
 ```agda
 abstract
