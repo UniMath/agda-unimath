@@ -29,6 +29,8 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
+
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
@@ -37,8 +39,11 @@ open import group-theory.semigroups
 
 open import lists.concatenation-lists
 open import lists.lists
+open import lists.tuples
 
 open import ring-theory.semirings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

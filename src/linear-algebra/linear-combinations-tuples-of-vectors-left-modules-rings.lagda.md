@@ -10,6 +10,7 @@ module linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings w
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -20,6 +21,9 @@ open import lists.functoriality-tuples
 open import lists.tuples
 
 open import ring-theory.rings
+open import ring-theory.tuples-in-rings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -290,4 +294,152 @@ module _
             ( scalars-b)
             ( vectors-b))
         by refl
+```
+
+### Whenever the coefficient tuple is the trivial tuple, the linear combination is equal to the zero element
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where
+
+  zero-trivial-tuple-linear-combination-tuple-left-module-Ring :
+    (n : ℕ) →
+    (vectors : tuple (type-left-module-Ring R M) n) →
+    linear-combination-tuple-left-module-Ring R M
+      ( zero-tuple-type-Ring R n)
+      ( vectors) ＝
+    zero-left-module-Ring R M
+  zero-trivial-tuple-linear-combination-tuple-left-module-Ring n empty-tuple =
+    refl
+  zero-trivial-tuple-linear-combination-tuple-left-module-Ring
+    (succ-ℕ n) (x ∷ vectors) =
+    equational-reasoning
+    linear-combination-tuple-left-module-Ring R M
+      ( zero-Ring R ∷ zero-tuple-type-Ring R n)
+      ( x ∷ vectors)
+    ＝ add-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M
+        ( zero-tuple-type-Ring R n)
+        ( vectors))
+      ( mul-left-module-Ring R M (zero-Ring R) x)
+      by refl
+    ＝ add-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M
+        ( zero-tuple-type-Ring R n)
+        ( vectors))
+      ( zero-left-module-Ring R M)
+      by
+        ap
+          ( λ y → add-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
+              ( zero-tuple-type-Ring R n)
+              ( vectors))
+            ( y))
+          (left-zero-law-mul-left-module-Ring R M x)
+    ＝ add-left-module-Ring R M
+      ( zero-left-module-Ring R M)
+      ( zero-left-module-Ring R M)
+      by
+        ap
+          ( λ y → add-left-module-Ring R M y (zero-left-module-Ring R M))
+          ( zero-trivial-tuple-linear-combination-tuple-left-module-Ring n
+            ( vectors))
+    ＝ zero-left-module-Ring R M
+      by left-unit-law-add-left-module-Ring R M (zero-left-module-Ring R M)
+```
+
+### Whenever the coefficient tuple is the trivial tuple besides one value, that value determines the value of the linear combination
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where
+
+  component-with-value-tuple-trivial-tuple-linear-combination-tuple-left-module-Ring :
+    (n : ℕ) →
+    (r : type-Ring R)
+    (vectors : tuple (type-left-module-Ring R M) n) →
+    (i : Fin n) →
+    linear-combination-tuple-left-module-Ring R M
+      ( with-value-tuple i r (zero-tuple-type-Ring R n))
+      ( vectors) ＝
+    mul-left-module-Ring R M r (component-tuple n vectors i)
+  component-with-value-tuple-trivial-tuple-linear-combination-tuple-left-module-Ring
+    (succ-ℕ n) r (x ∷ vectors) (inr _) =
+    equational-reasoning
+    linear-combination-tuple-left-module-Ring R M
+      ( with-value-tuple (inr _) r (zero-tuple-type-Ring R (succ-ℕ n)))
+      ( x ∷ vectors)
+    ＝ linear-combination-tuple-left-module-Ring R M
+      ( r ∷ (zero-tuple-type-Ring R n))
+      ( x ∷ vectors)
+      by refl
+    ＝ add-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M
+        ( zero-tuple-type-Ring R n)
+        ( vectors))
+      ( mul-left-module-Ring R M r x)
+      by refl
+    ＝ add-left-module-Ring R M
+      ( zero-left-module-Ring R M)
+      ( mul-left-module-Ring R M r x)
+      by
+        ap
+          ( λ y → add-left-module-Ring R M y (mul-left-module-Ring R M r x))
+          ( zero-trivial-tuple-linear-combination-tuple-left-module-Ring R M n
+            ( vectors))
+    ＝ mul-left-module-Ring R M r x
+      by left-unit-law-add-left-module-Ring R M (mul-left-module-Ring R M r x)
+    ＝ mul-left-module-Ring R M r
+      ( component-tuple (succ-ℕ n) (x ∷ vectors) (inr _))
+      by ap (λ y → mul-left-module-Ring R M r y) refl
+  component-with-value-tuple-trivial-tuple-linear-combination-tuple-left-module-Ring
+    (succ-ℕ n) r (x ∷ vectors) (inl i) =
+    equational-reasoning
+    linear-combination-tuple-left-module-Ring R M
+      ( with-value-tuple (inl i) r (zero-tuple-type-Ring R (succ-ℕ n)))
+      ( x ∷ vectors)
+    ＝ linear-combination-tuple-left-module-Ring R M
+      ( zero-Ring R ∷ (with-value-tuple i r (zero-tuple-type-Ring R n)))
+      ( x ∷ vectors)
+      by refl
+    ＝ add-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
+        ( vectors))
+      ( mul-left-module-Ring R M (zero-Ring R) x)
+      by refl
+    ＝ add-left-module-Ring R M
+      ( linear-combination-tuple-left-module-Ring R M
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
+        ( vectors))
+      ( zero-left-module-Ring R M)
+      by
+        ap
+          ( λ y → add-left-module-Ring R M
+            ( linear-combination-tuple-left-module-Ring R M
+              ( with-value-tuple i r (zero-tuple-type-Ring R n))
+              ( vectors))
+            ( y))
+          ( left-zero-law-mul-left-module-Ring R M x)
+    ＝ linear-combination-tuple-left-module-Ring R M
+        ( with-value-tuple i r (zero-tuple-type-Ring R n))
+        ( vectors)
+      by right-unit-law-add-left-module-Ring R M
+        ( linear-combination-tuple-left-module-Ring R M
+          ( with-value-tuple i r (zero-tuple-type-Ring R n))
+          ( vectors))
+    ＝ mul-left-module-Ring R M r
+      ( component-tuple (succ-ℕ n) (x ∷ vectors) (inl i))
+      by
+        component-with-value-tuple-trivial-tuple-linear-combination-tuple-left-module-Ring
+          ( n)
+          ( r)
+          ( vectors)
+          ( i)
 ```
