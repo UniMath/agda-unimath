@@ -215,9 +215,9 @@ abstract
 
 ```agda
 abstract
-  is-negative-odd-power-ℚ⁻ :
+  is-negative-power-is-odd-exponent-ℚ⁻ :
     (n : ℕ) (q : ℚ⁻) → is-odd-ℕ n → is-negative-ℚ (power-ℚ n (rational-ℚ⁻ q))
-  is-negative-odd-power-ℚ⁻ n q⁻@(q , is-neg-q) odd-n =
+  is-negative-power-is-odd-exponent-ℚ⁻ n q⁻@(q , is-neg-q) odd-n =
     let
       (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
@@ -238,9 +238,9 @@ abstract
 
 ```agda
 abstract
-  even-power-neg-ℚ :
+  power-neg-is-even-exponent-ℚ :
     (n : ℕ) (q : ℚ) → is-even-ℕ n → power-ℚ n (neg-ℚ q) ＝ power-ℚ n q
-  even-power-neg-ℚ _ q (k , refl) =
+  power-neg-is-even-exponent-ℚ _ q (k , refl) =
     equational-reasoning
       power-ℚ (k *ℕ 2) (neg-ℚ q)
       ＝ power-ℚ k (square-ℚ (neg-ℚ q))
@@ -255,9 +255,9 @@ abstract
 
 ```agda
 abstract
-  power-is-odd-neg-ℚ :
+  power-neg-is-odd-exponent-ℚ :
     (n : ℕ) (q : ℚ) → is-odd-ℕ n → power-ℚ n (neg-ℚ q) ＝ neg-ℚ (power-ℚ n q)
-  power-is-odd-neg-ℚ n q odd-n =
+  power-neg-is-odd-exponent-ℚ n q odd-n =
     let (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
       equational-reasoning
@@ -267,7 +267,7 @@ abstract
         ＝ power-ℚ (k *ℕ 2) (neg-ℚ q) *ℚ neg-ℚ q
           by power-succ-ℚ (k *ℕ 2) (neg-ℚ q)
         ＝ power-ℚ (k *ℕ 2) q *ℚ neg-ℚ q
-          by ap-mul-ℚ (even-power-neg-ℚ _ q (k , refl)) refl
+          by ap-mul-ℚ (power-neg-is-even-exponent-ℚ _ q (k , refl)) refl
         ＝ neg-ℚ (power-ℚ (k *ℕ 2) q *ℚ q)
           by right-negative-law-mul-ℚ _ _
         ＝ neg-ℚ (power-ℚ (succ-ℕ (k *ℕ 2)) q)
@@ -275,16 +275,17 @@ abstract
         ＝ neg-ℚ (power-ℚ n q)
           by ap (λ m → neg-ℚ (power-ℚ m q)) k2+1=n
 
-  neg-power-is-odd-neg-ℚ :
+  neg-power-neg-is-odd-exponent-ℚ :
     (n : ℕ) (q : ℚ) → is-odd-ℕ n → neg-ℚ (power-ℚ n (neg-ℚ q)) ＝ power-ℚ n q
-  neg-power-is-odd-neg-ℚ n q odd-n =
-    ap neg-ℚ (power-is-odd-neg-ℚ n q odd-n) ∙ neg-neg-ℚ _
+  neg-power-neg-is-odd-exponent-ℚ n q odd-n =
+    ap neg-ℚ (power-neg-is-odd-exponent-ℚ n q odd-n) ∙ neg-neg-ℚ _
 
-  neg-power-is-odd-neg-ℚ⁻ :
+  neg-power-neg-is-odd-exponent-ℚ⁻ :
     (n : ℕ) (q : ℚ⁻) → is-odd-ℕ n →
     neg-ℚ (rational-ℚ⁺ (power-ℚ⁺ n (neg-ℚ⁻ q))) ＝ power-ℚ n (rational-ℚ⁻ q)
-  neg-power-is-odd-neg-ℚ⁻ n q⁻@(q , _) odd-n =
-    ap neg-ℚ (inv (power-rational-ℚ⁺ n _)) ∙ neg-power-is-odd-neg-ℚ n q odd-n
+  neg-power-neg-is-odd-exponent-ℚ⁻ n q⁻@(q , _) odd-n =
+    ( ap neg-ℚ (inv (power-rational-ℚ⁺ n _))) ∙
+    ( neg-power-neg-is-odd-exponent-ℚ n q odd-n)
 ```
 
 ### `|q|ⁿ=|qⁿ|`
@@ -305,7 +306,7 @@ abstract
         by inv (rational-abs-mul-ℚ _ _)
 ```
 
-### If `|p| ≤ |q|`, `|pⁿ| ≤ |qⁿ|`
+### If `|p| ≤ |q|`, then `|pⁿ| ≤ |qⁿ|`
 
 ```agda
 abstract
@@ -324,10 +325,10 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-odd-power-ℚ :
+  preserves-leq-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
     leq-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-leq-odd-power-ℚ n p q odd-n p≤q =
+  preserves-leq-power-is-odd-exponent-ℚ n p q odd-n p≤q =
     rec-coproduct
       ( λ is-neg-p →
         rec-coproduct
@@ -338,8 +339,8 @@ abstract
             in
               binary-tr
                 ( leq-ℚ)
-                ( neg-power-is-odd-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-power-is-odd-neg-ℚ⁻ n q⁻ odd-n)
+                ( neg-power-neg-is-odd-exponent-ℚ⁻ n p⁻ odd-n)
+                ( neg-power-neg-is-odd-exponent-ℚ⁻ n q⁻ odd-n)
                 ( neg-leq-ℚ
                   ( preserves-leq-power-ℚ⁺
                     ( n)
@@ -352,7 +353,7 @@ abstract
               ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
               ( leq-negative-nonnegative-ℚ
                 ( power-ℚ n p ,
-                  is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
+                  is-negative-power-is-odd-exponent-ℚ⁻ n (p , is-neg-p) odd-n)
                 ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
           ( decide-is-negative-is-nonnegative-ℚ q))
       ( λ is-nonneg-p →
@@ -372,10 +373,10 @@ abstract
 
 ```agda
 abstract
-  preserves-le-power-is-odd-ℚ :
+  preserves-le-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → le-ℚ p q →
     le-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-le-power-is-odd-ℚ n p q odd-n p<q =
+  preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q =
     rec-coproduct
       ( λ is-neg-p →
         rec-coproduct
@@ -386,8 +387,8 @@ abstract
             in
               binary-tr
                 ( le-ℚ)
-                ( neg-power-is-odd-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-power-is-odd-neg-ℚ⁻ n q⁻ odd-n)
+                ( neg-power-neg-is-odd-exponent-ℚ⁻ n p⁻ odd-n)
+                ( neg-power-neg-is-odd-exponent-ℚ⁻ n q⁻ odd-n)
                 ( neg-le-ℚ
                   ( preserves-le-power-ℚ⁺
                     ( n)
@@ -400,7 +401,7 @@ abstract
               ( le-ℚ (power-ℚ n p))
               ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
               ( le-negative-nonnegative-ℚ
-                ( power-ℚ n p , is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
+                ( power-ℚ n p , is-negative-power-is-odd-exponent-ℚ⁻ n (p , is-neg-p) odd-n)
                 ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
           ( decide-is-negative-is-nonnegative-ℚ q))
       ( λ is-nonneg-p →
@@ -530,7 +531,7 @@ abstract
       ( λ p pⁿ≤-q →
         binary-tr
           ( leq-ℚ)
-          ( inv (power-is-odd-neg-ℚ n p odd-n))
+          ( inv (power-neg-is-odd-exponent-ℚ n p odd-n))
           ( neg-neg-ℚ q)
           ( neg-leq-ℚ pⁿ≤-q))
       ( is-unbounded-above-power-is-odd-ℚ n odd-n (neg-ℚ q))
