@@ -19,8 +19,8 @@ module analysis.classical-intermediate-value-theorem where
 The
 {{#concept "classical intermediate value theorem" WDID=Q245098 WD="intermediate value theorem"}}
 states that for a
-[pointwise ε-δ continuous](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
-[endomorphism](foundation.endomorphisms.md) `f` on the
+[pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
+`f` on the
 [real numbers](real-numbers.dedekind-real-numbers.md), real numbers `a` and `b`
 with `a` [less than or equal to](real-numbers.inequality-real-numbers.md) `b`
 such that `f a` is [negative](real-numbers.negative-real-numbers.md) and `f b`

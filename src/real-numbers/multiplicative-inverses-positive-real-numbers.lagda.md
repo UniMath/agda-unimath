@@ -434,7 +434,7 @@ module _
         ( cancel-right-mul-div-ℝ⁺)
 ```
 
-### The canonical embedding of rational numbers preserves multiplicative inverses
+### The inclusion of rational numbers preserves multiplicative inverses
 
 ```agda
 abstract

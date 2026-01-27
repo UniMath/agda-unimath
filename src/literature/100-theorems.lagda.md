@@ -199,14 +199,14 @@ open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces u
 
 ### 79. The Intermediate Value Theorem {#79}
 
-Only the constructive variant is currently proved.
-
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
 open import analysis.intermediate-value-theorem using
   ( intermediate-value-theorem-ℝ)
 ```
+
+Only the constructive variant is currently proved.
 
 ### 80. The fundamental theorem of arithmetic {#80}
 

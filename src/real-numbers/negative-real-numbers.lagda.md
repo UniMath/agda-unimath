@@ -104,7 +104,7 @@ abstract
   is-negative-sim-ℝ = preserves-le-left-sim-ℝ _ _ _
 ```
 
-### If `x < y` and `y` is negative, `x` is negative
+### If `x < y` and `y` is negative, then `x` is negative
 
 ```agda
 abstract
