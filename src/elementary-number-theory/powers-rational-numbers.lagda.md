@@ -362,7 +362,7 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-odd-power-ℚ :
+  preserves-leq-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
     leq-ℚ (power-ℚ n p) (power-ℚ n q)
   preserves-leq-odd-power-ℚ n p q odd-n p≤q =
