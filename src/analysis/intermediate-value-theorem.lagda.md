@@ -79,13 +79,13 @@ open import real-numbers.strict-inequality-real-numbers
 The
 {{#concept "constructive intermediate value theorem" Agda=intermediate-value-theorem-ℝ}}
 states that for a
-[pointwise ε-δ continuous](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
-[endomorphism](foundation.endomorphisms.md) `f` on the
+[pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
+`f` on the
 [real numbers](real-numbers.dedekind-real-numbers.md), real numbers `a` and `b`
 with `a` [less than or equal to](real-numbers.inequality-real-numbers.md) `b`
 such that `f a` is [negative](real-numbers.negative-real-numbers.md) and `f b`
-is [positive](real-numbers.positive-real-numbers.md), and a
-[positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
+is [positive](real-numbers.positive-real-numbers.md), then for every
+[positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`
 there exists a `c` with `a ≤ c ≤ b` such that the
 [absolute value](real-numbers.absolute-value-real-numbers.md) of `f c` is at
 most `ε`.
@@ -713,7 +713,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
 `m` with `|f(cₙ)| ≤ ε` [or](foundation.disjunction.md) `f(aₙ) < 0 < f(bₙ)`.
 
 ```agda
-  lemma-prop-intermediate-value-theorem-ℝ : (m : ℕ) → Prop l
+  lemma-prop-intermediate-value-theorem-ℝ : ℕ → Prop l
   lemma-prop-intermediate-value-theorem-ℝ m =
     ( ∃
       ( ℕ)
