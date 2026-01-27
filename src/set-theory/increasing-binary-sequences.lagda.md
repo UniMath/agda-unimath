@@ -144,7 +144,7 @@ cons-ℕ∞↗ (inl x) = succ-ℕ∞↗ x
 cons-ℕ∞↗ (inr x) = zero-ℕ∞↗
 ```
 
-### Small constants
+### Some constants
 
 ```agda
 one-ℕ∞↗ : ℕ∞↗
