@@ -34,6 +34,9 @@ of [natural numbers](elementary-number-theory.natural-numbers.md) in the sense
 that it is the final coalgebra of the functor `X ↦ 1 + X` rather than the
 initial algebra.
 
+The conatural numbers are equivalent to the type of
+[increasing binary sequences](set-theory.increasing-binary-sequences.md).
+
 ## Definitions
 
 ### The coinductive type of conatural numbers
