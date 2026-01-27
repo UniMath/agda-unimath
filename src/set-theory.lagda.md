@@ -57,6 +57,7 @@ open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
 open import set-theory.equality-cardinals public
+open import set-theory.decidable-dependent-pair-types-over-increasing-binary-sequences public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
 open import set-theory.increasing-binary-sequences public
@@ -65,6 +66,7 @@ open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
+open import set-theory.shifting-increasing-binary-sequences public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
 ```
