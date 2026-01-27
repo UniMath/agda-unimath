@@ -297,6 +297,20 @@ abstract
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
 ```
 
+### Raised unit laws for addition
+
+```agda
+abstract
+  right-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ raise-zero-ℝ l ＝ x
+  right-raise-zero-law-add-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (x +ℝ raise-zero-ℝ l))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
+```
+
 ### Swapping laws for addition on real numbers
 
 ```agda
@@ -596,6 +610,23 @@ abstract
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x
       ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
+```
+
+### Adding raised real numbers
+
+```agda
+abstract
+  add-raise-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {y : ℝ l2} →
+    raise-ℝ l3 x +ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+  add-raise-ℝ {l3 = l3} {l4 = l4} {x = x} {y = y} =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 x +ℝ raise-ℝ l4 y
+        ~ℝ x +ℝ y
+          by preserves-sim-add-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)
+        ~ℝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+          by sim-raise-ℝ (l3 ⊔ l4) (x +ℝ y))
 ```
 
 ## See also

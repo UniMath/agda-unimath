@@ -401,7 +401,7 @@ abstract
     apart-right-sim-ℝ _ _ _ (sim-raise-ℝ l3 y)
 ```
 
-### If `x` is apart from `y` and `z`, `x` is apart from `max y z`
+### If `x` is apart from `y` and `z`, then `x` is apart from `max y z`
 
 ```agda
 abstract
@@ -425,7 +425,7 @@ abstract
       ( x#y)
 ```
 
-### If `x` is apart from `y` and `x`, `x` is apart from `min y z`
+### If `x` is apart from `y` and `x`, then `x` is apart from `min y z`
 
 ```agda
 abstract

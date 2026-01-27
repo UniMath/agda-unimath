@@ -56,10 +56,10 @@ of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
 cuts.
 
 For any `x : ℝ`, `max-ℝ x` is a
-[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
-Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
-[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+Moreover, the map `x ↦ max-ℝ x` is a short map from `ℝ` into the
+[metric space of short maps](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
 of `ℝ`.
 
 ## Definition
