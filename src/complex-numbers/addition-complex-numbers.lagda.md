@@ -8,14 +8,18 @@ module complex-numbers.addition-complex-numbers where
 
 ```agda
 open import complex-numbers.complex-numbers
+open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 ```
 
 </details>
@@ -101,4 +105,70 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x +ℂ y) (x' +ℂ y')
   preserves-sim-add-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-add-ℝ a~a' c~c' , preserves-sim-add-ℝ b~b' d~d')
+```
+
+### The sum of `z` and `conjugate-ℂ z` is double `re-ℂ z`
+
+```agda
+abstract
+  right-add-conjugate-ℂ :
+    {l : Level} (z : ℂ l) → z +ℂ conjugate-ℂ z ＝ complex-ℝ (re-ℂ z +ℝ re-ℂ z)
+  right-add-conjugate-ℂ (a +iℂ b) = eq-ℂ refl (eq-right-inverse-law-add-ℝ b)
+```
+
+### Swapping laws for addition on complex numbers
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3)
+  where
+
+  abstract
+    right-swap-add-ℂ :
+      (x +ℂ y) +ℂ z ＝ (x +ℂ z) +ℂ y
+    right-swap-add-ℂ =
+      equational-reasoning
+        (x +ℂ y) +ℂ z
+        ＝ x +ℂ (y +ℂ z) by associative-add-ℂ x y z
+        ＝ x +ℂ (z +ℂ y) by ap (x +ℂ_) (commutative-add-ℂ y z)
+        ＝ (x +ℂ z) +ℂ y by inv (associative-add-ℂ x z y)
+
+    left-swap-add-ℂ :
+      x +ℂ (y +ℂ z) ＝ y +ℂ (x +ℂ z)
+    left-swap-add-ℂ =
+      equational-reasoning
+        x +ℂ (y +ℂ z)
+        ＝ (x +ℂ y) +ℂ z by inv (associative-add-ℂ x y z)
+        ＝ (y +ℂ x) +ℂ z by ap (_+ℂ z) (commutative-add-ℂ x y)
+        ＝ y +ℂ (x +ℂ z) by associative-add-ℂ y x z
+```
+
+### Interchange laws for addition on complex numbers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) (w : ℂ l4)
+  where
+
+  abstract
+    interchange-law-add-add-ℂ : (x +ℂ y) +ℂ (z +ℂ w) ＝ (x +ℂ z) +ℂ (y +ℂ w)
+    interchange-law-add-add-ℂ =
+      equational-reasoning
+        (x +ℂ y) +ℂ (z +ℂ w)
+        ＝ x +ℂ (y +ℂ (z +ℂ w)) by associative-add-ℂ _ _ _
+        ＝ x +ℂ (z +ℂ (y +ℂ w)) by ap (x +ℂ_) (left-swap-add-ℂ y z w)
+        ＝ (x +ℂ z) +ℂ (y +ℂ w) by inv (associative-add-ℂ x z (y +ℂ w))
+```
+
+### The inclusion of real numbers preserves addition
+
+```agda
+abstract
+  add-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x +ℂ complex-ℝ y ＝ complex-ℝ (x +ℝ y)
+  add-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( refl)
+      ( add-raise-ℝ ∙ ap (raise-ℝ _) (left-unit-law-add-ℝ _))
 ```

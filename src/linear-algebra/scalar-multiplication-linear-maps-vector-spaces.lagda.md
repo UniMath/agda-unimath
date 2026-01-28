@@ -11,8 +11,8 @@ open import commutative-algebra.heyting-fields
 
 open import foundation.universe-levels
 
+open import linear-algebra.linear-endomorphisms-vector-spaces
 open import linear-algebra.linear-maps-vector-spaces
-open import linear-algebra.linear-transformations-vector-spaces
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings
 open import linear-algebra.vector-spaces
 ```
@@ -37,17 +37,17 @@ module _
   (c : type-Heyting-Field F)
   where
 
-  is-linear-mul-Vector-Space :
-    is-linear-transform-Vector-Space F V (mul-Vector-Space F V c)
-  is-linear-mul-Vector-Space =
-    is-linear-mul-left-module-Commutative-Ring
+  is-linear-map-mul-Vector-Space :
+    is-linear-endo-Vector-Space F V (mul-Vector-Space F V c)
+  is-linear-map-mul-Vector-Space =
+    is-linear-map-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field F)
       ( V)
       ( c)
 
-  linear-transform-mul-Vector-Space : linear-transform-Vector-Space F V
-  linear-transform-mul-Vector-Space =
-    linear-transform-mul-left-module-Commutative-Ring
+  linear-endo-mul-Vector-Space : linear-endo-Vector-Space F V
+  linear-endo-mul-Vector-Space =
+    linear-endo-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field F)
       ( V)
       ( c)
@@ -68,5 +68,5 @@ module _
     linear-map-Vector-Space F V W → linear-map-Vector-Space F V W
   mul-linear-map-Vector-Space =
     comp-linear-map-Vector-Space F V W W
-      ( linear-transform-mul-Vector-Space F W c)
+      ( linear-endo-mul-Vector-Space F W c)
 ```

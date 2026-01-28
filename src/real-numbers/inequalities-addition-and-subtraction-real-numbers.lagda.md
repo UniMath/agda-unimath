@@ -228,3 +228,14 @@ module _
           ( commutative-add-ℝ z x)
           ( y+x≤z+y+d))
 ```
+
+### If `x ≤ y`, then `z - y ≤ z - x`
+
+```agda
+abstract
+  reverses-leq-left-diff-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} (z : ℝ l3) →
+    leq-ℝ x y → leq-ℝ (z -ℝ y) (z -ℝ x)
+  reverses-leq-left-diff-ℝ z x≤y =
+    preserves-leq-left-add-ℝ z _ _ (neg-leq-ℝ x≤y)
+```

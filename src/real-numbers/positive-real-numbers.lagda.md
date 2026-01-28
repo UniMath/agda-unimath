@@ -254,6 +254,9 @@ abstract
   preserves-is-positive-real-ℚ pos-q =
     preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
+  is-positive-real-ℚ⁺ : (q : ℚ⁺) → is-positive-ℝ (real-ℚ⁺ q)
+  is-positive-real-ℚ⁺ (q , pos-q) = preserves-is-positive-real-ℚ pos-q
+
   reflects-is-positive-real-ℚ :
     {q : ℚ} → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
   reflects-is-positive-real-ℚ {q} 0<qℝ =
@@ -353,6 +356,9 @@ abstract
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
+raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
 ```
 
 ### Raising a positive real to its own level is the identity

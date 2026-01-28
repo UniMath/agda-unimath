@@ -13,8 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-commutative-rings
-open import linear-algebra.linear-transformations-left-modules-commutative-rings
 ```
 
 </details>
@@ -40,18 +40,18 @@ module _
   (r : type-Commutative-Ring R)
   where
 
-  is-linear-mul-left-module-Commutative-Ring :
-    is-linear-transform-left-module-Commutative-Ring R M
+  is-linear-map-mul-left-module-Commutative-Ring :
+    is-linear-endo-left-module-Commutative-Ring R M
       ( mul-left-module-Commutative-Ring R M r)
-  is-linear-mul-left-module-Commutative-Ring =
+  is-linear-map-mul-left-module-Commutative-Ring =
     ( left-distributive-mul-add-left-module-Commutative-Ring R M r ,
       left-swap-mul-left-module-Commutative-Ring R M r)
 
-  linear-transform-mul-left-module-Commutative-Ring :
-    linear-transform-left-module-Commutative-Ring R M
-  linear-transform-mul-left-module-Commutative-Ring =
+  linear-endo-mul-left-module-Commutative-Ring :
+    linear-endo-left-module-Commutative-Ring R M
+  linear-endo-mul-left-module-Commutative-Ring =
     ( mul-left-module-Commutative-Ring R M r ,
-      is-linear-mul-left-module-Commutative-Ring)
+      is-linear-map-mul-left-module-Commutative-Ring)
 ```
 
 ### Scalar multiplication of linear maps
@@ -70,5 +70,5 @@ module _
     linear-map-left-module-Commutative-Ring R M N
   mul-linear-map-left-module-Commutative-Ring =
     comp-linear-map-left-module-Commutative-Ring R M N N
-      ( linear-transform-mul-left-module-Commutative-Ring R N r)
+      ( linear-endo-mul-left-module-Commutative-Ring R N r)
 ```

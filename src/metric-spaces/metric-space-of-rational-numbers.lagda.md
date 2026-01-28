@@ -12,6 +12,7 @@ module metric-spaces.metric-space-of-rational-numbers where
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
@@ -44,17 +45,17 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
-open import metric-spaces.lipschitz-functions-metric-spaces
+open import metric-spaces.lipschitz-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -304,12 +305,12 @@ module _
   where
 
   abstract
-    is-isometry-add-ℚ :
+    is-isometry-left-add-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-    is-isometry-add-ℚ d y z =
+    is-isometry-left-add-ℚ d y z =
       pair
         ( map-product
           ( preserves-lower-neighborhood-add-ℚ x y z d)
@@ -318,36 +319,36 @@ module _
           ( reflects-lower-neighborhood-add-ℚ x y z d)
           ( reflects-lower-neighborhood-add-ℚ x z y d))
 
-    is-isometry-add-ℚ' :
+    is-isometry-left-add-ℚ' :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ' x)
-    is-isometry-add-ℚ' d y z =
+    is-isometry-left-add-ℚ' d y z =
       binary-tr
         ( λ u v → neighborhood-ℚ d y z ↔ neighborhood-ℚ d u v)
         ( commutative-add-ℚ x y)
         ( commutative-add-ℚ x z)
-        ( is-isometry-add-ℚ d y z)
+        ( is-isometry-left-add-ℚ d y z)
 
-    is-uniformly-continuous-add-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-left-add-ℚ :
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-    is-uniformly-continuous-add-ℚ =
-      is-uniformly-continuous-is-isometry-Metric-Space
+    is-uniformly-continuous-map-left-add-ℚ =
+      is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ x)
-        ( is-isometry-add-ℚ)
+        ( is-isometry-left-add-ℚ)
 
-  uniformly-continuous-add-ℚ :
-    uniformly-continuous-function-Metric-Space
+  uniformly-continuous-map-left-add-ℚ :
+    uniformly-continuous-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
-  uniformly-continuous-add-ℚ =
-    ( add-ℚ x , is-uniformly-continuous-add-ℚ)
+  uniformly-continuous-map-left-add-ℚ =
+    ( add-ℚ x , is-uniformly-continuous-map-left-add-ℚ)
 ```
 
 ### Negation of rational numbers is an isometry
@@ -370,23 +371,23 @@ abstract
       ↔ neighborhood-ℚ d (neg-ℚ x) (neg-ℚ y)
         by leq-dist-iff-neighborhood-ℚ _ _ _
 
-  is-uniformly-continuous-neg-ℚ :
-    is-uniformly-continuous-function-Metric-Space
+  is-uniformly-continuous-map-neg-ℚ :
+    is-uniformly-continuous-map-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
       ( neg-ℚ)
-  is-uniformly-continuous-neg-ℚ =
-    is-uniformly-continuous-is-isometry-Metric-Space
+  is-uniformly-continuous-map-neg-ℚ =
+    is-uniformly-continuous-map-is-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℚ)
       ( neg-ℚ)
       ( is-isometry-neg-ℚ)
 
-uniformly-continuous-neg-ℚ :
-  uniformly-continuous-function-Metric-Space
+uniformly-continuous-map-neg-ℚ :
+  uniformly-continuous-map-Metric-Space
     ( metric-space-ℚ)
     ( metric-space-ℚ)
-uniformly-continuous-neg-ℚ = (neg-ℚ , is-uniformly-continuous-neg-ℚ)
+uniformly-continuous-map-neg-ℚ = (neg-ℚ , is-uniformly-continuous-map-neg-ℚ)
 ```
 
 ### Subtracting from a fixed rational number is an isometry
@@ -397,37 +398,37 @@ module _
   where
 
   abstract
-    is-isometry-diff-ℚ :
+    is-isometry-left-diff-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-    is-isometry-diff-ℚ =
-      is-isometry-comp-is-isometry-Metric-Space
+    is-isometry-left-diff-ℚ =
+      is-isometry-comp-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( add-ℚ q)
         ( neg-ℚ)
-        ( is-isometry-add-ℚ q)
+        ( is-isometry-left-add-ℚ q)
         ( is-isometry-neg-ℚ)
 
-    is-uniformly-continuous-diff-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-left-diff-ℚ :
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-    is-uniformly-continuous-diff-ℚ =
-      is-uniformly-continuous-is-isometry-Metric-Space
+    is-uniformly-continuous-map-left-diff-ℚ =
+      is-uniformly-continuous-map-is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( diff-ℚ q)
-        ( is-isometry-diff-ℚ)
+        ( is-isometry-left-diff-ℚ)
 
-  uniformly-continuous-diff-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
-  uniformly-continuous-diff-ℚ =
-    ( diff-ℚ q , is-uniformly-continuous-diff-ℚ)
+  uniformly-continuous-map-left-diff-ℚ :
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
+  uniformly-continuous-map-left-diff-ℚ =
+    ( diff-ℚ q , is-uniformly-continuous-map-left-diff-ℚ)
 ```
 
 ### Multiplication of rational numbers is Lipschitz
@@ -438,13 +439,13 @@ module _
   where
 
   abstract
-    is-lipschitz-constant-succ-abs-mul-ℚ :
-      is-lipschitz-constant-function-Metric-Space
+    is-lipschitz-constant-succ-map-abs-mul-ℚ :
+      is-lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
         ( positive-succ-ℚ⁰⁺ (abs-ℚ x))
-    is-lipschitz-constant-succ-abs-mul-ℚ d y z H =
+    is-lipschitz-constant-succ-map-abs-mul-ℚ d y z H =
       neighborhood-leq-dist-ℚ
         ( positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d)
         ( x *ℚ y)
@@ -470,70 +471,70 @@ module _
               ( succ-ℚ (rational-abs-ℚ x))
               ( succ-leq-ℚ (rational-abs-ℚ x)))))
 
-    lipschitz-constant-succ-abs-mul-ℚ :
-      lipschitz-constant-function-Metric-Space
+    lipschitz-constant-map-abs-mul-ℚ :
+      lipschitz-constant-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
-    lipschitz-constant-succ-abs-mul-ℚ =
+    lipschitz-constant-map-abs-mul-ℚ =
       ( positive-succ-ℚ⁰⁺ (abs-ℚ x)) ,
-      ( is-lipschitz-constant-succ-abs-mul-ℚ)
+      ( is-lipschitz-constant-succ-map-abs-mul-ℚ)
 
-    is-lipschitz-left-mul-ℚ :
-      ( is-lipschitz-function-Metric-Space
+    is-lipschitz-map-left-mul-ℚ :
+      ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x))
-    is-lipschitz-left-mul-ℚ =
-      unit-trunc-Prop lipschitz-constant-succ-abs-mul-ℚ
+    is-lipschitz-map-left-mul-ℚ =
+      unit-trunc-Prop lipschitz-constant-map-abs-mul-ℚ
 
-    is-lipschitz-right-mul-ℚ :
-      ( is-lipschitz-function-Metric-Space
+    is-lipschitz-map-right-mul-ℚ :
+      ( is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x))
-    is-lipschitz-right-mul-ℚ =
-      is-lipschitz-htpy-function-Metric-Space
+    is-lipschitz-map-right-mul-ℚ =
+      is-lipschitz-htpy-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
         ( mul-ℚ' x)
         ( commutative-mul-ℚ x)
-        ( is-lipschitz-left-mul-ℚ)
+        ( is-lipschitz-map-left-mul-ℚ)
 
-    is-uniformly-continuous-left-mul-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-left-mul-ℚ :
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
-    is-uniformly-continuous-left-mul-ℚ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+    is-uniformly-continuous-map-left-mul-ℚ =
+      is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ x)
-        ( is-lipschitz-left-mul-ℚ)
+        ( is-lipschitz-map-left-mul-ℚ)
 
-    is-uniformly-continuous-right-mul-ℚ :
-      is-uniformly-continuous-function-Metric-Space
+    is-uniformly-continuous-map-right-mul-ℚ :
+      is-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x)
-    is-uniformly-continuous-right-mul-ℚ =
-      is-uniformly-continuous-is-lipschitz-function-Metric-Space
+    is-uniformly-continuous-map-right-mul-ℚ =
+      is-uniformly-continuous-map-is-lipschitz-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
         ( mul-ℚ' x)
-        ( is-lipschitz-right-mul-ℚ)
+        ( is-lipschitz-map-right-mul-ℚ)
 
-  uniformly-continuous-left-mul-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
-  uniformly-continuous-left-mul-ℚ =
-    ( mul-ℚ x , is-uniformly-continuous-left-mul-ℚ)
+  uniformly-continuous-map-left-mul-ℚ :
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
+  uniformly-continuous-map-left-mul-ℚ =
+    ( mul-ℚ x , is-uniformly-continuous-map-left-mul-ℚ)
 
-  uniformly-continuous-right-mul-ℚ :
-    uniformly-continuous-function-Metric-Space metric-space-ℚ metric-space-ℚ
-  uniformly-continuous-right-mul-ℚ =
-    ( mul-ℚ' x , is-uniformly-continuous-right-mul-ℚ)
+  uniformly-continuous-map-right-mul-ℚ :
+    uniformly-continuous-map-Metric-Space metric-space-ℚ metric-space-ℚ
+  uniformly-continuous-map-right-mul-ℚ =
+    ( mul-ℚ' x , is-uniformly-continuous-map-right-mul-ℚ)
 ```
 
 ### The convergent Cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
@@ -595,4 +596,30 @@ convergent-rational-ℚ⁺ =
   cauchy-approximation-rational-ℚ⁺ ,
   zero-ℚ ,
   is-zero-limit-rational-ℚ⁺
+```
+
+### `x + d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-right-add-rational-ℚ⁺ :
+    (x : ℚ) (d : ℚ⁺) → neighborhood-ℚ d x (x +ℚ rational-ℚ⁺ d)
+  neighborhood-right-add-rational-ℚ⁺ x d⁺@(d , _) =
+    ( refl-leq-ℚ (x +ℚ d) ,
+      transitive-leq-ℚ x (x +ℚ d) (x +ℚ d +ℚ d)
+        ( leq-right-add-rational-ℚ⁺ (x +ℚ d) d⁺)
+        ( leq-right-add-rational-ℚ⁺ x d⁺))
+```
+
+### `x - d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-right-diff-rational-ℚ⁺ :
+    (x : ℚ) (d : ℚ⁺) → neighborhood-ℚ d x (x -ℚ rational-ℚ⁺ d)
+  neighborhood-right-diff-rational-ℚ⁺ x d⁺@(d , _) =
+    ( transitive-leq-ℚ (x -ℚ d) x (x +ℚ d)
+        ( leq-right-add-rational-ℚ⁺ x d⁺)
+        ( leq-transpose-right-add-ℚ _ _ _ (leq-right-add-rational-ℚ⁺ x d⁺)) ,
+      inv-tr (leq-ℚ x) (is-section-diff-ℚ _ _) (refl-leq-ℚ x))
 ```

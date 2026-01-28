@@ -29,7 +29,7 @@ open import ring-theory.rings
 
 Given two [linear maps](linear-algebra.linear-maps-left-modules-rings.md) `f`
 and `g` from a [left module](linear-algebra.left-modules-rings.md) `M` over a
-[ring](ring-theory.rings.md) `R` to a left module `N` over `R`, the map
+[ring](ring-theory.rings.md) `R` to a left module `N` over `R`, then the map
 `x ↦ f x + g x` is a linear map.
 
 ## Definition
