@@ -110,8 +110,9 @@ satisfies the bound `aₙ ≤ cₙ ≤ bₙ`, and `cₙ` is a
 [Cauchy sequence](real-numbers.cauchy-sequences-real-numbers.md). The key lemma
 is that for all `n`, there is an `m ≤ n` with `|f(cₘ)| ≤ ε`
 [or](foundation.disjunction.md) `f(aₙ) < 0 < f(bₙ)`. Using the pointwise
-continuity of `f` at the [limit](real-numbers.limits-sequences-real-numbers.md)
-of the `cₙ`, we show that either case implies the intermediate value theorem.
+continuity of `f` at the
+[limit](real-numbers.limits-of-sequences-real-numbers.md) of the `cₙ`, we show
+that either case implies the intermediate value theorem.
 
 ### Defining the sequences `aₙ`, `bₙ`, `cₙ`
 
