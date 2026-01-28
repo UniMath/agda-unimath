@@ -59,6 +59,7 @@ open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
 open import real-numbers.totally-bounded-subsets-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 
 open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ```
