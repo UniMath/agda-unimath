@@ -1,4 +1,4 @@
-# Linear transformations on vector spaces
+# Linear endomorphisms on vector spaces
 
 ```agda
 module linear-algebra.linear-endomorphisms-vector-spaces where
@@ -30,7 +30,7 @@ open import linear-algebra.vector-spaces
 ## Idea
 
 A
-{{#concept "linear transformation" Disambiguation="on vector spaces" Agda=linear-endo-Vector-Space}}
+{{#concept "linear endomorphism" Disambiguation="on vector spaces" Agda=linear-endo-Vector-Space}}
 on a [vector space](linear-algebra.vector-spaces.md) `V` is a
 [linear map](linear-algebra.linear-maps-vector-spaces.md) from `V` to itself.
 
@@ -75,7 +75,7 @@ module _
 
 ## Properties
 
-### A linear transformation maps zero to zero
+### A linear endomorphism maps zero to zero
 
 ```agda
 module _
@@ -93,7 +93,7 @@ module _
       is-zero-map-zero-linear-map-Vector-Space F V V f
 ```
 
-### A linear map maps `-v` to the negation of the map of `v`
+### A linear endomorphism maps `-v` to the negation of the map of `v`
 
 ```agda
 module _
@@ -112,7 +112,7 @@ module _
       map-neg-linear-map-Vector-Space F V V f
 ```
 
-### The identity map is a linear transformation
+### The identity map is a linear endomorphism
 
 ```agda
 module _
@@ -130,7 +130,7 @@ module _
     id-linear-endo-left-module-Ring (ring-Heyting-Field F) V
 ```
 
-### The composition of linear transformations is a linear transformation
+### Composition of linear endomorphisms
 
 ```agda
 module _
@@ -148,11 +148,6 @@ module _
       is-linear-endo-Vector-Space F V (g ∘ f)
     is-linear-endo-comp-Vector-Space =
       is-linear-map-comp-Vector-Space F V V V g f
-```
-
-### The linear composition of linear transformations
-
-```agda
 module _
   {l1 l2 : Level}
   (F : Heyting-Field l1)
@@ -166,7 +161,7 @@ module _
     comp-linear-map-Vector-Space F V V V g f
 ```
 
-### Iterating linear transformations
+### Iterating linear endomorphisms
 
 ```agda
 module _
