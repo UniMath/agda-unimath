@@ -9,7 +9,15 @@ module analysis.classical-intermediate-value-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-
+open import real-numbers.proper-closed-intervals-real-numbers
+open import foundation.dependent-pair-types
+open import lists.sequences
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import foundation.universe-levels
+open import real-numbers.nonpositive-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -37,7 +45,25 @@ there exists a `c` with `a ≤ c ≤ b` with `|f c| ≤ ε`.
 
 ## Proof
 
-This has yet to be proved.
+```agda
+module _
+  {l1 l2 : Level}
+  (f : pointwise-ε-δ-continuous-endomap-ℝ l1 l2)
+  ([a,b]@(a , b , a<b) : proper-closed-interval-ℝ l1 l1)
+  (fa≤0 : is-nonpositive-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f a))
+
+  where
+
+  interleaved mutual
+    lower-bound-sequence-classical-intermediate-value-theorem-ℝ :
+      sequence (ℝ l1)
+    upper-bound-sequence-classical-intermediate-value-theorem-ℝ :
+      sequence (ℝ l1)
+    sequence-classical-intermediate-value-theorem-ℝ : sequence (ℝ l1)
+
+    lower-bound-sequence-classical-intermediate-value-theorem-ℝ 0 = a
+    upper-bound-sequence-classical-intermediate-value-theorem-ℝ 0 = b
+```
 
 ## External links
 

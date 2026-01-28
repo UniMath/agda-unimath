@@ -33,6 +33,7 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
+open import foundation.law-of-excluded-middle
 
 open import logic.functoriality-existential-quantification
 
@@ -635,7 +636,6 @@ module _
 
 ```agda
 abstract
-
   irrefutable-trichotomy-le-ℝ :
     {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
     ¬¬ (le-ℝ a b + sim-ℝ a b + le-ℝ b a)
@@ -787,6 +787,15 @@ strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
 strict-order-ℝ l =
   ( strict-preorder-ℝ l ,
     extensionality-strict-preorder-ℝ l)
+```
+
+### If the law of excluded middle holds, trichotomy follows
+
+```agda
+trichotomy-le-lem-ℝ :
+  {l1 l2 l3 : Level} → level-LEM (l2 ⊔ l3) →
+  {A : UU l1} (x : ℝ l2) (y : ℝ l3) →
+  (le-ℝ x y → A) → (sim-ℝ x y → A) →
 ```
 
 ## References
