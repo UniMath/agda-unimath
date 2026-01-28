@@ -132,7 +132,7 @@ module _
   (M : left-module-Commutative-Ring l2 R)
   where
 
-  is-linear-id-left-module-Commutative-Ring :
+  is-linear-map-id-left-module-Commutative-Ring :
     is-linear-transform-left-module-Commutative-Ring R M id
   is-linear-id-left-module-Commutative-Ring =
     is-linear-id-left-module-Ring (ring-Commutative-Ring R) M

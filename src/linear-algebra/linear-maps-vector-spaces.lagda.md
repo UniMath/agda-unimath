@@ -174,7 +174,7 @@ module _
   where
 
   abstract
-    is-linear-comp-is-linear-map-Vector-Space :
+    is-linear-map-comp-Vector-Space :
       is-linear-map-Vector-Space F W X g →
       is-linear-map-Vector-Space F V W f →
       is-linear-map-Vector-Space F V X (g ∘ f)

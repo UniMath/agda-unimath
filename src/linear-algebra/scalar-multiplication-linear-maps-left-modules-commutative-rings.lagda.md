@@ -40,7 +40,7 @@ module _
   (r : type-Commutative-Ring R)
   where
 
-  is-linear-mul-left-module-Commutative-Ring :
+  is-linear-map-mul-left-module-Commutative-Ring :
     is-linear-transform-left-module-Commutative-Ring R M
       ( mul-left-module-Commutative-Ring R M r)
   is-linear-mul-left-module-Commutative-Ring =

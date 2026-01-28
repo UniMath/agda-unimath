@@ -37,7 +37,7 @@ module _
   (c : type-Heyting-Field F)
   where
 
-  is-linear-mul-Vector-Space :
+  is-linear-map-mul-Vector-Space :
     is-linear-transform-Vector-Space F V (mul-Vector-Space F V c)
   is-linear-mul-Vector-Space =
     is-linear-mul-left-module-Commutative-Ring

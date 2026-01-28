@@ -121,7 +121,7 @@ module _
   (V : Vector-Space l2 F)
   where
 
-  is-linear-id-Vector-Space : is-linear-transform-Vector-Space F V id
+  is-linear-map-id-Vector-Space : is-linear-transform-Vector-Space F V id
   is-linear-id-Vector-Space =
     is-linear-id-left-module-Ring (ring-Heyting-Field F) V
 

@@ -121,7 +121,7 @@ module _
   where
 
   is-linear-id-left-module-Ring : is-linear-map-left-module-Ring R M M id
-  is-linear-id-left-module-Ring = (λ _ _ → refl) , (λ _ _ → refl)
+  is-linear-map-id-left-module-Ring = (λ _ _ → refl) , (λ _ _ → refl)
 
   id-linear-transform-left-module-Ring : linear-transform-left-module-Ring R M
   id-linear-transform-left-module-Ring = (id , is-linear-id-left-module-Ring)

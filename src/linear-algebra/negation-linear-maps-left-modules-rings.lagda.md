@@ -39,13 +39,13 @@ module _
   (f : linear-map-left-module-Ring R M N)
   where
 
-  neg-map-linear-map-left-module-Ring :
+  map-neg-linear-map-left-module-Ring :
     type-left-module-Ring R M → type-left-module-Ring R N
   neg-map-linear-map-left-module-Ring x =
     neg-left-module-Ring R N (map-linear-map-left-module-Ring R M N f x)
 
   abstract
-    is-additive-neg-map-linear-map-left-module-Ring :
+    is-additive-map-neg-linear-map-left-module-Ring :
       is-additive-map-left-module-Ring R M N neg-map-linear-map-left-module-Ring
     is-additive-neg-map-linear-map-left-module-Ring x y =
       ( ap
@@ -53,7 +53,7 @@ module _
         ( is-additive-map-linear-map-left-module-Ring R M N f x y)) ∙
       ( distributive-neg-add-left-module-Ring R N _ _)
 
-    is-homogeneous-neg-map-linear-map-left-module-Ring :
+    is-homogeneous-map-neg-linear-map-left-module-Ring :
       is-homogeneous-map-left-module-Ring R M N
         ( neg-map-linear-map-left-module-Ring)
     is-homogeneous-neg-map-linear-map-left-module-Ring c x =
@@ -62,7 +62,7 @@ module _
         ( is-homogeneous-map-linear-map-left-module-Ring R M N f c x)) ∙
       ( inv (right-negative-law-mul-left-module-Ring R N c _))
 
-  is-linear-neg-map-linear-map-left-module-Ring :
+  is-linear-map-neg-linear-map-left-module-Ring :
     is-linear-map-left-module-Ring R M N neg-map-linear-map-left-module-Ring
   is-linear-neg-map-linear-map-left-module-Ring =
     ( is-additive-neg-map-linear-map-left-module-Ring ,
