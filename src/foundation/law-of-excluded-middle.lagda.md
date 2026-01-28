@@ -22,13 +22,6 @@ open import univalent-combinatorics.2-element-types
 
 </details>
 
-## Idea
-
-The
-{{#concept "law of excluded middle" WD="principle of excluded middle" WDID=Q468422 Agda=LEM}}
-asserts that any [proposition](foundation-core.propositions.md) `P` is
-[decidable](foundation.decidable-types.md).
-
 ## Properties
 
 ### The unrestricted law of excluded middle does not hold
