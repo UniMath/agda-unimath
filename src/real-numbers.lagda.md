@@ -124,7 +124,6 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.strictly-increasing-endomaps-real-numbers public
-open import real-numbers.strictly-increasing-functions-real-numbers public
 open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
