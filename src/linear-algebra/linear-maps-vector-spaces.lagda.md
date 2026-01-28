@@ -178,8 +178,8 @@ module _
       is-linear-map-Vector-Space F W X g →
       is-linear-map-Vector-Space F V W f →
       is-linear-map-Vector-Space F V X (g ∘ f)
-    is-linear-comp-is-linear-map-Vector-Space =
-      is-linear-comp-is-linear-map-left-module-Ring
+    is-linear-map-comp-Vector-Space =
+      is-linear-map-comp-left-module-Ring
         ( ring-Heyting-Field F)
         ( V)
         ( W)

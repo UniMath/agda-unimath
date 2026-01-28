@@ -43,9 +43,6 @@ open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
-open import linear-algebra.linear-transformations-left-modules-commutative-rings public
-open import linear-algebra.linear-transformations-left-modules-rings public
-open import linear-algebra.linear-transformations-vector-spaces public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public

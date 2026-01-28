@@ -194,8 +194,8 @@ module _
       is-linear-map-left-module-Commutative-Ring R W X g →
       is-linear-map-left-module-Commutative-Ring R V W f →
       is-linear-map-left-module-Commutative-Ring R V X (g ∘ f)
-    is-linear-comp-is-linear-map-left-module-Commutative-Ring =
-      is-linear-comp-is-linear-map-left-module-Ring
+    is-linear-map-comp-left-module-Commutative-Ring =
+      is-linear-map-comp-left-module-Ring
         ( ring-Commutative-Ring R)
         ( V)
         ( W)
