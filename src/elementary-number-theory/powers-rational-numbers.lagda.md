@@ -365,7 +365,7 @@ abstract
   preserves-leq-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
     leq-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-leq-odd-power-ℚ n p q odd-n p≤q =
+  preserves-leq-power-is-odd-exponent-ℚ n p q odd-n p≤q =
     trichotomy-le-ℚ p q
       ( leq-le-ℚ ∘ preserves-le-odd-power-ℚ n p q odd-n)
       ( leq-eq-ℚ ∘ ap (power-ℚ n))
