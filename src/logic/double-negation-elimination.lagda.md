@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality
 open import foundation.empty-types
+open import foundation.function-types
 open import foundation.evaluation-functions
 open import foundation.hilberts-epsilon-operators
 open import foundation.irrefutable-equality
@@ -24,6 +25,7 @@ open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation-core.law-of-excluded-middle
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -288,6 +290,20 @@ module _
   {l1 : Level} {A : UU l1} → has-double-negation-elim A → ε-operator-Hilbert A
 ε-operator-Hilbert-has-double-negation-elim H =
   H ∘ double-negation-double-negation-type-trunc-Prop ∘ intro-double-negation
+```
+
+### The law of excluded middle implies double negation elimination for propositions
+
+```agda
+module _
+  {l : Level}
+  (lem : level-LEM l)
+  (P : Prop l)
+  where
+
+  double-negation-elim-lem-Prop : has-double-negation-elim (type-Prop P)
+  double-negation-elim-lem-Prop ¬¬P =
+    rec-coproduct id (ex-falso ∘ ¬¬P) (lem P)
 ```
 
 ## See also
