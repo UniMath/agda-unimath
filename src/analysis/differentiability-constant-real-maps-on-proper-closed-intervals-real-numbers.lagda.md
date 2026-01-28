@@ -96,7 +96,7 @@ module _
 const-differentiable-real-map-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) (c : ℝ l2) →
   differentiable-real-map-proper-closed-interval-ℝ l2 [a,b]
-differentiable-const-real-map-proper-closed-interval-ℝ {l1} {l2} [a,b] c =
+const-differentiable-real-map-proper-closed-interval-ℝ {l1} {l2} [a,b] c =
   ( const (type-proper-closed-interval-ℝ l1 [a,b]) c ,
     const (type-proper-closed-interval-ℝ l1 [a,b]) (raise-zero-ℝ (l1 ⊔ l2)) ,
     is-derivative-const-zero-const-real-map-proper-closed-interval-ℝ [a,b] c)

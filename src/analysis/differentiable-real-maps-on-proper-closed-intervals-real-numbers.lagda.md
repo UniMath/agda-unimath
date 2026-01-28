@@ -125,22 +125,24 @@ module _
   is-derivative-real-map-proper-closed-interval-ℝ =
     type-Prop is-derivative-prop-real-map-proper-closed-interval-ℝ
 
+is-differentiable-real-map-proper-closed-interval-ℝ :
+  {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) →
+  (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) →
+  UU (lsuc l1 ⊔ lsuc l2)
+is-differentiable-real-map-proper-closed-interval-ℝ {l1} {l2} [a,b] f =
+  Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
+    ( is-derivative-real-map-proper-closed-interval-ℝ [a,b] f)
+
 module _
   {l1 : Level}
   (l2 : Level)
   ([a,b] : proper-closed-interval-ℝ l1 l1)
   where
 
-  derivative-real-map-proper-closed-interval-ℝ :
-    (type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2) → UU (lsuc (l1 ⊔ l2))
-  derivative-real-map-proper-closed-interval-ℝ f =
-    Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
-      ( λ f' → is-derivative-real-map-proper-closed-interval-ℝ [a,b] f f')
-
   differentiable-real-map-proper-closed-interval-ℝ : UU (lsuc (l1 ⊔ l2))
   differentiable-real-map-proper-closed-interval-ℝ =
     Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
-      ( derivative-real-map-proper-closed-interval-ℝ)
+      ( is-differentiable-real-map-proper-closed-interval-ℝ [a,b])
 
 module _
   {l1 l2 : Level}
@@ -425,12 +427,6 @@ module _
   (f : type-proper-closed-interval-ℝ l1 [a,b] → ℝ l2)
   where
 
-  is-differentiable-real-map-proper-closed-interval-ℝ :
-    UU (lsuc l1 ⊔ lsuc l2)
-  is-differentiable-real-map-proper-closed-interval-ℝ =
-    Σ ( type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2))
-      ( is-derivative-real-map-proper-closed-interval-ℝ [a,b] f)
-
   abstract
     eq-is-derivative-real-map-proper-closed-interval-ℝ :
       (g h : type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2)) →
@@ -449,7 +445,7 @@ module _
 
     all-elements-equal-is-differentiable-real-map-proper-closed-interval-ℝ :
       all-elements-equal
-        ( is-differentiable-real-map-proper-closed-interval-ℝ)
+        ( is-differentiable-real-map-proper-closed-interval-ℝ [a,b] f)
     all-elements-equal-is-differentiable-real-map-proper-closed-interval-ℝ
       (g , G) (h , H) =
       eq-type-subtype
@@ -457,7 +453,7 @@ module _
         ( eq-is-derivative-real-map-proper-closed-interval-ℝ g h G H)
 
     is-prop-is-differentiable-real-map-proper-closed-interval-ℝ :
-      is-prop is-differentiable-real-map-proper-closed-interval-ℝ
+      is-prop (is-differentiable-real-map-proper-closed-interval-ℝ [a,b] f)
     is-prop-is-differentiable-real-map-proper-closed-interval-ℝ =
       is-prop-all-elements-equal
         ( all-elements-equal-is-differentiable-real-map-proper-closed-interval-ℝ)
@@ -465,7 +461,7 @@ module _
   is-differentiable-prop-real-map-proper-closed-interval-ℝ :
     Prop (lsuc l1 ⊔ lsuc l2)
   is-differentiable-prop-real-map-proper-closed-interval-ℝ =
-    ( is-differentiable-real-map-proper-closed-interval-ℝ ,
+    ( is-differentiable-real-map-proper-closed-interval-ℝ [a,b] f ,
       is-prop-is-differentiable-real-map-proper-closed-interval-ℝ)
 ```
 
