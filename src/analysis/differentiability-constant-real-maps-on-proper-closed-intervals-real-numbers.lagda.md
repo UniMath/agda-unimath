@@ -93,7 +93,7 @@ module _
                     is-nonnegative-real-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε *ℝ⁰⁺ nonnegative-dist-ℝ _ _)))
 
-differentiable-const-real-map-proper-closed-interval-ℝ :
+const-differentiable-real-map-proper-closed-interval-ℝ :
   {l1 l2 : Level} ([a,b] : proper-closed-interval-ℝ l1 l1) (c : ℝ l2) →
   differentiable-real-map-proper-closed-interval-ℝ l2 [a,b]
 differentiable-const-real-map-proper-closed-interval-ℝ {l1} {l2} [a,b] c =
