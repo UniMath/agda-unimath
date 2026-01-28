@@ -19,9 +19,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import linear-algebra.linear-endomorphisms-left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
 open import linear-algebra.linear-maps-vector-spaces
-open import linear-algebra.linear-endomorphisms-left-modules-rings
 open import linear-algebra.vector-spaces
 ```
 

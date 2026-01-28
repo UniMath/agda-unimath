@@ -20,9 +20,9 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.linear-endomorphisms-left-modules-rings
 open import linear-algebra.linear-maps-left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-rings
-open import linear-algebra.linear-endomorphisms-left-modules-rings
 ```
 
 </details>
