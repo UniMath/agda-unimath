@@ -9,36 +9,50 @@ module analysis.classical-intermediate-value-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-open import real-numbers.closed-intervals-real-numbers
-open import foundation.dependent-pair-types
-open import lists.sequences
-open import real-numbers.binary-mean-real-numbers
-open import foundation.homotopies
-open import foundation.propositional-truncations
 open import elementary-number-theory.addition-positive-rational-numbers
-open import real-numbers.iterated-halving-difference-real-numbers
-open import foundation.coproduct-types
-open import real-numbers.rational-real-numbers
-open import real-numbers.dedekind-real-numbers
-open import foundation.law-of-excluded-middle
+open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.inequality-real-numbers
-open import real-numbers.difference-real-numbers
-open import real-numbers.negation-real-numbers
-open import foundation.identity-types
-open import foundation.universe-levels
-open import real-numbers.nonpositive-real-numbers
-open import real-numbers.nonnegative-real-numbers
-open import real-numbers.multiplication-real-numbers
-open import real-numbers.positive-real-numbers
+
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import real-numbers.increasing-sequences-real-numbers
-open import real-numbers.limits-of-sequences-real-numbers
+open import foundation.existential-quantification
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.law-of-excluded-middle
+open import foundation.propositional-truncations
+open import foundation.universe-levels
+
+open import lists.sequences
+open import lists.subsequences
+
+open import order-theory.large-posets
+
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
+open import real-numbers.binary-mean-real-numbers
 open import real-numbers.cauchy-sequences-real-numbers
-open import real-numbers.real-sequences-approximating-zero
+open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.decreasing-sequences-real-numbers
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.increasing-sequences-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.iterated-halving-difference-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
+open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
+open import real-numbers.negation-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.nonpositive-real-numbers
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
+open import real-numbers.positive-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.real-sequences-approximating-zero
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
+open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -417,7 +431,7 @@ module _
         ( is-limit-sequence-classical-intermediate-value-theorem-ℝ)
 ```
 
-### `f c ≤ 0`
+### `f c` is nonpositive
 
 ```agda
   abstract
@@ -429,11 +443,190 @@ module _
     is-nonpositive-map-limit-sequence-classical-intermediate-value-theorem-ℝ =
       leq-not-le-ℝ _ _
         ( λ 0<fc →
-          let open do-syntax-trunc-Prop empty-Prop
+          let
+            open do-syntax-trunc-Prop empty-Prop
+            open inequality-reasoning-Large-Poset ℝ-Large-Poset
           in do
             (ε , ε<fc) ← exists-ℚ⁺-in-lower-cut-ℝ⁺ (_ , 0<fc)
-            let (
-            {!   !})
+            (δ , Hδ) ←
+              is-pointwise-ε-δ-continuous-map-pointwise-ε-δ-continuous-endomap-ℝ
+                ( f)
+                ( limit-sequence-classical-intermediate-value-theorem-ℝ)
+                ( ε)
+            (δ' , 2δ'<δ) ← double-le-ℚ⁺ δ
+            (μba , is-mod-μba) ←
+              is-limit-subsequence-ℝ
+                ( tail-subsequence (iterated-half-diff-leq-ℝ a≤b))
+                ( is-zero-limit-iterated-half-diff-leq-ℝ a≤b)
+            (μc , is-mod-μc) ←
+              is-limit-sequence-classical-intermediate-value-theorem-ℝ
+            let
+              Nba = μba δ'
+              Nc = μc δ'
+              N = max-ℕ Nba Nc
+              cN = sequence-classical-intermediate-value-theorem-ℝ N
+              aN = lower-bound-sequence-classical-intermediate-value-theorem-ℝ N
+              Nδ'aNcN : neighborhood-ℝ l1 δ' aN cN
+              Nδ'aNcN =
+                neighborhood-real-bound-each-leq-ℝ _ _ _
+                  ( transitive-leq-ℝ _ _ _
+                    ( leq-left-add-real-ℚ⁺ _ _)
+                    ( leq-lower-bound-sequence-classical-intermediate-value-theorem-ℝ
+                      ( N)))
+                  ( chain-of-inequalities
+                    cN
+                    ≤ (cN -ℝ aN) +ℝ aN
+                      by leq-sim-ℝ' (cancel-right-diff-add-ℝ _ _)
+                    ≤ iterated-half-diff-leq-ℝ a≤b (succ-ℕ N) +ℝ aN
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( diff-lower-bound-sequence-classical-intermediate-value-theorem-ℝ
+                              ( N))
+                            ( refl))
+                    ≤ (raise-zero-ℝ l1 +ℝ real-ℚ⁺ δ') +ℝ aN
+                      by
+                        preserves-leq-right-add-ℝ _ _ _
+                          ( left-leq-real-bound-neighborhood-ℝ _ _ _
+                            ( is-mod-μba δ' N (left-leq-max-ℕ Nba Nc)))
+                    ≤ (raise-zero-ℝ l1 +ℝ aN) +ℝ real-ℚ⁺ δ'
+                      by leq-eq-ℝ (right-swap-add-ℝ _ _ _)
+                    ≤ aN +ℝ real-ℚ⁺ δ'
+                      by
+                        leq-eq-ℝ (ap-add-ℝ (left-raise-zero-law-add-ℝ aN) refl))
+              NδaNc =
+                monotonic-neighborhood-ℝ _ _
+                  ( δ' +ℚ⁺ δ')
+                  ( δ)
+                  ( 2δ'<δ)
+                  ( is-triangular-neighborhood-ℝ _ _ _ _ _
+                    ( is-mod-μc δ' N (right-leq-max-ℕ Nba Nc))
+                    ( Nδ'aNcN))
+            not-leq-le-ℝ
+              ( real-ℚ⁺ ε)
+              ( map-pointwise-ε-δ-continuous-endomap-ℝ
+                ( f)
+                ( limit-sequence-classical-intermediate-value-theorem-ℝ))
+              ( le-real-is-in-lower-cut-ℝ _ ε<fc)
+              ( chain-of-inequalities
+                map-pointwise-ε-δ-continuous-endomap-ℝ
+                  ( f)
+                  ( limit-sequence-classical-intermediate-value-theorem-ℝ)
+                ≤ map-pointwise-ε-δ-continuous-endomap-ℝ f aN +ℝ real-ℚ⁺ ε
+                  by
+                    left-leq-real-bound-neighborhood-ℝ _ _ _
+                      ( Hδ aN (is-symmetric-neighborhood-ℝ _ _ _ NδaNc))
+                ≤ zero-ℝ +ℝ real-ℚ⁺ ε
+                  by
+                    preserves-leq-right-add-ℝ _ _ _
+                      ( is-nonpositive-map-lower-bound-sequence-classical-intermediate-value-theorem-ℝ
+                        ( N))
+                ≤ real-ℚ⁺ ε
+                  by leq-eq-ℝ (left-unit-law-add-ℝ _)))
+```
+
+### `f c` is nonnegative
+
+```agda
+  abstract
+    is-nonnegative-map-limit-sequence-classical-intermediate-value-theorem-ℝ :
+      is-nonnegative-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
+          ( f)
+          ( limit-sequence-classical-intermediate-value-theorem-ℝ))
+    is-nonnegative-map-limit-sequence-classical-intermediate-value-theorem-ℝ =
+      leq-not-le-ℝ _ _
+        ( λ fc<0 →
+          let
+            open do-syntax-trunc-Prop empty-Prop
+            open inequality-reasoning-Large-Poset ℝ-Large-Poset
+          in do
+            (ε , fc+ε<0) ← exists-positive-rational-separation-le-ℝ fc<0
+            (δ , Hδ) ←
+              is-pointwise-ε-δ-continuous-map-pointwise-ε-δ-continuous-endomap-ℝ
+                ( f)
+                ( limit-sequence-classical-intermediate-value-theorem-ℝ)
+                ( ε)
+            (δ' , 2δ'<δ) ← double-le-ℚ⁺ δ
+            (μba , is-mod-μba) ←
+              is-limit-subsequence-ℝ
+                ( tail-subsequence (iterated-half-diff-leq-ℝ a≤b))
+                ( is-zero-limit-iterated-half-diff-leq-ℝ a≤b)
+            (μc , is-mod-μc) ←
+              is-limit-sequence-classical-intermediate-value-theorem-ℝ
+            let
+              Nba = μba δ'
+              Nc = μc δ'
+              N = max-ℕ Nba Nc
+              cN = sequence-classical-intermediate-value-theorem-ℝ N
+              bN = upper-bound-sequence-classical-intermediate-value-theorem-ℝ N
+              Nδ'bNcN : neighborhood-ℝ l1 δ' bN cN
+              Nδ'bNcN =
+                neighborhood-real-bound-each-leq-ℝ _ _ _
+                  ( chain-of-inequalities
+                    bN
+                    ≤ (bN -ℝ cN) +ℝ cN
+                      by leq-sim-ℝ' (cancel-right-diff-add-ℝ _ _)
+                    ≤ iterated-half-diff-leq-ℝ a≤b (succ-ℕ N) +ℝ cN
+                      by
+                        leq-eq-ℝ
+                          ( ap-add-ℝ
+                            ( diff-upper-bound-sequence-classical-intermediate-value-theorem-ℝ
+                              ( N))
+                            ( refl))
+                    ≤ (raise-zero-ℝ l1 +ℝ real-ℚ⁺ δ') +ℝ cN
+                      by
+                        preserves-leq-right-add-ℝ _ _ _
+                          ( left-leq-real-bound-neighborhood-ℝ _ _ _
+                            ( is-mod-μba δ' N (left-leq-max-ℕ Nba Nc)))
+                    ≤ (raise-zero-ℝ l1 +ℝ cN) +ℝ real-ℚ⁺ δ'
+                      by leq-eq-ℝ (right-swap-add-ℝ _ _ _)
+                    ≤ cN +ℝ real-ℚ⁺ δ'
+                      by
+                        leq-eq-ℝ (ap-add-ℝ (left-raise-zero-law-add-ℝ cN) refl))
+                  ( transitive-leq-ℝ _ _ _
+                    ( leq-left-add-real-ℚ⁺ _ _)
+                    ( leq-upper-bound-sequence-classical-intermediate-value-theorem-ℝ
+                      ( N)))
+              NδbNc =
+                monotonic-neighborhood-ℝ _ _
+                  ( δ' +ℚ⁺ δ')
+                  ( δ)
+                  ( 2δ'<δ)
+                  ( is-triangular-neighborhood-ℝ _ _ _ _ _
+                    ( is-mod-μc δ' N (right-leq-max-ℕ Nba Nc))
+                    ( Nδ'bNcN))
+            not-leq-le-ℝ _ _
+              ( fc+ε<0)
+              ( chain-of-inequalities
+                zero-ℝ
+                ≤ map-pointwise-ε-δ-continuous-endomap-ℝ
+                    ( f)
+                    ( bN)
+                  by
+                    is-nonnegative-map-upper-bound-sequence-classical-intermediate-value-theorem-ℝ
+                      ( N)
+                ≤ ( map-pointwise-ε-δ-continuous-endomap-ℝ
+                    ( f)
+                    ( limit-sequence-classical-intermediate-value-theorem-ℝ)) +ℝ
+                  ( real-ℚ⁺ ε)
+                  by
+                    right-leq-real-bound-neighborhood-ℝ _ _ _
+                      ( Hδ bN (is-symmetric-neighborhood-ℝ _ _ _ NδbNc))))
+
+    classical-intermediate-value-theorem-ℝ :
+      exists
+        ( type-closed-interval-ℝ l1 [a,b])
+        ( λ (x , _ , _) →
+          is-zero-prop-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f x))
+    classical-intermediate-value-theorem-ℝ =
+      intro-exists
+        ( limit-sequence-classical-intermediate-value-theorem-ℝ ,
+          leq-lower-bound-lim-sequence-classical-intermediate-value-theorem-ℝ ,
+          leq-upper-bound-lim-sequence-classical-intermediate-value-theorem-ℝ)
+        ( sim-sim-leq-ℝ
+          ( is-nonpositive-map-limit-sequence-classical-intermediate-value-theorem-ℝ ,
+            is-nonnegative-map-limit-sequence-classical-intermediate-value-theorem-ℝ))
 ```
 
 ## External links

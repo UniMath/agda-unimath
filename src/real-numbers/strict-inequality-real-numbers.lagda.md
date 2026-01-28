@@ -24,21 +24,21 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-disjunction
 open import foundation.large-binary-relations
+open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.functoriality-coproduct-types
-open import logic.irrefutable-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
-open import foundation.law-of-excluded-middle
 
-open import logic.functoriality-existential-quantification
 open import logic.double-negation-elimination
+open import logic.functoriality-existential-quantification
+open import logic.irrefutable-types
 
 open import order-theory.similarity-of-elements-strict-preorders
 open import order-theory.strict-orders
