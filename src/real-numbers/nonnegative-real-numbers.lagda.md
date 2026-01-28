@@ -17,6 +17,7 @@ open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -161,6 +162,9 @@ zero-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ zero-ℚ⁰⁺
 
 one-ℝ⁰⁺ : ℝ⁰⁺ lzero
 one-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ one-ℚ⁰⁺
+
+one-half-ℝ⁰⁺ : ℝ⁰⁺ lzero
+one-half-ℝ⁰⁺ = nonnegative-real-ℚ⁺ one-half-ℚ⁺
 ```
 
 ### A real number is nonnegative if and only if every element of its upper cut is positive
