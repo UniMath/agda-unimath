@@ -1,7 +1,7 @@
 # Eigenmodules of linear transformations of left modules over commutative rings
 
 ```agda
-module spectral-theory.eigenmodules-linear-transformations-left-modules-commutative-rings where
+module spectral-theory.eigenmodules-linear-endomorphisms-left-modules-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -17,10 +17,10 @@ open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.left-submodules-commutative-rings
-open import linear-algebra.linear-transformations-left-modules-commutative-rings
+open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
 open import linear-algebra.subsets-left-modules-commutative-rings
 
-open import spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-commutative-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings
 ```
 
 </details>
@@ -28,14 +28,14 @@ open import spectral-theory.eigenvalues-eigenelements-linear-transformations-lef
 ## Idea
 
 Given a
-[linear transformation](linear-algebra.linear-transformations-left-modules-commutative-rings.md)
+[linear transformation](linear-algebra.linear-endomorphisms-left-modules-commutative-rings.md)
 `f` of a [left module](linear-algebra.left-modules-commutative-rings.md) `M`
 over a [commutative ring](commutative-algebra.commutative-rings.md) `R`, the
-{{#concept "eigenmodule" Disambiguation="of a linear transformation of a left module over a commutative ring" Agda=eigenmodule-linear-transform-left-module-Commutative-Ring}}
+{{#concept "eigenmodule" Disambiguation="of a linear transformation of a left module over a commutative ring" Agda=eigenmodule-linear-endo-left-module-Commutative-Ring}}
 of `r : R` is the
 [subset](linear-algebra.subsets-left-modules-commutative-rings.md) of elements
 of `M` with the
-[eigenvalue](spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-commutative-rings.md)
+[eigenvalue](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings.md)
 `r`. This subset is a
 [submodule](linear-algebra.left-submodules-commutative-rings.md) of `M`.
 
@@ -46,14 +46,14 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   (r : type-Commutative-Ring R)
   where
 
-  subset-eigenmodule-linear-transform-left-module-Commutative-Ring :
+  subset-eigenmodule-linear-endo-left-module-Commutative-Ring :
     subset-left-module-Commutative-Ring l2 R M
-  subset-eigenmodule-linear-transform-left-module-Commutative-Ring =
-    is-eigenelement-eigenvalue-prop-linear-transform-left-module-Commutative-Ring
+  subset-eigenmodule-linear-endo-left-module-Commutative-Ring =
+    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring
       ( R)
       ( M)
       ( f)
@@ -69,29 +69,29 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   (r : type-Commutative-Ring R)
   where
 
   abstract
-    is-closed-under-addition-subset-eigenmodule-linear-transform-left-module-Commutative-Ring :
+    is-closed-under-addition-subset-eigenmodule-linear-endo-left-module-Commutative-Ring :
       is-closed-under-addition-subset-left-module-Commutative-Ring R M
-        ( subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+        ( subset-eigenmodule-linear-endo-left-module-Commutative-Ring
           ( R)
           ( M)
           ( f)
           ( r))
-    is-closed-under-addition-subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+    is-closed-under-addition-subset-eigenmodule-linear-endo-left-module-Commutative-Ring
       x y fx=rx fy=ry =
       equational-reasoning
-      map-linear-transform-left-module-Commutative-Ring R M f
+      map-linear-endo-left-module-Commutative-Ring R M f
         ( add-left-module-Commutative-Ring R M x y)
       ＝
         add-left-module-Commutative-Ring R M
-          ( map-linear-transform-left-module-Commutative-Ring R M f x)
-          ( map-linear-transform-left-module-Commutative-Ring R M f y)
+          ( map-linear-endo-left-module-Commutative-Ring R M f x)
+          ( map-linear-endo-left-module-Commutative-Ring R M f y)
         by
-          is-additive-map-linear-transform-left-module-Commutative-Ring
+          is-additive-map-linear-endo-left-module-Commutative-Ring
             ( R)
             ( M)
             ( f)
@@ -117,31 +117,31 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   (r : type-Commutative-Ring R)
   where
 
   abstract
-    is-closed-under-scalar-multiplication-subset-eigenmodule-linear-transform-left-module-Commutative-Ring :
+    is-closed-under-scalar-multiplication-subset-eigenmodule-linear-endo-left-module-Commutative-Ring :
       is-closed-under-scalar-multiplication-subset-left-module-Commutative-Ring
         ( R)
         ( M)
-        ( subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+        ( subset-eigenmodule-linear-endo-left-module-Commutative-Ring
           ( R)
           ( M)
           ( f)
           ( r))
-    is-closed-under-scalar-multiplication-subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+    is-closed-under-scalar-multiplication-subset-eigenmodule-linear-endo-left-module-Commutative-Ring
       s x fx=rx =
       equational-reasoning
-      map-linear-transform-left-module-Commutative-Ring R M f
+      map-linear-endo-left-module-Commutative-Ring R M f
         ( mul-left-module-Commutative-Ring R M s x)
       ＝
         mul-left-module-Commutative-Ring R M
           ( s)
-          ( map-linear-transform-left-module-Commutative-Ring R M f x)
+          ( map-linear-endo-left-module-Commutative-Ring R M f x)
         by
-          is-homogeneous-map-linear-transform-left-module-Commutative-Ring
+          is-homogeneous-map-linear-endo-left-module-Commutative-Ring
             ( R)
             ( M)
             ( f)
@@ -166,39 +166,39 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   (r : type-Commutative-Ring R)
   where
 
-  eigenmodule-linear-transform-left-module-Commutative-Ring :
+  eigenmodule-linear-endo-left-module-Commutative-Ring :
     left-submodule-Commutative-Ring l2 R M
-  eigenmodule-linear-transform-left-module-Commutative-Ring =
-    ( subset-eigenmodule-linear-transform-left-module-Commutative-Ring R M f r ,
-      is-eigenelement-zero-linear-transform-left-module-Commutative-Ring
+  eigenmodule-linear-endo-left-module-Commutative-Ring =
+    ( subset-eigenmodule-linear-endo-left-module-Commutative-Ring R M f r ,
+      is-eigenelement-zero-linear-endo-left-module-Commutative-Ring
         ( R)
         ( M)
         ( f)
         ( r) ,
-      is-closed-under-addition-subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+      is-closed-under-addition-subset-eigenmodule-linear-endo-left-module-Commutative-Ring
         ( R)
         ( M)
         ( f)
         ( r) ,
-      is-closed-under-scalar-multiplication-subset-eigenmodule-linear-transform-left-module-Commutative-Ring
+      is-closed-under-scalar-multiplication-subset-eigenmodule-linear-endo-left-module-Commutative-Ring
         ( R)
         ( M)
         ( f)
         ( r))
 
-  left-eigenmodule-linear-transform-left-module-Commutative-Ring :
+  left-eigenmodule-linear-endo-left-module-Commutative-Ring :
     left-module-Commutative-Ring l2 R
-  left-eigenmodule-linear-transform-left-module-Commutative-Ring =
+  left-eigenmodule-linear-endo-left-module-Commutative-Ring =
     left-module-left-submodule-Commutative-Ring
       ( R)
       ( M)
-      ( eigenmodule-linear-transform-left-module-Commutative-Ring)
+      ( eigenmodule-linear-endo-left-module-Commutative-Ring)
 ```
 
 ## See also
 
-- [Eigenspaces of linear transformations of vector spaces](spectral-theory.eigenspaces-linear-transformations-vector-spaces.md)
+- [Eigenspaces of linear transformations of vector spaces](spectral-theory.eigenspaces-linear-endomorphisms-vector-spaces.md)

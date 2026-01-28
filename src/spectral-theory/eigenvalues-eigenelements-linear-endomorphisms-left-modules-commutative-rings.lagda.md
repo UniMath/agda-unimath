@@ -1,7 +1,7 @@
 # Eigenvalues and eigenelements of linear transformations of left modules over commutative rings
 
 ```agda
-module spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-commutative-rings where
+module spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +14,9 @@ open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.left-modules-rings
-open import linear-algebra.linear-transformations-left-modules-commutative-rings
+open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
 
-open import spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings
 ```
 
 </details>
@@ -24,7 +24,7 @@ open import spectral-theory.eigenvalues-eigenelements-linear-transformations-lef
 ## Idea
 
 Given a
-[linear transformation](linear-algebra.linear-transformations-left-modules-commutative-rings.md)
+[linear transformation](linear-algebra.linear-endomorphisms-left-modules-commutative-rings.md)
 `f` on a [left module](linear-algebra.left-modules-commutative-rings.md) `M`
 over a [commutative ring](commutative-algebra.commutative-rings.md) `R`, an
 element `v : M` is an
@@ -45,22 +45,22 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   where
 
-  is-eigenelement-eigenvalue-prop-linear-transform-left-module-Commutative-Ring :
+  is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring R M → Prop l2
-  is-eigenelement-eigenvalue-prop-linear-transform-left-module-Commutative-Ring =
-    is-eigenelement-eigenvalue-prop-linear-transform-left-module-Ring
+  is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring =
+    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Ring
       ( ring-Commutative-Ring R)
       ( M)
       ( f)
 
-  is-eigenelement-eigenvalue-linear-transform-left-module-Commutative-Ring :
+  is-eigenelement-eigenvalue-linear-endo-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring R M → UU l2
-  is-eigenelement-eigenvalue-linear-transform-left-module-Commutative-Ring c v =
+  is-eigenelement-eigenvalue-linear-endo-left-module-Commutative-Ring c v =
     type-Prop
-      ( is-eigenelement-eigenvalue-prop-linear-transform-left-module-Commutative-Ring
+      ( is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring
         ( c)
         ( v))
 ```
@@ -74,20 +74,20 @@ module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
-  (f : linear-transform-left-module-Commutative-Ring R M)
+  (f : linear-endo-left-module-Commutative-Ring R M)
   where
 
   abstract
-    is-eigenelement-zero-linear-transform-left-module-Commutative-Ring :
+    is-eigenelement-zero-linear-endo-left-module-Commutative-Ring :
       (r : type-Commutative-Ring R) →
-      is-eigenelement-eigenvalue-linear-transform-left-module-Commutative-Ring
+      is-eigenelement-eigenvalue-linear-endo-left-module-Commutative-Ring
         ( R)
         ( M)
         ( f)
         ( r)
         ( zero-left-module-Commutative-Ring R M)
-    is-eigenelement-zero-linear-transform-left-module-Commutative-Ring =
-      is-eigenelement-zero-linear-transform-left-module-Ring
+    is-eigenelement-zero-linear-endo-left-module-Commutative-Ring =
+      is-eigenelement-zero-linear-endo-left-module-Ring
         ( ring-Commutative-Ring R)
         ( M)
         ( f)
@@ -95,5 +95,5 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-rings.md)
-- [Eigenvalues and eigenvectors of vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-transformations-vector-spaces.md)
+- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings.md)
+- [Eigenvalues and eigenvectors of vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces.md)

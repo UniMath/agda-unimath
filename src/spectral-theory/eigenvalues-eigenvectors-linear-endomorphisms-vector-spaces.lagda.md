@@ -1,7 +1,7 @@
 # Eigenvalues and eigenvectors of linear transformations of vector spaces
 
 ```agda
-module spectral-theory.eigenvalues-eigenvectors-linear-transformations-vector-spaces where
+module spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -13,10 +13,10 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-rings
-open import linear-algebra.linear-transformations-vector-spaces
+open import linear-algebra.linear-endomorphisms-vector-spaces
 open import linear-algebra.vector-spaces
 
-open import spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings
 ```
 
 </details>
@@ -24,7 +24,7 @@ open import spectral-theory.eigenvalues-eigenelements-linear-transformations-lef
 ## Idea
 
 Given a
-[linear transformation](linear-algebra.linear-transformations-vector-spaces.md)
+[linear transformation](linear-algebra.linear-endomorphisms-vector-spaces.md)
 `f` on a [vector space](linear-algebra.vector-spaces.md) `V` over a
 [Heyting field](commutative-algebra.heyting-fields.md) `F`, an vector `v : V` is
 an
@@ -45,27 +45,27 @@ module _
   {l1 l2 : Level}
   (F : Heyting-Field l1)
   (V : Vector-Space l2 F)
-  (f : linear-transform-Vector-Space F V)
+  (f : linear-endo-Vector-Space F V)
   where
 
-  is-eigenvector-eigenvalue-prop-linear-transform-Vector-Space :
+  is-eigenvector-eigenvalue-prop-linear-endo-Vector-Space :
     type-Heyting-Field F → type-Vector-Space F V → Prop l2
-  is-eigenvector-eigenvalue-prop-linear-transform-Vector-Space =
-    is-eigenelement-eigenvalue-prop-linear-transform-left-module-Ring
+  is-eigenvector-eigenvalue-prop-linear-endo-Vector-Space =
+    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Ring
       ( ring-Heyting-Field F)
       ( V)
       ( f)
 
-  is-eigenvector-eigenvalue-linear-transform-Vector-Space :
+  is-eigenvector-eigenvalue-linear-endo-Vector-Space :
     type-Heyting-Field F → type-Vector-Space F V → UU l2
-  is-eigenvector-eigenvalue-linear-transform-Vector-Space c v =
-    type-Prop (is-eigenvector-eigenvalue-prop-linear-transform-Vector-Space c v)
+  is-eigenvector-eigenvalue-linear-endo-Vector-Space c v =
+    type-Prop (is-eigenvector-eigenvalue-prop-linear-endo-Vector-Space c v)
 ```
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-rings.md)
-- [Eigenvalues and eigenelements of left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-transformations-left-modules-commutative-rings.md)
+- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings.md)
+- [Eigenvalues and eigenelements of left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings.md)
 
 ## External links
 
