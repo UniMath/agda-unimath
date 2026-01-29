@@ -9,6 +9,7 @@ open import measure-theory.empty-complemented-subtypes public
 open import measure-theory.full-complemented-subtypes public
 open import measure-theory.intersections-complemented-subtypes public
 open import measure-theory.large-poset-complemented-subtypes public
+open import measure-theory.unions-complemented-subtypes public
 ```
 
 ## References
