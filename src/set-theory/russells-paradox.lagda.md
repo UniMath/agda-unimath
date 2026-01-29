@@ -42,15 +42,16 @@ open import trees.universal-multiset
 arises when a [set](foundation-core.sets.md) of all sets is assumed to exist.
 
 **Proof outline.** Given a set `𝒰` that contains all sets, then we may by
-diagonalization construct a new set called the _Russel set_
+diagonalization construct a new set, called the _Russell set_, of all sets who
+do not contain themselves as an element:
 
 ```text
   Russell := {X ∈ 𝒰 | X ∉ X}.
 ```
 
-It may then be demonstrated that `Russell` contains itself if and only if it
-does not contain itself, but negation has no fixed points and so this gives a
-contradiction. ∎
+It may then be demonstrated that `Russell` contains itself as an element if and
+only if it does not contain itself, but negation has no fixed points and so this
+gives a contradiction. ∎
 
 In Russell's paradox it is of no importance that the elementhood relation takes
 values in [propositions](foundation-core.propositions.md). In other words,
