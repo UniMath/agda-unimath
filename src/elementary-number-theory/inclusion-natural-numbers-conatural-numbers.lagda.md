@@ -80,3 +80,9 @@ is-not-surjective-conatural-ℕ : ¬ (is-surjective conatural-ℕ)
 is-not-surjective-conatural-ℕ H =
   elim-exists empty-Prop neq-infinity-conatural-ℕ (H infinity-ℕ∞)
 ```
+
+## See also
+
+- For the inclusion of the natural numbers into
+  [increasing binary sequences](set-theory.increasing-binary-sequences.md) see
+  [the inclusion of natural numbers into increasing binary sequences](set-theory.inclusion-natural-numbers-increasing-binary-sequences.md)
