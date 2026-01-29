@@ -1,7 +1,7 @@
 # Linear transformations on left modules of rings
 
 ```agda
-module linear-algebra.linear-endomorphisms-left-modules-rings where
+module linear-algebra.linear-endomaps-left-modules-rings where
 ```
 
 <details><summary>Imports</summary>

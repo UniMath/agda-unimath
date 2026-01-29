@@ -1,7 +1,7 @@
 # Linear endomorphisms on left modules over commutative rings
 
 ```agda
-module linear-algebra.linear-endomorphisms-left-modules-commutative-rings where
+module linear-algebra.linear-endomaps-left-modules-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -20,7 +20,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
-open import linear-algebra.linear-endomorphisms-left-modules-rings
+open import linear-algebra.linear-endomaps-left-modules-rings
 open import linear-algebra.linear-maps-left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-rings
 ```
