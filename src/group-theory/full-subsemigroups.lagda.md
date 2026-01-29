@@ -41,7 +41,7 @@ module _
   where
 
   is-full-prop-Subsemigroup : Prop (l1 ⊔ l2)
-  is-full-prop-Subsemigroup = is-full-subtype-Prop (subset-Subsemigroup G H)
+  is-full-prop-Subsemigroup = is-full-prop-subtype (subset-Subsemigroup G H)
 
   is-full-Subsemigroup : UU (l1 ⊔ l2)
   is-full-Subsemigroup = type-Prop is-full-prop-Subsemigroup

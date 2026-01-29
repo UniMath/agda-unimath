@@ -34,14 +34,14 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  is-full-subtype-Prop : Prop (l1 ⊔ l2)
-  is-full-subtype-Prop = Π-Prop A P
+  is-full-prop-subtype : Prop (l1 ⊔ l2)
+  is-full-prop-subtype = Π-Prop A P
 
   is-full-subtype : UU (l1 ⊔ l2)
-  is-full-subtype = type-Prop is-full-subtype-Prop
+  is-full-subtype = type-Prop is-full-prop-subtype
 
   is-prop-is-full-subtype : is-prop is-full-subtype
-  is-prop-is-full-subtype = is-prop-type-Prop is-full-subtype-Prop
+  is-prop-is-full-subtype = is-prop-type-Prop is-full-prop-subtype
 ```
 
 ### The full subtype at a universe level
