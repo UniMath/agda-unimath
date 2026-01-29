@@ -1,4 +1,4 @@
-# Linear endomorphisms on left modules over commutative rings
+# Linear endomaps on left modules over commutative rings
 
 ```agda
 module linear-algebra.linear-endomaps-left-modules-commutative-rings where
@@ -30,7 +30,7 @@ open import linear-algebra.linear-maps-left-modules-rings
 ## Idea
 
 A
-{{#concept "linear endomorphism" Disambiguation="on left modules over commutative rings" Agda=linear-endo-left-module-Commutative-Ring}}
+{{#concept "linear endomap" Disambiguation="on left modules over commutative rings" Agda=linear-endo-left-module-Commutative-Ring}}
 on a [left module](linear-algebra.left-modules-commutative-rings.md) `M` over a
 [commutative ring](commutative-algebra.commutative-rings.md) is a
 [linear map](linear-algebra.linear-maps-left-modules-commutative-rings.md) from
@@ -83,7 +83,7 @@ module _
 
 ## Properties
 
-### A linear endomorphism maps zero to zero
+### A linear endomap maps zero to zero
 
 ```agda
 module _
@@ -102,7 +102,7 @@ module _
       is-zero-map-zero-linear-map-left-module-Commutative-Ring R M M f
 ```
 
-### A linear endomorphism maps `-v` to the negation of the map of `v`
+### A linear endomap maps `-v` to the negation of the map of `v`
 
 ```agda
 module _
@@ -123,7 +123,7 @@ module _
       map-neg-linear-map-left-module-Commutative-Ring R M M f
 ```
 
-### The identity map is a linear endomorphism
+### The identity map is a linear endomap
 
 ```agda
 module _
@@ -143,7 +143,7 @@ module _
     id-linear-endo-left-module-Ring (ring-Commutative-Ring R) M
 ```
 
-### Composition of linear endomorphisms
+### Composition of linear endomaps
 
 ```agda
 module _
@@ -179,7 +179,7 @@ module _
     comp-linear-map-left-module-Commutative-Ring R M M M g f
 ```
 
-### Iterating linear endomorphisms
+### Iterating linear endomaps
 
 ```agda
 module _

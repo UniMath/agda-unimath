@@ -1,4 +1,4 @@
-# Linear endomorphisms on left modules of rings
+# Linear endomaps on left modules of rings
 
 ```agda
 module linear-algebra.linear-endomaps-left-modules-rings where
@@ -28,7 +28,7 @@ open import ring-theory.rings
 ## Idea
 
 A
-{{#concept "linear endomorphism" Disambiguation="of a left module of a ring" Agda=linear-endo-left-module-Ring}}
+{{#concept "linear endomap" Disambiguation="of a left module of a ring" Agda=linear-endo-left-module-Ring}}
 of a [left module](linear-algebra.left-modules-rings.md) `M` over a
 [ring](ring-theory.rings.md) is a
 [linear map](linear-algebra.linear-maps-left-modules-rings.md) from `M` to
@@ -74,7 +74,7 @@ module _
 
 ## Properties
 
-### A linear endomorphism maps zero to zero
+### A linear endomap maps zero to zero
 
 ```agda
 module _
@@ -93,7 +93,7 @@ module _
       is-zero-map-zero-linear-map-left-module-Ring R M M f
 ```
 
-### A linear endomorphism maps `-x` to the negation of the map of `x`
+### A linear endomap maps `-x` to the negation of the map of `x`
 
 ```agda
 module _
@@ -113,7 +113,7 @@ module _
       map-neg-linear-map-left-module-Ring R M M f
 ```
 
-### The identity map is a linear endomorphism
+### The identity map is a linear endomap
 
 ```agda
 module _
@@ -127,7 +127,7 @@ module _
   id-linear-endo-left-module-Ring = (id , is-linear-map-id-left-module-Ring)
 ```
 
-### Composition of linear endomorphisms
+### Composition of linear endomaps
 
 ```agda
 module _
@@ -158,7 +158,7 @@ module _
     comp-linear-map-left-module-Ring R M M M g f
 ```
 
-### Iterating linear endomorphisms
+### Iterating linear endomaps
 
 ```agda
 module _
