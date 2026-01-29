@@ -52,10 +52,14 @@ open import set-theory.baire-space public
 open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
+open import set-theory.cardinality-projective-sets public
+open import set-theory.cardinality-recursive-sets public
 open import set-theory.cardinals public
 open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
+open import set-theory.dependent-products-cardinals public
+open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinals public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
@@ -63,10 +67,12 @@ open import set-theory.increasing-binary-sequences public
 open import set-theory.inequality-cardinals public
 open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
+open import set-theory.inhabited-cardinals public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
+open import set-theory.zero-cardinal public
 ```
 
 ## See also
