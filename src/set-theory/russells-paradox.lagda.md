@@ -41,7 +41,7 @@ open import trees.universal-multiset
 {{#concept "Russell's paradox" WD="Russell's paradox" WDID=Q33401 Agda=paradox-Russell}}
 arises when a [set](foundation-core.sets.md) of all sets is assumed to exist.
 
-**Proof outline.** Given a set `𝒰` that contains all sets, then we may by
+**Paradox.** Given a set `𝒰` that contains all sets, then we may by
 diagonalization construct a new set, called the _Russell set_, of all sets who
 do not contain themselves as an element:
 
