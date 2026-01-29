@@ -83,7 +83,7 @@ module _
 
 ## Properties
 
-### A linear transformation maps zero to zero
+### A linear endomorphism maps zero to zero
 
 ```agda
 module _
@@ -102,7 +102,7 @@ module _
       is-zero-map-zero-linear-map-left-module-Commutative-Ring R M M f
 ```
 
-### A linear map maps `-v` to the negation of the map of `v`
+### A linear endomorphism maps `-v` to the negation of the map of `v`
 
 ```agda
 module _
@@ -123,7 +123,7 @@ module _
       map-neg-linear-map-left-module-Commutative-Ring R M M f
 ```
 
-### The identity map is a linear transformation
+### The identity map is a linear endomorphism
 
 ```agda
 module _
@@ -143,7 +143,7 @@ module _
     id-linear-endo-left-module-Ring (ring-Commutative-Ring R) M
 ```
 
-### The composition of linear transformations is a linear transformation
+### Composition of linear endomorphisms
 
 ```agda
 module _
@@ -165,11 +165,6 @@ module _
       is-linear-endo-left-module-Commutative-Ring R M (g ∘ f)
     is-linear-endo-comp-left-module-Commutative-Ring =
       is-linear-map-comp-left-module-Commutative-Ring R M M M g f
-```
-
-### The linear composition of linear transformations
-
-```agda
 module _
   {l1 l2 : Level}
   (R : Commutative-Ring l1)
@@ -184,7 +179,7 @@ module _
     comp-linear-map-left-module-Commutative-Ring R M M M g f
 ```
 
-### Iterating linear transformations
+### Iterating linear endomorphisms
 
 ```agda
 module _
