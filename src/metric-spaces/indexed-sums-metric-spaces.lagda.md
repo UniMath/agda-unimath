@@ -28,6 +28,7 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.discrete-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.indexed-sums-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.locally-constant-maps-metric-spaces
@@ -80,102 +81,10 @@ module _
   type-indexed-sum-Metric-Space : UU (la ⊔ lp)
   type-indexed-sum-Metric-Space = Σ (type-Set A) (type-Metric-Space ∘ P)
 
-  neighborhood-prop-indexed-sum-Metric-Space :
-    Rational-Neighborhood-Relation (la ⊔ lp') type-indexed-sum-Metric-Space
-  neighborhood-prop-indexed-sum-Metric-Space d (x , x') (y , y') =
-    Σ-Prop
-      ( Id-Prop
-        ( A)
-        ( x)
-        ( y))
-      ( λ e →
-        neighborhood-prop-Metric-Space
-        ( P y)
-        ( d)
-        ( tr (type-Metric-Space ∘ P) e x')
-        ( y'))
-
-  is-reflexive-neighborhood-indexed-sum-Metric-Space :
-    is-reflexive-Rational-Neighborhood-Relation
-      neighborhood-prop-indexed-sum-Metric-Space
-  is-reflexive-neighborhood-indexed-sum-Metric-Space d (x , x') =
-    (refl , refl-neighborhood-Metric-Space (P x) d x')
-
-  is-symmetric-neighborhood-indexed-sum-Metric-Space :
-    is-symmetric-Rational-Neighborhood-Relation
-      neighborhood-prop-indexed-sum-Metric-Space
-  is-symmetric-neighborhood-indexed-sum-Metric-Space
-    d (x , x') (.x , x'') (refl , N) =
-    (refl , symmetric-neighborhood-Metric-Space (P x) d x' x'' N)
-
-  is-triangular-neighborhood-indexed-Metric-Space :
-    is-triangular-Rational-Neighborhood-Relation
-      neighborhood-prop-indexed-sum-Metric-Space
-  is-triangular-neighborhood-indexed-Metric-Space
-    (x , xp) (.x , xp') (.x , xp'') d₁ d₂ (refl , K) (refl , H) =
-    ( refl ,
-      triangular-neighborhood-Metric-Space
-        ( P x)
-        ( xp)
-        ( xp')
-        ( xp'')
-        ( d₁)
-        ( d₂)
-        ( K)
-        ( H))
-
-  is-saturated-neighborhood-indexed-sum-Metric-Space :
-    is-saturated-Rational-Neighborhood-Relation
-      neighborhood-prop-indexed-sum-Metric-Space
-  is-saturated-neighborhood-indexed-sum-Metric-Space d (x , x') (y , y') H =
-    ( x=y , lemma-neighborhood-Σ)
-    where
-
-    x=y : x ＝ y
-    x=y = pr1 (H one-ℚ⁺)
-
-    all-eq-x=y :
-      (δ : ℚ⁺) → pr1 (H δ) ＝ x=y
-    all-eq-x=y δ =
-      is-set-has-uip
-        ( is-set-type-Set A)
-        ( x)
-        ( y)
-        ( pr1 (H δ))
-        ( x=y)
-
-    lemma-neighborhood-Σ :
-      neighborhood-Metric-Space
-        ( P y)
-        ( d)
-        ( tr (type-Metric-Space ∘ P) x=y x')
-        ( y')
-    lemma-neighborhood-Σ =
-      saturated-neighborhood-Metric-Space
-        ( P y)
-        ( d)
-        ( tr (type-Metric-Space ∘ P) x=y x')
-        ( y')
-        ( λ δ →
-          tr
-            ( λ e →
-              neighborhood-Metric-Space
-                (P y)
-                (d +ℚ⁺ δ)
-                ( tr (type-Metric-Space ∘ P) e x')
-                ( y'))
-            ( all-eq-x=y δ)
-            ( pr2 (H δ)))
-
   pseudometric-space-indexed-sum-Metric-Space :
     Pseudometric-Space (la ⊔ lp) (la ⊔ lp')
   pseudometric-space-indexed-sum-Metric-Space =
-    ( type-indexed-sum-Metric-Space ,
-      neighborhood-prop-indexed-sum-Metric-Space ,
-      is-reflexive-neighborhood-indexed-sum-Metric-Space ,
-      is-symmetric-neighborhood-indexed-sum-Metric-Space ,
-      is-triangular-neighborhood-indexed-Metric-Space ,
-      is-saturated-neighborhood-indexed-sum-Metric-Space)
+    indexed-sum-Pseudometric-Space A (pseudometric-Metric-Space ∘ P)
 
   is-tight-pseudometric-space-indexed-sum-Metric-Space :
     is-tight-Pseudometric-Space pseudometric-space-indexed-sum-Metric-Space
@@ -221,14 +130,8 @@ module _
 
   indexed-sum-Metric-Space : Metric-Space (la ⊔ lp) (la ⊔ lp')
   indexed-sum-Metric-Space =
-    make-Metric-Space
-      ( type-indexed-sum-Metric-Space)
-      ( neighborhood-prop-indexed-sum-Metric-Space)
-      ( is-reflexive-neighborhood-indexed-sum-Metric-Space)
-      ( is-symmetric-neighborhood-indexed-sum-Metric-Space)
-      ( is-triangular-neighborhood-indexed-Metric-Space)
-      ( is-saturated-neighborhood-indexed-sum-Metric-Space)
-      ( is-extensional-pseudometric-space-indexed-sum-Metric-Space)
+    ( pseudometric-space-indexed-sum-Metric-Space ,
+      is-extensional-pseudometric-space-indexed-sum-Metric-Space)
 
   base-point-indexed-sum-Metric-Space :
     type-Metric-Space indexed-sum-Metric-Space → type-Set A
