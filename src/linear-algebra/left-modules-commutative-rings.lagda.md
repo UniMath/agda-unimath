@@ -10,6 +10,7 @@ module linear-algebra.left-modules-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -200,6 +201,40 @@ module _
 ```
 
 ## Properties
+
+### `r(sx) = s(rx)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  where
+
+  abstract
+    left-swap-mul-left-module-Commutative-Ring :
+      (r s : type-Commutative-Ring R) →
+      (x : type-left-module-Commutative-Ring R M) →
+      mul-left-module-Commutative-Ring R M
+        ( r)
+        ( mul-left-module-Commutative-Ring R M s x) ＝
+      mul-left-module-Commutative-Ring R M
+        ( s)
+        ( mul-left-module-Commutative-Ring R M r x)
+    left-swap-mul-left-module-Commutative-Ring r s x =
+      let
+        _*M_ = mul-left-module-Commutative-Ring R M
+        _*R_ = mul-Commutative-Ring R
+      in
+        equational-reasoning
+          r *M (s *M x)
+          ＝ (r *R s) *M x
+            by inv (associative-mul-left-module-Commutative-Ring R M r s x)
+          ＝ (s *R r) *M x
+            by ap-binary _*M_ (commutative-mul-Commutative-Ring R r s) refl
+          ＝ s *M (r *M x)
+            by associative-mul-left-module-Commutative-Ring R M s r x
+```
 
 ### Any commutative ring is a left module over itself
 
