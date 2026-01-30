@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
-open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
+open import linear-algebra.linear-endomaps-left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-commutative-rings
 ```
 
