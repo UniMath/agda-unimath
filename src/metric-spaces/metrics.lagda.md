@@ -48,6 +48,7 @@ open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>
@@ -55,7 +56,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 A {{#concept "metric" WDID=Q865746 WD="metric function" Agda=Metric}} on a
-[set](foundation.sets.md) `X` is a function `d` from two elements of `X` to the
+[set](foundation.sets.md) `X` is a binary function on `X` into the
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) with the
 following properties:
 

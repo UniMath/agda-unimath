@@ -283,7 +283,7 @@ abstract opaque
 ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
-### The canonical map from rational numbers to the reals preserves and reflects inequality
+### The canonical inclusion of the rational numbers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -303,7 +303,7 @@ module _
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
 ```
 
-### The canonical map from integers to the reals preserves and reflects inequality
+### The inclusion of the integers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -320,7 +320,7 @@ module _
       reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
 ```
 
-### The canonical map from natural numbers to the reals preserves and reflects inequality
+### The inclusion of the natural numbers into the reals preserves and reflects inequality
 
 ```agda
 module _
@@ -393,7 +393,7 @@ module _
       ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
-### Inequality on the real numbers is invariant under raising universe levels
+### Raising either side of an inequality to another universe level
 
 ```agda
 abstract
@@ -403,11 +403,23 @@ abstract
   preserves-leq-left-raise-ℝ l {x} =
     preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
 
+  reflects-leq-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ (raise-ℝ l x) y → leq-ℝ x y
+  reflects-leq-left-raise-ℝ l {x} =
+    preserves-leq-left-sim-ℝ (sim-raise-ℝ' l x)
+
   preserves-leq-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
   preserves-leq-right-raise-ℝ l {x} {y} =
     preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+
+  reflects-leq-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
+    leq-ℝ x (raise-ℝ l y) → leq-ℝ x y
+  reflects-leq-right-raise-ℝ l {x} {y} =
+    preserves-leq-right-sim-ℝ (sim-raise-ℝ' l y)
 ```
 
 ### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
@@ -460,7 +472,7 @@ module _
   leq-iff-not-in-lower-cut-ℝ = (not-in-lower-cut-leq-ℝ , leq-not-in-lower-cut-ℝ)
 ```
 
-### If `q` is in the lower cut of `x`, `real-ℚ q ≤ x`
+### If `q` is in the lower cut of `x`, then `real-ℚ q ≤ x`
 
 ```agda
 module _
