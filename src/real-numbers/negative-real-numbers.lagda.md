@@ -103,3 +103,14 @@ abstract
     sim-ℝ x y → is-negative-ℝ x → is-negative-ℝ y
   is-negative-sim-ℝ = preserves-le-left-sim-ℝ _ _ _
 ```
+
+### If `x < y` and `y` is negative, then `x` is negative
+
+```agda
+abstract
+  is-negative-le-real-ℝ⁻ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ⁻ l2) →
+    le-ℝ x (real-ℝ⁻ y) → is-negative-ℝ x
+  is-negative-le-real-ℝ⁻ x (y , y<0) x<y =
+    transitive-le-ℝ x y zero-ℝ y<0 x<y
+```
