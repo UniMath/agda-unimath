@@ -102,11 +102,10 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  abstract
-    is-central-element-mul-Semiring :
-      (x y : type-Semiring R) →
-      is-central-element-Semiring R x → is-central-element-Semiring R y →
-      is-central-element-Semiring R (mul-Semiring R x y)
-    is-central-element-mul-Semiring =
-      is-central-element-mul-Monoid (multiplicative-monoid-Semiring R)
+  is-central-element-mul-Semiring :
+    (x y : type-Semiring R) →
+    is-central-element-Semiring R x → is-central-element-Semiring R y →
+    is-central-element-Semiring R (mul-Semiring R x y)
+  is-central-element-mul-Semiring =
+    is-central-element-mul-Monoid (multiplicative-monoid-Semiring R)
 ```
