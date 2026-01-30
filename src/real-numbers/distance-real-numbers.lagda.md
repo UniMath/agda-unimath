@@ -450,6 +450,20 @@ abstract
     tr (sim-ℝ _) (abs-real-ℝ⁺ y⁺) (dist-right-add-ℝ x y)
 ```
 
+### The distance between `x` and `y` is at most `|x| + |y|`
+
+```agda
+abstract
+  leq-dist-add-abs-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ (dist-ℝ x y) (abs-ℝ x +ℝ abs-ℝ y)
+  leq-dist-add-abs-ℝ x y =
+    tr
+      ( leq-ℝ (dist-ℝ x y))
+      ( ap-add-ℝ refl (abs-neg-ℝ y))
+      ( triangle-inequality-abs-ℝ x (neg-ℝ y))
+```
+
 ### The distance from a real number to itself is 0
 
 ```agda
