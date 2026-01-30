@@ -56,7 +56,7 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 The
 {{#concept "chain rule" Disambiguation="on real functions on proper closed intervals in the real numbers"}}
 states that given two
-[differentiable real functions](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
+[differentiable real maps](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 `f` and `g` on
 [proper closed intervals](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` and `[c, d]` in the
