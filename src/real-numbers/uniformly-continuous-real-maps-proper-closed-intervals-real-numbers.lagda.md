@@ -114,7 +114,8 @@ module _
 
   map-unit-im-uniformly-continuous-real-map-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l1 [a,b] →
-    type-subtype subset-im-uniformly-continuous-real-map-proper-closed-interval-ℝ
+    type-subtype
+      ( subset-im-uniformly-continuous-real-map-proper-closed-interval-ℝ)
   map-unit-im-uniformly-continuous-real-map-proper-closed-interval-ℝ =
     map-unit-im map-uniformly-continuous-real-map-proper-closed-interval-ℝ
 
