@@ -61,8 +61,8 @@ module _
     (x y : type-Poset X) → is-prop (incident-Poset x y)
   is-prop-incident-Poset = is-prop-incident-Preorder (preorder-Poset X)
 
-  is-total-Poset-Prop : Prop (l1 ⊔ l2)
-  is-total-Poset-Prop = is-total-Preorder-Prop (preorder-Poset X)
+  is-total-prop-Poset : Prop (l1 ⊔ l2)
+  is-total-prop-Poset = is-total-prop-Preorder (preorder-Poset X)
 
   is-total-Poset : UU (l1 ⊔ l2)
   is-total-Poset = is-total-Preorder (preorder-Poset X)
