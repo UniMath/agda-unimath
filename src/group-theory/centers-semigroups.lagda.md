@@ -10,9 +10,11 @@ module group-theory.centers-semigroups where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.central-elements-semigroups
+open import group-theory.commutative-semigroups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 open import group-theory.subsemigroups
@@ -22,7 +24,11 @@ open import group-theory.subsemigroups
 
 ## Idea
 
-The center of a semigroup consists of those elements that are central.
+The {{#concept "center" Disambiguation="of a semigroup" Agda=center-Semigroup}}
+of a [semigroup](group-theory.semigroups.md) `G` is the
+[subsemigroup](group-theory.subsemigroups.md) consisting of those elements of
+`G` that are [central](group-theory.central-elements-semigroups.md). The center
+is always a [commutative semigroup](group-theory.commutative-semigroups.md).
 
 ## Definition
 
@@ -74,4 +80,18 @@ module _
     hom-Semigroup semigroup-center-Semigroup G
   hom-inclusion-center-Semigroup =
     hom-inclusion-Subsemigroup G center-Semigroup
+
+  abstract
+    commutative-mul-center-Semigroup :
+      (x y : type-center-Semigroup) →
+      mul-center-Semigroup x y ＝ mul-center-Semigroup y x
+    commutative-mul-center-Semigroup (x , x∈C) (y , y∈C) =
+      eq-type-subtype
+        ( subtype-center-Semigroup)
+        ( x∈C y)
+
+  commutative-semigroup-center-Semigroup : Commutative-Semigroup l
+  commutative-semigroup-center-Semigroup =
+    ( semigroup-center-Semigroup ,
+      commutative-mul-center-Semigroup)
 ```

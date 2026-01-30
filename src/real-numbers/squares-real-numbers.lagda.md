@@ -52,6 +52,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -413,4 +414,30 @@ abstract
     (l : Level) → square-ℝ (raise-zero-ℝ l) ＝ raise-zero-ℝ l
   square-raise-zero-ℝ l =
     square-raise-ℝ l _ ∙ ap (raise-ℝ l) square-zero-ℝ
+
+  is-zero-square-is-zero-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ x → is-zero-ℝ (square-ℝ x)
+  is-zero-square-is-zero-ℝ {l} {x} x~0 =
+    transitive-sim-ℝ _ _ _
+      ( right-zero-law-mul-ℝ _)
+      ( preserves-sim-mul-ℝ x~0 x~0)
+
+  is-zero-is-zero-square-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ (square-ℝ x) → is-zero-ℝ x
+  is-zero-is-zero-square-ℝ {l} {x} x²~0 =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ _ _
+          ( λ 0<x →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁺ (x , 0<x))) ,
+        leq-not-le-ℝ _ _
+          ( λ x<0 →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁻ (x , x<0))))
 ```

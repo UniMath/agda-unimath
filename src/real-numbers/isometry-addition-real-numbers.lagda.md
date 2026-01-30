@@ -17,9 +17,9 @@ open import foundation.universe-levels
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -97,12 +97,12 @@ module _
       ( metric-space-ℝ (l1 ⊔ l2))
   isometry-right-add-ℝ = ( (λ y → add-ℝ y x) , is-isometry-right-add-ℝ)
 
-  short-left-add-ℝ :
-    short-function-Metric-Space
+  short-map-left-add-ℝ :
+    short-map-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
-  short-left-add-ℝ =
-    short-isometry-Metric-Space
+  short-map-left-add-ℝ =
+    short-map-isometry-Metric-Space
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-left-add-ℝ)
@@ -167,17 +167,32 @@ module _
 ### Addition is a modulated uniformly continuous function on the product of the metric space of reals with itself
 
 ```agda
-modulated-ucont-add-pair-ℝ :
+modulated-ucont-map-add-pair-ℝ :
   (l1 l2 : Level) →
   modulated-ucont-map-Metric-Space
     ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
     ( metric-space-ℝ (l1 ⊔ l2))
-modulated-ucont-add-pair-ℝ l1 l2 =
-  modulated-ucont-binary-isometry-Metric-Space
+modulated-ucont-map-add-pair-ℝ l1 l2 =
+  modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space
     ( metric-space-ℝ l1)
     ( metric-space-ℝ l2)
     ( metric-space-ℝ (l1 ⊔ l2))
     ( add-ℝ)
     ( is-isometry-left-add-ℝ)
     ( is-isometry-right-add-ℝ)
+```
+
+### Addition is a modulated uniformly continuous function on the product of the metric space of reals with itself
+
+```agda
+uniformly-continuous-map-add-pair-ℝ :
+  (l1 l2 : Level) →
+  uniformly-continuous-map-Metric-Space
+    ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
+    ( metric-space-ℝ (l1 ⊔ l2))
+uniformly-continuous-map-add-pair-ℝ l1 l2 =
+  uniformly-continuous-map-modulated-ucont-map-Metric-Space
+    ( product-Metric-Space (metric-space-ℝ l1) (metric-space-ℝ l2))
+    ( metric-space-ℝ (l1 ⊔ l2))
+    ( modulated-ucont-map-add-pair-ℝ l1 l2)
 ```
