@@ -65,11 +65,10 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  abstract
-    is-central-element-mul-Monoid :
-      (x y : type-Monoid M) →
-      is-central-element-Monoid M x → is-central-element-Monoid M y →
-      is-central-element-Monoid M (mul-Monoid M x y)
-    is-central-element-mul-Monoid =
-      is-central-element-mul-Semigroup (semigroup-Monoid M)
+  is-central-element-mul-Monoid :
+    (x y : type-Monoid M) →
+    is-central-element-Monoid M x → is-central-element-Monoid M y →
+    is-central-element-Monoid M (mul-Monoid M x y)
+  is-central-element-mul-Monoid =
+    is-central-element-mul-Semigroup (semigroup-Monoid M)
 ```
