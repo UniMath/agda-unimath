@@ -1,7 +1,7 @@
 # Eigenspaces of linear transformations of vector spaces
 
 ```agda
-module spectral-theory.eigenspaces-linear-endomorphisms-vector-spaces where
+module spectral-theory.eigenspaces-linear-endomaps-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -12,25 +12,24 @@ open import commutative-algebra.heyting-fields
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import linear-algebra.linear-endomorphisms-vector-spaces
+open import linear-algebra.linear-endomaps-vector-spaces
 open import linear-algebra.subspaces-vector-spaces
 open import linear-algebra.vector-spaces
 
-open import spectral-theory.eigenmodules-linear-endomorphisms-left-modules-commutative-rings
+open import spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings
 ```
 
 </details>
 
 ## Idea
 
-Given a
-[linear endomorphism](linear-algebra.linear-endomorphisms-vector-spaces.md) `f`
+Given a [linear endomaps](linear-algebra.linear-endomaps-vector-spaces.md) `f`
 of a [vector space](linear-algebra.vector-spaces.md) `V` over a
 [Heyting field](commutative-algebra.heyting-fields.md) `F`, the
-{{#concept "eigenspace" WDID=Q1303223 WD="eigenspace" Disambiguation="of a linear transformation on a vector space" Agda=eigenspace-linear-endo-Vector-Space}}
+{{#concept "eigenspace" WDID=Q1303223 WD="eigenspace" Disambiguation="of a linear endomap on a vector space" Agda=eigenspace-linear-endo-Vector-Space}}
 of `c : F` is the [subspace](linear-algebra.subspaces-vector-spaces.md) of `V`
 of vectors with
-[eigenvalue](spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces.md)
+[eigenvalue](spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces.md)
 `c`.
 
 ## Definition
@@ -63,4 +62,4 @@ module _
 
 ## See also
 
-- [Eigenmodules of linear transformations of left modules over commutative rings](spectral-theory.eigenmodules-linear-endomorphisms-left-modules-commutative-rings.md)
+- [Eigenmodules of linear transformations of left modules over commutative rings](spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings.md)

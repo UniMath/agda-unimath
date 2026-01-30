@@ -30,7 +30,7 @@ linear map.
 
 ## Definition
 
-### The linear transformation of scalar multiplication
+### The linear endomap of scalar multiplication
 
 ```agda
 module _

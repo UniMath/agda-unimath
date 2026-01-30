@@ -1,7 +1,7 @@
 # Eigenmodules of linear transformations of left modules over commutative rings
 
 ```agda
-module spectral-theory.eigenmodules-linear-endomorphisms-left-modules-commutative-rings where
+module spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -17,10 +17,10 @@ open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.left-submodules-commutative-rings
-open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
+open import linear-algebra.linear-endomaps-left-modules-commutative-rings
 open import linear-algebra.subsets-left-modules-commutative-rings
 
-open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings
 ```
 
 </details>
@@ -28,14 +28,14 @@ open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-
 ## Idea
 
 Given a
-[linear transformation](linear-algebra.linear-endomorphisms-left-modules-commutative-rings.md)
+[linear endomap](linear-algebra.linear-endomaps-left-modules-commutative-rings.md)
 `f` of a [left module](linear-algebra.left-modules-commutative-rings.md) `M`
 over a [commutative ring](commutative-algebra.commutative-rings.md) `R`, the
-{{#concept "eigenmodule" Disambiguation="of a linear transformation of a left module over a commutative ring" Agda=eigenmodule-linear-endo-left-module-Commutative-Ring}}
+{{#concept "eigenmodule" Disambiguation="of a linear endomap of a left module over a commutative ring" Agda=eigenmodule-linear-endo-left-module-Commutative-Ring}}
 of `r : R` is the
 [subset](linear-algebra.subsets-left-modules-commutative-rings.md) of elements
 of `M` with the
-[eigenvalue](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings.md)
+[eigenvalue](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings.md)
 `r`. This subset is a
 [submodule](linear-algebra.left-submodules-commutative-rings.md) of `M`.
 
@@ -159,7 +159,7 @@ module _
         by left-swap-mul-left-module-Commutative-Ring R M s r x
 ```
 
-### The subset of elements x with `f x = r * x` is a submodule
+### The subset of elements `x` with `f x = r * x` is a submodule
 
 ```agda
 module _
@@ -201,4 +201,4 @@ module _
 
 ## See also
 
-- [Eigenspaces of linear transformations of vector spaces](spectral-theory.eigenspaces-linear-endomorphisms-vector-spaces.md)
+- [Eigenspaces of linear transformations of vector spaces](spectral-theory.eigenspaces-linear-endomaps-vector-spaces.md)

@@ -1,7 +1,7 @@
 # Eigenvalues and eigenelements of linear transformations of left modules over commutative rings
 
 ```agda
-module spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings where
+module spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -14,9 +14,9 @@ open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.left-modules-rings
-open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings
+open import linear-algebra.linear-endomaps-left-modules-commutative-rings
 
-open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings
 ```
 
 </details>
@@ -24,19 +24,14 @@ open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-
 ## Idea
 
 Given a
-[linear transformation](linear-algebra.linear-endomorphisms-left-modules-commutative-rings.md)
+[linear endomap](linear-algebra.linear-endomaps-left-modules-commutative-rings.md)
 `f` on a [left module](linear-algebra.left-modules-commutative-rings.md) `M`
 over a [commutative ring](commutative-algebra.commutative-rings.md) `R`, an
 element `v : M` is an
-{{#concept "eigenelement" Disambiguation="of a linear transformation of a left module over a commutative ring"}}
+{{#concept "eigenelement" Disambiguation="of a linear endomap of a left module over a commutative ring"}}
 of `f` with
-{{#concept "eigenvalue" Disambiguation="of a linear transformation of a left module over a commutative ring"}}
+{{#concept "eigenvalue" Disambiguation="of a linear endomap of a left module over a commutative ring"}}
 `c : R` if `f v = c * v`.
-
-We adopt the convention that the zero of `M` is an eigenelement with every
-eigenvalue by default, because different modules will need different mechanisms
-(e.g. [apartness relations](foundation.apartness-relations.md)) to
-constructively describe nonzero elements.
 
 ## Definition
 
@@ -95,5 +90,5 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings.md)
-- [Eigenvalues and eigenvectors of vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces.md)
+- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings.md)
+- [Eigenvalues and eigenvectors of vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces.md)

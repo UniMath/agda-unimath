@@ -1,7 +1,7 @@
 # Eigenvalues and eigenvectors of linear transformations of vector spaces
 
 ```agda
-module spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces where
+module spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -13,30 +13,24 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-rings
-open import linear-algebra.linear-endomorphisms-vector-spaces
+open import linear-algebra.linear-endomaps-vector-spaces
 open import linear-algebra.vector-spaces
 
-open import spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings
 ```
 
 </details>
 
 ## Idea
 
-Given a
-[linear transformation](linear-algebra.linear-endomorphisms-vector-spaces.md)
-`f` on a [vector space](linear-algebra.vector-spaces.md) `V` over a
+Given a [linear endomap](linear-algebra.linear-endomaps-vector-spaces.md) `f` on
+a [vector space](linear-algebra.vector-spaces.md) `V` over a
 [Heyting field](commutative-algebra.heyting-fields.md) `F`, an vector `v : V` is
 an
-{{#concept "eigenvector" WDID=Q3555174 WD="eigenvector" Disambiguation="of a linear transformation of a vector space"}}
+{{#concept "eigenvector" WDID=Q3555174 WD="eigenvector" Disambiguation="of a linear endomap of a vector space"}}
 of `f` with
-{{#concept "eigenvalue" WDID=Q3553768 WD="eigenvalue" Disambiguation="of a linear transformation of a vector space"}}
+{{#concept "eigenvalue" WDID=Q3553768 WD="eigenvalue" Disambiguation="of a linear endomap of a vector space"}}
 `c : F` if `f v = c * v`.
-
-We adopt the convention that the zero of `V` is an eigenvector with every
-eigenvalue by default, because different vector spaces will need different
-mechanisms (e.g. [apartness relations](foundation.apartness-relations.md)) to
-constructively describe nonzero vectors.
 
 ## Definition
 
@@ -64,8 +58,8 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings.md)
-- [Eigenvalues and eigenelements of left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings.md)
+- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings.md)
+- [Eigenvalues and eigenelements of left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings.md)
 
 ## External links
 

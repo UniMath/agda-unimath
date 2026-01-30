@@ -1,7 +1,7 @@
-# Eigenvalues and eigenelements of linear transformations of left modules over rings
+# Eigenvalues and eigenelements of linear endomaps of left modules over rings
 
 ```agda
-module spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-rings where
+module spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-rings
-open import linear-algebra.linear-endomorphisms-left-modules-rings
+open import linear-algebra.linear-endomaps-left-modules-rings
 
 open import ring-theory.rings
 ```
@@ -22,19 +22,13 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a
-[linear endomorphism](linear-algebra.linear-endomorphisms-left-modules-rings.md)
+Given a [linear endomap](linear-algebra.linear-endomaps-left-modules-rings.md)
 `f` on a [left module](linear-algebra.left-modules-rings.md) `M` over a
 [ring](ring-theory.rings.md) `R`, an element `x : M` is an
-{{#concept "eigenelement" Disambiguation="of a linear transformation of a left module over a ring"}}
+{{#concept "eigenelement" Disambiguation="of a linear endomap of a left module over a ring"}}
 of `f` with
-{{#concept "eigenvalue" Disambiguation="of a linear transformation of a left module over a ring"}}
+{{#concept "eigenvalue" Disambiguation="of a linear endomap of a left module over a ring"}}
 `r : R` if `f x = r * x`.
-
-We adopt the convention that the zero of `M` is an eigenelement with every
-eigenvalue by default, because different modules will need different mechanisms
-(e.g. [apartness relations](foundation.apartness-relations.md)) to
-constructively describe nonzero elements.
 
 ## Definition
 
@@ -84,14 +78,14 @@ module _
         ( zero-left-module-Ring R M)
     is-eigenelement-zero-linear-endo-left-module-Ring r =
       equational-reasoning
-      map-linear-endo-left-module-Ring R M f (zero-left-module-Ring R M)
-      ＝ zero-left-module-Ring R M
-        by is-zero-map-zero-linear-endo-left-module-Ring R M f
-      ＝ mul-left-module-Ring R M r (zero-left-module-Ring R M)
-        by inv (right-zero-law-mul-left-module-Ring R M r)
+        map-linear-endo-left-module-Ring R M f (zero-left-module-Ring R M)
+        ＝ zero-left-module-Ring R M
+          by is-zero-map-zero-linear-endo-left-module-Ring R M f
+        ＝ mul-left-module-Ring R M r (zero-left-module-Ring R M)
+          by inv (right-zero-law-mul-left-module-Ring R M r)
 ```
 
 ## See also
 
-- [Eigenvalues and eigenvectors of linear endomorphisms on left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomorphisms-left-modules-commutative-rings.md)
-- [Eigenvalues and eigenvectors of linear endomorphisms on vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomorphisms-vector-spaces.md)
+- [Eigenvalues and eigenvectors of linear endomaps on left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings.md)
+- [Eigenvalues and eigenvectors of linear endomaps on vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces.md)
