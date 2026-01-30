@@ -58,7 +58,7 @@ module _
 
 ## Properties
 
-# If `f` is a monomorphism then `(f ∘ g = f ∘ h) ≃ (g = h)`
+### If `f` is a monomorphism then `(f ∘ g = f ∘ h) ≃ (g = h)`
 
 If `f : A → B` is a monomorphism then for all `g h : X → A` we have an
 equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then
