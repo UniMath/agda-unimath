@@ -74,7 +74,7 @@ module _
   where
 
   opaque
-    real-uniform-homeo-unit-proper-closed-interval-ℝ :
+    real-map-uniform-homeo-unit-proper-closed-interval-ℝ :
       type-unit-interval-ℝ (l1 ⊔ l2 ⊔ l3) → ℝ (l1 ⊔ l2 ⊔ l3)
     real-uniform-homeo-unit-proper-closed-interval-ℝ (x , 0≤x , x≤1) =
       let
@@ -155,9 +155,9 @@ module _
   where
 
   opaque
-    real-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
+    real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
       type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b] → ℝ (l1 ⊔ l2 ⊔ l3)
-    real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+    real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
       (x , a≤x , x≤b) =
       let
         (a , b , a<b) = [a,b]
@@ -165,14 +165,14 @@ module _
         real-inv-ℝ⁺ (positive-diff-le-ℝ a<b) *ℝ (x -ℝ a)
 
   abstract opaque
-    unfolding real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+    unfolding real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
 
-    lower-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
+    lower-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
       (x : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]) →
       leq-ℝ
         ( zero-ℝ)
-        ( real-inv-uniform-homeo-unit-proper-closed-interval-ℝ x)
-    lower-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+        ( real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ x)
+    lower-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
       (x , a≤x , x≤b) =
       let
         (a , b , a<b) = [a,b]
@@ -192,12 +192,12 @@ module _
                 ( inv-ℝ⁺ (positive-diff-le-ℝ a<b))
                 ( preserves-leq-right-add-ℝ _ _ _ a≤x)
 
-    upper-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
+    upper-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
       (x : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]) →
       leq-ℝ
-        ( real-inv-uniform-homeo-unit-proper-closed-interval-ℝ x)
+        ( real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ x)
         ( one-ℝ)
-    upper-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+    upper-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
       (x , a≤x , x≤b) =
       let
         (a , b , a<b) = [a,b]
@@ -217,10 +217,10 @@ module _
     type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b] →
     type-unit-interval-ℝ (l1 ⊔ l2 ⊔ l3)
   map-inv-uniform-homeo-unit-proper-closed-interval-ℝ x =
-    ( real-inv-uniform-homeo-unit-proper-closed-interval-ℝ x ,
-      lower-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+    ( real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ x ,
+      lower-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
         ( x) ,
-      upper-bound-real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+      upper-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
         ( x))
 ```
 
@@ -235,7 +235,7 @@ module _
 
   abstract opaque
     unfolding
-      real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+      real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
       real-uniform-homeo-unit-proper-closed-interval-ℝ
 
     is-section-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
@@ -300,7 +300,7 @@ module _
 
   abstract opaque
     unfolding
-      real-inv-uniform-homeo-unit-proper-closed-interval-ℝ
+      real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ
       real-uniform-homeo-unit-proper-closed-interval-ℝ
 
     is-uniformly-continuous-map-uniform-homeo-unit-proper-closed-interval-ℝ :
