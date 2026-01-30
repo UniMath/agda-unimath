@@ -27,6 +27,7 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.uniformly-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -106,6 +107,14 @@ module _
       ( metric-space-ℝ l2)
       ( metric-space-ℝ (l1 ⊔ l2))
       ( isometry-left-add-ℝ)
+
+  uniformly-continuous-map-right-add-ℝ :
+    uniformly-continuous-endomap-ℝ l2 (l1 ⊔ l2)
+  uniformly-continuous-map-right-add-ℝ =
+    uniformly-continuous-map-isometry-Metric-Space
+      ( metric-space-ℝ l2)
+      ( metric-space-ℝ (l1 ⊔ l2))
+      ( isometry-right-add-ℝ)
 ```
 
 ### Addition is an isometry from `ℝ` to the metric space of isometries `ℝ → ℝ`
