@@ -16,6 +16,8 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
@@ -69,17 +71,12 @@ abstract opaque
 
   exists-rational-approximate-below-ℝ :
     {l : Level} (x : ℝ l) (ε : ℚ⁺) →
-    type-trunc-Prop (rational-approximate-below-ℝ x ε)
+    is-inhabited (rational-approximate-below-ℝ x ε)
   exists-rational-approximate-below-ℝ {l} x ε⁺@(ε , _) =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( trunc-Prop (rational-approximate-below-ℝ x ε⁺))
-    in do
-      ((p , q) , q<p+ε , p<x , x<q) ← is-arithmetically-located-ℝ x ε⁺
-      intro-exists
-        ( p)
-        ( p<x ,
+    map-trunc-Prop
+      ( λ ((p , q) , q<p+ε , p<x , x<q) →
+        ( p ,
+          p<x ,
           ( λ r r+ε<p →
             le-lower-cut-ℝ
               ( x)
@@ -101,7 +98,8 @@ abstract opaque
                   ( q)
                   ( p +ℚ ε)
                   ( q<p+ε)
-                  ( le-lower-upper-cut-ℝ x r+ε<x x<q)))))
+                  ( le-lower-upper-cut-ℝ x r+ε<x x<q))))))
+      ( is-arithmetically-located-ℝ x ε⁺)
 ```
 
 ### Any real number can be approximated above to any positive rational precision `ε`
@@ -112,17 +110,12 @@ abstract opaque
 
   exists-rational-approximate-above-ℝ :
     {l : Level} (x : ℝ l) (ε : ℚ⁺) →
-    type-trunc-Prop (rational-approximate-above-ℝ x ε)
+    is-inhabited (rational-approximate-above-ℝ x ε)
   exists-rational-approximate-above-ℝ {l} x ε⁺@(ε , _) =
-    let
-      open
-        do-syntax-trunc-Prop
-          ( trunc-Prop (rational-approximate-above-ℝ x ε⁺))
-    in do
-      ((p , q) , q<p+ε , p<x , x<q) ← is-arithmetically-located-ℝ x ε⁺
-      intro-exists
-        ( q)
-        ( x<q ,
+    map-trunc-Prop
+      ( λ ((p , q) , q<p+ε , p<x , x<q) →
+        ( q ,
+          x<q ,
           ( λ r r+ε<q →
             le-lower-cut-ℝ
               ( x)
@@ -139,7 +132,8 @@ abstract opaque
               ( le-lower-upper-cut-ℝ
                 ( x)
                 ( le-lower-cut-ℝ x (le-right-add-rational-ℚ⁺ r ε⁺) r+ε<x)
-                ( x<q))))
+                ( x<q)))))
+      ( is-arithmetically-located-ℝ x ε⁺)
 ```
 
 ### Any real number can be approximated to any rational precision `ε`

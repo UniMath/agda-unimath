@@ -17,8 +17,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.complete-metric-spaces
-open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
@@ -27,7 +25,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -46,7 +44,7 @@ product structure if this holds for all the evaluations `f x` and `g x`. I.e.,
 between `f` and `g` are bounded below by the supremum of the distances between
 each `f x` and `g x`. The evaluation functions from the product metric space to
 each projected metric space are
-[short maps](metric-spaces.short-functions-metric-spaces.md).
+[short maps](metric-spaces.short-maps-metric-spaces.md).
 
 ## Definitions
 
@@ -147,18 +145,18 @@ module _
   {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2) (a : A)
   where
 
-  is-short-ev-Π-Metric-Space :
-    is-short-function-Metric-Space
+  is-short-map-ev-Metric-Space :
+    is-short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
       ( ev a)
-  is-short-ev-Π-Metric-Space ε x y H = H a
+  is-short-map-ev-Metric-Space ε x y H = H a
 
-  short-ev-Π-Metric-Space :
-    short-function-Metric-Space
+  ev-short-map-Metric-Space :
+    short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P a)
-  short-ev-Π-Metric-Space = (ev a , is-short-ev-Π-Metric-Space)
+  ev-short-map-Metric-Space = (ev a , is-short-map-ev-Metric-Space)
 ```
 
 ### The partial applications of a Cauchy approximation in a dependent product metric space are Cauchy approximations
@@ -172,10 +170,10 @@ module _
   ev-cauchy-approximation-Π-Metric-Space :
     (x : A) → cauchy-approximation-Metric-Space (P x)
   ev-cauchy-approximation-Π-Metric-Space x =
-    map-cauchy-approximation-short-function-Metric-Space
+    map-cauchy-approximation-short-map-Metric-Space
       ( Π-Metric-Space A P)
       ( P x)
-      ( short-ev-Π-Metric-Space A P x)
+      ( ev-short-map-Metric-Space A P x)
       ( f)
 ```
 
@@ -213,57 +211,4 @@ module _
       ( g)
   is-limit-is-pointwise-limit-cauchy-approximation-Π-Metric-Space L ε δ x =
     L x ε δ
-```
-
-### A product of complete metric spaces is complete
-
-```agda
-module _
-  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
-  (Π-complete : (x : A) → is-complete-Metric-Space (P x))
-  where
-
-  limit-cauchy-approximation-Π-is-complete-Metric-Space :
-    cauchy-approximation-Metric-Space (Π-Metric-Space A P) →
-    type-Π-Metric-Space A P
-  limit-cauchy-approximation-Π-is-complete-Metric-Space u x =
-    limit-cauchy-approximation-Complete-Metric-Space
-      ( P x , Π-complete x)
-      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
-
-  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space :
-    (u : cauchy-approximation-Metric-Space (Π-Metric-Space A P)) →
-    is-limit-cauchy-approximation-Metric-Space
-      ( Π-Metric-Space A P)
-      ( u)
-      ( limit-cauchy-approximation-Π-is-complete-Metric-Space u)
-  is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u ε δ x =
-    is-limit-limit-cauchy-approximation-Complete-Metric-Space
-      ( P x , Π-complete x)
-      ( ev-cauchy-approximation-Π-Metric-Space A P u x)
-      ( ε)
-      ( δ)
-
-  is-complete-Π-Metric-Space :
-    is-complete-Metric-Space (Π-Metric-Space A P)
-  is-complete-Π-Metric-Space u =
-    ( limit-cauchy-approximation-Π-is-complete-Metric-Space u ,
-      is-limit-limit-cauchy-approximation-Π-is-complete-Metric-Space u)
-```
-
-### The complete product of complete metric spaces
-
-```agda
-module _
-  {l l1 l2 : Level} (A : UU l) (C : A → Complete-Metric-Space l1 l2)
-  where
-
-  Π-Complete-Metric-Space : Complete-Metric-Space (l ⊔ l1) (l ⊔ l2)
-  pr1 Π-Complete-Metric-Space =
-    Π-Metric-Space A (metric-space-Complete-Metric-Space ∘ C)
-  pr2 Π-Complete-Metric-Space =
-    is-complete-Π-Metric-Space
-      ( A)
-      ( metric-space-Complete-Metric-Space ∘ C)
-      ( is-complete-metric-space-Complete-Metric-Space ∘ C)
 ```

@@ -18,11 +18,13 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
+open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -160,4 +162,31 @@ abstract
         ( is-prop-is-algebra
           ( group-signature) ( algebraic-theory-Group)
           ( model-Algebra group-signature algebraic-theory-Group A)))
+```
+
+### Homomorphisms of groups are homomorphisms of the algebra of groups, and vice versa
+
+```agda
+hom-algebra-Group :
+  {l1 l2 : Level} → algebra-Group l1 → algebra-Group l2 → UU (l1 ⊔ l2)
+hom-algebra-Group =
+  hom-Algebra group-signature algebraic-theory-Group
+
+hom-group-hom-algebra-Group :
+  {l1 l2 : Level} (G : algebra-Group l1) (H : algebra-Group l2) →
+  hom-algebra-Group G H →
+  hom-Group (group-algebra-Group G) (group-algebra-Group H)
+hom-group-hom-algebra-Group G H (f , K) =
+  ( f , λ {x} {y} → K mul-group-op (x ∷ y ∷ empty-tuple))
+
+hom-algebra-group-hom-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) →
+  hom-Group G H →
+  hom-algebra-Group (algebra-group-Group G) (algebra-group-Group H)
+hom-algebra-group-hom-Group G H (f , K) =
+  ( f ,
+    λ where
+      unit-group-op empty-tuple → preserves-unit-hom-Group G H (f , K)
+      mul-group-op (x ∷ y ∷ empty-tuple) → K {x} {y}
+      inv-group-op (x ∷ empty-tuple) → preserves-inv-hom-Group G H (f , K))
 ```

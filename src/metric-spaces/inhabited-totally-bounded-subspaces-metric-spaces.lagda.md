@@ -28,7 +28,7 @@ open import metric-spaces.nets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.totally-bounded-metric-spaces
 open import metric-spaces.totally-bounded-subspaces-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -96,44 +96,44 @@ module _
 ### The image of an inhabited totally bounded metric space under a uniformly continuous function is an inhabited totally bounded subspace
 
 ```agda
-im-uniformly-continuous-function-inhabited-totally-bounded-Metric-Space :
+im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
   {l1 l2 l3 l4 l5 : Level} →
   (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
-  (f : uniformly-continuous-function-Metric-Space X Y) →
+  (f : uniformly-continuous-map-Metric-Space X Y) →
   is-totally-bounded-Metric-Space l5 X →
   is-inhabited (type-Metric-Space X) →
   inhabited-totally-bounded-subspace-Metric-Space (l1 ⊔ l3) (l1 ⊔ l3 ⊔ l5) Y
-im-uniformly-continuous-function-inhabited-totally-bounded-Metric-Space
+im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
   X Y f tbX |X| =
-  ( ( subtype-im (map-uniformly-continuous-function-Metric-Space X Y f) ,
-      is-totally-bounded-im-uniformly-continuous-function-is-totally-bounded-Metric-Space
+  ( ( subtype-im (map-uniformly-continuous-map-Metric-Space X Y f) ,
+      is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space
         ( X)
         ( Y)
         ( tbX)
         ( f)) ,
     map-is-inhabited
-      ( map-unit-im (map-uniformly-continuous-function-Metric-Space X Y f))
+      ( map-unit-im (map-uniformly-continuous-map-Metric-Space X Y f))
       ( |X|))
 ```
 
-### The image of an inhabited totally bounded subspace of a metric space under a uniformly continuous function is an inhabited totally bounded subspace
+### The image of an inhabited totally bounded subspace of a metric space under a uniformly continuous map is an inhabited totally bounded subspace
 
 ```agda
-im-uniformly-continuous-function-inhabited-totally-bounded-subspace-Metric-Space :
+im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space :
   {l1 l2 l3 l4 l5 l6 : Level} →
   (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
-  (f : uniformly-continuous-function-Metric-Space X Y) →
+  (f : uniformly-continuous-map-Metric-Space X Y) →
   inhabited-totally-bounded-subspace-Metric-Space l5 l6 X →
   inhabited-totally-bounded-subspace-Metric-Space
     ( l1 ⊔ l3 ⊔ l5)
     ( l1 ⊔ l3 ⊔ l5 ⊔ l6)
     ( Y)
-im-uniformly-continuous-function-inhabited-totally-bounded-subspace-Metric-Space
+im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space
   X Y f ((S , tbS) , |S|) =
-  im-uniformly-continuous-function-inhabited-totally-bounded-Metric-Space
+  im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
     ( subspace-Metric-Space X S)
     ( Y)
-    ( comp-uniformly-continuous-function-Metric-Space
+    ( comp-uniformly-continuous-map-Metric-Space
       ( subspace-Metric-Space X S)
       ( X)
       ( Y)
