@@ -93,6 +93,29 @@ module _
 
 ## Properties
 
+### The image of an inhabited totally bounded metric space under a uniformly continuous function is an inhabited totally bounded subspace
+
+```agda
+im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
+  {l1 l2 l3 l4 l5 : Level} →
+  (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
+  (f : uniformly-continuous-map-Metric-Space X Y) →
+  is-totally-bounded-Metric-Space l5 X →
+  is-inhabited (type-Metric-Space X) →
+  inhabited-totally-bounded-subspace-Metric-Space (l1 ⊔ l3) (l1 ⊔ l3 ⊔ l5) Y
+im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
+  X Y f tbX |X| =
+  ( ( subtype-im (map-uniformly-continuous-map-Metric-Space X Y f) ,
+      is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space
+        ( X)
+        ( Y)
+        ( tbX)
+        ( f)) ,
+    map-is-inhabited
+      ( map-unit-im (map-uniformly-continuous-map-Metric-Space X Y f))
+      ( |X|))
+```
+
 ### The image of an inhabited totally bounded subspace of a metric space under a uniformly continuous map is an inhabited totally bounded subspace
 
 ```agda
@@ -106,17 +129,18 @@ im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space :
     ( l1 ⊔ l3 ⊔ l5 ⊔ l6)
     ( Y)
 im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space
-  X Y f (S , |S|) =
-    ( im-uniformly-continuous-map-totally-bounded-subspace-Metric-Space
-        ( X)
-        ( Y)
-        ( f)
-        ( S) ,
-      map-is-inhabited
-        ( map-unit-im
-          ( map-uniformly-continuous-map-Metric-Space X Y f ∘
-            inclusion-totally-bounded-subspace-Metric-Space X S))
-        ( |S|))
+  X Y f ((S , tbS) , |S|) =
+  im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
+    ( subspace-Metric-Space X S)
+    ( Y)
+    ( comp-uniformly-continuous-map-Metric-Space
+      ( subspace-Metric-Space X S)
+      ( X)
+      ( Y)
+      ( f)
+      ( uniformly-continuous-inclusion-subspace-Metric-Space X S))
+    ( tbS)
+    ( |S|)
 ```
 
 ### Inhabited, totally bounded subspaces of metric spaces are closed under cartesian products
