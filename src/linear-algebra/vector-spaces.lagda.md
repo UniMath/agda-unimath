@@ -11,6 +11,7 @@ open import commutative-algebra.heyting-fields
 open import commutative-algebra.homomorphisms-heyting-fields
 
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -61,6 +62,12 @@ module _
   zero-Vector-Space : type-Vector-Space
   zero-Vector-Space = zero-Ab ab-Vector-Space
 
+  is-zero-prop-Vector-Space : type-Vector-Space → Prop l2
+  is-zero-prop-Vector-Space v = Id-Prop set-Vector-Space v zero-Vector-Space
+
+  is-zero-Vector-Space : type-Vector-Space → UU l2
+  is-zero-Vector-Space v = v ＝ zero-Vector-Space
+
   neg-Vector-Space : type-Vector-Space → type-Vector-Space
   neg-Vector-Space = neg-Ab ab-Vector-Space
 
@@ -87,12 +94,12 @@ module _
 
   left-inverse-law-add-Vector-Space :
     (v : type-Vector-Space) →
-    add-Vector-Space (neg-Vector-Space v) v ＝ zero-Vector-Space
+    is-zero-Vector-Space (add-Vector-Space (neg-Vector-Space v) v)
   left-inverse-law-add-Vector-Space = left-inverse-law-add-Ab ab-Vector-Space
 
   right-inverse-law-add-Vector-Space :
     (v : type-Vector-Space) →
-    add-Vector-Space v (neg-Vector-Space v) ＝ zero-Vector-Space
+    is-zero-Vector-Space (add-Vector-Space v (neg-Vector-Space v))
   right-inverse-law-add-Vector-Space = right-inverse-law-add-Ab ab-Vector-Space
 
   commutative-add-Vector-Space :
@@ -136,7 +143,7 @@ module _
 
   left-zero-law-mul-Vector-Space :
     (v : type-Vector-Space) →
-    mul-Vector-Space (zero-Heyting-Field R) v ＝ zero-Vector-Space
+    is-zero-Vector-Space (mul-Vector-Space (zero-Heyting-Field R) v)
   left-zero-law-mul-Vector-Space =
     left-zero-law-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field R)
@@ -144,7 +151,7 @@ module _
 
   right-zero-law-mul-Vector-Space :
     (r : type-Heyting-Field R) →
-    mul-Vector-Space r zero-Vector-Space ＝ zero-Vector-Space
+    is-zero-Vector-Space (mul-Vector-Space r zero-Vector-Space)
   right-zero-law-mul-Vector-Space =
     right-zero-law-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field R)
