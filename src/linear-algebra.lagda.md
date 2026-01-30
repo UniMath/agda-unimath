@@ -38,9 +38,9 @@ open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-commutative-rings public
 open import linear-algebra.left-submodules-rings public
 open import linear-algebra.linear-combinations-tuples-of-vectors-left-modules-rings public
-open import linear-algebra.linear-endomorphisms-left-modules-commutative-rings public
-open import linear-algebra.linear-endomorphisms-left-modules-rings public
-open import linear-algebra.linear-endomorphisms-vector-spaces public
+open import linear-algebra.linear-endomaps-left-modules-commutative-rings public
+open import linear-algebra.linear-endomaps-left-modules-rings public
+open import linear-algebra.linear-endomaps-vector-spaces public
 open import linear-algebra.linear-forms-vector-spaces public
 open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public

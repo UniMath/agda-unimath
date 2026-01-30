@@ -11,7 +11,7 @@ open import commutative-algebra.heyting-fields
 
 open import foundation.universe-levels
 
-open import linear-algebra.linear-endomorphisms-vector-spaces
+open import linear-algebra.linear-endomaps-vector-spaces
 open import linear-algebra.linear-maps-vector-spaces
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings
 open import linear-algebra.vector-spaces
