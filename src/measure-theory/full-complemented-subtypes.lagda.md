@@ -28,6 +28,13 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
+A
+{{#concept "full" Disambiguation="complemented subtype of a type with an apartness relation"}}
+[complemented subtype](measure-theory.complemented-subtypes.md) of a type `X`
+equipped with an [apartness relation](foundation.apartness-relations.md) is the
+[full](foundation.full-subtypes.md) subtype paired with the
+[empty](foundation.empty-subtypes.md) subtype.
+
 ## Definition
 
 ### The property of being a full complemented subtype

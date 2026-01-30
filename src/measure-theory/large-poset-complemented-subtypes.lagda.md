@@ -29,6 +29,12 @@ open import order-theory.large-preorders
 
 ## Idea
 
+Given two [complemented subtypes](measure-theory.complemented-subtypes.md)
+`(A, A')` and `(B, B')` of a type equipped with an
+[apartness relation](foundation.apartness-relations.md), we define the
+[large poset](order-theory.large-posets.md) induced by the relation
+`A ≤ B ≔ A ⊆ B ∧ B' ⊆ A'`.
+
 ## Definition
 
 ```agda

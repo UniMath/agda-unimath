@@ -23,6 +23,15 @@ open import measure-theory.complemented-subtypes
 
 ## Idea
 
+The
+{{#concept "union" Disambiguation="of two complemented subtypes of a type equipped with an apartness relation" Agda=union-complemented-subtype-Type-With-Apartness}}
+of two [complemented subtypes](measure-theory.complemented-subtypes.md)
+`(A , A')` and `(B , B')` of a type equipped with an
+[apartness relation](foundation.apartness-relations.md) is the pair
+`((A ∩ B) ∪ (A ∩ B') ∪ (A' ∩ B), A' ∩ B')`.
+
+This definition follows {{#cite Zeuner22}}.
+
 ## Definition
 
 ```agda
@@ -68,3 +77,7 @@ module _
       complement-subtype-union-complemented-subtype-Type-With-Apartness ,
       apart-complement-subtype-union-complemented-subtype-Type-With-Apartness)
 ```
+
+## References
+
+{{#bibliography}}

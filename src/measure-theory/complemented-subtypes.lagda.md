@@ -26,8 +26,10 @@ A
 {{#concept "complemented subtype" Disambiguation="of a type with apartness" Agda=complemented-subtype-Type-With-Apartness}}
 of a type `X` equipped with an
 [apartness relation](foundation.apartness-relations.md) is an ordered pair of
-[subtypes](foundation-core.subtypes.md) `A` and `A'` of `X` such that every
-element of `A` is apart from every element of `A'`.
+[subtypes](foundation-core.subtypes.md) `A` and `A'` of `X` that are
+[apart](measure-theory.apart-subtypes.md).
+
+This definition follows {{#cite Zeuner22}}..
 
 ## Definition
 
@@ -139,3 +141,7 @@ module _
     ( is-in-total-subtype-complemented-subtype-Type-With-Apartness x ,
       is-prop-is-in-total-subtype-complemented-subtype-Type-With-Apartness x)
 ```
+
+## References
+
+{{#bibliography}}

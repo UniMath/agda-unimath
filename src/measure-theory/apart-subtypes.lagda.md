@@ -17,6 +17,11 @@ open import foundation.universe-levels
 
 ## Idea
 
+Two [subtypes](foundation.subtypes.md) `A` and `B` of a type `X` equipped with
+an [apartness relation](foundation.apartness-relations.md) are
+{{#concept "apart" Disambiguation="subtypes of a type equipped with an apartness relation" Agda=apart-subtype-Type-With-Apartness}}
+if every one of their elements is apart.
+
 ## Definition
 
 ```agda
