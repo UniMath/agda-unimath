@@ -10,7 +10,6 @@ module foundation.composition-spans where
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.homotopies
 open import foundation.identity-types
@@ -22,6 +21,7 @@ open import foundation.standard-pullbacks
 open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 
+open import foundation-core.equivalences-arrows
 open import foundation-core.function-types
 ```
 
