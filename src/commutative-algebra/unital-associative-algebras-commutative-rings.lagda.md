@@ -291,7 +291,7 @@ module _
         ( A))
 ```
 
-### Given a unital associative algebra `A` over `R`, there is a ring homomorphism from `R` to `A`
+### Given a unital associative algebra `A` over `R`, the map `r ↦ r · 1` is a ring homomorphism from `R` to `A`
 
 ```agda
 module _
