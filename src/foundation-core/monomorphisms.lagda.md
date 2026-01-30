@@ -58,7 +58,9 @@ module _
 
 ## Properties
 
-If `f : A → B` is a monomorphism then for any `g h : X → A` we have an
+# If `f` is a monomorphism then `(f ∘ g = f ∘ h) ≃ (g = h)`
+
+If `f : A → B` is a monomorphism then for all `g h : X → A` we have an
 equivalence `(f ∘ g = f ∘ h) ≃ (g = h)`. In particular, if `f ∘ g = f ∘ h` then
 `g = h`.
 
@@ -77,7 +79,7 @@ module _
   is-injective-postcomp-is-mono = map-inv-equiv equiv-postcomp-is-mono
 ```
 
-A function is a monomorphism if and only if it is an embedding.
+### A function is a monomorphism if and only if it is an embedding
 
 ```agda
 module _
@@ -113,6 +115,8 @@ equiv-postcomp-emb :
   (g ＝ h) ≃ (map-emb f ∘ g ＝ map-emb f ∘ h)
 equiv-postcomp-emb (f , H) = equiv-postcomp-is-emb f H
 ```
+
+### If `f` is an embedding then `(g ~ h) ≃ (f ∘ g ~ f ∘ h)`
 
 We construct an explicit equivalence for postcomposition for homotopies between
 functions (rather than equality) when the map is an embedding.
