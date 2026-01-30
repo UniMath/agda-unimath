@@ -9,7 +9,7 @@ module foundation.small-maps where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.locally-small-types
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.split-idempotent-maps
 open import foundation.universe-levels
 
@@ -74,17 +74,17 @@ module _
   is-small-map-Prop = is-small-map l f , is-prop-is-small-map
 ```
 
-### Small maps are closed under retracts of maps
+### Small maps are closed under retracts of arrows
 
 ```agda
 module _
   {l1 l2 l3 l4 l : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {f : A → B} {g : X → Y} (R : f retract-of-map g)
+  {f : A → B} {g : X → Y} (R : f retract-of-arrow g)
   where
 
   is-small-map-retract : is-small-map l g → is-small-map l f
   is-small-map-retract is-small-g b =
     is-small-retract
-      ( is-small-g (map-codomain-inclusion-retract-map f g R b))
-      ( retract-fiber-retract-map f g R b)
+      ( is-small-g (map-codomain-inclusion-retract-arrow f g R b))
+      ( retract-fiber-retract-arrow f g R b)
 ```

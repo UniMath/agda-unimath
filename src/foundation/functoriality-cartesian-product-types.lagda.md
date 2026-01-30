@@ -192,8 +192,8 @@ module _
     ( map-retraction-map-product f g H K ,
       retraction-map-retraction-map-product f g H K)
 
-  retract-map-product : A retract-of C → B retract-of D → A × B retract-of C × D
-  retract-map-product (f , retraction-f) (g , retraction-g) =
+  retract-product : A retract-of C → B retract-of D → A × B retract-of C × D
+  retract-product (f , retraction-f) (g , retraction-g) =
     ( map-product f g , retraction-map-product f g retraction-f retraction-g)
 ```
 
@@ -262,35 +262,43 @@ module _
   (f : A → C) (g : B → D)
   where
 
+  is-contr-map-left-factor-is-contr-map-map-product' :
+    D → is-contr-map (map-product f g) → is-contr-map f
+  is-contr-map-left-factor-is-contr-map-map-product' d is-contr-map-fg x =
+    is-contr-left-factor-product
+      ( fiber f x)
+      ( fiber g d)
+      ( is-contr-is-equiv'
+        ( fiber (map-product f g) (x , d))
+        ( map-compute-fiber-map-product f g (x , d))
+        ( is-equiv-map-compute-fiber-map-product f g (x , d))
+        ( is-contr-map-fg (x , d)))
+
   is-equiv-left-factor-is-equiv-map-product' :
     D → is-equiv (map-product f g) → is-equiv f
-  is-equiv-left-factor-is-equiv-map-product'
-    d is-equiv-fg =
+  is-equiv-left-factor-is-equiv-map-product' d is-equiv-fg =
     is-equiv-is-contr-map
-      ( λ x →
-        is-contr-left-factor-product
-          ( fiber f x)
-          ( fiber g d)
-          ( is-contr-is-equiv'
-            ( fiber (map-product f g) (x , d))
-            ( map-compute-fiber-map-product f g (x , d))
-            ( is-equiv-map-compute-fiber-map-product f g (x , d))
-            ( is-contr-map-is-equiv is-equiv-fg (x , d))))
+      ( is-contr-map-left-factor-is-contr-map-map-product' d
+        ( is-contr-map-is-equiv is-equiv-fg))
+
+  is-contr-map-right-factor-is-contr-map-map-product' :
+    C → is-contr-map (map-product f g) → is-contr-map g
+  is-contr-map-right-factor-is-contr-map-map-product' c is-contr-map-fg y =
+    is-contr-right-factor-product
+      ( fiber f c)
+      ( fiber g y)
+      ( is-contr-is-equiv'
+        ( fiber (map-product f g) (c , y))
+        ( map-compute-fiber-map-product f g (c , y))
+        ( is-equiv-map-compute-fiber-map-product f g (c , y))
+        ( is-contr-map-fg (c , y)))
 
   is-equiv-right-factor-is-equiv-map-product' :
     C → is-equiv (map-product f g) → is-equiv g
-  is-equiv-right-factor-is-equiv-map-product'
-    c is-equiv-fg =
+  is-equiv-right-factor-is-equiv-map-product' c is-equiv-fg =
     is-equiv-is-contr-map
-      ( λ y →
-        is-contr-right-factor-product
-          ( fiber f c)
-          ( fiber g y)
-          ( is-contr-is-equiv'
-            ( fiber (map-product f g) (c , y))
-            ( map-compute-fiber-map-product f g (c , y))
-            ( is-equiv-map-compute-fiber-map-product f g (c , y))
-            ( is-contr-map-is-equiv is-equiv-fg (c , y))))
+      ( is-contr-map-right-factor-is-contr-map-map-product' c
+        ( is-contr-map-is-equiv is-equiv-fg))
 ```
 
 ### The functorial action of products on arrows

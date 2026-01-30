@@ -10,11 +10,11 @@ open import foundation-core.operations-spans public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences-arrows
 open import foundation.morphisms-arrows
 open import foundation.spans
 open import foundation.universe-levels
 
+open import foundation-core.equivalences-arrows
 open import foundation-core.function-types
 ```
 
@@ -38,7 +38,7 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and an [equivalence of arrows](foundation.equivalences-arrows.md)
+and an [equivalence of arrows](foundation-core.equivalences-arrows.md)
 `h : equiv-arrow f' f` as indicated in the diagram
 
 ```text

@@ -14,7 +14,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -74,7 +74,7 @@ module _
           ( is-orthogonal-terminal-map-is-local f (G x)))
 ```
 
-### Weakly anodyne maps are closed under retracts of maps
+### Weakly anodyne maps are closed under retracts of arrows
 
 ```agda
 module _
@@ -83,8 +83,8 @@ module _
   (f : A → B) {j : C → D} {j' : C' → D'}
   where
 
-  is-weakly-anodyne-map-retract-map :
-    retract-map j j' → is-weakly-anodyne-map f j → is-weakly-anodyne-map f j'
-  is-weakly-anodyne-map-retract-map α J g G x =
-    is-local-retract-map-is-local j' j α (fiber g x) (J g G x)
+  is-weakly-anodyne-map-retract-arrow :
+    retract-arrow j j' → is-weakly-anodyne-map f j → is-weakly-anodyne-map f j'
+  is-weakly-anodyne-map-retract-arrow α J g G x =
+    is-local-retract-arrow-is-local j' j α (fiber g x) (J g G x)
 ```

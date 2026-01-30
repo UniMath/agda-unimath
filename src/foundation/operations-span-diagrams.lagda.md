@@ -10,11 +10,12 @@ open import foundation-core.operations-span-diagrams public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences-arrows
 open import foundation.operations-spans
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
+
+open import foundation-core.equivalences-arrows
 ```
 
 </details>
@@ -38,7 +39,7 @@ Consider a span diagram `𝒮` given by
   A <----- S -----> B
 ```
 
-and an [equivalence of arrows](foundation.equivalences-arrows.md)
+and an [equivalence of arrows](foundation-core.equivalences-arrows.md)
 `h : equiv-arrow f' f` as indicated in the diagram
 
 ```text
@@ -107,7 +108,7 @@ Consider a span diagram `𝒮` given by
   A <----- S -----> B
 ```
 
-and a [equivalence of arrows](foundation.equivalences-arrows.md)
+and a [equivalence of arrows](foundation-core.equivalences-arrows.md)
 `h : equiv-arrow g' g` as indicated in the diagram
 
 ```text
