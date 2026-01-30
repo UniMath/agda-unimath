@@ -9,7 +9,7 @@ module analysis.differentiability-reciprocal-function-on-positive-proper-closed-
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers
+open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
@@ -61,7 +61,7 @@ On a [positive](real-numbers.positive-proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md), the
 [multiplicative inverse function](real-numbers.multiplicative-inverses-positive-real-numbers.md)
 is
-[differentiable](analysis.differentiable-real-functions-on-proper-closed-intervals-real-numbers.md)
+[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 with derivative $$x ↦ -\frac{1}{x^2}$$
 
 ## Proof
@@ -69,7 +69,7 @@ with derivative $$x ↦ -\frac{1}{x^2}$$
 ```agda
 module _
   {l : Level}
-  ([a,b] : proper-closed-interval-ℝ l l)
+  ([a,b]@(a , b , a<b) : proper-closed-interval-ℝ l l)
   (0<a : is-positive-proper-closed-interval-ℝ [a,b])
   where
 
@@ -90,7 +90,7 @@ module _
 
   abstract
     is-derivative-inv-type-is-positive-proper-closed-interval-ℝ :
-      is-derivative-real-function-proper-closed-interval-ℝ
+      is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( map-inv-type-is-positive-proper-closed-interval-ℝ)
         ( map-derivative-inv-type-is-positive-proper-closed-interval-ℝ)
@@ -98,7 +98,7 @@ module _
       let
         open
           do-syntax-trunc-Prop
-            ( is-derivative-prop-real-function-proper-closed-interval-ℝ
+            ( is-derivative-prop-real-map-proper-closed-interval-ℝ
               ( [a,b])
               ( map-inv-type-is-positive-proper-closed-interval-ℝ)
               ( map-derivative-inv-type-is-positive-proper-closed-interval-ℝ))
@@ -109,7 +109,6 @@ module _
           map-inv-type-is-positive-proper-closed-interval-ℝ
         pos-inv-type-[a,b] =
           positive-map-inv-type-is-positive-proper-closed-interval-ℝ
-        (a , b , a<b) = [a,b]
         K = max-ℝ (real-inv-ℝ⁺ (a , 0<a)) b
       in do
         (M⁺@(M , _) , K<M) ← exists-greater-positive-rational-ℝ K

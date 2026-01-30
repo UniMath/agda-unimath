@@ -33,7 +33,6 @@ open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-real-numbers
-open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-real-numbers
@@ -477,28 +476,4 @@ abstract
         by preserves-sim-abs-ℝ (right-inverse-law-add-ℝ x)
       ~ℝ zero-ℝ
         by sim-eq-ℝ abs-zero-ℝ
-```
-
-### For any positive `c`, `c⁻¹ * dist-ℝ (c * x) (c * y) = dist-ℝ x y`
-
-```agda
-abstract
-  cancel-left-div-mul-dist-ℝ⁺ :
-    {l1 l2 l3 : Level} (c : ℝ⁺ l1) (x : ℝ l2) (y : ℝ l3) →
-    sim-ℝ
-      ( real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y))
-      ( dist-ℝ x y)
-  cancel-left-div-mul-dist-ℝ⁺ c x y =
-    similarity-reasoning-ℝ
-      real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y)
-      ~ℝ abs-ℝ (real-inv-ℝ⁺ c) *ℝ abs-ℝ (real-ℝ⁺ c *ℝ (x -ℝ y))
-        by
-          sim-eq-ℝ
-            ( ap-mul-ℝ
-              ( inv (abs-real-ℝ⁺ (inv-ℝ⁺ c)))
-              ( ap abs-ℝ (inv (left-distributive-mul-diff-ℝ _ x y))))
-      ~ℝ abs-ℝ (real-inv-ℝ⁺ c *ℝ (real-ℝ⁺ c *ℝ (x -ℝ y)))
-        by sim-eq-ℝ (inv (abs-mul-ℝ _ _))
-      ~ℝ dist-ℝ x y
-        by preserves-sim-abs-ℝ (cancel-left-div-mul-ℝ⁺ c (x -ℝ y))
 ```
