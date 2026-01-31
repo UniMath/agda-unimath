@@ -32,8 +32,9 @@ open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseu
 
 ## Idea
 
-Postcomposition with the natural
-[isometry](metric-spaces.isometries-pseudometric-spaces.md) from a
+Postcomposition with the
+[unit map of metric quotients](metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces.md),
+the natural [isometry](metric-spaces.isometries-pseudometric-spaces.md) from a
 [pseudometric space](metric-spaces.pseudometric-spaces.md) `Q` into its
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md)
 
