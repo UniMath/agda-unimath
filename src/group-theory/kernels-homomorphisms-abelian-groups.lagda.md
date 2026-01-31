@@ -21,11 +21,12 @@ open import group-theory.subsets-abelian-groups
 
 ## Idea
 
-The **kernel** of a
-[group homomorphism](group-theory.homomorphisms-abelian-groups.md) `f : A → B`
-between [abelian groups](group-theory.abelian-groups.md) `A` and `B` is the
-[subgroup](group-theory.subgroups-abelian-groups.md) of `A` consisting of those
-elements `x : A` such that `f x ＝ zero-Ab B`.
+The
+{{#concept "kernel" Disambiguation="of a homomorphism of abelian groups" Agda=kernel-hom-Ab}}
+of a [group homomorphism](group-theory.homomorphisms-abelian-groups.md)
+`f : A → B` between [abelian groups](group-theory.abelian-groups.md) `A` and `B`
+is the [subgroup](group-theory.subgroups-abelian-groups.md) of `A` consisting of
+those elements `x : A` such that `f x ＝ zero-Ab B`.
 
 ## Definitions
 
