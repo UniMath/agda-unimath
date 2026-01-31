@@ -26,7 +26,6 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
