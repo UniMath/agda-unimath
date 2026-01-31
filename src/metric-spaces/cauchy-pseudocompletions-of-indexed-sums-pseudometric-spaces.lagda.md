@@ -55,8 +55,7 @@ Moreover, this equivalence is an
 [isometry](metric-spaces.isometries-pseudometric-spaces.md) so it induces an
 [equality](metric-spaces.equality-of-pseudometric-spaces.md) of pseudometric
 spaces; therefore,
-{{#concept "the Cauchy pseudocompletion of an indexed sum is the indexed sum of the Cauchy
-pseudocompletions" Disambiguation="in pseudometric spaces" Agda=eq-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space}}.
+{{#concept "the Cauchy pseudocompletion of an indexed sum is the indexed sum of the Cauchy pseudocompletions" Disambiguation="in pseudometric spaces" Agda=eq-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space}}.
 
 ## Definitions
 
