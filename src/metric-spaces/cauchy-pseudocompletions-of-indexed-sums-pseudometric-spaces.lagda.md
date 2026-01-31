@@ -74,15 +74,10 @@ module _
     cauchy-pseudocompletion-Pseudometric-Space
       ( indexed-sum-Pseudometric-Space A P)
 
-  type-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space :
-    UU (la ⊔ lp ⊔ lp')
-  type-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space =
-    type-Pseudometric-Space
-      cauchy-pseudocompletion-indexed-sum-Pseudometric-Space
-
   cauchy-approximation-indexed-sum-Pseudometric-Space : UU (la ⊔ lp ⊔ lp')
   cauchy-approximation-indexed-sum-Pseudometric-Space =
-    type-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space
+    type-Pseudometric-Space
+      cauchy-pseudocompletion-indexed-sum-Pseudometric-Space
 
 module _
   {la lp lp' : Level}
