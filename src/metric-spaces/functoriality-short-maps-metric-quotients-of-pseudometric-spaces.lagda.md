@@ -57,7 +57,7 @@ and composition of short maps and induce commutative diagrams
 ```
 
 It is the
-{{#concept "functorial action" Disambiguation="of metric quotients on short maps" Agda=short-map-metric-quotient-short-map-Pseudometric-Space}}
+{{#concept "functorial action" Disambiguation="of metric quotients on short maps" Agda=short-map-metric-quotient-Pseudometric-Space}}
 of metric quotients on short maps.
 
 ## Definitions
