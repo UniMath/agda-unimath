@@ -203,28 +203,31 @@ module _
   contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space d =
     all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space d one-ℚ⁺
 
-  fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
+  map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
     ℚ⁺ →
     type-Pseudometric-Space
       ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-  fiber-cauchy-approximation-indexed-sum-Pseudometric-Space d =
+  map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+    d =
     tr
       ( type-Pseudometric-Space ∘ P)
       ( contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space d)
       ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space A P u d)
 
-  is-cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
+  is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
     is-cauchy-approximation-Pseudometric-Space
       ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-      ( fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
-  is-cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space ε δ =
+      ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
+  is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+    ε δ =
     tr
       ( λ z →
         neighborhood-Pseudometric-Space
           ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
           ( ε +ℚ⁺ δ)
           ( z)
-          ( fiber-cauchy-approximation-indexed-sum-Pseudometric-Space δ))
+          ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+            ( δ)))
       ( lemma)
       ( preserves-neighborhoods-map-isometry-Pseudometric-Space
         ( P
@@ -291,7 +294,8 @@ module _
             ( P)
             ( u)
             ( ε))) ＝
-      fiber-cauchy-approximation-indexed-sum-Pseudometric-Space ε
+      map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+        ε
     lemma =
       ( comp-tr
         ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
@@ -333,12 +337,13 @@ module _
               ( ε)
               ( one-ℚ⁺))))
 
-  cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
+  cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space
       ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-  cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space =
-    ( fiber-cauchy-approximation-indexed-sum-Pseudometric-Space ,
-      is-cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
+  cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+    =
+    ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space ,
+      is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
 ```
 
 ### The map from the Cauchy pseudocompletion of an indexed sum to the indexed sum of Cauchy pseudocompletions
@@ -356,7 +361,10 @@ module _
       ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
   map-inv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space u =
     ( base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u ,
-      cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space A P u)
+      cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+        ( A)
+        ( P)
+        ( u))
 ```
 
 ### The type of Cauchy approximations in an indexed sum is equivalent to the type of Cauchy approximmations in some fiber
@@ -444,8 +452,8 @@ module _
 
   short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
     short-map-Pseudometric-Space
-        ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+      ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
   short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space =
     ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ,
       preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
