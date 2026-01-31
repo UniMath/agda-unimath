@@ -84,30 +84,6 @@ module _
       ( short-map-unit-metric-quotient-Pseudometric-Space Q)
 ```
 
-### The type of short maps between metric quotients of pseudometric spaces
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (Q : Pseudometric-Space l1' l2')
-  where
-
-  short-map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  short-map-metric-quotient-Pseudometric-Space =
-    short-map-Metric-Space
-      ( metric-quotient-Pseudometric-Space P)
-      ( metric-quotient-Pseudometric-Space Q)
-
-  map-short-map-metric-quotient-Pseudometric-Space :
-    short-map-metric-quotient-Pseudometric-Space →
-    map-metric-quotient-Pseudometric-Space P Q
-  map-short-map-metric-quotient-Pseudometric-Space =
-    map-short-map-Metric-Space
-      ( metric-quotient-Pseudometric-Space P)
-      ( metric-quotient-Pseudometric-Space Q)
-```
-
 ### Action of metric quotients on short maps between pseudometric spaces
 
 ```agda
