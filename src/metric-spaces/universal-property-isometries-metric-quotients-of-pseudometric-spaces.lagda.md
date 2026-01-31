@@ -37,6 +37,7 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces
 ```
 
@@ -92,7 +93,7 @@ module _
       ( pseudometric-metric-quotient-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
       ( f)
-      ( isometry-metric-quotient-Pseudometric-Space P)
+      ( isometry-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ### Induced isometry from the quotient metric space into a metric space
@@ -221,7 +222,7 @@ module _
 
   is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space :
     map-extension-isometry-metric-quotient-Pseudometric-Space ∘
-    map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-isometry-extension-isometry-metric-quotient-Pseudometric-Space
     = pr2 g
