@@ -103,21 +103,6 @@ module _
     type-Prop (neighborhood-prop-metric-quotient-Pseudometric-Space ε X Y)
 ```
 
-### The type of maps between metric quotients of pseudometric spaces
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (Q : Pseudometric-Space l1' l2')
-  where
-
-  map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  map-metric-quotient-Pseudometric-Space =
-    type-metric-quotient-Pseudometric-Space P →
-    type-metric-quotient-Pseudometric-Space Q
-```
-
 ## Properties
 
 ### All quotient classes are inhabited
