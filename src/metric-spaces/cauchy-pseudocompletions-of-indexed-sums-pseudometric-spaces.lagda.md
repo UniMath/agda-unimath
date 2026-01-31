@@ -59,7 +59,7 @@ spaces; therefore,
 
 ## Definitions
 
-### Cauchy approximations in an indexed sum of pseudometric spaces
+### Cauchy pseudocompletions of indexed sums of pseudometric spaces
 
 ```agda
 module _
@@ -359,7 +359,7 @@ module _
       cauchy-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space A P u)
 ```
 
-### The type of Cauchy approximations in an indexed sum is equivalent to Cauchy approximmations in some fiber
+### The type of Cauchy approximations in an indexed sum is equivalent to the type of Cauchy approximmations in some fiber
 
 ```agda
 module _
@@ -424,22 +424,31 @@ module _
       is-equiv-map-indexed-sum-pseudocompletion-Pseudometric-Space A P)
 ```
 
-### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is an short
+### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is short
 
 ```agda
 module _
   {la lp lp' : Level}
   (A : Set la)
   (P : type-Set A → Pseudometric-Space lp lp')
-  where abstract
+  where
 
-  preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
-    is-short-map-Pseudometric-Space
-      ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
-      ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-  preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
-    d (x , u) (.x , v) (refl , Nuv) ε δ = (refl , Nuv ε δ)
+  abstract
+    preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
+      is-short-map-Pseudometric-Space
+        ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+        ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+    preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+      d (x , u) (.x , v) (refl , Nuv) ε δ = (refl , Nuv ε δ)
+
+  short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
+    short-map-Pseudometric-Space
+        ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+  short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space =
+    ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ,
+      preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
 ### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is an isometry
