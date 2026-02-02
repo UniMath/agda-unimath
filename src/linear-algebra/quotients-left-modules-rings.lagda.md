@@ -39,10 +39,9 @@ Given a [left module](linear-algebra.left-modules-rings.md) `M` over a
 [ring](ring-theory.rings.md) `R`, and a
 [submodule](linear-algebra.left-submodules-rings.md) `N` of `M`, the
 {{#concept "quotient module" Disambiguation="of left modules over rings"}} `M/N`
-is a left module over `R` equipped with a
-[linear map](linear-algebra.linear-maps-left-modules-rings.md) `q` satisfying
-the universal property that any linear map `f : M → P` such that `N ⊆ ker f`
-extends uniquely along `q` to a linear map `M/N → P`.
+is the [quotient group](group-theory.quotients-abelian-groups.md) `M/N` equipped
+with the induced scalar multiplication operation to make it a left module over
+`R`.
 
 ## Definition
 

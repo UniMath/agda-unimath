@@ -7,17 +7,27 @@ module linear-algebra.quotients-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.vector-spaces
 open import commutative-algebra.heyting-fields
+
 open import foundation.universe-levels
+
 open import linear-algebra.linear-maps-vector-spaces
-open import linear-algebra.subspaces-vector-spaces
 open import linear-algebra.quotients-left-modules-rings
+open import linear-algebra.subspaces-vector-spaces
+open import linear-algebra.vector-spaces
 ```
 
 </details>
 
 ## Idea
+
+Given a [vector space](linear-algebra.vector-spaces.md) `V` over a
+[Heyting field](commutative-algebra.heyting-fields.md) `K` and a
+[subspace](linear-algebra.subspaces-vector-spaces.md) `W` of `V`, the
+{{#concept "quotient space" WDID=Q1393796 WD="quotient space" Disambiguation="of a vector space over a Heyting field" Agda=quotient-Vector-Space}}
+`V/W` is the [quotient](linear-algebra.quotients-left-modules-rings.md) of `V`
+and `W` interpreted as [left modules](linear-algebra.left-modules-rings.md) over
+`K`.
 
 ## Definition
 
