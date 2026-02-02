@@ -185,6 +185,18 @@ open import elementary-number-theory.natural-numbers using
   ( ind-ℕ)
 ```
 
+### 78. The Cauchy-Schwarz inequality {#78}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser) and
+[malarbol](http://www.github.com/malarbol)
+
+```agda
+open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℂ-Inner-Product-Space)
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
+```
+
 ### 80. The fundamental theorem of arithmetic {#80}
 
 **Author:** [Victor Blanchi](https://github.com/VictorBlanchi)

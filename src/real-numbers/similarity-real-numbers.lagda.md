@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
+open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.similarity-subtypes
@@ -159,6 +160,16 @@ large-similarity-relation-sim-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
     ( λ _ _ → eq-sim-ℝ)
+```
+
+### The real numbers at universe `l` are locally small with respect to `UU l`
+
+```agda
+abstract
+  is-locally-small-ℝ : (l : Level) → is-locally-small l (ℝ l)
+  is-locally-small-ℝ =
+    is-locally-small-type-Large-Similarity-Relation
+      ( large-similarity-relation-sim-ℝ)
 ```
 
 ### Similarity reasoning
