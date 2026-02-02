@@ -1,7 +1,7 @@
-# Descent property of pushouts
+# Descent for pushouts
 
 ```agda
-module synthetic-homotopy-theory.descent-property-pushouts where
+module synthetic-homotopy-theory.descent-pushouts where
 ```
 
 <details><summary>Imports</summary>
@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 The
-{{#concept "descent property" Disambiguation="pushouts" Agda=uniqueness-family-cocone-descent-data-pushout WDID=Q5263725 WD="descent"}}
+{{#concept "descent property" Disambiguation="of pushouts" Agda=uniqueness-family-cocone-descent-data-pushout WDID=Q5263725 WD="descent"}}
 of [pushouts](synthetic-homotopy-theory.pushouts.md) states that given a pushout
 
 ```text
@@ -299,3 +299,7 @@ module _
   pr2 (pr2 family-with-descent-data-pushout-descent-data-pushout) =
     equiv-family-cocone-descent-data-pushout
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}
