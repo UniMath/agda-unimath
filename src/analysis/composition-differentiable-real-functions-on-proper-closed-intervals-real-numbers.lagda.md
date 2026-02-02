@@ -458,6 +458,10 @@ module _
       is-differentiable-comp-differentiable-real-map-proper-closed-interval-ℝ)
 ```
 
+## References
+
+{{#bibliography}}
+
 ## External links
 
 - [Chain rule](https://en.wikipedia.org/wiki/Chain_rule) on Wikipedia
