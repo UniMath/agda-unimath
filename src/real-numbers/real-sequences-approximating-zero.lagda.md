@@ -37,7 +37,7 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -60,7 +60,7 @@ the
 ```agda
 is-zero-limit-prop-sequence-ℝ : {l : Level} → sequence (ℝ l) → Prop l
 is-zero-limit-prop-sequence-ℝ {l} σ =
-  is-limit-prop-sequence-ℝ σ (raise-ℝ l zero-ℝ)
+  is-limit-prop-sequence-ℝ σ (raise-zero-ℝ l)
 
 is-zero-limit-sequence-ℝ : {l : Level} → sequence (ℝ l) → UU l
 is-zero-limit-sequence-ℝ σ = type-Prop (is-zero-limit-prop-sequence-ℝ σ)
@@ -86,9 +86,9 @@ abstract
           neighborhood-dist-ℝ
             ( ε)
             ( a n)
-            ( raise-ℝ l zero-ℝ)
+            ( raise-zero-ℝ l)
             ( chain-of-inequalities
-              dist-ℝ (a n) (raise-ℝ l zero-ℝ)
+              dist-ℝ (a n) (raise-zero-ℝ l)
               ≤ dist-ℝ (a n) zero-ℝ
                 by
                   leq-sim-ℝ

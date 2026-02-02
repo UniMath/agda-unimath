@@ -309,6 +309,7 @@ open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public
 open import foundation.maybe public
+open import foundation.mere-decidable-embeddings public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
@@ -395,7 +396,7 @@ open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions-of-values public
 open import foundation.replacement public
 open import foundation.retractions public
-open import foundation.retracts-of-maps public
+open import foundation.retracts-of-arrows public
 open import foundation.retracts-of-types public
 open import foundation.sections public
 open import foundation.separated-types-subuniverses public

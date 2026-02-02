@@ -80,6 +80,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -596,6 +597,9 @@ module _
 
 mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 mul-ℝ' y x = mul-ℝ x y
+
+mul-pair-ℝ : {l1 l2 : Level} → ℝ l1 × ℝ l2 → ℝ (l1 ⊔ l2)
+mul-pair-ℝ = rec-product mul-ℝ
 
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
@@ -1139,6 +1143,25 @@ abstract
       ( preserves-sim-left-mul-ℝ a b b' b~b')
 ```
 
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → raise-one-ℝ l *ℝ x ＝ x
+  left-raise-one-law-mul-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (raise-one-ℝ l *ℝ x))
+        ( left-unit-law-mul-ℝ x)
+        ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l one-ℝ)))
+
+  right-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ raise-one-ℝ l ＝ x
+  right-raise-one-law-mul-ℝ x =
+    commutative-mul-ℝ _ _ ∙ left-raise-one-law-mul-ℝ x
+```
+
 ### Zero laws
 
 ```agda
@@ -1147,7 +1170,7 @@ module _
   where
 
   abstract
-    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
+    left-zero-law-mul-ℝ : is-zero-ℝ (zero-ℝ *ℝ x)
     left-zero-law-mul-ℝ =
       inv-tr
         ( λ y → sim-ℝ y zero-ℝ)
@@ -1161,8 +1184,7 @@ module _
               by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
         ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
 
-    left-raise-zero-law-mul-ℝ :
-      raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
+    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
     left-raise-zero-law-mul-ℝ =
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
@@ -1179,9 +1201,13 @@ module _
           ~ℝ raise-zero-ℝ l
             by sim-raise-ℝ l zero-ℝ)
 
-    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
+    right-zero-law-mul-ℝ : is-zero-ℝ (x *ℝ zero-ℝ)
     right-zero-law-mul-ℝ =
       tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
+
+    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l ＝ raise-zero-ℝ l
+    right-raise-zero-law-mul-ℝ =
+      commutative-mul-ℝ _ _ ∙ left-raise-zero-law-mul-ℝ
 ```
 
 ### Swapping laws for multiplication on real numbers
@@ -1309,4 +1335,60 @@ abstract
         by right-distributive-mul-add-ℝ _ _ _
       ＝ multiple-Ab (ab-add-ℝ _) n x +ℝ x
         by ap-add-ℝ (left-mul-real-ℕ n x) (left-unit-law-mul-ℝ x)
+```
+
+### Multiplication by a raised real number
+
+```agda
+abstract
+  mul-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l x *ℝ y ＝ raise-ℝ l (x *ℝ y)
+  mul-left-raise-ℝ l x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l x *ℝ y
+        ~ℝ x *ℝ y
+          by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (x *ℝ y)
+          by sim-raise-ℝ l (x *ℝ y))
+
+  mul-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    x *ℝ raise-ℝ l y ＝ raise-ℝ l (x *ℝ y)
+  mul-right-raise-ℝ l x y =
+    equational-reasoning
+      x *ℝ raise-ℝ l y
+      ＝ raise-ℝ l y *ℝ x
+        by commutative-mul-ℝ _ _
+      ＝ raise-ℝ l (y *ℝ x)
+        by mul-left-raise-ℝ l y x
+      ＝ raise-ℝ l (x *ℝ y)
+        by ap (raise-ℝ l) (commutative-mul-ℝ y x)
+
+  mul-raise-ℝ :
+    {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l3 x *ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x *ℝ y)
+  mul-raise-ℝ {l3 = l3} {l4 = l4} x y =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ (l3 ⊔ l4) (x *ℝ y))
+        ( preserves-sim-mul-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)))
+```
+
+### Multiplication by negative one
+
+```agda
+abstract
+  left-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → neg-one-ℝ *ℝ x ＝ neg-ℝ x
+  left-neg-one-law-mul-ℝ x =
+    ( ap-mul-ℝ (inv (neg-real-ℤ one-ℤ)) refl) ∙
+    ( left-negative-law-mul-ℝ one-ℝ x) ∙
+    ( ap neg-ℝ (left-unit-law-mul-ℝ x))
+
+  right-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ neg-one-ℝ ＝ neg-ℝ x
+  right-neg-one-law-mul-ℝ x =
+    commutative-mul-ℝ x neg-one-ℝ ∙ left-neg-one-law-mul-ℝ x
 ```
