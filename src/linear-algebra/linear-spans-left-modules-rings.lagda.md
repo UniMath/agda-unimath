@@ -284,10 +284,10 @@ module _
               ( concat-tuple x-scalars y-scalars)
               ( concat-tuple x-vectors y-vectors))
 
-  is-closed-under-scalar-multiplicationscalar-linear-span-left-module-Ring :
+  is-closed-under-scalar-multiplication-linear-span-left-module-Ring :
     is-closed-under-scalar-multiplication-subset-left-module-Ring R M
       ( subset-linear-span-left-module-Ring R M S)
-  is-closed-under-scalar-multiplicationscalar-linear-span-left-module-Ring
+  is-closed-under-scalar-multiplication-linear-span-left-module-Ring
     r x x-in-span =
       let
         open
@@ -341,5 +341,5 @@ module _
   pr1 (pr2 (pr2 left-submodule-linear-span-left-module-Ring)) =
     is-closed-under-addition-linear-span-left-module-Ring
   pr2 (pr2 (pr2 left-submodule-linear-span-left-module-Ring)) =
-    is-closed-under-scalar-multiplicationscalar-linear-span-left-module-Ring
+    is-closed-under-scalar-multiplication-linear-span-left-module-Ring
 ```

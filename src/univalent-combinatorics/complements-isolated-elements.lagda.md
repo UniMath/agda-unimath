@@ -27,7 +27,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 For any element `x` in a [finite type](univalent-combinatorics.finite-types.md)
-`X` of [cardinality](set-theory.cardinalities.md) `n+1`, we can construct its
+`X` of [cardinality](set-theory.cardinals.md) `n+1`, we can construct its
 **complement**, which is a type of cardinality `n`.
 
 ## Definition

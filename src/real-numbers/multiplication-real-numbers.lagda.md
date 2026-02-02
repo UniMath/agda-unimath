@@ -1143,6 +1143,25 @@ abstract
       ( preserves-sim-left-mul-ℝ a b b' b~b')
 ```
 
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → raise-one-ℝ l *ℝ x ＝ x
+  left-raise-one-law-mul-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (raise-one-ℝ l *ℝ x))
+        ( left-unit-law-mul-ℝ x)
+        ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l one-ℝ)))
+
+  right-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ raise-one-ℝ l ＝ x
+  right-raise-one-law-mul-ℝ x =
+    commutative-mul-ℝ _ _ ∙ left-raise-one-law-mul-ℝ x
+```
+
 ### Zero laws
 
 ```agda
@@ -1333,4 +1352,43 @@ abstract
           by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
         ~ℝ raise-ℝ l (x *ℝ y)
           by sim-raise-ℝ l (x *ℝ y))
+
+  mul-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    x *ℝ raise-ℝ l y ＝ raise-ℝ l (x *ℝ y)
+  mul-right-raise-ℝ l x y =
+    equational-reasoning
+      x *ℝ raise-ℝ l y
+      ＝ raise-ℝ l y *ℝ x
+        by commutative-mul-ℝ _ _
+      ＝ raise-ℝ l (y *ℝ x)
+        by mul-left-raise-ℝ l y x
+      ＝ raise-ℝ l (x *ℝ y)
+        by ap (raise-ℝ l) (commutative-mul-ℝ y x)
+
+  mul-raise-ℝ :
+    {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l3 x *ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x *ℝ y)
+  mul-raise-ℝ {l3 = l3} {l4 = l4} x y =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ (l3 ⊔ l4) (x *ℝ y))
+        ( preserves-sim-mul-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)))
+```
+
+### Multiplication by negative one
+
+```agda
+abstract
+  left-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → neg-one-ℝ *ℝ x ＝ neg-ℝ x
+  left-neg-one-law-mul-ℝ x =
+    ( ap-mul-ℝ (inv (neg-real-ℤ one-ℤ)) refl) ∙
+    ( left-negative-law-mul-ℝ one-ℝ x) ∙
+    ( ap neg-ℝ (left-unit-law-mul-ℝ x))
+
+  right-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ neg-one-ℝ ＝ neg-ℝ x
+  right-neg-one-law-mul-ℝ x =
+    commutative-mul-ℝ x neg-one-ℝ ∙ left-neg-one-law-mul-ℝ x
 ```
