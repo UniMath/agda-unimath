@@ -36,7 +36,7 @@ for sequential colimits, and it is exactly an
 
 The fact that the type of descent data for a sequential diagram is equivalent to
 the type of type families over its colimit is recorded in
-[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-property-sequential-colimits.md).
+[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-sequential-colimits.md).
 
 ## Definitions
 
