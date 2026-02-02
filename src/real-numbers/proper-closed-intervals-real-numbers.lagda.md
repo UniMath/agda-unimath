@@ -25,6 +25,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -204,6 +205,20 @@ short-map-clamp-proper-closed-interval-ℝ :
 short-map-clamp-proper-closed-interval-ℝ [a,b] =
   short-map-clamp-closed-interval-ℝ
     ( closed-interval-proper-closed-interval-ℝ [a,b])
+```
+
+### The underlying subtype of a proper closed interval is inhabited
+
+```agda
+abstract
+  is-inhabited-subtype-proper-closed-interval-ℝ :
+    {l1 l2 : Level} (l3 : Level) ([a,b] : proper-closed-interval-ℝ l1 l2) →
+    is-inhabited-subtype (subtype-proper-closed-interval-ℝ (l1 ⊔ l3) [a,b])
+  is-inhabited-subtype-proper-closed-interval-ℝ l3 (a , b , a<b) =
+    intro-exists
+      ( raise-ℝ l3 a)
+      ( leq-sim-ℝ (sim-raise-ℝ l3 a) ,
+        preserves-leq-left-raise-ℝ l3 (leq-le-ℝ a<b))
 ```
 
 ### Every real number in a proper closed interval is an accumulation point in that proper closed interval
