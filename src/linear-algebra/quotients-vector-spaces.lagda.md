@@ -54,3 +54,8 @@ module _
   map-quotient-Vector-Space =
     map-quotient-hom-left-module-Ring (ring-Heyting-Field K) V W
 ```
+
+## External links
+
+- [Quotient space (linear algebra)](<https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)>)
+  on Wikipedia
