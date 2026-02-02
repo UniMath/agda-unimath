@@ -637,6 +637,28 @@ is-trunc-map-precomp-Π-is-surjective k H =
     ( is-neg-one-connected-map-is-surjective H)
 ```
 
+### Precomposing functions into a family of propositions by a surjective map is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-surjective f)
+  where
+
+  is-equiv-precomp-Π-Prop-is-surjective :
+    (P : B → Prop l3) →
+    is-equiv (precomp-Π f (type-Prop ∘ P))
+  is-equiv-precomp-Π-Prop-is-surjective P =
+    is-equiv-is-contr-map (is-trunc-map-precomp-Π-is-surjective neg-two-𝕋 H P)
+
+  map-inv-is-equiv-precomp-Π-Prop-is-surjective :
+    (P : B → Prop l3) →
+    ((a : A) → type-Prop (P (f a))) → (b : B) → type-Prop (P b)
+  map-inv-is-equiv-precomp-Π-Prop-is-surjective P =
+    map-inv-is-equiv (is-equiv-precomp-Π-Prop-is-surjective P)
+```
+
 ### Characterization of the identity type of `A ↠ B`
 
 ```agda

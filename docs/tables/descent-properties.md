@@ -6,4 +6,5 @@
 | Descent for equivalences         | [`foundation.descent-equivalences`](foundation.descent-equivalences.md)                                             |
 | Descent for pushouts             | [`synthetic-homotopy-theory.descent-pushouts`](synthetic-homotopy-theory.descent-pushouts.md)                       |
 | Descent for sequential colimits  | [`synthetic-homotopy-theory.descent-sequential-colimits`](synthetic-homotopy-theory.descent-sequential-colimits.md) |
+| Descent for surjective maps      | [`foundation.descent-surjective-maps`](foundation.descent-surjective-maps.md)                                       |
 | Descent for the circle           | [`synthetic-homotopy-theory.descent-circle`](synthetic-homotopy-theory.descent-circle.md)                           |
