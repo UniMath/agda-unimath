@@ -58,7 +58,7 @@ and composition of isometries and induce commutative diagrams
   [P] --q⋆f--> [Q] --q⋆g--> [R]
 ```
 
-It is the
+This is the
 {{#concept "functorial action" Disambiguation="of metric quotients on isometries" Agda=isometry-metric-quotient-Pseudometric-Space}}
 of metric quotients on isometries.
 
