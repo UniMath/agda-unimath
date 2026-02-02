@@ -67,7 +67,7 @@ derivative `x ↦ g' (f x) * f' x`.
 
 ## Proof
 
-This follows the proof of Theorem 6 of Chapter 2 of {{#cite BishopFoundations}}.
+This follows the proof of Theorem 6 in Chapter 2 of {{#cite BishopFoundations}}.
 
 ```agda
 module _
