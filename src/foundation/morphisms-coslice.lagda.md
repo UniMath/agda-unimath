@@ -1,7 +1,7 @@
-# Morphisms in the coslice category of types
+# Morphisms in the coslice under a type
 
 ```agda
-module foundation.coslice where
+module foundation.morphisms-coslice where
 ```
 
 <details><summary>Imports</summary>
@@ -34,8 +34,10 @@ Given a span of maps
   A       B,
 ```
 
-we define a morphism between the maps in the coslice category of types to be a
-map `h : A → B` together with a coherence triangle `(h ∘ f) ~ g`:
+we define a
+{{#concept "morphism" Agda=hom-coslice Disambiguation="in the coslice under a type"}}
+between the maps in the coslice category of types to be a map `h : A → B`
+together with a coherence triangle `(h ∘ f) ~ g`:
 
 ```text
       X
