@@ -47,12 +47,14 @@ these factor as isometries `q⋆f : [P] → [Q]`. This action preserves the iden
 and composition of isometries and induce commutative diagrams
 
 ```text
-   P ----f----> Q ----g----> R
-   |            |            |
-   q            q            q
-   |            |            |
-   v            v            v
-  [P] --q⋆f--> [Q] --q⋆g--> [R]
+        f         g
+   P ------> Q ------> R
+   |         |         |
+ q |       q |         | q
+   |         |         |
+   v         v         v
+  [P] ----> [Q] ----> [R]
+       q⋆f       q⋆g
 ```
 
 This is the
