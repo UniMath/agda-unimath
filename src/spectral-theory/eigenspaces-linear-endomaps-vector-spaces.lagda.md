@@ -1,4 +1,4 @@
-# Eigenspaces of linear transformations of vector spaces
+# Eigenspaces of linear endomaps of vector spaces
 
 ```agda
 module spectral-theory.eigenspaces-linear-endomaps-vector-spaces where

@@ -1,4 +1,4 @@
-# Eigenvalues and eigenelements of linear transformations of left modules over commutative rings
+# Eigenvalues and eigenelements of linear endomaps of left modules over commutative rings
 
 ```agda
 module spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings where
