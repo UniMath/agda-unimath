@@ -8,6 +8,7 @@ open import analysis.addition-differentiable-real-maps-on-proper-closed-interval
 open import analysis.alternation-sequences-metric-abelian-groups public
 open import analysis.comparison-test-series-real-numbers public
 open import analysis.complete-metric-abelian-groups public
+open import analysis.composition-differentiable-real-functions-on-proper-closed-intervals-real-numbers public
 open import analysis.convergent-series-complete-metric-abelian-groups public
 open import analysis.convergent-series-metric-abelian-groups public
 open import analysis.convergent-series-real-numbers public
