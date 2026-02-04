@@ -39,6 +39,10 @@ there exists a `c` with `a ≤ c ≤ b` with `|f c| ≤ ε`.
 
 This has yet to be proved.
 
+## See also
+
+- [The constructive intermediate value theorem](analysis.intermediate-value-theorem.md)
+
 ## External links
 
 - [Intermediate value theorem](https://ncatlab.org/nlab/show/intermediate+value+theorem)
