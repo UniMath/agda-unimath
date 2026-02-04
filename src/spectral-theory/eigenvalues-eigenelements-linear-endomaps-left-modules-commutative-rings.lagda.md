@@ -89,5 +89,4 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings.md)
 - [Eigenvalues and eigenvectors of vector spaces](spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces.md)

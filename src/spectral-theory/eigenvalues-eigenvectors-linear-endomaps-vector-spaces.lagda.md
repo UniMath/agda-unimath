@@ -60,7 +60,6 @@ module _
 
 ## See also
 
-- [Eigenvalues and eigenelements of left modules over rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings.md)
 - [Eigenvalues and eigenelements of left modules over commutative rings](spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings.md)
 
 ## External links
