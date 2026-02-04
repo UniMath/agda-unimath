@@ -54,9 +54,9 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 The
 {{#concept "product rule" Agda=is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ}}
 for
-[derivatives](analysis.derivatives-of-real-functions-on-proper-closed-intervals.md)
+[derivatives](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 states that if `f` and `g` are
-[uniformly continuous](real-numbers.uniformly-continuous-functions-proper-closed-intervals-real-numbers.md)
+[uniformly continuous](real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers.md)
 functions on a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md),
 and they are both differentiable with uniformly continuous derivatives `f'` and
