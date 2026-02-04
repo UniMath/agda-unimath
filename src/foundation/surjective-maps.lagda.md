@@ -16,7 +16,9 @@ open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
@@ -461,12 +463,26 @@ abstract
     is-surjective-dependent-universal-property-surjection f duppt-f
 
 abstract
-  is-propsitional-truncation-is-surjective :
+  is-propositional-truncation-is-surjective :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
     is-surjective f →
     dependent-universal-property-propositional-truncation P f
-  is-propsitional-truncation-is-surjective f is-surj-f =
+  is-propositional-truncation-is-surjective f is-surj-f =
     dependent-universal-property-surjection-is-surjective f is-surj-f
+
+abstract
+  is-surjective-unit-trunc-Prop :
+    {l : Level} (A : UU l) → is-surjective (unit-trunc-Prop {A = A})
+  is-surjective-unit-trunc-Prop A =
+    is-surjective-is-propositional-truncation
+      { P = trunc-Prop A}
+      ( unit-trunc-Prop)
+      ( dependent-universal-property-trunc-Prop)
+
+surjection-unit-trunc-Prop :
+  {l : Level} (A : UU l) → A ↠ type-trunc-Prop A
+surjection-unit-trunc-Prop A =
+  ( unit-trunc-Prop , is-surjective-unit-trunc-Prop A)
 ```
 
 ### A map that is both surjective and an embedding is an equivalence
@@ -545,6 +561,28 @@ module _
     is-surjective-map-product
       ( is-surjective-map-surjection f)
       ( is-surjective-map-surjection g)
+```
+
+### Surjectivity of maps on total spaces
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  abstract
+    is-surjective-tot :
+      (f : (a : A) → B a → C a) →
+      ((a : A) → is-surjective (f a)) → is-surjective (tot f)
+    is-surjective-tot f H (a , c) =
+      map-trunc-Prop
+        ( λ (b , fab=c) → ((a , b) , eq-pair-eq-fiber fab=c))
+        ( H a c)
+
+  surjection-tot : ((a : A) → B a ↠ C a) → Σ A B ↠ Σ A C
+  surjection-tot f =
+    ( tot (λ a → map-surjection (f a)) ,
+      is-surjective-tot _ (λ a → is-surjective-map-surjection (f a)))
 ```
 
 ### The composite of a surjective map before an equivalence is surjective
