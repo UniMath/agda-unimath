@@ -202,8 +202,8 @@ open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces u
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import analysis.intermediate-value-theorem using
-  ( intermediate-value-theorem-ℝ)
+open import analysis.constructive-intermediate-value-theorem using
+  ( constructive-intermediate-value-theorem-ℝ)
 ```
 
 Only the constructive variant is currently proved.
