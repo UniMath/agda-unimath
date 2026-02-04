@@ -319,23 +319,23 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  is-finitely-enumerable-coproduct-is-finitely-enumerable :
+  is-finitely-enumerable-coproduct :
     is-finitely-enumerable X → is-finitely-enumerable Y →
     is-finitely-enumerable (X + Y)
   is-finitely-enumerable-coproduct-is-finitely-enumerable =
     map-binary-trunc-Prop finite-enumeration-coproduct
 
-  is-finitely-enumerable-left-is-finitely-enumerable-coproduct :
+  is-finitely-enumerable-left-summand-coproduct :
     is-finitely-enumerable (X + Y) → is-finitely-enumerable X
   is-finitely-enumerable-left-is-finitely-enumerable-coproduct =
     map-trunc-Prop finite-enumeration-left-summand
 
-  is-finitely-enumerable-right-is-finitely-enumerable-coproduct :
+  is-finitely-enumerable-right-summand-coproduct :
     is-finitely-enumerable (X + Y) → is-finitely-enumerable Y
   is-finitely-enumerable-right-is-finitely-enumerable-coproduct =
     map-trunc-Prop finite-enumeration-right-summand
 
-  coproduct-is-finitely-enumerable-iff-each-finitely-enumerable :
+  iff-is-finitely-enumerable-coproduct :
     is-finitely-enumerable (X + Y) ↔
     is-finitely-enumerable X × is-finitely-enumerable Y
   pr1 coproduct-is-finitely-enumerable-iff-each-finitely-enumerable eX+Y =
