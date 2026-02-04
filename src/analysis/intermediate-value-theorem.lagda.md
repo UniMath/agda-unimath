@@ -60,7 +60,7 @@ open import real-numbers.zero-real-numbers
 ## Idea
 
 The
-{{#concept "classical intermediate value theorem" WDID=Q245098 WD="intermediate value theorem"}}
+{{#concept "intermediate value theorem" WDID=Q245098 WD="intermediate value theorem"}}
 states that for a
 [pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
 `f` on the [real numbers](real-numbers.dedekind-real-numbers.md), real numbers
@@ -97,34 +97,43 @@ module _
       sequence (ℝ l1)
     sequence-intermediate-value-theorem-ℝ : sequence (ℝ l1)
 
+    sign-sequence-intermediate-value-theorem-ℝ :
+      (n : ℕ) →
+      ( is-nonpositive-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
+          ( f)
+          ( sequence-intermediate-value-theorem-ℝ n))) +
+      ( is-nonnegative-ℝ
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
+          ( f)
+          ( sequence-intermediate-value-theorem-ℝ n)))
+
     sequence-intermediate-value-theorem-ℝ n =
       binary-mean-ℝ
         ( lower-bound-sequence-intermediate-value-theorem-ℝ n)
         ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
+
+    sign-sequence-intermediate-value-theorem-ℝ n =
+      linear-leq-lem-ℝ
+        ( lem)
+        ( map-pointwise-ε-δ-continuous-endomap-ℝ
+          ( f)
+          ( sequence-intermediate-value-theorem-ℝ n))
+        ( zero-ℝ)
 
     lower-bound-sequence-intermediate-value-theorem-ℝ 0 = a
     lower-bound-sequence-intermediate-value-theorem-ℝ (succ-ℕ n) =
       rec-coproduct
         ( λ _ → sequence-intermediate-value-theorem-ℝ n)
         ( λ _ → lower-bound-sequence-intermediate-value-theorem-ℝ n)
-        ( linear-leq-lem-ℝ
-          ( lem)
-          ( map-pointwise-ε-δ-continuous-endomap-ℝ
-            ( f)
-            ( sequence-intermediate-value-theorem-ℝ n))
-          ( zero-ℝ))
+        ( sign-sequence-intermediate-value-theorem-ℝ n)
 
     upper-bound-sequence-intermediate-value-theorem-ℝ 0 = b
     upper-bound-sequence-intermediate-value-theorem-ℝ (succ-ℕ n) =
       rec-coproduct
         ( λ _ → upper-bound-sequence-intermediate-value-theorem-ℝ n)
         ( λ _ → sequence-intermediate-value-theorem-ℝ n)
-        ( linear-leq-lem-ℝ
-          ( lem)
-          ( map-pointwise-ε-δ-continuous-endomap-ℝ
-            ( f)
-            ( sequence-intermediate-value-theorem-ℝ n))
-          ( zero-ℝ))
+        ( sign-sequence-intermediate-value-theorem-ℝ n)
 ```
 
 ### `aₙ ≤ cₙ ≤ bₙ`
@@ -148,25 +157,6 @@ module _
       leq-ℝ
         ( sequence-intermediate-value-theorem-ℝ n)
         ( upper-bound-sequence-intermediate-value-theorem-ℝ n)
-
-    sign-sequence-intermediate-value-theorem-ℝ :
-      (n : ℕ) →
-      ( is-nonpositive-ℝ
-        ( map-pointwise-ε-δ-continuous-endomap-ℝ
-          ( f)
-          ( sequence-intermediate-value-theorem-ℝ n))) +
-      ( is-nonnegative-ℝ
-        ( map-pointwise-ε-δ-continuous-endomap-ℝ
-          ( f)
-          ( sequence-intermediate-value-theorem-ℝ n)))
-
-    sign-sequence-intermediate-value-theorem-ℝ n =
-      linear-leq-lem-ℝ
-        ( lem)
-        ( map-pointwise-ε-δ-continuous-endomap-ℝ
-          ( f)
-          ( sequence-intermediate-value-theorem-ℝ n))
-        ( zero-ℝ)
 
     leq-lower-upper-bound-sequence-intermediate-value-theorem-ℝ 0 =
       a≤b
