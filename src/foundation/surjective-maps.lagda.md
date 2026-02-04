@@ -11,12 +11,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.coinhabited-pairs-of-types
 open import foundation.connected-maps
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
@@ -461,12 +465,26 @@ abstract
     is-surjective-dependent-universal-property-surjection f duppt-f
 
 abstract
-  is-propsitional-truncation-is-surjective :
+  is-propositional-truncation-is-surjective :
     {l1 l2 : Level} {A : UU l1} {P : Prop l2} (f : A → type-Prop P) →
     is-surjective f →
     dependent-universal-property-propositional-truncation P f
-  is-propsitional-truncation-is-surjective f is-surj-f =
+  is-propositional-truncation-is-surjective f is-surj-f =
     dependent-universal-property-surjection-is-surjective f is-surj-f
+
+abstract
+  is-surjective-unit-trunc-Prop :
+    {l : Level} (A : UU l) → is-surjective (unit-trunc-Prop {A = A})
+  is-surjective-unit-trunc-Prop A =
+    is-surjective-is-propositional-truncation
+      { P = trunc-Prop A}
+      ( unit-trunc-Prop)
+      ( dependent-universal-property-trunc-Prop)
+
+surjection-unit-trunc-Prop :
+  {l : Level} (A : UU l) → A ↠ type-trunc-Prop A
+surjection-unit-trunc-Prop A =
+  ( unit-trunc-Prop , is-surjective-unit-trunc-Prop A)
 ```
 
 ### A map that is both surjective and an embedding is an equivalence
@@ -526,16 +544,17 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  is-surjective-map-product :
-    {f : A → C} {g : B → D} →
-    is-surjective f → is-surjective g → is-surjective (map-product f g)
-  is-surjective-map-product {f} {g} s s' (c , d) =
-    apply-twice-universal-property-trunc-Prop
-      ( s c)
-      ( s' d)
-      ( trunc-Prop (fiber (map-product f g) (c , d)))
-      ( λ x y →
-        unit-trunc-Prop ((pr1 x , pr1 y) , eq-pair (pr2 x) (pr2 y)))
+  abstract
+    is-surjective-map-product :
+      {f : A → C} {g : B → D} →
+      is-surjective f → is-surjective g → is-surjective (map-product f g)
+    is-surjective-map-product {f} {g} s s' (c , d) =
+      apply-twice-universal-property-trunc-Prop
+        ( s c)
+        ( s' d)
+        ( trunc-Prop (fiber (map-product f g) (c , d)))
+        ( λ x y →
+          unit-trunc-Prop ((pr1 x , pr1 y) , eq-pair (pr2 x) (pr2 y)))
 
   surjection-product :
     (A ↠ C) → (B ↠ D) → ((A × B) ↠ (C × D))
@@ -545,6 +564,56 @@ module _
     is-surjective-map-product
       ( is-surjective-map-surjection f)
       ( is-surjective-map-surjection g)
+```
+
+### Functoriality of coproducts preserves being surjective
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+  abstract
+    is-surjective-map-coproduct :
+      {f : A → A'} {g : B → B'} →
+      is-surjective f → is-surjective g →
+      is-surjective (map-coproduct f g)
+    is-surjective-map-coproduct s s' (inl x) =
+      apply-universal-property-trunc-Prop (s x)
+        ( trunc-Prop (fiber (map-coproduct _ _) (inl x)))
+        ( λ (a , p) → unit-trunc-Prop (inl a , ap inl p))
+    is-surjective-map-coproduct s s' (inr x) =
+      apply-universal-property-trunc-Prop (s' x)
+        ( trunc-Prop (fiber (map-coproduct _ _) (inr x)))
+        ( λ (a , p) → unit-trunc-Prop (inr a , ap inr p))
+
+  surjection-coproduct :
+    (A ↠ A') → (B ↠ B') → ((A + B) ↠ (A' + B'))
+  surjection-coproduct (f , sf) (g , sg) =
+    ( map-coproduct f g ,
+      is-surjective-map-coproduct sf sg)
+```
+
+### Surjectivity of maps on total spaces
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  abstract
+    is-surjective-tot :
+      (f : (a : A) → B a → C a) →
+      ((a : A) → is-surjective (f a)) → is-surjective (tot f)
+    is-surjective-tot f H (a , c) =
+      map-trunc-Prop
+        ( λ (b , fab=c) → ((a , b) , eq-pair-eq-fiber fab=c))
+        ( H a c)
+
+  surjection-tot : ((a : A) → B a ↠ C a) → Σ A B ↠ Σ A C
+  surjection-tot f =
+    ( tot (λ a → map-surjection (f a)) ,
+      is-surjective-tot _ (λ a → is-surjective-map-surjection (f a)))
 ```
 
 ### The composite of a surjective map before an equivalence is surjective
