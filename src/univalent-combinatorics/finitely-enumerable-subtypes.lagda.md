@@ -125,23 +125,17 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2}
-  (S : finitely-enumerable-subtype l3 X)
-  (T : finitely-enumerable-subtype l4 Y)
+  (S@(subS , eS) : finitely-enumerable-subtype l3 X)
+  (T@(subT , eT) : finitely-enumerable-subtype l4 Y)
   where
 
   product-finitely-enumerable-subtype :
     finitely-enumerable-subtype (l3 ⊔ l4) (X × Y)
   product-finitely-enumerable-subtype =
-    let
-      subS = subtype-finitely-enumerable-subtype S
-      subT = subtype-finitely-enumerable-subtype T
-    in
-      ( product-subtype subS subT ,
-        is-finitely-enumerable-equiv
-          ( inv-equiv ( equiv-product-subtype subS subT))
-          ( is-finitely-enumerable-product
-            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype S)
-            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype T)))
+    ( product-subtype subS subT ,
+      is-finitely-enumerable-equiv
+        ( inv-equiv (equiv-product-subtype subS subT))
+        ( is-finitely-enumerable-product eS eT))
 ```
 
 ### Finitely enumerable subtypes are closed under unions
@@ -163,9 +157,12 @@ module _
     is-finitely-enumerable-subtype-union-finitely-enumerable-subtype =
       is-finitely-enumerable-surjection
         ( surjection-coproduct-union-subtype subS subT)
-        ( is-finitely-enumerable-coproduct-is-finitely-enumerable
-            ( fin-enum-S)
-            ( fin-enum-T))
+        ( is-finitely-enumerable-coproduct fin-enum-S fin-enum-T)
+
+  union-finitely-enumerable-subtype : finitely-enumerable-subtype (l2 ⊔ l3) X
+  union-finitely-enumerable-subtype =
+    ( subtype-union-finitely-enumerable-subtype ,
+      is-finitely-enumerable-subtype-union-finitely-enumerable-subtype)
 ```
 
 ### Empty subtypes are finitely enumerable
