@@ -1184,30 +1184,35 @@ module _
               by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
         ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
 
-    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l *ℝ x ＝ raise-zero-ℝ l
-    left-raise-zero-law-mul-ℝ =
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          raise-zero-ℝ l *ℝ x
-          ~ℝ zero-ℝ *ℝ x
-            by
-              preserves-sim-right-mul-ℝ
-                ( x)
-                ( raise-zero-ℝ l)
-                ( zero-ℝ)
-                ( sim-raise-ℝ' l zero-ℝ)
-          ~ℝ zero-ℝ
-            by left-zero-law-mul-ℝ
-          ~ℝ raise-zero-ℝ l
-            by sim-raise-ℝ l zero-ℝ)
-
     right-zero-law-mul-ℝ : is-zero-ℝ (x *ℝ zero-ℝ)
     right-zero-law-mul-ℝ =
       tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
 
-    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l ＝ raise-zero-ℝ l
+module _
+  {l1 l2 : Level} (x : ℝ l1)
+  where
+
+  abstract
+    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l2 *ℝ x ＝ raise-zero-ℝ (l1 ⊔ l2)
+    left-raise-zero-law-mul-ℝ =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          raise-zero-ℝ l2 *ℝ x
+          ~ℝ zero-ℝ *ℝ x
+            by
+              preserves-sim-right-mul-ℝ
+                ( x)
+                ( raise-zero-ℝ l2)
+                ( zero-ℝ)
+                ( sim-raise-ℝ' l2 zero-ℝ)
+          ~ℝ zero-ℝ
+            by left-zero-law-mul-ℝ x
+          ~ℝ raise-zero-ℝ (l1 ⊔ l2)
+            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ)
+
+    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l2 ＝ raise-zero-ℝ (l1 ⊔ l2)
     right-raise-zero-law-mul-ℝ =
-      commutative-mul-ℝ _ _ ∙ left-raise-zero-law-mul-ℝ
+      commutative-mul-ℝ x (raise-zero-ℝ l2) ∙ left-raise-zero-law-mul-ℝ
 ```
 
 ### Swapping laws for multiplication on real numbers
@@ -1391,4 +1396,26 @@ abstract
     {l : Level} (x : ℝ l) → x *ℝ neg-one-ℝ ＝ neg-ℝ x
   right-neg-one-law-mul-ℝ x =
     commutative-mul-ℝ x neg-one-ℝ ∙ left-neg-one-law-mul-ℝ x
+```
+
+### Adding `½ x` to itself produces `x`
+
+```agda
+abstract
+  twice-left-mul-one-half-ℝ :
+    {l : Level} (x : ℝ l) →
+    (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x) ＝ x
+  twice-left-mul-one-half-ℝ x =
+    equational-reasoning
+      (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x)
+      ＝ real-ℕ 2 *ℝ (one-half-ℝ *ℝ x)
+        by inv (left-mul-real-ℕ 2 (one-half-ℝ *ℝ x))
+      ＝ (real-ℕ 2 *ℝ one-half-ℝ) *ℝ x
+        by inv (associative-mul-ℝ (real-ℕ 2) one-half-ℝ x)
+      ＝ real-ℚ (rational-ℕ 2 *ℚ one-half-ℚ) *ℝ x
+        by ap-mul-ℝ (mul-real-ℚ _ _) refl
+      ＝ one-ℝ *ℝ x
+        by ap-mul-ℝ (ap real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ two-ℚ⁺)) refl
+      ＝ x
+        by left-unit-law-mul-ℝ x
 ```

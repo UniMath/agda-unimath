@@ -127,3 +127,25 @@ abstract
       ( preserves-leq-right-mul-ℝ⁰⁺ y' x≤x')
       ( preserves-leq-left-mul-ℝ⁰⁺ x y≤y')
 ```
+
+### Unit laws
+
+```agda
+abstract
+  left-unit-law-mul-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → one-ℝ⁰⁺ *ℝ⁰⁺ x ＝ x
+  left-unit-law-mul-ℝ⁰⁺ (x , _) = eq-ℝ⁰⁺ _ _ (left-unit-law-mul-ℝ x)
+```
+
+### If `x` is a nonnegative real number less than or equal to 1 and `y` is nonnegative, `xy ≤ y`
+
+```agda
+abstract
+  leq-left-mul-leq-one-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    leq-ℝ⁰⁺ x one-ℝ⁰⁺ → leq-ℝ⁰⁺ (x *ℝ⁰⁺ y) y
+  leq-left-mul-leq-one-ℝ⁰⁺ x y x≤1 =
+    tr
+      ( leq-ℝ⁰⁺ (x *ℝ⁰⁺ y))
+      ( left-unit-law-mul-ℝ⁰⁺ y)
+      ( preserves-leq-right-mul-ℝ⁰⁺ y x≤1)
+```

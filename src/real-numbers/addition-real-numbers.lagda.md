@@ -17,6 +17,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -610,6 +611,14 @@ abstract
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x
       ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
+```
+
+### `½ + ½ = 1`
+
+```agda
+abstract
+  twice-one-half-ℝ : one-half-ℝ +ℝ one-half-ℝ ＝ one-ℝ
+  twice-one-half-ℝ = add-real-ℚ _ _ ∙ ap real-ℚ twice-one-half-ℚ
 ```
 
 ### Adding raised real numbers

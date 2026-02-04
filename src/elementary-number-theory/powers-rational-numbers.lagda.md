@@ -33,7 +33,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
@@ -308,54 +310,6 @@ abstract
       ( preserves-leq-power-ℚ⁰⁺ n (abs-ℚ p) (abs-ℚ q) |p|≤|q|)
 ```
 
-### Odd powers of rational numbers preserve inequality
-
-```agda
-abstract
-  preserves-leq-odd-power-ℚ :
-    (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
-    leq-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-leq-odd-power-ℚ n p q odd-n p≤q =
-    rec-coproduct
-      ( λ is-neg-p →
-        rec-coproduct
-          ( λ is-neg-q →
-            let
-              p⁻ = (p , is-neg-p)
-              q⁻ = (q , is-neg-q)
-            in
-              binary-tr
-                ( leq-ℚ)
-                ( neg-odd-power-neg-ℚ⁻ n p⁻ odd-n)
-                ( neg-odd-power-neg-ℚ⁻ n q⁻ odd-n)
-                ( neg-leq-ℚ
-                  ( preserves-leq-power-ℚ⁺
-                    ( n)
-                    ( neg-ℚ⁻ q⁻)
-                    ( neg-ℚ⁻ p⁻)
-                    ( neg-leq-ℚ p≤q))))
-          ( λ is-nonneg-q →
-            inv-tr
-              ( leq-ℚ (power-ℚ n p))
-              ( power-rational-ℚ⁰⁺ n (q , is-nonneg-q))
-              ( leq-negative-nonnegative-ℚ
-                ( power-ℚ n p ,
-                  is-negative-odd-power-ℚ⁻ n (p , is-neg-p) odd-n)
-                ( power-ℚ⁰⁺ n (q , is-nonneg-q))))
-          ( decide-is-negative-is-nonnegative-ℚ q))
-      ( λ is-nonneg-p →
-        let
-          p⁰⁺ = (p , is-nonneg-p)
-          q⁰⁺ = (q , is-nonnegative-leq-ℚ⁰⁺ p⁰⁺ q p≤q)
-        in
-          binary-tr
-            ( leq-ℚ)
-            ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
-            ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-leq-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p≤q))
-      ( decide-is-negative-is-nonnegative-ℚ p)
-```
-
 ### Odd powers of rational numbers preserve strict inequality
 
 ```agda
@@ -402,6 +356,20 @@ abstract
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
             ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
+```
+
+### Odd powers of rational numbers preserve inequality
+
+```agda
+abstract
+  preserves-leq-power-is-odd-exponent-ℚ :
+    (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
+    leq-ℚ (power-ℚ n p) (power-ℚ n q)
+  preserves-leq-power-is-odd-exponent-ℚ n p q odd-n p≤q =
+    trichotomy-le-ℚ p q
+      ( leq-le-ℚ ∘ preserves-le-odd-power-ℚ n p q odd-n)
+      ( leq-eq-ℚ ∘ ap (power-ℚ n))
+      ( λ q<p → ex-falso (not-leq-le-ℚ q p q<p p≤q))
 ```
 
 ### If `|ε| < 1`, `εⁿ` approaches 0

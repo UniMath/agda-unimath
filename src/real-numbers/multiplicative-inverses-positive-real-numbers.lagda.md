@@ -236,6 +236,11 @@ abstract
             by ap positive-real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)
           ＝ raise-one-ℝ⁺ lzero
             by eq-raise-ℝ⁺ one-ℝ⁺))
+
+  real-inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
+  real-inv-positive-real-ℚ⁺ q =
+    ap real-ℝ⁺ (inv-positive-real-ℚ⁺ q)
 ```
 
 ### The multiplicative inverse operation reverses inequality
