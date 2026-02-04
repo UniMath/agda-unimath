@@ -1,9 +1,9 @@
-# The intermediate value theorem
+# The constructive intermediate value theorem
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.intermediate-value-theorem where
+module analysis.constructive-intermediate-value-theorem where
 ```
 
 <details><summary>Imports</summary>
@@ -79,7 +79,7 @@ open import real-numbers.unit-closed-interval-real-numbers
 ## Idea
 
 The
-{{#concept "constructive intermediate value theorem" Agda=intermediate-value-theorem-ℝ}}
+{{#concept "constructive intermediate value theorem" Agda=constructive-intermediate-value-theorem-ℝ}}
 states that for a
 [pointwise ε-δ continuous endomap](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
 `f` on the [real numbers](real-numbers.dedekind-real-numbers.md), real numbers
@@ -418,7 +418,7 @@ module _
 
 ```agda
   abstract
-    sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+    sim-one-interpolation-seq-leq-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
@@ -428,7 +428,7 @@ module _
       sim-ℝ
         ( pr1 (interpolation-seq-intermediate-value-theorem-ℝ n))
         ( one-ℝ)
-    sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+    sim-one-interpolation-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
       n ε/2≤fcₙ =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -466,7 +466,7 @@ module _
                     ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ ε))
                     ( ε/2≤fcₙ)))
 
-    eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+    eq-succ-lower-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
@@ -475,7 +475,7 @@ module _
           ( seq-intermediate-value-theorem-ℝ n)) →
       lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
       lower-bound-seq-intermediate-value-theorem-ℝ n
-    eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+    eq-succ-lower-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
       n ε/2≤fcₙ =
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
@@ -487,7 +487,7 @@ module _
               preserves-sim-diff-ℝ
                 ( refl-sim-ℝ _)
                 ( preserves-sim-right-mul-ℝ _ _ _
-                  ( sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                  ( sim-one-interpolation-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
                     ( n)
                     ( ε/2≤fcₙ)))
           ~ℝ
@@ -513,7 +513,7 @@ module _
           ~ℝ lower-bound-seq-intermediate-value-theorem-ℝ n
             by cancel-right-add-diff-ℝ _ _)
 
-    succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ :
+    succ-upper-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))
@@ -522,7 +522,8 @@ module _
           ( seq-intermediate-value-theorem-ℝ n)) →
       upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
       seq-intermediate-value-theorem-ℝ n
-    succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ n ε/2≤fcₙ =
+    succ-upper-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
+      n ε/2≤fcₙ =
       equational-reasoning
       ( upper-bound-seq-intermediate-value-theorem-ℝ n) -ℝ
       ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
@@ -536,7 +537,7 @@ module _
             ( inv (eq-sim-ℝ (add-right-diff-ℝ _ _)))
             ( eq-sim-ℝ
               ( preserves-sim-right-mul-ℝ _ _ _
-                ( sim-one-interpolation-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                ( sim-one-interpolation-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
                   ( n)
                   ( ε/2≤fcₙ))))
       ＝
@@ -557,7 +558,7 @@ module _
 
 ```agda
   abstract
-    sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+    sim-zero-interpolation-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ
@@ -567,7 +568,7 @@ module _
       sim-ℝ
         ( pr1 (interpolation-seq-intermediate-value-theorem-ℝ n))
         ( zero-ℝ)
-    sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+    sim-zero-interpolation-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
       n fcₙ≤-ε/2 =
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -602,7 +603,7 @@ module _
               by leq-sim-ℝ (right-inverse-law-add-ℝ one-half-ℝ))
 
   abstract
-    is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+    is-zero-shift-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ
@@ -610,21 +611,21 @@ module _
           ( seq-intermediate-value-theorem-ℝ n))
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
       sim-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n) zero-ℝ⁰⁺
-    is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+    is-zero-shift-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
       n fcₙ≤-ε/2 =
       similarity-reasoning-ℝ
         real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n)
         ~ℝ zero-ℝ *ℝ _
           by
             preserves-sim-right-mul-ℝ _ _ _
-              ( sim-zero-interpolation-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+              ( sim-zero-interpolation-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
                 ( n)
                 ( fcₙ≤-ε/2))
         ~ℝ zero-ℝ
           by left-zero-law-mul-ℝ _
 
   abstract
-    eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+    eq-succ-upper-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ
@@ -633,7 +634,7 @@ module _
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
       upper-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
       upper-bound-seq-intermediate-value-theorem-ℝ n
-    eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+    eq-succ-upper-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
       n fcₙ≤-ε/2 =
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
@@ -643,13 +644,13 @@ module _
             by
               preserves-sim-diff-ℝ
                 ( refl-sim-ℝ _)
-                ( is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                ( is-zero-shift-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
                   ( n)
                   ( fcₙ≤-ε/2))
           ~ℝ upper-bound-seq-intermediate-value-theorem-ℝ n
             by sim-eq-ℝ (right-unit-law-diff-ℝ _))
 
-    succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ :
+    succ-lower-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ :
       (n : ℕ) →
       leq-ℝ
         ( map-pointwise-ε-δ-continuous-endomap-ℝ
@@ -658,7 +659,7 @@ module _
           ( neg-ℝ (real-ℚ⁺ (one-half-ℚ⁺ *ℚ⁺ ε))) →
       lower-bound-seq-intermediate-value-theorem-ℝ (succ-ℕ n) ＝
       seq-intermediate-value-theorem-ℝ n
-    succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+    succ-lower-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
       n fcₙ≤-ε/2 =
       eq-sim-ℝ
         ( similarity-reasoning-ℝ
@@ -668,7 +669,7 @@ module _
             by
               preserves-sim-diff-ℝ
                 ( refl-sim-ℝ _)
-                ( is-zero-shift-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                ( is-zero-shift-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
                   ( n)
                   ( fcₙ≤-ε/2))
           ~ℝ seq-intermediate-value-theorem-ℝ n
@@ -736,14 +737,14 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                       ( inv-tr
                           ( ( is-negative-ℝ) ∘
                             ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
-                          ( eq-succ-lower-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                          ( eq-succ-lower-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
                             ( m)
                             ( leq-le-ℝ ε'<fcₘ))
                           ( faₘ<0) ,
                         inv-tr
                           ( ( is-positive-ℝ) ∘
                             ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
-                          ( succ-upper-bound-seq-leq-half-ε-seq-intermediate-value-theorem-ℝ
+                          ( succ-upper-bound-seq-leq-half-error-seq-intermediate-value-theorem-ℝ
                             ( m)
                             ( leq-le-ℝ ε'<fcₘ))
                           ( is-positive-le-ℝ⁺
@@ -768,7 +769,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                   ( inv-tr
                       ( ( is-negative-ℝ) ∘
                         ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
-                      ( succ-lower-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                      ( succ-lower-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
                         ( m)
                         ( leq-le-ℝ fcₘ<-ε'))
                       ( is-negative-le-real-ℝ⁻
@@ -778,7 +779,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                     inv-tr
                       ( ( is-positive-ℝ) ∘
                         ( map-pointwise-ε-δ-continuous-endomap-ℝ f))
-                      ( eq-succ-upper-bound-seq-leq-neg-half-ε-seq-intermediate-value-theorem-ℝ
+                      ( eq-succ-upper-bound-seq-leq-neg-half-error-seq-intermediate-value-theorem-ℝ
                         ( m)
                         ( leq-le-ℝ fcₘ<-ε'))
                       ( 0<fbₘ)))
@@ -794,14 +795,14 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
 
 ```agda
   abstract
-    intermediate-value-theorem-ℝ :
+    constructive-intermediate-value-theorem-ℝ :
       exists
         ( type-closed-interval-ℝ l ((a , b) , a≤b))
         ( λ (c , _) →
           leq-prop-ℝ
             ( abs-ℝ (map-pointwise-ε-δ-continuous-endomap-ℝ f c))
             ( real-ℚ⁺ ε))
-    intermediate-value-theorem-ℝ =
+    constructive-intermediate-value-theorem-ℝ =
       let
         motive =
           ∃ ( type-closed-interval-ℝ l ((a , b) , a≤b))
