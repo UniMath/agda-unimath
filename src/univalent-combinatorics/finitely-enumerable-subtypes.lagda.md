@@ -192,3 +192,7 @@ empty-finitely-enumerable-subtype l2 X =
   ( empty-subtype l2 X ,
     is-finitely-enumerable-empty-subtype l2 X)
 ```
+
+## See also
+
+- [Inhabited finitely enumerable subtypes](univalent-combinatorics.inhabited-finitely-enumerable-subtypes.md)
