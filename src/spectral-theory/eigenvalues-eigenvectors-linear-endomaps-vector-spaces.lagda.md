@@ -1,4 +1,4 @@
-# Eigenvalues and eigenvectors of linear transformations of vector spaces
+# Eigenvalues and eigenvectors of linear endomaps of vector spaces
 
 ```agda
 module spectral-theory.eigenvalues-eigenvectors-linear-endomaps-vector-spaces where
@@ -30,7 +30,9 @@ an
 {{#concept "eigenvector" WDID=Q3555174 WD="eigenvector" Disambiguation="of a linear endomap of a vector space"}}
 of `f` with
 {{#concept "eigenvalue" WDID=Q3553768 WD="eigenvalue" Disambiguation="of a linear endomap of a vector space"}}
-`c : F` if `f v = c * v`.
+`c : F` if it is a member of the
+[eigenspace](spectral-theory.eigenspaces-linear-endomaps-vector-spaces.md)
+associated with `c`, that is, it is in the kernel of the map `v ↦ f v - c * v`.
 
 ## Definition
 

@@ -15,14 +15,13 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import linear-algebra.difference-linear-maps-left-modules-commutative-rings
+open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.left-submodules-commutative-rings
-open import linear-algebra.difference-linear-maps-left-modules-commutative-rings
 open import linear-algebra.linear-endomaps-left-modules-commutative-rings
-open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings
-open import linear-algebra.subsets-left-modules-commutative-rings
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings
-open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings
+open import linear-algebra.subsets-left-modules-commutative-rings
 ```
 
 </details>

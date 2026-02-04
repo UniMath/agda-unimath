@@ -13,10 +13,10 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
-open import linear-algebra.left-modules-rings
+open import linear-algebra.left-submodules-commutative-rings
 open import linear-algebra.linear-endomaps-left-modules-commutative-rings
 
-open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings
+open import spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings
 ```
 
 </details>
@@ -31,7 +31,11 @@ element `v : M` is an
 {{#concept "eigenelement" Disambiguation="of a linear endomap of a left module over a commutative ring"}}
 of `f` with
 {{#concept "eigenvalue" Disambiguation="of a linear endomap of a left module over a commutative ring"}}
-`c : R` if `f v = c * v`.
+`c : R` is an element of the
+[eigenmodule](spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings.md)
+associated with `c`, that is, an element of the
+[kernel](linear-algebra.kernels-linear-maps-left-modules-commutative-rings.md)
+of the map `v ↦ f v - c * v`.
 
 ## Definition
 
@@ -46,10 +50,7 @@ module _
   is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring R M → Prop l2
   is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring =
-    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Ring
-      ( ring-Commutative-Ring R)
-      ( M)
-      ( f)
+    subset-eigenmodule-linear-endo-left-module-Commutative-Ring R M f
 
   is-eigenelement-eigenvalue-linear-endo-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring R M → UU l2
@@ -81,11 +82,9 @@ module _
         ( f)
         ( r)
         ( zero-left-module-Commutative-Ring R M)
-    is-eigenelement-zero-linear-endo-left-module-Commutative-Ring =
-      is-eigenelement-zero-linear-endo-left-module-Ring
-        ( ring-Commutative-Ring R)
-        ( M)
-        ( f)
+    is-eigenelement-zero-linear-endo-left-module-Commutative-Ring r =
+      contains-zero-left-submodule-Commutative-Ring R M
+        ( eigenmodule-linear-endo-left-module-Commutative-Ring R M f r)
 ```
 
 ## See also

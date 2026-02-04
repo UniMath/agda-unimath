@@ -62,4 +62,4 @@ module _
 
 ## See also
 
-- [Eigenmodules of linear transformations of left modules over commutative rings](spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings.md)
+- [Eigenmodules of linear endomaps of left modules over commutative rings](spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings.md)
