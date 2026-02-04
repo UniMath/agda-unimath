@@ -53,7 +53,7 @@ is-inhabited-finite-total-order-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-inhabited-finite-total-order-Poset-Prop P =
   product-Prop
-    ( is-total-Poset-Prop P)
+    ( is-total-prop-Poset P)
     ( product-Prop
       ( is-finite-Poset-Prop P)
       ( is-inhabited-Prop (type-Poset P)))
