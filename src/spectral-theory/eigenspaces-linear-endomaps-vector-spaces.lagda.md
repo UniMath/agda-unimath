@@ -53,7 +53,7 @@ module _
 
   vector-space-eigenspace-linear-endo-Vector-Space : Vector-Space l2 F
   vector-space-eigenspace-linear-endo-Vector-Space =
-    left-eigenmodule-linear-endo-left-module-Commutative-Ring
+    left-module-eigenmodule-linear-endo-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field F)
       ( V)
       ( f)
