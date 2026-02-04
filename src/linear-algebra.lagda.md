@@ -5,6 +5,7 @@
 ```agda
 module linear-algebra where
 
+open import linear-algebra.addition-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.addition-linear-maps-left-modules-rings public
 open import linear-algebra.bilinear-forms-real-vector-spaces public
 open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces public
@@ -17,6 +18,8 @@ open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
+open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
+open import linear-algebra.difference-linear-maps-left-modules-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
@@ -30,6 +33,7 @@ open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-matrices public
+open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
 open import linear-algebra.kernels-linear-maps-vector-spaces public
 open import linear-algebra.large-left-modules-large-rings public

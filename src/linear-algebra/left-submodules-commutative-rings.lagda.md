@@ -63,4 +63,9 @@ module _
     left-module-Commutative-Ring (l2 ⊔ l3) R
   left-module-left-submodule-Commutative-Ring =
     left-module-left-submodule-Ring (ring-Commutative-Ring R) M S
+
+  subset-left-submodule-Commutative-Ring :
+    subset-left-module-Commutative-Ring l3 R M
+  subset-left-submodule-Commutative-Ring =
+    subset-left-submodule-Ring (ring-Commutative-Ring R) M S
 ```
