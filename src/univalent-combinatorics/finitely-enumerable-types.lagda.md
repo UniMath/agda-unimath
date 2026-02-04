@@ -8,6 +8,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 
 ```agda
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -299,21 +300,11 @@ abstract
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   finite-enumeration X → finite-enumeration Y → finite-enumeration (X + Y)
-finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
-  let
-    F = rec-bool (raise l2 X) (raise l1 Y)
-    eF : (b : bool) → finite-enumeration (F b)
-    eF = λ where
-      false → finite-enumeration-equiv eY (compute-raise l1 Y)
-      true → finite-enumeration-equiv eX (compute-raise l2 X)
-  in
-    finite-enumeration-equiv
-      ( finite-enumeration-Σ
-        ( finite-enumeration-count (2 , equiv-bool-Fin-2))
-        ( F)
-        ( eF))
-      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y) ∘e
-        equiv-Σ-bool-coproduct F)
+finite-enumeration-coproduct {l1} {l2} {X} {Y} (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
+  ( nX +ℕ nY ,
+    comp-surjection
+      ( surjection-coproduct Fin-nX↠X Fin-nY↠Y)
+      ( surjection-inv-equiv (compute-coproduct-Fin nX nY)))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
@@ -322,27 +313,27 @@ module _
   is-finitely-enumerable-coproduct :
     is-finitely-enumerable X → is-finitely-enumerable Y →
     is-finitely-enumerable (X + Y)
-  is-finitely-enumerable-coproduct-is-finitely-enumerable =
+  is-finitely-enumerable-coproduct =
     map-binary-trunc-Prop finite-enumeration-coproduct
 
   is-finitely-enumerable-left-summand-coproduct :
     is-finitely-enumerable (X + Y) → is-finitely-enumerable X
-  is-finitely-enumerable-left-is-finitely-enumerable-coproduct =
+  is-finitely-enumerable-left-summand-coproduct =
     map-trunc-Prop finite-enumeration-left-summand
 
   is-finitely-enumerable-right-summand-coproduct :
     is-finitely-enumerable (X + Y) → is-finitely-enumerable Y
-  is-finitely-enumerable-right-is-finitely-enumerable-coproduct =
+  is-finitely-enumerable-right-summand-coproduct =
     map-trunc-Prop finite-enumeration-right-summand
 
   iff-is-finitely-enumerable-coproduct :
     is-finitely-enumerable (X + Y) ↔
     is-finitely-enumerable X × is-finitely-enumerable Y
-  pr1 coproduct-is-finitely-enumerable-iff-each-finitely-enumerable eX+Y =
-    ( is-finitely-enumerable-left-is-finitely-enumerable-coproduct eX+Y ,
-      is-finitely-enumerable-right-is-finitely-enumerable-coproduct eX+Y)
-  pr2 coproduct-is-finitely-enumerable-iff-each-finitely-enumerable =
-    ind-Σ is-finitely-enumerable-coproduct-is-finitely-enumerable
+  pr1 iff-is-finitely-enumerable-coproduct eX+Y =
+    ( is-finitely-enumerable-left-summand-coproduct eX+Y ,
+      is-finitely-enumerable-right-summand-coproduct eX+Y)
+  pr2 iff-is-finitely-enumerable-coproduct =
+    ind-Σ is-finitely-enumerable-coproduct
 ```
 
 ### Finitely enumerable types are closed under Cartesian products
@@ -355,24 +346,10 @@ module _
   finite-enumeration-product :
     finite-enumeration X → finite-enumeration Y → finite-enumeration (X × Y)
   finite-enumeration-product (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
-    let
-      surj-map : (Fin nX × Fin nY) → X × Y
-      surj-map =
-        map-product (map-surjection Fin-nX↠X) (map-surjection Fin-nY↠Y)
-      is-surjective-surj-map : is-surjective surj-map
-      is-surjective-surj-map =
-        λ (x , y) →
-          let open do-syntax-trunc-Prop (trunc-Prop (fiber surj-map (x , y)))
-          in do
-            (ix , fix=x) ← is-surjective-map-surjection Fin-nX↠X x
-            (iy , fiy=y) ← is-surjective-map-surjection Fin-nY↠Y y
-            intro-exists (ix , iy) (eq-pair fix=x fiy=y)
-    in
-      ( nX *ℕ nY ,
-        surj-map ∘ map-inv-equiv (product-Fin nX nY) ,
-        is-surjective-right-comp-equiv
-          ( is-surjective-surj-map)
-          ( inv-equiv (product-Fin nX nY)))
+    ( nX *ℕ nY ,
+      comp-surjection
+        ( surjection-product Fin-nX↠X Fin-nY↠Y)
+        ( surjection-inv-equiv (product-Fin nX nY)))
 
   is-finitely-enumerable-product :
     is-finitely-enumerable X → is-finitely-enumerable Y →
