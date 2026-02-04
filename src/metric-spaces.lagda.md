@@ -106,6 +106,8 @@ open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.functoriality-isometries-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.functoriality-short-maps-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
 open import metric-spaces.images-metric-spaces public
 open import metric-spaces.images-short-maps-metric-spaces public
@@ -126,6 +128,7 @@ open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
 open import metric-spaces.maps-metric-spaces public
 open import metric-spaces.maps-pseudometric-spaces public
+open import metric-spaces.metric-quotients-of-metric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
@@ -174,6 +177,7 @@ open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniform-homeomorphisms-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
 ```

@@ -9,7 +9,6 @@ module foundation.mere-path-cosplit-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences-arrows
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.equivalences-arrows
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions

@@ -61,8 +61,8 @@ module _
     (x y : type-Poset X) → is-prop (incident-Poset x y)
   is-prop-incident-Poset = is-prop-incident-Preorder (preorder-Poset X)
 
-  is-total-Poset-Prop : Prop (l1 ⊔ l2)
-  is-total-Poset-Prop = is-total-Preorder-Prop (preorder-Poset X)
+  is-total-prop-Poset : Prop (l1 ⊔ l2)
+  is-total-prop-Poset = is-total-prop-Preorder (preorder-Poset X)
 
   is-total-Poset : UU (l1 ⊔ l2)
   is-total-Poset = is-total-Preorder (preorder-Poset X)
@@ -89,6 +89,9 @@ module _
 
   is-total-Total-Order : is-total-Poset (poset-Total-Order)
   is-total-Total-Order = pr2 X
+
+  total-preorder-Total-Order : Total-Preorder l1 l2
+  total-preorder-Total-Order = (preorder-Total-Order , is-total-Total-Order)
 
   type-Total-Order : UU l1
   type-Total-Order = type-Poset poset-Total-Order
@@ -695,6 +698,20 @@ module _
           eq-one-max-Total-Order z w
             ( J ∘ (max=max-z-w ∙_))
             ( K ∘ (max=max-z-w ∙_)))
+```
+
+### Total orders are cotransitive
+
+```agda
+module _
+  {l1 l2 : Level} (X : Total-Order l1 l2)
+  (let _≤_ = leq-Total-Order X)
+  where
+
+  is-cotransitive-leq-Total-Order :
+    (x y z : type-Total-Order X) → x ≤ z → disjunction-type (x ≤ y) (y ≤ z)
+  is-cotransitive-leq-Total-Order =
+    is-cotransitive-leq-Total-Preorder (total-preorder-Total-Order X)
 ```
 
 ## External links
