@@ -54,7 +54,7 @@ and composition of isometries and induce commutative diagrams
   |         |         |
   v         v         v
  [P] ----> [Q] ----> [R]
-      q⋆f       q⋆g
+      [f]       [g]
 ```
 
 This is the
