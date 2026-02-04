@@ -52,7 +52,7 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 ## Idea
 
 The
-{{#concept "product rule" Agda=derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ}}
+{{#concept "product rule" Agda=is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ}}
 for
 [derivatives](analysis.derivatives-of-real-functions-on-proper-closed-intervals.md)
 states that if `f` and `g` are
@@ -102,7 +102,7 @@ module _
     in map f x *ℝ map g' x +ℝ map f' x *ℝ map g x
 
   abstract
-    derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ :
+    is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ :
       is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( map-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ
@@ -110,7 +110,7 @@ module _
           ( f)
           ( g))
         ( map-derivative-mul-real-map-proper-closed-interval-ℝ)
-    derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ =
+    is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ =
       let
         open
           do-syntax-trunc-Prop
@@ -159,7 +159,6 @@ module _
         intro-exists
           ( δ)
           ( λ ε x@(xℝ , _) y@(yℝ , _) Nδxy →
-
             chain-of-inequalities
               dist-ℝ
                 ( (map-f y *ℝ map-g y) -ℝ (map-f x *ℝ map-g x))
@@ -512,43 +511,44 @@ module _
 module _
   {l1 l2 l3 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : differentiable-real-map-proper-closed-interval-ℝ l2 [a,b])
-  (g : differentiable-real-map-proper-closed-interval-ℝ l3 [a,b])
+  (f@(map-f , map-f' , Df=f') :
+    differentiable-real-map-proper-closed-interval-ℝ l2 [a,b])
+  (g@(map-g , map-g' , Dg=g') :
+    differentiable-real-map-proper-closed-interval-ℝ l3 [a,b])
   where
 
   map-mul-differentiable-real-map-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l2 ⊔ l3)
   map-mul-differentiable-real-map-proper-closed-interval-ℝ x =
-    ( map-differentiable-real-map-proper-closed-interval-ℝ [a,b] f x) *ℝ
-    ( map-differentiable-real-map-proper-closed-interval-ℝ [a,b] g x)
+    map-f x *ℝ map-g x
 
-  abstract
-    is-differentiable-map-mul-differentiable-real-map-proper-closed-interval-ℝ :
-      is-differentiable-real-map-proper-closed-interval-ℝ
+  map-derivative-mul-differentiable-real-map-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l1 ⊔ l2 ⊔ l3)
+  map-derivative-mul-differentiable-real-map-proper-closed-interval-ℝ x =
+    map-f x *ℝ map-g' x +ℝ map-f' x *ℝ map-g x
+
+  is-differentiable-map-mul-differentiable-real-map-proper-closed-interval-ℝ :
+    is-differentiable-real-map-proper-closed-interval-ℝ
+      ( [a,b])
+      ( map-mul-differentiable-real-map-proper-closed-interval-ℝ)
+  is-differentiable-map-mul-differentiable-real-map-proper-closed-interval-ℝ =
+    ( map-derivative-mul-differentiable-real-map-proper-closed-interval-ℝ ,
+      is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ
         ( [a,b])
-        ( map-mul-differentiable-real-map-proper-closed-interval-ℝ)
-    is-differentiable-map-mul-differentiable-real-map-proper-closed-interval-ℝ =
-      let
-        (map-f , map-f' , Df=f') = f
-        (map-g , map-g' , Dg=g') = g
-      in
-        ( ( λ x → map-f x *ℝ map-g' x +ℝ map-f' x *ℝ map-g x) ,
-          derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ
-            ( [a,b])
-            ( uniformly-continuous-map-differentiable-real-map-proper-closed-interval-ℝ
-              ( [a,b])
-              ( f))
-            ( uniformly-continuous-map-differentiable-real-map-proper-closed-interval-ℝ
-              ( [a,b])
-              ( g))
-            ( uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ
-              ( [a,b])
-              ( f))
-            ( uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ
-              ( [a,b])
-              ( g))
-            ( Df=f')
-            ( Dg=g'))
+        ( uniformly-continuous-map-differentiable-real-map-proper-closed-interval-ℝ
+          ( [a,b])
+          ( f))
+        ( uniformly-continuous-map-differentiable-real-map-proper-closed-interval-ℝ
+          ( [a,b])
+          ( g))
+        ( uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ
+          ( [a,b])
+          ( f))
+        ( uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ
+          ( [a,b])
+          ( g))
+        ( Df=f')
+        ( Dg=g'))
 ```
 
 ## External links
