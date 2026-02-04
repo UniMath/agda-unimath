@@ -11,14 +11,15 @@ open import foundation.action-on-identifications-functions
 open import foundation.coinhabited-pairs-of-types
 open import foundation.connected-maps
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
-open import foundation.coproduct-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
@@ -43,7 +44,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation.functoriality-coproduct-types
 open import foundation-core.homotopies
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps

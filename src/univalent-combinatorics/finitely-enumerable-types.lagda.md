@@ -7,8 +7,8 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
