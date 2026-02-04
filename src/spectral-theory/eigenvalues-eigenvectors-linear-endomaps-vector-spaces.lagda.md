@@ -16,7 +16,7 @@ open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-endomaps-vector-spaces
 open import linear-algebra.vector-spaces
 
-open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-rings
+open import spectral-theory.eigenvalues-eigenelements-linear-endomaps-left-modules-commutative-rings
 ```
 
 </details>
@@ -47,8 +47,8 @@ module _
   is-eigenvector-eigenvalue-prop-linear-endo-Vector-Space :
     type-Heyting-Field F → type-Vector-Space F V → Prop l2
   is-eigenvector-eigenvalue-prop-linear-endo-Vector-Space =
-    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Ring
-      ( ring-Heyting-Field F)
+    is-eigenelement-eigenvalue-prop-linear-endo-left-module-Commutative-Ring
+      ( commutative-ring-Heyting-Field F)
       ( V)
       ( f)
 
