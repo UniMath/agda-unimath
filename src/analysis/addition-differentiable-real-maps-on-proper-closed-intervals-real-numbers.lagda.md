@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module analysis.addition-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
