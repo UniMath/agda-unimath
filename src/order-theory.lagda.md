@@ -73,6 +73,7 @@ open import order-theory.interval-subposets public
 open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
 open import order-theory.joins-finite-families-join-semilattices public
+open import order-theory.joins-finite-families-large-join-semilattices public
 open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-inflattices public

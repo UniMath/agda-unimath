@@ -1,6 +1,8 @@
 # Large join-semilattices
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module order-theory.large-join-semilattices where
 ```
 
@@ -11,14 +13,21 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
+
+open import group-theory.large-monoids
+open import group-theory.large-semigroups
 
 open import order-theory.bottom-elements-large-posets
 open import order-theory.join-semilattices
 open import order-theory.large-posets
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.posets
+open import order-theory.similarity-of-elements-large-posets
+open import order-theory.upper-bounds-large-posets
 ```
 
 </details>
@@ -206,6 +215,51 @@ module _
       ( large-poset-Large-Join-Semilattice L)
       ( is-large-join-semilattice-Large-Join-Semilattice L)
 
+  is-binary-upper-bound-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    is-binary-upper-bound-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
+      ( x)
+      ( y)
+      ( join-Large-Join-Semilattice x y)
+  is-binary-upper-bound-join-Large-Join-Semilattice x y =
+    is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
+      ( x)
+      ( y)
+      ( is-least-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-left-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    leq-Large-Join-Semilattice x (join-Large-Join-Semilattice x y)
+  leq-left-join-Large-Join-Semilattice x y =
+    pr1 (is-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-right-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    leq-Large-Join-Semilattice y (join-Large-Join-Semilattice x y)
+  leq-right-join-Large-Join-Semilattice x y =
+    pr2 (is-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-join-Large-Join-Semilattice :
+    {l1 l2 l3 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2)
+    (z : type-Large-Join-Semilattice l3) →
+    leq-Large-Join-Semilattice x z →
+    leq-Large-Join-Semilattice y z →
+    leq-Large-Join-Semilattice (join-Large-Join-Semilattice x y) z
+  leq-join-Large-Join-Semilattice x y z x≤z y≤z =
+    forward-implication
+      ( is-least-binary-upper-bound-join-Large-Join-Semilattice x y z)
+      ( x≤z , y≤z)
+
   ap-join-Large-Join-Semilattice :
     {l1 l2 : Level}
     {x x' : type-Large-Join-Semilattice l1}
@@ -235,6 +289,14 @@ module _
     is-bottom-element-bottom-is-large-join-semilattice-Large-Poset
       ( large-poset-Large-Join-Semilattice L)
       ( is-large-join-semilattice-Large-Join-Semilattice L)
+
+  large-similarity-relation-Large-Join-Semilattice :
+    Large-Similarity-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Join-Semilattice)
+  large-similarity-relation-Large-Join-Semilattice =
+    large-similarity-relation-sim-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
 ```
 
 ### Small join semilattices from large join semilattices
@@ -268,4 +330,166 @@ module _
   join-semilattice-Large-Join-Semilattice l =
     join-semilattice-Order-Theoretic-Join-Semilattice
       ( order-theoretic-join-semilattice-Large-Join-Semilattice l)
+```
+
+### The join operation is associative
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  (let _≤_ = leq-Large-Join-Semilattice L)
+  (let _∨_ = join-Large-Join-Semilattice L)
+  {l1 l2 l3 : Level}
+  (x : type-Large-Join-Semilattice L l1)
+  (y : type-Large-Join-Semilattice L l2)
+  (z : type-Large-Join-Semilattice L l3)
+  where
+
+  abstract
+    leq-left-triple-join-Large-Join-Semilattice :
+      x ≤ ((x ∨ y) ∨ z)
+    leq-left-triple-join-Large-Join-Semilattice =
+      transitive-leq-Large-Join-Semilattice L
+        ( x)
+        ( x ∨ y)
+        ( (x ∨ y) ∨ z)
+        ( leq-left-join-Large-Join-Semilattice L (x ∨ y) z)
+        ( leq-left-join-Large-Join-Semilattice L x y)
+
+    leq-center-triple-join-Large-Join-Semilattice :
+      y ≤ ((x ∨ y) ∨ z)
+    leq-center-triple-join-Large-Join-Semilattice =
+      transitive-leq-Large-Join-Semilattice L
+        ( y)
+        ( x ∨ y)
+        ( (x ∨ y) ∨ z)
+        ( leq-left-join-Large-Join-Semilattice L (x ∨ y) z)
+        ( leq-right-join-Large-Join-Semilattice L x y)
+
+    leq-right-triple-join-Large-Join-Semilattice :
+      z ≤ ((x ∨ y) ∨ z)
+    leq-right-triple-join-Large-Join-Semilattice =
+      leq-right-join-Large-Join-Semilattice L (x ∨ y) z
+
+    leq-left-triple-join-Large-Join-Semilattice' :
+      x ≤ (x ∨ (y ∨ z))
+    leq-left-triple-join-Large-Join-Semilattice' =
+      leq-left-join-Large-Join-Semilattice L x (y ∨ z)
+
+    leq-center-triple-join-Large-Join-Semilattice' :
+      y ≤ (x ∨ (y ∨ z))
+    leq-center-triple-join-Large-Join-Semilattice' =
+      transitive-leq-Large-Join-Semilattice L
+        ( y)
+        ( y ∨ z)
+        ( x ∨ (y ∨ z))
+        ( leq-right-join-Large-Join-Semilattice L x (y ∨ z))
+        ( leq-left-join-Large-Join-Semilattice L y z)
+
+    leq-right-triple-join-Large-Join-Semilattice' :
+      z ≤ (x ∨ (y ∨ z))
+    leq-right-triple-join-Large-Join-Semilattice' =
+      transitive-leq-Large-Join-Semilattice L
+        ( z)
+        ( y ∨ z)
+        ( x ∨ (y ∨ z))
+        ( leq-right-join-Large-Join-Semilattice L x (y ∨ z))
+        ( leq-right-join-Large-Join-Semilattice L y z)
+
+    leq-associative-join-Large-Join-Semilattice :
+      ((x ∨ y) ∨ z) ≤ (x ∨ (y ∨ z))
+    leq-associative-join-Large-Join-Semilattice =
+      leq-join-Large-Join-Semilattice L _ _ _
+        ( leq-join-Large-Join-Semilattice L _ _ _
+          ( leq-left-triple-join-Large-Join-Semilattice')
+          ( leq-center-triple-join-Large-Join-Semilattice'))
+        ( leq-right-triple-join-Large-Join-Semilattice')
+
+    leq-associative-join-Large-Join-Semilattice' :
+      (x ∨ (y ∨ z)) ≤ ((x ∨ y) ∨ z)
+    leq-associative-join-Large-Join-Semilattice' =
+      leq-join-Large-Join-Semilattice L _ _ _
+        ( leq-left-triple-join-Large-Join-Semilattice)
+        ( leq-join-Large-Join-Semilattice L _ _ _
+          ( leq-center-triple-join-Large-Join-Semilattice)
+          ( leq-right-triple-join-Large-Join-Semilattice))
+
+    associative-join-Large-Join-Semilattice :
+      ((x ∨ y) ∨ z) ＝ (x ∨ (y ∨ z))
+    associative-join-Large-Join-Semilattice =
+      antisymmetric-leq-Large-Join-Semilattice L _ _
+        ( leq-associative-join-Large-Join-Semilattice)
+        ( leq-associative-join-Large-Join-Semilattice')
+```
+
+### The join operation is commutative
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  (let _≤_ = leq-Large-Join-Semilattice L)
+  (let _∨_ = join-Large-Join-Semilattice L)
+  {l1 l2 : Level}
+  (x : type-Large-Join-Semilattice L l1)
+  (y : type-Large-Join-Semilattice L l2)
+  where
+
+  abstract
+    leq-commutative-join-Large-Join-Semilattice :
+      (x ∨ y) ≤ (y ∨ x)
+    leq-commutative-join-Large-Join-Semilattice =
+      leq-join-Large-Join-Semilattice L _ _ _
+        ( leq-right-join-Large-Join-Semilattice L y x)
+        ( leq-left-join-Large-Join-Semilattice L y x)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  (let _≤_ = leq-Large-Join-Semilattice L)
+  (let _∨_ = join-Large-Join-Semilattice L)
+  {l1 l2 : Level}
+  (x : type-Large-Join-Semilattice L l1)
+  (y : type-Large-Join-Semilattice L l2)
+  where
+
+  abstract
+    commutative-join-Large-Join-Semilattice :
+      (x ∨ y) ＝ (y ∨ x)
+    commutative-join-Large-Join-Semilattice =
+      antisymmetric-leq-Large-Join-Semilattice L _ _
+        ( leq-commutative-join-Large-Join-Semilattice L x y)
+        ( leq-commutative-join-Large-Join-Semilattice L y x)
+```
+
+### The bottom element is an identity for the join operation
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  (let _≤_ = leq-Large-Join-Semilattice L)
+  (let _∨_ = join-Large-Join-Semilattice L)
+  {l : Level}
+  (x : type-Large-Join-Semilattice L l)
+  where
+
+  abstract
+    left-bottom-law-join-Large-Join-Semilattice :
+      join-Large-Join-Semilattice L (bottom-Large-Join-Semilattice L) x ＝ x
+    left-bottom-law-join-Large-Join-Semilattice =
+      antisymmetric-leq-Large-Join-Semilattice L _ _
+        ( leq-join-Large-Join-Semilattice L _ _ _
+          ( is-bottom-element-bottom-Large-Join-Semilattice L x)
+          ( refl-leq-Large-Join-Semilattice L x))
+        ( leq-right-join-Large-Join-Semilattice L _ _)
+
+    right-bottom-law-join-Large-Join-Semilattice :
+      join-Large-Join-Semilattice L x (bottom-Large-Join-Semilattice L) ＝ x
+    right-bottom-law-join-Large-Join-Semilattice =
+      ( commutative-join-Large-Join-Semilattice L
+        ( x)
+        ( bottom-Large-Join-Semilattice L)) ∙
+      ( left-bottom-law-join-Large-Join-Semilattice)
 ```
