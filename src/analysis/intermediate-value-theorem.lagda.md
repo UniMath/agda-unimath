@@ -619,6 +619,10 @@ module _
             is-nonnegative-map-limit-sequence-intermediate-value-theorem-ℝ))
 ```
 
+## See also
+
+- [The constructive intermediate value theorem](analysis.constructive-intermediate-value-theorem.md)
+
 ## External links
 
 - [Intermediate value theorem](https://ncatlab.org/nlab/show/intermediate+value+theorem)
