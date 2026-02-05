@@ -136,6 +136,17 @@ open import group-theory.quotient-groups using
   ( is-quotient-group-quotient-Group)
 ```
 
+### Intermediate Value Theorem {#Q245098}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.intermediate-value-theorem using
+  ( intermediate-value-theorem-ℝ)
+open import analysis.constructive-intermediate-value-theorem using
+  ( constructive-intermediate-value-theorem-ℝ)
+```
+
 ### Kleene's fixed point theorem {#Q3527263}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
