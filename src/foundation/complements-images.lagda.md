@@ -35,7 +35,7 @@ open import foundation-core.truncation-levels
 The {{#concept "complement" Disambiguation="of the image of a map" Agda=nonim}}
 of the [image](foundation.images.md) of a map `f : A → B` is the collection of
 elements `y` in `B` such that the fiber of `f` over `y` is
-[empty](foundation.empty-types.md).
+[empty](foundation.empty-types.md). We also call this the _nonimage_ of `f`.
 
 ## Definitions
 
