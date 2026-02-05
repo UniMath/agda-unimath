@@ -66,8 +66,8 @@ be subject to change.
 ### The predicate of being cardinality-preprojective at a universe level
 
 We call a set $I$ _cardinality-preprojective_
-$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$
-is 0-connected.
+$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$ is
+0-connected.
 
 ```agda
 module _

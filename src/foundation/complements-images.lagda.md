@@ -181,4 +181,5 @@ nonim-1-Type X f = nonim-Truncated-Type zero-𝕋 X f
 
 ## See also
 
-- [Nonsurjective maps](foundation.nonsurjective-maps.md): maps whose nonimage is inhabited.
+- [Nonsurjective maps](foundation.nonsurjective-maps.md): maps whose nonimage is
+  inhabited.
