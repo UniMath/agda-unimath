@@ -37,6 +37,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 
 open import group-theory.abelian-groups
 open import group-theory.groups
@@ -81,6 +82,42 @@ positive-reciprocal-rational-ℤ⁺ k =
 reciprocal-rational-ℤ⁺ : ℤ⁺ → ℚ
 reciprocal-rational-ℤ⁺ k =
   rational-ℚ⁺ (positive-reciprocal-rational-ℤ⁺ k)
+```
+
+### The fraction ½
+
+```agda
+one-half-ℚ⁺ : ℚ⁺
+one-half-ℚ⁺ = positive-reciprocal-rational-succ-ℕ 1
+
+one-half-ℚ : ℚ
+one-half-ℚ = reciprocal-rational-succ-ℕ 1
+
+abstract
+  le-one-half-one-ℚ : le-ℚ one-half-ℚ one-ℚ
+  le-one-half-one-ℚ =
+    tr
+      ( le-ℚ one-half-ℚ)
+      ( ap rational-ℚ⁺ inv-one-ℚ⁺)
+      ( inv-le-ℚ⁺
+        ( one-ℚ⁺)
+        ( positive-rational-ℕ⁺ two-ℕ⁺)
+        ( preserves-le-rational-ℕ {1} {2} _))
+
+  twice-one-half-ℚ : one-half-ℚ +ℚ one-half-ℚ ＝ one-ℚ
+  twice-one-half-ℚ =
+    ( inv (left-mul-rational-nat-ℚ 2 one-half-ℚ)) ∙
+    ( ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ two-ℕ⁺)))
+
+  twice-left-mul-one-half-ℚ :
+    (q : ℚ) → (one-half-ℚ *ℚ q) +ℚ (one-half-ℚ *ℚ q) ＝ q
+  twice-left-mul-one-half-ℚ q =
+    equational-reasoning
+    one-half-ℚ *ℚ q +ℚ one-half-ℚ *ℚ q
+    ＝ rational-ℕ 2 *ℚ (one-half-ℚ *ℚ q)
+      by inv (left-mul-rational-nat-ℚ 2 _)
+    ＝ q
+      by is-section-left-div-ℚ⁺ two-ℚ⁺ q
 ```
 
 ## Properties
@@ -135,9 +172,8 @@ abstract
 ### If `m ≤ n`, the reciprocal of `n` is less than or equal to the reciprocal of `n`
 
 ```agda
-opaque
-  unfolding inv-ℚ⁺
-  unfolding leq-ℚ-Prop
+abstract opaque
+  unfolding inv-ℚ⁺ leq-ℚ-Prop
 
   leq-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → leq-ℕ⁺ m n →
@@ -153,9 +189,8 @@ opaque
 ### If `m < n`, the reciprocal of `n` is less than the reciprocal of `n`
 
 ```agda
-opaque
-  unfolding inv-ℚ⁺
-  unfolding le-ℚ-Prop
+abstract opaque
+  unfolding inv-ℚ⁺ le-ℚ-Prop
 
   le-reciprocal-rational-ℕ⁺ :
     (m n : ℕ⁺) → le-ℕ⁺ m n →
@@ -173,26 +208,27 @@ opaque
 ### For every positive rational number, there is a smaller unit fraction
 
 ```agda
-smaller-reciprocal-ℚ⁺ :
-  (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
-smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
-  tot
-    ( λ n⁺ 1<nq →
-      binary-tr
-        ( le-ℚ)
-        ( right-unit-law-mul-ℚ _)
-        ( ap
-          ( rational-ℚ⁺)
-          ( is-retraction-left-div-Group
-            ( group-mul-ℚ⁺)
-            ( positive-rational-ℕ⁺ n⁺)
-            ( q⁺)))
-        ( preserves-le-left-mul-ℚ⁺
-          ( positive-reciprocal-rational-ℕ⁺ n⁺)
-          ( one-ℚ)
-          ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
-          ( 1<nq)))
-    ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
+opaque
+  smaller-reciprocal-ℚ⁺ :
+    (q : ℚ⁺) → Σ ℕ⁺ (λ n → le-ℚ⁺ (positive-reciprocal-rational-ℕ⁺ n) q)
+  smaller-reciprocal-ℚ⁺ q⁺@(q , _) =
+    tot
+      ( λ n⁺ 1<nq →
+        binary-tr
+          ( le-ℚ)
+          ( right-unit-law-mul-ℚ _)
+          ( ap
+            ( rational-ℚ⁺)
+            ( is-retraction-left-div-Group
+              ( group-mul-ℚ⁺)
+              ( positive-rational-ℕ⁺ n⁺)
+              ( q⁺)))
+          ( preserves-le-left-mul-ℚ⁺
+            ( positive-reciprocal-rational-ℕ⁺ n⁺)
+            ( one-ℚ)
+            ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))
+            ( 1<nq)))
+      ( bound-archimedean-property-ℚ⁺ q⁺ one-ℚ⁺)
 ```
 
 ### The reciprocal of `n : ℕ⁺` is a multiplicative inverse of `n`

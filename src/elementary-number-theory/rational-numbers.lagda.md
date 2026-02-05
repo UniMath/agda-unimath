@@ -24,6 +24,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
@@ -140,6 +141,9 @@ one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+
+neq-zero-one-ℚ : zero-ℚ ≠ one-ℚ
+neq-zero-one-ℚ ()
 ```
 
 ### The negative of a rational number
@@ -154,11 +158,11 @@ opaque
 ### The negation of zero is zero
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℚ
 
   neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
-  neg-zero-ℚ = refl
+  neg-zero-ℚ = eq-type-subtype is-reduced-prop-fraction-ℤ refl
 ```
 
 ### The mediant of two rationals
@@ -188,10 +192,9 @@ module _
     eq-ℚ-sim-fraction-ℤ :
       sim-fraction-ℤ x y → rational-fraction-ℤ x ＝ rational-fraction-ℤ y
     eq-ℚ-sim-fraction-ℤ H =
-      eq-pair-Σ'
-        ( pair
-          ( unique-reduce-fraction-ℤ x y H)
-          ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+      eq-type-subtype
+        ( is-reduced-prop-fraction-ℤ)
+        ( unique-reduce-fraction-ℤ x y H)
 
     sim-fraction-ℤ-eq-ℚ :
       rational-fraction-ℤ x ＝ rational-fraction-ℤ y → sim-fraction-ℤ x y

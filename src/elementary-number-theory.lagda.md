@@ -83,6 +83,8 @@ open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
+open import elementary-number-theory.floor-nonnegative-integer-fractions public
+open import elementary-number-theory.floor-nonnegative-rational-numbers public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.geometric-sequences-rational-numbers public
@@ -158,6 +160,7 @@ open import elementary-number-theory.multiplicative-units-standard-cyclic-rings 
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.negation-closed-intervals-rational-numbers public
+open import elementary-number-theory.negative-closed-intervals-rational-numbers public
 open import elementary-number-theory.negative-integer-fractions public
 open import elementary-number-theory.negative-integers public
 open import elementary-number-theory.negative-rational-numbers public
@@ -177,6 +180,7 @@ open import elementary-number-theory.poset-closed-intervals-rational-numbers pub
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
 open import elementary-number-theory.positive-and-negative-rational-numbers public
+open import elementary-number-theory.positive-closed-intervals-rational-numbers public
 open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
@@ -229,6 +233,7 @@ open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
+open import elementary-number-theory.unit-closed-interval-rational-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-fractions-rational-numbers public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
