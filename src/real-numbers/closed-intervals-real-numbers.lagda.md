@@ -9,6 +9,7 @@ module real-numbers.closed-intervals-real-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
@@ -40,6 +41,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.short-map-binary-maximum-real-numbers
 open import real-numbers.short-map-binary-minimum-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -88,14 +90,6 @@ upper-bound-closed-interval-ℝ =
 ```
 
 ## Properties
-
-### The unit interval on the real numbers
-
-```agda
-unit-closed-interval-ℝ : closed-interval-ℝ lzero lzero
-unit-closed-interval-ℝ =
-  ((zero-ℝ , one-ℝ) , preserves-leq-real-ℚ leq-zero-one-ℚ)
-```
 
 ### Closed intervals in the real numbers are closed in the metric space of real numbers
 
@@ -164,16 +158,6 @@ complete-metric-space-closed-interval-ℝ l [a,b] =
   complete-closed-subspace-Complete-Metric-Space
     ( complete-metric-space-ℝ l)
     ( closed-subset-closed-interval-ℝ l [a,b])
-
-metric-space-unit-closed-interval-ℝ :
-  (l : Level) → Metric-Space (lsuc l) l
-metric-space-unit-closed-interval-ℝ l =
-  metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
-
-complete-metric-space-unit-interval-ℝ :
-  (l : Level) → Complete-Metric-Space (lsuc l) l
-complete-metric-space-unit-interval-ℝ l =
-  complete-metric-space-closed-interval-ℝ l unit-closed-interval-ℝ
 ```
 
 ### The clamping function
@@ -253,4 +237,61 @@ module _
               by w≤y
             ≤ z +ℝ real-ℚ⁺ d
               by right-leq-real-bound-neighborhood-ℝ d z y Ndzy)
+```
+
+### If `x ≤ a`, clamping `x` into `[a, b]` gives `a`
+
+```agda
+abstract
+  clamp-leq-lower-bound-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    leq-ℝ x (lower-bound-closed-interval-ℝ [a,b]) →
+    sim-ℝ
+      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( lower-bound-closed-interval-ℝ [a,b])
+  clamp-leq-lower-bound-closed-interval-ℝ ((a , b) , a≤b) x x≤a =
+    similarity-reasoning-ℝ
+      max-ℝ a (min-ℝ b x)
+      ~ℝ max-ℝ a x
+        by
+          preserves-sim-right-max-ℝ _ _ _
+            ( right-leq-left-min-ℝ (transitive-leq-ℝ x a b a≤b x≤a))
+      ~ℝ a
+        by right-leq-left-max-ℝ x≤a
+```
+
+### If `b ≤ x`, clamping `x` into `[a, b]` gives `b`
+
+```agda
+abstract
+  clamp-leq-upper-bound-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    leq-ℝ (upper-bound-closed-interval-ℝ [a,b]) x →
+    sim-ℝ
+      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( upper-bound-closed-interval-ℝ [a,b])
+  clamp-leq-upper-bound-closed-interval-ℝ ((a , b) , a≤b) x b≤x =
+    similarity-reasoning-ℝ
+      max-ℝ a (min-ℝ b x)
+      ~ℝ max-ℝ a b
+        by preserves-sim-right-max-ℝ _ _ _ (left-leq-right-min-ℝ b≤x)
+      ~ℝ b
+        by left-leq-right-max-ℝ a≤b
+```
+
+### Raising elements of closed intervals of rational numbers
+
+```agda
+real-closed-interval-ℚ : closed-interval-ℚ → closed-interval-ℝ lzero lzero
+real-closed-interval-ℚ ((a , b) , a≤b) =
+  ((real-ℚ a , real-ℚ b) , preserves-leq-real-ℚ a≤b)
+
+raise-real-type-closed-interval-ℚ :
+  (l : Level) ([a,b] : closed-interval-ℚ) →
+  type-closed-interval-ℚ [a,b] →
+  type-closed-interval-ℝ l (real-closed-interval-ℚ [a,b])
+raise-real-type-closed-interval-ℚ l ((a , b) , a≤b) (x , a≤x , x≤b) =
+  ( raise-real-ℚ l x ,
+    preserves-leq-right-raise-ℝ l (preserves-leq-real-ℚ a≤x) ,
+    preserves-leq-left-raise-ℝ l (preserves-leq-real-ℚ x≤b))
 ```

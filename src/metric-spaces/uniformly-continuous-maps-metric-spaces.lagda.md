@@ -26,11 +26,12 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.continuous-maps-metric-spaces
+open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 ```
@@ -101,29 +102,6 @@ module _
 ```
 
 ## Properties
-
-### Uniformly continuous maps are continuous everywhere
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (X : Metric-Space l1 l2)
-  (Y : Metric-Space l3 l4)
-  (f : map-Metric-Space X Y)
-  where
-
-  is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space :
-    is-uniformly-continuous-map-Metric-Space X Y f →
-    is-pointwise-continuous-map-Metric-Space X Y f
-  is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space =
-    rec-trunc-Prop
-      ( is-pointwise-continuous-prop-map-Metric-Space X Y f)
-      ( λ μ →
-        is-pointwise-continuous-map-modulated-ucont-map-Metric-Space
-          ( X)
-          ( Y)
-          ( f , μ))
-```
 
 ### The identity map is uniformly continuous
 
@@ -226,6 +204,31 @@ module _
     uniformly-continuous-map-Metric-Space A B
   uniformly-continuous-map-isometry-Metric-Space =
     tot is-uniformly-continuous-map-is-isometry-Metric-Space
+```
+
+### Uniformly continuous maps are pointwise continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  where
+
+  abstract
+    is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space :
+      (f : map-Metric-Space X Y) →
+      is-uniformly-continuous-map-Metric-Space X Y f →
+      is-pointwise-continuous-map-Metric-Space X Y f
+    is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space
+      f H x = map-trunc-Prop (λ (μ , is-mod-μ) → (μ , is-mod-μ x)) H
+
+  pointwise-continuous-map-uniformly-continuous-map-Metric-Space :
+    uniformly-continuous-map-Metric-Space X Y →
+    pointwise-continuous-map-Metric-Space X Y
+  pointwise-continuous-map-uniformly-continuous-map-Metric-Space (f , H) =
+    ( f ,
+      is-pointwise-continuous-map-is-uniformly-continuous-map-Metric-Space f H)
 ```
 
 ### The action on sequences of uniformly continuous maps

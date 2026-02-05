@@ -18,9 +18,12 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -37,8 +40,10 @@ open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
-open import real-numbers.limits-sequences-real-numbers
+open import real-numbers.limits-of-sequences-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -67,6 +72,27 @@ is-zero-limit-sequence-ℝ σ = type-Prop (is-zero-limit-prop-sequence-ℝ σ)
 ```
 
 ## Properties
+
+### The canonical embedding of the rational numbers in the real numbers preserves approximations of zero
+
+```agda
+abstract
+  is-zero-limit-real-is-zero-limit-sequence-ℚ :
+    (u : sequence ℚ) →
+    is-zero-limit-sequence-ℚ u →
+    is-zero-limit-sequence-ℝ (real-ℚ ∘ u)
+  is-zero-limit-real-is-zero-limit-sequence-ℚ u H =
+    tr
+      ( is-limit-sequence-ℝ (real-ℚ ∘ u))
+      ( eq-raise-ℝ zero-ℝ)
+      ( is-limit-map-sequence-isometry-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℝ lzero)
+        ( isometry-real-ℚ)
+        ( u)
+        ( zero-ℚ)
+        ( H))
+```
 
 ### If the absolute value of a sequence of reals is bounded by a rational approximation of zero, the sequence of reals is an approximation of zero
 
@@ -111,4 +137,38 @@ abstract
                   preserves-leq-real-ℚ
                     ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
         ( lim-b=0)
+```
+
+### Left multiplication by a real number preserves approximations of zero
+
+```agda
+abstract
+  preserves-is-zero-limit-left-mul-sequence-ℝ :
+    {l1 l2 : Level} (c : ℝ l1) (u : sequence (ℝ l2)) →
+    is-zero-limit-sequence-ℝ u →
+    is-zero-limit-sequence-ℝ (mul-ℝ c ∘ u)
+  preserves-is-zero-limit-left-mul-sequence-ℝ {l1} {l2} c u u→0 =
+    tr
+      ( is-limit-sequence-ℝ (mul-ℝ c ∘ u))
+      ( right-raise-zero-law-mul-ℝ c)
+      ( is-limit-map-sequence-uniformly-continuous-endomap-ℝ
+        ( uniformly-continuous-map-right-mul-ℝ l2 c)
+        ( u)
+        ( _)
+        ( u→0))
+```
+
+### Homotopies preserve approximations of zero
+
+```agda
+module _
+  {l : Level}
+  {u v : sequence (ℝ l)}
+  where
+
+  abstract
+    preserves-is-zero-limit-htpy-sequence-ℝ :
+      u ~ v → is-zero-limit-sequence-ℝ u → is-zero-limit-sequence-ℝ v
+    preserves-is-zero-limit-htpy-sequence-ℝ u~v =
+      tr is-zero-limit-sequence-ℝ (eq-htpy u~v)
 ```

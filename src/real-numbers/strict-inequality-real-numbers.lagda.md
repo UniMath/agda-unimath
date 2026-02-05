@@ -24,8 +24,10 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-disjunction
 open import foundation.large-binary-relations
+open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -34,7 +36,9 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
+open import logic.double-negation-elimination
 open import logic.functoriality-existential-quantification
+open import logic.irrefutable-types
 
 open import order-theory.similarity-of-elements-strict-preorders
 open import order-theory.strict-orders
@@ -380,11 +384,17 @@ module _
   where
 
   abstract
-    le-some-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
-    le-some-rational-ℝ =
+    exists-greater-rational-ℝ : exists ℚ (λ q → le-prop-ℝ x (real-ℚ q))
+    exists-greater-rational-ℝ =
       map-tot-exists
         ( λ q → le-real-is-in-upper-cut-ℝ x)
         ( is-inhabited-upper-cut-ℝ x)
+
+    exists-lesser-rational-ℝ : exists ℚ (λ q → le-prop-ℝ (real-ℚ q) x)
+    exists-lesser-rational-ℝ =
+      map-tot-exists
+        ( λ q → le-real-is-in-lower-cut-ℝ x)
+        ( is-inhabited-lower-cut-ℝ x)
 ```
 
 ### The reals have no lower or upper bound
@@ -628,28 +638,48 @@ module _
 ### It is irrefutable that either `a < b`, `a ~ b`, or `a > b`
 
 ```agda
-abstract
+module _
+  {l1 l2 : Level}
+  (a : ℝ l1)
+  (b : ℝ l2)
+  where
 
-  irrefutable-trichotomy-le-ℝ :
-    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
-    ¬¬ (le-ℝ a b + sim-ℝ a b + le-ℝ b a)
-  irrefutable-trichotomy-le-ℝ a b ¬a<b+a~b+b<a =
-    ¬a<b+a~b+b<a
-      ( inr
-        ( inl
-          ( sim-sim-leq-ℝ
-            ( leq-not-le-ℝ b a (¬a<b+a~b+b<a ∘ inr ∘ inr) ,
-              leq-not-le-ℝ a b (¬a<b+a~b+b<a ∘ inl)))))
+  type-trichotomy-le-ℝ : UU (l1 ⊔ l2)
+  type-trichotomy-le-ℝ =
+    le-ℝ a b + sim-ℝ a b + le-ℝ b a
 
-  irrefutable-trichotomy-le-ℝ' :
-    {l1 l2 : Level} (a : ℝ l1) (b : ℝ l2) →
-    ¬¬ disjunction-type (disjunction-type (le-ℝ a b) (sim-ℝ a b)) (le-ℝ b a)
-  irrefutable-trichotomy-le-ℝ' a b =
-    map-double-negation
-      ( rec-coproduct
-        ( inl-disjunction ∘ inl-disjunction)
-        ( rec-coproduct (inl-disjunction ∘ inr-disjunction) inr-disjunction))
-      ( irrefutable-trichotomy-le-ℝ a b)
+  abstract
+    is-prop-type-trichotomy-le-ℝ : is-prop type-trichotomy-le-ℝ
+    is-prop-type-trichotomy-le-ℝ =
+      is-prop-coproduct
+        ( λ a<b → rec-coproduct (not-sim-le-ℝ a<b) (asymmetric-le-ℝ a<b))
+        ( is-prop-le-ℝ a b)
+        ( is-prop-coproduct
+          ( λ a~b b<a → not-sim-le-ℝ b<a (symmetric-sim-ℝ a~b))
+          ( is-prop-sim-ℝ a b)
+          ( is-prop-le-ℝ b a))
+
+  trichotomy-prop-le-ℝ : Prop (l1 ⊔ l2)
+  trichotomy-prop-le-ℝ = (type-trichotomy-le-ℝ , is-prop-type-trichotomy-le-ℝ)
+
+  abstract
+    irrefutable-trichotomy-le-ℝ : is-irrefutable type-trichotomy-le-ℝ
+    irrefutable-trichotomy-le-ℝ ¬a<b+a~b+b<a =
+      ¬a<b+a~b+b<a
+        ( inr
+          ( inl
+            ( sim-sim-leq-ℝ
+              ( leq-not-le-ℝ b a (¬a<b+a~b+b<a ∘ inr ∘ inr) ,
+                leq-not-le-ℝ a b (¬a<b+a~b+b<a ∘ inl)))))
+
+    irrefutable-trichotomy-le-ℝ' :
+      ¬¬ disjunction-type (disjunction-type (le-ℝ a b) (sim-ℝ a b)) (le-ℝ b a)
+    irrefutable-trichotomy-le-ℝ' =
+      map-double-negation
+        ( rec-coproduct
+          ( inl-disjunction ∘ inl-disjunction)
+          ( rec-coproduct (inl-disjunction ∘ inr-disjunction) inr-disjunction))
+        ( irrefutable-trichotomy-le-ℝ)
 ```
 
 ### For any real numbers `a` and `b`, `a ≤ b` if and only if `a ~ b + a < b` is irrefutable {#MSEq5107860}
@@ -781,6 +811,32 @@ strict-order-ℝ : (l : Level) → Strict-Order (lsuc l) l
 strict-order-ℝ l =
   ( strict-preorder-ℝ l ,
     extensionality-strict-preorder-ℝ l)
+```
+
+### If the law of excluded middle holds, trichotomy follows
+
+```agda
+module _
+  {l1 l2 : Level}
+  (lem : level-LEM (l1 ⊔ l2))
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  abstract
+    trichotomy-le-lem-ℝ : type-trichotomy-le-ℝ x y
+    trichotomy-le-lem-ℝ =
+      double-negation-elim-lem-Prop
+        ( lem)
+        ( trichotomy-prop-le-ℝ x y)
+        ( irrefutable-trichotomy-le-ℝ x y)
+
+    linear-leq-lem-ℝ : leq-ℝ x y + leq-ℝ y x
+    linear-leq-lem-ℝ =
+      map-coproduct
+        ( leq-le-ℝ)
+        ( rec-coproduct leq-sim-ℝ' leq-le-ℝ)
+        ( trichotomy-le-lem-ℝ)
 ```
 
 ## References
