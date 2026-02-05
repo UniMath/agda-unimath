@@ -310,6 +310,11 @@ abstract
         ( sim-ℝ (x +ℝ raise-zero-ℝ l))
         ( right-unit-law-add-ℝ x)
         ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
+
+  left-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → raise-zero-ℝ l +ℝ x ＝ x
+  left-raise-zero-law-add-ℝ x =
+    commutative-add-ℝ _ _ ∙ right-raise-zero-law-add-ℝ x
 ```
 
 ### Swapping laws for addition on real numbers
