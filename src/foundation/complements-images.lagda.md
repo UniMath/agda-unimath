@@ -178,3 +178,7 @@ nonim-1-Type :
   (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
 nonim-1-Type X f = nonim-Truncated-Type zero-𝕋 X f
 ```
+
+## See also
+
+- [Nonsurjective maps](foundation.nonsurjective-maps.md): maps whose nonimage is inhabited.
