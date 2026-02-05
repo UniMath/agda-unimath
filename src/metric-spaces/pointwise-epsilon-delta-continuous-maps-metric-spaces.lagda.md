@@ -22,7 +22,7 @@ open import metric-spaces.pointwise-continuous-maps-metric-spaces
 ## Idea
 
 An
-{{#concept "ε-δ pointwise continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
+{{#concept "pointwise ε-δ continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
 from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space `Y`
 is a map `f : X → Y` such that for every `x : X`, the
 [ε-δ limit](metric-spaces.epsilon-delta-limits-of-maps-metric-spaces.md) of `f`
