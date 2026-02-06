@@ -224,8 +224,11 @@ has-bottom-element-ℝ⁰⁺-Large-Poset :
   has-bottom-element-Large-Poset ℝ⁰⁺-Large-Poset
 has-bottom-element-ℝ⁰⁺-Large-Poset =
   λ where
-    .bottom-has-bottom-element-Large-Poset → zero-ℝ⁰⁺
-    .is-bottom-element-bottom-has-bottom-element-Large-Poset → leq-zero-ℝ⁰⁺
+    .bottom-has-bottom-element-Large-Poset l → raise-ℝ⁰⁺ l zero-ℝ⁰⁺
+    .is-bottom-element-bottom-has-bottom-element-Large-Poset l x →
+      transitive-leq-ℝ _ _ _
+        ( leq-zero-ℝ⁰⁺ x)
+        ( leq-sim-ℝ' (sim-raise-ℝ l zero-ℝ))
 ```
 
 ### The poset of nonnegative real numbers at a universe level

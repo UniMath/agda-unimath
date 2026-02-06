@@ -19,6 +19,7 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -27,6 +28,7 @@ open import order-theory.bottom-elements-large-posets
 open import order-theory.large-posets
 open import order-theory.large-preorders
 
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -126,8 +128,8 @@ is-bottom-element-neg-infinity-upper-ℝ x q _ = star
 
 has-bottom-element-upper-ℝ :
   has-bottom-element-Large-Poset upper-ℝ-Large-Poset
-bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ =
-  neg-infinity-upper-ℝ
+bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ l =
+  raise-upper-ℝ l neg-infinity-upper-ℝ
 is-bottom-element-bottom-has-bottom-element-Large-Poset
-  has-bottom-element-upper-ℝ = is-bottom-element-neg-infinity-upper-ℝ
+  has-bottom-element-upper-ℝ l _ _ _ = map-raise star
 ```

@@ -16,12 +16,14 @@ open import foundation.universe-levels
 open import lists.finite-sequences
 
 open import order-theory.join-semilattices
-open import order-theory.joins-finite-families-join-semilattices
+open import order-theory.joins-finite-families-large-join-semilattices
+open import order-theory.least-upper-bounds-large-posets
 
 open import real-numbers.binary-maximum-nonnegative-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 
-open import univalent-combinatorics.inhabited-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -41,29 +43,69 @@ their [least upper bound](order-theory.least-upper-bounds-large-posets.md).
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (u : fin-sequence (ℝ⁰⁺ l) (succ-ℕ n))
+  {l : Level} (n : ℕ) (u : fin-sequence (ℝ⁰⁺ l) n)
   where
 
   max-fin-sequence-ℝ⁰⁺ : ℝ⁰⁺ l
   max-fin-sequence-ℝ⁰⁺ =
-    join-fin-sequence-type-Order-Theoretic-Join-Semilattice
-      ( ℝ⁰⁺-Order-Theoretic-Join-Semilattice l)
-      ( n)
-      ( u)
+    join-fin-sequence-type-Large-Join-Semilattice ℝ⁰⁺-Large-Join-Semilattice n u
 ```
 
-### The maximum of an inhabited finite family of nonnegative real numbers
+### The maximum of an finite family of nonnegative real numbers
 
 ```agda
 module _
-  {l1 l2 : Level} (I : Inhabited-Finite-Type l1)
-  (f : type-Inhabited-Finite-Type I → ℝ⁰⁺ l2)
+  {l1 l2 : Level} (I : Finite-Type l1)
+  (f : type-Finite-Type I → ℝ⁰⁺ l2)
   where
 
   max-finite-family-ℝ⁰⁺ : ℝ⁰⁺ l2
   max-finite-family-ℝ⁰⁺ =
-    join-inhabited-finite-family-Order-Theoretic-Join-Semilattice
-      ( ℝ⁰⁺-Order-Theoretic-Join-Semilattice l2)
+    join-finite-family-type-Large-Join-Semilattice
+      ( ℝ⁰⁺-Large-Join-Semilattice)
       ( I)
       ( f)
+```
+
+## Properties
+
+### The maximum of a finite sequence of nonnegative real numbers is its least upper bound
+
+```agda
+module _
+  {l : Level} (n : ℕ) (u : fin-sequence (ℝ⁰⁺ l) n)
+  where
+
+  abstract
+    is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ :
+      is-least-upper-bound-family-of-elements-Large-Poset
+        ( ℝ⁰⁺-Large-Poset)
+        ( u)
+        ( max-fin-sequence-ℝ⁰⁺ n u)
+    is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ =
+      is-least-upper-bound-join-fin-sequence-type-Large-Join-Semilattice
+        ( ℝ⁰⁺-Large-Join-Semilattice)
+        ( n)
+        ( u)
+```
+
+### The maximum of a finite family of nonnegative real numbers is its least upper bound
+
+```agda
+module _
+  {l1 l2 : Level} (I : Finite-Type l1)
+  (f : type-Finite-Type I → ℝ⁰⁺ l2)
+  where
+
+  abstract
+    is-least-upper-bound-max-finite-family-ℝ⁰⁺ :
+      is-least-upper-bound-family-of-elements-Large-Poset
+        ( ℝ⁰⁺-Large-Poset)
+        ( f)
+        ( max-finite-family-ℝ⁰⁺ I f)
+    is-least-upper-bound-max-finite-family-ℝ⁰⁺ =
+      is-least-upper-bound-join-finite-family-type-Large-Join-Semilattice
+        ( ℝ⁰⁺-Large-Join-Semilattice)
+        ( I)
+        ( f)
 ```
