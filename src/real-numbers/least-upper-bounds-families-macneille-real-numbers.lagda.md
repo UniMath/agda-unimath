@@ -67,8 +67,7 @@ upper bound.
 is-least-upper-bound-family-of-elements-macneille-ℝ :
   {l1 l2 l3 : Level} {I : UU l1} → (I → macneille-ℝ l2) → macneille-ℝ l3 → UUω
 is-least-upper-bound-family-of-elements-macneille-ℝ =
-  is-least-upper-bound-family-of-elements-Large-Poset
-    ( large-poset-macneille-ℝ)
+  is-least-upper-bound-family-of-elements-Large-Poset large-poset-macneille-ℝ
 
 has-least-upper-bound-family-of-elements-macneille-ℝ :
   {l1 l2 : Level} (l3 : Level) → {I : UU l1} → (I → macneille-ℝ l2) → UUω
@@ -82,7 +81,9 @@ has-least-upper-bound-family-of-elements-macneille-ℝ l3 =
 ### Least upper bounds of inhabited bounded families
 
 Every inhabited upper bounded family of MacNeille real numbers has a least upper
-bound. We follow the construction in Lemma D4.7.7 {{#cite Johnstone02}}.
+bound. This is referred to as the conditional order completeness of the
+MacNeille real numbers. We follow the construction in Lemma D4.7.7
+{{#cite Johnstone02}}.
 
 ```agda
 module _
@@ -118,12 +119,7 @@ module _
       elim-exists
         ( all-upper-sections-family-macneille-ℝ q)
         ( λ p (p<q , p∈all) i →
-          is-in-cut-le-ℚ-upper-ℝ
-            ( upper-macneille-ℝ (y i))
-            ( p)
-            ( q)
-            ( p<q)
-            ( p∈all i))
+          is-in-cut-le-ℚ-upper-ℝ (upper-macneille-ℝ (y i)) p q p<q (p∈all i))
 
   abstract
     is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -147,9 +143,7 @@ module _
       in do
         (q , q∈Uu) ← is-inhabited-upper-cut-macneille-ℝ u
         (r , q<r) ← exists-greater-ℚ q
-        intro-exists
-          ( r)
-          ( intro-exists q (q<r , (λ i → pr2 (y≤u i) q q∈Uu)))
+        intro-exists r(intro-exists q (q<r , (λ i → pr2 (y≤u i) q q∈Uu)))
 
   abstract
     forward-implication-is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -160,7 +154,7 @@ module _
           le-ℚ-Prop p q ∧
           upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ p)
     forward-implication-is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-      q q∈U =
+      q =
       map-exists
         ( λ r →
           type-Prop
@@ -171,7 +165,6 @@ module _
         ( λ p (p<q , p∈all) →
           le-right-mediant-ℚ p<q ,
           intro-exists p (le-left-mediant-ℚ p<q , p∈all))
-        ( q∈U)
 
   abstract
     backward-implication-is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -252,12 +245,10 @@ module _
               ( intro-exists
                 ( q)
                 ( p<q ,
-                  λ q∈U →
-                    q∉Ui
-                      ( is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-                        ( i)
-                        ( q)
-                        ( q∈U)))))
+                 ( q∉Ui ∘
+                   is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
+                    ( i)
+                    ( q)))))
           ( H)
 
   abstract
@@ -270,18 +261,18 @@ module _
           lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ r)
     forward-implication-is-rounded-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       p p∈L =
-        let
-          open
-            do-syntax-trunc-Prop
-              ( ∃ ℚ
-                ( λ r →
-                  le-ℚ-Prop p r ∧
-                  lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-                    ( r)))
-        in do
-          (q , p<q , q∉U) ← p∈L
-          (r , p<r , r<q) ← dense-le-ℚ p<q
-          intro-exists r (p<r , intro-exists q (r<q , q∉U))
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ℚ
+              ( λ r →
+                le-ℚ-Prop p r ∧
+                lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
+                  ( r)))
+      in do
+        (q , p<q , q∉U) ← p∈L
+        (r , p<r , r<q) ← dense-le-ℚ p<q
+        intro-exists r (p<r , intro-exists q (r<q , q∉U))
 
   abstract
     backward-implication-is-rounded-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -345,11 +336,9 @@ module _
           intro-exists
             ( p)
             ( p<q ,
-              λ p∈L →
               elim-exists
                 ( empty-Prop)
-                ( λ r (p<r , r∉U) → r∉U (intro-exists p (p<r , p∈all)))
-                ( p∈L)))
+                ( λ r (p<r , r∉U) → r∉U (intro-exists p (p<r , p∈all)))))
 
   abstract
     backward-implication-is-open-upper-complement-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -392,19 +381,19 @@ module _
                     ( r<s ,
                       λ r∈Li →
                       not-not-r∈U p<r
-                        ( λ r∈U →
-                          elim-exists
-                            ( empty-Prop)
-                            ( λ t (t<r , t∈all) →
-                              is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ (y i) t
-                                ( is-in-cut-le-ℚ-lower-ℝ
-                                  ( lower-macneille-ℝ (y i))
-                                  ( t)
-                                  ( r)
-                                  ( t<r)
-                                  ( r∈Li))
-                                ( t∈all i))
-                            ( r∈U))))))
+                        ( elim-exists
+                          ( empty-Prop)
+                          ( λ t (t<r , t∈all) →
+                            is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ
+                              ( y i)
+                              ( t)
+                              ( is-in-cut-le-ℚ-lower-ℝ
+                                ( lower-macneille-ℝ (y i))
+                                ( t)
+                                ( r)
+                                ( t<r)
+                                ( r∈Li))
+                              ( t∈all i)))))))
 
   abstract
     is-open-upper-complement-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -481,17 +470,12 @@ module _
             ( q∈Uz)
         (r , p<r , r<q) ← dense-le-ℚ p<q
         intro-exists
-          r
+          ( r)
           ( r<q ,
             λ i →
-              backward-implication
-                ( is-open-upper-complement-lower-cut-macneille-ℝ (y i) r)
-                ( intro-exists
-                  p
-                  ( p<r ,
-                    λ p∈Li →
-                      p∉Lz
-                        ( pr1 (y≤z i) p p∈Li))))
+            backward-implication
+              ( is-open-upper-complement-lower-cut-macneille-ℝ (y i) r)
+              ( intro-exists p (p<r , p∉Lz ∘ pr1 (y≤z i) p)))
 
   abstract
     leq-least-upper-bound-family-upper-bound-family-macneille-ℝ :
