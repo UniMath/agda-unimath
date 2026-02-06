@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -197,6 +198,22 @@ module _
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space =
     pr2 g
+```
+
+### Extensible short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  where
+
+  extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    Σ ( short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+      ( extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M)
 ```
 
 ### The property of being a complete short map from a pseudometric space in a metric space
@@ -698,7 +715,7 @@ module _
         ( f))
 ```
 
-### A short map that extends to the Cauchy pseudocompletion is complete
+### A short map extends to the Cauchy pseudocompletion if and only if it is complete
 
 ```agda
 module _
@@ -713,43 +730,42 @@ module _
     is-complete-short-map-Pseudometric-Space P M f
   is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
     g u =
-    ( ( map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    ( map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M)
         ( f)
         ( g)
-        ( u)) ,
-      ( is-lim-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( u) ,
+      is-lim-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M)
         ( f)
         ( g)
-        ( u)))
+        ( u))
 ```
 
-### A short map extends to the Cauchy pseudocompletion if and only if it is complete
+### Extensible short maps are equivalent to complete short maps
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
-  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f ↔
-    is-complete-short-map-Pseudometric-Space P M f
-  pr1
-    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    =
-    is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-      ( P)
-      ( M)
-      ( f)
-  pr2
-    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    =
-    exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ∘
-    pair f
+  equiv-extensible-complete-short-map-Pseudometric-Space :
+    complete-short-map-Pseudometric-Space P M ≃
+    extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
+  equiv-extensible-complete-short-map-Pseudometric-Space =
+    equiv-type-subtype
+      ( is-prop-is-complete-short-map-Pseudometric-Space P M)
+      ( is-prop-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M))
+      ( λ f H →
+        exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
+          ( f , H))
+      ( is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M))
 ```
