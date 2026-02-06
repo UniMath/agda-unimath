@@ -502,7 +502,7 @@ abstract
           by leq-eq-ℚ (ap-mul-ℚ (inv (power-rational-ℚ⁰⁺ n q⁰⁺)) refl)
 ```
 
-### If `n` is odd, `q ↦ qⁿ` is unbounded above and below
+### If `n` is odd, `q ↦ qⁿ` is cofinal and coinitial
 
 ```agda
 abstract
