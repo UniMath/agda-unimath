@@ -203,6 +203,12 @@ abstract
           ( q∈U))
 ```
 
+## See also
+
+- In
+  [located MacNeille real numbers](real-numbers.located-macneille-real-numbers.md)
+  we consider when MacNeille and Dedekind real numbers coincide.
+
 ## External links
 
 - [MacNeille real number](https://ncatlab.org/nlab/show/MacNeille+real+number)

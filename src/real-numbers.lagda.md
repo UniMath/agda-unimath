@@ -67,6 +67,7 @@ open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-of-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
+open import real-numbers.located-macneille-real-numbers public
 open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.macneille-real-numbers public
