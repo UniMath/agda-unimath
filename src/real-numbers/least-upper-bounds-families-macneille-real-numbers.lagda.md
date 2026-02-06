@@ -95,7 +95,7 @@ module _
 
   all-upper-sections-family-macneille-ℝ : subtype (l1 ⊔ l2) ℚ
   all-upper-sections-family-macneille-ℝ p =
-    Π-Prop I (λ i → cut-upper-ℝ (upper-macneille-ℝ (y i)) p)
+    Π-Prop I (λ i → upper-cut-macneille-ℝ (y i) p)
 
   upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
     subtype (l1 ⊔ l2) ℚ
@@ -145,11 +145,11 @@ module _
             ( ∃ ( ℚ)
                 ( upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ))
       in do
-        (q , q∈Uu) ← is-inhabited-cut-upper-ℝ (upper-macneille-ℝ u)
+        (q , q∈Uu) ← is-inhabited-upper-cut-macneille-ℝ u
         (r , q<r) ← exists-greater-ℚ q
         intro-exists
           ( r)
-          ( intro-exists q (q<r , λ i → pr2 (y≤u i) q q∈Uu))
+          ( intro-exists q (q<r , (λ i → pr2 (y≤u i) q q∈Uu)))
 
   abstract
     forward-implication-is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -221,7 +221,7 @@ module _
     ∃ ( ℚ)
       ( λ q →
         le-ℚ-Prop p q ∧
-        ¬' (upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ q))
+        ¬' upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ q)
 
   is-in-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
     ℚ → UU (l1 ⊔ l2)
@@ -242,7 +242,7 @@ module _
                 ( ∃ ( ℚ)
                     ( lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ))
           in do
-            (p , p∈Li) ← is-inhabited-cut-lower-ℝ (lower-macneille-ℝ (y i))
+            (p , p∈Li) ← is-inhabited-lower-cut-macneille-ℝ (y i)
             (q , p<q , q∉Ui) ←
               forward-implication
                 ( is-open-lower-complement-upper-cut-macneille-ℝ (y i) p)

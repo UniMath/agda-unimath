@@ -34,8 +34,8 @@ open import real-numbers.upper-dedekind-real-numbers
 
 The
 {{#concept "standard ordering" Disambiguation="MacNeille real numbers" Agda=leq-macneille-ℝ}}
-on the [MacNeille real numbers](real-numbers.macneille-real-numbers.md) is the
-nLab order on open Dedekind-MacNeille cuts:
+on the [MacNeille real numbers](real-numbers.macneille-real-numbers.md) `x ≤ y`
+is given by
 
 - `Lx ⊆ Ly` on lower cuts, and
 - `Uy ⊆ Ux` on upper cuts.
@@ -74,9 +74,7 @@ module _
 
   is-prop-leq-macneille-ℝ : is-prop leq-macneille-ℝ
   is-prop-leq-macneille-ℝ =
-    is-prop-product
-      is-prop-leq-lower-macneille-ℝ
-      is-prop-leq-upper-macneille-ℝ
+    is-prop-product is-prop-leq-lower-macneille-ℝ is-prop-leq-upper-macneille-ℝ
 
   leq-prop-macneille-ℝ : Prop (l1 ⊔ l2)
   leq-prop-macneille-ℝ = leq-macneille-ℝ , is-prop-leq-macneille-ℝ
@@ -96,40 +94,40 @@ module _
     leq-upper-macneille-ℝ x y
   leq-upper-leq-lower-macneille-ℝ lx⊆ly q y<q =
     elim-exists
-      ( cut-upper-ℝ (upper-macneille-ℝ x) q)
+      ( upper-cut-macneille-ℝ x q)
       ( λ p (p<q , p∉Ly) →
         backward-implication
           ( is-open-upper-complement-lower-cut-macneille-ℝ x q)
           ( intro-exists p (p<q , p∉Ly ∘ lx⊆ly p)))
       ( forward-implication
-        ( is-open-upper-complement-lower-cut-macneille-ℝ y q)
-        y<q)
+          ( is-open-upper-complement-lower-cut-macneille-ℝ y q)
+          ( y<q))
 
   leq-lower-leq-upper-macneille-ℝ :
     leq-upper-macneille-ℝ x y →
     leq-lower-macneille-ℝ x y
   leq-lower-leq-upper-macneille-ℝ uy⊆ux p p<x =
     elim-exists
-      ( cut-lower-ℝ (lower-macneille-ℝ y) p)
+      ( lower-cut-macneille-ℝ y p)
       ( λ q (p<q , q∉Ux) →
         backward-implication
           ( is-open-lower-complement-upper-cut-macneille-ℝ y p)
           ( intro-exists q (p<q , q∉Ux ∘ uy⊆ux q)))
       ( forward-implication
         ( is-open-lower-complement-upper-cut-macneille-ℝ x p)
-        p<x)
+        ( p<x))
 
   leq-macneille-leq-lower-macneille-ℝ :
     leq-lower-macneille-ℝ x y →
     leq-macneille-ℝ x y
   leq-macneille-leq-lower-macneille-ℝ lx⊆ly =
-    lx⊆ly , leq-upper-leq-lower-macneille-ℝ lx⊆ly
+    ( lx⊆ly , leq-upper-leq-lower-macneille-ℝ lx⊆ly)
 
   leq-macneille-leq-upper-macneille-ℝ :
     leq-upper-macneille-ℝ x y →
     leq-macneille-ℝ x y
   leq-macneille-leq-upper-macneille-ℝ uy⊆ux =
-    leq-lower-leq-upper-macneille-ℝ uy⊆ux , uy⊆ux
+    ( leq-lower-leq-upper-macneille-ℝ uy⊆ux , uy⊆ux)
 ```
 
 ### Inequality on MacNeille reals is reflexive
@@ -138,8 +136,8 @@ module _
 refl-leq-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) → leq-macneille-ℝ x x
 refl-leq-macneille-ℝ x =
-  refl-leq-lower-ℝ (lower-macneille-ℝ x) ,
-  refl-leq-upper-ℝ (upper-macneille-ℝ x)
+  ( refl-leq-lower-ℝ (lower-macneille-ℝ x) ,
+    refl-leq-upper-ℝ (upper-macneille-ℝ x))
 ```
 
 ### Inequality on MacNeille reals is transitive
@@ -171,9 +169,7 @@ antisymmetric-leq-macneille-ℝ :
   {l : Level} (x y : macneille-ℝ l) →
   leq-macneille-ℝ x y → leq-macneille-ℝ y x → x ＝ y
 antisymmetric-leq-macneille-ℝ x y x≤y y≤x =
-  eq-macneille-ℝ
-    ( x)
-    ( y)
+  eq-macneille-ℝ x y
     ( antisymmetric-leq-lower-ℝ
       ( lower-macneille-ℝ x)
       ( lower-macneille-ℝ y)

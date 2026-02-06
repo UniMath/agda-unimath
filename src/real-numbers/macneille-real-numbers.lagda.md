@@ -101,52 +101,57 @@ subtype-macneille-ℝ l x =
 macneille-ℝ : (l : Level) → UU (lsuc l)
 macneille-ℝ l = type-subtype (subtype-macneille-ℝ l)
 
-lower-macneille-ℝ : {l : Level} → macneille-ℝ l → lower-ℝ l
-lower-macneille-ℝ = pr1 ∘ pr1
+module _
+  {l : Level} (x : macneille-ℝ l)
+  where
 
-upper-macneille-ℝ : {l : Level} → macneille-ℝ l → upper-ℝ l
-upper-macneille-ℝ = pr2 ∘ pr1
+  lower-macneille-ℝ : lower-ℝ l
+  lower-macneille-ℝ = pr1 (pr1 x)
 
-lower-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
-lower-cut-macneille-ℝ x = cut-lower-ℝ (lower-macneille-ℝ x)
+  upper-macneille-ℝ : upper-ℝ l
+  upper-macneille-ℝ = pr2 (pr1 x)
 
-upper-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
-upper-cut-macneille-ℝ x = cut-upper-ℝ (upper-macneille-ℝ x)
+  lower-cut-macneille-ℝ : subtype l ℚ
+  lower-cut-macneille-ℝ = cut-lower-ℝ lower-macneille-ℝ
 
-is-in-lower-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → ℚ → UU l
-is-in-lower-cut-macneille-ℝ x =
-  is-in-cut-lower-ℝ (lower-macneille-ℝ x)
+  upper-cut-macneille-ℝ : subtype l ℚ
+  upper-cut-macneille-ℝ = cut-upper-ℝ upper-macneille-ℝ
 
-is-in-upper-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → ℚ → UU l
-is-in-upper-cut-macneille-ℝ x =
-  is-in-cut-upper-ℝ (upper-macneille-ℝ x)
+  is-in-lower-cut-macneille-ℝ : ℚ → UU l
+  is-in-lower-cut-macneille-ℝ =
+    is-in-cut-lower-ℝ lower-macneille-ℝ
 
-is-open-dedekind-macneille-macneille-ℝ :
-  {l : Level} (x : macneille-ℝ l) →
-  is-open-dedekind-macneille-lower-upper-ℝ
-    ( lower-macneille-ℝ x)
-    ( upper-macneille-ℝ x)
-is-open-dedekind-macneille-macneille-ℝ = pr2
+  is-in-upper-cut-macneille-ℝ : ℚ → UU l
+  is-in-upper-cut-macneille-ℝ =
+    is-in-cut-upper-ℝ upper-macneille-ℝ
 
-is-open-upper-complement-lower-cut-macneille-ℝ :
-  {l : Level} (x : macneille-ℝ l) (q : ℚ) →
-  is-in-upper-cut-macneille-ℝ x q ↔
-  exists ℚ (λ p → le-ℚ-Prop p q ∧ ¬' (lower-cut-macneille-ℝ x p))
-is-open-upper-complement-lower-cut-macneille-ℝ x =
-  pr1 (is-open-dedekind-macneille-macneille-ℝ x)
+  is-inhabited-lower-cut-macneille-ℝ : exists ℚ lower-cut-macneille-ℝ
+  is-inhabited-lower-cut-macneille-ℝ =
+    is-inhabited-cut-lower-ℝ lower-macneille-ℝ
 
-is-open-lower-complement-upper-cut-macneille-ℝ :
-  {l : Level} (x : macneille-ℝ l) (p : ℚ) →
-  is-in-lower-cut-macneille-ℝ x p ↔
-  exists ℚ (λ q → le-ℚ-Prop p q ∧ ¬' (upper-cut-macneille-ℝ x q))
-is-open-lower-complement-upper-cut-macneille-ℝ x =
-  pr2 (is-open-dedekind-macneille-macneille-ℝ x)
+  is-inhabited-upper-cut-macneille-ℝ : exists ℚ upper-cut-macneille-ℝ
+  is-inhabited-upper-cut-macneille-ℝ =
+    is-inhabited-cut-upper-ℝ upper-macneille-ℝ
 
-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
-cut-macneille-ℝ = cut-lower-ℝ ∘ lower-macneille-ℝ
+  is-open-dedekind-macneille-macneille-ℝ :
+    is-open-dedekind-macneille-lower-upper-ℝ
+      ( lower-macneille-ℝ)
+      ( upper-macneille-ℝ)
+  is-open-dedekind-macneille-macneille-ℝ = pr2 x
 
-cut-upper-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
-cut-upper-macneille-ℝ = cut-upper-ℝ ∘ upper-macneille-ℝ
+  is-open-upper-complement-lower-cut-macneille-ℝ :
+    (q : ℚ) →
+    is-in-upper-cut-macneille-ℝ q ↔
+    exists ℚ (λ p → le-ℚ-Prop p q ∧ ¬' lower-cut-macneille-ℝ p)
+  is-open-upper-complement-lower-cut-macneille-ℝ =
+    pr1 is-open-dedekind-macneille-macneille-ℝ
+
+  is-open-lower-complement-upper-cut-macneille-ℝ :
+    (p : ℚ) →
+    is-in-lower-cut-macneille-ℝ p ↔
+    exists ℚ (λ q → le-ℚ-Prop p q ∧ ¬' upper-cut-macneille-ℝ q)
+  is-open-lower-complement-upper-cut-macneille-ℝ =
+    pr2 is-open-dedekind-macneille-macneille-ℝ
 ```
 
 ## Properties
