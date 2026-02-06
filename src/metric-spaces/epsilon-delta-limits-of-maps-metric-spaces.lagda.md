@@ -99,7 +99,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (acω : ACω)
+  (acω : level-choice-ℕ (l1 ⊔ l2 ⊔ l4))
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (f : map-Metric-Space X Y)
@@ -108,17 +108,17 @@ module _
   where
 
   abstract
-    is-limit-is-ε-δ-limit-map-ACω-Metric-Space :
+    is-limit-is-ε-δ-limit-map-choice-ℕ-Metric-Space :
       is-ε-δ-limit-map-Metric-Space X Y f x y →
       is-point-limit-map-Metric-Space X Y f x y
-    is-limit-is-ε-δ-limit-map-ACω-Metric-Space H =
+    is-limit-is-ε-δ-limit-map-choice-ℕ-Metric-Space H =
       let
         open
           do-syntax-trunc-Prop
             ( is-point-limit-prop-map-Metric-Space X Y f x y)
       in do
         μ ←
-          choice-countable-discrete-set-ACω
+          choice-countable-discrete-set-choice-ℕ
             ( set-ℚ⁺)
             ( is-countable-set-ℚ⁺)
             ( has-decidable-equality-ℚ⁺)

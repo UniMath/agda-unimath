@@ -124,16 +124,16 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (acω : ACω)
+  (acω : level-choice-ℕ (lsuc l1 ⊔ l2))
   (f : ℝ l1 → ℝ l2)
   where
 
   abstract
-    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-ℝ :
+    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-choice-ℕ-ℝ :
       is-pointwise-ε-δ-continuous-endomap-ℝ f →
       is-pointwise-continuous-endomap-ℝ f
-    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-ℝ =
-      is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-Metric-Space
+    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-choice-ℕ-ℝ =
+      is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-choice-ℕ-Metric-Space
         ( acω)
         ( metric-space-ℝ l1)
         ( metric-space-ℝ l2)

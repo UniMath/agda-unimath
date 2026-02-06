@@ -43,22 +43,22 @@ open import univalent-combinatorics.classical-finite-types
 ## Idea
 
 The
-{{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACω}}
+{{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=choice-ℕ}}
 asserts that for every family of [inhabited](foundation.inhabited-types.md)
 [sets](foundation.sets.md) `B` indexed by the
 [natural numbers](elementary-number-theory.natural-numbers.md) `ℕ`, the type of
 sections of that family `(n : ℕ) → B n` is inhabited.
 
-## Definition
+## Definitions
+
+### Choice for the natural numbers
 
 ```agda
-level-ACω : (l : Level) → UU (lsuc l)
-level-ACω l =
-  (f : ℕ → Set l) (inhabited-f : (n : ℕ) → is-inhabited (type-Set (f n))) →
-  is-inhabited ((n : ℕ) → type-Set (f n))
+level-choice-ℕ : (l : Level) → UU (lsuc l)
+level-choice-ℕ l = (f : ℕ → Set l) → instance-choice-Set ℕ-Set f
 
-ACω : UUω
-ACω = {l : Level} → level-ACω l
+choice-ℕ : UUω
+choice-ℕ = {l : Level} → level-choice-ℕ l
 ```
 
 ## Properties
@@ -72,9 +72,10 @@ module _
   (decidable-equality-X : has-decidable-equality (type-Set X))
   where
 
-  choice-countable-discrete-set-ACω :
-    {l2 : Level} → ACω → (F : type-Set X → Set l2) → instance-choice-Set X F
-  choice-countable-discrete-set-ACω {l2} acω F inhabited-F =
+  choice-countable-discrete-set-choice-ℕ :
+    {l2 : Level} → level-choice-ℕ l2 →
+    (F : type-Set X → Set l2) → instance-choice-Set X F
+  choice-countable-discrete-set-choice-ℕ {l2} acω F inhabited-F =
     let
       open
         do-syntax-trunc-Prop
@@ -104,18 +105,19 @@ module _
 ### The axiom of choice implies the axiom of countable choice
 
 ```agda
-level-ACω-level-AC0 : {l : Level} → level-AC0 lzero l → level-ACω l
-level-ACω-level-AC0 ac0 f inhabited-f = ac0 ℕ-Set (type-Set ∘ f) inhabited-f
+level-choice-ℕ-level-AC0 : {l : Level} → level-AC0 lzero l → level-choice-ℕ l
+level-choice-ℕ-level-AC0 ac0 f inhabited-f =
+  ac0 ℕ-Set (type-Set ∘ f) inhabited-f
 
-ACω-AC0 : AC0 → ACω
-ACω-AC0 ac0 = level-ACω-level-AC0 ac0
+choice-ℕ-AC0 : AC0 → choice-ℕ
+choice-ℕ-AC0 ac0 = level-choice-ℕ-level-AC0 ac0
 ```
 
 ### The axiom of dependent choice implies the axiom of countable choice
 
 ```agda
-level-ACω-level-ADC : {l : Level} → level-ADC l lzero → level-ACω l
-level-ACω-level-ADC {l} adc f inhabited-f =
+level-choice-ℕ-level-ADC : {l : Level} → level-ADC l lzero → level-choice-ℕ l
+level-choice-ℕ-level-ADC {l} adc f inhabited-f =
   do
     (g , r-gn-g⟨n+1⟩) ←
       adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
