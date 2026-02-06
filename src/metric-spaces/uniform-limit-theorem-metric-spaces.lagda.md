@@ -50,9 +50,9 @@ Assuming the
 yields
 [pointwise continuity](metric-spaces.pointwise-continuous-maps-metric-spaces.md).
 
-## Properties
+## Theorem
 
-### The uniform limit theorem for pointwise ε-δ continuous maps
+### Uniform limits of pointwise ε-δ continuous maps are pointwise ε-δ continuous
 
 **Proof.** Let $u$ be a sequence of pointwise ε-δ continuous maps $uₙ : X → Y$
 that uniformly converges to $f$, i.e., it converges in the metric space of maps.
@@ -185,7 +185,7 @@ module _
                     ( uniform-left x)))))
 ```
 
-### Uniform limits of pointwise continuous maps are ε-δ continuous
+### Uniform limits of pointwise continuous maps are pointwise ε-δ continuous
 
 ```agda
 module _
@@ -197,14 +197,14 @@ module _
   where
 
   abstract
-    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space :
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-is-pointwise-continuous-map-Metric-Space :
       is-limit-sequence-Metric-Space
         ( metric-space-of-maps-Metric-Space X Y)
         ( u)
         ( f) →
       ( (n : ℕ) → is-pointwise-continuous-map-Metric-Space X Y (u n)) →
       is-pointwise-ε-δ-continuous-map-Metric-Space X Y f
-    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-is-pointwise-continuous-map-Metric-Space
       L H =
       is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-Metric-Space
         ( X)
@@ -246,7 +246,7 @@ module _
         ( X)
         ( Y)
         ( f)
-        ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
+        ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-is-pointwise-continuous-map-Metric-Space
           ( X)
           ( Y)
           ( u)
