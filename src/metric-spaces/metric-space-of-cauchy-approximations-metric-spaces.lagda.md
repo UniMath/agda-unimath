@@ -84,35 +84,6 @@ module _
       is-isometry-const-cauchy-approximation-Metric-Space)
 ```
 
-### The action of short maps on Cauchy approximations is short
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-map-Metric-Space A B)
-  where
-
-  is-short-map-short-map-cauchy-pseudocompletion-Metric-Space :
-    is-short-map-Metric-Space
-      ( metric-space-of-cauchy-approximations-Metric-Space A)
-      ( metric-space-of-cauchy-approximations-Metric-Space B)
-      ( map-short-map-cauchy-pseudocompletion-Metric-Space A B f)
-  is-short-map-short-map-cauchy-pseudocompletion-Metric-Space ε x y Nxy δ =
-    is-short-map-short-map-Metric-Space A B f ε
-      ( map-cauchy-approximation-Metric-Space A x δ)
-      ( map-cauchy-approximation-Metric-Space A y δ)
-      ( Nxy δ)
-
-  short-map-short-map-cauchy-pseudocompletion-Metric-Space :
-    short-map-Metric-Space
-      ( metric-space-of-cauchy-approximations-Metric-Space A)
-      ( metric-space-of-cauchy-approximations-Metric-Space B)
-  short-map-short-map-cauchy-pseudocompletion-Metric-Space =
-    map-short-map-cauchy-pseudocompletion-Metric-Space A B f ,
-    is-short-map-short-map-cauchy-pseudocompletion-Metric-Space
-```
-
 ### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation
 
 ```agda
