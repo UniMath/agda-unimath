@@ -29,7 +29,7 @@ open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise
 
 ## Idea
 
-For [odd](elementary-number-theory.parity-natural-numbers.md) `n`, the function
+For [odd](elementary-number-theory.parity-natural-numbers.md) $n$, the function
 $x ↦ \root{n}{x}$ is defined on the
 [real numbers](real-numbers.dedekind-real-numbers.md) as the inverse function to
 the [power](real-numbers.powers-real-numbers.md) operation $x ↦ x^n$.
