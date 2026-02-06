@@ -18,11 +18,11 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.increasing-endomaps-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.strictly-increasing-endomaps-real-numbers
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -47,16 +47,16 @@ module _
     cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( l)
       ( l)
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ =
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ =
     ( ( pointwise-ε-δ-continuous-power-ℝ l n ,
         is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n) ,
-      is-unbounded-above-power-is-odd-exponent-ℝ l n odd-n ,
-      is-unbounded-below-power-is-odd-exponent-ℝ l n odd-n)
+      is-cofinal-power-is-odd-exponent-ℝ l n odd-n ,
+      is-coinitial-power-is-odd-exponent-ℝ l n odd-n)
 
   aut-power-is-odd-exponent-ℝ : Aut (ℝ l)
   aut-power-is-odd-exponent-ℝ =
-    aut-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-      ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ)
+    aut-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+      ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ)
 
 root-is-odd-exponent-ℝ : {l : Level} (n : ℕ) → is-odd-ℕ n → ℝ l → ℝ l
 root-is-odd-exponent-ℝ {l} n odd-n =
@@ -100,8 +100,8 @@ module _
     is-strictly-increasing-root-is-odd-exponent-ℝ :
       is-strictly-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
     is-strictly-increasing-root-is-odd-exponent-ℝ =
-      is-strictly-increasing-map-inv-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-        ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ
+      is-strictly-increasing-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+        ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ
           ( l)
           ( n)
           ( odd-n))
