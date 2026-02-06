@@ -742,6 +742,19 @@ module _
         ( f)
         ( g)
         ( u))
+
+  iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f ↔
+    is-complete-short-map-Pseudometric-Space P M f
+  pr1
+    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+  pr2
+    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ∘
+    pair f
 ```
 
 ### Extensible short maps are equivalent to complete short maps
