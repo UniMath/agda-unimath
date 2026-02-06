@@ -223,8 +223,8 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
 
 ```agda
 open import metric-spaces.uniform-limit-theorem-metric-spaces using
-  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
-  ; is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space)
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}
