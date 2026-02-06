@@ -38,7 +38,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 The
-{{#concept "uniform limit theorem" WDID=Q7885107 WD="uniform limit theorem" Agda=is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-Metric-Space}}
+{{#concept "uniform limit theorem" WDID=Q7885107 WD="uniform limit theorem" Agda=is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-Metric-Space}}
 states that uniform convergence of a sequence of
 [maps between metric spaces](metric-spaces.maps-metric-spaces.md), i.e.,
 convergence in the
@@ -54,6 +54,27 @@ yields
 
 ### The uniform limit theorem for pointwise ε-δ continuous maps
 
+**Proof.** Let $u$ be a sequence of maps $uᵢ : X → Y$ that uniformly converges
+to $f$, i.e., it converges in the metric space of maps. Given arbitrary $x : X$
+and $ε : ℚ⁺$, we must produce $δ : ℚ⁺$ such that every $x' : X$ in the
+$δ$-neighborhood of $x$ is sent by $f$ into the $ε$-neighborhood of $f(x)$.
+
+Since $u$ converges uniformly to $f$, choose a modulus $m$ of convergence. Write
+$ε$ as a ternary sum of positive rationals $ε = (ε₁ + ε₂) + ε₃$, and let
+$ε₁₃ = min(ε₁ , ε₃)$ and $N = m(ε₁₃)$. By uniform convergence at stage $N$, for
+every $z : X$, $u_N(z)$ lies in the $ε₁₃$-neighborhood of $f(z)$, hence in
+particular in the $ε₁$-neighborhood and in the $ε₃$-neighborhood of $f(z)$.
+
+Now use pointwise ε-δ continuity of $u_N$ at $x$ with error $ε₂$: there is
+$δ : ℚ⁺$ such that every $x'$ in the $δ$-neighborhood of $x$ is mapped by $u_N$
+to the $ε₂$-neighborhood of $u_N(x)$.
+
+Take such an $x'$. By symmetry, $f(x)$ lies in the $ε₁$-neighborhood of
+$u_N(x)$. Combining this with the previous two bounds and applying the triangle
+inequality twice along $f(x) → u_N(x) → u_N(x') → f(x')$, we get that $f(x')$
+lies in the $ε$-neighborhood of $f(x)$. Therefore $f$ is pointwise ε-δ
+continuous at $x$. ∎
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -64,14 +85,14 @@ module _
   where
 
   abstract
-    is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-Metric-Space :
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-Metric-Space :
       is-limit-sequence-Metric-Space
         ( metric-space-of-maps-Metric-Space X Y)
         ( u)
         ( f) →
       ( (n : ℕ) → is-pointwise-ε-δ-continuous-map-Metric-Space X Y (u n)) →
       is-pointwise-ε-δ-continuous-map-Metric-Space X Y f
-    is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-Metric-Space
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-Metric-Space
       L H x ε =
       let
         open
@@ -130,7 +151,9 @@ module _
               ( ε₃)
               ( leq-right-min-ℚ⁺ ε₁ ε₃)
               ( uniform-min x)
+
         (δ , is-mod-δ) ← H N x ε₂
+
         intro-exists
           ( δ)
           ( λ x' Nx' →
@@ -173,16 +196,16 @@ module _
   where
 
   abstract
-    is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-pointwise-continuous-map-Metric-Space :
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space :
       is-limit-sequence-Metric-Space
         ( metric-space-of-maps-Metric-Space X Y)
         ( u)
         ( f) →
       ( (n : ℕ) → is-pointwise-continuous-map-Metric-Space X Y (u n)) →
       is-pointwise-ε-δ-continuous-map-Metric-Space X Y f
-    is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
+    is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
       L H =
-      is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-Metric-Space
+      is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-Metric-Space
         ( X)
         ( Y)
         ( u)
@@ -208,21 +231,21 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-map-uniform-limit-sequence-ACℕ-Metric-Space :
+    is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space :
       is-limit-sequence-Metric-Space
         ( metric-space-of-maps-Metric-Space X Y)
         ( u)
         ( f) →
       ( (n : ℕ) → is-pointwise-continuous-map-Metric-Space X Y (u n)) →
       is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-map-uniform-limit-sequence-ACℕ-Metric-Space
+    is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space
       L H =
       is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space
         ( acω)
         ( X)
         ( Y)
         ( f)
-        ( is-pointwise-ε-δ-continuous-map-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
+        ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
           ( X)
           ( Y)
           ( u)
