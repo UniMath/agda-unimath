@@ -24,7 +24,7 @@ An
 of a family of [MacNeille real numbers](real-numbers.macneille-real-numbers.md)
 `y : I → ℝ` is a MacNeille real number `x` such that for all `i` we have
 `yᵢ ≤ x`. In other words, it is an
-[upper bound](order-theory.upper-bounds-large-poset.md) in the
+[upper bound](order-theory.upper-bounds-large-posets.md) in the
 [ordering on the MacNeille reals](real-numbers.inequality-macneille-real-numbers.md).
 
 ## Definition

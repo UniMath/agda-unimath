@@ -55,7 +55,7 @@ on a family of [MacNeille real numbers](real-numbers.macneille-real-numbers.md)
 `y : I → ℝ` is a MacNeille real number `x` such that any MacNeille real number
 `u` is greater than `x` [if and only if](foundation.logical-equivalences.md) for
 all `i` we have `yᵢ ≤ u`. In other words, it is a
-[least upper bound](order-theory.least-upper-bounds-large-poset.md) in the
+[least upper bound](order-theory.least-upper-bounds-large-posets.md) in the
 [ordering on the MacNeille reals](real-numbers.inequality-macneille-real-numbers.md).
 
 All inhabited upper bounded families of MacNeille real numbers have a least
