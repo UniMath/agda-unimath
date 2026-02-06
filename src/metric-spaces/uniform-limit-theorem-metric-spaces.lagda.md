@@ -200,7 +200,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (acω : level-choice-ℕ (l1 ⊔ l2 ⊔ l4))
+  (acω : level-ACℕ (l1 ⊔ l2 ⊔ l4))
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (u : sequence (map-Metric-Space X Y))
@@ -208,16 +208,16 @@ module _
   where
 
   abstract
-    is-pointwise-continuous-map-uniform-limit-sequence-choice-ℕ-Metric-Space :
+    is-pointwise-continuous-map-uniform-limit-sequence-ACℕ-Metric-Space :
       is-limit-sequence-Metric-Space
         ( metric-space-of-maps-Metric-Space X Y)
         ( u)
         ( f) →
       ( (n : ℕ) → is-pointwise-continuous-map-Metric-Space X Y (u n)) →
       is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-map-uniform-limit-sequence-choice-ℕ-Metric-Space
+    is-pointwise-continuous-map-uniform-limit-sequence-ACℕ-Metric-Space
       L H =
-      is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-choice-ℕ-Metric-Space
+      is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space
         ( acω)
         ( X)
         ( Y)

@@ -43,7 +43,7 @@ open import univalent-combinatorics.classical-finite-types
 ## Idea
 
 The
-{{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=choice-ℕ}}
+{{#concept "axiom of countable choice" WD="axiom of countable choice" WDID=Q1000116 Agda=ACℕ}}
 asserts that for every family of [inhabited](foundation.inhabited-types.md)
 [sets](foundation.sets.md) `B` indexed by the
 [natural numbers](elementary-number-theory.natural-numbers.md) `ℕ`, the type of
@@ -54,11 +54,11 @@ sections of that family `(n : ℕ) → B n` is inhabited.
 ### Choice for the natural numbers
 
 ```agda
-level-choice-ℕ : (l : Level) → UU (lsuc l)
-level-choice-ℕ l = (f : ℕ → Set l) → instance-choice-Set ℕ-Set f
+level-ACℕ : (l : Level) → UU (lsuc l)
+level-ACℕ l = (f : ℕ → Set l) → instance-choice-Set ℕ-Set f
 
-choice-ℕ : UUω
-choice-ℕ = {l : Level} → level-choice-ℕ l
+ACℕ : UUω
+ACℕ = {l : Level} → level-ACℕ l
 ```
 
 ## Properties
@@ -72,10 +72,10 @@ module _
   (decidable-equality-X : has-decidable-equality (type-Set X))
   where
 
-  choice-countable-discrete-set-choice-ℕ :
-    {l2 : Level} → level-choice-ℕ l2 →
+  choice-countable-discrete-set-ACℕ :
+    {l2 : Level} → level-ACℕ l2 →
     (F : type-Set X → Set l2) → instance-choice-Set X F
-  choice-countable-discrete-set-choice-ℕ {l2} acω F inhabited-F =
+  choice-countable-discrete-set-ACℕ {l2} acω F inhabited-F =
     let
       open
         do-syntax-trunc-Prop
@@ -105,19 +105,19 @@ module _
 ### The axiom of choice implies the axiom of countable choice
 
 ```agda
-level-choice-ℕ-level-AC0 : {l : Level} → level-AC0 lzero l → level-choice-ℕ l
-level-choice-ℕ-level-AC0 ac0 f inhabited-f =
+level-ACℕ-level-AC0 : {l : Level} → level-AC0 lzero l → level-ACℕ l
+level-ACℕ-level-AC0 ac0 f inhabited-f =
   ac0 ℕ-Set (type-Set ∘ f) inhabited-f
 
-choice-ℕ-AC0 : AC0 → choice-ℕ
-choice-ℕ-AC0 ac0 = level-choice-ℕ-level-AC0 ac0
+ACℕ-AC0 : AC0 → ACℕ
+ACℕ-AC0 ac0 = level-ACℕ-level-AC0 ac0
 ```
 
 ### The axiom of dependent choice implies the axiom of countable choice
 
 ```agda
-level-choice-ℕ-level-ADC : {l : Level} → level-ADC l lzero → level-choice-ℕ l
-level-choice-ℕ-level-ADC {l} adc f inhabited-f =
+level-ACℕ-level-ADC : {l : Level} → level-ADC l lzero → level-ACℕ l
+level-ACℕ-level-ADC {l} adc f inhabited-f =
   do
     (g , r-gn-g⟨n+1⟩) ←
       adc (A , is-set-A) (unit-trunc-Prop (0 , λ ())) R entire-R
