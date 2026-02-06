@@ -129,7 +129,7 @@ module _
     is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       (i : I) (q : ℚ) →
       is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ q →
-      is-in-cut-upper-ℝ (upper-macneille-ℝ (y i)) q
+      is-in-upper-cut-macneille-ℝ (y i) q
     is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       i q q∈U =
       is-in-all-upper-sections-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
@@ -215,26 +215,6 @@ module _
       is-inhabited-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
       is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
 
-  abstract
-    is-disjoint-cut-family-macneille-ℝ :
-      (i : I) (q : ℚ) →
-      is-in-cut-lower-ℝ (lower-macneille-ℝ (y i)) q →
-      ¬ is-in-cut-upper-ℝ (upper-macneille-ℝ (y i)) q
-    is-disjoint-cut-family-macneille-ℝ i q q∈L q∈U =
-      let open do-syntax-trunc-Prop empty-Prop
-      in do
-        (r , q<r , r∉U) ←
-          forward-implication
-            ( is-open-lower-complement-upper-cut-macneille-ℝ (y i) q)
-            ( q∈L)
-        r∉U
-          ( is-in-cut-le-ℚ-upper-ℝ
-            ( upper-macneille-ℝ (y i))
-            ( q)
-            ( r)
-            ( q<r)
-            ( q∈U))
-
   lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
     subtype (l1 ⊔ l2) ℚ
   lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ p =
@@ -259,8 +239,8 @@ module _
           let
             open
               do-syntax-trunc-Prop
-                (∃ ( ℚ)
-                   ( lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ))
+                ( ∃ ( ℚ)
+                    ( lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ))
           in do
             (p , p∈Li) ← is-inhabited-cut-lower-ℝ (lower-macneille-ℝ (y i))
             (q , p<q , q∉Ui) ←
@@ -416,7 +396,7 @@ module _
                           elim-exists
                             ( empty-Prop)
                             ( λ t (t<r , t∈all) →
-                              is-disjoint-cut-family-macneille-ℝ i t
+                              is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ (y i) t
                                 ( is-in-cut-le-ℚ-lower-ℝ
                                   ( lower-macneille-ℝ (y i))
                                   ( t)
@@ -485,7 +465,7 @@ module _
       {l4 : Level} (z : macneille-ℝ l4) →
       is-upper-bound-family-of-elements-macneille-ℝ y z →
       (q : ℚ) →
-      is-in-cut-upper-ℝ (upper-macneille-ℝ z) q →
+      is-in-upper-cut-macneille-ℝ z q →
       is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ q
     is-in-cut-upper-least-upper-bound-family-is-in-cut-upper-macneille-ℝ
       z y≤z q q∈Uz =

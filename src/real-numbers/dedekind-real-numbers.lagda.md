@@ -67,7 +67,7 @@ direction": `q ∈ U` if and only if there is a `p < q` where `p ∈ U`.
 These cuts present lower and upper bounds on the Dedekind real number, and must
 satisfy the conditions
 
-1. _Disjointness_. The cuts `lx` and `uy` are disjoint subsets of `ℚ`.
+1. _Disjointedness_. The cuts `lx` and `uy` are disjoint subsets of `ℚ`.
 2. _Locatedness_. If `q < r` then `q` is in the cut `L` or `r` is in the cut
    `U`.
 

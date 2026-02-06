@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -106,6 +107,20 @@ lower-macneille-ℝ = pr1 ∘ pr1
 upper-macneille-ℝ : {l : Level} → macneille-ℝ l → upper-ℝ l
 upper-macneille-ℝ = pr2 ∘ pr1
 
+lower-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
+lower-cut-macneille-ℝ x = cut-lower-ℝ (lower-macneille-ℝ x)
+
+upper-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → subtype l ℚ
+upper-cut-macneille-ℝ x = cut-upper-ℝ (upper-macneille-ℝ x)
+
+is-in-lower-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → ℚ → UU l
+is-in-lower-cut-macneille-ℝ x =
+  is-in-cut-lower-ℝ (lower-macneille-ℝ x)
+
+is-in-upper-cut-macneille-ℝ : {l : Level} → macneille-ℝ l → ℚ → UU l
+is-in-upper-cut-macneille-ℝ x =
+  is-in-cut-upper-ℝ (upper-macneille-ℝ x)
+
 is-open-dedekind-macneille-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) →
   is-open-dedekind-macneille-lower-upper-ℝ
@@ -115,15 +130,15 @@ is-open-dedekind-macneille-macneille-ℝ = pr2
 
 is-open-upper-complement-lower-cut-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) (q : ℚ) →
-  is-in-cut-upper-ℝ (upper-macneille-ℝ x) q ↔
-  exists ℚ (λ p → le-ℚ-Prop p q ∧ ¬' (cut-lower-ℝ (lower-macneille-ℝ x) p))
+  is-in-upper-cut-macneille-ℝ x q ↔
+  exists ℚ (λ p → le-ℚ-Prop p q ∧ ¬' (lower-cut-macneille-ℝ x p))
 is-open-upper-complement-lower-cut-macneille-ℝ x =
   pr1 (is-open-dedekind-macneille-macneille-ℝ x)
 
 is-open-lower-complement-upper-cut-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) (p : ℚ) →
-  is-in-cut-lower-ℝ (lower-macneille-ℝ x) p ↔
-  exists ℚ (λ q → le-ℚ-Prop p q ∧ ¬' (cut-upper-ℝ (upper-macneille-ℝ x) q))
+  is-in-lower-cut-macneille-ℝ x p ↔
+  exists ℚ (λ q → le-ℚ-Prop p q ∧ ¬' (upper-cut-macneille-ℝ x q))
 is-open-lower-complement-upper-cut-macneille-ℝ x =
   pr2 (is-open-dedekind-macneille-macneille-ℝ x)
 
@@ -157,6 +172,30 @@ eq-macneille-ℝ :
   x ＝ y
 eq-macneille-ℝ {l} _ _ p q =
   eq-type-subtype (subtype-macneille-ℝ l) (eq-pair p q)
+```
+
+### Disjointedness of lower and upper cuts
+
+```agda
+abstract
+  is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ :
+    {l : Level} (x : macneille-ℝ l) (q : ℚ) →
+    is-in-lower-cut-macneille-ℝ x q →
+    ¬ is-in-upper-cut-macneille-ℝ x q
+  is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ x q q∈L q∈U =
+    let open do-syntax-trunc-Prop empty-Prop
+    in do
+      (r , q<r , r∉U) ←
+        forward-implication
+          ( is-open-lower-complement-upper-cut-macneille-ℝ x q)
+          ( q∈L)
+      r∉U
+        ( is-in-cut-le-ℚ-upper-ℝ
+          ( upper-macneille-ℝ x)
+          ( q)
+          ( r)
+          ( q<r)
+          ( q∈U))
 ```
 
 ## External links
