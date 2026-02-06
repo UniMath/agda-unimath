@@ -492,7 +492,7 @@ abstract
               ( |ε|<1))))
 ```
 
-### If `1 ≤ q` and `n` is nonzero, `q ≤ qⁿ`
+### If `1 ≤ q` and `n` is nonzero, then `q ≤ qⁿ`
 
 ```agda
 abstract
@@ -517,13 +517,13 @@ abstract
           by leq-eq-ℚ (ap-mul-ℚ (inv (power-rational-ℚ⁰⁺ n q⁰⁺)) refl)
 ```
 
-### If `n` is odd, `q ↦ qⁿ` is unbounded above and below
+### If `n` is odd, `q ↦ qⁿ` is cofinal and coinitial
 
 ```agda
 abstract
   is-unbounded-above-power-is-odd-ℚ :
     (n : ℕ) → is-odd-ℕ n → is-cofinal-map-Poset ℚ-Poset (power-ℚ n)
-  is-unbounded-above-power-is-odd-ℚ n odd-n q =
+  is-cofinal-power-is-odd-ℚ n odd-n q =
     let
       q' = max-ℚ q one-ℚ
     in

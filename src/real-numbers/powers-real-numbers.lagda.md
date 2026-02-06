@@ -267,7 +267,7 @@ abstract
 
 ```agda
 abstract
-  power-is-even-neg-ℝ :
+  power-neg-is-even-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ power-ℝ n x
   power-is-even-neg-ℝ _ x (k , refl) =
@@ -285,7 +285,7 @@ abstract
 
 ```agda
 abstract
-  power-is-odd-neg-ℝ :
+  power-neg-is-odd-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-odd-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ neg-ℝ (power-ℝ n x)
   power-is-odd-neg-ℝ n x odd-n =
