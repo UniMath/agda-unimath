@@ -253,3 +253,8 @@ module _
           ( L)
           ( H))
 ```
+
+## External links
+
+- [Uniform limit theorem](https://en.wikipedia.org/wiki/Uniform_limit_theorem)
+  on Wikipedia
