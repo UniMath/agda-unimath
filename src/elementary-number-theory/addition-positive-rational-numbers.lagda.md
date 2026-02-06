@@ -255,9 +255,9 @@ module _
 
   split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
   split-ℚ⁺ =
-    ( left-summand-split-ℚ⁺ ,
-      right-summand-split-ℚ⁺ ,
-      eq-add-split-ℚ⁺)
+    left-summand-split-ℚ⁺ ,
+    right-summand-split-ℚ⁺ ,
+    eq-add-split-ℚ⁺
 
   abstract
     le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
