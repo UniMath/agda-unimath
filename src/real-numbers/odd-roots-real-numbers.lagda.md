@@ -43,8 +43,8 @@ module _
   (odd-n : is-odd-ℕ n)
   where
 
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ :
-    unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ :
+    cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( l)
       ( l)
   unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ =
