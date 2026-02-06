@@ -93,24 +93,24 @@ module _
   (f : short-map-Metric-Space A B)
   where
 
-  is-short-map-cauchy-approximation-short-map-Metric-Space :
+  is-short-map-short-map-cauchy-pseudocompletion-Metric-Space :
     is-short-map-Metric-Space
       ( metric-space-of-cauchy-approximations-Metric-Space A)
       ( metric-space-of-cauchy-approximations-Metric-Space B)
-      ( map-cauchy-approximation-short-map-Metric-Space A B f)
-  is-short-map-cauchy-approximation-short-map-Metric-Space ε x y Nxy δ =
+      ( map-short-map-cauchy-pseudocompletion-Metric-Space A B f)
+  is-short-map-short-map-cauchy-pseudocompletion-Metric-Space ε x y Nxy δ =
     is-short-map-short-map-Metric-Space A B f ε
       ( map-cauchy-approximation-Metric-Space A x δ)
       ( map-cauchy-approximation-Metric-Space A y δ)
       ( Nxy δ)
 
-  short-map-cauchy-approximation-short-map-Metric-Space :
+  short-map-short-map-cauchy-pseudocompletion-Metric-Space :
     short-map-Metric-Space
       ( metric-space-of-cauchy-approximations-Metric-Space A)
       ( metric-space-of-cauchy-approximations-Metric-Space B)
-  short-map-cauchy-approximation-short-map-Metric-Space =
-    map-cauchy-approximation-short-map-Metric-Space A B f ,
-    is-short-map-cauchy-approximation-short-map-Metric-Space
+  short-map-short-map-cauchy-pseudocompletion-Metric-Space =
+    map-short-map-cauchy-pseudocompletion-Metric-Space A B f ,
+    is-short-map-short-map-cauchy-pseudocompletion-Metric-Space
 ```
 
 ### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation

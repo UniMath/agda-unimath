@@ -178,33 +178,33 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  isometry-cauchy-pseudocompletion-Metric-Space :
+  isometry-unit-cauchy-pseudocompletion-Metric-Space :
     isometry-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space M)
-  isometry-cauchy-pseudocompletion-Metric-Space =
-    isometry-cauchy-pseudocompletion-Pseudometric-Space
+  isometry-unit-cauchy-pseudocompletion-Metric-Space =
+    isometry-unit-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
 
-  map-cauchy-pseudocompletion-Metric-Space :
+  map-unit-cauchy-pseudocompletion-Metric-Space :
     type-Metric-Space M → cauchy-approximation-Metric-Space M
-  map-cauchy-pseudocompletion-Metric-Space =
+  map-unit-cauchy-pseudocompletion-Metric-Space =
     map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space M)
-      ( isometry-cauchy-pseudocompletion-Metric-Space)
+      ( isometry-unit-cauchy-pseudocompletion-Metric-Space)
 
   abstract
-    is-isometry-map-cauchy-pseudocompletion-Metric-Space :
+    is-isometry-map-unit-cauchy-pseudocompletion-Metric-Space :
       is-isometry-Pseudometric-Space
         ( pseudometric-Metric-Space M)
         ( cauchy-pseudocompletion-Metric-Space M)
-        ( map-cauchy-pseudocompletion-Metric-Space)
-    is-isometry-map-cauchy-pseudocompletion-Metric-Space =
+        ( map-unit-cauchy-pseudocompletion-Metric-Space)
+    is-isometry-map-unit-cauchy-pseudocompletion-Metric-Space =
       is-isometry-map-isometry-Pseudometric-Space
         ( pseudometric-Metric-Space M)
         ( cauchy-pseudocompletion-Metric-Space M)
-        ( isometry-cauchy-pseudocompletion-Metric-Space)
+        ( isometry-unit-cauchy-pseudocompletion-Metric-Space)
 ```
 
 ### Any Cauchy approximation in the Cauchy pseudocompletion of a metric space has a limit

@@ -52,35 +52,35 @@ module _
   (f : short-map-Metric-Space A B)
   where
 
-  short-map-cauchy-pseudocompletion-short-map-Metric-Space :
+  short-map-cauchy-pseudocompletion-Metric-Space :
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-  short-map-cauchy-pseudocompletion-short-map-Metric-Space =
-    short-map-cauchy-approximation-short-map-Pseudometric-Space
+  short-map-cauchy-pseudocompletion-Metric-Space =
+    short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( f)
 
-  map-cauchy-approximation-short-map-Metric-Space :
+  map-short-map-cauchy-pseudocompletion-Metric-Space :
     cauchy-approximation-Metric-Space A →
     cauchy-approximation-Metric-Space B
-  map-cauchy-approximation-short-map-Metric-Space =
+  map-short-map-cauchy-pseudocompletion-Metric-Space =
     map-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-        ( short-map-cauchy-pseudocompletion-short-map-Metric-Space)
+        ( short-map-cauchy-pseudocompletion-Metric-Space)
 
-  preserves-neighborhoods-map-cauchy-approximation-short-map-Metric-Space :
+  preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Metric-Space :
     is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-      ( map-cauchy-approximation-short-map-Metric-Space)
-  preserves-neighborhoods-map-cauchy-approximation-short-map-Metric-Space =
+      ( map-short-map-cauchy-pseudocompletion-Metric-Space)
+  preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Metric-Space =
     is-short-map-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space B)
-      ( short-map-cauchy-pseudocompletion-short-map-Metric-Space)
+      ( short-map-cauchy-pseudocompletion-Metric-Space)
 ```
 
 ## Properties
@@ -93,13 +93,13 @@ module _
   (A : Metric-Space l1 l2)
   where abstract
 
-  htpy-id-map-cauchy-approximation-short-map-Metric-Space :
-    map-cauchy-approximation-short-map-Metric-Space
+  htpy-id-map-short-map-cauchy-pseudocompletion-Metric-Space :
+    map-short-map-cauchy-pseudocompletion-Metric-Space
       ( A)
       ( A)
       ( id-short-map-Metric-Space A) ＝
     id
-  htpy-id-map-cauchy-approximation-short-map-Metric-Space = refl
+  htpy-id-map-short-map-cauchy-pseudocompletion-Metric-Space = refl
 
 module _
   {l1a l2a l1b l2b l1c l2c : Level}
@@ -110,12 +110,12 @@ module _
   (f : short-map-Metric-Space A B)
   where abstract
 
-  htpy-comp-map-cauchy-approximation-short-map-Metric-Space :
-    ( map-cauchy-approximation-short-map-Metric-Space B C g ∘
-      map-cauchy-approximation-short-map-Metric-Space A B f) ＝
-    ( map-cauchy-approximation-short-map-Metric-Space A C
+  htpy-comp-map-short-map-cauchy-pseudocompletion-Metric-Space :
+    ( map-short-map-cauchy-pseudocompletion-Metric-Space B C g ∘
+      map-short-map-cauchy-pseudocompletion-Metric-Space A B f) ＝
+    ( map-short-map-cauchy-pseudocompletion-Metric-Space A C
       ( comp-short-map-Metric-Space A B C g f))
-  htpy-comp-map-cauchy-approximation-short-map-Metric-Space = refl
+  htpy-comp-map-short-map-cauchy-pseudocompletion-Metric-Space = refl
 ```
 
 ### The action of short maps on Cauchy approximations preserves limits
@@ -129,13 +129,13 @@ module _
   (lim : type-Metric-Space A)
   where abstract
 
-  preserves-limit-map-cauchy-approximation-short-map-Metric-Space :
+  preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space :
     is-limit-cauchy-approximation-Metric-Space A a lim →
     is-limit-cauchy-approximation-Metric-Space
       ( B)
-      ( map-cauchy-approximation-short-map-Metric-Space A B f a)
+      ( map-short-map-cauchy-pseudocompletion-Metric-Space A B f a)
       ( map-short-map-Metric-Space A B f lim)
-  preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+  preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
     is-lim-a ε δ =
     is-short-map-short-map-Metric-Space A B
       ( f)

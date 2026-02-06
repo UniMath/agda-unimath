@@ -157,7 +157,7 @@ module _
 
   is-retraction-map-cauchy-pseudocompletion-is-complete-Metric-Space :
     ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space ∘
-      map-cauchy-pseudocompletion-Metric-Space M) ~
+      map-unit-cauchy-pseudocompletion-Metric-Space M) ~
     ( id)
   is-retraction-map-cauchy-pseudocompletion-is-complete-Metric-Space =
     is-retraction-limit-cauchy-approximation-Complete-Metric-Space
@@ -168,7 +168,7 @@ module _
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( u)
-      ( map-cauchy-pseudocompletion-Metric-Space
+      ( map-unit-cauchy-pseudocompletion-Metric-Space
         ( M)
         ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u))
   sim-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u =
@@ -237,7 +237,7 @@ module _
         ( preserves-neighborhoods-map-isometry-Pseudometric-Space
           ( pseudometric-Metric-Space M)
           ( cauchy-pseudocompletion-Metric-Space M)
-          ( isometry-cauchy-pseudocompletion-Metric-Space M)
+          ( isometry-unit-cauchy-pseudocompletion-Metric-Space M)
           ( δ)
           ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
             ( M)

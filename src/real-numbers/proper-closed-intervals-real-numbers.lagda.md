@@ -262,7 +262,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-add =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-add)
@@ -284,7 +284,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -297,7 +297,7 @@ abstract
                 by ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space
@@ -345,7 +345,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-diff =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-diff)
@@ -367,7 +367,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -381,7 +381,7 @@ abstract
                   ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space

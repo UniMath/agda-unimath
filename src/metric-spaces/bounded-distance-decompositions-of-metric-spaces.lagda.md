@@ -343,7 +343,7 @@ module _
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space :
     cauchy-approximation-Metric-Space A
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space =
-    map-cauchy-approximation-short-map-Metric-Space
+    map-short-map-cauchy-pseudocompletion-Metric-Space
       ( subspace-bounded-distance-component-Metric-Space A X)
       ( A)
       ( short-inclusion-subspace-Metric-Space

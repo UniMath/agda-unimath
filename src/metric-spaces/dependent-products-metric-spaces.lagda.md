@@ -170,7 +170,7 @@ module _
   ev-cauchy-approximation-Π-Metric-Space :
     (x : A) → cauchy-approximation-Metric-Space (P x)
   ev-cauchy-approximation-Π-Metric-Space x =
-    map-cauchy-approximation-short-map-Metric-Space
+    map-short-map-cauchy-pseudocompletion-Metric-Space
       ( Π-Metric-Space A P)
       ( P x)
       ( ev-short-map-Metric-Space A P x)
