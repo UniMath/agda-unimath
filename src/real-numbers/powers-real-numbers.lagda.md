@@ -538,7 +538,7 @@ abstract
                 ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))))
 ```
 
-### For odd `n`, `x ↦ xⁿ` is cofinal and below
+### For odd `n`, `x ↦ xⁿ` is cofinal and coinitial
 
 ```agda
 abstract
