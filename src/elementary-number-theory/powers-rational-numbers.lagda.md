@@ -508,7 +508,7 @@ abstract
 abstract
   is-unbounded-above-power-is-odd-ℚ :
     (n : ℕ) → is-odd-ℕ n → is-cofinal-map-Poset ℚ-Poset (power-ℚ n)
-  is-unbounded-above-power-is-odd-ℚ n odd-n q =
+  is-cofinal-power-is-odd-ℚ n odd-n q =
     let
       q' = max-ℚ q one-ℚ
     in
