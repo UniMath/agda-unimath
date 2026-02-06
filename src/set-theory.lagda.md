@@ -72,6 +72,7 @@ open import set-theory.konigs-theorem public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-indexed-inequality-cardinals public
+open import set-theory.strict-inequality-cardinals public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
 open import set-theory.zero-cardinal public

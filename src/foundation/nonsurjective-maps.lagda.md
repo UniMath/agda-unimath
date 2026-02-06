@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.injective-maps
+open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
@@ -34,6 +35,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 
 open import logic.propositionally-decidable-maps
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -218,4 +220,46 @@ module _
     is-injective g → is-nonsurjective f → is-nonsurjective (g ∘ f)
   is-nonsurjective-comp-is-injective-left G =
     map-trunc-Prop (nonim-comp-is-injective-left G)
+```
+
+### Decibable and not nonsurjective maps are surjective
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where abstract
+
+  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map :
+    is-inhabited-or-empty-map f → ¬ is-nonsurjective f → is-surjective f
+  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K b =
+    rec-coproduct id (λ np → ex-falso (K (unit-trunc-Prop (b , np)))) (H b)
+
+  is-surjective-is-not-nonsurjective-LEM :
+    level-LEM (l1 ⊔ l2) →
+    ¬ is-nonsurjective f → is-surjective f
+  is-surjective-is-not-nonsurjective-LEM lem =
+    is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map
+      ( λ y →
+        is-inhabited-or-empty-is-decidable-trunc-Prop
+          ( lem (trunc-Prop (fiber f y))))
+
+```
+
+### Assuming excluded middle, not surjective maps are nonsurjective
+
+```agda
+module _
+  {l1 l2 : Level}
+  (lem : level-LEM (l1 ⊔ l2))
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where abstract
+
+  is-nonsurjective-is-not-surjective-LEM :
+    ¬ is-surjective f → is-nonsurjective f
+  is-nonsurjective-is-not-surjective-LEM H =
+    rec-coproduct
+      ( id)
+      ( λ nF → ex-falso (H (is-surjective-is-not-nonsurjective-LEM nF)))
+      ( lem (is-nonsurjective-Prop f))
 ```
