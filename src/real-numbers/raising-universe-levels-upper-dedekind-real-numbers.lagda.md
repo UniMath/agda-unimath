@@ -34,8 +34,8 @@ open import real-numbers.upper-dedekind-real-numbers
 For every [universe](foundation.universe-levels.md) `𝒰` there is a type of
 [upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md)
 `upper-ℝ` relative to `𝒰`, `upper-ℝ 𝒰`. Given a larger universe `𝒱`, then we may
-{{#concept "raise" Disambiguation="a dedekind real number" Agda=raise-ℝ}} a
-upper Dedekind real number `x` from the universe `𝒰` to a upper Dedekind real
+{{#concept "raise" Disambiguation="an upper Dedekind real number" Agda=raise-upper-ℝ}}
+a upper Dedekind real number `x` from the universe `𝒰` to a upper Dedekind real
 number in the universe `𝒱`.
 
 ## Definition

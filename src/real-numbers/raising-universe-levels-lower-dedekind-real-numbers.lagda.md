@@ -34,8 +34,8 @@ open import real-numbers.lower-dedekind-real-numbers
 For every [universe](foundation.universe-levels.md) `𝒰` there is a type of
 [lower Dedekind real numbers](real-numbers.lower-dedekind-real-numbers.md)
 `lower-ℝ` relative to `𝒰`, `lower-ℝ 𝒰`. Given a larger universe `𝒱`, then we may
-{{#concept "raise" Disambiguation="a dedekind real number" Agda=raise-ℝ}} a
-lower Dedekind real number `x` from the universe `𝒰` to a lower Dedekind real
+{{#concept "raise" Disambiguation="a lower Dedekind real number" Agda=raise-lower-ℝ}}
+a lower Dedekind real number `x` from the universe `𝒰` to a lower Dedekind real
 number in the universe `𝒱`.
 
 ## Definition
