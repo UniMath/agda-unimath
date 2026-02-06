@@ -20,10 +20,13 @@ open import real-numbers.alternation-sequences-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
 open import real-numbers.binary-maximum-real-numbers public
+open import real-numbers.binary-mean-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
+open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers public
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
@@ -55,6 +58,7 @@ open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
 open import real-numbers.isometry-difference-real-numbers public
 open import real-numbers.isometry-negation-real-numbers public
+open import real-numbers.iterated-halving-difference-real-numbers public
 open import real-numbers.large-additive-group-of-real-numbers public
 open import real-numbers.large-multiplicative-group-of-positive-real-numbers public
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
@@ -131,10 +135,9 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
-open import real-numbers.unbounded-endomaps-real-numbers public
+open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
-open import real-numbers.uniformly-continuous-real-functions-proper-closed-intervals-real-numbers public
+open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
 open import real-numbers.zero-nonnegative-real-numbers public

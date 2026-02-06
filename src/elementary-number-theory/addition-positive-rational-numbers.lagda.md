@@ -12,6 +12,7 @@ module elementary-number-theory.addition-positive-rational-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-integer-fractions
@@ -131,6 +132,37 @@ interchange-law-add-add-ℚ⁺ x y u v =
       ( rational-ℚ⁺ v))
 ```
 
+### Addition with a positive rational number is a strictly increasing map
+
+```agda
+abstract
+  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+  le-left-add-rational-ℚ⁺ x d =
+    concatenate-leq-le-ℚ
+      ( x)
+      ( zero-ℚ +ℚ x)
+      ( (rational-ℚ⁺ d) +ℚ x)
+      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+      ( preserves-le-left-add-ℚ
+        ( x)
+        ( zero-ℚ)
+        ( rational-ℚ⁺ d)
+        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ d)))
+
+  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+  le-right-add-rational-ℚ⁺ x d =
+    inv-tr
+      ( le-ℚ x)
+      ( commutative-add-ℚ x (rational-ℚ⁺ d))
+      ( le-left-add-rational-ℚ⁺ x d)
+
+  leq-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (rational-ℚ⁺ d +ℚ x)
+  leq-left-add-rational-ℚ⁺ x d = leq-le-ℚ (le-left-add-rational-ℚ⁺ x d)
+
+  leq-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (x +ℚ rational-ℚ⁺ d)
+  leq-right-add-rational-ℚ⁺ x d = leq-le-ℚ (le-right-add-rational-ℚ⁺ x d)
+```
+
 ### The sum of two positive rational numbers is greater than each of them
 
 ```agda
@@ -231,12 +263,18 @@ module _
     le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
     le-left-summand-split-ℚ⁺ = le-mediant-zero-ℚ⁺ x
 
+    leq-left-summand-split-ℚ⁺ : leq-ℚ⁺ left-summand-split-ℚ⁺ x
+    leq-left-summand-split-ℚ⁺ = leq-le-ℚ le-left-summand-split-ℚ⁺
+
     le-right-summand-split-ℚ⁺ : le-ℚ⁺ right-summand-split-ℚ⁺ x
     le-right-summand-split-ℚ⁺ =
       tr
         ( le-ℚ⁺ right-summand-split-ℚ⁺)
         ( eq-add-split-ℚ⁺)
         ( le-right-add-ℚ⁺ left-summand-split-ℚ⁺ right-summand-split-ℚ⁺)
+
+    leq-right-summand-split-ℚ⁺ : leq-ℚ⁺ right-summand-split-ℚ⁺ x
+    leq-right-summand-split-ℚ⁺ = leq-le-ℚ le-right-summand-split-ℚ⁺
 
     le-add-split-ℚ⁺ :
       (p q r s : ℚ) →
@@ -259,37 +297,6 @@ module _
           { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
           ( p<q+left)
           ( r<s+right))
-```
-
-### Addition with a positive rational number is an increasing map
-
-```agda
-abstract
-  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
-  le-left-add-rational-ℚ⁺ x d =
-    concatenate-leq-le-ℚ
-      ( x)
-      ( zero-ℚ +ℚ x)
-      ( (rational-ℚ⁺ d) +ℚ x)
-      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-      ( preserves-le-left-add-ℚ
-        ( x)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ d)
-        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ d)))
-
-  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
-  le-right-add-rational-ℚ⁺ x d =
-    inv-tr
-      ( le-ℚ x)
-      ( commutative-add-ℚ x (rational-ℚ⁺ d))
-      ( le-left-add-rational-ℚ⁺ x d)
-
-  leq-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (rational-ℚ⁺ d +ℚ x)
-  leq-left-add-rational-ℚ⁺ x d = leq-le-ℚ (le-left-add-rational-ℚ⁺ x d)
-
-  leq-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (x +ℚ rational-ℚ⁺ d)
-  leq-right-add-rational-ℚ⁺ x d = leq-le-ℚ (le-right-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map

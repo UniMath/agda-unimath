@@ -34,6 +34,7 @@ open import order-theory.large-posets
 open import real-numbers.addition-positive-and-negative-real-numbers
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -51,7 +52,6 @@ open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -71,22 +71,22 @@ module _
   {l : Level} (x : ℝ⁺ l)
   where
 
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ :
-    unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ :
+    cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( l)
       ( l)
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ =
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ =
     ( ( ( mul-ℝ (real-ℝ⁺ x) ,
           is-pointwise-ε-δ-continuous-map-uniformly-continuous-endomap-ℝ
             ( uniformly-continuous-map-right-mul-ℝ l (real-ℝ⁺ x))) ,
         λ _ _ → preserves-le-left-mul-ℝ⁺ x) ,
-      is-unbounded-above-left-mul-real-ℝ⁺ l x ,
-      is-unbounded-below-left-mul-real-ℝ⁺ l x)
+      is-cofinal-left-mul-real-ℝ⁺ l x ,
+      is-coinitial-left-mul-real-ℝ⁺ l x)
 
   aut-left-mul-real-ℝ⁺ : Aut (ℝ l)
   aut-left-mul-real-ℝ⁺ =
-    aut-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-      ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺)
+    aut-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+      ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺)
 
   opaque
     real-inv-ℝ⁺ : ℝ l
@@ -236,6 +236,11 @@ abstract
             by ap positive-real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)
           ＝ raise-one-ℝ⁺ lzero
             by eq-raise-ℝ⁺ one-ℝ⁺))
+
+  real-inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
+  real-inv-positive-real-ℚ⁺ q =
+    ap real-ℝ⁺ (inv-positive-real-ℚ⁺ q)
 ```
 
 ### The multiplicative inverse operation reverses inequality

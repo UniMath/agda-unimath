@@ -41,6 +41,8 @@ open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -66,8 +68,6 @@ open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.strictly-increasing-endomaps-real-numbers
 open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
-open import real-numbers.unbounded-endomaps-real-numbers
 ```
 
 </details>
@@ -278,10 +278,10 @@ abstract
 
 ```agda
 abstract
-  power-is-even-neg-ℝ :
+  power-neg-is-even-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ power-ℝ n x
-  power-is-even-neg-ℝ _ x (k , refl) =
+  power-neg-is-even-exponent-ℝ _ x (k , refl) =
     equational-reasoning
       power-ℝ (k *ℕ 2) (neg-ℝ x)
       ＝ power-ℝ k (square-ℝ (neg-ℝ x))
@@ -296,10 +296,10 @@ abstract
 
 ```agda
 abstract
-  power-is-odd-neg-ℝ :
+  power-neg-is-odd-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-odd-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ neg-ℝ (power-ℝ n x)
-  power-is-odd-neg-ℝ n x odd-n =
+  power-neg-is-odd-exponent-ℝ n x odd-n =
     let (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
       equational-reasoning
@@ -309,7 +309,7 @@ abstract
         ＝ power-ℝ (k *ℕ 2) (neg-ℝ x) *ℝ neg-ℝ x
           by power-succ-ℝ _ _
         ＝ power-ℝ (k *ℕ 2) x *ℝ neg-ℝ x
-          by ap-mul-ℝ (power-is-even-neg-ℝ _ x (k , refl)) refl
+          by ap-mul-ℝ (power-neg-is-even-exponent-ℝ _ x (k , refl)) refl
         ＝ neg-ℝ (power-ℝ (k *ℕ 2) x *ℝ x)
           by right-negative-law-mul-ℝ _ _
         ＝ neg-ℝ (power-ℝ (succ-ℕ (k *ℕ 2)) x)
@@ -389,10 +389,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ (power-ℝ n (real-ℝ⁰⁺ x)) (power-ℝ n (real-ℝ⁰⁺ y))
   preserves-leq-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
-    leq-sim-ℝ
-      ( transitive-sim-ℝ _ one-ℝ _
-        ( sim-raise-ℝ l2 one-ℝ)
-        ( symmetric-sim-ℝ (sim-raise-ℝ l1 one-ℝ)))
+    leq-sim-ℝ (sim-raise-raise-ℝ l1 l2 one-ℝ)
   preserves-leq-power-real-ℝ⁰⁺ (succ-ℕ n) x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -466,7 +463,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
     sim-ℝ (power-ℝ n x) (power-ℝ n y)
   preserves-sim-power-ℝ {l1} {l2} 0 _ =
-    transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 one-ℝ) (sim-raise-ℝ' l1 one-ℝ)
+    sim-raise-raise-ℝ l1 l2 one-ℝ
   preserves-sim-power-ℝ 1 x~y = x~y
   preserves-sim-power-ℝ (succ-ℕ n@(succ-ℕ _)) x~y =
     preserves-sim-mul-ℝ (preserves-sim-power-ℝ n x~y) x~y
@@ -569,10 +566,10 @@ abstract
 
 ```agda
 abstract
-  is-unbounded-above-power-is-odd-exponent-ℝ :
+  is-cofinal-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
-    is-unbounded-above-endomap-ℝ (power-ℝ {l} n)
-  is-unbounded-above-power-is-odd-exponent-ℝ l n odd-n q =
+    is-cofinal-endomap-ℝ (power-ℝ {l} n)
+  is-cofinal-power-is-odd-exponent-ℝ l n odd-n q =
     map-exists _
       ( raise-real-ℚ l)
       ( λ p q≤pⁿ →
@@ -581,12 +578,12 @@ abstract
             ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
             ( sim-eq-ℝ (inv (power-real-ℚ n p))))
           ( preserves-leq-real-ℚ q≤pⁿ))
-      ( is-unbounded-above-power-is-odd-ℚ n odd-n q)
+      ( is-cofinal-power-is-odd-ℚ n odd-n q)
 
-  is-unbounded-below-power-is-odd-exponent-ℝ :
+  is-coinitial-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
-    is-unbounded-below-endomap-ℝ (power-ℝ {l} n)
-  is-unbounded-below-power-is-odd-exponent-ℝ l n odd-n q =
+    is-coinitial-endomap-ℝ (power-ℝ {l} n)
+  is-coinitial-power-is-odd-exponent-ℝ l n odd-n q =
     map-exists _
       ( raise-real-ℚ l)
       ( λ p pⁿ≤q →
@@ -595,5 +592,5 @@ abstract
             ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
             ( sim-eq-ℝ (inv (power-real-ℚ n p))))
           ( preserves-leq-real-ℚ pⁿ≤q))
-      ( is-unbounded-below-power-is-odd-ℚ n odd-n q)
+      ( is-coinitial-power-is-odd-ℚ n odd-n q)
 ```

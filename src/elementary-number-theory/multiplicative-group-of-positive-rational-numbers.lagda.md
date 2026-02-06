@@ -267,22 +267,22 @@ abstract
   inv-one-ℚ⁺ = inv-unit-Group group-mul-ℚ⁺
 ```
 
-### Multiplication by a positive rational number is unbounded above and below
+### Multiplication by a positive rational number is cofinal and below
 
 ```agda
 abstract
-  is-unbounded-above-left-mul-rational-ℚ⁺ :
+  is-cofinal-left-mul-rational-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) →
     exists ℚ (λ r → leq-ℚ-Prop q (rational-ℚ⁺ p *ℚ r))
-  is-unbounded-above-left-mul-rational-ℚ⁺ p q =
+  is-cofinal-left-mul-rational-ℚ⁺ p q =
     intro-exists
       ( rational-inv-ℚ⁺ p *ℚ q)
       ( leq-eq-ℚ (inv (is-section-left-div-ℚ⁺ p q)))
 
-  is-unbounded-below-left-mul-rational-ℚ⁺ :
+  is-coinitial-left-mul-rational-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) →
     exists ℚ (λ r → leq-ℚ-Prop (rational-ℚ⁺ p *ℚ r) q)
-  is-unbounded-below-left-mul-rational-ℚ⁺ p q =
+  is-coinitial-left-mul-rational-ℚ⁺ p q =
     intro-exists
       ( rational-inv-ℚ⁺ p *ℚ q)
       ( leq-eq-ℚ (is-section-left-div-ℚ⁺ p q))
