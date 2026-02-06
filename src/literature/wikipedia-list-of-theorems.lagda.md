@@ -190,6 +190,18 @@ open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
 ```
 
+### Monotone convergence theorem {#Q4454933}
+
+Known also as _Weierstrass' theorem_.
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+  ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
 ### Triangle inequality theorem {#Q208216}
 
 **Author:** [malarbol](https://github.com/malarbol)
@@ -223,8 +235,8 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
 
 ```agda
 open import metric-spaces.uniform-limit-theorem-metric-spaces using
-  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space
-  ; is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space)
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-pointwise-continuous-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}
