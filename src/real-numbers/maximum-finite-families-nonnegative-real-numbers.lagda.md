@@ -34,12 +34,12 @@ The
 {{#concept "maximum" Disambiguation="inhabited finite family, nonnegative real numbers" Agda=max-finite-family-ℝ⁰⁺}}
 of a family of
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) indexed by
-an [inhabited finite type](univalent-combinatorics.inhabited-finite-types.md) is
-their [least upper bound](order-theory.least-upper-bounds-large-posets.md).
+a [finite type](univalent-combinatorics.finite-types.md) is their
+[least upper bound](order-theory.least-upper-bounds-large-posets.md).
 
 ## Definition
 
-### The maximum of a nonempty finite sequence of nonnegative real numbers
+### The maximum of a finite sequence of nonnegative real numbers
 
 ```agda
 module _
