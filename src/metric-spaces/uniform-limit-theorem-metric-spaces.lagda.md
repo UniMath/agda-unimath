@@ -54,10 +54,11 @@ yields
 
 ### The uniform limit theorem for pointwise ε-δ continuous maps
 
-**Proof.** Let $u$ be a sequence of maps $uᵢ : X → Y$ that uniformly converges
-to $f$, i.e., it converges in the metric space of maps. Given arbitrary $x : X$
-and $ε : ℚ⁺$, we must produce $δ : ℚ⁺$ such that every $x' : X$ in the
-$δ$-neighborhood of $x$ is sent by $f$ into the $ε$-neighborhood of $f(x)$.
+**Proof.** Let $u$ be a sequence of pointwise ε-δ continuous maps $uₙ : X → Y$
+that uniformly converges to $f$, i.e., it converges in the metric space of maps.
+Given arbitrary $x : X$ and $ε : ℚ⁺$, we must produce $δ : ℚ⁺$ such that every
+$x' : X$ in the $δ$-neighborhood of $x$ is sent by $f$ into the $ε$-neighborhood
+of $f(x)$.
 
 Since $u$ converges uniformly to $f$, choose a modulus $m$ of convergence. Write
 $ε$ as a ternary sum of positive rationals $ε = (ε₁ + ε₂) + ε₃$, and let
