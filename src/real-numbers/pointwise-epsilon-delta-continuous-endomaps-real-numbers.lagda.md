@@ -28,7 +28,7 @@ open import real-numbers.uniformly-continuous-endomaps-real-numbers
 A
 {{#concept "pointwise ε-δ continuous" Disambiguation="from ℝ to ℝ" Agda=is-pointwise-ε-δ-continuous-endomap-ℝ}}
 [endomap](foundation.endomorphisms.md) on the
-[real numbers](real-numbers.dedekind-real-numbers.md) to themselves is a
+[real numbers](real-numbers.dedekind-real-numbers.md) is a
 [pointwise ε-δ continuous function](metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces.md)
 from the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md) to
