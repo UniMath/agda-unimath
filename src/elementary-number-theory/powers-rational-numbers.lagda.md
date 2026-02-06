@@ -41,6 +41,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
@@ -417,6 +418,20 @@ abstract
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
             ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
+```
+
+### Odd powers of rational numbers preserve inequality
+
+```agda
+abstract
+  preserves-leq-power-is-odd-exponent-ℚ :
+    (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
+    leq-ℚ (power-ℚ n p) (power-ℚ n q)
+  preserves-leq-power-is-odd-exponent-ℚ n p q odd-n p≤q =
+    trichotomy-le-ℚ p q
+      ( leq-le-ℚ ∘ preserves-le-odd-power-ℚ n p q odd-n)
+      ( leq-eq-ℚ ∘ ap (power-ℚ n))
+      ( λ q<p → ex-falso (not-leq-le-ℚ q p q<p p≤q))
 ```
 
 ### If `|ε| < 1`, `εⁿ` approaches 0
