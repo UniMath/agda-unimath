@@ -477,7 +477,7 @@ abstract
               ( |ε|<1))))
 ```
 
-### If `1 ≤ q` and `n` is nonzero, `q ≤ qⁿ`
+### If `1 ≤ q` and `n` is nonzero, then `q ≤ qⁿ`
 
 ```agda
 abstract
