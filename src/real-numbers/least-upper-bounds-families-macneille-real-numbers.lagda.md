@@ -143,7 +143,7 @@ module _
       in do
         (q , q∈Uu) ← is-inhabited-upper-cut-macneille-ℝ u
         (r , q<r) ← exists-greater-ℚ q
-        intro-exists r(intro-exists q (q<r , (λ i → pr2 (y≤u i) q q∈Uu)))
+        intro-exists r (intro-exists q (q<r , (λ i → pr2 (y≤u i) q q∈Uu)))
 
   abstract
     forward-implication-is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -245,10 +245,10 @@ module _
               ( intro-exists
                 ( q)
                 ( p<q ,
-                 ( q∉Ui ∘
-                   is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-                    ( i)
-                    ( q)))))
+                  ( q∉Ui ∘
+                    is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
+                      ( i)
+                      ( q)))))
           ( H)
 
   abstract
