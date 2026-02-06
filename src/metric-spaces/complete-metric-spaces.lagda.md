@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-types
@@ -23,10 +24,14 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 ```
 
 </details>
@@ -180,76 +185,69 @@ module _
       ( convergent-cauchy-approximation-Complete-Metric-Space A u)
 ```
 
-### Any complete metric space is a retract of its type of Cauchy approximations
-
-```agda
-module _
-  {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
-  where
-
-  abstract
-    is-retraction-limit-cauchy-approximation-Complete-Metric-Space :
-      ( limit-cauchy-approximation-Complete-Metric-Space A ∘
-        const-cauchy-approximation-Metric-Space
-          ( metric-space-Complete-Metric-Space A)) ~
-      ( id)
-    is-retraction-limit-cauchy-approximation-Complete-Metric-Space x =
-      all-eq-is-limit-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)
-        ( const-cauchy-approximation-Metric-Space
-          ( metric-space-Complete-Metric-Space A)
-          ( x))
-        ( limit-cauchy-approximation-Complete-Metric-Space
-          ( A)
-          ( const-cauchy-approximation-Metric-Space
-            ( metric-space-Complete-Metric-Space A)
-            ( x)))
-        ( x)
-        ( is-limit-limit-cauchy-approximation-Complete-Metric-Space
-          ( A)
-          ( const-cauchy-approximation-Metric-Space
-            ( metric-space-Complete-Metric-Space A)
-            ( x)))
-        ( is-limit-const-cauchy-approximation-Metric-Space
-          ( metric-space-Complete-Metric-Space A)
-          ( x))
-
-  retract-limit-cauchy-approximation-Complete-Metric-Space :
-    retract
-      ( cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A))
-      ( type-Complete-Metric-Space A)
-  retract-limit-cauchy-approximation-Complete-Metric-Space =
-    ( ( const-cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space A)) ,
-      ( limit-cauchy-approximation-Complete-Metric-Space A) ,
-      ( is-retraction-limit-cauchy-approximation-Complete-Metric-Space))
-```
-
 ### Saturation of the limit
 
 ```agda
 module _
   {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
   (f : cauchy-approximation-Metric-Space (metric-space-Complete-Metric-Space A))
-  where
+  where abstract
 
-  abstract
-    saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space :
-      (ε : ℚ⁺) →
-      neighborhood-Complete-Metric-Space A
-        ( ε)
-        ( map-cauchy-approximation-Metric-Space
-          ( metric-space-Complete-Metric-Space A)
-          ( f)
-          ( ε))
-        ( limit-cauchy-approximation-Complete-Metric-Space A f)
-    saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space =
-      saturated-is-limit-cauchy-approximation-Metric-Space
+  saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space :
+    (ε : ℚ⁺) →
+    neighborhood-Complete-Metric-Space A
+      ( ε)
+      ( map-cauchy-approximation-Metric-Space
         ( metric-space-Complete-Metric-Space A)
         ( f)
-        ( limit-cauchy-approximation-Complete-Metric-Space A f)
-        ( is-limit-limit-cauchy-approximation-Complete-Metric-Space A f)
+        ( ε))
+      ( limit-cauchy-approximation-Complete-Metric-Space A f)
+  saturated-is-limit-limit-cauchy-approximation-Complete-Metric-Space =
+    saturated-is-limit-cauchy-approximation-Metric-Space
+      ( metric-space-Complete-Metric-Space A)
+      ( f)
+      ( limit-cauchy-approximation-Complete-Metric-Space A f)
+      ( is-limit-limit-cauchy-approximation-Complete-Metric-Space A f)
+```
+
+### A metric space is complete if and only if the identity extends to the Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Metric-Space l1 l2)
+  where
+
+  iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space :
+    extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-short-map-Metric-Space M) ↔
+    is-complete-Metric-Space M
+  iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space =
+    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-short-map-Metric-Space M)
+```
+
+### A metric space is complete if and only if the unit short map of Cauchy precompletions has a retraction
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Metric-Space l1 l2)
+  where
+
+  iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space :
+    retraction-short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( short-map-unit-cauchy-pseudocompletion-Metric-Space M) ↔
+    is-complete-Metric-Space M
+  iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space =
+    iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space
+      ( M)
 ```
 
 ## External links

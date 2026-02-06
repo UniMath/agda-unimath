@@ -97,3 +97,42 @@ module _
     ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ,
       preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
+
+### The action of short maps on Cauchy approximations preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : short-map-Pseudometric-Space A B)
+  (f~g : htpy-map-short-map-Pseudometric-Space A B f g)
+  where
+
+  htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    htpy-map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( short-map-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( short-map-cauchy-pseudocompletion-Pseudometric-Space A B g)
+  htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
+### The action of short maps on Cauchy approximations is natural w.r.t. the unit map
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  coh-square-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ∘
+      map-unit-cauchy-pseudocompletion-Pseudometric-Space A) ~
+    ( map-unit-cauchy-pseudocompletion-Pseudometric-Space B ∘
+      map-short-map-Pseudometric-Space A B f)
+  coh-square-map-short-map-cauchy-pseudocompletion-Pseudometric-Space x =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
+```

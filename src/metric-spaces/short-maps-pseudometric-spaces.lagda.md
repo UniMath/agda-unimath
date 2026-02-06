@@ -338,3 +338,21 @@ module _
     short-map-isometry-Pseudometric-Space ,
     is-emb-short-map-isometry-Pseudometric-Space
 ```
+
+### Retractions of short maps between pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  retraction-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  retraction-short-map-Pseudometric-Space =
+    Σ ( short-map-Pseudometric-Space B A)
+      ( λ g →
+        map-short-map-Pseudometric-Space B A g ∘
+        map-short-map-Pseudometric-Space A B f ~
+        id-map-Pseudometric-Space A)
+```
