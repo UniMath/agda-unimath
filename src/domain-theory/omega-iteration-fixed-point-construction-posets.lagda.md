@@ -9,7 +9,6 @@ module domain-theory.omega-iteration-fixed-point-construction-posets where
 ```agda
 open import domain-theory.omega-continuous-maps-posets
 
-open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -20,7 +19,6 @@ open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.universe-levels
 
-open import order-theory.inflationary-maps-posets
 open import order-theory.increasing-sequences-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets
@@ -148,5 +146,5 @@ module _
 
 ## See also
 
-- [Kleene's fixed point theorem for posets](domain-theory.keenes-fixed-point-theorem-posets.md)
-- [Kleene's fixed point theorem for ω-complete posets](domain-theory.keenes-fixed-point-theorem-omega-complete-posets.md)
+- [Kleene's fixed point theorem for posets](domain-theory.kleenes-fixed-point-theorem-posets.md)
+- [Kleene's fixed point theorem for ω-complete posets](domain-theory.kleenes-fixed-point-theorem-omega-complete-posets.md)

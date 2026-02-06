@@ -10,7 +10,6 @@ module domain-theory.kleenes-fixed-point-theorem-posets where
 open import domain-theory.omega-continuous-maps-posets
 open import domain-theory.omega-iteration-fixed-point-construction-posets
 
-open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
