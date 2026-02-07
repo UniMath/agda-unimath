@@ -14,12 +14,14 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.embeddings
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.raising-universe-levels
@@ -120,6 +122,34 @@ abstract
 ```agda
 eq-raise-ℝ : {l : Level} (x : ℝ l) → x ＝ raise-ℝ l x
 eq-raise-ℝ {l} x = eq-sim-ℝ (sim-raise-ℝ l x)
+```
+
+### Raising a real is an injection and an embedding
+
+```agda
+abstract
+  is-injective-raise-ℝ :
+    {l0 : Level} (l : Level) → is-injective (raise-ℝ {l0} l)
+  is-injective-raise-ℝ l {x} {y} p =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        x
+        ~ℝ raise-ℝ l x
+          by sim-raise-ℝ l x
+        ~ℝ raise-ℝ l y
+          by sim-eq-ℝ p
+        ~ℝ y
+          by sim-raise-ℝ' l y)
+
+  injection-raise-ℝ : {l0 : Level} (l : Level) → injection (ℝ l0) (ℝ (l0 ⊔ l))
+  injection-raise-ℝ l = (raise-ℝ l , is-injective-raise-ℝ l)
+
+  is-emb-raise-ℝ : {l0 : Level} (l : Level) → is-emb (raise-ℝ {l0} l)
+  is-emb-raise-ℝ {l0} l =
+    is-emb-is-injective (is-set-ℝ (l0 ⊔ l)) (is-injective-raise-ℝ l)
+
+  emb-raise-ℝ : {l0 : Level} (l : Level) → ℝ l0 ↪ ℝ (l0 ⊔ l)
+  emb-raise-ℝ l = (raise-ℝ l , is-emb-raise-ℝ l)
 ```
 
 ### `x` and `y` are similar if and only if `x` raised to `y`'s universe level equals `y` raised to `x`'s universe level
