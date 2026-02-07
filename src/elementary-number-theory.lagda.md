@@ -36,7 +36,6 @@ open import elementary-number-theory.bernoullis-inequality-positive-rational-num
 open import elementary-number-theory.bezouts-lemma-integers public
 open import elementary-number-theory.bezouts-lemma-natural-numbers public
 open import elementary-number-theory.binary-sum-decompositions-natural-numbers public
-open import elementary-number-theory.binary-sum-decompositions-positive-rational-numbers public
 open import elementary-number-theory.binomial-coefficients public
 open import elementary-number-theory.binomial-theorem-integers public
 open import elementary-number-theory.binomial-theorem-natural-numbers public
@@ -231,7 +230,6 @@ open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.sylvesters-sequence public
 open import elementary-number-theory.taxicab-numbers public
 open import elementary-number-theory.telephone-numbers public
-open import elementary-number-theory.ternary-sum-decompositions-positive-rational-numbers public
 open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public

@@ -12,7 +12,6 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.ternary-sum-decompositions-positive-rational-numbers
 
 open import foundation.axiom-of-countable-choice
 open import foundation.dependent-pair-types
@@ -108,9 +107,9 @@ module _
       in do
         (m , is-mod-m) ← L
         let
-          ε₁ = left-summand-ternary-sum-decomposition-ℚ⁺ ε
-          ε₂ = middle-summand-ternary-sum-decomposition-ℚ⁺ ε
-          ε₃ = right-summand-ternary-sum-decomposition-ℚ⁺ ε
+          ε₁ = left-summand-split-ternary-ℚ⁺ ε
+          ε₂ = middle-summand-split-ternary-ℚ⁺ ε
+          ε₃ = right-summand-split-ternary-ℚ⁺ ε
           ε₁₃ = min-ℚ⁺ ε₁ ε₃
           N = m ε₁₃
 
@@ -160,7 +159,7 @@ module _
           ( λ x' Nx' →
             tr
               ( is-upper-bound-dist-Metric-Space Y (f x) (f x'))
-              ( eq-add-ternary-sum-decomposition-ℚ⁺ ε)
+              ( eq-add-split-ternary-ℚ⁺ ε)
               ( triangular-neighborhood-Metric-Space
                 ( Y)
                 ( f x)
