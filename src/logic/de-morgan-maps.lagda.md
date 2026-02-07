@@ -45,6 +45,8 @@ open import logic.de-morgan-types
 open import logic.de-morgans-law
 open import logic.double-negation-eliminating-maps
 open import logic.double-negation-elimination
+open import logic.propositionally-decidable-maps
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -336,4 +338,21 @@ module _
       ( map-neg (inclusion-retract (retract-fiber-retract-map f g R x)))
       ( map-neg (map-retraction-retract (retract-fiber-retract-map f g R x)))
       ( G (map-codomain-inclusion-retract-map f g R x))
+```
+
+### Propositionally decidable maps are De Morgan
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-de-morgan-map-is-inhabited-or-empty-map :
+    is-inhabited-or-empty-map f → is-de-morgan-map f
+  is-de-morgan-map-is-inhabited-or-empty-map H b =
+    is-decidable-iff
+      ( is-empty-type-trunc-Prop')
+      ( is-empty-type-trunc-Prop)
+      ( is-decidable-neg (is-decidable-trunc-Prop-is-inhabited-or-empty (H b)))
 ```

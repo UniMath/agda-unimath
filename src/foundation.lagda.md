@@ -304,6 +304,7 @@ open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.logical-operations-booleans public
+open import foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-types public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public

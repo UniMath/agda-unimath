@@ -70,12 +70,17 @@ module _
   is-projective-cardinality : UU (l1 ⊔ lsuc l2)
   is-projective-cardinality = is-projective-Cardinal l2 (cardinality X)
 
-  is-prop-is-projective-cardinality : is-prop is-projective-cardinality
+module _
+  {l1 l2 : Level} (X : Set l1)
+  where
+
+  is-prop-is-projective-cardinality : is-prop (is-projective-cardinality l2 X)
   is-prop-is-projective-cardinality =
     is-prop-is-projective-Cardinal l2 (cardinality X)
 
   eq-compute-is-projective-prop-cardinality :
-    is-projective-prop-cardinality ＝ is-projective-prop-Level' l2 (type-Set X)
+    is-projective-prop-cardinality l2 X ＝
+    is-projective-prop-Level' l2 (type-Set X)
   eq-compute-is-projective-prop-cardinality =
     triangle-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ lsuc l2))
@@ -83,22 +88,22 @@ module _
       ( X)
 
   eq-compute-is-projective-cardinality :
-    is-projective-cardinality ＝ is-projective-Level' l2 (type-Set X)
+    is-projective-cardinality l2 X ＝ is-projective-Level' l2 (type-Set X)
   eq-compute-is-projective-cardinality =
     ap type-Prop eq-compute-is-projective-prop-cardinality
 
   compute-is-projective-cardinality :
-    is-projective-cardinality ≃ is-projective-Level' l2 (type-Set X)
+    is-projective-cardinality l2 X ≃ is-projective-Level' l2 (type-Set X)
   compute-is-projective-cardinality =
     equiv-eq eq-compute-is-projective-cardinality
 
   unit-is-projective-cardinality :
-    is-projective-Level' l2 (type-Set X) → is-projective-cardinality
+    is-projective-Level' l2 (type-Set X) → is-projective-cardinality l2 X
   unit-is-projective-cardinality =
     map-inv-equiv compute-is-projective-cardinality
 
   inv-unit-is-projective-cardinality :
-    is-projective-cardinality → is-projective-Level' l2 (type-Set X)
+    is-projective-cardinality l2 X → is-projective-Level' l2 (type-Set X)
   inv-unit-is-projective-cardinality =
     map-equiv compute-is-projective-cardinality
 ```

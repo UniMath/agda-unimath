@@ -9,6 +9,7 @@ module foundation.nonsurjective-maps where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-maps
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
@@ -25,6 +26,7 @@ open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
+open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -34,6 +36,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 
+open import logic.de-morgan-maps
 open import logic.propositionally-decidable-maps
 open import logic.propositionally-decidable-types
 ```
@@ -243,6 +246,81 @@ module _
       ( λ y →
         is-inhabited-or-empty-is-decidable-trunc-Prop
           ( lem (trunc-Prop (fiber f y))))
+```
+
+### If the codomain is searchable and `f` is decidable, then if `f` is not surjective it is nonsurjective
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where abstract
+
+  is-surjective-is-not-nonim-is-decidable-map :
+    is-decidable-map f → ¬ nonim f → is-surjective f
+  is-surjective-is-not-nonim-is-decidable-map d nn b =
+    unit-trunc-Prop
+      ( double-negation-elim-is-decidable (d b) (λ nf → nn (b , nf)))
+
+  is-decidable-nonim-has-decidable-Σ :
+    has-decidable-Σ B → is-decidable-map f → is-decidable (nonim f)
+  is-decidable-nonim-has-decidable-Σ h d =
+    h ( (λ b → ¬ fiber f b) , (λ b → is-decidable-neg (d b)))
+
+  is-nonsurjective-is-not-surjective-has-decidable-Σ :
+    has-decidable-Σ B →
+    is-decidable-map f →
+    ¬ is-surjective f → is-nonsurjective f
+  is-nonsurjective-is-not-surjective-has-decidable-Σ h d H =
+    rec-coproduct
+      ( unit-trunc-Prop)
+      ( λ nnim →
+        ex-falso (H (is-surjective-is-not-nonim-is-decidable-map d nnim)))
+      ( is-decidable-nonim-has-decidable-Σ h d)
+
+  is-surjective-not-nonim-is-inhabited-or-empty-map :
+    is-inhabited-or-empty-map f → ¬ nonim f → is-surjective f
+  is-surjective-not-nonim-is-inhabited-or-empty-map H nn b =
+    rec-coproduct
+      ( id)
+      ( λ nf → ex-falso (nn (b , nf)))
+      ( H b)
+
+  is-decidable-nonim-has-decidable-Σ-Level-is-inhabited-or-empty-map :
+    has-decidable-Σ-Level (l1 ⊔ l2) B →
+    is-inhabited-or-empty-map f →
+    is-decidable (nonim f)
+  is-decidable-nonim-has-decidable-Σ-Level-is-inhabited-or-empty-map h Hf =
+    h ( (λ b → ¬ fiber f b) , is-de-morgan-map-is-inhabited-or-empty-map Hf)
+
+  is-nonsurjective-is-not-surjective-has-decidable-Σ-Level-is-inhabited-or-empty-map :
+    has-decidable-Σ-Level (l1 ⊔ l2) B →
+    is-inhabited-or-empty-map f →
+    ¬ is-surjective f → is-nonsurjective f
+  is-nonsurjective-is-not-surjective-has-decidable-Σ-Level-is-inhabited-or-empty-map
+    h Hf H =
+    rec-coproduct
+      ( unit-trunc-Prop)
+      ( λ nnim →
+        ex-falso
+          ( H (is-surjective-not-nonim-is-inhabited-or-empty-map Hf nnim)))
+      ( is-decidable-nonim-has-decidable-Σ-Level-is-inhabited-or-empty-map h Hf)
+
+  is-decidable-nonim-has-decidable-Σ-is-inhabited-or-empty-map :
+    has-decidable-Σ B →
+    is-inhabited-or-empty-map f →
+    is-decidable (nonim f)
+  is-decidable-nonim-has-decidable-Σ-is-inhabited-or-empty-map h =
+    is-decidable-nonim-has-decidable-Σ-Level-is-inhabited-or-empty-map h
+
+  is-nonsurjective-is-not-surjective-has-decidable-Σ-is-inhabited-or-empty-map :
+    has-decidable-Σ B →
+    is-inhabited-or-empty-map f →
+    ¬ is-surjective f → is-nonsurjective f
+  is-nonsurjective-is-not-surjective-has-decidable-Σ-is-inhabited-or-empty-map
+    h =
+    is-nonsurjective-is-not-surjective-has-decidable-Σ-Level-is-inhabited-or-empty-map
+      ( h)
 ```
 
 ### Assuming excluded middle, not surjective maps are nonsurjective
