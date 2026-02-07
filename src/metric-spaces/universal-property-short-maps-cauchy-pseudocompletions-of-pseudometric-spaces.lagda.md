@@ -20,12 +20,12 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.maps-pseudometric-spaces
@@ -54,7 +54,7 @@ maps [short maps](metric-spaces.short-maps-pseudometric-spaces.md) `g : C P → 
 short maps `g ∘ κ : P → M`. For any
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md),
 `u : C P`, its
-[image](metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces.md)
+[image](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 `C(g ∘ κ) u : C M`
 [converges](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) to
 `g u` so `g` is determined by its restriction to `P`.
