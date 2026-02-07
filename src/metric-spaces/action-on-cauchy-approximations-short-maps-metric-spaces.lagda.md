@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces
@@ -36,7 +36,7 @@ open import metric-spaces.short-maps-pseudometric-spaces
 [metric spaces](metric-spaces.metric-spaces.md) act on
 [cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
 and induce a short map between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md).
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
 
 This action is functorial and preserves
 [limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).

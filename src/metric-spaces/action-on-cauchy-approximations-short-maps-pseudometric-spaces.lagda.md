@@ -20,7 +20,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
@@ -34,7 +34,7 @@ open import metric-spaces.short-maps-pseudometric-spaces
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
 [cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 and induce a short map between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md).
 
 ## Definitions
 

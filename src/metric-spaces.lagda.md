@@ -79,12 +79,12 @@ open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-maps public
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces public
-open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public

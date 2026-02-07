@@ -21,7 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -36,7 +36,7 @@ open import metric-spaces.short-maps-pseudometric-spaces
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 and induce an isometry between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md).
 
 ## Definitions
 
