@@ -12,6 +12,8 @@ module real-numbers.macneille-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
 open import foundation.conjunction
@@ -20,6 +22,7 @@ open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
@@ -27,9 +30,13 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -56,35 +63,37 @@ module _
   {l1 l2 : Level} (L : lower-ℝ l1) (U : upper-ℝ l2)
   where
 
-  is-open-upper-complement-lower-cut-prop-lower-upper-macneille-ℝ :
+  is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ :
     Prop (l1 ⊔ l2)
-  is-open-upper-complement-lower-cut-prop-lower-upper-macneille-ℝ =
+  is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ =
     ∀' ℚ
       ( λ q → cut-upper-ℝ U q ⇔
       ∃ ℚ (λ p → le-ℚ-Prop p q ∧ ¬' cut-lower-ℝ L p))
 
-  is-open-upper-complement-lower-cut-lower-upper-macneille-ℝ :
+  is-open-upper-complement-lower-cut-lower-upper-real-macneille-ℝ :
     UU (l1 ⊔ l2)
-  is-open-upper-complement-lower-cut-lower-upper-macneille-ℝ =
-    type-Prop is-open-upper-complement-lower-cut-prop-lower-upper-macneille-ℝ
+  is-open-upper-complement-lower-cut-lower-upper-real-macneille-ℝ =
+    type-Prop
+      ( is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ)
 
-  is-open-lower-complement-upper-cut-prop-lower-upper-macneille-ℝ :
+  is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ :
     Prop (l1 ⊔ l2)
-  is-open-lower-complement-upper-cut-prop-lower-upper-macneille-ℝ =
+  is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ =
     ∀' ℚ
       ( λ p →
         cut-lower-ℝ L p ⇔
         ∃ ℚ (λ q → le-ℚ-Prop p q ∧ ¬' cut-upper-ℝ U q))
 
-  is-open-lower-complement-upper-cut-lower-upper-macneille-ℝ :
+  is-open-lower-complement-upper-cut-lower-upper-real-macneille-ℝ :
     UU (l1 ⊔ l2)
-  is-open-lower-complement-upper-cut-lower-upper-macneille-ℝ =
-    type-Prop is-open-lower-complement-upper-cut-prop-lower-upper-macneille-ℝ
+  is-open-lower-complement-upper-cut-lower-upper-real-macneille-ℝ =
+    type-Prop
+      ( is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ)
 
   is-open-dedekind-macneille-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-open-dedekind-macneille-prop-lower-upper-ℝ =
-    is-open-upper-complement-lower-cut-prop-lower-upper-macneille-ℝ ∧
-    is-open-lower-complement-upper-cut-prop-lower-upper-macneille-ℝ
+    is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ ∧
+    is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ
 
   is-open-dedekind-macneille-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-open-dedekind-macneille-lower-upper-ℝ =
@@ -105,38 +114,38 @@ module _
   {l : Level} (x : macneille-ℝ l)
   where
 
-  lower-macneille-ℝ : lower-ℝ l
-  lower-macneille-ℝ = pr1 (pr1 x)
+  lower-real-macneille-ℝ : lower-ℝ l
+  lower-real-macneille-ℝ = pr1 (pr1 x)
 
-  upper-macneille-ℝ : upper-ℝ l
-  upper-macneille-ℝ = pr2 (pr1 x)
+  upper-real-macneille-ℝ : upper-ℝ l
+  upper-real-macneille-ℝ = pr2 (pr1 x)
 
   lower-cut-macneille-ℝ : subtype l ℚ
-  lower-cut-macneille-ℝ = cut-lower-ℝ lower-macneille-ℝ
+  lower-cut-macneille-ℝ = cut-lower-ℝ lower-real-macneille-ℝ
 
   upper-cut-macneille-ℝ : subtype l ℚ
-  upper-cut-macneille-ℝ = cut-upper-ℝ upper-macneille-ℝ
+  upper-cut-macneille-ℝ = cut-upper-ℝ upper-real-macneille-ℝ
 
   is-in-lower-cut-macneille-ℝ : ℚ → UU l
   is-in-lower-cut-macneille-ℝ =
-    is-in-cut-lower-ℝ lower-macneille-ℝ
+    is-in-cut-lower-ℝ lower-real-macneille-ℝ
 
   is-in-upper-cut-macneille-ℝ : ℚ → UU l
   is-in-upper-cut-macneille-ℝ =
-    is-in-cut-upper-ℝ upper-macneille-ℝ
+    is-in-cut-upper-ℝ upper-real-macneille-ℝ
 
   is-inhabited-lower-cut-macneille-ℝ : exists ℚ lower-cut-macneille-ℝ
   is-inhabited-lower-cut-macneille-ℝ =
-    is-inhabited-cut-lower-ℝ lower-macneille-ℝ
+    is-inhabited-cut-lower-ℝ lower-real-macneille-ℝ
 
   is-inhabited-upper-cut-macneille-ℝ : exists ℚ upper-cut-macneille-ℝ
   is-inhabited-upper-cut-macneille-ℝ =
-    is-inhabited-cut-upper-ℝ upper-macneille-ℝ
+    is-inhabited-cut-upper-ℝ upper-real-macneille-ℝ
 
   is-open-dedekind-macneille-macneille-ℝ :
     is-open-dedekind-macneille-lower-upper-ℝ
-      ( lower-macneille-ℝ)
-      ( upper-macneille-ℝ)
+      ( lower-real-macneille-ℝ)
+      ( upper-real-macneille-ℝ)
   is-open-dedekind-macneille-macneille-ℝ = pr2 x
 
   is-open-upper-complement-lower-cut-macneille-ℝ :
@@ -172,8 +181,8 @@ abstract
 ```agda
 eq-macneille-ℝ :
   {l : Level} (x y : macneille-ℝ l) →
-  lower-macneille-ℝ x ＝ lower-macneille-ℝ y →
-  upper-macneille-ℝ x ＝ upper-macneille-ℝ y →
+  lower-real-macneille-ℝ x ＝ lower-real-macneille-ℝ y →
+  upper-real-macneille-ℝ x ＝ upper-real-macneille-ℝ y →
   x ＝ y
 eq-macneille-ℝ {l} _ _ p q =
   eq-type-subtype (subtype-macneille-ℝ l) (eq-pair p q)
@@ -196,11 +205,17 @@ abstract
           ( q∈L)
       r∉U
         ( is-in-cut-le-ℚ-upper-ℝ
-          ( upper-macneille-ℝ x)
+          ( upper-real-macneille-ℝ x)
           ( q)
           ( r)
           ( q<r)
           ( q∈U))
+
+  is-disjoint-cut-macneille-ℝ :
+    {l : Level} (x : macneille-ℝ l) (q : ℚ) →
+    ¬ (is-in-lower-cut-macneille-ℝ x q × is-in-upper-cut-macneille-ℝ x q)
+  is-disjoint-cut-macneille-ℝ x q (lq , uq) =
+    is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ x q lq uq
 ```
 
 ## External links

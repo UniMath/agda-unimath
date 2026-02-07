@@ -49,32 +49,36 @@ module _
   (y : macneille-ℝ l2)
   where
 
-  leq-lower-prop-macneille-ℝ : Prop (l1 ⊔ l2)
-  leq-lower-prop-macneille-ℝ =
-    leq-lower-ℝ-Prop (lower-macneille-ℝ x) (lower-macneille-ℝ y)
+  leq-lower-real-prop-macneille-ℝ : Prop (l1 ⊔ l2)
+  leq-lower-real-prop-macneille-ℝ =
+    leq-lower-ℝ-Prop (lower-real-macneille-ℝ x) (lower-real-macneille-ℝ y)
 
-  leq-lower-macneille-ℝ : UU (l1 ⊔ l2)
-  leq-lower-macneille-ℝ = type-Prop leq-lower-prop-macneille-ℝ
+  leq-lower-real-macneille-ℝ : UU (l1 ⊔ l2)
+  leq-lower-real-macneille-ℝ = type-Prop leq-lower-real-prop-macneille-ℝ
 
-  is-prop-leq-lower-macneille-ℝ : is-prop leq-lower-macneille-ℝ
-  is-prop-leq-lower-macneille-ℝ = is-prop-type-Prop leq-lower-prop-macneille-ℝ
+  is-prop-leq-lower-real-macneille-ℝ : is-prop leq-lower-real-macneille-ℝ
+  is-prop-leq-lower-real-macneille-ℝ =
+    is-prop-type-Prop leq-lower-real-prop-macneille-ℝ
 
-  leq-upper-prop-macneille-ℝ : Prop (l1 ⊔ l2)
-  leq-upper-prop-macneille-ℝ =
-    leq-upper-ℝ-Prop (upper-macneille-ℝ x) (upper-macneille-ℝ y)
+  leq-upper-real-prop-macneille-ℝ : Prop (l1 ⊔ l2)
+  leq-upper-real-prop-macneille-ℝ =
+    leq-upper-ℝ-Prop (upper-real-macneille-ℝ x) (upper-real-macneille-ℝ y)
 
-  leq-upper-macneille-ℝ : UU (l1 ⊔ l2)
-  leq-upper-macneille-ℝ = type-Prop leq-upper-prop-macneille-ℝ
+  leq-upper-real-macneille-ℝ : UU (l1 ⊔ l2)
+  leq-upper-real-macneille-ℝ = type-Prop leq-upper-real-prop-macneille-ℝ
 
-  is-prop-leq-upper-macneille-ℝ : is-prop leq-upper-macneille-ℝ
-  is-prop-leq-upper-macneille-ℝ = is-prop-type-Prop leq-upper-prop-macneille-ℝ
+  is-prop-leq-upper-real-macneille-ℝ : is-prop leq-upper-real-macneille-ℝ
+  is-prop-leq-upper-real-macneille-ℝ =
+    is-prop-type-Prop leq-upper-real-prop-macneille-ℝ
 
   leq-macneille-ℝ : UU (l1 ⊔ l2)
-  leq-macneille-ℝ = leq-lower-macneille-ℝ × leq-upper-macneille-ℝ
+  leq-macneille-ℝ = leq-lower-real-macneille-ℝ × leq-upper-real-macneille-ℝ
 
   is-prop-leq-macneille-ℝ : is-prop leq-macneille-ℝ
   is-prop-leq-macneille-ℝ =
-    is-prop-product is-prop-leq-lower-macneille-ℝ is-prop-leq-upper-macneille-ℝ
+    is-prop-product
+      ( is-prop-leq-lower-real-macneille-ℝ)
+      ( is-prop-leq-upper-real-macneille-ℝ)
 
   leq-prop-macneille-ℝ : Prop (l1 ⊔ l2)
   leq-prop-macneille-ℝ = leq-macneille-ℝ , is-prop-leq-macneille-ℝ
@@ -89,10 +93,10 @@ module _
   {l1 l2 : Level} (x : macneille-ℝ l1) (y : macneille-ℝ l2)
   where
 
-  leq-upper-leq-lower-macneille-ℝ :
-    leq-lower-macneille-ℝ x y →
-    leq-upper-macneille-ℝ x y
-  leq-upper-leq-lower-macneille-ℝ lx⊆ly q y<q =
+  leq-upper-leq-lower-real-macneille-ℝ :
+    leq-lower-real-macneille-ℝ x y →
+    leq-upper-real-macneille-ℝ x y
+  leq-upper-leq-lower-real-macneille-ℝ lx⊆ly q y<q =
     elim-exists
       ( upper-cut-macneille-ℝ x q)
       ( λ p (p<q , p∉Ly) →
@@ -103,10 +107,10 @@ module _
           ( is-open-upper-complement-lower-cut-macneille-ℝ y q)
           ( y<q))
 
-  leq-lower-leq-upper-macneille-ℝ :
-    leq-upper-macneille-ℝ x y →
-    leq-lower-macneille-ℝ x y
-  leq-lower-leq-upper-macneille-ℝ uy⊆ux p p<x =
+  leq-lower-leq-upper-real-macneille-ℝ :
+    leq-upper-real-macneille-ℝ x y →
+    leq-lower-real-macneille-ℝ x y
+  leq-lower-leq-upper-real-macneille-ℝ uy⊆ux p p<x =
     elim-exists
       ( lower-cut-macneille-ℝ y p)
       ( λ q (p<q , q∉Ux) →
@@ -117,17 +121,17 @@ module _
         ( is-open-lower-complement-upper-cut-macneille-ℝ x p)
         ( p<x))
 
-  leq-macneille-leq-lower-macneille-ℝ :
-    leq-lower-macneille-ℝ x y →
+  leq-macneille-leq-lower-real-macneille-ℝ :
+    leq-lower-real-macneille-ℝ x y →
     leq-macneille-ℝ x y
-  leq-macneille-leq-lower-macneille-ℝ lx⊆ly =
-    ( lx⊆ly , leq-upper-leq-lower-macneille-ℝ lx⊆ly)
+  leq-macneille-leq-lower-real-macneille-ℝ lx⊆ly =
+    ( lx⊆ly , leq-upper-leq-lower-real-macneille-ℝ lx⊆ly)
 
-  leq-macneille-leq-upper-macneille-ℝ :
-    leq-upper-macneille-ℝ x y →
+  leq-macneille-leq-upper-real-macneille-ℝ :
+    leq-upper-real-macneille-ℝ x y →
     leq-macneille-ℝ x y
-  leq-macneille-leq-upper-macneille-ℝ uy⊆ux =
-    ( leq-lower-leq-upper-macneille-ℝ uy⊆ux , uy⊆ux)
+  leq-macneille-leq-upper-real-macneille-ℝ uy⊆ux =
+    ( leq-lower-leq-upper-real-macneille-ℝ uy⊆ux , uy⊆ux)
 ```
 
 ### Inequality on MacNeille reals is reflexive
@@ -136,8 +140,8 @@ module _
 refl-leq-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) → leq-macneille-ℝ x x
 refl-leq-macneille-ℝ x =
-  ( refl-leq-lower-ℝ (lower-macneille-ℝ x) ,
-    refl-leq-upper-ℝ (upper-macneille-ℝ x))
+  ( refl-leq-lower-ℝ (lower-real-macneille-ℝ x) ,
+    refl-leq-upper-ℝ (upper-real-macneille-ℝ x))
 ```
 
 ### Inequality on MacNeille reals is transitive
@@ -149,15 +153,15 @@ transitive-leq-macneille-ℝ :
   leq-macneille-ℝ y z → leq-macneille-ℝ x y → leq-macneille-ℝ x z
 transitive-leq-macneille-ℝ x y z y≤z x≤y =
   ( transitive-leq-lower-ℝ
-      ( lower-macneille-ℝ x)
-      ( lower-macneille-ℝ y)
-      ( lower-macneille-ℝ z)
+      ( lower-real-macneille-ℝ x)
+      ( lower-real-macneille-ℝ y)
+      ( lower-real-macneille-ℝ z)
       ( pr1 y≤z)
       ( pr1 x≤y) ,
     transitive-leq-upper-ℝ
-      ( upper-macneille-ℝ x)
-      ( upper-macneille-ℝ y)
-      ( upper-macneille-ℝ z)
+      ( upper-real-macneille-ℝ x)
+      ( upper-real-macneille-ℝ y)
+      ( upper-real-macneille-ℝ z)
       ( pr2 y≤z)
       ( pr2 x≤y))
 ```
@@ -171,13 +175,13 @@ antisymmetric-leq-macneille-ℝ :
 antisymmetric-leq-macneille-ℝ x y x≤y y≤x =
   eq-macneille-ℝ x y
     ( antisymmetric-leq-lower-ℝ
-      ( lower-macneille-ℝ x)
-      ( lower-macneille-ℝ y)
+      ( lower-real-macneille-ℝ x)
+      ( lower-real-macneille-ℝ y)
       ( pr1 x≤y)
       ( pr1 y≤x))
     ( antisymmetric-leq-upper-ℝ
-      ( upper-macneille-ℝ x)
-      ( upper-macneille-ℝ y)
+      ( upper-real-macneille-ℝ x)
+      ( upper-real-macneille-ℝ y)
       ( pr2 x≤y)
       ( pr2 y≤x))
 ```
