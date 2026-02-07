@@ -196,13 +196,6 @@ module _
   is-rational-rational-macneille-ℝ = pr2 (pr2 x)
 ```
 
-### The predicate of being zero
-
-```agda
-is-zero-macneille-ℝ : {l : Level} → macneille-ℝ l → UU l
-is-zero-macneille-ℝ x = sim-macneille-ℝ x zero-macneille-ℝ
-```
-
 ## Properties
 
 ### The inclusions are embeddings

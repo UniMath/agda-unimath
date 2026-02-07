@@ -40,8 +40,8 @@ open import real-numbers.raising-universe-levels-macneille-real-numbers
 open import real-numbers.rational-macneille-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
-open import real-numbers.strict-inequality-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-macneille-real-numbers
 ```
 
 </details>
@@ -364,26 +364,6 @@ module _
 
 abstract opaque
   unfolding neg-macneille-ℝ real-ℚ macneille-real-ℚ
-
-  eq-raise-zero-macneille-ℝ :
-    {l : Level} →
-    raise-zero-macneille-ℝ l ＝ raise-macneille-ℝ l zero-macneille-ℝ
-  eq-raise-zero-macneille-ℝ {l} =
-    eq-eq-lower-real-macneille-ℝ
-      ( raise-zero-macneille-ℝ l)
-      ( raise-macneille-ℝ l zero-macneille-ℝ)
-      ( refl)
-
-  sim-raise-zero-macneille-ℝ :
-    {l : Level} →
-    raise-zero-macneille-ℝ l ~ℝₘ zero-macneille-ℝ
-  sim-raise-zero-macneille-ℝ {l} =
-    transitive-sim-macneille-ℝ
-      ( raise-zero-macneille-ℝ l)
-      ( raise-macneille-ℝ l zero-macneille-ℝ)
-      ( zero-macneille-ℝ)
-      ( sim-raise-macneille-ℝ' l zero-macneille-ℝ)
-      ( sim-eq-macneille-ℝ eq-raise-zero-macneille-ℝ)
 
   is-zero-eq-neg-macneille-ℝ :
     {l : Level} {x : macneille-ℝ l} →
