@@ -1,7 +1,7 @@
 # Cauchy pseudocompletions of complete metric space
 
 ```agda
-module metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces where
+module metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -23,8 +23,8 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -45,7 +45,7 @@ open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions
 
 Any [complete](metric-spaces.complete-metric-spaces.md) is a
 [retract](foundation.retracts-of-types.md) of its
-[cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md).
+[cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
 
 ## Properties
 

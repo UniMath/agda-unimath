@@ -1,7 +1,7 @@
 # The Cauchy pseudocompletion of a metric space
 
 ```agda
-module metric-spaces.cauchy-pseudocompletion-of-metric-spaces where
+module metric-spaces.cauchy-pseudocompletions-of-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
@@ -40,7 +40,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 The
 {{#concept "Cauchy pseudocompletion" Disambiguation="of a metric space" Agda=cauchy-pseudocompletion-Metric-Space}}
 of a [metric space](metric-spaces.metric-spaces.md) `M` is the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md):
 the pseudometric space of
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)

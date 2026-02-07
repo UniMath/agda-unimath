@@ -29,7 +29,7 @@ open import foundation.universe-levels
 open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -44,7 +44,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 in the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) have a
 [limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md).
 
