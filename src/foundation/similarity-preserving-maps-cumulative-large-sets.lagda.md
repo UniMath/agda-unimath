@@ -17,8 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given [cumulative large sets](foundation.cumulative-large-sets.md) `X` and `Y`,
-a map `f : X → Y`
+Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y`, a map
+`f : X → Y`
 {{#concept "preserves similarity" Disambiguation="map between two cumulative large sets" Agda=preserves-sim-map-Cumulative-Large-Set}}
 if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
 
@@ -28,14 +28,14 @@ if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
 module _
   {αX αY : Level → Level}
   {βX βY : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
   where
 
   preserves-sim-map-Cumulative-Large-Set :
-    ({l : Level} → X l → Y l) → UUω
+    ( {l : Level} →
+      type-Cumulative-Large-Set SX l →
+      type-Cumulative-Large-Set SY l) → UUω
   preserves-sim-map-Cumulative-Large-Set f =
     preserves-sim-map-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set SX)
@@ -49,7 +49,7 @@ module _
       ( large-similarity-relation-Cumulative-Large-Set SY)
 
   map-sim-preserving-map-Cumulative-Large-Set :
-    sim-preserving-map-Cumulative-Large-Set → {l : Level} → X l → Y l
+    sim-preserving-map-Cumulative-Large-Set → {l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SY l
   map-sim-preserving-map-Cumulative-Large-Set =
     map-sim-preserving-map-Large-Similarity-Relation
 
@@ -67,20 +67,19 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (SX : Cumulative-Large-Set α β)
   where
 
-  preserves-sim-endomap-Cumulative-Large-Set : ({l : Level} → X l → X l) → UUω
+  preserves-sim-endomap-Cumulative-Large-Set : ({l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SX l) → UUω
   preserves-sim-endomap-Cumulative-Large-Set =
-    preserves-sim-map-Cumulative-Large-Set S S
+    preserves-sim-map-Cumulative-Large-Set SX SX
 
   sim-preserving-endomap-Cumulative-Large-Set : UUω
   sim-preserving-endomap-Cumulative-Large-Set =
-    sim-preserving-map-Cumulative-Large-Set S S
+    sim-preserving-map-Cumulative-Large-Set SX SX
 
   map-sim-preserving-endomap-Cumulative-Large-Set :
-    sim-preserving-endomap-Cumulative-Large-Set → {l : Level} → X l → X l
+    sim-preserving-endomap-Cumulative-Large-Set → {l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SX l
   map-sim-preserving-endomap-Cumulative-Large-Set =
     map-sim-preserving-map-Large-Similarity-Relation
 
@@ -100,40 +99,38 @@ module _
 module _
   {αX αY : Level → Level}
   {βX βY : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
   where
 
   abstract
     commute-map-raise-preserves-sim-map-Cumulative-Large-Set :
-      (f : {l : Level} → X l → Y l) →
+      ( f :
+        {l : Level} →
+        type-Cumulative-Large-Set SX l →
+        type-Cumulative-Large-Set SY l) →
       preserves-sim-map-Cumulative-Large-Set SX SY f →
-      {l1 : Level} (l2 : Level) (x : X l1) →
+      {l1 : Level} (l2 : Level) (x : type-Cumulative-Large-Set SX l1) →
       f (raise-Cumulative-Large-Set SX l2 x) ＝
       raise-Cumulative-Large-Set SY l2 (f x)
     commute-map-raise-preserves-sim-map-Cumulative-Large-Set
       f preserves-sim-f {l1} l2 x =
-      eq-sim-Cumulative-Large-Set SY
+      eq-sim-Cumulative-Large-Set SY _ _
         ( transitive-sim-Cumulative-Large-Set SY _ _ _
           ( sim-raise-Cumulative-Large-Set SY l2 (f x))
-          ( preserves-sim-f
-            ( sim-raise-Cumulative-Large-Set' SX l2 x)))
+          ( preserves-sim-f _ _ (sim-raise-Cumulative-Large-Set' SX l2 x)))
 
 module _
   {αX αY : Level → Level}
   {βX βY : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
   where
 
   abstract
     commute-map-raise-sim-preserving-map-Cumulative-Large-Set :
       (f : sim-preserving-map-Cumulative-Large-Set SX SY)
-      {l0 : Level} (l : Level) (x : X l0) →
+      {l0 : Level} (l : Level) (x : type-Cumulative-Large-Set SX l0) →
       map-sim-preserving-map-Cumulative-Large-Set SX SY
         ( f)
         ( raise-Cumulative-Large-Set SX l x) ＝
@@ -148,22 +145,21 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (SX : Cumulative-Large-Set α β)
   where
 
   abstract
     commute-map-raise-sim-preserving-endomap-Cumulative-Large-Set :
-      (f : sim-preserving-endomap-Cumulative-Large-Set S)
-      {l0 : Level} (l : Level) (x : X l0) →
-      map-sim-preserving-endomap-Cumulative-Large-Set S
+      (f : sim-preserving-endomap-Cumulative-Large-Set SX)
+      {l0 : Level} (l : Level) (x : type-Cumulative-Large-Set SX l0) →
+      map-sim-preserving-endomap-Cumulative-Large-Set SX
         ( f)
-        ( raise-Cumulative-Large-Set S l x) ＝
-      raise-Cumulative-Large-Set S
+        ( raise-Cumulative-Large-Set SX l x) ＝
+      raise-Cumulative-Large-Set SX
         ( l)
-        ( map-sim-preserving-endomap-Cumulative-Large-Set S f x)
+        ( map-sim-preserving-endomap-Cumulative-Large-Set SX f x)
     commute-map-raise-sim-preserving-endomap-Cumulative-Large-Set =
-      commute-map-raise-sim-preserving-map-Cumulative-Large-Set S S
+      commute-map-raise-sim-preserving-map-Cumulative-Large-Set SX SX
 ```
 
 ## See also

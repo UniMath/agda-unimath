@@ -1,4 +1,4 @@
-Similarity-preserving binary maps on cumulative large sets
+# Similarity-preserving binary maps on cumulative large sets
 
 ```agda
 module foundation.similarity-preserving-binary-maps-cumulative-large-sets where
@@ -138,10 +138,10 @@ module _
       raise-Cumulative-Large-Set SZ l3 (f x y)
     map-raise-left-preserves-sim-binary-map-Cumulative-Large-Set
       f preserves-sim-f l3 x y =
-      eq-sim-Cumulative-Large-Set SZ
+      eq-sim-Cumulative-Large-Set SZ _ _
         ( transitive-sim-Cumulative-Large-Set SZ _ _ _
           ( sim-raise-Cumulative-Large-Set SZ l3 (f x y))
-          ( preserves-sim-f
+          ( preserves-sim-f _ _ _ _
             ( sim-raise-Cumulative-Large-Set' SX l3 x)
             ( refl-sim-Cumulative-Large-Set SY y)))
 
@@ -159,10 +159,10 @@ module _
       raise-Cumulative-Large-Set SZ l3 (f x y)
     map-raise-right-preserves-sim-binary-map-Cumulative-Large-Set
       f preserves-sim-f l3 x y =
-      eq-sim-Cumulative-Large-Set SZ
+      eq-sim-Cumulative-Large-Set SZ _ _
         ( transitive-sim-Cumulative-Large-Set SZ _ _ _
           ( sim-raise-Cumulative-Large-Set SZ l3 (f x y))
-          ( preserves-sim-f
+          ( preserves-sim-f _ _ _ _
             ( refl-sim-Cumulative-Large-Set SX x)
             ( sim-raise-Cumulative-Large-Set' SY l3 y)))
 
@@ -182,10 +182,10 @@ module _
       raise-Cumulative-Large-Set SZ (l3 ⊔ l4) (f x y)
     map-raise-raise-preserves-sim-binary-map-Cumulative-Large-Set
       f preserves-sim-f l3 l4 x y =
-      eq-sim-Cumulative-Large-Set SZ
+      eq-sim-Cumulative-Large-Set SZ _ _
         ( transitive-sim-Cumulative-Large-Set SZ _ _ _
           ( sim-raise-Cumulative-Large-Set SZ (l3 ⊔ l4) (f x y))
-          ( preserves-sim-f
+          ( preserves-sim-f _ _ _ _
             ( sim-raise-Cumulative-Large-Set' SX l3 x)
             ( sim-raise-Cumulative-Large-Set' SY l4 y)))
 

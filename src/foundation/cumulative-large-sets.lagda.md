@@ -102,13 +102,11 @@ record
       ( sim-raise-Cumulative-Large-Set l x)
 
   eq-sim-Cumulative-Large-Set :
-    {l : Level} {x y : type-Cumulative-Large-Set l} →
+    {l : Level} (x y : type-Cumulative-Large-Set l) →
     sim-Cumulative-Large-Set x y → x ＝ y
   eq-sim-Cumulative-Large-Set =
     eq-sim-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
-      ( _)
-      ( _)
 
 open Cumulative-Large-Set public
 ```
@@ -180,6 +178,8 @@ module _
         open similarity-reasoning-Cumulative-Large-Set S
       in
         eq-sim-Cumulative-Large-Set S
+          ( x)
+          ( y)
           ( similarity-reasoning
             x
             ~ raise-Cumulative-Large-Set S l2 x
@@ -219,7 +219,7 @@ module _
       {l : Level} (x : type-Cumulative-Large-Set S l) →
       raise-Cumulative-Large-Set S l x ＝ x
     eq-raise-Cumulative-Large-Set {l} x =
-      eq-sim-Cumulative-Large-Set S (sim-raise-Cumulative-Large-Set' S l x)
+      eq-sim-Cumulative-Large-Set S _ _ (sim-raise-Cumulative-Large-Set' S l x)
 ```
 
 ### Two elements of a cumulative large set are similar if and only if they are equal when raised to each other's universe level
@@ -242,7 +242,7 @@ module _
       let
         open similarity-reasoning-Cumulative-Large-Set S
       in
-        eq-sim-Cumulative-Large-Set S
+        eq-sim-Cumulative-Large-Set S _ _
           ( similarity-reasoning
               raise-Cumulative-Large-Set S l2 x
               ~ x
@@ -322,7 +322,7 @@ module _
       let
         open similarity-reasoning-Cumulative-Large-Set S
       in
-        eq-sim-Cumulative-Large-Set S
+        eq-sim-Cumulative-Large-Set S _ _
           ( similarity-reasoning
             raise-Cumulative-Large-Set S l1 (raise-Cumulative-Large-Set S l2 x)
             ~ raise-Cumulative-Large-Set S l2 x

@@ -9,6 +9,9 @@ module order-theory.large-join-semilattices where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
+open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
+open import order-theory.similarity-of-elements-large-posets
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.sets
@@ -16,6 +19,7 @@ open import foundation.universe-levels
 
 open import order-theory.bottom-elements-large-posets
 open import order-theory.join-semilattices
+open import order-theory.upper-bounds-large-posets
 open import order-theory.large-posets
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.posets
@@ -206,6 +210,51 @@ module _
       ( large-poset-Large-Join-Semilattice L)
       ( is-large-join-semilattice-Large-Join-Semilattice L)
 
+  is-binary-upper-bound-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    is-binary-upper-bound-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
+      ( x)
+      ( y)
+      ( join-Large-Join-Semilattice x y)
+  is-binary-upper-bound-join-Large-Join-Semilattice x y =
+    is-binary-upper-bound-is-least-binary-upper-bound-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
+      ( x)
+      ( y)
+      ( is-least-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-left-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    leq-Large-Join-Semilattice x (join-Large-Join-Semilattice x y)
+  leq-left-join-Large-Join-Semilattice x y =
+    pr1 (is-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-right-join-Large-Join-Semilattice :
+    {l1 l2 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2) →
+    leq-Large-Join-Semilattice y (join-Large-Join-Semilattice x y)
+  leq-right-join-Large-Join-Semilattice x y =
+    pr2 (is-binary-upper-bound-join-Large-Join-Semilattice x y)
+
+  leq-join-Large-Join-Semilattice :
+    {l1 l2 l3 : Level}
+    (x : type-Large-Join-Semilattice l1)
+    (y : type-Large-Join-Semilattice l2)
+    (z : type-Large-Join-Semilattice l3) →
+    leq-Large-Join-Semilattice x z →
+    leq-Large-Join-Semilattice y z →
+    leq-Large-Join-Semilattice (join-Large-Join-Semilattice x y) z
+  leq-join-Large-Join-Semilattice x y z x≤z y≤z =
+    forward-implication
+      ( is-least-binary-upper-bound-join-Large-Join-Semilattice x y z)
+      ( x≤z , y≤z)
+
   ap-join-Large-Join-Semilattice :
     {l1 l2 : Level}
     {x x' : type-Large-Join-Semilattice l1}
@@ -235,6 +284,31 @@ module _
     is-bottom-element-bottom-is-large-join-semilattice-Large-Poset
       ( large-poset-Large-Join-Semilattice L)
       ( is-large-join-semilattice-Large-Join-Semilattice L)
+
+  large-similarity-relation-Large-Join-Semilattice :
+    Large-Similarity-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Join-Semilattice)
+  large-similarity-relation-Large-Join-Semilattice =
+    large-similarity-relation-sim-Large-Poset
+      ( large-poset-Large-Join-Semilattice L)
+
+
+  sim-prop-Large-Join-Semilattice :
+    Large-Relation-Prop
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Join-Semilattice)
+  sim-prop-Large-Join-Semilattice =
+    sim-prop-Large-Similarity-Relation
+      ( large-similarity-relation-Large-Join-Semilattice)
+
+  sim-Large-Join-Semilattice :
+    Large-Relation
+      ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+      ( type-Large-Join-Semilattice)
+  sim-Large-Join-Semilattice =
+    sim-Large-Similarity-Relation
+      ( large-similarity-relation-Large-Join-Semilattice)
 ```
 
 ### Small join semilattices from large join semilattices
@@ -268,4 +342,10 @@ module _
   join-semilattice-Large-Join-Semilattice l =
     join-semilattice-Order-Theoretic-Join-Semilattice
       ( order-theoretic-join-semilattice-Large-Join-Semilattice l)
+```
+
+### The join operation preserves similarity
+
+```agda
+
 ```

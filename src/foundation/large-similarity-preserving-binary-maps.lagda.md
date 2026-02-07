@@ -38,7 +38,7 @@ module _
 
   preserves-sim-binary-map-Large-Similarity-Relation : UUω
   preserves-sim-binary-map-Large-Similarity-Relation =
-    {l1 l2 l3 l4 : Level} {x₁ : X l1} {x₂ : X l2} {y₁ : Y l3} {y₂ : Y l4} →
+    {l1 l2 l3 l4 : Level} (x₁ : X l1) (x₂ : X l2) (y₁ : Y l3) (y₂ : Y l4) →
     sim-Large-Similarity-Relation SX x₁ x₂ →
     sim-Large-Similarity-Relation SY y₁ y₂ →
     sim-Large-Similarity-Relation SZ (f x₁ y₁) (f x₂ y₂)
@@ -93,16 +93,16 @@ module _
       {l : Level} (y : Y l) →
       preserves-sim-map-Large-Similarity-Relation SX SZ (λ x → f x y)
     preserves-sim-left-preserves-sim-binary-map-Large-Similarity-Relation
-      H y x₁~x₂ =
-      H x₁~x₂ (refl-sim-Large-Similarity-Relation SY y)
+      H y x₁ x₂ x₁~x₂ =
+      H x₁ x₂ y y x₁~x₂ (refl-sim-Large-Similarity-Relation SY y)
 
     preserves-sim-right-preserves-sim-binary-map-Large-Similarity-Relation :
       preserves-sim-binary-map-Large-Similarity-Relation SX SY SZ f →
       {l : Level} (x : X l) →
       preserves-sim-map-Large-Similarity-Relation SY SZ (λ y → f x y)
     preserves-sim-right-preserves-sim-binary-map-Large-Similarity-Relation
-      H x =
-      H (refl-sim-Large-Similarity-Relation SX x)
+      H x y₁ y₂ y₁~y₂ =
+      H x x y₁ y₂ (refl-sim-Large-Similarity-Relation SX x) y₁~y₂
 
     preserves-sim-preserves-sim-left-right-binary-map-Large-Similarity-Relation :
       ( {l : Level} (y : Y l) →
@@ -111,11 +111,11 @@ module _
         preserves-sim-map-Large-Similarity-Relation SY SZ (λ y → f x y)) →
       preserves-sim-binary-map-Large-Similarity-Relation SX SY SZ f
     preserves-sim-preserves-sim-left-right-binary-map-Large-Similarity-Relation
-      HX HY {x₁ = x₁} {x₂ = x₂} {y₁ = y₁} {y₂ = y₂} x₁~x₂ y₁~y₂ =
+      HX HY x₁ x₂ y₁ y₂ x₁~x₂ y₁~y₂ =
       transitive-sim-Large-Similarity-Relation SZ
         ( f x₁ y₁)
         ( f x₂ y₁)
         ( f x₂ y₂)
-        ( HY x₂ y₁~y₂)
-        ( HX y₁ x₁~x₂)
+        ( HY x₂ y₁ y₂ y₁~y₂)
+        ( HX y₁ x₁ x₂ x₁~x₂)
 ```
