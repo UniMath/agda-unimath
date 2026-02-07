@@ -745,7 +745,7 @@ module _
             ( y)))
 ```
 
-### An cofinal and coinitial, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
+### A cofinal and coinitial, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
 
 ```agda
 module _
