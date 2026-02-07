@@ -267,7 +267,7 @@ abstract
   inv-one-ℚ⁺ = inv-unit-Group group-mul-ℚ⁺
 ```
 
-### Multiplication by a positive rational number is cofinal and below
+### Multiplication by a positive rational number is cofinal and coinitial
 
 ```agda
 abstract
