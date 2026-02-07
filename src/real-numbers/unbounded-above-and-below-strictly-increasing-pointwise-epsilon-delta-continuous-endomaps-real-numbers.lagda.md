@@ -504,8 +504,8 @@ module _
       in
         cotransitive-le-ℝ
           ( map-f (raise-real-ℚ l p))
-          ( map-f (raise-real-ℚ l q))
           ( y)
+          ( map-f (raise-real-ℚ l q))
           ( is-strictly-increasing-map-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( raise-real-ℚ l p)

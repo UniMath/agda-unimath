@@ -414,7 +414,7 @@ abstract
         ( [a,b])
         ( x)
         ( a≤x≤b))
-      ( cotransitive-le-ℝ a b x a<b)
+      ( cotransitive-le-ℝ a x b a<b)
 ```
 
 ### Given any two elements `x` and `y` of a proper closed interval in an `ε`-neighborhood of each other, there exists a third point `z` in an `ε`-neighborhood of both `x` and `y` but apart from both of them
@@ -815,10 +815,16 @@ module _
                       ( a+δ<x)
                       ( ε'+ε'<ε)
                       ( x-y<ε''))
-                    ( cotransitive-le-ℝ _ _
+                    ( cotransitive-le-ℝ
+                      zero-ℝ
                       ( yℝ -ℝ xℝ)
+                      ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
-                ( cotransitive-le-ℝ _ _ (xℝ -ℝ yℝ) (is-positive-real-ℚ⁺ ε'')))
+                ( cotransitive-le-ℝ
+                  zero-ℝ
+                  ( xℝ -ℝ yℝ)
+                  ( real-ℚ⁺ ε'')
+                  ( is-positive-real-ℚ⁺ ε'')))
           ( λ x<b →
             do
               (δ , x+δ<b) ← exists-positive-rational-separation-le-ℝ x<b
@@ -842,9 +848,15 @@ module _
                         ( x+δ<b)
                         ( ε'+ε'<ε)
                         ( x-y<ε''))
-                    ( cotransitive-le-ℝ _ _
+                    ( cotransitive-le-ℝ
+                      zero-ℝ
                       ( yℝ -ℝ xℝ)
+                      ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
-                ( cotransitive-le-ℝ _ _ (xℝ -ℝ yℝ) (is-positive-real-ℚ⁺ ε'')))
-          ( cotransitive-le-ℝ a b xℝ a<b)
+                ( cotransitive-le-ℝ
+                  zero-ℝ
+                  ( xℝ -ℝ yℝ)
+                  ( real-ℚ⁺ ε'')
+                  ( is-positive-real-ℚ⁺ ε'')))
+          ( cotransitive-le-ℝ a xℝ b a<b)
 ```

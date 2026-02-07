@@ -31,7 +31,7 @@ is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
-- **Cotransitive:** For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- **Cotransitive:** For any `a b c : A` we have `R a c → R a b ∨ R b c`.
 
 This is analogous to the notion of small
 [apartness relations](foundation.apartness-relations.md).
@@ -118,9 +118,6 @@ module _
     ( apart-prop-Large-Apartness-Relation R ,
       antirefl-Large-Apartness-Relation R ,
       symmetric-Large-Apartness-Relation R ,
-      λ a b c a#b →
-      map-disjunction
-        ( id)
-        ( symmetric-Large-Apartness-Relation R c b)
-        ( cotransitive-Large-Apartness-Relation R a b c a#b))
+      λ a b c a#c →
+      cotransitive-Large-Apartness-Relation R a b c a#c)
 ```

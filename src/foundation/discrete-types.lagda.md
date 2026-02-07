@@ -54,8 +54,8 @@ module _
 
   cotransitive-apart-Discrete-Type : is-cotransitive rel-apart-Discrete-Type
   cotransitive-apart-Discrete-Type x y z r
-    with has-decidable-equality-type-Discrete-Type X x z
-  ... | inl refl = unit-trunc-Prop (inr (λ s → r (inv s)))
+    with has-decidable-equality-type-Discrete-Type X x y
+  ... | inl refl = unit-trunc-Prop (inr (λ s → r s))
   ... | inr np = unit-trunc-Prop (inl np)
 
   is-tight-apart-Discrete-Type :
