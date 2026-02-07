@@ -1,4 +1,4 @@
-# The action on Cauchy approximations of short maps between metric spaces
+# Functoriality of Cauchy pseudocompletions of metric spaces and short maps
 
 ```agda
 module metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces where
