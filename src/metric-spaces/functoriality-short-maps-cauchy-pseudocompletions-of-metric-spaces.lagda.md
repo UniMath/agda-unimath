@@ -1,7 +1,7 @@
-# The action on Cauchy approximations of short maps between metric spaces
+# Functoriality of Cauchy pseudocompletions of metric spaces and short maps
 
 ```agda
-module metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces where
+module metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,9 +19,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces

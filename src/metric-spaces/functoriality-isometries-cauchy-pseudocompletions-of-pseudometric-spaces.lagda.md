@@ -1,7 +1,7 @@
-# The action on Cauchy approximations of isometries between pseudometric spaces
+# Functoriality of Cauchy pseudocompletions of pseudometric spaces and isometries
 
 ```agda
-module metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces where
+module metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -19,9 +19,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces

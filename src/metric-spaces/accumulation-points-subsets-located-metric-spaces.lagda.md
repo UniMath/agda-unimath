@@ -28,10 +28,10 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.apartness-located-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.closed-subsets-located-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
