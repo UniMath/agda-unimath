@@ -33,65 +33,77 @@ inclusion map for all [universe levels](foundation.universe-levels.md) `l1` and
 ```agda
 record
   Cumulative-Large-Set
-    {α : Level → Level}
-    (β : Level → Level → Level)
-    (X : (l : Level) → UU (α l)) :
+    (α : Level → Level)
+    (β : Level → Level → Level) :
     UUω
   where
 
   field
+    type-Cumulative-Large-Set : (l : Level) → UU (α l)
     large-similarity-relation-Cumulative-Large-Set :
-      Large-Similarity-Relation β X
+      Large-Similarity-Relation β type-Cumulative-Large-Set
     raise-Cumulative-Large-Set :
-      {l0 : Level} (l : Level) → X l0 → X (l ⊔ l0)
+      {l0 : Level} (l : Level) →
+      type-Cumulative-Large-Set l0 → type-Cumulative-Large-Set (l ⊔ l0)
 
-  sim-prop-Cumulative-Large-Set : Large-Relation-Prop β X
+  sim-prop-Cumulative-Large-Set :
+    Large-Relation-Prop β type-Cumulative-Large-Set
   sim-prop-Cumulative-Large-Set =
     sim-prop-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
 
-  sim-Cumulative-Large-Set : Large-Relation β X
+  sim-Cumulative-Large-Set : Large-Relation β type-Cumulative-Large-Set
   sim-Cumulative-Large-Set =
-    large-relation-Large-Relation-Prop X sim-prop-Cumulative-Large-Set
+    large-relation-Large-Relation-Prop
+      ( type-Cumulative-Large-Set)
+      ( sim-prop-Cumulative-Large-Set)
 
   refl-sim-Cumulative-Large-Set :
-    is-reflexive-Large-Relation X sim-Cumulative-Large-Set
+    is-reflexive-Large-Relation
+      ( type-Cumulative-Large-Set)
+      ( sim-Cumulative-Large-Set)
   refl-sim-Cumulative-Large-Set =
     refl-sim-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
 
   sim-eq-Cumulative-Large-Set :
-    {l : Level} {x y : X l} → x ＝ y → sim-Cumulative-Large-Set x y
+    {l : Level} {x y : type-Cumulative-Large-Set l} →
+    x ＝ y → sim-Cumulative-Large-Set x y
   sim-eq-Cumulative-Large-Set =
     sim-eq-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
 
   symmetric-sim-Cumulative-Large-Set :
-    is-symmetric-Large-Relation X sim-Cumulative-Large-Set
+    is-symmetric-Large-Relation
+      ( type-Cumulative-Large-Set)
+      ( sim-Cumulative-Large-Set)
   symmetric-sim-Cumulative-Large-Set =
     symmetric-sim-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
 
   transitive-sim-Cumulative-Large-Set :
-    is-transitive-Large-Relation X sim-Cumulative-Large-Set
+    is-transitive-Large-Relation
+      ( type-Cumulative-Large-Set)
+      ( sim-Cumulative-Large-Set)
   transitive-sim-Cumulative-Large-Set =
     transitive-sim-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
 
   field
     sim-raise-Cumulative-Large-Set :
-      {l0 : Level} (l : Level) (x : X l0) →
+      {l0 : Level} (l : Level) (x : type-Cumulative-Large-Set l0) →
       sim-Cumulative-Large-Set x (raise-Cumulative-Large-Set l x)
 
   sim-raise-Cumulative-Large-Set' :
-    {l0 : Level} (l : Level) (x : X l0) →
+    {l0 : Level} (l : Level) (x : type-Cumulative-Large-Set l0) →
     sim-Cumulative-Large-Set (raise-Cumulative-Large-Set l x) x
   sim-raise-Cumulative-Large-Set' l x =
     symmetric-sim-Cumulative-Large-Set _ _
       ( sim-raise-Cumulative-Large-Set l x)
 
   eq-sim-Cumulative-Large-Set :
-    {l : Level} {x y : X l} → sim-Cumulative-Large-Set x y → x ＝ y
+    {l : Level} {x y : type-Cumulative-Large-Set l} →
+    sim-Cumulative-Large-Set x y → x ＝ y
   eq-sim-Cumulative-Large-Set =
     eq-sim-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set)
@@ -109,19 +121,19 @@ open Cumulative-Large-Set public
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
-    is-set-Cumulative-Large-Set : (l : Level) → is-set (X l)
+    is-set-Cumulative-Large-Set :
+      (l : Level) → is-set (type-Cumulative-Large-Set S l)
     is-set-Cumulative-Large-Set =
       is-set-type-Large-Similarity-Relation
         ( large-similarity-relation-Cumulative-Large-Set S)
 
   set-Cumulative-Large-Set : (l : Level) → Set (α l)
   set-Cumulative-Large-Set l =
-    ( X l , is-set-Cumulative-Large-Set l)
+    ( type-Cumulative-Large-Set S l , is-set-Cumulative-Large-Set l)
 ```
 
 ### Similarity reasoning
@@ -140,8 +152,8 @@ in
 ```agda
 module
   similarity-reasoning-Cumulative-Large-Set
-    {α : Level → Level} {β : Level → Level → Level} {X : (l : Level) → UU (α l)}
-    (S : Cumulative-Large-Set β X)
+    {α : Level → Level} {β : Level → Level → Level}
+    (S : Cumulative-Large-Set α β)
   where
 
   open
@@ -156,8 +168,7 @@ module
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
@@ -187,9 +198,11 @@ module _
         ( is-injective-raise-Cumulative-Large-Set l1 l2)
 
   emb-raise-Cumulative-Large-Set :
-    (l1 l2 : Level) → X l1 ↪ X (l1 ⊔ l2)
+    (l1 l2 : Level) →
+    type-Cumulative-Large-Set S l1 ↪ type-Cumulative-Large-Set S (l1 ⊔ l2)
   emb-raise-Cumulative-Large-Set l1 l2 =
-    ( raise-Cumulative-Large-Set S l2 , is-emb-raise-Cumulative-Large-Set l1 l2)
+    ( raise-Cumulative-Large-Set S l2 ,
+      is-emb-raise-Cumulative-Large-Set l1 l2)
 ```
 
 ### Raising an element of a cumulative large set to its own universe level is the identity
@@ -198,13 +211,13 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
     eq-raise-Cumulative-Large-Set :
-      {l : Level} (x : X l) → raise-Cumulative-Large-Set S l x ＝ x
+      {l : Level} (x : type-Cumulative-Large-Set S l) →
+      raise-Cumulative-Large-Set S l x ＝ x
     eq-raise-Cumulative-Large-Set {l} x =
       eq-sim-Cumulative-Large-Set S (sim-raise-Cumulative-Large-Set' S l x)
 ```
@@ -215,13 +228,14 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
     eq-raise-sim-Cumulative-Large-Set :
-      {l1 l2 : Level} {x : X l1} {y : X l2} →
+      {l1 l2 : Level}
+      {x : type-Cumulative-Large-Set S l1}
+      {y : type-Cumulative-Large-Set S l2} →
       sim-Cumulative-Large-Set S x y →
       raise-Cumulative-Large-Set S l2 x ＝ raise-Cumulative-Large-Set S l1 y
     eq-raise-sim-Cumulative-Large-Set {l1} {l2} {x} {y} x~y =
@@ -239,7 +253,9 @@ module _
                 by sim-raise-Cumulative-Large-Set S l1 y)
 
     sim-eq-raise-Cumulative-Large-Set :
-      {l1 l2 : Level} {x : X l1} {y : X l2} →
+      {l1 l2 : Level}
+      {x : type-Cumulative-Large-Set S l1}
+      {y : type-Cumulative-Large-Set S l2} →
       raise-Cumulative-Large-Set S l2 x ＝ raise-Cumulative-Large-Set S l1 y →
       sim-Cumulative-Large-Set S x y
     sim-eq-raise-Cumulative-Large-Set {l1} {l2} {x} {y} rx=ry =
@@ -256,7 +272,9 @@ module _
             by sim-raise-Cumulative-Large-Set' S l1 y
 
   eq-raise-iff-sim-Cumulative-Large-Set :
-    {l1 l2 : Level} {x : X l1} {y : X l2} →
+    {l1 l2 : Level}
+    {x : type-Cumulative-Large-Set S l1}
+    {y : type-Cumulative-Large-Set S l2} →
     ( sim-Cumulative-Large-Set S x y ↔
       ( raise-Cumulative-Large-Set S l2 x ＝
         raise-Cumulative-Large-Set S l1 y))
@@ -271,13 +289,12 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
     sim-raise-raise-Cumulative-Large-Set :
-      {l0 : Level} (l1 l2 : Level) (x : X l0) →
+      {l0 : Level} (l1 l2 : Level) (x : type-Cumulative-Large-Set S l0) →
       sim-Cumulative-Large-Set S
         ( raise-Cumulative-Large-Set S l1 x)
         ( raise-Cumulative-Large-Set S l2 x)
@@ -293,13 +310,12 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   abstract
     raise-raise-Cumulative-Large-Set :
-      {l0 : Level} (l1 l2 : Level) (x : X l0) →
+      {l0 : Level} (l1 l2 : Level) (x : type-Cumulative-Large-Set S l0) →
       raise-Cumulative-Large-Set S l1 (raise-Cumulative-Large-Set S l2 x) ＝
       raise-Cumulative-Large-Set S (l1 ⊔ l2) x
     raise-raise-Cumulative-Large-Set l1 l2 x =
