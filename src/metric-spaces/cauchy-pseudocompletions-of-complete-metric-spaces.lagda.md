@@ -186,13 +186,13 @@ module _
           ( y))
         ( Nδ))
 
-  is-isometry-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+  is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     is-isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space M))
       ( pseudometric-space-Complete-Metric-Space M)
       ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
-  is-isometry-map-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y =
+  is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y =
     ( ( is-short-map-short-map-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space
           ( metric-space-Complete-Metric-Space M))
@@ -210,14 +210,14 @@ module _
   {l1 l2 : Level} (M : Complete-Metric-Space l1 l2)
   where
 
-  isometry-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+  isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     isometry-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space M))
       ( pseudometric-space-Complete-Metric-Space M)
-  isometry-map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+  isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space =
     ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M ,
-      is-isometry-map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
+      is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
 ```
 
 ### The unit map of Cauchy pseudocompletions of complete metric spaces has a unique retraction
