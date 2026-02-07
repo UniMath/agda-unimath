@@ -30,7 +30,7 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 ## Idea
 
-{{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=Königs-Theorem}}
+{{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=le-indexed-Σ-Π-Cardinal}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
 and $B$ over $I$, $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
 
@@ -73,23 +73,23 @@ module _
   (is-projective-I : is-projective-Level' l2 (type-Set I))
   where
 
-  cardinality-Königs-Theorem' :
+  le-indexed-cardinality-Σ-Π' :
     (A B : type-Set I → Set l2) →
     ((i : type-Set I) → le-indexed-cardinality' (A i) (B i)) →
     le-indexed-cardinality' (Σ-Set I A) (Π-Set I B)
-  cardinality-Königs-Theorem' A B p =
+  le-indexed-cardinality-Σ-Π' A B p =
     ( is-projective-I (type-Set ∘ B) (pr1 ∘ p) ,
       is-nonsurjective-map-Σ-Π-is-projective-base' is-projective-I (pr2 ∘ p))
 
-  cardinality-Königs-Theorem :
+  le-indexed-cardinality-Σ-Π :
     (A B : type-Set I → Set l2) →
     ((i : type-Set I) → le-indexed-cardinality (A i) (B i)) →
     le-indexed-cardinality (Σ-Set I A) (Π-Set I B)
-  cardinality-Königs-Theorem A B p =
+  le-indexed-cardinality-Σ-Π A B p =
     unit-le-indexed-cardinality
       ( Σ-Set I A)
       ( Π-Set I B)
-      ( cardinality-Königs-Theorem' A B
+      ( le-indexed-cardinality-Σ-Π' A B
         ( λ i → inv-unit-le-indexed-cardinality (A i) (B i) (p i)))
 
 module _
@@ -99,11 +99,11 @@ module _
   (let set-I = set-Cardinality-Projective-Set I)
   where
 
-  Königs-Theorem :
+  le-indexed-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → le-indexed-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
-  Königs-Theorem =
+  le-indexed-Σ-Π-Cardinal =
     apply-twice-ind-Cardinality-Projective-Set I
       ( λ A B →
         set-Prop
@@ -115,7 +115,7 @@ module _
           ( le-indexed-Cardinal)
           ( inv (compute-Σ-Cardinal I A))
           ( inv (compute-Π-Cardinal I B))
-          ( cardinality-Königs-Theorem
+          ( le-indexed-cardinality-Σ-Π
             ( set-I)
             ( is-projective-Cardinality-Projective-Set I)
             ( A)

@@ -146,7 +146,7 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 
 ```agda
 open import set-theory.konigs-theorem using
-  ( Königs-Theorem)
+  ( le-indexed-Σ-Π-Cardinal)
 ```
 
 ### Lawvere's fixed point theorem {#Q15809744}
