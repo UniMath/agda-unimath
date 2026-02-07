@@ -77,6 +77,6 @@ module _
 
 ## See also
 
-- [Raising the universe levels of upper Dedekind real numbers](real-numbers.raising-universe-levels-upper-dedekind-real-numbers)
-- [Raising the universe levels of Dedekind real numbers](real-numbers.raising-universe-levels-real-numbers)
-- [Raising the universe levels of MacNeille real numbers](real-numbers.raising-universe-levels-macneille-real-numbers)
+- [Raising the universe levels of upper Dedekind real numbers](real-numbers.raising-universe-levels-upper-dedekind-real-numbers.md)
+- [Raising the universe levels of Dedekind real numbers](real-numbers.raising-universe-levels-real-numbers.md)
+- [Raising the universe levels of MacNeille real numbers](real-numbers.raising-universe-levels-macneille-real-numbers.md)
