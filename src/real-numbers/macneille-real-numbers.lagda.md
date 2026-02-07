@@ -63,37 +63,36 @@ module _
   {l1 l2 : Level} (L : lower-ℝ l1) (U : upper-ℝ l2)
   where
 
-  is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ :
+  is-open-upper-complement-lower-cut-prop-lower-upper-ℝ :
     Prop (l1 ⊔ l2)
-  is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ =
+  is-open-upper-complement-lower-cut-prop-lower-upper-ℝ =
     ∀' ℚ
-      ( λ q → cut-upper-ℝ U q ⇔
-      ∃ ℚ (λ p → le-ℚ-Prop p q ∧ ¬' cut-lower-ℝ L p))
+      ( λ q →
+        cut-upper-ℝ U q ⇔
+        ∃ ℚ (λ p → le-ℚ-Prop p q ∧ ¬' cut-lower-ℝ L p))
 
-  is-open-upper-complement-lower-cut-lower-upper-real-macneille-ℝ :
+  is-open-upper-complement-lower-cut-lower-upper-ℝ :
     UU (l1 ⊔ l2)
-  is-open-upper-complement-lower-cut-lower-upper-real-macneille-ℝ =
-    type-Prop
-      ( is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ)
+  is-open-upper-complement-lower-cut-lower-upper-ℝ =
+    type-Prop is-open-upper-complement-lower-cut-prop-lower-upper-ℝ
 
-  is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ :
+  is-open-lower-complement-upper-cut-prop-lower-upper-ℝ :
     Prop (l1 ⊔ l2)
-  is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ =
+  is-open-lower-complement-upper-cut-prop-lower-upper-ℝ =
     ∀' ℚ
       ( λ p →
         cut-lower-ℝ L p ⇔
         ∃ ℚ (λ q → le-ℚ-Prop p q ∧ ¬' cut-upper-ℝ U q))
 
-  is-open-lower-complement-upper-cut-lower-upper-real-macneille-ℝ :
+  is-open-lower-complement-upper-cut-lower-upper-ℝ :
     UU (l1 ⊔ l2)
-  is-open-lower-complement-upper-cut-lower-upper-real-macneille-ℝ =
-    type-Prop
-      ( is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ)
+  is-open-lower-complement-upper-cut-lower-upper-ℝ =
+    type-Prop is-open-lower-complement-upper-cut-prop-lower-upper-ℝ
 
   is-open-dedekind-macneille-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-open-dedekind-macneille-prop-lower-upper-ℝ =
-    is-open-upper-complement-lower-cut-prop-lower-upper-real-macneille-ℝ ∧
-    is-open-lower-complement-upper-cut-prop-lower-upper-real-macneille-ℝ
+    is-open-upper-complement-lower-cut-prop-lower-upper-ℝ ∧
+    is-open-lower-complement-upper-cut-prop-lower-upper-ℝ
 
   is-open-dedekind-macneille-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-open-dedekind-macneille-lower-upper-ℝ =
@@ -188,7 +187,7 @@ eq-macneille-ℝ {l} _ _ p q =
   eq-type-subtype (subtype-macneille-ℝ l) (eq-pair p q)
 ```
 
-### Disjointedness of lower and upper cuts
+### Disjointness of lower and upper cuts
 
 ```agda
 abstract

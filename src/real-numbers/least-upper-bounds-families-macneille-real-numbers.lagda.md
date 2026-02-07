@@ -364,14 +364,6 @@ module _
               do-syntax-trunc-Prop
                 ( upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
                   ( q))
-
-            not-not-r∈U :
-              {r : ℚ} →
-              le-ℚ p r →
-              ¬¬
-                is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-                  ( r)
-            not-not-r∈U {r} p<r r∉U = p∉L (intro-exists r (p<r , r∉U))
           in do
             (r , p<r , r<q) ← dense-le-ℚ p<q
             (s , r<s , s<q) ← dense-le-ℚ r<q
@@ -385,20 +377,23 @@ module _
                     ( r)
                     ( r<s ,
                       λ r∈Li →
-                      not-not-r∈U p<r
-                        ( elim-exists
-                          ( empty-Prop)
-                          ( λ t (t<r , t∈all) →
-                            is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ
-                              ( y i)
-                              ( t)
-                              ( is-in-cut-le-ℚ-lower-ℝ
-                                ( lower-real-macneille-ℝ (y i))
-                                ( t)
-                                ( r)
-                                ( t<r)
-                                ( r∈Li))
-                              ( t∈all i)))))))
+                      p∉L
+                        ( intro-exists
+                          ( r)
+                          ( p<r ,
+                            elim-exists
+                              ( empty-Prop)
+                              ( λ t (t<r , t∈all) →
+                                is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ
+                                  ( y i)
+                                  ( t)
+                                  ( is-in-cut-le-ℚ-lower-ℝ
+                                    ( lower-real-macneille-ℝ (y i))
+                                    ( t)
+                                    ( r)
+                                    ( t<r)
+                                    ( r∈Li))
+                                  ( t∈all i))))))))
 
   abstract
     is-open-upper-complement-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -492,7 +487,8 @@ module _
         ( least-upper-bound-inhabited-bounded-family-macneille-ℝ)
         ( z)
         ( is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ
-          z y≤z)
+          ( z)
+          ( y≤z))
 
   abstract
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
