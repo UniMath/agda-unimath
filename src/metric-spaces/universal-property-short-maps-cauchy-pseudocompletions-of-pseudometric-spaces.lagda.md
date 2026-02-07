@@ -44,7 +44,7 @@ Given a [metric space](metric-spaces.metric-spaces.md) `M` and a
 [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, precomposition
 with the natural [isometry](metric-spaces.isometries-pseudometric-spaces.md) to
 the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 
 ```text
   κ : P → C P
