@@ -118,6 +118,7 @@ open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.sequences-with-alternating-signs-real-numbers public
 open import real-numbers.short-map-binary-maximum-real-numbers public
 open import real-numbers.short-map-binary-minimum-real-numbers public
+open import real-numbers.similarity-macneille-real-numbers public
 open import real-numbers.similarity-nonnegative-real-numbers public
 open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public

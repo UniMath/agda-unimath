@@ -57,7 +57,8 @@ module _
   leq-lower-real-macneille-ℝ = type-Prop leq-lower-real-prop-macneille-ℝ
 
   is-prop-leq-lower-real-macneille-ℝ : is-prop leq-lower-real-macneille-ℝ
-  is-prop-leq-lower-real-macneille-ℝ = is-prop-type-Prop leq-lower-real-prop-macneille-ℝ
+  is-prop-leq-lower-real-macneille-ℝ =
+    is-prop-type-Prop leq-lower-real-prop-macneille-ℝ
 
   leq-upper-real-prop-macneille-ℝ : Prop (l1 ⊔ l2)
   leq-upper-real-prop-macneille-ℝ =
@@ -67,14 +68,17 @@ module _
   leq-upper-real-macneille-ℝ = type-Prop leq-upper-real-prop-macneille-ℝ
 
   is-prop-leq-upper-real-macneille-ℝ : is-prop leq-upper-real-macneille-ℝ
-  is-prop-leq-upper-real-macneille-ℝ = is-prop-type-Prop leq-upper-real-prop-macneille-ℝ
+  is-prop-leq-upper-real-macneille-ℝ =
+    is-prop-type-Prop leq-upper-real-prop-macneille-ℝ
 
   leq-macneille-ℝ : UU (l1 ⊔ l2)
   leq-macneille-ℝ = leq-lower-real-macneille-ℝ × leq-upper-real-macneille-ℝ
 
   is-prop-leq-macneille-ℝ : is-prop leq-macneille-ℝ
   is-prop-leq-macneille-ℝ =
-    is-prop-product is-prop-leq-lower-real-macneille-ℝ is-prop-leq-upper-real-macneille-ℝ
+    is-prop-product
+      ( is-prop-leq-lower-real-macneille-ℝ)
+      ( is-prop-leq-upper-real-macneille-ℝ)
 
   leq-prop-macneille-ℝ : Prop (l1 ⊔ l2)
   leq-prop-macneille-ℝ = leq-macneille-ℝ , is-prop-leq-macneille-ℝ
