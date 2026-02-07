@@ -24,12 +24,9 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.path-algebra
-open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
