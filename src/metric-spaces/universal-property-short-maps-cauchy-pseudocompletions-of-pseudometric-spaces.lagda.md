@@ -68,7 +68,7 @@ short map `g : C P → M` such that
   g ∘ κ ~ f
 ```
 
-if and only if it is the images `Cf u` of Cauchy approximations `u : C P` are
+if and only if the images `Cf u` of Cauchy approximations `u : C P` are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
 `M`. In that case, `f` is called a
 {{#concept "complete short maps" Disambiguation="from a pseudometric space to a metric space" Agda=complete-short-map-Pseudometric-Space}}
