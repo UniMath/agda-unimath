@@ -26,10 +26,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
