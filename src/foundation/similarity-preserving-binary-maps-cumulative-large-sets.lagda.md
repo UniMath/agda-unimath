@@ -17,8 +17,8 @@ open import foundation.large-similarity-preserving-binary-maps
 
 ## Idea
 
-Given [cumulative large sets](foundation.cumulative-large-sets.md) `X`, `Y`, and
-`Z`, a binary map `f : X → Y → Z`
+Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y Z`, a
+binary map `f : X → Y → Z`
 {{#concept "preserves similarity" Disambiguation="binary map between cumulative large sets" Agda=preserves-sim-binary-map-Cumulative-Large-Set}}
 if whenever `x₁` is similar to `x₂` and `y₁` is similar to `y₂`, `f x₁ y₁` is
 similar to `f x₂ y₂`.
@@ -29,16 +29,17 @@ similar to `f x₂ y₂`.
 module _
   {αX αY αZ : Level → Level}
   {βX βY βZ : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  {Z : (l : Level) → UU (αZ l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
-  (SZ : Cumulative-Large-Set βZ Z)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
+  (SZ : Cumulative-Large-Set αZ βZ)
   where
 
   preserves-sim-binary-map-Cumulative-Large-Set :
-    ({l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2)) → UUω
+    ( {l1 l2 : Level} →
+      type-Cumulative-Large-Set SX l1 →
+      type-Cumulative-Large-Set SY l2 →
+      type-Cumulative-Large-Set SZ (l1 ⊔ l2)) →
+    UUω
   preserves-sim-binary-map-Cumulative-Large-Set f =
     preserves-sim-binary-map-Large-Similarity-Relation
       ( large-similarity-relation-Cumulative-Large-Set SX)
@@ -55,7 +56,10 @@ module _
 
   map-sim-preserving-binary-map-Cumulative-Large-Set :
     sim-preserving-binary-map-Cumulative-Large-Set →
-    {l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2)
+    {l1 l2 : Level} →
+    type-Cumulative-Large-Set SX l1 →
+    type-Cumulative-Large-Set SY l2 →
+    type-Cumulative-Large-Set SZ (l1 ⊔ l2)
   map-sim-preserving-binary-map-Cumulative-Large-Set =
     map-sim-preserving-binary-map-Large-Similarity-Relation
 
@@ -73,12 +77,15 @@ module _
 module _
   {α : Level → Level}
   {β : Level → Level → Level}
-  {X : (l : Level) → UU (α l)}
-  (S : Cumulative-Large-Set β X)
+  (S : Cumulative-Large-Set α β)
   where
 
   preserves-sim-binary-operator-Cumulative-Large-Set :
-    ({l1 l2 : Level} → X l1 → X l2 → X (l1 ⊔ l2)) → UUω
+    ( {l1 l2 : Level} →
+      type-Cumulative-Large-Set S l1 →
+      type-Cumulative-Large-Set S l2 →
+      type-Cumulative-Large-Set S (l1 ⊔ l2)) →
+    UUω
   preserves-sim-binary-operator-Cumulative-Large-Set =
     preserves-sim-binary-map-Cumulative-Large-Set S S S
 
@@ -88,7 +95,10 @@ module _
 
   map-sim-preserving-binary-operator-Cumulative-Large-Set :
     sim-preserving-binary-operator-Cumulative-Large-Set →
-    {l1 l2 : Level} → X l1 → X l2 → X (l1 ⊔ l2)
+    {l1 l2 : Level} →
+    type-Cumulative-Large-Set S l1 →
+    type-Cumulative-Large-Set S l2 →
+    type-Cumulative-Large-Set S (l1 ⊔ l2)
   map-sim-preserving-binary-operator-Cumulative-Large-Set =
     map-sim-preserving-binary-map-Large-Similarity-Relation
 
@@ -108,19 +118,22 @@ module _
 module _
   {αX αY αZ : Level → Level}
   {βX βY βZ : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  {Z : (l : Level) → UU (αZ l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
-  (SZ : Cumulative-Large-Set βZ Z)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
+  (SZ : Cumulative-Large-Set αZ βZ)
   where
 
   abstract
     map-raise-left-preserves-sim-binary-map-Cumulative-Large-Set :
-      (f : ({l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2))) →
+      (f :
+        {l1 l2 : Level} →
+        type-Cumulative-Large-Set SX l1 →
+        type-Cumulative-Large-Set SY l2 →
+        type-Cumulative-Large-Set SZ (l1 ⊔ l2)) →
       preserves-sim-binary-map-Cumulative-Large-Set SX SY SZ f →
-      {l1 l2 : Level} (l3 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       f (raise-Cumulative-Large-Set SX l3 x) y ＝
       raise-Cumulative-Large-Set SZ l3 (f x y)
     map-raise-left-preserves-sim-binary-map-Cumulative-Large-Set
@@ -133,9 +146,15 @@ module _
             ( refl-sim-Cumulative-Large-Set SY y)))
 
     map-raise-right-preserves-sim-binary-map-Cumulative-Large-Set :
-      (f : ({l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2))) →
+      (f :
+        {l1 l2 : Level} →
+        type-Cumulative-Large-Set SX l1 →
+        type-Cumulative-Large-Set SY l2 →
+        type-Cumulative-Large-Set SZ (l1 ⊔ l2)) →
       preserves-sim-binary-map-Cumulative-Large-Set SX SY SZ f →
-      {l1 l2 : Level} (l3 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       f x (raise-Cumulative-Large-Set SY l3 y) ＝
       raise-Cumulative-Large-Set SZ l3 (f x y)
     map-raise-right-preserves-sim-binary-map-Cumulative-Large-Set
@@ -148,9 +167,15 @@ module _
             ( sim-raise-Cumulative-Large-Set' SY l3 y)))
 
     map-raise-raise-preserves-sim-binary-map-Cumulative-Large-Set :
-      (f : ({l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2))) →
+      (f :
+        {l1 l2 : Level} →
+        type-Cumulative-Large-Set SX l1 →
+        type-Cumulative-Large-Set SY l2 →
+        type-Cumulative-Large-Set SZ (l1 ⊔ l2)) →
       preserves-sim-binary-map-Cumulative-Large-Set SX SY SZ f →
-      {l1 l2 : Level} (l3 l4 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 l4 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       f
         ( raise-Cumulative-Large-Set SX l3 x)
         ( raise-Cumulative-Large-Set SY l4 y) ＝
@@ -167,18 +192,17 @@ module _
 module _
   {αX αY αZ : Level → Level}
   {βX βY βZ : Level → Level → Level}
-  {X : (l : Level) → UU (αX l)}
-  {Y : (l : Level) → UU (αY l)}
-  {Z : (l : Level) → UU (αZ l)}
-  (SX : Cumulative-Large-Set βX X)
-  (SY : Cumulative-Large-Set βY Y)
-  (SZ : Cumulative-Large-Set βZ Z)
+  (SX : Cumulative-Large-Set αX βX)
+  (SY : Cumulative-Large-Set αY βY)
+  (SZ : Cumulative-Large-Set αZ βZ)
   (f : sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ)
   where
 
   abstract
     map-raise-left-sim-preserving-binary-map-Cumulative-Large-Set :
-      {l1 l2 : Level} (l3 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       map-sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ
         ( f)
         ( raise-Cumulative-Large-Set SX l3 x)
@@ -196,7 +220,9 @@ module _
           ( f))
 
     map-raise-right-sim-preserving-binary-map-Cumulative-Large-Set :
-      {l1 l2 : Level} (l3 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       map-sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ
         ( f)
         ( x)
@@ -214,7 +240,9 @@ module _
           ( f))
 
     map-raise-raise-sim-preserving-binary-map-Cumulative-Large-Set :
-      {l1 l2 : Level} (l3 l4 : Level) (x : X l1) (y : Y l2) →
+      {l1 l2 : Level} (l3 l4 : Level)
+      (x : type-Cumulative-Large-Set SX l1)
+      (y : type-Cumulative-Large-Set SY l2) →
       map-sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ
         ( f)
         ( raise-Cumulative-Large-Set SX l3 x)
