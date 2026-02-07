@@ -243,7 +243,6 @@ module _
       ( λ y →
         is-inhabited-or-empty-is-decidable-trunc-Prop
           ( lem (trunc-Prop (fiber f y))))
-
 ```
 
 ### Assuming excluded middle, not surjective maps are nonsurjective
@@ -260,6 +259,6 @@ module _
   is-nonsurjective-is-not-surjective-LEM H =
     rec-coproduct
       ( id)
-      ( λ nF → ex-falso (H (is-surjective-is-not-nonsurjective-LEM nF)))
+      ( λ nF → ex-falso (H (is-surjective-is-not-nonsurjective-LEM lem nF)))
       ( lem (is-nonsurjective-Prop f))
 ```
