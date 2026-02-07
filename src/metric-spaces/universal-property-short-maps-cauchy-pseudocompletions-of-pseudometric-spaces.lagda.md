@@ -27,8 +27,8 @@ open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometri
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
