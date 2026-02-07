@@ -7,9 +7,6 @@ module metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-p
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-positive-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -25,7 +22,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces
-open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
