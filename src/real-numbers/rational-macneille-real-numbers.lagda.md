@@ -42,7 +42,6 @@ open import real-numbers.located-macneille-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
-open import real-numbers.similarity-macneille-real-numbers
 ```
 
 </details>
