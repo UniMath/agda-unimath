@@ -27,8 +27,10 @@ open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -128,6 +130,13 @@ module _
 abstract
   eq-ℚ⁺ : {x y : ℚ⁺} → rational-ℚ⁺ x ＝ rational-ℚ⁺ y → x ＝ y
   eq-ℚ⁺ {x} {y} = eq-type-subtype is-positive-prop-ℚ
+
+  is-injective-rational-ℚ⁺ : is-injective rational-ℚ⁺
+  is-injective-rational-ℚ⁺ = eq-ℚ⁺
+
+  is-emb-rational-ℚ⁺ : is-emb rational-ℚ⁺
+  is-emb-rational-ℚ⁺ =
+    is-emb-is-injective is-set-ℚ is-injective-rational-ℚ⁺
 ```
 
 ## Properties

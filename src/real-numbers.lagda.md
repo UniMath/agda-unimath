@@ -111,6 +111,7 @@ open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers public
 open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
+open import real-numbers.rational-macneille-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
