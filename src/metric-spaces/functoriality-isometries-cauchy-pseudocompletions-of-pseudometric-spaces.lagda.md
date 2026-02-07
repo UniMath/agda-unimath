@@ -1,4 +1,4 @@
-# Functoriality of Cauchy pseudocompletions of pseudometric spaces and isometries
+# Functorial action on isometries of Cauchy pseudocompletions of pseudometric spaces
 
 ```agda
 module metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces where
