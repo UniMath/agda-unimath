@@ -160,11 +160,14 @@ module _
 
 ```agda
 abstract
-  is-set-macneille-ℝ : (l : Level) → is-set (macneille-ℝ l)
-  is-set-macneille-ℝ l =
+  is-set-macneille-ℝ : {l : Level} → is-set (macneille-ℝ l)
+  is-set-macneille-ℝ {l} =
     is-set-type-subtype
       ( subtype-macneille-ℝ l)
       ( is-set-product (is-set-lower-ℝ l) (is-set-upper-ℝ l))
+
+set-macneille-ℝ : (l : Level) → Set (lsuc l)
+set-macneille-ℝ l = (macneille-ℝ l , is-set-macneille-ℝ)
 ```
 
 ### Equality of MacNeille real numbers

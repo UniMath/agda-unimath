@@ -16,17 +16,22 @@ open import foundation.conjunction
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -58,6 +63,10 @@ is-located-macneille-ℝ x =
 
 located-macneille-ℝ : (l : Level) → UU (lsuc l)
 located-macneille-ℝ l = type-subtype is-located-prop-macneille-ℝ
+
+is-set-located-macneille-ℝ : {l : Level} → is-set (located-macneille-ℝ l)
+is-set-located-macneille-ℝ =
+  is-set-type-subtype is-located-prop-macneille-ℝ is-set-macneille-ℝ
 ```
 
 ### Dedekind reals are MacNeille reals
@@ -89,14 +98,14 @@ module _
     ( is-open-upper-complement-lower-cut-real-ℝ ,
       is-open-lower-complement-upper-cut-real-ℝ)
 
-macneille-real-ℝ : {l : Level} → ℝ l → macneille-ℝ l
-macneille-real-ℝ x =
-  ( ( lower-real-ℝ x , upper-real-ℝ x) ,
-    is-open-dedekind-macneille-real-ℝ x)
+  macneille-real-ℝ : macneille-ℝ l
+  macneille-real-ℝ =
+    ( ( lower-real-ℝ x , upper-real-ℝ x) ,
+      is-open-dedekind-macneille-real-ℝ)
 
-located-macneille-real-ℝ : {l : Level} → ℝ l → located-macneille-ℝ l
-located-macneille-real-ℝ x =
-  ( macneille-real-ℝ x , λ q r → is-located-lower-upper-cut-ℝ x)
+  located-macneille-real-ℝ : located-macneille-ℝ l
+  located-macneille-real-ℝ =
+    ( macneille-real-ℝ , λ q r → is-located-lower-upper-cut-ℝ x)
 ```
 
 ### Located MacNeille reals are Dedekind reals
@@ -130,8 +139,8 @@ real-macneille-ℝ x L = real-located-macneille-ℝ (x , L)
 ```agda
 abstract
   is-section-real-located-macneille-real-ℝ :
-    {l : Level} (x : ℝ l) →
-    real-located-macneille-ℝ (located-macneille-real-ℝ x) ＝ x
+    {l : Level} →
+    is-section (real-located-macneille-ℝ {l}) located-macneille-real-ℝ
   is-section-real-located-macneille-real-ℝ x =
     eq-eq-lower-real-ℝ
       ( real-located-macneille-ℝ (located-macneille-real-ℝ x))
@@ -139,8 +148,8 @@ abstract
       ( refl)
 
   is-retraction-real-located-macneille-real-ℝ :
-    {l : Level} (x : located-macneille-ℝ l) →
-    located-macneille-real-ℝ (real-located-macneille-ℝ x) ＝ x
+    {l : Level} →
+    is-retraction (real-located-macneille-ℝ {l}) located-macneille-real-ℝ
   is-retraction-real-located-macneille-real-ℝ {l} x =
     eq-type-subtype
       ( is-located-prop-macneille-ℝ)
@@ -150,13 +159,54 @@ abstract
         ( refl)
         ( refl))
 
-equiv-located-macneille-ℝ : (l : Level) → located-macneille-ℝ l ≃ ℝ l
-equiv-located-macneille-ℝ l =
-  ( real-located-macneille-ℝ ,
+  is-equiv-real-located-macneille-ℝ :
+    {l : Level} → is-equiv (real-located-macneille-ℝ {l})
+  is-equiv-real-located-macneille-ℝ =
     is-equiv-is-invertible
       ( located-macneille-real-ℝ)
       ( is-section-real-located-macneille-real-ℝ)
-      ( is-retraction-real-located-macneille-real-ℝ))
+      ( is-retraction-real-located-macneille-real-ℝ)
+
+  is-equiv-located-macneille-real-ℝ :
+    {l : Level} → is-equiv (located-macneille-real-ℝ {l})
+  is-equiv-located-macneille-real-ℝ =
+    is-equiv-is-invertible
+      ( real-located-macneille-ℝ)
+      ( is-retraction-real-located-macneille-real-ℝ)
+      ( is-section-real-located-macneille-real-ℝ)
+
+equiv-located-macneille-ℝ : (l : Level) → located-macneille-ℝ l ≃ ℝ l
+equiv-located-macneille-ℝ l =
+  ( real-located-macneille-ℝ , is-equiv-real-located-macneille-ℝ)
+```
+
+### The map from Dedekind reals to MacNeille reals is an embedding
+
+```agda
+abstract
+  is-emb-real-located-macneille-ℝ :
+    {l : Level} → is-emb (real-located-macneille-ℝ {l})
+  is-emb-real-located-macneille-ℝ =
+    is-emb-is-equiv is-equiv-real-located-macneille-ℝ
+
+  is-emb-located-macneille-real-ℝ :
+    {l : Level} → is-emb (located-macneille-real-ℝ {l})
+  is-emb-located-macneille-real-ℝ =
+    is-emb-is-equiv is-equiv-located-macneille-real-ℝ
+
+  is-emb-macneille-real-ℝ :
+    {l : Level} → is-emb (macneille-real-ℝ {l})
+  is-emb-macneille-real-ℝ {l} =
+    is-emb-comp
+      ( inclusion-subtype is-located-prop-macneille-ℝ)
+      ( located-macneille-real-ℝ {l})
+      ( is-emb-inclusion-subtype is-located-prop-macneille-ℝ)
+      ( is-emb-located-macneille-real-ℝ {l})
+
+  is-injective-macneille-real-ℝ :
+    {l : Level} → is-injective (macneille-real-ℝ {l})
+  is-injective-macneille-real-ℝ {l} =
+    is-injective-is-emb (is-emb-macneille-real-ℝ {l})
 ```
 
 ### If all MacNeille reals are located, then they coincide with Dedekind reals
@@ -242,18 +292,18 @@ module _
   {l : Level} (lem : level-LEM l)
   where
 
-  is-decidable-lower-cut-macneille-LEM-ℝ :
+  is-decidable-lower-cut-macneille-ℝ-LEM :
     (x : macneille-ℝ l) (p : ℚ) →
     is-decidable (is-in-lower-cut-macneille-ℝ x p)
-  is-decidable-lower-cut-macneille-LEM-ℝ x p =
+  is-decidable-lower-cut-macneille-ℝ-LEM x p =
     lem (lower-cut-macneille-ℝ x p)
 
-  is-located-macneille-LEM-ℝ : (x : macneille-ℝ l) → is-located-macneille-ℝ x
-  is-located-macneille-LEM-ℝ x =
+  is-located-macneille-ℝ-LEM : (x : macneille-ℝ l) → is-located-macneille-ℝ x
+  is-located-macneille-ℝ-LEM x =
     is-located-macneille-is-decidable-lower-cut-ℝ x
-      ( is-decidable-lower-cut-macneille-LEM-ℝ x)
+      ( is-decidable-lower-cut-macneille-ℝ-LEM x)
 
-  equiv-macneille-LEM-ℝ : macneille-ℝ l ≃ ℝ l
-  equiv-macneille-LEM-ℝ =
-    equiv-real-all-macneille-located-ℝ is-located-macneille-LEM-ℝ
+  equiv-macneille-ℝ-LEM : macneille-ℝ l ≃ ℝ l
+  equiv-macneille-ℝ-LEM =
+    equiv-real-all-macneille-located-ℝ is-located-macneille-ℝ-LEM
 ```
