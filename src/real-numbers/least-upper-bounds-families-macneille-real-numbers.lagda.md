@@ -119,7 +119,12 @@ module _
       elim-exists
         ( all-upper-sections-family-macneille-ℝ q)
         ( λ p (p<q , p∈all) i →
-          is-in-cut-le-ℚ-upper-ℝ (upper-macneille-ℝ (y i)) p q p<q (p∈all i))
+          is-in-cut-le-ℚ-upper-ℝ
+            ( upper-real-macneille-ℝ (y i))
+            ( p)
+            ( q)
+            ( p<q)
+            ( p∈all i))
 
   abstract
     is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
@@ -388,7 +393,7 @@ module _
                               ( y i)
                               ( t)
                               ( is-in-cut-le-ℚ-lower-ℝ
-                                ( lower-macneille-ℝ (y i))
+                                ( lower-real-macneille-ℝ (y i))
                                 ( t)
                                 ( r)
                                 ( t<r)
@@ -443,20 +448,20 @@ module _
         ( y)
         ( least-upper-bound-inhabited-bounded-family-macneille-ℝ)
     is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ i =
-      leq-macneille-leq-upper-macneille-ℝ
+      leq-macneille-leq-upper-real-macneille-ℝ
         ( y i)
         ( least-upper-bound-inhabited-bounded-family-macneille-ℝ)
         ( is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( i))
 
   abstract
-    is-in-cut-upper-least-upper-bound-family-is-in-cut-upper-macneille-ℝ :
+    is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ :
       {l4 : Level} (z : macneille-ℝ l4) →
       is-upper-bound-family-of-elements-macneille-ℝ y z →
       (q : ℚ) →
       is-in-upper-cut-macneille-ℝ z q →
       is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ q
-    is-in-cut-upper-least-upper-bound-family-is-in-cut-upper-macneille-ℝ
+    is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ
       z y≤z q q∈Uz =
       let
         open
@@ -483,10 +488,10 @@ module _
       is-upper-bound-family-of-elements-macneille-ℝ y z →
       leq-macneille-ℝ least-upper-bound-inhabited-bounded-family-macneille-ℝ z
     leq-least-upper-bound-family-upper-bound-family-macneille-ℝ z y≤z =
-      leq-macneille-leq-upper-macneille-ℝ
+      leq-macneille-leq-upper-real-macneille-ℝ
         ( least-upper-bound-inhabited-bounded-family-macneille-ℝ)
         ( z)
-        ( is-in-cut-upper-least-upper-bound-family-is-in-cut-upper-macneille-ℝ
+        ( is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ
           z y≤z)
 
   abstract

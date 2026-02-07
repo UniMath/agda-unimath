@@ -55,7 +55,9 @@ located. Therefore Dedekind reals coincide with located MacNeille reals.
 ```agda
 is-located-prop-macneille-ℝ : {l : Level} → subtype l (macneille-ℝ l)
 is-located-prop-macneille-ℝ x =
-  is-located-prop-lower-upper-ℝ (lower-macneille-ℝ x) (upper-macneille-ℝ x)
+  is-located-prop-lower-upper-ℝ
+    ( lower-real-macneille-ℝ x)
+    ( upper-real-macneille-ℝ x)
 
 is-located-macneille-ℝ : {l : Level} → macneille-ℝ l → UU l
 is-located-macneille-ℝ x =
@@ -111,23 +113,27 @@ module _
 ### Located MacNeille reals are Dedekind reals
 
 ```agda
-is-disjoint-lower-upper-macneille-ℝ :
+is-disjoint-lower-upper-real-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) →
-  is-disjoint-lower-upper-ℝ (lower-macneille-ℝ x) (upper-macneille-ℝ x)
-is-disjoint-lower-upper-macneille-ℝ x q (q∈L , q∈U) =
+  is-disjoint-lower-upper-ℝ
+    ( lower-real-macneille-ℝ x)
+    ( upper-real-macneille-ℝ x)
+is-disjoint-lower-upper-real-macneille-ℝ x q (q∈L , q∈U) =
   is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ x q q∈L q∈U
 
 real-located-macneille-ℝ : {l : Level} → located-macneille-ℝ l → ℝ l
 real-located-macneille-ℝ x =
   real-lower-upper-ℝ
-    ( lower-macneille-ℝ (pr1 x))
-    ( upper-macneille-ℝ (pr1 x))
-    ( is-disjoint-lower-upper-macneille-ℝ (pr1 x))
+    ( lower-real-macneille-ℝ (pr1 x))
+    ( upper-real-macneille-ℝ (pr1 x))
+    ( is-disjoint-lower-upper-real-macneille-ℝ (pr1 x))
     ( pr2 x)
 
 real-macneille-ℝ :
   {l : Level} (x : macneille-ℝ l) →
-  is-located-lower-upper-ℝ (lower-macneille-ℝ x) (upper-macneille-ℝ x) →
+  is-located-lower-upper-ℝ
+    ( lower-real-macneille-ℝ x)
+    ( upper-real-macneille-ℝ x) →
   ℝ l
 real-macneille-ℝ x L = real-located-macneille-ℝ (x , L)
 ```
