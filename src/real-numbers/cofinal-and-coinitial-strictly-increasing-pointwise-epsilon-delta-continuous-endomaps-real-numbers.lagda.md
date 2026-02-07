@@ -1,4 +1,4 @@
-# cofinal and coinitial, strictly increasing, pointwise ε-δ continuous endomaps on the real numbers
+# Cofinal and coinitial, strictly increasing, pointwise ε-δ continuous endomaps on the real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
