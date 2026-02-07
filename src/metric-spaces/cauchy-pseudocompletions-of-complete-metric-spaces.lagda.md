@@ -1,4 +1,4 @@
-# Cauchy pseudocompletions of complete metric space
+# Cauchy pseudocompletions of complete metric spaces
 
 ```agda
 module metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces where
