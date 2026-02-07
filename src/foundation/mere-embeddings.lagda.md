@@ -10,7 +10,6 @@ module foundation.mere-embeddings where
 open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.empty-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.law-of-excluded-middle
@@ -104,12 +103,4 @@ module _
     ((x : X) → mere-emb (Y x) (Z x)) →
     mere-emb ((x : X) → Y x) ((x : X) → Z x)
   mere-emb-Π H e = map-trunc-Prop emb-Π (H _ e)
-```
-
-### Empty types merely embed into any type
-
-```agda
-mere-emb-is-empty :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-empty X → mere-emb X Y
-mere-emb-is-empty H = unit-trunc-Prop (emb-is-empty H)
 ```
