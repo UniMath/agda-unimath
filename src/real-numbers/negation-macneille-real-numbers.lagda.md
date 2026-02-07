@@ -40,6 +40,7 @@ open import real-numbers.raising-universe-levels-macneille-real-numbers
 open import real-numbers.rational-macneille-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
+open import real-numbers.strict-inequality-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.zero-macneille-real-numbers
 ```
