@@ -118,6 +118,5 @@ module _
     ( apart-prop-Large-Apartness-Relation R ,
       antirefl-Large-Apartness-Relation R ,
       symmetric-Large-Apartness-Relation R ,
-      λ a b c a#c →
-      cotransitive-Large-Apartness-Relation R a b c a#c)
+      cotransitive-Large-Apartness-Relation R)
 ```

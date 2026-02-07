@@ -816,12 +816,12 @@ module _
                       ( ε'+ε'<ε)
                       ( x-y<ε''))
                     ( cotransitive-le-ℝ
-                      zero-ℝ
+                      ( zero-ℝ)
                       ( yℝ -ℝ xℝ)
                       ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
                 ( cotransitive-le-ℝ
-                  zero-ℝ
+                  ( zero-ℝ)
                   ( xℝ -ℝ yℝ)
                   ( real-ℚ⁺ ε'')
                   ( is-positive-real-ℚ⁺ ε'')))
@@ -849,12 +849,12 @@ module _
                         ( ε'+ε'<ε)
                         ( x-y<ε''))
                     ( cotransitive-le-ℝ
-                      zero-ℝ
+                      ( zero-ℝ)
                       ( yℝ -ℝ xℝ)
                       ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
                 ( cotransitive-le-ℝ
-                  zero-ℝ
+                  ( zero-ℝ)
                   ( xℝ -ℝ yℝ)
                   ( real-ℚ⁺ ε'')
                   ( is-positive-real-ℚ⁺ ε'')))
