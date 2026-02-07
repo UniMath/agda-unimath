@@ -180,3 +180,14 @@ pr2 (is-contr-type-is-empty l) x =
         ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
     ( eq-is-prop is-property-is-empty)
 ```
+
+### Empty types embed into any type
+
+```agda
+abstract
+  emb-is-empty :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪ B
+  emb-is-empty H =
+    ( ex-falso ∘ H ,
+      is-emb-comp ex-falso H is-emb-ex-falso (is-emb-is-empty H id))
+```
