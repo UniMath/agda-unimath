@@ -66,8 +66,7 @@ is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
   is-dedekind-lower-upper-ℝ (lower-real-ℚ x) (upper-real-ℚ x)
 is-dedekind-lower-upper-real-ℚ x =
-  ( (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
-    located-le-ℚ x)
+  ( (λ q (H , K) → asymmetric-le-ℚ q x H K) , located-le-ℚ x)
 ```
 
 ### The inclusion of `ℚ` into `ℝ lzero`
@@ -77,6 +76,13 @@ opaque
   real-ℚ : ℚ → ℝ lzero
   real-ℚ x =
     (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+
+abstract opaque
+  unfolding real-ℚ
+
+  eq-lower-real-real-ℚ :
+    (q : ℚ) → lower-real-ℝ (real-ℚ q) ＝ lower-real-ℚ q
+  eq-lower-real-real-ℚ q = refl
 
 real-ℚ⁺ : ℚ⁺ → ℝ lzero
 real-ℚ⁺ q = real-ℚ (rational-ℚ⁺ q)
