@@ -9,6 +9,7 @@ open import real-numbers.absolute-value-closed-intervals-real-numbers public
 open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.accumulation-points-subsets-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
+open import real-numbers.addition-macneille-real-numbers public
 open import real-numbers.addition-negative-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
 open import real-numbers.addition-nonzero-real-numbers public

@@ -9,8 +9,8 @@ module real-numbers.arithmetically-located-macneille-real-numbers where
 ```agda
 open import foundation.universe-levels
 
-open import real-numbers.macneille-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
+open import real-numbers.macneille-real-numbers
 ```
 
 </details>
