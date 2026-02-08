@@ -19,6 +19,7 @@ open import real-numbers.addition-upper-dedekind-real-numbers public
 open import real-numbers.alternation-sequences-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
+open import real-numbers.arithmetically-located-macneille-real-numbers public
 open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-mean-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
