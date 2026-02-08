@@ -176,4 +176,5 @@ is-decidable-is-solvable-linear-congruence-ℤ a b m =
 
 ## External links
 
-- [Linear congruence theorem](https://en.wikipedia.org/wiki/Linear_congruence_theorem)
+- [Linear Congruence Equation](https://mathworld.wolfram.com/LinearCongruenceEquation.html)
+  on Wolfram Mathworld
