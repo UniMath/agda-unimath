@@ -179,3 +179,18 @@ abstract
     ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
     ( is-section-pred-ℤ (x -ℤ y))
 ```
+
+### Taking the difference is a section
+
+```agda
+is-section-diff-ℤ : (x y : ℤ) → (x -ℤ y) +ℤ y ＝ x
+is-section-diff-ℤ x y =
+  equational-reasoning
+    (x -ℤ y) +ℤ y
+    ＝ (x -ℤ y) +ℤ (y -ℤ zero-ℤ)
+      by ap-add-ℤ (refl {x = x -ℤ y}) (inv (right-zero-law-diff-ℤ y))
+    ＝ x -ℤ zero-ℤ
+      by triangle-diff-ℤ x y zero-ℤ
+    ＝ x
+      by right-zero-law-diff-ℤ x
+```
