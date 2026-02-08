@@ -45,9 +45,7 @@ is-zero-macneille-ℝ x = sim-macneille-ℝ x zero-macneille-ℝ
 ### A MacNeille real number `x` is zero if and only if it equals `raise-zero-macneille-ℝ l` for the appropriate universe level `l`
 
 ```agda
-abstract opaque
-  unfolding macneille-real-ℚ
-
+abstract
   eq-raise-zero-macneille-ℝ :
     {l : Level} →
     raise-zero-macneille-ℝ l ＝ raise-macneille-ℝ l zero-macneille-ℝ

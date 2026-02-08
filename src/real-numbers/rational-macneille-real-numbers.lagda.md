@@ -41,7 +41,9 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.located-macneille-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-macneille-real-numbers
 ```
 
 </details>
@@ -58,10 +60,8 @@ call numbers in the image of this embedding
 ### The inclusion of `ℚ` into MacNeille reals
 
 ```agda
-opaque
-  macneille-real-ℚ : ℚ → macneille-ℝ lzero
-  macneille-real-ℚ q =
-    macneille-real-ℝ (real-ℚ q)
+macneille-real-ℚ : ℚ → macneille-ℝ lzero
+macneille-real-ℚ q = pr1 (located-macneille-real-ℚ q)
 
 macneille-real-ℚ⁺ : ℚ⁺ → macneille-ℝ lzero
 macneille-real-ℚ⁺ q =
@@ -70,6 +70,13 @@ macneille-real-ℚ⁺ q =
 macneille-real-ℚ⁰⁺ : ℚ⁰⁺ → macneille-ℝ lzero
 macneille-real-ℚ⁰⁺ q =
   macneille-real-ℚ (rational-ℚ⁰⁺ q)
+
+abstract opaque
+  unfolding real-ℚ
+
+  eq-lower-real-macneille-real-ℚ :
+    (q : ℚ) → lower-real-macneille-ℝ (macneille-real-ℚ q) ＝ lower-real-ℚ q
+  eq-lower-real-macneille-real-ℚ q = refl
 ```
 
 ### The inclusion of `ℤ` into MacNeille reals
@@ -200,9 +207,7 @@ module _
 ### The inclusions are embeddings
 
 ```agda
-abstract opaque
-  unfolding macneille-real-ℚ
-
+abstract
   is-emb-macneille-real-ℚ : is-emb macneille-real-ℚ
   is-emb-macneille-real-ℚ =
     is-emb-comp _ _ is-emb-macneille-real-ℝ is-emb-real-ℚ
@@ -248,9 +253,7 @@ abstract
 ### The embedding of a rational number is rational
 
 ```agda
-abstract opaque
-  unfolding macneille-real-ℚ
-
+abstract
   is-rational-macneille-real-ℚ :
     (p : ℚ) → is-rational-macneille-ℝ (macneille-real-ℚ p) p
   is-rational-macneille-real-ℚ p =

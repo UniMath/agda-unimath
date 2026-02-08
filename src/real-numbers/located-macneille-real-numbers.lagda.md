@@ -9,9 +9,12 @@ module real-numbers.located-macneille-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -37,6 +40,8 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.macneille-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -136,6 +141,25 @@ real-macneille-ℝ :
     ( upper-real-macneille-ℝ x) →
   ℝ l
 real-macneille-ℝ x L = real-located-macneille-ℝ (x , L)
+```
+
+### Located rational, integer, and natural MacNeille reals
+
+```agda
+located-macneille-real-ℚ : ℚ → located-macneille-ℝ lzero
+located-macneille-real-ℚ q =
+  located-macneille-real-ℝ (real-ℚ q)
+
+located-zero-macneille-ℝ : located-macneille-ℝ lzero
+located-zero-macneille-ℝ = located-macneille-real-ℚ zero-ℚ
+
+located-macneille-real-ℤ : ℤ → located-macneille-ℝ lzero
+located-macneille-real-ℤ x =
+  located-macneille-real-ℝ (real-ℤ x)
+
+located-macneille-real-ℕ : ℕ → located-macneille-ℝ lzero
+located-macneille-real-ℕ n =
+  located-macneille-real-ℝ (real-ℕ n)
 ```
 
 ## Properties

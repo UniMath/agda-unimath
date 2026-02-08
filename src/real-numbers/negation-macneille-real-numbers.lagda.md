@@ -33,6 +33,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import real-numbers.located-macneille-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
@@ -194,11 +195,48 @@ abstract opaque
           tr (is-in-lower-cut-macneille-ℝ x) (inv (neg-neg-ℚ q))))
 ```
 
+### Negation preserves and reflects locatedness
+
+```agda
+abstract opaque
+  unfolding neg-macneille-ℝ
+
+  is-located-neg-macneille-ℝ :
+    {l : Level} (x : macneille-ℝ l) →
+    is-located-macneille-ℝ x →
+    is-located-macneille-ℝ (neg-macneille-ℝ x)
+  is-located-neg-macneille-ℝ x L q r q<r =
+    elim-disjunction
+      ( disjunction-Prop
+        ( lower-cut-macneille-ℝ (neg-macneille-ℝ x) q)
+        ( upper-cut-macneille-ℝ (neg-macneille-ℝ x) r))
+      ( inr-disjunction)
+      ( inl-disjunction)
+      ( L (neg-ℚ r) (neg-ℚ q) (neg-le-ℚ q<r))
+
+  is-located-is-located-neg-macneille-ℝ :
+    {l : Level} (x : macneille-ℝ l) →
+    is-located-macneille-ℝ (neg-macneille-ℝ x) →
+    is-located-macneille-ℝ x
+  is-located-is-located-neg-macneille-ℝ x Lneg =
+    tr
+      ( is-located-macneille-ℝ)
+      ( neg-neg-macneille-ℝ x)
+      ( is-located-neg-macneille-ℝ (neg-macneille-ℝ x) Lneg)
+
+neg-located-macneille-ℝ :
+  {l : Level} →
+  located-macneille-ℝ l →
+  located-macneille-ℝ l
+neg-located-macneille-ℝ x =
+  ( neg-macneille-ℝ (pr1 x) , is-located-neg-macneille-ℝ (pr1 x) (pr2 x))
+```
+
 ### Negation preserves rationality
 
 ```agda
 opaque
-  unfolding neg-macneille-ℝ macneille-real-ℚ real-ℚ
+  unfolding neg-macneille-ℝ real-ℚ
 
   neg-macneille-real-ℚ :
     (q : ℚ) →
@@ -274,7 +312,7 @@ module _
   where
 
   abstract opaque
-    unfolding neg-macneille-ℝ real-ℚ macneille-real-ℚ
+    unfolding neg-macneille-ℝ real-ℚ
 
     is-in-lower-cut-zero-is-in-upper-cut-zero-eq-neg-macneille-ℝ :
       is-in-lower-cut-macneille-ℝ x zero-ℚ →
@@ -364,7 +402,7 @@ module _
               is-in-lower-cut-is-in-lower-cut-raise-zero-eq-neg-macneille-ℝ q)))
 
 abstract opaque
-  unfolding neg-macneille-ℝ real-ℚ macneille-real-ℚ
+  unfolding neg-macneille-ℝ real-ℚ
 
   is-zero-eq-neg-macneille-ℝ :
     {l : Level} {x : macneille-ℝ l} →

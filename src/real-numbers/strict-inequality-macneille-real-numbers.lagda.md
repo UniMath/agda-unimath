@@ -393,7 +393,7 @@ module _
   where
 
   abstract opaque
-    unfolding le-macneille-ℝ macneille-real-ℚ real-ℚ
+    unfolding le-macneille-ℝ real-ℚ
 
     preserves-le-macneille-real-ℚ :
       le-ℚ x y → le-macneille-ℝ (macneille-real-ℚ x) (macneille-real-ℚ y)
@@ -445,7 +445,7 @@ module _
   where
 
   abstract opaque
-    unfolding le-macneille-ℝ macneille-real-ℚ real-ℚ
+    unfolding le-macneille-ℝ real-ℚ
 
     le-real-iff-is-in-lower-cut-macneille-ℝ :
       is-in-lower-cut-macneille-ℝ x q ↔ le-macneille-ℝ (macneille-real-ℚ q) x
@@ -500,7 +500,7 @@ module _
   where
 
   abstract opaque
-    unfolding le-macneille-ℝ macneille-real-ℚ real-ℚ
+    unfolding le-macneille-ℝ real-ℚ
 
     le-real-iff-is-in-upper-cut-macneille-ℝ :
       is-in-upper-cut-macneille-ℝ x q ↔ le-macneille-ℝ x (macneille-real-ℚ q)
