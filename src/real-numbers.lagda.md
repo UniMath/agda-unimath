@@ -108,7 +108,6 @@ open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-located-macneille-real-numbers public
 open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers public
 open import real-numbers.raising-universe-levels-macneille-real-numbers public
-open import real-numbers.raising-universe-levels-rational-macneille-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
 open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers public
 open import real-numbers.rational-approximates-of-real-numbers public
