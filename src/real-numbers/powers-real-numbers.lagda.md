@@ -23,19 +23,30 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
+
 open import order-theory.large-posets
 
 open import real-numbers.absolute-value-real-numbers
+open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.large-ring-of-real-numbers
+open import real-numbers.lipschitz-continuity-multiplication-real-numbers
+open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -43,6 +54,8 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.pointwise-continuous-endomaps-real-numbers
+open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
@@ -51,6 +64,8 @@ open import real-numbers.real-sequences-approximating-zero
 open import real-numbers.similarity-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.strictly-increasing-endomaps-real-numbers
+open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -252,10 +267,10 @@ abstract
 
 ```agda
 abstract
-  even-power-neg-ℝ :
+  power-neg-is-even-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-even-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ power-ℝ n x
-  even-power-neg-ℝ _ x (k , refl) =
+  power-neg-is-even-exponent-ℝ _ x (k , refl) =
     equational-reasoning
       power-ℝ (k *ℕ 2) (neg-ℝ x)
       ＝ power-ℝ k (square-ℝ (neg-ℝ x))
@@ -270,10 +285,10 @@ abstract
 
 ```agda
 abstract
-  odd-power-neg-ℝ :
+  power-neg-is-odd-exponent-ℝ :
     {l : Level} (n : ℕ) (x : ℝ l) → is-odd-ℕ n →
     power-ℝ n (neg-ℝ x) ＝ neg-ℝ (power-ℝ n x)
-  odd-power-neg-ℝ n x odd-n =
+  power-neg-is-odd-exponent-ℝ n x odd-n =
     let (k , k2+1=n) = has-odd-expansion-is-odd n odd-n
     in
       equational-reasoning
@@ -283,7 +298,7 @@ abstract
         ＝ power-ℝ (k *ℕ 2) (neg-ℝ x) *ℝ neg-ℝ x
           by power-succ-ℝ _ _
         ＝ power-ℝ (k *ℕ 2) x *ℝ neg-ℝ x
-          by ap-mul-ℝ (even-power-neg-ℝ _ x (k , refl)) refl
+          by ap-mul-ℝ (power-neg-is-even-exponent-ℝ _ x (k , refl)) refl
         ＝ neg-ℝ (power-ℝ (k *ℕ 2) x *ℝ x)
           by right-negative-law-mul-ℝ _ _
         ＝ neg-ℝ (power-ℝ (succ-ℕ (k *ℕ 2)) x)
@@ -363,10 +378,7 @@ abstract
     {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ (power-ℝ n (real-ℝ⁰⁺ x)) (power-ℝ n (real-ℝ⁰⁺ y))
   preserves-leq-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
-    leq-sim-ℝ
-      ( transitive-sim-ℝ _ one-ℝ _
-        ( sim-raise-ℝ l2 one-ℝ)
-        ( symmetric-sim-ℝ (sim-raise-ℝ l1 one-ℝ)))
+    leq-sim-ℝ (sim-raise-raise-ℝ l1 l2 one-ℝ)
   preserves-leq-power-real-ℝ⁰⁺ (succ-ℕ n) x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
@@ -430,4 +442,133 @@ abstract
               by leq-eq-ℝ (power-real-ℚ n ε)
             ≤ real-ℚ⁺ (power-ℚ⁺ n ε⁺)
               by leq-eq-ℝ (ap real-ℚ (power-rational-ℚ⁺ n ε⁺)))
+```
+
+### The power operation preserves similarity
+
+```agda
+abstract
+  preserves-sim-power-ℝ :
+    {l1 l2 : Level} (n : ℕ) {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℝ (power-ℝ n x) (power-ℝ n y)
+  preserves-sim-power-ℝ {l1} {l2} 0 _ =
+    sim-raise-raise-ℝ l1 l2 one-ℝ
+  preserves-sim-power-ℝ 1 x~y = x~y
+  preserves-sim-power-ℝ (succ-ℕ n@(succ-ℕ _)) x~y =
+    preserves-sim-mul-ℝ (preserves-sim-power-ℝ n x~y) x~y
+
+  power-raise-ℝ :
+    {l1 : Level} (l2 : Level) (n : ℕ) (x : ℝ l1) →
+    power-ℝ n (raise-ℝ l2 x) ＝ raise-ℝ l2 (power-ℝ n x)
+  power-raise-ℝ l n x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ l _)
+        ( preserves-sim-power-ℝ n (sim-raise-ℝ' l x)))
+```
+
+### For any `n`, `x ↦ xⁿ` is pointwise continuous
+
+```agda
+abstract
+  is-pointwise-continuous-power-ℝ :
+    (l : Level) (n : ℕ) →
+    is-pointwise-continuous-endomap-ℝ (power-ℝ {l} n)
+  is-pointwise-continuous-power-ℝ l 0 =
+    is-pointwise-continuous-endomap-const-ℝ l (raise-one-ℝ l)
+  is-pointwise-continuous-power-ℝ l 1 =
+    is-pointwise-continuous-endomap-id-ℝ l
+  is-pointwise-continuous-power-ℝ l (succ-ℕ n@(succ-ℕ _)) =
+    is-pointwise-continuous-map-comp-pointwise-continuous-map-Metric-Space
+      ( metric-space-ℝ l)
+      ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+      ( metric-space-ℝ l)
+      ( pointwise-continuous-map-mul-pair-ℝ l l)
+      ( comp-pointwise-continuous-map-Metric-Space
+        ( metric-space-ℝ l)
+        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+        ( product-Metric-Space (metric-space-ℝ l) (metric-space-ℝ l))
+        ( pointwise-continuous-map-product-Metric-Space _ _ _ _
+          ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+          ( pointwise-continuous-endomap-id-ℝ l))
+        ( pointwise-continuous-map-isometry-Metric-Space _ _
+          ( diagonal-product-isometry-Metric-Space (metric-space-ℝ l))))
+
+pointwise-continuous-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-continuous-endomap-ℝ l l
+pointwise-continuous-power-ℝ l n =
+  ( power-ℝ n , is-pointwise-continuous-power-ℝ l n)
+
+abstract
+  is-pointwise-ε-δ-continuous-power-ℝ :
+    (l : Level) (n : ℕ) →
+    is-pointwise-ε-δ-continuous-endomap-ℝ (power-ℝ {l} n)
+  is-pointwise-ε-δ-continuous-power-ℝ l n =
+    is-pointwise-ε-δ-continuous-map-pointwise-continuous-endomap-ℝ
+      ( pointwise-continuous-power-ℝ l n)
+
+pointwise-ε-δ-continuous-power-ℝ :
+  (l : Level) (n : ℕ) → pointwise-ε-δ-continuous-endomap-ℝ l l
+pointwise-ε-δ-continuous-power-ℝ l n =
+  ( power-ℝ n , is-pointwise-ε-δ-continuous-power-ℝ l n)
+```
+
+### For rational `q`, `real-ℚ (power-ℚ n q)` is similar to `power-ℝ n (raise-real-ℚ l q)`
+
+```agda
+abstract
+  sim-power-raise-real-ℚ :
+    (l : Level) (n : ℕ) (q : ℚ) →
+    sim-ℝ (real-ℚ (power-ℚ n q)) (power-ℝ n (raise-real-ℚ l q))
+  sim-power-raise-real-ℚ l n q =
+    concat-eq-sim-ℝ
+      ( inv (power-real-ℚ n q))
+      ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ q)))
+```
+
+### For odd `n`, `x ↦ xⁿ` is strictly increasing
+
+```agda
+abstract
+  is-strictly-increasing-power-is-odd-exponent-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-strictly-increasing-endomap-ℝ (power-ℝ {l} n)
+  is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n =
+    is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
+      ( pointwise-ε-δ-continuous-power-ℝ l n)
+      ( λ p q p<q →
+        preserves-le-sim-ℝ
+          ( sim-power-raise-real-ℚ l n p)
+          ( sim-power-raise-real-ℚ l n q)
+          ( preserves-le-real-ℚ
+            ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))
+```
+
+### For odd `n`, `x ↦ xⁿ` is cofinal and coinitial
+
+```agda
+abstract
+  is-cofinal-power-is-odd-exponent-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-cofinal-endomap-ℝ (power-ℝ {l} n)
+  is-cofinal-power-is-odd-exponent-ℝ l n odd-n q =
+    map-exists _
+      ( raise-real-ℚ l)
+      ( λ p q≤pⁿ →
+        preserves-leq-right-sim-ℝ
+          ( sim-power-raise-real-ℚ l n p)
+          ( preserves-leq-real-ℚ q≤pⁿ))
+      ( is-cofinal-power-is-odd-ℚ n odd-n q)
+
+  is-coinitial-power-is-odd-exponent-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-coinitial-endomap-ℝ (power-ℝ {l} n)
+  is-coinitial-power-is-odd-exponent-ℝ l n odd-n q =
+    map-exists _
+      ( raise-real-ℚ l)
+      ( λ p pⁿ≤q →
+        preserves-leq-left-sim-ℝ
+          ( sim-power-raise-real-ℚ l n p)
+          ( preserves-leq-real-ℚ pⁿ≤q))
+      ( is-coinitial-power-is-odd-ℚ n odd-n q)
 ```

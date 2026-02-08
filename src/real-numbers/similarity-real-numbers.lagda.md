@@ -130,6 +130,21 @@ abstract opaque
     transitive-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
+### Concatenation of similarity with equality
+
+```agda
+abstract
+  concat-sim-eq-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} {y' : ℝ l2} →
+    sim-ℝ x y → y ＝ y' → sim-ℝ x y'
+  concat-sim-eq-ℝ x~y refl = x~y
+
+  concat-eq-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l1} {y : ℝ l2} →
+    x ＝ x' → sim-ℝ x' y → sim-ℝ x y
+  concat-eq-sim-ℝ refl x'~y = x'~y
+```
+
 ### Similar real numbers in the same universe are equal
 
 ```agda
