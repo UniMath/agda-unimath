@@ -16,6 +16,17 @@ module literature.wikipedia-list-of-theorems where
 The theorems are ordered alphabetically, omitting leading definite articles
 ("the").
 
+### Absolute convergence theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.absolute-convergence-series-real-numbers using
+  ( is-convergent-is-absolutely-convergent-series-ℝ)
+open import functional-analysis.absolute-convergence-series-real-banach-spaces using
+  ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
+```
+
 ### Bézout's lemma {#Q513028}
 
 **Author:** [Bryan Lu](https://blu-bird.github.io)
@@ -177,6 +188,15 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
 ```
 
 ### Triangle inequality theorem {#Q208216}
