@@ -27,6 +27,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -249,6 +250,52 @@ module _
   left-unit-law-add-lower-ℝ : add-lower-ℝ (lower-real-ℚ zero-ℚ) x ＝ x
   left-unit-law-add-lower-ℝ =
     commutative-add-lower-ℝ (lower-real-ℚ zero-ℚ) x ∙ right-unit-law-add-lower-ℝ
+```
+
+### The inclusion of rational numbers preserves addition
+
+```agda
+abstract
+  sim-add-lower-real-ℚ :
+    (p q : ℚ) →
+    sim-subtype
+      ( cut-lower-ℝ (add-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q)))
+      ( cut-lower-ℝ (lower-real-ℚ (p +ℚ q)))
+  sim-add-lower-real-ℚ p q =
+    ( ( λ r →
+        elim-exists
+          ( cut-lower-ℝ (lower-real-ℚ (p +ℚ q)) r)
+          ( λ (a , b) (a<p , b<q , r=a+b) →
+            inv-tr
+              ( λ t → le-ℚ t (p +ℚ q))
+              ( r=a+b)
+              ( preserves-le-add-ℚ a<p b<q))) ,
+      ( λ r r<p+q →
+        elim-exists
+          ( cut-add-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q) r)
+          ( λ a (a0<a , a<p) →
+            intro-exists
+              ( a , r -ℚ a)
+              ( a<p ,
+                le-transpose-right-add-ℚ r q a
+                  ( tr
+                    ( le-ℚ r)
+                    ( commutative-add-ℚ a q)
+                    ( tr
+                      ( λ t → le-ℚ t (a +ℚ q))
+                      ( is-section-diff-ℚ q r)
+                      ( preserves-le-left-add-ℚ q (r -ℚ q) a a0<a))) ,
+                inv (is-identity-right-conjugation-add-ℚ a r)))
+          ( dense-le-ℚ (le-transpose-right-add-ℚ r p q r<p+q))))
+
+  add-lower-real-ℚ :
+    (p q : ℚ) →
+    add-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q) ＝ lower-real-ℚ (p +ℚ q)
+  add-lower-real-ℚ p q =
+    eq-sim-cut-lower-ℝ
+      ( add-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q))
+      ( lower-real-ℚ (p +ℚ q))
+      ( sim-add-lower-real-ℚ p q)
 ```
 
 ### The commutative monoid of lower Dedekind real numbers

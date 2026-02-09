@@ -28,7 +28,9 @@ open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -121,6 +123,13 @@ module _
 abstract
   eq-ℚ⁰⁺ : {x y : ℚ⁰⁺} → rational-ℚ⁰⁺ x ＝ rational-ℚ⁰⁺ y → x ＝ y
   eq-ℚ⁰⁺ {x} {y} = eq-type-subtype is-nonnegative-prop-ℚ
+
+  is-injective-rational-ℚ⁰⁺ : is-injective rational-ℚ⁰⁺
+  is-injective-rational-ℚ⁰⁺ = eq-ℚ⁰⁺
+
+  is-emb-rational-ℚ⁰⁺ : is-emb rational-ℚ⁰⁺
+  is-emb-rational-ℚ⁰⁺ =
+    is-emb-is-injective is-set-ℚ is-injective-rational-ℚ⁰⁺
 ```
 
 ### The nonnegative rational numbers form a set
