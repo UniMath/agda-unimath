@@ -37,20 +37,24 @@ differing universe levels.
 ## Definition
 
 ```agda
-opaque
-  sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-  sim-ℝ x y = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
 
-  is-prop-sim-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-prop (sim-ℝ x y)
-  is-prop-sim-ℝ x y =
-    is-prop-type-Prop (sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y))
+  opaque
+    sim-ℝ : UU (l1 ⊔ l2)
+    sim-ℝ = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 
-sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
-sim-prop-ℝ x y = (sim-ℝ x y , is-prop-sim-ℝ x y)
+    is-prop-sim-ℝ : is-prop sim-ℝ
+    is-prop-sim-ℝ =
+      is-prop-type-Prop (sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y))
 
-infix 6 _~ℝ_
-_~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-_~ℝ_ = sim-ℝ
+  sim-prop-ℝ : Prop (l1 ⊔ l2)
+  sim-prop-ℝ = (sim-ℝ , is-prop-sim-ℝ)
+
+  infix 6 _~ℝ_
+  _~ℝ_ : UU (l1 ⊔ l2)
+  _~ℝ_ = sim-ℝ
 ```
 
 ## Properties
@@ -97,10 +101,10 @@ module _
 abstract opaque
   unfolding sim-ℝ
 
-  refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ~ℝ x
+  refl-sim-ℝ : {l : Level} (x : ℝ l) → x ~ℝ x
   refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
 
-  sim-eq-ℝ : {l : Level} → {x y : ℝ l} → x ＝ y → x ~ℝ y
+  sim-eq-ℝ : {l : Level} {x y : ℝ l} → x ＝ y → x ~ℝ y
   sim-eq-ℝ {_} {x} {y} x=y = tr (sim-ℝ x) x=y (refl-sim-ℝ x)
 ```
 
@@ -111,7 +115,7 @@ abstract opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
-    {l1 l2 : Level} → {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → x ~ℝ y → y ~ℝ x
   symmetric-sim-ℝ {x = x} {y = y} =
     symmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 ```
@@ -123,7 +127,7 @@ abstract opaque
   unfolding sim-ℝ
 
   transitive-sim-ℝ :
-    {l1 l2 l3 : Level} →
+    {l1 l2 l3 : Level}
     (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     y ~ℝ z → x ~ℝ y → x ~ℝ z
   transitive-sim-ℝ x y z =
@@ -151,18 +155,18 @@ abstract
 abstract opaque
   unfolding sim-ℝ
 
-  eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
+  eq-sim-ℝ : {l : Level} {x y : ℝ l} → x ~ℝ y → x ＝ y
   eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
 ```
 
 ### Similarity is a large similarity relation
 
 ```agda
-large-preorder-sim-ℝ : Large-Preorder lsuc _⊔_
+large-preorder-sim-ℝ : Large-Preorder lsuc (_⊔_)
 large-preorder-sim-ℝ =
   make-Large-Preorder ℝ sim-prop-ℝ refl-sim-ℝ transitive-sim-ℝ
 
-large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation _⊔_ ℝ
+large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation (_⊔_) ℝ
 large-equivalence-relation-sim-ℝ =
   make-Large-Equivalence-Relation
     ( sim-prop-ℝ)
@@ -170,7 +174,7 @@ large-equivalence-relation-sim-ℝ =
     ( λ _ _ → symmetric-sim-ℝ)
     ( transitive-sim-ℝ)
 
-large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-sim-ℝ : Large-Similarity-Relation (_⊔_) ℝ
 large-similarity-relation-sim-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
@@ -206,12 +210,12 @@ abstract opaque
   unfolding sim-ℝ
 
   similarity-reasoning-ℝ_ :
-    {l : Level} → (x : ℝ l) → sim-ℝ x x
+    {l : Level} (x : ℝ l) → sim-ℝ x x
   similarity-reasoning-ℝ x = refl-sim-ℝ x
 
   step-similarity-reasoning-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-    sim-ℝ x y → {l3 : Level} → (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
+    sim-ℝ x y → {l3 : Level} (u : ℝ l3) → sim-ℝ y u → sim-ℝ x u
   step-similarity-reasoning-ℝ {x = x} {y = y} p u q = transitive-sim-ℝ x y u q p
 
   syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q

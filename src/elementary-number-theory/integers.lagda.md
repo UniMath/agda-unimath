@@ -163,6 +163,9 @@ abstract
   is-set-ℤ : is-set ℤ
   is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
 
+  is-emb-int-ℕ : is-emb int-ℕ
+  is-emb-int-ℕ = is-emb-is-injective is-set-ℤ is-injective-int-ℕ
+
 ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ
 pr2 ℤ-Set = is-set-ℤ

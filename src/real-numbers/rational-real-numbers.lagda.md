@@ -9,6 +9,7 @@ module real-numbers.rational-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
@@ -21,6 +22,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -64,17 +66,23 @@ is-dedekind-lower-upper-real-ℚ :
   (x : ℚ) →
   is-dedekind-lower-upper-ℝ (lower-real-ℚ x) (upper-real-ℚ x)
 is-dedekind-lower-upper-real-ℚ x =
-  ( (λ q (H , K) → asymmetric-le-ℚ q x H K) ,
-    located-le-ℚ x)
+  ( (λ q (H , K) → asymmetric-le-ℚ q x H K) , located-le-ℚ x)
 ```
 
-### The canonical map from `ℚ` to `ℝ lzero`
+### The inclusion of `ℚ` into `ℝ lzero`
 
 ```agda
 opaque
   real-ℚ : ℚ → ℝ lzero
   real-ℚ x =
     (lower-real-ℚ x , upper-real-ℚ x , is-dedekind-lower-upper-real-ℚ x)
+
+abstract opaque
+  unfolding real-ℚ
+
+  eq-lower-real-real-ℚ :
+    (q : ℚ) → lower-real-ℝ (real-ℚ q) ＝ lower-real-ℚ q
+  eq-lower-real-real-ℚ q = refl
 
 real-ℚ⁺ : ℚ⁺ → ℝ lzero
 real-ℚ⁺ q = real-ℚ (rational-ℚ⁺ q)
@@ -83,14 +91,14 @@ real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ lzero
 real-ℚ⁰⁺ q = real-ℚ (rational-ℚ⁰⁺ q)
 ```
 
-### The canonical map from `ℤ` to `ℝ lzero`
+### The inclusion of `ℤ` into `ℝ lzero`
 
 ```agda
 real-ℤ : ℤ → ℝ lzero
 real-ℤ x = real-ℚ (rational-ℤ x)
 ```
 
-### The canonical map from `ℕ` to `ℝ lzero`
+### The inclusion of `ℕ` into `ℝ lzero`
 
 ```agda
 real-ℕ : ℕ → ℝ lzero
@@ -125,7 +133,7 @@ one-half-ℝ : ℝ lzero
 one-half-ℝ = real-ℚ one-half-ℚ
 ```
 
-### The canonical map from `ℚ` to `ℝ l`
+### The inclusion of `ℚ` into `ℝ l`
 
 ```agda
 raise-real-ℚ : (l : Level) → ℚ → ℝ l
@@ -319,7 +327,7 @@ is-rational-iff-eq-raise-real-ℝ =
     is-rational-eq-raise-real-rational-ℝ)
 ```
 
-### The canonical map from rationals to rational reals
+### The inclusion of rationals into rational reals
 
 ```agda
 rational-real-ℚ : ℚ → Rational-ℝ lzero
@@ -335,28 +343,23 @@ raise-rational-real-ℚ l q =
 ```agda
 abstract
   is-section-rational-real-ℚ :
-    (q : ℚ) →
-    rational-rational-ℝ (rational-real-ℚ q) ＝ q
+    is-section rational-rational-ℝ rational-real-ℚ
   is-section-rational-real-ℚ q = refl
 
   is-retraction-rational-real-ℚ :
-    (x : Rational-ℝ lzero) →
-    rational-real-ℚ (rational-rational-ℝ x) ＝ x
+      is-retraction rational-rational-ℝ rational-real-ℚ
   is-retraction-rational-real-ℚ (x , q , H) =
-    eq-type-subtype
-      subtype-rational-ℝ
-        ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
-    where
-      α : rational-rational-ℝ (x , q , H) ＝ q
-      α = refl
+    eq-type-subtype subtype-rational-ℝ (eq-real-rational-is-rational-ℝ x q H)
 
-equiv-rational-ℝ : Rational-ℝ lzero ≃ ℚ
-equiv-rational-ℝ =
-  ( rational-rational-ℝ ,
+  is-equiv-rational-rational-ℝ : is-equiv (rational-rational-ℝ {lzero})
+  is-equiv-rational-rational-ℝ =
     is-equiv-is-invertible
       ( rational-real-ℚ)
       ( is-section-rational-real-ℚ)
-      ( is-retraction-rational-real-ℚ))
+      ( is-retraction-rational-real-ℚ)
+
+equiv-rational-ℝ : Rational-ℝ lzero ≃ ℚ
+equiv-rational-ℝ = (rational-rational-ℝ , is-equiv-rational-rational-ℝ)
 ```
 
 ### The canonical embedding of the rational numbers in the real numbers is injective
@@ -381,6 +384,56 @@ abstract opaque
           ( irreflexive-le-ℚ
             ( q)
             ( tr (λ x → is-in-lower-cut-ℝ x q) pℝ=qℝ q<p)))
+```
+
+### Raising rational reals is an embedding
+
+```agda
+abstract
+  is-injective-raise-real-ℚ :
+    {l : Level} → is-injective (raise-real-ℚ l)
+  is-injective-raise-real-ℚ {l} =
+    is-injective-comp is-injective-real-ℚ (is-injective-raise-ℝ l)
+
+  is-emb-raise-real-ℚ : {l : Level} → is-emb (raise-real-ℚ l)
+  is-emb-raise-real-ℚ {l} =
+    is-emb-is-injective (is-set-ℝ l) (is-injective-raise-real-ℚ {l})
+```
+
+### The inclusions are embeddings
+
+```agda
+abstract
+  is-emb-real-ℚ : is-emb real-ℚ
+  is-emb-real-ℚ = is-emb-is-injective (is-set-ℝ lzero) is-injective-real-ℚ
+
+  is-emb-real-ℚ⁺ : is-emb real-ℚ⁺
+  is-emb-real-ℚ⁺ =
+    is-emb-comp real-ℚ rational-ℚ⁺ is-emb-real-ℚ is-emb-rational-ℚ⁺
+
+  is-emb-real-ℚ⁰⁺ : is-emb real-ℚ⁰⁺
+  is-emb-real-ℚ⁰⁺ =
+    is-emb-comp real-ℚ rational-ℚ⁰⁺ is-emb-real-ℚ is-emb-rational-ℚ⁰⁺
+
+  is-emb-real-ℤ : is-emb real-ℤ
+  is-emb-real-ℤ =
+    is-emb-comp real-ℚ rational-ℤ is-emb-real-ℚ is-emb-rational-ℤ
+
+  is-emb-real-ℕ : is-emb real-ℕ
+  is-emb-real-ℕ =
+    is-emb-comp real-ℤ int-ℕ is-emb-real-ℤ is-emb-int-ℕ
+
+  is-injective-real-ℚ⁺ : is-injective real-ℚ⁺
+  is-injective-real-ℚ⁺ = is-injective-is-emb is-emb-real-ℚ⁺
+
+  is-injective-real-ℚ⁰⁺ : is-injective real-ℚ⁰⁺
+  is-injective-real-ℚ⁰⁺ = is-injective-is-emb is-emb-real-ℚ⁰⁺
+
+  is-injective-real-ℤ : is-injective real-ℤ
+  is-injective-real-ℤ = is-injective-is-emb is-emb-real-ℤ
+
+  is-injective-real-ℕ : is-injective real-ℕ
+  is-injective-real-ℕ = is-injective-is-emb is-emb-real-ℕ
 ```
 
 ### `0 ≠ 1`

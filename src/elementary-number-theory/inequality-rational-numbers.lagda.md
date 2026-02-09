@@ -36,9 +36,11 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
@@ -309,6 +311,21 @@ abstract opaque
     (x y : ℤ) → leq-ℤ x y ↔ leq-ℚ (rational-ℤ x) (rational-ℤ y)
   pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ
   pr2 (iff-leq-rational-ℤ x y) = reflects-leq-rational-ℤ x y
+```
+
+### The canonical map from integers to rationals is an embedding
+
+```agda
+abstract
+  is-injective-rational-ℤ : is-injective rational-ℤ
+  is-injective-rational-ℤ {x} {y} p=q =
+    antisymmetric-leq-ℤ
+      ( reflects-leq-rational-ℤ x y (leq-eq-ℚ p=q))
+      ( reflects-leq-rational-ℤ y x (leq-eq-ℚ (inv p=q)))
+
+  is-emb-rational-ℤ : is-emb rational-ℤ
+  is-emb-rational-ℤ =
+    is-emb-is-injective is-set-ℚ is-injective-rational-ℤ
 ```
 
 ### The canonical map from natural numbers to the rational numbers preserves and reflects inequality
