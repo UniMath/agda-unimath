@@ -49,10 +49,18 @@ open import real-numbers.upper-dedekind-real-numbers
 A {{#concept "MacNeille real number" Agda=macneille-ℝ}} is an
 {{#concept "open Dedekind-MacNeille cut" Agda=is-open-dedekind-macneille-lower-upper-ℝ}}
 `(L , U)` of [rational numbers](elementary-number-theory.rational-numbers.md),
-i.e., a lower cut `L` and an upper cut `U` satisfying
+i.e., a [lower cut](real-numbers.lower-dedekind-real-numbers.md) `L` and an
+[upper cut](real-numbers.upper-dedekind-real-numbers.md) `U` satisfying
 
 - `q ∈ U` iff there exists `p < q` with `p ∉ L`
 - `p ∈ L` iff there exists `q > p` with `q ∉ U`.
+
+Constructively, the MacNeille real numbers form a weaker model of real numbers
+than the [Dedekind real numbers](real-numbers.dedekind-real-numbers.md), i.e.,
+located MacNeille real numbers. However, for the NacNeille reals it can
+constructively be shown that they are conditionally order complete
+{{#cite Johnstone02}} and uncountable {{#cite BH19}}, unlike the Dedekind reals
+{{#cite BH25}}.
 
 ## Definitions
 
@@ -216,6 +224,10 @@ abstract
   is-disjoint-cut-macneille-ℝ x q (lq , uq) =
     is-not-in-upper-cut-is-in-lower-cut-macneille-ℝ x q lq uq
 ```
+
+## References
+
+{{#bibliography}}
 
 ## External links
 
