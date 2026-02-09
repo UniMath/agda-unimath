@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.functoriality-dependent-pair-types
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -144,17 +145,13 @@ module _
 
   has-supremum-family-has-modulated-supremum-family-ℝ :
     has-modulated-supremum-family-ℝ → has-supremum-family-ℝ y l3
-  has-supremum-family-has-modulated-supremum-family-ℝ (x , is-mod-sup-x) =
-    ( x ,
-      is-supremum-is-modulated-supremum-family-ℝ
-        ( y)
-        ( x)
-        ( is-mod-sup-x))
+  has-supremum-family-has-modulated-supremum-family-ℝ =
+    tot (is-supremum-is-modulated-supremum-family-ℝ y)
 ```
 
 ## Properties
 
-### A modulated supremum is a least upper bound
+### Modulated suprema are least upper bounds
 
 ```agda
 module _
@@ -176,12 +173,11 @@ module _
   le-supremum-iff-le-element-modulated-family-ℝ :
     {l4 : Level} → (z : ℝ l4) →
     (le-ℝ z x) ↔ (exists I (λ i → le-prop-ℝ z (y i)))
-  le-supremum-iff-le-element-modulated-family-ℝ z =
+  le-supremum-iff-le-element-modulated-family-ℝ =
     le-supremum-iff-le-element-family-ℝ
       ( y)
       ( x)
       ( is-supremum-is-modulated-supremum-family-ℝ y x is-mod-sup-x)
-      ( z)
 ```
 
 ### Modulated suprema are unique up to similarity
@@ -205,7 +201,7 @@ module _
         ( is-supremum-is-modulated-supremum-family-ℝ x z is-mod-sup-z)
 ```
 
-### The type of modulated suprema of a family is a proposition
+### Modulated suprema are unique
 
 ```agda
 module _
@@ -239,7 +235,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (acω : level-ACℕ (l1 ⊔ l2 ⊔ l3))
+  (acℕ : level-ACℕ (l1 ⊔ l2 ⊔ l3))
   (I : Set l1) (y : type-Set I → ℝ l2) (x : ℝ l3)
   where
 
@@ -250,13 +246,13 @@ module _
     rec-trunc-Prop
       ( is-modulated-supremum-prop-family-ℝ y x)
       ( λ μ →
-        is-upper-bound-is-supremum-family-ℝ y x is-sup-x ,
-        unit-trunc-Prop (λ ε → (pr1 (μ ε) , pr2 (μ ε))))
+        ( is-upper-bound-is-supremum-family-ℝ y x is-sup-x ,
+          unit-trunc-Prop μ))
       ( choice-countable-discrete-set-ACℕ
         ( set-ℚ⁺)
         ( is-countable-set-ℚ⁺)
         ( has-decidable-equality-ℚ⁺)
-        ( acω)
+        ( acℕ)
         ( λ ε → Σ-Set I (λ i → set-Prop (le-prop-ℝ (x -ℝ real-ℚ⁺ ε) (y i))))
         ( is-approximated-below-is-supremum-family-ℝ y x is-sup-x))
 ```
