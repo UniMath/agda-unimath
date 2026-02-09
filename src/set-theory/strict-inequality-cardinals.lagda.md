@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -36,13 +37,19 @@ open import foundation.retractions
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.surjective-maps
+open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import set-theory.cardinals
+open import set-theory.cardinals-with-merely-decidable-sums
 open import set-theory.complemented-inequality-cardinals
+open import set-theory.discrete-cardinals
 open import set-theory.inequality-cardinals
 open import set-theory.inhabited-cardinals
+open import set-theory.projective-cardinals
 open import set-theory.strict-indexed-inequality-cardinals
 ```
 
@@ -52,7 +59,10 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 We may say a [cardinal](set-theory.cardinals.md) `X` is (strictly)
 {{#concept "less than" Disambiguation="set-cardinal" Agda=le-Cardinal}} a
-cardinal `Y` if `X ≤ Y` and `Y ≰ X`.
+cardinal `Y` if `X ≤ Y` and `Y ≰ X`, in the sense that every set in the
+equivalence class of `X` merely embeds into every set in the equivalence class
+of `Y`, and no set in the equivalence class of `Y` merely embeds into any set in
+the equivalence class of `X`.
 
 ## Definition
 
@@ -96,25 +106,25 @@ module _
 
 ## Properties
 
-### Under excluded middle, if `Y ≰ X` then `Y` is inhabited
+### If `Y` is inhabited-or-empty and `Y ≰ X` then `Y` is inhabited
 
 ```agda
 module _
   {l1 l2 : Level}
-  (lem : level-LEM l2)
   (X : Set l1) (Y : Set l2)
+  (dY : is-inhabited-or-empty (type-Set Y))
   where
 
-  is-inhabited-is-not-leq-cardinality-LEM :
+  is-inhabited-is-not-leq-cardinality :
     ¬ leq-cardinality Y X → is-inhabited (type-Set Y)
-  is-inhabited-is-not-leq-cardinality-LEM H =
+  is-inhabited-is-not-leq-cardinality H =
     rec-coproduct
       ( id)
       ( λ ny →
         ex-falso
           ( H ( unit-leq-cardinality Y X
-                ( mere-emb-is-empty (is-empty-type-trunc-Prop' ny)))))
-      ( lem (is-inhabited-Prop (type-Set Y)))
+                ( mere-emb-is-empty ny))))
+      ( dY)
 ```
 
 ### Projective codomain implies surjections induce reverse embeddings
@@ -124,12 +134,12 @@ module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  leq-cardinality-is-surjective-map :
+  geq-is-surjective-cardinality :
     is-projective-Level' (l1 ⊔ l2) (type-Set Y) →
     (f : type-Set X → type-Set Y) →
     is-surjective f →
     leq-cardinality Y X
-  leq-cardinality-is-surjective-map is-projective-Y f is-surjective-f =
+  geq-is-surjective-cardinality is-projective-Y f is-surjective-f =
     unit-leq-cardinality Y X
       ( map-trunc-Prop
         ( λ s →
@@ -140,7 +150,9 @@ module _
         ( is-projective-Y (fiber f) is-surjective-f))
 ```
 
-### Strict indexed inequality implies strict inequality under a forward embedding
+### Strict indexed inequality implies strict inequality under a forward embedding, assuming excluded middle
+
+<!-- TODO: factor out non-LEM variant -->
 
 ```agda
 module _
@@ -149,11 +161,11 @@ module _
   (X : Set l1) (Y : Set l2)
   where
 
-  not-leq-right-le-indexed-cardinality :
+  not-geq-le-indexed-leq-cardinality :
     leq-cardinality X Y →
     le-indexed-cardinality X Y →
     ¬ leq-cardinality Y X
-  not-leq-right-le-indexed-cardinality X≤Y X<Y Y≤X =
+  not-geq-le-indexed-leq-cardinality X≤Y X<Y Y≤X =
     rec-trunc-Prop
       ( empty-Prop)
       ( λ e →
@@ -167,12 +179,12 @@ module _
         ( inv-unit-leq-cardinality X Y X≤Y)
         ( inv-unit-leq-cardinality Y X Y≤X))
 
-  le-cardinality-le-indexed-cardinality :
+  le-le-indexed-leq-cardinality :
     leq-cardinality X Y →
     le-indexed-cardinality X Y →
     le-cardinality X Y
-  le-cardinality-le-indexed-cardinality X≤Y X<Y =
-    ( X≤Y , not-leq-right-le-indexed-cardinality X≤Y X<Y)
+  le-le-indexed-leq-cardinality X≤Y X<Y =
+    ( X≤Y , not-geq-le-indexed-leq-cardinality X≤Y X<Y)
 ```
 
 ### Strict inequality implies strict indexed inequality under projectivity
@@ -180,33 +192,132 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (lem : level-LEM (l1 ⊔ l2))
-  (lem-l2 : level-LEM l2)
   (X : Set l1) (Y : Set l2)
+  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (decidable-equality-Y : has-decidable-equality (type-Set Y))
+  (decidable-Σ-Y :
+    type-trunc-Prop (has-decidable-Σ-Level (l1 ⊔ l2) (type-Set Y)))
+  (decidable-Σ-X :
+    type-trunc-Prop (has-decidable-Σ-Level l2 (type-Set X)))
   where
 
-  le-indexed-cardinality-le-cardinality :
-    is-projective-Level' (l1 ⊔ l2) (type-Set Y) →
+  le-indexed-le-cardinality :
     le-cardinality X Y →
     le-indexed-cardinality X Y
-  le-indexed-cardinality-le-cardinality
-    is-projective-Y (_ , nY≤X) =
+  le-indexed-le-cardinality (_ , nY≤X) =
     unit-le-indexed-cardinality X Y
-      ( is-inhabited-is-not-leq-cardinality-LEM lem-l2 X Y nY≤X ,
+      ( is-inhabited-is-not-leq-cardinality X Y
+          ( is-inhabited-or-empty-merely-has-decidable-Σ-Level decidable-Σ-Y)
+          ( nY≤X) ,
         λ f →
-        is-nonsurjective-is-not-surjective-LEM lem
-          ( λ is-surjective-f →
-            nY≤X
-              ( leq-cardinality-is-surjective-map X Y
-                ( is-projective-Y)
-                ( f)
-                ( is-surjective-f))))
+        rec-trunc-Prop
+          ( is-nonsurjective-Prop f)
+          ( λ hΣY →
+            rec-trunc-Prop
+              ( is-nonsurjective-Prop f)
+              ( λ hΣX →
+                is-nonsurjective-is-not-surjective-has-decidable-Σ-Level-is-inhabited-or-empty-map
+                  hΣY
+                  ( is-inhabited-or-empty-map-has-decidable-Σ-Level
+                    hΣX decidable-equality-Y f)
+                  ( nY≤X ∘
+                    geq-is-surjective-cardinality X Y is-projective-Y f))
+              ( decidable-Σ-X))
+          ( decidable-Σ-Y))
 
-  strict-inequality-iff-le-indexed-cardinality :
-    is-projective-Level' (l1 ⊔ l2) (type-Set Y) →
+module _
+  {l1 l2 : Level}
+  (lem : level-LEM (l1 ⊔ l2))
+  (X : Set l1) (Y : Set l2)
+  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (decidable-equality-Y : has-decidable-equality (type-Set Y))
+  (decidable-Σ-Y :
+    type-trunc-Prop (has-decidable-Σ-Level (l1 ⊔ l2) (type-Set Y)))
+  (decidable-Σ-X :
+    type-trunc-Prop (has-decidable-Σ-Level l2 (type-Set X)))
+  where
+
+  le-iff-le-indexed-cardinality :
     leq-cardinality X Y →
     le-indexed-cardinality X Y ↔ le-cardinality X Y
-  strict-inequality-iff-le-indexed-cardinality is-projective-Y X≤Y =
-    ( le-cardinality-le-indexed-cardinality lem X Y X≤Y ,
-      le-indexed-cardinality-le-cardinality is-projective-Y)
+  le-iff-le-indexed-cardinality X≤Y =
+    ( le-le-indexed-leq-cardinality lem X Y X≤Y ,
+      le-indexed-le-cardinality X Y is-projective-Y
+        decidable-equality-Y decidable-Σ-Y decidable-Σ-X)
+```
+
+### Strict inequality implies strict indexed inequality for projective cardinals
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  le-indexed-le-Cardinal :
+    (X : Cardinal l1) (Y : Cardinal l2) →
+    is-projective-Cardinal (l1 ⊔ l2) Y →
+    is-discrete-Cardinal Y →
+    merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y →
+    merely-decidable-Σ-Cardinal l2 X →
+    le-Cardinal X Y →
+    le-indexed-Cardinal X Y
+  le-indexed-le-Cardinal =
+    apply-twice-dependent-universal-property-trunc-Set'
+      ( λ X Y →
+        set-Prop
+          ( function-Prop
+            ( is-projective-Cardinal (l1 ⊔ l2) Y)
+            ( function-Prop
+              ( is-discrete-Cardinal Y)
+              ( function-Prop
+                ( merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y)
+                ( function-Prop
+                  ( merely-decidable-Σ-Cardinal l2 X)
+                  ( function-Prop
+                    ( le-Cardinal X Y)
+                    ( le-indexed-prop-Cardinal X Y)))))))
+      ( λ X Y is-projective-Y is-discrete-Y merely-Σ-Y merely-Σ-X →
+        le-indexed-le-cardinality
+          ( X)
+          ( Y)
+          ( inv-unit-is-projective-cardinality Y is-projective-Y)
+          ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
+          ( inv-unit-merely-decidable-Σ-cardinality Y merely-Σ-Y)
+          ( inv-unit-merely-decidable-Σ-cardinality X merely-Σ-X))
+
+  le-iff-le-indexed-Cardinal :
+    (lem : level-LEM (l1 ⊔ l2)) →
+    (X : Cardinal l1) (Y : Cardinal l2) →
+    is-projective-Cardinal (l1 ⊔ l2) Y →
+    is-discrete-Cardinal Y →
+    merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y →
+    merely-decidable-Σ-Cardinal l2 X →
+    leq-Cardinal X Y →
+    le-indexed-Cardinal X Y ↔ le-Cardinal X Y
+  le-iff-le-indexed-Cardinal lem =
+    apply-twice-dependent-universal-property-trunc-Set'
+      ( λ X Y →
+        set-Prop
+          ( function-Prop
+            ( is-projective-Cardinal (l1 ⊔ l2) Y)
+            ( function-Prop
+              ( is-discrete-Cardinal Y)
+              ( function-Prop
+                ( merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y)
+                ( function-Prop
+                  ( merely-decidable-Σ-Cardinal l2 X)
+                  ( function-Prop
+                    ( leq-Cardinal X Y)
+                    ( iff-Prop
+                      ( le-indexed-prop-Cardinal X Y)
+                      ( le-prop-Cardinal X Y))))))))
+      ( λ X Y is-projective-Y is-discrete-Y merely-Σ-Y merely-Σ-X →
+        le-iff-le-indexed-cardinality
+          ( lem)
+          ( X)
+          ( Y)
+          ( inv-unit-is-projective-cardinality Y is-projective-Y)
+          ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
+          ( inv-unit-merely-decidable-Σ-cardinality Y merely-Σ-Y)
+          ( inv-unit-merely-decidable-Σ-cardinality X merely-Σ-X))
 ```
