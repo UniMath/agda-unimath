@@ -761,8 +761,8 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                             ( leq-le-ℝ -ε<fcₘ))))
                   ( cotransitive-le-ℝ
                     ( real-ℚ⁺ ε')
-                    ( real-ℚ⁺ ε)
                     ( fcₘ)
+                    ( real-ℚ⁺ ε)
                     ( preserves-le-real-ℚ ε'<ε)))
               ( λ fcₘ<-ε' →
                 inr-disjunction
@@ -785,8 +785,8 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                       ( 0<fbₘ)))
               ( cotransitive-le-ℝ
                 ( neg-ℝ (real-ℚ⁺ ε))
-                ( neg-ℝ (real-ℚ⁺ ε'))
                 ( fcₘ)
+                ( neg-ℝ (real-ℚ⁺ ε'))
                 ( neg-le-ℝ (preserves-le-real-ℚ ε'<ε))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```

@@ -245,17 +245,14 @@ module _
 
     cotransitive-apart-Heyting-Field :
       is-cotransitive apart-prop-Heyting-Field
-    cotransitive-apart-Heyting-Field x y z is-invertible-⟨x-y⟩ =
-      map-disjunction
-        ( id)
-        ( symmetric-apart-Heyting-Field z y)
-        ( is-local-commutative-ring-Heyting-Field F
-          ( diff-Heyting-Field F x z)
-          ( diff-Heyting-Field F z y)
-          ( inv-tr
-            ( is-invertible-element-Heyting-Field F)
-            ( add-diff-Heyting-Field F x z y)
-            ( is-invertible-⟨x-y⟩)))
+    cotransitive-apart-Heyting-Field x y z is-invertible-⟨x-z⟩ =
+      is-local-commutative-ring-Heyting-Field F
+        ( diff-Heyting-Field F x y)
+        ( diff-Heyting-Field F y z)
+        ( inv-tr
+          ( is-invertible-element-Heyting-Field F)
+          ( add-diff-Heyting-Field F x y z)
+          ( is-invertible-⟨x-z⟩))
 
   apartness-relation-Heyting-Field : Apartness-Relation l (type-Heyting-Field F)
   apartness-relation-Heyting-Field =
