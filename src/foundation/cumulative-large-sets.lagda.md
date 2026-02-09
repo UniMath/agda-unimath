@@ -283,7 +283,7 @@ module _
       sim-eq-raise-Cumulative-Large-Set)
 ```
 
-### A value raised to two different universe levels is similar
+### A value raised to one universe level is similar to itself raised to another universe level
 
 ```agda
 module _
