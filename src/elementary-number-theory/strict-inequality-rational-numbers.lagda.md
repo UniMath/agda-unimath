@@ -619,6 +619,27 @@ pr1 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-left-diff-ℚ x y z
 pr2 (le-iff-transpose-left-diff-ℚ x y z) = le-transpose-right-add-ℚ x z y
 ```
 
+### Iterated transposition of mixed addition and differences on strict inequalities of rational numbers
+
+```agda
+abstract
+  le-triple-transpose-right-add-diff-ℚ :
+    (p q a b : ℚ) →
+    le-ℚ b (a +ℚ (q -ℚ p)) →
+    le-ℚ (p -ℚ a) (q -ℚ b)
+  le-triple-transpose-right-add-diff-ℚ p q a b b<a+q-p =
+    le-transpose-left-add-ℚ (p -ℚ a) b q
+      ( tr
+        ( λ t → le-ℚ t q)
+        ( commutative-add-ℚ b (p -ℚ a))
+        ( tr
+          ( le-ℚ (b +ℚ (p -ℚ a)))
+          ( ( associative-add-ℚ a (q -ℚ p) (p -ℚ a)) ∙
+            ( ap (a +ℚ_) (triangle-diff-ℚ q p a)) ∙
+            ( is-identity-right-conjugation-add-ℚ a q))
+          ( preserves-le-left-add-ℚ (p -ℚ a) b (a +ℚ (q -ℚ p)) b<a+q-p)))
+```
+
 ### Swapping laws
 
 ```agda
