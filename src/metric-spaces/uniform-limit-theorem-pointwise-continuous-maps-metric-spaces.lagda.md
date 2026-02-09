@@ -1,7 +1,7 @@
-# The uniform limit theorem in metric spaces
+# The uniform limit theorem for pointwise continuous maps between metric spaces
 
 ```agda
-module metric-spaces.uniform-limit-theorem-metric-spaces where
+module metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -37,7 +37,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 The
-{{#concept "uniform limit theorem" WDID=Q7885107 WD="uniform limit theorem" Agda=is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space}}
+{{#concept "uniform limit theorem" WDID=Q7885107 WD="uniform limit theorem"  Disambiguation="pointwise continuous maps between metric spaces" Agda=is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space Agda=is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space}}
 states that uniform convergence of a sequence of
 [maps between metric spaces](metric-spaces.maps-metric-spaces.md), i.e.,
 convergence in the
