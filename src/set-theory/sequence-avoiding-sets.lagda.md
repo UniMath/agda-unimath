@@ -97,7 +97,7 @@ module _
     is-weakly-sequence-avoiding X → ¬ is-directly-countable X
   is-not-directly-countable-is-weakly-sequence-avoiding H C =
     apply-universal-property-trunc-Prop C
-      empty-Prop
+      ( empty-Prop)
       ( λ (a , is-surjective-a) →
         H a is-surjective-a
           ( λ avoiding-a →
