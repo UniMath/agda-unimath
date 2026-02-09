@@ -41,8 +41,8 @@ open import real-numbers.suprema-families-real-numbers
 ## Idea
 
 The
-{{#concept "monotone convergence theorem" WDID=Q4454933 WD="Weierstrass theorem" Disambiguation="increasing sequence of real numbers" Agda=is-limit-is-modulated-supremum-is-increasing-sequence-ℝ Agda=is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ}},
-also known as **Weierstrass' theorem**, states that an
+{{#concept "monotone convergence theorem" WDID=Q4454933 WD="Weierstrass theorem" Disambiguation="increasing sequence of real numbers" Agda=is-limit-is-modulated-supremum-is-increasing-sequence-ℝ Agda=is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ}}
+states that an
 [increasing sequence](real-numbers.increasing-sequences-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md) with a
 [modulated supremum](real-numbers.modulated-suprema-families-real-numbers.md)
