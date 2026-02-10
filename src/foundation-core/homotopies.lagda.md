@@ -309,6 +309,15 @@ inv-nat-htpy-id :
 inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ```
 
+```agda
+ap-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g) →
+  {x y : A} (p : x ＝ y) →
+  ap f p ＝ H x ∙ ap g p ∙ inv (H y)
+ap-htpy {f = f} {g} H {x} {y} p =
+  right-transpose-eq-concat (ap f p) (H y) (H x ∙ ap g p) (inv-nat-htpy H p)
+```
+
 ### Conjugation by homotopies
 
 Given a homotopy `H : f ~ g` we obtain a natural map `f x ＝ f y → g x ＝ g y`
