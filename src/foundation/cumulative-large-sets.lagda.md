@@ -234,11 +234,11 @@ module _
   abstract
     eq-raise-sim-Cumulative-Large-Set :
       {l1 l2 : Level}
-      {x : type-Cumulative-Large-Set S l1}
-      {y : type-Cumulative-Large-Set S l2} →
+      (x : type-Cumulative-Large-Set S l1)
+      (y : type-Cumulative-Large-Set S l2) →
       sim-Cumulative-Large-Set S x y →
       raise-Cumulative-Large-Set S l2 x ＝ raise-Cumulative-Large-Set S l1 y
-    eq-raise-sim-Cumulative-Large-Set {l1} {l2} {x} {y} x~y =
+    eq-raise-sim-Cumulative-Large-Set {l1} {l2} x y x~y =
       let
         open similarity-reasoning-Cumulative-Large-Set S
       in
@@ -273,13 +273,13 @@ module _
 
   eq-raise-iff-sim-Cumulative-Large-Set :
     {l1 l2 : Level}
-    {x : type-Cumulative-Large-Set S l1}
-    {y : type-Cumulative-Large-Set S l2} →
+    (x : type-Cumulative-Large-Set S l1)
+    (y : type-Cumulative-Large-Set S l2) →
     ( sim-Cumulative-Large-Set S x y ↔
       ( raise-Cumulative-Large-Set S l2 x ＝
         raise-Cumulative-Large-Set S l1 y))
-  eq-raise-iff-sim-Cumulative-Large-Set =
-    ( eq-raise-sim-Cumulative-Large-Set ,
+  eq-raise-iff-sim-Cumulative-Large-Set x y =
+    ( eq-raise-sim-Cumulative-Large-Set x y ,
       sim-eq-raise-Cumulative-Large-Set)
 ```
 
