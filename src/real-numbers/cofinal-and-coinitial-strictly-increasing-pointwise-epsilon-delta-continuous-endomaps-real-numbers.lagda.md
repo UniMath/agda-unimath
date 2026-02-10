@@ -504,8 +504,8 @@ module _
       in
         cotransitive-le-ℝ
           ( map-f (raise-real-ℚ l p))
-          ( map-f (raise-real-ℚ l q))
           ( y)
+          ( map-f (raise-real-ℚ l q))
           ( is-strictly-increasing-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( raise-real-ℚ l p)
@@ -745,7 +745,7 @@ module _
             ( y)))
 ```
 
-### An cofinal and coinitial, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
+### A cofinal and coinitial, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
 
 ```agda
 module _

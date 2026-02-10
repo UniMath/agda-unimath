@@ -30,6 +30,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.powers-real-numbers
 open import real-numbers.strictly-increasing-endomaps-real-numbers
 ```
 
@@ -148,7 +149,7 @@ module _
     is-strictly-increasing-root-is-odd-exponent-ℝ :
       {l : Level} →
       is-strictly-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
-    is-strictly-increasing-root-is-odd-exponent-ℝ {l} =
+    is-strictly-increasing-root-is-odd-exponent-ℝ =
       is-strictly-increasing-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
         ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ
           ( l)

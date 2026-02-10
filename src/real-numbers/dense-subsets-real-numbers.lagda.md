@@ -492,5 +492,5 @@ module _
                     ( leq-right-min-ℚ⁺ δ ε)
                     ( Nε'xy) ,
                   y∈S))
-          ( cotransitive-le-ℝ a b x a<b)
+          ( cotransitive-le-ℝ a x b a<b)
 ```
