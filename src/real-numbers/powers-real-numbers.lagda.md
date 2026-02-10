@@ -559,13 +559,13 @@ abstract
 
 ```agda
 abstract
-  is-injective-power-is-odd-ℝ :
+  is-injective-power-is-odd-exponent-ℝ :
     (l : Level) (n : ℕ) → is-odd-ℕ n →
     is-injective (power-ℝ {l} n)
-  is-injective-power-is-odd-ℝ l n odd-n =
+  is-injective-power-is-odd-exponent-ℝ l n odd-n =
     is-injective-is-strictly-increasing-endomap-ℝ
       ( power-ℝ n)
-      ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
+      ( is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n)
 ```
 
 ### For odd `n`, `x ↦ xⁿ` is cofinal and coinitial

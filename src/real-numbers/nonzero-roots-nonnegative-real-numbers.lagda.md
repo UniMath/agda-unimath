@@ -50,7 +50,7 @@ is the inverse operation to the `n`th
 opaque
   root-pair-expansion-ℝ⁰⁺ : {l : Level} → ℕ → ℕ → ℝ⁰⁺ l → ℝ⁰⁺ l
   root-pair-expansion-ℝ⁰⁺ 0 v x =
-    root-is-odd-ℝ⁰⁺ _ (is-odd-has-odd-expansion _ (v , refl)) x
+    root-is-odd-exponent-ℝ⁰⁺ _ (is-odd-has-odd-expansion _ (v , refl)) x
   root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
     root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x)
 
@@ -81,7 +81,7 @@ abstract opaque
     x
   is-section-root-pair-expansion-ℝ⁰⁺ 0 v x =
     ( ap-binary power-ℝ⁰⁺ (left-unit-law-mul-ℕ _) refl) ∙
-    ( is-section-root-is-odd-ℝ⁰⁺ _ _ x)
+    ( is-section-root-is-odd-exponent-ℝ⁰⁺ _ _ x)
   is-section-root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
     eq-ℝ⁰⁺ _ _
       ( equational-reasoning
@@ -136,9 +136,9 @@ abstract opaque
     x
   is-retraction-root-pair-expansion-ℝ⁰⁺ 0 v x =
     ( ap
-      ( root-is-odd-ℝ⁰⁺ _ _)
+      ( root-is-odd-exponent-ℝ⁰⁺ _ _)
       ( ap-binary power-ℝ⁰⁺ (left-unit-law-mul-ℕ _) refl)) ∙
-    ( is-retraction-root-is-odd-ℝ⁰⁺ _ _ x)
+    ( is-retraction-root-is-odd-exponent-ℝ⁰⁺ _ _ x)
   is-retraction-root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
     equational-reasoning
       root-pair-expansion-ℝ⁰⁺

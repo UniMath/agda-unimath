@@ -99,37 +99,41 @@ module _
 
 ```agda
 abstract
-  preserves-sim-root-is-odd-ℝ :
+  preserves-sim-root-is-odd-exponent-ℝ :
     {l1 l2 : Level} (n : ℕ) (odd-n : is-odd-ℕ n) →
     {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
-    sim-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
-  preserves-sim-root-is-odd-ℝ {l1} {l2} n odd-n {x} {y} x~y =
+    sim-ℝ (root-is-odd-exponent-ℝ n odd-n x) (root-is-odd-exponent-ℝ n odd-n y)
+  preserves-sim-root-is-odd-exponent-ℝ {l1} {l2} n odd-n {x} {y} x~y =
     sim-eq-raise-ℝ
-      ( is-injective-power-is-odd-ℝ
+      ( is-injective-power-is-odd-exponent-ℝ
         ( l1 ⊔ l2)
         ( n)
         ( odd-n)
         ( equational-reasoning
-          power-ℝ n (raise-ℝ l2 (root-is-odd-ℝ n odd-n x))
-          ＝ raise-ℝ l2 (power-ℝ n (root-is-odd-ℝ n odd-n x))
+          power-ℝ n (raise-ℝ l2 (root-is-odd-exponent-ℝ n odd-n x))
+          ＝ raise-ℝ l2 (power-ℝ n (root-is-odd-exponent-ℝ n odd-n x))
             by power-raise-ℝ l2 n _
           ＝ raise-ℝ l2 x
-            by ap (raise-ℝ l2) (is-section-root-is-odd-ℝ n odd-n x)
+            by ap (raise-ℝ l2) (is-section-root-is-odd-exponent-ℝ n odd-n x)
           ＝ raise-ℝ l1 y
             by eq-raise-sim-ℝ x~y
-          ＝ raise-ℝ l1 (power-ℝ n (root-is-odd-ℝ n odd-n y))
-            by ap (raise-ℝ l1) (inv (is-section-root-is-odd-ℝ n odd-n y))
-          ＝ power-ℝ n (raise-ℝ l1 (root-is-odd-ℝ n odd-n y))
+          ＝ raise-ℝ l1 (power-ℝ n (root-is-odd-exponent-ℝ n odd-n y))
+            by
+              ap
+                ( raise-ℝ l1)
+                ( inv (is-section-root-is-odd-exponent-ℝ n odd-n y))
+          ＝ power-ℝ n (raise-ℝ l1 (root-is-odd-exponent-ℝ n odd-n y))
             by inv (power-raise-ℝ l1 n _)))
 
-  root-is-odd-raise-ℝ :
+  root-raise-is-odd-exponent-ℝ :
     {l0 : Level} (l : Level) (n : ℕ) (odd-n : is-odd-ℕ n) (x : ℝ l0) →
-    root-is-odd-ℝ n odd-n (raise-ℝ l x) ＝ raise-ℝ l (root-is-odd-ℝ n odd-n x)
-  root-is-odd-raise-ℝ {l0} l n odd-n x =
+    root-is-odd-exponent-ℝ n odd-n (raise-ℝ l x) ＝
+    raise-ℝ l (root-is-odd-exponent-ℝ n odd-n x)
+  root-raise-is-odd-exponent-ℝ {l0} l n odd-n x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
         ( sim-raise-ℝ l _)
-        ( preserves-sim-root-is-odd-ℝ n odd-n (sim-raise-ℝ' l x)))
+        ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l x)))
 ```
 
 ### For odd `n`, the `n`th root operation preserves strict inequality
@@ -142,22 +146,24 @@ module _
 
   abstract
     is-strictly-increasing-root-is-odd-exponent-ℝ :
+      {l : Level} →
       is-strictly-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
-    is-strictly-increasing-root-is-odd-exponent-ℝ =
+    is-strictly-increasing-root-is-odd-exponent-ℝ {l} =
       is-strictly-increasing-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
         ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-power-is-odd-exponent-ℝ
           ( l)
           ( n)
           ( odd-n))
 
-    preserves-le-root-is-odd-ℝ :
+    preserves-le-root-is-odd-exponent-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-      le-ℝ x y → le-ℝ (root-is-odd-ℝ n odd-n x) (root-is-odd-ℝ n odd-n y)
-    preserves-le-root-is-odd-ℝ {l1} {l2} {x} {y} x<y =
+      le-ℝ x y →
+      le-ℝ (root-is-odd-exponent-ℝ n odd-n x) (root-is-odd-exponent-ℝ n odd-n y)
+    preserves-le-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x<y =
       preserves-le-sim-ℝ
-        ( preserves-sim-root-is-odd-ℝ n odd-n (sim-raise-ℝ' l2 x))
-        ( preserves-sim-root-is-odd-ℝ n odd-n (sim-raise-ℝ' l1 y))
-        ( is-strictly-increasing-root-is-odd-ℝ
+        ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l2 x))
+        ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l1 y))
+        ( is-strictly-increasing-root-is-odd-exponent-ℝ
           ( raise-ℝ l2 x)
           ( raise-ℝ l1 y)
           ( preserves-le-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x<y))
@@ -173,28 +179,44 @@ module _
 
   abstract
     is-increasing-root-is-odd-exponent-ℝ :
-      is-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
+      {l : Level} → is-increasing-endomap-ℝ (root-is-odd-exponent-ℝ {l} n odd-n)
     is-increasing-root-is-odd-exponent-ℝ =
       is-increasing-is-strictly-increasing-endomap-ℝ
         ( root-is-odd-exponent-ℝ n odd-n)
         ( is-strictly-increasing-root-is-odd-exponent-ℝ n odd-n)
+
+    preserves-leq-root-is-odd-exponent-ℝ :
+      {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+      leq-ℝ x y →
+      leq-ℝ
+        ( root-is-odd-exponent-ℝ n odd-n x)
+        ( root-is-odd-exponent-ℝ n odd-n y)
+    preserves-leq-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x≤y =
+      preserves-leq-sim-ℝ
+        ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l2 x))
+        ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l1 y))
+        ( is-increasing-root-is-odd-exponent-ℝ
+          ( raise-ℝ l2 x)
+          ( raise-ℝ l1 y)
+          ( preserves-leq-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x≤y))
 ```
 
 ### For odd `n`, the `n`th root of 0 is 0
 
 ```agda
 abstract
-  root-is-odd-zero-ℝ :
-    (n : ℕ) (odd-n : is-odd-ℕ n) → root-is-odd-ℝ n odd-n zero-ℝ ＝ zero-ℝ
-  root-is-odd-zero-ℝ n odd-n =
-    is-injective-power-is-odd-ℝ
+  root-zero-is-odd-exponent-ℝ :
+    (n : ℕ) (odd-n : is-odd-ℕ n) →
+    root-is-odd-exponent-ℝ n odd-n zero-ℝ ＝ zero-ℝ
+  root-zero-is-odd-exponent-ℝ n odd-n =
+    is-injective-power-is-odd-exponent-ℝ
       ( lzero)
       ( n)
       ( odd-n)
       ( equational-reasoning
-        power-ℝ n (root-is-odd-ℝ n odd-n zero-ℝ)
+        power-ℝ n (root-is-odd-exponent-ℝ n odd-n zero-ℝ)
         ＝ zero-ℝ
-          by is-section-root-is-odd-ℝ n odd-n zero-ℝ
+          by is-section-root-is-odd-exponent-ℝ n odd-n zero-ℝ
         ＝ power-ℝ n zero-ℝ
           by inv (power-nonzero-zero-ℝ (n , is-nonzero-is-odd-ℕ odd-n)))
 ```
@@ -203,17 +225,17 @@ abstract
 
 ```agda
 abstract
-  root-is-odd-one-ℝ :
-    (n : ℕ) (odd-n : is-odd-ℕ n) → root-is-odd-ℝ n odd-n one-ℝ ＝ one-ℝ
-  root-is-odd-one-ℝ n odd-n =
-    is-injective-power-is-odd-ℝ
+  root-one-is-odd-exponent-ℝ :
+    (n : ℕ) (odd-n : is-odd-ℕ n) → root-is-odd-exponent-ℝ n odd-n one-ℝ ＝ one-ℝ
+  root-one-is-odd-exponent-ℝ n odd-n =
+    is-injective-power-is-odd-exponent-ℝ
       ( lzero)
       ( n)
       ( odd-n)
       ( equational-reasoning
-        power-ℝ n (root-is-odd-ℝ n odd-n one-ℝ)
+        power-ℝ n (root-is-odd-exponent-ℝ n odd-n one-ℝ)
         ＝ one-ℝ
-          by is-section-root-is-odd-ℝ n odd-n one-ℝ
+          by is-section-root-is-odd-exponent-ℝ n odd-n one-ℝ
         ＝ power-ℝ n one-ℝ
           by inv (power-one-ℝ n))
 ```
@@ -229,17 +251,18 @@ module _
   where
 
   abstract
-    is-nonnegative-root-is-odd-real-ℝ⁰⁺ :
-      is-nonnegative-ℝ (root-is-odd-ℝ n odd-n x)
-    is-nonnegative-root-is-odd-real-ℝ⁰⁺ =
+    is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺ :
+      is-nonnegative-ℝ (root-is-odd-exponent-ℝ n odd-n x)
+    is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺ =
       tr
-        ( λ y → leq-ℝ y (root-is-odd-ℝ n odd-n x))
-        ( root-is-odd-zero-ℝ n odd-n)
-        ( preserves-leq-root-is-odd-ℝ n odd-n 0≤x)
+        ( λ y → leq-ℝ y (root-is-odd-exponent-ℝ n odd-n x))
+        ( root-zero-is-odd-exponent-ℝ n odd-n)
+        ( preserves-leq-root-is-odd-exponent-ℝ n odd-n 0≤x)
 
-  root-is-odd-ℝ⁰⁺ : ℝ⁰⁺ l
-  root-is-odd-ℝ⁰⁺ =
-    ( root-is-odd-ℝ n odd-n x , is-nonnegative-root-is-odd-real-ℝ⁰⁺)
+  root-is-odd-exponent-ℝ⁰⁺ : ℝ⁰⁺ l
+  root-is-odd-exponent-ℝ⁰⁺ =
+    ( root-is-odd-exponent-ℝ n odd-n x ,
+      is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺)
 
 module _
   {l : Level}
@@ -249,15 +272,15 @@ module _
   where
 
   abstract
-    is-section-root-is-odd-ℝ⁰⁺ :
-      power-ℝ⁰⁺ n (root-is-odd-ℝ⁰⁺ n odd-n x⁰⁺) ＝ x⁰⁺
-    is-section-root-is-odd-ℝ⁰⁺ =
-      eq-ℝ⁰⁺ _ _ (is-section-root-is-odd-ℝ n odd-n x)
+    is-section-root-is-odd-exponent-ℝ⁰⁺ :
+      power-ℝ⁰⁺ n (root-is-odd-exponent-ℝ⁰⁺ n odd-n x⁰⁺) ＝ x⁰⁺
+    is-section-root-is-odd-exponent-ℝ⁰⁺ =
+      eq-ℝ⁰⁺ _ _ (is-section-root-is-odd-exponent-ℝ n odd-n x)
 
-    is-retraction-root-is-odd-ℝ⁰⁺ :
-      root-is-odd-ℝ⁰⁺ n odd-n (power-ℝ⁰⁺ n x⁰⁺) ＝ x⁰⁺
-    is-retraction-root-is-odd-ℝ⁰⁺ =
-      eq-ℝ⁰⁺ _ _ (is-retraction-root-is-odd-ℝ n odd-n x)
+    is-retraction-root-is-odd-exponent-ℝ⁰⁺ :
+      root-is-odd-exponent-ℝ⁰⁺ n odd-n (power-ℝ⁰⁺ n x⁰⁺) ＝ x⁰⁺
+    is-retraction-root-is-odd-exponent-ℝ⁰⁺ =
+      eq-ℝ⁰⁺ _ _ (is-retraction-root-is-odd-exponent-ℝ n odd-n x)
 ```
 
 ## See also
