@@ -141,7 +141,7 @@ module _
           ( function-Prop
             ( (i : type-I) → le-indexed-Cardinal (A i) (B i))
             ( le-indexed-prop-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B))))
-      ( λ A B p →
+      ( λ A B →
         binary-tr
           ( le-indexed-Cardinal)
           ( inv (compute-Σ-Cardinal I A))
@@ -150,8 +150,7 @@ module _
             ( set-I)
             ( is-projective-Cardinality-Projective-Set I)
             ( A)
-            ( B)
-            ( p)))
+            ( B)))
 ```
 
 ## Corollaries
@@ -176,8 +175,8 @@ module _
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
-  le-indexed-Σ-Π-le-family-Cardinal A B merely-Σ-A is-projective-B is-discrete-B
-    merely-Σ-B H =
+  le-indexed-Σ-Π-le-family-Cardinal
+    A B merely-Σ-A is-projective-B is-discrete-B merely-Σ-B H =
     le-indexed-Σ-Π-Cardinal I A B
       ( λ i →
         le-indexed-le-Cardinal
@@ -242,8 +241,8 @@ module _
     ((i : type-I) → merely-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
     leq-cardinality (Σ-Set set-I A) (Π-Set set-I B)
-  leq-cardinality-Σ-Π-le-family A B merely-Σ-A is-projective-B is-discrete-B
-    merely-Σ-B H =
+  leq-cardinality-Σ-Π-le-family
+    A B merely-Σ-A is-projective-B is-discrete-B merely-Σ-B H =
     let
       nonsurjective-emb :
         (e : (i : type-I) → type-Set (A i) ↪ type-Set (B i)) →
@@ -265,8 +264,7 @@ module _
 
       build-emb :
         ((i : type-I) → type-Set (A i) ↪ type-Set (B i)) →
-        type-trunc-Prop
-          ( type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
+        type-trunc-Prop (type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
       build-emb e =
         map-trunc-Prop
           ( emb-Σ-Π-nonim-Set (type-I , dI) A B e)
