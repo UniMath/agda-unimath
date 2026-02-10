@@ -40,7 +40,7 @@ The
 states that this congruence has a solution if and only if `gcd(a,m)` divides
 `b`, where `gcd(a,m)` is the
 [greatest common divisor](elementary-number-theory.greatest-common-divisor-integers.md)
-of `a` and `m`. Constructively, the reverse implication is obtained from
+of `a` and `m`. The reverse implication is obtained constructively from
 [Bézout's lemma](elementary-number-theory.bezouts-lemma-integers.md).
 
 ## Definition
