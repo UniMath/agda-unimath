@@ -636,6 +636,6 @@ has-decidable-Σ-Prop {l} =
 
 ## See also
 
-- [Types with decidable existential quantifications](foundation.types-with-decidable-existential-quantifications.md)
+- [Types with decidable existential quantification](foundation.types-with-decidable-existential-quantification.md)
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
 - [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantifications.md)
