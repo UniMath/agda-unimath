@@ -41,7 +41,7 @@ open import foundation.retractions
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.types-with-decidable-dependent-pair-types
+open import foundation.types-with-decidable-existential-quantification
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
@@ -51,7 +51,7 @@ open import logic.propositionally-decidable-maps
 open import logic.propositionally-decidable-types
 
 open import set-theory.cardinals
-open import set-theory.cardinals-with-merely-decidable-sums
+open import set-theory.cardinals-with-decidable-existential-quantification
 open import set-theory.complemented-inequality-cardinals
 open import set-theory.decidable-cardinals
 open import set-theory.discrete-cardinals
@@ -206,13 +206,13 @@ module _
 module _
   {l1 l2 : Level}
   (X : Set l1) (Y : Set l2)
+  (decidable-equality-X : has-decidable-equality (type-Set X))
+  (decidable-∃-X :
+    type-trunc-Prop (has-decidable-∃-Level l2 (type-Set X)))
   (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
   (decidable-equality-Y : has-decidable-equality (type-Set Y))
-  (decidable-Σ-Y :
-    type-trunc-Prop (has-decidable-Σ-Level (l1 ⊔ l2) (type-Set Y)))
-  (decidable-equality-X : has-decidable-equality (type-Set X))
-  (decidable-Σ-X :
-    type-trunc-Prop (has-decidable-Σ-Level l2 (type-Set X)))
+  (decidable-∃-Y :
+    type-trunc-Prop (has-decidable-∃-Level (l1 ⊔ l2) (type-Set Y)))
   where
 
   le-indexed-le-complemented-cardinality :
@@ -221,38 +221,37 @@ module _
   le-indexed-le-complemented-cardinality (_ , nY≤X) =
     unit-le-indexed-cardinality X Y
       ( is-inhabited-is-not-leq-complemented-cardinality X Y
-          ( is-inhabited-or-empty-merely-has-decidable-Σ-Level decidable-Σ-Y)
+          ( is-inhabited-or-empty-merely-has-decidable-∃-Level decidable-∃-Y)
           ( nY≤X) ,
         λ f →
-        rec-trunc-Prop
-          ( is-nonsurjective-Prop f)
-          ( λ hΣY →
-            rec-trunc-Prop
-              ( is-nonsurjective-Prop f)
-              ( λ hΣX →
-                is-nonsurjective-is-not-surjective-has-decidable-Σ-Level-is-inhabited-or-empty-map
-                  hΣY
-                  ( is-inhabited-or-empty-map-has-decidable-Σ-Level
-                    hΣX decidable-equality-Y f)
-                  ( nY≤X ∘
-                    geq-complemented-is-surjective-cardinality
-                      X Y
-                      decidable-equality-X
-                      is-projective-Y f))
-              ( decidable-Σ-X))
-          ( decidable-Σ-Y))
+          apply-twice-universal-property-trunc-Prop
+            decidable-∃-Y
+            decidable-∃-X
+            ( is-nonsurjective-Prop f)
+            ( λ hΣY hΣX →
+              is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
+                hΣY
+                ( is-inhabited-or-empty-map-has-decidable-∃-Level
+                  hΣX decidable-equality-Y f)
+                ( nY≤X ∘
+                  geq-complemented-is-surjective-cardinality
+                    X Y
+                    decidable-equality-X
+                    is-projective-Y f)
+            )
+      )
 
 module _
   {l1 l2 : Level}
   (wlpo : level-WLPO (l1 ⊔ l2))
   (X : Set l1) (Y : Set l2)
+  (decidable-equality-X : has-decidable-equality (type-Set X))
+  (decidable-∃-X :
+    type-trunc-Prop (has-decidable-∃-Level l2 (type-Set X)))
   (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
   (decidable-equality-Y : has-decidable-equality (type-Set Y))
-  (decidable-Σ-Y :
-    type-trunc-Prop (has-decidable-Σ-Level (l1 ⊔ l2) (type-Set Y)))
-  (decidable-equality-X : has-decidable-equality (type-Set X))
-  (decidable-Σ-X :
-    type-trunc-Prop (has-decidable-Σ-Level l2 (type-Set X)))
+  (decidable-∃-Y :
+    type-trunc-Prop (has-decidable-∃-Level (l1 ⊔ l2) (type-Set Y)))
   where
 
   le-complemented-iff-le-indexed-cardinality :
@@ -261,11 +260,11 @@ module _
   le-complemented-iff-le-indexed-cardinality X≤Y =
     ( le-complemented-le-indexed-leq-complemented-cardinality wlpo X Y X≤Y ,
       le-indexed-le-complemented-cardinality X Y
+        ( decidable-equality-X)
+        ( decidable-∃-X)
         ( is-projective-Y)
         ( decidable-equality-Y)
-        ( decidable-Σ-Y)
-        ( decidable-equality-X)
-        ( decidable-Σ-X))
+        ( decidable-∃-Y))
 ```
 
 ### Strict inequality implies strict indexed inequality for projective cardinals
@@ -277,11 +276,11 @@ module _
 
   le-indexed-le-complemented-Cardinal :
     (X : Cardinal l1) (Y : Cardinal l2) →
+    is-discrete-Cardinal X →
+    merely-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y →
-    is-discrete-Cardinal X →
-    merely-decidable-Σ-Cardinal l2 X →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     le-complemented-Cardinal X Y →
     le-indexed-Cardinal X Y
   le-indexed-le-complemented-Cardinal =
@@ -289,36 +288,36 @@ module _
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( is-projective-Cardinal (l1 ⊔ l2) Y)
+            ( is-discrete-Cardinal X)
             ( function-Prop
-              ( is-discrete-Cardinal Y)
+              ( merely-decidable-∃-Cardinal l2 X)
               ( function-Prop
-                ( merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y)
+                ( is-projective-Cardinal (l1 ⊔ l2) Y)
                 ( function-Prop
-                  ( is-discrete-Cardinal X)
+                  ( is-discrete-Cardinal Y)
                   ( function-Prop
-                    ( merely-decidable-Σ-Cardinal l2 X)
+                    ( merely-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                     ( function-Prop
                       ( le-complemented-Cardinal X Y)
                       ( le-indexed-prop-Cardinal X Y))))))))
-      ( λ X Y is-projective-Y is-discrete-Y merely-Σ-Y is-discrete-X merely-Σ-X →
+      ( λ X Y is-discrete-X merely-Σ-X is-projective-Y is-discrete-Y merely-Σ-Y →
         le-indexed-le-complemented-cardinality
           ( X)
           ( Y)
+          ( inv-unit-is-discrete-cardinality X is-discrete-X)
+          ( inv-unit-merely-decidable-∃-cardinality X merely-Σ-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-merely-decidable-Σ-cardinality Y merely-Σ-Y)
-          ( inv-unit-is-discrete-cardinality X is-discrete-X)
-          ( inv-unit-merely-decidable-Σ-cardinality X merely-Σ-X))
+          ( inv-unit-merely-decidable-∃-cardinality Y merely-Σ-Y))
 
   le-complemented-iff-le-indexed-Cardinal :
     (wlpo : level-WLPO (l1 ⊔ l2)) →
     (X : Cardinal l1) (Y : Cardinal l2) →
+    is-discrete-Cardinal X →
+    merely-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y →
-    is-discrete-Cardinal X →
-    merely-decidable-Σ-Cardinal l2 X →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     leq-complemented-Cardinal X Y →
     le-indexed-Cardinal X Y ↔ le-complemented-Cardinal X Y
   le-complemented-iff-le-indexed-Cardinal wlpo =
@@ -326,30 +325,30 @@ module _
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( is-projective-Cardinal (l1 ⊔ l2) Y)
+            ( is-discrete-Cardinal X)
             ( function-Prop
-              ( is-discrete-Cardinal Y)
+              ( merely-decidable-∃-Cardinal l2 X)
               ( function-Prop
-                ( merely-decidable-Σ-Cardinal (l1 ⊔ l2) Y)
+                ( is-projective-Cardinal (l1 ⊔ l2) Y)
                 ( function-Prop
-                  ( is-discrete-Cardinal X)
+                  ( is-discrete-Cardinal Y)
                   ( function-Prop
-                    ( merely-decidable-Σ-Cardinal l2 X)
+                    ( merely-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                     ( function-Prop
                       ( leq-complemented-Cardinal X Y)
                       ( iff-Prop
                         ( le-indexed-prop-Cardinal X Y)
                         ( le-complemented-prop-Cardinal X Y)))))))))
       ( λ X Y
-          is-projective-Y is-discrete-Y merely-Σ-Y
-          is-discrete-X merely-Σ-X →
+          is-discrete-X merely-Σ-X
+          is-projective-Y is-discrete-Y merely-Σ-Y →
         le-complemented-iff-le-indexed-cardinality
           ( wlpo)
           ( X)
           ( Y)
+          ( inv-unit-is-discrete-cardinality X is-discrete-X)
+          ( inv-unit-merely-decidable-∃-cardinality X merely-Σ-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-merely-decidable-Σ-cardinality Y merely-Σ-Y)
-          ( inv-unit-is-discrete-cardinality X is-discrete-X)
-          ( inv-unit-merely-decidable-Σ-cardinality X merely-Σ-X))
+          ( inv-unit-merely-decidable-∃-cardinality Y merely-Σ-Y))
 ```
