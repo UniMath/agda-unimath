@@ -17,12 +17,14 @@ open import linear-algebra.real-inner-product-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -46,14 +48,14 @@ module _
   where
 
   is-orthogonal-prop-ℝ-Inner-Product-Space :
-    Relation-Prop (lsuc l1) (type-ℝ-Inner-Product-Space V)
+    Relation-Prop l1 (type-ℝ-Inner-Product-Space V)
   is-orthogonal-prop-ℝ-Inner-Product-Space =
     is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
       ( vector-space-ℝ-Inner-Product-Space V)
       ( bilinear-form-inner-product-ℝ-Inner-Product-Space V)
 
   is-orthogonal-ℝ-Inner-Product-Space :
-    Relation (lsuc l1) (type-ℝ-Inner-Product-Space V)
+    Relation l1 (type-ℝ-Inner-Product-Space V)
   is-orthogonal-ℝ-Inner-Product-Space =
     type-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
 ```
@@ -94,8 +96,15 @@ module _
           ⟨ v +V w ,V v +V w ⟩
           ＝ ⟨ v ,V v ⟩ +ℝ real-ℕ 2 *ℝ ⟨ v ,V w ⟩ +ℝ ⟨ w ,V w ⟩
             by squared-norm-add-ℝ-Inner-Product-Space V v w
-          ＝ ⟨ v ,V v ⟩ +ℝ real-ℕ 2 *ℝ raise-ℝ l1 zero-ℝ +ℝ ⟨ w ,V w ⟩
-            by ap-add-ℝ (ap-add-ℝ refl (ap-mul-ℝ refl v∙w=0)) refl
+          ＝ ⟨ v ,V v ⟩ +ℝ real-ℕ 2 *ℝ raise-zero-ℝ l1 +ℝ ⟨ w ,V w ⟩
+            by
+              ap-add-ℝ
+                ( ap-add-ℝ
+                  ( refl)
+                  ( ap-mul-ℝ
+                    ( refl)
+                    ( eq-raise-zero-is-zero-ℝ v∙w=0)))
+                ( refl)
           ＝ ⟨ v ,V v ⟩ +ℝ zero-ℝ +ℝ ⟨ w ,V w ⟩
             by
               ap-add-ℝ
@@ -123,8 +132,41 @@ module _
     norm-add-orthogonal-ℝ-Inner-Product-Space v w v∙w=0 =
       ap
         ( real-sqrt-ℝ⁰⁺)
-        ( eq-ℝ⁰⁺ _ _
-          ( pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
+        ( eq-ℝ⁰⁺ _ _ (pythagorean-theorem-ℝ-Inner-Product-Space v w v∙w=0))
+```
+
+### Orthogonality is preserved by scalar multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Inner-Product-Space l1 l2)
+  where
+
+  abstract
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space :
+      (c : ℝ l1) (v w : type-ℝ-Inner-Product-Space V) →
+      is-orthogonal-ℝ-Inner-Product-Space V v w →
+      is-orthogonal-ℝ-Inner-Product-Space V (mul-ℝ-Inner-Product-Space V c v) w
+    preserves-is-orthogonal-left-mul-ℝ-Inner-Product-Space c v w v·w=0 =
+      let
+        ⟨_,V_⟩ = inner-product-ℝ-Inner-Product-Space V
+        _*V_ = mul-ℝ-Inner-Product-Space V
+      in
+        similarity-reasoning-ℝ
+        ⟨ c *V v ,V w ⟩
+        ~ℝ c *ℝ ⟨ v ,V w ⟩
+          by
+            sim-eq-ℝ
+              ( preserves-scalar-mul-left-inner-product-ℝ-Inner-Product-Space
+                ( V)
+                ( c)
+                ( v)
+                ( w))
+        ~ℝ c *ℝ zero-ℝ
+          by preserves-sim-left-mul-ℝ c _ _ v·w=0
+        ~ℝ zero-ℝ
+          by right-zero-law-mul-ℝ c
 ```
 
 ## References

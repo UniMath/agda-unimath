@@ -17,6 +17,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -29,6 +30,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -82,6 +84,13 @@ is-positive-real-ℝ⁺ = pr2
 ```
 
 ## Properties
+
+### The positive real numbers form a set
+
+```agda
+ℝ⁺-Set : (l : Level) → Set (lsuc l)
+ℝ⁺-Set l = set-subset (ℝ-Set l) is-positive-prop-ℝ
+```
 
 ### Positivity is preserved by similarity
 
@@ -156,7 +165,8 @@ module _
   abstract
     is-positive-iff-zero-in-lower-cut-ℝ :
       is-positive-ℝ x ↔ is-in-lower-cut-ℝ x zero-ℚ
-    is-positive-iff-zero-in-lower-cut-ℝ = inv-iff (le-real-iff-lower-cut-ℚ x)
+    is-positive-iff-zero-in-lower-cut-ℝ =
+      inv-iff (le-real-iff-is-in-lower-cut-ℝ x)
 
     is-positive-zero-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x zero-ℚ → is-positive-ℝ x
@@ -245,6 +255,9 @@ abstract
   preserves-is-positive-real-ℚ pos-q =
     preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
+  is-positive-real-ℚ⁺ : (q : ℚ⁺) → is-positive-ℝ (real-ℚ⁺ q)
+  is-positive-real-ℚ⁺ (q , pos-q) = preserves-is-positive-real-ℚ pos-q
+
   reflects-is-positive-real-ℚ :
     {q : ℚ} → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
   reflects-is-positive-real-ℚ {q} 0<qℝ =
@@ -255,6 +268,9 @@ positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ 
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+
+one-half-ℝ⁺ : ℝ⁺ lzero
+one-half-ℝ⁺ = positive-real-ℚ⁺ one-half-ℚ⁺
 
 is-positive-one-ℝ : is-positive-ℝ one-ℝ
 is-positive-one-ℝ = is-positive-real-ℝ⁺ one-ℝ⁺
@@ -284,6 +300,9 @@ abstract
 
 positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
 positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
+
+two-ℝ⁺ : ℝ⁺ lzero
+two-ℝ⁺ = positive-real-ℕ⁺ two-ℕ⁺
 ```
 
 ### `x` is positive if and only if there exists a positive rational number it is not less than or equal to
@@ -334,7 +353,25 @@ abstract
 ### Raising the universe level of positive real numbers
 
 ```agda
+abstract
+  preserves-is-positive-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
+    is-positive-ℝ (raise-ℝ l x)
+  preserves-is-positive-raise-ℝ l x 0<x =
+    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
+
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
-  ( raise-ℝ l x , preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x)
+  ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
+raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
+```
+
+### Raising a positive real to its own level is the identity
+
+```agda
+abstract
+  eq-raise-ℝ⁺ : {l : Level} → (x : ℝ⁺ l) → x ＝ raise-ℝ⁺ l x
+  eq-raise-ℝ⁺ (x , _) = eq-ℝ⁺ _ _ (eq-raise-ℝ x)
 ```

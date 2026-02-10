@@ -12,6 +12,7 @@ module elementary-number-theory.addition-positive-rational-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-integer-fractions
@@ -131,6 +132,37 @@ interchange-law-add-add-ℚ⁺ x y u v =
       ( rational-ℚ⁺ v))
 ```
 
+### Addition with a positive rational number is a strictly increasing map
+
+```agda
+abstract
+  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+  le-left-add-rational-ℚ⁺ x d =
+    concatenate-leq-le-ℚ
+      ( x)
+      ( zero-ℚ +ℚ x)
+      ( (rational-ℚ⁺ d) +ℚ x)
+      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+      ( preserves-le-left-add-ℚ
+        ( x)
+        ( zero-ℚ)
+        ( rational-ℚ⁺ d)
+        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ d)))
+
+  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+  le-right-add-rational-ℚ⁺ x d =
+    inv-tr
+      ( le-ℚ x)
+      ( commutative-add-ℚ x (rational-ℚ⁺ d))
+      ( le-left-add-rational-ℚ⁺ x d)
+
+  leq-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (rational-ℚ⁺ d +ℚ x)
+  leq-left-add-rational-ℚ⁺ x d = leq-le-ℚ (le-left-add-rational-ℚ⁺ x d)
+
+  leq-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (x +ℚ rational-ℚ⁺ d)
+  leq-right-add-rational-ℚ⁺ x d = leq-le-ℚ (le-right-add-rational-ℚ⁺ x d)
+```
+
 ### The sum of two positive rational numbers is greater than each of them
 
 ```agda
@@ -138,27 +170,28 @@ module _
   (x y : ℚ⁺)
   where
 
-  le-left-add-ℚ⁺ : le-ℚ⁺ x (x +ℚ⁺ y)
-  le-left-add-ℚ⁺ =
-    tr
-      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
-      ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
-      ( preserves-le-right-add-ℚ
-        ( rational-ℚ⁺ x)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ y)
-        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ y)))
+  abstract
+    le-left-add-ℚ⁺ : le-ℚ⁺ x (x +ℚ⁺ y)
+    le-left-add-ℚ⁺ =
+      tr
+        ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+        ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
+        ( preserves-le-right-add-ℚ
+          ( rational-ℚ⁺ x)
+          ( zero-ℚ)
+          ( rational-ℚ⁺ y)
+          ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ y)))
 
-  le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
-  le-right-add-ℚ⁺ =
-    tr
-      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
-      ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
-      ( preserves-le-left-add-ℚ
-        ( rational-ℚ⁺ y)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ x)
-        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ x)))
+    le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
+    le-right-add-ℚ⁺ =
+      tr
+        ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+        ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
+        ( preserves-le-left-add-ℚ
+          ( rational-ℚ⁺ y)
+          ( zero-ℚ)
+          ( rational-ℚ⁺ x)
+          ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ x)))
 ```
 
 ### The positive difference of strictly inequal positive rational numbers
@@ -171,32 +204,33 @@ module _
   le-diff-ℚ⁺ : ℚ⁺
   le-diff-ℚ⁺ = positive-diff-le-ℚ H
 
-  left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
-  left-diff-law-add-ℚ⁺ =
-    eq-ℚ⁺
-      ( ( associative-add-ℚ
-          ( rational-ℚ⁺ y)
-          ( neg-ℚ (rational-ℚ⁺ x))
-          ( rational-ℚ⁺ x)) ∙
-        ( ( ap
-            ( (rational-ℚ⁺ y) +ℚ_)
-            ( left-inverse-law-add-ℚ (rational-ℚ⁺ x))) ∙
-        ( right-unit-law-add-ℚ (rational-ℚ⁺ y))))
+  abstract
+    left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
+    left-diff-law-add-ℚ⁺ =
+      eq-ℚ⁺
+        ( ( associative-add-ℚ
+            ( rational-ℚ⁺ y)
+            ( neg-ℚ (rational-ℚ⁺ x))
+            ( rational-ℚ⁺ x)) ∙
+          ( ( ap
+              ( (rational-ℚ⁺ y) +ℚ_)
+              ( left-inverse-law-add-ℚ (rational-ℚ⁺ x))) ∙
+          ( right-unit-law-add-ℚ (rational-ℚ⁺ y))))
 
-  right-diff-law-add-ℚ⁺ : x +ℚ⁺ le-diff-ℚ⁺ ＝ y
-  right-diff-law-add-ℚ⁺ =
-    ( eq-ℚ⁺
-      ( commutative-add-ℚ
-        ( rational-ℚ⁺ x)
-        ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
-    ( left-diff-law-add-ℚ⁺)
-
-  le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
-  le-le-diff-ℚ⁺ =
-    tr
-      ( le-ℚ⁺ le-diff-ℚ⁺)
+    right-diff-law-add-ℚ⁺ : x +ℚ⁺ le-diff-ℚ⁺ ＝ y
+    right-diff-law-add-ℚ⁺ =
+      ( eq-ℚ⁺
+        ( commutative-add-ℚ
+          ( rational-ℚ⁺ x)
+          ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
       ( left-diff-law-add-ℚ⁺)
-      ( le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
+
+    le-le-diff-ℚ⁺ : le-ℚ⁺ le-diff-ℚ⁺ y
+    le-le-diff-ℚ⁺ =
+      tr
+        ( le-ℚ⁺ le-diff-ℚ⁺)
+        ( left-diff-law-add-ℚ⁺)
+        ( le-left-add-ℚ⁺ le-diff-ℚ⁺ x)
 ```
 
 ### Any positive rational number can be expressed as the sum of two positive rational numbers
@@ -229,12 +263,18 @@ module _
     le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
     le-left-summand-split-ℚ⁺ = le-mediant-zero-ℚ⁺ x
 
+    leq-left-summand-split-ℚ⁺ : leq-ℚ⁺ left-summand-split-ℚ⁺ x
+    leq-left-summand-split-ℚ⁺ = leq-le-ℚ le-left-summand-split-ℚ⁺
+
     le-right-summand-split-ℚ⁺ : le-ℚ⁺ right-summand-split-ℚ⁺ x
     le-right-summand-split-ℚ⁺ =
       tr
         ( le-ℚ⁺ right-summand-split-ℚ⁺)
         ( eq-add-split-ℚ⁺)
         ( le-right-add-ℚ⁺ left-summand-split-ℚ⁺ right-summand-split-ℚ⁺)
+
+    leq-right-summand-split-ℚ⁺ : leq-ℚ⁺ right-summand-split-ℚ⁺ x
+    leq-right-summand-split-ℚ⁺ = leq-le-ℚ le-right-summand-split-ℚ⁺
 
     le-add-split-ℚ⁺ :
       (p q r s : ℚ) →
@@ -257,37 +297,6 @@ module _
           { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
           ( p<q+left)
           ( r<s+right))
-```
-
-### Addition with a positive rational number is an increasing map
-
-```agda
-abstract
-  le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
-  le-left-add-rational-ℚ⁺ x d =
-    concatenate-leq-le-ℚ
-      ( x)
-      ( zero-ℚ +ℚ x)
-      ( (rational-ℚ⁺ d) +ℚ x)
-      ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-      ( preserves-le-left-add-ℚ
-        ( x)
-        ( zero-ℚ)
-        ( rational-ℚ⁺ d)
-        ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ d)))
-
-  le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
-  le-right-add-rational-ℚ⁺ x d =
-    inv-tr
-      ( le-ℚ x)
-      ( commutative-add-ℚ x (rational-ℚ⁺ d))
-      ( le-left-add-rational-ℚ⁺ x d)
-
-  leq-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (rational-ℚ⁺ d +ℚ x)
-  leq-left-add-rational-ℚ⁺ x d = leq-le-ℚ (le-left-add-rational-ℚ⁺ x d)
-
-  leq-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → leq-ℚ x (x +ℚ rational-ℚ⁺ d)
-  leq-right-add-rational-ℚ⁺ x d = leq-le-ℚ (le-right-add-rational-ℚ⁺ x d)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map
@@ -321,41 +330,42 @@ module _
   (x y : ℚ)
   where
 
-  le-add-positive-leq-ℚ :
-    (I : leq-ℚ x y) (d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))
-  le-add-positive-leq-ℚ I d =
-    concatenate-leq-le-ℚ
-      ( x)
-      ( y)
-      ( y +ℚ (rational-ℚ⁺ d))
-      ( I)
-      ( le-right-add-rational-ℚ⁺ y d)
+  abstract
+    le-add-positive-leq-ℚ :
+      (I : leq-ℚ x y) (d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))
+    le-add-positive-leq-ℚ I d =
+      concatenate-leq-le-ℚ
+        ( x)
+        ( y)
+        ( y +ℚ (rational-ℚ⁺ d))
+        ( I)
+        ( le-right-add-rational-ℚ⁺ y d)
 
-  leq-add-positive-le-add-positive-ℚ :
-    ((d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))) →
-    ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d)))
-  leq-add-positive-le-add-positive-ℚ H d =
-    leq-le-ℚ
-      { x}
-      { y +ℚ (rational-ℚ⁺ d)}
-      (H d)
+    leq-add-positive-le-add-positive-ℚ :
+      ((d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))) →
+      ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d)))
+    leq-add-positive-le-add-positive-ℚ H d =
+      leq-le-ℚ
+        { x}
+        { y +ℚ (rational-ℚ⁺ d)}
+        (H d)
 
-  leq-leq-add-positive-ℚ :
-    ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
-  leq-leq-add-positive-ℚ H =
-    rec-coproduct
-      ( λ y<x →
-        ex-falso
-          ( not-leq-le-ℚ
-            ( mediant-ℚ y x)
-            ( x)
-            ( le-right-mediant-ℚ y<x)
-            ( tr
-              ( leq-ℚ x)
-              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
-              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x))))))
-      ( id)
-      ( decide-le-leq-ℚ y x)
+    leq-leq-add-positive-ℚ :
+      ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
+    leq-leq-add-positive-ℚ H =
+      rec-coproduct
+        ( λ y<x →
+          ex-falso
+            ( not-leq-le-ℚ
+              ( mediant-ℚ y x)
+              ( x)
+              ( le-right-mediant-ℚ y<x)
+              ( tr
+                ( leq-ℚ x)
+                ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
+                ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x))))))
+        ( id)
+        ( decide-le-leq-ℚ y x)
 
   equiv-leq-le-add-positive-ℚ :
     leq-ℚ x y ≃ ((d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d)))
@@ -381,31 +391,32 @@ module _
   (x y : ℚ) (d : ℚ⁺)
   where
 
-  le-le-add-positive-leq-add-positive-ℚ :
-    (L : leq-ℚ y (x +ℚ (rational-ℚ⁺ d)))
-    (r : ℚ)
-    (I : le-ℚ (r +ℚ rational-ℚ⁺ d) y) →
-    le-ℚ r x
-  le-le-add-positive-leq-add-positive-ℚ L r I =
-    reflects-le-left-add-ℚ
-      ( rational-ℚ⁺ d)
-      ( r)
-      ( x)
-      ( concatenate-le-leq-ℚ
-        ( r +ℚ rational-ℚ⁺ d)
-        ( y)
-        ( x +ℚ rational-ℚ⁺ d)
-        ( I)
-        ( L))
+  abstract
+    le-le-add-positive-leq-add-positive-ℚ :
+      (L : leq-ℚ y (x +ℚ (rational-ℚ⁺ d)))
+      (r : ℚ)
+      (I : le-ℚ (r +ℚ rational-ℚ⁺ d) y) →
+      le-ℚ r x
+    le-le-add-positive-leq-add-positive-ℚ L r I =
+      reflects-le-left-add-ℚ
+        ( rational-ℚ⁺ d)
+        ( r)
+        ( x)
+        ( concatenate-le-leq-ℚ
+          ( r +ℚ rational-ℚ⁺ d)
+          ( y)
+          ( x +ℚ rational-ℚ⁺ d)
+          ( I)
+          ( L))
 
-  leq-add-positive-le-le-add-positive-ℚ :
-    ((r : ℚ) → le-ℚ (r +ℚ rational-ℚ⁺ d) y → le-ℚ r x) →
-    leq-ℚ y (x +ℚ rational-ℚ⁺ d)
-  leq-add-positive-le-le-add-positive-ℚ L =
-    rec-coproduct
-      ( ex-falso ∘ (irreflexive-le-ℚ x) ∘ L x)
-      ( id)
-      ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
+    leq-add-positive-le-le-add-positive-ℚ :
+      ((r : ℚ) → le-ℚ (r +ℚ rational-ℚ⁺ d) y → le-ℚ r x) →
+      leq-ℚ y (x +ℚ rational-ℚ⁺ d)
+    leq-add-positive-le-le-add-positive-ℚ L =
+      rec-coproduct
+        ( ex-falso ∘ (irreflexive-le-ℚ x) ∘ L x)
+        ( id)
+        ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
 ```
 
 ### Any positive rational number `p` has a `q` with `q + q < p`

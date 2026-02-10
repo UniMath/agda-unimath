@@ -42,6 +42,7 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
@@ -50,18 +51,19 @@ open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 ```
 
 </details>
@@ -101,40 +103,40 @@ module _
   {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space :
-    short-function-Pseudometric-Space
+  short-map-cauchy-approximation-metric-quotient-Pseudometric-Space :
+    short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-  short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space =
-    short-map-short-function-cauchy-approximation-Pseudometric-Space
+  short-map-cauchy-approximation-metric-quotient-Pseudometric-Space =
+    short-map-cauchy-approximation-short-map-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
-      ( short-map-metric-quotient-Pseudometric-Space M)
+      ( short-map-unit-metric-quotient-Pseudometric-Space M)
 
-  map-metric-quotient-cauchy-approximation-Pseudometric-Space :
+  map-cauchy-approximation-metric-quotient-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space M →
     cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
-  map-metric-quotient-cauchy-approximation-Pseudometric-Space =
-    map-short-function-Pseudometric-Space
+  map-cauchy-approximation-metric-quotient-Pseudometric-Space =
+    map-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
+      ( short-map-cauchy-approximation-metric-quotient-Pseudometric-Space)
 
-  is-short-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
-    is-short-function-Pseudometric-Space
+  is-short-map-cauchy-approximation-metric-quotient-Pseudometric-Space :
+    is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-      ( map-metric-quotient-cauchy-approximation-Pseudometric-Space)
-  is-short-map-metric-quotient-cauchy-approximation-Pseudometric-Space =
-    is-short-map-short-function-Pseudometric-Space
+      ( map-cauchy-approximation-metric-quotient-Pseudometric-Space)
+  is-short-map-cauchy-approximation-metric-quotient-Pseudometric-Space =
+    is-short-map-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
-      ( short-map-metric-quotient-cauchy-apprtoximation-Pseudometric-Space)
+      ( short-map-cauchy-approximation-metric-quotient-Pseudometric-Space)
 ```
 
 ### Lifts of Cauchy approximations in the quotient metric space up to similarity
@@ -155,7 +157,7 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-metric-quotient-Pseudometric-Space A))
       ( u)
-      ( map-metric-quotient-cauchy-approximation-Pseudometric-Space A v)
+      ( map-cauchy-approximation-metric-quotient-Pseudometric-Space A v)
 
   is-lift-quotient-cauchy-approximation-Pseudometric-Space : UU (l1 ⊔ l2)
   is-lift-quotient-cauchy-approximation-Pseudometric-Space =
@@ -206,12 +208,12 @@ module _
     is-limit-cauchy-approximation-Pseudometric-Space M u lim)
   where
 
-  preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space :
+  preserves-limits-map-cauchy-approximation-metric-quotient-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
-      ( map-metric-quotient-cauchy-approximation-Pseudometric-Space M u)
-      ( map-metric-quotient-Pseudometric-Space M lim)
-  preserves-limits-map-metric-quotient-cauchy-approximation-Pseudometric-Space
+      ( map-cauchy-approximation-metric-quotient-Pseudometric-Space M u)
+      ( map-unit-metric-quotient-Pseudometric-Space M lim)
+  preserves-limits-map-cauchy-approximation-metric-quotient-Pseudometric-Space
     ε δ (x , x∈uε) (y , y∈lim) =
     let
       lim~y : sim-Pseudometric-Space M lim y
@@ -233,7 +235,7 @@ module _
           ( x)
           ( x∈uε)
     in
-      preserves-neighborhood-sim-Pseudometric-Space
+      preserves-neighborhoods-sim-Pseudometric-Space
         ( M)
         ( uε~x)
         ( lim~y)
@@ -252,14 +254,14 @@ module _
   has-lift-map-quotient-cauchy-approximation-metric-quotient-Pseudometric-Space :
     has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space
       ( A)
-      ( map-metric-quotient-cauchy-approximation-Pseudometric-Space A u)
+      ( map-cauchy-approximation-metric-quotient-Pseudometric-Space A u)
   has-lift-map-quotient-cauchy-approximation-metric-quotient-Pseudometric-Space =
     unit-trunc-Prop
       ( u ,
         refl-sim-Pseudometric-Space
           ( cauchy-pseudocompletion-Pseudometric-Space
             ( pseudometric-metric-quotient-Pseudometric-Space A))
-          ( map-metric-quotient-cauchy-approximation-Pseudometric-Space A u))
+          ( map-cauchy-approximation-metric-quotient-Pseudometric-Space A u))
 ```
 
 ### Convergent Cauchy approximations in the quotient metric space have a lift up to similarity
@@ -296,12 +298,12 @@ module _
         ( lim))
       ( const-cauchy-approximation-Pseudometric-Space
         ( pseudometric-metric-quotient-Pseudometric-Space A)
-        ( map-metric-quotient-Pseudometric-Space A x))
+        ( map-unit-metric-quotient-Pseudometric-Space A x))
       ( λ d α β →
         sim-eq-Pseudometric-Space
           ( pseudometric-metric-quotient-Pseudometric-Space A)
           ( lim)
-          ( map-metric-quotient-Pseudometric-Space A x)
+          ( map-unit-metric-quotient-Pseudometric-Space A x)
           ( inv
             ( eq-set-quotient-equivalence-class-set-quotient
               ( equivalence-relation-sim-Pseudometric-Space A)

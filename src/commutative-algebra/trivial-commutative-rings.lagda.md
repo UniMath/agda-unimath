@@ -8,6 +8,7 @@ module commutative-algebra.trivial-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.contractible-types
@@ -107,6 +108,31 @@ trivial-Commutative-Ring = (trivial-Ring , is-commutative-trivial-Ring)
 is-trivial-trivial-Commutative-Ring :
   is-trivial-Commutative-Ring trivial-Commutative-Ring
 is-trivial-trivial-Commutative-Ring = refl
+```
+
+### The zero of a commutative ring is invertible if and only if the commutative ring is trivial
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  abstract
+    is-invertible-zero-is-trivial-Commutative-Ring :
+      is-trivial-Commutative-Ring R →
+      is-invertible-element-Commutative-Ring R (zero-Commutative-Ring R)
+    is-invertible-zero-is-trivial-Commutative-Ring 0=1 =
+      ( one-Commutative-Ring R ,
+        ( ( ap-mul-Commutative-Ring R 0=1 refl) ∙
+          ( right-unit-law-mul-Commutative-Ring R _)) ,
+        ( ( ap-mul-Commutative-Ring R refl 0=1) ∙
+          ( left-unit-law-mul-Commutative-Ring R _)))
+
+    is-trivial-is-invertible-zero-Commutative-Ring :
+      is-invertible-element-Commutative-Ring R (zero-Commutative-Ring R) →
+      is-trivial-Commutative-Ring R
+    is-trivial-is-invertible-zero-Commutative-Ring (r , 0r=1 , _) =
+      inv (left-zero-law-mul-Commutative-Ring R r) ∙ 0r=1
 ```
 
 ### The type of trivial rings is contractible

@@ -24,6 +24,7 @@ open import elementary-number-theory.square-roots-positive-rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -37,6 +38,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -45,10 +47,12 @@ open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -207,6 +211,22 @@ square-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
 square-ℝ⁻ x⁻@(x , _) = (square-ℝ x , is-positive-square-ℝ⁻ x⁻)
 ```
 
+### For nonnegative real numbers, squaring preserves inequality
+
+```agda
+abstract
+  preserves-leq-square-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
+    leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
+  preserves-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
+    transitive-leq-ℝ
+      ( square-ℝ x)
+      ( x *ℝ y)
+      ( square-ℝ y)
+      ( preserves-leq-right-mul-ℝ⁰⁺ y⁰⁺ x≤y)
+      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x≤y)
+```
+
 ### For nonnegative real numbers, squaring preserves strict inequality
 
 ```agda
@@ -252,7 +272,7 @@ abstract
   is-in-lower-cut-square-ℝ x q⁰⁺@(q , _) q∈Lx =
     let
       qℝ = nonnegative-real-ℚ⁰⁺ q⁰⁺
-      q<x = le-real-is-in-lower-cut-ℚ x q∈Lx
+      q<x = le-real-is-in-lower-cut-ℝ x q∈Lx
     in
       is-in-lower-cut-le-real-ℚ
         ( square-ℝ x)
@@ -282,7 +302,7 @@ abstract
           ( x⁰⁺)
           ( nonnegative-real-ℚ⁺
             ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))
-          ( le-real-is-in-upper-cut-ℚ x q∈Ux)))
+          ( le-real-is-in-upper-cut-ℝ x q∈Ux)))
 ```
 
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`
@@ -361,9 +381,26 @@ abstract
 ```agda
 abstract
   preserves-sim-square-ℝ :
-    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
-    sim-ℝ x y → sim-ℝ (square-ℝ x) (square-ℝ y)
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
+    sim-ℝ (square-ℝ x) (square-ℝ y)
   preserves-sim-square-ℝ x~y = preserves-sim-mul-ℝ x~y x~y
+```
+
+### Squaring commutes with raising the universe level of a real number
+
+```agda
+abstract
+  square-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) →
+    square-ℝ (raise-ℝ l x) ＝ raise-ℝ l (square-ℝ x)
+  square-raise-ℝ l x =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        square-ℝ (raise-ℝ l x)
+        ~ℝ square-ℝ x
+          by preserves-sim-square-ℝ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (square-ℝ x)
+          by sim-raise-ℝ l _)
 ```
 
 ### `0² = 0`
@@ -372,4 +409,35 @@ abstract
 abstract
   square-zero-ℝ : square-ℝ zero-ℝ ＝ zero-ℝ
   square-zero-ℝ = eq-sim-ℝ (left-zero-law-mul-ℝ zero-ℝ)
+
+  square-raise-zero-ℝ :
+    (l : Level) → square-ℝ (raise-zero-ℝ l) ＝ raise-zero-ℝ l
+  square-raise-zero-ℝ l =
+    square-raise-ℝ l _ ∙ ap (raise-ℝ l) square-zero-ℝ
+
+  is-zero-square-is-zero-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ x → is-zero-ℝ (square-ℝ x)
+  is-zero-square-is-zero-ℝ {l} {x} x~0 =
+    transitive-sim-ℝ _ _ _
+      ( right-zero-law-mul-ℝ _)
+      ( preserves-sim-mul-ℝ x~0 x~0)
+
+  is-zero-is-zero-square-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ (square-ℝ x) → is-zero-ℝ x
+  is-zero-is-zero-square-ℝ {l} {x} x²~0 =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ _ _
+          ( λ 0<x →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁺ (x , 0<x))) ,
+        leq-not-le-ℝ _ _
+          ( λ x<0 →
+            not-le-leq-ℝ
+              ( square-ℝ x)
+              ( zero-ℝ)
+              ( leq-sim-ℝ x²~0)
+              ( is-positive-square-ℝ⁻ (x , x<0))))
 ```
