@@ -417,7 +417,7 @@ $n$-[types](foundation-core.truncated-types.md).
 | [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ-Prop`                          |
 | [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π-Prop`                          |
 | [Functions](foundation-core.function-types.md)              | `→`               | `⇒`                               |
-| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`              | `⇔`                               |
+| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `⇔`                               |
 | [Product](foundation-core.cartesian-product-types.md)       | `×`               | `product-Prop`                    |
 | [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `join-Prop`                       |
 | [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`              |
@@ -456,3 +456,8 @@ The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## See also
+
+- It is shown that the subuniverse of propositions has decidable Σ-types in
+  [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md).
