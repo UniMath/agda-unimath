@@ -763,10 +763,6 @@ abstract
       ( h ( (λ x → f x ＝ y) , (λ x → d (f x) y)))
 ```
 
-## References
-
-{{#bibliography}}
-
 ## See also
 
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
