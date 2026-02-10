@@ -10,12 +10,16 @@ module foundation.projective-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
 ```
@@ -98,6 +102,55 @@ is-projective-Level' l2 X =
 
 is-projective' : {l1 : Level} → UU l1 → UUω
 is-projective' X = {l2 : Level} → is-projective-Level' l2 X
+```
+
+## Properties
+
+### The alternative statement for set-projectivity is equivalent to set-projectivity when the base is a set
+
+```agda
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  is-projective'-is-0-projective-Level :
+    {l2 l3 : Level} →
+    is-projective-Level' (l2 ⊔ l3) X →
+    is-trunc-projective-Level l2 l3 0 X
+  is-projective'-is-0-projective-Level is-projective-X A B f g =
+    map-is-inhabited
+      ( map-equiv (compute-Π-fiber-postcomp X (map-connected-map f) g))
+      ( is-projective-X
+        ( λ x → fiber (map-connected-map f) (g x))
+        ( λ x →
+          is-surjective-is-neg-one-connected-map
+            ( is-connected-map-connected-map f)
+            ( g x)))
+
+  is-projective'-is-0-projective :
+    is-projective' X → is-trunc-projective 0 X
+  is-projective'-is-0-projective is-projective-X =
+    is-projective'-is-0-projective-Level is-projective-X
+```
+
+```agda
+module _
+  {l1 : Level} {X : UU l1} (is-set-X : is-set X)
+  where
+
+  is-0-projective-is-projective'-is-set-Level :
+    {l2 : Level} → is-trunc-projective 0 X → is-projective-Level' l2 X
+  is-0-projective-is-projective'-is-set-Level is-projective-X P H =
+    map-is-inhabited
+      ( map-inv-equiv (compute-fiber-postcomp-pr1 P id))
+      ( is-projective-X
+        ( Σ X P)
+        ( X , is-set-X)
+        ( pr1 ,
+          is-neg-one-connected-map-is-surjective
+            ( λ x →
+              map-is-inhabited (map-equiv (inv-equiv-fiber-pr1 P x)) (H x)))
+        ( id))
 ```
 
 ## See also

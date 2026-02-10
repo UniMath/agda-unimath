@@ -644,3 +644,9 @@ module _
               ( Y))
           ( is-equiv-id))
 ```
+
+## See also
+
+- [Suspensions of pointed types](synthetic-homotopy-theory.suspensions-of-pointed-types.md)
+- [Suspensions of propositions](synthetic-homotopy-theory.suspensions-of-propositions.md)
+- [Suspensions of projective types](synthetic-homotopy-theory.suspensions-of-projective-types.md)
