@@ -22,7 +22,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cumulative large set" Agda=Cumulative-Large-Sets}} is a
+A {{#concept "cumulative large set" Agda=Cumulative-Large-Set}} is a
 universe-polymorphic type `X : (l : Level) → UU (α l)` equipped with a
 [large similarity relation](foundation.large-similarity-relations.md) and an
 inclusion map for all [universe levels](foundation.universe-levels.md) `l1` and
