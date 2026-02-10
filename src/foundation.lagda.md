@@ -106,6 +106,7 @@ open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
+open import foundation.cumulative-large-sets public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -409,6 +410,10 @@ open import foundation.sets public
 open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets public
+open import foundation.similarity-preserving-binary-maps-large-similarity-relations public
+open import foundation.similarity-preserving-maps-cumulative-large-sets public
+open import foundation.similarity-preserving-maps-large-similarity-relations public
 open import foundation.similarity-subtypes public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public

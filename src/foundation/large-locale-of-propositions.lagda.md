@@ -10,12 +10,12 @@ module foundation.large-locale-of-propositions where
 open import foundation.conjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
-open import foundation.large-similarity-relations
 
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -25,10 +25,10 @@ open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
-open import order-theory.similarity-of-elements-large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.top-elements-large-posets
 ```
 

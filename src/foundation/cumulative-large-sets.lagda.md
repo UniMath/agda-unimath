@@ -7,13 +7,13 @@ module foundation.cumulative-large-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-similarity-relations
-open import foundation.injective-maps
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.embeddings
-open import foundation.large-binary-relations
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
 ```

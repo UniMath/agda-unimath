@@ -1,39 +1,45 @@
-# Large similarity preserving binary maps
+# Similarity preserving binary maps over large similarity relations
 
 ```agda
-module foundation.large-similarity-preserving-binary-maps where
+module foundation.similarity-preserving-binary-maps-large-similarity-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-similarity-relations
+open import foundation.embeddings
 open import foundation.injective-maps
 open import foundation.large-binary-relations
-open import foundation.universe-levels
-open import foundation.large-similarity-preserving-maps
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.embeddings
+open import foundation.similarity-preserving-maps-large-similarity-relations
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
+Given [large similarity relations](foundation.large-similarity-relations.md)
+over universe-polymorphic types `X Y Z`, a binary map `f : X → Y → Z`
+{{#concept "preserves similarity" Disambiguation="binary maps over types with large similarity relations" Agda=preserves-sim-binary-map-Large-Similarity-Relation}}
+if whenever `x` is similar to `x'` and `y` is similar to `y'`, `f x y` is
+similar to `f x' y'`.
+
 ## Definition
 
 ```agda
 module _
   {αX αY αZ : Level → Level}
-  {βX βY βZ : Level → Level → Level}
+  {βX βY βZ γ : Level → Level → Level}
   {X : (l : Level) → UU (αX l)}
   {Y : (l : Level) → UU (αY l)}
   {Z : (l : Level) → UU (αZ l)}
   (SX : Large-Similarity-Relation βX X)
   (SY : Large-Similarity-Relation βY Y)
   (SZ : Large-Similarity-Relation βZ Z)
-  (f : {l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2))
+  (f : {l1 l2 : Level} → X l1 → Y l2 → Z (γ l1 l2))
   where
 
   preserves-sim-binary-map-Large-Similarity-Relation : UUω
