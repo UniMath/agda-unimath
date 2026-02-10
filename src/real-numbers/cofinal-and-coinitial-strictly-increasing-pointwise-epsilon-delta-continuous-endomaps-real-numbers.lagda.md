@@ -1,4 +1,4 @@
-# cofinal and below, strictly increasing, pointwise ε-δ continuous endomaps on the real numbers
+# Cofinal and coinitial, strictly increasing, pointwise ε-δ continuous endomaps on the real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -67,7 +67,7 @@ open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-
 If an [endomap](foundation.endomorphisms.md) on the
 [real numbers](real-numbers.dedekind-real-numbers.md) is
 
-- [cofinal and below](real-numbers.cofinal-and-coinitial-endomaps-real-numbers.md)
+- [cofinal and coinitial](real-numbers.cofinal-and-coinitial-endomaps-real-numbers.md)
 - [strictly increasing](real-numbers.strictly-increasing-endomaps-real-numbers.md)
 - [pointwise ε-δ continuous](real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers.md)
 
@@ -192,7 +192,7 @@ module _
 
 ## Properties
 
-### The inverse map of an cofinal and below, strictly increasing, pointwise ε-δ continuous map
+### The inverse map of an cofinal and coinitial, strictly increasing, pointwise ε-δ continuous map
 
 ```agda
 module _
@@ -745,7 +745,7 @@ module _
             ( y)))
 ```
 
-### An cofinal and below, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
+### An cofinal and coinitial, strictly increasing, pointwise ε-δ endomap on ℝ is an automorphism
 
 ```agda
 module _
@@ -1000,7 +1000,7 @@ module _
                     by leq-le-ℝ y+δhi<yhi)))
 ```
 
-### The inverse function is cofinal and below, strictly increasing, and pointwise ε-δ continuous
+### The inverse function is cofinal and coinitial, strictly increasing, and pointwise ε-δ continuous
 
 ```agda
 module _

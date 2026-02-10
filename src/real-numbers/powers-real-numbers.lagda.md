@@ -524,6 +524,19 @@ pointwise-ε-δ-continuous-power-ℝ l n =
   ( power-ℝ n , is-pointwise-ε-δ-continuous-power-ℝ l n)
 ```
 
+### For rational `q`, `real-ℚ (power-ℚ n q)` is similar to `power-ℝ n (raise-real-ℚ l q)`
+
+```agda
+abstract
+  sim-power-raise-real-ℚ :
+    (l : Level) (n : ℕ) (q : ℚ) →
+    sim-ℝ (real-ℚ (power-ℚ n q)) (power-ℝ n (raise-real-ℚ l q))
+  sim-power-raise-real-ℚ l n q =
+    concat-eq-sim-ℝ
+      ( inv (power-real-ℚ n q))
+      ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ q)))
+```
+
 ### For odd `n`, `x ↦ xⁿ` is strictly increasing
 
 ```agda
@@ -535,18 +548,11 @@ abstract
     is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
       ( pointwise-ε-δ-continuous-power-ℝ l n)
       ( λ p q p<q →
-        binary-tr
-          ( le-ℝ)
-          ( inv (power-raise-ℝ l n (real-ℚ p)))
-          ( inv (power-raise-ℝ l n (real-ℚ q)))
-          ( le-raise-le-ℝ
-            ( l)
-            ( binary-tr
-              ( le-ℝ)
-              ( inv (power-real-ℚ n p))
-              ( inv (power-real-ℚ n q))
-              ( preserves-le-real-ℚ
-                ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))))
+        preserves-le-sim-ℝ
+          ( sim-power-raise-real-ℚ l n p)
+          ( sim-power-raise-real-ℚ l n q)
+          ( preserves-le-real-ℚ
+            ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))
 ```
 
 ### For odd `n`, `x ↦ xⁿ` is injective
@@ -562,7 +568,7 @@ abstract
       ( is-strictly-increasing-power-is-odd-ℝ l n odd-n)
 ```
 
-### For odd `n`, `x ↦ xⁿ` is unbounded above and below
+### For odd `n`, `x ↦ xⁿ` is cofinal and coinitial
 
 ```agda
 abstract
@@ -574,9 +580,7 @@ abstract
       ( raise-real-ℚ l)
       ( λ p q≤pⁿ →
         preserves-leq-right-sim-ℝ
-          ( transitive-sim-ℝ _ _ _
-            ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
-            ( sim-eq-ℝ (inv (power-real-ℚ n p))))
+          ( sim-power-raise-real-ℚ l n p)
           ( preserves-leq-real-ℚ q≤pⁿ))
       ( is-cofinal-power-is-odd-ℚ n odd-n q)
 
@@ -588,9 +592,7 @@ abstract
       ( raise-real-ℚ l)
       ( λ p pⁿ≤q →
         preserves-leq-left-sim-ℝ
-          ( transitive-sim-ℝ _ _ _
-            ( preserves-sim-power-ℝ n (sim-raise-ℝ l (real-ℚ p)))
-            ( sim-eq-ℝ (inv (power-real-ℚ n p))))
+          ( sim-power-raise-real-ℚ l n p)
           ( preserves-leq-real-ℚ pⁿ≤q))
       ( is-coinitial-power-is-odd-ℚ n odd-n q)
 ```
