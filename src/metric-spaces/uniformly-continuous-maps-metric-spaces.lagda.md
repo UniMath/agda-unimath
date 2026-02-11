@@ -9,9 +9,11 @@ module metric-spaces.uniformly-continuous-maps-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
@@ -26,6 +28,7 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
@@ -245,6 +248,58 @@ module _
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
   map-sequence-uniformly-continuous-map-Metric-Space =
     map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
+```
+
+### The product of uniformly continuous maps on metric spaces
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (Z : Metric-Space l5 l6)
+  (W : Metric-Space l7 l8)
+  (f : uniformly-continuous-map-Metric-Space X Y)
+  (g : uniformly-continuous-map-Metric-Space Z W)
+  where
+
+  map-product-uniformly-continuous-map-Metric-Space :
+    type-Metric-Space X × type-Metric-Space Z →
+    type-Metric-Space Y × type-Metric-Space W
+  map-product-uniformly-continuous-map-Metric-Space =
+    map-product
+      ( map-uniformly-continuous-map-Metric-Space X Y f)
+      ( map-uniformly-continuous-map-Metric-Space Z W g)
+
+  abstract
+    is-uniformly-continuous-map-product-Metric-Space :
+      is-uniformly-continuous-map-Metric-Space
+        ( product-Metric-Space X Z)
+        ( product-Metric-Space Y W)
+        ( map-product-uniformly-continuous-map-Metric-Space)
+    is-uniformly-continuous-map-product-Metric-Space =
+      map-binary-trunc-Prop
+        ( λ μf μg →
+          pr2
+            ( product-modulated-ucont-map-Metric-Space X Y Z W
+              ( map-uniformly-continuous-map-Metric-Space X Y f , μf)
+              ( map-uniformly-continuous-map-Metric-Space Z W g , μg)))
+        ( is-uniformly-continuous-map-uniformly-continuous-map-Metric-Space
+          ( X)
+          ( Y)
+          ( f))
+        ( is-uniformly-continuous-map-uniformly-continuous-map-Metric-Space
+          ( Z)
+          ( W)
+          ( g))
+
+  product-uniformly-continuous-map-Metric-Space :
+    uniformly-continuous-map-Metric-Space
+      ( product-Metric-Space X Z)
+      ( product-Metric-Space Y W)
+  product-uniformly-continuous-map-Metric-Space =
+    ( map-product-uniformly-continuous-map-Metric-Space ,
+      is-uniformly-continuous-map-product-Metric-Space)
 ```
 
 ## See also
