@@ -16,6 +16,17 @@ module literature.wikipedia-list-of-theorems where
 The theorems are ordered alphabetically, omitting leading definite articles
 ("the").
 
+### Absolute convergence theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.absolute-convergence-series-real-numbers using
+  ( is-convergent-is-absolutely-convergent-series-ℝ)
+open import functional-analysis.absolute-convergence-series-real-banach-spaces using
+  ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
+```
+
 ### Bézout's lemma {#Q513028}
 
 **Author:** [Bryan Lu](https://blu-bird.github.io)
@@ -204,6 +215,16 @@ open import real-numbers.distance-real-numbers using
 ```agda
 open import linear-algebra.orthogonality-real-inner-product-spaces using
   ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Uniform limit theorem {#Q7885107}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}
