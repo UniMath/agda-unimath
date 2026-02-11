@@ -24,11 +24,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import lists.finite-sequences
 open import foundation.whiskering-homotopies-composition
 
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
 
+open import lists.finite-sequences
 open import lists.lists
 
 open import univalent-combinatorics.counting
