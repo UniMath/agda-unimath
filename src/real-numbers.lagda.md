@@ -84,6 +84,7 @@ open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numb
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.modulated-cauchy-sequences-real-numbers public
+open import real-numbers.modulated-suprema-families-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
 open import real-numbers.multiplication-nonzero-real-numbers public
@@ -104,6 +105,7 @@ open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
+open import real-numbers.positive-proper-closed-intervals-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
