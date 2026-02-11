@@ -85,6 +85,7 @@ open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numb
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.modulated-cauchy-sequences-real-numbers public
+open import real-numbers.modulated-suprema-families-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
 open import real-numbers.multiplication-nonzero-real-numbers public
