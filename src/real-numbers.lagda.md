@@ -100,6 +100,7 @@ open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.nonzero-roots-nonnegative-real-numbers public
 open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
