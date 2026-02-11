@@ -31,11 +31,14 @@ open import group-theory.semigroups
 
 open import order-theory.large-posets
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-positive-and-negative-real-numbers
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
@@ -437,4 +440,28 @@ module _
         ( λ z → sim-ℝ z y)
         ( right-swap-mul-ℝ _ _ _)
         ( cancel-right-mul-div-ℝ⁺)
+```
+
+### For any positive `c`, we have `c⁻¹ * dist-ℝ (c * x) (c * y) = dist-ℝ x y`
+
+```agda
+abstract
+  cancel-left-div-mul-dist-ℝ⁺ :
+    {l1 l2 l3 : Level} (c : ℝ⁺ l1) (x : ℝ l2) (y : ℝ l3) →
+    sim-ℝ
+      ( real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y))
+      ( dist-ℝ x y)
+  cancel-left-div-mul-dist-ℝ⁺ c x y =
+    similarity-reasoning-ℝ
+      real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y)
+      ~ℝ abs-ℝ (real-inv-ℝ⁺ c) *ℝ abs-ℝ (real-ℝ⁺ c *ℝ (x -ℝ y))
+        by
+          sim-eq-ℝ
+            ( ap-mul-ℝ
+              ( inv (abs-real-ℝ⁺ (inv-ℝ⁺ c)))
+              ( ap abs-ℝ (inv (left-distributive-mul-diff-ℝ _ x y))))
+      ~ℝ abs-ℝ (real-inv-ℝ⁺ c *ℝ (real-ℝ⁺ c *ℝ (x -ℝ y)))
+        by sim-eq-ℝ (inv (abs-mul-ℝ _ _))
+      ~ℝ dist-ℝ x y
+        by preserves-sim-abs-ℝ (cancel-left-div-mul-ℝ⁺ c (x -ℝ y))
 ```
