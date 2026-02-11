@@ -22,7 +22,7 @@ open import metric-spaces.pointwise-continuous-maps-metric-spaces
 ## Idea
 
 An
-{{#concept "ε-δ pointwise continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
+{{#concept "pointwise ε-δ continuous map" Disambiguation="between metric spaces" Agda=pointwise-continuous-map-Metric-Space}}
 from a [metric space](metric-spaces.metric-spaces.md) `X` to a metric space `Y`
 is a map `f : X → Y` such that for every `x : X`, the
 [ε-δ limit](metric-spaces.epsilon-delta-limits-of-maps-metric-spaces.md) of `f`
@@ -88,19 +88,19 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (acω : ACω)
+  (acω : level-ACℕ (l1 ⊔ l2 ⊔ l4))
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (f : map-Metric-Space X Y)
   where
 
   abstract
-    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-Metric-Space :
+    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space :
       is-pointwise-ε-δ-continuous-map-Metric-Space X Y f →
       is-pointwise-continuous-map-Metric-Space X Y f
-    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACω-Metric-Space
+    is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space
       H x =
-      is-limit-is-ε-δ-limit-map-ACω-Metric-Space
+      is-limit-is-ε-δ-limit-map-ACℕ-Metric-Space
         ( acω)
         ( X)
         ( Y)
