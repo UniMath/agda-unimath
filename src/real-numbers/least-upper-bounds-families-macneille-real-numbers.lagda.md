@@ -81,7 +81,7 @@ has-least-upper-bound-family-of-elements-macneille-ℝ l3 =
 ### Least upper bounds of inhabited bounded families
 
 Every inhabited upper bounded family of MacNeille real numbers has a least upper
-bound. This is referred to as the conditional order completeness of the
+bound. This is referred to as the _conditional order completeness_ of the
 MacNeille real numbers. We follow the construction in Lemma D4.7.7
 {{#cite Johnstone02}}.
 
@@ -93,7 +93,24 @@ module _
   (u : macneille-ℝ l3)
   (y≤u : is-upper-bound-family-of-elements-macneille-ℝ y u)
   where
+```
 
+Let
+
+$$
+  A ≔ \{\,p : ℚ \mid ∀(i : I),\; p ∈ U_{y_i}\,\},
+$$
+
+where $U_{y_i}$ is the upper cut of $y_i$. In Agda this is
+`all-upper-sections-family-macneille-ℝ`.
+
+The candidate upper cut of the least upper bound is then
+
+$$
+  (q ∈ U_{\sup y}) ≔ (∃(p : ℚ),\; (p ≤ q) ∧ (p ∈ A)).
+$$
+
+```agda
   all-upper-sections-family-macneille-ℝ : subtype (l1 ⊔ l2) ℚ
   all-upper-sections-family-macneille-ℝ p =
     Π-Prop I (λ i → upper-cut-macneille-ℝ (y i) p)
@@ -108,7 +125,13 @@ module _
   is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ =
     is-in-subtype
       ( upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+If $q ∈ U_{\sup y}$, then by definition there is $p ≤ q$ with $p ∈ U_{y_i}$ for
+all $i$. By upward closure of upper cuts, this implies $q ∈ U_{y_i}$ for all
+$i$.
+
+```agda
   abstract
     is-in-all-upper-sections-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       (q : ℚ) →
@@ -135,7 +158,17 @@ module _
       i q q∈U =
       is-in-all-upper-sections-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
         q q∈U i
+```
 
+To show that $U_{\sup y}$ is inhabited, we use the given upper bound $u$: choose
+$q ∈ U_u$, then choose $r > q$. Since each $y_i ≤ u$, we get $q ∈ U_{y_i}$ for
+all $i$, hence $r ∈ U_{\sup y}$.
+
+For roundedness of $U_{\sup y}$, the forward direction refines a witness $p < q$
+to the mediant $\operatorname{med}(p,q)$, and the backward direction composes
+two existential witnesses using transitivity of $≤$ on $ℚ$.
+
+```agda
   abstract
     is-inhabited-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       exists ℚ upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
@@ -212,7 +245,15 @@ module _
     ( upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
       is-inhabited-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
       is-rounded-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+For the lower cut we take the open lower complement:
+
+$$
+  (p ∈ L_{\sup y}) ≔ (∃(q : ℚ),\; (p ≤ q) ∧ ¬ (q ∈ U_{\sup y})).
+$$
+
+```agda
   lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
     subtype (l1 ⊔ l2) ℚ
   lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ p =
@@ -226,7 +267,13 @@ module _
   is-in-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ =
     is-in-subtype
       ( lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+To see $L_{\sup y}$ is inhabited, pick $i : I$, choose $p ∈ L_{y_i}$, and then
+choose $q > p$ with $q ∉ U_{y_i}$. If $q ∈ U_{\sup y}$, then in particular
+$q ∈ U_{y_i}$, a contradiction.
+
+```agda
   abstract
     is-inhabited-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       exists ℚ lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
@@ -256,6 +303,12 @@ module _
                       ( q)))))
           ( H)
 
+```
+
+Roundedness of $L_{\sup y}$ follows from density of $ℚ$: from a witness $p < q$
+with $q ∉ U*{\sup y}$, choose $r$ with $p < r < q$, and keep the same $q$.
+
+```agda
   abstract
     forward-implication-is-rounded-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       (p : ℚ) →
@@ -320,7 +373,23 @@ module _
     ( lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
       is-inhabited-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
       is-rounded-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+Next we verify that the two cuts are open complements, i.e.,
+
+$$
+ (q ∈ U_{\sup y}) ⇔ (∃(p ≤ q),\; p ∉ L_{\sup y})
+$$
+
+and
+
+$$
+  (p ∈ L_{\sup y}) ⇔ (∃(q ≥ p),\; q ∉ U_{\sup y}).
+$$
+
+This is exactly the openness condition needed for a MacNeille real.
+
+```agda
   abstract
     forward-implication-is-open-upper-complement-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       (q : ℚ) →
@@ -430,13 +499,27 @@ module _
     is-open-dedekind-macneille-least-upper-bound-inhabited-bounded-family-macneille-ℝ =
       ( is-open-upper-complement-lower-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
         is-open-lower-complement-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+We now assemble the MacNeille real $\sup y$ from its lower and upper cuts.
+
+```agda
   least-upper-bound-inhabited-bounded-family-macneille-ℝ : macneille-ℝ (l1 ⊔ l2)
   least-upper-bound-inhabited-bounded-family-macneille-ℝ =
     ( ( lower-real-least-upper-bound-inhabited-bounded-family-macneille-ℝ ,
         upper-real-least-upper-bound-inhabited-bounded-family-macneille-ℝ) ,
       is-open-dedekind-macneille-least-upper-bound-inhabited-bounded-family-macneille-ℝ)
+```
 
+To prove the upper-bound property, we use:
+
+$$
+(q ∈ U_{\sup y}) \;\Longrightarrow\; (∀(i : I),\; q ∈ U_{y_i}),
+$$
+
+which immediately yields $y_i ≤ \sup y$ for each $i$.
+
+```agda
   abstract
     is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       is-upper-bound-family-of-elements-macneille-ℝ
@@ -448,7 +531,17 @@ module _
         ( least-upper-bound-inhabited-bounded-family-macneille-ℝ)
         ( is-in-cut-upper-family-is-in-upper-cut-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( i))
+```
 
+For leastness, let $z$ be any upper bound of the family. The key step is:
+
+$$
+  (q ∈ U_z) \;\Longrightarrow\; (q ∈ U_{\sup y}).
+$$
+
+Equivalently, $U_z ⊆ U_{\sup y}$, so $\sup y ≤ z$.
+
+```agda
   abstract
     is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ :
       {l4 : Level} (z : macneille-ℝ l4) →
@@ -489,7 +582,18 @@ module _
         ( is-in-cut-upper-least-upper-bound-family-is-in-upper-cut-macneille-ℝ
           ( z)
           ( y≤z))
+```
 
+The final theorem packages both directions:
+
+$$
+\left(∀ z,\; \bigl(∀ i,\; y_i ≤ z\bigr) ⇒ \sup y ≤ z\right)
+\quad\text{and}\quad \left(∀ i,\; y_i ≤ \sup y\right).
+$$
+
+So the constructed real is a least upper bound of the inhabited bounded family.
+
+```agda
   abstract
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ :
       is-least-upper-bound-family-of-elements-macneille-ℝ
