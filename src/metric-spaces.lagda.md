@@ -176,6 +176,7 @@ open import metric-spaces.totally-bounded-metric-spaces public
 open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniform-homeomorphisms-metric-spaces public
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
