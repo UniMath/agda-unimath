@@ -30,7 +30,7 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 ## Idea
 
 Given two
-[uniformly continuous maps](real-numbers.uniformly-continuous-maps-proper-closed-intervals-real-numbers.md)
+[uniformly continuous maps](real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers.md)
 `f` and `g` on the
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 of [real numbers](real-numbers.dedekind-real-numbers.md) `[a, b]`, the map
