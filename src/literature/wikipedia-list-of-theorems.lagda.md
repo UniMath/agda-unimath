@@ -229,6 +229,16 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
   ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
+### Uniform limit theorem {#Q7885107}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
+```
+
 ### Yoneda lemma {#Q320577}
 
 **Author:** [Emily Riehl](https://emilyriehl.github.io/)

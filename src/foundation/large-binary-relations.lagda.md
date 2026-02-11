@@ -162,8 +162,8 @@ module _
   is-cotransitive-Large-Relation-Prop =
     {l1 l2 l3 : Level} →
     (a : A l1) (b : A l2) (c : A l3) →
-    type-Prop (R a b) →
-    type-Prop ((R a c) ∨ (R c b))
+    type-Prop (R a c) →
+    type-Prop ((R a b) ∨ (R b c))
 ```
 
 ## See also

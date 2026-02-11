@@ -50,9 +50,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A binary sum decomposition of a
-[natural number](elementary-number-theory.natural-numbers.md) `n : ℕ` resembles
-an [integer partition](elementary-number-theory.integer-partitions.md), but is
+A
+{{#concept "binary sum decomposition" Disambiguation="natural number" Agda=binary-sum-decomposition-ℕ}}
+of a [natural number](elementary-number-theory.natural-numbers.md) `n : ℕ`
+resembles an
+[integer partition](elementary-number-theory.integer-partitions.md), but is
+ordered, and the components may be zero.
 
 ## Definition
 
