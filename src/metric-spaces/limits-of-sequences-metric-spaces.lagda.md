@@ -91,7 +91,7 @@ module _
   is-modulus-limit-modulus-sequence-Metric-Space :
     (m : limit-modulus-sequence-Metric-Space) →
     is-limit-modulus-sequence-Metric-Space
-      (modulus-limit-modulus-sequence-Metric-Space m)
+      ( modulus-limit-modulus-sequence-Metric-Space m)
   is-modulus-limit-modulus-sequence-Metric-Space m = pr2 m
 
   is-limit-prop-sequence-Metric-Space : Prop l2
