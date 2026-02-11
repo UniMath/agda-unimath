@@ -192,8 +192,6 @@ open import foundation.lawveres-fixed-point-theorem using
 
 ### Monotone convergence theorem {#Q4454933}
 
-Known also as _Weierstrass' theorem_.
-
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
