@@ -73,6 +73,10 @@ then the top face is also a pushout.
 
 ## Theorem
 
+We derive the theorem from the
+[flattening lemma](synthetic-homotopy-theory.flattening-lemma-pushouts.md),
+using a lot of coherence reasoning.
+
 ```agda
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
@@ -93,6 +97,290 @@ module _
       top left back front right bottom)
   where
 
+  equiv-left-mathers-second-cube-theorem :
+    universal-property-pullback f hB (hA , f' , left) →
+    (x : A) → fiber' hA x ≃ fiber' hB (f x)
+  equiv-left-mathers-second-cube-theorem =
+    fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+      f hB (hA , f' , left)
+
+  equiv-front-mathers-second-cube-theorem :
+    universal-property-pullback h hD (hB , h' , front) →
+    (x : B) → fiber' hB x ≃ fiber' hD (h x)
+  equiv-front-mathers-second-cube-theorem =
+    fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+      h hD (hB , h' , front)
+
+  equiv-right-mathers-second-cube-theorem :
+    universal-property-pullback k hD (hC , k' , right) →
+    (x : C) → fiber' hC x ≃ fiber' hD (k x)
+  equiv-right-mathers-second-cube-theorem =
+    fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
+      k hD (hC , k' , right)
+
+  map-left-mathers-second-cube-theorem :
+    (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+    (x : A) → fiber' hA x → fiber' hB (f x)
+  map-left-mathers-second-cube-theorem pb-left x =
+    map-equiv (equiv-left-mathers-second-cube-theorem pb-left x)
+
+  map-front-mathers-second-cube-theorem :
+    (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    (x : B) → fiber' hB x → fiber' hD (h x)
+  map-front-mathers-second-cube-theorem pb-front x =
+    map-equiv (equiv-front-mathers-second-cube-theorem pb-front x)
+
+  map-right-mathers-second-cube-theorem :
+    (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+    (x : C) → fiber' hC x → fiber' hD (k x)
+  map-right-mathers-second-cube-theorem pb-right x =
+    map-equiv (equiv-right-mathers-second-cube-theorem pb-right x)
+
+  descent-data-pushout-mathers-second-cube-theorem :
+    universal-property-pullback h hD (hB , h' , front) →
+    universal-property-pullback k hD (hC , k' , right) →
+    descent-data-pushout (make-span-diagram f g) (l2' ⊔ l2) (l3' ⊔ l3)
+  descent-data-pushout-mathers-second-cube-theorem pb-front pb-right =
+    ( fiber' hB ,
+      fiber' hC ,
+      ( λ s →
+        ( inv-equiv (equiv-right-mathers-second-cube-theorem pb-right (g s))) ∘e
+        ( equiv-tr (fiber' hD) (bottom s)) ∘e
+        ( equiv-front-mathers-second-cube-theorem pb-front (f s))))
+
+  equiv-descent-data-pushout-mathers-second-cube-theorem :
+    ( pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    ( pb-right : universal-property-pullback k hD (hC , k' , right)) →
+    equiv-descent-data-pushout
+      ( descent-data-pushout-mathers-second-cube-theorem pb-front pb-right)
+      ( descent-data-family-cocone-span-diagram (h , k , bottom) (fiber' hD))
+  equiv-descent-data-pushout-mathers-second-cube-theorem pb-front pb-right =
+    ( equiv-front-mathers-second-cube-theorem pb-front ,
+      equiv-right-mathers-second-cube-theorem pb-right ,
+      ( λ s t →
+        is-section-map-inv-equiv
+          ( equiv-right-mathers-second-cube-theorem pb-right (g s))
+          ( tr
+            ( fiber' hD)
+            ( bottom s)
+            ( map-front-mathers-second-cube-theorem pb-front (f s) t))))
+
+  source-front-mathers-second-cube-theorem :
+    universal-property-pullback h hD (hB , h' , front) →
+    universal-property-pullback f hB (hA , f' , left) →
+    (x : A') → fiber' hD (h (f (hA x)))
+  source-front-mathers-second-cube-theorem pb-front pb-left x =
+    map-front-mathers-second-cube-theorem pb-front (f (hA x))
+      ( map-left-mathers-second-cube-theorem pb-left (hA x) (x , refl))
+
+  compute-source-front-mathers-second-cube-theorem :
+    (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+    (x : A') →
+    source-front-mathers-second-cube-theorem pb-front pb-left x ＝
+    (h' (f' x) , ap h (left x) ∙ front (f' x))
+  compute-source-front-mathers-second-cube-theorem pb-front pb-left x = refl
+
+  compute-tr-source-front-mathers-second-cube-theorem :
+    (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+    (x : A') →
+    tr
+      ( fiber' hD)
+      ( bottom (hA x))
+      ( source-front-mathers-second-cube-theorem pb-front pb-left x) ＝
+    ( h' (f' x) , inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))
+  compute-tr-source-front-mathers-second-cube-theorem pb-front pb-left x =
+    ( inv-compute-tr-fiber'
+      hD
+      ( bottom (hA x))
+      ( source-front-mathers-second-cube-theorem pb-front pb-left x)) ∙
+    ( ap
+      ( tot (λ y q → inv (bottom (hA x)) ∙ q))
+      ( compute-source-front-mathers-second-cube-theorem pb-front pb-left x))
+
+  coherence-front-right-mathers-second-cube-theorem :
+    (x : A') →
+    ( h' (f' x) , inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x))) ＝
+    (k' (g' x) , ap k (back x) ∙ right (g' x))
+  coherence-front-right-mathers-second-cube-theorem x =
+    eq-pair-Σ
+      ( top x)
+      ( ( inv (substitution-law-tr (k (g (hA x)) ＝_) hD (top x))) ∙
+        ( tr-Id-right
+          ( ap hD (top x))
+          ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
+        ( assoc
+          ( inv (bottom (hA x)))
+          ( ap h (left x) ∙ front (f' x))
+          ( ap hD (top x))) ∙
+        ( inv
+          ( left-transpose-eq-concat
+            ( bottom (hA x))
+            ( ap k (back x) ∙ right (g' x))
+            ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
+            ( inv (c x)))))
+
+  abstract
+    ap-pr1-coherence-front-right-mathers-second-cube-theorem :
+      pr1 ·l coherence-front-right-mathers-second-cube-theorem ~ top
+    ap-pr1-coherence-front-right-mathers-second-cube-theorem x =
+      ap-pr1-eq-pair-Σ
+        ( top x)
+        ( ( inv (substitution-law-tr (k (g (hA x)) ＝_) hD (top x))) ∙
+          ( tr-Id-right
+            ( ap hD (top x))
+            ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
+          ( assoc
+            ( inv (bottom (hA x)))
+            ( ap h (left x) ∙ front (f' x))
+            ( ap hD (top x))) ∙
+          ( inv
+            ( left-transpose-eq-concat
+              ( bottom (hA x))
+              ( ap k (back x) ∙ right (g' x))
+              ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
+              ( inv (c x)))))
+
+  compute-right-mathers-second-cube-theorem :
+    (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+    (x : A') →
+    map-right-mathers-second-cube-theorem pb-right (g (hA x)) (g' x , back x) ＝
+    (k' (g' x) , ap k (back x) ∙ right (g' x))
+  compute-right-mathers-second-cube-theorem pb-right x = refl
+
+  abstract
+    ap-pr1-compute-right-mathers-second-cube-theorem :
+      (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+      (x : A') →
+      ap pr1 (compute-right-mathers-second-cube-theorem pb-right x) ＝ refl
+    ap-pr1-compute-right-mathers-second-cube-theorem pb-right x = refl
+
+  coherence-tr-front-right-mathers-second-cube-theorem :
+    (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+    (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+    (x : A') →
+    tr
+      ( fiber' hD)
+      ( bottom (hA x))
+      ( source-front-mathers-second-cube-theorem pb-front pb-left x) ＝
+    map-right-mathers-second-cube-theorem pb-right (g (hA x)) (g' x , back x)
+  coherence-tr-front-right-mathers-second-cube-theorem
+    pb-front pb-right pb-left x =
+    ( compute-tr-source-front-mathers-second-cube-theorem pb-front pb-left x) ∙
+    ( coherence-front-right-mathers-second-cube-theorem x) ∙
+    ( inv (compute-right-mathers-second-cube-theorem pb-right x))
+
+  abstract
+    ap-pr1-coherence-tr-front-right-mathers-second-cube-theorem :
+      (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+      (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+      (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+      ( pr1) ·l
+      ( coherence-tr-front-right-mathers-second-cube-theorem
+        ( pb-front)
+        ( pb-right)
+        ( pb-left)) ~
+      ( ( ( pr1) ·l
+          ( compute-tr-source-front-mathers-second-cube-theorem
+            ( pb-front)
+            ( pb-left)) ∙h
+          ( pr1 ·l coherence-front-right-mathers-second-cube-theorem)) ∙h
+        ( pr1 ·l inv-htpy (compute-right-mathers-second-cube-theorem pb-right)))
+    ap-pr1-coherence-tr-front-right-mathers-second-cube-theorem
+      pb-front pb-right pb-left x =
+      ( ap-concat
+        ( pr1)
+        ( compute-tr-source-front-mathers-second-cube-theorem pb-front
+          ( pb-left)
+          ( x) ∙
+          ( coherence-front-right-mathers-second-cube-theorem x))
+        ( inv (compute-right-mathers-second-cube-theorem pb-right x))) ∙
+        ( ap
+          ( _∙
+            ap pr1 (inv (compute-right-mathers-second-cube-theorem pb-right x)))
+          ( ap-concat
+            ( pr1)
+            ( compute-tr-source-front-mathers-second-cube-theorem pb-front
+              ( pb-left)
+              ( x))
+            ( coherence-front-right-mathers-second-cube-theorem x)))
+
+  back-source-mathers-second-cube-theorem :
+    (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+    (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+    (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+    (x : A') → fiber' hC (g (hA x))
+  back-source-mathers-second-cube-theorem pb-front pb-right pb-left x =
+    map-family-descent-data-pushout
+      ( descent-data-pushout-mathers-second-cube-theorem pb-front pb-right)
+      ( hA x)
+      ( pr2
+        ( map-equiv
+          ( ( equiv-tot (equiv-left-mathers-second-cube-theorem pb-left)) ∘e
+            ( inv-equiv-total-fiber' hA))
+          ( x)))
+
+  abstract
+    compute-back-source-mathers-second-cube-theorem :
+      (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+      (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+      (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+      (x : A') →
+      back-source-mathers-second-cube-theorem pb-front pb-right pb-left x ＝
+      map-inv-equiv
+        ( equiv-right-mathers-second-cube-theorem pb-right (g (hA x)))
+        ( tr
+          ( fiber' hD)
+          ( bottom (hA x))
+          ( source-front-mathers-second-cube-theorem pb-front pb-left x))
+    compute-back-source-mathers-second-cube-theorem pb-front pb-right pb-left =
+      refl-htpy
+
+  abstract
+    coherence-back-source-mathers-second-cube-theorem :
+      (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+      (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+      (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+      (x : A') →
+      back-source-mathers-second-cube-theorem pb-front pb-right pb-left x ＝
+      (g' x , back x)
+    coherence-back-source-mathers-second-cube-theorem
+      pb-front pb-right pb-left x =
+      ( compute-back-source-mathers-second-cube-theorem
+        ( pb-front)
+        ( pb-right)
+        ( pb-left)
+        ( x)) ∙
+      ( ap
+        ( map-inv-equiv
+          ( equiv-right-mathers-second-cube-theorem pb-right (g (hA x))))
+        ( coherence-tr-front-right-mathers-second-cube-theorem
+          pb-front pb-right pb-left x)) ∙
+      ( is-retraction-map-inv-equiv
+        ( equiv-right-mathers-second-cube-theorem pb-right (g (hA x)))
+        ( g' x , back x))
+
+  abstract
+    back-path-mathers-second-cube-theorem :
+      (pb-front : universal-property-pullback h hD (hB , h' , front)) →
+      (pb-right : universal-property-pullback k hD (hC , k' , right)) →
+      (pb-left : universal-property-pullback f hB (hA , f' , left)) →
+      (x : A') →
+      tr (fiber' hC) (back x)
+        (back-source-mathers-second-cube-theorem pb-front pb-right pb-left x) ＝
+      (g' x , refl)
+    back-path-mathers-second-cube-theorem pb-front pb-right pb-left x =
+      ( ap
+        ( tr (fiber' hC) (back x))
+        ( coherence-back-source-mathers-second-cube-theorem
+          ( pb-front)
+          ( pb-right)
+          ( pb-left)
+          ( x))) ∙
+      ( inv-compute-tr-self-fiber' hC (g' x , back x))
+
   mathers-second-cube-theorem :
     universal-property-pushout f g (h , k , bottom) →
     universal-property-pullback h hD (hB , h' , front) →
@@ -103,44 +391,51 @@ module _
   mathers-second-cube-theorem po-bottom pb-front pb-right pb-left pb-back =
     up-top
     where
-      e-left =
-        fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
-          f hB (hA , f' , left) pb-left
-      e-front =
-        fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
-          h hD (hB , h' , front) pb-front
-      e-right =
-        fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
-          k hD (hC , k' , right) pb-right
-      P :
-        descent-data-pushout
-          ( make-span-diagram f g)
-          ( l2' ⊔ l2)
-          ( l3' ⊔ l3)
-      P =
-        ( fiber' hB ,
-          fiber' hC ,
-          ( λ s →
-            ( inv-equiv (e-right (g s))) ∘e
-            ( equiv-tr (fiber' hD) (bottom s)) ∘e
-            ( e-front (f s))))
+      e-left = equiv-left-mathers-second-cube-theorem pb-left
+      e-front = equiv-front-mathers-second-cube-theorem pb-front
+      e-right = equiv-right-mathers-second-cube-theorem pb-right
 
-      e :
-        equiv-descent-data-pushout
-          P
-          ( descent-data-family-cocone-span-diagram
-            ( h , k , bottom)
-            ( fiber' hD))
-      e =
-        ( e-front ,
-          e-right ,
-          ( λ s t →
-            is-section-map-inv-equiv
-              ( e-right (g s))
-              ( tr
-                ( fiber' hD)
-                ( bottom s)
-                ( map-equiv (e-front (f s)) t))))
+      P = descent-data-pushout-mathers-second-cube-theorem pb-front pb-right
+
+      e = equiv-descent-data-pushout-mathers-second-cube-theorem pb-front pb-right
+
+      source-front =
+        source-front-mathers-second-cube-theorem pb-front pb-left
+
+      compute-source-front =
+        compute-source-front-mathers-second-cube-theorem pb-front pb-left
+
+      compute-tr-source-front =
+        compute-tr-source-front-mathers-second-cube-theorem pb-front pb-left
+
+      coherence-front-right = coherence-front-right-mathers-second-cube-theorem
+
+      ap-pr1-coherence-front-right =
+        ap-pr1-coherence-front-right-mathers-second-cube-theorem
+
+      compute-right = compute-right-mathers-second-cube-theorem pb-right
+
+      ap-pr1-compute-right =
+        ap-pr1-compute-right-mathers-second-cube-theorem pb-right
+
+      coherence-tr-front-right =
+        coherence-tr-front-right-mathers-second-cube-theorem
+          pb-front pb-right pb-left
+
+      ap-pr1-coherence-tr-front-right =
+        ap-pr1-coherence-tr-front-right-mathers-second-cube-theorem
+          pb-front pb-right pb-left
+
+      back-source =
+        back-source-mathers-second-cube-theorem pb-front pb-right pb-left
+
+      compute-back-source =
+        compute-back-source-mathers-second-cube-theorem
+          pb-front pb-right pb-left
+
+      coherence-back-source =
+        coherence-back-source-mathers-second-cube-theorem
+          pb-front pb-right pb-left
 
       cocone-flat-Σ :
         cocone
@@ -175,7 +470,7 @@ module _
         cocone
           ( vertical-map-span-flattening-descent-data-pushout P)
           ( horizontal-map-span-flattening-descent-data-pushout P)
-          D'
+          ( D')
       cocone-flat =
         cocone-map
           ( vertical-map-span-flattening-descent-data-pushout P)
@@ -186,30 +481,28 @@ module _
       compute-vertical-map-cocone-flat :
         (t : Σ C (fiber' hC)) →
         pr1 (pr2 cocone-flat) t ＝
-        pr1
-          ( map-equiv
-            ( e-right (pr1 t))
-            ( pr2 t))
+        pr1 (map-equiv (e-right (pr1 t)) (pr2 t))
       compute-vertical-map-cocone-flat t = refl
 
-      up-cocone-flat :
-        universal-property-pushout
-          ( vertical-map-span-flattening-descent-data-pushout P)
-          ( horizontal-map-span-flattening-descent-data-pushout P)
-          ( cocone-flat)
-      up-cocone-flat =
-        up-pushout-up-pushout-is-equiv
-          ( vertical-map-span-flattening-descent-data-pushout P)
-          ( horizontal-map-span-flattening-descent-data-pushout P)
-          ( cocone-flat-Σ)
-          ( cocone-flat)
-          ( map-equiv (equiv-total-fiber' hD))
-          ( refl-htpy-cocone
+      abstract
+        up-cocone-flat :
+          universal-property-pushout
             ( vertical-map-span-flattening-descent-data-pushout P)
             ( horizontal-map-span-flattening-descent-data-pushout P)
-            ( cocone-flat))
-          ( is-equiv-map-equiv-total-fiber' hD)
-          ( up-cocone-flat-Σ)
+            ( cocone-flat)
+        up-cocone-flat =
+          up-pushout-up-pushout-is-equiv
+            ( vertical-map-span-flattening-descent-data-pushout P)
+            ( horizontal-map-span-flattening-descent-data-pushout P)
+            ( cocone-flat-Σ)
+            ( cocone-flat)
+            ( map-equiv (equiv-total-fiber' hD))
+            ( refl-htpy-cocone
+              ( vertical-map-span-flattening-descent-data-pushout P)
+              ( horizontal-map-span-flattening-descent-data-pushout P)
+              ( cocone-flat))
+            ( is-equiv-map-equiv-total-fiber' hD)
+            ( up-cocone-flat-Σ)
 
       left-square :
         coherence-square-maps
@@ -220,148 +513,8 @@ module _
       left-square x =
         eq-pair-Σ (left x) (inv-compute-tr-self-fiber' hB (f' x , left x))
 
-      source-front : (x : A') → fiber' hD (h (f (hA x)))
-      source-front x =
-        map-equiv
-          ( e-front (f (hA x)))
-          ( map-equiv (e-left (hA x)) (x , refl))
-
-      compute-source-front :
-        (x : A') →
-        source-front x ＝ (h' (f' x) , ap h (left x) ∙ front (f' x))
-      compute-source-front x = refl
-
-      compute-tr-source-front :
-        (x : A') →
-        tr (fiber' hD) (bottom (hA x)) (source-front x) ＝
-        ( h' (f' x) ,
-          inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))
-      compute-tr-source-front x =
-        ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙
-        ( ap
-          ( tot (λ y q → inv (bottom (hA x)) ∙ q))
-          ( compute-source-front x))
-
-      coherence-front-right :
-        (x : A') →
-        ( h' (f' x) ,
-          inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x))) ＝
-        (k' (g' x) , ap k (back x) ∙ right (g' x))
-      coherence-front-right x =
-        eq-pair-Σ
-          ( top x)
-          ( ( inv
-              ( substitution-law-tr
-                ( λ y → (k ∘ g) (hA x) ＝ y)
-                ( hD)
-                ( top x))) ∙
-            ( tr-Id-right
-              ( ap hD (top x))
-              ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
-            ( assoc
-              ( inv (bottom (hA x)))
-              ( ap h (left x) ∙ front (f' x))
-              ( ap hD (top x))) ∙
-            ( inv
-              ( left-transpose-eq-concat
-                ( bottom (hA x))
-                ( ap k (back x) ∙ right (g' x))
-                ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
-                ( inv (c x)))))
-
-      ap-pr1-coherence-front-right :
-        (x : A') →
-        ap pr1 (coherence-front-right x) ＝ top x
-      ap-pr1-coherence-front-right x =
-        ap-pr1-eq-pair-Σ
-          ( top x)
-          ( ( inv
-              ( substitution-law-tr
-                ( λ y → (k ∘ g) (hA x) ＝ y)
-                ( hD)
-                ( top x))) ∙
-            ( tr-Id-right
-              ( ap hD (top x))
-              ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
-            ( assoc
-              ( inv (bottom (hA x)))
-              ( ap h (left x) ∙ front (f' x))
-              ( ap hD (top x))) ∙
-            ( inv
-              ( left-transpose-eq-concat
-                ( bottom (hA x))
-                ( ap k (back x) ∙ right (g' x))
-                ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
-                ( inv (c x)))))
-
-      compute-right :
-        (x : A') →
-        map-equiv (e-right (g (hA x))) (g' x , back x) ＝
-        (k' (g' x) , ap k (back x) ∙ right (g' x))
-      compute-right x = refl
-
-      ap-pr1-compute-right :
-        (x : A') →
-        ap pr1 (compute-right x) ＝ refl
-      ap-pr1-compute-right x = refl
-
-      coherence-tr-front-right :
-        (x : A') →
-        tr (fiber' hD) (bottom (hA x)) (source-front x) ＝
-        map-equiv (e-right (g (hA x))) (g' x , back x)
-      coherence-tr-front-right x =
-        ( compute-tr-source-front x) ∙
-        ( coherence-front-right x) ∙
-        ( inv (compute-right x))
-
-      ap-pr1-coherence-tr-front-right :
-        (x : A') →
-        ap pr1 (coherence-tr-front-right x) ＝
-        ( ( ap pr1 (compute-tr-source-front x) ∙
-            ap pr1 (coherence-front-right x)) ∙
-          ap pr1 (inv (compute-right x)))
-      ap-pr1-coherence-tr-front-right x =
-        ( ap-concat
-          ( pr1)
-          ( compute-tr-source-front x ∙ coherence-front-right x)
-          ( inv (compute-right x))) ∙
-          ( ap
-            ( λ p → p ∙ ap pr1 (inv (compute-right x)))
-            ( ap-concat
-              ( pr1)
-              ( compute-tr-source-front x)
-              ( coherence-front-right x)))
-
-      back-source : (x : A') → fiber' hC (g (hA x))
-      back-source x =
-        map-family-descent-data-pushout
-          ( P)
-          ( hA x)
-          ( pr2 (map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA) x))
-
-      compute-back-source :
-        (x : A') →
-        back-source x ＝
-        map-inv-equiv
-          ( e-right (g (hA x)))
-          ( tr (fiber' hD) (bottom (hA x)) (source-front x))
-      compute-back-source x = refl
-
-      coherence-back-source :
-        (x : A') → back-source x ＝ (g' x , back x)
-      coherence-back-source x =
-        ( compute-back-source x) ∙
-        ( ap
-          ( map-inv-equiv (e-right (g (hA x))))
-          ( coherence-tr-front-right x)) ∙
-        ( is-retraction-map-inv-equiv (e-right (g (hA x))) (g' x , back x))
-
-      back-path :
-        (x : A') →
-        tr (fiber' hC) (back x) (back-source x) ＝ (g' x , refl)
-      back-path x =
-        ( ap (tr (fiber' hC) (back x)) (coherence-back-source x)) ∙
-        ( inv-compute-tr-self-fiber' hC (g' x , back x))
+      back-path =
+        back-path-mathers-second-cube-theorem pb-front pb-right pb-left
 
       right-square :
         coherence-square-maps
@@ -369,34 +522,32 @@ module _
           ( map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA))
           ( map-equiv (inv-equiv-total-fiber' hC))
           ( horizontal-map-span-flattening-descent-data-pushout P)
-      right-square x =
-        eq-pair-Σ (back x) (back-path x)
+      right-square x = eq-pair-Σ (back x) (back-path x)
 
-      first-term-top-flat : (x : A') → h' (f' x) ＝ k' (pr1 (back-source x))
-      first-term-top-flat x =
-        ap (pr1 cocone-flat) (inv (left-square x)) ∙
-        (pr2 (pr2 cocone-flat) ·r map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA)) x
+      first-term-top-flat :
+        (x : A') → h' (f' x) ＝ k' (pr1 (back-source x))
+      first-term-top-flat =
+        ( pr1 cocone-flat ·l inv-htpy left-square) ∙h
+        ( pr2 (pr2 cocone-flat) ·r
+          map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA))
 
       third-term-top-flat :
-        (x : A') →
-        k' (pr1 (back-source x)) ＝
-        k' (g' x)
-      third-term-top-flat x =
-        (pr1 (pr2 (cocone-comp-horizontal
-          ( f')
-          ( map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA))
-          ( horizontal-map-span-flattening-descent-data-pushout P)
-          ( map-equiv (inv-equiv-total-fiber' hB) ,
-            vertical-map-span-flattening-descent-data-pushout P ,
-            inv-htpy left-square)
-          ( cocone-flat))) ·l right-square) x
+        (x : A') → k' (pr1 (back-source x)) ＝ k' (g' x)
+      third-term-top-flat =
+        ( pr1
+          ( pr2 (cocone-comp-horizontal
+            ( f')
+            ( map-equiv (equiv-tot e-left ∘e inv-equiv-total-fiber' hA))
+            ( horizontal-map-span-flattening-descent-data-pushout P)
+            ( map-equiv (inv-equiv-total-fiber' hB) ,
+              vertical-map-span-flattening-descent-data-pushout P ,
+              inv-htpy left-square)
+            ( cocone-flat)))) ·l
+        ( right-square)
 
       third-term-top-flat-compute :
         (x : A') →
-        third-term-top-flat x ＝
-        ap
-          ( pr1 (pr2 cocone-flat))
-          ( right-square x)
+        third-term-top-flat x ＝ ap (pr1 (pr2 cocone-flat)) (right-square x)
       third-term-top-flat-compute x = refl
 
       middle-term-top-flat :
@@ -418,8 +569,8 @@ module _
 
       up-top-flat :
         universal-property-pushout
-          f'
-          g'
+          ( f')
+          ( g')
           ( comp-cocone-hom-span
             ( vertical-map-span-flattening-descent-data-pushout P)
             ( horizontal-map-span-flattening-descent-data-pushout P)
@@ -476,47 +627,67 @@ module _
       path-coherence-cocone-top-flat x =
         first-term-top-flat x ∙ third-term-top-flat x
 
-      module MiddleThirdTopFlatTarget (x : A') where
-        eR : fiber' hC (g (hA x)) ≃ fiber' hD (k (g (hA x)))
-        eR = e-right (g (hA x))
+      module _ (x : A') where
+        eR-middle-third-top-flat-target :
+          fiber' hC (g (hA x)) ≃ fiber' hD (k (g (hA x)))
+        eR-middle-third-top-flat-target = e-right (g (hA x))
 
-        u : fiber' hD (k (g (hA x)))
-        u = tr (fiber' hD) (bottom (hA x)) (source-front x)
+        u-middle-third-top-flat-target : fiber' hD (k (g (hA x)))
+        u-middle-third-top-flat-target =
+          tr (fiber' hD) (bottom (hA x)) (source-front x)
 
-        v : fiber' hD (k (g (hA x)))
-        v = map-equiv eR (g' x , back x)
+        v-middle-third-top-flat-target : fiber' hD (k (g (hA x)))
+        v-middle-third-top-flat-target =
+          map-equiv eR-middle-third-top-flat-target (g' x , back x)
 
-        F : fiber' hC (g (hA x)) → D'
-        F t = pr1 (map-equiv eR t)
+        F-middle-third-top-flat-target : fiber' hC (g (hA x)) → D'
+        F-middle-third-top-flat-target t =
+          pr1 (map-equiv eR-middle-third-top-flat-target t)
 
-        π : fiber' hD (k (g (hA x))) → D'
-        π = pr1
+        π-middle-third-top-flat-target : fiber' hD (k (g (hA x))) → D'
+        π-middle-third-top-flat-target = pr1
 
         abstract
-          H :
+          H-middle-third-top-flat-target :
             ( λ t →
               pr1
                 ( map-equiv
                   ( e-right (g (hA x)))
-                  ( map-inv-equiv eR t))) ~
-            π
-          H t =
-            ap π (is-section-map-inv-equiv eR t)
+                  ( map-inv-equiv eR-middle-third-top-flat-target t))) ~
+            π-middle-third-top-flat-target
+          H-middle-third-top-flat-target t =
+            ap
+              π-middle-third-top-flat-target
+              (is-section-map-inv-equiv eR-middle-third-top-flat-target t)
 
         abstract
-          section-to-retraction :
-            ap π (is-section-map-inv-equiv eR v) ＝
-            ap F (is-retraction-map-inv-equiv eR (g' x , back x))
-          section-to-retraction =
-            ( ap (ap π) (coherence-map-inv-equiv eR (g' x , back x))) ∙
+          section-to-retraction-middle-third-top-flat-target :
+            ap
+              π-middle-third-top-flat-target
+              ( is-section-map-inv-equiv
+                eR-middle-third-top-flat-target
+                v-middle-third-top-flat-target) ＝
+            ap
+              F-middle-third-top-flat-target
+              ( is-retraction-map-inv-equiv
+                eR-middle-third-top-flat-target
+                ( g' x , back x))
+          section-to-retraction-middle-third-top-flat-target =
+            ( ap
+              (ap π-middle-third-top-flat-target)
+              ( coherence-map-inv-equiv
+                eR-middle-third-top-flat-target
+                (g' x , back x))) ∙
             ( inv
               ( ap-comp
-                ( π)
-                ( map-equiv eR)
-                ( is-retraction-map-inv-equiv eR (g' x , back x))))
+                ( π-middle-third-top-flat-target)
+                ( map-equiv eR-middle-third-top-flat-target)
+                ( is-retraction-map-inv-equiv
+                  eR-middle-third-top-flat-target
+                  (g' x , back x))))
 
         abstract
-          proof :
+          middle-third-top-flat-target :
             middle-term-top-flat x ∙
             ap pr1 (coherence-tr-front-right x) ＝
             ap
@@ -526,60 +697,82 @@ module _
                     ( e-right (g (hA x)))
                     ( t)))
               ( coherence-back-source x)
-          proof =
+          middle-third-top-flat-target =
             ( assoc
-              ( ap F (compute-back-source x))
-              ( ap π (is-section-map-inv-equiv eR u))
-              ( ap π (coherence-tr-front-right x))) ∙
-            ( ap
-              ( λ p → ap F (compute-back-source x) ∙ p)
-              ( nat-htpy H (coherence-tr-front-right x))) ∙
-            ( inv
-              ( assoc
-                ( ap F (compute-back-source x))
-                ( ap (F ∘ map-inv-equiv eR) (coherence-tr-front-right x))
-                ( ap π (is-section-map-inv-equiv eR v)))) ∙
-            ( ap
-              ( λ q →
-                ( ap F (compute-back-source x) ∙ q) ∙
-                ap π (is-section-map-inv-equiv eR v))
-              ( ap-comp F (map-inv-equiv eR) (coherence-tr-front-right x))) ∙
-            ( ap
-              ( λ p → p ∙ ap π (is-section-map-inv-equiv eR v))
-              ( inv
-                ( ap-concat
-                  ( F)
-                  ( compute-back-source x)
-                  ( ap (map-inv-equiv eR) (coherence-tr-front-right x))))) ∙
+              ( ap F-middle-third-top-flat-target (compute-back-source x))
+              ( ap
+                π-middle-third-top-flat-target
+                ( is-section-map-inv-equiv
+                  eR-middle-third-top-flat-target
+                  u-middle-third-top-flat-target))
+              ( ap π-middle-third-top-flat-target (coherence-tr-front-right x))) ∙
             ( ap
               ( λ p →
-                ap F
+                ap F-middle-third-top-flat-target (compute-back-source x) ∙ p)
+              ( nat-htpy
+                H-middle-third-top-flat-target
+                (coherence-tr-front-right x))) ∙
+            ( inv
+              ( assoc
+                ( ap F-middle-third-top-flat-target (compute-back-source x))
+                ( ap
+                  ( F-middle-third-top-flat-target ∘
+                    map-inv-equiv eR-middle-third-top-flat-target)
+                  ( coherence-tr-front-right x))
+                ( ap
+                  π-middle-third-top-flat-target
+                  ( is-section-map-inv-equiv
+                    eR-middle-third-top-flat-target
+                    v-middle-third-top-flat-target)))) ∙
+            ( ap
+              ( λ q →
+                ( ( ap
+                    ( F-middle-third-top-flat-target)
+                    ( compute-back-source x)) ∙
+                  ( q)) ∙
+                ap
+                  ( π-middle-third-top-flat-target)
+                  ( is-section-map-inv-equiv
+                    ( eR-middle-third-top-flat-target)
+                    ( v-middle-third-top-flat-target)))
+              ( ap-comp
+                ( F-middle-third-top-flat-target)
+                ( map-inv-equiv eR-middle-third-top-flat-target)
+                ( coherence-tr-front-right x))) ∙
+            ( ap
+              ( _∙
+                ap
+                  ( π-middle-third-top-flat-target)
+                  ( is-section-map-inv-equiv
+                    ( eR-middle-third-top-flat-target)
+                    ( v-middle-third-top-flat-target)))
+              ( inv
+                ( ap-concat
+                  ( F-middle-third-top-flat-target)
+                  ( compute-back-source x)
+                  ( ap
+                    ( map-inv-equiv eR-middle-third-top-flat-target)
+                    ( coherence-tr-front-right x))))) ∙
+            ( ap
+              ( ap
+                  ( F-middle-third-top-flat-target)
                   ( compute-back-source x ∙
-                    ap (map-inv-equiv eR) (coherence-tr-front-right x)) ∙
-                p)
-              section-to-retraction) ∙
+                    ap
+                      (map-inv-equiv eR-middle-third-top-flat-target)
+                      (coherence-tr-front-right x)) ∙_)
+              ( section-to-retraction-middle-third-top-flat-target)) ∙
             ( inv
               ( ap-concat
-                ( F)
+                ( F-middle-third-top-flat-target)
                 ( compute-back-source x ∙
-                  ap (map-inv-equiv eR) (coherence-tr-front-right x))
-                ( is-retraction-map-inv-equiv eR (g' x , back x))))
+                  ap
+                    ( map-inv-equiv eR-middle-third-top-flat-target)
+                    ( coherence-tr-front-right x))
+                ( is-retraction-map-inv-equiv
+                  ( eR-middle-third-top-flat-target)
+                  ( g' x , back x))))
 
-      abstract
-        middle-third-top-flat-target :
-          (x : A') →
-          middle-term-top-flat x ∙
-          ap pr1 (coherence-tr-front-right x) ＝
-          ap
-            ( λ t →
-              pr1
-                ( map-equiv
-                  ( e-right (g (hA x)))
-                  ( t)))
-            ( coherence-back-source x)
-        middle-third-top-flat-target x = MiddleThirdTopFlatTarget.proof x
-
-      module FirstMiddleTopFlat (x : A') where
+      module _ (x : A') where
         eR : fiber' hC (g (hA x)) ≃ fiber' hD (k (g (hA x)))
         eR = e-right (g (hA x))
 
@@ -630,14 +823,10 @@ module _
               ( left x)
               ( inv-compute-tr-self-fiber' hB (f' x , left x))) ∙
             ( ap
-              ( λ p →
-                p ∙ ap pr1 (inv-compute-tr-self-fiber' hB (f' x , left x)))
+              ( _∙ ap pr1 (inv-compute-tr-self-fiber' hB (f' x , left x)))
               ( ap-pr1-pr2-eq-pair-Σ-B (left x) (f' x , left x))) ∙
             ( ap
-              ( λ p →
-                ap pr1
-                  ( compute-tr-fiber' hB (left x) (f' x , left x)) ∙
-                p)
+              ( ap pr1 (compute-tr-fiber' hB (left x) (f' x , left x)) ∙_)
               ( ap-pr1-inv-compute-tr-self-fiber'-htpy-B (f' x , left x))) ∙
             ( right-inv
               ( ap pr1 (compute-tr-fiber' hB (left x) (f' x , left x))))
@@ -676,16 +865,10 @@ module _
               ( bottom (hA x))
               ( inv (is-section-map-inv-equiv eR u))) ∙
             ( ap
-              ( λ p → p ∙ ap pr1 (inv (is-section-map-inv-equiv eR u)))
+              ( _∙ ap pr1 (inv (is-section-map-inv-equiv eR u)))
               ( ap-pr1-pr2-eq-pair-Σ-D
                 ( bottom (hA x))
                 ( source-front x)))
-
-        abstract
-          middle-term-top-flat-rewrite :
-            middle-term-top-flat x ＝
-            ap pr1 (is-section-map-inv-equiv eR u)
-          middle-term-top-flat-rewrite = refl
 
         abstract
           cancel-is-section :
@@ -694,10 +877,7 @@ module _
             refl
           cancel-is-section =
             ( ap
-              ( λ p → ap pr1 (inv (is-section-map-inv-equiv eR u)) ∙ p)
-              ( middle-term-top-flat-rewrite)) ∙
-            ( ap
-              ( λ p → p ∙ ap pr1 (is-section-map-inv-equiv eR u))
+              ( _∙ ap pr1 (is-section-map-inv-equiv eR u))
               ( ap-inv pr1 (is-section-map-inv-equiv eR u))) ∙
             ( left-inv (ap pr1 (is-section-map-inv-equiv eR u)))
 
@@ -705,7 +885,7 @@ module _
           ap-pr1-ap-tot-compute-source-front :
             ap pr1
               ( ap
-                ( tot (λ y q → inv (bottom (hA x)) ∙ q))
+                ( tot (λ y → inv (bottom (hA x)) ∙_))
                 ( compute-source-front x)) ＝
             refl
           ap-pr1-ap-tot-compute-source-front =
@@ -721,27 +901,26 @@ module _
         abstract
           ap-pr1-compute-tr-source-front :
             ap pr1 (compute-tr-source-front x) ＝
-            ap pr1
-              ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x))
+            ap pr1 (inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x))
           ap-pr1-compute-tr-source-front =
             ( ap-concat
               ( pr1)
               ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x))
               ( ap
-                ( tot (λ y q → inv (bottom (hA x)) ∙ q))
+                ( tot (λ y → inv (bottom (hA x)) ∙_))
                 ( compute-source-front x))) ∙
             ( ap
-              ( λ p →
-                ap pr1
-                  ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙
-                p)
+              ( ap
+                ( pr1)
+                ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙_)
               ( ap-pr1-ap-tot-compute-source-front)) ∙
             ( right-unit)
 
         abstract
           inv-ap-pr1-inv-compute-tr-fiber' :
             inv
-              ( ap pr1
+              ( ap
+                ( pr1)
                 ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x))) ＝
             ap pr1 (compute-tr-fiber' hD (bottom (hA x)) (source-front x))
           inv-ap-pr1-inv-compute-tr-fiber' =
@@ -754,58 +933,36 @@ module _
 
         abstract
           inv-ap-pr1-compute-tr-source-front :
-            ap pr1
-              ( compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ＝
+            ap pr1 (compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ＝
             inv (ap pr1 (compute-tr-source-front x))
           inv-ap-pr1-compute-tr-source-front =
             ( inv inv-ap-pr1-inv-compute-tr-fiber') ∙
             ( inv (ap inv ap-pr1-compute-tr-source-front))
 
         abstract
-          proof :
+          first-middle-top-flat :
             first-term-top-flat x ∙ middle-term-top-flat x ＝
             inv (ap pr1 (compute-tr-source-front x))
-          proof =
+          first-middle-top-flat =
+            ( assoc (ap (pr1 cocone-flat) (inv (left-square x))) q r) ∙
+            ( ap (_∙ (q ∙ r)) ap-pr1-cocone-flat-inv-left-square) ∙
+            ( ap (_∙ r) coherence-top-flat) ∙
             ( assoc
-              ( ap (pr1 cocone-flat) (inv (left-square x)))
-              ( q)
-              ( r)) ∙
-            ( ap
-              ( λ p → p ∙ (q ∙ r))
-              ( ap-pr1-cocone-flat-inv-left-square)) ∙
-            ( left-unit {p = q ∙ r}) ∙
-            ( ap
-              ( λ p → p ∙ r)
-              ( coherence-top-flat)) ∙
-            ( assoc
-              ( ap pr1
-                ( compute-tr-fiber' hD (bottom (hA x)) (source-front x)))
+              ( ap pr1 (compute-tr-fiber' hD (bottom (hA x)) (source-front x)))
               ( ap pr1 (inv (is-section-map-inv-equiv eR u)))
               ( r)) ∙
             ( ap
-              ( λ p →
-                ap pr1
-                  ( compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙
-                p)
+              ( ap
+                ( pr1)
+                ( compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙_)
               ( cancel-is-section)) ∙
             ( right-unit) ∙
             ( inv-ap-pr1-compute-tr-source-front)
 
-      abstract
-        first-middle-top-flat-test :
-          (x : A') →
-          first-term-top-flat x ∙ middle-term-top-flat x ＝
-          inv (ap pr1 (compute-tr-source-front x))
-        first-middle-top-flat-test x = FirstMiddleTopFlat.proof x
-
       third-term-top-flat-target :
         (x : A') →
         ap
-          ( λ t →
-            pr1
-              ( map-equiv
-                ( e-right (g (hA x)))
-                ( t)))
+          ( λ t → pr1 (map-equiv (e-right (g (hA x))) t))
           ( coherence-back-source x) ＝
         third-term-top-flat x
       third-term-top-flat-target x =
@@ -816,35 +973,28 @@ module _
         ( inv ap-pr1-vertical-map-cocone-flat) ∙
         ( inv (third-term-top-flat-compute x))
         where
-          pr1-map-equiv-e-right' :
+          pr1-map-equiv-e-right :
             {c : C} (t : fiber' hC c) →
             pr1 (map-equiv (e-right c) t) ＝ k' (pr1 t)
-          pr1-map-equiv-e-right' t = refl
-
-          pr1-map-equiv-e-right :
-            (t : fiber' hC (g (hA x))) →
-            pr1 (map-equiv (e-right (g (hA x))) t) ＝ k' (pr1 t)
-          pr1-map-equiv-e-right t = pr1-map-equiv-e-right' t
+          pr1-map-equiv-e-right t = refl
 
           pr1-pr2 : Σ C (fiber' hC) → C'
           pr1-pr2 t = pr1 (pr2 t)
 
-          pr1-vertical-map-cocone-flat :
-            (t : Σ C (fiber' hC)) →
-            pr1 (pr2 cocone-flat) t ＝ k' (pr1 (pr2 t))
-          pr1-vertical-map-cocone-flat t =
-            ( compute-vertical-map-cocone-flat t) ∙
-            ( pr1-map-equiv-e-right' (pr2 t))
+          abstract
+            pr1-vertical-map-cocone-flat :
+              (t : Σ C (fiber' hC)) →
+              pr1 (pr2 cocone-flat) t ＝ k' (pr1 (pr2 t))
+            pr1-vertical-map-cocone-flat t =
+              pr1-map-equiv-e-right (pr2 t)
 
-          ap-pr1-vertical-map-cocone-flat :
-            ap (pr1 (pr2 cocone-flat)) (right-square x) ＝
-            ap (k' ∘ pr1-pr2) (right-square x)
-          ap-pr1-vertical-map-cocone-flat =
-            ( ap-htpy pr1-vertical-map-cocone-flat (right-square x)) ∙
-            ( ap
-              ( λ p → p ∙ inv refl)
-              ( left-unit {p = ap (k' ∘ pr1-pr2) (right-square x)})) ∙
-            ( right-unit {p = ap (k' ∘ pr1-pr2) (right-square x)})
+          abstract
+            ap-pr1-vertical-map-cocone-flat :
+              ap (pr1 (pr2 cocone-flat)) (right-square x) ＝
+              ap (k' ∘ pr1-pr2) (right-square x)
+            ap-pr1-vertical-map-cocone-flat =
+              ( ap-htpy pr1-vertical-map-cocone-flat (right-square x)) ∙
+              ( right-unit {p = ap (k' ∘ pr1-pr2) (right-square x)})
 
           π₀ : fiber' hC (g (hA x)) → C'
           π₀ r = pr1 r
@@ -852,31 +1002,35 @@ module _
           π₁ : fiber' hC (hC (g' x)) → C'
           π₁ r = pr1 r
 
-          ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' :
-            {y : C} (u : fiber' hC y) →
-            ap pr1 (compute-tr-self-fiber' hC u) ＝
-            ap pr1 (compute-tr-fiber' hC (pr2 u) u)
-          ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' (._ , refl) = refl
+          abstract
+            ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' :
+              {y : C} (u : fiber' hC y) →
+              ap pr1 (compute-tr-self-fiber' hC u) ＝
+              ap pr1 (compute-tr-fiber' hC (pr2 u) u)
+            ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' (._ , refl) = refl
 
-          pr1-tr-fiber'-htpy :
-            (t : fiber' hC (g (hA x))) →
-            pr1 (tr (fiber' hC) (back x) t) ＝ pr1 t
-          pr1-tr-fiber'-htpy t =
-            inv (ap pr1 (compute-tr-fiber' hC (back x) t))
+          abstract
+            pr1-tr-fiber'-htpy :
+              (t : fiber' hC (g (hA x))) →
+              pr1 (tr (fiber' hC) (back x) t) ＝ pr1 t
+            pr1-tr-fiber'-htpy t =
+              inv (ap pr1 (compute-tr-fiber' hC (back x) t))
 
-          ap-pr1-inv-compute-tr-self-fiber'-htpy :
-            {y : C} (u : fiber' hC y) →
-            ap pr1 (inv-compute-tr-self-fiber' hC u) ＝
-            inv (ap pr1 (compute-tr-fiber' hC (pr2 u) u))
-          ap-pr1-inv-compute-tr-self-fiber'-htpy u =
-            ( ap-inv pr1 (compute-tr-self-fiber' hC u)) ∙
-            ( ap inv (ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' u))
+          abstract
+            ap-pr1-inv-compute-tr-self-fiber'-htpy :
+              {y : C} (u : fiber' hC y) →
+              ap pr1 (inv-compute-tr-self-fiber' hC u) ＝
+              inv (ap pr1 (compute-tr-fiber' hC (pr2 u) u))
+            ap-pr1-inv-compute-tr-self-fiber'-htpy u =
+              ( ap-inv pr1 (compute-tr-self-fiber' hC u)) ∙
+              ( ap inv (ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' u))
 
-          ap-pr1-pr2-eq-pair-Σ :
-            {y y' : C} (p : y ＝ y') (u : fiber' hC y) →
-            ap pr1-pr2 (eq-pair-Σ p refl) ＝
-            ap pr1 (compute-tr-fiber' hC p u)
-          ap-pr1-pr2-eq-pair-Σ refl u = refl
+          abstract
+            ap-pr1-pr2-eq-pair-Σ :
+              {y y' : C} (p : y ＝ y') (u : fiber' hC y) →
+              ap pr1-pr2 (eq-pair-Σ p refl) ＝
+              ap pr1 (compute-tr-fiber' hC p u)
+            ap-pr1-pr2-eq-pair-Σ refl u = refl
 
           abstract
             ap-pr1-map-equiv-e-right :
@@ -890,11 +1044,9 @@ module _
               ap (k' ∘ pr1) (coherence-back-source x)
             ap-pr1-map-equiv-e-right =
               ( ap-htpy pr1-map-equiv-e-right (coherence-back-source x)) ∙
-              ( ap
-                ( λ p → p ∙ inv refl)
-                ( left-unit {p = ap (k' ∘ pr1) (coherence-back-source x)})) ∙
               ( right-unit {p = ap (k' ∘ pr1) (coherence-back-source x)})
 
+          abstract
             ap-pr1-back-path :
               ap π₁ (back-path x) ＝
               inv (ap π₁ (compute-tr-fiber' hC (back x) (back-source x))) ∙
@@ -904,37 +1056,32 @@ module _
                 ( ap (tr (fiber' hC) (back x)) (coherence-back-source x))
                 ( inv-compute-tr-self-fiber' hC (g' x , back x))) ∙
               ( ap
-                ( λ p →
-                  p ∙ ap π₁ (inv-compute-tr-self-fiber' hC (g' x , back x)))
-                ( inv (ap-comp
-                  {A = fiber' hC (g (hA x))}
-                  {B = fiber' hC (hC (g' x))}
-                  {C = C'}
-                  π₁
-                  ( tr (fiber' hC) (back x))
-                  ( coherence-back-source x)))) ∙
+                ( _∙ ap π₁ (inv-compute-tr-self-fiber' hC (g' x , back x)))
+                ( inv
+                  ( ap-comp
+                    {A = fiber' hC (g (hA x))}
+                    {B = fiber' hC (hC (g' x))}
+                    {C = C'}
+                    ( π₁)
+                    ( tr (fiber' hC) (back x))
+                    ( coherence-back-source x)))) ∙
               ( ap
-                ( λ p →
-                  p ∙ ap π₁ (inv-compute-tr-self-fiber' hC (g' x , back x)))
+                ( _∙ ap π₁ (inv-compute-tr-self-fiber' hC (g' x , back x)))
                 ( ap-htpy pr1-tr-fiber'-htpy (coherence-back-source x))) ∙
               ( assoc
-                ( pr1-tr-fiber'-htpy (back-source x) ∙
-                  ap π₀ (coherence-back-source x))
+                ( ( pr1-tr-fiber'-htpy (back-source x)) ∙
+                  ( ap π₀ (coherence-back-source x)))
                 ( inv (pr1-tr-fiber'-htpy (g' x , back x)))
                 ( ap π₁ (inv-compute-tr-self-fiber' hC (g' x , back x)))) ∙
               ( ap
-                ( λ p →
-                  pr1-tr-fiber'-htpy (back-source x) ∙
-                  ap π₀ (coherence-back-source x) ∙
-                  p)
+                ( ( ( pr1-tr-fiber'-htpy (back-source x)) ∙
+                    ( ap π₀ (coherence-back-source x))) ∙_)
                 ( ap
-                  ( λ p → inv (pr1-tr-fiber'-htpy (g' x , back x)) ∙ p)
+                  ( inv (pr1-tr-fiber'-htpy (g' x , back x)) ∙_)
                   ( ap-pr1-inv-compute-tr-self-fiber'-htpy (g' x , back x)))) ∙
               ( ap
-                ( λ p →
-                  pr1-tr-fiber'-htpy (back-source x) ∙
-                  ap π₀ (coherence-back-source x) ∙
-                  p)
+                ( ( ( pr1-tr-fiber'-htpy (back-source x)) ∙
+                    ( ap π₀ (coherence-back-source x))) ∙_)
                 ( left-inv (pr1-tr-fiber'-htpy (g' x , back x)))) ∙
               ( right-unit)
 
@@ -945,18 +1092,13 @@ module _
             ap-pr1-pr2-right-square =
               ( compute-ap-eq-pair-Σ pr1-pr2 (back x) (back-path x)) ∙
               ( ap
-                ( λ p →
-                  p ∙ ap (ev-pair pr1-pr2 (hC (g' x))) (back-path x))
+                ( _∙ ap (ev-pair pr1-pr2 (hC (g' x))) (back-path x))
                 ( ap-pr1-pr2-eq-pair-Σ (back x) (back-source x))) ∙
               ( ap
-                ( λ p →
-                  ap π₁ (compute-tr-fiber' hC (back x) (back-source x)) ∙
-                  p)
+                ( ap π₁ (compute-tr-fiber' hC (back x) (back-source x)) ∙_)
                 ( ap-ev-pair-pr1-pr2)) ∙
               ( ap
-                ( λ p →
-                  ap π₁ (compute-tr-fiber' hC (back x) (back-source x)) ∙
-                  p)
+                ( ap π₁ (compute-tr-fiber' hC (back x) (back-source x)) ∙_)
                 ( ap-pr1-back-path)) ∙
               ( inv
                 ( assoc
@@ -964,11 +1106,11 @@ module _
                   ( pr1-tr-fiber'-htpy (back-source x))
                   ( ap π₀ (coherence-back-source x)))) ∙
               ( ap
-                ( λ p → p ∙ ap π₀ (coherence-back-source x))
+                ( _∙ ap π₀ (coherence-back-source x))
                 ( right-inv
-                  ( ap π₁ (compute-tr-fiber' hC (back x) (back-source x))))) ∙
-              ( left-unit)
+                  ( ap π₁ (compute-tr-fiber' hC (back x) (back-source x)))))
               where
+
               ev-pair-pr1-pr2 :
                 ev-pair pr1-pr2 (hC (g' x)) ~ π₁
               ev-pair-pr1-pr2 t = refl
@@ -978,9 +1120,6 @@ module _
                 ap π₁ (back-path x)
               ap-ev-pair-pr1-pr2 =
                 ( ap-htpy ev-pair-pr1-pr2 (back-path x)) ∙
-                ( ap
-                  ( λ p → p ∙ inv refl)
-                  ( left-unit {p = ap π₁ (back-path x)})) ∙
                 ( right-unit {p = ap π₁ (back-path x)})
 
       abstract
@@ -989,16 +1128,15 @@ module _
           middle-term-top-flat x ∙
           ap pr1 (coherence-tr-front-right x) ＝
           third-term-top-flat x
-        middle-third-top-flat-test x =
-          ( middle-third-top-flat-target x) ∙
-          ( third-term-top-flat-target x)
+        middle-third-top-flat-test =
+          middle-third-top-flat-target ∙h third-term-top-flat-target
 
       abstract
         path-coherence-cocone-top-flat-is-top :
-          (x : A') → path-coherence-cocone-top-flat x ＝ top x
+          path-coherence-cocone-top-flat ~ top
         path-coherence-cocone-top-flat-is-top x =
           ( ap
-            ( λ p → first-term-top-flat x ∙ p)
+            ( first-term-top-flat x ∙_)
             ( inv (middle-third-top-flat-test x))) ∙
           ( inv
             ( assoc
@@ -1006,37 +1144,34 @@ module _
               ( middle-term-top-flat x)
               ( ap pr1 (coherence-tr-front-right x)))) ∙
           ( ap
-            ( λ p → p ∙ ap pr1 (coherence-tr-front-right x))
-            ( first-middle-top-flat-test x)) ∙
+            ( _∙ ap pr1 (coherence-tr-front-right x))
+            ( first-middle-top-flat x)) ∙
           ( ap
-            ( λ p → inv (ap pr1 (compute-tr-source-front x)) ∙ p)
+            ( inv (ap pr1 (compute-tr-source-front x)) ∙_)
             ( ap-pr1-coherence-tr-front-right x)) ∙
           ( inv
             ( assoc
               ( inv (ap pr1 (compute-tr-source-front x)))
-              ( ap pr1 (compute-tr-source-front x) ∙
-                ap pr1 (coherence-front-right x))
+              ( ( ap pr1 (compute-tr-source-front x)) ∙
+                ( ap pr1 (coherence-front-right x)))
               ( ap pr1 (inv (compute-right x))))) ∙
           ( ap
-            ( λ p → p ∙ ap pr1 (inv (compute-right x)))
+            ( _∙ ap pr1 (inv (compute-right x)))
             ( inv
               ( assoc
                 ( inv (ap pr1 (compute-tr-source-front x)))
                 ( ap pr1 (compute-tr-source-front x))
                 ( ap pr1 (coherence-front-right x))))) ∙
           ( ap
-            ( λ p → p ∙ ap pr1 (inv (compute-right x)))
+            ( _∙ ap pr1 (inv (compute-right x)))
             ( right-whisker-concat
               ( left-inv (ap pr1 (compute-tr-source-front x)))
               ( ap pr1 (coherence-front-right x)))) ∙
           ( ap
-            ( λ p → p ∙ ap pr1 (inv (compute-right x)))
-            ( left-unit {p = ap pr1 (coherence-front-right x)})) ∙
+            ( ap pr1 (coherence-front-right x) ∙_)
+            ( ap-inv pr1 (compute-right x))) ∙
           ( ap
-            ( λ p → ap pr1 (coherence-front-right x) ∙ p)
-            ( ap-inv (pr1) (compute-right x))) ∙
-          ( ap
-            ( λ p → ap pr1 (coherence-front-right x) ∙ p)
+            ( ap pr1 (coherence-front-right x) ∙_)
             ( inv (ap-pr1-compute-right x))) ∙
           ( right-unit) ∙
           ( ap-pr1-coherence-front-right x)
@@ -1044,12 +1179,12 @@ module _
       abstract
         coherence-cocone-top-flat :
           statement-coherence-htpy-cocone
-            f'
-            g'
-            cocone-top-flat
+            ( f')
+            ( g')
+            ( cocone-top-flat)
             ( h' , k' , top)
-            horizontal-cocone-top-flat
-            vertical-cocone-top-flat
+            ( horizontal-cocone-top-flat)
+            ( vertical-cocone-top-flat)
         coherence-cocone-top-flat x =
           right-unit ∙ path-coherence-cocone-top-flat-is-top x
 
