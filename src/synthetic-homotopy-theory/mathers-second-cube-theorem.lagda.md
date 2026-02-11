@@ -201,27 +201,27 @@ module _
         ( tot (λ y → inv (bottom (hA x)) ∙_))
         ( compute-source-front-mathers-second-cube-theorem pb-front pb-left x))
 
-    coherence-front-right-mathers-second-cube-theorem :
-      (x : A') →
-      ( h' (f' x) , inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x))) ＝
-      (k' (g' x) , ap k (back x) ∙ right (g' x))
-    coherence-front-right-mathers-second-cube-theorem x =
-      eq-pair-Σ
-        ( top x)
-        ( ( inv (substitution-law-tr (k (g (hA x)) ＝_) hD (top x))) ∙
-          ( tr-Id-right
-            ( ap hD (top x))
-            ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
-          ( assoc
-            ( inv (bottom (hA x)))
-            ( ap h (left x) ∙ front (f' x))
-            ( ap hD (top x))) ∙
-          ( inv
-            ( left-transpose-eq-concat
-              ( bottom (hA x))
-              ( ap k (back x) ∙ right (g' x))
-              ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
-              ( inv (c x)))))
+  coherence-front-right-mathers-second-cube-theorem :
+    (x : A') →
+    ( h' (f' x) , inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x))) ＝
+    (k' (g' x) , ap k (back x) ∙ right (g' x))
+  coherence-front-right-mathers-second-cube-theorem x =
+    eq-pair-Σ
+      ( top x)
+      ( ( inv (substitution-law-tr (k (g (hA x)) ＝_) hD (top x))) ∙
+        ( tr-Id-right
+          ( ap hD (top x))
+          ( inv (bottom (hA x)) ∙ (ap h (left x) ∙ front (f' x)))) ∙
+        ( assoc
+          ( inv (bottom (hA x)))
+          ( ap h (left x) ∙ front (f' x))
+          ( ap hD (top x))) ∙
+        ( inv
+          ( left-transpose-eq-concat
+            ( bottom (hA x))
+            ( ap k (back x) ∙ right (g' x))
+            ( ( ap h (left x) ∙ front (f' x)) ∙ ap hD (top x))
+            ( inv (c x)))))
 
   abstract
     ap-pr1-coherence-front-right-mathers-second-cube-theorem :
