@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -352,7 +353,7 @@ module _
   retraction-short-map-Pseudometric-Space =
     Σ ( short-map-Pseudometric-Space B A)
       ( λ g →
-        map-short-map-Pseudometric-Space B A g ∘
-        map-short-map-Pseudometric-Space A B f ~
-        id-map-Pseudometric-Space A)
+        is-retraction
+          ( map-short-map-Pseudometric-Space A B f)
+          ( map-short-map-Pseudometric-Space B A g))
 ```
