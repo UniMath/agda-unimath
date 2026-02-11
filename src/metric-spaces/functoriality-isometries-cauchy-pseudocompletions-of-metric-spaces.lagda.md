@@ -73,7 +73,7 @@ module _
 
 ## Properties
 
-### The action of isometries preserves homotopies
+### The action on isometries preserves homotopies
 
 ```agda
 module _
@@ -91,7 +91,7 @@ module _
       ( f~g ∘ map-cauchy-approximation-Metric-Space A u)
 ```
 
-### The action of isometries preserves composition
+### The action on isometries preserves composition
 
 ```agda
 module _
