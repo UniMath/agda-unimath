@@ -32,18 +32,17 @@ open import metric-spaces.short-maps-pseudometric-spaces
 
 ## Idea
 
-[Short maps](metric-spaces.short-maps-metric-spaces.md) between
-[metric spaces](metric-spaces.metric-spaces.md) act on
-[cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
-and induce a short map between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
-
-This action preserves the identity, compositions of short maps, and
-[limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
-
-It is the
+The
 {{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on short maps between metric spaces" Agda=short-map-cauchy-pseudocompletion-Metric-Space}}
-of Cauchy pseudocompletions on short maps between metric spaces.
+of
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md)
+on [short maps](metric-spaces.short-maps-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md) is the
+[action](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
+on the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
+
+This action preserves
+[limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
 
 ## Definitions
 
@@ -89,7 +88,7 @@ module _
 
 ## Properties
 
-### Functoriality of the action of short maps
+### Functoriality of the action on short maps
 
 ```agda
 module _

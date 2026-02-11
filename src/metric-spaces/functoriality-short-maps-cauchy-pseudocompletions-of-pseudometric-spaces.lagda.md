@@ -30,15 +30,16 @@ open import metric-spaces.short-maps-pseudometric-spaces
 
 ## Idea
 
-[Short maps](metric-spaces.short-maps-pseudometric-spaces.md) between
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md) act on
-[cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-and induce a short map between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md).
-
-It is the
+The
 {{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on short maps between pseudometric spaces" Agda=short-map-cauchy-pseudocompletion-Pseudometric-Space}}
-of Cauchy pseudocompletions on isometries between pseudometric spaces.
+of
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
+on [short maps](metric-spaces.short-maps-pseudometric-spaces.md) between
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) is the
+[short](metric-spaces.short-maps-pseudometric-spaces.md) action induced by the
+precomposition action on
+[Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+in a pseudometric space.
 
 ## Definitions
 
