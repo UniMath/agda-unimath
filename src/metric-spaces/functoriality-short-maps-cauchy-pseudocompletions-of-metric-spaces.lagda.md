@@ -38,8 +38,12 @@ open import metric-spaces.short-maps-pseudometric-spaces
 and induce a short map between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
 
-This action is functorial and preserves
+This action preserves the identity, compositions of short maps, and
 [limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
+
+It is the
+{{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on short maps between metric spaces" Agda=short-map-cauchy-pseudocompletion-Metric-Space}}
+of Cauchy pseudocompletions on short maps between metric spaces.
 
 ## Definitions
 

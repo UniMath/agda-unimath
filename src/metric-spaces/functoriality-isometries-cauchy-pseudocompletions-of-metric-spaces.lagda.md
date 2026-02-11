@@ -39,6 +39,10 @@ and induce an [isometry](metric-spaces.isometries-pseudometric-spaces.md)
 between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
 
+It is the
+{{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on isometries between metric spaces" Agda=isometry-cauchy-pseudocompletion-Metric-Space}}
+of Cauchy pseudocompletions on isometries between metric spaces.
+
 ## Definitions
 
 ### The isometric action on isometries of Cauchy pseudocompletions

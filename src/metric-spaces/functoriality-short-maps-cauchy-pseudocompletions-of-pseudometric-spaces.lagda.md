@@ -36,6 +36,10 @@ open import metric-spaces.short-maps-pseudometric-spaces
 and induce a short map between the
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md).
 
+It is the
+{{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on short maps between pseudometric spaces" Agda=short-map-cauchy-pseudocompletion-Pseudometric-Space}}
+of Cauchy pseudocompletions on isometries between pseudometric spaces.
+
 ## Definitions
 
 ### The action on short maps on Cauchy pseudocompletions
