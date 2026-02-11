@@ -40,7 +40,7 @@ and induce an isometry between the
 
 ## Definitions
 
-### The action of isometries on Cauchy approximations
+### The action on isometries of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -60,7 +60,7 @@ module _
 
 ## Properties
 
-### The action of isometries on Cauchy approximations is an isometry
+### The action on isometries is an isometry
 
 ```agda
 module _

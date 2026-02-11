@@ -41,7 +41,7 @@ between the
 
 ## Definitions
 
-### The isometric action of isometries on Cauchy approximations
+### The isometric action on isometries of Cauchy pseudocompletions
 
 ```agda
 module _

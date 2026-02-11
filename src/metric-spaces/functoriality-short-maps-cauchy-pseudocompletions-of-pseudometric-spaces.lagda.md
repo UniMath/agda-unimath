@@ -38,7 +38,7 @@ and induce a short map between the
 
 ## Definitions
 
-### The action of short maps on Cauchy approximations
+### The action on short maps on Cauchy pseudocompletions
 
 ```agda
 module _
@@ -66,7 +66,7 @@ module _
 
 ## Properties
 
-### The action of short maps on Cauchy approximations is short
+### The action on short maps is short
 
 ```agda
 module _
