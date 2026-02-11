@@ -69,51 +69,50 @@ with derivative $$x ↦ -\frac{1}{x^2}$$
 ```agda
 module _
   {l : Level}
-  ([a,b]@(a , b , a<b) : proper-closed-interval-ℝ l l)
-  (0<a : is-positive-proper-closed-interval-ℝ [a,b])
+  (([a,b]@(a , b , a<b) , 0<a) : positive-proper-closed-interval-ℝ l l)
   where
 
-  positive-map-inv-type-is-positive-proper-closed-interval-ℝ :
+  positive-map-reciprocal-positive-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l [a,b] → ℝ⁺ l
-  positive-map-inv-type-is-positive-proper-closed-interval-ℝ =
+  positive-map-reciprocal-positive-proper-closed-interval-ℝ =
     inv-ℝ⁺ ∘ positive-real-type-is-positive-proper-closed-interval-ℝ [a,b] 0<a
 
-  map-inv-type-is-positive-proper-closed-interval-ℝ :
+  map-reciprocal-positive-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l [a,b] → ℝ l
-  map-inv-type-is-positive-proper-closed-interval-ℝ =
-    real-ℝ⁺ ∘ positive-map-inv-type-is-positive-proper-closed-interval-ℝ
+  map-reciprocal-positive-proper-closed-interval-ℝ =
+    real-ℝ⁺ ∘ positive-map-reciprocal-positive-proper-closed-interval-ℝ
 
-  map-derivative-inv-type-is-positive-proper-closed-interval-ℝ :
+  map-derivative-reciprocal-positive-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l [a,b] → ℝ l
-  map-derivative-inv-type-is-positive-proper-closed-interval-ℝ =
-    neg-ℝ ∘ square-ℝ ∘ map-inv-type-is-positive-proper-closed-interval-ℝ
+  map-derivative-reciprocal-positive-proper-closed-interval-ℝ =
+    neg-ℝ ∘ square-ℝ ∘ map-reciprocal-positive-proper-closed-interval-ℝ
 
   abstract
-    is-derivative-inv-type-is-positive-proper-closed-interval-ℝ :
+    is-derivative-reciprocal-positive-proper-closed-interval-ℝ :
       is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
-        ( map-inv-type-is-positive-proper-closed-interval-ℝ)
-        ( map-derivative-inv-type-is-positive-proper-closed-interval-ℝ)
-    is-derivative-inv-type-is-positive-proper-closed-interval-ℝ =
+        ( map-reciprocal-positive-proper-closed-interval-ℝ)
+        ( map-derivative-reciprocal-positive-proper-closed-interval-ℝ)
+    is-derivative-reciprocal-positive-proper-closed-interval-ℝ =
       let
         open
           do-syntax-trunc-Prop
             ( is-derivative-prop-real-map-proper-closed-interval-ℝ
               ( [a,b])
-              ( map-inv-type-is-positive-proper-closed-interval-ℝ)
-              ( map-derivative-inv-type-is-positive-proper-closed-interval-ℝ))
+              ( map-reciprocal-positive-proper-closed-interval-ℝ)
+              ( map-derivative-reciprocal-positive-proper-closed-interval-ℝ))
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
         pos-type-[a,b] =
           positive-real-type-is-positive-proper-closed-interval-ℝ [a,b] 0<a
-        real-inv-type-[a,b] =
-          map-inv-type-is-positive-proper-closed-interval-ℝ
-        pos-inv-type-[a,b] =
-          positive-map-inv-type-is-positive-proper-closed-interval-ℝ
+        real-reciprocal-[a,b] =
+          map-reciprocal-positive-proper-closed-interval-ℝ
+        pos-reciprocal-[a,b] =
+          positive-map-reciprocal-positive-proper-closed-interval-ℝ
         K = max-ℝ (real-inv-ℝ⁺ (a , 0<a)) b
       in do
         (M⁺@(M , _) , K<M) ← exists-greater-positive-rational-ℝ K
         let
-          real-inv-type-[a,b]<M x =
+          real-reciprocal-[a,b]<M x =
             concatenate-leq-le-ℝ _ _ _
               ( inv-leq-ℝ⁺ (a , 0<a) (pos-type-[a,b] x) (pr1 (pr2 x)))
               ( concatenate-leq-le-ℝ _ K _
@@ -125,15 +124,15 @@ module _
           ( λ ε x y Nδxy →
             chain-of-inequalities
               dist-ℝ
-                ( real-inv-type-[a,b] y -ℝ real-inv-type-[a,b] x)
-                ( ( neg-ℝ (square-ℝ (real-inv-type-[a,b] x))) *ℝ
+                ( real-reciprocal-[a,b] y -ℝ real-reciprocal-[a,b] x)
+                ( ( neg-ℝ (square-ℝ (real-reciprocal-[a,b] x))) *ℝ
                   ( pr1 y -ℝ pr1 x))
               ≤ ( real-inv-ℝ⁺ (pos-type-[a,b] x *ℝ⁺ pos-type-[a,b] y)) *ℝ
                 ( dist-ℝ
                   ( ( pr1 x *ℝ pr1 y) *ℝ
-                    ( real-inv-type-[a,b] y -ℝ real-inv-type-[a,b] x))
+                    ( real-reciprocal-[a,b] y -ℝ real-reciprocal-[a,b] x))
                   ( ( pr1 x *ℝ pr1 y) *ℝ
-                    ( ( neg-ℝ (square-ℝ (real-inv-type-[a,b] x))) *ℝ
+                    ( ( neg-ℝ (square-ℝ (real-reciprocal-[a,b] x))) *ℝ
                       ( pr1 y -ℝ pr1 x))))
                 by
                   leq-sim-ℝ'
@@ -144,10 +143,10 @@ module _
               ≤ ( ( real-inv-ℝ⁺ (pos-type-[a,b] x)) *ℝ
                   ( real-inv-ℝ⁺ (pos-type-[a,b] y))) *ℝ
                 ( dist-ℝ
-                  ( ( (pr1 x *ℝ pr1 y) *ℝ real-inv-type-[a,b] y) -ℝ
-                    ( (pr1 x *ℝ pr1 y) *ℝ real-inv-type-[a,b] x))
+                  ( ( (pr1 x *ℝ pr1 y) *ℝ real-reciprocal-[a,b] y) -ℝ
+                    ( (pr1 x *ℝ pr1 y) *ℝ real-reciprocal-[a,b] x))
                   ( ( pr1 x *ℝ pr1 y) *ℝ
-                    ( ( square-ℝ (real-inv-type-[a,b] x)) *ℝ
+                    ( ( square-ℝ (real-reciprocal-[a,b] x)) *ℝ
                       ( neg-ℝ (pr1 y -ℝ pr1 x)))))
                 by
                   leq-eq-ℝ
@@ -161,10 +160,10 @@ module _
                             ( inv (right-negative-law-mul-ℝ _ _))))))
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
                 ( dist-ℝ
-                  ( ( ( pr1 x *ℝ pr1 y) *ℝ real-inv-type-[a,b] y) -ℝ
-                    ( ( pr1 y *ℝ pr1 x) *ℝ real-inv-type-[a,b] x))
+                  ( ( ( pr1 x *ℝ pr1 y) *ℝ real-reciprocal-[a,b] y) -ℝ
+                    ( ( pr1 y *ℝ pr1 x) *ℝ real-reciprocal-[a,b] x))
                   ( ( pr1 x *ℝ pr1 y) *ℝ
-                    ( ( square-ℝ (real-inv-type-[a,b] x)) *ℝ
+                    ( ( square-ℝ (real-reciprocal-[a,b] x)) *ℝ
                       ( pr1 x -ℝ pr1 y))))
                 by
                   preserves-leq-mul-ℝ⁰⁺
@@ -179,8 +178,8 @@ module _
                       ( nonnegative-real-ℚ⁺ M⁺)
                       ( nonnegative-ℝ⁺ (inv-ℝ⁺ (pos-type-[a,b] y)))
                       ( nonnegative-real-ℚ⁺ M⁺)
-                      ( leq-le-ℝ (real-inv-type-[a,b]<M x))
-                      ( leq-le-ℝ (real-inv-type-[a,b]<M y)))
+                      ( leq-le-ℝ (real-reciprocal-[a,b]<M x))
+                      ( leq-le-ℝ (real-reciprocal-[a,b]<M y)))
                     ( leq-eq-ℝ
                       ( ap-dist-ℝ
                         ( ap-diff-ℝ
@@ -192,7 +191,7 @@ module _
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
                 ( dist-ℝ
                   ( pr1 x -ℝ pr1 y)
-                  ( ( pr1 x *ℝ square-ℝ (real-inv-type-[a,b] x)) *ℝ
+                  ( ( pr1 x *ℝ square-ℝ (real-reciprocal-[a,b] x)) *ℝ
                     ( pr1 y *ℝ (pr1 x -ℝ pr1 y))))
                 by
                   leq-eq-ℝ
@@ -206,7 +205,7 @@ module _
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
                 ( dist-ℝ
                   ( pr1 x -ℝ pr1 y)
-                  ( ( real-inv-type-[a,b] x) *ℝ
+                  ( ( real-reciprocal-[a,b] x) *ℝ
                     ( pr1 y *ℝ (pr1 x -ℝ pr1 y))))
                 by
                   leq-eq-ℝ
@@ -220,7 +219,7 @@ module _
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
                 ( dist-ℝ
                   ( one-ℝ *ℝ (pr1 x -ℝ pr1 y))
-                  ( (real-inv-type-[a,b] x *ℝ pr1 y) *ℝ (pr1 x -ℝ pr1 y)))
+                  ( (real-reciprocal-[a,b] x *ℝ pr1 y) *ℝ (pr1 x -ℝ pr1 y)))
                 by
                   leq-eq-ℝ
                     ( ap-mul-ℝ
@@ -229,7 +228,7 @@ module _
                         ( inv (left-unit-law-mul-ℝ _))
                         ( inv (associative-mul-ℝ _ _ _))))
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
-                ( ( dist-ℝ one-ℝ (real-inv-type-[a,b] x *ℝ pr1 y)) *ℝ
+                ( ( dist-ℝ one-ℝ (real-reciprocal-[a,b] x *ℝ pr1 y)) *ℝ
                   ( dist-ℝ (pr1 x) (pr1 y)))
                 by
                   leq-eq-ℝ
@@ -237,10 +236,10 @@ module _
                       ( refl)
                       ( inv (right-distributive-abs-mul-dist-ℝ _ _ _)))
               ≤ ( square-ℝ (real-ℚ M)) *ℝ
-                ( ( ( real-inv-type-[a,b] x) *ℝ
+                ( ( ( real-reciprocal-[a,b] x) *ℝ
                     ( dist-ℝ
                       ( pr1 x *ℝ one-ℝ)
-                      ( pr1 x *ℝ (real-inv-type-[a,b] x *ℝ pr1 y)))) *ℝ
+                      ( pr1 x *ℝ (real-reciprocal-[a,b] x *ℝ pr1 y)))) *ℝ
                   ( dist-ℝ (pr1 x) (pr1 y)))
                 by
                   leq-eq-ℝ
@@ -252,10 +251,10 @@ module _
                             ( cancel-left-div-mul-dist-ℝ⁺
                               ( pos-type-[a,b] x)
                               ( one-ℝ)
-                              ( real-inv-type-[a,b] x *ℝ pr1 y))))
+                              ( real-reciprocal-[a,b] x *ℝ pr1 y))))
                         ( refl)))
               ≤ ( real-ℚ (square-ℚ M)) *ℝ
-                ( ( real-inv-type-[a,b] x) *ℝ
+                ( ( real-reciprocal-[a,b] x) *ℝ
                   ( dist-ℝ (pr1 x) (pr1 y)) *ℝ
                   ( dist-ℝ (pr1 x) (pr1 y)))
                 by
@@ -283,7 +282,7 @@ module _
                           ( nonnegative-real-ℚ⁺ M⁺)
                           ( nonnegative-dist-ℝ _ _)
                           ( nonnegative-real-ℚ⁺ (M⁻³ *ℚ⁺ ε))
-                          ( leq-le-ℝ (real-inv-type-[a,b]<M x))
+                          ( leq-le-ℝ (real-reciprocal-[a,b]<M x))
                           ( leq-dist-neighborhood-ℝ _ _ _ Nδxy)))
               ≤ ( real-ℚ (square-ℚ M) *ℝ (real-ℚ M *ℝ real-ℚ⁺ (M⁻³ *ℚ⁺ ε))) *ℝ
                 ( dist-ℝ (pr1 x) (pr1 y))

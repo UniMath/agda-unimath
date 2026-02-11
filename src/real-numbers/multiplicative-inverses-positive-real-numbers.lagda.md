@@ -442,7 +442,7 @@ module _
         ( cancel-right-mul-div-ℝ⁺)
 ```
 
-### For any positive `c`, `c⁻¹ * dist-ℝ (c * x) (c * y) = dist-ℝ x y`
+### For any positive `c`, we have `c⁻¹ * dist-ℝ (c * x) (c * y) = dist-ℝ x y`
 
 ```agda
 abstract

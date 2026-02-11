@@ -10,6 +10,7 @@ module real-numbers.positive-proper-closed-intervals-real-numbers where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -32,6 +33,8 @@ in the [real numbers](real-numbers.dedekind-real-numbers.md) is
 if all its elements are [positive](real-numbers.positive-real-numbers.md), or
 equivalently, if its lower bound is positive.
 
+## Definition
+
 ```agda
 is-positive-prop-proper-closed-interval-ℝ :
   {l1 l2 : Level} → proper-closed-interval-ℝ l1 l2 → Prop l1
@@ -40,6 +43,30 @@ is-positive-prop-proper-closed-interval-ℝ (a , _ , _) = is-positive-prop-ℝ a
 is-positive-proper-closed-interval-ℝ :
   {l1 l2 : Level} → proper-closed-interval-ℝ l1 l2 → UU l1
 is-positive-proper-closed-interval-ℝ (a , _ , _) = is-positive-ℝ a
+
+positive-proper-closed-interval-ℝ : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+positive-proper-closed-interval-ℝ l1 l2 =
+  type-subtype (is-positive-prop-proper-closed-interval-ℝ {l1} {l2})
+
+module _
+  {l1 l2 : Level}
+  (([a,b] , 0<a) : positive-proper-closed-interval-ℝ l1 l2)
+  where
+
+  proper-closed-interval-positive-proper-closed-interval-ℝ :
+    proper-closed-interval-ℝ l1 l2
+  proper-closed-interval-positive-proper-closed-interval-ℝ = [a,b]
+
+  is-positive-proper-closed-interval-positive-proper-closed-interval-ℝ :
+    is-positive-proper-closed-interval-ℝ
+      ( proper-closed-interval-positive-proper-closed-interval-ℝ)
+  is-positive-proper-closed-interval-positive-proper-closed-interval-ℝ = 0<a
+
+type-positive-proper-closed-interval-ℝ :
+  {l1 l2 : Level} (l : Level) → positive-proper-closed-interval-ℝ l1 l2 →
+  UU (l1 ⊔ l2 ⊔ lsuc l)
+type-positive-proper-closed-interval-ℝ l ([a,b] , _) =
+  type-proper-closed-interval-ℝ l [a,b]
 ```
 
 ## Properties
