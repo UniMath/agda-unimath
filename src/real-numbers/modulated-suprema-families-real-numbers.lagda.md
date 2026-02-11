@@ -239,20 +239,21 @@ module _
   (I : Set l1) (y : type-Set I → ℝ l2) (x : ℝ l3)
   where
 
-  is-modulated-supremum-is-supremum-family-ACℕ-ℝ :
-    is-supremum-family-ℝ y x →
-    is-modulated-supremum-family-ℝ y x
-  is-modulated-supremum-is-supremum-family-ACℕ-ℝ is-sup-x =
-    rec-trunc-Prop
-      ( is-modulated-supremum-prop-family-ℝ y x)
-      ( λ μ →
-        ( is-upper-bound-is-supremum-family-ℝ y x is-sup-x ,
-          unit-trunc-Prop μ))
-      ( choice-countable-discrete-set-ACℕ
-        ( set-ℚ⁺)
-        ( is-countable-set-ℚ⁺)
-        ( has-decidable-equality-ℚ⁺)
-        ( acℕ)
-        ( λ ε → Σ-Set I (λ i → set-Prop (le-prop-ℝ (x -ℝ real-ℚ⁺ ε) (y i))))
-        ( is-approximated-below-is-supremum-family-ℝ y x is-sup-x))
+  abstract
+    is-modulated-supremum-is-supremum-family-ACℕ-ℝ :
+      is-supremum-family-ℝ y x →
+      is-modulated-supremum-family-ℝ y x
+    is-modulated-supremum-is-supremum-family-ACℕ-ℝ is-sup-x =
+      rec-trunc-Prop
+        ( is-modulated-supremum-prop-family-ℝ y x)
+        ( λ μ →
+          ( is-upper-bound-is-supremum-family-ℝ y x is-sup-x ,
+            unit-trunc-Prop μ))
+        ( choice-countable-discrete-set-ACℕ
+          ( set-ℚ⁺)
+          ( is-countable-set-ℚ⁺)
+          ( has-decidable-equality-ℚ⁺)
+          ( acℕ)
+          ( λ ε → Σ-Set I (λ i → set-Prop (le-prop-ℝ (x -ℝ real-ℚ⁺ ε) (y i))))
+          ( is-approximated-below-is-supremum-family-ℝ y x is-sup-x))
 ```

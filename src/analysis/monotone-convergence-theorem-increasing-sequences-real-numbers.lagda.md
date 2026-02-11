@@ -66,53 +66,57 @@ module _
   (is-sup-v : is-supremum-family-ℝ u v)
   where
 
-  left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
-    (ε : ℚ⁺) (n : ℕ) → leq-ℝ (u n) (v +ℝ real-ℚ⁺ ε)
-  left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ ε n =
-    transitive-leq-ℝ
-      ( u n)
-      ( v)
-      ( v +ℝ real-ℚ⁺ ε)
-      ( leq-left-add-real-ℚ⁺ v ε)
-      ( is-upper-bound-is-supremum-family-ℝ u v is-sup-v n)
+  abstract
+    left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
+      (ε : ℚ⁺) (n : ℕ) → leq-ℝ (u n) (v +ℝ real-ℚ⁺ ε)
+    left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+      ε n =
+      transitive-leq-ℝ
+        ( u n)
+        ( v)
+        ( v +ℝ real-ℚ⁺ ε)
+        ( leq-left-add-real-ℚ⁺ v ε)
+        ( is-upper-bound-is-supremum-family-ℝ u v is-sup-v n)
 
-  right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
-    (ε : ℚ⁺) (n m : ℕ) → leq-ℕ m n →
-    le-ℝ (v -ℝ real-ℚ⁺ ε) (u m) →
-    leq-ℝ v (u n +ℝ real-ℚ⁺ ε)
-  right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
-    ε n m m≤n v-ε<u-m =
-    transitive-leq-ℝ
-      ( v)
-      ( u m +ℝ real-ℚ⁺ ε)
-      ( u n +ℝ real-ℚ⁺ ε)
-      ( preserves-leq-right-add-ℝ (real-ℚ⁺ ε) (u m) (u n) (inc-u m n m≤n))
-      ( leq-le-ℝ
-        ( le-transpose-left-diff-ℝ
-          ( v)
-          ( real-ℚ⁺ ε)
-          ( u m)
-          ( v-ε<u-m)))
+  abstract
+    right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
+      (ε : ℚ⁺) (n m : ℕ) → leq-ℕ m n →
+      le-ℝ (v -ℝ real-ℚ⁺ ε) (u m) →
+      leq-ℝ v (u n +ℝ real-ℚ⁺ ε)
+    right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+      ε n m m≤n v-ε<u-m =
+      transitive-leq-ℝ
+        ( v)
+        ( u m +ℝ real-ℚ⁺ ε)
+        ( u n +ℝ real-ℚ⁺ ε)
+        ( preserves-leq-right-add-ℝ (real-ℚ⁺ ε) (u m) (u n) (inc-u m n m≤n))
+        ( leq-le-ℝ
+          ( le-transpose-left-diff-ℝ
+            ( v)
+            ( real-ℚ⁺ ε)
+            ( u m)
+            ( v-ε<u-m)))
 
-  neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
-    (ε : ℚ⁺) (n m : ℕ) → leq-ℕ m n →
-    le-ℝ (v -ℝ real-ℚ⁺ ε) (u m) →
-    neighborhood-ℝ l ε (u n) v
-  neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
-    ε n m m≤n v-ε<u-m =
-    neighborhood-real-bound-each-leq-ℝ
-      ( ε)
-      ( u n)
-      ( v)
-      ( left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+  abstract
+    neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ :
+      (ε : ℚ⁺) (n m : ℕ) → leq-ℕ m n →
+      le-ℝ (v -ℝ real-ℚ⁺ ε) (u m) →
+      neighborhood-ℝ l ε (u n) v
+    neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+      ε n m m≤n v-ε<u-m =
+      neighborhood-real-bound-each-leq-ℝ
         ( ε)
-        ( n))
-      ( right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
-        ( ε)
-        ( n)
-        ( m)
-        ( m≤n)
-        ( v-ε<u-m))
+        ( u n)
+        ( v)
+        ( left-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+          ( ε)
+          ( n))
+        ( right-leq-neighborhood-le-diff-error-is-supremum-is-increasing-sequence-ℝ
+          ( ε)
+          ( n)
+          ( m)
+          ( m≤n)
+          ( v-ε<u-m))
 ```
 
 ## Theorem
@@ -163,15 +167,16 @@ module _
   (inc-u : is-increasing-sequence-ℝ u)
   where
 
-  is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ :
-    (v : ℝ l) →
-    is-supremum-family-ℝ u v →
-    is-limit-sequence-ℝ u v
-  is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ v H =
-    is-limit-is-modulated-supremum-is-increasing-sequence-ℝ u
-      ( inc-u)
-      ( v)
-      ( is-modulated-supremum-is-supremum-family-ACℕ-ℝ acℕ ℕ-Set u v H)
+  abstract
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ :
+      (v : ℝ l) →
+      is-supremum-family-ℝ u v →
+      is-limit-sequence-ℝ u v
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ v H =
+      is-limit-is-modulated-supremum-is-increasing-sequence-ℝ u
+        ( inc-u)
+        ( v)
+        ( is-modulated-supremum-is-supremum-family-ACℕ-ℝ acℕ ℕ-Set u v H)
 ```
 
 ## External links
