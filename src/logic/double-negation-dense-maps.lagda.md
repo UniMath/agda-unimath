@@ -532,8 +532,10 @@ raise-prop-bool l false = raise-empty-Prop l
 
 is-injective-raise-prop-bool :
   {l : Level} → is-injective (raise-prop-bool l)
-is-injective-raise-prop-bool {l} {true} {true} p = refl
-is-injective-raise-prop-bool {l} {false} {false} p = refl
+is-injective-raise-prop-bool {l} {true} {true} p =
+  refl
+is-injective-raise-prop-bool {l} {false} {false} p =
+  refl
 is-injective-raise-prop-bool {l} {true} {false} p =
   raise-ex-falso l (tr type-Prop p raise-star)
 is-injective-raise-prop-bool {l} {false} {true} p =
