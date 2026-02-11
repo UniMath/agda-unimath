@@ -305,7 +305,7 @@ cocone-comp-horizontal' f i k g j c coh =
 cocone-comp-vertical :
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( f : A → B) (i : A → X) (k : B → C) ( c : cocone f i Y) →
+  ( f : A → B) (i : A → X) (k : B → C) (c : cocone f i Y) →
   cocone k (horizontal-map-cocone f i c) Z → cocone (k ∘ f) i Z
 pr1 (cocone-comp-vertical f i k c d) =
   horizontal-map-cocone k (horizontal-map-cocone f i c) d
