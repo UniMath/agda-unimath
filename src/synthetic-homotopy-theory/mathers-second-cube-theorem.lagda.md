@@ -31,8 +31,8 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
-open import foundation.whiskering-identifications-concatenation
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -196,7 +196,7 @@ module _
       ( bottom (hA x))
       ( source-front-mathers-second-cube-theorem pb-front pb-left x)) ∙
     ( ap
-      ( tot (λ y q → inv (bottom (hA x)) ∙ q))
+      ( tot (λ y → inv (bottom (hA x)) ∙_))
       ( compute-source-front-mathers-second-cube-theorem pb-front pb-left x))
 
   coherence-front-right-mathers-second-cube-theorem :
@@ -397,7 +397,8 @@ module _
 
       P = descent-data-pushout-mathers-second-cube-theorem pb-front pb-right
 
-      e = equiv-descent-data-pushout-mathers-second-cube-theorem pb-front pb-right
+      e =
+        equiv-descent-data-pushout-mathers-second-cube-theorem pb-front pb-right
 
       source-front =
         source-front-mathers-second-cube-theorem pb-front pb-left
@@ -556,11 +557,7 @@ module _
         pr1 (tr (fiber' hD) (bottom (hA x)) (source-front x))
       middle-term-top-flat x =
         ( ap
-          ( λ t →
-            pr1
-              ( map-equiv
-                ( e-right (g (hA x)))
-                ( t)))
+          ( λ t → pr1 (map-equiv (e-right (g (hA x))) t))
           ( compute-back-source x)) ∙
         ( ap pr1
           ( is-section-map-inv-equiv
@@ -691,11 +688,7 @@ module _
             middle-term-top-flat x ∙
             ap pr1 (coherence-tr-front-right x) ＝
             ap
-              ( λ t →
-                pr1
-                  ( map-equiv
-                    ( e-right (g (hA x)))
-                    ( t)))
+              ( λ t → pr1 (map-equiv (e-right (g (hA x))) t))
               ( coherence-back-source x)
           middle-third-top-flat-target =
             ( assoc
@@ -705,10 +698,11 @@ module _
                 ( is-section-map-inv-equiv
                   eR-middle-third-top-flat-target
                   u-middle-third-top-flat-target))
-              ( ap π-middle-third-top-flat-target (coherence-tr-front-right x))) ∙
+              ( ap
+                ( π-middle-third-top-flat-target)
+                ( coherence-tr-front-right x))) ∙
             ( ap
-              ( λ p →
-                ap F-middle-third-top-flat-target (compute-back-source x) ∙ p)
+              ( ap F-middle-third-top-flat-target (compute-back-source x) ∙_)
               ( nat-htpy
                 H-middle-third-top-flat-target
                 (coherence-tr-front-right x))) ∙
@@ -892,10 +886,10 @@ module _
             ( inv
               ( ap-comp
                 ( pr1)
-                ( tot (λ y q → inv (bottom (hA x)) ∙ q))
+                ( tot (λ y → inv (bottom (hA x)) ∙_))
                 ( compute-source-front x))) ∙
             ( ap-refl
-              ( pr1 ∘ tot (λ y q → inv (bottom (hA x)) ∙ q))
+              ( pr1 ∘ tot (λ y → inv (bottom (hA x)) ∙_))
               ( source-front x))
 
         abstract
@@ -1035,11 +1029,7 @@ module _
           abstract
             ap-pr1-map-equiv-e-right :
               ap
-                ( λ t →
-                  pr1
-                    ( map-equiv
-                      ( e-right (g (hA x)))
-                      ( t)))
+                ( λ t → pr1 (map-equiv (e-right (g (hA x))) t))
                 ( coherence-back-source x) ＝
               ap (k' ∘ pr1) (coherence-back-source x)
             ap-pr1-map-equiv-e-right =
