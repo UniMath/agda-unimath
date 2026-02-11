@@ -1,15 +1,14 @@
 # Combinatorial identities of sums of natural numbers
 
 ```agda
-module univalent-combinatorics.sums-of-finite-sequences-of-natural-numbers where
-
-open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers public
+module univalent-combinatorics.sums-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
