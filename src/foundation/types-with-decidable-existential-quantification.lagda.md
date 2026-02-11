@@ -201,10 +201,10 @@ abstract
 
 ```agda
 abstract
-  has-decidable-∃-Level-has-decidable-Σ-Level :
+  has-decidable-∃-has-decidable-Σ-Level :
     {l1 l2 : Level} {X : UU l1} →
     has-decidable-Σ-Level l2 X → has-decidable-∃-Level l2 X
-  has-decidable-∃-Level-has-decidable-Σ-Level h P =
+  has-decidable-∃-has-decidable-Σ-Level h P =
     is-decidable-trunc-Prop-is-decidable (h P)
 
   has-decidable-∃-has-decidable-Σ :
