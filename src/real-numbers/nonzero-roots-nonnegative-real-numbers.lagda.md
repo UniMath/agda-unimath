@@ -57,9 +57,8 @@ opaque
   root-nonzero-nat-ℝ⁰⁺ : {l : Level} → ℕ⁺ → ℝ⁰⁺ l → ℝ⁰⁺ l
   root-nonzero-nat-ℝ⁰⁺ (0 , H) _ = ex-falso (H refl)
   root-nonzero-nat-ℝ⁰⁺ (succ-ℕ n , _) =
-    let
-      ((u , v) , _) = has-pair-expansion n
-    in root-pair-expansion-ℝ⁰⁺ u v
+    let ((u , v) , _) = has-pair-expansion n in
+    root-pair-expansion-ℝ⁰⁺ u v
 
 real-root-pair-expansion-ℝ⁰⁺ : {l : Level} → ℕ → ℕ → ℝ⁰⁺ l → ℝ l
 real-root-pair-expansion-ℝ⁰⁺ u v x = real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v x)
