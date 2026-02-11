@@ -30,7 +30,6 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.powers-real-numbers
 open import real-numbers.strictly-increasing-endomaps-real-numbers
 ```
 
