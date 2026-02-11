@@ -302,7 +302,6 @@ $q ∈ U_{y_i}$, a contradiction.
                       ( i)
                       ( q)))))
           ( H)
-
 ```
 
 Roundedness of $L_{\sup y}$ follows from density of $ℚ$: from a witness $p < q$
@@ -533,7 +532,8 @@ which immediately yields $y_i ≤ \sup y$ for each $i$.
           ( i))
 ```
 
-For leastness, let $z$ be any upper bound of the family. The key step is:
+To prove it is a _least_ upper-bound, let $z$ be any upper bound of the family.
+The key step is:
 
 $$
   (q ∈ U_z) \;\Longrightarrow\; (q ∈ U_{\sup y}).
