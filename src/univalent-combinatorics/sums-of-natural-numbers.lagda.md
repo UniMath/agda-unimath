@@ -1,9 +1,9 @@
 # Combinatorial identities of sums of natural numbers
 
 ```agda
-module univalent-combinatorics.sums-of-natural-numbers where
+module univalent-combinatorics.sums-of-finite-sequences-of-natural-numbers where
 
-open import elementary-number-theory.sums-of-natural-numbers public
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers public
 ```
 
 <details><summary>Imports</summary>
