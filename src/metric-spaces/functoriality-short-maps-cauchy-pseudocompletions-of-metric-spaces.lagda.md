@@ -43,7 +43,7 @@ This action is functorial and preserves
 
 ## Definitions
 
-### The action of short maps on Cauchy approximations
+### The action on short maps of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -118,7 +118,7 @@ module _
   htpy-comp-map-short-map-cauchy-pseudocompletion-Metric-Space = refl
 ```
 
-### The action of short maps on Cauchy approximations preserves limits
+### The action on short maps on Cauchy pseudocompletions preserves limits
 
 ```agda
 module _
