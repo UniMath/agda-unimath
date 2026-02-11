@@ -35,7 +35,7 @@ of `f` with
 [eigenmodule](spectral-theory.eigenmodules-linear-endomaps-left-modules-commutative-rings.md)
 associated with `c`, that is, an element of the
 [kernel](linear-algebra.kernels-linear-maps-left-modules-commutative-rings.md)
-of the map `v ↦ f v - c * v`.
+of the map `v ↦ (f v - c * v)`.
 
 ## Definition
 

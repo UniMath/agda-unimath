@@ -32,7 +32,7 @@ of `f` with
 {{#concept "eigenvalue" WDID=Q3553768 WD="eigenvalue" Disambiguation="of a linear endomap of a vector space"}}
 `c : F` if it is a member of the
 [eigenspace](spectral-theory.eigenspaces-linear-endomaps-vector-spaces.md)
-associated with `c`, that is, it is in the kernel of the map `v ↦ f v - c * v`.
+associated with `c`, that is, it is in the kernel of the map `v ↦ (f v - c * v)`.
 
 ## Definition
 

@@ -31,7 +31,7 @@ Given two
 [linear maps](linear-algebra.linear-maps-left-modules-commutative-rings.md) `f`
 and `g` from a [left module](linear-algebra.left-modules-commutative-rings.md)
 `M` over a [commutative ring](commutative-algebra.commutative-rings.md) `R` to a
-left module `N` over `R`, then the map `x ↦ f x + g x` is a linear map.
+left module `N` over `R`, then the map `x ↦ (f x + g x)` is a linear map.
 
 ## Definition
 

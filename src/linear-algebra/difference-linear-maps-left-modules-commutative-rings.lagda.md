@@ -27,7 +27,7 @@ The
 of two [linear maps](linear-algebra.linear-maps-left-modules-rings.md) `f` and
 `g` between two [left modules](linear-algebra.left-modules-rings.md) over a
 [commutative ring](commutative-algebra.commutative-rings.md) is the linear map
-`x ↦ f x - g x`.
+`x ↦ (f x - g x)`.
 
 ## Definition
 

@@ -27,9 +27,10 @@ open import linear-algebra.subsets-left-modules-commutative-rings
 ## Idea
 
 The
-{{#concept "kernel" WDID=Q2914509 WD="kernel" Disambiguation="of a linear map between left modules over commutative rings" Agda=kernel-linear-map-left-module-Commutative-Ring}}
-of a [linear map](linear-algebra.linear-maps-left-modules-commutative-rings.md)
-from a [left module](linear-algebra.left-modules-commutative-rings.md) over a
+{{#concept "kernel" WDID=Q2914509 WD="kernel" Disambiguation="of a linear map between left modules over commutative rings" Agda=kernel-linear-map-left-module-Commutative-Ring}},
+or **null space**, of a
+[linear map](linear-algebra.linear-maps-left-modules-commutative-rings.md) from
+a [left module](linear-algebra.left-modules-commutative-rings.md) over a
 [commutative ring](commutative-algebra.commutative-rings.md) to another left
 module over the same ring is the preimage of zero under the linear map.
 

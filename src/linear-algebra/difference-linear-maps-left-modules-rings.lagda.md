@@ -26,7 +26,7 @@ The
 {{#concept "difference" Disambiguation="of linear maps between left modules over rings" Agda=diff-linear-map-left-module-Ring}}
 of two [linear maps](linear-algebra.linear-maps-left-modules-rings.md) `f` and
 `g` between two [left modules](linear-algebra.left-modules-rings.md) over a
-[ring](ring-theory.rings.md) is the linear map `x ↦ f x - g x`.
+[ring](ring-theory.rings.md) is the linear map `x ↦ (f x - g x)`.
 
 ## Definition
 
