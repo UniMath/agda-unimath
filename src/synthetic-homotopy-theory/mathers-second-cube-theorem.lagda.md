@@ -690,7 +690,7 @@ module _
                 ( g' x , back x))
           section-to-retraction-middle-third-top-flat-target =
             ( ap
-              (ap π-middle-third-top-flat-target)
+              ( ap π-middle-third-top-flat-target)
               ( coherence-map-inv-equiv
                 eR-middle-third-top-flat-target
                 (g' x , back x))) ∙
