@@ -19,10 +19,10 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
@@ -95,7 +95,7 @@ real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
 real-limit-cauchy-approximation-ℚ f =
   limit-cauchy-approximation-Complete-Metric-Space
     ( complete-metric-space-ℝ lzero)
-    ( map-cauchy-approximation-short-map-Metric-Space
+    ( map-short-map-cauchy-pseudocompletion-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( short-map-isometry-Metric-Space
