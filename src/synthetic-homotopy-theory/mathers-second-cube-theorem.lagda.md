@@ -673,8 +673,8 @@ module _
             ( π-middle-third-top-flat-target)
           H-middle-third-top-flat-target t =
             ap
-              π-middle-third-top-flat-target
-              (is-section-map-inv-equiv eR-middle-third-top-flat-target t)
+              ( π-middle-third-top-flat-target)
+              ( is-section-map-inv-equiv eR-middle-third-top-flat-target t)
 
         abstract
           section-to-retraction-middle-third-top-flat-target :
@@ -713,18 +713,18 @@ module _
             ( assoc
               ( ap F-middle-third-top-flat-target (compute-back-source x))
               ( ap
-                π-middle-third-top-flat-target
+                ( π-middle-third-top-flat-target)
                 ( is-section-map-inv-equiv
-                  eR-middle-third-top-flat-target
-                  u-middle-third-top-flat-target))
+                  ( eR-middle-third-top-flat-target)
+                  ( u-middle-third-top-flat-target)))
               ( ap
                 ( π-middle-third-top-flat-target)
                 ( coherence-tr-front-right x))) ∙
             ( ap
               ( ap F-middle-third-top-flat-target (compute-back-source x) ∙_)
               ( nat-htpy
-                H-middle-third-top-flat-target
-                (coherence-tr-front-right x))) ∙
+                ( H-middle-third-top-flat-target)
+                ( coherence-tr-front-right x))) ∙
             ( inv
               ( assoc
                 ( ap F-middle-third-top-flat-target (compute-back-source x))
