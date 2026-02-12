@@ -896,23 +896,6 @@ module _
             ( left-inv (ap pr1 (is-section-map-inv-equiv eR u)))
 
         abstract
-          ap-pr1-ap-tot-compute-source-front :
-            ap pr1
-              ( ap
-                ( tot (λ y → inv (bottom (hA x)) ∙_))
-                ( compute-source-front x)) ＝
-            refl
-          ap-pr1-ap-tot-compute-source-front =
-            ( inv
-              ( ap-comp
-                ( pr1)
-                ( tot (λ y → inv (bottom (hA x)) ∙_))
-                ( compute-source-front x))) ∙
-            ( ap-refl
-              ( pr1 ∘ tot (λ y → inv (bottom (hA x)) ∙_))
-              ( source-front x))
-
-        abstract
           ap-pr1-compute-tr-source-front :
             ap pr1 (compute-tr-source-front x) ＝
             ap pr1 (inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x))
@@ -923,11 +906,6 @@ module _
               ( ap
                 ( tot (λ y → inv (bottom (hA x)) ∙_))
                 ( compute-source-front x))) ∙
-            ( ap
-              ( ap
-                ( pr1)
-                ( inv-compute-tr-fiber' hD (bottom (hA x)) (source-front x)) ∙_)
-              ( ap-pr1-ap-tot-compute-source-front)) ∙
             ( right-unit)
 
         abstract
