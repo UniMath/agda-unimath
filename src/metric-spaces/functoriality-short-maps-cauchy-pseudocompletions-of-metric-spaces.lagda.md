@@ -44,7 +44,7 @@ between their underlying
 [short maps](metric-spaces.short-maps-pseudometric-spaces.md).
 
 It maps short maps between metric spaces to short maps between their Cauchy
-pseudocompletions and preserves
+pseudocompletions, and preserves
 [limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
 
 ## Definitions
