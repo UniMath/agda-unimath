@@ -1,4 +1,4 @@
-# Functoriality of metric quotients of pseudometric spaces and isometries
+# Functorial action on isometries of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

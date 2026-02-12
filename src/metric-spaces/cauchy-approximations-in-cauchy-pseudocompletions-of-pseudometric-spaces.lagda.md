@@ -26,10 +26,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -44,7 +44,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 in the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of a [pseudometric space](metric-spaces.pseudometric-spaces.md) have a
 [limit](metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces.md).
 
@@ -287,7 +287,7 @@ module _
         ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space M)
     is-short-map-lim-cauchy-approximation-pseudocompletion-Pseudometric-Space
       d u v Nuv =
-      reflects-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
+      reflects-neighborhoods-map-unit-cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M)
         ( d)
         ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
@@ -364,7 +364,7 @@ module _
           ( M)
           ( v))
         ( d)
-        ( preserves-neighborhoods-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( preserves-neighborhoods-map-unit-cauchy-pseudocompletion-Pseudometric-Space
           ( cauchy-pseudocompletion-Pseudometric-Space M)
           ( d)
           ( lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
@@ -414,10 +414,10 @@ module _
   is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space :
     is-limit-cauchy-approximation-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
-      ( map-cauchy-approximation-short-map-Pseudometric-Space
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( M)
         ( cauchy-pseudocompletion-Pseudometric-Space M)
-        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-unit-cauchy-pseudocompletion-Pseudometric-Space M)
         ( u))
       ( u)
   is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space
@@ -448,21 +448,21 @@ module _
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M))
-      ( map-cauchy-approximation-short-map-Pseudometric-Space
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( M)
         ( cauchy-pseudocompletion-Pseudometric-Space M)
-        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-unit-cauchy-pseudocompletion-Pseudometric-Space M)
         ( u))
-      ( map-cauchy-pseudocompletion-Pseudometric-Space
+      ( map-unit-cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space M)
         ( u))
   sim-map-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space =
     sim-const-is-limit-cauchy-approximation-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space M)
-      ( map-cauchy-approximation-short-map-Pseudometric-Space
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( M)
         ( cauchy-pseudocompletion-Pseudometric-Space M)
-        ( short-map-cauchy-pseudocompletion-Pseudometric-Space M)
+        ( short-map-unit-cauchy-pseudocompletion-Pseudometric-Space M)
         ( u))
       ( u)
       ( is-limit-map-cauchy-approximation-cauchy-pseudocompletion-Ppseudometric-Space)
