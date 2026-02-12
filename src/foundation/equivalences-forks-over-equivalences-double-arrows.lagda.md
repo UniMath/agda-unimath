@@ -10,12 +10,14 @@ module foundation.equivalences-forks-over-equivalences-double-arrows where
 open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
 open import foundation.action-on-identifications-functions
+open import foundation.action-on-identifications-ternary-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.double-arrows
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-of-equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.action-on-identifications-binary-functions
 open import foundation.equivalences-arrows
 open import foundation.equivalences-double-arrows
 open import foundation.forks
@@ -291,8 +293,7 @@ module _
           ( codomain-equiv-equiv-double-arrow a a' e)))
       ( vertical-map-cospan-cone-fork a')
       ( vertical-map-cone-fork a c)
-      ( map-equiv
-        ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+      ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
       ( domain-map-equiv-double-arrow a a' e)
       ( vertical-map-cone-fork a' c')
       ( horizontal-map-cone-fork a c)
@@ -302,8 +303,7 @@ module _
       ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
       ( coherence-square-cone-fork a c)
       ( pasting-vertical-coherence-square-maps
-        ( map-equiv
-          ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+        ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
         ( map-fork a c)
         ( map-fork a' c')
         ( domain-map-equiv-double-arrow a a' e)
@@ -325,8 +325,7 @@ module _
         codomain-map-equiv-double-arrow a a' e
           ( left-map-double-arrow a (map-fork a c x)) ＝
         left-map-double-arrow a'
-          ( domain-map-equiv-double-arrow a a' e
-            (map-fork a c x))
+          ( domain-map-equiv-double-arrow a a' e (map-fork a c x))
       left-square-ev-fork-equiv =
         left-square-equiv-double-arrow a a' e (map-fork a c x)
 
@@ -341,10 +340,11 @@ module _
 
       pasting-left-square-ev-fork-equiv :
         left-square-ev-fork-equiv ∙
-        ap (left-map-double-arrow a') (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x) ＝
+        ap
+          ( left-map-double-arrow a')
+          ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x) ＝
         pasting-vertical-coherence-square-maps
-          ( map-equiv
-            ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+          ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
           ( map-fork a c)
           ( map-fork a' c')
           ( domain-map-equiv-double-arrow a a' e)
@@ -396,9 +396,7 @@ module _
             ( map-fork a c x)) ＝
         horizontal-map-cospan-cone-fork a'
           ( map-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
+            ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))
       path-map-coherence-ev-fork-equiv =
         ap (horizontal-map-cospan-cone-fork a')
           ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x)
@@ -411,15 +409,12 @@ module _
         vertical-map-cospan-cone-fork a'
           ( left-map-double-arrow a'
             ( map-fork a' c'
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-                x)))
+              ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x)))
       path-left-pasting-square-ev-fork-equiv =
         ap
           ( vertical-map-cospan-cone-fork a')
           ( pasting-vertical-coherence-square-maps
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+            ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
             ( map-fork a c)
             ( map-fork a' c')
             ( domain-map-equiv-double-arrow a a' e)
@@ -434,19 +429,13 @@ module _
         vertical-map-cospan-cone-fork a'
           ( left-map-double-arrow a'
             ( map-fork a' c'
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-                x))) ＝
+              ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))) ＝
         horizontal-map-cospan-cone-fork a'
           ( map-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
+            ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))
       path-target-cone-square-ev-fork-equiv =
         coherence-square-cone-fork a' c'
-          ( map-equiv
-            ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-            x)
+          ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x)
 
       path-left-ev-fork-equiv :
         map-equiv
@@ -456,12 +445,11 @@ module _
           ( vertical-map-cospan-cone-fork a
             ( horizontal-map-cone-fork a c x)) ＝
         horizontal-map-cospan-cone-fork a'
-          ( map-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
+          ( map-fork a' c' (map-equiv-fork-equiv-double-arrow a a' c c' e e' x))
       path-left-ev-fork-equiv =
-        path-source-cone-square-ev-fork-equiv ∙ path-left-cospan-square-ev-fork-equiv ∙ path-map-coherence-ev-fork-equiv
+        path-source-cone-square-ev-fork-equiv ∙
+        path-left-cospan-square-ev-fork-equiv ∙
+        path-map-coherence-ev-fork-equiv
 
       path-right-ev-fork-equiv :
         map-equiv
@@ -472,24 +460,24 @@ module _
             ( horizontal-map-cone-fork a c x)) ＝
         horizontal-map-cospan-cone-fork a'
           ( map-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
-      path-right-ev-fork-equiv = path-left-pasting-square-ev-fork-equiv ∙ path-target-cone-square-ev-fork-equiv
+            ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))
+      path-right-ev-fork-equiv =
+        path-left-pasting-square-ev-fork-equiv ∙
+        path-target-cone-square-ev-fork-equiv
 
       ap-pr1-path-source-cone-square-ev-fork-equiv :
         ap pr1 path-source-cone-square-ev-fork-equiv ＝ refl
       ap-pr1-path-source-cone-square-ev-fork-equiv =
-        inv-ap-comp
-          pr1
+        ( inv-ap-comp
+          ( pr1)
           ( map-equiv
             ( equiv-product
               ( codomain-equiv-equiv-double-arrow a a' e)
               ( codomain-equiv-equiv-double-arrow a a' e)))
-          ( coherence-square-cone-fork a c x) ∙
+          ( coherence-square-cone-fork a c x)) ∙
         ( ap-comp
           ( codomain-map-equiv-double-arrow a a' e)
-          pr1
+          ( pr1)
           ( coherence-square-cone-fork a c x)) ∙
         ( ap
           ( ap (codomain-map-equiv-double-arrow a a' e))
@@ -499,16 +487,16 @@ module _
         ap pr2 path-source-cone-square-ev-fork-equiv ＝
         ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x)
       ap-pr2-path-source-cone-square-ev-fork-equiv =
-        inv-ap-comp
-          pr2
+        ( inv-ap-comp
+          ( pr2)
           ( map-equiv
             ( equiv-product
               ( codomain-equiv-equiv-double-arrow a a' e)
               ( codomain-equiv-equiv-double-arrow a a' e)))
-          ( coherence-square-cone-fork a c x) ∙
+          ( coherence-square-cone-fork a c x)) ∙
         ( ap-comp
           ( codomain-map-equiv-double-arrow a a' e)
-          pr2
+          ( pr2)
           ( coherence-square-cone-fork a c x)) ∙
         ( ap
           ( ap (codomain-map-equiv-double-arrow a a' e))
@@ -517,12 +505,13 @@ module _
       ap-pr1-path-left-cospan-square-ev-fork-equiv :
         ap pr1 path-left-cospan-square-ev-fork-equiv ＝ left-square-ev-fork-equiv
       ap-pr1-path-left-cospan-square-ev-fork-equiv =
-        ( ap (ap pr1)
+        ( ap
+          ( ap pr1)
           ( inv-inv
             ( eq-pair left-square-ev-fork-equiv right-square-ev-fork-equiv)) ∙
           ap-pr1-eq-pair
-            left-square-ev-fork-equiv
-            right-square-ev-fork-equiv)
+            ( left-square-ev-fork-equiv)
+            ( right-square-ev-fork-equiv))
 
       ap-pr2-path-left-cospan-square-ev-fork-equiv :
         ap pr2 path-left-cospan-square-ev-fork-equiv ＝ right-square-ev-fork-equiv
@@ -535,9 +524,9 @@ module _
             right-square-ev-fork-equiv)
 
       ap-pr1-path-left-pasting-square-ev-fork-equiv :
-        ap pr1 path-left-pasting-square-ev-fork-equiv ＝ pasting-vertical-coherence-square-maps
-          ( map-equiv
-            ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+        ap pr1 path-left-pasting-square-ev-fork-equiv ＝
+        pasting-vertical-coherence-square-maps
+          ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
           ( map-fork a c)
           ( map-fork a' c')
           ( domain-map-equiv-double-arrow a a' e)
@@ -546,48 +535,13 @@ module _
           ( codomain-map-equiv-double-arrow a a' e)
           ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
           ( left-square-equiv-double-arrow a a' e)
-          x
+          ( x)
       ap-pr1-path-left-pasting-square-ev-fork-equiv =
-        inv
-          ( (inv-ap-id P) ∙
-            ap-comp pr1 (vertical-map-cospan-cone-fork a') P)
+        inv (inv-ap-id P ∙ ap-comp pr1 (vertical-map-cospan-cone-fork a') P)
         where
           P =
             pasting-vertical-coherence-square-maps
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
-              ( map-fork a c)
-              ( map-fork a' c')
-              ( domain-map-equiv-double-arrow a a' e)
-              ( left-map-double-arrow a)
-              ( left-map-double-arrow a')
-              ( codomain-map-equiv-double-arrow a a' e)
-              ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
-              ( left-square-equiv-double-arrow a a' e)
-              x
-
-      ap-pr2-path-left-pasting-square-ev-fork-equiv :
-        ap pr2 path-left-pasting-square-ev-fork-equiv ＝ pasting-vertical-coherence-square-maps
-          ( map-equiv
-            ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
-          ( map-fork a c)
-          ( map-fork a' c')
-          ( domain-map-equiv-double-arrow a a' e)
-          ( left-map-double-arrow a)
-          ( left-map-double-arrow a')
-          ( codomain-map-equiv-double-arrow a a' e)
-          ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
-          ( left-square-equiv-double-arrow a a' e)
-          x
-      ap-pr2-path-left-pasting-square-ev-fork-equiv =
-        inv
-          ( (inv-ap-id P) ∙
-            ap-comp pr2 (vertical-map-cospan-cone-fork a') P)
-        where
-          P =
-            pasting-vertical-coherence-square-maps
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e'))
+              ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
               ( map-fork a c)
               ( map-fork a' c')
               ( domain-map-equiv-double-arrow a a' e)
@@ -598,153 +552,119 @@ module _
               ( left-square-equiv-double-arrow a a' e)
               ( x)
 
-      ap-pr1-path-target-cone-square-ev-fork-equiv :
-        ap pr1 path-target-cone-square-ev-fork-equiv ＝ refl
-      ap-pr1-path-target-cone-square-ev-fork-equiv =
-        ap-pr1-ap-pair
-          ( coh-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
-
-      ap-pr2-path-target-cone-square-ev-fork-equiv :
-        ap pr2 path-target-cone-square-ev-fork-equiv ＝
-        coh-fork a' c'
-          ( map-equiv
-            ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-            x)
-      ap-pr2-path-target-cone-square-ev-fork-equiv =
-        ap-pr2-ap-pair
-          ( coh-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
-
-      coh-pr2-path-left-ev-fork-equiv :
-        ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x) ∙
-        ( right-square-ev-fork-equiv ∙
-          ap (right-map-double-arrow a')
-            (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x)) ＝
-        left-square-ev-fork-equiv ∙
-        ( ap (left-map-double-arrow a')
-          (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x) ∙
-          coh-fork a' c'
-            ( map-equiv
-              ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-              x))
-      coh-pr2-path-left-ev-fork-equiv =
-        inv (coh-equiv-fork-equiv-double-arrow a a' c c' e e' x)
+      ap-pr2-path-left-pasting-square-ev-fork-equiv :
+        ap pr2 path-left-pasting-square-ev-fork-equiv ＝
+        pasting-vertical-coherence-square-maps
+          ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
+          ( map-fork a c)
+          ( map-fork a' c')
+          ( domain-map-equiv-double-arrow a a' e)
+          ( left-map-double-arrow a)
+          ( left-map-double-arrow a')
+          ( codomain-map-equiv-double-arrow a a' e)
+          ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
+          ( left-square-equiv-double-arrow a a' e)
+          ( x)
+      ap-pr2-path-left-pasting-square-ev-fork-equiv =
+        inv (inv-ap-id P ∙ ap-comp pr2 (vertical-map-cospan-cone-fork a') P)
+        where
+          P =
+            pasting-vertical-coherence-square-maps
+              ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
+              ( map-fork a c)
+              ( map-fork a' c')
+              ( domain-map-equiv-double-arrow a a' e)
+              ( left-map-double-arrow a)
+              ( left-map-double-arrow a')
+              ( codomain-map-equiv-double-arrow a a' e)
+              ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
+              ( left-square-equiv-double-arrow a a' e)
+              ( x)
 
       pr1-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow :
         pr1 (pair-eq path-left-ev-fork-equiv) ＝
         pr1 (pair-eq path-right-ev-fork-equiv)
       pr1-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow =
-        ap-concat
-          pr1
-          ( path-source-cone-square-ev-fork-equiv ∙
-            path-left-cospan-square-ev-fork-equiv)
-          path-map-coherence-ev-fork-equiv ∙
-        ap
-          ( _∙ ap pr1 path-map-coherence-ev-fork-equiv)
-          ( ap-concat
-            pr1
-            path-source-cone-square-ev-fork-equiv
-            path-left-cospan-square-ev-fork-equiv) ∙
-        ap
-          ( _∙ ap pr1 path-map-coherence-ev-fork-equiv)
-          ( ap
-            ( _∙ ap pr1 path-left-cospan-square-ev-fork-equiv)
-            ap-pr1-path-source-cone-square-ev-fork-equiv) ∙
-        ap
-          ( _∙ ap pr1 path-map-coherence-ev-fork-equiv)
-          left-unit ∙
-        ap
-          ( _∙
-            ap pr1 path-map-coherence-ev-fork-equiv)
-          ap-pr1-path-left-cospan-square-ev-fork-equiv ∙
-        ap
-          ( λ t → left-square-ev-fork-equiv ∙ t)
+        ( ap-concat
+          ( pr1)
+          ( ( path-source-cone-square-ev-fork-equiv) ∙
+            ( path-left-cospan-square-ev-fork-equiv))
+          ( path-map-coherence-ev-fork-equiv)) ∙
+        ( ap-binary
+          ( _∙_)
+          ( ( ap-concat
+              ( pr1)
+              ( path-source-cone-square-ev-fork-equiv)
+              ( path-left-cospan-square-ev-fork-equiv)) ∙
+            ( ap
+              ( _∙ ap pr1 path-left-cospan-square-ev-fork-equiv)
+              ( ap-pr1-path-source-cone-square-ev-fork-equiv) ∙
+            ( ap-pr1-path-left-cospan-square-ev-fork-equiv)))
           ( inv-ap-comp
-            pr1
+            ( pr1)
             ( horizontal-map-cospan-cone-fork a')
-            (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x)) ∙
-        inv pasting-left-square-ev-fork-equiv ∙
-        inv ap-pr1-path-left-pasting-square-ev-fork-equiv ∙
-        inv right-unit ∙
-        ap
-          ( λ t → ap pr1 path-left-pasting-square-ev-fork-equiv ∙ t)
-          (inv ap-pr1-path-target-cone-square-ev-fork-equiv) ∙
-        inv-ap-concat
-          pr1
-          path-left-pasting-square-ev-fork-equiv
-          path-target-cone-square-ev-fork-equiv
+            ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))) ∙
+        ( inv pasting-left-square-ev-fork-equiv) ∙
+        ( inv ap-pr1-path-left-pasting-square-ev-fork-equiv) ∙
+        ( inv right-unit) ∙
+        ( ap
+          ( ap pr1 path-left-pasting-square-ev-fork-equiv ∙_)
+          ( inv
+            ( ap-pr1-ap-pair
+              ( coh-fork a' c'
+                ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))))) ∙
+        ( inv-ap-concat
+          ( pr1)
+          ( path-left-pasting-square-ev-fork-equiv)
+          ( path-target-cone-square-ev-fork-equiv))
 
       pr2-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow :
         pr2 (pair-eq path-left-ev-fork-equiv) ＝
         pr2 (pair-eq path-right-ev-fork-equiv)
       pr2-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow =
         ap-concat
-          pr2
-          ( path-source-cone-square-ev-fork-equiv ∙
-            path-left-cospan-square-ev-fork-equiv)
-          path-map-coherence-ev-fork-equiv ∙
-        ap
-          ( _∙ ap pr2 path-map-coherence-ev-fork-equiv)
-          ( ap-concat
-            pr2
-            path-source-cone-square-ev-fork-equiv
-            path-left-cospan-square-ev-fork-equiv) ∙
-        ap
-          ( λ t → (t ∙ ap pr2 path-left-cospan-square-ev-fork-equiv) ∙ ap pr2 path-map-coherence-ev-fork-equiv)
-          ap-pr2-path-source-cone-square-ev-fork-equiv ∙
-        ap
-          ( λ t →
-            ( ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x) ∙ t) ∙
-            ap pr2 path-map-coherence-ev-fork-equiv)
-          ap-pr2-path-left-cospan-square-ev-fork-equiv ∙
-        ap
-          ( λ t →
-            ( ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x) ∙
-              right-square-ev-fork-equiv) ∙
-            t)
+          ( pr2)
+          ( ( path-source-cone-square-ev-fork-equiv) ∙
+            ( path-left-cospan-square-ev-fork-equiv))
+          ( path-map-coherence-ev-fork-equiv) ∙
+        ( ap-binary
+          ( _∙_)
+          ( ( ap-concat
+              ( pr2)
+              ( path-source-cone-square-ev-fork-equiv)
+              ( path-left-cospan-square-ev-fork-equiv)) ∙
+            ( ap-binary
+              ( _∙_)
+              ( ap-pr2-path-source-cone-square-ev-fork-equiv)
+              ( ap-pr2-path-left-cospan-square-ev-fork-equiv)))
           ( inv-ap-comp
-            pr2
+            ( pr2)
             ( horizontal-map-cospan-cone-fork a')
-            (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x)) ∙
-        assoc
-          (ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x))
-          right-square-ev-fork-equiv
-          ( ap (right-map-double-arrow a')
-            (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x)) ∙
-        coh-pr2-path-left-ev-fork-equiv ∙
-        inv
+            ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))) ∙
+        ( assoc
+          ( ap (codomain-map-equiv-double-arrow a a' e) (coh-fork a c x))
+          ( right-square-ev-fork-equiv)
+          ( ap
+            ( right-map-double-arrow a')
+            (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))) ∙
+        ( inv (coh-equiv-fork-equiv-double-arrow a a' c c' e e' x)) ∙
+        ( inv
           ( assoc
-            left-square-ev-fork-equiv
-            ( ap (left-map-double-arrow a')
-              (coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))
+            ( left-square-ev-fork-equiv)
+            ( ap
+              ( left-map-double-arrow a')
+              ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))
             ( coh-fork a' c'
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-                x))) ∙
-        ap
-          ( _∙
-            coh-fork a' c'
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-                x))
-          (inv pasting-left-square-ev-fork-equiv) ∙
-        ap
-          ( _∙
-            coh-fork a' c'
-              ( map-equiv
-                ( equiv-equiv-fork-equiv-double-arrow a a' c c' e e')
-                ( x)))
-          ( inv ap-pr2-path-left-pasting-square-ev-fork-equiv) ∙
-        ap
-          ( ap pr2 path-left-pasting-square-ev-fork-equiv ∙_)
-          ( inv ap-pr2-path-target-cone-square-ev-fork-equiv) ∙
-        inv-ap-concat
-          pr2
-          path-left-pasting-square-ev-fork-equiv
-          path-target-cone-square-ev-fork-equiv
+              ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x)))) ∙
+        ( ap-binary (_∙_)
+          ( ( inv pasting-left-square-ev-fork-equiv) ∙
+            ( inv ap-pr2-path-left-pasting-square-ev-fork-equiv))
+          ( inv
+            (ap-pr2-ap-pair
+              ( coh-fork a' c'
+                ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))))) ∙
+        ( inv-ap-concat
+          ( pr2)
+          ( path-left-pasting-square-ev-fork-equiv)
+          ( path-target-cone-square-ev-fork-equiv))
 ```
