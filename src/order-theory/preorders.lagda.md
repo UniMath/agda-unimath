@@ -63,7 +63,7 @@ module _
   leq-Preorder x y = type-Prop (leq-prop-Preorder x y)
 
   is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
-  is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-prop-Preorder
+  is-prop-leq-Preorder = is-prop-rel-Relation-Prop leq-prop-Preorder
 
   concatenate-eq-leq-Preorder' :
     {x y z : type-Preorder} → x ＝ y → leq-Preorder x z → leq-Preorder y z
@@ -97,7 +97,7 @@ module _
   le-Preorder x y = type-Prop (le-prop-Preorder x y)
 
   is-prop-le-Preorder : (x y : type-Preorder) → is-prop (le-Preorder x y)
-  is-prop-le-Preorder = is-prop-type-Relation-Prop le-prop-Preorder
+  is-prop-le-Preorder = is-prop-rel-Relation-Prop le-prop-Preorder
 
   refl-leq-Preorder : is-reflexive leq-Preorder
   refl-leq-Preorder = pr1 (pr2 (pr2 X))
