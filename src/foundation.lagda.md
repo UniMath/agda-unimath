@@ -175,7 +175,7 @@ open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
 open import foundation.equality-of-equality-cartesian-product-types public
 open import foundation.equality-truncation-levels public
-open import foundation.equalizers public
+open import foundation.standard-equalizers public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public

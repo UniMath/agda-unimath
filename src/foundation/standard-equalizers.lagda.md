@@ -1,7 +1,7 @@
-# Equalizers
+# Standard equalizers
 
 ```agda
-module foundation.equalizers where
+module foundation.standard-equalizers where
 ```
 
 <details><summary>Imports</summary>
@@ -23,7 +23,7 @@ open import foundation.universe-levels
 ## Idea
 
 The
-{{#concept "standard equalizer" Disambiguation="of a double arrow of types" WDID=Q1224487 WD"equaliser" Agda=standard-equalizer}}
+{{#concept "standard equalizer" Disambiguation="of a double arrow of types" WDID=Q1224487 WD="equaliser" Agda=standard-equalizer}}
 of a [double arrow](foundation.double-arrows.md) `f, g : A → B` is the type of
 pairs of elements `x, y : A` such that `f x ＝ g y`. It comes equipped with a
 canonical [fork](foundation.forks.md) satisfying the

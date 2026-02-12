@@ -35,8 +35,8 @@ open import foundation.universe-levels
 Given a [double arrow](foundation.double-arrows.md) `f, g : A → B`, consider a
 [fork](foundation.forks.md) `e : B → X` with vertex `X`. The
 {{#concept "universal property" Disambiguation="of equalizers of types" Agda=universal-property-equalizer}}
-of [equalizers](foundation.equalizers.md) is the statement that the fork
-postcomposition map
+of [equalizers](foundation.standard-equalizers.md) is the statement that the
+fork postcomposition map
 
 ```text
 fork-map : (X → Y) → fork Y
@@ -108,8 +108,9 @@ module _
 
 As mentioned in [`forks`](foundation.forks.md), forks can be thought of as
 special cases of cones under cospans. This theorem makes it more precise,
-asserting that under this mapping, [equalizers](foundation.equalizers.md)
-correspond to [pullbacks](foundation.pullbacks.md).
+asserting that under this mapping,
+[equalizers](foundation.standard-equalizers.md) correspond to
+[pullbacks](foundation.pullbacks.md).
 
 ```agda
 module _
