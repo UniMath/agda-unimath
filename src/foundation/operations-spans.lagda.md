@@ -93,7 +93,7 @@ Consider a span `s` given by
   A <----- S -----> B
 ```
 
-and a equivalence of arrows `h : equiv-arrow g' g` as indicated in the diagram
+and an equivalence of arrows `h : equiv-arrow g' g` as indicated in the diagram
 
 ```text
                g'
