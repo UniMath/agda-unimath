@@ -59,11 +59,11 @@ module _
   where
 
   left-map-hom-cospan-diagram :
-    left-type-cospan-diagram 𝒮 → left-type-cospan-diagram 𝒯
+    domain-cospan-diagram 𝒮 → domain-cospan-diagram 𝒯
   left-map-hom-cospan-diagram = pr1 h
 
   right-map-hom-cospan-diagram :
-    right-type-cospan-diagram 𝒮 → right-type-cospan-diagram 𝒯
+    codomain-cospan-diagram 𝒮 → codomain-cospan-diagram 𝒯
   right-map-hom-cospan-diagram = pr1 (pr2 h)
 
   cospanning-map-hom-cospan-diagram :
@@ -131,9 +131,9 @@ module _
   hom-cospan-diagram-rotate :
     (h : hom-cospan-diagram 𝒯 𝒮) (h' : hom-cospan-diagram ℛ 𝒮) →
     hom-cospan-diagram
-      ( left-type-cospan-diagram 𝒯 ,
-        left-type-cospan-diagram ℛ ,
-        left-type-cospan-diagram 𝒮 ,
+      ( domain-cospan-diagram 𝒯 ,
+        domain-cospan-diagram ℛ ,
+        domain-cospan-diagram 𝒮 ,
         left-map-hom-cospan-diagram 𝒯 𝒮 h ,
         left-map-hom-cospan-diagram ℛ 𝒮 h')
       ( codomain-hom-cospan-diagram-rotate h h')
@@ -149,9 +149,9 @@ module _
   hom-cospan-diagram-rotate' :
     (h : hom-cospan-diagram 𝒯 𝒮) (h' : hom-cospan-diagram ℛ 𝒮) →
     hom-cospan-diagram
-      ( right-type-cospan-diagram 𝒯 ,
-        right-type-cospan-diagram ℛ ,
-        right-type-cospan-diagram 𝒮 ,
+      ( codomain-cospan-diagram 𝒯 ,
+        codomain-cospan-diagram ℛ ,
+        codomain-cospan-diagram 𝒮 ,
         right-map-hom-cospan-diagram 𝒯 𝒮 h ,
         right-map-hom-cospan-diagram ℛ 𝒮 h')
       ( codomain-hom-cospan-diagram-rotate h h')

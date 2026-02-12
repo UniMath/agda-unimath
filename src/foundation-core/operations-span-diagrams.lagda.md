@@ -52,15 +52,15 @@ module _
 
   concat-span-diagram :
     (𝒮 : span-diagram l1 l2 l3)
-    {A' : UU l4} (f : domain-span-diagram 𝒮 → A')
-    {B' : UU l5} (g : codomain-span-diagram 𝒮 → B') →
+    {A' : UU l4} (i : domain-span-diagram 𝒮 → A')
+    {B' : UU l5} (j : codomain-span-diagram 𝒮 → B') →
     span-diagram l4 l5 l3
-  pr1 (concat-span-diagram 𝒮 {A'} f {B'} g) =
+  pr1 (concat-span-diagram 𝒮 {A'} i {B'} j) =
     A'
-  pr1 (pr2 (concat-span-diagram 𝒮 {A'} f {B'} g)) =
+  pr1 (pr2 (concat-span-diagram 𝒮 {A'} i {B'} j)) =
     B'
-  pr2 (pr2 (concat-span-diagram 𝒮 {A'} f {B'} g)) =
-    concat-span (span-span-diagram 𝒮) f g
+  pr2 (pr2 (concat-span-diagram 𝒮 {A'} i {B'} j)) =
+    concat-span (span-span-diagram 𝒮) i j
 ```
 
 ### Concatenating span diagrams and maps on the left

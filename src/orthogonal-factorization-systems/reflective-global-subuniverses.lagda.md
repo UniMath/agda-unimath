@@ -376,8 +376,8 @@ module _
 
   is-in-reflective-global-subuniverse-pullback :
     is-in-reflective-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
-    is-in-reflective-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
-    is-in-reflective-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-reflective-global-subuniverse 𝒫 (domain-cospan-diagram 𝒮) →
+    is-in-reflective-global-subuniverse 𝒫 (codomain-cospan-diagram 𝒮) →
     is-in-reflective-global-subuniverse 𝒫 (domain-pullback-cone 𝒮 c)
   is-in-reflective-global-subuniverse-pullback =
     is-in-global-subuniverse-pullback-localization-global-subuniverse
