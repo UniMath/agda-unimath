@@ -47,7 +47,8 @@ map `e : B → X` together with a [homotopy](foundation.homotopies.md)
 ```text
      g
    ----->     e
- A -----> B -----> X
+ A        B -----> X
+   ----->
      f
 ```
 
@@ -120,7 +121,8 @@ a new cofork `h ∘ e`.
 ```text
      g
    ----->     e        h
- A -----> B -----> X -----> Y
+ A        B -----> X -----> Y
+   ----->
      f
 ```
 
@@ -198,7 +200,8 @@ module _
 ```text
      g
    ----->     e        h        k
- A -----> B -----> X -----> Y -----> Z
+ A        B -----> X -----> Y -----> Z
+   ----->
      f
 ```
 
