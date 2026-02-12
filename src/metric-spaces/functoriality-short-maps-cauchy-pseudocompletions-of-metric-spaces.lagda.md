@@ -40,11 +40,11 @@ on [short maps](metric-spaces.short-maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is the
 [action](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 between their underlying
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md).
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) and
+[short maps](metric-spaces.short-maps-pseudometric-spaces.md).
 
-It maps short maps between metric spaces to
-[short maps](metric-spaces.short-maps-pseudometric-spaces.md) between their
-Cauchy pseudocompletions and preserves
+It maps short maps between metric spaces to short maps between their Cauchy
+pseudocompletions and preserves
 [limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
 
 ## Definitions
