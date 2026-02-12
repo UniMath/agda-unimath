@@ -205,7 +205,7 @@ module _
     {f : A → B} → is-injective f →
     number-of-elements-count eA ≤-ℕ number-of-elements-count eB
   leq-is-injective-count H =
-    leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
+    leq-is-emb-count (is-emb-is-injective (is-set-type-count eB) H)
 ```
 
 #### There is no embedding `A ↪ B` between types equipped with a counting if the number of elements of `B` is strictly less than the number of elements of `A`
@@ -237,7 +237,7 @@ module _
     number-of-elements-count eB <-ℕ number-of-elements-count eA →
     is-not-injective f
   is-not-injective-le-count f p H =
-    is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
+    is-not-emb-le-count f p (is-emb-is-injective (is-set-type-count eB) H)
 ```
 
 #### There is no embedding `ℕ ↪ A` into a type equipped with a counting
