@@ -38,7 +38,7 @@ of
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md)
 on [isometries](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is the
-[action](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
+[functorial action](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 between their underlying
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
