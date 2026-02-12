@@ -35,11 +35,13 @@ The
 of
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 on [short maps](metric-spaces.short-maps-pseudometric-spaces.md) between
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md) is the
-[short](metric-spaces.short-maps-pseudometric-spaces.md) action induced by the
-precomposition action on
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) is the action on
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
-in a pseudometric space.
+induced by the postcomposition with
+[short](metric-spaces.short-maps-pseudometric-spaces.md).
+
+It maps short maps between pseudometric spaces to short maps between their
+Cauchy pseudocompletions.
 
 ## Definitions
 
@@ -59,14 +61,14 @@ module _
   map-short-map-cauchy-pseudocompletion-Pseudometric-Space (u , H) =
     ( map-short-map-Pseudometric-Space A B f ∘ u ,
       λ ε δ →
-        is-short-map-short-map-Pseudometric-Space
-          ( A)
-          ( B)
-          ( f)
-          ( ε +ℚ⁺ δ)
-          ( u ε)
-          ( u δ)
-          ( H ε δ))
+      is-short-map-short-map-Pseudometric-Space
+        ( A)
+        ( B)
+        ( f)
+        ( ε +ℚ⁺ δ)
+        ( u ε)
+        ( u δ)
+        ( H ε δ))
 ```
 
 ## Properties

@@ -41,6 +41,10 @@ on [isometries](metric-spaces.isometries-metric-spaces.md) between
 [action](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 on the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
+It maps isometries between metric spaces to
+[isometries](metric-spaces.isometries-pseudometric-spaces.md) between their
+Cauchy pseudocompletions.
+
 ## Definitions
 
 ### The isometric action on isometries of Cauchy pseudocompletions

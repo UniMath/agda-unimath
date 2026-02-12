@@ -36,7 +36,7 @@ The
 [functorial action](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of
 [Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
-on [short maps](metric-spaces.short-maps-metric-spaces.md) maps
+on [short maps](metric-spaces.short-maps-pseudometric-spaces.md) maps
 [isometries](metric-spaces.isometries-pseudometric-spaces.md) between
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) to isometries
 between their Cauchy pseudocompletions.

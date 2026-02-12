@@ -41,7 +41,9 @@ on [short maps](metric-spaces.short-maps-metric-spaces.md) between
 [action](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 on the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
-This action preserves
+It maps short maps between metric spaces to
+[short maps](metric-spaces.short-maps-pseudometric-spaces.md) between their
+Cauchy pseudocompletions and preserves
 [limits](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md).
 
 ## Definitions
