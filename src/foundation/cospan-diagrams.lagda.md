@@ -29,6 +29,11 @@ cospan-diagram :
 cospan-diagram l1 l2 l3 =
   Σ (UU l1) (λ A → Σ (UU l2) (cospan l3 A))
 
+make-cospan-diagram :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} →
+  (A → X) → (B → X) → cospan-diagram l1 l2 l3
+make-cospan-diagram {A = A} {B} {X} f g = (A , B , X , f , g)
+
 module _
   {l1 l2 l3 : Level} (c : cospan-diagram l1 l2 l3)
   where
