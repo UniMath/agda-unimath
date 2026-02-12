@@ -172,7 +172,7 @@ module _
           ( R)
           ( left-module-algebra-Commutative-Ring R A)
           ( left-module-algebra-Commutative-Ring R A)
-          ( right-linear-map-bilinear-map-left-module-Commutative-Ring
+          ( linear-map-ev-left-bilinear-map-left-module-Commutative-Ring
             ( R)
             ( left-module-algebra-Commutative-Ring R A)
             ( left-module-algebra-Commutative-Ring R A)
@@ -207,7 +207,7 @@ module _
         ( R)
         ( left-module-algebra-Commutative-Ring R A)
         ( left-module-algebra-Commutative-Ring R A)
-        ( left-linear-map-bilinear-map-left-module-Commutative-Ring
+        ( linear-map-ev-right-bilinear-map-left-module-Commutative-Ring
           ( R)
           ( left-module-algebra-Commutative-Ring R A)
           ( left-module-algebra-Commutative-Ring R A)
@@ -241,7 +241,7 @@ module _
         ( R)
         ( left-module-algebra-Commutative-Ring R A)
         ( left-module-algebra-Commutative-Ring R A)
-        ( right-linear-map-bilinear-map-left-module-Commutative-Ring
+        ( linear-map-ev-left-bilinear-map-left-module-Commutative-Ring
           ( R)
           ( left-module-algebra-Commutative-Ring R A)
           ( left-module-algebra-Commutative-Ring R A)
@@ -262,7 +262,7 @@ module _
         ( R)
         ( left-module-algebra-Commutative-Ring R A)
         ( left-module-algebra-Commutative-Ring R A)
-        ( left-linear-map-bilinear-map-left-module-Commutative-Ring
+        ( linear-map-ev-right-bilinear-map-left-module-Commutative-Ring
           ( R)
           ( left-module-algebra-Commutative-Ring R A)
           ( left-module-algebra-Commutative-Ring R A)

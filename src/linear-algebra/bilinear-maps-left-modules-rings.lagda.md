@@ -45,30 +45,30 @@ module _
     type-left-module-Ring R Z)
   where
 
-  is-linear-on-left-prop-bimap-left-module-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-linear-on-left-prop-bimap-left-module-Ring =
+  is-linear-on-left-prop-binary-map-left-module-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-left-prop-binary-map-left-module-Ring =
     Π-Prop
       ( type-left-module-Ring R Y)
       ( λ y → is-linear-map-prop-left-module-Ring R X Z (λ x → f x y))
 
-  is-linear-on-left-bimap-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-linear-on-left-bimap-left-module-Ring =
-    type-Prop is-linear-on-left-prop-bimap-left-module-Ring
+  is-linear-on-left-binary-map-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-left-binary-map-left-module-Ring =
+    type-Prop is-linear-on-left-prop-binary-map-left-module-Ring
 
-  is-linear-on-right-prop-bimap-left-module-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-linear-on-right-prop-bimap-left-module-Ring =
+  is-linear-on-right-prop-binary-map-left-module-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-right-prop-binary-map-left-module-Ring =
     Π-Prop
       ( type-left-module-Ring R X)
       ( λ x → is-linear-map-prop-left-module-Ring R Y Z (f x))
 
-  is-linear-on-right-bimap-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-linear-on-right-bimap-left-module-Ring =
-    type-Prop is-linear-on-right-prop-bimap-left-module-Ring
+  is-linear-on-right-binary-map-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-right-binary-map-left-module-Ring =
+    type-Prop is-linear-on-right-prop-binary-map-left-module-Ring
 
   is-bilinear-map-prop-left-module-Ring : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-bilinear-map-prop-left-module-Ring =
-    is-linear-on-left-prop-bimap-left-module-Ring ∧
-    is-linear-on-right-prop-bimap-left-module-Ring
+    is-linear-on-left-prop-binary-map-left-module-Ring ∧
+    is-linear-on-right-prop-binary-map-left-module-Ring
 
   is-bilinear-map-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-bilinear-map-left-module-Ring =
@@ -113,17 +113,17 @@ module _
   (f : bilinear-map-left-module-Ring R X Y Z)
   where
 
-  left-linear-map-bilinear-map-left-module-Ring :
+  linear-map-ev-right-bilinear-map-left-module-Ring :
     (y : type-left-module-Ring R Y) →
     linear-map-left-module-Ring R X Z
-  left-linear-map-bilinear-map-left-module-Ring y =
+  linear-map-ev-right-bilinear-map-left-module-Ring y =
     ( ( λ x → map-bilinear-map-left-module-Ring R X Y Z f x y) ,
       pr1 (pr2 f) y)
 
-  right-linear-map-bilinear-map-left-module-Ring :
+  linear-map-ev-left-bilinear-map-left-module-Ring :
     (x : type-left-module-Ring R X) →
     linear-map-left-module-Ring R Y Z
-  right-linear-map-bilinear-map-left-module-Ring x =
+  linear-map-ev-left-bilinear-map-left-module-Ring x =
     ( map-bilinear-map-left-module-Ring R X Y Z f x ,
       pr2 (pr2 f) x)
 ```
@@ -149,7 +149,7 @@ module _
       zero-left-module-Ring R Z
     left-zero-law-bilinear-map-left-module-Ring y =
       is-zero-map-zero-linear-map-left-module-Ring R X Z
-        ( left-linear-map-bilinear-map-left-module-Ring R X Y Z f y)
+        ( linear-map-ev-right-bilinear-map-left-module-Ring R X Y Z f y)
 
     right-zero-law-bilinear-map-left-module-Ring :
       (x : type-left-module-Ring R X) →
@@ -159,7 +159,7 @@ module _
       zero-left-module-Ring R Z
     right-zero-law-bilinear-map-left-module-Ring x =
       is-zero-map-zero-linear-map-left-module-Ring R Y Z
-        ( right-linear-map-bilinear-map-left-module-Ring R X Y Z f x)
+        ( linear-map-ev-left-bilinear-map-left-module-Ring R X Y Z f x)
 ```
 
 ## See also
