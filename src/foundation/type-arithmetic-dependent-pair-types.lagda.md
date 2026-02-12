@@ -296,11 +296,24 @@ module _
       is-section-map-inv-interchange-Σ-Σ
       is-retraction-map-inv-interchange-Σ-Σ
 
+  is-equiv-map-inv-interchange-Σ-Σ : is-equiv map-inv-interchange-Σ-Σ
+  is-equiv-map-inv-interchange-Σ-Σ =
+    is-equiv-is-invertible
+      map-interchange-Σ-Σ
+      is-retraction-map-inv-interchange-Σ-Σ
+      is-section-map-inv-interchange-Σ-Σ
+
   interchange-Σ-Σ :
     Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) ≃
     Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
   pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
+
+  inv-interchange-Σ-Σ :
+    Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) ≃
+    Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
+  pr1 inv-interchange-Σ-Σ = map-inv-interchange-Σ-Σ
+  pr2 inv-interchange-Σ-Σ = is-equiv-map-inv-interchange-Σ-Σ
 
   interchange-Σ-Σ-Σ :
     Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y))) ≃
@@ -415,6 +428,18 @@ module _
 
   inv-right-distributive-product-Σ : Σ A (λ a → B a × C) ≃ (Σ A B) × C
   inv-right-distributive-product-Σ = inv-associative-Σ
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  where
+
+  distributive-product-Σ :
+    (Σ A B) × (Σ C D) ≃ Σ (A × C) (λ (a , c) → B a × D c)
+  distributive-product-Σ = interchange-Σ-Σ (λ _ _ → D)
+
+  inv-distributive-product-Σ :
+    Σ (A × C) (λ (a , c) → B a × D c) ≃ (Σ A B) × (Σ C D)
+  inv-distributive-product-Σ = inv-interchange-Σ-Σ (λ _ _ → D)
 ```
 
 ## See also

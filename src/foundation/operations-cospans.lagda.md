@@ -55,7 +55,8 @@ Then we obtain a cospan `A' --> S' <-- B`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2}
   (s : cospan l3 A B)
   {S' : UU l4} {A' : UU l5} (f' : A' → S')
   (h : equiv-arrow (left-map-cospan s) f')
@@ -108,7 +109,8 @@ Then we obtain a cospan `A --> S' <-- B'`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2}
   (s : cospan l3 A B)
   {S' : UU l4} {B' : UU l5} (g' : B' → S')
   (h : equiv-arrow (right-map-cospan s) g')

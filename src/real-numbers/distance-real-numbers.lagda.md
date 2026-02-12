@@ -257,6 +257,16 @@ abstract
       ( leq-transpose-right-add-ℝ _ _ _ y≤z+x)
 ```
 
+### The difference of two real numbers is at most their distance
+
+```agda
+abstract
+  leq-diff-dist-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ (x -ℝ y) (dist-ℝ x y)
+  leq-diff-dist-ℝ _ _ = leq-abs-ℝ _
+```
+
 ### Addition preserves distance between real numbers
 
 ```agda
@@ -302,6 +312,24 @@ abstract
               ( right-inverse-law-add-ℝ z))
       ~ℝ dist-ℝ x y
         by sim-eq-ℝ (ap abs-ℝ (right-unit-law-add-ℝ (x -ℝ y)))
+```
+
+### Negation preserves the distance between real numbers
+
+```agda
+abstract
+  dist-neg-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    dist-ℝ (neg-ℝ x) (neg-ℝ y) ＝ dist-ℝ x y
+  dist-neg-ℝ x y =
+    equational-reasoning
+      abs-ℝ (neg-ℝ x -ℝ neg-ℝ y)
+      ＝ abs-ℝ (neg-ℝ x +ℝ y)
+        by ap abs-ℝ (ap-add-ℝ refl (neg-neg-ℝ y))
+      ＝ dist-ℝ y x
+        by ap abs-ℝ (commutative-add-ℝ _ _)
+      ＝ dist-ℝ x y
+        by commutative-dist-ℝ y x
 ```
 
 ### Distributivity laws
@@ -373,16 +401,14 @@ abstract
 
 ```agda
 abstract
-  leq-add-abs-dist-ℝ :
+  leq-abs-add-abs-dist-ℝ :
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
-    leq-ℝ x (abs-ℝ y +ℝ dist-ℝ y x)
-  leq-add-abs-dist-ℝ x y =
+    leq-ℝ (abs-ℝ x) (abs-ℝ y +ℝ dist-ℝ y x)
+  leq-abs-add-abs-dist-ℝ x y =
     let open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in
       chain-of-inequalities
-      x
-      ≤ abs-ℝ x
-        by leq-abs-ℝ x
+      abs-ℝ x
       ≤ abs-ℝ ((x -ℝ y) +ℝ y)
         by
           leq-sim-ℝ
@@ -394,6 +420,12 @@ abstract
         by leq-eq-ℝ (commutative-add-ℝ _ _)
       ≤ abs-ℝ y +ℝ dist-ℝ y x
         by leq-eq-ℝ (ap-add-ℝ refl (commutative-dist-ℝ x y))
+
+  leq-add-abs-dist-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ x (abs-ℝ y +ℝ dist-ℝ y x)
+  leq-add-abs-dist-ℝ x y =
+    transitive-leq-ℝ _ _ _ (leq-abs-add-abs-dist-ℝ x y) (leq-abs-ℝ x)
 ```
 
 ### The distance between `x` and `x + y` is `|y|`
@@ -416,6 +448,20 @@ abstract
     sim-ℝ (dist-ℝ x (x +ℝ real-ℝ⁺ y)) (real-ℝ⁺ y)
   dist-right-add-ℝ⁺ x y⁺@(y , _) =
     tr (sim-ℝ _) (abs-real-ℝ⁺ y⁺) (dist-right-add-ℝ x y)
+```
+
+### The distance between `x` and `y` is at most `|x| + |y|`
+
+```agda
+abstract
+  leq-dist-add-abs-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    leq-ℝ (dist-ℝ x y) (abs-ℝ x +ℝ abs-ℝ y)
+  leq-dist-add-abs-ℝ x y =
+    tr
+      ( leq-ℝ (dist-ℝ x y))
+      ( ap-add-ℝ refl (abs-neg-ℝ y))
+      ( triangle-inequality-abs-ℝ x (neg-ℝ y))
 ```
 
 ### The distance from a real number to itself is 0
