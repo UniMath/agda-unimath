@@ -236,13 +236,16 @@ module _
           ( metric-space-Complete-Metric-Space M))
         ( short-map-unit-cauchy-pseudocompletion-Metric-Space
           ( metric-space-Complete-Metric-Space M)))
-  is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space =
-    ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space M ,
-      all-eq-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( pseudometric-space-Complete-Metric-Space M)
-        ( metric-space-Complete-Metric-Space M)
-        ( id-short-map-Metric-Space
-          ( metric-space-Complete-Metric-Space M))
-        ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space
-          ( M)))
+  pr1 is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space
+    =
+    retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space M
+  pr2 is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space
+    =
+    all-eq-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space M)
+      ( metric-space-Complete-Metric-Space M)
+      ( id-short-map-Metric-Space
+        ( metric-space-Complete-Metric-Space M))
+      ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space
+        ( M))
 ```
