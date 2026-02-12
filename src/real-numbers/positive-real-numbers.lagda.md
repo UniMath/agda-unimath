@@ -17,6 +17,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -254,6 +255,9 @@ abstract
   preserves-is-positive-real-ℚ pos-q =
     preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
+  is-positive-real-ℚ⁺ : (q : ℚ⁺) → is-positive-ℝ (real-ℚ⁺ q)
+  is-positive-real-ℚ⁺ (q , pos-q) = preserves-is-positive-real-ℚ pos-q
+
   reflects-is-positive-real-ℚ :
     {q : ℚ} → is-positive-ℝ (real-ℚ q) → is-positive-ℚ q
   reflects-is-positive-real-ℚ {q} 0<qℝ =
@@ -264,6 +268,9 @@ positive-real-ℚ⁺ (q , pos-q) = (real-ℚ q , preserves-is-positive-real-ℚ 
 
 one-ℝ⁺ : ℝ⁺ lzero
 one-ℝ⁺ = positive-real-ℚ⁺ one-ℚ⁺
+
+one-half-ℝ⁺ : ℝ⁺ lzero
+one-half-ℝ⁺ = positive-real-ℚ⁺ one-half-ℚ⁺
 
 is-positive-one-ℝ : is-positive-ℝ one-ℝ
 is-positive-one-ℝ = is-positive-real-ℝ⁺ one-ℝ⁺
@@ -293,6 +300,9 @@ abstract
 
 positive-real-ℕ⁺ : ℕ⁺ → ℝ⁺ lzero
 positive-real-ℕ⁺ (n , n≠0) = (real-ℕ n , is-positive-real-is-nonzero-ℕ n≠0)
+
+two-ℝ⁺ : ℝ⁺ lzero
+two-ℝ⁺ = positive-real-ℕ⁺ two-ℕ⁺
 ```
 
 ### `x` is positive if and only if there exists a positive rational number it is not less than or equal to
@@ -353,6 +363,9 @@ abstract
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
+raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
 ```
 
 ### Raising a positive real to its own level is the identity

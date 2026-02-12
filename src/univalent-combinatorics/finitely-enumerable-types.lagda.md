@@ -7,6 +7,7 @@ module univalent-combinatorics.finitely-enumerable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -15,6 +16,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
@@ -110,16 +112,30 @@ abstract
     is-empty-surjection Fin-0↠X id
 ```
 
+### Finitely enumerable types are closed under surjections
+
+```agda
+finite-enumeration-surjection :
+  {l1 : Level} {X : UU l1} → finite-enumeration X →
+  {l2 : Level} {Y : UU l2} → (X ↠ Y) → finite-enumeration Y
+finite-enumeration-surjection (n , Fin-n↠X) X↠Y =
+  ( n , comp-surjection X↠Y Fin-n↠X)
+
+is-finitely-enumerable-surjection :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↠ Y →
+  is-finitely-enumerable X → is-finitely-enumerable Y
+is-finitely-enumerable-surjection X↠Y =
+  map-is-inhabited (λ eX → finite-enumeration-surjection eX X↠Y)
+```
+
 ### Finitely enumerable types are closed under equivalences
 
 ```agda
 finite-enumeration-equiv :
   {l1 : Level} {X : UU l1} → finite-enumeration X →
   {l2 : Level} {Y : UU l2} → X ≃ Y → finite-enumeration Y
-finite-enumeration-equiv (n , Fin-n↠X) X≃Y =
-  ( n ,
-    map-equiv X≃Y ∘ map-surjection Fin-n↠X ,
-    is-surjective-left-comp-equiv X≃Y (is-surjective-map-surjection Fin-n↠X))
+finite-enumeration-equiv eX X≃Y =
+  finite-enumeration-surjection eX (surjection-equiv X≃Y)
 
 is-finitely-enumerable-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
@@ -165,6 +181,41 @@ finitely-enumerable-type-Finite-Type :
   {l : Level} → Finite-Type l → Finitely-Enumerable-Type l
 finitely-enumerable-type-Finite-Type (X , is-finite-X) =
   (X , is-finitely-enumerable-is-finite is-finite-X)
+```
+
+### Empty types are finitely enumerable
+
+```agda
+module _
+  {l : Level}
+  {X : UU l}
+  (¬X : is-empty X)
+  where
+
+  finite-enumeration-is-empty : finite-enumeration X
+  finite-enumeration-is-empty =
+    finite-enumeration-count (count-is-empty ¬X)
+
+  is-finitely-enumerable-is-empty : is-finitely-enumerable X
+  is-finitely-enumerable-is-empty =
+    unit-trunc-Prop finite-enumeration-is-empty
+```
+
+### Contractible types are finitely enumerable
+
+```agda
+module _
+  {l : Level}
+  {X : UU l}
+  (cX : is-contr X)
+  where
+
+  finite-enumeration-is-contr : finite-enumeration X
+  finite-enumeration-is-contr = finite-enumeration-count (count-is-contr cX)
+
+  is-finitely-enumerable-is-contr : is-finitely-enumerable X
+  is-finitely-enumerable-is-contr =
+    unit-trunc-Prop finite-enumeration-is-contr
 ```
 
 ### Finitely enumerable types are closed under dependent sums
@@ -249,41 +300,40 @@ abstract
 finite-enumeration-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   finite-enumeration X → finite-enumeration Y → finite-enumeration (X + Y)
-finite-enumeration-coproduct {l1} {l2} {X} {Y} eX eY =
-  let
-    F = rec-bool (raise l2 X) (raise l1 Y)
-    eF : (b : bool) → finite-enumeration (F b)
-    eF = λ where
-      false → finite-enumeration-equiv eY (compute-raise l1 Y)
-      true → finite-enumeration-equiv eX (compute-raise l2 X)
-  in
-    finite-enumeration-equiv
-      ( finite-enumeration-Σ
-        ( finite-enumeration-count (2 , equiv-bool-Fin-2))
-        ( F)
-        ( eF))
-      ( equiv-coproduct (inv-compute-raise l2 X) (inv-compute-raise l1 Y) ∘e
-        equiv-Σ-bool-coproduct F)
+finite-enumeration-coproduct {l1} {l2} {X} {Y} (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
+  ( nX +ℕ nY ,
+    comp-surjection
+      ( surjection-coproduct Fin-nX↠X Fin-nY↠Y)
+      ( surjection-inv-equiv (compute-coproduct-Fin nX nY)))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  coproduct-is-finitely-enumerable-iff-each-finitely-enumerable :
+  is-finitely-enumerable-coproduct :
+    is-finitely-enumerable X → is-finitely-enumerable Y →
+    is-finitely-enumerable (X + Y)
+  is-finitely-enumerable-coproduct =
+    map-binary-trunc-Prop finite-enumeration-coproduct
+
+  is-finitely-enumerable-left-summand-coproduct :
+    is-finitely-enumerable (X + Y) → is-finitely-enumerable X
+  is-finitely-enumerable-left-summand-coproduct =
+    map-trunc-Prop finite-enumeration-left-summand
+
+  is-finitely-enumerable-right-summand-coproduct :
+    is-finitely-enumerable (X + Y) → is-finitely-enumerable Y
+  is-finitely-enumerable-right-summand-coproduct =
+    map-trunc-Prop finite-enumeration-right-summand
+
+  iff-is-finitely-enumerable-coproduct :
     is-finitely-enumerable (X + Y) ↔
     is-finitely-enumerable X × is-finitely-enumerable Y
-  pr1 coproduct-is-finitely-enumerable-iff-each-finitely-enumerable =
-    rec-trunc-Prop
-      ( is-finitely-enumerable-prop X ∧ is-finitely-enumerable-prop Y)
-      ( λ eX+Y →
-        ( unit-trunc-Prop (finite-enumeration-left-summand eX+Y) ,
-          unit-trunc-Prop (finite-enumeration-right-summand eX+Y)))
-  pr2 coproduct-is-finitely-enumerable-iff-each-finitely-enumerable (eX , eY) =
-    let open do-syntax-trunc-Prop (is-finitely-enumerable-prop (X + Y))
-    in do
-      enum-X ← eX
-      enum-Y ← eY
-      unit-trunc-Prop (finite-enumeration-coproduct enum-X enum-Y)
+  pr1 iff-is-finitely-enumerable-coproduct eX+Y =
+    ( is-finitely-enumerable-left-summand-coproduct eX+Y ,
+      is-finitely-enumerable-right-summand-coproduct eX+Y)
+  pr2 iff-is-finitely-enumerable-coproduct =
+    ind-Σ is-finitely-enumerable-coproduct
 ```
 
 ### Finitely enumerable types are closed under Cartesian products
@@ -296,34 +346,16 @@ module _
   finite-enumeration-product :
     finite-enumeration X → finite-enumeration Y → finite-enumeration (X × Y)
   finite-enumeration-product (nX , Fin-nX↠X) (nY , Fin-nY↠Y) =
-    let
-      surj-map : (Fin nX × Fin nY) → X × Y
-      surj-map =
-        map-product (map-surjection Fin-nX↠X) (map-surjection Fin-nY↠Y)
-      is-surjective-surj-map : is-surjective surj-map
-      is-surjective-surj-map =
-        λ (x , y) →
-          let open do-syntax-trunc-Prop (trunc-Prop (fiber surj-map (x , y)))
-          in do
-            (ix , fix=x) ← is-surjective-map-surjection Fin-nX↠X x
-            (iy , fiy=y) ← is-surjective-map-surjection Fin-nY↠Y y
-            intro-exists (ix , iy) (eq-pair fix=x fiy=y)
-    in
-      ( nX *ℕ nY ,
-        surj-map ∘ map-inv-equiv (product-Fin nX nY) ,
-        is-surjective-right-comp-equiv
-          ( is-surjective-surj-map)
-          ( inv-equiv (product-Fin nX nY)))
+    ( nX *ℕ nY ,
+      comp-surjection
+        ( surjection-product Fin-nX↠X Fin-nY↠Y)
+        ( surjection-inv-equiv (product-Fin nX nY)))
 
   is-finitely-enumerable-product :
     is-finitely-enumerable X → is-finitely-enumerable Y →
     is-finitely-enumerable (X × Y)
-  is-finitely-enumerable-product eX eY =
-    let open do-syntax-trunc-Prop (is-finitely-enumerable-prop (X × Y))
-    in do
-      ex ← eX
-      ey ← eY
-      unit-trunc-Prop (finite-enumeration-product ex ey)
+  is-finitely-enumerable-product =
+    map-binary-trunc-Prop finite-enumeration-product
 
 product-Finitely-Enumerable-Type :
   {l1 l2 : Level}
@@ -331,7 +363,7 @@ product-Finitely-Enumerable-Type :
   (Y : Finitely-Enumerable-Type l2) →
   Finitely-Enumerable-Type (l1 ⊔ l2)
 product-Finitely-Enumerable-Type (X , eX) (Y , eY) =
-  (X × Y , is-finitely-enumerable-product eX eY)
+  ( X × Y , is-finitely-enumerable-product eX eY)
 ```
 
 ### Finitely enumerable types are subfinitely enumerable

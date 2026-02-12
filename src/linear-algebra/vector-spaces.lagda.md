@@ -8,8 +8,10 @@ module linear-algebra.vector-spaces where
 
 ```agda
 open import commutative-algebra.heyting-fields
+open import commutative-algebra.homomorphisms-heyting-fields
 
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -60,6 +62,12 @@ module _
   zero-Vector-Space : type-Vector-Space
   zero-Vector-Space = zero-Ab ab-Vector-Space
 
+  is-zero-prop-Vector-Space : type-Vector-Space → Prop l2
+  is-zero-prop-Vector-Space v = Id-Prop set-Vector-Space v zero-Vector-Space
+
+  is-zero-Vector-Space : type-Vector-Space → UU l2
+  is-zero-Vector-Space v = v ＝ zero-Vector-Space
+
   neg-Vector-Space : type-Vector-Space → type-Vector-Space
   neg-Vector-Space = neg-Ab ab-Vector-Space
 
@@ -86,12 +94,12 @@ module _
 
   left-inverse-law-add-Vector-Space :
     (v : type-Vector-Space) →
-    add-Vector-Space (neg-Vector-Space v) v ＝ zero-Vector-Space
+    is-zero-Vector-Space (add-Vector-Space (neg-Vector-Space v) v)
   left-inverse-law-add-Vector-Space = left-inverse-law-add-Ab ab-Vector-Space
 
   right-inverse-law-add-Vector-Space :
     (v : type-Vector-Space) →
-    add-Vector-Space v (neg-Vector-Space v) ＝ zero-Vector-Space
+    is-zero-Vector-Space (add-Vector-Space v (neg-Vector-Space v))
   right-inverse-law-add-Vector-Space = right-inverse-law-add-Ab ab-Vector-Space
 
   commutative-add-Vector-Space :
@@ -135,7 +143,7 @@ module _
 
   left-zero-law-mul-Vector-Space :
     (v : type-Vector-Space) →
-    mul-Vector-Space (zero-Heyting-Field R) v ＝ zero-Vector-Space
+    is-zero-Vector-Space (mul-Vector-Space (zero-Heyting-Field R) v)
   left-zero-law-mul-Vector-Space =
     left-zero-law-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field R)
@@ -143,7 +151,7 @@ module _
 
   right-zero-law-mul-Vector-Space :
     (r : type-Heyting-Field R) →
-    mul-Vector-Space r zero-Vector-Space ＝ zero-Vector-Space
+    is-zero-Vector-Space (mul-Vector-Space r zero-Vector-Space)
   right-zero-law-mul-Vector-Space =
     right-zero-law-mul-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field R)
@@ -187,6 +195,45 @@ vector-space-heyting-field-Heyting-Field :
 vector-space-heyting-field-Heyting-Field R =
   left-module-commutative-ring-Commutative-Ring
     ( commutative-ring-Heyting-Field R)
+```
+
+### Given a vector space over `G`, a field homomorphism `F → G` induces a vector space over `F`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (F : Heyting-Field l1)
+  (G : Heyting-Field l2)
+  (h : hom-Heyting-Field F G)
+  (V : Vector-Space l3 G)
+  where
+
+  vector-space-hom-Vector-Space : Vector-Space l3 F
+  vector-space-hom-Vector-Space =
+    left-module-hom-left-module-Commutative-Ring
+      ( commutative-ring-Heyting-Field F)
+      ( commutative-ring-Heyting-Field G)
+      ( h)
+      ( V)
+```
+
+### A field homomorphism `F → G` induces the structure of a vector space over `F` on `G`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (F : Heyting-Field l1)
+  (G : Heyting-Field l2)
+  (h : hom-Heyting-Field F G)
+  where
+
+  vector-space-hom-Heyting-Field : Vector-Space l2 F
+  vector-space-hom-Heyting-Field =
+    vector-space-hom-Vector-Space
+      ( F)
+      ( G)
+      ( h)
+      ( vector-space-heyting-field-Heyting-Field G)
 ```
 
 ## See also

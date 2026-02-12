@@ -395,5 +395,5 @@ module _
 
 ## See also
 
-- [Equivalences of arrows](foundation.equivalences-arrows.md) for the same
+- [Equivalences of arrows](foundation-core.equivalences-arrows.md) for the same
   concept under a different name.

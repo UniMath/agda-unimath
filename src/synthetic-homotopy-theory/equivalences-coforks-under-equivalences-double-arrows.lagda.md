@@ -30,9 +30,7 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [coforks](synthetic-homotopy-theory.coforks.md)
 `c : B → X` and `c' : V → Y`, respectively, and an
 [equivalence of double arrows](foundation.equivalences-double-arrows.md)
-`e : (f, g) ≃ (h, k)`.
-
-Then an
+`e : (f, g) ≃ (h, k)`. Then an
 {{#concept "equivalence of coforks" Disambiguation="under an equivalence of double arrows" Agda=equiv-cofork-equiv-double-arrow}}
 under `e` is a triple `(m, H, K)`, with `m : X ≃ Y` an
 [equivalence](foundation-core.equivalences.md) of vertices of the coforks, `H` a

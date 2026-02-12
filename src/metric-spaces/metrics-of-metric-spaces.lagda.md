@@ -21,12 +21,12 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.located-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -36,6 +36,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -45,9 +46,9 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-A function `ρ` from two elements of a
-[metric space](metric-spaces.metric-spaces.md) `M` to the
-[nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is a
+A binary function `ρ` on a [metric space](metric-spaces.metric-spaces.md) `M`
+into the [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is
+a
 {{#concept "metric" disambiguation="of a metric space" WD="metric function" WDID=Q865746 Agda=is-metric-of-Metric-Space}}
 of `M` if for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
@@ -113,7 +114,7 @@ module _
     is-reflexive-is-metric-of-Metric-Space :
       is-reflexive-distance-function (set-Metric-Space M) ρ
     is-reflexive-is-metric-of-Metric-Space x =
-      sim-zero-leq-positive-rational-ℝ⁰⁺
+      is-zero-leq-positive-rational-ℝ⁰⁺
         ( ρ x x)
         ( λ ε →
           forward-implication
@@ -184,7 +185,7 @@ module _
               ( nonnegative-real-ℚ⁺ ε)
               ( zero-ℝ⁰⁺)
               ( ρ x y)
-              ( ρxy~0)
+              ( symmetric-sim-ℝ ρxy~0)
               ( leq-zero-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))))
 
   is-metric-is-metric-of-Metric-Space :
@@ -270,7 +271,7 @@ module _
         ( isometric-equiv-metric-is-metric-of-Metric-Space M ρ is-metric-M-ρ)
 ```
 
-### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a function `f : M → N` is an isometry if and only if `dM x y` is similar to `dN (f x) (f y)` for all `x, y : M`
+### If `M` and `N` are metric spaces with metrics `dM` and `dN`, a map `f : M → N` is an isometry if and only if `dM x y` is similar to `dN (f x) (f y)` for all `x, y : M`
 
 ```agda
 module _
@@ -281,7 +282,7 @@ module _
   (dN : distance-function l6 (set-Metric-Space N))
   (is-metric-dM : is-metric-of-Metric-Space M dM)
   (is-metric-dN : is-metric-of-Metric-Space N dN)
-  (f : type-function-Metric-Space M N)
+  (f : map-Metric-Space M N)
   where
 
   abstract
@@ -335,14 +336,14 @@ module _
   (dN : distance-function l6 (set-Metric-Space N))
   (is-metric-dM : is-metric-of-Metric-Space M dM)
   (is-metric-dN : is-metric-of-Metric-Space N dN)
-  (f : type-function-Metric-Space M N)
+  (f : map-Metric-Space M N)
   where
 
   abstract
-    is-short-function-leq-metric-Metric-Space :
+    is-short-map-leq-metric-Metric-Space :
       ((x y : type-Metric-Space M) → leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y)) →
-      is-short-function-Metric-Space M N f
-    is-short-function-leq-metric-Metric-Space H d x y Ndxy =
+      is-short-map-Metric-Space M N f
+    is-short-map-leq-metric-Metric-Space H d x y Ndxy =
       backward-implication
         ( is-metric-dN d (f x) (f y))
         ( transitive-leq-ℝ
@@ -352,11 +353,11 @@ module _
           ( forward-implication (is-metric-dM d x y) Ndxy)
           ( H x y))
 
-    leq-metric-is-short-function-Metric-Space :
-      is-short-function-Metric-Space M N f →
+    leq-metric-is-short-map-Metric-Space :
+      is-short-map-Metric-Space M N f →
       (x y : type-Metric-Space M) →
       leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y)
-    leq-metric-is-short-function-Metric-Space H x y =
+    leq-metric-is-short-map-Metric-Space H x y =
       leq-leq-positive-rational-ℝ⁰⁺
         ( dN (f x) (f y))
         ( dM x y)
@@ -365,12 +366,12 @@ module _
             ( is-metric-dN d (f x) (f y))
             ( H d x y (backward-implication (is-metric-dM d x y) dMxy≤d)))
 
-  is-short-function-iff-leq-metric-Metric-Space :
-    is-short-function-Metric-Space M N f ↔
+  is-short-map-iff-leq-metric-Metric-Space :
+    is-short-map-Metric-Space M N f ↔
     ((x y : type-Metric-Space M) → leq-ℝ⁰⁺ (dN (f x) (f y)) (dM x y))
-  is-short-function-iff-leq-metric-Metric-Space =
-    ( leq-metric-is-short-function-Metric-Space ,
-      is-short-function-leq-metric-Metric-Space)
+  is-short-map-iff-leq-metric-Metric-Space =
+    ( leq-metric-is-short-map-Metric-Space ,
+      is-short-map-leq-metric-Metric-Space)
 ```
 
 ## See also
