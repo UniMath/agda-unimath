@@ -488,21 +488,22 @@ module _
         ( ap
           ( ap pr1)
           ( inv-inv
-            ( eq-pair left-square-ev-fork-equiv right-square-ev-fork-equiv)) ∙
-          ap-pr1-eq-pair
-            ( left-square-ev-fork-equiv)
-            ( right-square-ev-fork-equiv))
+            ( eq-pair left-square-ev-fork-equiv right-square-ev-fork-equiv))) ∙
+        ( ap-pr1-eq-pair
+          ( left-square-ev-fork-equiv)
+          ( right-square-ev-fork-equiv))
 
       ap-pr2-path-left-cospan-square-ev-fork-equiv :
         ap pr2 path-left-cospan-square-ev-fork-equiv ＝
         right-square-ev-fork-equiv
       ap-pr2-path-left-cospan-square-ev-fork-equiv =
-        ( ap (ap pr2)
+        ( ap
+          ( ap pr2)
           ( inv-inv
-            ( eq-pair left-square-ev-fork-equiv right-square-ev-fork-equiv)) ∙
-          ap-pr2-eq-pair
-            left-square-ev-fork-equiv
-            right-square-ev-fork-equiv)
+            ( eq-pair left-square-ev-fork-equiv right-square-ev-fork-equiv))) ∙
+        ( ap-pr2-eq-pair
+          ( left-square-ev-fork-equiv)
+          ( right-square-ev-fork-equiv))
 
       ap-pr1-path-left-pasting-square-ev-fork-equiv :
         ap pr1 path-left-pasting-square-ev-fork-equiv ＝
@@ -639,7 +640,7 @@ module _
         ( ap-binary (_∙_)
           ( inv ap-pr2-path-left-pasting-square-ev-fork-equiv)
           ( inv
-            (ap-pr2-ap-pair
+            ( ap-pr2-ap-pair
               ( coh-fork a' c'
                 ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x))))) ∙
         ( inv-ap-concat

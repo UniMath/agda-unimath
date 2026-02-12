@@ -22,13 +22,17 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **equalizer** of a [double arrow](foundation.double-arrows.md)
-`f, g : A → B` is a [fork](foundation.forks.md) that satisfies the
-[universal property of equalizers](foundation.universal-property-equalizers.md).
+The
+{{#concept "standard equalizer" Disambiguation="of a double arrow of types" WDID=Q1224487 WD"equaliser" Agda=standard-equalizer}}
+of a [double arrow](foundation.double-arrows.md) `f, g : A → B` is the type of
+pairs of elements `x, y : A` such that `f x ＝ g y`. It comes equipped with a
+canonical [fork](foundation.forks.md) satisfying the
+[universal property of equalizers](foundation.universal-property-equalizers.md)
+between `f` and `g`.
 
 ## Properties
 
-### All double arrows admit a equalizer
+### All double arrows admit an equalizer
 
 ```agda
 module _
@@ -55,11 +59,9 @@ module _
       ( cone-diagonal-fork a fork-standard-equalizer)
   is-pullback-cone-standard-equalizer =
     tr
-      ( λ c →
-        is-pullback
-          ( vertical-map-cospan-cone-fork a)
-          ( horizontal-map-cospan-cone-fork a)
-          ( c))
+      ( is-pullback
+        ( vertical-map-cospan-cone-fork a)
+        ( horizontal-map-cospan-cone-fork a))
       ( inv
         ( is-retraction-cone-diagonal-fork a
           ( cone-standard-pullback

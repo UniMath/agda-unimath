@@ -154,14 +154,11 @@ module _
       ( up-equalizer Y)
 ```
 
-### In an equivalence of forks, one fork is a equalizer if and only if the other is
-
-In other words, given two forks connected vertically with equivalences, as in
-the following diagram:
+### In an equivalence of forks, one fork is an equalizer if and only if the other is
 
 Given an
 [equivalence of forks](foundation.equivalences-forks-over-equivalences-double-arrows.md)
-between forks `c` and `c'`
+between `c` and `c'`
 
 ```text
            ≃
@@ -179,7 +176,7 @@ between forks `c` and `c'`
            ≃
 ```
 
-we have that the left fork is a equalizer if and only if the right fork is a
+we have that the left fork is an equalizer if and only if the right fork is a
 equalizer.
 
 ```agda
