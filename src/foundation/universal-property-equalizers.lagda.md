@@ -160,7 +160,7 @@ In other words, given two forks connected vertically with equivalences, as in
 the following diagram:
 
 Given an
-[equivalence of forks](foundation.equivalences-forks-under-equivalences-double-arrows.md)
+[equivalence of forks](foundation.equivalences-forks-over-equivalences-double-arrows.md)
 between forks `c` and `c'`
 
 ```text
