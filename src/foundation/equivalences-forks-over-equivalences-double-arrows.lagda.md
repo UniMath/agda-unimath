@@ -29,9 +29,7 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [forks](foundation.forks.md) `c : X → A` and
 `c' : Y → U`, respectively, and an
 [equivalence of double arrows](foundation.equivalences-double-arrows.md)
-`e : (f, g) ≃ (h, k)`.
-
-Then an
+`e : (f, g) ≃ (h, k)`. Then an
 {{#concept "equivalence of forks" Disambiguation="over an equivalence of double arrows" Agda=equiv-fork-equiv-double-arrow}}
 over `e` is a triple `(m, H, K)`, with `m : X ≃ Y` an
 [equivalence](foundation-core.equivalences.md) of vertices of the forks, `H` a

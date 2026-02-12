@@ -27,9 +27,7 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [coforks](synthetic-homotopy-theory.coforks.md)
 `c : B → X` and `c' : V → Y`, respectively, and a
 [morphism of double arrows](foundation.morphisms-double-arrows.md)
-`e : (f, g) → (h, k)`.
-
-Then a
+`e : (f, g) → (h, k)`. Then a
 {{#concept "morphism of coforks" Disambiguation="under a morphism of double arrows" Agda=hom-cofork-hom-double-arrow}}
 under `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
 coforks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the

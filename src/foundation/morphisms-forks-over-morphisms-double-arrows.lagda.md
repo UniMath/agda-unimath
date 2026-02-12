@@ -26,9 +26,7 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [forks](foundation.forks.md) `c : X → A` and
 `c' : Y → U`, respectively, and a
 [morphism of double arrows](foundation.morphisms-double-arrows.md)
-`e : (f, g) → (h, k)`.
-
-Then a
+`e : (f, g) → (h, k)`. Then a
 {{#concept "morphism of forks" Disambiguation="over a morphism of double arrows" Agda=hom-fork-hom-double-arrow}}
 over `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
 forks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the top
