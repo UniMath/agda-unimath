@@ -32,12 +32,18 @@ open import metric-spaces.short-maps-pseudometric-spaces
 
 ## Idea
 
-[Isometries](metric-spaces.isometries-metric-spaces.md) between
-[metric spaces](metric-spaces.metric-spaces.md) act on
-[Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
-and induce an [isometry](metric-spaces.isometries-pseudometric-spaces.md)
-between the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md).
+The
+{{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on isometries between metric spaces" Agda=isometry-cauchy-pseudocompletion-Metric-Space}}
+of
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md)
+on [isometries](metric-spaces.isometries-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md) is the
+[action](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
+on the underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
+
+It maps isometries between metric spaces to
+[isometries](metric-spaces.isometries-pseudometric-spaces.md) between their
+Cauchy pseudocompletions.
 
 ## Definitions
 

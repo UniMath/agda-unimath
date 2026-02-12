@@ -15,11 +15,13 @@ open import analysis.convergent-series-metric-abelian-groups public
 open import analysis.convergent-series-real-numbers public
 open import analysis.differentiability-constant-real-maps-on-proper-closed-intervals-real-numbers public
 open import analysis.differentiability-identity-map-on-proper-closed-intervals-real-numbers public
+open import analysis.differentiability-reciprocal-function-on-positive-proper-closed-intervals-real-numbers public
 open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers public
 open import analysis.intermediate-value-theorem public
 open import analysis.limits-of-sequences-metric-abelian-groups public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
+open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers public
 open import analysis.nonnegative-series-real-numbers public
 open import analysis.ratio-test-series-real-numbers public
 open import analysis.scalar-multiplication-differentiable-real-maps-on-proper-closed-intervals-real-numbers public
