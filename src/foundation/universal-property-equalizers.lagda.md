@@ -9,24 +9,23 @@ module foundation.universal-property-equalizers where
 ```agda
 open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-maps
-open import foundation.function-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
 open import foundation.equivalences
 open import foundation.equivalences-double-arrows
+open import foundation.equivalences-forks-over-equivalences-double-arrows
 open import foundation.fibers-of-maps
+open import foundation.forks
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.universe-levels
-
-open import foundation.cones-over-cospan-diagrams
-open import foundation.forks
-open import foundation.equivalences-forks-over-equivalences-double-arrows
 open import foundation.universal-property-pullbacks
+open import foundation.universe-levels
 ```
 
 </details>

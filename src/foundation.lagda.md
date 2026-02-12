@@ -174,6 +174,7 @@ open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
 open import foundation.equality-of-equality-cartesian-product-types public
 open import foundation.equality-truncation-levels public
+open import foundation.equalizers public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
@@ -516,6 +517,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-function-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
+open import foundation.universal-property-equalizers public
 open import foundation.universal-property-equivalences public
 open import foundation.universal-property-family-of-fibers-of-maps public
 open import foundation.universal-property-fiber-products public

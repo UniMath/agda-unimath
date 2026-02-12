@@ -7,20 +7,19 @@ module foundation.equivalences-forks-over-equivalences-double-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
-open import foundation.action-on-identifications-functions
-open import foundation.action-on-identifications-ternary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.double-arrows
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-of-equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.action-on-identifications-binary-functions
 open import foundation.equivalences-arrows
 open import foundation.equivalences-double-arrows
 open import foundation.forks
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -280,7 +279,8 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {a : double-arrow l1 l2} {X : UU l3} (c : fork a X)
   {a' : double-arrow l4 l5} {Y : UU l6} (c' : fork a' Y)
-  (e : equiv-double-arrow a a') (e' : equiv-fork-equiv-double-arrow a a' c c' e)
+  (e : equiv-double-arrow a a')
+  (e' : equiv-fork-equiv-double-arrow a a' c c' e)
   where
 
   coherence-cube-cone-fork-equiv-fork-equiv-double-arrow :
@@ -319,7 +319,8 @@ module _
   coherence-cube-cone-fork-equiv-fork-equiv-double-arrow x =
     map-inv-equiv
       ( equiv-pair-eq² path-left-ev-fork-equiv path-right-ev-fork-equiv)
-      ( pr1-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow , pr2-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow)
+      ( pr1-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow ,
+        pr2-coherence-cube-cone-fork-equiv-fork-equiv-double-arrow)
     where
       left-square-ev-fork-equiv :
         codomain-map-equiv-double-arrow a a' e
@@ -338,24 +339,6 @@ module _
       right-square-ev-fork-equiv =
         right-square-equiv-double-arrow a a' e (map-fork a c x)
 
-      pasting-left-square-ev-fork-equiv :
-        left-square-ev-fork-equiv ∙
-        ap
-          ( left-map-double-arrow a')
-          ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x) ＝
-        pasting-vertical-coherence-square-maps
-          ( map-equiv-fork-equiv-double-arrow a a' c c' e e')
-          ( map-fork a c)
-          ( map-fork a' c')
-          ( domain-map-equiv-double-arrow a a' e)
-          ( left-map-double-arrow a)
-          ( left-map-double-arrow a')
-          ( codomain-map-equiv-double-arrow a a' e)
-          ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
-          ( left-square-equiv-double-arrow a a' e)
-          x
-      pasting-left-square-ev-fork-equiv = refl
-
       path-source-cone-square-ev-fork-equiv :
         map-equiv
           ( equiv-product
@@ -367,8 +350,7 @@ module _
           ( equiv-product
             ( codomain-equiv-equiv-double-arrow a a' e)
             ( codomain-equiv-equiv-double-arrow a a' e))
-          ( horizontal-map-cospan-cone-fork a
-            ( vertical-map-cone-fork a c x))
+          ( horizontal-map-cospan-cone-fork a (vertical-map-cone-fork a c x))
       path-source-cone-square-ev-fork-equiv =
         ap
           ( map-equiv
@@ -379,12 +361,11 @@ module _
 
       path-left-cospan-square-ev-fork-equiv :
         map-equiv
-          ( cospanning-equiv-equiv-cospan-diagram-fork-equiv-double-arrow a a' e)
-          ( horizontal-map-cospan-cone-fork a
-            ( map-fork a c x)) ＝
+          ( cospanning-equiv-equiv-cospan-diagram-fork-equiv-double-arrow a a'
+            ( e))
+          ( horizontal-map-cospan-cone-fork a (map-fork a c x)) ＝
         horizontal-map-cospan-cone-fork a'
-          ( domain-map-equiv-double-arrow a a' e
-            ( map-fork a c x))
+          ( domain-map-equiv-double-arrow a a' e (map-fork a c x))
       path-left-cospan-square-ev-fork-equiv =
         inv-htpy
           ( left-square-equiv-cospan-diagram-fork-equiv-double-arrow a a' e)
@@ -423,7 +404,7 @@ module _
             ( codomain-map-equiv-double-arrow a a' e)
               ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e')
               ( left-square-equiv-double-arrow a a' e)
-              x)
+              ( x))
 
       path-target-cone-square-ev-fork-equiv :
         vertical-map-cospan-cone-fork a'
@@ -503,7 +484,8 @@ module _
           ( ap-pr2-ap-pair (coh-fork a c x)))
 
       ap-pr1-path-left-cospan-square-ev-fork-equiv :
-        ap pr1 path-left-cospan-square-ev-fork-equiv ＝ left-square-ev-fork-equiv
+        ap pr1 path-left-cospan-square-ev-fork-equiv ＝
+        left-square-ev-fork-equiv
       ap-pr1-path-left-cospan-square-ev-fork-equiv =
         ( ap
           ( ap pr1)
@@ -514,7 +496,8 @@ module _
             ( right-square-ev-fork-equiv))
 
       ap-pr2-path-left-cospan-square-ev-fork-equiv :
-        ap pr2 path-left-cospan-square-ev-fork-equiv ＝ right-square-ev-fork-equiv
+        ap pr2 path-left-cospan-square-ev-fork-equiv ＝
+        right-square-ev-fork-equiv
       ap-pr2-path-left-cospan-square-ev-fork-equiv =
         ( ap (ap pr2)
           ( inv-inv
@@ -604,7 +587,6 @@ module _
             ( pr1)
             ( horizontal-map-cospan-cone-fork a')
             ( coh-map-fork-equiv-fork-equiv-double-arrow a a' c c' e e' x))) ∙
-        ( inv pasting-left-square-ev-fork-equiv) ∙
         ( inv ap-pr1-path-left-pasting-square-ev-fork-equiv) ∙
         ( inv right-unit) ∙
         ( ap
@@ -657,8 +639,7 @@ module _
             ( coh-fork a' c'
               ( map-equiv-fork-equiv-double-arrow a a' c c' e e' x)))) ∙
         ( ap-binary (_∙_)
-          ( ( inv pasting-left-square-ev-fork-equiv) ∙
-            ( inv ap-pr2-path-left-pasting-square-ev-fork-equiv))
+          ( inv ap-pr2-path-left-pasting-square-ev-fork-equiv)
           ( inv
             (ap-pr2-ap-pair
               ( coh-fork a' c'

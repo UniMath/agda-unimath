@@ -8,15 +8,14 @@ module foundation.equalizers where
 
 ```agda
 open import foundation.double-arrows
-open import foundation.identity-types
-open import foundation.transport-along-identifications
-open import foundation.universe-levels
-
 open import foundation.forks
+open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.standard-pullbacks
+open import foundation.transport-along-identifications
 open import foundation.universal-property-equalizers
 open import foundation.universal-property-pullbacks
+open import foundation.universe-levels
 ```
 
 </details>
