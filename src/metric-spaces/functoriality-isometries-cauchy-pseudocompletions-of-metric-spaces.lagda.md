@@ -40,7 +40,7 @@ on [isometries](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is the
 [functorial action](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 between their underlying
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md).
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) and isometries.
 
 It maps isometries between metric spaces to
 [isometries](metric-spaces.isometries-pseudometric-spaces.md) between their
