@@ -805,21 +805,11 @@ module _
         pr1-pr2-D : Σ D (fiber' hD) → D'
         pr1-pr2-D t = pr1 (pr2 t)
 
-        abstract
-          ap-pr1-compute-tr-self-fiber'-compute-tr-fiber'-B :
-            {y : B} (v : fiber' hB y) →
-            ap pr1 (compute-tr-self-fiber' hB v) ＝
-            ap pr1 (compute-tr-fiber' hB (pr2 v) v)
-          ap-pr1-compute-tr-self-fiber'-compute-tr-fiber'-B (._ , refl) = refl
-
-        abstract
-          ap-pr1-inv-compute-tr-self-fiber'-htpy-B :
-            {y : B} (v : fiber' hB y) →
-            ap pr1 (inv-compute-tr-self-fiber' hB v) ＝
-            inv (ap pr1 (compute-tr-fiber' hB (pr2 v) v))
-          ap-pr1-inv-compute-tr-self-fiber'-htpy-B v =
-            ( ap-inv pr1 (compute-tr-self-fiber' hB v)) ∙
-            ( ap inv (ap-pr1-compute-tr-self-fiber'-compute-tr-fiber'-B v))
+        ap-pr1-inv-compute-tr-self-fiber'-htpy-B :
+          {y : B} (v : fiber' hB y) →
+          ap pr1 (inv-compute-tr-self-fiber' hB v) ＝
+          inv (ap pr1 (compute-tr-fiber' hB (pr2 v) v))
+        ap-pr1-inv-compute-tr-self-fiber'-htpy-B (._ , refl) = refl
 
         abstract
           ap-pr1-pr2-eq-pair-Σ-B :
@@ -995,27 +985,17 @@ module _
           π₁ r = pr1 r
 
           abstract
-            ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' :
-              {y : C} (u : fiber' hC y) →
-              ap pr1 (compute-tr-self-fiber' hC u) ＝
-              ap pr1 (compute-tr-fiber' hC (pr2 u) u)
-            ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' (._ , refl) = refl
-
-          abstract
             pr1-tr-fiber'-htpy :
               (t : fiber' hC (g (hA x))) →
               pr1 (tr (fiber' hC) (back x) t) ＝ pr1 t
             pr1-tr-fiber'-htpy t =
               inv (ap pr1 (compute-tr-fiber' hC (back x) t))
 
-          abstract
-            ap-pr1-inv-compute-tr-self-fiber'-htpy :
-              {y : C} (u : fiber' hC y) →
-              ap pr1 (inv-compute-tr-self-fiber' hC u) ＝
-              inv (ap pr1 (compute-tr-fiber' hC (pr2 u) u))
-            ap-pr1-inv-compute-tr-self-fiber'-htpy u =
-              ( ap-inv pr1 (compute-tr-self-fiber' hC u)) ∙
-              ( ap inv (ap-pr1-compute-tr-self-fiber'-compute-tr-fiber' u))
+          ap-pr1-inv-compute-tr-self-fiber'-htpy :
+            {y : C} (u : fiber' hC y) →
+            ap pr1 (inv-compute-tr-self-fiber' hC u) ＝
+            inv (ap pr1 (compute-tr-fiber' hC (pr2 u) u))
+          ap-pr1-inv-compute-tr-self-fiber'-htpy (._ , refl) = refl
 
           abstract
             ap-pr1-pr2-eq-pair-Σ :
