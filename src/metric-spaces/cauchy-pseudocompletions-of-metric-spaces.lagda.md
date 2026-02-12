@@ -167,7 +167,7 @@ module _
       ( pseudometric-Metric-Space M)
 ```
 
-### The isometry from a metric space to its Cauchy pseudocompletion
+### The unit isometry from a metric space to its Cauchy pseudocompletion
 
 ```agda
 module _

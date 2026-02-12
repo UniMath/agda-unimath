@@ -56,14 +56,14 @@ module _
   {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
   where
 
-  retraction-short-map-unit-cauchy-precompletion-Complete-Metric-Space :
+  retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space :
     retraction-short-map-Pseudometric-Space
       ( pseudometric-space-Complete-Metric-Space A)
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space A))
       ( short-map-unit-cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space A))
-  retraction-short-map-unit-cauchy-precompletion-Complete-Metric-Space =
+  retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space =
     exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-space-Complete-Metric-Space A)
       ( metric-space-Complete-Metric-Space A)
@@ -76,7 +76,7 @@ module _
         ( metric-space-Complete-Metric-Space A))
       ( pseudometric-space-Complete-Metric-Space A)
   short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
-    pr1 retraction-short-map-unit-cauchy-precompletion-Complete-Metric-Space
+    pr1 retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space
 
   map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     map-Pseudometric-Space
@@ -237,12 +237,12 @@ module _
         ( short-map-unit-cauchy-pseudocompletion-Metric-Space
           ( metric-space-Complete-Metric-Space M)))
   is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space =
-    ( retraction-short-map-unit-cauchy-precompletion-Complete-Metric-Space M ,
+    ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space M ,
       all-eq-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-space-Complete-Metric-Space M)
         ( metric-space-Complete-Metric-Space M)
         ( id-short-map-Metric-Space
           ( metric-space-Complete-Metric-Space M))
-        ( retraction-short-map-unit-cauchy-precompletion-Complete-Metric-Space
+        ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space
           ( M)))
 ```
