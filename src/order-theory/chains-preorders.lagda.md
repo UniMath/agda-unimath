@@ -37,7 +37,7 @@ module _
 
   is-chain-prop-Subpreorder : Prop (l1 ⊔ l2 ⊔ l3)
   is-chain-prop-Subpreorder =
-    is-total-Preorder-Prop (preorder-Subpreorder X S)
+    is-total-prop-Preorder (preorder-Subpreorder X S)
 
   is-chain-Subpreorder : UU (l1 ⊔ l2 ⊔ l3)
   is-chain-Subpreorder = type-Prop is-chain-prop-Subpreorder
