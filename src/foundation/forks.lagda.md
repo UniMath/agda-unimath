@@ -61,7 +61,8 @@ which looks like a fork.
 
 Forks are an analog of
 [cones over cospan diagrams](foundation.cones-over-cospan-diagrams.md) for
-double arrows. The universal fork of a double arrow is their equalizer.
+double arrows. The universal fork of a double arrow is their
+[equalizer](foundation.equalizers.md).
 
 ## Definitions
 

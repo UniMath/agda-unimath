@@ -13,11 +13,13 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.subtype-identity-principle
+open import foundation.commuting-cubes-of-maps
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.homotopies
 open import foundation-core.function-types
-open import foundation-core.pullbacks
+open import foundation.pullbacks
 ```
 
 </details>
@@ -193,6 +195,68 @@ module _
             ( h)
             ( d)
             ( up-pb-d)))
+```
+
+### In a commuting cube where the vertical maps are equivalences, the bottom square is a pullback if and only if the top square is a pullback
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' ≃ A) (hB : B' ≃ B) (hC : C' ≃ C) (hD : D' ≃ D)
+  (top : h' ∘ f' ~ k' ∘ g')
+  (back-left : f ∘ map-equiv hA ~ map-equiv hB ∘ f')
+  (back-right : g ∘ map-equiv hA ~ map-equiv hC ∘ g')
+  (front-left : h ∘ map-equiv hB ~ map-equiv hD ∘ h')
+  (front-right : k ∘ map-equiv hC ~ map-equiv hD ∘ k')
+  (bottom : h ∘ f ~ k ∘ g)
+  (c :
+    coherence-cube-maps
+      f g h k f' g' h' k'
+      ( map-equiv hA) (map-equiv hB) (map-equiv hC) (map-equiv hD)
+      top back-left back-right front-left front-right bottom)
+  where abstract
+
+  universal-property-pullback-bottom-universal-property-pullback-top-cube-equiv :
+    universal-property-pullback h' k' (f' , g' , top) →
+    universal-property-pullback h k (f , g , bottom)
+  universal-property-pullback-bottom-universal-property-pullback-top-cube-equiv
+    up-top =
+    universal-property-pullback-is-pullback h k (f , g , bottom)
+      ( is-pullback-bottom-is-pullback-top-cube-equiv
+        f g h k f' g' h' k' hA hB hC hD
+        ( top)
+        ( back-left)
+        ( back-right)
+        ( front-left)
+        ( front-right)
+        ( bottom)
+        ( c)
+        ( is-pullback-universal-property-pullback  h' k'
+          ( f' , g' , top)
+          ( up-top)))
+
+  universal-property-pullback-top-universal-property-pullback-bottom-cube-equiv :
+    universal-property-pullback h k (f , g , bottom) →
+    universal-property-pullback h' k' (f' , g' , top)
+  universal-property-pullback-top-universal-property-pullback-bottom-cube-equiv
+    up-bottom =
+    universal-property-pullback-is-pullback h' k' (f' , g' , top)
+      ( is-pullback-top-is-pullback-bottom-cube-equiv
+        f g h k f' g' h' k' hA hB hC hD
+        ( top)
+        ( back-left)
+        ( back-right)
+        ( front-left)
+        ( front-right)
+        ( bottom)
+        ( c)
+        ( is-pullback-universal-property-pullback h k
+          ( f , g , bottom)
+          ( up-bottom)))
 ```
 
 ## Table of files about pullbacks

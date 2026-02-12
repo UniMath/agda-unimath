@@ -353,6 +353,72 @@ module _
             is-equiv-hC is-equiv-hA)))
 ```
 
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' ≃ A) (hB : B' ≃ B) (hC : C' ≃ C) (hD : D' ≃ D)
+  (top : h' ∘ f' ~ k' ∘ g')
+  (back-left : f ∘ map-equiv hA ~ map-equiv hB ∘ f')
+  (back-right : g ∘ map-equiv hA ~ map-equiv hC ∘ g')
+  (front-left : h ∘ map-equiv hB ~ map-equiv hD ∘ h')
+  (front-right : k ∘ map-equiv hC ~ map-equiv hD ∘ k')
+  (bottom : h ∘ f ~ k ∘ g)
+  (c :
+    coherence-cube-maps
+      f g h k f' g' h' k'
+      ( map-equiv hA) (map-equiv hB) (map-equiv hC) (map-equiv hD)
+      top back-left back-right front-left front-right bottom)
+  where
+
+  is-pullback-bottom-is-pullback-top-cube-equiv :
+    is-pullback h' k' (f' , g' , top) →
+    is-pullback h k (f , g , bottom)
+  is-pullback-bottom-is-pullback-top-cube-equiv =
+    is-pullback-bottom-is-pullback-top-cube-is-equiv
+      f g h k f' g' h' k'
+      ( map-equiv hA)
+      ( map-equiv hB)
+      ( map-equiv hC)
+      ( map-equiv hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom)
+      ( c)
+      ( is-equiv-map-equiv hA)
+      ( is-equiv-map-equiv hB)
+      ( is-equiv-map-equiv hC)
+      ( is-equiv-map-equiv hD)
+
+  is-pullback-top-is-pullback-bottom-cube-equiv :
+    is-pullback h k (f , g , bottom) →
+    is-pullback h' k' (f' , g' , top)
+  is-pullback-top-is-pullback-bottom-cube-equiv =
+    is-pullback-top-is-pullback-bottom-cube-is-equiv
+      f g h k f' g' h' k'
+      ( map-equiv hA)
+      ( map-equiv hB)
+      ( map-equiv hC)
+      ( map-equiv hD)
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom)
+      ( c)
+      ( is-equiv-map-equiv hA)
+      ( is-equiv-map-equiv hB)
+      ( is-equiv-map-equiv hC)
+      ( is-equiv-map-equiv hD)
+```
+
 ### In a commuting cube where the maps from back-right to front-left are equivalences, the back-right square is a pullback if and only if the front-left square is a pullback
 
 ```agda
