@@ -105,7 +105,7 @@ module _
       preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### The action of short maps on Cauchy approximations preserves homotopies
+### The action on short maps of Cauchy pseudocompletions preserves homotopies
 
 ```agda
 module _
@@ -126,7 +126,7 @@ module _
       ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
 ```
 
-### The action of short maps on Cauchy approximations is natural w.r.t. the unit map
+### The action on short maps of Cauchy pseudocompletions is natural w.r.t. the unit map
 
 ```agda
 module _
