@@ -14,6 +14,7 @@ open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.forcing-boolean-predicates-natural-numbers
 open import elementary-number-theory.geometric-sequences-rational-numbers
 open import elementary-number-theory.inequalities-sums-of-finite-sequences-of-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -58,7 +59,7 @@ open import real-numbers.inequalities-addition-macneille-real-numbers
 open import real-numbers.inequality-macneille-real-numbers
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers
 open import real-numbers.least-upper-bounds-postfixpoints-endomaps-macneille-real-numbers
-open import real-numbers.least-upper-bounds-translation-addition-macneille-real-numbers
+open import real-numbers.least-upper-bounds-rational-translation-addition-macneille-real-numbers
 open import real-numbers.located-macneille-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.not-in-image-greatest-postfixpoints-macneille-real-numbers
@@ -102,8 +103,8 @@ is-admissible-levy-base-index-sequence-macneille-ℝ f x (k , χ , _) =
 indexing-type-levy-family-sequence-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) (x : macneille-ℝ l) → UU l
 indexing-type-levy-family-sequence-macneille-ℝ f x =
-  Σ levy-base-index-sequence-macneille-ℝ
-    (is-admissible-levy-base-index-sequence-macneille-ℝ f x)
+  Σ ( levy-base-index-sequence-macneille-ℝ)
+    ( is-admissible-levy-base-index-sequence-macneille-ℝ f x)
 
 weight-levy-sequence-macneille-ℝ : ℕ → ℚ
 weight-levy-sequence-macneille-ℝ n =
@@ -111,9 +112,7 @@ weight-levy-sequence-macneille-ℝ n =
 
 selected-weight-levy-sequence-macneille-ℝ : ℕ → bool → ℚ
 selected-weight-levy-sequence-macneille-ℝ n =
-  rec-bool
-    ( weight-levy-sequence-macneille-ℝ n)
-    ( zero-ℚ)
+  rec-bool (weight-levy-sequence-macneille-ℝ n) zero-ℚ
 
 sum-levy-base-index-sequence-macneille-ℝ :
   levy-base-index-sequence-macneille-ℝ → ℚ
@@ -135,18 +134,13 @@ is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) (x : macneille-ℝ l) →
   is-inhabited (indexing-type-levy-family-sequence-macneille-ℝ f x)
 is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ _ _ =
-  unit-trunc-Prop
-    ( ( zero-ℕ , ( λ _ → false) , λ _ _ → refl) ,
-      λ _ ())
+  unit-trunc-Prop ((zero-ℕ , (λ _ → false) , (λ _ _ → refl)) , (λ _ ()))
 
 abstract
   leq-zero-weight-levy-sequence-macneille-ℝ :
-    (n : ℕ) →
-    leq-ℚ zero-ℚ (weight-levy-sequence-macneille-ℝ n)
+    (n : ℕ) → leq-ℚ zero-ℚ (weight-levy-sequence-macneille-ℝ n)
   leq-zero-weight-levy-sequence-macneille-ℝ n =
-    leq-le-ℚ
-      ( le-zero-is-positive-ℚ
-        ( is-positive-power-ℚ⁺ n one-half-ℚ⁺))
+    leq-le-ℚ (le-zero-is-positive-ℚ (is-positive-power-ℚ⁺ n one-half-ℚ⁺))
 
   leq-selected-weight-levy-sequence-macneille-ℝ :
     (n : ℕ) (b : bool) →
@@ -164,9 +158,7 @@ abstract
       ( sum-levy-base-index-sequence-macneille-ℝ S)
       ( sum-fin-sequence-ℚ
         ( pr1 S)
-        ( λ i →
-          weight-levy-sequence-macneille-ℝ
-            ( nat-Fin (pr1 S) i)))
+        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin (pr1 S) i)))
   leq-sum-levy-base-index-map-ℕ-sum-all-weights-macneille-ℝ (k , χ , _) =
     preserves-leq-sum-fin-sequence-ℚ
       ( k)
@@ -184,9 +176,8 @@ abstract
   eq-sum-all-weights-sum-standard-geometric-one-half-ℚ :
     (k : ℕ) →
     sum-fin-sequence-ℚ
-      k
-      ( λ i →
-        weight-levy-sequence-macneille-ℝ (nat-Fin k i)) ＝
+      ( k)
+      ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)) ＝
     sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k
   eq-sum-all-weights-sum-standard-geometric-one-half-ℚ k =
     ap
@@ -194,32 +185,27 @@ abstract
       ( eq-htpy
         ( λ i →
           inv
-            ( compute-standard-geometric-sequence-ℚ
-              one-ℚ
-              one-half-ℚ
-              ( nat-Fin k i) ∙
-              left-unit-law-mul-ℚ
-                ( power-ℚ (nat-Fin k i) one-half-ℚ))))
+            ( ( compute-standard-geometric-sequence-ℚ
+                ( one-ℚ)
+                ( one-half-ℚ)
+                ( nat-Fin k i)) ∙
+              ( left-unit-law-mul-ℚ (power-ℚ (nat-Fin k i) one-half-ℚ)))))
 
   leq-two-sum-all-weights-levy-base-index-sequence-macneille-ℝ :
     (k : ℕ) →
     leq-ℚ
       ( sum-fin-sequence-ℚ
-        k
-        ( λ i →
-          weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
+        ( k)
+        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
       ( rational-ℕ 2)
   leq-two-sum-all-weights-levy-base-index-sequence-macneille-ℝ k =
     transitive-leq-ℚ
-      ( sum-fin-sequence-ℚ
-        k
-        ( λ i →
-          weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
+      ( sum-fin-sequence-ℚ k
+        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
       ( sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k)
       ( rational-ℕ 2)
       ( leq-rational-two-sum-standard-geometric-one-half-ℚ k)
-      ( leq-eq-ℚ
-        ( eq-sum-all-weights-sum-standard-geometric-one-half-ℚ k))
+      ( leq-eq-ℚ (eq-sum-all-weights-sum-standard-geometric-one-half-ℚ k))
 
   leq-two-sum-levy-base-index-sequence-macneille-ℝ :
     (S : levy-base-index-sequence-macneille-ℝ) →
@@ -229,10 +215,8 @@ abstract
   leq-two-sum-levy-base-index-sequence-macneille-ℝ (k , χ , χ-outside-k) =
     transitive-leq-ℚ
       ( sum-levy-base-index-sequence-macneille-ℝ (k , χ , χ-outside-k))
-      ( sum-fin-sequence-ℚ
-        k
-        ( λ i →
-          weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
+      ( sum-fin-sequence-ℚ k
+        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
       ( rational-ℕ 2)
       ( leq-two-sum-all-weights-levy-base-index-sequence-macneille-ℝ k)
       ( leq-sum-levy-base-index-map-ℕ-sum-all-weights-macneille-ℝ
@@ -296,28 +280,18 @@ abstract
       ( endomap-levy-sequence-macneille-ℝ f x)
   is-least-upper-bound-family-of-elements-at-level-endomap-levy-sequence-macneille-ℝ
     f x =
-    is-least-upper-bound-family-of-elements-at-level-is-least-upper-bound-family-of-elements-macneille-ℝ
-      ( family-of-elements-levy-sequence-macneille-ℝ f x)
-      ( endomap-levy-sequence-macneille-ℝ f x)
-      ( is-least-upper-bound-family-of-elements-endomap-levy-sequence-macneille-ℝ
-        f x)
+    is-least-upper-bound-family-of-elements-endomap-levy-sequence-macneille-ℝ
+      f x
 
 is-admissible-leq-levy-base-index-sequence-macneille-ℝ :
-  {l : Level} (f : ℕ → macneille-ℝ l) {x y : macneille-ℝ l} →
+  {l : Level} (f : ℕ → macneille-ℝ l) (x y : macneille-ℝ l) →
   leq-macneille-ℝ x y →
   (S : levy-base-index-sequence-macneille-ℝ) →
   is-admissible-levy-base-index-sequence-macneille-ℝ f x S →
   is-admissible-levy-base-index-sequence-macneille-ℝ f y S
 is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-  f {x} {y} x≤y S H m m∈S =
-  λ y≤fm →
-    H m m∈S
-      ( transitive-leq-macneille-ℝ
-        x
-        y
-        ( f m)
-        ( y≤fm)
-        ( x≤y))
+  f x y x≤y S H m m∈S y≤fm =
+  H m m∈S (transitive-leq-macneille-ℝ x y (f m) y≤fm x≤y)
 
 abstract
   is-increasing-endomap-levy-sequence-macneille-ℝ :
@@ -331,100 +305,23 @@ abstract
       ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
       ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
       ( endomap-levy-sequence-macneille-ℝ f y)
-      ( λ where
-        (S , admissible-S-x) →
-          is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-            ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
-            ( family-of-elements-levy-sequence-macneille-ℝ f y)
-            ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-            ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-            ( S ,
-              is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-                f
-                {x = x}
-                {y = y}
-                x≤y
-                S
-                admissible-S-x))
+      ( λ (S , admissible-S-x) →
+        is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
+          ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
+          ( family-of-elements-levy-sequence-macneille-ℝ f y)
+          ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( S ,
+            is-admissible-leq-levy-base-index-sequence-macneille-ℝ f x y x≤y S
+              ( admissible-S-x)))
 ```
 
-## Forcing a single index
+## Extending Levy indices by forcing
+
+The generic forcing operations on boolean predicates over `ℕ` are imported from
+`elementary-number-theory.forcing-boolean-predicates-natural-numbers`.
 
 ```agda
-force-true-from-decidable-equality-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) →
-  is-decidable (m ＝ n) →
-  bool
-force-true-from-decidable-equality-ℕ n χ m (inl _) = true
-force-true-from-decidable-equality-ℕ n χ m (inr _) = χ m
-
-eq-force-true-from-decidable-equality-inl-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) (p : m ＝ n) →
-  force-true-from-decidable-equality-ℕ n χ m (inl p) ＝ true
-eq-force-true-from-decidable-equality-inl-ℕ n χ m p = refl
-
-eq-force-true-from-decidable-equality-inr-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) (p : m ＝ n → empty) →
-  force-true-from-decidable-equality-ℕ n χ m (inr p) ＝ χ m
-eq-force-true-from-decidable-equality-inr-ℕ n χ m p = refl
-
-force-true-ℕ :
-  ℕ → (ℕ → bool) → ℕ → bool
-force-true-ℕ n χ m =
-  force-true-from-decidable-equality-ℕ
-    n
-    χ
-    m
-    ( has-decidable-equality-ℕ m n)
-
-is-true-force-true-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) →
-  is-true (force-true-ℕ n χ m) →
-  (m ＝ n) + is-true (χ m)
-is-true-force-true-ℕ n χ m =
-  ind-coproduct
-    ( λ d →
-      is-true (force-true-from-decidable-equality-ℕ n χ m d) →
-      (m ＝ n) + is-true (χ m))
-    ( λ p _ → inl p)
-    ( λ _ H' → inr H')
-    ( has-decidable-equality-ℕ m n)
-
-is-false-force-true-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) →
-  m ≠ n →
-  is-false (χ m) →
-  is-false (force-true-ℕ n χ m)
-is-false-force-true-ℕ n χ m =
-  ind-coproduct
-    ( λ d →
-      m ≠ n →
-      is-false (χ m) →
-      is-false (force-true-from-decidable-equality-ℕ n χ m d))
-    ( λ p neq' _ → ex-falso (neq' p))
-    ( λ _ _ χm=false' → χm=false')
-    ( has-decidable-equality-ℕ m n)
-
-is-true-force-true-self-ℕ :
-  (n : ℕ) (χ : ℕ → bool) →
-  is-true (force-true-ℕ n χ n)
-is-true-force-true-self-ℕ n χ =
-  ind-coproduct
-    ( λ d → is-true (force-true-from-decidable-equality-ℕ n χ n d))
-    ( λ _ → refl)
-    ( λ n≠n → ex-falso (n≠n refl))
-    ( has-decidable-equality-ℕ n n)
-
-eq-force-true-neq-ℕ :
-  (n : ℕ) (χ : ℕ → bool) (m : ℕ) →
-  m ≠ n → force-true-ℕ n χ m ＝ χ m
-eq-force-true-neq-ℕ n χ m =
-  ind-coproduct
-    ( λ d → m ≠ n → force-true-from-decidable-equality-ℕ n χ m d ＝ χ m)
-    ( λ p m≠n' → ex-falso (m≠n' p))
-    ( λ _ _ → refl)
-    ( has-decidable-equality-ℕ m n)
-
 extend-levy-base-index-force-true-sequence-macneille-ℝ :
   ℕ →
   levy-base-index-sequence-macneille-ℝ →
@@ -432,9 +329,9 @@ extend-levy-base-index-force-true-sequence-macneille-ℝ :
 extend-levy-base-index-force-true-sequence-macneille-ℝ
   n (k , (χ , χ-outside-k)) =
   ( k +ℕ succ-ℕ n ,
-    force-true-ℕ n χ ,
+    force-true-at-ℕ n χ ,
     λ m n+k≤m →
-      is-false-force-true-ℕ n χ m
+      is-false-force-true-at-ℕ n χ m
         ( λ p →
           neq-le-ℕ
             ( concatenate-le-leq-ℕ
@@ -471,7 +368,7 @@ is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
         ( inv m=n)
         ( not-y≤fn))
     ( λ m∈S → admissible-S m m∈S)
-    ( is-true-force-true-ℕ n (pr1 (pr2 S)) m m∈extend-S)
+    ( is-true-force-true-at-ℕ n (pr1 (pr2 S)) m m∈extend-S)
 ```
 
 ## Sum estimates for forced indices
@@ -491,14 +388,14 @@ module _
   inl-fin-sequence-extended-levy-base-index-force-true-sequence-macneille-ℝ i =
     selected-weight-levy-sequence-macneille-ℝ
       ( nat-Fin k i)
-      ( force-true-ℕ n χ (nat-Fin k i))
+      ( force-true-at-ℕ n χ (nat-Fin k i))
 
   extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ :
     Fin (k +ℕ succ-ℕ n) → ℚ
   extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ i =
     selected-weight-levy-sequence-macneille-ℝ
       ( nat-Fin (k +ℕ succ-ℕ n) i)
-      ( force-true-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
+      ( force-true-at-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
 
   inr-fin-sequence-extended-levy-base-index-force-true-sequence-macneille-ℝ :
     Fin (succ-ℕ n) → ℚ
@@ -517,7 +414,7 @@ module _
       i =
       ap
         ( λ m →
-          selected-weight-levy-sequence-macneille-ℝ m (force-true-ℕ n χ m))
+          selected-weight-levy-sequence-macneille-ℝ m (force-true-at-ℕ n χ m))
         ( inv (nat-inl-coproduct-Fin k (succ-ℕ n) i))
 
     leq-old-inl-fin-sequence-extended-levy-base-index-force-true-sequence-macneille-ℝ :
@@ -534,7 +431,7 @@ module _
             ( old-fin-sequence-levy-base-index-sequence-macneille-ℝ i)
             ( selected-weight-levy-sequence-macneille-ℝ
               ( nat-Fin k i)
-              ( force-true-from-decidable-equality-ℕ n χ (nat-Fin k i) d)))
+              ( force-true-at-from-decidable-equality-ℕ n χ (nat-Fin k i) d)))
         ( λ _ →
           ind-bool
             ( λ b →
@@ -581,7 +478,7 @@ module _
               ( succ-ℕ n)
               i)))
         ( refl-leq-ℚ zero-ℚ)
-        ( force-true-ℕ
+        ( force-true-at-ℕ
           n
           χ
           ( nat-Fin
@@ -1113,7 +1010,7 @@ module _
           ( nat-Fin
             ( k +ℕ succ-ℕ n)
             i)
-          ( force-true-from-decidable-equality-ℕ
+          ( force-true-at-from-decidable-equality-ℕ
             n
             χ
             ( nat-Fin
@@ -1139,7 +1036,7 @@ module _
           ( nat-Fin
             ( k +ℕ succ-ℕ n)
             i)
-          ( force-true-from-decidable-equality-ℕ
+          ( force-true-at-from-decidable-equality-ℕ
             n
             χ
             ( nat-Fin
@@ -1158,7 +1055,7 @@ module _
                       ( k +ℕ succ-ℕ n)
                       i)
                     b)
-                ( eq-force-true-from-decidable-equality-inl-ℕ
+                ( eq-force-true-at-from-decidable-equality-inl-ℕ
                   n
                   χ
                   ( nat-Fin
@@ -1214,7 +1111,7 @@ module _
           ( nat-Fin
             ( k +ℕ succ-ℕ n)
             i)
-          ( force-true-from-decidable-equality-ℕ
+          ( force-true-at-from-decidable-equality-ℕ
             n
             χ
             ( nat-Fin
@@ -1230,7 +1127,7 @@ module _
                     ( k +ℕ succ-ℕ n)
                     i)
                   b)
-              ( eq-force-true-from-decidable-equality-inr-ℕ
+              ( eq-force-true-at-from-decidable-equality-inr-ℕ
                 n
                 χ
                 ( nat-Fin
@@ -1332,113 +1229,87 @@ module _
       (admissible-S : is-admissible-levy-base-index-sequence-macneille-ℝ f x S) →
       (not-y≤fn : ¬ leq-macneille-ℝ y (f n)) →
       leq-macneille-ℝ
-        ( family-of-elements-levy-sequence-macneille-ℝ
-          f
-          x
-          ( S ,
-            admissible-S))
-        ( family-of-elements-levy-sequence-macneille-ℝ
-          f
-          y
+        ( family-of-elements-levy-sequence-macneille-ℝ f x (S , admissible-S))
+        ( family-of-elements-levy-sequence-macneille-ℝ f y
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
-              f
-              y
-              n
-              S
-              ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-                f
-                {x = x}
-                {y = y}
-                x≤y
-                S
-                admissible-S)
-              not-y≤fn))
+              ( f)
+              ( y)
+              ( n)
+              ( S)
+              ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ f x y x≤y
+                ( S)
+                ( admissible-S))
+              ( not-y≤fn)))
     leq-family-element-levy-base-index-map-ℕ-family-element-extend-levy-base-index-force-true-sequence-macneille-ℝ
       n S x≤y admissible-S not-y≤fn =
       leq-raise-macneille-real-ℚ
         ( sum-levy-base-index-sequence-macneille-ℝ S)
         ( sum-levy-base-index-sequence-macneille-ℝ
-          ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-            n
-            S))
+          ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
         ( leq-sum-levy-base-index-map-ℕ-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ
-          n
-          S)
+          ( n)
+          ( S))
 ```
 
 ## Weight bounds for forced sums
 
 ```agda
 module _
-  (n : ℕ) (S : levy-base-index-sequence-macneille-ℝ)
+  (n : ℕ) (S@(k , χ , _) : levy-base-index-sequence-macneille-ℝ)
+  (let iₙ = mod-succ-ℕ (k +ℕ n) n)
   where
 
-  k-wfs : ℕ
-  k-wfs = pr1 S
-
-  χ-wfs : ℕ → bool
-  χ-wfs = pr1 (pr2 S)
-
-  extended-S-wfs : levy-base-index-sequence-macneille-ℝ
-  extended-S-wfs =
-    extend-levy-base-index-force-true-sequence-macneille-ℝ n S
-
   extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs :
-    Fin (k-wfs +ℕ succ-ℕ n) → ℚ
+    Fin (k +ℕ succ-ℕ n) → ℚ
   extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs i =
     selected-weight-levy-sequence-macneille-ℝ
-      ( nat-Fin (k-wfs +ℕ succ-ℕ n) i)
-      ( force-true-ℕ n χ-wfs (nat-Fin (k-wfs +ℕ succ-ℕ n) i))
-
-  i-n-wfs : Fin (k-wfs +ℕ succ-ℕ n)
-  i-n-wfs = mod-succ-ℕ (k-wfs +ℕ n) n
+      ( nat-Fin (k +ℕ succ-ℕ n) i)
+      ( force-true-at-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
 
   abstract
-    eq-nat-Fin-i-n-wfs-wfs :
-      nat-Fin (k-wfs +ℕ succ-ℕ n) i-n-wfs ＝ n
-    eq-nat-Fin-i-n-wfs-wfs =
+    eq-nat-Fin-iₙ-wfs :
+      nat-Fin (k +ℕ succ-ℕ n) iₙ ＝ n
+    eq-nat-Fin-iₙ-wfs =
       eq-cong-le-ℕ
-        ( k-wfs +ℕ succ-ℕ n)
-        ( nat-Fin (k-wfs +ℕ succ-ℕ n) i-n-wfs)
+        ( k +ℕ succ-ℕ n)
+        ( nat-Fin (k +ℕ succ-ℕ n) iₙ)
         ( n)
-        ( strict-upper-bound-nat-Fin
-          ( k-wfs +ℕ succ-ℕ n)
-          ( i-n-wfs))
+        ( strict-upper-bound-nat-Fin (k +ℕ succ-ℕ n) (iₙ))
         ( concatenate-le-leq-ℕ
           { x = n}
           { y = succ-ℕ n}
-          { z = k-wfs +ℕ succ-ℕ n}
+          { z = k +ℕ succ-ℕ n}
           ( succ-le-ℕ n)
-          ( leq-add-ℕ' (succ-ℕ n) k-wfs))
-        ( cong-nat-mod-succ-ℕ
-          ( k-wfs +ℕ n)
-          ( n))
+          ( leq-add-ℕ' (succ-ℕ n) k))
+        ( cong-nat-mod-succ-ℕ (k +ℕ n) n)
 
-    eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs :
-      extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs i-n-wfs ＝
-      weight-levy-sequence-macneille-ℝ n
-    eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs =
-      ap
-        ( λ m →
-          selected-weight-levy-sequence-macneille-ℝ m (force-true-ℕ n χ-wfs m))
-        ( eq-nat-Fin-i-n-wfs-wfs) ∙
-      ( ind-bool
-        ( λ b →
-          is-true b →
-          selected-weight-levy-sequence-macneille-ℝ n b ＝
-          weight-levy-sequence-macneille-ℝ n)
-        ( λ _ → refl)
-        ( λ ())
-        ( force-true-ℕ n χ-wfs n)
-        ( is-true-force-true-self-ℕ n χ-wfs))
+    abstract
+      eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs :
+        extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs
+          ( iₙ) ＝
+        weight-levy-sequence-macneille-ℝ n
+      eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs =
+        ap
+          ( λ m →
+            selected-weight-levy-sequence-macneille-ℝ m (force-true-at-ℕ n χ m))
+          ( eq-nat-Fin-iₙ-wfs) ∙
+        ( ind-bool
+          ( λ b →
+            is-true b →
+            selected-weight-levy-sequence-macneille-ℝ n b ＝
+            weight-levy-sequence-macneille-ℝ n)
+          ( λ _ → refl)
+          ( λ ())
+          ( force-true-at-ℕ n χ n)
+          ( is-true-force-true-at-self-ℕ n χ))
 
-    leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs :
-      (i : Fin (k-wfs +ℕ succ-ℕ n)) →
+    leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs :
+      (i : Fin (k +ℕ succ-ℕ n)) →
       leq-ℚ
         zero-ℚ
         ( extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs i)
-    leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs
+    leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs
       i =
       ind-bool
         ( λ b →
@@ -1446,19 +1317,19 @@ module _
             zero-ℚ
             ( selected-weight-levy-sequence-macneille-ℝ
               ( nat-Fin
-                ( k-wfs +ℕ succ-ℕ n)
+                ( k +ℕ succ-ℕ n)
                 i)
               b))
         ( leq-zero-weight-levy-sequence-macneille-ℝ
           ( nat-Fin
-            ( k-wfs +ℕ succ-ℕ n)
+            ( k +ℕ succ-ℕ n)
             i))
         ( refl-leq-ℚ zero-ℚ)
-        ( force-true-ℕ
+        ( force-true-at-ℕ
           n
-          χ-wfs
+          χ
           ( nat-Fin
-            ( k-wfs +ℕ succ-ℕ n)
+            ( k +ℕ succ-ℕ n)
             i))
 
   abstract
@@ -1466,22 +1337,22 @@ module _
       leq-ℚ
         ( weight-levy-sequence-macneille-ℝ n)
         ( sum-levy-base-index-sequence-macneille-ℝ
-          ( extended-S-wfs))
+          ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
     leq-weight-levy-map-ℕ-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ =
       transitive-leq-ℚ
         ( weight-levy-sequence-macneille-ℝ n)
-        ( extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs i-n-wfs)
+        ( extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs iₙ)
         ( sum-fin-sequence-ℚ
-          ( k-wfs +ℕ succ-ℕ n)
+          ( k +ℕ succ-ℕ n)
           ( extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs))
         ( leq-term-sum-fin-sequence-ℚ
-          ( k-wfs +ℕ succ-ℕ n)
+          ( k +ℕ succ-ℕ n)
           ( extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs)
-          ( leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs)
-          ( i-n-wfs))
+          ( leq-zero-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs)
+          ( iₙ))
         ( leq-eq-ℚ
           ( inv
-            ( eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs-wfs)))
+            ( eq-selected-value-extended-fin-sequence-levy-base-index-force-true-sequence-macneille-ℝ-wfs)))
 ```
 
 ## Weight bounds for forced family elements
@@ -1499,17 +1370,15 @@ module _
       leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
           ( weight-levy-sequence-macneille-ℝ n))
-        ( family-of-elements-levy-sequence-macneille-ℝ
-          f
-          y
+        ( family-of-elements-levy-sequence-macneille-ℝ f y
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
-              f
-              y
-              n
-              S
-              admissible-S
-              not-y≤fn))
+              ( f)
+              ( y)
+              ( n)
+              ( S)
+              ( admissible-S)
+              ( not-y≤fn)))
     leq-weight-levy-map-ℕ-family-element-extend-levy-base-index-force-true-sequence-macneille-ℝ
       n S admissible-S not-y≤fn =
       leq-raise-macneille-real-ℚ
@@ -1517,8 +1386,8 @@ module _
         ( sum-levy-base-index-sequence-macneille-ℝ
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
         ( leq-weight-levy-map-ℕ-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ
-          n
-          S)
+          ( n)
+          ( S))
 ```
 
 ## Admissibility at image indices
@@ -1532,12 +1401,7 @@ abstract
     is-admissible-levy-base-index-sequence-macneille-ℝ f x S →
     is-false (pr1 (pr2 S) n)
   is-false-admissible-index-image-levy-base-index-sequence-macneille-ℝ
-    f
-    x
-    n
-    fn=x
-    (k , (χ , χ-outside-k))
-    admissible-S =
+    f x n fn=x (k , (χ , χ-outside-k)) admissible-S =
     is-false-is-not-true
       ( χ n)
       ( λ n∈S →
@@ -1567,42 +1431,37 @@ module _
         ( raise-macneille-real-ℚ l
           ( sum-levy-base-index-sequence-macneille-ℝ S +ℚ
             weight-levy-sequence-macneille-ℝ n))
-        ( family-of-elements-levy-sequence-macneille-ℝ
-          f
-          y
+        ( family-of-elements-levy-sequence-macneille-ℝ f y
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
-              f
-              y
-              n
-              S
+              ( f)
+              ( y)
+              ( n)
+              ( S)
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-                f
-                {x = x}
-                {y = y}
-                x≤y
-                S
-                admissible-S)
-              not-y≤fn))
+                ( f)
+                x y
+                ( x≤y)
+                ( S)
+                ( admissible-S))
+              ( not-y≤fn)))
     leq-add-sum-levy-base-index-map-ℕ-weight-family-element-extend-levy-base-index-force-true-sequence-macneille-ℝ
       n fn=x x≤y S admissible-S not-y≤fn =
       leq-raise-macneille-real-ℚ
         ( sum-levy-base-index-sequence-macneille-ℝ S +ℚ
           weight-levy-sequence-macneille-ℝ n)
         ( sum-levy-base-index-sequence-macneille-ℝ
-          ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-            n
-            S))
+          ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
         ( leq-add-sum-levy-base-index-map-ℕ-weight-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ
-          n
-          S
+          ( n)
+          ( S)
           ( is-false-admissible-index-image-levy-base-index-sequence-macneille-ℝ
-            f
-            x
-            n
-            fn=x
-            S
-            admissible-S))
+            ( f)
+            ( x)
+            ( n)
+            ( fn=x)
+            ( S)
+            ( admissible-S)))
 
     leq-add-sum-levy-base-index-map-ℕ-weight-endomap-levy-sequence-macneille-ℝ :
       (n : ℕ) →
@@ -1625,14 +1484,12 @@ module _
         ( family-of-elements-levy-sequence-macneille-ℝ f y
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
-              f
-              y
-              n
-              S
-              ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-                f
-                {x = x}
-                {y = y}
+              ( f)
+              ( y)
+              ( n)
+              ( S)
+              ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ f
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1651,8 +1508,7 @@ module _
               S
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
                 f
-                {x = x}
-                {y = y}
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1705,8 +1561,7 @@ module _
               S
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
                 f
-                {x = x}
-                {y = y}
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1725,8 +1580,7 @@ module _
               S
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
                 f
-                {x = x}
-                {y = y}
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1766,8 +1620,7 @@ module _
               S
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
                 f
-                {x = x}
-                {y = y}
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1786,8 +1639,7 @@ module _
               S
               ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
                 f
-                {x = x}
-                {y = y}
+                x y
                 x≤y
                 S
                 admissible-S)
@@ -1798,9 +1650,7 @@ module _
           n
           S
           ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ
-            f
-            {x = x}
-            {y = y}
+            f x y
             x≤y
             S
             admissible-S)
@@ -2015,11 +1865,8 @@ abstract
       ( point-self-admissible-levy-sequence-macneille-ℝ f)
   is-least-upper-bound-family-of-elements-at-level-point-self-admissible-levy-sequence-macneille-ℝ
     f =
-    is-least-upper-bound-family-of-elements-at-level-is-least-upper-bound-family-of-elements-macneille-ℝ
-      ( family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
-      ( point-self-admissible-levy-sequence-macneille-ℝ f)
-      ( is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-macneille-ℝ
-        ( f))
+    is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-macneille-ℝ
+      f
 
   leq-family-element-point-self-admissible-levy-sequence-macneille-ℝ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
@@ -2071,10 +1918,9 @@ module _
         ( fn=x0)
         ( S)
         ( is-admissible-leq-levy-base-index-sequence-macneille-ℝ f
-          {x =
-            raise-macneille-real-ℚ l
-              ( sum-levy-base-index-sequence-macneille-ℝ S)}
-          {y = x0}
+          ( raise-macneille-real-ℚ l
+            ( sum-levy-base-index-sequence-macneille-ℝ S))
+          ( x0)
           ( leq-family-element-point-self-admissible-levy-sequence-macneille-ℝ'
             ( S)
             ( self-admissible-S))
@@ -2236,9 +2082,7 @@ module _
           leq-macneille-ℝ
             ( raise-macneille-real-ℚ l
               ( sum-levy-base-index-sequence-macneille-ℝ
-                ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-                  n
-                  S)))
+                ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S)))
             ( x0)
         extend-S≤x0 =
           double-negation-elim-leq-left-raise-macneille-real-ℚ
@@ -2264,11 +2108,9 @@ module _
                 weight-levy-sequence-macneille-ℝ n))
             ( raise-macneille-real-ℚ l
               ( sum-levy-base-index-sequence-macneille-ℝ
-                ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-                  n
-                  S)))
+                ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S)))
             ( x0)
-            extend-S≤x0
+            ( extend-S≤x0)
             ( leq-add-sum-levy-base-index-map-ℕ-weight-family-element-extend-self-admissible-levy-sequence-macneille-ℝ
               ( n)
               ( fn=x0)
@@ -2292,15 +2134,12 @@ module _
             ( add-sum-S+weight≤x0)
       in
         tr
-          ( λ z →
-            leq-macneille-ℝ
-              z
-              x0)
+          ( λ z → leq-macneille-ℝ z x0)
           ( inv
             ( eq-right-translate-raise-macneille-real-ℚ'
               ( weight-levy-sequence-macneille-ℝ n)
               ( sum-levy-base-index-sequence-macneille-ℝ S)))
-          add-weight+sum-S≤x0
+          ( add-weight+sum-S≤x0)
 
     is-upper-bound-right-translate-family-of-elements-self-admissible-levy-sequence-macneille-ℝ :
       (n : ℕ) →
@@ -2356,10 +2195,10 @@ module _
 ### Final theorem
 
 ```agda
-sequence-avoiding-point-macneille-ℝ :
+sequence-avoiding-point-levy-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l) (λ x0 → (n : ℕ) → f n ≠ x0)
-sequence-avoiding-point-macneille-ℝ f =
+sequence-avoiding-point-levy-macneille-ℝ f =
   ( point-self-admissible-levy-sequence-macneille-ℝ f ,
     not-in-image-point-self-admissible-levy-sequence-macneille-ℝ f)
 ```

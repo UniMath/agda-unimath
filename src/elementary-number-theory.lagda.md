@@ -85,6 +85,7 @@ open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.floor-nonnegative-integer-fractions public
 open import elementary-number-theory.floor-nonnegative-rational-numbers public
+open import elementary-number-theory.forcing-boolean-predicates-natural-numbers public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.geometric-sequences-rational-numbers public

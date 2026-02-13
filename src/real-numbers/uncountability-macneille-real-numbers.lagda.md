@@ -48,7 +48,7 @@ not-in-sequence-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l) (λ x0 → (n : ℕ) → f n ≠ x0)
 not-in-sequence-macneille-ℝ f =
-  sequence-avoiding-point-macneille-ℝ f
+  sequence-avoiding-point-levy-macneille-ℝ f
 ```
 
 ## Corollaries

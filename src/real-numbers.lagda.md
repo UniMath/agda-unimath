@@ -72,7 +72,7 @@ open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers public
 open import real-numbers.least-upper-bounds-postfixpoints-endomaps-macneille-real-numbers public
-open import real-numbers.least-upper-bounds-translation-addition-macneille-real-numbers public
+open import real-numbers.least-upper-bounds-rational-translation-addition-macneille-real-numbers public
 open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-of-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
