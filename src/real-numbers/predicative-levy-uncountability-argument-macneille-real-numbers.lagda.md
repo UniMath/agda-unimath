@@ -255,8 +255,8 @@ endomap-levy-sequence-macneille-ℝ f x =
   least-upper-bound-inhabited-bounded-family-macneille-ℝ
     ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f x)
     ( family-of-elements-levy-sequence-macneille-ℝ f x)
-    ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
-    ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
+    ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
+    ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
 
 abstract
   is-least-upper-bound-family-of-elements-endomap-levy-sequence-macneille-ℝ :
@@ -269,8 +269,8 @@ abstract
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f x)
       ( family-of-elements-levy-sequence-macneille-ℝ f x)
-      ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
-      ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
+      ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
+      ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
 
 abstract
   is-least-upper-bound-family-of-elements-at-level-endomap-levy-sequence-macneille-ℝ :
@@ -302,15 +302,15 @@ abstract
     leq-least-upper-bound-family-upper-bound-family-macneille-ℝ
       ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f x)
       ( family-of-elements-levy-sequence-macneille-ℝ f x)
-      ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
-      ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
+      ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
+      ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
       ( endomap-levy-sequence-macneille-ℝ f y)
       ( λ (S , admissible-S-x) →
         is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
           ( family-of-elements-levy-sequence-macneille-ℝ f y)
-          ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-          ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
+          ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
           ( S ,
             is-admissible-leq-levy-base-index-sequence-macneille-ℝ f x y x≤y S
               ( admissible-S-x)))
@@ -1318,8 +1318,8 @@ module _
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
           ( family-of-elements-levy-sequence-macneille-ℝ f y)
-          ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-          ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
+          ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
               ( f)
@@ -1376,8 +1376,8 @@ module _
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
           ( family-of-elements-levy-sequence-macneille-ℝ f y)
-          ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-          ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
+          ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
               ( f)
@@ -1428,8 +1428,8 @@ module _
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f y)
           ( family-of-elements-levy-sequence-macneille-ℝ f y)
-          ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
-          ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y))
+          ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
+          ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f y)
           ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S ,
             is-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ
               ( f)
@@ -1491,8 +1491,8 @@ module _
       leq-least-upper-bound-family-upper-bound-family-macneille-ℝ
         ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f x)
         ( family-of-elements-levy-sequence-macneille-ℝ f x)
-        ( pr1 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
-        ( pr2 (has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x))
+        ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
+        ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
         ( raise-macneille-real-ℚ l (rational-ℕ 2))
         ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f x)
 
@@ -1506,12 +1506,10 @@ module _
           ( raise-zero-macneille-ℝ l))
         ( family-of-elements-levy-sequence-macneille-ℝ f
           ( raise-zero-macneille-ℝ l))
-        ( pr1
-          ( has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f
-            ( raise-zero-macneille-ℝ l)))
-        ( pr2
-          ( has-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f
-            ( raise-zero-macneille-ℝ l)))
+        ( upper-bound-family-of-elements-levy-sequence-macneille-ℝ f
+          ( raise-zero-macneille-ℝ l))
+        ( is-upper-bound-family-of-elements-levy-sequence-macneille-ℝ f
+          ( raise-zero-macneille-ℝ l))
         ( ( zero-ℕ , ( λ _ → false) , λ _ _ → refl) ,
           ( λ _ ()))
 
@@ -1632,8 +1630,8 @@ point-self-admissible-levy-sequence-macneille-ℝ f =
   least-upper-bound-inhabited-bounded-family-macneille-ℝ
     ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
     ( family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
-    ( pr1 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
-    ( pr2 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
+    ( upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
+    ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
 
 abstract
   is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-macneille-ℝ :
@@ -1646,8 +1644,8 @@ abstract
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
       ( family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
-      ( pr1 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
-      ( pr2 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
+      ( upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
+      ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
 
   leq-family-element-point-self-admissible-levy-sequence-macneille-ℝ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
@@ -1659,8 +1657,8 @@ abstract
     is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
       ( family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
-      ( pr1 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
-      ( pr2 (has-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
+      ( upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
+      ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-macneille-ℝ f)
 ```
 
 ### Contradiction at the least upper bound
