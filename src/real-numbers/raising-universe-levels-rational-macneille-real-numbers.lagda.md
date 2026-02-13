@@ -14,11 +14,11 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.double-negation
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels

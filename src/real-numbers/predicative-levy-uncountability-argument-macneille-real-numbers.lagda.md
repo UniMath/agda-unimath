@@ -33,12 +33,12 @@ open import elementary-number-theory.sums-of-finite-sequences-of-rational-number
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.double-negation
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -280,7 +280,8 @@ abstract
     is-least-upper-bound-family-of-elements-macneille-ℝ
       ( family-of-elements-levy-sequence-macneille-ℝ f x)
       ( endomap-levy-sequence-macneille-ℝ f x)
-  is-least-upper-bound-family-of-elements-endomap-levy-sequence-macneille-ℝ f x =
+  is-least-upper-bound-family-of-elements-endomap-levy-sequence-macneille-ℝ
+    f x =
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
       ( is-inhabited-indexing-type-levy-family-sequence-macneille-ℝ f x)
       ( family-of-elements-levy-sequence-macneille-ℝ f x)
@@ -2037,7 +2038,6 @@ abstract
 ### Contradiction at the least upper bound
 
 ```agda
-
 module _
   {l : Level} (f : ℕ → macneille-ℝ l)
   (let x0 = point-self-admissible-levy-sequence-macneille-ℝ f)

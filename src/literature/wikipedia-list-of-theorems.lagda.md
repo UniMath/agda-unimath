@@ -213,7 +213,7 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
 ```agda
 open import real-numbers.uncountability-macneille-real-numbers using
   ( is-uncountable-macneille-ℝ ;
-    is-uncountable-dedekind-ℝ-LEM )
+    is-uncountable-dedekind-ℝ-LEM)
 ```
 
 ### Yoneda lemma {#Q320577}
