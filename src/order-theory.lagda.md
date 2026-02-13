@@ -52,6 +52,7 @@ open import order-theory.galois-connections public
 open import order-theory.galois-connections-large-posets public
 open import order-theory.greatest-lower-bounds-large-posets public
 open import order-theory.greatest-lower-bounds-posets public
+open import order-theory.greatest-postfixpoints-endomaps-posets public
 open import order-theory.homomorphisms-frames public
 open import order-theory.homomorphisms-large-frames public
 open import order-theory.homomorphisms-large-locales public
@@ -95,6 +96,7 @@ open import order-theory.large-suplattices public
 open import order-theory.lattices public
 open import order-theory.least-upper-bounds-large-posets public
 open import order-theory.least-upper-bounds-posets public
+open import order-theory.least-upper-bounds-postfixpoints-endomaps-posets public
 open import order-theory.locales public
 open import order-theory.locally-finite-posets public
 open import order-theory.lower-bounds-large-posets public
@@ -121,6 +123,7 @@ open import order-theory.poset-closed-intervals-lattices public
 open import order-theory.poset-closed-intervals-posets public
 open import order-theory.poset-closed-intervals-total-orders public
 open import order-theory.posets public
+open import order-theory.postfixpoints-endomaps-posets public
 open import order-theory.powers-of-large-locales public
 open import order-theory.precategory-of-decidable-total-orders public
 open import order-theory.precategory-of-finite-posets public
