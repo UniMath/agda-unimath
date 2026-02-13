@@ -84,7 +84,7 @@ along `κ`.
 
 ## Definitions
 
-### Precomposition of short maps by the natural inclusion of pseudometric spaces into their Cauchy pseudocompletions
+### Precomposition of short maps by the unit map of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -107,7 +107,7 @@ module _
       ( short-map-unit-cauchy-pseudocompletion-Pseudometric-Space P)
 ```
 
-### Extensions of short maps along the natural isometry of Cauchy pseudocompletions
+### Extensions of short maps along the unit map of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -213,7 +213,7 @@ module _
     pr2 g
 ```
 
-### Extensible short maps
+### Extensible short maps along the unit map of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -266,7 +266,7 @@ module _
       exten-short-map-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
 ```
 
-### The property of being a complete short map from a pseudometric space in a metric space
+### The property of being a complete short map from a pseudometric space to a metric space
 
 ```agda
 module _
@@ -895,17 +895,17 @@ module _
     is-retraction-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
       f = refl
 
-  is-equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    is-equiv
-      precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-  is-equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    =
-    is-equiv-is-invertible
-      ( short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M))
-      ( is-section-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-      ( is-retraction-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+    is-equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+      is-equiv
+        precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    is-equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      =
+      is-equiv-is-invertible
+        ( short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)
+          ( M))
+        ( is-section-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+        ( is-retraction-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 
   equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     short-map-Pseudometric-Space
