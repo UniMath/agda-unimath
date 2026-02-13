@@ -1715,9 +1715,7 @@ module _
         ( sum-levy-base-index-sequence-macneille-ℝ S +ℚ
           weight-levy-sequence-macneille-ℝ n)
         ( sum-levy-base-index-sequence-macneille-ℝ
-          ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-            n
-            S))
+          ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
     leq-add-sum-levy-base-index-map-ℕ-weight-sum-extend-self-admissible-levy-sequence-macneille-ℝ
       n fn=x0 S self-admissible-S =
       leq-add-sum-levy-base-index-map-ℕ-weight-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ
@@ -1766,9 +1764,7 @@ module _
       leq-raise-macneille-real-ℚ
         ( sum-levy-base-index-sequence-macneille-ℝ S)
         ( sum-levy-base-index-sequence-macneille-ℝ
-          ( extend-levy-base-index-force-true-sequence-macneille-ℝ
-            ( n)
-            ( S)))
+          ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S))
         ( leq-sum-levy-base-index-map-ℕ-sum-extend-levy-base-index-force-true-sequence-macneille-ℝ
           ( n)
           ( S))
@@ -1779,11 +1775,11 @@ module _
       (fn=x0 : f n ＝ x0) →
       (S : levy-base-index-sequence-macneille-ℝ) →
       is-self-admissible-levy-base-index-sequence-macneille-ℝ f S →
-      ¬ ( leq-macneille-ℝ
-          ( raise-macneille-real-ℚ l
-            ( sum-levy-base-index-sequence-macneille-ℝ
-              ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S)))
-          ( x0)) →
+      ¬ leq-macneille-ℝ
+        ( raise-macneille-real-ℚ l
+          ( sum-levy-base-index-sequence-macneille-ℝ
+            ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S)))
+        ( x0) →
       is-self-admissible-levy-base-index-sequence-macneille-ℝ f
         ( extend-levy-base-index-force-true-sequence-macneille-ℝ n S)
     is-self-admissible-extend-levy-base-index-force-true-sequence-macneille-ℝ-from-not-leq
@@ -1927,7 +1923,7 @@ module _
         ( translate-family-right-macneille-real-ℚ
           ( weight-levy-sequence-macneille-ℝ n)
           ( family-of-elements-self-admissible-levy-sequence-macneille-ℝ f))
-        x0
+        ( x0)
     is-upper-bound-right-translate-family-of-elements-self-admissible-levy-sequence-macneille-ℝ
       n fn=x0 (S , self-admissible-S) =
       leq-right-translate-family-element-point-self-admissible-levy-sequence-macneille-ℝ
