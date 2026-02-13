@@ -11,7 +11,6 @@ open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types

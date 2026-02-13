@@ -39,8 +39,11 @@ open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.iterating-functions public
+open import foundation-core.law-of-excluded-middle public
 open import foundation-core.monomorphisms public
 open import foundation-core.negation public
+open import foundation-core.operations-cospan-diagrams public
+open import foundation-core.operations-cospans public
 open import foundation-core.operations-span-diagrams public
 open import foundation-core.operations-spans public
 open import foundation-core.path-split-maps public

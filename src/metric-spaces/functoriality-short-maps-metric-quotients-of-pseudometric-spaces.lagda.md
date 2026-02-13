@@ -1,4 +1,4 @@
-# Functoriality of metric quotients of pseudometric spaces and short maps
+# Functorial action on short maps of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -49,12 +49,14 @@ these factor as short maps `q⋆f : [P] → [Q]`. This action preserves the iden
 and composition of short maps and induce commutative diagrams
 
 ```text
-   P ----f----> Q ----g----> R
-   |            |            |
-   q            q            q
-   |            |            |
-   v            v            v
-  [P] --q⋆f--> [Q] --q⋆g--> [R]
+       f         g
+  P ------> Q ------> R
+  |         |         |
+  |         |         |
+  |         |         |
+  v         v         v
+ [P] ----> [Q] ----> [R]
+      [f]       [g]
 ```
 
 It is the
