@@ -1,4 +1,4 @@
-# Similarity-preserving binary maps on cumulative large sets
+# Similarity preserving binary maps on cumulative large sets
 
 ```agda
 module foundation.similarity-preserving-binary-maps-cumulative-large-sets where
@@ -72,7 +72,7 @@ module _
     preserves-sim-map-sim-preserving-binary-map-Large-Similarity-Relation
 ```
 
-### Similarity-preserving binary operators
+### Similarity preserving binary operators
 
 ```agda
 module _
@@ -113,7 +113,7 @@ module _
 
 ## Properties
 
-### Raising universe levels on similarity-preserving binary maps
+### Raising universe levels on similarity preserving binary maps
 
 ```agda
 module _
