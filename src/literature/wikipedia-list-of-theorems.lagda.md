@@ -206,6 +206,16 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
   ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
+### Uncountability of the continuum {#Q22952648}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import real-numbers.uncountability-macneille-real-numbers using
+  ( is-uncountable-macneille-ℝ ;
+    is-uncountable-dedekind-ℝ-LEM )
+```
+
 ### Yoneda lemma {#Q320577}
 
 **Author:** [Emily Riehl](https://emilyriehl.github.io/)

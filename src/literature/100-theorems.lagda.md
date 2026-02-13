@@ -49,6 +49,16 @@ open import elementary-number-theory.infinitude-of-primes using
   ( infinitude-of-primes-ℕ)
 ```
 
+### 22. The Non-Denumerability of the Continuum {#22}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import real-numbers.uncountability-macneille-real-numbers using
+  ( is-uncountable-macneille-ℝ ;
+    is-uncountable-dedekind-ℝ-LEM )
+```
+
 ### 25. Schröder–Bernstein theorem {#25}
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
