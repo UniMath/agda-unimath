@@ -69,7 +69,7 @@ abstract
 ```agda
 abstract
   is-not-surjective-sequence-macneille-ℝ :
-    {l : Level} (f : ℕ → macneille-ℝ l) → ¬ (is-surjective f)
+    {l : Level} (f : ℕ → macneille-ℝ l) → ¬ is-surjective f
   is-not-surjective-sequence-macneille-ℝ {l} f H =
     is-not-directly-countable-is-sequence-avoiding
       ( set-macneille-ℝ l)
@@ -83,21 +83,20 @@ abstract
 abstract
   is-uncountable-macneille-ℝ :
     {l : Level} → is-uncountable (set-macneille-ℝ l)
-  is-uncountable-macneille-ℝ
-    {l} =
+  is-uncountable-macneille-ℝ {l} =
     is-uncountable-is-sequence-avoiding
       ( set-macneille-ℝ l)
       ( raise-zero-macneille-ℝ l)
       ( is-sequence-avoiding-macneille-ℝ)
 ```
 
-### Under excluded middle, Dedekind reals are uncountable
+### Under excluded middle, the Dedekind reals are uncountable
 
 ```agda
 abstract
-  is-uncountable-dedekind-ℝ-LEM :
+  is-uncountable-ℝ-LEM :
     {l : Level} (lem : level-LEM l) → is-uncountable (ℝ-Set l)
-  is-uncountable-dedekind-ℝ-LEM {l} lem C =
+  is-uncountable-ℝ-LEM {l} lem C =
     is-uncountable-macneille-ℝ
       ( is-countable-equiv
         ( ℝ-Set l)
