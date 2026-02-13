@@ -647,7 +647,7 @@ module _
       ( sim-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### All extensions of short maps to the Cauchy pseudocompletion are homotopic
+### All extensions of a short map to the Cauchy pseudocompletion are homotopic
 
 ```agda
 module _
