@@ -22,7 +22,7 @@ open import foundation.universe-levels
 ## Idea
 
 Given [large similarity relations](foundation.large-similarity-relations.md)
-over universe-polymorphic types `X Y Z`, a binary map `f : X → Y → Z`
+over universe polymorphic types `X Y Z`, a binary map `f : X → Y → Z`
 {{#concept "preserves similarity" Disambiguation="binary maps over types with large similarity relations" Agda=preserves-sim-binary-map-Large-Similarity-Relation}}
 if whenever `x` is similar to `x'` and `y` is similar to `y'`, `f x y` is
 similar to `f x' y'`.

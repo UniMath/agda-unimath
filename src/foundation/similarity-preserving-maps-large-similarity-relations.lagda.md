@@ -21,7 +21,7 @@ open import foundation.universe-levels
 ## Idea
 
 Given [large similarity relations](foundation.large-similarity-relations.md) on
-universe-polymorphic types `X` and `Y`, a map `f : X → Y`
+universe polymorphic types `X` and `Y`, a map `f : X → Y`
 {{#concept "preserves similarity" Disambiguation="map between two large similarity relations" Agda=preserves-sim-map-Large-Similarity-Relation}}
 if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
 
