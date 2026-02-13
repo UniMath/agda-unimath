@@ -152,6 +152,50 @@ module _
       ( Y)
       ( Z)
       ( f)
+
+  is-additive-map-ev-left-bilinear-map-left-module-Commutative-Ring :
+    (x : type-left-module-Commutative-Ring R X) →
+    is-additive-map-left-module-Commutative-Ring R Y Z
+      ( map-bilinear-map-left-module-Commutative-Ring R X Y Z f x)
+  is-additive-map-ev-left-bilinear-map-left-module-Commutative-Ring x =
+    is-additive-map-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( Y)
+      ( Z)
+      ( linear-map-ev-left-bilinear-map-left-module-Commutative-Ring x)
+
+  is-homogeneous-map-ev-left-bilinear-map-left-module-Commutative-Ring :
+    (x : type-left-module-Commutative-Ring R X) →
+    is-homogeneous-map-left-module-Commutative-Ring R Y Z
+      ( map-bilinear-map-left-module-Commutative-Ring R X Y Z f x)
+  is-homogeneous-map-ev-left-bilinear-map-left-module-Commutative-Ring x =
+    is-homogeneous-map-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( Y)
+      ( Z)
+      ( linear-map-ev-left-bilinear-map-left-module-Commutative-Ring x)
+
+  is-additive-map-ev-right-bilinear-map-left-module-Commutative-Ring :
+    (y : type-left-module-Commutative-Ring R Y) →
+    is-additive-map-left-module-Commutative-Ring R X Z
+      ( λ x → map-bilinear-map-left-module-Commutative-Ring R X Y Z f x y)
+  is-additive-map-ev-right-bilinear-map-left-module-Commutative-Ring y =
+    is-additive-map-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( X)
+      ( Z)
+      ( linear-map-ev-right-bilinear-map-left-module-Commutative-Ring y)
+
+  is-homogeneous-map-ev-right-bilinear-map-left-module-Commutative-Ring :
+    (y : type-left-module-Commutative-Ring R Y) →
+    is-homogeneous-map-left-module-Commutative-Ring R X Z
+      ( λ x → map-bilinear-map-left-module-Commutative-Ring R X Y Z f x y)
+  is-homogeneous-map-ev-right-bilinear-map-left-module-Commutative-Ring y =
+    is-homogeneous-map-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( X)
+      ( Z)
+      ( linear-map-ev-right-bilinear-map-left-module-Commutative-Ring y)
 ```
 
 ### Zero laws of bilinear maps
