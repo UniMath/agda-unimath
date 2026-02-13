@@ -64,7 +64,7 @@ module _
       ( short-map-unit-cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space A))
   retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space =
-    exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-space-Complete-Metric-Space A)
       ( metric-space-Complete-Metric-Space A)
       ( id-short-map-Metric-Space (metric-space-Complete-Metric-Space A) ,

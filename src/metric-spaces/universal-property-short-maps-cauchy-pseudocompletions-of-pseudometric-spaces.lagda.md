@@ -70,15 +70,15 @@ short map `g : C P → M` such that
 if and only if the images `Cf u` of Cauchy approximations `u : C P` are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
 `M`. In that case, `f` is called a
-{{#concept "complete short map" Disambiguation="from a pseudometric space to a metric space" Agda=complete-short-map-Pseudometric-Space}}
+{{#concept "precomplete short map" Disambiguation="from a pseudometric space to a metric space" Agda=precomplete-short-map-Pseudometric-Space}}
 from `P` to `M`. The type of short maps for the Cauchy pseudocompletion `C P` of
 a pseudometric space `P` to a metric space `M` is equivalent to the type of
-**complete short maps** from `P` to `M`.
+**precomplete short maps** from `P` to `M`.
 
 Equivalently, the Cauchy pseudocompletion satisfies satisfies the
-{{#concept "universal property" Disambiguation="of Cauchy pseudocompletions and complete short maps" Agda=is-contr-extension-complete-short-map-Pseudometric-Space}}
-of Cauchy precompletions and complete short maps: for any complete short map
-`f : P → M` from a pseudometric space in a metric space, there
+{{#concept "universal property" Disambiguation="of Cauchy pseudocompletions and precomplete short maps" Agda=is-contr-extension-precomplete-short-map-Pseudometric-Space}}
+of Cauchy precompletions and precomplete short maps: for any precomplete short
+map `f : P → M` from a pseudometric space in a metric space, there
 [uniquely exists](foundation.uniqueness-quantification.md) an extension of `f`
 along `κ`.
 
@@ -266,7 +266,7 @@ module _
       exten-short-map-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
 ```
 
-### The property of being a complete short map from a pseudometric space to a metric space
+### The property of being a precomplete short map from a pseudometric space to a metric space
 
 ```agda
 module _
@@ -276,8 +276,8 @@ module _
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  is-complete-prop-short-map-Pseudometric-Space : Prop (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  is-complete-prop-short-map-Pseudometric-Space =
+  is-precomplete-prop-short-map-Pseudometric-Space : Prop (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  is-precomplete-prop-short-map-Pseudometric-Space =
     Π-Prop
       ( cauchy-approximation-Pseudometric-Space P)
       ( is-convergent-prop-cauchy-approximation-Metric-Space M ∘
@@ -286,17 +286,17 @@ module _
           ( pseudometric-Metric-Space M)
           ( f))
 
-  is-complete-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  is-complete-short-map-Pseudometric-Space =
-    type-Prop is-complete-prop-short-map-Pseudometric-Space
+  is-precomplete-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  is-precomplete-short-map-Pseudometric-Space =
+    type-Prop is-precomplete-prop-short-map-Pseudometric-Space
 
-  is-prop-is-complete-short-map-Pseudometric-Space :
-    is-prop is-complete-short-map-Pseudometric-Space
-  is-prop-is-complete-short-map-Pseudometric-Space =
-    is-prop-type-Prop is-complete-prop-short-map-Pseudometric-Space
+  is-prop-is-precomplete-short-map-Pseudometric-Space :
+    is-prop is-precomplete-short-map-Pseudometric-Space
+  is-prop-is-precomplete-short-map-Pseudometric-Space =
+    is-prop-type-Prop is-precomplete-prop-short-map-Pseudometric-Space
 ```
 
-### The type of complete short maps from a pseudometric space to a metric space
+### The type of precomplete short maps from a pseudometric space to a metric space
 
 ```agda
 module _
@@ -305,30 +305,30 @@ module _
   (M : Metric-Space l1' l2')
   where
 
-  complete-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  complete-short-map-Pseudometric-Space =
+  precomplete-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  precomplete-short-map-Pseudometric-Space =
     type-subtype
-      ( is-complete-prop-short-map-Pseudometric-Space P M)
+      ( is-precomplete-prop-short-map-Pseudometric-Space P M)
 
-  short-map-complete-short-map-Pseudometric-Space :
-    complete-short-map-Pseudometric-Space →
+  short-map-precomplete-short-map-Pseudometric-Space :
+    precomplete-short-map-Pseudometric-Space →
     short-map-Pseudometric-Space P (pseudometric-Metric-Space M)
-  short-map-complete-short-map-Pseudometric-Space = pr1
+  short-map-precomplete-short-map-Pseudometric-Space = pr1
 
-  map-complete-short-map-Pseudometric-Space :
-    complete-short-map-Pseudometric-Space →
+  map-precomplete-short-map-Pseudometric-Space :
+    precomplete-short-map-Pseudometric-Space →
     map-Pseudometric-Space P (pseudometric-Metric-Space M)
-  map-complete-short-map-Pseudometric-Space f =
+  map-precomplete-short-map-Pseudometric-Space f =
     map-short-map-Pseudometric-Space
       ( P)
       ( pseudometric-Metric-Space M)
-      ( short-map-complete-short-map-Pseudometric-Space f)
+      ( short-map-precomplete-short-map-Pseudometric-Space f)
 
-  is-complete-short-map-complete-short-map-Pseudometric-Space :
-    (f : complete-short-map-Pseudometric-Space) →
-    is-complete-short-map-Pseudometric-Space P M
-      ( short-map-complete-short-map-Pseudometric-Space f)
-  is-complete-short-map-complete-short-map-Pseudometric-Space = pr2
+  is-precomplete-short-map-precomplete-short-map-Pseudometric-Space :
+    (f : precomplete-short-map-Pseudometric-Space) →
+    is-precomplete-short-map-Pseudometric-Space P M
+      ( short-map-precomplete-short-map-Pseudometric-Space f)
+  is-precomplete-short-map-precomplete-short-map-Pseudometric-Space = pr2
 ```
 
 ## Properties
@@ -353,96 +353,104 @@ module _
     ( g , refl-htpy)
 ```
 
-### A complete short map extends to the Cauchy pseudocompletion
+### A precomplete short map extends to the Cauchy pseudocompletion
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
-  (f : complete-short-map-Pseudometric-Space P M)
+  (f : precomplete-short-map-Pseudometric-Space P M)
   where
 
-  map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
-  map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space u =
+  map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space u =
     limit-is-convergent-cauchy-approximation-Metric-Space
       ( M)
       ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( pseudometric-Metric-Space M)
-        ( short-map-complete-short-map-Pseudometric-Space P M f)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
         ( u))
-      ( is-complete-short-map-complete-short-map-Pseudometric-Space P M f u)
+      ( is-precomplete-short-map-precomplete-short-map-Pseudometric-Space
+        ( P)
+        ( M)
+        ( f)
+        ( u))
 
-  sim-const-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  sim-const-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     (u : cauchy-approximation-Pseudometric-Space P) →
     sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space M)
       ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( pseudometric-Metric-Space M)
-        ( short-map-complete-short-map-Pseudometric-Space P M f)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
         ( u))
       ( map-unit-cauchy-pseudocompletion-Metric-Space M
-        ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( u)))
-  sim-const-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+  sim-const-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
     u =
     sim-const-is-limit-cauchy-approximation-Metric-Space
       ( M)
       ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( pseudometric-Metric-Space M)
-        ( short-map-complete-short-map-Pseudometric-Space P M f)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
         ( u))
-      ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space u)
+      ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space u)
       ( is-limit-limit-is-convergent-cauchy-approximation-Metric-Space
         ( M)
         ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
-          ( short-map-complete-short-map-Pseudometric-Space P M f)
+          ( short-map-precomplete-short-map-Pseudometric-Space P M f)
           ( u))
-        ( is-complete-short-map-complete-short-map-Pseudometric-Space P M f u))
+        ( is-precomplete-short-map-precomplete-short-map-Pseudometric-Space
+          ( P)
+          ( M)
+          ( f)
+          ( u)))
 
-  is-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  is-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
-      ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-  is-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+  is-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
     d u v Nuv =
     reflects-neighborhoods-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( cauchy-pseudocompletion-Metric-Space M)
       ( isometry-unit-cauchy-pseudocompletion-Metric-Space M)
       ( d)
-      ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space u)
-      ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space v)
+      ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space u)
+      ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space v)
       ( preserves-neighborhoods-sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M)
         { map-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
-          ( short-map-complete-short-map-Pseudometric-Space P M f)
+          ( short-map-precomplete-short-map-Pseudometric-Space P M f)
           ( u)}
         { map-unit-cauchy-pseudocompletion-Metric-Space M
-          ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
             ( u))}
         { map-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
-          ( short-map-complete-short-map-Pseudometric-Space P M f)
+          ( short-map-precomplete-short-map-Pseudometric-Space P M f)
           ( v)}
         { map-unit-cauchy-pseudocompletion-Metric-Space M
-          ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
             ( v))}
-        ( sim-const-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( sim-const-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( u))
-        ( sim-const-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( sim-const-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( v))
         ( d)
         ( is-short-map-short-map-Pseudometric-Space
@@ -451,57 +459,57 @@ module _
           ( short-map-cauchy-pseudocompletion-Pseudometric-Space
             ( P)
             ( pseudometric-Metric-Space M)
-            ( short-map-complete-short-map-Pseudometric-Space P M f))
+            ( short-map-precomplete-short-map-Pseudometric-Space P M f))
           ( d)
           ( u)
           ( v)
           ( Nuv)))
 
-  short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
-  short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
-      is-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+  short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
+      is-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 
-  is-extension-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  is-extension-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     is-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
-      ( short-map-complete-short-map-Pseudometric-Space P M f)
-      ( short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-  is-extension-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+      ( short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+  is-extension-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
     x =
     all-eq-is-limit-cauchy-approximation-Metric-Space
       ( M)
       ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( pseudometric-Metric-Space M)
-        ( short-map-complete-short-map-Pseudometric-Space P M f)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
         ( map-unit-cauchy-pseudocompletion-Pseudometric-Space P x))
-      ( map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( map-unit-cauchy-pseudocompletion-Pseudometric-Space P x))
-      ( map-complete-short-map-Pseudometric-Space P M f x)
+      ( map-precomplete-short-map-Pseudometric-Space P M f x)
       ( is-limit-limit-is-convergent-cauchy-approximation-Metric-Space
         ( M)
         ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
-          ( short-map-complete-short-map-Pseudometric-Space P M f)
+          ( short-map-precomplete-short-map-Pseudometric-Space P M f)
           ( map-unit-cauchy-pseudocompletion-Pseudometric-Space P x))
-        ( is-complete-short-map-complete-short-map-Pseudometric-Space
+        ( is-precomplete-short-map-precomplete-short-map-Pseudometric-Space
           ( P)
           ( M)
           ( f)
           ( map-unit-cauchy-pseudocompletion-Pseudometric-Space P x)))
       ( is-limit-const-cauchy-approximation-Metric-Space M
-        ( map-complete-short-map-Pseudometric-Space P M f x))
+        ( map-precomplete-short-map-Pseudometric-Space P M f x))
 
-  exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
-      ( short-map-complete-short-map-Pseudometric-Space P M f)
-  exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    ( short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
-      is-extension-short-map-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+      ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+  exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    ( short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
+      is-extension-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
 ### The values of extensions of short maps are limits
@@ -765,7 +773,7 @@ module _
         ( f))
 ```
 
-### A short map extends to the Cauchy pseudocompletion if and only if it is complete
+### A short map extends to the Cauchy pseudocompletion if and only if it is precomplete
 
 ```agda
 module _
@@ -775,10 +783,10 @@ module _
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f →
-    is-complete-short-map-Pseudometric-Space P M f
-  is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    is-precomplete-short-map-Pseudometric-Space P M f
+  is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
     g u =
     ( map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
@@ -793,21 +801,21 @@ module _
         ( g)
         ( u))
 
-  iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  iff-is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f ↔
-    is-complete-short-map-Pseudometric-Space P M f
+    is-precomplete-short-map-Pseudometric-Space P M f
   pr1
-    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    iff-is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
     =
-    is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
   pr2
-    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    iff-is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
     =
-    exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ∘
+    exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ∘
     pair f
 ```
 
-### Extensible short maps are equivalent to complete short maps
+### Extensible short maps are equivalent to precomplete short maps
 
 ```agda
 module _
@@ -816,20 +824,22 @@ module _
   (M : Metric-Space l1' l2')
   where
 
-  equiv-complete-extensible-short-map-Pseudometric-Space :
+  equiv-precomplete-extensible-short-map-Pseudometric-Space :
     extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ≃
-    complete-short-map-Pseudometric-Space P M
-  equiv-complete-extensible-short-map-Pseudometric-Space =
+    precomplete-short-map-Pseudometric-Space P M
+  equiv-precomplete-extensible-short-map-Pseudometric-Space =
     equiv-type-subtype
       ( is-prop-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M))
-      ( is-prop-is-complete-short-map-Pseudometric-Space P M)
-      ( is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( is-prop-is-precomplete-short-map-Pseudometric-Space P M)
+      ( is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M))
       ( λ f H →
-        exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
+        exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)
+          ( M)
           ( f , H))
 ```
 
@@ -918,7 +928,7 @@ module _
       is-equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### Short maps from the Cauchy pseudocompletion of a pseudometric spaces in a metric space are the complete short maps
+### Short maps from the Cauchy pseudocompletion of a pseudometric spaces in a metric space are the precomplete short maps
 
 ```agda
 module _
@@ -931,35 +941,35 @@ module _
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M) ≃
-    complete-short-map-Pseudometric-Space P M
+    precomplete-short-map-Pseudometric-Space P M
   equiv-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    equiv-complete-extensible-short-map-Pseudometric-Space P M ∘e
+    equiv-precomplete-extensible-short-map-Pseudometric-Space P M ∘e
     equiv-precomp-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( P)
       ( M)
 ```
 
-### The type of extensions of a complete short map is contractible
+### The type of extensions of a precomplete short map is contractible
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
-  (f : complete-short-map-Pseudometric-Space P M)
+  (f : precomplete-short-map-Pseudometric-Space P M)
   where abstract
 
-  is-contr-extension-complete-short-map-Pseudometric-Space :
+  is-contr-extension-precomplete-short-map-Pseudometric-Space :
     is-contr
       ( extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
-        ( short-map-complete-short-map-Pseudometric-Space P M f))
-  is-contr-extension-complete-short-map-Pseudometric-Space =
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f))
+  is-contr-extension-precomplete-short-map-Pseudometric-Space =
     is-proof-irrelevant-is-prop
       ( is-prop-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M)
-        ( short-map-complete-short-map-Pseudometric-Space P M f))
-      ( exten-complete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f))
+      ( exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
         ( M)
         ( f))

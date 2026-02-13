@@ -225,7 +225,7 @@ module _
       ( id-short-map-Metric-Space M) ↔
     is-complete-Metric-Space M
   iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space =
-    iff-is-complete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    iff-is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( M)
       ( id-short-map-Metric-Space M)
