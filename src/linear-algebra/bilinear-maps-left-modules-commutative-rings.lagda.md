@@ -57,7 +57,8 @@ module _
       ( Z)
       ( f)
 
-  is-linear-on-left-binary-map-left-module-Commutative-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-left-binary-map-left-module-Commutative-Ring :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-linear-on-left-binary-map-left-module-Commutative-Ring =
     type-Prop is-linear-on-left-prop-binary-map-left-module-Commutative-Ring
 
@@ -71,7 +72,8 @@ module _
       ( Z)
       ( f)
 
-  is-linear-on-right-binary-map-left-module-Commutative-Ring : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-linear-on-right-binary-map-left-module-Commutative-Ring :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-linear-on-right-binary-map-left-module-Commutative-Ring =
     type-Prop is-linear-on-right-prop-binary-map-left-module-Commutative-Ring
 
