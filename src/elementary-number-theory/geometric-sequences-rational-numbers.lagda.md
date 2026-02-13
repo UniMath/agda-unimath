@@ -19,8 +19,12 @@ open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.metric-additive-group-of-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-rational-numbers
@@ -28,7 +32,9 @@ open import elementary-number-theory.powers-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -175,6 +181,191 @@ module _
             ( λ n → power-ℚ n r)
             ( zero-ℚ)
             ( is-zero-limit-power-le-one-abs-ℚ r |r|<1))
+```
+
+### The partial sums of a geometric sequence are bounded by the geometric sum
+
+```agda
+abstract
+  leq-bound-sum-standard-geometric-fin-sequence-ℚ :
+    (r : ℚ⁺) (b : ℚ) →
+    leq-ℚ zero-ℚ b →
+    leq-ℚ (one-ℚ +ℚ rational-ℚ⁺ r *ℚ b) b →
+    (k : ℕ) →
+    leq-ℚ (sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k) b
+  leq-bound-sum-standard-geometric-fin-sequence-ℚ r b zero≤b one+r*b≤b zero-ℕ =
+    transitive-leq-ℚ
+      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) zero-ℕ)
+      ( zero-ℚ)
+      ( b)
+      ( zero≤b)
+      ( leq-eq-ℚ refl)
+  leq-bound-sum-standard-geometric-fin-sequence-ℚ
+    r b zero≤b one+r*b≤b (succ-ℕ k) =
+    transitive-leq-ℚ
+      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) (succ-ℕ k))
+      ( one-ℚ +ℚ
+        ( rational-ℚ⁺ r *ℚ
+          sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k))
+      ( b)
+      ( transitive-leq-ℚ
+        ( one-ℚ +ℚ
+          ( rational-ℚ⁺ r *ℚ
+            sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k))
+        ( one-ℚ +ℚ (rational-ℚ⁺ r *ℚ b))
+        ( b)
+        ( one+r*b≤b)
+        ( preserves-leq-right-add-ℚ
+          ( one-ℚ)
+          ( rational-ℚ⁺ r *ℚ
+            sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k)
+          ( rational-ℚ⁺ r *ℚ b)
+          ( preserves-leq-left-mul-ℚ⁺
+            ( r)
+            ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k)
+            ( b)
+            ( leq-bound-sum-standard-geometric-fin-sequence-ℚ
+              r b zero≤b one+r*b≤b k))))
+      ( leq-eq-ℚ
+        ( compute-sum-standard-geometric-fin-sequence-succ-Commutative-Ring
+          ( commutative-ring-ℚ)
+          ( one-ℚ)
+          ( rational-ℚ⁺ r)
+          ( k)))
+```
+
+### The geometric series 1 + ½ + ¼ + ⅛ + ⋯
+
+```agda
+le-rational-one-half-one-ℚ :
+  le-ℚ (rational-ℚ⁺ one-half-ℚ⁺) (rational-ℚ⁺ one-ℚ⁺)
+le-rational-one-half-one-ℚ =
+  tr
+    ( le-ℚ (rational-ℚ⁺ one-half-ℚ⁺))
+    ( ap rational-ℚ⁺ inv-one-ℚ⁺)
+    ( inv-le-ℚ⁺
+      ( one-ℚ⁺)
+      ( two-ℚ⁺)
+      ( preserves-le-rational-ℕ {1} {2} _))
+
+le-abs-one-half-one-ℚ :
+  le-ℚ (rational-abs-ℚ one-half-ℚ) (rational-ℚ⁺ one-ℚ⁺)
+le-abs-one-half-one-ℚ =
+  tr
+    ( λ z → le-ℚ z (rational-ℚ⁺ one-ℚ⁺))
+    ( inv (rational-abs-rational-ℚ⁺ one-half-ℚ⁺))
+    ( le-rational-one-half-one-ℚ)
+
+sum-standard-geometric-sequence-one-half-ℚ : ℚ
+sum-standard-geometric-sequence-one-half-ℚ =
+  ( one-ℚ) *ℚ
+  ( rational-inv-ℚˣ
+    ( invertible-diff-le-abs-ℚ one-half-ℚ one-ℚ⁺ le-abs-one-half-one-ℚ))
+
+abstract
+  is-sum-standard-geometric-sequence-one-half-ℚ :
+    is-sum-series-Metric-Ab {G = metric-ab-add-ℚ}
+      ( series-terms-Metric-Ab
+        ( seq-standard-geometric-sequence-ℚ one-ℚ one-half-ℚ))
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+  is-sum-standard-geometric-sequence-one-half-ℚ =
+    sum-standard-geometric-sequence-ℚ one-ℚ one-half-ℚ le-abs-one-half-one-ℚ
+
+  eq-diff-one-one-half-one-half-ℚ :
+    one-ℚ -ℚ one-half-ℚ ＝ one-half-ℚ
+  eq-diff-one-one-half-one-half-ℚ =
+    equational-reasoning
+      one-ℚ -ℚ one-half-ℚ
+      ＝ (one-half-ℚ +ℚ one-half-ℚ) -ℚ one-half-ℚ
+        by ap (_-ℚ one-half-ℚ) (inv twice-one-half-ℚ)
+      ＝ one-half-ℚ +ℚ (one-half-ℚ -ℚ one-half-ℚ)
+        by associative-add-ℚ one-half-ℚ one-half-ℚ (neg-ℚ one-half-ℚ)
+      ＝ one-half-ℚ +ℚ zero-ℚ
+        by ap (one-half-ℚ +ℚ_) (right-inverse-law-add-ℚ one-half-ℚ)
+      ＝ one-half-ℚ
+        by right-unit-law-add-ℚ one-half-ℚ
+
+  eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ :
+    sum-standard-geometric-sequence-one-half-ℚ ＝ rational-ℕ 2
+  eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ =
+    let
+      q-one-half-ℚˣ : ℚˣ
+      q-one-half-ℚˣ =
+        invertible-diff-le-abs-ℚ one-half-ℚ one-ℚ⁺ le-abs-one-half-one-ℚ
+
+      eq-rational-q-one-half-ℚˣ :
+        rational-ℚˣ q-one-half-ℚˣ ＝ one-ℚ -ℚ one-half-ℚ
+      eq-rational-q-one-half-ℚˣ = refl
+
+      eq-mul-two-rational-q-one-half-ℚˣ :
+        rational-ℕ 2 *ℚ rational-ℚˣ q-one-half-ℚˣ ＝ one-ℚ
+      eq-mul-two-rational-q-one-half-ℚˣ =
+        ( ap (rational-ℕ 2 *ℚ_) eq-rational-q-one-half-ℚˣ) ∙
+        ( ap (rational-ℕ 2 *ℚ_) eq-diff-one-one-half-one-half-ℚ) ∙
+        ( mul-two-one-half-ℚ)
+    in
+      ( ap
+        ( _*ℚ rational-inv-ℚˣ q-one-half-ℚˣ)
+        ( inv eq-mul-two-rational-q-one-half-ℚˣ)) ∙
+      ( cancel-right-mul-div-ℚˣ (rational-ℕ 2) q-one-half-ℚˣ)
+
+  leq-zero-sum-standard-geometric-sequence-one-half-ℚ :
+    leq-ℚ zero-ℚ sum-standard-geometric-sequence-one-half-ℚ
+  leq-zero-sum-standard-geometric-sequence-one-half-ℚ =
+    transitive-leq-ℚ
+      ( zero-ℚ)
+      ( rational-ℕ 2)
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+      ( leq-eq-ℚ
+        ( inv eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ))
+      ( preserves-leq-rational-ℕ {0} {2} (leq-zero-ℕ 2))
+
+  leq-one-plus-half-mul-sum-standard-geometric-sequence-one-half-ℚ :
+    leq-ℚ
+      ( one-ℚ +ℚ
+        ( one-half-ℚ *ℚ sum-standard-geometric-sequence-one-half-ℚ))
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+  leq-one-plus-half-mul-sum-standard-geometric-sequence-one-half-ℚ =
+    leq-eq-ℚ
+      ( equational-reasoning
+        one-ℚ +ℚ (one-half-ℚ *ℚ sum-standard-geometric-sequence-one-half-ℚ)
+        ＝ one-ℚ +ℚ (one-half-ℚ *ℚ rational-ℕ 2)
+          by
+            ap
+              ( λ x → one-ℚ +ℚ (one-half-ℚ *ℚ x))
+              ( eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ)
+        ＝ one-ℚ +ℚ one-ℚ
+          by ap (one-ℚ +ℚ_) mul-one-half-two-ℚ
+        ＝ rational-ℕ 2
+          by twice-one-ℚ
+        ＝ sum-standard-geometric-sequence-one-half-ℚ
+          by inv eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ)
+
+  leq-two-sum-standard-geometric-one-half-ℚ :
+    (k : ℕ) →
+    leq-ℚ
+      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k)
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+  leq-two-sum-standard-geometric-one-half-ℚ =
+    leq-bound-sum-standard-geometric-fin-sequence-ℚ
+      ( one-half-ℚ⁺)
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+      ( leq-zero-sum-standard-geometric-sequence-one-half-ℚ)
+      ( leq-one-plus-half-mul-sum-standard-geometric-sequence-one-half-ℚ)
+
+  leq-rational-two-sum-standard-geometric-one-half-ℚ :
+    (k : ℕ) →
+    leq-ℚ
+      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k)
+      ( rational-ℕ 2)
+  leq-rational-two-sum-standard-geometric-one-half-ℚ k =
+    transitive-leq-ℚ
+      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k)
+      ( sum-standard-geometric-sequence-one-half-ℚ)
+      ( rational-ℕ 2)
+      ( leq-eq-ℚ
+        ( eq-sum-standard-geometric-sequence-one-half-rational-two-ℚ))
+      ( leq-two-sum-standard-geometric-one-half-ℚ k)
 ```
 
 ## External links

@@ -42,10 +42,13 @@ open import real-numbers.extensionality-multiplication-bilinear-form-real-number
 open import real-numbers.field-of-real-numbers public
 open import real-numbers.finitely-enumerable-subsets-real-numbers public
 open import real-numbers.geometric-sequences-real-numbers public
+open import real-numbers.greatest-postfixpoints-endomaps-macneille-real-numbers public
+open import real-numbers.increasing-endomaps-macneille-real-numbers public
 open import real-numbers.increasing-endomaps-real-numbers public
 open import real-numbers.increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
+open import real-numbers.inequalities-addition-macneille-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-macneille-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
@@ -68,6 +71,9 @@ open import real-numbers.large-multiplicative-group-of-positive-real-numbers pub
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers public
+open import real-numbers.least-upper-bounds-postfixpoints-endomaps-macneille-real-numbers public
+open import real-numbers.least-upper-bounds-translations-addition-macneille-real-numbers public
+open import real-numbers.predicative-levy-uncountability-argument-macneille-real-numbers public
 open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-of-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
@@ -102,14 +108,17 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-macneille-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
+open import real-numbers.nonnegative-rational-translation-macneille-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.not-in-image-greatest-postfixpoints-macneille-real-numbers public
 open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
 open import real-numbers.positive-real-numbers public
+open import real-numbers.postfixpoints-endomaps-macneille-real-numbers public
 open import real-numbers.powers-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
 open import real-numbers.raising-universe-levels-located-macneille-real-numbers public
@@ -122,6 +131,7 @@ open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-macneille-real-numbers public
 open import real-numbers.rational-real-numbers public
+open import real-numbers.rational-translation-macneille-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
@@ -150,6 +160,7 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
+open import real-numbers.uncountability-macneille-real-numbers public
 open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers public

@@ -20,6 +20,8 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.posets
+open import order-theory.preorders
 
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
@@ -186,7 +188,7 @@ antisymmetric-leq-macneille-ℝ x y x≤y y≤x =
       ( pr2 y≤x))
 ```
 
-### Inequality on MacNeille reals is a large poset
+### Inequality on MacNeille reals form a poset
 
 ```agda
 large-preorder-macneille-ℝ : Large-Preorder lsuc (_⊔_)
@@ -202,4 +204,12 @@ large-poset-macneille-ℝ =
   λ where
   .large-preorder-Large-Poset → large-preorder-macneille-ℝ
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-macneille-ℝ
+
+preorder-macneille-ℝ : (l : Level) → Preorder (lsuc l) l
+preorder-macneille-ℝ =
+  preorder-Large-Preorder large-preorder-macneille-ℝ
+
+poset-macneille-ℝ : (l : Level) → Poset (lsuc l) l
+poset-macneille-ℝ =
+  poset-Large-Poset large-poset-macneille-ℝ
 ```

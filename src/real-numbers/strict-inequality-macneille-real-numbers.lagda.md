@@ -743,6 +743,46 @@ module _
           leq-le-rational-macneille-ℝ y x (forward-implication ∘ H))
 ```
 
+### Rational inequalities and strict inequalities against MacNeille reals
+
+```agda
+abstract
+  leq-not-le-right-macneille-real-ℚ :
+    {l : Level} (x : macneille-ℝ l) (q : ℚ) →
+    ¬ le-macneille-ℝ x (macneille-real-ℚ q) →
+    leq-macneille-ℝ (macneille-real-ℚ q) x
+  leq-not-le-right-macneille-real-ℚ x q not-x<q =
+    leq-le-rational-macneille-ℝ
+      ( macneille-real-ℚ q)
+      ( x)
+      ( λ r x<r →
+        rec-coproduct
+          ( λ q<r →
+            preserves-le-macneille-real-ℚ q<r)
+          ( λ r≤q →
+            ex-falso
+              ( not-x<q
+                ( concatenate-le-leq-macneille-ℝ
+                  ( x)
+                  ( macneille-real-ℚ r)
+                  ( macneille-real-ℚ q)
+                  ( x<r)
+                  ( leq-macneille-real-ℚ r≤q))))
+          ( decide-le-leq-ℚ q r))
+
+  double-negation-elim-leq-left-macneille-real-ℚ :
+    {l : Level} →
+    (x : macneille-ℝ l) →
+    (q : ℚ) →
+    ¬¬ leq-macneille-ℝ (macneille-real-ℚ q) x →
+    leq-macneille-ℝ (macneille-real-ℚ q) x
+  double-negation-elim-leq-left-macneille-real-ℚ
+    x q ¬¬q≤x =
+    leq-not-le-right-macneille-real-ℚ x q
+      ( λ x<q →
+        ¬¬q≤x (λ q≤x → not-le-leq-macneille-ℝ (macneille-real-ℚ q) x q≤x x<q))
+```
+
 ### `0 < 1`
 
 ```agda
@@ -766,14 +806,13 @@ abstract
           ( ∃ ℚ⁺ (λ q → le-prop-macneille-ℝ x (macneille-real-ℚ⁺ q)))
     in do
       (p , x<p) ← is-inhabited-upper-cut-macneille-ℝ x
-      let q = max-ℚ p one-ℚ
       intro-exists
-        ( q ,
+        ( max-ℚ p one-ℚ ,
           is-positive-le-zero-ℚ
             ( concatenate-le-leq-ℚ
               ( zero-ℚ)
               ( one-ℚ)
-              ( q)
+              ( max-ℚ p one-ℚ)
               ( le-zero-one-ℚ)
               ( leq-right-max-ℚ p one-ℚ)))
         ( le-real-is-in-upper-cut-macneille-ℝ

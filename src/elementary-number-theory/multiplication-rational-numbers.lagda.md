@@ -474,6 +474,14 @@ abstract
         by ap-add-ℚ refl (left-mul-rational-nat-ℚ n q)
       ＝ multiple-Ab abelian-group-add-ℚ (succ-ℕ n) q
         by inv (multiple-succ-Ab' abelian-group-add-ℚ n q)
+
+  eq-succ-mul-rational-ℕ-right-ℚ :
+    (n : ℕ) (q : ℚ) →
+    q +ℚ (rational-ℕ n *ℚ q) ＝ rational-ℕ (succ-ℕ n) *ℚ q
+  eq-succ-mul-rational-ℕ-right-ℚ n q =
+    inv
+      ( ( ap-mul-ℚ (inv (succ-rational-ℕ n)) refl) ∙
+        ( mul-left-succ-ℚ (rational-ℕ n) q))
 ```
 
 ### `2q = q + q`
@@ -482,6 +490,11 @@ abstract
 abstract
   mul-two-ℚ : (q : ℚ) → rational-ℕ 2 *ℚ q ＝ q +ℚ q
   mul-two-ℚ = left-mul-rational-nat-ℚ 2
+
+  twice-one-ℚ : one-ℚ +ℚ one-ℚ ＝ rational-ℕ 2
+  twice-one-ℚ =
+    inv (mul-two-ℚ one-ℚ) ∙
+    right-unit-law-mul-ℚ (rational-ℕ 2)
 ```
 
 ### The product of a rational number and its denominator is its numerator

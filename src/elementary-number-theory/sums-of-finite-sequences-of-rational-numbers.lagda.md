@@ -107,3 +107,14 @@ compute-sum-one-element-ℚ :
 compute-sum-one-element-ℚ =
   compute-sum-one-element-Commutative-Ring commutative-ring-ℚ
 ```
+
+### Interchange of addition and sums of finite rational sequences
+
+```agda
+interchange-add-sum-fin-sequence-ℚ :
+  (n : ℕ) (a b : Fin n → ℚ) →
+  sum-fin-sequence-ℚ n a +ℚ sum-fin-sequence-ℚ n b ＝
+  sum-fin-sequence-ℚ n (λ i → a i +ℚ b i)
+interchange-add-sum-fin-sequence-ℚ =
+  interchange-add-sum-fin-sequence-type-Commutative-Ring commutative-ring-ℚ
+```

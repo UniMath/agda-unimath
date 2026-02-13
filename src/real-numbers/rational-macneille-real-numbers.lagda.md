@@ -38,7 +38,10 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-lower-dedekind-real-numbers
+open import real-numbers.inequality-macneille-real-numbers
 open import real-numbers.located-macneille-real-numbers
+open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
@@ -258,6 +261,31 @@ abstract
     (p : ℚ) → is-rational-macneille-ℝ (macneille-real-ℚ p) p
   is-rational-macneille-real-ℚ p =
     ap macneille-real-ℝ (eq-raise-ℝ (real-ℚ p))
+```
+
+### The inclusion of rationals into MacNeille reals preserves inequality
+
+```agda
+abstract
+  leq-macneille-real-ℚ :
+    {p q : ℚ} →
+    leq-ℚ p q →
+    leq-macneille-ℝ
+      ( macneille-real-ℚ p)
+      ( macneille-real-ℚ q)
+  leq-macneille-real-ℚ {p} {q} p≤q =
+    leq-macneille-leq-lower-real-macneille-ℝ
+      ( macneille-real-ℚ p)
+      ( macneille-real-ℚ q)
+      ( λ r r<p →
+        tr
+          ( λ Lq → is-in-cut-lower-ℝ Lq r)
+          ( inv (eq-lower-real-macneille-real-ℚ q))
+          ( preserves-leq-lower-real-ℚ p q p≤q r
+            ( tr
+              ( λ Lp → is-in-cut-lower-ℝ Lp r)
+              ( eq-lower-real-macneille-real-ℚ p)
+              ( r<p))))
 ```
 
 ### A raised rational MacNeille real is rational

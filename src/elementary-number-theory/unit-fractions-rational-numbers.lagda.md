@@ -109,6 +109,16 @@ abstract
     ( inv (left-mul-rational-nat-ℚ 2 one-half-ℚ)) ∙
     ( ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ (positive-rational-ℕ⁺ two-ℕ⁺)))
 
+  mul-two-one-half-ℚ : rational-ℕ 2 *ℚ one-half-ℚ ＝ one-ℚ
+  mul-two-one-half-ℚ =
+    ( mul-two-ℚ one-half-ℚ) ∙
+    twice-one-half-ℚ
+
+  mul-one-half-two-ℚ : one-half-ℚ *ℚ rational-ℕ 2 ＝ one-ℚ
+  mul-one-half-two-ℚ =
+    ( commutative-mul-ℚ one-half-ℚ (rational-ℕ 2)) ∙
+    mul-two-one-half-ℚ
+
   twice-left-mul-one-half-ℚ :
     (q : ℚ) → (one-half-ℚ *ℚ q) +ℚ (one-half-ℚ *ℚ q) ＝ q
   twice-left-mul-one-half-ℚ q =

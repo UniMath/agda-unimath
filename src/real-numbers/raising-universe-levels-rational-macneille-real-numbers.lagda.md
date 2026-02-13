@@ -16,6 +16,10 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.double-negation
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
@@ -27,6 +31,7 @@ open import real-numbers.macneille-real-numbers
 open import real-numbers.raising-universe-levels-macneille-real-numbers
 open import real-numbers.rational-macneille-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-macneille-real-numbers
 open import real-numbers.strict-inequality-macneille-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
@@ -66,6 +71,81 @@ abstract opaque
             ( preserves-leq-lower-real-ℚ p q p≤q r (map-inv-raise r<p)))))
 ```
 
+### Raising a rational MacNeille real agrees with raising the underlying MacNeille real
+
+```agda
+abstract
+  eq-raise-macneille-real-ℚ-raise-macneille-ℝ :
+    {l : Level} (q : ℚ) →
+    raise-macneille-real-ℚ l q ＝
+    raise-macneille-ℝ l (macneille-real-ℚ q)
+  eq-raise-macneille-real-ℚ-raise-macneille-ℝ {l} q =
+    eq-eq-lower-real-macneille-ℝ
+      ( raise-macneille-real-ℚ l q)
+      ( raise-macneille-ℝ l (macneille-real-ℚ q))
+      ( refl)
+```
+
+### Comparing inequalities against raised and unraised rational MacNeille reals
+
+```agda
+module _
+  {l : Level}
+  (x : macneille-ℝ l)
+  (q : ℚ)
+  where
+
+  abstract
+    sim-raise-macneille-real-ℚ-macneille-real-ℚ :
+      sim-macneille-ℝ
+        ( raise-macneille-real-ℚ l q)
+        ( macneille-real-ℚ q)
+    sim-raise-macneille-real-ℚ-macneille-real-ℚ =
+      transitive-sim-macneille-ℝ
+        ( raise-macneille-real-ℚ l q)
+        ( raise-macneille-ℝ l (macneille-real-ℚ q))
+        ( macneille-real-ℚ q)
+        ( sim-raise-macneille-ℝ' l (macneille-real-ℚ q))
+        ( sim-eq-macneille-ℝ
+          ( eq-raise-macneille-real-ℚ-raise-macneille-ℝ q))
+
+    leq-raise-macneille-real-ℚ-iff-leq-macneille-real-ℚ :
+      leq-macneille-ℝ (raise-macneille-real-ℚ l q) x ↔
+      leq-macneille-ℝ (macneille-real-ℚ q) x
+    leq-raise-macneille-real-ℚ-iff-leq-macneille-real-ℚ =
+      ( ( λ q≤x →
+          transitive-leq-macneille-ℝ
+            ( macneille-real-ℚ q)
+            ( raise-macneille-real-ℚ l q)
+            ( x)
+            ( q≤x)
+            ( leq-sim-macneille-ℝ'
+              ( sim-raise-macneille-real-ℚ-macneille-real-ℚ))) ,
+        ( λ q≤x →
+          transitive-leq-macneille-ℝ
+            ( raise-macneille-real-ℚ l q)
+            ( macneille-real-ℚ q)
+            ( x)
+            ( q≤x)
+            ( leq-sim-macneille-ℝ
+                ( sim-raise-macneille-real-ℚ-macneille-real-ℚ))))
+
+    double-negation-elim-leq-left-raise-macneille-real-ℚ :
+      ¬¬ leq-macneille-ℝ (raise-macneille-real-ℚ l q) x →
+      leq-macneille-ℝ (raise-macneille-real-ℚ l q) x
+    double-negation-elim-leq-left-raise-macneille-real-ℚ ¬¬q≤x =
+      backward-implication
+        ( leq-raise-macneille-real-ℚ-iff-leq-macneille-real-ℚ)
+        ( double-negation-elim-leq-left-macneille-real-ℚ x q
+          ( λ ¬q≤x →
+            ¬¬q≤x
+              ( λ q≤x →
+                ¬q≤x
+                  ( forward-implication
+                    ( leq-raise-macneille-real-ℚ-iff-leq-macneille-real-ℚ)
+                    ( q≤x)))))
+```
+
 ### Raising universe levels preserves strict order
 
 ```agda
@@ -89,7 +169,7 @@ abstract opaque
     {l : Level} (p q : ℚ) →
     le-macneille-ℝ (raise-macneille-real-ℚ l p) (raise-macneille-real-ℚ l q) →
     le-ℚ p q
-  reflects-le-raise-macneille-real-ℚ {l} p q =
+  reflects-le-raise-macneille-real-ℚ p q =
     elim-exists
       ( le-ℚ-Prop p q)
       ( λ r (p<r , r<q) →
@@ -110,7 +190,7 @@ abstract opaque
     {l : Level} (p q : ℚ) →
     le-macneille-ℝ (raise-macneille-real-ℚ l p) (macneille-real-ℚ q) →
     le-ℚ p q
-  reflects-le-left-raise-macneille-real-ℚ {l} p q =
+  reflects-le-left-raise-macneille-real-ℚ p q =
     elim-exists
       ( le-ℚ-Prop p q)
       ( λ r (p<r , r<q) →

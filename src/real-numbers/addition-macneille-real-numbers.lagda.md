@@ -67,6 +67,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
 open import real-numbers.strict-inequality-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-macneille-real-numbers
 ```
 
 </details>
@@ -626,6 +627,29 @@ abstract
 ### Adding raised MacNeille real numbers
 
 ```agda
+abstract
+  associative-add-macneille-ℝ :
+    {l1 l2 l3 : Level}
+    (x : located-macneille-ℝ l1)
+    (y : located-macneille-ℝ l2)
+    (z : macneille-ℝ l3) →
+    add-lower-ℝ
+      ( lower-real-macneille-ℝ (pr1 x))
+      ( add-lower-ℝ
+        ( lower-real-macneille-ℝ (pr1 y))
+        ( lower-real-macneille-ℝ z)) ＝
+    add-lower-ℝ
+      ( add-lower-ℝ
+        ( lower-real-macneille-ℝ (pr1 x))
+        ( lower-real-macneille-ℝ (pr1 y)))
+      ( lower-real-macneille-ℝ z)
+  associative-add-macneille-ℝ x y z =
+    inv
+      ( associative-add-lower-ℝ
+        ( lower-real-macneille-ℝ (pr1 x))
+        ( lower-real-macneille-ℝ (pr1 y))
+        ( lower-real-macneille-ℝ z))
+
 abstract
   add-raise-macneille-ℝ :
     {l1 l2 l3 l4 : Level}
