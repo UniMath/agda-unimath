@@ -24,11 +24,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cumulative large set" Agda=Cumulative-Large-Set}} is a
-universe polymorphic type `X : (l : Level) → UU (α l)` equipped with a
+A {{#concept "cumulative large set" Agda=Cumulative-Large-Set}} is a universe
+polymorphic type `X : (l : Level) → UU (α l)` equipped with a
 [large similarity relation](foundation.large-similarity-relations.md) and an
 inclusion map for all [universe levels](foundation.universe-levels.md) `l1` and
 `l2`, `raise : X l1 → X (l1 ⊔ l2)`, such that `x` is similar to `raise x`.
+
+Many structures are universe-polymorphic in nature. A cumulative large set
+represents a universe-polymorphic [set](foundation.sets.md) with an embedding
+operation into higher universe levels.
 
 ## Definition
 
