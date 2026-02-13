@@ -44,9 +44,8 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
 Given a [metric space](metric-spaces.metric-spaces.md) `M` and a
 [pseudometric space](metric-spaces.pseudometric-spaces.md) `P`, precomposition
-with the natural [isometry](metric-spaces.isometries-pseudometric-spaces.md) to
-the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
+with the unit [isometry](metric-spaces.isometries-pseudometric-spaces.md) of
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
 
 ```text
   κ : P → C P
@@ -71,7 +70,7 @@ short map `g : C P → M` such that
 if and only if the images `Cf u` of Cauchy approximations `u : C P` are
 [convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
 `M`. In that case, `f` is called a
-{{#concept "complete short maps" Disambiguation="from a pseudometric space to a metric space" Agda=complete-short-map-Pseudometric-Space}}
+{{#concept "complete short map" Disambiguation="from a pseudometric space to a metric space" Agda=complete-short-map-Pseudometric-Space}}
 from `P` to `M`. The type of short maps for the Cauchy pseudocompletion `C P` of
 a pseudometric space `P` to a metric space `M` is equivalent to the type of
 **complete short maps** from `P` to `M`.
