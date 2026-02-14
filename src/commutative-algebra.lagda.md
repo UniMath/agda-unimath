@@ -71,6 +71,8 @@ open import commutative-algebra.products-subsets-commutative-rings public
 open import commutative-algebra.radical-ideals-commutative-rings public
 open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
+open import commutative-algebra.subalgebras-commutative-rings public
+open import commutative-algebra.subsets-algebras-commutative-rings public
 open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-rings public
