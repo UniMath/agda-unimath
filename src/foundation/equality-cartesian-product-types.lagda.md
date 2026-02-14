@@ -135,6 +135,32 @@ ap-pr2-eq-pair :
 ap-pr2-eq-pair refl refl = refl
 ```
 
+###
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x : A} {y y' : B x}
+  where
+
+  ap-pr1-ap-pair :
+    (p : y ＝ y') → ap pr1 (ap (pair {B = B} x) p) ＝ refl
+  ap-pr1-ap-pair refl = refl
+
+  inv-ap-pr1-ap-pair :
+    (p : y ＝ y') → refl ＝ ap pr1 (ap (pair {B = B} x) p)
+  inv-ap-pr1-ap-pair p = inv (ap-pr1-ap-pair p)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x : A} {y y' : B}
+  where
+
+  ap-pr2-ap-pair : (p : y ＝ y') → ap pr2 (ap (pair {B = λ _ → B} x) p) ＝ p
+  ap-pr2-ap-pair refl = refl
+
+  inv-ap-pr2-ap-pair : (p : y ＝ y') → p ＝ ap pr2 (ap (pair {B = λ _ → B} x) p)
+  inv-ap-pr2-ap-pair p = inv (ap-pr2-ap-pair p)
+```
+
 #### Computing transport along a path of the form `eq-pair`
 
 ```agda
