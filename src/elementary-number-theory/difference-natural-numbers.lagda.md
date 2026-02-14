@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -34,6 +35,10 @@ Given two [natural numbers](elementary-number-theory.natural-numbers.md) `a` and
 is `a` if and only if `b` is
 [less than or equal to](elementary-number-theory.inequality-natural-numbers.md)
 `a`.
+
+The difference of `a` and `b` is equivalent to the
+[distance](elementary-number-theory.distance-natural-numbers.md) between `a` and
+`b`, but is only defined when `b ≤ a`.
 
 ## Definition
 
@@ -83,7 +88,7 @@ subtraction-prop-ℕ n m =
 
 ## Properties
 
-### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
+### We have `n ≤ m` if and only if there is a number `l` such that `l + n = m`
 
 ```agda
 subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → type-subtraction-ℕ n m
@@ -136,4 +141,15 @@ abstract
           by ap-add-ℕ refl (inv (left-add-diff-leq-ℕ m n n≤m))
         ＝ diff-leq-ℕ m n n≤m +ℕ (k +ℕ n)
           by left-swap-add-ℕ k (diff-leq-ℕ m n n≤m) n)
+```
+
+### Where defined, the distance and difference of natural numbers agree
+
+```agda
+abstract
+  eq-diff-dist-leq-ℕ :
+    (m n : ℕ) (n≤m : leq-ℕ n m) → diff-leq-ℕ m n n≤m ＝ dist-ℕ m n
+  eq-diff-dist-leq-ℕ 0 0 star = refl
+  eq-diff-dist-leq-ℕ (succ-ℕ m) 0 star = refl
+  eq-diff-dist-leq-ℕ (succ-ℕ m) (succ-ℕ n) m≤n = eq-diff-dist-leq-ℕ m n m≤n
 ```
