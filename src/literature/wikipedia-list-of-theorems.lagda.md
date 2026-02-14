@@ -190,6 +190,16 @@ open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
 ```
 
+### Monotone convergence theorem {#Q4454933}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+  ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
 ### Triangle inequality theorem {#Q208216}
 
 **Author:** [malarbol](https://github.com/malarbol)

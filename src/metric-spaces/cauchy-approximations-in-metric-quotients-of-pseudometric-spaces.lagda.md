@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces where
+module metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -42,15 +42,15 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -80,7 +80,7 @@ approximations in the
 Cauchy approximation in the metric quotient of a pseudometric space has a
 {{#concept "lift up to similarity" Agda=has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space}}
 if it is similar (in the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md)
 of the metric quotient) to the pointwise quotient of
 [some](foundation.existential-quantification.md) Cauchy approximation in the
 pseudometric space.
@@ -109,7 +109,7 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
   short-map-cauchy-approximation-metric-quotient-Pseudometric-Space =
-    short-map-cauchy-approximation-short-map-Pseudometric-Space
+    short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
       ( short-map-unit-metric-quotient-Pseudometric-Space M)
