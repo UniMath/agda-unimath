@@ -13,7 +13,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -63,7 +63,7 @@ catalan-numbers =
     ( λ _ → ℕ)
     ( 1)
     ( λ k C →
-      sum-Fin-ℕ k
+      sum-fin-sequence-ℕ k
         ( λ i →
           mul-ℕ
             ( C ( nat-Fin k i)

@@ -371,22 +371,6 @@ abstract
     concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
 ```
 
-### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
-
-```agda
-subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → l +ℕ n ＝ m)
-subtraction-leq-ℕ zero-ℕ m p = (m , refl)
-subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = (pr1 P , ap succ-ℕ (pr2 P))
-  where
-  P : Σ ℕ (λ l' → l' +ℕ n ＝ m)
-  P = subtraction-leq-ℕ n m p
-
-leq-subtraction-ℕ : (n m l : ℕ) → l +ℕ n ＝ m → n ≤-ℕ m
-leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
-leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
-  leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
-```
-
 ### Multiplication preserves inequality of natural numbers
 
 ```agda

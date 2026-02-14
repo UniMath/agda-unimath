@@ -10,7 +10,7 @@ open import foundation.fibers-of-maps public
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.decidable-types
