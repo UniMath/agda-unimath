@@ -527,11 +527,7 @@ module _
             ( refl-leq-ℚ (weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
             ( leq-zero-weight-levy-sequence-macneille-ℝ (nat-Fin k i))
             ( χ (nat-Fin k i)))
-        ( λ _ →
-          refl-leq-ℚ
-            ( summand-levy-sequence-macneille-ℝ
-              ( nat-Fin k i)
-              ( χ (nat-Fin k i))))
+        ( λ _ → refl-leq-ℚ _)
         ( has-decidable-equality-ℕ (nat-Fin k i) n)
 
     leq-zero-summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool :
