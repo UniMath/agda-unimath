@@ -175,7 +175,6 @@ open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
 open import foundation.equality-of-equality-cartesian-product-types public
 open import foundation.equality-truncation-levels public
-open import foundation.standard-equalizers public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
 open import foundation.equivalence-induction public
@@ -434,6 +433,7 @@ open import foundation.spans-of-spans public
 open import foundation.split-idempotent-maps public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.standard-equalizers public
 open import foundation.standard-pullbacks public
 open import foundation.standard-ternary-pullbacks public
 open import foundation.strict-symmetrization-binary-relations public
