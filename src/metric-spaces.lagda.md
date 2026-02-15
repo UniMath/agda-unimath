@@ -141,6 +141,7 @@ open import metric-spaces.metric-space-of-maps-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-short-maps-metric-spaces public
+open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public

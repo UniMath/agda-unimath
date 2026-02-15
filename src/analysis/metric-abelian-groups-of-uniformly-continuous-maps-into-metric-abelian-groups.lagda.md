@@ -7,25 +7,33 @@ module analysis.metric-abelian-groups-of-uniformly-continuous-maps-into-metric-a
 <details><summary>Imports</summary>
 
 ```agda
-open import metric-spaces.maps-metric-spaces
 open import analysis.metric-abelian-groups
+
 open import foundation.dependent-pair-types
-open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-maps-metric-spaces
 open import foundation.logical-equivalences
-open import metric-spaces.isometries-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 open import foundation.universe-levels
+
 open import group-theory.abelian-groups
 open import group-theory.function-abelian-groups
-open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces
 open import group-theory.subgroups-abelian-groups
+
+open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
+open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
 
 ## Idea
+
+Given a [metric space](metric-spaces.metric-spaces.md) `X` and a
+[metric abelian group](analysis.metric-abelian-groups.md) `G`, the set of
+[uniformly continuous maps](metric-spaces.uniformly-continuous-maps-metric-spaces.md)
+from `X` to `G` itself forms a metric abelian group.
 
 ## Definition
 

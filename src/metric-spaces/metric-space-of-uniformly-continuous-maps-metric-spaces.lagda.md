@@ -11,8 +11,8 @@ open import foundation.universe-levels
 
 open import metric-spaces.metric-space-of-maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>

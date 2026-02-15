@@ -9,12 +9,12 @@ module metric-spaces.uniformly-continuous-maps-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
@@ -29,12 +29,12 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
-open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
