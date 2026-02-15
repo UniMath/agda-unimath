@@ -14,7 +14,6 @@ open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.forcing-boolean-predicates-natural-numbers
 open import elementary-number-theory.geometric-sequences-rational-numbers
 open import elementary-number-theory.inequalities-sums-of-finite-sequences-of-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -72,6 +71,8 @@ open import real-numbers.rational-translation-macneille-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
 open import real-numbers.strict-inequality-macneille-real-numbers
 open import real-numbers.upper-bounds-families-macneille-real-numbers
+
+open import set-theory.adjoining-indices-boolean-sequences
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
@@ -401,15 +402,12 @@ If $\{n\}$ and $χ$ are admissible at $x$, then so is the adjoined predicate.
 
 ```agda
 adjoin-index-bounded-sequence-bool :
-  bounded-sequence-bool →
-  ℕ →
-  bounded-sequence-bool
-adjoin-index-bounded-sequence-bool
-  (k , (χ , adm-χ)) n =
+  bounded-sequence-bool → ℕ → bounded-sequence-bool
+adjoin-index-bounded-sequence-bool (k , χ , adm-χ) n =
   ( k +ℕ succ-ℕ n ,
-    force-true-at-ℕ n χ ,
+    force-true-at-sequence-bool χ n ,
     λ m n+k≤m →
-    is-false-force-true-at-ℕ n χ m
+    is-false-force-true-at-sequence-bool χ n m
       ( λ p →
         neq-le-ℕ
           ( concatenate-le-leq-ℕ
@@ -439,8 +437,8 @@ is-levy-admissible-adjoin-index-bounded-sequence-bool
   f y n S adm-S not-y≤fn m m∈extend-S =
   rec-coproduct
     ( λ m=n → inv-tr (λ t → ¬ leq-macneille-ℝ y (f t)) m=n not-y≤fn)
-    ( λ m∈S → adm-S m m∈S)
-    ( is-true-force-true-at-ℕ n (pr1 (pr2 S)) m m∈extend-S)
+    ( adm-S m)
+    ( is-true-force-true-at-sequence-bool (pr1 (pr2 S)) n m m∈extend-S)
 ```
 
 ## Sum estimates when adjoining indices to bounded boolean predicates
@@ -461,7 +459,6 @@ $$
 ```agda
 module _
   (n : ℕ) (S@(k , χ , _) : bounded-sequence-bool)
-  (let S∪n = adjoin-index-bounded-sequence-bool S n)
   where
 
   summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool :
@@ -474,14 +471,14 @@ module _
   summand-fin-sequence-adjoin-index-bounded-sequence-bool i =
     summand-levy-sequence-macneille-ℝ
       ( nat-Fin (k +ℕ succ-ℕ n) i)
-      ( force-true-at-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
+      ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i))
 
   summand-inl-fin-sequence-adjoin-index-bounded-sequence-bool :
     Fin k → ℚ
   summand-inl-fin-sequence-adjoin-index-bounded-sequence-bool i =
     summand-levy-sequence-macneille-ℝ
       ( nat-Fin k i)
-      ( force-true-at-ℕ n χ (nat-Fin k i))
+      ( force-true-at-sequence-bool χ n (nat-Fin k i))
 
   summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool :
     Fin (succ-ℕ n) → ℚ
@@ -500,7 +497,11 @@ module _
       i =
       ap
         ( λ m →
-          summand-levy-sequence-macneille-ℝ m (force-true-at-ℕ n χ m))
+          summand-levy-sequence-macneille-ℝ m
+            ( force-true-at-sequence-bool
+            ( χ)
+            ( n)
+            ( m)))
         ( inv (nat-inl-coproduct-Fin k (succ-ℕ n) i))
 
     leq-old-summand-inl-fin-sequence-adjoin-index-bounded-sequence-bool :
@@ -517,25 +518,37 @@ module _
             ( summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool i)
             ( summand-levy-sequence-macneille-ℝ
               ( nat-Fin k i)
-              ( force-true-at-from-decidable-equality-ℕ n χ (nat-Fin k i) d)))
-        ( λ _ →
-          ind-bool
-            ( λ b →
-              leq-ℚ
-                ( summand-levy-sequence-macneille-ℝ (nat-Fin k i) b)
-                ( weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
-            ( refl-leq-ℚ (weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
-            ( leq-zero-weight-levy-sequence-macneille-ℝ (nat-Fin k i))
-            ( χ (nat-Fin k i)))
-        ( λ _ → refl-leq-ℚ _)
+              ( force-true-at-sequence-bool χ n (nat-Fin k i))))
+        ( λ p →
+          transitive-leq-ℚ _ _ _
+            ( leq-eq-ℚ
+              ( inv
+                ( ap
+                  ( summand-levy-sequence-macneille-ℝ (nat-Fin k i))
+                  ( eq-force-true-at-eq-sequence-bool χ n (nat-Fin k i) p))))
+            ( ind-bool
+              ( λ b →
+                leq-ℚ
+                  ( summand-levy-sequence-macneille-ℝ (nat-Fin k i) b)
+                  ( weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
+              ( refl-leq-ℚ (weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
+              ( leq-zero-weight-levy-sequence-macneille-ℝ (nat-Fin k i))
+              ( χ (nat-Fin k i))))
+        ( λ q →
+          transitive-leq-ℚ _ _ _
+            ( leq-eq-ℚ
+              ( inv
+                ( ap
+                  ( summand-levy-sequence-macneille-ℝ (nat-Fin k i))
+                  ( eq-force-true-at-neq-sequence-bool χ n (nat-Fin k i) q))))
+            ( refl-leq-ℚ _))
         ( has-decidable-equality-ℕ (nat-Fin k i) n)
 
     leq-zero-summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool :
       (i : Fin (succ-ℕ n)) →
       leq-ℚ
         ( zero-ℚ)
-        ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool
-          ( i))
+        ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool i)
     leq-zero-summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool
       i =
       ind-bool
@@ -548,8 +561,8 @@ module _
         ( leq-zero-weight-levy-sequence-macneille-ℝ
           ( nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin k (succ-ℕ n) i)))
         ( refl-leq-ℚ zero-ℚ)
-        ( force-true-at-ℕ n χ
-          ( nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin  k (succ-ℕ n) i)))
+        ( force-true-at-sequence-bool χ n
+          ( nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin k (succ-ℕ n) i)))
 
     leq-zero-sum-summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool :
       leq-ℚ
@@ -628,7 +641,8 @@ module _
   leq-sum-levy-base-index-map-ℕ-sum-adjoin-index-bounded-sequence-bool :
     leq-ℚ
       ( dyadic-sum-bounded-sequence-bool S)
-      ( dyadic-sum-bounded-sequence-bool S∪n)
+      ( dyadic-sum-bounded-sequence-bool
+        ( adjoin-index-bounded-sequence-bool S n))
   leq-sum-levy-base-index-map-ℕ-sum-adjoin-index-bounded-sequence-bool =
     transitive-leq-ℚ _ _ _
       ( leq-sum-inl-extended-fin-sequence-sum-summand-fin-sequence-adjoin-index-bounded-sequence-bool)
@@ -699,7 +713,8 @@ module _
         ( χ (nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin k (succ-ℕ n) i)))
 
     eq-sum-old-fin-sequence-sum-inl-old-extended-fin-sequence-bounded-sequence-bool :
-      sum-fin-sequence-ℚ k summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool ＝
+      sum-fin-sequence-ℚ k
+        ( summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool) ＝
       sum-fin-sequence-ℚ k inl-old-extended-fin-sequence-bounded-sequence-bool
     eq-sum-old-fin-sequence-sum-inl-old-extended-fin-sequence-bounded-sequence-bool =
       ap
@@ -764,18 +779,14 @@ module _
           ( k +ℕ succ-ℕ n)
           ( nat-Fin (k +ℕ succ-ℕ n) iₙ)
           ( n)
-          ( strict-upper-bound-nat-Fin
-            ( k +ℕ succ-ℕ n)
-            ( iₙ))
+          ( strict-upper-bound-nat-Fin (k +ℕ succ-ℕ n) iₙ)
           ( concatenate-le-leq-ℕ
             { x = n}
             { y = succ-ℕ n}
             { z = k +ℕ succ-ℕ n}
             ( succ-le-ℕ n)
             ( leq-add-ℕ' (succ-ℕ n) k))
-          ( cong-nat-mod-succ-ℕ
-            ( k +ℕ n)
-            ( n))
+          ( cong-nat-mod-succ-ℕ (k +ℕ n) n)
 
     eq-delta-fin-sequence-index-eq-levy-base-index-extend-true-sequence-macneille-ℝ :
       (i : Fin (k +ℕ succ-ℕ n)) →
@@ -794,7 +805,6 @@ module _
         ( λ _ _ → refl)
         ( λ q p' → ex-falso (q p'))
         ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
-
 
     eq-delta-fin-sequence-selected-index-levy-base-index-extend-true-sequence-macneille-ℝ :
       delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ iₙ ＝
@@ -868,21 +878,19 @@ module _
             ( d))
         ( summand-levy-sequence-macneille-ℝ
           ( nat-Fin (k +ℕ succ-ℕ n) i)
-          ( force-true-at-from-decidable-equality-ℕ n χ
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( d)))
+          ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i)))
     leq-old-extended-add-delta-summand-fin-sequence-adjoin-index-bounded-sequence-bool-from-decidable
       χn=false i (inl p) =
       transitive-leq-ℚ _ _ _
         ( leq-eq-ℚ
           ( inv
-              ( ( ap
-                  ( summand-levy-sequence-macneille-ℝ
-                    ( nat-Fin (k +ℕ succ-ℕ n) i))
-                  ( inv (eq-force-true-at-from-decidable-equality-inl-ℕ n χ
-                    ( nat-Fin (k +ℕ succ-ℕ n) i)
-                    ( p)))) ∙
-                ( ap weight-levy-sequence-macneille-ℝ p))))
+            ( ( ap
+                ( summand-levy-sequence-macneille-ℝ
+                  ( nat-Fin (k +ℕ succ-ℕ n) i))
+                ( eq-force-true-at-eq-sequence-bool χ n
+                  ( nat-Fin (k +ℕ succ-ℕ n) i)
+                  ( p))) ∙
+              ( ap weight-levy-sequence-macneille-ℝ p))))
         ( transitive-leq-ℚ _ _ _
           ( ind-bool
             ( λ b →
@@ -910,7 +918,7 @@ module _
           ( inv
             ( ap
               ( summand-levy-sequence-macneille-ℝ (nat-Fin (k +ℕ succ-ℕ n) i))
-              ( eq-force-true-at-from-decidable-equality-inr-ℕ n χ
+              ( eq-force-true-at-neq-sequence-bool χ n
                 ( nat-Fin (k +ℕ succ-ℕ n) i)
                 ( q)))))
         ( transitive-leq-ℚ _ _ _
@@ -931,7 +939,8 @@ module _
       leq-ℚ
         ( dyadic-sum-bounded-sequence-bool S +ℚ
           weight-levy-sequence-macneille-ℝ n)
-        ( dyadic-sum-bounded-sequence-bool S∪n)
+        ( dyadic-sum-bounded-sequence-bool
+          ( adjoin-index-bounded-sequence-bool S n))
     leq-add-sum-levy-base-index-map-ℕ-weight-sum-adjoin-index-bounded-sequence-bool
       χn=false =
       transitive-leq-ℚ _ _ _
@@ -983,9 +992,7 @@ module _
               ( y)
               ( n)
               ( S)
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y
-                ( S)
-                ( adm-S))
+              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
               ( not-y≤fn)))
     leq-family-element-levy-base-index-map-ℕ-family-element-adjoin-index-bounded-sequence-bool
       n S x≤y adm-S not-y≤fn =
@@ -1019,7 +1026,7 @@ module _
   summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs i =
     summand-levy-sequence-macneille-ℝ
       ( nat-Fin (k +ℕ succ-ℕ n) i)
-      ( force-true-at-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
+      ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i))
 
   abstract
     eq-nat-Fin-iₙ-wfs :
@@ -1046,7 +1053,8 @@ module _
       eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs =
         ap
           ( λ m →
-            summand-levy-sequence-macneille-ℝ m (force-true-at-ℕ n χ m))
+            summand-levy-sequence-macneille-ℝ m
+              ( force-true-at-sequence-bool χ n m))
           ( eq-nat-Fin-iₙ-wfs) ∙
         ( ind-bool
           ( λ b →
@@ -1055,8 +1063,8 @@ module _
             weight-levy-sequence-macneille-ℝ n)
           ( λ _ → refl)
           ( λ ())
-          ( force-true-at-ℕ n χ n)
-          ( is-true-force-true-at-self-ℕ n χ))
+          ( force-true-at-sequence-bool χ n n)
+          ( is-true-force-true-at-self-sequence-bool χ n))
 
     leq-zero-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs :
       (i : Fin (k +ℕ succ-ℕ n)) →
@@ -1071,7 +1079,7 @@ module _
             ( summand-levy-sequence-macneille-ℝ (nat-Fin (k +ℕ succ-ℕ n) i) b))
         ( leq-zero-weight-levy-sequence-macneille-ℝ (nat-Fin (k +ℕ succ-ℕ n) i))
         ( refl-leq-ℚ zero-ℚ)
-        ( force-true-at-ℕ n χ (nat-Fin (k +ℕ succ-ℕ n) i))
+        ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i))
 
   abstract
     leq-weight-levy-map-ℕ-sum-adjoin-index-bounded-sequence-bool :

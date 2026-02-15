@@ -48,6 +48,7 @@ theory, and [Russell's paradox](set-theory.russells-paradox.md).
 ```agda
 module set-theory where
 
+open import set-theory.adjoining-indices-boolean-sequences public
 open import set-theory.baire-space public
 open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
