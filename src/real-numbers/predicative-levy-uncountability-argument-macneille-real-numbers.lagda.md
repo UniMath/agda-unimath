@@ -245,11 +245,7 @@ abstract
         ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
       ( rational-ℕ 2)
   leq-two-sum-all-weights-bounded-sequence-bool k =
-    transitive-leq-ℚ
-      ( sum-fin-sequence-ℚ k
-        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
-      ( sum-standard-geometric-fin-sequence-ℚ one-ℚ one-half-ℚ k)
-      ( rational-ℕ 2)
+    transitive-leq-ℚ _ _ _
       ( leq-rational-two-sum-standard-geometric-one-half-ℚ k)
       ( leq-eq-ℚ (eq-sum-all-weights-sum-standard-geometric-one-half-ℚ k))
 
@@ -259,11 +255,7 @@ abstract
       ( dyadic-sum-bounded-sequence-bool S)
       ( rational-ℕ 2)
   leq-two-dyadic-sum-bounded-sequence-bool (k , χ , adm-χ) =
-    transitive-leq-ℚ
-      ( dyadic-sum-bounded-sequence-bool (k , χ , adm-χ))
-      ( sum-fin-sequence-ℚ k
-        ( λ i → weight-levy-sequence-macneille-ℝ (nat-Fin k i)))
-      ( rational-ℕ 2)
+    transitive-leq-ℚ _ _ _
       ( leq-two-sum-all-weights-bounded-sequence-bool k)
       ( leq-sum-levy-base-index-map-ℕ-sum-all-weights-macneille-ℝ
         ( k , χ , adm-χ))
@@ -570,12 +562,7 @@ module _
           ( succ-ℕ n)
           ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool))
     leq-zero-sum-summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool =
-      transitive-leq-ℚ
-        ( zero-ℚ)
-        ( sum-fin-sequence-ℚ (succ-ℕ n) (λ _ → zero-ℚ))
-        ( sum-fin-sequence-ℚ
-          ( succ-ℕ n)
-          ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool))
+      transitive-leq-ℚ _ _ _
         ( preserves-leq-sum-fin-sequence-ℚ
           ( succ-ℕ n)
           ( λ _ → zero-ℚ)
@@ -602,13 +589,7 @@ module _
         ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
           inl-coproduct-Fin k (succ-ℕ n)))
   leq-sum-old-fin-sequence-sum-inl-extended-levy-base-index-extend-true-sequence-macneille-ℝ =
-    transitive-leq-ℚ
-      ( sum-fin-sequence-ℚ k (summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool))
-      ( sum-fin-sequence-ℚ k
-        ( summand-inl-fin-sequence-adjoin-index-bounded-sequence-bool))
-      ( sum-fin-sequence-ℚ k
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-          inl-coproduct-Fin k (succ-ℕ n)))
+    transitive-leq-ℚ _ _ _
       ( leq-eq-ℚ
         ( eq-sum-summand-inl-fin-sequence-adjoin-index-bounded-sequence-bool))
       ( preserves-leq-sum-fin-sequence-ℚ k
@@ -625,38 +606,13 @@ module _
         ( k +ℕ succ-ℕ n)
         ( summand-fin-sequence-adjoin-index-bounded-sequence-bool))
   leq-sum-inl-extended-fin-sequence-sum-summand-fin-sequence-adjoin-index-bounded-sequence-bool =
-    transitive-leq-ℚ
-      ( sum-fin-sequence-ℚ k
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-          inl-coproduct-Fin k (succ-ℕ n)))
-      ( sum-fin-sequence-ℚ k
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-          inl-coproduct-Fin k (succ-ℕ n)) +ℚ
-        sum-fin-sequence-ℚ
-          ( succ-ℕ n)
-          ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool))
-      ( sum-fin-sequence-ℚ
-        ( k +ℕ succ-ℕ n)
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool))
+    transitive-leq-ℚ _ _ _
       ( leq-eq-ℚ
         ( inv
           ( split-sum-fin-sequence-ℚ k
             ( succ-ℕ n)
             ( summand-fin-sequence-adjoin-index-bounded-sequence-bool))))
-      ( transitive-leq-ℚ
-        ( sum-fin-sequence-ℚ k
-          ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-            inl-coproduct-Fin k (succ-ℕ n)))
-        ( ( sum-fin-sequence-ℚ k
-            ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-              inl-coproduct-Fin k (succ-ℕ n))) +ℚ
-          ( zero-ℚ))
-        ( ( sum-fin-sequence-ℚ k
-            ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-              inl-coproduct-Fin k (succ-ℕ n))) +ℚ
-          ( sum-fin-sequence-ℚ
-            ( succ-ℕ n)
-            ( summand-inr-fin-sequence-adjoin-index-bounded-sequence-bool)))
+      ( transitive-leq-ℚ _ _ _
         ( preserves-leq-right-add-ℚ
           ( sum-fin-sequence-ℚ k
             ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
@@ -678,15 +634,7 @@ module _
       ( dyadic-sum-bounded-sequence-bool S)
       ( dyadic-sum-bounded-sequence-bool S∪n)
   leq-sum-levy-base-index-map-ℕ-sum-adjoin-index-bounded-sequence-bool =
-    transitive-leq-ℚ
-      ( sum-fin-sequence-ℚ k
-        ( summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool))
-      ( sum-fin-sequence-ℚ k
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool ∘
-          inl-coproduct-Fin k (succ-ℕ n)))
-      ( sum-fin-sequence-ℚ
-        ( k +ℕ succ-ℕ n)
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool))
+    transitive-leq-ℚ _ _ _
       ( leq-sum-inl-extended-fin-sequence-sum-summand-fin-sequence-adjoin-index-bounded-sequence-bool)
       ( leq-sum-old-fin-sequence-sum-inl-extended-levy-base-index-extend-true-sequence-macneille-ℝ)
 
@@ -783,42 +731,15 @@ module _
         ( leq-zero-inr-old-extended-fin-sequence-bounded-sequence-bool)
 
     leq-sum-old-fin-sequence-sum-old-extended-fin-sequence-bounded-sequence-bool =
-      transitive-leq-ℚ
-        ( sum-fin-sequence-ℚ k
-          ( summand-underlying-fin-sequence-adjoin-index-bounded-sequence-bool))
-        ( sum-fin-sequence-ℚ k
-          ( inl-old-extended-fin-sequence-bounded-sequence-bool))
-        ( sum-fin-sequence-ℚ
-          ( k +ℕ succ-ℕ n)
-          ( old-extended-fin-sequence-bounded-sequence-bool))
-        ( transitive-leq-ℚ
-          ( sum-fin-sequence-ℚ k
-            ( inl-old-extended-fin-sequence-bounded-sequence-bool))
-          ( sum-fin-sequence-ℚ k
-            ( inl-old-extended-fin-sequence-bounded-sequence-bool) +ℚ
-            sum-fin-sequence-ℚ
-              ( succ-ℕ n)
-              ( inr-old-extended-fin-sequence-bounded-sequence-bool))
-          ( sum-fin-sequence-ℚ
-            ( k +ℕ succ-ℕ n)
-            ( old-extended-fin-sequence-bounded-sequence-bool))
+      transitive-leq-ℚ _ _ _
+        ( transitive-leq-ℚ _ _ _
           ( leq-eq-ℚ
             ( inv
               ( split-sum-fin-sequence-ℚ
                 ( k)
                 ( succ-ℕ n)
                 ( old-extended-fin-sequence-bounded-sequence-bool))))
-          ( transitive-leq-ℚ
-            ( sum-fin-sequence-ℚ k
-              ( inl-old-extended-fin-sequence-bounded-sequence-bool))
-            ( ( sum-fin-sequence-ℚ k
-                ( inl-old-extended-fin-sequence-bounded-sequence-bool)) +ℚ
-              ( zero-ℚ))
-            ( ( sum-fin-sequence-ℚ k
-                ( inl-old-extended-fin-sequence-bounded-sequence-bool)) +ℚ
-              ( sum-fin-sequence-ℚ
-                ( succ-ℕ n)
-                ( inr-old-extended-fin-sequence-bounded-sequence-bool)))
+          ( transitive-leq-ℚ _ _ _
             ( preserves-leq-right-add-ℚ
               ( sum-fin-sequence-ℚ k
                 ( inl-old-extended-fin-sequence-bounded-sequence-bool))
@@ -922,12 +843,7 @@ module _
           ( k +ℕ succ-ℕ n)
           ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ))
     leq-weight-sum-delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ =
-      transitive-leq-ℚ
-        ( weight-levy-sequence-macneille-ℝ n)
-        ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ iₙ)
-        ( sum-fin-sequence-ℚ
-          ( k +ℕ succ-ℕ n)
-          ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ))
+      transitive-leq-ℚ _ _ _
         ( leq-term-sum-fin-sequence-ℚ
           ( k +ℕ succ-ℕ n)
           ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ)
@@ -961,17 +877,7 @@ module _
             ( d)))
     leq-old-extended-add-delta-summand-fin-sequence-adjoin-index-bounded-sequence-bool-from-decidable
       χn=false i (inl p) =
-      transitive-leq-ℚ
-        ( ( summand-levy-sequence-macneille-ℝ
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( χ (nat-Fin (k +ℕ succ-ℕ n) i))) +ℚ
-          ( weight-levy-sequence-macneille-ℝ n))
-        ( weight-levy-sequence-macneille-ℝ n)
-        ( summand-levy-sequence-macneille-ℝ
-          ( nat-Fin (k +ℕ succ-ℕ n) i)
-          ( force-true-at-from-decidable-equality-ℕ n χ
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( inl p)))
+      transitive-leq-ℚ _ _ _
         ( leq-eq-ℚ
           ( inv
               ( ( ap
@@ -981,14 +887,7 @@ module _
                     ( nat-Fin (k +ℕ succ-ℕ n) i)
                     ( p)))) ∙
                 ( ap weight-levy-sequence-macneille-ℝ p))))
-        ( transitive-leq-ℚ
-          ( ( summand-levy-sequence-macneille-ℝ
-              ( nat-Fin (k +ℕ succ-ℕ n) i)
-              ( χ (nat-Fin (k +ℕ succ-ℕ n) i))) +ℚ
-            ( weight-levy-sequence-macneille-ℝ n))
-          ( ( summand-levy-sequence-macneille-ℝ n (χ n)) +ℚ
-            ( weight-levy-sequence-macneille-ℝ n))
-          ( weight-levy-sequence-macneille-ℝ n)
+        ( transitive-leq-ℚ _ _ _
           ( ind-bool
             ( λ b →
               is-false b →
@@ -1010,17 +909,7 @@ module _
               ( p))))
     leq-old-extended-add-delta-summand-fin-sequence-adjoin-index-bounded-sequence-bool-from-decidable
       χn=false i (inr q) =
-      transitive-leq-ℚ
-        ( ( old-extended-fin-sequence-bounded-sequence-bool i) +ℚ
-          ( delta-from-decidable-equality-index-levy-base-index-extend-true-sequence-macneille-ℝ
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( inr q)))
-        ( old-extended-fin-sequence-bounded-sequence-bool i)
-        ( summand-levy-sequence-macneille-ℝ
-          ( nat-Fin (k +ℕ succ-ℕ n) i)
-          ( force-true-at-from-decidable-equality-ℕ n χ
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( inr q)))
+      transitive-leq-ℚ _ _ _
         ( leq-eq-ℚ
           ( inv
             ( ap
@@ -1028,13 +917,7 @@ module _
               ( eq-force-true-at-from-decidable-equality-inr-ℕ n χ
                 ( nat-Fin (k +ℕ succ-ℕ n) i)
                 ( q)))))
-        ( transitive-leq-ℚ
-          ( ( old-extended-fin-sequence-bounded-sequence-bool i) +ℚ
-            ( delta-from-decidable-equality-index-levy-base-index-extend-true-sequence-macneille-ℝ
-              ( nat-Fin (k +ℕ succ-ℕ n) i)
-              ( inr q)))
-          ( old-extended-fin-sequence-bounded-sequence-bool i +ℚ zero-ℚ)
-          ( old-extended-fin-sequence-bounded-sequence-bool i)
+        ( transitive-leq-ℚ _ _ _
           ( leq-eq-ℚ
             ( right-unit-law-add-ℚ
               ( old-extended-fin-sequence-bounded-sequence-bool i)))
@@ -1055,18 +938,7 @@ module _
         ( dyadic-sum-bounded-sequence-bool S∪n)
     leq-add-sum-levy-base-index-map-ℕ-weight-sum-adjoin-index-bounded-sequence-bool
       χn=false =
-      transitive-leq-ℚ
-        ( dyadic-sum-bounded-sequence-bool S +ℚ
-          weight-levy-sequence-macneille-ℝ n)
-        ( sum-fin-sequence-ℚ
-          ( k +ℕ succ-ℕ n)
-          ( λ i →
-            old-extended-fin-sequence-bounded-sequence-bool i +ℚ
-            delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ
-              ( i)))
-        ( sum-fin-sequence-ℚ
-          ( k +ℕ succ-ℕ n)
-          ( summand-fin-sequence-adjoin-index-bounded-sequence-bool))
+      transitive-leq-ℚ _ _ _
         ( preserves-leq-sum-fin-sequence-ℚ
           ( k +ℕ succ-ℕ n)
           ( λ i →
@@ -1076,21 +948,7 @@ module _
           ( summand-fin-sequence-adjoin-index-bounded-sequence-bool)
           ( leq-old-extended-add-delta-summand-fin-sequence-adjoin-index-bounded-sequence-bool
             ( χn=false)))
-        ( transitive-leq-ℚ
-          ( dyadic-sum-bounded-sequence-bool S +ℚ
-            weight-levy-sequence-macneille-ℝ n)
-          ( ( sum-fin-sequence-ℚ
-              ( k +ℕ succ-ℕ n)
-              ( old-extended-fin-sequence-bounded-sequence-bool)) +ℚ
-            ( sum-fin-sequence-ℚ
-              ( k +ℕ succ-ℕ n)
-              ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ)))
-          ( sum-fin-sequence-ℚ
-            ( k +ℕ succ-ℕ n)
-            ( λ i →
-              old-extended-fin-sequence-bounded-sequence-bool i +ℚ
-              delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ
-                ( i)))
+        ( transitive-leq-ℚ _ _ _
           ( leq-eq-ℚ
             ( interchange-add-sum-fin-sequence-ℚ
               ( k +ℕ succ-ℕ n)
@@ -1226,13 +1084,7 @@ module _
         ( dyadic-sum-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
     leq-weight-levy-map-ℕ-sum-adjoin-index-bounded-sequence-bool =
-      transitive-leq-ℚ
-        ( weight-levy-sequence-macneille-ℝ n)
-        ( summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs
-          ( iₙ))
-        ( sum-fin-sequence-ℚ
-          ( k +ℕ succ-ℕ n)
-          ( summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs))
+      transitive-leq-ℚ _ _ _
         ( leq-term-sum-fin-sequence-ℚ
           ( k +ℕ succ-ℕ n)
           ( summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs)
