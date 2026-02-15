@@ -36,9 +36,10 @@ is `a` if and only if `b` is
 [less than or equal to](elementary-number-theory.inequality-natural-numbers.md)
 `a`.
 
-The difference of `a` and `b` is equivalent to the
+**Note.** The difference of `a` and `b` is equivalent to the
 [distance](elementary-number-theory.distance-natural-numbers.md) between `a` and
-`b`, but is only defined when `b ≤ a`.
+`b`, but is only defined when `b ≤ a`. For this reason, it is often preferred to use
+the distance function over the difference function on natural numbers.
 
 ## Definition
 
