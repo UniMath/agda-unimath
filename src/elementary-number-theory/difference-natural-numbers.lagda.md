@@ -153,3 +153,7 @@ abstract
   eq-diff-dist-leq-ℕ (succ-ℕ m) 0 star = refl
   eq-diff-dist-leq-ℕ (succ-ℕ m) (succ-ℕ n) m≤n = eq-diff-dist-leq-ℕ m n m≤n
 ```
+
+## See also
+
+- [The distance between natural numbers](elementary-number-theory.distance-natural-numbers.md), which is a total function substitute for the difference function considered on this page
