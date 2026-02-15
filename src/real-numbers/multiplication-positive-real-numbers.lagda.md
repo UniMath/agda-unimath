@@ -37,6 +37,7 @@ open import order-theory.large-posets
 open import real-numbers.addition-positive-and-negative-real-numbers
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
@@ -50,7 +51,6 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.unbounded-endomaps-real-numbers
 ```
 
 </details>
@@ -226,14 +226,14 @@ abstract
   right-raise-one-law-mul-ℝ⁺ x = eq-ℝ⁺ _ _ (right-raise-one-law-mul-ℝ _)
 ```
 
-### Multiplication by a positive real number is unbounded above
+### Multiplication by a positive real number is cofinal
 
 ```agda
 abstract
-  is-unbounded-above-left-mul-real-ℝ⁺ :
+  is-cofinal-left-mul-real-ℝ⁺ :
     {l1 : Level} (l2 : Level) (x : ℝ⁺ l1) →
-    is-unbounded-above-endomap-ℝ (mul-ℝ {l1} {l2} (real-ℝ⁺ x))
-  is-unbounded-above-left-mul-real-ℝ⁺ l2 x q =
+    is-cofinal-endomap-ℝ (mul-ℝ {l1} {l2} (real-ℝ⁺ x))
+  is-cofinal-left-mul-real-ℝ⁺ l2 x q =
     let
       open
         do-syntax-trunc-Prop
@@ -241,7 +241,7 @@ abstract
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in do
       (p⁺@(p , _) , p<x) ← exists-ℚ⁺-in-lower-cut-ℝ⁺ x
-      (r , q≤pr) ← is-unbounded-above-left-mul-rational-ℚ⁺ p⁺ q
+      (r , q≤pr) ← is-cofinal-left-mul-rational-ℚ⁺ p⁺ q
       let r' = max-ℚ r zero-ℚ
       intro-exists
         ( raise-real-ℚ l2 r')
@@ -264,10 +264,10 @@ abstract
           ≤ real-ℝ⁺ x *ℝ raise-real-ℚ l2 r'
             by leq-sim-ℝ (preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l2 _)))
 
-  is-unbounded-below-left-mul-real-ℝ⁺ :
+  is-coinitial-left-mul-real-ℝ⁺ :
     {l1 : Level} (l2 : Level) (x : ℝ⁺ l1) →
-    is-unbounded-below-endomap-ℝ (mul-ℝ {l1} {l2} (real-ℝ⁺ x))
-  is-unbounded-below-left-mul-real-ℝ⁺ l2 x q =
+    is-coinitial-endomap-ℝ (mul-ℝ {l1} {l2} (real-ℝ⁺ x))
+  is-coinitial-left-mul-real-ℝ⁺ l2 x q =
     map-exists _
       ( neg-ℝ)
       ( λ y -q≤xy →
@@ -276,5 +276,5 @@ abstract
           ( inv (right-negative-law-mul-ℝ _ _))
           ( neg-real-ℚ (neg-ℚ q) ∙ ap real-ℚ (neg-neg-ℚ q))
           ( neg-leq-ℝ -q≤xy))
-      ( is-unbounded-above-left-mul-real-ℝ⁺ l2 x (neg-ℚ q))
+      ( is-cofinal-left-mul-real-ℝ⁺ l2 x (neg-ℚ q))
 ```

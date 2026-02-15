@@ -31,8 +31,8 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  is-central-element-semiring-Prop : type-Semiring R → Prop l
-  is-central-element-semiring-Prop =
+  is-central-element-prop-Semiring : type-Semiring R → Prop l
+  is-central-element-prop-Semiring =
     is-central-element-prop-Monoid
       ( multiplicative-monoid-Semiring R)
 
@@ -40,10 +40,11 @@ module _
   is-central-element-Semiring =
     is-central-element-Monoid (multiplicative-monoid-Semiring R)
 
-  is-prop-is-central-element-Semiring :
-    (x : type-Semiring R) → is-prop (is-central-element-Semiring x)
-  is-prop-is-central-element-Semiring =
-    is-prop-is-central-element-Monoid (multiplicative-monoid-Semiring R)
+  abstract
+    is-prop-is-central-element-Semiring :
+      (x : type-Semiring R) → is-prop (is-central-element-Semiring x)
+    is-prop-is-central-element-Semiring =
+      is-prop-is-central-element-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ## Properties
@@ -55,10 +56,11 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  is-central-element-zero-Semiring :
-    is-central-element-Semiring R (zero-Semiring R)
-  is-central-element-zero-Semiring x =
-    left-zero-law-mul-Semiring R x ∙ inv (right-zero-law-mul-Semiring R x)
+  abstract
+    is-central-element-zero-Semiring :
+      is-central-element-Semiring R (zero-Semiring R)
+    is-central-element-zero-Semiring x =
+      left-zero-law-mul-Semiring R x ∙ inv (right-zero-law-mul-Semiring R x)
 ```
 
 ### The unit element is central
@@ -68,10 +70,11 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  is-central-element-one-Semiring :
-    is-central-element-Semiring R (one-Semiring R)
-  is-central-element-one-Semiring =
-    is-central-element-unit-Monoid (multiplicative-monoid-Semiring R)
+  abstract
+    is-central-element-one-Semiring :
+      is-central-element-Semiring R (one-Semiring R)
+    is-central-element-one-Semiring =
+      is-central-element-unit-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### The sum of two central elements is central
@@ -81,14 +84,15 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  is-central-element-add-Semiring :
-    (x y : type-Semiring R) → is-central-element-Semiring R x →
-    is-central-element-Semiring R y →
-    is-central-element-Semiring R (add-Semiring R x y)
-  is-central-element-add-Semiring x y H K z =
-    ( right-distributive-mul-add-Semiring R x y z) ∙
-    ( ( ap-add-Semiring R (H z) (K z)) ∙
-      ( inv (left-distributive-mul-add-Semiring R z x y)))
+  abstract
+    is-central-element-add-Semiring :
+      (x y : type-Semiring R) → is-central-element-Semiring R x →
+      is-central-element-Semiring R y →
+      is-central-element-Semiring R (add-Semiring R x y)
+    is-central-element-add-Semiring x y H K z =
+      ( right-distributive-mul-add-Semiring R x y z) ∙
+      ( ( ap-add-Semiring R (H z) (K z)) ∙
+        ( inv (left-distributive-mul-add-Semiring R z x y)))
 ```
 
 ### The product of two central elements is central
