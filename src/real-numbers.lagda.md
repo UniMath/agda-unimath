@@ -27,6 +27,8 @@ open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
+open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers public
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.decreasing-sequences-real-numbers public
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.dense-subsets-real-numbers public
@@ -44,6 +46,7 @@ open import real-numbers.increasing-pointwise-epsilon-delta-continuous-endomaps-
 open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
+open import real-numbers.inequality-macneille-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
 open import real-numbers.inequality-positive-real-numbers public
 open import real-numbers.inequality-real-numbers public
@@ -70,6 +73,7 @@ open import real-numbers.local-ring-of-real-numbers public
 open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.maximum-finite-families-nonnegative-real-numbers public
+open import real-numbers.macneille-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
@@ -83,6 +87,7 @@ open import real-numbers.minimum-inhabited-finitely-enumerable-subsets-real-numb
 open import real-numbers.minimum-lower-dedekind-real-numbers public
 open import real-numbers.minimum-upper-dedekind-real-numbers public
 open import real-numbers.modulated-cauchy-sequences-real-numbers public
+open import real-numbers.modulated-suprema-families-real-numbers public
 open import real-numbers.multiplication-negative-real-numbers public
 open import real-numbers.multiplication-nonnegative-real-numbers public
 open import real-numbers.multiplication-nonzero-real-numbers public
@@ -98,9 +103,12 @@ open import real-numbers.negative-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
+open import real-numbers.nonzero-roots-nonnegative-real-numbers public
+open import real-numbers.odd-roots-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
+open import real-numbers.positive-proper-closed-intervals-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
@@ -136,8 +144,6 @@ open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
-open import real-numbers.unbounded-endomaps-real-numbers public
 open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public
 open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers public

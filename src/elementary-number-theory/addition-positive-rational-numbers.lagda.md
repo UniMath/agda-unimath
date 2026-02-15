@@ -255,9 +255,9 @@ module _
 
   split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
   split-ℚ⁺ =
-    left-summand-split-ℚ⁺ ,
-    right-summand-split-ℚ⁺ ,
-    eq-add-split-ℚ⁺
+    ( left-summand-split-ℚ⁺ ,
+      right-summand-split-ℚ⁺ ,
+      eq-add-split-ℚ⁺)
 
   abstract
     le-left-summand-split-ℚ⁺ : le-ℚ⁺ left-summand-split-ℚ⁺ x
@@ -297,6 +297,48 @@ module _
           { s +ℚ rational-ℚ⁺ right-summand-split-ℚ⁺}
           ( p<q+left)
           ( r<s+right))
+```
+
+### Any positive rational number can be expressed as the sum of three positive rational numbers
+
+```agda
+module _
+  (x : ℚ⁺)
+  where
+
+  left-summand-split-ternary-ℚ⁺ : ℚ⁺
+  left-summand-split-ternary-ℚ⁺ = left-summand-split-ℚ⁺ x
+
+  middle-summand-split-ternary-ℚ⁺ : ℚ⁺
+  middle-summand-split-ternary-ℚ⁺ =
+    left-summand-split-ℚ⁺ (right-summand-split-ℚ⁺ x)
+
+  right-summand-split-ternary-ℚ⁺ : ℚ⁺
+  right-summand-split-ternary-ℚ⁺ =
+    right-summand-split-ℚ⁺ (right-summand-split-ℚ⁺ x)
+
+  eq-add-split-ternary-ℚ⁺ :
+    ( ( left-summand-split-ternary-ℚ⁺ +ℚ⁺
+        middle-summand-split-ternary-ℚ⁺) +ℚ⁺
+      ( right-summand-split-ternary-ℚ⁺)) ＝
+    ( x)
+  eq-add-split-ternary-ℚ⁺ =
+    ( associative-add-ℚ⁺
+      ( left-summand-split-ternary-ℚ⁺)
+      ( middle-summand-split-ternary-ℚ⁺)
+      ( right-summand-split-ternary-ℚ⁺)) ∙
+    ( ap
+      ( left-summand-split-ternary-ℚ⁺ +ℚ⁺_)
+      ( eq-add-split-ℚ⁺ (right-summand-split-ℚ⁺ x))) ∙
+    ( eq-add-split-ℚ⁺ x)
+
+  split-ternary-ℚ⁺ :
+    Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → Σ ℚ⁺ (λ w → (u +ℚ⁺ v) +ℚ⁺ w ＝ x)))
+  split-ternary-ℚ⁺ =
+    ( left-summand-split-ternary-ℚ⁺ ,
+      middle-summand-split-ternary-ℚ⁺ ,
+      right-summand-split-ternary-ℚ⁺ ,
+      eq-add-split-ternary-ℚ⁺)
 ```
 
 ### Subtraction by a positive rational number is a strictly deflationary map
