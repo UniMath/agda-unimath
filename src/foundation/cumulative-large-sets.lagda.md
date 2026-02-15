@@ -29,7 +29,8 @@ for some way to compare elements at different universe levels.
 [Identity types](foundation-core.identity-types.md) fall short with this respect
 because elements at different universe levels don't inhabit the same type. To
 solve this issue we have two standard mechanisms: raising universe levels of
-elements, and [large similarity relations](foundation.large-similarity-relations.md).
+elements, and
+[large similarity relations](foundation.large-similarity-relations.md).
 
 A {{#concept "cumulative large set" Agda=Cumulative-Large-Set}} captures such a
 structure. It is a universe polymorphic type `X : (l : Level) → UU (α l)`
