@@ -41,6 +41,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.short-map-binary-maximum-real-numbers
 open import real-numbers.short-map-binary-minimum-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -236,6 +237,46 @@ module _
               by w≤y
             ≤ z +ℝ real-ℚ⁺ d
               by right-leq-real-bound-neighborhood-ℝ d z y Ndzy)
+```
+
+### If `x ≤ a`, clamping `x` into `[a, b]` gives `a`
+
+```agda
+abstract
+  clamp-leq-lower-bound-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    leq-ℝ x (lower-bound-closed-interval-ℝ [a,b]) →
+    sim-ℝ
+      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( lower-bound-closed-interval-ℝ [a,b])
+  clamp-leq-lower-bound-closed-interval-ℝ ((a , b) , a≤b) x x≤a =
+    similarity-reasoning-ℝ
+      max-ℝ a (min-ℝ b x)
+      ~ℝ max-ℝ a x
+        by
+          preserves-sim-right-max-ℝ _ _ _
+            ( right-leq-left-min-ℝ (transitive-leq-ℝ x a b a≤b x≤a))
+      ~ℝ a
+        by right-leq-left-max-ℝ x≤a
+```
+
+### If `b ≤ x`, clamping `x` into `[a, b]` gives `b`
+
+```agda
+abstract
+  clamp-leq-upper-bound-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    leq-ℝ (upper-bound-closed-interval-ℝ [a,b]) x →
+    sim-ℝ
+      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( upper-bound-closed-interval-ℝ [a,b])
+  clamp-leq-upper-bound-closed-interval-ℝ ((a , b) , a≤b) x b≤x =
+    similarity-reasoning-ℝ
+      max-ℝ a (min-ℝ b x)
+      ~ℝ max-ℝ a b
+        by preserves-sim-right-max-ℝ _ _ _ (left-leq-right-min-ℝ b≤x)
+      ~ℝ b
+        by left-leq-right-max-ℝ a≤b
 ```
 
 ### Raising elements of closed intervals of rational numbers

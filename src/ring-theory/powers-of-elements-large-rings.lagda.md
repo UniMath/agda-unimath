@@ -10,7 +10,11 @@ module ring-theory.powers-of-elements-large-rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -83,6 +87,34 @@ module _
     power-one-Large-Ring =
       power-unit-Large-Monoid
         ( multiplicative-large-monoid-Large-Ring R)
+```
+
+### For nonzero `n`, `0ⁿ = 0`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    power-nonzero-raise-zero-Large-Ring :
+      (l : Level) (n : ℕ⁺) →
+      power-Large-Ring R (nat-ℕ⁺ n) (raise-zero-Large-Ring R l) ＝
+      raise-zero-Large-Ring R l
+    power-nonzero-raise-zero-Large-Ring l (0 , H) = ex-falso (H refl)
+    power-nonzero-raise-zero-Large-Ring l (1 , _) = refl
+    power-nonzero-raise-zero-Large-Ring l (succ-ℕ n@(succ-ℕ _) , _) =
+      right-raise-zero-law-mul-Large-Ring R l _
+
+    power-nonzero-zero-Large-Ring :
+      (n : ℕ⁺) →
+      power-Large-Ring R (nat-ℕ⁺ n) (zero-Large-Ring R) ＝ zero-Large-Ring R
+    power-nonzero-zero-Large-Ring n =
+      ( ap
+        ( power-Large-Ring R (nat-ℕ⁺ n))
+        ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))) ∙
+      ( power-nonzero-raise-zero-Large-Ring lzero n) ∙
+      ( eq-raise-Large-Ring R lzero (zero-Large-Ring R))
 ```
 
 ### `xⁿ⁺¹ = xⁿx`

@@ -304,7 +304,7 @@ abstract
 abstract
   is-zero-limit-power-le-one-ℚ⁺ :
     (ε : ℚ⁺) → le-ℚ⁺ ε one-ℚ⁺ →
-    is-zero-limit-sequence-ℚ (λ n → rational-ℚ⁺ (power-ℚ⁺ n ε))
+    is-zero-limit-sequence-ℚ (λ n → rational-power-ℚ⁺ n ε)
   is-zero-limit-power-le-one-ℚ⁺ ε ε<1 =
     is-limit-bound-modulus-sequence-Metric-Space
       ( metric-space-ℚ)

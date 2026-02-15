@@ -152,6 +152,11 @@ module _
     {f f' : (x : A) → B x} (H : f ~ f') → id ·l H ~ H
   left-unit-law-left-whisker-comp H x = ap-id (H x)
 
+  inv-left-unit-law-left-whisker-comp :
+    {f f' : (x : A) → B x} (H : f ~ f') → H ~ id ·l H
+  inv-left-unit-law-left-whisker-comp H =
+    inv-htpy (left-unit-law-left-whisker-comp H)
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where

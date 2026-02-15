@@ -62,9 +62,6 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.action-on-convergent-sequences-modulated-uniformly-continuous-maps-metric-spaces public
@@ -79,12 +76,12 @@ open import metric-spaces.cartesian-products-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-maps public
 open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-pseudometric-spaces public
-open import metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
@@ -106,6 +103,12 @@ open import metric-spaces.equality-of-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
+open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-metric-spaces public
+open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces public
+open import metric-spaces.functoriality-isometries-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces public
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces public
+open import metric-spaces.functoriality-short-maps-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.images-isometries-metric-spaces public
 open import metric-spaces.images-metric-spaces public
 open import metric-spaces.images-short-maps-metric-spaces public
@@ -126,6 +129,7 @@ open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
 open import metric-spaces.maps-metric-spaces public
 open import metric-spaces.maps-pseudometric-spaces public
+open import metric-spaces.metric-quotients-of-metric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
@@ -173,7 +177,10 @@ open import metric-spaces.totally-bounded-metric-spaces public
 open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniform-homeomorphisms-metric-spaces public
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces public
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
 ```

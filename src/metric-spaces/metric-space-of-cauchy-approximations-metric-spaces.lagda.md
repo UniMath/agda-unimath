@@ -17,10 +17,10 @@ open import foundation.involutions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.dependent-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces
@@ -82,35 +82,6 @@ module _
   isometry-const-cauchy-approximation-Metric-Space =
     ( const-cauchy-approximation-Metric-Space A ,
       is-isometry-const-cauchy-approximation-Metric-Space)
-```
-
-### The action of short maps on Cauchy approximations is short
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-map-Metric-Space A B)
-  where
-
-  is-short-map-cauchy-approximation-short-map-Metric-Space :
-    is-short-map-Metric-Space
-      ( metric-space-of-cauchy-approximations-Metric-Space A)
-      ( metric-space-of-cauchy-approximations-Metric-Space B)
-      ( map-cauchy-approximation-short-map-Metric-Space A B f)
-  is-short-map-cauchy-approximation-short-map-Metric-Space ε x y Nxy δ =
-    is-short-map-short-map-Metric-Space A B f ε
-      ( map-cauchy-approximation-Metric-Space A x δ)
-      ( map-cauchy-approximation-Metric-Space A y δ)
-      ( Nxy δ)
-
-  short-map-cauchy-approximation-short-map-Metric-Space :
-    short-map-Metric-Space
-      ( metric-space-of-cauchy-approximations-Metric-Space A)
-      ( metric-space-of-cauchy-approximations-Metric-Space B)
-  short-map-cauchy-approximation-short-map-Metric-Space =
-    map-cauchy-approximation-short-map-Metric-Space A B f ,
-    is-short-map-cauchy-approximation-short-map-Metric-Space
 ```
 
 ### Swapping the arguments of a Cauchy approximation of Cauchy approximations produces a Cauchy approximation

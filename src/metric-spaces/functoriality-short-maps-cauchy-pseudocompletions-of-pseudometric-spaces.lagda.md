@@ -1,0 +1,106 @@
+# Functorial action on short maps of Cauchy pseudocompletions of pseudometric spaces
+
+```agda
+module metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
+```
+
+</details>
+
+## Idea
+
+The
+{{#concept "functorial action" Disambiguation="of Cauchy pseudocompletions on short maps between pseudometric spaces" Agda=short-map-cauchy-pseudocompletion-Pseudometric-Space}}
+of
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md)
+on [short maps](metric-spaces.short-maps-pseudometric-spaces.md) between
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) is the action on
+[Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+induced by the postcomposition with
+[short](metric-spaces.short-maps-pseudometric-spaces.md).
+
+It maps short maps between pseudometric spaces to short maps between their
+Cauchy pseudocompletions.
+
+## Definitions
+
+### The action on short maps on Cauchy pseudocompletions
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+  map-short-map-cauchy-pseudocompletion-Pseudometric-Space (u , H) =
+    ( map-short-map-Pseudometric-Space A B f ∘ u ,
+      λ ε δ →
+      is-short-map-short-map-Pseudometric-Space
+        ( A)
+        ( B)
+        ( f)
+        ( ε +ℚ⁺ δ)
+        ( u ε)
+        ( u δ)
+        ( H ε δ))
+```
+
+## Properties
+
+### The action on short maps is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  abstract
+    preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+      is-short-map-Pseudometric-Space
+        ( cauchy-pseudocompletion-Pseudometric-Space A)
+        ( cauchy-pseudocompletion-Pseudometric-Space B)
+        ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f)
+    preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      d x y Nxy α β =
+      is-short-map-short-map-Pseudometric-Space A B f
+        ( α +ℚ⁺ β +ℚ⁺ d)
+        ( map-cauchy-approximation-Pseudometric-Space A x α)
+        ( map-cauchy-approximation-Pseudometric-Space A y β)
+        ( Nxy α β)
+
+  short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+  short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ,
+      preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+```

@@ -107,18 +107,19 @@ abstract
   cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
   cotransitive-apart-ℝ x y z =
     elim-disjunction
-      ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-      ( λ x<y →
-        map-disjunction
-          ( inl-disjunction)
-          ( inl-disjunction)
-          ( cotransitive-le-ℝ x y z x<y))
-      ( λ y<x →
+      ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
+      ( λ x<z →
         elim-disjunction
-          ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
+          ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
+          ( inl-disjunction ∘ inl-disjunction)
+          ( inr-disjunction ∘ inl-disjunction)
+          ( cotransitive-le-ℝ x y z x<z))
+      ( λ z<x →
+        elim-disjunction
+          ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
           ( inr-disjunction ∘ inr-disjunction)
           ( inl-disjunction ∘ inr-disjunction)
-          ( cotransitive-le-ℝ y x z y<x))
+          ( cotransitive-le-ℝ z y x z<x))
 ```
 
 ### Apartness on the reals is a large apartness relation

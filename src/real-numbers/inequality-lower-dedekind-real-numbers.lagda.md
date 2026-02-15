@@ -17,6 +17,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
@@ -61,24 +62,49 @@ module _
 
 ## Properties
 
+### Inequality on lower Dedekind reals is reflexive
+
+```agda
+refl-leq-lower-ℝ : {l : Level} (x : lower-ℝ l) → leq-lower-ℝ x x
+refl-leq-lower-ℝ x = refl-leq-subtype (cut-lower-ℝ x)
+```
+
+### Inequality on lower Dedekind reals is transitive
+
+```agda
+transitive-leq-lower-ℝ :
+  {l1 l2 l3 : Level} →
+  (x : lower-ℝ l1) (y : lower-ℝ l2) (z : lower-ℝ l3) →
+  leq-lower-ℝ y z → leq-lower-ℝ x y → leq-lower-ℝ x z
+transitive-leq-lower-ℝ x y z =
+  transitive-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) (cut-lower-ℝ z)
+```
+
+### Inequality on lower Dedekind reals is antisymmetric
+
+```agda
+antisymmetric-leq-lower-ℝ :
+  {l : Level} (x y : lower-ℝ l) →
+  leq-lower-ℝ x y → leq-lower-ℝ y x → x ＝ y
+antisymmetric-leq-lower-ℝ x y x≤y y≤x =
+  eq-eq-cut-lower-ℝ
+    ( x)
+    ( y)
+    ( antisymmetric-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) x≤y y≤x)
+```
+
 ### Inequality on lower Dedekind reals is a large poset
 
 ```agda
 lower-ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder lower-ℝ-Large-Preorder = lower-ℝ
 leq-prop-Large-Preorder lower-ℝ-Large-Preorder = leq-lower-ℝ-Prop
-refl-leq-Large-Preorder lower-ℝ-Large-Preorder x =
-  refl-leq-subtype (cut-lower-ℝ x)
-transitive-leq-Large-Preorder lower-ℝ-Large-Preorder x y z =
-  transitive-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) (cut-lower-ℝ z)
+refl-leq-Large-Preorder lower-ℝ-Large-Preorder = refl-leq-lower-ℝ
+transitive-leq-Large-Preorder lower-ℝ-Large-Preorder = transitive-leq-lower-ℝ
 
 lower-ℝ-Large-Poset : Large-Poset lsuc _⊔_
 large-preorder-Large-Poset lower-ℝ-Large-Poset = lower-ℝ-Large-Preorder
-antisymmetric-leq-Large-Poset lower-ℝ-Large-Poset x y x≤y y≤x =
-  eq-eq-cut-lower-ℝ
-    ( x)
-    ( y)
-    ( antisymmetric-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) x≤y y≤x)
+antisymmetric-leq-Large-Poset lower-ℝ-Large-Poset = antisymmetric-leq-lower-ℝ
 ```
 
 ### If a rational is in a lower Dedekind cut, its projection is less than or equal to the corresponding lower real

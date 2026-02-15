@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.cauchy-approximations-metric-quotients-of-pseudometric-spaces where
+module metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -42,15 +42,15 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -63,6 +63,7 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 ```
 
 </details>
@@ -79,7 +80,7 @@ approximations in the
 Cauchy approximation in the metric quotient of a pseudometric space has a
 {{#concept "lift up to similarity" Agda=has-lift-cauchy-approximation-metric-quotient-Pseudometric-Space}}
 if it is similar (in the
-[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletion-of-metric-spaces.md)
+[Cauchy pseudocompletion](metric-spaces.cauchy-pseudocompletions-of-metric-spaces.md)
 of the metric quotient) to the pointwise quotient of
 [some](foundation.existential-quantification.md) Cauchy approximation in the
 pseudometric space.
@@ -108,10 +109,10 @@ module _
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-quotient-Pseudometric-Space M))
   short-map-cauchy-approximation-metric-quotient-Pseudometric-Space =
-    short-map-cauchy-approximation-short-map-Pseudometric-Space
+    short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( M)
       ( pseudometric-metric-quotient-Pseudometric-Space M)
-      ( short-map-metric-quotient-Pseudometric-Space M)
+      ( short-map-unit-metric-quotient-Pseudometric-Space M)
 
   map-cauchy-approximation-metric-quotient-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space M →
@@ -211,7 +212,7 @@ module _
     is-limit-cauchy-approximation-Metric-Space
       ( metric-quotient-Pseudometric-Space M)
       ( map-cauchy-approximation-metric-quotient-Pseudometric-Space M u)
-      ( map-metric-quotient-Pseudometric-Space M lim)
+      ( map-unit-metric-quotient-Pseudometric-Space M lim)
   preserves-limits-map-cauchy-approximation-metric-quotient-Pseudometric-Space
     ε δ (x , x∈uε) (y , y∈lim) =
     let
@@ -297,12 +298,12 @@ module _
         ( lim))
       ( const-cauchy-approximation-Pseudometric-Space
         ( pseudometric-metric-quotient-Pseudometric-Space A)
-        ( map-metric-quotient-Pseudometric-Space A x))
+        ( map-unit-metric-quotient-Pseudometric-Space A x))
       ( λ d α β →
         sim-eq-Pseudometric-Space
           ( pseudometric-metric-quotient-Pseudometric-Space A)
           ( lim)
-          ( map-metric-quotient-Pseudometric-Space A x)
+          ( map-unit-metric-quotient-Pseudometric-Space A x)
           ( inv
             ( eq-set-quotient-equivalence-class-set-quotient
               ( equivalence-relation-sim-Pseudometric-Space A)

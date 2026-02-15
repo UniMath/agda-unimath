@@ -85,9 +85,7 @@ module _
   modulated-ucont-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   modulated-ucont-map-Metric-Space =
     Σ ( map-Metric-Space X Y)
-      ( λ f →
-        Σ ( ℚ⁺ → ℚ⁺)
-          ( is-modulus-of-uniform-continuity-map-Metric-Space X Y f))
+      ( modulus-of-uniform-continuity-map-Metric-Space X Y)
 
   map-modulated-ucont-map-Metric-Space :
     modulated-ucont-map-Metric-Space → map-Metric-Space X Y

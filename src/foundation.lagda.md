@@ -136,6 +136,7 @@ open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
+open import foundation.descent-surjective-maps public
 open import foundation.diaconescus-theorem public
 open import foundation.diagonal-maps-cartesian-products-of-types public
 open import foundation.diagonal-maps-of-types public
@@ -172,6 +173,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equality-of-equality-cartesian-product-types public
 open import foundation.equality-truncation-levels public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-extensionality public
@@ -180,8 +182,10 @@ open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
+open import foundation.equivalences-cospan-diagrams public
 open import foundation.equivalences-cospans public
 open import foundation.equivalences-double-arrows public
+open import foundation.equivalences-forks-over-equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-span-diagrams public
@@ -210,6 +214,7 @@ open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.finitely-truncated-types public
 open import foundation.fixed-points-endofunctions public
+open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
@@ -322,6 +327,7 @@ open import foundation.morphisms-coalgebras-maybe public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-double-arrows public
+open import foundation.morphisms-forks-over-morphisms-double-arrows public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public
@@ -340,9 +346,12 @@ open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.noninjective-maps public
 open import foundation.null-homotopic-maps public
+open import foundation.operations-cospan-diagrams public
+open import foundation.operations-cospans public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
+open import foundation.opposite-cospans public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
@@ -459,6 +468,7 @@ open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.transport-split-type-families public
+open import foundation.transposition-cospan-diagrams public
 open import foundation.transposition-identifications-along-equivalences public
 open import foundation.transposition-identifications-along-retractions public
 open import foundation.transposition-identifications-along-sections public

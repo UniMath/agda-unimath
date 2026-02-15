@@ -5,6 +5,8 @@
 ```agda
 module commutative-algebra where
 
+open import commutative-algebra.algebras-commutative-rings public
+open import commutative-algebra.associative-algebras-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
@@ -14,6 +16,7 @@ open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
 open import commutative-algebra.convolution-sequences-commutative-rings public
 open import commutative-algebra.convolution-sequences-commutative-semirings public
+open import commutative-algebra.dependent-products-algebras-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
@@ -21,6 +24,7 @@ open import commutative-algebra.euclidean-domains public
 open import commutative-algebra.formal-power-series-commutative-rings public
 open import commutative-algebra.formal-power-series-commutative-semirings public
 open import commutative-algebra.full-ideals-commutative-rings public
+open import commutative-algebra.function-algebras-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
 open import commutative-algebra.geometric-sequences-commutative-rings public
@@ -68,6 +72,8 @@ open import commutative-algebra.products-subsets-commutative-rings public
 open import commutative-algebra.radical-ideals-commutative-rings public
 open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
+open import commutative-algebra.subalgebras-commutative-rings public
+open import commutative-algebra.subsets-algebras-commutative-rings public
 open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-rings public
@@ -76,6 +82,8 @@ open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings public
 open import commutative-algebra.transporting-commutative-ring-structure-isomorphisms-abelian-groups public
 open import commutative-algebra.trivial-commutative-rings public
+open import commutative-algebra.unital-algebras-commutative-rings public
+open import commutative-algebra.unital-associative-algebras-commutative-rings public
 open import commutative-algebra.zariski-locale public
 open import commutative-algebra.zariski-topology public
 ```

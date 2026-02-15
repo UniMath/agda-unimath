@@ -60,6 +60,11 @@ record Large-Commutative-Ring
   zero-Large-Commutative-Ring =
     zero-Large-Ring large-ring-Large-Commutative-Ring
 
+  raise-zero-Large-Commutative-Ring :
+    (l : Level) → type-Large-Commutative-Ring l
+  raise-zero-Large-Commutative-Ring =
+    raise-zero-Large-Ring large-ring-Large-Commutative-Ring
+
   sim-prop-Large-Commutative-Ring :
     Large-Relation-Prop β type-Large-Commutative-Ring
   sim-prop-Large-Commutative-Ring =
