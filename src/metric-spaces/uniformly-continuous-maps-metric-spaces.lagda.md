@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.cartesian-product-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
@@ -32,6 +34,7 @@ open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
@@ -238,6 +241,31 @@ module _
     tot is-uniformly-continuous-map-is-isometry-Metric-Space
 ```
 
+### Constant maps are uniformly continuous
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l3 l4)
+  (b : type-Metric-Space B)
+  where
+
+  abstract
+    is-uniformly-continuous-map-const-map-Metric-Space :
+      is-uniformly-continuous-map-Metric-Space A B
+        ( const-map-Metric-Space A B b)
+    is-uniformly-continuous-map-const-map-Metric-Space =
+      is-uniformly-continuous-map-is-short-map-Metric-Space A B
+        ( const-map-Metric-Space A B b)
+        ( is-short-map-const-Metric-Space A B b)
+
+  const-uniformly-continuous-map-Metric-Space :
+    uniformly-continuous-map-Metric-Space A B
+  const-uniformly-continuous-map-Metric-Space =
+    ( const-map-Metric-Space A B b ,
+      is-uniformly-continuous-map-const-map-Metric-Space)
+```
+
 ### Uniformly continuous maps are pointwise continuous
 
 ```agda
@@ -277,6 +305,49 @@ module _
     sequence-type-Metric-Space X → sequence-type-Metric-Space Y
   map-sequence-uniformly-continuous-map-Metric-Space =
     map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
+```
+
+### The Cartesian product of uniformly continuous maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (A : Metric-Space l1 l2)
+  (X : Metric-Space l3 l4)
+  (B : Metric-Space l5 l6)
+  (Y : Metric-Space l7 l8)
+  (f@(map-f , ucont-f) : uniformly-continuous-map-Metric-Space A X)
+  (g@(map-g , ucont-g) : uniformly-continuous-map-Metric-Space B Y)
+  where
+
+  map-product-uniformly-continuous-map-Metric-Space :
+    type-Metric-Space A × type-Metric-Space B →
+    type-Metric-Space X × type-Metric-Space Y
+  map-product-uniformly-continuous-map-Metric-Space = map-product map-f map-g
+
+  abstract
+    is-uniformly-continuous-map-product-uniformly-continuous-map-Metric-Space :
+      is-uniformly-continuous-map-Metric-Space
+        ( product-Metric-Space A B)
+        ( product-Metric-Space X Y)
+        ( map-product-uniformly-continuous-map-Metric-Space)
+    is-uniformly-continuous-map-product-uniformly-continuous-map-Metric-Space =
+      map-binary-trunc-Prop
+        ( λ μf μg →
+          pr2
+            ( product-modulated-ucont-map-Metric-Space A X B Y
+              ( map-f , μf)
+              ( map-g , μg)))
+        ( ucont-f)
+        ( ucont-g)
+
+  product-uniformly-continuous-map-Metric-Space :
+    uniformly-continuous-map-Metric-Space
+      ( product-Metric-Space A B)
+      ( product-Metric-Space X Y)
+  product-uniformly-continuous-map-Metric-Space =
+    ( map-product-uniformly-continuous-map-Metric-Space ,
+      is-uniformly-continuous-map-product-uniformly-continuous-map-Metric-Space)
 ```
 
 ## See also
