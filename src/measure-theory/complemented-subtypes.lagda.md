@@ -29,7 +29,7 @@ of a type `X` equipped with an
 [subtypes](foundation-core.subtypes.md) `A` and `A'` of `X` that are
 [apart](measure-theory.apart-subtypes.md).
 
-This definition follows {{#cite Zeuner22}}..
+This definition follows {{#cite Zeuner22}}.
 
 ## Definition
 
