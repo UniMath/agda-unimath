@@ -8,10 +8,10 @@ module elementary-number-theory.difference-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.distance-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -38,8 +38,8 @@ is `a` if and only if `b` is
 
 **Note.** The difference of `a` and `b` is equivalent to the
 [distance](elementary-number-theory.distance-natural-numbers.md) between `a` and
-`b`, but is only defined when `b ≤ a`. For this reason, it is often preferred to use
-the distance function over the difference function on natural numbers.
+`b`, but is only defined when `b ≤ a`. For this reason, it is often preferred to
+use the distance function over the difference function on natural numbers.
 
 ## Definition
 
@@ -157,4 +157,6 @@ abstract
 
 ## See also
 
-- [The distance between natural numbers](elementary-number-theory.distance-natural-numbers.md), which is a total function substitute for the difference function considered on this page
+- [The distance between natural numbers](elementary-number-theory.distance-natural-numbers.md),
+  which is a total function substitute for the difference function considered on
+  this page
