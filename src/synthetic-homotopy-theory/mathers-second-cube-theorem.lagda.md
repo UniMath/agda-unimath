@@ -72,6 +72,8 @@ then the top face is also a pushout.
 
 ## Theorem
 
+We assume a (fully universe-polymorphic) commuting cube of maps.
+
 ```agda
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
@@ -91,34 +93,63 @@ module _
       f g h k f' g' h' k' hA hB hC hD
       top left back front right bottom)
   where
+```
 
-  fiberwise-equiv-left-mathers-second-cube-theorem :
+First we turn the pullback assumptions on the individual vertical faces into
+fiberwise equivalences to construct an equifibered span diagram.
+
+```agda
+  fiberwise-equiv-left-mathers-cube :
     universal-property-pullback f hB (hA , f' , left) →
     (a : A) → fiber' hA a ≃ fiber' hB (f a)
-  fiberwise-equiv-left-mathers-second-cube-theorem pb-left =
+  fiberwise-equiv-left-mathers-cube pb-left =
     fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
       f hB (hA , f' , left) pb-left
 
-  fiberwise-equiv-back-mathers-second-cube-theorem :
+  fiberwise-map-left-mathers-cube :
+    universal-property-pullback f hB (hA , f' , left) →
+    (a : A) → fiber' hA a → fiber' hB (f a)
+  fiberwise-map-left-mathers-cube pb-left =
+    map-equiv ∘ fiberwise-equiv-left-mathers-cube pb-left
+
+  fiberwise-equiv-back-mathers-cube :
     universal-property-pullback g hC (hA , g' , back) →
     (a : A) → fiber' hA a ≃ fiber' hC (g a)
-  fiberwise-equiv-back-mathers-second-cube-theorem pb-back =
+  fiberwise-equiv-back-mathers-cube pb-back =
     fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
       g hC (hA , g' , back) pb-back
 
-  fiberwise-equiv-front-mathers-second-cube-theorem :
+  fiberwise-map-back-mathers-cube :
+    universal-property-pullback g hC (hA , g' , back) →
+    (a : A) → fiber' hA a → fiber' hC (g a)
+  fiberwise-map-back-mathers-cube pb-back =
+    map-equiv ∘ fiberwise-equiv-back-mathers-cube pb-back
+
+  fiberwise-equiv-front-mathers-cube :
     universal-property-pullback h hD (hB , h' , front) →
     (b : B) → fiber' hB b ≃ fiber' hD (h b)
-  fiberwise-equiv-front-mathers-second-cube-theorem pb-front =
+  fiberwise-equiv-front-mathers-cube pb-front =
     fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
       h hD (hB , h' , front) pb-front
 
-  fiberwise-equiv-right-mathers-second-cube-theorem :
+  fiberwise-map-front-mathers-cube :
+    universal-property-pullback h hD (hB , h' , front) →
+    (b : B) → fiber' hB b → fiber' hD (h b)
+  fiberwise-map-front-mathers-cube pb-front =
+    map-equiv ∘ fiberwise-equiv-front-mathers-cube pb-front
+
+  fiberwise-equiv-right-mathers-cube :
     universal-property-pullback k hD (hC , k' , right) →
     (c : C) → fiber' hC c ≃ fiber' hD (k c)
-  fiberwise-equiv-right-mathers-second-cube-theorem pb-right =
+  fiberwise-equiv-right-mathers-cube pb-right =
     fiberwise-equiv-map-fiber-vertical-map-cone-universal-property-pullback'
       k hD (hC , k' , right) pb-right
+
+  fiberwise-map-right-mathers-cube :
+    universal-property-pullback k hD (hC , k' , right) →
+    (c : C) → fiber' hC c → fiber' hD (k c)
+  fiberwise-map-right-mathers-cube pb-right =
+    map-equiv ∘ fiberwise-equiv-right-mathers-cube pb-right
 
   equifibered-span-diagram-mathers-cube :
     universal-property-pullback f hB (hA , f' , left) →
@@ -132,8 +163,8 @@ module _
     ( fiber' hB ,
       fiber' hC ,
       fiber' hA ,
-      fiberwise-equiv-left-mathers-second-cube-theorem pb-left ,
-      fiberwise-equiv-back-mathers-second-cube-theorem pb-back)
+      fiberwise-equiv-left-mathers-cube pb-left ,
+      fiberwise-equiv-back-mathers-cube pb-back)
 
   back-left-mathers-cube :
     (pb-left : universal-property-pullback f hB (hA , f' , left))
@@ -160,6 +191,8 @@ module _
     eq-pair-Σ (back x) (inv-compute-tr-self-fiber' hC (g' x , back x))
 ```
 
+Let us now assume that the four vertical faces are pullback squares.
+
 ```agda
   module _
     (pb-front : universal-property-pullback h hD (hB , h' , front))
@@ -168,94 +201,11 @@ module _
     (pb-back : universal-property-pullback g hC (hA , g' , back))
     where
 
-    left-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (b : B) →
-      left-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( b) ≃
-      left-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( b)
-    left-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      fiberwise-equiv-front-mathers-second-cube-theorem pb-front
-
-    left-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (b : B) →
-      left-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( b) →
-      left-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( b)
-    left-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      map-equiv ∘
-      left-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-
-    right-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (c : C) →
-      right-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( c) ≃
-      right-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( c)
-    right-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      fiberwise-equiv-right-mathers-second-cube-theorem pb-right
-
-    right-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (c : C) →
-      right-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( c) →
-      right-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( c)
-    right-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      map-equiv ∘
-      right-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-
-    spanning-type-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (a : A) →
-      spanning-type-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( a) ≃
-      spanning-type-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( a)
-    spanning-type-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-      a =
-      ( fiberwise-equiv-front-mathers-second-cube-theorem pb-front (f a)) ∘e
-      ( fiberwise-equiv-left-mathers-second-cube-theorem pb-left a)
-
-    spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
-      (a : A) →
-      spanning-type-family-equifibered-span-diagram
-        ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-        ( a) →
-      spanning-type-family-equifibered-span-diagram
-        ( equifibered-span-diagram-family-cocone-span-diagram
-          ( h , k , bottom)
-          ( fiber' hD))
-        ( a)
-    spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      map-equiv ∘
-      spanning-type-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-
     coherence-left-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
       (a : A) →
       coherence-square-maps
-        ( spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-          ( a))
+        ( ( fiberwise-map-front-mathers-cube pb-front (f a)) ∘
+          ( fiberwise-map-left-mathers-cube pb-left a))
         ( map-left-family-equifibered-span-diagram
           ( equifibered-span-diagram-mathers-cube pb-left pb-back)
           ( a))
@@ -264,8 +214,7 @@ module _
             ( h , k , bottom)
             ( fiber' hD))
           ( a))
-        ( left-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-          ( f a))
+        ( fiberwise-map-front-mathers-cube pb-front (f a))
     coherence-left-equiv-equifibered-span-diagram-mathers-second-cube-theorem
       a t =
       refl
@@ -273,8 +222,8 @@ module _
     coherence-right-equiv-equifibered-span-diagram-mathers-second-cube-theorem :
       (a : A) →
       coherence-square-maps
-        ( spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-          ( a))
+        ( ( fiberwise-map-front-mathers-cube pb-front (f a)) ∘
+          ( fiberwise-map-left-mathers-cube pb-left a))
         ( map-right-family-equifibered-span-diagram
           ( equifibered-span-diagram-mathers-cube pb-left pb-back)
           ( a))
@@ -283,8 +232,7 @@ module _
             ( h , k , bottom)
             ( fiber' hD))
           ( a))
-        ( right-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-          ( g a))
+        ( fiberwise-map-right-mathers-cube pb-right (g a))
     coherence-right-equiv-equifibered-span-diagram-mathers-second-cube-theorem
       .(hA x)
       ( x , refl) =
@@ -304,8 +252,8 @@ module _
       ( compute-tr-fiber'
         ( hD)
         ( bottom (hA x))
-        ( spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-          ( hA x)
+        ( ( ( fiberwise-map-front-mathers-cube pb-front (f (hA x))) ∘
+            ( fiberwise-map-left-mathers-cube pb-left (hA x)))
           ( x , refl)))
 
     equiv-equifibered-span-diagram-mathers-second-cube-theorem :
@@ -315,9 +263,11 @@ module _
           ( h , k , bottom)
           ( fiber' hD))
     equiv-equifibered-span-diagram-mathers-second-cube-theorem =
-      ( left-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem ,
-        right-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem ,
-        spanning-type-equiv-equiv-equifibered-span-diagram-mathers-second-cube-theorem ,
+      ( fiberwise-equiv-front-mathers-cube pb-front ,
+        fiberwise-equiv-right-mathers-cube pb-right ,
+        ( λ a →
+          ( fiberwise-equiv-front-mathers-cube pb-front (f a)) ∘e
+          ( fiberwise-equiv-left-mathers-cube pb-left a)) ,
         coherence-left-equiv-equifibered-span-diagram-mathers-second-cube-theorem ,
         coherence-right-equiv-equifibered-span-diagram-mathers-second-cube-theorem)
 
@@ -340,7 +290,12 @@ module _
           ( fiber' hD)
           ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
         ( map-equiv-total-fiber' hD)
+```
 
+Using that equivalence, we construct a postcomposed cocone in `D'` and use the
+flattening lemma for equifibered span diagrams to show this is a pushout.
+
+```agda
     universal-property-pushout-cocone-postcompose-mathers-second-cube-theorem :
       (po-bottom : universal-property-pushout f g (h , k , bottom)) →
       universal-property-pushout
@@ -462,8 +417,13 @@ module _
         ( is-equiv-map-inv-equiv-total-fiber' hB)
         ( is-equiv-map-inv-equiv-total-fiber' hC)
         ( is-equiv-map-inv-equiv-total-fiber' hA)
+```
 
-    left-path-eq-cocone-span-extension-mathers-second-cube-theorem :
+We now transfer the universal property back to a cocone on `f'` and `g'` via
+total-fiber computations.
+
+```agda
+    left-eq-cocone-span-extension-mathers-second-cube-theorem :
       (x : A') →
       ap
         ( h' ∘ map-equiv-total-fiber' hB)
@@ -472,7 +432,7 @@ module _
             ( left x)
             ( inv (compute-tr-self-fiber' hB (f' x , left x))))) ＝
       refl
-    left-path-eq-cocone-span-extension-mathers-second-cube-theorem x =
+    left-eq-cocone-span-extension-mathers-second-cube-theorem x =
       ( ap-inv
         ( h' ∘ map-equiv-total-fiber' hB)
         ( eq-pair-Σ
@@ -517,8 +477,8 @@ module _
     point-spanning-type-map-equiv-mathers-second-cube-theorem :
       (x : A') → fiber' hD (h (f (hA x)))
     point-spanning-type-map-equiv-mathers-second-cube-theorem x =
-      spanning-type-map-equiv-equifibered-span-diagram-mathers-second-cube-theorem
-        ( hA x)
+      ( ( fiberwise-map-front-mathers-cube pb-front (f (hA x))) ∘
+        ( fiberwise-map-left-mathers-cube pb-left (hA x)))
         ( x , refl)
 
     ap-inclusion-fiber'-compute-tr-point-mathers-second-cube-theorem :
@@ -545,7 +505,12 @@ module _
       ( ap (p ∙_) (distributive-inv-concat (inv q) p)) ∙
       ( is-section-inv-concat p (inv (inv q))) ∙
       ( inv-inv q)
+```
 
+The next lemmas compute how fiber inclusions and transport interact on the
+middle equality.
+
+```agda
     ap-inclusion-fiber'-middle-coherence-equiv-equifibered-span-diagram-mathers-second-cube-theorem' :
       (x : A') →
       ( ap
@@ -619,7 +584,7 @@ module _
         ( ap-inclusion-fiber'-compute-tr-point-mathers-second-cube-theorem x)
         ( top x))
 
-    middle-path-eq-cocone-span-extension-mathers-second-cube-theorem :
+    middle-eq-cocone-span-extension-mathers-second-cube-theorem :
       (x : A') →
       ap
         ( map-equiv-total-fiber' hD)
@@ -630,7 +595,7 @@ module _
               ( hA x)
               ( x , refl)))) ＝
       top x
-    middle-path-eq-cocone-span-extension-mathers-second-cube-theorem x =
+    middle-eq-cocone-span-extension-mathers-second-cube-theorem x =
       ( ap-map-equiv-total-fiber'-eq-pair-Σ-fiber'-mathers-second-cube-theorem
         ( bottom (hA x))
         ( inv
@@ -640,7 +605,7 @@ module _
       ( ap-inclusion-fiber'-middle-coherence-equiv-equifibered-span-diagram-mathers-second-cube-theorem
         ( x))
 
-    right-path-eq-cocone-span-extension-mathers-second-cube-theorem :
+    right-eq-cocone-span-extension-mathers-second-cube-theorem :
       (x : A') →
       ap
         ( k' ∘ map-equiv-total-fiber' hC)
@@ -648,7 +613,7 @@ module _
           ( back x)
           ( inv (compute-tr-self-fiber' hC (g' x , back x)))) ＝
       refl
-    right-path-eq-cocone-span-extension-mathers-second-cube-theorem x =
+    right-eq-cocone-span-extension-mathers-second-cube-theorem x =
       ( ap-comp k' (map-equiv-total-fiber' hC)
         ( eq-pair-Σ
           ( back x)
@@ -669,9 +634,9 @@ module _
       ( right-unit) ∙
       ( ap-ternary
         ( λ t m r → ((t ∙ m) ∙ r))
-        ( left-path-eq-cocone-span-extension-mathers-second-cube-theorem x)
-        ( middle-path-eq-cocone-span-extension-mathers-second-cube-theorem x)
-        ( right-path-eq-cocone-span-extension-mathers-second-cube-theorem x)) ∙
+        ( left-eq-cocone-span-extension-mathers-second-cube-theorem x)
+        ( middle-eq-cocone-span-extension-mathers-second-cube-theorem x)
+        ( right-eq-cocone-span-extension-mathers-second-cube-theorem x)) ∙
       ( right-unit)
 
     eq-cocone-span-extension-mathers-second-cube-theorem :
@@ -684,7 +649,11 @@ module _
         ( refl-htpy ,
           refl-htpy ,
           coherence-eq-cocone-span-extension-mathers-second-cube-theorem)
+```
 
+Finally, we identify the constructed cocone with the original.
+
+```agda
     mathers-second-cube-theorem :
       universal-property-pushout f g (h , k , bottom) →
       universal-property-pushout f' g' (h' , k' , top)
