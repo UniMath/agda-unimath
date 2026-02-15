@@ -30,6 +30,11 @@ A {{#concept "large similarity relation" Agda=Large-Similarity-Relation}} is a
 similarity at the same [universe level](foundation.universe-levels.md) implies
 [equality](foundation.identity-types.md).
 
+Many structures are universe-polymorphic in nature. As universes in Agda are
+disjoint, [identity types](foundation.identity-types.md) only suffice to
+identify elements at the same universe level. Large similarity relations serve
+to express types with propositional identity across universe levels.
+
 ## Definition
 
 ```agda
@@ -168,3 +173,9 @@ module
 
   syntax step-similarity-reasoning p u q = p ~ u by q
 ```
+
+## See also
+
+- [Cumulative large sets](foundation.cumulative-large-sets.md), types with large
+  similarity relations equipped with embeddings to elements to higher universe
+  levels

@@ -10,6 +10,7 @@ module foundation.large-locale-of-propositions where
 open import foundation.conjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
@@ -28,6 +29,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.top-elements-large-posets
 ```
 
@@ -65,6 +67,14 @@ transitive-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
 Prop-Large-Poset : Large-Poset lsuc (_⊔_)
 large-preorder-Large-Poset Prop-Large-Poset = Prop-Large-Preorder
 antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
+```
+
+### Similarity in the large poset of propositions
+
+```agda
+large-similarity-relation-Prop : Large-Similarity-Relation (_⊔_) Prop
+large-similarity-relation-Prop =
+  large-similarity-relation-sim-Large-Poset Prop-Large-Poset
 ```
 
 ### Meets in the large poset of propositions
