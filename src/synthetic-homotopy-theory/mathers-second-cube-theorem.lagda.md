@@ -335,35 +335,23 @@ flattening lemma for equifibered span diagrams to show this is a pushout.
             ( equifibered-span-diagram-mathers-cube pb-left pb-back))
           ( cocone-map
             ( vertical-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back)))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
             ( horizontal-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back)))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
             ( cocone-flattening-equifibered-span-diagram f g
               ( h , k , bottom)
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back)
               ( fiber' hD)
               ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
             ( map-equiv-total-fiber' hD))
           ( cocone-map
             ( vertical-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back)))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
             ( horizontal-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back)))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
             ( cocone-flattening-equifibered-span-diagram f g
               ( h , k , bottom)
-              ( equifibered-span-diagram-mathers-cube
-                ( pb-left)
-                ( pb-back))
+              ( equifibered-span-diagram-mathers-cube pb-left pb-back)
               ( fiber' hD)
               ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
             ( map-equiv-total-fiber' hD))
