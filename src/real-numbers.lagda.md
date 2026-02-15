@@ -19,8 +19,10 @@ open import real-numbers.addition-upper-dedekind-real-numbers public
 open import real-numbers.alternation-sequences-real-numbers public
 open import real-numbers.apartness-real-numbers public
 open import real-numbers.arithmetically-located-dedekind-cuts public
+open import real-numbers.binary-maximum-nonnegative-real-numbers public
 open import real-numbers.binary-maximum-real-numbers public
 open import real-numbers.binary-mean-real-numbers public
+open import real-numbers.binary-minimum-nonnegative-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
@@ -71,6 +73,7 @@ open import real-numbers.local-ring-of-real-numbers public
 open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
 open import real-numbers.macneille-real-numbers public
+open import real-numbers.maximum-finite-families-nonnegative-real-numbers public
 open import real-numbers.maximum-finite-families-real-numbers public
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.maximum-lower-dedekind-real-numbers public
@@ -109,7 +112,9 @@ open import real-numbers.positive-proper-closed-intervals-real-numbers public
 open import real-numbers.positive-real-numbers public
 open import real-numbers.powers-real-numbers public
 open import real-numbers.proper-closed-intervals-real-numbers public
+open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers public
 open import real-numbers.raising-universe-levels-real-numbers public
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers public
 open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
