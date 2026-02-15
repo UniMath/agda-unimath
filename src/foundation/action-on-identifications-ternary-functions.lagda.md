@@ -149,6 +149,14 @@ module _
     ap-ternary H (ap f p) (ap g q) (ap h r)
   ap-ternary-comp f g h refl refl refl = refl
 
+  ap-ternary-comp' :
+    {l5 : Level} {E : UU l5} (f : D → E)
+    {x x' : A} (p : x ＝ x')
+    {y y' : B} (q : y ＝ y')
+    {z z' : C} (r : z ＝ z') →
+    ap-ternary (λ a b c → f (H a b c)) p q r ＝ ap f (ap-ternary H p q r)
+  ap-ternary-comp' f refl refl refl = refl
+
   ap-ternary-comp-diagonal :
     {l5 : Level} {A' : UU l5}
     (f : A' → A) (g : A' → B) (h : A' → C)
@@ -158,31 +166,6 @@ module _
   ap-ternary-comp-diagonal f g h p =
     ( inv (ap-ternary-diagonal (λ x y z → H (f x) (g y) (h z)) p)) ∙
     ( ap-ternary-comp f g h p p p)
-
-  ap-ternary-comp' :
-    {l5 : Level} {E : UU l5} (f : D → E)
-    {x x' : A} (p : x ＝ x')
-    {y y' : B} (q : y ＝ y')
-    {z z' : C} (r : z ＝ z') →
-    ap-ternary (λ a b c → f (H a b c)) p q r ＝ ap f (ap-ternary H p q r)
-  ap-ternary-comp' f refl refl refl = refl
-```
-
-### Computing the ternary action on identifications when swapping the first two arguments
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B → C → D)
-  where
-
-  ap-ternary-permute :
-    {x x' : A} (p : x ＝ x')
-    {y y' : B} (q : y ＝ y')
-    {z z' : C} (r : z ＝ z') →
-    ap-ternary (λ y x z → f x y z) q p r ＝ ap-ternary f p q r
-  ap-ternary-permute refl refl refl = refl
 ```
 
 ## See also
