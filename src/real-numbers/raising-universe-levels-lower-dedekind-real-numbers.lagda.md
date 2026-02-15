@@ -68,7 +68,7 @@ module _
 
   raise-lower-ℝ : lower-ℝ (l0 ⊔ l)
   raise-lower-ℝ =
-    cut-raise-lower-ℝ ,
-    is-inhabited-cut-raise-lower-ℝ ,
-    is-rounded-cut-raise-lower-ℝ
+    ( cut-raise-lower-ℝ ,
+      is-inhabited-cut-raise-lower-ℝ ,
+      is-rounded-cut-raise-lower-ℝ)
 ```

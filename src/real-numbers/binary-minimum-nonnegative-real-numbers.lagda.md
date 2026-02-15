@@ -74,7 +74,7 @@ module _
 ### The large poset of nonnegative real numbers has meets
 
 ```agda
-has-meets-ℝ⁰⁺-Large-Poset : has-meets-Large-Poset ℝ⁰⁺-Large-Poset
+has-meets-large-poset-ℝ⁰⁺ : has-meets-Large-Poset ℝ⁰⁺-Large-Poset
 has-meets-ℝ⁰⁺-Large-Poset =
   λ where
     .meet-has-meets-Large-Poset → min-ℝ⁰⁺
@@ -85,7 +85,7 @@ has-meets-ℝ⁰⁺-Large-Poset =
 ### The nonnegative real numbers at a universe level form a meet-semilattice
 
 ```agda
-ℝ⁰⁺-Order-Theoretic-Meet-Semilattice :
+order-theoretic-meet-semiliattice-ℝ⁰⁺ :
   (l : Level) → Order-Theoretic-Meet-Semilattice (lsuc l) l
 pr1 (ℝ⁰⁺-Order-Theoretic-Meet-Semilattice l) = ℝ⁰⁺-Poset l
 pr2 (ℝ⁰⁺-Order-Theoretic-Meet-Semilattice l) x y =

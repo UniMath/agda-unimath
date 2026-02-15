@@ -202,7 +202,7 @@ abstract
 ### The large poset of nonnegative real numbers
 
 ```agda
-ℝ⁰⁺-Large-Preorder : Large-Preorder lsuc (_⊔_)
+large-preorder-ℝ⁰⁺ : Large-Preorder lsuc (_⊔_)
 ℝ⁰⁺-Large-Preorder =
   λ where
     .type-Large-Preorder → ℝ⁰⁺
@@ -210,7 +210,7 @@ abstract
     .refl-leq-Large-Preorder → refl-leq-ℝ ∘ real-ℝ⁰⁺
     .transitive-leq-Large-Preorder → transitive-leq-ℝ⁰⁺
 
-ℝ⁰⁺-Large-Poset : Large-Poset lsuc (_⊔_)
+large-poset-ℝ⁰⁺ : Large-Poset lsuc (_⊔_)
 ℝ⁰⁺-Large-Poset =
   λ where
     .large-preorder-Large-Poset → ℝ⁰⁺-Large-Preorder
@@ -220,7 +220,7 @@ abstract
 ### The large poset of nonnegative real numbers has a bottom element
 
 ```agda
-has-bottom-element-ℝ⁰⁺-Large-Poset :
+has-bottom-element-large-poset-ℝ⁰⁺ :
   has-bottom-element-Large-Poset ℝ⁰⁺-Large-Poset
 has-bottom-element-ℝ⁰⁺-Large-Poset =
   λ where
@@ -235,5 +235,5 @@ has-bottom-element-ℝ⁰⁺-Large-Poset =
 
 ```agda
 ℝ⁰⁺-Poset : (l : Level) → Poset (lsuc l) l
-ℝ⁰⁺-Poset = poset-Large-Poset ℝ⁰⁺-Large-Poset
+poset-ℝ⁰⁺ = poset-Large-Poset ℝ⁰⁺-Large-Poset
 ```
