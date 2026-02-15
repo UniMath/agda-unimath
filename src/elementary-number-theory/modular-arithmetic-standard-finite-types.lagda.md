@@ -15,6 +15,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -190,6 +191,40 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( succ-ℕ x)
     ( leq-nat-mod-succ-ℕ k x)
     ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+```
+
+### If `x ≤ k` then the residue of `x` modulo `k + 1` is `x`
+
+```agda
+eq-nat-fin-mod-succ-ℕ :
+  (k x : ℕ) →
+  leq-ℕ x k →
+  nat-Fin (succ-ℕ k) (mod-succ-ℕ k x) ＝ x
+eq-nat-fin-mod-succ-ℕ k x H =
+  eq-cong-le-ℕ
+    ( succ-ℕ k)
+    ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+    ( x)
+    ( strict-upper-bound-nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+    ( le-succ-leq-ℕ x k H)
+    ( cong-nat-mod-succ-ℕ k x)
+
+eq-nat-fin-mod-add-succ-ℕ :
+  (k x : ℕ) →
+  nat-Fin (k +ℕ succ-ℕ x) (mod-succ-ℕ (k +ℕ x) x) ＝ x
+eq-nat-fin-mod-add-succ-ℕ k x =
+  eq-nat-fin-mod-succ-ℕ
+    ( k +ℕ x)
+    ( x)
+    ( leq-le-succ-ℕ
+      ( x)
+      ( k +ℕ x)
+      ( concatenate-le-leq-ℕ
+        { x = x}
+        { y = succ-ℕ x}
+        { z = k +ℕ succ-ℕ x}
+        ( succ-le-ℕ x)
+        ( leq-add-ℕ' (succ-ℕ x) k)))
 ```
 
 ## Operations

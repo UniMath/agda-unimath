@@ -767,27 +767,6 @@ module _
         ( leq-eq-ℚ
           ( eq-sum-old-fin-sequence-sum-inl-old-extended-fin-sequence-bounded-sequence-bool))
 
-    -- TODO: rename
-    iₙ : Fin (k +ℕ succ-ℕ n)
-    iₙ = mod-succ-ℕ (k +ℕ n) n
-
-    abstract
-      eq-nat-Fin-iₙ :
-        nat-Fin (k +ℕ succ-ℕ n) iₙ ＝ n
-      eq-nat-Fin-iₙ =
-        eq-cong-le-ℕ
-          ( k +ℕ succ-ℕ n)
-          ( nat-Fin (k +ℕ succ-ℕ n) iₙ)
-          ( n)
-          ( strict-upper-bound-nat-Fin (k +ℕ succ-ℕ n) iₙ)
-          ( concatenate-le-leq-ℕ
-            { x = n}
-            { y = succ-ℕ n}
-            { z = k +ℕ succ-ℕ n}
-            ( succ-le-ℕ n)
-            ( leq-add-ℕ' (succ-ℕ n) k))
-          ( cong-nat-mod-succ-ℕ (k +ℕ n) n)
-
     eq-delta-fin-sequence-index-eq-levy-base-index-extend-true-sequence-macneille-ℝ :
       (i : Fin (k +ℕ succ-ℕ n)) →
       nat-Fin (k +ℕ succ-ℕ n) i ＝ n →
@@ -807,13 +786,14 @@ module _
         ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
 
     eq-delta-fin-sequence-selected-index-levy-base-index-extend-true-sequence-macneille-ℝ :
-      delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ iₙ ＝
+      delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ
+        ( mod-succ-ℕ (k +ℕ n) n) ＝
       weight-levy-sequence-macneille-ℝ n
     eq-delta-fin-sequence-selected-index-levy-base-index-extend-true-sequence-macneille-ℝ
       =
       eq-delta-fin-sequence-index-eq-levy-base-index-extend-true-sequence-macneille-ℝ
-        iₙ
-        eq-nat-Fin-iₙ
+        ( mod-succ-ℕ (k +ℕ n) n)
+        ( eq-nat-fin-mod-add-succ-ℕ k n)
 
     eq-old-extended-fin-sequence-index-bounded-sequence-bool :
       (i : Fin (k +ℕ succ-ℕ n)) →
@@ -854,7 +834,7 @@ module _
           ( k +ℕ succ-ℕ n)
           ( delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ)
           ( leq-zero-delta-fin-sequence-levy-base-index-extend-true-sequence-macneille-ℝ)
-          ( iₙ))
+          ( mod-succ-ℕ (k +ℕ n) n))
         ( leq-eq-ℚ
           ( inv
             ( eq-delta-fin-sequence-selected-index-levy-base-index-extend-true-sequence-macneille-ℝ)))
@@ -1018,7 +998,6 @@ $$
 ```agda
 module _
   (n : ℕ) (S@(k , χ , _) : bounded-sequence-bool)
-  (let iₙ = mod-succ-ℕ (k +ℕ n) n)
   where
 
   summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs :
@@ -1029,42 +1008,25 @@ module _
       ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i))
 
   abstract
-    eq-nat-Fin-iₙ-wfs :
-      nat-Fin (k +ℕ succ-ℕ n) iₙ ＝ n
-    eq-nat-Fin-iₙ-wfs =
-      eq-cong-le-ℕ
-        ( k +ℕ succ-ℕ n)
-        ( nat-Fin (k +ℕ succ-ℕ n) iₙ)
-        ( n)
-        ( strict-upper-bound-nat-Fin (k +ℕ succ-ℕ n) (iₙ))
-        ( concatenate-le-leq-ℕ
-          { x = n}
-          { y = succ-ℕ n}
-          { z = k +ℕ succ-ℕ n}
-          ( succ-le-ℕ n)
-          ( leq-add-ℕ' (succ-ℕ n) k))
-        ( cong-nat-mod-succ-ℕ (k +ℕ n) n)
-
-    abstract
-      eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs :
-        summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs
-          ( iₙ) ＝
-        weight-levy-sequence-macneille-ℝ n
-      eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs =
-        ap
-          ( λ m →
-            summand-levy-sequence-macneille-ℝ m
-              ( force-true-at-sequence-bool χ n m))
-          ( eq-nat-Fin-iₙ-wfs) ∙
-        ( ind-bool
-          ( λ b →
-            is-true b →
-            summand-levy-sequence-macneille-ℝ n b ＝
-            weight-levy-sequence-macneille-ℝ n)
-          ( λ _ → refl)
-          ( λ ())
-          ( force-true-at-sequence-bool χ n n)
-          ( is-true-force-true-at-self-sequence-bool χ n))
+    eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs :
+      summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs
+        ( mod-succ-ℕ (k +ℕ n) n) ＝
+      weight-levy-sequence-macneille-ℝ n
+    eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs =
+      ap
+        ( λ m →
+          summand-levy-sequence-macneille-ℝ m
+            ( force-true-at-sequence-bool χ n m))
+        ( eq-nat-fin-mod-add-succ-ℕ k n) ∙
+      ( ind-bool
+        ( λ b →
+          is-true b →
+          summand-levy-sequence-macneille-ℝ n b ＝
+          weight-levy-sequence-macneille-ℝ n)
+        ( λ _ → refl)
+        ( λ ())
+        ( force-true-at-sequence-bool χ n n)
+        ( is-true-force-true-at-self-sequence-bool χ n))
 
     leq-zero-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs :
       (i : Fin (k +ℕ succ-ℕ n)) →
@@ -1093,7 +1055,7 @@ module _
           ( k +ℕ succ-ℕ n)
           ( summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs)
           ( leq-zero-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs)
-          ( iₙ))
+          ( mod-succ-ℕ (k +ℕ n) n))
         ( leq-eq-ℚ
           ( inv
             ( eq-selected-value-summand-fin-sequence-adjoin-index-bounded-sequence-bool-wfs)))
