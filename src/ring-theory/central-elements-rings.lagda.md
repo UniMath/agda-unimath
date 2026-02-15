@@ -33,15 +33,16 @@ module _
 
   is-central-element-prop-Ring : type-Ring R → Prop l
   is-central-element-prop-Ring =
-    is-central-element-semiring-Prop (semiring-Ring R)
+    is-central-element-prop-Semiring (semiring-Ring R)
 
   is-central-element-Ring : type-Ring R → UU l
   is-central-element-Ring = is-central-element-Semiring (semiring-Ring R)
 
-  is-prop-is-central-element-Ring :
-    (x : type-Ring R) → is-prop (is-central-element-Ring x)
-  is-prop-is-central-element-Ring =
-    is-prop-is-central-element-Semiring (semiring-Ring R)
+  abstract
+    is-prop-is-central-element-Ring :
+      (x : type-Ring R) → is-prop (is-central-element-Ring x)
+    is-prop-is-central-element-Ring =
+      is-prop-is-central-element-Semiring (semiring-Ring R)
 ```
 
 ## Properties
