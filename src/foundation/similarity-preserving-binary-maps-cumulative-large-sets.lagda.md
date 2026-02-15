@@ -19,10 +19,9 @@ open import foundation.universe-levels
 
 Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y Z`, a
 binary map `f : X → Y → Z`
-{{#concept "preserves similarity" Disambiguation="binary map between cumulative large sets" Agda=preserves-sim-binary-map-Cumulative-Large-Set}}
-if it
-[preserves similarity](foundation.similarity-preserving-binary-maps-large-similarity-relations.md)
-on their [large similarity relations](foundation.large-similarity-relations.md).
+{{#concept "preserves similarity" Disambiguation="binary maps over cumulative large sets" Agda=preserves-sim-binary-map-Cumulative-Large-Set}}
+if whenever `x` is similar to `x'` and `y` is similar to `y'`, `f x y` is
+similar to `f x' y'`.
 
 ## Definition
 

@@ -17,8 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y`, a map
-`f : X → Y`
+Given [cumulative large sets](foundation.cumulative-large-sets.md) on `X` and
+`Y`, a map `f : X → Y`
 {{#concept "preserves similarity" Disambiguation="map between two cumulative large sets" Agda=preserves-sim-map-Cumulative-Large-Set}}
 if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
 
