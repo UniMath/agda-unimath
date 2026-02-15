@@ -63,7 +63,7 @@ module _
   abstract
     is-greatest-binary-lower-bound-min-ℝ⁰⁺ :
       is-greatest-binary-lower-bound-Large-Poset
-        ( ℝ⁰⁺-Large-Poset)
+        ( large-poset-ℝ⁰⁺)
         ( x⁰⁺)
         ( y⁰⁺)
         ( min-ℝ⁰⁺ x⁰⁺ y⁰⁺)
@@ -74,8 +74,8 @@ module _
 ### The large poset of nonnegative real numbers has meets
 
 ```agda
-has-meets-large-poset-ℝ⁰⁺ : has-meets-Large-Poset ℝ⁰⁺-Large-Poset
-has-meets-ℝ⁰⁺-Large-Poset =
+has-meets-large-poset-ℝ⁰⁺ : has-meets-Large-Poset large-poset-ℝ⁰⁺
+has-meets-large-poset-ℝ⁰⁺ =
   λ where
     .meet-has-meets-Large-Poset → min-ℝ⁰⁺
     .is-greatest-binary-lower-bound-meet-has-meets-Large-Poset →
@@ -85,10 +85,10 @@ has-meets-ℝ⁰⁺-Large-Poset =
 ### The nonnegative real numbers at a universe level form a meet-semilattice
 
 ```agda
-order-theoretic-meet-semiliattice-ℝ⁰⁺ :
+order-theoretic-meet-semilattice-ℝ⁰⁺ :
   (l : Level) → Order-Theoretic-Meet-Semilattice (lsuc l) l
-pr1 (ℝ⁰⁺-Order-Theoretic-Meet-Semilattice l) = ℝ⁰⁺-Poset l
-pr2 (ℝ⁰⁺-Order-Theoretic-Meet-Semilattice l) x y =
+pr1 (order-theoretic-meet-semilattice-ℝ⁰⁺ l) = poset-ℝ⁰⁺ l
+pr2 (order-theoretic-meet-semilattice-ℝ⁰⁺ l) x y =
   ( min-ℝ⁰⁺ x y , is-greatest-binary-lower-bound-min-ℝ⁰⁺ x y)
 ```
 

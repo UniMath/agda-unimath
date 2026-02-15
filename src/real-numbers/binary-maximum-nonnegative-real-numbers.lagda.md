@@ -65,7 +65,7 @@ module _
   abstract
     is-least-binary-upper-bound-max-ℝ⁰⁺ :
       is-least-binary-upper-bound-Large-Poset
-        ( ℝ⁰⁺-Large-Poset)
+        ( large-poset-ℝ⁰⁺)
         ( x⁰⁺)
         ( y⁰⁺)
         ( max-ℝ⁰⁺ x⁰⁺ y⁰⁺)
@@ -76,8 +76,8 @@ module _
 ### The large poset of nonnegative real numbers has joins
 
 ```agda
-has-joins-large-poset-ℝ⁰⁺ : has-joins-Large-Poset ℝ⁰⁺-Large-Poset
-has-joins-ℝ⁰⁺-Large-Poset =
+has-joins-large-poset-ℝ⁰⁺ : has-joins-Large-Poset large-poset-ℝ⁰⁺
+has-joins-large-poset-ℝ⁰⁺ =
   λ where
     .join-has-joins-Large-Poset →
       max-ℝ⁰⁺
@@ -89,26 +89,26 @@ has-joins-ℝ⁰⁺-Large-Poset =
 
 ```agda
 is-large-join-semilattice-large-poset-ℝ⁰⁺ :
-  is-large-join-semilattice-Large-Poset ℝ⁰⁺-Large-Poset
-is-large-join-semilattice-ℝ⁰⁺-Large-Poset =
+  is-large-join-semilattice-Large-Poset large-poset-ℝ⁰⁺
+is-large-join-semilattice-large-poset-ℝ⁰⁺ =
   λ where
     .has-joins-is-large-join-semilattice-Large-Poset →
-      has-joins-ℝ⁰⁺-Large-Poset
+      has-joins-large-poset-ℝ⁰⁺
     .has-bottom-element-is-large-join-semilattice-Large-Poset →
-      has-bottom-element-ℝ⁰⁺-Large-Poset
+      has-bottom-element-large-poset-ℝ⁰⁺
 
 large-join-semilattice-ℝ⁰⁺ : Large-Join-Semilattice lsuc (_⊔_)
-ℝ⁰⁺-Large-Join-Semilattice =
+large-join-semilattice-ℝ⁰⁺ =
   λ where
-    .large-poset-Large-Join-Semilattice → ℝ⁰⁺-Large-Poset
+    .large-poset-Large-Join-Semilattice → large-poset-ℝ⁰⁺
     .is-large-join-semilattice-Large-Join-Semilattice →
-      is-large-join-semilattice-ℝ⁰⁺-Large-Poset
+      is-large-join-semilattice-large-poset-ℝ⁰⁺
 
 order-theoretic-join-semilattice-ℝ⁰⁺ :
   (l : Level) → Order-Theoretic-Join-Semilattice (lsuc l) l
-ℝ⁰⁺-Order-Theoretic-Join-Semilattice =
+order-theoretic-join-semilattice-ℝ⁰⁺ =
   order-theoretic-join-semilattice-Large-Join-Semilattice
-    ( ℝ⁰⁺-Large-Join-Semilattice)
+    ( large-join-semilattice-ℝ⁰⁺)
 ```
 
 ## See also

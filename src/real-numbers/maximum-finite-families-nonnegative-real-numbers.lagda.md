@@ -48,7 +48,7 @@ module _
 
   max-fin-sequence-ℝ⁰⁺ : ℝ⁰⁺ l
   max-fin-sequence-ℝ⁰⁺ =
-    join-fin-sequence-type-Large-Join-Semilattice ℝ⁰⁺-Large-Join-Semilattice n u
+    join-fin-sequence-type-Large-Join-Semilattice large-join-semilattice-ℝ⁰⁺ n u
 ```
 
 ### The maximum of an finite family of nonnegative real numbers
@@ -62,7 +62,7 @@ module _
   max-finite-family-ℝ⁰⁺ : ℝ⁰⁺ l2
   max-finite-family-ℝ⁰⁺ =
     join-finite-family-type-Large-Join-Semilattice
-      ( ℝ⁰⁺-Large-Join-Semilattice)
+      ( large-join-semilattice-ℝ⁰⁺)
       ( I)
       ( f)
 ```
@@ -79,12 +79,12 @@ module _
   abstract
     is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ :
       is-least-upper-bound-family-of-elements-Large-Poset
-        ( ℝ⁰⁺-Large-Poset)
+        ( large-poset-ℝ⁰⁺)
         ( u)
         ( max-fin-sequence-ℝ⁰⁺ n u)
     is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ =
       is-least-upper-bound-join-fin-sequence-type-Large-Join-Semilattice
-        ( ℝ⁰⁺-Large-Join-Semilattice)
+        ( large-join-semilattice-ℝ⁰⁺)
         ( n)
         ( u)
 ```
@@ -100,12 +100,12 @@ module _
   abstract
     is-least-upper-bound-max-finite-family-ℝ⁰⁺ :
       is-least-upper-bound-family-of-elements-Large-Poset
-        ( ℝ⁰⁺-Large-Poset)
+        ( large-poset-ℝ⁰⁺)
         ( f)
         ( max-finite-family-ℝ⁰⁺ I f)
     is-least-upper-bound-max-finite-family-ℝ⁰⁺ =
       is-least-upper-bound-join-finite-family-type-Large-Join-Semilattice
-        ( ℝ⁰⁺-Large-Join-Semilattice)
+        ( large-join-semilattice-ℝ⁰⁺)
         ( I)
         ( f)
 ```

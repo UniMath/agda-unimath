@@ -203,7 +203,7 @@ abstract
 
 ```agda
 large-preorder-ℝ⁰⁺ : Large-Preorder lsuc (_⊔_)
-ℝ⁰⁺-Large-Preorder =
+large-preorder-ℝ⁰⁺ =
   λ where
     .type-Large-Preorder → ℝ⁰⁺
     .leq-prop-Large-Preorder → leq-prop-ℝ⁰⁺
@@ -211,9 +211,9 @@ large-preorder-ℝ⁰⁺ : Large-Preorder lsuc (_⊔_)
     .transitive-leq-Large-Preorder → transitive-leq-ℝ⁰⁺
 
 large-poset-ℝ⁰⁺ : Large-Poset lsuc (_⊔_)
-ℝ⁰⁺-Large-Poset =
+large-poset-ℝ⁰⁺ =
   λ where
-    .large-preorder-Large-Poset → ℝ⁰⁺-Large-Preorder
+    .large-preorder-Large-Poset → large-preorder-ℝ⁰⁺
     .antisymmetric-leq-Large-Poset → antisymmetric-leq-ℝ⁰⁺
 ```
 
@@ -221,8 +221,8 @@ large-poset-ℝ⁰⁺ : Large-Poset lsuc (_⊔_)
 
 ```agda
 has-bottom-element-large-poset-ℝ⁰⁺ :
-  has-bottom-element-Large-Poset ℝ⁰⁺-Large-Poset
-has-bottom-element-ℝ⁰⁺-Large-Poset =
+  has-bottom-element-Large-Poset large-poset-ℝ⁰⁺
+has-bottom-element-large-poset-ℝ⁰⁺ =
   λ where
     .bottom-has-bottom-element-Large-Poset l → raise-ℝ⁰⁺ l zero-ℝ⁰⁺
     .is-bottom-element-bottom-has-bottom-element-Large-Poset l x →
@@ -234,6 +234,6 @@ has-bottom-element-ℝ⁰⁺-Large-Poset =
 ### The poset of nonnegative real numbers at a universe level
 
 ```agda
-ℝ⁰⁺-Poset : (l : Level) → Poset (lsuc l) l
-poset-ℝ⁰⁺ = poset-Large-Poset ℝ⁰⁺-Large-Poset
+poset-ℝ⁰⁺ : (l : Level) → Poset (lsuc l) l
+poset-ℝ⁰⁺ = poset-Large-Poset large-poset-ℝ⁰⁺
 ```
