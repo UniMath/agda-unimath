@@ -1,2 +1,1 @@
-\grad:{\nabla}
-\R:{\mathbb{R}^{#1 \times #2}}
+\im:\operatorname{im}
