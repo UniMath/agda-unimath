@@ -279,11 +279,7 @@ Let us now assume that the four vertical faces are pullback squares.
           ( equifibered-span-diagram-mathers-cube pb-left pb-back))
         ( D')
     cocone-postcompose-mathers-second-cube-theorem =
-      cocone-map
-        ( vertical-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( horizontal-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
+      cocone-map _ _
         ( cocone-flattening-equifibered-span-diagram f g
           ( h , k , bottom)
           ( equifibered-span-diagram-mathers-cube pb-left pb-back)
@@ -306,56 +302,9 @@ flattening lemma for equifibered span diagrams to show this is a pushout.
         ( cocone-postcompose-mathers-second-cube-theorem)
     universal-property-pushout-cocone-postcompose-mathers-second-cube-theorem
       po-bottom =
-      up-pushout-up-pushout-is-equiv
-        ( vertical-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( horizontal-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( cocone-flattening-equifibered-span-diagram f g
-          ( h , k , bottom)
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-          ( fiber' hD)
-          ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
-        ( cocone-map
-          ( vertical-map-span-flattening-equifibered-span-diagram
-            ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-          ( horizontal-map-span-flattening-equifibered-span-diagram
-            ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-          ( cocone-flattening-equifibered-span-diagram f g
-            ( h , k , bottom)
-            ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-            ( fiber' hD)
-            ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
-          ( map-equiv-total-fiber' hD))
+      up-pushout-up-pushout-is-equiv _ _ _ _
         ( map-equiv-total-fiber' hD)
-        ( htpy-eq-cocone
-          ( vertical-map-span-flattening-equifibered-span-diagram
-            ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-          ( horizontal-map-span-flattening-equifibered-span-diagram
-            ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-          ( cocone-map
-            ( vertical-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-            ( horizontal-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-            ( cocone-flattening-equifibered-span-diagram f g
-              ( h , k , bottom)
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-              ( fiber' hD)
-              ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
-            ( map-equiv-total-fiber' hD))
-          ( cocone-map
-            ( vertical-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-            ( horizontal-map-span-flattening-equifibered-span-diagram
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-            ( cocone-flattening-equifibered-span-diagram f g
-              ( h , k , bottom)
-              ( equifibered-span-diagram-mathers-cube pb-left pb-back)
-              ( fiber' hD)
-              ( equiv-equifibered-span-diagram-mathers-second-cube-theorem))
-            ( map-equiv-total-fiber' hD))
-          ( refl))
+        ( refl-htpy-cocone _ _ _)
         ( is-equiv-map-equiv-total-fiber' hD)
         ( flattening-lemma-equifibered-span-diagram f g
           ( h , k , bottom)
@@ -367,13 +316,7 @@ flattening lemma for equifibered span diagrams to show this is a pushout.
     cocone-span-extension-mathers-second-cube-theorem :
       cocone f' g' D'
     cocone-span-extension-mathers-second-cube-theorem =
-      comp-cocone-hom-span
-        ( vertical-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( horizontal-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( f')
-        ( g')
+      comp-cocone-hom-span _ _ f' g'
         ( map-inv-equiv-total-fiber' hB)
         ( map-inv-equiv-total-fiber' hC)
         ( map-inv-equiv-total-fiber' hA)
@@ -387,13 +330,7 @@ flattening lemma for equifibered span diagrams to show this is a pushout.
         ( cocone-span-extension-mathers-second-cube-theorem)
     universal-property-pushout-cocone-span-extension-mathers-second-cube-theorem
       po-bottom =
-      universal-property-pushout-extended-by-equivalences
-        ( vertical-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( horizontal-map-span-flattening-equifibered-span-diagram
-          ( equifibered-span-diagram-mathers-cube pb-left pb-back))
-        ( f')
-        ( g')
+      universal-property-pushout-extended-by-equivalences _ _ f' g'
         ( map-inv-equiv-total-fiber' hB)
         ( map-inv-equiv-total-fiber' hC)
         ( map-inv-equiv-total-fiber' hA)
