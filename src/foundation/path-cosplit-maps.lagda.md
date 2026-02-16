@@ -28,7 +28,6 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
-open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
 open import foundation.morphisms-arrows
@@ -49,6 +48,7 @@ open import foundation-core.equivalences
 open import foundation-core.equivalences-arrows
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
+open import foundation-core.iterated-successors-truncation-levels
 open import foundation-core.propositions
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types

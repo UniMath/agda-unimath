@@ -14,7 +14,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
-open import foundation.iterated-successors-truncation-levels
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.truncations
@@ -26,6 +25,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.iterated-successors-truncation-levels
 open import foundation-core.precomposition-functions
 open import foundation-core.retracts-of-types
 open import foundation-core.truncated-maps

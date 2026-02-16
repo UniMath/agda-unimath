@@ -13,7 +13,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.identity-types
+open import foundation-core.iterated-successors-truncation-levels
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 ```

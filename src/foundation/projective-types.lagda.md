@@ -17,10 +17,10 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.iterated-successors-truncation-levels
 open import foundation.postcomposition-functions
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.truncated-addition-truncation-levels
 open import foundation.truncation-levels
 open import foundation.universe-levels
 

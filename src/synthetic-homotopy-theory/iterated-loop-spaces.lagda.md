@@ -10,11 +10,12 @@ module synthetic-homotopy-theory.iterated-loop-spaces where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.function-types
-open import foundation.iterated-successors-truncation-levels
 open import foundation.iterating-functions
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
+open import foundation-core.iterated-successors-truncation-levels
 
 open import structured-types.h-spaces
 open import structured-types.pointed-types

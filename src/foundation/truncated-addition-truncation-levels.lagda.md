@@ -218,20 +218,6 @@ not-reflects-leq-left-truncadd-𝕋 :
 not-reflects-leq-left-truncadd-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
 ```
 
-### Coherence with addition on natural numbers
-
-```agda
-add+2-truncation-level-minus-one-ℕ :
-  (k n : ℕ) →
-  truncation-level-minus-one-ℕ (k +ℕ n) ＝
-  add+2-𝕋
-    ( truncation-level-minus-one-ℕ k)
-    ( truncation-level-minus-two-ℕ n)
-add+2-truncation-level-minus-one-ℕ k zero-ℕ = refl
-add+2-truncation-level-minus-one-ℕ k (succ-ℕ n) =
-  ap succ-𝕋 (add+2-truncation-level-minus-one-ℕ k n)
-```
-
 ## See also
 
 - [`iterated-successors-truncation-levels`](foundation.iterated-successors-truncation-levels.md)
