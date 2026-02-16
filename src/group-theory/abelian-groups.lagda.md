@@ -622,6 +622,52 @@ module _
   add-right-subtraction-Ab = mul-right-div-Group (group-Ab A)
 ```
 
+### `(-x) - (-y) = y - x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-neg-Ab :
+      (x y : type-Ab A) →
+      right-subtraction-Ab A (neg-Ab A x) (neg-Ab A y) ＝
+      right-subtraction-Ab A y x
+    right-subtraction-neg-Ab x y =
+      equational-reasoning
+        right-subtraction-Ab A (neg-Ab A x) (neg-Ab A y)
+        ＝ add-Ab A (neg-Ab A x) y
+          by ap-add-Ab A refl (neg-neg-Ab A y)
+        ＝ right-subtraction-Ab A y x
+          by commutative-add-Ab A _ _
+```
+
+### `(x + y) - (x + z) = y - z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-left-add-Ab :
+      (x y z : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A x y) (add-Ab A x z) ＝
+      right-subtraction-Ab A y z
+    right-subtraction-left-add-Ab x y z =
+      equational-reasoning
+        right-subtraction-Ab A (add-Ab A x y) (add-Ab A x z)
+        ＝ add-Ab A (add-Ab A x y) (add-Ab A (neg-Ab A x) (neg-Ab A z))
+          by ap-add-Ab A refl (distributive-neg-add-Ab A x z)
+        ＝ add-Ab A (right-subtraction-Ab A x x) (right-subtraction-Ab A y z)
+          by interchange-add-add-Ab A _ _ _ _
+        ＝ add-Ab A (zero-Ab A) (right-subtraction-Ab A y z)
+          by ap-add-Ab A (right-inverse-law-add-Ab A x) refl
+        ＝ right-subtraction-Ab A y z
+          by left-unit-law-add-Ab A _
+```
+
 ### Conjugation is the identity function
 
 **Proof:** Consider two elements `x` and `y` of an abelian group. Then

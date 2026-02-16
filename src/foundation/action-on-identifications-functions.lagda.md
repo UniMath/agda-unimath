@@ -31,7 +31,7 @@ identity types.
 ```agda
 ap :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
-  x ＝ y → (f x) ＝ (f y)
+  x ＝ y → f x ＝ f y
 ap f refl = refl
 ```
 
@@ -40,18 +40,29 @@ ap f refl = refl
 ### The identity function acts trivially on identifications
 
 ```agda
-ap-id :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) → (ap id p) ＝ p
-ap-id refl = refl
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  ap-id : (p : x ＝ y) → ap id p ＝ p
+  ap-id refl = refl
+
+  inv-ap-id : (p : x ＝ y) → p ＝ ap id p
+  inv-ap-id p = inv (ap-id p)
 ```
 
 ### The action on identifications of a composite function is the composite of the actions
 
 ```agda
-ap-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
-ap-comp g f refl = refl
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C) (f : A → B)
+  where
+
+  ap-comp : {x y : A} (p : x ＝ y) → ap (g ∘ f) p ＝ (ap g ∘ ap f) p
+  ap-comp refl = refl
+
+  inv-ap-comp : {x y : A} (p : x ＝ y) → (ap g ∘ ap f) p ＝ ap (g ∘ f) p
+  inv-ap-comp q = inv (ap-comp q)
 
 ap-comp-assoc :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -63,10 +74,12 @@ ap-comp-assoc h g f refl = refl
 ### The action on identifications of any map preserves `refl`
 
 ```agda
-ap-refl :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
-  (ap f (refl {x = x})) ＝ refl
-ap-refl f x = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A)
+  where
+
+  ap-refl : ap f (refl {x = x}) ＝ refl
+  ap-refl = refl
 ```
 
 ### The action on identifications of any map preserves concatenation of identifications
@@ -80,6 +93,10 @@ module _
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
   ap-concat refl q = refl
 
+  inv-ap-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f p ∙ ap f q ＝ ap f (p ∙ q)
+  inv-ap-concat p q = inv (ap-concat p q)
+
   compute-right-refl-ap-concat :
     {x y : A} (p : x ＝ y) →
     ap-concat p refl ＝ ap (ap f) right-unit ∙ inv right-unit
@@ -89,19 +106,29 @@ module _
 ### The action on identifications of any map preserves inverses
 
 ```agda
-ap-inv :
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
-ap-inv f refl = refl
+  where
+
+  ap-inv : (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
+  ap-inv refl = refl
+
+  inv-ap-inv : (p : x ＝ y) → inv (ap f p) ＝ ap f (inv p)
+  inv-ap-inv p = inv (ap-inv p)
 ```
 
 ### The action on identifications of a constant map is constant
 
 ```agda
-ap-const :
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A}
-  (p : x ＝ y) → (ap (const A b) p) ＝ refl
-ap-const b refl = refl
+  where
+
+  ap-const : (p : x ＝ y) → ap (const A b) p ＝ refl
+  ap-const refl = refl
+
+  inv-ap-const : (p : x ＝ y) → refl ＝ ap (const A b) p
+  inv-ap-const p = inv (ap-const p)
 ```
 
 ## See also

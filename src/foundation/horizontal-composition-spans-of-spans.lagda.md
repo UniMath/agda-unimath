@@ -12,7 +12,6 @@ open import foundation.composition-spans
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.homotopies
 open import foundation.identity-types
@@ -26,6 +25,7 @@ open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.equivalences-arrows
 open import foundation-core.function-types
 ```
 

@@ -32,7 +32,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.transport-along-identifications
@@ -223,7 +223,7 @@ module _
 
   is-local-retract : A retract-of B → is-local f B → is-local f A
   is-local-retract R =
-    is-equiv-retract-map-is-equiv'
+    is-equiv-retract-arrow-is-equiv'
       ( precomp f A)
       ( precomp f B)
       ( retract-postcomp Y R)
@@ -251,15 +251,15 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  (f : A → B) (g : X → Y) (R : f retract-of-arrow g) (S : UU l5)
   where
 
-  is-local-retract-map-is-local : is-local g S → is-local f S
-  is-local-retract-map-is-local =
-    is-equiv-retract-map-is-equiv
+  is-local-retract-arrow-is-local : is-local g S → is-local f S
+  is-local-retract-arrow-is-local =
+    is-equiv-retract-arrow-is-equiv
       ( precomp f S)
       ( precomp g S)
-      ( retract-map-precomp-retract-map f g R S)
+      ( retract-arrow-precomp-retract-arrow f g R S)
 ```
 
 In fact, the higher coherence of the retract is not needed:
@@ -278,9 +278,9 @@ module _
   (S : UU l5)
   where
 
-  is-local-retract-map-is-local' : is-local g S → is-local f S
-  is-local-retract-map-is-local' =
-    is-equiv-retract-map-is-equiv'
+  is-local-retract-arrow-is-local' : is-local g S → is-local f S
+  is-local-retract-arrow-is-local' =
+    is-equiv-retract-arrow-is-equiv'
       ( precomp f S)
       ( precomp g S)
       ( retract-precomp R₁ S)

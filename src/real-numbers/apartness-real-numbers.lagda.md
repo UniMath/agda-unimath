@@ -15,12 +15,14 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
+open import foundation.identity-types
 open import foundation.large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
@@ -29,14 +31,18 @@ open import metric-spaces.apartness-located-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.binary-maximum-real-numbers
+open import real-numbers.binary-minimum-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.located-metric-space-of-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
@@ -78,38 +84,42 @@ apart-le-ℝ' = inr-disjunction
 ### Apartness is antireflexive
 
 ```agda
-antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
-antireflexive-apart-ℝ x =
-  elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
+abstract
+  antireflexive-apart-ℝ : {l : Level} → (x : ℝ l) → ¬ (apart-ℝ x x)
+  antireflexive-apart-ℝ x =
+    elim-disjunction empty-Prop (irreflexive-le-ℝ x) (irreflexive-le-ℝ x)
 ```
 
 ### Apartness is symmetric
 
 ```agda
-symmetric-apart-ℝ :
-  {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
-symmetric-apart-ℝ {x = x} {y = y} =
-  elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
+abstract
+  symmetric-apart-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → apart-ℝ x y → apart-ℝ y x
+  symmetric-apart-ℝ {x = x} {y = y} =
+    elim-disjunction (apart-prop-ℝ y x) inr-disjunction inl-disjunction
 ```
 
 ### Apartness is cotransitive
 
 ```agda
-cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
-cotransitive-apart-ℝ x y z =
-  elim-disjunction
-    ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-    ( λ x<y →
-      map-disjunction
-        ( inl-disjunction)
-        ( inl-disjunction)
-        ( cotransitive-le-ℝ x y z x<y))
-    ( λ y<x →
-      elim-disjunction
-        ( apart-prop-ℝ x z ∨ apart-prop-ℝ z y)
-        ( inr-disjunction ∘ inr-disjunction)
-        ( inl-disjunction ∘ inr-disjunction)
-        ( cotransitive-le-ℝ y x z y<x))
+abstract
+  cotransitive-apart-ℝ : is-cotransitive-Large-Relation-Prop ℝ apart-prop-ℝ
+  cotransitive-apart-ℝ x y z =
+    elim-disjunction
+      ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
+      ( λ x<z →
+        elim-disjunction
+          ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
+          ( inl-disjunction ∘ inl-disjunction)
+          ( inr-disjunction ∘ inl-disjunction)
+          ( cotransitive-le-ℝ x y z x<z))
+      ( λ z<x →
+        elim-disjunction
+          ( apart-prop-ℝ x y ∨ apart-prop-ℝ y z)
+          ( inr-disjunction ∘ inr-disjunction)
+          ( inl-disjunction ∘ inr-disjunction)
+          ( cotransitive-le-ℝ z y x z<x))
 ```
 
 ### Apartness on the reals is a large apartness relation
@@ -126,12 +136,59 @@ cotransitive-Large-Apartness-Relation large-apartness-relation-ℝ =
   cotransitive-apart-ℝ
 ```
 
+### Apartness on a particular universe level of the reals
+
+```agda
+apartness-relation-ℝ : (l : Level) → Apartness-Relation l (ℝ l)
+apartness-relation-ℝ =
+  apartness-relation-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
 ### Apart real numbers are nonequal
 
 ```agda
 nonequal-apart-ℝ : {l : Level} (x y : ℝ l) → apart-ℝ x y → x ≠ y
 nonequal-apart-ℝ x y =
   nonequal-apart-Large-Apartness-Relation large-apartness-relation-ℝ
+```
+
+### Nonapart real numbers are similar
+
+```agda
+abstract
+  sim-nonapart-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → ¬ (apart-ℝ x y) → sim-ℝ x y
+  sim-nonapart-ℝ x y ¬x#y =
+    sim-sim-leq-ℝ
+      ( leq-not-le-ℝ y x ( ¬x#y ∘ apart-le-ℝ') ,
+        leq-not-le-ℝ x y ( ¬x#y ∘ apart-le-ℝ))
+```
+
+### Real numbers at the same universe level are equal if and only if they are not apart
+
+```agda
+abstract
+  eq-iff-nonapart-ℝ :
+    {l : Level} (x y : ℝ l) → (x ＝ y) ↔ ¬ (apart-ℝ x y)
+  eq-iff-nonapart-ℝ x y =
+    ( ( λ x=y x#y → nonequal-apart-ℝ x y x#y x=y) ,
+      eq-sim-ℝ ∘ sim-nonapart-ℝ x y)
+```
+
+### The apartness relation of real numbers is tight
+
+```agda
+abstract
+  is-tight-apartness-relation-ℝ :
+    (l : Level) → is-tight-Apartness-Relation (apartness-relation-ℝ l)
+  is-tight-apartness-relation-ℝ l x y =
+    backward-implication (eq-iff-nonapart-ℝ x y)
+
+tight-apartness-relation-ℝ :
+  (l : Level) → Tight-Apartness-Relation l (ℝ l)
+tight-apartness-relation-ℝ l =
+  ( apartness-relation-ℝ l ,
+    is-tight-apartness-relation-ℝ l)
 ```
 
 ### Apartness is preserved by translation
@@ -232,6 +289,10 @@ module _
         ( sim-eq-ℝ (left-unit-law-add-ℝ y))
         ( preserves-apart-right-add-ℝ y _ _ x-y#0)
 
+  apart-iff-is-nonzero-diff-ℝ : (apart-ℝ x y) ↔ (is-nonzero-ℝ (x -ℝ y))
+  apart-iff-is-nonzero-diff-ℝ =
+    ( is-nonzero-diff-is-apart-ℝ , apart-is-nonzero-diff-ℝ)
+
   nonzero-diff-apart-ℝ : apart-ℝ x y → nonzero-ℝ (l1 ⊔ l2)
   nonzero-diff-apart-ℝ x#y = (x -ℝ y , is-nonzero-diff-is-apart-ℝ x#y)
 ```
@@ -322,4 +383,67 @@ module _
     apart-ℝ x y ↔ apart-located-metric-space-ℝ x y
   apart-iff-apart-located-metric-space-ℝ =
     ( apart-located-metric-space-apart-ℝ , apart-apart-located-metric-space-ℝ)
+```
+
+### Apartness is preserved by raising the universe level of real numbers
+
+```agda
+abstract
+  preserves-apart-left-raise-ℝ :
+    {l1 l2 : Level} (l3 : Level) {x : ℝ l1} {y : ℝ l2} →
+    apart-ℝ x y → apart-ℝ (raise-ℝ l3 x) y
+  preserves-apart-left-raise-ℝ l3 {x} {y} =
+    apart-left-sim-ℝ _ _ _ (sim-raise-ℝ l3 x)
+
+  preserves-apart-right-raise-ℝ :
+    {l1 l2 : Level} (l3 : Level) {x : ℝ l1} {y : ℝ l2} →
+    apart-ℝ x y → apart-ℝ x (raise-ℝ l3 y)
+  preserves-apart-right-raise-ℝ l3 {x} {y} =
+    apart-right-sim-ℝ _ _ _ (sim-raise-ℝ l3 y)
+```
+
+### If `x` is apart from `y` and `z`, then `x` is apart from `max y z`
+
+```agda
+abstract
+  apart-max-apart-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} →
+    apart-ℝ x y → apart-ℝ x z → apart-ℝ x (max-ℝ y z)
+  apart-max-apart-ℝ {x = x} {y = y} {z = z} x#y x#z =
+    elim-disjunction
+      ( apart-prop-ℝ x (max-ℝ y z))
+      ( λ x<y →
+        apart-le-ℝ
+          ( concatenate-le-leq-ℝ x y (max-ℝ y z) x<y (leq-left-max-ℝ y z)))
+      ( λ y<x →
+        elim-disjunction
+          ( apart-prop-ℝ x (max-ℝ y z))
+          ( λ x<z →
+            apart-le-ℝ
+              ( concatenate-le-leq-ℝ x z (max-ℝ y z) x<z (leq-right-max-ℝ y z)))
+          ( λ z<x → apart-le-ℝ' (le-max-le-le-ℝ y<x z<x))
+          ( x#z))
+      ( x#y)
+```
+
+### If `x` is apart from `y` and `x`, then `x` is apart from `min y z`
+
+```agda
+abstract
+  apart-min-apart-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} →
+    apart-ℝ x y → apart-ℝ x z → apart-ℝ x (min-ℝ y z)
+  apart-min-apart-ℝ {x = x} {y = y} {z = z} x#y x#z =
+    elim-disjunction
+      ( apart-prop-ℝ x (min-ℝ y z))
+      ( λ x<y →
+        elim-disjunction
+          ( apart-prop-ℝ x (min-ℝ y z))
+          ( λ x<z → apart-le-ℝ (le-min-le-le-ℝ x<y x<z))
+          ( λ z<x →
+            apart-le-ℝ' (concatenate-leq-le-ℝ _ _ _ (leq-right-min-ℝ y z) z<x))
+          ( x#z))
+      ( λ y<x →
+        apart-le-ℝ' (concatenate-leq-le-ℝ _ _ _ (leq-left-min-ℝ y z) y<x))
+      ( x#y)
 ```

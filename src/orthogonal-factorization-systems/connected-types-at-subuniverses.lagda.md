@@ -11,7 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.subuniverses
 open import foundation.unit-type
@@ -162,27 +162,29 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (K : subuniverse l1 l2) {A : UU l3}
-  where abstract
+  where
 
-  is-subuniverse-connected-is-subuniverse-connected-const-condition :
-    is-subuniverse-connected-const-condition K A →
-    is-subuniverse-connected K A
-  is-subuniverse-connected-is-subuniverse-connected-const-condition H U =
-    is-equiv-is-contr-map
-      ( λ u →
-        is-contr-equiv
-          ( Σ (pr1 U) (λ v → (x : A) → v ＝ u x))
-          ( compute-fiber-diagonal-exponential u)
-          ( H U u))
+  abstract
+    is-subuniverse-connected-is-subuniverse-connected-const-condition :
+      is-subuniverse-connected-const-condition K A →
+      is-subuniverse-connected K A
+    is-subuniverse-connected-is-subuniverse-connected-const-condition H U =
+      is-equiv-is-contr-map
+        ( λ u →
+          is-contr-equiv
+            ( Σ (pr1 U) (λ v → (x : A) → v ＝ u x))
+            ( compute-fiber-diagonal-exponential u)
+            ( H U u))
 
-  is-subuniverse-connected-const-condition-is-subuniverse-connected :
-    is-subuniverse-connected K A →
-    is-subuniverse-connected-const-condition K A
-  is-subuniverse-connected-const-condition-is-subuniverse-connected H U u =
-    is-contr-equiv'
-      ( fiber (diagonal-exponential (pr1 U) A) u)
-      ( compute-fiber-diagonal-exponential u)
-      ( is-contr-map-is-equiv (H U) u)
+  abstract
+    is-subuniverse-connected-const-condition-is-subuniverse-connected :
+      is-subuniverse-connected K A →
+      is-subuniverse-connected-const-condition K A
+    is-subuniverse-connected-const-condition-is-subuniverse-connected H U u =
+      is-contr-equiv'
+        ( fiber (diagonal-exponential (pr1 U) A) u)
+        ( compute-fiber-diagonal-exponential u)
+        ( is-contr-map-is-equiv (H U) u)
 ```
 
 ### All types are `Contr`-connected
@@ -221,10 +223,10 @@ module _
     is-subuniverse-connected K B →
     is-subuniverse-connected K A
   is-subuniverse-connected-retract R H U =
-    is-equiv-retract-map-is-equiv
+    is-equiv-retract-arrow-is-equiv
       ( diagonal-exponential (pr1 U) A)
       ( diagonal-exponential (pr1 U) B)
-      ( retract-map-diagonal-exponential-retract id-retract R)
+      ( retract-arrow-diagonal-exponential-retract id-retract R)
       ( H U)
 ```
 

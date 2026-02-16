@@ -9,6 +9,7 @@ module complex-numbers.multiplication-complex-numbers where
 ```agda
 open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import elementary-number-theory.rational-numbers
@@ -320,4 +321,66 @@ abstract
       preserves-sim-add-ℝ
         ( preserves-sim-mul-ℝ a~a' d~d')
         ( preserves-sim-mul-ℝ b~b' c~c'))
+```
+
+### Negative laws of multiplication
+
+```agda
+abstract
+  left-negative-law-mul-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    neg-ℂ z *ℂ w ＝ neg-ℂ (z *ℂ w)
+  left-negative-law-mul-ℂ (a +iℂ b) (c +iℂ d) =
+    inv
+      ( eq-ℂ
+        ( equational-reasoning
+          neg-ℝ (a *ℝ c -ℝ b *ℝ d)
+          ＝ neg-ℝ (a *ℝ c) -ℝ neg-ℝ (b *ℝ d)
+            by distributive-neg-add-ℝ _ _
+          ＝ neg-ℝ a *ℝ c -ℝ neg-ℝ b *ℝ d
+            by
+              ap-diff-ℝ
+                ( inv (left-negative-law-mul-ℝ a c))
+                ( inv (left-negative-law-mul-ℝ b d)))
+        ( equational-reasoning
+          neg-ℝ (a *ℝ d +ℝ b *ℝ c)
+          ＝ neg-ℝ (a *ℝ d) +ℝ neg-ℝ (b *ℝ c)
+            by distributive-neg-add-ℝ _ _
+          ＝ neg-ℝ a *ℝ d +ℝ neg-ℝ b *ℝ c
+            by
+              ap-add-ℝ
+                ( inv (left-negative-law-mul-ℝ a d))
+                ( inv (left-negative-law-mul-ℝ b c))))
+
+  right-negative-law-mul-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    z *ℂ neg-ℂ w ＝ neg-ℂ (z *ℂ w)
+  right-negative-law-mul-ℂ z w =
+    equational-reasoning
+      z *ℂ neg-ℂ w
+      ＝ neg-ℂ w *ℂ z
+        by commutative-mul-ℂ _ _
+      ＝ neg-ℂ (w *ℂ z)
+        by left-negative-law-mul-ℂ w z
+      ＝ neg-ℂ (z *ℂ w)
+        by ap neg-ℂ (commutative-mul-ℂ w z)
+```
+
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℂ :
+    {l : Level} (z : ℂ l) → raise-ℂ l one-ℂ *ℂ z ＝ z
+  left-raise-one-law-mul-ℂ {l} z =
+    eq-sim-ℂ
+      ( tr
+        ( sim-ℂ (raise-ℂ l one-ℂ *ℂ z))
+        ( left-unit-law-mul-ℂ z)
+        ( preserves-sim-mul-ℂ (sim-raise-ℂ' l one-ℂ) (refl-sim-ℂ z)))
+
+  right-raise-one-law-mul-ℂ :
+    {l : Level} (z : ℂ l) → z *ℂ raise-ℂ l one-ℂ ＝ z
+  right-raise-one-law-mul-ℂ z =
+    commutative-mul-ℂ _ _ ∙ left-raise-one-law-mul-ℂ z
 ```

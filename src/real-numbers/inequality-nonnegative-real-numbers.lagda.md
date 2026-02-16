@@ -17,15 +17,23 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import order-theory.bottom-elements-large-posets
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.posets
+
 open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -74,6 +82,14 @@ module _
     preserves-leq-left-sim-ℝ⁰⁺ = preserves-leq-left-sim-ℝ x~y
 ```
 
+### Inequality is reflexive
+
+```agda
+abstract
+  refl-leq-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ⁰⁺ x x
+  refl-leq-ℝ⁰⁺ (x , _) = refl-leq-ℝ x
+```
+
 ### Inequality is transitive
 
 ```agda
@@ -83,6 +99,18 @@ module _
 
   transitive-leq-ℝ⁰⁺ : leq-ℝ⁰⁺ y z → leq-ℝ⁰⁺ x y → leq-ℝ⁰⁺ x z
   transitive-leq-ℝ⁰⁺ = transitive-leq-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y) (real-ℝ⁰⁺ z)
+```
+
+### Inequality is antisymmetric
+
+```agda
+module _
+  {l : Level} (x : ℝ⁰⁺ l) (y : ℝ⁰⁺ l)
+  where
+
+  antisymmetric-leq-ℝ⁰⁺ : leq-ℝ⁰⁺ x y → leq-ℝ⁰⁺ y x → x ＝ y
+  antisymmetric-leq-ℝ⁰⁺ x≤y y≤x =
+    eq-ℝ⁰⁺ x y (antisymmetric-leq-ℝ _ _ x≤y y≤x)
 ```
 
 ### If `x` is less than all the positive rational numbers `y` is less than, then `x ≤ y`
@@ -155,4 +183,57 @@ module _
       sim-sim-leq-ℝ
         ( leq-leq-positive-rational-ℝ⁰⁺ x y (backward-implication ∘ H) ,
           leq-leq-positive-rational-ℝ⁰⁺ y x (forward-implication ∘ H))
+```
+
+### A nonnegative real number less than or equal to zero is zero
+
+```agda
+abstract
+  eq-zero-leq-zero-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) → leq-ℝ⁰⁺ x zero-ℝ⁰⁺ → x ＝ raise-zero-ℝ⁰⁺ l
+  eq-zero-leq-zero-ℝ⁰⁺ {l} x⁰⁺@(x , 0≤x) x≤0 =
+    eq-ℝ⁰⁺ _ _
+      ( eq-sim-ℝ
+        ( transitive-sim-ℝ _ _ _
+          ( sim-raise-ℝ l zero-ℝ)
+          ( sim-sim-leq-ℝ (x≤0 , 0≤x))))
+```
+
+### The large poset of nonnegative real numbers
+
+```agda
+large-preorder-ℝ⁰⁺ : Large-Preorder lsuc (_⊔_)
+large-preorder-ℝ⁰⁺ =
+  λ where
+    .type-Large-Preorder → ℝ⁰⁺
+    .leq-prop-Large-Preorder → leq-prop-ℝ⁰⁺
+    .refl-leq-Large-Preorder → refl-leq-ℝ ∘ real-ℝ⁰⁺
+    .transitive-leq-Large-Preorder → transitive-leq-ℝ⁰⁺
+
+large-poset-ℝ⁰⁺ : Large-Poset lsuc (_⊔_)
+large-poset-ℝ⁰⁺ =
+  λ where
+    .large-preorder-Large-Poset → large-preorder-ℝ⁰⁺
+    .antisymmetric-leq-Large-Poset → antisymmetric-leq-ℝ⁰⁺
+```
+
+### The large poset of nonnegative real numbers has a bottom element
+
+```agda
+has-bottom-element-large-poset-ℝ⁰⁺ :
+  has-bottom-element-Large-Poset large-poset-ℝ⁰⁺
+has-bottom-element-large-poset-ℝ⁰⁺ =
+  λ where
+    .bottom-has-bottom-element-Large-Poset l → raise-ℝ⁰⁺ l zero-ℝ⁰⁺
+    .is-bottom-element-bottom-has-bottom-element-Large-Poset l x →
+      transitive-leq-ℝ _ _ _
+        ( leq-zero-ℝ⁰⁺ x)
+        ( leq-sim-ℝ' (sim-raise-ℝ l zero-ℝ))
+```
+
+### The poset of nonnegative real numbers at a universe level
+
+```agda
+poset-ℝ⁰⁺ : (l : Level) → Poset (lsuc l) l
+poset-ℝ⁰⁺ = poset-Large-Poset large-poset-ℝ⁰⁺
 ```

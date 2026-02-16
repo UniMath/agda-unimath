@@ -63,6 +63,14 @@ is-nonnegative-square-ℤ a =
     ( decide-is-negative-is-nonnegative-ℤ {a})
 ```
 
+### The square of an embedding of a natural number is the embedding of the square of the natural number
+
+```agda
+abstract
+  square-int-ℕ : (n : ℕ) → square-ℤ (int-ℕ n) ＝ int-ℕ (square-ℕ n)
+  square-int-ℕ n = mul-int-ℕ n n
+```
+
 ### The square of the negation of `x` is the square of `x`
 
 ```agda
@@ -107,6 +115,32 @@ pr2
   ( ( int-ℕ root) ,
     ( ( inv (int-abs-is-nonnegative-ℤ a pf-nonneg)) ∙
       ( pr2 (is-square-int-is-square-nat (root , pf-square)))))
+```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℤ : (x : ℤ) → int-ℕ (square-ℕ (abs-ℤ x)) ＝ square-ℤ x
+  square-abs-ℤ x =
+    rec-coproduct
+      ( λ x=|x| →
+        equational-reasoning
+          int-ℕ (square-ℕ (abs-ℤ x))
+          ＝ square-ℤ (int-ℕ (abs-ℤ x))
+            by inv (mul-int-ℕ (abs-ℤ x) (abs-ℤ x))
+          ＝ square-ℤ x
+            by inv (ap square-ℤ x=|x|))
+      ( λ x=-|x| →
+        equational-reasoning
+          int-ℕ (square-ℕ (abs-ℤ x))
+          ＝ square-ℤ (int-abs-ℤ x)
+            by inv (mul-int-ℕ (abs-ℤ x) (abs-ℤ x))
+          ＝ square-ℤ (neg-ℤ (int-abs-ℤ x))
+            by inv (square-neg-ℤ (int-abs-ℤ x))
+          ＝ square-ℤ x
+            by inv (ap square-ℤ x=-|x|))
+      ( is-pos-or-neg-abs-ℤ x)
 ```
 
 ### Squareness in ℤ is decidable
