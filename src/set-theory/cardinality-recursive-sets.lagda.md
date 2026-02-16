@@ -45,7 +45,7 @@ Note that classically, the universe of sets is itself a set, and so trivially
 $║ X → \Set ║₀ ≃ (X → ║ \Set ║₀)$. However, with
 [univalence](foundation.univalence.md), the universe of sets $\Set$ is more
 richly structured, making its [set truncation](foundation.set-truncations.md)
-$║Set║₀$ presents cardinals.
+$║Set║₀$ present cardinals.
 
 ```text
             (X → Set)
