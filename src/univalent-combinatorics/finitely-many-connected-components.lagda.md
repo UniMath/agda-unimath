@@ -214,7 +214,7 @@ has-finitely-many-connected-components-finite-Π :
   has-finitely-many-connected-components ((a : A) → B a)
 has-finitely-many-connected-components-finite-Π {B = B} H K =
   is-finite-equiv'
-    ( equiv-distributive-trunc-Π-is-finite-Set B H)
+    ( equiv-distributive-trunc-Π-is-finite-Set H B)
     ( is-finite-Π H K)
 ```
 

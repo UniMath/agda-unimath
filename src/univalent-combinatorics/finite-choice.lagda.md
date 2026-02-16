@@ -193,3 +193,7 @@ module _
         ( double-negation-type-Prop ((x : X) → Y x))
         ( λ e → finite-double-negation-choice-count e H)
 ```
+
+## See also
+
+- [Distributivity of set truncation over finite products](univalent-combinatorics.distributivity-of-set-truncation-over-finite-products.md)

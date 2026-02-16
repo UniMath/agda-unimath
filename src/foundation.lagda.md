@@ -79,6 +79,7 @@ open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.commuting-triangles-of-morphisms-arrows public
 open import foundation.complements public
+open import foundation.complements-images public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
 open import foundation.composition-algebra public
@@ -346,6 +347,7 @@ open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.noninjective-maps public
+open import foundation.nonsurjective-maps public
 open import foundation.null-homotopic-maps public
 open import foundation.operations-cospan-diagrams public
 open import foundation.operations-cospans public

@@ -446,11 +446,11 @@ module _
       apply-universal-property-trunc-Prop (pr2 Y)
         ( coproduct-Prop
           ( Id-Prop
-            ( pair X (is-set-count eX))
+            ( set-type-count eX)
             ( pr1 two-elements-transposition)
             ( x))
           ( Id-Prop
-            ( pair X (is-set-count eX))
+            ( set-type-count eX)
             ( pr1 (pr2 two-elements-transposition))
             ( x))
           ( λ q r →

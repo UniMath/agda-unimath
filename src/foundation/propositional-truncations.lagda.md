@@ -68,8 +68,7 @@ trunc-Prop = trunc neg-one-𝕋
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
 symbol `║` in the propositional truncation notation `║_║₋₁` can be inserted with
-`agda-input` using the escape sequence `\--=` and selecting the second item in
-the list.
+`agda-input` using the escape sequence `\--=2`.
 
 ## Properties
 
