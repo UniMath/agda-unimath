@@ -38,6 +38,7 @@ open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
+open import foundation-core.iterated-successors-truncation-levels public
 open import foundation-core.iterating-functions public
 open import foundation-core.law-of-excluded-middle public
 open import foundation-core.monomorphisms public
