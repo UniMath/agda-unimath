@@ -193,9 +193,7 @@ abstract
 
   leq-dyadic-summand-bool-ℚ :
     (n : ℕ) (b : bool) →
-    leq-ℚ
-      ( dyadic-summand-bool-ℚ n b)
-      ( power-two-neg-ℚ n)
+    leq-ℚ (dyadic-summand-bool-ℚ n b) (power-two-neg-ℚ n)
   leq-dyadic-summand-bool-ℚ n true =
     refl-leq-ℚ (power-two-neg-ℚ n)
   leq-dyadic-summand-bool-ℚ n false =
@@ -262,7 +260,8 @@ $$
 ## Levy admissibility of boolean sequences and Levy's endomap
 
 The results above establish that the family of dyadic sums over bounded boolean
-sequences is inhabited and bounded, so we can define Levy’s endomap
+sequences is inhabited and bounded, so using the conditional order-completeness
+of the MacNeille reals we can define Levy’s endomap
 
 $$
   g(x) ≔ \sup\{∑_{i ∈ S}2⁻ⁱ | S\text{ finite and }$f$\text{-admissible at }x\},
@@ -448,6 +447,17 @@ adjoin-index-levy-admissible-bounded-sequence-bool :
 adjoin-index-levy-admissible-bounded-sequence-bool f y (S , adm-S) n y≰fn =
   ( adjoin-index-bounded-sequence-bool S n ,
     is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S adm-S y≰fn)
+
+adjoin-index-levy-admissible-leq-bounded-sequence-bool :
+  {l : Level} (f : ℕ → macneille-ℝ l) (x y : macneille-ℝ l) →
+  leq-macneille-ℝ x y →
+  (S : levy-admissible-bounded-sequence-bool f x) (n : ℕ) →
+  ¬ leq-macneille-ℝ y (f n) →
+  levy-admissible-bounded-sequence-bool f y
+adjoin-index-levy-admissible-leq-bounded-sequence-bool
+  f x y x≤y (S , adm-S) =
+  adjoin-index-levy-admissible-bounded-sequence-bool f y
+    ( S , is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
 ```
 
 ## Dyadic sum estimates when adjoining indices
@@ -949,10 +959,11 @@ module _
       leq-macneille-ℝ
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f x (S , adm-S))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
     leq-dyadic-sum-is-levy-admissible-bounded-sequence-bool
       n S x≤y adm-S y≰fn =
       leq-raise-macneille-real-ℚ
@@ -1107,10 +1118,11 @@ module _
         ( raise-macneille-real-ℚ l
           ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-adjoin-index-bounded-sequence-bool
       n fn=x x≤y S adm-S y≰fn =
       leq-raise-macneille-real-ℚ
@@ -1145,10 +1157,11 @@ module _
         ( raise-macneille-real-ℚ l
           ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( endomap-levy-sequence-ℝₘ f y)
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-levy-admissible-bounded-sequence-bool f y)
@@ -1157,10 +1170,11 @@ module _
           ( is-upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool
             ( f)
             ( y))
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-adjoin-index-bounded-sequence-bool
           ( n)
           ( fn=x)
@@ -1187,10 +1201,11 @@ module _
       transitive-leq-macneille-ℝ
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f x (S , adm-S))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( endomap-levy-sequence-ℝₘ f y)
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-levy-admissible-bounded-sequence-bool f y)
@@ -1199,10 +1214,11 @@ module _
           ( is-upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool
             ( f)
             ( y))
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( leq-dyadic-sum-is-levy-admissible-bounded-sequence-bool
           ( f)
           ( x)
@@ -1226,10 +1242,11 @@ module _
       transitive-leq-macneille-ℝ
         ( raise-macneille-real-ℚ l (power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( endomap-levy-sequence-ℝₘ f y)
         ( is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
           ( is-inhabited-levy-admissible-bounded-sequence-bool f y)
@@ -1238,10 +1255,11 @@ module _
           ( is-upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool
             ( f)
             ( y))
-          ( adjoin-index-bounded-sequence-bool S n ,
-            is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
-              ( is-levy-admissible-leq-bounded-sequence-bool f x y x≤y S adm-S)
-              ( y≰fn)))
+          ( adjoin-index-levy-admissible-leq-bounded-sequence-bool f x y
+            ( x≤y)
+            ( S , adm-S)
+            ( n)
+            ( y≰fn)))
         ( leq-power-two-neg-dyadic-sum-adjoin-index-is-levy-admissible-bounded-sequence-bool
           ( f)
           ( y)
@@ -1407,13 +1425,11 @@ abstract
   is-inhabited-levy-bounded-sequence-bool :
     {l : Level} (f : ℕ → macneille-ℝ l) →
     is-inhabited (levy-bounded-sequence-bool f)
-  is-inhabited-levy-bounded-sequence-bool
-    _ =
-    unit-trunc-Prop
-      ( ( zero-ℕ , ( λ _ → false) , λ _ _ → refl) , λ _ ())
+  is-inhabited-levy-bounded-sequence-bool _ =
+    unit-trunc-Prop (( zero-ℕ , ( λ _ → false) , λ _ _ → refl) , λ _ ())
 
 upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
-  {l : Level} (f : ℕ → macneille-ℝ l) → macneille-ℝ l
+  {l : Level} → (ℕ → macneille-ℝ l) → macneille-ℝ l
 upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ {l} _ =
   raise-macneille-real-ℚ l (rational-ℕ 2)
 
