@@ -14,6 +14,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
+open import foundation.iterated-successors-truncation-levels
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.truncations
@@ -198,6 +199,14 @@ is-connected-is-connected-succ-𝕋 k H =
       is-equiv-diagonal-exponential-is-connected
         ( truncated-type-succ-Truncated-Type k B)
         ( H))
+
+is-connected-is-connected-add+2-𝕋 :
+  {l : Level} (k r : 𝕋) {A : UU l} →
+  is-connected (add+2-𝕋 k r) A → is-connected k A
+is-connected-is-connected-add+2-𝕋 k neg-two-𝕋 H = H
+is-connected-is-connected-add+2-𝕋 k (succ-𝕋 r) H =
+  is-connected-is-connected-add+2-𝕋 k r
+    ( is-connected-is-connected-succ-𝕋 (add+2-𝕋 k r) H)
 ```
 
 ### An inhabited type `A` is `k + 1`-connected if and only if its identity types are `k`-connected
