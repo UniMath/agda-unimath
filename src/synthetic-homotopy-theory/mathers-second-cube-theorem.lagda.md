@@ -191,7 +191,9 @@ fiberwise equivalences to construct an equifibered span diagram.
     eq-pair-Σ (back x) (inv-compute-tr-self-fiber' hC (g' x , back x))
 ```
 
-Let us now assume that the four vertical faces are pullback squares.
+Let us now assume that the four vertical faces are pullback squares. We
+construct an equivalence between the equifibered span diagram given above, and
+the canonical flattening cocone.
 
 ```agda
   module _
@@ -288,8 +290,9 @@ Let us now assume that the four vertical faces are pullback squares.
         ( map-equiv-total-fiber' hD)
 ```
 
-Using that equivalence, we construct a postcomposed cocone in `D'` and use the
-flattening lemma for equifibered span diagrams to show this is a pushout.
+Using our constructed equivalence, we apply the flattening lemma for equifibered
+span diagrams to show we have a pushout. It is not yet demonstrated, though,
+that this cocone is coherently homotopic to the original cocone.
 
 ```agda
     universal-property-pushout-cocone-postcompose-mathers-second-cube-theorem :
@@ -344,8 +347,8 @@ flattening lemma for equifibered span diagrams to show this is a pushout.
         ( is-equiv-map-inv-equiv-total-fiber' hA)
 ```
 
-We now transfer the universal property back to a cocone on `f'` and `g'` via
-total-fiber computations.
+We now transfer the universal property back to the original cocone on `f'` and
+`g'` via total-fiber computations.
 
 ```agda
     left-eq-cocone-span-extension-mathers-second-cube-theorem :
@@ -402,9 +405,9 @@ total-fiber computations.
     point-spanning-type-map-equiv-mathers-second-cube-theorem :
       (x : A') → fiber' hD (h (f (hA x)))
     point-spanning-type-map-equiv-mathers-second-cube-theorem x =
-      ( ( fiberwise-map-front-mathers-cube pb-front (f (hA x))) ∘
-        ( fiberwise-map-left-mathers-cube pb-left (hA x)))
-        ( x , refl)
+      ( fiberwise-map-front-mathers-cube pb-front (f (hA x))
+        ( fiberwise-map-left-mathers-cube pb-left (hA x)
+          ( x , refl)))
 
     ap-inclusion-fiber'-compute-tr-point-mathers-second-cube-theorem :
       (x : A') →
@@ -424,8 +427,7 @@ total-fiber computations.
           ( point-spanning-type-map-equiv-mathers-second-cube-theorem x))
 ```
 
-The next lemmas compute how fiber inclusions and transport interact on the
-middle equality.
+We compute how fiber inclusions and transport interact on the middle equality.
 
 ```agda
     ap-inclusion-fiber'-middle-coherence-equiv-equifibered-span-diagram-mathers-second-cube-theorem' :
@@ -568,7 +570,8 @@ middle equality.
           coherence-eq-cocone-span-extension-mathers-second-cube-theorem)
 ```
 
-Finally, we identify the constructed cocone with the original.
+Finally, we identify the constructed cocone with the original and obtain the
+universal property.
 
 ```agda
     mathers-second-cube-theorem :
