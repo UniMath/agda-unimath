@@ -46,7 +46,7 @@ module _
 
   is-double-negation-dense-subtype-Prop : Prop (l1 ⊔ l2)
   is-double-negation-dense-subtype-Prop =
-    is-full-subtype-Prop (complement-subtype (complement-subtype P))
+    is-full-prop-subtype (complement-subtype (complement-subtype P))
 
   is-double-negation-dense-subtype : UU (l1 ⊔ l2)
   is-double-negation-dense-subtype =

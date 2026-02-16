@@ -42,7 +42,7 @@ module _
 
   is-dense-prop-subset-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
   is-dense-prop-subset-Metric-Space =
-    is-full-subtype-Prop (closure-subset-Metric-Space X S)
+    is-full-prop-subtype (closure-subset-Metric-Space X S)
 
   is-dense-subset-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
   is-dense-subset-Metric-Space = type-Prop is-dense-prop-subset-Metric-Space
