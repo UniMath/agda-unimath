@@ -422,14 +422,6 @@ total-fiber computations.
           ( hD)
           ( bottom (hA x))
           ( point-spanning-type-map-equiv-mathers-second-cube-theorem x))
-
-    cancellation-inv-concat-mathers-second-cube-theorem :
-      {x y z : D'} (p : x ＝ y) (q : x ＝ z) →
-      p ∙ inv (inv q ∙ p) ＝ q
-    cancellation-inv-concat-mathers-second-cube-theorem p q =
-      ( ap (p ∙_) (distributive-inv-concat (inv q) p)) ∙
-      ( is-section-inv-concat p (inv (inv q))) ∙
-      ( inv-inv q)
 ```
 
 The next lemmas compute how fiber inclusions and transport interact on the
@@ -505,7 +497,7 @@ middle equality.
           inv t)
         ( ap-inclusion-fiber'-middle-coherence-equiv-equifibered-span-diagram-mathers-second-cube-theorem'
           ( x))) ∙
-      ( cancellation-inv-concat-mathers-second-cube-theorem
+      ( cancellation-inv-inv-concat
         ( ap-inclusion-fiber'-compute-tr-point-mathers-second-cube-theorem x)
         ( top x))
 
