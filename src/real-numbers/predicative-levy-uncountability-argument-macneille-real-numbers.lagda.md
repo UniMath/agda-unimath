@@ -676,17 +676,12 @@ module _
     underlying-extended-finseq-bounded-sequence-bool ∘
     inr-coproduct-Fin k (succ-ℕ n)
 
-  delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool :
-    (m : ℕ) → is-decidable (m ＝ n) → ℚ
-  delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool
-    m =
-    rec-coproduct (λ _ → power-two-neg-ℚ n) (λ _ → zero-ℚ)
-
   delta-finseq-adjoin-index-bounded-sequence-bool :
     Fin (k +ℕ succ-ℕ n) → ℚ
   delta-finseq-adjoin-index-bounded-sequence-bool i =
-    delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool
-      ( nat-Fin (k +ℕ succ-ℕ n) i)
+    rec-coproduct
+      ( λ _ → power-two-neg-ℚ n)
+      ( λ _ → zero-ℚ)
       ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
 
   abstract
@@ -712,9 +707,7 @@ module _
           leq-ℚ
             ( zero-ℚ)
             ( dyadic-summand-bool-ℚ
-              ( nat-Fin
-                ( k +ℕ succ-ℕ n)
-                ( inr-coproduct-Fin k (succ-ℕ n) i))
+              ( nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin k (succ-ℕ n) i))
               ( b)))
         ( leq-zero-power-two-neg-ℚ
           ( nat-Fin (k +ℕ succ-ℕ n) (inr-coproduct-Fin k (succ-ℕ n) i)))
@@ -786,19 +779,17 @@ module _
       ind-coproduct
         ( λ d →
           nat-Fin (k +ℕ succ-ℕ n) i ＝ n →
-          delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( d) ＝
+          rec-coproduct (λ _ → power-two-neg-ℚ n) (λ _ → zero-ℚ) d ＝
           power-two-neg-ℚ n)
         ( λ _ _ → refl)
         ( λ q p' → ex-falso (q p'))
         ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
 
-    eq-delta-finseq-selected-index-adjoin-index-bounded-sequence-bool :
+    eq-delta-finseq-selected-adjoin-index-bounded-sequence-bool :
       delta-finseq-adjoin-index-bounded-sequence-bool
         ( mod-succ-ℕ (k +ℕ n) n) ＝
       power-two-neg-ℚ n
-    eq-delta-finseq-selected-index-adjoin-index-bounded-sequence-bool
+    eq-delta-finseq-selected-adjoin-index-bounded-sequence-bool
       =
       eq-delta-finseq-index-eq-adjoin-index-bounded-sequence-bool
         ( mod-succ-ℕ (k +ℕ n) n)
@@ -824,9 +815,7 @@ module _
         ( λ d →
           leq-ℚ
             ( zero-ℚ)
-            ( delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool
-              ( nat-Fin (k +ℕ succ-ℕ n) i)
-              ( d)))
+            ( rec-coproduct (λ _ → power-two-neg-ℚ n) (λ _ → zero-ℚ) d))
         ( λ _ → leq-zero-power-two-neg-ℚ n)
         ( λ _ → refl-leq-ℚ zero-ℚ)
         ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
@@ -846,7 +835,7 @@ module _
           ( mod-succ-ℕ (k +ℕ n) n))
         ( leq-eq-ℚ
           ( inv
-            ( eq-delta-finseq-selected-index-adjoin-index-bounded-sequence-bool)))
+            ( eq-delta-finseq-selected-adjoin-index-bounded-sequence-bool)))
 
     leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool :
       is-false (χ n) →
@@ -854,80 +843,66 @@ module _
       leq-ℚ
         ( underlying-extended-finseq-bounded-sequence-bool i +ℚ
           delta-finseq-adjoin-index-bounded-sequence-bool i)
-        ( summand-finseq-adjoin-index-bounded-sequence-bool
-          ( i))
-    leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool-from-decidable :
-      (χn=false : is-false (χ n)) →
-      (i : Fin (k +ℕ succ-ℕ n)) →
-      (d : is-decidable (nat-Fin (k +ℕ succ-ℕ n) i ＝ n)) →
-      leq-ℚ
-        ( underlying-extended-finseq-bounded-sequence-bool i +ℚ
-          delta-from-decidable-equality-index-adjoin-index-bounded-sequence-bool
-            ( nat-Fin (k +ℕ succ-ℕ n) i)
-            ( d))
-        ( dyadic-summand-bool-ℚ
-          ( nat-Fin (k +ℕ succ-ℕ n) i)
-          ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i)))
-    leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool-from-decidable
-      χn=false i (inl p) =
-      transitive-leq-ℚ _ _ _
-        ( leq-eq-ℚ
-          ( inv
-            ( ( ap
-                ( dyadic-summand-bool-ℚ
-                  ( nat-Fin (k +ℕ succ-ℕ n) i))
-                ( eq-force-true-at-eq-sequence-bool χ n
-                  ( nat-Fin (k +ℕ succ-ℕ n) i)
-                  ( p))) ∙
-              ( ap power-two-neg-ℚ p))))
-        ( transitive-leq-ℚ _ _ _
-          ( ind-bool
-            ( λ b →
-              is-false b →
-              leq-ℚ
-                ( (dyadic-summand-bool-ℚ n b) +ℚ
-                  ( power-two-neg-ℚ n))
-                ( power-two-neg-ℚ n))
-            ( λ ())
-            ( λ _ →
-              leq-eq-ℚ
-                ( left-unit-law-add-ℚ (power-two-neg-ℚ n)))
-            ( χ n)
-            ( χn=false))
-          ( leq-eq-ℚ
-            ( ap
-              ( λ m →
-                ( dyadic-summand-bool-ℚ m (χ m)) +ℚ
-                ( power-two-neg-ℚ n))
-              ( p))))
-    leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool-from-decidable
-      χn=false i (inr q) =
-      transitive-leq-ℚ _ _ _
-        ( leq-eq-ℚ
-          ( inv
-            ( ap
-              ( dyadic-summand-bool-ℚ (nat-Fin (k +ℕ succ-ℕ n) i))
-              ( eq-force-true-at-neq-sequence-bool χ n
-                ( nat-Fin (k +ℕ succ-ℕ n) i)
-                ( q)))))
-        ( transitive-leq-ℚ _ _ _
-          ( leq-eq-ℚ
-            ( right-unit-law-add-ℚ
-              ( underlying-extended-finseq-bounded-sequence-bool i)))
-          ( refl-leq-ℚ _))
+        ( summand-finseq-adjoin-index-bounded-sequence-bool i)
     leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool
       χn=false i =
-      leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool-from-decidable
-        ( χn=false)
-        ( i)
+      ind-coproduct
+        ( λ d →
+          leq-ℚ
+            ( underlying-extended-finseq-bounded-sequence-bool i +ℚ
+              rec-coproduct (λ _ → power-two-neg-ℚ n) (λ _ → zero-ℚ) d)
+            ( dyadic-summand-bool-ℚ
+              ( nat-Fin (k +ℕ succ-ℕ n) i)
+              ( force-true-at-sequence-bool χ n (nat-Fin (k +ℕ succ-ℕ n) i))))
+        ( λ p →
+          transitive-leq-ℚ _ _ _
+            ( leq-eq-ℚ
+              ( inv
+                ( ( ap
+                    ( dyadic-summand-bool-ℚ
+                      ( nat-Fin (k +ℕ succ-ℕ n) i))
+                    ( eq-force-true-at-eq-sequence-bool χ n
+                      ( nat-Fin (k +ℕ succ-ℕ n) i)
+                      ( p))) ∙
+                  ( ap power-two-neg-ℚ p))))
+            ( transitive-leq-ℚ _ _ _
+              ( ind-bool
+                ( λ b →
+                  is-false b →
+                  leq-ℚ
+                    ( dyadic-summand-bool-ℚ n b +ℚ power-two-neg-ℚ n)
+                    ( power-two-neg-ℚ n))
+                ( λ ())
+                ( λ _ →
+                  leq-eq-ℚ
+                    ( left-unit-law-add-ℚ (power-two-neg-ℚ n)))
+                ( χ n)
+                ( χn=false))
+              ( leq-eq-ℚ
+                ( ap
+                  ( λ m → dyadic-summand-bool-ℚ m (χ m) +ℚ power-two-neg-ℚ n)
+                  ( p)))))
+        ( λ q →
+          transitive-leq-ℚ _ _ _
+            ( leq-eq-ℚ
+              ( inv
+                ( ap
+                  ( dyadic-summand-bool-ℚ (nat-Fin (k +ℕ succ-ℕ n) i))
+                  ( eq-force-true-at-neq-sequence-bool χ n
+                    ( nat-Fin (k +ℕ succ-ℕ n) i)
+                    ( q)))))
+            ( transitive-leq-ℚ _ _ _
+              ( leq-eq-ℚ
+                ( right-unit-law-add-ℚ
+                  ( underlying-extended-finseq-bounded-sequence-bool i)))
+              ( refl-leq-ℚ _)))
         ( has-decidable-equality-ℕ (nat-Fin (k +ℕ succ-ℕ n) i) n)
 
   abstract
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool :
       is-false (χ n) →
       leq-ℚ
-        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
-          power-two-neg-ℚ n)
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n)
         ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool
@@ -937,8 +912,7 @@ module _
           ( k +ℕ succ-ℕ n)
           ( λ i →
             underlying-extended-finseq-bounded-sequence-bool i +ℚ
-            delta-finseq-adjoin-index-bounded-sequence-bool
-              ( i))
+            delta-finseq-adjoin-index-bounded-sequence-bool i)
           ( summand-finseq-adjoin-index-bounded-sequence-bool)
           ( leq-underlying-extended-add-delta-summand-finseq-adjoin-index-bounded-sequence-bool
             ( χn=false)))
@@ -1140,8 +1114,7 @@ module _
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-adjoin-index-bounded-sequence-bool
       n fn=x x≤y S adm-S y≰fn =
       leq-raise-macneille-real-ℚ
-        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
-          power-two-neg-ℚ n)
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n)
         ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool
@@ -1170,8 +1143,7 @@ module _
       n fn=x x≤y S adm-S y≰fn =
       transitive-leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
-          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
-            power-two-neg-ℚ n))
+          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
           ( adjoin-index-bounded-sequence-bool S n ,
             is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
