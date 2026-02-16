@@ -174,11 +174,16 @@ dyadic-summand-bool-ℚ : ℕ → bool → ℚ
 dyadic-summand-bool-ℚ n =
   rec-bool (power-two-neg-ℚ n) zero-ℚ
 
-dyadic-sum-bounded-sequence-bool-ℚ :
+dyadic-sum-ℚ-bounded-sequence-bool :
   bounded-sequence-bool → ℚ
-dyadic-sum-bounded-sequence-bool-ℚ (k , χ , _) =
+dyadic-sum-ℚ-bounded-sequence-bool (k , χ , _) =
   sum-fin-sequence-ℚ k
     ( λ i → dyadic-summand-bool-ℚ (nat-Fin k i) (χ (nat-Fin k i)))
+
+raise-dyadic-sum-ℝₘ-bounded-sequence-bool :
+  (l : Level) → bounded-sequence-bool → macneille-ℝ l
+raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S =
+  raise-macneille-real-ℚ l (dyadic-sum-ℚ-bounded-sequence-bool S)
 
 abstract
   leq-zero-power-two-neg-ℚ :
@@ -205,7 +210,7 @@ $$
   leq-dyadic-sum-bounded-sequence-bool-full-dyadic-sum-ℚ :
     (S : bounded-sequence-bool) →
     leq-ℚ
-      ( dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( dyadic-sum-ℚ-bounded-sequence-bool S)
       ( sum-fin-sequence-ℚ
         ( pr1 S)
         ( λ i → power-two-neg-ℚ (nat-Fin (pr1 S) i)))
@@ -232,24 +237,24 @@ $$
                 ( nat-Fin k i)) ∙
               ( left-unit-law-mul-ℚ (power-ℚ (nat-Fin k i) one-half-ℚ)))))
 
-  leq-two-full-dyadic-sum-bounded-sequence-bool-ℚ :
+  leq-two-full-dyadic-sum-ℚ-bounded-sequence-bool :
     (k : ℕ) →
     leq-ℚ
       ( sum-fin-sequence-ℚ k (λ i → power-two-neg-ℚ (nat-Fin k i)))
       ( rational-ℕ 2)
-  leq-two-full-dyadic-sum-bounded-sequence-bool-ℚ k =
+  leq-two-full-dyadic-sum-ℚ-bounded-sequence-bool k =
     transitive-leq-ℚ _ _ _
       ( leq-rational-two-sum-standard-geometric-one-half-ℚ k)
       ( leq-eq-ℚ (eq-full-dyadic-sum-sum-standard-geometric-one-half-ℚ k))
 
-  leq-two-dyadic-sum-bounded-sequence-bool-ℚ :
+  leq-two-dyadic-sum-ℚ-bounded-sequence-bool :
     (S : bounded-sequence-bool) →
     leq-ℚ
-      ( dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( dyadic-sum-ℚ-bounded-sequence-bool S)
       ( rational-ℕ 2)
-  leq-two-dyadic-sum-bounded-sequence-bool-ℚ (k , χ , adm-χ) =
+  leq-two-dyadic-sum-ℚ-bounded-sequence-bool (k , χ , adm-χ) =
     transitive-leq-ℚ _ _ _
-      ( leq-two-full-dyadic-sum-bounded-sequence-bool-ℚ k)
+      ( leq-two-full-dyadic-sum-ℚ-bounded-sequence-bool k)
       ( leq-dyadic-sum-bounded-sequence-bool-full-dyadic-sum-ℚ
         ( k , χ , adm-χ))
 ```
@@ -284,7 +289,7 @@ module _
     levy-admissible-bounded-sequence-bool →
     macneille-ℝ l
   dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool (S , _) =
-    raise-macneille-real-ℚ l (dyadic-sum-bounded-sequence-bool-ℚ S)
+    raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S
 
   point-levy-admissible-bounded-sequence-bool :
     levy-admissible-bounded-sequence-bool
@@ -307,9 +312,9 @@ module _
       ( upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool)
   is-upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool (S , _) =
     leq-raise-macneille-real-ℚ
-      ( dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( dyadic-sum-ℚ-bounded-sequence-bool S)
       ( rational-ℕ 2)
-      ( leq-two-dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( leq-two-dyadic-sum-ℚ-bounded-sequence-bool S)
 
   has-upper-bound-dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool :
     Σ (macneille-ℝ l)
@@ -411,6 +416,15 @@ adjoin-index-bounded-sequence-bool (k , χ , adm-χ) n =
       ( adm-χ
         ( m)
         ( transitive-leq-ℕ k (k +ℕ succ-ℕ n) m n+k≤m (leq-add-ℕ k (succ-ℕ n)))))
+
+raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool :
+  (l : Level) →
+  bounded-sequence-bool →
+  ℕ →
+  macneille-ℝ l
+raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n =
+  raise-dyadic-sum-ℝₘ-bounded-sequence-bool l
+    ( adjoin-index-bounded-sequence-bool S n)
 
 is-levy-admissible-adjoin-index-bounded-sequence-bool :
   {l : Level} (f : ℕ → macneille-ℝ l) (y : macneille-ℝ l) →
@@ -635,8 +649,8 @@ module _
 
   leq-dyadic-sum-bounded-sequence-bool-sum-adjoin-index-bounded-sequence-bool :
     leq-ℚ
-      ( dyadic-sum-bounded-sequence-bool-ℚ S)
-      ( dyadic-sum-bounded-sequence-bool-ℚ
+      ( dyadic-sum-ℚ-bounded-sequence-bool S)
+      ( dyadic-sum-ℚ-bounded-sequence-bool
         ( adjoin-index-bounded-sequence-bool S n))
   leq-dyadic-sum-bounded-sequence-bool-sum-adjoin-index-bounded-sequence-bool =
     transitive-leq-ℚ _ _ _
@@ -912,9 +926,9 @@ module _
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool :
       is-false (χ n) →
       leq-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
           power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool
       χn=false =
@@ -968,8 +982,8 @@ module _
     leq-dyadic-sum-is-levy-admissible-bounded-sequence-bool
       n S x≤y adm-S y≰fn =
       leq-raise-macneille-real-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S)
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-dyadic-sum-bounded-sequence-bool-sum-adjoin-index-bounded-sequence-bool
           ( n)
@@ -1030,7 +1044,7 @@ module _
     leq-power-two-neg-levy-map-ℕ-sum-adjoin-index-bounded-sequence-bool :
       leq-ℚ
         ( power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
     leq-power-two-neg-levy-map-ℕ-sum-adjoin-index-bounded-sequence-bool =
       transitive-leq-ℚ _ _ _
@@ -1067,7 +1081,7 @@ module _
       n S adm-S y≰fn =
       leq-raise-macneille-real-ℚ
         ( power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-power-two-neg-levy-map-ℕ-sum-adjoin-index-bounded-sequence-bool n S)
 ```
@@ -1117,8 +1131,7 @@ module _
       (y≰fn : ¬ leq-macneille-ℝ y (f n)) →
       leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-            power-two-neg-ℚ n))
+          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
           ( adjoin-index-bounded-sequence-bool S n ,
             is-levy-admissible-adjoin-index-bounded-sequence-bool f y n S
@@ -1127,9 +1140,9 @@ module _
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-adjoin-index-bounded-sequence-bool
       n fn=x x≤y S adm-S y≰fn =
       leq-raise-macneille-real-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
           power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool
           ( n)
@@ -1151,14 +1164,13 @@ module _
       (y≰fn : ¬ leq-macneille-ℝ y (f n)) →
       leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-            power-two-neg-ℚ n))
+          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
         ( endomap-levy-sequence-ℝₘ f y)
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-endomap-levy-sequence-ℝₘ
       n fn=x x≤y S adm-S y≰fn =
       transitive-leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
+          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ
             power-two-neg-ℚ n))
         ( dyadic-sum-ℝₘ-levy-admissible-bounded-sequence-bool f y
           ( adjoin-index-bounded-sequence-bool S n ,
@@ -1359,7 +1371,7 @@ module _
         ( x≤gx)
 
   has-upper-bound-postfixpoints-endomap-levy-sequence-ℝₘ :
-    Σ (macneille-ℝ l)
+    Σ ( macneille-ℝ l)
       ( is-upper-bound-family-of-elements-macneille-ℝ
         ( family-of-elements-postfixpoints-endomap-macneille-ℝ
           ( endomap-levy-sequence-ℝₘ f)))
@@ -1381,119 +1393,121 @@ module _
       ( is-upper-bound-postfixpoints-endomap-levy-sequence-ℝₘ)
 ```
 
-## Finite Levy escaping image argument
+### The Levy point
 
-Instead of quantifying over all postfixpoints directly, we now specialize to
-finite self-$f$-admissible sets $S$, i.e., finite sets of natural numbers that
-are $f$-admissible at their own dyadic sum. By conditional order-completeness we
-may again define
+We construct the _Levy point_ $x₀$ of a sequence of MacNeille reals $f : ℕ → ℝₘ$
 
 $$
-  x₀ ≔ sup\{\text{family element of }(k,χ,outside) | (k,χ,outside)\text{ is self-}f\text{-admissible}\}.
+  x₀ ≔ sup\left\lbrace ∑_{i ∈ S}2⁻ⁱ \mvert S\text{ is finite self-}f\text{-admissible}\right\rbrace
 $$
+
+This is again well-defined by conditional order-completeness.
+
+Notice that, instead of quantifying over all postfixpoints as with the
+Knaster–Tarski fixed point theorem, we have specialized to dyadic sums of finite
+self-$f$-admissible sets $S$, i.e., finite sets of natural numbers that are
+$f$-admissible at their own dyadic sum.
 
 The remaining argument shows $x₀ ∉ im(f)$.
 
 ```agda
-is-self-admissible-bounded-sequence-bool :
-  {l : Level} (f : ℕ → macneille-ℝ l) →
+is-levy-bounded-sequence-bool :
+  {l : Level} → (ℕ → macneille-ℝ l) →
   bounded-sequence-bool → UU l
-is-self-admissible-bounded-sequence-bool {l} f S =
+is-levy-bounded-sequence-bool {l} f S =
   is-levy-admissible-bounded-sequence-bool f
-    ( raise-macneille-real-ℚ l
-      ( dyadic-sum-bounded-sequence-bool-ℚ S))
+    ( raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S)
     ( S)
 
-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ :
-  {l : Level} (f : ℕ → macneille-ℝ l) → UU l
-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f =
-  Σ bounded-sequence-bool
-    ( is-self-admissible-bounded-sequence-bool f)
+levy-bounded-sequence-bool :
+  {l : Level} → (ℕ → macneille-ℝ l) → UU l
+levy-bounded-sequence-bool f =
+  Σ bounded-sequence-bool (is-levy-bounded-sequence-bool f)
 
-family-of-elements-self-admissible-levy-sequence-ℝₘ :
+dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
-  indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f →
+  levy-bounded-sequence-bool f →
   macneille-ℝ l
-family-of-elements-self-admissible-levy-sequence-ℝₘ {l} _ (S , _) =
-  raise-macneille-real-ℚ l (dyadic-sum-bounded-sequence-bool-ℚ S)
+dyadic-sum-levy-bounded-sequence-bool-ℝₘ {l} _ (S , _) =
+  raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S
 
 abstract
-  is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ :
+  is-inhabited-levy-bounded-sequence-bool :
     {l : Level} (f : ℕ → macneille-ℝ l) →
-    is-inhabited (indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
-  is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ
+    is-inhabited (levy-bounded-sequence-bool f)
+  is-inhabited-levy-bounded-sequence-bool
     _ =
     unit-trunc-Prop
       ( ( zero-ℕ , ( λ _ → false) , λ _ _ → refl) , λ _ ())
 
-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ :
+upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
   {l : Level} (f : ℕ → macneille-ℝ l) → macneille-ℝ l
-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ {l} _ =
+upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ {l} _ =
   raise-macneille-real-ℚ l (rational-ℕ 2)
 
 abstract
-  is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ :
+  is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
     is-upper-bound-family-of-elements-macneille-ℝ
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-  is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ
-    {l} f (S , _) =
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+  is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ
+    f (S , _) =
     leq-raise-macneille-real-ℚ
-      ( dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( dyadic-sum-ℚ-bounded-sequence-bool S)
       ( rational-ℕ 2)
-      ( leq-two-dyadic-sum-bounded-sequence-bool-ℚ S)
+      ( leq-two-dyadic-sum-ℚ-bounded-sequence-bool S)
 
-has-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ :
+has-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l)
     ( is-upper-bound-family-of-elements-macneille-ℝ
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f))
-has-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f =
-  ( upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f ,
-    is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f))
+has-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f =
+  ( upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f ,
+    is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
 
-point-self-admissible-levy-sequence-ℝₘ :
-  {l : Level} (f : ℕ → macneille-ℝ l) → macneille-ℝ l
-point-self-admissible-levy-sequence-ℝₘ f =
+point-levy-sequence-ℝₘ :
+  {l : Level} → (ℕ → macneille-ℝ l) → macneille-ℝ l
+point-levy-sequence-ℝₘ f =
   least-upper-bound-inhabited-bounded-family-macneille-ℝ
-    ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
-    ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-    ( upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-    ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+    ( is-inhabited-levy-bounded-sequence-bool f)
+    ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+    ( upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+    ( is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
 
 abstract
-  is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-ℝₘ :
+  is-least-upper-bound-family-of-elements-point-levy-sequence-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
     is-least-upper-bound-family-of-elements-macneille-ℝ
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( point-self-admissible-levy-sequence-ℝₘ f)
-  is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-ℝₘ
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( point-levy-sequence-ℝₘ f)
+  is-least-upper-bound-family-of-elements-point-levy-sequence-ℝₘ
     f =
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-      ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+      ( is-inhabited-levy-bounded-sequence-bool f)
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
 
-  leq-family-element-point-self-admissible-levy-sequence-ℝₘ :
+  leq-family-element-point-levy-sequence-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
-    ( i : indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f) →
+    (i : levy-bounded-sequence-bool f) →
     leq-macneille-ℝ
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f i)
-      ( point-self-admissible-levy-sequence-ℝₘ f)
-  leq-family-element-point-self-admissible-levy-sequence-ℝₘ f =
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f i)
+      ( point-levy-sequence-ℝₘ f)
+  leq-family-element-point-levy-sequence-ℝₘ f =
     is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-      ( is-inhabited-indexing-type-self-admissible-levy-family-sequence-macneille-ℝ f)
-      ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
-      ( is-upper-bound-family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+      ( is-inhabited-levy-bounded-sequence-bool f)
+      ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( is-upper-bound-dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
 ```
 
-### Contradiction at the least upper bound
+### Contradiction at the Levy point
 
 Assume $f(n) = x₀$. Then every self-$f$-admissible finite set $S$ avoids $n$, so
-adjoining $n$ contributes $2⁻ⁿ$. From this we derive that
+adjoining $n$ contributes $2⁻ⁿ$ to the dyadic sum. From this we derive that
 
 $$
   x₀ + 2⁻ⁿ ≤ x₀,
@@ -1504,29 +1518,25 @@ which is absurd since $2⁻ⁿ > 0$. Hence $f(n) ≠ x₀$ for all $n$.
 ```agda
 module _
   {l : Level} (f : ℕ → macneille-ℝ l)
-  (let x0 = point-self-admissible-levy-sequence-ℝₘ f)
+  (let x0 = point-levy-sequence-ℝₘ f)
   where
 
   abstract
-    leq-family-element-point-self-admissible-levy-sequence-ℝₘ' :
+    leq-family-element-point-levy-sequence-ℝₘ' :
       ( S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
-      leq-macneille-ℝ
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S))
-        ( x0)
-    leq-family-element-point-self-admissible-levy-sequence-ℝₘ'
+      is-levy-bounded-sequence-bool f S →
+      leq-macneille-ℝ (raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S) x0
+    leq-family-element-point-levy-sequence-ℝₘ'
       S self-adm-S =
-      leq-family-element-point-self-admissible-levy-sequence-ℝₘ f
-        ( S , self-adm-S)
+      leq-family-element-point-levy-sequence-ℝₘ f (S , self-adm-S)
 
-    is-false-self-admissible-index-at-image-point-self-admissible-levy-sequence-ℝₘ :
+    is-false-self-admissible-index-at-image-point-levy-sequence-ℝₘ :
       (n : ℕ) →
       f n ＝ x0 →
       (S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
+      is-levy-bounded-sequence-bool f S →
       is-false (pr1 (pr2 S) n)
-    is-false-self-admissible-index-at-image-point-self-admissible-levy-sequence-ℝₘ
+    is-false-self-admissible-index-at-image-point-levy-sequence-ℝₘ
       n fn=x0 S self-adm-S =
       is-false-at-index-is-levy-admissible-bounded-sequence-bool
         ( f)
@@ -1535,12 +1545,9 @@ module _
         ( fn=x0)
         ( S)
         ( is-levy-admissible-leq-bounded-sequence-bool f
-          ( raise-macneille-real-ℚ l
-            ( dyadic-sum-bounded-sequence-bool-ℚ S))
+          ( raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S)
           ( x0)
-          ( leq-family-element-point-self-admissible-levy-sequence-ℝₘ'
-            ( S)
-            ( self-adm-S))
+          ( leq-family-element-point-levy-sequence-ℝₘ' S self-adm-S)
           ( S)
           ( self-adm-S))
 
@@ -1548,18 +1555,17 @@ module _
       (n : ℕ) →
       f n ＝ x0 →
       (S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
+      is-levy-bounded-sequence-bool f S →
       leq-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-          power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n)
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
     leq-add-dyadic-sum-power-two-neg-sum-extend-self-admissible-levy-sequence-ℝₘ
       n fn=x0 S self-adm-S =
       leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-sum-adjoin-index-bounded-sequence-bool
         ( n)
         ( S)
-        ( is-false-self-admissible-index-at-image-point-self-admissible-levy-sequence-ℝₘ
+        ( is-false-self-admissible-index-at-image-point-levy-sequence-ℝₘ
           ( n)
           ( fn=x0)
           ( S)
@@ -1569,20 +1575,16 @@ module _
       (n : ℕ) →
       f n ＝ x0 →
       (S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
+      is-levy-bounded-sequence-bool f S →
       leq-macneille-ℝ
         ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-            power-two-neg-ℚ n))
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ
-            ( adjoin-index-bounded-sequence-bool S n)))
+          ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
+        ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
     leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-extend-self-admissible-levy-sequence-ℝₘ
       n fn=x0 S self-adm-S =
       leq-raise-macneille-real-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-          power-two-neg-ℚ n)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n)
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-add-dyadic-sum-power-two-neg-sum-extend-self-admissible-levy-sequence-ℝₘ
           n fn=x0 S self-adm-S)
@@ -1592,16 +1594,13 @@ module _
       (n : ℕ) →
       (S : bounded-sequence-bool) →
       leq-macneille-ℝ
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ S))
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ
-            ( adjoin-index-bounded-sequence-bool S n)))
+        ( raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S)
+        ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
     leq-dyadic-sum-bounded-sequence-bool-family-element-extend-self-admissible-levy-sequence-ℝₘ
       n S =
       leq-raise-macneille-real-ℚ
-        ( dyadic-sum-bounded-sequence-bool-ℚ S)
-        ( dyadic-sum-bounded-sequence-bool-ℚ
+        ( dyadic-sum-ℚ-bounded-sequence-bool S)
+        ( dyadic-sum-ℚ-bounded-sequence-bool
           ( adjoin-index-bounded-sequence-bool S n))
         ( leq-dyadic-sum-bounded-sequence-bool-sum-adjoin-index-bounded-sequence-bool
           ( n)
@@ -1610,33 +1609,26 @@ module _
   abstract
     is-self-admissible-adjoin-not-leq-index-bounded-sequence-bool :
       (n : ℕ) →
-      (fn=x0 : f n ＝ x0) →
+      f n ＝ x0 →
       (S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
+      is-levy-bounded-sequence-bool f S →
       ¬ leq-macneille-ℝ
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ
-            ( adjoin-index-bounded-sequence-bool S n)))
+        ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
         ( x0) →
-      is-self-admissible-bounded-sequence-bool f
+      is-levy-bounded-sequence-bool f
         ( adjoin-index-bounded-sequence-bool S n)
     is-self-admissible-adjoin-not-leq-index-bounded-sequence-bool
       n fn=x0 S self-adm-S extend-S≰x0 =
       is-levy-admissible-adjoin-index-bounded-sequence-bool
         ( f)
-        ( raise-macneille-real-ℚ l
-          ( dyadic-sum-bounded-sequence-bool-ℚ
-            ( adjoin-index-bounded-sequence-bool S n)))
+        ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
         ( n)
         ( S)
         ( λ m m∈S sum-extend-S≤fm →
           self-adm-S m m∈S
             ( transitive-leq-macneille-ℝ
-              ( raise-macneille-real-ℚ l
-                ( dyadic-sum-bounded-sequence-bool-ℚ S))
-              ( raise-macneille-real-ℚ l
-                ( dyadic-sum-bounded-sequence-bool-ℚ
-                  ( adjoin-index-bounded-sequence-bool S n)))
+              ( raise-dyadic-sum-ℝₘ-bounded-sequence-bool l S)
+              ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
               ( f m)
               ( sum-extend-S≤fm)
               ( leq-dyadic-sum-bounded-sequence-bool-family-element-extend-self-admissible-levy-sequence-ℝₘ
@@ -1646,9 +1638,7 @@ module _
           extend-S≰x0
             ( tr
               ( leq-macneille-ℝ
-                  ( raise-macneille-real-ℚ l
-                    ( dyadic-sum-bounded-sequence-bool-ℚ
-                      ( adjoin-index-bounded-sequence-bool S n))))
+                ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n))
               ( fn=x0)
               ( sum-extend-S≤fn)))
 
@@ -1656,17 +1646,15 @@ module _
       (n : ℕ) →
       (fn=x0 : f n ＝ x0) →
       (S : bounded-sequence-bool) →
-      is-self-admissible-bounded-sequence-bool f S →
+      is-levy-bounded-sequence-bool f S →
       ¬¬
         ( leq-macneille-ℝ
-          ( raise-macneille-real-ℚ l
-            ( dyadic-sum-bounded-sequence-bool-ℚ
-              ( adjoin-index-bounded-sequence-bool S n)))
+          ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
           ( x0))
     not-not-leq-family-element-extend-self-admissible-levy-sequence-ℝₘ
       n fn=x0 S self-adm-S extend-S≰x0 =
       extend-S≰x0
-        ( leq-family-element-point-self-admissible-levy-sequence-ℝₘ f
+        ( leq-family-element-point-levy-sequence-ℝₘ f
           ( adjoin-index-bounded-sequence-bool S n ,
             is-self-admissible-adjoin-not-leq-index-bounded-sequence-bool
               ( n)
@@ -1676,31 +1664,29 @@ module _
               ( extend-S≰x0)))
 
   abstract
-    leq-right-translate-family-element-point-self-admissible-levy-sequence-ℝₘ :
+    leq-right-translate-family-element-point-levy-sequence-ℝₘ :
       (n : ℕ) →
       (fn=x0 : f n ＝ x0) →
       (S : bounded-sequence-bool) →
       ( self-adm-S :
-        is-self-admissible-bounded-sequence-bool f S) →
+        is-levy-bounded-sequence-bool f S) →
       leq-macneille-ℝ
         ( translate-family-right-macneille-real-ℚ
           ( power-two-neg-ℚ n)
-          ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+          ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
           ( S , self-adm-S))
         ( x0)
-    leq-right-translate-family-element-point-self-admissible-levy-sequence-ℝₘ
+    leq-right-translate-family-element-point-levy-sequence-ℝₘ
       n fn=x0 S self-adm-S =
       let
         extend-S≤x0 :
           leq-macneille-ℝ
-            ( raise-macneille-real-ℚ l
-              ( dyadic-sum-bounded-sequence-bool-ℚ
-                ( adjoin-index-bounded-sequence-bool S n)))
+            ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
             ( x0)
         extend-S≤x0 =
           double-negation-elim-leq-left-raise-macneille-real-ℚ
             ( x0)
-            ( dyadic-sum-bounded-sequence-bool-ℚ
+            ( dyadic-sum-ℚ-bounded-sequence-bool
               ( adjoin-index-bounded-sequence-bool S n))
             ( not-not-leq-family-element-extend-self-admissible-levy-sequence-ℝₘ
               ( n)
@@ -1711,16 +1697,13 @@ module _
         add-sum-S+dyadic-coeff≤x0 :
           leq-macneille-ℝ
             ( raise-macneille-real-ℚ l
-              ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ power-two-neg-ℚ n))
+              ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
             ( x0)
         add-sum-S+dyadic-coeff≤x0 =
           transitive-leq-macneille-ℝ
             ( raise-macneille-real-ℚ l
-              ( dyadic-sum-bounded-sequence-bool-ℚ S +ℚ
-                power-two-neg-ℚ n))
-            ( raise-macneille-real-ℚ l
-              ( dyadic-sum-bounded-sequence-bool-ℚ
-                ( adjoin-index-bounded-sequence-bool S n)))
+              ( dyadic-sum-ℚ-bounded-sequence-bool S +ℚ power-two-neg-ℚ n))
+            ( raise-dyadic-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
             ( x0)
             ( extend-S≤x0)
             ( leq-add-dyadic-sum-bounded-sequence-bool-power-two-neg-family-element-extend-self-admissible-levy-sequence-ℝₘ
@@ -1732,8 +1715,7 @@ module _
         add-dyadic-coeff+sum-S≤x0 :
           leq-macneille-ℝ
             ( raise-macneille-real-ℚ l
-              ( power-two-neg-ℚ n +ℚ
-                dyadic-sum-bounded-sequence-bool-ℚ S))
+              ( power-two-neg-ℚ n +ℚ dyadic-sum-ℚ-bounded-sequence-bool S))
             ( x0)
         add-dyadic-coeff+sum-S≤x0 =
           tr
@@ -1741,7 +1723,7 @@ module _
             ( ap
               ( raise-macneille-real-ℚ l)
               ( commutative-add-ℚ
-                ( dyadic-sum-bounded-sequence-bool-ℚ S)
+                ( dyadic-sum-ℚ-bounded-sequence-bool S)
                 ( power-two-neg-ℚ n)))
             ( add-sum-S+dyadic-coeff≤x0)
       in
@@ -1750,61 +1732,56 @@ module _
           ( inv
             ( eq-right-translate-raise-macneille-real-ℚ'
               ( power-two-neg-ℚ n)
-              ( dyadic-sum-bounded-sequence-bool-ℚ S)))
+              ( dyadic-sum-ℚ-bounded-sequence-bool S)))
           ( add-dyadic-coeff+sum-S≤x0)
 
-    is-upper-bound-right-translate-family-of-elements-self-admissible-levy-sequence-ℝₘ :
+    is-upper-bound-right-translate-dyadic-sum-levy-bounded-sequence-bool-ℝₘ :
       (n : ℕ) →
       (fn=x0 : f n ＝ x0) →
       is-upper-bound-family-of-elements-macneille-ℝ
         ( translate-family-right-macneille-real-ℚ
           ( power-two-neg-ℚ n)
-          ( family-of-elements-self-admissible-levy-sequence-ℝₘ f))
+          ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f))
         ( x0)
-    is-upper-bound-right-translate-family-of-elements-self-admissible-levy-sequence-ℝₘ
+    is-upper-bound-right-translate-dyadic-sum-levy-bounded-sequence-bool-ℝₘ
       n fn=x0 (S , self-adm-S) =
-      leq-right-translate-family-element-point-self-admissible-levy-sequence-ℝₘ
+      leq-right-translate-family-element-point-levy-sequence-ℝₘ
         ( n)
         ( fn=x0)
         ( S)
         ( self-adm-S)
 
-    leq-right-translate-point-self-admissible-levy-sequence-ℝₘ :
+    leq-right-translate-point-levy-sequence-ℝₘ :
       (n : ℕ) →
       (fn=x0 : f n ＝ x0) →
       leq-macneille-ℝ
         ( add-macneille-ℝ
-          ( located-macneille-real-ℚ
-            ( power-two-neg-ℚ n))
+          ( located-macneille-real-ℚ (power-two-neg-ℚ n))
           ( x0))
         ( x0)
-    leq-right-translate-point-self-admissible-levy-sequence-ℝₘ
+    leq-right-translate-point-levy-sequence-ℝₘ
       n fn=x0 =
       forward-implication
         ( is-least-upper-bound-family-of-elements-at-level-right-translate-macneille-real-ℚ
           ( power-two-neg-ℚ n)
-          ( family-of-elements-self-admissible-levy-sequence-ℝₘ f)
+          ( dyadic-sum-levy-bounded-sequence-bool-ℝₘ f)
           ( x0)
-          ( is-least-upper-bound-family-of-elements-point-self-admissible-levy-sequence-ℝₘ
-            ( f))
+          ( is-least-upper-bound-family-of-elements-point-levy-sequence-ℝₘ f)
           ( x0))
-        ( is-upper-bound-right-translate-family-of-elements-self-admissible-levy-sequence-ℝₘ
-          ( n)
-          ( fn=x0))
+        ( is-upper-bound-right-translate-dyadic-sum-levy-bounded-sequence-bool-ℝₘ n fn=x0)
 
-    not-in-image-point-self-admissible-levy-sequence-ℝₘ :
+    not-in-image-point-levy-sequence-ℝₘ :
       (n : ℕ) → f n ≠ x0
-    not-in-image-point-self-admissible-levy-sequence-ℝₘ
+    not-in-image-point-levy-sequence-ℝₘ
       n fn=x0 =
       not-leq-right-translate-positive-macneille-real-ℚ
         ( x0)
         ( power-two-neg-ℚ n)
         ( le-zero-power-two-neg-ℚ n)
-        ( leq-right-translate-point-self-admissible-levy-sequence-ℝₘ n
-          ( fn=x0))
+        ( leq-right-translate-point-levy-sequence-ℝₘ n fn=x0)
 ```
 
-### Sequence-avoiding point
+### Conclusion
 
 We have produced a sequence-avoiding point for a general $f$: a point $x₀$
 together with a proof that every index $n$ satisfies $f(n) ≠ x₀$.
@@ -1814,8 +1791,8 @@ sequence-avoiding-point-levy-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l) (λ x0 → (n : ℕ) → f n ≠ x0)
 sequence-avoiding-point-levy-macneille-ℝ f =
-  ( point-self-admissible-levy-sequence-ℝₘ f ,
-    not-in-image-point-self-admissible-levy-sequence-ℝₘ f)
+  ( point-levy-sequence-ℝₘ f ,
+    not-in-image-point-levy-sequence-ℝₘ f)
 ```
 
 ## References
