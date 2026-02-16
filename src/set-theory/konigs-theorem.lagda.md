@@ -8,6 +8,7 @@ module set-theory.konigs-theorem where
 
 ```agda
 open import foundation.binary-transport
+open import foundation.complements-images
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
