@@ -294,9 +294,9 @@ We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
 answer: <https://mathoverflow.net/a/433318>.
 
-**Proof.** Let $X$ be a subfinitely indexed type, witnessed by
-$\operatorname{Fin}n ↩ D ↠ X$ where $h$ is the surjection. We wish to show $X$
-is [Dedekind finite](univalent-combinatorics.dedekind-finite-types.md), so let
+**Proof.** Let $X$ be a subfinitely indexed type, witnessed by $\Fin n ↩ D ↠ X$
+where $h$ is the surjection. We wish to show $X$ is
+[Dedekind finite](univalent-combinatorics.dedekind-finite-types.md), so let
 $f : X ↪ X$ be an arbitrary self-embedding. To conclude $f$ is an
 [equivalence](foundation-core.equivalences.md) it suffices to prove $f$ is
 surjective, so we want to show that given an arbitrary $x : X$ there exists a
@@ -305,15 +305,15 @@ $z : X$ such that $x = f(z)$.
 The mapping $i ↦ fⁱ(x)$ defines a [sequence](lists.sequences.md) of elements of
 $X$. By surjectivity of $h$ each $fⁱ(x)$ merely has a representative in $D$, so
 by [finite choice](univalent-combinatorics.finite-choice.md) there exists a
-[finite sequence](lists.finite-sequences.md) $y₋ : \operatorname{Fin}n → D$
-lifting $x,f(x),…,f^{n-1}(x)$.
+[finite sequence](lists.finite-sequences.md) $y₋ : \Fin n → D$ lifting
+$x,f(x),…,f^{n-1}(x)$.
 
 Now, the [pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
-applies to $\operatorname{Fin}n$, so there has to be $i < j$ in
-$\operatorname{Fin}n$ such that $yᵢ = yⱼ$, and in particular $h(yᵢ) = h(yⱼ)$,
-i.e., $fⁱ(x) = fʲ(x)$. By [injectivity](foundation-core.injective-maps.md) of
-$f$ we can cancel $i$ applications to obtain $x = f(fʲ⁻ⁱ⁻¹(x))$, and so
-$fʲ⁻ⁱ⁻¹(x)$ is the desired preimage. ∎
+applies to $\Fin n$, so there has to be $i < j$ in $\Fin n$ such that $yᵢ = yⱼ$,
+and in particular $h(yᵢ) = h(yⱼ)$, i.e., $fⁱ(x) = fʲ(x)$. By
+[injectivity](foundation-core.injective-maps.md) of $f$ we can cancel $i$
+applications to obtain $x = f(fʲ⁻ⁱ⁻¹(x))$, and so $fʲ⁻ⁱ⁻¹(x)$ is the desired
+preimage. ∎
 
 ```agda
 module _

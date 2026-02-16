@@ -1,2 +1,7 @@
 \grad:{\nabla}
 \R:{\mathbb{R}^{#1 \times #2}}
+\Prop:{\mathrm{Prop}}
+\Set:{\mathrm{Set}}
+\Cardinal:{\mathrm{Cardinal}}
+\cardinality:{\operatorname{cardinality}}
+\Fin:{\operatorname{Fin}}

@@ -181,7 +181,7 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
     greatest-fixed-point-knaster-tarski-Suplattice)
 ```
 
-### König's theorem (set theory) {#Q1077462}
+### Kőnig's theorem (set theory) {#Q1077462}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 

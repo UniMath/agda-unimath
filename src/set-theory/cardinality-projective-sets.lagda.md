@@ -55,7 +55,7 @@ A [set](foundation-core.sets.md) $I$ is
 {{#concept "cardinality-projective" Disamibguation="sets" Agda=Cardinality-Projective-Set}}
 if it is [projective](foundation.projective-types.md) and the
 [postcomposition map](foundation-core.postcomposition-functions.md)
-$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$ is
+$${\cardinality} ∘ {-} : (I → \Set) → (I → \Cardinal)$$ is
 0-[connected](foundation.connected-maps.md).
 
 **Terminology.** This terminology is not established in the literature and may
@@ -66,8 +66,7 @@ be subject to change.
 ### The predicate of being cardinality-preprojective at a universe level
 
 We call a set $I$ _cardinality-preprojective_
-$$\mathrm{cardinality} ∘ {-} : (I → Set) → (I → \mathrm{Cardinal})$$ is
-0-connected.
+$${\cardinality} ∘ {-} : (I → \Set) → (I → \Cardinal)$$ is 0-connected.
 
 ```agda
 module _
