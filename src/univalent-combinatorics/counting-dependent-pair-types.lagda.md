@@ -10,7 +10,7 @@ module univalent-combinatorics.counting-dependent-pair-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
@@ -98,7 +98,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
     number-of-elements-count (count-Σ' k e f) ＝
-    sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))
+    sum-fin-sequence-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coproduct
