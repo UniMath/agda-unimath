@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-successors-truncation-levels
 open import foundation.postcomposition-functions
+open import foundation.raising-universe-levels
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.truncation-levels
@@ -99,6 +100,13 @@ is-trunc-projective k X = {l2 l3 : Level} → is-trunc-projective-Level l2 l3 k 
 
 ### Alternative statement of set-projectivity
 
+We also give the alternative definition of set-projectivity as having a choice
+function
+
+$$ ((x : X) → ║P(x)║₋₁) → ║(x : X) → P(x)║₋₁$$
+
+for every type family $P$.
+
 ```agda
 module _
   {l1 : Level} (l2 : Level) (X : UU l1)
@@ -126,7 +134,52 @@ is-projective' : {l1 : Level} → UU l1 → UUω
 is-projective' X = {l2 : Level} → is-projective-Level' l2 X
 ```
 
+### The universe of set-projective sets
+
+```agda
+Projective-Set' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Projective-Set' l1 l2 = Σ (Set l1) (is-projective-Level' l2 ∘ type-Set)
+
+module _
+  {l1 l2 : Level} (X : Projective-Set' l1 l2)
+  where
+
+  set-Projective-Set' : Set l1
+  set-Projective-Set' = pr1 X
+
+  type-Projective-Set' : UU l1
+  type-Projective-Set' = type-Set set-Projective-Set'
+
+  is-set-type-Projective-Set' : is-set type-Projective-Set'
+  is-set-type-Projective-Set' = is-set-type-Set set-Projective-Set'
+
+  is-projective-Projective-Set' : is-projective-Level' l2 type-Projective-Set'
+  is-projective-Projective-Set' = pr2 X
+```
+
 ## Properties
+
+### Lowering universe levels for projectivity
+
+```agda
+is-projective-is-projective-lub-Level' :
+  {l1 : Level} (l2 l3 : Level) {X : UU l1} →
+  is-projective-Level' (l2 ⊔ l3) X →
+  is-projective-Level' l2 X
+is-projective-is-projective-lub-Level' l2 l3 H P h =
+  map-is-inhabited
+    ( λ f x → map-inv-raise (f x))
+    ( H
+      ( λ x → raise l3 (P x))
+      ( λ x → map-is-inhabited map-raise (h x)))
+
+is-projective-is-projective-lsuc-Level' :
+  {l1 : Level} (l2 : Level) {X : UU l1} →
+  is-projective-Level' (lsuc l2) X →
+  is-projective-Level' l2 X
+is-projective-is-projective-lsuc-Level' l2 =
+  is-projective-is-projective-lub-Level' l2 (lsuc l2)
+```
 
 ### Set-projectivity is equivalent to 0-projectivity
 

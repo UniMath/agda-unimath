@@ -36,8 +36,7 @@ states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
 and $B$ over $I$, $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
 
 In constructive mathematics we have to be more mindful of our statements than
-usual. Here $I$ is any
-[cardinality-projective set](set-theory.cardinality-projective-sets.md) and by
+usual. Here $I$ is any [projective set](foundation.projective-types.md), and by
 $Aᵢ < Bᵢ$ we mean that $Bᵢ$ is [inhabited](foundation.inhabited-types.md) and
 that for every map $f : Aᵢ → Bᵢ$ there
 [exists](foundation.existential-quantification.md) an element of $Bᵢ$ that $f$
@@ -95,30 +94,34 @@ module _
 
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set' l1 (lsuc l2))
+  (let set-I = set-Projective-Set' I)
+  (let type-I = type-Projective-Set' I)
+  (let I' = cardinality-projective-set-Projective-Set' I)
   where
 
   le-indexed-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → le-indexed-Cardinal (A i) (B i)) →
-    le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-Cardinal =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
             ( (i : type-I) → le-indexed-Cardinal (A i) (B i))
-            ( le-indexed-prop-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B))))
+            ( le-indexed-prop-Cardinal
+              ( Σ-Cardinal I' A)
+              ( Π-Cardinal I' B))))
       ( λ A B p →
         binary-tr
           ( le-indexed-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-indexed-cardinality-Σ-Π
             ( set-I)
-            ( is-projective-Cardinality-Projective-Set I)
+            ( is-projective-is-projective-lsuc-Level' l2
+              ( is-projective-Projective-Set' I))
             ( A)
             ( B)
             ( p)))
