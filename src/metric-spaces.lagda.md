@@ -79,9 +79,10 @@ open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-p
 open import metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
-open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
-open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
+open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
+open import metric-spaces.cauchy-pseudocompletions-of-indexed-sums-pseudometric-spaces public
 open import metric-spaces.cauchy-sequences-complete-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
@@ -114,6 +115,7 @@ open import metric-spaces.images-metric-spaces public
 open import metric-spaces.images-short-maps-metric-spaces public
 open import metric-spaces.images-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
+open import metric-spaces.indexed-sums-pseudometric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
