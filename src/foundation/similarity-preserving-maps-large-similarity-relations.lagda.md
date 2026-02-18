@@ -1,36 +1,40 @@
 # Large similarity preserving maps
 
 ```agda
-module foundation.large-similarity-preserving-maps where
+module foundation.similarity-preserving-maps-large-similarity-relations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-similarity-relations
+open import foundation.embeddings
 open import foundation.injective-maps
 open import foundation.large-binary-relations
-open import foundation.universe-levels
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.embeddings
+open import foundation.universe-levels
 ```
 
 </details>
 
 ## Idea
 
+Given [large similarity relations](foundation.large-similarity-relations.md) on
+universe polymorphic types `X` and `Y`, a map `f : X → Y`
+{{#concept "preserves similarity" Disambiguation="map between two large similarity relations" Agda=preserves-sim-map-Large-Similarity-Relation}}
+if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
+
 ## Definition
 
 ```agda
 module _
-  {αX αY : Level → Level}
+  {αX αY γ : Level → Level}
   {βX βY : Level → Level → Level}
   {X : (l : Level) → UU (αX l)}
   {Y : (l : Level) → UU (αY l)}
   (SX : Large-Similarity-Relation βX X)
   (SY : Large-Similarity-Relation βY Y)
-  {γ : Level → Level}
   (f : {l : Level} → X l → Y (γ l))
   where
 

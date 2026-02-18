@@ -8,8 +8,8 @@ module foundation.similarity-preserving-maps-cumulative-large-sets where
 
 ```agda
 open import foundation.cumulative-large-sets
-open import foundation.large-similarity-preserving-maps
 open import foundation.identity-types
+open import foundation.similarity-preserving-maps-large-similarity-relations
 open import foundation.universe-levels
 ```
 
@@ -17,8 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y`, a map
-`f : X → Y`
+Given [cumulative large sets](foundation.cumulative-large-sets.md) on `X` and
+`Y`, a map `f : X → Y`
 {{#concept "preserves similarity" Disambiguation="map between two cumulative large sets" Agda=preserves-sim-map-Cumulative-Large-Set}}
 if whenever `x₁` is similar to `x₂` , `f x₁` is similar to `f x₂`.
 
@@ -49,7 +49,9 @@ module _
       ( large-similarity-relation-Cumulative-Large-Set SY)
 
   map-sim-preserving-map-Cumulative-Large-Set :
-    sim-preserving-map-Cumulative-Large-Set → {l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SY l
+    sim-preserving-map-Cumulative-Large-Set →
+    {l : Level} →
+    type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SY l
   map-sim-preserving-map-Cumulative-Large-Set =
     map-sim-preserving-map-Large-Similarity-Relation
 
@@ -70,7 +72,11 @@ module _
   (SX : Cumulative-Large-Set α β)
   where
 
-  preserves-sim-endomap-Cumulative-Large-Set : ({l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SX l) → UUω
+  preserves-sim-endomap-Cumulative-Large-Set :
+    ( {l : Level} →
+      type-Cumulative-Large-Set SX l →
+      type-Cumulative-Large-Set SX l) →
+    UUω
   preserves-sim-endomap-Cumulative-Large-Set =
     preserves-sim-map-Cumulative-Large-Set SX SX
 
@@ -79,7 +85,9 @@ module _
     sim-preserving-map-Cumulative-Large-Set SX SX
 
   map-sim-preserving-endomap-Cumulative-Large-Set :
-    sim-preserving-endomap-Cumulative-Large-Set → {l : Level} → type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SX l
+    sim-preserving-endomap-Cumulative-Large-Set →
+    {l : Level} →
+    type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SX l
   map-sim-preserving-endomap-Cumulative-Large-Set =
     map-sim-preserving-map-Large-Similarity-Relation
 

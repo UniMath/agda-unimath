@@ -68,6 +68,9 @@ is-set-type-trunc-Set = is-trunc-type-trunc
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
 
+unit-trunc-Set' : {l : Level} (A : UU l) → A → type-trunc-Set A
+unit-trunc-Set' A = unit-trunc-Set
+
 is-set-truncation-trunc-Set :
   {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
@@ -78,8 +81,7 @@ is-set-truncation-trunc-Set A = is-truncation-trunc
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
 symbol `║` in the set truncation notation `║_║₀` can be inserted with
-`agda-input` using the escape sequence `\--=` and selecting the second item in
-the list.
+`agda-input` using the escape sequence `\--=2`.
 
 ## Properties
 
@@ -465,7 +467,7 @@ module _
   equiv-unit-trunc-set = equiv-unit-trunc A
 ```
 
-### Distributive of set truncation over coproduct
+### Distributivity of set truncation over coproducts
 
 ```agda
 module _

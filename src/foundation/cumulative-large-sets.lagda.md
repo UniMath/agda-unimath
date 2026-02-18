@@ -7,13 +7,15 @@ module foundation.cumulative-large-sets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-similarity-relations
-open import foundation.injective-maps
-open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.embeddings
-open import foundation.large-binary-relations
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.large-binary-relations
+open import foundation.large-equivalence-relations
+open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -22,8 +24,17 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cumulative large set" Agda=Cumulative-Large-Sets}} is a
-universe-polymorphic type `X : (l : Level) → UU (α l)` equipped with a
+Many structures in mathematics are universe polymorphic in nature, which calls
+for some way to compare elements at different universe levels.
+[Identity types](foundation-core.identity-types.md) fall short with this respect
+because elements at different universe levels don't inhabit the same type. To
+solve this issue we have two standard mechanisms: raising universe levels of
+elements, and
+[large similarity relations](foundation.large-similarity-relations.md).
+
+A {{#concept "cumulative large set" Agda=Cumulative-Large-Set}} captures such a
+structure. It is a universe polymorphic type `X : (l : Level) → UU (α l)`
+equipped with a
 [large similarity relation](foundation.large-similarity-relations.md) and an
 inclusion map for all [universe levels](foundation.universe-levels.md) `l1` and
 `l2`, `raise : X l1 → X (l1 ⊔ l2)`, such that `x` is similar to `raise x`.
@@ -330,3 +341,102 @@ module _
             ~ raise-Cumulative-Large-Set S (l1 ⊔ l2) x
               by sim-raise-raise-Cumulative-Large-Set S l2 (l1 ⊔ l2) x)
 ```
+
+### A universe-raising operation on a universe-polymorphic family of sets induces a cumulative large set
+
+```agda
+module _
+  {α : Level → Level}
+  (X : (l : Level) → Set (α l))
+  (raise-X : {l0 : Level} (l : Level) → type-Set (X l0) ↪ type-Set (X (l ⊔ l0)))
+  (raise-raise-X :
+    {l0 : Level} (l1 l2 : Level) (x : type-Set (X l0)) →
+    map-emb (raise-X l1) (map-emb (raise-X l2) x) ＝
+    map-emb (raise-X (l1 ⊔ l2)) x)
+  where
+
+  sim-prop-induced-raise :
+    Large-Relation-Prop (λ l1 l2 → α (l1 ⊔ l2)) (λ l → type-Set (X l))
+  sim-prop-induced-raise {l1} {l2} x y =
+    Id-Prop (X (l1 ⊔ l2)) (map-emb (raise-X l2) x) (map-emb (raise-X l1) y)
+
+  sim-induced-raise :
+    Large-Relation (λ l1 l2 → α (l1 ⊔ l2)) (λ l → type-Set (X l))
+  sim-induced-raise =
+    large-relation-Large-Relation-Prop
+      ( λ l → type-Set (X l))
+      ( sim-prop-induced-raise)
+
+  refl-sim-induced-raise :
+    is-reflexive-Large-Relation (λ l → type-Set (X l)) sim-induced-raise
+  refl-sim-induced-raise x = refl
+
+  symmetric-sim-induced-raise :
+    is-symmetric-Large-Relation (λ l → type-Set (X l)) sim-induced-raise
+  symmetric-sim-induced-raise _ _ = inv
+
+  commute-induced-raise :
+    {l0 : Level} (l1 l2 : Level) (x : type-Set (X l0)) →
+    map-emb (raise-X l1) (map-emb (raise-X l2) x) ＝
+    map-emb (raise-X l2) (map-emb (raise-X l1) x)
+  commute-induced-raise l1 l2 x =
+    raise-raise-X l1 l2 x ∙ inv (raise-raise-X l2 l1 x)
+
+  transitive-sim-induced-raise :
+    is-transitive-Large-Relation (λ l → type-Set (X l)) sim-induced-raise
+  transitive-sim-induced-raise {l1} {l2} {l3} x y z r3y=r2z r2x=r1y =
+    is-injective-emb
+      ( raise-X l2)
+      ( equational-reasoning
+        map-emb (raise-X l2) (map-emb (raise-X l3) x)
+        ＝ map-emb (raise-X l3) (map-emb (raise-X l2) x)
+          by commute-induced-raise l2 l3 x
+        ＝ map-emb (raise-X l3) (map-emb (raise-X l1) y)
+          by ap (map-emb (raise-X l3)) r2x=r1y
+        ＝ map-emb (raise-X l1) (map-emb (raise-X l3) y)
+          by commute-induced-raise l3 l1 y
+        ＝ map-emb (raise-X l1) (map-emb (raise-X l2) z)
+          by ap (map-emb (raise-X l1)) r3y=r2z
+        ＝ map-emb (raise-X l2) (map-emb (raise-X l1) z)
+          by commute-induced-raise l1 l2 z)
+
+  eq-sim-induced-raise :
+    {l : Level} (x y : type-Set (X l)) → sim-induced-raise x y → x ＝ y
+  eq-sim-induced-raise {l} x y = is-injective-emb (raise-X l)
+
+  large-equivalence-relation-induced-raise :
+    Large-Equivalence-Relation (λ l1 l2 → α (l1 ⊔ l2)) (λ l → type-Set (X l))
+  large-equivalence-relation-induced-raise =
+    λ where
+      .sim-prop-Large-Equivalence-Relation → sim-prop-induced-raise
+      .refl-sim-Large-Equivalence-Relation → refl-sim-induced-raise
+      .symmetric-sim-Large-Equivalence-Relation → symmetric-sim-induced-raise
+      .transitive-sim-Large-Equivalence-Relation → transitive-sim-induced-raise
+
+  large-similarity-relation-induced-raise :
+    Large-Similarity-Relation (λ l1 l2 → α (l1 ⊔ l2)) (λ l → type-Set (X l))
+  large-similarity-relation-induced-raise =
+    λ where
+      .large-equivalence-relation-Large-Similarity-Relation →
+        large-equivalence-relation-induced-raise
+      .eq-sim-Large-Similarity-Relation → eq-sim-induced-raise
+
+  sim-raise-induced-raise :
+    {l0 : Level} (l : Level) (x : type-Set (X l0)) →
+    sim-induced-raise x (map-emb (raise-X l) x)
+  sim-raise-induced-raise {l0} l x = inv (raise-raise-X l0 l x)
+
+  cumulative-large-set-induced-raise :
+    Cumulative-Large-Set α (λ l1 l2 → α (l1 ⊔ l2))
+  cumulative-large-set-induced-raise =
+    λ where
+      .type-Cumulative-Large-Set l → type-Set (X l)
+      .large-similarity-relation-Cumulative-Large-Set →
+        large-similarity-relation-induced-raise
+      .raise-Cumulative-Large-Set l → map-emb (raise-X l)
+      .sim-raise-Cumulative-Large-Set → sim-raise-induced-raise
+```
+
+## See also
+
+- [Global subuniverses](foundation.global-subuniverses.md)

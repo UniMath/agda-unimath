@@ -571,16 +571,16 @@ abstract opaque
   unfolding le-ℝ
 
   cotransitive-le-ℝ : is-cotransitive-Large-Relation-Prop ℝ le-prop-ℝ
-  cotransitive-le-ℝ x y z x<y =
+  cotransitive-le-ℝ x y z x<z =
     let
-      open do-syntax-trunc-Prop (le-prop-ℝ x z ∨ le-prop-ℝ z y)
+      open do-syntax-trunc-Prop (le-prop-ℝ x y ∨ le-prop-ℝ y z)
     in do
-      ( q , x<q , q<y) ← x<y
+      ( q , x<q , q<z) ← x<z
       ( p , p<q , x<p) ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       map-disjunction
-        ( λ p<z → intro-exists p (x<p , p<z))
-        ( λ z<q → intro-exists q (z<q , q<y))
-        ( is-located-lower-upper-cut-ℝ z p<q)
+        ( λ p<y → intro-exists p (x<p , p<y))
+        ( λ y<q → intro-exists q (y<q , q<z))
+        ( is-located-lower-upper-cut-ℝ y p<q)
 ```
 
 ### `x < y` iff `raise-ℝ l x < raise-ℝ l y`

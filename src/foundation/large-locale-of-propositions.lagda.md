@@ -10,12 +10,13 @@ module foundation.large-locale-of-propositions where
 open import foundation.conjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
+open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
-open import foundation.large-similarity-relations
 
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -25,10 +26,10 @@ open import order-theory.large-frames
 open import order-theory.large-locales
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
-open import order-theory.similarity-of-elements-large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.top-elements-large-posets
 ```
 
@@ -105,9 +106,9 @@ is-top-element-top-has-top-element-Large-Poset
 has-bottom-element-Prop-Large-Locale :
   has-bottom-element-Large-Poset Prop-Large-Poset
 bottom-has-bottom-element-Large-Poset
-  has-bottom-element-Prop-Large-Locale = empty-Prop
+  has-bottom-element-Prop-Large-Locale = raise-empty-Prop
 is-bottom-element-bottom-has-bottom-element-Large-Poset
-  has-bottom-element-Prop-Large-Locale P = ex-falso
+  has-bottom-element-Prop-Large-Locale l P = ex-falso ∘ map-inv-raise
 ```
 
 ### The large poset of propositions is a large meet-semilattice

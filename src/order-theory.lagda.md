@@ -19,6 +19,8 @@ open import order-theory.closed-intervals-posets public
 open import order-theory.closed-intervals-total-orders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
+open import order-theory.cofinal-maps-posets public
+open import order-theory.coinitial-maps-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
 open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
 open import order-theory.coverings-locales public
@@ -73,6 +75,7 @@ open import order-theory.interval-subposets public
 open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
 open import order-theory.joins-finite-families-join-semilattices public
+open import order-theory.joins-finite-families-large-join-semilattices public
 open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-inflattices public

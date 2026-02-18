@@ -1,4 +1,4 @@
-# Similarity-preserving binary maps on cumulative large sets
+# Similarity preserving binary maps on cumulative large sets
 
 ```agda
 module foundation.similarity-preserving-binary-maps-cumulative-large-sets where
@@ -8,9 +8,9 @@ module foundation.similarity-preserving-binary-maps-cumulative-large-sets where
 
 ```agda
 open import foundation.cumulative-large-sets
-open import foundation.universe-levels
 open import foundation.identity-types
-open import foundation.large-similarity-preserving-binary-maps
+open import foundation.similarity-preserving-binary-maps-large-similarity-relations
+open import foundation.universe-levels
 ```
 
 </details>
@@ -19,9 +19,9 @@ open import foundation.large-similarity-preserving-binary-maps
 
 Given [cumulative large sets](foundation.cumulative-large-sets.md) `X Y Z`, a
 binary map `f : X → Y → Z`
-{{#concept "preserves similarity" Disambiguation="binary map between cumulative large sets" Agda=preserves-sim-binary-map-Cumulative-Large-Set}}
-if whenever `x₁` is similar to `x₂` and `y₁` is similar to `y₂`, `f x₁ y₁` is
-similar to `f x₂ y₂`.
+{{#concept "preserves similarity" Disambiguation="binary maps over cumulative large sets" Agda=preserves-sim-binary-map-Cumulative-Large-Set}}
+if whenever `x` is similar to `x'` and `y` is similar to `y'`, `f x y` is
+similar to `f x' y'`.
 
 ## Definition
 
@@ -71,7 +71,7 @@ module _
     preserves-sim-map-sim-preserving-binary-map-Large-Similarity-Relation
 ```
 
-### Similarity-preserving binary operators
+### Similarity preserving binary operators
 
 ```agda
 module _
@@ -112,7 +112,7 @@ module _
 
 ## Properties
 
-### Raising universe levels on similarity-preserving binary maps
+### Raising universe levels on similarity preserving binary maps
 
 ```agda
 module _
