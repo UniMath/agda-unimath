@@ -407,9 +407,7 @@ module _
     is-truncation-equivalence k f → is-truncated-acyclic-map k f
   is-truncated-acyclic-map-is-truncation-equivalence e =
     is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
-      ( λ C →
-        is-emb-is-equiv
-          ( is-equiv-precomp-is-truncation-equivalence k f e C))
+      ( λ C → is-emb-is-equiv (is-equiv-precomp-is-truncation-equivalence e C))
 ```
 
 ### `k`-acyclic maps are closed under pullbacks
