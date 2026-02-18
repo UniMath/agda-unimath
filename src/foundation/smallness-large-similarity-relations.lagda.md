@@ -7,12 +7,12 @@ module foundation.smallness-large-similarity-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.large-similarity-relations
 open import foundation.dependent-pair-types
-open import foundation.subtypes
 open import foundation.identity-types
-open import foundation.universe-levels
+open import foundation.large-similarity-relations
 open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 </details>
@@ -77,3 +77,26 @@ module _
     ( is-small-Large-Similarity-Relation R l x ,
       is-prop-is-small-Large-Similarity-Relation)
 ```
+
+## Properties
+
+### A value is small relative to its own universe level
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  {X : (l : Level) → UU (α l)}
+  (R : Large-Similarity-Relation β X)
+  where
+
+  is-small-level-Large-Similarity-Relation :
+    {l : Level} (x : X l) →
+    is-small-Large-Similarity-Relation R l x
+  is-small-level-Large-Similarity-Relation x =
+    ( x , refl-sim-Large-Similarity-Relation R x)
+```
+
+## See also
+
+- [Smallness in cumulative large sets](foundation.smallness-cumulative-large-sets.md)
