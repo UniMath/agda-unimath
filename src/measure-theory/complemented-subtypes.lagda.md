@@ -27,9 +27,11 @@ A
 of a type `X` equipped with an
 [apartness relation](foundation.apartness-relations.md) is an ordered pair of
 [subtypes](foundation-core.subtypes.md) `A` and `A'` of `X` that are
-[apart](measure-theory.apart-subtypes.md).
+[apart](measure-theory.apart-subtypes.md). A complemented subtype represents a
+subtype equipped with a positively represented complement.
 
-This definition follows {{#cite Zeuner22}}.
+This definition follows {{#cite Zeuner22}}, but the term "complemented subset"
+used in this sense goes back to {{#cite BishopFoundations}}.
 
 ## Definition
 
