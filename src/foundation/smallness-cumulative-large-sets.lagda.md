@@ -90,3 +90,20 @@ module _
     ( raise-Cumulative-Large-Set X l x ,
       sim-raise-Cumulative-Large-Set X l x)
 ```
+
+### Given `x : X l0`, `x` raised to another universe level is `l0`-small
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (X : Cumulative-Large-Set α β)
+  where
+
+  is-small-raise-Cumulative-Large-Set :
+    {l0 : Level} (l : Level) (x : type-Cumulative-Large-Set X l0) →
+    is-small-Cumulative-Large-Set X l0 (raise-Cumulative-Large-Set X l x)
+  is-small-raise-Cumulative-Large-Set l x =
+    ( x ,
+      sim-raise-Cumulative-Large-Set' X l x)
+```
