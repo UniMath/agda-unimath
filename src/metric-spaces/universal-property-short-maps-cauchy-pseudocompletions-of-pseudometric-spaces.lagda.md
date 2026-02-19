@@ -52,7 +52,7 @@ with the unit [isometry](metric-spaces.isometries-pseudometric-spaces.md) of
 ```
 
 maps [short maps](metric-spaces.short-maps-pseudometric-spaces.md) `g : C P → M`
-short maps `g ∘ κ : P → M`. For any
+to short maps `g ∘ κ : P → M`. For any
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md),
 `u : C P`, its
 [image](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
