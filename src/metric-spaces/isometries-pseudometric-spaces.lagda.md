@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -377,4 +378,22 @@ module _
         ( f))
       ( id-isometry-Pseudometric-Space A)
       ( is-retraction-map-inv-is-equiv E)
+```
+
+### Retractions of isometries between pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : isometry-Pseudometric-Space A B)
+  where
+
+  retraction-isometry-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  retraction-isometry-Pseudometric-Space =
+    Σ ( isometry-Pseudometric-Space B A)
+      ( λ g →
+        is-retraction
+          ( map-isometry-Pseudometric-Space A B f)
+          ( map-isometry-Pseudometric-Space B A g))
 ```

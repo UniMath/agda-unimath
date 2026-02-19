@@ -1,4 +1,4 @@
-# Cauchy pseudocompletions of complete metric space
+# Cauchy pseudocompletions of complete metric spaces
 
 ```agda
 module metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces where
@@ -12,10 +12,12 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -25,6 +27,7 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
@@ -32,8 +35,11 @@ open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.universal-property-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 ```
 
 </details>
@@ -46,235 +52,142 @@ Any [complete](metric-spaces.complete-metric-spaces.md) is a
 
 ## Properties
 
-### Any complete metric space is a short retract of its Cauchy pseudocompletion
+### Any complete metric space is a retract of its Cauchy pseudocompletion
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (is-complete-M : is-complete-Metric-Space M)
+  {l1 l2 : Level} (A : Complete-Metric-Space l1 l2)
   where
 
-  map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
+  retraction-isometry-unit-cauchy-pseudocompletion-Complete-Metric-Space :
+    retraction-isometry-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( isometry-unit-cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+  retraction-isometry-unit-cauchy-pseudocompletion-Complete-Metric-Space =
+    exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( metric-space-Complete-Metric-Space A)
+      ( id-precomplete-isometry-Complete-Metric-Space A)
+
+  retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space :
+    retraction-short-map-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( short-map-unit-cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+  retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space =
+    exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( metric-space-Complete-Metric-Space A)
+      ( id-precomplete-short-map-Complete-Metric-Space A)
+
+  isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+  isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    pr1 retraction-isometry-unit-cauchy-pseudocompletion-Complete-Metric-Space
+
+  short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+  short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    short-map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space)
+
+  map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( pseudometric-Metric-Space M)
-  map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
-    limit-cauchy-approximation-Complete-Metric-Space
-      ( M , is-complete-M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+  map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space)
 
-  is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    (u : cauchy-approximation-Metric-Space M) →
+  is-limit-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    ( u :
+      cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A)) →
     is-limit-cauchy-approximation-Metric-Space
-      ( M)
+      ( metric-space-Complete-Metric-Space A)
       ( u)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
-  is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
-    is-limit-limit-cauchy-approximation-Complete-Metric-Space
-      ( M , is-complete-M)
+      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space u)
+  is-limit-map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    is-limit-limit-cauchy-approximation-Complete-Metric-Space A
 
-  sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    (u : cauchy-approximation-Metric-Space M) →
+  sim-const-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    ( u :
+      cauchy-approximation-Metric-Space
+        ( metric-space-Complete-Metric-Space A)) →
     sim-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
       ( u)
       ( const-cauchy-approximation-Metric-Space
-        ( M)
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u))
-  sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u =
+        ( metric-space-Complete-Metric-Space A)
+        ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space u))
+  sim-const-map-lim-cauchy-pseudocompletion-Complete-Metric-Space u =
     sim-const-is-limit-cauchy-approximation-Metric-Space
-      ( M)
+      ( metric-space-Complete-Metric-Space A)
       ( u)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
-      ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
-
-  is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    is-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( ( const-cauchy-approximation-Metric-Space M) ∘
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
-  is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-    d x y =
-      preserves-neighborhoods-sim-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        { x}
-        { const-cauchy-approximation-Metric-Space
-          ( M)
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)}
-        { y}
-        { const-cauchy-approximation-Metric-Space
-          ( M)
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)}
-        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( x))
-        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( y))
-        ( d)
-
-  is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    is-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( pseudometric-Metric-Space M)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space)
-  is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space d x y Nxy =
-    saturated-neighborhood-Metric-Space
-      ( M)
-      ( d)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)
-      ( lemma-saturated-neighborhood-map-lim)
-    where
-
-      lemma-saturated-neighborhood-map-lim :
-        (δ : ℚ⁺) →
-        neighborhood-Metric-Space
-          ( M)
-          ( d +ℚ⁺ δ)
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y)
-      lemma-saturated-neighborhood-map-lim δ =
-        tr
-          ( is-upper-bound-dist-Metric-Space
-            ( M)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space x)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space y))
-          ( ap (add-ℚ⁺' d) (eq-add-split-ℚ⁺ δ) ∙ commutative-add-ℚ⁺ δ d)
-          ( is-short-map-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-            ( d)
-            ( x)
-            ( y)
-            ( Nxy)
-            ( left-summand-split-ℚ⁺ δ)
-            ( right-summand-split-ℚ⁺ δ))
-
-  short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( pseudometric-Metric-Space M)
-  short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
-    ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space ,
-      is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space)
-
-  is-retraction-map-cauchy-pseudocompletion-is-complete-Metric-Space :
-    ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space ∘
-      map-unit-cauchy-pseudocompletion-Metric-Space M) ~
-    ( id)
-  is-retraction-map-cauchy-pseudocompletion-is-complete-Metric-Space =
-    is-retraction-limit-cauchy-approximation-Complete-Metric-Space
-      ( M , is-complete-M)
-
-  sim-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    (u : cauchy-approximation-Metric-Space M) →
-    sim-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( u)
-      ( map-unit-cauchy-pseudocompletion-Metric-Space
-        ( M)
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u))
-  sim-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u =
-    sim-const-is-limit-cauchy-approximation-Metric-Space
-      ( M)
-      ( u)
-      ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
-      ( is-limit-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space u)
+      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space u)
+      ( is-limit-map-lim-cauchy-pseudocompletion-Complete-Metric-Space u)
 ```
 
-### The isometry mapping a Cauchy approximation in a complete metric space to its limit
+### The unit map of Cauchy pseudocompletions of complete metric spaces has a unique retraction
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Metric-Space l1 l2)
-  (is-complete-M : is-complete-Metric-Space M)
+  {l1 l2 : Level}
+  (M : Complete-Metric-Space l1 l2)
   where
 
-  abstract
-    reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-      (δ : ℚ⁺) →
-      (u v : cauchy-approximation-Metric-Space M) →
-      neighborhood-Metric-Space
-        ( M)
-        ( δ)
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M)
-          ( u))
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M)
-          ( v)) →
-      neighborhood-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        ( δ)
-        ( u)
-        ( v)
-    reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-      δ x y Nδ =
-      reflects-neighborhoods-sim-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-          { x}
-          { const-cauchy-approximation-Metric-Space
-            ( M)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-              ( M)
-              ( is-complete-M)
-              ( x))}
-          { y}
-          { const-cauchy-approximation-Metric-Space
-            ( M)
-            ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-              ( M)
-              ( is-complete-M)
-              ( y))}
-        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M)
-          ( x))
-        ( sim-const-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M)
-          ( y))
-        ( δ)
-        ( preserves-neighborhoods-map-isometry-Pseudometric-Space
-          ( pseudometric-Metric-Space M)
-          ( cauchy-pseudocompletion-Metric-Space M)
-          ( isometry-unit-cauchy-pseudocompletion-Metric-Space M)
-          ( δ)
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-            ( M)
-            ( is-complete-M)
-            ( x))
-          ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-            ( M)
-            ( is-complete-M)
-            ( y))
-          ( Nδ))
+  is-contr-retraction-isometry-unit-pseudocompletion-Complete-Metric-Space :
+    is-contr
+      ( retraction-isometry-Pseudometric-Space
+        ( pseudometric-space-Complete-Metric-Space M)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space M))
+        ( isometry-unit-cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space M)))
+  is-contr-retraction-isometry-unit-pseudocompletion-Complete-Metric-Space =
+    is-proof-irrelevant-is-prop
+      ( is-prop-extension-isometry-cauchy-pseudocompletion-Pseudometric-Space
+        ( pseudometric-space-Complete-Metric-Space M)
+        ( metric-space-Complete-Metric-Space M)
+        ( id-isometry-Metric-Space
+          ( metric-space-Complete-Metric-Space M)))
+      ( retraction-isometry-unit-cauchy-pseudocompletion-Complete-Metric-Space
+        ( M))
 
-    is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-      is-isometry-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        ( pseudometric-Metric-Space M)
-        ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M))
-    is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space d x y =
-      ( ( is-short-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( M)
-          ( is-complete-M)
-          ( d)
-          ( x)
-          ( y)) ,
-        ( reflects-neighborhoods-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-          ( d)
-          ( x)
-          ( y)))
-
-  isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space :
-    isometry-Pseudometric-Space
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( pseudometric-Metric-Space M)
-  isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space =
-    ( ( map-lim-cauchy-pseudocompletion-is-complete-Metric-Space
-        ( M)
-        ( is-complete-M)) ,
-      ( is-isometry-map-lim-cauchy-pseudocompletion-is-complete-Metric-Space))
+  is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space :
+    is-contr
+      ( retraction-short-map-Pseudometric-Space
+        ( pseudometric-space-Complete-Metric-Space M)
+        ( cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space M))
+        ( short-map-unit-cauchy-pseudocompletion-Metric-Space
+          ( metric-space-Complete-Metric-Space M)))
+  is-contr-retraction-short-map-unit-pseudocompletion-Complete-Metric-Space =
+    is-proof-irrelevant-is-prop
+      ( is-prop-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( pseudometric-space-Complete-Metric-Space M)
+        ( metric-space-Complete-Metric-Space M)
+        ( id-short-map-Metric-Space
+          ( metric-space-Complete-Metric-Space M)))
+      ( retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space
+        ( M))
 ```
