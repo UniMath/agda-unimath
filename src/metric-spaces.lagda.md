@@ -181,6 +181,7 @@ open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric
 open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.universal-property-isometries-cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
