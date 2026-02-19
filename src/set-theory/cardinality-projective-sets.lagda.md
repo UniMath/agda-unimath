@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
+open import foundation.distributivity-of-set-truncation-over-projective-products
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -23,7 +24,6 @@ open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.postcomposition-functions
-open import foundation.distributivity-of-set-truncation-over-projective-products
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.propositions
