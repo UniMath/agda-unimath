@@ -42,7 +42,7 @@ abstract
             ( map-equiv e ∘ unit-trunc-Set) ~
             ( map-Π (λ x → unit-trunc-Set))))
   distributive-trunc-Π-Fin-Set k A =
-    distributive-trunc-Π-is-projective-Level'
+    distributive-trunc-Π-is-projective-Level
       ( Fin k)
       ( A)
       ( λ P h → finite-choice-Fin k {Y = P} h)
@@ -86,7 +86,7 @@ module _
               ( map-equiv e ∘ unit-trunc-Set) ~
               ( map-Π (λ x → unit-trunc-Set))))
     distributive-trunc-Π-count-Set c =
-      distributive-trunc-Π-is-projective-Level'
+      distributive-trunc-Π-is-projective-Level
         ( A)
         ( B)
         ( λ P h → finite-choice-count {X = A} {Y = P} c h)
@@ -139,7 +139,7 @@ module _
               ( map-equiv e ∘ unit-trunc-Set) ~
               ( map-Π (λ x → unit-trunc-Set))))
     distributive-trunc-Π-is-finite-Set =
-      distributive-trunc-Π-is-projective-Level'
+      distributive-trunc-Π-is-projective-Level
         ( A)
         ( B)
         ( λ P h → finite-choice {X = A} {Y = P} H h)
