@@ -7,13 +7,11 @@ module foundation.nonsurjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.complements-images
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
-open import foundation.complements-images
-open import foundation.coproduct-types
-open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
@@ -43,7 +41,6 @@ open import foundation-core.propositions
 open import logic.de-morgan-maps
 open import logic.propositionally-decidable-maps
 open import logic.propositionally-decidable-types
-open import logic.propositionally-decidable-maps
 ```
 
 </details>
@@ -312,8 +309,11 @@ module _
     h Hf H =
     rec-coproduct
       ( id)
-      ( ex-falso ∘ H ∘ is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map Hf)
-      ( is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map h Hf)
+      ( ex-falso ∘
+        H ∘
+        is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map Hf)
+      ( is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map h
+        ( Hf))
 
   is-nonsurjective-is-not-surjective-has-decidable-∃-has-decidable-∃-Level :
     has-decidable-∃-Level (l1 ⊔ l2) B →

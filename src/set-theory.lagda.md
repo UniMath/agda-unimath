@@ -63,11 +63,6 @@ open import set-theory.decidable-cardinals public
 open import set-theory.dependent-products-cardinals public
 open import set-theory.dependent-sums-cardinals public
 open import set-theory.discrete-cardinals public
-open import set-theory.complemented-inequality-cardinals public
-open import set-theory.countable-sets public
-open import set-theory.cumulative-hierarchy public
-open import set-theory.dependent-products-cardinals public
-open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinals public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public

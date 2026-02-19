@@ -300,7 +300,9 @@ module _
                     ( function-Prop
                       ( le-complemented-Cardinal X Y)
                       ( le-indexed-prop-Cardinal X Y))))))))
-      ( λ X Y is-discrete-X merely-Σ-X is-projective-Y is-discrete-Y merely-Σ-Y →
+      ( λ X Y
+          is-discrete-X merely-Σ-X
+          is-projective-Y is-discrete-Y merely-Σ-Y →
         le-indexed-le-complemented-cardinality
           ( X)
           ( Y)

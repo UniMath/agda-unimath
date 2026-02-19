@@ -9,12 +9,12 @@ module set-theory.konigs-theorem where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.complements-images
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
-open import foundation.complements-images
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.embeddings
@@ -375,7 +375,9 @@ module _
                       ( function-Prop
                         ( (i : type-I) → merely-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
-                          ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I B))
+                          ( merely-decidable-∃-Cardinal
+                            ( l1 ⊔ l2)
+                            ( Π-Cardinal I B))
                           ( function-Prop
                             ( (i : type-I) → le-Cardinal (A i) (B i))
                             ( le-prop-Cardinal
@@ -735,7 +737,9 @@ module _
                       ( function-Prop
                         ( (i : type-I) → merely-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
-                          ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I B))
+                          ( merely-decidable-∃-Cardinal
+                            ( l1 ⊔ l2)
+                            ( Π-Cardinal I B))
                           ( function-Prop
                             ( (i : type-I) → le-Cardinal (A i) (B i))
                             ( le-prop-Cardinal
