@@ -26,11 +26,14 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.universal-property-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 ```
 
@@ -218,6 +221,18 @@ module _
   (M : Metric-Space l1 l2)
   where
 
+  iff-is-complete-extension-id-isometry-cauchy-pseuducompletion-Metric-Space :
+    extension-isometry-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-isometry-Metric-Space M) ↔
+    is-complete-Metric-Space M
+  iff-is-complete-extension-id-isometry-cauchy-pseuducompletion-Metric-Space =
+    iff-is-precomplete-extension-isometry-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-isometry-Metric-Space M)
+
   iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space :
     extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
@@ -231,13 +246,23 @@ module _
       ( id-short-map-Metric-Space M)
 ```
 
-### A metric space is complete if and only if the unit short map of Cauchy precompletions has a retraction
+### A metric space is complete if and only if the unit map of Cauchy precompletions has a retraction
 
 ```agda
 module _
   {l1 l2 : Level}
   (M : Metric-Space l1 l2)
   where
+
+  iff-is-complete-retraction-isometry-unit-cauchy-precompletion-Metric-Space :
+    retraction-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( isometry-unit-cauchy-pseudocompletion-Metric-Space M) ↔
+    is-complete-Metric-Space M
+  iff-is-complete-retraction-isometry-unit-cauchy-precompletion-Metric-Space =
+    iff-is-complete-extension-id-isometry-cauchy-pseuducompletion-Metric-Space
+      ( M)
 
   iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space :
     retraction-short-map-Pseudometric-Space
@@ -248,6 +273,31 @@ module _
   iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space =
     iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space
       ( M)
+```
+
+### The identity in a complete metric space is precomplete
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Complete-Metric-Space l1 l2)
+  where
+
+  id-precomplete-isometry-Complete-Metric-Space :
+    precomplete-isometry-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space M)
+      ( metric-space-Complete-Metric-Space M)
+  id-precomplete-isometry-Complete-Metric-Space =
+    ( id-isometry-Metric-Space (metric-space-Complete-Metric-Space M) ,
+      is-complete-metric-space-Complete-Metric-Space M)
+
+  id-precomplete-short-map-Complete-Metric-Space :
+    precomplete-short-map-Pseudometric-Space
+      ( pseudometric-space-Complete-Metric-Space M)
+      ( metric-space-Complete-Metric-Space M)
+  id-precomplete-short-map-Complete-Metric-Space =
+    ( id-short-map-Metric-Space (metric-space-Complete-Metric-Space M) ,
+      is-complete-metric-space-Complete-Metric-Space M)
 ```
 
 ## External links

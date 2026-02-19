@@ -52,7 +52,7 @@ Any [complete](metric-spaces.complete-metric-spaces.md) is a
 
 ## Properties
 
-### Any complete metric space is a short retract of its Cauchy pseudocompletion
+### Any complete metric space is a retract of its Cauchy pseudocompletion
 
 ```agda
 module _
@@ -70,8 +70,7 @@ module _
     exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-space-Complete-Metric-Space A)
       ( metric-space-Complete-Metric-Space A)
-      ( id-isometry-Metric-Space (metric-space-Complete-Metric-Space A) ,
-        is-complete-metric-space-Complete-Metric-Space A)
+      ( id-precomplete-isometry-Complete-Metric-Space A)
 
   retraction-short-map-unit-cauchy-pseudocompletion-Complete-Metric-Space :
     retraction-short-map-Pseudometric-Space
@@ -84,8 +83,7 @@ module _
     exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-space-Complete-Metric-Space A)
       ( metric-space-Complete-Metric-Space A)
-      ( id-short-map-Metric-Space (metric-space-Complete-Metric-Space A) ,
-        is-complete-metric-space-Complete-Metric-Space A)
+      ( id-precomplete-short-map-Complete-Metric-Space A)
 
   isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     isometry-Pseudometric-Space
