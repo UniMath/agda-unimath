@@ -152,6 +152,8 @@ open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
+open import foundation.distributivity-of-set-truncation-over-projective-products public
+open import foundation.distributivity-of-truncation-over-truncation-projective-products public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-dense-equality public
