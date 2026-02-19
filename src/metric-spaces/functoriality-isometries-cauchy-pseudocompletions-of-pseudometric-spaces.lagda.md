@@ -148,3 +148,42 @@ module _
     ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f ,
       is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
 ```
+
+### The action on short maps of Cauchy pseudocompletions preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space A B)
+  (f~g : htpy-map-isometry-Pseudometric-Space A B f g)
+  where
+
+  htpy-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    htpy-map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( isometry-cauchy-pseudocompletion-Pseudometric-Space A B g)
+  htpy-map-isometry-cauchy-pseudocompletion-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
+### The action on short maps of Cauchy pseudocompletions is natural w.r.t. the unit map
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : isometry-Pseudometric-Space A B)
+  where
+
+  coh-square-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f ∘
+      map-unit-cauchy-pseudocompletion-Pseudometric-Space A) ~
+    ( map-unit-cauchy-pseudocompletion-Pseudometric-Space B ∘
+      map-isometry-Pseudometric-Space A B f)
+  coh-square-map-isometry-cauchy-pseudocompletion-Pseudometric-Space x =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
+```
