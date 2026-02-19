@@ -36,6 +36,16 @@ open import foundation.universe-levels
 
 ## Idea
 
+[Set truncation](foundation.set-truncations.md) distributes over dependent
+products on [projective](foundation.projective-types.md) types $X$. The
+distributive map
+
+$$
+  ║ (x : X) → A x ║₀ → ((x : X) → ║ A x ║₀)
+$$
+
+is an [equivalence](foundation-core.equivalences.md)
+
 ## Properties
 
 ### Distributivity of set truncation over projective types
@@ -134,9 +144,8 @@ module _
             ( λ x →
               ( compute-distributive-trunc-Π zero-𝕋 (λ y → pr1 (s y)) x) ∙
               ( pr2 (s x)))))
-      ( H
-        ( λ x → fiber (unit-trunc-Set {A = Y x}) (t x))
-        ( λ x → is-surjective-unit-trunc-Set (Y x) (t x)))
+      ( H ( λ x → fiber (unit-trunc-Set {A = Y x}) (t x))
+          ( λ x → is-surjective-unit-trunc-Set (Y x) (t x)))
 
   is-emb-map-distributive-trunc-Π-is-projective-Level' :
     is-projective-Level' l2 X →
@@ -197,12 +206,14 @@ module _
     is-set X →
     is-set-projective X →
     is-contr
-      ( Σ ( ║ ((x : X) → Y x) ║₀ ≃
-            ( (x : X) → ║ Y x ║₀))
-          ( λ e →
-            ( map-equiv e ∘ unit-trunc-Set) ~
-            ( map-Π (λ x → unit-trunc-Set))))
+      ( Σ ( ║ ((x : X) → Y x) ║₀ ≃ ((x : X) → ║ Y x ║₀))
+          ( λ e → map-equiv e ∘ unit-trunc-Set ~ map-Π (λ x → unit-trunc-Set)))
   distributive-trunc-Π-is-set-projective K H =
     distributive-trunc-Π-is-projective-Level' X Y
       ( is-projective-Level'-is-set-projective K H {l2})
 ```
+
+## See also
+
+- [Distributivity of truncation over truncation-projective products](foundation.distributivity-of-truncation-over-truncation-projective-products.md)
+- [Distributivity of set truncation over finite products](univalent-combinatorics.distributivity-of-set-truncation-over-finite-products.md)
