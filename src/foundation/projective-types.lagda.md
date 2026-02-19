@@ -55,12 +55,13 @@ an [embedding](foundation-core.embeddings.md), and it is an equivalence for
 every `X`, `A`, and `R` if and only if
 [the axiom of choice](foundation.axiom-of-choice.md) holds.
 
-The notion of set-projectiveness generalizes to
-{{#concept "`n`-projectiveness" Agda=is-trunc-projective}}, for every
-[natural number](elementary-number-theory.natural-numbers.md) `n`. A type `X` is
-said to be `k`-projective if the postcomposition function `(X → A) → (X → B)` is
-surjective for every `k-1`-[connected map](foundation.connected-maps.md)
-`f : A → B` into a `k`-[truncated type](foundation-core.truncated-types.md) `B`.
+A type is said to be {{#concept "projective" Agda=is-projective}} if there is a
+choice function
+
+$$ ((x : X) → ║P(x)║₋₁) → ║(x : X) → P(x)║₋₁$$
+
+for every type family $P$. This condition is stronger than set-projectivity,
+unless $X$ is a set.
 
 ## Definitions
 
@@ -77,63 +78,56 @@ is-set-projective : {l1 : Level} → UU l1 → UUω
 is-set-projective X = {l2 l3 : Level} → is-set-projective-Level l2 l3 X
 ```
 
-### Alternative definition of set-projectivity
-
-We also give the alternative definition of set-projectivity as having a choice
-function
-
-$$ ((x : X) → ║P(x)║₋₁) → ║(x : X) → P(x)║₋₁$$
-
-for every type family $P$.
+### Projective types
 
 ```agda
 module _
   {l1 : Level} (l2 : Level) (X : UU l1)
   where
 
-  is-projective-Level' : UU (l1 ⊔ lsuc l2)
-  is-projective-Level' =
+  is-projective-Level : UU (l1 ⊔ lsuc l2)
+  is-projective-Level =
     (P : X → UU l2) →
     ((x : X) → is-inhabited (P x)) →
     is-inhabited ((x : X) → (P x))
 
   abstract
-    is-prop-is-projective-Level' : is-prop is-projective-Level'
-    is-prop-is-projective-Level' =
+    is-prop-is-projective-Level : is-prop is-projective-Level
+    is-prop-is-projective-Level =
       is-prop-Π
         ( λ P →
           is-prop-function-type
             ( is-property-is-inhabited ((x : X) → P x)))
 
-  is-projective-prop-Level' : Prop (l1 ⊔ lsuc l2)
-  is-projective-prop-Level' =
-    ( is-projective-Level' , is-prop-is-projective-Level')
+  is-projective-prop-Level : Prop (l1 ⊔ lsuc l2)
+  is-projective-prop-Level =
+    ( is-projective-Level , is-prop-is-projective-Level)
 
-is-projective' : {l1 : Level} → UU l1 → UUω
-is-projective' X = {l2 : Level} → is-projective-Level' l2 X
+is-projective : {l1 : Level} → UU l1 → UUω
+is-projective X = {l2 : Level} → is-projective-Level l2 X
 ```
 
 ### The universe of set-projective sets
 
 ```agda
-Projective-Set' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Projective-Set' l1 l2 = Σ (Set l1) (is-projective-Level' l2 ∘ type-Set)
+Projective-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Projective-Set l1 l2 = Σ (Set l1) (is-projective-Level l2 ∘ type-Set)
 
 module _
-  {l1 l2 : Level} (X : Projective-Set' l1 l2)
+  {l1 l2 : Level} (X : Projective-Set l1 l2)
   where
 
-  set-Projective-Set' : Set l1
-  set-Projective-Set' = pr1 X
+  set-Projective-Set : Set l1
+  set-Projective-Set = pr1 X
 
-  type-Projective-Set' : UU l1
-  type-Projective-Set' = type-Set set-Projective-Set'
+  type-Projective-Set : UU l1
+  type-Projective-Set = type-Set set-Projective-Set
 
-  is-set-type-Projective-Set' : is-set type-Projective-Set'
-  is-set-type-Projective-Set' = is-set-type-Set set-Projective-Set'
+  is-set-type-Projective-Set : is-set type-Projective-Set
+  is-set-type-Projective-Set = is-set-type-Set set-Projective-Set
 
-  is-projective-Projective-Set' : is-projective-Level' l2 type-Projective-Set'
-  is-projective-Projective-Set' = pr2 X
+  is-projective-Projective-Set : is-projective-Level l2 type-Projective-Set
+  is-projective-Projective-Set = pr2 X
 ```
 
 ## Properties
@@ -141,34 +135,34 @@ module _
 ### Lowering universe levels for projectivity
 
 ```agda
-is-projective-is-projective-lub-Level' :
+is-projective-is-projective-lub-Level :
   {l1 : Level} (l2 l3 : Level) {X : UU l1} →
-  is-projective-Level' (l2 ⊔ l3) X →
-  is-projective-Level' l2 X
-is-projective-is-projective-lub-Level' l2 l3 H P h =
+  is-projective-Level (l2 ⊔ l3) X →
+  is-projective-Level l2 X
+is-projective-is-projective-lub-Level l2 l3 H P h =
   map-is-inhabited
     ( λ f x → map-inv-raise (f x))
     ( H
       ( λ x → raise l3 (P x))
       ( λ x → map-is-inhabited map-raise (h x)))
 
-is-projective-is-projective-lsuc-Level' :
+is-projective-is-projective-lsuc-Level :
   {l1 : Level} (l2 : Level) {X : UU l1} →
-  is-projective-Level' (lsuc l2) X →
-  is-projective-Level' l2 X
-is-projective-is-projective-lsuc-Level' l2 =
-  is-projective-is-projective-lub-Level' l2 (lsuc l2)
+  is-projective-Level (lsuc l2) X →
+  is-projective-Level l2 X
+is-projective-is-projective-lsuc-Level l2 =
+  is-projective-is-projective-lub-Level l2 (lsuc l2)
 ```
 
-### Set-projective sets are projective in the alternative sense
+### Set-projective sets are projective
 
 ```agda
-is-projective-Level'-is-set-projective-Level :
+is-projective-is-set-projective-Level :
   {l1 l2 : Level} {X : UU l1} →
   is-set X →
   is-set-projective-Level (l1 ⊔ l2) l1 X →
-  is-projective-Level' l2 X
-is-projective-Level'-is-set-projective-Level {X = X} K H P h =
+  is-projective-Level l2 X
+is-projective-is-set-projective-Level {X = X} K H P h =
   map-is-inhabited
     ( map-inv-equiv (compute-fiber-postcomp-pr1 P id))
     ( H
@@ -178,16 +172,19 @@ is-projective-Level'-is-set-projective-Level {X = X} K H P h =
         λ x → map-is-inhabited (λ y → ((x , y) , refl)) (h x))
       ( id))
 
-is-projective-Level'-is-set-projective :
+is-projective-is-set-projective :
   {l1 : Level} {X : UU l1} →
   is-set X →
   is-set-projective X →
-  {l2 : Level} → is-projective-Level' l2 X
-is-projective-Level'-is-set-projective {l1} {X} K H {l2} =
-  is-projective-Level'-is-set-projective-Level K (H {l1 ⊔ l2} {l1})
+  is-projective X
+is-projective-is-set-projective {l1} {X} K H {l2} =
+  is-projective-is-set-projective-Level K (H {l1 ⊔ l2} {l1})
 ```
 
 ## See also
+
+- The notion of set-projectivity generalizes to
+  [`n`-projectivity](foundation.truncation-projective-types.md).
 
 - The natural map `(X → A)/~ → (X → A/R)` is studied in
   [`foundation.exponents-set-quotients`](foundation.exponents-set-quotients.md)

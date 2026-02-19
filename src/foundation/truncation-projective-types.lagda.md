@@ -10,13 +10,13 @@ module foundation.truncation-projective-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.iterated-successors-truncation-levels
-open import foundation.connected-maps
 open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.surjective-maps
@@ -34,7 +34,8 @@ open import foundation-core.sets
 ## Idea
 
 Given a [natural number](elementary-number-theory.natural-numbers.md) $k$, a
-type $X$ is $𝑘$-{{#concept "projective" Disambiguation="truncation, at a type"}}
+type $X$ is
+$𝑘$-{{#concept "projective" Disambiguation="truncation, at a type" Agda=is-trunc-projective}}
 if [postcomposition](foundation.postcomposition-functions.md) by any
 $(k-1)$-[connected map](foundation.connected-maps.md) into any
 $k$-[truncated](foundation.truncated-types.md) codomain is
@@ -135,21 +136,21 @@ is-add-trunc-projective-is-trunc-projective {l1} k n {X} K H A B f h =
 ### Projective types in the alternative sense are 𝑛-projective for all 𝑛
 
 ```agda
-is-trunc-projective-is-projective-Level' :
+is-trunc-projective-is-projective-Level :
   {l1 : Level} (l2 l3 : Level) (n : ℕ) {X : UU l1} →
-  is-projective-Level' (l2 ⊔ l3) X →
+  is-projective-Level (l2 ⊔ l3) X →
   is-trunc-projective-Level l2 l3 n X
-is-trunc-projective-is-projective-Level' l2 l3 n {X} H A B f h =
+is-trunc-projective-is-projective-Level l2 l3 n {X} H A B f h =
   map-is-inhabited
     ( map-equiv (compute-Π-fiber-postcomp X (map-connected-map f) h))
     ( H ( λ x → fiber (map-connected-map f) (h x))
         ( λ x →
           is-inhabited-is-connected (is-connected-map-connected-map f (h x))))
 
-is-trunc-projective-is-projective' :
+is-trunc-projective-is-projective :
   {l1 : Level} (n : ℕ) {X : UU l1} →
-  is-projective' X →
+  is-projective X →
   is-trunc-projective n X
-is-trunc-projective-is-projective' n H {l2} {l3} =
-  is-trunc-projective-is-projective-Level' l2 l3 n (H {l2 ⊔ l3})
+is-trunc-projective-is-projective n H {l2} {l3} =
+  is-trunc-projective-is-projective-Level l2 l3 n (H {l2 ⊔ l3})
 ```
