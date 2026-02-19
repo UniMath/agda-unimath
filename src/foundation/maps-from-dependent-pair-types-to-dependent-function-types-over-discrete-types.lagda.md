@@ -10,6 +10,7 @@ module foundation.maps-from-dependent-pair-types-to-dependent-function-types-ove
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.complements-images
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-maps

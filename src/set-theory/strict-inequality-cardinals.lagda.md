@@ -145,7 +145,7 @@ module _
   where
 
   geq-is-surjective-cardinality :
-    is-projective-Level' (l1 ⊔ l2) (type-Set Y) →
+    is-projective-Level (l1 ⊔ l2) (type-Set Y) →
     (f : type-Set X → type-Set Y) →
     is-surjective f →
     leq-cardinality Y X
@@ -306,7 +306,7 @@ module _
   (X : Set l1) (Y : Set l2)
   (decidable-∃-X :
     type-trunc-Prop (has-decidable-∃-Level l2 (type-Set X)))
-  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (is-projective-Y : is-projective-Level (l1 ⊔ l2) (type-Set Y))
   (decidable-equality-Y : has-decidable-equality (type-Set Y))
   (decidable-∃-Y :
     type-trunc-Prop (has-decidable-∃-Level (l1 ⊔ l2) (type-Set Y)))
@@ -339,7 +339,7 @@ module _
   {l1 l2 : Level}
   (lem : level-LEM (l1 ⊔ l2))
   (X : Set l1) (Y : Set l2)
-  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (is-projective-Y : is-projective-Level (l1 ⊔ l2) (type-Set Y))
   where
 
   private
@@ -376,7 +376,7 @@ module _
   (X : Set l1) (Y : Set l2)
   (decidable-∃-X :
     type-trunc-Prop (has-decidable-∃-Level l2 (type-Set X)))
-  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (is-projective-Y : is-projective-Level (l1 ⊔ l2) (type-Set Y))
   (decidable-equality-Y : has-decidable-equality (type-Set Y))
   (decidable-∃-Y :
     type-trunc-Prop (has-decidable-∃-Level (l1 ⊔ l2) (type-Set Y)))
@@ -397,7 +397,7 @@ module _
   (decidable-equality-X : has-decidable-equality (type-Set X))
   (decidable-∃-X :
     type-trunc-Prop (has-decidable-∃-Level l2 (type-Set X)))
-  (is-projective-Y : is-projective-Level' (l1 ⊔ l2) (type-Set Y))
+  (is-projective-Y : is-projective-Level (l1 ⊔ l2) (type-Set Y))
   (decidable-equality-Y : has-decidable-equality (type-Set Y))
   (decidable-∃-Y :
     type-trunc-Prop (has-decidable-∃-Level (l1 ⊔ l2) (type-Set Y)))

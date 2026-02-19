@@ -169,8 +169,9 @@ cardinals, under additional assumptions on the indexing set and cardinals.
 ```agda
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (let type-I = type-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
   where
 
   le-indexed-Σ-Π-le-family-Cardinal :
@@ -180,7 +181,7 @@ module _
     ((i : type-I) → is-discrete-Cardinal (B i)) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
-    le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-le-family-Cardinal
     A B merely-Σ-A is-projective-B is-discrete-B merely-Σ-B H =
     le-indexed-Σ-Π-Cardinal I A B
@@ -200,8 +201,9 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (let type-I = type-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
   where
 
   le-indexed-Σ-Π-le-complemented-family-Cardinal :
@@ -212,7 +214,7 @@ module _
     ((i : type-I) → is-discrete-Cardinal (B i)) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-complemented-Cardinal (A i) (B i)) →
-    le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-le-complemented-family-Cardinal
     A B is-discrete-A merely-Σ-A is-projective-B is-discrete-B merely-Σ-B H =
     le-indexed-Σ-Π-Cardinal I A B
@@ -233,16 +235,17 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let set-I = set-Projective-Set I)
   where
 
   leq-cardinality-Σ-Π-le-family :
     (A B : type-I → Set l2) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (A i)) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
@@ -274,7 +277,8 @@ module _
       build-emb e =
         map-trunc-Prop
           ( emb-Σ-Π-nonim-Set (type-I , dI) A B e)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → nonim (pr1 (e i)))
             ( λ i → nonsurjective-emb e i))
     in
@@ -285,17 +289,19 @@ module _
         ( type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
         ( map-trunc-Prop
           ( build-emb)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → type-Set (A i) ↪ type-Set (B i))
             ( λ i → inv-unit-leq-cardinality (A i) (B i) (pr1 (H i))))))
 
 module _
   {l1 l2 : Level}
   (wlpo : level-WLPO (l1 ⊔ l2))
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let set-I = set-Projective-Set I)
   where
 
   le-cardinality-Σ-Π :
@@ -303,7 +309,7 @@ module _
     is-discrete-cardinality (Σ-Set set-I A) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (A i)) →
     merely-decidable-∃-cardinality (l1 ⊔ l2) (Σ-Set set-I A) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
     is-discrete-cardinality (Π-Set set-I B) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (B i)) →
@@ -331,7 +337,8 @@ module _
         ( H))
       ( le-indexed-cardinality-Σ-Π
         ( set-I)
-        ( is-projective-Cardinality-Projective-Set I)
+        ( is-projective-is-projective-lsuc-Level l2
+          ( is-projective-Projective-Set I))
         ( A)
         ( B)
         ( λ i →
@@ -346,66 +353,66 @@ module _
 
   le-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
-    is-discrete-Cardinal (Σ-Cardinal I A) →
+    is-discrete-Cardinal (Σ-Cardinal I' A) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (A i)) →
-    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I A) →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
-    is-discrete-Cardinal (Π-Cardinal I B) →
+    is-discrete-Cardinal (Π-Cardinal I' B) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
-    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I B) →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
-    le-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-Σ-Π-Cardinal =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
-            ( is-discrete-Cardinal (Σ-Cardinal I A))
+            ( is-discrete-Cardinal (Σ-Cardinal I' A))
             ( function-Prop
               ( (i : type-I) → merely-decidable-∃-Cardinal l2 (A i))
               ( function-Prop
-                ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I A))
+                ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
                 ( function-Prop
                   ( (i : type-I) → is-projective-Cardinal l2 (B i))
                   ( function-Prop
                     ( (i : type-I) → is-discrete-Cardinal (B i))
                     ( function-Prop
-                      ( is-discrete-Cardinal (Π-Cardinal I B))
+                      ( is-discrete-Cardinal (Π-Cardinal I' B))
                       ( function-Prop
                         ( (i : type-I) → merely-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
                           ( merely-decidable-∃-Cardinal
                             ( l1 ⊔ l2)
-                            ( Π-Cardinal I B))
+                            ( Π-Cardinal I' B))
                           ( function-Prop
                             ( (i : type-I) → le-Cardinal (A i) (B i))
                             ( le-prop-Cardinal
-                              ( Σ-Cardinal I A)
-                              ( Π-Cardinal I B))))))))))))
+                              ( Σ-Cardinal I' A)
+                              ( Π-Cardinal I' B))))))))))))
       ( λ A B is-discrete-Σ merely-Σ-A merely-Σ-Σ is-projective-B is-discrete-B
       is-discrete-Π merely-Σ-B merely-Σ-Π H →
         binary-tr
           ( le-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-cardinality-Σ-Π A B
             ( tr is-discrete-Cardinal
-              ( compute-Σ-Cardinal I A)
+              ( compute-Σ-Cardinal I' A)
               ( is-discrete-Σ))
             ( merely-Σ-A)
             ( tr (merely-decidable-∃-Cardinal (l1 ⊔ l2))
-              ( compute-Σ-Cardinal I A)
+              ( compute-Σ-Cardinal I' A)
               ( merely-Σ-Σ))
             ( λ i →
               inv-unit-is-projective-cardinality (B i) (is-projective-B i))
             ( is-discrete-B)
             ( tr is-discrete-Cardinal
-              ( compute-Π-Cardinal I B)
+              ( compute-Π-Cardinal I' B)
               ( is-discrete-Π))
             ( merely-Σ-B)
             ( tr (merely-decidable-∃-Cardinal (l1 ⊔ l2))
-              ( compute-Π-Cardinal I B)
+              ( compute-Π-Cardinal I' B)
               ( merely-Σ-Π))
             ( H)))
 ```
@@ -416,10 +423,11 @@ module _
 module _
   {l1 l2 : Level}
   (lem : level-LEM (l1 ⊔ l2))
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let set-I = set-Projective-Set I)
   where
 
   private
@@ -431,7 +439,7 @@ module _
 
   leq-cardinality-Σ-Π-le-family-LEM :
     (A B : type-I → Set l2) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
     leq-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   leq-cardinality-Σ-Π-le-family-LEM A B is-projective-B H =
@@ -459,7 +467,8 @@ module _
       build-emb e =
         map-trunc-Prop
           ( emb-Σ-Π-nonim-Set (type-I , dI) A B e)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → nonim (pr1 (e i)))
             ( λ i → nonsurjective-emb e i))
     in
@@ -470,13 +479,14 @@ module _
         ( type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
         ( map-trunc-Prop
           ( build-emb)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → type-Set (A i) ↪ type-Set (B i))
             ( λ i → inv-unit-leq-cardinality (A i) (B i) (pr1 (H i))))))
 
   le-cardinality-Σ-Π-LEM :
     (A B : type-I → Set l2) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
     le-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   le-cardinality-Σ-Π-LEM A B is-projective-B H =
@@ -487,7 +497,8 @@ module _
       ( leq-cardinality-Σ-Π-le-family-LEM A B is-projective-B H)
       ( le-indexed-cardinality-Σ-Π
         ( set-I)
-        ( is-projective-Cardinality-Projective-Set I)
+        ( is-projective-is-projective-lsuc-Level l2
+          ( is-projective-Projective-Set I))
         ( A)
         ( B)
         ( λ i →
@@ -502,9 +513,9 @@ module _
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
-    le-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-Σ-Π-Cardinal-LEM =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
@@ -512,13 +523,13 @@ module _
             ( function-Prop
               ( (i : type-I) → le-Cardinal (A i) (B i))
               ( le-prop-Cardinal
-                ( Σ-Cardinal I A)
-                ( Π-Cardinal I B)))))
+                ( Σ-Cardinal I' A)
+                ( Π-Cardinal I' B)))))
       ( λ A B is-projective-B H →
         binary-tr
           ( le-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-cardinality-Σ-Π-LEM A B
             ( λ i →
               inv-unit-is-projective-cardinality (B i) (is-projective-B i))
@@ -530,17 +541,18 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (decidable-Σ-I : has-decidable-Σ (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (decidable-Σ-I : has-decidable-Σ (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let set-I = set-Projective-Set I)
   where
 
   leq-complemented-cardinality-Σ-Π :
     (A B : type-I → Set l2) →
     ((i : type-I) → is-discrete-cardinality (A i)) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-complemented-cardinality (A i) (B i)) →
@@ -593,7 +605,8 @@ module _
       build-emb e =
         map-trunc-Prop
           ( dec-emb-Σ-Π e)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → nonim (map-decidable-emb (e i)))
             ( nonsurjective-emb e))
     in
@@ -604,7 +617,8 @@ module _
         ( type-Set (Σ-Set set-I A) ↪ᵈ type-Set (Π-Set set-I B))
         ( map-trunc-Prop
           ( build-emb)
-          ( is-projective-Cardinality-Projective-Set I
+          ( is-projective-is-projective-lsuc-Level l2
+            ( is-projective-Projective-Set I)
             ( λ i → type-Set (A i) ↪ᵈ type-Set (B i))
             ( λ i →
               inv-unit-leq-complemented-cardinality (A i) (B i) (pr1 (H i))))))
@@ -612,18 +626,19 @@ module _
 module _
   {l1 l2 : Level}
   (wlpo : level-WLPO (l1 ⊔ l2))
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (decidable-Σ-I : has-decidable-Σ (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (decidable-Σ-I : has-decidable-Σ (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let set-I = set-Projective-Set I)
   where
 
   le-complemented-cardinality-Σ-Π :
     (A B : type-I → Set l2) →
     ((i : type-I) → is-discrete-cardinality (A i)) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (A i)) →
-    ((i : type-I) → is-projective-Level' l2 (type-Set (B i))) →
+    ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
     ((i : type-I) → merely-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-complemented-cardinality (A i) (B i)) →
@@ -639,7 +654,8 @@ module _
           is-projective-B is-discrete-B merely-Σ-B H)
       ( le-indexed-cardinality-Σ-Π
         ( set-I)
-        ( is-projective-Cardinality-Projective-Set I)
+        ( is-projective-is-projective-lsuc-Level l2
+          ( is-projective-Projective-Set I))
         ( A)
         ( B)
         ( λ i →
@@ -661,9 +677,9 @@ module _
     ((i : type-I) → is-discrete-Cardinal (B i)) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-complemented-Cardinal (A i) (B i)) →
-    le-complemented-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-complemented-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-complemented-Σ-Π-Cardinal =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
@@ -679,14 +695,14 @@ module _
                     ( function-Prop
                       ( (i : type-I) → le-complemented-Cardinal (A i) (B i))
                       ( le-complemented-prop-Cardinal
-                        ( Σ-Cardinal I A)
-                        ( Π-Cardinal I B)))))))))
+                        ( Σ-Cardinal I' A)
+                        ( Π-Cardinal I' B)))))))))
       ( λ A B is-discrete-A merely-Σ-A
       is-projective-B is-discrete-B merely-Σ-B H →
         binary-tr
           ( le-complemented-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-complemented-cardinality-Σ-Π A B is-discrete-A merely-Σ-A
             ( λ i →
               inv-unit-is-projective-cardinality (B i) (is-projective-B i))
@@ -701,56 +717,59 @@ module _
 module _
   {l1 l2 : Level}
   (wlpo : WLPO)
-  (I : Cardinality-Projective-Set l1 l2)
-  (dI : has-decidable-equality (type-Cardinality-Projective-Set I))
-  (let type-I = type-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (dI : has-decidable-equality (type-Projective-Set I))
+  (let I' = cardinality-projective-set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
   where
 
   le-Σ-Π-Cardinal-WLPO :
     (A B : type-I → Cardinal l2) →
-    is-discrete-Cardinal (Σ-Cardinal I A) →
+    is-discrete-Cardinal (Σ-Cardinal I' A) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (A i)) →
-    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I A) →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
-    is-discrete-Cardinal (Π-Cardinal I B) →
+    is-discrete-Cardinal (Π-Cardinal I' B) →
     ((i : type-I) → merely-decidable-∃-Cardinal l2 (B i)) →
-    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I B) →
+    merely-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
-    le-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-Σ-Π-Cardinal-WLPO =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
-            ( is-discrete-Cardinal (Σ-Cardinal I A))
+            ( is-discrete-Cardinal (Σ-Cardinal I' A))
             ( function-Prop
               ( (i : type-I) → merely-decidable-∃-Cardinal l2 (A i))
               ( function-Prop
-                ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I A))
+                ( merely-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
                 ( function-Prop
                   ( (i : type-I) → is-projective-Cardinal l2 (B i))
                   ( function-Prop
                     ( (i : type-I) → is-discrete-Cardinal (B i))
                     ( function-Prop
-                      ( is-discrete-Cardinal (Π-Cardinal I B))
+                      ( is-discrete-Cardinal (Π-Cardinal I' B))
                       ( function-Prop
                         ( (i : type-I) → merely-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
                           ( merely-decidable-∃-Cardinal
                             ( l1 ⊔ l2)
-                            ( Π-Cardinal I B))
+                            ( Π-Cardinal I' B))
                           ( function-Prop
                             ( (i : type-I) → le-Cardinal (A i) (B i))
                             ( le-prop-Cardinal
-                              ( Σ-Cardinal I A)
-                              ( Π-Cardinal I B))))))))))))
-      ( λ A B is-discrete-Σ merely-Σ-A merely-Σ-Σ is-projective-B is-discrete-B
-      is-discrete-Π merely-Σ-B merely-Σ-Π H →
+                              ( Σ-Cardinal I' A)
+                              ( Π-Cardinal I' B))))))))))))
+      ( λ A B
+          is-discrete-Σ merely-Σ-A merely-Σ-Σ
+          is-projective-B is-discrete-B
+          is-discrete-Π merely-Σ-B merely-Σ-Π H →
         binary-tr
           ( le-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-cardinality-Σ-Π
             ( wlpo)
             ( I)
@@ -758,21 +777,24 @@ module _
             ( A)
             ( B)
             ( tr is-discrete-Cardinal
-              ( compute-Σ-Cardinal I A)
+              ( compute-Σ-Cardinal I' A)
               ( is-discrete-Σ))
             ( merely-Σ-A)
-            ( tr (merely-decidable-∃-Cardinal (l1 ⊔ l2))
-              ( compute-Σ-Cardinal I A)
+            ( tr
+              ( merely-decidable-∃-Cardinal (l1 ⊔ l2))
+              ( compute-Σ-Cardinal I' A)
               ( merely-Σ-Σ))
             ( λ i →
               inv-unit-is-projective-cardinality (B i) (is-projective-B i))
             ( is-discrete-B)
-            ( tr is-discrete-Cardinal
-              ( compute-Π-Cardinal I B)
+            ( tr
+              ( is-discrete-Cardinal)
+              ( compute-Π-Cardinal I' B)
               ( is-discrete-Π))
             ( merely-Σ-B)
-            ( tr (merely-decidable-∃-Cardinal (l1 ⊔ l2))
-              ( compute-Π-Cardinal I B)
+            ( tr
+              ( merely-decidable-∃-Cardinal (l1 ⊔ l2))
+              ( compute-Π-Cardinal I' B)
               ( merely-Σ-Π))
             ( H)))
 ```
