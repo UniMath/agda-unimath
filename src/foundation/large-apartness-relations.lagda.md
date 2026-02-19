@@ -7,6 +7,10 @@ module foundation.large-apartness-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.apartness-relations
+open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.negated-equality
@@ -27,7 +31,7 @@ is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
-- **Cotransitive:** For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- **Cotransitive:** For any `a b c : A` we have `R a c → R a b ∨ R b c`.
 
 This is analogous to the notion of small
 [apartness relations](foundation.apartness-relations.md).
@@ -98,4 +102,21 @@ module _
     {l : Level} {a b : A l} → apart-Large-Apartness-Relation R a b → a ≠ b
   nonequal-apart-Large-Apartness-Relation {a = a} p refl =
     antirefl-Large-Apartness-Relation R a p
+```
+
+### Small apartness relations from large apartness relations
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {A : (l : Level) → UU (α l)} (R : Large-Apartness-Relation β A)
+  where
+
+  apartness-relation-Large-Apartness-Relation :
+    (l : Level) → Apartness-Relation (β l l) (A l)
+  apartness-relation-Large-Apartness-Relation l =
+    ( apart-prop-Large-Apartness-Relation R ,
+      antirefl-Large-Apartness-Relation R ,
+      symmetric-Large-Apartness-Relation R ,
+      cotransitive-Large-Apartness-Relation R)
 ```

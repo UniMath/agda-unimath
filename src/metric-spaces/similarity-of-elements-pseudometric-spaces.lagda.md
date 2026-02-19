@@ -22,9 +22,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
@@ -172,13 +173,13 @@ module _
   where
 
   abstract
-    preserves-neighborhood-left-sim-Pseudometric-Space :
+    preserves-neighborhoods-left-sim-Pseudometric-Space :
       { x y : type-Pseudometric-Space A} →
       ( sim-Pseudometric-Space A x y) →
       ( d : ℚ⁺) (z : type-Pseudometric-Space A) →
       neighborhood-Pseudometric-Space A d x z →
       neighborhood-Pseudometric-Space A d y z
-    preserves-neighborhood-left-sim-Pseudometric-Space {x} {y} x≍y d z Nxz =
+    preserves-neighborhoods-left-sim-Pseudometric-Space {x} {y} x≍y d z Nxz =
       saturated-neighborhood-Pseudometric-Space
         ( A)
         ( d)
@@ -203,46 +204,46 @@ module _
                 ( y)
                 ( x≍y δ))))
 
-    preserves-neighborhood-right-sim-Pseudometric-Space :
+    preserves-neighborhoods-right-sim-Pseudometric-Space :
       { x y : type-Pseudometric-Space A} →
       ( sim-Pseudometric-Space A x y) →
       ( d : ℚ⁺) (z : type-Pseudometric-Space A) →
       neighborhood-Pseudometric-Space A d z x →
       neighborhood-Pseudometric-Space A d z y
-    preserves-neighborhood-right-sim-Pseudometric-Space {x} {y} x≍y d z Nzx =
+    preserves-neighborhoods-right-sim-Pseudometric-Space {x} {y} x≍y d z Nzx =
       symmetric-neighborhood-Pseudometric-Space A d y z
-        ( preserves-neighborhood-left-sim-Pseudometric-Space x≍y d z
+        ( preserves-neighborhoods-left-sim-Pseudometric-Space x≍y d z
           ( symmetric-neighborhood-Pseudometric-Space A d z x Nzx))
 
-    preserves-neighborhood-sim-Pseudometric-Space :
+    preserves-neighborhoods-sim-Pseudometric-Space :
       {x x' y y' : type-Pseudometric-Space A} →
       sim-Pseudometric-Space A x x' →
       sim-Pseudometric-Space A y y' →
       (d : ℚ⁺) →
       neighborhood-Pseudometric-Space A d x y →
       neighborhood-Pseudometric-Space A d x' y'
-    preserves-neighborhood-sim-Pseudometric-Space
+    preserves-neighborhoods-sim-Pseudometric-Space
       {x} {x'} {y} {y'} x~x' y~y' d Nxy =
-      preserves-neighborhood-left-sim-Pseudometric-Space
+      preserves-neighborhoods-left-sim-Pseudometric-Space
         ( x~x')
         ( d)
         ( y')
-        ( preserves-neighborhood-right-sim-Pseudometric-Space
+        ( preserves-neighborhoods-right-sim-Pseudometric-Space
           ( y~y')
           ( d)
           ( x)
           ( Nxy))
 
-    reflects-neighborhood-sim-Pseudometric-Space :
+    reflects-neighborhoods-sim-Pseudometric-Space :
       {x x' y y' : type-Pseudometric-Space A} →
       sim-Pseudometric-Space A x x' →
       sim-Pseudometric-Space A y y' →
       (d : ℚ⁺) →
       neighborhood-Pseudometric-Space A d x' y' →
       neighborhood-Pseudometric-Space A d x y
-    reflects-neighborhood-sim-Pseudometric-Space
+    reflects-neighborhoods-sim-Pseudometric-Space
       {x} {x'} {y} {y'} x~x' y~y' =
-      preserves-neighborhood-sim-Pseudometric-Space
+      preserves-neighborhoods-sim-Pseudometric-Space
         ( inv-sim-Pseudometric-Space A x~x')
         ( inv-sim-Pseudometric-Space A y~y')
 
@@ -254,8 +255,8 @@ module _
         neighborhood-Pseudometric-Space A d y z)
     same-neighbors-iff-sim-Pseudometric-Space =
       ( λ x≍y d z →
-        ( preserves-neighborhood-left-sim-Pseudometric-Space x≍y d z) ,
-        ( preserves-neighborhood-left-sim-Pseudometric-Space
+        ( preserves-neighborhoods-left-sim-Pseudometric-Space x≍y d z) ,
+        ( preserves-neighborhoods-left-sim-Pseudometric-Space
           ( inv-sim-Pseudometric-Space A x≍y)
           ( d)
           ( z))) ,
@@ -313,16 +314,47 @@ module _
   { l1 l2 l1' l2' : Level}
   ( A : Pseudometric-Space l1 l2)
   ( B : Pseudometric-Space l1' l2')
-  ( f : short-function-Pseudometric-Space A B)
-  where
+  ( f : short-map-Pseudometric-Space A B)
+  where abstract
 
-  abstract
-    preserves-sim-map-short-function-Pseudometric-Space :
-      ( x y : type-Pseudometric-Space A) →
-      ( sim-Pseudometric-Space A x y) →
-      ( sim-Pseudometric-Space B
-        ( map-short-function-Pseudometric-Space A B f x)
-        ( map-short-function-Pseudometric-Space A B f y))
-    preserves-sim-map-short-function-Pseudometric-Space x y x~y d =
-      is-short-map-short-function-Pseudometric-Space A B f d x y (x~y d)
+  preserves-sim-map-short-map-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) →
+    ( sim-Pseudometric-Space B
+      ( map-short-map-Pseudometric-Space A B f x)
+      ( map-short-map-Pseudometric-Space A B f y))
+  preserves-sim-map-short-map-Pseudometric-Space x y x~y d =
+    is-short-map-short-map-Pseudometric-Space A B f d x y (x~y d)
+```
+
+### Isometries between pseudometric spaces preserve and reflect similarity
+
+```agda
+module _
+  { l1 l2 l1' l2' : Level}
+  ( A : Pseudometric-Space l1 l2)
+  ( B : Pseudometric-Space l1' l2')
+  ( f : isometry-Pseudometric-Space A B)
+  where abstract
+
+  preserves-sim-map-isometry-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) →
+    ( sim-Pseudometric-Space B
+      ( map-isometry-Pseudometric-Space A B f x)
+      ( map-isometry-Pseudometric-Space A B f y))
+  preserves-sim-map-isometry-Pseudometric-Space =
+    preserves-sim-map-short-map-Pseudometric-Space
+      ( A)
+      ( B)
+      ( short-map-isometry-Pseudometric-Space A B f)
+
+  reflects-sim-map-isometry-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space B
+      ( map-isometry-Pseudometric-Space A B f x)
+      ( map-isometry-Pseudometric-Space A B f y)) →
+    ( sim-Pseudometric-Space A x y)
+  reflects-sim-map-isometry-Pseudometric-Space x y fx~fy d =
+    reflects-neighborhoods-map-isometry-Pseudometric-Space A B f d x y (fx~fy d)
 ```

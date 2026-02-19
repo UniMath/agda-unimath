@@ -7,13 +7,16 @@ module ring-theory.large-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.large-abelian-groups
 open import group-theory.large-monoids
 open import group-theory.large-semigroups
@@ -53,6 +56,9 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
     {l1 l2 : Level} →
     type-Large-Ring l1 → type-Large-Ring l2 → type-Large-Ring (l1 ⊔ l2)
   add-Large-Ring = add-Large-Ab large-ab-Large-Ring
+
+  neg-Large-Ring : {l : Level} → type-Large-Ring l → type-Large-Ring l
+  neg-Large-Ring = neg-Large-Ab large-ab-Large-Ring
 
   zero-Large-Ring : type-Large-Ring lzero
   zero-Large-Ring = zero-Large-Ab large-ab-Large-Ring
@@ -268,6 +274,18 @@ module _
   right-unit-law-add-Large-Ring =
     right-unit-law-add-Large-Ab (large-ab-Large-Ring R)
 
+  left-inverse-law-add-Large-Ring :
+    {l : Level} (x : type-Large-Ring R l) →
+    add-Large-Ring R (neg-Large-Ring R x) x ＝ raise-zero-Large-Ring R l
+  left-inverse-law-add-Large-Ring =
+    left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+
+  right-inverse-law-add-Large-Ring :
+    {l : Level} (x : type-Large-Ring R l) →
+    add-Large-Ring R x (neg-Large-Ring R x) ＝ raise-zero-Large-Ring R l
+  right-inverse-law-add-Large-Ring =
+    right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+
   commutative-add-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R x y ＝ add-Large-Ring R y x
@@ -311,4 +329,99 @@ module _
           ( _)
           ( _)) ,
       raise-raise-Large-Ring R _)
+```
+
+### Zero laws of multiplication
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    left-raise-zero-law-mul-Large-Ring :
+      (l1 : Level) {l2 : Level} (x : type-Large-Ring R l2) →
+      mul-Large-Ring R (raise-zero-Large-Ring R l1) x ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    left-raise-zero-law-mul-Large-Ring l1 {l2} x =
+      is-zero-is-idempotent-Ab
+        ( ab-Large-Ab (large-ab-Large-Ring R) (l1 ⊔ l2))
+        ( equational-reasoning
+          add-Large-Ring
+            ( R)
+            ( mul-Large-Ring R (raise-zero-Large-Ring R l1) x)
+            ( mul-Large-Ring R (raise-zero-Large-Ring R l1) x)
+          ＝
+            mul-Large-Ring R
+              ( add-Large-Ring R
+                ( raise-zero-Large-Ring R l1)
+                ( raise-zero-Large-Ring R l1))
+              ( x)
+            by inv (right-distributive-mul-add-Large-Ring R _ _ _)
+          ＝ mul-Large-Ring R (raise-zero-Large-Ring R l1) x
+            by
+              ap-binary
+                ( mul-Large-Ring R)
+                ( right-unit-law-add-Ab
+                  ( ab-Large-Ab (large-ab-Large-Ring R) l1)
+                  ( raise-zero-Large-Ring R l1))
+                ( refl))
+
+    left-zero-law-mul-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      sim-Large-Ring R
+        ( mul-Large-Ring R (zero-Large-Ring R) x)
+        ( zero-Large-Ring R)
+    left-zero-law-mul-Large-Ring {l} x =
+      inv-tr
+        ( λ y → sim-Large-Ring R y (zero-Large-Ring R))
+        ( ( ap-binary
+            ( mul-Large-Ring R)
+            ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))
+            ( refl)) ∙
+          ( left-raise-zero-law-mul-Large-Ring lzero x))
+        ( sim-raise-Large-Ring' R l (zero-Large-Ring R))
+
+    right-raise-zero-law-mul-Large-Ring :
+      (l1 : Level) {l2 : Level} (x : type-Large-Ring R l2) →
+      mul-Large-Ring R x (raise-zero-Large-Ring R l1) ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    right-raise-zero-law-mul-Large-Ring l1 {l2} x =
+      is-zero-is-idempotent-Ab
+        ( ab-Large-Ab (large-ab-Large-Ring R) (l1 ⊔ l2))
+        ( equational-reasoning
+          add-Large-Ring
+            ( R)
+            ( mul-Large-Ring R x (raise-zero-Large-Ring R l1))
+            ( mul-Large-Ring R x (raise-zero-Large-Ring R l1))
+          ＝
+            mul-Large-Ring R
+              ( x)
+              ( add-Large-Ring R
+                ( raise-zero-Large-Ring R l1)
+                ( raise-zero-Large-Ring R l1))
+            by inv (left-distributive-mul-add-Large-Ring R _ _ _)
+          ＝ mul-Large-Ring R x (raise-zero-Large-Ring R l1)
+            by
+              ap-binary
+                ( mul-Large-Ring R)
+                ( refl)
+                ( right-unit-law-add-Ab
+                  ( ab-Large-Ab (large-ab-Large-Ring R) l1)
+                  ( raise-zero-Large-Ring R l1)))
+
+    right-zero-law-mul-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      sim-Large-Ring R
+        ( mul-Large-Ring R x (zero-Large-Ring R))
+        ( zero-Large-Ring R)
+    right-zero-law-mul-Large-Ring {l} x =
+      inv-tr
+        ( λ y → sim-Large-Ring R y (zero-Large-Ring R))
+        ( ( ap-binary
+            ( mul-Large-Ring R)
+            ( refl)
+            ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))) ∙
+          ( right-raise-zero-law-mul-Large-Ring lzero x))
+        ( sim-raise-Large-Ring' R l (zero-Large-Ring R))
 ```

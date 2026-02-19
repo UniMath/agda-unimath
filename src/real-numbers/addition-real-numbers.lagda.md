@@ -9,10 +9,15 @@ module real-numbers.addition-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -41,6 +46,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -204,7 +210,7 @@ abstract opaque
   unfolding add-ℝ neg-ℝ
 
   right-inverse-law-add-ℝ :
-    {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+    {l : Level} → (x : ℝ l) → is-zero-ℝ (x +ℝ neg-ℝ x)
   right-inverse-law-add-ℝ x =
     sim-rational-ℝ
       ( x +ℝ neg-ℝ x ,
@@ -233,15 +239,15 @@ abstract opaque
                 x<p)))
 
 abstract
-  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-ℝ : {l : Level} (x : ℝ l) → is-zero-ℝ (neg-ℝ x +ℝ x)
   left-inverse-law-add-ℝ x =
     tr
-      ( λ y → sim-ℝ y zero-ℝ)
+      ( is-zero-ℝ)
       ( commutative-add-ℝ x (neg-ℝ x))
       ( right-inverse-law-add-ℝ x)
 
   eq-right-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → x +ℝ neg-ℝ x ＝ raise-zero-ℝ l
   eq-right-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
@@ -249,7 +255,7 @@ abstract
         ( right-inverse-law-add-ℝ x))
 
   eq-left-inverse-law-add-ℝ :
-    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-ℝ l zero-ℝ
+    {l : Level} (x : ℝ l) → neg-ℝ x +ℝ x ＝ raise-zero-ℝ l
   eq-left-inverse-law-add-ℝ x =
     eq-sim-ℝ
       ( transitive-sim-ℝ _ _ _
@@ -290,6 +296,25 @@ abstract
     transitive-sim-ℝ _ _ _
       ( preserves-sim-right-add-ℝ _ _ _ x~x')
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
+```
+
+### Raised unit laws for addition
+
+```agda
+abstract
+  right-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ raise-zero-ℝ l ＝ x
+  right-raise-zero-law-add-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (x +ℝ raise-zero-ℝ l))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
+
+  left-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → raise-zero-ℝ l +ℝ x ＝ x
+  left-raise-zero-law-add-ℝ x =
+    commutative-add-ℝ _ _ ∙ right-raise-zero-law-add-ℝ x
 ```
 
 ### Swapping laws for addition on real numbers
@@ -341,6 +366,39 @@ module _
         ( λ z → sim-ℝ z x)
         ( right-swap-add-ℝ x y (neg-ℝ y))
         ( cancel-right-add-diff-ℝ)
+
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  abstract
+    cancel-left-conjugation-ℝ : sim-ℝ ((x +ℝ y) +ℝ neg-ℝ x) y
+    cancel-left-conjugation-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( ap-add-ℝ (commutative-add-ℝ y x) refl)
+        ( cancel-right-add-diff-ℝ y x)
+
+    cancel-right-conjugation-ℝ : sim-ℝ (x +ℝ (y +ℝ neg-ℝ x)) y
+    cancel-right-conjugation-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( commutative-add-ℝ _ _)
+        ( cancel-right-diff-add-ℝ y x)
+
+    cancel-left-add-diff-ℝ : sim-ℝ (x +ℝ (neg-ℝ x +ℝ y)) y
+    cancel-left-add-diff-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( ap-add-ℝ refl (commutative-add-ℝ _ _))
+        ( cancel-right-conjugation-ℝ)
+
+    cancel-left-diff-add-ℝ : sim-ℝ (neg-ℝ x +ℝ (x +ℝ y)) y
+    cancel-left-diff-add-ℝ =
+      tr
+        ( λ z → sim-ℝ z y)
+        ( commutative-add-ℝ _ _)
+        ( cancel-left-conjugation-ℝ)
 ```
 
 ### Addition reflects similarity
@@ -385,6 +443,23 @@ module _
   pr2 iff-translate-left-sim-ℝ = reflects-sim-left-add-ℝ z x y
 ```
 
+### Raising the universe level of real numbers distributes over addition
+
+```agda
+abstract
+  distributive-raise-add-ℝ :
+    {l1 l2 : Level} (l3 : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l3 (x +ℝ y) ＝ raise-ℝ l3 x +ℝ raise-ℝ l3 y
+  distributive-raise-add-ℝ l3 x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 (x +ℝ y)
+        ~ℝ x +ℝ y
+          by sim-raise-ℝ' l3 (x +ℝ y)
+        ~ℝ raise-ℝ l3 x +ℝ raise-ℝ l3 y
+          by preserves-sim-add-ℝ (sim-raise-ℝ l3 x) (sim-raise-ℝ l3 y))
+```
+
 ### The inclusion of rational numbers preserves addition
 
 ```agda
@@ -425,6 +500,34 @@ abstract
       x +ℝ real-ℚ p +ℝ real-ℚ q
       ＝ x +ℝ (real-ℚ p +ℝ real-ℚ q) by associative-add-ℝ _ _ _
       ＝ x +ℝ real-ℚ (p +ℚ q) by ap (x +ℝ_) (add-real-ℚ p q)
+```
+
+### The inclusion of integers preserves addition
+
+```agda
+abstract
+  add-real-ℤ : (x y : ℤ) → real-ℤ x +ℝ real-ℤ y ＝ real-ℤ (x +ℤ y)
+  add-real-ℤ x y =
+    equational-reasoning
+      real-ℤ x +ℝ real-ℤ y
+      ＝ real-ℚ (rational-ℤ x +ℚ rational-ℤ y)
+        by add-real-ℚ _ _
+      ＝ real-ℤ (x +ℤ y)
+        by ap real-ℚ (add-rational-ℤ x y)
+```
+
+### The inclusion of natural numbers preserves addition
+
+```agda
+abstract
+  add-real-ℕ : (x y : ℕ) → real-ℕ x +ℝ real-ℕ y ＝ real-ℕ (x +ℕ y)
+  add-real-ℕ x y =
+    equational-reasoning
+      real-ℕ x +ℝ real-ℕ y
+      ＝ real-ℤ (int-ℕ x +ℤ int-ℕ y)
+        by add-real-ℤ _ _
+      ＝ real-ℕ (x +ℕ y)
+        by ap real-ℤ (add-int-ℕ x y)
 ```
 
 ### Interchange laws for addition on real numbers
@@ -513,6 +616,31 @@ abstract
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x
       ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
+```
+
+### `½ + ½ = 1`
+
+```agda
+abstract
+  twice-one-half-ℝ : one-half-ℝ +ℝ one-half-ℝ ＝ one-ℝ
+  twice-one-half-ℝ = add-real-ℚ _ _ ∙ ap real-ℚ twice-one-half-ℚ
+```
+
+### Adding raised real numbers
+
+```agda
+abstract
+  add-raise-ℝ :
+    {l1 l2 l3 l4 : Level} {x : ℝ l1} {y : ℝ l2} →
+    raise-ℝ l3 x +ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+  add-raise-ℝ {l3 = l3} {l4 = l4} {x = x} {y = y} =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l3 x +ℝ raise-ℝ l4 y
+        ~ℝ x +ℝ y
+          by preserves-sim-add-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)
+        ~ℝ raise-ℝ (l3 ⊔ l4) (x +ℝ y)
+          by sim-raise-ℝ (l3 ⊔ l4) (x +ℝ y))
 ```
 
 ## See also

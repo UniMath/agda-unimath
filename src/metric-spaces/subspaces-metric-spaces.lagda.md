@@ -16,17 +16,17 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -148,7 +148,7 @@ module _
   where
 
   inclusion-subspace-Metric-Space :
-    type-function-Metric-Space
+    map-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
   inclusion-subspace-Metric-Space = inclusion-subtype S
@@ -189,9 +189,9 @@ module _
   where
 
   short-inclusion-subspace-Metric-Space :
-    short-function-Metric-Space (subspace-Metric-Space A S) A
+    short-map-Metric-Space (subspace-Metric-Space A S) A
   short-inclusion-subspace-Metric-Space =
-    short-isometry-Metric-Space
+    short-map-isometry-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
       ( isometry-inclusion-subspace-Metric-Space A S)
@@ -207,10 +207,32 @@ module _
   where
 
   uniformly-continuous-inclusion-subspace-Metric-Space :
-    uniformly-continuous-function-Metric-Space (subspace-Metric-Space A S) A
+    uniformly-continuous-map-Metric-Space (subspace-Metric-Space A S) A
   uniformly-continuous-inclusion-subspace-Metric-Space =
-    uniformly-continuous-isometry-Metric-Space
+    uniformly-continuous-map-isometry-Metric-Space
       ( subspace-Metric-Space A S)
       ( A)
       ( isometry-inclusion-subspace-Metric-Space A S)
+```
+
+### If the image of a uniformly continuous function `f : X → Y` is a subset of `P`, then `f` is a uniformly continuous function to the subspace of `Y` induced by `P`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (P : subset-Metric-Space l5 Y)
+  where
+
+  uniformly-continuous-map-into-subspace-Metric-Space :
+    (f : uniformly-continuous-map-Metric-Space X Y) →
+    (Pf :
+      (x : type-Metric-Space X) →
+      is-in-subtype
+        ( P)
+        ( map-uniformly-continuous-map-Metric-Space X Y f x)) →
+    uniformly-continuous-map-Metric-Space X (subspace-Metric-Space Y P)
+  uniformly-continuous-map-into-subspace-Metric-Space (f , is-ucont-f) Pf =
+    ( ( λ x → (f x , Pf x)) , is-ucont-f)
 ```
