@@ -133,7 +133,7 @@ is-add-trunc-projective-is-trunc-projective {l1} k n {X} K H A B f h =
           ( id)))
 ```
 
-### Projective types in the alternative sense are 𝑛-projective for all 𝑛
+### Projective types are 𝑛-projective for all 𝑛
 
 ```agda
 is-trunc-projective-is-projective-Level :
