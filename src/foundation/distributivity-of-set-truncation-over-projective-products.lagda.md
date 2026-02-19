@@ -200,7 +200,7 @@ module _
     is-equiv (map-distributive-trunc-Π zero-𝕋 Y)
   is-equiv-map-distributive-trunc-Π-is-set-projective K H =
     is-equiv-map-distributive-trunc-Π-is-projective-Level X Y
-      ( is-projective-Level-is-set-projective K H {l2})
+      ( is-projective-is-set-projective K H {l2})
 
   distributive-trunc-Π-is-set-projective :
     is-set X →
@@ -210,7 +210,7 @@ module _
           ( λ e → map-equiv e ∘ unit-trunc-Set ~ map-Π (λ x → unit-trunc-Set)))
   distributive-trunc-Π-is-set-projective K H =
     distributive-trunc-Π-is-projective-Level X Y
-      ( is-projective-Level-is-set-projective K H {l2})
+      ( is-projective-is-set-projective K H {l2})
 ```
 
 ## See also
