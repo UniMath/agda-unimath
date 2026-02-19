@@ -160,7 +160,7 @@ is-projective-is-projective-lsuc-Level' l2 =
   is-projective-is-projective-lub-Level' l2 (lsuc l2)
 ```
 
-### Set-projectivity implies projectivity in the alternative sense
+### Set-projective sets are projective in the alternative sense
 
 ```agda
 is-projective-Level'-is-set-projective-Level :
