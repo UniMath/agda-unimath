@@ -80,6 +80,21 @@ has-decidable-∃-Level l2 X =
 
 has-decidable-∃ : {l1 : Level} → UU l1 → UUω
 has-decidable-∃ X = {l2 : Level} → has-decidable-∃-Level l2 X
+
+module _
+  {l1 : Level} (l2 : Level) (X : UU l1)
+  where
+
+  is-prop-has-decidable-∃-Level : is-prop (has-decidable-∃-Level l2 X)
+  is-prop-has-decidable-∃-Level =
+    is-prop-Π
+      ( λ P →
+        is-prop-is-decidable
+          ( is-prop-exists-structure X (family-decidable-family P)))
+
+  has-decidable-∃-level-Prop : Prop (l1 ⊔ lsuc l2)
+  pr1 has-decidable-∃-level-Prop = has-decidable-∃-Level l2 X
+  pr2 has-decidable-∃-level-Prop = is-prop-has-decidable-∃-Level
 ```
 
 ### The predicate of having small decidable existential quantification
