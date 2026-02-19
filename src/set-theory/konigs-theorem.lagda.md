@@ -14,6 +14,7 @@ open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
+open import foundation.complements-images
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.embeddings
@@ -66,8 +67,7 @@ states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
 and $B$ over $I$, $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
 
 In constructive mathematics we have to be more mindful of our statements than
-usual. Here $I$ is any
-[cardinality-projective set](set-theory.cardinality-projective-sets.md) and by
+usual. Here $I$ is any [projective set](foundation.projective-types.md), and by
 $Aᵢ < Bᵢ$ we mean that $Bᵢ$ is [inhabited](foundation.inhabited-types.md) and
 that for every map $f : Aᵢ → Bᵢ$ there
 [exists](foundation.existential-quantification.md) an element of $Bᵢ$ that $f$
@@ -82,17 +82,18 @@ then every function from $ΣᵢAᵢ$ to $ΠᵢBᵢ$ misses an element.
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {I : UU l1} (p : is-projective-Level' (l2 ⊔ l3) I)
+  {I : UU l1} (is-projective-I : is-projective-Level (l2 ⊔ l3) I)
   {A : I → UU l2} {B : I → UU l3}
   where
 
-  is-nonsurjective-map-Σ-Π-is-projective-base' :
+  is-nonsurjective-map-Σ-Π-is-projective-base :
     (H : (i : I) (f : A i → B i) → is-nonsurjective f)
     (g : Σ I A → ((i : I) → B i)) → is-nonsurjective g
-  is-nonsurjective-map-Σ-Π-is-projective-base' H g =
+  is-nonsurjective-map-Σ-Π-is-projective-base H g =
     map-trunc-Prop
       ( λ h → (pr1 ∘ h , (λ ((i , a) , r) → pr2 (h i) (a , htpy-eq r i))))
-      ( p (λ i → nonim (λ a → g (i , a) i)) (λ i → H i (λ a → g (i , a) i)))
+      ( is-projective-I
+        ( λ i → nonim (λ a → g (i , a) i)) (λ i → H i (λ a → g (i , a) i)))
 ```
 
 ## Theorem
@@ -101,7 +102,7 @@ module _
 module _
   {l1 l2 : Level}
   (I : Set l1)
-  (is-projective-I : is-projective-Level' l2 (type-Set I))
+  (is-projective-I : is-projective-Level l2 (type-Set I))
   where
 
   le-indexed-cardinality-Σ-Π' :
@@ -110,7 +111,7 @@ module _
     le-indexed-cardinality' (Σ-Set I A) (Π-Set I B)
   le-indexed-cardinality-Σ-Π' A B p =
     ( is-projective-I (type-Set ∘ B) (pr1 ∘ p) ,
-      is-nonsurjective-map-Σ-Π-is-projective-base' is-projective-I (pr2 ∘ p))
+      is-nonsurjective-map-Σ-Π-is-projective-base is-projective-I (pr2 ∘ p))
 
   le-indexed-cardinality-Σ-Π :
     (A B : type-Set I → Set l2) →
@@ -125,32 +126,37 @@ module _
 
 module _
   {l1 l2 : Level}
-  (I : Cardinality-Projective-Set l1 l2)
-  (let type-I = type-Cardinality-Projective-Set I)
-  (let set-I = set-Cardinality-Projective-Set I)
+  (I : Projective-Set l1 (lsuc l2))
+  (let set-I = set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let I' = cardinality-projective-set-Projective-Set I)
   where
 
   le-indexed-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → le-indexed-Cardinal (A i) (B i)) →
-    le-indexed-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B)
+    le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-Cardinal =
-    apply-twice-ind-Cardinality-Projective-Set I
+    apply-twice-ind-Cardinality-Projective-Set I'
       ( λ A B →
         set-Prop
           ( function-Prop
             ( (i : type-I) → le-indexed-Cardinal (A i) (B i))
-            ( le-indexed-prop-Cardinal (Σ-Cardinal I A) (Π-Cardinal I B))))
-      ( λ A B →
+            ( le-indexed-prop-Cardinal
+              ( Σ-Cardinal I' A)
+              ( Π-Cardinal I' B))))
+      ( λ A B p →
         binary-tr
           ( le-indexed-Cardinal)
-          ( inv (compute-Σ-Cardinal I A))
-          ( inv (compute-Π-Cardinal I B))
+          ( inv (compute-Σ-Cardinal I' A))
+          ( inv (compute-Π-Cardinal I' B))
           ( le-indexed-cardinality-Σ-Π
             ( set-I)
-            ( is-projective-Cardinality-Projective-Set I)
+            ( is-projective-is-projective-lsuc-Level l2
+              ( is-projective-Projective-Set I))
             ( A)
-            ( B)))
+            ( B)
+            ( p)))
 ```
 
 ## Corollaries
@@ -766,11 +772,6 @@ module _
               ( merely-Σ-Π))
             ( H)))
 ```
-
-## Comments
-
-More generally, for every localization `L` contained in `Set` there is an
-`L`-modal Kőnig's theorem.
 
 ## External links
 

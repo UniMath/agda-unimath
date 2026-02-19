@@ -86,7 +86,7 @@ module _
   where
 
   mere-emb-tot :
-    is-projective-Level' (l2 ⊔ l3) X →
+    is-projective-Level (l2 ⊔ l3) X →
     ((x : X) → mere-emb (Y x) (Z x)) →
     mere-emb (Σ X Y) (Σ X Z)
   mere-emb-tot H e = map-trunc-Prop emb-tot (H _ e)
@@ -100,7 +100,7 @@ module _
   where
 
   mere-emb-Π :
-    is-projective-Level' (l2 ⊔ l3) X →
+    is-projective-Level (l2 ⊔ l3) X →
     ((x : X) → mere-emb (Y x) (Z x)) →
     mere-emb ((x : X) → Y x) ((x : X) → Z x)
   mere-emb-Π H e = map-trunc-Prop emb-Π (H _ e)
