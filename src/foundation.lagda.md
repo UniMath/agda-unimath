@@ -490,6 +490,7 @@ open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncation-modalities public
+open import foundation.truncation-projective-types public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
 open import foundation.type-arithmetic-booleans public
