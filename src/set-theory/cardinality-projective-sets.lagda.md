@@ -23,6 +23,7 @@ open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.postcomposition-functions
+open import foundation.distributivity-of-set-truncation-over-projective-products
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -258,171 +259,6 @@ module _
       ( λ f → inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)))
       ( is-connected-map-unit-trunc zero-𝕋)
       ( is-connected-map-is-equiv H)
-
-module _
-  {l1 : Level} (l2 : Level) (I : Set l1)
-  where
-
-  mere-eq-postcomp-cardinality-is-projective-Level' :
-    (H : is-projective-Level' l2 (type-Set I))
-    (A B : type-Set I → Set l2) →
-    cardinality ∘ A ＝ cardinality ∘ B →
-    mere-eq A B
-  mere-eq-postcomp-cardinality-is-projective-Level' H A B p =
-    map-is-inhabited
-      ( λ e →
-        eq-htpy
-          ( λ i →
-            map-inv-equiv
-              ( extensionality-Set (A i) (B i))
-              ( e i)))
-      ( H
-        ( λ i → type-Set (A i) ≃ type-Set (B i))
-        ( λ i →
-          apply-universal-property-trunc-Prop
-            ( unit-trunc-Prop (htpy-eq p i))
-            ( is-inhabited-Prop (type-Set (A i) ≃ type-Set (B i)))
-            ( λ q →
-              map-equiv
-                ( compute-sim-cardinality (A i) (B i))
-                ( sim-eq-cardinality (A i) (B i) q))))
-
-  reflecting-map-postcomp-cardinality :
-    reflecting-map-equivalence-relation
-      ( mere-eq-equivalence-relation (type-Set I → Set l2))
-      ( type-Set (function-Set (type-Set I) (Cardinal-Set l2)))
-  pr1 reflecting-map-postcomp-cardinality =
-    postcomp (type-Set I) cardinality
-  pr2 reflecting-map-postcomp-cardinality {A} {B} r =
-    apply-universal-property-trunc-Prop
-      ( r)
-      ( Id-Prop
-        ( function-Set (type-Set I) (Cardinal-Set l2))
-        ( postcomp (type-Set I) cardinality A)
-        ( postcomp (type-Set I) cardinality B))
-      ( ap (postcomp (type-Set I) cardinality))
-
-  map-postcomp-cardinality-trunc-is-projective-Level' :
-    (H : is-projective-Level' l2 (type-Set I)) →
-    type-trunc-Set (type-Set I → Set l2) →
-    (type-Set I → Cardinal l2)
-  map-postcomp-cardinality-trunc-is-projective-Level' H =
-    map-universal-property-set-quotient-is-set-quotient
-      ( mere-eq-equivalence-relation (type-Set I → Set l2))
-      ( trunc-Set (type-Set I → Set l2))
-      ( reflecting-map-mere-eq-unit-trunc-Set (type-Set I → Set l2))
-      ( is-set-quotient-trunc-Set (type-Set I → Set l2))
-      ( function-Set (type-Set I) (Cardinal-Set l2))
-      ( reflecting-map-postcomp-cardinality)
-
-  triangle-map-postcomp-cardinality-trunc-is-projective-Level' :
-    (H : is-projective-Level' l2 (type-Set I)) →
-    map-postcomp-cardinality-trunc-is-projective-Level' H ∘ unit-trunc-Set ~
-    postcomp (type-Set I) cardinality
-  triangle-map-postcomp-cardinality-trunc-is-projective-Level' H =
-    triangle-universal-property-set-quotient-is-set-quotient
-      ( mere-eq-equivalence-relation (type-Set I → Set l2))
-      ( trunc-Set (type-Set I → Set l2))
-      ( reflecting-map-mere-eq-unit-trunc-Set (type-Set I → Set l2))
-      ( is-set-quotient-trunc-Set (type-Set I → Set l2))
-      ( function-Set (type-Set I) (Cardinal-Set l2))
-      ( reflecting-map-postcomp-cardinality)
-
-  htpy-map-distributive-map-postcomp-cardinality-trunc-is-projective-Level' :
-    (H : is-projective-Level' l2 (type-Set I)) →
-    map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2) ~
-    map-postcomp-cardinality-trunc-is-projective-Level' H
-  htpy-map-distributive-map-postcomp-cardinality-trunc-is-projective-Level'
-    H t =
-    apply-universal-property-trunc-Prop
-      ( is-surjective-unit-trunc-Set (type-Set I → Set l2) t)
-      ( Id-Prop
-        ( function-Set (type-Set I) (Cardinal-Set l2))
-        ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2) t)
-        ( map-postcomp-cardinality-trunc-is-projective-Level' H t))
-      ( λ (f , qf) →
-        ( inv
-          ( ap
-            ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-            ( qf))) ∙
-        ( eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)) ∙
-        ( inv
-          ( triangle-map-postcomp-cardinality-trunc-is-projective-Level' H f))
-        ∙ ( ap (map-postcomp-cardinality-trunc-is-projective-Level' H) (qf)))
-
-  is-surjective-postcomp-cardinality-is-projective-Level' :
-    is-projective-Level' (lsuc l2) (type-Set I) →
-    is-surjective (postcomp (type-Set I) (cardinality {l2}))
-  is-surjective-postcomp-cardinality-is-projective-Level' H =
-    is-trunc-projective-is-projective-Level'
-      ( lsuc l2)
-      ( lsuc l2)
-      ( succ-ℕ zero-ℕ)
-      ( H)
-      ( Set l2)
-      ( Cardinal l2 , is-trunc-is-set neg-one-𝕋 is-set-Cardinal)
-      ( cardinality , is-connected-map-unit-trunc zero-𝕋)
-
-  is-surjective-map-distributive-trunc-set-is-projective-Level' :
-    is-projective-Level' (lsuc l2) (type-Set I) →
-    is-surjective
-      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-  is-surjective-map-distributive-trunc-set-is-projective-Level' H =
-    is-surjective-right-map-triangle
-      ( postcomp (type-Set I) cardinality)
-      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-      ( unit-trunc-Set)
-      ( λ f → inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)))
-      ( is-surjective-postcomp-cardinality-is-projective-Level' H)
-
-  is-emb-map-distributive-trunc-set-is-projective-Level' :
-    is-projective-Level' (lsuc l2) (type-Set I) →
-    is-emb
-      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-  is-emb-map-distributive-trunc-set-is-projective-Level' H =
-    is-emb-htpy
-      ( htpy-map-distributive-map-postcomp-cardinality-trunc-is-projective-Level'
-        ( is-projective-is-projective-lsuc-Level' l2 H))
-      ( is-emb-map-universal-property-set-quotient-is-set-quotient
-        ( mere-eq-equivalence-relation (type-Set I → Set l2))
-        ( trunc-Set (type-Set I → Set l2))
-        ( reflecting-map-mere-eq-unit-trunc-Set (type-Set I → Set l2))
-        ( is-set-quotient-trunc-Set (type-Set I → Set l2))
-        ( function-Set (type-Set I) (Cardinal-Set l2))
-        ( reflecting-map-postcomp-cardinality)
-        ( mere-eq-postcomp-cardinality-is-projective-Level'
-          ( is-projective-is-projective-lsuc-Level' l2 H)))
-
-  is-equiv-map-distributive-trunc-set-is-projective-Level' :
-    is-projective-Level' (lsuc l2) (type-Set I) →
-    is-equiv
-      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-  is-equiv-map-distributive-trunc-set-is-projective-Level' H =
-    is-equiv-is-emb-is-surjective
-      ( is-surjective-map-distributive-trunc-set-is-projective-Level' H)
-      ( is-emb-map-distributive-trunc-set-is-projective-Level' H)
-
-  is-cardinality-projective-set-is-projective-Level' :
-    is-projective-Level' (lsuc l2) (type-Set I) →
-    is-cardinality-projective-set-Level l2 I
-  is-cardinality-projective-set-is-projective-Level' H =
-    is-connected-map-left-map-triangle
-      ( postcomp (type-Set I) cardinality)
-      ( map-distributive-trunc-function-type zero-𝕋 (type-Set I) (Set l2))
-      ( unit-trunc-Set)
-      ( λ f → inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 f)))
-      ( is-connected-map-unit-trunc zero-𝕋)
-      ( is-connected-map-is-equiv
-        ( is-equiv-map-distributive-trunc-set-is-projective-Level' H))
-
-is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set :
-  {l1 l2 : Level} (I : Cardinality-Projective-Set l1 l2) →
-  is-equiv
-    ( map-distributive-trunc-function-type zero-𝕋
-      ( type-Cardinality-Projective-Set I)
-      ( Set l2))
-is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set (I , H) =
-  is-equiv-map-distributive-trunc-set-is-cardinality-projective-set I H
 ```
 
 ### Cardinality-projective sets are cardinality-recursive
@@ -441,7 +277,9 @@ module _
     is-cardinality-recursive-set-Level l2 (set-Cardinality-Projective-Set I)
   is-cardinality-recursive-Cardinality-Projective-Set =
     retraction-is-equiv
-      ( is-equiv-map-distributive-trunc-set-Cardinality-Projective-Set I)
+      ( is-equiv-map-distributive-trunc-set-is-cardinality-projective-set
+        ( set-Cardinality-Projective-Set I)
+        ( is-cardinality-projective-Cardinality-Projective-Set I))
 
   cardinality-recursive-set-Cardinality-Projective-Set :
     Cardinality-Recursive-Set l1 l2
@@ -488,6 +326,23 @@ module _
     ( is-equiv-map-distributive-trunc-set-is-set-equivalence-postcomp-cardinality-Set
       ( I)
       ( H))
+```
+
+### Projective sets are cardinality-projective
+
+```agda
+cardinality-projective-set-Projective-Set' :
+  {l1 l2 : Level} →
+  Projective-Set' l1 (lsuc l2) →
+  Cardinality-Projective-Set l1 l2
+cardinality-projective-set-Projective-Set' {l1} {l2} X =
+  ( set-Projective-Set' X ,
+    is-cardinality-projective-set-is-is-equiv-map-distributive-trunc-set
+      ( set-Projective-Set' X)
+      ( is-equiv-map-distributive-trunc-Π-is-projective-Level'
+        ( type-Set (set-Projective-Set' X))
+        ( λ _ → Set l2)
+        ( is-projective-Projective-Set' X)))
 ```
 
 ### The standard finite sets are cardinality-projective
