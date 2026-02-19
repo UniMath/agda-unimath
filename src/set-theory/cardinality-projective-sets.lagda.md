@@ -67,9 +67,6 @@ be subject to change.
 
 ### The predicate of being cardinality-projective at a universe level
 
-We call a set $I$ _cardinality-projective_ if
-$${\cardinality} ∘ {-} : (I → \Set) → (I → \Cardinal)$$ is 0-connected.
-
 ```agda
 module _
   {l1 : Level} (l2 : Level) (I : Set l1)

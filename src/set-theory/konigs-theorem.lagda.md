@@ -51,17 +51,18 @@ then every function from $ΣᵢAᵢ$ to $ΠᵢBᵢ$ misses an element.
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {I : UU l1} (p : is-projective-Level (l2 ⊔ l3) I)
+  {I : UU l1} (is-projective-I : is-projective-Level (l2 ⊔ l3) I)
   {A : I → UU l2} {B : I → UU l3}
   where
 
-  is-nonsurjective-map-Σ-Π-is-projective-base' :
+  is-nonsurjective-map-Σ-Π-is-projective-base :
     (H : (i : I) (f : A i → B i) → is-nonsurjective f)
     (g : Σ I A → ((i : I) → B i)) → is-nonsurjective g
-  is-nonsurjective-map-Σ-Π-is-projective-base' H g =
+  is-nonsurjective-map-Σ-Π-is-projective-base H g =
     map-trunc-Prop
       ( λ h → (pr1 ∘ h , (λ ((i , a) , r) → pr2 (h i) (a , htpy-eq r i))))
-      ( p (λ i → nonim (λ a → g (i , a) i)) (λ i → H i (λ a → g (i , a) i)))
+      ( is-projective-I
+        ( λ i → nonim (λ a → g (i , a) i)) (λ i → H i (λ a → g (i , a) i)))
 ```
 
 ## Theorem
@@ -79,7 +80,7 @@ module _
     le-indexed-cardinality' (Σ-Set I A) (Π-Set I B)
   le-indexed-cardinality-Σ-Π' A B p =
     ( is-projective-I (type-Set ∘ B) (pr1 ∘ p) ,
-      is-nonsurjective-map-Σ-Π-is-projective-base' is-projective-I (pr2 ∘ p))
+      is-nonsurjective-map-Σ-Π-is-projective-base is-projective-I (pr2 ∘ p))
 
   le-indexed-cardinality-Σ-Π :
     (A B : type-Set I → Set l2) →
@@ -126,11 +127,6 @@ module _
             ( B)
             ( p)))
 ```
-
-## Comments
-
-More generally, for every localization `L` contained in `Set` there is an
-`L`-modal Kőnig's theorem.
 
 ## External links
 
