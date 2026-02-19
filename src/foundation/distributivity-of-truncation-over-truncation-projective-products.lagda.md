@@ -29,12 +29,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-For a `k`-projective type `X`, postcomposition by the unit map into
-`(k-1)`-truncation is surjective, and therefore the induced distributivity map
+For a $k$-[projective](foundation.truncation-projective-types.md) type $X$,
+[postcomposition](foundation.postcomposition-functions.md) by the unit map into
+$(k-1)$-[truncation](foundation.truncations.md) is
+[surjective](foundation.surjective-maps.md), and therefore the induced
+distributivity map
 
-```text
-  ║ (X → A) ║(k-1) → (X → ║ A ║(k-1))
-```
+$$
+  ║ (x : X) → A x ║_{k-1} → ((x : X) → ║ A x ║_{k-1})
+$$
 
 is surjective.
 
@@ -111,3 +114,7 @@ is-surjective-map-distributive-trunc-function-type-is-trunc-projective
   is-surjective-map-distributive-trunc-function-type-is-trunc-projective-Level
     k X A H
 ```
+
+## See also
+
+- [Distributivity of set-truncation over projective products](foundation.distributivity-of-set-truncation-over-projective-products.md)
