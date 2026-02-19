@@ -104,9 +104,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Projective-Set' l1 (lsuc l2))
-  (let X' = cardinality-projective-set-Projective-Set' X)
-  (let type-X = type-Projective-Set' X)
+  {l1 l2 : Level} (X : Projective-Set l1 (lsuc l2))
+  (let X' = cardinality-projective-set-Projective-Set X)
+  (let type-X = type-Projective-Set X)
   where
 
   is-inhabited-Π-Cardinal :
@@ -125,9 +125,9 @@ module _
           ( is-inhabited-Cardinal)
           ( compute-Π-Cardinal X' Y)
           ( unit-is-inhabited-cardinality
-            ( Π-Set (set-Projective-Set' X) Y)
-            ( is-projective-is-projective-lsuc-Level' l2
-              ( is-projective-Projective-Set' X)
+            ( Π-Set (set-Projective-Set X) Y)
+            ( is-projective-is-projective-lsuc-Level l2
+              ( is-projective-Projective-Set X)
               ( type-Set ∘ Y)
               ( λ x → inv-unit-is-inhabited-cardinality (Y x) (y x)))))
 

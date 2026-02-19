@@ -130,29 +130,6 @@ module _
   is-projective-Projective-Set = pr2 X
 ```
 
-### The universe of set-projective sets
-
-```agda
-Projective-Set' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Projective-Set' l1 l2 = Σ (Set l1) (is-projective-Level' l2 ∘ type-Set)
-
-module _
-  {l1 l2 : Level} (X : Projective-Set' l1 l2)
-  where
-
-  set-Projective-Set' : Set l1
-  set-Projective-Set' = pr1 X
-
-  type-Projective-Set' : UU l1
-  type-Projective-Set' = type-Set set-Projective-Set'
-
-  is-set-type-Projective-Set' : is-set type-Projective-Set'
-  is-set-type-Projective-Set' = is-set-type-Set set-Projective-Set'
-
-  is-projective-Projective-Set' : is-projective-Level' l2 type-Projective-Set'
-  is-projective-Projective-Set' = pr2 X
-```
-
 ## Properties
 
 ### Lowering universe levels for projectivity

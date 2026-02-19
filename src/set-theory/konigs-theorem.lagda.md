@@ -51,7 +51,7 @@ then every function from $ΣᵢAᵢ$ to $ΠᵢBᵢ$ misses an element.
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {I : UU l1} (p : is-projective-Level' (l2 ⊔ l3) I)
+  {I : UU l1} (p : is-projective-Level (l2 ⊔ l3) I)
   {A : I → UU l2} {B : I → UU l3}
   where
 
@@ -70,7 +70,7 @@ module _
 module _
   {l1 l2 : Level}
   (I : Set l1)
-  (is-projective-I : is-projective-Level' l2 (type-Set I))
+  (is-projective-I : is-projective-Level l2 (type-Set I))
   where
 
   le-indexed-cardinality-Σ-Π' :
@@ -94,10 +94,10 @@ module _
 
 module _
   {l1 l2 : Level}
-  (I : Projective-Set' l1 (lsuc l2))
-  (let set-I = set-Projective-Set' I)
-  (let type-I = type-Projective-Set' I)
-  (let I' = cardinality-projective-set-Projective-Set' I)
+  (I : Projective-Set l1 (lsuc l2))
+  (let set-I = set-Projective-Set I)
+  (let type-I = type-Projective-Set I)
+  (let I' = cardinality-projective-set-Projective-Set I)
   where
 
   le-indexed-Σ-Π-Cardinal :
@@ -120,8 +120,8 @@ module _
           ( inv (compute-Π-Cardinal I' B))
           ( le-indexed-cardinality-Σ-Π
             ( set-I)
-            ( is-projective-is-projective-lsuc-Level' l2
-              ( is-projective-Projective-Set' I))
+            ( is-projective-is-projective-lsuc-Level l2
+              ( is-projective-Projective-Set I))
             ( A)
             ( B)
             ( p)))

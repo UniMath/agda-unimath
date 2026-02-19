@@ -331,18 +331,18 @@ module _
 ### Projective sets are cardinality-projective
 
 ```agda
-cardinality-projective-set-Projective-Set' :
+cardinality-projective-set-Projective-Set :
   {l1 l2 : Level} →
-  Projective-Set' l1 (lsuc l2) →
+  Projective-Set l1 (lsuc l2) →
   Cardinality-Projective-Set l1 l2
-cardinality-projective-set-Projective-Set' {l1} {l2} X =
-  ( set-Projective-Set' X ,
+cardinality-projective-set-Projective-Set {l1} {l2} X =
+  ( set-Projective-Set X ,
     is-cardinality-projective-set-is-is-equiv-map-distributive-trunc-set
-      ( set-Projective-Set' X)
-      ( is-equiv-map-distributive-trunc-Π-is-projective-Level'
-        ( type-Set (set-Projective-Set' X))
+      ( set-Projective-Set X)
+      ( is-equiv-map-distributive-trunc-Π-is-projective-Level
+        ( type-Set (set-Projective-Set X))
         ( λ _ → Set l2)
-        ( is-projective-Projective-Set' X)))
+        ( is-projective-Projective-Set X)))
 ```
 
 ### The standard finite sets are cardinality-projective
