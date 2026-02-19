@@ -176,10 +176,10 @@ module _
 
   le-indexed-Σ-Π-le-family-Cardinal :
     (A B : type-I → Cardinal l2) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (A i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (A i)) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-le-family-Cardinal
@@ -209,10 +209,10 @@ module _
   le-indexed-Σ-Π-le-complemented-family-Cardinal :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → is-discrete-Cardinal (A i)) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (A i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (A i)) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-complemented-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-le-complemented-family-Cardinal
@@ -245,10 +245,10 @@ module _
 
   leq-cardinality-Σ-Π-le-family :
     (A B : type-I → Set l2) →
-    ((i : type-I) → decidable-∃-cardinality l2 (A i)) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (A i)) →
     ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
-    ((i : type-I) → decidable-∃-cardinality l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
     leq-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   leq-cardinality-Σ-Π-le-family
@@ -265,10 +265,10 @@ module _
             ( le-indexed-le-cardinality
               ( A i)
               ( B i)
-              ( inv-unit-decidable-∃-cardinality (A i) (decidable-∃-A i))
+              ( inv-unit-has-decidable-∃-cardinality (A i) (decidable-∃-A i))
               ( is-projective-B i)
               ( inv-unit-is-discrete-cardinality (B i) (is-discrete-B i))
-              ( inv-unit-decidable-∃-cardinality (B i) (decidable-∃-B i))
+              ( inv-unit-has-decidable-∃-cardinality (B i) (decidable-∃-B i))
               ( H i)))
           ( pr1 (e i))
 
@@ -308,13 +308,13 @@ module _
   le-cardinality-Σ-Π :
     (A B : type-I → Set l2) →
     is-discrete-cardinality (Σ-Set set-I A) →
-    ((i : type-I) → decidable-∃-cardinality l2 (A i)) →
-    decidable-∃-cardinality (l1 ⊔ l2) (Σ-Set set-I A) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (A i)) →
+    has-decidable-∃-cardinality (l1 ⊔ l2) (Σ-Set set-I A) →
     ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
     is-discrete-cardinality (Π-Set set-I B) →
-    ((i : type-I) → decidable-∃-cardinality l2 (B i)) →
-    decidable-∃-cardinality (l1 ⊔ l2) (Π-Set set-I B) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (B i)) →
+    has-decidable-∃-cardinality (l1 ⊔ l2) (Π-Set set-I B) →
     ((i : type-I) → le-cardinality (A i) (B i)) →
     le-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   le-cardinality-Σ-Π A B is-discrete-Σ decidable-∃-A decidable-∃-Σ
@@ -324,11 +324,11 @@ module _
       ( Σ-Set set-I A)
       ( Π-Set set-I B)
       ( inv-unit-is-discrete-cardinality (Σ-Set set-I A) is-discrete-Σ)
-      ( inv-unit-decidable-∃-cardinality
+      ( inv-unit-has-decidable-∃-cardinality
         ( Σ-Set set-I A)
         ( decidable-∃-Σ))
       ( inv-unit-is-discrete-cardinality (Π-Set set-I B) is-discrete-Π)
-      ( inv-unit-decidable-∃-cardinality
+      ( inv-unit-has-decidable-∃-cardinality
         ( Π-Set set-I B)
         ( decidable-∃-Π))
       ( leq-cardinality-Σ-Π-le-family I dI A B decidable-∃-A
@@ -346,22 +346,22 @@ module _
           le-indexed-le-cardinality
             ( A i)
             ( B i)
-            ( inv-unit-decidable-∃-cardinality (A i) (decidable-∃-A i))
+            ( inv-unit-has-decidable-∃-cardinality (A i) (decidable-∃-A i))
             ( is-projective-B i)
             ( inv-unit-is-discrete-cardinality (B i) (is-discrete-B i))
-            ( inv-unit-decidable-∃-cardinality (B i) (decidable-∃-B i))
+            ( inv-unit-has-decidable-∃-cardinality (B i) (decidable-∃-B i))
             ( H i)))
 
   le-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
     is-discrete-Cardinal (Σ-Cardinal I' A) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (A i)) →
-    decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (A i)) →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
     is-discrete-Cardinal (Π-Cardinal I' B) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (B i)) →
-    decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (B i)) →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
     le-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-Σ-Π-Cardinal =
@@ -371,9 +371,9 @@ module _
           ( function-Prop
             ( is-discrete-Cardinal (Σ-Cardinal I' A))
             ( function-Prop
-              ( (i : type-I) → decidable-∃-Cardinal l2 (A i))
+              ( (i : type-I) → has-decidable-∃-Cardinal l2 (A i))
               ( function-Prop
-                ( decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
+                ( has-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
                 ( function-Prop
                   ( (i : type-I) → is-projective-Cardinal l2 (B i))
                   ( function-Prop
@@ -381,9 +381,9 @@ module _
                     ( function-Prop
                       ( is-discrete-Cardinal (Π-Cardinal I' B))
                       ( function-Prop
-                        ( (i : type-I) → decidable-∃-Cardinal l2 (B i))
+                        ( (i : type-I) → has-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
-                          ( decidable-∃-Cardinal
+                          ( has-decidable-∃-Cardinal
                             ( l1 ⊔ l2)
                             ( Π-Cardinal I' B))
                           ( function-Prop
@@ -402,7 +402,7 @@ module _
               ( compute-Σ-Cardinal I' A)
               ( is-discrete-Σ))
             ( decidable-∃-A)
-            ( tr (decidable-∃-Cardinal (l1 ⊔ l2))
+            ( tr (has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Σ-Cardinal I' A)
               ( decidable-∃-Σ))
             ( λ i →
@@ -412,7 +412,7 @@ module _
               ( compute-Π-Cardinal I' B)
               ( is-discrete-Π))
             ( decidable-∃-B)
-            ( tr (decidable-∃-Cardinal (l1 ⊔ l2))
+            ( tr (has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Π-Cardinal I' B)
               ( decidable-∃-Π))
             ( H)))
@@ -555,7 +555,7 @@ module _
     ((i : type-I) → is-discrete-cardinality (A i)) →
     ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
-    ((i : type-I) → decidable-∃-cardinality l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-complemented-cardinality (A i) (B i)) →
     leq-complemented-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   leq-complemented-cardinality-Σ-Π
@@ -598,7 +598,7 @@ module _
                   ( inv-unit-is-discrete-cardinality (A i) (is-discrete-A i))
                   ( is-projective-B i)
                   ( map-decidable-emb (e i)))))
-          ( inv-unit-decidable-∃-cardinality (B i) (decidable-∃-B i))
+          ( inv-unit-has-decidable-∃-cardinality (B i) (decidable-∃-B i))
 
       build-emb :
         ((i : type-I) → type-Set (A i) ↪ᵈ type-Set (B i)) →
@@ -638,10 +638,10 @@ module _
   le-complemented-cardinality-Σ-Π :
     (A B : type-I → Set l2) →
     ((i : type-I) → is-discrete-cardinality (A i)) →
-    ((i : type-I) → decidable-∃-cardinality l2 (A i)) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (A i)) →
     ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
     ((i : type-I) → is-discrete-cardinality (B i)) →
-    ((i : type-I) → decidable-∃-cardinality l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-cardinality l2 (B i)) →
     ((i : type-I) → le-complemented-cardinality (A i) (B i)) →
     le-complemented-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   le-complemented-cardinality-Σ-Π
@@ -665,19 +665,19 @@ module _
             ( A i)
             ( B i)
             ( inv-unit-is-discrete-cardinality (A i) (is-discrete-A i))
-            ( inv-unit-decidable-∃-cardinality (A i) (decidable-∃-A i))
+            ( inv-unit-has-decidable-∃-cardinality (A i) (decidable-∃-A i))
             ( is-projective-B i)
             ( inv-unit-is-discrete-cardinality (B i) (is-discrete-B i))
-            ( inv-unit-decidable-∃-cardinality (B i) (decidable-∃-B i))
+            ( inv-unit-has-decidable-∃-cardinality (B i) (decidable-∃-B i))
             ( H i)))
 
   le-complemented-Σ-Π-Cardinal :
     (A B : type-I → Cardinal l2) →
     ((i : type-I) → is-discrete-Cardinal (A i)) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (A i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (A i)) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (B i)) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (B i)) →
     ((i : type-I) → le-complemented-Cardinal (A i) (B i)) →
     le-complemented-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-complemented-Σ-Π-Cardinal =
@@ -687,13 +687,13 @@ module _
           ( function-Prop
             ( (i : type-I) → is-discrete-Cardinal (A i))
             ( function-Prop
-              ( (i : type-I) → decidable-∃-Cardinal l2 (A i))
+              ( (i : type-I) → has-decidable-∃-Cardinal l2 (A i))
               ( function-Prop
                 ( (i : type-I) → is-projective-Cardinal l2 (B i))
                 ( function-Prop
                   ( (i : type-I) → is-discrete-Cardinal (B i))
                   ( function-Prop
-                    ( (i : type-I) → decidable-∃-Cardinal l2 (B i))
+                    ( (i : type-I) → has-decidable-∃-Cardinal l2 (B i))
                     ( function-Prop
                       ( (i : type-I) → le-complemented-Cardinal (A i) (B i))
                       ( le-complemented-prop-Cardinal
@@ -728,13 +728,13 @@ module _
   le-Σ-Π-Cardinal-WLPO :
     (A B : type-I → Cardinal l2) →
     is-discrete-Cardinal (Σ-Cardinal I' A) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (A i)) →
-    decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (A i)) →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A) →
     ((i : type-I) → is-projective-Cardinal l2 (B i)) →
     ((i : type-I) → is-discrete-Cardinal (B i)) →
     is-discrete-Cardinal (Π-Cardinal I' B) →
-    ((i : type-I) → decidable-∃-Cardinal l2 (B i)) →
-    decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
+    ((i : type-I) → has-decidable-∃-Cardinal l2 (B i)) →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) (Π-Cardinal I' B) →
     ((i : type-I) → le-Cardinal (A i) (B i)) →
     le-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-Σ-Π-Cardinal-WLPO =
@@ -744,9 +744,9 @@ module _
           ( function-Prop
             ( is-discrete-Cardinal (Σ-Cardinal I' A))
             ( function-Prop
-              ( (i : type-I) → decidable-∃-Cardinal l2 (A i))
+              ( (i : type-I) → has-decidable-∃-Cardinal l2 (A i))
               ( function-Prop
-                ( decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
+                ( has-decidable-∃-Cardinal (l1 ⊔ l2) (Σ-Cardinal I' A))
                 ( function-Prop
                   ( (i : type-I) → is-projective-Cardinal l2 (B i))
                   ( function-Prop
@@ -754,9 +754,9 @@ module _
                     ( function-Prop
                       ( is-discrete-Cardinal (Π-Cardinal I' B))
                       ( function-Prop
-                        ( (i : type-I) → decidable-∃-Cardinal l2 (B i))
+                        ( (i : type-I) → has-decidable-∃-Cardinal l2 (B i))
                         ( function-Prop
-                          ( decidable-∃-Cardinal
+                          ( has-decidable-∃-Cardinal
                             ( l1 ⊔ l2)
                             ( Π-Cardinal I' B))
                           ( function-Prop
@@ -783,7 +783,7 @@ module _
               ( is-discrete-Σ))
             ( decidable-∃-A)
             ( tr
-              ( decidable-∃-Cardinal (l1 ⊔ l2))
+              ( has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Σ-Cardinal I' A)
               ( decidable-∃-Σ))
             ( λ i →
@@ -795,7 +795,7 @@ module _
               ( is-discrete-Π))
             ( decidable-∃-B)
             ( tr
-              ( decidable-∃-Cardinal (l1 ⊔ l2))
+              ( has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Π-Cardinal I' B)
               ( decidable-∃-Π))
             ( H)))

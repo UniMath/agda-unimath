@@ -277,10 +277,10 @@ module _
   le-indexed-le-complemented-Cardinal :
     (X : Cardinal l1) (Y : Cardinal l2) →
     is-discrete-Cardinal X →
-    decidable-∃-Cardinal l2 X →
+    has-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    decidable-∃-Cardinal (l1 ⊔ l2) Y →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     le-complemented-Cardinal X Y →
     le-indexed-Cardinal X Y
   le-indexed-le-complemented-Cardinal =
@@ -290,13 +290,13 @@ module _
           ( function-Prop
             ( is-discrete-Cardinal X)
             ( function-Prop
-              ( decidable-∃-Cardinal l2 X)
+              ( has-decidable-∃-Cardinal l2 X)
               ( function-Prop
                 ( is-projective-Cardinal (l1 ⊔ l2) Y)
                 ( function-Prop
                   ( is-discrete-Cardinal Y)
                   ( function-Prop
-                    ( decidable-∃-Cardinal (l1 ⊔ l2) Y)
+                    ( has-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                     ( function-Prop
                       ( le-complemented-Cardinal X Y)
                       ( le-indexed-prop-Cardinal X Y))))))))
@@ -307,19 +307,19 @@ module _
           ( X)
           ( Y)
           ( inv-unit-is-discrete-cardinality X is-discrete-X)
-          ( inv-unit-decidable-∃-cardinality X decidable-∃-X)
+          ( inv-unit-has-decidable-∃-cardinality X decidable-∃-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-decidable-∃-cardinality Y decidable-∃-Y))
+          ( inv-unit-has-decidable-∃-cardinality Y decidable-∃-Y))
 
   le-complemented-iff-le-indexed-Cardinal :
     (wlpo : level-WLPO (l1 ⊔ l2)) →
     (X : Cardinal l1) (Y : Cardinal l2) →
     is-discrete-Cardinal X →
-    decidable-∃-Cardinal l2 X →
+    has-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    decidable-∃-Cardinal (l1 ⊔ l2) Y →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     leq-complemented-Cardinal X Y →
     le-indexed-Cardinal X Y ↔ le-complemented-Cardinal X Y
   le-complemented-iff-le-indexed-Cardinal wlpo =
@@ -329,13 +329,13 @@ module _
           ( function-Prop
             ( is-discrete-Cardinal X)
             ( function-Prop
-              ( decidable-∃-Cardinal l2 X)
+              ( has-decidable-∃-Cardinal l2 X)
               ( function-Prop
                 ( is-projective-Cardinal (l1 ⊔ l2) Y)
                 ( function-Prop
                   ( is-discrete-Cardinal Y)
                   ( function-Prop
-                    ( decidable-∃-Cardinal (l1 ⊔ l2) Y)
+                    ( has-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                     ( function-Prop
                       ( leq-complemented-Cardinal X Y)
                       ( iff-Prop
@@ -349,8 +349,8 @@ module _
           ( X)
           ( Y)
           ( inv-unit-is-discrete-cardinality X is-discrete-X)
-          ( inv-unit-decidable-∃-cardinality X decidable-∃-X)
+          ( inv-unit-has-decidable-∃-cardinality X decidable-∃-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-decidable-∃-cardinality Y decidable-∃-Y))
+          ( inv-unit-has-decidable-∃-cardinality Y decidable-∃-Y))
 ```

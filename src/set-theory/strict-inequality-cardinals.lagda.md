@@ -459,10 +459,10 @@ module _
 
   le-indexed-le-Cardinal :
     (X : Cardinal l1) (Y : Cardinal l2) →
-    decidable-∃-Cardinal l2 X →
+    has-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    decidable-∃-Cardinal (l1 ⊔ l2) Y →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     le-Cardinal X Y →
     le-indexed-Cardinal X Y
   le-indexed-le-Cardinal =
@@ -470,13 +470,13 @@ module _
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( decidable-∃-Cardinal l2 X)
+            ( has-decidable-∃-Cardinal l2 X)
             ( function-Prop
               ( is-projective-Cardinal (l1 ⊔ l2) Y)
               ( function-Prop
                 ( is-discrete-Cardinal Y)
                 ( function-Prop
-                  ( decidable-∃-Cardinal (l1 ⊔ l2) Y)
+                  ( has-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                   ( function-Prop
                     ( le-Cardinal X Y)
                     ( le-indexed-prop-Cardinal X Y)))))))
@@ -484,18 +484,18 @@ module _
         le-indexed-le-cardinality
           ( X)
           ( Y)
-          ( inv-unit-decidable-∃-cardinality X decidable-∃-X)
+          ( inv-unit-has-decidable-∃-cardinality X decidable-∃-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-decidable-∃-cardinality Y decidable-∃-Y))
+          ( inv-unit-has-decidable-∃-cardinality Y decidable-∃-Y))
 
   le-iff-le-indexed-Cardinal :
     (lem : level-LEM (l1 ⊔ l2)) →
     (X : Cardinal l1) (Y : Cardinal l2) →
-    decidable-∃-Cardinal l2 X →
+    has-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    decidable-∃-Cardinal (l1 ⊔ l2) Y →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     leq-Cardinal X Y →
     le-indexed-Cardinal X Y ↔ le-Cardinal X Y
   le-iff-le-indexed-Cardinal lem =
@@ -503,13 +503,13 @@ module _
       ( λ X Y →
         set-Prop
           ( function-Prop
-            ( decidable-∃-Cardinal l2 X)
+            ( has-decidable-∃-Cardinal l2 X)
             ( function-Prop
               ( is-projective-Cardinal (l1 ⊔ l2) Y)
               ( function-Prop
                 ( is-discrete-Cardinal Y)
                 ( function-Prop
-                  ( decidable-∃-Cardinal (l1 ⊔ l2) Y)
+                  ( has-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                   ( function-Prop
                     ( leq-Cardinal X Y)
                     ( iff-Prop
@@ -520,19 +520,19 @@ module _
           ( lem)
           ( X)
           ( Y)
-          ( inv-unit-decidable-∃-cardinality X decidable-∃-X)
+          ( inv-unit-has-decidable-∃-cardinality X decidable-∃-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-decidable-∃-cardinality Y decidable-∃-Y))
+          ( inv-unit-has-decidable-∃-cardinality Y decidable-∃-Y))
 
   le-iff-le-indexed-Cardinal-WLPO :
     (wlpo : level-WLPO (l1 ⊔ l2)) →
     (X : Cardinal l1) (Y : Cardinal l2) →
     is-discrete-Cardinal X →
-    decidable-∃-Cardinal l2 X →
+    has-decidable-∃-Cardinal l2 X →
     is-projective-Cardinal (l1 ⊔ l2) Y →
     is-discrete-Cardinal Y →
-    decidable-∃-Cardinal (l1 ⊔ l2) Y →
+    has-decidable-∃-Cardinal (l1 ⊔ l2) Y →
     leq-Cardinal X Y →
     le-indexed-Cardinal X Y ↔ le-Cardinal X Y
   le-iff-le-indexed-Cardinal-WLPO wlpo =
@@ -542,13 +542,13 @@ module _
           ( function-Prop
             ( is-discrete-Cardinal X)
             ( function-Prop
-              ( decidable-∃-Cardinal l2 X)
+              ( has-decidable-∃-Cardinal l2 X)
               ( function-Prop
                 ( is-projective-Cardinal (l1 ⊔ l2) Y)
                 ( function-Prop
                   ( is-discrete-Cardinal Y)
                   ( function-Prop
-                    ( decidable-∃-Cardinal (l1 ⊔ l2) Y)
+                    ( has-decidable-∃-Cardinal (l1 ⊔ l2) Y)
                     ( function-Prop
                       ( leq-Cardinal X Y)
                       ( iff-Prop
@@ -562,8 +562,8 @@ module _
           ( X)
           ( Y)
           ( inv-unit-is-discrete-cardinality X is-discrete-X)
-          ( inv-unit-decidable-∃-cardinality X decidable-∃-X)
+          ( inv-unit-has-decidable-∃-cardinality X decidable-∃-X)
           ( inv-unit-is-projective-cardinality Y is-projective-Y)
           ( inv-unit-is-discrete-cardinality Y is-discrete-Y)
-          ( inv-unit-decidable-∃-cardinality Y decidable-∃-Y))
+          ( inv-unit-has-decidable-∃-cardinality Y decidable-∃-Y))
 ```

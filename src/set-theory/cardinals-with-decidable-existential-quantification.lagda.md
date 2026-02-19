@@ -32,7 +32,7 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ`
-{{#concept "has decidable existential quantification" Disambiguation="set-cardinal" Agda=decidable-∃-Cardinal}},
+{{#concept "has decidable existential quantification" Disambiguation="set-cardinal" Agda=has-decidable-∃-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class
 [has decidable existential quantification](foundation.types-with-decidable-existential-quantification.md).
 
@@ -45,20 +45,20 @@ module _
   {l1 : Level} (l2 : Level) (κ : Cardinal l1)
   where
 
-  decidable-∃-prop-Cardinal : Prop (l1 ⊔ lsuc l2)
-  decidable-∃-prop-Cardinal =
+  has-decidable-∃-prop-Cardinal : Prop (l1 ⊔ lsuc l2)
+  has-decidable-∃-prop-Cardinal =
     apply-universal-property-trunc-Set' κ
       ( Prop-Set (l1 ⊔ lsuc l2))
       ( has-decidable-∃-level-Prop l2 ∘ type-Set)
 
-  decidable-∃-Cardinal : UU (l1 ⊔ lsuc l2)
-  decidable-∃-Cardinal =
-    type-Prop decidable-∃-prop-Cardinal
+  has-decidable-∃-Cardinal : UU (l1 ⊔ lsuc l2)
+  has-decidable-∃-Cardinal =
+    type-Prop has-decidable-∃-prop-Cardinal
 
-  is-prop-decidable-∃-Cardinal :
-    is-prop decidable-∃-Cardinal
-  is-prop-decidable-∃-Cardinal =
-    is-prop-type-Prop decidable-∃-prop-Cardinal
+  is-prop-has-decidable-∃-Cardinal :
+    is-prop has-decidable-∃-Cardinal
+  is-prop-has-decidable-∃-Cardinal =
+    is-prop-type-Prop has-decidable-∃-prop-Cardinal
 ```
 
 ### Cardinalities with decidable existential quantification
@@ -68,82 +68,82 @@ module _
   {l1 : Level} (l2 : Level) (X : Set l1)
   where
 
-  decidable-∃-prop-cardinality : Prop (l1 ⊔ lsuc l2)
-  decidable-∃-prop-cardinality =
-    decidable-∃-prop-Cardinal l2 (cardinality X)
+  has-decidable-∃-prop-cardinality : Prop (l1 ⊔ lsuc l2)
+  has-decidable-∃-prop-cardinality =
+    has-decidable-∃-prop-Cardinal l2 (cardinality X)
 
-  decidable-∃-cardinality : UU (l1 ⊔ lsuc l2)
-  decidable-∃-cardinality =
-    decidable-∃-Cardinal l2 (cardinality X)
+  has-decidable-∃-cardinality : UU (l1 ⊔ lsuc l2)
+  has-decidable-∃-cardinality =
+    has-decidable-∃-Cardinal l2 (cardinality X)
 
 module _
   {l1 l2 : Level} (X : Set l1)
   where
 
-  is-prop-decidable-∃-cardinality :
-    is-prop (decidable-∃-cardinality l2 X)
-  is-prop-decidable-∃-cardinality =
-    is-prop-decidable-∃-Cardinal l2 (cardinality X)
+  is-prop-has-decidable-∃-cardinality :
+    is-prop (has-decidable-∃-cardinality l2 X)
+  is-prop-has-decidable-∃-cardinality =
+    is-prop-has-decidable-∃-Cardinal l2 (cardinality X)
 
-  eq-compute-decidable-∃-prop-cardinality :
-    decidable-∃-prop-cardinality l2 X ＝
+  eq-compute-has-decidable-∃-prop-cardinality :
+    has-decidable-∃-prop-cardinality l2 X ＝
     has-decidable-∃-level-Prop l2 (type-Set X)
-  eq-compute-decidable-∃-prop-cardinality =
+  eq-compute-has-decidable-∃-prop-cardinality =
     triangle-universal-property-trunc-Set
       ( Prop-Set (l1 ⊔ lsuc l2))
       ( has-decidable-∃-level-Prop l2 ∘ type-Set)
       ( X)
 
-  eq-compute-decidable-∃-cardinality :
-    decidable-∃-cardinality l2 X ＝
+  eq-compute-has-decidable-∃-cardinality :
+    has-decidable-∃-cardinality l2 X ＝
     has-decidable-∃-Level l2 (type-Set X)
-  eq-compute-decidable-∃-cardinality =
-    ap type-Prop eq-compute-decidable-∃-prop-cardinality
+  eq-compute-has-decidable-∃-cardinality =
+    ap type-Prop eq-compute-has-decidable-∃-prop-cardinality
 
-  compute-decidable-∃-cardinality :
-    decidable-∃-cardinality l2 X ≃
+  compute-has-decidable-∃-cardinality :
+    has-decidable-∃-cardinality l2 X ≃
     has-decidable-∃-Level l2 (type-Set X)
-  compute-decidable-∃-cardinality =
-    equiv-eq eq-compute-decidable-∃-cardinality
+  compute-has-decidable-∃-cardinality =
+    equiv-eq eq-compute-has-decidable-∃-cardinality
 
-  unit-decidable-∃-cardinality :
+  unit-has-decidable-∃-cardinality :
     is-inhabited (has-decidable-∃-Level l2 (type-Set X)) →
-    decidable-∃-cardinality l2 X
-  unit-decidable-∃-cardinality =
+    has-decidable-∃-cardinality l2 X
+  unit-has-decidable-∃-cardinality =
     rec-trunc-Prop
-      ( decidable-∃-prop-cardinality l2 X)
-      ( map-inv-equiv compute-decidable-∃-cardinality)
+      ( has-decidable-∃-prop-cardinality l2 X)
+      ( map-inv-equiv compute-has-decidable-∃-cardinality)
 
-  inv-unit-decidable-∃-cardinality :
-    decidable-∃-cardinality l2 X →
+  inv-unit-has-decidable-∃-cardinality :
+    has-decidable-∃-cardinality l2 X →
     is-inhabited (has-decidable-∃-Level l2 (type-Set X))
-  inv-unit-decidable-∃-cardinality =
-    unit-trunc-Prop ∘ map-equiv compute-decidable-∃-cardinality
+  inv-unit-has-decidable-∃-cardinality =
+    unit-trunc-Prop ∘ map-equiv compute-has-decidable-∃-cardinality
 ```
 
 ### The universe of cardinals with decidable existential quantification
 
 ```agda
-Projective-Cardinal : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Projective-Cardinal l1 l2 = Σ (Cardinal l1) (decidable-∃-Cardinal l2)
+Cardinal-With-Decidable-∃ : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Cardinal-With-Decidable-∃ l1 l2 = Σ (Cardinal l1) (has-decidable-∃-Cardinal l2)
 
-is-set-Projective-Cardinal :
-  {l1 l2 : Level} → is-set (Projective-Cardinal l1 l2)
-is-set-Projective-Cardinal {l1} {l2} =
-  is-set-type-subtype (decidable-∃-prop-Cardinal l2) is-set-Cardinal
+is-set-Cardinal-With-Decidable-∃ :
+  {l1 l2 : Level} → is-set (Cardinal-With-Decidable-∃ l1 l2)
+is-set-Cardinal-With-Decidable-∃ {l1} {l2} =
+  is-set-type-subtype (has-decidable-∃-prop-Cardinal l2) is-set-Cardinal
 
-Projective-Cardinal-Set : (l1 l2 : Level) → Set (lsuc l1 ⊔ lsuc l2)
-Projective-Cardinal-Set l1 l2 =
-  (Projective-Cardinal l1 l2 , is-set-Projective-Cardinal)
+Cardinal-With-Decidable-∃-Set : (l1 l2 : Level) → Set (lsuc l1 ⊔ lsuc l2)
+Cardinal-With-Decidable-∃-Set l1 l2 =
+  (Cardinal-With-Decidable-∃ l1 l2 , is-set-Cardinal-With-Decidable-∃)
 
 module _
-  {l1 l2 : Level} (κ : Projective-Cardinal l1 l2)
+  {l1 l2 : Level} (κ : Cardinal-With-Decidable-∃ l1 l2)
   where
 
-  cardinal-Projective-Cardinal : Cardinal l1
-  cardinal-Projective-Cardinal = pr1 κ
+  cardinal-Cardinal-With-Decidable-∃ : Cardinal l1
+  cardinal-Cardinal-With-Decidable-∃ = pr1 κ
 
-  is-projective-Projective-Cardinal :
-    decidable-∃-Cardinal l2 cardinal-Projective-Cardinal
-  is-projective-Projective-Cardinal = pr2 κ
+  has-decidable-∃-cardinal-Cardinal-With-Decidable-∃ :
+    has-decidable-∃-Cardinal l2 cardinal-Cardinal-With-Decidable-∃
+  has-decidable-∃-cardinal-Cardinal-With-Decidable-∃ = pr2 κ
 ```
