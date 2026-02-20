@@ -33,15 +33,12 @@ A linear congruence in the [integers](elementary-number-theory.integers.md) asks
 for an integer `x` such that `a * x ≡ b (mod m)`, i.e., such that `a * x` is
 [congruent](elementary-number-theory.congruence-integers.md) to `b` modulo `m`.
 Equivalently, this asks whether `m` is a
-[divisor](elementary-number-theory.divisibility-integers.md) of `b - ax`.
-
-The
+[divisor](elementary-number-theory.divisibility-integers.md) of `b - ax`. The
 {{#concept "linear congruence theorem" Disambiguation="integers" WDID=Q524257 WD="linear congruence theorem" Agda=linear-congruence-theorem-ℤ}}
 states that this congruence has a solution if and only if `gcd(a,m)` divides
 `b`, where `gcd(a,m)` is the
 [greatest common divisor](elementary-number-theory.greatest-common-divisor-integers.md)
-of `a` and `m`. The reverse implication is obtained constructively from
-[Bézout's lemma](elementary-number-theory.bezouts-lemma-integers.md).
+of `a` and `m`.
 
 ## Definition
 
