@@ -71,12 +71,15 @@ module _
   inv-equiv-count : X ≃ Fin number-of-elements-count
   inv-equiv-count = inv-equiv equiv-count
 
-  is-set-count : is-set X
-  is-set-count =
+  is-set-type-count : is-set X
+  is-set-type-count =
     is-set-equiv'
       ( Fin number-of-elements-count)
       ( equiv-count)
       ( is-set-Fin number-of-elements-count)
+
+  set-type-count : Set l
+  set-type-count = (X , is-set-type-count)
 ```
 
 ## Properties

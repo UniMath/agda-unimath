@@ -11,6 +11,7 @@ module finite-group-theory.orbits-permutations where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers

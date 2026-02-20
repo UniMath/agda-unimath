@@ -450,7 +450,7 @@ abstract
   is-set-is-finite {l} {X} H =
     apply-universal-property-trunc-Prop H
       ( is-set-Prop X)
-      ( λ e → is-set-count e)
+      ( λ e → is-set-type-count e)
 
 is-set-type-Finite-Type :
   {l : Level} (X : Finite-Type l) → is-set (type-Finite-Type X)

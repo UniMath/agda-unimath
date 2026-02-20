@@ -190,6 +190,16 @@ open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
 ```
 
+### Monotone convergence theorem {#Q4454933}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+  ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
 ### Pythagorean theorem {#Q11518}
 
 **Author:** [Louis Wasserman](https://github.com/lowasser)
@@ -234,6 +244,10 @@ open import real-numbers.distance-real-numbers using
 open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
   ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
     is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces using
+  ( modulus-of-uniform-continuity-map-limit-modulus-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}
