@@ -64,7 +64,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
     retraction i → is-emb i
   is-emb-retract-count e i R =
-    is-emb-is-injective (is-set-count e) (is-injective-retraction i R)
+    is-emb-is-injective (is-set-type-count e) (is-injective-retraction i R)
 
 emb-retract-count :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →

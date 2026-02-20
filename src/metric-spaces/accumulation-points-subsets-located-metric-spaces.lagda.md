@@ -28,10 +28,10 @@ open import lists.sequences
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.apartness-located-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.closed-subsets-located-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
@@ -82,7 +82,7 @@ module _
           ( x)) ∧
     is-limit-cauchy-approximation-prop-Metric-Space
       ( metric-space-Located-Metric-Space X)
-      ( map-cauchy-approximation-short-map-Metric-Space
+      ( map-short-map-cauchy-pseudocompletion-Metric-Space
         ( subspace-Located-Metric-Space X S)
         ( metric-space-Located-Metric-Space X)
         ( short-inclusion-subspace-Metric-Space
@@ -157,7 +157,7 @@ module _
               ( x)
               ( saturated-is-limit-cauchy-approximation-Metric-Space
                 ( metric-space-Located-Metric-Space X)
-                ( map-cauchy-approximation-short-map-Metric-Space
+                ( map-short-map-cauchy-pseudocompletion-Metric-Space
                   ( subspace-Located-Metric-Space
                     ( X)
                     ( subset-closed-subset-Located-Metric-Space X S))
@@ -232,7 +232,7 @@ module _
           ( ( λ n → a#x _) ,
             is-limit-modulated-cauchy-sequence-cauchy-approximation-Metric-Space
               ( metric-space-Located-Metric-Space X)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( subspace-Located-Metric-Space X S)
                 ( metric-space-Located-Metric-Space X)
                 ( short-inclusion-subspace-Metric-Space
