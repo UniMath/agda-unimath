@@ -204,8 +204,6 @@ open import elementary-number-theory.linear-congruence-theorem-integers using
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import elementary-number-theory.linear-congruence-theorem-integers using
-  ( linear-congruence-theorem-ℤ)
 open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
   ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
     is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
