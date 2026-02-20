@@ -18,13 +18,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [cumulative large set](foundation.cumulative-large-sets.md) `X`, `R` on
-a universe-polymorphic type family `X`, a value `x : X l0` is
+Given a [cumulative large set](foundation.cumulative-large-sets.md) `X`, a value
+`x : X l0` is
 {{#concept "small" Disambiguation="in a cumulative large set" Agda=is-small-Cumulative-Large-Set}}
-relative to a universe level `l` if it is
-[small](foundation.smallness-large-similarity-relations.md) relative to `l` in
-the [large similarity relation](foundation.large-similarity-relations.md) of
-`X`.
+relative to a universe level `l` if it is similar to a value of `X l`.
 
 ## Definition
 
@@ -67,10 +64,10 @@ module _
   (X : Cumulative-Large-Set α β)
   where
 
-  is-small-level-Cumulative-Large-Set :
+  is-small-self-Cumulative-Large-Set :
     {l : Level} (x : type-Cumulative-Large-Set X l) →
     is-small-Cumulative-Large-Set X l x
-  is-small-level-Cumulative-Large-Set x =
+  is-small-self-Cumulative-Large-Set x =
     ( x , refl-sim-Cumulative-Large-Set X x)
 ```
 

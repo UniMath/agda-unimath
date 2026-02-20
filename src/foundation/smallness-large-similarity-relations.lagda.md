@@ -20,7 +20,8 @@ open import foundation.universe-levels
 ## Idea
 
 Given a [large similarity relation](foundation.large-similarity-relations.md)
-`R` on a universe-polymorphic type family `X`, a value `x : X l0` is
+`R` on a family of types `X` stratified by universe levels, a value `x : X l0`
+is
 {{#concept "small" Disambiguation="relative to a large similarity relation" Agda=is-small-Large-Similarity-Relation}}
 relative to a universe level `l` if it is similar to a value in `X l`.
 
@@ -90,10 +91,10 @@ module _
   (R : Large-Similarity-Relation β X)
   where
 
-  is-small-level-Large-Similarity-Relation :
+  is-small-self-Large-Similarity-Relation :
     {l : Level} (x : X l) →
     is-small-Large-Similarity-Relation R l x
-  is-small-level-Large-Similarity-Relation x =
+  is-small-self-Large-Similarity-Relation x =
     ( x , refl-sim-Large-Similarity-Relation R x)
 ```
 
