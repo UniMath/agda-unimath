@@ -20,7 +20,7 @@ open import foundation.universe-levels
 ## Idea
 
 Given a [large similarity relation](foundation.large-similarity-relations.md)
-`R` on a universe-polymorphic type family `X`, an value `x : X l0` is
+`R` on a universe-polymorphic type family `X`, a value `x : X l0` is
 {{#concept "small" Disambiguation="relative to a large similarity relation" Agda=is-small-Large-Similarity-Relation}}
 relative to a universe level `l` if it is similar to a value in `X l`.
 

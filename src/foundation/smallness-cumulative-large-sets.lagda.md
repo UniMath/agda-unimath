@@ -19,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 Given a [cumulative large set](foundation.cumulative-large-sets.md) `X`, `R` on
-a universe-polymorphic type family `X`, an value `x : X l0` is
+a universe-polymorphic type family `X`, a value `x : X l0` is
 {{#concept "small" Disambiguation="in a cumulative large set" Agda=is-small-Cumulative-Large-Set}}
 relative to a universe level `l` if it is
 [small](foundation.smallness-large-similarity-relations.md) relative to `l` in
