@@ -466,6 +466,7 @@ open import foundation.symmetric-operations public
 open import foundation.telescopes public
 open import foundation.terminal-spans-families-of-types public
 open import foundation.tight-apartness-relations public
+open import foundation.tight-large-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
 open import foundation.total-partial-functions public
