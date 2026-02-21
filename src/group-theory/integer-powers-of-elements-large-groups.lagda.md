@@ -232,9 +232,9 @@ module _
             ( equational-reasoning
               x * (mul-inv x * y)
               ＝ raise-Large-Group G l1 y
-                by cancel-left-mul-div-Large-Group G x y
+                by eq-cancel-left-mul-div-Large-Group G x y
               ＝ (y * x) * mul-inv x
-                by inv (cancel-right-mul-div-Large-Group G x y)
+                by inv (eq-cancel-right-mul-div-Large-Group G x y)
               ＝ (x * y) * mul-inv x
                 by ap-mul-Large-Group G (inv xy=yx) refl
               ＝ x * (y * mul-inv x)
@@ -311,9 +311,9 @@ module _
             ( equational-reasoning
               (x * mul-inv y) * y
               ＝ raise-Large-Group G l2 x
-                by cancel-right-div-mul-Large-Group G y x
+                by eq-cancel-right-div-mul-Large-Group G y x
               ＝ mul-inv y * (y * x)
-                by inv (cancel-left-div-mul-Large-Group G y x)
+                by inv (eq-cancel-left-div-mul-Large-Group G y x)
               ＝ mul-inv y * (x * y)
                 by ap-mul-Large-Group G refl (inv xy=yx)
               ＝ (mul-inv y * x) * y
@@ -428,28 +428,9 @@ module _
                   ( inv (int-power-int-Large-Group G n x))
                   ( inv (int-power-int-Large-Group G n y))
         x⁻¹y⁻¹=⟨xy⟩⁻¹ =
-          eq-sim-Large-Group G _ _
-            ( unique-right-inv-Large-Group G (x * y) (mul-inv x * mul-inv y)
-              ( equational-reasoning
-                (x * y) * (mul-inv x * mul-inv y)
-                ＝ (y * x) * (mul-inv x * mul-inv y)
-                  by ap-mul-Large-Group G xy=yx refl
-                ＝ y * (x * (mul-inv x * mul-inv y))
-                  by associative-mul-Large-Group G _ _ _
-                ＝ y * raise-Large-Group G l1 (mul-inv y)
-                  by
-                    ap-mul-Large-Group G
-                      ( refl)
-                      ( cancel-left-mul-div-Large-Group G x _)
-                ＝ raise-Large-Group G l1 (y * mul-inv y)
-                  by mul-raise-right-Large-Group G _ _
-                ＝ raise-Large-Group G l1 (raise-unit-Large-Group G l2)
-                  by
-                    ap
-                      ( raise-Large-Group G l1)
-                      ( sim-right-inverse-law-mul-Large-Group G y)
-                ＝ raise-unit-Large-Group G (l1 ⊔ l2)
-                  by raise-raise-Large-Group G _))
+          inv
+            ( ( ap (inv-Large-Group G) xy=yx) ∙
+              ( distributive-inv-mul-Large-Group G y x))
       in
         ind-ℤ
           ( λ k →
