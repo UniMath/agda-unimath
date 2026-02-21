@@ -367,7 +367,7 @@ module _
       mul-Large-Left-Module-Large-Ring M (zero-Large-Ring R) x ＝
       raise-zero-Large-Left-Module-Large-Ring M l
     left-zero-law-mul-Large-Left-Module-Large-Ring x =
-      eq-zero-is-idempotent-add-Large-Ab
+      eq-zero-is-idempotent-Large-Ab
         ( large-ab-Large-Left-Module-Large-Ring M)
         ( _)
         ( equational-reasoning
@@ -428,7 +428,7 @@ module _
         ( zero-Large-Left-Module-Large-Ring M) ＝
       raise-zero-Large-Left-Module-Large-Ring M l
     right-zero-law-mul-Large-Left-Module-Large-Ring a =
-      eq-zero-is-idempotent-add-Large-Ab
+      eq-zero-is-idempotent-Large-Ab
         ( large-ab-Large-Left-Module-Large-Ring M)
         ( _)
         ( equational-reasoning
