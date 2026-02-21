@@ -24,7 +24,7 @@ open import order-theory.posets
 ## Idea
 
 Consider a [universe level](foundation.universe-levels.md) `l`. An
-`l`-{{#concept "inflattice"  Agda=Inflattice}} is a
+`l`-{{#concept "inflattice" Agda=Inflattice}} is a
 [poset](order-theory.posets.md) which has all
 [greatest lower bounds](order-theory.greatest-lower-bounds-posets.md) of
 families of elements indexed by a type at universe level `l`.

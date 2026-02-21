@@ -2,14 +2,13 @@
 
 ```agda
 module univalent-combinatorics.sums-of-natural-numbers where
-
-open import elementary-number-theory.sums-of-natural-numbers public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types

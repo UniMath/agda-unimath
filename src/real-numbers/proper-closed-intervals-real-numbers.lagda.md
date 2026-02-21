@@ -25,6 +25,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -33,10 +34,10 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.closed-subsets-metric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
@@ -206,6 +207,20 @@ short-map-clamp-proper-closed-interval-ℝ [a,b] =
     ( closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
+### The underlying subtype of a proper closed interval is inhabited
+
+```agda
+abstract
+  is-inhabited-subtype-proper-closed-interval-ℝ :
+    {l1 l2 : Level} (l3 : Level) ([a,b] : proper-closed-interval-ℝ l1 l2) →
+    is-inhabited-subtype (subtype-proper-closed-interval-ℝ (l1 ⊔ l3) [a,b])
+  is-inhabited-subtype-proper-closed-interval-ℝ l3 (a , b , a<b) =
+    intro-exists
+      ( raise-ℝ l3 a)
+      ( leq-sim-ℝ (sim-raise-ℝ l3 a) ,
+        preserves-leq-left-raise-ℝ l3 (leq-le-ℝ a<b))
+```
+
 ### Every real number in a proper closed interval is an accumulation point in that proper closed interval
 
 Note that this cannot be made more universe-polymorphic.
@@ -247,7 +262,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-add =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-add)
@@ -269,7 +284,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -282,7 +297,7 @@ abstract
                 by ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space
@@ -330,7 +345,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-diff =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-diff)
@@ -352,7 +367,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -366,7 +381,7 @@ abstract
                   ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space
@@ -399,7 +414,7 @@ abstract
         ( [a,b])
         ( x)
         ( a≤x≤b))
-      ( cotransitive-le-ℝ a b x a<b)
+      ( cotransitive-le-ℝ a x b a<b)
 ```
 
 ### Given any two elements `x` and `y` of a proper closed interval in an `ε`-neighborhood of each other, there exists a third point `z` in an `ε`-neighborhood of both `x` and `y` but apart from both of them
@@ -800,10 +815,16 @@ module _
                       ( a+δ<x)
                       ( ε'+ε'<ε)
                       ( x-y<ε''))
-                    ( cotransitive-le-ℝ _ _
+                    ( cotransitive-le-ℝ
+                      ( zero-ℝ)
                       ( yℝ -ℝ xℝ)
+                      ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
-                ( cotransitive-le-ℝ _ _ (xℝ -ℝ yℝ) (is-positive-real-ℚ⁺ ε'')))
+                ( cotransitive-le-ℝ
+                  ( zero-ℝ)
+                  ( xℝ -ℝ yℝ)
+                  ( real-ℚ⁺ ε'')
+                  ( is-positive-real-ℚ⁺ ε'')))
           ( λ x<b →
             do
               (δ , x+δ<b) ← exists-positive-rational-separation-le-ℝ x<b
@@ -827,9 +848,15 @@ module _
                         ( x+δ<b)
                         ( ε'+ε'<ε)
                         ( x-y<ε''))
-                    ( cotransitive-le-ℝ _ _
+                    ( cotransitive-le-ℝ
+                      ( zero-ℝ)
                       ( yℝ -ℝ xℝ)
+                      ( real-ℚ⁺ ε'')
                       ( is-positive-real-ℚ⁺ ε'')))
-                ( cotransitive-le-ℝ _ _ (xℝ -ℝ yℝ) (is-positive-real-ℚ⁺ ε'')))
-          ( cotransitive-le-ℝ a b xℝ a<b)
+                ( cotransitive-le-ℝ
+                  ( zero-ℝ)
+                  ( xℝ -ℝ yℝ)
+                  ( real-ℚ⁺ ε'')
+                  ( is-positive-real-ℚ⁺ ε'')))
+          ( cotransitive-le-ℝ a xℝ b a<b)
 ```

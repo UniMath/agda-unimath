@@ -17,6 +17,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -295,6 +296,25 @@ abstract
     transitive-sim-ℝ _ _ _
       ( preserves-sim-right-add-ℝ _ _ _ x~x')
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
+```
+
+### Raised unit laws for addition
+
+```agda
+abstract
+  right-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → x +ℝ raise-zero-ℝ l ＝ x
+  right-raise-zero-law-add-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (x +ℝ raise-zero-ℝ l))
+        ( right-unit-law-add-ℝ x)
+        ( preserves-sim-left-add-ℝ _ _ _ (sim-raise-ℝ' l zero-ℝ)))
+
+  left-raise-zero-law-add-ℝ :
+    {l : Level} (x : ℝ l) → raise-zero-ℝ l +ℝ x ＝ x
+  left-raise-zero-law-add-ℝ x =
+    commutative-add-ℝ _ _ ∙ right-raise-zero-law-add-ℝ x
 ```
 
 ### Swapping laws for addition on real numbers
@@ -596,6 +616,14 @@ abstract
   unique-left-inverse-add-ℝ x y x+y~0 =
     unique-right-inverse-add-ℝ y x
       ( tr (λ z → sim-ℝ z zero-ℝ) (commutative-add-ℝ x y) x+y~0)
+```
+
+### `½ + ½ = 1`
+
+```agda
+abstract
+  twice-one-half-ℝ : one-half-ℝ +ℝ one-half-ℝ ＝ one-ℝ
+  twice-one-half-ℝ = add-real-ℚ _ _ ∙ ap real-ℚ twice-one-half-ℚ
 ```
 
 ### Adding raised real numbers

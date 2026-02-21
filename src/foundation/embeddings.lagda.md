@@ -378,7 +378,7 @@ module _
           ( is-prop-map-is-emb is-emb-f))
 ```
 
-### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
+### In a commuting square of which the sides are equivalences, the top map is an embedding if and only if the bottom map is an embedding
 
 ```agda
 module _

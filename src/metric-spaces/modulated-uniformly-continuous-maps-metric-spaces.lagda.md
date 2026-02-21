@@ -25,10 +25,11 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuous-maps-metric-spaces
+open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 ```
@@ -84,9 +85,7 @@ module _
   modulated-ucont-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   modulated-ucont-map-Metric-Space =
     Σ ( map-Metric-Space X Y)
-      ( λ f →
-        Σ ( ℚ⁺ → ℚ⁺)
-          ( is-modulus-of-uniform-continuity-map-Metric-Space X Y f))
+      ( modulus-of-uniform-continuity-map-Metric-Space X Y)
 
   map-modulated-ucont-map-Metric-Space :
     modulated-ucont-map-Metric-Space → map-Metric-Space X Y

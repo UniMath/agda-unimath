@@ -191,8 +191,21 @@ open import elementary-number-theory.natural-numbers using
 [malarbol](http://www.github.com/malarbol)
 
 ```agda
+open import linear-algebra.cauchy-schwarz-inequality-complex-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℂ-Inner-Product-Space)
 open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
   ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
+```
+
+### 79. The Intermediate Value Theorem {#79}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.intermediate-value-theorem using
+  ( intermediate-value-theorem-ℝ)
+open import analysis.constructive-intermediate-value-theorem using
+  ( constructive-intermediate-value-theorem-ℝ)
 ```
 
 ### 80. The fundamental theorem of arithmetic {#80}

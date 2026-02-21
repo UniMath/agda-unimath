@@ -19,6 +19,7 @@ open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binary-sum-decompositions-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers

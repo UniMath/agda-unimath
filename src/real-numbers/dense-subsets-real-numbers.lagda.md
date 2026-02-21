@@ -1,6 +1,8 @@
 # Dense subsets of the real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.dense-subsets-real-numbers where
 ```
 
@@ -17,7 +19,9 @@ open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.intersections-subtypes
 open import foundation.propositional-truncations
@@ -40,6 +44,7 @@ open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.proper-closed-intervals-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
@@ -413,4 +418,79 @@ module _
                 ≤ b
                   by leq-le-ℝ a+ε<b)
               ( b<y))
+```
+
+### If `S` is dense in `ℝ`, it is dense in any proper closed interval in `ℝ`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (S : dense-subset-ℝ l1 l2)
+  ([a,b]@(a , b , a<b) : proper-closed-interval-ℝ l3 l4)
+  where
+
+  abstract
+    is-dense-subset-proper-closed-interval-ℝ :
+      is-dense-subset-Metric-Space
+        ( metric-space-proper-closed-interval-ℝ l2 [a,b])
+        ( subset-dense-subset-ℝ S ∘ pr1)
+    is-dense-subset-proper-closed-interval-ℝ (x , a≤x , x≤b) ε =
+      let
+        motive =
+          ∃
+            ( type-proper-closed-interval-ℝ l2 [a,b])
+            ( λ (y , _ , _) →
+              neighborhood-prop-ℝ l2 ε x y ∧ subset-dense-subset-ℝ S y)
+        open do-syntax-trunc-Prop motive
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in
+        elim-disjunction
+          ( motive)
+          ( λ a<x →
+            do
+              (δ , a+δ<x) ← exists-positive-rational-separation-le-ℝ a<x
+              (y , y≤x , y∈S , Nε'xy) ←
+                is-dense-below-dense-subset-ℝ S x (min-ℚ⁺ δ ε)
+              intro-exists
+                ( y ,
+                  ( chain-of-inequalities
+                    a
+                    ≤ x -ℝ real-ℚ⁺ δ
+                      by leq-le-ℝ (le-transpose-left-add-ℝ _ _ _ a+δ<x)
+                    ≤ x -ℝ real-ℚ⁺ (min-ℚ⁺ δ ε)
+                      by
+                        reverses-leq-left-diff-ℝ _
+                          ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δ ε))
+                    ≤ y
+                      by
+                        leq-transpose-right-add-ℝ _ _ _
+                          ( left-leq-real-bound-neighborhood-ℝ _ _ _ Nε'xy)) ,
+                  transitive-leq-ℝ y x b x≤b y≤x)
+                ( weakly-monotonic-neighborhood-ℝ _ _ _ _
+                    ( leq-right-min-ℚ⁺ δ ε)
+                    ( Nε'xy) ,
+                  y∈S))
+          ( λ x<b →
+            do
+              (δ , x+δ<b) ← exists-positive-rational-separation-le-ℝ x<b
+              (y , x≤y , y∈S , Nε'xy) ←
+                is-dense-above-dense-subset-ℝ S x (min-ℚ⁺ δ ε)
+              intro-exists
+                ( y ,
+                  transitive-leq-ℝ a x y x≤y a≤x ,
+                  ( chain-of-inequalities
+                    y
+                    ≤ x +ℝ real-ℚ⁺ (min-ℚ⁺ δ ε)
+                      by right-leq-real-bound-neighborhood-ℝ _ _ _ Nε'xy
+                    ≤ x +ℝ real-ℚ⁺ δ
+                      by
+                        preserves-leq-left-add-ℝ _ _ _
+                          ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δ ε))
+                    ≤ b
+                      by leq-le-ℝ x+δ<b))
+                ( weakly-monotonic-neighborhood-ℝ _ _ _ _
+                    ( leq-right-min-ℚ⁺ δ ε)
+                    ( Nε'xy) ,
+                  y∈S))
+          ( cotransitive-le-ℝ a x b a<b)
 ```

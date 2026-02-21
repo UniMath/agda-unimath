@@ -69,8 +69,8 @@ module _
 
   left-square-coherence-htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) →
-    left-map-hom-cospan-diagram 𝒮 𝒯 h ~
-    left-map-hom-cospan-diagram 𝒮 𝒯 h' →
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h' →
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l1 ⊔ l3')
   left-square-coherence-htpy-hom-cospan-diagram h h' L C =
@@ -82,8 +82,8 @@ module _
 
   right-square-coherence-htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) →
-    right-map-hom-cospan-diagram 𝒮 𝒯 h ~
-    right-map-hom-cospan-diagram 𝒮 𝒯 h' →
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h' →
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l2 ⊔ l3')
   right-square-coherence-htpy-hom-cospan-diagram h h' R C =
@@ -95,10 +95,10 @@ module _
 
   coherence-htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) →
-    left-map-hom-cospan-diagram 𝒮 𝒯 h ~
-    left-map-hom-cospan-diagram 𝒮 𝒯 h' →
-    right-map-hom-cospan-diagram 𝒮 𝒯 h ~
-    right-map-hom-cospan-diagram 𝒮 𝒯 h' →
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h' →
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h' →
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l1 ⊔ l2 ⊔ l3')
   coherence-htpy-hom-cospan-diagram h h' L R C =
@@ -108,11 +108,11 @@ module _
   htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l1' ⊔ l2' ⊔ l3')
   htpy-hom-cospan-diagram h h' =
-    Σ ( left-map-hom-cospan-diagram 𝒮 𝒯 h ~
-        left-map-hom-cospan-diagram 𝒮 𝒯 h')
+    Σ ( map-domain-hom-cospan-diagram 𝒮 𝒯 h ~
+        map-domain-hom-cospan-diagram 𝒮 𝒯 h')
       ( λ L →
-        Σ ( right-map-hom-cospan-diagram 𝒮 𝒯 h ~
-            right-map-hom-cospan-diagram 𝒮 𝒯 h')
+        Σ ( map-codomain-hom-cospan-diagram 𝒮 𝒯 h ~
+            map-codomain-hom-cospan-diagram 𝒮 𝒯 h')
           ( λ R →
             Σ ( cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
                 cospanning-map-hom-cospan-diagram 𝒮 𝒯 h')
@@ -127,11 +127,13 @@ module _
   where
 
   htpy-left-map-htpy-hom-cospan-diagram :
-    left-map-hom-cospan-diagram 𝒮 𝒯 h ~ left-map-hom-cospan-diagram 𝒮 𝒯 h'
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-domain-hom-cospan-diagram 𝒮 𝒯 h'
   htpy-left-map-htpy-hom-cospan-diagram = pr1 H
 
   htpy-right-map-htpy-hom-cospan-diagram :
-    right-map-hom-cospan-diagram 𝒮 𝒯 h ~ right-map-hom-cospan-diagram 𝒮 𝒯 h'
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h ~
+    map-codomain-hom-cospan-diagram 𝒮 𝒯 h'
   htpy-right-map-htpy-hom-cospan-diagram = pr1 (pr2 H)
 
   htpy-cospanning-map-htpy-hom-cospan-diagram :
@@ -183,11 +185,11 @@ module _
     (h : hom-cospan-diagram 𝒮 𝒯) → is-torsorial (htpy-hom-cospan-diagram 𝒮 𝒯 h)
   is-torsorial-htpy-hom-cospan-diagram h =
     is-torsorial-Eq-structure
-      ( is-torsorial-htpy (left-map-hom-cospan-diagram 𝒮 𝒯 h))
-      ( left-map-hom-cospan-diagram 𝒮 𝒯 h , refl-htpy)
+      ( is-torsorial-htpy (map-domain-hom-cospan-diagram 𝒮 𝒯 h))
+      ( map-domain-hom-cospan-diagram 𝒮 𝒯 h , refl-htpy)
       ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (right-map-hom-cospan-diagram 𝒮 𝒯 h))
-        ( right-map-hom-cospan-diagram 𝒮 𝒯 h , refl-htpy)
+        ( is-torsorial-htpy (map-codomain-hom-cospan-diagram 𝒮 𝒯 h))
+        ( map-codomain-hom-cospan-diagram 𝒮 𝒯 h , refl-htpy)
         ( is-torsorial-Eq-structure
           ( is-torsorial-htpy (cospanning-map-hom-cospan-diagram 𝒮 𝒯 h))
           ( cospanning-map-hom-cospan-diagram 𝒮 𝒯 h , refl-htpy)
