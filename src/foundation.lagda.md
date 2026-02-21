@@ -129,6 +129,10 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-cumulative-large-sets public
+open import foundation.dependent-products-large-binary-relations public
+open import foundation.dependent-products-large-equivalence-relations public
+open import foundation.dependent-products-large-similarity-relations public
 open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-products-subtypes public
 open import foundation.dependent-sums-pullbacks public
@@ -219,7 +223,9 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
+open import foundation.function-cumulative-large-sets public
 open import foundation.function-extensionality public
+open import foundation.function-large-binary-relations public
 open import foundation.function-large-equivalence-relations public
 open import foundation.function-large-similarity-relations public
 open import foundation.function-types public
