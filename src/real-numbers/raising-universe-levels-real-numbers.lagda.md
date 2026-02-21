@@ -12,6 +12,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -115,6 +116,22 @@ abstract
     transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 x) (sim-raise-ℝ' l1 x)
 ```
 
+### The cumulative large set of real numbers
+
+```agda
+cumulative-large-set-ℝ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℝ =
+  λ where
+    .type-Cumulative-Large-Set →
+      ℝ
+    .large-similarity-relation-Cumulative-Large-Set →
+      large-similarity-relation-ℝ
+    .raise-Cumulative-Large-Set →
+      raise-ℝ
+    .sim-raise-Cumulative-Large-Set →
+      sim-raise-ℝ
+```
+
 ### Raising a real to its own level is the identity
 
 ```agda
@@ -133,27 +150,12 @@ module _
 
   abstract
     eq-raise-sim-ℝ : sim-ℝ x y → raise-ℝ l2 x ＝ raise-ℝ l1 y
-    eq-raise-sim-ℝ x~y =
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          raise-ℝ l2 x
-          ~ℝ x
-            by sim-raise-ℝ' l2 x
-          ~ℝ y
-            by x~y
-          ~ℝ raise-ℝ l1 y
-            by sim-raise-ℝ l1 y)
+    eq-raise-sim-ℝ =
+      eq-raise-sim-Cumulative-Large-Set cumulative-large-set-ℝ x y
 
     sim-eq-raise-ℝ : raise-ℝ l2 x ＝ raise-ℝ l1 y → sim-ℝ x y
-    sim-eq-raise-ℝ l2x=l1y =
-      similarity-reasoning-ℝ
-        x
-        ~ℝ raise-ℝ l2 x
-          by sim-raise-ℝ l2 x
-        ~ℝ raise-ℝ l1 y
-          by sim-eq-ℝ l2x=l1y
-        ~ℝ y
-          by sim-raise-ℝ' l1 y
+    sim-eq-raise-ℝ =
+      sim-eq-raise-Cumulative-Large-Set cumulative-large-set-ℝ x y
 ```
 
 ### Raising a real by two universe levels is equivalent to raising by the least upper bound of the universe levels
@@ -163,12 +165,5 @@ abstract
   raise-raise-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) →
     raise-ℝ l2 (raise-ℝ l3 x) ＝ raise-ℝ (l2 ⊔ l3) x
-  raise-raise-ℝ {l1} {l2} {l3} x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        raise-ℝ l2 (raise-ℝ l3 x)
-        ~ℝ raise-ℝ l3 x
-          by sim-raise-ℝ' l2 _
-        ~ℝ raise-ℝ (l2 ⊔ l3) x
-          by sim-raise-raise-ℝ l3 (l2 ⊔ l3) x)
+  raise-raise-ℝ = raise-raise-Cumulative-Large-Set cumulative-large-set-ℝ _ _
 ```

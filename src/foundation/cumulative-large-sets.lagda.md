@@ -216,23 +216,6 @@ module _
       is-emb-raise-Cumulative-Large-Set l1 l2)
 ```
 
-### Raising an element of a cumulative large set to its own universe level is the identity
-
-```agda
-module _
-  {α : Level → Level}
-  {β : Level → Level → Level}
-  (S : Cumulative-Large-Set α β)
-  where
-
-  abstract
-    eq-raise-Cumulative-Large-Set :
-      {l : Level} (x : type-Cumulative-Large-Set S l) →
-      raise-Cumulative-Large-Set S l x ＝ x
-    eq-raise-Cumulative-Large-Set {l} x =
-      eq-sim-Cumulative-Large-Set S _ _ (sim-raise-Cumulative-Large-Set' S l x)
-```
-
 ### Two elements of a cumulative large set are similar if and only if they are equal when raised to each other's universe level
 
 ```agda
@@ -265,11 +248,11 @@ module _
 
     sim-eq-raise-Cumulative-Large-Set :
       {l1 l2 : Level}
-      {x : type-Cumulative-Large-Set S l1}
-      {y : type-Cumulative-Large-Set S l2} →
+      (x : type-Cumulative-Large-Set S l1)
+      (y : type-Cumulative-Large-Set S l2) →
       raise-Cumulative-Large-Set S l2 x ＝ raise-Cumulative-Large-Set S l1 y →
       sim-Cumulative-Large-Set S x y
-    sim-eq-raise-Cumulative-Large-Set {l1} {l2} {x} {y} rx=ry =
+    sim-eq-raise-Cumulative-Large-Set {l1} {l2} x y rx=ry =
       let
         open similarity-reasoning-Cumulative-Large-Set S
       in
@@ -291,7 +274,24 @@ module _
         raise-Cumulative-Large-Set S l1 y))
   eq-raise-iff-sim-Cumulative-Large-Set x y =
     ( eq-raise-sim-Cumulative-Large-Set x y ,
-      sim-eq-raise-Cumulative-Large-Set)
+      sim-eq-raise-Cumulative-Large-Set x y)
+
+  abstract
+    eq-raise-sim-Cumulative-Large-Set' :
+      {l1 l2 : Level}
+      (x : type-Cumulative-Large-Set S (l1 ⊔ l2))
+      (y : type-Cumulative-Large-Set S l2) →
+      sim-Cumulative-Large-Set S x y → x ＝ raise-Cumulative-Large-Set S l1 y
+    eq-raise-sim-Cumulative-Large-Set' {l1} x y x~y =
+      eq-sim-Cumulative-Large-Set S
+        ( x)
+        ( raise-Cumulative-Large-Set S l1 y)
+        ( transitive-sim-Cumulative-Large-Set S
+          ( x)
+          ( y)
+          ( raise-Cumulative-Large-Set S l1 y)
+          ( sim-raise-Cumulative-Large-Set S l1 y)
+          ( x~y))
 ```
 
 ### A value raised to one universe level is similar to itself raised to another universe level
@@ -340,6 +340,42 @@ module _
               by sim-raise-Cumulative-Large-Set' S l1 _
             ~ raise-Cumulative-Large-Set S (l1 ⊔ l2) x
               by sim-raise-raise-Cumulative-Large-Set S l2 (l1 ⊔ l2) x)
+```
+
+### Raising an element of a cumulative large set to its own universe level, or any lesser level, is the identity
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (S : Cumulative-Large-Set α β)
+  where
+
+  abstract
+    eq-raise-Cumulative-Large-Set :
+      {l : Level} (x : type-Cumulative-Large-Set S l) →
+      raise-Cumulative-Large-Set S l x ＝ x
+    eq-raise-Cumulative-Large-Set {l} x =
+      eq-sim-Cumulative-Large-Set S _ _ (sim-raise-Cumulative-Large-Set' S l x)
+
+    eq-raise-leq-level-Cumulative-Large-Set :
+      (l1 : Level) {l2 : Level} (x : type-Cumulative-Large-Set S (l1 ⊔ l2)) →
+      raise-Cumulative-Large-Set S l2 x ＝ x
+    eq-raise-leq-level-Cumulative-Large-Set l1 {l2} x =
+      equational-reasoning
+        raise-Cumulative-Large-Set S l2 x
+        ＝
+          raise-Cumulative-Large-Set S
+            ( l2)
+            ( raise-Cumulative-Large-Set S (l1 ⊔ l2) x)
+          by
+            ap
+              ( raise-Cumulative-Large-Set S l2)
+              ( inv (eq-raise-Cumulative-Large-Set x))
+        ＝ raise-Cumulative-Large-Set S (l1 ⊔ l2) x
+          by raise-raise-Cumulative-Large-Set S l2 (l1 ⊔ l2) x
+        ＝ x
+          by eq-raise-Cumulative-Large-Set x
 ```
 
 ### A universe-raising operation on a universe-polymorphic family of sets induces a cumulative large set

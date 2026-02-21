@@ -8,11 +8,13 @@ module ring-theory.large-rings where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.sets
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -45,6 +47,10 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
 
   field
     large-ab-Large-Ring : Large-Ab α β
+
+  cumulative-large-set-Large-Ring : Cumulative-Large-Set α β
+  cumulative-large-set-Large-Ring =
+    cumulative-large-set-Large-Ab large-ab-Large-Ring
 
   type-Large-Ring : (l : Level) → UU (α l)
   type-Large-Ring = type-Large-Ab large-ab-Large-Ring
@@ -222,24 +228,31 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
   where
 
-  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α
+  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α β
   multiplicative-large-semigroup-Large-Ring =
-    make-Large-Semigroup
-      ( set-Large-Ring R)
-      ( mul-Large-Ring R)
-      ( associative-mul-Large-Ring R)
+    λ where
+      .cumulative-large-set-Large-Semigroup →
+        cumulative-large-set-Large-Ring R
+      .sim-preserving-binary-operator-mul-Large-Semigroup →
+        make-sim-preserving-binary-operator-Cumulative-Large-Set
+          ( cumulative-large-set-Large-Ring R)
+          ( mul-Large-Ring R)
+          ( λ x x' y y' x~x' y~y' →
+            preserves-sim-mul-Large-Ring R x x' x~x' y y' y~y')
+      .associative-mul-Large-Semigroup →
+        associative-mul-Large-Ring R
 
   multiplicative-large-monoid-Large-Ring : Large-Monoid α β
   multiplicative-large-monoid-Large-Ring =
-    make-Large-Monoid
-      ( multiplicative-large-semigroup-Large-Ring)
-      ( large-similarity-relation-Large-Ring R)
-      ( raise-Large-Ring R)
-      ( sim-raise-Large-Ring R)
-      ( preserves-sim-mul-Large-Ring R)
-      ( one-Large-Ring R)
-      ( left-unit-law-mul-Large-Ring R)
-      ( right-unit-law-mul-Large-Ring R)
+    λ where
+      .large-semigroup-Large-Monoid →
+        multiplicative-large-semigroup-Large-Ring
+      .unit-Large-Monoid →
+        one-Large-Ring R
+      .left-unit-law-mul-Large-Monoid →
+        left-unit-law-mul-Large-Ring R
+      .right-unit-law-mul-Large-Monoid →
+        right-unit-law-mul-Large-Ring R
 
   raise-one-Large-Ring : (l : Level) → type-Large-Ring R l
   raise-one-Large-Ring =
@@ -324,8 +337,10 @@ module _
   hom-raise-Large-Ring =
     ( hom-raise-Large-Ab (large-ab-Large-Ring R) l1 l2 ,
       inv
-        ( raise-mul-Large-Monoid
+        ( mul-raise-raise-Large-Monoid
           ( multiplicative-large-monoid-Large-Ring R)
+          ( l2)
+          ( l2)
           ( _)
           ( _)) ,
       raise-raise-Large-Ring R _)
