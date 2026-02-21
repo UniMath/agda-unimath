@@ -190,7 +190,7 @@ module _
     mul-Large-Commutative-Monoid M (raise-unit-Large-Commutative-Monoid l2) x ＝
     raise-Large-Commutative-Monoid l2 x
   raise-left-unit-law-Large-Commutative-Monoid =
-    raise-left-unit-law-mul-Large-Monoid
+    left-raise-unit-law-mul-Large-Monoid
       ( large-monoid-Large-Commutative-Monoid M)
 
   raise-right-unit-law-Large-Commutative-Monoid :
@@ -198,7 +198,7 @@ module _
     mul-Large-Commutative-Monoid M x (raise-unit-Large-Commutative-Monoid l2) ＝
     raise-Large-Commutative-Monoid l2 x
   raise-right-unit-law-Large-Commutative-Monoid =
-    raise-right-unit-law-mul-Large-Monoid
+    right-raise-unit-law-mul-Large-Monoid
       ( large-monoid-Large-Commutative-Monoid M)
 
   raise-unit-lzero-Large-Commutative-Monoid :

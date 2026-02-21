@@ -253,14 +253,14 @@ module _
     mul-Large-Group G (raise-unit-Large-Group G l2) x ＝
     raise-Large-Group G l2 x
   raise-left-unit-law-Large-Group =
-    raise-left-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
+    left-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-right-unit-law-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
     mul-Large-Group G x (raise-unit-Large-Group G l2) ＝
     raise-Large-Group G l2 x
   raise-right-unit-law-Large-Group =
-    raise-right-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
+    right-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-unit-lzero-Large-Group :
     raise-unit-Large-Group G lzero ＝ unit-Large-Group G
