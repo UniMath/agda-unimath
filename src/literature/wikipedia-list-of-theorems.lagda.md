@@ -181,6 +181,16 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
     greatest-fixed-point-knaster-tarski-Suplattice)
 ```
 
+### Kőnig's theorem (set theory) {#Q1077462}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import set-theory.konigs-theorem using
+  ( le-indexed-Σ-Π-Cardinal ;
+    le-Σ-Π-Cardinal-LEM)
+```
+
 ### Lawvere's fixed point theorem {#Q15809744}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
