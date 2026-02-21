@@ -17,6 +17,11 @@ open import foundation.universe-levels
 
 ## Idea
 
+The [dependent product](foundation.dependent-products-large-binary-relations.md)
+of a family of
+[large similarity relations](foundation.large-similarity-relations.md) is a
+large similarity relation.
+
 ## Definition
 
 ```agda
