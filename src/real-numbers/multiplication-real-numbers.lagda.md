@@ -54,6 +54,7 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -1141,6 +1142,14 @@ abstract
       ( a' *ℝ b')
       ( preserves-sim-right-mul-ℝ b' a a' a~a')
       ( preserves-sim-left-mul-ℝ a b b' b~b')
+
+sim-preserving-binary-operator-mul-ℝ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℝ
+sim-preserving-binary-operator-mul-ℝ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℝ)
+    ( mul-ℝ)
+    ( λ _ _ _ _ a~a' b~b' → preserves-sim-mul-ℝ a~a' b~b')
 ```
 
 ### Raised unit laws
