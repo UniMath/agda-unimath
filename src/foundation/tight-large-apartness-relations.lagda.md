@@ -99,7 +99,7 @@ open Tight-Large-Apartness-Relation public
 
 ## Properties
 
-### A Tight large apartness relation induces a large similarity relation
+### A tight large apartness relation induces a large similarity relation
 
 ```agda
 module _
@@ -118,25 +118,6 @@ module _
     large-relation-Large-Relation-Prop A sim-prop-Tight-Large-Apartness-Relation
 
   abstract
-    refl-sim-Tight-Large-Apartness-Relation :
-      is-reflexive-Large-Relation A sim-Tight-Large-Apartness-Relation
-    refl-sim-Tight-Large-Apartness-Relation =
-      antirefl-Tight-Large-Apartness-Relation R
-
-    symmetric-sim-Tight-Large-Apartness-Relation :
-      is-symmetric-Large-Relation A sim-Tight-Large-Apartness-Relation
-    symmetric-sim-Tight-Large-Apartness-Relation x y =
-      map-neg (symmetric-Tight-Large-Apartness-Relation R y x)
-
-    transitive-sim-Tight-Large-Apartness-Relation :
-      is-transitive-Large-Relation A sim-Tight-Large-Apartness-Relation
-    transitive-sim-Tight-Large-Apartness-Relation x y z ¬y#z ¬x#y x#z =
-      elim-disjunction
-        ( empty-Prop)
-        ( ¬x#y)
-        ( ¬y#z)
-        ( cotransitive-Tight-Large-Apartness-Relation R x y z x#z)
-
     eq-sim-Tight-Large-Apartness-Relation :
       {l : Level} (x y : A l) →
       sim-Tight-Large-Apartness-Relation x y → x ＝ y
@@ -146,15 +127,8 @@ module _
   large-equivalence-relation-Tight-Large-Apartness-Relation :
     Large-Equivalence-Relation β A
   large-equivalence-relation-Tight-Large-Apartness-Relation =
-    λ where
-      .sim-prop-Large-Equivalence-Relation →
-        sim-prop-Tight-Large-Apartness-Relation
-      .refl-sim-Large-Equivalence-Relation →
-        refl-sim-Tight-Large-Apartness-Relation
-      .symmetric-sim-Large-Equivalence-Relation →
-        symmetric-sim-Tight-Large-Apartness-Relation
-      .transitive-sim-Large-Equivalence-Relation →
-        transitive-sim-Tight-Large-Apartness-Relation
+    large-equivalence-relation-Large-Apartness-Relation
+      ( large-apartness-relation-Tight-Large-Apartness-Relation R)
 
   large-similarity-relation-Tight-Large-Apartness-Relation :
     Large-Similarity-Relation β A
