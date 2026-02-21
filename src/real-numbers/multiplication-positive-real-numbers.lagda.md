@@ -27,6 +27,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -205,6 +206,15 @@ abstract
     sim-ℝ⁺ (x *ℝ⁺ y) (x' *ℝ⁺ y')
   preserves-sim-mul-ℝ⁺ (x , _) (x' , _) x~x' (y , _) (y' , _) y~y' =
     preserves-sim-mul-ℝ x~x' y~y'
+
+sim-preserving-binary-operator-mul-ℝ⁺ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℝ⁺
+sim-preserving-binary-operator-mul-ℝ⁺ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℝ⁺)
+    ( mul-ℝ⁺)
+    ( λ x x' y y' x~x' y~y' →
+      preserves-sim-mul-ℝ⁺ x x' x~x' y y' y~y')
 ```
 
 ### Unit laws

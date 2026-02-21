@@ -73,9 +73,9 @@ module _
       preserves-sim-mul-Large-Monoid M
         ( power-Large-Monoid M (succ-ℕ n) x)
         ( power-Large-Monoid M (succ-ℕ n) y)
-        ( preserves-sim-power-Large-Monoid (succ-ℕ n) x y x~y)
         ( x)
         ( y)
+        ( preserves-sim-power-Large-Monoid (succ-ℕ n) x y x~y)
         ( x~y)
 ```
 
@@ -174,9 +174,9 @@ module _
       equational-reasoning
         raise-unit-Large-Monoid M l1 * y
         ＝ raise-Large-Monoid M l1 y
-          by raise-left-unit-law-Large-Monoid M y
+          by raise-left-unit-law-mul-Large-Monoid M y
         ＝ y * raise-unit-Large-Monoid M l1
-          by inv (raise-right-unit-law-Large-Monoid M y)
+          by inv (raise-right-unit-law-mul-Large-Monoid M y)
     commute-powers-Large-Monoid' 1 H = H
     commute-powers-Large-Monoid' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -206,9 +206,9 @@ module _
       equational-reasoning
         x * raise-unit-Large-Monoid M l2
         ＝ raise-Large-Monoid M l2 x
-          by raise-right-unit-law-Large-Monoid M x
+          by raise-right-unit-law-mul-Large-Monoid M x
         ＝ raise-unit-Large-Monoid M l2 * x
-          by inv (raise-left-unit-law-Large-Monoid M x)
+          by inv (raise-left-unit-law-mul-Large-Monoid M x)
     commute-powers-Large-Monoid'' 1 H = H
     commute-powers-Large-Monoid'' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -268,9 +268,9 @@ module _
         ( equational-reasoning
             raise-unit-Large-Monoid M l1 * raise-unit-Large-Monoid M l2
             ＝ raise-Large-Monoid M l1 (raise-unit-Large-Monoid M l2)
-              by raise-left-unit-law-Large-Monoid M _
+              by raise-left-unit-law-mul-Large-Monoid M _
             ＝ raise-unit-Large-Monoid M (l1 ⊔ l2)
-              by raise-raise-Large-Monoid M _)
+              by raise-raise-Large-Monoid M _ _ _)
     distributive-power-mul-Large-Monoid 1 _ = refl
     distributive-power-mul-Large-Monoid (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning

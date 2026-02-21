@@ -11,6 +11,7 @@ open import complex-numbers.complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.negated-equality
 open import foundation.universe-levels
@@ -58,4 +59,20 @@ abstract
 abstract
   neq-raise-zero-one-ℂ : (l : Level) → raise-ℂ l zero-ℂ ≠ raise-ℂ l one-ℂ
   neq-raise-zero-one-ℂ l 0=1ℂ = neq-raise-zero-one-ℝ l (ap re-ℂ 0=1ℂ)
+```
+
+### The cumulative large set of complex numbers
+
+```agda
+cumulative-large-set-ℂ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℂ =
+  λ where
+    .type-Cumulative-Large-Set →
+      ℂ
+    .large-similarity-relation-Cumulative-Large-Set →
+      large-similarity-relation-ℂ
+    .raise-Cumulative-Large-Set →
+      raise-ℂ
+    .sim-raise-Cumulative-Large-Set →
+      sim-raise-ℂ
 ```

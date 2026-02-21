@@ -45,7 +45,7 @@ large-monoid-mul-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-mul-ℝ =
   make-Large-Monoid
     ( large-semigroup-mul-ℝ)
-    ( large-similarity-relation-sim-ℝ)
+    ( large-similarity-relation-ℝ)
     ( raise-ℝ)
     ( sim-raise-ℝ)
     ( λ _ _ x~x' _ _ y~y' → preserves-sim-mul-ℝ x~x' y~y')

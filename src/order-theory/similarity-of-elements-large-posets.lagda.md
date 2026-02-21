@@ -190,11 +190,11 @@ module _
       ( symmetric-sim-Large-Poset P)
       ( transitive-sim-Large-Poset P)
 
-  large-similarity-relation-sim-Large-Poset :
+  large-similarity-relation-Large-Poset :
     Large-Similarity-Relation
       ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
       ( type-Large-Poset P)
-  large-similarity-relation-sim-Large-Poset =
+  large-similarity-relation-Large-Poset =
     make-Large-Similarity-Relation
       ( large-equivalence-relation-sim-Large-Poset)
       ( eq-sim-Large-Poset P)
