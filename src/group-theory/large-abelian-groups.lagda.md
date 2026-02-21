@@ -192,6 +192,12 @@ module _
   eq-raise-Large-Ab =
     eq-raise-Large-Group (large-group-Large-Ab G)
 
+  eq-raise-leq-level-Large-Ab :
+    (l1 : Level) {l2 : Level} (x : type-Large-Ab G (l1 ⊔ l2)) →
+    raise-Large-Ab l2 x ＝ x
+  eq-raise-leq-level-Large-Ab =
+    eq-raise-leq-level-Large-Group (large-group-Large-Ab G)
+
   is-emb-raise-Large-Ab :
     (l1 l2 : Level) → is-emb (raise-Large-Ab {l1} l2)
   is-emb-raise-Large-Ab =
@@ -381,6 +387,11 @@ module _
 
   raise-zero-Large-Ab : (l : Level) → type-Large-Ab G l
   raise-zero-Large-Ab = raise-unit-Large-Group (large-group-Large-Ab G)
+
+  raise-zero-lzero-Large-Ab :
+    raise-zero-Large-Ab lzero ＝ zero-Large-Ab
+  raise-zero-lzero-Large-Ab =
+    raise-unit-lzero-Large-Group (large-group-Large-Ab G)
 
   is-zero-prop-Large-Ab : {l : Level} → type-Large-Ab G l → Prop (β l lzero)
   is-zero-prop-Large-Ab = is-unit-prop-Large-Group (large-group-Large-Ab G)
