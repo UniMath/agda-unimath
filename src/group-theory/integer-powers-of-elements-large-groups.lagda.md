@@ -442,7 +442,7 @@ module _
                       ( refl)
                       ( cancel-left-mul-div-Large-Group G x _)
                 ＝ raise-Large-Group G l1 (y * mul-inv y)
-                  by raise-right-mul-Large-Group G _ _
+                  by mul-raise-right-Large-Group G _ _
                 ＝ raise-Large-Group G l1 (raise-unit-Large-Group G l2)
                   by
                     ap

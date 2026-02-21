@@ -172,14 +172,14 @@ module _
     {l1 l2 l3 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
     add-Large-Ab G (raise-Large-Ab l3 x) y ＝
     raise-Large-Ab l3 (add-Large-Ab G x y)
-  raise-left-add-Large-Ab = raise-left-mul-Large-Group (large-group-Large-Ab G)
+  raise-left-add-Large-Ab = mul-raise-left-Large-Group (large-group-Large-Ab G)
 
   raise-right-add-Large-Ab :
     {l1 l2 l3 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
     add-Large-Ab G x (raise-Large-Ab l3 y) ＝
     raise-Large-Ab l3 (add-Large-Ab G x y)
   raise-right-add-Large-Ab =
-    raise-right-mul-Large-Group (large-group-Large-Ab G)
+    mul-raise-right-Large-Group (large-group-Large-Ab G)
 
   raise-left-unit-law-Large-Ab :
     {l1 l2 : Level} (x : type-Large-Ab G l1) →
