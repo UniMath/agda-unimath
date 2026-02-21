@@ -431,6 +431,8 @@ open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
+open import foundation.smallness-cumulative-large-sets public
+open import foundation.smallness-large-similarity-relations public
 open import foundation.sorial-type-families public
 open import foundation.span-diagrams public
 open import foundation.span-diagrams-families-of-types public
