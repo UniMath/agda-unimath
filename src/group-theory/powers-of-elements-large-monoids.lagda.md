@@ -174,9 +174,9 @@ module _
       equational-reasoning
         raise-unit-Large-Monoid M l1 * y
         ＝ raise-Large-Monoid M l1 y
-          by raise-left-unit-law-mul-Large-Monoid M y
+          by left-raise-unit-law-mul-Large-Monoid M y
         ＝ y * raise-unit-Large-Monoid M l1
-          by inv (raise-right-unit-law-mul-Large-Monoid M y)
+          by inv (right-raise-unit-law-mul-Large-Monoid M y)
     commute-powers-Large-Monoid' 1 H = H
     commute-powers-Large-Monoid' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -206,9 +206,9 @@ module _
       equational-reasoning
         x * raise-unit-Large-Monoid M l2
         ＝ raise-Large-Monoid M l2 x
-          by raise-right-unit-law-mul-Large-Monoid M x
+          by right-raise-unit-law-mul-Large-Monoid M x
         ＝ raise-unit-Large-Monoid M l2 * x
-          by inv (raise-left-unit-law-mul-Large-Monoid M x)
+          by inv (left-raise-unit-law-mul-Large-Monoid M x)
     commute-powers-Large-Monoid'' 1 H = H
     commute-powers-Large-Monoid'' (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
@@ -268,7 +268,7 @@ module _
         ( equational-reasoning
             raise-unit-Large-Monoid M l1 * raise-unit-Large-Monoid M l2
             ＝ raise-Large-Monoid M l1 (raise-unit-Large-Monoid M l2)
-              by raise-left-unit-law-mul-Large-Monoid M _
+              by left-raise-unit-law-mul-Large-Monoid M _
             ＝ raise-unit-Large-Monoid M (l1 ⊔ l2)
               by raise-raise-Large-Monoid M _ _ _)
     distributive-power-mul-Large-Monoid 1 _ = refl

@@ -18,6 +18,7 @@ open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -160,39 +161,40 @@ module _
   eq-raise-Large-Ab :
     (l1 : Level) {l2 : Level} (x : type-Large-Ab G (l1 ⊔ l2)) →
     raise-Large-Ab l2 x ＝ x
-  eq-raise-Large-Ab = eq-raise-Large-Group (large-group-Large-Ab G)
+  eq-raise-Large-Ab = eq-raise-leq-level-Large-Group (large-group-Large-Ab G)
 
   raise-raise-Large-Ab :
     {l1 l2 l3 : Level} → (x : type-Large-Ab G l1) →
     raise-Large-Ab l2 (raise-Large-Ab l3 x) ＝
     raise-Large-Ab (l2 ⊔ l3) x
-  raise-raise-Large-Ab = raise-raise-Large-Group (large-group-Large-Ab G)
+  raise-raise-Large-Ab = raise-raise-Large-Group (large-group-Large-Ab G) _ _
 
   raise-left-add-Large-Ab :
     {l1 l2 l3 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
     add-Large-Ab G (raise-Large-Ab l3 x) y ＝
     raise-Large-Ab l3 (add-Large-Ab G x y)
-  raise-left-add-Large-Ab = mul-raise-left-Large-Group (large-group-Large-Ab G)
+  raise-left-add-Large-Ab =
+    mul-raise-left-Large-Group (large-group-Large-Ab G) _
 
   raise-right-add-Large-Ab :
     {l1 l2 l3 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
     add-Large-Ab G x (raise-Large-Ab l3 y) ＝
     raise-Large-Ab l3 (add-Large-Ab G x y)
   raise-right-add-Large-Ab =
-    mul-raise-right-Large-Group (large-group-Large-Ab G)
+    mul-raise-right-Large-Group (large-group-Large-Ab G) _
 
   raise-left-unit-law-Large-Ab :
     {l1 l2 : Level} (x : type-Large-Ab G l1) →
     add-Large-Ab G (raise-zero-Large-Ab l2) x ＝ raise-Large-Ab l2 x
   raise-left-unit-law-Large-Ab =
-    raise-left-unit-law-Large-Group (large-group-Large-Ab G)
+    left-raise-unit-law-mul-Large-Group (large-group-Large-Ab G)
 
   raise-right-unit-law-Large-Ab :
     {l1 l2 : Level} (x : type-Large-Ab G l1) →
     add-Large-Ab G x (raise-zero-Large-Ab l2) ＝
     raise-Large-Ab l2 x
   raise-right-unit-law-Large-Ab =
-    raise-right-unit-law-Large-Group (large-group-Large-Ab G)
+    right-raise-unit-law-mul-Large-Group (large-group-Large-Ab G)
 
   raise-unit-lzero-Large-Ab :
     raise-zero-Large-Ab lzero ＝ zero-Large-Ab G
@@ -205,8 +207,8 @@ module _
     (x : type-Large-Ab G l2) (x' : type-Large-Ab G l3) →
     sim-Large-Ab G x x' →
     sim-Large-Ab G (add-Large-Ab G x y) (add-Large-Ab G x' y)
-  preserves-sim-left-add-Large-Ab =
-    preserves-sim-left-mul-Large-Group (large-group-Large-Ab G)
+  preserves-sim-left-add-Large-Ab y =
+    preserves-sim-right-mul-Large-Group (large-group-Large-Ab G) y
 
   preserves-sim-right-add-Large-Ab :
     {l1 l2 l3 : Level} →
@@ -214,8 +216,8 @@ module _
     (y : type-Large-Ab G l2) (y' : type-Large-Ab G l3) →
     sim-Large-Ab G y y' →
     sim-Large-Ab G (add-Large-Ab G x y) (add-Large-Ab G x y')
-  preserves-sim-right-add-Large-Ab =
-    preserves-sim-right-mul-Large-Group (large-group-Large-Ab G)
+  preserves-sim-right-add-Large-Ab x =
+    preserves-sim-left-mul-Large-Group (large-group-Large-Ab G) x
 ```
 
 ### Similarity reasoning on large abelian groups
@@ -262,13 +264,13 @@ module _
     {l : Level} (x : type-Large-Ab G l) →
     add-Large-Ab G (neg-Large-Ab G x) x ＝ raise-zero-Large-Ab G l
   left-inverse-law-add-Large-Ab =
-    left-inverse-law-mul-Large-Group (large-group-Large-Ab G)
+    eq-left-inverse-law-mul-Large-Group (large-group-Large-Ab G)
 
   right-inverse-law-add-Large-Ab :
     {l : Level} (x : type-Large-Ab G l) →
     add-Large-Ab G x (neg-Large-Ab G x) ＝ raise-zero-Large-Ab G l
   right-inverse-law-add-Large-Ab =
-    right-inverse-law-mul-Large-Group (large-group-Large-Ab G)
+    eq-right-inverse-law-mul-Large-Group (large-group-Large-Ab G)
 ```
 
 ### The negation of the identity is the identity
@@ -295,8 +297,15 @@ module _
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       (add-Large-Ab G x y ＝ raise-zero-Large-Ab G (l1 ⊔ l2)) →
       sim-Large-Ab G y (neg-Large-Ab G x)
-    unique-right-neg-Large-Ab =
-      unique-right-inv-Large-Group (large-group-Large-Ab G)
+    unique-right-neg-Large-Ab x y x+y=r0 =
+      unique-right-inv-Large-Group
+        ( large-group-Large-Ab G)
+        ( x)
+        ( y)
+        ( inv-tr
+          ( λ z → sim-Large-Ab G z (zero-Large-Ab G))
+          ( x+y=r0)
+          ( sim-raise-Large-Ab' G _ (zero-Large-Ab G)))
 ```
 
 ### Uniqueness of additive left inverses
@@ -311,8 +320,15 @@ module _
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       (add-Large-Ab G x y ＝ raise-zero-Large-Ab G (l1 ⊔ l2)) →
       sim-Large-Ab G x (neg-Large-Ab G y)
-    unique-left-neg-Large-Ab =
-      unique-left-inv-Large-Group (large-group-Large-Ab G)
+    unique-left-neg-Large-Ab x y x+y=r0 =
+      unique-left-inv-Large-Group
+        ( large-group-Large-Ab G)
+        ( x)
+        ( y)
+        ( inv-tr
+          ( λ z → sim-Large-Ab G z (zero-Large-Ab G))
+          ( x+y=r0)
+          ( sim-raise-Large-Ab' G _ (zero-Large-Ab G)))
 ```
 
 ### Distributivity of negation over addition
@@ -362,7 +378,7 @@ module _
     ( sim-Large-Ab G x y) ↔
     ( raise-Large-Ab G l2 x ＝ raise-Large-Ab G l1 y)
   sim-iff-eq-raise-Large-Ab =
-    sim-iff-eq-raise-Large-Group (large-group-Large-Ab G)
+    eq-raise-iff-sim-Large-Group (large-group-Large-Ab G)
 
   sim-eq-raise-Large-Ab :
     {l1 l2 : Level} →
@@ -427,7 +443,7 @@ module _
       add-Large-Ab G (neg-Large-Ab G x) (add-Large-Ab G x y) ＝
       raise-Large-Ab G l1 y
     cancel-left-diff-add-Large-Ab =
-      cancel-left-div-mul-Large-Group (large-group-Large-Ab G)
+      eq-cancel-left-div-mul-Large-Group (large-group-Large-Ab G)
 
     sim-cancel-left-diff-add-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
@@ -442,7 +458,7 @@ module _
       add-Large-Ab G x (add-Large-Ab G (neg-Large-Ab G x) y) ＝
       raise-Large-Ab G l1 y
     cancel-left-add-diff-Large-Ab =
-      cancel-left-mul-div-Large-Group (large-group-Large-Ab G)
+      eq-cancel-left-mul-div-Large-Group (large-group-Large-Ab G)
 
     sim-cancel-left-add-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
@@ -457,7 +473,7 @@ module _
       add-Large-Ab G (add-Large-Ab G y x) (neg-Large-Ab G x) ＝
       raise-Large-Ab G l1 y
     cancel-right-add-diff-Large-Ab =
-      cancel-right-mul-div-Large-Group (large-group-Large-Ab G)
+      eq-cancel-right-mul-div-Large-Group (large-group-Large-Ab G)
 
     sim-cancel-right-add-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
@@ -472,7 +488,7 @@ module _
       add-Large-Ab G (add-Large-Ab G y (neg-Large-Ab G x)) x ＝
       raise-Large-Ab G l1 y
     cancel-right-diff-add-Large-Ab =
-      cancel-right-div-mul-Large-Group (large-group-Large-Ab G)
+      eq-cancel-right-div-mul-Large-Group (large-group-Large-Ab G)
 
     sim-cancel-right-diff-add-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →

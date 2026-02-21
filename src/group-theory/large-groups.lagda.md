@@ -86,16 +86,7 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   ap-mul-Large-Group = ap-mul-Large-Monoid large-monoid-Large-Group
 
   field
-    sim-preserving-endomap-inv-Large-Group :
-      sim-preserving-endomap-Cumulative-Large-Set
-        ( id)
-        ( cumulative-large-set-Large-Group)
-
-  inv-Large-Group : {l : Level} → type-Large-Group l → type-Large-Group l
-  inv-Large-Group =
-    map-sim-preserving-endomap-Cumulative-Large-Set
-      ( cumulative-large-set-Large-Group)
-      ( sim-preserving-endomap-inv-Large-Group)
+    inv-Large-Group : {l : Level} → type-Large-Group l → type-Large-Group l
 
   is-unit-prop-Large-Group : {l : Level} → type-Large-Group l → Prop (β l lzero)
   is-unit-prop-Large-Group = is-unit-prop-Large-Monoid large-monoid-Large-Group
@@ -336,42 +327,6 @@ module _
       mul-raise-raise-Large-Monoid (large-monoid-Large-Group G)
 ```
 
-### The inverse operation preserves similarity
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
-  where
-
-  preserves-sim-inv-Large-Group :
-    preserves-sim-endomap-Cumulative-Large-Set
-      ( id)
-      ( cumulative-large-set-Large-Group G)
-      ( inv-Large-Group G)
-  preserves-sim-inv-Large-Group =
-    preserves-sim-map-sim-preserving-endomap-Cumulative-Large-Set
-      ( cumulative-large-set-Large-Group G)
-      ( sim-preserving-endomap-inv-Large-Group G)
-```
-
-### Raising universe levels in the inverse operation
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
-  where
-
-  abstract
-    inv-raise-Large-Group :
-      {l0 : Level} (l : Level) (x : type-Large-Group G l0) →
-      inv-Large-Group G (raise-Large-Group G l x) ＝
-      raise-Large-Group G l (inv-Large-Group G x)
-    inv-raise-Large-Group =
-      commute-map-raise-sim-preserving-endomap-Cumulative-Large-Set
-        ( cumulative-large-set-Large-Group G)
-        ( sim-preserving-endomap-inv-Large-Group G)
-```
-
 ### Semigroup laws
 
 ```agda
@@ -435,17 +390,18 @@ module _
   right-unit-law-mul-Large-Group =
     right-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
-  raise-left-unit-law-mul-Large-Group :
+  left-raise-unit-law-mul-Large-Group :
     {l1 l2 : Level} (y : type-Large-Group G l2) →
     mul-Large-Group G (raise-unit-Large-Group l1) y ＝ raise-Large-Group G l1 y
-  raise-left-unit-law-mul-Large-Group =
-    raise-left-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
+  left-raise-unit-law-mul-Large-Group =
+    left-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
-  raise-right-unit-law-mul-Large-Group :
+  right-raise-unit-law-mul-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
-    mul-Large-Group G x (raise-unit-Large-Group l2) ＝ raise-Large-Group G l2 x
-  raise-right-unit-law-mul-Large-Group =
-    raise-right-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
+    mul-Large-Group G x (raise-unit-Large-Group l2) ＝
+    raise-Large-Group G l2 x
+  right-raise-unit-law-mul-Large-Group =
+    right-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
   eq-left-is-unit-law-mul-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
@@ -648,6 +604,69 @@ module _
               ( sim-cancel-right-mul-div-Large-Group G y x)
         ~ inv-G y
           by sim-left-is-unit-law-mul-Large-Group G (x *G y) (inv-G y) xy~1
+```
+
+### The inverse operation preserves similarity
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  (let inv-G = inv-Large-Group G)
+  (let _*G_ = mul-Large-Group G)
+  where
+
+  open similarity-reasoning-Large-Group G
+
+  abstract
+    preserves-sim-inv-Large-Group :
+      preserves-sim-endomap-Cumulative-Large-Set
+        ( id)
+        ( cumulative-large-set-Large-Group G)
+        ( inv-Large-Group G)
+    preserves-sim-inv-Large-Group x y x~y =
+      unique-left-inv-Large-Group G
+        ( inv-G x)
+        ( y)
+        ( similarity-reasoning
+          inv-G x *G y
+          ~ inv-G x *G x
+            by
+              preserves-sim-left-mul-Large-Group G
+                ( inv-G x)
+                ( y)
+                ( x)
+                ( symmetric-sim-Large-Group G x y x~y)
+          ~ unit-Large-Group G
+            by sim-left-inverse-law-mul-Large-Group G x)
+
+  sim-preserving-endomap-inv-Large-Group :
+    sim-preserving-endomap-Cumulative-Large-Set
+      ( id)
+      ( cumulative-large-set-Large-Group G)
+  sim-preserving-endomap-inv-Large-Group =
+    make-sim-preserving-endomap-Cumulative-Large-Set
+      ( id)
+      ( cumulative-large-set-Large-Group G)
+      ( inv-Large-Group G)
+      ( preserves-sim-inv-Large-Group)
+```
+
+### Raising universe levels in the inverse operation
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
+  where
+
+  abstract
+    inv-raise-Large-Group :
+      {l0 : Level} (l : Level) (x : type-Large-Group G l0) →
+      inv-Large-Group G (raise-Large-Group G l x) ＝
+      raise-Large-Group G l (inv-Large-Group G x)
+    inv-raise-Large-Group =
+      commute-map-raise-sim-preserving-endomap-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Group G)
+        ( sim-preserving-endomap-inv-Large-Group G)
 ```
 
 ### Distributivity of inverses over multiplication
@@ -948,19 +967,19 @@ module _
   where
 
   abstract
-    eq-raise-unit-is-idempotent-mul-Large-Group :
+    eq-raise-unit-is-idempotent-Large-Group :
       {l : Level} (x : type-Large-Group G l) →
       mul-Large-Group G x x ＝ x → x ＝ raise-unit-Large-Group G l
-    eq-raise-unit-is-idempotent-mul-Large-Group {l} _ =
+    eq-raise-unit-is-idempotent-Large-Group {l} _ =
       is-unit-is-idempotent-Group (group-Large-Group G l)
 
-    is-unit-is-idempotent-mul-Large-Group :
+    is-unit-is-idempotent-Large-Group :
       {l : Level} (x : type-Large-Group G l) →
       mul-Large-Group G x x ＝ x → is-unit-Large-Group G x
-    is-unit-is-idempotent-mul-Large-Group {l} x x²=x =
+    is-unit-is-idempotent-Large-Group {l} x x²=x =
       inv-tr
         ( is-unit-Large-Group G)
-        ( eq-raise-unit-is-idempotent-mul-Large-Group x x²=x)
+        ( eq-raise-unit-is-idempotent-Large-Group x x²=x)
         ( is-unit-raise-unit-Large-Group G l)
 
     is-idempotent-mul-is-unit-Large-Group :

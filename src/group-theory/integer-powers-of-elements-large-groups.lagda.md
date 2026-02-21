@@ -447,7 +447,7 @@ module _
                   by
                     ap
                       ( raise-Large-Group G l1)
-                      ( right-inverse-law-mul-Large-Group G y)
+                      ( sim-right-inverse-law-mul-Large-Group G y)
                 ＝ raise-unit-Large-Group G (l1 ⊔ l2)
                   by raise-raise-Large-Group G _))
       in

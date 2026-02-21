@@ -360,19 +360,19 @@ module _
     raise-unit-lzero-Large-Monoid =
       eq-raise-Large-Monoid M (unit-Large-Monoid M)
 
-    raise-left-unit-law-mul-Large-Monoid :
+    left-raise-unit-law-mul-Large-Monoid :
       {l1 l2 : Level} (x : type-Large-Monoid M l1) →
       mul-Large-Monoid M (raise-unit-Large-Monoid l2) x ＝
       raise-Large-Monoid M l2 x
-    raise-left-unit-law-mul-Large-Monoid {l1} {l2} x =
+    left-raise-unit-law-mul-Large-Monoid {l1} {l2} x =
       ( mul-raise-left-Large-Monoid M l2 (unit-Large-Monoid M) x) ∙
       ( ap (raise-Large-Monoid M l2) (left-unit-law-mul-Large-Monoid M x))
 
-    raise-right-unit-law-mul-Large-Monoid :
+    right-raise-unit-law-mul-Large-Monoid :
       {l1 l2 : Level} (x : type-Large-Monoid M l1) →
       mul-Large-Monoid M x (raise-unit-Large-Monoid l2) ＝
       raise-Large-Monoid M l2 x
-    raise-right-unit-law-mul-Large-Monoid {l1} {l2} x =
+    right-raise-unit-law-mul-Large-Monoid {l1} {l2} x =
       ( mul-raise-right-Large-Monoid M l2 x (unit-Large-Monoid M)) ∙
       ( ap (raise-Large-Monoid M l2) (right-unit-law-mul-Large-Monoid M x))
 ```
@@ -423,7 +423,7 @@ module _
       ( ap-mul-Large-Monoid M
         ( eq-raise-unit-is-unit-Large-Monoid M x x~1)
         ( refl)) ∙
-      ( raise-left-unit-law-mul-Large-Monoid M y)
+      ( left-raise-unit-law-mul-Large-Monoid M y)
 
     eq-right-is-unit-law-mul-Large-Monoid :
       is-unit-Large-Monoid M y →
@@ -432,7 +432,7 @@ module _
       ( ap-mul-Large-Monoid M
         ( refl)
         ( eq-raise-unit-is-unit-Large-Monoid M y y~1)) ∙
-      ( raise-right-unit-law-mul-Large-Monoid M x)
+      ( right-raise-unit-law-mul-Large-Monoid M x)
 
     sim-left-is-unit-law-mul-Large-Monoid :
       is-unit-Large-Monoid M x → sim-Large-Monoid M (mul-Large-Monoid M x y) y
@@ -467,9 +467,9 @@ module _
     ( semigroup-Large-Monoid l ,
       raise-unit-Large-Monoid M l ,
       ( λ x →
-        raise-left-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _) ,
+        left-raise-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _) ,
       ( λ x →
-        raise-right-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _))
+        right-raise-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _))
 ```
 
 ### The raise operation is a monoid homomorphism
