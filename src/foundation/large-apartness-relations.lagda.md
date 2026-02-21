@@ -172,3 +172,7 @@ module _
       .transitive-sim-Large-Equivalence-Relation →
         transitive-sim-Large-Apartness-Relation
 ```
+
+## See also
+
+- [Tight large apartness relations](foundation.tight-large-apartness-relations.md)
