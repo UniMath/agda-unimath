@@ -106,10 +106,10 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
       mul-Large-Ring (mul-Large-Ring a b) c ＝
       mul-Large-Ring a (mul-Large-Ring b c)
 
-    sim-left-unit-law-mul-Large-Ring :
+    left-unit-law-mul-Large-Ring :
       {l : Level} (a : type-Large-Ring l) → mul-Large-Ring one-Large-Ring a ＝ a
 
-    sim-right-unit-law-mul-Large-Ring :
+    right-unit-law-mul-Large-Ring :
       {l : Level} (a : type-Large-Ring l) → mul-Large-Ring a one-Large-Ring ＝ a
 
     left-distributive-mul-add-Large-Ring :
@@ -747,9 +747,9 @@ module _
       .unit-Large-Monoid →
         one-Large-Ring R
       .left-unit-law-mul-Large-Monoid →
-        sim-left-unit-law-mul-Large-Ring R
+        left-unit-law-mul-Large-Ring R
       .right-unit-law-mul-Large-Monoid →
-        sim-right-unit-law-mul-Large-Ring R
+        right-unit-law-mul-Large-Ring R
 ```
 
 ### Floating raised universe levels out of multiplication
@@ -902,6 +902,24 @@ module _
       is-zero-Large-Ring R (mul-Large-Ring R x (zero-Large-Ring R))
     sim-right-zero-law-mul-Large-Ring x =
       right-is-zero-law-mul-Large-Ring x _ (is-zero-zero-Large-Ring R)
+
+    left-raise-zero-law-mul-Large-Ring :
+      {l1 l2 : Level} (y : type-Large-Ring R l1) →
+      mul-Large-Ring R (raise-zero-Large-Ring R l2) y ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    left-raise-zero-law-mul-Large-Ring {l1} {l2} y =
+      eq-raise-zero-is-zero-Large-Ring R _
+        ( left-is-zero-law-mul-Large-Ring _ y
+          ( is-zero-raise-zero-Large-Ring R l2))
+
+    right-raise-zero-law-mul-Large-Ring :
+      {l1 l2 : Level} (x : type-Large-Ring R l1) →
+      mul-Large-Ring R x (raise-zero-Large-Ring R l2) ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    right-raise-zero-law-mul-Large-Ring {l1} {l2} x =
+      eq-raise-zero-is-zero-Large-Ring R _
+        ( right-is-zero-law-mul-Large-Ring x _
+          ( is-zero-raise-zero-Large-Ring R l2))
 ```
 
 ### Negative laws of multiplication
@@ -980,7 +998,7 @@ module _
         ＝ neg-Large-Ring R (one-Large-Ring R *R x)
           by left-negative-law-mul-Large-Ring R (one-Large-Ring R) x
         ＝ neg-Large-Ring R x
-          by ap (neg-Large-Ring R) (sim-left-unit-law-mul-Large-Ring R x)
+          by ap (neg-Large-Ring R) (left-unit-law-mul-Large-Ring R x)
 
     right-neg-one-law-mul-Large-Ring :
       {l : Level} (x : type-Large-Ring R l) →
@@ -991,7 +1009,7 @@ module _
         ＝ neg-Large-Ring R (x *R one-Large-Ring R)
           by right-negative-law-mul-Large-Ring R x (one-Large-Ring R)
         ＝ neg-Large-Ring R x
-          by ap (neg-Large-Ring R) (sim-right-unit-law-mul-Large-Ring R x)
+          by ap (neg-Large-Ring R) (right-unit-law-mul-Large-Ring R x)
 ```
 
 ### Distributive laws of multiplication over subtraction
