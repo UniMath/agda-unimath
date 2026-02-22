@@ -794,9 +794,9 @@ module _
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
   {l1 l2 l3 : Level}
+  (z : type-Large-Group G l3)
   (x : type-Large-Group G l1)
   (y : type-Large-Group G l2)
-  (z : type-Large-Group G l3)
   where
 
   abstract
@@ -923,7 +923,7 @@ module _
       eq-type-subtype
         ( λ z → Id-Prop (set-Large-Group G (l1 ⊔ l2)) (z *G x) y)
         ( eq-sim-Large-Group G a b
-          ( reflects-sim-right-mul-Large-Group G a b x
+          ( reflects-sim-right-mul-Large-Group G x a b
             ( sim-eq-Large-Group G (ax=y ∙ inv bx=y))))
 
     is-prop-map-right-mul-Large-Group :
