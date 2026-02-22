@@ -193,7 +193,7 @@ module _
   eq-sim-Large-Ring = eq-sim-Large-Ab (large-ab-Large-Ring R)
 ```
 
-### Similarity reasoning on large abelian groups
+### Similarity reasoning on large rings
 
 ```agda
 module
@@ -656,7 +656,7 @@ module _
       reflects-sim-left-add-Large-Ab (large-ab-Large-Ring R) z x y
 ```
 
-### Addition on the left or right in a large abelian group is an embedding
+### Addition on the left or right in a large ring is an embedding
 
 ```agda
 module _
