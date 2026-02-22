@@ -824,6 +824,12 @@ module _
   right-raise-unit-law-mul-Large-Ring =
     right-raise-unit-law-mul-Large-Monoid (large-monoid-mul-Large-Ring R)
 
+  left-raise-unit-law-mul-Large-Ring' :
+    {l : Level} (y : type-Large-Ring R l) →
+    mul-Large-Ring R (raise-one-Large-Ring l) y ＝ y
+  left-raise-unit-law-mul-Large-Ring' =
+    left-raise-unit-law-mul-Large-Monoid' (large-monoid-mul-Large-Ring R)
+
   eq-left-is-one-law-mul-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     is-one-Large-Ring x → mul-Large-Ring R x y ＝ raise-Large-Ring R l1 y
