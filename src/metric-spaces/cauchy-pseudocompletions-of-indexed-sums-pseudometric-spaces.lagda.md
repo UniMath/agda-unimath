@@ -372,8 +372,8 @@ module _
   where abstract
 
   is-section-map-indexed-sum-pseudocompletion-Pseudometric-Space :
-    ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ∘
-      map-inv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P) ~
+    map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ∘
+    map-inv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ~
     id
   is-section-map-indexed-sum-pseudocompletion-Pseudometric-Space u =
     eq-htpy-cauchy-approximation-Pseudometric-Space
@@ -395,8 +395,8 @@ module _
             ( refl)))
 
   is-retraction-map-indexed-sum-pseudocompletion-Pseudometric-Space :
-    ( map-inv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ∘
-      map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P) ~
+    map-inv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ∘
+    map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ~
     id
   is-retraction-map-indexed-sum-pseudocompletion-Pseudometric-Space (b , u) =
     eq-pair-eq-fiber
