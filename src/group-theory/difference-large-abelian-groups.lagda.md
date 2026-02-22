@@ -10,6 +10,7 @@ module group-theory.difference-large-abelian-groups where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -57,6 +58,29 @@ module _
 ```
 
 ## Properties
+
+### Subtraction preserves similarity
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  abstract
+    preserves-sim-right-diff-Large-Ab :
+      preserves-sim-binary-operator-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Ab G)
+        ( right-diff-Large-Ab G)
+    preserves-sim-right-diff-Large-Ab =
+      preserves-sim-right-div-Large-Group (large-group-Large-Ab G)
+
+    preserves-sim-left-diff-Large-Ab :
+      preserves-sim-binary-operator-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Ab G)
+        ( left-diff-Large-Ab G)
+    preserves-sim-left-diff-Large-Ab =
+      preserves-sim-left-div-Large-Group (large-group-Large-Ab G)
+```
 
 ### Left and right subtraction are equivalent
 
