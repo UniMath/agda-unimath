@@ -9,11 +9,17 @@ module group-theory.difference-large-abelian-groups where
 ```agda
 open import group-theory.large-abelian-groups
 open import group-theory.division-large-groups
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
+open import foundation.transport-along-identifications
 open import foundation.identity-types
+open import foundation.action-on-identifications-binary-functions
 ```
 
 ## Idea
+
+In a [large Abelian group](group-theory.large-abelian-groups.md), the difference
+of elements `a` and `b` is `a` plus the negation of `b`.
 
 ## Definition
 
@@ -31,31 +37,60 @@ module _
     {l1 l2 : Level} → type-Large-Ab G l1 → type-Large-Ab G l2 →
     type-Large-Ab G (l1 ⊔ l2)
   right-diff-Large-Ab x y = add-Large-Ab G x (neg-Large-Ab G y)
+
+  ap-right-diff-Large-Ab :
+    {l1 l2 : Level} →
+    {x x' : type-Large-Ab G l1} → x ＝ x' →
+    {y y' : type-Large-Ab G l2} → y ＝ y' →
+    right-diff-Large-Ab x y ＝ right-diff-Large-Ab x' y'
+  ap-right-diff-Large-Ab = ap-binary right-diff-Large-Ab
+
+  ap-left-diff-Large-Ab :
+    {l1 l2 : Level} →
+    {x x' : type-Large-Ab G l1} → x ＝ x' →
+    {y y' : type-Large-Ab G l2} → y ＝ y' →
+    left-diff-Large-Ab x y ＝ left-diff-Large-Ab x' y'
+  ap-left-diff-Large-Ab = ap-binary left-diff-Large-Ab
 ```
 
 ## Properties
 
+### Left and right subtraction are equivalent
+
 ```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  abstract
+    eq-left-right-diff-Large-Ab :
+      {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
+      left-diff-Large-Ab G x y ＝ right-diff-Large-Ab G x y
+    eq-left-right-diff-Large-Ab x y =
+      commutative-add-Large-Ab G (neg-Large-Ab G y) x
+```
+
+### `-(x - y) = y - x`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
   abstract
     neg-right-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      neg-Large-Ab G (right-diff-Large-Ab x y) ＝
-      right-diff-Large-Ab y x
+      neg-Large-Ab G (right-diff-Large-Ab G x y) ＝
+      right-diff-Large-Ab G y x
     neg-right-diff-Large-Ab =
       inv-right-div-Large-Group (large-group-Large-Ab G)
 
     neg-left-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      neg-Large-Ab G (left-diff-Large-Ab x y) ＝
-      left-diff-Large-Ab y x
+      neg-Large-Ab G (left-diff-Large-Ab G x y) ＝
+      left-diff-Large-Ab G y x
     neg-left-diff-Large-Ab =
       inv-left-div-Large-Group (large-group-Large-Ab G)
-
-    eq-left-right-diff-Large-Ab :
-      {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      left-diff-Large-Ab x y ＝ right-diff-Large-Ab x y
-    eq-left-right-diff-Large-Ab x y =
-      commutative-add-Large-Ab G (neg-Large-Ab G y) x
 ```
 
 ### Interchange laws of subtraction
@@ -236,7 +271,7 @@ module _
           by right-diff-right-diff-Large-Ab G x y
 ```
 
-### Unit laws of subtraction
+### `x - 0 = x`
 
 ```agda
 module _
@@ -256,4 +291,21 @@ module _
       right-diff-Large-Ab G x (zero-Large-Ab G) ＝ x
     zero-law-right-diff-Large-Ab =
       unit-law-right-div-Large-Group (large-group-Large-Ab G)
+
+    is-zero-law-left-diff-Large-Ab :
+      {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
+      is-zero-Large-Ab G y →
+      sim-Large-Ab G (left-diff-Large-Ab G x y) x
+    is-zero-law-left-diff-Large-Ab x y y~0 =
+      inv-tr
+        ( λ z → sim-Large-Ab G z x)
+        ( eq-left-right-diff-Large-Ab G x y)
+        ( is-zero-law-right-diff-Large-Ab x y y~0)
+
+    zero-law-left-diff-Large-Ab :
+      {l : Level} (x : type-Large-Ab G l) →
+      left-diff-Large-Ab G x (zero-Large-Ab G) ＝ x
+    zero-law-left-diff-Large-Ab x =
+      ( eq-left-right-diff-Large-Ab G x _) ∙
+      ( zero-law-right-diff-Large-Ab x)
 ```

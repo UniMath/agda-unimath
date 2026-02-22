@@ -49,6 +49,7 @@ open import group-theory.congruence-relations-monoids public
 open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.conjugation-concrete-groups public
+open import group-theory.conjugation-large-groups public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
 open import group-theory.cores-monoids public
 open import group-theory.cyclic-groups public
@@ -56,14 +57,17 @@ open import group-theory.decidable-subgroups public
 open import group-theory.dependent-products-abelian-groups public
 open import group-theory.dependent-products-commutative-monoids public
 open import group-theory.dependent-products-groups public
-open import group-theory.dependent-products-large-groups public
+open import group-theory.dependent-products-large-abelian-groups public
 open import group-theory.dependent-products-large-commutative-monoids public
+open import group-theory.dependent-products-large-groups public
 open import group-theory.dependent-products-large-monoids public
 open import group-theory.dependent-products-large-semigroups public
 open import group-theory.dependent-products-monoids public
 open import group-theory.dependent-products-semigroups public
+open import group-theory.difference-large-abelian-groups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
+open import group-theory.division-large-groups public
 open import group-theory.e8-lattice public
 open import group-theory.elements-of-finite-order-groups public
 open import group-theory.embeddings-abelian-groups public
