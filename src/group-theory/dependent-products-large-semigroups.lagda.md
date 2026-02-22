@@ -85,11 +85,8 @@ module _
 
   Π-Large-Semigroup : Large-Semigroup (λ l → l0 ⊔ α l) (λ l1 l2 → l0 ⊔ β l1 l2)
   Π-Large-Semigroup =
-    λ where
-      .cumulative-large-set-Large-Semigroup →
-        cumulative-large-set-Π-Large-Semigroup
-      .sim-preserving-binary-operator-mul-Large-Semigroup →
-        sim-preserving-binary-operator-mul-Π-Large-Semigroup
-      .associative-mul-Large-Semigroup →
-        associative-mul-Π-Large-Semigroup
+    make-Large-Semigroup
+      ( cumulative-large-set-Π-Large-Semigroup)
+      ( sim-preserving-binary-operator-mul-Π-Large-Semigroup)
+      ( associative-mul-Π-Large-Semigroup)
 ```

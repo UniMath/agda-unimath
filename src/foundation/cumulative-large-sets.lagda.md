@@ -49,6 +49,9 @@ record
     UUω
   where
 
+  constructor
+    make-Cumulative-Large-Set
+
   field
     type-Cumulative-Large-Set : (l : Level) → UU (α l)
     large-similarity-relation-Cumulative-Large-Set :
