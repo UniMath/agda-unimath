@@ -438,6 +438,18 @@ module _
   right-raise-unit-law-add-Large-Ab =
     right-raise-unit-law-mul-Large-Group (large-group-Large-Ab G)
 
+  left-raise-unit-law-add-Large-Ab' :
+    {l : Level} (y : type-Large-Ab G l) →
+    add-Large-Ab G (raise-zero-Large-Ab l) y ＝ y
+  left-raise-unit-law-add-Large-Ab' =
+    left-raise-unit-law-mul-Large-Group' (large-group-Large-Ab G)
+
+  right-raise-unit-law-add-Large-Ab' :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G x (raise-zero-Large-Ab l) ＝ x
+  right-raise-unit-law-add-Large-Ab' =
+    right-raise-unit-law-mul-Large-Group' (large-group-Large-Ab G)
+
   eq-left-is-zero-law-add-Large-Ab :
     {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
     is-zero-Large-Ab x → add-Large-Ab G x y ＝ raise-Large-Ab G l1 y
@@ -807,10 +819,10 @@ module _
     eq-left-right-conjugation-Large-Ab =
       eq-left-right-conjugation-Large-Group (large-group-Large-Ab G)
 
-    cancel-left-conjugation-Large-Ab :
+    sim-cancel-left-conjugation-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       sim-Large-Ab G (left-conjugation-Large-Ab x y) y
-    cancel-left-conjugation-Large-Ab x y =
+    sim-cancel-left-conjugation-Large-Ab x y =
       tr
         ( λ z → sim-Large-Ab G z y)
         ( right-swap-add-Large-Ab G x (neg-G x) y)
@@ -819,14 +831,14 @@ module _
           ( y)
           ( sim-right-inverse-law-add-Large-Ab G x))
 
-    cancel-right-conjugation-Large-Ab :
+    sim-cancel-right-conjugation-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       sim-Large-Ab G (right-conjugation-Large-Ab x y) y
-    cancel-right-conjugation-Large-Ab x y =
+    sim-cancel-right-conjugation-Large-Ab x y =
       tr
         ( λ z → sim-Large-Ab G z y)
         ( eq-left-right-conjugation-Large-Ab x y)
-        ( cancel-left-conjugation-Large-Ab x y)
+        ( sim-cancel-left-conjugation-Large-Ab x y)
 ```
 
 ### Interchange laws
