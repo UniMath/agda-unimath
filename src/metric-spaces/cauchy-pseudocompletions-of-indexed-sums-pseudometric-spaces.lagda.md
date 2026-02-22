@@ -23,9 +23,9 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces
+open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.equality-of-pseudometric-spaces
 open import metric-spaces.indexed-sums-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
@@ -49,7 +49,7 @@ Conversely, for any Cauchy approximation `u` in `Σ A P`, there exists `aᵤ : A
 and a Cauchy approximation `uₐ` in `P aᵤ` such that `u ~ (aᵤ , uₐ)`. Thus, the
 type of Cauchy approximations in an indexed sum of pseudometric spaces is
 [equivalent](foundation-core.equivalences.md) to the indexed sum of the
-[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces.md).
+[Cauchy pseudocompletions](metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces.md).
 
 Moreover, this equivalence is an
 [isometry](metric-spaces.isometries-pseudometric-spaces.md) so it induces an
@@ -145,7 +145,7 @@ module _
       ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
       ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
   map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space (x , u) =
-    map-cauchy-approximation-isometry-Pseudometric-Space
+    map-isometry-cauchy-pseudocompletion-Pseudometric-Space
       ( P x)
       ( indexed-sum-Pseudometric-Space A P)
       ( isometry-emb-fiber-indexed-Pseudometric-Space A P x)
