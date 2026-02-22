@@ -7,13 +7,14 @@ module group-theory.difference-large-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.large-abelian-groups
-open import group-theory.division-large-groups
-open import foundation.action-on-identifications-functions
-open import foundation.universe-levels
-open import foundation.transport-along-identifications
-open import foundation.identity-types
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.identity-types
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import group-theory.division-large-groups
+open import group-theory.large-abelian-groups
 ```
 
 </details>
