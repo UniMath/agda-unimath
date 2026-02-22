@@ -165,7 +165,7 @@ module _
     raise-Large-Commutative-Monoid l2 (raise-Large-Commutative-Monoid l3 x) ＝
     raise-Large-Commutative-Monoid (l2 ⊔ l3) x
   raise-raise-Large-Commutative-Monoid =
-    raise-raise-Large-Monoid (large-monoid-Large-Commutative-Monoid M) _ _
+    raise-raise-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
 
   raise-left-mul-Large-Commutative-Monoid :
     {l1 l2 l3 : Level} →
