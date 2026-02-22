@@ -202,7 +202,7 @@ module _
     emb-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-raise-Large-Group :
-    {l0 : Level} (l1 l2 : Level) (x : type-Large-Group G l0) →
+    {l0 l1 l2 : Level} (x : type-Large-Group G l0) →
     raise-Large-Group l1 (raise-Large-Group l2 x) ＝
     raise-Large-Group (l1 ⊔ l2) x
   raise-raise-Large-Group =

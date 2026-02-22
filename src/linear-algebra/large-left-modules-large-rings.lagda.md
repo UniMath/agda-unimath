@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.large-abelian-groups
@@ -148,14 +149,14 @@ record
     add-Large-Left-Module-Large-Ring (neg-Large-Left-Module-Large-Ring x) x ＝
     raise-zero-Large-Left-Module-Large-Ring l
   left-inverse-law-add-Large-Left-Module-Large-Ring =
-    left-inverse-law-add-Large-Ab large-ab-Large-Left-Module-Large-Ring
+    eq-left-inverse-law-add-Large-Ab large-ab-Large-Left-Module-Large-Ring
 
   right-inverse-law-add-Large-Left-Module-Large-Ring :
     {l : Level} (x : type-Large-Left-Module-Large-Ring l) →
     add-Large-Left-Module-Large-Ring x (neg-Large-Left-Module-Large-Ring x) ＝
     raise-zero-Large-Left-Module-Large-Ring l
   right-inverse-law-add-Large-Left-Module-Large-Ring =
-    right-inverse-law-add-Large-Ab large-ab-Large-Left-Module-Large-Ring
+    eq-right-inverse-law-add-Large-Ab large-ab-Large-Left-Module-Large-Ring
 
   commutative-add-Large-Left-Module-Large-Ring :
     {l1 l2 : Level} →
@@ -175,8 +176,15 @@ record
     sim-Large-Left-Module-Large-Ring
       ( y)
       ( neg-Large-Left-Module-Large-Ring x)
-  unique-right-neg-Large-Left-Module-Large-Ring =
-    unique-right-neg-Large-Ab large-ab-Large-Left-Module-Large-Ring
+  unique-right-neg-Large-Left-Module-Large-Ring x y x+y=r0 =
+    unique-right-neg-Large-Ab
+      ( large-ab-Large-Left-Module-Large-Ring)
+      ( x)
+      ( y)
+      ( inv-tr
+        ( is-zero-Large-Ab large-ab-Large-Left-Module-Large-Ring)
+        ( x+y=r0)
+        ( is-zero-raise-zero-Large-Ab large-ab-Large-Left-Module-Large-Ring _))
 
   refl-sim-Large-Left-Module-Large-Ring :
     {l : Level} (x : type-Large-Left-Module-Large-Ring l) →
@@ -188,7 +196,7 @@ record
     {l : Level} {x y : type-Large-Left-Module-Large-Ring l} →
     sim-Large-Left-Module-Large-Ring x y → x ＝ y
   eq-sim-Large-Left-Module-Large-Ring =
-    eq-sim-Large-Ab large-ab-Large-Left-Module-Large-Ring
+    eq-sim-Large-Ab large-ab-Large-Left-Module-Large-Ring _ _
 
   sim-eq-Large-Left-Module-Large-Ring :
     {l : Level} {x y : type-Large-Left-Module-Large-Ring l} →
@@ -223,7 +231,7 @@ record
     (x : type-Large-Left-Module-Large-Ring (l1 ⊔ l2)) →
     raise-Large-Left-Module-Large-Ring l2 x ＝ x
   eq-raise-Large-Left-Module-Large-Ring =
-    eq-raise-Large-Ab large-ab-Large-Left-Module-Large-Ring
+    eq-raise-leq-level-Large-Ab large-ab-Large-Left-Module-Large-Ring
 
   field
     mul-Large-Left-Module-Large-Ring :
@@ -367,7 +375,7 @@ module _
       mul-Large-Left-Module-Large-Ring M (zero-Large-Ring R) x ＝
       raise-zero-Large-Left-Module-Large-Ring M l
     left-zero-law-mul-Large-Left-Module-Large-Ring x =
-      eq-zero-is-idempotent-Large-Ab
+      eq-raise-zero-is-idempotent-Large-Ab
         ( large-ab-Large-Left-Module-Large-Ring M)
         ( _)
         ( equational-reasoning
@@ -428,7 +436,7 @@ module _
         ( zero-Large-Left-Module-Large-Ring M) ＝
       raise-zero-Large-Left-Module-Large-Ring M l
     right-zero-law-mul-Large-Left-Module-Large-Ring a =
-      eq-zero-is-idempotent-Large-Ab
+      eq-raise-zero-is-idempotent-Large-Ab
         ( large-ab-Large-Left-Module-Large-Ring M)
         ( _)
         ( equational-reasoning

@@ -182,7 +182,7 @@ module _
   eq-raise-Large-Ring :
     (l1 : Level) {l2 : Level} (x : type-Large-Ring R (l1 ⊔ l2)) →
     raise-Large-Ring R l2 x ＝ x
-  eq-raise-Large-Ring = eq-raise-Large-Ab (large-ab-Large-Ring R)
+  eq-raise-Large-Ring = eq-raise-leq-level-Large-Ab (large-ab-Large-Ring R)
 
   raise-raise-Large-Ring :
     {l1 l2 l3 : Level} → (x : type-Large-Ring R l1) →
@@ -194,31 +194,32 @@ module _
     {l1 l2 l3 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R (raise-Large-Ring R l3 x) y ＝
     raise-Large-Ring R l3 (add-Large-Ring R x y)
-  raise-left-add-Large-Ring = raise-left-add-Large-Ab (large-ab-Large-Ring R)
+  raise-left-add-Large-Ring = add-raise-left-Large-Ab (large-ab-Large-Ring R) _
 
   raise-right-add-Large-Ring :
     {l1 l2 l3 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R x (raise-Large-Ring R l3 y) ＝
     raise-Large-Ring R l3 (add-Large-Ring R x y)
-  raise-right-add-Large-Ring = raise-right-add-Large-Ab (large-ab-Large-Ring R)
+  raise-right-add-Large-Ring =
+    add-raise-right-Large-Ab (large-ab-Large-Ring R) _
 
   left-raise-unit-law-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) →
     add-Large-Ring R (raise-zero-Large-Ring l2) x ＝ raise-Large-Ring R l2 x
   left-raise-unit-law-Large-Ring =
-    left-raise-unit-law-Large-Ab (large-ab-Large-Ring R)
+    left-raise-unit-law-add-Large-Ab (large-ab-Large-Ring R)
 
   right-raise-unit-law-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) →
     add-Large-Ring R x (raise-zero-Large-Ring l2) ＝
     raise-Large-Ring R l2 x
   right-raise-unit-law-Large-Ring =
-    right-raise-unit-law-Large-Ab (large-ab-Large-Ring R)
+    right-raise-unit-law-add-Large-Ab (large-ab-Large-Ring R)
 
   raise-zero-lzero-Large-Ring :
     raise-zero-Large-Ring lzero ＝ zero-Large-Ring R
   raise-zero-lzero-Large-Ring =
-    raise-unit-lzero-Large-Ab (large-ab-Large-Ring R)
+    raise-zero-lzero-Large-Ab (large-ab-Large-Ring R)
 ```
 
 ### The multiplicative monoid of a large ring
@@ -291,13 +292,13 @@ module _
     {l : Level} (x : type-Large-Ring R l) →
     add-Large-Ring R (neg-Large-Ring R x) x ＝ raise-zero-Large-Ring R l
   left-inverse-law-add-Large-Ring =
-    left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+    eq-left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
 
   right-inverse-law-add-Large-Ring :
     {l : Level} (x : type-Large-Ring R l) →
     add-Large-Ring R x (neg-Large-Ring R x) ＝ raise-zero-Large-Ring R l
   right-inverse-law-add-Large-Ring =
-    right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+    eq-right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
 
   commutative-add-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
