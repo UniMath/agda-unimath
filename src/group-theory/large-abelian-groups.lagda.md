@@ -636,15 +636,15 @@ module _
     neg-neg-Large-Ab = inv-inv-Large-Group (large-group-Large-Ab G)
 ```
 
-### Right addition reflects similarity
+### Addition reflects similarity
 
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   {l1 l2 l3 : Level}
+  (z : type-Large-Ab G l3)
   (x : type-Large-Ab G l1)
   (y : type-Large-Ab G l2)
-  (z : type-Large-Ab G l3)
   where
 
   abstract
@@ -653,22 +653,9 @@ module _
       sim-Large-Ab G x y
     reflects-sim-right-add-Large-Ab =
       reflects-sim-right-mul-Large-Group (large-group-Large-Ab G) x y z
-```
 
-### Left addition reflects similarity
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
-  {l1 l2 l3 : Level}
-  (x : type-Large-Ab G l1)
-  (y : type-Large-Ab G l2)
-  (z : type-Large-Ab G l3)
-  where
-
-  abstract
     reflects-sim-left-add-Large-Ab :
-      sim-Large-Ab G (add-Large-Ab G x y) (add-Large-Ab G x z) →
+      sim-Large-Ab G (add-Large-Ab G z x) (add-Large-Ab G z y) →
       sim-Large-Ab G y z
     reflects-sim-left-add-Large-Ab =
       reflects-sim-left-mul-Large-Group (large-group-Large-Ab G) x y z
