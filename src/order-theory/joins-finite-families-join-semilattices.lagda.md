@@ -201,10 +201,9 @@ abstract
         ( equiv-Π _
           ( inv-equiv Fin-sn≃I)
           ( λ i →
-            equiv-eq
-              ( ap
-                ( λ j → leq-Order-Theoretic-Join-Semilattice X (f j) y)
-                ( inv (is-section-map-inv-equiv Fin-sn≃I i)))))
+            equiv-inv-tr
+              ( λ j → leq-Order-Theoretic-Join-Semilattice X (f j) y)
+              ( is-section-map-inv-equiv Fin-sn≃I i)))
 ```
 
 ### The join of an inhabited finite family of elements is its join over any count for that family

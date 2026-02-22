@@ -200,6 +200,24 @@ open import analysis.monotone-convergence-theorem-increasing-sequences-real-numb
     is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
 ```
 
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
+```
+
 ### Triangle inequality theorem {#Q208216}
 
 **Author:** [malarbol](https://github.com/malarbol)
@@ -218,15 +236,6 @@ open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```
 
-### Pythagorean theorem {#Q11518}
-
-**Author:** [Louis Wasserman](https://github.com/lowasser)
-
-```agda
-open import linear-algebra.orthogonality-real-inner-product-spaces using
-  ( pythagorean-theorem-ℝ-Inner-Product-Space)
-```
-
 ### Uniform limit theorem {#Q7885107}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -235,6 +244,10 @@ open import linear-algebra.orthogonality-real-inner-product-spaces using
 open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
   ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
     is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces using
+  ( modulus-of-uniform-continuity-map-limit-modulus-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}
