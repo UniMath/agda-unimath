@@ -64,9 +64,7 @@ module _
   Π-Large-Commutative-Monoid :
     Large-Commutative-Monoid (λ l → l0 ⊔ α l) (λ l1 l2 → l0 ⊔ β l1 l2)
   Π-Large-Commutative-Monoid =
-    λ where
-      .large-monoid-Large-Commutative-Monoid →
-        large-monoid-Π-Large-Commutative-Monoid
-      .commutative-mul-Large-Commutative-Monoid →
-        commutative-mul-Π-Large-Commutative-Monoid
+    make-Large-Commutative-Monoid
+      ( large-monoid-Π-Large-Commutative-Monoid)
+      ( commutative-mul-Π-Large-Commutative-Monoid)
 ```
