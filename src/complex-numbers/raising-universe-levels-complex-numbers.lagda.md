@@ -66,13 +66,9 @@ abstract
 ```agda
 cumulative-large-set-ℂ : Cumulative-Large-Set lsuc (_⊔_)
 cumulative-large-set-ℂ =
-  λ where
-    .type-Cumulative-Large-Set →
-      ℂ
-    .large-similarity-relation-Cumulative-Large-Set →
-      large-similarity-relation-ℂ
-    .raise-Cumulative-Large-Set →
-      raise-ℂ
-    .sim-raise-Cumulative-Large-Set →
-      sim-raise-ℂ
+  make-Cumulative-Large-Set
+    ( ℂ)
+    ( large-similarity-relation-ℂ)
+    ( raise-ℂ)
+    ( sim-raise-ℂ)
 ```
