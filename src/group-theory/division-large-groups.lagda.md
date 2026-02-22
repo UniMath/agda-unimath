@@ -18,6 +18,9 @@ open import group-theory.large-groups
 
 ## Idea
 
+In a [large group](group-theory.large-groups.md), `g` divided on the left by `h`
+is `h⁻¹g`, and divided on the right by `h` is `gh⁻¹`.
+
 ## Definition
 
 ```agda
