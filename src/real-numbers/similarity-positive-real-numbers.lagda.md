@@ -7,6 +7,7 @@ module real-numbers.similarity-positive-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
@@ -73,8 +74,8 @@ abstract
     {l : Level} (x y : ℝ⁺ l) → sim-ℝ⁺ x y → x ＝ y
   eq-sim-ℝ⁺ x y x~y = eq-ℝ⁺ x y (eq-sim-ℝ x~y)
 
-large-similarity-relation-sim-ℝ⁺ : Large-Similarity-Relation (_⊔_) ℝ⁺
-large-similarity-relation-sim-ℝ⁺ =
+large-similarity-relation-ℝ⁺ : Large-Similarity-Relation (_⊔_) ℝ⁺
+large-similarity-relation-ℝ⁺ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ⁺)
     ( eq-sim-ℝ⁺)
@@ -84,6 +85,22 @@ large-similarity-relation-sim-ℝ⁺ =
 
 ```agda
 abstract
-  sim-raise-ℝ⁺ : {l0 : Level} (l : Level) (x : ℝ⁺ l) → sim-ℝ⁺ x (raise-ℝ⁺ l x)
+  sim-raise-ℝ⁺ : {l0 : Level} (l : Level) (x : ℝ⁺ l0) → sim-ℝ⁺ x (raise-ℝ⁺ l x)
   sim-raise-ℝ⁺ l (x , _) = sim-raise-ℝ l x
+```
+
+### The cumulative large set of positive real numbers
+
+```agda
+cumulative-large-set-ℝ⁺ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℝ⁺ =
+  λ where
+    .type-Cumulative-Large-Set →
+      ℝ⁺
+    .large-similarity-relation-Cumulative-Large-Set →
+      large-similarity-relation-ℝ⁺
+    .raise-Cumulative-Large-Set →
+      raise-ℝ⁺
+    .sim-raise-Cumulative-Large-Set →
+      sim-raise-ℝ⁺
 ```

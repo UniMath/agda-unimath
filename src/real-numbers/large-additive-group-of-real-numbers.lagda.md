@@ -42,24 +42,27 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ## Definition
 
 ```agda
-large-semigroup-add-ℝ : Large-Semigroup lsuc
+large-semigroup-add-ℝ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℝ =
-  make-Large-Semigroup
-    ( ℝ-Set)
-    ( add-ℝ)
-    ( associative-add-ℝ)
+  λ where
+    .cumulative-large-set-Large-Semigroup →
+      cumulative-large-set-ℝ
+    .sim-preserving-binary-operator-mul-Large-Semigroup →
+      sim-preserving-binary-operator-add-ℝ
+    .associative-mul-Large-Semigroup →
+      associative-add-ℝ
 
 large-monoid-add-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℝ =
-  make-Large-Monoid
-    ( large-semigroup-add-ℝ)
-    ( large-similarity-relation-sim-ℝ)
-    ( raise-ℝ)
-    ( sim-raise-ℝ)
-    ( λ a b a~b c d c~d → preserves-sim-add-ℝ a~b c~d)
-    ( zero-ℝ)
-    ( left-unit-law-add-ℝ)
-    ( right-unit-law-add-ℝ)
+  λ where
+    .large-semigroup-Large-Monoid →
+      large-semigroup-add-ℝ
+    .unit-Large-Monoid →
+      zero-ℝ
+    .left-unit-law-mul-Large-Monoid →
+      left-unit-law-add-ℝ
+    .right-unit-law-mul-Large-Monoid →
+      right-unit-law-add-ℝ
 
 large-commutative-monoid-add-ℝ : Large-Commutative-Monoid lsuc (_⊔_)
 large-commutative-monoid-add-ℝ =
@@ -69,12 +72,15 @@ large-commutative-monoid-add-ℝ =
 
 large-group-add-ℝ : Large-Group lsuc (_⊔_)
 large-group-add-ℝ =
-  make-Large-Group
-    ( large-monoid-add-ℝ)
-    ( neg-ℝ)
-    ( λ _ _ → preserves-sim-neg-ℝ)
-    ( eq-left-inverse-law-add-ℝ)
-    ( eq-right-inverse-law-add-ℝ)
+  λ where
+    .large-monoid-Large-Group →
+      large-monoid-add-ℝ
+    .inv-Large-Group →
+      neg-ℝ
+    .sim-left-inverse-law-mul-Large-Group →
+      left-inverse-law-add-ℝ
+    .sim-right-inverse-law-mul-Large-Group →
+      right-inverse-law-add-ℝ
 
 large-ab-add-ℝ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℝ =
