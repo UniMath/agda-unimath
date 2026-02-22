@@ -326,10 +326,10 @@ module _
 
   abstract
     raise-raise-Cumulative-Large-Set :
-      {l0 : Level} (l1 l2 : Level) (x : type-Cumulative-Large-Set S l0) →
+      {l0 l1 l2 : Level} (x : type-Cumulative-Large-Set S l0) →
       raise-Cumulative-Large-Set S l1 (raise-Cumulative-Large-Set S l2 x) ＝
       raise-Cumulative-Large-Set S (l1 ⊔ l2) x
-    raise-raise-Cumulative-Large-Set l1 l2 x =
+    raise-raise-Cumulative-Large-Set {l0} {l1} {l2} x =
       let
         open similarity-reasoning-Cumulative-Large-Set S
       in
@@ -373,7 +373,7 @@ module _
               ( raise-Cumulative-Large-Set S l2)
               ( inv (eq-raise-Cumulative-Large-Set x))
         ＝ raise-Cumulative-Large-Set S (l1 ⊔ l2) x
-          by raise-raise-Cumulative-Large-Set S l2 (l1 ⊔ l2) x
+          by raise-raise-Cumulative-Large-Set S x
         ＝ x
           by eq-raise-Cumulative-Large-Set x
 ```
