@@ -209,7 +209,7 @@ module _
     emb-raise-Large-Group (large-group-Large-Ab G)
 
   raise-raise-Large-Ab :
-    {l0 : Level} (l1 l2 : Level) (x : type-Large-Ab G l0) →
+    {l0 l1 l2 : Level} (x : type-Large-Ab G l0) →
     raise-Large-Ab l1 (raise-Large-Ab l2 x) ＝
     raise-Large-Ab (l1 ⊔ l2) x
   raise-raise-Large-Ab =

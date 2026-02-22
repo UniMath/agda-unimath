@@ -188,7 +188,7 @@ module _
     {l1 l2 l3 : Level} → (x : type-Large-Ring R l1) →
     raise-Large-Ring R l2 (raise-Large-Ring R l3 x) ＝
     raise-Large-Ring R (l2 ⊔ l3) x
-  raise-raise-Large-Ring = raise-raise-Large-Ab (large-ab-Large-Ring R) _ _
+  raise-raise-Large-Ring = raise-raise-Large-Ab (large-ab-Large-Ring R)
 
   raise-left-add-Large-Ring :
     {l1 l2 l3 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
