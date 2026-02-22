@@ -62,15 +62,11 @@ large-commutative-monoid-add-ℂ =
 
 large-group-add-ℂ : Large-Group lsuc (_⊔_)
 large-group-add-ℂ =
-  λ where
-    .large-monoid-Large-Group →
-      large-monoid-add-ℂ
-    .inv-Large-Group →
-      neg-ℂ
-    .sim-left-inverse-law-mul-Large-Group →
-      left-inverse-law-add-ℂ
-    .sim-right-inverse-law-mul-Large-Group →
-      right-inverse-law-add-ℂ
+  make-Large-Group
+    ( large-monoid-add-ℂ)
+    ( neg-ℂ)
+    ( left-inverse-law-add-ℂ)
+    ( right-inverse-law-add-ℂ)
 
 large-ab-add-ℂ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℂ =

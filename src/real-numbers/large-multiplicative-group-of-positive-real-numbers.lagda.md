@@ -53,15 +53,11 @@ large-monoid-mul-ℝ⁺ =
 
 large-group-mul-ℝ⁺ : Large-Group lsuc (_⊔_)
 large-group-mul-ℝ⁺ =
-  λ where
-    .large-monoid-Large-Group →
-      large-monoid-mul-ℝ⁺
-    .inv-Large-Group →
-      inv-ℝ⁺
-    .sim-left-inverse-law-mul-Large-Group →
-      left-inverse-law-mul-ℝ⁺
-    .sim-right-inverse-law-mul-Large-Group →
-      right-inverse-law-mul-ℝ⁺
+  make-Large-Group
+    ( large-monoid-mul-ℝ⁺)
+    ( inv-ℝ⁺)
+    ( left-inverse-law-mul-ℝ⁺)
+    ( right-inverse-law-mul-ℝ⁺)
 
 large-ab-mul-ℝ⁺ : Large-Ab lsuc (_⊔_)
 large-ab-mul-ℝ⁺ =
