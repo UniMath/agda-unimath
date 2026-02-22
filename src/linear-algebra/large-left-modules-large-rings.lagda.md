@@ -263,7 +263,8 @@ module _
     {l0 : Level} (l : Level) →
     type-Large-Left-Module-Large-Ring M l0 →
     type-Large-Left-Module-Large-Ring M (l0 ⊔ l)
-  raise-Large-Left-Module-Large-Ring = raise-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
+  raise-Large-Left-Module-Large-Ring =
+    raise-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
 
   sim-raise-Large-Left-Module-Large-Ring :
     {l0 : Level} (l : Level) (x : type-Large-Left-Module-Large-Ring M l0) →
@@ -481,7 +482,8 @@ module _
       ( id)
       ( cumulative-large-set-Large-Left-Module-Large-Ring M)
   sim-preserving-endomap-neg-Large-Left-Module-Large-Ring =
-    sim-preserving-endomap-neg-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
+    sim-preserving-endomap-neg-Large-Ab
+      ( large-ab-Large-Left-Module-Large-Ring M)
 
   preserves-sim-neg-Large-Left-Module-Large-Ring :
     preserves-sim-endomap-Cumulative-Large-Set
@@ -507,8 +509,12 @@ module _
     (x : type-Large-Left-Module-Large-Ring M l1)
     (y : type-Large-Left-Module-Large-Ring M l2)
     (z : type-Large-Left-Module-Large-Ring M l3) →
-    add-Large-Left-Module-Large-Ring M (add-Large-Left-Module-Large-Ring M x y) z ＝
-    add-Large-Left-Module-Large-Ring M x (add-Large-Left-Module-Large-Ring M y z)
+    add-Large-Left-Module-Large-Ring M
+      ( add-Large-Left-Module-Large-Ring M x y)
+      ( z) ＝
+    add-Large-Left-Module-Large-Ring M
+      ( x)
+      ( add-Large-Left-Module-Large-Ring M y z)
   associative-add-Large-Left-Module-Large-Ring =
     associative-add-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
 ```
@@ -524,11 +530,13 @@ module _
   where
 
   zero-Large-Left-Module-Large-Ring : type-Large-Left-Module-Large-Ring M lzero
-  zero-Large-Left-Module-Large-Ring = zero-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
+  zero-Large-Left-Module-Large-Ring =
+    zero-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
 
   raise-zero-Large-Left-Module-Large-Ring :
     (l : Level) → type-Large-Left-Module-Large-Ring M l
-  raise-zero-Large-Left-Module-Large-Ring = raise-zero-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
+  raise-zero-Large-Left-Module-Large-Ring =
+    raise-zero-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
 
   raise-zero-lzero-Large-Left-Module-Large-Ring :
     raise-zero-Large-Left-Module-Large-Ring lzero ＝
@@ -674,7 +682,8 @@ module _
           ( neg-Large-Left-Module-Large-Ring M x)
           ( x))
     sim-left-inverse-law-add-Large-Left-Module-Large-Ring =
-      sim-left-inverse-law-add-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
+      sim-left-inverse-law-add-Large-Ab
+        ( large-ab-Large-Left-Module-Large-Ring M)
 
     sim-right-inverse-law-add-Large-Left-Module-Large-Ring :
       {l : Level} (x : type-Large-Left-Module-Large-Ring M l) →
