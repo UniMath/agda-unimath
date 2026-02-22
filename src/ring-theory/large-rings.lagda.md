@@ -230,29 +230,22 @@ module _
 
   multiplicative-large-semigroup-Large-Ring : Large-Semigroup α β
   multiplicative-large-semigroup-Large-Ring =
-    λ where
-      .cumulative-large-set-Large-Semigroup →
-        cumulative-large-set-Large-Ring R
-      .sim-preserving-binary-operator-mul-Large-Semigroup →
-        make-sim-preserving-binary-operator-Cumulative-Large-Set
-          ( cumulative-large-set-Large-Ring R)
-          ( mul-Large-Ring R)
-          ( λ x x' y y' x~x' y~y' →
-            preserves-sim-mul-Large-Ring R x x' x~x' y y' y~y')
-      .associative-mul-Large-Semigroup →
-        associative-mul-Large-Ring R
+    make-Large-Semigroup
+      ( cumulative-large-set-Large-Ring R)
+      ( make-sim-preserving-binary-operator-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Ring R)
+        ( mul-Large-Ring R)
+        ( λ x x' y y' x~x' y~y' →
+          preserves-sim-mul-Large-Ring R x x' x~x' y y' y~y'))
+      ( associative-mul-Large-Ring R)
 
   multiplicative-large-monoid-Large-Ring : Large-Monoid α β
   multiplicative-large-monoid-Large-Ring =
-    λ where
-      .large-semigroup-Large-Monoid →
-        multiplicative-large-semigroup-Large-Ring
-      .unit-Large-Monoid →
-        one-Large-Ring R
-      .left-unit-law-mul-Large-Monoid →
-        left-unit-law-mul-Large-Ring R
-      .right-unit-law-mul-Large-Monoid →
-        right-unit-law-mul-Large-Ring R
+    make-Large-Monoid
+      ( multiplicative-large-semigroup-Large-Ring)
+      ( one-Large-Ring R)
+      ( left-unit-law-mul-Large-Ring R)
+      ( right-unit-law-mul-Large-Ring R)
 
   raise-one-Large-Ring : (l : Level) → type-Large-Ring R l
   raise-one-Large-Ring =

@@ -68,9 +68,9 @@ module _
 
   Π-Large-Monoid : Large-Monoid (λ l → l0 ⊔ α l) (λ l1 l2 → l0 ⊔ β l1 l2)
   Π-Large-Monoid =
-    λ where
-      .large-semigroup-Large-Monoid → large-semigroup-Π-Large-Monoid
-      .unit-Large-Monoid → unit-Π-Large-Monoid
-      .left-unit-law-mul-Large-Monoid → left-unit-law-mul-Π-Large-Monoid
-      .right-unit-law-mul-Large-Monoid → right-unit-law-mul-Π-Large-Monoid
+    make-Large-Monoid
+      ( large-semigroup-Π-Large-Monoid)
+      ( unit-Π-Large-Monoid)
+      ( left-unit-law-mul-Π-Large-Monoid)
+      ( right-unit-law-mul-Π-Large-Monoid)
 ```

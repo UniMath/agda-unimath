@@ -44,25 +44,18 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ```agda
 large-semigroup-add-ℝ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℝ =
-  λ where
-    .cumulative-large-set-Large-Semigroup →
-      cumulative-large-set-ℝ
-    .sim-preserving-binary-operator-mul-Large-Semigroup →
-      sim-preserving-binary-operator-add-ℝ
-    .associative-mul-Large-Semigroup →
-      associative-add-ℝ
+  make-Large-Semigroup
+    ( cumulative-large-set-ℝ)
+    ( sim-preserving-binary-operator-add-ℝ)
+    ( associative-add-ℝ)
 
 large-monoid-add-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℝ =
-  λ where
-    .large-semigroup-Large-Monoid →
-      large-semigroup-add-ℝ
-    .unit-Large-Monoid →
-      zero-ℝ
-    .left-unit-law-mul-Large-Monoid →
-      left-unit-law-add-ℝ
-    .right-unit-law-mul-Large-Monoid →
-      right-unit-law-add-ℝ
+  make-Large-Monoid
+    ( large-semigroup-add-ℝ)
+    ( zero-ℝ)
+    ( left-unit-law-add-ℝ)
+    ( right-unit-law-add-ℝ)
 
 large-commutative-monoid-add-ℝ : Large-Commutative-Monoid lsuc (_⊔_)
 large-commutative-monoid-add-ℝ =
