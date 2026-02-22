@@ -230,7 +230,7 @@ module _
       ( cumulative-large-set-Large-Semigroup G)
 
   raise-raise-Large-Semigroup :
-    {l0 : Level} (l1 l2 : Level) (x : type-Large-Semigroup G l0) →
+    {l0 l1 l2 : Level} (x : type-Large-Semigroup G l0) →
     raise-Large-Semigroup l1 (raise-Large-Semigroup l2 x) ＝
     raise-Large-Semigroup (l1 ⊔ l2) x
   raise-raise-Large-Semigroup =

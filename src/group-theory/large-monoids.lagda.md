@@ -199,7 +199,7 @@ module _
     emb-raise-Large-Semigroup (large-semigroup-Large-Monoid M)
 
   raise-raise-Large-Monoid :
-    {l0 : Level} (l1 l2 : Level) (x : type-Large-Monoid M l0) →
+    {l0 l1 l2 : Level} (x : type-Large-Monoid M l0) →
     raise-Large-Monoid l1 (raise-Large-Monoid l2 x) ＝
     raise-Large-Monoid (l1 ⊔ l2) x
   raise-raise-Large-Monoid =
@@ -486,5 +486,5 @@ module _
       ( monoid-Large-Monoid M (l1 ⊔ l2))
   hom-raise-Large-Monoid l1 l2 =
     ( hom-raise-Large-Semigroup (large-semigroup-Large-Monoid M) l1 l2 ,
-      raise-raise-Large-Monoid M l2 l1 (unit-Large-Monoid M))
+      raise-raise-Large-Monoid M (unit-Large-Monoid M))
 ```
