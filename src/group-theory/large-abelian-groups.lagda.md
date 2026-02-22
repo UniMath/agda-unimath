@@ -167,7 +167,7 @@ module _
     {l1 l2 l3 : Level} → (x : type-Large-Ab G l1) →
     raise-Large-Ab l2 (raise-Large-Ab l3 x) ＝
     raise-Large-Ab (l2 ⊔ l3) x
-  raise-raise-Large-Ab = raise-raise-Large-Group (large-group-Large-Ab G) _ _
+  raise-raise-Large-Ab = raise-raise-Large-Group (large-group-Large-Ab G)
 
   raise-left-add-Large-Ab :
     {l1 l2 l3 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
