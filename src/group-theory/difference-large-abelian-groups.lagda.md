@@ -1,39 +1,60 @@
-### Subtraction
+# Differences in large abelian groups
+
+```agda
+module group-theory.difference-large-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import group-theory.large-abelian-groups
+open import group-theory.division-large-groups
+open import foundation.universe-levels
+open import foundation.identity-types
+```
+
+## Idea
+
+## Definition
 
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   where
 
-  left-subtraction-Large-Ab :
+  left-diff-Large-Ab :
     {l1 l2 : Level} → type-Large-Ab G l1 → type-Large-Ab G l2 →
     type-Large-Ab G (l1 ⊔ l2)
-  left-subtraction-Large-Ab x y = add-Large-Ab G (neg-Large-Ab G y) x
+  left-diff-Large-Ab x y = add-Large-Ab G (neg-Large-Ab G y) x
 
-  right-subtraction-Large-Ab :
+  right-diff-Large-Ab :
     {l1 l2 : Level} → type-Large-Ab G l1 → type-Large-Ab G l2 →
     type-Large-Ab G (l1 ⊔ l2)
-  right-subtraction-Large-Ab x y = add-Large-Ab G x (neg-Large-Ab G y)
+  right-diff-Large-Ab x y = add-Large-Ab G x (neg-Large-Ab G y)
+```
 
+## Properties
+
+```agda
   abstract
-    neg-right-subtraction-Large-Ab :
+    neg-right-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      neg-Large-Ab G (right-subtraction-Large-Ab x y) ＝
-      right-subtraction-Large-Ab y x
-    neg-right-subtraction-Large-Ab =
+      neg-Large-Ab G (right-diff-Large-Ab x y) ＝
+      right-diff-Large-Ab y x
+    neg-right-diff-Large-Ab =
       inv-right-div-Large-Group (large-group-Large-Ab G)
 
-    neg-left-subtraction-Large-Ab :
+    neg-left-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      neg-Large-Ab G (left-subtraction-Large-Ab x y) ＝
-      left-subtraction-Large-Ab y x
-    neg-left-subtraction-Large-Ab =
+      neg-Large-Ab G (left-diff-Large-Ab x y) ＝
+      left-diff-Large-Ab y x
+    neg-left-diff-Large-Ab =
       inv-left-div-Large-Group (large-group-Large-Ab G)
 
-    eq-left-right-subtraction-Large-Ab :
+    eq-left-right-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
-      left-subtraction-Large-Ab x y ＝ right-subtraction-Large-Ab x y
-    eq-left-right-subtraction-Large-Ab x y =
+      left-diff-Large-Ab x y ＝ right-diff-Large-Ab x y
+    eq-left-right-diff-Large-Ab x y =
       commutative-add-Large-Ab G (neg-Large-Ab G y) x
 ```
 
@@ -47,17 +68,17 @@ module _
   where
 
   abstract
-    interchange-right-subtraction-add-Large-Ab :
+    interchange-right-diff-add-Large-Ab :
       {l1 l2 l3 l4 : Level}
       (a : type-Large-Ab G l1) (b : type-Large-Ab G l2)
       (c : type-Large-Ab G l3) (d : type-Large-Ab G l4) →
-      right-subtraction-Large-Ab G
+      right-diff-Large-Ab G
         ( add-Large-Ab G a b)
         ( add-Large-Ab G c d) ＝
       add-Large-Ab G
-        ( right-subtraction-Large-Ab G a c)
-        ( right-subtraction-Large-Ab G b d)
-    interchange-right-subtraction-add-Large-Ab a b c d =
+        ( right-diff-Large-Ab G a c)
+        ( right-diff-Large-Ab G b d)
+    interchange-right-diff-add-Large-Ab a b c d =
       equational-reasoning
         (a +G b) +G neg-G (c +G d)
         ＝ (a +G b) +G (neg-G c +G neg-G d)
@@ -76,16 +97,16 @@ module _
   where
 
   abstract
-    associate-right-subtraction-Large-Ab :
+    associate-right-diff-Large-Ab :
       {l1 l2 l3 : Level}
       (x : type-Large-Ab G l1)
       (y : type-Large-Ab G l2)
       (z : type-Large-Ab G l3) →
-      right-subtraction-Large-Ab G (right-subtraction-Large-Ab G x y) z ＝
-      right-subtraction-Large-Ab G x (add-Large-Ab G y z)
-    associate-right-subtraction-Large-Ab x y z =
+      right-diff-Large-Ab G (right-diff-Large-Ab G x y) z ＝
+      right-diff-Large-Ab G x (add-Large-Ab G y z)
+    associate-right-diff-Large-Ab x y z =
       ( associate-right-div-Large-Group (large-group-Large-Ab G) x y z) ∙
-      ( ap (right-subtraction-Large-Ab G x) (commutative-add-Large-Ab G z y))
+      ( ap (right-diff-Large-Ab G x) (commutative-add-Large-Ab G z y))
 ```
 
 ### `(x - y) + (y - z) = x - z`
@@ -100,17 +121,17 @@ module _
   open similarity-reasoning-Large-Ab G
 
   abstract
-    add-right-subtraction-Large-Ab :
+    add-right-diff-Large-Ab :
       {l1 l2 l3 : Level}
       (x : type-Large-Ab G l1)
       (y : type-Large-Ab G l2)
       (z : type-Large-Ab G l3) →
       sim-Large-Ab G
         ( add-Large-Ab G
-          ( right-subtraction-Large-Ab G x y)
-          ( right-subtraction-Large-Ab G y z))
-        ( right-subtraction-Large-Ab G x z)
-    add-right-subtraction-Large-Ab x y z =
+          ( right-diff-Large-Ab G x y)
+          ( right-diff-Large-Ab G y z))
+        ( right-diff-Large-Ab G x z)
+    add-right-diff-Large-Ab x y z =
       similarity-reasoning
         (x +G neg-G y) +G (y +G neg-G z)
         ~ x +G (neg-G y +G (y +G neg-G z))
@@ -133,23 +154,23 @@ module _
   open similarity-reasoning-Large-Ab G
 
   abstract
-    right-subtraction-add-Large-Ab :
+    right-diff-add-Large-Ab :
       {l1 l2 l3 : Level}
       (x : type-Large-Ab G l1)
       (y : type-Large-Ab G l2)
       (z : type-Large-Ab G l3) →
       sim-Large-Ab G
-        ( right-subtraction-Large-Ab G
+        ( right-diff-Large-Ab G
           ( add-Large-Ab G x z)
           ( add-Large-Ab G y z))
-        ( right-subtraction-Large-Ab G x y)
-    right-subtraction-add-Large-Ab x y z =
+        ( right-diff-Large-Ab G x y)
+    right-diff-add-Large-Ab x y z =
       similarity-reasoning
         (x +G z) +G neg-G (y +G z)
         ~ (x +G neg-G y) +G (z +G neg-G z)
           by
             sim-eq-Large-Ab G
-              ( interchange-right-subtraction-add-Large-Ab G x z y z)
+              ( interchange-right-diff-add-Large-Ab G x z y z)
         ~ x +G neg-G y
           by
             sim-right-is-zero-law-add-Large-Ab G _ _
@@ -168,18 +189,18 @@ module _
   open similarity-reasoning-Large-Ab G
 
   abstract
-    right-subtraction-right-subtraction-Large-Ab :
+    right-diff-right-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       sim-Large-Ab G
-        ( right-subtraction-Large-Ab G x (right-subtraction-Large-Ab G x y))
+        ( right-diff-Large-Ab G x (right-diff-Large-Ab G x y))
         ( y)
-    right-subtraction-right-subtraction-Large-Ab x y =
+    right-diff-right-diff-Large-Ab x y =
       similarity-reasoning
         x +G neg-G (x +G neg-G y)
         ~ x +G (y +G neg-G x)
           by
             sim-eq-Large-Ab G
-              ( ap-add-Large-Ab G refl (neg-right-subtraction-Large-Ab G x y))
+              ( ap-add-Large-Ab G refl (neg-right-diff-Large-Ab G x y))
         ~ y
           by cancel-right-conjugation-Large-Ab G x y
 ```
@@ -196,14 +217,14 @@ module _
   open similarity-reasoning-Large-Ab G
 
   abstract
-    transpose-sim-right-subtraction-Large-Ab :
+    transpose-sim-right-diff-Large-Ab :
       {l1 l2 l3 : Level}
       (x : type-Large-Ab G l1)
       (y : type-Large-Ab G l2)
       (z : type-Large-Ab G l3) →
-      sim-Large-Ab G (right-subtraction-Large-Ab G x y) z →
-      sim-Large-Ab G (right-subtraction-Large-Ab G x z) y
-    transpose-sim-right-subtraction-Large-Ab x y z x-y~z =
+      sim-Large-Ab G (right-diff-Large-Ab G x y) z →
+      sim-Large-Ab G (right-diff-Large-Ab G x z) y
+    transpose-sim-right-diff-Large-Ab x y z x-y~z =
       similarity-reasoning
         x +G neg-G z
         ~ x +G neg-G (x +G neg-G y)
@@ -212,7 +233,7 @@ module _
               ( preserves-sim-neg-Large-Ab G _ _
                 ( symmetric-sim-Large-Ab G _ _ x-y~z))
         ~ y
-          by right-subtraction-right-subtraction-Large-Ab G x y
+          by right-diff-right-diff-Large-Ab G x y
 ```
 
 ### Unit laws of subtraction
@@ -223,16 +244,16 @@ module _
   where
 
   abstract
-    is-zero-law-right-subtraction-Large-Ab :
+    is-zero-law-right-diff-Large-Ab :
       {l1 l2 : Level} (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
       is-zero-Large-Ab G y →
-      sim-Large-Ab G (right-subtraction-Large-Ab G x y) x
-    is-zero-law-right-subtraction-Large-Ab =
+      sim-Large-Ab G (right-diff-Large-Ab G x y) x
+    is-zero-law-right-diff-Large-Ab =
       is-unit-law-right-div-Large-Group (large-group-Large-Ab G)
 
-    zero-law-right-subtraction-Large-Ab :
+    zero-law-right-diff-Large-Ab :
       {l : Level} (x : type-Large-Ab G l) →
-      right-subtraction-Large-Ab G x (zero-Large-Ab G) ＝ x
-    zero-law-right-subtraction-Large-Ab =
+      right-diff-Large-Ab G x (zero-Large-Ab G) ＝ x
+    zero-law-right-diff-Large-Ab =
       unit-law-right-div-Large-Group (large-group-Large-Ab G)
 ```
