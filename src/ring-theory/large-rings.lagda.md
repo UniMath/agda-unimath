@@ -336,7 +336,7 @@ module _
     preserves-sim-right-add-Large-Ab (large-ab-Large-Ring R)
 ```
 
-### Raising universe levels in multiplication
+### Raising universe levels in addition
 
 ```agda
 module _
@@ -526,6 +526,47 @@ module _
       add-Large-Ring R x (neg-Large-Ring R x) ＝ raise-zero-Large-Ring R l
     eq-right-inverse-law-add-Large-Ring =
       eq-right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+
+    unique-left-neg-Large-Ring :
+      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
+      is-zero-Large-Ring R (add-Large-Ring R x y) →
+      sim-Large-Ring R x (neg-Large-Ring R y)
+    unique-left-neg-Large-Ring =
+      unique-left-neg-Large-Ab (large-ab-Large-Ring R)
+
+    unique-right-neg-Large-Ring :
+      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
+      is-zero-Large-Ring R (add-Large-Ring R x y) →
+      sim-Large-Ring R y (neg-Large-Ring R x)
+    unique-right-neg-Large-Ring =
+      unique-right-neg-Large-Ab (large-ab-Large-Ring R)
+
+    distributive-neg-add-Large-Ring :
+      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
+      neg-Large-Ring R (add-Large-Ring R x y) ＝
+      add-Large-Ring R (neg-Large-Ring R x) (neg-Large-Ring R y)
+    distributive-neg-add-Large-Ring x y =
+      distributive-neg-add-Large-Ab (large-ab-Large-Ring R) x y
+
+    neg-is-zero-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      is-zero-Large-Ring R x → is-zero-Large-Ring R (neg-Large-Ring R x)
+    neg-is-zero-Large-Ring = neg-is-zero-Large-Ab (large-ab-Large-Ring R)
+
+    neg-zero-Large-Ring :
+      neg-Large-Ring R (zero-Large-Ring R) ＝ zero-Large-Ring R
+    neg-zero-Large-Ring = neg-zero-Large-Ab (large-ab-Large-Ring R)
+
+    neg-raise-zero-Large-Ring :
+      (l : Level) →
+      neg-Large-Ring R (raise-zero-Large-Ring R l) ＝ raise-zero-Large-Ring R l
+    neg-raise-zero-Large-Ring =
+      neg-raise-zero-Large-Ab (large-ab-Large-Ring R)
+
+    neg-neg-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      neg-Large-Ring R (neg-Large-Ring R x) ＝ x
+    neg-neg-Large-Ring = neg-neg-Large-Ab (large-ab-Large-Ring R)
 ```
 
 ### Cancellation laws
@@ -590,83 +631,6 @@ module _
       eq-cancel-right-add-diff-Large-Ab (large-ab-Large-Ring R) x y
 ```
 
-### Uniqueness of negations
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  where
-
-  abstract
-    unique-left-neg-Large-Ring :
-      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
-      is-zero-Large-Ring R (add-Large-Ring R x y) →
-      sim-Large-Ring R x (neg-Large-Ring R y)
-    unique-left-neg-Large-Ring =
-      unique-left-neg-Large-Ab (large-ab-Large-Ring R)
-
-    unique-right-neg-Large-Ring :
-      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
-      is-zero-Large-Ring R (add-Large-Ring R x y) →
-      sim-Large-Ring R y (neg-Large-Ring R x)
-    unique-right-neg-Large-Ring =
-      unique-right-neg-Large-Ab (large-ab-Large-Ring R)
-```
-
-### The negation of zero is zero
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  where
-
-  abstract
-    neg-is-zero-Large-Ring :
-      {l : Level} (x : type-Large-Ring R l) →
-      is-zero-Large-Ring R x → is-zero-Large-Ring R (neg-Large-Ring R x)
-    neg-is-zero-Large-Ring = neg-is-zero-Large-Ab (large-ab-Large-Ring R)
-
-    neg-zero-Large-Ring :
-      neg-Large-Ring R (zero-Large-Ring R) ＝ zero-Large-Ring R
-    neg-zero-Large-Ring = neg-zero-Large-Ab (large-ab-Large-Ring R)
-
-    neg-raise-zero-Large-Ring :
-      (l : Level) →
-      neg-Large-Ring R (raise-zero-Large-Ring R l) ＝ raise-zero-Large-Ring R l
-    neg-raise-zero-Large-Ring =
-      neg-raise-zero-Large-Ab (large-ab-Large-Ring R)
-```
-
-### Distributivity of negation over addition
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  where
-
-  abstract
-    distributive-neg-add-Large-Ring :
-      {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
-      neg-Large-Ring R (add-Large-Ring R x y) ＝
-      add-Large-Ring R (neg-Large-Ring R x) (neg-Large-Ring R y)
-    distributive-neg-add-Large-Ring x y =
-      distributive-neg-add-Large-Ab (large-ab-Large-Ring R) x y
-```
-
-### Negation is an involution
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  where
-
-  abstract
-    neg-neg-Large-Ring :
-      {l : Level} (x : type-Large-Ring R l) →
-      neg-Large-Ring R (neg-Large-Ring R x) ＝ x
-    neg-neg-Large-Ring = neg-neg-Large-Ab (large-ab-Large-Ring R)
-```
-
 ### Addition reflects similarity
 
 ```agda
@@ -692,7 +656,7 @@ module _
       reflects-sim-left-add-Large-Ab (large-ab-Large-Ring R) z x y
 ```
 
-### Left addition in a large abelian group is an embedding
+### Addition on the left or right in a large abelian group is an embedding
 
 ```agda
 module _
@@ -705,17 +669,7 @@ module _
       is-emb (add-Large-Ring R {l2 = l2} x)
     is-emb-left-add-Large-Ring =
       is-emb-left-add-Large-Ab (large-ab-Large-Ring R) l2 x
-```
 
-### Right addition in a large abelian group is an embedding
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  {l1 : Level} (l2 : Level) (x : type-Large-Ring R l1)
-  where
-
-  abstract
     is-emb-right-add-Large-Ring :
       is-emb (add-Large-Ring' R {l2 = l2} x)
     is-emb-right-add-Large-Ring =
