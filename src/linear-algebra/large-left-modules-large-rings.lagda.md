@@ -547,7 +547,7 @@ module _
                 ( x)
               by
                 ap-mul-Large-Left-Module-Large-Ring M
-                  ( right-inverse-law-add-Large-Ring R a)
+                  ( eq-right-inverse-law-add-Large-Ring R a)
                   ( refl)
             ＝ raise-zero-Large-Left-Module-Large-Ring M (l1 ⊔ l2)
               by left-raise-zero-law-mul-Large-Left-Module-Large-Ring M _))
