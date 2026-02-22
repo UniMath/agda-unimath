@@ -794,9 +794,9 @@ module _
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Group α β)
   {l1 l2 l3 : Level}
+  (z : type-Large-Group G l3)
   (x : type-Large-Group G l1)
   (y : type-Large-Group G l2)
-  (z : type-Large-Group G l3)
   where
 
   abstract
