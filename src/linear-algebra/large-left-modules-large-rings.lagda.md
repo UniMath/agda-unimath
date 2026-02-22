@@ -416,7 +416,7 @@ module _
     preserves-sim-right-add-Large-Ab (large-ab-Large-Left-Module-Large-Ring M)
 ```
 
-### Raising universe levels in multiplication
+### Raising universe levels in addition
 
 ```agda
 module _
