@@ -16,6 +16,8 @@ open import foundation.identity-types
 open import foundation.action-on-identifications-binary-functions
 ```
 
+</details>
+
 ## Idea
 
 In a [large Abelian group](group-theory.large-abelian-groups.md), the difference
