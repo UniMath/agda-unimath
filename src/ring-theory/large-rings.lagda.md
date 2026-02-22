@@ -731,25 +731,18 @@ module _
 
   large-semigroup-mul-Large-Ring : Large-Semigroup α β
   large-semigroup-mul-Large-Ring =
-    λ where
-      .cumulative-large-set-Large-Semigroup →
-        cumulative-large-set-Large-Ring R
-      .sim-preserving-binary-operator-mul-Large-Semigroup →
-        sim-preserving-binary-operator-mul-Large-Ring R
-      .associative-mul-Large-Semigroup →
-        associative-mul-Large-Ring R
+    make-Large-Semigroup
+      ( cumulative-large-set-Large-Ring R)
+      ( sim-preserving-binary-operator-mul-Large-Ring R)
+      ( associative-mul-Large-Ring R)
 
   large-monoid-mul-Large-Ring : Large-Monoid α β
   large-monoid-mul-Large-Ring =
-    λ where
-      .large-semigroup-Large-Monoid →
-        large-semigroup-mul-Large-Ring
-      .unit-Large-Monoid →
-        one-Large-Ring R
-      .left-unit-law-mul-Large-Monoid →
-        left-unit-law-mul-Large-Ring R
-      .right-unit-law-mul-Large-Monoid →
-        right-unit-law-mul-Large-Ring R
+    make-Large-Monoid
+      ( large-semigroup-mul-Large-Ring)
+      ( one-Large-Ring R)
+      ( left-unit-law-mul-Large-Ring R)
+      ( right-unit-law-mul-Large-Ring R)
 ```
 
 ### Floating raised universe levels out of multiplication
