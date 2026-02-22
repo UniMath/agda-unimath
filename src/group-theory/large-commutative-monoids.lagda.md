@@ -203,7 +203,7 @@ module _
     emb-raise-Large-Monoid (large-monoid-Large-Commutative-Monoid M)
 
   raise-raise-Large-Commutative-Monoid :
-    {l0 : Level} (l1 l2 : Level) (x : type-Large-Commutative-Monoid M l0) →
+    {l0 l1 l2 : Level} (x : type-Large-Commutative-Monoid M l0) →
     raise-Large-Commutative-Monoid l1 (raise-Large-Commutative-Monoid l2 x) ＝
     raise-Large-Commutative-Monoid (l1 ⊔ l2) x
   raise-raise-Large-Commutative-Monoid =
