@@ -445,6 +445,22 @@ module _
     right-raise-unit-law-mul-Large-Monoid
       ( large-monoid-Large-Commutative-Monoid M)
 
+  left-raise-unit-law-mul-Large-Commutative-Monoid' :
+    {l : Level} (x : type-Large-Commutative-Monoid M l) →
+    mul-Large-Commutative-Monoid M (raise-unit-Large-Commutative-Monoid l) x ＝
+    x
+  left-raise-unit-law-mul-Large-Commutative-Monoid' =
+    left-raise-unit-law-mul-Large-Monoid'
+      ( large-monoid-Large-Commutative-Monoid M)
+
+  right-raise-unit-law-mul-Large-Commutative-Monoid' :
+    {l : Level} (x : type-Large-Commutative-Monoid M l) →
+    mul-Large-Commutative-Monoid M x (raise-unit-Large-Commutative-Monoid l) ＝
+    x
+  right-raise-unit-law-mul-Large-Commutative-Monoid' =
+    right-raise-unit-law-mul-Large-Monoid'
+      ( large-monoid-Large-Commutative-Monoid M)
+
   eq-left-is-unit-law-mul-Large-Commutative-Monoid :
     {l1 l2 : Level}
     (x : type-Large-Commutative-Monoid M l1)
