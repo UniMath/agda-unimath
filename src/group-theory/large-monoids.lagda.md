@@ -368,6 +368,13 @@ module _
       ( mul-raise-left-Large-Monoid M l2 (unit-Large-Monoid M) x) ∙
       ( ap (raise-Large-Monoid M l2) (left-unit-law-mul-Large-Monoid M x))
 
+    left-raise-unit-law-mul-Large-Monoid' :
+      {l : Level} (x : type-Large-Monoid M l) →
+      mul-Large-Monoid M (raise-unit-Large-Monoid l) x ＝ x
+    left-raise-unit-law-mul-Large-Monoid' x =
+      ( left-raise-unit-law-mul-Large-Monoid x) ∙
+      ( eq-raise-Large-Monoid M x)
+
     right-raise-unit-law-mul-Large-Monoid :
       {l1 l2 : Level} (x : type-Large-Monoid M l1) →
       mul-Large-Monoid M x (raise-unit-Large-Monoid l2) ＝
@@ -375,6 +382,13 @@ module _
     right-raise-unit-law-mul-Large-Monoid {l1} {l2} x =
       ( mul-raise-right-Large-Monoid M l2 x (unit-Large-Monoid M)) ∙
       ( ap (raise-Large-Monoid M l2) (right-unit-law-mul-Large-Monoid M x))
+
+    right-raise-unit-law-mul-Large-Monoid' :
+      {l : Level} (x : type-Large-Monoid M l) →
+      mul-Large-Monoid M x (raise-unit-Large-Monoid l) ＝ x
+    right-raise-unit-law-mul-Large-Monoid' x =
+      ( right-raise-unit-law-mul-Large-Monoid x) ∙
+      ( eq-raise-Large-Monoid M x)
 ```
 
 ### Unit elements in large monoids
@@ -466,10 +480,8 @@ module _
   monoid-Large-Monoid l =
     ( semigroup-Large-Monoid l ,
       raise-unit-Large-Monoid M l ,
-      ( λ x →
-        left-raise-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _) ,
-      ( λ x →
-        right-raise-unit-law-mul-Large-Monoid M x ∙ eq-raise-Large-Monoid M _))
+      left-raise-unit-law-mul-Large-Monoid' M ,
+      right-raise-unit-law-mul-Large-Monoid' M)
 ```
 
 ### The raise operation is a monoid homomorphism
