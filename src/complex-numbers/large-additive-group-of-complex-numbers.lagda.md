@@ -41,25 +41,18 @@ The type of [complex numbers](complex-numbers.complex-numbers.md) equipped with
 ```agda
 large-semigroup-add-ℂ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℂ =
-  λ where
-    .cumulative-large-set-Large-Semigroup →
-      cumulative-large-set-ℂ
-    .sim-preserving-binary-operator-mul-Large-Semigroup →
-      sim-preserving-binary-operator-add-ℂ
-    .associative-mul-Large-Semigroup →
-      associative-add-ℂ
+  make-Large-Semigroup
+    ( cumulative-large-set-ℂ)
+    ( sim-preserving-binary-operator-add-ℂ)
+    ( associative-add-ℂ)
 
 large-monoid-add-ℂ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℂ =
-  λ where
-    .large-semigroup-Large-Monoid →
-      large-semigroup-add-ℂ
-    .unit-Large-Monoid →
-      zero-ℂ
-    .left-unit-law-mul-Large-Monoid →
-      left-unit-law-add-ℂ
-    .right-unit-law-mul-Large-Monoid →
-      right-unit-law-add-ℂ
+  make-Large-Monoid
+    ( large-semigroup-add-ℂ)
+    ( zero-ℂ)
+    ( left-unit-law-add-ℂ)
+    ( right-unit-law-add-ℂ)
 
 large-commutative-monoid-add-ℂ : Large-Commutative-Monoid lsuc (_⊔_)
 large-commutative-monoid-add-ℂ =
@@ -69,15 +62,11 @@ large-commutative-monoid-add-ℂ =
 
 large-group-add-ℂ : Large-Group lsuc (_⊔_)
 large-group-add-ℂ =
-  λ where
-    .large-monoid-Large-Group →
-      large-monoid-add-ℂ
-    .inv-Large-Group →
-      neg-ℂ
-    .sim-left-inverse-law-mul-Large-Group →
-      left-inverse-law-add-ℂ
-    .sim-right-inverse-law-mul-Large-Group →
-      right-inverse-law-add-ℂ
+  make-Large-Group
+    ( large-monoid-add-ℂ)
+    ( neg-ℂ)
+    ( left-inverse-law-add-ℂ)
+    ( right-inverse-law-add-ℂ)
 
 large-ab-add-ℂ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℂ =
