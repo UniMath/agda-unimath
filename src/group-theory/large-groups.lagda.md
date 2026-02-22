@@ -220,7 +220,7 @@ module _
     raise-Large-Group G l2 (raise-Large-Group G l3 x) ＝
     raise-Large-Group G (l2 ⊔ l3) x
   raise-raise-Large-Group =
-    raise-raise-Large-Monoid (large-monoid-Large-Group G) _ _
+    raise-raise-Large-Monoid (large-monoid-Large-Group G)
 
   raise-left-mul-Large-Group :
     {l1 l2 l3 : Level}
