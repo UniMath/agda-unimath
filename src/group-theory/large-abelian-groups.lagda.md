@@ -299,7 +299,7 @@ module _
     preserves-sim-right-mul-Large-Group (large-group-Large-Ab G)
 ```
 
-### Raising universe levels in multiplication
+### Raising universe levels in addition
 
 ```agda
 module _
