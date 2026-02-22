@@ -396,12 +396,24 @@ module _
   left-raise-unit-law-mul-Large-Group =
     left-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
+  left-raise-unit-law-mul-Large-Group' :
+    {l : Level} (y : type-Large-Group G l) →
+    mul-Large-Group G (raise-unit-Large-Group l) y ＝ y
+  left-raise-unit-law-mul-Large-Group' =
+    left-raise-unit-law-mul-Large-Monoid' (large-monoid-Large-Group G)
+
   right-raise-unit-law-mul-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
     mul-Large-Group G x (raise-unit-Large-Group l2) ＝
     raise-Large-Group G l2 x
   right-raise-unit-law-mul-Large-Group =
     right-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
+
+  right-raise-unit-law-mul-Large-Group' :
+    {l : Level} (x : type-Large-Group G l) →
+    mul-Large-Group G x (raise-unit-Large-Group l) ＝ x
+  right-raise-unit-law-mul-Large-Group' =
+    right-raise-unit-law-mul-Large-Monoid' (large-monoid-Large-Group G)
 
   eq-left-is-unit-law-mul-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) (y : type-Large-Group G l2) →
