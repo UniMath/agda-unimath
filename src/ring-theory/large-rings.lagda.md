@@ -683,13 +683,13 @@ module _
       sim-Large-Ring R (add-Large-Ring R x z) (add-Large-Ring R y z) →
       sim-Large-Ring R x y
     reflects-sim-right-add-Large-Ring =
-      reflects-sim-right-add-Large-Ab (large-ab-Large-Ring R) x y z
+      reflects-sim-right-add-Large-Ab (large-ab-Large-Ring R) z x y
 
     reflects-sim-left-add-Large-Ring :
-      sim-Large-Ring R (add-Large-Ring R x y) (add-Large-Ring R x z) →
-      sim-Large-Ring R y z
+      sim-Large-Ring R (add-Large-Ring R z x) (add-Large-Ring R z y) →
+      sim-Large-Ring R x y
     reflects-sim-left-add-Large-Ring =
-      reflects-sim-left-add-Large-Ab (large-ab-Large-Ring R) x y z
+      reflects-sim-left-add-Large-Ab (large-ab-Large-Ring R) z x y
 ```
 
 ### Left addition in a large abelian group is an embedding
