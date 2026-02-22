@@ -667,15 +667,15 @@ module _
     neg-neg-Large-Ring = neg-neg-Large-Ab (large-ab-Large-Ring R)
 ```
 
-### Right addition reflects similarity
+### Addition reflects similarity
 
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
   {l1 l2 l3 : Level}
+  (z : type-Large-Ring R l3)
   (x : type-Large-Ring R l1)
   (y : type-Large-Ring R l2)
-  (z : type-Large-Ring R l3)
   where
 
   abstract
@@ -684,20 +684,7 @@ module _
       sim-Large-Ring R x y
     reflects-sim-right-add-Large-Ring =
       reflects-sim-right-add-Large-Ab (large-ab-Large-Ring R) x y z
-```
 
-### Left addition reflects similarity
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
-  {l1 l2 l3 : Level}
-  (x : type-Large-Ring R l1)
-  (y : type-Large-Ring R l2)
-  (z : type-Large-Ring R l3)
-  where
-
-  abstract
     reflects-sim-left-add-Large-Ring :
       sim-Large-Ring R (add-Large-Ring R x y) (add-Large-Ring R x z) →
       sim-Large-Ring R y z
