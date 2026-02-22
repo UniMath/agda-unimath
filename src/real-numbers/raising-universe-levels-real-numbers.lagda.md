@@ -165,5 +165,5 @@ abstract
   raise-raise-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) →
     raise-ℝ l2 (raise-ℝ l3 x) ＝ raise-ℝ (l2 ⊔ l3) x
-  raise-raise-ℝ = raise-raise-Cumulative-Large-Set cumulative-large-set-ℝ _ _
+  raise-raise-ℝ = raise-raise-Cumulative-Large-Set cumulative-large-set-ℝ
 ```

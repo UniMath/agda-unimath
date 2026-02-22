@@ -270,7 +270,7 @@ module _
             ＝ raise-Large-Monoid M l1 (raise-unit-Large-Monoid M l2)
               by left-raise-unit-law-mul-Large-Monoid M _
             ＝ raise-unit-Large-Monoid M (l1 ⊔ l2)
-              by raise-raise-Large-Monoid M _ _ _)
+              by raise-raise-Large-Monoid M _)
     distributive-power-mul-Large-Monoid 1 _ = refl
     distributive-power-mul-Large-Monoid (succ-ℕ n@(succ-ℕ _)) {x} {y} H =
       equational-reasoning
