@@ -523,6 +523,44 @@ module _
       ( left-bottom-law-join-Large-Join-Semilattice)
 ```
 
+### The cumulative large set associated with a large join semilattice
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  raise-Large-Join-Semilattice :
+    {l1 : Level} (l : Level) →
+    type-Large-Join-Semilattice L l1 → type-Large-Join-Semilattice L (l1 ⊔ l)
+  raise-Large-Join-Semilattice l x =
+    join-Large-Join-Semilattice L
+      ( x)
+      ( bottom-Large-Join-Semilattice L l)
+
+  sim-raise-Large-Join-Semilattice :
+    {l1 : Level} (l : Level) (x : type-Large-Join-Semilattice L l1) →
+    sim-Large-Join-Semilattice L x (raise-Large-Join-Semilattice l x)
+  sim-raise-Large-Join-Semilattice l x =
+    ( leq-left-join-Large-Join-Semilattice L x _ ,
+      leq-join-Large-Join-Semilattice L _ _ _
+        ( refl-leq-Large-Join-Semilattice L x)
+        ( is-bottom-element-bottom-Large-Join-Semilattice
+          ( L)
+          ( l)
+          ( x)))
+
+  cumulative-large-set-Large-Join-Semilattice :
+    Cumulative-Large-Set α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
+  cumulative-large-set-Large-Join-Semilattice =
+    make-Cumulative-Large-Set
+      ( type-Large-Join-Semilattice L)
+      ( large-similarity-relation-Large-Join-Semilattice L)
+      ( raise-Large-Join-Semilattice)
+      ( sim-raise-Large-Join-Semilattice)
+```
+
 ### The join operation on a large join semilattice preserves similarity
 
 ```agda
@@ -559,6 +597,16 @@ module _
           ( transitive-leq-Large-Join-Semilattice L _ _ _
             ( leq-right-join-Large-Join-Semilattice L x y)
             ( y'≤y)))
+
+  sim-preserving-binary-operator-join-Large-Join-Semilattice :
+    sim-preserving-binary-operator-Cumulative-Large-Set
+      ( cumulative-large-set-Large-Join-Semilattice L)
+  sim-preserving-binary-operator-join-Large-Join-Semilattice =
+    make-sim-preserving-binary-operator-Cumulative-Large-Set
+      ( cumulative-large-set-Large-Join-Semilattice L)
+      ( join-Large-Join-Semilattice L)
+      ( λ x x' y y' x~x' y~y' →
+        preserves-sim-join-Large-Join-Semilattice x x' x~x' y y' y~y')
 ```
 
 ### The large commutative monoid associated with a large join semilattice
@@ -569,75 +617,29 @@ module _
   (L : Large-Join-Semilattice α β)
   where
 
-  raise-Large-Join-Semilattice :
-    {l1 : Level} (l : Level) →
-    type-Large-Join-Semilattice L l1 → type-Large-Join-Semilattice L (l1 ⊔ l)
-  raise-Large-Join-Semilattice l x =
-    join-Large-Join-Semilattice L
-      ( x)
-      ( bottom-Large-Join-Semilattice L l)
-
-  sim-raise-Large-Join-Semilattice :
-    {l1 : Level} (l : Level) (x : type-Large-Join-Semilattice L l1) →
-    sim-Large-Join-Semilattice L x (raise-Large-Join-Semilattice l x)
-  sim-raise-Large-Join-Semilattice l x =
-    ( leq-left-join-Large-Join-Semilattice L x _ ,
-      leq-join-Large-Join-Semilattice L _ _ _
-        ( refl-leq-Large-Join-Semilattice L x)
-        ( is-bottom-element-bottom-Large-Join-Semilattice
-          ( L)
-          ( l)
-          ( x)))
-
-  cumulative-large-set-Large-Join-Semilattice :
-    Cumulative-Large-Set α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
-  cumulative-large-set-Large-Join-Semilattice =
-    λ where
-      .type-Cumulative-Large-Set →
-        type-Large-Join-Semilattice L
-      .large-similarity-relation-Cumulative-Large-Set →
-        large-similarity-relation-Large-Join-Semilattice L
-      .raise-Cumulative-Large-Set →
-        raise-Large-Join-Semilattice
-      .sim-raise-Cumulative-Large-Set →
-        sim-raise-Large-Join-Semilattice
-
   large-semigroup-Large-Join-Semilattice :
     Large-Semigroup α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
   large-semigroup-Large-Join-Semilattice =
-    λ where
-      .cumulative-large-set-Large-Semigroup →
-        cumulative-large-set-Large-Join-Semilattice
-      .sim-preserving-binary-operator-mul-Large-Semigroup →
-        make-sim-preserving-binary-operator-Cumulative-Large-Set
-          ( cumulative-large-set-Large-Join-Semilattice)
-          ( join-Large-Join-Semilattice L)
-          ( λ x x' y y' x~x' →
-            preserves-sim-join-Large-Join-Semilattice L x x' x~x' y y')
-      .associative-mul-Large-Semigroup →
-        associative-join-Large-Join-Semilattice L
+    make-Large-Semigroup
+      ( cumulative-large-set-Large-Join-Semilattice L)
+      ( sim-preserving-binary-operator-join-Large-Join-Semilattice L)
+      ( associative-join-Large-Join-Semilattice L)
 
   large-monoid-Large-Join-Semilattice :
     Large-Monoid α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
   large-monoid-Large-Join-Semilattice =
-    λ where
-      .large-semigroup-Large-Monoid →
-        large-semigroup-Large-Join-Semilattice
-      .unit-Large-Monoid →
-        bottom-Large-Join-Semilattice L lzero
-      .left-unit-law-mul-Large-Monoid →
-        left-bottom-law-join-Large-Join-Semilattice L
-      .right-unit-law-mul-Large-Monoid →
-        right-bottom-law-join-Large-Join-Semilattice L
+    make-Large-Monoid
+      ( large-semigroup-Large-Join-Semilattice)
+      ( bottom-Large-Join-Semilattice L lzero)
+      ( left-bottom-law-join-Large-Join-Semilattice L)
+      ( right-bottom-law-join-Large-Join-Semilattice L)
 
   large-commutative-monoid-Large-Join-Semilattice :
     Large-Commutative-Monoid α (λ l1 l2 → β l1 l2 ⊔ β l2 l1)
   large-commutative-monoid-Large-Join-Semilattice =
-    λ where
-      .large-monoid-Large-Commutative-Monoid →
-        large-monoid-Large-Join-Semilattice
-      .commutative-mul-Large-Commutative-Monoid →
-        commutative-join-Large-Join-Semilattice L
+    make-Large-Commutative-Monoid
+      ( large-monoid-Large-Join-Semilattice)
+      ( commutative-join-Large-Join-Semilattice L)
 
   commutative-monoid-Large-Join-Semilattice :
     (l : Level) → Commutative-Monoid (α l)

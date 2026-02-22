@@ -38,37 +38,26 @@ The [positive real numbers](real-numbers.positive-real-numbers.md) form a
 ```agda
 large-semigroup-mul-ℝ⁺ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-mul-ℝ⁺ =
-  λ where
-    .cumulative-large-set-Large-Semigroup →
-      cumulative-large-set-ℝ⁺
-    .sim-preserving-binary-operator-mul-Large-Semigroup →
-      sim-preserving-binary-operator-mul-ℝ⁺
-    .associative-mul-Large-Semigroup →
-      associative-mul-ℝ⁺
+  make-Large-Semigroup
+    ( cumulative-large-set-ℝ⁺)
+    ( sim-preserving-binary-operator-mul-ℝ⁺)
+    ( associative-mul-ℝ⁺)
 
 large-monoid-mul-ℝ⁺ : Large-Monoid lsuc (_⊔_)
 large-monoid-mul-ℝ⁺ =
-  λ where
-    .large-semigroup-Large-Monoid →
-      large-semigroup-mul-ℝ⁺
-    .unit-Large-Monoid →
-      one-ℝ⁺
-    .left-unit-law-mul-Large-Monoid →
-      left-unit-law-mul-ℝ⁺
-    .right-unit-law-mul-Large-Monoid →
-      right-unit-law-mul-ℝ⁺
+  make-Large-Monoid
+    ( large-semigroup-mul-ℝ⁺)
+    ( one-ℝ⁺)
+    ( left-unit-law-mul-ℝ⁺)
+    ( right-unit-law-mul-ℝ⁺)
 
 large-group-mul-ℝ⁺ : Large-Group lsuc (_⊔_)
 large-group-mul-ℝ⁺ =
-  λ where
-    .large-monoid-Large-Group →
-      large-monoid-mul-ℝ⁺
-    .inv-Large-Group →
-      inv-ℝ⁺
-    .sim-left-inverse-law-mul-Large-Group →
-      left-inverse-law-mul-ℝ⁺
-    .sim-right-inverse-law-mul-Large-Group →
-      right-inverse-law-mul-ℝ⁺
+  make-Large-Group
+    ( large-monoid-mul-ℝ⁺)
+    ( inv-ℝ⁺)
+    ( left-inverse-law-mul-ℝ⁺)
+    ( right-inverse-law-mul-ℝ⁺)
 
 large-ab-mul-ℝ⁺ : Large-Ab lsuc (_⊔_)
 large-ab-mul-ℝ⁺ =

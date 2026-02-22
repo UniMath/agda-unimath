@@ -84,13 +84,9 @@ module _
 
   Π-Large-Group : Large-Group (λ l → l0 ⊔ α l) (λ l1 l2 → l0 ⊔ β l1 l2)
   Π-Large-Group =
-    λ where
-      .large-monoid-Large-Group →
-        large-monoid-Π-Large-Group
-      .inv-Large-Group →
-        inv-Π-Large-Group
-      .sim-left-inverse-law-mul-Large-Group →
-        sim-left-inverse-law-mul-Π-Large-Group
-      .sim-right-inverse-law-mul-Large-Group →
-        sim-right-inverse-law-mul-Π-Large-Group
+    make-Large-Group
+      ( large-monoid-Π-Large-Group)
+      ( inv-Π-Large-Group)
+      ( sim-left-inverse-law-mul-Π-Large-Group)
+      ( sim-right-inverse-law-mul-Π-Large-Group)
 ```
