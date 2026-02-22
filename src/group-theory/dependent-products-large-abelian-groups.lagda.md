@@ -57,7 +57,7 @@ module _
 
   Π-Large-Ab : Large-Ab (λ l → l0 ⊔ α l) (λ l1 l2 → l0 ⊔ β l1 l2)
   Π-Large-Ab =
-    λ where
-      .large-group-Large-Ab → large-group-Π-Large-Ab
-      .commutative-add-Large-Ab → commutative-add-Π-Large-Ab
+    make-Large-Ab
+      ( large-group-Π-Large-Ab)
+      ( commutative-add-Π-Large-Ab)
 ```
