@@ -264,7 +264,7 @@ module _
             sim-eq-Large-Ab G
               ( ap-add-Large-Ab G refl (neg-right-diff-Large-Ab G x y))
         ~ y
-          by cancel-right-conjugation-Large-Ab G x y
+          by sim-cancel-right-conjugation-Large-Ab G x y
 ```
 
 ### If `x - y = z`, then `x - z = y`
