@@ -8,6 +8,7 @@ module order-theory.initial-segments-ordinals where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -16,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.similarity-subtypes
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.accessible-elements-relations
@@ -210,8 +212,6 @@ module _
 
 ### The well-founded relation on the type of initial segments
 
-<!-- TODO this may not exist -->
-
 ```agda
 module _
   {l1 l2 : Level}
@@ -251,13 +251,136 @@ module _
      (pr2 (pr2 I<J)))
     (pr2 (pr2 J<K))
 
+  has-same-elements-refl-inclusion-initial-segment-Ordinal :
+    (x : type-Ordinal α) →
+    has-same-elements-initial-segment-Ordinal α
+      (inclusion-initial-segment-Ordinal α x)
+      (inclusion-initial-segment-Ordinal α x)
+  has-same-elements-refl-inclusion-initial-segment-Ordinal x =
+    map-equiv
+      ( extensionality-has-same-elements-initial-segment-Ordinal α
+        ( inclusion-initial-segment-Ordinal α x)
+        ( inclusion-initial-segment-Ordinal α x))
+      ( refl)
+
+  le-inclusion-initial-segment-Ordinal :
+    {l3 : Level}
+    (I : initial-segment-Ordinal l3 α)
+    (x : type-Ordinal α) →
+    is-in-initial-segment-Ordinal α I x →
+    le-initial-segment-Ordinal
+      ( inclusion-initial-segment-Ordinal α x)
+      ( I)
+  le-inclusion-initial-segment-Ordinal I x x∈I =
+    ( x ,
+      ( has-same-elements-refl-inclusion-initial-segment-Ordinal x ,
+        x∈I))
+
   is-well-founded-le-initial-segment-Ordinal :
     is-well-founded-Relation (le-initial-segment-Ordinal {l2} {l2})
-  is-well-founded-le-initial-segment-Ordinal (I , H) =
+  is-accessible-inclusion-initial-segment-Ordinal :
+    (x : type-Ordinal α) →
+    is-accessible-element-Relation
+      (le-initial-segment-Ordinal {l2} {l2})
+      (inclusion-initial-segment-Ordinal α x)
+  is-accessible-inclusion-initial-segment-Ordinal =
+    ind-Ordinal α
+      ( λ x →
+        is-accessible-element-Relation
+          (le-initial-segment-Ordinal {l2} {l2})
+          (inclusion-initial-segment-Ordinal α x))
+      ( λ {x} IH →
+        access
+          ( λ {J} J<x →
+            tr
+              ( is-accessible-element-Relation
+                (le-initial-segment-Ordinal {l2} {l2}))
+              ( inv
+                ( map-inv-equiv
+                  ( extensionality-has-same-elements-initial-segment-Ordinal α
+                    J
+                    (inclusion-initial-segment-Ordinal α (pr1 J<x)))
+                  ( pr1 (pr2 J<x))))
+              ( IH (pr2 (pr2 J<x)))))
+
+  is-well-founded-le-initial-segment-Ordinal I =
     access
-      ( λ {J} (x , q) →
-        ind-Ordinal α
-          ( λ _ → is-accessible-element-Relation le-initial-segment-Ordinal J)
-          ( λ {u} u<x → {!  pr2 q !})
-          ( x))
+      ( λ {J} J<I →
+        tr
+          ( is-accessible-element-Relation
+            (le-initial-segment-Ordinal {l2} {l2}))
+          ( inv
+            ( map-inv-equiv
+              ( extensionality-has-same-elements-initial-segment-Ordinal α
+                J
+                (inclusion-initial-segment-Ordinal α (pr1 J<I)))
+              ( pr1 (pr2 J<I))))
+          ( is-accessible-inclusion-initial-segment-Ordinal (pr1 J<I)))
+
+  transitive-well-founded-relation-initial-segment-Ordinal :
+    Transitive-Well-Founded-Relation
+      ( l1 ⊔ l2)
+      ( initial-segment-Ordinal l2 α)
+  transitive-well-founded-relation-initial-segment-Ordinal =
+    ( le-initial-segment-Ordinal {l2} {l2} ,
+      ( is-well-founded-le-initial-segment-Ordinal ,
+        transitive-le-initial-segment-Ordinal))
+```
+
+### A forcing construction for boolean predicates on initial segments
+
+```agda
+module _
+  {l1 l2 : Level}
+  (α : Ordinal l1 l2)
+  (P : initial-segment-Ordinal l2 α → bool)
+  where
+
+  is-in-force-initial-segment-Ordinal :
+    type-Ordinal α → UU (l1 ⊔ l2)
+  is-in-force-initial-segment-Ordinal x =
+    (y : type-Ordinal α) →
+    leq-Ordinal α y x →
+    is-false (P (inclusion-initial-segment-Ordinal α y))
+
+  is-prop-is-in-force-initial-segment-Ordinal :
+    (x : type-Ordinal α) → is-prop (is-in-force-initial-segment-Ordinal x)
+  is-prop-is-in-force-initial-segment-Ordinal x =
+    is-prop-Π
+      ( λ y →
+        is-prop-function-type
+          ( is-prop-is-false
+            ( P (inclusion-initial-segment-Ordinal α y))))
+
+  force-subtype-initial-segment-Ordinal :
+    subtype (l1 ⊔ l2) (type-Ordinal α)
+  force-subtype-initial-segment-Ordinal x =
+    ( is-in-force-initial-segment-Ordinal x ,
+      is-prop-is-in-force-initial-segment-Ordinal x)
+
+  is-initial-segment-force-subtype-initial-segment-Ordinal :
+    is-initial-segment-subtype-Ordinal α force-subtype-initial-segment-Ordinal
+  is-initial-segment-force-subtype-initial-segment-Ordinal x y x<y Hy z z≤x =
+    Hy z
+      ( transitive-leq-Ordinal α z x y
+        ( leq-le-Ordinal α x<y)
+        ( z≤x))
+
+  force-initial-segment-Ordinal :
+    initial-segment-Ordinal (l1 ⊔ l2) α
+  force-initial-segment-Ordinal =
+    ( force-subtype-initial-segment-Ordinal ,
+      is-initial-segment-force-subtype-initial-segment-Ordinal)
+
+  is-in-force-initial-segment-Ordinal' :
+    type-Ordinal α → UU (l1 ⊔ l2)
+  is-in-force-initial-segment-Ordinal' =
+    is-in-initial-segment-Ordinal α force-initial-segment-Ordinal
+
+  is-false-ev-inclusion-is-in-force-initial-segment-Ordinal :
+    (x : type-Ordinal α) →
+    is-in-force-initial-segment-Ordinal' x →
+    is-false (P (inclusion-initial-segment-Ordinal α x))
+  is-false-ev-inclusion-is-in-force-initial-segment-Ordinal x H =
+    H x (refl-leq-Ordinal α x)
 ```
