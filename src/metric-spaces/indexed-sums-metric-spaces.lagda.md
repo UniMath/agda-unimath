@@ -234,9 +234,9 @@ module _
     ( is-short-map-map-emb-fiber-indexed-sum-Metric-Space d px px' ,
       reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space d px px')
 
-  isometry-emb-fiber-indexed-Metric-Space :
+  isometry-emb-fiber-indexed-sum-Metric-Space :
     isometry-Metric-Space (P x) (indexed-sum-Metric-Space A P)
-  isometry-emb-fiber-indexed-Metric-Space =
+  isometry-emb-fiber-indexed-sum-Metric-Space =
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
       is-isometry-map-emb-fiber-indexed-sum-Metric-Space)
 ```
