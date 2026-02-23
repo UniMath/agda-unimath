@@ -110,6 +110,7 @@ open import group-theory.integer-powers-of-elements-large-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
 open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
+open import group-theory.invertible-elements-large-monoids public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-concrete-groups public
