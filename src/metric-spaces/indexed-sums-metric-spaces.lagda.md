@@ -12,10 +12,12 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -239,4 +241,106 @@ module _
   isometry-emb-fiber-indexed-sum-Metric-Space =
     ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
       is-isometry-map-emb-fiber-indexed-sum-Metric-Space)
+```
+
+### Short maps from indexed sums are products of short maps
+
+```agda
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
+  (Q : Metric-Space lq lq')
+  where
+
+  precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
+    short-map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q) →
+    (a : type-Set A) →
+    short-map-Metric-Space (P a) Q
+  precomp-emb-fiber-short-map-indexed-sum-Metric-Space f a =
+    comp-short-map-Metric-Space
+      ( P a)
+      ( indexed-sum-Metric-Space A P)
+      ( Q)
+      ( f)
+      ( short-map-emb-fiber-indexed-sum-Metric-Space A P a)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
+  (Q : Metric-Space lq lq')
+  (f : (a : type-Set A) → short-map-Metric-Space (P a) Q)
+  where
+
+  map-Π-short-map-fiber-indexed-sum-Metric-Space :
+    map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q)
+  map-Π-short-map-fiber-indexed-sum-Metric-Space (a , x) =
+    map-short-map-Metric-Space (P a) Q (f a) x
+
+  is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space :
+    is-short-map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q)
+      ( map-Π-short-map-fiber-indexed-sum-Metric-Space)
+  is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space
+    d (a , x) (.a , y) (refl , Nxy) =
+    is-short-map-short-map-Metric-Space (P a) Q (f a) d x y Nxy
+
+  Π-short-map-fiber-indexed-sum-Metric-Space :
+    short-map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q)
+  Π-short-map-fiber-indexed-sum-Metric-Space =
+    ( map-Π-short-map-fiber-indexed-sum-Metric-Space ,
+      is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
+  (Q : Metric-Space lq lq')
+  where abstract
+
+  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
+    Π-short-map-fiber-indexed-sum-Metric-Space A P Q ∘
+    precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q ~
+    id
+  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space f =
+    eq-htpy-map-short-map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q)
+      ( Π-short-map-fiber-indexed-sum-Metric-Space A P Q
+        ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q f))
+      ( f)
+      ( refl-htpy)
+
+  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
+    is-equiv
+      ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q)
+  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space =
+    is-equiv-is-invertible
+      ( Π-short-map-fiber-indexed-sum-Metric-Space A P Q)
+      ( refl-htpy)
+      ( is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Metric-Space lp lp')
+  (Q : Metric-Space lq lq')
+  where
+
+  equiv-short-map-indexed-sum-Metric-Space :
+    short-map-Metric-Space
+      ( indexed-sum-Metric-Space A P)
+      ( Q) ≃
+    ((a : type-Set A) → short-map-Metric-Space (P a) Q)
+  equiv-short-map-indexed-sum-Metric-Space =
+    ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q ,
+      is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q)
 ```
