@@ -46,7 +46,7 @@ module _
 
   le-Strict-Subpreorder : Relation l2 type-Strict-Subpreorder
   le-Strict-Subpreorder =
-    type-Relation-Prop le-prop-Strict-Subpreorder
+    rel-Relation-Prop le-prop-Strict-Subpreorder
 
   is-irreflexive-le-Strict-Subpreorder :
     is-irreflexive le-Strict-Subpreorder
