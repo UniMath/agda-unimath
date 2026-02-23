@@ -12,8 +12,11 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.evaluation-functions
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -324,9 +327,111 @@ module _
     ( is-short-map-map-emb-fiber-indexed-sum-Pseudometric-Space d px px' ,
       reflects-neighborhoods-emb-fiber-indexed-sum-Pseudometric-Space d px px')
 
-  isometry-emb-fiber-indexed-Pseudometric-Space :
+  isometry-emb-fiber-indexed-sum-Pseudometric-Space :
     isometry-Pseudometric-Space (P x) (indexed-sum-Pseudometric-Space A P)
-  isometry-emb-fiber-indexed-Pseudometric-Space =
+  isometry-emb-fiber-indexed-sum-Pseudometric-Space =
     ( map-emb-fiber-indexed-sum-Pseudometric-Space A P x ,
       is-isometry-map-emb-fiber-indexed-sum-Pseudometric-Space)
+```
+
+### Short maps from indexed sums are products of short maps
+
+```agda
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  (Q : Pseudometric-Space lq lq')
+  where
+
+  precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space :
+    short-map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q) →
+    (a : type-Set A) →
+    short-map-Pseudometric-Space (P a) Q
+  precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space f a =
+    comp-short-map-Pseudometric-Space
+      ( P a)
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q)
+      ( f)
+      ( short-map-emb-fiber-indexed-sum-Pseudometric-Space A P a)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  (Q : Pseudometric-Space lq lq')
+  (f : (a : type-Set A) → short-map-Pseudometric-Space (P a) Q)
+  where
+
+  map-Π-short-map-fiber-indexed-sum-Pseudometric-Space :
+    map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q)
+  map-Π-short-map-fiber-indexed-sum-Pseudometric-Space (a , x) =
+    map-short-map-Pseudometric-Space (P a) Q (f a) x
+
+  is-short-map-Π-short-map-fiber-indexed-sum-Pseudometric-Space :
+    is-short-map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q)
+      ( map-Π-short-map-fiber-indexed-sum-Pseudometric-Space)
+  is-short-map-Π-short-map-fiber-indexed-sum-Pseudometric-Space
+    d (a , x) (.a , y) (refl , Nxy) =
+    is-short-map-short-map-Pseudometric-Space (P a) Q (f a) d x y Nxy
+
+  Π-short-map-fiber-indexed-sum-Pseudometric-Space :
+    short-map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q)
+  Π-short-map-fiber-indexed-sum-Pseudometric-Space =
+    ( map-Π-short-map-fiber-indexed-sum-Pseudometric-Space ,
+      is-short-map-Π-short-map-fiber-indexed-sum-Pseudometric-Space)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  (Q : Pseudometric-Space lq lq')
+  where abstract
+
+  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space :
+    Π-short-map-fiber-indexed-sum-Pseudometric-Space A P Q ∘
+    precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q ~
+    id
+  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space f =
+    eq-htpy-map-short-map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q)
+      ( Π-short-map-fiber-indexed-sum-Pseudometric-Space A P Q
+        ( precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q f))
+      ( f)
+      ( refl-htpy)
+
+  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space :
+    is-equiv
+      ( precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q)
+  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space =
+    is-equiv-is-invertible
+      ( Π-short-map-fiber-indexed-sum-Pseudometric-Space A P Q)
+      ( refl-htpy)
+      ( is-retraction-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space)
+
+module _
+  {la lp lp' lq lq' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  (Q : Pseudometric-Space lq lq')
+  where
+
+  equiv-short-map-indexed-sum-Pseudometric-Space :
+    short-map-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( Q) ≃
+    ((a : type-Set A) → short-map-Pseudometric-Space (P a) Q)
+  equiv-short-map-indexed-sum-Pseudometric-Space =
+    ( precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q ,
+      is-equiv-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q)
 ```

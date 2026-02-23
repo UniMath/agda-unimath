@@ -147,7 +147,7 @@ module _
     map-isometry-cauchy-pseudocompletion-Pseudometric-Space
       ( P x)
       ( indexed-sum-Pseudometric-Space A P)
-      ( isometry-emb-fiber-indexed-Pseudometric-Space A P x)
+      ( isometry-emb-fiber-indexed-sum-Pseudometric-Space A P x)
       ( u)
 ```
 
