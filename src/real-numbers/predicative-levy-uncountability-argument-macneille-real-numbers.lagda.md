@@ -818,98 +818,105 @@ finite $f$-self-admissible sets $S$, i.e., finite sets of natural numbers that
 are $f$-admissible at their own geometric sum.
 
 ```agda
-is-levy-bounded-sequence-bool :
+is-levy-self-admissible-bounded-sequence-bool :
   {l : Level} → (ℕ → macneille-ℝ l) →
   bounded-sequence-bool → UU l
-is-levy-bounded-sequence-bool {l} f S =
+is-levy-self-admissible-bounded-sequence-bool {l} f S =
   is-levy-admissible-bounded-sequence-bool f
     ( raise-geometric-sum-ℝₘ-bounded-sequence-bool l S)
     ( S)
 
-levy-bounded-sequence-bool :
+levy-self-admissible-bounded-sequence-bool :
   {l : Level} → (ℕ → macneille-ℝ l) → UU l
-levy-bounded-sequence-bool f =
-  Σ bounded-sequence-bool (is-levy-bounded-sequence-bool f)
+levy-self-admissible-bounded-sequence-bool f =
+  Σ bounded-sequence-bool (is-levy-self-admissible-bounded-sequence-bool f)
 
-geometric-sum-levy-bounded-sequence-bool-ℝₘ :
+geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
-  levy-bounded-sequence-bool f →
+  levy-self-admissible-bounded-sequence-bool f →
   macneille-ℝ l
-geometric-sum-levy-bounded-sequence-bool-ℝₘ {l} _ (S , _) =
+geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ {l} _ (S , _) =
   raise-geometric-sum-ℝₘ-bounded-sequence-bool l S
 
 abstract
-  is-inhabited-levy-bounded-sequence-bool :
+  is-inhabited-levy-self-admissible-bounded-sequence-bool :
     {l : Level} (f : ℕ → macneille-ℝ l) →
-    is-inhabited (levy-bounded-sequence-bool f)
-  is-inhabited-levy-bounded-sequence-bool {l} f =
+    is-inhabited (levy-self-admissible-bounded-sequence-bool f)
+  is-inhabited-levy-self-admissible-bounded-sequence-bool {l} f =
     unit-trunc-Prop
       ( ( zero-ℕ , ex-falso) ,
         is-levy-admissible-empty-bounded-sequence-bool f
           ( raise-geometric-sum-ℝₘ-bounded-sequence-bool l (zero-ℕ , ex-falso)))
 
-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ :
+upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ :
   {l : Level} → (ℕ → macneille-ℝ l) → macneille-ℝ l
-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ {l} _ =
+upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ {l} _ =
   raise-macneille-real-ℚ l (geometric-series-bound-ℚ r r<1)
 
 abstract
-  is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ :
+  is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
     is-upper-bound-family-of-elements-macneille-ℝ
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-      ( upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-  is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+        ( f))
+  is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
     f (S , _) =
     leq-raise-macneille-real-ℚ
       ( geometric-sum-ℚ-bounded-sequence-bool' S)
       ( geometric-series-bound-ℚ r r<1)
       ( leq-bound-geometric-sum-ℚ-bounded-sequence-bool' S)
 
-has-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ :
+has-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l)
     ( is-upper-bound-family-of-elements-macneille-ℝ
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f))
-has-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f =
-  ( upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f ,
-    is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f))
+has-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f =
+  ( upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f ,
+    is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+      ( f))
 
 fixpoint-levy-sequence-ℝₘ :
   {l : Level} → (ℕ → macneille-ℝ l) → macneille-ℝ l
 fixpoint-levy-sequence-ℝₘ f =
   least-upper-bound-inhabited-bounded-family-macneille-ℝ
-    ( is-inhabited-levy-bounded-sequence-bool f)
-    ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-    ( upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-    ( is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+    ( is-inhabited-levy-self-admissible-bounded-sequence-bool f)
+    ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
+    ( upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
+    ( is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+      ( f))
 
 abstract
   is-least-upper-bound-family-of-elements-fixpoint-levy-sequence-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
     is-least-upper-bound-family-of-elements-macneille-ℝ
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
       ( fixpoint-levy-sequence-ℝₘ f)
   is-least-upper-bound-family-of-elements-fixpoint-levy-sequence-ℝₘ
     f =
     is-least-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-      ( is-inhabited-levy-bounded-sequence-bool f)
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-      ( upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-      ( is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( is-inhabited-levy-self-admissible-bounded-sequence-bool f)
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+        ( f))
+      ( is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+        ( f))
 
   leq-geometric-sum-fixpoint-levy-sequence-ℝₘ :
     {l : Level} (f : ℕ → macneille-ℝ l) →
-    (i : levy-bounded-sequence-bool f) →
+    (i : levy-self-admissible-bounded-sequence-bool f) →
     leq-macneille-ℝ
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f i)
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f i)
       ( fixpoint-levy-sequence-ℝₘ f)
   leq-geometric-sum-fixpoint-levy-sequence-ℝₘ f =
     is-upper-bound-least-upper-bound-inhabited-bounded-family-macneille-ℝ
-      ( is-inhabited-levy-bounded-sequence-bool f)
-      ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-      ( upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
-      ( is-upper-bound-geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+      ( is-inhabited-levy-self-admissible-bounded-sequence-bool f)
+      ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
+      ( upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+        ( f))
+      ( is-upper-bound-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+        ( f))
 ```
 
 ### Contradiction at the Levy fixpoint
@@ -949,7 +956,7 @@ module _
   where
 
   is-false-self-admissible-index-at-image-fixpoint-levy-sequence-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     is-false (sequence-bool-bounded-sequence-bool (pr1 S) n)
   is-false-self-admissible-index-at-image-fixpoint-levy-sequence-ℝₘ
     (S , self-adm-S) =
@@ -965,7 +972,7 @@ module _
         ( S , self-adm-S))
 
   leq-add-geometric-sum-power-geometric-ratio-sum-extend-self-admissible-levy-sequence-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     leq-ℚ
       ( geometric-sum-ℚ-bounded-sequence-bool' (pr1 S) +ℚ
         power-geometric-ratio-ℚ' n)
@@ -980,7 +987,7 @@ module _
         ( S , self-adm-S))
 
   leq-geometric-sum+bool-power-geometric-ratio-geometric-sum-adjoin-index-levy-bounded-sequence-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     leq-macneille-ℝ
       ( raise-macneille-real-ℚ l
         ( power-geometric-ratio-ℚ' n +ℚ
@@ -1001,15 +1008,15 @@ module _
               ( geometric-sum-ℚ-bounded-sequence-bool' S)
               ( power-geometric-ratio-ℚ' n)))))
 
-  is-levy-adjoin-not-leq-index-bounded-sequence-bool :
+  is-levy-self-admissible-adjoin-not-leq-index-bounded-sequence-bool :
     (S : bounded-sequence-bool) →
-    is-levy-bounded-sequence-bool f S →
+    is-levy-self-admissible-bounded-sequence-bool f S →
     ¬ leq-macneille-ℝ
       ( raise-geometric-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
       ( x0) →
-    is-levy-bounded-sequence-bool f
+    is-levy-self-admissible-bounded-sequence-bool f
       ( adjoin-index-bounded-sequence-bool' S n)
-  is-levy-adjoin-not-leq-index-bounded-sequence-bool
+  is-levy-self-admissible-adjoin-not-leq-index-bounded-sequence-bool
     S self-adm-S extend-S≰x0 =
     is-levy-admissible-adjoin-index-bounded-sequence-bool
       ( f)
@@ -1037,7 +1044,7 @@ module _
             ( sum-extend-S≤fn)))
 
   not-not-leq-geometric-sum-adjoin-index-levy-bounded-sequence-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     ¬¬
       ( leq-macneille-ℝ
         ( raise-geometric-sum-ℝₘ-adjoin-index-bounded-sequence-bool l (pr1 S) n)
@@ -1047,17 +1054,17 @@ module _
     extend-S≰x0
       ( leq-geometric-sum-fixpoint-levy-sequence-ℝₘ f
         ( adjoin-index-bounded-sequence-bool' S n ,
-          is-levy-adjoin-not-leq-index-bounded-sequence-bool
+          is-levy-self-admissible-adjoin-not-leq-index-bounded-sequence-bool
             ( S)
             ( self-adm-S)
             ( extend-S≰x0)))
 
-  leq-geometric-sum-adjoin-index-levy-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+  leq-geometric-sum-adjoin-index-levy-self-admissible-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ :
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     leq-macneille-ℝ
       ( raise-geometric-sum-ℝₘ-adjoin-index-bounded-sequence-bool l (pr1 S) n)
       ( x0)
-  leq-geometric-sum-adjoin-index-levy-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ
+  leq-geometric-sum-adjoin-index-levy-self-admissible-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ
     S =
     double-negation-elim-leq-left-raise-macneille-real-ℚ
       ( x0)
@@ -1065,14 +1072,14 @@ module _
         ( adjoin-index-bounded-sequence-bool' (pr1 S) n))
       ( not-not-leq-geometric-sum-adjoin-index-levy-bounded-sequence-ℝₘ S)
 
-  is-upper-bound-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ' :
-    (S : levy-bounded-sequence-bool f) →
+  is-upper-bound-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ' :
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     leq-macneille-ℝ
       ( raise-macneille-real-ℚ l
         ( power-geometric-ratio-ℚ' n +ℚ
           geometric-sum-ℚ-bounded-sequence-bool' (pr1 S)))
       ( x0)
-  is-upper-bound-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ'
+  is-upper-bound-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ'
     ( S , self-adm-S) =
     transitive-leq-macneille-ℝ
       ( raise-macneille-real-ℚ l
@@ -1080,27 +1087,29 @@ module _
           geometric-sum-ℚ-bounded-sequence-bool' S))
       ( raise-geometric-sum-ℝₘ-adjoin-index-bounded-sequence-bool l S n)
       ( x0)
-      ( leq-geometric-sum-adjoin-index-levy-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ
+      ( leq-geometric-sum-adjoin-index-levy-self-admissible-bounded-sequence-bool-fixpoint-levy-sequence-ℝₘ
         ( S , self-adm-S))
       ( leq-geometric-sum+bool-power-geometric-ratio-geometric-sum-adjoin-index-levy-bounded-sequence-ℝₘ
         ( S , self-adm-S))
 
-  is-upper-bound-right-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ :
-    (S : levy-bounded-sequence-bool f) →
+  is-upper-bound-right-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ :
+    (S : levy-self-admissible-bounded-sequence-bool f) →
     leq-macneille-ℝ
       ( translate-family-right-macneille-real-ℚ
         ( power-geometric-ratio-ℚ' n)
-        ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+        ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
         ( S))
       ( x0)
-  is-upper-bound-right-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ S =
+  is-upper-bound-right-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ
+    S =
     tr
       ( λ z → leq-macneille-ℝ z x0)
       ( inv
         ( eq-right-translate-raise-macneille-real-ℚ'
           ( power-geometric-ratio-ℚ' n)
           ( geometric-sum-ℚ-bounded-sequence-bool' (pr1 S))))
-      ( is-upper-bound-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ' S)
+      ( is-upper-bound-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ'
+        ( S))
 
   leq-right-translate-fixpoint-levy-sequence-ℝₘ :
     leq-macneille-ℝ
@@ -1112,11 +1121,11 @@ module _
     forward-implication
       ( is-least-upper-bound-family-of-elements-at-level-right-translate-macneille-real-ℚ
         ( power-geometric-ratio-ℚ' n)
-        ( geometric-sum-levy-bounded-sequence-bool-ℝₘ f)
+        ( geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ f)
         ( x0)
         ( is-least-upper-bound-family-of-elements-fixpoint-levy-sequence-ℝₘ f)
         ( x0))
-      ( is-upper-bound-right-translate-geometric-sum-levy-bounded-sequence-bool-ℝₘ)
+      ( is-upper-bound-right-translate-geometric-sum-levy-self-admissible-bounded-sequence-bool-ℝₘ)
 ```
 
 ### Conclusion
