@@ -60,6 +60,7 @@ open import group-theory.dependent-products-monoids public
 open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
+open import group-theory.direct-sums-abelian-groups public
 open import group-theory.e8-lattice public
 open import group-theory.elements-of-finite-order-groups public
 open import group-theory.embeddings-abelian-groups public
