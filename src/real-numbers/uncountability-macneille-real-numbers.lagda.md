@@ -7,8 +7,17 @@ module real-numbers.uncountability-macneille-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.law-of-excluded-middle
@@ -44,11 +53,19 @@ For every sequence `f : ℕ → ℝₘ` we may construct a MacNeille real not in
 image of `f`.
 
 ```agda
+le-zero-one-half-ℚ :
+  le-ℚ zero-ℚ one-half-ℚ
+le-zero-one-half-ℚ =
+  le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ one-half-ℚ⁺)
+
 not-in-sequence-macneille-ℝ :
   {l : Level} (f : ℕ → macneille-ℝ l) →
   Σ (macneille-ℝ l) (λ x0 → (n : ℕ) → f n ≠ x0)
-not-in-sequence-macneille-ℝ f =
-  sequence-avoiding-point-levy-macneille-ℝ f
+not-in-sequence-macneille-ℝ =
+  sequence-avoiding-point-levy-macneille-ℝ
+    ( one-half-ℚ)
+    ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ one-half-ℚ⁺))
+    ( le-one-half-one-ℚ)
 ```
 
 ## Corollaries

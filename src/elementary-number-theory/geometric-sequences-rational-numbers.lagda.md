@@ -193,15 +193,15 @@ abstract
     leq-ℚ (one-ℚ +ℚ rational-ℚ⁺ r *ℚ b) b →
     (k : ℕ) →
     leq-ℚ (sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k) b
-  leq-bound-sum-standard-geometric-fin-sequence-ℚ r b zero≤b one+r*b≤b zero-ℕ =
+  leq-bound-sum-standard-geometric-fin-sequence-ℚ r b 0≤b one+r*b≤b zero-ℕ =
     transitive-leq-ℚ
       ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) zero-ℕ)
       ( zero-ℚ)
       ( b)
-      ( zero≤b)
+      ( 0≤b)
       ( leq-eq-ℚ refl)
   leq-bound-sum-standard-geometric-fin-sequence-ℚ
-    r b zero≤b one+r*b≤b (succ-ℕ k) =
+    r b 0≤b one+r*b≤b (succ-ℕ k) =
     transitive-leq-ℚ
       ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) (succ-ℕ k))
       ( one-ℚ +ℚ
@@ -225,13 +225,90 @@ abstract
             ( sum-standard-geometric-fin-sequence-ℚ one-ℚ (rational-ℚ⁺ r) k)
             ( b)
             ( leq-bound-sum-standard-geometric-fin-sequence-ℚ
-              r b zero≤b one+r*b≤b k))))
+              r b 0≤b one+r*b≤b k))))
       ( leq-eq-ℚ
         ( compute-sum-standard-geometric-fin-sequence-succ-Commutative-Ring
           ( commutative-ring-ℚ)
           ( one-ℚ)
           ( rational-ℚ⁺ r)
           ( k)))
+```
+
+### Constructing a geometric bound from `r < 1`
+
+```agda
+module _
+  (r : ℚ) (r<1 : le-ℚ r one-ℚ)
+  where
+
+  diff-geometric-series-bound-ℚ⁺ : ℚ⁺
+  diff-geometric-series-bound-ℚ⁺ = positive-diff-le-ℚ r<1
+
+  geometric-series-bound-ℚ : ℚ
+  geometric-series-bound-ℚ = rational-inv-ℚ⁺ diff-geometric-series-bound-ℚ⁺
+
+  leq-zero-geometric-series-bound-ℚ :
+    leq-ℚ zero-ℚ geometric-series-bound-ℚ
+  leq-zero-geometric-series-bound-ℚ =
+    leq-le-ℚ
+      ( le-zero-is-positive-ℚ
+        ( is-positive-rational-inv-ℚ⁺ diff-geometric-series-bound-ℚ⁺))
+
+  eq-r+diff-geometric-series-bound-one-ℚ :
+    r +ℚ rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺ ＝ one-ℚ
+  eq-r+diff-geometric-series-bound-one-ℚ =
+    right-law-positive-diff-le-ℚ r<1
+
+  eq-geometric-series-bound-mul-diff-one-ℚ :
+    geometric-series-bound-ℚ *ℚ rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺ ＝
+    one-ℚ
+  eq-geometric-series-bound-mul-diff-one-ℚ =
+    ap rational-ℚ⁺ (left-inverse-law-mul-ℚ⁺ diff-geometric-series-bound-ℚ⁺)
+
+  eq-geometric-series-bound-one-plus-r-mul-geometric-series-bound-ℚ :
+    geometric-series-bound-ℚ ＝
+    one-ℚ +ℚ r *ℚ geometric-series-bound-ℚ
+  eq-geometric-series-bound-one-plus-r-mul-geometric-series-bound-ℚ =
+    equational-reasoning
+      geometric-series-bound-ℚ
+      ＝ geometric-series-bound-ℚ *ℚ one-ℚ
+        by inv (right-unit-law-mul-ℚ geometric-series-bound-ℚ)
+      ＝ geometric-series-bound-ℚ *ℚ
+        (r +ℚ rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺)
+        by
+          ap
+            (geometric-series-bound-ℚ *ℚ_)
+            (inv eq-r+diff-geometric-series-bound-one-ℚ)
+      ＝ geometric-series-bound-ℚ *ℚ r +ℚ
+        geometric-series-bound-ℚ *ℚ rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺
+        by
+          left-distributive-mul-add-ℚ
+            geometric-series-bound-ℚ
+            r
+            (rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺)
+      ＝ r *ℚ geometric-series-bound-ℚ +ℚ
+        geometric-series-bound-ℚ *ℚ rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺
+        by
+          ap
+            ( _+ℚ
+              geometric-series-bound-ℚ *ℚ
+              rational-ℚ⁺ diff-geometric-series-bound-ℚ⁺)
+            (commutative-mul-ℚ geometric-series-bound-ℚ r)
+      ＝ r *ℚ geometric-series-bound-ℚ +ℚ one-ℚ
+        by
+          ap
+            ( r *ℚ geometric-series-bound-ℚ +ℚ_)
+            ( eq-geometric-series-bound-mul-diff-one-ℚ)
+      ＝ one-ℚ +ℚ r *ℚ geometric-series-bound-ℚ
+        by commutative-add-ℚ (r *ℚ geometric-series-bound-ℚ) one-ℚ
+
+  leq-one-plus-r-mul-geometric-series-bound-ℚ :
+    leq-ℚ
+      ( one-ℚ +ℚ r *ℚ geometric-series-bound-ℚ)
+      ( geometric-series-bound-ℚ)
+  leq-one-plus-r-mul-geometric-series-bound-ℚ =
+    leq-eq-ℚ
+      ( inv eq-geometric-series-bound-one-plus-r-mul-geometric-series-bound-ℚ)
 ```
 
 ### The geometric series 1 + ½ + ¼ + ⅛ + ⋯

@@ -68,7 +68,6 @@ open import elementary-number-theory.divisibility-integers public
 open import elementary-number-theory.divisibility-modular-arithmetic public
 open import elementary-number-theory.divisibility-natural-numbers public
 open import elementary-number-theory.divisibility-standard-finite-types public
-open import elementary-number-theory.dyadic-sums-bounded-boolean-predicates public
 open import elementary-number-theory.equality-conatural-numbers public
 open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
@@ -89,6 +88,7 @@ open import elementary-number-theory.floor-nonnegative-rational-numbers public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.geometric-sequences-rational-numbers public
+open import elementary-number-theory.geometric-sums-bounded-boolean-predicates public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
