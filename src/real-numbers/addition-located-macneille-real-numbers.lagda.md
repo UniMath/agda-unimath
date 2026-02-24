@@ -27,7 +27,6 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.addition-lower-dedekind-real-numbers
-open import real-numbers.addition-macneille-real-numbers
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.located-macneille-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
@@ -37,6 +36,7 @@ open import real-numbers.raising-universe-levels-located-macneille-real-numbers
 open import real-numbers.rational-macneille-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
+open import real-numbers.translation-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -44,7 +44,7 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-We consider [addition](real-numbers.addition-macneille-real-numbers.md) on
+We consider [translation](real-numbers.translation-macneille-real-numbers.md) on
 [MacNeille real numbers](real-numbers.macneille-real-numbers.md) restricted to
 [located MacNeille real numbers](real-numbers.located-macneille-real-numbers.md).
 
@@ -54,13 +54,13 @@ We consider [addition](real-numbers.addition-macneille-real-numbers.md) on
 
 ```agda
 abstract opaque
-  unfolding add-macneille-ℝ
+  unfolding translate-macneille-ℝ
 
   is-located-add-located-macneille-ℝ :
     {l1 l2 : Level}
     (x : located-macneille-ℝ l1)
     (y : located-macneille-ℝ l2) →
-    is-located-macneille-ℝ (add-macneille-ℝ x (pr1 y))
+    is-located-macneille-ℝ (translate-macneille-ℝ x (pr1 y))
   is-located-add-located-macneille-ℝ x y p q p<q =
     elim-exists
       ( cut-lower-ℝ (lower-real-add-macneille-ℝ (pr1 x) (pr1 y)) p ∨
@@ -96,7 +96,7 @@ add-located-macneille-ℝ :
   located-macneille-ℝ l2 →
   located-macneille-ℝ (l1 ⊔ l2)
 add-located-macneille-ℝ x y =
-  ( add-macneille-ℝ x (pr1 y) ,
+  ( translate-macneille-ℝ x (pr1 y) ,
     is-located-add-located-macneille-ℝ x y)
 
 eq-add-located-macneille-ℝ :
@@ -108,7 +108,7 @@ eq-add-located-macneille-ℝ :
 eq-add-located-macneille-ℝ {x = x} {x' = x'} x=x' {y = y} {y' = y'} y=y' =
   eq-type-subtype
     ( is-located-prop-macneille-ℝ)
-    ( ap-add-macneille-ℝ x=x' (ap pr1 y=y'))
+    ( ap-translate-macneille-ℝ x=x' (ap pr1 y=y'))
 ```
 
 ## Properties
@@ -117,7 +117,7 @@ eq-add-located-macneille-ℝ {x = x} {x' = x'} x=x' {y = y} {y' = y'} y=y' =
 
 ```agda
 abstract opaque
-  unfolding add-macneille-ℝ
+  unfolding translate-macneille-ℝ
 
   commutative-add-located-macneille-ℝ :
     {l1 l2 : Level}
@@ -128,8 +128,8 @@ abstract opaque
     eq-type-subtype
       ( is-located-prop-macneille-ℝ)
       ( eq-eq-lower-real-macneille-ℝ
-        ( add-macneille-ℝ x (pr1 y))
-        ( add-macneille-ℝ y (pr1 x))
+        ( translate-macneille-ℝ x (pr1 y))
+        ( translate-macneille-ℝ y (pr1 x))
         ( commutative-add-lower-ℝ
           ( lower-real-macneille-ℝ (pr1 x))
           ( lower-real-macneille-ℝ (pr1 y))))
@@ -139,7 +139,7 @@ abstract opaque
 
 ```agda
 abstract opaque
-  unfolding add-macneille-ℝ
+  unfolding translate-macneille-ℝ
 
   associative-add-located-macneille-ℝ :
     {l1 l2 l3 : Level}
@@ -152,8 +152,8 @@ abstract opaque
     eq-type-subtype
       ( is-located-prop-macneille-ℝ)
       ( eq-eq-lower-real-macneille-ℝ
-        ( add-macneille-ℝ (add-located-macneille-ℝ x y) (pr1 z))
-        ( add-macneille-ℝ x (pr1 (add-located-macneille-ℝ y z)))
+        ( translate-macneille-ℝ (add-located-macneille-ℝ x y) (pr1 z))
+        ( translate-macneille-ℝ x (pr1 (add-located-macneille-ℝ y z)))
         ( associative-add-lower-ℝ
           ( lower-real-macneille-ℝ (pr1 x))
           ( lower-real-macneille-ℝ (pr1 y))
@@ -164,7 +164,7 @@ abstract opaque
 
 ```agda
 abstract opaque
-  unfolding add-macneille-ℝ
+  unfolding translate-macneille-ℝ
 
   right-unit-law-add-located-macneille-ℝ :
     {l : Level} (x : located-macneille-ℝ l) →
@@ -173,7 +173,7 @@ abstract opaque
     eq-type-subtype
       ( is-located-prop-macneille-ℝ)
       ( eq-eq-lower-real-macneille-ℝ
-        ( add-macneille-ℝ x zero-macneille-ℝ)
+        ( translate-macneille-ℝ x zero-macneille-ℝ)
         ( pr1 x)
         ( tr
           ( λ z →
@@ -195,9 +195,10 @@ abstract
       ( is-located-prop-macneille-ℝ)
       ( eq-sim-macneille-ℝ
         ( tr
-          ( sim-macneille-ℝ (add-macneille-ℝ x (raise-zero-macneille-ℝ l)))
+          ( sim-macneille-ℝ
+            ( translate-macneille-ℝ x (raise-zero-macneille-ℝ l)))
           ( ap pr1 (right-unit-law-add-located-macneille-ℝ x))
-          ( preserves-sim-left-add-macneille-ℝ
+          ( preserves-sim-left-translate-macneille-ℝ
             ( x)
             ( raise-zero-macneille-ℝ l)
             ( zero-macneille-ℝ)

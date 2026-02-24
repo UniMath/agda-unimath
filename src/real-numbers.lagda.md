@@ -10,7 +10,6 @@ open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.accumulation-points-subsets-real-numbers public
 open import real-numbers.addition-located-macneille-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
-open import real-numbers.addition-macneille-real-numbers public
 open import real-numbers.addition-negative-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
 open import real-numbers.addition-nonzero-real-numbers public
@@ -44,6 +43,7 @@ open import real-numbers.increasing-endomaps-real-numbers public
 open import real-numbers.increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
+open import real-numbers.inequalities-translation-macneille-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-macneille-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
@@ -66,6 +66,7 @@ open import real-numbers.large-multiplicative-group-of-positive-real-numbers pub
 open import real-numbers.large-multiplicative-monoid-of-real-numbers public
 open import real-numbers.large-ring-of-real-numbers public
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers public
+open import real-numbers.least-upper-bounds-rational-translation-addition-macneille-real-numbers public
 open import real-numbers.limits-of-endomaps-real-numbers public
 open import real-numbers.limits-of-sequences-real-numbers public
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
@@ -100,6 +101,7 @@ open import real-numbers.negation-lower-upper-dedekind-real-numbers public
 open import real-numbers.negation-macneille-real-numbers public
 open import real-numbers.negation-real-numbers public
 open import real-numbers.negative-real-numbers public
+open import real-numbers.nonnegative-rational-translation-macneille-real-numbers public
 open import real-numbers.nonnegative-real-numbers public
 open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
@@ -119,6 +121,7 @@ open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-macneille-real-numbers public
 open import real-numbers.rational-real-numbers public
+open import real-numbers.rational-translation-macneille-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
@@ -146,6 +149,7 @@ open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers pu
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
+open import real-numbers.translation-macneille-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.unbounded-endomaps-real-numbers public
