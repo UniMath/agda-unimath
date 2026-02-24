@@ -274,25 +274,23 @@ module _
     Σ (bounded-sequence-bool) (is-levy-admissible-bounded-sequence-bool)
 
   geometric-sum-ℝₘ-levy-admissible-bounded-sequence-bool :
-    levy-admissible-bounded-sequence-bool →
-    macneille-ℝ l
+    levy-admissible-bounded-sequence-bool → macneille-ℝ l
   geometric-sum-ℝₘ-levy-admissible-bounded-sequence-bool (S , _) =
     raise-geometric-sum-ℝₘ-bounded-sequence-bool l S
 
   is-levy-admissible-empty-bounded-sequence-bool :
-    is-levy-admissible-bounded-sequence-bool (zero-ℕ , (λ ()))
+    is-levy-admissible-bounded-sequence-bool (zero-ℕ , ex-falso)
   is-levy-admissible-empty-bounded-sequence-bool m m∈S =
     ex-falso
       ( is-not-true-is-false
-        ( sequence-bool-bounded-sequence-bool (zero-ℕ , (λ ())) m)
+        ( sequence-bool-bounded-sequence-bool (zero-ℕ , ex-falso) m)
         ( is-false-sequence-bool-bounded-sequence-bool-zero m)
         ( m∈S))
 
   point-levy-admissible-bounded-sequence-bool :
     levy-admissible-bounded-sequence-bool
   point-levy-admissible-bounded-sequence-bool =
-    ( ( zero-ℕ , (λ ())) ,
-      is-levy-admissible-empty-bounded-sequence-bool)
+    ( (zero-ℕ , ex-falso) , is-levy-admissible-empty-bounded-sequence-bool)
 
   is-inhabited-levy-admissible-bounded-sequence-bool :
     is-inhabited levy-admissible-bounded-sequence-bool
@@ -749,7 +747,7 @@ module _
         ( is-upper-bound-geometric-sum-ℝₘ-levy-admissible-bounded-sequence-bool
           ( f)
           ( raise-zero-macneille-ℝ l))
-        ( ( zero-ℕ , ( λ ())) ,
+        ( ( zero-ℕ , ex-falso) ,
           is-levy-admissible-empty-bounded-sequence-bool f
             ( raise-zero-macneille-ℝ l))
 
