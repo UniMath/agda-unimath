@@ -219,7 +219,7 @@ module _
     is-invertible-element-prop-Heyting-Field F (diff-Heyting-Field F x y)
 
   apart-Heyting-Field : Relation l (type-Heyting-Field F)
-  apart-Heyting-Field = type-Relation-Prop apart-prop-Heyting-Field
+  apart-Heyting-Field = rel-Relation-Prop apart-prop-Heyting-Field
 
   abstract
     antirefl-apart-Heyting-Field : is-antireflexive apart-prop-Heyting-Field
