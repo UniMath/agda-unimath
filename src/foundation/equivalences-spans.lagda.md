@@ -148,19 +148,22 @@ module _
   equiv-eq-span : (s t : span l3 A B) → s ＝ t → equiv-span s t
   equiv-eq-span s .s refl = id-equiv-span s
 
-  is-torsorial-equiv-span : (s : span l3 A B) → is-torsorial (equiv-span s)
-  is-torsorial-equiv-span s =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (spanning-type-span s))
-      ( spanning-type-span s , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (left-map-span s))
-        ( left-map-span s , refl-htpy)
-        ( is-torsorial-htpy (right-map-span s)))
+  abstract
+    is-torsorial-equiv-span :
+      (s : span l3 A B) → is-torsorial (equiv-span {l1} {l2} {l3} {l3} s)
+    is-torsorial-equiv-span s =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (spanning-type-span s))
+        ( spanning-type-span s , id-equiv)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-htpy (left-map-span s))
+          ( left-map-span s , refl-htpy)
+          ( is-torsorial-htpy (right-map-span s)))
 
-  is-equiv-equiv-eq-span : (c d : span l3 A B) → is-equiv (equiv-eq-span c d)
-  is-equiv-equiv-eq-span c =
-    fundamental-theorem-id (is-torsorial-equiv-span c) (equiv-eq-span c)
+  abstract
+    is-equiv-equiv-eq-span : (c d : span l3 A B) → is-equiv (equiv-eq-span c d)
+    is-equiv-equiv-eq-span c =
+      fundamental-theorem-id (is-torsorial-equiv-span c) (equiv-eq-span c)
 
   extensionality-span : (c d : span l3 A B) → (c ＝ d) ≃ (equiv-span c d)
   pr1 (extensionality-span c d) = equiv-eq-span c d

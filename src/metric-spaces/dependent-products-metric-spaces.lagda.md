@@ -15,9 +15,9 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
@@ -170,7 +170,7 @@ module _
   ev-cauchy-approximation-Π-Metric-Space :
     (x : A) → cauchy-approximation-Metric-Space (P x)
   ev-cauchy-approximation-Π-Metric-Space x =
-    map-cauchy-approximation-short-map-Metric-Space
+    map-short-map-cauchy-pseudocompletion-Metric-Space
       ( Π-Metric-Space A P)
       ( P x)
       ( ev-short-map-Metric-Space A P x)

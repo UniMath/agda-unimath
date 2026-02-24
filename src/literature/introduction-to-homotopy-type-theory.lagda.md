@@ -435,7 +435,7 @@ open import lists.lists using
   ( length-list)
 
 -- (e)
-open import elementary-number-theory.sums-of-natural-numbers using
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers using
   ( sum-list-ℕ)
 open import elementary-number-theory.products-of-natural-numbers using
   ( product-list-ℕ)
