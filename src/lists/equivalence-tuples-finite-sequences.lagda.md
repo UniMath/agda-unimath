@@ -17,6 +17,8 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -52,15 +54,14 @@ module _
     cons-fin-sequence n a (fin-sequence-tuple n v)
 
   is-section-fin-sequence-tuple :
-    (n : ℕ) → (tuple-fin-sequence n ∘ fin-sequence-tuple n) ~ id
+    (n : ℕ) → is-section (tuple-fin-sequence n) (fin-sequence-tuple n)
   is-section-fin-sequence-tuple .zero-ℕ empty-tuple = refl
   is-section-fin-sequence-tuple .(succ-ℕ _) (a ∷ v) =
     ap (λ u → a ∷ u) (is-section-fin-sequence-tuple _ v)
 
   abstract
     is-retraction-fin-sequence-tuple :
-      (n : ℕ) →
-      (fin-sequence-tuple n ∘ tuple-fin-sequence n) ~ id
+      (n : ℕ) → is-retraction (tuple-fin-sequence n) (fin-sequence-tuple n)
     is-retraction-fin-sequence-tuple zero-ℕ v = eq-htpy (λ ())
     is-retraction-fin-sequence-tuple (succ-ℕ n) v =
       eq-htpy

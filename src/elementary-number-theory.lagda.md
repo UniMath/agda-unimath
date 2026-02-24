@@ -88,7 +88,7 @@ open import elementary-number-theory.floor-nonnegative-rational-numbers public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers public
 open import elementary-number-theory.geometric-sequences-rational-numbers public
-open import elementary-number-theory.geometric-sums-bounded-boolean-predicates public
+open import elementary-number-theory.geometric-sums-boolean-arrays public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
