@@ -10,21 +10,22 @@ module commutative-algebra.large-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.propositions
-open import foundation.embeddings
-open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.cumulative-large-sets
-open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
-open import foundation.similarity-preserving-maps-cumulative-large-sets
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.function-types
+open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
+open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
+open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.universe-levels
-open import group-theory.large-monoids
+
 open import group-theory.large-commutative-monoids
+open import group-theory.large-monoids
 
 open import ring-theory.large-rings
 ```
@@ -126,30 +127,41 @@ module _
     sim-prop-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-Large-Commutative-Ring : Large-Relation β (type-Large-Commutative-Ring R)
-  sim-Large-Commutative-Ring = sim-Large-Ring (large-ring-Large-Commutative-Ring R)
+  sim-Large-Commutative-Ring =
+    sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   refl-sim-Large-Commutative-Ring :
-    is-reflexive-Large-Relation (type-Large-Commutative-Ring R) sim-Large-Commutative-Ring
+    is-reflexive-Large-Relation
+      ( type-Large-Commutative-Ring R)
+      ( sim-Large-Commutative-Ring)
   refl-sim-Large-Commutative-Ring =
     refl-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   symmetric-sim-Large-Commutative-Ring :
-    is-symmetric-Large-Relation (type-Large-Commutative-Ring R) sim-Large-Commutative-Ring
+    is-symmetric-Large-Relation
+      ( type-Large-Commutative-Ring R)
+      ( sim-Large-Commutative-Ring)
   symmetric-sim-Large-Commutative-Ring =
     symmetric-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   transitive-sim-Large-Commutative-Ring :
-    is-transitive-Large-Relation (type-Large-Commutative-Ring R) sim-Large-Commutative-Ring
+    is-transitive-Large-Relation
+      ( type-Large-Commutative-Ring R)
+      ( sim-Large-Commutative-Ring)
   transitive-sim-Large-Commutative-Ring =
     transitive-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-eq-Large-Commutative-Ring :
-    {l : Level} {x y : type-Large-Commutative-Ring R l} → x ＝ y → sim-Large-Commutative-Ring x y
-  sim-eq-Large-Commutative-Ring = sim-eq-Large-Ring (large-ring-Large-Commutative-Ring R)
+    {l : Level} {x y : type-Large-Commutative-Ring R l} →
+    x ＝ y → sim-Large-Commutative-Ring x y
+  sim-eq-Large-Commutative-Ring =
+    sim-eq-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   eq-sim-Large-Commutative-Ring :
-    {l : Level} (x y : type-Large-Commutative-Ring R l) → sim-Large-Commutative-Ring x y → x ＝ y
-  eq-sim-Large-Commutative-Ring = eq-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
+    {l : Level} (x y : type-Large-Commutative-Ring R l) →
+    sim-Large-Commutative-Ring x y → x ＝ y
+  eq-sim-Large-Commutative-Ring =
+    eq-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 ```
 
 ### Similarity reasoning on large rings
@@ -175,7 +187,8 @@ module _
   raise-Large-Commutative-Ring :
     {l0 : Level} (l : Level) →
     type-Large-Commutative-Ring R l0 → type-Large-Commutative-Ring R (l0 ⊔ l)
-  raise-Large-Commutative-Ring = raise-Large-Ring (large-ring-Large-Commutative-Ring R)
+  raise-Large-Commutative-Ring =
+    raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-raise-Large-Commutative-Ring :
     {l0 : Level} (l : Level) (x : type-Large-Commutative-Ring R l0) →
@@ -379,18 +392,26 @@ module _
   where
 
   zero-Large-Commutative-Ring : type-Large-Commutative-Ring R lzero
-  zero-Large-Commutative-Ring = zero-Large-Ring (large-ring-Large-Commutative-Ring R)
+  zero-Large-Commutative-Ring =
+    zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
-  raise-zero-Large-Commutative-Ring : (l : Level) → type-Large-Commutative-Ring R l
-  raise-zero-Large-Commutative-Ring = raise-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
+  raise-zero-Large-Commutative-Ring :
+    (l : Level) → type-Large-Commutative-Ring R l
+  raise-zero-Large-Commutative-Ring =
+    raise-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
-  is-zero-prop-Large-Commutative-Ring : {l : Level} → type-Large-Commutative-Ring R l → Prop (β l lzero)
-  is-zero-prop-Large-Commutative-Ring = is-zero-prop-Large-Ring (large-ring-Large-Commutative-Ring R)
+  is-zero-prop-Large-Commutative-Ring :
+    {l : Level} → type-Large-Commutative-Ring R l → Prop (β l lzero)
+  is-zero-prop-Large-Commutative-Ring =
+    is-zero-prop-Large-Ring (large-ring-Large-Commutative-Ring R)
 
-  is-zero-Large-Commutative-Ring : {l : Level} → type-Large-Commutative-Ring R l → UU (β l lzero)
-  is-zero-Large-Commutative-Ring x = type-Prop (is-zero-prop-Large-Commutative-Ring x)
+  is-zero-Large-Commutative-Ring :
+    {l : Level} → type-Large-Commutative-Ring R l → UU (β l lzero)
+  is-zero-Large-Commutative-Ring x =
+    type-Prop (is-zero-prop-Large-Commutative-Ring x)
 
-  is-zero-zero-Large-Commutative-Ring : is-zero-Large-Commutative-Ring zero-Large-Commutative-Ring
+  is-zero-zero-Large-Commutative-Ring :
+    is-zero-Large-Commutative-Ring zero-Large-Commutative-Ring
   is-zero-zero-Large-Commutative-Ring =
     is-zero-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
@@ -510,11 +531,13 @@ module _
     neg-is-zero-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
       is-zero-Large-Commutative-Ring R x → is-zero-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x)
-    neg-is-zero-Large-Commutative-Ring = neg-is-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
+    neg-is-zero-Large-Commutative-Ring =
+      neg-is-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     neg-zero-Large-Commutative-Ring :
       neg-Large-Commutative-Ring R (zero-Large-Commutative-Ring R) ＝ zero-Large-Commutative-Ring R
-    neg-zero-Large-Commutative-Ring = neg-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
+    neg-zero-Large-Commutative-Ring =
+      neg-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     neg-raise-zero-Large-Commutative-Ring :
       (l : Level) →
@@ -525,7 +548,8 @@ module _
     neg-neg-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
       neg-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) ＝ x
-    neg-neg-Large-Commutative-Ring = neg-neg-Large-Ring (large-ring-Large-Commutative-Ring R)
+    neg-neg-Large-Commutative-Ring =
+      neg-neg-Large-Ring (large-ring-Large-Commutative-Ring R)
 ```
 
 ### Cancellation laws
