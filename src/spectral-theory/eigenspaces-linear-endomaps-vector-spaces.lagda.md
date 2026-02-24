@@ -23,8 +23,8 @@ open import spectral-theory.eigenmodules-linear-endomaps-left-modules-commutativ
 
 ## Idea
 
-Given a [linear endomap](linear-algebra.linear-endomaps-vector-spaces.md) `f`
-of a [vector space](linear-algebra.vector-spaces.md) `V` over a
+Given a [linear endomap](linear-algebra.linear-endomaps-vector-spaces.md) `f` of
+a [vector space](linear-algebra.vector-spaces.md) `V` over a
 [Heyting field](commutative-algebra.heyting-fields.md) `F`, the
 {{#concept "eigenspace" WDID=Q1303223 WD="eigenspace" Disambiguation="of a linear endomap on a vector space" Agda=eigenspace-linear-endo-Vector-Space}}
 of `c : F` is the [subspace](linear-algebra.subspaces-vector-spaces.md) of `V`
