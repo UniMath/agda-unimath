@@ -60,10 +60,9 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.addition-macneille-real-numbers
 open import real-numbers.greatest-postfixpoints-endomaps-macneille-real-numbers
 open import real-numbers.increasing-endomaps-macneille-real-numbers
-open import real-numbers.inequalities-addition-macneille-real-numbers
+open import real-numbers.inequalities-translation-macneille-real-numbers
 open import real-numbers.inequality-macneille-real-numbers
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers
 open import real-numbers.least-upper-bounds-postfixpoints-endomaps-macneille-real-numbers
@@ -79,6 +78,7 @@ open import real-numbers.rational-macneille-real-numbers
 open import real-numbers.rational-translation-macneille-real-numbers
 open import real-numbers.similarity-macneille-real-numbers
 open import real-numbers.strict-inequality-macneille-real-numbers
+open import real-numbers.translation-macneille-real-numbers
 open import real-numbers.upper-bounds-families-macneille-real-numbers
 
 open import univalent-combinatorics.coproduct-types
@@ -173,6 +173,11 @@ power-geometric-ratio-ℚ' = power-geometric-ratio-ℚ r⁺
 le-zero-power-geometric-ratio-ℚ' :
   (n : ℕ) → le-ℚ zero-ℚ (power-geometric-ratio-ℚ' n)
 le-zero-power-geometric-ratio-ℚ' = le-zero-power-geometric-ratio-ℚ r⁺
+
+power-geometric-ratio-ℚ⁺' : ℕ → ℚ⁺
+power-geometric-ratio-ℚ⁺' n =
+  ( power-geometric-ratio-ℚ' n ,
+    is-positive-le-zero-ℚ (le-zero-power-geometric-ratio-ℚ' n))
 
 geometric-sum-ℚ-array-bool' :
   array-bool → ℚ
@@ -998,18 +1003,14 @@ module _
     tr
       ( λ z → leq-macneille-ℝ z x0)
       ( inv
-        ( eq-right-translate-raise-macneille-real-ℚ'
+        ( eq-add-translate-raise-macneille-real-ℚ'
           ( power-geometric-ratio-ℚ' n)
           ( geometric-sum-ℚ-array-bool' (pr1 S))))
       ( is-upper-bound-translate-geometric-sum-levy-self-admissible-array-bool-ℝₘ'
         ( S))
 
   leq-right-translate-fixpoint-levy-sequence-ℝₘ :
-    leq-macneille-ℝ
-      ( add-macneille-ℝ
-        ( located-macneille-real-ℚ (power-geometric-ratio-ℚ' n))
-        ( x0))
-      ( x0)
+    leq-macneille-ℝ (translate-ℚ-macneille-ℝ (power-geometric-ratio-ℚ' n) x0) x0
   leq-right-translate-fixpoint-levy-sequence-ℝₘ =
     forward-implication
       ( is-least-upper-bound-family-of-elements-at-level-right-translate-macneille-real-ℚ
@@ -1034,10 +1035,9 @@ module _
   not-in-image-fixpoint-levy-sequence-ℝₘ :
     (n : ℕ) → f n ≠ fixpoint-levy-sequence-ℝₘ f
   not-in-image-fixpoint-levy-sequence-ℝₘ n fn=x0 =
-    not-leq-right-translate-positive-macneille-real-ℚ
+    not-leq-self-translate-ℚ⁺-macneille-ℝ
+      ( power-geometric-ratio-ℚ⁺' n)
       ( fixpoint-levy-sequence-ℝₘ f)
-      ( power-geometric-ratio-ℚ' n)
-      ( le-zero-power-geometric-ratio-ℚ' n)
       ( leq-right-translate-fixpoint-levy-sequence-ℝₘ f n fn=x0)
 
   sequence-avoiding-point-levy-macneille-ℝ :

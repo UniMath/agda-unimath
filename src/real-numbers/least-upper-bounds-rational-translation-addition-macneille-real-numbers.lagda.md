@@ -17,13 +17,13 @@ open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import real-numbers.addition-macneille-real-numbers
-open import real-numbers.inequalities-addition-macneille-real-numbers
+open import real-numbers.inequalities-translation-macneille-real-numbers
 open import real-numbers.inequality-macneille-real-numbers
 open import real-numbers.least-upper-bounds-families-macneille-real-numbers
 open import real-numbers.located-macneille-real-numbers
 open import real-numbers.macneille-real-numbers
 open import real-numbers.rational-translation-macneille-real-numbers
+open import real-numbers.translation-macneille-real-numbers
 open import real-numbers.upper-bounds-families-macneille-real-numbers
 ```
 
@@ -36,7 +36,7 @@ translate-family-right-macneille-real-ℚ :
   {l1 l2 : Level} (q : ℚ) {I : UU l1} →
   (I → macneille-ℝ l2) → I → macneille-ℝ l2
 translate-family-right-macneille-real-ℚ q y i =
-  add-macneille-ℝ (located-macneille-real-ℚ q) (y i)
+  translate-ℚ-macneille-ℝ q (y i)
 ```
 
 ## Properties
@@ -49,14 +49,10 @@ abstract
     is-upper-bound-family-of-elements-macneille-ℝ y z →
     is-upper-bound-family-of-elements-macneille-ℝ
       ( translate-family-right-macneille-real-ℚ q y)
-      ( add-macneille-ℝ (located-macneille-real-ℚ q) z)
+      ( translate-ℚ-macneille-ℝ q z)
   preserves-upper-bound-family-of-elements-right-translate-macneille-real-ℚ
     q y z y≤z i =
-    preserves-leq-right-add-macneille-ℝ
-      ( located-macneille-real-ℚ q)
-      ( y i)
-      ( z)
-      ( y≤z i)
+    preserves-leq-offset-translate-ℚ-macneille-ℝ q (y i) z (y≤z i)
 
 abstract
   reflects-upper-bound-family-of-elements-right-translate-macneille-real-ℚ :
@@ -64,11 +60,11 @@ abstract
     (y : I → macneille-ℝ l2) (z : macneille-ℝ l2) →
     is-upper-bound-family-of-elements-macneille-ℝ
       ( translate-family-right-macneille-real-ℚ q y)
-      ( add-macneille-ℝ (located-macneille-real-ℚ q) z) →
+      ( translate-ℚ-macneille-ℝ q z) →
     is-upper-bound-family-of-elements-macneille-ℝ y z
   reflects-upper-bound-family-of-elements-right-translate-macneille-real-ℚ
     q y z q+y≤q+z i =
-    reflects-leq-right-add-macneille-real-ℚ q (y i) z (q+y≤q+z i)
+    reflects-leq-offset-translate-ℚ-macneille-ℝ q (y i) z (q+y≤q+z i)
 
 abstract
   iff-upper-bound-family-of-elements-right-translate-macneille-real-ℚ :
@@ -77,7 +73,7 @@ abstract
     is-upper-bound-family-of-elements-macneille-ℝ y z ↔
     is-upper-bound-family-of-elements-macneille-ℝ
       ( translate-family-right-macneille-real-ℚ q y)
-      ( add-macneille-ℝ (located-macneille-real-ℚ q) z)
+      ( translate-ℚ-macneille-ℝ q z)
   iff-upper-bound-family-of-elements-right-translate-macneille-real-ℚ q y z =
     ( preserves-upper-bound-family-of-elements-right-translate-macneille-real-ℚ
         q y z ,
@@ -101,7 +97,7 @@ module _
   (y : I → macneille-ℝ l2) (x : macneille-ℝ l2)
   (is-lub-x : is-least-upper-bound-family-of-elements-at-level-macneille-ℝ y x)
   (let q+y = translate-family-right-macneille-real-ℚ q y)
-  (let q+x = add-macneille-ℝ (located-macneille-real-ℚ q) x)
+  (let q+x = translate-ℚ-macneille-ℝ q x)
   (let ub-x = backward-implication (is-lub-x x) (refl-leq-macneille-ℝ x))
   where
 
@@ -114,15 +110,15 @@ module _
       z q+y≤z =
       tr
         ( leq-macneille-ℝ q+x)
-        ( right-inverse-right-translate-macneille-real-ℚ q z)
-        ( preserves-leq-right-add-macneille-ℝ
-          ( located-macneille-real-ℚ q)
+        ( is-section-translate-neg-ℚ-macneille-ℝ q z)
+        ( preserves-leq-offset-translate-ℚ-macneille-ℝ
+          ( q)
           ( x)
-          ( add-macneille-ℝ (located-macneille-real-ℚ (neg-ℚ q)) z)
+          ( translate-ℚ-macneille-ℝ (neg-ℚ q) z)
           ( forward-implication
-            ( is-lub-x (add-macneille-ℝ (located-macneille-real-ℚ (neg-ℚ q)) z))
+            ( is-lub-x (translate-ℚ-macneille-ℝ (neg-ℚ q) z))
             ( λ i →
-              leq-transpose-right-add-macneille-real-ℚ q (y i) z (q+y≤z i))))
+              leq-transpose-neg-translate-ℚ-macneille-ℝ q (y i) z (q+y≤z i))))
 
   abstract
     backward-implication-is-least-upper-bound-family-of-elements-right-translate-macneille-real-ℚ :
@@ -132,15 +128,11 @@ module _
     backward-implication-is-least-upper-bound-family-of-elements-right-translate-macneille-real-ℚ
       z q+x≤z i =
       transitive-leq-macneille-ℝ
-        ( add-macneille-ℝ (located-macneille-real-ℚ q) (y i))
-        ( add-macneille-ℝ (located-macneille-real-ℚ q) x)
+        ( translate-ℚ-macneille-ℝ q (y i))
+        ( translate-ℚ-macneille-ℝ q x)
         ( z)
         ( q+x≤z)
-        ( preserves-leq-right-add-macneille-ℝ
-          ( located-macneille-real-ℚ q)
-          ( y i)
-          ( x)
-          ( ub-x i))
+        ( preserves-leq-offset-translate-ℚ-macneille-ℝ q (y i) x (ub-x i))
 
   abstract
     is-least-upper-bound-family-of-elements-at-level-right-translate-macneille-real-ℚ :

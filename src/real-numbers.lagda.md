@@ -10,7 +10,6 @@ open import real-numbers.absolute-value-real-numbers public
 open import real-numbers.accumulation-points-subsets-real-numbers public
 open import real-numbers.addition-located-macneille-real-numbers public
 open import real-numbers.addition-lower-dedekind-real-numbers public
-open import real-numbers.addition-macneille-real-numbers public
 open import real-numbers.addition-negative-real-numbers public
 open import real-numbers.addition-nonnegative-real-numbers public
 open import real-numbers.addition-nonzero-real-numbers public
@@ -48,7 +47,7 @@ open import real-numbers.increasing-endomaps-real-numbers public
 open import real-numbers.increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.increasing-sequences-real-numbers public
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers public
-open import real-numbers.inequalities-addition-macneille-real-numbers public
+open import real-numbers.inequalities-translation-macneille-real-numbers public
 open import real-numbers.inequality-lower-dedekind-real-numbers public
 open import real-numbers.inequality-macneille-real-numbers public
 open import real-numbers.inequality-nonnegative-real-numbers public
@@ -159,6 +158,7 @@ open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers pu
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
+open import real-numbers.translation-macneille-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public
 open import real-numbers.uncountability-macneille-real-numbers public
 open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers public

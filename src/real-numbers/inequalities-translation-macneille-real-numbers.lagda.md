@@ -1,7 +1,7 @@
-# Inequality preservation for addition on MacNeille real numbers
+# Inequality preservation for translation of MacNeille real numbers
 
 ```agda
-module real-numbers.inequalities-addition-macneille-real-numbers where
+module real-numbers.inequalities-translation-macneille-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +15,6 @@ open import foundation.universe-levels
 open import group-theory.minkowski-multiplication-commutative-monoids
 
 open import real-numbers.addition-lower-dedekind-real-numbers
-open import real-numbers.addition-macneille-real-numbers
 open import real-numbers.addition-upper-dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-macneille-real-numbers
@@ -23,6 +22,7 @@ open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.located-macneille-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.macneille-real-numbers
+open import real-numbers.translation-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
 
@@ -89,18 +89,18 @@ abstract
 
 ```agda
 abstract opaque
-  unfolding add-macneille-ℝ
+  unfolding translate-macneille-ℝ
 
-  preserves-leq-right-add-macneille-ℝ :
+  preserves-leq-right-translate-macneille-ℝ :
     {l1 l2 l3 : Level} →
     (z : located-macneille-ℝ l1) →
     (x : macneille-ℝ l2) →
     (y : macneille-ℝ l3) →
     leq-macneille-ℝ x y →
     leq-macneille-ℝ
-      ( add-macneille-ℝ z x)
-      ( add-macneille-ℝ z y)
-  preserves-leq-right-add-macneille-ℝ z x y x≤y =
+      ( translate-macneille-ℝ z x)
+      ( translate-macneille-ℝ z y)
+  preserves-leq-right-translate-macneille-ℝ z x y x≤y =
     ( preserves-leq-left-add-lower-ℝ
         ( lower-real-macneille-ℝ x)
         ( lower-real-macneille-ℝ y)
@@ -112,16 +112,16 @@ abstract opaque
         ( upper-real-macneille-ℝ (pr1 z))
         ( pr2 x≤y))
 
-  preserves-leq-left-add-macneille-ℝ :
+  preserves-leq-left-translate-macneille-ℝ :
     {l1 l2 l3 : Level} →
     (x : located-macneille-ℝ l1) →
     (y : located-macneille-ℝ l2) →
     (z : macneille-ℝ l3) →
     leq-macneille-ℝ (pr1 x) (pr1 y) →
     leq-macneille-ℝ
-      ( add-macneille-ℝ x z)
-      ( add-macneille-ℝ y z)
-  preserves-leq-left-add-macneille-ℝ x y z x≤y =
+      ( translate-macneille-ℝ x z)
+      ( translate-macneille-ℝ y z)
+  preserves-leq-left-translate-macneille-ℝ x y z x≤y =
     ( preserves-leq-right-add-lower-ℝ
         ( lower-real-macneille-ℝ (pr1 x))
         ( lower-real-macneille-ℝ (pr1 y))
