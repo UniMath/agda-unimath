@@ -25,8 +25,10 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
+open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
+open import group-theory.sums-of-finite-sequences-of-elements-groups
 
 open import linear-algebra.finite-sequences-in-abelian-groups
 open import linear-algebra.finite-sequences-in-commutative-monoids
@@ -210,6 +212,17 @@ module _
     preserves-sum-permutation-fin-sequence-type-Ab =
       preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
         ( commutative-monoid-Ab G)
+```
+
+### Constant sums are multiples
+
+```agda
+abstract
+  sum-constant-fin-sequence-type-Ab :
+    {l : Level} (G : Ab l) (n : ℕ) (x : type-Ab G) →
+    sum-fin-sequence-type-Ab G n (λ _ → x) ＝ multiple-Ab G n x
+  sum-constant-fin-sequence-type-Ab G =
+    sum-constant-fin-sequence-type-Group (group-Ab G)
 ```
 
 ## See also

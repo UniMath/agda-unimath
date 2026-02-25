@@ -23,9 +23,11 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given two pointed types `a : A` and `b : B`, their cartesian product is again
-canonically pointed at `(a , b) : A × B`. We call this the **pointed cartesian
-product** or **pointed product** of the two pointed types.
+Given two [pointed types](structured-types.pointed-types.md) `a : A` and
+`b : B`, their [cartesian product](foundation.cartesian-product-types.md) is
+again canonically pointed at `(a , b) : A × B`. We call this the
+{{#concept "pointed cartesian product" Agda=product-Pointed-Type}} or **pointed
+product** of the two pointed types.
 
 ## Definition
 
@@ -36,8 +38,7 @@ module _
 
   product-Pointed-Type :
     (A : Pointed-Type l1) (B : Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-  pr1 (product-Pointed-Type (A , a) (B , b)) = A × B
-  pr2 (product-Pointed-Type (A , a) (B , b)) = a , b
+  product-Pointed-Type (A , a) (B , b) = (A × B , (a , b))
 
   infixr 15 _×∗_
   _×∗_ = product-Pointed-Type

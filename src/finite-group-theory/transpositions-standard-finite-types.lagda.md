@@ -42,8 +42,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given `i` and `j` in `Fin n`, the transposition associated to `i` and `j` swap
-these two elements.
+Given `i` and `j` in `Fin n`, the
+{{#concept "transposition" Disambiguation="on a standard finite type" Agda=transposition-Fin}}
+associated to `i` and `j` swap these two elements.
 
 ## Definitions
 

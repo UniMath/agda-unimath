@@ -88,6 +88,16 @@ module _
   nonequal-Π f g a = map-neg (λ h → htpy-eq h a)
 ```
 
+### If a function is nonequal at two points, the points are nonequal
+
+```agda
+abstract
+  nonequal-map :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    {a a' : A} → f a ≠ f a' → a ≠ a'
+  nonequal-map f = map-neg (ap f)
+```
+
 ### If either component of two pairs are nonequal, the pairs are nonequal
 
 ```agda
@@ -96,14 +106,14 @@ module _
   where
 
   nonequal-pr1 : (u v : Σ A B) → pr1 u ≠ pr1 v → u ≠ v
-  nonequal-pr1 u v = map-neg (ap pr1)
+  nonequal-pr1 u v = nonequal-map pr1
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   nonequal-product-pr2 : (u v : A × B) → pr2 u ≠ pr2 v → u ≠ v
-  nonequal-product-pr2 u v = map-neg (ap pr2)
+  nonequal-product-pr2 u v = nonequal-map pr2
 ```
 
 ### If there is a reflexive relation that does not relate `a` and `b`, then they are nonequal

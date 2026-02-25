@@ -35,10 +35,13 @@ open import trees.rooted-morphisms-directed-trees
 
 ## Idea
 
-**Equivalences of directed trees** are morphisms of directed trees of which the
-actions on nodes and on edges are both equivalences. In other words,
-equivalences of directed trees are just equivalences between their underlying
-directed graphs.
+{{#concept "Equivalences" Disambiguation="of directed trees" Agda=equiv-Directed-Tree}}
+of [directed trees](trees.directed-trees.md) are
+[morphisms](trees.morphisms-directed-trees.md) of directed trees of which the
+actions on nodes and on edges are both
+[equivalences](foundation-core.equivalences.md). In other words, equivalences of
+directed trees are just equivalences between their underlying
+[directed graphs](graph-theory.directed-graphs.md).
 
 ## Definitions
 

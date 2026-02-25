@@ -1,4 +1,4 @@
-# Groups of order `2`
+# Groups of order 2
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -37,7 +37,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of groups of order 2 is contractible
+The type of [groups](group-theory.groups.md) of
+[order](finite-group-theory.finite-groups.md) 2 is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 

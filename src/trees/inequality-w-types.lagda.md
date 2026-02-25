@@ -23,7 +23,8 @@ open import trees.w-types
 
 ## Idea
 
-The elementhood relation on W-types induces a strict ordering.
+The [elementhood relation on W-types](trees.elementhood-relation-w-types.md)
+induces a strict ordering.
 
 ## Definition
 

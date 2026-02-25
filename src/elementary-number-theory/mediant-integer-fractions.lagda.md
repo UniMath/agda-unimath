@@ -50,41 +50,42 @@ mediant-fraction-ℤ (a , b) (c , d) = (add-ℤ a c , add-positive-ℤ b d)
 ### The mediant preserves the cross-multiplication difference
 
 ```agda
-cross-mul-diff-left-mediant-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  cross-mul-diff-fraction-ℤ x y ＝
-  cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y)
-cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
-  equational-reasoning
-  (ny *ℤ dx -ℤ nx *ℤ dy)
-  ＝ (nx *ℤ dx +ℤ ny *ℤ dx) -ℤ (nx *ℤ dx +ℤ nx *ℤ dy)
-    by inv
-      ( left-translation-diff-ℤ
-        ( mul-ℤ ny dx)
-        ( mul-ℤ nx dy)
-        ( mul-ℤ nx dx))
-  ＝ (nx +ℤ ny) *ℤ dx -ℤ nx *ℤ (dx +ℤ dy)
-    by ap-diff-ℤ
-      ( inv (right-distributive-mul-add-ℤ nx ny dx))
-      ( inv (left-distributive-mul-add-ℤ nx dx dy))
+abstract
+  cross-mul-diff-left-mediant-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    cross-mul-diff-fraction-ℤ x y ＝
+    cross-mul-diff-fraction-ℤ x ( mediant-fraction-ℤ x y)
+  cross-mul-diff-left-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
+    equational-reasoning
+    (ny *ℤ dx -ℤ nx *ℤ dy)
+    ＝ (nx *ℤ dx +ℤ ny *ℤ dx) -ℤ (nx *ℤ dx +ℤ nx *ℤ dy)
+      by inv
+        ( left-translation-diff-ℤ
+          ( mul-ℤ ny dx)
+          ( mul-ℤ nx dy)
+          ( mul-ℤ nx dx))
+    ＝ (nx +ℤ ny) *ℤ dx -ℤ nx *ℤ (dx +ℤ dy)
+      by ap-diff-ℤ
+        ( inv (right-distributive-mul-add-ℤ nx ny dx))
+        ( inv (left-distributive-mul-add-ℤ nx dx dy))
 
-cross-mul-diff-right-mediant-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  cross-mul-diff-fraction-ℤ x y ＝
-  cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y
-cross-mul-diff-right-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
-  equational-reasoning
-  (ny *ℤ dx -ℤ nx *ℤ dy)
-  ＝ (ny *ℤ dx +ℤ ny *ℤ dy) -ℤ (nx *ℤ dy +ℤ ny *ℤ dy)
-    by inv
-      ( right-translation-diff-ℤ
-        ( mul-ℤ ny dx)
-        ( mul-ℤ nx dy)
-        ( mul-ℤ ny dy))
-  ＝ ny *ℤ (dx +ℤ dy) -ℤ (nx +ℤ ny) *ℤ dy
-    by ap-diff-ℤ
-      ( inv (left-distributive-mul-add-ℤ ny dx dy))
-      ( inv (right-distributive-mul-add-ℤ nx ny dy))
+  cross-mul-diff-right-mediant-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    cross-mul-diff-fraction-ℤ x y ＝
+    cross-mul-diff-fraction-ℤ (mediant-fraction-ℤ x y) y
+  cross-mul-diff-right-mediant-fraction-ℤ (nx , dx , px) (ny , dy , py) =
+    equational-reasoning
+    (ny *ℤ dx -ℤ nx *ℤ dy)
+    ＝ (ny *ℤ dx +ℤ ny *ℤ dy) -ℤ (nx *ℤ dy +ℤ ny *ℤ dy)
+      by inv
+        ( right-translation-diff-ℤ
+          ( mul-ℤ ny dx)
+          ( mul-ℤ nx dy)
+          ( mul-ℤ ny dy))
+    ＝ ny *ℤ (dx +ℤ dy) -ℤ (nx +ℤ ny) *ℤ dy
+      by ap-diff-ℤ
+        ( inv (left-distributive-mul-add-ℤ ny dx dy))
+        ( inv (right-distributive-mul-add-ℤ nx ny dy))
 ```
 
 ### Common divisors of the numerator and denominator of the mediant of two integer fractions divide their cross-multiplication difference
@@ -124,40 +125,41 @@ div-cross-mul-diff-common-divisor-mediant-fraction-ℤ
 ### If the cross-multiplication difference of two fractions is 1 their mediant integer fraction is reduced
 
 ```agda
-is-reduced-mediant-is-one-cross-mul-diff-fraction-ℤ :
-  (x y : fraction-ℤ) →
-  is-one-ℤ (cross-mul-diff-fraction-ℤ x y) →
-  is-reduced-fraction-ℤ (mediant-fraction-ℤ x y)
-is-reduced-mediant-is-one-cross-mul-diff-fraction-ℤ x y H =
-  let
-    n = numerator-fraction-ℤ (mediant-fraction-ℤ x y)
-    d = denominator-fraction-ℤ (mediant-fraction-ℤ x y)
+abstract
+  is-reduced-mediant-is-one-cross-mul-diff-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    is-one-ℤ (cross-mul-diff-fraction-ℤ x y) →
+    is-reduced-fraction-ℤ (mediant-fraction-ℤ x y)
+  is-reduced-mediant-is-one-cross-mul-diff-fraction-ℤ x y H =
+    let
+      n = numerator-fraction-ℤ (mediant-fraction-ℤ x y)
+      d = denominator-fraction-ℤ (mediant-fraction-ℤ x y)
 
-    is-unit-gcd-mediant : is-unit-ℤ (gcd-ℤ n d)
-    is-unit-gcd-mediant =
-      tr
-        ( div-ℤ (gcd-ℤ n d))
-        ( H)
-        ( div-cross-mul-diff-common-divisor-mediant-fraction-ℤ
-          ( x)
-          ( y)
-          ( gcd-ℤ n d)
-          ( is-common-divisor-gcd-ℤ n d))
-  in
-    rec-coproduct
-      ( λ K → K)
-      ( λ K →
-        ex-falso
-          ( is-not-negative-and-nonnegative-ℤ
+      is-unit-gcd-mediant : is-unit-ℤ (gcd-ℤ n d)
+      is-unit-gcd-mediant =
+        tr
+          ( div-ℤ (gcd-ℤ n d))
+          ( H)
+          ( div-cross-mul-diff-common-divisor-mediant-fraction-ℤ
+            ( x)
+            ( y)
             ( gcd-ℤ n d)
-            ( ( inv-tr
-                ( is-negative-ℤ)
-                ( K)
-                ( _)) ,
-              ( is-nonnegative-gcd-ℤ n d))))
-      ( is-one-or-neg-one-is-unit-ℤ
-        ( gcd-ℤ n d)
-        ( is-unit-gcd-mediant))
+            ( is-common-divisor-gcd-ℤ n d))
+    in
+      rec-coproduct
+        ( λ K → K)
+        ( λ K →
+          ex-falso
+            ( is-not-negative-and-nonnegative-ℤ
+              ( gcd-ℤ n d)
+              ( ( inv-tr
+                  ( is-negative-ℤ)
+                  ( K)
+                  ( _)) ,
+                ( is-nonnegative-gcd-ℤ n d))))
+        ( is-one-or-neg-one-is-unit-ℤ
+          ( gcd-ℤ n d)
+          ( is-unit-gcd-mediant))
 ```
 
 ## External links

@@ -21,8 +21,9 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-The {{#concept "terminal directed graph"}} is a
-[directed graph](graph-theory.directed-graphs.md) `1` such that the type of
+The
+{{#concept "terminal directed graph" Agda=is-terminal-Directed-Graph Agda=terminal-Directed-Graph}}
+is a [directed graph](graph-theory.directed-graphs.md) `1` such that the type of
 [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A 1` is
 [contractible](foundation-core.contractible-types.md) for any directed graph
 `A`.

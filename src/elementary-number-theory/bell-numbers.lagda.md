@@ -12,7 +12,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 ```
 
 </details>
@@ -26,7 +26,7 @@ The {{#concept "Bell numbers" Agda=bell-number-ℕ WDID=Q816063 WD="Bell number"
 be defined recursively by $B_0 := 1$ and
 
 $$
-  B_{n+1} := \sum_{k=0}^{n} \binom{n}{k}B_k.
+  B_{n+1} := ∑_{k=0}^{n} \binom{n}{k}B_k.
 $$
 
 The Bell numbers are listed as sequence A000110 in the

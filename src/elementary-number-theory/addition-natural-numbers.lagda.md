@@ -138,6 +138,33 @@ abstract
       associative-add-ℕ
 ```
 
+### Swap laws of addition
+
+```agda
+abstract
+  left-swap-add-ℕ : (a b c : ℕ) → a +ℕ (b +ℕ c) ＝ b +ℕ (a +ℕ c)
+  left-swap-add-ℕ a b c =
+    equational-reasoning
+      a +ℕ (b +ℕ c)
+      ＝ (a +ℕ b) +ℕ c
+        by inv (associative-add-ℕ a b c)
+      ＝ (b +ℕ a) +ℕ c
+        by ap-add-ℕ (commutative-add-ℕ a b) (refl {x = c})
+      ＝ b +ℕ (a +ℕ c)
+        by associative-add-ℕ b a c
+
+  right-swap-add-ℕ : (a b c : ℕ) → (a +ℕ b) +ℕ c ＝ (a +ℕ c) +ℕ b
+  right-swap-add-ℕ a b c =
+    equational-reasoning
+      (a +ℕ b) +ℕ c
+      ＝ a +ℕ (b +ℕ c)
+        by associative-add-ℕ a b c
+      ＝ a +ℕ (c +ℕ b)
+        by ap-add-ℕ (refl {x = a}) (commutative-add-ℕ b c)
+      ＝ (a +ℕ c) +ℕ b
+        by inv (associative-add-ℕ a c b)
+```
+
 ### Addition by a fixed element on either side is injective
 
 ```agda

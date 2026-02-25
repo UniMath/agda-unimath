@@ -47,6 +47,16 @@ refl-dependent-identification :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} {y : B x} →
   dependent-identification B refl y y
 refl-dependent-identification B = refl
+
+dependent-identification' :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → UU l2
+dependent-identification' B p u v = (u ＝ inv-tr B p v)
+
+refl-dependent-identification' :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} {y : B x} →
+  dependent-identification' B refl y y
+refl-dependent-identification' B = refl
 ```
 
 ### Iterated dependent identifications

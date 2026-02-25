@@ -11,6 +11,8 @@ module real-numbers.binary-minimum-real-numbers where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -30,6 +32,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -54,6 +57,11 @@ module _
   opaque
     min-ℝ : ℝ (l1 ⊔ l2)
     min-ℝ = neg-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y))
+
+ap-min-ℝ :
+  {l1 l2 : Level} → {x x' : ℝ l1} → x ＝ x' →
+  {y y' : ℝ l2} → y ＝ y' → min-ℝ x y ＝ min-ℝ x' y'
+ap-min-ℝ = ap-binary min-ℝ
 ```
 
 ## Properties
@@ -66,7 +74,7 @@ module _
   (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℝ min-ℝ
 
     is-greatest-binary-lower-bound-min-ℝ :
@@ -79,10 +87,8 @@ module _
       tr
         ( λ w → leq-ℝ w (min-ℝ x y))
         ( neg-neg-ℝ z)
-        ( neg-leq-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y)) (neg-ℝ z)
-          ( leq-max-leq-leq-ℝ _ _ (neg-ℝ z)
-            ( neg-leq-ℝ z x z≤x)
-            ( neg-leq-ℝ z y z≤y)))
+        ( neg-leq-ℝ
+          ( leq-max-leq-leq-ℝ _ _ (neg-ℝ z) (neg-leq-ℝ z≤x) (neg-leq-ℝ z≤y)))
     pr2 (is-greatest-binary-lower-bound-min-ℝ z) z≤min =
       let
         case :
@@ -93,7 +99,7 @@ module _
             ( tr
               ( leq-ℝ (min-ℝ x y))
               ( neg-neg-ℝ _)
-              ( neg-leq-ℝ (neg-ℝ w) (max-ℝ (neg-ℝ x) (neg-ℝ y)) -w≤max))
+              ( neg-leq-ℝ -w≤max))
             ( z≤min)
       in (case x (leq-left-max-ℝ _ _) , case y (leq-right-max-ℝ _ _))
 
@@ -132,6 +138,18 @@ module _
           ( is-greatest-binary-lower-bound-min-ℝ x y))
 ```
 
+### The binary minimum is commutative
+
+```agda
+abstract opaque
+  unfolding min-ℝ
+
+  commutative-min-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → min-ℝ x y ＝ min-ℝ y x
+  commutative-min-ℝ x y =
+    ap neg-ℝ (commutative-max-ℝ (neg-ℝ x) (neg-ℝ y))
+```
+
 ### The large poset of real numbers has meets
 
 ```agda
@@ -157,7 +175,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding min-ℝ
 
     approximate-above-min-ℝ :
@@ -172,10 +190,11 @@ module _
           le-ℝ (max-ℝ (neg-ℝ x) (neg-ℝ y) -ℝ real-ℚ⁺ ε) (neg-ℝ w) →
           le-ℝ w (min-ℝ x y +ℝ real-ℚ⁺ ε)
         case w max-ε<-w =
-          binary-tr le-ℝ
+          binary-tr
+            ( le-ℝ)
             ( neg-neg-ℝ w)
             ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ _ (neg-ℝ w) max-ε<-w)
+            ( neg-le-ℝ max-ε<-w)
       in
         elim-disjunction
           ( (le-prop-ℝ x (min-ℝ x y +ℝ real-ℚ⁺ ε)) ∨
@@ -183,4 +202,44 @@ module _
           ( λ max-ε<-x → inl-disjunction (case x max-ε<-x))
           ( λ max-ε<-y → inr-disjunction (case y max-ε<-y))
           ( approximate-below-max-ℝ (neg-ℝ x) (neg-ℝ y) ε)
+```
+
+### If `x ≤ y`, the minimum of `x` and `y` is similar to `x`
+
+```agda
+abstract opaque
+  unfolding min-ℝ
+
+  left-leq-right-min-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ x y →
+    sim-ℝ (min-ℝ x y) x
+  left-leq-right-min-ℝ {x = x} {y = y} x≤y =
+    similarity-reasoning-ℝ
+      min-ℝ x y
+      ~ℝ neg-ℝ (neg-ℝ x)
+        by preserves-sim-neg-ℝ (right-leq-left-max-ℝ (neg-leq-ℝ x≤y))
+      ~ℝ x
+        by sim-eq-ℝ (neg-neg-ℝ x)
+
+  right-leq-left-min-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → leq-ℝ y x →
+    sim-ℝ (min-ℝ x y) y
+  right-leq-left-min-ℝ {y = y} y≤x =
+    tr (λ z → sim-ℝ z y) (commutative-min-ℝ _ _) (left-leq-right-min-ℝ y≤x)
+```
+
+### If `x < y` and `x < z`, then `x < min-ℝ y z`
+
+```agda
+abstract opaque
+  unfolding min-ℝ
+
+  le-min-le-le-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} → le-ℝ x y → le-ℝ x z →
+    le-ℝ x (min-ℝ y z)
+  le-min-le-le-ℝ {x = x} {y = y} {z = z} x<y x<z =
+    tr
+      ( λ w → le-ℝ w (min-ℝ y z))
+      ( neg-neg-ℝ x)
+      ( neg-le-ℝ (le-max-le-le-ℝ (neg-le-ℝ x<y) (neg-le-ℝ x<z)))
 ```

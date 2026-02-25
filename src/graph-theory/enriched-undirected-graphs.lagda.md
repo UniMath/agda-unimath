@@ -28,9 +28,9 @@ open import higher-group-theory.higher-groups
 ## Idea
 
 Consider a type `A` equipped with a type family `B` over `A`. An
-**`(A,B)`-enriched undirected graph** is an
-[undirected graph](graph-theory.undirected-graphs.md) `G := (V,E)` equipped with
-a map `sh : V → A`, and for each vertex `v` an
+`(A,B)`-{{#concept "enriched undirected graph" Agda=Enriched-Undirected-Graph}}
+is an [undirected graph](graph-theory.undirected-graphs.md) `G := (V,E)`
+equipped with a map `sh : V → A`, and for each vertex `v` an
 [equivalence](foundation-core.equivalences.md) from `B (sh v)` to the type of
 all edges going out of `v`, i.e., to the type `neighbor v` of
 [neighbors](graph-theory.neighbors-undirected-graphs.md).

@@ -149,7 +149,7 @@ abstract
 propositional truncations, we have an embedding `║X║₋₁ ↪ ║Fin k║₋₁`. By
 induction, if `k ≐ 0` then `║Fin k║₋₁ ≃ 0 ≃ Fin 0` and so `║X║₋₁ ↪ Fin 0` is a
 subcounting. Otherwise, if `k ≐ j + 1`, then `║Fin k║₋₁ ≃ 1 ≃ Fin 1` and again
-`║X║₋₁ ↪ Fin 1` is a subcounting.
+`║X║₋₁ ↪ Fin 1` is a subcounting. ∎
 
 ```agda
 module _
@@ -173,8 +173,8 @@ We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
 answer: <https://mathoverflow.net/a/433318>.
 
-**Proof.** Let $X$ be a type with a subcounting $ι : X ↪ Fin n$, and let
-$f : X ↪ X$ be an arbitrary self-embedding. It suffices to prove $f$ is
+**Proof.** Let $X$ be a type with a subcounting $ι : X ↪ \operatorname{Fin}n$,
+and let $f : X ↪ X$ be an arbitrary self-embedding. It suffices to prove $f$ is
 surjective, so assume given an $x : X$ where we want to show there exists
 $z : X$ such that $f(z) ＝ x$. The mapping $i ↦ fⁱ(x)$ defines an $ℕ$-indexed
 sequence of elements of $X$. Since the

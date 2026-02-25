@@ -29,7 +29,9 @@ open import structured-types.pointed-types-equipped-with-automorphisms
 
 ## Idea
 
-We show that ℤ is the initial pointed type equipped with an automorphism
+We show that the type of [integers](elementary-number-theory.integers.md) ℤ is
+the initial
+[pointed type equipped with an automorphism](structured-types.pointed-types-equipped-with-automorphisms.md).
 
 ## Definition
 

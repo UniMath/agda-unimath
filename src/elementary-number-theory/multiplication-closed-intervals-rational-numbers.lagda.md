@@ -26,16 +26,19 @@ open import elementary-number-theory.minima-and-maxima-rational-numbers
 open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-negative-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negation-closed-intervals-rational-numbers
+open import elementary-number-theory.negative-closed-intervals-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.poset-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
+open import elementary-number-theory.positive-closed-intervals-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.proper-closed-intervals-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -46,12 +49,14 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.images-subtypes
 open import foundation.logical-equivalences
@@ -924,7 +929,7 @@ abstract
           rational-dist-ℚ (a *ℚ q) (b *ℚ q)
           ≤ rational-dist-ℚ a b *ℚ rational-abs-ℚ q
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ( ap
                     ( rational-abs-ℚ)
                     ( inv (right-distributive-mul-diff-ℚ _ _ _))) ∙
@@ -939,7 +944,7 @@ abstract
           ≤ width-closed-interval-ℚ [a,b] *ℚ
             rational-max-abs-closed-interval-ℚ [c,d]
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-mul-ℚ
                   ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [a,b])
                   ( refl))
@@ -951,7 +956,7 @@ abstract
           rational-dist-ℚ (p *ℚ c) (p *ℚ d)
           ≤ rational-dist-ℚ c d *ℚ rational-abs-ℚ p
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ( ap
                     ( rational-abs-ℚ)
                     ( inv (left-distributive-mul-diff-ℚ _ _ _))) ∙
@@ -966,7 +971,7 @@ abstract
                 ( leq-max-abs-is-in-closed-interval-ℚ [a,b] p p∈[a,b])
           ≤ _
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-mul-ℚ
                   ( eq-width-dist-lower-upper-bounds-closed-interval-ℚ [c,d])
                   ( refl))
@@ -983,7 +988,7 @@ abstract
           rational-dist-ℚ (a *ℚ c) (b *ℚ d)
           ≤ rational-abs-ℚ ((a *ℚ c -ℚ b *ℚ c) +ℚ (b *ℚ c -ℚ b *ℚ d))
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap
                   ( rational-abs-ℚ)
                   ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
@@ -996,7 +1001,7 @@ abstract
           rational-dist-ℚ (a *ℚ d) (b *ℚ c)
           ≤ rational-abs-ℚ ((a *ℚ d -ℚ b *ℚ d) +ℚ (b *ℚ d -ℚ b *ℚ c))
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap
                   ( rational-abs-ℚ)
                   ( inv ( mul-right-div-Group group-add-ℚ _ _ _)))
@@ -1006,7 +1011,7 @@ abstract
           ≤ rational-dist-ℚ (a *ℚ d) (b *ℚ d) +ℚ
             rational-dist-ℚ (b *ℚ c) (b *ℚ d)
             by
-              leq-eq-ℚ _ _
+              leq-eq-ℚ
                 ( ap-add-ℚ refl (ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _)))
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by preserves-leq-add-ℚ |ad-bd|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
@@ -1042,7 +1047,7 @@ abstract
         chain-of-inequalities
           rational-dist-ℚ q q
           ≤ zero-ℚ
-            by leq-eq-ℚ _ _ (rational-dist-self-ℚ q)
+            by leq-eq-ℚ (rational-dist-self-ℚ q)
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
             by
               leq-zero-rational-ℚ⁰⁺ (<b-a><max|c||d|>⁰⁺ +ℚ⁰⁺ <d-c><max|a||b|>⁰⁺)
@@ -1286,4 +1291,122 @@ abstract
             ( leq-nonpositive-nonnegative-ℚ
               ( neg-ℚ⁰⁺ (nonnegative-square-ℚ q))
               ( nonnegative-square-ℚ q))
+```
+
+### If the product of `[a, b]` and `[c, d]` is positive, then `[a, b]` and `[c, d]` are both positive or both negative
+
+```agda
+abstract
+  same-sign-lower-bounds-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-negative-ℚ (lower-bound-closed-interval-ℚ [c,d])) +
+      ( is-positive-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-positive-ℚ (lower-bound-closed-interval-ℚ [c,d])))
+  same-sign-lower-bounds-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
+    same-sign-is-positive-mul-ℚ
+      ( is-positive-leq-ℚ⁺
+        ( _ , is-pos-lb)
+        ( transitive-leq-ℚ _ _ _ (leq-left-min-ℚ _ _) (leq-left-min-ℚ _ _)))
+
+  same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])) +
+      ( is-positive-ℚ (lower-bound-closed-interval-ℚ [a,b]) ×
+        is-positive-ℚ (upper-bound-closed-interval-ℚ [c,d])))
+  same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
+    same-sign-is-positive-mul-ℚ
+      ( is-positive-leq-ℚ⁺
+        ( _ , is-pos-lb)
+        ( transitive-leq-ℚ _ _ _
+          ( leq-right-min-ℚ _ _)
+          ( leq-left-min-ℚ _ _)))
+
+  same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
+        is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])) +
+      ( is-positive-ℚ (upper-bound-closed-interval-ℚ [a,b]) ×
+        is-positive-ℚ (upper-bound-closed-interval-ℚ [c,d])))
+  same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
+    same-sign-is-positive-mul-ℚ
+      ( is-positive-leq-ℚ⁺
+        ( _ , is-pos-lb)
+        ( transitive-leq-ℚ _ _ _
+          ( leq-right-min-ℚ _ _)
+          ( leq-right-min-ℚ _ _)))
+
+  is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) →
+    is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])
+  is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
+    rec-coproduct
+      ( pr2)
+      ( λ (is-pos-a , _) →
+        ex-falso
+          ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
+      ( same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( is-pos-lb))
+
+  is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    is-negative-ℚ (lower-bound-closed-interval-ℚ [a,b]) →
+    is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b])
+  is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
+    rec-coproduct
+      ( pr1)
+      ( λ (_ , is-pos-d) →
+        ex-falso
+          ( is-not-negative-and-positive-ℚ
+            ( is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+              ( [a,b])
+              ( [c,d])
+              ( is-pos-lb)
+              ( is-neg-a) ,
+            is-pos-d)))
+      ( same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( is-pos-lb))
+
+  same-sign-is-positive-mul-closed-interval-ℚ :
+    ([a,b] [c,d] : closed-interval-ℚ) →
+    is-positive-closed-interval-ℚ (mul-closed-interval-ℚ [a,b] [c,d]) →
+    ( ( is-negative-closed-interval-ℚ [a,b] ×
+        is-negative-closed-interval-ℚ [c,d]) +
+      ( is-positive-closed-interval-ℚ [a,b] ×
+        is-positive-closed-interval-ℚ [c,d]))
+  same-sign-is-positive-mul-closed-interval-ℚ
+    [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb =
+    map-coproduct
+      ( λ (is-neg-a , is-neg-c) →
+        ( is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ
+            ( [a,b])
+            ( [c,d])
+            ( is-pos-lb)
+            ( is-neg-a) ,
+          is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
+            ( [a,b])
+            ( [c,d])
+            ( is-pos-lb)
+            ( is-neg-a)))
+      ( id)
+      ( same-sign-lower-bounds-is-positive-mul-closed-interval-ℚ
+        ( [a,b])
+        ( [c,d])
+        ( is-pos-lb))
 ```

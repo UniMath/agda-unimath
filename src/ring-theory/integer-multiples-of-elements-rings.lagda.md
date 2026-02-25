@@ -32,8 +32,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The **integer multiple operation** on a [ring](ring-theory.rings.md) is the map
-`k x ↦ kx`, which is defined by
+The
+{{#concept "integer multiple operation" Disambiguation="on a ring" Agda=integer-multiple-Ring}}
+on a [ring](ring-theory.rings.md) is the map `k x ↦ kx`, which is defined by
 [iteratively](foundation.iterating-automorphisms.md) adding `x` with itself an
 [integer](elementary-number-theory.integers.md) `k` times.
 
@@ -142,9 +143,9 @@ module _
   {l : Level} (R : Ring l) (a : type-Ring R)
   where
 
-  integer-multiple-zero-Ring :
+  left-zero-law-integer-multiple-Ring :
     integer-multiple-Ring R zero-ℤ a ＝ zero-Ring R
-  integer-multiple-zero-Ring =
+  left-zero-law-integer-multiple-Ring =
     integer-multiple-zero-Ab (ab-Ring R) a
 ```
 
@@ -301,7 +302,7 @@ module _
           ( left-integer-multiple-law-mul-Ring (inl k) _ _)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
   left-integer-multiple-law-mul-Ring (inr (inl _)) x y =
-    ( ap (mul-Ring' R y) (integer-multiple-zero-Ring R x)) ∙
+    ( ap (mul-Ring' R y) (left-zero-law-integer-multiple-Ring R x)) ∙
     ( left-zero-law-mul-Ring R y)
   left-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
     ( ap (mul-Ring' R y) (integer-multiple-one-Ring R x)) ∙
@@ -330,7 +331,7 @@ module _
           ( right-integer-multiple-law-mul-Ring (inl k) x y)) ∙
         ( inv (integer-multiple-pred-Ring R (inl k) _))))
   right-integer-multiple-law-mul-Ring (inr (inl _)) x y =
-    ( ap (mul-Ring R x) (integer-multiple-zero-Ring R y)) ∙
+    ( ap (mul-Ring R x) (left-zero-law-integer-multiple-Ring R y)) ∙
     ( right-zero-law-mul-Ring R x)
   right-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
     ( ap (mul-Ring R x) (integer-multiple-one-Ring R y)) ∙
@@ -369,7 +370,7 @@ module _
   commute-integer-multiple-Ring (inr (inl _)) {x} H =
     tr
       ( commute-Ring R _)
-      ( inv (integer-multiple-zero-Ring R x))
+      ( inv (left-zero-law-integer-multiple-Ring R x))
       ( inv (commute-zero-Ring R _))
   commute-integer-multiple-Ring (inr (inr zero-ℕ)) H =
     tr
@@ -403,7 +404,7 @@ module _
   commute-integer-multiples-Ring (inr (inl _)) l {x} H =
     tr
       ( commute-Ring' R _)
-      ( inv (integer-multiple-zero-Ring R x))
+      ( inv (left-zero-law-integer-multiple-Ring R x))
       ( commute-zero-Ring R _)
   commute-integer-multiples-Ring (inr (inr zero-ℕ)) l H =
     tr

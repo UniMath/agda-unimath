@@ -9,10 +9,12 @@ module complex-numbers.multiplication-complex-numbers where
 ```agda
 open import complex-numbers.addition-complex-numbers
 open import complex-numbers.complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import elementary-number-theory.rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -20,9 +22,11 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -45,6 +49,11 @@ mul-ℂ (a , b) (c , d) = (a *ℝ c -ℝ b *ℝ d , a *ℝ d +ℝ b *ℝ c)
 infixl 40 _*ℂ_
 _*ℂ_ : {l1 l2 : Level} → ℂ l1 → ℂ l2 → ℂ (l1 ⊔ l2)
 _*ℂ_ = mul-ℂ
+
+ap-mul-ℂ :
+  {l1 l2 : Level} {z z' : ℂ l1} → z ＝ z' → {w w' : ℂ l2} → w ＝ w' →
+  mul-ℂ z w ＝ mul-ℂ z' w'
+ap-mul-ℂ = ap-binary mul-ℂ
 ```
 
 ## Properties
@@ -254,4 +263,124 @@ opaque
                 ( right-zero-law-mul-ℝ _))
         ＝ zero-ℝ
           by left-unit-law-add-ℝ zero-ℝ)
+```
+
+### The canonical embedding of real numbers in the complex numbers preserves multiplication
+
+```agda
+abstract
+  mul-complex-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
+    complex-ℝ x *ℂ complex-ℝ y ＝ complex-ℝ (x *ℝ y)
+  mul-complex-ℝ {l1} {l2} x y =
+    eq-ℂ
+      ( equational-reasoning
+        x *ℝ y -ℝ raise-ℝ l1 zero-ℝ *ℝ raise-ℝ l2 zero-ℝ
+        ＝ x *ℝ y -ℝ zero-ℝ *ℝ zero-ℝ
+          by
+            eq-sim-ℝ
+              ( preserves-sim-diff-ℝ
+                ( refl-sim-ℝ (x *ℝ y))
+                ( symmetric-sim-ℝ
+                  ( preserves-sim-mul-ℝ (sim-raise-ℝ _ _) (sim-raise-ℝ _ _))))
+        ＝ x *ℝ y -ℝ zero-ℝ
+          by ap-diff-ℝ refl (eq-sim-ℝ (right-zero-law-mul-ℝ _))
+        ＝ x *ℝ y
+          by right-unit-law-diff-ℝ (x *ℝ y))
+      ( eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          x *ℝ raise-ℝ l2 zero-ℝ +ℝ raise-ℝ l1 zero-ℝ *ℝ y
+          ~ℝ x *ℝ zero-ℝ +ℝ zero-ℝ *ℝ y
+            by
+              symmetric-sim-ℝ
+                ( preserves-sim-add-ℝ
+                  ( preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l2 zero-ℝ))
+                  ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ l1 zero-ℝ)))
+          ~ℝ zero-ℝ +ℝ zero-ℝ
+            by
+              preserves-sim-add-ℝ
+                ( right-zero-law-mul-ℝ x)
+                ( left-zero-law-mul-ℝ y)
+          ~ℝ zero-ℝ
+            by sim-eq-ℝ (left-unit-law-add-ℝ zero-ℝ)
+          ~ℝ raise-ℝ (l1 ⊔ l2) zero-ℝ
+            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ))
+```
+
+### Similarity is preserved by multiplication
+
+```agda
+abstract
+  preserves-sim-mul-ℂ :
+    {l1 l2 l3 l4 : Level} {x : ℂ l1} {x' : ℂ l2} {y : ℂ l3} {y' : ℂ l4} →
+    sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x *ℂ y) (x' *ℂ y')
+  preserves-sim-mul-ℂ (a~a' , b~b') (c~c' , d~d') =
+    ( preserves-sim-diff-ℝ
+        ( preserves-sim-mul-ℝ a~a' c~c')
+        ( preserves-sim-mul-ℝ b~b' d~d') ,
+      preserves-sim-add-ℝ
+        ( preserves-sim-mul-ℝ a~a' d~d')
+        ( preserves-sim-mul-ℝ b~b' c~c'))
+```
+
+### Negative laws of multiplication
+
+```agda
+abstract
+  left-negative-law-mul-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    neg-ℂ z *ℂ w ＝ neg-ℂ (z *ℂ w)
+  left-negative-law-mul-ℂ (a +iℂ b) (c +iℂ d) =
+    inv
+      ( eq-ℂ
+        ( equational-reasoning
+          neg-ℝ (a *ℝ c -ℝ b *ℝ d)
+          ＝ neg-ℝ (a *ℝ c) -ℝ neg-ℝ (b *ℝ d)
+            by distributive-neg-add-ℝ _ _
+          ＝ neg-ℝ a *ℝ c -ℝ neg-ℝ b *ℝ d
+            by
+              ap-diff-ℝ
+                ( inv (left-negative-law-mul-ℝ a c))
+                ( inv (left-negative-law-mul-ℝ b d)))
+        ( equational-reasoning
+          neg-ℝ (a *ℝ d +ℝ b *ℝ c)
+          ＝ neg-ℝ (a *ℝ d) +ℝ neg-ℝ (b *ℝ c)
+            by distributive-neg-add-ℝ _ _
+          ＝ neg-ℝ a *ℝ d +ℝ neg-ℝ b *ℝ c
+            by
+              ap-add-ℝ
+                ( inv (left-negative-law-mul-ℝ a d))
+                ( inv (left-negative-law-mul-ℝ b c))))
+
+  right-negative-law-mul-ℂ :
+    {l1 l2 : Level} (z : ℂ l1) (w : ℂ l2) →
+    z *ℂ neg-ℂ w ＝ neg-ℂ (z *ℂ w)
+  right-negative-law-mul-ℂ z w =
+    equational-reasoning
+      z *ℂ neg-ℂ w
+      ＝ neg-ℂ w *ℂ z
+        by commutative-mul-ℂ _ _
+      ＝ neg-ℂ (w *ℂ z)
+        by left-negative-law-mul-ℂ w z
+      ＝ neg-ℂ (z *ℂ w)
+        by ap neg-ℂ (commutative-mul-ℂ w z)
+```
+
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℂ :
+    {l : Level} (z : ℂ l) → raise-ℂ l one-ℂ *ℂ z ＝ z
+  left-raise-one-law-mul-ℂ {l} z =
+    eq-sim-ℂ
+      ( tr
+        ( sim-ℂ (raise-ℂ l one-ℂ *ℂ z))
+        ( left-unit-law-mul-ℂ z)
+        ( preserves-sim-mul-ℂ (sim-raise-ℂ' l one-ℂ) (refl-sim-ℂ z)))
+
+  right-raise-one-law-mul-ℂ :
+    {l : Level} (z : ℂ l) → z *ℂ raise-ℂ l one-ℂ ＝ z
+  right-raise-one-law-mul-ℂ z =
+    commutative-mul-ℂ _ _ ∙ left-raise-one-law-mul-ℂ z
 ```

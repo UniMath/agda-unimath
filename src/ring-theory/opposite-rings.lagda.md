@@ -18,8 +18,11 @@ open import ring-theory.rings
 
 ## Idea
 
-The opposite of a ring R is a ring with the same underlying abelian group, but
-with multiplication given by `x·y := yx`.
+The
+{{#concept "opposite" Disambiguation="of a ring" WD="opposite ring" WDID=Q1940482 Agda=op-Ring}}
+of a [ring](ring-theory.rings.md) `R` is a ring with the same underlying
+[abelian group](group-theory.abelian-groups.md), but with multiplication given
+by `x·y := yx`.
 
 ## Definition
 

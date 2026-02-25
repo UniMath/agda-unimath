@@ -49,7 +49,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-`P ≐ (A ◃ B)` and `Q ≐ (C ◃ D)`, a
+`P ≐ (A \mathbin{◃} B)` and `Q ≐ (C \mathbin{◃} D)`, a
 {{#concept "morphism" Disambiguation="of polynomial endofunctors of types" Agda=hom-polynomial-endofunctor}}
 `α` from `P` to `Q` consists of a pair of maps
 
@@ -350,9 +350,8 @@ module _
         by
         equiv-tot
           ( λ (a , p) →
-            compute-coherence-triangle-fiber-precomp'
+            compute-extension-fiber-precomp'
               ( α₁ a)
-              ( X)
               ( inv-tr (λ c' → Q₁ c' → X) p x))
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →

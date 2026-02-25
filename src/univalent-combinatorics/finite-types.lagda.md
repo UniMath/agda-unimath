@@ -450,7 +450,7 @@ abstract
   is-set-is-finite {l} {X} H =
     apply-universal-property-trunc-Prop H
       ( is-set-Prop X)
-      ( λ e → is-set-count e)
+      ( λ e → is-set-type-count e)
 
 is-set-type-Finite-Type :
   {l : Level} (X : Finite-Type l) → is-set (type-Finite-Type X)
@@ -764,6 +764,23 @@ abstract
           ( λ m → has-cardinality-ℕ m X)
           ( p)
           ( pr2 (has-finite-cardinality-is-finite H)))
+```
+
+### The finite types are propositionally decidable
+
+```agda
+module _
+  {l : Level} (X : Finite-Type l)
+  where
+
+  is-inhabited-or-empty-type-Finite-Type :
+    is-inhabited-or-empty (type-Finite-Type X)
+  is-inhabited-or-empty-type-Finite-Type =
+    rec-trunc-Prop
+      ( is-inhabited-or-empty-Prop (type-Finite-Type X))
+      ( λ (n , Fin-n≃X) →
+        is-inhabited-or-empty-equiv' Fin-n≃X (is-inhabited-or-empty-Fin n))
+      ( is-finite-type-Finite-Type X)
 ```
 
 ## External links

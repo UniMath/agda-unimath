@@ -30,7 +30,9 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-The **combinator operation** on enriched directed trees combines, for any
+The
+{{#concept "combinator operation" Disambiguation="on enriched directed trees" Agda=combinator-Enriched-Directed-Tree}}
+on [enriched directed trees](trees.enriched-directed-trees.md) combines, for any
 element `a : A`, a family of enriched directed trees
 `T : B(a) → Enriched-Directed-Tree A B` indexed by `B a` into a single tree
 enriched directed tree with a new root.

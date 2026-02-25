@@ -36,8 +36,10 @@ open import trees.directed-trees
 
 ## Idea
 
-The **base** of a directed tree consists of the nodes equipped with an edge to
-the root.
+The
+{{#concept "base" Disambiguation="of a directed tree" Agda=base-Directed-Tree}}
+of a [directed tree](trees.directed-trees.md) consists of the nodes equipped
+with an edge to the root.
 
 ## Definition
 

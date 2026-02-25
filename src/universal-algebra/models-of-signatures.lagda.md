@@ -1,8 +1,6 @@
 # Models of signatures
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module universal-algebra.models-of-signatures where
 ```
 
@@ -36,45 +34,54 @@ open import universal-algebra.signatures
 
 ## Idea
 
-A model of a signature `Sig` in a type `A` is a dependent function that assigns
-to each function symbol `f` of arity `n` and `n`-tuple of elements of `A` an
-element of `A`.
+A
+{{#concept "model" Disambiguation="of a single-sorted finitary algebraic signature" Agda=Model-Of-Signature}}
+of a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` in a type `A` is a dependent function that assigns to each function symbol
+`f` of arity `n` and `n`-[tuple](lists.tuples.md) of elements of `A` an element
+of `A`.
 
 ## Definitions
 
-### Models
+### The predicate on a type of being a model
 
 ```agda
+is-model-of-signature-type :
+  {l1 l2 : Level} → signature l1 → UU l2 → UU (l1 ⊔ l2)
+is-model-of-signature-type σ X =
+  (f : operation-signature σ) →
+  tuple X (arity-operation-signature σ f) → X
+```
+
+### The predicate on a set of being a model
+
+```agda
+is-model-of-signature : {l1 l2 : Level} → signature l1 → Set l2 → UU (l1 ⊔ l2)
+is-model-of-signature σ X = is-model-of-signature-type σ (type-Set X)
+```
+
+### The type of models of a signature
+
+```agda
+Model-Of-Signature :
+  {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Model-Of-Signature l2 σ = Σ (Set l2) (is-model-of-signature σ)
+
 module _
-  {l1 : Level} (σ : signature l1)
+  {l1 l2 : Level} (σ : signature l1) (X : Model-Of-Signature l2 σ)
   where
 
-  is-model : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
-  is-model X =
-    ( f : operation-signature σ) →
-    ( tuple X (arity-operation-signature σ f) → X)
+  set-Model-Of-Signature : Set l2
+  set-Model-Of-Signature = pr1 X
 
-  is-model-signature : {l2 : Level} → (Set l2) → UU (l1 ⊔ l2)
-  is-model-signature X = is-model (type-Set X)
+  is-model-set-Model-Of-Signature :
+    is-model-of-signature σ set-Model-Of-Signature
+  is-model-set-Model-Of-Signature = pr2 X
 
-  Model-Signature : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Model-Signature l2 = Σ (Set l2) (λ X → is-model-signature X)
+  type-Model-Of-Signature : UU l2
+  type-Model-Of-Signature = type-Set set-Model-Of-Signature
 
-  set-Model-Signature : {l2 : Level} → Model-Signature l2 → Set l2
-  set-Model-Signature M = pr1 M
-
-  is-model-set-Model-Signature :
-    {l2 : Level} →
-    (M : Model-Signature l2) →
-    is-model-signature (set-Model-Signature M)
-  is-model-set-Model-Signature M = pr2 M
-
-  type-Model-Signature : {l2 : Level} → Model-Signature l2 → UU l2
-  type-Model-Signature M = pr1 (set-Model-Signature M)
-
-  is-set-type-Model-Signature :
-    {l2 : Level} →
-    (M : Model-Signature l2) →
-    is-set (type-Model-Signature M)
-  is-set-type-Model-Signature M = pr2 (set-Model-Signature M)
+  is-set-type-Model-Of-Signature : is-set type-Model-Of-Signature
+  is-set-type-Model-Of-Signature = is-set-type-Set set-Model-Of-Signature
 ```

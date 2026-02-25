@@ -12,20 +12,18 @@ module elementary-number-theory.positive-rational-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.equality-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
-open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.nonzero-rational-numbers
-open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
@@ -190,6 +188,9 @@ abstract
 ```agda
 positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
 positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
+
+two-ℚ⁺ : ℚ⁺
+two-ℚ⁺ = positive-rational-ℕ⁺ (2 , λ ())
 ```
 
 ### The rational image of a positive integer fraction is positive
@@ -232,7 +233,7 @@ abstract
 
 ```agda
 module _
-  (x y : ℚ) (H : le-ℚ x y)
+  {x y : ℚ} (H : le-ℚ x y)
   where
 
   abstract
@@ -281,13 +282,20 @@ nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ```agda
 abstract
   is-positive-leq-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-leq-ℚ⁺ (p , pos-p) q p≤q =
+    (p : ℚ⁺) {q : ℚ} → leq-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-leq-ℚ⁺ (p , pos-p) p≤q =
     is-positive-le-zero-ℚ
       ( concatenate-le-leq-ℚ _ _ _ (le-zero-is-positive-ℚ pos-p) p≤q)
 
   is-positive-le-ℚ⁺ :
-    (p : ℚ⁺) (q : ℚ) → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
-  is-positive-le-ℚ⁺ p q p<q =
-    is-positive-leq-ℚ⁺ p q (leq-le-ℚ p<q)
+    (p : ℚ⁺) {q : ℚ} → le-ℚ (rational-ℚ⁺ p) q → is-positive-ℚ q
+  is-positive-le-ℚ⁺ p p<q = is-positive-leq-ℚ⁺ p (leq-le-ℚ p<q)
+```
+
+### Equality on the positive rational numbers is decidable
+
+```agda
+has-decidable-equality-ℚ⁺ : has-decidable-equality ℚ⁺
+has-decidable-equality-ℚ⁺ =
+  has-decidable-equality-subtype is-positive-prop-ℚ has-decidable-equality-ℚ
 ```

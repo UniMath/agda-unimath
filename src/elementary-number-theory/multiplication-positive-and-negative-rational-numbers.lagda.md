@@ -21,6 +21,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 ```
@@ -168,4 +169,33 @@ abstract
                     is-pos-xy)))
             ( y≠0)
             ( λ is-pos-y → inr (is-pos-x , is-pos-y)))
+```
+
+### If `xy` is negative, one of `x` and `y` is positive and the other negative
+
+```agda
+abstract
+  different-signs-is-negative-mul-ℚ :
+    {x y : ℚ} → is-negative-ℚ (x *ℚ y) →
+    ( ( is-positive-ℚ x × is-negative-ℚ y) +
+      ( is-negative-ℚ x × is-positive-ℚ y))
+  different-signs-is-negative-mul-ℚ {x} {y} is-neg-xy =
+    map-coproduct
+      ( λ (is-neg-neg-x , is-neg-y) →
+        ( tr
+            ( is-positive-ℚ)
+            ( neg-neg-ℚ x)
+            ( is-positive-neg-is-negative-ℚ is-neg-neg-x) ,
+          is-neg-y))
+      ( λ (is-pos-neg-x , is-pos-y) →
+        ( tr
+            ( is-negative-ℚ)
+            ( neg-neg-ℚ x)
+            ( is-negative-neg-is-positive-ℚ is-pos-neg-x) ,
+          is-pos-y))
+      ( same-sign-is-positive-mul-ℚ
+        ( inv-tr
+          ( is-positive-ℚ)
+          ( left-negative-law-mul-ℚ x y)
+          ( is-positive-neg-is-negative-ℚ is-neg-xy)))
 ```

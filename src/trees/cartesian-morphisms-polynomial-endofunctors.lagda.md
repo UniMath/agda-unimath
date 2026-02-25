@@ -17,7 +17,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -47,6 +46,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences-arrows
 open import foundation-core.retractions
 open import foundation-core.torsorial-type-families
 
@@ -61,7 +61,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, a
+$P ≐ (A \mathbin{◃} B)$ and $Q ≐ (C \mathbin{◃} D)$, a
 [morphism](trees.morphisms-polynomial-endofunctors.md) $α : P → Q$ is
 {{#concept "cartesian" Disambiguation="morphism of polynomial endofunctors of types" Agda=is-cartesian-hom-polynomial-endofunctor Agda=cartesian-hom-polynomial-endofunctor}}
 if the family of maps

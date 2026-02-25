@@ -200,6 +200,13 @@ module _
   right-subtraction-Commutative-Ring =
     right-subtraction-Ring ring-Commutative-Ring
 
+  ap-right-subtraction-Commutative-Ring :
+    {x x' y y' : type-Commutative-Ring} → x ＝ x' → y ＝ y' →
+    right-subtraction-Commutative-Ring x y ＝
+    right-subtraction-Commutative-Ring x' y'
+  ap-right-subtraction-Commutative-Ring =
+    ap-right-subtraction-Ring ring-Commutative-Ring
+
   is-section-right-subtraction-Commutative-Ring :
     (x : type-Commutative-Ring) →
     ( add-Commutative-Ring' x ∘
@@ -576,74 +583,6 @@ module _
     right-distributive-mul-right-subtraction-Ring ring-Commutative-Ring
 ```
 
-### Scalar multiplication of elements of a commutative ring by natural numbers
-
-```agda
-  mul-nat-scalar-Commutative-Ring :
-    ℕ → type-Commutative-Ring → type-Commutative-Ring
-  mul-nat-scalar-Commutative-Ring =
-    mul-nat-scalar-Ring ring-Commutative-Ring
-
-  ap-mul-nat-scalar-Commutative-Ring :
-    {m n : ℕ} {x y : type-Commutative-Ring} →
-    (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Commutative-Ring m x ＝
-    mul-nat-scalar-Commutative-Ring n y
-  ap-mul-nat-scalar-Commutative-Ring =
-    ap-mul-nat-scalar-Ring ring-Commutative-Ring
-
-  left-zero-law-mul-nat-scalar-Commutative-Ring :
-    (x : type-Commutative-Ring) →
-    mul-nat-scalar-Commutative-Ring 0 x ＝ zero-Commutative-Ring
-  left-zero-law-mul-nat-scalar-Commutative-Ring =
-    left-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
-
-  right-zero-law-mul-nat-scalar-Commutative-Ring :
-    (n : ℕ) →
-    mul-nat-scalar-Commutative-Ring n zero-Commutative-Ring ＝
-    zero-Commutative-Ring
-  right-zero-law-mul-nat-scalar-Commutative-Ring =
-    right-zero-law-mul-nat-scalar-Ring ring-Commutative-Ring
-
-  left-unit-law-mul-nat-scalar-Commutative-Ring :
-    (x : type-Commutative-Ring) →
-    mul-nat-scalar-Commutative-Ring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Commutative-Ring =
-    left-unit-law-mul-nat-scalar-Ring ring-Commutative-Ring
-
-  left-nat-scalar-law-mul-Commutative-Ring :
-    (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-Commutative-Ring (mul-nat-scalar-Commutative-Ring n x) y ＝
-    mul-nat-scalar-Commutative-Ring n (mul-Commutative-Ring x y)
-  left-nat-scalar-law-mul-Commutative-Ring =
-    left-nat-scalar-law-mul-Ring ring-Commutative-Ring
-
-  right-nat-scalar-law-mul-Commutative-Ring :
-    (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-Commutative-Ring x (mul-nat-scalar-Commutative-Ring n y) ＝
-    mul-nat-scalar-Commutative-Ring n (mul-Commutative-Ring x y)
-  right-nat-scalar-law-mul-Commutative-Ring =
-    right-nat-scalar-law-mul-Ring ring-Commutative-Ring
-
-  left-distributive-mul-nat-scalar-add-Commutative-Ring :
-    (n : ℕ) (x y : type-Commutative-Ring) →
-    mul-nat-scalar-Commutative-Ring n (add-Commutative-Ring x y) ＝
-    add-Commutative-Ring
-      ( mul-nat-scalar-Commutative-Ring n x)
-      ( mul-nat-scalar-Commutative-Ring n y)
-  left-distributive-mul-nat-scalar-add-Commutative-Ring =
-    left-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
-
-  right-distributive-mul-nat-scalar-add-Commutative-Ring :
-    (m n : ℕ) (x : type-Commutative-Ring) →
-    mul-nat-scalar-Commutative-Ring (m +ℕ n) x ＝
-    add-Commutative-Ring
-      ( mul-nat-scalar-Commutative-Ring m x)
-      ( mul-nat-scalar-Commutative-Ring n x)
-  right-distributive-mul-nat-scalar-add-Commutative-Ring =
-    right-distributive-mul-nat-scalar-add-Ring ring-Commutative-Ring
-```
-
 ### Addition of a list of elements in a commutative ring
 
 ```agda
@@ -658,4 +597,21 @@ module _
       ( add-list-Commutative-Ring l2)
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
+```
+
+### The sum of `x - y` and `y - z` is `x - z`
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  add-right-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring R) →
+    add-Commutative-Ring R
+      ( right-subtraction-Commutative-Ring R x y)
+      ( right-subtraction-Commutative-Ring R y z) ＝
+    right-subtraction-Commutative-Ring R x z
+  add-right-subtraction-Commutative-Ring =
+    add-right-subtraction-Ab (ab-Commutative-Ring R)
 ```

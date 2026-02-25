@@ -1,6 +1,8 @@
 # Large abelian groups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module group-theory.large-abelian-groups where
 ```
 
@@ -12,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.universe-levels
@@ -54,6 +57,13 @@ record Large-Ab (α : Level → Level) (β : Level → Level → Level) : UUω w
     type-Large-Ab (l1 ⊔ l2)
   add-Large-Ab = mul-Large-Group large-group-Large-Ab
 
+  ap-add-Large-Ab :
+    {l1 l2 : Level} {x x' : type-Large-Ab l1} → x ＝ x' →
+    {y y' : type-Large-Ab l2} → y ＝ y' →
+    add-Large-Ab x y ＝ add-Large-Ab x' y'
+  ap-add-Large-Ab =
+    ap-mul-Large-Group large-group-Large-Ab
+
   zero-Large-Ab : type-Large-Ab lzero
   zero-Large-Ab = unit-Large-Group large-group-Large-Ab
 
@@ -62,7 +72,7 @@ record Large-Ab (α : Level → Level) (β : Level → Level → Level) : UUω w
 
   field
     commutative-add-Large-Ab :
-      {l1 l2 : Level} → (x : type-Large-Ab l1) → (y : type-Large-Ab l2) →
+      {l1 l2 : Level} (x : type-Large-Ab l1) (y : type-Large-Ab l2) →
       add-Large-Ab x y ＝ add-Large-Ab y x
 
 open Large-Ab public
@@ -76,6 +86,11 @@ open Large-Ab public
 module _
   {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
   where
+
+  large-similarity-relation-Large-Ab :
+    Large-Similarity-Relation β (type-Large-Ab G)
+  large-similarity-relation-Large-Ab =
+    large-similarity-relation-Large-Group (large-group-Large-Ab G)
 
   sim-prop-Large-Ab : Large-Relation-Prop β (type-Large-Ab G)
   sim-prop-Large-Ab = sim-prop-Large-Group (large-group-Large-Ab G)
@@ -98,6 +113,17 @@ module _
     sim-Large-Ab y z → sim-Large-Ab x y → sim-Large-Ab x z
   transitive-sim-Large-Ab =
     transitive-sim-Large-Group (large-group-Large-Ab G)
+
+  sim-eq-Large-Ab :
+    {l : Level} {x y : type-Large-Ab G l} →
+    x ＝ y → sim-Large-Ab x y
+  sim-eq-Large-Ab = sim-eq-Large-Group (large-group-Large-Ab G)
+
+  eq-sim-Large-Ab :
+    {l : Level} {x y : type-Large-Ab G l} →
+    sim-Large-Ab x y → x ＝ y
+  eq-sim-Large-Ab {x = x} {y = y} =
+    eq-sim-Large-Group (large-group-Large-Ab G) x y
 ```
 
 ### Raising universe levels
@@ -167,9 +193,80 @@ module _
     raise-zero-Large-Ab lzero ＝ zero-Large-Ab G
   raise-unit-lzero-Large-Ab =
     raise-unit-lzero-Large-Group (large-group-Large-Ab G)
+
+  preserves-sim-left-add-Large-Ab :
+    {l1 l2 l3 : Level} →
+    (y : type-Large-Ab G l1) →
+    (x : type-Large-Ab G l2) (x' : type-Large-Ab G l3) →
+    sim-Large-Ab G x x' →
+    sim-Large-Ab G (add-Large-Ab G x y) (add-Large-Ab G x' y)
+  preserves-sim-left-add-Large-Ab =
+    preserves-sim-left-mul-Large-Group (large-group-Large-Ab G)
+
+  preserves-sim-right-add-Large-Ab :
+    {l1 l2 l3 : Level} →
+    (x : type-Large-Ab G l1) →
+    (y : type-Large-Ab G l2) (y' : type-Large-Ab G l3) →
+    sim-Large-Ab G y y' →
+    sim-Large-Ab G (add-Large-Ab G x y) (add-Large-Ab G x y')
+  preserves-sim-right-add-Large-Ab =
+    preserves-sim-right-mul-Large-Group (large-group-Large-Ab G)
 ```
 
-### The negative of the identity is the identity
+### Similarity reasoning on large abelian groups
+
+```agda
+module
+  similarity-reasoning-Large-Ab
+    {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  open similarity-reasoning-Large-Group (large-group-Large-Ab G) public
+```
+
+### Group properties of large abelian groups
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  associative-add-Large-Ab :
+    {l1 l2 l3 : Level} →
+    (a : type-Large-Ab G l1) →
+    (b : type-Large-Ab G l2) →
+    (c : type-Large-Ab G l3) →
+    add-Large-Ab G (add-Large-Ab G a b) c ＝
+    add-Large-Ab G a (add-Large-Ab G b c)
+  associative-add-Large-Ab =
+    associative-mul-Large-Group (large-group-Large-Ab G)
+
+  left-unit-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G (zero-Large-Ab G) x ＝ x
+  left-unit-law-add-Large-Ab =
+    left-unit-law-mul-Large-Group (large-group-Large-Ab G)
+
+  right-unit-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G x (zero-Large-Ab G) ＝ x
+  right-unit-law-add-Large-Ab =
+    right-unit-law-mul-Large-Group (large-group-Large-Ab G)
+
+  left-inverse-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G (neg-Large-Ab G x) x ＝ raise-zero-Large-Ab G l
+  left-inverse-law-add-Large-Ab =
+    left-inverse-law-mul-Large-Group (large-group-Large-Ab G)
+
+  right-inverse-law-add-Large-Ab :
+    {l : Level} (x : type-Large-Ab G l) →
+    add-Large-Ab G x (neg-Large-Ab G x) ＝ raise-zero-Large-Ab G l
+  right-inverse-law-add-Large-Ab =
+    right-inverse-law-mul-Large-Group (large-group-Large-Ab G)
+```
+
+### The negation of the identity is the identity
 
 ```agda
 module _
@@ -227,7 +324,7 @@ module _
       add-Large-Ab G (neg-Large-Ab G x) (neg-Large-Ab G y)
     distributive-neg-add-Large-Ab x y =
       ( distributive-inv-mul-Large-Group (large-group-Large-Ab G) x y) ∙
-      ( commutative-add-Large-Ab G _ _)
+      ( commutative-add-Large-Ab G (neg-Large-Ab G y) (neg-Large-Ab G x))
 ```
 
 ### Negation is an involution
@@ -395,4 +492,69 @@ module _
   emb-right-add-Large-Ab : type-Large-Ab G l2 ↪ type-Large-Ab G (l1 ⊔ l2)
   emb-right-add-Large-Ab =
     emb-right-mul-Large-Group (large-group-Large-Ab G) l2 x
+```
+
+### The raise operation is an abelian group homomorphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  (l1 l2 : Level)
+  where
+
+  hom-raise-Large-Ab :
+    hom-Ab
+      ( ab-Large-Ab G l1)
+      ( ab-Large-Ab G (l1 ⊔ l2))
+  hom-raise-Large-Ab = hom-raise-Large-Group (large-group-Large-Ab G) l1 l2
+```
+
+### If `x + x ＝ x`, `x` is similar to 0
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  abstract
+    sim-zero-is-idempotent-add-Large-Ab :
+      {l : Level} (x : type-Large-Ab G l) →
+      add-Large-Ab G x x ＝ x →
+      sim-Large-Ab G x (zero-Large-Ab G)
+    sim-zero-is-idempotent-add-Large-Ab {l} x x+x=x =
+      let
+        open similarity-reasoning-Large-Ab G
+      in
+        similarity-reasoning
+          x
+          ~ add-Large-Ab G x (zero-Large-Ab G)
+            by sim-eq-Large-Ab G (inv (right-unit-law-add-Large-Ab G x))
+          ~ add-Large-Ab G x (raise-zero-Large-Ab G l)
+            by
+              preserves-sim-right-add-Large-Ab G _ _ _
+                ( sim-raise-Large-Ab G _ _)
+          ~ add-Large-Ab G x (add-Large-Ab G x (neg-Large-Ab G x))
+            by
+              sim-eq-Large-Ab G
+                ( ap-add-Large-Ab G
+                  ( refl)
+                  ( inv (right-inverse-law-add-Large-Ab G x)))
+          ~ add-Large-Ab G (add-Large-Ab G x x) (neg-Large-Ab G x)
+            by sim-eq-Large-Ab G (inv (associative-add-Large-Ab G _ _ _))
+          ~ add-Large-Ab G x (neg-Large-Ab G x)
+            by sim-eq-Large-Ab G (ap-add-Large-Ab G x+x=x refl)
+          ~ raise-zero-Large-Ab G l
+            by sim-eq-Large-Ab G (right-inverse-law-add-Large-Ab G x)
+          ~ zero-Large-Ab G
+            by sim-raise-Large-Ab' G _ _
+
+    eq-zero-is-idempotent-add-Large-Ab :
+      {l : Level} (x : type-Large-Ab G l) →
+      add-Large-Ab G x x ＝ x →
+      x ＝ raise-zero-Large-Ab G l
+    eq-zero-is-idempotent-add-Large-Ab {l} x x+x=x =
+      eq-sim-Large-Ab G
+        ( transitive-sim-Large-Ab G _ _ _
+          ( sim-raise-Large-Ab G l (zero-Large-Ab G))
+          ( sim-zero-is-idempotent-add-Large-Ab x x+x=x))
 ```

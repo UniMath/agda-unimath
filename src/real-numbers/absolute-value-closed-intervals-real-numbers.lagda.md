@@ -49,10 +49,8 @@ abstract
     leq-ℝ (abs-ℝ z) (max-abs-closed-interval-ℝ [x,y])
   leq-max-abs-is-in-closed-interval-ℝ ((x , y) , x≤y) z (x≤z , z≤y) =
     leq-abs-leq-leq-neg-ℝ
-      ( z)
-      ( max-ℝ (neg-ℝ x) y)
       ( transitive-leq-ℝ _ _ _ (leq-right-max-ℝ _ _) z≤y)
-      ( transitive-leq-ℝ _ _ _ (leq-left-max-ℝ _ _) (neg-leq-ℝ _ _ x≤z))
+      ( transitive-leq-ℝ _ _ _ (leq-left-max-ℝ _ _) (neg-leq-ℝ x≤z))
 ```
 
 ### The maximum absolute value of an interval is nonnegative

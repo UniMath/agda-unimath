@@ -1,6 +1,8 @@
 # Multiplication of interior intervals of closed intervals of rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.multiplication-interior-closed-intervals-rational-numbers where
 ```
 
@@ -325,12 +327,10 @@ abstract
                 ( a'<b')
                 ( c'<d')
                 ( min'=a'c')
-            is-pos-b' =
-              is-positive-le-ℚ⁰⁺ (a' , is-nonneg-a') b' a'<b'
-            is-pos-b = is-positive-le-ℚ⁺ (b' , is-pos-b') b b'<b
-            is-pos-d' =
-              is-positive-le-ℚ⁰⁺ (c' , is-nonneg-c') d' c'<d'
-            is-pos-d = is-positive-le-ℚ⁺ (d' , is-pos-d') d d'<d
+            is-pos-b' = is-positive-le-ℚ⁰⁺ (a' , is-nonneg-a') a'<b'
+            is-pos-b = is-positive-le-ℚ⁺ (b' , is-pos-b') b'<b
+            is-pos-d' = is-positive-le-ℚ⁰⁺ (c' , is-nonneg-c') c'<d'
+            is-pos-d = is-positive-le-ℚ⁺ (d' , is-pos-d') d'<d
             is-nonneg-min' =
               inv-tr
                 ( is-nonnegative-ℚ)
@@ -377,11 +377,7 @@ abstract
                         ( le-ℚ (a *ℚ c'))
                         ( min'=a'c')
                         ( preserves-le-right-mul-ℚ⁺
-                          ( c' ,
-                            is-positive-le-ℚ⁰⁺
-                              ( c , is-nonneg-c)
-                              ( c')
-                              ( c<c'))
+                          ( c' , is-positive-le-ℚ⁰⁺ (c , is-nonneg-c) c<c')
                           ( a)
                           ( a')
                           ( a<a'))))
@@ -403,10 +399,8 @@ abstract
                 ( a'<b')
                 ( c'<d')
                 ( min'=a'd')
-            is-neg-a =
-              is-negative-le-ℚ⁰⁻ (a' , is-nonpos-a') a a<a'
-            is-pos-d =
-              is-positive-le-ℚ⁰⁺ (d' , is-nonneg-d') d d'<d
+            is-neg-a = is-negative-le-ℚ⁰⁻ (a' , is-nonpos-a') a<a'
+            is-pos-d = is-positive-le-ℚ⁰⁺ (d' , is-nonneg-d') d'<d
           in
             concatenate-leq-le-ℚ
               ( min)
@@ -444,8 +438,8 @@ abstract
                 ( a'<b')
                 ( c'<d')
                 ( min'=b'c')
-            is-pos-b = is-positive-le-ℚ⁰⁺ (b' , is-nonneg-b') b b'<b
-            is-neg-c = is-negative-le-ℚ⁰⁻ (c' , is-nonpos-c') c c<c'
+            is-pos-b = is-positive-le-ℚ⁰⁺ (b' , is-nonneg-b') b'<b
+            is-neg-c = is-negative-le-ℚ⁰⁻ (c' , is-nonpos-c') c<c'
           in
             concatenate-le-leq-ℚ
               ( min)
@@ -481,12 +475,10 @@ abstract
                 ( a'<b')
                 ( c'<d')
                 ( min'=b'd')
-            is-neg-a' =
-              is-negative-le-ℚ⁰⁻ (b' , is-nonpos-b') a' a'<b'
-            is-neg-a = is-negative-le-ℚ⁻ (a' , is-neg-a') a a<a'
-            is-neg-c' =
-              is-negative-le-ℚ⁰⁻ (d' , is-nonpos-d') c' c'<d'
-            is-neg-c = is-negative-le-ℚ⁻ (c' , is-neg-c') c c<c'
+            is-neg-a' = is-negative-le-ℚ⁰⁻ (b' , is-nonpos-b') a'<b'
+            is-neg-a = is-negative-le-ℚ⁻ (a' , is-neg-a') a<a'
+            is-neg-c' = is-negative-le-ℚ⁰⁻ (d' , is-nonpos-d') c'<d'
+            is-neg-c = is-negative-le-ℚ⁻ (c' , is-neg-c') c<c'
             is-nonneg-min' =
               inv-tr
                 ( is-nonnegative-ℚ)
@@ -533,11 +525,7 @@ abstract
                           ( le-ℚ (b' *ℚ d))
                           ( min'=b'd')
                           ( reverses-le-left-mul-ℚ⁻
-                            ( b' ,
-                              is-negative-le-ℚ⁰⁻
-                                ( b , is-nonpos-b)
-                                ( b')
-                                ( b'<b))
+                            ( b' , is-negative-le-ℚ⁰⁻ (b , is-nonpos-b) b'<b)
                             ( d')
                             ( d)
                             ( d'<d)))))

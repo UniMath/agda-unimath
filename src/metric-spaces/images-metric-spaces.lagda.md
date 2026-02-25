@@ -10,7 +10,7 @@ module metric-spaces.images-metric-spaces where
 open import foundation.images
 open import foundation.universe-levels
 
-open import metric-spaces.functions-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.subspaces-metric-spaces
 ```
@@ -19,7 +19,7 @@ open import metric-spaces.subspaces-metric-spaces
 
 ## Idea
 
-Given a [function](metric-spaces.functions-metric-spaces.md) between
+Given a [map](metric-spaces.maps-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) `f : X → Y`, the
 [image](foundation.images.md) of `X` under `f` is a
 [subspace](metric-spaces.subspaces-metric-spaces.md) of `Y`.
@@ -29,7 +29,7 @@ Given a [function](metric-spaces.functions-metric-spaces.md) between
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
   where
 
   im-Metric-Space : Metric-Space (l1 ⊔ l3) l4

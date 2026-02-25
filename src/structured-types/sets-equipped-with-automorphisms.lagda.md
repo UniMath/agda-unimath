@@ -19,9 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **set equipped with an automorphism** is a pair consisting of a
-[set](foundation.sets.md) `A` and an [automorphism](foundation.automorphisms.md)
-on `e : A ≃ A`.
+A {{#concept "set equipped with an automorphism" Agda=Set-With-Automorphism}} is
+a pair consisting of a [set](foundation.sets.md) `A` and an
+[automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
 
 ## Definitions
 

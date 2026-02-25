@@ -46,7 +46,7 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [polynomial endofunctors](trees.polynomial-endofunctors.md)
-$P ≐ (A ◃ B)$ and $Q ≐ (C ◃ D)$, a
+$P ≐ (A \mathbin{◃} B)$ and $Q ≐ (C \mathbin{◃} D)$, a
 {{#concept "natural transformation" Disambiguation="of polynomial endofunctors of types" Agda=natural-transformation-polynomial-endofunctor}}
 $α$ from $P$ to $Q$ is a family of maps $α : (X : Type) → P(X) → Q(X)$ such that
 for every map of types $f : X → Y$, the following square commutes

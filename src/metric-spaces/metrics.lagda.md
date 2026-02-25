@@ -1,6 +1,8 @@
 # Metrics
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module metric-spaces.metrics where
 ```
 
@@ -36,11 +38,17 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.saturation-inequality-nonnegative-real-numbers
+open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>
@@ -48,7 +56,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 A {{#concept "metric" WDID=Q865746 WD="metric function" Agda=Metric}} on a
-[set](foundation.sets.md) `X` is a function `d` from two elements of `X` to the
+[set](foundation.sets.md) `X` is a binary function on `X` into the
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) with the
 following properties:
 
@@ -74,7 +82,7 @@ module _
 
   is-reflexive-prop-distance-function : Prop (l1 ⊔ l2)
   is-reflexive-prop-distance-function =
-    Π-Prop (type-Set X) (λ x → sim-zero-prop-ℝ⁰⁺ (d x x))
+    Π-Prop (type-Set X) (λ x → is-zero-prop-ℝ⁰⁺ (d x x))
 
   is-reflexive-distance-function : UU (l1 ⊔ l2)
   is-reflexive-distance-function = type-Prop is-reflexive-prop-distance-function
@@ -115,7 +123,7 @@ module _
         Π-Prop
           ( type-Set X)
           ( λ y →
-            hom-Prop (sim-zero-prop-ℝ⁰⁺ (d x y)) (Id-Prop X x y)))
+            hom-Prop (is-zero-prop-ℝ⁰⁺ (d x y)) (Id-Prop X x y)))
 
   is-extensional-distance-function : UU (l1 ⊔ l2)
   is-extensional-distance-function =
@@ -141,7 +149,7 @@ module _
   dist-Metric : distance-function l2 X
   dist-Metric = pr1 μ
 
-  is-reflexive-dist-Metric : (x : type-Set X) → sim-zero-ℝ⁰⁺ (dist-Metric x x)
+  is-reflexive-dist-Metric : (x : type-Set X) → is-zero-ℝ⁰⁺ (dist-Metric x x)
   is-reflexive-dist-Metric = pr1 (pr2 μ)
 
   is-symmetric-dist-Metric :
@@ -154,7 +162,7 @@ module _
   is-triangular-dist-Metric = pr1 (pr2 (pr2 (pr2 μ)))
 
   is-extensional-dist-Metric :
-    (x y : type-Set X) → sim-zero-ℝ⁰⁺ (dist-Metric x y) → x ＝ y
+    (x y : type-Set X) → is-zero-ℝ⁰⁺ (dist-Metric x y) → x ＝ y
   is-extensional-dist-Metric = pr2 (pr2 (pr2 (pr2 μ)))
 ```
 
@@ -188,7 +196,7 @@ module _
         ( nonnegative-real-ℚ⁺ ε)
         ( zero-ℝ⁰⁺)
         ( dist-Metric X μ x x)
-        ( is-reflexive-dist-Metric X μ x)
+        ( symmetric-sim-ℝ (is-reflexive-dist-Metric X μ x))
         ( leq-zero-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))
 ```
 
@@ -291,7 +299,7 @@ module _
       is-tight-Pseudometric-Space (pseudometric-space-Metric X μ)
     is-tight-pseudometric-space-Metric x y H =
       is-extensional-dist-Metric X μ x y
-        ( sim-zero-le-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y) H)
+        ( is-zero-leq-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y) H)
 ```
 
 ### The pseudometric space induced by a metric is extensional
@@ -338,9 +346,7 @@ module _
         ( not-leq-le-ℝ
           ( real-ℚ⁺ δ)
           ( real-ℝ⁰⁺ (dist-Metric X μ x y)))
-        ( leq-le-ℝ
-          ( real-ℝ⁰⁺ (dist-Metric X μ x y))
-          ( real-ℚ⁺ ε))
+        ( leq-le-ℝ)
         ( is-located-le-ℝ
           ( real-ℝ⁰⁺ (dist-Metric X μ x y))
           ( rational-ℚ⁺ δ)
@@ -365,6 +371,6 @@ module _
       bounded-dist-Metric-Space (metric-space-Metric X μ) x y
     bounded-dist-metric-space-Metric x y =
       map-tot-exists
-        ( λ ε → leq-le-ℝ (real-ℝ⁰⁺ (dist-Metric X μ x y)) (real-ℚ⁺ ε))
+        ( λ ε → leq-le-ℝ)
         ( le-some-positive-rational-ℝ⁰⁺ (dist-Metric X μ x y))
 ```

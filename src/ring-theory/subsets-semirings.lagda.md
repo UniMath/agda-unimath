@@ -21,7 +21,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-A subset of a semiring is a subtype of the underlying type of a semiring
+A {{#concept "subset" Disambiguation="of a semiring" Agda=subset-Semiring}} of a
+[semiring](ring-theory.semirings.md) `R` is a [subtype](foundation.subtypes.md)
+of the underlying type of `R`.
 
 ## Definition
 

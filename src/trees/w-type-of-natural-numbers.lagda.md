@@ -29,14 +29,16 @@ open import trees.w-types
 
 ## Idea
 
-Since the type of natural numbers is an initial algebra for the polynomial
-endofunctor
+Since the type of [natural numbers](elementary-number-theory.natural-numbers.md)
+is an initial [algebra](trees.algebras-polynomial-endofunctors.md) for the
+[polynomial endofunctor](trees.polynomial-endofunctors.md)
 
 ```text
   X ↦ X + 𝟙,
 ```
 
-there is an equivalent definition of the natural numbers as a W-type.
+there is an [equivalent](foundation-core.equivalences.md) definition of the
+natural numbers as a [W-type](trees.w-types.md).
 
 ## Definition
 

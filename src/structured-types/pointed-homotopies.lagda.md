@@ -173,14 +173,23 @@ commutes.
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (G : unpointed-htpy-pointed-Π f g)
+  (f g : pointed-Π A B)
   where
 
-  coherence-point-unpointed-htpy-pointed-Π : UU l2
-  coherence-point-unpointed-htpy-pointed-Π =
+  coherence-point-unpointed-htpy-pointed-Π' :
+    function-pointed-Π f (point-Pointed-Type A) ＝
+    function-pointed-Π g (point-Pointed-Type A) →
+    UU l2
+  coherence-point-unpointed-htpy-pointed-Π' G =
     coherence-triangle-identifications
       ( preserves-point-function-pointed-Π f)
       ( preserves-point-function-pointed-Π g)
+      ( G)
+
+  coherence-point-unpointed-htpy-pointed-Π :
+    unpointed-htpy-pointed-Π f g → UU l2
+  coherence-point-unpointed-htpy-pointed-Π G =
+    coherence-point-unpointed-htpy-pointed-Π'
       ( G (point-Pointed-Type A))
 ```
 

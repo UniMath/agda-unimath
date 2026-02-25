@@ -34,8 +34,8 @@ open import trees.w-types
 
 ## Idea
 
-The W-type constructor acts functorially on `A` and `B`. It is covariant in `A`,
-and contravariant in `B`.
+The [W-type](trees.w-types.md) constructor acts functorially on `A` and `B`. It
+is covariant in `A`, and contravariant in `B`.
 
 ## Definition
 

@@ -26,6 +26,7 @@ open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
 
+open import ring-theory.multiples-of-elements-rings
 open import ring-theory.rings
 open import ring-theory.sums-of-finite-sequences-of-elements-semirings
 
@@ -252,6 +253,18 @@ module _
   is-linear-sum-fin-sequence-type-Ring =
     ( λ x y → inv (interchange-add-sum-fin-sequence-type-Ring R n x y)) ,
     ( λ c x → inv (left-distributive-mul-sum-fin-sequence-type-Ring R n c x))
+```
+
+### The sum of a constant finite sequence in a ring is scalar multiplication by the length of the sequence
+
+```agda
+abstract
+  sum-constant-fin-sequence-type-Ring :
+    {l : Level} (R : Ring l) (n : ℕ) (x : type-Ring R) →
+    sum-fin-sequence-type-Ring R n (λ _ → x) ＝
+    multiple-Ring R n x
+  sum-constant-fin-sequence-type-Ring R =
+    sum-constant-fin-sequence-type-Semiring ( semiring-Ring R)
 ```
 
 ## See also

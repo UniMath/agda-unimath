@@ -26,8 +26,8 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A **right ideal** in a [ring](ring-theory.rings.md) `R` is a right submodule of
-`R`.
+A {{#concept "right ideal" Disambiguation="in a ring" Agda=right-ideal-Ring}} in
+a [ring](ring-theory.rings.md) `R` is a right submodule of `R`.
 
 ## Definitions
 

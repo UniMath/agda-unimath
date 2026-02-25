@@ -25,7 +25,7 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.type-arithmetic-unit-type
@@ -132,10 +132,10 @@ module _
   is-null-retract :
     X retract-of Y → A retract-of B → is-null Y B → is-null X A
   is-null-retract e f =
-    is-equiv-retract-map-is-equiv
+    is-equiv-retract-arrow-is-equiv
       ( diagonal-exponential A X)
       ( diagonal-exponential B Y)
-      ( retract-map-diagonal-exponential-retract f e)
+      ( retract-arrow-diagonal-exponential-retract f e)
 
 module _
   {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}

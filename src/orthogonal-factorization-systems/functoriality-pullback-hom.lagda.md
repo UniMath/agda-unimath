@@ -25,7 +25,7 @@ open import foundation.morphisms-arrows
 open import foundation.morphisms-cospan-diagrams
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition

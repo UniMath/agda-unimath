@@ -77,12 +77,23 @@ one-ℕ⁺ : ℕ⁺
 one-ℕ⁺ = one-nonzero-ℕ
 ```
 
+### The nonzero natural number `2`
+
+```agda
+two-ℕ⁺ : ℕ⁺
+pr1 two-ℕ⁺ = 2
+pr2 two-ℕ⁺ ()
+```
+
 ### The successor function on the nonzero natural numbers
 
 ```agda
 succ-nonzero-ℕ : nonzero-ℕ → nonzero-ℕ
 pr1 (succ-nonzero-ℕ (x , _)) = succ-ℕ x
 pr2 (succ-nonzero-ℕ (x , _)) = is-nonzero-succ-ℕ x
+
+succ-ℕ⁺ : ℕ⁺ → ℕ⁺
+succ-ℕ⁺ = succ-nonzero-ℕ
 ```
 
 ### The successor function from the natural numbers to the nonzero natural numbers
@@ -139,8 +150,7 @@ _+ℕ⁺_ = add-nonzero-ℕ
 ```agda
 mul-nonzero-ℕ : nonzero-ℕ → nonzero-ℕ → nonzero-ℕ
 pr1 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) = p *ℕ q
-pr2 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) pq=0 =
-  rec-coproduct p≠0 q≠0 (is-zero-summand-is-zero-mul-ℕ p q pq=0)
+pr2 (mul-nonzero-ℕ (p , p≠0) (q , q≠0)) = is-nonzero-mul-ℕ p q p≠0 q≠0
 
 infixl 40 _*ℕ⁺_
 _*ℕ⁺_ : ℕ⁺ → ℕ⁺ → ℕ⁺

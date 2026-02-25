@@ -490,24 +490,24 @@ module _
 
   is-equiv-map-compute-cone-pullback-localization-global-subuniverse :
     is-in-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (domain-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (codomain-cospan-diagram 𝒮) →
     is-equiv map-compute-cone-pullback-localization-global-subuniverse
   is-equiv-map-compute-cone-pullback-localization-global-subuniverse x a b =
     is-equiv-map-Σ _
       ( up-localization-global-subuniverse LC
-        ( left-type-cospan-diagram 𝒮 , a))
+        ( domain-cospan-diagram 𝒮 , a))
       ( λ _ →
         is-equiv-map-Σ _
           ( up-localization-global-subuniverse LC
-            ( right-type-cospan-diagram 𝒮 , b))
+            ( codomain-cospan-diagram 𝒮 , b))
           ( λ _ →
             is-equiv-right-whisker-unit-localization-global-subuniverse 𝒫 LC x))
 
   is-in-global-subuniverse-pullback-localization-global-subuniverse :
     is-in-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (domain-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (codomain-cospan-diagram 𝒮) →
     is-in-global-subuniverse 𝒫 (domain-pullback-cone 𝒮 c)
   is-in-global-subuniverse-pullback-localization-global-subuniverse x a b =
     is-in-global-subuniverse-is-local-type-universal-property-localization-global-subuniverse
