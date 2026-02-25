@@ -107,7 +107,7 @@ is-projective : {l1 : Level} → UU l1 → UUω
 is-projective X = {l2 : Level} → is-projective-Level l2 X
 ```
 
-### The universe of set-projective sets
+### The universe of projective sets
 
 ```agda
 Projective-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
