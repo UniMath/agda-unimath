@@ -13,9 +13,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.empty-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
