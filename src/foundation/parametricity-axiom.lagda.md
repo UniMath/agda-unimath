@@ -75,12 +75,12 @@ module _
   {l : Level}
   where abstract
 
-  is-empty-map-bool-LEM : LEM l → UU l → bool
+  is-empty-map-bool-LEM : level-LEM l → UU l → bool
   is-empty-map-bool-LEM lem X =
     rec-coproduct (λ _ → true) (λ _ → false) (lem (is-empty-Prop X))
 
   compute-is-empty-map-bool-LEM-raise-empty :
-    (lem : LEM l) →
+    (lem : level-LEM l) →
     is-empty-map-bool-LEM lem (raise-empty l) ＝ true
   compute-is-empty-map-bool-LEM-raise-empty lem =
     ind-coproduct
@@ -90,7 +90,7 @@ module _
       ( lem (is-empty-Prop (raise-empty l)))
 
   compute-is-empty-map-bool-LEM-raise-unit :
-    (lem : LEM l) →
+    (lem : level-LEM l) →
     is-empty-map-bool-LEM lem (raise-unit l) ＝ false
   compute-is-empty-map-bool-LEM-raise-unit lem =
     ind-coproduct
@@ -107,7 +107,7 @@ module _
     ( htpy-eq (is-section-map-inv-equiv (const (UU l) , H) f) Y)
 
   no-LEM-is-parametric-bool :
-    is-parametric l bool → ¬ LEM l
+    is-parametric l bool → ¬ level-LEM l
   no-LEM-is-parametric-bool H lem =
     neq-true-false-bool
       ( ( inv (compute-is-empty-map-bool-LEM-raise-empty lem)) ∙
@@ -124,15 +124,13 @@ module _
 ```agda
 abstract
   no-LEM-level-Parametricity :
-    {l : Level} → level-Parametricity l → ¬ LEM l
+    {l : Level} → level-Parametricity l → ¬ level-LEM l
   no-LEM-level-Parametricity {l} H =
     no-LEM-is-parametric-bool
       ( is-parametric-equiv (compute-raise-bool l) (H {X = raise-bool l}))
 
-  no-LEM-Parametricity :
-    Parametricity → ¬ LEM lzero
-  no-LEM-Parametricity H =
-    no-LEM-level-Parametricity (H {l = lzero})
+  no-LEM-Parametricity : Parametricity → LEM → empty
+  no-LEM-Parametricity H lem = no-LEM-level-Parametricity {lzero} H lem
 ```
 
 ### Parametricity contradicts the axiom of choice
