@@ -62,9 +62,6 @@ metric space, `N d₂ x y` [or](foundation.disjunction.md)
 module metric-spaces where
 
 open import metric-spaces.accumulation-points-subsets-located-metric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-isometries-pseudometric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces public
-open import metric-spaces.action-on-cauchy-approximations-short-maps-pseudometric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-short-maps-metric-spaces public
 open import metric-spaces.action-on-cauchy-sequences-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.action-on-convergent-sequences-modulated-uniformly-continuous-maps-metric-spaces public
@@ -86,6 +83,8 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletion-of-pseudometric-spaces public
+open import metric-spaces.cauchy-approximations-metric-spaces public
+open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces public
