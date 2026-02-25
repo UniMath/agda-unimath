@@ -117,6 +117,7 @@ open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
 open import order-theory.order-preserving-maps-total-orders public
+open import order-theory.ordinal-of-natural-numbers public
 open import order-theory.ordinals public
 open import order-theory.poset-closed-intervals-lattices public
 open import order-theory.poset-closed-intervals-posets public
