@@ -1,4 +1,4 @@
-# Direct sums of left modules over rings
+# External direct sums of left modules over rings
 
 ```agda
 module linear-algebra.external-direct-sums-left-modules-rings where

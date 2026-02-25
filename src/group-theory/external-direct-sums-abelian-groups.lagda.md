@@ -1,4 +1,4 @@
-# Direct sums of Abelian groups
+# External direct sums of Abelian groups
 
 ```agda
 module group-theory.external-direct-sums-abelian-groups where
