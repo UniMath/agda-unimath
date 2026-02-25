@@ -33,6 +33,7 @@ open import order-theory.decidable-total-preorders public
 open import order-theory.decreasing-sequences-posets public
 open import order-theory.deflationary-maps-posets public
 open import order-theory.deflationary-maps-preorders public
+open import order-theory.decidable-terminal-segments-ordinals public
 open import order-theory.dependent-products-large-frames public
 open import order-theory.dependent-products-large-inflattices public
 open import order-theory.dependent-products-large-locales public
@@ -41,6 +42,7 @@ open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
 open import order-theory.dependent-products-large-suplattices public
 open import order-theory.distributive-lattices public
+open import order-theory.empty-terminal-segments-ordinals public
 open import order-theory.filters-posets public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
@@ -69,7 +71,6 @@ open import order-theory.inflattices public
 open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public
 open import order-theory.inhabited-finite-total-orders public
-open import order-theory.initial-segments-ordinals public
 open import order-theory.intersections-closed-intervals-lattices public
 open import order-theory.intersections-closed-intervals-total-orders public
 open import order-theory.interval-subposets public
@@ -119,6 +120,9 @@ open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
 open import order-theory.order-preserving-maps-total-orders public
 open import order-theory.ordinals public
+open import order-theory.ordinal-of-natural-numbers public
+open import order-theory.principal-or-empty-terminal-segments-ordinals public
+open import order-theory.principal-terminal-segments-ordinals public
 open import order-theory.poset-closed-intervals-lattices public
 open import order-theory.poset-closed-intervals-posets public
 open import order-theory.poset-closed-intervals-total-orders public
@@ -167,6 +171,9 @@ open import order-theory.top-elements-posets public
 open import order-theory.top-elements-preorders public
 open import order-theory.total-orders public
 open import order-theory.total-preorders public
+open import order-theory.tail-ordinals public
+open import order-theory.terminal-segments-ordinals public
+open import order-theory.trichotomous-ordinals public
 open import order-theory.transitive-well-founded-relations public
 open import order-theory.transposition-inequalities-along-order-preserving-retractions-posets public
 open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets public
