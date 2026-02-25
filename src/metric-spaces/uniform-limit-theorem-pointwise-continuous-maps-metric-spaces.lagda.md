@@ -223,7 +223,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (acω : level-ACℕ (l1 ⊔ l2 ⊔ l4))
+  (acℕ : level-ACℕ (l1 ⊔ l2 ⊔ l4))
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (u : sequence (map-Metric-Space X Y))
@@ -241,7 +241,7 @@ module _
     is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space
       L H =
       is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space
-        ( acω)
+        ( acℕ)
         ( X)
         ( Y)
         ( f)

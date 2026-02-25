@@ -19,6 +19,7 @@ open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -102,6 +103,37 @@ module _
 ```
 
 ## Properties
+
+### The moduli of uniform continuity of a map form a set
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  where
+
+  is-set-modulus-of-uniform-continuity-map-Metric-Space :
+    (f : map-Metric-Space X Y) →
+    is-set (modulus-of-uniform-continuity-map-Metric-Space X Y f)
+  is-set-modulus-of-uniform-continuity-map-Metric-Space f =
+    is-set-Σ
+      ( is-set-function-type is-set-ℚ⁺)
+      ( λ m →
+        is-set-is-prop
+          ( is-prop-type-Prop
+            ( is-modulus-of-uniform-continuity-prop-map-Metric-Space
+              ( X)
+              ( Y)
+              ( f)
+              ( m))))
+
+  modulus-of-uniform-continuity-set-map-Metric-Space :
+    (f : map-Metric-Space X Y) → Set (l1 ⊔ l2 ⊔ l4)
+  modulus-of-uniform-continuity-set-map-Metric-Space f =
+    ( modulus-of-uniform-continuity-map-Metric-Space X Y f ,
+      is-set-modulus-of-uniform-continuity-map-Metric-Space f)
+```
 
 ### The identity map is uniformly continuous
 
