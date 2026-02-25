@@ -1,7 +1,7 @@
 # Direct sums of Abelian groups
 
 ```agda
-module group-theory.direct-sums-abelian-groups where
+module group-theory.external-direct-sums-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -31,10 +31,8 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.dependent-products-abelian-groups
 open import group-theory.full-subgroups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.subgroups-abelian-groups
-open import group-theory.subsets-abelian-groups
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
@@ -44,12 +42,13 @@ open import univalent-combinatorics.finitely-enumerable-types
 
 ## Idea
 
-The
+The external
 {{#concept "direct sum" WDID=Q13582243 WD="direct sum" Disambiguation="of a family of abelian groups" Agda=∑-Ab}}
 of a family of [abelian groups](group-theory.abelian-groups.md) `Gᵢ` indexed by
 a type `I` is the [subgroup](group-theory.subgroups-abelian-groups.md) of the
 [dependent product](group-theory.dependent-products-abelian-groups.md) of the
-`Gᵢ` containing those elements `f : I → Gᵢ` such that `f` is zero except on a
+`Gᵢ` containing those elements `f : I → Gᵢ` such that `f` is zero except
+possibly on a
 [finitely enumerable subtype](univalent-combinatorics.finitely-enumerable-subtypes.md)
 of `I`.
 

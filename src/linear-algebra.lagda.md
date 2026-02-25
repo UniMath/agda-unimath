@@ -20,6 +20,7 @@ open import linear-algebra.dependent-products-left-modules-commutative-rings pub
 open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
+open import linear-algebra.external-direct-sums-left-modules-rings public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public

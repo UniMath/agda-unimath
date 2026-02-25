@@ -44,6 +44,9 @@ module _
   type-Π-left-module-Ring : UU (l2 ⊔ l3)
   type-Π-left-module-Ring = type-Ab ab-Π-left-module-Ring
 
+  zero-Π-left-module-Ring : type-Π-left-module-Ring
+  zero-Π-left-module-Ring = zero-Ab ab-Π-left-module-Ring
+
   add-Π-left-module-Ring :
     type-Π-left-module-Ring → type-Π-left-module-Ring → type-Π-left-module-Ring
   add-Π-left-module-Ring = add-Ab ab-Π-left-module-Ring
