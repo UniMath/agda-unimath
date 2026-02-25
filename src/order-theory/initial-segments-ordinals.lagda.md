@@ -19,7 +19,6 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.similarity-subtypes
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.accessible-elements-relations
@@ -224,6 +223,8 @@ module _
 ```
 
 ### The well-founded relation on the type of initial segments
+
+<!-- TODO this may not exist -->
 
 ```agda
 module _
