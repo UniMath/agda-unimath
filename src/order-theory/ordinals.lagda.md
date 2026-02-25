@@ -124,6 +124,12 @@ module _
   is-irreflexive-le-Ordinal =
     is-irreflexive-le-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
+
+  ind-Ordinal :
+    {l3 : Level} (P : type-Ordinal → UU l3) →
+    ({x : type-Ordinal} → ({u : type-Ordinal} → le-Ordinal u x → P u) → P x) →
+    (x : type-Ordinal) → P x
+  ind-Ordinal = ind-Well-Founded-Relation well-founded-relation-Ordinal
 ```
 
 The associated reflexive relation on an ordinal.
