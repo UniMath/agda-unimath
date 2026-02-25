@@ -60,8 +60,8 @@ choice function
 
 $$ ((x : X) → ║P(x)║₋₁) → ║(x : X) → P(x)║₋₁$$
 
-for every type family $P$. This condition is stronger than set-projectivity,
-unless $X$ is a set.
+for every type family $P$. This condition might be stronger than
+set-projectivity when $X$ is not a set.
 
 ## Definitions
 
