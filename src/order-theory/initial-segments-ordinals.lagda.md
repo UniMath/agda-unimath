@@ -7,8 +7,8 @@ module order-theory.initial-segments-ordinals where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
@@ -413,7 +413,7 @@ module _
       ( extensionality-has-same-elements-initial-segment-Ordinal α I J)
       ( λ x →
         ( ( λ x∈I →
-            is-in-le-inclusion-initial-segment-Ordinal J  x
+            is-in-le-inclusion-initial-segment-Ordinal J x
               ( pr1
                 ( H (inclusion-initial-segment-Ordinal α x))
                 ( le-inclusion-initial-segment-Ordinal I x x∈I))) ,

@@ -11,8 +11,8 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ordinal-induction-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
-open import foundation.coproduct-types
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -21,8 +21,8 @@ open import foundation.universe-levels
 
 open import order-theory.accessible-elements-relations
 open import order-theory.ordinals
-open import order-theory.trichotomous-ordinals
 open import order-theory.transitive-well-founded-relations
+open import order-theory.trichotomous-ordinals
 open import order-theory.well-founded-relations
 ```
 
