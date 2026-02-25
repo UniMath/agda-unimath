@@ -11,11 +11,13 @@ module set-theory.weak-limited-principle-of-omniscience-increasing-binary-sequen
 ```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.type-arithmetic-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-equality
+open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
@@ -28,11 +30,16 @@ open import foundation.logical-equivalences
 open import foundation.logical-operations-booleans
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
 
 open import foundation-core.identity-types
 
+open import logic.double-negation-dense-maps
+open import logic.double-negation-eliminating-maps
+
+open import set-theory.inclusion-natural-numbers-increasing-binary-sequences
 open import set-theory.increasing-binary-sequences
 ```
 
@@ -98,4 +105,31 @@ WLPO-emb-ℕ∞↗-ℕ : (ℕ∞↗ ↪ ℕ) → WLPO
 WLPO-emb-ℕ∞↗-ℕ e =
   WLPO-has-decidable-equality-ℕ∞↗
     ( has-decidable-equality-emb e has-decidable-equality-ℕ)
+```
+
+### If the inclusion `ℕ + {∞} → ℕ∞↗` is an equivalence then WLPO holds
+
+Since this inclusion is already a double negation dense embedding, it suffices
+to assume that it is double negation eliminating.
+
+```agda
+WLPO-is-equiv-increasing-binary-sequence-ℕ+∞ :
+  is-equiv increasing-binary-sequence-ℕ+∞ → WLPO
+WLPO-is-equiv-increasing-binary-sequence-ℕ+∞ e =
+  WLPO-equiv-ℕ-ℕ∞↗
+    ( (increasing-binary-sequence-ℕ+∞ , e) ∘e commutative-coproduct ∘e equiv-ℕ)
+
+WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞ :
+  is-double-negation-eliminating-map increasing-binary-sequence-ℕ+∞ → WLPO
+WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞ e =
+  WLPO-is-equiv-increasing-binary-sequence-ℕ+∞
+    ( is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map
+      ( is-double-negation-dense-increasing-binary-sequence-ℕ+∞)
+      ( is-emb-increasing-binary-sequence-ℕ+∞ , e))
+
+WLPO-is-decidable-map-increasing-binary-sequence-ℕ+∞ :
+  is-decidable-map increasing-binary-sequence-ℕ+∞ → WLPO
+WLPO-is-decidable-map-increasing-binary-sequence-ℕ+∞ e =
+  WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞
+    ( is-double-negation-eliminating-map-is-decidable-map e)
 ```
