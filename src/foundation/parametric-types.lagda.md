@@ -8,8 +8,11 @@ module foundation.parametric-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.evaluation-functions
+open import foundation.fibers-of-maps
+open import foundation.propositional-maps
 open import foundation.retracts-of-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -31,6 +34,10 @@ A type `X : 𝒰` is
 if the [constant map](foundation.constant-maps.md) `X → (𝒰 → X)` is an
 [equivalence](foundation-core.equivalences.md). In other words, if `X` is
 `𝒰`-[null](orthogonal-factorization-systems.null-types.md).
+
+Parametricity can be understood as a "classical taboo" since it contradicts the
+law of excluded middle. We demonstrate this in
+[`foundation.parametricity-booleans`](foundation.parametricity-booleans.md).
 
 ## Definitions
 
@@ -70,34 +77,6 @@ module _
 ```
 
 ## Properties
-
-### Parametric types are closed under equivalences
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  where abstract
-
-  is-parametric-equiv :
-    X ≃ Y → is-parametric l3 Y → is-parametric l3 X
-  is-parametric-equiv = is-null-equiv-base
-
-  is-parametric-equiv' :
-    X ≃ Y → is-parametric l3 X → is-parametric l3 Y
-  is-parametric-equiv' = is-null-equiv-base ∘ inv-equiv
-```
-
-### Parametric types are closed under retracts
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  where abstract
-
-  is-parametric-retract :
-    X retract-of Y → is-parametric l3 Y → is-parametric l3 X
-  is-parametric-retract = is-null-retract-base
-```
 
 ### Contractible types are parametric
 
@@ -140,3 +119,54 @@ abstract
   is-parametric-is-prop {l1} {l2} H =
     is-null-is-prop H (ev (raise-empty l2))
 ```
+
+### Parametric types are closed under equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  where abstract
+
+  is-parametric-equiv :
+    X ≃ Y → is-parametric l3 Y → is-parametric l3 X
+  is-parametric-equiv = is-null-equiv-base
+
+  is-parametric-equiv' :
+    X ≃ Y → is-parametric l3 X → is-parametric l3 Y
+  is-parametric-equiv' = is-null-equiv-base ∘ inv-equiv
+```
+
+### Parametric types are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  where abstract
+
+  is-parametric-retract :
+    X retract-of Y → is-parametric l3 Y → is-parametric l3 X
+  is-parametric-retract = is-null-retract-base
+```
+
+### Parametric types are closed under embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  where abstract
+
+  is-parametric-emb :
+    Y ↪ X → is-parametric l3 X → is-parametric l3 Y
+  is-parametric-emb e is-parametric-X =
+    is-parametric-equiv'
+      ( equiv-total-fiber (map-emb e))
+      ( is-null-Σ
+        ( is-parametric-X)
+        ( λ x → is-parametric-is-prop (is-prop-type-Prop (fiber-emb-Prop e x))))
+```
+
+## See also
+
+- [Subuniverse-parametric types](foundation.subuniverse-parametric-types.md)
+- [Parametricity of the booleans](foundation.parametricity-booleans.md)
+- [The parametricity axiom](foundation.parametricity-axiom.md)

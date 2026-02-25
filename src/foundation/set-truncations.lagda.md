@@ -17,6 +17,8 @@ open import foundation.functoriality-coproduct-types
 open import foundation.mere-equality
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
@@ -465,6 +467,23 @@ module _
 
   equiv-unit-trunc-set : type-Set A ≃ type-trunc-Set (type-Set A)
   equiv-unit-trunc-set = equiv-unit-trunc A
+```
+
+### The subuniverse of sets is a retract of the universe
+
+```agda
+is-retraction-trunc-Set :
+  {l : Level} →
+  is-retraction (type-Set {l = l}) (trunc-Set {l = l})
+is-retraction-trunc-Set {l} A =
+  map-inv-equiv
+    ( extensionality-Set (trunc-Set (type-Set A)) A)
+    ( inv-equiv (equiv-unit-trunc-set A))
+
+retract-Set-UU : {l : Level} → Set l retract-of UU l
+pr1 retract-Set-UU = type-Set
+pr1 (pr2 retract-Set-UU) = trunc-Set
+pr2 (pr2 retract-Set-UU) = is-retraction-trunc-Set
 ```
 
 ### Distributivity of set truncation over coproducts

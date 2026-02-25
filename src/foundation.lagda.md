@@ -223,6 +223,7 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
+open import foundation.full-subuniverses public
 open import foundation.function-cumulative-large-sets public
 open import foundation.function-extensionality public
 open import foundation.function-large-binary-relations public
@@ -365,6 +366,7 @@ open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.parametric-types public
 open import foundation.parametricity-axiom public
+open import foundation.parametricity-booleans public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
 open import foundation.partitions public
@@ -466,6 +468,7 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public

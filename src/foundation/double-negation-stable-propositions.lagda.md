@@ -19,6 +19,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
@@ -244,6 +245,22 @@ empty-Double-Negation-Stable-Prop =
 unit-Double-Negation-Stable-Prop : Double-Negation-Stable-Prop lzero
 unit-Double-Negation-Stable-Prop =
   ( unit , is-prop-unit , double-negation-elim-unit)
+
+raise-empty-Double-Negation-Stable-Prop :
+  (l : Level) → Double-Negation-Stable-Prop l
+raise-empty-Double-Negation-Stable-Prop l =
+  ( raise-empty l ,
+    is-prop-raise-empty ,
+    ( λ nnx →
+      ex-falso (nnx is-empty-raise-empty)))
+
+raise-unit-Double-Negation-Stable-Prop :
+  (l : Level) → Double-Negation-Stable-Prop l
+raise-unit-Double-Negation-Stable-Prop l =
+  ( raise-unit l ,
+    is-prop-raise-unit ,
+    ( λ _ →
+      raise-star))
 ```
 
 ```agda
@@ -288,6 +305,58 @@ double-negation-Double-Negation-Stable-Prop :
   {l : Level} → Double-Negation-Stable-Prop l → Double-Negation-Stable-Prop l
 double-negation-Double-Negation-Stable-Prop P =
   neg-Double-Negation-Stable-Prop (neg-Double-Negation-Stable-Prop P)
+```
+
+### Double negation stable propositions are a retract of propositions
+
+```agda
+double-negation-stable-prop-Prop :
+  {l : Level} → Prop l → Double-Negation-Stable-Prop l
+double-negation-stable-prop-Prop P =
+  double-negation-type-Double-Negation-Stable-Prop (type-Prop P)
+
+is-retraction-double-negation-stable-prop-Prop :
+  {l : Level} →
+  is-retraction
+    ( prop-Double-Negation-Stable-Prop {l})
+    ( double-negation-stable-prop-Prop)
+is-retraction-double-negation-stable-prop-Prop P =
+  eq-iff-Double-Negation-Stable-Prop
+    ( double-negation-stable-prop-Prop (prop-Double-Negation-Stable-Prop P))
+    ( P)
+    ( has-double-negation-elim-type-Double-Negation-Stable-Prop P)
+    ( intro-double-negation)
+
+retract-Double-Negation-Stable-Prop-Prop :
+  {l : Level} → Double-Negation-Stable-Prop l retract-of Prop l
+retract-Double-Negation-Stable-Prop-Prop =
+  ( prop-Double-Negation-Stable-Prop ,
+    double-negation-stable-prop-Prop ,
+    is-retraction-double-negation-stable-prop-Prop)
+```
+
+### Double negation stable propositions are a retract of the universe
+
+```agda
+is-retraction-double-negation-type-Double-Negation-Stable-Prop :
+  {l : Level} →
+  is-retraction
+    ( type-Double-Negation-Stable-Prop {l})
+    ( double-negation-type-Double-Negation-Stable-Prop)
+is-retraction-double-negation-type-Double-Negation-Stable-Prop P =
+  eq-iff-Double-Negation-Stable-Prop
+    ( double-negation-type-Double-Negation-Stable-Prop
+      ( type-Double-Negation-Stable-Prop P))
+    ( P)
+    ( has-double-negation-elim-type-Double-Negation-Stable-Prop P)
+    ( intro-double-negation)
+
+retract-Double-Negation-Stable-Prop-UU :
+  {l : Level} → Double-Negation-Stable-Prop l retract-of UU l
+retract-Double-Negation-Stable-Prop-UU =
+  ( type-Double-Negation-Stable-Prop ,
+    double-negation-type-Double-Negation-Stable-Prop ,
+    is-retraction-double-negation-type-Double-Negation-Stable-Prop)
 ```
 
 ### Universal quantification over double negation stable propositions is double negation stable
