@@ -300,7 +300,8 @@ module _
     aux :
       (l :
         least-finite-bound-ℕ∞↗
-          ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)) →
+          ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ
+            ( x))) →
       increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x ＝
       increasing-binary-sequence-ℕ (pr1 (pr1 l))
     aux ((zero-ℕ , p) , H) =

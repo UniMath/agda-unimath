@@ -73,6 +73,8 @@ open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
+open import set-theory.weak-limited-principle-of-omniscience-conatural-numbers public
+open import set-theory.weak-limited-principle-of-omniscience-increasing-binary-sequences public
 open import set-theory.zero-cardinal public
 ```
 
