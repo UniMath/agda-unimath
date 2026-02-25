@@ -30,8 +30,8 @@ open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
-open import foundation.propositional-truncations
 open import foundation.propositional-maps
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-arrows
