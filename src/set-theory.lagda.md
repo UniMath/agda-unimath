@@ -61,6 +61,7 @@ open import set-theory.cumulative-hierarchy public
 open import set-theory.dependent-products-cardinals public
 open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinals public
+open import set-theory.equivalence-conatural-numbers-increasing-binary-sequences public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
 open import set-theory.increasing-binary-sequences public
