@@ -182,7 +182,7 @@ abstract
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
 ```
 
-In fact, it suffices that the map's action on identifications has a retraction.
+In fact, it suffices that the maps action on identifications has a retraction.
 
 ```agda
 abstract
