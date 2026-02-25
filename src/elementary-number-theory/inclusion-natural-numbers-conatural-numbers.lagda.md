@@ -76,7 +76,7 @@ neq-infinity-conatural-ℕ (succ-ℕ n) p =
   neq-infinity-conatural-ℕ n
     ( is-injective-succ-ℕ∞ (p ∙ is-infinite-successor-condition-infinity-ℕ∞))
 
-is-not-surjective-conatural-ℕ : ¬ is-surjective conatural-ℕ
+is-not-surjective-conatural-ℕ : ¬ (is-surjective conatural-ℕ)
 is-not-surjective-conatural-ℕ H =
   elim-exists empty-Prop neq-infinity-conatural-ℕ (H infinity-ℕ∞)
 ```
