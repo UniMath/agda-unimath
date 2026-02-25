@@ -49,7 +49,7 @@ module _
   where
 
   is-prop-retract-of : A retract-of B → is-prop B → is-prop A
-  is-prop-retract-of = is-trunc-retract-of
+  is-prop-retract-of = is-trunc-retract-of neg-one-𝕋
 ```
 
 ### If a type embeds into a proposition, then it is a proposition

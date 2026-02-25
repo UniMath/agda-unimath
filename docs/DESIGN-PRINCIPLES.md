@@ -23,7 +23,7 @@ makes use of several postulates.
 6. The **truncation operations** are postulated in
    [`foundation.truncations`](foundation.truncations.md)
 7. The **interval** is postulated in
-   [`synthetic-homotopy-theory.interval-type`](synthetic-homotopy-theory.interval-type.md)
+   [`synthetic-homotopy-theory.interval`](synthetic-homotopy-theory.interval.md)
 8. The **circle** is postulated in
    [`synthetic-homotopy-theory.circle`](synthetic-homotopy-theory.circle.md)
 9. **Pushouts** are postulated in
@@ -39,8 +39,8 @@ makes use of several postulates.
 Note that there is some redundancy in the postulates we assume. For example, the
 [univalence axiom implies function extensionality](foundation.univalence-implies-function-extensionality.md),
 but we still assume function extensionality separately. Furthermore,
-[the interval type is contractible](synthetic-homotopy-theory.interval-type.md),
-and the higher inductive types in the agda-unimath library only have computation
+[the interval type is contractible](synthetic-homotopy-theory.interval.md), and
+the higher inductive types in the agda-unimath library only have computation
 rules up to identification, so there is no need at all to postulate it. The
 [circle](synthetic-homotopy-theory.circle.md) can be constructed as the type of
 `ℤ`-[torsors](group-theory.torsors.md), and the

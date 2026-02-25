@@ -52,6 +52,10 @@ of [connected components](foundation.connected-components.md), i.e., its
 [set truncation](foundation.set-truncations.md), is
 [contractible](foundation-core.contractible-types.md).
 
+## Definitions
+
+### The predicate on types of being 0-connected
+
 ```agda
 is-0-connected-Prop : {l : Level} → UU l → Prop l
 is-0-connected-Prop A = is-contr-Prop (type-trunc-Set A)
@@ -101,7 +105,11 @@ abstract
       ( apply-dependent-universal-property-trunc-Set'
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
+```
 
+### A type is 0-connected if it is inhabited and all elements are merely equal
+
+```agda
 abstract
   is-0-connected-mere-eq-is-inhabited :
     {l : Level} {A : UU l} →
@@ -112,20 +120,19 @@ abstract
       ( λ a → is-0-connected-mere-eq a (K a))
 ```
 
-### A type is 0-connected iff any point inclusion is surjective
+### A type is is 0-connected iff there is a point inclusion which is surjective
 
 ```agda
-abstract
-  is-0-connected-is-surjective-point :
-    {l1 : Level} {A : UU l1} (a : A) →
-    is-surjective (point a) → is-0-connected A
-  is-0-connected-is-surjective-point a H =
-    is-0-connected-mere-eq a
-      ( λ x →
-        apply-universal-property-trunc-Prop
-          ( H x)
-          ( mere-eq-Prop a x)
-          ( λ u → unit-trunc-Prop (pr2 u)))
+is-0-connected-is-surjective-point :
+  {l1 : Level} {A : UU l1} (a : A) →
+  is-surjective (point a) → is-0-connected A
+is-0-connected-is-surjective-point a H =
+  is-0-connected-mere-eq a
+    ( λ x →
+      apply-universal-property-trunc-Prop
+        ( H x)
+        ( mere-eq-Prop a x)
+        ( λ u → unit-trunc-Prop (pr2 u)))
 
 abstract
   is-surjective-point-is-0-connected :
@@ -217,12 +224,13 @@ abstract
 ```agda
 is-0-connected-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (A ≃ B) → is-0-connected B → is-0-connected A
-is-0-connected-equiv e = is-contr-equiv _ (equiv-trunc-Set e)
+  A ≃ B → is-0-connected B → is-0-connected A
+is-0-connected-equiv {B = B} e =
+  is-contr-equiv (type-trunc-Set B) (equiv-trunc-Set e)
 
 is-0-connected-equiv' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (A ≃ B) → is-0-connected A → is-0-connected B
+  A ≃ B → is-0-connected A → is-0-connected B
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```
 
@@ -255,8 +263,7 @@ abstract
 
 ```agda
 is-0-connected-is-contr :
-  {l : Level} (X : UU l) →
-  is-contr X → is-0-connected X
+  {l : Level} (X : UU l) → is-contr X → is-0-connected X
 is-0-connected-is-contr X p =
   is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
 ```

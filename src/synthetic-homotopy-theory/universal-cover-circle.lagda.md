@@ -113,7 +113,7 @@ abstract
             ( f x p₀)))
 ```
 
-### The universal cover
+### The universal cover of the circle
 
 ```agda
 module _
