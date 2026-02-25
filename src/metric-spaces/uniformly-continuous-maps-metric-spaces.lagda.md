@@ -307,7 +307,7 @@ module _
     map-sequence (map-uniformly-continuous-map-Metric-Space X Y f)
 ```
 
-### The Cartesian product of uniformly continuous maps
+### The cartesian product of uniformly continuous maps
 
 ```agda
 module _
