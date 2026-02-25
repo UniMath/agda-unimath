@@ -8,10 +8,13 @@ module foundation.mere-embeddings where
 
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
+open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -72,4 +75,32 @@ antisymmetric-mere-emb :
   level-LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
 antisymmetric-mere-emb lem =
   map-binary-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem)
+```
+
+### Dependent sums over projective types preserve mere embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : X → UU l2} {Z : X → UU l3}
+  where
+
+  mere-emb-tot :
+    is-projective-Level' (l2 ⊔ l3) X →
+    ((x : X) → mere-emb (Y x) (Z x)) →
+    mere-emb (Σ X Y) (Σ X Z)
+  mere-emb-tot H e = map-trunc-Prop emb-tot (H _ e)
+```
+
+### Dependent products over projective types preserve mere embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : X → UU l2} {Z : X → UU l3}
+  where
+
+  mere-emb-Π :
+    is-projective-Level' (l2 ⊔ l3) X →
+    ((x : X) → mere-emb (Y x) (Z x)) →
+    mere-emb ((x : X) → Y x) ((x : X) → Z x)
+  mere-emb-Π H e = map-trunc-Prop emb-Π (H _ e)
 ```
