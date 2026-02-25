@@ -7,29 +7,32 @@ module metric-spaces.distances-located-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation.coproduct-types
-open import foundation.negation
-open import elementary-number-theory.rational-numbers
-open import foundation.dependent-pair-types
-open import real-numbers.upper-dedekind-real-numbers
-open import foundation.existential-quantification
-open import real-numbers.dedekind-real-numbers
-open import foundation.empty-types
-open import foundation.propositional-truncations
-open import real-numbers.nonnegative-real-numbers
-open import foundation.logical-equivalences
-open import real-numbers.rational-real-numbers
-open import real-numbers.inequality-real-numbers
 open import elementary-number-theory.inequality-rational-numbers
-open import real-numbers.real-numbers-from-upper-dedekind-real-numbers
-open import foundation.disjunction
-open import metric-spaces.metric-spaces
-open import foundation.functoriality-disjunction
-open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
-open import metric-spaces.located-metric-spaces
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.functoriality-disjunction
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.universe-levels
+
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
+open import metric-spaces.located-metric-spaces
+open import metric-spaces.metric-spaces
+
+open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
+open import real-numbers.nonnegative-real-numbers
+open import real-numbers.rational-real-numbers
+open import real-numbers.real-numbers-from-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
