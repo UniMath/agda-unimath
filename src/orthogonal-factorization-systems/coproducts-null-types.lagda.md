@@ -30,7 +30,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-unit-type
