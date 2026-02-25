@@ -291,29 +291,6 @@ retraction-sequence-ℕ∞↗ = (force-ℕ∞↗ , is-retraction-force-ℕ∞↗
 
 retract-cantor-space-ℕ∞↗ : ℕ∞↗ retract-of cantor-space
 retract-cantor-space-ℕ∞↗ = (sequence-ℕ∞↗ , retraction-sequence-ℕ∞↗)
-
-abstract
-  Eq-infinity-force-ℕ∞↗-all-false :
-    (f : ℕ → bool) →
-    ((n : ℕ) → is-false (f n)) →
-    Eq-ℕ∞↗ (force-ℕ∞↗ f) infinity-ℕ∞↗
-  Eq-infinity-force-ℕ∞↗-all-false f p 0 =
-    p 0
-  Eq-infinity-force-ℕ∞↗-all-false f p (succ-ℕ n) =
-    ( ap (or-bool (f (succ-ℕ n))) (Eq-infinity-force-ℕ∞↗-all-false f p n)) ∙
-    ( ap (λ z → or-bool z false) (p (succ-ℕ n))) ∙
-    ( right-unit-law-or-bool)
-
-  all-false-eq-infinity-force-ℕ∞↗ :
-    (f : ℕ → bool) →
-    force-ℕ∞↗ f ＝ infinity-ℕ∞↗ →
-    (n : ℕ) → is-false (f n)
-  all-false-eq-infinity-force-ℕ∞↗ f p 0 =
-    Eq-eq-ℕ∞↗ p 0
-  all-false-eq-infinity-force-ℕ∞↗ f p (succ-ℕ n) =
-    is-false-is-false-leq-bool
-      ( left-leq-or-bool {f (succ-ℕ n)} {sequence-ℕ∞↗ (force-ℕ∞↗ f) n})
-      ( Eq-eq-ℕ∞↗ p (succ-ℕ n))
 ```
 
 ### Increasing binary sequences are order preserving maps
@@ -355,43 +332,6 @@ abstract
 abstract
   eq-zero-is-zero-ℕ∞↗ : (x : ℕ∞↗) → is-true (sequence-ℕ∞↗ x 0) → x ＝ zero-ℕ∞↗
   eq-zero-is-zero-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-zero-is-zero-ℕ∞↗ x p)
-```
-
-### Computing with the left shift operation
-
-```agda
-abstract
-  Eq-succ-shift-left-ℕ∞↗ :
-    (x : ℕ∞↗) →
-    is-false (sequence-ℕ∞↗ x 0) →
-    Eq-ℕ∞↗ x (succ-ℕ∞↗ (shift-left-ℕ∞↗ x))
-  Eq-succ-shift-left-ℕ∞↗ x p zero-ℕ = p
-  Eq-succ-shift-left-ℕ∞↗ x p (succ-ℕ n) = refl
-
-  eq-succ-shift-left-ℕ∞↗ :
-    (x : ℕ∞↗) →
-    is-false (sequence-ℕ∞↗ x 0) →
-    x ＝ succ-ℕ∞↗ (shift-left-ℕ∞↗ x)
-  eq-succ-shift-left-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-succ-shift-left-ℕ∞↗ x p)
-```
-
-### Computing with the deconstructor
-
-```agda
-abstract
-  eq-exception-decons-ℕ∞↗-is-true :
-    (x : ℕ∞↗) →
-    is-true (sequence-ℕ∞↗ x 0) →
-    decons-ℕ∞↗ x ＝ exception-Maybe
-  eq-exception-decons-ℕ∞↗-is-true x p with sequence-ℕ∞↗ x 0 | p
-  ... | true | refl = refl
-
-  eq-unit-decons-ℕ∞↗-is-false :
-    (x : ℕ∞↗) →
-    is-false (sequence-ℕ∞↗ x 0) →
-    decons-ℕ∞↗ x ＝ unit-Maybe (shift-left-ℕ∞↗ x)
-  eq-unit-decons-ℕ∞↗-is-false x p with sequence-ℕ∞↗ x 0 | p
-  ... | false | refl = refl
 ```
 
 ## See also

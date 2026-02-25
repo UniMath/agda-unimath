@@ -9,7 +9,6 @@ module set-theory.finite-elements-increasing-binary-sequences where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.booleans
 open import foundation.constant-maps
@@ -158,28 +157,7 @@ module _
 
 ### If an increasing binary sequence has an upper bound there exists a unique least upper bound
 
-```agda
-least-finite-bound-finite-bound-ℕ∞↗ :
-  (x : ℕ∞↗) → finite-bound-ℕ∞↗ x → least-finite-bound-ℕ∞↗ x
-least-finite-bound-finite-bound-ℕ∞↗ x u =
-  ( ( pr1 m ,
-      pr1 (pr2 m)) ,
-    λ v → pr2 (pr2 m) (pr1 v) (pr2 v))
-  where
-  m : minimal-element-ℕ (is-finitely-bounded-ℕ∞↗ x)
-  m =
-    well-ordering-principle-ℕ
-      ( is-finitely-bounded-ℕ∞↗ x)
-      ( is-decidable-is-finitely-bounded-ℕ∞↗ x)
-      ( u)
-
-least-finite-bound-is-finite-ℕ∞↗ :
-  (x : ℕ∞↗) → is-finite-ℕ∞↗ x → least-finite-bound-ℕ∞↗ x
-least-finite-bound-is-finite-ℕ∞↗ x =
-  rec-trunc-Prop
-    ( least-finite-bound-prop-ℕ∞↗ x)
-    ( least-finite-bound-finite-bound-ℕ∞↗ x)
-```
+> This remains to be formalized.
 
 ### If an increasing binary sequence is bounded above by a finite number, then it is bounded above by any larger finite number
 

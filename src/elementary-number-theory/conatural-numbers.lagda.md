@@ -96,13 +96,6 @@ coit-ℕ∞ : {l : Level} {A : UU l} → (A → Maybe A) → A → ℕ∞
 decons-ℕ∞ (coit-ℕ∞ f x) with f x
 decons-ℕ∞ (coit-ℕ∞ f x) | inl a = unit-Maybe (coit-ℕ∞ f a)
 decons-ℕ∞ (coit-ℕ∞ f x) | inr _ = exception-Maybe
-
-compute-decons-coit-ℕ∞ :
-  {l : Level} {A : UU l} (f : A → Maybe A) (x : A) →
-  decons-ℕ∞ (coit-ℕ∞ f x) ＝ map-Maybe (coit-ℕ∞ f) (f x)
-compute-decons-coit-ℕ∞ f x with f x
-... | inl y = refl
-... | inr y = refl
 ```
 
 ### The corecursor function for conatural numbers
