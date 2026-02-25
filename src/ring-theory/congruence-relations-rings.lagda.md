@@ -27,8 +27,11 @@ open import ring-theory.rings
 
 ## Idea
 
-A congruence relation on a ring `R` is a congruence relation on the underlying
-semiring of `R`.
+A
+{{#concept "congruence relation" Disambiguation="on a ring" WD="congruence relation" WDID=Q8349849 Agda=congruence-Ring}}
+on a [ring](ring-theory.rings.md) `R` is a
+[congruence relation](ring-theory.congruence-relations-semirings.md) on the
+underlying [semiring](ring-theory.semirings.md) of `R`.
 
 ## Definition
 

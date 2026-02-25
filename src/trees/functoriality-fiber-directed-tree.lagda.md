@@ -26,8 +26,9 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-Any morphism `f : S → T` of directed trees induces for any node `x ∈ S` a
-morphism of fibers of directed trees.
+Any [morphism](trees.morphisms-directed-trees.md) `f : S → T` of
+[directed trees](trees.directed-trees.md) induces for any node `x ∈ S` a
+morphism of [fibers](trees.fibers-directed-trees.md) of directed trees.
 
 ## Definitions
 

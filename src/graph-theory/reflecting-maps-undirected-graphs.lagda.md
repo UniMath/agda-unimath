@@ -21,9 +21,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **reflecting map** from an
-[undirected graph](graph-theory.undirected-graphs.md) `(V , E)` into a type `X`
-consists of a map `fV : V → X` and a map
+A
+{{#concept "reflecting map" Disambiguation="from an undirected graph into a type" Agda=reflecting-map-Undirected-Graph}}
+from an [undirected graph](graph-theory.undirected-graphs.md) `(V , E)` into a
+type `X` consists of a map `fV : V → X` and a map
 
 ```text
   fE : (v : unordered-pair V) → E v → symmetric-Id (map-unordered-pair fV v).

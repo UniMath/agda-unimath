@@ -8,7 +8,7 @@ module lists.flattening-lists where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
@@ -23,8 +23,9 @@ open import lists.lists
 
 ## Idea
 
-Any list of lists of elements of `A` can be flattened to form a list of elements
-of `A`
+Any [list](lists.lists.md) of lists of elements of `A` can be
+{{#concept "flattened" Disambiguation="list of lists" Agda=flatten-list}} to
+form a list of elements of `A`
 
 ## Definition
 

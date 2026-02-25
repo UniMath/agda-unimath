@@ -156,11 +156,11 @@ abstract
   resize-resize-𝕍 :
     {l1 l2 : Level} {x : 𝕍 l1} (H : is-small-𝕍 l2 x) →
     resize-𝕍 (resize-𝕍 x H) (is-small-resize-𝕍 x H) ＝ x
-  resize-resize-𝕍 {x = tree-𝕎 A α} (pair (pair A' e) H) =
+  resize-resize-𝕍 {x = tree-𝕎 A α} ((A' , e) , H) =
     eq-Eq-𝕎
       ( resize-𝕍
-        ( resize-𝕍 (tree-𝕎 A α) (pair (pair A' e) H))
-        ( is-small-resize-𝕍 (tree-𝕎 A α) (pair (pair A' e) H)))
+        ( resize-𝕍 (tree-𝕎 A α) ((A' , e) , H))
+        ( is-small-resize-𝕍 (tree-𝕎 A α) ((A' , e) , H)))
       ( tree-𝕎 A α)
       ( pair
         ( refl)
@@ -168,11 +168,11 @@ abstract
           Eq-𝕎-eq
             ( resize-𝕍
               ( resize-𝕍
-                ( α (map-inv-equiv e (map-inv-equiv (inv-equiv e) z)))
-                ( H (map-inv-equiv e (map-inv-equiv (inv-equiv e) z))))
+                ( α (map-inv-equiv e (map-equiv e z)))
+                ( H (map-inv-equiv e (map-equiv e z))))
               ( is-small-resize-𝕍
-                ( α (map-inv-equiv e (map-inv-equiv (inv-equiv e) z)))
-                ( H (map-inv-equiv e (map-inv-equiv (inv-equiv e) z)))))
+                ( α (map-inv-equiv e (map-equiv e z)))
+                ( H (map-inv-equiv e (map-equiv e z)))))
             ( α z)
             ( ( ap
                 ( λ t →

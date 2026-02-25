@@ -74,12 +74,12 @@ instance-Dirk-Gently-Principle-LEM' P Q (inr np) =
   inl-disjunction (ex-falso ∘ np)
 
 level-Dirk-Gently-Principle-LEM :
-  (l1 l2 : Level) → LEM l1 → level-Dirk-Gently-Principle l1 l2
+  (l1 l2 : Level) → level-LEM l1 → level-Dirk-Gently-Principle l1 l2
 level-Dirk-Gently-Principle-LEM l1 l2 lem P Q =
   instance-Dirk-Gently-Principle-LEM' P Q (lem P)
 
 level-Dirk-Gently-Principle-LEM' :
-  (l1 l2 : Level) → LEM l2 → level-Dirk-Gently-Principle l1 l2
+  (l1 l2 : Level) → level-LEM l2 → level-Dirk-Gently-Principle l1 l2
 level-Dirk-Gently-Principle-LEM' l1 l2 lem P Q =
   swap-disjunction (level-Dirk-Gently-Principle-LEM l2 l1 lem Q P)
 ```

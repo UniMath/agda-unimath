@@ -9,14 +9,19 @@ module linear-algebra.linear-maps-left-modules-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 
 open import linear-algebra.left-modules-rings
 
@@ -139,6 +144,22 @@ module _
 
 ## Properties
 
+### A linear map is an abelian group homomorphism on the abelian groups of the left modules
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  where
+
+  hom-ab-linear-map-left-module-Ring :
+    linear-map-left-module-Ring R M N →
+    hom-Ab (ab-left-module-Ring R M) (ab-left-module-Ring R N)
+  hom-ab-linear-map-left-module-Ring (f , H , _) = (f , H _ _)
+```
+
 ### A linear map maps zero to zero
 
 ```agda
@@ -152,15 +173,11 @@ module _
       (f : linear-map-left-module-Ring R M N) →
       map-linear-map-left-module-Ring R M N f (zero-left-module-Ring R M) ＝
       zero-left-module-Ring R N
-    is-zero-map-zero-linear-map-left-module-Ring (f , H , K) =
-      equational-reasoning
-        f (zero-left-module-Ring R M)
-        ＝ f (mul-left-module-Ring R M (zero-Ring R) (zero-left-module-Ring R M))
-          by ap f (inv (left-zero-law-mul-left-module-Ring R M _))
-        ＝ mul-left-module-Ring R N (zero-Ring R) (f (zero-left-module-Ring R M))
-          by K _ _
-        ＝ zero-left-module-Ring R N
-          by left-zero-law-mul-left-module-Ring R N _
+    is-zero-map-zero-linear-map-left-module-Ring f =
+      preserves-zero-hom-Ab
+        ( ab-left-module-Ring R M)
+        ( ab-left-module-Ring R N)
+        ( hom-ab-linear-map-left-module-Ring R M N f)
 ```
 
 ### A linear map maps `-x` to the negation of the map of `x`
@@ -177,29 +194,11 @@ module _
       (x : type-left-module-Ring R M) →
       map-linear-map-left-module-Ring R M N f (neg-left-module-Ring R M x) ＝
       neg-left-module-Ring R N (map-linear-map-left-module-Ring R M N f x)
-    map-neg-linear-map-left-module-Ring (f , H , K) x =
-      equational-reasoning
-        f (neg-left-module-Ring R M x)
-        ＝ f (mul-left-module-Ring R M (neg-Ring R (one-Ring R)) x)
-          by ap f (inv (mul-neg-one-left-module-Ring R M x))
-        ＝ mul-left-module-Ring R N (neg-Ring R (one-Ring R)) (f x)
-          by K _ _
-        ＝ neg-left-module-Ring R N (f x)
-          by mul-neg-one-left-module-Ring R N (f x)
-```
-
-### The identity map is linear
-
-```agda
-module _
-  {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
-  where
-
-  is-linear-id-left-module-Ring : is-linear-map-left-module-Ring R M M id
-  is-linear-id-left-module-Ring = (λ _ _ → refl) , (λ _ _ → refl)
-
-  id-linear-map-left-module-Ring : linear-map-left-module-Ring R M M
-  id-linear-map-left-module-Ring = (id , is-linear-id-left-module-Ring)
+    map-neg-linear-map-left-module-Ring f _ =
+      preserves-negatives-hom-Ab
+        ( ab-left-module-Ring R M)
+        ( ab-left-module-Ring R N)
+        ( hom-ab-linear-map-left-module-Ring R M N f)
 ```
 
 ### The composition of linear maps is linear
@@ -214,31 +213,32 @@ module _
   (f : type-left-module-Ring R M → type-left-module-Ring R N)
   where
 
-  is-additive-comp-is-additive-map-left-module-Ring :
-    is-additive-map-left-module-Ring R N K g →
-    is-additive-map-left-module-Ring R M N f →
-    is-additive-map-left-module-Ring R M K (g ∘ f)
-  is-additive-comp-is-additive-map-left-module-Ring Hg Hf x y =
-    ap g (Hf x y) ∙ Hg (f x) (f y)
+  abstract
+    is-additive-map-comp-left-module-Ring :
+      is-additive-map-left-module-Ring R N K g →
+      is-additive-map-left-module-Ring R M N f →
+      is-additive-map-left-module-Ring R M K (g ∘ f)
+    is-additive-map-comp-left-module-Ring Hg Hf x y =
+      ap g (Hf x y) ∙ Hg (f x) (f y)
 
-  is-homogeneous-comp-is-homogeneous-map-left-module-Ring :
-    is-homogeneous-map-left-module-Ring R N K g →
-    is-homogeneous-map-left-module-Ring R M N f →
-    is-homogeneous-map-left-module-Ring R M K (g ∘ f)
-  is-homogeneous-comp-is-homogeneous-map-left-module-Ring Hg Hf c x =
-    ap g (Hf c x) ∙ Hg c (f x)
+    is-homogeneous-map-comp-left-module-Ring :
+      is-homogeneous-map-left-module-Ring R N K g →
+      is-homogeneous-map-left-module-Ring R M N f →
+      is-homogeneous-map-left-module-Ring R M K (g ∘ f)
+    is-homogeneous-map-comp-left-module-Ring Hg Hf c x =
+      ap g (Hf c x) ∙ Hg c (f x)
 
-  is-linear-comp-is-linear-map-left-module-Ring :
-    is-linear-map-left-module-Ring R N K g →
-    is-linear-map-left-module-Ring R M N f →
-    is-linear-map-left-module-Ring R M K (g ∘ f)
-  is-linear-comp-is-linear-map-left-module-Ring Hg Hf =
-    ( is-additive-comp-is-additive-map-left-module-Ring
-      ( is-additive-is-linear-map-left-module-Ring R N K g Hg)
-      ( is-additive-is-linear-map-left-module-Ring R M N f Hf)) ,
-    ( is-homogeneous-comp-is-homogeneous-map-left-module-Ring
-      ( is-homogeneous-is-linear-map-left-module-Ring R N K g Hg)
-      ( is-homogeneous-is-linear-map-left-module-Ring R M N f Hf))
+    is-linear-map-comp-left-module-Ring :
+      is-linear-map-left-module-Ring R N K g →
+      is-linear-map-left-module-Ring R M N f →
+      is-linear-map-left-module-Ring R M K (g ∘ f)
+    is-linear-map-comp-left-module-Ring Hg Hf =
+      ( is-additive-map-comp-left-module-Ring
+        ( is-additive-is-linear-map-left-module-Ring R N K g Hg)
+        ( is-additive-is-linear-map-left-module-Ring R M N f Hf)) ,
+      ( is-homogeneous-map-comp-left-module-Ring
+        ( is-homogeneous-is-linear-map-left-module-Ring R N K g Hg)
+        ( is-homogeneous-is-linear-map-left-module-Ring R M N f Hf))
 ```
 
 ### The linear composition of linear maps between left modules
@@ -257,9 +257,74 @@ module _
   comp-linear-map-left-module-Ring =
     ( map-linear-map-left-module-Ring R N K g ∘
       map-linear-map-left-module-Ring R M N f) ,
-    ( is-linear-comp-is-linear-map-left-module-Ring R M N K
+    ( is-linear-map-comp-left-module-Ring R M N K
       ( map-linear-map-left-module-Ring R N K g)
       ( map-linear-map-left-module-Ring R M N f)
       ( is-linear-map-linear-map-left-module-Ring R N K g)
       ( is-linear-map-linear-map-left-module-Ring R M N f))
 ```
+
+### The constant map to zero is a linear map
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  where
+
+  abstract
+    is-additive-const-zero-map-left-module-Ring :
+      is-additive-map-left-module-Ring R M N
+        ( const (type-left-module-Ring R M) (zero-left-module-Ring R N))
+    is-additive-const-zero-map-left-module-Ring _ _ =
+      inv (left-unit-law-add-left-module-Ring R N _)
+
+    is-homogeneous-const-zero-map-left-module-Ring :
+      is-homogeneous-map-left-module-Ring R M N
+        ( const (type-left-module-Ring R M) (zero-left-module-Ring R N))
+    is-homogeneous-const-zero-map-left-module-Ring _ _ =
+      inv (right-zero-law-mul-left-module-Ring R N _)
+
+  is-linear-const-zero-map-left-module-Ring :
+    is-linear-map-left-module-Ring R M N
+      ( const (type-left-module-Ring R M) (zero-left-module-Ring R N))
+  is-linear-const-zero-map-left-module-Ring =
+    ( is-additive-const-zero-map-left-module-Ring ,
+      is-homogeneous-const-zero-map-left-module-Ring)
+
+  const-zero-linear-map-left-module-Ring : linear-map-left-module-Ring R M N
+  const-zero-linear-map-left-module-Ring =
+    ( const (type-left-module-Ring R M) (zero-left-module-Ring R N) ,
+      is-linear-const-zero-map-left-module-Ring)
+```
+
+### If two linear maps are homotopic, they are equal
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  (f g : linear-map-left-module-Ring R M N)
+  where
+
+  abstract
+    eq-htpy-linear-map-left-module-Ring :
+      ( ( map-linear-map-left-module-Ring R M N f) ~
+        ( map-linear-map-left-module-Ring R M N g)) →
+      f ＝ g
+    eq-htpy-linear-map-left-module-Ring f~g =
+      eq-type-subtype
+        ( is-linear-map-prop-left-module-Ring R M N)
+        ( eq-htpy f~g)
+```
+
+## See also
+
+- [Linear maps between left modules over commutative rings](linear-algebra.linear-maps-left-modules-commutative-rings.md)
+- [Linear maps between vector spaces](linear-algebra.linear-maps-vector-spaces.md)
+- [Addition of linear maps on left modules](linear-algebra.addition-linear-maps-left-modules-rings.md)
+- [Negation of linear maps on left modules](linear-algebra.negation-linear-maps-left-modules-rings.md)

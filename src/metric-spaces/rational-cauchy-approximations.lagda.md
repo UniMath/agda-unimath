@@ -22,10 +22,11 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.cauchy-completeness-dedekind-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -94,12 +95,12 @@ real-limit-cauchy-approximation-ℚ : cauchy-approximation-ℚ → ℝ lzero
 real-limit-cauchy-approximation-ℚ f =
   limit-cauchy-approximation-Complete-Metric-Space
     ( complete-metric-space-ℝ lzero)
-    ( map-short-function-cauchy-approximation-Metric-Space
+    ( map-short-map-cauchy-pseudocompletion-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
-      ( short-isometry-Metric-Space
+      ( short-map-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ lzero)
-        ( isometry-metric-space-real-ℚ))
+        ( isometry-real-ℚ))
       ( f))
 ```

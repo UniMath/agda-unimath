@@ -45,3 +45,5 @@ is-small-is-surjective {f = f} H K L =
 ## See also
 
 - [Small maps](foundation.small-maps.md)
+- The `is-essentially-in-subuniverse` predicate in
+  [`foundation.subuniverses`](foundation.subuniverses.md)

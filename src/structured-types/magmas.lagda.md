@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "magma" Agda=Magma}} is a type [equipped](foundation.structure.md)
-with a binary operation.
+A {{#concept "magma" WD="magma" WDID=Q679903 Agda=Magma}} is a type
+[equipped](foundation.structure.md) with a binary operation.
 
 ## Definition
 

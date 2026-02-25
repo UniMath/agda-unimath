@@ -166,6 +166,9 @@ zero-ℚ⁰⁺ = nonnegative-rational-ℕ zero-ℕ
 
 one-ℚ⁰⁺ : ℚ⁰⁺
 one-ℚ⁰⁺ = nonnegative-rational-ℕ 1
+
+is-nonnegative-one-ℚ : is-nonnegative-ℚ one-ℚ
+is-nonnegative-one-ℚ = is-nonnegative-rational-ℕ 1
 ```
 
 ### The rational image of a nonnegative integer fraction is nonnegative

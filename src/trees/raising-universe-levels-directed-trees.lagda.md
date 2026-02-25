@@ -25,7 +25,10 @@ open import trees.equivalences-directed-trees
 
 ## Idea
 
-We define the operation that raises the universe level of a directed tree.
+We define the operation that
+{{#concept "raises" Disambiguation="universe levels of directed trees" Agda=raise-Directed-Tree}}
+the [universe level](foundation.universe-levels.md) of a
+[directed tree](trees.directed-trees.md).
 
 ## Definitions
 

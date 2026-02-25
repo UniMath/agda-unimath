@@ -37,14 +37,15 @@ open import trees.w-types
 
 ## Idea
 
-A W-type `𝕎 A B` is said to be **extensional** if for any two elements
-`S T : 𝕎 A B` the induced map
+A [W-type](trees.w-types.md) `𝕎 A B` is said to be
+{{#concept "extensional" Disambiguation="W-type" Agda=is-extensional-𝕎}} if for
+any two elements `S T : 𝕎 A B` the induced map
 
 ```text
-  S ＝ T → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
+  (S ＝ T) → ((U : 𝕎 A B) → (U ∈-𝕎 S) ≃ (U ∈-𝕎 T))
 ```
 
-is an equivalence.
+is an [equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -80,6 +81,8 @@ module _
 
 ## Properties
 
+### Characterizing equality in extensional W-types
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -92,21 +95,23 @@ module _
   refl-Eq-Eq-ext-𝕎 : (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → Eq-Eq-ext-𝕎 x y u u
   refl-Eq-Eq-ext-𝕎 x y u z = refl-htpy
 
-  is-torsorial-Eq-Eq-ext-𝕎 :
-    (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → is-torsorial (Eq-Eq-ext-𝕎 x y u)
-  is-torsorial-Eq-Eq-ext-𝕎 x y u =
-    is-torsorial-Eq-Π (λ z → is-torsorial-htpy-equiv (u z))
+  abstract
+    is-torsorial-Eq-Eq-ext-𝕎 :
+      (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → is-torsorial (Eq-Eq-ext-𝕎 x y u)
+    is-torsorial-Eq-Eq-ext-𝕎 x y u =
+      is-torsorial-Eq-Π (λ z → is-torsorial-htpy-equiv (u z))
 
   Eq-Eq-ext-eq-𝕎 :
     (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → u ＝ v → Eq-Eq-ext-𝕎 x y u v
   Eq-Eq-ext-eq-𝕎 x y u .u refl = refl-Eq-Eq-ext-𝕎 x y u
 
-  is-equiv-Eq-Eq-ext-eq-𝕎 :
-    (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → is-equiv (Eq-Eq-ext-eq-𝕎 x y u v)
-  is-equiv-Eq-Eq-ext-eq-𝕎 x y u =
-    fundamental-theorem-id
-      ( is-torsorial-Eq-Eq-ext-𝕎 x y u)
-      ( Eq-Eq-ext-eq-𝕎 x y u)
+  abstract
+    is-equiv-Eq-Eq-ext-eq-𝕎 :
+      (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → is-equiv (Eq-Eq-ext-eq-𝕎 x y u v)
+    is-equiv-Eq-Eq-ext-eq-𝕎 x y u =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-Eq-ext-𝕎 x y u)
+        ( Eq-Eq-ext-eq-𝕎 x y u)
 
   eq-Eq-Eq-ext-𝕎 :
     {x y : 𝕎 A B} {u v : Eq-ext-𝕎 x y} → Eq-Eq-ext-𝕎 x y u v → u ＝ v
@@ -117,24 +122,24 @@ module _
     (x : 𝕎 A B) → Σ (𝕎 A B) (Eq-ext-𝕎 x) ≃ Σ A (λ a → B (shape-𝕎 x) ≃ B a)
   equiv-total-Eq-ext-𝕎 (tree-𝕎 a f) =
     ( ( equiv-tot
-            ( λ x →
-              ( ( right-unit-law-Σ-is-contr
-                  ( λ e → is-torsorial-htpy (f ∘ map-inv-equiv e))) ∘e
-                ( equiv-tot
-                  ( λ e →
-                    equiv-tot
-                      ( λ g →
-                        equiv-Π
-                          ( λ y → f (map-inv-equiv e y) ＝ g y)
-                          ( e)
-                          ( λ y →
-                            equiv-concat
-                              ( ap f (is-retraction-map-inv-equiv e y))
-                              ( g (map-equiv e y))))))) ∘e
-              ( ( equiv-left-swap-Σ) ∘e
-                ( equiv-tot
+        ( λ x →
+          ( ( right-unit-law-Σ-is-contr
+              ( λ e → is-torsorial-htpy (f ∘ map-inv-equiv e))) ∘e
+            ( equiv-tot
+              ( λ e →
+                equiv-tot
                   ( λ g →
-                    inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e
+                    equiv-Π
+                      ( λ y → f (map-inv-equiv e y) ＝ g y)
+                      ( e)
+                      ( λ y →
+                        equiv-concat
+                          ( ap f (is-retraction-map-inv-equiv e y))
+                          ( g (map-equiv e y))))))) ∘e
+          ( ( equiv-left-swap-Σ) ∘e
+            ( equiv-tot
+              ( λ g →
+                inv-equiv (equiv-fam-equiv-equiv-slice f g)))))) ∘e
           ( associative-Σ)) ∘e
         ( equiv-Σ
           ( λ (t : Σ A (λ x → B x → 𝕎 A B)) →
@@ -144,7 +149,7 @@ module _
     where
     H :
       ( z : 𝕎 A (λ x → B x)) →
-      Eq-ext-𝕎 ( tree-𝕎 a f) z ≃
+      Eq-ext-𝕎 (tree-𝕎 a f) z ≃
       Eq-ext-𝕎
         ( tree-𝕎 a f)
         ( tree-𝕎
@@ -152,33 +157,40 @@ module _
           ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
     H (tree-𝕎 b g) = id-equiv
 
-  is-torsorial-Eq-ext-is-univalent-𝕎 :
-    is-univalent B → (x : 𝕎 A B) → is-torsorial (Eq-ext-𝕎 x)
-  is-torsorial-Eq-ext-is-univalent-𝕎 H (tree-𝕎 a f) =
-    is-contr-equiv
-      ( Σ A (λ x → B a ≃ B x))
-      ( equiv-total-Eq-ext-𝕎 (tree-𝕎 a f))
-      ( fundamental-theorem-id' (λ x → equiv-tr B) (H a))
+  abstract
+    is-torsorial-Eq-ext-is-univalent-𝕎 :
+      is-univalent B → (x : 𝕎 A B) → is-torsorial (Eq-ext-𝕎 x)
+    is-torsorial-Eq-ext-is-univalent-𝕎 H (tree-𝕎 a f) =
+      is-contr-equiv
+        ( Σ A (λ x → B a ≃ B x))
+        ( equiv-total-Eq-ext-𝕎 (tree-𝕎 a f))
+        ( fundamental-theorem-id' (λ x → equiv-tr B) (H a))
 
-  is-extensional-is-univalent-𝕎 :
-    is-univalent B → is-extensional-𝕎 A B
-  is-extensional-is-univalent-𝕎 H x =
-    fundamental-theorem-id
-      ( is-torsorial-Eq-ext-is-univalent-𝕎 H x)
-      ( λ y → extensional-Eq-eq-𝕎 {y = y})
+  abstract
+    is-extensional-is-univalent-𝕎 :
+      is-univalent B → is-extensional-𝕎 A B
+    is-extensional-is-univalent-𝕎 H x =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-ext-is-univalent-𝕎 H x)
+        ( λ y → extensional-Eq-eq-𝕎 {y = y})
 
-  is-univalent-is-extensional-𝕎 :
-    type-trunc-Prop (𝕎 A B) → is-extensional-𝕎 A B → is-univalent B
-  is-univalent-is-extensional-𝕎 p H x =
-    apply-universal-property-trunc-Prop p
-      ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : x ＝ y) → equiv-tr B γ)))
-      ( λ w →
-        fundamental-theorem-id
-          ( is-contr-equiv'
-            ( Σ (𝕎 A B) (Eq-ext-𝕎 (tree-𝕎 x (λ y → w))))
-            ( equiv-total-Eq-ext-𝕎 (tree-𝕎 x (λ y → w)))
-            ( fundamental-theorem-id'
-              ( λ z → extensional-Eq-eq-𝕎)
-              ( H (tree-𝕎 x (λ y → w)))))
-          ( λ y → equiv-tr B {y = y}))
+  abstract
+    is-univalent-is-extensional-𝕎 :
+      type-trunc-Prop (𝕎 A B) → is-extensional-𝕎 A B → is-univalent B
+    is-univalent-is-extensional-𝕎 p H x =
+      apply-universal-property-trunc-Prop p
+        ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : x ＝ y) → equiv-tr B γ)))
+        ( λ w →
+          fundamental-theorem-id
+            ( is-contr-equiv'
+              ( Σ (𝕎 A B) (Eq-ext-𝕎 (tree-𝕎 x (λ y → w))))
+              ( equiv-total-Eq-ext-𝕎 (tree-𝕎 x (λ y → w)))
+              ( fundamental-theorem-id'
+                ( λ z → extensional-Eq-eq-𝕎)
+                ( H (tree-𝕎 x (λ y → w)))))
+            ( λ y → equiv-tr B {y = y}))
 ```
+
+## See also
+
+- [Univalent polynomial endofunctors](trees.univalent-polynomial-endofunctors.md)

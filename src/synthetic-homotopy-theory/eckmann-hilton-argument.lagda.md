@@ -782,6 +782,10 @@ module _
         ( tr³-horizontal-concat-right-unit-law-right-whisker-left-unit-law-left-whisker-Ω²))
 ```
 
+## See also
+
+- [Medial magmas](structured-types.medial-magmas.md)
+
 ## External links
 
 - [The Eckmann-Hilton argument](https://1lab.dev/Algebra.Magma.Unital.EckmannHilton.html)

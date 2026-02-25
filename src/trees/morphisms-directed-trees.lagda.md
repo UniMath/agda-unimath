@@ -32,8 +32,11 @@ open import trees.directed-trees
 
 ## Idea
 
-A **morphism of directed trees** from `S` to `T` is a morphism between their
-underlying directed graphs.
+A
+{{#concept "morphism" Disambiguation="of directed trees" Agda=hom-Directed-Tree}}
+of [directed trees](trees.directed-trees.md) from `S` to `T` is a
+[morphism](graph-theory.morphisms-directed-graphs.md) between their underlying
+[directed graphs](graph-theory.directed-graphs.md).
 
 ## Definitions
 

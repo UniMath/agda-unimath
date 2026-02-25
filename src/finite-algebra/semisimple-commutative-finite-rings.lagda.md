@@ -29,8 +29,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **semisimple commutative finite ring** is a commutative finite ring which is
-merely equivalent to an iterated cartesian product of finite fields.
+A
+{{#concept "semisimple commutative finite ring" Agda=Semisimple-Finite-Commutative-Ring}}
+is a [commutative finite ring](finite-algebra.commutative-finite-rings.md) which
+is merely equivalent to an iterated cartesian product of
+[finite fields](finite-algebra.finite-fields.md).
 
 ## Definitions
 

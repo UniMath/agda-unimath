@@ -16,11 +16,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-The universal tree is the coinductive type associated to the
-[polynomial endofunctor](trees.polynomial-endofunctors.md)
+The {{#concept "universal tree" Agda=Universal-Tree}} is the coinductive type
+associated to the
+[universal polynomial endofunctor](trees.universal-polynomial-endofunctor.md)
 
 ```text
-  X ↦ Σ 𝒰 (λ T → Xᵀ).
+  X ↦ Σ (T : 𝒰), (T → X).
 ```
 
 Note that this is the same polynomial endofunctor that we used to define the

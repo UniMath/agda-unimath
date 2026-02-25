@@ -32,8 +32,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Given a family of finite rings `A i` indexed by a finite type `i : I`, their
-**dependent product** `Π(i:I), A i` is again a finite ring.
+Given a family of [finite rings](finite-algebra.finite-rings.md) `A i` indexed
+by a [finite type](univalent-combinatorics.finite-types.md) `i : I`, their
+{{#concept "dependent product" Disambiguation="of finite family of finite rings" Agda=Π-Finite-Ring}}
+`Π(i:I), A i` is again a finite ring.
 
 ## Definition
 

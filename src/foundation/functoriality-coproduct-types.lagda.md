@@ -22,7 +22,6 @@ open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.retractions
 open import foundation.structure-identity-principle
-open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
@@ -337,28 +336,6 @@ abstract
       ( is-equiv-map-compute-eq-coproduct-inr-inr x y)
       ( is-equiv-map-compute-eq-coproduct-inr-inr (g x) (g y))
       ( G x y)
-```
-
-### Functoriality of coproducts preserves surjections
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  where
-
-  abstract
-    is-surjective-map-coproduct :
-      {f : A → A'} {g : B → B'} →
-      is-surjective f → is-surjective g →
-      is-surjective (map-coproduct f g)
-    is-surjective-map-coproduct s s' (inl x) =
-      apply-universal-property-trunc-Prop (s x)
-        ( trunc-Prop (fiber (map-coproduct _ _) (inl x)))
-        ( λ (a , p) → unit-trunc-Prop (inl a , ap inl p))
-    is-surjective-map-coproduct s s' (inr x) =
-      apply-universal-property-trunc-Prop (s' x)
-        ( trunc-Prop (fiber (map-coproduct _ _) (inr x)))
-        ( λ (a , p) → unit-trunc-Prop (inr a , ap inr p))
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`

@@ -113,7 +113,7 @@ module _
   where
 
   is-emb-id : is-emb (id {A = A})
-  is-emb-id x y = is-equiv-htpy id ap-id is-equiv-id
+  is-emb-id x y = is-equiv-htpy-id ap-id
 
   id-emb : A ↪ A
   pr1 id-emb = id

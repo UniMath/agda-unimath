@@ -16,6 +16,17 @@ module literature.wikipedia-list-of-theorems where
 The theorems are ordered alphabetically, omitting leading definite articles
 ("the").
 
+### Absolute convergence theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.absolute-convergence-series-real-numbers using
+  ( is-convergent-is-absolutely-convergent-series-ℝ)
+open import functional-analysis.absolute-convergence-series-real-banach-spaces using
+  ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
+```
+
 ### Bézout's lemma {#Q513028}
 
 **Author:** [Bryan Lu](https://blu-bird.github.io)
@@ -50,16 +61,17 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 **Author:** [Elif Uskuplu](https://elifuskuplu.github.io)
 
-**Note:** The formalization of the Cantor-Schröder-Bernstein theorem in
-agda-unimath is a generalization of the statement to all types, i.e., it is not
-restricted to sets. This generalization is originally due to Martin-Escardó,
-hence we refer to the generalization as the Cantor-Schröder-Bernstein-Escardó
-theorem.
-
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein-Escardó ;
     Cantor-Schröder-Bernstein)
+```
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import foundation.cantor-schroder-bernstein-decidable-embeddings using
+  ( Cantor-Schröder-Bernstein-WLPO)
 ```
 
 ### Cantor's theorem {#Q474881}
@@ -78,6 +90,16 @@ open import foundation.cantors-theorem using
 ```agda
 open import group-theory.cayleys-theorem using
   ( Cayleys-theorem)
+```
+
+### Cauchy-Schwarz inequality {#Q190546}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser) and
+[malarbol](http://www.github.com/malarbol)
+
+```agda
+open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces using
+  ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space)
 ```
 
 ### Diaconescu's theorem {#Q3527059}
@@ -116,6 +138,26 @@ open import foundation.fundamental-theorem-of-equivalence-relations using
   ( equiv-equivalence-relation-partition)
 ```
 
+### Fundamental theorem on homomorphisms {#Q1187646}
+
+**Author:** [Egbert Rijke](https://egbertrijke.github.io)
+
+```agda
+open import group-theory.quotient-groups using
+  ( is-quotient-group-quotient-Group)
+```
+
+### Intermediate Value Theorem {#Q245098}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import analysis.intermediate-value-theorem using
+  ( intermediate-value-theorem-ℝ)
+open import analysis.constructive-intermediate-value-theorem using
+  ( constructive-intermediate-value-theorem-ℝ)
+```
+
 ### Kleene's fixed point theorem {#Q3527263}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -146,6 +188,66 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Monotone convergence theorem {#Q4454933}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+  ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
+```
+
+### Triangle inequality theorem {#Q208216}
+
+**Author:** [malarbol](https://github.com/malarbol)
+
+```agda
+open import real-numbers.metric-space-of-real-numbers using
+  ( is-triangular-neighborhood-ℝ)
+```
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.absolute-value-real-numbers using
+  ( triangle-inequality-abs-ℝ)
+open import real-numbers.distance-real-numbers using
+  ( triangle-inequality-dist-ℝ)
+```
+
+### Uniform limit theorem {#Q7885107}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces using
+  ( modulus-of-uniform-continuity-map-limit-modulus-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}

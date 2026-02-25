@@ -26,7 +26,8 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-Ring homomorphisms are maps between rings that preserve the ring structure
+{{#concept "Finite ring homomorphisms" Agda=hom-Finite-Ring}} are maps between
+[finite rings](finite-algebra.finite-rings.md) that preserve the ring structure.
 
 ## Definitions
 

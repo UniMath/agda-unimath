@@ -21,12 +21,14 @@ open import foundation-core.decidable-propositions public
 open import foundation-core.dependent-identifications public
 open import foundation-core.diagonal-maps-cartesian-products-of-types public
 open import foundation-core.discrete-types public
+open import foundation-core.double-negation-stable-equality public
 open import foundation-core.embeddings public
 open import foundation-core.empty-types public
 open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
+open import foundation-core.equivalences-arrows public
 open import foundation-core.families-of-equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-types public
@@ -37,7 +39,11 @@ open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
 open import foundation-core.iterating-functions public
+open import foundation-core.law-of-excluded-middle public
+open import foundation-core.monomorphisms public
 open import foundation-core.negation public
+open import foundation-core.operations-cospan-diagrams public
+open import foundation-core.operations-cospans public
 open import foundation-core.operations-span-diagrams public
 open import foundation-core.operations-spans public
 open import foundation-core.path-split-maps public

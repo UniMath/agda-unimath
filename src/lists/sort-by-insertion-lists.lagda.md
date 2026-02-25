@@ -27,9 +27,17 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We use the definition of sort by insertion for tuples
-([`lists.sort-by-insertion-tuples`](lists.sort-by-insertion-tuples.md)) and we
-adapt it for lists.
+{{#concept "Sort by insertion" Disambiguation="for lists" WD="insertion sort" WDID=Q117241 Agda=insertion-sort-list}}
+is a recursive [sorting algorithm](lists.sorting-algorithms-lists.md) on
+[lists](lists.lists.md). If a list is empty or with only one element then it is
+sorted. Otherwise, we recursively sort the tail of the list. Then we compare the
+head of the list to the head of the [sorted](lists.sorted-lists.md) tail. If the
+head is less or equal than the head of the tail the list is sorted. Otherwise we
+permute the two elements and we recursively sort the tail of the list.
+
+We use the definition of
+[sort by insertion for tuples](lists.sort-by-insertion-tuples.md) and adapt it
+for lists.
 
 ## Definition
 

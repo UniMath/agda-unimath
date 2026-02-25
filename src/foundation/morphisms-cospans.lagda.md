@@ -19,9 +19,9 @@ open import foundation-core.commuting-triangles-of-maps
 
 ## Idea
 
-Consider two [cospans](foundation.cospans.md) `c := (X , f , g)` and
-`d := (Y , h , k)` from `A` to `B`. A
-{{#concept "morphism of cospans" Agda=hom-cospan}} from `c` to `d` consists of a
+Consider two [cospans](foundation.cospans.md) `s := (X , f , g)` and
+`t := (Y , h , k)` from `A` to `B`. A
+{{#concept "morphism of cospans" Agda=hom-cospan}} from `s` to `t` consists of a
 map `u : X → Y` equipped with [homotopies](foundation-core.homotopies.md)
 witnessing that the two triangles
 
@@ -43,17 +43,40 @@ witnessing that the two triangles
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
-  (c : cospan l3 A B) (d : cospan l4 A B)
+  (s : cospan l3 A B) (t : cospan l4 A B)
   where
 
+  left-coherence-hom-cospan :
+    (cospanning-type-cospan s → cospanning-type-cospan t) → UU (l1 ⊔ l4)
+  left-coherence-hom-cospan h =
+    coherence-triangle-maps (left-map-cospan t) h (left-map-cospan s)
+
+  right-coherence-hom-cospan :
+    (cospanning-type-cospan s → cospanning-type-cospan t) → UU (l2 ⊔ l4)
+  right-coherence-hom-cospan h =
+    coherence-triangle-maps (right-map-cospan t) h (right-map-cospan s)
+
   coherence-hom-cospan :
-    (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l4)
-  coherence-hom-cospan h =
-    ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
-    ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
+    (cospanning-type-cospan s → cospanning-type-cospan t) → UU (l1 ⊔ l2 ⊔ l4)
+  coherence-hom-cospan f =
+    left-coherence-hom-cospan f × right-coherence-hom-cospan f
 
   hom-cospan : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-cospan =
-    Σ ( codomain-cospan c → codomain-cospan d)
+    Σ ( cospanning-type-cospan s → cospanning-type-cospan t)
       ( coherence-hom-cospan)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (s : cospan l3 A B) (t : cospan l4 A B) (f : hom-cospan s t)
+  where
+
+  map-hom-cospan : cospanning-type-cospan s → cospanning-type-cospan t
+  map-hom-cospan = pr1 f
+
+  left-triangle-hom-cospan : left-coherence-hom-cospan s t map-hom-cospan
+  left-triangle-hom-cospan = pr1 (pr2 f)
+
+  right-triangle-hom-cospan : right-coherence-hom-cospan s t map-hom-cospan
+  right-triangle-hom-cospan = pr2 (pr2 f)
 ```

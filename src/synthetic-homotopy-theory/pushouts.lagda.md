@@ -30,6 +30,7 @@ open import reflection.erasing-equality
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
@@ -176,7 +177,20 @@ module _
         ( c)
         ( compute-inl-dependent-cogap)
         ( compute-inr-dependent-cogap)
+```
 
+For reference, the unfolded type signature for `compute-glue-dependent-cogap` is
+as follows:
+
+```text
+  (s : S) →
+  ( apd dependent-cogap (glue-pushout f g s) ∙
+    compute-inr-dependent-cogap (g s)) ＝
+  ( ap (tr P (glue-pushout f g s)) (compute-inl-dependent-cogap (f s)) ∙
+    coherence-square-dependent-cocone f g (cocone-pushout f g) P c s)
+```
+
+```agda
   htpy-compute-dependent-cogap :
     htpy-dependent-cocone f g
       ( cocone-pushout f g)
@@ -460,7 +474,7 @@ module _
       ( up-pushout f g)
 ```
 
-### Pushout cocones satisfy the pullback property of the pushout
+### Cocones satisfy the pullback property of the pushout if and only if they are pushouts
 
 ```agda
 module _
@@ -481,6 +495,29 @@ module _
     is-pushout-pullback-property-pushout pb =
       is-pushout-universal-property-pushout f g c
         ( universal-property-pushout-pullback-property-pushout f g c pb)
+```
+
+### Cocones satisfy the dependent pullback property of the pushout if and only if they are pushouts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  abstract
+    dependent-pullback-property-pushout-is-pushout :
+      is-pushout f g c → dependent-pullback-property-pushout f g c
+    dependent-pullback-property-pushout-is-pushout po =
+      dependent-pullback-property-pullback-property-pushout f g c
+        ( pullback-property-pushout-is-pushout f g c po)
+
+  abstract
+    is-pushout-dependent-pullback-property-pushout :
+      dependent-pullback-property-pushout f g c → is-pushout f g c
+    is-pushout-dependent-pullback-property-pushout pb =
+      is-pushout-pullback-property-pushout f g c
+        ( pullback-property-dependent-pullback-property-pushout f g c pb)
 ```
 
 ### Fibers of the cogap map

@@ -80,6 +80,9 @@ module _
   is-retraction-map-inv-equiv-is-small =
     is-retraction-map-inv-equiv equiv-is-small
 
+  is-equiv-map-inv-equiv-is-small : is-equiv map-inv-equiv-is-small
+  is-equiv-map-inv-equiv-is-small = is-equiv-map-inv-equiv equiv-is-small
+
   coherence-map-inv-equiv-is-small :
     coherence-is-coherently-invertible
       ( map-equiv-is-small)
@@ -353,3 +356,5 @@ is-small-logical-equivalence H K =
 ## See also
 
 - [Small maps](foundation.small-maps.md)
+- The `is-essentially-in-subuniverse` predicate in
+  [`foundation.subuniverses`](foundation.subuniverses.md)

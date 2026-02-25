@@ -315,10 +315,17 @@ Given a homotopy `H : f ~ g` we obtain a natural map `f x ＝ f y → g x ＝ g 
 given by conjugation by `H`.
 
 ```agda
-conjugate-htpy :
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
-  (H : f ~ g) {x y : A} → f x ＝ f y → g x ＝ g y
-conjugate-htpy H {x} {y} p = inv (H x) ∙ (p ∙ H y)
+  (H : f ~ g) {x y : A}
+  where
+
+  conjugate-htpy : f x ＝ f y → g x ＝ g y
+  conjugate-htpy p = inv (H x) ∙ (p ∙ H y)
+
+  compute-conjugate-htpy-ap :
+    (p : x ＝ y) → conjugate-htpy (ap f p) ＝ ap g p
+  compute-conjugate-htpy-ap refl = left-inv (H x)
 ```
 
 ### Homotopies preserve the laws of the action on identity types

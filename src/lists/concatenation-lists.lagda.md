@@ -26,7 +26,9 @@ open import lists.lists
 
 ## Idea
 
-Two lists can be concatenated to form a single list.
+Two [lists](lists.lists.md) can be
+{{#concept "concatenated" Disambiguation="pairs of lists" Agda=concat-list}} to
+form a single list.
 
 ## Definition
 

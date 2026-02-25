@@ -17,7 +17,6 @@ open import elementary-number-theory.rational-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
-open import foundation.interchange-law
 ```
 
 </details>
@@ -75,11 +74,10 @@ abstract
 ### The difference of a rational number with zero is itself
 
 ```agda
-opaque
-  unfolding neg-ℚ
-
+abstract
   right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
-  right-zero-law-diff-ℚ = right-unit-law-add-ℚ
+  right-zero-law-diff-ℚ x =
+    ap-add-ℚ refl neg-zero-ℚ ∙ right-unit-law-add-ℚ x
 ```
 
 ### The difference of zero and a rational number is its negative
@@ -186,4 +184,20 @@ abstract
         by ap (rational-ℤ x +ℚ_) (inv (neg-rational-ℤ y))
       ＝ rational-ℤ (x -ℤ y)
         by add-rational-ℤ x (neg-ℤ y)
+```
+
+### The difference of the successor of a rational number and the rational number is one
+
+```agda
+abstract
+  diff-succ-ℚ : (q : ℚ) → succ-ℚ q -ℚ q ＝ one-ℚ
+  diff-succ-ℚ q =
+    equational-reasoning
+      (one-ℚ +ℚ q) -ℚ q
+      ＝ one-ℚ +ℚ (q -ℚ q)
+        by associative-add-ℚ _ _ _
+      ＝ one-ℚ +ℚ zero-ℚ
+        by ap-add-ℚ refl (right-inverse-law-add-ℚ q)
+      ＝ one-ℚ
+        by right-unit-law-add-ℚ _
 ```

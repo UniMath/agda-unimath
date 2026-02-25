@@ -12,8 +12,10 @@ module real-numbers.metric-space-of-real-numbers where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -41,13 +43,17 @@ open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 
+open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
+open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers
 ```
@@ -130,10 +136,7 @@ module _
       diagonal-product
         ( (r : ℚ) →
           is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
-        ( λ r →
-          le-lower-cut-ℝ x r
-            ( r +ℚ rational-ℚ⁺ d)
-            ( le-right-add-rational-ℚ⁺ r d))
+        ( λ r → le-lower-cut-ℝ x (le-right-add-rational-ℚ⁺ r d))
 
     is-symmetric-neighborhood-ℝ :
       is-symmetric-Rational-Neighborhood-Relation (neighborhood-prop-ℝ l)
@@ -170,15 +173,11 @@ module _
         elim-exists
           ( lower-cut-ℝ x r)
           ( λ r' (K , I') →
-            H ( positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' K)
+            H ( positive-diff-le-ℚ K)
               ( r)
               ( tr
                 ( is-in-lower-cut-ℝ y)
-                ( ( inv
-                    ( right-law-positive-diff-le-ℚ
-                      ( r +ℚ rational-ℚ⁺ ε)
-                      ( r')
-                      ( K))) ∙
+                ( ( inv (right-law-positive-diff-le-ℚ K)) ∙
                   ( associative-add-ℚ
                     ( r)
                     ( rational-ℚ⁺ ε)
@@ -221,11 +220,11 @@ module _
               ( lower-cut-ℝ y r)
               ( λ s (r<s , Lxs) →
                 pr2
-                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( H (positive-diff-le-ℚ r<s))
                   ( r)
                   ( inv-tr
                     ( λ u → is-in-lower-cut-ℝ x u)
-                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( right-law-positive-diff-le-ℚ r<s)
                     ( Lxs)))
               ( forward-implication (is-rounded-lower-cut-ℝ x r) Lxr))
           ( λ r Lyr →
@@ -233,11 +232,11 @@ module _
               ( lower-cut-ℝ x r)
               ( λ s (r<s , Lys) →
                 pr1
-                  ( H (positive-diff-le-ℚ r s r<s))
+                  ( H (positive-diff-le-ℚ r<s))
                   ( r)
                   ( inv-tr
                     ( λ u → is-in-lower-cut-ℝ y u)
-                    ( right-law-positive-diff-le-ℚ r s r<s)
+                    ( right-law-positive-diff-le-ℚ r<s)
                     ( Lys)))
               ( forward-implication (is-rounded-lower-cut-ℝ y r) Lyr)))
 
@@ -284,7 +283,6 @@ module _
       lower-neighborhood-ℝ d x y
     lower-neighborhood-real-bound-leq-ℝ (d , _) x y y≤x+d q q+d<y =
       is-in-lower-cut-le-real-ℚ
-        ( q)
         ( x)
         ( concatenate-le-leq-ℝ
           ( real-ℚ q)
@@ -297,7 +295,7 @@ module _
             ( inv-tr
               ( λ z → le-ℝ z y)
               ( add-real-ℚ q d)
-              ( le-real-is-in-lower-cut-ℚ (q +ℚ d) y q+d<y)))
+              ( le-real-is-in-lower-cut-ℝ y q+d<y)))
           ( leq-transpose-right-add-ℝ y x (real-ℚ d) y≤x+d))
 
   opaque
@@ -342,6 +340,21 @@ module _
       real-bound-leq-lower-neighborhood-ℝ d x y H
 ```
 
+### `x + real-ℚ⁺ d` is in a `d`-neighborhood of `x`
+
+```agda
+abstract
+  neighborhood-right-add-real-ℚ⁺ :
+    {l : Level} (x : ℝ l) (d : ℚ⁺) →
+    neighborhood-ℝ l d x (x +ℝ real-ℚ⁺ d)
+  neighborhood-right-add-real-ℚ⁺ x d =
+    neighborhood-real-bound-each-leq-ℝ d _ _
+      ( transitive-leq-ℝ _ _ _
+        ( leq-left-add-real-ℝ⁰⁺ _ (nonnegative-real-ℚ⁺ d))
+        ( leq-left-add-real-ℝ⁰⁺ _ (nonnegative-real-ℚ⁺ d)))
+      ( refl-leq-ℝ _)
+```
+
 ### Similarity of real numbers preserves neighborhoods
 
 ```agda
@@ -358,10 +371,6 @@ module _
       ( x')
       ( y')
       ( preserves-leq-sim-ℝ
-        ( x)
-        ( x')
-        ( y +ℝ real-ℚ⁺ d)
-        ( y' +ℝ real-ℚ⁺ d)
         ( x~x')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)
@@ -370,10 +379,6 @@ module _
           ( y~y'))
         ( left-leq-real-bound-neighborhood-ℝ d x y H))
       ( preserves-leq-sim-ℝ
-        ( y)
-        ( y')
-        ( x +ℝ real-ℚ⁺ d)
-        ( x' +ℝ real-ℚ⁺ d)
         ( y~y')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)
@@ -383,18 +388,35 @@ module _
         ( right-leq-real-bound-neighborhood-ℝ d x y H))
 ```
 
+### The neighborhood relation on the real numbers is monotonic
+
+```agda
+abstract
+  monotonic-neighborhood-ℝ :
+    {l : Level} (x y : ℝ l) (d₁ d₂ : ℚ⁺) → le-ℚ⁺ d₁ d₂ →
+    neighborhood-ℝ l d₁ x y → neighborhood-ℝ l d₂ x y
+  monotonic-neighborhood-ℝ {l} =
+    monotonic-neighborhood-Metric-Space (metric-space-ℝ l)
+
+  weakly-monotonic-neighborhood-ℝ :
+    {l : Level} (x y : ℝ l) (d₁ d₂ : ℚ⁺) → leq-ℚ⁺ d₁ d₂ →
+    neighborhood-ℝ l d₁ x y → neighborhood-ℝ l d₂ x y
+  weakly-monotonic-neighborhood-ℝ {l} =
+    weakly-monotonic-neighborhood-Metric-Space (metric-space-ℝ l)
+```
+
 ### The canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
 opaque
   unfolding neighborhood-ℝ real-ℚ
 
-  is-isometry-metric-space-real-ℚ :
+  is-isometry-real-ℚ :
     is-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( real-ℚ)
-  is-isometry-metric-space-real-ℚ d x y =
+  is-isometry-real-ℚ d x y =
     pair
       ( map-product
         ( le-le-add-positive-leq-add-positive-ℚ x y d)
@@ -403,12 +425,12 @@ opaque
         ( leq-add-positive-le-le-add-positive-ℚ x y d)
         ( leq-add-positive-le-le-add-positive-ℚ y x d))
 
-isometry-metric-space-real-ℚ :
+isometry-real-ℚ :
   isometry-Metric-Space
     ( metric-space-ℚ)
     ( metric-space-ℝ lzero)
-isometry-metric-space-real-ℚ =
-  ( real-ℚ , is-isometry-metric-space-real-ℚ)
+isometry-real-ℚ =
+  ( real-ℚ , is-isometry-real-ℚ)
 ```
 
 ### Raising real numbers is an isometry
@@ -419,12 +441,12 @@ module _
   where
 
   abstract
-    is-isometry-metric-space-raise-ℝ :
+    is-isometry-raise-ℝ :
       is-isometry-Metric-Space
         ( metric-space-ℝ l0)
         ( metric-space-ℝ (l0 ⊔ l))
         ( raise-ℝ l)
-    pr1 (is-isometry-metric-space-raise-ℝ d x y) =
+    pr1 (is-isometry-raise-ℝ d x y) =
       preserves-neighborhood-sim-ℝ
         ( d)
         ( x)
@@ -433,7 +455,7 @@ module _
         ( raise-ℝ l y)
         ( sim-raise-ℝ l x)
         ( sim-raise-ℝ l y)
-    pr2 (is-isometry-metric-space-raise-ℝ d x y) =
+    pr2 (is-isometry-raise-ℝ d x y) =
       preserves-neighborhood-sim-ℝ
         ( d)
         ( raise-ℝ l x)
@@ -443,12 +465,12 @@ module _
         ( symmetric-sim-ℝ (sim-raise-ℝ l x))
         ( symmetric-sim-ℝ (sim-raise-ℝ l y))
 
-  isometry-metric-space-raise-ℝ :
+  isometry-raise-ℝ :
     isometry-Metric-Space
       ( metric-space-ℝ l0)
       ( metric-space-ℝ (l0 ⊔ l))
-  isometry-metric-space-raise-ℝ =
-    ( raise-ℝ l , is-isometry-metric-space-raise-ℝ)
+  isometry-raise-ℝ =
+    ( raise-ℝ l , is-isometry-raise-ℝ)
 ```
 
 ### Raising rational numbers to real numbers is an isometry
@@ -458,29 +480,29 @@ module _
   (l : Level)
   where
 
-  isometry-metric-space-raise-real-ℚ :
+  isometry-raise-real-ℚ :
     isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ l)
-  isometry-metric-space-raise-real-ℚ =
+  isometry-raise-real-ℚ =
     comp-isometry-Metric-Space
       ( metric-space-ℚ)
       ( metric-space-ℝ lzero)
       ( metric-space-ℝ l)
-      ( isometry-metric-space-raise-ℝ l)
-      ( isometry-metric-space-real-ℚ)
+      ( isometry-raise-ℝ l)
+      ( isometry-real-ℚ)
 
   abstract
-    is-isometry-metric-space-raise-real-ℚ :
+    is-isometry-raise-real-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ l)
         ( raise-real-ℚ l)
-    is-isometry-metric-space-raise-real-ℚ =
+    is-isometry-raise-real-ℚ =
       is-isometry-map-isometry-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℝ l)
-        ( isometry-metric-space-raise-real-ℚ)
+        ( isometry-raise-real-ℚ)
 ```
 
 ## References

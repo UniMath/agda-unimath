@@ -33,9 +33,12 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Given a family of commutative finite rings `A i` indexed by a finite type
-`i : I`, their **dependent product** `Π(i:I), A i` is again a finite commutative
-ring.
+Given a family of
+[commutative finite rings](finite-algebra.commutative-finite-rings.md) `A i`
+indexed by a [finite type](univalent-combinatorics.finite-types.md) `i : I`,
+their
+{{#concept "dependent product" Disambiguation="of finite family of commutative finite rings" Agda=Π-Finite-Commutative-Ring}}
+`Π(i:I), A i` is again a finite commutative ring.
 
 ## Definition
 

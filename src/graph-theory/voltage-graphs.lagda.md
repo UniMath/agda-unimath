@@ -19,9 +19,11 @@ open import group-theory.groups
 
 ## Idea
 
-A **voltage graph** is a [directed graph](graph-theory.directed-graphs.md) `G`
-equipped with a [group](group-theory.groups.md) `Π`, which we call the **voltage
-group**, and a labeling of the edges of `G` by elements of `Π`.
+A {{#concept "voltage graph" Agda=Voltage-Graph}} is a
+[directed graph](graph-theory.directed-graphs.md) `G` equipped with a
+[group](group-theory.groups.md) `Π`, which we call the
+{{#concept "voltage group" Agda=voltage-Voltage-Graph}}, and a labeling of the
+edges of `G` by elements of `Π`.
 
 ## Definition
 

@@ -20,8 +20,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **(large) precategory of rings** consists of [rings](ring-theory.rings.md)
-and [ring homomorphisms](ring-theory.homomorphisms-rings.md).
+The
+{{#concept "precategory" Disambiguation="of rings" Agda=Ring-Large-Precategory Agda=Ring-Precategory}}
+of [rings](ring-theory.rings.md) consists of [rings](ring-theory.rings.md) and
+[ring homomorphisms](ring-theory.homomorphisms-rings.md).
 
 ## Definitions
 

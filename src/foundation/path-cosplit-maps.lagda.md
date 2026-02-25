@@ -17,7 +17,6 @@ open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-action-on-identifications-functions
@@ -38,7 +37,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -47,6 +46,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.equivalences-arrows
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions
@@ -170,7 +170,8 @@ is-path-cosplit-is-trunc :
 is-path-cosplit-is-trunc neg-two-𝕋 is-trunc-f =
   retraction-is-contr-map is-trunc-f
 is-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
-  is-path-cosplit-is-trunc k (is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
+  is-path-cosplit-is-trunc k
+    ( is-trunc-map-ap-is-trunc-map-succ k f is-trunc-f x y)
 ```
 
 ### If a map is `k`-path-cosplit then it is `k+1`-path-cosplit
@@ -336,7 +337,7 @@ is-path-cosplit-is-path-cosplit-on-domain-hom-arrow :
   is-path-cosplit k f
 is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
   {k = neg-two-𝕋} f g α I =
-  retraction-retract-map-retraction' f g
+  retraction-retract-arrow-retraction' f g
     ( map-domain-hom-arrow f g α , I)
     ( map-codomain-hom-arrow f g α)
     ( coh-hom-arrow f g α)
@@ -363,7 +364,7 @@ Given a triangle of the form
          C,
 ```
 
-if the left map is is `k`-path-cosplit then so is the top map.
+if the left map is `k`-path-cosplit then so is the top map.
 
 ```agda
 is-path-cosplit-top-map-triangle' :
@@ -507,7 +508,7 @@ is-path-cosplit-tot {k = succ-𝕋 k} {f = f} F x y =
   is-path-cosplit-equiv-arrow
     ( equiv-pair-eq-Σ x y ,
       equiv-pair-eq-Σ (tot f x) (tot f y) ,
-      compute-ap-tot f)
+      coh-ap-tot f)
     ( is-path-cosplit-tot
       { f = λ p q → inv (preserves-tr f p (pr2 x)) ∙ ap (f (pr1 y)) q}
       ( λ where refl → F (pr1 y) (pr2 x) (pr2 y)))

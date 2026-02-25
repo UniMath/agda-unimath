@@ -41,7 +41,9 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 ## Idea
 
-Finite semigroups are semigroups of which the underlying type is finite.
+{{#concept "Finite semigroups" Agda=Finite-Semigroup}} are
+[semigroups](group-theory.semigroups.md) whose underlying type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definitions
 

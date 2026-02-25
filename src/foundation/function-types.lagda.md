@@ -91,8 +91,8 @@ module _
 
   compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
-    ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
-    dependent-identification (λ a → B a → C a) p f g
+    ( (b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
+    ( dependent-identification (λ a → B a → C a) p f g)
   compute-dependent-identification-function-type refl f g =
     inv-equiv equiv-funext
 

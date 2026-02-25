@@ -32,9 +32,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The {{#concept "Eisenstein integers" WDID=Q262370 WD="Eisenstein integer"}} are
-the [complex numbers](complex-numbers.complex-numbers.md) of the form `a + bω`,
-where `ω = -½ + ½√3i`, and where `a` and `b` are
+The
+{{#concept "Eisenstein integers" WDID=Q262370 WD="Eisenstein integer" Agda=ℤ[ω]}}
+are the [complex numbers](complex-numbers.complex-numbers.md) of the form
+`a + bω`, where `ω = -½ + ½√3i`, and where `a` and `b` are
 [integers](elementary-number-theory.integers.md). Note that `ω` is a solution to
 the equation `ω² + ω + 1 = 0`.
 

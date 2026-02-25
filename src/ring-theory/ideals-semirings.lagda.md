@@ -23,16 +23,17 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-An **ideal** (resp. a **left/right ideal**) of a semiring `R` is an additive
-submodule of `R` that is closed under multiplication by elements of `R` (from
-the left/right).
+An {{#concept "ideal" Disambiguation="in a semiring" Agda=ideal-Semiring}}
+(resp. a
+{{#concept "left" Disambiguation="ideal in a semiring" Agda=left-ideal-Semiring}}/{{#concept "right ideal" Disambiguation="in a semiring" Agda=right-ideal-Semiring}})
+in a [semiring](ring-theory.semirings.md) `R` is an additive submodule of `R`
+that is closed under multiplication by elements of `R` (from the left/right).
 
-### Note
-
-This is the standard definition of ideals in semirings. However, such two-sided
-ideals do not correspond uniquely to congruences on `R`. If we ask in addition
-that the underlying additive submodule is normal, then we get unique
-correspondence to congruences. We will call such ideals **normal**.
+**Note.** This is the standard definition of ideals in semirings. However, such
+two-sided ideals do not correspond uniquely to
+[congruences](ring-theory.congruence-relations-semirings.md) on `R`. If we ask
+in addition that the underlying additive submodule is normal, then we get unique
+correspondence to congruences. We will call such ideals _normal_.
 
 ## Definitions
 

@@ -31,7 +31,7 @@ open import foundation.universe-levels
 
 A [subtype](foundation-core.subtypes.md) is an
 {{#concept "empty" WDID=Q226183 WD="empty set" Agda=is-empty-subtype}} subtype
-if is is [empty](foundation.empty-types.md) as a type.
+if it is [empty](foundation.empty-types.md) as a type.
 
 ## Definition
 
@@ -63,13 +63,21 @@ module _
   {l1 l2 : Level} {X : UU l1} (S : subtype l2 X)
   where
 
-  is-empty-type-empty-subtype : is-empty-subtype S → is-empty (type-subtype S)
-  is-empty-type-empty-subtype is-empty-S (x , x∈S) = is-empty-S x x∈S
+  abstract
+    is-empty-type-is-empty-subtype :
+      is-empty-subtype S → is-empty (type-subtype S)
+    is-empty-type-is-empty-subtype is-empty-S (x , x∈S) = is-empty-S x x∈S
 
-  is-empty-subtype-is-empty-type-subtype :
-    is-empty (type-subtype S) → is-empty-subtype S
-  is-empty-subtype-is-empty-type-subtype is-empty-type-S x x∈S =
-    is-empty-type-S (x , x∈S)
+    is-empty-subtype-is-empty-type-subtype :
+      is-empty (type-subtype S) → is-empty-subtype S
+    is-empty-subtype-is-empty-type-subtype is-empty-type-S x x∈S =
+      is-empty-type-S (x , x∈S)
+
+abstract
+  is-empty-type-empty-subtype :
+    {l1 : Level} (l2 : Level) (X : UU l1) →
+    is-empty-subtype (empty-subtype l2 X)
+  is-empty-type-empty-subtype l2 X x = map-inv-raise
 ```
 
 ### Empty subtypes at a given level are torsorial

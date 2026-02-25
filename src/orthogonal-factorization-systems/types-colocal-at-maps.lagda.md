@@ -14,7 +14,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -22,7 +21,7 @@ open import foundation.identity-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
@@ -30,6 +29,7 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.equivalences-arrows
 open import foundation-core.fibers-of-maps
 ```
 
@@ -183,15 +183,15 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (R : g retract-of-map f) (S : UU l5)
+  (f : A → B) (g : X → Y) (R : g retract-of-arrow f) (S : UU l5)
   where
 
-  is-colocal-retract-map-is-colocal : is-colocal f S → is-colocal g S
-  is-colocal-retract-map-is-colocal =
-    is-equiv-retract-map-is-equiv
+  is-colocal-retract-arrow-is-colocal : is-colocal f S → is-colocal g S
+  is-colocal-retract-arrow-is-colocal =
+    is-equiv-retract-arrow-is-equiv
       ( postcomp S g)
       ( postcomp S f)
-      ( retract-map-postcomp-retract-map g f R S)
+      ( retract-arrow-postcomp-retract-arrow g f R S)
 ```
 
 In fact, the higher coherence of the retract is not needed:
@@ -210,9 +210,9 @@ module _
   (S : UU l5)
   where
 
-  is-colocal-retract-map-is-colocal' : is-colocal f S → is-colocal g S
-  is-colocal-retract-map-is-colocal' =
-    is-equiv-retract-map-is-equiv'
+  is-colocal-retract-arrow-is-colocal' : is-colocal f S → is-colocal g S
+  is-colocal-retract-arrow-is-colocal' =
+    is-equiv-retract-arrow-is-equiv'
       ( postcomp S g)
       ( postcomp S f)
       ( retract-postcomp S R₀)

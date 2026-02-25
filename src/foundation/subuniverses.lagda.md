@@ -89,20 +89,25 @@ module _
   is-essentially-in-subuniverse X =
     Σ (type-subuniverse P) (λ Y → inclusion-subuniverse P Y ≃ X)
 
+  is-proof-irrelevant-is-essentially-in-subuniverse :
+    {l3 : Level} (X : UU l3) →
+    is-proof-irrelevant (is-essentially-in-subuniverse X)
+  is-proof-irrelevant-is-essentially-in-subuniverse X ((X' , p) , e) =
+    is-torsorial-Eq-subtype
+      ( is-contr-equiv'
+        ( Σ (UU _) (λ T → T ≃ X'))
+        ( equiv-tot (equiv-postcomp-equiv e))
+        ( is-torsorial-equiv' X'))
+      ( is-prop-is-in-subuniverse P)
+      ( X')
+      ( e)
+      ( p)
+
   is-prop-is-essentially-in-subuniverse :
     {l3 : Level} (X : UU l3) → is-prop (is-essentially-in-subuniverse X)
   is-prop-is-essentially-in-subuniverse X =
     is-prop-is-proof-irrelevant
-      ( λ ((X' , p) , e) →
-        is-torsorial-Eq-subtype
-          ( is-contr-equiv'
-            ( Σ (UU _) (λ T → T ≃ X'))
-            ( equiv-tot (equiv-postcomp-equiv e))
-            ( is-torsorial-equiv' X'))
-          ( is-prop-is-in-subuniverse P)
-          ( X')
-          ( e)
-          ( p))
+      ( is-proof-irrelevant-is-essentially-in-subuniverse X)
 
   is-essentially-in-subuniverse-Prop :
     {l3 : Level} (X : UU l3) → Prop (lsuc l1 ⊔ l2 ⊔ l3)
@@ -111,6 +116,8 @@ module _
   pr2 (is-essentially-in-subuniverse-Prop X) =
     is-prop-is-essentially-in-subuniverse X
 ```
+
+- See also [univalent type families](foundation.univalent-type-families.md).
 
 ## Properties
 

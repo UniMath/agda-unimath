@@ -34,10 +34,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define {{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. These
-are [equivalent](lists.equivalence-tuples-finite-sequences.md) to the related
-concept of [finite sequences](lists.finite-sequences.md), but are structured
-like [lists](lists.lists.md) instead of [arrays](lists.arrays.md).
+For every [natural number](elementary-number-theory.natural-numbers.md) `n` we
+define {{#concept "tuples" WD="n-tuple" WDID=Q600590 Agda=tuple}} of length `n`.
+These are [equivalent](lists.equivalence-tuples-finite-sequences.md) to the
+related concept of [finite sequences](lists.finite-sequences.md), but are
+structured like [lists](lists.lists.md) instead of [arrays](lists.arrays.md).
 
 ## Definitions
 

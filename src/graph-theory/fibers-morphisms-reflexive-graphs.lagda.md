@@ -36,9 +36,10 @@ open import graph-theory.reflexive-graphs
 
 Consider a [morphism](graph-theory.morphisms-reflexive-graphs.md) `f : H → G` of
 [reflexive graphs](graph-theory.reflexive-graphs.md). The
-{{#concept "fiber" Disambiguation="morphisms of reflexive graphs"}} of `f` is
-the [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md)
-`fib_f` over `G` given by
+{{#concept "fiber" Disambiguation="morphisms of reflexive graphs" Agda=fiber-hom-Reflexive-Graph}}
+of `f` is the
+[dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md) `fib_f`
+over `G` given by
 
 ```text
   (fib_f)₀ x := fib f₀

@@ -29,8 +29,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Given two finite rings R1 and R2, we define a ring structure on the product of
-R1 and R2.
+Given two [finite rings](finite-algebra.finite-rings.md) `R1` and `R2`, then the
+{{#concept "product" Disambiguation="of finite rings" Agda=product-Finite-Ring}}
+finite ring `R1 × R2` is defined componentwise.
 
 ## Definition
 

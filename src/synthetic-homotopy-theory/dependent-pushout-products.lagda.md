@@ -40,7 +40,7 @@ is the [cogap map](synthetic-homotopy-theory.pushouts.md) of the
                        Σ f id
 ```
 
-The [fiber](foundation-core.fibers-of-maps.md) of the dependent pushout product
+The [fiber](foundation-core.fibers-of-maps.md) of the dependent pushout-product
 at `(x , y)` is [equivalent](foundation-core.equivalences.md) to the join of
 fibers
 

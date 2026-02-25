@@ -24,12 +24,15 @@ open import trees.rooted-morphisms-directed-trees
 
 ## Idea
 
-**Rooted morphisms of enriched directed trees** are root preserving morphisms of
-enriched directed trees.
+A
+{{#concept "rooted morphism" Disambiguation="of enriched directed trees" Agda=rooted-hom-Enriched-Directed-Tree}}
+of [enriched directed trees](trees.enriched-directed-trees.md) from `S` to `T`
+is a [morphism](trees.morphisms-enriched-directed-trees.md) of enriched directed
+trees that maps the root of `S` to the root of `T`.
 
 ## Definitions
 
-### Rooted morphisms of directed trees
+### Rooted morphisms of enriched directed trees
 
 ```agda
 module _
@@ -128,7 +131,7 @@ module _
     preserves-root-rooted-hom-Enriched-Directed-Tree = pr2 f
 ```
 
-### The identity rooted morphism of directed trees
+### The identity rooted morphism of enriched directed trees
 
 ```agda
 id-rooted-hom-Enriched-Directed-Tree :

@@ -21,7 +21,9 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-We **raise the universe levels** of
+We
+{{#concept "raise" Disambiguation="the universe levels of directed graphs" Agda=raise-Directed-Graph}}
+the [universe levels](foundation.universe-levels.md) of
 [directed graphs](graph-theory.directed-graphs.md) by
 [raising the universe levels](foundation.raising-universe-levels.md) of the
 vertices and the edges.

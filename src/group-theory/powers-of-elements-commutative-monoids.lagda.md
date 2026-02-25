@@ -144,13 +144,15 @@ module _
 
   distributive-power-mul-Commutative-Monoid :
     (n : ℕ) {x y : type-Commutative-Monoid M} →
-    (H : mul-Commutative-Monoid M x y ＝ mul-Commutative-Monoid M y x) →
     power-Commutative-Monoid M n (mul-Commutative-Monoid M x y) ＝
     mul-Commutative-Monoid M
       ( power-Commutative-Monoid M n x)
       ( power-Commutative-Monoid M n y)
-  distributive-power-mul-Commutative-Monoid =
-    distributive-power-mul-Monoid (monoid-Commutative-Monoid M)
+  distributive-power-mul-Commutative-Monoid n =
+    distributive-power-mul-Monoid
+      ( monoid-Commutative-Monoid M)
+      ( n)
+      ( commutative-mul-Commutative-Monoid M _ _)
 ```
 
 ### Powers by products of natural numbers are iterated powers

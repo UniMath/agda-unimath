@@ -26,8 +26,12 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-A **morphism of enriched directed trees** is a morphism of directed trees that
-preserves the enrichment structure.
+A
+{{#concept "morphism" Disambiguation="of enriched directed trees" Agda=hom-Enriched-Directed-Tree}}
+of [enriched directed trees](trees.enriched-directed-trees.md) is a
+[morphism](trees.morphisms-directed-trees.md) of
+[directed trees](trees.directed-trees.md) that preserves the enrichment
+structure.
 
 ## Definitions
 

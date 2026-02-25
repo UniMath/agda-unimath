@@ -27,7 +27,7 @@ open import order-theory.upper-bounds-posets
 ## Idea
 
 Consider a [universe level](foundation.universe-levels.md) `l`. An
-`l`-{{#concept "suplattice"  Agda=Suplattice}} is a
+`l`-{{#concept "suplattice" Agda=Suplattice}} is a
 [poset](order-theory.posets.md) which has all
 [least upper bounds](order-theory.least-upper-bounds-posets.md) of families of
 elements indexed by a type of universe level `l`.

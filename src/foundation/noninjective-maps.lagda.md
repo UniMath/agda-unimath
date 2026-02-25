@@ -41,23 +41,6 @@ if there [exists](foundation.existential-quantification.md) a
 
 ## Definitions
 
-### Not injective maps
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-not-injective : (A → B) → UU (l1 ⊔ l2)
-  is-not-injective f = ¬ (is-injective f)
-
-  is-prop-is-not-injective : {f : A → B} → is-prop (is-not-injective f)
-  is-prop-is-not-injective = is-prop-neg
-
-  is-not-injective-Prop : (A → B) → Prop (l1 ⊔ l2)
-  is-not-injective-Prop f = (is-not-injective f , is-prop-is-not-injective)
-```
-
 ### Noninjective maps
 
 ```agda
@@ -90,6 +73,23 @@ module _
 
   is-noninjective-map-noninjective-map : is-noninjective map-noninjective-map
   is-noninjective-map-noninjective-map = pr2 f
+```
+
+### Not injective maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-not-injective : (A → B) → UU (l1 ⊔ l2)
+  is-not-injective f = ¬ (is-injective f)
+
+  is-prop-is-not-injective : {f : A → B} → is-prop (is-not-injective f)
+  is-prop-is-not-injective = is-prop-neg
+
+  is-not-injective-Prop : (A → B) → Prop (l1 ⊔ l2)
+  is-not-injective-Prop f = (is-not-injective f , is-prop-is-not-injective)
 ```
 
 ## Properties

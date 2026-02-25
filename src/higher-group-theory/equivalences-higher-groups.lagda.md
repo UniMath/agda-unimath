@@ -57,7 +57,7 @@ module _
     pointed-equiv-equiv-∞-Group = pointed-equiv-Ω-pointed-equiv e
 
     equiv-equiv-∞-Group : type-∞-Group G ≃ type-∞-Group H
-    equiv-equiv-∞-Group = equiv-map-Ω-pointed-equiv e
+    equiv-equiv-∞-Group = equiv-Ω-pointed-equiv e
 ```
 
 ### The identity equivalence of higher groups

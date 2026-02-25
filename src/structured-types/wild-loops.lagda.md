@@ -24,7 +24,9 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-A wild loop is a wild quasigroup equipped with a unit element.
+A {{#concept "wild loop" Agda=Wild-Loop}} is a
+[wild quasigroup](structured-types.wild-quasigroups.md) equipped with a unit
+element.
 
 ## Definition
 

@@ -23,7 +23,8 @@ open import structured-types.sets-equipped-with-automorphisms
 
 ## Idea
 
-A **cyclic set** consists of a [set](foundation.sets.md) `A` equipped with an
+A {{#concept "cyclic set" Agda=Cyclic-Set}} consists of a
+[set](foundation.sets.md) `A` [equipped](foundation.structure.md) with an
 [automorphism](foundation.automorphisms.md) `e : A ≃ A` which is _cyclic_ in the
 sense that its underlying set is [inhabited](foundation.inhabited-types.md) and
 the map
