@@ -126,12 +126,12 @@ module _
 
 ```agda
 abstract
-  coproduct-closed-null-implies-is-null-bool :
+  is-null-bool-is-null-coproduct :
     {l1 : Level} {Y : UU l1} →
     ( {l2 l3 : Level} {A : UU l2} {B : UU l3} →
       is-null Y A → is-null Y B → is-null Y (A + B)) →
     is-null Y bool
-  coproduct-closed-null-implies-is-null-bool {Y = Y} H =
+  is-null-bool-is-null-coproduct {Y = Y} H =
     is-null-equiv-base
       ( equiv-bool-coproduct-unit)
       ( H ( is-null-is-contr Y is-contr-unit)
@@ -158,9 +158,7 @@ module _
       is-empty A →
       is-null Y A
     is-null-is-empty is-empty-A =
-      is-null-equiv-base
-        ( equiv-is-empty is-empty-A id)
-        is-null-empty
+      is-null-equiv-base (equiv-is-empty is-empty-A id) is-null-empty
 
 abstract
   is-null-Fin-is-null-bool :
@@ -173,9 +171,9 @@ abstract
       ( is-null-empty Y is-null-bool)
       ( λ n is-null-Fin-n →
         is-null-coproduct-is-null-bool
-          Y
-          is-null-bool
-          is-null-Fin-n
+          ( Y)
+          ( is-null-bool)
+          ( is-null-Fin-n)
           ( is-null-is-contr Y is-contr-unit))
 ```
 
@@ -199,12 +197,11 @@ abstract
 
   is-null-type-Finite-Type-is-null-bool :
     {l1 l2 : Level} (Y : UU l1) →
-    (is-null-bool : is-null Y bool) →
+    is-null Y bool →
     (X : Finite-Type l2) →
     is-null Y (type-Finite-Type X)
   is-null-type-Finite-Type-is-null-bool Y is-null-bool X =
-    is-null-is-finite-is-null-bool
-      Y
-      is-null-bool
+    is-null-is-finite-is-null-bool Y
+      ( is-null-bool)
       ( is-finite-type-Finite-Type X)
 ```
