@@ -334,8 +334,9 @@ module _
 
 ### The dependent sum of a type family over a `Y`-null base is `Y`-null if and only if the type family is `Y`-null
 
-One direction was already proven in `null-types`, however, we give a second
-proof of this fact below.
+One direction was already proven in
+[`null-types`](orthogonal-factorization-systems.null-types.md), however, we give
+a second proof of this fact below.
 
 ```agda
 module _
