@@ -626,15 +626,15 @@ module _
   (P : type-Set A → Pseudometric-Space lp lp')
   where
 
-  eq-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
-    indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ＝
-    cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P
-  eq-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space =
-    map-inv-equiv
-      ( equiv-eq-isometric-equiv-Pseudometric-Space
+  compute-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space :
+    cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P ＝
+    indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P
+  compute-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space =
+    inv
+      ( eq-isometric-equiv-Pseudometric-Space
         ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P))
-      ( isometric-equiv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
-        ( A)
-        ( P))
+        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+        ( isometric-equiv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+          ( A)
+          ( P)))
 ```
