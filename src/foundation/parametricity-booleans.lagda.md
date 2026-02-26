@@ -198,7 +198,7 @@ abstract
       is-parametric l A → is-parametric l B → is-parametric l (A + B)) →
     is-parametric l bool
   is-parametric-bool-is-parametric-coproduct {l} =
-    coproduct-closed-null-implies-is-null-bool {Y = UU l}
+    is-null-bool-is-null-coproduct {Y = UU l}
 
 module _
   {l2 l3 : Level} (K : subuniverse l2 l3)
@@ -221,7 +221,7 @@ module _
       is-subuniverse-parametric K (A + B)) →
     is-subuniverse-parametric K bool
   is-subuniverse-parametric-bool-is-subuniverse-parametric-coproduct =
-    coproduct-closed-null-implies-is-null-bool {Y = type-subuniverse K}
+    is-null-bool-is-null-coproduct {Y = type-subuniverse K}
 ```
 
 ### Parametricity of the booleans implies parametricity of finite types
@@ -325,8 +325,9 @@ module _
     is-decidable-split-on-double-negation-stable-prop
       ( Π-Prop ℕ (λ n → is-true-Prop (g n)))
       ( λ nn-all-g n →
-        double-negation-elim-is-decidable
-          ( has-decidable-equality-bool (g n) true)
+        has-double-negation-stable-equality-bool
+          ( g n)
+          ( true)
           ( λ nn-gn → nn-all-g (λ all-g → nn-gn (all-g n))))
 
 abstract
