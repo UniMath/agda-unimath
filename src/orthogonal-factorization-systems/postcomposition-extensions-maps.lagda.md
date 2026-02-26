@@ -15,12 +15,13 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
-open import foundation.monomorphisms
 open import foundation.postcomposition-functions
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.monomorphisms
 
 open import orthogonal-factorization-systems.extensions-maps
 ```

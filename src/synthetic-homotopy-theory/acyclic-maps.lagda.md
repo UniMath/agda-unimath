@@ -34,7 +34,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -563,11 +563,11 @@ module _
   where
 
   is-acyclic-map-retract-of :
-    f retract-of-map g → is-acyclic-map g → is-acyclic-map f
+    f retract-of-arrow g → is-acyclic-map g → is-acyclic-map f
   is-acyclic-map-retract-of R ac b =
     is-acyclic-retract-of
-      ( retract-fiber-retract-map f g R b)
-      ( ac (map-codomain-inclusion-retract-map f g R b))
+      ( retract-fiber-retract-arrow f g R b)
+      ( ac (map-codomain-inclusion-retract-arrow f g R b))
 ```
 
 ## See also

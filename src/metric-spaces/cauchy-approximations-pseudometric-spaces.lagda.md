@@ -19,8 +19,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
@@ -101,31 +102,6 @@ module _
   pr1 const-cauchy-approximation-Pseudometric-Space _ = x
   pr2 const-cauchy-approximation-Pseudometric-Space ε δ =
     refl-neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) x
-```
-
-### The action of short maps on Cauchy approximations
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A B)
-  where
-
-  map-short-function-cauchy-approximation-Pseudometric-Space :
-    cauchy-approximation-Pseudometric-Space A →
-    cauchy-approximation-Pseudometric-Space B
-  map-short-function-cauchy-approximation-Pseudometric-Space (u , H) =
-    ( map-short-function-Pseudometric-Space A B f ∘ u ,
-      λ ε δ →
-        is-short-map-short-function-Pseudometric-Space
-          ( A)
-          ( B)
-          ( f)
-          ( ε +ℚ⁺ δ)
-          ( u ε)
-          ( u δ)
-          ( H ε δ))
 ```
 
 ### Homotopic Cauchy approximations are equal

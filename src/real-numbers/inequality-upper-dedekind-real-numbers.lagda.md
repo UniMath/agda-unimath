@@ -17,8 +17,10 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -27,6 +29,7 @@ open import order-theory.bottom-elements-large-posets
 open import order-theory.large-posets
 open import order-theory.large-preorders
 
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -61,24 +64,54 @@ module _
 
 ## Properties
 
+### Inequality on upper Dedekind reals is reflexive
+
+```agda
+refl-leq-upper-ℝ : {l : Level} (x : upper-ℝ l) → leq-upper-ℝ x x
+refl-leq-upper-ℝ x = refl-leq-subtype (cut-upper-ℝ x)
+```
+
+### Inequality on upper Dedekind reals is transitive
+
+```agda
+transitive-leq-upper-ℝ :
+  {l1 l2 l3 : Level} →
+  (x : upper-ℝ l1) (y : upper-ℝ l2) (z : upper-ℝ l3) →
+  leq-upper-ℝ y z → leq-upper-ℝ x y → leq-upper-ℝ x z
+transitive-leq-upper-ℝ x y z y≤z x≤y =
+  transitive-leq-subtype
+    (cut-upper-ℝ z)
+    (cut-upper-ℝ y)
+    (cut-upper-ℝ x)
+    x≤y
+    y≤z
+```
+
+### Inequality on upper Dedekind reals is antisymmetric
+
+```agda
+antisymmetric-leq-upper-ℝ :
+  {l : Level} (x y : upper-ℝ l) →
+  leq-upper-ℝ x y → leq-upper-ℝ y x → x ＝ y
+antisymmetric-leq-upper-ℝ x y x≤y y≤x =
+  eq-eq-cut-upper-ℝ
+    ( x)
+    ( y)
+    ( antisymmetric-leq-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) y≤x x≤y)
+```
+
 ### Inequality on upper Dedekind reals is a large poset
 
 ```agda
 upper-ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder upper-ℝ-Large-Preorder = upper-ℝ
 leq-prop-Large-Preorder upper-ℝ-Large-Preorder = leq-upper-ℝ-Prop
-refl-leq-Large-Preorder upper-ℝ-Large-Preorder x =
-  refl-leq-subtype (cut-upper-ℝ x)
-transitive-leq-Large-Preorder upper-ℝ-Large-Preorder x y z y≤z x≤y =
-  transitive-leq-subtype (cut-upper-ℝ z) (cut-upper-ℝ y) (cut-upper-ℝ x) x≤y y≤z
+refl-leq-Large-Preorder upper-ℝ-Large-Preorder = refl-leq-upper-ℝ
+transitive-leq-Large-Preorder upper-ℝ-Large-Preorder = transitive-leq-upper-ℝ
 
 upper-ℝ-Large-Poset : Large-Poset lsuc _⊔_
 large-preorder-Large-Poset upper-ℝ-Large-Poset = upper-ℝ-Large-Preorder
-antisymmetric-leq-Large-Poset upper-ℝ-Large-Poset x y x≤y y≤x =
-  eq-eq-cut-upper-ℝ
-    ( x)
-    ( y)
-    ( antisymmetric-leq-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) y≤x x≤y)
+antisymmetric-leq-Large-Poset upper-ℝ-Large-Poset = antisymmetric-leq-upper-ℝ
 ```
 
 ### If a rational is in an upper Dedekind cut, the corresponding upper real is less than or equal to the rational's projection
@@ -126,8 +159,8 @@ is-bottom-element-neg-infinity-upper-ℝ x q _ = star
 
 has-bottom-element-upper-ℝ :
   has-bottom-element-Large-Poset upper-ℝ-Large-Poset
-bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ =
-  neg-infinity-upper-ℝ
+bottom-has-bottom-element-Large-Poset has-bottom-element-upper-ℝ l =
+  raise-upper-ℝ l neg-infinity-upper-ℝ
 is-bottom-element-bottom-has-bottom-element-Large-Poset
-  has-bottom-element-upper-ℝ = is-bottom-element-neg-infinity-upper-ℝ
+  has-bottom-element-upper-ℝ l _ _ _ = map-raise star
 ```

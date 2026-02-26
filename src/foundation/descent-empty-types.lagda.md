@@ -17,6 +17,23 @@ open import foundation-core.pullbacks
 
 </details>
 
+## Idea
+
+The
+{{#concept "descent property" Disambiguation="of empty types" Agda=descent-empty}}
+of [empty types](foundation-core.empty-types.md) states that every
+[cone](foundation.cones-over-cospan-diagrams.md) of the form
+
+```text
+  C ------> ∅
+  |         |
+  |         |
+  ∨         ∨
+  B ------> X
+```
+
+is a [pullback](foundation-core.pullbacks.md).
+
 ## Theorem
 
 ```agda
@@ -39,3 +56,7 @@ module _
       (p : C → empty) (q : C → B) → is-pullback ex-falso g (cone-empty p q)
     descent-empty' p q = descent-empty (cone-empty p q)
 ```
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

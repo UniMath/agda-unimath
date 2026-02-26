@@ -12,6 +12,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
+open import group-theory.centers-monoids
 open import group-theory.central-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -23,7 +25,12 @@ open import group-theory.subgroups
 
 ## Idea
 
-The **center** of a group consists of those elements that are central.
+The
+{{#concept "center" Disambiguation="of a group" WDID=Q1195852 WD="center" Agda=center-Group}}
+of a [group](group-theory.groups.md) `G` is the
+[normal subgroup](group-theory.normal-subgroups.md) consisting of those elements
+that are [central](group-theory.central-elements-groups.md) in `G`. The center
+is always an [abelian group](group-theory.abelian-groups.md).
 
 ## Definition
 
@@ -99,4 +106,21 @@ module _
   center-Group : Normal-Subgroup l G
   pr1 center-Group = subgroup-center-Group
   pr2 center-Group = is-normal-subgroup-center-Group
+
+  abstract
+    commutative-mul-center-Group :
+      (x y : type-center-Group) →
+      mul-center-Group x y ＝ mul-center-Group y x
+    commutative-mul-center-Group =
+      commutative-mul-center-Monoid (monoid-Group G)
+
+  ab-center-Group : Ab l
+  ab-center-Group =
+    ( group-center-Group ,
+      commutative-mul-center-Group)
 ```
+
+## External links
+
+- [Center (group theory)](<https://en.wikipedia.org/wiki/Center_(group_theory)>)
+  on Wikipedia

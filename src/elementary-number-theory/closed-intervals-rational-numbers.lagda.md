@@ -67,10 +67,12 @@ upper-bound-closed-interval-ℚ =
 ### The subtype associated with a closed interval
 
 ```agda
-subtype-closed-interval-ℚ :
-  closed-interval-ℚ → subtype lzero ℚ
+subtype-closed-interval-ℚ : closed-interval-ℚ → subtype lzero ℚ
 subtype-closed-interval-ℚ =
   subtype-closed-interval-Poset ℚ-Poset
+
+type-closed-interval-ℚ : closed-interval-ℚ → UU lzero
+type-closed-interval-ℚ [a,b] = type-subtype (subtype-closed-interval-ℚ [a,b])
 
 is-in-closed-interval-ℚ : closed-interval-ℚ → ℚ → UU lzero
 is-in-closed-interval-ℚ [a,b] =

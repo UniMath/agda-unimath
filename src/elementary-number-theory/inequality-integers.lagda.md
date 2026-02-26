@@ -87,6 +87,9 @@ abstract
   refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
   refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 
+  leq-eq-ℤ : {k l : ℤ} → k ＝ l → leq-ℤ k l
+  leq-eq-ℤ {k} {.k} refl = refl-leq-ℤ k
+
   antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
   antisymmetric-leq-ℤ {x} {y} H K =
     eq-diff-ℤ

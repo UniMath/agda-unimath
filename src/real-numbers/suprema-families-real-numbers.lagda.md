@@ -153,7 +153,7 @@ module _
                 ( x-ε<yᵢ)
                 ( le-transpose-left-add-ℝ' _ _ _
                   ( le-transpose-right-diff-ℝ _ _ _
-                    ( le-real-is-in-lower-cut-ℚ (x -ℝ z) ε<x-z))))
+                    ( le-real-is-in-lower-cut-ℝ (x -ℝ z) ε<x-z))))
               ( yᵢ≤z i))
     pr2 (is-least-upper-bound-is-supremum-family-ℝ z) x≤z i =
       transitive-leq-ℝ (y i) x z x≤z
@@ -260,7 +260,7 @@ module _
             ( x-ε<yᵢ)
             ( le-transpose-left-add-ℝ' _ _ _
               ( le-transpose-right-diff-ℝ _ _ _
-                ( le-real-is-in-lower-cut-ℚ (x -ℝ z) ε<x-z))))
+                ( le-real-is-in-lower-cut-ℝ (x -ℝ z) ε<x-z))))
 
     le-supremum-iff-le-element-family-ℝ :
       {l4 : Level} → (z : ℝ l4) →

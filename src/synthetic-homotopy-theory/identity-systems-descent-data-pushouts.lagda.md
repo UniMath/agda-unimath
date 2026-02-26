@@ -33,7 +33,7 @@ open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.descent-data-equivalence-types-over-pushouts
 open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts
 open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.descent-property-pushouts
+open import synthetic-homotopy-theory.descent-pushouts
 open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
 open import synthetic-homotopy-theory.families-descent-data-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
@@ -71,9 +71,8 @@ and a point `p₀ : PA a₀` over a basepoint `a₀ : A`, we would like to mirro
 definition of identity systems. A naïve translation would lead us to define
 dependent descent data and its sections. We choose to sidestep building that
 technical infrastructure. By the
-[descent property](synthetic-homotopy-theory.descent-property-pushouts.md),
-there is a [unique](foundation-core.contractible-types.md) type family
-`P : X → 𝒰`
+[descent property](synthetic-homotopy-theory.descent-pushouts.md), there is a
+[unique](foundation-core.contractible-types.md) type family `P : X → 𝒰`
 [corresponding](synthetic-homotopy-theory.families-descent-data-pushouts.md) to
 `(PA, PB, PS)`. Observe that the type of dependent type families
 `(x : X) → (p : P x) → 𝒰` is [equivalent](foundation-core.equivalences.md) to

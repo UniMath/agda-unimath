@@ -12,6 +12,8 @@ open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences-arrows
+open import foundation.function-extensionality
 open import foundation.functoriality-truncation
 open import foundation.identity-types
 open import foundation.precomposition-functions-into-subuniverses
@@ -60,7 +62,7 @@ truncation-equivalence :
 truncation-equivalence k A B = Σ (A → B) (is-truncation-equivalence k)
 
 module _
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
   (f : truncation-equivalence k A B)
   where
 
@@ -85,39 +87,17 @@ module _
 ### A map `f : A → B` is a `k`-equivalence if and only if `- ∘ f : (B → X) → (A → X)` is an equivalence for every `k`-truncated type `X`
 
 ```agda
-is-equiv-precomp-is-truncation-equivalence :
-  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-  is-truncation-equivalence k f →
-  (X : Truncated-Type l3 k) → is-equiv (precomp f (type-Truncated-Type X))
-is-equiv-precomp-is-truncation-equivalence k f H X =
-  is-equiv-bottom-is-equiv-top-square
-    ( precomp unit-trunc (type-Truncated-Type X))
-    ( precomp unit-trunc (type-Truncated-Type X))
-    ( precomp (map-trunc k f) (type-Truncated-Type X))
-    ( precomp f (type-Truncated-Type X))
-    ( precomp-coherence-square-maps
-      ( unit-trunc)
-      ( f)
-      ( map-trunc k f)
-      ( unit-trunc)
-      ( inv-htpy (coherence-square-map-trunc k f))
-      ( type-Truncated-Type X))
-    ( is-truncation-trunc X)
-    ( is-truncation-trunc X)
-    ( is-equiv-precomp-is-equiv (map-trunc k f) H (type-Truncated-Type X))
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
 
-is-truncation-equivalence-is-equiv-precomp :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-  ( (l : Level) (X : Truncated-Type l k) →
-    is-equiv (precomp f (type-Truncated-Type X))) →
-  is-truncation-equivalence k f
-is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
-  is-equiv-is-equiv-precomp-Truncated-Type k
-    ( trunc k A)
-    ( trunc k B)
-    ( map-trunc k f)
-    ( λ X →
-      is-equiv-top-is-equiv-bottom-square
+  abstract
+    is-equiv-precomp-is-truncation-equivalence :
+      is-truncation-equivalence k f →
+      {l : Level} (X : Truncated-Type l k) →
+      is-equiv (precomp f (type-Truncated-Type X))
+    is-equiv-precomp-is-truncation-equivalence H X =
+      is-equiv-bottom-is-equiv-top-square
         ( precomp unit-trunc (type-Truncated-Type X))
         ( precomp unit-trunc (type-Truncated-Type X))
         ( precomp (map-trunc k f) (type-Truncated-Type X))
@@ -131,7 +111,79 @@ is-truncation-equivalence-is-equiv-precomp k {A} {B} f H =
           ( type-Truncated-Type X))
         ( is-truncation-trunc X)
         ( is-truncation-trunc X)
-        ( H _ X))
+        ( is-equiv-precomp-is-equiv (map-trunc k f) H (type-Truncated-Type X))
+
+  abstract
+    is-truncation-equivalence-is-equiv-precomp :
+      ( (l : Level) (X : Truncated-Type l k) →
+        is-equiv (precomp f (type-Truncated-Type X))) →
+      is-truncation-equivalence k f
+    is-truncation-equivalence-is-equiv-precomp H =
+      is-equiv-is-equiv-precomp-Truncated-Type k
+        ( trunc k A)
+        ( trunc k B)
+        ( map-trunc k f)
+        ( λ X →
+          is-equiv-top-is-equiv-bottom-square
+            ( precomp unit-trunc (type-Truncated-Type X))
+            ( precomp unit-trunc (type-Truncated-Type X))
+            ( precomp (map-trunc k f) (type-Truncated-Type X))
+            ( precomp f (type-Truncated-Type X))
+            ( precomp-coherence-square-maps
+              ( unit-trunc)
+              ( f)
+              ( map-trunc k f)
+              ( unit-trunc)
+              ( inv-htpy (coherence-square-map-trunc k f))
+              ( type-Truncated-Type X))
+            ( is-truncation-trunc X)
+            ( is-truncation-trunc X)
+            ( H _ X))
+```
+
+### The recursion principle of truncation equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-truncation-equivalence k f)
+  where
+
+  rec-is-truncation-equivalence :
+    {l : Level} (X : Truncated-Type l k) →
+    (A → type-Truncated-Type X) → B → type-Truncated-Type X
+  rec-is-truncation-equivalence X =
+    map-inv-is-equiv (is-equiv-precomp-is-truncation-equivalence H X)
+
+  compute-rec-is-truncation-equivalence :
+    {l : Level} (X : Truncated-Type l k) →
+    (g : A → type-Truncated-Type X) (x : A) →
+    rec-is-truncation-equivalence X g (f x) ＝ g x
+  compute-rec-is-truncation-equivalence X g =
+    htpy-eq
+      ( is-section-map-inv-is-equiv
+        ( is-equiv-precomp-is-truncation-equivalence H X)
+        ( g))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  (f : truncation-equivalence k A B)
+  where
+
+  rec-truncation-equivalence :
+    {l : Level} (X : Truncated-Type l k) →
+    (A → type-Truncated-Type X) → B → type-Truncated-Type X
+  rec-truncation-equivalence =
+    rec-is-truncation-equivalence
+      ( is-truncation-equivalence-truncation-equivalence f)
+
+  compute-rec-truncation-equivalence :
+    {l : Level} (X : Truncated-Type l k) →
+    (g : A → type-Truncated-Type X) (x : A) →
+    rec-truncation-equivalence X g (map-truncation-equivalence f x) ＝ g x
+  compute-rec-truncation-equivalence =
+    compute-rec-is-truncation-equivalence
+      ( is-truncation-equivalence-truncation-equivalence f)
 ```
 
 ### Equivalences are `k`-equivalences for all `k`
@@ -182,8 +234,21 @@ module _
   is-truncation-equivalence-is-connected-map :
     is-connected-map k f → is-truncation-equivalence k f
   is-truncation-equivalence-is-connected-map c =
-    is-truncation-equivalence-is-equiv-precomp k f
-      ( λ l X → dependent-universal-property-is-connected-map k c (λ _ → X))
+    is-truncation-equivalence-is-equiv-precomp
+      ( λ l X → dependent-universal-property-is-connected-map c (λ _ → X))
+```
+
+### The unit maps of `k`-truncation are `k`-equivalences
+
+```agda
+module _
+  {l : Level} {k : 𝕋} {A : UU l}
+  where
+
+  is-truncation-equivalence-unit-trunc :
+    is-truncation-equivalence k (unit-trunc {k = k} {A})
+  is-truncation-equivalence-unit-trunc =
+    is-truncation-equivalence-is-equiv-precomp (λ l → is-truncation-trunc)
 ```
 
 ### The `k`-equivalences are closed under composition
@@ -209,16 +274,16 @@ module _
     truncation-equivalence k A B →
     truncation-equivalence k A C
   pr1 (truncation-equivalence-comp g f) =
-    map-truncation-equivalence k g ∘ map-truncation-equivalence k f
+    map-truncation-equivalence g ∘ map-truncation-equivalence f
   pr2 (truncation-equivalence-comp g f) =
     is-truncation-equivalence-comp
-      ( map-truncation-equivalence k g)
-      ( map-truncation-equivalence k f)
-      ( is-truncation-equivalence-truncation-equivalence k f)
-      ( is-truncation-equivalence-truncation-equivalence k g)
+      ( map-truncation-equivalence g)
+      ( map-truncation-equivalence f)
+      ( is-truncation-equivalence-truncation-equivalence f)
+      ( is-truncation-equivalence-truncation-equivalence g)
 ```
 
-### The class of `k`-equivalences has the 3-for-2 property
+### Cancellation property of truncation equivalences
 
 ```agda
 module _
@@ -248,6 +313,43 @@ module _
         ( map-trunc k (g ∘ f))
         ( preserves-comp-map-trunc k g f)
         ( e))
+```
+
+### The class of `k`-equivalences has the 3-for-2 property
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (K : f ~ g ∘ h)
+  where
+
+  abstract
+    is-truncation-equivalence-top-map-triangle :
+      is-truncation-equivalence k g →
+      is-truncation-equivalence k f →
+      is-truncation-equivalence k h
+    is-truncation-equivalence-top-map-triangle G F =
+      is-truncation-equivalence-right-factor g h
+        ( is-truncation-equivalence-htpy' k K F)
+        ( G)
+
+  abstract
+    is-truncation-equivalence-left-map-triangle :
+      is-truncation-equivalence k h →
+      is-truncation-equivalence k g →
+      is-truncation-equivalence k f
+    is-truncation-equivalence-left-map-triangle H G =
+      is-truncation-equivalence-htpy k K
+        ( is-truncation-equivalence-comp g h H G)
+
+  abstract
+    is-truncation-equivalence-right-map-triangle :
+      is-truncation-equivalence k f →
+      is-truncation-equivalence k h →
+      is-truncation-equivalence k g
+    is-truncation-equivalence-right-map-triangle F =
+      is-truncation-equivalence-left-factor g h
+        ( is-truncation-equivalence-htpy' k K F)
 ```
 
 ### Sections of `k`-equivalences are `k`-equivalences
@@ -341,8 +443,7 @@ module _
   is-truncation-equivalence-map-Σ-map-base-unit-trunc' :
     is-truncation-equivalence k map-Σ-map-base-unit-trunc'
   is-truncation-equivalence-map-Σ-map-base-unit-trunc' =
-    is-truncation-equivalence-is-equiv-precomp k
-      ( map-Σ-map-base-unit-trunc')
+    is-truncation-equivalence-is-equiv-precomp
       ( λ l (Y , TY) →
         is-equiv-equiv
           ( equiv-ev-pair)
@@ -365,8 +466,7 @@ module _
   is-truncation-equivalence-map-Σ-map-base-unit-trunc :
     is-truncation-equivalence k map-Σ-map-base-unit-trunc
   is-truncation-equivalence-map-Σ-map-base-unit-trunc =
-    is-truncation-equivalence-is-equiv-precomp k
-      ( map-Σ-map-base-unit-trunc)
+    is-truncation-equivalence-is-equiv-precomp
       ( λ l (Y , TY) →
         is-equiv-equiv
           {f = precomp (λ x → unit-trunc (pr1 x) , pr2 x) Y}
@@ -451,7 +551,7 @@ module _
     type-trunc k (fiber f b) ≃
     type-trunc k (fiber (map-trunc (succ-𝕋 k) f) (unit-trunc b))
   equiv-trunc-fiber-map-trunc-fiber =
-    equiv-trunc-truncation-equivalence k
+    equiv-trunc-truncation-equivalence
       ( truncation-equivalence-fiber-map-trunc-fiber)
 ```
 
@@ -478,15 +578,15 @@ module _
     truncation-equivalence k A B → is-connected k B → is-connected k A
   is-connected-truncation-equivalence-is-connected f =
     is-connected-is-truncation-equivalence-is-connected
-      ( map-truncation-equivalence k f)
-      ( is-truncation-equivalence-truncation-equivalence k f)
+      ( map-truncation-equivalence f)
+      ( is-truncation-equivalence-truncation-equivalence f)
 
   is-connected-truncation-equivalence-is-connected' :
     truncation-equivalence k A B → is-connected k A → is-connected k B
   is-connected-truncation-equivalence-is-connected' f =
     is-connected-is-truncation-equivalence-is-connected'
-      ( map-truncation-equivalence k f)
-      ( is-truncation-equivalence-truncation-equivalence k f)
+      ( map-truncation-equivalence f)
+      ( is-truncation-equivalence-truncation-equivalence f)
 ```
 
 ### Every `(k+1)`-equivalence is `k`-connected
@@ -682,6 +782,22 @@ module _
     is-connected-map-right-factor-is-succ-connected-map-right-factor f s
       ( is-connected-map-htpy-id h)
       ( is-connected-map-section-is-truncation-equivalence-succ k (s , h) e)
+```
+
+### An `n`-truncation equivalence between `n`-truncated types is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-equiv-is-truncation-equivalence :
+    is-trunc k A → is-trunc k B → is-truncation-equivalence k f → is-equiv f
+  is-equiv-is-truncation-equivalence a b =
+    is-equiv-source-is-equiv-target-equiv-arrow f (map-trunc k f)
+      ( equiv-unit-trunc (A , a) ,
+        equiv-unit-trunc (B , b) ,
+        inv-htpy (coherence-square-map-trunc k f))
 ```
 
 ## References

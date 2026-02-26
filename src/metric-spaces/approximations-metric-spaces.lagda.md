@@ -7,6 +7,7 @@ module metric-spaces.approximations-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-products-subtypes
@@ -28,19 +29,21 @@ open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces
 open import metric-spaces.images-metric-spaces
-open import metric-spaces.images-short-functions-metric-spaces
-open import metric-spaces.images-uniformly-continuous-functions-metric-spaces
+open import metric-spaces.images-short-maps-metric-spaces
+open import metric-spaces.images-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.modulated-uniformly-continuous-functions-metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -112,21 +115,21 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : type-function-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
+  (f : map-Metric-Space X Y) {μ : ℚ⁺ → ℚ⁺}
   (is-modulus-ucont-f-μ :
-    is-modulus-of-uniform-continuity-function-Metric-Space X Y f μ)
+    is-modulus-of-uniform-continuity-map-Metric-Space X Y f μ)
   (ε : ℚ⁺) (A : approximation-Metric-Space l5 X (μ ε))
   where
 
   abstract
-    is-approximation-im-uniformly-continuous-function-approximation-Metric-Space :
+    is-approximation-im-uniformly-continuous-map-approximation-Metric-Space :
       is-approximation-Metric-Space
         ( im-Metric-Space X Y f)
         ( ε)
         ( im-subtype
           ( map-unit-im f)
           ( subset-approximation-Metric-Space X (μ ε) A))
-    is-approximation-im-uniformly-continuous-function-approximation-Metric-Space
+    is-approximation-im-uniformly-continuous-map-approximation-Metric-Space
       (y , ∃x:fx=y) =
         let
           open
@@ -147,37 +150,37 @@ module _
               ( fx=y)
               ( is-modulus-ucont-f-μ a ε x Nμεax))
 
-  approximation-im-uniformly-continuous-function-approximation-Metric-Space :
+  approximation-im-uniformly-continuous-map-approximation-Metric-Space :
     approximation-Metric-Space (l1 ⊔ l3 ⊔ l5) (im-Metric-Space X Y f) ε
-  approximation-im-uniformly-continuous-function-approximation-Metric-Space =
+  approximation-im-uniformly-continuous-map-approximation-Metric-Space =
     ( im-subtype (map-unit-im f) (subset-approximation-Metric-Space X (μ ε) A) ,
-      is-approximation-im-uniformly-continuous-function-approximation-Metric-Space)
+      is-approximation-im-uniformly-continuous-map-approximation-Metric-Space)
 ```
 
-### If `f : X → Y` is a short function and `A` is an `ε`-approximation of `X`, then `im f A` is an `ε`-approximation of `im f X`
+### If `f : X → Y` is a short map and `A` is an `ε`-approximation of `X`, then `im f A` is an `ε`-approximation of `im f X`
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4)
-  (f : short-function-Metric-Space X Y)
+  (f : short-map-Metric-Space X Y)
   (ε : ℚ⁺) (A : approximation-Metric-Space l5 X ε)
   where
 
-  approximation-im-short-function-approximation-Metric-Space :
+  approximation-im-short-map-approximation-Metric-Space :
     approximation-Metric-Space
       ( l1 ⊔ l3 ⊔ l5)
-      ( im-short-function-Metric-Space X Y f)
+      ( im-short-map-Metric-Space X Y f)
       ( ε)
-  approximation-im-short-function-approximation-Metric-Space =
-    approximation-im-uniformly-continuous-function-approximation-Metric-Space
+  approximation-im-short-map-approximation-Metric-Space =
+    approximation-im-uniformly-continuous-map-approximation-Metric-Space
       ( X)
       ( Y)
-      ( map-short-function-Metric-Space X Y f)
-      ( is-modulus-of-uniform-continuity-id-is-short-function-Metric-Space
+      ( map-short-map-Metric-Space X Y f)
+      ( is-modulus-of-uniform-continuity-map-id-is-short-map-Metric-Space
         ( X)
         ( Y)
-        ( map-short-function-Metric-Space X Y f)
-        ( is-short-map-short-function-Metric-Space X Y f))
+        ( map-short-map-Metric-Space X Y f)
+        ( is-short-map-short-map-Metric-Space X Y f))
       ( ε)
       ( A)
 ```
@@ -197,8 +200,8 @@ module _
       ( im-isometry-Metric-Space X Y f)
       ( ε)
   approximation-im-isometry-approximation-Metric-Space =
-    approximation-im-short-function-approximation-Metric-Space X Y
-      ( short-isometry-Metric-Space X Y f)
+    approximation-im-short-map-approximation-Metric-Space X Y
+      ( short-map-isometry-Metric-Space X Y f)
       ( ε)
       ( A)
 ```
@@ -322,6 +325,27 @@ module _
         ( subset-approximation-Metric-Space X ε A)
         ( subset-approximation-Metric-Space Y ε B) ,
       is-approximation-product-approximation-Metric-Space)
+```
+
+### If `S` is an `δ`-approximation for `X` and `δ ≤ ε`, `S` is an `ε`-approximation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2)
+  (δ ε : ℚ⁺)
+  (δ≤ε : leq-ℚ⁺ δ ε)
+  (S : subset-Metric-Space l3 X)
+  where
+
+  abstract
+    is-approximation-is-approximation-leq-Metric-Space :
+      is-approximation-Metric-Space X δ S → is-approximation-Metric-Space X ε S
+    is-approximation-is-approximation-leq-Metric-Space H x =
+      map-tot-exists
+        ( λ (s , s∈S) Nδxs →
+          weakly-monotonic-neighborhood-Metric-Space X s x δ ε δ≤ε Nδxs)
+        ( H x)
 ```
 
 ## References

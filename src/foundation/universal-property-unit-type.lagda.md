@@ -159,3 +159,15 @@ is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map :
 is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map H =
   is-equiv-comp _ _ (is-equiv-const-unit _) H
 ```
+
+### The unit type is terminal
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  is-equiv-terminal-map-Π-unit : is-equiv (terminal-map (X → unit))
+  is-equiv-terminal-map-Π-unit =
+    is-equiv-is-invertible (const X) refl-htpy refl-htpy
+```

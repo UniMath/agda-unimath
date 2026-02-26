@@ -75,20 +75,21 @@ quotient-euclidean-division-ℕ' (succ-ℕ k) n =
 ### Euclidean division via modular arithmetic
 
 ```agda
-euclidean-division-ℕ :
-  (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → le-ℕ r k))
-pr1 (euclidean-division-ℕ zero-ℕ x) = x
-pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
-pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
-pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
-pr1 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) =
-  symmetric-cong-ℕ
-    ( succ-ℕ k)
-    ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-    ( x)
-    ( cong-nat-mod-succ-ℕ k x)
-pr2 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) f =
-  strict-upper-bound-nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
+opaque
+  euclidean-division-ℕ :
+    (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → le-ℕ r k))
+  pr1 (euclidean-division-ℕ zero-ℕ x) = x
+  pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
+  pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
+  pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
+  pr1 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) =
+    symmetric-cong-ℕ
+      ( succ-ℕ k)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( x)
+      ( cong-nat-mod-succ-ℕ k x)
+  pr2 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) f =
+    strict-upper-bound-nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
 
 remainder-euclidean-division-ℕ : ℕ → ℕ → ℕ
 remainder-euclidean-division-ℕ k x =
@@ -115,26 +116,29 @@ eq-quotient-euclidean-division-ℕ :
 eq-quotient-euclidean-division-ℕ k x =
   pr2 (cong-euclidean-division-ℕ k x)
 
-eq-euclidean-division-ℕ :
-  (k x : ℕ) →
-  ( add-ℕ
-    ( (quotient-euclidean-division-ℕ k x) *ℕ k)
-    ( remainder-euclidean-division-ℕ k x)) ＝
-  ( x)
-eq-euclidean-division-ℕ zero-ℕ x =
-  ( inv
+abstract opaque
+  unfolding euclidean-division-ℕ
+
+  eq-euclidean-division-ℕ :
+    (k x : ℕ) →
+    ( add-ℕ
+      ( (quotient-euclidean-division-ℕ k x) *ℕ k)
+      ( remainder-euclidean-division-ℕ k x)) ＝
+    ( x)
+  eq-euclidean-division-ℕ zero-ℕ x =
+    ( inv
+      ( ap
+        ( _+ℕ x)
+        ( right-zero-law-mul-ℕ (quotient-euclidean-division-ℕ zero-ℕ x)))) ∙
+    ( left-unit-law-add-ℕ x)
+  eq-euclidean-division-ℕ (succ-ℕ k) x =
     ( ap
-      ( _+ℕ x)
-      ( right-zero-law-mul-ℕ (quotient-euclidean-division-ℕ zero-ℕ x)))) ∙
-  ( left-unit-law-add-ℕ x)
-eq-euclidean-division-ℕ (succ-ℕ k) x =
-  ( ap
-    ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
-    ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
-      ( commutative-dist-ℕ x
-        ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
-  ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
-    ( leq-nat-mod-succ-ℕ k x))
+      ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
+      ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
+        ( commutative-dist-ℕ x
+          ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
+    ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
+      ( leq-nat-mod-succ-ℕ k x))
 ```
 
 ```agda
