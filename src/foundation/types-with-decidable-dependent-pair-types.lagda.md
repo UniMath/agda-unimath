@@ -323,44 +323,6 @@ abstract
 
 > This remains to be formalized.
 
-#### Pointed small boolean criteria imply decidable Σ-types
-
-```agda
-abstract
-  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool :
-    {l : Level} {X : UU l} →
-    has-decidable-Σ-pointed-bool X →
-    has-decidable-Σ-pointed X
-  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool f =
-    has-decidable-Σ-pointed-has-decidable-type-subtype-pointed
-      ( has-decidable-type-subtype-pointed-has-decidable-Σ-pointed-bool
-        f)
-
-  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' :
-    {l : Level} {X : UU l} →
-    has-decidable-Σ-pointed-bool' X →
-    has-decidable-Σ-pointed X
-  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' f =
-    has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool
-      (flip-has-decidable-Σ-pointed-bool f)
-
-  has-decidable-Σ-has-decidable-Σ-pointed-bool :
-    {l : Level} {X : UU l} →
-    has-decidable-Σ-pointed-bool X →
-    has-decidable-Σ X
-  has-decidable-Σ-has-decidable-Σ-pointed-bool f =
-    has-decidable-Σ-has-decidable-Σ-pointed
-      (has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool f)
-
-  has-decidable-Σ-has-decidable-Σ-pointed-bool' :
-    {l : Level} {X : UU l} →
-    has-decidable-Σ-pointed-bool' X →
-    has-decidable-Σ X
-  has-decidable-Σ-has-decidable-Σ-pointed-bool' f =
-    has-decidable-Σ-has-decidable-Σ-pointed
-      (has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' f)
-```
-
 ### Having decidable Σ-types transfers along double negation dense maps
 
 ```agda
