@@ -8,26 +8,29 @@ module order-theory.trichotomous-ordinals where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types
-open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.transport-along-identifications
-open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.universe-levels
 
+open import order-theory.cotransitive-strict-orders
 open import order-theory.ordinals
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.total-orders
+open import order-theory.total-preorders
 open import order-theory.transitive-well-founded-relations
+open import order-theory.trichotomous-strict-orders
 open import order-theory.well-founded-relations
 ```
 
@@ -35,9 +38,10 @@ open import order-theory.well-founded-relations
 
 ## Idea
 
-A {{#concept "trichotomous ordinal" Agda=Trichotomous-Ordinal}} is an
-[ordinal](order-theory.ordinals.md) `α` such that for all `x` and `y` in `α`,
-either `x < y`, `x = y`, or `x > y`.
+A
+{{#concept "trichotomous ordinal" Agda=is-trichotomous-Ordinal Agda=Trichotomous-Ordinal}}
+is an [ordinal](order-theory.ordinals.md) `α` such that for all `x` and `y` in
+`α`, either `x < y`, `x = y`, or `x > y`.
 
 ## Definitions
 
@@ -47,7 +51,8 @@ either `x < y`, `x = y`, or `x > y`.
 is-trichotomous-Ordinal :
   {l1 l2 : Level} → Ordinal l1 l2 → UU (l1 ⊔ l2)
 is-trichotomous-Ordinal α =
-  (x y : type-Ordinal α) → (le-Ordinal α x y) + (x ＝ y) + (le-Ordinal α y x)
+  is-trichotomous-Strict-Order
+    ( strict-order-Ordinal α)
 ```
 
 ### The type of trichotomous ordinals
@@ -189,6 +194,23 @@ module _
 
 ## Properties
 
+### Being trichotomous is a property
+
+```agda
+module _
+  {l1 l2 : Level}
+  (α : Ordinal l1 l2)
+  where
+
+  is-prop-is-trichotomous-Ordinal : is-prop (is-trichotomous-Ordinal α)
+  is-prop-is-trichotomous-Ordinal =
+    is-prop-is-trichotomous-Strict-Order (strict-order-Ordinal α)
+
+  is-trichotomous-prop-Ordinal : Prop (l1 ⊔ l2)
+  is-trichotomous-prop-Ordinal =
+    is-trichotomous-prop-Strict-Order (strict-order-Ordinal α)
+```
+
 ### Decidable ordinals are trichotomous
 
 ```agda
@@ -198,64 +220,65 @@ module _
   (dle-α : (x y : type-Ordinal α) → is-decidable (le-Ordinal α x y))
   where
 
-  eq-incomparable-is-decidable-Ordinal :
-    (x y : type-Ordinal α) →
-    ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y
-  eq-incomparable-is-decidable-Ordinal =
-    ind-Ordinal α
-      ( λ x →
-        (y : type-Ordinal α) → ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y)
-      ( λ {x} IHx →
-        ind-Ordinal α
-          ( λ y → ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y)
-          ( λ {y} IHy x≮y y≮x →
-            is-extensional-Ordinal α x y
-              ( λ u →
-                ( ( λ u<x →
-                    rec-coproduct
-                      ( id)
-                      ( λ u≮y →
-                        rec-coproduct
-                          ( λ y<u →
-                            ex-falso
-                              ( y≮x (transitive-le-Ordinal α y u x u<x y<u)))
-                          ( λ y≮u →
-                            ex-falso
-                              ( y≮x
-                                ( tr
-                                  ( λ t → le-Ordinal α t x)
-                                  ( IHx u<x y u≮y y≮u)
-                                  ( u<x))))
-                          ( dle-α y u))
-                      ( dle-α u y)) ,
-                  ( λ u<y →
-                    rec-coproduct
-                      ( λ x<u →
-                        ex-falso (x≮y (transitive-le-Ordinal α x u y u<y x<u)))
-                      ( λ x≮u →
-                        rec-coproduct
-                          ( id)
-                          ( λ u≮x →
-                            ex-falso
-                              ( x≮y
-                                ( tr
-                                  ( λ t → le-Ordinal α t y)
-                                  ( inv (IHy u<y x≮u u≮x))
-                                  ( u<y))))
-                          ( dle-α u x))
-                      ( dle-α x u))))))
+  abstract
+    lower-bound-is-decidable-Ordinal :
+      (a b : type-Ordinal α) →
+      ({u : type-Ordinal α} →
+        le-Ordinal α u a →
+        ¬ le-Ordinal α u b →
+        ¬ le-Ordinal α b u →
+        u ＝ b) →
+      ¬ le-Ordinal α b a →
+      (u : type-Ordinal α) →
+      le-Ordinal α u a →
+      le-Ordinal α u b
+    lower-bound-is-decidable-Ordinal a b IH b≮a u u<a =
+      rec-ternary-coproduct
+        ( id)
+        ( λ p → ex-falso (b≮a (transitive-le-Ordinal α b u a u<a (pr2 p))))
+        ( λ p →
+          ex-falso
+            ( b≮a
+              ( tr
+                ( λ t → le-Ordinal α t a)
+                ( IH u<a (pr1 p) (pr2 p))
+                ( u<a))))
+        ( rec-coproduct
+          ( inl)
+          ( λ u≮b →
+            rec-coproduct
+              ( λ b<u → inr (inl (u≮b , b<u)))
+              ( λ b≮u → inr (inr (u≮b , b≮u)))
+              ( dle-α b u))
+          ( dle-α u b))
 
-  is-trichotomous-is-decidable-le-Ordinal :
-    is-trichotomous-Ordinal α
-  is-trichotomous-is-decidable-le-Ordinal x y =
-    map-coproduct
-      ( id)
-      ( λ x≮y →
-        rec-coproduct
-          ( inr)
-          ( λ y≮x → inl (eq-incomparable-is-decidable-Ordinal x y x≮y y≮x))
-          ( dle-α y x))
-      ( dle-α x y)
+  abstract
+    eq-incomparable-is-decidable-Ordinal :
+      (x y : type-Ordinal α) →
+      ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y
+    eq-incomparable-is-decidable-Ordinal =
+      ind²-Ordinal α
+        ( λ x y → ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y)
+        ( λ {x} IHx y IHy x≮y y≮x →
+          is-extensional-Ordinal α x y
+            ( λ u →
+              ( lower-bound-is-decidable-Ordinal x y
+                  ( λ u<x u≮y y≮u → IHx u<x y u≮y y≮u)
+                  ( y≮x)
+                  ( u) ,
+                lower-bound-is-decidable-Ordinal y x
+                  ( λ u<y u≮x x≮u → inv (IHy u<y x≮u u≮x))
+                  ( x≮y)
+                  ( u))))
+
+  abstract
+    is-trichotomous-is-decidable-le-Ordinal :
+      is-trichotomous-Ordinal α
+    is-trichotomous-is-decidable-le-Ordinal =
+      is-trichotomous-is-decidable-le-eq-incomparable-Strict-Order
+        ( strict-order-Ordinal α)
+        ( dle-α)
+        ( eq-incomparable-is-decidable-Ordinal)
 ```
 
 ### Trichotomy implies weak trichotomy
@@ -267,24 +290,59 @@ module _
   (H : is-trichotomous-Ordinal α)
   where
 
-  is-weakly-trichotomous-is-trichotomous-Ordinal :
+  ge-not-eq-not-le-is-trichotomous-Ordinal :
     (x y : type-Ordinal α) →
     ¬ le-Ordinal α x y → ¬ (x ＝ y) → le-Ordinal α y x
-  is-weakly-trichotomous-is-trichotomous-Ordinal x y x≮y x≠y =
-    rec-coproduct (ex-falso ∘ x≮y) (rec-coproduct (ex-falso ∘ x≠y) id) (H x y)
+  ge-not-eq-not-le-is-trichotomous-Ordinal =
+    ge-not-eq-not-le-Trichotomous-Strict-Order
+      ( strict-order-Ordinal α , H)
 
 module _
   {l1 l2 : Level}
   (α : Trichotomous-Ordinal l1 l2)
   where
 
-  is-weakly-trichotomous-Trichotomous-Ordinal :
+  ge-not-eq-not-le-Trichotomous-Ordinal :
     (x y : type-Trichotomous-Ordinal α) →
     ¬ le-Trichotomous-Ordinal α x y →
     ¬ (x ＝ y) →
     le-Trichotomous-Ordinal α y x
-  is-weakly-trichotomous-Trichotomous-Ordinal =
-    is-weakly-trichotomous-is-trichotomous-Ordinal
+  ge-not-eq-not-le-Trichotomous-Ordinal =
+    ge-not-eq-not-le-is-trichotomous-Ordinal
+      ( ordinal-Trichotomous-Ordinal α)
+      ( is-trichotomous-ordinal-Trichotomous-Ordinal α)
+```
+
+### Trichotomous ordinals are cotransitive
+
+```agda
+module _
+  {l1 l2 : Level}
+  (α : Ordinal l1 l2)
+  (H : is-trichotomous-Ordinal α)
+  where
+
+  is-cotransitive-le-is-trichotomous-Ordinal :
+    (x y z : type-Ordinal α) →
+    le-Ordinal α x z →
+    disjunction-type (le-Ordinal α x y) (le-Ordinal α y z)
+  is-cotransitive-le-is-trichotomous-Ordinal =
+    is-cotransitive-le-Trichotomous-Strict-Order
+      ( strict-order-Ordinal α , H)
+
+module _
+  {l1 l2 : Level}
+  (α : Trichotomous-Ordinal l1 l2)
+  where
+
+  is-cotransitive-le-Trichotomous-Ordinal :
+    (x y z : type-Trichotomous-Ordinal α) →
+    le-Trichotomous-Ordinal α x z →
+    disjunction-type
+      ( le-Trichotomous-Ordinal α x y)
+      ( le-Trichotomous-Ordinal α y z)
+  is-cotransitive-le-Trichotomous-Ordinal =
+    is-cotransitive-le-is-trichotomous-Ordinal
       ( ordinal-Trichotomous-Ordinal α)
       ( is-trichotomous-ordinal-Trichotomous-Ordinal α)
 ```
@@ -301,32 +359,35 @@ module _
   is-decidable-le-is-trichotomous-Ordinal :
     (x y : type-Ordinal α) → is-decidable (le-Ordinal α x y)
   is-decidable-le-is-trichotomous-Ordinal x y =
-    rec-coproduct
+    rec-ternary-coproduct
       ( inl)
-      ( rec-coproduct
-        ( λ x=y →
-          inr
-            ( λ x<y →
-              is-irreflexive-le-Ordinal α y
-                ( tr (λ t → le-Ordinal α t y) x=y x<y)))
-        ( λ y<x → inr (λ x<y → is-asymmetric-le-Ordinal α x y x<y y<x)))
+      ( λ x=y →
+        inr
+          ( λ x<y →
+            is-irreflexive-le-Ordinal α y
+              ( tr (λ t → le-Ordinal α t y) x=y x<y)))
+      ( λ y<x →
+        inr
+          ( λ x<y →
+            is-irreflexive-le-Ordinal α x
+              ( transitive-le-Ordinal α x y x y<x x<y)))
       ( tα x y)
 
   is-decidable-eq-is-trichotomous-Ordinal :
     (x y : type-Ordinal α) → is-decidable (x ＝ y)
   is-decidable-eq-is-trichotomous-Ordinal x y =
-    rec-coproduct
+    rec-ternary-coproduct
       ( λ x<y →
         inr
           ( λ x=y →
             is-irreflexive-le-Ordinal α y
-              ( tr ( λ t → le-Ordinal α t y) x=y x<y)))
-      ( rec-coproduct
-        ( inl)
-        ( λ y<x →
-          inr
-            ( λ x=y →
-              is-irreflexive-le-Ordinal α y (tr (le-Ordinal α y) x=y y<x))))
+              ( tr (λ t → le-Ordinal α t y) x=y x<y)))
+      ( inl)
+      ( λ y<x →
+        inr
+          ( λ x=y →
+            is-irreflexive-le-Ordinal α y
+              ( tr (le-Ordinal α y) x=y y<x)))
       ( tα x y)
 
   has-decidable-equality-is-trichotomous-Ordinal :
@@ -349,10 +410,38 @@ module _
       ( ordinal-Trichotomous-Ordinal α)
       ( is-trichotomous-ordinal-Trichotomous-Ordinal α)
 
-  has-decidable-equality-type-Trichotomous-Ordinal :
+  has-decidable-equality-Trichotomous-Ordinal :
     has-decidable-equality (type-Trichotomous-Ordinal α)
-  has-decidable-equality-type-Trichotomous-Ordinal =
+  has-decidable-equality-Trichotomous-Ordinal =
     has-decidable-equality-is-trichotomous-Ordinal
       ( ordinal-Trichotomous-Ordinal α)
       ( is-trichotomous-ordinal-Trichotomous-Ordinal α)
+
+  discrete-type-Trichotomous-Ordinal : Discrete-Type l1
+  discrete-type-Trichotomous-Ordinal =
+    ( type-Trichotomous-Ordinal α ,
+      has-decidable-equality-Trichotomous-Ordinal)
+```
+
+### Trichotomous ordinals are total
+
+```agda
+module _
+  {l1 l2 : Level}
+  (α : Trichotomous-Ordinal l1 l2)
+  where
+
+  is-total-leq-Trichotomous-Ordinal :
+    is-total-Poset (poset-Trichotomous-Ordinal α)
+  is-total-leq-Trichotomous-Ordinal x y =
+    rec-ternary-coproduct
+      ( λ x<y → inl-disjunction (leq-le-Trichotomous-Ordinal α x<y))
+      ( λ x=y → inl-disjunction (leq-eq-Trichotomous-Ordinal α x=y))
+      ( λ y<x → inr-disjunction (leq-le-Trichotomous-Ordinal α y<x))
+      ( is-trichotomous-ordinal-Trichotomous-Ordinal α x y)
+
+  total-order-Trichotomous-Ordinal : Total-Order l1 (l1 ⊔ l2)
+  total-order-Trichotomous-Ordinal =
+    ( poset-Trichotomous-Ordinal α ,
+      is-total-leq-Trichotomous-Ordinal)
 ```

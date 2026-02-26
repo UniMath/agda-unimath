@@ -89,6 +89,32 @@ module _
     ind-accessible-element-Relation _∈_ P (λ _ → IH) (w x)
 ```
 
+### Double well-founded induction
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {X : UU l1}
+  {Y : UU l2}
+  (R@(_∈_ , wR) : Well-Founded-Relation l3 X)
+  (S@(_∈'_ , wS) : Well-Founded-Relation l4 Y)
+  (P : X → Y → UU l5)
+  where
+
+  ind²-Well-Founded-Relation :
+    ( {x : X} → ({u : X} → u ∈ x → (y : Y) → P u y) →
+      (y : Y) → ({v : Y} → v ∈' y → P x v) →
+      P x y) →
+    (x : X) (y : Y) → P x y
+  ind²-Well-Founded-Relation f =
+    ind-Well-Founded-Relation R
+      ( λ x → (y : Y) → P x y)
+      ( λ {x} IHx →
+        ind-Well-Founded-Relation S
+          ( λ y → P x y)
+          ( λ {y} IHy → f IHx y IHy))
+```
+
 ## Properties
 
 ### A well-founded relation is asymmetric, and thus irreflexive
