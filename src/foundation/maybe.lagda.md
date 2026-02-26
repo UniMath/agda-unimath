@@ -317,6 +317,10 @@ module _
     unit-trunc-Prop ((inr (inl x)) , refl)
   is-surjective-map-maybe-coproduct (inr star) =
     unit-trunc-Prop ((inl (inr star)) , refl)
+
+  surjection-maybe-coproduct : Maybe A + Maybe B ↠ Maybe (A + B)
+  surjection-maybe-coproduct =
+    ( map-maybe-coproduct , is-surjective-map-maybe-coproduct)
 ```
 
 ### There is a surjection from `Maybe A × Maybe B` to `Maybe (A × B)`
@@ -337,6 +341,10 @@ module _
     unit-trunc-Prop ((inl a , inl b) , refl)
   is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
+
+  surjection-maybe-product : Maybe A × Maybe B ↠ Maybe (A × B)
+  surjection-maybe-product =
+    ( map-maybe-product , is-surjective-map-maybe-product)
 ```
 
 ### If `X` is a set, `Maybe X` is a set

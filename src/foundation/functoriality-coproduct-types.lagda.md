@@ -359,6 +359,14 @@ module _
       apply-universal-property-trunc-Prop (s' x)
         ( trunc-Prop (fiber (map-coproduct _ _) (inr x)))
         ( λ (a , p) → unit-trunc-Prop (inr a , ap inr p))
+
+  surjection-coproduct : (A ↠ A') → (B ↠ B') → (A + B) ↠ (A' + B')
+  pr1 (surjection-coproduct f g) =
+    map-coproduct (map-surjection f) (map-surjection g)
+  pr2 (surjection-coproduct f g) =
+    is-surjective-map-coproduct
+      ( is-surjective-map-surjection f)
+      ( is-surjective-map-surjection g)
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`
