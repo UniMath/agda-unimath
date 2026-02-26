@@ -60,45 +60,57 @@ module _
 
   strict-preorder-Trichotomous-Strict-Order : Strict-Preorder l1 l2
   strict-preorder-Trichotomous-Strict-Order =
-    strict-preorder-Strict-Order strict-order-Trichotomous-Strict-Order
+    strict-preorder-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   extensionality-Trichotomous-Strict-Order :
-    extensionality-principle-Strict-Preorder strict-preorder-Trichotomous-Strict-Order
+    extensionality-principle-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Order)
   extensionality-Trichotomous-Strict-Order =
-    extensionality-Strict-Order strict-order-Trichotomous-Strict-Order
+    extensionality-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   type-Trichotomous-Strict-Order : UU l1
   type-Trichotomous-Strict-Order =
-    type-Strict-Order strict-order-Trichotomous-Strict-Order
+    type-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   le-prop-Trichotomous-Strict-Order :
     Relation-Prop l2 type-Trichotomous-Strict-Order
   le-prop-Trichotomous-Strict-Order =
-    le-prop-Strict-Order strict-order-Trichotomous-Strict-Order
+    le-prop-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
-  le-Trichotomous-Strict-Order : Relation l2 type-Trichotomous-Strict-Order
+  le-Trichotomous-Strict-Order :
+    Relation l2 type-Trichotomous-Strict-Order
   le-Trichotomous-Strict-Order =
-    le-Strict-Order strict-order-Trichotomous-Strict-Order
+    le-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   is-prop-le-Trichotomous-Strict-Order :
     (x y : type-Trichotomous-Strict-Order) →
     is-prop (le-Trichotomous-Strict-Order x y)
   is-prop-le-Trichotomous-Strict-Order =
-    is-prop-le-Strict-Order strict-order-Trichotomous-Strict-Order
+    is-prop-le-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   is-irreflexive-le-Trichotomous-Strict-Order :
     is-irreflexive le-Trichotomous-Strict-Order
   is-irreflexive-le-Trichotomous-Strict-Order =
-    is-irreflexive-le-Strict-Order strict-order-Trichotomous-Strict-Order
+    is-irreflexive-le-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   is-transitive-le-Trichotomous-Strict-Order :
     is-transitive le-Trichotomous-Strict-Order
   is-transitive-le-Trichotomous-Strict-Order =
-    is-transitive-le-Strict-Order strict-order-Trichotomous-Strict-Order
+    is-transitive-le-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
 
   is-trichotomous-Strict-Order-Trichotomous-Strict-Order :
-    is-trichotomous-Strict-Order strict-order-Trichotomous-Strict-Order
-  is-trichotomous-Strict-Order-Trichotomous-Strict-Order = pr2 A
+    is-trichotomous-Strict-Order
+      ( strict-order-Trichotomous-Strict-Order)
+  is-trichotomous-Strict-Order-Trichotomous-Strict-Order =
+    pr2 A
 
   trichotomous-strict-preorder-Trichotomous-Strict-Order :
     Trichotomous-Strict-Preorder l1 l2

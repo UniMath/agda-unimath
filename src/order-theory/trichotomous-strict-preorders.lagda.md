@@ -69,41 +69,51 @@ module _
 
   type-Trichotomous-Strict-Preorder : UU l1
   type-Trichotomous-Strict-Preorder =
-    type-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    type-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   le-prop-Trichotomous-Strict-Preorder :
     Relation-Prop l2 type-Trichotomous-Strict-Preorder
   le-prop-Trichotomous-Strict-Preorder =
-    le-prop-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    le-prop-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   le-Trichotomous-Strict-Preorder :
     Relation l2 type-Trichotomous-Strict-Preorder
   le-Trichotomous-Strict-Preorder =
-    le-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    le-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   is-prop-le-Trichotomous-Strict-Preorder :
     (x y : type-Trichotomous-Strict-Preorder) →
     is-prop (le-Trichotomous-Strict-Preorder x y)
   is-prop-le-Trichotomous-Strict-Preorder =
-    is-prop-le-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    is-prop-le-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   is-irreflexive-le-Trichotomous-Strict-Preorder :
     is-irreflexive le-Trichotomous-Strict-Preorder
   is-irreflexive-le-Trichotomous-Strict-Preorder =
-    is-irreflexive-le-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    is-irreflexive-le-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   is-transitive-le-Trichotomous-Strict-Preorder :
     is-transitive le-Trichotomous-Strict-Preorder
   is-transitive-le-Trichotomous-Strict-Preorder =
-    is-transitive-le-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
+    is-transitive-le-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
 
   is-trichotomous-Strict-Preorder-Trichotomous-Strict-Preorder :
-    is-trichotomous-Strict-Preorder strict-preorder-Trichotomous-Strict-Preorder
-  is-trichotomous-Strict-Preorder-Trichotomous-Strict-Preorder = pr2 A
+    is-trichotomous-Strict-Preorder
+      ( strict-preorder-Trichotomous-Strict-Preorder)
+  is-trichotomous-Strict-Preorder-Trichotomous-Strict-Preorder =
+    pr2 A
 
   trichotomy-Trichotomous-Strict-Preorder :
     (x y : type-Trichotomous-Strict-Preorder) →
-    (le-Trichotomous-Strict-Preorder x y) + (x ＝ y) + (le-Trichotomous-Strict-Preorder y x)
+    (le-Trichotomous-Strict-Preorder x y) +
+    (x ＝ y) +
+    (le-Trichotomous-Strict-Preorder y x)
   trichotomy-Trichotomous-Strict-Preorder =
     is-trichotomous-Strict-Preorder-Trichotomous-Strict-Preorder
 ```
