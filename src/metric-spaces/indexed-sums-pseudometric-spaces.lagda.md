@@ -18,6 +18,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.transport-along-identifications
@@ -30,6 +31,7 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -75,10 +77,7 @@ module _
       type-indexed-sum-Pseudometric-Space
   neighborhood-prop-indexed-sum-Pseudometric-Space d (x , x') (y , y') =
     Σ-Prop
-      ( Id-Prop
-        ( A)
-        ( x)
-        ( y))
+      ( Id-Prop A x y)
       ( λ e →
         neighborhood-prop-Pseudometric-Space
         ( P y)
@@ -434,4 +433,109 @@ module _
   equiv-short-map-indexed-sum-Pseudometric-Space =
     ( precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q ,
       is-equiv-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q)
+```
+
+### Similarity in an indexed sum of pseudometric spaces is equivalent to similarity in some fiber
+
+```agda
+module _
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  where
+
+  sim-fiber-prop-indexed-sum-Pseudometric-Space :
+    Relation-Prop (la ⊔ lp') (type-indexed-sum-Pseudometric-Space A P)
+  sim-fiber-prop-indexed-sum-Pseudometric-Space (x , x') (y , y') =
+    Σ-Prop
+      ( Id-Prop A x y)
+      ( λ e →
+        sim-prop-Pseudometric-Space
+        ( P y)
+        ( tr (type-Pseudometric-Space ∘ P) e x')
+        ( y'))
+
+  sim-fiber-indexed-sum-Pseudometric-Space :
+    Relation (la ⊔ lp') (type-indexed-sum-Pseudometric-Space A P)
+  sim-fiber-indexed-sum-Pseudometric-Space x y =
+    type-Prop (sim-fiber-prop-indexed-sum-Pseudometric-Space x y)
+
+  is-prop-sim-fiber-indexed-sum-Pseudometric-Space :
+    (x y : type-indexed-sum-Pseudometric-Space A P) →
+    is-prop (sim-fiber-indexed-sum-Pseudometric-Space x y)
+  is-prop-sim-fiber-indexed-sum-Pseudometric-Space x y =
+    is-prop-type-Prop (sim-fiber-prop-indexed-sum-Pseudometric-Space x y)
+
+module _
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  (x y : type-indexed-sum-Pseudometric-Space A P)
+  where abstract
+
+  sim-indexed-sum-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( x)
+      ( y) →
+    sim-fiber-indexed-sum-Pseudometric-Space A P x y
+  sim-indexed-sum-Pseudometric-Space H = (eq-base , sim-fiber)
+    where
+
+    eq-base :
+      base-point-indexed-sum-Pseudometric-Space A P x ＝
+      base-point-indexed-sum-Pseudometric-Space A P y
+    eq-base =
+      pr1 (H one-ℚ⁺)
+
+    sim-fiber :
+      sim-Pseudometric-Space
+        ( P ( base-point-indexed-sum-Pseudometric-Space A P y))
+        ( tr
+          ( type-Pseudometric-Space ∘ P)
+          ( eq-base)
+          ( fiber-point-indexed-sum-Pseudometric-Space A P x))
+        ( fiber-point-indexed-sum-Pseudometric-Space A P y)
+    sim-fiber d =
+      tr
+        ( λ e →
+          neighborhood-Pseudometric-Space
+            ( P ( base-point-indexed-sum-Pseudometric-Space A P y))
+            ( d)
+            ( tr
+              ( type-Pseudometric-Space ∘ P)
+              ( e)
+              ( fiber-point-indexed-sum-Pseudometric-Space A P x))
+            ( fiber-point-indexed-sum-Pseudometric-Space A P y))
+        ( is-set-has-uip
+          ( is-set-type-Set A)
+          ( base-point-indexed-sum-Pseudometric-Space A P x)
+          ( base-point-indexed-sum-Pseudometric-Space A P y)
+          ( pr1 (H d))
+          ( eq-base))
+        ( pr2 (H d))
+
+  iff-sim-indexed-sum-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( x)
+      ( y) ↔
+    sim-fiber-indexed-sum-Pseudometric-Space A P x y
+  iff-sim-indexed-sum-Pseudometric-Space =
+    ( sim-indexed-sum-Pseudometric-Space , λ (e , H) d → (e , H d))
+
+  equiv-sim-indexed-sum-Pseudometric-Space :
+    sim-Pseudometric-Space
+      ( indexed-sum-Pseudometric-Space A P)
+      ( x)
+      ( y) ≃
+    sim-fiber-indexed-sum-Pseudometric-Space A P x y
+  equiv-sim-indexed-sum-Pseudometric-Space =
+    equiv-iff'
+      ( sim-prop-Pseudometric-Space
+        ( indexed-sum-Pseudometric-Space A P)
+        ( x)
+        ( y))
+      ( sim-fiber-prop-indexed-sum-Pseudometric-Space A P x y)
+      ( iff-sim-indexed-sum-Pseudometric-Space)
 ```
