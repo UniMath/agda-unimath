@@ -144,7 +144,6 @@ module _
   ind²-Ordinal =
     ind²-Well-Founded-Relation
       well-founded-relation-Ordinal
-      well-founded-relation-Ordinal
 ```
 
 The associated reflexive relation on an ordinal.
