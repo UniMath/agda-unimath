@@ -72,15 +72,20 @@ module _
 
   is-trichotomous-ordinal-Trichotomous-Ordinal :
     is-trichotomous-Ordinal ordinal-Trichotomous-Ordinal
-  is-trichotomous-ordinal-Trichotomous-Ordinal = pr2 α
+  is-trichotomous-ordinal-Trichotomous-Ordinal =
+    pr2 α
 
   type-Trichotomous-Ordinal : UU l1
-  type-Trichotomous-Ordinal = type-Ordinal ordinal-Trichotomous-Ordinal
+  type-Trichotomous-Ordinal =
+    type-Ordinal ordinal-Trichotomous-Ordinal
 
-  le-prop-Trichotomous-Ordinal : Relation-Prop l2 type-Trichotomous-Ordinal
-  le-prop-Trichotomous-Ordinal = le-prop-Ordinal ordinal-Trichotomous-Ordinal
+  le-prop-Trichotomous-Ordinal :
+    Relation-Prop l2 type-Trichotomous-Ordinal
+  le-prop-Trichotomous-Ordinal =
+    le-prop-Ordinal ordinal-Trichotomous-Ordinal
 
-  is-ordinal-Trichotomous-Ordinal : is-ordinal le-prop-Trichotomous-Ordinal
+  is-ordinal-Trichotomous-Ordinal :
+    is-ordinal le-prop-Trichotomous-Ordinal
   is-ordinal-Trichotomous-Ordinal =
     is-ordinal-Ordinal ordinal-Trichotomous-Ordinal
 
@@ -102,7 +107,8 @@ module _
   transitive-well-founded-relation-Trichotomous-Ordinal =
     transitive-well-founded-relation-Ordinal ordinal-Trichotomous-Ordinal
 
-  transitive-le-Trichotomous-Ordinal : is-transitive le-Trichotomous-Ordinal
+  transitive-le-Trichotomous-Ordinal :
+    is-transitive le-Trichotomous-Ordinal
   transitive-le-Trichotomous-Ordinal =
     transitive-le-Ordinal ordinal-Trichotomous-Ordinal
 
@@ -116,7 +122,8 @@ module _
   well-founded-relation-Trichotomous-Ordinal =
     well-founded-relation-Ordinal ordinal-Trichotomous-Ordinal
 
-  is-asymmetric-le-Trichotomous-Ordinal : is-asymmetric le-Trichotomous-Ordinal
+  is-asymmetric-le-Trichotomous-Ordinal :
+    is-asymmetric le-Trichotomous-Ordinal
   is-asymmetric-le-Trichotomous-Ordinal =
     is-asymmetric-le-Ordinal ordinal-Trichotomous-Ordinal
 
@@ -125,24 +132,32 @@ module _
   is-irreflexive-le-Trichotomous-Ordinal =
     is-irreflexive-le-Ordinal ordinal-Trichotomous-Ordinal
 
-  leq-Trichotomous-Ordinal : Relation (l1 ⊔ l2) type-Trichotomous-Ordinal
-  leq-Trichotomous-Ordinal = leq-Ordinal ordinal-Trichotomous-Ordinal
+  leq-Trichotomous-Ordinal :
+    Relation (l1 ⊔ l2) type-Trichotomous-Ordinal
+  leq-Trichotomous-Ordinal =
+    leq-Ordinal ordinal-Trichotomous-Ordinal
 
   is-prop-leq-Trichotomous-Ordinal :
-    {x y : type-Trichotomous-Ordinal} → is-prop (leq-Trichotomous-Ordinal x y)
+    {x y : type-Trichotomous-Ordinal} →
+    is-prop (leq-Trichotomous-Ordinal x y)
   is-prop-leq-Trichotomous-Ordinal =
     is-prop-leq-Ordinal ordinal-Trichotomous-Ordinal
 
   leq-prop-Trichotomous-Ordinal :
     Relation-Prop (l1 ⊔ l2) type-Trichotomous-Ordinal
-  leq-prop-Trichotomous-Ordinal = leq-prop-Ordinal ordinal-Trichotomous-Ordinal
+  leq-prop-Trichotomous-Ordinal =
+    leq-prop-Ordinal ordinal-Trichotomous-Ordinal
 
-  refl-leq-Trichotomous-Ordinal : is-reflexive leq-Trichotomous-Ordinal
-  refl-leq-Trichotomous-Ordinal = refl-leq-Ordinal ordinal-Trichotomous-Ordinal
+  refl-leq-Trichotomous-Ordinal :
+    is-reflexive leq-Trichotomous-Ordinal
+  refl-leq-Trichotomous-Ordinal =
+    refl-leq-Ordinal ordinal-Trichotomous-Ordinal
 
   leq-eq-Trichotomous-Ordinal :
-    {x y : type-Trichotomous-Ordinal} → x ＝ y → leq-Trichotomous-Ordinal x y
-  leq-eq-Trichotomous-Ordinal = leq-eq-Ordinal ordinal-Trichotomous-Ordinal
+    {x y : type-Trichotomous-Ordinal} →
+    x ＝ y → leq-Trichotomous-Ordinal x y
+  leq-eq-Trichotomous-Ordinal = l
+  eq-eq-Ordinal ordinal-Trichotomous-Ordinal
 
   transitive-leq-Trichotomous-Ordinal :
     is-transitive leq-Trichotomous-Ordinal
@@ -153,7 +168,8 @@ module _
     {x y : type-Trichotomous-Ordinal} →
     le-Trichotomous-Ordinal x y →
     leq-Trichotomous-Ordinal x y
-  leq-le-Trichotomous-Ordinal = leq-le-Ordinal ordinal-Trichotomous-Ordinal
+  leq-le-Trichotomous-Ordinal =
+    leq-le-Ordinal ordinal-Trichotomous-Ordinal
 
   antisymmetric-leq-Trichotomous-Ordinal :
     is-antisymmetric leq-Trichotomous-Ordinal
@@ -166,12 +182,15 @@ module _
     is-preorder-leq-Ordinal ordinal-Trichotomous-Ordinal
 
   preorder-Trichotomous-Ordinal : Preorder l1 (l1 ⊔ l2)
-  preorder-Trichotomous-Ordinal = preorder-Ordinal ordinal-Trichotomous-Ordinal
+  preorder-Trichotomous-Ordinal =
+    preorder-Ordinal ordinal-Trichotomous-Ordinal
 
   poset-Trichotomous-Ordinal : Poset l1 (l1 ⊔ l2)
-  poset-Trichotomous-Ordinal = poset-Ordinal ordinal-Trichotomous-Ordinal
+  poset-Trichotomous-Ordinal =
+    poset-Ordinal ordinal-Trichotomous-Ordinal
 
-  is-set-type-Trichotomous-Ordinal : is-set type-Trichotomous-Ordinal
+  is-set-type-Trichotomous-Ordinal :
+    is-set type-Trichotomous-Ordinal
   is-set-type-Trichotomous-Ordinal =
     is-set-type-Ordinal ordinal-Trichotomous-Ordinal
 
@@ -181,7 +200,8 @@ module _
   trichotomy-Trichotomous-Ordinal :
     (x y : type-Trichotomous-Ordinal) →
     (le-Trichotomous-Ordinal x y) + (x ＝ y) + (le-Trichotomous-Ordinal y x)
-  trichotomy-Trichotomous-Ordinal = is-trichotomous-ordinal-Trichotomous-Ordinal
+  trichotomy-Trichotomous-Ordinal =
+    is-trichotomous-ordinal-Trichotomous-Ordinal
 
   ind-Trichotomous-Ordinal :
     {l3 : Level} (P : type-Trichotomous-Ordinal → UU l3) →
@@ -217,25 +237,20 @@ module _
 module _
   {l1 l2 : Level}
   (α : Ordinal l1 l2)
-  (dle-α : (x y : type-Ordinal α) → is-decidable (le-Ordinal α x y))
+  (let _<_ = le-Ordinal α)
+  (dle-α : (x y : type-Ordinal α) → is-decidable (x < y))
   where
 
   abstract
     lower-bound-is-decidable-Ordinal :
       (a b : type-Ordinal α) →
-      ({u : type-Ordinal α} →
-        le-Ordinal α u a →
-        ¬ le-Ordinal α u b →
-        ¬ le-Ordinal α b u →
-        u ＝ b) →
-      ¬ le-Ordinal α b a →
-      (u : type-Ordinal α) →
-      le-Ordinal α u a →
-      le-Ordinal α u b
+      ({u : type-Ordinal α} → u < a → ¬ (u < b) → ¬ (b < u) → u ＝ b) →
+      ¬ (b < a) → (u : type-Ordinal α) → u < a → u < b
     lower-bound-is-decidable-Ordinal a b IH b≮a u u<a =
       rec-ternary-coproduct
         ( id)
-        ( λ p → ex-falso (b≮a (transitive-le-Ordinal α b u a u<a (pr2 p))))
+        ( λ p →
+          ex-falso (b≮a (transitive-le-Ordinal α b u a u<a (pr2 p))))
         ( λ p →
           ex-falso
             ( b≮a
@@ -254,11 +269,10 @@ module _
 
   abstract
     eq-incomparable-is-decidable-Ordinal :
-      (x y : type-Ordinal α) →
-      ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y
+      (x y : type-Ordinal α) → ¬ (x < y) → ¬ (y < x) → x ＝ y
     eq-incomparable-is-decidable-Ordinal =
       ind²-Ordinal α
-        ( λ x y → ¬ le-Ordinal α x y → ¬ le-Ordinal α y x → x ＝ y)
+        ( λ x y → ¬ (x < y) → ¬ (y < x) → x ＝ y)
         ( λ {x} IHx y IHy x≮y y≮x →
           is-extensional-Ordinal α x y
             ( λ u →
