@@ -20,6 +20,7 @@ open import foundation.universe-levels
 
 open import order-theory.cotransitive-strict-preorders
 open import order-theory.double-negation-stable-strict-orders
+open import order-theory.double-negation-stable-strict-preorders
 open import order-theory.strict-orders
 open import order-theory.strict-preorders
 ```

@@ -168,7 +168,8 @@ module _
     is-prop-trichotomy-is-trichotomous-Strict-Preorder :
       is-trichotomous-Strict-Preorder A →
       (x y : type-Strict-Preorder A) →
-      is-prop ((le-Strict-Preorder A x y) + (x ＝ y) + (le-Strict-Preorder A y x))
+      is-prop
+        ( (le-Strict-Preorder A x y) + (x ＝ y) + (le-Strict-Preorder A y x))
     is-prop-trichotomy-is-trichotomous-Strict-Preorder tA x y =
       is-prop-coproduct
         ( λ x<y →
