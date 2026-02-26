@@ -156,8 +156,8 @@ module _
   leq-eq-Trichotomous-Ordinal :
     {x y : type-Trichotomous-Ordinal} →
     x ＝ y → leq-Trichotomous-Ordinal x y
-  leq-eq-Trichotomous-Ordinal = l
-  eq-eq-Ordinal ordinal-Trichotomous-Ordinal
+  leq-eq-Trichotomous-Ordinal =
+    leq-eq-Ordinal ordinal-Trichotomous-Ordinal
 
   transitive-leq-Trichotomous-Ordinal :
     is-transitive leq-Trichotomous-Ordinal
