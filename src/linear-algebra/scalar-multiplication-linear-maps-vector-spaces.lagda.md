@@ -27,7 +27,7 @@ and a constant `c : R`, the map `x ↦ c * f x` is a linear map.
 
 ## Definition
 
-### The linear transformation of scalar multiplication
+### The linear endomap of scalar multiplication
 
 ```agda
 module _
