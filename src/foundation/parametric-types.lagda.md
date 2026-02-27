@@ -193,10 +193,10 @@ module _
 
 Given a discrete type `B`, if there exists a function `f : I → B` together with
 elements `X` and `Y` of `I` such that `f X ≠ f Y`, and moreover there is some
-assignment of double negation stable propositions to `I`, `χ : Prop¬¬ → I` that
-sends true propositions to `X` and false propositions to `Y`, then every type
-has decidable universal quantifications. For `I` equal to a universe, there is
-such a map given by splitting at any given double negation stable proposition:
+assignment `χ` of double negation stable propositions to `I` that sends true
+propositions to `X` and false propositions to `Y`, then every type has decidable
+universal quantifications. For `I` equal to a universe, there is such a map
+given by splitting at any given double negation stable proposition:
 
 ```text
   χ P ≔ (P × X) + ((¬ P) × Y)
