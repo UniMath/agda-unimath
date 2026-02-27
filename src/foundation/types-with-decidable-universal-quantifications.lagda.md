@@ -45,7 +45,7 @@ of type
   (P : decidable-subtype X) → is-decidable (∀ x. x ∈ P).
 ```
 
-Note that having decidable universal quantifications is
+Having decidable universal quantifications is
 [logically equivalent](foundation.logical-equivalences.md) to having
 [decidable Π-types](foundation.types-with-decidable-dependent-product-types.md),
 but the latter is not a [proposition](foundation-core.propositions.md).
@@ -186,5 +186,6 @@ abstract
 
 ## See also
 
+- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 - [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md)
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
