@@ -60,7 +60,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The universe of `Y`-[null](orthogonal-factorization-systems.null-types.md) types
-are closed under [coproducts](foundation.coproduct-types.md) if and only if the
+is closed under [coproducts](foundation.coproduct-types.md) if and only if the
 [booleans](foundation.booleans.md) are `Y`-null.
 
 ## Properties
@@ -188,7 +188,7 @@ abstract
     is-null Y X
   is-null-is-finite-is-null-bool Y {X = X} is-null-bool is-finite-X =
     apply-universal-property-trunc-Prop
-      is-finite-X
+      ( is-finite-X)
       ( is-null-Prop Y X)
       ( λ (n , e) →
         is-null-equiv-base

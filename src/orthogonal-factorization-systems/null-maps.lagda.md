@@ -334,8 +334,9 @@ module _
 
 ### The dependent sum of a type family over a `Y`-null base is `Y`-null if and only if the type family is `Y`-null
 
-One direction was already proven in `null-types`, however, we give a second
-proof of this fact below.
+One direction was already proven in
+[`null-types`](orthogonal-factorization-systems.null-types.md), however, we give
+a second proof of this fact below.
 
 ```agda
 module _
@@ -423,8 +424,8 @@ module _
     is-null-map-Π : ((i : I) → is-null-map Y (f i)) → is-null-map Y (map-Π f)
     is-null-map-Π is-null-f =
       is-null-map-is-orthogonal-terminal-map Y (map-Π f)
-      ( is-orthogonal-right-Π (terminal-map Y) f
-        ( λ i → is-orthogonal-terminal-map-is-null-map Y (f i) (is-null-f i)))
+        ( is-orthogonal-right-Π (terminal-map Y) f
+          ( λ i → is-orthogonal-terminal-map-is-null-map Y (f i) (is-null-f i)))
 ```
 
 ### Null maps are closed under exponentiation
