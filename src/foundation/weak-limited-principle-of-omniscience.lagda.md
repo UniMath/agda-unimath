@@ -45,10 +45,10 @@ particular, it is a restricted form of the
 
 ```agda
 level-prop-WLPO : (l : Level) → Prop (lsuc l)
-level-prop-WLPO l = has-decidable-∀-Level l ℕ , is-prop-has-decidable-∀-Level
+level-prop-WLPO l = has-decidable-∀-prop-Level l ℕ
 
 level-WLPO : (l : Level) → UU (lsuc l)
-level-WLPO l = type-Prop (level-prop-WLPO l)
+level-WLPO l = has-decidable-∀-Level l ℕ
 
 WLPO : UUω
 WLPO = {l : Level} → level-WLPO l

@@ -12,6 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions
@@ -75,6 +76,11 @@ is-prop-has-decidable-∀-Level =
     ( λ P →
       is-prop-is-decidable
         ( is-prop-is-full-subtype (subtype-decidable-subtype P)))
+
+has-decidable-∀-prop-Level :
+  {l1 : Level} (l2 : Level) → UU l1 → Prop (l1 ⊔ lsuc l2)
+has-decidable-∀-prop-Level l2 X =
+  (has-decidable-∀-Level l2 X , is-prop-has-decidable-∀-Level)
 ```
 
 ## Properties
