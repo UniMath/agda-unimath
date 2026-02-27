@@ -288,6 +288,10 @@ abstract
 
 ### If some type refutes decidable Π-types then the booleans are parametric
 
+In particular, if the
+[weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
+is refuted then the booleans are parametric.
+
 ```agda
 abstract
   is-parametric-bool-not-has-decidable-∀-Level :
