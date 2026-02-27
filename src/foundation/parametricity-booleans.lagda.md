@@ -14,6 +14,9 @@ open import foundation.axiom-of-choice
 open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diaconescus-theorem
@@ -33,6 +36,8 @@ open import foundation.subuniverse-parametric-types
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-empty-type
+open import foundation.types-with-decidable-dependent-product-types
+open import foundation.types-with-decidable-universal-quantifications
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-equivalences
@@ -67,14 +72,11 @@ The [booleans](foundation.booleans.md) are said to be
 universe, `bool → (𝒰 → bool)`, is an
 [equivalence](foundation-core.equivalences.md).
 
-We consider consequences of assuming the booleans are parametric, and hypotheses
-under which the booleans are parametric:
+We consider consequences of assuming the booleans are parametric:
 
 1. If the booleans are parametric then the law of excluded middle does not hold.
 2. If the booleans are parametric then the axiom of choice does not hold.
-3. If the weak limited principle of omniscience does not hold then the booleans
-   are parametric.
-4. If the booleans are parametric then parametric types are closed under
+3. If the booleans are parametric then parametric types are closed under
    coproducts.
 
 ## Properties
@@ -284,190 +286,20 @@ abstract
     is-parametric-is-subfinite-is-parametric-bool H eX
 ```
 
-### A WLPO-based separation principle for booleans
-
-If there exists a function `f : I → bool` together with elements `X` and `Y` of
-`I` such that `f X ≠ f Y`, and moreover there is some assignment of propositions
-to `I`, `χ : Prop → I` that sends true propositions to `X` and false
-propositions to `Y`, then WLPO holds. For `I` equal to the universe, there is
-such a map given by splitting at any given proposition:
-
-```text
-  χ P ≔ (P × X) + ((¬ P) × Y)
-```
-
-Therefore, if WLPO does not hold, then `f` must send `X` and `Y` to the same
-element in `bool`, and hence `bool` is parametric.
+### If some type refutes decidable Π-types then the booleans are parametric
 
 ```agda
-module _
-  {l1 : Level} {I : UU l1}
-  (f : I → bool)
-  {X Y : I}
-  (fX≠fY : f X ≠ f Y)
-  (χ : Prop lzero → I)
-  (eq-χ-true : (P : Prop lzero) → type-Prop P → χ P ＝ X)
-  (eq-χ-false : (P : Prop lzero) → ¬ type-Prop P → χ P ＝ Y)
-  where abstract
-
-  is-decidable-split-on-double-negation-stable-prop :
-    (P : Prop lzero) →
-    (¬¬ type-Prop P → type-Prop P) →
-    is-decidable (type-Prop P)
-  is-decidable-split-on-double-negation-stable-prop P H =
-    map-coproduct
-      ( λ p → H (λ np → fX≠fY (inv p ∙ ap f (eq-χ-false P np))))
-      ( λ np p → np (ap f (eq-χ-true P p)))
-      ( has-decidable-equality-bool (f (χ P)) (f X))
-
-  bool-WLPO-separating-map-split : bool-WLPO
-  bool-WLPO-separating-map-split g =
-    is-decidable-split-on-double-negation-stable-prop
-      ( Π-Prop ℕ (λ n → is-true-Prop (g n)))
-      ( λ nn-all-g n →
-        has-double-negation-stable-equality-bool
-          ( g n)
-          ( true)
-          ( λ nn-gn → nn-all-g (λ all-g → nn-gn (all-g n))))
-
 abstract
-  separate-boolean-map-split-on-prop-bool-WLPO :
-    {l1 : Level} {I : UU l1} →
-    ¬ bool-WLPO →
-    (f : I → bool) →
-    (X Y : I) →
-    (χ : (f X ≠ f Y) → Prop lzero → I) →
-    ( (fX≠fY : f X ≠ f Y) (P : Prop lzero) →
-      type-Prop P → χ fX≠fY P ＝ X) →
-    ( (fX≠fY : f X ≠ f Y) (P : Prop lzero) →
-      ¬ type-Prop P → χ fX≠fY P ＝ Y) →
-    f X ＝ f Y
-  separate-boolean-map-split-on-prop-bool-WLPO
-    nwlpo f X Y χ eq-χ-true eq-χ-false =
-    rec-coproduct
-      ( id)
-      ( λ fX≠fY →
-        ex-falso
-          ( nwlpo
-            ( bool-WLPO-separating-map-split
-              ( f)
-              ( fX≠fY)
-              ( χ fX≠fY)
-              ( eq-χ-true fX≠fY)
-              ( eq-χ-false fX≠fY))))
-      ( has-decidable-equality-bool (f X) (f Y))
+  is-parametric-bool-not-has-decidable-∀-Level :
+    {l : Level} {A : UU l} →
+    ¬ has-decidable-∀-Level l A → is-parametric l bool
+  is-parametric-bool-not-has-decidable-∀-Level ¬d∀A =
+    is-parametric-not-has-decidable-∀-Discrete-Type ¬d∀A bool-Discrete-Type
 
-  compute-split-on-prop-true :
-    {l1 l2 l3 : Level} (P : Prop l1) {X : UU l2} {Y : UU l3} →
-    type-Prop P → ((type-Prop P × X) + ((¬ type-Prop P) × Y)) ≃ X
-  compute-split-on-prop-true P {X = X} {Y = Y} p =
-    ( left-unit-law-product-is-contr
-      ( is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)) ∘e
-    ( right-unit-law-coproduct-is-empty
-      ( type-Prop P × X)
-      ( (¬ type-Prop P) × Y)
-      ( λ z → (pr1 z) p))
-
-  compute-split-on-prop-false :
-    {l1 l2 l3 : Level} (P : Prop l1) {X : UU l2} {Y : UU l3} →
-    ¬ type-Prop P → ((type-Prop P × X) + ((¬ type-Prop P) × Y)) ≃ Y
-  compute-split-on-prop-false P {X = X} {Y = Y} np =
-    ( left-unit-law-product-is-contr
-      (is-proof-irrelevant-is-prop (is-property-is-empty) np)) ∘e
-    ( left-unit-law-coproduct-is-empty
-      ( type-Prop P × X)
-      ( (¬ type-Prop P) × Y)
-      ( λ z → np (pr1 z)))
-```
-
-### Rejecting WLPO requires accepting that the booleans are parametric
-
-This depends on the univalence axiom.
-
-```agda
-split-on-prop :
-  {l : Level} (f : UU l → bool) {X Y : UU l} → Prop lzero → UU l
-split-on-prop f {X} {Y} P = (type-Prop P × X) + ((¬ type-Prop P) × Y)
-
-abstract
-  rice-contrapositive-bool-WLPO :
-    {l : Level} →
-    ¬ bool-WLPO →
-    (f : UU l → bool) →
-    (X Y : UU l) → f X ＝ f Y
-  rice-contrapositive-bool-WLPO nwlpo f X Y =
-    separate-boolean-map-split-on-prop-bool-WLPO nwlpo f X Y
-      ( λ _ → split-on-prop f {X} {Y})
-      ( λ _ P p → eq-equiv (compute-split-on-prop-true P p))
-      ( λ _ P np → eq-equiv (compute-split-on-prop-false P np))
-
-  is-parametric-bool-no-bool-WLPO :
-    {l : Level} → ¬ bool-WLPO → is-parametric l bool
-  is-parametric-bool-no-bool-WLPO {l} nwlpo =
-    is-equiv-is-invertible
-      ( ev (raise-empty l))
-      ( λ f →
-        eq-htpy
-          ( λ X →
-            inv (rice-contrapositive-bool-WLPO nwlpo f X (raise-empty l))))
-      ( refl-htpy)
-```
-
-### Rejecting WLPO requires accepting that the booleans are proposition-parametric
-
-We repeat the proof to avoid using univalence. In this case we only require
-propositional extensionality.
-
-```agda
-module _
-  {l : Level}
-  (f : Prop l → bool)
-  {X Y : Prop l}
-  where abstract
-
-  split-on-prop-Prop : Prop lzero → Prop l
-  pr1 (split-on-prop-Prop P) =
-    (type-Prop P × type-Prop X) + ((¬ type-Prop P) × type-Prop Y)
-  pr2 (split-on-prop-Prop P) =
-    is-prop-coproduct
-      ( λ z w → (pr1 w) (pr1 z))
-      ( is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop X))
-      ( is-prop-product (is-property-is-empty) (is-prop-type-Prop Y))
-
-abstract
-  rice-contrapositive-prop-bool-WLPO :
-    {l : Level} →
-    ¬ bool-WLPO →
-    (f : Prop l → bool) (X Y : Prop l) → f X ＝ f Y
-  rice-contrapositive-prop-bool-WLPO nwlpo f X Y =
-    separate-boolean-map-split-on-prop-bool-WLPO nwlpo f X Y
-      ( λ _ → split-on-prop-Prop f {X} {Y})
-      ( λ _ P p →
-        eq-iff'
-          ( split-on-prop-Prop f P)
-          ( X)
-          ( iff-equiv (compute-split-on-prop-true P p)))
-      ( λ _ P np →
-        eq-iff'
-          ( split-on-prop-Prop f P)
-          ( Y)
-          ( iff-equiv (compute-split-on-prop-false P np)))
-
-  is-prop-parametric-bool-no-bool-WLPO :
-    {l : Level} → ¬ bool-WLPO → is-null (Prop l) bool
-  is-prop-parametric-bool-no-bool-WLPO {l} nwlpo =
-    is-equiv-is-invertible
-      ( ev (raise-empty-Prop l))
-      ( λ f →
-        eq-htpy
-          ( λ P →
-            inv
-              ( rice-contrapositive-prop-bool-WLPO
-                ( nwlpo)
-                ( f)
-                ( P)
-                ( raise-empty-Prop l))))
-      ( refl-htpy)
+  is-parametric-lzero-bool-no-WLPO :
+    ¬ level-WLPO lzero → is-parametric lzero bool
+  is-parametric-lzero-bool-no-WLPO =
+    is-parametric-bool-not-has-decidable-∀-Level
 ```
 
 ## See also

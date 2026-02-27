@@ -82,11 +82,11 @@ is-prop-has-decidable-∀-Level =
 ### Types with decidable universal quantifications have decidable Π-types
 
 ```agda
-has-decidable-Π-has-decidable-∀ :
-  {l1 : Level} {X : UU l1} →
-  has-decidable-∀ X →
-  has-decidable-Π X
-has-decidable-Π-has-decidable-∀
+has-decidable-Π-Level-has-decidable-∀-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  has-decidable-∀-Level l2 X →
+  has-decidable-Π-Level l2 X
+has-decidable-Π-Level-has-decidable-∀-Level
   f P =
   map-coproduct
     ( λ nnp x →
@@ -96,6 +96,31 @@ has-decidable-Π-has-decidable-∀
           neg-type-Decidable-Prop
             ( ¬ (family-decidable-family P x))
             ( is-decidable-neg (is-decidable-decidable-family P x))))
+
+has-decidable-Π-has-decidable-∀ :
+  {l1 : Level} {X : UU l1} →
+  has-decidable-∀ X →
+  has-decidable-Π X
+has-decidable-Π-has-decidable-∀ f {l2} =
+  has-decidable-Π-Level-has-decidable-∀-Level (f {l2})
+```
+
+### Types with decidable Π-types have decidable universal quantifications
+
+```agda
+has-decidable-∀-Level-has-decidable-Π-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  has-decidable-Π-Level l2 X →
+  has-decidable-∀-Level l2 X
+has-decidable-∀-Level-has-decidable-Π-Level f P =
+  f (decidable-family-decidable-subtype P)
+
+has-decidable-∀-has-decidable-Π :
+  {l1 : Level} {X : UU l1} →
+  has-decidable-Π X →
+  has-decidable-∀ X
+has-decidable-∀-has-decidable-Π f {l2} =
+  has-decidable-∀-Level-has-decidable-Π-Level (f {l2})
 ```
 
 ### Merely decidable types with merely equal elements have decidable universal quantifications
