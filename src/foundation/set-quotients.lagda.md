@@ -24,9 +24,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
+open import foundation.morphisms-slice
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications

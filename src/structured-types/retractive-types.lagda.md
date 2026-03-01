@@ -41,8 +41,8 @@ correspond precisely to families of
 retractive types is the study of pointed types parametrized over a base type
 `X`.
 
-The `X`-retractive types live naturally in the [coslice](foundation.coslice.md)
-of `X`, which is why we use the preposition _under_ rather than _over_.
+The `X`-retractive types live naturally in the coslice of `X`, which is why we
+use the preposition _under_ rather than _over_.
 
 ## Definitions
 
