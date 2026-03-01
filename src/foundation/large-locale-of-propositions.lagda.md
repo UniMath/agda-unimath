@@ -74,7 +74,7 @@ antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```agda
 large-similarity-relation-Prop : Large-Similarity-Relation (_⊔_) Prop
 large-similarity-relation-Prop =
-  large-similarity-relation-sim-Large-Poset Prop-Large-Poset
+  large-similarity-relation-Large-Poset Prop-Large-Poset
 ```
 
 ### Meets in the large poset of propositions

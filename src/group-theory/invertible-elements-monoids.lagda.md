@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -459,6 +460,12 @@ module _
       ( left-div-is-invertible-element-Monoid H)
       ( is-section-left-div-is-invertible-element-Monoid H)
       ( is-retraction-left-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid =
+    ( is-equiv-mul-is-invertible-element-Monoid ,
+      is-invertible-element-is-equiv-mul-Monoid)
 ```
 
 #### An element `x` is invertible if and only if `z ↦ zx` is an equivalence
@@ -534,9 +541,16 @@ module _
       ( right-div-is-invertible-element-Monoid H)
       ( is-section-right-div-is-invertible-element-Monoid H)
       ( is-retraction-right-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid' :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid' M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid' =
+    ( is-equiv-mul-is-invertible-element-Monoid' ,
+      is-invertible-element-is-equiv-mul-Monoid')
 ```
 
 ## See also
 
 - The core of a monoid is defined in
   [`group-theory.cores-monoids`](group-theory.cores-monoids.md).
+- [Invertible elements in large monoids](group-theory.invertible-elements-large-monoids.md)

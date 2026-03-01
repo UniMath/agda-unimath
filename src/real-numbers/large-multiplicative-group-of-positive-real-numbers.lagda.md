@@ -36,21 +36,17 @@ The [positive real numbers](real-numbers.positive-real-numbers.md) form a
 ## Definition
 
 ```agda
-large-semigroup-mul-ℝ⁺ : Large-Semigroup lsuc
+large-semigroup-mul-ℝ⁺ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-mul-ℝ⁺ =
   make-Large-Semigroup
-    ( ℝ⁺-Set)
-    ( mul-ℝ⁺)
+    ( cumulative-large-set-ℝ⁺)
+    ( sim-preserving-binary-operator-mul-ℝ⁺)
     ( associative-mul-ℝ⁺)
 
 large-monoid-mul-ℝ⁺ : Large-Monoid lsuc (_⊔_)
 large-monoid-mul-ℝ⁺ =
   make-Large-Monoid
     ( large-semigroup-mul-ℝ⁺)
-    ( large-similarity-relation-sim-ℝ⁺)
-    ( raise-ℝ⁺)
-    ( λ l (x , _) → sim-raise-ℝ l x)
-    ( preserves-sim-mul-ℝ⁺)
     ( one-ℝ⁺)
     ( left-unit-law-mul-ℝ⁺)
     ( right-unit-law-mul-ℝ⁺)
