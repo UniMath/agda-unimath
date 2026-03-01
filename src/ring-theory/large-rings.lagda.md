@@ -8,11 +8,13 @@ module ring-theory.large-rings where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.sets
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -45,6 +47,10 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
 
   field
     large-ab-Large-Ring : Large-Ab α β
+
+  cumulative-large-set-Large-Ring : Cumulative-Large-Set α β
+  cumulative-large-set-Large-Ring =
+    cumulative-large-set-Large-Ab large-ab-Large-Ring
 
   type-Large-Ring : (l : Level) → UU (α l)
   type-Large-Ring = type-Large-Ab large-ab-Large-Ring
@@ -176,7 +182,7 @@ module _
   eq-raise-Large-Ring :
     (l1 : Level) {l2 : Level} (x : type-Large-Ring R (l1 ⊔ l2)) →
     raise-Large-Ring R l2 x ＝ x
-  eq-raise-Large-Ring = eq-raise-Large-Ab (large-ab-Large-Ring R)
+  eq-raise-Large-Ring = eq-raise-leq-level-Large-Ab (large-ab-Large-Ring R)
 
   raise-raise-Large-Ring :
     {l1 l2 l3 : Level} → (x : type-Large-Ring R l1) →
@@ -188,31 +194,32 @@ module _
     {l1 l2 l3 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R (raise-Large-Ring R l3 x) y ＝
     raise-Large-Ring R l3 (add-Large-Ring R x y)
-  raise-left-add-Large-Ring = raise-left-add-Large-Ab (large-ab-Large-Ring R)
+  raise-left-add-Large-Ring = add-raise-left-Large-Ab (large-ab-Large-Ring R) _
 
   raise-right-add-Large-Ring :
     {l1 l2 l3 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
     add-Large-Ring R x (raise-Large-Ring R l3 y) ＝
     raise-Large-Ring R l3 (add-Large-Ring R x y)
-  raise-right-add-Large-Ring = raise-right-add-Large-Ab (large-ab-Large-Ring R)
+  raise-right-add-Large-Ring =
+    add-raise-right-Large-Ab (large-ab-Large-Ring R) _
 
-  raise-left-unit-law-Large-Ring :
+  left-raise-unit-law-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) →
     add-Large-Ring R (raise-zero-Large-Ring l2) x ＝ raise-Large-Ring R l2 x
-  raise-left-unit-law-Large-Ring =
-    raise-left-unit-law-Large-Ab (large-ab-Large-Ring R)
+  left-raise-unit-law-Large-Ring =
+    left-raise-unit-law-add-Large-Ab (large-ab-Large-Ring R)
 
-  raise-right-unit-law-Large-Ring :
+  right-raise-unit-law-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) →
     add-Large-Ring R x (raise-zero-Large-Ring l2) ＝
     raise-Large-Ring R l2 x
-  raise-right-unit-law-Large-Ring =
-    raise-right-unit-law-Large-Ab (large-ab-Large-Ring R)
+  right-raise-unit-law-Large-Ring =
+    right-raise-unit-law-add-Large-Ab (large-ab-Large-Ring R)
 
   raise-zero-lzero-Large-Ring :
     raise-zero-Large-Ring lzero ＝ zero-Large-Ring R
   raise-zero-lzero-Large-Ring =
-    raise-unit-lzero-Large-Ab (large-ab-Large-Ring R)
+    raise-zero-lzero-Large-Ab (large-ab-Large-Ring R)
 ```
 
 ### The multiplicative monoid of a large ring
@@ -222,21 +229,21 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
   where
 
-  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α
+  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α β
   multiplicative-large-semigroup-Large-Ring =
     make-Large-Semigroup
-      ( set-Large-Ring R)
-      ( mul-Large-Ring R)
+      ( cumulative-large-set-Large-Ring R)
+      ( make-sim-preserving-binary-operator-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Ring R)
+        ( mul-Large-Ring R)
+        ( λ x x' y y' x~x' y~y' →
+          preserves-sim-mul-Large-Ring R x x' x~x' y y' y~y'))
       ( associative-mul-Large-Ring R)
 
   multiplicative-large-monoid-Large-Ring : Large-Monoid α β
   multiplicative-large-monoid-Large-Ring =
     make-Large-Monoid
       ( multiplicative-large-semigroup-Large-Ring)
-      ( large-similarity-relation-Large-Ring R)
-      ( raise-Large-Ring R)
-      ( sim-raise-Large-Ring R)
-      ( preserves-sim-mul-Large-Ring R)
       ( one-Large-Ring R)
       ( left-unit-law-mul-Large-Ring R)
       ( right-unit-law-mul-Large-Ring R)
@@ -278,13 +285,13 @@ module _
     {l : Level} (x : type-Large-Ring R l) →
     add-Large-Ring R (neg-Large-Ring R x) x ＝ raise-zero-Large-Ring R l
   left-inverse-law-add-Large-Ring =
-    left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+    eq-left-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
 
   right-inverse-law-add-Large-Ring :
     {l : Level} (x : type-Large-Ring R l) →
     add-Large-Ring R x (neg-Large-Ring R x) ＝ raise-zero-Large-Ring R l
   right-inverse-law-add-Large-Ring =
-    right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
+    eq-right-inverse-law-add-Large-Ab (large-ab-Large-Ring R)
 
   commutative-add-Large-Ring :
     {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2) →
@@ -324,8 +331,10 @@ module _
   hom-raise-Large-Ring =
     ( hom-raise-Large-Ab (large-ab-Large-Ring R) l1 l2 ,
       inv
-        ( raise-mul-Large-Monoid
+        ( mul-raise-raise-Large-Monoid
           ( multiplicative-large-monoid-Large-Ring R)
+          ( l2)
+          ( l2)
           ( _)
           ( _)) ,
       raise-raise-Large-Ring R _)
