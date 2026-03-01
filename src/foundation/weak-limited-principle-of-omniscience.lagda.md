@@ -20,6 +20,8 @@ open import foundation.limited-principle-of-omniscience
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.transport-along-identifications
+open import foundation.types-with-decidable-dependent-product-types
+open import foundation.types-with-decidable-universal-quantifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
@@ -43,20 +45,36 @@ particular, it is a restricted form of the
 
 ```agda
 level-prop-WLPO : (l : Level) → Prop (lsuc l)
-level-prop-WLPO l =
-  Π-Prop
-    ( decidable-subtype l ℕ)
-    ( λ P →
-      is-decidable-Prop (is-full-decidable-subtype-Prop P))
+level-prop-WLPO l = has-decidable-∀-prop-Level l ℕ
 
 level-WLPO : (l : Level) → UU (lsuc l)
-level-WLPO l = type-Prop (level-prop-WLPO l)
+level-WLPO l = has-decidable-∀-Level l ℕ
 
 WLPO : UUω
 WLPO = {l : Level} → level-WLPO l
 ```
 
 ## Properties
+
+### WLPO is logically equivalent to decidable Π-types of ℕ
+
+```agda
+level-WLPO-has-decidable-Π-level-ℕ :
+  {l : Level} → level-WLPO l → has-decidable-Π-Level l ℕ
+level-WLPO-has-decidable-Π-level-ℕ =
+  has-decidable-Π-Level-has-decidable-∀-Level
+
+has-decidable-Π-Level-ℕ-level-WLPO :
+  {l : Level} → has-decidable-Π-Level l ℕ → level-WLPO l
+has-decidable-Π-Level-ℕ-level-WLPO =
+  has-decidable-∀-Level-has-decidable-Π-Level
+
+WLPO-has-decidable-Π-ℕ : WLPO → has-decidable-Π ℕ
+WLPO-has-decidable-Π-ℕ = has-decidable-Π-has-decidable-∀
+
+has-decidable-Π-ℕ-WLPO : has-decidable-Π ℕ → WLPO
+has-decidable-Π-ℕ-WLPO = has-decidable-∀-has-decidable-Π
+```
 
 ### The limited principle of omniscience implies the weak limited principle of omniscience
 

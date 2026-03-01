@@ -13,7 +13,10 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.postcomposition-functions
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
@@ -175,6 +178,23 @@ abstract
                   ( is-empty-raise-empty)
                   ( type-Prop P))))))
       ( is-torsorial-iff (raise-empty-Prop l1))
+```
+
+### The propositions are a retract of the universe
+
+```agda
+is-retraction-trunc-Prop :
+  {l : Level} →
+  is-retraction (type-Prop {l = l}) (trunc-Prop {l = l})
+is-retraction-trunc-Prop {l} P =
+  eq-iff
+    ( map-inv-equiv (equiv-unit-trunc-Prop P))
+    ( map-equiv (equiv-unit-trunc-Prop P))
+
+retract-Prop-UU : {l : Level} → Prop l retract-of UU l
+pr1 retract-Prop-UU = type-Prop
+pr1 (pr2 retract-Prop-UU) = trunc-Prop
+pr2 (pr2 retract-Prop-UU) = is-retraction-trunc-Prop
 ```
 
 ## Table of files about propositional logic
