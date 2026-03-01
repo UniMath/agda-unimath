@@ -41,7 +41,7 @@ module _
     leq-prop-Poset P c a ∧ leq-prop-Poset P b d
 
   leq-closed-interval-Poset : Relation l2 (closed-interval-Poset P)
-  leq-closed-interval-Poset = type-Relation-Prop leq-prop-closed-interval-Poset
+  leq-closed-interval-Poset = rel-Relation-Prop leq-prop-closed-interval-Poset
 ```
 
 ## Properties

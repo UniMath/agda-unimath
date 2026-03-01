@@ -142,7 +142,7 @@ module _
     is-prop-is-accessible-element-Relation x
 ```
 
-### If `x` is an `<`-accessible element, then `<` is antisymmetric at `x`
+### If `x` is an `<`-accessible element, then `<` is asymmetric at `x`
 
 ```agda
 module _

@@ -56,19 +56,19 @@ Relation-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 Relation-Prop l A = A → A → Prop l
 
-type-Relation-Prop :
+rel-Relation-Prop :
   {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → Relation l2 A
-type-Relation-Prop R x y = pr1 (R x y)
+rel-Relation-Prop R x y = pr1 (R x y)
 
-is-prop-type-Relation-Prop :
+is-prop-rel-Relation-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
-  (x y : A) → is-prop (type-Relation-Prop R x y)
-is-prop-type-Relation-Prop R x y = pr2 (R x y)
+  (x y : A) → is-prop (rel-Relation-Prop R x y)
+is-prop-rel-Relation-Prop R x y = pr2 (R x y)
 
 total-space-Relation-Prop :
   {l : Level} {l1 : Level} {A : UU l1} → Relation-Prop l A → UU (l ⊔ l1)
 total-space-Relation-Prop {A = A} R =
-  Σ (A × A) λ (a , a') → type-Relation-Prop R a a'
+  Σ (A × A) λ (a , a') → rel-Relation-Prop R a a'
 ```
 
 ### The predicate of being a reflexive relation
@@ -96,11 +96,11 @@ module _
   where
 
   is-reflexive-Relation-Prop : UU (l1 ⊔ l2)
-  is-reflexive-Relation-Prop = is-reflexive (type-Relation-Prop R)
+  is-reflexive-Relation-Prop = is-reflexive (rel-Relation-Prop R)
 
   is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
   is-prop-is-reflexive-Relation-Prop =
-    is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+    is-prop-Π (λ x → is-prop-rel-Relation-Prop R x x)
 
   is-reflexive-prop-Relation-Prop : Prop (l1 ⊔ l2)
   is-reflexive-prop-Relation-Prop =
@@ -132,12 +132,12 @@ module _
   where
 
   is-symmetric-Relation-Prop : UU (l1 ⊔ l2)
-  is-symmetric-Relation-Prop = is-symmetric (type-Relation-Prop R)
+  is-symmetric-Relation-Prop = is-symmetric (rel-Relation-Prop R)
 
   is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
-      ( λ x y r → is-prop-type-Relation-Prop R y x)
+      ( λ x y r → is-prop-rel-Relation-Prop R y x)
 
   is-symmetric-prop-Relation-Prop : Prop (l1 ⊔ l2)
   is-symmetric-prop-Relation-Prop =
@@ -172,14 +172,14 @@ module _
   where
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
-  is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
+  is-transitive-Relation-Prop = is-transitive (rel-Relation-Prop R)
 
   is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
   is-prop-is-transitive-Relation-Prop =
     is-prop-iterated-Π 3
       ( λ x y z →
         is-prop-function-type
-          ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))
+          ( is-prop-function-type (is-prop-rel-Relation-Prop R x z)))
 ```
 
 ### The predicate of being an irreflexive relation
@@ -200,7 +200,7 @@ module _
   where
 
   is-irreflexive-Relation-Prop : UU (l1 ⊔ l2)
-  is-irreflexive-Relation-Prop = is-irreflexive (type-Relation-Prop R)
+  is-irreflexive-Relation-Prop = is-irreflexive (rel-Relation-Prop R)
 ```
 
 ### The predicate of being an asymmetric relation
@@ -242,7 +242,7 @@ module _
   where
 
   is-antisymmetric-Relation-Prop : UU (l1 ⊔ l2)
-  is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
+  is-antisymmetric-Relation-Prop = is-antisymmetric (rel-Relation-Prop R)
 ```
 
 ### The predicate of being an entire relation
@@ -271,7 +271,7 @@ module _
   where
 
   is-entire-Relation-Prop : UU (l1 ⊔ l2)
-  is-entire-Relation-Prop = is-entire-Relation (type-Relation-Prop R)
+  is-entire-Relation-Prop = is-entire-Relation (rel-Relation-Prop R)
 ```
 
 ## Properties
