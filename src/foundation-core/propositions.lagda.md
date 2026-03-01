@@ -456,3 +456,8 @@ The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## See also
+
+- It is shown that the subuniverse of propositions has decidable Σ-types in
+  [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md).
