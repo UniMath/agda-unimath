@@ -23,6 +23,7 @@ open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.difference-linear-maps-left-modules-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
+open import linear-algebra.external-direct-sums-left-modules-rings public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public

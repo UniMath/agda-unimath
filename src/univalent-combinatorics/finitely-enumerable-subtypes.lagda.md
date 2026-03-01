@@ -22,11 +22,14 @@ open import foundation.images-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
+open import foundation.singleton-subtypes
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
+open import univalent-combinatorics.finite-subtypes
 open import univalent-combinatorics.finitely-enumerable-types
 ```
 
@@ -165,6 +168,19 @@ module _
       is-finitely-enumerable-subtype-union-finitely-enumerable-subtype)
 ```
 
+### Finite subtypes are finitely enumerable
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} ((S , is-finite-S) : finite-subtype l2 X)
+  where
+
+  finitely-enumerable-subtype-finite-subtype :
+    finitely-enumerable-subtype l2 X
+  finitely-enumerable-subtype-finite-subtype =
+    ( S , is-finitely-enumerable-is-finite is-finite-S)
+```
+
 ### Empty subtypes are finitely enumerable
 
 ```agda
@@ -188,6 +204,16 @@ empty-finitely-enumerable-subtype :
 empty-finitely-enumerable-subtype l2 X =
   ( empty-subtype l2 X ,
     is-finitely-enumerable-empty-subtype l2 X)
+```
+
+### Singleton subtypes are finitely enumerable
+
+```agda
+singleton-finitely-enumerable-subtype :
+  {l : Level} (X : Set l) (x : type-Set X) →
+  finitely-enumerable-subtype l (type-Set X)
+singleton-finitely-enumerable-subtype X x =
+  finitely-enumerable-subtype-finite-subtype (singleton-finite-subtype X x)
 ```
 
 ## See also
