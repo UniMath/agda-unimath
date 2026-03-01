@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -337,4 +338,22 @@ module _
   emb-short-map-isometry-Pseudometric-Space =
     short-map-isometry-Pseudometric-Space ,
     is-emb-short-map-isometry-Pseudometric-Space
+```
+
+### Retractions of short maps between pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  retraction-short-map-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  retraction-short-map-Pseudometric-Space =
+    Σ ( short-map-Pseudometric-Space B A)
+      ( λ g →
+        is-retraction
+          ( map-short-map-Pseudometric-Space A B f)
+          ( map-short-map-Pseudometric-Space B A g))
 ```
