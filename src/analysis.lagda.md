@@ -21,6 +21,7 @@ open import analysis.intermediate-value-theorem public
 open import analysis.limits-of-sequences-metric-abelian-groups public
 open import analysis.metric-abelian-groups public
 open import analysis.metric-abelian-groups-normed-real-vector-spaces public
+open import analysis.metric-abelian-groups-of-uniformly-continuous-maps-into-metric-abelian-groups public
 open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers public
 open import analysis.nonnegative-series-real-numbers public
 open import analysis.ratio-test-series-real-numbers public

@@ -30,6 +30,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
 </details>
@@ -222,13 +223,13 @@ module _
   (G : Metric-Ab l1 l2)
   where
 
-  modulated-ucont-map-add-pair-Metric-Ab :
+  modulated-uniformly-continuous-map-add-pair-Metric-Ab :
     modulated-ucont-map-Metric-Space
       ( product-Metric-Space
         ( metric-space-Metric-Ab G)
         ( metric-space-Metric-Ab G))
       ( metric-space-Metric-Ab G)
-  modulated-ucont-map-add-pair-Metric-Ab =
+  modulated-uniformly-continuous-map-add-pair-Metric-Ab =
     modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space
       ( metric-space-Metric-Ab G)
       ( metric-space-Metric-Ab G)
@@ -236,4 +237,18 @@ module _
       ( add-Metric-Ab G)
       ( is-isometry-add-Metric-Ab G)
       ( is-isometry-add-Metric-Ab' G)
+
+  uniformly-continuous-map-add-pair-Metric-Ab :
+    uniformly-continuous-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+  uniformly-continuous-map-add-pair-Metric-Ab =
+    uniformly-continuous-map-modulated-ucont-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+      ( modulated-uniformly-continuous-map-add-pair-Metric-Ab)
 ```

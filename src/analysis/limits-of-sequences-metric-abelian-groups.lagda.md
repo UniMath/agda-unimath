@@ -88,7 +88,7 @@ module _
           ( metric-space-Metric-Ab G)
           ( metric-space-Metric-Ab G))
         ( metric-space-Metric-Ab G)
-        ( modulated-ucont-map-add-pair-Metric-Ab G)
+        ( modulated-uniformly-continuous-map-add-pair-Metric-Ab G)
         ( pair-sequence u v)
         ( lim-u , lim-v)
         ( is-limit-pair-sequence-Metric-Space
