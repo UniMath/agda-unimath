@@ -24,9 +24,11 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 
 ## Idea
 
-The **coequalizer** of a [double arrow](foundation.double-arrows.md)
-`f, g : A → B` is the colimiting [cofork](synthetic-homotopy-theory.coforks.md),
-i.e. a cofork with the
+The
+{{#concept "coequalizer" Disambiguation="of a double arrow of types" WDID=Q5140810 WD="coequalizer"}}
+of a [double arrow](foundation.double-arrows.md) `f, g : A → B` is the
+colimiting [cofork](synthetic-homotopy-theory.coforks.md), i.e., a cofork with
+the
 [universal property of coequalizers](synthetic-homotopy-theory.universal-property-coequalizers.md).
 
 ## Properties
@@ -35,8 +37,7 @@ i.e. a cofork with the
 
 The
 {{#concept "standard coequalizer" Disambiguation="of types" Agda=standard-coequalizer}}
-may be obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the
-span
+is obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the span
 
 ```text
      ∇         [f,g]

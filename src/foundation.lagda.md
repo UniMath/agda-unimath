@@ -448,6 +448,7 @@ open import foundation.spans-of-spans public
 open import foundation.split-idempotent-maps public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.standard-equalizers public
 open import foundation.standard-pullbacks public
 open import foundation.standard-ternary-pullbacks public
 open import foundation.strict-symmetrization-binary-relations public
@@ -534,6 +535,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-function-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
+open import foundation.universal-property-equalizers public
 open import foundation.universal-property-equivalences public
 open import foundation.universal-property-family-of-fibers-of-maps public
 open import foundation.universal-property-fiber-products public
