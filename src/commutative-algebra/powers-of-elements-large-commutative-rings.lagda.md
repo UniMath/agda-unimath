@@ -215,5 +215,5 @@ module _
         ( power-Large-Commutative-Ring R n y)
     distributive-power-mul-Large-Commutative-Ring =
       distributive-power-mul-Large-Commutative-Monoid
-        ( multiplicative-large-commutative-monoid-Large-Commutative-Ring R)
+        ( large-commutative-monoid-mul-Large-Commutative-Ring R)
 ```
