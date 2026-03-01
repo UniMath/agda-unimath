@@ -7,14 +7,24 @@ module set-theory.bounded-increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-equality
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.inequality-booleans
+open import foundation.injective-maps
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
@@ -23,8 +33,14 @@ open import foundation-core.identity-types
 open import order-theory.posets
 open import order-theory.subposets
 
+open import set-theory.finite-elements-increasing-binary-sequences
+open import set-theory.inclusion-natural-numbers-increasing-binary-sequences
 open import set-theory.increasing-binary-sequences
 open import set-theory.inequality-increasing-binary-sequences
+
+open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -218,4 +234,153 @@ has-double-negation-stable-equality-bounded-ℕ∞↗ n =
 
 ### If `n` is finite then `bounded-ℕ∞↗ n` is a finite set with `n + 1` elements
 
-> This remains to be formalized.
+```agda
+module _
+  (n : ℕ)
+  where
+
+  bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    classical-Fin (succ-ℕ n) → bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)
+  bounded-increasing-binary-sequence-classical-Fin-ℕ k =
+    ( increasing-binary-sequence-ℕ (pr1 k) ,
+      preserves-order-increasing-binary-sequence-ℕ
+        ( pr1 k)
+        ( n)
+        ( leq-le-succ-ℕ (pr1 k) n (pr2 k)))
+
+  increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ :
+    bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n) → ℕ∞↗
+  increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ =
+    increasing-binary-sequence-bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)
+
+  finite-bound-bounded-increasing-binary-sequence-ℕ :
+    (x : bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)) →
+    finite-bound-ℕ∞↗
+      ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)
+  finite-bound-bounded-increasing-binary-sequence-ℕ x =
+    ( n ,
+      is-true-is-true-leq-bool
+        ( is-strictly-bounded-below-bounded-ℕ∞↗
+          ( increasing-binary-sequence-ℕ n)
+          ( x)
+          ( n))
+        ( is-finitely-bounded-increasing-binary-sequence-ℕ n))
+
+  least-finite-bound-bounded-increasing-binary-sequence-ℕ :
+    (x : bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)) →
+    least-finite-bound-ℕ∞↗
+      ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)
+  least-finite-bound-bounded-increasing-binary-sequence-ℕ x =
+    least-finite-bound-finite-bound-ℕ∞↗
+      ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)
+      ( finite-bound-bounded-increasing-binary-sequence-ℕ x)
+
+  index-least-finite-bound-bounded-increasing-binary-sequence-ℕ :
+    (x : bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)) →
+    ℕ
+  index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x =
+    pr1 (pr1 (least-finite-bound-bounded-increasing-binary-sequence-ℕ x))
+
+  leq-index-least-finite-bound-bounded-increasing-binary-sequence-ℕ :
+    (x : bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)) →
+    index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x ≤-ℕ n
+  leq-index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x =
+    pr2 (least-finite-bound-bounded-increasing-binary-sequence-ℕ x)
+      ( finite-bound-bounded-increasing-binary-sequence-ℕ x)
+
+  eq-increasing-binary-sequence-index-least-finite-bound-bounded-ℕ↗ :
+    (x : bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)) →
+    increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x ＝
+    increasing-binary-sequence-ℕ
+      ( index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x)
+  eq-increasing-binary-sequence-index-least-finite-bound-bounded-ℕ↗ x =
+    aux
+      ( least-finite-bound-bounded-increasing-binary-sequence-ℕ x)
+    where
+    aux :
+      (l :
+        least-finite-bound-ℕ∞↗
+          ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ
+            ( x))) →
+      increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x ＝
+      increasing-binary-sequence-ℕ (pr1 (pr1 l))
+    aux ((zero-ℕ , p) , H) =
+      eq-zero-is-zero-ℕ∞↗
+        ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)
+        ( p)
+    aux ((succ-ℕ k , p) , H) =
+      eq-succ-criterion-ℕ∞↗
+        ( is-false-is-not-true
+          ( sequence-ℕ∞↗
+            ( increasing-binary-sequence-bounded-increasing-binary-sequence-ℕ x)
+            ( k))
+          ( λ q → neg-succ-leq-ℕ k (H (k , q))))
+        ( p)
+
+  classical-Fin-bounded-increasing-binary-sequence-ℕ :
+    bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n) → classical-Fin (succ-ℕ n)
+  pr1 (classical-Fin-bounded-increasing-binary-sequence-ℕ x) =
+    index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x
+  pr2 (classical-Fin-bounded-increasing-binary-sequence-ℕ x) =
+    le-succ-leq-ℕ
+      ( index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x)
+      ( n)
+      ( leq-index-least-finite-bound-bounded-increasing-binary-sequence-ℕ x)
+
+  is-injective-bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    is-injective bounded-increasing-binary-sequence-classical-Fin-ℕ
+  is-injective-bounded-increasing-binary-sequence-classical-Fin-ℕ {x} {y} p =
+    eq-Eq-classical-Fin
+      ( succ-ℕ n)
+      ( x)
+      ( y)
+      ( is-injective-increasing-binary-sequence-ℕ (ap pr1 p))
+
+  is-emb-bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    is-emb bounded-increasing-binary-sequence-classical-Fin-ℕ
+  is-emb-bounded-increasing-binary-sequence-classical-Fin-ℕ =
+    is-emb-is-injective
+      ( is-set-bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n))
+      ( is-injective-bounded-increasing-binary-sequence-classical-Fin-ℕ)
+
+  is-surjective-bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    is-surjective bounded-increasing-binary-sequence-classical-Fin-ℕ
+  is-surjective-bounded-increasing-binary-sequence-classical-Fin-ℕ x =
+    unit-trunc-Prop
+      ( classical-Fin-bounded-increasing-binary-sequence-ℕ x ,
+        eq-type-subtype
+          ( λ y → leq-prop-ℕ∞↗ y (increasing-binary-sequence-ℕ n))
+          ( inv
+            ( eq-increasing-binary-sequence-index-least-finite-bound-bounded-ℕ↗
+              ( x))))
+
+  is-equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    is-equiv bounded-increasing-binary-sequence-classical-Fin-ℕ
+  is-equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ =
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-bounded-increasing-binary-sequence-classical-Fin-ℕ)
+      ( is-emb-bounded-increasing-binary-sequence-classical-Fin-ℕ)
+
+  equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ :
+    classical-Fin (succ-ℕ n) ≃ bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n)
+  equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ =
+    ( bounded-increasing-binary-sequence-classical-Fin-ℕ ,
+      is-equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ)
+
+  count-bounded-increasing-binary-sequence-ℕ :
+    count (bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n))
+  count-bounded-increasing-binary-sequence-ℕ =
+    count-equiv
+      ( equiv-bounded-increasing-binary-sequence-classical-Fin-ℕ)
+      ( count-classical-Fin (succ-ℕ n))
+
+  number-of-elements-count-bounded-increasing-binary-sequence-ℕ :
+    number-of-elements-count count-bounded-increasing-binary-sequence-ℕ ＝
+    succ-ℕ n
+  number-of-elements-count-bounded-increasing-binary-sequence-ℕ = refl
+
+  is-finite-bounded-increasing-binary-sequence-ℕ :
+    is-finite (bounded-ℕ∞↗ (increasing-binary-sequence-ℕ n))
+  is-finite-bounded-increasing-binary-sequence-ℕ =
+    is-finite-count count-bounded-increasing-binary-sequence-ℕ
+```
