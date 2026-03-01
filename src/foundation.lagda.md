@@ -24,6 +24,7 @@ open import foundation.action-on-identifications-binary-dependent-functions publ
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
+open import foundation.action-on-identifications-ternary-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
