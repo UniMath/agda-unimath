@@ -124,7 +124,7 @@ module _
   htpy-comp-map-short-map-cauchy-pseudocompletion-Metric-Space = refl
 ```
 
-### The action on short maps on Cauchy pseudocompletions preserves limits
+### The action on short maps of Cauchy pseudocompletions preserves limits
 
 ```agda
 module _
