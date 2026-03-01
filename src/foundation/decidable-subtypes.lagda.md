@@ -222,7 +222,7 @@ module _
 
   is-full-decidable-subtype-Prop : Prop (l1 ⊔ l2)
   is-full-decidable-subtype-Prop =
-    is-full-subtype-Prop (subtype-decidable-subtype P)
+    is-full-prop-subtype (subtype-decidable-subtype P)
 
   is-full-decidable-subtype : UU (l1 ⊔ l2)
   is-full-decidable-subtype = type-Prop is-full-decidable-subtype-Prop

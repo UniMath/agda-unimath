@@ -39,7 +39,7 @@ module _
   where
 
   is-full-prop-Subgroup : Prop (l1 ⊔ l2)
-  is-full-prop-Subgroup = is-full-subtype-Prop (subset-Subgroup G H)
+  is-full-prop-Subgroup = is-full-prop-subtype (subset-Subgroup G H)
 
   is-full-Subgroup : UU (l1 ⊔ l2)
   is-full-Subgroup = type-Prop is-full-prop-Subgroup
