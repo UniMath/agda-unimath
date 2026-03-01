@@ -239,6 +239,17 @@ has-decidable-Σ-pointed-has-decidable-Σ-has-element x₀ f P =
     ( f (neg-decidable-family P))
 ```
 
+### A type with pointedly decidable Σ-types has decidable Σ-types
+
+```agda
+has-decidable-Σ-has-decidable-Σ-pointed :
+  {l : Level} {X : UU l} →
+  has-decidable-Σ-pointed X → has-decidable-Σ X
+has-decidable-Σ-has-decidable-Σ-pointed f P =
+  let (x , H) = f (neg-decidable-family P) in
+  map-coproduct (λ p → (x , p)) (λ np (y , q) → H np y q) (pr2 P x)
+```
+
 ### The two small predicates of pointedly having decidable Σ-types are equivalent
 
 ```agda
