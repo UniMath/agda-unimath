@@ -360,3 +360,20 @@ abstract
       ( λ p=1 → leq-eq-ℚ (ap-mul-ℚ p=1 refl ∙ left-unit-law-mul-ℚ q))
       ( λ 1<p → ex-falso (not-leq-le-ℚ one-ℚ p 1<p p≤1))
 ```
+
+### Swapping laws for multiplication of positive rational numbers
+
+```agda
+abstract
+  right-swap-mul-ℚ⁺ :
+    (a b c : ℚ⁺) → (a *ℚ⁺ b) *ℚ⁺ c ＝ (a *ℚ⁺ c) *ℚ⁺ b
+  right-swap-mul-ℚ⁺ a b c =
+    equational-reasoning
+      (a *ℚ⁺ b) *ℚ⁺ c
+      ＝ a *ℚ⁺ (b *ℚ⁺ c)
+        by associative-mul-ℚ⁺ a b c
+      ＝ a *ℚ⁺ (c *ℚ⁺ b)
+        by ap-mul-ℚ⁺ refl (commutative-mul-ℚ⁺ b c)
+      ＝ (a *ℚ⁺ c) *ℚ⁺ b
+        by inv (associative-mul-ℚ⁺ a c b)
+```

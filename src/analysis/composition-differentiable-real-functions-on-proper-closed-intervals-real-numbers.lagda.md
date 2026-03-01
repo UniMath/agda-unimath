@@ -147,18 +147,6 @@ module _
               ( [c,d])
               ( g))
         gf = map-comp-differentiable-real-map-proper-closed-interval-ℝ
-        g'f x =
-          ( map-derivative-differentiable-real-map-proper-closed-interval-ℝ
-            ( [c,d])
-            ( g)
-            ( tot
-              ( f[a,b]⊆[c,d])
-              ( map-unit-im-uniformly-continuous-real-map-proper-closed-interval-ℝ
-                ( [a,b])
-                ( uniformly-continuous-map-differentiable-real-map-proper-closed-interval-ℝ
-                  ( [a,b])
-                  ( f))
-                ( x))))
         f' =
           map-derivative-differentiable-real-map-proper-closed-interval-ℝ
             ( [a,b])
@@ -178,6 +166,11 @@ module _
               ( [a,b])
               ( ucont-f)
               ( z))
+        g'∘f x =
+          ( map-derivative-differentiable-real-map-proper-closed-interval-ℝ
+            ( [c,d])
+            ( g)
+            ( tot-f x))
       in do
         (δf , is-mod-δf) ←
           is-derivative-map-derivative-differentiable-real-map-proper-closed-interval-ℝ
@@ -221,20 +214,20 @@ module _
                     ( Nδxy))
             in
               chain-of-inequalities
-                dist-ℝ (gf y -ℝ gf x) (g'f x *ℝ f' x *ℝ (pr1 y -ℝ pr1 x))
+                dist-ℝ (gf y -ℝ gf x) (g'∘f x *ℝ f' x *ℝ (pr1 y -ℝ pr1 x))
                 ≤ ( dist-ℝ
                     ( gf y -ℝ gf x)
-                    ( g'f x *ℝ (map-f y -ℝ map-f x))) +ℝ
+                    ( g'∘f x *ℝ (map-f y -ℝ map-f x))) +ℝ
                   ( dist-ℝ
-                    ( g'f x *ℝ (map-f y -ℝ map-f x))
-                    ( g'f x *ℝ f' x *ℝ (pr1 y -ℝ pr1 x)))
+                    ( g'∘f x *ℝ (map-f y -ℝ map-f x))
+                    ( g'∘f x *ℝ f' x *ℝ (pr1 y -ℝ pr1 x)))
                   by triangle-inequality-dist-ℝ _ _ _
                 ≤ ( dist-ℝ
                     ( gf y -ℝ gf x)
-                    ( g'f x *ℝ (map-f y -ℝ map-f x))) +ℝ
+                    ( g'∘f x *ℝ (map-f y -ℝ map-f x))) +ℝ
                   ( dist-ℝ
-                    ( g'f x *ℝ (map-f y -ℝ map-f x))
-                    ( g'f x *ℝ (f' x *ℝ (pr1 y -ℝ pr1 x))))
+                    ( g'∘f x *ℝ (map-f y -ℝ map-f x))
+                    ( g'∘f x *ℝ (f' x *ℝ (pr1 y -ℝ pr1 x))))
                   by
                     leq-eq-ℝ
                       ( ap-add-ℝ
@@ -242,8 +235,8 @@ module _
                         ( ap-dist-ℝ refl (associative-mul-ℝ _ _ _)))
                 ≤ ( dist-ℝ
                     ( gf y -ℝ gf x)
-                    ( g'f x *ℝ (map-f y -ℝ map-f x))) +ℝ
-                  ( ( abs-ℝ (g'f x)) *ℝ
+                    ( g'∘f x *ℝ (map-f y -ℝ map-f x))) +ℝ
+                  ( ( abs-ℝ (g'∘f x)) *ℝ
                     ( dist-ℝ
                       ( map-f y -ℝ map-f x))
                       ( f' x *ℝ (pr1 y -ℝ pr1 x)))
@@ -270,7 +263,7 @@ module _
                             ( leq-left-min-ℚ⁺ (ωf (δg α)) (δf β))
                             ( Nδxy))))
                       ( preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-abs-ℝ (g'f x))
+                        ( nonnegative-abs-ℝ (g'∘f x))
                         ( nonnegative-real-ℚ⁺ q⁺)
                         ( nonnegative-dist-ℝ _ _)
                         ( nonnegative-real-ℚ⁺ β *ℝ⁰⁺ nonnegative-dist-ℝ _ _)
