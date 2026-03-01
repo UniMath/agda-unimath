@@ -65,6 +65,7 @@ module _
 
   record hom-Large-Preorder : UUω
     where
+    eta-equality
     constructor
       make-hom-Large-Preorder
     field

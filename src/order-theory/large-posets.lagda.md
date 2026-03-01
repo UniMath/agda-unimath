@@ -41,7 +41,9 @@ is antisymmetric.
 
 ```agda
 record
-  Large-Poset (α : Level → Level) (β : Level → Level → Level) : UUω where
+  Large-Poset (α : Level → Level) (β : Level → Level → Level) : UUω
+  where
+  eta-equality
   constructor
     make-Large-Poset
   field
