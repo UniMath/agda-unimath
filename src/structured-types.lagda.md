@@ -18,6 +18,7 @@ open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
+open import structured-types.dependent-extension-h-spaces public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
@@ -27,6 +28,7 @@ open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-retractive-types public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
+open import structured-types.extension-h-spaces public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
 open import structured-types.finite-multiplication-magmas public
@@ -54,10 +56,12 @@ open import structured-types.noncoherent-h-spaces public
 open import structured-types.opposite-pointed-spans public
 open import structured-types.pointed-2-homotopies public
 open import structured-types.pointed-cartesian-product-types public
+open import structured-types.pointed-dependent-function-h-spaces public
 open import structured-types.pointed-dependent-functions public
 open import structured-types.pointed-dependent-pair-types public
 open import structured-types.pointed-equivalences public
 open import structured-types.pointed-families-of-types public
+open import structured-types.pointed-function-h-spaces public
 open import structured-types.pointed-homotopies public
 open import structured-types.pointed-isomorphisms public
 open import structured-types.pointed-maps public
