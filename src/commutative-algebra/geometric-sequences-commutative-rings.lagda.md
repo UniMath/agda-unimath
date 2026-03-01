@@ -141,13 +141,14 @@ module _
     seq-geometric-sequence-Commutative-Ring R
       standard-geometric-sequence-Commutative-Ring
 
-  is-geometric-standard-geometric-sequence-Commutative-Ring :
-    is-geometric-sequence-Commutative-Semiring
-      ( commutative-semiring-Commutative-Ring R)
-      ( seq-standard-geometric-sequence-Commutative-Ring)
-  is-geometric-standard-geometric-sequence-Commutative-Ring =
-    is-geometric-seq-geometric-sequence-Commutative-Ring R
-      standard-geometric-sequence-Commutative-Ring
+  abstract
+    is-geometric-standard-geometric-sequence-Commutative-Ring :
+      is-geometric-sequence-Commutative-Semiring
+        ( commutative-semiring-Commutative-Ring R)
+        ( seq-standard-geometric-sequence-Commutative-Ring)
+    is-geometric-standard-geometric-sequence-Commutative-Ring =
+      is-geometric-seq-geometric-sequence-Commutative-Ring R
+        standard-geometric-sequence-Commutative-Ring
 ```
 
 ### The geometric sequences `n ↦ a * rⁿ`
@@ -174,10 +175,11 @@ module _
       ( R)
       ( geometric-mul-pow-nat-Commutative-Ring)
 
-  eq-initial-term-mul-pow-nat-Commutative-Ring :
-    initial-term-mul-pow-nat-Commutative-Ring ＝ a
-  eq-initial-term-mul-pow-nat-Commutative-Ring =
-    right-unit-law-mul-Commutative-Ring R a
+  abstract
+    eq-initial-term-mul-pow-nat-Commutative-Ring :
+      initial-term-mul-pow-nat-Commutative-Ring ＝ a
+    eq-initial-term-mul-pow-nat-Commutative-Ring =
+      right-unit-law-mul-Commutative-Ring R a
 ```
 
 ## Properties
@@ -190,16 +192,17 @@ module _
   (u : geometric-sequence-Commutative-Ring R)
   where
 
-  htpy-seq-standard-geometric-sequence-Commutative-Ring :
-    ( seq-geometric-sequence-Commutative-Ring R
-      ( standard-geometric-sequence-Commutative-Ring R
-        ( initial-term-geometric-sequence-Commutative-Ring R u)
-        ( common-ratio-geometric-sequence-Commutative-Ring R u))) ~
-    ( seq-geometric-sequence-Commutative-Ring R u)
-  htpy-seq-standard-geometric-sequence-Commutative-Ring =
-    htpy-seq-standard-geometric-sequence-Commutative-Semiring
-      ( commutative-semiring-Commutative-Ring R)
-      ( u)
+  abstract
+    htpy-seq-standard-geometric-sequence-Commutative-Ring :
+      ( seq-geometric-sequence-Commutative-Ring R
+        ( standard-geometric-sequence-Commutative-Ring R
+          ( initial-term-geometric-sequence-Commutative-Ring R u)
+          ( common-ratio-geometric-sequence-Commutative-Ring R u))) ~
+      ( seq-geometric-sequence-Commutative-Ring R u)
+    htpy-seq-standard-geometric-sequence-Commutative-Ring =
+      htpy-seq-standard-geometric-sequence-Commutative-Semiring
+        ( commutative-semiring-Commutative-Ring R)
+        ( u)
 ```
 
 ### The nth term of a geometric sequence with initial term `a` and common ratio `r` is `a * rⁿ`
@@ -209,20 +212,21 @@ module _
   {l : Level} (R : Commutative-Ring l) (a r : type-Commutative-Ring R)
   where
 
-  htpy-mul-pow-standard-geometric-sequence-Commutative-Ring :
-    mul-pow-nat-Commutative-Ring R a r ~
-    seq-standard-geometric-sequence-Commutative-Ring R a r
-  htpy-mul-pow-standard-geometric-sequence-Commutative-Ring =
-    htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
-      ( commutative-semiring-Commutative-Ring R)
-      ( a)
-      ( r)
+  abstract
+    htpy-mul-pow-standard-geometric-sequence-Commutative-Ring :
+      mul-pow-nat-Commutative-Ring R a r ~
+      seq-standard-geometric-sequence-Commutative-Ring R a r
+    htpy-mul-pow-standard-geometric-sequence-Commutative-Ring =
+      htpy-mul-pow-standard-geometric-sequence-Commutative-Semiring
+        ( commutative-semiring-Commutative-Ring R)
+        ( a)
+        ( r)
 
-  initial-term-standard-geometric-sequence-Commutative-Ring :
-    seq-standard-geometric-sequence-Commutative-Ring R a r 0 ＝ a
-  initial-term-standard-geometric-sequence-Commutative-Ring =
-    ( inv (htpy-mul-pow-standard-geometric-sequence-Commutative-Ring 0)) ∙
-    ( eq-initial-term-mul-pow-nat-Commutative-Ring R a r)
+    initial-term-standard-geometric-sequence-Commutative-Ring :
+      seq-standard-geometric-sequence-Commutative-Ring R a r 0 ＝ a
+    initial-term-standard-geometric-sequence-Commutative-Ring =
+      ( inv (htpy-mul-pow-standard-geometric-sequence-Commutative-Ring 0)) ∙
+      ( eq-initial-term-mul-pow-nat-Commutative-Ring R a r)
 ```
 
 ```agda
@@ -231,22 +235,23 @@ module _
   (u : geometric-sequence-Commutative-Ring R)
   where
 
-  htpy-mul-pow-geometric-sequence-Commutative-Ring :
-    mul-pow-nat-Commutative-Ring
-      ( R)
-      ( initial-term-geometric-sequence-Commutative-Ring R u)
-      ( common-ratio-geometric-sequence-Commutative-Ring R u) ~
-    seq-geometric-sequence-Commutative-Ring R u
-  htpy-mul-pow-geometric-sequence-Commutative-Ring n =
-    ( htpy-mul-pow-standard-geometric-sequence-Commutative-Ring
-      ( R)
-      ( initial-term-geometric-sequence-Commutative-Ring R u)
-      ( common-ratio-geometric-sequence-Commutative-Ring R u)
-      ( n)) ∙
-    ( htpy-seq-standard-geometric-sequence-Commutative-Semiring
-      ( commutative-semiring-Commutative-Ring R)
-      ( u)
-      ( n))
+  abstract
+    htpy-mul-pow-geometric-sequence-Commutative-Ring :
+      mul-pow-nat-Commutative-Ring
+        ( R)
+        ( initial-term-geometric-sequence-Commutative-Ring R u)
+        ( common-ratio-geometric-sequence-Commutative-Ring R u) ~
+      seq-geometric-sequence-Commutative-Ring R u
+    htpy-mul-pow-geometric-sequence-Commutative-Ring n =
+      ( htpy-mul-pow-standard-geometric-sequence-Commutative-Ring
+        ( R)
+        ( initial-term-geometric-sequence-Commutative-Ring R u)
+        ( common-ratio-geometric-sequence-Commutative-Ring R u)
+        ( n)) ∙
+      ( htpy-seq-standard-geometric-sequence-Commutative-Semiring
+        ( commutative-semiring-Commutative-Ring R)
+        ( u)
+        ( n))
 ```
 
 ### Constant sequences are geometric with common ratio one
@@ -347,8 +352,8 @@ module _
       equational-reasoning
         sum-standard-geometric-fin-sequence-Commutative-Ring R a r (succ-ℕ n)
         ＝
-          sum-standard-geometric-fin-sequence-Commutative-Ring R a r n +R
-          seq-standard-geometric-sequence-Commutative-Ring R a r n
+          ( sum-standard-geometric-fin-sequence-Commutative-Ring R a r n) +R
+          ( seq-standard-geometric-sequence-Commutative-Ring R a r n)
           by
             cons-sum-fin-sequence-type-Commutative-Ring R
               ( n)
@@ -356,7 +361,6 @@ module _
                 ( a)
                 ( r)
                 ( succ-ℕ n))
-              ( refl)
         ＝
           ( (a *R 1/⟨1-r⟩) *R (one-R -R power-Commutative-Ring R n r)) +R
           ( a *R power-Commutative-Ring R n r)
@@ -380,12 +384,12 @@ module _
                 ( refl)
                 ( inv (left-unit-law-mul-Commutative-Ring R _)))
         ＝
-          a *R
+          ( a) *R
           ( (1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
             (one-R *R power-Commutative-Ring R n r))
           by inv (left-distributive-mul-add-Commutative-Ring R a _ _)
         ＝
-          a *R
+          ( a) *R
           ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
             ( (1/⟨1-r⟩ *R (one-R -R r)) *R power-Commutative-Ring R n r))
             by
@@ -395,7 +399,7 @@ module _
                   ( refl)
                   ( ap-mul-Commutative-Ring R (inv (pr2 H)) refl))
         ＝
-          a *R
+          ( a) *R
           ( ( 1/⟨1-r⟩ *R (one-R -R power-Commutative-Ring R n r)) +R
             ( 1/⟨1-r⟩ *R ((one-R -R r) *R power-Commutative-Ring R n r)))
           by
@@ -405,7 +409,7 @@ module _
                 ( refl)
                 ( associative-mul-Commutative-Ring R _ _ _))
         ＝
-          a *R
+          ( a) *R
           ( 1/⟨1-r⟩ *R
             ( ( one-R -R power-Commutative-Ring R n r) +R
               ( (one-R -R r) *R power-Commutative-Ring R n r)))

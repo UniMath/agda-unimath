@@ -82,7 +82,7 @@ module _
     (f : unit → type-Commutative-Semiring A) →
     sum-finite-Commutative-Semiring A unit-Finite-Type f ＝ f star
   sum-unit-finite-Commutative-Semiring =
-    sum-unit-finite-Semiring (semiring-Commutative-Semiring A)
+    sum-unit-finite-type-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ### Sums over contractible types
@@ -230,7 +230,7 @@ module _
     (f : type-Finite-Type A → type-Commutative-Semiring R) →
     is-zero-Commutative-Semiring R (sum-finite-Commutative-Semiring R A f)
   eq-zero-sum-finite-is-empty-Commutative-Semiring =
-    eq-zero-sum-finite-is-empty-Semiring (semiring-Commutative-Semiring R) A H
+    is-zero-sum-finite-is-empty-Semiring (semiring-Commutative-Semiring R) A H
 ```
 
 ### The sum over a finite type is the sum over any count for that type

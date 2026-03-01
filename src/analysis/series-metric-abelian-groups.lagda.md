@@ -109,7 +109,7 @@ module _
       ( cons-sum-fin-sequence-type-Ab
         ( ab-Metric-Ab G)
         ( n)
-        ( f ∘ nat-Fin (succ-ℕ n)) refl)
+        ( f ∘ nat-Fin (succ-ℕ n)))
       ( refl) ∙
     is-identity-left-conjugation-Ab (ab-Metric-Ab G) _ _
 ```

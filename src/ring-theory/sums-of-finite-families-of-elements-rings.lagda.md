@@ -39,15 +39,16 @@ any family of elements of `R` indexed by a
 ## Definition
 
 ```agda
-sum-count-Ring :
-  {l1 l2 : Level} (R : Ring l1) (A : UU l2) → count A → (A → type-Ring R) →
-  type-Ring R
-sum-count-Ring R = sum-count-Semiring (semiring-Ring R)
+module _
+  {l1 l2 : Level} (R : Ring l1)
+  where
 
-sum-finite-Ring :
-  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2) →
-  (type-Finite-Type A → type-Ring R) → type-Ring R
-sum-finite-Ring R = sum-finite-Semiring (semiring-Ring R)
+  sum-count-Ring : (A : UU l2) → count A → (A → type-Ring R) → type-Ring R
+  sum-count-Ring = sum-count-Semiring (semiring-Ring R)
+
+  sum-finite-Ring :
+    (A : Finite-Type l2) → (type-Finite-Type A → type-Ring R) → type-Ring R
+  sum-finite-Ring = sum-finite-Semiring (semiring-Ring R)
 ```
 
 ## Properties
@@ -59,9 +60,10 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  sum-unit-finite-Ring :
-    (f : unit → type-Ring R) → sum-finite-Ring R unit-Finite-Type f ＝ f star
-  sum-unit-finite-Ring = sum-unit-finite-Semiring (semiring-Ring R)
+  abstract
+    sum-unit-finite-type-Ring :
+      (f : unit → type-Ring R) → sum-finite-Ring R unit-Finite-Type f ＝ f star
+    sum-unit-finite-type-Ring = sum-unit-finite-type-Semiring (semiring-Ring R)
 ```
 
 ### Sums are homotopy invariant
@@ -71,11 +73,12 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  htpy-sum-finite-Ring :
-    {l2 : Level} (A : Finite-Type l2) →
-    {f g : type-Finite-Type A → type-Ring R} → (f ~ g) →
-    sum-finite-Ring R A f ＝ sum-finite-Ring R A g
-  htpy-sum-finite-Ring = htpy-sum-finite-Semiring (semiring-Ring R)
+  abstract
+    htpy-sum-finite-Ring :
+      {l2 : Level} (A : Finite-Type l2) →
+      {f g : type-Finite-Type A → type-Ring R} → (f ~ g) →
+      sum-finite-Ring R A f ＝ sum-finite-Ring R A g
+    htpy-sum-finite-Ring = htpy-sum-finite-Semiring (semiring-Ring R)
 ```
 
 ### Multiplication distributes over sums
@@ -85,21 +88,22 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  left-distributive-mul-sum-finite-Ring :
-    {l2 : Level} (A : Finite-Type l2) (x : type-Ring R) →
-    (f : type-Finite-Type A → type-Ring R) →
-    mul-Ring R x (sum-finite-Ring R A f) ＝
-    sum-finite-Ring R A (mul-Ring R x ∘ f)
-  left-distributive-mul-sum-finite-Ring =
-    left-distributive-mul-sum-finite-Semiring (semiring-Ring R)
+  abstract
+    left-distributive-mul-sum-finite-Ring :
+      {l2 : Level} (A : Finite-Type l2) (x : type-Ring R) →
+      (f : type-Finite-Type A → type-Ring R) →
+      mul-Ring R x (sum-finite-Ring R A f) ＝
+      sum-finite-Ring R A (mul-Ring R x ∘ f)
+    left-distributive-mul-sum-finite-Ring =
+      left-distributive-mul-sum-finite-Semiring (semiring-Ring R)
 
-  right-distributive-mul-sum-finite-Ring :
-    {l2 : Level} (A : Finite-Type l2) →
-    (f : type-Finite-Type A → type-Ring R) (x : type-Ring R) →
-    mul-Ring R (sum-finite-Ring R A f) x ＝
-    sum-finite-Ring R A (mul-Ring' R x ∘ f)
-  right-distributive-mul-sum-finite-Ring =
-    right-distributive-mul-sum-finite-Semiring (semiring-Ring R)
+    right-distributive-mul-sum-finite-Ring :
+      {l2 : Level} (A : Finite-Type l2) →
+      (f : type-Finite-Type A → type-Ring R) (x : type-Ring R) →
+      mul-Ring R (sum-finite-Ring R A f) x ＝
+      sum-finite-Ring R A (mul-Ring' R x ∘ f)
+    right-distributive-mul-sum-finite-Ring =
+      right-distributive-mul-sum-finite-Semiring (semiring-Ring R)
 ```
 
 ### A sum of zeroes is zero
@@ -109,45 +113,50 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  sum-zero-finite-Ring :
-    {l2 : Level} (A : Finite-Type l2) →
-    sum-finite-Ring R A (λ _ → zero-Ring R) ＝ zero-Ring R
-  sum-zero-finite-Ring = sum-zero-finite-Semiring (semiring-Ring R)
+  abstract
+    sum-zero-finite-Ring :
+      {l2 : Level} (A : Finite-Type l2) →
+      sum-finite-Ring R A (λ _ → zero-Ring R) ＝ zero-Ring R
+    sum-zero-finite-Ring = sum-zero-finite-Semiring (semiring-Ring R)
 ```
 
 ### Sums over finite types are preserved by equivalences
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Ring l1) (A : Finite-Type l2) (B : Finite-Type l3)
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3)
   (H : equiv-Finite-Type A B)
   where
 
-  sum-equiv-finite-Ring :
-    (f : type-Finite-Type A → type-Ring R) →
-    sum-finite-Ring R A f ＝
-    sum-finite-Ring R B (f ∘ map-inv-equiv H)
-  sum-equiv-finite-Ring = sum-equiv-finite-Semiring (semiring-Ring R) A B H
+  abstract
+    sum-equiv-finite-Ring :
+      (f : type-Finite-Type A → type-Ring R) →
+      sum-finite-Ring R A f ＝
+      sum-finite-Ring R B (f ∘ map-inv-equiv H)
+    sum-equiv-finite-Ring = sum-equiv-finite-Semiring (semiring-Ring R) A B H
 ```
 
 ### Sums over finite types distribute over coproducts
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Ring l1)
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
   (A : Finite-Type l2) (B : Finite-Type l3)
   where
 
-  distributive-sum-coproduct-finite-Ring :
-    (f :
-      type-Finite-Type A + type-Finite-Type B → type-Ring R) →
-    sum-finite-Ring R (coproduct-Finite-Type A B) f ＝
-    add-Ring
-      ( R)
-      ( sum-finite-Ring R A (f ∘ inl))
-      ( sum-finite-Ring R B (f ∘ inr))
-  distributive-sum-coproduct-finite-Ring =
-    distributive-sum-coproduct-finite-Semiring (semiring-Ring R) A B
+  abstract
+    distributive-sum-coproduct-finite-Ring :
+      (f : type-Finite-Type A + type-Finite-Type B → type-Ring R) →
+      sum-finite-Ring R (coproduct-Finite-Type A B) f ＝
+      add-Ring
+        ( R)
+        ( sum-finite-Ring R A (f ∘ inl))
+        ( sum-finite-Ring R B (f ∘ inr))
+    distributive-sum-coproduct-finite-Ring =
+      distributive-sum-coproduct-finite-Semiring (semiring-Ring R) A B
 ```
 
 ### Sums distribute over dependent pair types
@@ -158,35 +167,38 @@ module _
   (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
   where
 
-  sum-Σ-finite-Ring :
-    (f : (a : type-Finite-Type A) → type-Finite-Type (B a) → type-Ring R) →
-    sum-finite-Ring R (Σ-Finite-Type A B) (ind-Σ f) ＝
-    sum-finite-Ring R A (λ a → sum-finite-Ring R (B a) (f a))
-  sum-Σ-finite-Ring = sum-Σ-finite-Semiring (semiring-Ring R) A B
+  abstract
+    sum-Σ-finite-Ring :
+      (f : (a : type-Finite-Type A) → type-Finite-Type (B a) → type-Ring R) →
+      sum-finite-Ring R (Σ-Finite-Type A B) (ind-Σ f) ＝
+      sum-finite-Ring R A (λ a → sum-finite-Ring R (B a) (f a))
+    sum-Σ-finite-Ring = sum-Σ-finite-Semiring (semiring-Ring R) A B
 ```
 
 ### The sum over an empty type is zero
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
-  (H : is-empty (type-Finite-Type A))
+  {l1 l2 : Level} (R : Ring l1)
+  (A : Finite-Type l2) (¬A : is-empty (type-Finite-Type A))
   where
 
-  eq-zero-sum-finite-is-empty-Ring :
-    (f : type-Finite-Type A → type-Ring R) →
-    is-zero-Ring R (sum-finite-Ring R A f)
-  eq-zero-sum-finite-is-empty-Ring =
-    eq-zero-sum-finite-is-empty-Semiring (semiring-Ring R) A H
+  abstract
+    is-zero-sum-finite-is-empty-Ring :
+      (f : type-Finite-Type A → type-Ring R) →
+      is-zero-Ring R (sum-finite-Ring R A f)
+    is-zero-sum-finite-is-empty-Ring =
+      is-zero-sum-finite-is-empty-Semiring (semiring-Ring R) A ¬A
 ```
 
 ### The sum over a finite type is the sum over any count for that type
 
 ```agda
-eq-sum-finite-sum-count-Ring :
-  {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
-  (cA : count (type-Finite-Type A)) (f : type-Finite-Type A → type-Ring R) →
-  sum-finite-Ring R A f ＝ sum-count-Ring R (type-Finite-Type A) cA f
-eq-sum-finite-sum-count-Ring R =
-  eq-sum-finite-sum-count-Semiring (semiring-Ring R)
+abstract
+  eq-sum-finite-sum-count-Ring :
+    {l1 l2 : Level} (R : Ring l1) (A : Finite-Type l2)
+    (cA : count (type-Finite-Type A)) (f : type-Finite-Type A → type-Ring R) →
+    sum-finite-Ring R A f ＝ sum-count-Ring R (type-Finite-Type A) cA f
+  eq-sum-finite-sum-count-Ring R =
+    eq-sum-finite-sum-count-Semiring (semiring-Ring R)
 ```
