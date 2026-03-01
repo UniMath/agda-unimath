@@ -18,6 +18,8 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.strict-orders
+open import order-theory.strict-preorders
 open import order-theory.transitive-well-founded-relations
 open import order-theory.well-founded-relations
 ```
@@ -124,6 +126,24 @@ module _
   is-irreflexive-le-Ordinal =
     is-irreflexive-le-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
+
+  ind-Ordinal :
+    {l3 : Level} (P : type-Ordinal → UU l3) →
+    ({x : type-Ordinal} → ({u : type-Ordinal} → le-Ordinal u x → P u) → P x) →
+    (x : type-Ordinal) → P x
+  ind-Ordinal = ind-Well-Founded-Relation well-founded-relation-Ordinal
+
+  ind²-Ordinal :
+    {l3 : Level} (P : type-Ordinal → type-Ordinal → UU l3) →
+    ( {x : type-Ordinal} →
+      ({u : type-Ordinal} → le-Ordinal u x → (y : type-Ordinal) → P u y) →
+      (y : type-Ordinal) →
+      ({u : type-Ordinal} → le-Ordinal u y → P x u) →
+      P x y) →
+    (x y : type-Ordinal) → P x y
+  ind²-Ordinal =
+    ind²-Well-Founded-Relation
+      well-founded-relation-Ordinal
 ```
 
 The associated reflexive relation on an ordinal.
@@ -181,4 +201,21 @@ The associated reflexive relation on an ordinal.
 
   set-Ordinal : Set l1
   set-Ordinal = (type-Ordinal , is-set-type-Ordinal)
+
+  strict-preorder-Ordinal : Strict-Preorder l1 l2
+  strict-preorder-Ordinal =
+    ( type-Ordinal ,
+      ( le-prop-Ordinal ,
+        ( is-irreflexive-le-Ordinal ,
+          transitive-le-Ordinal)))
+
+  extensionality-strict-preorder-Ordinal :
+    extensionality-principle-Strict-Preorder strict-preorder-Ordinal
+  extensionality-strict-preorder-Ordinal x y s =
+    is-extensional-Ordinal x y (pr1 s)
+
+  strict-order-Ordinal : Strict-Order l1 l2
+  strict-order-Ordinal =
+    ( strict-preorder-Ordinal ,
+      extensionality-strict-preorder-Ordinal)
 ```

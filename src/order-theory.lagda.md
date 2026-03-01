@@ -23,6 +23,8 @@ open import order-theory.cofinal-maps-posets public
 open import order-theory.coinitial-maps-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
 open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
+open import order-theory.cotransitive-strict-orders public
+open import order-theory.cotransitive-strict-preorders public
 open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
@@ -41,6 +43,8 @@ open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
 open import order-theory.dependent-products-large-suplattices public
 open import order-theory.distributive-lattices public
+open import order-theory.double-negation-stable-strict-orders public
+open import order-theory.double-negation-stable-strict-preorders public
 open import order-theory.filters-posets public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
@@ -117,6 +121,7 @@ open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
 open import order-theory.order-preserving-maps-total-orders public
+open import order-theory.ordinal-of-natural-numbers public
 open import order-theory.ordinals public
 open import order-theory.poset-closed-intervals-lattices public
 open import order-theory.poset-closed-intervals-posets public
@@ -169,6 +174,9 @@ open import order-theory.total-preorders public
 open import order-theory.transitive-well-founded-relations public
 open import order-theory.transposition-inequalities-along-order-preserving-retractions-posets public
 open import order-theory.transposition-inequalities-along-sections-of-order-preserving-maps-posets public
+open import order-theory.trichotomous-ordinals public
+open import order-theory.trichotomous-strict-orders public
+open import order-theory.trichotomous-strict-preorders public
 open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
