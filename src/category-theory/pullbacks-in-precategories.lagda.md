@@ -106,10 +106,10 @@ module _
     hom-Precategory C object-pullback-obj-Precategory z
   pr2-pullback-obj-Precategory = pr1 (pr2 (pr2 (t x y z f g)))
 
-  pullback-square-Precategory-comm :
+  comm-pullback-obj-Precategory :
     comp-hom-Precategory C f pr1-pullback-obj-Precategory ＝
     comp-hom-Precategory C g pr2-pullback-obj-Precategory
-  pullback-square-Precategory-comm = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
+  comm-pullback-obj-Precategory = pr1 (pr2 (pr2 (pr2 (t x y z f g))))
 
   module _
     (w' : obj-Precategory C)
@@ -123,20 +123,20 @@ module _
     morphism-into-pullback-obj-Precategory =
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
-    morphism-into-pullback-comm-pr1 :
+    comm-morphism-into-pr1-pullback-obj-Precategory :
       comp-hom-Precategory C
         pr1-pullback-obj-Precategory
         morphism-into-pullback-obj-Precategory ＝
       p₁'
-    morphism-into-pullback-comm-pr1 =
+    comm-morphism-into-pr1-pullback-obj-Precategory =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
-    morphism-into-pullback-comm-pr2 :
+    comm-morphism-into-pr2-pullback-obj-Precategory :
       comp-hom-Precategory C
         pr2-pullback-obj-Precategory
         morphism-into-pullback-obj-Precategory ＝
       p₂'
-    morphism-into-pullback-comm-pr2 =
+    comm-morphism-into-pr2-pullback-obj-Precategory =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     is-unique-morphism-into-pullback-obj-Precategory :
@@ -172,3 +172,7 @@ module _
   pr2 is-pullback-prop-Precategory =
     is-prop-is-pullback-obj-Precategory
 ```
+
+## See also
+
+- [Pushouts](category-theory.pushouts-in-precategories.md) for the dual concept.
