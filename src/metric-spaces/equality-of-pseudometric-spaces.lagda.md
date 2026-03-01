@@ -172,6 +172,11 @@ module _
   equiv-eq-isometric-equiv-Pseudometric-Space =
     ( equiv-isometric-eq-equiv-Pseudometric-Space A B) ∘e
     ( equiv-eq-isometric-eq-Pseudometric-Space A B)
+
+  eq-isometric-equiv-Pseudometric-Space :
+    isometric-equiv-Pseudometric-Space A B → A ＝ B
+  eq-isometric-equiv-Pseudometric-Space =
+    map-inv-equiv equiv-eq-isometric-equiv-Pseudometric-Space
 ```
 
 ### Isometric equivalence of pseudometric spaces is torsorial
