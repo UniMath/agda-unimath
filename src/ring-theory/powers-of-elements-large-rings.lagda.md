@@ -16,6 +16,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.large-monoids
@@ -43,7 +44,7 @@ module _
 
   power-Large-Ring : {l : Level} → ℕ → type-Large-Ring R l → type-Large-Ring R l
   power-Large-Ring =
-    power-Large-Monoid (multiplicative-large-monoid-Large-Ring R)
+    power-Large-Monoid (large-monoid-mul-Large-Ring R)
 ```
 
 ## Properties
@@ -63,7 +64,7 @@ module _
       sim-Large-Ring R (power-Large-Ring R n x) (power-Large-Ring R n y)
     preserves-sim-power-Large-Ring =
       preserves-sim-power-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
 
 ### `1ⁿ = 1`
@@ -80,13 +81,13 @@ module _
       raise-one-Large-Ring R l
     raise-power-one-Large-Ring =
       raise-power-unit-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 
     power-one-Large-Ring :
       (n : ℕ) → power-Large-Ring R n (one-Large-Ring R) ＝ one-Large-Ring R
     power-one-Large-Ring =
       power-unit-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
 
 ### For nonzero `n`, `0ⁿ = 0`
@@ -104,17 +105,16 @@ module _
     power-nonzero-raise-zero-Large-Ring l (0 , H) = ex-falso (H refl)
     power-nonzero-raise-zero-Large-Ring l (1 , _) = refl
     power-nonzero-raise-zero-Large-Ring l (succ-ℕ n@(succ-ℕ _) , _) =
-      right-raise-zero-law-mul-Large-Ring R l _
+      right-raise-zero-law-mul-Large-Ring R _
 
     power-nonzero-zero-Large-Ring :
       (n : ℕ⁺) →
       power-Large-Ring R (nat-ℕ⁺ n) (zero-Large-Ring R) ＝ zero-Large-Ring R
     power-nonzero-zero-Large-Ring n =
-      ( ap
-        ( power-Large-Ring R (nat-ℕ⁺ n))
-        ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))) ∙
-      ( power-nonzero-raise-zero-Large-Ring lzero n) ∙
-      ( eq-raise-Large-Ring R lzero (zero-Large-Ring R))
+      tr
+        ( λ z → power-Large-Ring R (nat-ℕ⁺ n) z ＝ z)
+        ( eq-raise-Large-Ring R (zero-Large-Ring R))
+        ( power-nonzero-raise-zero-Large-Ring lzero n)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -131,7 +131,7 @@ module _
       mul-Large-Ring R (power-Large-Ring R n x) x
     power-succ-Large-Ring =
       power-succ-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
 
 ### `xⁿ⁺¹ = xxⁿ`
@@ -148,7 +148,7 @@ module _
       mul-Large-Ring R x (power-Large-Ring R n x)
     power-succ-Large-Ring' =
       power-succ-Large-Monoid'
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -165,7 +165,7 @@ module _
       mul-Large-Ring R (power-Large-Ring R m x) (power-Large-Ring R n x)
     distributive-power-add-Large-Ring =
       distributive-power-add-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
 
 ### Powers by products of natural numbers are iterated powers
@@ -182,5 +182,5 @@ module _
       power-Large-Ring R n (power-Large-Ring R m x)
     power-mul-Large-Ring =
       power-mul-Large-Monoid
-        ( multiplicative-large-monoid-Large-Ring R)
+        ( large-monoid-mul-Large-Ring R)
 ```
