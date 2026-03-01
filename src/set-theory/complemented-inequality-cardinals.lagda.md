@@ -219,6 +219,9 @@ module _
 
 ### Assuming the weak limited principle of omniscience, then complemented inequality forms a partial order
 
+This is a direct consequence of the
+[Cantor–Schröder–Bernstein theorem for decidable embeddings](foundation.cantor-schroder-bernstein-decidable-embeddings.md).
+
 ```agda
 module _
   {l : Level} (wlpo : level-WLPO l)

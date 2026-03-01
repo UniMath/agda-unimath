@@ -33,7 +33,7 @@ open import set-theory.inhabited-cardinals
 
 ## Idea
 
-Given a family of cardinals $κ : I → \mathrm{Cardinal}$ over a
+Given a family of cardinals $κ : I → \Cardinal$ over a
 [cardinality-recursive set](set-theory.cardinality-recursive-sets.md) $I$, then
 we may define the {{#concept "dependent sum cardinal" Agda=Σ-Cardinal'}}
 $Σ_{i∈I}κᵢ$, as the cardinality of the
@@ -145,7 +145,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (X : Set l1)
-  (is-projective-X : is-projective-Level' l2 (type-Set X))
+  (is-projective-X : is-projective-Level l2 (type-Set X))
   where
 
   leq-cardinality-Σ :
