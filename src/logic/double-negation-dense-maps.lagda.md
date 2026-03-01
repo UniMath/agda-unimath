@@ -7,18 +7,28 @@ module logic.double-negation-dense-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.booleans
 open import foundation.connected-maps
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositions
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -28,7 +38,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.propositions
 open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
@@ -512,6 +521,48 @@ module _
   is-irrefutable-double-negation-dense-map f =
     is-irrefutable-is-double-negation-dense-map
       ( is-double-negation-dense-map-double-negation-dense-map f)
+```
+
+### The double negation dense embedding of `bool` into `Prop`
+
+```agda
+raise-prop-bool : (l : Level) → bool → Prop l
+raise-prop-bool l true = raise-unit-Prop l
+raise-prop-bool l false = raise-empty-Prop l
+
+is-injective-raise-prop-bool :
+  {l : Level} → is-injective (raise-prop-bool l)
+is-injective-raise-prop-bool {l} {true} {true} p = refl
+is-injective-raise-prop-bool {l} {false} {false} p = refl
+is-injective-raise-prop-bool {l} {true} {false} p =
+  raise-ex-falso l (tr type-Prop p raise-star)
+is-injective-raise-prop-bool {l} {false} {true} p =
+  raise-ex-falso l (tr type-Prop (inv p) raise-star)
+
+is-emb-raise-prop-bool :
+  {l : Level} → is-emb (raise-prop-bool l)
+is-emb-raise-prop-bool {l} =
+  is-emb-is-injective (is-set-type-Prop {l}) (is-injective-raise-prop-bool {l})
+
+fiber-raise-prop-bool :
+  {l : Level} (P : Prop l) →
+  type-Prop P + ¬ type-Prop P →
+  Σ bool (λ b → raise-prop-bool l b ＝ P)
+fiber-raise-prop-bool {l} P (inl p) =
+  ( true , eq-iff (λ _ → p) (λ _ → raise-star))
+fiber-raise-prop-bool {l} P (inr np) =
+  ( false ,
+    eq-iff (raise-ex-falso l) (map-equiv (compute-raise-empty l) ∘ np))
+
+is-double-negation-dense-map-raise-prop-bool :
+  {l : Level} → is-double-negation-dense-map (raise-prop-bool l)
+is-double-negation-dense-map-raise-prop-bool P nbf =
+  double-negation-excluded-middle (λ c → nbf (fiber-raise-prop-bool P c))
+
+double-negation-dense-map-raise-prop-bool :
+  (l : Level) → bool ↠¬¬ Prop l
+double-negation-dense-map-raise-prop-bool l =
+  (raise-prop-bool l , is-double-negation-dense-map-raise-prop-bool)
 ```
 
 ## See also

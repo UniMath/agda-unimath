@@ -156,6 +156,8 @@ open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjoint-subtypes public
 open import foundation.disjunction public
+open import foundation.distributivity-of-set-truncation-over-projective-products public
+open import foundation.distributivity-of-truncation-over-truncation-projective-products public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-dense-equality public
@@ -317,6 +319,7 @@ open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.logical-operations-booleans public
+open import foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-types public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public
@@ -499,6 +502,7 @@ open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncation-modalities public
+open import foundation.truncation-projective-types public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
 open import foundation.type-arithmetic-booleans public
@@ -513,6 +517,7 @@ open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
 open import foundation.types-with-decidable-dependent-pair-types public
 open import foundation.types-with-decidable-dependent-product-types public
+open import foundation.types-with-decidable-existential-quantification public
 open import foundation.types-with-decidable-universal-quantifications public
 open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
