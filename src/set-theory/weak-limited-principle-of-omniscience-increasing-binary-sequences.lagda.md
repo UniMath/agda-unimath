@@ -30,6 +30,7 @@ open import foundation.logical-equivalences
 open import foundation.logical-operations-booleans
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
@@ -126,6 +127,14 @@ WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞ e =
     ( is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map
       ( is-double-negation-dense-increasing-binary-sequence-ℕ+∞)
       ( is-emb-increasing-binary-sequence-ℕ+∞ , e))
+
+WLPO-is-surjective-increasing-binary-sequence-ℕ+∞ :
+  is-surjective increasing-binary-sequence-ℕ+∞ → WLPO
+WLPO-is-surjective-increasing-binary-sequence-ℕ+∞ e =
+  WLPO-is-equiv-increasing-binary-sequence-ℕ+∞
+    ( is-equiv-is-emb-is-surjective
+      ( e)
+      ( is-emb-increasing-binary-sequence-ℕ+∞))
 
 WLPO-is-decidable-map-increasing-binary-sequence-ℕ+∞ :
   is-decidable-map increasing-binary-sequence-ℕ+∞ → WLPO
