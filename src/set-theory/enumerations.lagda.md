@@ -43,10 +43,6 @@ Given a type `α`, a type `X` is said to be
 `α`-{{#concept "enumerated" Disambiguation="type" Agda=enumeration}} if there is
 a [surjective map](foundation.surjective-maps.md) `α ↠ 1 + X`.
 
-A type `X` is
-`α`-{{#concept "enumerable" Disambiguation="type" Agda=is-enumerable}} if there
-[exists](foundation.existential-quantification.md) an `α`-enumeration of `X`.
-
 If `α` and `X` are [discrete types](foundation.discrete-types.md), then `X` is
 `α`-enumerated if and only if `X` is a
 [retract](foundation.retracts-of-types.md) of `α` or
@@ -95,47 +91,6 @@ module _
   is-enumerable-Prop = trunc-Prop (enumeration α X)
 ```
 
-### Direct α-enumerability
-
-A type `X` is {{#concept "directly α-enumerable" Agda=is-directly-enumerable}}
-if there is a surjective map `α ↠ X`.
-
-```agda
-is-directly-enumerable-Prop : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
-is-directly-enumerable-Prop α X = ∃ (α → X) (is-surjective-Prop)
-
-is-directly-enumerable : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-is-directly-enumerable α X = type-Prop (is-directly-enumerable-Prop α X)
-
-is-prop-is-directly-enumerable :
-  {l1 l2 : Level} (α : UU l1) (X : UU l2) → is-prop (is-directly-enumerable α X)
-is-prop-is-directly-enumerable α X =
-  is-prop-type-Prop (is-directly-enumerable-Prop α X)
-
-module _
-  {l1 l2 : Level} {α : UU l1} {X : UU l2} (x₀ : X)
-  where
-
-  is-directly-enumerable-is-enumerable :
-    is-enumerable α X → is-directly-enumerable α X
-  is-directly-enumerable-is-enumerable H =
-    apply-universal-property-trunc-Prop H
-      ( is-directly-enumerable-Prop α X)
-      ( λ P →
-        unit-trunc-Prop
-          ( f ∘ pr1 P , is-surjective-comp is-surjective-f (pr2 P)))
-    where
-    f : Maybe X → X
-    f (inl x) = x
-    f (inr _) = x₀
-
-    is-surjective-f : is-surjective f
-    is-surjective-f x = unit-trunc-Prop (inl x , refl)
-```
-
-For the converse, we need a shifting structure `α ≃ Maybe α`. See
-[enumerations by fixed points of the maybe-monad](set-theory.enumerations-fixed-points-maybe.md).
-
 ## Properties
 
 ### If X has an α-enumeration then X is a decidable subprojection of α
@@ -174,80 +129,6 @@ module _
       ( unit-trunc-Prop ∘ decidable-subprojection-enumeration)
 ```
 
-### α-enumerations transfer along covers
-
-```agda
-module _
-  {l1 l2 l3 : Level} {α : UU l1} {A : UU l2} {B : UU l3}
-  where
-
-  is-directly-enumerable-is-directly-enumerably-indexed' :
-    {f : A → B} → is-surjective f →
-    is-directly-enumerable α A → is-directly-enumerable α B
-  is-directly-enumerable-is-directly-enumerably-indexed' {f} F =
-    map-exists (is-surjective) (postcomp α f) (λ _ → is-surjective-comp F)
-
-  is-directly-enumerable-is-directly-enumerably-indexed :
-    (A ↠ B) → is-directly-enumerable α A → is-directly-enumerable α B
-  is-directly-enumerable-is-directly-enumerably-indexed (f , F) =
-    is-directly-enumerable-is-directly-enumerably-indexed' F
-
-  is-enumerable-is-enumerably-indexed' :
-    {f : A → B} → is-surjective f → is-enumerable α A → is-enumerable α B
-  is-enumerable-is-enumerably-indexed' {f} F =
-    map-exists
-      ( is-surjective)
-      ( postcomp α (map-Maybe f))
-      ( λ _ → is-surjective-comp (is-surjective-map-is-surjective-Maybe F))
-
-  is-enumerable-is-enumerably-indexed :
-    (A ↠ B) → is-enumerable α A → is-enumerable α B
-  is-enumerable-is-enumerably-indexed (f , F) =
-    is-enumerable-is-enumerably-indexed' F
-```
-
-### Retracts of α-enumerable types are α-enumerable
-
-```agda
-module _
-  {l1 l2 l3 : Level} {α : UU l1} {A : UU l2} {B : UU l3} (R : B retract-of A)
-  where
-
-  is-directly-enumerable-retract-of :
-    is-directly-enumerable α A → is-directly-enumerable α B
-  is-directly-enumerable-retract-of =
-    is-directly-enumerable-is-directly-enumerably-indexed'
-      { f = map-retraction-retract R}
-      ( is-surjective-has-section
-        ( inclusion-retract R , is-retraction-map-retraction-retract R))
-
-  is-enumerable-retract-of :
-    is-enumerable α A → is-enumerable α B
-  is-enumerable-retract-of =
-    is-enumerable-is-enumerably-indexed'
-      { f = map-retraction-retract R}
-      ( is-surjective-has-section
-        ( inclusion-retract R , is-retraction-map-retraction-retract R))
-```
-
-### α-enumerable types are closed under equivalences
-
-```agda
-module _
-  {l1 l2 l3 : Level} {α : UU l1} {A : UU l2} {B : UU l3} (e : B ≃ A)
-  where
-
-  is-directly-enumerable-equiv :
-    is-directly-enumerable α A → is-directly-enumerable α B
-  is-directly-enumerable-equiv =
-    is-directly-enumerable-retract-of (retract-equiv e)
-
-  is-enumerable-equiv :
-    is-enumerable α A → is-enumerable α B
-  is-enumerable-equiv =
-    is-enumerable-retract-of (retract-equiv e)
-```
-
 ### The empty type is α-enumerable iff α is inhabited
 
 ```agda
@@ -260,20 +141,9 @@ module _
     ( ( λ _ → exception-Maybe) ,
       ( λ where (inr _) → map-trunc-Prop (_, refl) |x₀|))
 
-  is-enumerable-empty : is-inhabited α → is-enumerable α empty
-  is-enumerable-empty |x₀| =
-    unit-trunc-Prop ( enumeration-emtpy |x₀|)
-
-  is-enumerable-empty' : α → is-enumerable α empty
-  is-enumerable-empty' x₀ = is-enumerable-empty (unit-trunc-Prop x₀)
-
   is-inhabited-enumeration-empty : enumeration α empty → is-inhabited α
   is-inhabited-enumeration-empty (f , H) =
     map-trunc-Prop pr1 (H exception-Maybe)
-
-  is-inhabited-is-enumerable-empty : is-enumerable α empty → is-inhabited α
-  is-inhabited-is-enumerable-empty =
-    rec-trunc-Prop (is-inhabited-Prop α) is-inhabited-enumeration-empty
 ```
 
 ## See also

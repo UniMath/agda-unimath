@@ -53,7 +53,7 @@ An element `a : A` is
 {{#concept "extremally isolated" Agda=is-extremally-isolated Agda=extremally-extremally-isolated-element}}
 if `a ＝ x` is [De Morgan](logic.de-morgan-types.md) for any `x`. I.e., if the
 [proposition](foundation-core.propositions.md) `a ≠ x` is
-[decidable](foundation-core.decidable-types.md).
+[decidable](foundation.decidable-types.md).
 
 ## Definitions
 
