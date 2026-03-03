@@ -39,12 +39,6 @@ if the [constant map](foundation.constant-maps.md) `X → (K → X)` is an
 [equivalence](foundation-core.equivalences.md). In other words, if `X` is
 `K`-[null](orthogonal-factorization-systems.null-types.md).
 
-Most instances of subuniverse-parametricity are "classical taboos". Already
-double-negation-parametricity of the booleans contradicts the
-[law of excluded middle](foundation.law-of-excluded-middle.md). We demonstrate
-this in
-[`foundation.parametricity-booleans`](foundation.parametricity-booleans.md).
-
 ## Definitions
 
 ### The predicate on a type of being parametric at a subuniverse

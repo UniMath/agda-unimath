@@ -59,10 +59,6 @@ if the [constant map](foundation.constant-maps.md) `X → (𝒰 → X)` is an
 [equivalence](foundation-core.equivalences.md). In other words, if `X` is
 `𝒰`-[null](orthogonal-factorization-systems.null-types.md).
 
-Parametricity can be understood as a "classical taboo" since it contradicts the
-law of excluded middle. We demonstrate this in
-[`foundation.parametricity-booleans`](foundation.parametricity-booleans.md).
-
 ## Definitions
 
 ### The predicate on a type of being parametric
@@ -357,5 +353,4 @@ raising infrastructure.
 ## See also
 
 - [Subuniverse-parametric types](foundation.subuniverse-parametric-types.md)
-- [Parametricity of the booleans](foundation.parametricity-booleans.md)
 - [The parametricity axiom](foundation.parametricity-axiom.md)

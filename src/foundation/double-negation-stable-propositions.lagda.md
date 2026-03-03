@@ -245,18 +245,6 @@ empty-Double-Negation-Stable-Prop =
 unit-Double-Negation-Stable-Prop : Double-Negation-Stable-Prop lzero
 unit-Double-Negation-Stable-Prop =
   ( unit , is-prop-unit , double-negation-elim-unit)
-
-raise-empty-Double-Negation-Stable-Prop :
-  (l : Level) → Double-Negation-Stable-Prop l
-raise-empty-Double-Negation-Stable-Prop l =
-  ( raise-empty l ,
-    is-prop-raise-empty ,
-    ( λ nnx → ex-falso (nnx is-empty-raise-empty)))
-
-raise-unit-Double-Negation-Stable-Prop :
-  (l : Level) → Double-Negation-Stable-Prop l
-raise-unit-Double-Negation-Stable-Prop l =
-  ( raise-unit l , is-prop-raise-unit , (λ _ → raise-star))
 ```
 
 ```agda
