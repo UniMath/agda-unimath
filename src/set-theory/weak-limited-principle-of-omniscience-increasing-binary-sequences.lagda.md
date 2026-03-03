@@ -107,7 +107,3 @@ WLPO-emb-ℕ∞↗-ℕ e =
   WLPO-has-decidable-equality-ℕ∞↗
     ( has-decidable-equality-emb e has-decidable-equality-ℕ)
 ```
-
-## See also
-
-- [The limited principle of omniscience and increasing binary sequences](set-theory.limited-principle-of-omniscience-increasing-binary-sequences.md)
