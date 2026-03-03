@@ -17,7 +17,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
-open import foundation.weakly-constant-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diaconescus-theorem
@@ -47,6 +46,7 @@ open import foundation.univalence
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
+open import foundation.weakly-constant-maps
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
