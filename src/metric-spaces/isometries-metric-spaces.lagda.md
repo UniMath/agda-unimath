@@ -529,3 +529,79 @@ module _
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
 ```
+
+### Isometries are short expansive maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-Metric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-expansive-is-short-map-Metric-Space :
+      is-short-map-Metric-Space A B f →
+      is-expansive-map-Metric-Space A B f →
+      is-isometry-Metric-Space A B f
+    is-isometry-is-expansive-is-short-map-Metric-Space H K d x y =
+      (H d x y , K d x y)
+
+  isometry-is-expansive-is-short-map-Metric-Space :
+    is-short-map-Metric-Space A B f →
+    is-expansive-map-Metric-Space A B f →
+    isometry-Metric-Space A B
+  isometry-is-expansive-is-short-map-Metric-Space H K =
+    (f , is-isometry-is-expansive-is-short-map-Metric-Space H K)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-map-Metric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-expansive-map-short-map-Metric-Space :
+      is-expansive-map-Metric-Space A B
+        ( map-short-map-Metric-Space A B f) →
+      is-isometry-Metric-Space A B
+        ( map-short-map-Metric-Space A B f)
+    is-isometry-is-expansive-map-short-map-Metric-Space =
+      is-isometry-is-expansive-is-short-map-Metric-Space A B
+        ( map-short-map-Metric-Space A B f)
+        ( is-short-map-short-map-Metric-Space A B f)
+
+  isometry-is-expansive-map-short-map-Metric-Space :
+    is-expansive-map-Metric-Space A B
+      ( map-short-map-Metric-Space A B f) →
+    isometry-Metric-Space A B
+  isometry-is-expansive-map-short-map-Metric-Space K =
+    ( map-short-map-Metric-Space A B f ,
+      is-isometry-is-expansive-map-short-map-Metric-Space K)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : expansive-map-Metric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-short-map-expansive-map-Metric-Space :
+      is-short-map-Metric-Space A B
+        ( map-expansive-map-Metric-Space A B f) →
+      is-isometry-Metric-Space A B
+        ( map-expansive-map-Metric-Space A B f)
+    is-isometry-is-short-map-expansive-map-Metric-Space H =
+      is-isometry-is-expansive-is-short-map-Metric-Space A B
+        ( map-expansive-map-Metric-Space A B f)
+        ( H)
+        ( is-expansive-map-expansive-map-Metric-Space A B f)
+
+  isometry-is-short-map-expansive-map-Metric-Space :
+    is-short-map-Metric-Space A B
+      ( map-expansive-map-Metric-Space A B f) →
+    isometry-Metric-Space A B
+  isometry-is-short-map-expansive-map-Metric-Space H =
+    ( map-expansive-map-Metric-Space A B f ,
+      is-isometry-is-short-map-expansive-map-Metric-Space H)
+```
