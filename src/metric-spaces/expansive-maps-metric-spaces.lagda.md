@@ -10,7 +10,6 @@ module metric-spaces.expansive-maps-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -26,7 +25,6 @@ open import foundation.universe-levels
 open import lists.sequences
 
 open import metric-spaces.expansive-maps-pseudometric-spaces
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.poset-of-rational-neighborhood-relations
@@ -269,55 +267,6 @@ module _
       ( h)
       ( g)
       ( f)
-```
-
-### Any isometry between metric spaces is expansive
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-Metric-Space A B)
-  where
-
-  is-expansive-map-is-isometry-Metric-Space :
-    is-isometry-Metric-Space A B f →
-    is-expansive-map-Metric-Space A B f
-  is-expansive-map-is-isometry-Metric-Space =
-    is-expansive-map-is-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
-```
-
-### The embedding of isometries of metric spaces into expansive maps
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  where
-
-  expansive-map-isometry-Metric-Space :
-    isometry-Metric-Space A B → expansive-map-Metric-Space A B
-  expansive-map-isometry-Metric-Space =
-    expansive-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  is-emb-expansive-map-isometry-Metric-Space :
-    is-emb expansive-map-isometry-Metric-Space
-  is-emb-expansive-map-isometry-Metric-Space =
-    is-emb-expansive-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  emb-expansive-map-isometry-Metric-Space :
-    isometry-Metric-Space A B ↪ expansive-map-Metric-Space A B
-  emb-expansive-map-isometry-Metric-Space =
-    emb-expansive-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
 ```
 
 ### The action on sequences of expansive maps
