@@ -53,8 +53,8 @@ module _
     (x y : type-Discrete-Type) → Decidable-Prop l
   Id-Decidable-Prop x y =
     ( x ＝ y ,
-      ( is-set-type-Discrete-Type x y ,
-        has-decidable-equality-type-Discrete-Type x y))
+      is-set-type-Discrete-Type x y ,
+      has-decidable-equality-type-Discrete-Type x y)
 ```
 
 ## External links
