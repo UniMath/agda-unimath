@@ -82,8 +82,8 @@ level-De-Morgans-Law : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 level-De-Morgans-Law l1 l2 =
   (P : Prop l1) (Q : Prop l2) → de-morgans-law P Q
 
-prop-level-De-Morgans-Law : (l1 l2 : Level) → Prop (lsuc l1 ⊔ lsuc l2)
-prop-level-De-Morgans-Law l1 l2 =
+level-prop-De-Morgans-Law : (l1 l2 : Level) → Prop (lsuc l1 ⊔ lsuc l2)
+level-prop-De-Morgans-Law l1 l2 =
   Π-Prop
     ( Prop l1)
     ( λ P → Π-Prop (Prop l2) (λ Q → de-morgans-law-Prop P Q))
