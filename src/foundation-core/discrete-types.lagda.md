@@ -11,6 +11,8 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.decidable-propositions
+open import foundation-core.identity-types
 open import foundation-core.sets
 ```
 
@@ -46,6 +48,13 @@ module _
   set-Discrete-Type : Set l
   pr1 set-Discrete-Type = type-Discrete-Type
   pr2 set-Discrete-Type = is-set-type-Discrete-Type
+
+  Id-Decidable-Prop :
+    (x y : type-Discrete-Type) → Decidable-Prop l
+  Id-Decidable-Prop x y =
+    ( x ＝ y ,
+      ( is-set-type-Discrete-Type x y ,
+        has-decidable-equality-type-Discrete-Type x y))
 ```
 
 ## External links

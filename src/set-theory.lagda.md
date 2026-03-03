@@ -69,8 +69,6 @@ open import set-theory.inequality-cardinals public
 open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
 open import set-theory.inhabited-cardinals public
-open import set-theory.limited-principle-of-omniscience-conatural-numbers public
-open import set-theory.limited-principle-of-omniscience-increasing-binary-sequences public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
