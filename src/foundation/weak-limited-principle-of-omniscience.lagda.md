@@ -59,9 +59,9 @@ WLPO = {l : Level} → level-WLPO l
 ### WLPO is logically equivalent to decidable Π-types of ℕ
 
 ```agda
-has-decidable-Π-level-ℕ-level-WLPO:
+has-decidable-Π-level-ℕ-level-WLPO :
   {l : Level} → level-WLPO l → has-decidable-Π-Level l ℕ
-has-decidable-Π-level-ℕ-level-WLPO=
+has-decidable-Π-level-ℕ-level-WLPO =
   has-decidable-Π-Level-has-decidable-∀-Level
 
 level-WLPO-has-decidable-Π-level-ℕ :
