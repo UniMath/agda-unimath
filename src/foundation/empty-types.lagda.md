@@ -126,8 +126,8 @@ abstract
 iff-is-empty-type-trunc-Prop :
   {l1 : Level} {X : UU l1} →
   is-empty X ↔ is-empty (type-trunc-Prop X)
-pr1 iff-is-empty-type-trunc-Prop = is-empty-type-trunc-Prop
-pr2 iff-is-empty-type-trunc-Prop = is-empty-type-trunc-Prop'
+iff-is-empty-type-trunc-Prop =
+  ( is-empty-type-trunc-Prop , is-empty-type-trunc-Prop')
 ```
 
 ### Any inhabited type is nonempty
