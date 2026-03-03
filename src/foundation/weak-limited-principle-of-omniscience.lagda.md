@@ -59,21 +59,21 @@ WLPO = {l : Level} → level-WLPO l
 ### WLPO is logically equivalent to decidable Π-types of ℕ
 
 ```agda
-level-WLPO-has-decidable-Π-level-ℕ :
+has-decidable-Π-level-ℕ-level-WLPO:
   {l : Level} → level-WLPO l → has-decidable-Π-Level l ℕ
-level-WLPO-has-decidable-Π-level-ℕ =
+has-decidable-Π-level-ℕ-level-WLPO=
   has-decidable-Π-Level-has-decidable-∀-Level
 
-has-decidable-Π-Level-ℕ-level-WLPO :
+level-WLPO-has-decidable-Π-level-ℕ :
   {l : Level} → has-decidable-Π-Level l ℕ → level-WLPO l
-has-decidable-Π-Level-ℕ-level-WLPO =
+level-WLPO-has-decidable-Π-level-ℕ =
   has-decidable-∀-Level-has-decidable-Π-Level
 
-WLPO-has-decidable-Π-ℕ : WLPO → has-decidable-Π ℕ
-WLPO-has-decidable-Π-ℕ = has-decidable-Π-has-decidable-∀
+has-decidable-Π-ℕ-WLPO : WLPO → has-decidable-Π ℕ
+has-decidable-Π-ℕ-WLPO = has-decidable-Π-has-decidable-∀
 
-has-decidable-Π-ℕ-WLPO : has-decidable-Π ℕ → WLPO
-has-decidable-Π-ℕ-WLPO = has-decidable-∀-has-decidable-Π
+WLPO-has-decidable-Π-ℕ : has-decidable-Π ℕ → WLPO
+WLPO-has-decidable-Π-ℕ = has-decidable-∀-has-decidable-Π
 ```
 
 ### The limited principle of omniscience implies the weak limited principle of omniscience
