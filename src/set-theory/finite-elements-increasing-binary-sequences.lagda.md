@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.inhabited-types
+open import foundation.logical-operations-booleans
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -136,7 +137,7 @@ Finite-ℕ∞↗ = Σ ℕ∞↗ is-finite-ℕ∞↗
 
 ```agda
 is-not-finitely-bounded-infinity-ℕ∞↗ :
-  (n : ℕ) → ¬ (is-finitely-bounded-ℕ∞↗ infinity-ℕ∞↗ n)
+  (n : ℕ) → ¬ is-finitely-bounded-ℕ∞↗ infinity-ℕ∞↗ n
 is-not-finitely-bounded-infinity-ℕ∞↗ n ()
 ```
 
@@ -144,7 +145,7 @@ is-not-finitely-bounded-infinity-ℕ∞↗ n ()
 
 ```agda
 module _
-  (x : ℕ∞↗) (H : (n : ℕ) → ¬ (is-finitely-bounded-ℕ∞↗ x n))
+  (x : ℕ∞↗) (H : (n : ℕ) → ¬ is-finitely-bounded-ℕ∞↗ x n)
   where
 
   Eq-infinity-is-not-finitely-bounded-ℕ∞↗ : sequence-ℕ∞↗ x ~ const ℕ false
@@ -159,19 +160,25 @@ module _
 ### If an increasing binary sequence has an upper bound there exists a unique least upper bound
 
 ```agda
+minimal-element-finite-bound-ℕ∞↗ :
+  (x : ℕ∞↗) → finite-bound-ℕ∞↗ x → minimal-element-ℕ (is-finitely-bounded-ℕ∞↗ x)
+minimal-element-finite-bound-ℕ∞↗ x =
+  well-ordering-principle-ℕ
+    ( is-finitely-bounded-ℕ∞↗ x)
+    ( is-decidable-is-finitely-bounded-ℕ∞↗ x)
+
+least-finite-bound-minimal-element-is-finitely-bounded-ℕ∞↗ :
+  (x : ℕ∞↗) →
+  minimal-element-ℕ (is-finitely-bounded-ℕ∞↗ x) →
+  least-finite-bound-ℕ∞↗ x
+least-finite-bound-minimal-element-is-finitely-bounded-ℕ∞↗ x (m , p , M) =
+  ((m , p) , (λ v → M (pr1 v) (pr2 v)))
+
 least-finite-bound-finite-bound-ℕ∞↗ :
   (x : ℕ∞↗) → finite-bound-ℕ∞↗ x → least-finite-bound-ℕ∞↗ x
 least-finite-bound-finite-bound-ℕ∞↗ x u =
-  ( ( pr1 m ,
-      pr1 (pr2 m)) ,
-    λ v → pr2 (pr2 m) (pr1 v) (pr2 v))
-  where
-  m : minimal-element-ℕ (is-finitely-bounded-ℕ∞↗ x)
-  m =
-    well-ordering-principle-ℕ
-      ( is-finitely-bounded-ℕ∞↗ x)
-      ( is-decidable-is-finitely-bounded-ℕ∞↗ x)
-      ( u)
+  least-finite-bound-minimal-element-is-finitely-bounded-ℕ∞↗ x
+    ( minimal-element-finite-bound-ℕ∞↗ x u)
 
 least-finite-bound-is-finite-ℕ∞↗ :
   (x : ℕ∞↗) → is-finite-ℕ∞↗ x → least-finite-bound-ℕ∞↗ x
@@ -209,4 +216,34 @@ abstract
     is-finitely-bounded-is-finitely-bounded-by-zero-ℕ∞↗ x m
   is-finitely-bounded-leq-ℕ∞↗ x (succ-ℕ n) (succ-ℕ m) =
     is-finitely-bounded-leq-ℕ∞↗ (shift-left-ℕ∞↗ x) n m
+```
+
+### Finite bounds of forced increasing binary sequences
+
+```agda
+abstract
+  has-true-is-true-force-ℕ∞↗' :
+    (f : ℕ → bool) (n : ℕ) →
+    is-true (force-ℕ∞↗' f n) →
+    Σ ℕ (λ m → is-true (f m))
+  has-true-is-true-force-ℕ∞↗' f 0 =
+    λ p → (0 , p)
+  has-true-is-true-force-ℕ∞↗' f (succ-ℕ n) =
+    ind-bool
+      ( λ b →
+        ( f (succ-ℕ n) ＝ b) →
+        is-true (or-bool b (force-ℕ∞↗' f n)) →
+        Σ ℕ (λ m → is-true (f m)))
+      ( λ q r → (succ-ℕ n , q))
+      ( λ q r → has-true-is-true-force-ℕ∞↗' f n r)
+      ( f (succ-ℕ n))
+      ( refl)
+
+abstract
+  has-true-finite-bound-force-ℕ∞↗ :
+    (f : ℕ → bool) →
+    finite-bound-ℕ∞↗ (force-ℕ∞↗ f) →
+    Σ ℕ (λ m → is-true (f m))
+  has-true-finite-bound-force-ℕ∞↗ f (n , p) =
+    has-true-is-true-force-ℕ∞↗' f n p
 ```

@@ -108,37 +108,6 @@ WLPO-emb-ℕ∞↗-ℕ e =
     ( has-decidable-equality-emb e has-decidable-equality-ℕ)
 ```
 
-### If the inclusion `ℕ + {∞} → ℕ∞↗` is an equivalence then WLPO holds
+## See also
 
-Since this inclusion is already a double negation dense embedding, it suffices
-to assume that it is double negation eliminating.
-
-```agda
-WLPO-is-equiv-increasing-binary-sequence-ℕ+∞ :
-  is-equiv increasing-binary-sequence-ℕ+∞ → WLPO
-WLPO-is-equiv-increasing-binary-sequence-ℕ+∞ e =
-  WLPO-equiv-ℕ-ℕ∞↗
-    ( (increasing-binary-sequence-ℕ+∞ , e) ∘e commutative-coproduct ∘e equiv-ℕ)
-
-WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞ :
-  is-double-negation-eliminating-map increasing-binary-sequence-ℕ+∞ → WLPO
-WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞ e =
-  WLPO-is-equiv-increasing-binary-sequence-ℕ+∞
-    ( is-equiv-is-double-negation-stable-emb-is-double-negation-dense-map
-      ( is-double-negation-dense-increasing-binary-sequence-ℕ+∞)
-      ( is-emb-increasing-binary-sequence-ℕ+∞ , e))
-
-WLPO-is-surjective-increasing-binary-sequence-ℕ+∞ :
-  is-surjective increasing-binary-sequence-ℕ+∞ → WLPO
-WLPO-is-surjective-increasing-binary-sequence-ℕ+∞ e =
-  WLPO-is-equiv-increasing-binary-sequence-ℕ+∞
-    ( is-equiv-is-emb-is-surjective
-      ( e)
-      ( is-emb-increasing-binary-sequence-ℕ+∞))
-
-WLPO-is-decidable-map-increasing-binary-sequence-ℕ+∞ :
-  is-decidable-map increasing-binary-sequence-ℕ+∞ → WLPO
-WLPO-is-decidable-map-increasing-binary-sequence-ℕ+∞ e =
-  WLPO-is-double-negation-eliminating-map-increasing-binary-sequence-ℕ+∞
-    ( is-double-negation-eliminating-map-is-decidable-map e)
-```
+- [The limited principle of omniscience and increasing binary sequences](set-theory.limited-principle-of-omniscience-increasing-binary-sequences.md)
