@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.injective-maps
 open import foundation.maybe
+open import foundation.negated-equality
 open import foundation.retractions
 open import foundation.sections
 open import foundation.unit-type
@@ -30,6 +31,7 @@ open import foundation.unit-type
 open import foundation-core.empty-types
 open import foundation-core.identity-types
 
+open import set-theory.inclusion-natural-numbers-increasing-binary-sequences
 open import set-theory.increasing-binary-sequences
 ```
 
@@ -143,6 +145,17 @@ abstract
     succ-ℕ∞↗ (increasing-binary-sequence-ℕ∞ x)
   compute-increasing-binary-sequence-succ-ℕ∞ x =
     eq-Eq-ℕ∞↗ (Eq-compute-increasing-binary-sequence-succ-ℕ∞ x)
+
+  Eq-compute-increasing-binary-sequence-infinity-ℕ∞ :
+    Eq-ℕ∞↗ (increasing-binary-sequence-ℕ∞ infinity-ℕ∞) infinity-ℕ∞↗
+  Eq-compute-increasing-binary-sequence-infinity-ℕ∞ zero-ℕ = refl
+  Eq-compute-increasing-binary-sequence-infinity-ℕ∞ (succ-ℕ n) =
+    Eq-compute-increasing-binary-sequence-infinity-ℕ∞ n
+
+  compute-increasing-binary-sequence-infinity-ℕ∞ :
+    increasing-binary-sequence-ℕ∞ infinity-ℕ∞ ＝ infinity-ℕ∞↗
+  compute-increasing-binary-sequence-infinity-ℕ∞ =
+    eq-Eq-ℕ∞↗ Eq-compute-increasing-binary-sequence-infinity-ℕ∞
 ```
 
 ## `ℕ∞ → ℕ∞↗` is a retraction of `ℕ∞↗ → ℕ∞`
@@ -268,6 +281,27 @@ abstract
     is-injective-increasing-binary-sequence-ℕ∞
       ( is-retraction-increasing-binary-sequence-ℕ∞
         ( increasing-binary-sequence-ℕ∞ x))
+```
+
+## Compatibility with the inclusion of the natural numbers
+
+```agda
+abstract
+  neq-in-image-increasing-binary-sequence-ℕ-increasing-binary-sequence-ℕ∞-infinity :
+    (n : ℕ) →
+    increasing-binary-sequence-ℕ∞ infinity-ℕ∞ ≠ increasing-binary-sequence-ℕ n
+  neq-in-image-increasing-binary-sequence-ℕ-increasing-binary-sequence-ℕ∞-infinity
+    n p =
+    neq-infinity-increasing-binary-sequence-ℕ n
+      ( inv p ∙ compute-increasing-binary-sequence-infinity-ℕ∞)
+
+  compute-conatural-number-infinity-ℕ∞↗ :
+    conatural-number-ℕ∞↗ infinity-ℕ∞↗ ＝ infinity-ℕ∞
+  compute-conatural-number-infinity-ℕ∞↗ =
+    ( ap
+      ( conatural-number-ℕ∞↗)
+      ( inv compute-increasing-binary-sequence-infinity-ℕ∞)) ∙
+    ( is-section-increasing-binary-sequence-ℕ∞ infinity-ℕ∞)
 ```
 
 ## Equivalence
