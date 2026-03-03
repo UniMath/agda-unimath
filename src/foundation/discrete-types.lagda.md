@@ -32,22 +32,6 @@ A {{#concept "discrete type"}} is a type that has
 [decidable equality](foundation.decidable-equality.md). Consequently, discrete
 types are [sets](foundation-core.sets.md) by Hedberg's theorem.
 
-## Definitions
-
-### The decidable proposition of equality in a discrete type
-
-```agda
-module _
-  {l : Level} (X : Discrete-Type l)
-  where
-
-  Id-Decidable-Prop : (x y : type-Discrete-Type X) → Decidable-Prop l
-  Id-Decidable-Prop x y =
-    ( x ＝ y ,
-      is-set-type-Discrete-Type X x y ,
-      has-decidable-equality-type-Discrete-Type X x y)
-```
-
 ## Properties
 
 ### The apartness relation on a discrete type is negated equality

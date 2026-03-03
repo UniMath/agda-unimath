@@ -375,25 +375,6 @@ abstract
   eq-succ-shift-left-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-succ-shift-left-ℕ∞↗ x p)
 ```
 
-### Computing with the deconstructor
-
-```agda
-abstract
-  eq-exception-decons-ℕ∞↗-is-true :
-    (x : ℕ∞↗) →
-    is-true (sequence-ℕ∞↗ x 0) →
-    decons-ℕ∞↗ x ＝ exception-Maybe
-  eq-exception-decons-ℕ∞↗-is-true x p with sequence-ℕ∞↗ x 0 | p
-  ... | true | refl = refl
-
-  eq-unit-decons-ℕ∞↗-is-false :
-    (x : ℕ∞↗) →
-    is-false (sequence-ℕ∞↗ x 0) →
-    decons-ℕ∞↗ x ＝ unit-Maybe (shift-left-ℕ∞↗ x)
-  eq-unit-decons-ℕ∞↗-is-false x p with sequence-ℕ∞↗ x 0 | p
-  ... | false | refl = refl
-```
-
 ## See also
 
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)
