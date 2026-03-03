@@ -17,8 +17,10 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions
 open import foundation.function-types
+open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
@@ -76,21 +78,60 @@ module _
   de-morgans-law : UU (l1 ⊔ l2)
   de-morgans-law = type-Prop de-morgans-law-Prop
 
-De-Morgans-Law-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-De-Morgans-Law-Level l1 l2 =
+level-De-Morgans-Law : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+level-De-Morgans-Law l1 l2 =
   (P : Prop l1) (Q : Prop l2) → de-morgans-law P Q
 
-prop-De-Morgans-Law-Level : (l1 l2 : Level) → Prop (lsuc l1 ⊔ lsuc l2)
-prop-De-Morgans-Law-Level l1 l2 =
+prop-level-De-Morgans-Law : (l1 l2 : Level) → Prop (lsuc l1 ⊔ lsuc l2)
+prop-level-De-Morgans-Law l1 l2 =
   Π-Prop
     ( Prop l1)
     ( λ P → Π-Prop (Prop l2) (λ Q → de-morgans-law-Prop P Q))
 
 De-Morgans-Law : UUω
-De-Morgans-Law = {l1 l2 : Level} → De-Morgans-Law-Level l1 l2
+De-Morgans-Law = {l1 l2 : Level} → level-De-Morgans-Law l1 l2
 ```
 
 ## Properties
+
+### The law of excluded middle implies De Morgan's law
+
+```agda
+level-De-Morgans-Law-level-LEM :
+  {l : Level} →
+  level-LEM l →
+  level-De-Morgans-Law l l
+level-De-Morgans-Law-level-LEM lem P Q =
+  rec-coproduct
+    ( λ p npq → inr-disjunction (λ q → npq (p , q)))
+    ( λ np _ → inl-disjunction np)
+    ( lem P)
+```
+
+### De Morgan's law implies decidable negation
+
+```agda
+is-decidable-neg-prop-level-De-Morgans-Law :
+  {l : Level} →
+  level-De-Morgans-Law l l →
+  (P : Prop l) →
+  is-decidable (¬ type-Prop P)
+is-decidable-neg-prop-level-De-Morgans-Law dm P =
+  elim-disjunction (is-decidable-Prop (neg-Prop P))
+    ( inl)
+    ( inr)
+    ( dm P (neg-Prop P) ( λ z → pr2 z (pr1 z)))
+
+is-decidable-neg-level-De-Morgans-Law :
+  {l : Level} →
+  level-De-Morgans-Law l l →
+  (P : UU l) →
+  is-decidable (¬ P)
+is-decidable-neg-level-De-Morgans-Law dm P =
+  is-decidable-iff'
+    ( inv-iff iff-is-empty-type-trunc-Prop)
+    ( is-decidable-neg-prop-level-De-Morgans-Law dm (trunc-Prop P))
+```
 
 ### The constructively valid De Morgan's laws
 

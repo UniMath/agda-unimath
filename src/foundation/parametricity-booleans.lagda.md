@@ -17,9 +17,11 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
+open import foundation.weakly-constant-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diaconescus-theorem
+open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
@@ -28,7 +30,9 @@ open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
+open import foundation.logical-operations-booleans
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.parametric-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -49,10 +53,11 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
+
+open import logic.de-morgans-law
 
 open import orthogonal-factorization-systems.coproducts-null-types
 open import orthogonal-factorization-systems.null-types
@@ -72,14 +77,109 @@ The [booleans](foundation.booleans.md) are said to be
 universe, `bool → (𝒰 → bool)`, is an
 [equivalence](foundation-core.equivalences.md).
 
-We consider consequences of assuming the booleans are parametric:
+We deduce consequences of assuming the booleans are parametric:
 
-1. If the booleans are parametric then the law of excluded middle does not hold.
-2. If the booleans are parametric then the axiom of choice does not hold.
-3. If the booleans are parametric then parametric types are closed under
-   coproducts.
+1. If the booleans are parametric then
+   [De Morgan's law](logic.de-morgans-law.md) does not hold.
+2. If the booleans are parametric then the
+   [law of excluded middle](foundation.law-of-excluded-middle.md) does not hold.
+3. If the booleans are parametric then the
+   [axiom of choice](foundation.axiom-of-choice.md) does not hold.
+
+In fact, these consequences already follow under the considerably weaker
+assumption that the booleans is parametric at the subuniverse of double negation
+stable propositions.
 
 ## Properties
+
+### Parametricity of the booleans contradicts De Morgan's law
+
+```agda
+module _
+  {l : Level}
+  where abstract
+
+  is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop :
+    ( (P : Double-Negation-Stable-Prop l) →
+      is-decidable (¬ type-Double-Negation-Stable-Prop P)) →
+    Double-Negation-Stable-Prop l →
+    bool
+  is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop dnP P =
+    neg-bool (map-bool-is-decidable (dnP P))
+
+  compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-empty :
+    (dnP :
+      (P : Double-Negation-Stable-Prop l) →
+      is-decidable (¬ type-Double-Negation-Stable-Prop P)) →
+    is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop
+      ( dnP)
+      ( raise-empty-Double-Negation-Stable-Prop l) ＝
+    false
+  compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-empty
+    dnP =
+    ind-coproduct
+      ( λ d → neg-bool (map-bool-is-decidable d) ＝ false)
+      ( λ _ → refl)
+      ( λ p → ex-falso (p is-empty-raise-empty))
+      ( dnP (raise-empty-Double-Negation-Stable-Prop l))
+
+  compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-unit :
+    (dnP :
+      (P : Double-Negation-Stable-Prop l) →
+      is-decidable (¬ type-Double-Negation-Stable-Prop P)) →
+    is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop
+      ( dnP)
+      ( raise-unit-Double-Negation-Stable-Prop l) ＝
+    true
+  compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-unit
+    dnP =
+    ind-coproduct
+      ( λ d → neg-bool (map-bool-is-decidable d) ＝ true)
+      ( λ p → ex-falso (p raise-star))
+      ( λ _ → refl)
+      ( dnP (raise-unit-Double-Negation-Stable-Prop l))
+
+  is-weakly-constant-map-is-¬¬-parametric-bool :
+    is-null (Double-Negation-Stable-Prop l) bool →
+    (f : Double-Negation-Stable-Prop l → bool) →
+    is-weakly-constant-map f
+  is-weakly-constant-map-is-¬¬-parametric-bool H f P Q =
+    ( inv (htpy-eq (is-section-map-inv-is-equiv H f) P)) ∙
+    ( htpy-eq (is-section-map-inv-is-equiv H f) Q)
+
+  no-all-is-decidable-neg-double-negation-stable-prop-is-¬¬-parametric-bool :
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l}) bool →
+    ¬ ( (P : Double-Negation-Stable-Prop l) →
+        is-decidable (¬ type-Double-Negation-Stable-Prop P))
+  no-all-is-decidable-neg-double-negation-stable-prop-is-¬¬-parametric-bool
+    H dnP =
+    neq-true-false-bool
+      ( ( inv
+          ( compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-unit
+            ( dnP))) ∙
+        ( is-weakly-constant-map-is-¬¬-parametric-bool
+          ( H)
+          ( is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop dnP)
+          ( raise-unit-Double-Negation-Stable-Prop l)
+          ( raise-empty-Double-Negation-Stable-Prop l)) ∙
+        ( compute-is-true-map-bool-is-decidable-neg-Double-Negation-Stable-Prop-raise-empty
+          ( dnP)))
+  no-de-morgans-law-is-¬¬-parametric-bool :
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l}) bool →
+    ¬ level-De-Morgans-Law l l
+  no-de-morgans-law-is-¬¬-parametric-bool H dm =
+    no-all-is-decidable-neg-double-negation-stable-prop-is-¬¬-parametric-bool H
+      ( λ P →
+        is-decidable-neg-prop-level-De-Morgans-Law dm
+          ( prop-Double-Negation-Stable-Prop P))
+
+  no-de-morgans-law-is-parametric-bool :
+    is-parametric l bool →
+    ¬ level-De-Morgans-Law l l
+  no-de-morgans-law-is-parametric-bool H =
+    no-de-morgans-law-is-¬¬-parametric-bool
+      ( is-¬¬-parametric-is-parametric H)
+```
 
 ### Parametricity of the booleans contradicts excluded middle
 
@@ -88,80 +188,11 @@ module _
   {l : Level}
   where abstract
 
-  is-true-map-bool-LEM-Double-Negation-Stable-Prop :
-    level-LEM l →
-    Double-Negation-Stable-Prop l →
-    bool
-  is-true-map-bool-LEM-Double-Negation-Stable-Prop lem P =
-    rec-coproduct
-      ( λ _ → true)
-      ( λ _ → false)
-      ( lem (prop-Double-Negation-Stable-Prop P))
-
-  compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-empty :
-    (lem : level-LEM l) →
-    is-true-map-bool-LEM-Double-Negation-Stable-Prop
-      lem
-      ( raise-empty-Double-Negation-Stable-Prop l) ＝ false
-  compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-empty lem =
-    ind-coproduct
-      ( λ d → rec-coproduct (λ _ → true) (λ _ → false) d ＝ false)
-      ( λ p → ex-falso (is-empty-raise-empty p))
-      ( λ _ → refl)
-      ( lem
-        ( prop-Double-Negation-Stable-Prop
-          ( raise-empty-Double-Negation-Stable-Prop l)))
-
-  compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-unit :
-    (lem : level-LEM l) →
-    is-true-map-bool-LEM-Double-Negation-Stable-Prop
-      lem
-      ( raise-unit-Double-Negation-Stable-Prop l) ＝ true
-  compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-unit lem =
-    ind-coproduct
-      ( λ d → rec-coproduct (λ _ → true) (λ _ → false) d ＝ true)
-      ( λ _ → refl)
-      ( λ p → ex-falso (p raise-star))
-      ( lem
-        ( prop-Double-Negation-Stable-Prop
-          ( raise-unit-Double-Negation-Stable-Prop l)))
-
-  is-constant-map-is-¬¬-parametric-bool :
-    is-null (Double-Negation-Stable-Prop l) bool →
-    (f : Double-Negation-Stable-Prop l → bool) →
-    (P Q : Double-Negation-Stable-Prop l) →
-    f P ＝ f Q
-  is-constant-map-is-¬¬-parametric-bool H f P Q =
-    ( inv
-      ( htpy-eq
-        ( is-section-map-inv-equiv
-          ( const (Double-Negation-Stable-Prop l) , H)
-          ( f))
-        ( P))) ∙
-    ( htpy-eq
-      ( is-section-map-inv-equiv
-        ( const (Double-Negation-Stable-Prop l) , H)
-        ( f))
-      ( Q))
-
   no-LEM-is-¬¬-parametric-bool :
-    is-subuniverse-parametric
-      {l1 = lzero} {l2 = l} {l3 = l}
-      ( is-double-negation-stable-prop-Prop)
-      ( bool) →
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l}) bool →
     ¬ level-LEM l
-  no-LEM-is-¬¬-parametric-bool H lem =
-    neq-true-false-bool
-      ( ( inv
-          ( compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-unit
-            ( lem))) ∙
-        ( is-constant-map-is-¬¬-parametric-bool
-          ( H)
-          ( is-true-map-bool-LEM-Double-Negation-Stable-Prop lem)
-          ( raise-unit-Double-Negation-Stable-Prop l)
-          ( raise-empty-Double-Negation-Stable-Prop l)) ∙
-        ( compute-is-true-map-bool-LEM-Double-Negation-Stable-Prop-raise-empty
-          ( lem)))
+  no-LEM-is-¬¬-parametric-bool H =
+    no-de-morgans-law-is-¬¬-parametric-bool H ∘ level-De-Morgans-Law-level-LEM
 
   no-LEM-is-parametric-bool :
     is-parametric l bool → ¬ level-LEM l
@@ -173,13 +204,21 @@ module _
 ### Parametricity of the booleans contradicts the axiom of choice
 
 ```agda
-abstract
+module _
+  {l : Level}
+  where abstract
+
+  no-AC0-is-¬¬-parametric-bool :
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l}) bool →
+    ¬ level-AC0 l l
+  no-AC0-is-¬¬-parametric-bool H ac =
+    no-LEM-is-¬¬-parametric-bool H (theorem-Diaconescu ac)
+
   no-AC0-is-parametric-bool :
-    {l : Level} → is-parametric l bool → ¬ level-AC0 l l
-  no-AC0-is-parametric-bool H ac =
-    no-LEM-is-¬¬-parametric-bool
+    is-parametric l bool → ¬ level-AC0 l l
+  no-AC0-is-parametric-bool H =
+    no-AC0-is-¬¬-parametric-bool
       ( is-¬¬-parametric-is-parametric H)
-      ( theorem-Diaconescu ac)
 ```
 
 ### Coproduct closure of parametric types is equivalent to parametricity of the booleans
@@ -191,8 +230,8 @@ abstract
     is-parametric l bool →
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-parametric l A → is-parametric l B → is-parametric l (A + B)
-  is-parametric-coproduct-is-parametric-bool {l} H HA HB =
-    is-null-coproduct-is-null-bool (UU l) H HA HB
+  is-parametric-coproduct-is-parametric-bool {l} H =
+    is-null-coproduct-is-null-bool (UU l) H
 
   is-parametric-bool-is-parametric-coproduct :
     {l : Level} →
@@ -212,9 +251,8 @@ module _
     is-subuniverse-parametric K A →
     is-subuniverse-parametric K B →
     is-subuniverse-parametric K (A + B)
-  is-subuniverse-parametric-coproduct-is-subuniverse-parametric-bool
-    H HA HB =
-    is-null-coproduct-is-null-bool (type-subuniverse K) H HA HB
+  is-subuniverse-parametric-coproduct-is-subuniverse-parametric-bool H =
+    is-null-coproduct-is-null-bool (type-subuniverse K) H
 
   is-subuniverse-parametric-bool-is-subuniverse-parametric-coproduct :
     ( {l4 l5 : Level} {A : UU l4} {B : UU l5} →
@@ -286,7 +324,7 @@ abstract
     is-parametric-is-subfinite-is-parametric-bool H eX
 ```
 
-### If some type refutes decidable Π-types then the booleans are parametric
+### If some type refutes decidability of universal quantifications, then the booleans are parametric
 
 In particular, if the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)

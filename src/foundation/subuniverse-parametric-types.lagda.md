@@ -181,13 +181,11 @@ abstract
   is-¬¬-parametric-is-parametric :
     {l1 l2 : Level} {X : UU l1} →
     is-parametric l2 X →
-    is-subuniverse-parametric
-      {l1 = l1} {l2 = l2} {l3 = l2}
-      is-double-negation-stable-prop-Prop X
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l2}) X
   is-¬¬-parametric-is-parametric =
     is-parametric-retract-universe
-      is-double-negation-stable-prop-Prop
-      retract-Double-Negation-Stable-Prop-UU
+      ( is-double-negation-stable-prop-Prop)
+      ( retract-Double-Negation-Stable-Prop-UU)
 ```
 
 ### Parametricity at propositions implies parametricity at double negation stable propositions
@@ -196,20 +194,13 @@ abstract
 abstract
   is-¬¬-parametric-is-prop-parametric :
     {l1 l2 : Level} {X : UU l1} →
-    is-subuniverse-parametric
-      {l1 = l1} {l2 = l2} {l3 = l2}
-      is-prop-Prop X →
-    is-subuniverse-parametric
-      {l1 = l1} {l2 = l2} {l3 = l2}
-      is-double-negation-stable-prop-Prop X
-  is-¬¬-parametric-is-prop-parametric
-    {l1} {l2} {X} =
+    is-subuniverse-parametric (is-prop-Prop {l2}) X →
+    is-subuniverse-parametric (is-double-negation-stable-prop-Prop {l2}) X
+  is-¬¬-parametric-is-prop-parametric {X} =
     is-parametric-retract-subuniverse
-      {l1 = l1} {l2 = l2} {l3 = l2}
-      {l4 = l2} {l5 = l2}
-      is-double-negation-stable-prop-Prop
-      is-prop-Prop
-      retract-Double-Negation-Stable-Prop-Prop
+      ( is-double-negation-stable-prop-Prop)
+      ( is-prop-Prop)
+      ( retract-Double-Negation-Stable-Prop-Prop)
 ```
 
 ### Contractible types are parametric at any subuniverse
