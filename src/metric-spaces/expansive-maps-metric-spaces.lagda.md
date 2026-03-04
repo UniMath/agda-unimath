@@ -41,9 +41,10 @@ open import metric-spaces.sequences-metric-spaces
 A [map](metric-spaces.maps-metric-spaces.md) `f` between two
 [metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "expansive" Disambiguation="maps between metric spaces" Agda=is-expansive-map-Metric-Space}}
-if for any two points `x` and `y` in `A`, if `f x` and `f y` share an
-`ε`-neighborhood in `B` then `x` and `y` share an `ε`-neighborhood in `A`. In
-other words, `f` reflects neighborhoods.
+if it reflects
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `f x` and `f y` share an `ε`-neighborhood in `B`
+then `x` and `y` share an `ε`-neighborhood in `A`.
 
 ## Definitions
 

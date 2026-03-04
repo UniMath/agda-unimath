@@ -40,9 +40,10 @@ open import metric-spaces.pseudometric-spaces
 A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
 {{#concept "expansive" Disambiguation="maps between pseudometric spaces" Agda=is-expansive-map-Pseudometric-Space}}
-if for any two points `x` and `y` in `A`, if `f x` and `f y` share an
-`ε`-neighborhood in `B` then `x` and `y` share an `ε`-neighborhood in `A`. In
-other words, `f` reflects neighborhoods.
+if it reflects
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `f x` and `f y` share an `ε`-neighborhood in `B`
+then `x` and `y` share an `ε`-neighborhood in `A`.
 
 ## Definitions
 

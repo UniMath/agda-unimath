@@ -40,13 +40,10 @@ open import metric-spaces.pseudometric-spaces
 A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="map between pseudometric spaces" Agda=is-short-map-Pseudometric-Space WD="metric map" WDID=Q2713824}}
-if the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `A` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md)
-by `f` of the rational neighborhood relation on `B`. I.e., upper bounds on the
-distance between two points in `A` are upper bounds of the distance between
-their images in `B`.
+if it preserves
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+`x` and `y` in `A`, if `x` and `y` share an `ε`-neighborhood in `A` then `f x`
+and `f y` share an `ε`-neighborhood in `B`.
 
 ## Definitions
 
