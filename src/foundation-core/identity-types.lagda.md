@@ -383,6 +383,11 @@ module _
   is-section-inv-concat' :
     {x y z : A} (q : y ＝ z) (r : x ＝ z) → (r ∙ inv q) ∙ q ＝ r
   is-section-inv-concat' refl refl = refl
+
+  cancellation-inv-inv-concat :
+    {x y z : A} (p : x ＝ y) (q : x ＝ z) →
+    p ∙ inv (inv q ∙ p) ＝ q
+  cancellation-inv-inv-concat refl refl = refl
 ```
 
 ### Transposing inverses
