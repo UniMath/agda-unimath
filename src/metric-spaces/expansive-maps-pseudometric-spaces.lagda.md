@@ -50,7 +50,7 @@ distance between them.
 
 ## Definitions
 
-### The property of being a expansive map between pseudometric spaces
+### The property of being an expansive map between pseudometric spaces
 
 ```agda
 module _
