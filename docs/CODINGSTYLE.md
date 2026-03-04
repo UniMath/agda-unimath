@@ -344,6 +344,18 @@ Here is a list of our naming conventions:
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
 
+### Convention: left and right
+
+When reading a discussion of left and right usages of binary operations, such as
+`left-mul-ℝ x`, it can be ambiguous whether this means left multiplication _by_
+`x` or left multiplication _of_ `x`, which of course have opposite meanings.
+agda-unimath adopts the convention that "by" is implied when ambiguous:
+`left-mul-ℝ x y` multiplies `y` on the left _by_ `x` (and refers to `x * y`),
+`right-mul-ℝ x y` multiplies `y` on the right _by_ `x` (and refers to `y * x`).
+
+This convention makes theorems such as `preserves-sim-left-mul-ℝ x` read as
+"left multiplication by `x` preserves similarity."
+
 ## Formatting: indentation, line breaks, and parentheses { #formatting }
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
