@@ -298,8 +298,13 @@ usernames = ["Lîm Tsú-thuàn"]
 github = "dannypsnl"
 homepage = "https://dannypsnl.srht.site/"
 
-
 [[contributors]]
 displayName = "Bjarki"
 usernames = ["Bjarki"]
 github = "bjarki781"
+
+[[contributors]]
+displayName = "Tim Johns"
+usernames = ["Tim Johns"]
+github = "SlimTim10"
+homepage = "https://timjohns.ca/"
