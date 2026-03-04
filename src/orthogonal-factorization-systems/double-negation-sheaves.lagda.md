@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.double-negation-sheaves where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
 open import foundation.irrefutable-propositions
@@ -101,22 +102,34 @@ module _
 
 ### Double negation stable propositions are double negation sheaves
 
-This follows from the fact that a proposition `P` is double negation stable if
-and only if it is local at all double negations
+```agda
+module _
+  {l1 l2 : Level} {A : UU l2}
+  (is-prop-A : is-prop A)
+  (is-¬¬-stable-A : is-double-negation-stable (A , is-prop-A))
+  where
 
-```text
-  (¬¬A → P) → (A → P),
+  is-double-negation-sheaf-is-double-negation-stable-is-prop :
+    is-double-negation-sheaf l1 A
+  is-double-negation-sheaf-is-double-negation-stable-is-prop P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-A)
+      ( is-prop-function-type is-prop-A)
+      ( λ f →
+        is-¬¬-stable-A
+          ( λ na → is-irrefutable-Irrefutable-Prop P (λ p → na (f p))))
 ```
-
-and nullification at irrefutable propositions is a restriction of this.
-
-> This remains to be formalized.
 
 ### The negation of a type is a double negation sheaf
 
-This is a corollary of the previous result.
-
-> This remains to be formalized.
+```agda
+is-double-negation-sheaf-neg :
+  {l1 l2 : Level} {A : UU l2} → is-double-negation-sheaf l1 (¬ A)
+is-double-negation-sheaf-neg =
+  is-double-negation-sheaf-is-double-negation-stable-is-prop
+    ( is-prop-neg)
+    ( elim-triple-negation)
+```
 
 ## References
 
