@@ -24,7 +24,10 @@ the [constant map](foundation.constant-maps.md)
   X → (𝒰 → X)
 ```
 
-is an [equivalence](foundation-core.equivalences.md).
+is an [equivalence](foundation-core.equivalences.md). Jem Lord {{#cite Lord25}}
+presents this as _internal parametricity_. Since we only work internally to type
+theory that is all we can reason about, so we dub it simply _parametricity_.
+Many consequences of parametricity are also explored in {{#cite BELS17}}.
 
 ## Definition
 
@@ -38,4 +41,4 @@ Parametricity = {l : Level} → level-Parametricity l
 
 ## References
 
-{{#bibliography}} {{#reference Lord25}}
+{{#bibliography}}
