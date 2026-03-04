@@ -96,7 +96,7 @@ module _
 
   is-expansive-map-expansive-map-Pseudometric-Space :
     is-expansive-map-Pseudometric-Space A B
-      map-expansive-map-Pseudometric-Space
+      ( map-expansive-map-Pseudometric-Space)
   is-expansive-map-expansive-map-Pseudometric-Space = pr2 f
 ```
 
@@ -136,9 +136,11 @@ module _
   equiv-eq-htpy-map-expansive-map-Pseudometric-Space :
     (f ＝ g) ≃ htpy-map-expansive-map-Pseudometric-Space
   equiv-eq-htpy-map-expansive-map-Pseudometric-Space =
-    equiv-funext ∘e
-    extensionality-type-subtype'
-      ( is-expansive-map-prop-Pseudometric-Space A B) f g
+    ( equiv-funext) ∘e
+    ( extensionality-type-subtype'
+      ( is-expansive-map-prop-Pseudometric-Space A B)
+      ( f)
+      ( g))
 
   eq-htpy-map-expansive-map-Pseudometric-Space :
     htpy-map-expansive-map-Pseudometric-Space → f ＝ g
@@ -194,36 +196,14 @@ module _
       ( id-expansive-map-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-expansive-map-Pseudometric-Space =
-    eq-htpy-map-expansive-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-expansive-map-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-expansive-map-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( λ x → refl)
+  left-unit-law-comp-expansive-map-Pseudometric-Space = refl
 
   right-unit-law-comp-expansive-map-Pseudometric-Space :
     ( comp-expansive-map-Pseudometric-Space A A B
       ( f)
       ( id-expansive-map-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-expansive-map-Pseudometric-Space =
-    eq-htpy-map-expansive-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-expansive-map-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-expansive-map-Pseudometric-Space A))
-      ( λ x → refl)
+  right-unit-law-comp-expansive-map-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of expansive maps between pseudometric spaces
@@ -302,13 +282,11 @@ module _
       ( expansive-map-isometry-Pseudometric-Space)
       ( is-emb-inclusion-subtype
         ( is-expansive-map-prop-Pseudometric-Space A B))
-      ( is-emb-htpy
-        ( λ f → refl)
-        ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-expansive-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ expansive-map-Pseudometric-Space A B
   emb-expansive-map-isometry-Pseudometric-Space =
-    expansive-map-isometry-Pseudometric-Space ,
-    is-emb-expansive-map-isometry-Pseudometric-Space
+    ( expansive-map-isometry-Pseudometric-Space ,
+      is-emb-expansive-map-isometry-Pseudometric-Space)
 ```

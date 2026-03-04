@@ -100,7 +100,7 @@ module _
 
   is-short-map-short-map-Pseudometric-Space :
     is-short-map-Pseudometric-Space A B
-      map-short-map-Pseudometric-Space
+      ( map-short-map-Pseudometric-Space)
   is-short-map-short-map-Pseudometric-Space = pr2 f
 ```
 
@@ -140,9 +140,11 @@ module _
   equiv-eq-htpy-map-short-map-Pseudometric-Space :
     (f ＝ g) ≃ htpy-map-short-map-Pseudometric-Space
   equiv-eq-htpy-map-short-map-Pseudometric-Space =
-    equiv-funext ∘e
-    extensionality-type-subtype'
-      ( is-short-map-prop-Pseudometric-Space A B) f g
+    ( equiv-funext) ∘e
+    ( extensionality-type-subtype'
+      ( is-short-map-prop-Pseudometric-Space A B)
+      ( f)
+      ( g))
 
   eq-htpy-map-short-map-Pseudometric-Space :
     htpy-map-short-map-Pseudometric-Space → f ＝ g
@@ -198,36 +200,14 @@ module _
       ( id-short-map-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-short-map-Pseudometric-Space =
-    eq-htpy-map-short-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-short-map-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-short-map-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( λ x → refl)
+  left-unit-law-comp-short-map-Pseudometric-Space = refl
 
   right-unit-law-comp-short-map-Pseudometric-Space :
     ( comp-short-map-Pseudometric-Space A A B
       ( f)
       ( id-short-map-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-short-map-Pseudometric-Space =
-    eq-htpy-map-short-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-short-map-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-short-map-Pseudometric-Space A))
-      ( λ x → refl)
+  right-unit-law-comp-short-map-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of short maps between pseudometric spaces
@@ -328,13 +308,11 @@ module _
       ( short-map-isometry-Pseudometric-Space)
       ( is-emb-inclusion-subtype
         ( is-short-map-prop-Pseudometric-Space A B))
-      ( is-emb-htpy
-        ( λ f → refl)
-        ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-short-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
   emb-short-map-isometry-Pseudometric-Space =
-    short-map-isometry-Pseudometric-Space ,
-    is-emb-short-map-isometry-Pseudometric-Space
+    ( short-map-isometry-Pseudometric-Space ,
+      is-emb-short-map-isometry-Pseudometric-Space)
 ```
