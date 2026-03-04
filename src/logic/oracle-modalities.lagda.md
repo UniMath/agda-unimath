@@ -195,6 +195,10 @@ module _
       is-uniquely-eliminating-modality-oracle-modality)
 ```
 
+## See also
+
+- [The impredicative encoding of oracle modalities](logic.impredicative-encoding-oracle-modalities.md)
+
 ## References
 
 {{#bibliography}}
