@@ -39,14 +39,10 @@ open import metric-spaces.pseudometric-spaces
 
 A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
-{{#concept "expansive" Disambiguation="map between pseudometric spaces" Agda=is-expansive-map-Pseudometric-Space}}
-if the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md) by
-`f` of the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `B` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the rational neighborhood relation on `A`. I.e., upper bounds on the
-distance between the images of two points of `A` are upper bounds of the
-distance between them.
+{{#concept "expansive" Disambiguation="maps between pseudometric spaces" Agda=is-expansive-map-Pseudometric-Space}}
+if for any two points `x` and `y` in `A`, if `f x` and `f y` share an
+`ε`-neighborhood in `B` then `x` and `y` share an `ε`-neighborhood in `A`. In
+other words, `f` reflects neighborhoods.
 
 ## Definitions
 
