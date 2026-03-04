@@ -53,7 +53,7 @@ them.
 
 ## Definitions
 
-### The property of being a expansive map between metric spaces
+### The property of being an expansive map between metric spaces
 
 ```agda
 module _
