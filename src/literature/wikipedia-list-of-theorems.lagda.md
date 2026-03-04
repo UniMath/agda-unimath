@@ -200,6 +200,24 @@ open import analysis.monotone-convergence-theorem-increasing-sequences-real-numb
     is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
 ```
 
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
+```
+
 ### Triangle inequality theorem {#Q208216}
 
 **Author:** [malarbol](https://github.com/malarbol)
@@ -216,15 +234,6 @@ open import real-numbers.absolute-value-real-numbers using
   ( triangle-inequality-abs-ℝ)
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
-```
-
-### Pythagorean theorem {#Q11518}
-
-**Author:** [Louis Wasserman](https://github.com/lowasser)
-
-```agda
-open import linear-algebra.orthogonality-real-inner-product-spaces using
-  ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
 ### Uniform limit theorem {#Q7885107}

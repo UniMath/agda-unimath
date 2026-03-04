@@ -127,10 +127,13 @@ module _
   (f g : isometry-Pseudometric-Space A B)
   where
 
+  htpy-map-isometry-Pseudometric-Space : UU (l1 ⊔ l1')
+  htpy-map-isometry-Pseudometric-Space =
+    map-isometry-Pseudometric-Space A B f ~
+    map-isometry-Pseudometric-Space A B g
+
   equiv-eq-htpy-map-isometry-Pseudometric-Space :
-    ( f ＝ g) ≃
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g)
+    (f ＝ g) ≃ htpy-map-isometry-Pseudometric-Space
   equiv-eq-htpy-map-isometry-Pseudometric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
@@ -139,16 +142,12 @@ module _
       ( g)
 
   htpy-eq-map-isometry-Pseudometric-Space :
-    ( f ＝ g) →
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g)
+    (f ＝ g) → htpy-map-isometry-Pseudometric-Space
   htpy-eq-map-isometry-Pseudometric-Space =
     map-equiv equiv-eq-htpy-map-isometry-Pseudometric-Space
 
   eq-htpy-map-isometry-Pseudometric-Space :
-    ( map-isometry-Pseudometric-Space A B f ~
-      map-isometry-Pseudometric-Space A B g) →
-    ( f ＝ g)
+    htpy-map-isometry-Pseudometric-Space → (f ＝ g)
   eq-htpy-map-isometry-Pseudometric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Pseudometric-Space
 ```

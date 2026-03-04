@@ -8,7 +8,7 @@ module lists.flattening-lists where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types

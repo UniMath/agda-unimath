@@ -12,6 +12,7 @@ module metric-spaces.modulated-cauchy-sequences-metric-spaces where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers

@@ -118,7 +118,7 @@ is-decidable-count-subtype P e f x =
           pair
             ( pr1 y ＝ x)
             ( pair
-              ( is-set-count e (pr1 y) x)
+              ( is-set-type-count e (pr1 y) x)
               ( has-decidable-equality-count e (pr1 y) x)))
         ( f)))
 ```
