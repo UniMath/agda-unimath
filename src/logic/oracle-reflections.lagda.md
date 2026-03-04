@@ -354,12 +354,12 @@ module _
     dependent-extension-property-oracle-reflection-Level l5 p X
       ( prop-oracle-reflection p R)
       ( oracle-algebra-oracle-reflection p R)
-  ind-lower-oracle-reflection Q unit* ask* =
+  ind-lower-oracle-reflection Q unit ask =
     map-inv-raise ∘
     ind-oracle-reflection p R
       ( raise-Prop l6 ∘ Q)
-      ( map-raise ∘ unit*)
-      ( λ a f f* → map-raise (ask* a f (map-inv-raise ∘ f*)))
+      ( map-raise ∘ unit)
+      ( λ a f f* → map-raise (ask a f (map-inv-raise ∘ f*)))
 
   rec-lower-oracle-reflection :
     extension-property-oracle-reflection-Level l5 p X
