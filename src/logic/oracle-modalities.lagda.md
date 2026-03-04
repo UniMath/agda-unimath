@@ -98,7 +98,7 @@ module _
   rec-oracle-modality X = rec-oracle-reflection p (𝒪ₚ X)
 ```
 
-### Oracles are dense at their oracle modalities
+### Oracles are dense at their own oracle modalities
 
 ```agda
 module _
