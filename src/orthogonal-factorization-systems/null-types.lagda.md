@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
+open import foundation.evaluation-functions
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -250,6 +251,15 @@ is-null-is-contr {A = A} B is-contr-A =
     ( is-local-is-contr (terminal-map B) A is-contr-A)
 ```
 
+### All types are null at contractible types
+
+```agda
+is-null-is-contr-exponent :
+  {l1 l2 : Level} {Y : UU l1} (A : UU l2) → is-contr Y → is-null Y A
+is-null-is-contr-exponent A is-contr-Y =
+  is-equiv-diagonal-exponential-is-contr is-contr-Y A
+```
+
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
@@ -289,7 +299,7 @@ module _
     is-equiv-has-converse-is-prop
       ( is-prop-P)
       ( is-prop-function-type is-prop-P)
-      ( λ f → f y)
+      ( ev y)
 
   is-null-is-prop-is-inhabited :
     {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
