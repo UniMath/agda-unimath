@@ -237,36 +237,14 @@ module _
       ( id-isometry-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-isometry-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( refl-htpy)
+  left-unit-law-comp-isometry-Pseudometric-Space = refl
 
   right-unit-law-comp-isometry-Pseudometric-Space :
     ( comp-isometry-Pseudometric-Space A A B
       ( f)
       ( id-isometry-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-isometry-Pseudometric-Space A))
-      ( refl-htpy)
+  right-unit-law-comp-isometry-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of isometries between pseudometric spaces
@@ -290,17 +268,7 @@ module _
     ( comp-isometry-Pseudometric-Space A C D
       ( h)
       ( comp-isometry-Pseudometric-Space A B C g f))
-  associative-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( D)
-      ( comp-isometry-Pseudometric-Space A B D
-        ( comp-isometry-Pseudometric-Space B C D h g)
-        ( f))
-      ( comp-isometry-Pseudometric-Space A C D
-        ( h)
-        ( comp-isometry-Pseudometric-Space A B C g f))
-      ( refl-htpy)
+  associative-comp-isometry-Pseudometric-Space = refl
 ```
 
 ### The inverse of an isometric equivalence is an isometry
@@ -422,8 +390,7 @@ module _
     is-emb-right-factor
       ( map-expansive-map-Pseudometric-Space A B)
       ( expansive-map-isometry-Pseudometric-Space)
-      ( is-emb-inclusion-subtype
-        ( is-expansive-map-prop-Pseudometric-Space A B))
+      ( is-emb-inclusion-subtype (is-expansive-map-prop-Pseudometric-Space A B))
       ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-expansive-map-isometry-Pseudometric-Space :
@@ -473,17 +440,14 @@ module _
     is-emb-right-factor
       ( map-short-map-Pseudometric-Space A B)
       ( short-map-isometry-Pseudometric-Space)
-      ( is-emb-inclusion-subtype
-        ( is-short-map-prop-Pseudometric-Space A B))
-      ( is-emb-htpy
-        ( λ f → refl)
-        ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
+      ( is-emb-inclusion-subtype (is-short-map-prop-Pseudometric-Space A B))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-short-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
   emb-short-map-isometry-Pseudometric-Space =
-    short-map-isometry-Pseudometric-Space ,
-    is-emb-short-map-isometry-Pseudometric-Space
+    ( short-map-isometry-Pseudometric-Space ,
+      is-emb-short-map-isometry-Pseudometric-Space)
 ```
 
 ### Isometries are short expansive maps

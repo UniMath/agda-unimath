@@ -521,15 +521,13 @@ module _
     is-emb-right-factor
       ( map-short-map-Metric-Space A B)
       ( short-map-isometry-Metric-Space)
-      ( is-emb-inclusion-subtype
-        ( is-short-map-prop-Metric-Space A B))
+      ( is-emb-inclusion-subtype (is-short-map-prop-Metric-Space A B))
       ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B))
 
   emb-short-map-isometry-Metric-Space :
     isometry-Metric-Space A B ↪ short-map-Metric-Space A B
   emb-short-map-isometry-Metric-Space =
-    ( short-map-isometry-Metric-Space ,
-      is-emb-short-map-isometry-Metric-Space)
+    ( short-map-isometry-Metric-Space , is-emb-short-map-isometry-Metric-Space)
 ```
 
 ### Isometries are short expansive maps
