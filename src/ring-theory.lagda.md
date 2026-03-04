@@ -23,6 +23,7 @@ open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.cyclic-rings public
+open import ring-theory.dependent-products-large-rings public
 open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
