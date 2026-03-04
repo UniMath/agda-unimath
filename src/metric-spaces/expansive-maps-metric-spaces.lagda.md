@@ -39,19 +39,14 @@ open import metric-spaces.sequences-metric-spaces
 A [map](metric-spaces.maps-metric-spaces.md) `f` between two
 [metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "expansive" Disambiguation="maps between metric spaces" Agda=is-expansive-map-Metric-Space}}
-if it's [expansive](metric-spaces.expansive-maps-pseudometric-spaces.md) between
-their underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md).
-That is, if the
-[preimage](metric-spaces.preimages-rational-neighborhood-relations.md) by `f` of
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `B` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md) the
-rational neighborhood relation on `A`. I.e., upper bounds on the distance
-between the images of two points of `A` are upper bounds of the distance between
-them.
+if it reflects
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `f x` and `f y` share an `ε`-neighborhood in `B`
+then `x` and `y` share an `ε`-neighborhood in `A`.
 
 ## Definitions
 
-### The property of being a expansive map between metric spaces
+### The property of being an expansive map between metric spaces
 
 ```agda
 module _
@@ -145,7 +140,7 @@ module _
     id-expansive-map-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
-### Equality of expansive maps between metric spaces is characterized by homotopy of their carrier maps
+### Equality of expansive maps between metric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _

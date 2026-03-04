@@ -37,18 +37,15 @@ open import metric-spaces.pseudometric-spaces
 
 A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
-{{#concept "expansive" Disambiguation="map between pseudometric spaces" Agda=is-expansive-map-Pseudometric-Space}}
-if the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md) by
-`f` of the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `B` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the rational neighborhood relation on `A`. I.e., upper bounds on the
-distance between the images of two points of `A` are upper bounds of the
-distance between them.
+{{#concept "expansive" Disambiguation="maps between pseudometric spaces" Agda=is-expansive-map-Pseudometric-Space}}
+if it reflects
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `f x` and `f y` share an `ε`-neighborhood in `B`
+then `x` and `y` share an `ε`-neighborhood in `A`.
 
 ## Definitions
 
-### The property of being a expansive map between pseudometric spaces
+### The property of being an expansive map between pseudometric spaces
 
 ```agda
 module _
@@ -75,7 +72,7 @@ module _
     is-prop-type-Prop is-expansive-map-prop-Pseudometric-Space
 ```
 
-### The set of expansive maps between pseudometric spaces
+### The type of expansive maps between pseudometric spaces
 
 ```agda
 module _
@@ -98,7 +95,7 @@ module _
 
   is-expansive-map-expansive-map-Pseudometric-Space :
     is-expansive-map-Pseudometric-Space A B
-      map-expansive-map-Pseudometric-Space
+      ( map-expansive-map-Pseudometric-Space)
   is-expansive-map-expansive-map-Pseudometric-Space = pr2 f
 ```
 
@@ -121,7 +118,7 @@ module _
     ( id-map-Pseudometric-Space A , is-expansive-map-id-map-Pseudometric-Space)
 ```
 
-### Equality of expansive maps between pseudometric spaces is characterized by homotopy of their carrier maps
+### Equality of expansive maps between pseudometric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _
@@ -138,9 +135,11 @@ module _
   equiv-eq-htpy-map-expansive-map-Pseudometric-Space :
     (f ＝ g) ≃ htpy-map-expansive-map-Pseudometric-Space
   equiv-eq-htpy-map-expansive-map-Pseudometric-Space =
-    equiv-funext ∘e
-    extensionality-type-subtype'
-      ( is-expansive-map-prop-Pseudometric-Space A B) f g
+    ( equiv-funext) ∘e
+    ( extensionality-type-subtype'
+      ( is-expansive-map-prop-Pseudometric-Space A B)
+      ( f)
+      ( g))
 
   eq-htpy-map-expansive-map-Pseudometric-Space :
     htpy-map-expansive-map-Pseudometric-Space → f ＝ g
@@ -196,36 +195,14 @@ module _
       ( id-expansive-map-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-expansive-map-Pseudometric-Space =
-    eq-htpy-map-expansive-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-expansive-map-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-expansive-map-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( λ x → refl)
+  left-unit-law-comp-expansive-map-Pseudometric-Space = refl
 
   right-unit-law-comp-expansive-map-Pseudometric-Space :
     ( comp-expansive-map-Pseudometric-Space A A B
       ( f)
       ( id-expansive-map-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-expansive-map-Pseudometric-Space =
-    eq-htpy-map-expansive-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-expansive-map-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-expansive-map-Pseudometric-Space A))
-      ( λ x → refl)
+  right-unit-law-comp-expansive-map-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of expansive maps between pseudometric spaces
@@ -249,15 +226,5 @@ module _
     ( comp-expansive-map-Pseudometric-Space A C D
       ( h)
       ( comp-expansive-map-Pseudometric-Space A B C g f))
-  associative-comp-expansive-map-Pseudometric-Space =
-    eq-htpy-map-expansive-map-Pseudometric-Space
-      ( A)
-      ( D)
-      ( comp-expansive-map-Pseudometric-Space A B D
-        ( comp-expansive-map-Pseudometric-Space B C D h g)
-        ( f))
-      ( comp-expansive-map-Pseudometric-Space A C D
-        ( h)
-        ( comp-expansive-map-Pseudometric-Space A B C g f))
-      ( λ x → refl)
+  associative-comp-expansive-map-Pseudometric-Space = refl
 ```

@@ -39,15 +39,10 @@ open import metric-spaces.short-maps-pseudometric-spaces
 A [map](metric-spaces.maps-metric-spaces.md) `f` between two
 [metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="maps between metric spaces" Agda=is-short-map-Metric-Space WD="metric map" WDID=Q2713824}}
-if it's [short](metric-spaces.short-maps-pseudometric-spaces.md) between their
-underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md). That is,
-if the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `A` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md)
-by `f` of the rational neighborhood relation on `B`. I.e., upper bounds on the
-distance between two points in `A` are upper bounds of the distance between
-their images in `B`.
+if it preserves
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `x` and `y` share an `ε`-neighborhood in `A` then
+`f x` and `f y` share an `ε`-neighborhood in `B`.
 
 ## Definitions
 
@@ -145,7 +140,7 @@ module _
     id-short-map-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
-### Equality of short maps between metric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between metric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _

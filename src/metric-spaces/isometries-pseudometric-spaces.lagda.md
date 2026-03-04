@@ -424,15 +424,13 @@ module _
       ( expansive-map-isometry-Pseudometric-Space)
       ( is-emb-inclusion-subtype
         ( is-expansive-map-prop-Pseudometric-Space A B))
-      ( is-emb-htpy
-        ( λ f → refl)
-        ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-expansive-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ expansive-map-Pseudometric-Space A B
   emb-expansive-map-isometry-Pseudometric-Space =
-    expansive-map-isometry-Pseudometric-Space ,
-    is-emb-expansive-map-isometry-Pseudometric-Space
+    ( expansive-map-isometry-Pseudometric-Space ,
+      is-emb-expansive-map-isometry-Pseudometric-Space)
 ```
 
 ### Any isometry between pseudometric spaces is short

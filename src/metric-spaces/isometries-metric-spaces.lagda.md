@@ -481,7 +481,7 @@ module _
       ( pseudometric-Metric-Space B)
 ```
 
-### Any isometry between metric spaces is short
+### Any isometry between pseudometric spaces is short
 
 ```agda
 module _
@@ -493,14 +493,11 @@ module _
   is-short-map-is-isometry-Metric-Space :
     is-isometry-Metric-Space A B f →
     is-short-map-Metric-Space A B f
-  is-short-map-is-isometry-Metric-Space =
-    is-short-map-is-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
+  is-short-map-is-isometry-Metric-Space I =
+    preserves-neighborhoods-map-isometry-Metric-Space A B (f , I)
 ```
 
-### The embedding of isometries of metric spaces into short maps
+### The embedding of isometries of pseudometric spaces into short maps
 
 ```agda
 module _
@@ -510,24 +507,29 @@ module _
 
   short-map-isometry-Metric-Space :
     isometry-Metric-Space A B → short-map-Metric-Space A B
-  short-map-isometry-Metric-Space =
-    short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
+  short-map-isometry-Metric-Space f =
+    map-isometry-Metric-Space A B f ,
+    is-short-map-is-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Metric-Space A B f)
+      ( is-isometry-map-isometry-Metric-Space A B f)
 
   is-emb-short-map-isometry-Metric-Space :
     is-emb short-map-isometry-Metric-Space
   is-emb-short-map-isometry-Metric-Space =
-    is-emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
+    is-emb-right-factor
+      ( map-short-map-Metric-Space A B)
+      ( short-map-isometry-Metric-Space)
+      ( is-emb-inclusion-subtype
+        ( is-short-map-prop-Metric-Space A B))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B))
 
   emb-short-map-isometry-Metric-Space :
     isometry-Metric-Space A B ↪ short-map-Metric-Space A B
   emb-short-map-isometry-Metric-Space =
-    emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
+    ( short-map-isometry-Metric-Space ,
+      is-emb-short-map-isometry-Metric-Space)
 ```
 
 ### Isometries are short expansive maps
