@@ -119,7 +119,7 @@ module _
     ( id-map-Pseudometric-Space A , is-expansive-map-id-map-Pseudometric-Space)
 ```
 
-### Equality of expansive maps between pseudometric spaces is characterized by homotopy of their carrier maps
+### Equality of expansive maps between pseudometric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _

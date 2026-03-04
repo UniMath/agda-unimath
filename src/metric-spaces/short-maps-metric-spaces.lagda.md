@@ -147,7 +147,7 @@ module _
     id-short-map-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
-### Equality of short maps between metric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between metric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _
