@@ -10,12 +10,14 @@ module foundation.projective-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
+open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
+open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncated-types
 ```
@@ -90,11 +92,27 @@ is-trunc-projective k X = {l2 l3 : Level} → is-trunc-projective-Level l2 l3 k 
 ### Alternative statement of set-projectivity
 
 ```agda
-is-projective-Level' : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-is-projective-Level' l2 X =
-  (P : X → UU l2) →
-  ((x : X) → is-inhabited (P x)) →
-  is-inhabited ((x : X) → (P x))
+module _
+  {l1 : Level} (l2 : Level) (X : UU l1)
+  where
+
+  is-projective-Level' : UU (l1 ⊔ lsuc l2)
+  is-projective-Level' =
+    (P : X → UU l2) →
+    ((x : X) → is-inhabited (P x)) →
+    is-inhabited ((x : X) → (P x))
+
+  abstract
+    is-prop-is-projective-Level' : is-prop is-projective-Level'
+    is-prop-is-projective-Level' =
+      is-prop-Π
+        ( λ P →
+          is-prop-function-type
+            ( is-property-is-inhabited ((x : X) → P x)))
+
+  is-projective-prop-Level' : Prop (l1 ⊔ lsuc l2)
+  is-projective-prop-Level' =
+    ( is-projective-Level' , is-prop-is-projective-Level')
 
 is-projective' : {l1 : Level} → UU l1 → UUω
 is-projective' X = {l2 : Level} → is-projective-Level' l2 X

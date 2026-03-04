@@ -96,6 +96,7 @@ open import metric-spaces.dense-subsets-metric-spaces public
 open import metric-spaces.dependent-products-complete-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
+open import metric-spaces.distances-located-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
@@ -141,6 +142,7 @@ open import metric-spaces.metric-space-of-maps-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-short-maps-metric-spaces public
+open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public
@@ -178,6 +180,7 @@ open import metric-spaces.totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.triangular-rational-neighborhood-relations public
 open import metric-spaces.uniform-homeomorphisms-metric-spaces public
 open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces public
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
