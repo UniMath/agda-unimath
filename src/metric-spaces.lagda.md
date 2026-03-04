@@ -101,6 +101,8 @@ open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
+open import metric-spaces.expansive-maps-metric-spaces public
+open import metric-spaces.expansive-maps-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
