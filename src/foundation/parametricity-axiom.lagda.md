@@ -16,7 +16,8 @@ open import foundation.universe-levels
 ## Idea
 
 The {{#concept "parametricity axiom" Agda=Parametricity}} states that all types
-are [parametric](foundation.parametric-types.md). I.e., for each type `X : 𝒰`,
+are [parametric](foundation.parametric-types.md) at their own
+[universe level](foundation.universe-levels.md). I.e., for each type `X : 𝒰`,
 the [constant map](foundation.constant-maps.md)
 
 ```text
