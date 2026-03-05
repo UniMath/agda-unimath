@@ -281,7 +281,9 @@ module _
     ind-oracle-reflection (λ _ → Q)
 ```
 
-### The functorial action of oracle reflections
+## Properties
+
+### Oracle reflections are unique
 
 ```agda
 module _
@@ -290,29 +292,23 @@ module _
   {X : UU l3}
   where
 
-  map-oracle-reflection :
+  implication-oracle-reflection :
     (l5 : Level) →
     (R : oracle-reflection l4 (l5 ⊔ l6) p X)
     (R' : oracle-reflection l6 l7 p X) →
     type-oracle-reflection p R → type-oracle-reflection p R'
-  map-oracle-reflection l5 R R' =
+  implication-oracle-reflection l5 R R' =
     map-inv-raise ∘
     ind-oracle-reflection p R
       ( λ _ → raise-Prop l5 (prop-oracle-reflection p R'))
       ( map-raise ∘ unit-oracle-reflection p R')
       ( λ a _ f* →
         map-raise (ask-oracle-reflection p R' a (map-inv-raise ∘ f*)))
-```
 
-## Properties
-
-### Oracle reflections are unique
-
-```agda
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} (p : A → Prop l2)
-  (X : UU l3)
+  {X : UU l3}
   where
 
   eq-prop-oracle-reflection :
@@ -321,8 +317,8 @@ module _
     prop-oracle-reflection p R ＝ prop-oracle-reflection p R'
   eq-prop-oracle-reflection {l5} R R' =
     eq-iff
-      ( map-oracle-reflection p l5 R R')
-      ( map-oracle-reflection p l5 R' R)
+      ( implication-oracle-reflection p l5 R R')
+      ( implication-oracle-reflection p l5 R' R)
 
   is-prop-oracle-reflection :
     (l5 : Level) → is-prop (oracle-reflection l4 (l4 ⊔ l5) p X)
