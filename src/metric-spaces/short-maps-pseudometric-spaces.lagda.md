@@ -40,13 +40,10 @@ open import metric-spaces.pseudometric-spaces
 A [map](metric-spaces.maps-pseudometric-spaces.md) `f` between two
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="map between pseudometric spaces" Agda=is-short-map-Pseudometric-Space WD="metric map" WDID=Q2713824}}
-if the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `A` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md)
-by `f` of the rational neighborhood relation on `B`. I.e., upper bounds on the
-distance between two points in `A` are upper bounds of the distance between
-their images in `B`.
+if it preserves
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+`x` and `y` in `A`, if `x` and `y` share an `ε`-neighborhood in `A` then `f x`
+and `f y` share an `ε`-neighborhood in `B`.
 
 ## Definitions
 
@@ -100,7 +97,7 @@ module _
 
   is-short-map-short-map-Pseudometric-Space :
     is-short-map-Pseudometric-Space A B
-      map-short-map-Pseudometric-Space
+      ( map-short-map-Pseudometric-Space)
   is-short-map-short-map-Pseudometric-Space = pr2 f
 ```
 
@@ -123,7 +120,7 @@ module _
     ( id-map-Pseudometric-Space A , is-short-map-id-map-Pseudometric-Space)
 ```
 
-### Equality of short maps between pseudometric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between pseudometric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _
@@ -140,9 +137,11 @@ module _
   equiv-eq-htpy-map-short-map-Pseudometric-Space :
     (f ＝ g) ≃ htpy-map-short-map-Pseudometric-Space
   equiv-eq-htpy-map-short-map-Pseudometric-Space =
-    equiv-funext ∘e
-    extensionality-type-subtype'
-      ( is-short-map-prop-Pseudometric-Space A B) f g
+    ( equiv-funext) ∘e
+    ( extensionality-type-subtype'
+      ( is-short-map-prop-Pseudometric-Space A B)
+      ( f)
+      ( g))
 
   eq-htpy-map-short-map-Pseudometric-Space :
     htpy-map-short-map-Pseudometric-Space → f ＝ g
@@ -198,36 +197,14 @@ module _
       ( id-short-map-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-short-map-Pseudometric-Space =
-    eq-htpy-map-short-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-short-map-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-short-map-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( λ x → refl)
+  left-unit-law-comp-short-map-Pseudometric-Space = refl
 
   right-unit-law-comp-short-map-Pseudometric-Space :
     ( comp-short-map-Pseudometric-Space A A B
       ( f)
       ( id-short-map-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-short-map-Pseudometric-Space =
-    eq-htpy-map-short-map-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-short-map-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-short-map-Pseudometric-Space A))
-      ( λ x → refl)
+  right-unit-law-comp-short-map-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of short maps between pseudometric spaces
@@ -328,13 +305,11 @@ module _
       ( short-map-isometry-Pseudometric-Space)
       ( is-emb-inclusion-subtype
         ( is-short-map-prop-Pseudometric-Space A B))
-      ( is-emb-htpy
-        ( λ f → refl)
-        ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B)))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
 
   emb-short-map-isometry-Pseudometric-Space :
     isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
   emb-short-map-isometry-Pseudometric-Space =
-    short-map-isometry-Pseudometric-Space ,
-    is-emb-short-map-isometry-Pseudometric-Space
+    ( short-map-isometry-Pseudometric-Space ,
+      is-emb-short-map-isometry-Pseudometric-Space)
 ```
