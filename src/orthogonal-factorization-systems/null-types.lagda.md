@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
+open import foundation.evaluation-functions
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -23,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.path-cosplit-maps
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
@@ -33,6 +35,7 @@ open import foundation.retractions
 open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.sections
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
@@ -287,35 +290,6 @@ module _
         by inv-distributive-Π-Σ)
 ```
 
-### Propositions are null at inhabited types
-
-```agda
-module _
-  {l1 l2 : Level} {Y : UU l1}
-  where
-
-  is-null-is-prop-is-inhabited' :
-    {P : UU l2} → Y → is-prop P → is-null Y P
-  is-null-is-prop-is-inhabited' {P} y is-prop-P =
-    is-equiv-has-converse-is-prop
-      ( is-prop-P)
-      ( is-prop-function-type is-prop-P)
-      ( λ f → f y)
-
-  is-null-is-prop-is-inhabited :
-    {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
-  is-null-is-prop-is-inhabited {P} is-inhabited-Y is-prop-P =
-    is-equiv-has-converse-is-prop
-      ( is-prop-P)
-      ( is-prop-function-type is-prop-P)
-      ( λ f → rec-trunc-Prop (P , is-prop-P) f is-inhabited-Y)
-
-  is-null-prop-is-inhabited :
-    is-inhabited Y → (P : Prop l2) → is-null Y (type-Prop P)
-  is-null-prop-is-inhabited is-inhabited-Y P =
-    is-null-is-prop-is-inhabited is-inhabited-Y (is-prop-type-Prop P)
-```
-
 ### Null types are closed under dependent products
 
 ```agda
@@ -394,6 +368,99 @@ module _
             {g = diagonal-exponential A Y y}) ∘e
         ( equiv-ap (diagonal-exponential A Y , is-null-A) x y))
       ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq x y Y)
+```
+
+### Propositions are null at inhabited types
+
+```agda
+module _
+  {l1 l2 : Level} {Y : UU l1}
+  where
+
+  is-null-is-prop-is-inhabited' :
+    {P : UU l2} → Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited' {P} y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → f y)
+
+  is-null-is-prop-is-inhabited :
+    {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited {P} is-inhabited-Y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → rec-trunc-Prop (P , is-prop-P) f is-inhabited-Y)
+
+  is-null-prop-is-inhabited :
+    is-inhabited Y → (P : Prop l2) → is-null Y (type-Prop P)
+  is-null-prop-is-inhabited is-inhabited-Y P =
+    is-null-is-prop-is-inhabited is-inhabited-Y (is-prop-type-Prop P)
+```
+
+### Null types are closed under path-cosplittings over inhabited exponents
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  is-null-path-cosplitting-has-element-exponent :
+    Y →
+    is-null Y A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-null Y B
+  is-null-path-cosplitting-has-element-exponent y is-null-A r =
+    is-equiv-is-invertible
+      ( ev y)
+      ( λ g →
+        eq-htpy
+          ( λ X →
+            pr1
+              ( is-path-cosplit-path-cosplit-map r
+                ( g y)
+                ( g X))
+              ( ( inv
+                  ( ap
+                    ( ev y)
+                    ( is-section-map-inv-is-equiv is-null-A
+                      ( map-path-cosplit-map r ∘ g)))) ∙
+                ( ap
+                  ( ev X)
+                  ( is-section-map-inv-is-equiv is-null-A
+                    ( map-path-cosplit-map r ∘ g))))))
+      ( refl-htpy)
+
+  is-null-path-cosplitting-is-inhabited-exponent :
+    is-inhabited Y →
+    is-null Y A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-null Y B
+  is-null-path-cosplitting-is-inhabited-exponent is-inhabited-Y is-null-A r =
+    rec-trunc-Prop
+      ( is-null-Prop Y B)
+      ( λ y → is-null-path-cosplitting-has-element-exponent y is-null-A r)
+      ( is-inhabited-Y)
+```
+
+### If propositions are `Y`-null, then `Y`-null types are closed under path-cosplittings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  is-null-path-cosplitting-is-null-prop :
+    ({P : UU l1} → is-prop P → is-null Y P) →
+    is-null Y A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-null Y B
+  is-null-path-cosplitting-is-null-prop is-null-prop-Y =
+    is-null-path-cosplitting-is-inhabited-exponent
+      ( map-inv-is-equiv
+        ( is-null-prop-Y (is-property-is-inhabited Y))
+        ( unit-trunc-Prop))
 ```
 
 ## See also
