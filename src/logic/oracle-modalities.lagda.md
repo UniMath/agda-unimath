@@ -98,30 +98,6 @@ module _
   rec-oracle-modality X = rec-oracle-reflection p (𝒪ₚ X)
 ```
 
-### Do syntax for oracle modalities
-
-```agda
-module do-syntax-oracle-modality
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l3 l4 l5 p)
-  (motive : Prop l5)
-  (let M = type-Prop motive)
-  where
-
-  _>>=_ :
-    {X : UU l3} →
-    type-oracle-modality p 𝒪ₚ X →
-    ((X → M) × ((a : A) → (type-Prop (p a) → M) → M)) →
-    M
-  _>>=_ {X} m (unit-motive , ask-motive) =
-    rec-oracle-modality p 𝒪ₚ X
-      ( motive)
-      ( unit-motive)
-      ( λ a _ → ask-motive a)
-      ( m)
-```
-
 ## Properties
 
 ### Oracle modalities are uniquely eliminating
