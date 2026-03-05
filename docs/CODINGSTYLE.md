@@ -356,6 +356,15 @@ agda-unimath adopts the convention that "by" is implied when ambiguous:
 This convention makes theorems such as `preserves-sim-left-mul-ℝ x` read as
 "left multiplication by `x` preserves similarity."
 
+Some cases are not such straightforward binary operators, however, such as the
+case of taking a
+[bilinear map](linear-algebra.bilinear-maps-left-modules-rings.md) and
+constructing the linear map formed by fixing the left or right argument. The
+standard agda-unimath idiom here is `ev-left` to refer to the operation of
+evaluating the binary function with its left argument fixed. So given a bilinear
+map `f : X → Y → Z`, `ev-left f x` refers to a linear map `Y → Z`, and
+`ev-right f y` refers to a linear map `X → Z`.
+
 ## Formatting: indentation, line breaks, and parentheses { #formatting }
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
