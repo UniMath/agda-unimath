@@ -1,4 +1,4 @@
-# Dependent products of associative algebras
+# Dependent products of associative algebras over commutative rings
 
 ```agda
 module commutative-algebra.dependent-products-associative-algebras-commutative-rings where
