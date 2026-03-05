@@ -40,6 +40,8 @@ Oracle modalities are considered in the impredicative setting in {{#cite AB26}}.
 
 ## Definitions
 
+### Oracle modalities
+
 ```agda
 module _
   {l1 l2 : Level}
@@ -50,8 +52,6 @@ module _
   oracle-modality : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
   oracle-modality = (X : UU l3) → oracle-reflection l4 l5 p X
 ```
-
-### Basic projection maps
 
 ```agda
 module _
