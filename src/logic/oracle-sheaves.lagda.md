@@ -662,6 +662,11 @@ module _
       p 𝒪ₚ irrefutable-p Q (double-negation-elim-is-decidable dQ)
 ```
 
+## See also
+
+- The type of [oracle stable propositions](logic.oracle-stable-propositions.md)
+  is an oracle sheaf.
+
 ## References
 
 {{#bibliography}}
