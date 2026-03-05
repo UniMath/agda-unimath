@@ -8,6 +8,7 @@ module logic.impredicative-encoding-oracle-modalities where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -101,23 +102,19 @@ module _
 
   ind-impredicative-oracle-modality :
     {l3 : Level} {X : UU l1} →
-    dependent-extension-property-oracle-reflection-Level
-      ( l3)
-      ( p)
-      ( X)
+    dependent-extension-property-oracle-reflection-Level l3 p X
       ( prop-impredicative-oracle-modality l3 p X)
       ( oracle-algebra-impredicative-oracle-modality l3 X)
-  ind-impredicative-oracle-modality
-    {l3} {X} Q η ask y =
+  ind-impredicative-oracle-modality {l3} {X} Q η ask y =
     y ( Q y)
       ( λ x →
         tr
-          ( λ z → type-Prop (Q z))
+          ( type-Prop ∘ Q)
           ( eq-type-Prop (prop-impredicative-oracle-modality l3 p X))
           ( η x))
       ( λ a f →
         tr
-          ( λ z → type-Prop (Q z))
+          ( type-Prop ∘ Q)
           ( eq-type-Prop (prop-impredicative-oracle-modality l3 p X))
           ( ask a (λ _ → y) f))
 
