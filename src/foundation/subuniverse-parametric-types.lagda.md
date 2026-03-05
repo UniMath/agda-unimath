@@ -10,7 +10,9 @@ module foundation.subuniverse-parametric-types where
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
 open import foundation.full-subuniverses
+open import foundation.inhabited-subuniverses
 open import foundation.parametric-types
+open import foundation.path-cosplit-maps
 open import foundation.propositional-extensionality
 open import foundation.retracts-of-types
 open import foundation.set-truncations
@@ -21,7 +23,10 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -131,6 +136,46 @@ module _
     is-subuniverse-parametric L X →
     is-subuniverse-parametric K X
   is-parametric-retract-subuniverse = is-null-retract-exponent
+```
+
+### Subuniverses parametric types are closed under embeddings if the subuniverse is inhabited
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (K : inhabited-subuniverse l2 l3) {X : UU l1} {Y : UU l4}
+  where abstract
+
+  is-subuniverse-parametric-emb :
+    Y ↪ X →
+    is-subuniverse-parametric (subuniverse-inhabited-subuniverse K) X →
+    is-subuniverse-parametric (subuniverse-inhabited-subuniverse K) Y
+  is-subuniverse-parametric-emb e is-subuniverse-parametric-X =
+    is-null-equiv-base
+      ( inv-equiv (equiv-total-fiber (map-emb e)))
+      ( is-null-Σ
+        ( is-subuniverse-parametric-X)
+        ( λ x →
+          is-null-is-prop-is-inhabited
+            ( is-inhabited-subuniverse-inhabited-subuniverse K)
+            ( is-prop-type-Prop (fiber-emb-Prop e x))))
+```
+
+### Subuniverses parametric types are closed under path-cosplittings if the subuniverse is inhabited
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (K : inhabited-subuniverse l2 l3) {A : UU l1} {B : UU l4}
+  where abstract
+
+  is-subuniverse-parametric-path-cosplitting :
+    is-subuniverse-parametric (subuniverse-inhabited-subuniverse K) A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-subuniverse-parametric (subuniverse-inhabited-subuniverse K) B
+  is-subuniverse-parametric-path-cosplitting =
+    is-null-path-cosplitting-is-inhabited-exponent
+      ( is-inhabited-subuniverse-inhabited-subuniverse K)
 ```
 
 ### Parametric types are parametric at propositions
