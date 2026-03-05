@@ -60,7 +60,8 @@ presented in three equivalent ways:
    [null](orthogonal-factorization-systems.null-types.md) at each `p a`.
 
 This file develops these three presentations, and shows that the collection of
-oracle stable propositions forms an [oracle sheaf](logic.oracle-sheaves.md).
+oracle stable propositions forms an [oracle sheaf](logic.oracle-sheaves.md),
+Corollary 4.3 {{#cite AB26}}.
 
 ## Definitions
 
@@ -520,3 +521,7 @@ module _
   oracle-sheaf-Oracle-Stable-Prop =
     ( Oracle-Stable-Prop p 𝒪ₚ , is-oracle-sheaf-Oracle-Stable-Prop)
 ```
+
+## References
+
+{{#bibliography}}
