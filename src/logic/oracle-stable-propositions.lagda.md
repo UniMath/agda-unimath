@@ -42,19 +42,10 @@ Given an oracle `p : A → Prop`, an
 presented in three equivalent ways:
 
 1. as a [proposition](foundation-core.propositions.md) `s` equipped with a map
+   `𝒪ₚ s → s` where `𝒪ₚ` is the [oracle modality](logic.oracle-modalities.md)
+   associated to `p`.
 
-   ```text
-     𝒪ₚ s → s
-   ```
-
-   where `𝒪ₚ` is the [oracle modality](logic.oracle-modalities.md) associated to
-   `p`.
-
-2. as a proposition `s` equipped with operations
-
-   ```text
-     (a : A) → (p a → s) → s
-   ```
+2. as a proposition `s` equipped with operations `(a : A) → (p a → s) → s`
 
 3. as a proposition `s` that is
    [null](orthogonal-factorization-systems.null-types.md) at each `p a`.
