@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -64,6 +65,16 @@ record Large-Commutative-Ring
     (l : Level) → type-Large-Commutative-Ring l
   raise-zero-Large-Commutative-Ring =
     raise-zero-Large-Ring large-ring-Large-Commutative-Ring
+
+  is-zero-prop-Large-Commutative-Ring :
+    {l : Level} → type-Large-Commutative-Ring l → Prop (β l lzero)
+  is-zero-prop-Large-Commutative-Ring =
+    is-zero-prop-Large-Ring large-ring-Large-Commutative-Ring
+
+  is-zero-Large-Commutative-Ring :
+    {l : Level} → type-Large-Commutative-Ring l → UU (β l lzero)
+  is-zero-Large-Commutative-Ring =
+    is-zero-Large-Ring large-ring-Large-Commutative-Ring
 
   sim-prop-Large-Commutative-Ring :
     Large-Relation-Prop β type-Large-Commutative-Ring
