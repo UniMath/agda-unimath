@@ -296,11 +296,11 @@ abstract
       ( is-de-morgan-type-prop-is-double-negation-sheaf-bool is-¬¬-sheaf-bool P)
       ( type-Prop Q)
 
-  De-Morgans-Law-Level-is-double-negation-sheaf-bool :
+  level-De-Morgans-Law-is-double-negation-sheaf-bool :
     {l : Level} →
     is-double-negation-sheaf l bool →
-    De-Morgans-Law-Level l l
-  De-Morgans-Law-Level-is-double-negation-sheaf-bool =
+    level-De-Morgans-Law l l
+  level-De-Morgans-Law-is-double-negation-sheaf-bool =
     de-morgans-law-is-double-negation-sheaf-bool
 ```
 
