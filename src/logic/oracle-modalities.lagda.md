@@ -171,6 +171,23 @@ module _
       is-uniquely-eliminating-modality-oracle-modality)
 ```
 
+### Lowering the universal property of oracle modalities
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (l5 l6 : Level)
+  {A : UU l1} (p : A → Prop l2)
+  (𝒪ₚ : oracle-modality l3 l4 (l5 ⊔ l6) p)
+  where
+
+  lower-oracle-modality :
+    oracle-modality l3 l4 l5 p
+  lower-oracle-modality X =
+    ( prop-oracle-modality p 𝒪ₚ X ,
+      oracle-algebra-oracle-modality p 𝒪ₚ X ,
+      ind-lower-oracle-reflection l5 l6 p (𝒪ₚ X))
+```
+
 ## See also
 
 - [The impredicative encoding of oracle modalities](logic.impredicative-encoding-oracle-modalities.md)
