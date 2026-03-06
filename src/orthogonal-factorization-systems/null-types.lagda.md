@@ -263,30 +263,15 @@ is-null-is-contr-exponent A is-contr-Y =
   is-equiv-diagonal-exponential-is-contr is-contr-Y A
 ```
 
-### Null types are closed under dependent sums
-
-This is Theorem 2.19 in {{#cite RSS20}}.
+### Propositions are null if the diagonal has a converse map
 
 ```agda
-module _
-  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3}
-  (is-null-A : is-null Y A)
-  (is-null-B : (x : A) → is-null Y (B x))
-  where
-
-  is-null-Σ : is-null Y (Σ A B)
-  is-null-Σ =
-    is-equiv-map-equiv
-      ( equivalence-reasoning
-        Σ A B
-        ≃ Σ (Y → A) (λ f → (x : Y) → B (f x))
-        by
-          equiv-Σ
-            ( λ f → (x : Y) → B (f x))
-            ( diagonal-exponential A Y , is-null-A)
-            ( λ x → diagonal-exponential (B x) Y , is-null-B x)
-        ≃ (Y → Σ A B)
-        by inv-distributive-Π-Σ)
+is-null-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop A → ((B → A) → A) → is-null B A
+is-null-is-prop {A = A} {B} is-prop-A f =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-prop (terminal-map B) A is-prop-A (λ g _ → f g))
 ```
 
 ### Propositions are null at inhabited types
@@ -316,6 +301,32 @@ module _
     is-inhabited Y → (P : Prop l2) → is-null Y (type-Prop P)
   is-null-prop-is-inhabited is-inhabited-Y P =
     is-null-is-prop-is-inhabited is-inhabited-Y (is-prop-type-Prop P)
+```
+
+### Null types are closed under dependent sums
+
+This is Theorem 2.19 in {{#cite RSS20}}.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3}
+  (is-null-A : is-null Y A)
+  (is-null-B : (x : A) → is-null Y (B x))
+  where
+
+  is-null-Σ : is-null Y (Σ A B)
+  is-null-Σ =
+    is-equiv-map-equiv
+      ( equivalence-reasoning
+        Σ A B
+        ≃ Σ (Y → A) (λ f → (x : Y) → B (f x))
+        by
+          equiv-Σ
+            ( λ f → (x : Y) → B (f x))
+            ( diagonal-exponential A Y , is-null-A)
+            ( λ x → diagonal-exponential (B x) Y , is-null-B x)
+        ≃ (Y → Σ A B)
+        by inv-distributive-Π-Σ)
 ```
 
 ### Null types are closed under dependent products
