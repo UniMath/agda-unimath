@@ -30,7 +30,7 @@ Given an oracle `p`, i.e., a predicate `p : A → Prop`, the
 ```
 
 We show this operator forms an appropriately large
-[oracle modality](logic.oracle-modalities.md). The operator is _impredicative_
+[oracle modality](logic.oracle-modalities.md). The operator is "impredicative"
 in the sense that it produces a large proposition which only has a universal
 property with respect to small propositions.
 
