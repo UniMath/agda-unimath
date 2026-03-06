@@ -12,6 +12,7 @@ open import foundation-core.fibers-of-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -180,6 +181,16 @@ module _
   inv-compute-tr-self-fiber' :
     {y : B} (u : fiber' f y) → tr (fiber' f) (pr2 u) u ＝ (pr1 u , refl)
   inv-compute-tr-self-fiber' u = inv (compute-tr-self-fiber' u)
+
+  compute-ap-map-equiv-total-fiber'-eq-pair-Σ-inv-compute-tr-self-fiber' :
+    {y : B} (u : fiber' f y) →
+    ap
+      ( map-equiv-total-fiber' f)
+      ( eq-pair-Σ (pr2 u) (inv (compute-tr-self-fiber' u))) ＝
+    refl
+  compute-ap-map-equiv-total-fiber'-eq-pair-Σ-inv-compute-tr-self-fiber'
+    (._ , refl) =
+    refl
 ```
 
 ## Table of files about fibers of maps
