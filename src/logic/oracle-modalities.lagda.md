@@ -40,6 +40,8 @@ Oracle modalities are considered in the impredicative setting in {{#cite AB26}}.
 
 ## Definitions
 
+### Oracle modalities
+
 ```agda
 module _
   {l1 l2 : Level}
@@ -50,8 +52,6 @@ module _
   oracle-modality : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
   oracle-modality = (X : UU l3) → oracle-reflection l4 l5 p X
 ```
-
-### Basic projection maps
 
 ```agda
 module _
@@ -96,46 +96,6 @@ module _
       ( prop-oracle-modality X)
       ( oracle-algebra-oracle-modality X)
   rec-oracle-modality X = rec-oracle-reflection p (𝒪ₚ X)
-```
-
-### Oracles are dense at their own oracle modalities
-
-```agda
-module _
-  {l1 l2 l4 l5 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l2 l4 l5 p)
-  where
-
-  is-dense-self-oracle-modality :
-    (a : A) → type-oracle-modality p 𝒪ₚ (type-Prop (p a))
-  is-dense-self-oracle-modality a =
-    ask-oracle-modality p 𝒪ₚ (type-Prop (p a)) a
-      ( unit-oracle-modality p 𝒪ₚ (type-Prop (p a)))
-```
-
-### Do syntax for oracle modalities
-
-```agda
-module do-syntax-oracle-modality
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l3 l4 l5 p)
-  (motive : Prop l5)
-  (let M = type-Prop motive)
-  where
-
-  _>>=_ :
-    {X : UU l3} →
-    type-oracle-modality p 𝒪ₚ X →
-    ((X → M) × ((a : A) → (type-Prop (p a) → M) → M)) →
-    M
-  _>>=_ {X} m (unit-motive , ask-motive) =
-    rec-oracle-modality p 𝒪ₚ X
-      ( motive)
-      ( unit-motive)
-      ( λ a _ → ask-motive a)
-      ( m)
 ```
 
 ## Properties
