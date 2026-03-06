@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.double-negation-sheaves where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-modality
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
 open import foundation.irrefutable-propositions
@@ -22,6 +23,8 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
+
+open import logic.oracle-sheaves
 
 open import orthogonal-factorization-systems.null-types
 ```
@@ -56,7 +59,52 @@ is-prop-is-double-negation-sheaf {A = A} =
   is-prop-Π (λ P → is-prop-is-null (type-Irrefutable-Prop P) A)
 ```
 
+### The property of being an excluded middle sheaf
+
+```agda
+is-excluded-middle-sheaf :
+  (l1 : Level) {l2 : Level} (A : UU l2) → UU (lsuc l1 ⊔ l2)
+is-excluded-middle-sheaf l1 {l2} =
+  is-oracle-sheaf
+    ( excluded-middle-oracle)
+    ( excluded-middle-oracle-modality l1 (l1 ⊔ l2))
+
+is-prop-is-excluded-middle-sheaf :
+  {l1 l2 : Level} {A : UU l2} → is-prop (is-excluded-middle-sheaf l1 A)
+is-prop-is-excluded-middle-sheaf {l1} {l2} {A} =
+  is-prop-is-oracle-sheaf
+    ( excluded-middle-oracle {l1 ⊔ l2})
+    ( excluded-middle-oracle-modality l1 (l1 ⊔ l2))
+    ( A)
+```
+
 ## Properties
+
+### Double negation sheaves and excluded middle sheaves coincide
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  is-double-negation-sheaf-is-excluded-middle-sheaf :
+    is-excluded-middle-sheaf l2 A →
+    is-double-negation-sheaf l2 A
+  is-double-negation-sheaf-is-excluded-middle-sheaf H P =
+    H (prop-Irrefutable-Prop P) (is-irrefutable-Irrefutable-Prop P)
+
+  is-excluded-middle-sheaf-is-double-negation-sheaf :
+    is-double-negation-sheaf l2 A →
+    is-excluded-middle-sheaf l2 A
+  is-excluded-middle-sheaf-is-double-negation-sheaf H s t =
+    H (make-Irrefutable-Prop s t)
+
+  iff-is-double-negation-sheaf-is-excluded-middle-sheaf :
+    is-excluded-middle-sheaf l2 A ↔ is-double-negation-sheaf l2 A
+  iff-is-double-negation-sheaf-is-excluded-middle-sheaf =
+    ( is-double-negation-sheaf-is-excluded-middle-sheaf ,
+      is-excluded-middle-sheaf-is-double-negation-sheaf)
+```
 
 ### The empty type is a double negation sheaf
 
