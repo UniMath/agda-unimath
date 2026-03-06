@@ -23,7 +23,7 @@ open import logic.oracle-modalities
 
 An {{#concept "irrefutable oracle modality" Agda=irrefutable-oracle-modality}}
 is an [oracle modality](logic.oracle-modalities.md) for an
-[irrefutable](logic.irrefutable-propositions.md) oracle
+[irrefutable](foundation.irrefutable-propositions.md) oracle
 `p : A → Irrefutable-Prop`, i.e., a family of
 [propositions](foundation-core.propositions.md) such that for each `a : A`, the
 [double negation](foundation.double-negation.md) of `p a` holds.
