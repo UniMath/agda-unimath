@@ -19,7 +19,7 @@ open import orthogonal-factorization-systems.connected-types-at-subuniverses pub
 open import orthogonal-factorization-systems.continuation-modalities public
 open import orthogonal-factorization-systems.coproducts-null-types public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
-open import orthogonal-factorization-systems.double-negation-sheaves public
+open import logic.double-negation-sheaves public
 open import orthogonal-factorization-systems.equality-extensions-dependent-maps public
 open import orthogonal-factorization-systems.equality-extensions-maps public
 open import orthogonal-factorization-systems.equivalences-at-subuniverses public

@@ -184,4 +184,4 @@ excluded-middle-oracle-modality l1 l2 X =
 
 ## See also
 
-- [Double negation sheaves](orthogonal-factorization-systems.double-negation-sheaves.md)
+- [Double negation sheaves](logic.double-negation-sheaves.md)

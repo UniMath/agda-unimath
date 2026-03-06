@@ -1,7 +1,7 @@
 # Double negation sheaves
 
 ```agda
-module orthogonal-factorization-systems.double-negation-sheaves where
+module logic.double-negation-sheaves where
 ```
 
 <details><summary>Imports</summary>
