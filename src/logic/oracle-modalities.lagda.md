@@ -215,7 +215,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
+  {l1 l2 l3 l4 : Level} (l5 l6 : Level)
   {A : UU l1} (p : A → Prop l2)
   (𝒪ₚ : oracle-modality l3 l4 (l5 ⊔ l6) p)
   where
