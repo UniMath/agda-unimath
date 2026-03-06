@@ -27,6 +27,7 @@ open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
@@ -91,6 +92,19 @@ module _
       ( pseudometric-space-Complete-Metric-Space A)
       ( short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space)
 
+  is-short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    is-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space)
+  is-short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    is-short-map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space A))
+      ( pseudometric-space-Complete-Metric-Space A)
+      ( short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space)
+
   is-limit-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
     ( u :
       cauchy-approximation-Metric-Space
@@ -128,27 +142,13 @@ module _
   {l1 l2 : Level} (M : Complete-Metric-Space l1 l2)
   where abstract
 
-  reflects-neighborhoods-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
-    ( δ : ℚ⁺) →
-    ( u v :
-      cauchy-approximation-Metric-Space
-        ( metric-space-Complete-Metric-Space M)) →
-    neighborhood-Metric-Space
-      ( metric-space-Complete-Metric-Space M)
-      ( δ)
-      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space
-        ( M)
-        ( u))
-      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space
-        ( M)
-        ( v)) →
-    neighborhood-Pseudometric-Space
+  is-expansive-map-lim-cauchy-pseudocompletion-Complete-Metric-Space :
+    is-expansive-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
         ( metric-space-Complete-Metric-Space M))
-      ( δ)
-      ( u)
-      ( v)
-  reflects-neighborhoods-map-lim-cauchy-pseudocompletion-Complete-Metric-Space
+      ( pseudometric-space-Complete-Metric-Space M)
+      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
+  is-expansive-map-lim-cauchy-pseudocompletion-Complete-Metric-Space
     δ x y Nδ =
     reflects-neighborhoods-sim-Pseudometric-Space
       ( cauchy-pseudocompletion-Metric-Space
@@ -194,18 +194,8 @@ module _
       ( pseudometric-space-Complete-Metric-Space M)
       ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
   is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y =
-    ( ( is-short-map-short-map-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space
-          ( metric-space-Complete-Metric-Space M))
-        ( pseudometric-space-Complete-Metric-Space M)
-        ( short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
-        ( d)
-        ( x)
-        ( y)) ,
-      ( reflects-neighborhoods-map-lim-cauchy-pseudocompletion-Complete-Metric-Space
-        ( d)
-        ( x)
-        ( y)))
+    ( is-short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space M d x y ,
+      is-expansive-map-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y)
 
 module _
   {l1 l2 : Level} (M : Complete-Metric-Space l1 l2)
