@@ -17,8 +17,11 @@ open import commutative-algebra.commutative-semirings public
 open import commutative-algebra.convolution-sequences-commutative-rings public
 open import commutative-algebra.convolution-sequences-commutative-semirings public
 open import commutative-algebra.dependent-products-algebras-commutative-rings public
+open import commutative-algebra.dependent-products-associative-algebras-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-rings public
 open import commutative-algebra.dependent-products-commutative-semirings public
+open import commutative-algebra.dependent-products-unital-algebras-commutative-rings public
+open import commutative-algebra.dependent-products-unital-associative-algebras-commutative-rings public
 open import commutative-algebra.discrete-fields public
 open import commutative-algebra.euclidean-domains public
 open import commutative-algebra.formal-power-series-commutative-rings public
