@@ -150,34 +150,22 @@ module _
 
 ### Double negation stable propositions are double negation sheaves
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l2}
-  (is-prop-A : is-prop A)
-  (is-¬¬-stable-A : is-double-negation-stable (A , is-prop-A))
-  where
+This follows from the fact that a proposition `P` is double negation stable if
+and only if it is local at all double negations
 
-  is-double-negation-sheaf-is-double-negation-stable-is-prop :
-    is-double-negation-sheaf l1 A
-  is-double-negation-sheaf-is-double-negation-stable-is-prop P =
-    is-equiv-has-converse-is-prop
-      ( is-prop-A)
-      ( is-prop-function-type is-prop-A)
-      ( λ f →
-        is-¬¬-stable-A
-          ( λ na → is-irrefutable-Irrefutable-Prop P (λ p → na (f p))))
+```text
+  (¬¬A → P) → (A → P),
 ```
+
+and nullification at irrefutable propositions is a restriction of this.
+
+> This remains to be formalized.
 
 ### The negation of a type is a double negation sheaf
 
-```agda
-is-double-negation-sheaf-neg :
-  {l1 l2 : Level} {A : UU l2} → is-double-negation-sheaf l1 (¬ A)
-is-double-negation-sheaf-neg =
-  is-double-negation-sheaf-is-double-negation-stable-is-prop
-    ( is-prop-neg)
-    ( elim-triple-negation)
-```
+This is a corollary of the previous result.
+
+> This remains to be formalized.
 
 ## References
 

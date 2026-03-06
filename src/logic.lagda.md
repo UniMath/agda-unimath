@@ -33,6 +33,7 @@ open import logic.markovs-principle public
 open import logic.oracle-modalities public
 open import logic.oracle-reflections public
 open import logic.oracle-sheaves public
+open import logic.oracle-stable-propositions public
 open import logic.propositional-double-negation-elimination public
 open import logic.propositionally-decidable-maps public
 open import logic.propositionally-decidable-types public

@@ -575,6 +575,11 @@ module _
         ( is-oracle-sheaf-type-oracle-sheaf p 𝒪ₚ Y))
 ```
 
+## See also
+
+- The type of [oracle stable propositions](logic.oracle-stable-propositions.md)
+  is an oracle sheaf.
+
 ## References
 
 {{#bibliography}}
