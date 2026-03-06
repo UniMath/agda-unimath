@@ -7,12 +7,17 @@ module orthogonal-factorization-systems.double-negation-sheaves where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.booleans
 open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-modality
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
+open import foundation.function-extensionality
+open import foundation.functoriality-coproduct-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -22,8 +27,11 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.identity-types
 open import foundation-core.propositions
 
+open import logic.de-morgan-types
+open import logic.de-morgans-law
 open import logic.oracle-sheaves
 
 open import orthogonal-factorization-systems.null-types
@@ -146,6 +154,82 @@ module _
     is-double-negation-stable (A , is-prop-A)
   is-double-negation-stable-is-double-negation-sheaf-is-prop ¬¬a =
     map-inv-is-equiv (is-¬¬-sheaf-A (A , is-prop-A , ¬¬a)) id
+```
+
+### If the booleans are a double negation sheaf, then propositions are De Morgan
+
+```agda
+module _
+  {l : Level}
+  (is-¬¬-sheaf-bool : is-double-negation-sheaf l bool)
+  (P : Prop l)
+  where
+
+  point-decision-bool-is-double-negation-sheaf-bool : bool
+  point-decision-bool-is-double-negation-sheaf-bool =
+    map-inv-is-equiv
+      ( is-¬¬-sheaf-bool (is-decidable-prop-Irrefutable-Prop P))
+      ( bool-Decidable-Prop ∘ make-Decidable-Prop P)
+
+  compute-point-decision-bool-is-double-negation-sheaf-bool :
+    (d : is-decidable-type-Prop P) →
+    point-decision-bool-is-double-negation-sheaf-bool ＝
+    bool-Decidable-Prop (make-Decidable-Prop P d)
+  compute-point-decision-bool-is-double-negation-sheaf-bool =
+    htpy-eq
+      ( is-section-map-inv-is-equiv
+        ( is-¬¬-sheaf-bool (is-decidable-prop-Irrefutable-Prop P))
+        ( bool-Decidable-Prop ∘ make-Decidable-Prop P))
+
+  abstract
+    is-not-type-Prop-is-false-point-decision-bool-is-double-negation-sheaf-bool :
+      point-decision-bool-is-double-negation-sheaf-bool ＝ false →
+      ¬ (type-Prop P)
+    is-not-type-Prop-is-false-point-decision-bool-is-double-negation-sheaf-bool
+      p=false p =
+      neq-false-true-bool
+        ( ( inv p=false) ∙
+          ( compute-point-decision-bool-is-double-negation-sheaf-bool (inl p)))
+
+    is-double-negation-type-Prop-is-not-false-point-decision-bool-is-double-negation-sheaf-bool :
+      ¬ (point-decision-bool-is-double-negation-sheaf-bool ＝ false) →
+      ¬¬ (type-Prop P)
+    is-double-negation-type-Prop-is-not-false-point-decision-bool-is-double-negation-sheaf-bool
+      p≠false np =
+      p≠false
+        ( compute-point-decision-bool-is-double-negation-sheaf-bool (inr np))
+
+    is-de-morgan-type-prop-is-double-negation-sheaf-bool :
+      is-de-morgan (type-Prop P)
+    is-de-morgan-type-prop-is-double-negation-sheaf-bool =
+      map-coproduct
+        ( is-not-type-Prop-is-false-point-decision-bool-is-double-negation-sheaf-bool)
+        ( is-double-negation-type-Prop-is-not-false-point-decision-bool-is-double-negation-sheaf-bool)
+        ( has-decidable-equality-bool
+          ( point-decision-bool-is-double-negation-sheaf-bool)
+          ( false))
+```
+
+### If the booleans are a double negation sheaf, then De Morgan's law holds
+
+```agda
+abstract
+  de-morgans-law-is-double-negation-sheaf-bool :
+    {l1 l2 : Level} →
+    is-double-negation-sheaf l1 bool →
+    (P : Prop l1) (Q : Prop l2) →
+    de-morgans-law P Q
+  de-morgans-law-is-double-negation-sheaf-bool is-¬¬-sheaf-bool P Q =
+    satisfies-de-morgans-law-is-de-morgan
+      ( is-de-morgan-type-prop-is-double-negation-sheaf-bool is-¬¬-sheaf-bool P)
+      ( type-Prop Q)
+
+  De-Morgans-Law-Level-is-double-negation-sheaf-bool :
+    {l : Level} →
+    is-double-negation-sheaf l bool →
+    De-Morgans-Law-Level l l
+  De-Morgans-Law-Level-is-double-negation-sheaf-bool =
+    de-morgans-law-is-double-negation-sheaf-bool
 ```
 
 ## References
