@@ -12,8 +12,10 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
+open import foundation.evaluation-functions
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -33,6 +35,8 @@ open import foundation.retractions
 open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.sections
+open import foundation.standard-pullbacks
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
@@ -250,6 +254,15 @@ is-null-is-contr {A = A} B is-contr-A =
     ( is-local-is-contr (terminal-map B) A is-contr-A)
 ```
 
+### All types are null at contractible types
+
+```agda
+is-null-is-contr-exponent :
+  {l1 l2 : Level} {Y : UU l1} (A : UU l2) → is-contr Y → is-null Y A
+is-null-is-contr-exponent A is-contr-Y =
+  is-equiv-diagonal-exponential-is-contr is-contr-Y A
+```
+
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
@@ -289,7 +302,7 @@ module _
     is-equiv-has-converse-is-prop
       ( is-prop-P)
       ( is-prop-function-type is-prop-P)
-      ( λ f → f y)
+      ( ev y)
 
   is-null-is-prop-is-inhabited :
     {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
@@ -351,21 +364,7 @@ module _
   abstract
     is-null-product : is-null Y A → is-null Y B → is-null Y (A × B)
     is-null-product is-null-A is-null-B =
-      is-null-is-orthogonal-terminal-maps
-        ( is-orthogonal-right-comp
-          ( terminal-map Y)
-          ( map-product (terminal-map A) (terminal-map B))
-          ( terminal-map (unit × unit))
-          ( is-orthogonal-is-equiv-right
-            ( terminal-map Y)
-            ( terminal-map (unit × unit))
-            ( is-equiv-map-right-unit-law-product))
-          ( is-orthogonal-right-product
-            ( terminal-map Y)
-            ( terminal-map A)
-            ( terminal-map B)
-            ( is-orthogonal-terminal-maps-is-null is-null-A)
-            ( is-orthogonal-terminal-maps-is-null is-null-B)))
+      is-null-Σ is-null-A (λ _ → is-null-B)
 ```
 
 ### Null types are closed under identity types
@@ -383,6 +382,47 @@ module _
             {g = diagonal-exponential A Y y}) ∘e
         ( equiv-ap (diagonal-exponential A Y , is-null-A) x y))
       ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq x y Y)
+```
+
+### Null types are closed under standard pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {Y : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  (f : A → X) (g : B → X)
+  where
+
+  is-null-standard-pullback :
+    is-null Y A → is-null Y B → is-null Y X →
+    is-null Y (standard-pullback f g)
+  is-null-standard-pullback is-null-A is-null-B is-null-X =
+    is-null-Σ
+      ( is-null-A)
+      ( λ a →
+        is-null-Σ
+          ( is-null-B)
+          ( λ b → is-null-Id is-null-X (f a) (g b)))
+```
+
+### Null types are closed under fibers
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {Y : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → B) (b : B)
+  where
+
+  is-null-fiber :
+    is-null Y A → is-null Y B → is-null Y (fiber f b)
+  is-null-fiber is-null-A is-null-B =
+    is-null-Σ is-null-A (λ a → is-null-Id is-null-B (f a) b)
+
+  is-null-fiber' :
+    is-null Y A → is-null Y B → is-null Y (fiber' f b)
+  is-null-fiber' is-null-A is-null-B =
+    is-null-Σ is-null-A (λ a → is-null-Id is-null-B b (f a))
 ```
 
 ## See also
