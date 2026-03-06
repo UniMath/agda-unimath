@@ -180,7 +180,7 @@ abstract
       ( is-torsorial-iff (raise-empty-Prop l1))
 ```
 
-### The propositions are a retract of the universe
+### The subuniverse of propositions is a retract of the universe
 
 ```agda
 is-retraction-trunc-Prop :
