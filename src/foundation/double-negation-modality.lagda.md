@@ -96,6 +96,8 @@ large-lawvere-tierney-topology-double-negation =
 
 ### Double negation is the excluded middle oracle modality
 
+This appears as Example 3.8 in {{#cite AB26}}.
+
 ```agda
 excluded-middle-oracle :
   {l : Level} → Prop l → Prop l

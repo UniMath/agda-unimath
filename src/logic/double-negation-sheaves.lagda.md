@@ -7,20 +7,24 @@ module logic.double-negation-sheaves where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.double-negation
 open import foundation.double-negation-modality
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
@@ -154,6 +158,74 @@ module _
     is-double-negation-stable (A , is-prop-A)
   is-double-negation-stable-is-double-negation-sheaf-is-prop ¬¬a =
     map-inv-is-equiv (is-¬¬-sheaf-A (A , is-prop-A , ¬¬a)) id
+```
+
+### The type of double negation stable propositions is a double negation sheaf
+
+```agda
+module _
+  {l : Level}
+  where
+
+  map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop :
+    (P : Irrefutable-Prop l) →
+    (type-Irrefutable-Prop P → Double-Negation-Stable-Prop l) →
+    Double-Negation-Stable-Prop l
+  map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop P =
+    Π-Double-Negation-Stable-Prop (type-Irrefutable-Prop P)
+
+  compute-map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop :
+    (P : Irrefutable-Prop l) →
+    (h : type-Irrefutable-Prop P → Double-Negation-Stable-Prop l) →
+    (u : type-Irrefutable-Prop P) →
+    map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+      P h ＝
+    h u
+  compute-map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+    P h u =
+    eq-iff-Double-Negation-Stable-Prop
+      ( map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+        ( P)
+        ( h))
+      ( h u)
+      ( ev u)
+      ( λ x v →
+        tr
+          ( type-Double-Negation-Stable-Prop)
+          ( ap h (eq-type-Prop (prop-Irrefutable-Prop P)))
+          ( x))
+
+  map-inv-diagonal-type-Double-Negation-Stable-Prop :
+    (P : Irrefutable-Prop l) →
+    (Q : Double-Negation-Stable-Prop l) →
+    ( type-Irrefutable-Prop P → type-Double-Negation-Stable-Prop Q) →
+    type-Double-Negation-Stable-Prop Q
+  map-inv-diagonal-type-Double-Negation-Stable-Prop P Q h =
+    has-double-negation-elim-type-Double-Negation-Stable-Prop Q
+      ( λ nQ → is-irrefutable-Irrefutable-Prop P (nQ ∘ h))
+
+  is-double-negation-sheaf-Double-Negation-Stable-Prop :
+    is-double-negation-sheaf l (Double-Negation-Stable-Prop l)
+  is-double-negation-sheaf-Double-Negation-Stable-Prop P =
+    is-equiv-is-invertible
+      ( map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+        ( P))
+      ( eq-htpy ∘
+        compute-map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+          ( P))
+      ( λ Q →
+        eq-iff-Double-Negation-Stable-Prop
+          ( map-inv-diagonal-exponential-irrefutable-prop-Double-Negation-Stable-Prop
+            ( P)
+            ( diagonal-exponential
+              ( Double-Negation-Stable-Prop l)
+              ( type-Irrefutable-Prop P)
+              ( Q)))
+          ( Q)
+          ( map-inv-diagonal-type-Double-Negation-Stable-Prop P Q)
+          ( diagonal-exponential
+            ( type-Double-Negation-Stable-Prop Q)
+            ( type-Irrefutable-Prop P)))
 ```
 
 ### If the booleans are a double negation sheaf, then propositions are De Morgan
