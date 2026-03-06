@@ -148,25 +148,6 @@ module _
     map-inv-is-equiv (is-¬¬-sheaf-A (A , is-prop-A , ¬¬a)) id
 ```
 
-### Double negation stable propositions are double negation sheaves
-
-This follows from the fact that a proposition `P` is double negation stable if
-and only if it is local at all double negations
-
-```text
-  (¬¬A → P) → (A → P),
-```
-
-and nullification at irrefutable propositions is a restriction of this.
-
-> This remains to be formalized.
-
-### The negation of a type is a double negation sheaf
-
-This is a corollary of the previous result.
-
-> This remains to be formalized.
-
 ## References
 
 {{#bibliography}}
