@@ -291,7 +291,7 @@ double-negation-Double-Negation-Stable-Prop P =
   neg-Double-Negation-Stable-Prop (neg-Double-Negation-Stable-Prop P)
 ```
 
-### Double negation stable propositions are a retract of propositions
+### The subuniverse of double negation stable propositions is a retract of the universe of propositions
 
 ```agda
 double-negation-stable-prop-Prop :
@@ -319,7 +319,10 @@ retract-Double-Negation-Stable-Prop-Prop =
     is-retraction-double-negation-stable-prop-Prop)
 ```
 
-### Double negation stable propositions are a retract of the universe
+### The subuniverse of double negation stable propositions is a retract of the universe of types
+
+This is formalized independently of the previous section and does not depend on
+the existence of propositional truncations.
 
 ```agda
 is-retraction-double-negation-type-Double-Negation-Stable-Prop :
