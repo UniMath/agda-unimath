@@ -60,7 +60,7 @@ to short maps `g ∘ κ : P → M`. For any
 [converges](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) to
 `g u` so `g` is determined by its restriction to `P`.
 
-Conversely, a short map `f : P → M`, extends along `κ`, i.e. there exists a
+Conversely, a short map `f : P → M`, extends along `κ`, i.e., there exists a
 short map `g : C P → M` such that
 
 ```text
