@@ -20,6 +20,7 @@ open import logic.double-negation-dense-maps public
 open import logic.double-negation-dense-subtypes public
 open import logic.double-negation-eliminating-maps public
 open import logic.double-negation-elimination public
+open import logic.double-negation-sheaves public
 open import logic.double-negation-stable-embeddings public
 open import logic.double-negation-stable-subtypes public
 open import logic.functoriality-existential-quantification public
