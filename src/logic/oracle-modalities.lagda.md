@@ -100,6 +100,22 @@ module _
 
 ## Properties
 
+### Oracles are dense at their own oracle modalities
+
+```agda
+module _
+  {l1 l2 l4 l5 : Level}
+  {A : UU l1} (p : A → Prop l2)
+  (𝒪ₚ : oracle-modality l2 l4 l5 p)
+  where
+
+  is-dense-self-oracle-modality :
+    (a : A) → type-oracle-modality p 𝒪ₚ (type-Prop (p a))
+  is-dense-self-oracle-modality a =
+    ask-oracle-modality p 𝒪ₚ (type-Prop (p a)) a
+      ( unit-oracle-modality p 𝒪ₚ (type-Prop (p a)))
+```
+
 ### Oracle modalities are uniquely eliminating
 
 ```agda
