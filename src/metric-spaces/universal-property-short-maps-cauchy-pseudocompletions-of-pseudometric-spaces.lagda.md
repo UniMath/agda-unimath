@@ -75,7 +75,7 @@ from `P` to `M`. The type of short maps from the Cauchy pseudocompletion `C P`
 of a pseudometric space `P` to a metric space `M` is equivalent to the type of
 **precomplete short maps** from `P` to `M`.
 
-Equivalently, the Cauchy pseudocompletion satisfies satisfies the
+Equivalently, the Cauchy pseudocompletion satisfies the
 {{#concept "universal property" Disambiguation="of Cauchy pseudocompletions and precomplete short maps" Agda=is-contr-extension-precomplete-short-map-Pseudometric-Space}}
 of Cauchy precompletions and precomplete short maps: for any precomplete short
 map `f : P → M` from a pseudometric space in a metric space, there
