@@ -16,6 +16,8 @@ open import foundation.parametricity-booleans
 open import foundation.universe-levels
 
 open import foundation-core.negation
+
+open import logic.de-morgans-law
 ```
 
 </details>
@@ -50,15 +52,30 @@ Parametricity = {l : Level} → level-Parametricity l
 
 ## Consequences
 
-### Parametricity contradicts excluded middle
+### Parametricity contradicts De Morgan's law
+
+```agda
+abstract
+  no-de-morgans-law-level-Parametricity :
+    {l : Level} → level-Parametricity l → ¬ level-De-Morgans-Law l l
+  no-de-morgans-law-level-Parametricity {l} H =
+    no-de-morgans-law-is-parametric-bool
+      ( is-parametric-equiv (compute-raise-bool l) H)
+
+  no-de-morgans-law-Parametricity :
+    Parametricity → De-Morgans-Law → empty
+  no-de-morgans-law-Parametricity H dm =
+    no-de-morgans-law-level-Parametricity {lzero} H dm
+```
+
+### Parametricity contradicts the law of excluded middle
 
 ```agda
 abstract
   no-LEM-level-Parametricity :
     {l : Level} → level-Parametricity l → ¬ level-LEM l
   no-LEM-level-Parametricity {l} H =
-    no-LEM-is-parametric-bool
-      ( is-parametric-equiv (compute-raise-bool l) (H {X = raise-bool l}))
+    no-LEM-is-parametric-bool (is-parametric-equiv (compute-raise-bool l) H)
 
   no-LEM-Parametricity : Parametricity → LEM → empty
   no-LEM-Parametricity H lem = no-LEM-level-Parametricity {lzero} H lem
@@ -72,12 +89,12 @@ abstract
     {l : Level} → level-Parametricity l → ¬ level-AC0 l l
   no-AC0-level-Parametricity {l} H =
     no-AC0-is-parametric-bool
-      ( is-parametric-equiv (compute-raise-bool l) (H {X = raise-bool l}))
+      ( is-parametric-equiv (compute-raise-bool l) H)
 
   no-AC0-Parametricity :
     Parametricity → AC0 → empty
   no-AC0-Parametricity H ac =
-    no-AC0-level-Parametricity (H {l = lzero}) (ac {l1 = lzero} {l2 = lzero})
+    no-AC0-level-Parametricity H (ac {l1 = lzero})
 ```
 
 ## References
