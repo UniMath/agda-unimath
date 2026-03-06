@@ -170,8 +170,8 @@ large-equivalence-relation-sim-ℝ =
     ( λ _ _ → symmetric-sim-ℝ)
     ( transitive-sim-ℝ)
 
-large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
-large-similarity-relation-sim-ℝ =
+large-similarity-relation-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
     ( λ _ _ → eq-sim-ℝ)
@@ -184,7 +184,7 @@ abstract
   is-locally-small-ℝ : (l : Level) → is-locally-small l (ℝ l)
   is-locally-small-ℝ =
     is-locally-small-type-Large-Similarity-Relation
-      ( large-similarity-relation-sim-ℝ)
+      ( large-similarity-relation-ℝ)
 ```
 
 ### Similarity reasoning

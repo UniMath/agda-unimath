@@ -50,6 +50,7 @@ record
     {βX βY : Level → Level → Level}
     {X : (l : Level) → UU (αX l)}
     {Y : (l : Level) → UU (αY l)}
+    (γ : Level → Level)
     (SX : Large-Similarity-Relation βX X)
     (SY : Large-Similarity-Relation βY Y) :
     UUω
@@ -57,7 +58,7 @@ record
 
   field
     map-sim-preserving-map-Large-Similarity-Relation :
-      {l : Level} → X l → Y l
+      {l : Level} → X l → Y (γ l)
     preserves-sim-map-sim-preserving-map-Large-Similarity-Relation :
       preserves-sim-map-Large-Similarity-Relation
         ( SX)
