@@ -592,7 +592,7 @@ module _
         ( f)
         ( g)
         ( u))
-      ( coh-square-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
         ( pseudometric-Metric-Space M)
         ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space

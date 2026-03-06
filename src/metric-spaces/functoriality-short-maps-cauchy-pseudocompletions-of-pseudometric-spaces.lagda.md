@@ -126,7 +126,7 @@ module _
       ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
 ```
 
-### The action on short maps of Cauchy pseudocompletions is natural w.r.t. the unit map
+### The unit of cauchy pseudocompletions is a natural transformation
 
 ```agda
 module _
@@ -135,11 +135,11 @@ module _
   (f : short-map-Pseudometric-Space A B)
   where
 
-  coh-square-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space :
     ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ∘
       map-unit-cauchy-pseudocompletion-Pseudometric-Space A) ~
     ( map-unit-cauchy-pseudocompletion-Pseudometric-Space B ∘
       map-short-map-Pseudometric-Space A B f)
-  coh-square-map-short-map-cauchy-pseudocompletion-Pseudometric-Space x =
+  naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space x =
     eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
 ```
