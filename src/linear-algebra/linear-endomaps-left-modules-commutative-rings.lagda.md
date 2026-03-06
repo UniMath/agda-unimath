@@ -79,6 +79,24 @@ module _
     is-linear-endo-left-module-Commutative-Ring R M
       ( map-linear-endo-left-module-Commutative-Ring)
   is-linear-endo-map-linear-endo-left-module-Commutative-Ring = pr2 f
+
+  is-additive-map-linear-endo-left-module-Commutative-Ring :
+    is-additive-map-left-module-Commutative-Ring
+      ( R)
+      ( M)
+      ( M)
+      ( map-linear-endo-left-module-Commutative-Ring)
+  is-additive-map-linear-endo-left-module-Commutative-Ring =
+    is-additive-map-linear-map-left-module-Commutative-Ring R M M f
+
+  is-homogeneous-map-linear-endo-left-module-Commutative-Ring :
+    is-homogeneous-map-left-module-Commutative-Ring
+      ( R)
+      ( M)
+      ( M)
+      ( map-linear-endo-left-module-Commutative-Ring)
+  is-homogeneous-map-linear-endo-left-module-Commutative-Ring =
+    is-homogeneous-map-linear-map-left-module-Commutative-Ring R M M f
 ```
 
 ## Properties
