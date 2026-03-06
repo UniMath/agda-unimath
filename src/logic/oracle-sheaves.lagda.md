@@ -11,12 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
-open import foundation.double-negation
-open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.evaluation-functions
@@ -25,18 +21,15 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import logic.double-negation-elimination
 open import logic.oracle-modalities
 
 open import orthogonal-factorization-systems.null-types
@@ -580,86 +573,6 @@ module _
       is-oracle-sheaf-fiber' p 𝒪ₚ f y
         ( is-oracle-sheaf-type-oracle-sheaf p 𝒪ₚ X)
         ( is-oracle-sheaf-type-oracle-sheaf p 𝒪ₚ Y))
-```
-
-### Empty is an oracle sheaf for irrefutable oracles
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l3 l4 l5 p)
-  (irrefutable-p : (a : A) → is-irrefutable-type-Prop (p a))
-  where
-
-  is-irrefutable-is-irrefutable-oracle-dense-prop :
-    (s : Prop l3) →
-    type-oracle-modality p 𝒪ₚ (type-Prop s) →
-    ¬¬ type-Prop s
-  is-irrefutable-is-irrefutable-oracle-dense-prop s t h =
-    map-inv-raise
-      ( rec-oracle-modality p 𝒪ₚ
-        ( type-Prop s)
-        ( raise-empty-Prop l5)
-        ( map-raise ∘ h)
-        ( λ a _ h* → map-raise (irrefutable-p a (map-inv-raise ∘ h*)))
-        ( t))
-
-  is-irrefutable-oracle-sheaf-empty :
-    is-oracle-sheaf p 𝒪ₚ empty
-  is-irrefutable-oracle-sheaf-empty s t =
-    is-equiv-is-empty
-      ( diagonal-exponential empty (type-Prop s))
-      ( is-irrefutable-is-irrefutable-oracle-dense-prop s t)
-
-  empty-irrefutable-oracle-sheaf :
-    oracle-sheaf lzero p 𝒪ₚ
-  empty-irrefutable-oracle-sheaf =
-    ( empty , is-irrefutable-oracle-sheaf-empty)
-```
-
-### Double-negation-stable propositions are irrefutable oracle sheaves
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l3 l4 l5 p)
-  (irrefutable-p : (a : A) → is-irrefutable-type-Prop (p a))
-  where
-
-  is-irrefutable-oracle-sheaf-has-double-negation-elim-type-Prop :
-    (Q : Prop l6) →
-    has-double-negation-elim (type-Prop Q) →
-    is-oracle-sheaf p 𝒪ₚ (type-Prop Q)
-  is-irrefutable-oracle-sheaf-has-double-negation-elim-type-Prop Q DQ s t =
-    is-equiv-has-converse-is-prop
-      ( is-prop-type-Prop Q)
-      ( is-prop-function-type (is-prop-type-Prop Q))
-      ( λ h →
-        DQ
-          ( λ nQ →
-            is-irrefutable-is-irrefutable-oracle-dense-prop
-              p 𝒪ₚ irrefutable-p s t (nQ ∘ h)))
-```
-
-### Decidable propositions are irrefutable oracle sheaves
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} (p : A → Prop l2)
-  (𝒪ₚ : oracle-modality l3 l4 l5 p)
-  (irrefutable-p : (a : A) → is-irrefutable-type-Prop (p a))
-  where
-
-  is-irrefutable-oracle-sheaf-is-decidable-type-Prop :
-    (Q : Prop l6) →
-    is-decidable-type-Prop Q →
-    is-oracle-sheaf p 𝒪ₚ (type-Prop Q)
-  is-irrefutable-oracle-sheaf-is-decidable-type-Prop Q dQ =
-    is-irrefutable-oracle-sheaf-has-double-negation-elim-type-Prop
-      p 𝒪ₚ irrefutable-p Q (double-negation-elim-is-decidable dQ)
 ```
 
 ## References
