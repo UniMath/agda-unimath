@@ -62,7 +62,7 @@ The
 {{#concept "unit interval" Disambiguation="in the rational numbers" Agda=unit-closed-interval-ℚ}}
 in the [rational numbers](elementary-number-theory.rational-numbers.md) is the
 [closed interval](elementary-number-theory.closed-intervals-rational-numbers.md)
-$[0, 1]$.
+$\lbrack 0, 1\rbrack$.
 
 ## Definition
 

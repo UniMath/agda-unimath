@@ -96,10 +96,13 @@ open import metric-spaces.dense-subsets-metric-spaces public
 open import metric-spaces.dependent-products-complete-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-metric-spaces public
+open import metric-spaces.distances-located-metric-spaces public
 open import metric-spaces.elements-at-bounded-distance-metric-spaces public
 open import metric-spaces.epsilon-delta-limits-of-maps-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-pseudometric-spaces public
+open import metric-spaces.expansive-maps-metric-spaces public
+open import metric-spaces.expansive-maps-pseudometric-spaces public
 open import metric-spaces.extensionality-pseudometric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
@@ -141,6 +144,7 @@ open import metric-spaces.metric-space-of-maps-metric-spaces public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-space-of-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-short-maps-metric-spaces public
+open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metrics public
 open import metric-spaces.metrics-of-metric-spaces public
