@@ -130,7 +130,9 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-binary-relations public
 open import foundation.dependent-products-cumulative-large-sets public
+open import foundation.dependent-products-equivalence-relations public
 open import foundation.dependent-products-large-binary-relations public
 open import foundation.dependent-products-large-equivalence-relations public
 open import foundation.dependent-products-large-similarity-relations public
@@ -425,6 +427,7 @@ open import foundation.sequential-limits public
 open import foundation.set-coequalizers public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
+open import foundation.set-quotients-dependent-products public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.sigma-closed-subuniverses public
