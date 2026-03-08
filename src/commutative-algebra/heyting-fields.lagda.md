@@ -19,9 +19,11 @@ open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -339,13 +341,11 @@ module _
   where
 
   abstract
-    extensional-apart-add-Heyting-Field :
-      (w x y z : type-Heyting-Field F) →
-      apart-Heyting-Field F
-        ( add-Heyting-Field F w x)
-        ( add-Heyting-Field F y z) →
-      disjunction-type (apart-Heyting-Field F w y) (apart-Heyting-Field F x z)
-    extensional-apart-add-Heyting-Field w x y z w+x#y+z =
+    extensional-add-apart-Heyting-Field :
+      is-extensional-binary-op-Apartness-Relation
+        ( add-Heyting-Field F)
+        ( apartness-relation-Heyting-Field F)
+    extensional-add-apart-Heyting-Field w x y z w+x#y+z =
       is-local-commutative-ring-Heyting-Field F
         ( diff-Heyting-Field F w y)
         ( diff-Heyting-Field F x z)
@@ -408,11 +408,9 @@ module _
 
   abstract
     extensional-apart-mul-Heyting-Field :
-      (w x y z : type-Heyting-Field F) →
-      apart-Heyting-Field F
-        ( mul-Heyting-Field F w x)
-        ( mul-Heyting-Field F y z) →
-      disjunction-type (apart-Heyting-Field F w y) (apart-Heyting-Field F x z)
+      is-extensional-binary-op-Apartness-Relation
+        ( mul-Heyting-Field F)
+        ( apartness-relation-Heyting-Field F)
     extensional-apart-mul-Heyting-Field w x y z wx#yz =
       map-disjunction
         ( λ (⟨wx-yx⟩⁻¹ , ⟨wx-yx⟩⟨wx-yx⟩⁻¹=1 , _) →
@@ -453,6 +451,166 @@ module _
           ( mul-Heyting-Field F y x)
           ( mul-Heyting-Field F y z)
           ( wx#yz))
+```
+
+### A Heyting field can be defined in terms of a commutative ring with a tight apartness relation, where addition is apartness-extensional and apartness characterizes invertibiltiy
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : Tight-Apartness-Relation l2 (type-Commutative-Ring R))
+  (extensional-addition-apartness :
+    is-extensional-binary-op-Apartness-Relation
+      ( add-Commutative-Ring R)
+      ( apartness-relation-Tight-Apartness-Relation A))
+  (inv-iff-apart-zero :
+    (x : type-Commutative-Ring R) →
+    ( is-invertible-element-Commutative-Ring R x ↔
+      apart-Tight-Apartness-Relation A x (zero-Commutative-Ring R)))
+  (let _+R_ = add-Commutative-Ring R)
+  (let neg-R = neg-Commutative-Ring R)
+  (let _-R_ = right-subtraction-Commutative-Ring R)
+  (let zero-R = zero-Commutative-Ring R)
+  where
+
+  abstract
+    preserves-apart-right-add-tight-apartness-relation-Commutative-Ring :
+      (z x y : type-Commutative-Ring R) →
+      apart-Tight-Apartness-Relation A x y →
+      apart-Tight-Apartness-Relation A
+        ( add-Commutative-Ring R x z)
+        ( add-Commutative-Ring R y z)
+    preserves-apart-right-add-tight-apartness-relation-Commutative-Ring
+      z x y x#y =
+      elim-disjunction
+        ( rel-Tight-Apartness-Relation A _ _)
+        ( id)
+        ( λ -z#-z → ex-falso (antirefl-Tight-Apartness-Relation A _ -z#-z))
+        ( extensional-addition-apartness
+          ( x +R z)
+          ( neg-R z)
+          ( y +R z)
+          ( neg-R z)
+          ( binary-tr
+            ( apart-Tight-Apartness-Relation A)
+            ( inv
+              ( is-retraction-right-subtraction-Ab (ab-Commutative-Ring R) z x))
+            ( inv
+              ( is-retraction-right-subtraction-Ab (ab-Commutative-Ring R) z y))
+            ( x#y)))
+
+    apart-is-invertible-diff-tight-apartness-relation-Commutative-Ring :
+      (x y : type-Commutative-Ring R) →
+      is-invertible-element-Commutative-Ring R
+        ( right-subtraction-Commutative-Ring R x y) →
+      apart-Tight-Apartness-Relation A x y
+    apart-is-invertible-diff-tight-apartness-relation-Commutative-Ring
+      x y is-invertible-⟨x-y⟩ =
+      binary-tr
+        ( apart-Tight-Apartness-Relation A)
+        ( is-section-right-subtraction-Commutative-Ring R y x)
+        ( left-unit-law-add-Commutative-Ring R y)
+        ( preserves-apart-right-add-tight-apartness-relation-Commutative-Ring
+          ( y)
+          ( x -R y)
+          ( zero-Commutative-Ring R)
+          ( forward-implication
+            ( inv-iff-apart-zero (right-subtraction-Commutative-Ring R x y))
+            ( is-invertible-⟨x-y⟩)))
+
+    is-invertible-diff-apart-tight-apartness-relation-Commutative-Ring :
+      (x y : type-Commutative-Ring R) →
+      apart-Tight-Apartness-Relation A x y →
+      is-invertible-element-Commutative-Ring R
+        ( right-subtraction-Commutative-Ring R x y)
+    is-invertible-diff-apart-tight-apartness-relation-Commutative-Ring x y x#y =
+      backward-implication
+        ( inv-iff-apart-zero _)
+        ( binary-tr
+          ( apart-Tight-Apartness-Relation A)
+          ( refl)
+          ( right-inverse-law-add-Commutative-Ring R y)
+          ( preserves-apart-right-add-tight-apartness-relation-Commutative-Ring
+            ( neg-Commutative-Ring R y)
+            ( x)
+            ( y)
+            ( x#y)))
+
+    is-local-commutative-ring-tight-apartness-relation-Commutative-Ring :
+      is-local-Commutative-Ring R
+    is-local-commutative-ring-tight-apartness-relation-Commutative-Ring
+      a b is-invertible-a+b =
+      map-disjunction
+        ( backward-implication (inv-iff-apart-zero a))
+        ( λ 0#-b →
+          backward-implication
+            ( inv-iff-apart-zero b)
+            ( binary-tr
+              ( apart-Tight-Apartness-Relation A)
+              ( left-unit-law-add-Commutative-Ring R b)
+              ( left-inverse-law-add-Commutative-Ring R b)
+              ( preserves-apart-right-add-tight-apartness-relation-Commutative-Ring
+                ( b)
+                ( zero-R)
+                ( neg-R b)
+                ( 0#-b))))
+        ( extensional-addition-apartness
+          ( a)
+          ( zero-R)
+          ( zero-R)
+          ( neg-R b)
+          ( apart-is-invertible-diff-tight-apartness-relation-Commutative-Ring
+            ( a +R zero-R)
+            ( zero-R -R b)
+            ( inv-tr
+              ( is-invertible-element-Commutative-Ring R)
+              ( equational-reasoning
+                (a +R zero-R) -R (zero-R -R b)
+                ＝ a -R neg-R b
+                  by
+                    ap-right-subtraction-Commutative-Ring R
+                      ( right-unit-law-add-Commutative-Ring R a)
+                      ( left-unit-law-add-Commutative-Ring R (neg-R b))
+                ＝ a +R b
+                  by
+                    ap-add-Commutative-Ring R
+                      ( refl)
+                      ( neg-neg-Commutative-Ring R b))
+              ( is-invertible-a+b))))
+
+    is-nontrivial-tight-apartness-relation-Commutative-Ring :
+      is-nontrivial-Commutative-Ring R
+    is-nontrivial-tight-apartness-relation-Commutative-Ring =
+      nonequal-apart-Tight-Apartness-Relation A
+        ( zero-R)
+        ( one-Commutative-Ring R)
+        ( symmetric-Tight-Apartness-Relation A _ _
+          ( forward-implication
+            ( inv-iff-apart-zero _)
+            ( is-invertible-element-one-Commutative-Ring R)))
+
+  local-commutative-ring-tight-apartness-relation-Commutative-Ring :
+    Local-Commutative-Ring l1
+  local-commutative-ring-tight-apartness-relation-Commutative-Ring =
+    ( R ,
+      is-local-commutative-ring-tight-apartness-relation-Commutative-Ring)
+
+  abstract
+    is-zero-is-not-invertible-tight-apartness-relation-Commutative-Ring :
+      (x : type-Commutative-Ring R) →
+      ¬ (is-invertible-element-Commutative-Ring R x) →
+      x ＝ zero-Commutative-Ring R
+    is-zero-is-not-invertible-tight-apartness-relation-Commutative-Ring
+      x ¬inv-x =
+      is-tight-apartness-relation-Tight-Apartness-Relation A _ _
+        ( λ x#0 → ¬inv-x (backward-implication (inv-iff-apart-zero x) x#0))
+
+  heyting-field-tight-apartness-relation-Commutative-Ring : Heyting-Field l1
+  heyting-field-tight-apartness-relation-Commutative-Ring =
+    ( local-commutative-ring-tight-apartness-relation-Commutative-Ring ,
+      is-nontrivial-tight-apartness-relation-Commutative-Ring ,
+      is-zero-is-not-invertible-tight-apartness-relation-Commutative-Ring)
 ```
 
 ## External links

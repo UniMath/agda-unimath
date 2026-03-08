@@ -10,6 +10,7 @@ module foundation.apartness-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.negated-equality
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
@@ -206,6 +207,50 @@ apartness-relation-restriction-Type-With-Apartness :
   (X → type-Type-With-Apartness Y) → Apartness-Relation l3 X
 apartness-relation-restriction-Type-With-Apartness Y f =
   restriction-Apartness-Relation f (apartness-relation-Type-With-Apartness Y)
+```
+
+### Apart elements are nonequal
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A)
+  where
+
+  abstract
+    nonequal-apart-Apartness-Relation :
+      (x y : A) → apart-Apartness-Relation R x y → x ≠ y
+    nonequal-apart-Apartness-Relation x .x x#x refl =
+      antirefl-Apartness-Relation R x x#x
+```
+
+### The property that a binary operation is extensional on an apartness relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (f : A → A → A) (R : Apartness-Relation l2 A)
+  where
+
+  is-extensional-prop-binary-op-Apartness-Relation : Prop (l1 ⊔ l2)
+  is-extensional-prop-binary-op-Apartness-Relation =
+    Π-Prop
+      ( A)
+      ( λ a →
+        Π-Prop
+          ( A)
+          ( λ b →
+            Π-Prop
+              ( A)
+              ( λ c →
+                Π-Prop
+                  ( A)
+                  ( λ d →
+                    rel-Apartness-Relation R (f a b) (f c d) ⇒
+                    ( ( rel-Apartness-Relation R a c) ∨
+                      ( rel-Apartness-Relation R b d))))))
+
+  is-extensional-binary-op-Apartness-Relation : UU (l1 ⊔ l2)
+  is-extensional-binary-op-Apartness-Relation =
+    type-Prop is-extensional-prop-binary-op-Apartness-Relation
 ```
 
 ## References
