@@ -13,6 +13,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -29,6 +30,7 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.precomplete-short-maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
@@ -238,7 +240,47 @@ module _
 module _
   {l1 l2 : Level}
   (M : Metric-Space l1 l2)
+  (H : is-complete-Metric-Space M)
   where
+
+  retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space :
+    retraction-short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( short-map-unit-cauchy-pseudocompletion-Metric-Space M)
+  pr1
+    retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space
+    =
+    short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-short-map-Metric-Space M , H)
+  pr2 retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space
+    =
+    inv-htpy
+      ( is-extension-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( pseudometric-Metric-Space M)
+        ( M)
+        ( id-short-map-Metric-Space M , H))
+
+module _
+  { l1 l2 : Level}
+  ( M : Metric-Space l1 l2)
+  where
+
+  is-complete-retraction-short-map-unit-cauchy-pseudocompletion-Metric-Space :
+    retraction-short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( short-map-unit-cauchy-pseudocompletion-Metric-Space M) →
+    is-complete-Metric-Space M
+  is-complete-retraction-short-map-unit-cauchy-pseudocompletion-Metric-Space
+    (g , H) =
+    is-precomplete-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( M)
+      ( id-short-map-Metric-Space M)
+      ( g , inv-htpy H)
 
   iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space :
     retraction-short-map-Pseudometric-Space
@@ -247,8 +289,9 @@ module _
       ( short-map-unit-cauchy-pseudocompletion-Metric-Space M) ↔
     is-complete-Metric-Space M
   iff-is-complete-retraction-short-map-unit-cauchy-precompletion-Metric-Space =
-    iff-is-complete-extension-id-short-map-cauchy-pseuducompletion-Metric-Space
-      ( M)
+    ( is-complete-retraction-short-map-unit-cauchy-pseudocompletion-Metric-Space ,
+      retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space
+        ( M))
 ```
 
 ### A metric space is complete if and only if all short maps into it are precomplete

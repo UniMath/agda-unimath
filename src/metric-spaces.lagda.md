@@ -163,6 +163,7 @@ open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-maps public
 open import metric-spaces.precategory-of-metric-spaces-and-short-maps public
+open import metric-spaces.precomplete-short-maps-pseudometric-spaces public
 open import metric-spaces.preimages-rational-neighborhood-relations public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
