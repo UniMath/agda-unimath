@@ -54,7 +54,7 @@ if all
 of
 [Cauchy approximations](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 in `P` are
-[convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces) in
+[convergent](metric-spaces.convergent-cauchy-approximations-metric-spaces.md) in
 `M`.
 
 Any **precomplete** short map `f : P → M`
