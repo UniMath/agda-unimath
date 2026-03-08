@@ -325,7 +325,7 @@ module _
     H (pseudometric-Metric-Space M) (id-short-map-Metric-Space M)
 ```
 
-### A metric space is complete if and only if all short maps into it extends to the Cauchy pseudocompletion
+### A metric space is complete if and only if all short maps into it extend to the Cauchy pseudocompletions
 
 ```agda
 module _
