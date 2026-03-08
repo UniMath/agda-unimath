@@ -1,6 +1,6 @@
 # Orthogonal factorization systems
 
-## Examples of higher modalities
+## Instances of higher modalities
 
 {{#include tables/higher-modalities.md}}
 
