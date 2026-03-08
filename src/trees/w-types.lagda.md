@@ -9,7 +9,11 @@ module trees.w-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
+open import foundation.double-negation-stable-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -18,6 +22,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -26,8 +31,14 @@ open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.types-with-decidable-dependent-product-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.discrete-types
+open import foundation-core.propositions
+
+open import logic.double-negation-elimination
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors
@@ -363,4 +374,82 @@ is-initial-𝕎-Alg {A = A} {B} X =
     ( λ f →
       eq-htpy-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X (hom-𝕎-Alg X) f
         ( htpy-hom-𝕎-Alg X f))
+```
+
+### Decidable equality for W-types
+
+If `A` has decidable equality and `B : A → 𝒰` is a family of types with
+decidable dependent products, then `𝕎 A B` has decidable equality.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (dA : has-decidable-equality A)
+  (dΠB : (x : A) → has-decidable-Π (B x))
+  where
+
+  is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position :
+    (v w : 𝕎 A B) → is-decidable (Eq-𝕎 v w)
+  is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+    (tree-𝕎 x α) (tree-𝕎 y β) =
+    is-decidable-Σ-has-double-negation-dense-equality-base
+      ( λ p q →
+        irrefutable-eq-eq
+          ( eq-is-prop (is-set-has-decidable-equality dA x y)))
+      ( dA x y)
+      ( λ p →
+        dΠB x
+          ( ( λ z → Eq-𝕎 (α z) (β (tr B p z))) ,
+            ( λ z →
+              is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+                ( α z)
+                ( β (tr B p z)))))
+
+  has-decidable-equality-𝕎-has-decidable-equality-shape-has-decidable-Π-position :
+    has-decidable-equality (𝕎 A B)
+  has-decidable-equality-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+    v w =
+    is-decidable-equiv
+      ( equiv-Eq-𝕎-eq v w)
+      ( is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+        ( v)
+        ( w))
+```
+
+### Double negation stable equality for W-types
+
+If `A` has double negation stable equality, then `𝕎 A B` has double negation
+stable equality.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (hA : has-double-negation-stable-equality A)
+  where
+
+  has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape :
+    (v w : 𝕎 A B) → has-double-negation-elim (Eq-𝕎 v w)
+  has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+    (tree-𝕎 x α) (tree-𝕎 y β) =
+    double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( λ p q →
+        irrefutable-eq-eq
+          ( eq-is-prop (is-set-has-double-negation-stable-equality hA x y)))
+      ( hA x y)
+      ( λ p →
+        double-negation-elim-Π
+          ( λ z →
+            has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+              ( α z)
+              ( β (tr B p z))))
+
+  has-double-negation-stable-equality-𝕎-has-double-negation-stable-equality-shape :
+    has-double-negation-stable-equality (𝕎 A B)
+  has-double-negation-stable-equality-𝕎-has-double-negation-stable-equality-shape
+    v w =
+    has-double-negation-elim-equiv
+      ( equiv-Eq-𝕎-eq v w)
+      ( has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+        ( v)
+        ( w))
 ```
