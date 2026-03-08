@@ -12,10 +12,13 @@ open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.trivial-commutative-rings
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.apartness-relations
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
@@ -128,6 +131,15 @@ module _
     type-Heyting-Field → type-Heyting-Field → type-Heyting-Field
   add-Heyting-Field = add-Ring ring-Heyting-Field
 
+  ap-add-Heyting-Field :
+    {x x' : type-Heyting-Field} →
+    x ＝ x' →
+    {y y' : type-Heyting-Field} →
+    y ＝ y' →
+    add-Heyting-Field x y ＝
+    add-Heyting-Field x' y'
+  ap-add-Heyting-Field = ap-binary add-Heyting-Field
+
   mul-Heyting-Field :
     type-Heyting-Field → type-Heyting-Field → type-Heyting-Field
   mul-Heyting-Field = mul-Ring ring-Heyting-Field
@@ -147,6 +159,16 @@ module _
   is-invertible-element-Heyting-Field : type-Heyting-Field → UU l
   is-invertible-element-Heyting-Field x =
     type-Prop (is-invertible-element-prop-Heyting-Field x)
+
+  is-invertible-is-right-invertible-element-Heyting-Field :
+    {x : type-Heyting-Field} →
+    is-right-invertible-element-Commutative-Ring
+      ( commutative-ring-Heyting-Field)
+      ( x) →
+    is-invertible-element-Heyting-Field x
+  is-invertible-is-right-invertible-element-Heyting-Field =
+    is-invertible-is-right-invertible-element-Commutative-Ring
+      ( commutative-ring-Heyting-Field)
 
   is-zero-is-not-invertible-element-Heyting-Field :
     (x : type-Heyting-Field) → ¬ (is-invertible-element-Heyting-Field x) →
@@ -184,10 +206,33 @@ module _
   distributive-neg-diff-Heyting-Field =
     neg-right-subtraction-Ab ab-Heyting-Field
 
+  associative-mul-Heyting-Field :
+    (x y z : type-Heyting-Field) →
+    mul-Heyting-Field (mul-Heyting-Field x y) z ＝
+    mul-Heyting-Field x (mul-Heyting-Field y z)
+  associative-mul-Heyting-Field =
+    associative-mul-Commutative-Ring commutative-ring-Heyting-Field
+
   commutative-mul-Heyting-Field :
     (x y : type-Heyting-Field) → mul-Heyting-Field x y ＝ mul-Heyting-Field y x
   commutative-mul-Heyting-Field =
     commutative-mul-Commutative-Ring commutative-ring-Heyting-Field
+
+  left-distributive-mul-diff-Heyting-Field :
+    (x y z : type-Heyting-Field) →
+    mul-Heyting-Field x (diff-Heyting-Field y z) ＝
+    diff-Heyting-Field (mul-Heyting-Field x y) (mul-Heyting-Field x z)
+  left-distributive-mul-diff-Heyting-Field =
+    left-distributive-mul-right-subtraction-Commutative-Ring
+      ( commutative-ring-Heyting-Field)
+
+  right-distributive-mul-diff-Heyting-Field :
+    (x y z : type-Heyting-Field) →
+    mul-Heyting-Field (diff-Heyting-Field x y) z ＝
+    diff-Heyting-Field (mul-Heyting-Field x z) (mul-Heyting-Field y z)
+  right-distributive-mul-diff-Heyting-Field =
+    right-distributive-mul-right-subtraction-Commutative-Ring
+      ( commutative-ring-Heyting-Field)
 
   add-diff-Heyting-Field :
     (x y z : type-Heyting-Field) →
@@ -195,6 +240,12 @@ module _
     diff-Heyting-Field x z
   add-diff-Heyting-Field =
     add-right-subtraction-Ab ab-Heyting-Field
+
+  diff-add-Heyting-Field :
+    (z x y : type-Heyting-Field) →
+    diff-Heyting-Field (add-Heyting-Field x z) (add-Heyting-Field y z) ＝
+    diff-Heyting-Field x y
+  diff-add-Heyting-Field = right-subtraction-right-add-Ab ab-Heyting-Field
 
   eq-is-zero-diff-Heyting-Field :
     (x y : type-Heyting-Field) →
@@ -277,6 +328,131 @@ module _
   tight-apartness-relation-Heyting-Field =
     ( apartness-relation-Heyting-Field ,
       is-tight-apartness-relation-Heyting-Field)
+```
+
+### Extensionality of the apartness relation on addition
+
+```agda
+module _
+  {l : Level}
+  (F : Heyting-Field l)
+  where
+
+  abstract
+    extensional-apart-add-Heyting-Field :
+      (w x y z : type-Heyting-Field F) →
+      apart-Heyting-Field F
+        ( add-Heyting-Field F w x)
+        ( add-Heyting-Field F y z) →
+      disjunction-type (apart-Heyting-Field F w y) (apart-Heyting-Field F x z)
+    extensional-apart-add-Heyting-Field w x y z w+x#y+z =
+      is-local-commutative-ring-Heyting-Field F
+        ( diff-Heyting-Field F w y)
+        ( diff-Heyting-Field F x z)
+        ( tr
+          ( is-invertible-element-Heyting-Field F)
+          ( interchange-add-right-subtraction-Commutative-Ring
+            ( commutative-ring-Heyting-Field F)
+            ( w)
+            ( x)
+            ( y)
+            ( z))
+          ( w+x#y+z))
+```
+
+### Addition preserves and reflects apartness
+
+```agda
+module _
+  {l : Level}
+  (F : Heyting-Field l)
+  where
+
+  abstract
+    preserves-apart-right-add-Heyting-Field :
+      (z x y : type-Heyting-Field F) →
+      apart-Heyting-Field F x y →
+      apart-Heyting-Field F (add-Heyting-Field F x z) (add-Heyting-Field F y z)
+    preserves-apart-right-add-Heyting-Field z x y =
+      inv-tr
+        ( is-invertible-element-Heyting-Field F)
+        ( diff-add-Heyting-Field F z x y)
+
+    reflects-apart-right-add-Heyting-Field :
+      (z x y : type-Heyting-Field F) →
+      apart-Heyting-Field F
+        ( add-Heyting-Field F x z)
+        ( add-Heyting-Field F y z) →
+      apart-Heyting-Field F x y
+    reflects-apart-right-add-Heyting-Field z x y x+z#y+z =
+      binary-tr
+        ( apart-Heyting-Field F)
+        ( is-retraction-right-subtraction-Ab (ab-Heyting-Field F) z x)
+        ( is-retraction-right-subtraction-Ab (ab-Heyting-Field F) z y)
+        ( preserves-apart-right-add-Heyting-Field
+          ( neg-Heyting-Field F z)
+          ( add-Heyting-Field F x z)
+          ( add-Heyting-Field F y z)
+          ( x+z#y+z))
+```
+
+### Extensionality of the apartness relation on multiplication
+
+```agda
+module _
+  {l : Level}
+  (F : Heyting-Field l)
+  (let _*F_ = mul-Heyting-Field F)
+  (let _-F_ = diff-Heyting-Field F)
+  where
+
+  abstract
+    extensional-apart-mul-Heyting-Field :
+      (w x y z : type-Heyting-Field F) →
+      apart-Heyting-Field F
+        ( mul-Heyting-Field F w x)
+        ( mul-Heyting-Field F y z) →
+      disjunction-type (apart-Heyting-Field F w y) (apart-Heyting-Field F x z)
+    extensional-apart-mul-Heyting-Field w x y z wx#yz =
+      map-disjunction
+        ( λ (⟨wx-yx⟩⁻¹ , ⟨wx-yx⟩⟨wx-yx⟩⁻¹=1 , _) →
+          is-invertible-is-right-invertible-element-Heyting-Field F
+            ( x *F ⟨wx-yx⟩⁻¹ ,
+              ( equational-reasoning
+                (w -F y) *F (x *F ⟨wx-yx⟩⁻¹)
+                ＝ ((w -F y) *F x) *F ⟨wx-yx⟩⁻¹
+                  by inv (associative-mul-Heyting-Field F _ _ _)
+                ＝ ((w *F x) -F (y *F x)) *F ⟨wx-yx⟩⁻¹
+                  by
+                    ap-mul-Heyting-Field F
+                      ( right-distributive-mul-diff-Heyting-Field F w y x)
+                      ( refl)
+                ＝ one-Heyting-Field F
+                  by ⟨wx-yx⟩⟨wx-yx⟩⁻¹=1)))
+        ( λ (⟨yx-yz⟩⁻¹ , ⟨yx-yz⟩⟨yx-yz⟩⁻¹=1 , _) →
+          is-invertible-is-right-invertible-element-Heyting-Field F
+            ( y *F ⟨yx-yz⟩⁻¹ ,
+              ( equational-reasoning
+                (x -F z) *F (y *F ⟨yx-yz⟩⁻¹)
+                ＝ ((x -F z) *F y) *F ⟨yx-yz⟩⁻¹
+                  by inv (associative-mul-Heyting-Field F _ _ _)
+                ＝ (y *F (x -F z)) *F ⟨yx-yz⟩⁻¹
+                  by
+                    ap-mul-Heyting-Field F
+                      ( commutative-mul-Heyting-Field F _ _)
+                      ( refl)
+                ＝ ((y *F x) -F (y *F z)) *F ⟨yx-yz⟩⁻¹
+                  by
+                    ap-mul-Heyting-Field F
+                      ( left-distributive-mul-diff-Heyting-Field F y x z)
+                      ( refl)
+                ＝ one-Heyting-Field F
+                  by ⟨yx-yz⟩⟨yx-yz⟩⁻¹=1)))
+        ( cotransitive-apart-Heyting-Field F
+          ( mul-Heyting-Field F w x)
+          ( mul-Heyting-Field F y x)
+          ( mul-Heyting-Field F y z)
+          ( wx#yz))
 ```
 
 ## External links
