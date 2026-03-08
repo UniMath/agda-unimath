@@ -297,7 +297,7 @@ module _
     ( g , refl-htpy)
 ```
 
-### Precomplete short map extends to the Cauchy pseudocompletion
+### Precomplete short maps extend to the Cauchy pseudocompletion
 
 ```agda
 module _
