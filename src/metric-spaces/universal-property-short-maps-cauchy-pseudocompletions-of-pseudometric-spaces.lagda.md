@@ -331,48 +331,6 @@ module _
   (M : Metric-Space l1' l2')
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   (g : extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f)
-  where
-
-  htpy-map-precomp-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    htpy-map-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( cauchy-pseudocompletion-Metric-Space M)
-      ( short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( pseudometric-Metric-Space M)
-        ( f))
-      ( short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( pseudometric-Metric-Space M)
-        ( precomp-short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M)
-          ( f)
-          ( g)))
-  htpy-map-precomp-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    =
-    htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
-      ( P)
-      ( pseudometric-Metric-Space M)
-      ( f)
-      ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space P M
-        ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M)
-          ( f)
-          ( g)))
-      ( htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M)
-        ( f)
-        ( g))
-
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
-  (g : extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f)
   (u : cauchy-approximation-Pseudometric-Space P)
   where abstract
 
@@ -397,11 +355,23 @@ module _
       ( sim-Pseudometric-Space
         ( cauchy-pseudocompletion-Metric-Space M))
       ( inv
-        ( htpy-map-precomp-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
           ( P)
-          ( M)
+          ( pseudometric-Metric-Space M)
           ( f)
-          ( g)
+          ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+            ( P)
+            ( M)
+            ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+              ( P)
+              ( M)
+              ( f)
+              ( g)))
+          ( htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+            ( P)
+            ( M)
+            ( f)
+            ( g))
           ( u)))
       ( naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
         ( cauchy-pseudocompletion-Pseudometric-Space P)
