@@ -48,7 +48,7 @@ open import orthogonal-factorization-systems.extensions-maps
 A [short maps](metric-spaces.short-maps-pseudometric-spaces.md) `f : P → M` from
 a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` in a
 [metric space](metric-spaces.metric-spaces.md) `M` is called
-{{#concept "precomplete short map" Disambiguation="from a pseudometric space to a metric space" Agda=precomplete-short-map-Pseudometric-Space}}
+{{#concept "precomplete" Disambiguation="from a pseudometric space to a metric space" Agda=is-precomplete-short-map-Pseudometric-Space}}
 if all
 [images](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of
