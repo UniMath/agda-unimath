@@ -112,7 +112,7 @@ module _
       ( short-map-unit-cauchy-pseudocompletion-Pseudometric-Space P)
 ```
 
-### Extensions of short maps along the unit map of Cauchy pseudocompletions
+### The property of being the extension of a short map along the unit of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -163,7 +163,11 @@ module _
   is-extension-prop-short-map-cauchy-pseudocompletion-Pseudometric-Space =
     ( is-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
       is-prop-is-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+```
 
+### Extensions of short maps along the unit map of Cauchy pseudocompletions
+
+```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
