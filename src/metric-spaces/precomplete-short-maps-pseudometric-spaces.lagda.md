@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -23,18 +24,21 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 
@@ -70,6 +74,14 @@ map of
     ∨    g   ∨
    C P ------> M
 ```
+
+Compositions of short maps preserves precomplete short maps: if `f : P → M` is
+**precomplete**,
+
+- for any pseudometric space `Q` and short map `h : Q → P`, `f ∘ h : Q → M` is
+  **precomplete**;
+- for any metric space `N` and short map `h : M → N`, `h ∘ f : P → N` is
+  **precomplete**.
 
 ## Definitions
 
@@ -291,4 +303,64 @@ module _
           ( M)
           ( f)
           ( map-unit-cauchy-pseudocompletion-Pseudometric-Space P x)))
+```
+
+### Composition preserves precomplete short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : precomplete-short-map-Pseudometric-Space P M)
+  where
+
+  is-precomplete-left-comp-precomplete-short-map-Pseudometric-Space :
+    {l l' : Level} →
+    (Q : Pseudometric-Space l l') →
+    (g : short-map-Pseudometric-Space Q P) →
+    is-precomplete-short-map-Pseudometric-Space
+      ( Q)
+      ( M)
+      ( comp-short-map-Pseudometric-Space
+        ( Q)
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+        ( g))
+  is-precomplete-left-comp-precomplete-short-map-Pseudometric-Space Q g u =
+    is-precomplete-short-map-precomplete-short-map-Pseudometric-Space
+      ( P)
+      ( M)
+      ( f)
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space Q P g u)
+
+  is-precomplete-right-comp-precomplete-short-map-Pseudometric-Space :
+    {l l' : Level} →
+    (N : Metric-Space l l') →
+    (g : short-map-Metric-Space M N) →
+    is-precomplete-short-map-Pseudometric-Space
+      ( P)
+      ( N)
+      ( comp-short-map-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( pseudometric-Metric-Space N)
+        ( g)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f))
+  is-precomplete-right-comp-precomplete-short-map-Pseudometric-Space N g u =
+    is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space
+      ( M)
+      ( N)
+      ( g)
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+        ( u))
+      ( is-precomplete-short-map-precomplete-short-map-Pseudometric-Space
+        ( P)
+        ( M)
+        ( f)
+        ( u))
 ```

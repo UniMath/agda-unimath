@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
@@ -149,4 +150,31 @@ module _
       ( map-cauchy-approximation-Metric-Space A a ε)
       ( lim)
       ( is-lim-a ε δ)
+```
+
+### The action on short maps of Cauchy pseudocompletions preserves convergent Cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : short-map-Metric-Space A B)
+  (a : cauchy-approximation-Metric-Space A)
+  where
+
+  is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space A a →
+    is-convergent-cauchy-approximation-Metric-Space
+      ( B)
+      ( map-short-map-cauchy-pseudocompletion-Metric-Space A B f a)
+  is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space
+    ( lim , is-limit) =
+    ( map-short-map-Metric-Space A B f lim ,
+      preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
+        ( A)
+        ( B)
+        ( f)
+        ( a)
+        ( lim)
+        ( is-limit))
 ```
