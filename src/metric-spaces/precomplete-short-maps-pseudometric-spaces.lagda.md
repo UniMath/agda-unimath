@@ -313,7 +313,7 @@ module _
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
   (f : precomplete-short-map-Pseudometric-Space P M)
-  where
+  where abstract
 
   is-precomplete-left-comp-precomplete-short-map-Pseudometric-Space :
     {l l' : Level} →
