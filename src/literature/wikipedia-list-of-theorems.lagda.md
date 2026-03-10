@@ -190,6 +190,15 @@ open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
 ```
 
+### Linear congruence theorem {#Q524257}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import elementary-number-theory.linear-congruence-theorem-integers using
+  ( linear-congruence-theorem-ℤ)
+```
+
 ### Monotone convergence theorem {#Q4454933}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
