@@ -75,7 +75,7 @@ map of
    C P ------> M
 ```
 
-Compositions of short maps preserves precomplete short maps: if `f : P → M` is
+Composition of short maps preserves precomplete short maps: if `f : P → M` is
 **precomplete**,
 
 - for any pseudometric space `Q` and short map `h : Q → P`, `f ∘ h : Q → M` is
