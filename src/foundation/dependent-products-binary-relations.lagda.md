@@ -20,8 +20,8 @@ open import foundation.universe-levels
 ## Idea
 
 The dependent product of a family of
-[binary relations](foundation.binary-relations.md) `R` on types `A` indexed by
-`I` is a binary relation on the type `(i : I) → A i`.
+[binary relations](foundation.binary-relations.md) `Rᵢ` on types `Aᵢ` indexed by
+`i : I` is a binary relation on the type `(i : I) → A i`.
 
 ## Definition
 
@@ -93,7 +93,7 @@ module _
       trans-R i (f i) (g i) (h i) (Rgh i) (Rfg i)
 ```
 
-### Dependent product preserve antisymmetry
+### Dependent products preserve antisymmetry
 
 ```agda
 module _
