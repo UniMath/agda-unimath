@@ -251,14 +251,14 @@ module _
   pr1
     retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space
     =
-    short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( M)
       ( id-short-map-Metric-Space M , H)
   pr2 retraction-short-map-unit-cauchy-pseudocompletion-is-complete-Metric-Space
     =
     inv-htpy
-      ( is-extension-short-map-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( is-extension-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( pseudometric-Metric-Space M)
         ( M)
         ( id-short-map-Metric-Space M , H))
