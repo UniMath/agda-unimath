@@ -1,4 +1,4 @@
-# Finite sequences of set quotients
+# Set quotients of multivariable inputs
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
