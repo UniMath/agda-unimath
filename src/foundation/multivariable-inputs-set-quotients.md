@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module foundation.finite-sequences-set-quotients where
+module foundation.multivariable-inputs-set-quotients where
 ```
 
 <details><summary>Imports</summary>
