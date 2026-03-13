@@ -20,6 +20,7 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.extensional-binary-functions-apartness-relations
 open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
@@ -343,8 +344,8 @@ module _
   abstract
     extensional-add-apart-Heyting-Field :
       is-extensional-binary-op-Apartness-Relation
-        ( add-Heyting-Field F)
         ( apartness-relation-Heyting-Field F)
+        ( add-Heyting-Field F)
     extensional-add-apart-Heyting-Field w x y z w+x#y+z =
       is-local-commutative-ring-Heyting-Field F
         ( diff-Heyting-Field F w y)
@@ -409,8 +410,8 @@ module _
   abstract
     extensional-apart-mul-Heyting-Field :
       is-extensional-binary-op-Apartness-Relation
-        ( mul-Heyting-Field F)
         ( apartness-relation-Heyting-Field F)
+        ( mul-Heyting-Field F)
     extensional-apart-mul-Heyting-Field w x y z wx#yz =
       map-disjunction
         ( λ (⟨wx-yx⟩⁻¹ , ⟨wx-yx⟩⟨wx-yx⟩⁻¹=1 , _) →
@@ -462,8 +463,8 @@ module _
   (A : Tight-Apartness-Relation l2 (type-Commutative-Ring R))
   (extensional-addition-apartness :
     is-extensional-binary-op-Apartness-Relation
-      ( add-Commutative-Ring R)
-      ( apartness-relation-Tight-Apartness-Relation A))
+      ( apartness-relation-Tight-Apartness-Relation A)
+      ( add-Commutative-Ring R))
   (inv-iff-apart-zero :
     (x : type-Commutative-Ring R) →
     ( is-invertible-element-Commutative-Ring R x ↔

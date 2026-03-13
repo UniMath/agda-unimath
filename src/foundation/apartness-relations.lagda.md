@@ -223,36 +223,6 @@ module _
       antirefl-Apartness-Relation R x x#x
 ```
 
-### The property that a binary operation is extensional on an apartness relation
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (f : A → A → A) (R : Apartness-Relation l2 A)
-  where
-
-  is-extensional-prop-binary-op-Apartness-Relation : Prop (l1 ⊔ l2)
-  is-extensional-prop-binary-op-Apartness-Relation =
-    Π-Prop
-      ( A)
-      ( λ a →
-        Π-Prop
-          ( A)
-          ( λ b →
-            Π-Prop
-              ( A)
-              ( λ c →
-                Π-Prop
-                  ( A)
-                  ( λ d →
-                    rel-Apartness-Relation R (f a b) (f c d) ⇒
-                    ( ( rel-Apartness-Relation R a c) ∨
-                      ( rel-Apartness-Relation R b d))))))
-
-  is-extensional-binary-op-Apartness-Relation : UU (l1 ⊔ l2)
-  is-extensional-binary-op-Apartness-Relation =
-    type-Prop is-extensional-prop-binary-op-Apartness-Relation
-```
-
 ## References
 
 {{#bibliography}} {{#reference MRR88}}

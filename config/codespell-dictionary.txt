@@ -4,6 +4,7 @@ Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
 Lavwere->Lawvere
 ahda->agda
+aight->right
 anamorhpism->anamorphism
 anamorhpisms->anamorphisms
 anamorhpsim->anamorphism
@@ -80,3 +81,4 @@ outout->output
 ringr->ring
 ringrs->rings
 semiorm->seminorm
+sight->right
