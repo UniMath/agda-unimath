@@ -597,102 +597,16 @@ module _
   (M : Metric-Space l1' l2')
   where
 
-  extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+  equiv-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space P M ≃
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M) →
-    extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
-  extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space f =
-    ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space P M f ,
-      extension-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M)
-        ( f))
-
-  abstract
-    is-section-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-      extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space ∘
-      short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M) ~
-      id
-    is-section-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
-      f =
-      eq-type-subtype
-        ( extension-prop-short-map-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M))
-        ( eq-htpy-map-short-map-Pseudometric-Space
-          ( P)
-          ( pseudometric-Metric-Space M)
-          ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
-            ( P)
-            ( M)
-            ( short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-              ( P)
-              ( M)
-              ( f)))
-          ( short-map-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-            ( P)
-            ( M)
-            ( f))
-          ( inv-htpy
-            ( htpy-map-exten-short-map-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-              ( P)
-              ( M)
-              ( f))))
-
-    is-retraction-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-      short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M) ∘
-      extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space ~
-      id
-    is-retraction-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
-      f = refl
-
-    is-equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-      is-equiv
-        extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    is-equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
-      =
-      is-equiv-is-invertible
-        ( short-map-exten-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M))
-        ( is-section-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-        ( is-retraction-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-
-  equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M) ≃
-    extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space P M
-  equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
-    =
-    ( extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
-      is-equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space)
-```
-
-### Short maps from the Cauchy pseudocompletion of a pseudometric spaces in a metric space are the precomplete short maps
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  where
-
-  equiv-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M) ≃
-    precomplete-short-map-Pseudometric-Space P M
-  equiv-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    equiv-precomplete-extensible-short-map-Pseudometric-Space P M ∘e
-    equiv-extensible-precomp-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+  equiv-extensible-short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    ( equiv-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( P)
-      ( M)
+      ( M)) ∘e
+    ( equiv-precomplete-extensible-short-map-Pseudometric-Space P M)
 ```
 
 ### The type of extensions of a precomplete short map is contractible

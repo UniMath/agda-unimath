@@ -295,9 +295,14 @@ module _
     short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
-  short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    ( map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space ,
-      is-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+  pr1
+    short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+  pr2
+    short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    is-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
 
   is-extension-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     is-extension-of-map
@@ -530,9 +535,9 @@ module _
 
 ```agda
 module _
-  { l1 l2 l1' l2' : Level}
-  ( P : Pseudometric-Space l1 l2)
-  ( M : Metric-Space l1' l2')
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
   where
 
   precomplete-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space :
@@ -547,4 +552,108 @@ module _
         ( P)
         ( M)
         ( g))
+```
+
+### Short maps from the Cauchy pseudocompletion are the extension of their restrictions
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  where abstract
+
+  is-section-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( P)
+      ( M)) ∘
+    ( precomplete-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M)) ~
+    ( id)
+  is-section-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    g =
+    eq-htpy-map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-Metric-Space M)
+      ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M)
+        ( precomplete-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)
+          ( M)
+          ( g)))
+      ( g)
+      ( refl-htpy)
+
+  is-retraction-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    ( precomplete-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+      ( P)
+      ( M)) ∘
+    ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( P)
+      ( M)) ~
+    ( id)
+  is-retraction-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    f =
+    eq-type-subtype
+      ( is-precomplete-prop-short-map-Pseudometric-Space P M)
+      ( eq-htpy-map-short-map-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)
+          ( M)
+          ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+            ( P)
+            ( M)
+            ( f)))
+        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+        ( inv-htpy
+          ( is-extension-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+          ( P)
+          ( M)
+          ( f))))
+
+  is-equiv-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    is-equiv
+      ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M))
+  is-equiv-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    is-equiv-is-invertible
+      ( precomplete-precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M))
+      ( is-section-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+      ( is-retraction-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+```
+
+### The equivalence between precomplete short maps and short maps from the Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  where
+
+  equiv-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    precomplete-short-map-Pseudometric-Space P M ≃
+    short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-Metric-Space M)
+  pr1
+    equiv-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( P)
+      ( M)
+  pr2
+    equiv-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    =
+    is-equiv-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
+      ( P)
+      ( M)
 ```
