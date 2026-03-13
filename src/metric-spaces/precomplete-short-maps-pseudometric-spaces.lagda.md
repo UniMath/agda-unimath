@@ -174,7 +174,51 @@ module _
   is-precomplete-short-map-precomplete-short-map-Pseudometric-Space = pr2
 ```
 
+### Homotopies between precomplete short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f g : precomplete-short-map-Pseudometric-Space P M)
+  where
+
+  htpy-map-precomplete-short-map-Pseudometric-Space : UU (l1 ⊔ l1')
+  htpy-map-precomplete-short-map-Pseudometric-Space =
+    map-precomplete-short-map-Pseudometric-Space P M f ~
+    map-precomplete-short-map-Pseudometric-Space P M g
+```
+
 ## Properties
+
+### Homotopic precomplete short maps are equal
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  {f g : precomplete-short-map-Pseudometric-Space P M}
+  where
+
+  eq-htpy-map-precomplete-short-map-Pseudometric-Space :
+    htpy-map-precomplete-short-map-Pseudometric-Space P M f g →
+    f ＝ g
+  eq-htpy-map-precomplete-short-map-Pseudometric-Space =
+    eq-type-subtype (is-precomplete-prop-short-map-Pseudometric-Space P M) ∘
+    eq-htpy-map-short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-Metric-Space M)
+      ( short-map-precomplete-short-map-Pseudometric-Space P M f)
+      ( short-map-precomplete-short-map-Pseudometric-Space P M g)
+
+  eq-inv-htpy-map-precomplete-short-map-Pseudometric-Space :
+    htpy-map-precomplete-short-map-Pseudometric-Space P M g f →
+    f ＝ g
+  eq-inv-htpy-map-precomplete-short-map-Pseudometric-Space =
+    eq-htpy-map-precomplete-short-map-Pseudometric-Space ∘ inv-htpy
+```
 
 ### A precomplete short map extends to the Cauchy pseudocompletion
 
@@ -596,24 +640,13 @@ module _
     ( id)
   is-retraction-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
     f =
-    eq-type-subtype
-      ( is-precomplete-prop-short-map-Pseudometric-Space P M)
-      ( eq-htpy-map-short-map-Pseudometric-Space
+    eq-inv-htpy-map-precomplete-short-map-Pseudometric-Space
+      ( P)
+      ( M)
+      ( is-extension-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
         ( P)
-        ( pseudometric-Metric-Space M)
-        ( precomp-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M)
-          ( short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
-            ( P)
-            ( M)
-            ( f)))
-        ( short-map-precomplete-short-map-Pseudometric-Space P M f)
-        ( inv-htpy
-          ( is-extension-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space
-          ( P)
-          ( M)
-          ( f))))
+        ( M)
+        ( f))
 
   is-equiv-short-map-exten-precomplete-short-map-cauchy-pseudocompletion-Pseudometric-Space :
     is-equiv
