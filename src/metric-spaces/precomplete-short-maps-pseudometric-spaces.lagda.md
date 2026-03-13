@@ -501,7 +501,7 @@ module _
       ( sim-map-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-#### Restrictions to short maps from Cauchy pseudocompletions are precomplete
+#### Restrictions of short maps from Cauchy pseudocompletions are precomplete
 
 ```agda
 module _

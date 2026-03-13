@@ -201,6 +201,35 @@ module _
     = pr2 g
 ```
 
+### Homotopies between of extensions of a short map
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+  (g h : extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f)
+  where
+
+  htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    UU (l1 ⊔ l2 ⊔ l1')
+  htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space =
+    htpy-map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space P)
+      ( pseudometric-Metric-Space M)
+      ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M)
+        ( f)
+        ( g))
+      ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( M)
+        ( f)
+        ( h))
+```
+
 ### Extensible short maps along the unit map of Cauchy pseudocompletions
 
 ```agda
@@ -256,35 +285,6 @@ module _
 ```
 
 ## Properties
-
-### Homotopies between of extensions of a short map
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
-  (g h : extension-short-map-cauchy-pseudocompletion-Pseudometric-Space P M f)
-  where
-
-  htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space :
-    UU (l1 ⊔ l2 ⊔ l1')
-  htpy-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space =
-    htpy-map-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M)
-      ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M)
-        ( f)
-        ( g))
-      ( short-map-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space
-        ( P)
-        ( M)
-        ( f)
-        ( h))
-```
 
 ### Homotopic extensions are equal
 
