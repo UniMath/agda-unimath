@@ -257,7 +257,7 @@ module _
 
 ## Properties
 
-### Equality of extensions
+### Homotopies between of extensions of a short map
 
 ```agda
 module _
@@ -284,7 +284,11 @@ module _
         ( M)
         ( f)
         ( h))
+```
 
+### Homotopic extensions are equal
+
+```agda
 module _
   {l1 l2 l1' l2' : Level}
   (P : Pseudometric-Space l1 l2)
