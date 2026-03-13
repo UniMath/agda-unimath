@@ -184,6 +184,28 @@ module _
         ( λ d → H d α β)
 ```
 
+### Homotopic Cauchy approximations have the same limits
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f g : cauchy-approximation-Metric-Space A)
+  (x : type-Metric-Space A)
+  (f~g : htpy-map-cauchy-approximation-Metric-Space A f g)
+  where
+
+  preserves-limit-htpy-map-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space A f x →
+    is-limit-cauchy-approximation-Metric-Space A g x
+  preserves-limit-htpy-map-cauchy-approximation-Metric-Space =
+    preserves-limit-htpy-map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
+      ( g)
+      ( f~g)
+      ( x)
+```
+
 ## See also
 
 - [Convergent cauchy approximations](metric-spaces.convergent-cauchy-approximations-metric-spaces.md)
