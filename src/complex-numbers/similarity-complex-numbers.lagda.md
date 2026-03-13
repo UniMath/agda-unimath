@@ -152,11 +152,9 @@ sim-preserving-endomap-neg-ℂ :
     ( large-similarity-relation-ℂ)
     ( large-similarity-relation-ℂ)
 sim-preserving-endomap-neg-ℂ =
-  λ where
-    .map-sim-preserving-map-Large-Similarity-Relation →
-      neg-ℂ
-    .preserves-sim-map-sim-preserving-map-Large-Similarity-Relation _ _ →
-      preserves-sim-neg-ℂ
+  make-sim-preserving-map-Large-Similarity-Relation
+    ( neg-ℂ)
+    ( preserves-sim-neg-ℂ)
 ```
 
 ### Similarity reasoning
