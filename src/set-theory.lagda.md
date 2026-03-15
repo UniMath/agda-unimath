@@ -61,6 +61,7 @@ open import set-theory.cumulative-hierarchy public
 open import set-theory.dependent-products-cardinals public
 open import set-theory.dependent-sums-cardinals public
 open import set-theory.equality-cardinals public
+open import set-theory.equivalence-conatural-numbers-increasing-binary-sequences public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
 open import set-theory.increasing-binary-sequences public
@@ -68,10 +69,14 @@ open import set-theory.inequality-cardinals public
 open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
 open import set-theory.inhabited-cardinals public
+open import set-theory.limited-principle-of-omniscience-conatural-numbers public
+open import set-theory.limited-principle-of-omniscience-increasing-binary-sequences public
 open import set-theory.positive-elements-increasing-binary-sequences public
 open import set-theory.russells-paradox public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
 open import set-theory.uncountable-sets public
+open import set-theory.weak-limited-principle-of-omniscience-conatural-numbers public
+open import set-theory.weak-limited-principle-of-omniscience-increasing-binary-sequences public
 open import set-theory.zero-cardinal public
 ```
 
