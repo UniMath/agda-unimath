@@ -39,7 +39,7 @@ open import lists.tuples
 Given an [equivalence relation](foundation.equivalence-relations.md) `R` on a
 type `A`, the type of `n`-[tuples](lists.tuples.md) in the
 [set quotient](foundation.set-quotients.md) `A/R` satisfies the
-[universal property of a set quotient](foundation.universal-property-set-quotients.md)
+[universal property of the set quotient](foundation.universal-property-set-quotients.md)
 on the
 [equivalence relation induced by `R` on `n`-tuples in A](lists.equivalence-relations-tuples.md).
 
