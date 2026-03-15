@@ -615,3 +615,23 @@ module _
   add-right-subtraction-Commutative-Ring =
     add-right-subtraction-Ab (ab-Commutative-Ring R)
 ```
+
+### Interchanging addition and right subtraction
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  abstract
+    interchange-add-right-subtraction-Commutative-Ring :
+      (x y z w : type-Commutative-Ring R) →
+      right-subtraction-Commutative-Ring R
+        ( add-Commutative-Ring R x y)
+        ( add-Commutative-Ring R z w) ＝
+      add-Commutative-Ring R
+        ( right-subtraction-Commutative-Ring R x z)
+        ( right-subtraction-Commutative-Ring R y w)
+    interchange-add-right-subtraction-Commutative-Ring =
+      interchange-add-right-subtraction-Ab (ab-Commutative-Ring R)
+```
