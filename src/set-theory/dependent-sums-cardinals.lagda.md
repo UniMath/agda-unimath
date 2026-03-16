@@ -145,7 +145,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (X : Set l1)
-  (is-projective-X : is-projective-Level' l2 (type-Set X))
+  (is-projective-X : is-projective-Level l2 (type-Set X))
   where
 
   leq-cardinality-Σ :

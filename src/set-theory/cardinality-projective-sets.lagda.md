@@ -99,14 +99,14 @@ module _
   is-cardinality-projective-set-Level : UU (l1 ⊔ lsuc l2)
   is-cardinality-projective-set-Level =
     is-connected-map zero-𝕋 (postcomp (type-Set I) (cardinality {l2})) ×
-    is-projective-Level' l2 (type-Set I)
+    is-projective-Level l2 (type-Set I)
 
   is-prop-is-cardinality-projective-set-Level :
     is-prop is-cardinality-projective-set-Level
   is-prop-is-cardinality-projective-set-Level =
     is-prop-product
       ( is-prop-is-cardinality-preprojective-set-Level l2 I)
-      ( is-prop-is-projective-Level' l2 (type-Set I))
+      ( is-prop-is-projective-Level l2 (type-Set I))
 
   is-cardinality-projective-set-prop-Level : Prop (l1 ⊔ lsuc l2)
   is-cardinality-projective-set-prop-Level =
@@ -146,7 +146,7 @@ module _
     pr1 is-cardinality-projective-Cardinality-Projective-Set
 
   is-projective-Cardinality-Projective-Set :
-    is-projective-Level' l2 type-Cardinality-Projective-Set
+    is-projective-Level l2 type-Cardinality-Projective-Set
   is-projective-Cardinality-Projective-Set =
     pr2 is-cardinality-projective-Cardinality-Projective-Set
 
