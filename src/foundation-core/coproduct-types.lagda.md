@@ -49,3 +49,35 @@ rec-coproduct :
   (A → C) → (B → C) → (A + B) → C
 rec-coproduct {C = C} = ind-coproduct (λ _ → C)
 ```
+
+### The induction principle for ternary coproduct types
+
+```agda
+ind-ternary-coproduct :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} →
+  (D : A + B + C → UU l4) →
+  ((x : A) → D (inl x)) →
+  ((y : B) → D (inr (inl y))) →
+  ((z : C) → D (inr (inr z))) →
+  (t : A + B + C) →
+  D t
+ind-ternary-coproduct D f g h =
+  ind-coproduct D f
+    (ind-coproduct (λ u → D (inr u)) g h)
+```
+
+### The recursion principle for ternary coproduct types
+
+```agda
+rec-ternary-coproduct :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
+  (A → D) →
+  (B → D) →
+  (C → D) →
+  A + B + C →
+  D
+rec-ternary-coproduct {D = D} =
+  ind-ternary-coproduct (λ _ → D)
+```

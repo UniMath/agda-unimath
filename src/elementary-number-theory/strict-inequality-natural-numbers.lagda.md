@@ -210,12 +210,12 @@ abstract
 ### The strict inequality on the natural numbers is linear
 
 ```agda
-linear-le-ℕ : (x y : ℕ) → (le-ℕ x y) + ((x ＝ y) + (le-ℕ y x))
-linear-le-ℕ zero-ℕ zero-ℕ = inr (inl refl)
-linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
-linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
-linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
-  map-coproduct id (map-coproduct (ap succ-ℕ) id) (linear-le-ℕ x y)
+trichotomy-le-ℕ : (x y : ℕ) → (le-ℕ x y) + ((x ＝ y) + (le-ℕ y x))
+trichotomy-le-ℕ zero-ℕ zero-ℕ = inr (inl refl)
+trichotomy-le-ℕ zero-ℕ (succ-ℕ y) = inl star
+trichotomy-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
+trichotomy-le-ℕ (succ-ℕ x) (succ-ℕ y) =
+  map-coproduct id (map-coproduct (ap succ-ℕ) id) (trichotomy-le-ℕ x y)
 ```
 
 ### `n < m` if and only if there exists a nonzero natural number `l` such that `l + n = m`
