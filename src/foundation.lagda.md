@@ -130,7 +130,9 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-binary-relations public
 open import foundation.dependent-products-cumulative-large-sets public
+open import foundation.dependent-products-equivalence-relations public
 open import foundation.dependent-products-large-binary-relations public
 open import foundation.dependent-products-large-equivalence-relations public
 open import foundation.dependent-products-large-similarity-relations public
@@ -217,7 +219,6 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
-open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.finitely-truncated-types public
