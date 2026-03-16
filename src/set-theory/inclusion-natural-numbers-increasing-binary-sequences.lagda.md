@@ -1,4 +1,4 @@
-# The canonical inclusion of natural numbers into increasing binary sequences
+# The inclusion of natural numbers into increasing binary sequences
 
 ```agda
 module set-theory.inclusion-natural-numbers-increasing-binary-sequences where
@@ -310,6 +310,12 @@ module _
       ( H)
       ( ind-Maybe (h , h∞))
 ```
+
+## See also
+
+- For the inclusion of the natural numbers into
+  [the conatural numbers](elementary-number-theory.conatural-numbers.md) see
+  [the inclusion of natural numbers into the conatural numbers](elementary-number-theory.inclusion-natural-numbers-conatural-numbers.md)
 
 ## References
 
