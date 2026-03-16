@@ -206,6 +206,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extensional-binary-functions-apartness-relations public
 open import foundation.extensions-types public
 open import foundation.extensions-types-global-subuniverses public
 open import foundation.extensions-types-subuniverses public
