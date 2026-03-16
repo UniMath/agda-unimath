@@ -72,6 +72,8 @@ open import orthogonal-factorization-systems.reflective-global-subuniverses publ
 open import orthogonal-factorization-systems.reflective-modalities public
 open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.regular-cd-structures public
+open import orthogonal-factorization-systems.relative-separations-types-global-subuniverses public
+open import orthogonal-factorization-systems.relative-separations-types-subuniverses public
 open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
