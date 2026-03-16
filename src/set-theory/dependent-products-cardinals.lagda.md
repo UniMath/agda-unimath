@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-set-truncation
 open import foundation.identity-types
+open import foundation.projective-types
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.transport-along-identifications
@@ -29,7 +30,7 @@ open import set-theory.inhabited-cardinals
 
 ## Idea
 
-Given a family of cardinals $κ : I → \mathrm{Cardinal}$ over a
+Given a family of cardinals $κ : I → \Cardinal$ over a
 [cardinality-recursive set](set-theory.cardinality-recursive-sets.md) $I$, then
 we may define the {{#concept "dependent product cardinal" Agda=Π-Cardinal'}}
 $Π_{i∈I}κᵢ$, as the cardinality of the
@@ -103,33 +104,35 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
-  (let type-X = type-Cardinality-Projective-Set X)
+  {l1 l2 : Level} (X : Projective-Set l1 (lsuc l2))
+  (let X' = cardinality-projective-set-Projective-Set X)
+  (let type-X = type-Projective-Set X)
   where
 
   is-inhabited-Π-Cardinal :
     (K : type-X → Cardinal l2) →
     ((x : type-X) → is-inhabited-Cardinal (K x)) →
-    is-inhabited-Cardinal (Π-Cardinal X K)
+    is-inhabited-Cardinal (Π-Cardinal X' K)
   is-inhabited-Π-Cardinal =
-    ind-Cardinality-Projective-Set X
+    ind-Cardinality-Projective-Set X'
       ( λ K →
         set-Prop
           ( function-Prop
             ( (x : type-X) → is-inhabited-Cardinal (K x))
-            ( is-inhabited-prop-Cardinal (Π-Cardinal X K))))
+            ( is-inhabited-prop-Cardinal (Π-Cardinal X' K))))
       ( λ Y y →
         inv-tr
           ( is-inhabited-Cardinal)
-          ( compute-Π-Cardinal X Y)
+          ( compute-Π-Cardinal X' Y)
           ( unit-is-inhabited-cardinality
-            ( Π-Set (set-Cardinality-Projective-Set X) Y)
-            ( is-projective-Cardinality-Projective-Set X
+            ( Π-Set (set-Projective-Set X) Y)
+            ( is-projective-is-projective-lsuc-Level l2
+              ( is-projective-Projective-Set X)
               ( type-Set ∘ Y)
               ( λ x → inv-unit-is-inhabited-cardinality (Y x) (y x)))))
 
   Π-Inhabited-Cardinal :
     (type-X → Inhabited-Cardinal l2) → Inhabited-Cardinal (l1 ⊔ l2)
   Π-Inhabited-Cardinal K =
-    ( Π-Cardinal X (pr1 ∘ K) , is-inhabited-Π-Cardinal (pr1 ∘ K) (pr2 ∘ K))
+    ( Π-Cardinal X' (pr1 ∘ K) , is-inhabited-Π-Cardinal (pr1 ∘ K) (pr2 ∘ K))
 ```
