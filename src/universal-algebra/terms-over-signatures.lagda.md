@@ -11,18 +11,14 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.functoriality-tuples
-open import lists.lists
-open import lists.lists-discrete-types
 open import lists.tuples
 
 open import univalent-combinatorics.standard-finite-types
