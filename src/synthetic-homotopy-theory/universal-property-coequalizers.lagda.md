@@ -212,11 +212,9 @@ module _
         ( equiv-equiv-cofork-equiv-double-arrow c c' e e')
         ( coherence-square-cocone-cofork a c)
         ( inv-htpy
-          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e)))
+          ( left-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e))
         ( inv-htpy
-          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e)))
+          ( right-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e))
         ( inv-htpy
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -289,11 +287,9 @@ module _
         ( map-equiv-cofork-equiv-double-arrow c c' e e')
         ( coherence-square-cocone-cofork a c)
         ( inv-htpy
-          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e)))
+          ( left-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e))
         ( inv-htpy
-          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e)))
+          ( right-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e))
         ( inv-htpy
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -321,11 +317,9 @@ module _
           ( vertical-map-cocone-cofork a c)
           ( vertical-map-span-cocone-cofork a')
           ( vertical-map-cocone-cofork a' c')
-          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e))
+          ( right-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e)
           ( coherence-square-cocone-cofork a c)
-          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-equiv-double-arrow a a' e))
+          ( left-square-equiv-span-diagram-cofork-equiv-double-arrow a a' e)
           ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')
           ( coherence-square-cocone-cofork a' c')
           ( pasting-vertical-coherence-square-maps
