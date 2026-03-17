@@ -68,10 +68,7 @@ module _
 
   data word-free-Algebra : UU (l1 ⊔ l3) where
     in-generator-word-free-Algebra : G → word-free-Algebra
-    op-word-free-Algebra :
-      (op : operation-signature σ) →
-      tuple word-free-Algebra (arity-operation-signature σ op) →
-      word-free-Algebra
+    op-word-free-Algebra : is-model-of-signature-type σ word-free-Algebra
 
   data sim-word-free-Algebra : Relation (l1 ⊔ l2 ⊔ l3) word-free-Algebra where
     refl-sim-word-free-Algebra :
