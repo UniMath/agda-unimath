@@ -223,7 +223,7 @@ module _
         ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
           by
           ( equiv-concat
-            ( (inv ( is-retraction-equivalence-class-set-quotient R (class R x))))
+            ( inv ( is-retraction-equivalence-class-set-quotient R (class R x)))
             ( equivalence-class-set-quotient R (quotient-map R y)))
         ≃ ( class R x ＝ class R y)
           by
