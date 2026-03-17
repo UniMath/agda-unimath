@@ -21,8 +21,10 @@ open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.propositional-truncation-binary-relations
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -222,6 +224,16 @@ module _
       eval-term σ op-free-Algebra (in-word-free-Algebra ∘ v) t ＝
       in-word-free-Algebra (eval-term σ op-word-free-Algebra v t)
 
+    Eq-compute-eval-tuple-term-free-Algebra :
+      (k : ℕ) {n : ℕ} (t : tuple (term σ k) n)
+      (v : fin-sequence word-free-Algebra k) →
+      Eq-tuple
+        ( n)
+        ( eval-tuple-term σ op-free-Algebra (in-word-free-Algebra ∘ v) t)
+        ( map-tuple
+          ( in-word-free-Algebra)
+          ( eval-tuple-term σ op-word-free-Algebra v t))
+
     compute-eval-tuple-term-free-Algebra :
       (k : ℕ) {n : ℕ} (t : tuple (term σ k) n)
       (v : fin-sequence word-free-Algebra k) →
@@ -229,12 +241,6 @@ module _
       map-tuple
         ( in-word-free-Algebra)
         ( eval-tuple-term σ op-word-free-Algebra v t)
-    compute-eval-tuple-term-free-Algebra k {0} empty-tuple v =
-      refl
-    compute-eval-tuple-term-free-Algebra k {succ-ℕ n} (t ∷ ts) v =
-      eq-Eq-tuple _ _ _
-        ( compute-eval-term-free-Algebra k t v ,
-          Eq-eq-tuple _ _ _ (compute-eval-tuple-term-free-Algebra k ts v))
 
     compute-eval-term-free-Algebra k (var-term i) v = refl
     compute-eval-term-free-Algebra k (op-term op xs) v =
@@ -244,6 +250,14 @@ module _
       ( compute-op-free-Algebra
         ( op)
         ( eval-tuple-term σ op-word-free-Algebra v xs))
+
+    Eq-compute-eval-tuple-term-free-Algebra k {0} empty-tuple v = map-raise star
+    Eq-compute-eval-tuple-term-free-Algebra k {succ-ℕ n} (x ∷ xs) v =
+      ( compute-eval-term-free-Algebra k x v ,
+        Eq-compute-eval-tuple-term-free-Algebra k xs v)
+
+    compute-eval-tuple-term-free-Algebra k xs v =
+      eq-Eq-tuple _ _ _ (Eq-compute-eval-tuple-term-free-Algebra k xs v)
 
   abstract
     is-algebra-free-Algebra :

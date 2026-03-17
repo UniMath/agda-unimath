@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 For any [binary relation](foundation.binary-relations.md) `R` on a type `A`,
 there is an induced binary relation valued in propositions constructed by taking
-the [propositional truncation](foundation.propsitional-truncations.md) of `R`.
+the [propositional truncation](foundation.propositional-truncations.md) of `R`.
 
 ## Definition
 
