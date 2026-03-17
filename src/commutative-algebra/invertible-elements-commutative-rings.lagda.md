@@ -70,7 +70,7 @@ module _
       ( ring-Commutative-Ring A)
 ```
 
-### Aight invertible elements of commutative rings
+### Right invertible elements of commutative rings
 
 ```agda
 module _
