@@ -13,6 +13,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.function-extensionality
+open import foundation.equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.function-types
@@ -43,6 +45,7 @@ open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
+open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.terms-over-signatures
 ```
 
@@ -256,7 +259,6 @@ module _
     compute-eval-tuple-term-free-Algebra k xs v =
       eq-Eq-tuple _ _ _ (Eq-compute-eval-tuple-term-free-Algebra k xs v)
 
-  abstract
     is-algebra-free-Algebra :
       is-algebra-Model-of-Signature σ T model-of-signature-free-Algebra
     is-algebra-free-Algebra i v =
@@ -303,4 +305,172 @@ module _
 
 ### The universal property of the free algebra
 
-This has yet to be proved.
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (G : UU l3)
+  where
+
+  is-free-Algebra :
+    {l4 : Level} (l5 : Level) → Algebra l4 σ T →
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
+  is-free-Algebra l5 A =
+    (B : Algebra l5 σ T) → (G → type-Algebra σ T B) ≃ hom-Algebra σ T A B
+
+module _
+  {l1 l2 l3 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (G : UU l3)
+  {l4 : Level}
+  (B : Algebra l4 σ T)
+  where
+
+  map-word-is-free-free-Algebra :
+    (G → type-Algebra σ T B) → word-free-Algebra σ T G → type-Algebra σ T B
+
+  -- necessarily preferred to map-tuple for termination checking
+  map-tuple-word-is-free-free-Algebra :
+    (G → type-Algebra σ T B) →
+    {n : ℕ} →
+    tuple (word-free-Algebra σ T G) n →
+    tuple (type-Algebra σ T B) n
+
+  map-word-is-free-free-Algebra f (in-generator-word-free-Algebra x) = f x
+  map-word-is-free-free-Algebra f (op-word-free-Algebra op xs) =
+    is-model-set-Algebra σ T B
+      ( op)
+      ( map-tuple-word-is-free-free-Algebra f xs)
+
+  map-tuple-word-is-free-free-Algebra f empty-tuple = empty-tuple
+  map-tuple-word-is-free-free-Algebra f (w ∷ ws) =
+    map-word-is-free-free-Algebra f w ∷
+    map-tuple-word-is-free-free-Algebra f ws
+
+  abstract
+    Eq-map-tuple-map-tuple-word-is-free-free-Algebra :
+      (f : G → type-Algebra σ T B)
+      {n : ℕ} (w : tuple (word-free-Algebra σ T G) n) →
+      Eq-tuple
+        ( n)
+        ( map-tuple-word-is-free-free-Algebra f w)
+        ( map-tuple (map-word-is-free-free-Algebra f) w)
+    Eq-map-tuple-map-tuple-word-is-free-free-Algebra f empty-tuple =
+      map-raise star
+    Eq-map-tuple-map-tuple-word-is-free-free-Algebra f (w ∷ ws) =
+      ( refl ,
+        Eq-map-tuple-map-tuple-word-is-free-free-Algebra f ws)
+
+    eq-map-tuple-map-tuple-word-is-free-free-Algebra :
+      (f : G → type-Algebra σ T B)
+      {n : ℕ} (w : tuple (word-free-Algebra σ T G) n) →
+      map-tuple-word-is-free-free-Algebra f w ＝
+      map-tuple (map-word-is-free-free-Algebra f) w
+    eq-map-tuple-map-tuple-word-is-free-free-Algebra f w =
+      eq-Eq-tuple _ _ _ (Eq-map-tuple-map-tuple-word-is-free-free-Algebra f w)
+
+  abstract
+    eval-term-map-word-is-free-free-Algebra :
+      (f : G → type-Algebra σ T B) {n : ℕ} (t : term σ n)
+      (v : fin-sequence (word-free-Algebra σ T G) n) →
+      map-word-is-free-free-Algebra f (eval-term σ op-word-free-Algebra v t) ＝
+      eval-term
+        ( σ)
+        ( is-model-set-Algebra σ T B)
+        ( map-word-is-free-free-Algebra f ∘ v) t
+
+    eval-tuple-term-map-tuple-word-is-free-free-Algebra :
+      (f : G → type-Algebra σ T B) {k n : ℕ} (t : tuple (term σ k) n)
+      (v : fin-sequence (word-free-Algebra σ T G) k) →
+      Eq-tuple
+        ( n)
+        ( map-tuple-word-is-free-free-Algebra
+          ( f)
+          ( eval-tuple-term σ op-word-free-Algebra v t))
+        ( eval-tuple-term
+          ( σ)
+          ( is-model-set-Algebra σ T B)
+          ( map-word-is-free-free-Algebra f ∘ v)
+          ( t))
+
+    eval-term-map-word-is-free-free-Algebra f (var-term x) v =
+      refl
+    eval-term-map-word-is-free-free-Algebra f (op-term op x) v =
+      ap
+        ( is-model-set-Algebra σ T B op)
+        ( eq-Eq-tuple _ _ _
+          ( eval-tuple-term-map-tuple-word-is-free-free-Algebra f x v))
+
+    eval-tuple-term-map-tuple-word-is-free-free-Algebra f empty-tuple v =
+      map-raise star
+    eval-tuple-term-map-tuple-word-is-free-free-Algebra f (x ∷ xs) v =
+      ( eval-term-map-word-is-free-free-Algebra f x v ,
+        eval-tuple-term-map-tuple-word-is-free-free-Algebra f xs v)
+
+  abstract
+    preserves-sim-map-word-is-free-free-Algebra' :
+      (f : G → type-Algebra σ T B) (x y : word-free-Algebra σ T G) →
+      sim-word-free-Algebra σ T G x y →
+      map-word-is-free-free-Algebra f x ＝ map-word-is-free-free-Algebra f y
+
+    preserves-sim-map-tuple-word-is-free-free-Algebra' :
+      (f : G → type-Algebra σ T B) {n : ℕ}
+      (x y : tuple (word-free-Algebra σ T G) n) →
+      rel-tuple-Relation (sim-word-free-Algebra σ T G) n x y →
+      Eq-tuple
+        ( n)
+        ( map-tuple-word-is-free-free-Algebra f x)
+        ( map-tuple-word-is-free-free-Algebra f y)
+
+    preserves-sim-map-word-is-free-free-Algebra'
+      f x .x (refl-sim-word-free-Algebra .x) =
+      refl
+    preserves-sim-map-word-is-free-free-Algebra'
+      f x y (symmetric-sim-word-free-Algebra .y .x y~x) =
+      inv (preserves-sim-map-word-is-free-free-Algebra' f y x y~x)
+    preserves-sim-map-word-is-free-free-Algebra'
+      f x y (transitive-sim-word-free-Algebra .x z .y z~y x~z) =
+      ( preserves-sim-map-word-is-free-free-Algebra' f x z x~z) ∙
+      ( preserves-sim-map-word-is-free-free-Algebra' f z y z~y)
+    preserves-sim-map-word-is-free-free-Algebra'
+      f (op-word-free-Algebra op x) (op-word-free-Algebra .op y)
+      (ap-op-sim-word-free-Algebra .op .x .y x~y) =
+      ap
+        ( is-model-set-Algebra σ T B op)
+        ( eq-Eq-tuple _ _ _
+          ( preserves-sim-map-tuple-word-is-free-free-Algebra' f x y x~y))
+    preserves-sim-map-word-is-free-free-Algebra'
+      f x y (equation-sim-word-free-Algebra e v) =
+      let
+        (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T e
+      in
+        ( eval-term-map-word-is-free-free-Algebra f lhs v) ∙
+        ( is-algebra-model-Algebra σ T B
+          ( e)
+          ( map-word-is-free-free-Algebra f ∘ v)) ∙
+        ( inv (eval-term-map-word-is-free-free-Algebra f rhs v))
+
+    preserves-sim-map-tuple-word-is-free-free-Algebra'
+      f empty-tuple empty-tuple _ =
+      map-raise star
+    preserves-sim-map-tuple-word-is-free-free-Algebra'
+      f (x ∷ xs) (y ∷ ys) (x~y , xs~ys) =
+      ( preserves-sim-map-word-is-free-free-Algebra' f x y x~y ,
+        preserves-sim-map-tuple-word-is-free-free-Algebra' f xs ys xs~ys)
+
+  preserves-sim-map-word-is-free-free-Algebra :
+    (f : G → type-Algebra σ T B) →
+    preserves-sim-equivalence-relation
+      ( equivalence-relation-word-free-Algebra σ T G)
+      ( Id-equivalence-relation (set-Algebra σ T B))
+      ( map-word-is-free-free-Algebra f)
+  preserves-sim-map-word-is-free-free-Algebra f {x} {y} =
+    rec-trunc-Prop
+      ( Id-Prop
+        ( set-Algebra σ T B)
+        ( map-word-is-free-free-Algebra f x)
+        ( map-word-is-free-free-Algebra f y))
+      ( preserves-sim-map-word-is-free-free-Algebra' f x y)
+```
