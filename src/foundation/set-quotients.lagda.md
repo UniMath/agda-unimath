@@ -46,6 +46,20 @@ open import foundation-core.subtypes
 
 </details>
 
+## Idea
+
+Given an [equivalence relation](foundation.equivalence-relations.md) `R` on a
+type `A`, the
+{{#concept "set quotient" WDID=Q3966112 WD="quotient set" Agda=set-quotient}}
+`A/R` is a canonical construction of a type satisfying the
+[universal property of set quotients](foundation.universal-property-set-quotients.md).
+
+It is constructed by using the
+[type theoretic replacement axiom](foundation.replacement.md) to construct a
+type [equivalent](foundation.equivalences.md) to the type of
+[equivalence classes](foundation.equivalence-classes.md) of `R` in the universe
+that is the least upper bound of the universes of `A` and `R`.
+
 ## Definitions
 
 ### Set quotients
@@ -198,26 +212,27 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where
 
-  is-effective-quotient-map : is-effective R (quotient-map R)
-  is-effective-quotient-map x y =
-    equivalence-reasoning
-      ( quotient-map R x ＝ quotient-map R y)
-      ≃ ( equivalence-class-set-quotient R (quotient-map R x) ＝
-          equivalence-class-set-quotient R (quotient-map R y))
-        by equiv-ap-emb (emb-equivalence-class-set-quotient R)
-      ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
-        by
-        ( equiv-concat
-          ( (inv ( is-retraction-equivalence-class-set-quotient R (class R x))))
-          ( equivalence-class-set-quotient R (quotient-map R y)))
-      ≃ ( class R x ＝ class R y)
-        by
-        ( equiv-concat'
-          ( class R x)
-          ( is-retraction-equivalence-class-set-quotient R (class R y)))
-      ≃ ( sim-equivalence-relation R x y)
-        by
-        ( is-effective-class R x y)
+  abstract
+    is-effective-quotient-map : is-effective R (quotient-map R)
+    is-effective-quotient-map x y =
+      equivalence-reasoning
+        ( quotient-map R x ＝ quotient-map R y)
+        ≃ ( equivalence-class-set-quotient R (quotient-map R x) ＝
+            equivalence-class-set-quotient R (quotient-map R y))
+          by equiv-ap-emb (emb-equivalence-class-set-quotient R)
+        ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
+          by
+          ( equiv-concat
+            ( (inv ( is-retraction-equivalence-class-set-quotient R (class R x))))
+            ( equivalence-class-set-quotient R (quotient-map R y)))
+        ≃ ( class R x ＝ class R y)
+          by
+          ( equiv-concat'
+            ( class R x)
+            ( is-retraction-equivalence-class-set-quotient R (class R y)))
+        ≃ ( sim-equivalence-relation R x y)
+          by
+          ( is-effective-class R x y)
 
   apply-effectiveness-quotient-map :
     {x y : A} → quotient-map R x ＝ quotient-map R y →
@@ -264,31 +279,32 @@ module _
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
 
-  is-section-inv-precomp-set-quotient :
-    {l : Level} (X : Set l) →
-    (f : reflecting-map-equivalence-relation R (type-Set X)) →
-    (a : A) →
-    inv-precomp-set-quotient X f (quotient-map R a) ＝
-      map-reflecting-map-equivalence-relation R f a
-  is-section-inv-precomp-set-quotient X f =
-    htpy-eq
-      ( ap
-        ( map-reflecting-map-equivalence-relation R)
-        ( is-section-map-inv-is-equiv
-          ( is-set-quotient-set-quotient X)
-          ( f)))
+  abstract
+    is-section-inv-precomp-set-quotient :
+      {l : Level} (X : Set l) →
+      (f : reflecting-map-equivalence-relation R (type-Set X)) →
+      (a : A) →
+      inv-precomp-set-quotient X f (quotient-map R a) ＝
+        map-reflecting-map-equivalence-relation R f a
+    is-section-inv-precomp-set-quotient X f =
+      htpy-eq
+        ( ap
+          ( map-reflecting-map-equivalence-relation R)
+          ( is-section-map-inv-is-equiv
+            ( is-set-quotient-set-quotient X)
+            ( f)))
 
-  is-retraction-inv-precomp-set-quotient :
-    {l : Level} (X : Set l) (f : hom-Set (quotient-Set R) X) →
-    inv-precomp-set-quotient X
-      ( precomp-Set-Quotient R
-        ( quotient-Set R)
-        ( reflecting-map-quotient-map R)
-        ( X)
-        ( f)) ＝
-    f
-  is-retraction-inv-precomp-set-quotient X f =
-    is-retraction-map-inv-is-equiv (is-set-quotient-set-quotient X) f
+    is-retraction-inv-precomp-set-quotient :
+      {l : Level} (X : Set l) (f : hom-Set (quotient-Set R) X) →
+      inv-precomp-set-quotient X
+        ( precomp-Set-Quotient R
+          ( quotient-Set R)
+          ( reflecting-map-quotient-map R)
+          ( X)
+          ( f)) ＝
+      f
+    is-retraction-inv-precomp-set-quotient X f =
+      is-retraction-map-inv-is-equiv (is-set-quotient-set-quotient X) f
 ```
 
 ### Induction into propositions on the set quotient
