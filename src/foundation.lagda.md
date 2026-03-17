@@ -405,6 +405,7 @@ open import foundation.proper-subtypes public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
+open import foundation.propositional-truncation-binary-relations public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullback-cones public
