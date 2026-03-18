@@ -10,7 +10,9 @@ module ring-theory.invertible-elements-large-rings where
 
 ```agda
 open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.propositions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.invertible-elements-large-monoids
@@ -240,6 +242,46 @@ module _
       ( large-monoid-mul-Large-Ring R)
       ( x)
       ( y)
+```
+
+### Invertible elements are closed under negation
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (R : Large-Ring α β)
+  {l1 : Level}
+  (x : type-Large-Ring R l1)
+  where
+
+  is-left-invertible-element-neg-Large-Ring :
+    is-left-invertible-element-Large-Ring R x →
+    is-left-invertible-element-Large-Ring R (neg-Large-Ring R x)
+  is-left-invertible-element-neg-Large-Ring (y , yx~1) =
+    ( neg-Large-Ring R y ,
+      inv-tr
+        ( is-one-Large-Ring R)
+        ( negative-law-mul-Large-Ring R y x)
+        ( yx~1))
+
+  is-right-invertible-element-neg-Large-Ring :
+    is-right-invertible-element-Large-Ring R x →
+    is-right-invertible-element-Large-Ring R (neg-Large-Ring R x)
+  is-right-invertible-element-neg-Large-Ring (y , xy~1) =
+    ( neg-Large-Ring R y ,
+      inv-tr
+        ( is-one-Large-Ring R)
+        ( negative-law-mul-Large-Ring R x y)
+        ( xy~1))
+
+  is-invertible-element-neg-Large-Ring :
+    is-invertible-element-Large-Ring R x →
+    is-invertible-element-Large-Ring R (neg-Large-Ring R x)
+  is-invertible-element-neg-Large-Ring (y , xy~1 , yx~1) =
+    ( neg-Large-Ring R y ,
+      pr2 (is-right-invertible-element-neg-Large-Ring (y , xy~1)) ,
+      pr2 (is-left-invertible-element-neg-Large-Ring (y , yx~1)))
 ```
 
 ## See also
