@@ -688,26 +688,16 @@ module _
     htpy-is-retraction-map-inv-is-free-free-Algebra f g =
       compute-map-is-free-free-Algebra σ T G B f _
 
-  is-equiv-hom-is-free-free-Algebra :
-    is-equiv (hom-is-free-free-Algebra σ T G B)
-  is-equiv-hom-is-free-free-Algebra =
+  is-free-free-Algebra :
+    is-equiv map-inv-is-free-free-Algebra
+  is-free-free-Algebra =
     is-equiv-is-invertible
-      ( map-inv-is-free-free-Algebra)
+      ( hom-is-free-free-Algebra σ T G B)
+      ( λ f →
+        eq-htpy (htpy-is-retraction-map-inv-is-free-free-Algebra f))
       ( λ φ →
         eq-type-subtype
           ( preserves-operations-prop-Algebra σ T (free-Algebra σ T G) B)
           ( eq-htpy
             ( htpy-is-section-map-inv-is-free-free-Algebra φ)))
-      ( λ f →
-        eq-htpy (htpy-is-retraction-map-inv-is-free-free-Algebra f))
-
-is-free-free-Algebra :
-  {l1 l2 l3 : Level}
-  (σ : signature l1)
-  (T : Algebraic-Theory l2 σ)
-  (G : UU l3) →
-  is-free-Algebra σ T G (free-Algebra σ T G)
-is-free-free-Algebra σ T G B =
-  ( hom-is-free-free-Algebra σ T G B ,
-    is-equiv-hom-is-free-free-Algebra σ T G B)
 ```
