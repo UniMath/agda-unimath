@@ -40,8 +40,7 @@ large-ring-ℂ : Large-Ring lsuc (_⊔_)
 large-ring-ℂ =
   make-Large-Ring
     ( large-ab-add-ℂ)
-    ( mul-ℂ)
-    ( λ _ _ z~z' _ _ → preserves-sim-mul-ℂ z~z')
+    ( sim-preserving-binary-operator-mul-ℂ)
     ( one-ℂ)
     ( associative-mul-ℂ)
     ( left-unit-law-mul-ℂ)

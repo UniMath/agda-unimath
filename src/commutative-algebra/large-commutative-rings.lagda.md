@@ -124,7 +124,7 @@ module _
     Large-Commutative-Monoid α β
   multiplicative-large-commutative-monoid-Large-Commutative-Ring =
     make-Large-Commutative-Monoid
-      ( multiplicative-large-monoid-Large-Ring
+      ( large-monoid-mul-Large-Ring
         ( large-ring-Large-Commutative-Ring R))
       ( commutative-mul-Large-Commutative-Ring R)
 
