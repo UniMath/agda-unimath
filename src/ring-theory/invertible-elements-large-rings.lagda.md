@@ -163,7 +163,7 @@ module _
       ( x)
 ```
 
-### An element is invertible in a large monoid if and only if it is invertible in the corresponding small monoid
+### An element is invertible in a large ring if and only if it is invertible in the corresponding small ring
 
 ```agda
 module _
