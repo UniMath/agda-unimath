@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -23,10 +24,12 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
 </details>
@@ -234,36 +237,14 @@ module _
       ( id-isometry-Pseudometric-Space B)
       ( f)) ＝
     ( f)
-  left-unit-law-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( B)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( B)
-        ( B)
-        ( id-isometry-Pseudometric-Space B)
-        ( f))
-      ( f)
-      ( refl-htpy)
+  left-unit-law-comp-isometry-Pseudometric-Space = refl
 
   right-unit-law-comp-isometry-Pseudometric-Space :
     ( comp-isometry-Pseudometric-Space A A B
       ( f)
       ( id-isometry-Pseudometric-Space A)) ＝
     ( f)
-  right-unit-law-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( comp-isometry-Pseudometric-Space
-        ( A)
-        ( A)
-        ( B)
-        ( f)
-        ( id-isometry-Pseudometric-Space A))
-      ( refl-htpy)
+  right-unit-law-comp-isometry-Pseudometric-Space = refl
 ```
 
 ### Associativity of composition of isometries between pseudometric spaces
@@ -287,17 +268,7 @@ module _
     ( comp-isometry-Pseudometric-Space A C D
       ( h)
       ( comp-isometry-Pseudometric-Space A B C g f))
-  associative-comp-isometry-Pseudometric-Space =
-    eq-htpy-map-isometry-Pseudometric-Space
-      ( A)
-      ( D)
-      ( comp-isometry-Pseudometric-Space A B D
-        ( comp-isometry-Pseudometric-Space B C D h g)
-        ( f))
-      ( comp-isometry-Pseudometric-Space A C D
-        ( h)
-        ( comp-isometry-Pseudometric-Space A B C g f))
-      ( refl-htpy)
+  associative-comp-isometry-Pseudometric-Space = refl
 ```
 
 ### The inverse of an isometric equivalence is an isometry
@@ -377,4 +348,180 @@ module _
         ( f))
       ( id-isometry-Pseudometric-Space A)
       ( is-retraction-map-inv-is-equiv E)
+```
+
+### Any isometry between pseudometric spaces is expansive
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : map-Pseudometric-Space A B)
+  where
+
+  is-expansive-map-is-isometry-Pseudometric-Space :
+    is-isometry-Pseudometric-Space A B f →
+    is-expansive-map-Pseudometric-Space A B f
+  is-expansive-map-is-isometry-Pseudometric-Space I =
+    reflects-neighborhoods-map-isometry-Pseudometric-Space A B (f , I)
+```
+
+### The embedding of isometries of pseudometric spaces into expansive maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  where
+
+  expansive-map-isometry-Pseudometric-Space :
+    isometry-Pseudometric-Space A B → expansive-map-Pseudometric-Space A B
+  expansive-map-isometry-Pseudometric-Space f =
+    map-isometry-Pseudometric-Space A B f ,
+    is-expansive-map-is-isometry-Pseudometric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Pseudometric-Space A B f)
+      ( is-isometry-map-isometry-Pseudometric-Space A B f)
+
+  is-emb-expansive-map-isometry-Pseudometric-Space :
+    is-emb expansive-map-isometry-Pseudometric-Space
+  is-emb-expansive-map-isometry-Pseudometric-Space =
+    is-emb-right-factor
+      ( map-expansive-map-Pseudometric-Space A B)
+      ( expansive-map-isometry-Pseudometric-Space)
+      ( is-emb-inclusion-subtype (is-expansive-map-prop-Pseudometric-Space A B))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
+
+  emb-expansive-map-isometry-Pseudometric-Space :
+    isometry-Pseudometric-Space A B ↪ expansive-map-Pseudometric-Space A B
+  emb-expansive-map-isometry-Pseudometric-Space =
+    ( expansive-map-isometry-Pseudometric-Space ,
+      is-emb-expansive-map-isometry-Pseudometric-Space)
+```
+
+### Any isometry between pseudometric spaces is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : map-Pseudometric-Space A B)
+  where
+
+  is-short-map-is-isometry-Pseudometric-Space :
+    is-isometry-Pseudometric-Space A B f →
+    is-short-map-Pseudometric-Space A B f
+  is-short-map-is-isometry-Pseudometric-Space I =
+    preserves-neighborhoods-map-isometry-Pseudometric-Space A B (f , I)
+```
+
+### The embedding of isometries of pseudometric spaces into short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  where
+
+  short-map-isometry-Pseudometric-Space :
+    isometry-Pseudometric-Space A B → short-map-Pseudometric-Space A B
+  short-map-isometry-Pseudometric-Space f =
+    map-isometry-Pseudometric-Space A B f ,
+    is-short-map-is-isometry-Pseudometric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Pseudometric-Space A B f)
+      ( is-isometry-map-isometry-Pseudometric-Space A B f)
+
+  is-emb-short-map-isometry-Pseudometric-Space :
+    is-emb short-map-isometry-Pseudometric-Space
+  is-emb-short-map-isometry-Pseudometric-Space =
+    is-emb-right-factor
+      ( map-short-map-Pseudometric-Space A B)
+      ( short-map-isometry-Pseudometric-Space)
+      ( is-emb-inclusion-subtype (is-short-map-prop-Pseudometric-Space A B))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
+
+  emb-short-map-isometry-Pseudometric-Space :
+    isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
+  emb-short-map-isometry-Pseudometric-Space =
+    ( short-map-isometry-Pseudometric-Space ,
+      is-emb-short-map-isometry-Pseudometric-Space)
+```
+
+### Isometries are short expansive maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : map-Pseudometric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-expansive-is-short-map-Pseudometric-Space :
+      is-short-map-Pseudometric-Space A B f →
+      is-expansive-map-Pseudometric-Space A B f →
+      is-isometry-Pseudometric-Space A B f
+    is-isometry-is-expansive-is-short-map-Pseudometric-Space H K d x y =
+      (H d x y , K d x y)
+
+  isometry-is-expansive-is-short-map-Pseudometric-Space :
+    is-short-map-Pseudometric-Space A B f →
+    is-expansive-map-Pseudometric-Space A B f →
+    isometry-Pseudometric-Space A B
+  isometry-is-expansive-is-short-map-Pseudometric-Space H K =
+    (f , is-isometry-is-expansive-is-short-map-Pseudometric-Space H K)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-expansive-map-short-map-Pseudometric-Space :
+      is-expansive-map-Pseudometric-Space A B
+        ( map-short-map-Pseudometric-Space A B f) →
+      is-isometry-Pseudometric-Space A B
+        ( map-short-map-Pseudometric-Space A B f)
+    is-isometry-is-expansive-map-short-map-Pseudometric-Space =
+      is-isometry-is-expansive-is-short-map-Pseudometric-Space A B
+        ( map-short-map-Pseudometric-Space A B f)
+        ( is-short-map-short-map-Pseudometric-Space A B f)
+
+  isometry-is-expansive-map-short-map-Pseudometric-Space :
+    is-expansive-map-Pseudometric-Space A B
+      ( map-short-map-Pseudometric-Space A B f) →
+    isometry-Pseudometric-Space A B
+  isometry-is-expansive-map-short-map-Pseudometric-Space K =
+    ( map-short-map-Pseudometric-Space A B f ,
+      is-isometry-is-expansive-map-short-map-Pseudometric-Space K)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : expansive-map-Pseudometric-Space A B)
+  where
+
+  abstract
+    is-isometry-is-short-map-expansive-map-Pseudometric-Space :
+      is-short-map-Pseudometric-Space A B
+        ( map-expansive-map-Pseudometric-Space A B f) →
+      is-isometry-Pseudometric-Space A B
+        ( map-expansive-map-Pseudometric-Space A B f)
+    is-isometry-is-short-map-expansive-map-Pseudometric-Space H =
+      is-isometry-is-expansive-is-short-map-Pseudometric-Space A B
+        ( map-expansive-map-Pseudometric-Space A B f)
+        ( H)
+        ( is-expansive-map-expansive-map-Pseudometric-Space A B f)
+
+  isometry-is-short-map-expansive-map-Pseudometric-Space :
+    is-short-map-Pseudometric-Space A B
+      ( map-expansive-map-Pseudometric-Space A B f) →
+    isometry-Pseudometric-Space A B
+  isometry-is-short-map-expansive-map-Pseudometric-Space H =
+    ( map-expansive-map-Pseudometric-Space A B f ,
+      is-isometry-is-short-map-expansive-map-Pseudometric-Space H)
 ```
