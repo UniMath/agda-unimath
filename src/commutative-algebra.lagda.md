@@ -45,6 +45,7 @@ open import commutative-algebra.integral-domains public
 open import commutative-algebra.intersections-ideals-commutative-rings public
 open import commutative-algebra.intersections-radical-ideals-commutative-rings public
 open import commutative-algebra.invertible-elements-commutative-rings public
+open import commutative-algebra.invertible-elements-large-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.joins-ideals-commutative-rings public
 open import commutative-algebra.joins-radical-ideals-commutative-rings public
