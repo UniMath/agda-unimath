@@ -256,6 +256,45 @@ module _
       ( y)
 ```
 
+### Invertible elements are closed under negation
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
+  {l1 : Level}
+  (x : type-Large-Commutative-Ring R l1)
+  where
+
+  is-left-invertible-element-neg-Large-Commutative-Ring :
+    is-left-invertible-element-Large-Commutative-Ring R x →
+    is-left-invertible-element-Large-Commutative-Ring R
+      ( neg-Large-Commutative-Ring R x)
+  is-left-invertible-element-neg-Large-Commutative-Ring =
+    is-left-invertible-element-neg-Large-Ring
+      ( large-ring-Large-Commutative-Ring R)
+      ( x)
+
+  is-right-invertible-element-neg-Large-Commutative-Ring :
+    is-right-invertible-element-Large-Commutative-Ring R x →
+    is-right-invertible-element-Large-Commutative-Ring R
+      ( neg-Large-Commutative-Ring R x)
+  is-right-invertible-element-neg-Large-Commutative-Ring =
+    is-right-invertible-element-neg-Large-Ring
+      ( large-ring-Large-Commutative-Ring R)
+      ( x)
+
+  is-invertible-element-neg-Large-Commutative-Ring :
+    is-invertible-element-Large-Commutative-Ring R x →
+    is-invertible-element-Large-Commutative-Ring R
+      ( neg-Large-Commutative-Ring R x)
+  is-invertible-element-neg-Large-Commutative-Ring =
+    is-invertible-element-neg-Large-Ring
+      ( large-ring-Large-Commutative-Ring R)
+      ( x)
+```
+
 ## See also
 
 - [Invertible elements in (small) commutative rings](commutative-algebra.invertible-elements-commutative-rings.md)

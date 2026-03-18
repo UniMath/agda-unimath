@@ -12,6 +12,7 @@ module commutative-algebra.large-heyting-fields where
 open import commutative-algebra.heyting-fields
 open import commutative-algebra.invertible-elements-large-commutative-rings
 open import commutative-algebra.large-commutative-rings
+open import group-theory.large-abelian-groups
 open import commutative-algebra.local-commutative-rings
 
 open import foundation.transport-along-identifications
@@ -36,6 +37,7 @@ open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.universe-levels
 
 open import group-theory.large-commutative-monoids
+open import group-theory.difference-large-abelian-groups
 
 open import ring-theory.large-rings
 ```
@@ -70,6 +72,10 @@ record
   large-ring-Large-Heyting-Field =
     large-ring-Large-Commutative-Ring
       ( large-commutative-ring-Large-Heyting-Field)
+
+  large-ab-Large-Heyting-Field : Large-Ab α β
+  large-ab-Large-Heyting-Field =
+    large-ab-Large-Ring large-ring-Large-Heyting-Field
 
   cumulative-large-set-Large-Heyting-Field : Cumulative-Large-Set α β
   cumulative-large-set-Large-Heyting-Field =
@@ -884,5 +890,27 @@ module _
           ( eq-right-inverse-law-add-Large-Heyting-Field K x)
           ( inv-x-x))
 
+    symmetric-apart-Large-Heyting-Field :
+      is-symmetric-Large-Relation
+        ( type-Large-Heyting-Field K)
+        ( apart-Large-Heyting-Field)
+    symmetric-apart-Large-Heyting-Field x y inv-x-y =
+      tr
+        ( is-invertible-element-Large-Heyting-Field K)
+        ( neg-right-diff-Large-Ab (large-ab-Large-Heyting-Field K) x y)
+        ( is-invertible-element-neg-Large-Commutative-Ring
+          ( large-commutative-ring-Large-Heyting-Field K)
+          ( diff-Large-Heyting-Field K x y)
+          ( inv-x-y))
+
+    cotransitive-apart-Large-Heyting-Field :
+      is-cotransitive-Large-Relation-Prop
+        ( type-Large-Heyting-Field K)
+        ( apart-prop-Large-Heyting-Field)
+    cotransitive-apart-Large-Heyting-Field x y z inv-x-z =
+      is-local-Large-Heyting-Field K
+        ( diff-Large-Heyting-Field K x y)
+        ( diff-Large-Heyting-Field K y z)
+        ?
 
 ```

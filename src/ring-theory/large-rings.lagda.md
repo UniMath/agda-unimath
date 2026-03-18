@@ -933,6 +933,23 @@ module _
                     ( x)
                     ( y +R neg-R y)
                     ( sim-right-inverse-law-add-Large-Ring R y)))
+
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  {l1 l2 : Level} (x : type-Large-Ring R l1) (y : type-Large-Ring R l2)
+  (let neg-R = neg-Large-Ring R)
+  where
+
+  abstract
+    negative-law-mul-Large-Ring :
+      mul-Large-Ring R (neg-Large-Ring R x) (neg-Large-Ring R y) ＝
+      mul-Large-Ring R x y
+    negative-law-mul-Large-Ring =
+      ( left-negative-law-mul-Large-Ring R x (neg-Large-Ring R y)) ∙
+      ( ap
+        ( neg-Large-Ring R)
+        ( right-negative-law-mul-Large-Ring R x y)) ∙
+      ( neg-neg-Large-Ring R (mul-Large-Ring R x y))
 ```
 
 ### Multiplication by negative one is negation
