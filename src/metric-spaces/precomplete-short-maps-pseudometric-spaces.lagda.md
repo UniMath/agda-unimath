@@ -425,7 +425,7 @@ module _
         ( g)
         ( short-map-precomplete-short-map-Pseudometric-Space P M f))
   is-precomplete-right-comp-precomplete-short-map-Pseudometric-Space N g u =
-    is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space
+    is-convergent-map-short-map-is-convergent-cauchy-approximation-Metric-Space
       ( M)
       ( N)
       ( g)
