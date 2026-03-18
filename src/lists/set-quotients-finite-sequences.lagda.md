@@ -47,7 +47,7 @@ module _
 
   reflecting-quotient-map-fin-sequence :
     reflecting-map-equivalence-relation
-      ( equivalence-relation-fin-sequence-equivalence-relation R n)
+      ( fin-sequence-equivalence-relation R n)
       ( fin-sequence (set-quotient R) n)
   reflecting-quotient-map-fin-sequence =
     reflecting-quotient-map-Π-set-quotient-Finite-Type
@@ -57,7 +57,7 @@ module _
   abstract
     is-set-quotient-fin-sequence-set-quotient :
       is-set-quotient
-        ( equivalence-relation-fin-sequence-equivalence-relation R n)
+        ( fin-sequence-equivalence-relation R n)
         ( fin-sequence-Set (quotient-Set R) n)
         ( reflecting-quotient-map-fin-sequence)
     is-set-quotient-fin-sequence-set-quotient =

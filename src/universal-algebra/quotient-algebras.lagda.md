@@ -167,7 +167,7 @@ module _
         (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i
       in
         ind-is-set-quotient
-          ( equivalence-relation-fin-sequence-equivalence-relation R k)
+          ( fin-sequence-equivalence-relation R k)
           ( fin-sequence-Set set-quotient-Algebra k)
           ( reflecting-quotient-map-fin-sequence R k)
           ( is-set-quotient-fin-sequence-set-quotient R k)
