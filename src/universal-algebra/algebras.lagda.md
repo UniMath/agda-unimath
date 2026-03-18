@@ -47,6 +47,22 @@ theory.
 
 ```agda
 module _
+  {l1 : Level} (σ : signature l1)
+  where
+
+  satisfies-equation-prop-Model-Of-Signature :
+    {l2 : Level} → abstract-equation σ → Model-Of-Signature l2 σ → Prop l2
+  satisfies-equation-prop-Model-Of-Signature
+    (k , lhs , rhs) (set-M , is-model-M) =
+    Π-Prop
+      ( fin-sequence (type-Set set-M) k)
+      ( λ v →
+        Id-Prop
+          ( set-M)
+          ( eval-term σ is-model-M v lhs)
+          ( eval-term σ is-model-M v rhs))
+
+module _
   {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
@@ -56,17 +72,10 @@ module _
     Π-Prop
       ( index-Algebraic-Theory σ T)
       ( λ e →
-        let
-          (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T e
-          m = is-model-set-Model-Of-Signature σ M
-        in
-          Π-Prop
-            ( fin-sequence (type-Model-Of-Signature σ M) k)
-            ( λ assign →
-              Id-Prop
-                ( set-Model-Of-Signature σ M)
-                ( eval-term σ m assign lhs)
-                ( eval-term σ m assign rhs)))
+        satisfies-equation-prop-Model-Of-Signature
+          ( σ)
+          ( index-abstract-equation-Algebraic-Theory σ T e)
+          ( M))
 
   is-algebra-Model-of-Signature :
     {l3 : Level} → Model-Of-Signature l3 σ → UU (l2 ⊔ l3)
