@@ -53,6 +53,9 @@ record
     (A : (l : Level) → UU (α l)) : UUω
   where
 
+  constructor
+    make-Tight-Large-Apartness-Relation
+
   field
     large-apartness-relation-Tight-Large-Apartness-Relation :
       Large-Apartness-Relation β A

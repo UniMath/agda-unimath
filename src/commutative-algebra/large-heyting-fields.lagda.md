@@ -891,9 +891,9 @@ module _
           ( inv-x-x))
 
     symmetric-apart-Large-Heyting-Field :
-      is-symmetric-Large-Relation
+      is-symmetric-Large-Relation-Prop
         ( type-Large-Heyting-Field K)
-        ( apart-Large-Heyting-Field)
+        ( apart-prop-Large-Heyting-Field)
     symmetric-apart-Large-Heyting-Field x y inv-x-y =
       tr
         ( is-invertible-element-Large-Heyting-Field K)
@@ -907,10 +907,78 @@ module _
       is-cotransitive-Large-Relation-Prop
         ( type-Large-Heyting-Field K)
         ( apart-prop-Large-Heyting-Field)
-    cotransitive-apart-Large-Heyting-Field x y z inv-x-z =
-      is-local-Large-Heyting-Field K
-        ( diff-Large-Heyting-Field K x y)
-        ( diff-Large-Heyting-Field K y z)
-        ?
+    cotransitive-apart-Large-Heyting-Field {l1} {l2} {l3} x y z inv-x-z =
+      let
+        open similarity-reasoning-Large-Heyting-Field K
+      in
+        is-local-Large-Heyting-Field K
+          ( diff-Large-Heyting-Field K x y)
+          ( diff-Large-Heyting-Field K y z)
+          ( tr
+            ( is-invertible-element-Large-Heyting-Field K)
+            ( eq-sim-Large-Heyting-Field K _ _
+              ( similarity-reasoning
+                raise-Large-Heyting-Field K l2 (diff-Large-Heyting-Field K x z)
+                ~ diff-Large-Heyting-Field K x z
+                  by sim-raise-Large-Heyting-Field' K l2 _
+                ~ add-Large-Heyting-Field K
+                    ( diff-Large-Heyting-Field K x y)
+                    ( diff-Large-Heyting-Field K y z)
+                  by
+                    symmetric-sim-Large-Heyting-Field K _ _
+                      ( add-right-diff-Large-Ab
+                        ( large-ab-Large-Heyting-Field K)
+                        ( x)
+                        ( y)
+                        ( z))))
+            ( is-invertible-element-raise-Large-Commutative-Ring
+              ( large-commutative-ring-Large-Heyting-Field K)
+              ( l2)
+              ( diff-Large-Heyting-Field K x z)
+              ( inv-x-z)))
 
+  large-apartness-relation-Large-Heyting-Field :
+    Large-Apartness-Relation
+      ( λ l1 l2 → α (l1 ⊔ l2) ⊔ β (l1 ⊔ l2) lzero)
+      ( type-Large-Heyting-Field K)
+  large-apartness-relation-Large-Heyting-Field =
+    make-Large-Apartness-Relation
+      ( apart-prop-Large-Heyting-Field)
+      ( antirefl-apart-Large-Heyting-Field)
+      ( symmetric-apart-Large-Heyting-Field)
+      ( cotransitive-apart-Large-Heyting-Field)
+```
+
+### The apartness relation of a large Heyting field is tight
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (K : Large-Heyting-Field α β)
+  where
+
+  abstract
+    is-tight-large-apartness-relation-Large-Heyting-Field :
+      is-tight-Large-Apartness-Relation
+        ( large-apartness-relation-Large-Heyting-Field K)
+    is-tight-large-apartness-relation-Large-Heyting-Field l x y ¬x#y =
+      is-tight-apartness-relation-Heyting-Field
+        ( heyting-field-Large-Heyting-Field K l)
+        ( x)
+        ( y)
+        ( map-neg
+          ( is-invertible-is-invertible-small-element-Large-Commutative-Ring
+            ( large-commutative-ring-Large-Heyting-Field K)
+            ( diff-Large-Heyting-Field K x y))
+          ( ¬x#y))
+
+  tight-large-apartness-relation-Large-Heyting-Field :
+    Tight-Large-Apartness-Relation
+      ( λ l1 l2 → α (l1 ⊔ l2) ⊔ β (l1 ⊔ l2) lzero)
+      ( type-Large-Heyting-Field K)
+  tight-large-apartness-relation-Large-Heyting-Field =
+    make-Tight-Large-Apartness-Relation
+      ( large-apartness-relation-Large-Heyting-Field K)
+      ( is-tight-large-apartness-relation-Large-Heyting-Field)
 ```

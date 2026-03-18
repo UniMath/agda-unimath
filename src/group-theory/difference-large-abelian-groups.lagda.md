@@ -97,6 +97,53 @@ module _
       commutative-add-Large-Ab G (neg-Large-Ab G y) x
 ```
 
+### Raising universe level distributes over subtraction
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (G : Large-Ab α β)
+  where
+
+  open similarity-reasoning-Large-Ab G
+
+  abstract
+    raise-right-diff-Large-Ab :
+      {l1 l2 : Level} (l3 l4 : Level)
+      (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
+      raise-Large-Ab G (l3 ⊔ l4) (right-diff-Large-Ab G x y) ＝
+      right-diff-Large-Ab G (raise-Large-Ab G l3 x) (raise-Large-Ab G l4 y)
+    raise-right-diff-Large-Ab l3 l4 x y =
+      inv
+        ( map-raise-raise-sim-preserving-binary-operator-Cumulative-Large-Set
+          ( cumulative-large-set-Large-Ab G)
+          ( make-sim-preserving-binary-operator-Cumulative-Large-Set
+            ( cumulative-large-set-Large-Ab G)
+            ( right-diff-Large-Ab G)
+            ( preserves-sim-right-diff-Large-Ab G))
+          ( l3)
+          ( l4)
+          ( x)
+          ( y))
+
+    raise-left-diff-Large-Ab :
+      {l1 l2 : Level} (l3 l4 : Level)
+      (x : type-Large-Ab G l1) (y : type-Large-Ab G l2) →
+      raise-Large-Ab G (l3 ⊔ l4) (left-diff-Large-Ab G x y) ＝
+      left-diff-Large-Ab G (raise-Large-Ab G l3 x) (raise-Large-Ab G l4 y)
+    raise-left-diff-Large-Ab l3 l4 x y =
+      inv
+        ( map-raise-raise-sim-preserving-binary-operator-Cumulative-Large-Set
+          ( cumulative-large-set-Large-Ab G)
+          ( make-sim-preserving-binary-operator-Cumulative-Large-Set
+            ( cumulative-large-set-Large-Ab G)
+            ( left-diff-Large-Ab G)
+            ( preserves-sim-left-diff-Large-Ab G))
+          ( l3)
+          ( l4)
+          ( x)
+          ( y))
+```
+
 ### `-(x - y) = y - x`
 
 ```agda
