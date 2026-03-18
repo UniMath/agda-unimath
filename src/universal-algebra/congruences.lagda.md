@@ -17,8 +17,8 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.tuples
 open import lists.equivalence-relations-tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras

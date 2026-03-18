@@ -11,42 +11,34 @@ module universal-algebra.quotient-algebras where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
 open import foundation.action-on-identifications-functions
-open import foundation.unit-type
-open import foundation.raising-universe-levels
-open import foundation.identity-types
-open import foundation.function-types
+open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.finite-sequences-set-quotients
+open import foundation.function-types
 open import foundation.functoriality-set-quotients
-open import foundation.functoriality-propositional-truncation
-open import foundation.reflecting-maps-equivalence-relations
-open import lists.functoriality-tuples
-open import foundation.universal-property-set-quotients
-open import foundation.multivariable-functoriality-set-quotients
-open import lists.set-quotients-tuples
-open import foundation.multivariable-operations
-open import foundation.propositional-truncations
-open import lists.equivalence-relations-finite-sequences
-open import foundation.propositions
+open import foundation.identity-types
+open import foundation.raising-universe-levels
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.unit-type
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import lists.tuples
-open import lists.finite-sequences
+open import lists.equivalence-relations-finite-sequences
 open import lists.equivalence-relations-tuples
+open import lists.finite-sequences
+open import lists.functoriality-tuples
+open import lists.set-quotients-finite-sequences
+open import lists.set-quotients-tuples
+open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.congruences
-open import universal-algebra.terms-over-signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>
@@ -104,9 +96,9 @@ module _
           ( is-set-quotient-set-quotient R)
           ( hom-is-model-quotient-Algebra op)
 
-  model-of-signature-quotient-Algebra :
+  model-quotient-Algebra :
     Model-Of-Signature (l3 ⊔ l4) σ
-  model-of-signature-quotient-Algebra =
+  model-quotient-Algebra =
     ( set-quotient-Algebra ,
       is-model-quotient-Algebra)
 
@@ -185,9 +177,30 @@ module _
       ( compute-eval-term-quotient-Algebra t v ,
         compute-eval-tuple-term-quotient-Algebra ts v)
 
-    is-algebra-quotient-Algebra :
-      is-algebra-Model-of-Signature σ T model-of-signature-quotient-Algebra
-    is-algebra-quotient-Algebra i v =
-      ind-is-set-quotient
-        {!   !} {!   !} {!   !} {!   !} {!   !} {!   !} {!   !}
+    is-algebra-model-quotient-Algebra :
+      is-algebra-Model-of-Signature σ T model-quotient-Algebra
+    is-algebra-model-quotient-Algebra i =
+      let
+        (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i
+      in
+        ind-is-set-quotient
+          ( equivalence-relation-fin-sequence-equivalence-relation R k)
+          ( fin-sequence-Set set-quotient-Algebra k)
+          ( reflecting-quotient-map-fin-sequence R k)
+          ( is-set-quotient-fin-sequence-set-quotient R k)
+          ( λ v →
+            Id-Prop
+              ( set-quotient-Algebra)
+              ( eval-term σ is-model-quotient-Algebra v lhs)
+              ( eval-term σ is-model-quotient-Algebra v rhs))
+          ( λ v →
+            ( compute-eval-term-quotient-Algebra lhs v) ∙
+            ( ap
+              ( quotient-map-Algebra)
+              ( is-algebra-model-Algebra σ T A i v)) ∙
+            ( inv (compute-eval-term-quotient-Algebra rhs v)))
+
+  quotient-Algebra : Algebra (l3 ⊔ l4) σ T
+  quotient-Algebra =
+    ( model-quotient-Algebra , is-algebra-model-quotient-Algebra)
 ```
