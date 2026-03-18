@@ -148,28 +148,11 @@ module _
 
     compute-eval-term-quotient-Algebra (var-term i) v = refl
     compute-eval-term-quotient-Algebra (op-term op xs) v =
-      equational-reasoning
-        is-model-quotient-Algebra op
-          ( eval-tuple-term
-            ( σ)
-            ( is-model-quotient-Algebra)
-            ( quotient-map-Algebra ∘ v) xs)
-        ＝
-          is-model-quotient-Algebra op
-            ( map-tuple
-              ( quotient-map-Algebra)
-              ( eval-tuple-term σ (is-model-set-Algebra σ T A) v xs))
-          by
-            ap
-              ( is-model-quotient-Algebra op)
-              ( eq-Eq-tuple _ _ _
-                ( compute-eval-tuple-term-quotient-Algebra xs v))
-        ＝
-          quotient-map-Algebra
-            ( is-model-set-Algebra σ T A
-              ( op)
-              ( eval-tuple-term σ (is-model-set-Algebra σ T A) v xs))
-          by compute-is-model-quotient-Algebra op _
+      ( ap
+        ( is-model-quotient-Algebra op)
+        ( eq-Eq-tuple _ _ _
+          ( compute-eval-tuple-term-quotient-Algebra xs v))) ∙
+      ( compute-is-model-quotient-Algebra op _)
 
     compute-eval-tuple-term-quotient-Algebra empty-tuple v =
       map-raise star
