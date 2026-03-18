@@ -78,6 +78,22 @@ module _
   is-tight-apartness-relation-Tight-Apartness-Relation :
     is-tight-Apartness-Relation apartness-relation-Tight-Apartness-Relation
   is-tight-apartness-relation-Tight-Apartness-Relation = pr2 R
+
+  antirefl-Tight-Apartness-Relation :
+    is-antireflexive rel-Tight-Apartness-Relation
+  antirefl-Tight-Apartness-Relation =
+    antirefl-Apartness-Relation apartness-relation-Tight-Apartness-Relation
+
+  nonequal-apart-Tight-Apartness-Relation :
+    (x y : A) → apart-Tight-Apartness-Relation x y → x ≠ y
+  nonequal-apart-Tight-Apartness-Relation =
+    nonequal-apart-Apartness-Relation
+      ( apartness-relation-Tight-Apartness-Relation)
+
+  symmetric-Tight-Apartness-Relation :
+    is-symmetric apart-Tight-Apartness-Relation
+  symmetric-Tight-Apartness-Relation =
+    symmetric-Apartness-Relation apartness-relation-Tight-Apartness-Relation
 ```
 
 ### Types with tight apartness
@@ -284,3 +300,4 @@ set-Type-With-Tight-Apartness A =
 - Every tight apartness relation is
   [standard](foundation.standard-apartness-relations.md).
 - [Dependent function types with apartness relations](foundation.dependent-function-types-with-apartness-relations.md)
+- [Tight large apartness relations](foundation.tight-large-apartness-relations.md)

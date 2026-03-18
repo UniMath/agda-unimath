@@ -24,6 +24,7 @@ open import foundation.action-on-identifications-binary-dependent-functions publ
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
+open import foundation.action-on-identifications-ternary-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
@@ -79,6 +80,7 @@ open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.commuting-triangles-of-morphisms-arrows public
 open import foundation.complements public
+open import foundation.complements-images public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
 open import foundation.composition-algebra public
@@ -106,6 +108,7 @@ open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
+open import foundation.cumulative-large-sets public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -127,6 +130,10 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-cumulative-large-sets public
+open import foundation.dependent-products-large-binary-relations public
+open import foundation.dependent-products-large-equivalence-relations public
+open import foundation.dependent-products-large-similarity-relations public
 open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-products-subtypes public
 open import foundation.dependent-sums-pullbacks public
@@ -197,6 +204,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extensional-binary-functions-apartness-relations public
 open import foundation.extensions-types public
 open import foundation.extensions-types-global-subuniverses public
 open import foundation.extensions-types-subuniverses public
@@ -217,7 +225,10 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
+open import foundation.full-subuniverses public
+open import foundation.function-cumulative-large-sets public
 open import foundation.function-extensionality public
+open import foundation.function-large-binary-relations public
 open import foundation.function-large-equivalence-relations public
 open import foundation.function-large-similarity-relations public
 open import foundation.function-types public
@@ -345,6 +356,7 @@ open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.noninjective-maps public
+open import foundation.nonsurjective-maps public
 open import foundation.null-homotopic-maps public
 open import foundation.operations-cospan-diagrams public
 open import foundation.operations-cospans public
@@ -354,6 +366,8 @@ open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-cospans public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.parametric-types public
+open import foundation.parametricity-axiom public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
 open import foundation.partitions public
@@ -417,6 +431,10 @@ open import foundation.sets public
 open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets public
+open import foundation.similarity-preserving-binary-maps-large-similarity-relations public
+open import foundation.similarity-preserving-maps-cumulative-large-sets public
+open import foundation.similarity-preserving-maps-large-similarity-relations public
 open import foundation.similarity-subtypes public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
@@ -424,6 +442,8 @@ open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
+open import foundation.smallness-cumulative-large-sets public
+open import foundation.smallness-large-similarity-relations public
 open import foundation.sorial-type-families public
 open import foundation.span-diagrams public
 open import foundation.span-diagrams-families-of-types public
@@ -449,6 +469,7 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public
@@ -459,6 +480,7 @@ open import foundation.symmetric-operations public
 open import foundation.telescopes public
 open import foundation.terminal-spans-families-of-types public
 open import foundation.tight-apartness-relations public
+open import foundation.tight-large-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
 open import foundation.total-partial-functions public

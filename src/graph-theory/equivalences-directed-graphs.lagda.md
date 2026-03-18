@@ -342,7 +342,7 @@ module _
       ( is-torsorial-Id G)
 ```
 
-### The inverse of an equivalence of directed trees
+### The inverse of an equivalence of directed graphs
 
 ```agda
 module _
