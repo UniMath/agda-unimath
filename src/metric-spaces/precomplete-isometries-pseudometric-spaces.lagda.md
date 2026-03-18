@@ -457,7 +457,7 @@ module _
         ( g)
         ( isometry-precomplete-isometry-Pseudometric-Space P M f))
   is-precomplete-right-comp-precomplete-isometry-Pseudometric-Space N g u =
-    is-convergent-map-isometry-convergent-cauchy-approximation-Metric-Space
+    is-convergent-map-isometry-is-convergent-cauchy-approximation-Metric-Space
       ( M)
       ( N)
       ( g)
