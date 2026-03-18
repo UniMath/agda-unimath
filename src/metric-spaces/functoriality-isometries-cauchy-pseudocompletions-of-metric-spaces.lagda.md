@@ -19,9 +19,11 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -117,4 +119,58 @@ module _
       ( comp-isometry-Metric-Space A B C g f))
   htpy-comp-map-isometry-cauchy-pseudocompletion-Metric-Space u =
     eq-htpy-cauchy-approximation-Metric-Space C refl-htpy
+```
+
+### The action on isometries of Cauchy pseudocompletions preserves limits
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : isometry-Metric-Space A B)
+  (a : cauchy-approximation-Metric-Space A)
+  (lim : type-Metric-Space A)
+  where abstract
+
+  preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space A a lim →
+    is-limit-cauchy-approximation-Metric-Space
+      ( B)
+      ( map-isometry-cauchy-pseudocompletion-Metric-Space A B f a)
+      ( map-isometry-Metric-Space A B f lim)
+  preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space
+    is-lim-a ε δ =
+    is-short-map-isometry-Metric-Space A B
+      ( f)
+      ( ε +ℚ⁺ δ)
+      ( map-cauchy-approximation-Metric-Space A a ε)
+      ( lim)
+      ( is-lim-a ε δ)
+```
+
+### The action on isometries of Cauchy pseudocompletions preserves convergent Cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : isometry-Metric-Space A B)
+  (a : cauchy-approximation-Metric-Space A)
+  where
+
+  is-convergent-map-isometry-convergent-cauchy-approximation-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space A a →
+    is-convergent-cauchy-approximation-Metric-Space
+      ( B)
+      ( map-isometry-cauchy-pseudocompletion-Metric-Space A B f a)
+  is-convergent-map-isometry-convergent-cauchy-approximation-Metric-Space
+    ( lim , is-limit) =
+    ( map-isometry-Metric-Space A B f lim ,
+      preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space
+        ( A)
+        ( B)
+        ( f)
+        ( a)
+        ( lim)
+        ( is-limit))
 ```

@@ -21,8 +21,10 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
@@ -76,39 +78,23 @@ module _
   (f : isometry-Pseudometric-Space A B)
   where abstract
 
-  preserves-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
-    (d : ℚ⁺) →
-    (x y : cauchy-approximation-Pseudometric-Space A) →
-    neighborhood-Pseudometric-Space
+  is-short-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space A)
-      ( d)
-      ( x)
-      ( y) →
-    neighborhood-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space B)
-      ( d)
-      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f x)
-      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f y)
-  preserves-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space =
+      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+  is-short-map-isometry-cauchy-pseudocompletion-Pseudometric-Space =
     preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
       ( A)
       ( B)
       ( short-map-isometry-Pseudometric-Space A B f)
 
-  reflects-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
-    (d : ℚ⁺) →
-    (x y : cauchy-approximation-Pseudometric-Space A) →
-    neighborhood-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space B)
-      ( d)
-      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f x)
-      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f y) →
-    neighborhood-Pseudometric-Space
+  is-expansive-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    is-expansive-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space A)
-      ( d)
-      ( x)
-      ( y)
-  reflects-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+  is-expansive-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
     d x y Nxy α β =
     reflects-neighborhoods-map-isometry-Pseudometric-Space
       ( A)
@@ -124,15 +110,13 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space A)
       ( cauchy-pseudocompletion-Pseudometric-Space B)
       ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
-  is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space d x y =
-    ( ( preserves-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
-        ( d)
-        ( x)
-        ( y)) ,
-      ( reflects-neighborhoods-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
-        ( d)
-        ( x)
-        ( y)))
+  is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space =
+    is-isometry-is-expansive-is-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( is-short-map-isometry-cauchy-pseudocompletion-Pseudometric-Space)
+      ( is-expansive-map-isometry-cauchy-pseudocompletion-Pseudometric-Space)
 
 module _
   {l1 l2 l1' l2' : Level}
@@ -145,6 +129,79 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space A)
       ( cauchy-pseudocompletion-Pseudometric-Space B)
   isometry-cauchy-pseudocompletion-Pseudometric-Space =
-    ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f ,
-      is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+    isometry-is-expansive-is-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( is-short-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( is-expansive-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
+        ( A)
+        ( B)
+        ( f))
+```
+
+### The action on short maps of Cauchy pseudocompletions preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space A B)
+  (f~g : htpy-map-isometry-Pseudometric-Space A B f g)
+  where
+
+  htpy-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    htpy-map-isometry-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( isometry-cauchy-pseudocompletion-Pseudometric-Space A B g)
+  htpy-map-isometry-cauchy-pseudocompletion-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
+### The unit of cauchy pseudocompletions is a natural transformation
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : isometry-Pseudometric-Space A B)
+  where
+
+  naturality-isometry-unit-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f ∘
+      map-unit-cauchy-pseudocompletion-Pseudometric-Space A) ~
+    ( map-unit-cauchy-pseudocompletion-Pseudometric-Space B ∘
+      map-isometry-Pseudometric-Space A B f)
+  naturality-isometry-unit-cauchy-pseudocompletion-Pseudometric-Space x =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
+```
+
+### The action on short maps of Cauchy pseudocompletions preserves limits
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : isometry-Pseudometric-Space A B)
+  (a : cauchy-approximation-Pseudometric-Space A)
+  (lim : type-Pseudometric-Space A)
+  where abstract
+
+  preserves-limit-map-isometry-cauchy-pseudocompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space A a lim →
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( B)
+      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f a)
+      ( map-isometry-Pseudometric-Space A B f lim)
+  preserves-limit-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
+    is-lim-a ε δ =
+    is-short-map-isometry-Pseudometric-Space A B
+      ( f)
+      ( ε +ℚ⁺ δ)
+      ( map-cauchy-approximation-Pseudometric-Space A a ε)
+      ( lim)
+      ( is-lim-a ε δ)
 ```
