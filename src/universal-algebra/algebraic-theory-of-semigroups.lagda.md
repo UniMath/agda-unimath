@@ -16,6 +16,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -29,6 +30,7 @@ open import univalent-combinatorics.classical-finite-types
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -78,41 +80,90 @@ Algebra-Semigroup l =
 ### The algebra of semigroups is equivalent to the type of semigroups
 
 ```agda
-semigroup-Algebra-Semigroup :
-  {l : Level} → Algebra-Semigroup l → Semigroup l
-semigroup-Algebra-Semigroup ((set-A , models-A) , satisfies-A) =
-  ( set-A ,
-    ( λ x y → models-A mul-semigroup-op (x ∷ y ∷ empty-tuple)) ,
-    ( λ x y z →
-      satisfies-A
-        ( associative-semigroup-law)
-        ( component-tuple 3 (z ∷ y ∷ x ∷ empty-tuple))))
+module _
+  {l : Level}
+  (((set-A , models-A) , satisfies-A) : Algebra-Semigroup l)
+  where
 
-algebra-semigroup-Semigroup :
-  {l : Level} → Semigroup l → Algebra-Semigroup l
-algebra-semigroup-Semigroup G =
-  ( ( set-Semigroup G ,
-      λ where
-        mul-semigroup-op (x ∷ y ∷ empty-tuple) → mul-Semigroup G x y) ,
-    λ where
-      associative-semigroup-law xs →
-        associative-mul-Semigroup G (xs _) (xs _) (xs _))
+  type-Algebra-Semigroup : UU l
+  type-Algebra-Semigroup = type-Set set-A
+
+  mul-Algebra-Semigroup :
+    type-Algebra-Semigroup → type-Algebra-Semigroup → type-Algebra-Semigroup
+  mul-Algebra-Semigroup x y =
+    models-A mul-semigroup-op (x ∷ y ∷ empty-tuple)
+
+  associative-mul-Algebra-Semigroup :
+    (x y z : type-Algebra-Semigroup) →
+    mul-Algebra-Semigroup (mul-Algebra-Semigroup x y) z ＝
+    mul-Algebra-Semigroup x (mul-Algebra-Semigroup y z)
+  associative-mul-Algebra-Semigroup x y z =
+    satisfies-A
+      ( associative-semigroup-law)
+      ( component-tuple 3 (z ∷ y ∷ x ∷ empty-tuple))
+
+  semigroup-Algebra-Semigroup : Semigroup l
+  semigroup-Algebra-Semigroup =
+    ( set-A ,
+      mul-Algebra-Semigroup ,
+      associative-mul-Algebra-Semigroup)
+
+module _
+  {l : Level}
+  (G : Semigroup l)
+  where
+
+  is-model-of-semigroup-signature-Semigroup :
+    is-model-of-signature semigroup-signature (set-Semigroup G)
+  is-model-of-semigroup-signature-Semigroup
+    mul-semigroup-op (x ∷ y ∷ empty-tuple) =
+    mul-Semigroup G x y
+
+  model-of-semigroup-signature-Semigroup :
+    Model-Of-Signature l semigroup-signature
+  model-of-semigroup-signature-Semigroup =
+    ( set-Semigroup G ,
+      is-model-of-semigroup-signature-Semigroup)
+
+  is-algebra-semigroup-Semigroup :
+    is-algebra-Model-of-Signature
+      ( semigroup-signature)
+      ( algebraic-theory-Semigroup)
+      ( model-of-semigroup-signature-Semigroup)
+  is-algebra-semigroup-Semigroup associative-semigroup-law xs =
+    associative-mul-Semigroup G _ _ _
+
+  algebra-semigroup-Semigroup : Algebra-Semigroup l
+  algebra-semigroup-Semigroup =
+    ( model-of-semigroup-signature-Semigroup ,
+      is-algebra-semigroup-Semigroup)
+
+abstract
+  is-section-semigroup-Algebra-Semigroup :
+    {l : Level} (A : Algebra-Semigroup l) →
+    algebra-semigroup-Semigroup (semigroup-Algebra-Semigroup A) ＝ A
+  is-section-semigroup-Algebra-Semigroup A =
+    eq-type-subtype
+      ( is-algebra-prop-Model-Of-Signature
+        ( semigroup-signature)
+        ( algebraic-theory-Semigroup))
+      ( eq-pair-eq-fiber
+        ( eq-binary-htpy _ _
+          λ where
+            mul-semigroup-op (x ∷ y ∷ empty-tuple) → refl))
+
+  is-retraction-semigroup-Algebra-Semigroup :
+    {l : Level} (G : Semigroup l) →
+    semigroup-Algebra-Semigroup (algebra-semigroup-Semigroup G) ＝ G
+  is-retraction-semigroup-Algebra-Semigroup G = refl
 
 is-equiv-semigroup-Algebra-Semigroup :
   {l : Level} → is-equiv (algebra-semigroup-Semigroup {l})
 is-equiv-semigroup-Algebra-Semigroup =
   is-equiv-is-invertible
     ( semigroup-Algebra-Semigroup)
-    ( λ A →
-      eq-type-subtype
-        ( is-algebra-prop-Model-Of-Signature
-          ( semigroup-signature)
-          ( algebraic-theory-Semigroup))
-        ( eq-pair-eq-fiber
-          ( eq-binary-htpy _ _
-            λ where
-              mul-semigroup-op (x ∷ y ∷ empty-tuple) → refl)))
-    ( λ _ → refl)
+    ( is-section-semigroup-Algebra-Semigroup)
+    ( is-retraction-semigroup-Algebra-Semigroup)
 
 equiv-semigroup-Algebra-Semigroup :
   {l : Level} → Semigroup l ≃ Algebra-Semigroup l
