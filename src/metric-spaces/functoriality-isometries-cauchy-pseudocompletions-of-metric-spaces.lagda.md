@@ -21,6 +21,7 @@ open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
@@ -138,14 +139,13 @@ module _
       ( B)
       ( map-isometry-cauchy-pseudocompletion-Metric-Space A B f a)
       ( map-isometry-Metric-Space A B f lim)
-  preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space
-    is-lim-a ε δ =
-    is-short-map-isometry-Metric-Space A B
-      ( f)
-      ( ε +ℚ⁺ δ)
-      ( map-cauchy-approximation-Metric-Space A a ε)
+  preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space =
+    preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
+      ( A)
+      ( B)
+      ( short-map-isometry-Metric-Space A B f)
+      ( a)
       ( lim)
-      ( is-lim-a ε δ)
 ```
 
 ### The action on isometries of Cauchy pseudocompletions preserves convergent Cauchy approximations
@@ -158,19 +158,15 @@ module _
   (a : cauchy-approximation-Metric-Space A)
   where
 
-  is-convergent-map-isometry-convergent-cauchy-approximation-Metric-Space :
+  is-convergent-map-isometry-is-convergent-cauchy-approximation-Metric-Space :
     is-convergent-cauchy-approximation-Metric-Space A a →
     is-convergent-cauchy-approximation-Metric-Space
       ( B)
       ( map-isometry-cauchy-pseudocompletion-Metric-Space A B f a)
-  is-convergent-map-isometry-convergent-cauchy-approximation-Metric-Space
-    ( lim , is-limit) =
-    ( map-isometry-Metric-Space A B f lim ,
-      preserves-limit-map-isometry-cauchy-pseudocompletion-Metric-Space
-        ( A)
-        ( B)
-        ( f)
-        ( a)
-        ( lim)
-        ( is-limit))
+  is-convergent-map-isometry-is-convergent-cauchy-approximation-Metric-Space =
+    is-convergent-map-short-map-is-convergent-cauchy-approximation-Metric-Space
+      ( A)
+      ( B)
+      ( short-map-isometry-Metric-Space A B f)
+      ( a)
 ```

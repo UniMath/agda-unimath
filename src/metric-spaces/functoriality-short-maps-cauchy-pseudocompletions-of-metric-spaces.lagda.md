@@ -162,12 +162,12 @@ module _
   (a : cauchy-approximation-Metric-Space A)
   where
 
-  is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space :
+  is-convergent-map-short-map-is-convergent-cauchy-approximation-Metric-Space :
     is-convergent-cauchy-approximation-Metric-Space A a →
     is-convergent-cauchy-approximation-Metric-Space
       ( B)
       ( map-short-map-cauchy-pseudocompletion-Metric-Space A B f a)
-  is-convergent-map-short-map-convergent-cauchy-approximation-Metric-Space
+  is-convergent-map-short-map-is-convergent-cauchy-approximation-Metric-Space
     ( lim , is-limit) =
     ( map-short-map-Metric-Space A B f lim ,
       preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
