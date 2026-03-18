@@ -12,11 +12,13 @@ open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
+open import foundation.functoriality-set-quotients
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.tuples
+open import lists.equivalence-relations-tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
@@ -45,29 +47,14 @@ module _
   (R : equivalence-relation l4 (type-Algebra σ T A))
   where
 
-  relation-holds-for-all-tuples-equivalence-relation-Algebra :
-    {n : ℕ} →
-    (v : tuple (type-Algebra σ T A) n) →
-    (v' : tuple (type-Algebra σ T A) n) →
-    UU l4
-  relation-holds-for-all-tuples-equivalence-relation-Algebra
-    { .zero-ℕ} empty-tuple empty-tuple =
-    raise-unit l4
-  relation-holds-for-all-tuples-equivalence-relation-Algebra
-    { .(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
-    ( sim-equivalence-relation R x x') ×
-    ( relation-holds-for-all-tuples-equivalence-relation-Algebra v v')
-
   preserves-operations-equivalence-relation-Algebra :
     UU (l1 ⊔ l3 ⊔ l4)
   preserves-operations-equivalence-relation-Algebra =
-    ( op : operation-signature σ) →
-    ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
-    ( v' : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
-    relation-holds-for-all-tuples-equivalence-relation-Algebra v v' →
-    sim-equivalence-relation R
-      ( is-model-set-Algebra σ T A op v)
-      ( is-model-set-Algebra σ T A op v')
+    (op : operation-signature σ) →
+    preserves-sim-equivalence-relation
+      ( equivalence-relation-tuple R (arity-operation-signature σ op))
+      ( R)
+      ( is-model-set-Algebra σ T A op)
 ```
 
 ### Congruences

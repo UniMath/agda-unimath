@@ -18,6 +18,7 @@ open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.binary-relations-tuples
 open import lists.tuples
 ```
 
@@ -39,11 +40,8 @@ module _
   where
 
   sim-prop-equivalence-relation-tuple : (n : ℕ) → Relation-Prop l2 (tuple A n)
-  sim-prop-equivalence-relation-tuple 0 empty-tuple empty-tuple =
-    raise-unit-Prop l2
-  sim-prop-equivalence-relation-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) =
-    ( prop-equivalence-relation R x y) ∧
-    ( sim-prop-equivalence-relation-tuple n xs ys)
+  sim-prop-equivalence-relation-tuple n =
+    prop-tuple-Relation-Prop (prop-equivalence-relation R) n
 
   sim-equivalence-relation-tuple : (n : ℕ) → Relation l2 (tuple A n)
   sim-equivalence-relation-tuple n =
@@ -52,27 +50,24 @@ module _
   abstract
     refl-sim-equivalence-relation-tuple :
       (n : ℕ) → is-reflexive (sim-equivalence-relation-tuple n)
-    refl-sim-equivalence-relation-tuple 0 empty-tuple = map-raise star
-    refl-sim-equivalence-relation-tuple (succ-ℕ n) (x ∷ xs) =
-      ( refl-equivalence-relation R x ,
-        refl-sim-equivalence-relation-tuple n xs)
+    refl-sim-equivalence-relation-tuple =
+      refl-rel-tuple-Relation
+        ( sim-equivalence-relation R)
+        ( refl-equivalence-relation R)
 
     symmetric-sim-equivalence-relation-tuple :
       (n : ℕ) → is-symmetric (sim-equivalence-relation-tuple n)
-    symmetric-sim-equivalence-relation-tuple 0 empty-tuple empty-tuple 0~0 = 0~0
-    symmetric-sim-equivalence-relation-tuple
-      (succ-ℕ n) (x ∷ xs) (y ∷ ys) (x~y , xs~ys) =
-      ( symmetric-equivalence-relation R x y x~y ,
-        symmetric-sim-equivalence-relation-tuple n xs ys xs~ys)
+    symmetric-sim-equivalence-relation-tuple =
+      symmetric-rel-tuple-Relation
+        ( sim-equivalence-relation R)
+        ( symmetric-equivalence-relation R)
 
     transitive-sim-equivalence-relation-tuple :
       (n : ℕ) → is-transitive (sim-equivalence-relation-tuple n)
-    transitive-sim-equivalence-relation-tuple
-      0 empty-tuple empty-tuple empty-tuple 0~0 _ = 0~0
-    transitive-sim-equivalence-relation-tuple
-      (succ-ℕ n) (x ∷ xs) (y ∷ ys) (z ∷ zs) (y~z , ys~zs) (x~y , xs~ys) =
-      ( transitive-equivalence-relation R x y z y~z x~y ,
-        transitive-sim-equivalence-relation-tuple n xs ys zs ys~zs xs~ys)
+    transitive-sim-equivalence-relation-tuple =
+      transitive-rel-tuple-Relation
+        ( sim-equivalence-relation R)
+        ( transitive-equivalence-relation R)
 
   equivalence-relation-tuple : (n : ℕ) → equivalence-relation l2 (tuple A n)
   equivalence-relation-tuple n =
