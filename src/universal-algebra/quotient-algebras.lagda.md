@@ -164,18 +164,17 @@ module _
       is-algebra-Model-of-Signature σ T model-quotient-Algebra
     is-algebra-model-quotient-Algebra i =
       let
-        (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i
+        eq@(k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i
       in
         ind-is-set-quotient
           ( fin-sequence-equivalence-relation R k)
           ( fin-sequence-Set set-quotient-Algebra k)
           ( reflecting-quotient-map-fin-sequence R k)
           ( is-set-quotient-fin-sequence-set-quotient R k)
-          ( λ v →
-            Id-Prop
-              ( set-quotient-Algebra)
-              ( eval-term σ is-model-quotient-Algebra v lhs)
-              ( eval-term σ is-model-quotient-Algebra v rhs))
+          ( satisfies-equation-assignment-prop-Model-Of-Signature
+            ( σ)
+            ( eq)
+            ( model-quotient-Algebra))
           ( λ v →
             ( compute-eval-term-quotient-Algebra lhs v) ∙
             ( ap
