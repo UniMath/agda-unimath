@@ -295,6 +295,29 @@ module _
       ( x)
 ```
 
+### Invertible elements are closed under raising universe level
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
+  {l1 : Level}
+  (l2 : Level)
+  (x : type-Large-Commutative-Ring R l1)
+  where
+
+  is-invertible-element-raise-Large-Commutative-Ring :
+    is-invertible-element-Large-Commutative-Ring R x →
+    is-invertible-element-Large-Commutative-Ring R
+      ( raise-Large-Commutative-Ring R l2 x)
+  is-invertible-element-raise-Large-Commutative-Ring =
+    is-invertible-element-raise-Large-Ring
+      ( large-ring-Large-Commutative-Ring R)
+      ( l2)
+      ( x)
+```
+
 ## See also
 
 - [Invertible elements in (small) commutative rings](commutative-algebra.invertible-elements-commutative-rings.md)

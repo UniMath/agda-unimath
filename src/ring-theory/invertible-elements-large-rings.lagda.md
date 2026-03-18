@@ -284,6 +284,28 @@ module _
       pr2 (is-left-invertible-element-neg-Large-Ring (y , yx~1)))
 ```
 
+### Invertible elements are closed under raising universe level
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (R : Large-Ring α β)
+  {l1 : Level}
+  (l2 : Level)
+  (x : type-Large-Ring R l1)
+  where
+
+  is-invertible-element-raise-Large-Ring :
+    is-invertible-element-Large-Ring R x →
+    is-invertible-element-Large-Ring R (raise-Large-Ring R l2 x)
+  is-invertible-element-raise-Large-Ring =
+    is-invertible-element-raise-Large-Monoid
+      ( large-monoid-mul-Large-Ring R)
+      ( l2)
+      ( x)
+```
+
 ## See also
 
 - [Invertible elements in (small) rings](ring-theory.invertible-elements-rings.md)
