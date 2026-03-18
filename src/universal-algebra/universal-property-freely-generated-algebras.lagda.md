@@ -92,20 +92,17 @@ abstract
       ( hom-is-free-Algebra σ T B A in-g-B in-g-A is-free-B is-free-A) ＝
     id-hom-Algebra σ T B
   is-section-hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B =
-    let
-      hom-B→A = hom-is-free-Algebra σ T B A in-g-B in-g-A is-free-B is-free-A
-      hom-A→B = hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B
-    in
-      is-injective-is-equiv
-        ( is-free-B B)
-        ( eq-htpy
-          ( λ g →
-            ( ap
-              ( map-hom-Algebra σ T A B hom-A→B)
-              ( htpy-eq
-                ( is-section-map-inv-is-equiv (is-free-B A) in-g-A)
-                ( g))) ∙
-            ( htpy-eq (is-section-map-inv-is-equiv (is-free-A B) in-g-B) g)))
+    is-injective-is-equiv
+      ( is-free-B B)
+      ( eq-htpy
+        ( λ g →
+          ( ap
+            ( map-hom-Algebra σ T A B
+              ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B))
+            ( htpy-eq
+              ( is-section-map-inv-is-equiv (is-free-B A) in-g-A)
+              ( g))) ∙
+          ( htpy-eq (is-section-map-inv-is-equiv (is-free-A B) in-g-B) g)))
 
 module _
   {l1 l2 l3 l4 l5 : Level}
