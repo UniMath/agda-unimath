@@ -8,6 +8,7 @@ module universal-algebra.algebraic-theory-of-groups where
 
 ```agda
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -15,12 +16,17 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 
+open import lists.equivalence-tuples-finite-sequences
 open import lists.tuples
+
+open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.standard-finite-types
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
@@ -54,40 +60,49 @@ pr2 group-signature mul-group-op = 2
 pr2 group-signature inv-group-op = 1
 
 data group-laws : UU lzero where
-  associative-l-group-laws : group-laws
-  invl-l-group-laws : group-laws
-  invr-r-group-laws : group-laws
+  associative-group-laws : group-laws
+  invl-group-laws : group-laws
+  invr-group-laws : group-laws
   idl-l-group-laws : group-laws
-  idr-r-group-laws : group-laws
+  idr-group-laws : group-laws
 
 algebraic-theory-Group : Algebraic-Theory lzero group-signature
 pr1 algebraic-theory-Group = group-laws
 pr2 algebraic-theory-Group =
-  λ where
-  associative-l-group-laws →
-    ( op mul-group-op
-      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-tuple)) ∷
-        var 2 ∷
-        empty-tuple)) ,
-    ( op mul-group-op
-      ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-tuple)) ∷ empty-tuple))
-  invl-l-group-laws →
-    ( op mul-group-op
-      ( op inv-group-op (var 0 ∷ empty-tuple) ∷ var 0 ∷ empty-tuple)) ,
-    ( op unit-group-op empty-tuple)
-  invr-r-group-laws →
-    ( op mul-group-op
-      ( var 0 ∷ op inv-group-op (var 0 ∷ empty-tuple) ∷ empty-tuple)) ,
-    ( op unit-group-op empty-tuple)
-  idl-l-group-laws →
-    ( op mul-group-op (op unit-group-op empty-tuple ∷ var 0 ∷ empty-tuple)) ,
-    ( var 0)
-  idr-r-group-laws →
-    ( op mul-group-op (var 0 ∷ op unit-group-op empty-tuple ∷ empty-tuple)) ,
-    ( var 0)
-    where
-    op = op-term
-    var = var-term
+  let
+    _*-term_ :
+      {k : ℕ} →
+      term group-signature k → term group-signature k → term group-signature k
+    _*-term_ x y =
+      op-term
+        ( mul-group-op)
+        ( x ∷ y ∷ empty-tuple)
+    inv-term x = op-term inv-group-op (x ∷ empty-tuple)
+    unit-term = op-term unit-group-op empty-tuple
+    var : (i : ℕ) {k : ℕ} → {le-ℕ i k} → term group-signature k
+    var i {k} {i<k} = var-term (standard-classical-Fin k (i , i<k))
+  in
+    λ where
+      associative-group-laws →
+        ( 3 ,
+          (var 0 *-term var 1) *-term var 2 ,
+          var 0 *-term (var 1 *-term var 2))
+      invl-group-laws →
+        ( 1 ,
+          inv-term (var 0) *-term var 0 ,
+          unit-term)
+      invr-group-laws →
+        ( 1 ,
+          var 0 *-term inv-term (var 0) ,
+          unit-term)
+      idl-l-group-laws →
+        ( 1 ,
+          unit-term *-term var 0 ,
+          var 0)
+      idr-group-laws →
+        ( 1 ,
+          var 0 *-term unit-term ,
+          var 0)
 
 algebra-Group : (l : Level) → UU (lsuc l)
 algebra-Group l = Algebra l group-signature algebraic-theory-Group
@@ -100,46 +115,51 @@ algebra-Group l = Algebra l group-signature algebraic-theory-Group
 ```agda
 group-algebra-Group :
   {l : Level} → algebra-Group l → Group l
-pr1 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A))) = A-Set
-pr1 (pr2 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x y =
-  models-A mul-group-op (x ∷ y ∷ empty-tuple)
-pr2 (pr2 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x y z =
-  satisfies-A associative-l-group-laws
-    ( λ { 0 → x ; 1 → y ; (succ-ℕ (succ-ℕ n)) → z})
-pr1 (pr1 (pr2 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) =
-  models-A unit-group-op empty-tuple
-pr1 (pr2 (pr1 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A idl-l-group-laws (λ _ → x)
-pr2 (pr2 (pr1 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A idr-r-group-laws (λ _ → x)
-pr1 (pr2 (pr2 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x =
-  models-A inv-group-op (x ∷ empty-tuple)
-pr1 (pr2 (pr2 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A invl-l-group-laws (λ _ → x)
-pr2 (pr2 (pr2 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A invr-r-group-laws (λ _ → x)
+group-algebra-Group ((A-Set , models-A) , satisfies-A) =
+  let
+    mul-A x y = models-A mul-group-op (x ∷ y ∷ empty-tuple)
+    inv-A x = models-A inv-group-op (x ∷ empty-tuple)
+    unit-A = models-A unit-group-op empty-tuple
+    associative-mul-A x y z =
+      satisfies-A
+        ( associative-group-laws)
+        ( fin-sequence-tuple 3 (z ∷ y ∷ x ∷ empty-tuple))
+    left-unit-law-mul-A x =
+      satisfies-A idl-l-group-laws (λ _ → x)
+    right-unit-law-mul-A x =
+      satisfies-A idr-group-laws (λ _ → x)
+    left-inv-law-mul-A x =
+      satisfies-A invl-group-laws (λ _ → x)
+    right-inv-law-mul-A x =
+      satisfies-A invr-group-laws (λ _ → x)
+  in
+    ( ( A-Set , mul-A , associative-mul-A) ,
+      ( unit-A , left-unit-law-mul-A , right-unit-law-mul-A) ,
+      ( inv-A , left-inv-law-mul-A , right-inv-law-mul-A))
 
 algebra-group-Group :
   {l : Level} → Group l → algebra-Group l
 algebra-group-Group G =
-  pair
-    ( pair
-      ( set-Group G)
-      ( λ where
-        unit-group-op v → unit-Group G
-        mul-group-op (x ∷ y ∷ empty-tuple) → mul-Group G x y
-        inv-group-op (x ∷ empty-tuple) → inv-Group G x))
-    ( λ where
-      associative-l-group-laws assign →
-        associative-mul-Group G (assign 0) (assign 1) (assign 2)
-      invl-l-group-laws assign →
-        left-inverse-law-mul-Group G (assign 0)
-      invr-r-group-laws assign →
-        right-inverse-law-mul-Group G (assign 0)
-      idl-l-group-laws assign →
-        left-unit-law-mul-Group G (assign 0)
-      idr-r-group-laws assign →
-        right-unit-law-mul-Group G (assign 0))
+  let
+    fin : (i : ℕ) (k : ℕ) → {le-ℕ i k} → Fin k
+    fin i k {i<k} = standard-classical-Fin k (i , i<k)
+  in
+    ( ( set-Group G ,
+        λ where
+          mul-group-op (x ∷ y ∷ empty-tuple) → mul-Group G x y
+          inv-group-op (x ∷ empty-tuple) → inv-Group G x
+          unit-group-op _ → unit-Group G) ,
+      λ where
+        associative-group-laws xs →
+          associative-mul-Group G (xs (fin 0 3)) (xs (fin 1 3)) (xs (fin 2 3))
+        invl-group-laws xs →
+          left-inverse-law-mul-Group G (xs (fin 0 1))
+        invr-group-laws xs →
+          right-inverse-law-mul-Group G (xs (fin 0 1))
+        idl-l-group-laws xs →
+          left-unit-law-mul-Group G (xs (fin 0 1))
+        idr-group-laws xs →
+          right-unit-law-mul-Group G (xs (fin 0 1)))
 
 abstract
   equiv-group-algebra-Group :
@@ -147,21 +167,21 @@ abstract
   pr1 equiv-group-algebra-Group = group-algebra-Group
   pr1 (pr1 (pr2 equiv-group-algebra-Group)) = algebra-group-Group
   pr2 (pr1 (pr2 equiv-group-algebra-Group)) G =
-    eq-pair-eq-fiber
-      ( eq-is-prop (is-prop-is-group-Semigroup (semigroup-Group G)))
+    eq-type-subtype
+      ( is-group-prop-Semigroup)
+      ( refl)
   pr1 (pr2 (pr2 equiv-group-algebra-Group)) = algebra-group-Group
   pr2 (pr2 (pr2 equiv-group-algebra-Group)) A =
-    eq-pair-Σ
+    eq-type-subtype
+      ( is-algebra-prop-Model-Of-Signature
+        ( group-signature)
+        ( algebraic-theory-Group))
       ( eq-pair-eq-fiber
         ( eq-htpy
-          ( λ where
+          λ where
             unit-group-op → eq-htpy (λ where empty-tuple → refl)
             mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-tuple) → refl)
-            inv-group-op → eq-htpy (λ where (x ∷ empty-tuple) → refl))))
-      ( eq-is-prop
-        ( is-prop-is-algebra
-          ( group-signature) ( algebraic-theory-Group)
-          ( model-Algebra group-signature algebraic-theory-Group A)))
+            inv-group-op → eq-htpy (λ where (x ∷ empty-tuple) → refl)))
 ```
 
 ### Homomorphisms of groups are homomorphisms of the algebra of groups, and vice versa
