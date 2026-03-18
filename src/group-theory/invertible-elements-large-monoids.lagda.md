@@ -315,6 +315,45 @@ module _
     ( is-invertible-small-iff-is-invertible-element-Large-Monoid M x)
 ```
 
+### If `x` is invertible, `raise l x` is invertible
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (M : Large-Monoid α β)
+  {l1 : Level}
+  (l2 : Level)
+  (x : type-Large-Monoid M l1)
+  where
+
+  is-invertible-element-raise-Large-Monoid :
+    is-invertible-element-Large-Monoid M x →
+    is-invertible-element-Large-Monoid M (raise-Large-Monoid M l2 x)
+  is-invertible-element-raise-Large-Monoid (y , xy~1 , yx~1) =
+    ( raise-Large-Monoid M l2 y ,
+      transitive-sim-Large-Monoid M
+        ( mul-Large-Monoid M
+          ( raise-Large-Monoid M l2 x)
+          ( raise-Large-Monoid M l2 y))
+        ( mul-Large-Monoid M x y)
+        ( unit-Large-Monoid M)
+        ( xy~1)
+        ( preserves-sim-mul-Large-Monoid M _ _ _ _
+          ( sim-raise-Large-Monoid' M l2 x)
+          ( sim-raise-Large-Monoid' M l2 y)) ,
+      transitive-sim-Large-Monoid M
+        ( mul-Large-Monoid M
+          ( raise-Large-Monoid M l2 y)
+          ( raise-Large-Monoid M l2 x))
+        ( mul-Large-Monoid M y x)
+        ( unit-Large-Monoid M)
+        ( yx~1)
+        ( preserves-sim-mul-Large-Monoid M _ _ _ _
+          ( sim-raise-Large-Monoid' M l2 y)
+          ( sim-raise-Large-Monoid' M l2 x)))
+```
+
 ## See also
 
 - [Invertible elements in (small) monoids](group-theory.invertible-elements-monoids.md)
