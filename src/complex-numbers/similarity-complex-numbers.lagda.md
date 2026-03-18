@@ -11,11 +11,13 @@ open import complex-numbers.complex-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
 open import foundation.locally-small-types
 open import foundation.propositions
+open import foundation.similarity-preserving-maps-large-similarity-relations
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -143,6 +145,18 @@ abstract
     sim-ℂ x y → sim-ℂ (neg-ℂ x) (neg-ℂ y)
   preserves-sim-neg-ℂ (a~c , b~d) =
     ( preserves-sim-neg-ℝ a~c , preserves-sim-neg-ℝ b~d)
+
+sim-preserving-endomap-neg-ℂ :
+  sim-preserving-map-Large-Similarity-Relation
+    ( id)
+    ( large-similarity-relation-ℂ)
+    ( large-similarity-relation-ℂ)
+sim-preserving-endomap-neg-ℂ =
+  λ where
+    .map-sim-preserving-map-Large-Similarity-Relation →
+      neg-ℂ
+    .preserves-sim-map-sim-preserving-map-Large-Similarity-Relation _ _ →
+      preserves-sim-neg-ℂ
 ```
 
 ### Similarity reasoning
