@@ -222,16 +222,22 @@ module _
   apart-Heyting-Field = type-Relation-Prop apart-prop-Heyting-Field
 
   abstract
-    antirefl-apart-Heyting-Field : is-antireflexive apart-prop-Heyting-Field
-    antirefl-apart-Heyting-Field x is-invertible-x-x =
+    is-not-invertible-zero-Heyting-Field :
+      ¬ is-invertible-element-Heyting-Field F (zero-Heyting-Field F)
+    is-not-invertible-zero-Heyting-Field is-inv-0 =
       is-nontrivial-commutative-ring-Heyting-Field
         ( F)
         ( is-trivial-is-invertible-zero-Commutative-Ring
           ( commutative-ring-Heyting-Field F)
-          ( tr
-            ( is-invertible-element-Heyting-Field F)
-            ( right-inverse-law-add-Heyting-Field F x)
-            ( is-invertible-x-x)))
+          ( is-inv-0))
+
+    antirefl-apart-Heyting-Field : is-antireflexive apart-prop-Heyting-Field
+    antirefl-apart-Heyting-Field x is-invertible-x-x =
+      is-not-invertible-zero-Heyting-Field
+        ( tr
+          ( is-invertible-element-Heyting-Field F)
+          ( right-inverse-law-add-Heyting-Field F x)
+          ( is-invertible-x-x))
 
     symmetric-apart-Heyting-Field : is-symmetric apart-Heyting-Field
     symmetric-apart-Heyting-Field x y is-invertible-⟨x-y⟩ =

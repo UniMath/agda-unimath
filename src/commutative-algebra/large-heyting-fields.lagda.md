@@ -10,9 +10,11 @@ module commutative-algebra.large-heyting-fields where
 
 ```agda
 open import commutative-algebra.heyting-fields
+open import commutative-algebra.invertible-elements-large-commutative-rings
 open import commutative-algebra.large-commutative-rings
 open import commutative-algebra.local-commutative-rings
 
+open import foundation.transport-along-identifications
 open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -21,9 +23,11 @@ open import foundation.function-types
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.tight-large-apartness-relations
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
+open import foundation.large-apartness-relations
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -31,9 +35,7 @@ open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.universe-levels
 
-open import group-theory.invertible-elements-large-monoids
 open import group-theory.large-commutative-monoids
-open import group-theory.large-monoids
 
 open import ring-theory.large-rings
 ```
@@ -41,6 +43,15 @@ open import ring-theory.large-rings
 </details>
 
 ## Idea
+
+A {{#concept "large Heyting field" Agda=Large-Heyting-Field}} is a
+[large commutative ring](commutative-algebra.large-commutative-rings.md) which
+satisfies the following properties:
+
+- Locality: if `x + y` is invertible, `x` [or](foundation.disjunction.md) `y`
+  are invertible
+- Nontriviality: `0 ≠ 1`
+- Extensionality: if `x` is [not](foundation.negation.md) invertible, it is zero
 
 ## Definition
 
@@ -75,15 +86,11 @@ record
     large-commutative-monoid-mul-Large-Commutative-Ring
       ( large-commutative-ring-Large-Heyting-Field)
 
-  large-monoid-mul-Large-Heyting-Field : Large-Monoid α β
-  large-monoid-mul-Large-Heyting-Field =
-    large-monoid-Large-Commutative-Monoid
-      large-commutative-monoid-mul-Large-Heyting-Field
-
   is-invertible-element-prop-Large-Heyting-Field :
     {l : Level} (x : type-Large-Heyting-Field l) → Prop (α l ⊔ β l lzero)
   is-invertible-element-prop-Large-Heyting-Field =
-    is-invertible-element-prop-Large-Monoid large-monoid-mul-Large-Heyting-Field
+    is-invertible-element-prop-Large-Commutative-Ring
+      ( large-commutative-ring-Large-Heyting-Field)
 
   is-invertible-element-Large-Heyting-Field :
     {l : Level} (x : type-Large-Heyting-Field l) → UU (α l ⊔ β l lzero)
@@ -784,17 +791,17 @@ module _
         ( l) ,
       λ x y inv-x+y →
         map-disjunction
-          ( is-invertible-small-is-invertible-element-Large-Monoid
-            ( large-monoid-mul-Large-Heyting-Field K)
+          ( is-invertible-small-is-invertible-element-Large-Commutative-Ring
+            ( large-commutative-ring-Large-Heyting-Field K)
             ( x))
-          ( is-invertible-small-is-invertible-element-Large-Monoid
-            ( large-monoid-mul-Large-Heyting-Field K)
+          ( is-invertible-small-is-invertible-element-Large-Commutative-Ring
+            ( large-commutative-ring-Large-Heyting-Field K)
             ( y))
           ( is-local-Large-Heyting-Field K
             ( x)
             ( y)
-            ( is-invertible-is-invertible-small-element-Large-Monoid
-              ( large-monoid-mul-Large-Heyting-Field K)
+            ( is-invertible-is-invertible-small-element-Large-Commutative-Ring
+              ( large-commutative-ring-Large-Heyting-Field K)
               ( add-Large-Heyting-Field K x y)
               ( inv-x+y))))
 
@@ -810,8 +817,72 @@ module _
           ( is-zero-is-not-invertible-element-Large-Heyting-Field K
             ( x)
             ( map-neg
-              ( is-invertible-small-is-invertible-element-Large-Monoid
-                ( large-monoid-mul-Large-Heyting-Field K)
+              ( is-invertible-small-is-invertible-element-Large-Commutative-Ring
+                ( large-commutative-ring-Large-Heyting-Field K)
                 ( x))
               ( ¬inv-x))))
+```
+
+### Zero is not an invertible element of a large Heyting field
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (K : Large-Heyting-Field α β)
+  where
+
+  abstract
+    is-not-invertible-raise-zero-Large-Heyting-Field :
+      (l : Level) →
+      ¬ ( is-invertible-element-Large-Heyting-Field K
+          ( raise-zero-Large-Heyting-Field K l))
+    is-not-invertible-raise-zero-Large-Heyting-Field l is-inv-0 =
+      is-not-invertible-zero-Heyting-Field
+        ( heyting-field-Large-Heyting-Field K l)
+        ( is-invertible-small-is-invertible-element-Large-Commutative-Ring
+          ( large-commutative-ring-Large-Heyting-Field K)
+          ( raise-zero-Large-Heyting-Field K l)
+          ( is-inv-0))
+```
+
+### The large apartness relation of a large Heyting field
+
+```agda
+module _
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (K : Large-Heyting-Field α β)
+  where
+
+  apart-prop-Large-Heyting-Field :
+    Large-Relation-Prop
+      ( λ l1 l2 → α (l1 ⊔ l2) ⊔ β (l1 ⊔ l2) lzero)
+      ( type-Large-Heyting-Field K)
+  apart-prop-Large-Heyting-Field x y =
+    is-invertible-element-prop-Large-Heyting-Field K
+      ( diff-Large-Heyting-Field K x y)
+
+  apart-Large-Heyting-Field :
+    Large-Relation
+      ( λ l1 l2 → α (l1 ⊔ l2) ⊔ β (l1 ⊔ l2) lzero)
+      ( type-Large-Heyting-Field K)
+  apart-Large-Heyting-Field =
+    large-relation-Large-Relation-Prop
+      ( type-Large-Heyting-Field K)
+      ( apart-prop-Large-Heyting-Field)
+
+  abstract
+    antirefl-apart-Large-Heyting-Field :
+      is-antireflexive-Large-Relation-Prop
+        ( type-Large-Heyting-Field K)
+        ( apart-prop-Large-Heyting-Field)
+    antirefl-apart-Large-Heyting-Field {l} x inv-x-x =
+      is-not-invertible-raise-zero-Large-Heyting-Field K l
+        ( tr
+          ( is-invertible-element-Large-Heyting-Field K)
+          ( eq-right-inverse-law-add-Large-Heyting-Field K x)
+          ( inv-x-x))
+
+
 ```
