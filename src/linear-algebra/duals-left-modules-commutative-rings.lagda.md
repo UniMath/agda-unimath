@@ -124,3 +124,7 @@ module _
       is-additive-map-double-dual-left-module-Commutative-Ring ,
       is-homogeneous-map-double-dual-left-module-Commutative-Ring)
 ```
+
+## External links
+
+- [Dual module](https://en.wikipedia.org/wiki/Dual_module) on Wikipedia
