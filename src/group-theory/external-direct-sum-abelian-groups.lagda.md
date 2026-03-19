@@ -204,7 +204,7 @@ module _
 
 ## Properties
 
-### Mapping the `Gᵢ` into the direct sum preserves the operations of the `Gᵢ`
+### The mapping from the `Gᵢ` into the direct sum preserves addition
 
 ```agda
 module _
@@ -233,20 +233,54 @@ module _
       ( apply-effectiveness-quotient-map'
         ( equivalence-relation-direct-sum-Ab I G)
         ( unit-trunc-Prop (add-rel-congruence-direct-sum-Ab i g h)))
+```
+
+### The canonical homomorphism from the `Gᵢ` to the direct sum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
 
   hom-in-direct-sum-Ab :
     (i : I) → hom-Ab (G i) (direct-sum-Ab I G)
   hom-in-direct-sum-Ab i =
     ( in-direct-sum-Ab I G ∘ pair i ,
-      inv (add-in-direct-sum-Ab i _ _))
+      inv (add-in-direct-sum-Ab I G i _ _))
+```
+
+### The zeroes of the `Gᵢ` map to the zero of the direct sum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
 
   abstract
     in-zero-direct-sum-Ab :
       (i : I) →
       in-direct-sum-Ab I G (i , zero-Ab (G i)) ＝ zero-direct-sum-Ab I G
     in-zero-direct-sum-Ab i =
-      preserves-zero-hom-Ab (G i) (direct-sum-Ab I G) (hom-in-direct-sum-Ab i)
+      preserves-zero-hom-Ab
+        ( G i)
+        ( direct-sum-Ab I G)
+        ( hom-in-direct-sum-Ab I G i)
+```
 
+### The mapping of the `Gᵢ` into the direct sum preserves negation
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
+
+  abstract
     neg-in-direct-sum-Ab :
       (i : I) (g : type-Ab (G i)) →
       neg-direct-sum-Ab I G (in-direct-sum-Ab I G (i , g)) ＝
@@ -256,5 +290,5 @@ module _
         ( preserves-negatives-hom-Ab
           ( G i)
           ( direct-sum-Ab I G)
-          ( hom-in-direct-sum-Ab i))
+          ( hom-in-direct-sum-Ab I G i))
 ```
