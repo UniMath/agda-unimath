@@ -70,68 +70,111 @@ module _
   quotient-map-Π-set-quotient-Finite-Type :
     ((i : I) → A i) → Π-set-quotient-Finite-Type
   quotient-map-Π-set-quotient-Finite-Type f i = quotient-map (R i) (f i)
+```
+
+## Properties
+
+### The quotient map is surjective
+
+Note that this theorem uses the finiteness of `I` for
+[finite choice](univalent-combinatorics.finite-choice.md).
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (finite-I@(I , is-finite-I) : Finite-Type l1)
+  {A : I → UU l2}
+  (R : (i : I) → equivalence-relation l3 (A i))
+  where
 
   abstract
     is-surjective-quotient-map-Π-set-quotient-Finite-Type :
-      is-surjective quotient-map-Π-set-quotient-Finite-Type
+      is-surjective (quotient-map-Π-set-quotient-Finite-Type finite-I R)
     is-surjective-quotient-map-Π-set-quotient-Finite-Type g =
       map-trunc-Prop
         ( λ choice → (pr1 ∘ choice , eq-htpy (pr2 ∘ choice)))
         ( finite-choice
           ( is-finite-I)
           ( λ i → is-surjective-quotient-map (R i) (g i)))
+```
 
+### The quotient map reflects the induced equivalence relation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (finite-I@(I , _) : Finite-Type l1)
+  {A : I → UU l2}
+  (R : (i : I) → equivalence-relation l3 (A i))
+  where
+
+  abstract
     reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type :
       reflects-equivalence-relation
-        ( Π-equivalence-relation-Finite-Type)
-        ( quotient-map-Π-set-quotient-Finite-Type)
+        ( Π-equivalence-relation-Finite-Type finite-I R)
+        ( quotient-map-Π-set-quotient-Finite-Type finite-I R)
     reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type
       f~g =
       eq-htpy (λ i → apply-effectiveness-quotient-map' (R i) (f~g i))
 
+  reflecting-quotient-map-Π-set-quotient-Finite-Type :
+    reflecting-map-equivalence-relation
+      ( Π-equivalence-relation-Finite-Type finite-I R)
+      ( Π-set-quotient-Finite-Type finite-I R)
+  reflecting-quotient-map-Π-set-quotient-Finite-Type =
+    ( quotient-map-Π-set-quotient-Finite-Type finite-I R ,
+      reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type)
+```
+
+### The quotient map is effective
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (finite-I@(I , _) : Finite-Type l1)
+  {A : I → UU l2}
+  (R : (i : I) → equivalence-relation l3 (A i))
+  where
+
+  abstract
     is-effective-quotient-map-Π-set-quotient-Finite-Type :
       is-effective
-        ( Π-equivalence-relation-Finite-Type)
-        ( quotient-map-Π-set-quotient-Finite-Type)
+        ( Π-equivalence-relation-Finite-Type finite-I R)
+        ( quotient-map-Π-set-quotient-Finite-Type finite-I R)
     is-effective-quotient-map-Π-set-quotient-Finite-Type f g =
       equiv-iff
         ( Id-Prop
-          ( set-Π-set-quotient-Finite-Type)
-          ( quotient-map-Π-set-quotient-Finite-Type f)
-          ( quotient-map-Π-set-quotient-Finite-Type g))
-        ( sim-prop-Π-equivalence-relation-Finite-Type f g)
+          ( set-Π-set-quotient-Finite-Type finite-I R)
+          ( quotient-map-Π-set-quotient-Finite-Type finite-I R f)
+          ( quotient-map-Π-set-quotient-Finite-Type finite-I R g))
+        ( sim-prop-Π-equivalence-relation-Finite-Type finite-I R f g)
         ( λ qf=qg i → apply-effectiveness-quotient-map (R i) (htpy-eq qf=qg i))
-        ( reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type)
+        ( reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type
+          ( finite-I)
+          ( R))
+```
 
-  reflecting-quotient-map-Π-set-quotient-Finite-Type :
-    reflecting-map-equivalence-relation
-      ( Π-equivalence-relation-Finite-Type)
-      ( Π-set-quotient-Finite-Type)
-  reflecting-quotient-map-Π-set-quotient-Finite-Type =
-    ( quotient-map-Π-set-quotient-Finite-Type ,
-      reflects-Π-equivalence-relation-quotient-map-Π-set-quotient-Finite-Type)
+### The dependent product is a set quotient
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (finite-I@(I , _) : Finite-Type l1)
+  {A : I → UU l2}
+  (R : (i : I) → equivalence-relation l3 (A i))
+  where
 
   abstract
     is-set-quotient-Π-set-quotient-Finite-Type :
       is-set-quotient
-        ( Π-equivalence-relation-Finite-Type)
-        ( set-Π-set-quotient-Finite-Type)
-        ( reflecting-quotient-map-Π-set-quotient-Finite-Type)
+        ( Π-equivalence-relation-Finite-Type finite-I R)
+        ( set-Π-set-quotient-Finite-Type finite-I R)
+        ( reflecting-quotient-map-Π-set-quotient-Finite-Type finite-I R)
     is-set-quotient-Π-set-quotient-Finite-Type =
       is-set-quotient-is-surjective-and-effective
-        ( Π-equivalence-relation-Finite-Type)
-        ( set-Π-set-quotient-Finite-Type)
-        ( reflecting-quotient-map-Π-set-quotient-Finite-Type)
-        ( is-surjective-quotient-map-Π-set-quotient-Finite-Type ,
-          is-effective-quotient-map-Π-set-quotient-Finite-Type)
-
-    equiv-Π-set-quotient-Finite-Type :
-      set-quotient Π-equivalence-relation-Finite-Type ≃
-      Π-set-quotient-Finite-Type
-    equiv-Π-set-quotient-Finite-Type =
-      equiv-uniqueness-set-quotient-set-quotient
-        ( Π-equivalence-relation-Finite-Type)
-        ( set-Π-set-quotient-Finite-Type)
-        ( reflecting-quotient-map-Π-set-quotient-Finite-Type)
-        ( is-set-quotient-Π-set-quotient-Finite-Type)
+        ( Π-equivalence-relation-Finite-Type finite-I R)
+        ( set-Π-set-quotient-Finite-Type finite-I R)
+        ( reflecting-quotient-map-Π-set-quotient-Finite-Type finite-I R)
+        ( is-surjective-quotient-map-Π-set-quotient-Finite-Type finite-I R ,
+          is-effective-quotient-map-Π-set-quotient-Finite-Type finite-I R)
 ```
