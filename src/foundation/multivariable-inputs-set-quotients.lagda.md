@@ -466,7 +466,7 @@ abstract
               ( X) _))) ∙
         is-retraction-inv-precomp-f
 
-is-set-quotient-fin-sequence-set-quotient :
+is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation :
   { l1 l2 : Level}
   ( n : ℕ)
   ( A : fin-sequence (UU l1) n)
@@ -475,8 +475,12 @@ is-set-quotient-fin-sequence-set-quotient :
     ( all-sim-equivalence-relation n A R)
     ( set-quotient-fin-sequence-Set n A R)
     ( reflecting-map-quotient-fin-sequence-map n A R)
-pr1 (is-set-quotient-fin-sequence-set-quotient n A R X) =
+pr1
+  ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+    n A R X) =
   section-precomp-fin-sequence-set-quotient n A R X
-pr2 (is-set-quotient-fin-sequence-set-quotient n A R X) =
+pr2
+  ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+    n A R X) =
   is-retraction-inv-precomp-fin-sequence-set-quotient n A R X
 ```
