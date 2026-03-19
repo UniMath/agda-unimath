@@ -29,20 +29,23 @@ open import lists.tuples
 ## Definition
 
 ```agda
-data monoid-ops : UU lzero where
-  monoid-semigroup-op : operation-Semigroup → monoid-ops
-  unit-monoid-op : monoid-ops
+data operation-Monoid : UU lzero where
+  operation-monoid-operation-Semigroup : operation-Semigroup → operation-Monoid
+  unit-operation-Monoid : operation-Monoid
 
-pattern mul-monoid-op = monoid-semigroup-op mul-operation-Semigroup-op
+pattern mul-operation-Monoid =
+  operation-monoid-operation-Semigroup mul-operation-Semigroup-op
 
-monoid-signature : signature lzero
-pr1 monoid-signature = monoid-ops
-pr2 monoid-signature (monoid-semigroup-op op) =
-  pr2 signature-Semigroup op
-pr2 monoid-signature unit-monoid-op = 0
+signature-Monoid : signature lzero
+pr1 signature-Monoid = operation-Monoid
+pr2 signature-Monoid (operation-monoid-operation-Semigroup op) =
+  arity-operation-signature signature-Semigroup op
+pr2 signature-Monoid unit-operation-Monoid = 0
 
-data monoid-laws : UU lzero where
-  monoid-law-law-Semigroup : law-Semigroup → monoid-laws
-  left-unit-law-monoid-law : monoid-laws
-  right-unit-law-monoid-law : monoid-laws
+data law-Monoid : UU lzero where
+  law-monoid-law-Semigroup : law-Semigroup → law-Monoid
+  left-unit-law-law-Monoid : law-Monoid
+  right-unit-law-law-Monoid : law-Monoid
+
+algebraic-theory-Monoid : Algebraic-Theory
 ```
