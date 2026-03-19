@@ -1,0 +1,243 @@
+# The external direct sum of abelian groups
+
+```agda
+{-# OPTIONS --lossy-unification #-}
+
+module group-theory.external-direct-sum-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.propositional-truncation-binary-relations
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.set-quotients
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+
+open import lists.tuples
+
+open import universal-algebra.algebraic-theory-of-abelian-groups
+open import universal-algebra.algebraic-theory-of-groups
+open import universal-algebra.congruences
+open import universal-algebra.freely-generated-algebras
+open import universal-algebra.quotient-algebras
+```
+
+</details>
+
+## Idea
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
+
+  free-algebra-direct-sum-Ab : Algebra-Ab (l1 ⊔ l2)
+  free-algebra-direct-sum-Ab =
+    free-Algebra group-signature algebraic-theory-Ab (Σ I (type-Ab ∘ G))
+
+  ab-free-algebra-direct-sum-Ab : Ab (l1 ⊔ l2)
+  ab-free-algebra-direct-sum-Ab = ab-Algebra-Ab free-algebra-direct-sum-Ab
+
+  type-free-algebra-direct-sum-Ab : UU (l1 ⊔ l2)
+  type-free-algebra-direct-sum-Ab =
+    type-Ab ab-free-algebra-direct-sum-Ab
+
+  add-free-algebra-direct-sum-Ab :
+    type-free-algebra-direct-sum-Ab → type-free-algebra-direct-sum-Ab →
+    type-free-algebra-direct-sum-Ab
+  add-free-algebra-direct-sum-Ab =
+    add-Ab ab-free-algebra-direct-sum-Ab
+
+  neg-free-algebra-direct-sum-Ab :
+    type-free-algebra-direct-sum-Ab → type-free-algebra-direct-sum-Ab
+  neg-free-algebra-direct-sum-Ab =
+    neg-Ab ab-free-algebra-direct-sum-Ab
+
+  in-free-algebra-direct-sum-Ab :
+    Σ I (type-Ab ∘ G) → type-free-algebra-direct-sum-Ab
+  in-free-algebra-direct-sum-Ab =
+    in-generator-free-Algebra
+      ( group-signature)
+      ( algebraic-theory-Ab)
+      ( Σ I (type-Ab ∘ G))
+
+  data rel-congruence-direct-sum-Ab :
+    Relation (l1 ⊔ l2) type-free-algebra-direct-sum-Ab where
+
+    refl-rel-congruence-direct-sum-Ab :
+      is-reflexive rel-congruence-direct-sum-Ab
+    symmetric-rel-congruence-direct-sum-Ab :
+      is-symmetric rel-congruence-direct-sum-Ab
+    transitive-rel-congruence-direct-sum-Ab :
+      is-transitive rel-congruence-direct-sum-Ab
+
+    add-rel-congruence-direct-sum-Ab :
+      (i : I) (g h : type-Ab (G i)) →
+      rel-congruence-direct-sum-Ab
+        ( add-free-algebra-direct-sum-Ab
+          ( in-free-algebra-direct-sum-Ab (i , g))
+          ( in-free-algebra-direct-sum-Ab (i , h)))
+        ( in-free-algebra-direct-sum-Ab (i , add-Ab (G i) g h))
+
+    ap-add-rel-congruence-direct-sum-Ab :
+      (x y z w : type-free-algebra-direct-sum-Ab) →
+      rel-congruence-direct-sum-Ab x z →
+      rel-congruence-direct-sum-Ab y w →
+      rel-congruence-direct-sum-Ab
+        ( add-free-algebra-direct-sum-Ab x y)
+        ( add-free-algebra-direct-sum-Ab z w)
+
+    ap-neg-rel-congruence-direct-sum-Ab :
+      (x y : type-free-algebra-direct-sum-Ab) →
+      rel-congruence-direct-sum-Ab x y →
+      rel-congruence-direct-sum-Ab
+        ( neg-free-algebra-direct-sum-Ab x)
+        ( neg-free-algebra-direct-sum-Ab y)
+
+  equivalence-relation-direct-sum-Ab :
+    equivalence-relation (l1 ⊔ l2) type-free-algebra-direct-sum-Ab
+  equivalence-relation-direct-sum-Ab =
+    ( trunc-prop-Relation rel-congruence-direct-sum-Ab ,
+      reflexive-trunc-prop-Relation
+        ( rel-congruence-direct-sum-Ab)
+        ( refl-rel-congruence-direct-sum-Ab) ,
+      symmetric-trunc-prop-Relation
+        ( rel-congruence-direct-sum-Ab)
+        ( symmetric-rel-congruence-direct-sum-Ab) ,
+      transitive-trunc-prop-Relation
+        ( rel-congruence-direct-sum-Ab)
+        ( transitive-rel-congruence-direct-sum-Ab))
+
+  abstract
+    is-congruence-equivalence-relation-direct-sum-Ab :
+      preserves-operations-equivalence-relation-Algebra
+        ( group-signature)
+        ( algebraic-theory-Ab)
+        ( free-algebra-direct-sum-Ab)
+        ( equivalence-relation-direct-sum-Ab)
+    is-congruence-equivalence-relation-direct-sum-Ab
+      unit-group-op {empty-tuple} {empty-tuple} _ =
+      unit-trunc-Prop
+        ( refl-rel-congruence-direct-sum-Ab
+          ( zero-Ab ab-free-algebra-direct-sum-Ab))
+    is-congruence-equivalence-relation-direct-sum-Ab
+      mul-group-op {x ∷ y ∷ empty-tuple} {z ∷ w ∷ empty-tuple}
+        ( x~z , y~w , _) =
+        map-binary-trunc-Prop
+          ( ap-add-rel-congruence-direct-sum-Ab x y z w)
+          ( x~z)
+          ( y~w)
+    is-congruence-equivalence-relation-direct-sum-Ab
+      inv-group-op {x ∷ empty-tuple} {y ∷ empty-tuple} (x~y , _) =
+      map-trunc-Prop (ap-neg-rel-congruence-direct-sum-Ab x y) x~y
+
+  congruence-direct-sum-Ab :
+    congruence-Algebra
+      ( l1 ⊔ l2)
+      ( group-signature)
+      ( algebraic-theory-Ab)
+      ( free-algebra-direct-sum-Ab)
+  congruence-direct-sum-Ab =
+    ( equivalence-relation-direct-sum-Ab ,
+      is-congruence-equivalence-relation-direct-sum-Ab)
+
+  opaque
+    algebra-direct-sum-Ab : Algebra-Ab (l1 ⊔ l2)
+    algebra-direct-sum-Ab =
+      quotient-Algebra
+        ( group-signature)
+        ( algebraic-theory-Ab)
+        ( free-algebra-direct-sum-Ab)
+        ( congruence-direct-sum-Ab)
+
+  direct-sum-Ab : Ab (l1 ⊔ l2)
+  direct-sum-Ab = ab-Algebra-Ab algebra-direct-sum-Ab
+
+  type-direct-sum-Ab : UU (l1 ⊔ l2)
+  type-direct-sum-Ab = type-Ab direct-sum-Ab
+
+  add-direct-sum-Ab :
+    type-direct-sum-Ab → type-direct-sum-Ab → type-direct-sum-Ab
+  add-direct-sum-Ab = add-Ab direct-sum-Ab
+
+  neg-direct-sum-Ab : type-direct-sum-Ab → type-direct-sum-Ab
+  neg-direct-sum-Ab = neg-Ab direct-sum-Ab
+
+  zero-direct-sum-Ab : type-direct-sum-Ab
+  zero-direct-sum-Ab = zero-Ab direct-sum-Ab
+
+  opaque
+    unfolding algebra-direct-sum-Ab
+
+    in-direct-sum-Ab : Σ I (type-Ab ∘ G) → type-direct-sum-Ab
+    in-direct-sum-Ab =
+      ( quotient-map equivalence-relation-direct-sum-Ab) ∘
+      ( in-free-algebra-direct-sum-Ab)
+```
+
+## Properties
+
+### Adding two elements at the same index produces the sum in the group at that index
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
+
+  abstract opaque
+    unfolding in-direct-sum-Ab
+
+    add-in-direct-sum-Ab :
+      (i : I) (g h : type-Ab (G i)) →
+      add-direct-sum-Ab I G
+        ( in-direct-sum-Ab I G (i , g))
+        (in-direct-sum-Ab I G (i , h)) ＝
+      in-direct-sum-Ab I G (i , add-Ab (G i) g h)
+    add-in-direct-sum-Ab i g h =
+      ( compute-is-model-quotient-Algebra
+        ( group-signature)
+        ( algebraic-theory-Ab)
+        ( free-algebra-direct-sum-Ab I G)
+        ( congruence-direct-sum-Ab I G)
+        ( mul-group-op)
+        ( _)) ∙
+      ( apply-effectiveness-quotient-map'
+        ( equivalence-relation-direct-sum-Ab I G)
+        ( unit-trunc-Prop (add-rel-congruence-direct-sum-Ab i g h)))
+```
+
+### The canonical homomorphism between the group at an index and the external direct sum
+
+```agda
+module _
+  {l1 l2 : Level}
+  (I : UU l1)
+  (G : I → Ab l2)
+  where
+
+  hom-in-direct-sum-Ab :
+    (i : I) → hom-Ab (G i) (direct-sum-Ab I G)
+  hom-in-direct-sum-Ab i =
+    ( in-direct-sum-Ab I G ∘ pair i ,
+      inv (add-in-direct-sum-Ab I G i _ _))
+```
