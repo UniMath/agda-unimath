@@ -690,3 +690,58 @@ module _
       ( P)
       ( M)
 ```
+
+### A short map homotopic to a precomplete short map is precomplete
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f g : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+  where
+
+  preserves-precomplete-htpy-map-short-map-Pseudometric-Space :
+    htpy-map-short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-Metric-Space M)
+      ( f)
+      ( g) →
+    is-precomplete-short-map-Pseudometric-Space P M f →
+    is-precomplete-short-map-Pseudometric-Space P M g
+  preserves-precomplete-htpy-map-short-map-Pseudometric-Space f~g H u =
+    tr
+      ( is-convergent-cauchy-approximation-Metric-Space M)
+      ( htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( f)
+        ( g)
+        ( f~g)
+        ( u))
+      ( H u)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+  (g : precomplete-short-map-Pseudometric-Space P M)
+  where
+
+  is-precomplete-htpy-map-precomplete-short-map-Pseudometric-Space :
+    htpy-map-short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-Metric-Space M)
+      ( f)
+      ( short-map-precomplete-short-map-Pseudometric-Space P M g) →
+    is-precomplete-short-map-Pseudometric-Space P M f
+  is-precomplete-htpy-map-precomplete-short-map-Pseudometric-Space f~g =
+    preserves-precomplete-htpy-map-short-map-Pseudometric-Space
+      ( P)
+      ( M)
+      ( short-map-precomplete-short-map-Pseudometric-Space P M g)
+      ( f)
+      ( inv-htpy f~g)
+      ( is-precomplete-short-map-precomplete-short-map-Pseudometric-Space P M g)
+```

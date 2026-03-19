@@ -685,3 +685,27 @@ module _
       ( P)
       ( M)
 ```
+
+### An isometry homotopic to a precomplete isometry is precomplete
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
+  where
+
+  preserves-precomplete-htpy-map-isometry-Pseudometric-Space :
+    htpy-map-isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-Metric-Space M)
+      ( f)
+      ( g) →
+    is-precomplete-isometry-Pseudometric-Space P M f →
+    is-precomplete-isometry-Pseudometric-Space P M g
+  preserves-precomplete-htpy-map-isometry-Pseudometric-Space =
+    preserves-precomplete-htpy-map-short-map-Pseudometric-Space P M
+      ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
+      ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) g)
+```

@@ -27,11 +27,13 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import metric-spaces.complete-metric-spaces
 open import metric-spaces.equality-of-pseudometric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.precomplete-isometries-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 ```
@@ -114,10 +116,35 @@ module _
   is-retraction-map-inv-isometric-equiv-Metric-Space e =
     is-retraction-map-inv-equiv (equiv-isometric-equiv-Metric-Space e)
 
+  is-equiv-map-isometric-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    is-equiv
+      ( map-isometric-equiv-Metric-Space e)
+  is-equiv-map-isometric-equiv-Metric-Space e =
+    is-equiv-map-equiv
+      ( equiv-isometric-equiv-Metric-Space e)
+
   is-isometry-map-isometric-equiv-Metric-Space :
     (e : isometric-equiv-Metric-Space) →
     is-isometry-Metric-Space A B (map-isometric-equiv-Metric-Space e)
   is-isometry-map-isometric-equiv-Metric-Space = pr2
+
+  isometry-isometric-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    isometry-Metric-Space A B
+  isometry-isometric-equiv-Metric-Space e =
+    ( map-isometric-equiv-Metric-Space e ,
+      is-isometry-map-isometric-equiv-Metric-Space e)
+
+  isometry-inv-isometric-equiv-Metric-Space :
+    (e : isometric-equiv-Metric-Space) →
+    isometry-Metric-Space B A
+  isometry-inv-isometric-equiv-Metric-Space e =
+    isometry-inv-is-equiv-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( isometry-isometric-equiv-Metric-Space e)
+      ( is-equiv-map-isometric-equiv-Metric-Space e)
 ```
 
 ### Isometric equivalences between metric spaces
@@ -290,4 +317,54 @@ module _
         ( Σ (Metric-Space l1 l2) (Id A))
         ( equiv-tot (equiv-eq-isometric-equiv-Metric-Space' A))
         ( is-torsorial-Id A)
+```
+
+### A metric space isometrically equivalent to a complete metric space is complete
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2)
+  (B : Complete-Metric-Space l1' l2')
+  (A≃B : isometric-equiv-Metric-Space A (metric-space-Complete-Metric-Space B))
+  where
+
+  is-complete-isometric-equiv-metric-space-Complete-Metric-Space :
+    is-complete-Metric-Space A
+  is-complete-isometric-equiv-metric-space-Complete-Metric-Space =
+    preserves-precomplete-htpy-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( A)
+      ( comp-isometry-Metric-Space
+        ( A)
+        ( metric-space-Complete-Metric-Space B)
+        ( A)
+        ( isometry-inv-isometric-equiv-Metric-Space
+          ( A)
+          ( metric-space-Complete-Metric-Space B)
+          ( A≃B))
+        ( isometry-isometric-equiv-Metric-Space
+          ( A)
+          ( metric-space-Complete-Metric-Space B)
+          ( A≃B)))
+      ( id-isometry-Metric-Space A)
+      ( is-retraction-map-inv-isometric-equiv-Metric-Space
+        ( A)
+        ( metric-space-Complete-Metric-Space B)
+        ( A≃B))
+      ( is-precomplete-right-comp-precomplete-isometry-Pseudometric-Space
+        ( pseudometric-Metric-Space A)
+        ( metric-space-Complete-Metric-Space B)
+        ( precomplete-isometry-Complete-Metric-Space
+          ( pseudometric-Metric-Space A)
+          ( B)
+          ( isometry-isometric-equiv-Metric-Space
+            ( A)
+            ( metric-space-Complete-Metric-Space B)
+            ( A≃B)))
+        ( A)
+        ( isometry-inv-isometric-equiv-Metric-Space
+          ( A)
+          ( metric-space-Complete-Metric-Space B)
+          ( A≃B)))
 ```

@@ -28,8 +28,10 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.precomplete-isometries-pseudometric-spaces
 open import metric-spaces.precomplete-short-maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-metric-spaces
@@ -325,6 +327,31 @@ module _
     H (pseudometric-Metric-Space M) (id-short-map-Metric-Space M)
 ```
 
+### The precomplete short map induced by a short map in a complete metric space
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Complete-Metric-Space l3 l4)
+  where
+
+  precomplete-short-map-Complete-Metric-Space :
+    short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space M) →
+    precomplete-short-map-Pseudometric-Space
+      ( P)
+      ( metric-space-Complete-Metric-Space M)
+  precomplete-short-map-Complete-Metric-Space f =
+    ( f ,
+      all-precomplete-short-map-is-complete-Metric-Space
+        ( metric-space-Complete-Metric-Space M)
+        ( is-complete-metric-space-Complete-Metric-Space M)
+        ( P)
+        ( f))
+```
+
 ### A metric space is complete if and only if all short maps into it extend to the Cauchy pseudocompletions
 
 ```agda
@@ -357,6 +384,34 @@ module _
           ( M)
           ( f)
           ( H X f))
+```
+
+### The precomplete isometry induced by an isometry in a complete metric space
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Complete-Metric-Space l3 l4)
+  where
+
+  precomplete-isometry-Complete-Metric-Space :
+    isometry-Pseudometric-Space
+      ( P)
+      ( pseudometric-space-Complete-Metric-Space M) →
+    precomplete-isometry-Pseudometric-Space
+      ( P)
+      ( metric-space-Complete-Metric-Space M)
+  precomplete-isometry-Complete-Metric-Space f =
+    ( f ,
+      all-precomplete-short-map-is-complete-Metric-Space
+        ( metric-space-Complete-Metric-Space M)
+        ( is-complete-metric-space-Complete-Metric-Space M)
+        ( P)
+        ( short-map-isometry-Pseudometric-Space
+          ( P)
+          ( pseudometric-space-Complete-Metric-Space M)
+          ( f)))
 ```
 
 ## External links

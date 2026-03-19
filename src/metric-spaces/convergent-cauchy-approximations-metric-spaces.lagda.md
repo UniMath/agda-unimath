@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -111,6 +112,12 @@ module _
     cauchy-approximation-Metric-Space A
   approximation-convergent-cauchy-approximation-Metric-Space = pr1 f
 
+  is-convergent-approximation-convergent-cauchy-approximation-Metric-Space :
+    is-convergent-cauchy-approximation-Metric-Space A
+      approximation-convergent-cauchy-approximation-Metric-Space
+  is-convergent-approximation-convergent-cauchy-approximation-Metric-Space =
+    pr2 f
+
   map-convergent-cauchy-approximation-Metric-Space :
     ℚ⁺ → type-Metric-Space A
   map-convergent-cauchy-approximation-Metric-Space =
@@ -190,4 +197,46 @@ module _
     ( convergent-const-cauchy-approximation-Metric-Space A ,
       limit-convergent-cauchy-approximation-Metric-Space A ,
       is-retraction-convergent-cauchy-approximation-Metric-Space)
+```
+
+### Homotopies preserve convergent Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (u v : cauchy-approximation-Metric-Space A)
+  where
+
+  preserves-convergence-htpy-map-cauchy-approximation-Metric-Space :
+    htpy-map-cauchy-approximation-Metric-Space A u v →
+    is-convergent-cauchy-approximation-Metric-Space A u →
+    is-convergent-cauchy-approximation-Metric-Space A v
+  preserves-convergence-htpy-map-cauchy-approximation-Metric-Space u~v =
+    tot
+      ( λ lim →
+        preserves-limit-htpy-map-cauchy-approximation-Metric-Space A u v
+          ( lim)
+          ( u~v))
+
+module _
+  {l1 l2 : Level}
+  (A : Metric-Space l1 l2)
+  (u : cauchy-approximation-Metric-Space A)
+  (v : convergent-cauchy-approximation-Metric-Space A)
+  where
+
+  is-convergent-htpy-map-convergent-cauchy-approximation-Metric-Space :
+    htpy-map-cauchy-approximation-Metric-Space A u
+      ( approximation-convergent-cauchy-approximation-Metric-Space A v) →
+    is-convergent-cauchy-approximation-Metric-Space A u
+  is-convergent-htpy-map-convergent-cauchy-approximation-Metric-Space u~v =
+    preserves-convergence-htpy-map-cauchy-approximation-Metric-Space
+      ( A)
+      ( approximation-convergent-cauchy-approximation-Metric-Space A v)
+      ( u)
+      ( inv-htpy u~v)
+      ( is-convergent-approximation-convergent-cauchy-approximation-Metric-Space
+        ( A)
+        ( v))
 ```
