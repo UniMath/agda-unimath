@@ -1,6 +1,8 @@
 # Quotient algebras
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module universal-algebra.quotient-algebras where
 ```
 
@@ -9,21 +11,26 @@ module universal-algebra.quotient-algebras where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functoriality-propositional-truncation
-open import foundation.multivariable-functoriality-set-quotients
-open import foundation.multivariable-inputs-set-quotients
-open import foundation.multivariable-operations
-open import foundation.propositional-truncations
-open import foundation.propositions
+open import foundation.function-types
+open import foundation.functoriality-set-quotients
+open import foundation.identity-types
+open import foundation.raising-universe-levels
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.unit-type
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
+open import lists.equivalence-relations-finite-sequences
+open import lists.equivalence-relations-tuples
+open import lists.finite-sequences
+open import lists.functoriality-tuples
+open import lists.set-quotients-finite-sequences
+open import lists.set-quotients-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
@@ -31,6 +38,7 @@ open import universal-algebra.algebras
 open import universal-algebra.congruences
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>
@@ -44,123 +52,137 @@ of an [algebra](universal-algebra.algebras.md) by a
 [set quotient](foundation.set-quotients.md) by that congruence. This quotient
 again has the structure of an algebra inherited by the original one.
 
-## Definitions
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
   (T : Algebraic-Theory l2 σ)
   (A : Algebra l3 σ T)
-  (R : congruence-Algebra l4 σ T A)
+  ((R , preserves-sim-op-R) : congruence-Algebra l4 σ T A)
   where
 
   set-quotient-Algebra : Set (l3 ⊔ l4)
-  set-quotient-Algebra =
-    quotient-Set (equivalence-relation-congruence-Algebra σ T A R)
+  set-quotient-Algebra = quotient-Set R
 
   type-quotient-Algebra : UU (l3 ⊔ l4)
-  type-quotient-Algebra = pr1 set-quotient-Algebra
+  type-quotient-Algebra = set-quotient R
 
-  is-set-set-quotient-Algebra : is-set type-quotient-Algebra
-  is-set-set-quotient-Algebra = pr2 set-quotient-Algebra
+  hom-is-model-quotient-Algebra :
+    (op : operation-signature σ) →
+    hom-equivalence-relation
+      ( equivalence-relation-tuple R (arity-operation-signature σ op))
+      ( R)
+  hom-is-model-quotient-Algebra op =
+    ( is-model-set-Algebra σ T A op ,
+      preserves-sim-op-R op)
 
-  compute-quotient-Algebra :
-    equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R) ≃
-    type-quotient-Algebra
-  compute-quotient-Algebra =
-    compute-set-quotient
-      ( equivalence-relation-congruence-Algebra σ T A R)
+  quotient-map-Algebra : type-Algebra σ T A → type-quotient-Algebra
+  quotient-map-Algebra = quotient-map R
 
-  set-quotient-equivalence-class-Algebra :
-    equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R) →
-    type-quotient-Algebra
-  set-quotient-equivalence-class-Algebra =
-    map-equiv compute-quotient-Algebra
+  opaque
+    is-model-quotient-Algebra : is-model-of-signature σ set-quotient-Algebra
+    is-model-quotient-Algebra op =
+      let
+        k = arity-operation-signature σ op
+      in
+        map-is-set-quotient
+          ( equivalence-relation-tuple R k)
+          ( tuple-Set set-quotient-Algebra k)
+          ( reflecting-map-tuple-quotient-map R k)
+          ( R)
+          ( set-quotient-Algebra)
+          ( reflecting-map-quotient-map R)
+          ( is-set-quotient-tuple-set-quotient R k)
+          ( is-set-quotient-set-quotient R)
+          ( hom-is-model-quotient-Algebra op)
 
-  equivalence-class-set-quotient-Algebra :
-    type-quotient-Algebra →
-    equivalence-class
-      ( equivalence-relation-congruence-Algebra σ T A R)
-  equivalence-class-set-quotient-Algebra =
-    map-inv-equiv compute-quotient-Algebra
-
-  is-inhabited-tuple-type-quotient-Algebra :
-    {n : ℕ} →
-    tuple type-quotient-Algebra n →
-    type-trunc-Prop (tuple (type-Algebra σ T A) n)
-  is-inhabited-tuple-type-quotient-Algebra empty-tuple =
-    unit-trunc-Prop empty-tuple
-  is-inhabited-tuple-type-quotient-Algebra (x ∷ v) =
-    map-universal-property-trunc-Prop
-      ( trunc-Prop _)
-      ( λ (z , p) →
-        map-trunc-Prop
-          ( λ v' → z ∷ v')
-          ( is-inhabited-tuple-type-quotient-Algebra v))
-      ( pr2 (equivalence-class-set-quotient-Algebra x))
-
-  relation-holds-for-all-tuples-sim-quotient-Algebra :
-    {n : ℕ}
-    (v v' : multivariable-input n ( λ _ → type-Algebra σ T A)) →
-    sim-equivalence-relation
-      ( all-sim-equivalence-relation n
-        ( λ _ → type-Algebra σ T A)
-        ( λ _ → equivalence-relation-congruence-Algebra σ T A R))
-      ( v)
-      ( v') →
-    relation-holds-for-all-tuples-equivalence-relation-Algebra σ T A
-      ( equivalence-relation-congruence-Algebra σ T A R)
-      ( tuple-multivariable-input n (type-Algebra σ T A) v)
-      ( tuple-multivariable-input n (type-Algebra σ T A) v')
-  relation-holds-for-all-tuples-sim-quotient-Algebra
-    {zero-ℕ} v v' p =
-    raise-star
-  relation-holds-for-all-tuples-sim-quotient-Algebra
-    {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    ( p ,
-      relation-holds-for-all-tuples-sim-quotient-Algebra
-        ( v)
-        ( v')
-        ( p'))
-
-  is-model-set-quotient-Algebra :
-    is-model-of-signature σ set-quotient-Algebra
-  is-model-set-quotient-Algebra op v =
-    multivariable-map-set-quotient
-      ( arity-operation-signature σ op)
-      ( λ _ → type-Algebra σ T A)
-      ( λ _ → equivalence-relation-congruence-Algebra σ T A R)
-      ( equivalence-relation-congruence-Algebra σ T A R)
-      ( pair
-        ( λ v →
-          is-model-set-Algebra σ T A op
-            ( tuple-multivariable-input
-              ( arity-operation-signature σ op)
-              ( type-Algebra σ T A)
-              ( v)))
-        ( λ {v} {v'} p →
-          preserves-operations-congruence-Algebra σ T A R op
-            ( tuple-multivariable-input
-              ( arity-operation-signature σ op)
-              ( type-Algebra σ T A)
-              ( v))
-            ( tuple-multivariable-input
-              ( arity-operation-signature σ op)
-              ( type-Algebra σ T A)
-              ( v'))
-            ( relation-holds-for-all-tuples-sim-quotient-Algebra
-              ( v)
-              ( v')
-              ( p))))
-      ( multivariable-input-tuple
-        ( arity-operation-signature σ op)
-        ( type-quotient-Algebra)
-        ( v))
-
-  model-quotient-Algebra : Model-Of-Signature (l3 ⊔ l4) σ
+  model-quotient-Algebra :
+    Model-Of-Signature (l3 ⊔ l4) σ
   model-quotient-Algebra =
-    ( set-quotient-Algebra , is-model-set-quotient-Algebra)
+    ( set-quotient-Algebra ,
+      is-model-quotient-Algebra)
+
+  abstract opaque
+    unfolding is-model-quotient-Algebra
+
+    compute-is-model-quotient-Algebra :
+      (op : operation-signature σ)
+      (t : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
+      is-model-quotient-Algebra op (map-tuple quotient-map-Algebra t) ＝
+      quotient-map-Algebra (is-model-set-Algebra σ T A op t)
+    compute-is-model-quotient-Algebra op =
+      let
+        k = arity-operation-signature σ op
+      in
+        coherence-square-map-is-set-quotient
+          ( equivalence-relation-tuple R k)
+          ( tuple-Set set-quotient-Algebra k)
+          ( reflecting-map-tuple-quotient-map R k)
+          ( R)
+          ( set-quotient-Algebra)
+          ( reflecting-map-quotient-map R)
+          ( is-set-quotient-tuple-set-quotient R k)
+          ( is-set-quotient-set-quotient R)
+          ( hom-is-model-quotient-Algebra op)
+
+  abstract
+    compute-eval-term-quotient-Algebra :
+      {n : ℕ} (t : term σ n) (v : fin-sequence (type-Algebra σ T A) n) →
+      eval-term σ is-model-quotient-Algebra (quotient-map-Algebra ∘ v) t ＝
+      quotient-map-Algebra
+        ( eval-term σ (is-model-set-Algebra σ T A) v t)
+
+    compute-eval-tuple-term-quotient-Algebra :
+      {n k : ℕ} (t : tuple (term σ n) k)
+      (v : fin-sequence (type-Algebra σ T A) n) →
+      Eq-tuple
+        ( k)
+        ( eval-tuple-term
+          ( σ)
+          ( is-model-quotient-Algebra)
+          ( quotient-map-Algebra ∘ v)
+          ( t))
+        ( map-tuple
+          ( quotient-map-Algebra)
+          ( eval-tuple-term σ (is-model-set-Algebra σ T A) v t))
+
+    compute-eval-term-quotient-Algebra (var-term i) v = refl
+    compute-eval-term-quotient-Algebra (op-term op xs) v =
+      ( ap
+        ( is-model-quotient-Algebra op)
+        ( eq-Eq-tuple _ _ _
+          ( compute-eval-tuple-term-quotient-Algebra xs v))) ∙
+      ( compute-is-model-quotient-Algebra op _)
+
+    compute-eval-tuple-term-quotient-Algebra empty-tuple v =
+      map-raise star
+    compute-eval-tuple-term-quotient-Algebra (t ∷ ts) v =
+      ( compute-eval-term-quotient-Algebra t v ,
+        compute-eval-tuple-term-quotient-Algebra ts v)
+
+    is-algebra-model-quotient-Algebra :
+      is-algebra-Model-of-Signature σ T model-quotient-Algebra
+    is-algebra-model-quotient-Algebra i =
+      let
+        eq@(k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i
+      in
+        ind-is-set-quotient
+          ( fin-sequence-equivalence-relation R k)
+          ( fin-sequence-Set set-quotient-Algebra k)
+          ( reflecting-quotient-map-fin-sequence R k)
+          ( is-set-quotient-fin-sequence-set-quotient R k)
+          ( satisfies-equation-assignment-prop-Model-Of-Signature
+            ( σ)
+            ( eq)
+            ( model-quotient-Algebra))
+          ( λ v →
+            ( compute-eval-term-quotient-Algebra lhs v) ∙
+            ( ap
+              ( quotient-map-Algebra)
+              ( is-algebra-model-Algebra σ T A i v)) ∙
+            ( inv (compute-eval-term-quotient-Algebra rhs v)))
+
+  quotient-Algebra : Algebra (l3 ⊔ l4) σ T
+  quotient-Algebra =
+    ( model-quotient-Algebra , is-algebra-model-quotient-Algebra)
 ```
