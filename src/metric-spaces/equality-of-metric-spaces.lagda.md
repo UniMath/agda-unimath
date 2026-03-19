@@ -325,6 +325,38 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2)
+  (B : Metric-Space l1' l2')
+  where
+
+  is-complete-isometric-equiv-Metric-Space :
+    isometric-equiv-Metric-Space A B →
+    is-complete-Metric-Space A →
+    is-complete-Metric-Space B
+  is-complete-isometric-equiv-Metric-Space A≃B H =
+    is-precomplete-htpy-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space B)
+      ( B)
+      ( comp-isometry-Metric-Space
+        ( B)
+        ( A)
+        ( B)
+        ( isometry-isometric-equiv-Metric-Space A B A≃B)
+        ( isometry-inv-isometric-equiv-Metric-Space A B A≃B))
+      ( id-isometry-Metric-Space B)
+      ( is-section-map-inv-isometric-equiv-Metric-Space A B A≃B)
+      ( is-precomplete-right-comp-precomplete-isometry-Pseudometric-Space
+        ( pseudometric-Metric-Space B)
+        ( A)
+        ( precomplete-isometry-Complete-Metric-Space
+          ( pseudometric-Metric-Space B)
+          ( A , H)
+          ( isometry-inv-isometric-equiv-Metric-Space A B A≃B))
+        ( B)
+        ( isometry-isometric-equiv-Metric-Space A B A≃B))
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2)
   (B : Complete-Metric-Space l1' l2')
   (A≃B : isometric-equiv-Metric-Space A (metric-space-Complete-Metric-Space B))
   where
@@ -332,7 +364,7 @@ module _
   is-complete-isometric-equiv-metric-space-Complete-Metric-Space :
     is-complete-Metric-Space A
   is-complete-isometric-equiv-metric-space-Complete-Metric-Space =
-    preserves-precomplete-htpy-map-isometry-Pseudometric-Space
+    is-precomplete-htpy-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
       ( A)
       ( comp-isometry-Metric-Space

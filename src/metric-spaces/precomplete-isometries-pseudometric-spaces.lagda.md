@@ -696,7 +696,7 @@ module _
   (f g : isometry-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  preserves-precomplete-htpy-map-isometry-Pseudometric-Space :
+  is-precomplete-htpy-map-isometry-Pseudometric-Space :
     htpy-map-isometry-Pseudometric-Space
       ( P)
       ( pseudometric-Metric-Space M)
@@ -704,8 +704,8 @@ module _
       ( g) →
     is-precomplete-isometry-Pseudometric-Space P M f →
     is-precomplete-isometry-Pseudometric-Space P M g
-  preserves-precomplete-htpy-map-isometry-Pseudometric-Space =
-    preserves-precomplete-htpy-map-short-map-Pseudometric-Space P M
+  is-precomplete-htpy-map-isometry-Pseudometric-Space =
+    is-precomplete-htpy-map-short-map-Pseudometric-Space P M
       ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) f)
       ( short-map-isometry-Pseudometric-Space P (pseudometric-Metric-Space M) g)
 ```

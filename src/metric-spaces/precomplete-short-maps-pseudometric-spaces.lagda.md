@@ -701,7 +701,7 @@ module _
   (f g : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
   where
 
-  preserves-precomplete-htpy-map-short-map-Pseudometric-Space :
+  is-precomplete-htpy-map-short-map-Pseudometric-Space :
     htpy-map-short-map-Pseudometric-Space
       ( P)
       ( pseudometric-Metric-Space M)
@@ -709,7 +709,7 @@ module _
       ( g) →
     is-precomplete-short-map-Pseudometric-Space P M f →
     is-precomplete-short-map-Pseudometric-Space P M g
-  preserves-precomplete-htpy-map-short-map-Pseudometric-Space f~g H u =
+  is-precomplete-htpy-map-short-map-Pseudometric-Space f~g H u =
     tr
       ( is-convergent-cauchy-approximation-Metric-Space M)
       ( htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
@@ -737,7 +737,7 @@ module _
       ( short-map-precomplete-short-map-Pseudometric-Space P M g) →
     is-precomplete-short-map-Pseudometric-Space P M f
   is-precomplete-htpy-map-precomplete-short-map-Pseudometric-Space f~g =
-    preserves-precomplete-htpy-map-short-map-Pseudometric-Space
+    is-precomplete-htpy-map-short-map-Pseudometric-Space
       ( P)
       ( M)
       ( short-map-precomplete-short-map-Pseudometric-Space P M g)
