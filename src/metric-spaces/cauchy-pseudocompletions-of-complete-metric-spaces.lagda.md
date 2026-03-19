@@ -221,7 +221,7 @@ module _
       is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
 ```
 
-### The identity of complete metric spaces has a unique extension to its Cauchy pseudocompletion
+### The identity map of complete metric spaces has a unique extension to the Cauchy pseudocompletion
 
 ```agda
 module _
