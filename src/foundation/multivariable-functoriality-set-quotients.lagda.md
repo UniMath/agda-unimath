@@ -9,8 +9,8 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.finite-sequences-set-quotients
 open import foundation.functoriality-set-quotients
+open import foundation.multivariable-inputs-set-quotients
 open import foundation.set-quotients
 open import foundation.universe-levels
 
