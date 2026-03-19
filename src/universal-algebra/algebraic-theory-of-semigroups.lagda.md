@@ -49,11 +49,11 @@ The type of all such [algebras](universal-algebra.algebras.md) is
 
 ```agda
 data operation-Semigroup : UU lzero where
-  mul-operation-Semigroup-op : operation-Semigroup
+  mul-operation-Semigroup : operation-Semigroup
 
 signature-Semigroup : signature lzero
 pr1 signature-Semigroup = operation-Semigroup
-pr2 signature-Semigroup mul-operation-Semigroup-op = 2
+pr2 signature-Semigroup mul-operation-Semigroup = 2
 
 data law-Semigroup : UU lzero where
   associative-law-Semigroup : law-Semigroup
@@ -64,7 +64,7 @@ pr2 algebraic-theory-Semigroup associative-law-Semigroup =
   let
     var : (i : ℕ) → {le-ℕ i 3} → term signature-Semigroup 3
     var i {i<3} = var-term (standard-classical-Fin 3 (i , i<3))
-    _*_ x y = op-term mul-operation-Semigroup-op (x ∷ y ∷ empty-tuple)
+    _*_ x y = op-term mul-operation-Semigroup (x ∷ y ∷ empty-tuple)
   in
     ( 3 ,
       (var 0 * var 1) * var 2 ,
@@ -91,7 +91,7 @@ module _
   mul-Algebra-Semigroup :
     type-Algebra-Semigroup → type-Algebra-Semigroup → type-Algebra-Semigroup
   mul-Algebra-Semigroup x y =
-    models-A mul-operation-Semigroup-op (x ∷ y ∷ empty-tuple)
+    models-A mul-operation-Semigroup (x ∷ y ∷ empty-tuple)
 
   associative-mul-Algebra-Semigroup :
     (x y z : type-Algebra-Semigroup) →
@@ -116,7 +116,7 @@ module _
   is-model-of-signature-Semigroup-Semigroup :
     is-model-of-signature signature-Semigroup (set-Semigroup G)
   is-model-of-signature-Semigroup-Semigroup
-    mul-operation-Semigroup-op (x ∷ y ∷ empty-tuple) =
+    mul-operation-Semigroup (x ∷ y ∷ empty-tuple) =
     mul-Semigroup G x y
 
   model-of-signature-Semigroup-Semigroup :
@@ -150,7 +150,7 @@ abstract
       ( eq-pair-eq-fiber
         ( eq-binary-htpy _ _
           λ where
-            mul-operation-Semigroup-op (x ∷ y ∷ empty-tuple) → refl))
+            mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → refl))
 
   is-retraction-semigroup-Algebra-Semigroup :
     {l : Level} (G : Semigroup l) →
@@ -186,7 +186,7 @@ hom-algebra-semigroup-hom-Semigroup :
 hom-algebra-semigroup-hom-Semigroup _ _ (map-f , preserves-mul-f) =
   ( map-f ,
     λ where
-      mul-operation-Semigroup-op (x ∷ y ∷ empty-tuple) → preserves-mul-f)
+      mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → preserves-mul-f)
 
 hom-semigroup-hom-Algebra-Semigroup :
   {l1 l2 : Level} (G : Algebra-Semigroup l1) (H : Algebra-Semigroup l2) →
@@ -196,5 +196,5 @@ hom-semigroup-hom-Algebra-Semigroup :
     ( semigroup-Algebra-Semigroup H)
 hom-semigroup-hom-Algebra-Semigroup G H (map-f , preserves-ops-f) =
   ( map-f ,
-    preserves-ops-f mul-operation-Semigroup-op (_ ∷ _ ∷ empty-tuple))
+    preserves-ops-f mul-operation-Semigroup (_ ∷ _ ∷ empty-tuple))
 ```
