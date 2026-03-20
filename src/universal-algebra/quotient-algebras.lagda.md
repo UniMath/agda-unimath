@@ -11,16 +11,20 @@ module universal-algebra.quotient-algebras where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-homotopies-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-set-quotients
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
@@ -36,9 +40,11 @@ open import lists.tuples
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.congruences
+open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
+open import universal-algebra.universal-property-quotient-algebras
 ```
 
 </details>
@@ -185,4 +191,219 @@ module _
   quotient-Algebra : Algebra (l3 ⊔ l4) σ T
   quotient-Algebra =
     ( model-quotient-Algebra , is-algebra-model-quotient-Algebra)
+```
+
+## Properties
+
+### The quotient map is a homomorphism
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (R@(equiv-rel-R , _) : congruence-Algebra l4 σ T A)
+  where
+
+  preserves-operations-quotient-map-Algebra :
+    preserves-operations-Algebra σ T
+      ( A)
+      ( quotient-Algebra σ T A R)
+      ( quotient-map-Algebra σ T A R)
+  preserves-operations-quotient-map-Algebra op xs =
+    inv (compute-is-model-quotient-Algebra σ T A R op xs)
+
+  hom-quotient-map-Algebra :
+    hom-Algebra σ T A (quotient-Algebra σ T A R)
+  hom-quotient-map-Algebra =
+    ( quotient-map-Algebra σ T A R ,
+      preserves-operations-quotient-map-Algebra)
+
+  reflecting-congruence-hom-quotient-map-Algebra :
+    reflecting-congruence-hom-Algebra σ T A R (quotient-Algebra σ T A R)
+  reflecting-congruence-hom-quotient-map-Algebra =
+    ( hom-quotient-map-Algebra ,
+      apply-effectiveness-quotient-map' equiv-rel-R)
+```
+
+### The quotient algebra satisfies the universal property of quotient algebras
+
+#### The homomorphism from `(A/R) → B` induced by a homomorphism `A → B` reflecting the congruence `R`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (R@(equiv-rel-R , _) : congruence-Algebra l4 σ T A)
+  (B : Algebra l5 σ T)
+  where
+
+  map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra :
+    reflecting-congruence-hom-Algebra σ T A R B →
+    set-quotient equiv-rel-R → type-Algebra σ T B
+  map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+    ( (φ , preserves-ops-φ) , reflects-R-φ) =
+    inv-precomp-set-quotient
+      ( equiv-rel-R)
+      ( set-Algebra σ T B)
+      ( φ , reflects-R-φ)
+
+  abstract opaque
+    unfolding is-model-quotient-Algebra
+
+    is-hom-map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra :
+      (φ : reflecting-congruence-hom-Algebra σ T A R B) →
+      preserves-operations-Algebra σ T (quotient-Algebra σ T A R) B
+        ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra φ)
+    is-hom-map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+      refl-φ@((φ , preserves-ops-φ) , reflects-R-φ) op =
+      let
+        k = arity-operation-signature σ op
+      in
+        ind-is-set-quotient
+          ( equivalence-relation-tuple equiv-rel-R k)
+          ( tuple-Set (quotient-Set equiv-rel-R) k)
+          ( reflecting-map-tuple-quotient-map equiv-rel-R k)
+          ( is-set-quotient-tuple-set-quotient equiv-rel-R k)
+          ( λ xs →
+            Id-Prop
+              ( set-Algebra σ T B)
+              ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                ( refl-φ)
+                ( is-model-quotient-Algebra σ T A R op xs))
+              ( is-model-set-Algebra σ T B
+                ( op)
+                ( map-tuple
+                  ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                    ( refl-φ))
+                  ( xs))))
+          ( λ xs →
+            equational-reasoning
+              map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                ( refl-φ)
+                ( is-model-quotient-Algebra σ T A R op
+                  ( map-tuple (quotient-map equiv-rel-R) xs))
+              ＝
+                map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                  ( refl-φ)
+                  ( quotient-map
+                    ( equiv-rel-R)
+                    ( is-model-set-Algebra σ T A op xs))
+                by
+                  ap
+                    ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                      ( refl-φ))
+                    ( compute-is-model-quotient-Algebra σ T A R op xs)
+              ＝ φ (is-model-set-Algebra σ T A op xs)
+                by
+                  is-section-inv-precomp-set-quotient
+                    ( equiv-rel-R)
+                    ( set-Algebra σ T B)
+                    ( φ , reflects-R-φ)
+                    ( is-model-set-Algebra σ T A op xs)
+              ＝ is-model-set-Algebra σ T B op (map-tuple φ xs)
+                by preserves-ops-φ op xs
+              ＝
+                is-model-set-Algebra σ T B op
+                  ( map-tuple
+                    ( ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                        ( refl-φ)) ∘
+                      ( quotient-map equiv-rel-R))
+                    ( xs))
+                by
+                  action-htpy-function
+                    ( λ f → is-model-set-Algebra σ T B op (map-tuple f xs))
+                    ( inv-htpy
+                      ( is-section-inv-precomp-set-quotient
+                        ( equiv-rel-R)
+                        ( set-Algebra σ T B)
+                        ( φ , reflects-R-φ)))
+              ＝
+                is-model-set-Algebra σ T B op
+                  ( map-tuple
+                    ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+                      ( refl-φ))
+                      ( map-tuple (quotient-map equiv-rel-R) xs))
+                by
+                  action-htpy-function
+                    ( λ f → is-model-set-Algebra σ T B op (f xs))
+                    ( inv-htpy (preserves-comp-map-tuple k _ _)))
+
+  hom-inv-precomp-is-quotient-algebra-quotient-Algebra :
+    reflecting-congruence-hom-Algebra σ T A R B →
+    hom-Algebra σ T (quotient-Algebra σ T A R) B
+  hom-inv-precomp-is-quotient-algebra-quotient-Algebra φ =
+    ( map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra φ ,
+      is-hom-map-hom-inv-precomp-is-quotient-algebra-quotient-Algebra φ)
+
+  abstract
+    is-retraction-hom-inv-precomp-is-quotient-algebra-quotient-Algebra :
+      (φ : hom-Algebra σ T (quotient-Algebra σ T A R) B) →
+      hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+        ( precomp-reflecting-congruence-hom-Algebra σ T A R
+          ( quotient-Algebra σ T A R)
+          ( reflecting-congruence-hom-quotient-map-Algebra σ T A R)
+          ( B)
+          ( φ)) ＝ φ
+    is-retraction-hom-inv-precomp-is-quotient-algebra-quotient-Algebra φ =
+      eq-htpy-hom-Algebra σ T
+        ( quotient-Algebra σ T A R)
+        ( B)
+        ( _)
+        ( φ)
+        ( htpy-eq
+          ( is-retraction-inv-precomp-set-quotient
+            ( equiv-rel-R)
+            ( set-Algebra σ T B)
+            ( map-hom-Algebra σ T (quotient-Algebra σ T A R) B φ)))
+```
+
+### Precomposition with the homomorphism from `A → A/R` is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (R@(equiv-rel-R , _) : congruence-Algebra l4 σ T A)
+  where
+
+  abstract
+    is-section-hom-inv-precomp-is-quotient-algebra-quotient-Algebra :
+      {l5 : Level} (B : Algebra l5 σ T) →
+      (φ : reflecting-congruence-hom-Algebra σ T A R B) →
+      precomp-reflecting-congruence-hom-Algebra σ T A R
+        ( quotient-Algebra σ T A R)
+        ( reflecting-congruence-hom-quotient-map-Algebra σ T A R)
+        ( B)
+        ( hom-inv-precomp-is-quotient-algebra-quotient-Algebra σ T A R B φ) ＝
+      φ
+    is-section-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+      B (hom-φ@(φ , _) , reflects-R-φ) =
+      eq-type-subtype
+        ( reflects-equivalence-relation-prop-hom-Algebra σ T A equiv-rel-R B)
+        ( eq-htpy-hom-Algebra σ T A B _ hom-φ
+          ( is-section-inv-precomp-set-quotient
+            ( equiv-rel-R)
+            ( set-Algebra σ T B)
+            ( φ , reflects-R-φ)))
+
+  is-quotient-algebra-quotient-Algebra :
+    is-quotient-Algebra σ T A R
+      ( quotient-Algebra σ T A R)
+      ( reflecting-congruence-hom-quotient-map-Algebra σ T A R)
+  is-quotient-algebra-quotient-Algebra B =
+    is-equiv-is-invertible
+      ( hom-inv-precomp-is-quotient-algebra-quotient-Algebra σ T A R B)
+      ( is-section-hom-inv-precomp-is-quotient-algebra-quotient-Algebra B)
+      ( is-retraction-hom-inv-precomp-is-quotient-algebra-quotient-Algebra
+        ( σ)
+        ( T)
+        ( A)
+        ( R)
+        ( B))
 ```
