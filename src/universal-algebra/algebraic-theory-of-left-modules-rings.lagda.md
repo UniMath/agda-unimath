@@ -382,6 +382,12 @@ module _
       ( left-module-Algebra-Left-Module-Ring R)
       ( is-section-left-module-Algebra-Left-Module-Ring)
       ( is-retraction-left-module-Algebra-Left-Module-Ring)
+
+  equiv-left-module-Algebra-Left-Module-Ring :
+    left-module-Ring l2 R ≃ Algebra-Left-Module-Ring l2 R
+  equiv-left-module-Algebra-Left-Module-Ring =
+    ( algebra-left-module-left-module-Ring R ,
+      is-equiv-algebra-left-module-left-module-Ring)
 ```
 
 ### Linear maps on left modules are equivalent to homomorphisms of algebras in the theory of left modules
