@@ -13,6 +13,9 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncation-binary-relations
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.unit-type
@@ -121,4 +124,28 @@ module _
     trans-R (succ-ℕ n) (x ∷ xs) (y ∷ ys) (z ∷ zs) (y~z , ys~zs) (x~y , xs~ys) =
     ( trans-R x y z y~z x~y ,
       transitive-rel-tuple-Relation trans-R n xs ys zs ys~zs xs~ys)
+```
+
+### Choosing representatives from the relation induced by a propositional truncation of a binary relation
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1}
+  (R : Relation l2 A)
+  where
+
+  abstract
+    choice-rel-tuple-trunc-prop-Relation :
+      (n : ℕ) (x y : tuple A n) →
+      rel-tuple-Relation-Prop (trunc-prop-Relation R) n x y →
+      type-trunc-prop-Relation (rel-tuple-Relation R n) x y
+    choice-rel-tuple-trunc-prop-Relation 0 empty-tuple empty-tuple _ =
+      unit-trunc-Prop (map-raise star)
+    choice-rel-tuple-trunc-prop-Relation
+      (succ-ℕ n) (x ∷ xs) (y ∷ ys) (∥xRy∥ , ∥xsRys∥) =
+      map-binary-trunc-Prop
+        ( pair)
+        ( ∥xRy∥)
+        ( choice-rel-tuple-trunc-prop-Relation n xs ys ∥xsRys∥)
 ```
