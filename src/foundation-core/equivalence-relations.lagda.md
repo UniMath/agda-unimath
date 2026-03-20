@@ -28,8 +28,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An equivalence relation is a relation valued in propositions, which is
-reflexive,symmetric, and transitive.
+An
+{{#concept "equivalence relation" WDID=Q130998 WD="equivalence relation" Agda=equivalence-relation}}
+is a [relation](foundation.binary-relations.md) valued in
+[propositions](foundation-core.propositions.md), which is reflexive, symmetric,
+and transitive.
 
 ## Definition
 
