@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtypes
@@ -175,26 +176,61 @@ equiv-semigroup-Algebra-Semigroup =
 ### Homomorphisms of semigroups are equivalent to homomorphisms of the algebras of semigroups
 
 ```agda
-hom-algebra-semigroup-hom-Semigroup :
-  {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2) →
-  hom-Semigroup G H →
-  hom-Algebra
-    ( signature-Semigroup)
-    ( algebraic-theory-Semigroup)
-    ( algebra-semigroup-Semigroup G)
-    ( algebra-semigroup-Semigroup H)
-hom-algebra-semigroup-hom-Semigroup _ _ (map-f , preserves-mul-f) =
-  ( map-f ,
-    λ where
-      mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → preserves-mul-f)
+hom-Algebra-Semigroup :
+  {l1 l2 : Level} → Algebra-Semigroup l1 → Algebra-Semigroup l2 → UU (l1 ⊔ l2)
+hom-Algebra-Semigroup =
+  hom-Algebra signature-Semigroup algebraic-theory-Semigroup
 
 hom-semigroup-hom-Algebra-Semigroup :
   {l1 l2 : Level} (G : Algebra-Semigroup l1) (H : Algebra-Semigroup l2) →
-  hom-Algebra signature-Semigroup algebraic-theory-Semigroup G H →
+  hom-Algebra-Semigroup G H →
   hom-Semigroup
     ( semigroup-Algebra-Semigroup G)
     ( semigroup-Algebra-Semigroup H)
 hom-semigroup-hom-Algebra-Semigroup G H (map-f , preserves-ops-f) =
   ( map-f ,
     preserves-ops-f mul-operation-Semigroup (_ ∷ _ ∷ empty-tuple))
+
+module _
+  {l1 l2 : Level}
+  (G : Semigroup l1)
+  (H : Semigroup l2)
+  where
+
+  hom-algebra-semigroup-hom-Semigroup :
+    hom-Semigroup G H →
+    hom-Algebra-Semigroup
+      ( algebra-semigroup-Semigroup G)
+      ( algebra-semigroup-Semigroup H)
+  hom-algebra-semigroup-hom-Semigroup (map-f , preserves-mul-f) =
+    ( map-f ,
+      λ where
+        mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → preserves-mul-f)
+
+  is-equiv-hom-algebra-semigroup-hom-Semigroup :
+    is-equiv hom-algebra-semigroup-hom-Semigroup
+  is-equiv-hom-algebra-semigroup-hom-Semigroup =
+    is-equiv-is-invertible
+      ( hom-semigroup-hom-Algebra-Semigroup
+        ( algebra-semigroup-Semigroup G)
+        ( algebra-semigroup-Semigroup H))
+      ( λ φ →
+        eq-htpy-hom-Algebra
+          ( signature-Semigroup)
+          ( algebraic-theory-Semigroup)
+          ( algebra-semigroup-Semigroup G)
+          ( algebra-semigroup-Semigroup H)
+          ( _)
+          ( φ)
+          ( refl-htpy))
+      ( λ φ → eq-htpy-hom-Semigroup G H refl-htpy)
+
+  equiv-hom-semigroup-hom-Algebra-Semigroup :
+    hom-Semigroup G H ≃
+    hom-Algebra-Semigroup
+      ( algebra-semigroup-Semigroup G)
+      ( algebra-semigroup-Semigroup H)
+  equiv-hom-semigroup-hom-Algebra-Semigroup =
+    ( hom-algebra-semigroup-hom-Semigroup ,
+      is-equiv-hom-algebra-semigroup-hom-Semigroup)
 ```
