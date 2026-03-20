@@ -47,6 +47,9 @@ record Large-Apartness-Relation
   (A : (l : Level) → UU (α l)) : UUω
   where
 
+  constructor
+    make-Large-Apartness-Relation
+
   field
     apart-prop-Large-Apartness-Relation : Large-Relation-Prop β A
     antirefl-Large-Apartness-Relation :

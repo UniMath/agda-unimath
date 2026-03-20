@@ -23,6 +23,7 @@ open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.cyclic-rings public
+open import ring-theory.dependent-products-large-rings public
 open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
@@ -48,6 +49,7 @@ open import ring-theory.integer-multiples-of-elements-rings public
 open import ring-theory.intersections-ideals-rings public
 open import ring-theory.intersections-ideals-semirings public
 open import ring-theory.invariant-basis-property-rings public
+open import ring-theory.invertible-elements-large-rings public
 open import ring-theory.invertible-elements-rings public
 open import ring-theory.isomorphisms-rings public
 open import ring-theory.joins-ideals-rings public

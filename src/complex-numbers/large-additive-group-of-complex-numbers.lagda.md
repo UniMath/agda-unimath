@@ -65,23 +65,8 @@ large-group-add-ℂ =
   make-Large-Group
     ( large-monoid-add-ℂ)
     ( neg-ℂ)
-    ( λ _ _ → preserves-sim-neg-ℂ)
-    ( λ x →
-      eq-sim-ℂ
-        ( transitive-sim-ℂ
-          ( neg-ℂ x +ℂ x)
-          ( zero-ℂ)
-          ( raise-ℂ _ zero-ℂ)
-          ( sim-raise-ℂ _ zero-ℂ)
-          ( left-inverse-law-add-ℂ x)))
-    ( λ x →
-      eq-sim-ℂ
-        ( transitive-sim-ℂ
-          ( x +ℂ neg-ℂ x)
-          ( zero-ℂ)
-          ( raise-ℂ _ zero-ℂ)
-          ( sim-raise-ℂ _ zero-ℂ)
-          ( right-inverse-law-add-ℂ x)))
+    ( left-inverse-law-add-ℂ)
+    ( right-inverse-law-add-ℂ)
 
 large-ab-add-ℂ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℂ =

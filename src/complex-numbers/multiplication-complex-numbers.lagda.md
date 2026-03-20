@@ -18,6 +18,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -321,6 +322,15 @@ abstract
       preserves-sim-add-ℝ
         ( preserves-sim-mul-ℝ a~a' d~d')
         ( preserves-sim-mul-ℝ b~b' c~c'))
+
+sim-preserving-binary-operator-mul-ℂ :
+  sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℂ)
+sim-preserving-binary-operator-mul-ℂ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℂ)
+    ( mul-ℂ)
+    ( λ _ _ _ _ → preserves-sim-mul-ℂ)
 ```
 
 ### Negative laws of multiplication

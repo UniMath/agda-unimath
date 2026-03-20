@@ -41,16 +41,23 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ```agda
 large-ring-ℝ : Large-Ring lsuc (_⊔_)
 large-ring-ℝ =
-  make-Large-Ring
-    ( large-ab-add-ℝ)
-    ( mul-ℝ)
-    ( λ _ _ a~a' _ _ → preserves-sim-mul-ℝ a~a')
-    ( one-ℝ)
-    ( associative-mul-ℝ)
-    ( left-unit-law-mul-ℝ)
-    ( right-unit-law-mul-ℝ)
-    ( left-distributive-mul-add-ℝ)
-    ( right-distributive-mul-add-ℝ)
+  λ where
+    .large-ab-Large-Ring →
+      large-ab-add-ℝ
+    .sim-preserving-binary-operator-mul-Large-Ring →
+      sim-preserving-binary-operator-mul-ℝ
+    .one-Large-Ring →
+      one-ℝ
+    .associative-mul-Large-Ring →
+      associative-mul-ℝ
+    .left-unit-law-mul-Large-Ring →
+      left-unit-law-mul-ℝ
+    .right-unit-law-mul-Large-Ring →
+      right-unit-law-mul-ℝ
+    .left-distributive-mul-add-Large-Ring →
+      left-distributive-mul-add-ℝ
+    .right-distributive-mul-add-Large-Ring →
+      right-distributive-mul-add-ℝ
 
 large-commutative-ring-ℝ : Large-Commutative-Ring lsuc (_⊔_)
 large-commutative-ring-ℝ =
