@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 
+open import lists.binary-relations-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theory-of-abelian-groups
@@ -34,6 +35,7 @@ open import universal-algebra.algebraic-theory-of-groups
 open import universal-algebra.congruences
 open import universal-algebra.freely-generated-algebras
 open import universal-algebra.quotient-algebras
+open import universal-algebra.signatures
 ```
 
 </details>
@@ -56,7 +58,7 @@ module _
 
   free-algebra-direct-sum-Ab : Algebra-Ab (l1 ⊔ l2)
   free-algebra-direct-sum-Ab =
-    free-Algebra group-signature algebraic-theory-Ab (Σ I (type-Ab ∘ G))
+    free-Algebra signature-Ab algebraic-theory-Ab (Σ I (type-Ab ∘ G))
 
   ab-free-algebra-direct-sum-Ab : Ab (l1 ⊔ l2)
   ab-free-algebra-direct-sum-Ab = ab-Algebra-Ab free-algebra-direct-sum-Ab
@@ -85,7 +87,7 @@ module _
     Σ I (type-Ab ∘ G) → type-free-algebra-direct-sum-Ab
   in-free-algebra-direct-sum-Ab =
     in-generator-free-Algebra
-      ( group-signature)
+      ( signature-Ab)
       ( algebraic-theory-Ab)
       ( Σ I (type-Ab ∘ G))
 
@@ -99,6 +101,13 @@ module _
     transitive-rel-congruence-direct-sum-Ab :
       is-transitive rel-congruence-direct-sum-Ab
 
+    ap-op-rel-congruence-direct-sum-Ab :
+      preserves-operations-relation-Algebra
+        ( signature-Ab)
+        ( algebraic-theory-Ab)
+        ( free-algebra-direct-sum-Ab)
+        ( rel-congruence-direct-sum-Ab)
+
     add-rel-congruence-direct-sum-Ab :
       (i : I) (g h : type-Ab (G i)) →
       rel-congruence-direct-sum-Ab
@@ -106,21 +115,6 @@ module _
           ( in-free-algebra-direct-sum-Ab (i , g))
           ( in-free-algebra-direct-sum-Ab (i , h)))
         ( in-free-algebra-direct-sum-Ab (i , add-Ab (G i) g h))
-
-    ap-add-rel-congruence-direct-sum-Ab :
-      (x y z w : type-free-algebra-direct-sum-Ab) →
-      rel-congruence-direct-sum-Ab x z →
-      rel-congruence-direct-sum-Ab y w →
-      rel-congruence-direct-sum-Ab
-        ( add-free-algebra-direct-sum-Ab x y)
-        ( add-free-algebra-direct-sum-Ab z w)
-
-    ap-neg-rel-congruence-direct-sum-Ab :
-      (x y : type-free-algebra-direct-sum-Ab) →
-      rel-congruence-direct-sum-Ab x y →
-      rel-congruence-direct-sum-Ab
-        ( neg-free-algebra-direct-sum-Ab x)
-        ( neg-free-algebra-direct-sum-Ab y)
 
   equivalence-relation-direct-sum-Ab :
     equivalence-relation (l1 ⊔ l2) type-free-algebra-direct-sum-Ab
@@ -139,29 +133,24 @@ module _
   abstract
     is-congruence-equivalence-relation-direct-sum-Ab :
       preserves-operations-equivalence-relation-Algebra
-        ( group-signature)
+        ( signature-Ab)
         ( algebraic-theory-Ab)
         ( free-algebra-direct-sum-Ab)
         ( equivalence-relation-direct-sum-Ab)
-    is-congruence-equivalence-relation-direct-sum-Ab
-      unit-group-op {empty-tuple} {empty-tuple} _ =
-      unit-trunc-Prop
-        ( refl-rel-congruence-direct-sum-Ab zero-free-algebra-direct-sum-Ab)
-    is-congruence-equivalence-relation-direct-sum-Ab
-      mul-group-op {x ∷ y ∷ empty-tuple} {z ∷ w ∷ empty-tuple}
-        ( x~z , y~w , _) =
-        map-binary-trunc-Prop
-          ( ap-add-rel-congruence-direct-sum-Ab x y z w)
-          ( x~z)
-          ( y~w)
-    is-congruence-equivalence-relation-direct-sum-Ab
-      inv-group-op {x ∷ empty-tuple} {y ∷ empty-tuple} (x~y , _) =
-      map-trunc-Prop (ap-neg-rel-congruence-direct-sum-Ab x y) x~y
+    is-congruence-equivalence-relation-direct-sum-Ab op {xs} {ys} xs~ys =
+      map-trunc-Prop
+        ( ap-op-rel-congruence-direct-sum-Ab op)
+        ( choice-rel-tuple-trunc-prop-Relation
+          ( rel-congruence-direct-sum-Ab)
+          ( arity-operation-signature signature-Ab op)
+          ( xs)
+          ( ys)
+          ( xs~ys))
 
   congruence-direct-sum-Ab :
     congruence-Algebra
       ( l1 ⊔ l2)
-      ( group-signature)
+      ( signature-Ab)
       ( algebraic-theory-Ab)
       ( free-algebra-direct-sum-Ab)
   congruence-direct-sum-Ab =
@@ -172,7 +161,7 @@ module _
     algebra-direct-sum-Ab : Algebra-Ab (l1 ⊔ l2)
     algebra-direct-sum-Ab =
       quotient-Algebra
-        ( group-signature)
+        ( signature-Ab)
         ( algebraic-theory-Ab)
         ( free-algebra-direct-sum-Ab)
         ( congruence-direct-sum-Ab)
@@ -224,11 +213,11 @@ module _
       in-direct-sum-Ab I G (i , add-Ab (G i) g h)
     add-in-direct-sum-Ab i g h =
       ( compute-is-model-quotient-Algebra
-        ( group-signature)
+        ( signature-Ab)
         ( algebraic-theory-Ab)
         ( free-algebra-direct-sum-Ab I G)
         ( congruence-direct-sum-Ab I G)
-        ( mul-group-op)
+        ( add-operation-Ab)
         ( _)) ∙
       ( apply-effectiveness-quotient-map'
         ( equivalence-relation-direct-sum-Ab I G)

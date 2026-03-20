@@ -9,6 +9,7 @@ module universal-algebra.congruences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -17,6 +18,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.binary-relations-tuples
 open import lists.equivalence-relations-tuples
 open import lists.tuples
 
@@ -44,17 +46,20 @@ operations of the algebra.
 module _
   {l1 l2 l3 l4 : Level} (σ : signature l1)
   (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
-  (R : equivalence-relation l4 (type-Algebra σ T A))
   where
 
+  preserves-operations-relation-Algebra :
+    Relation l4 (type-Algebra σ T A) → UU (l1 ⊔ l3 ⊔ l4)
+  preserves-operations-relation-Algebra R =
+    (op : operation-signature σ)
+    {x y : tuple (type-Algebra σ T A) (arity-operation-signature σ op)} →
+    rel-tuple-Relation R (arity-operation-signature σ op) x y →
+    R (is-model-set-Algebra σ T A op x) (is-model-set-Algebra σ T A op y)
+
   preserves-operations-equivalence-relation-Algebra :
-    UU (l1 ⊔ l3 ⊔ l4)
-  preserves-operations-equivalence-relation-Algebra =
-    (op : operation-signature σ) →
-    preserves-sim-equivalence-relation
-      ( equivalence-relation-tuple R (arity-operation-signature σ op))
-      ( R)
-      ( is-model-set-Algebra σ T A op)
+    equivalence-relation l4 (type-Algebra σ T A) → UU (l1 ⊔ l3 ⊔ l4)
+  preserves-operations-equivalence-relation-Algebra R =
+    preserves-operations-relation-Algebra (sim-equivalence-relation R)
 ```
 
 ### Congruences
