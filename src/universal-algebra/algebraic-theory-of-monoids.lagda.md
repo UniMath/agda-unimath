@@ -34,10 +34,12 @@ open import lists.tuples
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebraic-theory-of-semigroups
 open import universal-algebra.algebras
+open import universal-algebra.extensions-signatures
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
+open import universal-algebra.abstract-equations-over-signatures
 ```
 
 </details>
@@ -74,6 +76,12 @@ data law-Monoid : UU lzero where
 pattern associative-law-Monoid =
   law-monoid-law-Semigroup associative-law-Semigroup
 
+extension-signature-semigroup-Monoid :
+  is-extension-of-signature signature-Semigroup signature-Monoid
+pr1 extension-signature-semigroup-Monoid =
+  operation-monoid-operation-Semigroup
+pr2 extension-signature-semigroup-Monoid _ = refl
+
 algebraic-theory-Monoid : Algebraic-Theory lzero signature-Monoid
 pr1 algebraic-theory-Monoid = law-Monoid
 pr2 algebraic-theory-Monoid =
@@ -88,10 +96,15 @@ pr2 algebraic-theory-Monoid =
     unit-term = op-term unit-operation-Monoid empty-tuple
   in
     λ where
-      associative-law-Monoid →
-        ( 3 ,
-          (var 0 2 *-term var 1 2) *-term var 2 2 ,
-          var 0 2 *-term (var 1 2 *-term var 2 2))
+      (law-monoid-law-Semigroup law) →
+        translation-abstract-equation
+          ( signature-Semigroup)
+          ( signature-Monoid)
+          ( extension-signature-semigroup-Monoid)
+          ( index-abstract-equation-Algebraic-Theory
+            ( signature-Semigroup)
+            ( algebraic-theory-Semigroup)
+            ( law))
       left-unit-law-law-Monoid →
         ( 1 ,
           unit-term *-term var 0 0 ,
