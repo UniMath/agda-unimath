@@ -236,6 +236,9 @@ module _
       ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
       ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})
 
+    eq-iso-Group : (H : Group l) → iso-Group G H → G ＝ H
+    eq-iso-Group H = map-inv-equiv (extensionality-Group' H)
+
   abstract
     is-torsorial-iso-Group : is-torsorial (λ (H : Group l) → iso-Group G H)
     is-torsorial-iso-Group =
