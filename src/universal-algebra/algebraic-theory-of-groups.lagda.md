@@ -20,7 +20,6 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
-open import group-theory.isomorphisms-groups
 open import group-theory.monoids
 
 open import lists.tuples
