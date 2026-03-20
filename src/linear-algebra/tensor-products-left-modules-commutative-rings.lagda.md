@@ -26,6 +26,7 @@ open import linear-algebra.bilinear-maps-left-modules-commutative-rings
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-commutative-rings
 
+open import lists.binary-relations-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theory-of-left-modules-commutative-rings
@@ -34,6 +35,7 @@ open import universal-algebra.algebras
 open import universal-algebra.congruences
 open import universal-algebra.freely-generated-algebras
 open import universal-algebra.quotient-algebras
+open import universal-algebra.signatures
 ```
 
 </details>
@@ -156,6 +158,13 @@ module _
     transitive-rel-tensor-product-left-module-Commutative-Ring :
       is-transitive rel-tensor-product-left-module-Commutative-Ring
 
+    ap-op-rel-tensor-product-left-module-Commutative-Ring :
+      preserves-operations-relation-Algebra
+        ( signature-left-module-Commutative-Ring R)
+        ( algebraic-theory-left-module-Commutative-Ring R)
+        ( free-algebra-tensor-product-left-module-Commutative-Ring)
+        ( rel-tensor-product-left-module-Commutative-Ring)
+
     left-additive-rel-tensor-product-left-module-Commutative-Ring :
       (m m' : type-left-module-Commutative-Ring R M)
       (n : type-left-module-Commutative-Ring R N) →
@@ -202,30 +211,6 @@ module _
           ( m)
           ( mul-left-module-Commutative-Ring R N r n))
 
-    ap-add-rel-tensor-product-left-module-Commutative-Ring :
-      (x x' y y' :
-        type-free-algebra-tensor-product-left-module-Commutative-Ring) →
-      rel-tensor-product-left-module-Commutative-Ring x x' →
-      rel-tensor-product-left-module-Commutative-Ring y y' →
-      rel-tensor-product-left-module-Commutative-Ring
-        ( add-free-algebra-tensor-product-left-module-Commutative-Ring x y)
-        ( add-free-algebra-tensor-product-left-module-Commutative-Ring x' y')
-
-    ap-mul-rel-tensor-product-left-module-Commutative-Ring :
-      (r : type-Commutative-Ring R)
-      (x x' : type-free-algebra-tensor-product-left-module-Commutative-Ring) →
-      rel-tensor-product-left-module-Commutative-Ring x x' →
-      rel-tensor-product-left-module-Commutative-Ring
-        ( mul-free-algebra-tensor-product-left-module-Commutative-Ring r x)
-        ( mul-free-algebra-tensor-product-left-module-Commutative-Ring r x')
-
-    ap-neg-rel-tensor-product-left-module-Commutative-Ring :
-      (x x' : type-free-algebra-tensor-product-left-module-Commutative-Ring) →
-      rel-tensor-product-left-module-Commutative-Ring x x' →
-      rel-tensor-product-left-module-Commutative-Ring
-        ( neg-free-algebra-tensor-product-left-module-Commutative-Ring x)
-        ( neg-free-algebra-tensor-product-left-module-Commutative-Ring x')
-
   equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring :
     equivalence-relation
       ( l1 ⊔ l2 ⊔ l3)
@@ -255,29 +240,17 @@ module _
         ( free-algebra-tensor-product-left-module-Commutative-Ring)
         ( equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring)
     preserves-operations-equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring
-      add-operation-left-module-Ring
-      {x ∷ y ∷ empty-tuple} {x' ∷ y' ∷ empty-tuple} (x~x' , y~y' , _) =
-      map-binary-trunc-Prop
-        ( ap-add-rel-tensor-product-left-module-Commutative-Ring x x' y y')
-        ( x~x')
-        ( y~y')
-    preserves-operations-equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring
-      (mul-operation-left-module-Ring r) {x ∷ empty-tuple} {x' ∷ empty-tuple}
-      (x~x' , _) =
+      op {xs} {ys} xs~ys =
       map-trunc-Prop
-        ( ap-mul-rel-tensor-product-left-module-Commutative-Ring r x x')
-        ( x~x')
-    preserves-operations-equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring
-      neg-operation-left-module-Ring {x ∷ empty-tuple} {x' ∷ empty-tuple}
-      (x~x' , _) =
-      map-trunc-Prop
-        ( ap-neg-rel-tensor-product-left-module-Commutative-Ring x x')
-        ( x~x')
-    preserves-operations-equivalence-relation-free-algebra-tensor-product-left-module-Commutative-Ring
-      zero-operation-left-module-Ring {empty-tuple} {empty-tuple} _ =
-      unit-trunc-Prop
-        ( refl-rel-tensor-product-left-module-Commutative-Ring
-          ( zero-free-algebra-tensor-product-left-module-Commutative-Ring))
+        ( ap-op-rel-tensor-product-left-module-Commutative-Ring op)
+        ( choice-rel-tuple-trunc-prop-Relation
+          ( rel-tensor-product-left-module-Commutative-Ring)
+          ( arity-operation-signature
+            ( signature-left-module-Commutative-Ring R)
+            ( op))
+          ( xs)
+          ( ys)
+          ( xs~ys))
 
   congruence-free-algebra-tensor-product-left-module-Commutative-Ring :
     congruence-Algebra
