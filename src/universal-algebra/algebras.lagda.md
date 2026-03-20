@@ -13,10 +13,13 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+
+open import lists.finite-sequences
 
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
@@ -47,16 +50,34 @@ module _
   {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  is-algebra : {l3 : Level} → Model-Of-Signature l3 σ → UU (l2 ⊔ l3)
-  is-algebra M =
-    (e : index-Algebraic-Theory σ T) →
-    (assign : assignment σ (type-Model-Of-Signature σ M)) →
-    eval-term σ (is-model-set-Model-Of-Signature σ M) assign
-      ( lhs-abstract-equation σ
-        ( index-abstract-equation-Algebraic-Theory σ T e)) ＝
-    eval-term σ (is-model-set-Model-Of-Signature σ M) assign
-      ( rhs-abstract-equation σ
-        ( index-abstract-equation-Algebraic-Theory σ T e))
+  is-algebra-prop-Model-Of-Signature :
+    {l3 : Level} → Model-Of-Signature l3 σ → Prop (l2 ⊔ l3)
+  is-algebra-prop-Model-Of-Signature M =
+    Π-Prop
+      ( index-Algebraic-Theory σ T)
+      ( λ e →
+        let
+          (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T e
+          m = is-model-set-Model-Of-Signature σ M
+        in
+          Π-Prop
+            ( fin-sequence (type-Model-Of-Signature σ M) k)
+            ( λ assign →
+              Id-Prop
+                ( set-Model-Of-Signature σ M)
+                ( eval-term σ m assign lhs)
+                ( eval-term σ m assign rhs)))
+
+  is-algebra-Model-of-Signature :
+    {l3 : Level} → Model-Of-Signature l3 σ → UU (l2 ⊔ l3)
+  is-algebra-Model-of-Signature =
+    is-in-subtype is-algebra-prop-Model-Of-Signature
+
+  is-prop-is-algebra-Model-of-Signature :
+    {l3 : Level} (M : Model-Of-Signature l3 σ) →
+    is-prop (is-algebra-Model-of-Signature M)
+  is-prop-is-algebra-Model-of-Signature =
+    is-prop-is-in-subtype is-algebra-prop-Model-Of-Signature
 ```
 
 ### The type of algebras
@@ -68,7 +89,7 @@ Algebra :
   Algebraic-Theory l2 σ →
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 Algebra l3 σ T =
-  Σ (Model-Of-Signature l3 σ) (is-algebra σ T)
+  type-subtype (is-algebra-prop-Model-Of-Signature σ T {l3})
 
 module _
   {l1 l2 l3 : Level} (σ : signature l1)
@@ -90,28 +111,6 @@ module _
   is-set-type-Algebra : is-set type-Algebra
   is-set-type-Algebra = is-set-type-Set set-Algebra
 
-  is-algebra-Algebra : is-algebra σ T model-Algebra
-  is-algebra-Algebra = pr2 A
-```
-
-## Properties
-
-### Being an algebra is a proposition
-
-```agda
-module _
-  {l1 l2 l3 : Level} (σ : signature l1)
-  (T : Algebraic-Theory l2 σ) (X : Model-Of-Signature l3 σ)
-  where
-
-  abstract
-    is-prop-is-algebra : is-prop (is-algebra σ T X)
-    is-prop-is-algebra =
-      is-prop-Π
-        ( λ e →
-          ( is-prop-Π
-            ( λ _ → is-set-type-Model-Of-Signature σ X _ _)))
-
-  is-algebra-Prop : Prop (l2 ⊔ l3)
-  is-algebra-Prop = (is-algebra σ T X , is-prop-is-algebra)
+  is-algebra-model-Algebra : is-algebra-Model-of-Signature σ T model-Algebra
+  is-algebra-model-Algebra = pr2 A
 ```
