@@ -27,11 +27,9 @@ open import lists.tuples
 
 open import univalent-combinatorics.standard-finite-types
 
-open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebraic-theory-of-groups
 open import universal-algebra.algebras
-open import universal-algebra.extensions-signatures
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
