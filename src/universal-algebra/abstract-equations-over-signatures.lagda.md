@@ -66,7 +66,6 @@ module _
   (σ : signature l1)
   (τ : signature l2)
   (E : is-extension-of-signature σ τ)
-  {k : ℕ}
   where
 
   translation-abstract-equation :
