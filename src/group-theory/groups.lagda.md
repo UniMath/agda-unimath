@@ -70,6 +70,9 @@ is-group-is-unital-Semigroup G is-unital-Semigroup-G =
       ( (x : type-Semigroup G) →
         mul-Semigroup G x (i x) ＝ pr1 is-unital-Semigroup-G))
 
+is-group-Monoid : {l : Level} → Monoid l → UU l
+is-group-Monoid = ind-Σ is-group-is-unital-Semigroup
+
 is-group-Semigroup :
   {l : Level} (G : Semigroup l) → UU l
 is-group-Semigroup G =
@@ -679,4 +682,13 @@ module _
   pointed-type-with-aut-Group : Pointed-Type-With-Aut l
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
+```
+
+### Making groups from monoids
+
+```agda
+group-is-group-Monoid :
+  {l : Level} (M : Monoid l) → is-group-Monoid M → Group l
+group-is-group-Monoid (G , is-unital-G) is-group-G =
+  ( G , is-unital-G , is-group-G)
 ```
