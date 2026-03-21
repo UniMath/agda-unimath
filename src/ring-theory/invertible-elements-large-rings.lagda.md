@@ -9,10 +9,10 @@ module ring-theory.invertible-elements-large-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.logical-equivalences
-open import foundation.transport-along-identifications
-open import foundation.propositions
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.invertible-elements-large-monoids
