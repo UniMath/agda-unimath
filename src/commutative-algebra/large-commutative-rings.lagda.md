@@ -169,10 +169,12 @@ module _
 ```agda
 module
   similarity-reasoning-Large-Commutative-Ring
-    {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+    {α : Level → Level} {β : Level → Level → Level}
+    (R : Large-Commutative-Ring α β)
   where
 
-  open similarity-reasoning-Large-Ring (large-ring-Large-Commutative-Ring R) public
+  open
+    similarity-reasoning-Large-Ring (large-ring-Large-Commutative-Ring R) public
 ```
 
 ### Raising universe levels
@@ -203,7 +205,8 @@ module _
     sim-raise-Large-Ring' (large-ring-Large-Commutative-Ring R)
 
   eq-raise-Large-Commutative-Ring :
-    {l : Level} (x : type-Large-Commutative-Ring R l) → raise-Large-Commutative-Ring l x ＝ x
+    {l : Level} (x : type-Large-Commutative-Ring R l) →
+    raise-Large-Commutative-Ring l x ＝ x
   eq-raise-Large-Commutative-Ring =
     eq-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
@@ -213,7 +216,8 @@ module _
     is-emb-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   emb-raise-Large-Commutative-Ring :
-    (l1 l2 : Level) → type-Large-Commutative-Ring R l1 ↪ type-Large-Commutative-Ring R (l1 ⊔ l2)
+    (l1 l2 : Level) →
+    type-Large-Commutative-Ring R l1 ↪ type-Large-Commutative-Ring R (l1 ⊔ l2)
   emb-raise-Large-Commutative-Ring =
     emb-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
@@ -225,20 +229,27 @@ module _
     raise-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   eq-raise-sim-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    sim-Large-Commutative-Ring R x y → raise-Large-Commutative-Ring l2 x ＝ raise-Large-Commutative-Ring l1 y
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    sim-Large-Commutative-Ring R x y →
+    raise-Large-Commutative-Ring l2 x ＝ raise-Large-Commutative-Ring l1 y
   eq-raise-sim-Large-Commutative-Ring =
     eq-raise-sim-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-eq-raise-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    raise-Large-Commutative-Ring l2 x ＝ raise-Large-Commutative-Ring l1 y → sim-Large-Commutative-Ring R x y
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    raise-Large-Commutative-Ring l2 x ＝ raise-Large-Commutative-Ring l1 y →
+    sim-Large-Commutative-Ring R x y
   sim-eq-raise-Large-Commutative-Ring =
     sim-eq-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   eq-raise-iff-sim-Large-Commutative-Ring :
     {l1 l2 : Level} →
-    (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
     ( sim-Large-Commutative-Ring R x y ↔
       ( raise-Large-Commutative-Ring l2 x ＝ raise-Large-Commutative-Ring l1 y))
   eq-raise-iff-sim-Large-Commutative-Ring =
@@ -246,7 +257,8 @@ module _
 
   eq-raise-sim-Large-Commutative-Ring' :
     {l1 l2 : Level}
-    (x : type-Large-Commutative-Ring R (l1 ⊔ l2)) (y : type-Large-Commutative-Ring R l2) →
+    (x : type-Large-Commutative-Ring R (l1 ⊔ l2))
+    (y : type-Large-Commutative-Ring R l2) →
     sim-Large-Commutative-Ring R x y → x ＝ raise-Large-Commutative-Ring l1 y
   eq-raise-sim-Large-Commutative-Ring' =
     eq-raise-sim-Large-Ring' (large-ring-Large-Commutative-Ring R)
@@ -256,14 +268,16 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   sim-preserving-binary-operator-add-Large-Commutative-Ring :
     sim-preserving-binary-operator-Cumulative-Large-Set
       ( cumulative-large-set-Large-Commutative-Ring R)
   sim-preserving-binary-operator-add-Large-Commutative-Ring =
-    sim-preserving-binary-operator-add-Large-Ring (large-ring-Large-Commutative-Ring R)
+    sim-preserving-binary-operator-add-Large-Ring
+      ( large-ring-Large-Commutative-Ring R)
 
   preserves-sim-add-Large-Commutative-Ring :
     preserves-sim-binary-operator-Cumulative-Large-Set
@@ -312,13 +326,15 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   abstract
     add-raise-right-Large-Commutative-Ring :
       {l1 l2 : Level} (l3 : Level) →
-      (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       add-Large-Commutative-Ring R x (raise-Large-Commutative-Ring R l3 y) ＝
       raise-Large-Commutative-Ring R l3 (add-Large-Commutative-Ring R x y)
     add-raise-right-Large-Commutative-Ring =
@@ -326,7 +342,8 @@ module _
 
     add-raise-left-Large-Commutative-Ring :
       {l1 l2 : Level} (l3 : Level) →
-      (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       add-Large-Commutative-Ring R (raise-Large-Commutative-Ring R l3 x) y ＝
       raise-Large-Commutative-Ring R l3 (add-Large-Commutative-Ring R x y)
     add-raise-left-Large-Commutative-Ring =
@@ -334,11 +351,14 @@ module _
 
     add-raise-raise-Large-Commutative-Ring :
       {l1 l2 : Level} (l3 l4 : Level) →
-      (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       add-Large-Commutative-Ring R
         ( raise-Large-Commutative-Ring R l3 x)
         ( raise-Large-Commutative-Ring R l4 y) ＝
-      raise-Large-Commutative-Ring R (l3 ⊔ l4) (add-Large-Commutative-Ring R x y)
+      raise-Large-Commutative-Ring R
+        ( l3 ⊔ l4)
+        ( add-Large-Commutative-Ring R x y)
     add-raise-raise-Large-Commutative-Ring =
       add-raise-raise-Large-Ring (large-ring-Large-Commutative-Ring R)
 ```
@@ -347,7 +367,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   sim-preserving-endomap-neg-Large-Commutative-Ring :
@@ -370,7 +391,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   associative-add-Large-Commutative-Ring :
@@ -388,7 +410,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   zero-Large-Commutative-Ring : type-Large-Commutative-Ring R lzero
@@ -416,7 +439,8 @@ module _
     is-zero-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   is-zero-raise-zero-Large-Commutative-Ring :
-    (l : Level) → is-zero-Large-Commutative-Ring (raise-zero-Large-Commutative-Ring l)
+    (l : Level) →
+    is-zero-Large-Commutative-Ring (raise-zero-Large-Commutative-Ring l)
   is-zero-raise-zero-Large-Commutative-Ring =
     is-zero-raise-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
@@ -440,37 +464,51 @@ module _
 
   left-raise-unit-law-add-Large-Commutative-Ring :
     {l1 l2 : Level} (y : type-Large-Commutative-Ring R l2) →
-    add-Large-Commutative-Ring R (raise-zero-Large-Commutative-Ring l1) y ＝ raise-Large-Commutative-Ring R l1 y
+    add-Large-Commutative-Ring R (raise-zero-Large-Commutative-Ring l1) y ＝
+    raise-Large-Commutative-Ring R l1 y
   left-raise-unit-law-add-Large-Commutative-Ring =
     left-raise-unit-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   right-raise-unit-law-add-Large-Commutative-Ring :
     {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) →
-    add-Large-Commutative-Ring R x (raise-zero-Large-Commutative-Ring l2) ＝ raise-Large-Commutative-Ring R l2 x
+    add-Large-Commutative-Ring R x (raise-zero-Large-Commutative-Ring l2) ＝
+    raise-Large-Commutative-Ring R l2 x
   right-raise-unit-law-add-Large-Commutative-Ring =
     right-raise-unit-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   eq-left-is-zero-law-add-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    is-zero-Large-Commutative-Ring x → add-Large-Commutative-Ring R x y ＝ raise-Large-Commutative-Ring R l1 y
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    is-zero-Large-Commutative-Ring x → add-Large-Commutative-Ring R x y ＝
+    raise-Large-Commutative-Ring R l1 y
   eq-left-is-zero-law-add-Large-Commutative-Ring =
     eq-left-is-zero-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   eq-right-is-zero-law-add-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    is-zero-Large-Commutative-Ring y → add-Large-Commutative-Ring R x y ＝ raise-Large-Commutative-Ring R l2 x
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    is-zero-Large-Commutative-Ring y →
+    add-Large-Commutative-Ring R x y ＝ raise-Large-Commutative-Ring R l2 x
   eq-right-is-zero-law-add-Large-Commutative-Ring =
     eq-right-is-zero-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-left-is-zero-law-add-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    is-zero-Large-Commutative-Ring x → sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) y
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    is-zero-Large-Commutative-Ring x →
+    sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) y
   sim-left-is-zero-law-add-Large-Commutative-Ring =
     sim-left-is-zero-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
   sim-right-is-zero-law-add-Large-Commutative-Ring :
-    {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
-    is-zero-Large-Commutative-Ring y → sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) x
+    {l1 l2 : Level}
+    (x : type-Large-Commutative-Ring R l1)
+    (y : type-Large-Commutative-Ring R l2) →
+    is-zero-Large-Commutative-Ring y →
+    sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) x
   sim-right-is-zero-law-add-Large-Commutative-Ring =
     sim-right-is-zero-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 ```
@@ -479,69 +517,85 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   abstract
     sim-left-inverse-law-add-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
-      is-zero-Large-Commutative-Ring R (add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) x)
+      is-zero-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) x)
     sim-left-inverse-law-add-Large-Commutative-Ring =
       sim-left-inverse-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     sim-right-inverse-law-add-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
-      is-zero-Large-Commutative-Ring R (add-Large-Commutative-Ring R x (neg-Large-Commutative-Ring R x))
+      is-zero-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R x (neg-Large-Commutative-Ring R x))
     sim-right-inverse-law-add-Large-Commutative-Ring =
       sim-right-inverse-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     eq-left-inverse-law-add-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
-      add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) x ＝ raise-zero-Large-Commutative-Ring R l
+      add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) x ＝
+      raise-zero-Large-Commutative-Ring R l
     eq-left-inverse-law-add-Large-Commutative-Ring =
       eq-left-inverse-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     eq-right-inverse-law-add-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
-      add-Large-Commutative-Ring R x (neg-Large-Commutative-Ring R x) ＝ raise-zero-Large-Commutative-Ring R l
+      add-Large-Commutative-Ring R x (neg-Large-Commutative-Ring R x) ＝
+      raise-zero-Large-Commutative-Ring R l
     eq-right-inverse-law-add-Large-Commutative-Ring =
       eq-right-inverse-law-add-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     unique-left-neg-Large-Commutative-Ring :
-      {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      {l1 l2 : Level}
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       is-zero-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) →
       sim-Large-Commutative-Ring R x (neg-Large-Commutative-Ring R y)
     unique-left-neg-Large-Commutative-Ring =
       unique-left-neg-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     unique-right-neg-Large-Commutative-Ring :
-      {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      {l1 l2 : Level}
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       is-zero-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) →
       sim-Large-Commutative-Ring R y (neg-Large-Commutative-Ring R x)
     unique-right-neg-Large-Commutative-Ring =
       unique-right-neg-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     distributive-neg-add-Large-Commutative-Ring :
-      {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2) →
+      {l1 l2 : Level}
+      (x : type-Large-Commutative-Ring R l1)
+      (y : type-Large-Commutative-Ring R l2) →
       neg-Large-Commutative-Ring R (add-Large-Commutative-Ring R x y) ＝
-      add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) (neg-Large-Commutative-Ring R y)
+      add-Large-Commutative-Ring R
+        ( neg-Large-Commutative-Ring R x)
+        ( neg-Large-Commutative-Ring R y)
     distributive-neg-add-Large-Commutative-Ring x y =
       distributive-neg-add-Large-Ring (large-ring-Large-Commutative-Ring R) x y
 
     neg-is-zero-Large-Commutative-Ring :
       {l : Level} (x : type-Large-Commutative-Ring R l) →
-      is-zero-Large-Commutative-Ring R x → is-zero-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x)
+      is-zero-Large-Commutative-Ring R x →
+      is-zero-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x)
     neg-is-zero-Large-Commutative-Ring =
       neg-is-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     neg-zero-Large-Commutative-Ring :
-      neg-Large-Commutative-Ring R (zero-Large-Commutative-Ring R) ＝ zero-Large-Commutative-Ring R
+      neg-Large-Commutative-Ring R (zero-Large-Commutative-Ring R) ＝
+      zero-Large-Commutative-Ring R
     neg-zero-Large-Commutative-Ring =
       neg-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
     neg-raise-zero-Large-Commutative-Ring :
       (l : Level) →
-      neg-Large-Commutative-Ring R (raise-zero-Large-Commutative-Ring R l) ＝ raise-zero-Large-Commutative-Ring R l
+      neg-Large-Commutative-Ring R (raise-zero-Large-Commutative-Ring R l) ＝
+      raise-zero-Large-Commutative-Ring R l
     neg-raise-zero-Large-Commutative-Ring =
       neg-raise-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 
@@ -556,69 +610,111 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
-  {l1 l2 : Level} (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
+  {l1 l2 : Level}
+  (x : type-Large-Commutative-Ring R l1) (y : type-Large-Commutative-Ring R l2)
   where
 
   abstract
     sim-cancel-left-diff-add-Large-Commutative-Ring :
       sim-Large-Commutative-Ring R
-        ( add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) (add-Large-Commutative-Ring R x y))
+        ( add-Large-Commutative-Ring R
+          ( neg-Large-Commutative-Ring R x)
+          ( add-Large-Commutative-Ring R x y))
         ( y)
     sim-cancel-left-diff-add-Large-Commutative-Ring =
-      sim-cancel-left-diff-add-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      sim-cancel-left-diff-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     sim-cancel-left-add-diff-Large-Commutative-Ring :
       sim-Large-Commutative-Ring R
-        ( add-Large-Commutative-Ring R x (add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) y))
+        ( add-Large-Commutative-Ring R
+          ( x)
+          ( add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) y))
         ( y)
     sim-cancel-left-add-diff-Large-Commutative-Ring =
-      sim-cancel-left-add-diff-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      sim-cancel-left-add-diff-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     sim-cancel-right-diff-add-Large-Commutative-Ring :
       sim-Large-Commutative-Ring R
-        ( add-Large-Commutative-Ring R (add-Large-Commutative-Ring R y (neg-Large-Commutative-Ring R x)) x)
+        ( add-Large-Commutative-Ring R
+          ( add-Large-Commutative-Ring R y (neg-Large-Commutative-Ring R x)) x)
         ( y)
     sim-cancel-right-diff-add-Large-Commutative-Ring =
-      sim-cancel-right-diff-add-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      sim-cancel-right-diff-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     sim-cancel-right-add-diff-Large-Commutative-Ring :
       sim-Large-Commutative-Ring R
-        ( add-Large-Commutative-Ring R (add-Large-Commutative-Ring R y x) (neg-Large-Commutative-Ring R x))
+        ( add-Large-Commutative-Ring R
+          ( add-Large-Commutative-Ring R y x)
+          ( neg-Large-Commutative-Ring R x))
         ( y)
     sim-cancel-right-add-diff-Large-Commutative-Ring =
-      sim-cancel-right-add-diff-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      sim-cancel-right-add-diff-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     eq-cancel-left-diff-add-Large-Commutative-Ring :
-      add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) (add-Large-Commutative-Ring R x y) ＝
+      add-Large-Commutative-Ring R
+        ( neg-Large-Commutative-Ring R x)
+        ( add-Large-Commutative-Ring R x y) ＝
       raise-Large-Commutative-Ring R l1 y
     eq-cancel-left-diff-add-Large-Commutative-Ring =
-      eq-cancel-left-diff-add-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      eq-cancel-left-diff-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     eq-cancel-left-add-diff-Large-Commutative-Ring :
-      add-Large-Commutative-Ring R x (add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) y) ＝
+      add-Large-Commutative-Ring R
+        ( x)
+        ( add-Large-Commutative-Ring R (neg-Large-Commutative-Ring R x) y) ＝
       raise-Large-Commutative-Ring R l1 y
     eq-cancel-left-add-diff-Large-Commutative-Ring =
-      eq-cancel-left-add-diff-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      eq-cancel-left-add-diff-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     eq-cancel-right-diff-add-Large-Commutative-Ring :
-      add-Large-Commutative-Ring R (add-Large-Commutative-Ring R y (neg-Large-Commutative-Ring R x)) x ＝
+      add-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R y (neg-Large-Commutative-Ring R x))
+        ( x) ＝
       raise-Large-Commutative-Ring R l1 y
     eq-cancel-right-diff-add-Large-Commutative-Ring =
-      eq-cancel-right-diff-add-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      eq-cancel-right-diff-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 
     eq-cancel-right-add-diff-Large-Commutative-Ring :
-      add-Large-Commutative-Ring R (add-Large-Commutative-Ring R y x) (neg-Large-Commutative-Ring R x) ＝
+      add-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R y x)
+        ( neg-Large-Commutative-Ring R x) ＝
       raise-Large-Commutative-Ring R l1 y
     eq-cancel-right-add-diff-Large-Commutative-Ring =
-      eq-cancel-right-add-diff-Large-Ring (large-ring-Large-Commutative-Ring R) x y
+      eq-cancel-right-add-diff-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( x)
+        ( y)
 ```
 
 ### Addition reflects similarity
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   {l1 l2 l3 : Level}
   (z : type-Large-Commutative-Ring R l3)
   (x : type-Large-Commutative-Ring R l1)
@@ -627,23 +723,36 @@ module _
 
   abstract
     reflects-sim-right-add-Large-Commutative-Ring :
-      sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R x z) (add-Large-Commutative-Ring R y z) →
+      sim-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R x z)
+        ( add-Large-Commutative-Ring R y z) →
       sim-Large-Commutative-Ring R x y
     reflects-sim-right-add-Large-Commutative-Ring =
-      reflects-sim-right-add-Large-Ring (large-ring-Large-Commutative-Ring R) z x y
+      reflects-sim-right-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( z)
+        ( x)
+        ( y)
 
     reflects-sim-left-add-Large-Commutative-Ring :
-      sim-Large-Commutative-Ring R (add-Large-Commutative-Ring R z x) (add-Large-Commutative-Ring R z y) →
+      sim-Large-Commutative-Ring R
+        ( add-Large-Commutative-Ring R z x)
+        ( add-Large-Commutative-Ring R z y) →
       sim-Large-Commutative-Ring R x y
     reflects-sim-left-add-Large-Commutative-Ring =
-      reflects-sim-left-add-Large-Ring (large-ring-Large-Commutative-Ring R) z x y
+      reflects-sim-left-add-Large-Ring
+        ( large-ring-Large-Commutative-Ring R)
+        ( z)
+        ( x)
+        ( y)
 ```
 
 ### Addition on the left or right in a large ring is an embedding
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   {l1 : Level} (l2 : Level) (x : type-Large-Commutative-Ring R l1)
   where
 
@@ -698,33 +807,39 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (M : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (M : Large-Commutative-Ring α β)
   where
 
   abstract
     mul-raise-right-Large-Commutative-Ring :
-      {l1 l2 : Level} (l3 : Level) →
-      (x : type-Large-Commutative-Ring M l1) (y : type-Large-Commutative-Ring M l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Large-Commutative-Ring M l1)
+      (y : type-Large-Commutative-Ring M l2) →
       mul-Large-Commutative-Ring M x (raise-Large-Commutative-Ring M l3 y) ＝
       raise-Large-Commutative-Ring M l3 (mul-Large-Commutative-Ring M x y)
     mul-raise-right-Large-Commutative-Ring =
       mul-raise-right-Large-Monoid (large-monoid-mul-Large-Commutative-Ring M)
 
     mul-raise-left-Large-Commutative-Ring :
-      {l1 l2 : Level} (l3 : Level) →
-      (x : type-Large-Commutative-Ring M l1) (y : type-Large-Commutative-Ring M l2) →
+      {l1 l2 : Level} (l3 : Level)
+      (x : type-Large-Commutative-Ring M l1)
+      (y : type-Large-Commutative-Ring M l2) →
       mul-Large-Commutative-Ring M (raise-Large-Commutative-Ring M l3 x) y ＝
       raise-Large-Commutative-Ring M l3 (mul-Large-Commutative-Ring M x y)
     mul-raise-left-Large-Commutative-Ring =
       mul-raise-left-Large-Monoid (large-monoid-mul-Large-Commutative-Ring M)
 
     mul-raise-raise-Large-Commutative-Ring :
-      {l1 l2 : Level} (l3 l4 : Level) →
-      (x : type-Large-Commutative-Ring M l1) (y : type-Large-Commutative-Ring M l2) →
+      {l1 l2 : Level} (l3 l4 : Level)
+      (x : type-Large-Commutative-Ring M l1)
+      (y : type-Large-Commutative-Ring M l2) →
       mul-Large-Commutative-Ring M
         ( raise-Large-Commutative-Ring M l3 x)
         ( raise-Large-Commutative-Ring M l4 y) ＝
-      raise-Large-Commutative-Ring M (l3 ⊔ l4) (mul-Large-Commutative-Ring M x y)
+      raise-Large-Commutative-Ring M
+        ( l3 ⊔ l4)
+        ( mul-Large-Commutative-Ring M x y)
     mul-raise-raise-Large-Commutative-Ring =
       mul-raise-raise-Large-Monoid (large-monoid-mul-Large-Commutative-Ring M)
 ```
@@ -733,7 +848,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   is-one-prop-Large-Commutative-Ring :
@@ -839,7 +955,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (R : Large-Commutative-Ring α β)
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
   where
 
   abstract
