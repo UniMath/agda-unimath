@@ -33,7 +33,7 @@ module _
   where
 
   is-full-subuniverse-Prop : Prop (lsuc l1 ⊔ l2)
-  is-full-subuniverse-Prop = is-full-subtype-Prop P
+  is-full-subuniverse-Prop = is-full-prop-subtype P
 
   is-full-subuniverse : UU (lsuc l1 ⊔ l2)
   is-full-subuniverse = is-full-subtype P
