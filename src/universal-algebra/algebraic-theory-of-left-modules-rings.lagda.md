@@ -54,6 +54,14 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
+There is an
+{{#concept "algebraic theory of left modules" Agda=algebraic-theory-left-module-Ring}}
+over any [ring](ring-theory.rings.md).
+
+The type of all such [algebras](universal-algebra.algebras.md) is
+[equivalent](foundation-core.equivalences.md) to the type of
+[left modules over the ring](linear-algebra.left-modules-rings.md).
+
 ## Definition
 
 ```agda
@@ -84,26 +92,26 @@ module _
 
   data law-left-module-Ring : UU l where
     law-left-module-ring-law-Ab : law-Ab → law-left-module-Ring
-    left-distributive-law-left-module-Ring :
+    left-distributive-mul-add-law-left-module-Ring :
       type-Ring R → law-left-module-Ring
-    right-distributive-law-left-module-Ring :
+    right-distributive-mul-add-law-left-module-Ring :
       type-Ring R → type-Ring R → law-left-module-Ring
     left-unit-mul-law-left-module-Ring : law-left-module-Ring
     associative-mul-law-left-module-Ring :
       type-Ring R → type-Ring R → law-left-module-Ring
 
   pattern associative-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab associative-law-Ab
+    law-left-module-ring-law-Ab associative-add-law-Ab
   pattern left-unit-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab left-unit-law-law-Ab
+    law-left-module-ring-law-Ab left-unit-add-law-Ab
   pattern right-unit-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab right-unit-law-law-Ab
+    law-left-module-ring-law-Ab right-unit-add-law-Ab
   pattern left-inverse-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab left-inverse-law-law-Ab
+    law-left-module-ring-law-Ab left-inverse-add-law-Ab
   pattern right-inverse-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab right-inverse-law-law-Ab
+    law-left-module-ring-law-Ab right-inverse-add-law-Ab
   pattern commutative-add-law-left-module-Ring =
-    law-left-module-ring-law-Ab commutative-law-Ab
+    law-left-module-ring-law-Ab commutative-add-law-Ab
 
   extension-signature-ab-left-module-Ring :
     is-extension-of-signature signature-Ab signature-left-module-Ring
@@ -142,11 +150,11 @@ module _
               ( signature-Ab)
               ( algebraic-theory-Ab)
               ( law))
-        ( left-distributive-law-left-module-Ring r) →
+        ( left-distributive-mul-add-law-left-module-Ring r) →
           ( 2 ,
             mul-term r (add-term (var 0 1) (var 1 1)) ,
             add-term (mul-term r (var 0 1)) (mul-term r (var 1 1)))
-        ( right-distributive-law-left-module-Ring r s) →
+        ( right-distributive-mul-add-law-left-module-Ring r s) →
           ( 1 ,
             mul-term (add-Ring R r s) (var 0 0) ,
             add-term (mul-term r (var 0 0)) (mul-term s (var 0 0)))
@@ -183,17 +191,17 @@ module _
   algebra-ab-Algebra-Left-Module-Ring =
     ( ( set-A , model-A ∘ operation-left-module-ring-operation-Ab) ,
       λ where
-        left-inverse-law-law-Ab →
+        left-inverse-add-law-Ab →
           satisfies-A left-inverse-add-law-left-module-Ring
-        right-inverse-law-law-Ab →
+        right-inverse-add-law-Ab →
           satisfies-A right-inverse-add-law-left-module-Ring
-        left-unit-law-law-Ab →
+        left-unit-add-law-Ab →
           satisfies-A left-unit-add-law-left-module-Ring
-        right-unit-law-law-Ab →
+        right-unit-add-law-Ab →
           satisfies-A right-unit-add-law-left-module-Ring
-        associative-law-Ab →
+        associative-add-law-Ab →
           satisfies-A associative-add-law-left-module-Ring
-        commutative-law-Ab →
+        commutative-add-law-Ab →
           satisfies-A commutative-add-law-left-module-Ring)
 
   ab-Algebra-Left-Module-Ring : Ab l2
@@ -222,7 +230,7 @@ module _
       ( mul-Algebra-Left-Module-Ring r y)
   left-distributive-law-mul-add-Algebra-Left-Module-Ring r x y =
     satisfies-A
-      ( left-distributive-law-left-module-Ring r)
+      ( left-distributive-mul-add-law-left-module-Ring r)
       ( component-tuple 2 (y ∷ x ∷ empty-tuple))
 
   right-distributive-law-mul-add-Algebra-Left-Module-Ring :
@@ -233,7 +241,7 @@ module _
       ( mul-Algebra-Left-Module-Ring s x)
   right-distributive-law-mul-add-Algebra-Left-Module-Ring r s x =
     satisfies-A
-      ( right-distributive-law-left-module-Ring r s)
+      ( right-distributive-mul-add-law-left-module-Ring r s)
       ( λ _ → x)
 
   associative-mul-Algebra-Left-Module-Ring :
@@ -311,10 +319,10 @@ module _
   is-algebra-model-left-module-Ring right-inverse-add-law-left-module-Ring xs =
     right-inverse-law-add-left-module-Ring R M _
   is-algebra-model-left-module-Ring
-    (left-distributive-law-left-module-Ring r) xs =
+    (left-distributive-mul-add-law-left-module-Ring r) xs =
     left-distributive-mul-add-left-module-Ring R M r _ _
   is-algebra-model-left-module-Ring
-    (right-distributive-law-left-module-Ring r s) xs =
+    (right-distributive-mul-add-law-left-module-Ring r s) xs =
     right-distributive-mul-add-left-module-Ring R M r s _
   is-algebra-model-left-module-Ring commutative-add-law-left-module-Ring xs =
     commutative-add-left-module-Ring R M _ _

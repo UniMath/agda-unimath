@@ -69,15 +69,15 @@ pr2 signature-Group inv-operation-Group = 1
 
 data law-Group : UU lzero where
   law-group-law-Monoid : law-Monoid → law-Group
-  left-inverse-law-law-Group : law-Group
-  right-inverse-law-law-Group : law-Group
+  left-inverse-mul-law-Group : law-Group
+  right-inverse-mul-law-Group : law-Group
 
-pattern associative-law-Group =
-  law-group-law-Monoid associative-law-Monoid
-pattern left-unit-law-law-Group =
-  law-group-law-Monoid left-unit-law-law-Monoid
-pattern right-unit-law-law-Group =
-  law-group-law-Monoid right-unit-law-law-Monoid
+pattern associative-mul-law-Group =
+  law-group-law-Monoid associative-mul-law-Monoid
+pattern left-unit-mul-law-Group =
+  law-group-law-Monoid left-unit-mul-law-Monoid
+pattern right-unit-mul-law-Group =
+  law-group-law-Monoid right-unit-mul-law-Monoid
 
 extension-signature-monoid-Group :
   is-extension-of-signature signature-Monoid signature-Group
@@ -104,11 +104,11 @@ pr2 algebraic-theory-Group =
             ( signature-Monoid)
             ( algebraic-theory-Monoid)
             ( law))
-      left-inverse-law-law-Group →
+      left-inverse-mul-law-Group →
         ( 1 ,
           inv-term var *-term var ,
           unit-term)
-      right-inverse-law-law-Group →
+      right-inverse-mul-law-Group →
         ( 1 ,
           var *-term inv-term var ,
           unit-term)
@@ -145,15 +145,15 @@ module _
       ( signature-Group)
       ( algebraic-theory-Group)
       ( model-set-Group)
-  is-algebra-model-set-Group associative-law-Group _ =
+  is-algebra-model-set-Group associative-mul-law-Group _ =
     associative-mul-Group G _ _ _
-  is-algebra-model-set-Group left-unit-law-law-Group _ =
+  is-algebra-model-set-Group left-unit-mul-law-Group _ =
     left-unit-law-mul-Group G _
-  is-algebra-model-set-Group right-unit-law-law-Group _ =
+  is-algebra-model-set-Group right-unit-mul-law-Group _ =
     right-unit-law-mul-Group G _
-  is-algebra-model-set-Group left-inverse-law-law-Group _ =
+  is-algebra-model-set-Group left-inverse-mul-law-Group _ =
     left-inverse-law-mul-Group G _
-  is-algebra-model-set-Group right-inverse-law-law-Group _ =
+  is-algebra-model-set-Group right-inverse-mul-law-Group _ =
     right-inverse-law-mul-Group G _
 
   algebra-group-Group : Algebra-Group l
@@ -172,9 +172,9 @@ module _
   algebra-monoid-Algebra-Group =
     ( ( set-A , model-A ∘ operation-group-operation-Monoid) ,
       λ where
-        associative-law-Monoid → satisfies-A associative-law-Group
-        left-unit-law-law-Monoid → satisfies-A left-unit-law-law-Group
-        right-unit-law-law-Monoid → satisfies-A right-unit-law-law-Group)
+        associative-mul-law-Monoid → satisfies-A associative-mul-law-Group
+        left-unit-mul-law-Monoid → satisfies-A left-unit-mul-law-Group
+        right-unit-mul-law-Monoid → satisfies-A right-unit-mul-law-Group)
 
   monoid-Algebra-Group : Monoid l
   monoid-Algebra-Group = monoid-Algebra-Monoid algebra-monoid-Algebra-Group
@@ -196,13 +196,13 @@ module _
     (x : type-Algebra-Group) →
     mul-Algebra-Group (inv-Algebra-Group x) x ＝ unit-Algebra-Group
   left-inverse-law-mul-Algebra-Group x =
-    satisfies-A left-inverse-law-law-Group (λ _ → x)
+    satisfies-A left-inverse-mul-law-Group (λ _ → x)
 
   right-inverse-law-mul-Algebra-Group :
     (x : type-Algebra-Group) →
     mul-Algebra-Group x (inv-Algebra-Group x) ＝ unit-Algebra-Group
   right-inverse-law-mul-Algebra-Group x =
-    satisfies-A right-inverse-law-law-Group (λ _ → x)
+    satisfies-A right-inverse-mul-law-Group (λ _ → x)
 
   group-Algebra-Group : Group l
   group-Algebra-Group =
