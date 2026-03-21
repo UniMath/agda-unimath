@@ -63,11 +63,11 @@ data law-Ab : UU lzero where
   law-ab-law-Group : law-Group → law-Ab
   commutative-add-law-Ab : law-Ab
 
-pattern associative-law-Ab = law-ab-law-Group associative-law-Group
-pattern left-unit-law-law-Ab = law-ab-law-Group left-unit-law-law-Group
-pattern right-unit-law-law-Ab = law-ab-law-Group right-unit-law-law-Group
-pattern left-inverse-law-law-Ab = law-ab-law-Group left-inverse-law-law-Group
-pattern right-inverse-law-law-Ab = law-ab-law-Group right-inverse-law-law-Group
+pattern associative-add-law-Ab = law-ab-law-Group associative-mul-law-Group
+pattern left-unit-add-law-Ab = law-ab-law-Group left-unit-mul-law-Group
+pattern right-unit-add-law-Ab = law-ab-law-Group right-unit-mul-law-Group
+pattern left-inverse-add-law-Ab = law-ab-law-Group left-inverse-mul-law-Group
+pattern right-inverse-add-law-Ab = law-ab-law-Group right-inverse-mul-law-Group
 
 algebraic-theory-Ab : Algebraic-Theory lzero signature-Ab
 pr1 algebraic-theory-Ab = law-Ab
