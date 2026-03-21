@@ -61,13 +61,13 @@ signature-Ab = signature-Group
 
 data law-Ab : UU lzero where
   law-ab-law-Group : law-Group → law-Ab
-  commutative-law-Ab : law-Ab
+  commutative-add-law-Ab : law-Ab
 
-pattern associative-law-Ab = law-ab-law-Group associative-law-Group
-pattern left-unit-law-law-Ab = law-ab-law-Group left-unit-law-law-Group
-pattern right-unit-law-law-Ab = law-ab-law-Group right-unit-law-law-Group
-pattern left-inverse-law-law-Ab = law-ab-law-Group left-inverse-law-law-Group
-pattern right-inverse-law-law-Ab = law-ab-law-Group right-inverse-law-law-Group
+pattern associative-add-law-Ab = law-ab-law-Group associative-mul-law-Group
+pattern left-unit-add-law-Ab = law-ab-law-Group left-unit-mul-law-Group
+pattern right-unit-add-law-Ab = law-ab-law-Group right-unit-mul-law-Group
+pattern left-inverse-add-law-Ab = law-ab-law-Group left-inverse-mul-law-Group
+pattern right-inverse-add-law-Ab = law-ab-law-Group right-inverse-mul-law-Group
 
 algebraic-theory-Ab : Algebraic-Theory lzero signature-Ab
 pr1 algebraic-theory-Ab = law-Ab
@@ -76,7 +76,7 @@ pr2 algebraic-theory-Ab (law-ab-law-Group law) =
     ( signature-Group)
     ( algebraic-theory-Group)
     ( law)
-pr2 algebraic-theory-Ab commutative-law-Ab =
+pr2 algebraic-theory-Ab commutative-add-law-Ab =
   let
     x-term = var-term (zero-Fin 1)
     y-term = var-term (one-Fin 1)
@@ -113,7 +113,7 @@ module _
       ( model-set-Ab)
   is-algebra-model-set-Ab (law-ab-law-Group law) =
     is-algebra-model-set-Group (group-Ab G) law
-  is-algebra-model-set-Ab commutative-law-Ab _ = commutative-add-Ab G _ _
+  is-algebra-model-set-Ab commutative-add-law-Ab _ = commutative-add-Ab G _ _
 
   algebra-ab-Ab : Algebra-Ab l
   algebra-ab-Ab = (model-set-Ab , is-algebra-model-set-Ab)
@@ -143,7 +143,7 @@ module _
   commutative-add-Algebra-Ab :
     (x y : type-Algebra-Ab) → add-Algebra-Ab x y ＝ add-Algebra-Ab y x
   commutative-add-Algebra-Ab x y =
-    satisfies-A commutative-law-Ab (component-tuple 2 (y ∷ x ∷ empty-tuple))
+    satisfies-A commutative-add-law-Ab (component-tuple 2 (y ∷ x ∷ empty-tuple))
 
   ab-Algebra-Ab : Ab l
   ab-Algebra-Ab = (group-Algebra-Ab , commutative-add-Algebra-Ab)
