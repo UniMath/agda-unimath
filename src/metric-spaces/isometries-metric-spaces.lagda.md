@@ -547,13 +547,6 @@ module _
     is-isometry-is-expansive-is-short-map-Metric-Space H K d x y =
       (H d x y , K d x y)
 
-  isometry-is-expansive-is-short-map-Metric-Space :
-    is-short-map-Metric-Space A B f →
-    is-expansive-map-Metric-Space A B f →
-    isometry-Metric-Space A B
-  isometry-is-expansive-is-short-map-Metric-Space H K =
-    (f , is-isometry-is-expansive-is-short-map-Metric-Space H K)
-
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
