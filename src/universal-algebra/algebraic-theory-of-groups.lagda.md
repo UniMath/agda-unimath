@@ -7,24 +7,32 @@ module universal-algebra.algebraic-theory-of-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
+open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.monoids
 
 open import lists.tuples
 
+open import univalent-combinatorics.standard-finite-types
+
+open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
+open import universal-algebra.algebraic-theory-of-monoids
 open import universal-algebra.algebras
+open import universal-algebra.extensions-signatures
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -44,149 +52,259 @@ of all such [algebras](universal-algebra.algebras.md) is
 ### The algebra of groups
 
 ```agda
-data group-ops : UU lzero where
-  unit-group-op mul-group-op inv-group-op : group-ops
+data operation-Group : UU lzero where
+  operation-group-operation-Monoid : operation-Monoid → operation-Group
+  inv-operation-Group : operation-Group
 
-group-signature : signature lzero
-pr1 group-signature = group-ops
-pr2 group-signature unit-group-op = 0
-pr2 group-signature mul-group-op = 2
-pr2 group-signature inv-group-op = 1
+pattern mul-operation-Group =
+  operation-group-operation-Monoid mul-operation-Monoid
+pattern unit-operation-Group =
+  operation-group-operation-Monoid unit-operation-Monoid
 
-data group-laws : UU lzero where
-  associative-l-group-laws : group-laws
-  invl-l-group-laws : group-laws
-  invr-r-group-laws : group-laws
-  idl-l-group-laws : group-laws
-  idr-r-group-laws : group-laws
+signature-Group : signature lzero
+pr1 signature-Group = operation-Group
+pr2 signature-Group (operation-group-operation-Monoid op) =
+  arity-operation-signature signature-Monoid op
+pr2 signature-Group inv-operation-Group = 1
 
-algebraic-theory-Group : Algebraic-Theory lzero group-signature
-pr1 algebraic-theory-Group = group-laws
+data law-Group : UU lzero where
+  law-group-law-Monoid : law-Monoid → law-Group
+  left-inverse-mul-law-Group : law-Group
+  right-inverse-mul-law-Group : law-Group
+
+pattern associative-mul-law-Group =
+  law-group-law-Monoid associative-mul-law-Monoid
+pattern left-unit-mul-law-Group =
+  law-group-law-Monoid left-unit-mul-law-Monoid
+pattern right-unit-mul-law-Group =
+  law-group-law-Monoid right-unit-mul-law-Monoid
+
+extension-signature-monoid-Group :
+  is-extension-of-signature signature-Monoid signature-Group
+pr1 extension-signature-monoid-Group =
+  operation-group-operation-Monoid
+pr2 extension-signature-monoid-Group _ = refl
+
+algebraic-theory-Group : Algebraic-Theory lzero signature-Group
+pr1 algebraic-theory-Group = law-Group
 pr2 algebraic-theory-Group =
-  λ where
-  associative-l-group-laws →
-    ( op mul-group-op
-      ( ( op mul-group-op (var 0 ∷ var 1 ∷ empty-tuple)) ∷
-        var 2 ∷
-        empty-tuple)) ,
-    ( op mul-group-op
-      ( var 0 ∷ (op mul-group-op (var 1 ∷ var 2 ∷ empty-tuple)) ∷ empty-tuple))
-  invl-l-group-laws →
-    ( op mul-group-op
-      ( op inv-group-op (var 0 ∷ empty-tuple) ∷ var 0 ∷ empty-tuple)) ,
-    ( op unit-group-op empty-tuple)
-  invr-r-group-laws →
-    ( op mul-group-op
-      ( var 0 ∷ op inv-group-op (var 0 ∷ empty-tuple) ∷ empty-tuple)) ,
-    ( op unit-group-op empty-tuple)
-  idl-l-group-laws →
-    ( op mul-group-op (op unit-group-op empty-tuple ∷ var 0 ∷ empty-tuple)) ,
-    ( var 0)
-  idr-r-group-laws →
-    ( op mul-group-op (var 0 ∷ op unit-group-op empty-tuple ∷ empty-tuple)) ,
-    ( var 0)
-    where
-    op = op-term
-    var = var-term
+  let
+    var = var-term (zero-Fin 0)
+    _*-term_ x y = op-term mul-operation-Group (x ∷ y ∷ empty-tuple)
+    inv-term x = op-term inv-operation-Group (x ∷ empty-tuple)
+    unit-term = op-term unit-operation-Group empty-tuple
+  in
+    λ where
+      (law-group-law-Monoid law) →
+        translation-abstract-equation
+          ( signature-Monoid)
+          ( signature-Group)
+          ( extension-signature-monoid-Group)
+          ( index-abstract-equation-Algebraic-Theory
+            ( signature-Monoid)
+            ( algebraic-theory-Monoid)
+            ( law))
+      left-inverse-mul-law-Group →
+        ( 1 ,
+          inv-term var *-term var ,
+          unit-term)
+      right-inverse-mul-law-Group →
+        ( 1 ,
+          var *-term inv-term var ,
+          unit-term)
 
-algebra-Group : (l : Level) → UU (lsuc l)
-algebra-Group l = Algebra l group-signature algebraic-theory-Group
+Algebra-Group : (l : Level) → UU (lsuc l)
+Algebra-Group l = Algebra l signature-Group algebraic-theory-Group
 ```
 
 ## Properties
 
-### The algebra of groups is equivalent to the type of groups
+### Algebras in the theory of groups from groups
 
 ```agda
-group-algebra-Group :
-  {l : Level} → algebra-Group l → Group l
-pr1 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A))) = A-Set
-pr1 (pr2 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x y =
-  models-A mul-group-op (x ∷ y ∷ empty-tuple)
-pr2 (pr2 (pr1 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x y z =
-  satisfies-A associative-l-group-laws
-    ( λ { 0 → x ; 1 → y ; (succ-ℕ (succ-ℕ n)) → z})
-pr1 (pr1 (pr2 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) =
-  models-A unit-group-op empty-tuple
-pr1 (pr2 (pr1 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A idl-l-group-laws (λ _ → x)
-pr2 (pr2 (pr1 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A idr-r-group-laws (λ _ → x)
-pr1 (pr2 (pr2 (group-algebra-Group ((A-Set , models-A) , satisfies-A)))) x =
-  models-A inv-group-op (x ∷ empty-tuple)
-pr1 (pr2 (pr2 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A invl-l-group-laws (λ _ → x)
-pr2 (pr2 (pr2 (pr2 (group-algebra-Group (_ , satisfies-A))))) x =
-  satisfies-A invr-r-group-laws (λ _ → x)
+module _
+  {l : Level}
+  (G : Group l)
+  where
 
-algebra-group-Group :
-  {l : Level} → Group l → algebra-Group l
-algebra-group-Group G =
-  pair
-    ( pair
-      ( set-Group G)
-      ( λ where
-        unit-group-op v → unit-Group G
-        mul-group-op (x ∷ y ∷ empty-tuple) → mul-Group G x y
-        inv-group-op (x ∷ empty-tuple) → inv-Group G x))
-    ( λ where
-      associative-l-group-laws assign →
-        associative-mul-Group G (assign 0) (assign 1) (assign 2)
-      invl-l-group-laws assign →
-        left-inverse-law-mul-Group G (assign 0)
-      invr-r-group-laws assign →
-        right-inverse-law-mul-Group G (assign 0)
-      idl-l-group-laws assign →
-        left-unit-law-mul-Group G (assign 0)
-      idr-r-group-laws assign →
-        right-unit-law-mul-Group G (assign 0))
+  algebra-monoid-Group : Algebra-Monoid l
+  algebra-monoid-Group =
+    algebra-monoid-Monoid (monoid-Group G)
 
-abstract
-  equiv-group-algebra-Group :
-    {l : Level} → algebra-Group l ≃ Group l
-  pr1 equiv-group-algebra-Group = group-algebra-Group
-  pr1 (pr1 (pr2 equiv-group-algebra-Group)) = algebra-group-Group
-  pr2 (pr1 (pr2 equiv-group-algebra-Group)) G =
-    eq-pair-eq-fiber
-      ( eq-is-prop (is-prop-is-group-Semigroup (semigroup-Group G)))
-  pr1 (pr2 (pr2 equiv-group-algebra-Group)) = algebra-group-Group
-  pr2 (pr2 (pr2 equiv-group-algebra-Group)) A =
-    eq-pair-Σ
-      ( eq-pair-eq-fiber
-        ( eq-htpy
-          ( λ where
-            unit-group-op → eq-htpy (λ where empty-tuple → refl)
-            mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-tuple) → refl)
-            inv-group-op → eq-htpy (λ where (x ∷ empty-tuple) → refl))))
-      ( eq-is-prop
-        ( is-prop-is-algebra
-          ( group-signature) ( algebraic-theory-Group)
-          ( model-Algebra group-signature algebraic-theory-Group A)))
+  is-model-set-Group : is-model-of-signature signature-Group (set-Group G)
+  is-model-set-Group (operation-group-operation-Monoid op) =
+    is-model-set-Monoid (monoid-Group G) op
+  is-model-set-Group inv-operation-Group (x ∷ empty-tuple) =
+    inv-Group G x
+
+  model-set-Group : Model-Of-Signature l signature-Group
+  model-set-Group = (set-Group G , is-model-set-Group)
+
+  is-algebra-model-set-Group :
+    is-algebra-Model-of-Signature
+      ( signature-Group)
+      ( algebraic-theory-Group)
+      ( model-set-Group)
+  is-algebra-model-set-Group associative-mul-law-Group _ =
+    associative-mul-Group G _ _ _
+  is-algebra-model-set-Group left-unit-mul-law-Group _ =
+    left-unit-law-mul-Group G _
+  is-algebra-model-set-Group right-unit-mul-law-Group _ =
+    right-unit-law-mul-Group G _
+  is-algebra-model-set-Group left-inverse-mul-law-Group _ =
+    left-inverse-law-mul-Group G _
+  is-algebra-model-set-Group right-inverse-mul-law-Group _ =
+    right-inverse-law-mul-Group G _
+
+  algebra-group-Group : Algebra-Group l
+  algebra-group-Group = (model-set-Group , is-algebra-model-set-Group)
 ```
 
-### Homomorphisms of groups are homomorphisms of the algebra of groups, and vice versa
+### Groups from algebras in the theory of groups
 
 ```agda
-hom-algebra-Group :
-  {l1 l2 : Level} → algebra-Group l1 → algebra-Group l2 → UU (l1 ⊔ l2)
-hom-algebra-Group =
-  hom-Algebra group-signature algebraic-theory-Group
+module _
+  {l : Level}
+  (A@((set-A , model-A) , satisfies-A) : Algebra-Group l)
+  where
 
-hom-group-hom-algebra-Group :
-  {l1 l2 : Level} (G : algebra-Group l1) (H : algebra-Group l2) →
-  hom-algebra-Group G H →
-  hom-Group (group-algebra-Group G) (group-algebra-Group H)
-hom-group-hom-algebra-Group G H (f , K) =
-  ( f , λ {x} {y} → K mul-group-op (x ∷ y ∷ empty-tuple))
+  algebra-monoid-Algebra-Group : Algebra-Monoid l
+  algebra-monoid-Algebra-Group =
+    ( ( set-A , model-A ∘ operation-group-operation-Monoid) ,
+      λ where
+        associative-mul-law-Monoid → satisfies-A associative-mul-law-Group
+        left-unit-mul-law-Monoid → satisfies-A left-unit-mul-law-Group
+        right-unit-mul-law-Monoid → satisfies-A right-unit-mul-law-Group)
 
-hom-algebra-group-hom-Group :
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  hom-Group G H →
-  hom-algebra-Group (algebra-group-Group G) (algebra-group-Group H)
-hom-algebra-group-hom-Group G H (f , K) =
-  ( f ,
-    λ where
-      unit-group-op empty-tuple → preserves-unit-hom-Group G H (f , K)
-      mul-group-op (x ∷ y ∷ empty-tuple) → K {x} {y}
-      inv-group-op (x ∷ empty-tuple) → preserves-inv-hom-Group G H (f , K))
+  monoid-Algebra-Group : Monoid l
+  monoid-Algebra-Group = monoid-Algebra-Monoid algebra-monoid-Algebra-Group
+
+  type-Algebra-Group : UU l
+  type-Algebra-Group = type-Set set-A
+
+  mul-Algebra-Group :
+    type-Algebra-Group → type-Algebra-Group → type-Algebra-Group
+  mul-Algebra-Group = mul-Monoid monoid-Algebra-Group
+
+  unit-Algebra-Group : type-Algebra-Group
+  unit-Algebra-Group = unit-Monoid monoid-Algebra-Group
+
+  inv-Algebra-Group : type-Algebra-Group → type-Algebra-Group
+  inv-Algebra-Group x = model-A inv-operation-Group (x ∷ empty-tuple)
+
+  left-inverse-law-mul-Algebra-Group :
+    (x : type-Algebra-Group) →
+    mul-Algebra-Group (inv-Algebra-Group x) x ＝ unit-Algebra-Group
+  left-inverse-law-mul-Algebra-Group x =
+    satisfies-A left-inverse-mul-law-Group (λ _ → x)
+
+  right-inverse-law-mul-Algebra-Group :
+    (x : type-Algebra-Group) →
+    mul-Algebra-Group x (inv-Algebra-Group x) ＝ unit-Algebra-Group
+  right-inverse-law-mul-Algebra-Group x =
+    satisfies-A right-inverse-mul-law-Group (λ _ → x)
+
+  group-Algebra-Group : Group l
+  group-Algebra-Group =
+    group-is-group-Monoid
+      ( monoid-Algebra-Group)
+      ( inv-Algebra-Group ,
+        left-inverse-law-mul-Algebra-Group ,
+        right-inverse-law-mul-Algebra-Group)
+```
+
+### The type of groups is equivalent to the type of algebras in the theory of groups
+
+```agda
+abstract
+  is-section-group-Algebra-Group :
+    {l : Level} (A : Algebra-Group l) →
+    algebra-group-Group (group-Algebra-Group A) ＝ A
+  is-section-group-Algebra-Group ((set-A , models-A) , satisfies-A) =
+    eq-type-subtype
+      ( is-algebra-prop-Model-Of-Signature
+        ( signature-Group)
+        ( algebraic-theory-Group))
+      ( eq-pair-eq-fiber
+        ( eq-binary-htpy _ _
+          ( λ where
+            mul-operation-Group (x ∷ y ∷ empty-tuple) → refl
+            unit-operation-Group empty-tuple → refl
+            inv-operation-Group (x ∷ empty-tuple) → refl)))
+
+  is-retraction-group-Algebra-Group :
+    {l : Level} (G : Group l) →
+    group-Algebra-Group (algebra-group-Group G) ＝ G
+  is-retraction-group-Algebra-Group _ = refl
+
+is-equiv-algebra-group-Group :
+  {l : Level} → is-equiv (algebra-group-Group {l})
+is-equiv-algebra-group-Group =
+  is-equiv-is-invertible
+    ( group-Algebra-Group)
+    ( is-section-group-Algebra-Group)
+    ( is-retraction-group-Algebra-Group)
+
+equiv-group-Algebra-Group :
+  {l : Level} → Group l ≃ Algebra-Group l
+equiv-group-Algebra-Group =
+  ( algebra-group-Group ,
+    is-equiv-algebra-group-Group)
+```
+
+### Homomorphisms of groups are equivalent to homomorphisms of algebras in the theory of groups
+
+```agda
+hom-Algebra-Group :
+  {l1 l2 : Level} → Algebra-Group l1 → Algebra-Group l2 → UU (l1 ⊔ l2)
+hom-Algebra-Group = hom-Algebra signature-Group algebraic-theory-Group
+
+hom-group-hom-Algebra-Group :
+  {l1 l2 : Level} (G : Algebra-Group l1) (H : Algebra-Group l2) →
+  hom-Algebra-Group G H →
+  hom-Group (group-Algebra-Group G) (group-Algebra-Group H)
+hom-group-hom-Algebra-Group G H (φ , preserves-ops-φ) =
+  ( φ , preserves-ops-φ mul-operation-Group (_ ∷ _ ∷ empty-tuple))
+
+module _
+  {l1 l2 : Level}
+  (G : Group l1)
+  (H : Group l2)
+  where
+
+  hom-algebra-group-hom-Group :
+    hom-Group G H →
+    hom-Algebra-Group (algebra-group-Group G) (algebra-group-Group H)
+  hom-algebra-group-hom-Group hom-φ@(φ , preserves-mul-φ) =
+    ( φ ,
+      λ where
+        mul-operation-Group (x ∷ y ∷ empty-tuple) → preserves-mul-φ
+        unit-operation-Group empty-tuple → preserves-unit-hom-Group G H hom-φ
+        inv-operation-Group (x ∷ empty-tuple) →
+          preserves-inv-hom-Group G H hom-φ)
+
+  is-equiv-hom-algebra-group-hom-Group :
+    is-equiv hom-algebra-group-hom-Group
+  is-equiv-hom-algebra-group-hom-Group =
+    is-equiv-is-invertible
+      ( hom-group-hom-Algebra-Group
+        ( algebra-group-Group G)
+        ( algebra-group-Group H))
+      ( λ φ →
+        eq-htpy-hom-Algebra
+          ( signature-Group)
+          ( algebraic-theory-Group)
+          ( algebra-group-Group G)
+          ( algebra-group-Group H)
+          ( _)
+          ( φ)
+          ( refl-htpy))
+      ( λ φ → eq-htpy-hom-Group G H refl-htpy)
+
+  equiv-hom-group-hom-Algebra-Group :
+    hom-Group G H ≃
+    hom-Algebra-Group (algebra-group-Group G) (algebra-group-Group H)
+  equiv-hom-group-hom-Algebra-Group =
+    ( hom-algebra-group-hom-Group ,
+      is-equiv-hom-algebra-group-hom-Group)
 ```
