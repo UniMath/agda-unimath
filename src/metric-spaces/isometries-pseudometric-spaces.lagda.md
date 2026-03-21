@@ -450,7 +450,7 @@ module _
       is-emb-short-map-isometry-Pseudometric-Space)
 ```
 
-### Isometries are short expansive maps
+### Short and expansive maps are isometries
 
 ```agda
 module _
