@@ -28,8 +28,10 @@ open import group-theory.semigroups
 
 ## Idea
 
-A homomorphism between two semigroups is a map between their underlying types
-that preserves the binary operation.
+A
+{{#concept "homomorphism" Disambiguation="between semigroups" Agda=hom-Semigroup}}
+between two [semigroups](group-theory.semigroups.md) is a map between their
+underlying types that preserves the binary operation.
 
 ## Definition
 
@@ -144,20 +146,20 @@ module _
         ( is-torsorial-htpy-hom-Semigroup f)
         ( htpy-eq-hom-Semigroup f)
 
-  eq-htpy-hom-Semigroup :
-    {f g : hom-Semigroup} → htpy-hom-Semigroup f g → f ＝ g
-  eq-htpy-hom-Semigroup {f} {g} =
-    map-inv-is-equiv (is-equiv-htpy-eq-hom-Semigroup f g)
+    eq-htpy-hom-Semigroup :
+      {f g : hom-Semigroup} → htpy-hom-Semigroup f g → f ＝ g
+    eq-htpy-hom-Semigroup {f} {g} =
+      map-inv-is-equiv (is-equiv-htpy-eq-hom-Semigroup f g)
 
-  is-set-hom-Semigroup : is-set hom-Semigroup
-  is-set-hom-Semigroup f g =
-    is-prop-is-equiv
-      ( is-equiv-htpy-eq-hom-Semigroup f g)
-      ( is-prop-Π
-        ( λ x →
-          is-set-type-Semigroup H
-            ( map-hom-Semigroup f x)
-            ( map-hom-Semigroup g x)))
+    is-set-hom-Semigroup : is-set hom-Semigroup
+    is-set-hom-Semigroup f g =
+      is-prop-is-equiv
+        ( is-equiv-htpy-eq-hom-Semigroup f g)
+        ( is-prop-Π
+          ( λ x →
+            is-set-type-Semigroup H
+              ( map-hom-Semigroup f x)
+              ( map-hom-Semigroup g x)))
 
   hom-set-Semigroup : Set (l1 ⊔ l2)
   pr1 hom-set-Semigroup = hom-Semigroup

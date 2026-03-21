@@ -7,7 +7,11 @@ module universal-algebra where
 
 open import universal-algebra.abstract-equations-over-signatures public
 open import universal-algebra.algebraic-theories public
+open import universal-algebra.algebraic-theory-of-abelian-groups public
 open import universal-algebra.algebraic-theory-of-groups public
+open import universal-algebra.algebraic-theory-of-left-modules-rings public
+open import universal-algebra.algebraic-theory-of-monoids public
+open import universal-algebra.algebraic-theory-of-semigroups public
 open import universal-algebra.algebras public
 open import universal-algebra.category-of-algebras-algebraic-theories public
 open import universal-algebra.congruences public
