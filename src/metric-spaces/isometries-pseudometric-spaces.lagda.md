@@ -467,13 +467,6 @@ module _
     is-isometry-is-expansive-is-short-map-Pseudometric-Space H K d x y =
       (H d x y , K d x y)
 
-  isometry-is-expansive-is-short-map-Pseudometric-Space :
-    is-short-map-Pseudometric-Space A B f →
-    is-expansive-map-Pseudometric-Space A B f →
-    isometry-Pseudometric-Space A B
-  isometry-is-expansive-is-short-map-Pseudometric-Space H K =
-    (f , is-isometry-is-expansive-is-short-map-Pseudometric-Space H K)
-
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
