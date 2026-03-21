@@ -7,13 +7,18 @@ module ring-theory.large-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-similarity-relations
 open import foundation.sets
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.large-abelian-groups
 open import group-theory.large-monoids
 open import group-theory.large-semigroups
@@ -42,6 +47,10 @@ record Large-Ring (α : Level → Level) (β : Level → Level → Level) : UUω
 
   field
     large-ab-Large-Ring : Large-Ab α β
+
+  cumulative-large-set-Large-Ring : Cumulative-Large-Set α β
+  cumulative-large-set-Large-Ring =
+    cumulative-large-set-Large-Ab large-ab-Large-Ring
 
   type-Large-Ring : (l : Level) → UU (α l)
   type-Large-Ring = type-Large-Ab large-ab-Large-Ring
@@ -219,21 +228,21 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
   where
 
-  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α
+  multiplicative-large-semigroup-Large-Ring : Large-Semigroup α β
   multiplicative-large-semigroup-Large-Ring =
     make-Large-Semigroup
-      ( set-Large-Ring R)
-      ( mul-Large-Ring R)
+      ( cumulative-large-set-Large-Ring R)
+      ( make-sim-preserving-binary-operator-Cumulative-Large-Set
+        ( cumulative-large-set-Large-Ring R)
+        ( mul-Large-Ring R)
+        ( λ x x' y y' x~x' y~y' →
+          preserves-sim-mul-Large-Ring R x x' x~x' y y' y~y'))
       ( associative-mul-Large-Ring R)
 
   multiplicative-large-monoid-Large-Ring : Large-Monoid α β
   multiplicative-large-monoid-Large-Ring =
     make-Large-Monoid
       ( multiplicative-large-semigroup-Large-Ring)
-      ( large-similarity-relation-Large-Ring R)
-      ( raise-Large-Ring R)
-      ( sim-raise-Large-Ring R)
-      ( preserves-sim-mul-Large-Ring R)
       ( one-Large-Ring R)
       ( left-unit-law-mul-Large-Ring R)
       ( right-unit-law-mul-Large-Ring R)
@@ -321,9 +330,106 @@ module _
   hom-raise-Large-Ring =
     ( hom-raise-Large-Ab (large-ab-Large-Ring R) l1 l2 ,
       inv
-        ( raise-mul-Large-Monoid
+        ( mul-raise-raise-Large-Monoid
           ( multiplicative-large-monoid-Large-Ring R)
+          ( l2)
+          ( l2)
           ( _)
           ( _)) ,
       raise-raise-Large-Ring R _)
+```
+
+### Zero laws of multiplication
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (R : Large-Ring α β)
+  where
+
+  abstract
+    left-raise-zero-law-mul-Large-Ring :
+      (l1 : Level) {l2 : Level} (x : type-Large-Ring R l2) →
+      mul-Large-Ring R (raise-zero-Large-Ring R l1) x ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    left-raise-zero-law-mul-Large-Ring l1 {l2} x =
+      is-zero-is-idempotent-Ab
+        ( ab-Large-Ab (large-ab-Large-Ring R) (l1 ⊔ l2))
+        ( equational-reasoning
+          add-Large-Ring
+            ( R)
+            ( mul-Large-Ring R (raise-zero-Large-Ring R l1) x)
+            ( mul-Large-Ring R (raise-zero-Large-Ring R l1) x)
+          ＝
+            mul-Large-Ring R
+              ( add-Large-Ring R
+                ( raise-zero-Large-Ring R l1)
+                ( raise-zero-Large-Ring R l1))
+              ( x)
+            by inv (right-distributive-mul-add-Large-Ring R _ _ _)
+          ＝ mul-Large-Ring R (raise-zero-Large-Ring R l1) x
+            by
+              ap-binary
+                ( mul-Large-Ring R)
+                ( right-unit-law-add-Ab
+                  ( ab-Large-Ab (large-ab-Large-Ring R) l1)
+                  ( raise-zero-Large-Ring R l1))
+                ( refl))
+
+    left-zero-law-mul-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      sim-Large-Ring R
+        ( mul-Large-Ring R (zero-Large-Ring R) x)
+        ( zero-Large-Ring R)
+    left-zero-law-mul-Large-Ring {l} x =
+      inv-tr
+        ( λ y → sim-Large-Ring R y (zero-Large-Ring R))
+        ( ( ap-binary
+            ( mul-Large-Ring R)
+            ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))
+            ( refl)) ∙
+          ( left-raise-zero-law-mul-Large-Ring lzero x))
+        ( sim-raise-Large-Ring' R l (zero-Large-Ring R))
+
+    right-raise-zero-law-mul-Large-Ring :
+      (l1 : Level) {l2 : Level} (x : type-Large-Ring R l2) →
+      mul-Large-Ring R x (raise-zero-Large-Ring R l1) ＝
+      raise-zero-Large-Ring R (l1 ⊔ l2)
+    right-raise-zero-law-mul-Large-Ring l1 {l2} x =
+      is-zero-is-idempotent-Ab
+        ( ab-Large-Ab (large-ab-Large-Ring R) (l1 ⊔ l2))
+        ( equational-reasoning
+          add-Large-Ring
+            ( R)
+            ( mul-Large-Ring R x (raise-zero-Large-Ring R l1))
+            ( mul-Large-Ring R x (raise-zero-Large-Ring R l1))
+          ＝
+            mul-Large-Ring R
+              ( x)
+              ( add-Large-Ring R
+                ( raise-zero-Large-Ring R l1)
+                ( raise-zero-Large-Ring R l1))
+            by inv (left-distributive-mul-add-Large-Ring R _ _ _)
+          ＝ mul-Large-Ring R x (raise-zero-Large-Ring R l1)
+            by
+              ap-binary
+                ( mul-Large-Ring R)
+                ( refl)
+                ( right-unit-law-add-Ab
+                  ( ab-Large-Ab (large-ab-Large-Ring R) l1)
+                  ( raise-zero-Large-Ring R l1)))
+
+    right-zero-law-mul-Large-Ring :
+      {l : Level} (x : type-Large-Ring R l) →
+      sim-Large-Ring R
+        ( mul-Large-Ring R x (zero-Large-Ring R))
+        ( zero-Large-Ring R)
+    right-zero-law-mul-Large-Ring {l} x =
+      inv-tr
+        ( λ y → sim-Large-Ring R y (zero-Large-Ring R))
+        ( ( ap-binary
+            ( mul-Large-Ring R)
+            ( refl)
+            ( inv (eq-raise-Large-Ring R lzero (zero-Large-Ring R)))) ∙
+          ( right-raise-zero-law-mul-Large-Ring lzero x))
+        ( sim-raise-Large-Ring' R l (zero-Large-Ring R))
 ```

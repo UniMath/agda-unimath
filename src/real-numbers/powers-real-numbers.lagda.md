@@ -15,6 +15,7 @@ open import commutative-algebra.powers-of-elements-large-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.powers-positive-rational-numbers
@@ -27,6 +28,7 @@ open import foundation.binary-transport
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -111,6 +113,15 @@ abstract
 abstract
   power-one-ℝ : (n : ℕ) → power-ℝ n one-ℝ ＝ one-ℝ
   power-one-ℝ = power-one-Large-Commutative-Ring large-commutative-ring-ℝ
+```
+
+### For nonzero `n`, `0ⁿ = 0`
+
+```agda
+abstract
+  power-nonzero-zero-ℝ : (n : ℕ⁺) → power-ℝ (nat-ℕ⁺ n) zero-ℝ ＝ zero-ℝ
+  power-nonzero-zero-ℝ =
+    power-nonzero-zero-Large-Commutative-Ring large-commutative-ring-ℝ
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -542,6 +553,19 @@ abstract
           ( sim-power-raise-real-ℚ l n q)
           ( preserves-le-real-ℚ
             ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))
+```
+
+### For odd `n`, `x ↦ xⁿ` is injective
+
+```agda
+abstract
+  is-injective-power-is-odd-exponent-ℝ :
+    (l : Level) (n : ℕ) → is-odd-ℕ n →
+    is-injective (power-ℝ {l} n)
+  is-injective-power-is-odd-exponent-ℝ l n odd-n =
+    is-injective-is-strictly-increasing-endomap-ℝ
+      ( power-ℝ n)
+      ( is-strictly-increasing-power-is-odd-exponent-ℝ l n odd-n)
 ```
 
 ### For odd `n`, `x ↦ xⁿ` is cofinal and coinitial

@@ -1,4 +1,4 @@
-# Functoriality of metric quotients of pseudometric spaces and isometries
+# Functorial action on isometries of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -9,6 +9,7 @@ module metric-spaces.functoriality-isometries-metric-quotients-of-pseudometric-s
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -18,6 +19,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import metric-spaces.functoriality-short-maps-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-metric-spaces
@@ -25,6 +27,8 @@ open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-metric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces
 ```
@@ -283,4 +287,53 @@ module _
       ( metric-quotient-Pseudometric-Space P)
       ( metric-quotient-Pseudometric-Space R)
       ( htpy-comp-map-metric-quotient-isometry-Pseudometric-Space)
+```
+
+### Isometries with similar images induce homotopic isometries between the metric quotients
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (Q : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space P Q)
+  where abstract
+
+  htpy-sim-isometry-metric-quotient-Pseudometric-Space :
+    ( (x : type-Pseudometric-Space P) →
+      sim-Pseudometric-Space Q
+        ( map-isometry-Pseudometric-Space P Q f x)
+        ( map-isometry-Pseudometric-Space P Q g x)) →
+    htpy-map-isometry-Metric-Space
+      ( metric-quotient-Pseudometric-Space P)
+      ( metric-quotient-Pseudometric-Space Q)
+      ( isometry-metric-quotient-Pseudometric-Space P Q f)
+      ( isometry-metric-quotient-Pseudometric-Space P Q g)
+  htpy-sim-isometry-metric-quotient-Pseudometric-Space =
+    htpy-sim-short-map-metric-quotient-Pseudometric-Space P Q
+      ( short-map-isometry-Pseudometric-Space P Q f)
+      ( short-map-isometry-Pseudometric-Space P Q g)
+```
+
+### The action of metric quotients on short maps preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (Q : Pseudometric-Space l1' l2')
+  (f g : isometry-Pseudometric-Space P Q)
+  where abstract
+
+  preserves-htpy-isometry-metric-quotient-Pseudometric-Space :
+    htpy-map-isometry-Pseudometric-Space P Q f g →
+    htpy-map-isometry-Metric-Space
+      ( metric-quotient-Pseudometric-Space P)
+      ( metric-quotient-Pseudometric-Space Q)
+      ( isometry-metric-quotient-Pseudometric-Space P Q f)
+      ( isometry-metric-quotient-Pseudometric-Space P Q g)
+  preserves-htpy-isometry-metric-quotient-Pseudometric-Space =
+    preserves-htpy-short-map-metric-quotient-Pseudometric-Space P Q
+      ( short-map-isometry-Pseudometric-Space P Q f)
+      ( short-map-isometry-Pseudometric-Space P Q g)
 ```

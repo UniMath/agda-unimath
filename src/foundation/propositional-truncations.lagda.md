@@ -68,8 +68,7 @@ trunc-Prop = trunc neg-one-𝕋
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
 symbol `║` in the propositional truncation notation `║_║₋₁` can be inserted with
-`agda-input` using the escape sequence `\--=` and selecting the second item in
-the list.
+`agda-input` using the escape sequence `\--=2`.
 
 ## Properties
 
@@ -514,6 +513,12 @@ This syntax is particularly useful when we must assume elements from multiple
 propositional truncations, especially dependent ones, e.g.
 `witness-truncated-prop-Q p` above where the assumed element `p` was itself used
 to get a witness of `trunc-Prop Q`.
+
+## See also
+
+- In
+  [`foundation.propositional-truncation`](foundation.propositional-extensionality.md)
+  we show that `trunc-Prop` is a retraction.
 
 ## Table of files about propositional logic
 

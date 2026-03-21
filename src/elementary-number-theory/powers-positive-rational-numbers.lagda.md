@@ -14,6 +14,7 @@ open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.arithmetic-sequences-positive-rational-numbers
 open import elementary-number-theory.bernoullis-inequality-positive-rational-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.distance-rational-numbers
 open import elementary-number-theory.geometric-sequences-positive-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers

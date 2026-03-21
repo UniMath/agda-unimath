@@ -16,7 +16,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
-open import metric-spaces.cauchy-pseudocompletion-of-metric-spaces
+open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces

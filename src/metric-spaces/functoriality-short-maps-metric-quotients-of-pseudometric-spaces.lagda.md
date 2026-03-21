@@ -1,4 +1,4 @@
-# Functoriality of metric quotients of pseudometric spaces and short maps
+# Functorial action on short maps of metric quotients of pseudometric spaces
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -9,11 +9,13 @@ module metric-spaces.functoriality-short-maps-metric-quotients-of-pseudometric-s
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -24,6 +26,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces
 ```
@@ -285,4 +288,81 @@ module _
         ( short-map-metric-quotient-Pseudometric-Space Q R g)
         ( short-map-metric-quotient-Pseudometric-Space P Q f))
       ( htpy-comp-map-metric-quotient-short-map-Pseudometric-Space)
+```
+
+### Short maps with similar images induce homotopic short maps between the metric quotients
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (Q : Pseudometric-Space l1' l2')
+  (f g : short-map-Pseudometric-Space P Q)
+  where abstract
+
+  htpy-sim-short-map-metric-quotient-Pseudometric-Space :
+    ( (x : type-Pseudometric-Space P) →
+      sim-Pseudometric-Space Q
+        ( map-short-map-Pseudometric-Space P Q f x)
+        ( map-short-map-Pseudometric-Space P Q g x)) →
+    htpy-map-short-map-Metric-Space
+      ( metric-quotient-Pseudometric-Space P)
+      ( metric-quotient-Pseudometric-Space Q)
+      ( short-map-metric-quotient-Pseudometric-Space P Q f)
+      ( short-map-metric-quotient-Pseudometric-Space P Q g)
+  htpy-sim-short-map-metric-quotient-Pseudometric-Space H X =
+    let
+      open
+        do-syntax-trunc-Prop
+          ( eq-prop-Metric-Space
+            ( metric-quotient-Pseudometric-Space Q)
+            ( map-short-map-metric-quotient-Pseudometric-Space P Q f X)
+            ( map-short-map-metric-quotient-Pseudometric-Space P Q g X))
+
+    in do
+      ( x , x∈X) ← is-inhabited-class-metric-quotient-Pseudometric-Space P X
+
+      ( ( compute-map-exten-short-map-metric-quotient-Pseudometric-Space
+          ( P)
+          ( metric-quotient-Pseudometric-Space Q)
+          ( postcomp-short-map-unit-metric-quotient-Pseudometric-Space P Q f)
+          ( X)
+          ( x∈X)) ∙
+        ( eq-map-unit-metric-quotient-sim-Pseudometric-Space Q
+          ( map-short-map-Pseudometric-Space P Q f x)
+          ( map-short-map-Pseudometric-Space P Q g x)
+          ( H x)) ∙
+        ( inv
+          ( compute-map-exten-short-map-metric-quotient-Pseudometric-Space
+            ( P)
+            ( metric-quotient-Pseudometric-Space Q)
+            ( postcomp-short-map-unit-metric-quotient-Pseudometric-Space P Q g)
+            ( X)
+            ( x∈X))))
+```
+
+### The action of metric quotients on short maps preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (Q : Pseudometric-Space l1' l2')
+  (f g : short-map-Pseudometric-Space P Q)
+  where abstract
+
+  preserves-htpy-short-map-metric-quotient-Pseudometric-Space :
+    htpy-map-short-map-Pseudometric-Space P Q f g →
+    htpy-map-short-map-Metric-Space
+      ( metric-quotient-Pseudometric-Space P)
+      ( metric-quotient-Pseudometric-Space Q)
+      ( short-map-metric-quotient-Pseudometric-Space P Q f)
+      ( short-map-metric-quotient-Pseudometric-Space P Q g)
+  preserves-htpy-short-map-metric-quotient-Pseudometric-Space f~g =
+    htpy-sim-short-map-metric-quotient-Pseudometric-Space P Q f g
+      ( λ x →
+        sim-eq-Pseudometric-Space Q
+          ( map-short-map-Pseudometric-Space P Q f x)
+          ( map-short-map-Pseudometric-Space P Q g x)
+          ( f~g x))
 ```
