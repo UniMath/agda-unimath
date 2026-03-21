@@ -120,7 +120,7 @@ abstract
       ( λ a → is-0-connected-mere-eq a (K a))
 ```
 
-### A type is is 0-connected iff there is a point inclusion which is surjective
+### A type is 0-connected iff there is a point inclusion which is surjective
 
 ```agda
 is-0-connected-is-surjective-point :
