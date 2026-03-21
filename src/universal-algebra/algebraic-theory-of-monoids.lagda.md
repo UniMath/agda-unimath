@@ -7,8 +7,7 @@ module universal-algebra.algebraic-theory-of-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.standard-finite-types
 
 open import foundation.binary-homotopies
 open import foundation.binary-transport
@@ -86,12 +85,7 @@ algebraic-theory-Monoid : Algebraic-Theory lzero signature-Monoid
 pr1 algebraic-theory-Monoid = law-Monoid
 pr2 algebraic-theory-Monoid =
   let
-    var : (i k : ℕ) → term signature-Monoid (succ-ℕ k)
-    var i k = var-term (mod-succ-ℕ k i)
-    _*-term_ :
-      {k : ℕ} →
-      term signature-Monoid k → term signature-Monoid k →
-      term signature-Monoid k
+    x-term = var-term (zero-Fin 0)
     _*-term_ x y = op-term mul-operation-Monoid (x ∷ y ∷ empty-tuple)
     unit-term = op-term unit-operation-Monoid empty-tuple
   in
@@ -107,12 +101,12 @@ pr2 algebraic-theory-Monoid =
             ( law))
       left-unit-mul-law-Monoid →
         ( 1 ,
-          unit-term *-term var 0 0 ,
-          var 0 0)
+          unit-term *-term x-term ,
+          x-term)
       right-unit-mul-law-Monoid →
         ( 1 ,
-          var 0 0 *-term unit-term ,
-          var 0 0)
+          x-term *-term unit-term ,
+          x-term)
 
 Algebra-Monoid : (l : Level) → UU (lsuc l)
 Algebra-Monoid l =
