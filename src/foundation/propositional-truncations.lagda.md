@@ -514,6 +514,12 @@ propositional truncations, especially dependent ones, e.g.
 `witness-truncated-prop-Q p` above where the assumed element `p` was itself used
 to get a witness of `trunc-Prop Q`.
 
+## See also
+
+- In
+  [`foundation.propositional-truncation`](foundation.propositional-extensionality.md)
+  we show that `trunc-Prop` is a retraction.
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional

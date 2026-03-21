@@ -240,6 +240,27 @@ module _
   is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
 ```
 
+### Contractible types are null at all types
+
+```agda
+is-null-is-contr :
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
+is-null-is-contr {A = A} B is-contr-A =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-contr (terminal-map B) A is-contr-A)
+```
+
+### Propositions are null if the diagonal has a converse map
+
+```agda
+is-null-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop A → ((B → A) → A) → is-null B A
+is-null-is-prop {A = A} {B} is-prop-A f =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-prop (terminal-map B) A is-prop-A (λ g _ → f g))
+```
+
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
@@ -264,16 +285,6 @@ module _
             ( λ x → diagonal-exponential (B x) Y , is-null-B x)
         ≃ (Y → Σ A B)
         by inv-distributive-Π-Σ)
-```
-
-### Contractible types are null at all types
-
-```agda
-is-null-is-contr :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
-is-null-is-contr {A = A} B is-contr-A =
-  is-null-is-local-terminal-map B A
-    ( is-local-is-contr (terminal-map B) A is-contr-A)
 ```
 
 ### Propositions are null at inhabited types
@@ -370,7 +381,20 @@ module _
 
 ### Null types are closed under identity types
 
-> This remains to be formalized.
+```agda
+module _
+  {l1 l2 : Level} {Y : UU l1} {A : UU l2}
+  where
+
+  is-null-Id : is-null Y A → (x y : A) → is-null Y (x ＝ y)
+  is-null-Id is-null-A x y =
+    is-equiv-htpy-equiv'
+      ( ( equiv-funext
+            {f = diagonal-exponential A Y x}
+            {g = diagonal-exponential A Y y}) ∘e
+        ( equiv-ap (diagonal-exponential A Y , is-null-A) x y))
+      ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq x y Y)
+```
 
 ## See also
 

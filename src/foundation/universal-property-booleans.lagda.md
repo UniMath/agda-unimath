@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -128,4 +129,34 @@ module _
   projection-bool-coproduct : A + B → bool
   projection-bool-coproduct (inl _) = true
   projection-bool-coproduct (inr _) = false
+```
+
+### The booleans are equivalent to the coproduct of two units
+
+```agda
+map-bool-coproduct-unit : bool → unit + unit
+map-bool-coproduct-unit true = inl star
+map-bool-coproduct-unit false = inr star
+
+map-inv-bool-coproduct-unit : unit + unit → bool
+map-inv-bool-coproduct-unit (inl _) = true
+map-inv-bool-coproduct-unit (inr _) = false
+
+is-section-map-inv-bool-coproduct-unit :
+  (map-inv-bool-coproduct-unit ∘ map-bool-coproduct-unit) ~ id
+is-section-map-inv-bool-coproduct-unit true = refl
+is-section-map-inv-bool-coproduct-unit false = refl
+
+is-retraction-map-inv-bool-coproduct-unit :
+  (map-bool-coproduct-unit ∘ map-inv-bool-coproduct-unit) ~ id
+is-retraction-map-inv-bool-coproduct-unit (inl _) = refl
+is-retraction-map-inv-bool-coproduct-unit (inr _) = refl
+
+equiv-bool-coproduct-unit : bool ≃ (unit + unit)
+pr1 equiv-bool-coproduct-unit = map-bool-coproduct-unit
+pr2 equiv-bool-coproduct-unit =
+  is-equiv-is-invertible
+    map-inv-bool-coproduct-unit
+    is-retraction-map-inv-bool-coproduct-unit
+    is-section-map-inv-bool-coproduct-unit
 ```
