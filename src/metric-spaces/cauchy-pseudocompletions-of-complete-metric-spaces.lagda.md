@@ -203,9 +203,14 @@ module _
         ( metric-space-Complete-Metric-Space M))
       ( pseudometric-space-Complete-Metric-Space M)
       ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
-  is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y =
-    ( is-short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space M d x y ,
-      is-expansive-map-lim-cauchy-pseudocompletion-Complete-Metric-Space d x y)
+  is-isometry-lim-cauchy-pseudocompletion-Complete-Metric-Space =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space
+        ( metric-space-Complete-Metric-Space M))
+      ( pseudometric-space-Complete-Metric-Space M)
+      ( map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
+      ( is-short-map-lim-cauchy-pseudocompletion-Complete-Metric-Space M)
+      ( is-expansive-map-lim-cauchy-pseudocompletion-Complete-Metric-Space)
 
 module _
   {l1 l2 : Level} (M : Complete-Metric-Space l1 l2)
