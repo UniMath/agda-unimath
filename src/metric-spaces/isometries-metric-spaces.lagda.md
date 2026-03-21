@@ -530,7 +530,7 @@ module _
     ( short-map-isometry-Metric-Space , is-emb-short-map-isometry-Metric-Space)
 ```
 
-### Isometries are short expansive maps
+### Short and expansive maps are isometries
 
 ```agda
 module _
