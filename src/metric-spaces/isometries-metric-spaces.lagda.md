@@ -571,14 +571,6 @@ module _
         ( map-short-map-Metric-Space A B f)
         ( is-short-map-short-map-Metric-Space A B f)
 
-  isometry-is-expansive-map-short-map-Metric-Space :
-    is-expansive-map-Metric-Space A B
-      ( map-short-map-Metric-Space A B f) →
-    isometry-Metric-Space A B
-  isometry-is-expansive-map-short-map-Metric-Space K =
-    ( map-short-map-Metric-Space A B f ,
-      is-isometry-is-expansive-map-short-map-Metric-Space K)
-
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
