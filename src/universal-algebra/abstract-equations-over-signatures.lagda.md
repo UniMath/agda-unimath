@@ -7,10 +7,13 @@ module universal-algebra.abstract-equations-over-signatures where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import universal-algebra.extensions-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -37,11 +40,36 @@ module _
   where
 
   abstract-equation : UU l1
-  abstract-equation = term σ × term σ
+  abstract-equation = Σ ℕ (λ k → term σ k × term σ k)
 
-  lhs-abstract-equation : abstract-equation → term σ
-  lhs-abstract-equation = pr1
+module _
+  {l : Level} (σ : signature l) ((k , lhs , rhs) : abstract-equation σ)
+  where
 
-  rhs-abstract-equation : abstract-equation → term σ
-  rhs-abstract-equation = pr2
+  arity-abstract-equation : ℕ
+  arity-abstract-equation = k
+
+  lhs-abstract-equation : term σ arity-abstract-equation
+  lhs-abstract-equation = lhs
+
+  rhs-abstract-equation : term σ arity-abstract-equation
+  rhs-abstract-equation = rhs
+```
+
+## Properties
+
+### Translation of equations
+
+```agda
+module _
+  {l1 l2 : Level}
+  (σ : signature l1)
+  (τ : signature l2)
+  (E : is-extension-of-signature σ τ)
+  where
+
+  translation-abstract-equation :
+    abstract-equation σ → abstract-equation τ
+  translation-abstract-equation (k , lhs , rhs) =
+    ( k , translation-term σ τ E lhs , translation-term σ τ E rhs)
 ```
