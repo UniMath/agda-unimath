@@ -491,14 +491,6 @@ module _
         ( map-short-map-Pseudometric-Space A B f)
         ( is-short-map-short-map-Pseudometric-Space A B f)
 
-  isometry-is-expansive-map-short-map-Pseudometric-Space :
-    is-expansive-map-Pseudometric-Space A B
-      ( map-short-map-Pseudometric-Space A B f) →
-    isometry-Pseudometric-Space A B
-  isometry-is-expansive-map-short-map-Pseudometric-Space K =
-    ( map-short-map-Pseudometric-Space A B f ,
-      is-isometry-is-expansive-map-short-map-Pseudometric-Space K)
-
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
