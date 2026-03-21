@@ -7,14 +7,13 @@ module universal-algebra.algebraic-theory-of-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
@@ -25,8 +24,6 @@ open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 
 open import lists.tuples
-
-open import univalent-combinatorics.classical-finite-types
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
@@ -57,14 +54,14 @@ pr1 signature-Semigroup = operation-Semigroup
 pr2 signature-Semigroup mul-operation-Semigroup = 2
 
 data law-Semigroup : UU lzero where
-  associative-law-Semigroup : law-Semigroup
+  associative-mul-law-Semigroup : law-Semigroup
 
 algebraic-theory-Semigroup : Algebraic-Theory lzero signature-Semigroup
 pr1 algebraic-theory-Semigroup = law-Semigroup
-pr2 algebraic-theory-Semigroup associative-law-Semigroup =
+pr2 algebraic-theory-Semigroup associative-mul-law-Semigroup =
   let
-    var : (i : ℕ) → {le-ℕ i 3} → term signature-Semigroup 3
-    var i {i<3} = var-term (standard-classical-Fin 3 (i , i<3))
+    var : (i : ℕ) → term signature-Semigroup 3
+    var i = var-term (mod-succ-ℕ 2 i)
     _*_ x y = op-term mul-operation-Semigroup (x ∷ y ∷ empty-tuple)
   in
     ( 3 ,
@@ -100,7 +97,7 @@ module _
     mul-Algebra-Semigroup x (mul-Algebra-Semigroup y z)
   associative-mul-Algebra-Semigroup x y z =
     satisfies-A
-      ( associative-law-Semigroup)
+      ( associative-mul-law-Semigroup)
       ( component-tuple 3 (z ∷ y ∷ x ∷ empty-tuple))
 
   semigroup-Algebra-Semigroup : Semigroup l
@@ -114,30 +111,28 @@ module _
   (G : Semigroup l)
   where
 
-  is-model-of-signature-Semigroup-Semigroup :
+  is-model-Semigroup :
     is-model-of-signature signature-Semigroup (set-Semigroup G)
-  is-model-of-signature-Semigroup-Semigroup
+  is-model-Semigroup
     mul-operation-Semigroup (x ∷ y ∷ empty-tuple) =
     mul-Semigroup G x y
 
-  model-of-signature-Semigroup-Semigroup :
+  model-Semigroup :
     Model-Of-Signature l signature-Semigroup
-  model-of-signature-Semigroup-Semigroup =
-    ( set-Semigroup G ,
-      is-model-of-signature-Semigroup-Semigroup)
+  model-Semigroup = (set-Semigroup G , is-model-Semigroup)
 
-  is-algebra-semigroup-Semigroup :
+  is-algebra-model-Semigroup :
     is-algebra-Model-of-Signature
       ( signature-Semigroup)
       ( algebraic-theory-Semigroup)
-      ( model-of-signature-Semigroup-Semigroup)
-  is-algebra-semigroup-Semigroup associative-law-Semigroup xs =
+      ( model-Semigroup)
+  is-algebra-model-Semigroup associative-mul-law-Semigroup xs =
     associative-mul-Semigroup G _ _ _
 
   algebra-semigroup-Semigroup : Algebra-Semigroup l
   algebra-semigroup-Semigroup =
-    ( model-of-signature-Semigroup-Semigroup ,
-      is-algebra-semigroup-Semigroup)
+    ( model-Semigroup ,
+      is-algebra-model-Semigroup)
 
 abstract
   is-section-semigroup-Algebra-Semigroup :
