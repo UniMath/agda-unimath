@@ -7,8 +7,7 @@ module universal-algebra.algebraic-theory-of-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.standard-finite-types
 
 open import foundation.binary-homotopies
 open import foundation.binary-transport
@@ -70,11 +69,11 @@ pr2 signature-Monoid unit-operation-Monoid = 0
 
 data law-Monoid : UU lzero where
   law-monoid-law-Semigroup : law-Semigroup → law-Monoid
-  left-unit-law-law-Monoid : law-Monoid
-  right-unit-law-law-Monoid : law-Monoid
+  left-unit-mul-law-Monoid : law-Monoid
+  right-unit-mul-law-Monoid : law-Monoid
 
-pattern associative-law-Monoid =
-  law-monoid-law-Semigroup associative-law-Semigroup
+pattern associative-mul-law-Monoid =
+  law-monoid-law-Semigroup associative-mul-law-Semigroup
 
 extension-signature-semigroup-Monoid :
   is-extension-of-signature signature-Semigroup signature-Monoid
@@ -86,12 +85,7 @@ algebraic-theory-Monoid : Algebraic-Theory lzero signature-Monoid
 pr1 algebraic-theory-Monoid = law-Monoid
 pr2 algebraic-theory-Monoid =
   let
-    var : (i k : ℕ) → term signature-Monoid (succ-ℕ k)
-    var i k = var-term (mod-succ-ℕ k i)
-    _*-term_ :
-      {k : ℕ} →
-      term signature-Monoid k → term signature-Monoid k →
-      term signature-Monoid k
+    x-term = var-term (zero-Fin 0)
     _*-term_ x y = op-term mul-operation-Monoid (x ∷ y ∷ empty-tuple)
     unit-term = op-term unit-operation-Monoid empty-tuple
   in
@@ -105,14 +99,14 @@ pr2 algebraic-theory-Monoid =
             ( signature-Semigroup)
             ( algebraic-theory-Semigroup)
             ( law))
-      left-unit-law-law-Monoid →
+      left-unit-mul-law-Monoid →
         ( 1 ,
-          unit-term *-term var 0 0 ,
-          var 0 0)
-      right-unit-law-law-Monoid →
+          unit-term *-term x-term ,
+          x-term)
+      right-unit-mul-law-Monoid →
         ( 1 ,
-          var 0 0 *-term unit-term ,
-          var 0 0)
+          x-term *-term unit-term ,
+          x-term)
 
 Algebra-Monoid : (l : Level) → UU (lsuc l)
 Algebra-Monoid l =
@@ -152,11 +146,11 @@ module _
       ( signature-Monoid)
       ( algebraic-theory-Monoid)
       ( model-set-Monoid)
-  is-algebra-model-set-Monoid associative-law-Monoid _ =
+  is-algebra-model-set-Monoid associative-mul-law-Monoid _ =
     associative-mul-Monoid M _ _ _
-  is-algebra-model-set-Monoid left-unit-law-law-Monoid _ =
+  is-algebra-model-set-Monoid left-unit-mul-law-Monoid _ =
     left-unit-law-mul-Monoid M _
-  is-algebra-model-set-Monoid right-unit-law-law-Monoid _ =
+  is-algebra-model-set-Monoid right-unit-mul-law-Monoid _ =
     right-unit-law-mul-Monoid M _
 
   algebra-monoid-Monoid : Algebra-Monoid l
@@ -178,7 +172,7 @@ module _
     ( ( set-A ,
         model-A ∘ operation-monoid-operation-Semigroup) ,
       λ where
-        associative-law-Semigroup → satisfies-A associative-law-Monoid)
+        associative-mul-law-Semigroup → satisfies-A associative-mul-law-Monoid)
 
   semigroup-Algebra-Monoid : Semigroup l
   semigroup-Algebra-Monoid =
@@ -197,12 +191,12 @@ module _
   left-unit-law-mul-Algebra-Monoid :
     left-unit-law mul-Algebra-Monoid unit-Algebra-Monoid
   left-unit-law-mul-Algebra-Monoid x =
-    satisfies-A left-unit-law-law-Monoid (λ _ → x)
+    satisfies-A left-unit-mul-law-Monoid (λ _ → x)
 
   right-unit-law-mul-Algebra-Monoid :
     right-unit-law mul-Algebra-Monoid unit-Algebra-Monoid
   right-unit-law-mul-Algebra-Monoid x =
-    satisfies-A right-unit-law-law-Monoid (λ _ → x)
+    satisfies-A right-unit-mul-law-Monoid (λ _ → x)
 
   monoid-Algebra-Monoid : Monoid l
   monoid-Algebra-Monoid =
