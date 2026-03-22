@@ -11,6 +11,7 @@ module analysis.multiplication-differentiable-real-functions-on-proper-closed-in
 ```agda
 open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
@@ -105,6 +106,93 @@ module _
     in map f x *ℝ map g' x +ℝ map f' x *ℝ map g x
 
   abstract
+    lemma-is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ :
+      (x y : type-proper-closed-interval-ℝ l1 [a,b]) (z : ℝ l1) →
+      dist-ℝ
+        ( (map-f y *ℝ map-g y) -ℝ (map-f x *ℝ map-g x))
+        ( (map-f x *ℝ map-g' x +ℝ map-f' x *ℝ map-g x) *ℝ z) ＝
+      abs-ℝ
+        ( ( map-f y *ℝ (map-g y -ℝ map-g x) -ℝ map-f x *ℝ (map-g' x *ℝ z)) +ℝ
+          ( (map-f y -ℝ map-f x -ℝ map-f' x *ℝ z)) *ℝ map-g x)
+    lemma-is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ
+      x y z =
+      let
+        fy = map-f y
+        gy = map-g y
+        fx = map-f x
+        gx = map-g x
+        f'x = map-f' x
+        g'x = map-g' x
+      in
+        equational-reasoning
+          dist-ℝ (fy *ℝ gy -ℝ fx *ℝ gx) ((fx *ℝ g'x +ℝ f'x *ℝ gx) *ℝ z)
+          ＝ dist-ℝ (fy *ℝ gy -ℝ fx *ℝ gx) (fx *ℝ g'x *ℝ z +ℝ f'x *ℝ gx *ℝ z)
+            by ap-dist-ℝ refl (right-distributive-mul-add-ℝ _ _ z)
+          ＝ dist-ℝ (fy *ℝ gy -ℝ fx *ℝ gx) (fx *ℝ g'x *ℝ z +ℝ f'x *ℝ z *ℝ gx)
+            by ap-dist-ℝ refl (ap-add-ℝ refl (right-swap-mul-ℝ f'x gx z))
+          ＝
+            abs-ℝ
+              ( ( fy *ℝ gy -ℝ fx *ℝ g'x *ℝ z) +ℝ
+                ( neg-ℝ (fx *ℝ gx) -ℝ f'x *ℝ z *ℝ gx))
+            by ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _)
+          ＝ dist-ℝ (fy *ℝ gy -ℝ fx *ℝ g'x *ℝ z) (fx *ℝ gx +ℝ f'x *ℝ z *ℝ gx)
+            by ap abs-ℝ (ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)))
+          ＝ dist-ℝ (fy *ℝ gy -ℝ fx *ℝ g'x *ℝ z) ((fx +ℝ f'x *ℝ z) *ℝ gx)
+            by
+              ap-dist-ℝ
+                { l1 ⊔ l2 ⊔ l3} -- the compiler seems to need a little help
+                ( refl)
+                ( inv (right-distributive-mul-add-ℝ _ _ _))
+          ＝
+            dist-ℝ
+              ( (fy *ℝ gy -ℝ fx *ℝ g'x *ℝ z) -ℝ fy *ℝ gx)
+              ( (fx +ℝ f'x *ℝ z) *ℝ gx -ℝ fy *ℝ gx)
+            by inv (eq-sim-ℝ (preserves-dist-right-add-ℝ _ _ _))
+          ＝
+            dist-ℝ
+              ( (fy *ℝ gy -ℝ fy *ℝ gx) -ℝ fx *ℝ g'x *ℝ z)
+              ( ((fx +ℝ f'x *ℝ z) -ℝ fy) *ℝ gx)
+            by
+              ap-dist-ℝ
+                { l1 ⊔ l2 ⊔ l3}
+                ( right-swap-add-ℝ (fy *ℝ gy) _ (neg-ℝ (fy *ℝ gx)))
+                ( inv (right-distributive-mul-diff-ℝ _ _ _))
+          ＝
+            dist-ℝ
+              ( fy *ℝ (gy -ℝ gx) -ℝ fx *ℝ g'x *ℝ z)
+              ( ((fx +ℝ f'x *ℝ z) -ℝ fy) *ℝ gx)
+            by
+              ap-dist-ℝ
+                { l1 ⊔ l2 ⊔ l3}
+                ( ap
+                  ( _-ℝ fx *ℝ g'x *ℝ z)
+                  ( inv (left-distributive-mul-diff-ℝ _ _ _)))
+                ( refl)
+          ＝
+            abs-ℝ
+              ( ( fy *ℝ (gy -ℝ gx) -ℝ fx *ℝ g'x *ℝ z) +ℝ
+                ( neg-ℝ ((fx +ℝ f'x *ℝ z) -ℝ fy) *ℝ gx))
+            by ap abs-ℝ (ap-add-ℝ refl (inv (left-negative-law-mul-ℝ _ _)))
+          ＝
+            abs-ℝ
+              ( ( fy *ℝ (gy -ℝ gx) -ℝ fx *ℝ g'x *ℝ z) +ℝ
+                ( fy -ℝ (fx +ℝ f'x *ℝ z)) *ℝ gx)
+            by
+              ap
+                ( abs-ℝ)
+                ( ap-add-ℝ refl (ap-mul-ℝ (distributive-neg-diff-ℝ _ _) refl))
+          ＝
+            abs-ℝ
+              ( ( fy *ℝ (gy -ℝ gx) -ℝ fx *ℝ (g'x *ℝ z)) +ℝ
+                ( (fy -ℝ fx -ℝ f'x *ℝ z)) *ℝ gx)
+            by
+              ap
+                ( abs-ℝ)
+                ( ap-add-ℝ
+                  ( ap-diff-ℝ refl (associative-mul-ℝ fx g'x z))
+                  ( ap-mul-ℝ (inv (associative-diff-ℝ _ _ _)) refl))
+
+  abstract
     is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ :
       is-derivative-real-map-proper-closed-interval-ℝ
         ( [a,b])
@@ -138,26 +226,6 @@ module _
             ( g')
         M₀ = max-ℝ (max-ℝ Mf Mg) Mg'
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
-        combine-left-mul-real-ℚ⁺ :
-          (p q : ℚ⁺) (z : ℝ l1) →
-          real-ℚ⁺ p *ℝ (real-ℚ⁺ q *ℝ z) ＝ real-ℚ⁺ (p *ℚ⁺ q) *ℝ z
-        combine-left-mul-real-ℚ⁺ p q z =
-          ( inv (associative-mul-ℝ (real-ℚ⁺ p) (real-ℚ⁺ q) z)) ∙
-          ( ap-mul-ℝ (mul-real-ℚ _ _) refl)
-        cancellation-helper p q r z =
-          equational-reasoning
-            real-ℚ⁺ p *ℝ (real-ℚ⁺ q *ℝ (real-ℚ⁺ (inv-ℚ⁺ (p *ℚ⁺ q) *ℚ⁺ r) *ℝ z))
-            ＝ real-ℚ⁺ (p *ℚ⁺ q) *ℝ (real-ℚ⁺ (inv-ℚ⁺ (p *ℚ⁺ q) *ℚ⁺ r) *ℝ z)
-              by combine-left-mul-real-ℚ⁺ p q _
-            ＝ real-ℚ⁺ ((p *ℚ⁺ q) *ℚ⁺ (inv-ℚ⁺ (p *ℚ⁺ q) *ℚ⁺ r)) *ℝ z
-              by combine-left-mul-real-ℚ⁺ _ _ z
-            ＝ real-ℚ⁺ r *ℝ z
-              by
-                ap-mul-ℝ
-                  ( ap
-                    ( real-ℚ⁺)
-                    ( eq-ℚ⁺ (is-section-left-div-ℚ⁺ (p *ℚ⁺ q) (rational-ℚ⁺ r))))
-                  ( refl)
       in do
         (δf , is-mod-δf) ← is-derivative-f-f'
         (δg , is-mod-δg) ← is-derivative-g-g'
@@ -202,6 +270,20 @@ module _
                 by leq-right-max-ℝ _ _
               ≤ real-ℚ⁺ M⁺
                 by leq-le-ℝ M₀<M⁺
+          δ≤δf-shrink ε =
+            transitive-leq-ℚ⁺
+              ( δ ε)
+              ( min-ℚ⁺ (δf (shrink ε)) (δg (shrink ε)))
+              ( δf (shrink ε))
+              ( leq-left-min-ℚ⁺ (δf (shrink ε)) (δg (shrink ε)))
+              ( leq-left-min-ℚ⁺ _ _)
+          δ≤δg-shrink ε =
+            transitive-leq-ℚ⁺
+              ( δ ε)
+              ( min-ℚ⁺ (δf (shrink ε)) (δg (shrink ε)))
+              ( δg (shrink ε))
+              ( leq-right-min-ℚ⁺ (δf (shrink ε)) (δg (shrink ε)))
+              ( leq-left-min-ℚ⁺ _ _)
         intro-exists
           ( δ)
           ( λ ε x@(xℝ , _) y@(yℝ , _) Nδxy →
@@ -209,195 +291,98 @@ module _
               dist-ℝ
                 ( (map-f y *ℝ map-g y) -ℝ (map-f x *ℝ map-g x))
                 ( (map-f x *ℝ map-g' x +ℝ map-f' x *ℝ map-g x) *ℝ (yℝ -ℝ xℝ))
-              ≤ dist-ℝ
-                  ( ( map-f y *ℝ map-g y) -ℝ (map-f x *ℝ map-g x))
-                  ( ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ)) +ℝ
-                    ( (map-f' x *ℝ map-g x) *ℝ (yℝ -ℝ xℝ)))
-                by
-                  leq-eq-ℝ (ap-dist-ℝ refl (right-distributive-mul-add-ℝ _ _ _))
-              ≤ dist-ℝ
-                  ( ( map-f y *ℝ map-g y) -ℝ (map-f x *ℝ map-g x))
-                  ( ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ)) +ℝ
-                    ( (map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x))
-                by
-                  leq-eq-ℝ
-                    ( ap-dist-ℝ refl (ap-add-ℝ refl (right-swap-mul-ℝ _ _ _)))
               ≤ abs-ℝ
-                  ( ( ( map-f y *ℝ map-g y) -ℝ
-                      ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ))) +ℝ
-                    ( ( neg-ℝ (map-f x *ℝ map-g x)) -ℝ
-                      ( map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x))
-                by leq-eq-ℝ (ap abs-ℝ (interchange-law-diff-add-ℝ _ _ _ _))
-              ≤ dist-ℝ
-                  ( ( map-f y *ℝ map-g y) -ℝ
-                    ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ)))
-                  ( ( map-f x *ℝ map-g x) +ℝ
-                    ( map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x)
+                  ( ( ( map-f y *ℝ (map-g y -ℝ map-g x)) -ℝ
+                      ( map-f x *ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
+                    ( ( map-f y -ℝ map-f x -ℝ map-f' x *ℝ (yℝ -ℝ xℝ))) *ℝ
+                      ( map-g x))
                 by
                   leq-eq-ℝ
-                    ( inv
-                      ( ap abs-ℝ (ap-add-ℝ refl (distributive-neg-add-ℝ _ _))))
-              ≤ dist-ℝ
-                  ( ( map-f y *ℝ map-g y) -ℝ
-                    ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ)))
-                  ( ( map-f x +ℝ map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x)
-                by
-                  leq-eq-ℝ
-                    ( ap-dist-ℝ refl (inv (right-distributive-mul-add-ℝ _ _ _)))
-              ≤ dist-ℝ
-                  ( ( ( map-f y *ℝ map-g y) -ℝ
-                      ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ))) -ℝ
-                    ( map-f y *ℝ map-g x))
-                  ( ( ( map-f x +ℝ map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x) -ℝ
-                    ( map-f y *ℝ map-g x))
-                by leq-sim-ℝ' (preserves-dist-right-add-ℝ _ _ _)
-              ≤ abs-ℝ
-                  ( ( ( ( map-f y *ℝ map-g y) -ℝ
-                        ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ))) -ℝ
-                      ( map-f y *ℝ map-g x)) +ℝ
-                    ( ( map-f y *ℝ map-g x) -ℝ
-                      ( (map-f x +ℝ map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x)))
-                by
-                  leq-eq-ℝ
-                    ( ap abs-ℝ (ap-add-ℝ refl (distributive-neg-diff-ℝ _ _)))
-              ≤ ( dist-ℝ
-                  ( ( map-f y *ℝ map-g y) -ℝ
-                    ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ)))
-                  ( map-f y *ℝ map-g x)) +ℝ
-                ( dist-ℝ
-                  ( map-f y *ℝ map-g x)
-                  ( (map-f x +ℝ map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x))
-                by triangle-inequality-abs-ℝ _ _
-              ≤ ( dist-ℝ
-                  ( (map-f y *ℝ map-g y) -ℝ (map-f y *ℝ map-g x))
-                  ( (map-f x *ℝ map-g' x) *ℝ (yℝ -ℝ xℝ))) +ℝ
-                ( ( dist-ℝ (map-f y) (map-f x +ℝ map-f' x *ℝ (yℝ -ℝ xℝ))) *ℝ
-                  ( abs-ℝ (map-g x)))
-                by
-                  leq-eq-ℝ
-                    ( ap-add-ℝ
-                      ( ap abs-ℝ (right-swap-add-ℝ _ _ _))
-                      ( inv (right-distributive-abs-mul-dist-ℝ _ _ _)))
+                    ( lemma-is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ
+                      ( x)
+                      ( y)
+                      ( yℝ -ℝ xℝ))
               ≤ ( dist-ℝ
                   ( map-f y *ℝ (map-g y -ℝ map-g x))
                   ( map-f x *ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                ( ( dist-ℝ
-                    ( map-f y -ℝ map-f x)
-                    ( map-f' x *ℝ (yℝ -ℝ xℝ))) *ℝ
-                  ( abs-ℝ (map-g x)))
-                by
-                  leq-eq-ℝ
-                    ( ap-add-ℝ
-                      ( ap-dist-ℝ
-                        ( inv (left-distributive-mul-diff-ℝ _ _ _))
-                        ( associative-mul-ℝ _ _ _))
-                      ( ap-mul-ℝ
-                        ( ap abs-ℝ (inv (associative-diff-ℝ _ _ _)))
-                        ( refl)))
+                ( abs-ℝ
+                  ( (map-f y -ℝ map-f x -ℝ map-f' x *ℝ (yℝ -ℝ xℝ)) *ℝ map-g x))
+                by triangle-inequality-abs-ℝ _ _
               ≤ ( dist-ℝ
                   ( map-f y *ℝ (map-g y -ℝ map-g x))
                   ( map-f y *ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
                 ( dist-ℝ
                   ( map-f y *ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))
                   ( map-f x *ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                ( real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ *ℝ real-ℚ⁺ M⁺)
+                ( ( dist-ℝ (map-f y -ℝ map-f x) (map-f' x *ℝ (yℝ -ℝ xℝ))) *ℝ
+                  ( abs-ℝ (map-g x)))
                 by
                   preserves-leq-add-ℝ
                     ( triangle-inequality-dist-ℝ _ _ _)
-                    ( preserves-leq-mul-ℝ⁰⁺
-                      ( nonnegative-dist-ℝ _ _)
-                      ( ( nonnegative-real-ℚ⁺ (shrink ε)) *ℝ⁰⁺
-                        ( nonnegative-dist-ℝ xℝ yℝ))
-                      ( nonnegative-abs-ℝ _)
-                      ( nonnegative-real-ℚ⁺ M⁺)
-                      ( is-mod-δf
-                        ( shrink ε)
-                        ( x)
-                        ( y)
-                        ( weakly-monotonic-neighborhood-ℝ
-                          ( xℝ)
-                          ( yℝ)
-                          ( δ ε)
-                          ( δf (shrink ε))
-                          ( transitive-leq-ℚ _ _ _
-                            ( leq-left-min-ℚ⁺ (δf (shrink ε)) (δg (shrink ε)))
-                            ( leq-left-min-ℚ⁺ _ _))
-                          ( Nδxy)))
-                      ( |g|≤M⁺ x))
+                    ( leq-eq-ℝ (abs-mul-ℝ _ _))
               ≤ ( ( abs-ℝ (map-f y)) *ℝ
                   ( dist-ℝ (map-g y -ℝ map-g x) (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
                 ( ( dist-ℝ (map-f y) (map-f x)) *ℝ
                   ( abs-ℝ (map-g' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                ( real-ℚ⁺ (shrink ε) *ℝ real-ℚ⁺ M⁺ *ℝ dist-ℝ xℝ yℝ)
+                ( ( abs-ℝ (map-g x)) *ℝ
+                  ( dist-ℝ (map-f y -ℝ map-f x) (map-f' x *ℝ (yℝ -ℝ xℝ))))
                 by
                   leq-eq-ℝ
                     ( ap-add-ℝ
                       ( ap-add-ℝ
                         ( inv (left-distributive-abs-mul-dist-ℝ _ _ _))
                         ( inv (right-distributive-abs-mul-dist-ℝ _ _ _)))
-                      ( right-swap-mul-ℝ _ _ _))
+                      ( commutative-mul-ℝ _ _))
               ≤ ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)) +ℝ
                 ( real-ℚ⁺ (shrink ε) *ℝ (abs-ℝ (map-g' x) *ℝ dist-ℝ yℝ xℝ)) +ℝ
-                ( real-ℚ⁺ M⁺ *ℝ real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)
+                ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ))
                 by
                   preserves-leq-add-ℝ
                     ( preserves-leq-add-ℝ
                       ( preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-abs-ℝ _)
+                        ( nonnegative-abs-ℝ (map-f y))
                         ( nonnegative-real-ℚ⁺ M⁺)
                         ( nonnegative-dist-ℝ _ _)
                         ( ( nonnegative-real-ℚ⁺ (shrink ε)) *ℝ⁰⁺
-                          ( nonnegative-dist-ℝ _ _))
+                          ( nonnegative-dist-ℝ xℝ yℝ))
                         ( |f|≤M⁺ y)
-                        ( is-mod-δg
-                          ( shrink ε)
-                          ( x)
-                          ( y)
-                          ( weakly-monotonic-neighborhood-ℝ
-                            ( xℝ)
-                            ( yℝ)
-                            ( δ ε)
-                            ( δg (shrink ε))
-                            ( transitive-leq-ℚ _ _ _
-                              ( leq-right-min-ℚ⁺
-                                ( δf (shrink ε))
-                                ( δg (shrink ε)))
-                              ( leq-left-min-ℚ⁺ _ _))
+                        ( is-mod-δg (shrink ε) x y
+                          ( weakly-monotonic-neighborhood-ℝ xℝ yℝ (δ ε) _
+                            ( δ≤δg-shrink ε)
                             ( Nδxy))))
                       ( preserves-leq-mul-ℝ⁰⁺
-                        ( nonnegative-abs-ℝ _)
+                        ( nonnegative-dist-ℝ _ _)
                         ( nonnegative-real-ℚ⁺ (shrink ε))
                         ( nonnegative-abs-ℝ _)
                         ( nonnegative-abs-ℝ _ *ℝ⁰⁺ nonnegative-dist-ℝ _ _)
-                        ( leq-dist-neighborhood-ℝ
-                          ( shrink ε)
-                          ( map-f y)
-                          ( map-f x)
-                          ( is-mod-ωf
-                            ( y)
-                            ( shrink ε)
-                            ( x)
-                            ( weakly-monotonic-neighborhood-ℝ
-                              ( yℝ)
-                              ( xℝ)
-                              ( δ ε)
-                              ( ωf (shrink ε))
+                        ( leq-dist-neighborhood-ℝ (shrink ε) _ _
+                          ( is-mod-ωf y (shrink ε) x
+                            ( weakly-monotonic-neighborhood-ℝ yℝ xℝ (δ ε) _
                               ( leq-right-min-ℚ⁺ _ _)
                               ( is-symmetric-neighborhood-ℝ (δ ε) xℝ yℝ Nδxy))))
                         ( leq-eq-ℝ (abs-mul-ℝ _ _))))
-                    ( leq-eq-ℝ (ap-mul-ℝ (commutative-mul-ℝ _ _) refl))
+                    ( preserves-leq-mul-ℝ⁰⁺
+                      ( nonnegative-abs-ℝ (map-g x))
+                      ( nonnegative-real-ℚ⁺ M⁺)
+                      ( nonnegative-dist-ℝ _ _)
+                      ( ( nonnegative-real-ℚ⁺ (shrink ε)) *ℝ⁰⁺
+                        ( nonnegative-dist-ℝ xℝ yℝ))
+                      ( |g|≤M⁺ x)
+                      ( is-mod-δf (shrink ε) x y
+                        ( weakly-monotonic-neighborhood-ℝ xℝ yℝ (δ ε) _
+                          ( δ≤δf-shrink ε)
+                          ( Nδxy))))
               ≤ ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)) +ℝ
                 ( real-ℚ⁺ (shrink ε) *ℝ (real-ℚ⁺ M⁺ *ℝ dist-ℝ yℝ xℝ)) +ℝ
                 ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ))
                 by
-                  preserves-leq-add-ℝ
+                  preserves-leq-right-add-ℝ _ _ _
                     ( preserves-leq-left-add-ℝ _ _ _
                       ( preserves-leq-left-mul-ℝ⁰⁺
                         ( nonnegative-real-ℚ⁺ (shrink ε))
                         ( preserves-leq-right-mul-ℝ⁰⁺
                           ( nonnegative-dist-ℝ yℝ xℝ)
                           ( |g'|≤M⁺ x))))
-                    ( leq-eq-ℝ (associative-mul-ℝ _ _ _))
               ≤ ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)) +ℝ
                 ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)) +ℝ
                 ( real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ))
@@ -413,8 +398,17 @@ module _
                       ( refl))
               ≤ real-ℕ 3 *ℝ (real-ℚ⁺ M⁺ *ℝ (real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ))
                 by leq-eq-ℝ (inv (left-mul-real-ℕ 3 _))
+              ≤ ( real-ℚ⁺ (three-ℚ⁺ *ℚ⁺ M⁺)) *ℝ
+                ( real-ℚ⁺ (shrink ε) *ℝ dist-ℝ xℝ yℝ)
+                by leq-eq-ℝ (combine-left-mul-real-ℚ _ _ _)
+              ≤ ( real-ℚ⁺ (three-ℚ⁺ *ℚ⁺ M⁺ *ℚ⁺ shrink ε)) *ℝ dist-ℝ xℝ yℝ
+                by leq-eq-ℝ (combine-left-mul-real-ℚ _ _ _)
               ≤ real-ℚ⁺ ε *ℝ dist-ℝ xℝ yℝ
-                by leq-eq-ℝ (cancellation-helper three-ℚ⁺ M⁺ ε (dist-ℝ xℝ yℝ)))
+                by
+                  leq-eq-ℝ
+                    ( ap-mul-ℝ
+                      ( ap real-ℚ⁺ (eq-ℚ⁺ (is-section-left-div-ℚ⁺ _ _)))
+                      ( refl)))
 
 module _
   {l1 l2 l3 : Level}
