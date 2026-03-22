@@ -193,7 +193,7 @@ module _
       is-equiv (equiv-eq-Algebra A B)
     is-equiv-equiv-eq-Algebra (A , p) =
       subtype-identity-principle
-        ( is-prop-is-algebra σ T)
+        ( is-prop-is-algebra-Model-of-Signature σ T)
         ( p)
         ( id-equiv-Model-Of-Signature σ A)
         ( equiv-eq-Algebra (A , p))
@@ -315,7 +315,7 @@ module _
         ( is-torsorial-equiv-Algebra σ T A)
 
   iso-eq-Algebra :
-      (A B : Algebra l3 σ T) → A ＝ B → iso-Algebra σ T A B
+    (A B : Algebra l3 σ T) → A ＝ B → iso-Algebra σ T A B
   iso-eq-Algebra = iso-eq-Large-Precategory (Algebra-Large-Precategory σ T)
 
   abstract
