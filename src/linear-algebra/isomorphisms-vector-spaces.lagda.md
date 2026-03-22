@@ -7,7 +7,7 @@ module linear-algebra.isomorphisms-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import commutative-algebra.commutative-rings
+open import commutative-algebra.heyting-fields
 
 open import foundation.dependent-pair-types
 open import foundation.subtypes
