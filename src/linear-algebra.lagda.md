@@ -63,6 +63,7 @@ open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
 open import linear-algebra.orthogonality-bilinear-forms-real-vector-spaces public
 open import linear-algebra.orthogonality-real-inner-product-spaces public
+open import linear-algebra.precategory-of-left-modules-commutative-rings public
 open import linear-algebra.precategory-of-left-modules-rings public
 open import linear-algebra.precategory-of-vector-spaces public
 open import linear-algebra.preimages-of-left-module-structures-along-homomorphisms-of-rings public
