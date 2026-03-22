@@ -10,7 +10,9 @@ module linear-algebra.linear-maps-left-modules-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -118,6 +120,17 @@ module _
       ( map-linear-map-left-module-Commutative-Ring)
   is-homogeneous-map-linear-map-left-module-Commutative-Ring =
     pr2 is-linear-map-linear-map-left-module-Commutative-Ring
+
+ev-linear-map-left-module-Commutative-Ring :
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (V : left-module-Commutative-Ring l2 R)
+  (W : left-module-Commutative-Ring l3 R)
+  (v : type-left-module-Commutative-Ring R V) →
+  linear-map-left-module-Commutative-Ring R V W →
+  type-left-module-Commutative-Ring R W
+ev-linear-map-left-module-Commutative-Ring R V W v f =
+  map-linear-map-left-module-Commutative-Ring R V W f v
 ```
 
 ## Properties
@@ -229,8 +242,31 @@ module _
       ( f)
 ```
 
+### If two linear maps are homotopic, they are equal
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  (N : left-module-Commutative-Ring l3 R)
+  (f g : linear-map-left-module-Commutative-Ring R M N)
+  where
+
+  abstract
+    eq-htpy-linear-map-left-module-Commutative-Ring :
+      ( ( map-linear-map-left-module-Commutative-Ring R M N f) ~
+        ( map-linear-map-left-module-Commutative-Ring R M N g)) →
+      f ＝ g
+    eq-htpy-linear-map-left-module-Commutative-Ring f~g =
+      eq-type-subtype
+        ( is-linear-map-prop-left-module-Commutative-Ring R M N)
+        ( eq-htpy f~g)
+```
+
 ## See also
 
 - [Linear maps between left modules over rings](linear-algebra.linear-maps-left-modules-rings.md)
 - [Linear maps between vector spaces](linear-algebra.linear-maps-vector-spaces.md)
 - [Scalar multiplication of linear maps between left modules over commutative rings](linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings.md)
+- [The left module of linear maps between left modules over commutative rings](linear-algebra.left-module-linear-maps-left-modules-commutative-rings.md)
