@@ -20,7 +20,7 @@ open import linear-algebra.linear-maps-left-modules-commutative-rings
 ## Idea
 
 A
-{{#concept "linear form" Disambiguation="in a left module over a commutative ring"}}
+{{#concept "linear form" Disambiguation="in a left module over a commutative ring" Agda=linear-form-left-module-Commutative-Ring}}
 in a [left module](linear-algebra.left-modules-commutative-rings.md) `M` over a
 [commutative ring](commutative-algebra.commutative-rings.md) `R` is a
 [linear map](linear-algebra.linear-maps-left-modules-commutative-rings.md) from
