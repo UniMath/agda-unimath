@@ -176,7 +176,7 @@ module _
     fin-sequence A (succ-ℕ n)
   insert-at-fin-sequence zero-ℕ a _ _ _ = a
   insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
-    insert-at-fin-sequence n a x (u ∘ inl-Fin n) y
+    insert-at-fin-sequence n a x (tail-fin-sequence n u) y
   insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) =
     head-fin-sequence n u
   insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inl y) =
@@ -200,7 +200,7 @@ module _
     a
   compute-elem-at-insert-at-fin-sequence zero-ℕ a _ _ = refl
   compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u =
-    compute-elem-at-insert-at-fin-sequence n a x (u ∘ inl-Fin n)
+    compute-elem-at-insert-at-fin-sequence n a x (tail-fin-sequence n u)
   compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inr x) u = refl
 ```
 
@@ -247,7 +247,7 @@ module _
     compute-insert-at-drop-at-fin-sequence
       ( n)
       ( x)
-      ( u ∘ inl-Fin (succ-ℕ n))
+      ( tail-fin-sequence (succ-ℕ n) u)
       ( y)
   compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
   compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inr x) u (inl y) = refl
