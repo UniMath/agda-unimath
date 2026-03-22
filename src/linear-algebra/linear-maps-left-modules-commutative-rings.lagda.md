@@ -9,6 +9,7 @@ module linear-algebra.linear-maps-left-modules-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -217,7 +218,7 @@ module _
         ( f)
 ```
 
-### The linear composition of linear maps between vector spaces
+### The linear composition of linear maps between left modules
 
 ```agda
 module _
@@ -242,6 +243,21 @@ module _
       ( f)
 ```
 
+### The identity linear map
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  where
+
+  id-linear-map-left-module-Commutative-Ring :
+    linear-map-left-module-Commutative-Ring R M M
+  id-linear-map-left-module-Commutative-Ring =
+    id-linear-map-left-module-Ring (ring-Commutative-Ring R) M
+```
+
 ### If two linear maps are homotopic, they are equal
 
 ```agda
@@ -250,18 +266,88 @@ module _
   (R : Commutative-Ring l1)
   (M : left-module-Commutative-Ring l2 R)
   (N : left-module-Commutative-Ring l3 R)
-  (f g : linear-map-left-module-Commutative-Ring R M N)
   where
+
+  htpy-linear-map-left-module-Commutative-Ring :
+    Relation (l2 ⊔ l3) (linear-map-left-module-Commutative-Ring R M N)
+  htpy-linear-map-left-module-Commutative-Ring =
+    htpy-linear-map-left-module-Ring (ring-Commutative-Ring R) M N
 
   abstract
     eq-htpy-linear-map-left-module-Commutative-Ring :
-      ( ( map-linear-map-left-module-Commutative-Ring R M N f) ~
-        ( map-linear-map-left-module-Commutative-Ring R M N g)) →
+      (f g : linear-map-left-module-Commutative-Ring R M N) →
+      htpy-linear-map-left-module-Commutative-Ring f g →
       f ＝ g
-    eq-htpy-linear-map-left-module-Commutative-Ring f~g =
-      eq-type-subtype
-        ( is-linear-map-prop-left-module-Commutative-Ring R M N)
-        ( eq-htpy f~g)
+    eq-htpy-linear-map-left-module-Commutative-Ring =
+      eq-htpy-linear-map-left-module-Ring (ring-Commutative-Ring R) M N
+```
+
+### Associativity of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  (N : left-module-Commutative-Ring l3 R)
+  (P : left-module-Commutative-Ring l4 R)
+  (Q : left-module-Commutative-Ring l5 R)
+  where
+
+  abstract
+    associative-comp-linear-map-left-module-Commutative-Ring :
+      (f : linear-map-left-module-Commutative-Ring R P Q)
+      (g : linear-map-left-module-Commutative-Ring R N P)
+      (h : linear-map-left-module-Commutative-Ring R M N) →
+      comp-linear-map-left-module-Commutative-Ring R M N Q
+        ( comp-linear-map-left-module-Commutative-Ring R N P Q f g)
+        ( h) ＝
+      comp-linear-map-left-module-Commutative-Ring R M P Q
+        ( f)
+        ( comp-linear-map-left-module-Commutative-Ring R M N P g h)
+    associative-comp-linear-map-left-module-Commutative-Ring =
+      associative-comp-linear-map-left-module-Ring
+        ( ring-Commutative-Ring R)
+        ( M)
+        ( N)
+        ( P)
+        ( Q)
+```
+
+### Unit laws of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  (N : left-module-Commutative-Ring l3 R)
+  where
+
+  abstract
+    left-unit-law-comp-linear-map-left-module-Commutative-Ring :
+      (f : linear-map-left-module-Commutative-Ring R M N) →
+      comp-linear-map-left-module-Commutative-Ring R M N N
+        ( id-linear-map-left-module-Commutative-Ring R N)
+        ( f) ＝
+      f
+    left-unit-law-comp-linear-map-left-module-Commutative-Ring =
+      left-unit-law-comp-linear-map-left-module-Ring
+        ( ring-Commutative-Ring R)
+        ( M)
+        ( N)
+
+    right-unit-law-comp-linear-map-left-module-Commutative-Ring :
+      (f : linear-map-left-module-Commutative-Ring R M N) →
+      comp-linear-map-left-module-Commutative-Ring R M M N
+        ( f)
+        ( id-linear-map-left-module-Commutative-Ring R M) ＝
+      f
+    right-unit-law-comp-linear-map-left-module-Commutative-Ring =
+      right-unit-law-comp-linear-map-left-module-Ring
+        ( ring-Commutative-Ring R)
+        ( M)
+        ( N)
 ```
 
 ## See also
