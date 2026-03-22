@@ -34,7 +34,7 @@ open import univalent-combinatorics.finite-types
 
 Given a [finite type](univalent-combinatorics.finite-types.md) `I`, a family of
 types `Aᵢ` indexed by `i : I`, and a family of
-[equivalence relations](foundation.equivalence-relations.md) `Rᵢ` on the `Aᵢ`,
+[equivalence relations](foundation.equivalence-relations.md) `Rᵢ` on each `Aᵢ`,
 the type `(i : I) → Aᵢ/Rᵢ`, where `Aᵢ/Rᵢ` is the
 [set quotient](foundation.set-quotients.md) of `Aᵢ` by `Rᵢ`, satisfies the
 [universal property of set quotients](foundation.universal-property-set-quotients.md)
