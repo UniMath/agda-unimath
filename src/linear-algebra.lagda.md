@@ -23,6 +23,7 @@ open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.difference-linear-maps-left-modules-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
+open import linear-algebra.duals-left-modules-commutative-rings public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public
@@ -39,6 +40,7 @@ open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings pu
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
 open import linear-algebra.kernels-linear-maps-vector-spaces public
 open import linear-algebra.large-left-modules-large-rings public
+open import linear-algebra.left-module-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.left-modules-commutative-rings public
 open import linear-algebra.left-modules-rings public
 open import linear-algebra.left-submodules-commutative-rings public
@@ -47,6 +49,7 @@ open import linear-algebra.linear-combinations-tuples-of-vectors-left-modules-ri
 open import linear-algebra.linear-endomaps-left-modules-commutative-rings public
 open import linear-algebra.linear-endomaps-left-modules-rings public
 open import linear-algebra.linear-endomaps-vector-spaces public
+open import linear-algebra.linear-forms-left-modules-commutative-rings public
 open import linear-algebra.linear-forms-vector-spaces public
 open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
@@ -56,6 +59,7 @@ open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
 open import linear-algebra.negation-linear-maps-left-modules-rings public
+open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
 open import linear-algebra.orthogonality-bilinear-forms-real-vector-spaces public
 open import linear-algebra.orthogonality-real-inner-product-spaces public
@@ -70,6 +74,7 @@ open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces publi
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
+open import linear-algebra.seminormed-complex-vector-spaces public
 open import linear-algebra.seminormed-real-vector-spaces public
 open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
 open import linear-algebra.standard-euclidean-inner-product-spaces public

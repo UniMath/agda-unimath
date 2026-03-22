@@ -83,6 +83,8 @@ record Type-With-Decidable-Π (l : Level) : UUω
 
     has-decidable-Π-type-Type-With-Decidable-Π :
       has-decidable-Π type-Type-With-Decidable-Π
+
+open Type-With-Decidable-Π public
 ```
 
 ## Properties

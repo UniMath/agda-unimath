@@ -24,6 +24,7 @@ open import foundation.action-on-identifications-binary-dependent-functions publ
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
+open import foundation.action-on-identifications-ternary-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
@@ -203,6 +204,7 @@ open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extensional-binary-functions-apartness-relations public
 open import foundation.extensions-types public
 open import foundation.extensions-types-global-subuniverses public
 open import foundation.extensions-types-subuniverses public
@@ -223,6 +225,7 @@ open import foundation.fixed-points-endofunctions public
 open import foundation.forks public
 open import foundation.freely-generated-equivalence-relations public
 open import foundation.full-subtypes public
+open import foundation.full-subuniverses public
 open import foundation.function-cumulative-large-sets public
 open import foundation.function-extensionality public
 open import foundation.function-large-binary-relations public
@@ -363,6 +366,8 @@ open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-cospans public
 open import foundation.opposite-spans public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.parametric-types public
+open import foundation.parametricity-axiom public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
 open import foundation.partitions public
@@ -464,6 +469,7 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public
