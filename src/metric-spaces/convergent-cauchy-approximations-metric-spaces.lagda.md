@@ -215,7 +215,7 @@ module _
   preserves-convergence-htpy-map-cauchy-approximation-Metric-Space u~v =
     tot
       ( λ lim →
-        preserves-limit-htpy-map-cauchy-approximation-Metric-Space A u v
+        is-limit-htpy-map-cauchy-approximation-Metric-Space A u v
           ( lim)
           ( u~v))
 
