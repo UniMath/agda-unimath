@@ -32,8 +32,7 @@ such that `yx ＝ e`, and it is said to be **right invertible** if there is an
 element `y : M` such that `xy ＝ e`. The element `x` is said to be
 {{#concept "invertible" Disambiguation="in a large monoid" Agda=is-invertible-element-Large-Monoid}}
 if it has a two-sided inverse, i.e., if there is an element `y : M` such that
-`xy = e` and `yx = e`. Left inverses of elements are also called **retractions**
-and right inverses are also called **sections**.
+`xy = e` and `yx = e`.
 
 ## Definition
 
