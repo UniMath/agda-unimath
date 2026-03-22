@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
@@ -103,4 +104,70 @@ module _
   short-map-cauchy-pseudocompletion-Pseudometric-Space =
     ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ,
       preserves-neighborhoods-map-short-map-cauchy-pseudocompletion-Pseudometric-Space)
+```
+
+### The action on short maps of Cauchy pseudocompletions preserves homotopies
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f g : short-map-Pseudometric-Space A B)
+  (f~g : htpy-map-short-map-Pseudometric-Space A B f g)
+  where
+
+  htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    htpy-map-short-map-Pseudometric-Space
+      ( cauchy-pseudocompletion-Pseudometric-Space A)
+      ( cauchy-pseudocompletion-Pseudometric-Space B)
+      ( short-map-cauchy-pseudocompletion-Pseudometric-Space A B f)
+      ( short-map-cauchy-pseudocompletion-Pseudometric-Space A B g)
+  htpy-map-short-map-cauchy-pseudocompletion-Pseudometric-Space u =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B
+      ( f~g ∘ map-cauchy-approximation-Pseudometric-Space A u)
+```
+
+### The unit of cauchy pseudocompletions is a natural transformation
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  where
+
+  naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space :
+    ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f ∘
+      map-unit-cauchy-pseudocompletion-Pseudometric-Space A) ~
+    ( map-unit-cauchy-pseudocompletion-Pseudometric-Space B ∘
+      map-short-map-Pseudometric-Space A B f)
+  naturality-short-map-unit-cauchy-pseudocompletion-Pseudometric-Space x =
+    eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
+```
+
+### The action on short maps of Cauchy pseudocompletions preserves limits
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  (f : short-map-Pseudometric-Space A B)
+  (a : cauchy-approximation-Pseudometric-Space A)
+  (lim : type-Pseudometric-Space A)
+  where abstract
+
+  preserves-limit-map-short-map-cauchy-pseudocompletion-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space A a lim →
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( B)
+      ( map-short-map-cauchy-pseudocompletion-Pseudometric-Space A B f a)
+      ( map-short-map-Pseudometric-Space A B f lim)
+  preserves-limit-map-short-map-cauchy-pseudocompletion-Pseudometric-Space
+    is-lim-a ε δ =
+    is-short-map-short-map-Pseudometric-Space A B
+      ( f)
+      ( ε +ℚ⁺ δ)
+      ( map-cauchy-approximation-Pseudometric-Space A a ε)
+      ( lim)
+      ( is-lim-a ε δ)
 ```
