@@ -68,7 +68,7 @@ concept of
 [homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function). A
 multivariable function `f` on real vector spaces is said to be _homogeneous of
 degree `k`_ if for every scalar `s` we have that
-`f(sx₀,sx₁,…,sxₙ) = sᵏf(x₀,x₁,…,xₙ)`. In particular, you may note that any
+`f(sx₀, sx₁, …, sxₙ) = sᵏ f(x₀, x₁, …, xₙ)`. In particular, you may note that any
 homogeneous bilinear form must be homogeneous of degree one.
 
 ## Definition
