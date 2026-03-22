@@ -355,30 +355,17 @@ module _
   where
 
   abstract
-    eq-raise-Cumulative-Large-Set :
-      {l : Level} (x : type-Cumulative-Large-Set S l) →
-      raise-Cumulative-Large-Set S l x ＝ x
-    eq-raise-Cumulative-Large-Set {l} x =
-      eq-sim-Cumulative-Large-Set S _ _ (sim-raise-Cumulative-Large-Set' S l x)
-
     eq-raise-leq-level-Cumulative-Large-Set :
       (l1 : Level) {l2 : Level} (x : type-Cumulative-Large-Set S (l1 ⊔ l2)) →
       raise-Cumulative-Large-Set S l2 x ＝ x
     eq-raise-leq-level-Cumulative-Large-Set l1 {l2} x =
-      equational-reasoning
-        raise-Cumulative-Large-Set S l2 x
-        ＝
-          raise-Cumulative-Large-Set S
-            ( l2)
-            ( raise-Cumulative-Large-Set S (l1 ⊔ l2) x)
-          by
-            ap
-              ( raise-Cumulative-Large-Set S l2)
-              ( inv (eq-raise-Cumulative-Large-Set x))
-        ＝ raise-Cumulative-Large-Set S (l1 ⊔ l2) x
-          by raise-raise-Cumulative-Large-Set S x
-        ＝ x
-          by eq-raise-Cumulative-Large-Set x
+      eq-sim-Cumulative-Large-Set S _ _ (sim-raise-Cumulative-Large-Set' S l2 x)
+
+    eq-raise-Cumulative-Large-Set :
+      {l : Level} (x : type-Cumulative-Large-Set S l) →
+      raise-Cumulative-Large-Set S l x ＝ x
+    eq-raise-Cumulative-Large-Set {l} x =
+      eq-raise-leq-level-Cumulative-Large-Set l x
 ```
 
 ### A universe-raising operation on a universe-polymorphic family of sets induces a cumulative large set
