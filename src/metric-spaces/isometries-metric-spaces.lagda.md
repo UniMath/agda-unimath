@@ -205,6 +205,14 @@ module _
     forward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
 
+  is-short-map-isometry-Metric-Space :
+    is-short-map-Metric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Metric-Space A B f)
+  is-short-map-isometry-Metric-Space =
+    preserves-neighborhoods-map-isometry-Metric-Space
+
   reflects-neighborhoods-map-isometry-Metric-Space :
     (d : ℚ⁺) (x y : type-Metric-Space A) →
     neighborhood-Metric-Space
@@ -216,6 +224,14 @@ module _
   reflects-neighborhoods-map-isometry-Metric-Space d x y =
     backward-implication
       ( is-isometry-map-isometry-Metric-Space A B f d x y)
+
+  is-expansive-map-isometry-Metric-Space :
+    is-expansive-map-Metric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Metric-Space A B f)
+  is-expansive-map-isometry-Metric-Space =
+    reflects-neighborhoods-map-isometry-Metric-Space
 ```
 
 ### Composition of isometries
