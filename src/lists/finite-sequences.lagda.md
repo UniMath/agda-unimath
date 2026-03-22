@@ -147,6 +147,61 @@ module _
     eq-htpy (htpy-cons-head-tail-fin-sequence n v)
 ```
 
+### The coordinates maps
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where
+
+  ev-fin-sequene : (i : Fin n) → fin-sequence A n → A
+  ev-fin-sequene i v = v i
+```
+
+### Insertion at a given index
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  insert-at-fin-sequence :
+    (n : ℕ) →
+    (a : A) →
+    (i : Fin (succ-ℕ n)) →
+    fin-sequence A n →
+    fin-sequence A (succ-ℕ n)
+  insert-at-fin-sequence zero-ℕ a _ _ _ = a
+  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
+    insert-at-fin-sequence n a x (u ∘ inl-Fin n) y
+  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) =
+    insert-at-fin-sequence n a x (u ∘ inl-Fin n) (inr y)
+  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inl y) =
+    insert-at-fin-sequence n a (inr x) (u ∘ inl-Fin n) y
+  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inr y) = a
+```
+
+### The coordinate at the index of an inserted element is the inserted element
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  compute-ev-insert-at-fin-sequence :
+    (n : ℕ) →
+    (a : A) →
+    (i : Fin (succ-ℕ n)) →
+    (u : fin-sequence A n) →
+    ev-fin-sequene (succ-ℕ n) i (insert-at-fin-sequence n a i u) ＝
+    a
+  compute-ev-insert-at-fin-sequence zero-ℕ a _ _ = refl
+  compute-ev-insert-at-fin-sequence (succ-ℕ n) a (inl x) u =
+    compute-ev-insert-at-fin-sequence n a x (u ∘ inl-Fin n)
+  compute-ev-insert-at-fin-sequence (succ-ℕ n) a (inr x) u = refl
+```
+
+
 ### Any sequence `u` in a type determines a sequence of finite sequences `(i : Fin n) ↦ u i`
 
 ```agda
