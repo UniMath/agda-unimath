@@ -50,7 +50,7 @@ module _
       ( fin-sequence-equivalence-relation R n)
       ( fin-sequence (set-quotient R) n)
   reflecting-quotient-map-fin-sequence =
-    reflecting-quotient-map-Π-set-quotient-Finite-Type
+    reflecting-quotient-map-Π-finite-family-set-quotient
       ( Fin-Finite-Type n)
       ( λ _ → R)
 
@@ -61,7 +61,7 @@ module _
         ( fin-sequence-Set (quotient-Set R) n)
         ( reflecting-quotient-map-fin-sequence)
     is-set-quotient-fin-sequence-set-quotient =
-      is-set-quotient-Π-set-quotient-Finite-Type
+      is-set-quotient-Π-finite-family-set-quotient
         ( Fin-Finite-Type n)
         ( λ _ → R)
 ```
