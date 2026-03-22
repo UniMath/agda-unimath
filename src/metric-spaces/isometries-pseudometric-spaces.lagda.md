@@ -466,78 +466,19 @@ module _
       is-emb-short-map-isometry-Pseudometric-Space)
 ```
 
-### Isometries are short expansive maps
+### Short and expansive maps are isometries
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
   (f : map-Pseudometric-Space A B)
-  where
+  where abstract
 
-  abstract
-    is-isometry-is-expansive-is-short-map-Pseudometric-Space :
-      is-short-map-Pseudometric-Space A B f →
-      is-expansive-map-Pseudometric-Space A B f →
-      is-isometry-Pseudometric-Space A B f
-    is-isometry-is-expansive-is-short-map-Pseudometric-Space H K d x y =
-      (H d x y , K d x y)
-
-  isometry-is-expansive-is-short-map-Pseudometric-Space :
+  is-isometry-is-expansive-map-is-short-map-Pseudometric-Space :
     is-short-map-Pseudometric-Space A B f →
     is-expansive-map-Pseudometric-Space A B f →
-    isometry-Pseudometric-Space A B
-  isometry-is-expansive-is-short-map-Pseudometric-Space H K =
-    (f , is-isometry-is-expansive-is-short-map-Pseudometric-Space H K)
-
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : short-map-Pseudometric-Space A B)
-  where
-
-  abstract
-    is-isometry-is-expansive-map-short-map-Pseudometric-Space :
-      is-expansive-map-Pseudometric-Space A B
-        ( map-short-map-Pseudometric-Space A B f) →
-      is-isometry-Pseudometric-Space A B
-        ( map-short-map-Pseudometric-Space A B f)
-    is-isometry-is-expansive-map-short-map-Pseudometric-Space =
-      is-isometry-is-expansive-is-short-map-Pseudometric-Space A B
-        ( map-short-map-Pseudometric-Space A B f)
-        ( is-short-map-short-map-Pseudometric-Space A B f)
-
-  isometry-is-expansive-map-short-map-Pseudometric-Space :
-    is-expansive-map-Pseudometric-Space A B
-      ( map-short-map-Pseudometric-Space A B f) →
-    isometry-Pseudometric-Space A B
-  isometry-is-expansive-map-short-map-Pseudometric-Space K =
-    ( map-short-map-Pseudometric-Space A B f ,
-      is-isometry-is-expansive-map-short-map-Pseudometric-Space K)
-
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : expansive-map-Pseudometric-Space A B)
-  where
-
-  abstract
-    is-isometry-is-short-map-expansive-map-Pseudometric-Space :
-      is-short-map-Pseudometric-Space A B
-        ( map-expansive-map-Pseudometric-Space A B f) →
-      is-isometry-Pseudometric-Space A B
-        ( map-expansive-map-Pseudometric-Space A B f)
-    is-isometry-is-short-map-expansive-map-Pseudometric-Space H =
-      is-isometry-is-expansive-is-short-map-Pseudometric-Space A B
-        ( map-expansive-map-Pseudometric-Space A B f)
-        ( H)
-        ( is-expansive-map-expansive-map-Pseudometric-Space A B f)
-
-  isometry-is-short-map-expansive-map-Pseudometric-Space :
-    is-short-map-Pseudometric-Space A B
-      ( map-expansive-map-Pseudometric-Space A B f) →
-    isometry-Pseudometric-Space A B
-  isometry-is-short-map-expansive-map-Pseudometric-Space H =
-    ( map-expansive-map-Pseudometric-Space A B f ,
-      is-isometry-is-short-map-expansive-map-Pseudometric-Space H)
+    is-isometry-Pseudometric-Space A B f
+  is-isometry-is-expansive-map-is-short-map-Pseudometric-Space H K d x y =
+    (H d x y , K d x y)
 ```

@@ -7,22 +7,12 @@ module metric-spaces.precomplete-short-maps-pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

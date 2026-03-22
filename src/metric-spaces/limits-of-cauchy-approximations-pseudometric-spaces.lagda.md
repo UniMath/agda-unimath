@@ -168,14 +168,14 @@ module _
 module _
   {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
   (f g : cauchy-approximation-Pseudometric-Space A)
-  (f~g : htpy-map-cauchy-approximation-Pseudometric-Space A f g)
   (x : type-Pseudometric-Space A)
+  (f~g : htpy-map-cauchy-approximation-Pseudometric-Space A f g)
   where
 
-  preserves-limit-htpy-map-cauchy-approximation-Pseudometric-Space :
+  is-limit-htpy-map-cauchy-approximation-Pseudometric-Space :
     is-limit-cauchy-approximation-Pseudometric-Space A f x →
     is-limit-cauchy-approximation-Pseudometric-Space A g x
-  preserves-limit-htpy-map-cauchy-approximation-Pseudometric-Space H ε δ =
+  is-limit-htpy-map-cauchy-approximation-Pseudometric-Space H ε δ =
     tr
       ( λ z → neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) z x)
       ( f~g ε)
