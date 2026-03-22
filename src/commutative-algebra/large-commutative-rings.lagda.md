@@ -56,6 +56,11 @@ record Large-Commutative-Ring
     type-Large-Commutative-Ring (l1 ⊔ l2)
   add-Large-Commutative-Ring = add-Large-Ring large-ring-Large-Commutative-Ring
 
+  neg-Large-Commutative-Ring :
+    {l : Level} → type-Large-Commutative-Ring l → type-Large-Commutative-Ring l
+  neg-Large-Commutative-Ring =
+    neg-Large-Ring large-ring-Large-Commutative-Ring
+
   zero-Large-Commutative-Ring : type-Large-Commutative-Ring lzero
   zero-Large-Commutative-Ring =
     zero-Large-Ring large-ring-Large-Commutative-Ring
@@ -124,7 +129,7 @@ module _
     Large-Commutative-Monoid α β
   multiplicative-large-commutative-monoid-Large-Commutative-Ring =
     make-Large-Commutative-Monoid
-      ( multiplicative-large-monoid-Large-Ring
+      ( large-monoid-mul-Large-Ring
         ( large-ring-Large-Commutative-Ring R))
       ( commutative-mul-Large-Commutative-Ring R)
 
