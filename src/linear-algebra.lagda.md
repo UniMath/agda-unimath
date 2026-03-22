@@ -59,6 +59,7 @@ open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
 open import linear-algebra.negation-linear-maps-left-modules-rings public
+open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
 open import linear-algebra.orthogonality-bilinear-forms-real-vector-spaces public
 open import linear-algebra.orthogonality-real-inner-product-spaces public
@@ -73,6 +74,7 @@ open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces publi
 open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
+open import linear-algebra.seminormed-complex-vector-spaces public
 open import linear-algebra.seminormed-real-vector-spaces public
 open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
 open import linear-algebra.standard-euclidean-inner-product-spaces public
