@@ -15,3 +15,19 @@ open import linear-algebra.linear-maps-vector-spaces
 ```
 
 </details>
+
+## Idea
+
+## Definition
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (K : Heyting-Field l1)
+  (G : UU l2)
+  (V : Vector-Space l3 K)
+  (in-V : G → type-Vector-Space K V)
+  where
+
+  is-free-
+```
