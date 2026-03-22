@@ -380,7 +380,7 @@ module _
       ( map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
   is-isometry-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space
     =
-    is-isometry-is-expansive-is-short-map-Pseudometric-Space
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
       ( map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
@@ -393,12 +393,8 @@ module _
       ( pseudometric-Metric-Space M)
   isometry-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space
     =
-    isometry-is-expansive-is-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M)
-      ( map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
-      ( is-short-map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
-      ( is-expansive-map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
+    ( map-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space ,
+      is-isometry-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space)
 
   is-extension-isometry-exten-precomplete-isometry-cauchy-pseudocompletion-Pseudometric-Space :
     is-extension-of-map
