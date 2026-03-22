@@ -12,8 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -22,13 +20,11 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 
-open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.tuples
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -95,112 +91,6 @@ multivariable-operation n A X =
 ```
 
 ## Properties
-
-### Multivariable inputs are equivalent to elements of finite sequences of types
-
-```agda
-module _
-  {l : Level}
-  where
-
-  Π-fin-sequence : (n : ℕ) → fin-sequence (UU l) n → UU l
-  Π-fin-sequence n A = (i : Fin n) → A i
-
-  multivariable-input-Π-fin-sequence :
-    (n : ℕ)
-    (A : fin-sequence (UU l) n) →
-    Π-fin-sequence n A →
-    multivariable-input n A
-  multivariable-input-Π-fin-sequence zero-ℕ A H = raise-star
-  multivariable-input-Π-fin-sequence (succ-ℕ n) A H =
-    ( H (neg-one-Fin n) ,
-      multivariable-input-Π-fin-sequence
-        ( n)
-        ( tail-fin-sequence n A)
-        ( H ∘ inl-Fin n))
-
-  Π-fin-sequence-multivariable-input :
-    (n : ℕ)
-    (A : fin-sequence (UU l) n) →
-    multivariable-input n A →
-    Π-fin-sequence n A
-  Π-fin-sequence-multivariable-input zero-ℕ A H ()
-  Π-fin-sequence-multivariable-input (succ-ℕ n) A H (inl x) =
-    Π-fin-sequence-multivariable-input
-      ( n)
-      ( tail-fin-sequence n A)
-      ( tail-multivariable-input n A H)
-      ( x)
-  Π-fin-sequence-multivariable-input (succ-ℕ n) A H (inr x) =
-    head-multivariable-input n A H
-
-  is-section-multivariable-input-Π-fin-sequence :
-    ( n : ℕ)
-    ( A : fin-sequence (UU l) n) →
-    ( multivariable-input-Π-fin-sequence n A ∘
-      Π-fin-sequence-multivariable-input n A) ~
-    id
-  is-section-multivariable-input-Π-fin-sequence zero-ℕ A =
-    is-section-map-inv-raise
-  is-section-multivariable-input-Π-fin-sequence (succ-ℕ n) A H =
-    eq-pair
-      ( refl)
-      ( is-section-multivariable-input-Π-fin-sequence
-        ( n)
-        ( tail-fin-sequence n A)
-        ( tail-multivariable-input n A H))
-
-  htpy-retraction-multivariable-input-Π-fin-sequence :
-    (n : ℕ)
-    (A : fin-sequence (UU l) n) →
-    (u : Π-fin-sequence n A) →
-    (i : Fin n) →
-    Π-fin-sequence-multivariable-input
-      ( n)
-      ( A)
-      ( multivariable-input-Π-fin-sequence
-        ( n)
-        ( A)
-        ( u))
-      ( i) ＝
-    u i
-  htpy-retraction-multivariable-input-Π-fin-sequence (succ-ℕ n) A u (inl x) =
-    htpy-retraction-multivariable-input-Π-fin-sequence
-      ( n)
-      ( tail-fin-sequence n A)
-      ( u ∘ inl-Fin n)
-      ( x)
-  htpy-retraction-multivariable-input-Π-fin-sequence (succ-ℕ n) A u (inr x) =
-    refl
-
-  is-retraction-multivariable-input-Π-fin-sequence :
-    ( n : ℕ)
-    ( A : fin-sequence (UU l) n) →
-    ( Π-fin-sequence-multivariable-input n A ∘
-      multivariable-input-Π-fin-sequence n A) ~
-    id
-  is-retraction-multivariable-input-Π-fin-sequence n A =
-    eq-htpy ∘ htpy-retraction-multivariable-input-Π-fin-sequence n A
-
-  is-equiv-multivariable-input-Π-fin-sequence :
-    (n : ℕ)
-    (A : fin-sequence (UU l) n) →
-    is-equiv (multivariable-input-Π-fin-sequence n A)
-  is-equiv-multivariable-input-Π-fin-sequence n A =
-    is-equiv-is-invertible
-      ( Π-fin-sequence-multivariable-input n A)
-      ( is-section-multivariable-input-Π-fin-sequence n A)
-      ( is-retraction-multivariable-input-Π-fin-sequence n A)
-
-  equiv-multivariable-input-Π-fin-sequence :
-    (n : ℕ) →
-    (A : fin-sequence (UU l) n) →
-    Π-fin-sequence n A ≃
-    multivariable-input n A
-  equiv-multivariable-input-Π-fin-sequence n A =
-    ( multivariable-input-Π-fin-sequence n A ,
-      is-equiv-multivariable-input-Π-fin-sequence n A)
-```
 
 ### For the case of constant families, multivariable inputs and tuples coincide
 
