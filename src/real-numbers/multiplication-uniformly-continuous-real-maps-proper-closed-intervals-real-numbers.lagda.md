@@ -42,14 +42,16 @@ of [real numbers](real-numbers.dedekind-real-numbers.md) `[a, b]`, the map
 module _
   {l1 l2 l3 : Level}
   ([a,b] : proper-closed-interval-ℝ l1 l1)
-  (f : uniformly-continuous-real-map-proper-closed-interval-ℝ l1 l2 [a,b])
-  (g : uniformly-continuous-real-map-proper-closed-interval-ℝ l1 l3 [a,b])
+  (f@(map-f , _) :
+    uniformly-continuous-real-map-proper-closed-interval-ℝ l1 l2 [a,b])
+  (g@(map-g , _) :
+    uniformly-continuous-real-map-proper-closed-interval-ℝ l1 l3 [a,b])
   where
 
   map-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ :
     type-proper-closed-interval-ℝ l1 [a,b] → ℝ (l2 ⊔ l3)
   map-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ x =
-    pr1 f x *ℝ pr1 g x
+    map-f x *ℝ map-g x
 
   abstract
     is-uniformly-continuous-map-mul-real-map-proper-closed-interval-ℝ :
