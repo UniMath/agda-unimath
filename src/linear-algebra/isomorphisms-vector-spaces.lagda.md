@@ -14,8 +14,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.isomorphisms-left-modules-rings
-open import linear-algebra.left-modules-commutative-rings
-open import linear-algebra.linear-maps-left-modules-commutative-rings
+open import linear-algebra.linear-maps-vector-spaces
+open import linear-algebra.vector-spaces
 ```
 
 </details>
