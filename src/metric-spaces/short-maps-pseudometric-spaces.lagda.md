@@ -11,7 +11,6 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -26,7 +25,6 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.poset-of-rational-neighborhood-relations
 open import metric-spaces.preimages-rational-neighborhood-relations
@@ -74,7 +72,7 @@ module _
     is-prop-type-Prop is-short-map-prop-Pseudometric-Space
 ```
 
-### The set of short maps between pseudometric spaces
+### The type of short maps between pseudometric spaces
 
 ```agda
 module _
@@ -228,17 +226,7 @@ module _
     ( comp-short-map-Pseudometric-Space A C D
       ( h)
       ( comp-short-map-Pseudometric-Space A B C g f))
-  associative-comp-short-map-Pseudometric-Space =
-    eq-htpy-map-short-map-Pseudometric-Space
-      ( A)
-      ( D)
-      ( comp-short-map-Pseudometric-Space A B D
-        ( comp-short-map-Pseudometric-Space B C D h g)
-        ( f))
-      ( comp-short-map-Pseudometric-Space A C D
-        ( h)
-        ( comp-short-map-Pseudometric-Space A B C g f))
-      ( λ x → refl)
+  associative-comp-short-map-Pseudometric-Space = refl
 ```
 
 ### Constant maps between pseudometric spaces are short
@@ -261,55 +249,4 @@ module _
     const-map-Pseudometric-Space A B b
   pr2 const-short-map-Pseudometric-Space =
     is-short-map-const-Pseudometric-Space
-```
-
-### Any isometry between pseudometric spaces is short
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  (f : map-Pseudometric-Space A B)
-  where
-
-  is-short-map-is-isometry-Pseudometric-Space :
-    is-isometry-Pseudometric-Space A B f →
-    is-short-map-Pseudometric-Space A B f
-  is-short-map-is-isometry-Pseudometric-Space I =
-    preserves-neighborhoods-map-isometry-Pseudometric-Space A B (f , I)
-```
-
-### The embedding of isometries of pseudometric spaces into short maps
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
-  where
-
-  short-map-isometry-Pseudometric-Space :
-    isometry-Pseudometric-Space A B → short-map-Pseudometric-Space A B
-  short-map-isometry-Pseudometric-Space f =
-    map-isometry-Pseudometric-Space A B f ,
-    is-short-map-is-isometry-Pseudometric-Space
-      ( A)
-      ( B)
-      ( map-isometry-Pseudometric-Space A B f)
-      ( is-isometry-map-isometry-Pseudometric-Space A B f)
-
-  is-emb-short-map-isometry-Pseudometric-Space :
-    is-emb short-map-isometry-Pseudometric-Space
-  is-emb-short-map-isometry-Pseudometric-Space =
-    is-emb-right-factor
-      ( map-short-map-Pseudometric-Space A B)
-      ( short-map-isometry-Pseudometric-Space)
-      ( is-emb-inclusion-subtype
-        ( is-short-map-prop-Pseudometric-Space A B))
-      ( is-emb-inclusion-subtype (is-isometry-prop-Pseudometric-Space A B))
-
-  emb-short-map-isometry-Pseudometric-Space :
-    isometry-Pseudometric-Space A B ↪ short-map-Pseudometric-Space A B
-  emb-short-map-isometry-Pseudometric-Space =
-    ( short-map-isometry-Pseudometric-Space ,
-      is-emb-short-map-isometry-Pseudometric-Space)
 ```
