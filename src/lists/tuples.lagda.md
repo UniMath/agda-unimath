@@ -213,6 +213,8 @@ module _
 
 ### The type of tuples of elements in a set is a set
 
+#### The type of listed tuples of elements in a set is a set
+
 ```agda
 module _
   {l : Level} {A : UU l}
