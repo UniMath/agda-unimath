@@ -7,20 +7,28 @@ module linear-algebra.isomorphisms-left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import linear-algebra.left-modules-rings
-open import ring-theory.rings
-open import linear-algebra.precategory-of-left-modules-rings
-open import foundation.dependent-pair-types
-open import linear-algebra.linear-maps-left-modules-rings
-open import foundation.universe-levels
 open import category-theory.isomorphisms-in-large-precategories
-open import foundation.propositions
+
+open import foundation.dependent-pair-types
 open import foundation.subtypes
+open import foundation.universe-levels
+
+open import linear-algebra.left-modules-rings
+open import linear-algebra.linear-maps-left-modules-rings
+open import linear-algebra.precategory-of-left-modules-rings
+
+open import ring-theory.rings
 ```
 
 </details>
 
 ## Idea
+
+{{#concept "Isomorphisms" Disambiguation="of left modules over a ring" Agda=iso-left-module-Ring}}
+of [left modules](linear-algebra.left-modules-rings.md) over a
+[ring](ring-theory.rings.md) are
+[linear maps](linear-algebra.linear-maps-left-modules-rings.md) that have a
+two-sided inverse.
 
 ## Definition
 
