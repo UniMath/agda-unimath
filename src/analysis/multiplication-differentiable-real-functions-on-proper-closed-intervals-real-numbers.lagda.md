@@ -407,7 +407,7 @@ module _
                 by
                   leq-eq-ℝ
                     ( ap-mul-ℝ
-                      ( ap real-ℚ⁺ (eq-ℚ⁺ (is-section-left-div-ℚ⁺ _ _)))
+                      ( ap real-ℚ (is-section-left-div-ℚ⁺ _ _))
                       ( refl)))
 
 module _
