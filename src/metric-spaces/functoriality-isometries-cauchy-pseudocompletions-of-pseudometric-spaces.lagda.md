@@ -111,7 +111,7 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space B)
       ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
   is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space =
-    is-isometry-is-expansive-is-short-map-Pseudometric-Space
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
       ( cauchy-pseudocompletion-Pseudometric-Space A)
       ( cauchy-pseudocompletion-Pseudometric-Space B)
       ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
@@ -129,15 +129,8 @@ module _
       ( cauchy-pseudocompletion-Pseudometric-Space A)
       ( cauchy-pseudocompletion-Pseudometric-Space B)
   isometry-cauchy-pseudocompletion-Pseudometric-Space =
-    isometry-is-expansive-is-short-map-Pseudometric-Space
-      ( cauchy-pseudocompletion-Pseudometric-Space A)
-      ( cauchy-pseudocompletion-Pseudometric-Space B)
-      ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
-      ( is-short-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
-      ( is-expansive-map-isometry-cauchy-pseudocompletion-Pseudometric-Space
-        ( A)
-        ( B)
-        ( f))
+    ( map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f ,
+      is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
 ```
 
 ### The action on short maps of Cauchy pseudocompletions preserves homotopies
