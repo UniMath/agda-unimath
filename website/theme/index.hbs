@@ -166,6 +166,10 @@
                             <i class="fa fa-search"></i>
                         </button>
                         {{/if}}
+                        <button id="random-page" class="icon-button" type="button" title="Random page"
+                            aria-label="Go to random module" aria-expanded="false">
+                            <i class="fa fa-random"></i>
+                        </button>
                     </div>
 
                     <h1 class="menu-title"><a href="HOME.html">{{ book_title }}</a></h1>
@@ -260,6 +264,25 @@
             </nav>
             {{/if}}
         </div>
+
+        <script>
+          document.querySelector('#random-page').addEventListener('click', () => {
+              // Only consider links with two dots to avoid the Overview modules
+              const moduleRegex = /[^.]+\.[^.]+\.html/;
+              // Extract the module list from the sidebar, no point duplicating this data
+              const allModules = Array.prototype.filter.call(
+                  document.querySelectorAll('#sidebar .section > .chapter-item > a'),
+                  // Filter based on the unresolved attribute (i.e. the relative path)
+                  link => {
+                      const href = link.attributes.href;
+                      // Filter out chevron link, Overview links, and TEMPLATE.lagda.html
+                      return href && !!moduleRegex.test(href.value) && !href.value.endsWith('.lagda.html');
+                  }
+              );
+              const chosen = allModules[Math.floor(Math.random() * (allModules.length + 1))];
+              location.href = chosen.href;
+          });
+        </script>
 
         {{#if live_reload_endpoint}}
         <!-- Livereload script (if served using the cli tool) -->
