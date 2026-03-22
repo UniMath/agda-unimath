@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.equality-of-pseudometric-spaces
+open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.indexed-sums-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
@@ -436,12 +437,12 @@ module _
   where
 
   abstract
-    preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
+    is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
       is-short-map-Pseudometric-Space
         ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
         ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
         ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-    preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+    is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
       d (x , u) (.x , v) (refl , Nuv) ε δ = (refl , Nuv ε δ)
 
   short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
@@ -450,7 +451,7 @@ module _
       ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
   short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space =
     ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ,
-      preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
+      is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
 ### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is an isometry
@@ -499,20 +500,12 @@ module _
   map-neighborhood-fiber-eq-base-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
     x .x u v refl d ε δ N = N
 
-  reflects-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
-    (d : ℚ⁺) →
-    (u v : type-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P) →
-    neighborhood-Pseudometric-Space
-      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
-      ( d)
-      ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P u)
-      ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P v) →
-    neighborhood-Pseudometric-Space
+  is-expansive-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
+    is-expansive-map-Pseudometric-Space
       ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-      ( d)
-      ( u)
-      ( v)
-  reflects-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+      ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+  is-expansive-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
     d (x , u) (y , v) Nuv = (x=y , neighborhood-fiber-x=y)
     where
 
@@ -574,17 +567,13 @@ module _
       ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
       ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
       ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-  is-isometry-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space d x y =
-    ( ( preserves-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
-        ( A)
-        ( P)
-        ( d)
-        ( x)
-        ( y)) ,
-      ( reflects-neighborhoods-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
-        ( d)
-        ( x)
-        ( y)))
+  is-isometry-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+      ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+      ( is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+      ( is-expansive-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
 ### The isometric equivalence between indexed sum of Cauchy pseudocompletions and pseudocompletions of indexed sums
@@ -627,14 +616,13 @@ module _
   where
 
   compute-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space :
-    cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P ＝
-    indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P
+    indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P ＝
+    cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P
   compute-cauchy-pseudocompletion-indexed-sum-Pseudometric-Space =
-    inv
-      ( eq-isometric-equiv-Pseudometric-Space
-        ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-        ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
-        ( isometric-equiv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
-          ( A)
-          ( P)))
+    eq-isometric-equiv-Pseudometric-Space
+      ( indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
+      ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
+      ( isometric-equiv-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+        ( A)
+        ( P))
 ```
