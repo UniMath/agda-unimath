@@ -21,7 +21,8 @@ open import linear-algebra.vector-spaces
 
 ## Idea
 
-[Vector spaces](linear-algebra.vector-spaces.md) and
+[Vector spaces](linear-algebra.vector-spaces.md) over a given
+[Heyting field](commutative-algebra.heyting-fields.md) and
 [linear maps](linear-algebra.linear-maps-vector-spaces.md) form a
 [large precategory](category-theory.large-precategories.md).
 
