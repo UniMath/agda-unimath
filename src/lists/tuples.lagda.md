@@ -213,14 +213,12 @@ module _
 
 ### The type of tuples of elements in a set is a set
 
-#### The type of listed tuples of elements in a set is a set
-
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-set-tuple : (n : ℕ) → is-set A -> is-set (tuple A n)
+  is-set-tuple : (n : ℕ) → is-set A → is-set (tuple A n)
   is-set-tuple = is-trunc-tuple zero-𝕋
 
 tuple-Set : {l : Level} → Set l → ℕ → Set l
