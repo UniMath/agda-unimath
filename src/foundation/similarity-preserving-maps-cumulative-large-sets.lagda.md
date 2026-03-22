@@ -204,12 +204,8 @@ module _
       type-Cumulative-Large-Set SX l → type-Cumulative-Large-Set SY (γ l)) →
     preserves-sim-map-Cumulative-Large-Set γ SX SY f →
     sim-preserving-map-Cumulative-Large-Set γ SX SY
-  make-sim-preserving-map-Cumulative-Large-Set f preserves-sim-f =
-    λ where
-      .map-sim-preserving-map-Large-Similarity-Relation →
-        f
-      .preserves-sim-map-sim-preserving-map-Large-Similarity-Relation →
-        preserves-sim-f
+  make-sim-preserving-map-Cumulative-Large-Set =
+    make-sim-preserving-map-Large-Similarity-Relation
 
 module _
   {αX : Level → Level}
