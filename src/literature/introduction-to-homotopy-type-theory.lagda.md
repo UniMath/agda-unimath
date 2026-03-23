@@ -3786,3 +3786,500 @@ open import foundation.isolated-elements using
   ( is-prop-eq-isolated-element
   ; is-emb-point-is-isolated)
 ```
+
+## 13 Function extensionality
+
+### 13.1 Equivalent forms of function extensionality
+
+**Proposition 13.1.1.** Equivalent forms of function extensionality.
+
+Note that we only show the logical equivalence between `(i)` and `(iii)`.
+TODO: do we care about adding `(ii)` to the chain?
+
+```agda
+open import foundation.function-extensionality using
+  ( htpy-eq
+  ; function-extensionality -- (i)
+  )
+open import foundation.homotopy-induction using ( is-torsorial-htpy -- (ii)
+  ; induction-principle-homotopies -- (iii)
+  ; induction-principle-homotopies-based-function-extensionality -- (i) → (iii)
+  ; based-function-extensionality-induction-principle-homotopies -- (iii) → (i)
+  )
+```
+
+**Theorem 13.1.2.** Weak function extensionality is equivalent to function
+extensionality.
+
+Note that we don't bundle the two implications into a logical equivalence,
+because both principles quantify over universes, so they lie in `UUω`, and
+`_↔_` doesn't handle large types.
+
+TODO: report that there's a page break between the display math of "such and
+such type" and "is contractible".
+
+```agda
+open import foundation.weak-function-extensionality using
+  ( weak-function-extensionality
+  ; weak-funext-funext
+  ; funext-weak-funext)
+```
+
+**Axiom 13.1.3.** Function extensionality.
+
+```agda
+open import foundation.function-extensionality using
+  ( funext
+  ; eq-htpy)
+```
+
+**Theorem 13.1.5.** Dependent products preserve truncation level.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-Π)
+```
+
+**Corollary 13.1.6.** The type of maps into a `k`-type is `k`-truncated.
+
+```agda
+open import foundation.truncated-types using
+  ( is-trunc-function-type)
+```
+
+**Remark 13.1.7.** `¬ A` is a proposition for every `A`.
+
+```agda
+open import foundation.negation using
+  ( is-prop-neg)
+```
+
+### 13.2 Identity systems on Π-types
+
+**Theorem 13.2.1.** Type theoretic principle of choice.
+
+Recall that the library has η for Σ types, so the identification
+`(pr₁(h(x)), pr₂(h(x))) = h(x)` is satisfied by `refl` as well.
+
+```agda
+open import foundation.type-theoretic-principle-of-choice using
+  ( map-distributive-Π-Σ -- "choice"
+  ; map-inv-distributive-Π-Σ -- "choice⁻¹"
+  ; is-equiv-map-distributive-Π-Σ)
+```
+
+**Corollary 13.2.2.** Distributivity of function types over Σ-types.
+
+```agda
+open import foundation.type-theoretic-principle-of-choice using
+  ( equiv-mapping-into-Σ)
+```
+
+**Corollary 13.2.3.** Sections of `pr1` are sections of the type family.
+
+```agda
+open import foundation.sections using
+  ( equiv-Π-section-pr1)
+```
+
+**Theorem 13.2.4.** Identity systems on Π-types.
+
+TODO
+
+### 13.3 Universal properties
+
+**Theorem 13.3.1.** The universal property of Σ-types.
+
+```agda
+open import foundation.dependent-pair-types using
+  ( ev-pair
+  ; ind-Σ)
+open import foundation.universal-property-dependent-pair-types using
+  ( is-equiv-ev-pair)
+```
+
+**Theorem 13.3.3.** The universal property of identity types.
+
+```agda
+open import foundation.identity-types using
+  ( ind-Id -- "ind-eq"
+  )
+open import foundation.universal-property-identity-types using
+  ( ev-refl
+  ; is-equiv-ev-refl)
+```
+
+### 13.4 Composing with equivalences
+
+**Theorem 13.4.1.** The universal property of equivalences.
+
+```agda
+open import foundation.equivalences using
+  ( is-equiv -- (i)
+  )
+open import foundation.dependent-universal-property-equivalences using
+  ( dependent-universal-property-equiv -- (ii)
+  ; is-equiv-precomp-Π-is-equiv -- (i) → (ii)
+  )
+open import foundation.universal-property-equivalences using
+  ( universal-property-equiv -- (iii)
+  ; is-equiv-precomp-is-equiv-precomp-Π -- (ii) → (iii)
+  ; is-equiv-is-equiv-precomp -- (iii) → (i)
+  )
+```
+
+### 13.5 The strong induction principle of ℕ
+
+**Theorem 13.5.1.** Strong induction for the natural numbers.
+
+```agda
+open import elementary-number-theory.strong-induction-natural-numbers using
+  ( strong-ind-ℕ
+  ; compute-zero-strong-ind-ℕ
+  ; compute-succ-strong-ind-ℕ
+  ; □-≤-ℕ -- P ↦ P̃
+  )
+```
+
+**Lemma 13.5.2.**
+
+Note that we cannot state judgmental equalities as theorems, so that part needs
+to be checked manually by verifying that `eq-zero-strong-ind-ℕ` is given by
+`refl`.
+
+```agda
+open import elementary-number-theory.strong-induction-natural-numbers using
+  ( zero-strong-ind-ℕ -- "p̃₀"
+  ; eq-zero-strong-ind-ℕ -- p̃₀(0, p) = p₀
+  )
+```
+
+**Lemma 13.5.3.**
+
+```agda
+open import elementary-number-theory.strong-induction-natural-numbers using
+  ( succ-strong-ind-ℕ -- "p̃ₛ"
+  ; htpy-succ-strong-ind-ℕ -- p̃ₛ(n, H, m, p) = H(m, q)
+  ; eq-succ-strong-ind-ℕ -- p̃ₛ(n, H, n+1, p) = pₛ(n, H)
+  )
+```
+
+### Exercises
+
+**Exercise 13.1.** Inversion and concatenation of homotopies are equivalences.
+
+```agda
+open import foundation.homotopies using
+  ( is-equiv-inv-htpy
+  ; is-equiv-concat-htpy
+  ; is-equiv-concat-htpy')
+```
+
+**Exercise 13.2.** Characterizing more identity types.
+
+Note that the library provides two characterizations of identity types of
+pointed maps: uniform pointed homotopies and non-uniform pointed homotopies.
+See the respective files for the motivation.
+
+```agda
+-- (a)
+open import structured-types.uniform-pointed-homotopies using
+  ( uniform-pointed-htpy
+  ; uniform-extensionality-pointed-Π)
+open import structured-types.pointed-homotopies using
+  ( pointed-htpy
+  ; extensionality-pointed-map)
+
+-- (b)
+open import foundation.slice using
+  ( htpy-hom-slice
+  ; extensionality-hom-slice)
+
+-- (c)
+open import foundation.coslice using
+  ( htpy-hom-coslice
+  ; extensionality-hom-coslice)
+
+-- (d)
+open import foundation.homotopies-morphisms-arrows using
+  ( htpy-hom-arrow
+  ; extensionality-hom-arrow)
+```
+
+**Exercise 13.3.** Being truncated is a proposition.
+
+Note on the naming: the proof of the fact that `is-contr(A)` is a proposition is
+named `is-property-is-contr` instead of the perhaps expected `is-prop-is-contr`.
+This is because the latter denotes the proof that `is-contr(A)` implies
+`is-prop(A)`.
+
+```agda
+-- (a)
+open import foundation.contractible-types using
+  ( is-property-is-contr)
+
+-- (b)
+open import foundation.truncated-types using
+  ( is-prop-is-trunc)
+```
+
+**Exercise 13.4.** Properties of equivalences.
+
+Similarly to `is-property-is-contr`, the proof of the fact that being an
+equivalence is a proposition is called `is-property-is-equiv`, since
+`is-prop-is-equiv` denotes the proof that when `A` is equivalent to `B` and `B`
+is a proposition, then `A` is a proposition.
+
+```agda
+-- (a)
+open import foundation.equivalences using
+  ( is-contr-section-is-equiv)
+
+-- (b)
+open import foundation.equivalences using
+  ( is-contr-retraction-is-equiv)
+
+-- (c)
+open import foundation.equivalences using
+  ( is-property-is-equiv)
+
+-- (d)
+open import foundation.equivalence-extensionality using
+  ( extensionality-equiv)
+
+-- (e)
+open import foundation.truncated-types using
+  ( is-trunc-equiv-is-trunc)
+```
+
+**Exercise 13.5.** Alternative (non-)notions of equivalences.
+
+In `(a)` we construct the chain of equivalences
+`is-path-split(f) ≃ is-equiv(f) ≃ is-coh-invertible(f)` instead, as `is-equiv`
+is the primary notion of equivalences in the library.
+
+```agda
+-- (a)
+open import foundation.path-split-maps using
+  ( is-prop-is-path-split
+  ; equiv-is-equiv-is-path-split -- is-path-split(f) ≃ is-equiv(f)
+  )
+open import foundation.coherently-invertible-maps using
+  ( is-prop-is-coherently-invertible
+  ; is-equiv-is-coherently-invertible-is-equiv)
+_ :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-equiv f ≃ is-coherently-invertible f
+_ = λ f → _ , is-equiv-is-coherently-invertible-is-equiv f
+
+-- (b)
+open import foundation.invertible-maps using
+  ( is-equiv-is-invertible-id-htpy-id-id)
+_ : {l : Level} {A : UU l} → (id {A = A} ~ id) ≃ is-invertible (id {A = A})
+_ = _ , is-equiv-is-invertible-id-htpy-id-id _
+```
+
+**Exercise 13.6.** The universal property of empty types.
+
+```agda
+open import foundation.universal-property-empty-type using
+  ( dependent-universal-property-empty -- (ii)
+  ; dependent-universal-property-empty-is-empty -- (i) → (ii)
+  ; universal-property-empty -- (iii)
+  ; universal-property-dependent-universal-property-empty -- (ii) → (iii)
+  ; is-empty-universal-property-empty -- (iii) → (i)
+  )
+```
+
+**Exercise 13.7.** The universal property of contractible types.
+
+Beware that the library defines the universal property as a property of a
+morally pointed type, meaning that the type of the property is
+`(A : 𝒰) (a : A) → 𝒱` rather than `(A : 𝒰) → 𝒱`. We also break the chain of
+equivalences into two smaller ones.
+
+```agda
+open import foundation.universal-property-contractible-types using
+  ( dependent-universal-property-contr -- (ii)
+  ; dependent-universal-property-contr-is-contr -- (i) → (ii)
+  ; universal-property-contr -- (iii)
+  ; universal-property-dependent-universal-property-contr -- (ii) → (iii)
+  -- (iii) → (iv) by instantiation
+  ; is-contr-is-equiv-ev-point -- (iv) → (i)
+  )
+open import foundation.contractible-types using
+  ( is-equiv-diagonal-exponential-is-contr -- (i) → (v)
+  -- (v) → (vi) by instantiation
+  ; is-contr-is-equiv-self-diagonal-exponential -- (vi) → i
+  )
+```
+
+**Exercise 13.8.** The universal property of coproducts.
+
+Note that here the universal properties are not statements but proofs of the
+statements for the canonical inductive type `A + B`.
+
+```agda
+open import foundation.universal-property-coproduct-types using
+  ( dependent-universal-property-coproduct
+  ; universal-property-coproduct)
+```
+
+**Exercise 13.9.**
+
+TODO. Note that `ev_b` is a less dependent version of `ev-refl-identity-system`,
+which allows `C` to depend on `B` (and this lack of dependency is probably
+compensated for by requiring the evaluation map to be an equivalence instead of
+just having a section).
+
+**Exercise 13.10.** The universal property of ℕ.
+
+```agda
+open import elementary-number-theory.universal-property-natural-numbers using
+  ( is-contr-structure-preserving-map-ℕ)
+```
+
+**Exercise 13.11.** Ordinal induction on ℕ.
+
+TODO the computation rule.
+
+```agda
+open import elementary-number-theory.ordinal-induction-natural-numbers using
+  ( ordinal-ind-ℕ)
+```
+
+**Exercise 13.12.** Postcomposition by truncated maps.
+
+```agda
+-- (a)
+open import foundation.functoriality-dependent-function-types using
+  ( is-trunc-map-map-Π)
+
+-- (b)
+open import foundation.functoriality-dependent-function-types using
+  ( is-equiv-map-equiv-Π)
+
+-- (c)
+open import foundation.functoriality-dependent-function-types using
+  ( is-trunc-map-map-Π' -- (i) → (ii)
+  ; is-trunc-map-is-trunc-map-map-Π' -- (ii) → (i)
+  )
+
+-- (d)
+open import foundation.functoriality-function-types using
+  ( is-trunc-map-postcomp-is-trunc-map -- (i) → (ii)
+  ; is-trunc-map-is-trunc-map-postcomp -- (ii) → (i)
+  ; is-emb-postcomp-is-emb
+  ; is-emb-is-emb-postcomp
+  )
+-- special cases
+open import foundation.postcomposition-functions using
+  ( is-equiv-postcomp-is-equiv
+  ; is-equiv-is-equiv-postcomp)
+open import foundation.functoriality-function-types using
+  ( is-emb-postcomp-is-emb
+  ; is-emb-is-emb-postcomp)
+```
+
+**Exercise 13.13.** Π-types distribute over coproducts.
+
+```agda
+open import foundation.dependent-binomial-theorem using
+  ( distributive-Π-coproduct)
+```
+
+**Exercise 13.14.** Retracts of sections.
+
+TODO: `(b)` says that `retr(h) retract-of sec(f)` instead of `retr(f)`.
+
+```agda
+-- (a)
+open import foundation.sections using
+  ( section-left-factor-retract-of-section-composition)
+
+-- (b)
+open import foundation.retractions using
+  ( retraction-right-factor-retract-of-retraction-left-factor)
+```
+
+**Exercise 13.15.** Maps over as maps of fibers.
+
+To justify the naming choices in the library, for `(a)` we define the type of
+lifts of a type family `P` over `X` agains a map `f : A → X` to be
+`(a : A) → P(f a)`, and in this context the exercise asks us to show that `fib`
+is the initial type family with a lift.
+
+```agda
+open import foundation.slice using
+  ( hom-slice)
+
+-- (a)
+open import foundation.universal-property-family-of-fibers-of-maps using
+  ( universal-property-family-of-fibers-fiber
+  ; equiv-universal-property-family-of-fibers)
+
+-- (b)
+open import foundation.slice using
+  ( fiberwise-hom -- codomain of α
+  ; equiv-fiberwise-hom-hom-slice -- "α"
+  )
+
+-- TODO: move this
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  γ : fiberwise-hom f g ≃ ((a : A) → fiber g (f a))
+  γ = equiv-universal-property-family-of-fibers f (fiber g)
+
+  β : hom-slice f g → ((a : A) → fiber g (f a))
+  β = λ H a → pr1 H a , inv (pr2 H a)
+
+  _ : is-equiv β
+  _ =
+    is-equiv-is-invertible
+      ( λ h → (λ a → pr1 (h a)) , (λ a → inv (pr2 (h a))))
+      ( λ h → eq-htpy (λ a → eq-pair-Σ refl (inv-inv _)))
+      ( λ x → eq-pair-Σ refl (eq-htpy (λ a → inv-inv _)))
+    where
+    open import foundation.equivalences using (is-equiv-is-invertible)
+    open import foundation.identity-types using (inv-inv)
+
+  _ : map-equiv γ ∘ map-equiv (equiv-fiberwise-hom-hom-slice f g) ~ β
+  _ = refl-htpy
+
+-- (c)
+open import foundation.slice using
+  ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice -- (i) → (ii)
+  ; is-fiberwise-equiv-fiberwise-equiv-equiv-slice -- (ii) → (i)
+  -- TODO (iii)
+  ; equiv-fam-equiv-equiv-slice -- conclusion
+  )
+```
+
+**Exercise 13.16.** Isomorphisms between sets.
+
+```agda
+open import foundation.isomorphisms-of-sets using
+  ( equiv-iso-equiv-Set)
+```
+
+**Exercise 13.17.** Contractible sections of families over discrete types.
+
+TODO.
+
+**Exercise 13.18.** Retracts as sequential limits.
+
+Following the naming conventions of the library, this exercise shows that `A` is
+the sequential limit
+
+```text
+            f      f      f
+  A ---> ⋯ ---> X ---> ⋯ ---> X.
+```
+
+Note that `f` is a split idempotent (as `f ∘ f ≐ i ∘ (r ∘ i) ∘ r ~ i ∘ r ≐ f`),
+so this formalization should go there.
+
+TODO.
