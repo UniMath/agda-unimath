@@ -10,26 +10,16 @@ module lists.replace-at-index-finite-sequences where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sets
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
 open import lists.focus-at-index-finite-sequences
 
-open import univalent-combinatorics.involution-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
