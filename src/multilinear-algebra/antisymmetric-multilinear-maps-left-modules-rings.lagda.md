@@ -54,13 +54,13 @@ a [ring](ring-theory.rings.md) `R` and `n : ℕ` a
 `f : Mⁿ⁺¹ → N` is called
 {{#concept "antisymmetric" Disambiguation="multilinear map between left modules" Agda=is-antisymmetric-multilinear-map-left-module-Ring}}
 if for any [indices](univalent-combinatorics.standard-finite-types.md)
-`(i ≠ j : ℕₙ)`, `f ∘ τᵢⱼ ~ - f`, where `τᵢⱼ` swaps the coordinates at `i` and
-`j`:
+`(i ≠ j : ℕₙ)`, `f ∘ ρᵢⱼ ~ - f`, where `ρᵢⱼ` extracts the coordinate at `j` and
+put it at `i`:
 
 ```text
   ∀ ((xₒ,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ,xⱼ₊₁,...,xₙ) : Mⁿ⁺¹) →
-  f (xₒ,...xᵢ₋₁,xⱼ,xᵢ₊₁,...,xⱼ₋₁,xᵢ,xⱼ₊₁,...,xₙ) ＝
-  f (xₒ,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ,xⱼ₊₁,...,xₙ)
+  f (xₒ,...xᵢ₋₁,xⱼ,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ₊₁,...,xₙ) ＝
+  - f (xₒ,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ,xⱼ₊₁,...,xₙ)
 ```
 
 ## Definitions
@@ -94,7 +94,7 @@ module _
                     Id-Prop
                       ( set-left-module-Ring R N)
                       ( map-multilinear-map-left-module-Ring R M N n f
-                        ( swap-at-finite-sequence n i j u))
+                        ( replace-at-finite-sequence n i j u))
                       ( neg-left-module-Ring R N
                         ( map-multilinear-map-left-module-Ring R M N n f u))))))
 
@@ -148,7 +148,7 @@ module _
     (i≠j : i ≠ j) →
     (u : fin-sequence (type-left-module-Ring R M) (succ-ℕ n)) →
     map-antisymmetric-multilinear-map-left-module-Ring
-      ( swap-at-finite-sequence n i j u) ＝
+      ( replace-at-finite-sequence n i j u) ＝
     neg-left-module-Ring R N
       ( map-antisymmetric-multilinear-map-left-module-Ring u)
   is-antisymmetric-map-antisymmetric-multilinear-map-left-module-Ring = pr2 f
