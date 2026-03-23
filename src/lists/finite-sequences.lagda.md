@@ -169,16 +169,16 @@ module _
   unfocus-at-finite-sequence (a , u) = insert-at-fin-sequence n a i u
 ```
 
-### Swapping elements at a pair of indices
+### Replaceping elements at a pair of indices
 
 ```agda
 module _
   {l : Level} {A : UU l} (n : ℕ) (i j : Fin (succ-ℕ n))
   where
 
-  swap-at-finite-sequence :
+  replace-at-finite-sequence :
     fin-sequence A (succ-ℕ n) → fin-sequence A (succ-ℕ n)
-  swap-at-finite-sequence =
+  replace-at-finite-sequence =
     unfocus-at-finite-sequence n i ∘ focus-at-finite-sequence n j
 ```
 
@@ -354,71 +354,73 @@ module _
     (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
 ```
 
-### Swapping the same index is the identity
+### Replaceping the same index is the identity
 
 ```agda
 module _
   {l : Level} {A : UU l} (n : ℕ)
   where
 
-  id-swap-at-finite-sequence :
+  id-replace-at-finite-sequence :
     (i : Fin (succ-ℕ n)) →
     (u : fin-sequence A (succ-ℕ n)) →
-    swap-at-finite-sequence n i i u ＝ u
-  id-swap-at-finite-sequence i u = is-retraction-focus-at-finite-sequence n i u
+    replace-at-finite-sequence n i i u ＝ u
+  id-replace-at-finite-sequence i u =
+    is-retraction-focus-at-finite-sequence n i u
 ```
 
-### Composing swaps
+### Composing replaces
 
 ```agda
 module _
   {l : Level} {A : UU l} (n : ℕ)
   where
 
-  comp-swap-at-finite-sequence :
+  comp-replace-at-finite-sequence :
     (i j k : Fin (succ-ℕ n)) →
     (u : fin-sequence A (succ-ℕ n)) →
-    swap-at-finite-sequence n i j
-      ( swap-at-finite-sequence n j k u) ＝
-    swap-at-finite-sequence n i k u
-  comp-swap-at-finite-sequence i j k u =
+    replace-at-finite-sequence n i j
+      ( replace-at-finite-sequence n j k u) ＝
+    replace-at-finite-sequence n i k u
+  comp-replace-at-finite-sequence i j k u =
     ap
       ( unfocus-at-finite-sequence n i)
       ( is-section-focus-at-finite-sequence n j
         ( focus-at-finite-sequence n k u))
 ```
 
-### Swapping elements is an equivalence
+### Replaceping elements is an equivalence
 
 ```agda
 module _
   {l : Level} {A : UU l} (n : ℕ)
   where abstract
 
-  is-section-swap-at-finite-sequence :
+  is-section-replace-at-finite-sequence :
     (i j : Fin (succ-ℕ n)) →
     (u : fin-sequence A (succ-ℕ n)) →
-    swap-at-finite-sequence n i j (swap-at-finite-sequence n j i u) ＝ u
-  is-section-swap-at-finite-sequence i j u =
-    ( comp-swap-at-finite-sequence n i j i u) ∙
-    ( id-swap-at-finite-sequence n i u)
+    replace-at-finite-sequence n i j (replace-at-finite-sequence n j i u) ＝ u
+  is-section-replace-at-finite-sequence i j u =
+    ( comp-replace-at-finite-sequence n i j i u) ∙
+    ( id-replace-at-finite-sequence n i u)
 
-  is-equiv-swap-at-finite-sequence :
-    (i j : Fin (succ-ℕ n)) → is-equiv (swap-at-finite-sequence {A = A} n i j)
-  is-equiv-swap-at-finite-sequence i j =
+  is-equiv-replace-at-finite-sequence :
+    (i j : Fin (succ-ℕ n)) → is-equiv (replace-at-finite-sequence {A = A} n i j)
+  is-equiv-replace-at-finite-sequence i j =
     is-equiv-is-invertible
-      ( swap-at-finite-sequence n j i)
-      ( is-section-swap-at-finite-sequence i j)
-      ( is-section-swap-at-finite-sequence j i)
+      ( replace-at-finite-sequence n j i)
+      ( is-section-replace-at-finite-sequence i j)
+      ( is-section-replace-at-finite-sequence j i)
 
 module _
   {l : Level} {A : UU l} (n : ℕ) (i j : Fin (succ-ℕ n))
   where
 
-  equiv-swap-at-finite-sequence :
+  equiv-replace-at-finite-sequence :
     fin-sequence A (succ-ℕ n) ≃ fin-sequence A (succ-ℕ n)
-  equiv-swap-at-finite-sequence =
-    ( swap-at-finite-sequence n i j , is-equiv-swap-at-finite-sequence n i j)
+  equiv-replace-at-finite-sequence =
+    ( replace-at-finite-sequence n i j ,
+      is-equiv-replace-at-finite-sequence n i j)
 ```
 
 ### Any sequence `u` in a type determines a sequence of finite sequences `(i : Fin n) ↦ u i`
