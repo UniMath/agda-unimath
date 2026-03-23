@@ -11,13 +11,8 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
-open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.conjunction
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -25,9 +20,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-
-open import group-theory.abelian-groups
-open import group-theory.homomorphisms-abelian-groups
 
 open import linear-algebra.finite-sequences-in-rings
 open import linear-algebra.left-modules-rings
