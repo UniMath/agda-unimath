@@ -95,5 +95,5 @@ module _
 
 ## External links
 
-- [multilnear maps](https://ncatlab.org/nlab/show/multilinear+map) at $n$Lab
+- [multilinear maps](https://ncatlab.org/nlab/show/multilinear+map) at $n$Lab
 - [Multilinear maps](https://en.wikipedia.org/wiki/Multilinear_map) at Wikipedia
