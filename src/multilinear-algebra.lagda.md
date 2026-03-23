@@ -11,6 +11,7 @@ between [modules](linear-algebra.left-modules-rings.md),
 ```agda
 module multilinear-algebra where
 
+open import multilinear-algebra.antisymmetric-multilinear-maps-left-modules-rings public
 open import multilinear-algebra.multilinear-maps-left-modules-rings public
 open import multilinear-algebra.symmetric-multilinear-maps-left-modules-rings public
 ```
