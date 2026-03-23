@@ -4,6 +4,10 @@ This file collects references to formalization of constructions, propositions,
 theorems and exercises from Rijke's Introduction to Homotopy Type Theory
 {{#cite Rij22}}.
 
+> This page is currently under construction. For more information on what's
+> missing, consult the associated GitHub issue
+> [#1925](https://github.com/UniMath/agda-unimath/issues/1925).
+
 ```agda
 module literature.introduction-to-homotopy-type-theory where
 
@@ -1079,8 +1083,6 @@ open import elementary-number-theory.distance-natural-numbers using
 _ : (m n : ℕ) → (m ＝ n) ↔ (dist-ℕ m n ＝ 0)
 _ = λ m n → (dist-eq-ℕ m n , eq-dist-ℕ m n)
 
--- TODO: b
-
 -- (c)
 open import elementary-number-theory.distance-natural-numbers using
   ( translation-invariant-dist-ℕ -- dist (a + m) (a + n) = dist m n
@@ -1092,6 +1094,8 @@ open import elementary-number-theory.distance-natural-numbers using
   ( is-additive-right-inverse-dist-ℕ -- x + dist x y = y for x ≤ y
   )
 ```
+
+> Part `(b)` is not yet formalized.
 
 **Exercise 6.6.** The absolute value function.
 
@@ -1484,9 +1488,9 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 -- (a)
 open import elementary-number-theory.euclidean-division-natural-numbers using
   ( euclidean-division-ℕ)
-
--- TODO: b
 ```
+
+> Part `(b)` is not yet formalized.
 
 **Exercise 7.10.** `k`-ary natural numbers.
 
@@ -1819,7 +1823,7 @@ open import elementary-number-theory.infinitude-of-primes using
 
 **Exercise 8.5.** Alternative definition of prime numbers.
 
-TODO
+> Not yet formalized.
 
 **Exercise 8.6.** Products have decidable equality if and only if factors have
 decidable equality, assuming the other factor is pointed.
@@ -1845,6 +1849,7 @@ open import foundation.decidable-equality using
 ```
 
 **Exercise 8.7.** Observational equality of coproducts.
+<a id="exercise-8.7"></a>
 
 Note that observational equality of coproducts is defined as a bespoke inductive
 type, because the book definition requires raising universe levels: if `A : 𝒰`
@@ -1880,8 +1885,6 @@ module _
 
   _ : (x y : A + B) → (x ＝ y) ↔ Eq-copr x y
   _ = λ x y → (Eq-eq-copr x y , eq-Eq-copr x y)
-
-  -- TODO the rest
 
   -- (b)
   open import foundation.decidable-equality using
@@ -1927,16 +1930,17 @@ open import foundation.decidable-equality using
 of `Fin k`
 
 ```agda
+-- (a)
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-Fin)
-
--- TODO: b
 ```
+
+> Part `(b)` is not yet formalized.
 
 **Exercise 8.10.** Definition of the greatest common divisor as the maximal
 element of common divisors.
 
-TODO
+> Not yet formalized.
 
 **Exercise 8.11.** Bézout's identity.
 
@@ -1980,11 +1984,11 @@ open import elementary-number-theory.fundamental-theorem-of-arithmetic using
 
 **Exercise 8.13.** There are infinitely many primes `p ≡ 3 mod 4`.
 
-TODO.
+> Not yet formalized.
 
 **Exercise 8.14.** Prime fields.
 
-TODO.
+> Not yet formalized.
 
 **Exercise 8.15.** The cofibonacci sequenece.
 
@@ -1992,9 +1996,9 @@ TODO.
 open import elementary-number-theory.cofibonacci using
   ( cofibonacci
   ; forward-is-left-adjoint-cofibonacci)
-
--- TODO: backward direction of the adjointness equivalence
 ```
+
+> The backward direction is not yet formalized.
 
 ## 9 Equivalences
 
@@ -2376,8 +2380,6 @@ open import foundation.functoriality-cartesian-product-types using
   )
 ```
 
-TODO: report this
-
 The claim of part (e) is actually false. We cannot construct the inverse map, as
 evidenced by the following counterexample: consider `ex-falso : ∅ → 𝟏`. By
 induction on ∅ we get a proof of `∅ → is-equiv ex-falso`, and assuming the
@@ -2427,7 +2429,7 @@ and [10.4.6](#theorem-10.5.6). This characterization isn't available at this
 point in the book, so a "nuts and bolts" proof is included below.
 
 ```agda
-module _
+module exercise-9-7-e
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
   (f : A → A') (g : B → B') (H : is-equiv (map-product f g))
   where private
@@ -2943,16 +2945,21 @@ open import foundation.equivalences using
 
 **Definition 11.5.2.** Observational equality of coproducts.
 
-TODO: report that `Eq-copr` has already been defined in Exercise 8.7?
+See the note in [Exercise 8.7](#exercise-8.7) which explains why the definitions
+here are not the same as the ones in the library.
 
 ```agda
 _ = Eq-copr
+open import foundation.equality-coproduct-types using
+  ( Eq-coproduct)
 ```
 
 **Lemma 11.5.3.** Reflexivity of `Eq-copr`.
 
 ```agda
 _ = refl-Eq-copr
+open import foundation.equality-coproduct-types using
+  ( refl-Eq-coproduct)
 ```
 
 **Proposition 11.5.4.** Torsoriality of observational equality of coproducts.
@@ -2974,6 +2981,9 @@ is-torsorial-Eq-copr {A} {B} (inr y) =
       equiv-coproduct (right-zero-law-product A) id-equiv ∘e
       right-distributive-Σ-coproduct (Eq-copr (inr y)))
     ( is-torsorial-Id y)
+
+open import foundation.equality-coproduct-types using
+  ( is-torsorial-Eq-coproduct)
 ```
 
 **Theorem 11.5.1.** Characterization of equality of coproducts.
@@ -2987,6 +2997,9 @@ equiv-Eq-eq-copr : {A B : UU} (x y : A + B) → (x ＝ y) ≃ (Eq-copr x y)
 pr1 (equiv-Eq-eq-copr x y) = Eq-eq-copr x y
 pr2 (equiv-Eq-eq-copr x y) = is-equiv-Eq-eq-copr x y
 
+open import foundation.equality-coproduct-types using
+  ( extensionality-coproduct)
+
 module _
   {A B : UU}
   where
@@ -2997,26 +3010,34 @@ module _
 
   _ : (inl {B = B} x ＝ inl x') ≃ (x ＝ x')
   _ = equiv-Eq-eq-copr (inl _) (inl _)
+  open import foundation.equality-coproduct-types using
+    ( compute-eq-coproduct-inl-inl)
 
   _ : (inl x ＝ inr y') ≃ empty
   _ = equiv-Eq-eq-copr (inl _) (inr _)
+  open import foundation.equality-coproduct-types using
+    ( compute-eq-coproduct-inl-inr)
 
   _ : (inr y ＝ inl x') ≃ empty
   _ = equiv-Eq-eq-copr (inr _) (inl _)
+  open import foundation.equality-coproduct-types using
+    ( compute-eq-coproduct-inr-inl)
 
   _ : (inr {A = A} y ＝ inr y') ≃ (y ＝ y')
   _ = equiv-Eq-eq-copr (inr _) (inr _)
+  open import foundation.equality-coproduct-types using
+    ( compute-eq-coproduct-inr-inr)
 ```
 
 ### 11.6 The structure identity principle
 
 **Definition 11.6.1.** Dependent identity systems.
 
-TODO, apparently?
+> Not yet formalized.
 
 **Theorem 11.6.2.** The structure identity principle.
 
-TODO as stated? We use torsoriality instead of dependent identity systems.
+> Not yet formalized in full as stated.
 
 ```agda
 open import foundation.structure-identity-principle using
@@ -3024,11 +3045,6 @@ open import foundation.structure-identity-principle using
 ```
 
 **Example 11.6.3.** Characterization of equality of fibers.
-
-TODO: report "alternative characterization of the fiber" should probably say
-"equality"
-
-TODO: do we have access to `equiv-right-transpose-eq-concat`?
 
 ```agda
 module _
@@ -3130,31 +3146,29 @@ _ =
 
 **Exercise 11.5.** Composition of embeddings being equivalences.
 
-TODO I think.
+> Not yet formalized.
 
 **Exercise 11.6.** `map-coproduct f g` being an embedding.
 
 ```agda
 open import foundation.equality-coproduct-types using
-  ( is-emb-coproduct -- f, g embeddings and f(a) ≠ g(a) → is-emb [f, g]
+  ( is-emb-coproduct -- (ii) → (i)
   )
-
--- TODO: reverse implication
 ```
+
+> The forward implication is not yet formalized.
 
 **Exercise 11.7.** Equivalences and embeddings with `map-coproduct`.
 
 ```agda
--- TODO: a
-
 -- (b)
 open import foundation.functoriality-coproduct-types using
   ( is-emb-map-coproduct)
-
--- TODO: reverse implication
 ```
 
-**Exercirse 11.8.** Functoriality of `tot`.
+> Part `(a)` and the reverse implication of `(b)` are not yet formalized.
+
+**Exercise 11.8.** Functoriality of `tot`.
 
 ```agda
 -- (a)
@@ -3190,12 +3204,6 @@ open import foundation.embeddings using
 
 **Exercise 11.10.** Path-split maps.
 
-TODO: this and other exercises ask the reader to "show that the following are
-equivalent"; this can mean to show inverse implications, but it's also possible
-to interpret it as showing a literal equivalence. That's also possible, but
-would require some understanding of hProps and proofs of being one, which only
-comes up in the next section. What's the intention here?
-
 ```agda
 open import foundation.path-split-maps using
   ( is-path-split
@@ -3207,7 +3215,6 @@ _ :
   is-equiv f ↔ is-path-split f
 _ = λ f → is-path-split-is-equiv f , is-equiv-is-path-split f
 
--- TODO: see above if this should be included
 open import foundation.path-split-maps using
   ( equiv-is-path-split-is-equiv)
 ```
@@ -3260,11 +3267,6 @@ open import foundation.empty-types using
 
 **Proposition 12.1.3.** Characterizations of propositions.
 
-Note that the library doesn't show the (iii) → (iv) step (TODO: importing the
-unit type to foundation-core.propositions creates a cycle, and it feels out of
-place in foundation.propositions; do we want to shuffle things around to have it
-formalized?). Instead we show (i) → (ii) → (iii) → (i) and (i) ↔ (iv)
-
 ```agda
 open import foundation.propositions using
   ( eq-is-prop' -- (i) → (ii)
@@ -3273,14 +3275,8 @@ open import foundation.propositions using
   )
 
 -- (iii) → (iv)
-open import foundation.embeddings
-_ :
-  {l1 : Level} {A : UU l1} →
-  (A → is-contr A) → is-emb (terminal-map A)
-_ =
-  λ PI →
-    is-emb-is-emb
-      ( λ a → is-emb-is-equiv (is-equiv-terminal-map-is-contr (PI a)))
+_ : {l1 : Level} {A : UU l1} → (A → is-contr A) → is-emb (terminal-map A)
+_ = λ PI x y → is-emb-is-equiv (is-equiv-terminal-map-is-contr (PI x)) x y
 ```
 
 **Proposition 12.1.4.** Two propositions are logically equivalent if and only if
@@ -3411,8 +3407,6 @@ open import foundation.truncation-levels using
 
 **Definition 12.4.1.** `k`-truncated types and maps.
 
-TODO: we don't have _proper_ `(k+1)` types; are they not useful?
-
 ```agda
 open import foundation.truncated-types using
   ( is-trunc
@@ -3422,6 +3416,8 @@ open import foundation.truncated-types using
 open import foundation.truncated-maps using
   ( is-trunc-map)
 ```
+
+> Proper `(k+1)` types are not formalized yet.
 
 **Proposition 12.4.3.** Truncation levels are cumulative.
 
@@ -3455,8 +3451,6 @@ open import foundation.truncated-types using
 ```
 
 **Theorem 12.4.7.** Recursive characterization of `(k+1)`-truncated maps.
-
-TODO: report that the last line of equivalence reasoning is on the next page.
 
 ```agda
 open import foundation.truncated-maps using
@@ -3493,8 +3487,6 @@ open import order-theory.posets using
 Note that in `(a)`, the library has a direct proof of the second part, and uses
 it in the proof of the first part, rather than the other way around.
 
-TODO: "injective maps" isn't actually ever properly defined AFAICT.
-
 ```agda
 -- (a)
 open import foundation.injective-maps using
@@ -3520,13 +3512,18 @@ open import elementary-number-theory.addition-natural-numbers using
 -- Note: the library uses (k + m = n) rather than (m + k = n)
 open import elementary-number-theory.difference-natural-numbers using
   ( subtraction-leq-ℕ
-  ; leq-subtraction-ℕ)
+  ; leq-subtraction-ℕ
+  ; is-prop-type-subtraction-ℕ)
+open import elementary-number-theory.inequality-natural-numbers using
+  ( is-prop-leq-ℕ)
 
--- TODO: conclude equivalence
-_ :
-  (m n : ℕ) → (m ≤-ℕ n) ↔ Σ ℕ (λ k → k +ℕ m ＝ n)
-_ =
-  λ m n → subtraction-leq-ℕ m n , λ (k , H) → leq-subtraction-ℕ m n k H
+_ : (m n : ℕ) → (m ≤-ℕ n) ≃ Σ ℕ (λ k → k +ℕ m ＝ n)
+_ = λ m n →
+  equiv-iff-is-prop
+    ( is-prop-leq-ℕ m n)
+    ( is-prop-type-subtraction-ℕ m n)
+    ( subtraction-leq-ℕ m n)
+    ( λ (k , H) → leq-subtraction-ℕ m n k H)
 
 -- (c)
 open import elementary-number-theory.multiplication-natural-numbers using
@@ -3539,13 +3536,14 @@ open import elementary-number-theory.divisibility-natural-numbers using
 
 **Exercise 12.4.** Coproducts of truncated types.
 
+Note that the library calls the book's exclusive disjunction "exclusive sums",
+and the name "exclusive disjunction" is used for the type `is-contr (P + Q)`.
+
 ```agda
 -- (a)
 open import foundation.coproduct-types using
   ( is-not-contractible-coproduct-is-contr)
 
--- Note: the library calls the book's exclusive disjunction "exclusive sums",
--- and the name "exclusive disjunction" is used for the type is-contr (P + Q)
 -- (b)
 open import foundation.exclusive-disjunction using
   ( equiv-exclusive-sum-xor-Prop)
@@ -3560,7 +3558,6 @@ _ = λ P Q → iff-equiv (equiv-exclusive-sum-xor-Prop P Q)
 open import foundation.coproduct-types using
   ( is-prop-coproduct -- (P -> ¬ Q) → is-prop (P + Q)
   )
--- TODO: other direction
 
 -- (d)
 open import foundation.equality-coproduct-types using
@@ -3570,6 +3567,8 @@ open import foundation.equality-coproduct-types using
 open import elementary-number-theory.integers using
   ( is-set-ℤ)
 ```
+
+> The backward direction of part `(c)` is not yet formalized.
 
 **Exercise 12.5.** Diagonals of maps.
 
@@ -3584,16 +3583,20 @@ open import foundation.diagonal-maps-cartesian-products-of-types using
 
 -- (a)
 open import foundation.diagonal-maps-cartesian-products-of-types using
-  ( is-prop-is-equiv-diagonal-product)
+  ( is-prop-is-equiv-diagonal-product
+  ; is-contr-map-diagonal-product-is-prop)
 
--- TODO: other direction; we have is-contr-map-diagonal-product-is-prop for
--- contractible maps
+_ : {l : Level} {A : UU l} → is-prop A → is-equiv (diagonal-product A)
+_ = is-equiv-is-contr-map ∘ is-contr-map-diagonal-product-is-prop
 
 -- (b)
 open import foundation.diagonal-maps-cartesian-products-of-types using
   ( is-equiv-eq-fiber-diagonal-product)
 
--- TODO: bundle it into an equivalence
+_ :
+  {l : Level} {A : UU l} (x y : A) →
+  fiber (diagonal-product A) (x , y) ≃ (x ＝ y)
+_ = λ x y → _ , (is-equiv-eq-fiber-diagonal-product _ (x , y))
 
 -- (c)
 open import foundation.diagonal-maps-cartesian-products-of-types using
@@ -3629,9 +3632,6 @@ _ =
 open import foundation.truncated-maps using
   ( is-trunc-map-is-trunc-domain-codomain)
 
--- TODO: put this somewhere else
--- actually it seems to be a pretty direct generalization of
--- is-trunc-is-trunc-map-into-is-trunc?
 converse :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (k : 𝕋) →
   is-trunc k B → is-trunc-map k f → is-trunc k A
@@ -3673,9 +3673,9 @@ _ =
     ( λ H →
       is-trunc-left-factor-product (succ-𝕋 k) H ,
       is-trunc-right-factor-product (succ-𝕋 k) H)
-
--- TODO: conclusion
 ```
+
+> The conclusion is not formalized yet.
 
 **Exercise 12.8.** Retracts of truncated types.
 
@@ -3691,7 +3691,7 @@ open import foundation.truncated-types using
 
 **Exercise 12.9.** Concatenation of lists is 0-truncated.
 
-TODO
+> Not formalized yet.
 
 **Exercise 12.10.** Truncatedness of the constant map.
 
@@ -3793,30 +3793,27 @@ open import foundation.isolated-elements using
 
 **Proposition 13.1.1.** Equivalent forms of function extensionality.
 
-Note that we only show the logical equivalence between `(i)` and `(iii)`.
-TODO: do we care about adding `(ii)` to the chain?
-
 ```agda
 open import foundation.function-extensionality using
   ( htpy-eq
   ; function-extensionality -- (i)
   )
-open import foundation.homotopy-induction using ( is-torsorial-htpy -- (ii)
+open import foundation.homotopy-induction using
+  ( is-torsorial-htpy -- (ii)
   ; induction-principle-homotopies -- (iii)
   ; induction-principle-homotopies-based-function-extensionality -- (i) → (iii)
   ; based-function-extensionality-induction-principle-homotopies -- (iii) → (i)
   )
 ```
 
+> Implications with `(ii)` are not formalized.
+
 **Theorem 13.1.2.** Weak function extensionality is equivalent to function
 extensionality.
 
 Note that we don't bundle the two implications into a logical equivalence,
-because both principles quantify over universes, so they lie in `UUω`, and
-`_↔_` doesn't handle large types.
-
-TODO: report that there's a page break between the display math of "such and
-such type" and "is contractible".
+because both principles quantify over universes, so they lie in `UUω`, and `_↔_`
+doesn't handle large types.
 
 ```agda
 open import foundation.weak-function-extensionality using
@@ -3863,8 +3860,8 @@ Recall that the library has η for Σ types, so the identification
 
 ```agda
 open import foundation.type-theoretic-principle-of-choice using
-  ( map-distributive-Π-Σ -- "choice"
-  ; map-inv-distributive-Π-Σ -- "choice⁻¹"
+  ( map-distributive-Π-Σ -- choice
+  ; map-inv-distributive-Π-Σ -- choice⁻¹
   ; is-equiv-map-distributive-Π-Σ)
 ```
 
@@ -3884,7 +3881,7 @@ open import foundation.sections using
 
 **Theorem 13.2.4.** Identity systems on Π-types.
 
-TODO
+> Not yet formalized.
 
 ### 13.3 Universal properties
 
@@ -3902,7 +3899,7 @@ open import foundation.universal-property-dependent-pair-types using
 
 ```agda
 open import foundation.identity-types using
-  ( ind-Id -- "ind-eq"
+  ( ind-Id -- ind-eq
   )
 open import foundation.universal-property-identity-types using
   ( ev-refl
@@ -3949,7 +3946,7 @@ to be checked manually by verifying that `eq-zero-strong-ind-ℕ` is given by
 
 ```agda
 open import elementary-number-theory.strong-induction-natural-numbers using
-  ( zero-strong-ind-ℕ -- "p̃₀"
+  ( zero-strong-ind-ℕ -- p̃₀
   ; eq-zero-strong-ind-ℕ -- p̃₀(0, p) = p₀
   )
 ```
@@ -3958,7 +3955,7 @@ open import elementary-number-theory.strong-induction-natural-numbers using
 
 ```agda
 open import elementary-number-theory.strong-induction-natural-numbers using
-  ( succ-strong-ind-ℕ -- "p̃ₛ"
+  ( succ-strong-ind-ℕ -- p̃ₛ
   ; htpy-succ-strong-ind-ℕ -- p̃ₛ(n, H, m, p) = H(m, q)
   ; eq-succ-strong-ind-ℕ -- p̃ₛ(n, H, n+1, p) = pₛ(n, H)
   )
@@ -3978,8 +3975,8 @@ open import foundation.homotopies using
 **Exercise 13.2.** Characterizing more identity types.
 
 Note that the library provides two characterizations of identity types of
-pointed maps: uniform pointed homotopies and non-uniform pointed homotopies.
-See the respective files for the motivation.
+pointed maps: uniform pointed homotopies and non-uniform pointed homotopies. See
+the respective files for the motivation.
 
 ```agda
 -- (a)
@@ -4067,6 +4064,7 @@ open import foundation.path-split-maps using
 open import foundation.coherently-invertible-maps using
   ( is-prop-is-coherently-invertible
   ; is-equiv-is-coherently-invertible-is-equiv)
+
 _ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   is-equiv f ≃ is-coherently-invertible f
@@ -4075,6 +4073,7 @@ _ = λ f → _ , is-equiv-is-coherently-invertible-is-equiv f
 -- (b)
 open import foundation.invertible-maps using
   ( is-equiv-is-invertible-id-htpy-id-id)
+
 _ : {l : Level} {A : UU l} → (id {A = A} ~ id) ≃ is-invertible (id {A = A})
 _ = _ , is-equiv-is-invertible-id-htpy-id-id _
 ```
@@ -4127,10 +4126,10 @@ open import foundation.universal-property-coproduct-types using
 
 **Exercise 13.9.**
 
-TODO. Note that `ev_b` is a less dependent version of `ev-refl-identity-system`,
-which allows `C` to depend on `B` (and this lack of dependency is probably
-compensated for by requiring the evaluation map to be an equivalence instead of
-just having a section).
+> Not yet formalized. Note that `ev_b` is a less dependent version of
+> `ev-refl-identity-system`, which allows `C` to depend on `B` (and this lack of
+> dependency is probably compensated for by requiring the evaluation map to be
+> an equivalence instead of just having a section).
 
 **Exercise 13.10.** The universal property of ℕ.
 
@@ -4141,12 +4140,12 @@ open import elementary-number-theory.universal-property-natural-numbers using
 
 **Exercise 13.11.** Ordinal induction on ℕ.
 
-TODO the computation rule.
-
 ```agda
 open import elementary-number-theory.ordinal-induction-natural-numbers using
   ( ordinal-ind-ℕ)
 ```
+
+> The computation rule is not yet formalized.
 
 **Exercise 13.12.** Postcomposition by truncated maps.
 
@@ -4190,7 +4189,8 @@ open import foundation.dependent-binomial-theorem using
 
 **Exercise 13.14.** Retracts of sections.
 
-TODO: `(b)` says that `retr(h) retract-of sec(f)` instead of `retr(f)`.
+Note that `(b)` in the textbooks claims that `retr(h)` is a retract of `sec(f)`,
+while it is supposed to be a retract of `retr(f)`.
 
 ```agda
 -- (a)
@@ -4205,7 +4205,7 @@ open import foundation.retractions using
 **Exercise 13.15.** Maps over as maps of fibers.
 
 To justify the naming choices in the library, for `(a)` we define the type of
-lifts of a type family `P` over `X` agains a map `f : A → X` to be
+lifts of a type family `P` over `X` against a map `f : A → X` to be
 `(a : A) → P(f a)`, and in this context the exercise asks us to show that `fib`
 is the initial type family with a lift.
 
@@ -4221,14 +4221,14 @@ open import foundation.universal-property-family-of-fibers-of-maps using
 -- (b)
 open import foundation.slice using
   ( fiberwise-hom -- codomain of α
-  ; equiv-fiberwise-hom-hom-slice -- "α"
+  ; equiv-fiberwise-hom-hom-slice -- α
   )
 
--- TODO: move this
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X)
   where
+  open import foundation.identity-types using (inv-inv)
 
   γ : fiberwise-hom f g ≃ ((a : A) → fiber g (f a))
   γ = equiv-universal-property-family-of-fibers f (fiber g)
@@ -4238,13 +4238,10 @@ module _
 
   _ : is-equiv β
   _ =
-    is-equiv-is-invertible
-      ( λ h → (λ a → pr1 (h a)) , (λ a → inv (pr2 (h a))))
-      ( λ h → eq-htpy (λ a → eq-pair-Σ refl (inv-inv _)))
-      ( λ x → eq-pair-Σ refl (eq-htpy (λ a → inv-inv _)))
-    where
-    open import foundation.equivalences using (is-equiv-is-invertible)
-    open import foundation.identity-types using (inv-inv)
+    is-equiv-is-invertible'
+      ( ( λ h → (λ a → pr1 (h a)) , (λ a → inv (pr2 (h a)))) ,
+        ( λ h → eq-htpy (λ a → eq-pair-Σ refl (inv-inv _))) ,
+        ( λ x → eq-pair-Σ refl (eq-htpy (λ a → inv-inv _))))
 
   _ : map-equiv γ ∘ map-equiv (equiv-fiberwise-hom-hom-slice f g) ~ β
   _ = refl-htpy
@@ -4253,10 +4250,12 @@ module _
 open import foundation.slice using
   ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice -- (i) → (ii)
   ; is-fiberwise-equiv-fiberwise-equiv-equiv-slice -- (ii) → (i)
-  -- TODO (iii)
   ; equiv-fam-equiv-equiv-slice -- conclusion
   )
 ```
+
+> The statement `(c) (iii)` and its inclusion in the chain is not yet
+> formalized.
 
 **Exercise 13.16.** Isomorphisms between sets.
 
@@ -4267,7 +4266,7 @@ open import foundation.isomorphisms-of-sets using
 
 **Exercise 13.17.** Contractible sections of families over discrete types.
 
-TODO.
+> Not yet formalized.
 
 **Exercise 13.18.** Retracts as sequential limits.
 
@@ -4282,4 +4281,4 @@ the sequential limit
 Note that `f` is a split idempotent (as `f ∘ f ≐ i ∘ (r ∘ i) ∘ r ~ i ∘ r ≐ f`),
 so this formalization should go there.
 
-TODO.
+> Not yet formalized.
