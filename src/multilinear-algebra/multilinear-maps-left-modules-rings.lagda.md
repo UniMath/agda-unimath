@@ -62,8 +62,11 @@ is [linear](linear-algebra.linear-maps-left-modules-rings.md).
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Ring l1)
-  ( M : left-module-Ring l2 R) (N : left-module-Ring l3 R) (n : ℕ)
+  {l1 l2 l3 : Level}
+  ( R : Ring l1)
+  ( M : left-module-Ring l2 R)
+  ( N : left-module-Ring l3 R)
+  ( n : ℕ)
   ( f :
     fin-sequence (type-left-module-Ring R M) (succ-ℕ n) →
     type-left-module-Ring R N)
@@ -91,6 +94,40 @@ module _
     is-prop is-multilinear-map-left-module-Ring
   is-prop-is-multilinear-map-left-module-Ring =
     is-prop-type-Prop is-multilinear-map-prop-left-module-Ring
+```
+
+### The type of multilinear maps between left modules
+
+```agda
+multilinear-map-left-module-Ring :
+  {l1 l2 l3 : Level} →
+  (R : Ring l1) →
+  (M : left-module-Ring l2 R) →
+  (N : left-module-Ring l3 R) →
+  (n : ℕ) →
+  UU (l1 ⊔ l2 ⊔ l3)
+multilinear-map-left-module-Ring R M N n =
+  type-subtype
+    ( is-multilinear-map-prop-left-module-Ring R M N n)
+
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  (n : ℕ)
+  (f : multilinear-map-left-module-Ring R M N n)
+  where
+
+  map-multilinear-map-left-module-Ring :
+    fin-sequence (type-left-module-Ring R M) (succ-ℕ n) →
+    type-left-module-Ring R N
+  map-multilinear-map-left-module-Ring = pr1 f
+
+  is-multilinear-map-multilinear-map-left-module-Ring :
+    is-multilinear-map-left-module-Ring R M N n
+      map-multilinear-map-left-module-Ring
+  is-multilinear-map-multilinear-map-left-module-Ring = pr2 f
 ```
 
 ## External links
