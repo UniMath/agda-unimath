@@ -35,7 +35,7 @@ and a type `A`, the [finite sequence](lists.finite-sequences.md) of
 of `Aⁿ⁺¹` is the family of maps `(i : ℕₙ) → Aⁿ⁺¹ → A × Aⁿ`
 
 ```text
-  (xₒ,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xₙ) ↦ (xᵢ , (xₒ,...xᵢ₋₁,xᵢ₊₁,...,xₙ))
+  (x₀,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xₙ) ↦ (xᵢ , (x₀,...xᵢ₋₁,xᵢ₊₁,...,xₙ))
 ```
 
 ## Definitions

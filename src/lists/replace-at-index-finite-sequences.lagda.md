@@ -35,8 +35,8 @@ the map `Aⁿ⁺¹ → Aⁿ⁺¹` that [extracts](lists.focus-at-index-finite-se
 the coordinate at `j` and inserts it at `i`:
 
 ```text
-  (xₒ,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ,xⱼ₊₁,...,xₙ) ↦
-  (xₒ,...xᵢ₋₁,xⱼ,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ₊₁,...,xₙ)
+  (x₀,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ,xⱼ₊₁,...,xₙ) ↦
+  (x₀,...xᵢ₋₁,xⱼ,xᵢ,xᵢ₊₁,...,xⱼ₋₁,xⱼ₊₁,...,xₙ)
 ```
 
 ## Definitions
