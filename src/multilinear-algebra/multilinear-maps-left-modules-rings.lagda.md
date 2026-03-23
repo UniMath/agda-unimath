@@ -47,8 +47,8 @@ a [ring](ring-theory.rings.md) `R` and `n : ℕ` a
 type of [finite sequences](lists.finite-sequences.md) of `M` into `N`,
 `f : Mⁿ⁺¹ → N` is called
 {{#concept "multilinear" Disambiguation="map between left modules over a ring" Agda=is-multilinear-map-left-module-Ring WD="multilinear map" WDID=Q1952404}}
-if, for any [index](univalent-combinatorics.standard-finite-types.md)
-`i : ℕₙ` and any element `(u₀,...,uᵢ₋₁,uᵢ₊₁,...,uₙ) : Mⁿ`, the map
+if, for any [index](univalent-combinatorics.standard-finite-types.md) `i : ℕₙ`
+and any element `(u₀,...,uᵢ₋₁,uᵢ₊₁,...,uₙ) : Mⁿ`, the map
 
 ```text
 x ↦ f (u₀,...,uᵢ₋₁,x,uᵢ₊₁,...,uₙ)
