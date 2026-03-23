@@ -169,6 +169,19 @@ module _
   unfocus-at-finite-sequence (a , u) = insert-at-fin-sequence n a i u
 ```
 
+### Swapping elements at a pair of indices
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ) (i j : Fin (succ-ℕ n))
+  where
+
+  swap-at-finite-sequence :
+    fin-sequence A (succ-ℕ n) → fin-sequence A (succ-ℕ n)
+  swap-at-finite-sequence =
+    unfocus-at-finite-sequence n i ∘ focus-at-finite-sequence n j
+```
+
 ## Properties
 
 ### The type of finite sequences of elements in a truncated type is truncated
@@ -306,25 +319,75 @@ module _
 
 ```agda
 module _
+  {l : Level} {A : UU l} (n : ℕ) (i : Fin (succ-ℕ n))
+  where abstract
+
+  is-section-focus-at-finite-sequence :
+    (x : A × fin-sequence A n) →
+    focus-at-finite-sequence n i (unfocus-at-finite-sequence n i x) ＝ x
+  is-section-focus-at-finite-sequence (a , u) =
+    eq-pair
+      ( compute-elem-at-insert-at-fin-sequence n a i u)
+      ( eq-htpy (compute-drop-at-insert-at-fin-sequence n a i u))
+
+  is-retraction-focus-at-finite-sequence :
+    (v : fin-sequence A (succ-ℕ n)) →
+    unfocus-at-finite-sequence n i (focus-at-finite-sequence n i v) ＝ v
+  is-retraction-focus-at-finite-sequence =
+    eq-htpy ∘ compute-insert-at-drop-at-fin-sequence n i
+
+  is-equiv-focus-at-finite-sequence :
+    is-equiv (focus-at-finite-sequence {A = A} n i)
+  is-equiv-focus-at-finite-sequence =
+    is-equiv-is-invertible
+      ( unfocus-at-finite-sequence n i)
+      ( is-section-focus-at-finite-sequence)
+      ( is-retraction-focus-at-finite-sequence)
+
+module _
   {l : Level} (A : UU l) (n : ℕ) (i : Fin (succ-ℕ n))
   where
-
-  abstract
-    is-equiv-focus-at-finite-sequence :
-      is-equiv (focus-at-finite-sequence {A = A} n i)
-    is-equiv-focus-at-finite-sequence =
-      is-equiv-is-invertible
-        ( unfocus-at-finite-sequence n i)
-        ( λ (a , u) →
-          eq-pair
-            ( compute-elem-at-insert-at-fin-sequence n a i u)
-            ( eq-htpy (compute-drop-at-insert-at-fin-sequence n a i u)))
-        ( eq-htpy ∘ (compute-insert-at-drop-at-fin-sequence n i))
 
   equiv-focus-at-finite-sequence :
     fin-sequence A (succ-ℕ n) ≃ A × fin-sequence A n
   equiv-focus-at-finite-sequence =
-    (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence)
+    (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
+```
+
+### Swapping elements is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where abstract
+
+  is-section-swap-at-finite-sequence :
+    (i j : Fin (succ-ℕ n)) →
+    (u : fin-sequence A (succ-ℕ n)) →
+    swap-at-finite-sequence n i j (swap-at-finite-sequence n j i u) ＝ u
+  is-section-swap-at-finite-sequence i j u =
+    ( ap
+      ( unfocus-at-finite-sequence n i)
+      ( is-section-focus-at-finite-sequence n j
+        ( focus-at-finite-sequence n i u))) ∙
+    ( is-retraction-focus-at-finite-sequence n i u)
+
+  is-equiv-swap-at-finite-sequence :
+    (i j : Fin (succ-ℕ n)) → is-equiv (swap-at-finite-sequence {A = A} n i j)
+  is-equiv-swap-at-finite-sequence i j =
+    is-equiv-is-invertible
+      ( swap-at-finite-sequence n j i)
+      ( is-section-swap-at-finite-sequence i j)
+      ( is-section-swap-at-finite-sequence j i)
+
+module _
+  {l : Level} {A : UU l} (n : ℕ) (i j : Fin (succ-ℕ n))
+  where
+
+  equiv-swap-at-finite-sequence :
+    fin-sequence A (succ-ℕ n) ≃ fin-sequence A (succ-ℕ n)
+  equiv-swap-at-finite-sequence =
+    ( swap-at-finite-sequence n i j , is-equiv-swap-at-finite-sequence n i j)
 ```
 
 ### Any sequence `u` in a type determines a sequence of finite sequences `(i : Fin n) ↦ u i`
