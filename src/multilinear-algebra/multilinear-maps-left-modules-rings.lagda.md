@@ -46,7 +46,7 @@ a [ring](ring-theory.rings.md) `R` and `n : ℕ` a
 [natural number](elementary-number-theory.natural-numbers.md); a map from the
 type of [finite sequences](lists.finite-sequences.md) of `M` into `N`,
 `f : Mⁿ⁺¹ → N` is called
-{{#concept "multilinear" Disambiguation="map between left modules over a ring" Agda=is-multilinear-map-left-module-Ring}}
+{{#concept "multilinear" Disambiguation="map between left modules over a ring" Agda=is-multilinear-map-left-module-Ring WD="multilinear map" WDID=Q1952404}}
 if, for any [index](univalent-combinatorics.standard-finite-types.md)
 `i : Fin (n + 1)` and any element `(u₀,...,uᵢ₋₁,uᵢ₊₁,...,uₙ) : Mⁿ`, the map
 
@@ -92,3 +92,8 @@ module _
   is-prop-is-multilinear-map-left-module-Ring =
     is-prop-type-Prop is-multilinear-map-prop-left-module-Ring
 ```
+
+## External links
+
+- [multilnear maps](https://ncatlab.org/nlab/show/multilinear+map) at $n$Lab
+- [Multilinear maps](https://en.wikipedia.org/wiki/Multilinear_map) at Wikipedia
