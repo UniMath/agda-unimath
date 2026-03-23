@@ -267,16 +267,16 @@
 
         <script>
           document.querySelector('#random-page').addEventListener('click', () => {
-              // Only consider links with two dots to avoid the Overview modules
-              const moduleRegex = /[^.]+\.[^.]+\.html/;
+              // Skip meta pages, which all have names in capital letters
+              const metaRegex = /[A-Z_]+(\.lagda)?\.html/;
               // Extract the module list from the sidebar, no point duplicating this data
               const allModules = Array.prototype.filter.call(
-                  document.querySelectorAll('#sidebar .section > .chapter-item > a'),
+                  document.querySelectorAll('#sidebar .chapter-item > a'),
                   // Filter based on the unresolved attribute (i.e. the relative path)
                   link => {
                       const href = link.attributes.href;
-                      // Filter out chevron link, Overview links, and TEMPLATE.lagda.html
-                      return href && !!moduleRegex.test(href.value) && !href.value.endsWith('.lagda.html');
+                      // Filter out chevron links and meta pages
+                      return href && !metaRegex.test(href.value);
                   }
               );
               const chosen = allModules[Math.floor(Math.random() * (allModules.length + 1))];
