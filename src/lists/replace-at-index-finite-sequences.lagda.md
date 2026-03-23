@@ -134,3 +134,20 @@ module _
     ( replace-at-finite-sequence n i j ,
       is-equiv-replace-at-finite-sequence n i j)
 ```
+
+### Focusing at a replaced element
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where
+
+  compute-focus-at-replace-at-finite :
+    (i j : Fin (succ-ℕ n)) →
+    (u : fin-sequence A (succ-ℕ n)) →
+    focus-at-finite-sequence n i
+      ( replace-at-finite-sequence n i j u) ＝
+    focus-at-finite-sequence n j u
+  compute-focus-at-replace-at-finite i j =
+    is-section-focus-at-finite-sequence n i ∘ focus-at-finite-sequence n j
+```
