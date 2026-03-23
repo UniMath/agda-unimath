@@ -495,10 +495,8 @@ module _
           ( [a,b])
           ( f')
           ( δf ∘ modulus-le-double-le-ℚ⁺)
-          ( λ ε x y x#y Nxy →
+          ( λ ε x@(xℝ , _) y@(yℝ , _) x#y Nxy →
             let
-              xℝ = pr1 x
-              yℝ = pr1 y
               (ε' , ε'+ε'<ε) = bound-double-le-ℚ⁺ ε
             in
               neighborhood-dist-ℝ
@@ -515,68 +513,55 @@ module _
                       by leq-eq-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ xℝ yℝ))
                     ≤ dist-ℝ (f' x *ℝ (yℝ -ℝ xℝ)) (f' y *ℝ (yℝ -ℝ xℝ))
                       by leq-eq-ℝ (right-distributive-abs-mul-dist-ℝ _ _ _)
-                    ≤ dist-ℝ
-                      ( neg-ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
-                      ( neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
-                      by leq-eq-ℝ (inv (dist-neg-ℝ _ _))
-                    ≤ dist-ℝ
-                      ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))
-                      ( (f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))
+                    ≤ ( dist-ℝ (f' x *ℝ (yℝ -ℝ xℝ)) (f y -ℝ f x)) +ℝ
+                      ( dist-ℝ (f y -ℝ f x) (f' y *ℝ (yℝ -ℝ xℝ)))
+                      by triangle-inequality-dist-ℝ _ _ _
+                    ≤ ( dist-ℝ
+                        ( f y -ℝ f x)
+                        ( f' x *ℝ (yℝ -ℝ xℝ))) +ℝ
+                      ( dist-ℝ
+                        ( neg-ℝ (f y -ℝ f x))
+                        ( neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ))))
                       by
                         leq-eq-ℝ
-                          ( inv (eq-sim-ℝ (preserves-dist-left-add-ℝ _ _ _)))
-                    ≤ ( abs-ℝ
-                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                      ( abs-ℝ
-                        ( neg-ℝ ((f y -ℝ f x) -ℝ (f' y *ℝ (yℝ -ℝ xℝ)))))
-                      by triangle-inequality-abs-ℝ _ _
-                    ≤ ( abs-ℝ
-                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                      ( abs-ℝ
-                        ( neg-ℝ (f y -ℝ f x) -ℝ neg-ℝ (f' y *ℝ (yℝ -ℝ xℝ))))
+                          ( ap-add-ℝ
+                            ( commutative-dist-ℝ _ _)
+                            ( inv (dist-neg-ℝ _ _)))
+                    ≤ ( dist-ℝ
+                        ( f y -ℝ f x)
+                        ( f' x *ℝ (yℝ -ℝ xℝ))) +ℝ
+                      ( dist-ℝ
+                        ( f x -ℝ f y)
+                        ( f' y *ℝ neg-ℝ (yℝ -ℝ xℝ)))
                       by
                         leq-eq-ℝ
                           ( ap-add-ℝ
                             ( refl)
-                            ( ap abs-ℝ (distributive-neg-add-ℝ _ _)))
-                    ≤ ( abs-ℝ
-                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                      ( abs-ℝ
-                        ( (f x -ℝ f y) -ℝ f' y *ℝ neg-ℝ (yℝ -ℝ xℝ)))
+                            ( ap-dist-ℝ
+                              ( distributive-neg-diff-ℝ _ _)
+                              ( inv (right-negative-law-mul-ℝ _ _))))
+                    ≤ ( dist-ℝ
+                        ( f y -ℝ f x)
+                        ( f' x *ℝ (yℝ -ℝ xℝ))) +ℝ
+                      ( dist-ℝ
+                        ( f x -ℝ f y)
+                        ( f' y *ℝ (xℝ -ℝ yℝ)))
                       by
                         leq-eq-ℝ
                           ( ap-add-ℝ
                             ( refl)
-                            ( ap
-                              ( abs-ℝ)
-                              ( ap-diff-ℝ
-                                ( distributive-neg-diff-ℝ _ _)
-                                ( inv (right-negative-law-mul-ℝ _ _)))))
-                    ≤ ( abs-ℝ
-                        ( (f y -ℝ f x) -ℝ (f' x *ℝ (yℝ -ℝ xℝ)))) +ℝ
-                      ( abs-ℝ
-                        ( (f x -ℝ f y) -ℝ (f' y *ℝ (xℝ -ℝ yℝ))))
-                      by
-                        leq-eq-ℝ
-                          ( ap-add-ℝ
-                            ( refl)
-                            ( ap
-                              ( abs-ℝ)
-                              ( ap-diff-ℝ
-                                ( refl)
-                                ( ap-mul-ℝ
-                                  ( refl)
-                                  ( distributive-neg-diff-ℝ _ _)))))
-                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ yℝ xℝ
+                            ( ap-dist-ℝ
+                              ( refl)
+                              ( ap-mul-ℝ refl (distributive-neg-diff-ℝ _ _))))
+                    ≤ ( real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ) +ℝ
+                      ( real-ℚ⁺ ε' *ℝ dist-ℝ yℝ xℝ)
                       by
                         preserves-leq-add-ℝ
                           ( is-mod-δf ε' x y Nxy)
-                          ( is-mod-δf
-                            ( ε')
-                            ( y)
-                            ( x)
-                            ( is-symmetric-neighborhood-ℝ _ _ _ Nxy))
-                    ≤ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ +ℝ real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ
+                          ( is-mod-δf ε' y x
+                            ( is-symmetric-neighborhood-ℝ (δf ε') xℝ yℝ Nxy))
+                    ≤ ( real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ) +ℝ
+                      ( real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ)
                       by
                         leq-eq-ℝ
                           ( ap-add-ℝ
@@ -590,8 +575,7 @@ module _
                       by
                         preserves-leq-right-mul-ℝ⁰⁺
                           ( nonnegative-dist-ℝ xℝ yℝ)
-                          ( preserves-leq-real-ℚ
-                            ( leq-le-ℚ ε'+ε'<ε)))))
+                          ( preserves-leq-real-ℚ (leq-le-ℚ ε'+ε'<ε)))))
 
 abstract
   is-uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ :
@@ -663,21 +647,20 @@ module _
         let ωf ε = min-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε) (δf' one-ℚ⁺)
         intro-exists
           ( ωf)
-          ( λ x ε y Nxy →
+          ( λ x@(xℝ , _) ε y@(yℝ , _) Nxy →
             neighborhood-dist-ℝ _ _ _
               ( chain-of-inequalities
                 dist-ℝ (f x) (f y)
                 ≤ dist-ℝ (f y) (f x)
                   by leq-eq-ℝ (commutative-dist-ℝ _ _)
-                ≤ ( abs-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x))) +ℝ
-                  ( dist-ℝ (f' x *ℝ (pr1 y -ℝ pr1 x)) (f y -ℝ f x))
-                  by leq-abs-add-abs-dist-ℝ _ (f' x *ℝ (pr1 y -ℝ pr1 x))
-                ≤ ( abs-ℝ (f' x) *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
-                  ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (pr1 y -ℝ pr1 x)))
+                ≤ ( abs-ℝ (f' x *ℝ (yℝ -ℝ xℝ))) +ℝ
+                  ( dist-ℝ (f' x *ℝ (yℝ -ℝ xℝ)) (f y -ℝ f x))
+                  by leq-abs-add-abs-dist-ℝ _ (f' x *ℝ (yℝ -ℝ xℝ))
+                ≤ ( abs-ℝ (f' x) *ℝ dist-ℝ yℝ xℝ) +ℝ
+                  ( dist-ℝ (f y -ℝ f x) (f' x *ℝ (yℝ -ℝ xℝ)))
                   by
                     leq-eq-ℝ (ap-add-ℝ (abs-mul-ℝ _ _) (commutative-dist-ℝ _ _))
-                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 y) (pr1 x)) +ℝ
-                  ( one-ℝ *ℝ dist-ℝ (pr1 x) (pr1 y))
+                ≤ (max-|f'| *ℝ dist-ℝ yℝ xℝ) +ℝ (one-ℝ *ℝ dist-ℝ xℝ yℝ)
                   by
                     preserves-leq-add-ℝ
                       ( preserves-leq-right-mul-ℝ⁰⁺
@@ -688,18 +671,18 @@ module _
                         ( x)
                         ( y)
                         ( weakly-monotonic-neighborhood-ℝ
-                          ( pr1 x)
-                          ( pr1 y)
+                          ( xℝ)
+                          ( yℝ)
                           ( ωf ε)
                           ( δf' one-ℚ⁺)
                           ( leq-right-min-ℚ⁺ _ _)
                           ( Nxy)))
-                ≤ ( max-|f'| *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
-                  ( one-ℝ *ℝ dist-ℝ (pr1 x) (pr1 y))
+                ≤ ( max-|f'| *ℝ dist-ℝ xℝ yℝ) +ℝ
+                  ( one-ℝ *ℝ dist-ℝ xℝ yℝ)
                   by
                     leq-eq-ℝ
                       ( ap-add-ℝ (ap-mul-ℝ refl (commutative-dist-ℝ _ _)) refl)
-                ≤ (max-|f'| +ℝ one-ℝ) *ℝ dist-ℝ (pr1 x) (pr1 y)
+                ≤ (max-|f'| +ℝ one-ℝ) *ℝ dist-ℝ xℝ yℝ
                   by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
                 ≤ (max-|f'| +ℝ one-ℝ) *ℝ real-ℚ⁺ (ωf ε)
                   by
