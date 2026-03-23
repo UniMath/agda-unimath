@@ -354,6 +354,40 @@ module _
     (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
 ```
 
+### Swapping the same index is the identity
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where
+
+  id-swap-at-finite-sequence :
+    (i : Fin (succ-ℕ n)) →
+    (u : fin-sequence A (succ-ℕ n)) →
+    swap-at-finite-sequence n i i u ＝ u
+  id-swap-at-finite-sequence i u = is-retraction-focus-at-finite-sequence n i u
+```
+
+### Composing swaps
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where
+
+  comp-swap-at-finite-sequence :
+    (i j k : Fin (succ-ℕ n)) →
+    (u : fin-sequence A (succ-ℕ n)) →
+    swap-at-finite-sequence n i j
+      ( swap-at-finite-sequence n j k u) ＝
+    swap-at-finite-sequence n i k u
+  comp-swap-at-finite-sequence i j k u =
+    ap
+      ( unfocus-at-finite-sequence n i)
+      ( is-section-focus-at-finite-sequence n j
+        ( focus-at-finite-sequence n k u))
+```
+
 ### Swapping elements is an equivalence
 
 ```agda
@@ -366,11 +400,8 @@ module _
     (u : fin-sequence A (succ-ℕ n)) →
     swap-at-finite-sequence n i j (swap-at-finite-sequence n j i u) ＝ u
   is-section-swap-at-finite-sequence i j u =
-    ( ap
-      ( unfocus-at-finite-sequence n i)
-      ( is-section-focus-at-finite-sequence n j
-        ( focus-at-finite-sequence n i u))) ∙
-    ( is-retraction-focus-at-finite-sequence n i u)
+    ( comp-swap-at-finite-sequence n i j i u) ∙
+    ( id-swap-at-finite-sequence n i u)
 
   is-equiv-swap-at-finite-sequence :
     (i j : Fin (succ-ℕ n)) → is-equiv (swap-at-finite-sequence {A = A} n i j)
