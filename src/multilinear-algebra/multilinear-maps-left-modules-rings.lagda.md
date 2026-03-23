@@ -31,6 +31,7 @@ open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
+open import lists.focus-at-index-finite-sequences
 
 open import ring-theory.rings
 

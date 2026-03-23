@@ -35,6 +35,7 @@ open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
 
 open import lists.finite-sequences
+open import lists.replace-at-index-finite-sequences
 
 open import multilinear-algebra.multilinear-maps-left-modules-rings
 
