@@ -52,12 +52,12 @@ a [ring](ring-theory.rings.md) `R` and `n : ℕ` a
 [multilinear map](multilinear-algebra.multilinear-maps-left-modules-rings.md)
 `f : Mⁿ⁺¹ → N` is called
 {{#concept "symmetric" Disambiguation="multilinear map between left modules" Agda=is-symmetric-multilinear-map-left-module-Ring}}
-if f is invariant under all
+if `f` is invariant under all
 [permutations](finite-group-theory.permutations-standard-finite-types.md) of
 [ℕₙ](univalent-combinatorics.standard-finite-types.md):
 
 ```text
-∀ (σ : Aut ℕₙ) (u : Mⁿ⁺¹) → f (u ∘ σ) ＝ f u
+  ∀ (σ : Aut ℕₙ) (u : Mⁿ⁺¹) → f (u ∘ σ) ＝ f u
 ```
 
 ## Definitions
