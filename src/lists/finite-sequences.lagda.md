@@ -354,7 +354,7 @@ module _
     (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
 ```
 
-### Replaceping the same index is the identity
+### Replacing at the same index is the identity
 
 ```agda
 module _
@@ -369,7 +369,7 @@ module _
     is-retraction-focus-at-finite-sequence n i u
 ```
 
-### Composing replaces
+### Composing replacements
 
 ```agda
 module _
@@ -389,7 +389,7 @@ module _
         ( focus-at-finite-sequence n k u))
 ```
 
-### Replaceping elements is an equivalence
+### Replacing elements is an equivalence
 
 ```agda
 module _
