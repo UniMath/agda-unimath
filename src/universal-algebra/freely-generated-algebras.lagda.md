@@ -25,11 +25,13 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncation-binary-relations
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
@@ -46,6 +48,7 @@ open import lists.tuples
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
@@ -700,4 +703,66 @@ module _
           ( preserves-operations-prop-Algebra σ T (free-Algebra σ T G) B)
           ( eq-htpy
             ( htpy-is-section-map-inv-is-free-free-Algebra φ)))
+```
+
+### Being freely generated is logically equivalent to isomorphism with the freely generated algebra
+
+Note that the
+[universal property of freely generated algebras](universal-algebra.universal-property-freely-generated-algebras.md)
+lives in `UUω`, but isomorphism to this canonical freely generated algebra is a
+logically equivalent small proposition that can be used in its place.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (I : UU l3)
+  (A : Algebra l4 σ T)
+  where
+
+  is-freely-generated-by-elements-prop-Algebra :
+    subtype (l1 ⊔ l2 ⊔ l3 ⊔ l4) (I → type-Algebra σ T A)
+  is-freely-generated-by-elements-prop-Algebra in-A =
+    is-iso-prop-Algebra σ T
+      ( free-Algebra σ T I)
+      ( A)
+      ( hom-is-free-free-Algebra σ T I A in-A)
+
+  is-freely-generated-by-elements-Algebra :
+    (I → type-Algebra σ T A) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-freely-generated-by-elements-Algebra =
+    is-in-subtype is-freely-generated-by-elements-prop-Algebra
+
+  abstract
+    is-free-is-freely-generated-by-elements-Algebra :
+      (in-A : I → type-Algebra σ T A) →
+      is-freely-generated-by-elements-Algebra in-A →
+      is-free-Algebra σ T A in-A
+    is-free-is-freely-generated-by-elements-Algebra in-A iso-A-FI C =
+      tr
+        ( is-equiv)
+        ( ap
+          ( λ f φ → map-hom-Algebra σ T A C φ ∘ f)
+          ( is-section-map-inv-is-equiv (is-free-free-Algebra σ T I A) in-A))
+        ( is-free-iso-Algebra σ T
+          ( free-Algebra σ T I)
+          ( in-generator-free-Algebra σ T I)
+          ( is-free-free-Algebra σ T I)
+          ( A)
+          ( hom-is-free-free-Algebra σ T I A in-A ,
+            iso-A-FI)
+          ( C))
+
+    is-freely-generated-by-elements-is-free-Algebra :
+      (in-A : I → type-Algebra σ T A) →
+      is-free-Algebra σ T A in-A →
+      is-freely-generated-by-elements-Algebra in-A
+    is-freely-generated-by-elements-is-free-Algebra in-A =
+      is-iso-hom-is-free-Algebra σ T
+        ( free-Algebra σ T I)
+        ( A)
+        ( in-generator-free-Algebra σ T I)
+        ( in-A)
+        ( is-free-free-Algebra σ T I)
 ```

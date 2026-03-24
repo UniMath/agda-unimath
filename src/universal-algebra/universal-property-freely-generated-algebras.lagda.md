@@ -1,25 +1,32 @@
 # The universal property of freely generated algebras
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module universal-algebra.universal-property-freely-generated-algebras where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-in-large-precategories
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.isomorphisms-of-algebras
+open import universal-algebra.precategory-of-algebras-algebraic-theories
 open import universal-algebra.signatures
 ```
 
@@ -38,17 +45,26 @@ type `G` and projection function `i : G → A` states that for any algebra `B` f
 ## Definition
 
 ```agda
-is-free-Algebra :
+module _
   {l1 l2 l3 l4 : Level}
   (σ : signature l1)
   (T : Algebraic-Theory l2 σ)
   {G : UU l3}
   (A : Algebra l4 σ T)
-  (in-g : G → type-Algebra σ T A) →
-  UUω
-is-free-Algebra σ T A in-g =
-  {l5 : Level} (B : Algebra l5 σ T) →
-  is-equiv (λ φ → map-hom-Algebra σ T A B φ ∘ in-g)
+  (in-g : G → type-Algebra σ T A)
+  where
+
+  is-free-Algebra : UUω
+  is-free-Algebra =
+    {l5 : Level} (B : Algebra l5 σ T) →
+    is-equiv (λ φ → map-hom-Algebra σ T A B φ ∘ in-g)
+
+  equiv-is-free-Algebra :
+    {l5 : Level} → is-free-Algebra → (B : Algebra l5 σ T) →
+    hom-Algebra σ T A B ≃ ((a : G) → type-Algebra σ T B)
+  equiv-is-free-Algebra is-free-A B =
+    ( ( λ φ → map-hom-Algebra σ T A B φ ∘ in-g) ,
+      is-free-A B)
 ```
 
 ## Properties
@@ -130,4 +146,30 @@ module _
   iso-is-free-Algebra =
     ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B ,
       is-iso-hom-is-free-Algebra)
+```
+
+### If an algebra is isomorphic to a free algebra, it is free
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  {G : UU l3}
+  (A : Algebra l4 σ T)
+  (in-g-A : G → type-Algebra σ T A)
+  (is-free-A : is-free-Algebra σ T A in-g-A)
+  (B : Algebra l5 σ T)
+  (iso-A-B : iso-Algebra σ T A B)
+  where
+
+  is-free-iso-Algebra :
+    is-free-Algebra σ T B (map-iso-Algebra σ T A B iso-A-B ∘ in-g-A)
+  is-free-iso-Algebra C =
+    is-equiv-comp _ _
+      ( is-equiv-precomp-hom-iso-Large-Precategory
+        ( Algebra-Large-Precategory σ T)
+        ( iso-A-B)
+        ( C))
+      ( is-free-A C)
 ```
