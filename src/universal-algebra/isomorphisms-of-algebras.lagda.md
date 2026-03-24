@@ -82,6 +82,19 @@ module _
       { Y = B}
 ```
 
+### The inverse of an isomorphism of algebras
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T) (B : Algebra l4 σ T)
+  where
+
+  inv-iso-Algebra : iso-Algebra σ T A B → iso-Algebra σ T B A
+  inv-iso-Algebra =
+    inv-iso-Large-Precategory (Algebra-Large-Precategory σ T) {X = A} {Y = B}
+```
+
 ### The property that a homomorphism of algebras is an equivalence
 
 ```agda

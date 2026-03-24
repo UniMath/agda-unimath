@@ -35,6 +35,7 @@ open import linear-algebra.finite-sequences-in-monoids public
 open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
+open import linear-algebra.freely-generated-left-modules-rings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.isomorphisms-left-modules-commutative-rings public
 open import linear-algebra.isomorphisms-left-modules-rings public

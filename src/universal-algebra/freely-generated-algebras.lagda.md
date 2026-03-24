@@ -700,4 +700,8 @@ module _
           ( preserves-operations-prop-Algebra σ T (free-Algebra σ T G) B)
           ( eq-htpy
             ( htpy-is-section-map-inv-is-free-free-Algebra φ)))
+
+  equiv-free-Algebra :
+    hom-Algebra σ T (free-Algebra σ T G) B ≃ (G → type-Algebra σ T B)
+  equiv-free-Algebra = (map-inv-is-free-free-Algebra , is-free-free-Algebra)
 ```
