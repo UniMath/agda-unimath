@@ -45,6 +45,7 @@ open import universal-algebra.algebraic-theory-of-abelian-groups
 open import universal-algebra.algebras
 open import universal-algebra.extensions-signatures
 open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.isomorphisms-of-algebras
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
@@ -346,6 +347,78 @@ module _
   (R : Ring l1)
   where
 
+  preserves-operations-id-is-section-left-module-Algebra-Left-Module-Ring :
+    (A : Algebra-Left-Module-Ring l2 R) →
+    preserves-operations-Algebra
+      ( signature-left-module-Ring R)
+      ( algebraic-theory-left-module-Ring R)
+      ( algebra-left-module-left-module-Ring R
+        ( left-module-Algebra-Left-Module-Ring R A))
+      ( A)
+      ( id)
+  preserves-operations-id-is-section-left-module-Algebra-Left-Module-Ring A =
+    λ where
+      add-operation-left-module-Ring (x ∷ y ∷ empty-tuple) → refl
+      neg-operation-left-module-Ring (x ∷ empty-tuple) → refl
+      zero-operation-left-module-Ring empty-tuple → refl
+      (mul-operation-left-module-Ring r) (x ∷ empty-tuple) → refl
+
+  preserves-operations-inv-id-is-section-left-module-Algebra-Left-Module-Ring :
+    (A : Algebra-Left-Module-Ring l2 R) →
+    preserves-operations-Algebra
+      ( signature-left-module-Ring R)
+      ( algebraic-theory-left-module-Ring R)
+      ( A)
+      ( algebra-left-module-left-module-Ring R
+        ( left-module-Algebra-Left-Module-Ring R A))
+      ( id)
+  preserves-operations-inv-id-is-section-left-module-Algebra-Left-Module-Ring
+    A =
+    λ where
+      add-operation-left-module-Ring (x ∷ y ∷ empty-tuple) → refl
+      neg-operation-left-module-Ring (x ∷ empty-tuple) → refl
+      zero-operation-left-module-Ring empty-tuple → refl
+      (mul-operation-left-module-Ring r) (x ∷ empty-tuple) → refl
+
+  hom-is-section-left-module-Algebra-Left-Module-Ring :
+    (A : Algebra-Left-Module-Ring l2 R) →
+    hom-Algebra
+      ( signature-left-module-Ring R)
+      ( algebraic-theory-left-module-Ring R)
+      ( algebra-left-module-left-module-Ring R
+        ( left-module-Algebra-Left-Module-Ring R A))
+      ( A)
+  hom-is-section-left-module-Algebra-Left-Module-Ring A =
+    ( id ,
+      preserves-operations-id-is-section-left-module-Algebra-Left-Module-Ring A)
+
+  inv-hom-is-section-left-module-Algebra-Left-Module-Ring :
+    (A : Algebra-Left-Module-Ring l2 R) →
+    hom-Algebra
+      ( signature-left-module-Ring R)
+      ( algebraic-theory-left-module-Ring R)
+      ( A)
+      ( algebra-left-module-left-module-Ring R
+        ( left-module-Algebra-Left-Module-Ring R A))
+  inv-hom-is-section-left-module-Algebra-Left-Module-Ring A =
+    ( id ,
+      preserves-operations-inv-id-is-section-left-module-Algebra-Left-Module-Ring
+        ( A))
+
+  iso-is-section-left-module-Algebra-Left-Module-Ring :
+    (A : Algebra-Left-Module-Ring l2 R) →
+    iso-Algebra
+      ( signature-left-module-Ring R)
+      ( algebraic-theory-left-module-Ring R)
+      ( algebra-left-module-left-module-Ring R
+        ( left-module-Algebra-Left-Module-Ring R A))
+      ( A)
+  iso-is-section-left-module-Algebra-Left-Module-Ring A =
+    ( hom-is-section-left-module-Algebra-Left-Module-Ring A ,
+      inv-hom-is-section-left-module-Algebra-Left-Module-Ring A ,
+      eq-htpy-hom-Algebra _ _ _ _ _ _ refl-htpy ,
+      eq-htpy-hom-Algebra _ _ _ _ _ _ refl-htpy)
+
   abstract
     is-section-left-module-Algebra-Left-Module-Ring :
       (A : Algebra-Left-Module-Ring l2 R) →
@@ -353,17 +426,8 @@ module _
         ( left-module-Algebra-Left-Module-Ring R A) ＝
       A
     is-section-left-module-Algebra-Left-Module-Ring A =
-      eq-type-subtype
-        ( is-algebra-prop-Model-Of-Signature
-          ( signature-left-module-Ring R)
-          ( algebraic-theory-left-module-Ring R))
-        ( eq-pair-eq-fiber
-          ( eq-binary-htpy _ _
-            λ where
-              add-operation-left-module-Ring (x ∷ y ∷ empty-tuple) → refl
-              neg-operation-left-module-Ring (x ∷ empty-tuple) → refl
-              zero-operation-left-module-Ring empty-tuple → refl
-              (mul-operation-left-module-Ring r) (x ∷ empty-tuple) → refl))
+      eq-iso-Algebra _ _ _ _
+        ( iso-is-section-left-module-Algebra-Left-Module-Ring A)
 
     is-retraction-left-module-Algebra-Left-Module-Ring :
       (M : left-module-Ring l2 R) →
