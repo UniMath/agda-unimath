@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import lists.finite-sequences
+open import lists.functoriality-finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -229,4 +230,50 @@ module _
     fin-sequence A (succ-ℕ n) ≃ A × fin-sequence A n
   equiv-focus-at-finite-sequence =
     (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
+```
+
+### Dropping is functorial
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  htpy-map-drop-at-finite-sequence :
+    (n : ℕ) →
+    (i : Fin (succ-ℕ n))
+    (u : fin-sequence A (succ-ℕ n)) →
+    map-fin-sequence n f (drop-at-fin-sequence n i u) ~
+    drop-at-fin-sequence n i (map-fin-sequence (succ-ℕ n) f u)
+  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inl x) u (inl y) =
+    htpy-map-drop-at-finite-sequence n x
+      ( tail-fin-sequence (succ-ℕ n) u)
+      ( y)
+  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inl x) u (inr y) = refl
+  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inr x) u k = refl
+```
+
+### Insertion is functorial
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  htpy-map-insert-at-finite-sequence :
+    (n : ℕ) →
+    (x : A) →
+    (i : Fin (succ-ℕ n)) →
+    (u : fin-sequence A n) →
+    insert-at-fin-sequence n
+      ( f x)
+      ( i)
+      ( map-fin-sequence n f u) ~
+    map-fin-sequence (succ-ℕ n) f (insert-at-fin-sequence n x i u)
+  htpy-map-insert-at-finite-sequence zero-ℕ x _ u _ = refl
+  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inl i) u (inl j) =
+    htpy-map-insert-at-finite-sequence n x i (tail-fin-sequence n u) j
+  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inl i) u (inr j) = refl
+  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inr _) u (inl j) = refl
+  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inr _) u (inr j) = refl
 ```
