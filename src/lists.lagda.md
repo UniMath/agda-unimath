@@ -26,7 +26,6 @@ open import lists.permutation-tuples public
 open import lists.predicates-on-lists public
 open import lists.quicksort-lists public
 open import lists.repetitions-sequences public
-open import lists.replace-at-index-finite-sequences public
 open import lists.reversing-lists public
 open import lists.sequences public
 open import lists.set-quotients-tuples public
