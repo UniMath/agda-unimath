@@ -7,6 +7,8 @@ module linear-algebra.universal-property-free-left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-in-large-precategories
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,6 +22,7 @@ open import foundation.universe-levels
 open import linear-algebra.isomorphisms-left-modules-rings
 open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
+open import linear-algebra.precategory-of-left-modules-rings
 
 open import ring-theory.rings
 ```
@@ -147,4 +150,30 @@ module _
         ( is-free-M)
         ( is-free-N) ,
       is-iso-linear-map-is-free-left-module-Ring)
+```
+
+### If a free module is isomorphic to another module, that module is free
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (R : Ring l1)
+  (G : UU l2)
+  (M : left-module-Ring l3 R)
+  (in-M : G → type-left-module-Ring R M)
+  (is-free-M : is-free-left-module-Ring R G M in-M)
+  (N : left-module-Ring l4 R)
+  (iso-M-N : iso-left-module-Ring R M N)
+  where
+
+  is-free-iso-left-module-Ring :
+    is-free-left-module-Ring R G N
+      ( map-iso-left-module-Ring R M N iso-M-N ∘ in-M)
+  is-free-iso-left-module-Ring P =
+    is-equiv-comp _ _
+      ( is-equiv-precomp-hom-iso-Large-Precategory
+        ( large-precategory-left-module-Ring R)
+        ( iso-M-N)
+        ( P))
+      ( is-free-M P)
 ```

@@ -64,6 +64,11 @@ module _
     is-iso-left-module-Ring (linear-map-iso-left-module-Ring i)
   is-iso-linear-map-iso-left-module-Ring = pr2
 
+  map-iso-left-module-Ring :
+    iso-left-module-Ring → type-left-module-Ring R M → type-left-module-Ring R N
+  map-iso-left-module-Ring i =
+    map-linear-map-left-module-Ring R M N (linear-map-iso-left-module-Ring i)
+
 module _
   {l1 l2 l3 : Level}
   (R : Ring l1)
@@ -83,4 +88,9 @@ module _
   linear-map-inv-iso-left-module-Ring : linear-map-left-module-Ring R N M
   linear-map-inv-iso-left-module-Ring =
     linear-map-iso-left-module-Ring R N M inv-iso-left-module-Ring
+
+  map-inv-iso-left-module-Ring :
+    type-left-module-Ring R N → type-left-module-Ring R M
+  map-inv-iso-left-module-Ring =
+    map-linear-map-left-module-Ring R N M linear-map-inv-iso-left-module-Ring
 ```
