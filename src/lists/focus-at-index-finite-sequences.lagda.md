@@ -52,7 +52,7 @@ module _
   elem-at-fin-sequence i v = v i
 ```
 
-### Insertion at a index
+### Insertion at an index
 
 ```agda
 module _
