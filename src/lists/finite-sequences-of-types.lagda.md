@@ -13,6 +13,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -146,4 +148,122 @@ unfocus-at-Π-fin-sequence :
 unfocus-at-Π-fin-sequence n A i (x , u) = insert-at-Π-fin-sequence n A i x u
 ```
 
--- TODO Prove that this is an equivalence
+### The coordinate at the index of an inserted element is the inserted element
+
+```agda
+compute-elem-at-insert-at-Π-fin-sequence :
+  {l : Level} →
+  (n : ℕ) →
+  (A : Fin (succ-ℕ n) → UU l) →
+  (i : Fin (succ-ℕ n)) →
+  (x : A i) →
+  (u : Π-fin-sequence n (drop-at-fin-sequence n i A)) →
+  elem-at-Π-fin-sequence (succ-ℕ n) A i (insert-at-Π-fin-sequence n A i x u) ＝
+  x
+compute-elem-at-insert-at-Π-fin-sequence zero-ℕ A (inr _) x u = refl
+compute-elem-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u =
+  compute-elem-at-insert-at-Π-fin-sequence
+    ( n)
+    ( tail-fin-sequence (succ-ℕ n) A)
+    ( i)
+    ( x)
+    ( u ∘ inl-Fin n)
+compute-elem-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u = refl
+```
+
+### Inserting after dropping an element produces the original finite sequence
+
+```agda
+compute-insert-at-drop-at-Π-fin-sequence :
+  {l : Level} →
+  (n : ℕ) →
+  (A : Fin (succ-ℕ n) → UU l) →
+  (i : Fin (succ-ℕ n)) →
+  (u : Π-fin-sequence (succ-ℕ n) A) →
+  insert-at-Π-fin-sequence
+    ( n)
+    ( A)
+    ( i)
+    ( elem-at-Π-fin-sequence (succ-ℕ n) A i u)
+    ( drop-at-Π-fin-sequence n A i u) ~
+  u
+compute-insert-at-drop-at-Π-fin-sequence zero-ℕ A (inr _) u (inr _) = refl
+compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inl j) =
+  compute-insert-at-drop-at-Π-fin-sequence
+    ( n)
+    ( tail-fin-sequence (succ-ℕ n) A)
+    ( i)
+    ( u ∘ inl-Fin (succ-ℕ n))
+    ( j)
+compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inr j) = refl
+compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inl j) = refl
+compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inr j) = refl
+```
+
+### Dropping an inserted element produces the original finite sequence
+
+```agda
+compute-drop-at-insert-at-Π-fin-sequence :
+  {l : Level} →
+  (n : ℕ) →
+  (A : Fin (succ-ℕ n) → UU l) →
+  (i : Fin (succ-ℕ n)) →
+  (x : A i) →
+  (u : Π-fin-sequence n (drop-at-fin-sequence n i A)) →
+  drop-at-Π-fin-sequence
+    ( n)
+    ( A)
+    ( i)
+    ( insert-at-Π-fin-sequence n A i x u) ~
+  u
+compute-drop-at-insert-at-Π-fin-sequence zero-ℕ A i x u ()
+compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inl j) =
+  compute-drop-at-insert-at-Π-fin-sequence
+    ( n)
+    ( tail-fin-sequence (succ-ℕ n) A)
+    ( i)
+    ( x)
+    ( u ∘ inl-Fin n)
+    ( j)
+compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inr j) =
+  refl
+compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u j = refl
+```
+
+### Focusing a finite sequence at an index is an equivalence
+
+```agda
+module _
+  {l : Level}
+  (n : ℕ)
+  (A : Fin (succ-ℕ n) → UU l)
+  (i : Fin (succ-ℕ n))
+  where
+
+  abstract
+    is-section-focus-at-Π-finite-sequence :
+      focus-at-Π-fin-sequence n A i ∘ unfocus-at-Π-fin-sequence n A i ~ id
+    is-section-focus-at-Π-finite-sequence (x , u) =
+      eq-pair
+        ( compute-elem-at-insert-at-Π-fin-sequence n A i x u)
+        ( eq-htpy (compute-drop-at-insert-at-Π-fin-sequence n A i x u))
+
+    is-retraction-focus-at-Π-finite-sequence :
+      unfocus-at-Π-fin-sequence n A i ∘ focus-at-Π-fin-sequence n A i ~ id
+    is-retraction-focus-at-Π-finite-sequence =
+      eq-htpy ∘ compute-insert-at-drop-at-Π-fin-sequence n A i
+
+    is-equiv-focus-at-Π-finite-sequence :
+      is-equiv (focus-at-Π-fin-sequence n A i)
+    is-equiv-focus-at-Π-finite-sequence =
+      is-equiv-is-invertible
+        ( unfocus-at-Π-fin-sequence n A i)
+        ( is-section-focus-at-Π-finite-sequence)
+        ( is-retraction-focus-at-Π-finite-sequence)
+
+  equiv-focus-at-Π-finite-sequence :
+    Π-fin-sequence (succ-ℕ n) A ≃
+    A i × Π-fin-sequence n (drop-at-fin-sequence n i A)
+  equiv-focus-at-Π-finite-sequence =
+    ( focus-at-Π-fin-sequence n A i , is-equiv-focus-at-Π-finite-sequence)
+```
