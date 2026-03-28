@@ -8,6 +8,7 @@ module linear-algebra where
 open import linear-algebra.addition-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.addition-linear-maps-left-modules-rings public
 open import linear-algebra.bases-left-modules-rings public
+open import linear-algebra.bases-vector-spaces public
 open import linear-algebra.bilinear-forms-real-vector-spaces public
 open import linear-algebra.bilinear-maps-left-modules-commutative-rings public
 open import linear-algebra.bilinear-maps-left-modules-rings public
@@ -25,7 +26,6 @@ open import linear-algebra.difference-linear-maps-left-modules-commutative-rings
 open import linear-algebra.difference-linear-maps-left-modules-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
 open import linear-algebra.duals-left-modules-commutative-rings public
-open import linear-algebra.finite-bases-left-modules-rings public
 open import linear-algebra.finite-sequences-in-abelian-groups public
 open import linear-algebra.finite-sequences-in-commutative-monoids public
 open import linear-algebra.finite-sequences-in-commutative-rings public
