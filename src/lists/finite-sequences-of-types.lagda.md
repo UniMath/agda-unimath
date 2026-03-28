@@ -238,32 +238,41 @@ module _
   (n : ℕ)
   (A : Fin (succ-ℕ n) → UU l)
   (i : Fin (succ-ℕ n))
+  where abstract
+
+  is-section-focus-at-Π-finite-sequence :
+    focus-at-Π-fin-sequence n A i ∘ unfocus-at-Π-fin-sequence n A i ~ id
+  is-section-focus-at-Π-finite-sequence (x , u) =
+    eq-pair
+      ( compute-elem-at-insert-at-Π-fin-sequence n A i x u)
+      ( eq-htpy (compute-drop-at-insert-at-Π-fin-sequence n A i x u))
+
+  is-retraction-focus-at-Π-finite-sequence :
+    unfocus-at-Π-fin-sequence n A i ∘ focus-at-Π-fin-sequence n A i ~ id
+  is-retraction-focus-at-Π-finite-sequence =
+    eq-htpy ∘ compute-insert-at-drop-at-Π-fin-sequence n A i
+
+  is-equiv-focus-at-Π-finite-sequence :
+    is-equiv (focus-at-Π-fin-sequence n A i)
+  is-equiv-focus-at-Π-finite-sequence =
+    is-equiv-is-invertible
+      ( unfocus-at-Π-fin-sequence n A i)
+      ( is-section-focus-at-Π-finite-sequence)
+      ( is-retraction-focus-at-Π-finite-sequence)
+
+module _
+  {l : Level}
+  (n : ℕ)
+  (A : Fin (succ-ℕ n) → UU l)
   where
 
-  abstract
-    is-section-focus-at-Π-finite-sequence :
-      focus-at-Π-fin-sequence n A i ∘ unfocus-at-Π-fin-sequence n A i ~ id
-    is-section-focus-at-Π-finite-sequence (x , u) =
-      eq-pair
-        ( compute-elem-at-insert-at-Π-fin-sequence n A i x u)
-        ( eq-htpy (compute-drop-at-insert-at-Π-fin-sequence n A i x u))
-
-    is-retraction-focus-at-Π-finite-sequence :
-      unfocus-at-Π-fin-sequence n A i ∘ focus-at-Π-fin-sequence n A i ~ id
-    is-retraction-focus-at-Π-finite-sequence =
-      eq-htpy ∘ compute-insert-at-drop-at-Π-fin-sequence n A i
-
-    is-equiv-focus-at-Π-finite-sequence :
-      is-equiv (focus-at-Π-fin-sequence n A i)
-    is-equiv-focus-at-Π-finite-sequence =
-      is-equiv-is-invertible
-        ( unfocus-at-Π-fin-sequence n A i)
-        ( is-section-focus-at-Π-finite-sequence)
-        ( is-retraction-focus-at-Π-finite-sequence)
-
-  equiv-focus-at-Π-finite-sequence :
-    Π-fin-sequence (succ-ℕ n) A ≃
-    A i × Π-fin-sequence n (drop-at-fin-sequence n i A)
-  equiv-focus-at-Π-finite-sequence =
-    ( focus-at-Π-fin-sequence n A i , is-equiv-focus-at-Π-finite-sequence)
+  Π-equiv-focus-at-Π-fin-sequence :
+    Π-fin-sequence
+      ( succ-ℕ n)
+      ( λ i →
+        Π-fin-sequence (succ-ℕ n) A ≃
+        A i × Π-fin-sequence n (drop-at-fin-sequence n i A))
+  Π-equiv-focus-at-Π-fin-sequence i =
+    ( focus-at-Π-fin-sequence n A i ,
+      is-equiv-focus-at-Π-finite-sequence n A i)
 ```

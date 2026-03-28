@@ -9,6 +9,7 @@ module lists.focus-at-index-finite-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
@@ -41,15 +43,25 @@ of `Aⁿ⁺¹` is the family of maps `(i : ℕₙ) → Aⁿ⁺¹ → A × Aⁿ`
 
 ## Definitions
 
-### The coordinates maps
+### Dropping an element at an index
 
 ```agda
 module _
-  {l : Level} {A : UU l} (n : ℕ)
+  {l : Level} {A : UU l}
   where
 
-  elem-at-fin-sequence : (i : Fin n) → fin-sequence A n → A
-  elem-at-fin-sequence i v = v i
+  drop-at-fin-sequence :
+    (n : ℕ) →
+    (i : Fin (succ-ℕ n)) →
+    fin-sequence A (succ-ℕ n) →
+    fin-sequence A n
+  drop-at-fin-sequence zero-ℕ _ u ()
+  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
+    drop-at-fin-sequence n x (tail-fin-sequence (succ-ℕ n) u) y
+  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) =
+    head-fin-sequence (succ-ℕ n) u
+  drop-at-fin-sequence (succ-ℕ n) (inr x) u =
+    tail-fin-sequence (succ-ℕ n) u
 ```
 
 ### Insertion at an index
@@ -75,27 +87,6 @@ module _
   insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inr y) = a
 ```
 
-### Dropping an element at an index
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  drop-at-fin-sequence :
-    (n : ℕ) →
-    (i : Fin (succ-ℕ n)) →
-    fin-sequence A (succ-ℕ n) →
-    fin-sequence A n
-  drop-at-fin-sequence zero-ℕ _ u ()
-  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    drop-at-fin-sequence n x (tail-fin-sequence (succ-ℕ n) u) y
-  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) =
-    head-fin-sequence (succ-ℕ n) u
-  drop-at-fin-sequence (succ-ℕ n) (inr x) u =
-    tail-fin-sequence (succ-ℕ n) u
-```
-
 ### Focusing a finite sequence at an index
 
 ```agda
@@ -103,15 +94,15 @@ module _
   {l : Level} {A : UU l} (n : ℕ) (i : Fin (succ-ℕ n))
   where
 
-  focus-at-finite-sequence :
+  focus-at-fin-sequence :
     fin-sequence A (succ-ℕ n) → A × fin-sequence A n
-  focus-at-finite-sequence u =
+  focus-at-fin-sequence u =
     ( elem-at-fin-sequence (succ-ℕ n) i u ,
       drop-at-fin-sequence n i u)
 
-  unfocus-at-finite-sequence :
+  unfocus-at-fin-sequence :
     A × fin-sequence A n → fin-sequence A (succ-ℕ n)
-  unfocus-at-finite-sequence (a , u) = insert-at-fin-sequence n a i u
+  unfocus-at-fin-sequence (a , u) = insert-at-fin-sequence n a i u
 ```
 
 ## Properties
@@ -200,36 +191,36 @@ module _
   {l : Level} {A : UU l} (n : ℕ) (i : Fin (succ-ℕ n))
   where abstract
 
-  is-section-focus-at-finite-sequence :
+  is-section-focus-at-fin-sequence :
     (x : A × fin-sequence A n) →
-    focus-at-finite-sequence n i (unfocus-at-finite-sequence n i x) ＝ x
-  is-section-focus-at-finite-sequence (a , u) =
+    focus-at-fin-sequence n i (unfocus-at-fin-sequence n i x) ＝ x
+  is-section-focus-at-fin-sequence (a , u) =
     eq-pair
       ( compute-elem-at-insert-at-fin-sequence n a i u)
       ( eq-htpy (compute-drop-at-insert-at-fin-sequence n a i u))
 
-  is-retraction-focus-at-finite-sequence :
+  is-retraction-focus-at-fin-sequence :
     (v : fin-sequence A (succ-ℕ n)) →
-    unfocus-at-finite-sequence n i (focus-at-finite-sequence n i v) ＝ v
-  is-retraction-focus-at-finite-sequence =
+    unfocus-at-fin-sequence n i (focus-at-fin-sequence n i v) ＝ v
+  is-retraction-focus-at-fin-sequence =
     eq-htpy ∘ compute-insert-at-drop-at-fin-sequence n i
 
-  is-equiv-focus-at-finite-sequence :
-    is-equiv (focus-at-finite-sequence {A = A} n i)
-  is-equiv-focus-at-finite-sequence =
+  is-equiv-focus-at-fin-sequence :
+    is-equiv (focus-at-fin-sequence {A = A} n i)
+  is-equiv-focus-at-fin-sequence =
     is-equiv-is-invertible
-      ( unfocus-at-finite-sequence n i)
-      ( is-section-focus-at-finite-sequence)
-      ( is-retraction-focus-at-finite-sequence)
+      ( unfocus-at-fin-sequence n i)
+      ( is-section-focus-at-fin-sequence)
+      ( is-retraction-focus-at-fin-sequence)
 
 module _
   {l : Level} (A : UU l) (n : ℕ) (i : Fin (succ-ℕ n))
   where
 
-  equiv-focus-at-finite-sequence :
+  equiv-focus-at-fin-sequence :
     fin-sequence A (succ-ℕ n) ≃ A × fin-sequence A n
-  equiv-focus-at-finite-sequence =
-    (focus-at-finite-sequence n i , is-equiv-focus-at-finite-sequence n i)
+  equiv-focus-at-fin-sequence =
+    (focus-at-fin-sequence n i , is-equiv-focus-at-fin-sequence n i)
 ```
 
 ### Dropping is functorial
@@ -239,18 +230,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  htpy-map-drop-at-finite-sequence :
+  htpy-map-drop-at-fin-sequence :
     (n : ℕ) →
     (i : Fin (succ-ℕ n))
     (u : fin-sequence A (succ-ℕ n)) →
     map-fin-sequence n f (drop-at-fin-sequence n i u) ~
     drop-at-fin-sequence n i (map-fin-sequence (succ-ℕ n) f u)
-  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inl x) u (inl y) =
-    htpy-map-drop-at-finite-sequence n x
+  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
+    htpy-map-drop-at-fin-sequence n x
       ( tail-fin-sequence (succ-ℕ n) u)
       ( y)
-  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inl x) u (inr y) = refl
-  htpy-map-drop-at-finite-sequence (succ-ℕ n) (inr x) u k = refl
+  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
+  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inr x) u k = refl
 ```
 
 ### Insertion is functorial
@@ -260,7 +251,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  htpy-map-insert-at-finite-sequence :
+  htpy-map-insert-at-fin-sequence :
     (n : ℕ) →
     (x : A) →
     (i : Fin (succ-ℕ n)) →
@@ -270,10 +261,10 @@ module _
       ( i)
       ( map-fin-sequence n f u) ~
     map-fin-sequence (succ-ℕ n) f (insert-at-fin-sequence n x i u)
-  htpy-map-insert-at-finite-sequence zero-ℕ x _ u _ = refl
-  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inl i) u (inl j) =
-    htpy-map-insert-at-finite-sequence n x i (tail-fin-sequence n u) j
-  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inl i) u (inr j) = refl
-  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inr _) u (inl j) = refl
-  htpy-map-insert-at-finite-sequence (succ-ℕ n) x (inr _) u (inr j) = refl
+  htpy-map-insert-at-fin-sequence zero-ℕ x _ u _ = refl
+  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inl j) =
+    htpy-map-insert-at-fin-sequence n x i (tail-fin-sequence n u) j
+  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inr j) = refl
+  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inr _) u (inl j) = refl
+  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inr _) u (inr j) = refl
 ```

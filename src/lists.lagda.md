@@ -11,6 +11,7 @@ open import lists.concatenation-tuples public
 open import lists.dependent-sequences public
 open import lists.equivalence-relations-tuples public
 open import lists.equivalence-tuples-finite-sequences public
+open import lists.extend-at-index-finite-sequences public
 open import lists.finite-sequences public
 open import lists.finite-sequences-of-types public
 open import lists.flattening-lists public
