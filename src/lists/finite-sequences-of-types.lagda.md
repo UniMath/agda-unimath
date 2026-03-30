@@ -43,7 +43,8 @@ A [finite sequence](lists.finite-sequences.md) of types `A : Fin n → UU l`
 induces a type `Πₙ A = (i : Fin n) → A i`.
 
 For any [natural number](elementary-number-theory.natural-numbers.md) `n`, and
-and any [index](univalent-combinatorics.standard-finite-types.md) `i : ℕₙ`,
+and any [index](univalent-combinatorics.standard-finite-types.md)
+`i : Fin (n+1)`,
 
 ```text
   Πₙ₊₁ A ≃ A i × Πₙ Aⁱ
@@ -55,7 +56,7 @@ where `Aⁱ` denotes the finite sequence of types obtained by
 
 ## Definition
 
-### Elements of a finite products of types
+### Elements of a finite product of types
 
 ```agda
 module _
