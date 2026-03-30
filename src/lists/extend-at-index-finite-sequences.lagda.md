@@ -79,20 +79,6 @@ at the index `i` is the corresponding co-Kleisli extension:
   extᵢ f = (Ｖₙ₊₁ • f) ∘ δᵢ
 ```
 
-For any maps `f : Ｖₙ₊₁(A) → B`, `g : Ｖₙ₊₁(B) → C`, their
-{{#concept "co-Kleisli composition at an index" Disambiguation="in finite sequences" Agda=comp-co-kleisli-at-fin-sequence}}
-at the index `i` is defined as
-
-```text
-  g •ᵢ f = g ∘ Ｖₙ₊₁(f) ∘ δᵢ
-```
-
-and the extension map is natural w.r.t. the co-Kleisli composition:
-
-```text
-  ∀ (g : Ｖₙ₊₁(B) → C) (f : Ｖₙ₊₁(A) → B) → extᵢ (g •ᵢ f) ~ extᵢ g ∘ extᵢ f
-```
-
 ## Definitions
 
 ### The duplication map at and index
@@ -255,42 +241,4 @@ module _
     u
   compute-extend-at-elem-at-fin-sequence =
     compute-map-elem-at-dupl-at-fin-sequence n i
-```
-
-### Co-Kleisli composition at an index
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (n : ℕ) (i : Fin (succ-ℕ n))
-  (g : fin-sequence B (succ-ℕ n) → C)
-  (f : fin-sequence A (succ-ℕ n) → B)
-  where
-
-  comp-co-kleisli-at-fin-sequence : fin-sequence A (succ-ℕ n) → C
-  comp-co-kleisli-at-fin-sequence =
-    g ∘ map-fin-sequence (succ-ℕ n) f ∘ dupl-at-fin-sequence n i
-```
-
-### Extension is natural w.r.t. the co-Kleisli composition
-
-TODO
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (n : ℕ) (i : Fin (succ-ℕ n))
-  (g : fin-sequence B (succ-ℕ n) → C)
-  (f : fin-sequence A (succ-ℕ n) → B)
-  where
-
-  -- compute-extend-at-comp-co-kleisli-at-fin :
-  --   (u : fin-sequence A (succ-ℕ n)) →
-  --   extend-at-fin-sequence n i
-  --     ( comp-co-kleisli-at-fin-sequence n i g f)
-  --     ( u) ~
-  --   extend-at-fin-sequence n i g
-  --     ( extend-at-fin-sequence n i f u)
-  -- compute-extend-at-comp-co-kleisli-at-fin u k =
-  --   {!!}
 ```
