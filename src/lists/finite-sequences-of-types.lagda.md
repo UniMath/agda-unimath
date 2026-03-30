@@ -27,6 +27,8 @@ open import foundation.universe-levels
 
 open import lists.finite-sequences
 open import lists.focus-at-index-finite-sequences
+open import lists.insert-at-index-finite-sequences
+open import lists.remove-at-index-finite-sequences
 open import lists.sequences
 
 open import univalent-combinatorics.involution-standard-finite-types
@@ -37,7 +39,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An [finite sequence](lists.finite-sequences.md) of types `A : Fin n → UU l`
+A [finite sequence](lists.finite-sequences.md) of types `A : Fin n → UU l`
 induces a type `Πₙ A = (i : Fin n) → A i`.
 
 For any [natural number](elementary-number-theory.natural-numbers.md) `n`, and
@@ -48,7 +50,8 @@ and any [index](univalent-combinatorics.standard-finite-types.md) `i : ℕₙ`,
 ```
 
 where `Aⁱ` denotes the finite sequence of types obtained by
-[dropping](lists.focus-at-index-finite-sequences.md) the `i`th component of `A`.
+[removing](lists.remove-at-index-finite-sequences.md) the `i`th component of
+`A`.
 
 ## Definition
 
@@ -86,7 +89,7 @@ insert-at-Π-fin-sequence :
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
   (x : A i) →
-  Π-fin-sequence n (drop-at-fin-sequence n i A) →
+  Π-fin-sequence n (remove-at-fin-sequence n i A) →
   Π-fin-sequence (succ-ℕ n) A
 insert-at-Π-fin-sequence zero-ℕ A (inr _) x _ (inr _) = x
 insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inl j) =
@@ -102,26 +105,26 @@ insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u (inl j) = u j
 insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u (inr j) = x
 ```
 
-### Dropping at an index
+### Removing at an index
 
 ```agda
-drop-at-Π-fin-sequence :
+remove-at-Π-fin-sequence :
   {l : Level} →
   (n : ℕ)
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
   Π-fin-sequence (succ-ℕ n) A →
-  Π-fin-sequence n (drop-at-fin-sequence n i A)
-drop-at-Π-fin-sequence zero-ℕ A (inr _) u ()
-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inl j) =
-  drop-at-Π-fin-sequence
+  Π-fin-sequence n (remove-at-fin-sequence n i A)
+remove-at-Π-fin-sequence zero-ℕ A (inr _) u ()
+remove-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inl j) =
+  remove-at-Π-fin-sequence
     ( n)
     ( tail-fin-sequence (succ-ℕ n) A)
     ( i)
     ( u ∘ inl-Fin (succ-ℕ n))
     ( j)
-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inr _) = u (inr _)
-drop-at-Π-fin-sequence (succ-ℕ n) A (inr i) u j = u (inl j)
+remove-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inr _) = u (inr _)
+remove-at-Π-fin-sequence (succ-ℕ n) A (inr i) u j = u (inl j)
 ```
 
 ### Focusing at in index
@@ -133,17 +136,17 @@ focus-at-Π-fin-sequence :
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
   Π-fin-sequence (succ-ℕ n) A →
-  (A i × Π-fin-sequence n (drop-at-fin-sequence n i A))
+  (A i × Π-fin-sequence n (remove-at-fin-sequence n i A))
 focus-at-Π-fin-sequence n A i u =
   ( elem-at-Π-fin-sequence (succ-ℕ n) A i u ,
-    drop-at-Π-fin-sequence n A i u)
+    remove-at-Π-fin-sequence n A i u)
 
 unfocus-at-Π-fin-sequence :
   {l : Level} →
   (n : ℕ)
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
-  (A i × Π-fin-sequence n (drop-at-fin-sequence n i A)) →
+  (A i × Π-fin-sequence n (remove-at-fin-sequence n i A)) →
   Π-fin-sequence (succ-ℕ n) A
 unfocus-at-Π-fin-sequence n A i (x , u) = insert-at-Π-fin-sequence n A i x u
 ```
@@ -157,7 +160,7 @@ compute-elem-at-insert-at-Π-fin-sequence :
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
   (x : A i) →
-  (u : Π-fin-sequence n (drop-at-fin-sequence n i A)) →
+  (u : Π-fin-sequence n (remove-at-fin-sequence n i A)) →
   elem-at-Π-fin-sequence (succ-ℕ n) A i (insert-at-Π-fin-sequence n A i x u) ＝
   x
 compute-elem-at-insert-at-Π-fin-sequence zero-ℕ A (inr _) x u = refl
@@ -171,10 +174,10 @@ compute-elem-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u =
 compute-elem-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u = refl
 ```
 
-### Inserting after dropping an element produces the original finite sequence
+### Inserting a removed element is the identity
 
 ```agda
-compute-insert-at-drop-at-Π-fin-sequence :
+compute-insert-at-remove-at-Π-fin-sequence :
   {l : Level} →
   (n : ℕ) →
   (A : Fin (succ-ℕ n) → UU l) →
@@ -185,49 +188,49 @@ compute-insert-at-drop-at-Π-fin-sequence :
     ( A)
     ( i)
     ( elem-at-Π-fin-sequence (succ-ℕ n) A i u)
-    ( drop-at-Π-fin-sequence n A i u) ~
+    ( remove-at-Π-fin-sequence n A i u) ~
   u
-compute-insert-at-drop-at-Π-fin-sequence zero-ℕ A (inr _) u (inr _) = refl
-compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inl j) =
-  compute-insert-at-drop-at-Π-fin-sequence
+compute-insert-at-remove-at-Π-fin-sequence zero-ℕ A (inr _) u (inr _) = refl
+compute-insert-at-remove-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inl j) =
+  compute-insert-at-remove-at-Π-fin-sequence
     ( n)
     ( tail-fin-sequence (succ-ℕ n) A)
     ( i)
     ( u ∘ inl-Fin (succ-ℕ n))
     ( j)
-compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inr j) = refl
-compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inl j) = refl
-compute-insert-at-drop-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inr j) = refl
+compute-insert-at-remove-at-Π-fin-sequence (succ-ℕ n) A (inl i) u (inr j) = refl
+compute-insert-at-remove-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inl j) = refl
+compute-insert-at-remove-at-Π-fin-sequence (succ-ℕ n) A (inr i) u (inr j) = refl
 ```
 
-### Dropping an inserted element produces the original finite sequence
+### Removing an inserted element is the identity
 
 ```agda
-compute-drop-at-insert-at-Π-fin-sequence :
+compute-remove-at-insert-at-Π-fin-sequence :
   {l : Level} →
   (n : ℕ) →
   (A : Fin (succ-ℕ n) → UU l) →
   (i : Fin (succ-ℕ n)) →
   (x : A i) →
-  (u : Π-fin-sequence n (drop-at-fin-sequence n i A)) →
-  drop-at-Π-fin-sequence
+  (u : Π-fin-sequence n (remove-at-fin-sequence n i A)) →
+  remove-at-Π-fin-sequence
     ( n)
     ( A)
     ( i)
     ( insert-at-Π-fin-sequence n A i x u) ~
   u
-compute-drop-at-insert-at-Π-fin-sequence zero-ℕ A i x u ()
-compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inl j) =
-  compute-drop-at-insert-at-Π-fin-sequence
+compute-remove-at-insert-at-Π-fin-sequence zero-ℕ A i x u ()
+compute-remove-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inl j) =
+  compute-remove-at-insert-at-Π-fin-sequence
     ( n)
     ( tail-fin-sequence (succ-ℕ n) A)
     ( i)
     ( x)
     ( u ∘ inl-Fin n)
     ( j)
-compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inr j) =
+compute-remove-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inl i) x u (inr j) =
   refl
-compute-drop-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u j = refl
+compute-remove-at-insert-at-Π-fin-sequence (succ-ℕ n) A (inr i) x u j = refl
 ```
 
 ### Focusing a finite sequence at an index is an equivalence
@@ -245,12 +248,12 @@ module _
   is-section-focus-at-Π-finite-sequence (x , u) =
     eq-pair
       ( compute-elem-at-insert-at-Π-fin-sequence n A i x u)
-      ( eq-htpy (compute-drop-at-insert-at-Π-fin-sequence n A i x u))
+      ( eq-htpy (compute-remove-at-insert-at-Π-fin-sequence n A i x u))
 
   is-retraction-focus-at-Π-finite-sequence :
     unfocus-at-Π-fin-sequence n A i ∘ focus-at-Π-fin-sequence n A i ~ id
   is-retraction-focus-at-Π-finite-sequence =
-    eq-htpy ∘ compute-insert-at-drop-at-Π-fin-sequence n A i
+    eq-htpy ∘ compute-insert-at-remove-at-Π-fin-sequence n A i
 
   is-equiv-focus-at-Π-finite-sequence :
     is-equiv (focus-at-Π-fin-sequence n A i)
@@ -271,7 +274,7 @@ module _
       ( succ-ℕ n)
       ( λ i →
         Π-fin-sequence (succ-ℕ n) A ≃
-        A i × Π-fin-sequence n (drop-at-fin-sequence n i A))
+        A i × Π-fin-sequence n (remove-at-fin-sequence n i A))
   Π-equiv-focus-at-Π-fin-sequence i =
     ( focus-at-Π-fin-sequence n A i ,
       is-equiv-focus-at-Π-finite-sequence n A i)

@@ -9,9 +9,7 @@ module lists.focus-at-index-finite-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
@@ -19,11 +17,11 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
-open import lists.functoriality-finite-sequences
+open import lists.insert-at-index-finite-sequences
+open import lists.remove-at-index-finite-sequences
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -33,59 +31,19 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 Given a [natural number](elementary-number-theory.natural-numbers.md) `n : ℕ`
-and a type `A`, the [finite sequence](lists.finite-sequences.md) of
-{{#concept "focusing maps" Disambiguation="of finite sequences" Agda=focus-at-finite-sequence}}
-of `Aⁿ⁺¹` is the family of maps `(i : ℕₙ) → Aⁿ⁺¹ → A × Aⁿ`
+and a type `A`, the [insertion map](lists.insert-at-index-finite-sequences.md)
+at an [index](univalent-combinatorics.standard-finite-types.md) `i : Fin (n+1)`
+induces an [equivalence](foundation.equivalences.md) `Aⁿ⁺¹ ≃ A × Aⁿ`
 
 ```text
-  (x₀,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xₙ) ↦ (xᵢ , (x₀,...xᵢ₋₁,xᵢ₊₁,...,xₙ))
+  (x₀,...xᵢ₋₁,xᵢ,xᵢ₊₁,...,xₙ) ↔ (xᵢ , (x₀,...xᵢ₋₁,xᵢ₊₁,...,xₙ))
 ```
+
+These are the
+{{#concept "focusing equivalences" Disambiguation="of finite sequences" Agda=equiv-focus-at-fin-sequence}}
+of finite sequences.
 
 ## Definitions
-
-### Dropping an element at an index
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  drop-at-fin-sequence :
-    (n : ℕ) →
-    (i : Fin (succ-ℕ n)) →
-    fin-sequence A (succ-ℕ n) →
-    fin-sequence A n
-  drop-at-fin-sequence zero-ℕ _ u ()
-  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    drop-at-fin-sequence n x (tail-fin-sequence (succ-ℕ n) u) y
-  drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) =
-    head-fin-sequence (succ-ℕ n) u
-  drop-at-fin-sequence (succ-ℕ n) (inr x) u =
-    tail-fin-sequence (succ-ℕ n) u
-```
-
-### Insertion at an index
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
-    fin-sequence A n →
-    fin-sequence A (succ-ℕ n)
-  insert-at-fin-sequence zero-ℕ a _ _ _ = a
-  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
-    insert-at-fin-sequence n a x (tail-fin-sequence n u) y
-  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) =
-    head-fin-sequence n u
-  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inl y) =
-    elem-at-fin-sequence (succ-ℕ n) y u
-  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inr y) = a
-```
 
 ### Focusing a finite sequence at an index
 
@@ -98,7 +56,7 @@ module _
     fin-sequence A (succ-ℕ n) → A × fin-sequence A n
   focus-at-fin-sequence u =
     ( elem-at-fin-sequence (succ-ℕ n) i u ,
-      drop-at-fin-sequence n i u)
+      remove-at-fin-sequence n i u)
 
   unfocus-at-fin-sequence :
     A × fin-sequence A n → fin-sequence A (succ-ℕ n)
@@ -106,83 +64,6 @@ module _
 ```
 
 ## Properties
-
-### The coordinate at the index of an inserted element is the inserted element
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  compute-elem-at-insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
-    (u : fin-sequence A n) →
-    elem-at-fin-sequence (succ-ℕ n) i (insert-at-fin-sequence n a i u) ＝
-    a
-  compute-elem-at-insert-at-fin-sequence zero-ℕ a _ _ = refl
-  compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u =
-    compute-elem-at-insert-at-fin-sequence n a x (tail-fin-sequence n u)
-  compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inr x) u = refl
-```
-
-### Inserting after dropping an element produces the original finite sequence
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  compute-insert-at-drop-at-fin-sequence :
-    (n : ℕ) →
-    (i : Fin (succ-ℕ n)) →
-    (u : fin-sequence A (succ-ℕ n)) →
-    insert-at-fin-sequence
-      ( n)
-      ( elem-at-fin-sequence (succ-ℕ n) i u)
-      ( i)
-      ( drop-at-fin-sequence n i u) ~
-    u
-  compute-insert-at-drop-at-fin-sequence zero-ℕ (inr _) u (inr _) = refl
-  compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    compute-insert-at-drop-at-fin-sequence
-      ( n)
-      ( x)
-      ( tail-fin-sequence (succ-ℕ n) u)
-      ( y)
-  compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
-  compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inr x) u (inl y) = refl
-  compute-insert-at-drop-at-fin-sequence (succ-ℕ n) (inr x) u (inr y) = refl
-```
-
-### Dropping an inserted element produces the original finite sequence
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  compute-drop-at-insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
-    (u : fin-sequence A n) →
-    drop-at-fin-sequence
-      ( n)
-      ( i)
-      ( insert-at-fin-sequence n a i u) ~
-    u
-  compute-drop-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
-    compute-drop-at-insert-at-fin-sequence
-      ( n)
-      ( a)
-      ( x)
-      ( tail-fin-sequence n u)
-      ( y)
-  compute-drop-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) = refl
-  compute-drop-at-insert-at-fin-sequence (succ-ℕ n) a (inr x) u j = refl
-```
 
 ### Focusing a finite sequence at an index is an equivalence
 
@@ -197,13 +78,13 @@ module _
   is-section-focus-at-fin-sequence (a , u) =
     eq-pair
       ( compute-elem-at-insert-at-fin-sequence n a i u)
-      ( eq-htpy (compute-drop-at-insert-at-fin-sequence n a i u))
+      ( eq-htpy (compute-remove-at-insert-at-fin-sequence n a i u))
 
   is-retraction-focus-at-fin-sequence :
     (v : fin-sequence A (succ-ℕ n)) →
     unfocus-at-fin-sequence n i (focus-at-fin-sequence n i v) ＝ v
   is-retraction-focus-at-fin-sequence =
-    eq-htpy ∘ compute-insert-at-drop-at-fin-sequence n i
+    eq-htpy ∘ compute-insert-at-remove-at-fin-sequence n i
 
   is-equiv-focus-at-fin-sequence :
     is-equiv (focus-at-fin-sequence {A = A} n i)
@@ -221,50 +102,4 @@ module _
     fin-sequence A (succ-ℕ n) ≃ A × fin-sequence A n
   equiv-focus-at-fin-sequence =
     (focus-at-fin-sequence n i , is-equiv-focus-at-fin-sequence n i)
-```
-
-### Dropping is functorial
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  htpy-map-drop-at-fin-sequence :
-    (n : ℕ) →
-    (i : Fin (succ-ℕ n))
-    (u : fin-sequence A (succ-ℕ n)) →
-    map-fin-sequence n f (drop-at-fin-sequence n i u) ~
-    drop-at-fin-sequence n i (map-fin-sequence (succ-ℕ n) f u)
-  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    htpy-map-drop-at-fin-sequence n x
-      ( tail-fin-sequence (succ-ℕ n) u)
-      ( y)
-  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
-  htpy-map-drop-at-fin-sequence (succ-ℕ n) (inr x) u k = refl
-```
-
-### Insertion is functorial
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  htpy-map-insert-at-fin-sequence :
-    (n : ℕ) →
-    (x : A) →
-    (i : Fin (succ-ℕ n)) →
-    (u : fin-sequence A n) →
-    insert-at-fin-sequence n
-      ( f x)
-      ( i)
-      ( map-fin-sequence n f u) ~
-    map-fin-sequence (succ-ℕ n) f (insert-at-fin-sequence n x i u)
-  htpy-map-insert-at-fin-sequence zero-ℕ x _ u _ = refl
-  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inl j) =
-    htpy-map-insert-at-fin-sequence n x i (tail-fin-sequence n u) j
-  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inr j) = refl
-  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inr _) u (inl j) = refl
-  htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inr _) u (inr j) = refl
 ```
