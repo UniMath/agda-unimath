@@ -40,19 +40,23 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A [finite sequence](lists.finite-sequences.md) of types `A : Fin n → UU l`
-induces a type `Πₙ A = (i : Fin n) → A i`.
+induces a type `Πₙ A = (i : Fin n) → A i`, i.e.,
+
+```text
+  Πₙ A ≃ A₀ × A₁ × ... × Aᵢ × ... Aₙ₋₁
+```
 
 For any [natural number](elementary-number-theory.natural-numbers.md) `n`, and
 and any [index](univalent-combinatorics.standard-finite-types.md)
 `i : Fin (n+1)`,
 
 ```text
-  Πₙ₊₁ A ≃ A i × Πₙ Aⁱ
+  Πₙ₊₁ A ≃ Aᵢ × Πₙ Aⁱ
 ```
 
 where `Aⁱ` denotes the finite sequence of types obtained by
-[removing](lists.remove-at-index-finite-sequences.md) the `i`th component of
-`A`.
+[removing](lists.remove-at-index-finite-sequences.md) the `i`th component of `A`
+so `Πₙ Aⁱ = A₀ × ... Aᵢ₋₁ × Aᵢ₊ᵢ × ... × Aₙ`.
 
 ## Definition
 
