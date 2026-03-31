@@ -109,7 +109,7 @@ module _
   htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inr _) u (inr j) = refl
 ```
 
-### Inserting a removed an element produces is the identity
+### Inserting a removed element is the identity
 
 ```agda
 module _
