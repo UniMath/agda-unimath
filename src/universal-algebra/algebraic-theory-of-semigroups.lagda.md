@@ -145,8 +145,8 @@ abstract
         ( algebraic-theory-Semigroup))
       ( eq-pair-eq-fiber
         ( eq-binary-htpy _ _
-          λ where
-            mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → refl))
+          ( λ where
+            mul-operation-Semigroup (x ∷ y ∷ empty-tuple) → refl)))
 
   is-retraction-semigroup-Algebra-Semigroup :
     {l : Level} (G : Semigroup l) →
