@@ -27,8 +27,8 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
-open import universal-algebra.homomorphisms-of-models-of-signatures
 open import universal-algebra.models-of-signatures
+open import universal-algebra.morphisms-of-models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
