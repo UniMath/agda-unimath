@@ -338,7 +338,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
+  {l1 l2 l3 l4 : Level}
   (σ : signature l1)
   (T : Algebraic-Theory l2 σ)
   (A : Algebra l3 σ T)
