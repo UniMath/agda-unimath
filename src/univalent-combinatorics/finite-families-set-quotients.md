@@ -1,7 +1,7 @@
-# Set quotients by dependent products of finite families of equivalence relations
+# Finite families of set quotients
 
 ```agda
-module univalent-combinatorics.set-quotients-dependent-products-finite-families-equivalence-relations where
+module univalent-combinatorics.finite-families-set-quotients where
 ```
 
 <details><summary>Imports</summary>
@@ -52,24 +52,24 @@ module _
   (R : (i : I) → equivalence-relation l3 (A i))
   where
 
-  Π-finite-family-equivalence-relation :
+  Π-fin-family-equivalence-relation :
     equivalence-relation (l1 ⊔ l3) ((i : I) → A i)
-  Π-finite-family-equivalence-relation = Π-equivalence-relation I R
+  Π-fin-family-equivalence-relation = Π-equivalence-relation I R
 
-  sim-prop-Π-finite-family-equivalence-relation :
+  sim-prop-Π-fin-family-equivalence-relation :
     Relation-Prop (l1 ⊔ l3) ((i : I) → A i)
-  sim-prop-Π-finite-family-equivalence-relation =
-    prop-equivalence-relation Π-finite-family-equivalence-relation
+  sim-prop-Π-fin-family-equivalence-relation =
+    prop-equivalence-relation Π-fin-family-equivalence-relation
 
-  Π-finite-family-set-quotient : UU (l1 ⊔ l2 ⊔ l3)
-  Π-finite-family-set-quotient = (i : I) → set-quotient (R i)
+  Π-fin-family-set-quotient : UU (l1 ⊔ l2 ⊔ l3)
+  Π-fin-family-set-quotient = (i : I) → set-quotient (R i)
 
-  set-Π-finite-family-set-quotient : Set (l1 ⊔ l2 ⊔ l3)
-  set-Π-finite-family-set-quotient = Π-Set' I (quotient-Set ∘ R)
+  set-Π-fin-family-set-quotient : Set (l1 ⊔ l2 ⊔ l3)
+  set-Π-fin-family-set-quotient = Π-Set' I (quotient-Set ∘ R)
 
-  quotient-map-Π-finite-family-set-quotient :
-    ((i : I) → A i) → Π-finite-family-set-quotient
-  quotient-map-Π-finite-family-set-quotient f i = quotient-map (R i) (f i)
+  quotient-map-Π-fin-family-set-quotient :
+    ((i : I) → A i) → Π-fin-family-set-quotient
+  quotient-map-Π-fin-family-set-quotient f i = quotient-map (R i) (f i)
 ```
 
 ## Properties
@@ -88,9 +88,9 @@ module _
   where
 
   abstract
-    is-surjective-quotient-map-Π-finite-family-set-quotient :
-      is-surjective (quotient-map-Π-finite-family-set-quotient finite-I R)
-    is-surjective-quotient-map-Π-finite-family-set-quotient g =
+    is-surjective-quotient-map-Π-fin-family-set-quotient :
+      is-surjective (quotient-map-Π-fin-family-set-quotient finite-I R)
+    is-surjective-quotient-map-Π-fin-family-set-quotient g =
       map-trunc-Prop
         ( λ choice → (pr1 ∘ choice , eq-htpy (pr2 ∘ choice)))
         ( finite-choice
@@ -98,7 +98,7 @@ module _
           ( λ i → is-surjective-quotient-map (R i) (g i)))
 ```
 
-### The quotient map reflects the induced equivalence relation
+### The quotient map reflects the product equivalence relation
 
 ```agda
 module _
@@ -109,21 +109,21 @@ module _
   where
 
   abstract
-    reflects-Π-equivalence-relation-quotient-map-Π-finite-family-set-quotient :
+    reflects-Π-equivalence-relation-quotient-map-Π-fin-family-set-quotient :
       reflects-equivalence-relation
-        ( Π-finite-family-equivalence-relation finite-I R)
-        ( quotient-map-Π-finite-family-set-quotient finite-I R)
-    reflects-Π-equivalence-relation-quotient-map-Π-finite-family-set-quotient
+        ( Π-fin-family-equivalence-relation finite-I R)
+        ( quotient-map-Π-fin-family-set-quotient finite-I R)
+    reflects-Π-equivalence-relation-quotient-map-Π-fin-family-set-quotient
       f~g =
       eq-htpy (λ i → apply-effectiveness-quotient-map' (R i) (f~g i))
 
-  reflecting-quotient-map-Π-finite-family-set-quotient :
+  reflecting-quotient-map-Π-fin-family-set-quotient :
     reflecting-map-equivalence-relation
-      ( Π-finite-family-equivalence-relation finite-I R)
-      ( Π-finite-family-set-quotient finite-I R)
-  reflecting-quotient-map-Π-finite-family-set-quotient =
-    ( quotient-map-Π-finite-family-set-quotient finite-I R ,
-      reflects-Π-equivalence-relation-quotient-map-Π-finite-family-set-quotient)
+      ( Π-fin-family-equivalence-relation finite-I R)
+      ( Π-fin-family-set-quotient finite-I R)
+  reflecting-quotient-map-Π-fin-family-set-quotient =
+    ( quotient-map-Π-fin-family-set-quotient finite-I R ,
+      reflects-Π-equivalence-relation-quotient-map-Π-fin-family-set-quotient)
 ```
 
 ### The quotient map is effective
@@ -137,19 +137,19 @@ module _
   where
 
   abstract
-    is-effective-quotient-map-Π-finite-family-set-quotient :
+    is-effective-quotient-map-Π-fin-family-set-quotient :
       is-effective
-        ( Π-finite-family-equivalence-relation finite-I R)
-        ( quotient-map-Π-finite-family-set-quotient finite-I R)
-    is-effective-quotient-map-Π-finite-family-set-quotient f g =
+        ( Π-fin-family-equivalence-relation finite-I R)
+        ( quotient-map-Π-fin-family-set-quotient finite-I R)
+    is-effective-quotient-map-Π-fin-family-set-quotient f g =
       equiv-iff
         ( Id-Prop
-          ( set-Π-finite-family-set-quotient finite-I R)
-          ( quotient-map-Π-finite-family-set-quotient finite-I R f)
-          ( quotient-map-Π-finite-family-set-quotient finite-I R g))
-        ( sim-prop-Π-finite-family-equivalence-relation finite-I R f g)
+          ( set-Π-fin-family-set-quotient finite-I R)
+          ( quotient-map-Π-fin-family-set-quotient finite-I R f)
+          ( quotient-map-Π-fin-family-set-quotient finite-I R g))
+        ( sim-prop-Π-fin-family-equivalence-relation finite-I R f g)
         ( λ qf=qg i → apply-effectiveness-quotient-map (R i) (htpy-eq qf=qg i))
-        ( reflects-Π-equivalence-relation-quotient-map-Π-finite-family-set-quotient
+        ( reflects-Π-equivalence-relation-quotient-map-Π-fin-family-set-quotient
           ( finite-I)
           ( R))
 ```
@@ -165,16 +165,16 @@ module _
   where
 
   abstract
-    is-set-quotient-Π-finite-family-set-quotient :
+    is-set-quotient-Π-fin-family-set-quotient :
       is-set-quotient
-        ( Π-finite-family-equivalence-relation finite-I R)
-        ( set-Π-finite-family-set-quotient finite-I R)
-        ( reflecting-quotient-map-Π-finite-family-set-quotient finite-I R)
-    is-set-quotient-Π-finite-family-set-quotient =
+        ( Π-fin-family-equivalence-relation finite-I R)
+        ( set-Π-fin-family-set-quotient finite-I R)
+        ( reflecting-quotient-map-Π-fin-family-set-quotient finite-I R)
+    is-set-quotient-Π-fin-family-set-quotient =
       is-set-quotient-is-surjective-and-effective
-        ( Π-finite-family-equivalence-relation finite-I R)
-        ( set-Π-finite-family-set-quotient finite-I R)
-        ( reflecting-quotient-map-Π-finite-family-set-quotient finite-I R)
-        ( is-surjective-quotient-map-Π-finite-family-set-quotient finite-I R ,
-          is-effective-quotient-map-Π-finite-family-set-quotient finite-I R)
+        ( Π-fin-family-equivalence-relation finite-I R)
+        ( set-Π-fin-family-set-quotient finite-I R)
+        ( reflecting-quotient-map-Π-fin-family-set-quotient finite-I R)
+        ( is-surjective-quotient-map-Π-fin-family-set-quotient finite-I R ,
+          is-effective-quotient-map-Π-fin-family-set-quotient finite-I R)
 ```

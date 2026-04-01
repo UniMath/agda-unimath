@@ -18,8 +18,8 @@ open import foundation.universe-levels
 open import lists.equivalence-relations-finite-sequences
 open import lists.finite-sequences
 
+open import univalent-combinatorics.finite-families-set-quotients
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.set-quotients-dependent-products-finite-families-equivalence-relations
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -50,7 +50,7 @@ module _
       ( fin-sequence-equivalence-relation R n)
       ( fin-sequence (set-quotient R) n)
   reflecting-quotient-map-fin-sequence =
-    reflecting-quotient-map-Π-finite-family-set-quotient
+    reflecting-quotient-map-Π-fin-family-set-quotient
       ( Fin-Finite-Type n)
       ( λ _ → R)
 
@@ -61,7 +61,7 @@ module _
         ( fin-sequence-Set (quotient-Set R) n)
         ( reflecting-quotient-map-fin-sequence)
     is-set-quotient-fin-sequence-set-quotient =
-      is-set-quotient-Π-finite-family-set-quotient
+      is-set-quotient-Π-fin-family-set-quotient
         ( Fin-Finite-Type n)
         ( λ _ → R)
 ```
