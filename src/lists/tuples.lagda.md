@@ -9,6 +9,7 @@ module lists.tuples where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.identity-types
@@ -50,6 +51,14 @@ module _
   tail-tuple : {n : ℕ} → tuple A (succ-ℕ n) → tuple A n
   tail-tuple (x ∷ v) = v
 
+  last-tuple : {n : ℕ} → tuple A (succ-ℕ n) → A
+  last-tuple (x ∷ empty-tuple) = x
+  last-tuple (x ∷ y ∷ xs) = last-tuple (y ∷ xs)
+
+  init-tuple : {n : ℕ} → tuple A (succ-ℕ n) → tuple A n
+  init-tuple (x ∷ empty-tuple) = empty-tuple
+  init-tuple (x ∷ y ∷ xs) = x ∷ init-tuple (y ∷ xs)
+
   snoc-tuple : {n : ℕ} → tuple A n → A → tuple A (succ-ℕ n)
   snoc-tuple empty-tuple a = a ∷ empty-tuple
   snoc-tuple (x ∷ v) a = x ∷ (snoc-tuple v a)
@@ -58,6 +67,16 @@ module _
     (n : ℕ) → tuple A n → fin-sequence A n
   component-tuple (succ-ℕ n) (a ∷ v) (inl k) = component-tuple n v k
   component-tuple (succ-ℕ n) (a ∷ v) (inr k) = a
+```
+
+### Folding over tuples
+
+```agda
+fold-tuple :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
+  {n : ℕ} → tuple A n → B
+fold-tuple b μ {0} _ = b
+fold-tuple b μ (a ∷ l) = μ a (fold-tuple b μ l)
 ```
 
 ## Properties
@@ -70,10 +89,26 @@ module _
   where
 
   cons-head-tail-tuple :
-    (n : ℕ) →
-    (v : tuple A (succ-ℕ n)) →
+    (n : ℕ) (v : tuple A (succ-ℕ n)) →
     ((head-tuple v) ∷ (tail-tuple v)) ＝ v
   cons-head-tail-tuple n (x ∷ v) = refl
+```
+
+### Adding the last element at the end of the initial segment of the tuple gives the same tuple
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  abstract
+    snoc-last-init-tuple :
+      {n : ℕ} (v : tuple A (succ-ℕ n)) →
+      snoc-tuple (init-tuple v) (last-tuple v) ＝ v
+    snoc-last-init-tuple (x ∷ empty-tuple) =
+      refl
+    snoc-last-init-tuple (x ∷ y ∷ xs) =
+      ap (x ∷_) (snoc-last-init-tuple (y ∷ xs))
 ```
 
 ### Computing the transport of a tuple over its size

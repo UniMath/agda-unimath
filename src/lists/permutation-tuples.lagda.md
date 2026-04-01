@@ -26,6 +26,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.arrays
+open import lists.elements-of-tuples
+open import lists.equality-tuples
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences

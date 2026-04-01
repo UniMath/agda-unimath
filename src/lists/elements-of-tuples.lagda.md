@@ -23,6 +23,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
+We define the relation of being an
+{{#concept "element" Disambiguation="of a tuple" Agda=element-tuple}} of a
+[tuple](lists.tuples.md).
+
 ## Definition
 
 ```agda

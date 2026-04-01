@@ -10,18 +10,14 @@ module lists.functoriality-tuples where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.postcomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import lists.tuples
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -74,12 +70,7 @@ preserves-id-map-tuple :
   {l : Level} (n : ℕ) {A : UU l} (x : tuple A n) → x ＝ map-tuple id x
 preserves-id-map-tuple zero-ℕ empty-tuple = refl
 preserves-id-map-tuple (succ-ℕ n) (x ∷ xs) =
-  eq-Eq-tuple
-    ( succ-ℕ n)
-    ( x ∷ xs)
-    ( map-tuple id (x ∷ xs))
-    ( refl ,
-      Eq-eq-tuple n xs (map-tuple id xs) (preserves-id-map-tuple n xs))
+  ap (x ∷_) (preserves-id-map-tuple n xs)
 ```
 
 ### The action on maps of tuples preserves composition
@@ -91,13 +82,5 @@ preserves-comp-map-tuple :
   map-tuple g (map-tuple f x) ＝ map-tuple (g ∘ f) x
 preserves-comp-map-tuple zero-ℕ f g empty-tuple = refl
 preserves-comp-map-tuple (succ-ℕ n) f g (x ∷ xs) =
-  eq-Eq-tuple
-    ( succ-ℕ n)
-    ( map-tuple g (map-tuple f (x ∷ xs)))
-    ( map-tuple (g ∘ f) (x ∷ xs))
-    ( refl ,
-      Eq-eq-tuple n
-        ( map-tuple g (map-tuple f xs))
-        ( map-tuple (g ∘ f) xs)
-        ( preserves-comp-map-tuple n f g xs))
+  ap (g (f x) ∷_) (preserves-comp-map-tuple n f g xs)
 ```
