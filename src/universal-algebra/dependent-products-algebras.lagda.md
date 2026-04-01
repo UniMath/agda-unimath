@@ -21,7 +21,7 @@ open import lists.functoriality-tuples
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
 open import universal-algebra.homomorphisms-of-algebras
-open import universal-algebra.homomorphisms-of-models-of-signatures
+open import universal-algebra.morphisms-of-models-of-signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
@@ -60,7 +60,7 @@ module _
   model-Π-Algebra = (set-Π-Algebra , is-model-set-Π-Algebra)
 
   hom-Π-Algebra :
-    (i : I) → hom-Model-of-Signature σ model-Π-Algebra (model-Algebra σ T (A i))
+    (i : I) → hom-Model-Of-Signature σ model-Π-Algebra (model-Algebra σ T (A i))
   hom-Π-Algebra i = (ev i , λ _ _ → refl)
 
   abstract
@@ -76,7 +76,7 @@ module _
       let
         (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T e
       in
-        ( eval-term-hom-Model-of-Signature
+        ( eval-term-hom-Model-Of-Signature
           ( σ)
           ( model-Π-Algebra)
           ( model-Algebra σ T (A i))
@@ -85,7 +85,7 @@ module _
           ( v)) ∙
         ( is-algebra-model-Algebra σ T (A i) e _) ∙
         ( inv
-          ( eval-term-hom-Model-of-Signature
+          ( eval-term-hom-Model-Of-Signature
             ( σ)
             ( model-Π-Algebra)
             ( model-Algebra σ T (A i))
@@ -94,7 +94,7 @@ module _
             ( v)))
 
     is-algebra-model-Π-Algebra :
-      is-algebra-Model-of-Signature σ T model-Π-Algebra
+      is-algebra-Model-Of-Signature σ T model-Π-Algebra
     is-algebra-model-Π-Algebra e v =
       eq-htpy (htpy-is-algebra-model-Π-Algebra e v)
 
