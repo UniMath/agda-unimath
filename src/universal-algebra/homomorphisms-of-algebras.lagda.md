@@ -32,7 +32,7 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
-open import universal-algebra.homomorphisms-of-models-of-signatures
+open import universal-algebra.morphisms-of-models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -62,7 +62,7 @@ module _
   preserves-operations-prop-Algebra :
     subtype (l1 ⊔ l3 ⊔ l4) (type-Algebra σ T A → type-Algebra σ T B)
   preserves-operations-prop-Algebra =
-    preserves-operations-prop-Model-Of-Signature
+    prop-preserves-operations-Model-Of-Signature
       ( σ)
       ( model-Algebra σ T A)
       ( model-Algebra σ T B)
@@ -281,7 +281,7 @@ module _
       map-hom-Algebra σ T A B φ (eval-term-Algebra σ T A t v) ＝
       eval-term-Algebra σ T B t (map-hom-Algebra σ T A B φ ∘ v)
     eval-term-hom-Algebra =
-      eval-term-hom-Model-of-Signature
+      eval-term-hom-Model-Of-Signature
         ( σ)
         ( model-Algebra σ T A)
         ( model-Algebra σ T B)
