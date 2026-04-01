@@ -23,5 +23,5 @@ open import universal-algebra.precategory-of-algebras-algebraic-theories public
 open import universal-algebra.quotient-algebras public
 open import universal-algebra.signatures public
 open import universal-algebra.terms-over-signatures public
-open import universal-algebra.universal-property-freely-generated-algebras public
+open import universal-algebra.universal-property-free-algebras public
 ```
