@@ -109,7 +109,7 @@ module _
     ( set-Subalgebra , is-model-set-Subalgebra)
 
   inclusion-hom-Subalgebra :
-    hom-Model-of-Signature
+    hom-Model-Of-Signature
       ( σ)
       ( model-of-signature-Subalgebra)
       ( model-Algebra σ T A)
@@ -120,20 +120,20 @@ module _
     eval-term-Subalgebra :
       {k : ℕ} (t : term σ k) (v : fin-sequence type-Subalgebra k) →
       inclusion-subtype S
-        ( eval-term-Model-of-Signature σ model-of-signature-Subalgebra t v) ＝
-      eval-term-Model-of-Signature σ
+        ( eval-term-Model-Of-Signature σ model-of-signature-Subalgebra t v) ＝
+      eval-term-Model-Of-Signature σ
         ( model-Algebra σ T A)
         ( t)
         ( inclusion-subtype S ∘ v)
     eval-term-Subalgebra =
-      eval-term-hom-Model-of-Signature
+      eval-term-hom-Model-Of-Signature
         ( σ)
         ( model-of-signature-Subalgebra)
         ( model-Algebra σ T A)
         ( inclusion-hom-Subalgebra)
 
     is-algebra-model-Subalgebra :
-      is-algebra-Model-of-Signature σ T model-of-signature-Subalgebra
+      is-algebra-Model-Of-Signature σ T model-of-signature-Subalgebra
     is-algebra-model-Subalgebra i v =
       let
         (k , lhs , rhs) = index-abstract-equation-Algebraic-Theory σ T i

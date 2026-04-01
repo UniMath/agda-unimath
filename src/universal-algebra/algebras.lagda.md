@@ -80,15 +80,15 @@ module _
           ( index-abstract-equation-Algebraic-Theory σ T e)
           ( M))
 
-  is-algebra-Model-of-Signature :
+  is-algebra-Model-Of-Signature :
     {l3 : Level} → Model-Of-Signature l3 σ → UU (l2 ⊔ l3)
-  is-algebra-Model-of-Signature =
+  is-algebra-Model-Of-Signature =
     is-in-subtype is-algebra-prop-Model-Of-Signature
 
-  is-prop-is-algebra-Model-of-Signature :
+  is-prop-is-algebra-Model-Of-Signature :
     {l3 : Level} (M : Model-Of-Signature l3 σ) →
-    is-prop (is-algebra-Model-of-Signature M)
-  is-prop-is-algebra-Model-of-Signature =
+    is-prop (is-algebra-Model-Of-Signature M)
+  is-prop-is-algebra-Model-Of-Signature =
     is-prop-is-in-subtype is-algebra-prop-Model-Of-Signature
 ```
 
@@ -123,7 +123,7 @@ module _
   is-set-type-Algebra : is-set type-Algebra
   is-set-type-Algebra = is-set-type-Set set-Algebra
 
-  is-algebra-model-Algebra : is-algebra-Model-of-Signature σ T model-Algebra
+  is-algebra-model-Algebra : is-algebra-Model-Of-Signature σ T model-Algebra
   is-algebra-model-Algebra = pr2 A
 ```
 

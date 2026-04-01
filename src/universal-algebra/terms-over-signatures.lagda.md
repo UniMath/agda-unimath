@@ -151,15 +151,15 @@ module _
   (M@(_ , is-model-M) : Model-Of-Signature l2 σ)
   where
 
-  eval-term-Model-of-Signature :
+  eval-term-Model-Of-Signature :
     {k : ℕ} → term σ k → fin-sequence (type-Model-Of-Signature σ M) k →
     type-Model-Of-Signature σ M
-  eval-term-Model-of-Signature t v = eval-term σ is-model-M v t
+  eval-term-Model-Of-Signature t v = eval-term σ is-model-M v t
 
-  eval-tuple-term-Model-of-Signature :
+  eval-tuple-term-Model-Of-Signature :
     {k n : ℕ} →
     tuple (term σ k) n → fin-sequence (type-Model-Of-Signature σ M) k →
     tuple (type-Model-Of-Signature σ M) n
-  eval-tuple-term-Model-of-Signature t v =
+  eval-tuple-term-Model-Of-Signature t v =
     eval-tuple-term σ is-model-M v t
 ```
