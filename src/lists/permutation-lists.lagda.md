@@ -21,6 +21,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.arrays
+open import lists.elements-of-lists
 open import lists.functoriality-lists
 open import lists.functoriality-tuples
 open import lists.lists
