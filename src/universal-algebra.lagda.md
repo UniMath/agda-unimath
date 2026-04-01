@@ -14,6 +14,7 @@ open import universal-algebra.congruences public
 open import universal-algebra.equivalences-models-of-signatures public
 open import universal-algebra.extensions-signatures public
 open import universal-algebra.homomorphisms-of-algebras public
+open import universal-algebra.homomorphisms-of-models-of-signatures public
 open import universal-algebra.isomorphisms-of-algebras public
 open import universal-algebra.kernels public
 open import universal-algebra.models-of-signatures public

@@ -27,7 +27,7 @@ open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
-open import universal-algebra.homomorphisms-of-algebras
+open import universal-algebra.homomorphisms-of-models-of-signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
@@ -108,33 +108,29 @@ module _
   model-of-signature-Subalgebra =
     ( set-Subalgebra , is-model-set-Subalgebra)
 
+  inclusion-hom-Subalgebra :
+    hom-Model-of-Signature
+      ( σ)
+      ( model-of-signature-Subalgebra)
+      ( model-Algebra σ T A)
+  inclusion-hom-Subalgebra =
+    ( inclusion-subtype S , λ _ _ → refl)
+
   abstract
     eval-term-Subalgebra :
       {k : ℕ} (t : term σ k) (v : fin-sequence type-Subalgebra k) →
-      inclusion-subtype S (eval-term σ is-model-set-Subalgebra v t) ＝
-      eval-term σ (is-model-set-Algebra σ T A) (inclusion-subtype S ∘ v) t
-
-    eval-tuple-term-Subalgebra :
-      {k n : ℕ} (t : tuple (term σ k) n) (v : fin-sequence type-Subalgebra k) →
-      Eq-tuple
-        ( n)
-        ( map-tuple
-          ( inclusion-subtype S)
-          ( eval-tuple-term σ is-model-set-Subalgebra v t))
-        ( eval-tuple-term
-          ( σ)
-          ( is-model-set-Algebra σ T A)
-          ( inclusion-subtype S ∘ v) t)
-
-    eval-term-Subalgebra (var-term i) v = refl
-    eval-term-Subalgebra (op-term op ts) v =
-      ap
-        ( is-model-set-Algebra σ T A op)
-        ( eq-Eq-tuple _ _ _ (eval-tuple-term-Subalgebra ts v))
-
-    eval-tuple-term-Subalgebra empty-tuple v = map-raise star
-    eval-tuple-term-Subalgebra (t ∷ ts) v =
-      ( eval-term-Subalgebra t v , eval-tuple-term-Subalgebra ts v)
+      inclusion-subtype S
+        ( eval-term-Model-of-Signature σ model-of-signature-Subalgebra t v) ＝
+      eval-term-Model-of-Signature σ
+        ( model-Algebra σ T A)
+        ( t)
+        ( inclusion-subtype S ∘ v)
+    eval-term-Subalgebra =
+      eval-term-hom-Model-of-Signature
+        ( σ)
+        ( model-of-signature-Subalgebra)
+        ( model-Algebra σ T A)
+        ( inclusion-hom-Subalgebra)
 
     is-algebra-model-Subalgebra :
       is-algebra-Model-of-Signature σ T model-of-signature-Subalgebra

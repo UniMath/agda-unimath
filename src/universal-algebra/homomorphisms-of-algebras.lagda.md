@@ -26,13 +26,15 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.subtypes
 
+open import lists.finite-sequences
 open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.algebraic-theories
 open import universal-algebra.algebras
-open import universal-algebra.models-of-signatures
+open import universal-algebra.homomorphisms-of-models-of-signatures
 open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>
@@ -57,31 +59,25 @@ module _
   (B : Algebra l4 σ T)
   where
 
+  preserves-operations-prop-Algebra :
+    subtype (l1 ⊔ l3 ⊔ l4) (type-Algebra σ T A → type-Algebra σ T B)
+  preserves-operations-prop-Algebra =
+    preserves-operations-prop-Model-Of-Signature
+      ( σ)
+      ( model-Algebra σ T A)
+      ( model-Algebra σ T B)
+
   preserves-operations-Algebra :
     (type-Algebra σ T A → type-Algebra σ T B) →
     UU (l1 ⊔ l3 ⊔ l4)
-  preserves-operations-Algebra f =
-    ( op : operation-signature σ) →
-    ( v : tuple (type-Algebra σ T A) (arity-operation-signature σ op)) →
-    f (is-model-set-Algebra σ T A op v) ＝
-    is-model-set-Algebra σ T B op (map-tuple f v)
+  preserves-operations-Algebra =
+    is-in-subtype preserves-operations-prop-Algebra
 
   is-prop-preserves-operations-Algebra :
     (f : type-Algebra σ T A → type-Algebra σ T B) →
     is-prop (preserves-operations-Algebra f)
-  is-prop-preserves-operations-Algebra f =
-    is-prop-Π
-      ( λ x →
-        is-prop-Π
-          ( λ y →
-            is-set-type-Algebra σ T B
-              ( f (is-model-set-Algebra σ T A x y))
-              ( is-model-set-Algebra σ T B x (map-tuple f y))))
-
-  preserves-operations-prop-Algebra :
-    (type-Algebra σ T A → type-Algebra σ T B) → Prop (l1 ⊔ l3 ⊔ l4)
-  preserves-operations-prop-Algebra f =
-    ( preserves-operations-Algebra f , is-prop-preserves-operations-Algebra f)
+  is-prop-preserves-operations-Algebra =
+    is-prop-is-in-subtype preserves-operations-prop-Algebra
 
   hom-Algebra : UU (l1 ⊔ l3 ⊔ l4)
   hom-Algebra =
@@ -265,4 +261,29 @@ module _
     eq-htpy-hom-Algebra σ T A B
       ( comp-hom-Algebra σ T A A B f (id-hom-Algebra σ T A)) f
       ( refl-htpy)
+```
+
+### Homomorphisms of algebras preserve the evaluation of terms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (B : Algebra l4 σ T)
+  (φ : hom-Algebra σ T A B)
+  where
+
+  abstract
+    eval-term-hom-Algebra :
+      {k : ℕ} (t : term σ k) (v : fin-sequence (type-Algebra σ T A) k) →
+      map-hom-Algebra σ T A B φ (eval-term-Algebra σ T A t v) ＝
+      eval-term-Algebra σ T B t (map-hom-Algebra σ T A B φ ∘ v)
+    eval-term-hom-Algebra =
+      eval-term-hom-Model-of-Signature
+        ( σ)
+        ( model-Algebra σ T A)
+        ( model-Algebra σ T B)
+        ( φ)
 ```

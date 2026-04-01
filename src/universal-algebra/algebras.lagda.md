@@ -7,6 +7,8 @@ module universal-algebra.algebras where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -20,6 +22,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 
 open import lists.finite-sequences
+open import lists.tuples
 
 open import universal-algebra.abstract-equations-over-signatures
 open import universal-algebra.algebraic-theories
@@ -122,4 +125,25 @@ module _
 
   is-algebra-model-Algebra : is-algebra-Model-of-Signature σ T model-Algebra
   is-algebra-model-Algebra = pr2 A
+```
+
+### Evaluation of terms in an algebra
+
+```agda
+module _
+  {l1 l2 l3 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T)
+  where
+
+  eval-term-Algebra :
+    {k : ℕ} →
+    term σ k → fin-sequence (type-Algebra σ T A) k → type-Algebra σ T A
+  eval-term-Algebra t v = eval-term σ (is-model-set-Algebra σ T A) v t
+
+  eval-tuple-term-Algebra :
+    {k n : ℕ} →
+    tuple (term σ k) n → fin-sequence (type-Algebra σ T A) k →
+    tuple (type-Algebra σ T A) n
+  eval-tuple-term-Algebra t v =
+    eval-tuple-term σ (is-model-set-Algebra σ T A) v t
 ```
