@@ -58,7 +58,10 @@ module _
       ( S)
       ( quotient-Set S)
       ( reflecting-map-quotient-map S)
-      ( is-set-quotient-fin-sequence-set-quotient n A R)
+      ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+        ( n)
+        ( A)
+        ( R))
       ( is-set-quotient-set-quotient S)
 
   compute-multivariable-map-set-quotient :
@@ -75,6 +78,9 @@ module _
       ( S)
       ( quotient-Set S)
       ( reflecting-map-quotient-map S)
-      ( is-set-quotient-fin-sequence-set-quotient n A R)
+      ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+        ( n)
+        ( A)
+        ( R))
       ( is-set-quotient-set-quotient S)
 ```

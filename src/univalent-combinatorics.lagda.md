@@ -69,6 +69,7 @@ open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
+open import univalent-combinatorics.finite-families-set-quotients public
 open import univalent-combinatorics.finite-subtypes public
 open import univalent-combinatorics.finite-types public
 open import univalent-combinatorics.finitely-enumerable-subtypes public
@@ -105,7 +106,6 @@ open import univalent-combinatorics.repetitions-of-values-sequences public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.riffle-shuffles public
 open import univalent-combinatorics.sequences-finite-types public
-open import univalent-combinatorics.set-quotients-dependent-products-finite-families-equivalence-relations public
 open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.sigma-decompositions public
 open import univalent-combinatorics.skipping-element-standard-finite-types public

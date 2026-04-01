@@ -1,9 +1,9 @@
-# Freely generated algebras
+# Free algebras
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module universal-algebra.freely-generated-algebras where
+module universal-algebra.free-algebras where
 ```
 
 <details><summary>Imports</summary>

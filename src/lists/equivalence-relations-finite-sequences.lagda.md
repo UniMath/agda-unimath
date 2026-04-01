@@ -37,19 +37,18 @@ module _
   (n : ℕ)
   where
 
-  equivalence-relation-fin-sequence-equivalence-relation :
+  fin-sequence-equivalence-relation :
     equivalence-relation l2 (fin-sequence A n)
-  equivalence-relation-fin-sequence-equivalence-relation =
+  fin-sequence-equivalence-relation =
     Π-equivalence-relation (Fin n) (λ _ → R)
 
   sim-fin-sequence-equivalence-relation : Relation l2 (fin-sequence A n)
   sim-fin-sequence-equivalence-relation =
-    sim-equivalence-relation
-      ( equivalence-relation-fin-sequence-equivalence-relation)
+    sim-equivalence-relation fin-sequence-equivalence-relation
 
   sim-prop-fin-sequence-equivalence-relation :
     Relation-Prop l2 (fin-sequence A n)
   sim-prop-fin-sequence-equivalence-relation =
     prop-equivalence-relation
-      ( equivalence-relation-fin-sequence-equivalence-relation)
+      ( fin-sequence-equivalence-relation)
 ```
