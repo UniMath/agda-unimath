@@ -179,7 +179,7 @@ module _
     map-inv-equiv (extensionality-hom-Model-Of-Signature f g)
 ```
 
-### Homomorphisms of models of signatures preserve the evaluation of terms
+### Morphisms of models of signatures preserve the evaluation of terms
 
 ```agda
 module _
