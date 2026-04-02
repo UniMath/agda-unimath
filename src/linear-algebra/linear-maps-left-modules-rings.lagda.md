@@ -8,6 +8,7 @@ module linear-algebra.linear-maps-left-modules-rings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.conjunction
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
@@ -111,10 +112,14 @@ module _
   (M : left-module-Ring l2 R) (N : left-module-Ring l3 R)
   where
 
+  hom-set-left-module-Ring : Set (l1 ⊔ l2 ⊔ l3)
+  hom-set-left-module-Ring =
+    set-subset
+      ( hom-set-Set (set-left-module-Ring R M) (set-left-module-Ring R N))
+      ( is-linear-map-prop-left-module-Ring R M N)
+
   linear-map-left-module-Ring : UU (l1 ⊔ l2 ⊔ l3)
-  linear-map-left-module-Ring =
-    Σ ( type-left-module-Ring R M → type-left-module-Ring R N)
-      ( is-linear-map-left-module-Ring R M N)
+  linear-map-left-module-Ring = type-Set hom-set-left-module-Ring
 
   map-linear-map-left-module-Ring :
     linear-map-left-module-Ring →
@@ -311,15 +316,90 @@ module _
   (f g : linear-map-left-module-Ring R M N)
   where
 
+  htpy-linear-map-left-module-Ring : UU (l2 ⊔ l3)
+  htpy-linear-map-left-module-Ring =
+    map-linear-map-left-module-Ring R M N f ~
+    map-linear-map-left-module-Ring R M N g
+
   abstract
     eq-htpy-linear-map-left-module-Ring :
-      ( ( map-linear-map-left-module-Ring R M N f) ~
-        ( map-linear-map-left-module-Ring R M N g)) →
-      f ＝ g
+      htpy-linear-map-left-module-Ring → f ＝ g
     eq-htpy-linear-map-left-module-Ring f~g =
       eq-type-subtype
         ( is-linear-map-prop-left-module-Ring R M N)
         ( eq-htpy f~g)
+```
+
+### The identity linear map from a left module to itself
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where
+
+  id-linear-map-left-module-Ring :
+    linear-map-left-module-Ring R M M
+  id-linear-map-left-module-Ring =
+    ( id , (λ _ _ → refl) , (λ _ _ → refl))
+```
+
+### Associativity of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  (P : left-module-Ring l4 R)
+  (Q : left-module-Ring l5 R)
+  where
+
+  abstract
+    associative-comp-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R P Q)
+      (g : linear-map-left-module-Ring R N P)
+      (h : linear-map-left-module-Ring R M N) →
+      comp-linear-map-left-module-Ring R M N Q
+        ( comp-linear-map-left-module-Ring R N P Q f g)
+        ( h) ＝
+      comp-linear-map-left-module-Ring R M P Q
+        ( f)
+        ( comp-linear-map-left-module-Ring R M N P g h)
+    associative-comp-linear-map-left-module-Ring f g h =
+      eq-htpy-linear-map-left-module-Ring R M Q _ _ refl-htpy
+```
+
+### Unit laws of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  where
+
+  abstract
+    left-unit-law-comp-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R M N) →
+      comp-linear-map-left-module-Ring R M N N
+        ( id-linear-map-left-module-Ring R N)
+        ( f) ＝
+      f
+    left-unit-law-comp-linear-map-left-module-Ring f =
+      eq-htpy-linear-map-left-module-Ring R M N _ _ refl-htpy
+
+    right-unit-law-comp-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R M N) →
+      comp-linear-map-left-module-Ring R M M N
+        ( f)
+        ( id-linear-map-left-module-Ring R M) ＝
+      f
+    right-unit-law-comp-linear-map-left-module-Ring f =
+      eq-htpy-linear-map-left-module-Ring R M N _ _ refl-htpy
 ```
 
 ## See also
