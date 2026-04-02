@@ -190,7 +190,10 @@ positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
 positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
 
 two-ℚ⁺ : ℚ⁺
-two-ℚ⁺ = positive-rational-ℕ⁺ (2 , λ ())
+two-ℚ⁺ = positive-rational-ℕ⁺ two-ℕ⁺
+
+three-ℚ⁺ : ℚ⁺
+three-ℚ⁺ = positive-rational-ℕ⁺ three-ℕ⁺
 ```
 
 ### The rational image of a positive integer fraction is positive
