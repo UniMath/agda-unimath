@@ -41,6 +41,8 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.concatenation-lists
+open import lists.elements-of-lists
+open import lists.equality-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-lists
@@ -766,9 +768,9 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
   rec-coproduct
-    ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
+    ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head-element-list z l))
     ( λ e →
-      is-in-tail
+      is-in-tail-element-list
         ( y)
         ( z)
         ( l)
@@ -975,24 +977,26 @@ all-elements-is-prime-list-ℕ p = (x : ℕ) → x ∈-list p → is-prime-ℕ x
 all-elements-is-prime-list-tail-ℕ :
   (p : list ℕ) (x : ℕ) (P : all-elements-is-prime-list-ℕ (cons x p)) →
   all-elements-is-prime-list-ℕ p
-all-elements-is-prime-list-tail-ℕ p x P y I = P y (is-in-tail y x p I)
+all-elements-is-prime-list-tail-ℕ p x P y I =
+  P y (is-in-tail-element-list y x p I)
 
 all-elements-is-prime-list-is-prime-list-ℕ :
   (p : list ℕ) → is-prime-list-ℕ p → all-elements-is-prime-list-ℕ p
-all-elements-is-prime-list-is-prime-list-ℕ (cons x p) P .x (is-head .x .p) =
+all-elements-is-prime-list-is-prime-list-ℕ
+  (cons x p) P .x (is-head-element-list .x .p) =
   pr1 P
 all-elements-is-prime-list-is-prime-list-ℕ
   ( cons x p)
   ( P)
   ( y)
-  ( is-in-tail .y .x .p I) =
+  ( is-in-tail-element-list .y .x .p I) =
   all-elements-is-prime-list-is-prime-list-ℕ p (pr2 P) y I
 
 is-prime-list-all-elements-is-prime-list-ℕ :
   (p : list ℕ) → all-elements-is-prime-list-ℕ p → is-prime-list-ℕ p
 is-prime-list-all-elements-is-prime-list-ℕ nil P = raise-star
 is-prime-list-all-elements-is-prime-list-ℕ (cons x p) P =
-  P x (is-head x p) ,
+  P x (is-head-element-list x p) ,
   is-prime-list-all-elements-is-prime-list-ℕ
     ( p)
     ( all-elements-is-prime-list-tail-ℕ p x P)
