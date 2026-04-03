@@ -163,6 +163,8 @@ open import metric-spaces.poset-of-rational-neighborhood-relations public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-maps public
 open import metric-spaces.precategory-of-metric-spaces-and-short-maps public
+open import metric-spaces.precomplete-isometries-pseudometric-spaces public
+open import metric-spaces.precomplete-short-maps-pseudometric-spaces public
 open import metric-spaces.preimages-rational-neighborhood-relations public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
@@ -186,6 +188,7 @@ open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric
 open import metric-spaces.uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces public
+open import metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces public
 open import metric-spaces.universal-property-short-maps-metric-quotients-of-pseudometric-spaces public
 ```
 
