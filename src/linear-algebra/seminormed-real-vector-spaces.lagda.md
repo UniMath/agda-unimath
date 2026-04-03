@@ -511,7 +511,7 @@ module _
   neighborhood-Seminormed-ℝ-Vector-Space :
     ℚ⁺ → Relation l1 (type-Seminormed-ℝ-Vector-Space V)
   neighborhood-Seminormed-ℝ-Vector-Space d =
-    type-Relation-Prop (neighborhood-prop-Seminormed-ℝ-Vector-Space d)
+    rel-Relation-Prop (neighborhood-prop-Seminormed-ℝ-Vector-Space d)
 
   abstract
     refl-neighborhood-Seminormed-ℝ-Vector-Space :

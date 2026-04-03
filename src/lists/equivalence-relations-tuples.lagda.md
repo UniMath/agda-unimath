@@ -47,7 +47,7 @@ module _
 
   sim-equivalence-relation-tuple : (n : ℕ) → Relation l2 (tuple A n)
   sim-equivalence-relation-tuple n =
-    type-Relation-Prop (sim-prop-equivalence-relation-tuple n)
+    rel-Relation-Prop (sim-prop-equivalence-relation-tuple n)
 
   abstract
     refl-sim-equivalence-relation-tuple :

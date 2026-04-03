@@ -329,7 +329,7 @@ module _
   neighborhood-Seminormed-ℂ-Vector-Space :
     ℚ⁺ → Relation l1 (type-Seminormed-ℂ-Vector-Space V)
   neighborhood-Seminormed-ℂ-Vector-Space d =
-    type-Relation-Prop (neighborhood-prop-Seminormed-ℂ-Vector-Space d)
+    rel-Relation-Prop (neighborhood-prop-Seminormed-ℂ-Vector-Space d)
 
   pseudometric-structure-Seminormed-ℂ-Vector-Space :
     Pseudometric-Structure l1 (type-Seminormed-ℂ-Vector-Space V)

@@ -81,13 +81,13 @@ module _
   le-Strictly-Preordered-Set :
     Relation l2 type-Strictly-Preordered-Set
   le-Strictly-Preordered-Set =
-    type-Relation-Prop le-prop-Strictly-Preordered-Set
+    rel-Relation-Prop le-prop-Strictly-Preordered-Set
 
   is-prop-le-Strictly-Preordered-Set :
     (x y : type-Strictly-Preordered-Set) →
     is-prop (le-Strictly-Preordered-Set x y)
   is-prop-le-Strictly-Preordered-Set =
-    is-prop-type-Relation-Prop le-prop-Strictly-Preordered-Set
+    is-prop-rel-Relation-Prop le-prop-Strictly-Preordered-Set
 
   is-irreflexive-le-Strictly-Preordered-Set :
     is-irreflexive le-Strictly-Preordered-Set
