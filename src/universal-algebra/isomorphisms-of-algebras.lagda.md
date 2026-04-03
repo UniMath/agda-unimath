@@ -80,6 +80,90 @@ module _
       ( Algebra-Large-Precategory σ T)
       { X = A}
       { Y = B}
+
+  is-iso-prop-Algebra : subtype (l1 ⊔ l3 ⊔ l4) (hom-Algebra σ T A B)
+  is-iso-prop-Algebra f = (is-iso-Algebra f , is-prop-is-iso-Algebra f)
+
+  hom-iso-Algebra : iso-Algebra → hom-Algebra σ T A B
+  hom-iso-Algebra =
+    hom-iso-Large-Precategory (Algebra-Large-Precategory σ T) {X = A} {Y = B}
+
+  hom-inv-iso-Algebra : iso-Algebra → hom-Algebra σ T B A
+  hom-inv-iso-Algebra =
+    hom-inv-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
+
+  is-section-hom-inv-iso-Algebra :
+    (φ : iso-Algebra) →
+    comp-hom-Algebra σ T B A B
+      ( hom-iso-Algebra φ)
+      ( hom-inv-iso-Algebra φ) ＝
+    id-hom-Algebra σ T B
+  is-section-hom-inv-iso-Algebra φ =
+    is-section-hom-inv-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
+      ( φ)
+
+  is-retraction-hom-inv-iso-Algebra :
+    (φ : iso-Algebra) →
+    comp-hom-Algebra σ T A B A
+      ( hom-inv-iso-Algebra φ)
+      ( hom-iso-Algebra φ) ＝
+    id-hom-Algebra σ T A
+  is-retraction-hom-inv-iso-Algebra φ =
+    is-retraction-hom-inv-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
+      ( φ)
+
+  is-iso-iso-Algebra :
+    (φ : iso-Algebra) → is-iso-Algebra (hom-iso-Algebra φ)
+  is-iso-iso-Algebra =
+    is-iso-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
+
+  map-iso-Algebra : iso-Algebra → type-Algebra σ T A → type-Algebra σ T B
+  map-iso-Algebra φ = map-hom-Algebra σ T A B (hom-iso-Algebra φ)
+
+  map-inv-iso-Algebra : iso-Algebra → type-Algebra σ T B → type-Algebra σ T A
+  map-inv-iso-Algebra φ = map-hom-Algebra σ T B A (hom-inv-iso-Algebra φ)
+
+  equiv-iso-Algebra : iso-Algebra → type-Algebra σ T A ≃ type-Algebra σ T B
+  equiv-iso-Algebra φ =
+    ( map-iso-Algebra φ ,
+      is-equiv-is-invertible
+        ( map-inv-iso-Algebra φ)
+        ( htpy-eq-hom-Algebra σ T B B _ _
+          ( is-section-hom-inv-iso-Algebra φ))
+        ( htpy-eq-hom-Algebra σ T A A _ _
+          ( is-retraction-hom-inv-iso-Large-Precategory
+            ( Algebra-Large-Precategory σ T)
+            { X = A}
+            { Y = B}
+            ( φ))))
+```
+
+### The inverse of an isomorphism
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (σ : signature l1)
+  (T : Algebraic-Theory l2 σ) (A : Algebra l3 σ T) (B : Algebra l4 σ T)
+  where
+
+  inv-iso-Algebra : iso-Algebra σ T A B → iso-Algebra σ T B A
+  inv-iso-Algebra =
+    inv-iso-Large-Precategory
+      ( Algebra-Large-Precategory σ T)
+      { X = A}
+      { Y = B}
 ```
 
 ### The property that a homomorphism of algebras is an equivalence
@@ -335,4 +419,20 @@ module _
   eq-iso-Algebra :
     (A B : Algebra l3 σ T) → iso-Algebra σ T A B → A ＝ B
   eq-iso-Algebra A B = map-inv-equiv (extensionality-iso-Algebra A B)
+```
+
+### Isomorphic algebras have isomorphic homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (σ : signature l1)
+  (T : Algebraic-Theory l2 σ)
+  (A : Algebra l3 σ T)
+  (A' : Algebra l4 σ T)
+  (B : Algebra l5 σ T)
+  (B' : Algebra l6 σ T)
+  (iso-A-A' : iso-Algebra σ T A A')
+  (iso-B-B' : iso-Algebra σ T B B')
+  where
 ```

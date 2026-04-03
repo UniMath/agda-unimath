@@ -13,6 +13,7 @@ open import universal-algebra.category-of-algebras-algebraic-theories public
 open import universal-algebra.congruences public
 open import universal-algebra.equivalences-models-of-signatures public
 open import universal-algebra.extensions-signatures public
+open import universal-algebra.freely-generated-algebras public
 open import universal-algebra.homomorphisms-of-algebras public
 open import universal-algebra.isomorphisms-of-algebras public
 open import universal-algebra.kernels public
@@ -22,4 +23,5 @@ open import universal-algebra.precategory-of-algebras-algebraic-theories public
 open import universal-algebra.quotient-algebras public
 open import universal-algebra.signatures public
 open import universal-algebra.terms-over-signatures public
+open import universal-algebra.universal-property-freely-generated-algebras public
 ```
