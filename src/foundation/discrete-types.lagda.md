@@ -19,6 +19,7 @@ open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
+open import foundation-core.decidable-propositions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
