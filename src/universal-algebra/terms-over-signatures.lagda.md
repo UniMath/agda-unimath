@@ -141,3 +141,25 @@ module _
   translation-tuple-term (x ∷ v) =
     (translation-term x) ∷ (translation-tuple-term v)
 ```
+
+### Evaluating terms on models of signatures
+
+```agda
+module _
+  {l1 l2 : Level}
+  (σ : signature l1)
+  (M@(_ , is-model-M) : Model-Of-Signature l2 σ)
+  where
+
+  eval-term-Model-Of-Signature :
+    {k : ℕ} → term σ k → fin-sequence (type-Model-Of-Signature σ M) k →
+    type-Model-Of-Signature σ M
+  eval-term-Model-Of-Signature t v = eval-term σ is-model-M v t
+
+  eval-tuple-term-Model-Of-Signature :
+    {k n : ℕ} →
+    tuple (term σ k) n → fin-sequence (type-Model-Of-Signature σ M) k →
+    tuple (type-Model-Of-Signature σ M) n
+  eval-tuple-term-Model-Of-Signature t v =
+    eval-tuple-term σ is-model-M v t
+```
