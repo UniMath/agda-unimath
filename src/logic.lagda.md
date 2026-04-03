@@ -25,11 +25,14 @@ open import logic.double-negation-stable-subtypes public
 open import logic.functoriality-existential-quantification public
 open import logic.impredicative-encoding-oracle-modalities public
 open import logic.intersections-double-negation-stable-subtypes public
+open import logic.irrefutable-oracle-modalities public
+open import logic.irrefutable-oracle-sheaves public
 open import logic.irrefutable-types public
 open import logic.markovian-types public
 open import logic.markovs-principle public
 open import logic.oracle-modalities public
 open import logic.oracle-reflections public
+open import logic.oracle-sheaves public
 open import logic.propositional-double-negation-elimination public
 open import logic.propositionally-decidable-maps public
 open import logic.propositionally-decidable-types public
