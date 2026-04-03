@@ -193,7 +193,7 @@ module _
       is-equiv (equiv-eq-Algebra A B)
     is-equiv-equiv-eq-Algebra (A , p) =
       subtype-identity-principle
-        ( is-prop-is-algebra-Model-of-Signature σ T)
+        ( is-prop-is-algebra-Model-Of-Signature σ T)
         ( p)
         ( id-equiv-Model-Of-Signature σ A)
         ( equiv-eq-Algebra (A , p))
