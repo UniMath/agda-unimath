@@ -22,6 +22,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.elements-of-lists
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.lists
@@ -196,17 +197,17 @@ module _
     (l : list A) (x : A) →
     x ∈-tuple (tuple-list l) → x ∈-list l
   is-in-list-is-in-tuple-list (cons y l) .y (is-head .y .(tuple-list l)) =
-    is-head y l
+    is-head-element-list y l
   is-in-list-is-in-tuple-list
     (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
-    is-in-tail x y l (is-in-list-is-in-tuple-list l x I)
+    is-in-tail-element-list x y l (is-in-list-is-in-tuple-list l x I)
 
   is-in-tuple-list-is-in-list :
     (l : list A) (x : A) →
     x ∈-list l → x ∈-tuple (tuple-list l)
-  is-in-tuple-list-is-in-list (cons x l) x (is-head .x l) =
+  is-in-tuple-list-is-in-list (cons x l) x (is-head-element-list .x l) =
     is-head x (tuple-list l)
-  is-in-tuple-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
+  is-in-tuple-list-is-in-list (cons y l) x (is-in-tail-element-list .x .y l I) =
     is-in-tail x y (tuple-list l) (is-in-tuple-list-is-in-list l x I)
 ```
 
