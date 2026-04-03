@@ -15,12 +15,12 @@ open import foundation.equality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.mere-equality
+open import foundation.morphisms-slice
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sets
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.truncations
 open import foundation.uniqueness-set-truncations
