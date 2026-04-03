@@ -9,6 +9,8 @@ open import lists.arrays public
 open import lists.concatenation-lists public
 open import lists.concatenation-tuples public
 open import lists.dependent-sequences public
+open import lists.elements-of-tuples public
+open import lists.equality-tuples public
 open import lists.equivalence-relations-tuples public
 open import lists.equivalence-tuples-finite-sequences public
 open import lists.finite-sequences public
@@ -25,6 +27,7 @@ open import lists.permutation-tuples public
 open import lists.predicates-on-lists public
 open import lists.quicksort-lists public
 open import lists.repetitions-sequences public
+open import lists.reversed-tuples public
 open import lists.reversing-lists public
 open import lists.sequences public
 open import lists.set-quotients-tuples public

@@ -22,6 +22,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.elements-of-tuples
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.lists
@@ -90,16 +91,6 @@ module _
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
-```
-
-### The definition of `fold-tuple`
-
-```agda
-fold-tuple :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
-  {n : ℕ} → tuple A n → B
-fold-tuple b μ {0} _ = b
-fold-tuple b μ (a ∷ l) = μ a (fold-tuple b μ l)
 ```
 
 ## Properties
@@ -195,19 +186,22 @@ module _
   is-in-list-is-in-tuple-list :
     (l : list A) (x : A) →
     x ∈-tuple (tuple-list l) → x ∈-list l
-  is-in-list-is-in-tuple-list (cons y l) .y (is-head .y .(tuple-list l)) =
+  is-in-list-is-in-tuple-list
+    (cons y l) .y (is-head-element-tuple .y .(tuple-list l)) =
     is-head y l
   is-in-list-is-in-tuple-list
-    (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
+    (cons y l) x (is-in-tail-element-tuple .x .y .(tuple-list l) I) =
     is-in-tail x y l (is-in-list-is-in-tuple-list l x I)
 
   is-in-tuple-list-is-in-list :
     (l : list A) (x : A) →
     x ∈-list l → x ∈-tuple (tuple-list l)
   is-in-tuple-list-is-in-list (cons x l) x (is-head .x l) =
-    is-head x (tuple-list l)
+    is-head-element-tuple x (tuple-list l)
   is-in-tuple-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
-    is-in-tail x y (tuple-list l) (is-in-tuple-list-is-in-list l x I)
+    is-in-tail-element-tuple x y
+      ( tuple-list l)
+      ( is-in-tuple-list-is-in-list l x I)
 ```
 
 ### Link between `fold-list` and `fold-tuple`

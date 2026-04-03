@@ -35,6 +35,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
+open import lists.equality-tuples
 open import lists.functoriality-tuples
 open import lists.tuples
 
