@@ -50,17 +50,25 @@ module _
   {l1 : Level} (σ : signature l1)
   where
 
+  satisfies-equation-assignment-prop-Model-Of-Signature :
+    {l2 : Level} (eq : abstract-equation σ) (M : Model-Of-Signature l2 σ) →
+    fin-sequence (type-Model-Of-Signature σ M) (arity-abstract-equation σ eq) →
+    Prop l2
+  satisfies-equation-assignment-prop-Model-Of-Signature
+    (k , lhs , rhs) (set-M , is-model-M) v =
+    Id-Prop
+      ( set-M)
+      ( eval-term σ is-model-M v lhs)
+      ( eval-term σ is-model-M v rhs)
+
   satisfies-equation-prop-Model-Of-Signature :
     {l2 : Level} → abstract-equation σ → Model-Of-Signature l2 σ → Prop l2
-  satisfies-equation-prop-Model-Of-Signature
-    (k , lhs , rhs) (set-M , is-model-M) =
+  satisfies-equation-prop-Model-Of-Signature eq M =
     Π-Prop
-      ( fin-sequence (type-Set set-M) k)
-      ( λ v →
-        Id-Prop
-          ( set-M)
-          ( eval-term σ is-model-M v lhs)
-          ( eval-term σ is-model-M v rhs))
+      ( fin-sequence
+        ( type-Model-Of-Signature σ M)
+        ( arity-abstract-equation σ eq))
+      ( satisfies-equation-assignment-prop-Model-Of-Signature eq M)
 
 module _
   {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
