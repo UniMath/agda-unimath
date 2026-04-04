@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import universal-algebra.extensions-signatures
 open import universal-algebra.signatures
 open import universal-algebra.terms-over-signatures
 ```
@@ -53,4 +54,22 @@ module _
 
   rhs-abstract-equation : term σ arity-abstract-equation
   rhs-abstract-equation = rhs
+```
+
+## Properties
+
+### Translation of equations
+
+```agda
+module _
+  {l1 l2 : Level}
+  (σ : signature l1)
+  (τ : signature l2)
+  (E : is-extension-of-signature σ τ)
+  where
+
+  translation-abstract-equation :
+    abstract-equation σ → abstract-equation τ
+  translation-abstract-equation (k , lhs , rhs) =
+    ( k , translation-term σ τ E lhs , translation-term σ τ E rhs)
 ```
