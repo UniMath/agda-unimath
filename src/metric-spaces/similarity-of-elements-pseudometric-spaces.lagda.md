@@ -64,6 +64,10 @@ module _
   sim-Pseudometric-Space =
     type-Relation-Prop sim-prop-Pseudometric-Space
 
+  sim-Pseudometric-Space' :
+    Relation l2 (type-Pseudometric-Space A)
+  sim-Pseudometric-Space' x y = sim-Pseudometric-Space y x
+
   is-prop-sim-Pseudometric-Space :
     (x y : type-Pseudometric-Space A) →
     is-prop (sim-Pseudometric-Space x y)
