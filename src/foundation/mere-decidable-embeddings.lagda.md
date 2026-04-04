@@ -9,6 +9,7 @@ module foundation.mere-decidable-embeddings where
 ```agda
 open import foundation.cantor-schroder-bernstein-decidable-embeddings
 open import foundation.decidable-embeddings
+open import foundation.empty-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -72,4 +73,12 @@ antisymmetric-mere-decidable-emb :
   mere-decidable-emb X Y → mere-decidable-emb Y X → mere-equiv X Y
 antisymmetric-mere-decidable-emb wlpo =
   map-binary-trunc-Prop (Cantor-Schröder-Bernstein-WLPO wlpo)
+```
+
+### Empty types merely decidably embed into any type
+
+```agda
+mere-decidable-emb-is-empty :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-empty X → mere-decidable-emb X Y
+mere-decidable-emb-is-empty H = unit-trunc-Prop (decidable-emb-is-empty H)
 ```
