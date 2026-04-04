@@ -97,11 +97,11 @@ De-Morgans-Law = {l1 l2 : Level} → level-De-Morgans-Law l1 l2
 ### The law of excluded middle implies De Morgan's law
 
 ```agda
-level-De-Morgans-Law-level-LEM :
+level-level-De-Morgans-Law-LEM :
   {l : Level} →
   level-LEM l →
   level-De-Morgans-Law l l
-level-De-Morgans-Law-level-LEM lem P Q =
+level-level-De-Morgans-Law-LEM lem P Q =
   rec-coproduct
     ( λ p npq → inr-disjunction (λ q → npq (p , q)))
     ( λ np _ → inl-disjunction np)

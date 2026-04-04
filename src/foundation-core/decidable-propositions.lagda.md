@@ -94,6 +94,10 @@ Decidable-Prop :
   (l : Level) → UU (lsuc l)
 Decidable-Prop l = type-subtype is-decidable-prop-Prop
 
+make-Decidable-Prop :
+  {l : Level} (P : Prop l) → is-decidable-type-Prop P → Decidable-Prop l
+make-Decidable-Prop P d = (type-Prop P , is-prop-type-Prop P , d)
+
 module _
   {l : Level} (P : Decidable-Prop l)
   where
