@@ -1,9 +1,9 @@
-# Finite sequences of set quotients
+# Multivariable inputs of set quotients are set quotients of finite sequences
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module foundation.finite-sequences-set-quotients where
+module foundation.multivariable-inputs-set-quotients where
 ```
 
 <details><summary>Imports</summary>
@@ -50,7 +50,8 @@ open import univalent-combinatorics.standard-finite-types
 Say we have a [finite sequence](lists.finite-sequences.md) of types `A1`, ...,
 `An` each equipped with an
 [equivalence relation](foundation.equivalence-relations.md) `Ri`. Then, the set
-quotient of this finite sequence is the finite sequence of the
+quotient of this finite sequence is the
+[multivariable input](foundation.multivariable-operations.md) of the
 [set quotients](foundation.set-quotients.md) of each `Ai`.
 
 ## Definition
@@ -466,7 +467,7 @@ abstract
               ( X) _))) ∙
         is-retraction-inv-precomp-f
 
-is-set-quotient-fin-sequence-set-quotient :
+is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation :
   { l1 l2 : Level}
   ( n : ℕ)
   ( A : fin-sequence (UU l1) n)
@@ -475,8 +476,12 @@ is-set-quotient-fin-sequence-set-quotient :
     ( all-sim-equivalence-relation n A R)
     ( set-quotient-fin-sequence-Set n A R)
     ( reflecting-map-quotient-fin-sequence-map n A R)
-pr1 (is-set-quotient-fin-sequence-set-quotient n A R X) =
+pr1
+  ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+    n A R X) =
   section-precomp-fin-sequence-set-quotient n A R X
-pr2 (is-set-quotient-fin-sequence-set-quotient n A R X) =
+pr2
+  ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+    n A R X) =
   is-retraction-inv-precomp-fin-sequence-set-quotient n A R X
 ```

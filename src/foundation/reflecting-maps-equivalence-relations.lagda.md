@@ -27,8 +27,10 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A map `f : A → B` out of a type `A` equipped with an equivalence relation `R` is
-said to **reflect** `R` if we have `R x y → f x ＝ f y` for every `x y : A`.
+A map `f : A → B` out of a type `A` equipped with an
+[equivalence relation](foundation-core.equivalence-relations.md) `R` is said to
+{{#concept "reflect" Disambiguation="a map reflecting an equivalence relation Agda=reflects-equivalence-relation}}
+`R` if we have `R x y → f x ＝ f y` for every `x y : A`.
 
 ## Definitions
 
