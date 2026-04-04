@@ -130,8 +130,8 @@ module _
       ( is-inhabited-subtype-inhabited-subtype P)
 
   extensionality-inhabited-subtype :
-    (Q : inhabited-subtype l2 A) → (P ＝ Q) ≃
-    has-same-elements-inhabited-subtype P Q
+    (Q : inhabited-subtype l2 A) →
+    (P ＝ Q) ≃ has-same-elements-inhabited-subtype P Q
   extensionality-inhabited-subtype Q =
     ( extensionality-subtype
       ( subtype-inhabited-subtype P)
