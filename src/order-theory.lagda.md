@@ -23,6 +23,8 @@ open import order-theory.cofinal-maps-posets public
 open import order-theory.coinitial-maps-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
 open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
+open import order-theory.cotransitive-strict-orders public
+open import order-theory.cotransitive-strict-preorders public
 open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
@@ -41,6 +43,8 @@ open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
 open import order-theory.dependent-products-large-suplattices public
 open import order-theory.distributive-lattices public
+open import order-theory.double-negation-stable-strict-orders public
+open import order-theory.double-negation-stable-strict-preorders public
 open import order-theory.filters-posets public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
