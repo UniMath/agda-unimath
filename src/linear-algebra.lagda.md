@@ -15,7 +15,7 @@ open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces p
 open import linear-algebra.complex-inner-product-spaces public
 open import linear-algebra.complex-vector-spaces public
 open import linear-algebra.conjugate-symmetric-sesquilinear-forms-complex-vector-spaces public
-open import linear-algebra.constant-matrices public
+open import linear-algebra.constant-grids public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
@@ -35,7 +35,9 @@ open import linear-algebra.finite-sequences-in-monoids public
 open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
-open import linear-algebra.functoriality-matrices public
+open import linear-algebra.functoriality-grids public
+open import linear-algebra.grids public
+open import linear-algebra.grids-on-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
 open import linear-algebra.kernels-linear-maps-vector-spaces public
@@ -56,8 +58,7 @@ open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
-open import linear-algebra.matrices-on-rings public
-open import linear-algebra.multiplication-matrices public
+open import linear-algebra.multiplication-grids public
 open import linear-algebra.negation-linear-maps-left-modules-rings public
 open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
@@ -72,9 +73,9 @@ open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
 open import linear-algebra.right-modules-rings public
+open import linear-algebra.scalar-multiplication-grids public
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces public
-open import linear-algebra.scalar-multiplication-matrices public
 open import linear-algebra.scalar-multiplication-tuples public
 open import linear-algebra.scalar-multiplication-tuples-on-rings public
 open import linear-algebra.seminormed-complex-vector-spaces public
@@ -87,7 +88,7 @@ open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.subspaces-vector-spaces public
 open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
-open import linear-algebra.transposition-matrices public
+open import linear-algebra.transposition-grids public
 open import linear-algebra.tuples-on-commutative-monoids public
 open import linear-algebra.tuples-on-commutative-rings public
 open import linear-algebra.tuples-on-commutative-semirings public
