@@ -9,6 +9,11 @@ module linear-algebra.matrices where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import lists.finite-sequences
@@ -43,7 +48,7 @@ module _
   where
 
   top-row-matrix : matrix A (succ-ℕ m) n → fin-sequence A n
-  top-row-matrix M = M (neg-one-Fin m)
+  top-row-matrix = head-fin-sequence m
 ```
 
 ### The vertical tail of a matrix
@@ -56,7 +61,7 @@ module _
   where
 
   vertical-tail-matrix : matrix A (succ-ℕ m) n → matrix A m n
-  vertical-tail-matrix M i = M (inl-Fin m i)
+  vertical-tail-matrix = tail-fin-sequence m
 ```
 
 ### The bottom row of a matrix
@@ -95,7 +100,7 @@ module _
   where
 
   first-column-matrix : matrix A m (succ-ℕ n) → fin-sequence A m
-  first-column-matrix M i = M i (neg-one-Fin n)
+  first-column-matrix M = head-fin-sequence n ∘ M
 ```
 
 ### The horizontal tail of a matrix
@@ -108,7 +113,7 @@ module _
   where
 
   horizontal-tail-matrix : matrix A m (succ-ℕ n) → matrix A m n
-  horizontal-tail-matrix M i j = M i (inl-Fin n j)
+  horizontal-tail-matrix M = tail-fin-sequence n ∘ M
 ```
 
 ### The last column of a matrix
@@ -137,8 +142,27 @@ module _
   horizontal-init-matrix M i j = M i (skip-zero-Fin n j)
 ```
 
+### Truncation of matrix types
+
+```agda
+abstract
+  is-trunc-matrix :
+    (k : 𝕋) {l : Level} {A : UU l} (m n : ℕ) →
+    is-trunc k A →
+    is-trunc k (matrix A m n)
+  is-trunc-matrix k m n tA =
+    is-trunc-function-type k (is-trunc-function-type k tA)
+
+matrix-Set : {l : Level} → Set l → ℕ → ℕ → Set l
+matrix-Set (A , is-set-A) m n =
+  ( matrix A m n ,
+    is-trunc-matrix zero-𝕋 m n is-set-A)
+```
+
 ## See also
 
 - [Grids](linear-algebra.grids.md), the analogous concept but with
   [tuples](lists.tuples.md) in the role of
   [finite sequences](lists.finite-sequences.md)
+- [Square matrices](linear-algebra.square-matrices.md)
+- [Matrices on rings](linear-algebra.matrices-on-rings.md)

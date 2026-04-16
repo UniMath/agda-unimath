@@ -7,23 +7,35 @@ module ring-theory.sums-of-finite-families-of-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import group-theory.sums-of-finite-families-of-elements-abelian-groups
+
+open import linear-algebra.finite-sequences-in-rings
 
 open import ring-theory.rings
 open import ring-theory.sums-of-finite-families-of-elements-semirings
 open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -189,4 +201,109 @@ eq-sum-finite-sum-count-Ring :
   sum-finite-Ring R A f ＝ sum-count-Ring R (type-Finite-Type A) cA f
 eq-sum-finite-sum-count-Ring R =
   eq-sum-finite-sum-count-Semiring (semiring-Ring R)
+```
+
+### The sum of a finite sequence is the sum over the type of indices of that sequence
+
+```agda
+module _
+  {l : Level}
+  (R : Ring l)
+  (n : ℕ)
+  where
+
+  abstract
+    eq-sum-finite-sum-fin-sequence-Ring :
+      (u : fin-sequence-type-Ring R n) →
+      sum-finite-Ring R (Fin-Finite-Type n) u ＝ sum-fin-sequence-type-Ring R n u
+    eq-sum-finite-sum-fin-sequence-Ring =
+      eq-sum-finite-sum-count-Ring R (Fin-Finite-Type n) (count-Fin n)
+```
+
+### Interchanging nested sums
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1)
+  (A : Finite-Type l2) (B : Finite-Type l3)
+  where
+
+  abstract
+    interchange-sum-sum-finite-Ring :
+      (u : type-Finite-Type A → type-Finite-Type B → type-Ring R) →
+      sum-finite-Ring R A (λ a → sum-finite-Ring R B (λ b → u a b)) ＝
+      sum-finite-Ring R B (λ b → sum-finite-Ring R A (λ a → u a b))
+    interchange-sum-sum-finite-Ring u =
+      equational-reasoning
+        sum-finite-Ring R A (λ a → sum-finite-Ring R B (u a))
+        ＝ sum-finite-Ring R (Σ-Finite-Type A (λ _ → B)) (ind-Σ u)
+          by inv (sum-Σ-finite-Ring R A (λ _ → B) u)
+        ＝ sum-finite-Ring R (Σ-Finite-Type B (λ _ → A)) (λ (b , a) → u a b)
+          by
+            sum-equiv-finite-Ring R
+              ( Σ-Finite-Type A (λ _ → B))
+              ( Σ-Finite-Type B (λ _ → A))
+              ( commutative-product)
+              ( ind-Σ u)
+        ＝ sum-finite-Ring R B (λ b → sum-finite-Ring R A (λ a → u a b))
+          by sum-Σ-finite-Ring R B (λ _ → A) (λ b a → u a b)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Ring :
+      (f : type-Finite-Type A → type-Ring R) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-zero-Ring R (f a)) →
+      sum-finite-Ring R A f ＝
+      sum-finite-Ring R
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Ring =
+      vanish-sum-decidable-subset-finite-Ab
+        ( ab-Ring R)
+        ( A)
+        ( P)
+
+    vanish-sum-complement-decidable-subset-finite-Ring :
+      (f : type-Finite-Type A → type-Ring R) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-zero-Ring R (f a)) →
+      sum-finite-Ring R A f ＝
+      sum-finite-Ring R
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Ring =
+      vanish-sum-complement-decidable-subset-finite-Ab
+        ( ab-Ring R)
+        ( A)
+        ( P)
+```
+
+### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Ring :
+      (f : type-Finite-Type I → type-Ring R) →
+      sum-finite-Ring R I f ＝ f i
+    sum-finite-is-contr-Ring =
+      sum-finite-is-contr-Ab
+        ( ab-Ring R)
+        ( I)
+        ( is-contr-I)
+        ( i)
 ```

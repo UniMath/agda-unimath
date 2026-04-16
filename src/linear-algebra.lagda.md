@@ -7,6 +7,7 @@ module linear-algebra where
 
 open import linear-algebra.addition-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.addition-linear-maps-left-modules-rings public
+open import linear-algebra.addition-matrices-on-rings public
 open import linear-algebra.bilinear-forms-real-vector-spaces public
 open import linear-algebra.bilinear-maps-left-modules-commutative-rings public
 open import linear-algebra.bilinear-maps-left-modules-rings public
@@ -19,7 +20,9 @@ open import linear-algebra.constant-grids public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
+open import linear-algebra.diagonal-grids-on-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
+open import linear-algebra.diagonals-of-square-matrices public
 open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.difference-linear-maps-left-modules-rings public
 open import linear-algebra.dot-product-standard-euclidean-vector-spaces public
@@ -38,6 +41,7 @@ open import linear-algebra.finite-sequences-in-semirings public
 open import linear-algebra.functoriality-grids public
 open import linear-algebra.grids public
 open import linear-algebra.grids-on-rings public
+open import linear-algebra.identity-matrices-on-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
 open import linear-algebra.kernels-linear-maps-vector-spaces public
@@ -58,7 +62,10 @@ open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
+open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-grids public
+open import linear-algebra.multiplication-matrices-on-rings public
+open import linear-algebra.multiplication-square-matrices-on-rings public
 open import linear-algebra.negation-linear-maps-left-modules-rings public
 open import linear-algebra.normed-complex-vector-spaces public
 open import linear-algebra.normed-real-vector-spaces public
@@ -81,6 +88,8 @@ open import linear-algebra.scalar-multiplication-tuples-on-rings public
 open import linear-algebra.seminormed-complex-vector-spaces public
 open import linear-algebra.seminormed-real-vector-spaces public
 open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
+open import linear-algebra.square-matrices public
+open import linear-algebra.square-matrices-on-rings public
 open import linear-algebra.standard-euclidean-inner-product-spaces public
 open import linear-algebra.standard-euclidean-vector-spaces public
 open import linear-algebra.subsets-left-modules-commutative-rings public
