@@ -142,6 +142,101 @@ module _
         ( htpy-associative-mul-matrix-Ring A B C)
 ```
 
+### Left distributivity of matrix multiplication over addition
+
+```agda
+module _
+  {l : Level}
+  (R : Ring l)
+  (m n p : ℕ)
+  (A : matrix-Ring R m n)
+  (B C : matrix-Ring R n p)
+  where
+
+  abstract
+    htpy-left-distributive-mul-add-matrix-Ring :
+      binary-htpy
+        ( mul-matrix-Ring R m n p A (add-matrix-Ring R n p B C))
+        ( add-matrix-Ring R m p
+          ( mul-matrix-Ring R m n p A B)
+          ( mul-matrix-Ring R m n p A C))
+    htpy-left-distributive-mul-add-matrix-Ring i k =
+      ( htpy-sum-fin-sequence-type-Ring R
+        ( n)
+        ( λ j → left-distributive-mul-add-Ring R _ _ _)) ∙
+      ( inv (interchange-add-sum-fin-sequence-type-Ring R n _ _))
+
+    left-distributive-mul-add-matrix-Ring :
+      mul-matrix-Ring R m n p A (add-matrix-Ring R n p B C) ＝
+      add-matrix-Ring R m p
+        ( mul-matrix-Ring R m n p A B)
+        ( mul-matrix-Ring R m n p A C)
+    left-distributive-mul-add-matrix-Ring =
+      eq-binary-htpy _ _ htpy-left-distributive-mul-add-matrix-Ring
+```
+
+### Right distributivity of matrix multiplication over addition
+
+```agda
+module _
+  {l : Level}
+  (R : Ring l)
+  (m n p : ℕ)
+  (A B : matrix-Ring R m n)
+  (C : matrix-Ring R n p)
+  where
+
+  abstract
+    htpy-right-distributive-mul-add-matrix-Ring :
+      binary-htpy
+        ( mul-matrix-Ring R m n p (add-matrix-Ring R m n A B) C)
+        ( add-matrix-Ring R m p
+          ( mul-matrix-Ring R m n p A C)
+          ( mul-matrix-Ring R m n p B C))
+    htpy-right-distributive-mul-add-matrix-Ring i k =
+      ( htpy-sum-fin-sequence-type-Ring R
+        ( n)
+        ( λ j → right-distributive-mul-add-Ring R _ _ _)) ∙
+      ( inv (interchange-add-sum-fin-sequence-type-Ring R n _ _))
+
+    right-distributive-mul-add-matrix-Ring :
+      mul-matrix-Ring R m n p (add-matrix-Ring R m n A B) C ＝
+      add-matrix-Ring R m p
+        ( mul-matrix-Ring R m n p A C)
+        ( mul-matrix-Ring R m n p B C)
+    right-distributive-mul-add-matrix-Ring =
+      eq-binary-htpy _ _ htpy-right-distributive-mul-add-matrix-Ring
+```
+
+### `(cA)B = c(AB)`
+
+```agda
+module _
+  {l : Level}
+  (R : Ring l)
+  (m n p : ℕ)
+  (r : type-Ring R)
+  (A : matrix-Ring R m n)
+  (B : matrix-Ring R n p)
+  where
+
+  abstract
+    htpy-associative-scalar-mul-mul-matrix-Ring :
+      binary-htpy
+        ( mul-matrix-Ring R m n p (scalar-mul-matrix-Ring R m n r A) B)
+        ( scalar-mul-matrix-Ring R m p r (mul-matrix-Ring R m n p A B))
+    htpy-associative-scalar-mul-mul-matrix-Ring i k =
+      ( htpy-sum-fin-sequence-type-Ring R n
+        ( λ j → associative-mul-Ring R r _ _)) ∙
+      ( inv (left-distributive-mul-sum-fin-sequence-type-Ring R n r _))
+
+    associative-scalar-mul-mul-matrix-Ring :
+      mul-matrix-Ring R m n p (scalar-mul-matrix-Ring R m n r A) B ＝
+      scalar-mul-matrix-Ring R m p r (mul-matrix-Ring R m n p A B)
+    associative-scalar-mul-mul-matrix-Ring =
+      eq-binary-htpy _ _ htpy-associative-scalar-mul-mul-matrix-Ring
+```
+
 ## See also
 
 - [Multiplication of square matrices on rings](linear-algebra.multiplication-square-matrices-on-rings.md)
