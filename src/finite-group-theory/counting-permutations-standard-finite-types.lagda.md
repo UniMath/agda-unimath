@@ -14,12 +14,10 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.transpositions
 open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -169,24 +167,28 @@ module _
         ( left-cancel-head-Permutation (map-inv-equiv-succ-Permutation (k , σ)))
         ( σ)
     pr2-is-section-map-inv-equiv-succ-Permutation' k σ i =
-      let
-        swap-k-σᵢ =
-          map-swap-permutation-Fin (succ-ℕ n) (inr star) k (inl (map-equiv σ i))
-      in
-        ap-lemma
-          ( left-is-left)
-          ( ( ap
-              ( λ j →
-                map-swap-permutation-Fin (succ-ℕ n) (inr star) j swap-k-σᵢ)
-              ( map-swap-left-permutation-Fin (succ-ℕ n) (inr star) k)) ∙
-            ( is-involution-map-swap-permutation-Fin
+      ap-lemma
+        ( left-is-left)
+        ( ( ap
+            ( λ j →
+              map-swap-permutation-Fin
+                ( succ-ℕ n)
+                ( inr star)
+                ( j)
+                ( map-swap-permutation-Fin
                   ( succ-ℕ n)
                   ( inr star)
                   ( k)
                   ( inl (map-equiv σ i))))
-          ( _)
-          ( star)
-          ( eq-is-prop (is-prop-is-left {Y = unit} (inl (map-equiv σ i))))
+            ( map-swap-left-permutation-Fin (succ-ℕ n) (inr star) k)) ∙
+          ( is-involution-map-swap-permutation-Fin
+                ( succ-ℕ n)
+                ( inr star)
+                ( k)
+                ( inl (map-equiv σ i))))
+        ( _)
+        ( star)
+        ( eq-is-prop (is-prop-is-left {Y = unit} (inl (map-equiv σ i))))
 
     is-section-map-inv-equiv-succ-Permutation :
       (x : Fin (succ-ℕ n) × Permutation n) →
@@ -205,36 +207,10 @@ module _
       let
         σ₋₁ = map-equiv σ (neg-one-Fin n)
       in
-        equational-reasoning
-          map-swap-permutation-Fin
-            ( succ-ℕ n)
-            ( inr star)
-            ( σ₋₁)
-            ( inl
-              ( left-is-left
-                ( map-swap-permutation-Fin
-                  ( succ-ℕ n)
-                  ( inr star)
-                  ( σ₋₁)
-                  ( map-equiv σ (inl i)))
-                ( is-left-map-is-left-cancel-head-Permutation σ (inl i) star)))
-          ＝
-            map-swap-permutation-Fin
-              ( succ-ℕ n)
-              ( inr star)
-              ( σ₋₁)
-              ( map-swap-permutation-Fin
-                ( succ-ℕ n)
-                ( inr star)
-                ( σ₋₁)
-                ( map-equiv σ (inl i)))
-            by
-              ap
-                ( map-swap-permutation-Fin (succ-ℕ n) (inr star) σ₋₁ ∘ pr1)
-                ( is-retraction-map-inv-equiv-left-summand _)
-          ＝ map-equiv σ (inl i)
-            by
-              is-involution-map-swap-permutation-Fin (succ-ℕ n) (inr star) σ₋₁ _
+        ( ap
+          ( map-swap-permutation-Fin (succ-ℕ n) (inr star) σ₋₁ ∘ pr1)
+          ( is-retraction-map-inv-equiv-left-summand _)) ∙
+        ( is-involution-map-swap-permutation-Fin (succ-ℕ n) (inr star) σ₋₁ _)
     is-retraction-map-inv-equiv-succ-Permutation' σ (inr star) =
       map-swap-left-permutation-Fin (succ-ℕ n) (inr star) _
 
