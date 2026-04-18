@@ -16,6 +16,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

@@ -24,6 +24,7 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -82,6 +83,14 @@ module _
     map-standard-transposition (has-decidable-equality-Fin n) neq z ＝ z
   is-fixed-point-transposition-Fin =
     is-fixed-point-standard-transposition (has-decidable-equality-Fin n) neq
+
+  abstract
+    is-involution-map-transposition-Fin :
+      is-involution map-transposition-Fin
+    is-involution-map-transposition-Fin =
+      is-involution-map-standard-transposition
+        ( has-decidable-equality-Fin n)
+        ( neq)
 ```
 
 ### The transposition that swaps the two last elements of `Fin (succ-ℕ (succ-ℕ n))`
@@ -123,72 +132,73 @@ module _
 We show that this definition is an instance of the previous one.
 
 ```agda
-  cases-htpy-swap-two-last-elements-transposition-Fin :
-    (x : Fin (succ-ℕ (succ-ℕ n))) →
-    (x ＝ neg-one-Fin (succ-ℕ n)) + (x ≠ neg-one-Fin (succ-ℕ n)) →
-    (x ＝ neg-two-Fin (succ-ℕ n)) + (x ≠ neg-two-Fin (succ-ℕ n)) →
-    map-swap-two-last-elements-transposition-Fin x ＝
-    map-transposition-Fin
-      ( succ-ℕ (succ-ℕ n))
-      ( neg-two-Fin (succ-ℕ n))
-      ( neg-one-Fin (succ-ℕ n))
-      ( neq-inl-inr)
-      ( x)
-  cases-htpy-swap-two-last-elements-transposition-Fin _ (inl refl) _ =
-    inv
-      ( right-computation-transposition-Fin
-        ( succ-ℕ (succ-ℕ n))
-        ( neg-two-Fin (succ-ℕ n))
-        ( neg-one-Fin (succ-ℕ n))
-        ( neq-inl-inr))
-  cases-htpy-swap-two-last-elements-transposition-Fin _ (inr p) (inl refl) =
-    inv
-      ( left-computation-transposition-Fin
-        ( succ-ℕ (succ-ℕ n))
-        ( neg-two-Fin (succ-ℕ n))
-        ( neg-one-Fin (succ-ℕ n))
-        ( neq-inl-inr))
-  cases-htpy-swap-two-last-elements-transposition-Fin
-    ( inl (inl x))
-    ( inr p)
-    ( inr q) =
-    inv
-      ( is-fixed-point-transposition-Fin
+  abstract
+    cases-htpy-swap-two-last-elements-transposition-Fin :
+      (x : Fin (succ-ℕ (succ-ℕ n))) →
+      (x ＝ neg-one-Fin (succ-ℕ n)) + (x ≠ neg-one-Fin (succ-ℕ n)) →
+      (x ＝ neg-two-Fin (succ-ℕ n)) + (x ≠ neg-two-Fin (succ-ℕ n)) →
+      map-swap-two-last-elements-transposition-Fin x ＝
+      map-transposition-Fin
         ( succ-ℕ (succ-ℕ n))
         ( neg-two-Fin (succ-ℕ n))
         ( neg-one-Fin (succ-ℕ n))
         ( neq-inl-inr)
-        ( inl (inl x))
-        ( q ∘ inv)
-        ( p ∘ inv))
-  cases-htpy-swap-two-last-elements-transposition-Fin
-    ( inl (inr star))
-    ( inr p)
-    ( inr q) = ex-falso (q refl)
-  cases-htpy-swap-two-last-elements-transposition-Fin
-    ( inr star)
-    ( inr p)
-    ( inr q) = ex-falso (p refl)
-
-  htpy-swap-two-last-elements-transposition-Fin :
-    htpy-equiv
-      ( swap-two-last-elements-transposition-Fin)
-      ( transposition-Fin
-        ( succ-ℕ (succ-ℕ n))
-        ( neg-two-Fin (succ-ℕ n))
-        ( neg-one-Fin (succ-ℕ n))
-        ( neq-inl-inr))
-  htpy-swap-two-last-elements-transposition-Fin x =
+        ( x)
+    cases-htpy-swap-two-last-elements-transposition-Fin _ (inl refl) _ =
+      inv
+        ( right-computation-transposition-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( neg-two-Fin (succ-ℕ n))
+          ( neg-one-Fin (succ-ℕ n))
+          ( neq-inl-inr))
+    cases-htpy-swap-two-last-elements-transposition-Fin _ (inr p) (inl refl) =
+      inv
+        ( left-computation-transposition-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( neg-two-Fin (succ-ℕ n))
+          ( neg-one-Fin (succ-ℕ n))
+          ( neq-inl-inr))
     cases-htpy-swap-two-last-elements-transposition-Fin
-      ( x)
-      ( has-decidable-equality-Fin
-        ( succ-ℕ (succ-ℕ n))
+      ( inl (inl x))
+      ( inr p)
+      ( inr q) =
+      inv
+        ( is-fixed-point-transposition-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( neg-two-Fin (succ-ℕ n))
+          ( neg-one-Fin (succ-ℕ n))
+          ( neq-inl-inr)
+          ( inl (inl x))
+          ( q ∘ inv)
+          ( p ∘ inv))
+    cases-htpy-swap-two-last-elements-transposition-Fin
+      ( inl (inr star))
+      ( inr p)
+      ( inr q) = ex-falso (q refl)
+    cases-htpy-swap-two-last-elements-transposition-Fin
+      ( inr star)
+      ( inr p)
+      ( inr q) = ex-falso (p refl)
+
+    htpy-swap-two-last-elements-transposition-Fin :
+      htpy-equiv
+        ( swap-two-last-elements-transposition-Fin)
+        ( transposition-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( neg-two-Fin (succ-ℕ n))
+          ( neg-one-Fin (succ-ℕ n))
+          ( neq-inl-inr))
+    htpy-swap-two-last-elements-transposition-Fin x =
+      cases-htpy-swap-two-last-elements-transposition-Fin
         ( x)
-        ( neg-one-Fin (succ-ℕ n)))
-      ( has-decidable-equality-Fin
-        ( succ-ℕ (succ-ℕ n))
-        ( x)
-        ( neg-two-Fin (succ-ℕ n)))
+        ( has-decidable-equality-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( x)
+          ( neg-one-Fin (succ-ℕ n)))
+        ( has-decidable-equality-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( x)
+          ( neg-two-Fin (succ-ℕ n)))
 ```
 
 ### Transpositions of a pair of adjacent elements in `Fin (succ-ℕ n)`
@@ -761,4 +771,54 @@ eq-permutation-list-adjacent-transpositions-transposition-Fin :
 eq-permutation-list-adjacent-transpositions-transposition-Fin n i j i≠j =
   eq-htpy-equiv
     ( htpy-permutation-list-adjacent-transpositions-transposition-Fin n i j i≠j)
+```
+
+### Arbitrary swaps
+
+A swap of `i` and `j` is their transposition if `i` and `j` are distinct, and
+the identity otherwise.
+
+```agda
+module _
+  (n : ℕ)
+  (i j : Fin n)
+  where
+
+  opaque
+    swap-permutation-Fin : Permutation n
+    swap-permutation-Fin =
+      rec-coproduct
+        ( λ _ → id-equiv)
+        ( λ i≠j → transposition-Fin n i j i≠j)
+        ( has-decidable-equality-Fin n i j)
+
+  map-swap-permutation-Fin : Fin n → Fin n
+  map-swap-permutation-Fin = map-equiv swap-permutation-Fin
+
+  abstract opaque
+    unfolding swap-permutation-Fin
+
+    map-swap-left-permutation-Fin : map-equiv swap-permutation-Fin i ＝ j
+    map-swap-left-permutation-Fin with has-decidable-equality-Fin n i j
+    ... | inl i=j = i=j
+    ... | inr i≠j = left-computation-transposition-Fin n i j i≠j
+
+    map-swap-right-permutation-Fin : map-equiv swap-permutation-Fin j ＝ i
+    map-swap-right-permutation-Fin with has-decidable-equality-Fin n i j
+    ... | inl i=j = inv i=j
+    ... | inr i≠j = right-computation-transposition-Fin n i j i≠j
+
+    is-fixed-point-swap-permutation-Fin :
+      (k : Fin n) → i ≠ k → j ≠ k → map-equiv swap-permutation-Fin k ＝ k
+    is-fixed-point-swap-permutation-Fin k i≠k j≠k
+      with has-decidable-equality-Fin n i j
+    ... | inl i=j = refl
+    ... | inr i≠j =
+      is-fixed-point-transposition-Fin n i j i≠j k i≠k j≠k
+
+    is-involution-map-swap-permutation-Fin :
+      is-involution map-swap-permutation-Fin
+    is-involution-map-swap-permutation-Fin with has-decidable-equality-Fin n i j
+    ... | inl i=j = is-involution-id
+    ... | inr i≠j = is-involution-map-transposition-Fin n i j i≠j
 ```
