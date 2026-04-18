@@ -19,6 +19,7 @@ open import linear-algebra.constant-grids public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
+open import linear-algebra.determinants-square-matrices-on-commutative-rings public
 open import linear-algebra.diagonal-grids-on-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.diagonals-of-square-matrices public
