@@ -14,6 +14,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.surjective-maps
@@ -137,6 +138,50 @@ abstract
   is-injective-unit-Maybe :
     {l : Level} {X : UU l} → is-injective (unit-Maybe {X = X})
   is-injective-unit-Maybe = is-injective-inl
+```
+
+### Being an exception is equivalent to being right as a coproduct
+
+```agda
+module _
+  {l : Level}
+  {X : UU l}
+  where
+
+  is-right-is-exception-Maybe :
+    (x : Maybe X) → is-exception-Maybe x → is-right x
+  is-right-is-exception-Maybe _ refl = star
+
+  is-exception-is-right-Maybe :
+    (x : Maybe X) → is-right x → is-exception-Maybe x
+  is-exception-is-right-Maybe (inr star) star = refl
+
+  is-right-iff-is-exception-Maybe :
+    (x : Maybe X) → is-exception-Maybe x ↔ is-right x
+  is-right-iff-is-exception-Maybe x =
+    ( is-right-is-exception-Maybe x , is-exception-is-right-Maybe x)
+```
+
+### Being a value is equivalent to being left as a coproduct
+
+```agda
+module _
+  {l : Level}
+  {X : UU l}
+  where
+
+  is-left-is-value-Maybe :
+    (x : Maybe X) → is-value-Maybe x → is-left x
+  is-left-is-value-Maybe (inl x) (.x , refl) = star
+
+  is-value-is-left-Maybe :
+    (x : Maybe X) → is-left x → is-value-Maybe x
+  is-value-is-left-Maybe (inl x) star = (x , refl)
+
+  is-left-iff-is-value-Maybe :
+    (x : Maybe X) → is-value-Maybe x ↔ is-left x
+  is-left-iff-is-value-Maybe x =
+    ( is-left-is-value-Maybe x , is-value-is-left-Maybe x)
 ```
 
 ### Being an exception is a decidable proposition
