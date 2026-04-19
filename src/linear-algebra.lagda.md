@@ -7,6 +7,7 @@ module linear-algebra where
 
 open import linear-algebra.addition-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.addition-linear-maps-left-modules-rings public
+open import linear-algebra.algebra-of-square-matrices-on-commutative-rings public
 open import linear-algebra.bilinear-forms-real-vector-spaces public
 open import linear-algebra.bilinear-maps-left-modules-commutative-rings public
 open import linear-algebra.bilinear-maps-left-modules-rings public
@@ -21,6 +22,7 @@ open import linear-algebra.dependent-products-left-modules-commutative-rings pub
 open import linear-algebra.dependent-products-left-modules-rings public
 open import linear-algebra.diagonal-grids-on-rings public
 open import linear-algebra.diagonal-matrices-on-rings public
+open import linear-algebra.diagonalizable-matrices-on-rings public
 open import linear-algebra.diagonals-of-square-matrices public
 open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.difference-linear-maps-left-modules-rings public
@@ -42,6 +44,7 @@ open import linear-algebra.grids public
 open import linear-algebra.grids-on-rings public
 open import linear-algebra.identity-matrices-on-commutative-rings public
 open import linear-algebra.identity-matrices-on-rings public
+open import linear-algebra.invertible-matrices-on-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
 open import linear-algebra.kernels-linear-maps-vector-spaces public
@@ -91,6 +94,7 @@ open import linear-algebra.scalar-multiplication-tuples-on-rings public
 open import linear-algebra.seminormed-complex-vector-spaces public
 open import linear-algebra.seminormed-real-vector-spaces public
 open import linear-algebra.sesquilinear-forms-complex-vector-spaces public
+open import linear-algebra.similarity-square-matrices-on-rings public
 open import linear-algebra.square-matrices public
 open import linear-algebra.square-matrices-on-commutative-rings public
 open import linear-algebra.square-matrices-on-rings public

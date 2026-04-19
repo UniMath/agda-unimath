@@ -70,6 +70,9 @@ module _
 
   diagonal-matrix-Ring : UU l
   diagonal-matrix-Ring = type-subtype is-diagonal-prop-square-matrix-Ring
+
+  matrix-diagonal-matrix-Ring : diagonal-matrix-Ring → square-matrix-Ring R n
+  matrix-diagonal-matrix-Ring = pr1
 ```
 
 ### Constructing a diagonal matrix from the finite sequence of elements on the diagonal

@@ -30,8 +30,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A **binary relation** on a type `A` is a family of types `R x y` depending on
-two variables `x y : A`. In the special case where each `R x y` is a
+A {{#concept "binary relation" WDID=Q130901 WD="binary relation" Agda=Relation}}
+on a type `A` is a family of types `R x y` depending on two variables `x y : A`.
+In the special case where each `R x y` is a
 [proposition](foundation-core.propositions.md), we say that the relation is
 valued in propositions. Thus, we take a general relation to mean a
 _proof-relevant_ relation.
