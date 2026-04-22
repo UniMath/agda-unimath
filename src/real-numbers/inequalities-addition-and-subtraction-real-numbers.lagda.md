@@ -21,6 +21,8 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
+open import order-theory.order-preserving-maps-posets
+
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -64,6 +66,10 @@ abstract
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     leq-ℝ x y → leq-ℝ (x -ℝ z) (y -ℝ z)
   preserves-leq-diff-ℝ z = preserves-leq-right-add-ℝ (neg-ℝ z)
+
+hom-poset-left-add-ℝ :
+  {l1 l2 : Level} → ℝ l1 → hom-Poset (ℝ-Poset l2) (ℝ-Poset (l1 ⊔ l2))
+hom-poset-left-add-ℝ x = ( add-ℝ x , preserves-leq-left-add-ℝ x)
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)

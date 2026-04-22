@@ -243,3 +243,38 @@ module _
                 ( z)))
           ( is-finite-I)
 ```
+
+### The join of an empty finite sequence is the bottom element
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  abstract
+    join-empty-fin-sequence-type-Large-Join-Semilattice :
+      {l : Level} →
+      join-fin-sequence-type-Large-Join-Semilattice L 0 empty-fin-sequence ＝
+      bottom-Large-Join-Semilattice L l
+    join-empty-fin-sequence-type-Large-Join-Semilattice =
+      left-bottom-law-join-Large-Join-Semilattice L _
+```
+
+### The join of a single element is the single element
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  abstract
+    join-single-fin-sequence-type-Large-Join-Semilattice :
+      {l : Level} (u : fin-sequence (type-Large-Join-Semilattice L l) 1) →
+      join-fin-sequence-type-Large-Join-Semilattice L 1 u ＝
+      u (neg-one-Fin 0)
+    join-single-fin-sequence-type-Large-Join-Semilattice {l} =
+      compute-sum-one-element-Commutative-Monoid
+        ( commutative-monoid-Large-Join-Semilattice L l)
+```

@@ -28,6 +28,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.order-preserving-maps-total-orders
 open import order-theory.posets
 ```
@@ -128,6 +129,12 @@ abstract
       ( rational-ℚ⁰⁺ (q *ℚ⁰⁺ s))
       ( preserves-leq-right-mul-ℚ⁰⁺ s _ _ p≤q)
       ( preserves-leq-left-mul-ℚ⁰⁺ p _ _ r≤s)
+
+hom-poset-left-mul-rational-ℚ⁰⁺ :
+  ℚ⁰⁺ → hom-Poset ℚ-Poset ℚ-Poset
+hom-poset-left-mul-rational-ℚ⁰⁺ p =
+  ( mul-ℚ (rational-ℚ⁰⁺ p) ,
+    preserves-leq-left-mul-ℚ⁰⁺ p)
 ```
 
 ### Multiplication by a nonnegative rational number distributes over the minimum operation
