@@ -271,7 +271,7 @@ abstract
     sum-constant-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Distributive law of sums over monoid multiplication
+### Interchanging sums and monoid multiplication
 
 ```agda
 module _
@@ -280,18 +280,18 @@ module _
   where
 
   abstract
-    distributive-sum-mul-fin-sequence-type-Commutative-Monoid :
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid :
       (n : ℕ) (f g : fin-sequence-type-Commutative-Monoid M n) →
       sum-fin-sequence-type-Commutative-Monoid M n
         ( λ i → mul-Commutative-Monoid M (f i) (g i)) ＝
       mul-Commutative-Monoid M
         ( sum-fin-sequence-type-Commutative-Monoid M n f)
         ( sum-fin-sequence-type-Commutative-Monoid M n g)
-    distributive-sum-mul-fin-sequence-type-Commutative-Monoid 0 _ _ =
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid 0 _ _ =
       inv (right-unit-law-mul-Commutative-Monoid M _)
-    distributive-sum-mul-fin-sequence-type-Commutative-Monoid (succ-ℕ n) f g =
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid (succ-ℕ n) f g =
       ( ap-mul-Commutative-Monoid M
-        ( distributive-sum-mul-fin-sequence-type-Commutative-Monoid
+        ( interchange-sum-mul-fin-sequence-type-Commutative-Monoid
           ( n)
           ( f ∘ inl-Fin n)
           ( g ∘ inl-Fin n))
@@ -309,7 +309,7 @@ hom-sum-fin-sequence-type-Commutative-Monoid :
     ( M)
 hom-sum-fin-sequence-type-Commutative-Monoid M n =
   ( ( ( sum-fin-sequence-type-Commutative-Monoid M n) ,
-        distributive-sum-mul-fin-sequence-type-Commutative-Monoid M n _ _) ,
+        interchange-sum-mul-fin-sequence-type-Commutative-Monoid M n _ _) ,
     sum-zero-fin-sequence-type-Commutative-Monoid M n)
 ```
 

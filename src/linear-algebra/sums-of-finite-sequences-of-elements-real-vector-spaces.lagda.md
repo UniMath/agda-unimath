@@ -117,7 +117,7 @@ module _
   where
 
   abstract
-    distributive-sum-add-fin-sequence-type-ℝ-Vector-Space :
+    interchange-sum-add-fin-sequence-type-ℝ-Vector-Space :
       (n : ℕ) (f g : fin-sequence (type-ℝ-Vector-Space V) n) →
       sum-fin-sequence-type-ℝ-Vector-Space V
         ( n)
@@ -125,8 +125,50 @@ module _
       add-ℝ-Vector-Space V
         ( sum-fin-sequence-type-ℝ-Vector-Space V n f)
         ( sum-fin-sequence-type-ℝ-Vector-Space V n g)
-    distributive-sum-add-fin-sequence-type-ℝ-Vector-Space =
-      distributive-sum-add-fin-sequence-type-Vector-Space (heyting-field-ℝ l1) V
+    interchange-sum-add-fin-sequence-type-ℝ-Vector-Space =
+      interchange-sum-add-fin-sequence-type-Vector-Space (heyting-field-ℝ l1) V
+```
+
+### Sums distribute over differences
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    interchange-sum-diff-fin-sequence-type-ℝ-Vector-Space :
+      (n : ℕ) (f g : fin-sequence (type-ℝ-Vector-Space V) n) →
+      sum-fin-sequence-type-ℝ-Vector-Space V
+        ( n)
+        ( λ i → diff-ℝ-Vector-Space V (f i) (g i)) ＝
+      diff-ℝ-Vector-Space V
+        ( sum-fin-sequence-type-ℝ-Vector-Space V n f)
+        ( sum-fin-sequence-type-ℝ-Vector-Space V n g)
+    interchange-sum-diff-fin-sequence-type-ℝ-Vector-Space =
+      interchange-sum-diff-fin-sequence-type-Vector-Space
+        ( heyting-field-ℝ l1)
+        ( V)
+```
+
+### Negation distributes over sums
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  where
+
+  abstract
+    distributive-neg-sum-fin-sequence-type-ℝ-Vector-Space :
+      (n : ℕ) (u : fin-sequence (type-ℝ-Vector-Space V) n) →
+      neg-ℝ-Vector-Space V (sum-fin-sequence-type-ℝ-Vector-Space V n u) ＝
+      sum-fin-sequence-type-ℝ-Vector-Space V n (neg-ℝ-Vector-Space V ∘ u)
+    distributive-neg-sum-fin-sequence-type-ℝ-Vector-Space =
+      distributive-neg-sum-fin-sequence-type-Vector-Space
+        ( heyting-field-ℝ l1)
+        ( V)
 ```
 
 ### The sum operation is a linear map

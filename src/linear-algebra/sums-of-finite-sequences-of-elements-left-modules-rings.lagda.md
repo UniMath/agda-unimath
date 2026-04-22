@@ -186,7 +186,7 @@ module _
   where
 
   abstract
-    distributive-sum-add-fin-sequence-type-left-module-Ring :
+    interchange-sum-add-fin-sequence-type-left-module-Ring :
       (n : ℕ) (f g : fin-sequence (type-left-module-Ring R M) n) →
       sum-fin-sequence-type-left-module-Ring R M
         ( n)
@@ -194,8 +194,52 @@ module _
       add-left-module-Ring R M
         ( sum-fin-sequence-type-left-module-Ring R M n f)
         ( sum-fin-sequence-type-left-module-Ring R M n g)
-    distributive-sum-add-fin-sequence-type-left-module-Ring =
-      distributive-sum-add-fin-sequence-type-Ab (ab-left-module-Ring R M)
+    interchange-sum-add-fin-sequence-type-left-module-Ring =
+      interchange-sum-add-fin-sequence-type-Ab (ab-left-module-Ring R M)
+```
+
+### The distributive law of negation over sums
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    distributive-neg-sum-fin-sequence-type-left-module-Ring :
+      (n : ℕ) (u : fin-sequence (type-left-module-Ring R M) n) →
+      neg-left-module-Ring R M
+        ( sum-fin-sequence-type-left-module-Ring R M n u) ＝
+      sum-fin-sequence-type-left-module-Ring R M
+        ( n)
+        ( neg-left-module-Ring R M ∘ u)
+    distributive-neg-sum-fin-sequence-type-left-module-Ring =
+      distributive-neg-sum-fin-sequence-type-Ab (ab-left-module-Ring R M)
+```
+
+### Sums distribute over differences
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where
+
+  abstract
+    interchange-sum-diff-fin-sequence-type-left-module-Ring :
+      (n : ℕ) (f g : fin-sequence (type-left-module-Ring R M) n) →
+      sum-fin-sequence-type-left-module-Ring R M
+        ( n)
+        ( λ i → diff-left-module-Ring R M (f i) (g i)) ＝
+      diff-left-module-Ring R M
+        ( sum-fin-sequence-type-left-module-Ring R M n f)
+        ( sum-fin-sequence-type-left-module-Ring R M n g)
+    interchange-sum-diff-fin-sequence-type-left-module-Ring =
+      interchange-sum-right-subtraction-fin-sequence-type-Ab
+        ( ab-left-module-Ring R M)
 ```
 
 ### The sum operation is a linear map
@@ -231,7 +275,7 @@ module _
       ( M)
       ( sum-fin-sequence-type-left-module-Ring R M n)
   is-linear-map-sum-fin-sequence-type-left-module-Ring =
-    ( distributive-sum-add-fin-sequence-type-left-module-Ring R M n ,
+    ( interchange-sum-add-fin-sequence-type-left-module-Ring R M n ,
       is-homogeneous-sum-fin-sequence-type-left-module-Ring)
 
   linear-map-sum-fin-sequence-type-left-module-Ring :

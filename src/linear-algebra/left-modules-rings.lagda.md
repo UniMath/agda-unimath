@@ -107,6 +107,10 @@ module _
   neg-left-module-Ring : type-left-module-Ring → type-left-module-Ring
   neg-left-module-Ring = neg-Ab ab-left-module-Ring
 
+  diff-left-module-Ring :
+    type-left-module-Ring → type-left-module-Ring → type-left-module-Ring
+  diff-left-module-Ring = right-subtraction-Ab ab-left-module-Ring
+
   endomorphism-ring-ab-left-module-Ring : Ring l2
   endomorphism-ring-ab-left-module-Ring =
     endomorphism-ring-Ab ab-left-module-Ring

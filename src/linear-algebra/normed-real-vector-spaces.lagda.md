@@ -191,6 +191,11 @@ module _
   right-inverse-law-add-Normed-ℝ-Vector-Space =
     right-inverse-law-add-Ab ab-Normed-ℝ-Vector-Space
 
+  mul-Normed-ℝ-Vector-Space :
+    ℝ l1 → type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space
+  mul-Normed-ℝ-Vector-Space =
+    mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
   map-norm-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space → ℝ l1
   map-norm-Normed-ℝ-Vector-Space = pr1 (pr1 norm-Normed-ℝ-Vector-Space)
 

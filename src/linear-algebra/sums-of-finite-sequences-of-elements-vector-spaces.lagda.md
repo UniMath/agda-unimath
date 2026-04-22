@@ -101,7 +101,7 @@ module _
   where
 
   abstract
-    distributive-sum-add-fin-sequence-type-Vector-Space :
+    interchange-sum-add-fin-sequence-type-Vector-Space :
       (n : ℕ) (f g : fin-sequence (type-Vector-Space K V) n) →
       sum-fin-sequence-type-Vector-Space K V
         ( n)
@@ -109,8 +109,8 @@ module _
       add-Vector-Space K V
         ( sum-fin-sequence-type-Vector-Space K V n f)
         ( sum-fin-sequence-type-Vector-Space K V n g)
-    distributive-sum-add-fin-sequence-type-Vector-Space =
-      distributive-sum-add-fin-sequence-type-left-module-Ring
+    interchange-sum-add-fin-sequence-type-Vector-Space =
+      interchange-sum-add-fin-sequence-type-left-module-Ring
         ( ring-Heyting-Field K)
         ( V)
 ```
@@ -131,6 +131,48 @@ module _
       sum-fin-sequence-type-Vector-Space K V n (u ∘ map-equiv σ)
     preserves-sum-permutation-fin-sequence-type-Vector-Space =
       preserves-sum-permutation-fin-sequence-type-left-module-Ring
+        ( ring-Heyting-Field K)
+        ( V)
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  where
+
+  abstract
+    distributive-neg-sum-fin-sequence-type-Vector-Space :
+      (n : ℕ) (u : fin-sequence (type-Vector-Space K V) n) →
+      neg-Vector-Space K V (sum-fin-sequence-type-Vector-Space K V n u) ＝
+      sum-fin-sequence-type-Vector-Space K V n (neg-Vector-Space K V ∘ u)
+    distributive-neg-sum-fin-sequence-type-Vector-Space =
+      distributive-neg-sum-fin-sequence-type-left-module-Ring
+        ( ring-Heyting-Field K)
+        ( V)
+```
+
+### Sums distribute over differences
+
+```agda
+module _
+  {l1 l2 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  where
+
+  abstract
+    interchange-sum-diff-fin-sequence-type-Vector-Space :
+      (n : ℕ) (f g : fin-sequence (type-Vector-Space K V) n) →
+      sum-fin-sequence-type-Vector-Space K V
+        ( n)
+        ( λ i → diff-Vector-Space K V (f i) (g i)) ＝
+      diff-Vector-Space K V
+        ( sum-fin-sequence-type-Vector-Space K V n f)
+        ( sum-fin-sequence-type-Vector-Space K V n g)
+    interchange-sum-diff-fin-sequence-type-Vector-Space =
+      interchange-sum-diff-fin-sequence-type-left-module-Ring
         ( ring-Heyting-Field K)
         ( V)
 ```

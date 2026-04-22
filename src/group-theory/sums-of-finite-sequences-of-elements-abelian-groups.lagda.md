@@ -226,7 +226,7 @@ abstract
     sum-constant-fin-sequence-type-Group (group-Ab G)
 ```
 
-### Distributive law of sums over addition
+### Interchanging sums and addition
 
 ```agda
 module _
@@ -235,12 +235,12 @@ module _
   where
 
   abstract
-    distributive-sum-add-fin-sequence-type-Ab :
+    interchange-sum-add-fin-sequence-type-Ab :
       (n : ℕ) (f g : fin-sequence-type-Ab G n) →
       sum-fin-sequence-type-Ab G n (λ i → add-Ab G (f i) (g i)) ＝
       add-Ab G (sum-fin-sequence-type-Ab G n f) (sum-fin-sequence-type-Ab G n g)
-    distributive-sum-add-fin-sequence-type-Ab =
-      distributive-sum-mul-fin-sequence-type-Commutative-Monoid
+    interchange-sum-add-fin-sequence-type-Ab =
+      interchange-sum-mul-fin-sequence-type-Commutative-Monoid
         ( commutative-monoid-Ab G)
 ```
 
@@ -252,7 +252,45 @@ hom-sum-fin-sequence-type-Ab :
   hom-Ab (function-Ab G (Fin n)) G
 hom-sum-fin-sequence-type-Ab G n =
   ( sum-fin-sequence-type-Ab G n ,
-    distributive-sum-add-fin-sequence-type-Ab G n _ _)
+    interchange-sum-add-fin-sequence-type-Ab G n _ _)
+```
+
+### Negation distributes over sums
+
+```agda
+abstract
+  distributive-neg-sum-fin-sequence-type-Ab :
+    {l : Level} (G : Ab l) (n : ℕ) (u : fin-sequence-type-Ab G n) →
+    neg-Ab G (sum-fin-sequence-type-Ab G n u) ＝
+    sum-fin-sequence-type-Ab G n (neg-Ab G ∘ u)
+  distributive-neg-sum-fin-sequence-type-Ab G n u =
+    inv
+      ( preserves-negatives-hom-Ab
+        ( function-Ab G (Fin n))
+        ( G)
+        ( hom-sum-fin-sequence-type-Ab G n))
+```
+
+### Interchanging sums and subtraction
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  abstract
+    interchange-sum-right-subtraction-fin-sequence-type-Ab :
+      (n : ℕ) (f g : fin-sequence-type-Ab G n) →
+      sum-fin-sequence-type-Ab G n (λ i → right-subtraction-Ab G (f i) (g i)) ＝
+      right-subtraction-Ab G
+        ( sum-fin-sequence-type-Ab G n f)
+        ( sum-fin-sequence-type-Ab G n g)
+    interchange-sum-right-subtraction-fin-sequence-type-Ab n f g =
+      ( interchange-sum-add-fin-sequence-type-Ab G n f (neg-Ab G ∘ g)) ∙
+      ( ap-add-Ab G
+        ( refl)
+        ( inv (distributive-neg-sum-fin-sequence-type-Ab G n g)))
 ```
 
 ## See also
