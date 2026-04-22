@@ -9,12 +9,12 @@ module linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-sp
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
-
 open import linear-algebra.normed-real-vector-spaces
+open import linear-algebra.sums-of-finite-sequences-of-elements-real-vector-spaces
 
 open import lists.finite-sequences
 
@@ -48,8 +48,8 @@ addition.
 sum-fin-sequence-type-Normed-ℝ-Vector-Space :
   {l1 l2 : Level} (V : Normed-ℝ-Vector-Space l1 l2) (n : ℕ) →
   fin-sequence (type-Normed-ℝ-Vector-Space V) n → type-Normed-ℝ-Vector-Space V
-sum-fin-sequence-type-Normed-ℝ-Vector-Space V =
-  sum-fin-sequence-type-Ab (ab-Normed-ℝ-Vector-Space V)
+sum-fin-sequence-type-Normed-ℝ-Vector-Space (V , _) =
+  sum-fin-sequence-type-ℝ-Vector-Space V
 ```
 
 ## Properties

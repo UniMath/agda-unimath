@@ -71,6 +71,7 @@ open import linear-algebra.rational-modules public
 open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
+open import linear-algebra.riemann-sums-real-vector-spaces-partitions-closed-intervals-real-numbers public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces public
@@ -85,7 +86,10 @@ open import linear-algebra.standard-euclidean-vector-spaces public
 open import linear-algebra.subsets-left-modules-commutative-rings public
 open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.subspaces-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-rings public
 open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-real-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-vector-spaces public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
 open import linear-algebra.transposition-matrices public
 open import linear-algebra.tuples-on-commutative-monoids public
