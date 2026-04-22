@@ -201,7 +201,6 @@ abstract
 abstract
   leq-zero-Fin :
     (n : ℕ) (i : Fin (succ-ℕ n)) → leq-Fin (succ-ℕ n) (zero-Fin n) i
-  leq-zero-Fin 0 (inr star) = star
+  leq-zero-Fin n (inr star) = star
   leq-zero-Fin (succ-ℕ n) (inl i) = leq-zero-Fin n i
-  leq-zero-Fin (succ-ℕ n) (inr star) = star
 ```
