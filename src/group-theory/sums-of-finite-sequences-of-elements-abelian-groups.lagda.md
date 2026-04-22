@@ -25,6 +25,8 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
+open import group-theory.function-abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
@@ -146,7 +148,7 @@ module _
     extend-sum-fin-sequence-type-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
-### Shifting a sum of elements in a monoid
+### Shifting a sum of elements in an abelian group
 
 ```agda
 module _
@@ -205,8 +207,7 @@ module _
 
   abstract
     preserves-sum-permutation-fin-sequence-type-Ab :
-      (n : ℕ) → (σ : Permutation n) →
-      (f : fin-sequence-type-Ab G n) →
+      (n : ℕ) (σ : Permutation n) (f : fin-sequence-type-Ab G n) →
       sum-fin-sequence-type-Ab G n f ＝
       sum-fin-sequence-type-Ab G n (f ∘ map-equiv σ)
     preserves-sum-permutation-fin-sequence-type-Ab =
@@ -223,6 +224,35 @@ abstract
     sum-fin-sequence-type-Ab G n (λ _ → x) ＝ multiple-Ab G n x
   sum-constant-fin-sequence-type-Ab G =
     sum-constant-fin-sequence-type-Group (group-Ab G)
+```
+
+### Distributive law of sums over addition
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  abstract
+    distributive-sum-add-fin-sequence-type-Ab :
+      (n : ℕ) (f g : fin-sequence-type-Ab G n) →
+      sum-fin-sequence-type-Ab G n (λ i → add-Ab G (f i) (g i)) ＝
+      add-Ab G (sum-fin-sequence-type-Ab G n f) (sum-fin-sequence-type-Ab G n g)
+    distributive-sum-add-fin-sequence-type-Ab =
+      distributive-sum-mul-fin-sequence-type-Commutative-Monoid
+        ( commutative-monoid-Ab G)
+```
+
+### The sum operation is an abelian group homomorphism
+
+```agda
+hom-sum-fin-sequence-type-Ab :
+  {l : Level} (G : Ab l) (n : ℕ) →
+  hom-Ab (function-Ab G (Fin n)) G
+hom-sum-fin-sequence-type-Ab G n =
+  ( sum-fin-sequence-type-Ab G n ,
+    distributive-sum-add-fin-sequence-type-Ab G n _ _)
 ```
 
 ## See also

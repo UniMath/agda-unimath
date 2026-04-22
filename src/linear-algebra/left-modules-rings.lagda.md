@@ -90,6 +90,11 @@ module _
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
 
+  ap-add-left-module-Ring :
+    {x y x' y' : type-left-module-Ring} →
+    x ＝ x' → y ＝ y' → add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring = ap-add-Ab ab-left-module-Ring
+
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
 

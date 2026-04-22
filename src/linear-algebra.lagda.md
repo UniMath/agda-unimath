@@ -19,6 +19,8 @@ open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-tuples public
 open import linear-algebra.dependent-products-left-modules-commutative-rings public
 open import linear-algebra.dependent-products-left-modules-rings public
+open import linear-algebra.dependent-products-real-vector-spaces public
+open import linear-algebra.dependent-products-vector-spaces public
 open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.difference-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.difference-linear-maps-left-modules-rings public
@@ -35,6 +37,9 @@ open import linear-algebra.finite-sequences-in-monoids public
 open import linear-algebra.finite-sequences-in-rings public
 open import linear-algebra.finite-sequences-in-semigroups public
 open import linear-algebra.finite-sequences-in-semirings public
+open import linear-algebra.function-left-modules-rings public
+open import linear-algebra.function-real-vector-spaces public
+open import linear-algebra.function-vector-spaces public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-rings public
@@ -53,6 +58,7 @@ open import linear-algebra.linear-forms-left-modules-commutative-rings public
 open import linear-algebra.linear-forms-vector-spaces public
 open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
+open import linear-algebra.linear-maps-real-vector-spaces public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
@@ -71,7 +77,6 @@ open import linear-algebra.rational-modules public
 open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
-open import linear-algebra.riemann-sums-real-vector-spaces-partitions-closed-intervals-real-numbers public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces public
