@@ -134,3 +134,15 @@ abstract
     join-single-fin-sequence-type-Large-Join-Semilattice
       ( large-join-semilattice-ℝ⁰⁺)
 ```
+
+### The maximum of a nonempty constant sequence of nonnegative numbers is the constant
+
+```agda
+abstract
+  max-constant-fin-sequence-ℝ⁰⁺ :
+    {l : Level} (n : ℕ) (c : ℝ⁰⁺ l) →
+    max-fin-sequence-ℝ⁰⁺ (succ-ℕ n) (λ _ → c) ＝ c
+  max-constant-fin-sequence-ℝ⁰⁺ =
+    join-constant-fin-sequence-type-Large-Join-Semilattice
+      ( large-join-semilattice-ℝ⁰⁺)
+```

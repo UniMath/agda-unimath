@@ -147,10 +147,10 @@ abstract
 
 ```agda
 abstract
-  diff-add-ℝ :
+  diff-right-add-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     sim-ℝ ((x +ℝ z) -ℝ (y +ℝ z)) (x -ℝ y)
-  diff-add-ℝ x y z =
+  diff-right-add-ℝ x y z =
     similarity-reasoning-ℝ
       (x +ℝ z) -ℝ (y +ℝ z)
       ~ℝ (x +ℝ z) +ℝ (neg-ℝ y -ℝ z)
@@ -163,6 +163,24 @@ abstract
         by sim-eq-ℝ (right-unit-law-add-ℝ (x -ℝ y))
 ```
 
+### `(x + y) - (x + z) = y - z`
+
+```agda
+abstract
+  diff-left-add-ℝ :
+    {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    sim-ℝ ((x +ℝ y) -ℝ (x +ℝ z)) (y -ℝ z)
+  diff-left-add-ℝ x y z =
+    similarity-reasoning-ℝ
+      (x +ℝ y) -ℝ (x +ℝ z)
+      ~ℝ (x -ℝ x) +ℝ (y -ℝ z)
+        by sim-eq-ℝ (interchange-law-diff-add-ℝ x y x z)
+      ~ℝ zero-ℝ +ℝ (y -ℝ z)
+        by preserves-sim-right-add-ℝ _ _ _ (right-inverse-law-add-ℝ x)
+      ~ℝ y -ℝ z
+        by sim-eq-ℝ (left-unit-law-add-ℝ _)
+```
+
 ### `(x - z) - (y - z) = x - y`
 
 ```agda
@@ -170,7 +188,7 @@ abstract
   diff-diff-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     sim-ℝ ((x -ℝ z) -ℝ (y -ℝ z)) (x -ℝ y)
-  diff-diff-ℝ x y z = diff-add-ℝ x y (neg-ℝ z)
+  diff-diff-ℝ x y z = diff-right-add-ℝ x y (neg-ℝ z)
 ```
 
 ### `x - (x - y) = y`

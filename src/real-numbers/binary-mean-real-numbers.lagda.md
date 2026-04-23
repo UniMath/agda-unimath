@@ -138,7 +138,7 @@ module _
             ( inv (twice-left-mul-one-half-ℝ y))
             ( left-distributive-mul-add-ℝ one-half-ℝ x y)
       ＝ one-half-ℝ *ℝ y -ℝ one-half-ℝ *ℝ x
-        by eq-sim-ℝ (diff-add-ℝ _ _ _)
+        by eq-sim-ℝ (diff-right-add-ℝ _ _ _)
       ＝ one-half-ℝ *ℝ (y -ℝ x)
         by inv (left-distributive-mul-diff-ℝ one-half-ℝ y x)
 ```
@@ -170,7 +170,7 @@ module _
         ( one-half-ℝ *ℝ x +ℝ one-half-ℝ *ℝ x)
         by ap-diff-ℝ (commutative-add-ℝ _ _) refl
       ＝ one-half-ℝ *ℝ y -ℝ one-half-ℝ *ℝ x
-        by eq-sim-ℝ (diff-add-ℝ _ _ _)
+        by eq-sim-ℝ (diff-right-add-ℝ _ _ _)
       ＝ one-half-ℝ *ℝ (y -ℝ x)
         by inv (left-distributive-mul-diff-ℝ one-half-ℝ y x)
 ```

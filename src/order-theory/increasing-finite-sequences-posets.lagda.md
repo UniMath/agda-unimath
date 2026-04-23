@@ -14,6 +14,8 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
@@ -21,7 +23,9 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
+open import lists.pairs-of-successive-elements-finite-sequences
 
+open import order-theory.closed-intervals-posets
 open import order-theory.opposite-posets
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
@@ -170,4 +174,58 @@ module _
       ( fin-sequence-increasing-fin-sequence-type-Poset P n u)
   reverses-order-increasing-fin-sequence-type-Poset n =
     ind-Σ (reverses-order-is-increasing-fin-sequence-type-Poset n)
+```
+
+### Given an increasing sequence `a₁ ≤ a₂ ≤ ... ≤ aₙ`, the sequence of intervals `[a₁, a₂], [a₂, a₃], ..., [aₙ₋₁, aₙ]`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (P : Poset l1 l2)
+  where
+
+  closed-intervals-increasing-fin-sequence-type-Poset :
+    (n : ℕ) → increasing-fin-sequence-type-Poset P (succ-ℕ n) →
+    fin-sequence (closed-interval-Poset P) n
+  closed-intervals-increasing-fin-sequence-type-Poset
+    ( succ-ℕ n)
+    ( u , u₁≤u₂ , is-increasing-tail-u) =
+    cons-fin-sequence
+      ( n)
+      ( ( head-fin-sequence (succ-ℕ n) u ,
+          head-fin-sequence n (tail-fin-sequence (succ-ℕ n) u)) ,
+        u₁≤u₂)
+      ( closed-intervals-increasing-fin-sequence-type-Poset
+        ( n)
+        ( tail-fin-sequence (succ-ℕ n) u , is-increasing-tail-u))
+
+  closed-intervals-increasing-fin-sequence-type-Poset' :
+    (n : ℕ) → increasing-fin-sequence-type-Poset P (succ-ℕ n) →
+    fin-sequence (closed-interval-Poset P) n
+  closed-intervals-increasing-fin-sequence-type-Poset' n (u , H) i =
+    ( pair-succ-fin-sequence' n u i ,
+      reverses-order-is-increasing-fin-sequence-type-Poset P
+        ( succ-ℕ n)
+        ( u)
+        ( H)
+        ( skip-zero-Fin n i)
+        ( inl-Fin n i)
+        ( leq-succ-Fin n i))
+
+  abstract
+    htpy-closed-intervals-increasing-fin-sequence-type-Poset' :
+      (n : ℕ) (u : increasing-fin-sequence-type-Poset P (succ-ℕ n)) →
+      closed-intervals-increasing-fin-sequence-type-Poset n u ~
+      closed-intervals-increasing-fin-sequence-type-Poset' n u
+    htpy-closed-intervals-increasing-fin-sequence-type-Poset'
+      (succ-ℕ n) (u , _ , H) (inl i) =
+      htpy-closed-intervals-increasing-fin-sequence-type-Poset'
+        ( n)
+        ( tail-fin-sequence (succ-ℕ n) u , H)
+        ( i)
+    htpy-closed-intervals-increasing-fin-sequence-type-Poset'
+      (succ-ℕ n) (u , _ , _) (inr star) =
+      eq-type-subtype
+        ( ind-Σ (leq-prop-Poset P))
+        ( refl)
 ```

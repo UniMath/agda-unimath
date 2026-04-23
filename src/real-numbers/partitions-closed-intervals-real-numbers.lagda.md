@@ -7,27 +7,16 @@ module real-numbers.partitions-closed-intervals-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.multiplication-nonnegative-rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.positive-and-negative-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.transport-along-identifications
+open import foundation.logical-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -39,8 +28,10 @@ open import order-theory.increasing-finite-sequences-posets
 open import order-theory.increasing-nonempty-arrays-posets
 open import order-theory.large-posets
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.lower-bounds-large-posets
 open import order-theory.opposite-posets
 open import order-theory.order-preserving-maps-posets
+open import order-theory.upper-bounds-large-posets
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.closed-intervals-real-numbers
@@ -75,7 +66,7 @@ in `ℝ` whose first element is `a` and whose last element is `b`.
 ```agda
 module _
   {l : Level}
-  (((a , b) , a≤b) : closed-interval-ℝ l l)
+  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l l)
   where
 
   partition-closed-interval-ℝ : UU (lsuc l)
@@ -84,43 +75,232 @@ module _
       ( λ u →
         ( head-increasing-nonempty-array-type-Poset (ℝ-Poset l) u ＝ a) ×
         ( last-increasing-nonempty-array-type-Poset (ℝ-Poset l) u ＝ b))
+
+  pred-length-partition-closed-interval-ℝ :
+    partition-closed-interval-ℝ → ℕ
+  pred-length-partition-closed-interval-ℝ ((((succ-ℕ n , _) , _) , _) , _) =
+    n
+
+  length-partition-closed-interval-ℝ :
+    partition-closed-interval-ℝ → ℕ
+  length-partition-closed-interval-ℝ =
+    succ-ℕ ∘ pred-length-partition-closed-interval-ℝ
+
+  real-fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    fin-sequence (ℝ l) (length-partition-closed-interval-ℝ p)
+  real-fin-sequence-partition-closed-interval-ℝ
+    ((((succ-ℕ n , u) , _) , _) , _) = u
+
+  is-increasing-real-fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    is-increasing-fin-sequence-type-Poset
+      ( ℝ-Poset l)
+      ( length-partition-closed-interval-ℝ p)
+      ( real-fin-sequence-partition-closed-interval-ℝ p)
+  is-increasing-real-fin-sequence-partition-closed-interval-ℝ
+    ((((succ-ℕ n , u) , _) , H) , _) =
+    H
+
+  increasing-real-fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    increasing-fin-sequence-type-Poset
+      ( ℝ-Poset l)
+      ( length-partition-closed-interval-ℝ p)
+  increasing-real-fin-sequence-partition-closed-interval-ℝ
+    ((((succ-ℕ n , u) , _) , H) , _) =
+    ( u , H)
+
+  abstract
+    reverses-order-fin-sequence-partition-closed-interval-ℝ :
+      (p : partition-closed-interval-ℝ) →
+      preserves-order-Poset
+        ( opposite-Poset (Fin-Poset (length-partition-closed-interval-ℝ p)))
+        ( ℝ-Poset l)
+        ( real-fin-sequence-partition-closed-interval-ℝ p)
+    reverses-order-fin-sequence-partition-closed-interval-ℝ
+      ((((succ-ℕ n , u) , _) , H) , _) =
+      reverses-order-is-increasing-fin-sequence-type-Poset
+        ( ℝ-Poset l)
+        ( succ-ℕ n)
+        ( u)
+        ( H)
+
+  eq-lower-bound-head-real-fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    head-fin-sequence
+      ( pred-length-partition-closed-interval-ℝ p)
+      ( real-fin-sequence-partition-closed-interval-ℝ p) ＝
+    a
+  eq-lower-bound-head-real-fin-sequence-partition-closed-interval-ℝ
+    ((((succ-ℕ n , u) , _) , _) , u₋₁=a , _) =
+    u₋₁=a
+
+  eq-upper-bound-last-real-fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    last-fin-sequence
+      ( pred-length-partition-closed-interval-ℝ p)
+      ( real-fin-sequence-partition-closed-interval-ℝ p) ＝
+    b
+  eq-upper-bound-last-real-fin-sequence-partition-closed-interval-ℝ
+    ((((succ-ℕ n , u) , _) , _) , _ , u₀=b) =
+    u₀=b
+
+  abstract
+    lower-bound-real-fin-sequence-partition-closed-interval-ℝ :
+      (p : partition-closed-interval-ℝ) →
+      is-lower-bound-family-of-elements-Large-Poset
+        ( ℝ-Large-Poset)
+        ( real-fin-sequence-partition-closed-interval-ℝ p)
+        ( a)
+    lower-bound-real-fin-sequence-partition-closed-interval-ℝ p i =
+      binary-tr
+        ( leq-ℝ)
+        ( eq-lower-bound-head-real-fin-sequence-partition-closed-interval-ℝ p)
+        ( refl)
+        ( reverses-order-fin-sequence-partition-closed-interval-ℝ
+          ( p)
+          ( neg-one-Fin (pred-length-partition-closed-interval-ℝ p))
+          ( i)
+          ( leq-neg-one-Fin (pred-length-partition-closed-interval-ℝ p) i))
+
+    upper-bound-real-fin-sequence-partition-closed-interval-ℝ :
+      (p : partition-closed-interval-ℝ) →
+      is-upper-bound-family-of-elements-Large-Poset
+        ( ℝ-Large-Poset)
+        ( real-fin-sequence-partition-closed-interval-ℝ p)
+        ( b)
+    upper-bound-real-fin-sequence-partition-closed-interval-ℝ p i =
+      binary-tr
+        ( leq-ℝ)
+        ( refl)
+        ( eq-upper-bound-last-real-fin-sequence-partition-closed-interval-ℝ p)
+        ( reverses-order-fin-sequence-partition-closed-interval-ℝ
+          ( p)
+          ( i)
+          ( zero-Fin (pred-length-partition-closed-interval-ℝ p))
+          ( leq-zero-Fin (pred-length-partition-closed-interval-ℝ p) i))
+
+  fin-sequence-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ) →
+    fin-sequence
+      ( type-closed-interval-ℝ l [a,b])
+      ( length-partition-closed-interval-ℝ p)
+  fin-sequence-partition-closed-interval-ℝ p i =
+    ( real-fin-sequence-partition-closed-interval-ℝ p i ,
+      lower-bound-real-fin-sequence-partition-closed-interval-ℝ p i ,
+      upper-bound-real-fin-sequence-partition-closed-interval-ℝ p i)
 ```
 
 ## Properties
 
+### The sequence of closed intervals of a partition
+
+```agda
+fin-sequence-closed-interval-partition-closed-interval-ℝ :
+  {l : Level} ([a,b] : closed-interval-ℝ l l)
+  (p : partition-closed-interval-ℝ [a,b]) →
+  fin-sequence
+    ( closed-interval-ℝ l l)
+    ( pred-length-partition-closed-interval-ℝ [a,b] p)
+fin-sequence-closed-interval-partition-closed-interval-ℝ {l} [a,b] p =
+  closed-intervals-increasing-fin-sequence-type-Poset
+    ( ℝ-Poset l)
+    ( pred-length-partition-closed-interval-ℝ [a,b] p)
+    ( increasing-real-fin-sequence-partition-closed-interval-ℝ [a,b] p)
+```
+
 ### The mesh of a partition
 
 ```agda
-differences-increasing-fin-sequence-ℝ :
-  {l : Level} (n : ℕ) →
-  increasing-fin-sequence-type-Poset (ℝ-Poset l) (succ-ℕ n) →
-  fin-sequence (ℝ⁰⁺ l) n
-differences-increasing-fin-sequence-ℝ {l} 0 _ _ = raise-zero-ℝ⁰⁺ l
-differences-increasing-fin-sequence-ℝ
-  (succ-ℕ n) (u , u₁≤u₂ , is-increasing-tail-u) =
-  cons-fin-sequence
-    ( n)
-    ( nonnegative-diff-leq-ℝ u₁≤u₂)
-    ( differences-increasing-fin-sequence-ℝ
-      ( n)
-      ( tail-fin-sequence (succ-ℕ n) u , is-increasing-tail-u))
-
 module _
   {l : Level}
   ([a,b] : closed-interval-ℝ l l)
   where
 
+  diffs-partition-closed-interval-ℝ :
+    (p : partition-closed-interval-ℝ [a,b]) →
+    fin-sequence
+      ( ℝ⁰⁺ l)
+      ( pred-length-partition-closed-interval-ℝ [a,b] p)
+  diffs-partition-closed-interval-ℝ p =
+    ( nonnegative-width-closed-interval-ℝ) ∘
+    ( fin-sequence-closed-interval-partition-closed-interval-ℝ [a,b] p)
+
   mesh-partition-closed-interval-ℝ :
     partition-closed-interval-ℝ [a,b] → ℝ⁰⁺ l
-  mesh-partition-closed-interval-ℝ ((((succ-ℕ n , u) , _) , H) , _) =
+  mesh-partition-closed-interval-ℝ p =
     max-fin-sequence-ℝ⁰⁺
-      ( n)
-      ( differences-increasing-fin-sequence-ℝ n (u , H))
+      ( pred-length-partition-closed-interval-ℝ [a,b] p)
+      ( diffs-partition-closed-interval-ℝ p)
 
   real-mesh-partition-closed-interval-ℝ :
     partition-closed-interval-ℝ [a,b] → ℝ l
   real-mesh-partition-closed-interval-ℝ =
     real-ℝ⁰⁺ ∘ mesh-partition-closed-interval-ℝ
+```
+
+### The mesh of a partition of a closed interval is at most the width of the interval
+
+```agda
+module _
+  {l : Level}
+  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l l)
+  where
+
+  abstract
+    bound-diffs-partition-closed-interval-ℝ :
+      (p : partition-closed-interval-ℝ [a,b]) →
+      is-upper-bound-family-of-elements-Large-Poset
+        ( large-poset-ℝ⁰⁺)
+        ( diffs-partition-closed-interval-ℝ [a,b] p)
+        ( nonnegative-width-closed-interval-ℝ [a,b])
+    bound-diffs-partition-closed-interval-ℝ
+      p@((((succ-ℕ n , u) , _) , _) , _) i =
+      let
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in
+        chain-of-inequalities
+          real-ℝ⁰⁺ (diffs-partition-closed-interval-ℝ [a,b] p i)
+          ≤ u (inl-Fin n i) -ℝ u (skip-zero-Fin n i)
+            by
+              leq-eq-ℝ
+                ( ap
+                  ( width-closed-interval-ℝ)
+                  ( htpy-closed-intervals-increasing-fin-sequence-type-Poset'
+                    ( ℝ-Poset l)
+                    ( pred-length-partition-closed-interval-ℝ [a,b] p)
+                    ( increasing-real-fin-sequence-partition-closed-interval-ℝ
+                      ( [a,b])
+                      ( p))
+                    ( i)))
+          ≤ b -ℝ u (skip-zero-Fin n i)
+            by
+              preserves-leq-right-add-ℝ _ _ _
+                ( upper-bound-real-fin-sequence-partition-closed-interval-ℝ
+                  ( [a,b])
+                  ( p)
+                  ( inl-Fin n i))
+          ≤ b -ℝ a
+            by
+              reverses-leq-left-diff-ℝ _
+                ( lower-bound-real-fin-sequence-partition-closed-interval-ℝ
+                  ( [a,b])
+                  ( p)
+                  ( skip-zero-Fin n i))
+
+    bound-mesh-partition-closed-interval-ℝ :
+      (p : partition-closed-interval-ℝ [a,b]) →
+      leq-ℝ⁰⁺
+        ( mesh-partition-closed-interval-ℝ [a,b] p)
+        ( nonnegative-width-closed-interval-ℝ [a,b])
+    bound-mesh-partition-closed-interval-ℝ p =
+      forward-implication
+        ( is-least-upper-bound-max-fin-sequence-ℝ⁰⁺
+          ( pred-length-partition-closed-interval-ℝ [a,b] p)
+          ( diffs-partition-closed-interval-ℝ [a,b] p)
+          ( nonnegative-width-closed-interval-ℝ [a,b]))
+        ( bound-diffs-partition-closed-interval-ℝ p)
 ```
 
 ### The trivial partition of a closed interval
@@ -139,208 +319,6 @@ module _
         raise-star) ,
       refl ,
       refl)
-```
-
-### The mesh of a partition of `[a, b]` is at most `b - a`
-
-```agda
-nonnegative-diff-last-first-increasing-fin-sequence-ℝ :
-  {l : Level} (n : ℕ) →
-  increasing-fin-sequence-type-Poset (ℝ-Poset l) (succ-ℕ n) →
-  ℝ⁰⁺ l
-nonnegative-diff-last-first-increasing-fin-sequence-ℝ n (u , H) =
-  nonnegative-diff-leq-ℝ
-    ( reverses-order-is-increasing-fin-sequence-type-Poset
-      ( ℝ-Poset _)
-      ( succ-ℕ n)
-      ( u)
-      ( H)
-      ( neg-one-Fin n)
-      ( zero-Fin n)
-      ( star))
-
-diff-last-first-increasing-fin-sequence-ℝ :
-  {l : Level} (n : ℕ) →
-  increasing-fin-sequence-type-Poset (ℝ-Poset l) (succ-ℕ n) →
-  ℝ l
-diff-last-first-increasing-fin-sequence-ℝ n u =
-  real-ℝ⁰⁺ (nonnegative-diff-last-first-increasing-fin-sequence-ℝ n u)
-
-abstract
-  bound-differences-increasing-fin-sequence-ℝ :
-    {l : Level} (n : ℕ)
-    (u : increasing-fin-sequence-type-Poset (ℝ-Poset l) (succ-ℕ n))
-    (i : Fin n) →
-    leq-ℝ
-      ( real-ℝ⁰⁺ (differences-increasing-fin-sequence-ℝ n u i))
-      ( diff-last-first-increasing-fin-sequence-ℝ n u)
-  bound-differences-increasing-fin-sequence-ℝ (succ-ℕ n) (u , H) (inr star) =
-    preserves-leq-right-add-ℝ
-      ( _)
-      ( u (inl (inr star)))
-      ( u (zero-Fin (succ-ℕ n)))
-      ( reverses-order-is-increasing-fin-sequence-type-Poset
-        ( ℝ-Poset _)
-        ( succ-ℕ (succ-ℕ n))
-        ( u)
-        ( H)
-        ( inl (inr star))
-        ( zero-Fin (succ-ℕ n))
-        ( leq-zero-Fin n (inr star)))
-  bound-differences-increasing-fin-sequence-ℝ
-    (succ-ℕ n) uu@(u , u₁≤u₂ , is-increasing-tail-u) (inl i) =
-    transitive-leq-ℝ _ _ _
-      ( reverses-leq-left-diff-ℝ
-        ( u (zero-Fin (succ-ℕ n)))
-        ( u₁≤u₂))
-      ( bound-differences-increasing-fin-sequence-ℝ
-        ( n)
-        ( tail-fin-sequence (succ-ℕ n) u ,
-          is-increasing-tail-u)
-        ( i))
-
-module _
-  {l : Level}
-  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l l)
-  where
-
-  abstract
-    leq-diff-mesh-partition-closed-interval-ℝ :
-      (p : partition-closed-interval-ℝ [a,b]) →
-      leq-ℝ⁰⁺
-        ( mesh-partition-closed-interval-ℝ [a,b] p)
-        ( nonnegative-diff-leq-ℝ a≤b)
-    leq-diff-mesh-partition-closed-interval-ℝ
-      p@((((succ-ℕ n , u) , _) , H) , head=a , last=b) =
-      let
-        Δ = differences-increasing-fin-sequence-ℝ n (u , H)
-      in
-        tr
-          ( leq-ℝ (real-mesh-partition-closed-interval-ℝ [a,b] p))
-          ( ap-diff-ℝ last=b head=a)
-          ( leq-is-least-upper-bound-family-of-elements-Large-Poset
-            ( large-poset-ℝ⁰⁺)
-            ( Δ)
-            ( max-fin-sequence-ℝ⁰⁺ n Δ)
-            ( is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ n Δ)
-            ( nonnegative-diff-last-first-increasing-fin-sequence-ℝ n (u , H))
-            ( bound-differences-increasing-fin-sequence-ℝ n (u , H)))
-```
-
-### The standard partition of `[a,b]` with length `n + 2`
-
-```agda
-module _
-  {l : Level}
-  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l l)
-  (n : ℕ)
-  where
-
-  hom-fin-sequence-standard-partition-closed-interval-ℝ :
-    hom-Poset
-      ( opposite-Poset (Fin-Poset (n +ℕ 2)))
-      ( ℝ-Poset l)
-  hom-fin-sequence-standard-partition-closed-interval-ℝ =
-    comp-hom-Poset
-      ( opposite-Poset (Fin-Poset (n +ℕ 2)))
-      ( ℕ-Poset)
-      ( ℝ-Poset l)
-      ( comp-hom-Poset
-        ( ℕ-Poset)
-        ( ℚ-Poset)
-        ( ℝ-Poset l)
-        ( comp-hom-Poset
-          ( ℚ-Poset)
-          ( ℚ-Poset)
-          ( ℝ-Poset l)
-          ( comp-hom-Poset
-            ( ℚ-Poset)
-            ( ℝ-Poset lzero)
-            ( ℝ-Poset l)
-            ( comp-hom-Poset
-              ( ℝ-Poset lzero)
-              ( ℝ-Poset l)
-              ( ℝ-Poset l)
-              ( hom-poset-left-add-ℝ a)
-              ( hom-poset-left-mul-real-ℝ⁰⁺ (nonnegative-diff-leq-ℝ a≤b)))
-            ( hom-poset-real-ℚ))
-          ( hom-poset-left-mul-rational-ℚ⁰⁺
-            ( nonnegative-ℚ⁺ (positive-reciprocal-rational-succ-ℕ n))))
-        ( hom-poset-rational-ℕ))
-      ( nat-Fin-reverse (n +ℕ 2) ,
-        λ i j → reverses-leq-nat-Fin-reverse (n +ℕ 2) j i)
-
-  fin-sequence-standard-partition-closed-interval-ℝ :
-    fin-sequence (ℝ l) (n +ℕ 2)
-  fin-sequence-standard-partition-closed-interval-ℝ =
-    pr1 hom-fin-sequence-standard-partition-closed-interval-ℝ
-
-  abstract
-    is-increasing-fin-sequence-standard-partition-closed-interval-ℝ :
-      is-increasing-fin-sequence-type-Poset
-        ( ℝ-Poset l)
-        ( n +ℕ 2)
-        ( fin-sequence-standard-partition-closed-interval-ℝ)
-    is-increasing-fin-sequence-standard-partition-closed-interval-ℝ =
-      is-increasing-reverses-order-fin-sequence-type-Poset
-        ( ℝ-Poset l)
-        ( n +ℕ 2)
-        ( fin-sequence-standard-partition-closed-interval-ℝ)
-        ( pr2 hom-fin-sequence-standard-partition-closed-interval-ℝ)
-
-    head-fin-sequence-standard-partition-closed-interval-ℝ :
-      head-fin-sequence
-        ( succ-ℕ n)
-        ( fin-sequence-standard-partition-closed-interval-ℝ) ＝
-      a
-    head-fin-sequence-standard-partition-closed-interval-ℝ =
-      equational-reasoning
-        a +ℝ (b -ℝ a) *ℝ real-ℚ (reciprocal-rational-succ-ℕ n *ℚ zero-ℚ)
-        ＝ a +ℝ (b -ℝ a) *ℝ zero-ℝ
-          by ap-add-ℝ refl (ap-mul-ℝ refl (ap real-ℚ (right-zero-law-mul-ℚ _)))
-        ＝ a +ℝ raise-zero-ℝ l
-          by ap-add-ℝ refl (eq-right-zero-law-mul-ℝ _)
-        ＝ a
-          by right-raise-zero-law-add-ℝ a
-
-    last-fin-sequence-standard-partition-closed-interval-ℝ :
-      last-fin-sequence
-        ( succ-ℕ n)
-        ( fin-sequence-standard-partition-closed-interval-ℝ) ＝
-      b
-    last-fin-sequence-standard-partition-closed-interval-ℝ =
-      let
-        1/⟨n+1⟩ = reciprocal-rational-succ-ℕ n
-      in
-        equational-reasoning
-          ( a) +ℝ
-          ( ( b -ℝ a) *ℝ
-            ( real-ℚ
-              ( 1/⟨n+1⟩ *ℚ
-                rational-ℕ (nat-Fin-reverse (n +ℕ 2) (zero-Fin (succ-ℕ n))))))
-          ＝ a +ℝ ((b -ℝ a) *ℝ (real-ℚ (1/⟨n+1⟩ *ℚ rational-ℕ (succ-ℕ n))))
-            by
-              ap
-                ( λ k → a +ℝ (b -ℝ a) *ℝ real-ℚ (1/⟨n+1⟩ *ℚ rational-ℕ k))
-                ( nat-reverse-zero-Fin (succ-ℕ n))
-          ＝ a +ℝ ((b -ℝ a) *ℝ one-ℝ)
-            by
-              ap
-                ( λ q → a +ℝ (b -ℝ a) *ℝ real-ℚ⁺ q)
-                ( left-inverse-law-mul-ℚ⁺
-                  ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' n)))
-          ＝ a +ℝ (b -ℝ a)
-            by ap-add-ℝ refl (right-unit-law-mul-ℝ (b -ℝ a))
-          ＝ b
-            by eq-sim-ℝ (add-right-diff-ℝ a b)
-
-  standard-partition-closed-interval-ℝ :
-    partition-closed-interval-ℝ [a,b]
-  standard-partition-closed-interval-ℝ =
-    ( ( ((n +ℕ 2 , fin-sequence-standard-partition-closed-interval-ℝ) , star) ,
-        is-increasing-fin-sequence-standard-partition-closed-interval-ℝ) ,
-      head-fin-sequence-standard-partition-closed-interval-ℝ ,
-      last-fin-sequence-standard-partition-closed-interval-ℝ)
 ```
 
 ## External links

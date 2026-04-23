@@ -134,6 +134,7 @@ open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public
 open import real-numbers.squares-real-numbers public
+open import real-numbers.standard-partitions-closed-intervals-real-numbers public
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public

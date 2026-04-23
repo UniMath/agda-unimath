@@ -11,7 +11,10 @@ module elementary-number-theory.difference-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.difference-integers
+open import elementary-number-theory.difference-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -184,6 +187,18 @@ abstract
         by ap (rational-ℤ x +ℚ_) (inv (neg-rational-ℤ y))
       ＝ rational-ℤ (x -ℤ y)
         by add-rational-ℤ x (neg-ℤ y)
+```
+
+### The inclusion of natural numbers preserves differences
+
+```agda
+abstract
+  diff-leq-rational-ℕ :
+    (x y : ℕ) (y≤x : leq-ℕ y x) →
+    rational-ℕ x -ℚ rational-ℕ y ＝ rational-ℕ (diff-leq-ℕ x y y≤x)
+  diff-leq-rational-ℕ x y y≤x =
+    ( diff-rational-ℤ (int-ℕ x) (int-ℕ y)) ∙
+    ( ap rational-ℤ (diff-leq-int-ℕ x y y≤x))
 ```
 
 ### The difference of the successor of a rational number and the rational number is one
