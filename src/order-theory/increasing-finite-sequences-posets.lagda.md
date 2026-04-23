@@ -39,7 +39,7 @@ open import univalent-combinatorics.standard-finite-types
 
 A [finite sequence](lists.finite-sequences.md) of elements of a
 [poset](order-theory.posets.md) is
-{{#concept "increasing" Disambiguation="finite sequence in a poset" Agda=is-increasing-fin-sequence-Poset}}
+{{#concept "increasing" Disambiguation="finite sequence in a poset" Agda=is-increasing-fin-sequence-type-Poset}}
 if each element is less than or equal to the next.
 
 ## Definition
