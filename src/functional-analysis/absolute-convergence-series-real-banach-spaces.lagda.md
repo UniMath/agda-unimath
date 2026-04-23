@@ -7,9 +7,6 @@ module functional-analysis.absolute-convergence-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-numbers
-open import analysis.series-real-numbers
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -33,6 +30,9 @@ open import functional-analysis.sums-of-finite-sequences-of-elements-real-banach
 open import metric-spaces.cauchy-sequences-metric-spaces
 
 open import order-theory.large-posets
+
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.series-real-numbers
 
 open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.difference-real-numbers

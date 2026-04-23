@@ -7,8 +7,6 @@ module functional-analysis.ratio-test-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.ratio-test-series-real-numbers
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-transport
@@ -25,6 +23,8 @@ open import functional-analysis.real-banach-spaces
 open import functional-analysis.series-real-banach-spaces
 
 open import logic.functoriality-existential-quantification
+
+open import real-analysis.ratio-test-series-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.inequality-real-numbers

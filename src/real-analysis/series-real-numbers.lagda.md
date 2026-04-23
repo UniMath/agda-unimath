@@ -1,7 +1,7 @@
 # Series in the real numbers
 
 ```agda
-module analysis.series-real-numbers where
+module real-analysis.series-real-numbers where
 ```
 
 <details><summary>Imports</summary>
