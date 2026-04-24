@@ -202,7 +202,7 @@ Inequalities in large posets can be constructed by equational reasoning as
 follows:
 
 ```text
-let open inequality-reasoning-Poset X
+let open inequality-reasoning-Large-Poset X
 in
   chain-of-inequalities
   x ≤ y

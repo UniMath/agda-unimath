@@ -11,11 +11,13 @@ module real-numbers.standard-partitions-closed-intervals-real-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.archimedean-property-positive-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
+open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
@@ -23,19 +25,25 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-homotopies-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import group-theory.abelian-groups
 
 open import lists.finite-sequences
 
 open import order-theory.increasing-finite-sequences-posets
+open import order-theory.large-posets
 open import order-theory.opposite-posets
 open import order-theory.order-preserving-maps-posets
 
@@ -52,6 +60,7 @@ open import real-numbers.nonnegative-real-numbers
 open import real-numbers.partitions-closed-intervals-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -66,7 +75,7 @@ of a [closed interval](real-numbers.closed-intervals-real-numbers.md) `[a, b]`
 in the [real numbers](real-numbers.dedekind-real-numbers.md) with `n + 2`
 elements is the
 [partition](real-numbers.partitions-closed-intervals-real-numbers.md)
-$$p_i := a + (b - a) \frac{i}{n+1}$$, where $$i$$ ranges from `0` to `n + 1`.
+`p_i := a + (b - a) i /(n + 1)`, where `i` ranges from `0` to `n + 1`.
 
 ## Definition
 
@@ -321,4 +330,78 @@ module _
         ( max-fin-sequence-ℝ⁰⁺ (succ-ℕ n))
         ( compute-diffs-standard-partition-closed-interval-ℝ)) ∙
       ( max-constant-fin-sequence-ℝ⁰⁺ n _)
+```
+
+### For any positive `ε` and interval `[a, b]`, there is a partition of `[a, b]` with mesh at most `ε`
+
+```agda
+module _
+  {l : Level}
+  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l l)
+  (ε : ℚ⁺)
+  where
+
+  abstract
+    exists-partition-mesh-bound-closed-interval-ℝ :
+      exists
+        ( partition-closed-interval-ℝ [a,b])
+        ( λ p →
+          leq-prop-ℝ
+            ( real-mesh-partition-closed-interval-ℝ [a,b] p)
+            ( real-ℚ⁺ ε))
+    exists-partition-mesh-bound-closed-interval-ℝ =
+      let
+        open do-syntax-trunc-Prop (∃ (partition-closed-interval-ℝ [a,b]) _)
+        open inequality-reasoning-Large-Poset ℝ-Large-Poset
+      in do
+        (q , b-a<q) ← exists-greater-positive-rational-ℝ (b -ℝ a)
+        (n⁺ , q<n⁺ε) ← archimedean-property-ℚ⁺ ε q
+        let n = nat-ℕ⁺ n⁺
+        intro-exists
+          ( standard-partition-closed-interval-ℝ [a,b] n)
+          ( chain-of-inequalities
+            real-mesh-partition-closed-interval-ℝ
+              ( [a,b])
+              ( standard-partition-closed-interval-ℝ [a,b] n)
+            ≤ (b -ℝ a) *ℝ real-ℚ (reciprocal-rational-succ-ℕ n)
+              by
+                leq-eq-ℝ
+                  ( ap
+                    ( real-ℝ⁰⁺)
+                    ( mesh-standard-partition-closed-interval-ℝ [a,b] n))
+            ≤ ( real-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ ε)) *ℝ
+              ( real-ℚ (reciprocal-rational-succ-ℕ n))
+              by
+                preserves-leq-right-mul-ℝ⁰⁺
+                  ( nonnegative-real-ℚ⁺ (positive-reciprocal-rational-succ-ℕ n))
+                  ( transitive-leq-ℝ
+                    ( b -ℝ a)
+                    ( real-ℚ⁺ q)
+                    ( real-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ ε))
+                    ( preserves-leq-real-ℚ (leq-le-ℚ q<n⁺ε))
+                    ( leq-le-ℝ b-a<q))
+            ≤ ( real-ℚ⁺ (positive-rational-ℕ⁺ (succ-nonzero-ℕ n⁺) *ℚ⁺ ε)) *ℝ
+              ( real-ℚ (reciprocal-rational-succ-ℕ n))
+              by
+                preserves-leq-right-mul-ℝ⁰⁺
+                  ( nonnegative-real-ℚ⁺ (positive-reciprocal-rational-succ-ℕ n))
+                  ( preserves-leq-real-ℚ
+                    ( preserves-leq-right-mul-ℚ⁺
+                      ( ε)
+                      ( _)
+                      ( _)
+                      ( preserves-leq-rational-ℕ (succ-leq-ℕ n))))
+            ≤ real-ℚ⁺
+                ( ( positive-rational-ℕ⁺ (succ-nonzero-ℕ n⁺) *ℚ⁺ ε) *ℚ⁺
+                  ( positive-reciprocal-rational-succ-ℕ n))
+              by leq-eq-ℝ (mul-real-ℚ _ _)
+            ≤ real-ℚ⁺ ε
+              by
+                leq-eq-ℝ
+                  ( ap
+                    ( real-ℚ⁺)
+                    ( is-identity-left-conjugation-Ab
+                      ( abelian-group-mul-ℚ⁺)
+                      ( positive-rational-ℕ⁺ (succ-nonzero-ℕ n⁺))
+                      ( ε))))
 ```
