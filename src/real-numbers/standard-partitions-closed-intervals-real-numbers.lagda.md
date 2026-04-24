@@ -61,7 +61,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "standard partitition" Disambiguation="of length n+2 of a closed interval in ℝ" Agda=standard-partition-closed-interval-ℝ}}
+{{#concept "standard partition" Disambiguation="of length n+2 of a closed interval in ℝ" Agda=standard-partition-closed-interval-ℝ}}
 of a [closed interval](real-numbers.closed-intervals-real-numbers.md) `[a, b]`
 in the [real numbers](real-numbers.dedekind-real-numbers.md) with `n + 2`
 elements is the
