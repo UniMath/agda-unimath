@@ -21,10 +21,6 @@ open import lists.functoriality-tuples
 open import lists.subtypes-tuples
 open import lists.tuples
 
-open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-posets
-open import order-theory.lower-bounds-large-posets
-
 open import universal-algebra.large-poset-submodels-of-signatures
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
