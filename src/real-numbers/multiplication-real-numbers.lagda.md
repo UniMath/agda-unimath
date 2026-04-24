@@ -1204,6 +1204,14 @@ module _
     right-zero-law-mul-ℝ =
       tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
 
+    eq-left-zero-law-mul-ℝ : zero-ℝ *ℝ x ＝ raise-zero-ℝ l
+    eq-left-zero-law-mul-ℝ =
+      eq-raise-zero-is-zero-ℝ left-zero-law-mul-ℝ
+
+    eq-right-zero-law-mul-ℝ : x *ℝ zero-ℝ ＝ raise-zero-ℝ l
+    eq-right-zero-law-mul-ℝ =
+      eq-raise-zero-is-zero-ℝ right-zero-law-mul-ℝ
+
 module _
   {l1 l2 : Level} (x : ℝ l1)
   where

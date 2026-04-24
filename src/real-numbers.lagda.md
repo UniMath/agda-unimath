@@ -106,6 +106,7 @@ open import real-numbers.nonpositive-real-numbers public
 open import real-numbers.nonzero-real-numbers public
 open import real-numbers.nonzero-roots-nonnegative-real-numbers public
 open import real-numbers.odd-roots-real-numbers public
+open import real-numbers.partitions-closed-intervals-real-numbers public
 open import real-numbers.pointwise-continuous-endomaps-real-numbers public
 open import real-numbers.pointwise-epsilon-delta-continuous-endomaps-real-numbers public
 open import real-numbers.positive-and-negative-real-numbers public
@@ -133,6 +134,7 @@ open import real-numbers.similarity-positive-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.square-roots-nonnegative-real-numbers public
 open import real-numbers.squares-real-numbers public
+open import real-numbers.standard-partitions-closed-intervals-real-numbers public
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers public
 open import real-numbers.strict-inequality-nonnegative-real-numbers public
 open import real-numbers.strict-inequality-positive-real-numbers public

@@ -11,6 +11,7 @@ module real-numbers.maximum-finite-families-nonnegative-real-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import lists.finite-sequences
@@ -24,6 +25,7 @@ open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -108,4 +110,39 @@ module _
         ( large-join-semilattice-ℝ⁰⁺)
         ( I)
         ( f)
+```
+
+### The maximum of an empty sequence is zero
+
+```agda
+abstract
+  max-empty-fin-sequence-ℝ⁰⁺ :
+    {l : Level} → max-fin-sequence-ℝ⁰⁺ 0 empty-fin-sequence ＝ raise-zero-ℝ⁰⁺ l
+  max-empty-fin-sequence-ℝ⁰⁺ =
+    join-empty-fin-sequence-type-Large-Join-Semilattice
+      ( large-join-semilattice-ℝ⁰⁺)
+```
+
+### The maximum of a single nonnegative real number is the nonnegative real number
+
+```agda
+abstract
+  max-single-fin-sequence-ℝ⁰⁺ :
+    {l : Level} (u : fin-sequence (ℝ⁰⁺ l) 1) →
+    max-fin-sequence-ℝ⁰⁺ 1 u ＝ u (neg-one-Fin 0)
+  max-single-fin-sequence-ℝ⁰⁺ =
+    join-single-fin-sequence-type-Large-Join-Semilattice
+      ( large-join-semilattice-ℝ⁰⁺)
+```
+
+### The maximum of a nonempty constant sequence of nonnegative numbers is the constant
+
+```agda
+abstract
+  max-constant-fin-sequence-ℝ⁰⁺ :
+    {l : Level} (n : ℕ) (c : ℝ⁰⁺ l) →
+    max-fin-sequence-ℝ⁰⁺ (succ-ℕ n) (λ _ → c) ＝ c
+  max-constant-fin-sequence-ℝ⁰⁺ =
+    join-constant-fin-sequence-type-Large-Join-Semilattice
+      ( large-join-semilattice-ℝ⁰⁺)
 ```

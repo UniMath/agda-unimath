@@ -510,14 +510,21 @@ is-preunivalent-Fin =
 
 ```agda
 abstract
+  is-inhabited-Fin-succ-ℕ :
+    (n : ℕ) → is-inhabited (Fin (succ-ℕ n))
+  is-inhabited-Fin-succ-ℕ n = unit-trunc-Prop (neg-one-Fin n)
+
   is-inhabited-is-nonzero-Fin :
     (n : ℕ) → is-nonzero-ℕ n → is-inhabited (Fin n)
   is-inhabited-is-nonzero-Fin zero-ℕ n≠0 = ex-falso (n≠0 refl)
-  is-inhabited-is-nonzero-Fin (succ-ℕ n) _ = unit-trunc-Prop (neg-one-Fin n)
+  is-inhabited-is-nonzero-Fin (succ-ℕ n) _ = is-inhabited-Fin-succ-ℕ n
 
   is-nonzero-is-inhabited-Fin :
     (n : ℕ) → is-inhabited (Fin n) → is-nonzero-ℕ n
   is-nonzero-is-inhabited-Fin _ H refl = rec-trunc-Prop empty-Prop (λ ()) H
+
+inhabited-type-Fin-succ-ℕ : (n : ℕ) → Inhabited-Type lzero
+inhabited-type-Fin-succ-ℕ n = (Fin (succ-ℕ n) , is-inhabited-Fin-succ-ℕ n)
 
 is-empty-is-zero-Fin : (n : ℕ) → is-zero-ℕ n → is-empty (Fin n)
 is-empty-is-zero-Fin _ refl ()
@@ -533,6 +540,29 @@ is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
 is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
 is-inhabited-or-empty-Fin n =
   is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
+```
+
+### `nat-Fin-reverse (succ-ℕ n)` maps `zero-Fin n` to `n`
+
+```agda
+abstract
+  nat-reverse-zero-Fin :
+    (n : ℕ) → nat-Fin-reverse (succ-ℕ n) (zero-Fin n) ＝ n
+  nat-reverse-zero-Fin zero-ℕ = refl
+  nat-reverse-zero-Fin (succ-ℕ n) = ap succ-ℕ (nat-reverse-zero-Fin n)
+```
+
+### The value of `nat-Fin-reverse (succ-ℕ n) (inl-Fin n i)`
+
+```agda
+abstract
+  compute-nat-reverse-inl-Fin :
+    (n : ℕ) (i : Fin n) →
+    nat-Fin-reverse (succ-ℕ n) (inl-Fin n i) ＝
+    succ-ℕ (nat-Fin-reverse (succ-ℕ n) (skip-zero-Fin n i))
+  compute-nat-reverse-inl-Fin (succ-ℕ n) (inl x) =
+    ap succ-ℕ (compute-nat-reverse-inl-Fin n x)
+  compute-nat-reverse-inl-Fin (succ-ℕ n) (inr star) = refl
 ```
 
 ## See also

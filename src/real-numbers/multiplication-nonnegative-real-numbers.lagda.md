@@ -25,6 +25,8 @@ open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -126,6 +128,12 @@ abstract
     transitive-leq-ℝ _ _ _
       ( preserves-leq-right-mul-ℝ⁰⁺ y' x≤x')
       ( preserves-leq-left-mul-ℝ⁰⁺ x y≤y')
+
+hom-poset-left-mul-real-ℝ⁰⁺ :
+  {l1 l2 : Level} → ℝ⁰⁺ l1 → hom-Poset (ℝ-Poset l2) (ℝ-Poset (l1 ⊔ l2))
+hom-poset-left-mul-real-ℝ⁰⁺ x =
+  ( mul-ℝ (real-ℝ⁰⁺ x) ,
+    λ _ _ → preserves-leq-left-mul-ℝ⁰⁺ x)
 ```
 
 ### Unit laws

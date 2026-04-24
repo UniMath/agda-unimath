@@ -10,6 +10,7 @@ module lists.finite-sequences where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -54,11 +55,18 @@ module _
   empty-fin-sequence ()
 
   head-fin-sequence : (n : ℕ) → fin-sequence A (succ-ℕ n) → A
-  head-fin-sequence n v = v (inr star)
+  head-fin-sequence n v = v (neg-one-Fin n)
+
+  last-fin-sequence : (n : ℕ) → fin-sequence A (succ-ℕ n) → A
+  last-fin-sequence n v = v (zero-Fin n)
 
   tail-fin-sequence :
     (n : ℕ) → fin-sequence A (succ-ℕ n) → fin-sequence A n
   tail-fin-sequence n v = v ∘ (inl-Fin n)
+
+  init-fin-sequence :
+    (n : ℕ) → fin-sequence A (succ-ℕ n) → fin-sequence A n
+  init-fin-sequence n v = v ∘ skip-zero-Fin n
 
   cons-fin-sequence :
     (n : ℕ) → A → fin-sequence A n → fin-sequence A (succ-ℕ n)

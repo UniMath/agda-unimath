@@ -329,6 +329,11 @@ abstract
   reflects-leq-rational-ℕ :
     (x y : ℕ) → leq-ℚ (rational-ℕ x) (rational-ℕ y) → leq-ℕ x y
   reflects-leq-rational-ℕ x y = backward-implication (iff-leq-rational-ℕ x y)
+
+hom-poset-rational-ℕ : hom-Poset ℕ-Poset ℚ-Poset
+hom-poset-rational-ℕ =
+  ( rational-ℕ ,
+    λ _ _ → preserves-leq-rational-ℕ)
 ```
 
 ### `x ≤ y` if and only if `0 ≤ y - x`

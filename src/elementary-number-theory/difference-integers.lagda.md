@@ -8,7 +8,10 @@ module elementary-number-theory.difference-integers where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -178,4 +181,23 @@ abstract
     ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
     ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
     ( is-section-pred-ℤ (x -ℤ y))
+```
+
+### The difference of natural numbers embedded in the integers
+
+```agda
+abstract
+  diff-leq-int-ℕ :
+    (x y : ℕ) (y≤x : leq-ℕ y x) →
+    int-ℕ x -ℤ int-ℕ y ＝ int-ℕ (diff-leq-ℕ x y y≤x)
+  diff-leq-int-ℕ x zero-ℕ _ = right-unit-law-add-ℤ (int-ℕ x)
+  diff-leq-int-ℕ (succ-ℕ x) (succ-ℕ y) y≤x =
+    equational-reasoning
+      int-ℕ (succ-ℕ x) -ℤ int-ℕ (succ-ℕ y)
+      ＝ succ-ℤ (int-ℕ x) -ℤ succ-ℤ (int-ℕ y)
+        by inv (ap-diff-ℤ (succ-int-ℕ x) (succ-int-ℕ y))
+      ＝ int-ℕ x -ℤ int-ℕ y
+        by diff-succ-ℤ (int-ℕ x) (int-ℕ y)
+      ＝ int-ℕ (diff-leq-ℕ (succ-ℕ x) (succ-ℕ y) y≤x)
+        by diff-leq-int-ℕ x y y≤x
 ```

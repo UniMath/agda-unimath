@@ -36,6 +36,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.similarity-of-elements-large-posets
@@ -301,6 +302,11 @@ module _
 
     iff-leq-real-ℚ : leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
+
+hom-poset-real-ℚ : hom-Poset ℚ-Poset (ℝ-Poset lzero)
+hom-poset-real-ℚ =
+  ( real-ℚ ,
+    λ _ _ → preserves-leq-real-ℚ)
 ```
 
 ### The inclusion of the integers into the reals preserves and reflects inequality

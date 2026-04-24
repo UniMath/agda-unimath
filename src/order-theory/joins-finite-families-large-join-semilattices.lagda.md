@@ -32,6 +32,7 @@ open import lists.finite-sequences
 open import order-theory.joins-finite-families-join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 
 open import univalent-combinatorics.counting
@@ -242,4 +243,68 @@ module _
                 ( f)
                 ( z)))
           ( is-finite-I)
+```
+
+### The join of an empty finite sequence is the bottom element
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  abstract
+    join-empty-fin-sequence-type-Large-Join-Semilattice :
+      {l : Level} →
+      join-fin-sequence-type-Large-Join-Semilattice L 0 empty-fin-sequence ＝
+      bottom-Large-Join-Semilattice L l
+    join-empty-fin-sequence-type-Large-Join-Semilattice =
+      left-bottom-law-join-Large-Join-Semilattice L _
+```
+
+### The join of a single element is the single element
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  abstract
+    join-single-fin-sequence-type-Large-Join-Semilattice :
+      {l : Level} (u : fin-sequence (type-Large-Join-Semilattice L l) 1) →
+      join-fin-sequence-type-Large-Join-Semilattice L 1 u ＝
+      u (neg-one-Fin 0)
+    join-single-fin-sequence-type-Large-Join-Semilattice {l} =
+      compute-sum-one-element-Commutative-Monoid
+        ( commutative-monoid-Large-Join-Semilattice L l)
+```
+
+### The join of a constant nonempty finite sequence is the constant
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Join-Semilattice α β)
+  where
+
+  abstract
+    join-constant-fin-sequence-type-Large-Join-Semilattice :
+      {l : Level} (n : ℕ) (c : type-Large-Join-Semilattice L l) →
+      join-fin-sequence-type-Large-Join-Semilattice L (succ-ℕ n) (λ _ → c) ＝ c
+    join-constant-fin-sequence-type-Large-Join-Semilattice n c =
+      eq-sim-Large-Poset
+        ( large-poset-Large-Join-Semilattice L)
+        ( _)
+        ( _)
+        ( sim-is-least-upper-bound-family-of-elements-Large-Poset
+          ( large-poset-Large-Join-Semilattice L)
+          ( is-least-upper-bound-join-fin-sequence-type-Large-Join-Semilattice
+            ( L)
+            ( succ-ℕ n)
+            ( λ _ → c))
+          ( is-least-upper-bound-constant-inhabited-family-Large-Poset
+            ( large-poset-Large-Join-Semilattice L)
+            ( inhabited-type-Fin-succ-ℕ n)
+            ( c)))
 ```

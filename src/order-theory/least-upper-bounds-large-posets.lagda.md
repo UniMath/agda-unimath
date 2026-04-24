@@ -7,9 +7,12 @@ module order-theory.least-upper-bounds-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 
@@ -372,4 +375,25 @@ module _
     right-leq-left-least-upper-bound-Large-Poset x y y≤x =
       is-binary-least-upper-bound-swap-Large-Poset P y x x
         ( left-leq-right-least-upper-bound-Large-Poset y x y≤x)
+```
+
+### The least upper bound of a nonempty constant family is the constant
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  where
+
+  abstract
+    is-least-upper-bound-constant-inhabited-family-Large-Poset :
+      {l1 l2 : Level} (X : Inhabited-Type l1) (c : type-Large-Poset P l2) →
+      is-least-upper-bound-family-of-elements-Large-Poset
+        ( P)
+        ( const (type-Inhabited-Type X) c)
+        ( c)
+    is-least-upper-bound-constant-inhabited-family-Large-Poset (X , |X|) c d =
+      ( ( λ cx≤d →
+          rec-trunc-Prop (leq-prop-Large-Poset P c d) cx≤d |X|) ,
+        ( λ d≤c _ → d≤c))
 ```
