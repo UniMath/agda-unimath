@@ -39,7 +39,7 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers
 
 To prove that a [series](functional-analysis.series-real-banach-spaces.md)
 `∑ aₙ` in a [real Banach space](functional-analysis.real-banach-spaces.md)
-[converges](analysis.series-real-numbers.md), it is sufficient to show that
+[converges](real-analysis.series-real-numbers.md), it is sufficient to show that
 [there exists](foundation.existential-quantification.md) a
 [nonnegative](real-numbers.nonnegative-real-numbers.md) real number `r`
 [less than](real-numbers.strict-inequality-real-numbers.md) 1 such that for all
