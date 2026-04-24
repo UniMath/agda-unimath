@@ -24,6 +24,8 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.function-commutative-monoids
+open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
 open import group-theory.sums-of-finite-sequences-of-elements-monoids
@@ -267,6 +269,48 @@ abstract
     power-Commutative-Monoid M n x
   sum-constant-fin-sequence-type-Commutative-Monoid M =
     sum-constant-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
+```
+
+### Interchanging sums and monoid multiplication
+
+```agda
+module _
+  {l : Level}
+  (M : Commutative-Monoid l)
+  where
+
+  abstract
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid :
+      (n : ℕ) (f g : fin-sequence-type-Commutative-Monoid M n) →
+      sum-fin-sequence-type-Commutative-Monoid M n
+        ( λ i → mul-Commutative-Monoid M (f i) (g i)) ＝
+      mul-Commutative-Monoid M
+        ( sum-fin-sequence-type-Commutative-Monoid M n f)
+        ( sum-fin-sequence-type-Commutative-Monoid M n g)
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid 0 _ _ =
+      inv (right-unit-law-mul-Commutative-Monoid M _)
+    interchange-sum-mul-fin-sequence-type-Commutative-Monoid (succ-ℕ n) f g =
+      ( ap-mul-Commutative-Monoid M
+        ( interchange-sum-mul-fin-sequence-type-Commutative-Monoid
+          ( n)
+          ( f ∘ inl-Fin n)
+          ( g ∘ inl-Fin n))
+        ( refl)) ∙
+      ( interchange-mul-mul-Commutative-Monoid M _ _ _ _)
+```
+
+### The sum operation is a commutative monoid homomorphism
+
+```agda
+hom-sum-fin-sequence-type-Commutative-Monoid :
+  {l : Level} (M : Commutative-Monoid l) (n : ℕ) →
+  hom-Commutative-Monoid
+    ( function-Commutative-Monoid M (Fin n))
+    ( M)
+hom-sum-fin-sequence-type-Commutative-Monoid M n =
+  ( ( ( sum-fin-sequence-type-Commutative-Monoid M n) ,
+        interchange-sum-mul-fin-sequence-type-Commutative-Monoid M n _ _) ,
+    sum-zero-fin-sequence-type-Commutative-Monoid M n)
 ```
 
 ## See also

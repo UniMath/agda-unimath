@@ -25,6 +25,8 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
+open import group-theory.function-abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
@@ -32,6 +34,9 @@ open import group-theory.sums-of-finite-sequences-of-elements-groups
 
 open import linear-algebra.finite-sequences-in-abelian-groups
 open import linear-algebra.finite-sequences-in-commutative-monoids
+
+open import lists.pairs-of-successive-elements-finite-sequences
+open import lists.finite-sequences
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
@@ -146,7 +151,7 @@ module _
     extend-sum-fin-sequence-type-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
-### Shifting a sum of elements in a monoid
+### Shifting a sum of elements in an abelian group
 
 ```agda
 module _
@@ -205,8 +210,7 @@ module _
 
   abstract
     preserves-sum-permutation-fin-sequence-type-Ab :
-      (n : ℕ) → (σ : Permutation n) →
-      (f : fin-sequence-type-Ab G n) →
+      (n : ℕ) (σ : Permutation n) (f : fin-sequence-type-Ab G n) →
       sum-fin-sequence-type-Ab G n f ＝
       sum-fin-sequence-type-Ab G n (f ∘ map-equiv σ)
     preserves-sum-permutation-fin-sequence-type-Ab =
@@ -223,6 +227,120 @@ abstract
     sum-fin-sequence-type-Ab G n (λ _ → x) ＝ multiple-Ab G n x
   sum-constant-fin-sequence-type-Ab G =
     sum-constant-fin-sequence-type-Group (group-Ab G)
+```
+
+### Interchanging sums and addition
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  abstract
+    interchange-sum-add-fin-sequence-type-Ab :
+      (n : ℕ) (f g : fin-sequence-type-Ab G n) →
+      sum-fin-sequence-type-Ab G n (λ i → add-Ab G (f i) (g i)) ＝
+      add-Ab G (sum-fin-sequence-type-Ab G n f) (sum-fin-sequence-type-Ab G n g)
+    interchange-sum-add-fin-sequence-type-Ab =
+      interchange-sum-mul-fin-sequence-type-Commutative-Monoid
+        ( commutative-monoid-Ab G)
+```
+
+### The sum operation is an abelian group homomorphism
+
+```agda
+hom-sum-fin-sequence-type-Ab :
+  {l : Level} (G : Ab l) (n : ℕ) →
+  hom-Ab (function-Ab G (Fin n)) G
+hom-sum-fin-sequence-type-Ab G n =
+  ( sum-fin-sequence-type-Ab G n ,
+    interchange-sum-add-fin-sequence-type-Ab G n _ _)
+```
+
+### Negation distributes over sums
+
+```agda
+abstract
+  distributive-neg-sum-fin-sequence-type-Ab :
+    {l : Level} (G : Ab l) (n : ℕ) (u : fin-sequence-type-Ab G n) →
+    neg-Ab G (sum-fin-sequence-type-Ab G n u) ＝
+    sum-fin-sequence-type-Ab G n (neg-Ab G ∘ u)
+  distributive-neg-sum-fin-sequence-type-Ab G n u =
+    inv
+      ( preserves-negatives-hom-Ab
+        ( function-Ab G (Fin n))
+        ( G)
+        ( hom-sum-fin-sequence-type-Ab G n))
+```
+
+### Interchanging sums and subtraction
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  abstract
+    interchange-sum-right-subtraction-fin-sequence-type-Ab :
+      (n : ℕ) (f g : fin-sequence-type-Ab G n) →
+      sum-fin-sequence-type-Ab G n (λ i → right-subtraction-Ab G (f i) (g i)) ＝
+      right-subtraction-Ab G
+        ( sum-fin-sequence-type-Ab G n f)
+        ( sum-fin-sequence-type-Ab G n g)
+    interchange-sum-right-subtraction-fin-sequence-type-Ab n f g =
+      ( interchange-sum-add-fin-sequence-type-Ab G n f (neg-Ab G ∘ g)) ∙
+      ( ap-add-Ab G
+        ( refl)
+        ( inv (distributive-neg-sum-fin-sequence-type-Ab G n g)))
+```
+
+### Telescoping sums
+
+A telescoping sum is a sum of the form `∑ aₙ₊₁ - aₙ` or `∑ aₙ - aₙ₊₁`.
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  telescope-fin-sequence-type-Ab :
+    (n : ℕ) → fin-sequence-type-Ab G (succ-ℕ n) → fin-sequence-type-Ab G n
+  telescope-fin-sequence-type-Ab n u =
+    ind-Σ (right-subtraction-Ab G) ∘ pair-succ-fin-sequence n u
+
+  telescope-fin-sequence-type-Ab' :
+    (n : ℕ) → fin-sequence-type-Ab G (succ-ℕ n) → fin-sequence-type-Ab G n
+  telescope-fin-sequence-type-Ab' n u =
+    ind-Σ (right-subtraction-Ab' G) ∘ pair-succ-fin-sequence n u
+
+  abstract
+    sum-telescope-fin-sequence-type-Ab :
+      (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
+      sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab n u) ＝
+      right-subtraction-Ab G (head-fin-sequence n u) (last-fin-sequence n u)
+    sum-telescope-fin-sequence-type-Ab 0 u =
+      inv (right-inverse-law-add-Ab G (head-fin-sequence 0 u))
+    sum-telescope-fin-sequence-type-Ab (succ-ℕ n) u =
+      ( ap-add-Ab G
+        ( sum-telescope-fin-sequence-type-Ab n (tail-fin-sequence (succ-ℕ n) u))
+        ( refl)) ∙
+      ( commutative-add-Ab G _ _) ∙
+      ( add-right-subtraction-Ab G _ _ _)
+
+    sum-telescope-fin-sequence-type-Ab' :
+      (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
+      sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab' n u) ＝
+      right-subtraction-Ab G (last-fin-sequence n u) (head-fin-sequence n u)
+    sum-telescope-fin-sequence-type-Ab' n u =
+      ( htpy-sum-fin-sequence-type-Ab G
+        ( n)
+        ( λ i → inv (neg-right-subtraction-Ab G _ _))) ∙
+      ( inv (distributive-neg-sum-fin-sequence-type-Ab G n _)) ∙
+      ( ap (neg-Ab G) (sum-telescope-fin-sequence-type-Ab n u)) ∙
+      ( neg-right-subtraction-Ab G _ _)
 ```
 
 ## See also
