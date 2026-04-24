@@ -621,7 +621,7 @@ module _
 
 ## See also
 
-- [The constructive intermediate value theorem](analysis.constructive-intermediate-value-theorem.md)
+- [The constructive intermediate value theorem](real-analysis.constructive-intermediate-value-theorem.md)
 
 ## External links
 

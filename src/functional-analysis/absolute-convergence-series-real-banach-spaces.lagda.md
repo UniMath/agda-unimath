@@ -195,7 +195,7 @@ module _
 
 ## See also
 
-- [Absolute convergence of series of real numbers](analysis.absolute-convergence-series-real-numbers.md)
+- [Absolute convergence of series of real numbers](real-analysis.absolute-convergence-series-real-numbers.md)
 
 ## External links
 
