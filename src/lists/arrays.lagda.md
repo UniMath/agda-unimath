@@ -70,19 +70,6 @@ module _
   is-empty-array : array A → UU lzero
   is-empty-array = type-Prop ∘ is-empty-array-Prop
 
-  is-nonempty-array-Prop : array A → Prop lzero
-  is-nonempty-array-Prop (zero-ℕ , t) = empty-Prop
-  is-nonempty-array-Prop (succ-ℕ n , t) = unit-Prop
-
-  is-nonempty-array : array A → UU lzero
-  is-nonempty-array = type-Prop ∘ is-nonempty-array-Prop
-
-  head-array : (t : array A) → is-nonempty-array t → A
-  head-array (succ-ℕ n , f) _ = f (inr star)
-
-  tail-array : (t : array A) → is-nonempty-array t → array A
-  tail-array (succ-ℕ n , f) _ = n , f ∘ inl
-
   cons-array : A → array A → array A
   cons-array a t =
     ( succ-ℕ (length-array t) ,

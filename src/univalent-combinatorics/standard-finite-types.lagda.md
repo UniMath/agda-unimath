@@ -535,6 +535,16 @@ is-inhabited-or-empty-Fin n =
   is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
 ```
 
+### `nat-Fin-reverse (succ-ℕ n)` maps `zero-Fin n` to `n`
+
+```agda
+abstract
+  nat-reverse-zero-Fin :
+    (n : ℕ) → nat-Fin-reverse (succ-ℕ n) (zero-Fin n) ＝ n
+  nat-reverse-zero-Fin zero-ℕ = refl
+  nat-reverse-zero-Fin (succ-ℕ n) = ap succ-ℕ (nat-reverse-zero-Fin n)
+```
+
 ## See also
 
 - [Classical finite types](univalent-combinatorics.classical-finite-types.md),
