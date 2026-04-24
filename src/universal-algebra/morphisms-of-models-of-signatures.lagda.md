@@ -7,13 +7,17 @@ module universal-algebra.morphisms-of-models-of-signatures where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -22,11 +26,13 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
+open import lists.finite-sequences
 open import lists.functoriality-tuples
 open import lists.tuples
 
 open import universal-algebra.models-of-signatures
 open import universal-algebra.signatures
+open import universal-algebra.terms-over-signatures
 ```
 
 </details>
@@ -171,4 +177,49 @@ module _
     htpy-hom-Model-Of-Signature f g → f ＝ g
   eq-htpy-hom-Model-Of-Signature f g =
     map-inv-equiv (extensionality-hom-Model-Of-Signature f g)
+```
+
+### Morphisms of models of signatures preserve the evaluation of terms
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (σ : signature l1)
+  (A : Model-Of-Signature l2 σ)
+  (B : Model-Of-Signature l3 σ)
+  (φ : hom-Model-Of-Signature σ A B)
+  where
+
+  abstract
+    eval-term-hom-Model-Of-Signature :
+      {k : ℕ} →
+      (t : term σ k) (v : fin-sequence (type-Model-Of-Signature σ A) k) →
+      map-hom-Model-Of-Signature σ A B φ
+        ( eval-term-Model-Of-Signature σ A t v) ＝
+      eval-term-Model-Of-Signature σ B t
+        ( map-hom-Model-Of-Signature σ A B φ ∘ v)
+
+    eval-tuple-term-hom-Model-Of-Signature :
+      {k n : ℕ}
+      (t : tuple (term σ k) n)
+      (v : fin-sequence (type-Model-Of-Signature σ A) k) →
+      Eq-tuple
+        ( n)
+        ( map-tuple
+          ( map-hom-Model-Of-Signature σ A B φ)
+          ( eval-tuple-term-Model-Of-Signature σ A t v))
+        ( eval-tuple-term-Model-Of-Signature σ B t
+          ( map-hom-Model-Of-Signature σ A B φ ∘ v))
+
+    eval-term-hom-Model-Of-Signature (var-term i) v = refl
+    eval-term-hom-Model-Of-Signature (op-term op ts) v =
+      ( preserves-operations-hom-Model-Of-Signature σ A B φ op _) ∙
+      ( ap
+        ( is-model-set-Model-Of-Signature σ B op)
+        ( eq-Eq-tuple _ _ _ (eval-tuple-term-hom-Model-Of-Signature ts v)))
+
+    eval-tuple-term-hom-Model-Of-Signature empty-tuple v = map-raise star
+    eval-tuple-term-hom-Model-Of-Signature (t ∷ ts) v =
+      ( eval-term-hom-Model-Of-Signature t v ,
+        eval-tuple-term-hom-Model-Of-Signature ts v)
 ```

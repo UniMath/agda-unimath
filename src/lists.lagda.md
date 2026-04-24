@@ -36,6 +36,7 @@ open import lists.sorted-tuples public
 open import lists.sorting-algorithms-lists public
 open import lists.sorting-algorithms-tuples public
 open import lists.subsequences public
+open import lists.subtypes-tuples public
 open import lists.tuples public
 open import lists.universal-property-lists-wild-monoids public
 ```
