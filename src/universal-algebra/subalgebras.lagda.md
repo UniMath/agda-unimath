@@ -32,7 +32,7 @@ open import universal-algebra.terms-over-signatures
 
 ## Idea
 
-A [subset](universal-algebra.subsets-algebras.md) of an
+A [subset](foundation.subtypes.md) of an
 [algebra](universal-algebra.algebras.md) that is closed under the
 [algebraic operations](universal-algebra.signatures.md) is called a
 {{#concept "subalgebra" Disambiguation="of an algebra of an algebraic theory" Agda=Subalgebra}},
