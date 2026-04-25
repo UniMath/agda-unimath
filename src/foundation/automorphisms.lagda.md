@@ -8,9 +8,9 @@ module foundation.automorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.sets
 
 open import structured-types.pointed-types
@@ -41,4 +41,14 @@ pr2 (Aut-Set A) = is-set-Aut (is-set-type-Set A)
 Aut-Pointed-Type : {l : Level} → UU l → Pointed-Type l
 pr1 (Aut-Pointed-Type A) = Aut A
 pr2 (Aut-Pointed-Type A) = id-equiv
+```
+
+### If `X ≃ Y`, then `Aut X ≃ Aut Y`
+
+```agda
+equiv-aut-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y → Aut X ≃ Aut Y
+equiv-aut-equiv {X = X} {Y = Y} X≃Y =
+  ( equiv-postcomp-equiv X≃Y Y) ∘e
+  ( equiv-precomp-equiv (inv-equiv X≃Y) X)
 ```
