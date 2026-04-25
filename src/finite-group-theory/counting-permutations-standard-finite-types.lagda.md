@@ -23,6 +23,7 @@ open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-types
@@ -56,20 +57,6 @@ with `n` [factorial](elementary-number-theory.factorials.md) elements.
 ### `Permutation (n + 1) ≃ Fin (n + 1) × Permutation n`
 
 ```agda
-ap-lemma :
-  {l1 l2 l3 : Level}
-  {A : UU l1}
-  {B : A → UU l2}
-  {C : UU l3}
-  {x y : A}
-  (f : (a : A) → B a → C)
-  (p : x ＝ y) →
-  (bx : B x)
-  (by : B y) →
-  dependent-identification B p bx by →
-  f x bx ＝ f y by
-ap-lemma f refl bx .bx refl = refl
-
 module _
   (n : ℕ)
   where
@@ -167,28 +154,27 @@ module _
         ( left-cancel-head-Permutation (map-inv-equiv-succ-Permutation (k , σ)))
         ( σ)
     pr2-is-section-map-inv-equiv-succ-Permutation' k σ i =
-      ap-lemma
-        ( left-is-left)
-        ( ( ap
-            ( λ j →
-              map-swap-permutation-Fin
-                ( succ-ℕ n)
-                ( inr star)
-                ( j)
-                ( map-swap-permutation-Fin
+      ap
+        ( ind-Σ left-is-left)
+        ( eq-pair-Σ
+          ( ( ap
+              ( λ j →
+                map-swap-permutation-Fin
                   ( succ-ℕ n)
                   ( inr star)
-                  ( k)
-                  ( inl (map-equiv σ i))))
-            ( map-swap-left-permutation-Fin (succ-ℕ n) (inr star) k)) ∙
-          ( is-involution-map-swap-permutation-Fin
-                ( succ-ℕ n)
-                ( inr star)
-                ( k)
-                ( inl (map-equiv σ i))))
-        ( _)
-        ( star)
-        ( eq-is-prop (is-prop-is-left {Y = unit} (inl (map-equiv σ i))))
+                  ( j)
+                  ( map-swap-permutation-Fin
+                    ( succ-ℕ n)
+                    ( inr star)
+                    ( k)
+                    ( inl (map-equiv σ i))))
+                ( map-swap-left-permutation-Fin (succ-ℕ n) (inr star) k)) ∙
+            ( is-involution-map-swap-permutation-Fin
+              ( succ-ℕ n)
+              ( inr star)
+              ( k)
+              ( inl (map-equiv σ i))))
+          ( eq-is-prop (is-prop-is-left {Y = unit} (inl (map-equiv σ i)))))
 
     is-section-map-inv-equiv-succ-Permutation :
       (x : Fin (succ-ℕ n) × Permutation n) →
