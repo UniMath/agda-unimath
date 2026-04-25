@@ -35,8 +35,8 @@ open import group-theory.sums-of-finite-sequences-of-elements-groups
 open import linear-algebra.finite-sequences-in-abelian-groups
 open import linear-algebra.finite-sequences-in-commutative-monoids
 
-open import lists.pairs-of-successive-elements-finite-sequences
 open import lists.finite-sequences
+open import lists.pairs-of-successive-elements-finite-sequences
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
