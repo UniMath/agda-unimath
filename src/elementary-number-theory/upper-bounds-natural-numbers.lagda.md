@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -33,8 +34,9 @@ open import foundation.universe-levels
 
 Consider a type family $P$ over the
 [natural numbers](elementary-number-theory.natural-numbers.md). A
-{{#concept "structured natural number"}} is simply a natural number $n$ equipped
-with an element $P(n)$. In this file we consider various upper bounds for
+{{#concept "structured natural number"}} is a natural number $n$ equipped
+with an element of type $P(n)$.
+In this file we consider various upper bounds for
 structured natural numbers, and relations between them. This file builds the
 prerequisite infrastructure for the
 [well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md)
@@ -278,7 +280,7 @@ is-nonempty-structure-is-in-family-is-least-upper-bound-ℕ P n H m p f =
 
 ```agda
 structure-least-upper-bound-is-decidable-fam-ℕ :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   (n : ℕ) → is-least-upper-bound-ℕ P n → (m : ℕ) → P m → P n
 structure-least-upper-bound-is-decidable-fam-ℕ P d n H m p =
   double-negation-elim-is-decidable
@@ -321,7 +323,7 @@ for any natural number `b`.
 
 ```agda
 is-decidable-is-upper-bound-ℕ' :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   (b : ℕ) → is-upper-bound-ℕ P b → is-decidable (P b) →
   (n : ℕ) → is-decidable (is-upper-bound-ℕ P n)
 is-decidable-is-upper-bound-ℕ' P d zero-ℕ H e n =
@@ -336,7 +338,7 @@ is-decidable-is-upper-bound-ℕ' P d (succ-ℕ b) H (inr f) =
     ( d b)
 
 is-decidable-is-upper-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   (b : ℕ) → is-upper-bound-ℕ P b →
   (n : ℕ) → is-decidable (is-upper-bound-ℕ P n)
 is-decidable-is-upper-bound-ℕ P d b H =

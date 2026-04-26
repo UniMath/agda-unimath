@@ -13,6 +13,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unital-binary-operations
@@ -132,12 +133,12 @@ module _
     is-unital (minkowski-mul-Monoid {l} {l} {l} M)
   pr1 is-unital-minkowski-mul-Monoid = is-unit-Monoid-Prop M
   pr1 (pr2 is-unital-minkowski-mul-Monoid) A =
-    antisymmetric-sim-subtype
+    eq-sim-subtype
       ( minkowski-mul-Monoid M (is-unit-Monoid-Prop M) A)
       ( A)
       ( left-unit-law-minkowski-mul-Monoid M A)
   pr2 (pr2 is-unital-minkowski-mul-Monoid) A =
-    antisymmetric-sim-subtype
+    eq-sim-subtype
       ( minkowski-mul-Monoid M A (is-unit-Monoid-Prop M))
       ( A)
       ( right-unit-law-minkowski-mul-Monoid M A)
@@ -178,15 +179,15 @@ module _
   (A' : subset-Monoid l4 M)
   where
 
-  preserves-leq-left-minkowski-mul-Monoid :
+  preserves-order-left-minkowski-mul-Monoid :
     A ⊆ A' → minkowski-mul-Monoid M A B ⊆ minkowski-mul-Monoid M A' B
-  preserves-leq-left-minkowski-mul-Monoid =
-    preserves-leq-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+  preserves-order-left-minkowski-mul-Monoid =
+    preserves-order-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 
-  preserves-leq-right-minkowski-mul-Monoid :
+  preserves-order-right-minkowski-mul-Monoid :
     A ⊆ A' → minkowski-mul-Monoid M B A ⊆ minkowski-mul-Monoid M B A'
-  preserves-leq-right-minkowski-mul-Monoid =
-    preserves-leq-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+  preserves-order-right-minkowski-mul-Monoid =
+    preserves-order-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 ```
 
 ### Similarity of subsets is preserved by Minkowski multiplication

@@ -27,8 +27,12 @@ open import trees.fibers-directed-trees
 
 ## Idea
 
-The **fiber** of an enriched directed tree at a node `x` is the fiber of the
-underlying directed tree at `x` equipped with the inherited enriched structure.
+The
+{{#concept "fiber" Disambiguation="of an enriched directed tree" Agda=fiber-Enriched-Directed-Tree}}
+of an [enriched directed tree](trees.enriched-directed-trees.md) at a node `x`
+is the [fiber](trees.fibers-directed-trees.md) of the underlying
+[directed tree](trees.directed-trees.md) at `x` equipped with the inherited
+enriched structure.
 
 ## Definition
 

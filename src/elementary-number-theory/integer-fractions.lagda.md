@@ -7,6 +7,7 @@ module elementary-number-theory.integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
@@ -18,6 +19,7 @@ open import elementary-number-theory.positive-integers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.identity-types
@@ -79,6 +81,13 @@ pr1 (in-fraction-ℤ x) = x
 pr2 (in-fraction-ℤ x) = one-positive-ℤ
 ```
 
+### Inclusion of the natural numbers
+
+```agda
+int-fraction-ℕ : ℕ → fraction-ℤ
+int-fraction-ℕ n = in-fraction-ℤ (int-ℕ n)
+```
+
 ### Negative one, zero and one
 
 ```agda
@@ -113,6 +122,14 @@ neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
 
 ## Properties
 
+### The double negation of an integer fraction is the original fraction
+
+```agda
+abstract
+  neg-neg-fraction-ℤ : (x : fraction-ℤ) → neg-fraction-ℤ (neg-fraction-ℤ x) ＝ x
+  neg-neg-fraction-ℤ (n , d) = ap (_, d) (neg-neg-ℤ n)
+```
+
 ### Denominators are nonzero
 
 ```agda
@@ -131,7 +148,20 @@ abstract
   is-set-fraction-ℤ = is-set-Σ is-set-ℤ (λ _ → is-set-positive-ℤ)
 
 fraction-ℤ-Set : Set lzero
-fraction-ℤ-Set = fraction-ℤ , is-set-fraction-ℤ
+fraction-ℤ-Set = (fraction-ℤ , is-set-fraction-ℤ)
+```
+
+### Integer fractions have decidable equality
+
+```agda
+has-decidable-equality-fraction-ℤ :
+  has-decidable-equality fraction-ℤ
+has-decidable-equality-fraction-ℤ =
+  has-decidable-equality-product
+    ( has-decidable-equality-ℤ)
+    ( has-decidable-equality-Σ
+        ( has-decidable-equality-ℤ)
+        ( λ x → has-decidable-equality-is-prop (is-prop-is-positive-ℤ x)))
 ```
 
 ### The standard equivalence relation on integer fractions

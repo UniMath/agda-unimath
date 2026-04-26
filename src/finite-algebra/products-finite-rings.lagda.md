@@ -29,8 +29,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Given two finite rings R1 and R2, we define a ring structure on the product of
-R1 and R2.
+Given two [finite rings](finite-algebra.finite-rings.md) `R1` and `R2`, then the
+{{#concept "product" Disambiguation="of finite rings" Agda=product-Finite-Ring}}
+finite ring `R1 × R2` is defined componentwise.
 
 ## Definition
 
@@ -78,21 +79,20 @@ module _
 
   left-unit-law-add-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id (add-product-Finite-Ring zero-product-Finite-Ring x) x
+    add-product-Finite-Ring zero-product-Finite-Ring x ＝ x
   left-unit-law-add-product-Finite-Ring =
     left-unit-law-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   right-unit-law-add-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id (add-product-Finite-Ring x zero-product-Finite-Ring) x
+    add-product-Finite-Ring x zero-product-Finite-Ring ＝ x
   right-unit-law-add-product-Finite-Ring =
     right-unit-law-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   left-inverse-law-add-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id
-      ( add-product-Finite-Ring (neg-product-Finite-Ring x) x)
-      ( zero-product-Finite-Ring)
+    add-product-Finite-Ring (neg-product-Finite-Ring x) x ＝
+    zero-product-Finite-Ring
   left-inverse-law-add-product-Finite-Ring =
     left-inverse-law-add-product-Ring
       ( ring-Finite-Ring R1)
@@ -100,9 +100,8 @@ module _
 
   right-inverse-law-add-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id
-      ( add-product-Finite-Ring x (neg-product-Finite-Ring x))
-      ( zero-product-Finite-Ring)
+    add-product-Finite-Ring x (neg-product-Finite-Ring x) ＝
+    zero-product-Finite-Ring
   right-inverse-law-add-product-Finite-Ring =
     right-inverse-law-add-product-Ring
       ( ring-Finite-Ring R1)
@@ -110,15 +109,14 @@ module _
 
   associative-add-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    Id
-      ( add-product-Finite-Ring (add-product-Finite-Ring x y) z)
-      ( add-product-Finite-Ring x (add-product-Finite-Ring y z))
+    add-product-Finite-Ring (add-product-Finite-Ring x y) z ＝
+    add-product-Finite-Ring x (add-product-Finite-Ring y z)
   associative-add-product-Finite-Ring =
     associative-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   commutative-add-product-Finite-Ring :
     (x y : type-product-Finite-Ring) →
-    Id (add-product-Finite-Ring x y) (add-product-Finite-Ring y x)
+    add-product-Finite-Ring x y ＝ add-product-Finite-Ring y x
   commutative-add-product-Finite-Ring =
     commutative-add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
@@ -135,31 +133,29 @@ module _
 
   associative-mul-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    Id
-      ( mul-product-Finite-Ring (mul-product-Finite-Ring x y) z)
-      ( mul-product-Finite-Ring x (mul-product-Finite-Ring y z))
+    mul-product-Finite-Ring (mul-product-Finite-Ring x y) z ＝
+    mul-product-Finite-Ring x (mul-product-Finite-Ring y z)
   associative-mul-product-Finite-Ring =
     associative-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   left-unit-law-mul-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id (mul-product-Finite-Ring one-product-Finite-Ring x) x
+    mul-product-Finite-Ring one-product-Finite-Ring x ＝ x
   left-unit-law-mul-product-Finite-Ring =
     left-unit-law-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   right-unit-law-mul-product-Finite-Ring :
     (x : type-product-Finite-Ring) →
-    Id (mul-product-Finite-Ring x one-product-Finite-Ring) x
+    mul-product-Finite-Ring x one-product-Finite-Ring ＝ x
   right-unit-law-mul-product-Finite-Ring =
     right-unit-law-mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   left-distributive-mul-add-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    Id
-      ( mul-product-Finite-Ring x (add-product-Finite-Ring y z))
-      ( add-product-Finite-Ring
-        ( mul-product-Finite-Ring x y)
-        ( mul-product-Finite-Ring x z))
+    mul-product-Finite-Ring x (add-product-Finite-Ring y z) ＝
+    add-product-Finite-Ring
+      ( mul-product-Finite-Ring x y)
+      ( mul-product-Finite-Ring x z)
   left-distributive-mul-add-product-Finite-Ring =
     left-distributive-mul-add-product-Ring
       ( ring-Finite-Ring R1)
@@ -167,11 +163,10 @@ module _
 
   right-distributive-mul-add-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
-    Id
-      ( mul-product-Finite-Ring (add-product-Finite-Ring x y) z)
-      ( add-product-Finite-Ring
-        ( mul-product-Finite-Ring x z)
-        ( mul-product-Finite-Ring y z))
+    mul-product-Finite-Ring (add-product-Finite-Ring x y) z ＝
+    add-product-Finite-Ring
+      ( mul-product-Finite-Ring x z)
+      ( mul-product-Finite-Ring y z)
   right-distributive-mul-add-product-Finite-Ring =
     right-distributive-mul-add-product-Ring
       ( ring-Finite-Ring R1)

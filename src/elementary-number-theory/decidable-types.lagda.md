@@ -14,6 +14,7 @@ open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -35,10 +36,11 @@ decidable.
 
 ```agda
 is-decidable-Σ-ℕ :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) → is-decidable-fam P →
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-family P) →
   is-decidable (Σ ℕ (λ x → m ≤-ℕ x × P x)) → is-decidable (Σ ℕ P)
 is-decidable-Σ-ℕ m P d (inl (x , l , p)) =
   inl (x , p)
+
 is-decidable-Σ-ℕ zero-ℕ P d (inr f) =
   inr (λ p → f (pr1 p , star , pr2 p))
 is-decidable-Σ-ℕ (succ-ℕ m) P d (inr f)
@@ -63,7 +65,7 @@ is-decidable-Σ-ℕ (succ-ℕ m) P d (inr f)
 ```agda
 is-decidable-bounded-Σ-ℕ :
   {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2) →
-  is-decidable-fam P → is-decidable-fam Q →
+  (dP : is-decidable-family P) (dQ : is-decidable-family Q) →
   is-upper-bound-ℕ P m → is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
 is-decidable-bounded-Σ-ℕ m P Q dP dQ H =
   is-decidable-Σ-ℕ
@@ -79,8 +81,8 @@ is-decidable-bounded-Σ-ℕ m P Q dP dQ H =
           ( pr1 (pr2 p))))
 
 is-decidable-bounded-Σ-ℕ' :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) →
-  is-decidable-fam P → is-decidable (Σ ℕ (λ x → x ≤-ℕ m × P x))
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-family P) →
+  is-decidable (Σ ℕ (λ x → x ≤-ℕ m × P x))
 is-decidable-bounded-Σ-ℕ' m P d =
   is-decidable-bounded-Σ-ℕ m
     ( λ x → x ≤-ℕ m)
@@ -95,15 +97,16 @@ is-decidable-bounded-Σ-ℕ' m P d =
 ```agda
 is-decidable-strictly-bounded-Σ-ℕ :
   {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2) →
-  is-decidable-fam P → is-decidable-fam Q → is-strict-upper-bound-ℕ P m →
+  (dP : is-decidable-family P) (dQ : is-decidable-family Q) →
+  is-strict-upper-bound-ℕ P m →
   is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
 is-decidable-strictly-bounded-Σ-ℕ m P Q dP dQ H =
   is-decidable-bounded-Σ-ℕ m P Q dP dQ
     ( is-upper-bound-is-strict-upper-bound-ℕ P m H)
 
 is-decidable-strictly-bounded-Σ-ℕ' :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) →
-  is-decidable-fam P → is-decidable (Σ ℕ (λ x → x <-ℕ m × P x))
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-family P) →
+  is-decidable (Σ ℕ (λ x → x <-ℕ m × P x))
 is-decidable-strictly-bounded-Σ-ℕ' m P d =
   is-decidable-strictly-bounded-Σ-ℕ m
     ( λ x → x <-ℕ m)
@@ -117,9 +120,8 @@ is-decidable-strictly-bounded-Σ-ℕ' m P d =
 
 ```agda
 is-decidable-Π-ℕ :
-  {l : Level} (P : ℕ → UU l) →
-  is-decidable-fam P → (m : ℕ) → is-decidable ((x : ℕ) → m ≤-ℕ x → P x) →
-  is-decidable ((x : ℕ) → P x)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) (m : ℕ) →
+  is-decidable ((x : ℕ) → m ≤-ℕ x → P x) → is-decidable ((x : ℕ) → P x)
 is-decidable-Π-ℕ P d zero-ℕ (inr nH) = inr (λ f → nH (λ x y → f x))
 is-decidable-Π-ℕ P d zero-ℕ (inl H) = inl (λ x → H x (leq-zero-ℕ x))
 is-decidable-Π-ℕ P d (succ-ℕ m) (inr nH) = inr (λ f → nH (λ x y → f x))
@@ -140,7 +142,7 @@ is-decidable-Π-ℕ P d (succ-ℕ m) (inl H) with d zero-ℕ
 ```agda
 is-decidable-bounded-Π-ℕ :
   {l1 l2 : Level} (P : ℕ → UU l1) (Q : ℕ → UU l2) →
-  is-decidable-fam P → is-decidable-fam Q →
+  (dP : is-decidable-family P) (dQ : is-decidable-family Q) →
   (m : ℕ) → is-upper-bound-ℕ P m →
   is-decidable ((x : ℕ) → P x → Q x)
 is-decidable-bounded-Π-ℕ P Q dP dQ m H =
@@ -151,8 +153,8 @@ is-decidable-bounded-Π-ℕ P Q dP dQ m H =
     ( inl (λ x l p → ex-falso (contradiction-leq-ℕ x m (H x p) l)))
 
 is-decidable-bounded-Π-ℕ' :
-  {l : Level} (P : ℕ → UU l) →
-  is-decidable-fam P → (m : ℕ) → is-decidable ((x : ℕ) → x ≤-ℕ m → P x)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
+  (m : ℕ) → is-decidable ((x : ℕ) → x ≤-ℕ m → P x)
 is-decidable-bounded-Π-ℕ' P d m =
   is-decidable-bounded-Π-ℕ
     ( λ x → x ≤-ℕ m)
@@ -168,14 +170,14 @@ is-decidable-bounded-Π-ℕ' P d m =
 ```agda
 is-decidable-strictly-bounded-Π-ℕ :
   {l1 l2 : Level} (P : ℕ → UU l1) (Q : ℕ → UU l2) →
-  is-decidable-fam P → is-decidable-fam Q →
+  (dP : is-decidable-family P) (dQ : is-decidable-family Q) →
   (m : ℕ) → is-strict-upper-bound-ℕ P m →
   is-decidable ((x : ℕ) → P x → Q x)
 is-decidable-strictly-bounded-Π-ℕ P Q dP dQ m H =
   is-decidable-bounded-Π-ℕ P Q dP dQ m (λ x p → leq-le-ℕ x m (H x p))
 
 is-decidable-strictly-bounded-Π-ℕ' :
-  {l : Level} (P : ℕ → UU l) → is-decidable-fam P →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   (m : ℕ) → is-decidable ((x : ℕ) → x <-ℕ m → P x)
 is-decidable-strictly-bounded-Π-ℕ' P d m =
   is-decidable-strictly-bounded-Π-ℕ

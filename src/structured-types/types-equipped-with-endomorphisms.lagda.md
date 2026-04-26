@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type equipped with an endomorphism consists of a type `A` equipped with a map
-`A → A`.
+A {{#concept "type equipped with an endomorphism" Agda=Type-With-Endomorphism}}
+consists of a type `A` [equipped](foundation.structure.md) with a map `A → A`.
 
 ## Definitions
 

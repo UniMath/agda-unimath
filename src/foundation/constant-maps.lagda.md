@@ -20,7 +20,7 @@ open import foundation.images
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-unit-type
@@ -202,4 +202,6 @@ abstract
 
 ## See also
 
+- [Coherently constant maps](foundation.coherently-constant-maps.md) for the
+  condition on a map of being constant
 - [Constant pointed maps](structured-types.constant-pointed-maps.md)

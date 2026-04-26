@@ -10,7 +10,6 @@ module foundation.equivalences-span-diagrams where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.equivalences-spans
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.morphisms-span-diagrams
@@ -24,6 +23,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.equivalences-arrows
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
@@ -294,21 +294,25 @@ module _
     (𝒯 : span-diagram l1 l2 l3) → 𝒮 ＝ 𝒯 → equiv-span-diagram 𝒮 𝒯
   equiv-eq-span-diagram 𝒯 refl = id-equiv-span-diagram 𝒮
 
-  is-torsorial-equiv-span-diagram :
-    is-torsorial (equiv-span-diagram 𝒮)
-  is-torsorial-equiv-span-diagram =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (domain-span-diagram 𝒮))
-      ( domain-span-diagram 𝒮 , id-equiv)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-equiv (codomain-span-diagram 𝒮))
-        ( codomain-span-diagram 𝒮 , id-equiv)
-        ( is-torsorial-equiv-span (span-span-diagram 𝒮)))
+  abstract
+    is-torsorial-equiv-span-diagram :
+      is-torsorial (equiv-span-diagram {l1} {l2} {l3} {l1} {l2} {l3} 𝒮)
+    is-torsorial-equiv-span-diagram =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (domain-span-diagram 𝒮))
+        ( domain-span-diagram 𝒮 , id-equiv)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-equiv (codomain-span-diagram 𝒮))
+          ( codomain-span-diagram 𝒮 , id-equiv)
+          ( is-torsorial-equiv-span (span-span-diagram 𝒮)))
 
-  is-equiv-equiv-eq-span-diagram :
-    (𝒯 : span-diagram l1 l2 l3) → is-equiv (equiv-eq-span-diagram 𝒯)
-  is-equiv-equiv-eq-span-diagram =
-    fundamental-theorem-id is-torsorial-equiv-span-diagram equiv-eq-span-diagram
+  abstract
+    is-equiv-equiv-eq-span-diagram :
+      (𝒯 : span-diagram l1 l2 l3) → is-equiv (equiv-eq-span-diagram 𝒯)
+    is-equiv-equiv-eq-span-diagram =
+      fundamental-theorem-id
+        ( is-torsorial-equiv-span-diagram)
+        ( equiv-eq-span-diagram)
 
   extensionality-span-diagram :
     (𝒯 : span-diagram l1 l2 l3) → (𝒮 ＝ 𝒯) ≃ equiv-span-diagram 𝒮 𝒯

@@ -36,7 +36,7 @@ for sequential colimits, and it is exactly an
 
 The fact that the type of descent data for a sequential diagram is equivalent to
 the type of type families over its colimit is recorded in
-[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-property-sequential-colimits.md).
+[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-sequential-colimits.md).
 
 ## Definitions
 
@@ -123,52 +123,55 @@ module _
       ( dependent-sequential-diagram-equifibered-sequential-diagram B)
       ( dependent-sequential-diagram-equifibered-sequential-diagram C)
 
-  module _
-    (e : equiv-descent-data-sequential-colimit)
-    where
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  (B : descent-data-sequential-colimit A l2)
+  (C : descent-data-sequential-colimit A l3)
+  (e : equiv-descent-data-sequential-colimit B C)
+  where
 
-    equiv-equiv-descent-data-sequential-colimit :
-      (n : ℕ) (a : family-sequential-diagram A n) →
-      family-descent-data-sequential-colimit B n a ≃
-      family-descent-data-sequential-colimit C n a
-    equiv-equiv-descent-data-sequential-colimit =
-      equiv-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( e)
+  equiv-equiv-descent-data-sequential-colimit :
+    (n : ℕ) (a : family-sequential-diagram A n) →
+    family-descent-data-sequential-colimit B n a ≃
+    family-descent-data-sequential-colimit C n a
+  equiv-equiv-descent-data-sequential-colimit =
+    equiv-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 
-    map-equiv-descent-data-sequential-colimit :
-      (n : ℕ) (a : family-sequential-diagram A n) →
-      family-descent-data-sequential-colimit B n a →
-      family-descent-data-sequential-colimit C n a
-    map-equiv-descent-data-sequential-colimit =
-      map-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( e)
+  map-equiv-descent-data-sequential-colimit :
+    (n : ℕ) (a : family-sequential-diagram A n) →
+    family-descent-data-sequential-colimit B n a →
+    family-descent-data-sequential-colimit C n a
+  map-equiv-descent-data-sequential-colimit =
+    map-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 
-    is-equiv-map-equiv-descent-data-sequential-colimit :
-      (n : ℕ) (a : family-sequential-diagram A n) →
-      is-equiv (map-equiv-descent-data-sequential-colimit n a)
-    is-equiv-map-equiv-descent-data-sequential-colimit =
-      is-equiv-map-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( e)
+  is-equiv-map-equiv-descent-data-sequential-colimit :
+    (n : ℕ) (a : family-sequential-diagram A n) →
+    is-equiv (map-equiv-descent-data-sequential-colimit n a)
+  is-equiv-map-equiv-descent-data-sequential-colimit =
+    is-equiv-map-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 
-    coh-equiv-descent-data-sequential-colimit :
-      coherence-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram B)
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( equiv-equiv-descent-data-sequential-colimit)
-    coh-equiv-descent-data-sequential-colimit =
-      coh-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( e)
+  coh-equiv-descent-data-sequential-colimit :
+    coherence-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram B)
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( equiv-equiv-descent-data-sequential-colimit)
+  coh-equiv-descent-data-sequential-colimit =
+    coh-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 
-    hom-equiv-descent-data-sequential-colimit :
-      hom-descent-data-sequential-colimit B C
-    hom-equiv-descent-data-sequential-colimit =
-      hom-equiv-dependent-sequential-diagram
-        ( dependent-sequential-diagram-equifibered-sequential-diagram C)
-        ( e)
+  hom-equiv-descent-data-sequential-colimit :
+    hom-descent-data-sequential-colimit B C
+  hom-equiv-descent-data-sequential-colimit =
+    hom-equiv-dependent-sequential-diagram
+      ( dependent-sequential-diagram-equifibered-sequential-diagram C)
+      ( e)
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}

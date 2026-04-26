@@ -20,9 +20,11 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A **faithful morphism of undirected graphs** is a
+A
+{{#concept "faithful morphism" Disambiguation="of undirected graphs" Agda=is-faithful-hom-Undirected-Graph Agda=faithful-hom-Undirected-Graph}}
+of [undirected graphs](graph-theory.undirected-graphs.md) is a
 [morphism](graph-theory.morphisms-undirected-graphs.md) `f : G → H` of
-[undirected graphs](graph-theory.undirected-graphs.md) such that for each
+undirected graphs such that for each
 [unordered pair](foundation.unordered-pairs.md) `p` of vertices in `G` the map
 
 ```text

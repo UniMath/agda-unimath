@@ -28,8 +28,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -53,9 +53,9 @@ module _
   precategory-isometry-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-isometry-Metric-Space)
+      ( isometry-set-Metric-Space)
       ( λ {A B C} → comp-isometry-Metric-Space A B C)
-      ( isometry-id-Metric-Space)
+      ( id-isometry-Metric-Space)
       ( λ {A B C D} → associative-comp-isometry-Metric-Space A B C D)
       ( λ {A B} → left-unit-law-comp-isometry-Metric-Space A B)
       ( λ {A B} → right-unit-law-comp-isometry-Metric-Space A B)
@@ -110,12 +110,9 @@ module _
     iso-Precategory precategory-isometry-Metric-Space A B ≃
     isometric-equiv-Metric-Space' A B
   equiv-iso-isometric-equiv-Metric-Space' =
-    equiv-tot (λ f → commutative-product) ∘e
-    associative-Σ
-      ( map-type-Metric-Space A B)
-      ( is-isometry-Metric-Space A B)
-      ( is-equiv ∘ map-isometry-Metric-Space A B) ∘e
-    equiv-tot
+    ( equiv-tot (λ f → commutative-product)) ∘e
+    ( associative-Σ) ∘e
+    ( equiv-tot
       ( λ f →
         equiv-iff
           ( is-iso-prop-Precategory
@@ -126,7 +123,7 @@ module _
           ( is-equiv-Prop
             ( map-isometry-Metric-Space A B f))
           ( is-equiv-is-iso-isometry-Metric-Space A B f)
-          ( is-iso-is-equiv-isometry-Metric-Space A B f))
+          ( is-iso-is-equiv-isometry-Metric-Space A B f)))
 ```
 
 ## See also

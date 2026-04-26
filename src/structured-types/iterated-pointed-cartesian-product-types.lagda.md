@@ -21,15 +21,18 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a list of pointed types `l` we define recursively the iterated pointed
-cartesian product of `l`.
+Given a [list](lists.lists.md) of
+[pointed types](structured-types.pointed-types.md) `l` we define recursively the
+{{#concept "iterated pointed cartesian product" Agda=iterated-product-Pointed-Type}}
+of `l`.
 
 ## Definition
 
 ```agda
 iterated-product-Pointed-Type :
   {l : Level} → (L : list (Pointed-Type l)) → Pointed-Type l
-iterated-product-Pointed-Type nil = raise-unit _ , raise-star
+iterated-product-Pointed-Type nil =
+  ( raise-unit _ , raise-star)
 iterated-product-Pointed-Type (cons x L) =
   x ×∗ (iterated-product-Pointed-Type L)
 ```

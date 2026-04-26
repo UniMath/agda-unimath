@@ -7,20 +7,19 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.binary-relations
-open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.cauchy-approximations-premetric-spaces
-open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
+open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
@@ -29,9 +28,14 @@ open import metric-spaces.metric-spaces
 
 A
 {{#concept "Cauchy approximation" Disambiguation="in a metric space" Agda=is-cauchy-approximation-Metric-Space}}
-in a [metric space](metric-spaces.metric-spaces.md) is a
-[Cauchy approximation](metric-spaces.cauchy-approximations-premetric-spaces.md)
-in the carrier [premetric space](metric-spaces.premetric-spaces.md).
+in a [metric space](metric-spaces.metric-spaces.md) `A` is a
+[Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
+in its underlying [pseudometric space](metric-spaces.pseudometric-spaces.md): a
+map `f` from [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to
+the carrier type of `A` such that for all positive rationals `ε` and `δ`, `f ε`
+and `f δ` are in a
+(`ε + δ`)-[neighborhood](metric-spaces.rational-neighborhood-relations.md),
+i.e., the distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 ## Definitions
 
@@ -45,8 +49,8 @@ module _
   is-cauchy-approximation-prop-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → Prop l2
   is-cauchy-approximation-prop-Metric-Space =
-    is-cauchy-approximation-prop-Premetric-Space
-      ( premetric-Metric-Space A)
+    is-cauchy-approximation-prop-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
 
   is-cauchy-approximation-Metric-Space :
     (ℚ⁺ → type-Metric-Space A) → UU l2
@@ -66,7 +70,10 @@ module _
 
   map-cauchy-approximation-Metric-Space :
     ℚ⁺ → type-Metric-Space A
-  map-cauchy-approximation-Metric-Space = pr1 f
+  map-cauchy-approximation-Metric-Space =
+    map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space :
     (ε δ : ℚ⁺) →
@@ -75,5 +82,51 @@ module _
       ( ε +ℚ⁺ δ)
       ( map-cauchy-approximation-Metric-Space ε)
       ( map-cauchy-approximation-Metric-Space δ)
-  is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
+  is-cauchy-approximation-map-cauchy-approximation-Metric-Space =
+    is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
 ```
+
+## Properties
+
+### Constant maps in metric spaces are Cauchy approximations
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (x : type-Metric-Space A)
+  where
+
+  const-cauchy-approximation-Metric-Space :
+    cauchy-approximation-Metric-Space A
+  const-cauchy-approximation-Metric-Space =
+    const-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( x)
+```
+
+### Homotopic Cauchy approximations are equal
+
+```agda
+module _
+  { l1 l2 : Level} (A : Metric-Space l1 l2)
+  { f g : cauchy-approximation-Metric-Space A}
+  ( f~g :
+    map-cauchy-approximation-Metric-Space A f ~
+    map-cauchy-approximation-Metric-Space A g)
+  where
+
+  eq-htpy-cauchy-approximation-Metric-Space : f ＝ g
+  eq-htpy-cauchy-approximation-Metric-Space =
+    eq-htpy-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f~g)
+```
+
+## References
+
+Our definition of Cauchy approximation follows Definition 4.5.5 of
+{{#cite Booij20PhD}} and Definition 11.2.10 of {{#cite UF13}}.
+
+{{#bibliography}}

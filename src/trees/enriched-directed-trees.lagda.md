@@ -32,14 +32,16 @@ open import trees.directed-trees
 
 ## Idea
 
-Consider a type `A` and a type family `B` over `A`. An **`(A,B)`-enriched
-directed tree** is a directed tree `T` equipped with a map
+Consider a type `A` and a type family `B` over `A`. An
+`(A,B)`-{{#concept "enriched directed tree" Agda=Enriched-Directed-Tree}} is a
+[directed tree](trees.directed-trees.md) `T` [equipped](foundation.structure.md)
+with a map
 
 ```text
   shape : node-Directed-Tree T → A
 ```
 
-and for each node `x` an equivalence
+and for each node `x` an [equivalence](foundation-core.equivalences.md)
 
 ```text
   e : B (shape x) ≃ Σ (node-Directed-Tree T) (λ y → edge-Directed-Tree T y x)

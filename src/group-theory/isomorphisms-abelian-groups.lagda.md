@@ -179,12 +179,12 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 
 ```agda
 iso-eq-Ab :
-  {l : Level} (A B : Ab l) → Id A B → iso-Ab A B
+  {l : Level} (A B : Ab l) → A ＝ B → iso-Ab A B
 iso-eq-Ab A B p = iso-eq-Group (group-Ab A) (group-Ab B) (ap pr1 p)
 
 abstract
   equiv-iso-eq-Ab' :
-    {l : Level} (A B : Ab l) → Id A B ≃ iso-Ab A B
+    {l : Level} (A B : Ab l) → (A ＝ B) ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
     ( equiv-ap-inclusion-subtype is-abelian-prop-Group {A} {B})
@@ -206,7 +206,7 @@ is-equiv-iso-eq-Ab A =
     ( iso-eq-Ab A)
 
 eq-iso-Ab :
-  {l : Level} (A B : Ab l) → iso-Ab A B → Id A B
+  {l : Level} (A B : Ab l) → iso-Ab A B → A ＝ B
 eq-iso-Ab A B = map-inv-is-equiv (is-equiv-iso-eq-Ab A B)
 ```
 

@@ -119,13 +119,28 @@ id-iff = (id , id)
 ### Composition of logical equivalences
 
 ```agda
-infixr 15 _∘iff_
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+  
+  infixr 15 _∘iff_
 
-_∘iff_ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  (B ↔ C) → (A ↔ B) → (A ↔ C)
-pr1 ((g1 , g2) ∘iff (f1 , f2)) = g1 ∘ f1
-pr2 ((g1 , g2) ∘iff (f1 , f2)) = f2 ∘ g2
+  _∘iff_ :
+    (B ↔ C) → (A ↔ B) → (A ↔ C)
+  pr1 ((g1 , g2) ∘iff (f1 , f2)) = g1 ∘ f1
+  pr2 ((g1 , g2) ∘iff (f1 , f2)) = f2 ∘ g2
+
+  precomp-iff :
+    (A ↔ B) → (B ↔ C) ↔ (A ↔ C)
+  pr1 (precomp-iff (f1 , f2)) (g1 , g2) = (g1 , g2) ∘iff (f1 , f2)
+  pr1 (pr2 (precomp-iff (f1 , f2)) (g1 , g2)) = g1 ∘ f2
+  pr2 (pr2 (precomp-iff (f1 , f2)) (g1 , g2)) = f1 ∘ g2
+
+  postcomp-iff :
+    (B ↔ C) → (A ↔ B) ↔ (A ↔ C)
+  pr1 (postcomp-iff (g1 , g2)) (f1 , f2) = (g1 , g2) ∘iff (f1 , f2)
+  pr1 (pr2 (postcomp-iff (g1 , g2)) (f1 , f2)) = g2 ∘ f1
+  pr2 (pr2 (postcomp-iff (g1 , g2)) (f1 , f2)) = f2 ∘ g1
 ```
 
 ### Inverting a logical equivalence
@@ -234,9 +249,9 @@ compute-fiber-iff-equiv :
 compute-fiber-iff-equiv {A = A} {B} (f , g) =
   ( equiv-tot (λ _ → equiv-funext)) ∘e
   ( left-unit-law-Σ-is-contr (is-torsorial-Id' f) (f , refl)) ∘e
-  ( inv-associative-Σ (A → B) (_＝ f) _) ∘e
+  ( inv-associative-Σ) ∘e
   ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
-  ( associative-Σ (A → B) _ _) ∘e
+  ( associative-Σ) ∘e
   ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
 ```
 

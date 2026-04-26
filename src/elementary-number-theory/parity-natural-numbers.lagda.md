@@ -19,6 +19,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 
@@ -33,7 +34,9 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -44,8 +47,8 @@ open import foundation.universe-levels
 ## Idea
 
 {{#concept "Parity" WD="parity" WDID=Q141160}}
-[partitions](foundation.partitions.md) the [natural
-numbers](elementary-number-theory.natural numbers.md) into two
+[partitions](foundation.partitions.md) the
+[natural numbers](elementary-number-theory.natural-numbers.md) into two
 [classes](foundation.equivalence-relations.md): the
 {{#concept "even" Disambiguation="natural number" Agda=is-even-ℕ WD="even number" WDID=Q13366104}}
 and the
@@ -195,6 +198,23 @@ is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
 is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 ```
 
+### Being even or odd is a proposition
+
+```agda
+abstract
+  is-prop-is-even-ℕ : (n : ℕ) → is-prop (is-even-ℕ n)
+  is-prop-is-even-ℕ n = is-prop-div-ℕ 2 n (inl (is-nonzero-succ-ℕ 1))
+
+  is-prop-is-odd-ℕ : (n : ℕ) → is-prop (is-odd-ℕ n)
+  is-prop-is-odd-ℕ n = is-prop-neg
+
+is-even-prop-ℕ : ℕ → Prop lzero
+is-even-prop-ℕ n = (is-even-ℕ n , is-prop-is-even-ℕ n)
+
+is-odd-prop-ℕ : ℕ → Prop lzero
+is-odd-prop-ℕ n = (is-odd-ℕ n , is-prop-is-odd-ℕ n)
+```
+
 ### A number is even if and only if it is not odd
 
 ```agda
@@ -220,100 +240,128 @@ is-odd-one-ℕ : is-odd-ℕ 1
 is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
 ```
 
+### An odd natural number is nonzero
+
+```agda
+abstract
+  is-nonzero-odd-number-ℕ :
+    (n : ℕ) → is-nonzero-ℕ (odd-number-ℕ n)
+  is-nonzero-odd-number-ℕ n = is-nonzero-succ-ℕ (2 *ℕ n)
+
+  is-nonzero-is-odd-ℕ : {n : ℕ} → is-odd-ℕ n → is-nonzero-ℕ n
+  is-nonzero-is-odd-ℕ odd-n refl = odd-n is-even-zero-ℕ
+```
+
 ### A natural number `x` is even if and only if `x + 2` is even
 
 ```agda
-is-even-is-even-succ-succ-ℕ :
-  (n : ℕ) → is-even-ℕ (succ-ℕ (succ-ℕ n)) → is-even-ℕ n
-pr1 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) = d
-pr2 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) =
-  is-injective-succ-ℕ (is-injective-succ-ℕ p)
+abstract
+  is-even-is-even-succ-succ-ℕ :
+    (n : ℕ) → is-even-ℕ (succ-ℕ (succ-ℕ n)) → is-even-ℕ n
+  pr1 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) = d
+  pr2 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) =
+    is-injective-succ-ℕ (is-injective-succ-ℕ p)
 
-is-even-succ-succ-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → is-even-ℕ (succ-ℕ (succ-ℕ n))
-pr1 (is-even-succ-succ-is-even-ℕ n (d , p)) = succ-ℕ d
-pr2 (is-even-succ-succ-is-even-ℕ n (d , p)) = ap (succ-ℕ ∘ succ-ℕ) p
+  is-even-succ-succ-is-even-ℕ :
+    (n : ℕ) → is-even-ℕ n → is-even-ℕ (succ-ℕ (succ-ℕ n))
+  pr1 (is-even-succ-succ-is-even-ℕ n (d , p)) = succ-ℕ d
+  pr2 (is-even-succ-succ-is-even-ℕ n (d , p)) = ap (succ-ℕ ∘ succ-ℕ) p
 ```
 
 ### A natural number `x` is odd if and only if `x + 2` is odd
 
 ```agda
-is-odd-is-odd-succ-succ-ℕ :
-  (n : ℕ) → is-odd-ℕ (succ-ℕ (succ-ℕ n)) → is-odd-ℕ n
-is-odd-is-odd-succ-succ-ℕ n = map-neg (is-even-succ-succ-is-even-ℕ n)
+abstract
+  is-odd-is-odd-succ-succ-ℕ :
+    (n : ℕ) → is-odd-ℕ (succ-ℕ (succ-ℕ n)) → is-odd-ℕ n
+  is-odd-is-odd-succ-succ-ℕ n = map-neg (is-even-succ-succ-is-even-ℕ n)
 
-is-odd-succ-succ-is-odd-ℕ :
-  (n : ℕ) → is-odd-ℕ n → is-odd-ℕ (succ-ℕ (succ-ℕ n))
-is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
+  is-odd-succ-succ-is-odd-ℕ :
+    (n : ℕ) → is-odd-ℕ n → is-odd-ℕ (succ-ℕ (succ-ℕ n))
+  is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
 ```
 
 ### If a natural number `x` is odd, then `x + 1` is even
 
 ```agda
-is-even-succ-is-odd-ℕ :
-  (n : ℕ) → is-odd-ℕ n → is-even-ℕ (succ-ℕ n)
-is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
-is-even-succ-is-odd-ℕ (succ-ℕ zero-ℕ) p = (1 , refl)
-is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
-  is-even-succ-succ-is-even-ℕ
-    ( succ-ℕ n)
-    ( is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
+abstract
+  is-even-succ-is-odd-ℕ :
+    (n : ℕ) → is-odd-ℕ n → is-even-ℕ (succ-ℕ n)
+  is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
+  is-even-succ-is-odd-ℕ (succ-ℕ zero-ℕ) p = (1 , refl)
+  is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
+    is-even-succ-succ-is-even-ℕ
+      ( succ-ℕ n)
+      ( is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
 ```
 
 ### If a natural number `x` is even, then `x + 1` is odd
 
 ```agda
-is-odd-succ-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
-is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
-is-odd-succ-is-even-ℕ (succ-ℕ zero-ℕ) p = ex-falso (is-odd-one-ℕ p)
-is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
-  is-odd-succ-succ-is-odd-ℕ
-    ( succ-ℕ n)
-    ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
+abstract
+  is-odd-succ-is-even-ℕ :
+    (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
+  is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
+  is-odd-succ-is-even-ℕ (succ-ℕ zero-ℕ) p = ex-falso (is-odd-one-ℕ p)
+  is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
+    is-odd-succ-succ-is-odd-ℕ
+      ( succ-ℕ n)
+      ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
 ```
 
 ### If a natural number `x + 1` is odd, then `x` is even
 
 ```agda
-is-even-is-odd-succ-ℕ :
-  (n : ℕ) → is-odd-ℕ (succ-ℕ n) → is-even-ℕ n
-is-even-is-odd-succ-ℕ n p =
-  is-even-is-even-succ-succ-ℕ
-    ( n)
-    ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
+abstract
+  is-even-is-odd-succ-ℕ :
+    (n : ℕ) → is-odd-ℕ (succ-ℕ n) → is-even-ℕ n
+  is-even-is-odd-succ-ℕ n p =
+    is-even-is-even-succ-succ-ℕ
+      ( n)
+      ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
 ```
 
 ### If a natural number `x + 1` is even, then `x` is odd
 
 ```agda
-is-odd-is-even-succ-ℕ :
-  (n : ℕ) → is-even-ℕ (succ-ℕ n) → is-odd-ℕ n
-is-odd-is-even-succ-ℕ n p =
-  is-odd-is-odd-succ-succ-ℕ
-    ( n)
-    ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
+abstract
+  is-odd-is-even-succ-ℕ :
+    (n : ℕ) → is-even-ℕ (succ-ℕ n) → is-odd-ℕ n
+  is-odd-is-even-succ-ℕ n p =
+    is-odd-is-odd-succ-succ-ℕ
+      ( n)
+      ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
 ```
 
 ### A natural number is odd if and only if it has an odd expansion
 
 ```agda
-is-odd-has-odd-expansion-ℕ : (n : ℕ) → has-odd-expansion-ℕ n → is-odd-ℕ n
-is-odd-has-odd-expansion-ℕ .(succ-ℕ (2 *ℕ m)) (m , refl) =
-  is-odd-succ-is-even-ℕ (2 *ℕ m) (m , commutative-mul-ℕ m 2)
+abstract
+  is-odd-has-odd-expansion-ℕ : (n : ℕ) → has-odd-expansion-ℕ n → is-odd-ℕ n
+  is-odd-has-odd-expansion-ℕ .(succ-ℕ (2 *ℕ m)) (m , refl) =
+    is-odd-succ-is-even-ℕ (2 *ℕ m) (m , commutative-mul-ℕ m 2)
 
-has-odd-expansion-is-odd-ℕ : (n : ℕ) → is-odd-ℕ n → has-odd-expansion-ℕ n
-has-odd-expansion-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
-has-odd-expansion-is-odd-ℕ (succ-ℕ zero-ℕ) p = (0 , refl)
-has-odd-expansion-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
-  ( succ-ℕ (pr1 s)) ,
-    ap (succ-ℕ ∘ succ-ℕ) (left-successor-law-add-ℕ _ _ ∙ pr2 s)
-  where
-  s : has-odd-expansion-ℕ n
-  s = has-odd-expansion-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p)
+  has-odd-expansion-is-odd-ℕ : (n : ℕ) → is-odd-ℕ n → has-odd-expansion-ℕ n
+  has-odd-expansion-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
+  has-odd-expansion-is-odd-ℕ (succ-ℕ zero-ℕ) p = (0 , refl)
+  has-odd-expansion-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
+    ( succ-ℕ (pr1 s)) ,
+      ap (succ-ℕ ∘ succ-ℕ) (left-successor-law-add-ℕ _ _ ∙ pr2 s)
+    where
+    s : has-odd-expansion-ℕ n
+    s = has-odd-expansion-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p)
 
-is-odd-odd-number-ℕ : (n : ℕ) → is-odd-ℕ (odd-number-ℕ n)
-is-odd-odd-number-ℕ n = is-odd-has-odd-expansion-ℕ (odd-number-ℕ n) (n , refl)
+  is-odd-odd-number-ℕ : (n : ℕ) → is-odd-ℕ (odd-number-ℕ n)
+  is-odd-odd-number-ℕ n = is-odd-has-odd-expansion-ℕ (odd-number-ℕ n) (n , refl)
+```
+
+### If `x` is odd and `y` is even, `x ≠ y`
+
+```agda
+abstract
+  neq-odd-even :
+    (x y : ℕ) → is-odd-ℕ x → is-even-ℕ y → x ≠ y
+  neq-odd-even x y odd-x even-y x=y = odd-x (inv-tr is-even-ℕ x=y even-y)
 ```
 
 ### A number is even if and only if it is divisible by an even number
@@ -526,18 +574,6 @@ is-odd-add-succ-self-ℕ n =
   is-odd-succ-is-even-ℕ (n +ℕ n) (is-even-add-self-ℕ n)
 ```
 
-### Odd numbers are nonzero
-
-```agda
-is-nonzero-odd-number-ℕ :
-  (n : ℕ) → is-nonzero-ℕ (odd-number-ℕ n)
-is-nonzero-odd-number-ℕ n = is-nonzero-succ-ℕ (2 *ℕ n)
-
-is-nonzero-is-odd-ℕ :
-  (n : ℕ) → is-odd-ℕ n → is-nonzero-ℕ n
-is-nonzero-is-odd-ℕ .zero-ℕ H refl = H is-even-zero-ℕ
-```
-
 ### A product $mn$ is odd if and only if both factors are odd
 
 ```agda
@@ -582,6 +618,24 @@ is-odd-right-factor-is-odd-mul-ℕ :
   (m n : ℕ) → is-odd-ℕ (m *ℕ n) → is-odd-ℕ n
 is-odd-right-factor-is-odd-mul-ℕ m n H K =
   H (is-even-div-is-even-ℕ n (m *ℕ n) K (m , refl))
+```
+
+### If `xy` is even, `x` or `y` is even
+
+```agda
+abstract
+  is-even-either-factor-is-even-mul-ℕ :
+    (x y : ℕ) → is-even-ℕ (x *ℕ y) → (is-even-ℕ x) + (is-even-ℕ y)
+  is-even-either-factor-is-even-mul-ℕ x y is-even-xy =
+    rec-coproduct
+      ( inl)
+      ( λ is-odd-x →
+        rec-coproduct
+          ( inr)
+          ( λ is-odd-y →
+            ex-falso (is-odd-mul-is-odd-ℕ x y is-odd-x is-odd-y is-even-xy))
+          ( is-decidable-is-even-ℕ y))
+      ( is-decidable-is-even-ℕ x)
 ```
 
 ### If a product $mn$ is even and one of the factors is odd, then the other is even

@@ -48,7 +48,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "permutation" Disambiguation="standard finite type"}} on a [standard finite type](univalent-combinatorics.standard-finite-types.md) `Fin n` is an [automorphism](foundation.automorphisms.md) of `Fin n`.
+A
+{{#concept "permutation" Disambiguation="standard finite type" Agda=permuation}}
+on a [standard finite type](univalent-combinatorics.standard-finite-types.md) `Fin n` is an [automorphism](foundation.automorphisms.md) of `Fin n`.
 
 ## Definitions
 
@@ -64,11 +66,12 @@ permutation n = Aut (Fin n)
 ```agda
 list-transpositions-permutation-Fin' :
   (n : ℕ) (f : permutation (succ-ℕ n)) →
-  (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
+  (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
   list
     ( Σ ( Fin (succ-ℕ n) → Decidable-Prop lzero)
         ( λ P →
           has-cardinality-ℕ 2 (Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P))))
+
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   cons
@@ -124,14 +127,13 @@ list-transpositions-permutation-Fin (succ-ℕ n) f =
 abstract
   retraction-permutation-list-transpositions-Fin' :
     (n : ℕ) (f : permutation (succ-ℕ n)) →
-    (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
-    (y z : Fin (succ-ℕ n)) → Id (map-equiv f y) z →
-    Id
-      ( map-equiv
-        ( permutation-list-transpositions
-          ( list-transpositions-permutation-Fin (succ-ℕ n) f))
-        ( y))
-      ( map-equiv f y)
+    (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
+    (y z : Fin (succ-ℕ n)) → map-equiv f y ＝ z →
+    map-equiv
+      ( permutation-list-transpositions
+        ( list-transpositions-permutation-Fin (succ-ℕ n) f))
+      ( y) ＝
+    map-equiv f y
   retraction-permutation-list-transpositions-Fin'
     zero-ℕ f (inr star) p (inr star) z q =
     inv p
@@ -188,7 +190,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P =
       pair
         ( transposition t ∘e f)
@@ -282,7 +284,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P = pair
       ( transposition t ∘e f)
       ( ( ap (map-transposition t) p) ∙
@@ -504,4 +506,13 @@ retraction-permutation-list-standard-transpositions-Fin 0 f ()
 retraction-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
   htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
   retraction-permutation-list-transpositions-Fin (succ-ℕ n) f
+
+eq-permutation-list-standard-transpositions-Fin :
+  (n : ℕ) (f : permutation n) →
+  permutation-list-standard-transpositions-Fin
+    ( n)
+    ( list-standard-transpositions-permutation-Fin n f) ＝
+  f
+eq-permutation-list-standard-transpositions-Fin n f =
+  eq-htpy-equiv (retraction-permutation-list-standard-transpositions-Fin n f)
 ```

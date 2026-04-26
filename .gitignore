@@ -420,13 +420,11 @@ node_modules/*
 package-lock.json
 
 # mdbook, automatically generated files
-docs/
 html/
 book/
 temp/
 src/temp/
 src/everything.lagda.md
-SUMMARY.md
-CONTRIBUTORS.md
-MAINTAINERS.md
 /website/css/Agda-highlight.css
+/website/images/agda_dependency_graph.svg
+/website/images/agda_dependency_graph_legend.html

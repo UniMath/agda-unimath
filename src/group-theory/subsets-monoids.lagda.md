@@ -82,10 +82,10 @@ module _
 ```agda
   is-closed-under-multiplication-prop-subset-Monoid : Prop (l1 ⊔ l2)
   is-closed-under-multiplication-prop-subset-Monoid =
-    Π-Prop
+    implicit-Π-Prop
       ( type-Monoid M)
       ( λ x →
-        Π-Prop
+        implicit-Π-Prop
           ( type-Monoid M)
           ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Monoid M x y)))))
 

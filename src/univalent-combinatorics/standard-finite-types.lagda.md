@@ -20,24 +20,32 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import structured-types.types-equipped-with-endomorphisms
 ```
@@ -147,7 +155,7 @@ map-equiv-Fin-1 : Fin 1 → unit
 map-equiv-Fin-1 (inr x) = x
 
 map-inv-equiv-Fin-1 : unit → Fin 1
-map-inv-equiv-Fin-1 x = inr x
+map-inv-equiv-Fin-1 = inr
 
 is-section-map-inv-equiv-Fin-1 :
   ( map-equiv-Fin-1 ∘ map-inv-equiv-Fin-1) ~ id
@@ -170,6 +178,12 @@ pr2 equiv-Fin-1 = is-equiv-map-equiv-Fin-1
 
 is-contr-Fin-1 : is-contr (Fin 1)
 is-contr-Fin-1 = is-contr-equiv unit equiv-Fin-1 is-contr-unit
+
+is-prop-Fin-1 : is-prop (Fin 1)
+is-prop-Fin-1 = is-prop-is-contr is-contr-Fin-1
+
+Fin-1-Prop : Prop lzero
+Fin-1-Prop = (Fin 1 , is-prop-Fin-1)
 
 is-not-contractible-Fin :
   (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)
@@ -228,7 +242,7 @@ nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 
 nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
-nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
+nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin-reverse k x)
 nat-Fin-reverse (succ-ℕ k) (inr x) = 0
 
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
@@ -246,7 +260,7 @@ upper-bound-nat-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin (succ-ℕ k) x) k
 upper-bound-nat-Fin zero-ℕ (inr star) = star
 upper-bound-nat-Fin (succ-ℕ k) (inl x) =
-  leq-succ-leq-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
+  preserves-order-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
 upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 
 upper-bound-nat-Fin' :
@@ -258,19 +272,9 @@ is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-nat-Fin k p)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inr star} p =
-  ex-falso
-    ( neq-le-ℕ
-      ( nat-Fin k x)
-      ( nat-Fin (succ-ℕ k) (inr star))
-      ( strict-upper-bound-nat-Fin k x)
-      ( p))
+  ex-falso (neq-le-ℕ  (strict-upper-bound-nat-Fin k x) p)
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
-  ex-falso
-    ( neq-le-ℕ
-      ( nat-Fin (succ-ℕ k) (inl y))
-      ( nat-Fin (succ-ℕ k) (inr star))
-      ( strict-upper-bound-nat-Fin k y)
-      ( inv p))
+  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k y) (inv p))
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
   refl
 
@@ -502,8 +506,39 @@ is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```
 
+### The standard finite type `Fin n` is inhabited if and only if `n` is nonzero
+
+```agda
+abstract
+  is-inhabited-is-nonzero-Fin :
+    (n : ℕ) → is-nonzero-ℕ n → is-inhabited (Fin n)
+  is-inhabited-is-nonzero-Fin zero-ℕ n≠0 = ex-falso (n≠0 refl)
+  is-inhabited-is-nonzero-Fin (succ-ℕ n) _ = unit-trunc-Prop (neg-one-Fin n)
+
+  is-nonzero-is-inhabited-Fin :
+    (n : ℕ) → is-inhabited (Fin n) → is-nonzero-ℕ n
+  is-nonzero-is-inhabited-Fin _ H refl = rec-trunc-Prop empty-Prop (λ ()) H
+
+is-empty-is-zero-Fin : (n : ℕ) → is-zero-ℕ n → is-empty (Fin n)
+is-empty-is-zero-Fin _ refl ()
+```
+
+### The standard finite types are decidable
+
+```agda
+is-decidable-Fin : (n : ℕ) → is-decidable (Fin n)
+is-decidable-Fin zero-ℕ = inr (λ ())
+is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
+
+is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
+is-inhabited-or-empty-Fin n =
+  is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
+```
+
 ## See also
 
+- [Classical finite types](univalent-combinatorics.classical-finite-types.md),
+  the set of natural numbers less than `n`
 - [The bounded natural numbers](elementary-number-theory.bounded-natural-numbers.md)
 - [The strictly bounded natural numbers](elementary-number-theory.strictly-bounded-natural-numbers.md)
 - [Modular arithmetic on the standard finite types](elementary-number-theory.modular-arithmetic-standard-finite-types.md)

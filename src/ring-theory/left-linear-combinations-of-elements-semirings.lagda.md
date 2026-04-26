@@ -16,11 +16,12 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.monoids
 
-open import ring-theory.monoids-with-semiring-actions
+open import ring-theory.monoids-with-left-semiring-action
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 
@@ -160,26 +161,36 @@ module _
   left-linear-combination-subset-Semiring =
     left-linear-combination-Semiring R (type-subset-Semiring R S)
 
+  left-scalar-multiplication-subset-Semiring :
+    type-Semiring R → type-subset-Semiring R S → type-Semiring R
+  left-scalar-multiplication-subset-Semiring r s =
+    mul-Semiring R r (inclusion-subset-Semiring R S s)
+
   ev-left-linear-combination-subset-Semiring :
     left-linear-combination-subset-Semiring → type-Semiring R
   ev-left-linear-combination-subset-Semiring =
     ev-unital-magma-left-linear-combination-Semiring R
       ( additive-unital-magma-Semiring R)
-      ( λ r s → mul-Semiring R r (inclusion-subset-Semiring R S s))
+      ( left-scalar-multiplication-subset-Semiring)
 
   is-left-linear-combination-subset-Semiring :
     type-Semiring R → UU (l1 ⊔ l2)
   is-left-linear-combination-subset-Semiring =
     is-left-linear-combination-Semiring R
       ( additive-unital-magma-Semiring R)
-      ( λ r s → mul-Semiring R r (inclusion-subset-Semiring R S s))
+      ( left-scalar-multiplication-subset-Semiring)
 
   is-mere-left-linear-combination-prop-subset-Semiring :
     type-Semiring R → Prop (l1 ⊔ l2)
   is-mere-left-linear-combination-prop-subset-Semiring =
     is-mere-left-linear-combination-prop-Semiring R
       ( additive-unital-magma-Semiring R)
-      ( λ r s → mul-Semiring R r (inclusion-subset-Semiring R S s))
+      ( left-scalar-multiplication-subset-Semiring)
+
+  is-mere-left-linear-combination-subset-Semiring :
+    type-Semiring R → UU (l1 ⊔ l2)
+  is-mere-left-linear-combination-subset-Semiring =
+    is-in-subtype is-mere-left-linear-combination-prop-subset-Semiring
 ```
 
 ### Left linear combinations of families of elements in a semiring
@@ -194,9 +205,9 @@ module _
   left-linear-combination-family-of-elements-Semiring =
     left-linear-combination-subset-Semiring R (trunc-Prop ∘ fiber a)
 
-  ev-unital-magma-left-linear-combination-family-of-elements-Semiring :
+  ev-left-linear-combination-family-of-elements-Semiring :
     left-linear-combination-family-of-elements-Semiring → type-Semiring R
-  ev-unital-magma-left-linear-combination-family-of-elements-Semiring =
+  ev-left-linear-combination-family-of-elements-Semiring =
     ev-left-linear-combination-subset-Semiring R (trunc-Prop ∘ fiber a)
 
   is-left-linear-combination-family-of-elements-Semiring :

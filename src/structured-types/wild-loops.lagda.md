@@ -24,7 +24,9 @@ open import structured-types.wild-quasigroups
 
 ## Idea
 
-A wild loop is a wild quasigroup equipped with a unit element.
+A {{#concept "wild loop" Agda=Wild-Loop}} is a
+[wild quasigroup](structured-types.wild-quasigroups.md) equipped with a unit
+element.
 
 ## Definition
 
@@ -61,27 +63,26 @@ module _
   mul-Wild-Loop' = mul-H-Space' h-space-Wild-Loop
 
   ap-mul-Wild-Loop :
-    {a b c d : type-Wild-Loop} → Id a b → Id c d →
-    Id (mul-Wild-Loop a c) (mul-Wild-Loop b d)
+    {a b c d : type-Wild-Loop} → a ＝ b → c ＝ d →
+    mul-Wild-Loop a c ＝ mul-Wild-Loop b d
   ap-mul-Wild-Loop = ap-mul-H-Space h-space-Wild-Loop
 
   magma-Wild-Loop : Magma l
   magma-Wild-Loop = magma-H-Space h-space-Wild-Loop
 
   left-unit-law-mul-Wild-Loop :
-    (x : type-Wild-Loop) → Id (mul-Wild-Loop unit-Wild-Loop x) x
+    (x : type-Wild-Loop) → mul-Wild-Loop unit-Wild-Loop x ＝ x
   left-unit-law-mul-Wild-Loop =
     left-unit-law-mul-H-Space h-space-Wild-Loop
 
   right-unit-law-mul-Wild-Loop :
-    (x : type-Wild-Loop) → Id (mul-Wild-Loop x unit-Wild-Loop) x
+    (x : type-Wild-Loop) → mul-Wild-Loop x unit-Wild-Loop ＝ x
   right-unit-law-mul-Wild-Loop =
     right-unit-law-mul-H-Space h-space-Wild-Loop
 
   coh-unit-laws-mul-Wild-Loop :
-    Id
-      ( left-unit-law-mul-Wild-Loop unit-Wild-Loop)
-      ( right-unit-law-mul-Wild-Loop unit-Wild-Loop)
+    left-unit-law-mul-Wild-Loop unit-Wild-Loop ＝
+    right-unit-law-mul-Wild-Loop unit-Wild-Loop
   coh-unit-laws-mul-Wild-Loop =
     coh-unit-laws-mul-H-Space h-space-Wild-Loop
 

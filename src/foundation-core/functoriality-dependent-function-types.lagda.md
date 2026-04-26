@@ -97,14 +97,19 @@ module _
   where
 
   abstract
+    is-contr-map-map-Π-is-fiberwise-contr-map :
+      {f : (i : I) → A i → B i} →
+      ((i : I) → is-contr-map (f i)) → is-contr-map (map-Π f)
+    is-contr-map-map-Π-is-fiberwise-contr-map H g =
+      is-contr-equiv' _ (compute-fiber-map-Π _ g) (is-contr-Π (λ i → H i (g i)))
+
+  abstract
     is-equiv-map-Π-is-fiberwise-equiv :
       {f : (i : I) → A i → B i} → is-fiberwise-equiv f → is-equiv (map-Π f)
     is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
       is-equiv-is-contr-map
-        ( λ g →
-          is-contr-equiv' _
-            ( compute-fiber-map-Π _ g)
-            ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
+        ( is-contr-map-map-Π-is-fiberwise-contr-map
+          ( is-contr-map-is-equiv ∘ is-equiv-f))
 
   equiv-Π-equiv-family :
     (e : (i : I) → A i ≃ B i) → ((i : I) → A i) ≃ ((i : I) → B i)

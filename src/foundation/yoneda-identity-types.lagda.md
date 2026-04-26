@@ -384,7 +384,7 @@ module _
       ( ind-Id x (λ y p → B y (yoneda-eq-eq p)) b y (eq-yoneda-eq f))
 ```
 
-While the induction principle does not have the desired reduction behaviour, the
+While the induction principle does not have the desired reduction behavior, the
 nondependent eliminator does. This is simply because we no longer need to
 [transport](foundation-core.transport-along-identifications.md) along
 `is-section-eq-yoneda-eq`.

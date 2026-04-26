@@ -68,7 +68,7 @@ module _
     power-succ-Semiring (semiring-Commutative-Semiring A)
 ```
 
-### `xⁿ⁺¹ ＝ xxⁿ`
+### `xⁿ⁺¹ = xxⁿ`
 
 ```agda
 module _

@@ -34,7 +34,7 @@ A **poset** is a [set](foundation-core.sets.md)
 [relation](foundation.binary-relations.md) that takes values in
 [propositions](foundation-core.propositions.md).
 
-## Definition
+## Definitions
 
 ```agda
 is-antisymmetric-leq-Preorder :
@@ -102,18 +102,6 @@ module _
 
   antisymmetric-leq-Poset : is-antisymmetric leq-Poset
   antisymmetric-leq-Poset = pr2 X
-
-  is-set-type-Poset : is-set type-Poset
-  is-set-type-Poset =
-    is-set-prop-in-id
-      ( λ x y → leq-Poset x y × leq-Poset y x)
-      ( λ x y → is-prop-product (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
-      ( λ x → refl-leq-Poset x , refl-leq-Poset x)
-      ( λ x y (H , K) → antisymmetric-leq-Poset x y H K)
-
-  set-Poset : Set l1
-  pr1 set-Poset = type-Poset
-  pr2 set-Poset = is-set-type-Poset
 ```
 
 ## Reasoning with inequalities in posets
@@ -121,41 +109,63 @@ module _
 Inequalities in preorders can be constructed by equational reasoning as follows:
 
 ```text
-calculate-in-Poset X
+let open inequality-reasoning-Poset X
+in
   chain-of-inequalities
   x ≤ y
       by ineq-1
-      in-Poset X
     ≤ z
       by ineq-2
-      in-Poset X
     ≤ v
       by ineq-3
-      in-Poset X
 ```
 
 Note, however, that in our setup of equational reasoning with inequalities it is
 not possible to mix inequalities with equalities or strict inequalities.
 
 ```agda
-infixl 1 calculate-in-Poset_chain-of-inequalities_
-infixl 0 step-calculate-in-Poset
-
-calculate-in-Poset_chain-of-inequalities_ :
+module inequality-reasoning-Poset
   {l1 l2 : Level} (X : Poset l1 l2)
-  (x : type-Poset X) → leq-Poset X x x
-calculate-in-Poset_chain-of-inequalities_ = refl-leq-Poset
+  where
 
-step-calculate-in-Poset :
-  {l1 l2 : Level} (X : Poset l1 l2)
-  {x y : type-Poset X} → leq-Poset X x y →
-  (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
-step-calculate-in-Poset X {x} {y} u z v = transitive-leq-Poset X x y z v u
+  infixl 1 chain-of-inequalities_
+  infixl 0 step-calculate-in-Poset
 
-syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
+  chain-of-inequalities_ : (x : type-Poset X) → leq-Poset X x x
+  chain-of-inequalities_ = refl-leq-Poset X
+
+  step-calculate-in-Poset :
+    {x y : type-Poset X} → leq-Poset X x y →
+    (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
+  step-calculate-in-Poset {x} {y} u z v = transitive-leq-Poset X x y z v u
+
+  syntax step-calculate-in-Poset u z v = u ≤ z by v
 ```
 
 ## Properties
+
+### The underlying type of a poset is a set
+
+```agda
+module _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+
+  is-set-type-Poset : is-set (type-Poset X)
+  is-set-type-Poset =
+    is-set-prop-in-id
+      ( λ x y → leq-Poset X x y × leq-Poset X y x)
+      ( λ x y →
+        is-prop-product (is-prop-leq-Poset X x y) (is-prop-leq-Poset X y x))
+      ( λ x → refl-leq-Poset X x , refl-leq-Poset X x)
+      ( λ x y (H , K) → antisymmetric-leq-Poset X x y H K)
+
+  set-Poset : Set l1
+  set-Poset = (type-Poset X , is-set-type-Poset)
+```
+
+We characterize equality in a poset as _similarity of elements_ in
+[`order-theory.similarity-of-elements-posets`](order-theory.similarity-of-elements-posets.md).
 
 ### Posets are categories whose underlying hom-sets are propositions
 
@@ -200,4 +210,18 @@ module _
         ( precategory-Category C) is-prop-hom-C f g)
 ```
 
-It remains to show that these constructions form inverses to eachother.
+It remains to show that these constructions form inverses to each other.
+
+### 3-cycles in poset inequalities
+
+```agda
+abstract
+  three-cycle-leq-Poset :
+    {l1 l2 : Level} → (P : Poset l1 l2) → {a b c : type-Poset P} →
+    leq-Poset P a b → leq-Poset P b c → leq-Poset P c a →
+    (a ＝ b) × (a ＝ c) × (b ＝ c)
+  three-cycle-leq-Poset P {a} {b} {c} a≤b b≤c c≤a =
+    ( antisymmetric-leq-Poset P a b a≤b (transitive-leq-Poset P _ c _ c≤a b≤c) ,
+      antisymmetric-leq-Poset P a c (transitive-leq-Poset P _ b _ b≤c a≤b) c≤a ,
+      antisymmetric-leq-Poset P b c b≤c (transitive-leq-Poset P _ a _ a≤b c≤a))
+```

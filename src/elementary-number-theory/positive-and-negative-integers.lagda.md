@@ -51,6 +51,15 @@ is-not-negative-and-positive-ℤ (inl x) (H , K) = K
 is-not-negative-and-positive-ℤ (inr x) (H , K) = H
 ```
 
+### No integer is both nonnegative and negative
+
+```agda
+is-not-negative-and-nonnegative-ℤ :
+  (x : ℤ) → ¬ (is-negative-ℤ x × is-nonnegative-ℤ x)
+is-not-negative-and-nonnegative-ℤ (inl x) (H , K) = K
+is-not-negative-and-nonnegative-ℤ (inr x) (H , K) = H
+```
+
 ### Dichotomies
 
 #### A nonzero integer is either negative or positive
@@ -166,10 +175,11 @@ is-negative-pred-is-nonpositive-ℤ {inr (inl x)} H = H
 #### The negative of a nonnegative integer is nonpositive
 
 ```agda
-is-nonpositive-neg-is-nonnegative-ℤ :
-  {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
-is-nonpositive-neg-is-nonnegative-ℤ {inr (inl x)} H = H
-is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
+abstract
+  is-nonpositive-neg-is-nonnegative-ℤ :
+    {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
+  is-nonpositive-neg-is-nonnegative-ℤ {inr (inl x)} H = H
+  is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
 
 neg-nonnegative-ℤ : nonnegative-ℤ → nonpositive-ℤ
 neg-nonnegative-ℤ (x , H) = (neg-ℤ x , is-nonpositive-neg-is-nonnegative-ℤ H)
@@ -214,35 +224,37 @@ neg-negative-ℤ (x , H) = (neg-ℤ x , is-positive-neg-is-negative-ℤ H)
 #### Nonpositivity is negated positivity
 
 ```agda
-is-not-positive-is-nonpositive-ℤ :
-  {x : ℤ} → is-nonpositive-ℤ x → ¬ (is-positive-ℤ x)
-is-not-positive-is-nonpositive-ℤ {inr (inl x)} _ q = q
-is-not-positive-is-nonpositive-ℤ {inr (inr x)} p _ = p
+abstract
+  is-not-positive-is-nonpositive-ℤ :
+    {x : ℤ} → is-nonpositive-ℤ x → ¬ (is-positive-ℤ x)
+  is-not-positive-is-nonpositive-ℤ {inr (inl x)} _ q = q
+  is-not-positive-is-nonpositive-ℤ {inr (inr x)} p _ = p
 
-is-nonpositive-is-not-positive-ℤ :
-  {x : ℤ} → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
-is-nonpositive-is-not-positive-ℤ {x} H =
-  rec-coproduct
-    ( λ K → ex-falso (H K))
-    ( id)
-    ( decide-is-positive-is-nonpositive-ℤ)
+  is-nonpositive-is-not-positive-ℤ :
+    {x : ℤ} → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
+  is-nonpositive-is-not-positive-ℤ {x} H =
+    rec-coproduct
+      ( λ K → ex-falso (H K))
+      ( id)
+      ( decide-is-positive-is-nonpositive-ℤ)
 ```
 
 #### Nonnegativity is negated negativity
 
 ```agda
-is-not-negative-is-nonnegative-ℤ :
-  {x : ℤ} → is-nonnegative-ℤ x → ¬ (is-negative-ℤ x)
-is-not-negative-is-nonnegative-ℤ {x} H K =
-  is-not-positive-is-nonpositive-ℤ
-    ( is-nonpositive-neg-is-nonnegative-ℤ H)
-    ( is-positive-neg-is-negative-ℤ K)
+abstract
+  is-not-negative-is-nonnegative-ℤ :
+    {x : ℤ} → is-nonnegative-ℤ x → ¬ (is-negative-ℤ x)
+  is-not-negative-is-nonnegative-ℤ {x} H K =
+    is-not-positive-is-nonpositive-ℤ
+      ( is-nonpositive-neg-is-nonnegative-ℤ H)
+      ( is-positive-neg-is-negative-ℤ K)
 
-is-nonnegative-is-not-negative-ℤ :
-  {x : ℤ} → ¬ (is-negative-ℤ x) → is-nonnegative-ℤ x
-is-nonnegative-is-not-negative-ℤ {x} H =
-  rec-coproduct
-    ( λ K → ex-falso (H K))
-    ( id)
-    ( decide-is-negative-is-nonnegative-ℤ)
+  is-nonnegative-is-not-negative-ℤ :
+    {x : ℤ} → ¬ (is-negative-ℤ x) → is-nonnegative-ℤ x
+  is-nonnegative-is-not-negative-ℤ {x} H =
+    rec-coproduct
+      ( λ K → ex-falso (H K))
+      ( id)
+      ( decide-is-negative-is-nonnegative-ℤ)
 ```

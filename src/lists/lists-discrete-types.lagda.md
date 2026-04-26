@@ -27,7 +27,9 @@ open import lists.lists
 
 ## Idea
 
-In this file we study lists of elements in discrete types.
+On this page we study [lists](lists.lists.md) of elements in
+[discrete types](foundation.discrete-types.md), i.e., types with
+[decidable equality](foundation.decidable-equality.md).
 
 ## Definitions
 

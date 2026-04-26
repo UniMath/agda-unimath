@@ -84,6 +84,9 @@ abstract
     {l : Level} {A : UU l} (f : is-empty A) → is-equiv f
   is-equiv-is-empty' f = is-equiv-is-empty f id
 
+equiv-is-empty' : {l : Level} {A : UU l} → is-empty A → A ≃ empty
+equiv-is-empty' f = (f , is-equiv-is-empty' f)
+
 equiv-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → is-empty B → A ≃ B
 equiv-is-empty f g =

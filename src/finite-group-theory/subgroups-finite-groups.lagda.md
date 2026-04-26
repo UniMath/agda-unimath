@@ -35,7 +35,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite subgroup of a finite group `G` is a decidable subgroup of `G`.
+A
+{{#concept "finite subgroup" Disambiguation="of a finite group" Agda=Subgroup-Finite-Group}}
+of a [finite group](finite-group-theory.finite-groups.md) `G` is a
+[decidable subgroup](group-theory.decidable-subgroups.md) of `G`.
 
 ## Definitions
 

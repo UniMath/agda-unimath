@@ -84,9 +84,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Ideas
 
-The delooping of a group homomorphism `f : G → H` is a pointed map
-`Bf : BG → BH` equipped with a homotopy witnessing that the following square
-commutes :
+The delooping of a
+[group homomorphism](group-theory.homomorphisms-concrete-groups.md) `f : G → H`
+is a pointed map `Bf : BG → BH` equipped with a
+[homotopy](foundation-core.homotopies.md) witnessing that the following square
+commutes:
 
 ```text
         f
@@ -95,13 +97,14 @@ commutes :
  ≅|           |≅
   |           |
   ∨           ∨
-  BG ------> BH
+  BG ------> BH.
        ΩBf
 ```
 
-In this file, we study the delooping of the sign homomorphism, and, more
-precisely, how to detect that a pointed map between `BSn` and `BS2` is a
-delooping of the sign homomorphism.
+On this page, we study the
+{{#concept "delooping of the sign homomorphism" Agda=delooping-sign}}, and, more
+precisely, how to detect that a [pointed map](structured-types.pointed-maps.md)
+between `BSn` and `BS2` is a delooping of the sign homomorphism.
 
 ## Definition
 
@@ -174,7 +177,7 @@ module _
 
     preserves-id-equiv-invertible-action-D-equiv :
       (n : ℕ) (X : Type-With-Cardinality-ℕ l1 n) →
-      Id (invertible-action-D-equiv n X X id-equiv) id-equiv
+      invertible-action-D-equiv n X X id-equiv ＝ id-equiv
     preserves-id-equiv-invertible-action-D-equiv n =
       compute-id-equiv-action-equiv-family-over-subuniverse
         ( mere-equiv-Prop (Fin n))
@@ -313,10 +316,9 @@ module _
     ( X Y : UU l1) →
     ( eX : mere-equiv (Fin (n +ℕ 2)) X) →
     ( eY : mere-equiv (Fin (n +ℕ 2)) Y) →
-    Id X Y →
-    Id
-      ( equivalence-class (R (n +ℕ 2) (X , eX)))
-      ( equivalence-class (R (n +ℕ 2) (Y , eY)))
+    X ＝ Y →
+    equivalence-class (R (n +ℕ 2) (X , eX)) ＝
+    equivalence-class (R (n +ℕ 2) (Y , eY))
   map-quotient-delooping-sign-loop n X Y eX eY p =
     ap
       ( equivalence-class ∘ R (n +ℕ 2))
@@ -365,8 +367,8 @@ module _
       ( X Y : UU l1)
       ( eX : mere-equiv (Fin (n +ℕ 2)) X)
       ( eY : mere-equiv (Fin (n +ℕ 2)) Y)
-      ( p : Id X Y) →
-      ( Id (tr (mere-equiv (Fin (n +ℕ 2))) p eX) eY) →
+      ( p : X ＝ Y) →
+      ( tr (mere-equiv (Fin (n +ℕ 2))) p eX ＝ eY) →
       ( sX : is-set X)
       ( sY : is-set Y) →
       coherence-square-maps
@@ -794,7 +796,8 @@ module _
       ( eq-htpy
         ( λ (f , s) →
           apply-universal-property-trunc-Prop s
-            ( Id-Prop (set-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
+            ( Id-Prop
+              ( set-Group (loop-group-Set (quotient-set-Fin (n +ℕ 2))))
               ( map-emb
                 ( restriction-generating-subset-Group
                   ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))
@@ -1266,7 +1269,7 @@ module _
                     ( eq-counting-equivalence-class-R n)
                     ( eq-is-prop is-prop-type-trunc-Prop))) ∙
                 ( inv
-                  ( eq-tr-type-Ω
+                  ( eq-conjugation-tr-type-Ω
                     ( eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop))

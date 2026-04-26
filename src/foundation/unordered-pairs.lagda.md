@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
@@ -539,21 +540,18 @@ abstract
     type-trunc-Prop
       ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
   is-surjective-standard-unordered-pair (I , a) =
-    apply-universal-property-trunc-Prop
-      ( has-two-elements-type-2-Element-Type I)
-      ( trunc-Prop
-        ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
+    map-trunc-Prop
       ( λ e →
-        unit-trunc-Prop
-          ( a (map-equiv e (zero-Fin 1)) ,
-            a (map-equiv e (one-Fin 1)) ,
-            eq-Eq-unordered-pair
-              ( standard-unordered-pair _ _)
-              ( I , a)
-              ( e)
-              ( λ where
-                ( inl (inr _)) → refl
-                ( inr _) → refl)))
+        a (map-equiv e (zero-Fin 1)) ,
+        a (map-equiv e (one-Fin 1)) ,
+        eq-Eq-unordered-pair
+          ( standard-unordered-pair _ _)
+          ( I , a)
+          ( e)
+          ( λ where
+            ( inl (inr _)) → refl
+            ( inr _) → refl))
+      ( has-two-elements-type-2-Element-Type I)
 ```
 
 ### For every unordered pair `p` and every element `i` in its underlying type, `p` is equal to a standard unordered pair

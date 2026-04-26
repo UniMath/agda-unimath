@@ -10,19 +10,19 @@ module set-theory.baire-space where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.double-negation-stable-equality
 open import foundation.function-types
+open import foundation.function-types-with-apartness-relations
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.identity-types
-open import foundation-core.propositions
 
 open import set-theory.cantors-diagonal-argument
 open import set-theory.countable-sets
@@ -37,7 +37,7 @@ The
 {{#concept "Baire space" Disambiguation="as a type" Agda=baire-space WD="Baire space" WDID=Q803936}}
 is the [set](foundation-core.sets.md) of
 [functions](foundation-core.function-types.md) `ℕ → ℕ`. In other words, it is
-the set of infinite [sequences](foundation.sequences.md) of
+the set of infinite [sequences](lists.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition
@@ -48,6 +48,31 @@ baire-space = ℕ → ℕ
 ```
 
 ## Properties
+
+### The Baire space has a tight apartness relation
+
+```agda
+tight-apartness-relation-baire-space :
+  Tight-Apartness-Relation lzero baire-space
+tight-apartness-relation-baire-space =
+  tight-apartness-relation-function-into-Type-With-Tight-Apartness
+    ( ℕ)
+    ( ℕ-Type-With-Tight-Apartness)
+
+baire-space-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+baire-space-Type-With-Tight-Apartness =
+  function-into-Type-With-Tight-Apartness ℕ ℕ-Type-With-Tight-Apartness
+```
+
+### The Baire space has double negation stable equality
+
+```agda
+has-double-negation-stable-equality-baire-space :
+  has-double-negation-stable-equality baire-space
+has-double-negation-stable-equality-baire-space =
+  has-double-negation-stable-equality-type-Type-With-Tight-Apartness
+    baire-space-Type-With-Tight-Apartness
+```
 
 ### The Baire space is a set
 
@@ -62,7 +87,7 @@ baire-space-Set = (baire-space , is-set-baire-space)
 ### The Baire space is uncountable
 
 We give two proofs. The first proof uses that the successor function on the
-nautral numbers has no fixed points and applies
+natural numbers has no fixed points and applies
 [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md). The
 second proof uses that equality on the natural numbers is
 [decidable](foundation.decidable-types.md), and applies

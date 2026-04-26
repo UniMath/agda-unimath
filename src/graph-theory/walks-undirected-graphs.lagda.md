@@ -37,10 +37,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
-of a [list](lists.lists.md) of edges that connect the starting point with the
-end point. Walks may repeat edges and pass through the same vertex multiple
-times.
+A
+{{#concept "walk" Disambiguation="in an undirected graph" WD="walk" WDID=Q12776184 Agda=walk-Undirected-Graph}}
+in an [undirected graph](graph-theory.undirected-graphs.md) consists of a
+[list](lists.lists.md) of edges that connect the starting point with the end
+point. Walks may repeat edges and pass through the same vertex multiple times.
 
 ## Definitions
 
@@ -194,10 +195,7 @@ module _
       ( equiv-is-contr
         ( is-torsorial-Id (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coproduct
-      ( vertex-Undirected-Graph G)
-      ( is-vertex-on-walk-Undirected-Graph G w)
-      ( λ z → other-element-unordered-pair p y ＝ z))
+    ( left-distributive-Σ-coproduct)
 ```
 
 ### The type of edges on a constant walk is empty
@@ -233,10 +231,7 @@ module _
       ( equiv-is-contr
         ( is-torsorial-Id (pair p e))
         ( is-contr-unit))) ∘e
-    ( left-distributive-Σ-coproduct
-      ( total-edge-Undirected-Graph G)
-      ( is-edge-on-walk-Undirected-Graph' G w)
-      ( λ z → pair p e ＝ z))
+    ( left-distributive-Σ-coproduct)
 ```
 
 ### Right unit law for concatenation of walks

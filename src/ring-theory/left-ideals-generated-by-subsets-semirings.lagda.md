@@ -34,7 +34,7 @@ open import order-theory.reflective-galois-connections-large-posets
 
 open import ring-theory.left-ideals-semirings
 open import ring-theory.left-linear-combinations-of-elements-semirings
-open import ring-theory.monoids-with-semiring-actions
+open import ring-theory.monoids-with-left-semiring-action
 open import ring-theory.poset-of-left-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
@@ -87,7 +87,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (R : Semiring l1) {U : UU l2} (a : U → type-Semiring R)
-  (I : left-ideal-Semiring l3 R) (H : (α : U) → is-in-left-ideal-Semiring R I (a α))
+  (I : left-ideal-Semiring l3 R)
+  (H : (α : U) → is-in-left-ideal-Semiring R I (a α))
   where
 
   is-left-ideal-generated-by-family-of-elements-Semiring : UUω
@@ -125,7 +126,7 @@ module _
 
   is-closed-under-addition-left-ideal-subset-Semiring :
     is-closed-under-addition-subset-Semiring R subset-left-ideal-subset-Semiring
-  is-closed-under-addition-left-ideal-subset-Semiring x y H K =
+  is-closed-under-addition-left-ideal-subset-Semiring {x} {y} H K =
     apply-twice-universal-property-trunc-Prop H K
       ( subset-left-ideal-subset-Semiring _)
       ( λ H' K' →
@@ -141,7 +142,7 @@ module _
   is-closed-under-left-multiplication-left-ideal-subset-Semiring :
     is-closed-under-left-multiplication-subset-Semiring R
       ( subset-left-ideal-subset-Semiring)
-  is-closed-under-left-multiplication-left-ideal-subset-Semiring r x H =
+  is-closed-under-left-multiplication-left-ideal-subset-Semiring H =
     apply-universal-property-trunc-Prop H
       ( subset-left-ideal-subset-Semiring _)
       ( λ H' →
@@ -151,8 +152,8 @@ module _
             ( additive-monoid-with-left-semiring-action-Semiring R)
             ( λ t (s , H) → mul-Semiring R t s)
             ( λ s t (a , H) → associative-mul-Semiring R s t a)
-            ( r)
-            ( x)
+            ( _)
+            ( _)
             ( H')))
 
   left-ideal-subset-Semiring :
@@ -185,9 +186,7 @@ module _
   contains-left-linear-combinations-left-ideal-subset-Semiring I H
     ( cons (r , (s , K)) l) =
     is-closed-under-addition-left-ideal-Semiring R I
-      ( mul-Semiring R r s)
-      ( ev-left-linear-combination-subset-Semiring R S l)
-      ( is-closed-under-left-multiplication-left-ideal-Semiring R I r s (H s K))
+      ( is-closed-under-left-multiplication-left-ideal-Semiring R I (H s K))
       ( contains-left-linear-combinations-left-ideal-subset-Semiring I H l)
 
   is-left-ideal-generated-by-subset-left-ideal-subset-Semiring :
@@ -459,11 +458,7 @@ module _
   cases-forward-inclusion-idempotent-left-ideal-subset-Semiring
     ( cons (x , y , u) l) =
     is-closed-under-addition-left-ideal-Semiring R I
-      ( mul-Semiring R x y)
-      ( ev-left-linear-combination-subset-Semiring R
-        ( subset-left-ideal-Semiring R I)
-        ( l))
-      ( is-closed-under-left-multiplication-left-ideal-Semiring R I x y u)
+      ( is-closed-under-left-multiplication-left-ideal-Semiring R I u)
       ( cases-forward-inclusion-idempotent-left-ideal-subset-Semiring l)
 
   abstract

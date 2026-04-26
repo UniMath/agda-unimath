@@ -26,7 +26,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
@@ -139,12 +139,25 @@ module _
   {f : A → B} {g : C → D} {g' : E → F}
   where
 
-  is-local-retract-map :
-    is-local-map f g → g' retract-of-map g → is-local-map f g'
-  is-local-retract-map G R d =
+  is-local-retract-arrow :
+    is-local-map f g → g' retract-of-arrow g → is-local-map f g'
+  is-local-retract-arrow G R d =
     is-local-retract
-      ( retract-fiber-retract-map g' g R d)
-      ( G (map-codomain-inclusion-retract-map g' g R d))
+      ( retract-fiber-retract-arrow g' g R d)
+      ( G (map-codomain-inclusion-retract-arrow g' g R d))
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {f' : E → F}
+  where
+
+  is-local-retract-arrow' :
+    is-local-map f g → f' retract-of-arrow f → is-local-map f' g
+  is-local-retract-arrow' F R d =
+    is-local-retract-arrow-is-local f' f R (fiber g d) (F d)
 ```
 
 ## See also

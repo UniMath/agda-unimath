@@ -10,11 +10,11 @@ module elementary-number-theory.binomial-coefficients where
 open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.semiring-of-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -69,7 +69,7 @@ is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) _ = refl
 is-zero-binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) H =
   ap-add-ℕ
     ( is-zero-binomial-coefficient-ℕ n k H)
-    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-le-succ-ℕ n k H))
+    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-strict-order-succ-ℕ n k H))
 ```
 
 ### `binomial-coefficient-ℕ n n ＝ 1`

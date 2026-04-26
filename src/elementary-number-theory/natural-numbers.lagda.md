@@ -202,9 +202,13 @@ is-nonzero-four-ℕ ()
 
 ## See also
 
-- [The based induction principle](elementary-number-theory.based-induction-natural-numbers.md).
-- [The strong induction principle](elementary-number-theory.strong-induction-natural-numbers.md).
-- [The based strong induction principle](elementary-number-theory.based-strong-induction-natural-numbers.md).
+- The based induction principle is defined in
+  [`based-induction-natural-numbers`](elementary-number-theory.based-induction-natural-numbers.md).
+- The strong induction principle is defined in
+  [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
+- The based strong induction principle is defined in
+  [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).
+- [The W-type of natural numbers](trees.w-type-of-natural-numbers.md)
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)
 
 ## References

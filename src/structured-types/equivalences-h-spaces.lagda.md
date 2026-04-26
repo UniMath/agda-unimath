@@ -135,7 +135,7 @@ that the unit laws are preserved:
     ap (μ (e *) -) e₁ ∙ (right-unit-law (e *) ∙ e₁).
   ```
 
-  By unwhiskering of commuting squares of identifications, i.e., by cancelling
+  By unwhiskering of commuting squares of identifications, i.e., by canceling
   out `e₁` on both sides, it follows that the asserted square commutes.
 
 ## Definition

@@ -105,11 +105,11 @@ module _
 
   is-extension-extend-continuation :
     (f : A → continuation R B) →
-    is-extension unit-continuation f (extend-continuation f)
+    is-extension-of-map unit-continuation f (extend-continuation f)
   is-extension-extend-continuation f = refl-htpy
 
   extension-continuation :
-    (f : A → continuation R B) → extension unit-continuation f
+    (f : A → continuation R B) → extension-map unit-continuation f
   extension-continuation f =
     ( extend-continuation f , is-extension-extend-continuation f)
 ```

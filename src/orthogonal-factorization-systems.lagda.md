@@ -1,6 +1,6 @@
 # Orthogonal factorization systems
 
-## Examples of higher modalities
+## Instances of higher modalities
 
 {{#include tables/higher-modalities.md}}
 
@@ -9,12 +9,21 @@
 ```agda
 module orthogonal-factorization-systems where
 
+open import orthogonal-factorization-systems.anodyne-maps public
 open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
+open import orthogonal-factorization-systems.connected-maps-at-subuniverses public
+open import orthogonal-factorization-systems.connected-maps-at-subuniverses-over-type public
+open import orthogonal-factorization-systems.connected-types-at-subuniverses public
 open import orthogonal-factorization-systems.continuation-modalities public
+open import orthogonal-factorization-systems.coproducts-null-types public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.double-negation-sheaves public
+open import orthogonal-factorization-systems.equality-extensions-dependent-maps public
+open import orthogonal-factorization-systems.equality-extensions-maps public
+open import orthogonal-factorization-systems.equivalences-at-subuniverses public
+open import orthogonal-factorization-systems.extensions-dependent-maps public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-maps public
@@ -55,6 +64,7 @@ open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
+open import orthogonal-factorization-systems.postcomposition-extensions-maps public
 open import orthogonal-factorization-systems.precomposition-lifts-families-of-elements public
 open import orthogonal-factorization-systems.pullback-hom public
 open import orthogonal-factorization-systems.raise-modalities public
@@ -71,6 +81,7 @@ open import orthogonal-factorization-systems.types-local-at-maps public
 open import orthogonal-factorization-systems.types-separated-at-maps public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses public
+open import orthogonal-factorization-systems.weakly-anodyne-maps public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.wide-global-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

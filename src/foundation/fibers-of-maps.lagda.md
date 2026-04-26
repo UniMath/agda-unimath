@@ -12,6 +12,7 @@ open import foundation-core.fibers-of-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -141,6 +142,55 @@ module _
     {y y' : B} (p : y ＝ y') (u : fiber f y) →
     tot (λ x → concat' _ p) u ＝ tr (fiber f) p u
   compute-tr-fiber refl u = ap (pair _) right-unit
+
+  inv-compute-tr-fiber :
+    {y y' : B} (p : y ＝ y') (u : fiber f y) →
+    tr (fiber f) p u ＝ tot (λ x → concat' _ p) u
+  inv-compute-tr-fiber p u = inv (compute-tr-fiber p u)
+
+  compute-tr-fiber' :
+    {y y' : B} (p : y ＝ y') (u : fiber' f y) →
+    tot (λ x q → inv p ∙ q) u ＝ tr (fiber' f) p u
+  compute-tr-fiber' refl u = refl
+
+  inv-compute-tr-fiber' :
+    {y y' : B} (p : y ＝ y') (u : fiber' f y) →
+    tr (fiber' f) p u ＝ tot (λ x q → inv p ∙ q) u
+  inv-compute-tr-fiber' p u = inv (compute-tr-fiber' p u)
+```
+
+### Transport in fibers along the fiber
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  compute-tr-self-fiber :
+    {y : B} (u : fiber f y) → (pr1 u , refl) ＝ tr (fiber f) (inv (pr2 u)) u
+  compute-tr-self-fiber (._ , refl) = refl
+
+  inv-compute-tr-self-fiber :
+    {y : B} (u : fiber f y) → tr (fiber f) (inv (pr2 u)) u ＝ (pr1 u , refl)
+  inv-compute-tr-self-fiber u = inv (compute-tr-self-fiber u)
+
+  compute-tr-self-fiber' :
+    {y : B} (u : fiber' f y) → (pr1 u , refl) ＝ tr (fiber' f) (pr2 u) u
+  compute-tr-self-fiber' (._ , refl) = refl
+
+  inv-compute-tr-self-fiber' :
+    {y : B} (u : fiber' f y) → tr (fiber' f) (pr2 u) u ＝ (pr1 u , refl)
+  inv-compute-tr-self-fiber' u = inv (compute-tr-self-fiber' u)
+
+  compute-ap-map-equiv-total-fiber'-eq-pair-Σ-inv-compute-tr-self-fiber' :
+    {y : B} (u : fiber' f y) →
+    ap
+      ( map-equiv-total-fiber' f)
+      ( eq-pair-Σ (pr2 u) (inv (compute-tr-self-fiber' u))) ＝
+    refl
+  compute-ap-map-equiv-total-fiber'-eq-pair-Σ-inv-compute-tr-self-fiber'
+    (._ , refl) =
+    refl
 ```
 
 ## Table of files about fibers of maps

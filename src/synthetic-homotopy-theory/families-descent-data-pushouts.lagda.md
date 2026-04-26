@@ -23,10 +23,8 @@ open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
 
 ## Idea
 
-In
-[`descent-property-pushouts`](synthetic-homotopy-theory.descent-property-pushouts.md)
-we show that given
-[descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
+In [`descent-pushouts`](synthetic-homotopy-theory.descent-pushouts.md) we show
+that given [descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
 `(PA, PB, PS)` over a [span diagram](foundation.span-diagrams.md) `𝒮`, there is
 a unique type family `P` over its
 [pushout](synthetic-homotopy-theory.pushouts.md) such that its induced descent
@@ -50,11 +48,11 @@ module _
   where
 
   family-with-descent-data-pushout :
-    (l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  family-with-descent-data-pushout l5 =
-    Σ ( X → UU l5)
+    (l5 l6 l7 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7)
+  family-with-descent-data-pushout l5 l6 l7 =
+    Σ ( X → UU l7)
       ( λ P →
-        Σ ( descent-data-pushout 𝒮 l5)
+        Σ ( descent-data-pushout 𝒮 l5 l6)
           ( λ Q →
             equiv-descent-data-pushout
               ( descent-data-family-cocone-span-diagram c P)
@@ -65,15 +63,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
   where
 
-  family-cocone-family-with-descent-data-pushout : X → UU l5
+  family-cocone-family-with-descent-data-pushout : X → UU l7
   family-cocone-family-with-descent-data-pushout = pr1 P
 
-  descent-data-family-with-descent-data-pushout : descent-data-pushout 𝒮 l5
+  descent-data-family-with-descent-data-pushout : descent-data-pushout 𝒮 l5 l6
   descent-data-family-with-descent-data-pushout = pr1 (pr2 P)
 
   left-family-family-with-descent-data-pushout :
@@ -83,7 +81,7 @@ module _
       ( descent-data-family-with-descent-data-pushout)
 
   right-family-family-with-descent-data-pushout :
-    codomain-span-diagram 𝒮 → UU l5
+    codomain-span-diagram 𝒮 → UU l6
   right-family-family-with-descent-data-pushout =
     right-family-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout)
@@ -224,8 +222,7 @@ module _
         ( family-cocone-family-with-descent-data-pushout)
         ( coherence-square-cocone _ _ c s))
       ( map-family-family-with-descent-data-pushout s)
-      ( right-map-family-with-descent-data-pushout
-        ( right-map-span-diagram 𝒮 s))
+      ( right-map-family-with-descent-data-pushout (right-map-span-diagram 𝒮 s))
   coherence-family-with-descent-data-pushout =
     coherence-equiv-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c
@@ -243,12 +240,11 @@ module _
   where
 
   family-with-descent-data-pushout-family-cocone :
-    {l5 : Level} (P : X → UU l5) →
-    family-with-descent-data-pushout c l5
-  pr1 (family-with-descent-data-pushout-family-cocone P) = P
+    {l : Level} (P : X → UU l) → family-with-descent-data-pushout c l l l
+  pr1 (family-with-descent-data-pushout-family-cocone P) =
+    P
   pr1 (pr2 (family-with-descent-data-pushout-family-cocone P)) =
     descent-data-family-cocone-span-diagram c P
   pr2 (pr2 (family-with-descent-data-pushout-family-cocone P)) =
-    id-equiv-descent-data-pushout
-      ( descent-data-family-cocone-span-diagram c P)
+    id-equiv-descent-data-pushout (descent-data-family-cocone-span-diagram c P)
 ```

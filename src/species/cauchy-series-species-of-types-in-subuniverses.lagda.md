@@ -1,4 +1,4 @@
-# Cauchy series of species of types in a subuniverse
+# Cauchy series of species of types in subuniverses
 
 ```agda
 module species.cauchy-series-species-of-types-in-subuniverses where
@@ -27,11 +27,13 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The **Cauchy series** of a species `S` of types in subuniverse from `P` to `Q`
-at `X` is defined as :
+The
+{{#concept "Cauchy series" Disambiguation="of species of types in subuniverses" Agda=cauchy-series-species-subuniverse}}
+of a [species](species.species-of-types-in-subuniverses.md) `S` of types in
+[subuniverse](foundation.subuniverses.md) from `P` to `Q` at `X` is defined as
 
 ```text
-Σ (U : type-subuniverse P) (S(U) × (U → X))
+  Σ (U : type-subuniverse P) (S(U) × (U → X)).
 ```
 
 ## Definition
@@ -61,25 +63,15 @@ module _
     cauchy-series-species-subuniverse ≃
     cauchy-series-species-types (Σ-extension-species-subuniverse P Q S) X
   equiv-cauchy-series-Σ-extension-species-subuniverse =
-    ( equiv-tot
-      ( λ U →
-        inv-associative-Σ
-          ( type-Prop (P U))
-          ( λ p → inclusion-subuniverse Q (S (U , p)))
-          ( λ _ → U → X))) ∘e
-    ( associative-Σ
-      ( UU l1)
-      ( λ U → type-Prop (P U))
-      ( λ U → Σ ( inclusion-subuniverse Q (S U)) (λ _ → pr1 U → X)))
+    (equiv-tot (λ U → inv-associative-Σ)) ∘e (associative-Σ)
 ```
 
 ### Equivalences
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2)
-  (Q : global-subuniverse (λ l → l))
+  {α : Level → Level} {l1 l2 l3 l4 l5 : Level}
+  (P : subuniverse l1 l2) (Q : global-subuniverse α)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (f :
@@ -101,7 +93,7 @@ module _
       ( T)
       ( X)
   equiv-cauchy-series-equiv-species-subuniverse =
-    equiv-tot λ X → equiv-product (f X) id-equiv
+    equiv-tot (λ X → equiv-product-left (f X))
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -119,5 +111,5 @@ module _
   equiv-cauchy-series-species-subuniverse =
     equiv-tot
       ( λ F →
-        equiv-product id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
+        equiv-product-right (equiv-postcomp (inclusion-subuniverse P F) e))
 ```

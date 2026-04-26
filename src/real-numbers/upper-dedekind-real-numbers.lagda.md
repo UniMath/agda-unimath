@@ -1,13 +1,19 @@
 # Upper Dedekind real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.upper-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-positive-rational-numbers
+open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -18,15 +24,18 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
@@ -96,6 +105,20 @@ module _
 
 ## Properties
 
+### The least upper Dedekind real
+
+There is a least upper Dedekind real whose cut is all rational numbers. We call
+this element **negative infinity**.
+
+```agda
+neg-infinity-upper-ℝ : upper-ℝ lzero
+pr1 neg-infinity-upper-ℝ _ = unit-Prop
+pr1 (pr2 neg-infinity-upper-ℝ) = intro-exists zero-ℚ star
+pr1 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ =
+  map-tot-exists (λ _ → _, star) (exists-lesser-ℚ q)
+pr2 (pr2 (pr2 neg-infinity-upper-ℝ) q) _ = star
+```
+
 ### The upper Dedekind reals form a set
 
 ```agda
@@ -114,12 +137,31 @@ module _
   {l : Level} (x : upper-ℝ l) (p q : ℚ)
   where
 
-  is-in-cut-le-ℚ-upper-ℝ :
-    le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
-  is-in-cut-le-ℚ-upper-ℝ p<q p<x =
-    backward-implication
-      ( is-rounded-cut-upper-ℝ x q)
-      ( intro-exists p (p<q , p<x))
+  abstract
+    is-in-cut-le-ℚ-upper-ℝ :
+      le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+    is-in-cut-le-ℚ-upper-ℝ p<q p<x =
+      backward-implication
+        ( is-rounded-cut-upper-ℝ x q)
+        ( intro-exists p (p<q , p<x))
+```
+
+### Upper Dedekind cuts are closed under the addition of positive rational numbers
+
+```agda
+module _
+  {l : Level} (x : upper-ℝ l) (p : ℚ) (d : ℚ⁺)
+  where
+
+  abstract
+    is-in-cut-add-rational-ℚ⁺-upper-ℝ :
+      is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x (p +ℚ rational-ℚ⁺ d)
+    is-in-cut-add-rational-ℚ⁺-upper-ℝ =
+      is-in-cut-le-ℚ-upper-ℝ
+        ( x)
+        ( p)
+        ( p +ℚ rational-ℚ⁺ d)
+        ( le-right-add-rational-ℚ⁺ p d)
 ```
 
 ### Upper Dedekind cuts are closed under inequality on the rationals
@@ -129,11 +171,13 @@ module _
   {l : Level} (x : upper-ℝ l) (p q : ℚ)
   where
 
-  is-in-cut-leq-ℚ-upper-ℝ :
-    leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
-  is-in-cut-leq-ℚ-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
-  ... | inl p<q = is-in-cut-le-ℚ-upper-ℝ x p q p<q x<p
-  ... | inr q≤p = tr (is-in-cut-upper-ℝ x) (antisymmetric-leq-ℚ p q p≤q q≤p) x<p
+  abstract
+    is-in-cut-leq-ℚ-upper-ℝ :
+      leq-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
+    is-in-cut-leq-ℚ-upper-ℝ p≤q x<p with decide-le-leq-ℚ p q
+    ... | inl p<q = is-in-cut-le-ℚ-upper-ℝ x p q p<q x<p
+    ... | inr q≤p =
+      tr (is-in-cut-upper-ℝ x) (antisymmetric-leq-ℚ p q p≤q q≤p) x<p
 ```
 
 ### Two upper real numbers with the same cut are equal
@@ -148,8 +192,7 @@ module _
 
   eq-sim-cut-upper-ℝ : sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) → x ＝ y
   eq-sim-cut-upper-ℝ =
-    eq-eq-cut-upper-ℝ ∘
-    antisymmetric-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
+    eq-eq-cut-upper-ℝ ∘ eq-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
 ```
 
 ## See also

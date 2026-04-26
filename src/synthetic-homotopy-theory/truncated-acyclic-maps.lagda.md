@@ -35,7 +35,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
@@ -88,7 +88,11 @@ module _
 
 ## Properties
 
-### A map is `k`-acyclic if and only if it is an [epimorphism with respect to `k`-types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+### A map is `k`-acyclic if and only if it is an epimorphism with respect to `k`-types
+
+This theorem characterizes the
+[`k`-epimorphisms](foundation.epimorphisms-with-respect-to-truncated-types.md)
+in homotopy type theory. {{#cite BdJR24}}
 
 ```agda
 module _
@@ -240,7 +244,9 @@ module _
             ( h X x y)))
 ```
 
-### A map is `k`-acyclic if and only if it is an [dependent `k`-epimorphism](foundation.dependent-epimorphisms-with-respect-to-truncated-types.md)
+### A map is `k`-acyclic if and only if it is a dependent `k`-epimorphism { #a-map-is-k-acyclic-if-and-only-if-it-is-an-dependent-k-epimorphism }
+
+<!-- The explicit id is there because it's linked to from the BdJR24 paper -->
 
 The proof is similar to that of dependent epimorphisms and
 [acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).
@@ -401,9 +407,7 @@ module _
     is-truncation-equivalence k f → is-truncated-acyclic-map k f
   is-truncated-acyclic-map-is-truncation-equivalence e =
     is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
-      ( λ C →
-        is-emb-is-equiv
-          ( is-equiv-precomp-is-truncation-equivalence k f e C))
+      ( λ C → is-emb-is-equiv (is-equiv-precomp-is-truncation-equivalence e C))
 ```
 
 ### `k`-acyclic maps are closed under pullbacks
@@ -523,13 +527,13 @@ module _
   where
 
   is-truncated-acyclic-map-retract-of :
-    f retract-of-map g →
+    f retract-of-arrow g →
     is-truncated-acyclic-map k g →
     is-truncated-acyclic-map k f
   is-truncated-acyclic-map-retract-of R ac b =
     is-truncated-acyclic-retract-of
-      ( retract-fiber-retract-map f g R b)
-      ( ac (map-codomain-inclusion-retract-map f g R b))
+      ( retract-fiber-retract-arrow f g R b)
+      ( ac (map-codomain-inclusion-retract-arrow f g R b))
 ```
 
 ### `k`-acyclic maps are closed under pushouts

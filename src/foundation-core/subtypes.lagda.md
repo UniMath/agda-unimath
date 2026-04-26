@@ -9,6 +9,7 @@ module foundation-core.subtypes where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
@@ -192,6 +193,9 @@ module _
   pr1 emb-subtype = inclusion-subtype B
   pr2 emb-subtype = is-emb-inclusion-subtype
 
+  injection-subtype : injection (type-subtype B) A
+  injection-subtype = injection-emb emb-subtype
+
   equiv-ap-inclusion-subtype :
     {s t : type-subtype B} →
     (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
@@ -304,22 +308,41 @@ pr1 (set-subset A P) = type-subtype P
 pr2 (set-subset A P) = is-set-type-subtype P (is-set-type-Set A)
 ```
 
+### If `P ⊆ Q`, then there is a map from the underlying type of P to the underlying type of Q
+
+```agda
+map-inclusion-type-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} (P : subtype l2 A) (Q : subtype l3 A) →
+  P ⊆ Q → type-subtype P → type-subtype Q
+map-inclusion-type-subtype P Q f = tot f
+```
+
+### If `f : A → B` and `P ⊆ Q ∘ f`, then there is a map from the underlying type of P to the underlying type of Q
+
+```agda
+map-type-subtype :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (P : subtype l3 A) (Q : subtype l4 B) (g : P ⊆ Q ∘ f) →
+  type-subtype P → type-subtype Q
+map-type-subtype f P Q g =
+  map-Σ (is-in-subtype Q) f g
+```
+
 ### Logically equivalent subtypes induce equivalences on the underlying type of a subtype
 
 ```agda
 equiv-type-subtype :
-  { l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
-  ( is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q) →
-  ( f : (x : A) → P x → Q x) →
-  ( g : (x : A) → Q x → P x) →
-  ( Σ A P) ≃ (Σ A Q)
-pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
-pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
+  {l1 l2 l3 : Level} {A : UU l1}
+  (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
+  type-subtype P ≃ type-subtype Q
+pr1 (equiv-type-subtype P Q f g) =
+  map-inclusion-type-subtype P Q f
+pr2 (equiv-type-subtype P Q f g) =
   is-equiv-tot-is-fiberwise-equiv
     ( λ x →
       is-equiv-has-converse-is-prop
-        ( is-subtype-P x)
-        ( is-subtype-Q x)
+        ( is-prop-is-in-subtype P x)
+        ( is-prop-is-in-subtype Q x)
         ( g x))
 ```
 

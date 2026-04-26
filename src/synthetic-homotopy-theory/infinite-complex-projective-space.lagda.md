@@ -1,4 +1,4 @@
-# The infinite complex projective space
+# The infinite dimensional complex projective space
 
 ```agda
 module synthetic-homotopy-theory.infinite-complex-projective-space where
@@ -34,3 +34,7 @@ pr2 point-ℂP∞ = unit-trunc-Set id-equiv
 
 This remains to be defined.
 [#742](https://github.com/UniMath/agda-unimath/issues/742)
+
+## See also
+
+- [The infinite dimensional real projective space](synthetic-homotopy-theory.infinite-real-projective-space.md)

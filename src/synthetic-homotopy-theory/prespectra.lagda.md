@@ -26,7 +26,7 @@ open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-
 
 ## Idea
 
-A **prespectrum** is a [sequence](foundation.sequences.md) of
+A **prespectrum** is a [sequence](lists.sequences.md) of
 [pointed types](structured-types.pointed-types.md) `Aₙ`
 [equipped](foundation.structure.md) with
 [pointed maps](structured-types.pointed-maps.md)

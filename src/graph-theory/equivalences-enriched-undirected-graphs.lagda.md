@@ -30,13 +30,15 @@ open import graph-theory.neighbors-undirected-graphs
 
 ## Idea
 
-An **equivalence of `(A,B)`-enriched undirected graphs** from an
-[`(A,B)`-enriched undirected graph](graph-theory.enriched-undirected-graphs.md)
-`G` to an `(A,B)`-enriched undirected graph `H` consists of an
+An
+{{#concept "equivalence" Disambiguation="of enriched undirected graphs" Agda=equiv-Enriched-Undirected-Graph}}
+of
+`(A,B)`-[enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
+from `G` to `H` consists of an
 [equivalence](graph-theory.equivalences-undirected-graphs.md) `e` of the
-underlying graphs of `G` and `H` such that preserving the labeling and the
-[equivalences](foundation-core.equivalences.md) on the
-[neighbors](graph-theory.neighbors-undirected-graphs.md).
+underlying [graphs](graph-theory.undirected-graphs.md) of `G` and `H` such that
+preserving the labeling and the [equivalences](foundation-core.equivalences.md)
+on the [neighbors](graph-theory.neighbors-undirected-graphs.md).
 
 ## Definition
 

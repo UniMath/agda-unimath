@@ -11,6 +11,10 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -264,7 +268,7 @@ is-nonempty-structure-is-in-family-is-largest-lower-bound-ℕ P n H f =
 
 ```agda
 structure-largest-lower-bound-is-decidable-fam-ℕ :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   (n : ℕ) → is-largest-lower-bound-ℕ P n → P n
 structure-largest-lower-bound-is-decidable-fam-ℕ P d n H =
   double-negation-elim-is-decidable
@@ -281,4 +285,58 @@ is-largest-lower-bound-is-lower-bound-ℕ :
 pr1 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K = K n p
 pr2 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K x q =
   transitive-leq-ℕ m n x (H x q) K
+```
+
+### If `P` is a decidable subtype of `ℕ`, then being a lower bound for `P` is decidable
+
+```agda
+module _
+  {l1 : Level} (P : decidable-subtype l1 ℕ)
+  where
+
+  abstract
+    is-decidable-is-lower-bound-decidable-subtype-ℕ :
+      (x : ℕ) → is-decidable (is-lower-bound-ℕ (is-in-decidable-subtype P) x)
+    is-decidable-is-lower-bound-decidable-subtype-ℕ zero-ℕ =
+      inl (λ y _ → leq-zero-ℕ y)
+    is-decidable-is-lower-bound-decidable-subtype-ℕ (succ-ℕ n)
+      with
+        is-decidable-is-lower-bound-decidable-subtype-ℕ n |
+        is-decidable-decidable-subtype P n
+    ... | inr ¬bound-n | _ =
+      inr
+        ( λ bound-sn →
+          ¬bound-n
+            ( λ m pm →
+              transitive-leq-ℕ n (succ-ℕ n) m (bound-sn m pm) (succ-leq-ℕ n)))
+    ... | inl bound-n | inl pn =
+      inr
+        ( λ bound-sn →
+          contradiction-le-ℕ
+            ( n)
+            ( succ-ℕ n)
+            ( succ-le-ℕ n)
+            ( bound-sn n pn))
+    ... | inl bound-n | inr ¬pn =
+      inl
+        ( λ m pm →
+          leq-not-le-ℕ
+            ( m)
+            ( succ-ℕ n)
+            ( λ m<sn →
+              rec-coproduct
+                ( λ m<n → contradiction-le-ℕ m n m<n (bound-n m pm))
+                ( λ n≤m →
+                  ¬pn
+                    ( tr
+                      ( is-in-decidable-subtype P)
+                      ( antisymmetric-leq-ℕ m n (leq-le-succ-ℕ m n m<sn) n≤m)
+                      ( pm)))
+                ( decide-le-leq-ℕ m n)))
+
+  decidable-subtype-lower-bound-decidable-subtype-ℕ : decidable-subtype l1 ℕ
+  decidable-subtype-lower-bound-decidable-subtype-ℕ n =
+    ( is-lower-bound-ℕ (is-in-decidable-subtype P) n ,
+      is-prop-is-lower-bound-ℕ (is-in-decidable-subtype P) n ,
+      is-decidable-is-lower-bound-decidable-subtype-ℕ n)
 ```

@@ -10,9 +10,10 @@ module foundation.inverse-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.iterating-functions
 ```
 
 </details>
@@ -21,8 +22,8 @@ open import foundation.universe-levels
 
 An
 {{#concept "inverse sequential diagram" Disambiguation="types" Agda=inverse-sequential-diagram}}
-of types `A` is a [sequence](foundation.sequences.md) of types together with
-maps between every two consecutive types
+of types `A` is a [sequence](lists.sequences.md) of types together with maps
+between every two consecutive types
 
 ```text
   fₙ : Aₙ₊₁ → Aₙ

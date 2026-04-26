@@ -85,7 +85,7 @@ module _
   where
 
   retraction-map-section-precomp : section (precomp f X) → retraction f
-  retraction-map-section-precomp (s , S) = s id , htpy-eq (S id)
+  retraction-map-section-precomp (s , S) = (s id , htpy-eq (S id))
 ```
 
 ### If `f` has a retraction then `- ∘ f : (Y → X) → (X → X)` has a section
@@ -96,7 +96,7 @@ module _
   where
 
   section-precomp-retraction-map : retraction f → section (precomp f X)
-  section-precomp-retraction-map (r , H) = precomp r X , htpy-precomp H X
+  section-precomp-retraction-map (r , H) = (precomp r X , htpy-precomp H X)
 ```
 
 ### Equivalences induce an equivalence from the type of homotopies between two maps to the type of homotopies between their precomposites
@@ -131,25 +131,25 @@ commutes.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {X : UU l3}
   where
 
-  compute-coherence-triangle-fiber-precomp' :
+  compute-extension-fiber-precomp' :
     (g : A → X) →
     fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps' g h f)
-  compute-coherence-triangle-fiber-precomp' g = equiv-tot (λ _ → equiv-funext)
+  compute-extension-fiber-precomp' g = equiv-tot (λ _ → equiv-funext)
 
-  compute-coherence-triangle-fiber-precomp :
+  compute-extension-fiber-precomp :
     (g : A → X) →
     fiber (precomp f X) g ≃ Σ (B → X) (λ h → coherence-triangle-maps g h f)
-  compute-coherence-triangle-fiber-precomp g =
+  compute-extension-fiber-precomp g =
     equiv-tot (λ _ → equiv-funext) ∘e equiv-fiber (precomp f X) g
 
   compute-fiber-precomp :
     (g : B → X) →
     fiber (precomp f X) (g ∘ f) ≃
     Σ (B → X) (λ h → coherence-square-maps f f h g)
-  compute-fiber-precomp g = compute-coherence-triangle-fiber-precomp (g ∘ f)
+  compute-fiber-precomp g = compute-extension-fiber-precomp (g ∘ f)
 
   compute-total-fiber-precomp :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃

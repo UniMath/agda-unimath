@@ -38,7 +38,9 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-An **ideal** in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
+An
+{{#concept "ideal" Disambiguation="in a ring" WD="ideal" WDID=Q44649 Agda=ideal-Ring}}
+in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
 
 ## Definitions
 
@@ -121,6 +123,13 @@ module _
   is-closed-under-addition-ideal-Ring =
     pr1 (pr2 is-additive-subgroup-ideal-Ring)
 
+  is-additive-submonoid-ideal-Ring :
+    is-additive-submonoid-subset-Ring R subset-ideal-Ring
+  pr1 is-additive-submonoid-ideal-Ring =
+    contains-zero-ideal-Ring
+  pr2 is-additive-submonoid-ideal-Ring =
+    is-closed-under-addition-ideal-Ring
+
   is-closed-under-negatives-ideal-Ring :
     is-closed-under-negatives-subset-Ring R subset-ideal-Ring
   is-closed-under-negatives-ideal-Ring =
@@ -146,15 +155,21 @@ module _
   normal-subgroup-ideal-Ring =
     normal-subgroup-Subgroup-Ab (ab-Ring R) subgroup-ideal-Ring
 
-  left-ideal-ideal-Ring : left-ideal-Ring l2 R
-  pr1 left-ideal-ideal-Ring = subset-ideal-Ring
-  pr1 (pr2 left-ideal-ideal-Ring) = is-additive-subgroup-ideal-Ring
+  left-ideal-ideal-Ring :
+    left-ideal-Ring l2 R
+  pr1 left-ideal-ideal-Ring =
+    subset-ideal-Ring
+  pr1 (pr2 left-ideal-ideal-Ring) =
+    is-additive-submonoid-ideal-Ring
   pr2 (pr2 left-ideal-ideal-Ring) =
     is-closed-under-left-multiplication-ideal-Ring
 
-  right-ideal-ideal-Ring : right-ideal-Ring l2 R
-  pr1 right-ideal-ideal-Ring = subset-ideal-Ring
-  pr1 (pr2 right-ideal-ideal-Ring) = is-additive-subgroup-ideal-Ring
+  right-ideal-ideal-Ring :
+    right-ideal-Ring l2 R
+  pr1 right-ideal-ideal-Ring =
+    subset-ideal-Ring
+  pr1 (pr2 right-ideal-ideal-Ring) =
+    is-additive-submonoid-ideal-Ring
   pr2 (pr2 right-ideal-ideal-Ring) =
     is-closed-under-right-multiplication-ideal-Ring
 ```
@@ -340,14 +355,8 @@ module _
   is-congruence-monoid-mul-congruence-ideal-Ring {x} {y} {u} {v} e f =
     ( is-closed-under-eq-ideal-Ring R I
       ( is-closed-under-addition-ideal-Ring R I
-        ( is-closed-under-right-multiplication-ideal-Ring R I
-          ( add-Ring R (neg-Ring R x) y)
-          ( u)
-          ( e))
-        ( is-closed-under-left-multiplication-ideal-Ring R I
-          ( y)
-          ( add-Ring R (neg-Ring R u) v)
-          ( f))))
+        ( is-closed-under-right-multiplication-ideal-Ring R I e)
+        ( is-closed-under-left-multiplication-ideal-Ring R I f)))
     ( equational-reasoning
       ( add-Ring R
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
@@ -442,17 +451,17 @@ module _
 
   is-closed-under-left-multiplication-subset-congruence-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-congruence-Ring
-  is-closed-under-left-multiplication-subset-congruence-Ring x y H =
+  is-closed-under-left-multiplication-subset-congruence-Ring H =
     concatenate-eq-sim-congruence-Ring R S
-      ( inv (right-zero-law-mul-Ring R x))
-      ( left-mul-congruence-Ring R S x H)
+      ( inv (right-zero-law-mul-Ring R _))
+      ( left-mul-congruence-Ring R S _ H)
 
   is-closed-under-right-multiplication-subset-congruence-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-congruence-Ring
-  is-closed-under-right-multiplication-subset-congruence-Ring x y H =
+  is-closed-under-right-multiplication-subset-congruence-Ring H =
     concatenate-eq-sim-congruence-Ring R S
-      ( inv (left-zero-law-mul-Ring R y))
-      ( right-mul-congruence-Ring R S H y)
+      ( inv (left-zero-law-mul-Ring R _))
+      ( right-mul-congruence-Ring R S H _)
 
   is-additive-subgroup-congruence-Ring :
     is-additive-subgroup-subset-Ring R subset-congruence-Ring

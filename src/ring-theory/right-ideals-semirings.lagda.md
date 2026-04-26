@@ -18,6 +18,9 @@ open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import group-theory.submonoids
+
+open import ring-theory.nonunital-subsemirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 ```
@@ -64,6 +67,10 @@ module _
   subset-right-ideal-Semiring : subset-Semiring l2 R
   subset-right-ideal-Semiring = pr1 I
 
+  is-right-ideal-right-ideal-Semiring :
+    is-right-ideal-subset-Semiring R subset-right-ideal-Semiring
+  is-right-ideal-right-ideal-Semiring = pr2 I
+
   is-in-right-ideal-Semiring : type-Semiring R → UU l2
   is-in-right-ideal-Semiring x = type-Prop (subset-right-ideal-Semiring x)
 
@@ -99,34 +106,56 @@ module _
   is-closed-under-eq-right-ideal-Semiring' =
     is-closed-under-eq-subset-Semiring' R subset-right-ideal-Semiring
 
-  is-right-ideal-subset-right-ideal-Semiring :
-    is-right-ideal-subset-Semiring R subset-right-ideal-Semiring
-  is-right-ideal-subset-right-ideal-Semiring = pr2 I
-
-  is-additive-submonoid-subset-right-ideal-Semiring :
+  is-additive-submonoid-right-ideal-Semiring :
     is-additive-submonoid-subset-Semiring R subset-right-ideal-Semiring
-  is-additive-submonoid-subset-right-ideal-Semiring =
-    pr1 is-right-ideal-subset-right-ideal-Semiring
+  is-additive-submonoid-right-ideal-Semiring =
+    pr1 is-right-ideal-right-ideal-Semiring
+
+  additive-submonoid-right-ideal-Semiring :
+    Submonoid l2 (additive-monoid-Semiring R)
+  pr1 additive-submonoid-right-ideal-Semiring =
+    subset-right-ideal-Semiring
+  pr2 additive-submonoid-right-ideal-Semiring =
+    is-additive-submonoid-right-ideal-Semiring
 
   contains-zero-right-ideal-Semiring :
     is-in-right-ideal-Semiring (zero-Semiring R)
   contains-zero-right-ideal-Semiring =
-    pr1 is-additive-submonoid-subset-right-ideal-Semiring
+    pr1 is-additive-submonoid-right-ideal-Semiring
 
   is-closed-under-addition-right-ideal-Semiring :
     is-closed-under-addition-subset-Semiring R subset-right-ideal-Semiring
   is-closed-under-addition-right-ideal-Semiring =
-    pr2 is-additive-submonoid-subset-right-ideal-Semiring
+    pr2 is-additive-submonoid-right-ideal-Semiring
 
   is-closed-under-right-multiplication-right-ideal-Semiring :
     is-closed-under-right-multiplication-subset-Semiring R
       subset-right-ideal-Semiring
   is-closed-under-right-multiplication-right-ideal-Semiring =
-    pr2 is-right-ideal-subset-right-ideal-Semiring
+    pr2 is-right-ideal-right-ideal-Semiring
 
-  is-right-ideal-right-ideal-Semiring :
-    is-right-ideal-subset-Semiring R subset-right-ideal-Semiring
-  is-right-ideal-right-ideal-Semiring = pr2 I
+  is-closed-under-multiplication-right-ideal-Semiring :
+    is-closed-under-multiplication-subset-Semiring R
+      ( subset-right-ideal-Semiring)
+  is-closed-under-multiplication-right-ideal-Semiring =
+    is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring
+      ( R)
+      ( subset-right-ideal-Semiring)
+      ( is-closed-under-right-multiplication-right-ideal-Semiring)
+
+  is-nonunital-subsemiring-right-ideal-Semiring :
+    is-nonunital-subsemiring-subset-Semiring R subset-right-ideal-Semiring
+  pr1 is-nonunital-subsemiring-right-ideal-Semiring =
+    is-additive-submonoid-right-ideal-Semiring
+  pr2 is-nonunital-subsemiring-right-ideal-Semiring =
+    is-closed-under-multiplication-right-ideal-Semiring
+
+  nonunital-subsemiring-right-ideal-Semiring :
+    Nonunital-Subsemiring l2 R
+  pr1 nonunital-subsemiring-right-ideal-Semiring =
+    subset-right-ideal-Semiring
+  pr2 nonunital-subsemiring-right-ideal-Semiring =
+    is-nonunital-subsemiring-right-ideal-Semiring
 ```
 
 ## Properties

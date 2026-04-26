@@ -162,6 +162,15 @@ quotient-euclidean-division-ℕ' (succ-ℕ k) n =
   array-quotient-euclidean-division-ℕ k n k
 ```
 
+### The map of the extended Euclidean algorithm
+
+```agda
+map-extended-euclidean-algorithm : ℕ × ℕ → ℕ × ℕ
+pr1 (map-extended-euclidean-algorithm (pair x y)) = y
+pr2 (map-extended-euclidean-algorithm (pair x y)) =
+  remainder-euclidean-division-ℕ y x
+```
+
 ## Properties
 
 ### If `d` divides a number `n`, then its quotient by euclidean division is its quotient by division

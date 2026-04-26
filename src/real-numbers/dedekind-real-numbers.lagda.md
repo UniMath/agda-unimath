@@ -8,20 +8,20 @@ module real-numbers.dedekind-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.maximum-rational-numbers
+open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
-open import foundation.complements-subtypes
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -29,16 +29,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
 open import foundation.universal-quantification
 open import foundation.universe-levels
-
-open import foundation-core.truncation-levels
 
 open import logic.functoriality-existential-quantification
 
@@ -90,7 +87,7 @@ module _
 
   is-disjoint-prop-lower-upper-ℝ : Prop (l1 ⊔ l2)
   is-disjoint-prop-lower-upper-ℝ =
-    ∀' ℚ (λ q → ¬' (cut-lower-ℝ lx q ∧ cut-upper-ℝ uy q))
+    disjoint-subtype-Prop (cut-lower-ℝ lx) (cut-upper-ℝ uy)
 
   is-disjoint-lower-upper-ℝ : UU (l1 ⊔ l2)
   is-disjoint-lower-upper-ℝ = type-Prop is-disjoint-prop-lower-upper-ℝ
@@ -169,13 +166,13 @@ module _
     exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ = is-rounded-cut-upper-ℝ upper-real-ℝ
 
-  is-disjoint-cut-ℝ : (q : ℚ) → ¬ (is-in-lower-cut-ℝ q × is-in-upper-cut-ℝ q)
+  is-disjoint-cut-ℝ : disjoint-subtype lower-cut-ℝ upper-cut-ℝ
   is-disjoint-cut-ℝ = pr1 (pr2 (pr2 x))
 
   is-located-lower-upper-cut-ℝ :
-    (q r : ℚ) → le-ℚ q r →
+    {q r : ℚ} → le-ℚ q r →
     type-disjunction-Prop (lower-cut-ℝ q) (upper-cut-ℝ r)
-  is-located-lower-upper-cut-ℝ = pr2 (pr2 (pr2 x))
+  is-located-lower-upper-cut-ℝ {q} {r} = pr2 (pr2 (pr2 x)) q r
 
   cut-ℝ : subtype l ℚ
   cut-ℝ q =
@@ -216,7 +213,7 @@ abstract
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (p q : ℚ)
+  {l : Level} (x : ℝ l) {p q : ℚ}
   where
 
   le-lower-cut-ℝ :
@@ -248,24 +245,28 @@ module _
 
 ```agda
 module _
-  {l : Level} (x : ℝ l) (p q : ℚ)
+  {l : Level} (x : ℝ l) {p q : ℚ}
   where
 
-  le-lower-upper-cut-ℝ :
-    is-in-lower-cut-ℝ x p →
-    is-in-upper-cut-ℝ x q →
-    le-ℚ p q
-  le-lower-upper-cut-ℝ H H' =
-    rec-coproduct
-      ( id)
-      ( λ I →
-        ex-falso
-          ( is-disjoint-cut-ℝ x p
-              ( H , leq-upper-cut-ℝ x q p I H')))
-      ( decide-le-leq-ℚ p q)
+  abstract
+    le-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      le-ℚ p q
+    le-lower-upper-cut-ℝ H H' =
+      rec-coproduct
+        ( id)
+        ( λ I → ex-falso (is-disjoint-cut-ℝ x p (H , leq-upper-cut-ℝ x I H')))
+        ( decide-le-leq-ℚ p q)
+
+    leq-lower-upper-cut-ℝ :
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      leq-ℚ p q
+    leq-lower-upper-cut-ℝ H H' = leq-le-ℚ (le-lower-upper-cut-ℝ H H')
 ```
 
-### Characterisation of each cut by the other
+### Characterization of each cut by the other
 
 #### The lower cut is the subtype of rationals bounded above by some element of the complement of the upper cut
 
@@ -281,6 +282,10 @@ module _
   lower-complement-upper-cut-ℝ : subtype l ℚ
   lower-complement-upper-cut-ℝ p =
     ∃ ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
+
+  is-in-lower-complement-upper-cut-ℝ : ℚ → UU l
+  is-in-lower-complement-upper-cut-ℝ =
+    is-in-subtype lower-complement-upper-cut-ℝ
 ```
 
 ```agda
@@ -298,7 +303,7 @@ module _
           ( lower-cut-ℝ x p)
           ( upper-cut-ℝ x q)
           ( pr2 I)
-          ( is-located-lower-upper-cut-ℝ x p q ( pr1 I)))
+          ( is-located-lower-upper-cut-ℝ x (pr1 I)))
 
   subset-lower-complement-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-complement-upper-cut-ℝ x
@@ -307,14 +312,27 @@ module _
       ( λ q → map-product id (λ L U → is-disjoint-cut-ℝ x q (L , U)))
       ( pr1 (is-rounded-lower-cut-ℝ x p) H)
 
+  sim-lower-cut-lower-complement-upper-cut-ℝ :
+    sim-subtype (lower-complement-upper-cut-ℝ x) (lower-cut-ℝ x)
+  sim-lower-cut-lower-complement-upper-cut-ℝ =
+    ( subset-lower-cut-lower-complement-upper-cut-ℝ ,
+      subset-lower-complement-upper-cut-lower-cut-ℝ)
+
+  has-same-elements-lower-complement-upper-cut-lower-cut-ℝ :
+    has-same-elements-subtype (lower-complement-upper-cut-ℝ x) (lower-cut-ℝ x)
+  has-same-elements-lower-complement-upper-cut-lower-cut-ℝ =
+    has-same-elements-sim-subtype
+      ( lower-complement-upper-cut-ℝ x)
+      ( lower-cut-ℝ x)
+      ( sim-lower-cut-lower-complement-upper-cut-ℝ)
+
   eq-lower-cut-lower-complement-upper-cut-ℝ :
     lower-complement-upper-cut-ℝ x ＝ lower-cut-ℝ x
   eq-lower-cut-lower-complement-upper-cut-ℝ =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( lower-complement-upper-cut-ℝ x)
       ( lower-cut-ℝ x)
-      ( subset-lower-cut-lower-complement-upper-cut-ℝ)
-      ( subset-lower-complement-upper-cut-lower-cut-ℝ)
+      ( sim-lower-cut-lower-complement-upper-cut-ℝ)
 ```
 
 #### The upper cut is the subtype of rationals bounded below by some element of the complement of the lower cut
@@ -331,6 +349,10 @@ module _
   upper-complement-lower-cut-ℝ : subtype l ℚ
   upper-complement-lower-cut-ℝ q =
     ∃ ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
+
+  is-in-upper-complement-lower-cut-ℝ : ℚ → UU l
+  is-in-upper-complement-lower-cut-ℝ =
+    is-in-subtype upper-complement-lower-cut-ℝ
 ```
 
 ```agda
@@ -348,7 +370,7 @@ module _
           ( lower-cut-ℝ x p)
           ( upper-cut-ℝ x q)
           ( pr2 I)
-          ( is-located-lower-upper-cut-ℝ x p q ( pr1 I)))
+          ( is-located-lower-upper-cut-ℝ x (pr1 I)))
 
   subset-upper-complement-lower-cut-upper-cut-ℝ :
     upper-cut-ℝ x ⊆ upper-complement-lower-cut-ℝ x
@@ -357,21 +379,34 @@ module _
       ( λ p → map-product id (λ U L → is-disjoint-cut-ℝ x p (L , U)))
       ( pr1 (is-rounded-upper-cut-ℝ x q) H)
 
+  sim-upper-cut-upper-complement-lower-cut-ℝ :
+    sim-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
+  sim-upper-cut-upper-complement-lower-cut-ℝ =
+    ( subset-upper-cut-upper-complement-lower-cut-ℝ ,
+      subset-upper-complement-lower-cut-upper-cut-ℝ)
+
+  has-same-elements-upper-complement-lower-cut-upper-cut-ℝ :
+    has-same-elements-subtype (upper-complement-lower-cut-ℝ x) (upper-cut-ℝ x)
+  has-same-elements-upper-complement-lower-cut-upper-cut-ℝ =
+    has-same-elements-sim-subtype
+      ( upper-complement-lower-cut-ℝ x)
+      ( upper-cut-ℝ x)
+      ( sim-upper-cut-upper-complement-lower-cut-ℝ)
+
   eq-upper-cut-upper-complement-lower-cut-ℝ :
     upper-complement-lower-cut-ℝ x ＝ upper-cut-ℝ x
   eq-upper-cut-upper-complement-lower-cut-ℝ =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( upper-complement-lower-cut-ℝ x)
       ( upper-cut-ℝ x)
-      ( subset-upper-cut-upper-complement-lower-cut-ℝ)
-      ( subset-upper-complement-lower-cut-upper-cut-ℝ)
+      ( sim-upper-cut-upper-complement-lower-cut-ℝ)
 ```
 
 ### The lower/upper cut of a real determines the other
 
 ```agda
 module _
-  {l : Level} (x y : ℝ l)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   subset-lower-cut-upper-cut-ℝ :
@@ -393,25 +428,42 @@ module _
       ( λ q → map-tot-exists (λ p → tot (λ _ K → K ∘ H p)))
 
 module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  sim-lower-cut-sim-upper-cut-ℝ :
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) →
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+  pr1 (sim-lower-cut-sim-upper-cut-ℝ (_ , uy⊆ux)) =
+    subset-lower-cut-upper-cut-ℝ x y uy⊆ux
+  pr2 (sim-lower-cut-sim-upper-cut-ℝ (ux⊆uy , _)) =
+    subset-lower-cut-upper-cut-ℝ y x ux⊆uy
+
+  sim-upper-cut-sim-lower-cut-ℝ :
+    sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) →
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
+  pr1 (sim-upper-cut-sim-lower-cut-ℝ (_ , ly⊆lx)) =
+    subset-upper-cut-lower-cut-ℝ y x ly⊆lx
+  pr2 (sim-upper-cut-sim-lower-cut-ℝ (lx⊆ly , _)) =
+    subset-upper-cut-lower-cut-ℝ x y lx⊆ly
+
+module _
   {l : Level} (x y : ℝ l)
   where
 
   eq-lower-cut-eq-upper-cut-ℝ :
     upper-cut-ℝ x ＝ upper-cut-ℝ y → lower-cut-ℝ x ＝ lower-cut-ℝ y
   eq-lower-cut-eq-upper-cut-ℝ H =
-    antisymmetric-leq-subtype
+    eq-sim-subtype
       ( lower-cut-ℝ x)
       ( lower-cut-ℝ y)
-      ( subset-lower-cut-upper-cut-ℝ x y
-        ( pr2 ∘ has-same-elements-eq-subtype
-          ( upper-cut-ℝ x)
-          ( upper-cut-ℝ y)
-          ( H)))
-      ( subset-lower-cut-upper-cut-ℝ y x
-        ( pr1 ∘ has-same-elements-eq-subtype
-          ( upper-cut-ℝ x)
-          ( upper-cut-ℝ y)
-          ( H)))
+      ( sim-lower-cut-sim-upper-cut-ℝ
+        ( x)
+        ( y)
+        ( tr
+          ( sim-subtype (upper-cut-ℝ x))
+          ( H)
+          ( refl-sim-subtype (upper-cut-ℝ x))))
 
   eq-lower-real-eq-upper-real-ℝ :
     upper-real-ℝ x ＝ upper-real-ℝ y → lower-real-ℝ x ＝ lower-real-ℝ y
@@ -494,6 +546,46 @@ module _
   eq-eq-upper-cut-ℝ = eq-eq-lower-cut-ℝ ∘ (eq-lower-cut-eq-upper-cut-ℝ x y)
 ```
 
+### The maximum of two elements of a lower cut of a real number is in the lower cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-in-lower-cut-max-ℚ :
+      (p q : ℚ) → is-in-lower-cut-ℝ x p → is-in-lower-cut-ℝ x q →
+      is-in-lower-cut-ℝ x (max-ℚ p q)
+    is-in-lower-cut-max-ℚ p q p<x q<x =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-lower-cut-ℝ x) (left-leq-right-max-ℚ p q p≤q) q<x)
+        ( λ q≤p →
+          inv-tr (is-in-lower-cut-ℝ x) (right-leq-left-max-ℚ p q q≤p) p<x)
+        ( linear-leq-ℚ p q)
+```
+
+### The minimum of two elements of a upper cut of a real number is in the upper cut
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    is-in-upper-cut-min-ℚ :
+      (p q : ℚ) → is-in-upper-cut-ℝ x p → is-in-upper-cut-ℝ x q →
+      is-in-upper-cut-ℝ x (min-ℚ p q)
+    is-in-upper-cut-min-ℚ p q x<p x<q =
+      rec-coproduct
+        ( λ p≤q →
+          inv-tr (is-in-upper-cut-ℝ x) (left-leq-right-min-ℚ p q p≤q) x<p)
+        ( λ q≤p →
+          inv-tr (is-in-upper-cut-ℝ x) (right-leq-left-min-ℚ p q q≤p) x<q)
+        ( linear-leq-ℚ p q)
+```
+
 ## References
 
 This page follows parts of Section 11.2 in {{#cite UF13}}.
@@ -502,7 +594,7 @@ This page follows parts of Section 11.2 in {{#cite UF13}}.
 
 ## External links
 
-- [DedekindReals.Type](https://www.cs.bham.ac.uk/~mhe/TypeTopology/DedekindReals.Type.html)
+- [`DedekindReals.Type`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/DedekindReals.Type.html)
   at TypeTopology
 - [Dedekind cut](https://ncatlab.org/nlab/show/Dedekind+cut) at $n$Lab
 - [Dedekind cut](https://en.wikipedia.org/wiki/Dedekind_cut) at Wikipedia

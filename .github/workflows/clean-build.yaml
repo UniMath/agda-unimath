@@ -1,0 +1,87 @@
+name: Clean build and profiling of library
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  typecheck-clean:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        agda: ['2.8.0']
+    steps:
+      - name: Checkout our repository
+        uses: actions/checkout@v4
+        with:
+          path: repo
+
+      - name: Setup Agda ${{ matrix.agda }} (prebuilt)
+        uses: ./repo/.github/actions/setup-agda
+        with:
+          agda-version: ${{ matrix.agda }}
+
+      - name: Typecheck library with profiling
+        run: |
+          cd repo
+          agda --version
+          mkdir -p temp
+          make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
+
+      - name: Save Agda build cache
+        uses: actions/cache/save@v4
+        with:
+          path: repo/_build
+          key:
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
+            hashFiles('repo/src/**') }}
+
+      - name: Download previous typechecking profile
+        run: |
+          mkdir -p benchmark-cache
+          curl 'https://agda-unimath-benchmarks.netlify.app/data.json' -o benchmark-cache/data.json
+          # Stop if there is no initial data (the server gave us an HTML instead of a JSON)
+          (head -1 benchmark-cache/data.json | grep -v DOCTYPE) || { rm benchmark-cache/data.json; exit 0; }
+          curl 'https://agda-unimath-benchmarks.netlify.app/data.csv' -o benchmark-cache/data.csv
+
+      - name: Process new profiling data
+        run: |
+          cd repo
+          python3 scripts/typechecking_profile_parser.py \
+            temp/benchmark-results.txt temp/memory-results.txt \
+            temp/benchmark-results.json ../benchmark-cache/data.csv \
+            ${{ github.sha }}
+
+      - name: Merge JSON profiling data
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          tool: 'customSmallerIsBetter'
+          # Location of the new data
+          output-file-path: './repo/temp/benchmark-results.json'
+          # Location of the aggregate data
+          external-data-json-path: './benchmark-cache/data.json'
+
+      - name: Publish the profiling CSV as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'Library profiling history'
+          path: './benchmark-cache/data.csv'
+
+      - name: Prepare new revision of the profiling website
+        run: |
+          mkdir -p benchmark-website
+          cp repo/website/benchmarks/index.html benchmark-website/
+          cp benchmark-cache/data.* benchmark-website/
+          echo 'window.BENCHMARK_DATA =' | cat - benchmark-cache/data.json > benchmark-website/data.js
+
+      - name: Deploy the new profiling website
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.PERF_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.PERF_SITE_KEY }}
+        run: |
+          npx netlify-cli deploy --prod --dir=benchmark-website

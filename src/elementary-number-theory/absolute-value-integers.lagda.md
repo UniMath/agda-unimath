@@ -28,8 +28,9 @@ open import foundation.unit-type
 
 ## Idea
 
-The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
-an integer is the natural number with the same distance from `0`.
+The
+{{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ WD="absolute value" WDID=Q120812}}
+of an integer is the natural number with the same distance from `0`.
 
 ## Definitions
 
@@ -94,7 +95,7 @@ predecessor-law-abs-ℤ (inr (inl star)) =
 predecessor-law-abs-ℤ (inr (inr zero-ℕ)) =
   star
 predecessor-law-abs-ℤ (inr (inr (succ-ℕ x))) =
-  leq-succ-leq-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
+  preserves-order-succ-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
 ```
 
 ### `|x + 1| ≤ |x| + 1`
@@ -105,7 +106,7 @@ successor-law-abs-ℤ :
 successor-law-abs-ℤ (inl zero-ℕ) =
   star
 successor-law-abs-ℤ (inl (succ-ℕ x)) =
-  leq-succ-leq-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
+  preserves-order-succ-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
 successor-law-abs-ℤ (inr (inl star)) =
   refl-leq-ℕ zero-ℕ
 successor-law-abs-ℤ (inr (inr x)) =
@@ -215,36 +216,50 @@ distributive-abs-mul-ℤ x y =
 ### `|(-x)y| ＝ |xy|`
 
 ```agda
-left-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
-left-negative-law-mul-abs-ℤ x y =
-  equational-reasoning
-    abs-ℤ (x *ℤ y)
-    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-      by (inv (negative-law-abs-ℤ (x *ℤ y)))
-    ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
-      by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
+abstract
+  left-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
+  left-negative-law-mul-abs-ℤ x y =
+    equational-reasoning
+      abs-ℤ (x *ℤ y)
+      ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+      ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
+        by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 ```
 
 ### `|x(-y)| ＝ |xy|`
 
 ```agda
-right-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ (x *ℤ (neg-ℤ y))
-right-negative-law-mul-abs-ℤ x y =
-  equational-reasoning
-    abs-ℤ (x *ℤ y)
-    ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-      by (inv (negative-law-abs-ℤ (x *ℤ y)))
-    ＝ abs-ℤ (x *ℤ (neg-ℤ y))
-      by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
+abstract
+  right-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ (x *ℤ (neg-ℤ y))
+  right-negative-law-mul-abs-ℤ x y =
+    equational-reasoning
+      abs-ℤ (x *ℤ y)
+      ＝ abs-ℤ (neg-ℤ (x *ℤ y))
+        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+      ＝ abs-ℤ (x *ℤ (neg-ℤ y))
+        by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
 ```
 
 ### `|(-x)(-y)| ＝ |xy|`
 
 ```agda
-double-negative-law-mul-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ (neg-ℤ y))
-double-negative-law-mul-abs-ℤ x y =
-  (right-negative-law-mul-abs-ℤ x y) ∙ (left-negative-law-mul-abs-ℤ x (neg-ℤ y))
+abstract
+  double-negative-law-mul-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ abs-ℤ ((neg-ℤ x) *ℤ (neg-ℤ y))
+  double-negative-law-mul-abs-ℤ x y =
+    ap abs-ℤ (inv (double-negative-law-mul-ℤ x y))
+```
+
+### `x = |x|` or `x = -|x|`
+
+```agda
+abstract
+  is-pos-or-neg-abs-ℤ :
+    (x : ℤ) → (x ＝ int-ℕ (abs-ℤ x)) + (x ＝ neg-ℤ (int-ℕ (abs-ℤ x)))
+  is-pos-or-neg-abs-ℤ (inr (inl unit)) = inl refl
+  is-pos-or-neg-abs-ℤ (inr (inr n)) = inl refl
+  is-pos-or-neg-abs-ℤ (inl n) = inr refl
 ```

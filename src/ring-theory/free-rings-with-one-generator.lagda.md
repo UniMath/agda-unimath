@@ -18,9 +18,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **free ring with one generator** is specified as a
-[ring](ring-theory.rings.md) `R` equipped with an element `g : R` such that for
-every ring `S` the map
+The
+{{#concept "free ring with one generator" Agda=is-free-ring-with-one-generator}}
+is specified as a [ring](ring-theory.rings.md) `R` equipped with an element
+`g : R` such that for every ring `S` the map
 
 ```text
   hom-set-Ring R S → type-Ring S

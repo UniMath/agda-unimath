@@ -84,7 +84,7 @@ module _
   where
 
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism :
-    is-epimorphism f → is-equiv (diagonal-into-fibers-precomp f X)
+    is-epimorphism f → is-equiv (diagonal-into-fibers-precomp f)
   is-equiv-diagonal-into-fibers-precomp-is-epimorphism e =
     is-equiv-map-section-family
       ( λ g → (g , refl))
@@ -102,10 +102,10 @@ module _
     universal-property-pushout f f (cocone-codiagonal-map f)
   universal-property-pushout-is-epimorphism e X =
     is-equiv-comp
-      ( map-equiv (compute-total-fiber-precomp f X))
-      ( diagonal-into-fibers-precomp f X)
+      ( map-equiv (compute-total-fiber-precomp f))
+      ( diagonal-into-fibers-precomp f)
       ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism f X e)
-      ( is-equiv-map-equiv (compute-total-fiber-precomp f X))
+      ( is-equiv-map-equiv (compute-total-fiber-precomp f))
 ```
 
 If the map `f : A → B` is epi, then its codiagonal is an equivalence.
@@ -142,7 +142,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
       ( λ g →
         is-contr-equiv
           ( Σ (B → X) (λ h → coherence-square-maps f f h g))
-          ( compute-fiber-precomp f X g)
+          ( compute-fiber-precomp f g)
           ( is-contr-fam-is-equiv-map-section-family
             ( λ h →
               ( vertical-map-cocone f f

@@ -25,9 +25,11 @@ open import group-theory.subsets-groups
 ## Idea
 
 For each element `g : G` of a group `G` we have a unique group homomorphism
-`f : ℤ → G` such that `f 1 = g`. The order of `g` is defined to be the kernel of
-this group homomorphism `f`. Since kernels are ordered by inclusion, it follows
-that the orders of elements of a group are ordered by reversed inclusion.
+`f : ℤ → G` such that `f 1 = g`. The
+{{#concept "order" WD="order of a group element" WDID=Q54555759 Agda=order-element-Group}}
+of `g` is defined to be the kernel of this group homomorphism `f`. Since kernels
+are ordered by inclusion, it follows that the orders of elements of a group are
+ordered by reversed inclusion.
 
 If the group `G` has decidable equality, then we can reduce the order of `g` to
 a natural number. In this case, the orders of elements of `G` are ordered by

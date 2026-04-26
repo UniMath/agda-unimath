@@ -107,11 +107,11 @@ homotopies between them.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   where
 
-  section-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  section-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   section-descent-data-pushout =
     Σ ( (a : domain-span-diagram 𝒮) → left-family-descent-data-pushout P a)
       ( λ tA →
@@ -147,12 +147,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   (r t : section-descent-data-pushout P)
   where
 
-  htpy-section-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-section-descent-data-pushout : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-section-descent-data-pushout =
     Σ ( left-map-section-descent-data-pushout P r ~
         left-map-section-descent-data-pushout P t)
@@ -174,8 +174,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   (r : section-descent-data-pushout P)
   where
 
@@ -192,8 +192,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   (r : section-descent-data-pushout P)
   where
 
@@ -281,9 +281,9 @@ equivalence. It follows that the left map is an equivalence
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
   where
 
   section-descent-data-section-family-cocone-span-diagram :
@@ -324,9 +324,9 @@ module _
       ( coherence-square-dependent-cocone _ _ _ _ d s))
 
   abstract
-    is-equiv-section-descent-data-depedent-cocone-span-diagram :
+    is-equiv-section-descent-data-dependent-cocone-span-diagram :
       is-equiv section-descent-data-dependent-cocone-span-diagram
-    is-equiv-section-descent-data-depedent-cocone-span-diagram =
+    is-equiv-section-descent-data-dependent-cocone-span-diagram =
       is-equiv-map-Σ _
         ( is-equiv-map-Π-is-fiberwise-equiv
           ( is-equiv-left-map-family-with-descent-data-pushout P))
@@ -366,7 +366,7 @@ module _
         ( triangle-section-descent-data-section-family-cocone-span-diagram)
         ( dependent-universal-property-universal-property-pushout _ _ _ up-c
           ( family-cocone-family-with-descent-data-pushout P))
-        ( is-equiv-section-descent-data-depedent-cocone-span-diagram)
+        ( is-equiv-section-descent-data-dependent-cocone-span-diagram)
 ```
 
 As a corollary, for any given section `(tA, tB, tS)` of `(PA, PB, PS)`, there is
@@ -381,10 +381,10 @@ homotopies of sections of `(PA, PB, PS)`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : family-with-descent-data-pushout c l5)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
   (t :
     section-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout P))

@@ -20,8 +20,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An element `x` of a ring `R` is said to be central if `xy ＝ yx` for every
-`y : R`.
+An element `x` of a [ring](ring-theory.rings.md) `R` is said to be
+{{#concept "central" Disambiguation="element of a ring" Agda=is-central-element-Ring}}
+if `xy ＝ yx` for every `y : R`.
 
 ## Definition
 
@@ -30,17 +31,18 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  is-central-element-ring-Prop : type-Ring R → Prop l
-  is-central-element-ring-Prop =
-    is-central-element-semiring-Prop (semiring-Ring R)
+  is-central-element-prop-Ring : type-Ring R → Prop l
+  is-central-element-prop-Ring =
+    is-central-element-prop-Semiring (semiring-Ring R)
 
   is-central-element-Ring : type-Ring R → UU l
   is-central-element-Ring = is-central-element-Semiring (semiring-Ring R)
 
-  is-prop-is-central-element-Ring :
-    (x : type-Ring R) → is-prop (is-central-element-Ring x)
-  is-prop-is-central-element-Ring =
-    is-prop-is-central-element-Semiring (semiring-Ring R)
+  abstract
+    is-prop-is-central-element-Ring :
+      (x : type-Ring R) → is-prop (is-central-element-Ring x)
+    is-prop-is-central-element-Ring =
+      is-prop-is-central-element-Semiring (semiring-Ring R)
 ```
 
 ## Properties

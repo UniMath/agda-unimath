@@ -87,17 +87,17 @@ is-finite-and-inhabited X =
 compute-Inhabited-Finite-Type' :
   {l : Level} →
   Inhabited-Finite-Type l ≃ type-subuniverse is-finite-and-inhabited-Prop
-compute-Inhabited-Finite-Type' = associative-Σ _ _ _
+compute-Inhabited-Finite-Type' = associative-Σ
 
 map-compute-Inhabited-Finite-Type' :
   {l : Level} →
   Inhabited-Finite-Type l → type-subuniverse is-finite-and-inhabited-Prop
-map-compute-Inhabited-Finite-Type' = map-associative-Σ _ _ _
+map-compute-Inhabited-Finite-Type' = map-associative-Σ
 
 map-inv-compute-Inhabited-Finite-Type' :
   {l : Level} →
   type-subuniverse is-finite-and-inhabited-Prop → Inhabited-Finite-Type l
-map-inv-compute-Inhabited-Finite-Type' = map-inv-associative-Σ _ _ _
+map-inv-compute-Inhabited-Finite-Type' = map-inv-associative-Σ
 ```
 
 ### Families of inhabited types
@@ -151,9 +151,15 @@ compute-Fam-Inhabited-Finite-Type X =
 ### Equality in inhabited finite types
 
 ```agda
+equiv-Inhabited-Finite-Type :
+  {l1 l2 : Level} → Inhabited-Finite-Type l1 → Inhabited-Finite-Type l2 →
+  UU (l1 ⊔ l2)
+equiv-Inhabited-Finite-Type X Y =
+  type-Inhabited-Finite-Type X ≃ type-Inhabited-Finite-Type Y
+
 eq-equiv-Inhabited-Finite-Type :
   {l : Level} → (X Y : Inhabited-Finite-Type l) →
-  type-Inhabited-Finite-Type X ≃ type-Inhabited-Finite-Type Y → X ＝ Y
+  equiv-Inhabited-Finite-Type X Y → X ＝ Y
 eq-equiv-Inhabited-Finite-Type X Y e =
   eq-type-subtype
     ( λ X → is-inhabited-Prop (type-Finite-Type X))

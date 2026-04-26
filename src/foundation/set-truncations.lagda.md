@@ -17,6 +17,8 @@ open import foundation.functoriality-coproduct-types
 open import foundation.mere-equality
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
@@ -68,6 +70,9 @@ is-set-type-trunc-Set = is-trunc-type-trunc
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
 
+unit-trunc-Set' : {l : Level} (A : UU l) → A → type-trunc-Set A
+unit-trunc-Set' A = unit-trunc-Set
+
 is-set-truncation-trunc-Set :
   {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
@@ -78,8 +83,7 @@ is-set-truncation-trunc-Set A = is-truncation-trunc
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
 symbol `║` in the set truncation notation `║_║₀` can be inserted with
-`agda-input` using the escape sequence `\--=` and selecting the second item in
-the list.
+`agda-input` using the escape sequence `\--=2`.
 
 ## Properties
 
@@ -122,6 +126,50 @@ module _
     (x : type-trunc-Set A) → type-Set (B x)
   apply-dependent-universal-property-trunc-Set' =
     map-inv-equiv (equiv-dependent-universal-property-trunc-Set B) f
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : type-trunc-Set A → UU l2}
+  (C : (a : type-trunc-Set A) → type-trunc-Set (B a) → Set l3)
+  (f :
+    (x : A) (y : B (unit-trunc-Set x)) →
+    type-Set (C (unit-trunc-Set x) (unit-trunc-Set y)))
+  where
+
+  apply-twice-dependent-universal-property-trunc-Set' :
+    (a : type-trunc-Set A) (b : type-trunc-Set (B a)) → type-Set (C a b)
+  apply-twice-dependent-universal-property-trunc-Set' =
+    apply-dependent-universal-property-trunc-Set'
+      ( λ x → Π-Set (trunc-Set (B x)) (C x))
+      ( λ x →
+        apply-dependent-universal-property-trunc-Set'
+          ( C (unit-trunc-Set x))
+          ( f x))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : type-trunc-Set A → UU l2}
+  {C : (a : type-trunc-Set A) → type-trunc-Set (B a) → UU l3}
+  (D :
+    (a : type-trunc-Set A) (b : type-trunc-Set (B a)) → type-trunc-Set (C a b) →
+    Set l4)
+  (f :
+    (x : A)
+    (y : B (unit-trunc-Set x))
+    (z : C (unit-trunc-Set x) (unit-trunc-Set y)) →
+    type-Set (D (unit-trunc-Set x) (unit-trunc-Set y) (unit-trunc-Set z)))
+  where
+
+  apply-thrice-dependent-universal-property-trunc-Set' :
+    (a : type-trunc-Set A)
+    (b : type-trunc-Set (B a))
+    (c : type-trunc-Set (C a b)) →
+    type-Set (D a b c)
+  apply-thrice-dependent-universal-property-trunc-Set' =
+    apply-twice-dependent-universal-property-trunc-Set'
+      ( λ x y → Π-Set (trunc-Set (C x y)) (D x y))
+      ( λ x y →
+        apply-dependent-universal-property-trunc-Set'
+          ( D (unit-trunc-Set x) (unit-trunc-Set y))
+          ( f x y))
 ```
 
 ### The universal property of set truncations
@@ -421,7 +469,24 @@ module _
   equiv-unit-trunc-set = equiv-unit-trunc A
 ```
 
-### Distributive of set truncation over coproduct
+### The subuniverse of sets is a retract of the universe
+
+```agda
+is-retraction-trunc-Set :
+  {l : Level} →
+  is-retraction (type-Set {l = l}) (trunc-Set {l = l})
+is-retraction-trunc-Set {l} A =
+  map-inv-equiv
+    ( extensionality-Set (trunc-Set (type-Set A)) A)
+    ( inv-equiv (equiv-unit-trunc-set A))
+
+retract-Set-UU : {l : Level} → Set l retract-of UU l
+pr1 retract-Set-UU = type-Set
+pr1 (pr2 retract-Set-UU) = trunc-Set
+pr2 (pr2 retract-Set-UU) = is-retraction-trunc-Set
+```
+
+### Distributivity of set truncation over coproducts
 
 ```agda
 module _

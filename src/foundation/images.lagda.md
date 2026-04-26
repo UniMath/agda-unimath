@@ -7,23 +7,28 @@ module foundation.images where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
+open import foundation.retractions
+open import foundation.sections
 open import foundation.slice
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.1-types
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.contractible-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
@@ -52,8 +57,8 @@ module _
   subtype-im : subtype (l1 ⊔ l2) X
   subtype-im x = trunc-Prop (fiber f x)
 
-  is-in-subtype-im : X → UU (l1 ⊔ l2)
-  is-in-subtype-im = is-in-subtype subtype-im
+  is-in-im : X → UU (l1 ⊔ l2)
+  is-in-im = is-in-subtype subtype-im
 
   im : UU (l1 ⊔ l2)
   im = type-subtype subtype-im
@@ -217,6 +222,61 @@ im-1-Type :
   {l1 l2 : Level} (X : 1-Type l1) {A : UU l2}
   (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
 im-1-Type X f = im-Truncated-Type zero-𝕋 X f
+```
+
+### The unit map of the image of an embedding is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B)
+  where
+
+  map-unit-im-emb : A → im (map-emb f)
+  map-unit-im-emb = map-unit-im (map-emb f)
+
+  abstract
+    is-equiv-unit-im-emb : is-equiv map-unit-im-emb
+    is-equiv-unit-im-emb =
+      is-equiv-is-emb-is-surjective
+        ( is-surjective-map-unit-im (map-emb f))
+        ( is-emb-right-factor
+          ( inclusion-im (map-emb f))
+          ( map-unit-im (map-emb f))
+          ( is-emb-inclusion-im (map-emb f))
+          ( is-emb-map-emb f))
+
+  equiv-im-emb : A ≃ im (map-emb f)
+  equiv-im-emb = (map-unit-im-emb , is-equiv-unit-im-emb)
+```
+
+### The image of `g ∘ f` is contained in the image of `f`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B)
+  where
+
+  abstract
+    inclusion-precomp-im :
+      subtype-im (g ∘ f) ⊆ subtype-im g
+    inclusion-precomp-im z H =
+      apply-universal-property-trunc-Prop H
+        ( subtype-im g z)
+        ( λ { (y , refl) → unit-trunc-Prop (f y , refl)})
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h)
+  where
+
+  abstract
+    inclusion-coherence-triangle-im :
+      subtype-im f ⊆ subtype-im g
+    inclusion-coherence-triangle-im z K =
+      apply-universal-property-trunc-Prop K
+        ( subtype-im g z)
+        ( λ { (y , refl) → unit-trunc-Prop (h y , inv (H y))})
 ```
 
 ## External links

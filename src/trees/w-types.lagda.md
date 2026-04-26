@@ -9,7 +9,11 @@ module trees.w-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-dense-equality
+open import foundation.double-negation-stable-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -18,6 +22,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -26,8 +31,14 @@ open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.types-with-decidable-dependent-product-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.discrete-types
+open import foundation-core.propositions
+
+open import logic.double-negation-elimination
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors
@@ -39,11 +50,12 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-Consider a type `A` equipped with a type family `B` over `A`. The type `W`
-generated inductively by a constructor `B x → W` for each `x : A` is called the
-**W-type** `W A B` of `B`. The elements of `A` can be thought of as symbols for
-the constructors of `W A B`, and the functions `B x → W A B` are the
-constructors. The elements of `W A B` can be thought of as well-founded trees.
+Consider a type `A` equipped with a type family `B` over `A`. The type `𝕎`
+generated inductively by a constructor `B x → 𝕎` for each `x : A` is called the
+{{#concept "W-type" Agda=𝕎}} `𝕎 A B` of `B`. The elements of `A` can be thought
+of as symbols for the constructors of `𝕎 A B`, and the functions `B x → 𝕎 A B`
+are the constructors. The elements of `𝕎 A B` can be thought of as well-founded
+trees.
 
 ## Definition
 
@@ -70,12 +82,12 @@ module _
 ```agda
 structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) → 𝕎 A B
+  type-polynomial-endofunctor' A B (𝕎 A B) → 𝕎 A B
 structure-𝕎-Alg (pair x α) = tree-𝕎 x α
 
 𝕎-Alg :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  algebra-polynomial-endofunctor (l1 ⊔ l2) A B
+  algebra-polynomial-endofunctor (l1 ⊔ l2) (A , B)
 𝕎-Alg A B = pair (𝕎 A B) structure-𝕎-Alg
 ```
 
@@ -84,7 +96,7 @@ structure-𝕎-Alg (pair x α) = tree-𝕎 x α
 ```agda
 𝕎-Coalg :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  coalgebra-polynomial-endofunctor (l1 ⊔ l2) A B
+  coalgebra-polynomial-endofunctor (l1 ⊔ l2) (A , B)
 pr1 (𝕎-Coalg A B) = 𝕎 A B
 pr1 (pr2 (𝕎-Coalg A B) x) = shape-𝕎 x
 pr2 (pr2 (𝕎-Coalg A B) x) = component-𝕎 x
@@ -202,7 +214,7 @@ module _
 ```agda
 map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  𝕎 A B → type-polynomial-endofunctor A B (𝕎 A B)
+  𝕎 A B → type-polynomial-endofunctor' A B (𝕎 A B)
 map-inv-structure-𝕎-Alg (tree-𝕎 x α) = pair x α
 
 is-section-map-inv-structure-𝕎-Alg :
@@ -226,7 +238,7 @@ is-equiv-structure-𝕎-Alg =
 
 equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  type-polynomial-endofunctor A B (𝕎 A B) ≃ 𝕎 A B
+  type-polynomial-endofunctor' A B (𝕎 A B) ≃ 𝕎 A B
 equiv-structure-𝕎-Alg =
   pair structure-𝕎-Alg is-equiv-structure-𝕎-Alg
 
@@ -241,7 +253,7 @@ is-equiv-map-inv-structure-𝕎-Alg =
 
 inv-equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  𝕎 A B ≃ type-polynomial-endofunctor A B (𝕎 A B)
+  𝕎 A B ≃ type-polynomial-endofunctor' A B (𝕎 A B)
 inv-equiv-structure-𝕎-Alg =
   pair map-inv-structure-𝕎-Alg is-equiv-map-inv-structure-𝕎-Alg
 ```
@@ -251,7 +263,7 @@ inv-equiv-structure-𝕎-Alg =
 ```agda
 map-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   𝕎 A B → type-algebra-polynomial-endofunctor X
 map-hom-𝕎-Alg X (tree-𝕎 x α) =
   structure-algebra-polynomial-endofunctor X
@@ -259,21 +271,21 @@ map-hom-𝕎-Alg X (tree-𝕎 x α) =
 
 structure-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   ( (map-hom-𝕎-Alg X) ∘ structure-𝕎-Alg) ~
   ( ( structure-algebra-polynomial-endofunctor X) ∘
-    ( map-polynomial-endofunctor A B (map-hom-𝕎-Alg X)))
+    ( map-polynomial-endofunctor' A B (map-hom-𝕎-Alg X)))
 structure-hom-𝕎-Alg X (pair x α) = refl
 
 hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X
 hom-𝕎-Alg X = pair (map-hom-𝕎-Alg X) (structure-hom-𝕎-Alg X)
 
 htpy-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   map-hom-𝕎-Alg X ~
   map-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f
@@ -287,12 +299,12 @@ htpy-htpy-hom-𝕎-Alg {A = A} {B} X f (tree-𝕎 x α) =
 
 compute-structure-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) (x : A) (α : B x → 𝕎 A B)
+  (X : algebra-polynomial-endofunctor l3 (A , B)) (x : A) (α : B x → 𝕎 A B)
   {f : 𝕎 A B → type-algebra-polynomial-endofunctor X} →
   (H : map-hom-𝕎-Alg X ~ f) →
   ( ap
     ( structure-algebra-polynomial-endofunctor X)
-    ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+    ( htpy-polynomial-endofunctor' A B H (pair x α))) ＝
   ( ap
     ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
     ( htpy-postcomp (B x) H α))
@@ -302,13 +314,13 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
     ( λ f H →
       ( ap
         ( structure-algebra-polynomial-endofunctor X)
-        ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+        ( htpy-polynomial-endofunctor' A B H (pair x α))) ＝
       ( ap
         ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
         ( htpy-postcomp (B x) H α)))
     ( ap
       ( ap (pr2 X))
-      ( coh-refl-htpy-polynomial-endofunctor A B
+      ( coh-refl-htpy-polynomial-endofunctor' A B
         ( map-hom-𝕎-Alg X)
         ( pair x α)) ∙
     ( inv
@@ -318,11 +330,11 @@ compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α =
 
 structure-htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   ( structure-hom-𝕎-Alg X ∙h
     ( ( structure-algebra-polynomial-endofunctor X) ·l
-      ( htpy-polynomial-endofunctor A B (htpy-htpy-hom-𝕎-Alg X f)))) ~
+      ( htpy-polynomial-endofunctor' A B (htpy-htpy-hom-𝕎-Alg X f)))) ~
   ( ( (htpy-htpy-hom-𝕎-Alg X f) ·r structure-𝕎-Alg {B = B}) ∙h
     ( structure-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X f))
 structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
@@ -334,7 +346,7 @@ structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
         ( ap
           ( λ t → pr2 X (pair x t))
           ( eq-htpy (htpy-htpy-hom-𝕎-Alg X (pair f μ-f) ·r α)))
-        ( pr2 X (map-polynomial-endofunctor A B f (pair x α))))
+        ( pr2 X (map-polynomial-endofunctor' A B f (pair x α))))
       ( inv (left-inv ( μ-f (pair x α)))))) ∙
   ( inv
     ( assoc
@@ -346,7 +358,7 @@ structure-htpy-hom-𝕎-Alg {A = A} {B} X (pair f μ-f) (pair x α) =
 
 htpy-hom-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   (f : hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X) →
   htpy-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X (hom-𝕎-Alg X) f
 htpy-hom-𝕎-Alg X f =
@@ -354,7 +366,7 @@ htpy-hom-𝕎-Alg X f =
 
 is-initial-𝕎-Alg :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : algebra-polynomial-endofunctor l3 A B) →
+  (X : algebra-polynomial-endofunctor l3 (A , B)) →
   is-contr (hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X)
 is-initial-𝕎-Alg {A = A} {B} X =
   pair
@@ -362,4 +374,82 @@ is-initial-𝕎-Alg {A = A} {B} X =
     ( λ f →
       eq-htpy-hom-algebra-polynomial-endofunctor (𝕎-Alg A B) X (hom-𝕎-Alg X) f
         ( htpy-hom-𝕎-Alg X f))
+```
+
+### Decidable equality for W-types
+
+If `A` has decidable equality and `B : A → 𝒰` is a family of types with
+decidable dependent products, then `𝕎 A B` has decidable equality.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (dA : has-decidable-equality A)
+  (dΠB : (x : A) → has-decidable-Π (B x))
+  where
+
+  is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position :
+    (v w : 𝕎 A B) → is-decidable (Eq-𝕎 v w)
+  is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+    (tree-𝕎 x α) (tree-𝕎 y β) =
+    is-decidable-Σ-has-double-negation-dense-equality-base
+      ( λ p q →
+        irrefutable-eq-eq
+          ( eq-is-prop (is-set-has-decidable-equality dA x y)))
+      ( dA x y)
+      ( λ p →
+        dΠB x
+          ( ( λ z → Eq-𝕎 (α z) (β (tr B p z))) ,
+            ( λ z →
+              is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+                ( α z)
+                ( β (tr B p z)))))
+
+  has-decidable-equality-𝕎-has-decidable-equality-shape-has-decidable-Π-position :
+    has-decidable-equality (𝕎 A B)
+  has-decidable-equality-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+    v w =
+    is-decidable-equiv
+      ( equiv-Eq-𝕎-eq v w)
+      ( is-decidable-Eq-𝕎-has-decidable-equality-shape-has-decidable-Π-position
+        ( v)
+        ( w))
+```
+
+### Double negation stable equality for W-types
+
+If `A` has double negation stable equality, then `𝕎 A B` has double negation
+stable equality.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (hA : has-double-negation-stable-equality A)
+  where
+
+  has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape :
+    (v w : 𝕎 A B) → has-double-negation-elim (Eq-𝕎 v w)
+  has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+    (tree-𝕎 x α) (tree-𝕎 y β) =
+    double-negation-elim-Σ-has-double-negation-dense-equality-base
+      ( λ p q →
+        irrefutable-eq-eq
+          ( eq-is-prop (is-set-has-double-negation-stable-equality hA x y)))
+      ( hA x y)
+      ( λ p →
+        double-negation-elim-Π
+          ( λ z →
+            has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+              ( α z)
+              ( β (tr B p z))))
+
+  has-double-negation-stable-equality-𝕎-has-double-negation-stable-equality-shape :
+    has-double-negation-stable-equality (𝕎 A B)
+  has-double-negation-stable-equality-𝕎-has-double-negation-stable-equality-shape
+    v w =
+    has-double-negation-elim-equiv
+      ( equiv-Eq-𝕎-eq v w)
+      ( has-double-negation-elim-Eq-𝕎-has-double-negation-stable-equality-shape
+        ( v)
+        ( w))
 ```

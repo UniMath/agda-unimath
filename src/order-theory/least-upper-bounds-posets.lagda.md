@@ -328,6 +328,48 @@ module _
         ( y , K))
 ```
 
+### Least upper bounds of subsets of elements
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (S : subtype l3 (type-Poset P))
+  where
+
+  is-least-upper-bound-subset-prop-Poset : type-Poset P → Prop (l1 ⊔ l2 ⊔ l3)
+  is-least-upper-bound-subset-prop-Poset =
+    is-least-upper-bound-family-of-elements-prop-Poset P (inclusion-subtype S)
+
+  is-least-upper-bound-subset-Poset : type-Poset P → UU (l1 ⊔ l2 ⊔ l3)
+  is-least-upper-bound-subset-Poset x =
+    type-Prop (is-least-upper-bound-subset-prop-Poset x)
+
+  is-prop-is-least-upper-bound-subset-Poset :
+    (x : type-Poset P) → is-prop (is-least-upper-bound-subset-Poset x)
+  is-prop-is-least-upper-bound-subset-Poset x =
+    is-prop-type-Prop (is-least-upper-bound-subset-prop-Poset x)
+```
+
+### The proposition that a subset of elements have a least upper bound
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : Poset l1 l2) (S : subtype l3 (type-Poset P))
+  where
+
+  has-least-upper-bound-subset-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3)
+  has-least-upper-bound-subset-prop-Poset =
+    has-least-upper-bound-family-of-elements-prop-Poset P (inclusion-subtype S)
+
+  has-least-upper-bound-subset-Poset : UU (l1 ⊔ l2 ⊔ l3)
+  has-least-upper-bound-subset-Poset =
+    type-Prop has-least-upper-bound-subset-prop-Poset
+
+  is-prop-has-least-upper-bound-subset-Poset :
+    is-prop has-least-upper-bound-subset-Poset
+  is-prop-has-least-upper-bound-subset-Poset =
+    is-prop-type-Prop has-least-upper-bound-subset-prop-Poset
+```
+
 ## Properties
 
 ### Binary least upper bounds as least upper bounds of families

@@ -131,7 +131,7 @@ module _
 
 In our main definition of repleteness, the containment proof of the isomorphism
 must be fixed at the left end-point. This is of course not necessary, so we can
-ask for a slighty relaxed proof of repleteness:
+ask for a slightly relaxed proof of repleteness:
 
 ```agda
 module _
@@ -247,7 +247,7 @@ module _
     ( equiv-tot
       ( equiv-is-iso-is-iso-base-is-replete-Subprecategory
           C P is-replete-P {x} {y})) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot
       ( λ f →
         ( commutative-product) ∘e

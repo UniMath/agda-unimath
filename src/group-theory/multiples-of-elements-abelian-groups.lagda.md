@@ -23,12 +23,13 @@ open import group-theory.powers-of-elements-groups
 
 ## Idea
 
-The multiplication operation on an
-[abelian group](group-theory.abelian-groups.md) is the map `n x ↦ n · x`, which
-is defined by [iteratively](foundation.iterating-functions.md) adding `x` with
-itself `n` times. We define this operation where `n` ranges over the
-[natural numbers](elementary-number-theory.natural-numbers.md), as well as where
-`n` ranges over the [integers](elementary-number-theory.integers.md).
+The
+{{#concept "multiplication" Disambiguation="natural multiple of elements of abelian groups" Agda=multiple-Ab}}
+operation on an [abelian group](group-theory.abelian-groups.md) is the map
+`n x ↦ n · x`, which is defined by
+[iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
+times. This file describes this operation where `n` ranges over the
+[natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition
 
@@ -111,7 +112,7 @@ module _
   multiple-succ-Ab' = power-succ-Group' (group-Ab A)
 ```
 
-### Multiples by sums of natural numbers are products of multiples
+### Multiples by sums of natural numbers are sums of multiples
 
 ```agda
 module _
@@ -152,3 +153,7 @@ module _
     multiple-Ab A (m *ℕ n) x ＝ multiple-Ab A n (multiple-Ab A m x)
   multiple-mul-Ab = power-mul-Group (group-Ab A)
 ```
+
+## See also
+
+- [Integer multiples of elements of abelian groups](group-theory.integer-multiples-of-elements-abelian-groups.md)

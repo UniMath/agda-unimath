@@ -23,7 +23,7 @@ open import foundation-core.homotopies
 
 ## Idea
 
-Consider an arrangment of maps composable into a diagram as follows:
+Consider an arrangement of maps composable into a diagram as follows:
 
 ```text
           hA

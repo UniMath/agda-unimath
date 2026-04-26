@@ -22,8 +22,9 @@ open import order-theory.subpreorders
 
 ## Idea
 
-A **subposet** of a poset `P` is a subtype of `P`. By restriction of the
-ordering on `P`, subposets have again the structure of a poset.
+A {{#concept "subposet" Agda=Subposet}} of a [poset](order-theory.posets.md) `P`
+is a [subtype](foundation.subtypes.md) of `P`. By restriction of the ordering on
+`P`, subposets have again the structure of a poset.
 
 ## Definitions
 
@@ -42,7 +43,7 @@ module _
   type-Subposet = type-Subpreorder (preorder-Poset X) S
 
   eq-type-Subposet :
-    (x y : type-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Subposet) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Subposet = eq-type-Subpreorder (preorder-Poset X) S
 
   leq-Subposet-Prop : (x y : type-Subposet) → Prop l2

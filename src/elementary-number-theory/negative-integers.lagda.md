@@ -14,6 +14,7 @@ open import elementary-number-theory.nonzero-integers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -96,7 +97,7 @@ neg-one-negative-ℤ = (neg-one-ℤ , star)
 ### Negativity is decidable
 
 ```agda
-is-decidable-is-negative-ℤ : is-decidable-fam is-negative-ℤ
+is-decidable-is-negative-ℤ : is-decidable-family is-negative-ℤ
 is-decidable-is-negative-ℤ (inl x) = inl star
 is-decidable-is-negative-ℤ (inr x) = inr id
 
@@ -147,24 +148,26 @@ eq-nat-negative-pred-negative-ℤ :
   nat-negative-ℤ (pred-negative-ℤ x) ＝ succ-ℕ (nat-negative-ℤ x)
 eq-nat-negative-pred-negative-ℤ (inl x , H) = refl
 
-is-section-nat-negative-ℤ :
-  (x : negative-ℤ) → negative-int-ℕ (nat-negative-ℤ x) ＝ x
-is-section-nat-negative-ℤ (inl zero-ℕ , H) = refl
-is-section-nat-negative-ℤ (inl (succ-ℕ x) , H) =
-  ap pred-negative-ℤ (is-section-nat-negative-ℤ (inl x , H))
+abstract
+  is-section-nat-negative-ℤ :
+    (x : negative-ℤ) → negative-int-ℕ (nat-negative-ℤ x) ＝ x
+  is-section-nat-negative-ℤ (inl zero-ℕ , H) = refl
+  is-section-nat-negative-ℤ (inl (succ-ℕ x) , H) =
+    ap pred-negative-ℤ (is-section-nat-negative-ℤ (inl x , H))
 
-is-retraction-nat-negative-ℤ :
-  (n : ℕ) → nat-negative-ℤ (negative-int-ℕ n) ＝ n
-is-retraction-nat-negative-ℤ zero-ℕ = refl
-is-retraction-nat-negative-ℤ (succ-ℕ n) =
-  eq-nat-negative-pred-negative-ℤ (negative-int-ℕ n) ∙
-  ap succ-ℕ (is-retraction-nat-negative-ℤ n)
+  is-retraction-nat-negative-ℤ :
+    (n : ℕ) → nat-negative-ℤ (negative-int-ℕ n) ＝ n
+  is-retraction-nat-negative-ℤ zero-ℕ = refl
+  is-retraction-nat-negative-ℤ (succ-ℕ n) =
+    eq-nat-negative-pred-negative-ℤ (negative-int-ℕ n) ∙
+    ap succ-ℕ (is-retraction-nat-negative-ℤ n)
 
-is-equiv-negative-int-ℕ : is-equiv negative-int-ℕ
-pr1 (pr1 is-equiv-negative-int-ℕ) = nat-negative-ℤ
-pr2 (pr1 is-equiv-negative-int-ℕ) = is-section-nat-negative-ℤ
-pr1 (pr2 is-equiv-negative-int-ℕ) = nat-negative-ℤ
-pr2 (pr2 is-equiv-negative-int-ℕ) = is-retraction-nat-negative-ℤ
+  is-equiv-negative-int-ℕ : is-equiv negative-int-ℕ
+  is-equiv-negative-int-ℕ =
+    is-equiv-is-invertible
+      ( nat-negative-ℤ)
+      ( is-section-nat-negative-ℤ)
+      ( is-retraction-nat-negative-ℤ)
 
 equiv-negative-int-ℕ : ℕ ≃ negative-ℤ
 pr1 equiv-negative-int-ℕ = negative-int-ℕ

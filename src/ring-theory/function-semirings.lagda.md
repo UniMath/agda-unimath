@@ -23,9 +23,10 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a semiring `R` and a type `X`, the function semiring `R^X` consists of
+Given a [semiring](ring-theory.semirings.md) `R` and a type `X`, the
+{{#concept "exponent semiring" Agda=function-Semiring}} `R^X` consists of
 functions from `X` into the underlying type of `R`. The semiring operations are
-defined pointwise
+defined pointwise.
 
 ## Definition
 

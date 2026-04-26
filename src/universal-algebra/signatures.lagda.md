@@ -20,7 +20,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A signature is a collection of function symbols with given arities.
+A (single-sorted, finitary, algebraic)
+{{#concept "signature" Disambiguation="single-sorted, algebraic, finitary" WD="signature" WDID=Q741810 Agda=signature}}
+is a [collection](foundation.dependent-pair-types.md) of function symbols with
+given finite arities.
 
 ## Definitions
 
@@ -28,55 +31,12 @@ A signature is a collection of function symbols with given arities.
 
 ```agda
 signature : (l : Level) → UU (lsuc l)
-signature (l) = Σ (UU l) (λ operations → (operations → ℕ))
+signature l = Σ (UU l) (λ operations → (operations → ℕ))
 
 operation-signature : {l : Level} → signature l → UU l
-operation-signature Sg = pr1 Sg
+operation-signature = pr1
 
 arity-operation-signature :
-  { l : Level} →
-  ( Sg : signature l) →
-  ( operation-signature Sg → ℕ)
-arity-operation-signature Sg = pr2 Sg
-```
-
-### Extension of signatures
-
-```agda
-is-extension-signature :
-  { l1 l2 : Level} →
-  signature l1 → signature l2 → UU (l1 ⊔ l2)
-is-extension-signature Sg1 Sg2 =
-  Σ ( operation-signature Sg2 → operation-signature Sg1)
-    ( λ f → is-emb f ×
-      ( ( op : operation-signature Sg2) →
-        arity-operation-signature Sg2 op ＝
-          arity-operation-signature Sg1 (f op)))
-
-emb-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  is-extension-signature Sg1 Sg2 →
-  ( operation-signature Sg2 → operation-signature Sg1)
-emb-extension-signature Sg1 Sg2 ext = pr1 ext
-
-is-emb-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  ( ext : is-extension-signature Sg1 Sg2) →
-  is-emb (emb-extension-signature Sg1 Sg2 ext)
-is-emb-extension-signature Sg1 Sg2 ext = pr1 (pr2 ext)
-
-arity-preserved-extension-signature :
-  { l1 l2 : Level} →
-  ( Sg1 : signature l1) →
-  ( Sg2 : signature l2) →
-  ( ext : is-extension-signature Sg1 Sg2) →
-  ( op : operation-signature Sg2) →
-  arity-operation-signature Sg2 op ＝
-    arity-operation-signature Sg1
-      ( emb-extension-signature Sg1 Sg2 ext op)
-arity-preserved-extension-signature Sg1 Sg2 ext = pr2 (pr2 ext)
+  {l : Level} (σ : signature l) → operation-signature σ → ℕ
+arity-operation-signature = pr2
 ```

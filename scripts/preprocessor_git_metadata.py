@@ -4,20 +4,18 @@
 # and it adheres to the appropriate protocol; see
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
-from collections import defaultdict
 import json
 from multiprocessing import Pool
 import os
 import subprocess
 import sys
-import time
-import tomli
 from utils import github_page_for_commit, eprint
-from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
+from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributors_warning
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
+RECENT_SITEWIDE_CHANGES_COUNT = 8
 
 
 def does_support(backend):
@@ -27,14 +25,14 @@ def does_support(backend):
 def module_source_path_from_md_name(roots, module_name):
     """
     Tries to find a source literate Agda or markdown file given
-    a list of directories to seach, and a 'module name', which is an
+    a list of directories to search, and a 'module name', which is an
     entry in the websites table of contents
     (usually of the form `agda-module.submodule.md`).
 
     Returns None if no such file is found.
     """
     base_name = module_name.replace('.', os.sep)[:-len('.md')]
-    # Check agains "lagda", not ".lagda", since that period would
+    # Check against "lagda", not ".lagda", since that period would
     # have been replaced by the previous line
     if base_name.endswith('lagda'):
         base_name = base_name[:-len('.lagda')]
@@ -60,7 +58,51 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
-def get_author_element_for_file(filename, include_contributors, contributors):
+def get_recent_changes(contributors, *args, recent_changes_count=RECENT_CHANGES_COUNT):
+    """
+    Returns a markdown list of the most recent commits.
+    """
+    recent_changes_output = subprocess.run([
+        'git', 'log',
+        # Show only last `recent_changes_count` commits
+        '-n', str(recent_changes_count),
+        # Get hash, date, message, author and coauthors, separated by tabs
+        # NB When there are no trailers, the line ends with a tab
+        # NB Coauthors usually have the format "name <email>" and there is
+        #    no way to tell git to strip the email, so it needs to be done
+        #    in post processing
+        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
+        'HEAD',
+        *args
+    ], capture_output=True, text=True, check=True).stdout.splitlines()
+
+    skipped_authors = set()
+    recent_changes = '## Recent changes\n'
+
+    for line in recent_changes_output:
+        [sha, date, message, *raw_authors] = line.split('\t')
+        author_indices = []
+        for raw_author in map(cleanup_author_part, raw_authors):
+            if raw_author == '':
+                continue
+            author_index = get_real_author_index(raw_author, contributors)
+            if author_index is None:
+                skipped_authors.add(raw_author)
+                continue
+            author_indices.append(author_index)
+
+        if not author_indices:
+            continue
+
+        formatted_authors = format_multiple_authors_attribution([
+            contributors[idx]['displayName'] for idx in author_indices
+        ])
+        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+
+    return (recent_changes, skipped_authors)
+
+
+def get_author_element_for_file(filename, include_contributors, contributors, contributors_file, recent_changes_count):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -70,6 +112,8 @@ def get_author_element_for_file(filename, include_contributors, contributors):
     # but alas I haven't found anything to that effect
 
     attribution_text = ''
+    skipped_authors = set()
+
     if include_contributors:
         # Arguments mostly copied from the 1lab pipeline
         raw_authors_git_output = subprocess.run([
@@ -86,12 +130,15 @@ def get_author_element_for_file(filename, include_contributors, contributors):
 
         # If all commits to a file are chore commits, then there are no authors
         if raw_authors_git_output:
-          # Collect authors and sort by number of commits
-          author_names = [
-              author['displayName']
-              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
-          ]
-          attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
+            # Collect authors and sort by number of commits
+            sorted_authors, __skipped_authors = sorted_authors_from_raw_shortlog_lines(
+                raw_authors_git_output, contributors)
+            skipped_authors.update(__skipped_authors)
+            author_names = [
+                author['displayName']
+                for author in sorted_authors
+            ]
+            attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -102,37 +149,12 @@ def get_author_element_for_file(filename, include_contributors, contributors):
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
 
-    recent_changes_output = subprocess.run([
-        'git', 'log',
-        # Show only last RECENT_CHANGES_COUNT commits
-        '-n', str(RECENT_CHANGES_COUNT),
-        # Get hash, date, message, author and coauthors, separated by tabs
-        # NB When there are no trailers, the line ends with a tab
-        # NB Coauthors usually have the format "name <email>" and there is
-        #    no way to tell git to strip the email, so it needs to be done
-        #    in post processing
-        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
-        'HEAD', '--', filename
-    ], capture_output=True, text=True, check=True).stdout.splitlines()
-    recent_changes = '## Recent changes\n'
-    for recent_changes_line in recent_changes_output:
-        [sha, date, message, *raw_authors] = recent_changes_line.split('\t')
-        author_indices = []
-        for raw_author in map(cleanup_author_part, raw_authors):
-            # Line ended with a tab
-            if raw_author == '':
-                continue
-            author_index = get_real_author_index(raw_author, contributors)
-            if author_index is None:
-                print_skipping_contributor_warning(raw_author)
-                continue
-            author_indices.append(author_index)
-        if len(author_indices) == 0:
-            continue
-        formatted_authors = format_multiple_authors_attribution([
-            contributors[author_index]['displayName'] for author_index in author_indices
-        ])
-        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
+    recent_changes, recent_skipped_authors = get_recent_changes(
+        contributors, '--', filename, recent_changes_count=recent_changes_count)
+    skipped_authors.update(recent_skipped_authors)
+
+    if skipped_authors:
+        print_skipping_contributors_warning(skipped_authors, contributors_file)
 
     return (
         f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{nobreak_span("Last modified on " + modified_date)}.</i></p>',
@@ -159,13 +181,30 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     source_file_name = potential_source_file_name
 
     if source_file_name in config['suppress_processing']:
+        # Suppress processing for this page
+        return
+
+    if source_file_name in config['sitewide_changes']:
+        # Insert recent sitewide changes on page
+        footer_recent_sitewide, skipped_authors = get_recent_changes(
+            contributors, '--invert-grep', '--grep=^chore:', recent_changes_count=config['recent_sitewide_changes_count'])
+
+        if skipped_authors:
+            print_skipping_contributors_warning(
+                skipped_authors, config['contributors_file'])
+
+        # Append to end of file
+        chapter['content'] += '\n' + footer_recent_sitewide
         return
 
     header_info_element, footer_info_element = get_author_element_for_file(
         source_file_name,
         any((source_file_name.endswith(ext)
             for ext in config['attribute_file_extensions'])),
-        contributors)
+        contributors,
+        config['contributors_file'],
+        config['recent_changes_count'])
+
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
     chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
@@ -212,9 +251,6 @@ if __name__ == '__main__':
             else:
                 sys.exit(0)
 
-    # Load the contributors data
-    contributors_data = parse_contributors_file()
-
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
     metadata_config = context['config']['preprocessor']['git-metadata']
@@ -222,12 +258,24 @@ if __name__ == '__main__':
         'attribute_file_extensions', [])
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
+    metadata_config['sitewide_changes'] = metadata_config.get(
+        'sitewide_changes', [])
+    metadata_config['contributors_file'] = metadata_config.get(
+        'contributors_file', 'CONTRIBUTORS.toml')
+    metadata_config['recent_changes_count'] = metadata_config.get(
+        'recent_changes_count', RECENT_CHANGES_COUNT)
+    metadata_config['recent_sitewide_changes_count'] = metadata_config.get(
+        'recent_sitewide_changes_count', RECENT_SITEWIDE_CHANGES_COUNT)
+
+    # Load the contributors data
+    contributors_data = parse_contributors_file(
+        metadata_config['contributors_file'])
 
     if bool(metadata_config.get('enable')):
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
             book['sections'] = p.starmap(add_author_info_to_root_section, [
-                (['src', ''], section, contributors_data, metadata_config)
+                (['src', '',  'docs'], section, contributors_data, metadata_config)
                 for section in book['sections']
             ])
     else:

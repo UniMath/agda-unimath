@@ -326,4 +326,4 @@ abstract
 
 ## References
 
-{{#bibliography}} {{#references Shu18}} {{#references Dlicata335/Cohesion-Agda}}
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}

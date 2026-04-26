@@ -62,16 +62,12 @@ module _
       ( ind-singleton a C
         ( λ x →
           ( y : B x) →
-            Id
-              ( ( map-inv-left-unit-law-Σ-is-contr ∘
-                  map-left-unit-law-Σ-is-contr)
-                ( x , y))
-              ( x , y))
+          map-inv-left-unit-law-Σ-is-contr
+            ( map-left-unit-law-Σ-is-contr (x , y)) ＝
+          ( x , y))
         ( λ y → ap
           ( map-inv-left-unit-law-Σ-is-contr)
-          ( ap
-            ( λ f → f y)
-            ( compute-ind-singleton a C (λ x → B x → B a) id))))
+          ( ap (λ f → f y) ( compute-ind-singleton a C (λ x → B x → B a) id))))
 
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr
@@ -168,7 +164,7 @@ formalize both ways.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : Σ A B → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
   map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (x , y)))
@@ -300,15 +296,28 @@ module _
       is-section-map-inv-interchange-Σ-Σ
       is-retraction-map-inv-interchange-Σ-Σ
 
+  is-equiv-map-inv-interchange-Σ-Σ : is-equiv map-inv-interchange-Σ-Σ
+  is-equiv-map-inv-interchange-Σ-Σ =
+    is-equiv-is-invertible
+      map-interchange-Σ-Σ
+      is-retraction-map-inv-interchange-Σ-Σ
+      is-section-map-inv-interchange-Σ-Σ
+
   interchange-Σ-Σ :
     Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) ≃
     Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
   pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 
+  inv-interchange-Σ-Σ :
+    Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) ≃
+    Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
+  pr1 inv-interchange-Σ-Σ = map-inv-interchange-Σ-Σ
+  pr2 inv-interchange-Σ-Σ = is-equiv-map-inv-interchange-Σ-Σ
+
   interchange-Σ-Σ-Σ :
     Σ A (λ x → Σ (B x) (λ y → Σ (C x) (D x y))) ≃
-    Σ A (λ x → Σ (C x) (λ z → Σ (B x) λ y → D x y z))
+    Σ A (λ x → Σ (C x) (λ z → Σ (B x) (λ y → D x y z)))
   interchange-Σ-Σ-Σ =
     associative-Σ' A C (λ x z → Σ (B x) λ y → D x y z) ∘e
     interchange-Σ-Σ ∘e
@@ -400,17 +409,37 @@ module _
 ### Distributive laws of cartesian products over Σ
 
 ```agda
-left-distributive-product-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
-  (A × (Σ B C)) ≃ Σ B (λ b → A × (C b))
-left-distributive-product-Σ =
-  equiv-left-swap-Σ
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
+  where
 
-right-distributive-product-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
-  ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
-right-distributive-product-Σ {A} =
-  associative-Σ _ _ _
+  left-distributive-product-Σ : A × (Σ B C) ≃ Σ B (λ b → A × (C b))
+  left-distributive-product-Σ = equiv-left-swap-Σ
+
+  inv-left-distributive-product-Σ : Σ B (λ b → A × (C b)) ≃ A × (Σ B C)
+  inv-left-distributive-product-Σ = equiv-left-swap-Σ
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3}
+  where
+
+  right-distributive-product-Σ : (Σ A B) × C ≃ Σ A (λ a → B a × C)
+  right-distributive-product-Σ = associative-Σ
+
+  inv-right-distributive-product-Σ : Σ A (λ a → B a × C) ≃ (Σ A B) × C
+  inv-right-distributive-product-Σ = inv-associative-Σ
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  where
+
+  distributive-product-Σ :
+    (Σ A B) × (Σ C D) ≃ Σ (A × C) (λ (a , c) → B a × D c)
+  distributive-product-Σ = interchange-Σ-Σ (λ _ _ → D)
+
+  inv-distributive-product-Σ :
+    Σ (A × C) (λ (a , c) → B a × D c) ≃ (Σ A B) × (Σ C D)
+  inv-distributive-product-Σ = inv-interchange-Σ-Σ (λ _ _ → D)
 ```
 
 ## See also

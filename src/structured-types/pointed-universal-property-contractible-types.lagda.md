@@ -27,8 +27,9 @@ open import structured-types.pointed-types
 ## Idea
 
 By definition, a [contractible](foundation-core.contractible-types.md) type is
-[pointed](structured-types.pointed-types.md). Moreover, they enjoy a universal
-property among the pointed types with respect to
+[pointed](structured-types.pointed-types.md). Moreover, they enjoy a
+{{#concept "universal property" Disambiguation="of contractible pointed types" Agda=universal-property-contr-Pointed-Type}}
+among the pointed types with respect to
 [pointed maps](structured-types.pointed-maps.md):
 
 A pointed type `A` is contractible if for all pointed types `X`, the type of

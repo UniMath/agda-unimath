@@ -7,10 +7,11 @@ module logic.functoriality-existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
-
-open import foundation-core.function-types
 ```
 
 </details>
@@ -105,6 +106,19 @@ module _
   map-tot-exists :
     (g : (x : A) → B x → C x) → exists-structure A B → exists-structure A C
   map-tot-exists g = map-exists C id g
+```
+
+### The functorial action of existential quantification on families of logical equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  iff-tot-exists :
+    (g : (x : A) → B x ↔ C x) → exists-structure A B ↔ exists-structure A C
+  pr1 (iff-tot-exists g) = map-tot-exists (forward-implication ∘ g)
+  pr2 (iff-tot-exists g) = map-tot-exists (backward-implication ∘ g)
 ```
 
 ### The functorial action of existential quantification on maps of the base

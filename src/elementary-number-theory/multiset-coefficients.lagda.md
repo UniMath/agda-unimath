@@ -18,7 +18,7 @@ open import elementary-number-theory.natural-numbers
 The multiset coefficients count the number of [multisets](trees.multisets.md) of
 size `k` of elements of a [set](foundation-core.sets.md) of size `n`. In other
 words, it counts the number of
-[connected componets](foundation.connected-components.md) of the type
+[connected components](foundation.connected-components.md) of the type
 
 ```text
   Σ (A : Fin n → Finite-Type), ║ Fin k ≃ Σ (i : Fin n), A i ║.

@@ -136,9 +136,11 @@ is-contained-in-radical-ideal-nilradical-Commutative-Ring :
 is-contained-in-radical-ideal-nilradical-Commutative-Ring R I x p =
   apply-universal-property-trunc-Prop p
     ( subset-radical-ideal-Commutative-Ring R I x)
-    ( λ (n , p) → is-radical-radical-ideal-Commutative-Ring R I x n
-    (is-closed-under-eq-radical-ideal-Commutative-Ring' R I
-    (contains-zero-radical-ideal-Commutative-Ring R I) p))
+    ( λ (n , p) →
+      is-radical-radical-ideal-Commutative-Ring R I x n
+        ( is-closed-under-eq-radical-ideal-Commutative-Ring' R I
+          ( contains-zero-radical-ideal-Commutative-Ring R I)
+          ( p)))
 ```
 
 ### The nilradical is contained in every prime ideal

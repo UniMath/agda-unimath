@@ -34,7 +34,7 @@ open import ring-theory.rings
 
 ## Idea
 
-The {{#concept "group of units" Disambiguation="ring" WD="unit" WDID=Q118084}}
+The {{#concept "group of units" Disambiguation="ring" WD="unit" WDID=Q118084 Agda=group-of-units-Ring}}
 of a [ring](ring-theory.rings.md) `R` is the [group](group-theory.groups.md)
 consisting of all the
 [invertible elements](ring-theory.invertible-elements-rings.md) in `R`.

@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.small-types
 open import foundation.small-universes
@@ -38,8 +39,21 @@ open import trees.universal-multiset
 ## Idea
 
 {{#concept "Russell's paradox" WD="Russell's paradox" WDID=Q33401 Agda=paradox-Russell}}
-arises when a [set](foundation-core.sets.md) of all sets is assumed to exist. In
-Russell's paradox it is of no importance that the elementhood relation takes
+arises when a [set](foundation-core.sets.md) of all sets is assumed to exist.
+
+**Paradox.** Given a set `𝒰` that contains all sets, then we may by
+diagonalization construct a new set, called the _Russell set_, of all sets who
+do not contain themselves as an element:
+
+```text
+  Russell := {X ∈ 𝒰 | X ∉ X}.
+```
+
+It may then be demonstrated that `Russell` contains itself as an element if and
+only if it does not contain itself, but negation has no fixed points and so this
+gives a contradiction. ∎
+
+In Russell's paradox it is of no importance that the elementhood relation takes
 values in [propositions](foundation-core.propositions.md). In other words,
 Russell's paradox arises similarly if there is a [multiset](trees.multisets.md)
 of all multisets. We will construct Russell's paradox from the assumption that a
@@ -57,8 +71,8 @@ there is no [surjective](foundation.surjective-maps.md) map `A → 𝒰`.
 Russell : (l : Level) → 𝕍 (lsuc l)
 Russell l =
   comprehension-𝕍
-    (universal-multiset-𝕍 l)
-    (λ X → X ∉-𝕍 X)
+    ( universal-multiset-𝕍 l)
+    ( λ X → X ∉-𝕍 X)
 ```
 
 ## Properties
@@ -75,7 +89,7 @@ module _
     is-small-comprehension-𝕍 l2
       { lsuc l1}
       { universal-multiset-𝕍 l1}
-      { λ z → z ∉-𝕍 z}
+      { λ X → X ∉-𝕍 X}
       ( is-small-universal-multiset-𝕍 l2 H)
       ( λ X → is-small-∉-𝕍 l2 (K X) (K X))
     where
@@ -98,74 +112,58 @@ module _
 ### Russell's paradox obtained from the assumption that `𝒰` is `𝒰`-small
 
 ```agda
-paradox-Russell : {l : Level} → ¬ (is-small l (UU l))
-paradox-Russell {l} H =
-  no-fixed-points-neg
-    ( R ∈-𝕍 R)
-    ( pair (map-equiv β) (map-inv-equiv β))
+module _
+  {l : Level} (H : is-small l (UU l))
   where
 
-  K : is-small-universe l l
-  K = pair H (λ X → pair X id-equiv)
+  equiv-in-notin-Russell :
+    (Russell l ∈-𝕍 Russell l) ≃ (Russell l ∉-𝕍 Russell l)
+  equiv-in-notin-Russell =
+    ( equiv-precomp (equiv-Russell-in-Russell K) empty) ∘e
+    ( left-unit-law-Σ-is-contr
+      { B = (λ t → (pr1 t) ∉-𝕍 (pr1 t))}
+      ( is-torsorial-Id' (resize-Russell K))
+      ( resize-Russell K , refl)) ∘e
+    ( inv-associative-Σ) ∘e
+    ( equiv-tot
+      ( λ t →
+        ( commutative-product) ∘e
+        ( equiv-product-right
+          ( inv-equiv
+            ( ( equiv-concat' _ (resize-resize-𝕍 (is-small-Russell K))) ∘e
+              ( eq-resize-𝕍
+                ( is-small-multiset-𝕍 is-small-lsuc t)
+                ( is-small-resize-Russell K))))))) ∘e
+    ( associative-Σ)
+    where
+      K : is-small-universe l l
+      K = (H , (λ X → (X , id-equiv)))
 
-  R : 𝕍 (lsuc l)
-  R = Russell l
+  iff-in-notin-Russell :
+    (Russell l ∈-𝕍 Russell l) ↔ (Russell l ∉-𝕍 Russell l)
+  iff-in-notin-Russell =
+    iff-equiv equiv-in-notin-Russell
 
-  is-small-R : is-small-𝕍 l R
-  is-small-R = is-small-Russell K
-
-  R' : 𝕍 l
-  R' = resize-Russell K
-
-  is-small-R' : is-small-𝕍 (lsuc l) R'
-  is-small-R' = is-small-resize-Russell K
-
-  abstract
-    p : resize-𝕍 R' is-small-R' ＝ R
-    p = resize-resize-𝕍 is-small-R
-
-  α : (R ∈-𝕍 R) ≃ (R' ∈-𝕍 R')
-  α = equiv-Russell-in-Russell K
-
-  abstract
-    β : (R ∈-𝕍 R) ≃ (R ∉-𝕍 R)
-    β = ( equiv-precomp α empty) ∘e
-        ( ( left-unit-law-Σ-is-contr
-            { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
-            ( is-torsorial-Id' R')
-            ( pair R' refl)) ∘e
-          ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
-            ( ( equiv-tot
-                ( λ t →
-                  ( commutative-product) ∘e
-                  ( equiv-product
-                    ( id-equiv)
-                    ( inv-equiv
-                      ( ( equiv-concat'
-                          _ ( p)) ∘e
-                        ( eq-resize-𝕍
-                          ( is-small-multiset-𝕍 is-small-lsuc t)
-                          ( is-small-R'))))))) ∘e
-              ( associative-Σ
-                ( 𝕍 l)
-                ( λ t → t ∉-𝕍 t)
-                ( λ t →
-                  ( resize-𝕍
-                    ( pr1 t)
-                    ( is-small-multiset-𝕍 is-small-lsuc (pr1 t))) ＝
-                  ( R))))))
+  paradox-Russell : empty
+  paradox-Russell =
+    no-fixed-points-neg (Russell l ∈-𝕍 Russell l) iff-in-notin-Russell
 ```
 
-### There can be no surjective map `f : A → 𝒰` for any `A : 𝒰`
+### There can be no surjective map `f : A ↠ 𝒰` for any `A : 𝒰`
+
+This result uses the axiom of replacement.
 
 ```agda
+no-surjection-onto-universe-is-small :
+  {l1 l2 : Level} {A : UU l1} → is-small l2 A →
+  (f : A → UU l2) → ¬ (is-surjective f)
+no-surjection-onto-universe-is-small e f H =
+  paradox-Russell (is-small-is-surjective H e is-locally-small-UU)
+
 no-surjection-onto-universe :
   {l : Level} {A : UU l} (f : A → UU l) → ¬ (is-surjective f)
-no-surjection-onto-universe f H =
-  paradox-Russell
-    ( is-small-is-surjective H
-      ( is-small')
-      ( is-locally-small-UU))
+no-surjection-onto-universe =
+  no-surjection-onto-universe-is-small is-small'
 ```
 
 ## External links

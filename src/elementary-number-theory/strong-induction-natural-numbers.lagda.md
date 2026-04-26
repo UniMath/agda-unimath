@@ -27,8 +27,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-The strong induction principle allows one to assume in the inductive step that
-the inductive hypothesis is satisfied at all smaller values.
+The
+{{#concept "strong induction principle" WDID=Q54506667 WD="principle of complete induction" Agda=strong-ind-ℕ}}
+on the [natural numbers](elementary-number-theory.natural-numbers.md) allows one
+to assume in the inductive step that the inductive hypothesis is satisfied at
+all
+[smaller values](elementary-number-theory.strict-inequality-natural-numbers.md).
 
 ## Definition
 

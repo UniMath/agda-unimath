@@ -1,6 +1,8 @@
 # The triangular numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.triangular-numbers where
 ```
 
@@ -11,11 +13,13 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.pronic-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
 
@@ -23,9 +27,11 @@ open import foundation.identity-types
 
 ## Idea
 
-The $n$th {{#concept "triangular number" Agda=triangular-number-ℕ}} is the
-[sum](elementary-number-theory.sums-of-natural-numbers.md) of the
-[natural numbers](elementary-number-theory.natural-numbers.md) up to $n$.
+The $n$th
+{{#concept "triangular number" WD="triangular number" WDID=Q245102 OEIS=A000217 Agda=triangular-number-ℕ}}
+is the
+[sum](elementary-number-theory.sums-of-finite-sequences-natural-numbers.md) of
+the [natural numbers](elementary-number-theory.natural-numbers.md) up to $n$.
 Alternatively, the triangular numbers can be defined inductively by
 
 ```text
@@ -59,6 +65,27 @@ inductive-triangular-number-ℕ : ℕ → ℕ
 inductive-triangular-number-ℕ 0 = 0
 inductive-triangular-number-ℕ (succ-ℕ n) =
   inductive-triangular-number-ℕ n +ℕ succ-ℕ n
+```
+
+### The nonzero triangular numbers
+
+```agda
+abstract
+  is-nonzero-triangular-number-succ-ℕ :
+    (n : ℕ) → is-nonzero-ℕ (triangular-number-ℕ (succ-ℕ n))
+  is-nonzero-triangular-number-succ-ℕ 0 ()
+  is-nonzero-triangular-number-succ-ℕ (succ-ℕ n) ()
+
+  is-nonzero-triangular-number-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-nonzero-ℕ (triangular-number-ℕ n)
+  is-nonzero-triangular-number-ℕ H
+    with
+    is-successor-is-nonzero-ℕ H
+  ... | (m , refl) = is-nonzero-triangular-number-succ-ℕ m
+
+triangular-number-ℕ⁺ : ℕ⁺ → ℕ⁺
+pr1 (triangular-number-ℕ⁺ (n , H)) = triangular-number-ℕ n
+pr2 (triangular-number-ℕ⁺ (n , H)) = is-nonzero-triangular-number-ℕ H
 ```
 
 ## Properties
@@ -119,3 +146,14 @@ compute-triangular-number-ℕ n =
 ## See also
 
 - [Nicomachus's Theorem](elementary-number-theory.nicomachuss-theorem.md)
+- [Reciprocal triangular numbers](elementary-number-theory.reciprocal-triangular-numbers.md)
+
+## External references
+
+- [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at
+  Wikipedia.
+- [A000217](https://oeis.org/A000217) in the OEIS
+
+## References
+
+{{#bibliography}}

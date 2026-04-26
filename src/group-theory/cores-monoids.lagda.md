@@ -47,7 +47,7 @@ module _
   submonoid-core-Monoid : Submonoid l M
   pr1 submonoid-core-Monoid = subtype-core-Monoid
   pr1 (pr2 submonoid-core-Monoid) = is-invertible-element-unit-Monoid M
-  pr2 (pr2 submonoid-core-Monoid) = is-invertible-element-mul-Monoid M
+  pr2 (pr2 submonoid-core-Monoid) = is-invertible-element-mul-Monoid M _ _
 
   monoid-core-Monoid : Monoid l
   monoid-core-Monoid = monoid-Submonoid M submonoid-core-Monoid

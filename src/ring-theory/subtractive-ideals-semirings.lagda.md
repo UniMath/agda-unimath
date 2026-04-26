@@ -11,6 +11,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-semirings
+open import ring-theory.right-ideals-semirings
+open import ring-theory.left-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 ```

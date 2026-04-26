@@ -42,13 +42,15 @@ open import group-theory.semigroups
 ## Idea
 
 Given a [normal subgroup](group-theory.normal-subgroups.md) `N` of `G`, the
-**quotient group** `G/N` is a [group](group-theory.groups.md) equipped with a
+{{#concept "quotient group" WD="quotient group" WDID=Q1138961 Agda=quotient-Group}}
+`G/N` is a [group](group-theory.groups.md) equipped with a
 [group homomorphism](group-theory.homomorphisms-groups.md) `q : G → G/N` such
-that `N ⊆ ker q`, and such that `q` satisfies the **universal property of the
-quotient group**, which asserts that any group homomorphism `f : G → H` such
-that `N ⊆ ker f` extends uniquely along `q` to a group homomorphism `G/N → H`.
-In other words, the universal property of the quotient group `G/N` asserts that
-the map
+that `N ⊆ ker q`, and such that `q` satisfies the
+{{#concept "universal property" Disambiguation="of the quotient group" Agda=universal-property-quotient-Group}}
+of the quotient group, which asserts that any group homomorphism `f : G → H`
+such that `N ⊆ ker f` extends uniquely along `q` to a group homomorphism
+`G/N → H`. In other words, the universal property of the quotient group `G/N`
+asserts that the map
 
 ```text
   hom-Group G/N H → nullifying-hom-Group G H N
@@ -59,6 +61,11 @@ from group homomorphisms `G/N → H` to
 `G → H` is an [equivalence](foundation-core.equivalences.md). Recall that a
 group homomorphism is said to be `N`-nullifying if `N` is contained in the
 [kernel](group-theory.kernels-homomorphisms-groups.md) of `f`.
+
+The fact that the quotient group satisfies its universal property is commonly
+known as the
+{{#concept "fundamental theorem on homomorphisms" Disambiguation="of groups" WD="fundamental theorem on homomorphisms" WDID=Q1187646 Agda=is-quotient-group-quotient-Group}},
+or **first isomorphism theorem**.
 
 ## Definitions
 
@@ -529,7 +536,7 @@ above. The first map is an equivalence by the universal property of set
 quotients, by which we have:
 
 ```text
-  (G/N → H) ≃ reflecting-map G H.
+  (G/N → H) ≃ reflecting-map G H. ∎
 ```
 
 ```agda
@@ -714,3 +721,8 @@ module _
       unit-congruence-Normal-Subgroup G N
         ( apply-effectiveness-map-quotient-hom-Group G N (inv H))
 ```
+
+## External links
+
+- [Fundamental theorem on homomorphisms](https://en.wikipedia.org/wiki/Fundamental_theorem_on_homomorphisms)
+  on Wikipedia

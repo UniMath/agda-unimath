@@ -11,8 +11,9 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -58,6 +59,26 @@ pronic-number-ℕ : ℕ → ℕ
 pronic-number-ℕ n = n *ℕ succ-ℕ n
 ```
 
+### The nonzero pronic numbers
+
+```agda
+abstract
+  is-nonzero-pronic-number-succ-ℕ :
+    (n : ℕ) → is-nonzero-ℕ (pronic-number-ℕ (succ-ℕ n))
+  is-nonzero-pronic-number-succ-ℕ n ()
+  
+  is-nonzero-pronic-number-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-nonzero-ℕ (pronic-number-ℕ n)
+  is-nonzero-pronic-number-ℕ H
+    with
+    is-successor-is-nonzero-ℕ H
+  ... | (m , refl) = is-nonzero-pronic-number-succ-ℕ m
+
+pronic-number-ℕ⁺ : ℕ⁺ → ℕ⁺
+pr1 (pronic-number-ℕ⁺ (n , H)) = pronic-number-ℕ n
+pr2 (pronic-number-ℕ⁺ (n , H)) = is-nonzero-pronic-number-ℕ H
+```
+
 ### The iterated pronic numbers
 
 The iterated pronic numbers are listed as [https://oeis.org/A007018) in the OEIS
@@ -87,7 +108,7 @@ iterated-pronic-number-ℕ (succ-ℕ n) =
 
 ## Properties
 
-### The pronic number of a successor
+### The value of the pronic number of a successor
 
 ```agda
 pronic-number-succ-ℕ :
@@ -119,7 +140,7 @@ abstract
       ( n , refl)
 ```
 
-### The $(n+1)$st pronic number
+### The value of the $(n+1)$st pronic number
 
 We have `(n + 1) * (n + 2) ＝ n * (n + 1) + 2 * (n + 1)`
 
@@ -220,6 +241,7 @@ compute-sum-of-pronic-numbers-ℕ n =
 ## See also
 
 - [Nicomachus's Theorem](elementary-number-theory.nicomachuss-theorem.md)
+- [Reciprocal pronic numbers](elementary-number-theory.reciprocal-pronic-numbers.md)
 - [Square pyramidal numbers](elementary-number-theory.square-pyramidal-numbers.md)
 - [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
 - [Triangular numbers](elementary-number-theory.triangular-numbers.md)

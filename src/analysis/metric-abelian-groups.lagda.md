@@ -1,0 +1,254 @@
+# Metric abelian groups
+
+```agda
+module analysis.metric-abelian-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.positive-rational-numbers
+
+open import foundation.action-on-identifications-binary-functions
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+
+open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.metric-spaces
+open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
+```
+
+</details>
+
+## Idea
+
+A {{#concept "metric abelian group" Agda=Metric-Ab}} is an
+[abelian group](group-theory.abelian-groups.md) endowed with the structure of a
+[metric space](metric-spaces.metric-spaces.md) such that the addition operation
+and negation operation are
+[isometries](metric-spaces.isometries-metric-spaces.md).
+
+## Definition
+
+```agda
+is-metric-ab-prop-Ab-Pseudometric-Structure :
+  {l1 l2 : Level} (G : Ab l1) (M : Pseudometric-Structure l2 (type-Ab G)) →
+  Prop (l1 ⊔ l2)
+is-metric-ab-prop-Ab-Pseudometric-Structure G M =
+  let
+    MS = (type-Ab G , M)
+  in
+    is-extensional-prop-Pseudometric-Space MS ∧
+    is-isometry-prop-Pseudometric-Space MS MS (neg-Ab G) ∧
+    Π-Prop
+      ( type-Ab G)
+      ( λ x → is-isometry-prop-Pseudometric-Space MS MS (add-Ab G x))
+
+is-metric-ab-Ab-Pseudometric-Structure :
+  {l1 l2 : Level} (G : Ab l1) (M : Pseudometric-Structure l2 (type-Ab G)) →
+  UU (l1 ⊔ l2)
+is-metric-ab-Ab-Pseudometric-Structure G M =
+  type-Prop (is-metric-ab-prop-Ab-Pseudometric-Structure G M)
+
+Metric-Ab : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Metric-Ab l1 l2 =
+  Σ ( Ab l1)
+    ( λ G →
+      Σ ( Pseudometric-Structure l2 (type-Ab G))
+        ( is-metric-ab-Ab-Pseudometric-Structure G))
+
+module _
+  {l1 l2 : Level} (MG : Metric-Ab l1 l2)
+  where
+
+  ab-Metric-Ab : Ab l1
+  ab-Metric-Ab = pr1 MG
+
+  type-Metric-Ab : UU l1
+  type-Metric-Ab = type-Ab ab-Metric-Ab
+```
+
+### Abelian group properties of metric abelian groups
+
+```agda
+module _
+  {l1 l2 : Level} (MG : Metric-Ab l1 l2)
+  where
+
+  zero-Metric-Ab : type-Metric-Ab MG
+  zero-Metric-Ab = zero-Ab (ab-Metric-Ab MG)
+
+  add-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
+  add-Metric-Ab = add-Ab (ab-Metric-Ab MG)
+
+  add-Metric-Ab' : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
+  add-Metric-Ab' = add-Ab' (ab-Metric-Ab MG)
+
+  ap-add-Metric-Ab :
+    {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
+    add-Metric-Ab x y ＝ add-Metric-Ab x' y'
+  ap-add-Metric-Ab = ap-add-Ab (ab-Metric-Ab MG)
+
+  neg-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG
+  neg-Metric-Ab = neg-Ab (ab-Metric-Ab MG)
+
+  abstract
+    neg-zero-Metric-Ab : neg-Metric-Ab zero-Metric-Ab ＝ zero-Metric-Ab
+    neg-zero-Metric-Ab = neg-zero-Ab (ab-Metric-Ab MG)
+
+    neg-neg-Metric-Ab :
+      (x : type-Metric-Ab MG) → neg-Metric-Ab (neg-Metric-Ab x) ＝ x
+    neg-neg-Metric-Ab = neg-neg-Ab (ab-Metric-Ab MG)
+
+  diff-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
+  diff-Metric-Ab x y = add-Metric-Ab x (neg-Metric-Ab y)
+
+  ap-diff-Metric-Ab :
+    {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
+    diff-Metric-Ab x y ＝ diff-Metric-Ab x' y'
+  ap-diff-Metric-Ab = ap-right-subtraction-Ab (ab-Metric-Ab MG)
+
+  commutative-add-Metric-Ab :
+    (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
+  commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
+
+  is-identity-right-conjugation-Metric-Ab :
+    (x y : type-Metric-Ab MG) → add-Metric-Ab x (diff-Metric-Ab y x) ＝ y
+  is-identity-right-conjugation-Metric-Ab =
+    is-identity-right-conjugation-Ab (ab-Metric-Ab MG)
+```
+
+### Metric properties of metric abelian groups
+
+```agda
+module _
+  {l1 l2 : Level} (MG : Metric-Ab l1 l2)
+  where
+
+  pseudometric-structure-Metric-Ab :
+    Pseudometric-Structure l2 (type-Metric-Ab MG)
+  pseudometric-structure-Metric-Ab = pr1 (pr2 MG)
+
+  pseudometric-space-Metric-Ab : Pseudometric-Space l1 l2
+  pseudometric-space-Metric-Ab =
+    ( type-Metric-Ab MG , pseudometric-structure-Metric-Ab)
+
+  metric-space-Metric-Ab : Metric-Space l1 l2
+  metric-space-Metric-Ab =
+    ( pseudometric-space-Metric-Ab ,
+      pr1 (pr2 (pr2 MG)))
+
+  neighborhood-prop-Metric-Ab :
+    Rational-Neighborhood-Relation l2 (type-Metric-Ab MG)
+  neighborhood-prop-Metric-Ab =
+    neighborhood-prop-Metric-Space metric-space-Metric-Ab
+
+  neighborhood-Metric-Ab : ℚ⁺ → Relation l2 (type-Metric-Ab MG)
+  neighborhood-Metric-Ab = neighborhood-Metric-Space metric-space-Metric-Ab
+
+  is-isometry-add-Metric-Ab :
+    (x : type-Metric-Ab MG) →
+    is-isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+      ( add-Metric-Ab MG x)
+  is-isometry-add-Metric-Ab = pr2 (pr2 (pr2 (pr2 MG)))
+
+  isometry-add-Metric-Ab :
+    (x : type-Metric-Ab MG) →
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-add-Metric-Ab x = (add-Metric-Ab MG x , is-isometry-add-Metric-Ab x)
+
+  abstract
+    is-isometry-add-Metric-Ab' :
+      (x : type-Metric-Ab MG) →
+      is-isometry-Metric-Space
+        ( metric-space-Metric-Ab)
+        ( metric-space-Metric-Ab)
+        ( add-Metric-Ab' MG x)
+    is-isometry-add-Metric-Ab' x =
+      tr
+        ( is-isometry-Metric-Space
+          ( metric-space-Metric-Ab)
+          ( metric-space-Metric-Ab))
+        ( eq-htpy (commutative-add-Metric-Ab MG x))
+        ( is-isometry-add-Metric-Ab x)
+
+  isometry-add-Metric-Ab' :
+    (x : type-Metric-Ab MG) →
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-add-Metric-Ab' x =
+    ( add-Metric-Ab' MG x , is-isometry-add-Metric-Ab' x)
+
+  is-isometry-neg-Metric-Ab :
+    is-isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+      ( neg-Metric-Ab MG)
+  is-isometry-neg-Metric-Ab = pr1 (pr2 (pr2 (pr2 MG)))
+
+  isometry-neg-Metric-Ab :
+    isometry-Metric-Space
+      ( metric-space-Metric-Ab)
+      ( metric-space-Metric-Ab)
+  isometry-neg-Metric-Ab = (neg-Metric-Ab MG , is-isometry-neg-Metric-Ab)
+```
+
+## Properties
+
+### Addition is a modulated uniformly continuous map from the product metric space of a metric abelian group to the metric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (G : Metric-Ab l1 l2)
+  where
+
+  modulated-uniformly-continuous-map-add-pair-Metric-Ab :
+    modulated-ucont-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+  modulated-uniformly-continuous-map-add-pair-Metric-Ab =
+    modulated-ucont-uncurry-map-is-binary-isometry-Metric-Space
+      ( metric-space-Metric-Ab G)
+      ( metric-space-Metric-Ab G)
+      ( metric-space-Metric-Ab G)
+      ( add-Metric-Ab G)
+      ( is-isometry-add-Metric-Ab G)
+      ( is-isometry-add-Metric-Ab' G)
+
+  uniformly-continuous-map-add-pair-Metric-Ab :
+    uniformly-continuous-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+  uniformly-continuous-map-add-pair-Metric-Ab =
+    uniformly-continuous-map-modulated-ucont-map-Metric-Space
+      ( product-Metric-Space
+        ( metric-space-Metric-Ab G)
+        ( metric-space-Metric-Ab G))
+      ( metric-space-Metric-Ab G)
+      ( modulated-uniformly-continuous-map-add-pair-Metric-Ab)
+```

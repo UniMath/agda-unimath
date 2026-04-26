@@ -19,17 +19,15 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.retractions
 open import foundation.sections
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import real-numbers.inequality-lower-dedekind-real-numbers
-open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
@@ -79,7 +77,7 @@ module _
         (λ p → le-ℚ p q × is-in-cut-neg-lower-ℝ p)
         ( neg-ℚ)
         ( λ p (-q<p , p<x) →
-          tr (le-ℚ (neg-ℚ p)) (neg-neg-ℚ q) (neg-le-ℚ (neg-ℚ q) p -q<p) ,
+          tr (le-ℚ (neg-ℚ p)) (neg-neg-ℚ q) (neg-le-ℚ -q<p) ,
           tr (is-in-cut-lower-ℝ x) (inv (neg-neg-ℚ p)) p<x)
         ( forward-implication (is-rounded-cut-lower-ℝ x (neg-ℚ q)) -q<x)
     pr2 (is-rounded-cut-neg-lower-ℝ q) =
@@ -88,7 +86,7 @@ module _
         ( λ p (p<q , -q<x) →
           backward-implication
             ( is-rounded-cut-lower-ℝ x (neg-ℚ q))
-            ( intro-exists (neg-ℚ p) (neg-le-ℚ p q p<q , -q<x)))
+            ( intro-exists (neg-ℚ p) (neg-le-ℚ p<q , -q<x)))
 
   neg-lower-ℝ : upper-ℝ l
   pr1 neg-lower-ℝ = cut-neg-lower-ℝ
@@ -130,7 +128,7 @@ module _
           tr
             ( λ x → le-ℚ x (neg-ℚ p))
             ( neg-neg-ℚ q)
-            ( neg-le-ℚ p (neg-ℚ q) p<-q) ,
+            ( neg-le-ℚ p<-q) ,
           tr (is-in-cut-upper-ℝ x) (inv (neg-neg-ℚ p)) x<p)
         ( forward-implication (is-rounded-cut-upper-ℝ x (neg-ℚ q)) x<-q)
     pr2 (is-rounded-cut-neg-upper-ℝ q) =
@@ -139,7 +137,7 @@ module _
         ( λ r (q<r , x<-r) →
           backward-implication
             ( is-rounded-cut-upper-ℝ x (neg-ℚ q))
-            ( intro-exists (neg-ℚ r) (neg-le-ℚ q r q<r , x<-r)))
+            ( intro-exists (neg-ℚ r) (neg-le-ℚ q<r , x<-r)))
 
   neg-upper-ℝ : lower-ℝ l
   pr1 neg-upper-ℝ = cut-neg-upper-ℝ
@@ -157,7 +155,7 @@ abstract
     eq-eq-cut-lower-ℝ
       ( neg-upper-ℝ (neg-lower-ℝ x))
       ( x)
-      ( antisymmetric-sim-subtype
+      ( eq-sim-subtype
         ( cut-neg-upper-ℝ (neg-lower-ℝ x))
         ( cut-lower-ℝ x)
         ( (λ p → tr (is-in-cut-lower-ℝ x) (neg-neg-ℚ p)) ,
@@ -169,23 +167,25 @@ abstract
     eq-eq-cut-upper-ℝ
       ( neg-lower-ℝ (neg-upper-ℝ x))
       ( x)
-      ( antisymmetric-sim-subtype
+      ( eq-sim-subtype
         ( cut-neg-lower-ℝ (neg-upper-ℝ x))
         ( cut-upper-ℝ x)
         ( (λ p → tr (is-in-cut-upper-ℝ x) (neg-neg-ℚ p)) ,
           (λ p → tr (is-in-cut-upper-ℝ x) (inv (neg-neg-ℚ p)))))
 
   is-equiv-neg-lower-ℝ : (l : Level) → is-equiv (neg-lower-ℝ {l})
-  pr1 (pr1 (is-equiv-neg-lower-ℝ l)) = neg-upper-ℝ
-  pr1 (pr2 (is-equiv-neg-lower-ℝ l)) = neg-upper-ℝ
-  pr2 (pr1 (is-equiv-neg-lower-ℝ l)) = is-section-neg-upper-ℝ l
-  pr2 (pr2 (is-equiv-neg-lower-ℝ l)) = is-retraction-neg-upper-ℝ l
+  is-equiv-neg-lower-ℝ l =
+    is-equiv-is-invertible
+      ( neg-upper-ℝ)
+      ( is-section-neg-upper-ℝ l)
+      ( is-retraction-neg-upper-ℝ l)
 
   is-equiv-neg-upper-ℝ : (l : Level) → is-equiv (neg-upper-ℝ {l})
-  pr1 (pr1 (is-equiv-neg-upper-ℝ l)) = neg-lower-ℝ
-  pr1 (pr2 (is-equiv-neg-upper-ℝ l)) = neg-lower-ℝ
-  pr2 (pr1 (is-equiv-neg-upper-ℝ l)) = is-retraction-neg-upper-ℝ l
-  pr2 (pr2 (is-equiv-neg-upper-ℝ l)) = is-section-neg-upper-ℝ l
+  is-equiv-neg-upper-ℝ l =
+    is-equiv-is-invertible
+      ( neg-lower-ℝ)
+      ( is-retraction-neg-upper-ℝ l)
+      ( is-section-neg-upper-ℝ l)
 ```
 
 ### The negation of a rational projected to a lower real is the projection of its negation as an upper real
@@ -197,13 +197,13 @@ neg-lower-real-ℚ q =
   eq-eq-cut-upper-ℝ
     ( neg-lower-ℝ (lower-real-ℚ q))
     ( upper-real-ℚ (neg-ℚ q))
-    ( antisymmetric-sim-subtype
+    ( eq-sim-subtype
       ( cut-neg-lower-ℝ (lower-real-ℚ q))
       ( cut-upper-real-ℚ (neg-ℚ q))
       ( (λ p -p<q →
-          tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ p) (neg-le-ℚ (neg-ℚ p) q -p<q)) ,
+          tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ p) (neg-le-ℚ -p<q)) ,
         (λ p -q<p →
-          tr (le-ℚ (neg-ℚ p)) (neg-neg-ℚ q) (neg-le-ℚ (neg-ℚ q) p -q<p))))
+          tr (le-ℚ (neg-ℚ p)) (neg-neg-ℚ q) (neg-le-ℚ -q<p))))
 ```
 
 ### The negation of a rational projected to an upper real is the projection of its negation as a lower real
@@ -215,17 +215,17 @@ neg-upper-real-ℚ q =
   eq-eq-cut-lower-ℝ
     ( neg-upper-ℝ (upper-real-ℚ q))
     ( lower-real-ℚ (neg-ℚ q))
-    ( antisymmetric-sim-subtype
+    ( eq-sim-subtype
       ( cut-neg-upper-ℝ (upper-real-ℚ q))
       ( cut-lower-real-ℚ (neg-ℚ q))
       ( (λ p q<-p →
           tr
             ( λ r → le-ℚ r (neg-ℚ q))
             ( neg-neg-ℚ p)
-            ( neg-le-ℚ q (neg-ℚ p) q<-p)) ,
+            ( neg-le-ℚ q<-p)) ,
         (λ p p<-q →
           tr
             ( λ r → le-ℚ r (neg-ℚ p))
             ( neg-neg-ℚ q)
-            ( neg-le-ℚ p (neg-ℚ q) p<-q))))
+            ( neg-le-ℚ p<-q))))
 ```

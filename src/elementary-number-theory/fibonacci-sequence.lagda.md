@@ -20,7 +20,7 @@ open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.squares-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

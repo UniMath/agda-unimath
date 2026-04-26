@@ -20,7 +20,8 @@ open import graph-theory.walks-undirected-graphs
 ## Idea
 
 An [undirected graph](graph-theory.undirected-graphs.md) is said to be
-**connected** if any point can be reached from any point by a
+{{#concept "connected" Disambiguation="undirected graph" WD="connected graph" WDID=Q230655 Agda=is-connected-Undirected-Graph}}
+if any point can be reached from any point by a
 [walk](graph-theory.walks-undirected-graphs.md).
 
 ## Definition

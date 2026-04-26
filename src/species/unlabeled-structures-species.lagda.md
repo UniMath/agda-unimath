@@ -21,8 +21,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-The type of **unlabeled `F`-structures** of order `n` of a
-[species](species.species-of-types.md) `F` is the type of
+The type of
+{{#concept "unlabeled `F`-structures" Disambiguation="of a species of types" Agda=unlabeled-structure-species-types}}
+of order `n` of a [species](species.species-of-types.md) `F` is the type of
 [sets](foundation-core.sets.md) `X` of size `n` equipped with an `F`-structure.
 Two unlabeled `F`-structures of order `n` are considered to be the same if the
 underlying sets are isomorphic and the `F`-structure of the first transports

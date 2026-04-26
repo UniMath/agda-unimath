@@ -20,7 +20,9 @@ open import foundation.universe-levels
 
 open import group-theory.submonoids
 
+open import ring-theory.nonunital-subsemirings
 open import ring-theory.semirings
+open import ring-theory.subsemirings
 open import ring-theory.subsets-semirings
 ```
 
@@ -28,16 +30,17 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-An **ideal** (resp. a **left/right ideal**) of a semiring `R` is an additive
-submodule of `R` that is closed under multiplication by elements of `R` (from
-the left/right).
+An {{#concept "ideal" Disambiguation="in a semiring" Agda=ideal-Semiring}}
+(resp. a
+{{#concept "left" Disambiguation="ideal in a semiring" Agda=left-ideal-Semiring}}/{{#concept "right ideal" Disambiguation="in a semiring" Agda=right-ideal-Semiring}})
+in a [semiring](ring-theory.semirings.md) `R` is an additive submodule of `R`
+that is closed under multiplication by elements of `R` (from the left/right).
 
-### Note
-
-This is the standard definition of ideals in semirings. However, such two-sided
-ideals do not correspond uniquely to congruences on `R`. If we ask in addition
-that the underlying additive submodule is normal, then we get unique
-correspondence to congruences. We will call such ideals **normal**.
+**Note.** This is the standard definition of ideals in semirings. However, such
+two-sided ideals do not correspond uniquely to
+[congruences](ring-theory.congruence-relations-semirings.md) on `R`. If we ask
+in addition that the underlying additive submodule is normal, then we get unique
+correspondence to congruences. We will call such ideals _normal_.
 
 ## Definitions
 
@@ -48,8 +51,7 @@ is-ideal-subset-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R) → UU (l1 ⊔ l2)
 is-ideal-subset-Semiring R P =
   is-additive-submonoid-subset-Semiring R P ×
-  ( is-closed-under-left-multiplication-subset-Semiring R P ×
-    is-closed-under-right-multiplication-subset-Semiring R P)
+  is-closed-under-two-sided-multiplication-subset-Semiring R P
 
 is-prop-is-ideal-subset-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R) →
@@ -57,9 +59,7 @@ is-prop-is-ideal-subset-Semiring :
 is-prop-is-ideal-subset-Semiring R P =
   is-prop-product
     ( is-prop-is-additive-submonoid-subset-Semiring R P)
-    ( is-prop-product
-      ( is-prop-is-closed-under-left-multiplication-subset-Semiring R P)
-      ( is-prop-is-closed-under-right-multiplication-subset-Semiring R P))
+    ( is-prop-is-closed-under-two-sided-multiplication-subset-Semiring R P)
 
 ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
@@ -119,14 +119,16 @@ module _
   is-closed-under-eq-ideal-Semiring' =
     is-closed-under-eq-subset-Semiring' R subset-ideal-Semiring
 
-  is-ideal-subset-ideal-Semiring :
-    is-ideal-subset-Semiring R subset-ideal-Semiring
-  is-ideal-subset-ideal-Semiring = pr2 I
-
   is-additive-submonoid-ideal-Semiring :
     is-additive-submonoid-subset-Semiring R subset-ideal-Semiring
   is-additive-submonoid-ideal-Semiring =
-    pr1 is-ideal-subset-ideal-Semiring
+    pr1 is-ideal-ideal-Semiring
+
+  additive-submonoid-ideal-Semiring : Submonoid l2 (additive-monoid-Semiring R)
+  pr1 additive-submonoid-ideal-Semiring =
+    subset-ideal-Semiring
+  pr2 additive-submonoid-ideal-Semiring =
+    is-additive-submonoid-ideal-Semiring
 
   contains-zero-ideal-Semiring :
     is-in-ideal-Semiring (zero-Semiring R)
@@ -138,20 +140,49 @@ module _
   is-closed-under-addition-ideal-Semiring =
     pr2 is-additive-submonoid-ideal-Semiring
 
+  is-closed-under-two-sided-multiplication-ideal-Semiring :
+    is-closed-under-two-sided-multiplication-subset-Semiring R
+      ( subset-ideal-Semiring)
+  is-closed-under-two-sided-multiplication-ideal-Semiring =
+    pr2 is-ideal-ideal-Semiring
+    
   is-closed-under-left-multiplication-ideal-Semiring :
     is-closed-under-left-multiplication-subset-Semiring R subset-ideal-Semiring
   is-closed-under-left-multiplication-ideal-Semiring =
-    pr1 (pr2 is-ideal-subset-ideal-Semiring)
+    is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+      ( R)
+      ( subset-ideal-Semiring)
+      ( is-closed-under-two-sided-multiplication-ideal-Semiring)
 
   is-closed-under-right-multiplication-ideal-Semiring :
     is-closed-under-right-multiplication-subset-Semiring R subset-ideal-Semiring
   is-closed-under-right-multiplication-ideal-Semiring =
-    pr2 (pr2 is-ideal-subset-ideal-Semiring)
+    is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+      ( R)
+      ( subset-ideal-Semiring)
+      ( is-closed-under-two-sided-multiplication-ideal-Semiring)
 
-  submonoid-ideal-Semiring : Submonoid l2 (additive-monoid-Semiring R)
-  pr1 submonoid-ideal-Semiring = subset-ideal-Semiring
-  pr1 (pr2 submonoid-ideal-Semiring) = contains-zero-ideal-Semiring
-  pr2 (pr2 submonoid-ideal-Semiring) = is-closed-under-addition-ideal-Semiring
+  is-closed-under-multiplication-ideal-Semiring :
+    is-closed-under-multiplication-subset-Semiring R subset-ideal-Semiring
+  is-closed-under-multiplication-ideal-Semiring =
+    is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring
+      ( R)
+      ( subset-ideal-Semiring)
+      ( is-closed-under-left-multiplication-ideal-Semiring)
+
+  is-nonunital-subsemiring-ideal-Semiring :
+    is-nonunital-subsemiring-subset-Semiring R subset-ideal-Semiring
+  pr1 is-nonunital-subsemiring-ideal-Semiring =
+    is-additive-submonoid-ideal-Semiring
+  pr2 is-nonunital-subsemiring-ideal-Semiring =
+    is-closed-under-multiplication-ideal-Semiring
+
+  nonunital-subsemiring-ideal-Semiring :
+    Nonunital-Subsemiring l2 R
+  pr1 nonunital-subsemiring-ideal-Semiring =
+    subset-ideal-Semiring
+  pr2 nonunital-subsemiring-ideal-Semiring =
+    is-nonunital-subsemiring-ideal-Semiring
 ```
 
 ## Properties

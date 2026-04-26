@@ -21,13 +21,14 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.pronic-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
@@ -199,7 +200,7 @@ reflects-order-square-ℕ m n H =
 reflects-strict-order-square-ℕ :
   (m n : ℕ) → square-ℕ m <-ℕ square-ℕ n → m <-ℕ n
 reflects-strict-order-square-ℕ m n H =
-  le-not-leq-ℕ n m
+  le-not-leq-ℕ m n
     ( λ K →
       contradiction-le-ℕ
         ( square-ℕ m)
@@ -392,23 +393,9 @@ is-even-square-is-even-ℕ :
 is-even-square-is-even-ℕ .(m *ℕ 2) (m , refl) =
   is-even-div-4-ℕ _ (div-four-square-is-even-ℕ (m *ℕ 2) (m , refl))
 
-is-even-is-even-square-ℕ :
-  (n : ℕ) → is-even-ℕ (square-ℕ n) → is-even-ℕ n
-is-even-is-even-square-ℕ zero-ℕ H = is-even-zero-ℕ
-is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (zero-ℕ , ())
-is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (succ-ℕ k , ())
-is-even-is-even-square-ℕ (succ-ℕ (succ-ℕ n)) (m , p) =
-  is-even-succ-succ-is-even-ℕ n
-    ( is-even-is-even-square-ℕ n
-      ( is-even-left-summand-ℕ
-        ( square-ℕ n)
-        ( 4 *ℕ n)
-        ( is-even-div-4-ℕ (4 *ℕ n) (n , commutative-mul-ℕ n 4))
-        ( is-even-left-summand-ℕ
-          ( square-ℕ n +ℕ 4 *ℕ n)
-          ( 4)
-          ( 2 , refl)
-          ( m , p ∙ square-succ-succ-ℕ n))))
+is-even-is-even-square-ℕ : (x : ℕ) → is-even-ℕ (square-ℕ x) → is-even-ℕ x
+is-even-is-even-square-ℕ x is-even-x² =
+  rec-coproduct id id (is-even-either-factor-is-even-mul-ℕ x x is-even-x²)
 
 is-even-div-four-square-ℕ :
   (n : ℕ) → div-ℕ 4 (square-ℕ n) → is-even-ℕ n

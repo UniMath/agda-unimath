@@ -54,7 +54,7 @@ integer fractions.
 ```agda
 is-reduced-fraction-ℤ : fraction-ℤ → UU lzero
 is-reduced-fraction-ℤ x =
-  is-relative-prime-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+  is-relatively-prime-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
 ```
 
 ## Properties and constructions
@@ -62,28 +62,34 @@ is-reduced-fraction-ℤ x =
 ### Being a reduced fraction is a proposition
 
 ```agda
-is-prop-is-reduced-fraction-ℤ :
-  (x : fraction-ℤ) → is-prop (is-reduced-fraction-ℤ x)
-is-prop-is-reduced-fraction-ℤ x =
-  is-prop-is-relative-prime-ℤ
-    ( numerator-fraction-ℤ x)
-    ( denominator-fraction-ℤ x)
+abstract
+  is-prop-is-reduced-fraction-ℤ :
+    (x : fraction-ℤ) → is-prop (is-reduced-fraction-ℤ x)
+  is-prop-is-reduced-fraction-ℤ x =
+    is-prop-is-relatively-prime-ℤ
+      ( numerator-fraction-ℤ x)
+      ( denominator-fraction-ℤ x)
+
+is-reduced-prop-fraction-ℤ : fraction-ℤ → Prop lzero
+is-reduced-prop-fraction-ℤ x =
+  ( is-reduced-fraction-ℤ x , is-prop-is-reduced-fraction-ℤ x)
 ```
 
 ### The negative of a reduced integer fraction is reduced
 
 ```agda
-is-reduced-neg-fraction-ℤ :
-  (x : fraction-ℤ) →
-  is-reduced-fraction-ℤ x →
-  is-reduced-fraction-ℤ (neg-fraction-ℤ x)
-is-reduced-neg-fraction-ℤ x =
-  tr
-    ( is-one-ℤ)
-    ( inv
-      ( preserves-gcd-left-neg-ℤ
-        ( numerator-fraction-ℤ x)
-        ( denominator-fraction-ℤ x)))
+abstract
+  is-reduced-neg-fraction-ℤ :
+    (x : fraction-ℤ) →
+    is-reduced-fraction-ℤ x →
+    is-reduced-fraction-ℤ (neg-fraction-ℤ x)
+  is-reduced-neg-fraction-ℤ x =
+    tr
+      ( is-one-ℤ)
+      ( inv
+        ( preserves-gcd-left-neg-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ x)))
 ```
 
 ### Any fraction can be reduced
@@ -587,6 +593,43 @@ unique-reduce-fraction-ℤ x y H =
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```
 
+### A reduced fraction is its own reduction
+
+```agda
+eq-reduce-is-reduced-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-reduced-fraction-ℤ x →
+  reduce-fraction-ℤ x ＝ x
+eq-reduce-is-reduced-fraction-ℤ x red-x =
+  eq-pair
+    ( eq-quotient-div-is-one-ℤ
+      ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+      ( numerator-fraction-ℤ x)
+      ( red-x)
+      ( div-left-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
+    ( eq-type-subtype
+      ( subtype-positive-ℤ)
+      ( eq-quotient-div-is-one-ℤ
+        ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+        ( denominator-fraction-ℤ x)
+        ( red-x)
+        ( div-right-gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))))
+```
+
+### The reduction operation on integer fractions is idempotent
+
+```agda
+is-idempotent-reduce-fraction-ℤ :
+  (x : fraction-ℤ) →
+  reduce-fraction-ℤ (reduce-fraction-ℤ x) ＝
+  reduce-fraction-ℤ x
+is-idempotent-reduce-fraction-ℤ x =
+  eq-reduce-is-reduced-fraction-ℤ
+    ( reduce-fraction-ℤ x)
+    ( is-reduced-reduce-fraction-ℤ x)
+```
+
 ## See also
 
 - [The type of rational numbers](elementary-number-theory.rational-numbers.md)
+

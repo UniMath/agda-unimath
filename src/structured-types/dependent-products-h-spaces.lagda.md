@@ -24,9 +24,11 @@ open import structured-types.pointed-types
 ## Idea
 
 Given a family of [H-spaces](structured-types.h-spaces.md) `Mᵢ` indexed by
-`i : I`, the dependent product `Π(i : I), Mᵢ` is a H-space consisting of
-dependent functions taking `i : I` to an element of the underlying type of `Mᵢ`.
-The multiplicative operation and the unit are given pointwise.
+`i : I`, the
+{{#concept "dependent product" Disambiguation="H-space" Agda=Π-H-Space}}
+`Π(i : I), Mᵢ` is an H-space consisting of dependent functions taking `i : I` to
+an element of the underlying type of `Mᵢ`. The multiplicative operation and the
+unit are given pointwise.
 
 ## Definition
 

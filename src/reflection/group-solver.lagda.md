@@ -13,16 +13,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.groups
-
-open import linear-algebra.vectors
 
 open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.reversing-lists
+open import lists.tuples
 ```
 
 </details>
@@ -32,14 +32,12 @@ open import lists.reversing-lists
 This module simplifies group expressions, such that all items associate the same
 way and removes units and inverses next to the original.
 
-The main entry-point is `solveExpr` below
-
 ```agda
 data Inductive-Fin : ℕ → UU lzero where
   zero-Inductive-Fin : {n : ℕ} → Inductive-Fin (succ-ℕ n)
   succ-Inductive-Fin : {n : ℕ} → Inductive-Fin n → Inductive-Fin (succ-ℕ n)
 
-finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (Id a b)
+finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (a ＝ b)
 finEq zero-Inductive-Fin zero-Inductive-Fin = inl refl
 finEq zero-Inductive-Fin (succ-Inductive-Fin b) = inr (λ ())
 finEq (succ-Inductive-Fin a) zero-Inductive-Fin = inr (λ ())
@@ -47,7 +45,7 @@ finEq (succ-Inductive-Fin a) (succ-Inductive-Fin b) with finEq a b
 ... | inl eq = inl (ap succ-Inductive-Fin eq)
 ... | inr neq = inr (λ where refl → neq refl)
 
-getVec : {n : ℕ} {l : Level} {A : UU l} → vec A n → Inductive-Fin n → A
+getVec : {n : ℕ} {l : Level} {A : UU l} → tuple A n → Inductive-Fin n → A
 getVec (x ∷ v) zero-Inductive-Fin = x
 getVec (x ∷ v) (succ-Inductive-Fin k) = getVec v k
 
@@ -315,35 +313,46 @@ module _ {n : ℕ} where
     (xs : Simple n) (x : SimpleElem n) →
     GroupEquality
       ( gMul (unquoteSimpleElem x) (unquoteSimple xs))
-      ( unquoteSimple (concat-list xs (cons x nil)))
-  gMul-concat-1 xs a = gMul-concat' xs (cons a nil)
+      ( unquoteSimple (snoc xs x))
+  gMul-concat-1 xs a =
+    tr
+      ( λ l →
+        GroupEquality
+          ( gMul (unquoteSimpleElem a) (unquoteSimple xs))
+          ( unquoteSimple l))
+      ( inv (snoc-concat-unit xs a))
+      ( gMul-concat' xs (cons a nil))
 
-  -- inv-simplify-valid'-nonempty : (x : SimpleElem n) (xs : list (SimpleElem n)) →
-  --                               GroupEquality (gInv (unquoteSimple (cons x xs)))
-  --                               (unquoteSimple (reverse-list (map-list inv-SE' (cons x xs))))
-  -- inv-simplify-valid'-nonempty x nil = inv-single-valid x
-  -- inv-simplify-valid'-nonempty x (cons y xs) =
-  --   distr-inv-mul-GE (unquoteSimple (cons y xs)) (unquoteSimpleElem x) ∙GE
-  --   ap-gMul (inv-single-valid x) (inv-simplify-valid'-nonempty y xs) ∙GE
-  --   gMul-concat-1 (concat-list (reverse-list (map-list inv-SE' xs)) (in-list (inv-SE' y))) (inv-SE' x)
+  inv-simplify-valid'-nonempty :
+    (x : SimpleElem n) (xs : list (SimpleElem n)) →
+    GroupEquality
+      ( gInv (unquoteSimple (cons x xs)))
+      ( unquoteSimple (reverse-list (map-list inv-SE' (cons x xs))))
+  inv-simplify-valid'-nonempty x nil = inv-single-valid x
+  inv-simplify-valid'-nonempty x (cons y xs) =
+    distr-inv-mul-GE (unquoteSimple (cons y xs)) (unquoteSimpleElem x) ∙GE
+    ap-gMul (inv-single-valid x) (inv-simplify-valid'-nonempty y xs) ∙GE
+    gMul-concat-1 (reverse-list (map-list inv-SE' (cons y xs))) (inv-SE' x)
 
-  -- inv-simplify-valid' : (w : list (SimpleElem n)) →
-  --                     GroupEquality (gInv (unquoteSimple w))
-  --                     (unquoteSimple (reverse-list (map-list inv-SE' w)))
-  -- inv-simplify-valid' nil = inv-unit-GE
-  -- inv-simplify-valid' (cons x xs) =
-  --   inv-simplify-valid'-nonempty x xs
+  inv-simplify-valid' : (w : list (SimpleElem n)) →
+                      GroupEquality (gInv (unquoteSimple w))
+                      (unquoteSimple (reverse-list (map-list inv-SE' w)))
+  inv-simplify-valid' nil = inv-unit-GE
+  inv-simplify-valid' (cons x xs) =
+    inv-simplify-valid'-nonempty x xs
 
-  -- simplifyValid : (g : GroupSyntax n) → GroupEquality g (unquoteSimple (simplifyGS g))
-  -- simplifyValid gUnit = refl-GE
-  -- simplifyValid (gMul a b) =
-  --   (ap-gMul (simplifyValid a) (simplifyValid b)) ∙GE
-  --   (concat-simplify-valid (simplifyGS b) (simplifyGS a))
-  -- simplifyValid (gInv g) = ap-gInv (simplifyValid g) ∙GE inv-simplify-valid' (simplifyGS g)
-  -- simplifyValid (inner _) = refl-GE
+  simplifyValid :
+    (g : GroupSyntax n) → GroupEquality g (unquoteSimple (simplifyGS g))
+  simplifyValid gUnit = refl-GE
+  simplifyValid (gMul a b) =
+    (ap-gMul (simplifyValid a) (simplifyValid b)) ∙GE
+    (concat-simplify-valid (simplifyGS b) (simplifyGS a))
+  simplifyValid (gInv g) =
+    ap-gInv (simplifyValid g) ∙GE inv-simplify-valid' (simplifyGS g)
+  simplifyValid (inner _) = refl-GE
 
   Env : {l : Level} → ℕ → UU l → UU l
-  Env n A = vec A n
+  Env n A = tuple A n
 
   module _
     {l : Level} (G : Group l)
@@ -394,10 +403,10 @@ module _ {n : ℕ} where
     useGroupEquality env (x ∷GE xs@(_ ∷GE _)) =
       useGroupEqualityElem env x ∙ useGroupEquality env xs
 
-    -- simplifyExpression :
-    --   (g : GroupSyntax n) (env : Env n (type-Group G)) →
-    --   unQuoteGS g env ＝ unQuoteGS (unquoteSimple (simplifyGS g)) env
-    -- simplifyExpression g env = useGroupEquality env (simplifyValid g)
+    simplifyExpression :
+      (g : GroupSyntax n) (env : Env n (type-Group G)) →
+      unQuoteGS g env ＝ unQuoteGS (unquoteSimple (simplifyGS g)) env
+    simplifyExpression g env = useGroupEquality env (simplifyValid g)
 
     -- Variadic functions
     n-args : (n : ℕ) (A B : UU) → UU
@@ -417,34 +426,48 @@ module _ {n : ℕ} where
     apply-n-args n f = apply-n-args-fin n (map-n-args n inner f)
 
     -- A variation of simplifyExpression which takes a function from the free variables to expr
-    -- simplifyExpr :
-    --   (env : Env n (type-Group G)) (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
-    --   unQuoteGS (apply-n-args n g) env ＝ unQuoteGS (unquoteSimple (simplifyGS (apply-n-args n g))) env
-    -- simplifyExpr env g = simplifyExpression (apply-n-args n g) env
+    simplifyExpr :
+      (env : Env n (type-Group G))
+      (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
+      unQuoteGS (apply-n-args n g) env ＝
+      unQuoteGS (unquoteSimple (simplifyGS (apply-n-args n g))) env
+    simplifyExpr env g = simplifyExpression (apply-n-args n g) env
+```
+
+```agda
+module _
+  {l : Level} {G : Group l}
+  where
+    private
+      _*_ = mul-Group G
+      infixl 40 _*_
+      _⁻¹ = inv-Group G
+      infix 45 _⁻¹
+
+      _*'_ : {n : ℕ} → GroupSyntax n → GroupSyntax n → GroupSyntax n
+      _*'_ = gMul
+      infixl 40 _*'_
+      x : GroupSyntax 2
+      x = inner (zero-Inductive-Fin)
+      y : GroupSyntax 2
+      y = inner (succ-Inductive-Fin zero-Inductive-Fin)
+
+      ex1 :
+        GroupEquality {n = 2}
+          ( gInv (x *' y *' gInv x *' gInv y))
+          ( y *' x *' gInv y *' gInv x)
+      ex1 = simplifyValid _
+
+      ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
+      ex2 x' y' =
+        simplifyExpression G
+          ( gInv (x *' y *' gInv x *' gInv y))
+          ( x' ∷ y' ∷ empty-tuple)
 ```
 
 ```text
-private
-    _*'_ : {n : ℕ} → GroupSyntax n → GroupSyntax n → GroupSyntax n
-    _*'_ = gMul
-    x : GroupSyntax 2
-    x = inner (zero-Inductive-Fin)
-    y : GroupSyntax 2
-    y = inner (succ-Inductive-Fin zero-Inductive-Fin)
-
-    infixl 40 _*'_
-    ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
-    ex1 = simplifyValid _
-
-    ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
-    ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
-
-    _ : UU
-    -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
-    _ = {!ex1!}
-
     ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
-    ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
+    ex3 x' y' = {!simplifyExpression G (gInv (x *' y)) (x' ∷ y' ∷ empty-tuple)!}
 
     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
     _ = {!simplifyValid (gInv x *' x *' y)!}

@@ -31,6 +31,8 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import logic.propositionally-decidable-types
+
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -75,7 +77,7 @@ pr2 (Σ-Finite-Type A B) =
     ( λ a → is-finite-type-Finite-Type (B a))
 ```
 
-### If `A` and `Σ A B` are finite, then eacy `B a` is finite
+### If `A` and `Σ A B` are finite, then each `B a` is finite
 
 ```agda
 abstract
@@ -106,9 +108,7 @@ abstract
                 ( λ t →
                   ( equiv-tot
                     ( λ x → equiv-eq-pair-Σ (map-section-family b x) t)) ∘e
-                  ( ( associative-Σ A
-                      ( λ (x : A) → Id x (pr1 t))
-                      ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
+                  ( ( associative-Σ) ∘e
                     ( inv-left-unit-law-Σ-is-contr
                       ( is-torsorial-Id' (pr1 t))
                       ( pair (pr1 t) refl))))))
@@ -160,10 +160,7 @@ abstract
             is-proof-irrelevant-is-prop
               ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
-        ( inv-equiv
-          ( left-distributive-Σ-coproduct A
-            ( λ x → type-trunc-Prop (B x))
-            ( λ x → is-empty (B x)))))
+        ( inv-left-distributive-Σ-coproduct))
       ( is-finite-coproduct
         ( is-finite-base-is-finite-Σ-merely-inhabited
           ( is-set-type-subtype (λ x → trunc-Prop _) K)

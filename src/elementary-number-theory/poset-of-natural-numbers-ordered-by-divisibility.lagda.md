@@ -31,9 +31,9 @@ open import order-theory.preorders
 
 ## Idea
 
-The **poset of natural numbers ordered by divisibility** consists of the
-[natural numbers](elementary-number-theory.natural-numbers.md) and its ordering
-is defined by
+The {{#concept "poset of natural numbers ordered by divisibility" Agda=ℕ-Div-Poset}}
+consists of the [natural numbers](elementary-number-theory.natural-numbers.md)
+and its ordering is defined by
 [bounded divisibility](elementary-number-theory.bounded-divisibility-natural-numbers.md),
 i.e., the type `m ≤ n` is defined to be the type of natural numbers `q ≤ n` such
 that `q * m ＝ n`.

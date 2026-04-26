@@ -17,6 +17,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -145,7 +146,7 @@ module _
     is-prop-product (is-prop-leq-ℕ (f k) n) (H (f k))
 
   is-decidable-is-structured-value-bound-input-ℕ :
-    is-decidable-fam P → (f : ℕ → ℕ) (n k : ℕ) →
+    is-decidable-family P → (f : ℕ → ℕ) (n k : ℕ) →
     is-decidable (is-structured-value-bound-input-ℕ f n k)
   is-decidable-is-structured-value-bound-input-ℕ d f n k =
     is-decidable-product (is-decidable-leq-ℕ (f k) n) (d (f k))
@@ -240,7 +241,7 @@ module _
       ( H 0)
   is-finite-is-value-bound-input-decidable-subtype-ℕ (succ-ℕ n) =
     is-finite-equiv'
-      ( left-distributive-Σ-coproduct ℕ _ _ ∘e
+      ( left-distributive-Σ-coproduct ∘e
         ( equiv-tot (λ x → compute-leq-succ-ℕ (f x) n)))
       ( is-finite-coproduct
         ( is-finite-is-value-bound-input-decidable-subtype-ℕ n)
@@ -304,7 +305,7 @@ out this example in the module about
 
 ```agda
 module _
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P)
   (f : ℕ → ℕ) (H : is-finite-map-ℕ f)
   where
 

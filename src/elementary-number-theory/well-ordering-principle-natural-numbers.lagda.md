@@ -17,6 +17,7 @@ open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -38,8 +39,8 @@ open import foundation.universe-levels
 The
 {{#concept "well-ordering principle of the natural numbers" WDID=Q2488476 WD="well-ordering principle"}}
 asserts that for every family of
-[decidable types](foundation.decidable-types.md) over ℕ equipped with a natural
-number `n` and an element `p : P n`, we can find a least natural number `n₀`
+[decidable types](foundation.decidable-types.md) over ℕ equipped with a
+[natural number](elementary-number-theory.natural-numbers.md) `n` and an element `p : P n`, we can find a least natural number `n₀`
 with an element `p₀ : P n₀`.
 
 The well-ordering principle has some useful consequences:
@@ -61,7 +62,7 @@ The well-ordering principle has some useful consequences:
 
 ```agda
 well-ordering-principle-ℕ' :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) → is-decidable (P 0) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) → is-decidable (P 0) →
   (n : ℕ) → P n → minimal-element-ℕ P
 well-ordering-principle-ℕ' P d (inl p0) n p =
   ( 0 , p0 , λ m _ → leq-zero-ℕ m)
@@ -73,7 +74,7 @@ well-ordering-principle-ℕ' P d (inr f) (succ-ℕ n) p =
     ( well-ordering-principle-ℕ' (P ∘ succ-ℕ) (d ∘ succ-ℕ) (d 1) n p)
 
 module _
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) {n : ℕ} (p : P n)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) {n : ℕ} (p : P n)
   where
 
   well-ordering-principle-ℕ :
@@ -107,19 +108,20 @@ module _
 ### The well-ordering principle returns `0` if `P 0` holds
 
 ```agda
-is-zero-well-ordering-principle-ℕ' :
-  {l : Level} (P : ℕ → UU l)
-  (d : is-decidable-fam P) (d0 : is-decidable (P 0)) →
-  (n : ℕ) (p : P n) → P 0 →
-  is-zero-ℕ (nat-minimal-element-ℕ P (well-ordering-principle-ℕ' P d d0 n p))
-is-zero-well-ordering-principle-ℕ' P d (inl x) n p p0 = refl
-is-zero-well-ordering-principle-ℕ' P d (inr f) n p p0 = ex-falso (f p0)
+abstract
+  is-zero-well-ordering-principle-ℕ' :
+    {l : Level} (P : ℕ → UU l)
+    (d : is-decidable-family P) (d0 : is-decidable (P 0)) →
+    (n : ℕ) (p : P n) → P 0 →
+    is-zero-ℕ (nat-minimal-element-ℕ P (well-ordering-principle-ℕ' P d d0 n p))
+  is-zero-well-ordering-principle-ℕ' P d (inl x) n p p0 = refl
+  is-zero-well-ordering-principle-ℕ' P d (inr f) n p p0 = ex-falso (f p0)
 
-is-zero-well-ordering-principle-ℕ :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
-  {n : ℕ} (p : P n) → P 0 → is-zero-ℕ (nat-well-ordering-principle-ℕ P d p)
-is-zero-well-ordering-principle-ℕ P d p p0 =
-  is-zero-well-ordering-principle-ℕ' P d (d 0) _ p p0
+  is-zero-well-ordering-principle-ℕ :
+    {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
+    {n : ℕ} (p : P n) → P 0 → is-zero-ℕ (nat-well-ordering-principle-ℕ P d p)
+  is-zero-well-ordering-principle-ℕ P d p p0 =
+    is-zero-well-ordering-principle-ℕ' P d (d 0) _ p p0
 ```
 
 ### Every decidable type family over `ℕ` equipped with an instance of an element with an upper bound has a bounded maximal element

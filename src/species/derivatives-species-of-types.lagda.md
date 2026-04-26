@@ -18,9 +18,11 @@ open import species.species-of-types
 
 ## Idea
 
-When we think of a species of types as the coefficients of a formal power
-series, the derivative of a species of types is the species of types
-representing the derivative of that formal power series.
+When we think of a [species of types](species.species-of-types.md) as the
+coefficients of a formal power series, the
+{{#concept "derivative" Disambiguation="of species of types" Agda=derivative-species-types}}
+of a species of types is the species of types representing the derivative of
+that formal power series.
 
 ## Definition
 

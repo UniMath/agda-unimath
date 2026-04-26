@@ -21,14 +21,24 @@
     "description": "Equational reasoning",
     "prefix": ["equational-reasoning"]
   },
-  "Homotopy-reasoning": {
+  "Homotopy reasoning": {
     "body": ["homotopy-reasoning ? ~ ? by ?"],
-    "description": "Homotopy-reasoning",
+    "description": "Homotopy reasoning",
     "prefix": ["homotopy-reasoning"]
   },
-  "Equivalence-reasoning": {
+  "Equivalence reasoning": {
     "body": ["equivalence-reasoning ? ≃ ? by ?"],
-    "description": "Equivalence-reasoning",
+    "description": "Equivalence reasoning",
     "prefix": ["equivalence-reasoning"]
+  },
+  "Retract reasoning": {
+    "body": ["retract-reasoning ? retract-of ? by ?"],
+    "description": "Retract reasoning",
+    "prefix": ["retract-reasoning"]
+  },
+  "Inequality reasoning": {
+    "body": ["chain-of-inequalities ? ≤ ? by ?"],
+    "description": "Inequality reasoning",
+    "prefix": ["chain-of-inequalities"]
   }
 }

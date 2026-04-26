@@ -2,13 +2,9 @@
   description = "agda-unimath";
 
   inputs = {
-    # Stable 24.11 has Agda 2.7.0.1
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # Unstable has Agda 2.8.0
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    # We aim to support Python 3.8 as long as Ubuntu 20.24 has LTS,
-    # since it ships with that version. Python 3.8 itself is already
-    # EOL, so it was dropped from nixpkgs 24.05
-    nixpkgs-python.url = "github:NixOS/nixpkgs/nixos-23.11";
     # Nixpkgs with tested versions of mdbook crates;
     # may be removed once we backport new mdbook assets to our
     # modified versions
@@ -19,20 +15,25 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-mdbook, nixpkgs-python, flake-utils, mdbook-catppuccin }:
+  outputs = { self, nixpkgs, nixpkgs-mdbook, flake-utils, mdbook-catppuccin }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           pkgs-mdbook = nixpkgs-mdbook.legacyPackages."${system}";
-          pkgs-python = nixpkgs-python.legacyPackages."${system}";
-          python = pkgs-python.python38.withPackages (p: with p; [
+          # We aim to support Python 3.10 as long as Ubuntu 22.24 has LTS,
+          # since it ships with that version
+          python = pkgs.python310.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
             pybtex
-            requests
             tomli
+            graphviz
           ]);
+          # Make sure pre-commit also uses Python 3.10
+          pre-commit = pkgs.pre-commit.override {
+            python3Packages = pkgs.python310Packages;
+          };
 
           agda-unimath-package = { lib, mkDerivation, time }: mkDerivation {
             pname = "agda-unimath";
@@ -43,7 +44,7 @@
 
             # We can reference the directory since we're using flakes,
             # which copies the version-tracked files into the nix store
-            # before evaluation, # so we don't run into the issue with
+            # before evaluation, so we don't run into the issue with
             # nonreproducible source paths as outlined here:
             # https://nix.dev/recipes/best-practices#reproducible-source-paths
             src = ./.;
@@ -76,10 +77,10 @@
 
             # Development tools
             packages = [
-              # maintanance scripts
+              # maintenance scripts
               python
               # pre-commit checks
-              pkgs.pre-commit
+              pre-commit
               pkgs.nodejs
             ] ++ (with pkgs-mdbook; [
               # working on the website

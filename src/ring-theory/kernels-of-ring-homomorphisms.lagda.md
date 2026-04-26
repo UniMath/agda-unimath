@@ -25,9 +25,11 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-The **kernel** of a [ring homomorphism](ring-theory.homomorphisms-rings.md)
-`f : R → S` is the [ideal](ring-theory.ideals-rings.md) of `R` consisting of all
-elements `x : R` equipped with an identification `f x ＝ 0`.
+The
+{{#concept "kernel" Disambiguation="of a ring homomorphism" Agda=kernel-hom-Ring}}
+of a [ring homomorphism](ring-theory.homomorphisms-rings.md) `f : R → S` is the
+[ideal](ring-theory.ideals-rings.md) of `R` consisting of all elements `x : R`
+equipped with an [identification](foundation-core.identity-types.md) `f x ＝ 0`.
 
 ## Definitions
 
@@ -75,14 +77,14 @@ module _
 
   is-closed-under-left-multiplication-kernel-hom-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-kernel-hom-Ring
-  is-closed-under-left-multiplication-kernel-hom-Ring x y H =
+  is-closed-under-left-multiplication-kernel-hom-Ring H =
     ( inv (right-zero-law-mul-Ring S _)) ∙
     ( ap (mul-Ring S _) H) ∙
     ( inv (preserves-mul-hom-Ring R S f))
 
   is-closed-under-right-multiplication-kernel-hom-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-kernel-hom-Ring
-  is-closed-under-right-multiplication-kernel-hom-Ring x y H =
+  is-closed-under-right-multiplication-kernel-hom-Ring H =
     ( inv (left-zero-law-mul-Ring S _)) ∙
     ( ap (mul-Ring' S _) H) ∙
     ( inv (preserves-mul-hom-Ring R S f))

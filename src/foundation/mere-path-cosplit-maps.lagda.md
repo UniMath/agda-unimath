@@ -9,7 +9,7 @@ module foundation.mere-path-cosplit-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences-arrows
+open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.equivalences-arrows
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
@@ -105,7 +106,7 @@ is-mere-path-cosplit-is-trunc neg-two-𝕋 is-trunc-f =
   unit-trunc-Prop (retraction-is-contr-map is-trunc-f)
 is-mere-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
   is-mere-path-cosplit-is-trunc k
-    ( is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
+    ( is-trunc-map-ap-is-trunc-map-succ k f is-trunc-f x y)
 ```
 
 ### If a map is `k`-path-cosplit then it is merely `k+1`-path-cosplit
@@ -116,15 +117,12 @@ is-mere-path-cosplit-succ-is-mere-path-cosplit :
   is-mere-path-cosplit k f → is-mere-path-cosplit (succ-𝕋 k) f
 is-mere-path-cosplit-succ-is-mere-path-cosplit
   neg-two-𝕋 {f = f} is-cosplit-f x y =
-  rec-trunc-Prop
-    ( is-mere-path-cosplit-Prop neg-two-𝕋 (ap f))
-    ( λ r → unit-trunc-Prop (retraction-ap f r))
-    ( is-cosplit-f)
+  map-trunc-Prop (λ r → retraction-ap f r) is-cosplit-f
 is-mere-path-cosplit-succ-is-mere-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
   is-mere-path-cosplit-succ-is-mere-path-cosplit k (is-cosplit-f x y)
 ```
 
-### If a type maps into a `k`-truncted type via a merely `k`-path-cosplit map then it is `k`-truncated
+### If a type maps into a `k`-truncated type via a merely `k`-path-cosplit map then it is `k`-truncated
 
 ```agda
 is-trunc-domain-is-mere-path-cosplit-is-trunc-codomain :

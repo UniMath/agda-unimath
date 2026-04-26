@@ -81,13 +81,13 @@ module _
 
   Eq-free-loop : (α α' : free-loop X) → UU l1
   Eq-free-loop (pair x α) α' =
-    Σ (Id x (base-free-loop α')) (λ p → Id (α ∙ p) (p ∙ (loop-free-loop α')))
+    Σ (x ＝ base-free-loop α') (λ p → α ∙ p ＝ p ∙ (loop-free-loop α'))
 
   refl-Eq-free-loop : (α : free-loop X) → Eq-free-loop α α
   pr1 (refl-Eq-free-loop (pair x α)) = refl
   pr2 (refl-Eq-free-loop (pair x α)) = right-unit
 
-  Eq-eq-free-loop : (α α' : free-loop X) → Id α α' → Eq-free-loop α α'
+  Eq-eq-free-loop : (α α' : free-loop X) → α ＝ α' → Eq-free-loop α α'
   Eq-eq-free-loop α .α refl = refl-Eq-free-loop α
 
   abstract
@@ -98,7 +98,7 @@ module _
         ( is-torsorial-Id x)
         ( pair x refl)
         ( is-contr-is-equiv'
-          ( Σ (Id x x) (λ α' → Id α α'))
+          ( Σ (x ＝ x) (λ α' → α ＝ α'))
           ( tot (λ α' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α' → is-equiv-concat right-unit α'))
@@ -122,7 +122,7 @@ module _
 
   Eq-free-dependent-loop : (p p' : free-dependent-loop α P) → UU l2
   Eq-free-dependent-loop (pair y p) p' =
-    Σ ( Id y (base-free-dependent-loop α P p'))
+    Σ ( y ＝ base-free-dependent-loop α P p')
       ( λ q →
         ( p ∙ q) ＝
         ( ( ap (tr P (loop-free-loop α)) q) ∙
@@ -134,7 +134,7 @@ module _
   pr2 (refl-Eq-free-dependent-loop (pair y p)) = right-unit
 
   Eq-free-dependent-loop-eq :
-    ( p p' : free-dependent-loop α P) → Id p p' → Eq-free-dependent-loop p p'
+    ( p p' : free-dependent-loop α P) → p ＝ p' → Eq-free-dependent-loop p p'
   Eq-free-dependent-loop-eq p .p refl = refl-Eq-free-dependent-loop p
 
   abstract
@@ -145,7 +145,7 @@ module _
         ( is-torsorial-Id y)
         ( pair y refl)
         ( is-contr-is-equiv'
-          ( Σ (Id (tr P (loop-free-loop α) y) y) (λ p' → Id p p'))
+          ( Σ (tr P (loop-free-loop α) y ＝ y) (λ p' → p ＝ p'))
           ( tot (λ p' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ p' → is-equiv-concat right-unit p'))
@@ -162,7 +162,7 @@ module _
 
   eq-Eq-free-dependent-loop :
     (p p' : free-dependent-loop α P) →
-    Eq-free-dependent-loop p p' → Id p p'
+    Eq-free-dependent-loop p p' → p ＝ p'
   eq-Eq-free-dependent-loop p p' =
     map-inv-is-equiv (is-equiv-Eq-free-dependent-loop-eq p p')
 ```

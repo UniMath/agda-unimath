@@ -302,16 +302,16 @@ open import foundation.booleans using
   ; ind-bool)
 
 -- (a)
-open import foundation.booleans using
+open import foundation.logical-operations-booleans using
   ( neg-bool)
 
 -- (b)
-open import foundation.booleans using
-  ( conjunction-bool)
+open import foundation.logical-operations-booleans using
+  ( and-bool)
 
 -- (c)
-open import foundation.booleans using
-  ( disjunction-bool)
+open import foundation.logical-operations-booleans using
+  ( or-bool)
 ```
 
 **Exercise 4.3.** Double negation.
@@ -336,7 +336,7 @@ open import foundation.double-negation using
   ( ¬¬_
   ; intro-double-negation -- P → ¬¬P
   ; map-double-negation -- (P → Q) → (¬¬P → ¬¬Q)
-  ; double-negation-extend -- (P → ¬¬Q) → (¬¬P → ¬¬Q)
+  ; extend-double-negation -- (P → ¬¬Q) → (¬¬P → ¬¬Q)
   )
 
 -- (c)
@@ -345,7 +345,7 @@ open import foundation.double-negation using
   ; double-negation-Peirces-law -- ¬¬(((P → Q) → P) → P)
   ; double-negation-linearity-implication -- ¬¬((P → Q) + (Q → P))
   )
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-is-decidable -- ¬¬(P + ¬P)
   )
 
@@ -382,7 +382,7 @@ _ =
       ( double-negation-elim-neg (¬ Q))
 
 -- (f)
-open import foundation.irrefutable-propositions using
+open import logic.irrefutable-types using
   ( is-irrefutable-product -- ¬¬A → ¬¬B → ¬¬(A × B)
   )
 
@@ -435,7 +435,7 @@ open import lists.lists using
   ( length-list)
 
 -- (e)
-open import elementary-number-theory.sums-of-natural-numbers using
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers using
   ( sum-list-ℕ)
 open import elementary-number-theory.products-of-natural-numbers using
   ( product-list-ℕ)
@@ -854,7 +854,7 @@ open import elementary-number-theory.natural-numbers using
   )
 ```
 
-The above proof uses Agda's built-in mechanism for recognizing that two elemens
+The above proof uses Agda's built-in mechanism for recognizing that two elements
 of an inductive type built out of different constructors cannot be equal (the
 "no confusion" principle). The proof from the book follows:
 
@@ -935,7 +935,7 @@ _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 
 -- (c)
-open import foundation.booleans using
+open import foundation.logical-operations-booleans using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
 _ : ¬ (false ＝ true)
@@ -961,22 +961,22 @@ open import elementary-number-theory.inequality-natural-numbers using
 
 -- (c)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( preserves-leq-left-add-ℕ
-  ; reflects-leq-left-add-ℕ)
+  ( preserves-order-left-add-ℕ
+  ; reflects-order-left-add-ℕ)
 
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m +ℕ k ≤-ℕ n +ℕ k)
 _ =
-  λ m n k → (preserves-leq-left-add-ℕ k m n , reflects-leq-left-add-ℕ k m n)
+  λ m n k → (preserves-order-left-add-ℕ k m n , reflects-order-left-add-ℕ k m n)
 
 -- (d)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( preserves-leq-left-mul-ℕ
+  ( preserves-order-left-mul-ℕ
   ; reflects-order-mul-ℕ)
 
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m *ℕ (succ-ℕ k) ≤-ℕ n *ℕ (succ-ℕ k))
 _ =
   λ m n k →
-    (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
+    (preserves-order-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
 
 -- (e)
 open import elementary-number-theory.minimum-natural-numbers using
@@ -995,14 +995,14 @@ open import elementary-number-theory.strict-inequality-natural-numbers using
 
 -- (a)
 open import elementary-number-theory.strict-inequality-natural-numbers using
-  ( anti-reflexive-le-ℕ
+  ( irreflexive-le-ℕ
   ; antisymmetric-le-ℕ
   ; transitive-le-ℕ)
 
 -- (b)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( succ-le-ℕ -- n < n + 1
-  ; preserves-le-succ-ℕ -- m < n → m < n + 1
+  ; preserves-strict-order-succ-ℕ -- m < n → m < n + 1
   )
 
 -- (c)
@@ -1029,7 +1029,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-eq-ℕ
   ; eq-dist-ℕ
-  ; symmetric-dist-ℕ -- dist m n = dist n m
+  ; commutative-dist-ℕ -- dist m n = dist n m
   ; triangle-inequality-dist-ℕ -- dist m n ≤ dist m k + dist k n
   )
 
@@ -1058,7 +1058,7 @@ open import elementary-number-theory.absolute-value-integers using
   ; eq-abs-ℤ
   ; abs-eq-ℤ
   ; subadditive-abs-ℤ -- |x + y| ≤ |x| + |y|
-  ; multiplicative-abs-ℤ -- |x * y| = |x| * |y|
+  ; distributive-mul-abs-ℤ -- |x * y| = |x| * |y|
   )
 
 _ : (x : ℤ) → (x ＝ zero-ℤ) ↔ (abs-ℤ x ＝ 0)
@@ -1753,7 +1753,7 @@ open import elementary-number-theory.collatz-conjecture using
 
 ```agda
 open import foundation.decidable-types using
-  ( idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
+  ( map-idempotent-is-decidable -- is-decidable (is-decidable P) → is-decidable P
   )
 ```
 

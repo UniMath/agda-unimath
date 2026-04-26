@@ -17,7 +17,8 @@ open import structured-types.magmas
 
 ## Idea
 
-Given a magma `M` and a type `X`, the function magma `M^X` consists of functions
+Given a [magma](structured-types.magmas.md) `M` and a type `X`, the
+{{#concept "function magma" Agda=function-Magma}} `M^X` consists of functions
 from `X` into the underlying type of `M`. The operation on `M^X` is defined
 pointwise.
 

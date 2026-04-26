@@ -27,8 +27,7 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A {{#concept "left ideal" Disambiguation="rings" Agda=left-ideal-Ring}} in a [ring](ring-theory.rings.md) `R` is a left submodule of
-`R`.
+A {{#concept "left ideal" Disambiguation="rings" Agda=left-ideal-Ring}} in a [ring](ring-theory.rings.md) `R` is an additive [submonoid](group-theory.submonoids-commutative-monoids.md) of `R` which is closed under multiplication by any element of `R` from the left.
 
 ## Definitions
 
@@ -97,15 +96,15 @@ module _
   is-closed-under-eq-left-ideal-Ring' =
     is-closed-under-eq-left-ideal-Semiring' (semiring-Ring R) I
 
-  is-left-ideal-subset-left-ideal-Ring :
+  is-left-ideal-left-ideal-Ring :
     is-left-ideal-subset-Ring R subset-left-ideal-Ring
-  is-left-ideal-subset-left-ideal-Ring =
-    is-left-ideal-subset-left-ideal-Semiring (semiring-Ring R) I
+  is-left-ideal-left-ideal-Ring =
+    is-left-ideal-left-ideal-Semiring (semiring-Ring R) I
 
-  is-additive-submonoid-subset-left-ideal-Ring :
+  is-additive-submonoid-left-ideal-Ring :
     is-additive-submonoid-subset-Ring R subset-left-ideal-Ring
-  is-additive-submonoid-subset-left-ideal-Ring =
-    is-additive-submonoid-subset-left-ideal-Semiring (semiring-Ring R) I
+  is-additive-submonoid-left-ideal-Ring =
+    is-additive-submonoid-left-ideal-Semiring (semiring-Ring R) I
 
   contains-zero-left-ideal-Ring : is-in-left-ideal-Ring (zero-Ring R)
   contains-zero-left-ideal-Ring =
@@ -121,19 +120,21 @@ module _
   is-closed-under-left-multiplication-left-ideal-Ring =
     is-closed-under-left-multiplication-left-ideal-Semiring (semiring-Ring R) I
 
+  is-closed-under-negatives-left-ideal-Ring :
+    is-closed-under-negatives-subset-Ring R subset-left-ideal-Ring
+  is-closed-under-negatives-left-ideal-Ring =
+    is-closed-under-negatives-is-closed-under-left-multiplication-subset-Ring R
+      ( subset-left-ideal-Ring)
+      ( is-closed-under-left-multiplication-left-ideal-Ring)
+
   is-additive-subgroup-left-ideal-Ring :
     is-additive-subgroup-subset-Ring R subset-left-ideal-Ring
   is-additive-subgroup-left-ideal-Ring =
     is-additive-subgroup-is-closed-under-left-multiplication-subset-Ring
       ( R)
       ( subset-left-ideal-Ring)
-      ( is-additive-submonoid-subset-left-ideal-Ring)
+      ( is-additive-submonoid-left-ideal-Ring)
       ( is-closed-under-left-multiplication-left-ideal-Ring)
-
-  is-left-ideal-left-ideal-Ring :
-    is-left-ideal-subset-Ring R subset-left-ideal-Ring
-  is-left-ideal-left-ideal-Ring =
-    is-left-ideal-left-ideal-Semiring (semiring-Ring R) I
 ```
 
 ## Properties

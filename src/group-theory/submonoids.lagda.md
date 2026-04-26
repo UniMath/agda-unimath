@@ -27,8 +27,10 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-A submonoid of a monoid `M` is a subset of `M` that contains the unit of `M` and
-is closed under multiplication.
+A {{#concept "submonoid" WDID=Q121499459 WD="submonoid" Agda=Submonoid}} of a
+[monoid](group-theory.monoids.md) `M` is a
+[subset](group-theory.subsets-monoids.md) of `M` that contains the unit of `M`
+and is closed under multiplication.
 
 ## Definitions
 
@@ -119,7 +121,7 @@ module _
     {x y : type-Monoid M} →
     is-in-Submonoid x → is-in-Submonoid y →
     is-in-Submonoid (mul-Monoid M x y)
-  is-closed-under-multiplication-Submonoid {x} {y} = pr2 (pr2 P) x y
+  is-closed-under-multiplication-Submonoid = pr2 (pr2 P)
 
   mul-Submonoid : (x y : type-Submonoid) → type-Submonoid
   pr1 (mul-Submonoid x y) =

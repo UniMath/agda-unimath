@@ -239,7 +239,7 @@ Consider a map `f : A → B` and consider two elements
   H K : is-∞-equiv f.
 ```
 
-A {{#concept "homotopy of elments of type `is-∞-equiv`" Agda=htpy-is-∞-equiv}}
+A {{#concept "homotopy of elements of type `is-∞-equiv`" Agda=htpy-is-∞-equiv}}
 from `H := (h , s , H')` to `K := (k , t , K')` consists of a homotopy
 
 ```text

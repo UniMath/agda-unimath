@@ -10,6 +10,7 @@ module elementary-number-theory.squares-integers where
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -128,6 +129,27 @@ compute-square-neg-ℤ :
 compute-square-neg-ℤ a = inv (double-negative-law-mul-ℤ a a)
 ```
 
+### The square of an embedding of a natural number is the embedding of the square of the natural number
+
+```agda
+abstract
+  square-int-ℕ : (n : ℕ) → square-ℤ (int-ℕ n) ＝ int-ℕ (square-ℕ n)
+  square-int-ℕ n = mul-int-ℕ n n
+```
+
+### The square of the negation of `x` is the square of `x`
+
+```agda
+abstract
+  square-neg-ℤ : (x : ℤ) → square-ℤ (neg-ℤ x) ＝ square-ℤ x
+  square-neg-ℤ x =
+    equational-reasoning
+      neg-ℤ x *ℤ neg-ℤ x
+      ＝ neg-ℤ (x *ℤ neg-ℤ x) by left-negative-law-mul-ℤ x (neg-ℤ x)
+      ＝ neg-ℤ (neg-ℤ (x *ℤ x)) by ap neg-ℤ (right-negative-law-mul-ℤ x x)
+      ＝ x *ℤ x by neg-neg-ℤ (x *ℤ x)
+```
+
 ### The squares in ℤ are exactly the squares in ℕ
 
 ```agda
@@ -154,6 +176,32 @@ pr2 (iff-is-nonneg-square-nat-is-square-int a) (H , r , p) =
     inv (int-abs-is-nonnegative-ℤ a H) ∙
     ap int-ℕ p ∙
     inv (compute-square-int-ℕ r))
+```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℤ : (x : ℤ) → int-ℕ (square-ℕ (abs-ℤ x)) ＝ square-ℤ x
+  square-abs-ℤ x =
+    rec-coproduct
+      ( λ x=|x| →
+        equational-reasoning
+          int-ℕ (square-ℕ (abs-ℤ x))
+          ＝ square-ℤ (int-ℕ (abs-ℤ x))
+            by inv (mul-int-ℕ (abs-ℤ x) (abs-ℤ x))
+          ＝ square-ℤ x
+            by inv (ap square-ℤ x=|x|))
+      ( λ x=-|x| →
+        equational-reasoning
+          int-ℕ (square-ℕ (abs-ℤ x))
+          ＝ square-ℤ (int-abs-ℤ x)
+            by inv (mul-int-ℕ (abs-ℤ x) (abs-ℤ x))
+          ＝ square-ℤ (neg-ℤ (int-abs-ℤ x))
+            by inv (square-neg-ℤ (int-abs-ℤ x))
+          ＝ square-ℤ x
+            by inv (ap square-ℤ x=-|x|))
+      ( is-pos-or-neg-abs-ℤ x)
 ```
 
 ### Being a square integer is decidable
@@ -267,4 +315,63 @@ is-even-div-four-square-ℤ :
   (n : ℤ) → div-ℤ 4 (square-ℤ n) → is-even-ℤ n
 is-even-div-four-square-ℤ n H =
   is-even-is-even-square-ℤ n (is-even-div-4-ℤ (square-ℤ n) H)
+```
+
+### The square of a sum
+
+We have the identity `(x + y)² = x² + 2xy + y²` for the square of a sum.
+
+```agda
+abstract
+  square-add-ℤ :
+    (x y : ℤ) →
+    square-ℤ (x +ℤ y) ＝
+    square-ℤ x +ℤ (int-ℕ 2 *ℤ (x *ℤ y)) +ℤ square-ℤ y
+  square-add-ℤ x y =
+    equational-reasoning
+      square-ℤ (x +ℤ y)
+      ＝ x *ℤ (x +ℤ y) +ℤ y *ℤ (x +ℤ y)
+        by right-distributive-mul-add-ℤ x y (x +ℤ y)
+      ＝ (x *ℤ x +ℤ x *ℤ y) +ℤ (y *ℤ x +ℤ y *ℤ y)
+        by
+          ap-add-ℤ
+            ( left-distributive-mul-add-ℤ x x y)
+            ( left-distributive-mul-add-ℤ y x y)
+      ＝ x *ℤ x +ℤ (x *ℤ y +ℤ (y *ℤ x +ℤ y *ℤ y))
+        by associative-add-ℤ (x *ℤ x) (x *ℤ y) _
+      ＝ x *ℤ x +ℤ (x *ℤ y +ℤ (x *ℤ y +ℤ y *ℤ y))
+        by
+          ap
+            ( x *ℤ x +ℤ_)
+            ( ap (x *ℤ y +ℤ_) (ap (_+ℤ y *ℤ y) (commutative-mul-ℤ y x)))
+      ＝ x *ℤ x +ℤ (int-ℕ 2 *ℤ (x *ℤ y) +ℤ y *ℤ y)
+        by ap (x *ℤ x +ℤ_) (inv (associative-add-ℤ (x *ℤ y) (x *ℤ y) (y *ℤ y)))
+      ＝ x *ℤ x +ℤ int-ℕ 2 *ℤ (x *ℤ y) +ℤ y *ℤ y
+        by inv (associative-add-ℤ (x *ℤ x) (int-ℕ 2 *ℤ (x *ℤ y)) _)
+```
+
+### The square of a difference
+
+We have the identity `(x - y)² = x² - 2xy + y²` for the square of a difference.
+
+```agda
+  square-diff-ℤ :
+    (x y : ℤ) →
+    square-ℤ (x -ℤ y) ＝
+    square-ℤ x -ℤ (int-ℕ 2 *ℤ (x *ℤ y)) +ℤ square-ℤ y
+  square-diff-ℤ x y =
+    equational-reasoning
+      square-ℤ (x -ℤ y)
+      ＝ square-ℤ x +ℤ int-ℕ 2 *ℤ (x *ℤ neg-ℤ y) +ℤ square-ℤ (neg-ℤ y)
+        by square-add-ℤ x (neg-ℤ y)
+      ＝ square-ℤ x +ℤ (int-ℕ 2 *ℤ neg-ℤ (x *ℤ y)) +ℤ square-ℤ y
+        by
+          ap-add-ℤ
+            ( ap (x *ℤ x +ℤ_) (ap (int-ℕ 2 *ℤ_) (right-negative-law-mul-ℤ x y)))
+            ( square-neg-ℤ y)
+      ＝ square-ℤ x -ℤ (int-ℕ 2 *ℤ (x *ℤ y)) +ℤ square-ℤ y
+        by
+          ap
+            ( λ z → square-ℤ x +ℤ z +ℤ square-ℤ y)
+            ( right-negative-law-mul-ℤ (int-ℕ 2) (x *ℤ y))
 ```

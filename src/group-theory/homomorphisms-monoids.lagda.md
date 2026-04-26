@@ -23,6 +23,8 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
+
+open import structured-types.morphisms-unital-magmas
 ```
 
 </details>
@@ -111,6 +113,12 @@ module _
   preserves-unit-hom-Monoid :
     preserves-unit-hom-Semigroup M N hom-semigroup-hom-Monoid
   preserves-unit-hom-Monoid = pr2 f
+
+  hom-unital-magma-hom-Monoid :
+    hom-Unital-Magma (unital-magma-Monoid M) (unital-magma-Monoid N)
+  pr1 hom-unital-magma-hom-Monoid = map-hom-Monoid
+  pr1 (pr2 hom-unital-magma-hom-Monoid) = preserves-mul-hom-Monoid
+  pr2 (pr2 hom-unital-magma-hom-Monoid) = preserves-unit-hom-Monoid
 ```
 
 ### The identity homomorphism of monoids

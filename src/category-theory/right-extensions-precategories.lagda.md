@@ -52,16 +52,17 @@ of a [functor](category-theory.functors-precategories.md) `F : C → D` between
 `φ : G ∘ p → F`.
 
 ```text
-  C
-  |  \
-  p    F
-  |      \
-  ∨        ∨
-  C' - G -> D
+    C
+    |  \
+  p |    \ F
+    |      \
+    ∨        ∨
+    C' -----> D
+         G
 ```
 
-We note that this is not a standard definition, but it inspired by the notion of
-a [right kan extension](category-theory.right-kan-extensions-precategories.md).
+We note that this is not a standard definition, but is inspired by the notion of
+a [right Kan extension](category-theory.right-kan-extensions-precategories.md).
 
 ## Definition
 
@@ -153,7 +154,7 @@ module _
 
 ## Properties
 
-### Characterization of equality right extensions of functors between precategories
+### Characterization of equality between right extensions of functors between precategories
 
 ```agda
   coherence-htpy-right-extension-Precategory :
@@ -248,3 +249,70 @@ module _
   eq-htpy-right-extension-Precategory R S =
     map-inv-equiv (equiv-htpy-eq-right-extension-Precategory R S)
 ```
+
+### Self-extensions
+
+In the case of extending a functor along itself, we have distinguished right
+extensions: the identity map gives a right extension (with the identity natural
+transformation) and we can iterate any right extension `R` to get a right
+extension `R²`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  where
+
+  id-right-extension-Precategory : right-extension-Precategory C D D F F
+  pr1 id-right-extension-Precategory = id-functor-Precategory D
+  pr2 id-right-extension-Precategory =
+    id-natural-transformation-Precategory C D F
+
+  extension-square-right-extension-Precategory :
+    (R : right-extension-Precategory C D D F F) →
+    functor-Precategory D D
+  extension-square-right-extension-Precategory R =
+    comp-functor-Precategory D D D
+      ( extension-right-extension-Precategory C D D F F R)
+      ( extension-right-extension-Precategory C D D F F R)
+
+  natural-transformation-square-right-extension-Precategory :
+    (R : right-extension-Precategory C D D F F) →
+    natural-transformation-Precategory C D
+      ( comp-functor-Precategory C D D
+        ( extension-square-right-extension-Precategory R)
+        ( F))
+      ( F)
+  natural-transformation-square-right-extension-Precategory R =
+    comp-natural-transformation-Precategory C D
+      ( comp-functor-Precategory C D D
+        ( comp-functor-Precategory D D D
+          ( extension-right-extension-Precategory C D D F F R)
+          ( extension-right-extension-Precategory C D D F F R))
+        ( F))
+      ( comp-functor-Precategory C D D
+        ( extension-right-extension-Precategory C D D F F R)
+        ( F))
+      ( F)
+      ( natural-transformation-right-extension-Precategory C D D F F R)
+      ( left-whisker-natural-transformation-Precategory C D D
+        ( comp-functor-Precategory C D D
+          ( extension-right-extension-Precategory C D D F F R)
+          ( F))
+        ( F)
+        ( extension-right-extension-Precategory C D D F F R)
+        ( natural-transformation-right-extension-Precategory C D D F F R))
+
+  square-right-extension-Precategory :
+    (R : right-extension-Precategory C D D F F) →
+    right-extension-Precategory C D D F F
+  square-right-extension-Precategory R =
+    ( extension-square-right-extension-Precategory R ,
+      natural-transformation-square-right-extension-Precategory R)
+```
+
+## See also
+
+- [Left extensions](category-theory.left-extensions-precategories.md) for the
+  dual concept.

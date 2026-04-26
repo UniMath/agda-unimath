@@ -13,6 +13,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -155,7 +156,7 @@ module _
     minkowski-mul-Commutative-Monoid M A B ＝
     minkowski-mul-Commutative-Monoid M B A
   commutative-minkowski-mul-Commutative-Monoid =
-    antisymmetric-sim-subtype
+    eq-sim-subtype
       ( minkowski-mul-Commutative-Monoid M A B)
       ( minkowski-mul-Commutative-Monoid M B A)
       ( commutative-minkowski-mul-leq-Commutative-Monoid M A B ,
@@ -208,19 +209,19 @@ module _
   (A' : subset-Commutative-Monoid l4 M)
   where
 
-  preserves-leq-left-minkowski-mul-Commutative-Monoid :
+  preserves-order-left-minkowski-mul-Commutative-Monoid :
     A ⊆ A' →
     minkowski-mul-Commutative-Monoid M A B ⊆
     minkowski-mul-Commutative-Monoid M A' B
-  preserves-leq-left-minkowski-mul-Commutative-Monoid =
-    preserves-leq-left-minkowski-mul-Monoid (monoid-Commutative-Monoid M) B A A'
+  preserves-order-left-minkowski-mul-Commutative-Monoid =
+    preserves-order-left-minkowski-mul-Monoid (monoid-Commutative-Monoid M) B A A'
 
-  preserves-leq-right-minkowski-mul-Commutative-Monoid :
+  preserves-order-right-minkowski-mul-Commutative-Monoid :
     A ⊆ A' →
     minkowski-mul-Commutative-Monoid M B A ⊆
     minkowski-mul-Commutative-Monoid M B A'
-  preserves-leq-right-minkowski-mul-Commutative-Monoid =
-    preserves-leq-right-minkowski-mul-Monoid
+  preserves-order-right-minkowski-mul-Commutative-Monoid =
+    preserves-order-right-minkowski-mul-Monoid
       ( monoid-Commutative-Monoid M)
       ( B)
       ( A)

@@ -125,11 +125,11 @@ module _
   compute-nullifying-hom-Group =
     ( equiv-type-subtype
       ( λ f →
-        is-prop-reflects-equivalence-relation
+        reflects-prop-equivalence-relation
           ( equivalence-relation-congruence-Normal-Subgroup G H)
           ( set-Group K)
           ( pr1 f))
-      ( λ f → is-prop-leq-Normal-Subgroup G H (kernel-hom-Group G K f))
+      ( λ f → leq-prop-Normal-Subgroup G H (kernel-hom-Group G K f))
       ( nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group)
       ( reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group)) ∘e
     ( equiv-right-swap-Σ)

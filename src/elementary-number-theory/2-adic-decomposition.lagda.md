@@ -396,7 +396,7 @@ is-prop-map-2-adic-composition-ℕ :
   is-prop-map (λ x → 2-adic-composition-ℕ (pr1 x) (pr2 x))
 is-prop-map-2-adic-composition-ℕ n =
   is-prop-equiv
-    ( associative-Σ ℕ _ _)
+    ( associative-Σ)
     ( is-prop-2-adic-decomposition-ℕ n)
 ```
 

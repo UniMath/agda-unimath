@@ -49,7 +49,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define the delooping of the sign homomorphism by using a method of Cartier.
+We define the
+{{#concept "delooping" Disambiguation="of the sign homomorphism, Cartier" Agda=cartier-delooping-sign}}
+of the [sign homomorphism](finite-group-theory.sign-homomorphism.md) by using a
+method of Cartier.
 
 ## Definitions
 

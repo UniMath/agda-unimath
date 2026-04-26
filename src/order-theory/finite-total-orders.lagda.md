@@ -59,7 +59,7 @@ is-finite-total-order-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-finite-total-order-Poset-Prop P =
   product-Prop
-    ( is-total-Poset-Prop P)
+    ( is-total-prop-Poset P)
     ( is-finite-Poset-Prop P)
 
 Finite-Total-Order : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

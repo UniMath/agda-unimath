@@ -46,10 +46,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The sign of a permutation is defined as the parity of the length of the
-decomposition of the permutation into transpositions. We show that each such
-decomposition as the same parity, so the sign map is well defined. We then show
-that the sign map is a group homomorphism.
+The
+{{#concept "sign" Disambiguation="of a permutation" WD="parity of a permutation" WDID=Q1064405 Agda=map-sign-homomorphism}}
+of a [permutation](finite-group-theory.permutations.md) is defined as the parity
+of the length of the decomposition of the permutation into
+[transpositions](finite-group-theory.transpositions.md). We show that each such
+decomposition has the same parity, so the sign map is well-defined. We then show
+that the sign map is a
+[group homomorphism](group-theory.homomorphisms-groups.md).
 
 ## Definitions
 
@@ -67,9 +71,8 @@ module _
   preserves-add-sign-homomorphism-Fin-2 :
     (f g :
       type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X) →
-    Id
-      ( sign-homomorphism-Fin-2 (f ∘e g))
-      ( add-Fin 2 (sign-homomorphism-Fin-2 f) (sign-homomorphism-Fin-2 g))
+    sign-homomorphism-Fin-2 (f ∘e g) ＝
+    add-Fin 2 (sign-homomorphism-Fin-2 f) (sign-homomorphism-Fin-2 g)
   preserves-add-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
@@ -166,10 +169,7 @@ module _
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-Type-With-Cardinality-ℕ n X) →
-      Id
-        ( f ∘e g)
-        ( permutation-list-transpositions
-          ( list-comp-f-g h))
+      f ∘e g ＝ permutation-list-transpositions (list-comp-f-g h)
     eq-list-comp-f-g h =
       eq-htpy-equiv
         ( λ x →
@@ -194,11 +194,8 @@ module _
                 ( list-trans g h))
 
   eq-sign-homomorphism-Fin-2-transposition :
-    ( Y :
-      2-Element-Decidable-Subtype l (type-Type-With-Cardinality-ℕ n X)) →
-    Id
-      ( sign-homomorphism-Fin-2 (transposition Y))
-      ( inr star)
+    ( Y : 2-Element-Decidable-Subtype l (type-Type-With-Cardinality-ℕ n X)) →
+    sign-homomorphism-Fin-2 (transposition Y) ＝ inr star
   eq-sign-homomorphism-Fin-2-transposition Y =
     ap pr1
       { x =
@@ -222,9 +219,8 @@ module _
   preserves-conjugation-sign-homomorphism-Fin-2 :
     ( f : type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n X) →
     ( g : type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n Y) →
-    Id
-      ( sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)))
-      ( sign-homomorphism-Fin-2 n X f)
+    sign-homomorphism-Fin-2 n Y (g ∘e (f ∘e inv-equiv g)) ＝
+    sign-homomorphism-Fin-2 n X f
   preserves-conjugation-sign-homomorphism-Fin-2 f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-Type-With-Cardinality-ℕ n X)

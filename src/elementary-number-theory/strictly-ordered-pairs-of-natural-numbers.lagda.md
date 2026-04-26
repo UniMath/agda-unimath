@@ -58,7 +58,7 @@ module _
 pair-of-distinct-elements-strictly-ordered-pair-ℕ :
   strictly-ordered-pair-ℕ → pair-of-distinct-elements ℕ
 pair-of-distinct-elements-strictly-ordered-pair-ℕ (a , b , H) =
-  (a , b , neq-le-ℕ a b H)
+  (a , b , neq-le-ℕ H)
 ```
 
 ### Any pair of distinct elements of natural numbers can be strictly ordered

@@ -27,7 +27,7 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 For any element `x` in a [finite type](univalent-combinatorics.finite-types.md)
-`X` of [cardinality](set-theory.cardinalities.md) `n+1`, we can construct its
+`X` of [cardinality](set-theory.cardinals.md) `n+1`, we can construct its
 **complement**, which is a type of cardinality `n`.
 
 ## Definition
@@ -116,7 +116,7 @@ equiv-complement-element-Type-With-Cardinality-ℕ :
     Σ ( Type-With-Cardinality-ℕ l1 (succ-ℕ k))
       ( type-Type-With-Cardinality-ℕ (succ-ℕ k))) →
   (e : equiv-Type-With-Cardinality-ℕ (succ-ℕ k) (pr1 X) (pr1 Y))
-  (p : Id (map-equiv e (pr2 X)) (pr2 Y)) →
+  (p : map-equiv e (pr2 X) ＝ pr2 Y) →
   equiv-Type-With-Cardinality-ℕ k
     ( complement-element-Type-With-Cardinality-ℕ k X)
     ( complement-element-Type-With-Cardinality-ℕ k Y)
