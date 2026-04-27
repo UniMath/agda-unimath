@@ -401,8 +401,6 @@ module _
       ( inclusion-im-pullback-im-comp (map-hom-Semiring R S f) a)
 ```
 
-map-linear-combination-family-of-elements-Semiring R S f x (map-hom-Semiring R S f ∘ x) (forward-implication-adjoint-relation-image-pullback-subtype (map-hom-Semiring R S f) (subtype-im x) (subtype-im (map-hom-Semiring R S f ∘ x)) {!!}) l , {!!}
-
 ### Functoriality preserves linear combinations of a single element in a semiring
 
 ```agda

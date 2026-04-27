@@ -24,8 +24,6 @@ open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-
 open import lists.lists
 
 open import univalent-combinatorics.counting
@@ -145,19 +143,6 @@ module _
 
 ### The type of all elements of a list is equivalent to the standard finite type with the length of the list as its number of elements
 
-Furthermore, there is a commuting triangle
-
-```text
-                   ≃
-  Fin (length l) ----> element l
-                \     /
-      vec-list l \   / pr1
-                  ∨ ∨
-                   X,
-```
-
-where the top equivalence is the counting of the type of elements of `l`
-
 ```agda
 module _
   {l1 : Level} {A : UU l1}
@@ -248,15 +233,4 @@ module _
   is-finite-element-list :
     (l : list A) → is-finite (element-list l)
   is-finite-element-list l = is-finite-count (count-element-list l)
-
-  triangle-compute-element-list :
-    (l : list A) →
-    coherence-triangle-maps
-      ( functional-vec-list l)
-      ( element-element-list l)
-      ( map-compute-element-list l)
-  triangle-compute-element-list (cons x l) (inl i) =
-    triangle-compute-element-list l i
-  triangle-compute-element-list (cons x l) (inr star) =
-    refl
 ```

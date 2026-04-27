@@ -22,8 +22,6 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import linear-algebra.vectors
-
 open import lists.elementhood-relation-lists
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
@@ -94,6 +92,8 @@ module _
 ```
 
 ## Properties
+
+### The type of lists of elements of A is equivalent to the type of arrays
 
 ```agda
 module _

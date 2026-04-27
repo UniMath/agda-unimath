@@ -61,6 +61,56 @@ module _
     is-prop-is-trivial-ideal-Semiring
 ```
 
+### The predicate of being a trivial left ideal of a semiring
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : left-ideal-Semiring l2 R)
+  where
+
+  is-trivial-left-ideal-Semiring : UU (l1 ⊔ l2)
+  is-trivial-left-ideal-Semiring =
+    {x : type-Semiring R} →
+    is-in-left-ideal-Semiring R I x → is-zero-Semiring R x
+
+  is-prop-is-trivial-left-ideal-Semiring :
+    is-prop is-trivial-left-ideal-Semiring
+  is-prop-is-trivial-left-ideal-Semiring =
+    is-prop-implicit-Π
+      ( λ _ → is-prop-function-type (is-set-type-Semiring R _ _))
+
+  is-trivial-prop-left-ideal-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-trivial-prop-left-ideal-Semiring =
+    is-trivial-left-ideal-Semiring
+  pr2 is-trivial-prop-left-ideal-Semiring =
+    is-prop-is-trivial-left-ideal-Semiring
+```
+
+### The predicate of being a trivial right ideal of a semiring
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : right-ideal-Semiring l2 R)
+  where
+
+  is-trivial-right-ideal-Semiring : UU (l1 ⊔ l2)
+  is-trivial-right-ideal-Semiring =
+    {x : type-Semiring R} →
+    is-in-right-ideal-Semiring R I x → is-zero-Semiring R x
+
+  is-prop-is-trivial-right-ideal-Semiring :
+    is-prop is-trivial-right-ideal-Semiring
+  is-prop-is-trivial-right-ideal-Semiring =
+    is-prop-implicit-Π
+      ( λ _ → is-prop-function-type (is-set-type-Semiring R _ _))
+
+  is-trivial-prop-right-ideal-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-trivial-prop-right-ideal-Semiring =
+    is-trivial-right-ideal-Semiring
+  pr2 is-trivial-prop-right-ideal-Semiring =
+    is-prop-is-trivial-right-ideal-Semiring
+```
+
 ### The standard trivial ideal of a semiring
 
 ```agda
