@@ -189,7 +189,8 @@ module _
   is-prop-is-closed-under-left-multiplication-subset-Semiring :
     is-prop is-closed-under-left-multiplication-subset-Semiring
   is-prop-is-closed-under-left-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 2 (λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-iterated-implicit-Π 2
+      ( λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-left-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-left-multiplication-prop-subset-Semiring =
@@ -213,7 +214,8 @@ module _
   is-prop-is-closed-under-right-multiplication-subset-Semiring :
     is-prop is-closed-under-right-multiplication-subset-Semiring
   is-prop-is-closed-under-right-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 2 (λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-iterated-implicit-Π 2
+      ( λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-right-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-right-multiplication-prop-subset-Semiring =
@@ -237,7 +239,8 @@ module _
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-prop is-closed-under-two-sided-multiplication-subset-Semiring
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 3 (λ r x u → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-iterated-implicit-Π 3
+      ( λ r x u → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-two-sided-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-two-sided-multiplication-prop-subset-Semiring =
@@ -284,7 +287,8 @@ module _
   is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-closed-under-two-sided-multiplication-subset-Semiring R S →
     is-closed-under-left-multiplication-subset-Semiring R S
-  is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring H U =
+  is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U =
     is-closed-under-eq-subset-Semiring R S
       ( H U)
       ( right-unit-law-mul-Semiring R _)
@@ -292,7 +296,8 @@ module _
   is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-closed-under-two-sided-multiplication-subset-Semiring R S →
     is-closed-under-right-multiplication-subset-Semiring R S
-  is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring H U =
+  is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U =
     is-closed-under-eq-subset-Semiring R S
       ( H U)
       ( ap (mul-Semiring' R _) (left-unit-law-mul-Semiring R _))
@@ -308,19 +313,22 @@ module _
   is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring :
     is-closed-under-left-multiplication-subset-Semiring R S →
     is-closed-under-multiplication-subset-Semiring R S
-  is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring H U V =
+  is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring
+    H U V =
     H V
 
   is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring :
     is-closed-under-right-multiplication-subset-Semiring R S →
     is-closed-under-multiplication-subset-Semiring R S
-  is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring H U V =
+  is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring
+    H U V =
     H U
 
   is-closed-under-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-closed-under-two-sided-multiplication-subset-Semiring R S →
     is-closed-under-multiplication-subset-Semiring R S
-  is-closed-under-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring H U V =
+  is-closed-under-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U V =
     is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
      R S H V
 ```

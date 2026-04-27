@@ -16,6 +16,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.images
+open import foundation.images-subtypes
 open import foundation.pullbacks-subtypes
 open import foundation.singleton-subtypes
 open import foundation.subtypes
@@ -319,4 +320,46 @@ module _
       ( subtype-im a)
       ( subtype-im b)
       ( g)
+```
+
+### Specific instance of functoriality preserving right linear combinations of families of elements in a semiring
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Semiring l1) (S : Semiring l2) (f : hom-Semiring R S)
+  {I : UU l3} (a : I → type-Semiring R)
+  where
+
+  map-right-linear-combination-family-of-elements-Semiring' :
+    right-linear-combination-family-of-elements-Semiring R a →
+    right-linear-combination-family-of-elements-Semiring S
+      ( map-hom-Semiring R S f ∘ a)
+  map-right-linear-combination-family-of-elements-Semiring' =
+    map-right-linear-combination-family-of-elements-Semiring R S f a
+      ( map-hom-Semiring R S f ∘ a)
+      ( inclusion-im-pullback-im-comp (map-hom-Semiring R S f) a)
+
+  preserves-ev-map-right-linear-combination-family-of-elements-Semiring' :
+    (l : right-linear-combination-family-of-elements-Semiring R a) →
+    map-hom-Semiring R S f
+      ( ev-right-linear-combination-family-of-elements-Semiring R a l) ＝
+    ev-right-linear-combination-family-of-elements-Semiring S
+      ( map-hom-Semiring R S f ∘ a)
+      ( map-right-linear-combination-family-of-elements-Semiring' l)
+  preserves-ev-map-right-linear-combination-family-of-elements-Semiring' =
+    preserves-ev-map-right-linear-combination-family-of-elements-Semiring R S f a
+      ( map-hom-Semiring R S f ∘ a)
+      ( inclusion-im-pullback-im-comp (map-hom-Semiring R S f) a)
+
+  map-is-right-linear-combination-family-of-elements-Semiring' :
+    (x : type-Semiring R) →
+    is-right-linear-combination-family-of-elements-Semiring R a x →
+    is-right-linear-combination-family-of-elements-Semiring S
+      ( map-hom-Semiring R S f ∘ a)
+      ( map-hom-Semiring R S f x)
+  map-is-right-linear-combination-family-of-elements-Semiring' =
+    map-is-right-linear-combination-family-of-elements-Semiring R S f a
+      ( map-hom-Semiring R S f ∘ a)
+      ( inclusion-im-pullback-im-comp (map-hom-Semiring R S f) a)
 ```

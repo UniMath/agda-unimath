@@ -72,7 +72,12 @@ module _
   is-right-ideal-right-ideal-Semiring = pr2 I
 
   is-in-right-ideal-Semiring : type-Semiring R → UU l2
-  is-in-right-ideal-Semiring x = type-Prop (subset-right-ideal-Semiring x)
+  is-in-right-ideal-Semiring = is-in-subtype subset-right-ideal-Semiring
+
+  is-prop-is-in-right-ideal-Semiring :
+    (x : type-Semiring R) → is-prop (is-in-right-ideal-Semiring x)
+  is-prop-is-in-right-ideal-Semiring =
+    is-prop-is-in-subtype subset-right-ideal-Semiring
 
   type-right-ideal-Semiring : UU (l1 ⊔ l2)
   type-right-ideal-Semiring = type-subset-Semiring R subset-right-ideal-Semiring

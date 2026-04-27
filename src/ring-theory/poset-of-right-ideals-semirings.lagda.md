@@ -149,6 +149,24 @@ module _
     (I J : right-ideal-Semiring l2 R) → sim-right-ideal-Semiring I J → I ＝ J
   eq-sim-right-ideal-Semiring =
     eq-sim-Large-Poset (right-ideal-Semiring-Large-Poset R)
+
+  has-same-elements-sim-right-ideal-Semiring :
+    {l2 l3 : Level}
+    (I : right-ideal-Semiring l2 R) (J : right-ideal-Semiring l3 R) →
+    sim-right-ideal-Semiring I J →
+    has-same-elements-right-ideal-Semiring R I J
+  pr1 (has-same-elements-sim-right-ideal-Semiring I J H x) =
+    pr1 H x
+  pr2 (has-same-elements-sim-right-ideal-Semiring I J H x) =
+    pr2 H x
+
+  sim-has-same-elements-right-ideal-Semiring :
+    {l2 l3 : Level}
+    (I : right-ideal-Semiring l2 R) (J : right-ideal-Semiring l3 R) →
+    has-same-elements-right-ideal-Semiring R I J →
+    sim-right-ideal-Semiring I J
+  pr1 (sim-has-same-elements-right-ideal-Semiring I J H) x = pr1 (H x)
+  pr2 (sim-has-same-elements-right-ideal-Semiring I J H) x = pr2 (H x)
 ```
 
 ## Properties
