@@ -42,6 +42,10 @@ two-sided ideals do not correspond uniquely to
 in addition that the underlying additive submodule is normal, then we get unique
 correspondence to congruences. We will call such ideals _normal_.
 
+## Overview of all files concerning ideals in semirings
+
+{{#include tables/ideals-semirings.md}}
+
 ## Definitions
 
 ### Ideals of semirings
