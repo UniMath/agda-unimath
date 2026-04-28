@@ -51,7 +51,7 @@ Since the image ideal of an ideal satisfies the following adjoint relation
 ```
 
 it follows that we obtain a
-[Galois connection](order-theory.galois-connections.md).
+[Galois connection](order-theory.galois-connections.md). We note that image ideals are called {{#concept "extension ideals" Agda=im-ideal-Semiring}} in {{#reference AtiyahMacdonald1969}}.
 
 ## Definitions
 
@@ -411,3 +411,7 @@ module _
       ( im-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
       ( inv-iff ∘ compute-image-ideal-family-of-elements-Semiring)
 ```
+
+## References
+
+{{#bibliography}}

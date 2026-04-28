@@ -51,7 +51,7 @@ Since the image left ideal of a left ideal satisfies the following adjoint relat
 ```
 
 it follows that we obtain a
-[Galois connection](order-theory.galois-connections.md).
+[Galois connection](order-theory.galois-connections.md). We note that image left ideals are called {{#concept "extension left ideals" Agda=im-left-ideal-Semiring}} in {{#reference AtiyahMacdonald1969}}.
 
 ## Definitions
 
@@ -411,3 +411,7 @@ module _
         ( left-ideal-family-of-elements-Semiring R x))
       ( inv-iff ∘ compute-image-left-ideal-family-of-elements-Semiring)
 ```
+
+## References
+
+{{#bibliography}}

@@ -7,13 +7,13 @@
 | Ideals of semirings | [`ring-theory.ideals-semirings`](ring-theory.ideals-semirings.md) |
 | Image ideals | [`ring-theory.image-ideals-semirings`](ring-theory.image-ideals-semirings.md) |
 | Intersections of ideals | [`ring-theory.intersections-ideals-semirings`](ring-theory.intersections-ideals-semirings.md) |
-| Joins of ideals | [`ring-theory.joins-ideals-semirings`](ring-theory.joins-ideals-rings.md) |
+| Joins of ideals | [`ring-theory.joins-ideals-semirings`](ring-theory.joins-ideals-semirings.md) |
 | Kernels of semiring homomorphisms | [`ring-theory.kernels-of-semiring-homomorphisms`](ring-theory.kernels-of-semiring-homomorphisms.md) |
 | Maximal ideals | [`ring-theory.maximal-ideals-semirings`](ring-theory.maximal-ideals-semirings.md) |
-| Nil ideals | [`ring-theory.nil-ideals-rings`](ring-theory.nil-ideals-rings.md) |
+| Nil ideals | [`ring-theory.nil-ideals-semirings`](ring-theory.nil-ideals-semirings.md) |
 | Poset of ideals | [`ring-theory.poset-of-ideals-semirings`](ring-theory.poset-of-ideals-semirings.md) |
 | Principal ideals | [`ring-theory.principal-ideals-semirings`](ring-theory.principal-ideals-semirings.md) |
-| Products of ideals | [`ring-theory.products-ideals-rings`](ring-theory.products-ideals-rings.md) |
+| Products of ideals | [`ring-theory.products-ideals-semirings`](ring-theory.products-ideals-semirings.md) |
 | Pullback ideals | [`ring-theory.pullbacks-ideals-semirings`](ring-theory.pullbacks-ideals-semirings.md) |
 | Subtractive ideals | [`ring-theory.subtractive-ideals-semirings`](ring-theory.subtractive-ideals-semirings.md) |
 | Trivial ideals | [`ring-theory.trivial-ideals-semirings`](ring-theory.trivial-ideals-semirings.md) |

@@ -51,7 +51,7 @@ Since the image right ideal of a right ideal satisfies the following adjoint rel
 ```
 
 it follows that we obtain a
-[Galois connection](order-theory.galois-connections.md).
+[Galois connection](order-theory.galois-connections.md). We note that image right ideals are called {{#concept "extension right ideals" Agda=im-right-ideal-Semiring}} in {{#reference AtiyahMacdonald1969}}.
 
 ## Definitions
 
@@ -411,3 +411,7 @@ module _
         ( right-ideal-family-of-elements-Semiring R x))
       ( inv-iff ∘ compute-image-right-ideal-family-of-elements-Semiring)
 ```
+
+## References
+
+{{#bibliography}}
