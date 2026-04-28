@@ -1,7 +1,7 @@
-# Images of right ideals of semirings
+# Image right ideals of semirings
 
 ```agda
-module ring-theory.images-right-ideals-semirings where
+module ring-theory.image-right-ideals-semirings where
 ```
 
 <details><summary>Imports</summary>
