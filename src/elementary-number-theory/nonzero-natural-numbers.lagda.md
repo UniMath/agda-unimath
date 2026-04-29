@@ -102,6 +102,9 @@ pr2 (succ-nonzero-ℕ (x , _)) = is-nonzero-succ-ℕ x
 
 succ-ℕ⁺ : ℕ⁺ → ℕ⁺
 succ-ℕ⁺ = succ-nonzero-ℕ
+
+nonzero-succ-ℕ : ℕ → ℕ⁺
+nonzero-succ-ℕ n = (succ-ℕ n , is-nonzero-succ-ℕ n)
 ```
 
 ### The successor function from the natural numbers to the nonzero natural numbers
