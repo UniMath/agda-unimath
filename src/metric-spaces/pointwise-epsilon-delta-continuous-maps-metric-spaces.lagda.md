@@ -8,6 +8,7 @@ module metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces where
 
 ```agda
 open import foundation.axiom-of-countable-choice
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -59,28 +60,35 @@ module _
   {l1 l2 l3 l4 : Level}
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
-  (f : pointwise-continuous-map-Metric-Space X Y)
+  (f : map-Metric-Space X Y)
+  where
+
+  abstract
+    is-pointwise-ε-δ-continuous-map-is-pointwise-continuous-map-Metric-Space :
+      is-pointwise-continuous-map-Metric-Space X Y f →
+      is-pointwise-ε-δ-continuous-map-Metric-Space X Y f
+    is-pointwise-ε-δ-continuous-map-is-pointwise-continuous-map-Metric-Space
+      H x =
+      is-ε-δ-limit-is-limit-map-Metric-Space X Y f x (f x) (H x)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
   where
 
   abstract
     is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-Metric-Space :
+      (f : pointwise-continuous-map-Metric-Space X Y) →
       is-pointwise-ε-δ-continuous-map-Metric-Space
         ( X)
         ( Y)
         ( map-pointwise-continuous-map-Metric-Space X Y f)
-    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-Metric-Space
-      x =
-      is-ε-δ-limit-is-limit-map-Metric-Space
-        ( X)
-        ( Y)
-        ( map-pointwise-continuous-map-Metric-Space X Y f)
-        ( x)
-        ( map-pointwise-continuous-map-Metric-Space X Y f x)
-        ( is-pointwise-continuous-map-pointwise-continuous-map-Metric-Space
+    is-pointwise-ε-δ-continuous-map-pointwise-continuous-map-Metric-Space =
+      ind-Σ
+        ( is-pointwise-ε-δ-continuous-map-is-pointwise-continuous-map-Metric-Space
           ( X)
-          ( Y)
-          ( f)
-          ( x))
+          ( Y))
 ```
 
 ### Assuming countable choice, pointwise ε-δ continuous maps are pointwise continuous
@@ -100,14 +108,7 @@ module _
       is-pointwise-continuous-map-Metric-Space X Y f
     is-pointwise-continuous-is-pointwise-ε-δ-continuous-map-ACℕ-Metric-Space
       H x =
-      is-limit-is-ε-δ-limit-map-ACℕ-Metric-Space
-        ( acω)
-        ( X)
-        ( Y)
-        ( f)
-        ( x)
-        ( f x)
-        ( H x)
+      is-limit-is-ε-δ-limit-map-ACℕ-Metric-Space acω X Y f x (f x) (H x)
 ```
 
 ## See also

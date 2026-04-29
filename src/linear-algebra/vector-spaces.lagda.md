@@ -10,6 +10,8 @@ module linear-algebra.vector-spaces where
 open import commutative-algebra.heyting-fields
 open import commutative-algebra.homomorphisms-heyting-fields
 
+open import foundation.automorphisms
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -18,6 +20,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.left-modules-rings
 ```
 
 </details>
@@ -237,6 +240,34 @@ module _
       ( G)
       ( h)
       ( vector-space-heyting-field-Heyting-Field G)
+```
+
+### Scalar multiplication by an invertible element of a field is an automorphism of a vector space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  {c : type-Heyting-Field K}
+  (is-inv-c : is-invertible-element-Heyting-Field K c)
+  where
+
+  is-equiv-mul-invertible-element-Vector-Space :
+    is-equiv (mul-Vector-Space K V c)
+  is-equiv-mul-invertible-element-Vector-Space =
+    is-equiv-mul-invertible-element-left-module-Ring
+      ( ring-Heyting-Field K)
+      ( V)
+      ( is-inv-c)
+
+  equiv-mul-invertible-element-Vector-Space :
+    Aut (type-Vector-Space K V)
+  equiv-mul-invertible-element-Vector-Space =
+    equiv-mul-invertible-element-left-module-Ring
+      ( ring-Heyting-Field K)
+      ( V)
+      ( is-inv-c)
 ```
 
 ## See also

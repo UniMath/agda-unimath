@@ -58,6 +58,7 @@ open import linear-algebra.linear-forms-left-modules-commutative-rings public
 open import linear-algebra.linear-forms-vector-spaces public
 open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
+open import linear-algebra.linear-maps-normed-real-vector-spaces public
 open import linear-algebra.linear-maps-real-vector-spaces public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public

@@ -12,6 +12,10 @@ module linear-algebra.real-vector-spaces where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtypes
@@ -26,7 +30,11 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.field-of-real-numbers
 open import real-numbers.multiplication-real-numbers
+open import real-numbers.multiplicative-inverses-nonzero-real-numbers
+open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negation-real-numbers
+open import real-numbers.nonzero-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 ```
@@ -244,6 +252,43 @@ real-vector-space-ℝ : (l : Level) → ℝ-Vector-Space l (lsuc l)
 real-vector-space-ℝ l =
   vector-space-heyting-field-Heyting-Field
     ( heyting-field-ℝ l)
+```
+
+### Scalar multiplication by a nonzero real number is an automorphism of a real vector space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  where
+
+  is-equiv-mul-nonzero-ℝ-Vector-Space :
+    (c : nonzero-ℝ l1) →
+    is-equiv (mul-ℝ-Vector-Space V (real-nonzero-ℝ c))
+  is-equiv-mul-nonzero-ℝ-Vector-Space (c , c#0) =
+    is-equiv-mul-invertible-element-Vector-Space
+      ( heyting-field-ℝ l1)
+      ( V)
+      ( is-invertible-is-nonzero-ℝ c c#0)
+
+  is-equiv-mul-positive-ℝ-Vector-Space :
+    (c : ℝ⁺ l1) →
+    is-equiv (mul-ℝ-Vector-Space V (real-ℝ⁺ c))
+  is-equiv-mul-positive-ℝ-Vector-Space (c , 0<c) =
+    is-equiv-mul-invertible-element-Vector-Space
+      ( heyting-field-ℝ l1)
+      ( V)
+      ( is-invertible-is-positive-ℝ c 0<c)
+
+  equiv-mul-nonzero-ℝ-Vector-Space :
+    nonzero-ℝ l1 → Aut (type-ℝ-Vector-Space V)
+  equiv-mul-nonzero-ℝ-Vector-Space (c , c#0) =
+    ( mul-ℝ-Vector-Space V c , is-equiv-mul-nonzero-ℝ-Vector-Space (c , c#0))
+
+  equiv-mul-positive-ℝ-Vector-Space :
+    ℝ⁺ l1 → Aut (type-ℝ-Vector-Space V)
+  equiv-mul-positive-ℝ-Vector-Space (c , 0<c) =
+    ( mul-ℝ-Vector-Space V c , is-equiv-mul-positive-ℝ-Vector-Space (c , 0<c))
 ```
 
 ## See also

@@ -7,6 +7,8 @@ module linear-algebra.linear-maps-real-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -66,4 +68,55 @@ module _
 
   linear-map-ℝ-Vector-Space : UU (lsuc l1 ⊔ l2 ⊔ l3)
   linear-map-ℝ-Vector-Space = type-subtype is-linear-map-prop-ℝ-Vector-Space
+
+module _
+  {l1 l2 l3 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  (W : ℝ-Vector-Space l1 l3)
+  ((f , is-additive-f , is-homogeneous-f) : linear-map-ℝ-Vector-Space V W)
+  where
+
+  map-linear-map-ℝ-Vector-Space : type-ℝ-Vector-Space V → type-ℝ-Vector-Space W
+  map-linear-map-ℝ-Vector-Space = f
+```
+
+## Properties
+
+### A linear map maps zero to zero
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  (W : ℝ-Vector-Space l1 l3)
+  (f : linear-map-ℝ-Vector-Space V W)
+  where
+
+  abstract
+    is-zero-map-zero-linear-map-ℝ-Vector-Space :
+      is-zero-ℝ-Vector-Space W
+        ( map-linear-map-ℝ-Vector-Space V W f (zero-ℝ-Vector-Space V))
+    is-zero-map-zero-linear-map-ℝ-Vector-Space =
+      is-zero-map-zero-linear-map-Vector-Space (heyting-field-ℝ l1) V W f
+```
+
+### A linear map `f` maps `x - y` to `f x - f y`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (V : ℝ-Vector-Space l1 l2)
+  (W : ℝ-Vector-Space l1 l3)
+  (f : linear-map-ℝ-Vector-Space V W)
+  where
+
+  abstract
+    map-diff-linear-map-ℝ-Vector-Space :
+      {x y : type-ℝ-Vector-Space V} →
+      map-linear-map-ℝ-Vector-Space V W f (diff-ℝ-Vector-Space V x y) ＝
+      diff-ℝ-Vector-Space W
+        ( map-linear-map-ℝ-Vector-Space V W f x)
+        ( map-linear-map-ℝ-Vector-Space V W f y)
+    map-diff-linear-map-ℝ-Vector-Space =
+      map-diff-linear-map-Vector-Space (heyting-field-ℝ l1) V W f
 ```
