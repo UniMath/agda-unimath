@@ -1,9 +1,9 @@
-# Sums of finite families of elements in commutative semigroups
+# Products of finite families of elements in commutative semigroups
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module group-theory.sums-of-finite-families-of-elements-commutative-semigroups where
+module group-theory.products-of-finite-families-of-elements-commutative-semigroups where
 ```
 
 <details><summary>Imports</summary>
@@ -34,7 +34,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-semigroups
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
+open import group-theory.products-of-finite-sequences-of-elements-commutative-semigroups
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.coproducts-inhabited-finite-types
@@ -52,60 +52,55 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "sum operation" Disambiguation="of a finite family of elements of a commutative semigroup" WD="sum" WDID=Q218005 Agda=sum-finite-Commutative-Semigroup}}
+{{#concept "product operation" Disambiguation="on a finite family of elements of a commutative semigroup" Agda=product-finite-Commutative-Semigroup}}
 extends the binary operation on a
 [commutative semigroup](group-theory.commutative-semigroups.md) `G` to any
 family of elements of `G` indexed by an
 [inhabited finite type](univalent-combinatorics.inhabited-finite-types.md).
 
-We use additive terminology consistently with the linear algebra definition of
-[finite sequences in commutative semigroups](linear-algebra.finite-sequences-in-commutative-semigroups.md)
-despite the use of multiplicative terminology for commutative semigroups in
-general.
-
-## Sums over counted types
+## Products over counted types
 
 ### Definition
 
 ```agda
-sum-count-Commutative-Semigroup :
+product-count-Commutative-Semigroup :
   {l1 l2 : Level} (G : Commutative-Semigroup l1) (A : UU l2) →
   is-inhabited A → count A → (A → type-Commutative-Semigroup G) →
   type-Commutative-Semigroup G
-sum-count-Commutative-Semigroup G A |A| cA@(zero-ℕ , _) _ =
+product-count-Commutative-Semigroup G A |A| cA@(zero-ℕ , _) _ =
   ex-falso
     ( is-nonempty-is-inhabited
       ( |A|)
       ( is-empty-is-zero-number-of-elements-count cA refl))
-sum-count-Commutative-Semigroup G A _ (succ-ℕ n , Fin-sn≃A) f =
-  sum-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv Fin-sn≃A)
+product-count-Commutative-Semigroup G A _ (succ-ℕ n , Fin-sn≃A) f =
+  product-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv Fin-sn≃A)
 ```
 
 ### Properties
 
-#### Sums for a counted type are homotopy invariant
+#### Products for a counted type are homotopy invariant
 
 ```agda
 module _
   {l1 l2 : Level} (G : Commutative-Semigroup l1) (A : UU l2)
   (|A| : is-inhabited A)
-  where
+  where abstract
 
-  htpy-sum-count-Commutative-Semigroup :
+  htpy-product-count-Commutative-Semigroup :
     (c : count A) →
     {f g : A → type-Commutative-Semigroup G} → (f ~ g) →
-    sum-count-Commutative-Semigroup G A |A| c f ＝
-    sum-count-Commutative-Semigroup G A |A| c g
-  htpy-sum-count-Commutative-Semigroup cA@(zero-ℕ , _) _ =
+    product-count-Commutative-Semigroup G A |A| c f ＝
+    product-count-Commutative-Semigroup G A |A| c g
+  htpy-product-count-Commutative-Semigroup cA@(zero-ℕ , _) _ =
     ex-falso
       ( is-nonempty-is-inhabited
         ( |A|)
         ( is-empty-is-zero-number-of-elements-count cA refl))
-  htpy-sum-count-Commutative-Semigroup (succ-ℕ nA , _) H =
-    htpy-sum-fin-sequence-type-Commutative-Semigroup G nA (λ i → H _)
+  htpy-product-count-Commutative-Semigroup (succ-ℕ nA , _) H =
+    htpy-product-fin-sequence-type-Commutative-Semigroup G nA (λ i → H _)
 ```
 
-#### Two counts for the same type produce equal sums
+#### Two counts for the same type produce equal products
 
 ```agda
 module _
@@ -114,50 +109,53 @@ module _
   where
 
   abstract
-    eq-sum-count-equiv-Commutative-Semigroup :
+    eq-product-count-equiv-Commutative-Semigroup :
       (n : ℕ) → (equiv1 equiv2 : Fin (succ-ℕ n) ≃ A) →
       (f : A → type-Commutative-Semigroup G) →
-      sum-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv1) f ＝
-      sum-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv2) f
-    eq-sum-count-equiv-Commutative-Semigroup n equiv1 equiv2 f =
+      product-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv1) f ＝
+      product-count-Commutative-Semigroup G A |A| (succ-ℕ n , equiv2) f
+    eq-product-count-equiv-Commutative-Semigroup n equiv1 equiv2 f =
       equational-reasoning
-      sum-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv equiv1)
+      product-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv equiv1)
       ＝
-        sum-fin-sequence-type-Commutative-Semigroup
+        product-fin-sequence-type-Commutative-Semigroup
           ( G)
           ( n)
           ( (f ∘ map-equiv equiv1) ∘ (map-inv-equiv equiv1 ∘ map-equiv equiv2))
         by
-          preserves-sum-permutation-fin-sequence-type-Commutative-Semigroup
+          preserves-product-permutation-fin-sequence-type-Commutative-Semigroup
             ( G)
             ( n)
             ( inv-equiv equiv1 ∘e equiv2)
             ( f ∘ map-equiv equiv1)
-      ＝ sum-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv equiv2)
+      ＝
+        product-fin-sequence-type-Commutative-Semigroup G
+          ( n)
+          ( f ∘ map-equiv equiv2)
         by
           ap
             ( λ g →
-              sum-fin-sequence-type-Commutative-Semigroup
+              product-fin-sequence-type-Commutative-Semigroup
                 ( G)
                 ( n)
                 ( f ∘ (g ∘ map-equiv equiv2)))
             ( eq-htpy (is-section-map-inv-equiv equiv1))
 
-    eq-sum-count-Commutative-Semigroup :
+    eq-product-count-Commutative-Semigroup :
       (f : A → type-Commutative-Semigroup G) (c1 c2 : count A) →
-      sum-count-Commutative-Semigroup G A |A| c1 f ＝
-      sum-count-Commutative-Semigroup G A |A| c2 f
-    eq-sum-count-Commutative-Semigroup f c1@(zero-ℕ , _) _ =
+      product-count-Commutative-Semigroup G A |A| c1 f ＝
+      product-count-Commutative-Semigroup G A |A| c2 f
+    eq-product-count-Commutative-Semigroup f c1@(zero-ℕ , _) _ =
       ex-falso
         ( is-nonempty-is-inhabited
           ( |A|)
           ( is-empty-is-zero-number-of-elements-count c1 refl))
-    eq-sum-count-Commutative-Semigroup f c1@(succ-ℕ n , e1) c2@(_ , e2)
+    eq-product-count-Commutative-Semigroup f c1@(succ-ℕ n , e1) c2@(_ , e2)
       with double-counting c1 c2
-    ... | refl = eq-sum-count-equiv-Commutative-Semigroup n e1 e2 f
+    ... | refl = eq-product-count-equiv-Commutative-Semigroup n e1 e2 f
 ```
 
-#### Sums of counted families indexed by equivalent types are equal
+#### Products of counted families indexed by equivalent types are equal
 
 ```agda
 module _
@@ -167,32 +165,32 @@ module _
   where
 
   abstract
-    sum-equiv-count-Commutative-Semigroup :
+    product-equiv-count-Commutative-Semigroup :
       (cA : count A) (cB : count B) (f : A → type-Commutative-Semigroup G) →
-      sum-count-Commutative-Semigroup G A |A| cA f ＝
-      sum-count-Commutative-Semigroup G B |B| cB (f ∘ map-inv-equiv H)
-    sum-equiv-count-Commutative-Semigroup
+      product-count-Commutative-Semigroup G A |A| cA f ＝
+      product-count-Commutative-Semigroup G B |B| cB (f ∘ map-inv-equiv H)
+    product-equiv-count-Commutative-Semigroup
       cA@(zero-ℕ , _) _ _ =
         ex-falso
         ( is-nonempty-is-inhabited
           ( |A|)
           ( is-empty-is-zero-number-of-elements-count cA refl))
-    sum-equiv-count-Commutative-Semigroup
+    product-equiv-count-Commutative-Semigroup
       cA@(succ-ℕ nA , Fin-nA≃A) cB@(_ , Fin-nB≃B) f
       with double-counting-equiv cA cB H
     ... | refl =
-      preserves-sum-permutation-fin-sequence-type-Commutative-Semigroup
+      preserves-product-permutation-fin-sequence-type-Commutative-Semigroup
         ( G)
         ( nA)
         ( inv-equiv Fin-nA≃A ∘e inv-equiv H ∘e Fin-nB≃B)
         ( _) ∙
-      htpy-sum-fin-sequence-type-Commutative-Semigroup
+      htpy-product-fin-sequence-type-Commutative-Semigroup
         ( G)
         ( nA)
         ( λ i → ap f (is-section-map-inv-equiv Fin-nA≃A _))
 ```
 
-#### Sums of coproducts of counted types
+#### Products of coproducts of counted types
 
 ```agda
 module _
@@ -202,39 +200,39 @@ module _
   where
 
   abstract
-    distributive-sum-coproduct-count-Commutative-Semigroup :
+    distributive-product-coproduct-count-Commutative-Semigroup :
       (cA : count A) (cB : count B) →
       (f : (A + B) → type-Commutative-Semigroup G) →
-      sum-count-Commutative-Semigroup
+      product-count-Commutative-Semigroup
         ( G)
         ( A + B)
         ( |A+B|)
         ( count-coproduct cA cB)
         ( f) ＝
       mul-Commutative-Semigroup G
-        ( sum-count-Commutative-Semigroup G A |A| cA (f ∘ inl))
-        ( sum-count-Commutative-Semigroup G B |B| cB (f ∘ inr))
-    distributive-sum-coproduct-count-Commutative-Semigroup
+        ( product-count-Commutative-Semigroup G A |A| cA (f ∘ inl))
+        ( product-count-Commutative-Semigroup G B |B| cB (f ∘ inr))
+    distributive-product-coproduct-count-Commutative-Semigroup
       cA@(succ-ℕ nA , Fin-snA≃A) cB@(succ-ℕ nB , Fin-snB≃B) f =
-        split-sum-fin-sequence-type-Commutative-Semigroup G nA nB _ ∙
+        split-product-fin-sequence-type-Commutative-Semigroup G nA nB _ ∙
         ap-mul-Commutative-Semigroup G
-          ( htpy-sum-fin-sequence-type-Commutative-Semigroup G nA
+          ( htpy-product-fin-sequence-type-Commutative-Semigroup G nA
             ( λ i → ap f (map-equiv-count-coproduct-inl-coproduct-Fin cA cB i)))
-          ( htpy-sum-fin-sequence-type-Commutative-Semigroup G nB
+          ( htpy-product-fin-sequence-type-Commutative-Semigroup G nB
             ( λ i → ap f (map-equiv-count-coproduct-inr-coproduct-Fin cA cB i)))
-    distributive-sum-coproduct-count-Commutative-Semigroup
+    distributive-product-coproduct-count-Commutative-Semigroup
       cA@(zero-ℕ , _) cB@(succ-ℕ _ , _) _ =
         ex-falso
         ( is-nonempty-is-inhabited
           ( |A|)
           ( is-empty-is-zero-number-of-elements-count cA refl))
-    distributive-sum-coproduct-count-Commutative-Semigroup
+    distributive-product-coproduct-count-Commutative-Semigroup
       cA@(zero-ℕ , _) cB@(zero-ℕ , _) _ =
         ex-falso
         ( is-nonempty-is-inhabited
           ( |A|)
           ( is-empty-is-zero-number-of-elements-count cA refl))
-    distributive-sum-coproduct-count-Commutative-Semigroup
+    distributive-product-coproduct-count-Commutative-Semigroup
       cA@(succ-ℕ _ , _) cB@(zero-ℕ , _) _ =
         ex-falso
         ( is-nonempty-is-inhabited
@@ -242,28 +240,28 @@ module _
           ( is-empty-is-zero-number-of-elements-count cB refl))
 ```
 
-## Sums over finite types
+## Products over finite types
 
 ### Definition
 
 ```agda
 module _
   {l1 l2 : Level} (G : Commutative-Semigroup l1) (A : Inhabited-Finite-Type l2)
-  where
+  where opaque
 
-  sum-finite-Commutative-Semigroup :
+  product-finite-Commutative-Semigroup :
     (f : type-Inhabited-Finite-Type A → type-Commutative-Semigroup G) →
     type-Commutative-Semigroup G
-  sum-finite-Commutative-Semigroup f =
+  product-finite-Commutative-Semigroup f =
     map-universal-property-set-quotient-trunc-Prop
       ( set-Commutative-Semigroup G)
       ( λ c →
-        sum-count-Commutative-Semigroup G
+        product-count-Commutative-Semigroup G
           ( type-Inhabited-Finite-Type A)
           ( is-inhabited-type-Inhabited-Finite-Type A)
           ( c)
           ( f))
-      ( eq-sum-count-Commutative-Semigroup G
+      ( eq-product-count-Commutative-Semigroup G
         ( type-Inhabited-Finite-Type A)
         ( is-inhabited-type-Inhabited-Finite-Type A)
         ( f))
@@ -272,7 +270,7 @@ module _
 
 ### Properties
 
-#### The sum over a finite type is its sum over any count for the type
+#### The product over a finite type is its product over any count for the type
 
 ```agda
 module _
@@ -280,33 +278,35 @@ module _
   (A : Inhabited-Finite-Type l2) (cA : count (type-Inhabited-Finite-Type A))
   where
 
-  abstract
-    eq-sum-finite-sum-count-Commutative-Semigroup :
+  abstract opaque
+    unfolding product-finite-Commutative-Semigroup
+
+    eq-product-finite-product-count-Commutative-Semigroup :
       (f : type-Inhabited-Finite-Type A → type-Commutative-Semigroup G) →
-      sum-finite-Commutative-Semigroup G A f ＝
-      sum-count-Commutative-Semigroup G
+      product-finite-Commutative-Semigroup G A f ＝
+      product-count-Commutative-Semigroup G
         ( type-Inhabited-Finite-Type A)
         ( is-inhabited-type-Inhabited-Finite-Type A) cA f
-    eq-sum-finite-sum-count-Commutative-Semigroup f =
-      ap
-        ( λ c → sum-finite-Commutative-Semigroup G ((_ , c) , _) f)
-        ( all-elements-equal-type-trunc-Prop _ _) ∙
-      htpy-universal-property-set-quotient-trunc-Prop
+    eq-product-finite-product-count-Commutative-Semigroup f =
+      ( ap
+        ( λ c → product-finite-Commutative-Semigroup G ((_ , c) , _) f)
+        ( all-elements-equal-type-trunc-Prop _ _)) ∙
+      ( htpy-universal-property-set-quotient-trunc-Prop
         ( set-Commutative-Semigroup G)
         ( λ c →
-          sum-count-Commutative-Semigroup G
+          product-count-Commutative-Semigroup G
             ( type-Inhabited-Finite-Type A)
             ( is-inhabited-type-Inhabited-Finite-Type A)
             ( c)
             ( f))
-        ( eq-sum-count-Commutative-Semigroup G
+        ( eq-product-count-Commutative-Semigroup G
           ( type-Inhabited-Finite-Type A)
           ( is-inhabited-type-Inhabited-Finite-Type A)
           ( f))
-        ( cA)
+        ( cA))
 ```
 
-#### Sums over a finite type are homotopy invariant
+#### Products over a finite type are homotopy invariant
 
 ```agda
 module _
@@ -314,48 +314,16 @@ module _
   where
 
   abstract
-    htpy-sum-finite-Commutative-Semigroup :
+    htpy-product-finite-Commutative-Semigroup :
       {f g : type-Inhabited-Finite-Type A → type-Commutative-Semigroup G} →
       f ~ g →
-      sum-finite-Commutative-Semigroup G A f ＝
-      sum-finite-Commutative-Semigroup G A g
-    htpy-sum-finite-Commutative-Semigroup {f} {g} H =
-      let
-        open
-          do-syntax-trunc-Prop
-            ( Id-Prop
-              ( set-Commutative-Semigroup G)
-              ( sum-finite-Commutative-Semigroup G A f)
-              ( sum-finite-Commutative-Semigroup G A g))
-      in do
-        cA ← is-finite-Inhabited-Finite-Type A
-        equational-reasoning
-          sum-finite-Commutative-Semigroup G A f
-          ＝
-            sum-count-Commutative-Semigroup G
-              ( type-Inhabited-Finite-Type A)
-              ( is-inhabited-type-Inhabited-Finite-Type A)
-              ( cA)
-              ( f)
-            by eq-sum-finite-sum-count-Commutative-Semigroup G A cA f
-          ＝
-            sum-count-Commutative-Semigroup G
-              ( type-Inhabited-Finite-Type A)
-              ( is-inhabited-type-Inhabited-Finite-Type A)
-              ( cA)
-              ( g)
-            by
-              htpy-sum-count-Commutative-Semigroup
-                ( G)
-                ( type-Inhabited-Finite-Type A)
-                ( is-inhabited-type-Inhabited-Finite-Type A)
-                ( cA)
-                ( H)
-          ＝ sum-finite-Commutative-Semigroup G A g
-            by inv (eq-sum-finite-sum-count-Commutative-Semigroup G A cA g)
+      product-finite-Commutative-Semigroup G A f ＝
+      product-finite-Commutative-Semigroup G A g
+    htpy-product-finite-Commutative-Semigroup {f} {g} f~g =
+      ap (product-finite-Commutative-Semigroup G A) (eq-htpy f~g)
 ```
 
-#### Sums over finite types are preserved by equivalences
+#### Products over finite types are preserved by equivalences
 
 ```agda
 module _
@@ -366,27 +334,28 @@ module _
   where
 
   abstract
-    sum-equiv-finite-Commutative-Semigroup :
+    product-equiv-finite-Commutative-Semigroup :
       (f : type-Inhabited-Finite-Type A → type-Commutative-Semigroup G) →
-      sum-finite-Commutative-Semigroup G A f ＝
-      sum-finite-Commutative-Semigroup G B (f ∘ map-inv-equiv H)
-    sum-equiv-finite-Commutative-Semigroup f =
+      product-finite-Commutative-Semigroup G A f ＝
+      product-finite-Commutative-Semigroup G B (f ∘ map-inv-equiv H)
+    product-equiv-finite-Commutative-Semigroup f =
       let
         open
           do-syntax-trunc-Prop
             ( Id-Prop
               ( set-Commutative-Semigroup G)
-              ( sum-finite-Commutative-Semigroup G A f)
-              ( sum-finite-Commutative-Semigroup G B (f ∘ map-inv-equiv H)))
+              ( product-finite-Commutative-Semigroup G A f)
+              ( product-finite-Commutative-Semigroup G B (f ∘ map-inv-equiv H)))
       in do
         cA ← is-finite-Inhabited-Finite-Type A
         cB ← is-finite-Inhabited-Finite-Type B
-        ( eq-sum-finite-sum-count-Commutative-Semigroup G _ cA f ∙
-          sum-equiv-count-Commutative-Semigroup G _ _ _ _ H cA cB f ∙
-          inv (eq-sum-finite-sum-count-Commutative-Semigroup G _ cB _))
+        ( ( eq-product-finite-product-count-Commutative-Semigroup G _ cA f) ∙
+          ( product-equiv-count-Commutative-Semigroup G _ _ _ _ H cA cB f) ∙
+          ( inv
+            ( eq-product-finite-product-count-Commutative-Semigroup G _ cB _)))
 ```
 
-### Sums over finite types distribute over coproducts
+### Products over finite types distribute over coproducts
 
 ```agda
 module _
@@ -396,49 +365,58 @@ module _
   where
 
   abstract
-    distributive-distributive-sum-coproduct-finite-Commutative-Semigroup :
+    distributive-product-coproduct-finite-Commutative-Semigroup :
       (f :
         type-Inhabited-Finite-Type A + type-Inhabited-Finite-Type B →
         type-Commutative-Semigroup G) →
-      sum-finite-Commutative-Semigroup
+      product-finite-Commutative-Semigroup
         ( G)
         ( coproduct-Inhabited-Finite-Type A B)
         ( f) ＝
       mul-Commutative-Semigroup
         ( G)
-        ( sum-finite-Commutative-Semigroup G A (f ∘ inl))
-        ( sum-finite-Commutative-Semigroup G B (f ∘ inr))
-    distributive-distributive-sum-coproduct-finite-Commutative-Semigroup f =
+        ( product-finite-Commutative-Semigroup G A (f ∘ inl))
+        ( product-finite-Commutative-Semigroup G B (f ∘ inr))
+    distributive-product-coproduct-finite-Commutative-Semigroup f =
       let
         open
           do-syntax-trunc-Prop
             ( Id-Prop
               ( set-Commutative-Semigroup G)
-              ( sum-finite-Commutative-Semigroup
+              ( product-finite-Commutative-Semigroup
                 ( G)
                 ( coproduct-Inhabited-Finite-Type A B)
                 ( f))
               ( mul-Commutative-Semigroup
                 ( G)
-                ( sum-finite-Commutative-Semigroup G A (f ∘ inl))
-                ( sum-finite-Commutative-Semigroup G B (f ∘ inr))))
+                ( product-finite-Commutative-Semigroup G A (f ∘ inl))
+                ( product-finite-Commutative-Semigroup G B (f ∘ inr))))
       in do
         cA ← is-finite-Inhabited-Finite-Type A
         cB ← is-finite-Inhabited-Finite-Type B
-        ( eq-sum-finite-sum-count-Commutative-Semigroup
+        ( ( eq-product-finite-product-count-Commutative-Semigroup
             ( G)
             ( coproduct-Inhabited-Finite-Type A B)
             ( count-coproduct cA cB)
-            ( f) ∙
-          distributive-sum-coproduct-count-Commutative-Semigroup G _ _ _ _ _
+            ( f)) ∙
+          ( distributive-product-coproduct-count-Commutative-Semigroup G
+            ( type-Inhabited-Finite-Type A)
+            ( is-inhabited-type-Inhabited-Finite-Type A)
+            ( type-Inhabited-Finite-Type B)
+            ( is-inhabited-type-Inhabited-Finite-Type B)
+            ( is-inhabited-type-Inhabited-Finite-Type
+              ( coproduct-Inhabited-Finite-Type A B))
             ( cA)
             ( cB)
-            ( f) ∙
+            ( f)) ∙
           ap-mul-Commutative-Semigroup G
             ( inv
-              ( eq-sum-finite-sum-count-Commutative-Semigroup G A cA (f ∘ inl)))
+              ( eq-product-finite-product-count-Commutative-Semigroup G
+                ( A)
+                ( cA)
+                ( f ∘ inl)))
             ( inv
-              ( eq-sum-finite-sum-count-Commutative-Semigroup
+              ( eq-product-finite-product-count-Commutative-Semigroup
                 ( G)
                 ( B)
                 ( cB)
