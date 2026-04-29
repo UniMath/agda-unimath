@@ -35,6 +35,9 @@ open import group-theory.sums-of-finite-sequences-of-elements-groups
 open import linear-algebra.finite-sequences-in-abelian-groups
 open import linear-algebra.finite-sequences-in-commutative-monoids
 
+open import lists.finite-sequences
+open import lists.pairs-of-successive-elements-finite-sequences
+
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -291,6 +294,53 @@ module _
       ( ap-add-Ab G
         ( refl)
         ( inv (distributive-neg-sum-fin-sequence-type-Ab G n g)))
+```
+
+### Telescoping sums
+
+A telescoping sum is a sum of the form `∑ aₙ₊₁ - aₙ` or `∑ aₙ - aₙ₊₁`.
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  where
+
+  telescope-fin-sequence-type-Ab :
+    (n : ℕ) → fin-sequence-type-Ab G (succ-ℕ n) → fin-sequence-type-Ab G n
+  telescope-fin-sequence-type-Ab n u =
+    ind-Σ (right-subtraction-Ab G) ∘ pair-succ-fin-sequence n u
+
+  telescope-fin-sequence-type-Ab' :
+    (n : ℕ) → fin-sequence-type-Ab G (succ-ℕ n) → fin-sequence-type-Ab G n
+  telescope-fin-sequence-type-Ab' n u =
+    ind-Σ (right-subtraction-Ab' G) ∘ pair-succ-fin-sequence n u
+
+  abstract
+    sum-telescope-fin-sequence-type-Ab :
+      (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
+      sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab n u) ＝
+      right-subtraction-Ab G (head-fin-sequence n u) (last-fin-sequence n u)
+    sum-telescope-fin-sequence-type-Ab 0 u =
+      inv (right-inverse-law-add-Ab G (head-fin-sequence 0 u))
+    sum-telescope-fin-sequence-type-Ab (succ-ℕ n) u =
+      ( ap-add-Ab G
+        ( sum-telescope-fin-sequence-type-Ab n (tail-fin-sequence (succ-ℕ n) u))
+        ( refl)) ∙
+      ( commutative-add-Ab G _ _) ∙
+      ( add-right-subtraction-Ab G _ _ _)
+
+    sum-telescope-fin-sequence-type-Ab' :
+      (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
+      sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab' n u) ＝
+      right-subtraction-Ab G (last-fin-sequence n u) (head-fin-sequence n u)
+    sum-telescope-fin-sequence-type-Ab' n u =
+      ( htpy-sum-fin-sequence-type-Ab G
+        ( n)
+        ( λ i → inv (neg-right-subtraction-Ab G _ _))) ∙
+      ( inv (distributive-neg-sum-fin-sequence-type-Ab G n _)) ∙
+      ( ap (neg-Ab G) (sum-telescope-fin-sequence-type-Ab n u)) ∙
+      ( neg-right-subtraction-Ab G _ _)
 ```
 
 ## See also
