@@ -7,39 +7,42 @@ module ring-theory.subtractive-ideals-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import group-theory.submonoids
+
 open import ring-theory.ideals-semirings
-open import ring-theory.right-ideals-semirings
-open import ring-theory.left-ideals-semirings
+open import ring-theory.nonunital-subsemirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
+open import ring-theory.subtractive-subsets-semirings
 ```
 
 </details>
 
 ## Idea
 
-An [ideal](ring-theory.ideals-semirings.md) $I$ of a [semiring](ring-theory.semirings.md) $R$ is said to be a {{#concept "subtractive ideal" Disambiguation="semirings" Agda=is-subtractive-ideal-Semiring}} if for every $a,b : R$ such that $a\in S$ and $a+b \in S$, we have $b \in S$. 
+An [ideal](ring-theory.ideals-semirings.md) `I` of a [semiring](ring-theory.semirings.md) `R` is said to be
+{{#concept "subtractive" Disambiguation="ideal of a semiring" Agda=subtractive-ideal-Semiring}}
+if for any `x y ∈ R` we have
+
+```text
+  x ∈ I ⇒ x + y ∈ I ⇒ y ∈ I.
+```
+
+That is, a subtractive ideal is a ideal satisfying a 3-for-2 property.
 
 ## Definitions
 
-### Subtractive subsets of a semiring
-
-```agda
-module _
-  {l1 l2 : Level} (R : Semiring l1) (I : subset-Semiring l2 R)
-  where
-
-  is-subtractive-subset-Semiring :
-    UU (l1 ⊔ l2)
-  is-subtractive-subset-Semiring =
-    (a b : type-Semiring R) →
-    is-in-subtype I a → is-in-subtype I (add-Semiring R a b) → is-in-subtype I b
-```
-
-### Subtractive ideals of a semiring
+### The predicate of being a subtractive ideal
 
 ```agda
 module _
@@ -50,30 +53,230 @@ module _
     UU (l1 ⊔ l2)
   is-subtractive-ideal-Semiring =
     is-subtractive-subset-Semiring R (subset-ideal-Semiring R I)
+
+  is-prop-is-subtractive-ideal-Semiring :
+    is-prop is-subtractive-ideal-Semiring
+  is-prop-is-subtractive-ideal-Semiring =
+    is-prop-is-subtractive-subset-Semiring R (subset-ideal-Semiring R I)
+
+  is-subtractive-prop-ideal-Semiring :
+    Prop (l1 ⊔ l2)
+  pr1 is-subtractive-prop-ideal-Semiring =
+    is-subtractive-ideal-Semiring
+  pr2 is-subtractive-prop-ideal-Semiring =
+    is-prop-is-subtractive-ideal-Semiring
 ```
 
-### Subtractive left ideals of a semiring
+### The type of subtractive ideals
+
+```agda
+subtractive-ideal-Semiring :
+  {l1 : Level} (l2 : Level) (R : Semiring l1) → UU (l1 ⊔ lsuc l2)
+subtractive-ideal-Semiring l2 R =
+  Σ (ideal-Semiring l2 R) (is-subtractive-ideal-Semiring R)
+
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : subtractive-ideal-Semiring l2 R)
+  where
+
+  ideal-subtractive-ideal-Semiring : ideal-Semiring l2 R
+  ideal-subtractive-ideal-Semiring = pr1 I
+
+  is-subtractive-subtractive-ideal-Semiring :
+    is-subtractive-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+  is-subtractive-subtractive-ideal-Semiring =
+    pr2 I
+
+  subset-subtractive-ideal-Semiring : subset-Semiring l2 R
+  subset-subtractive-ideal-Semiring =
+    subset-ideal-Semiring R ideal-subtractive-ideal-Semiring
+
+  is-ideal-subtractive-ideal-Semiring :
+    is-ideal-subset-Semiring R subset-subtractive-ideal-Semiring
+  is-ideal-subtractive-ideal-Semiring =
+    is-ideal-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-in-subtractive-ideal-Semiring : type-Semiring R → UU l2
+  is-in-subtractive-ideal-Semiring =
+    is-in-ideal-Semiring R ideal-subtractive-ideal-Semiring
+
+  is-prop-is-in-subtractive-ideal-Semiring :
+    (x : type-Semiring R) → is-prop (is-in-subtractive-ideal-Semiring x)
+  is-prop-is-in-subtractive-ideal-Semiring =
+    is-prop-is-in-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  type-subtractive-ideal-Semiring : UU (l1 ⊔ l2)
+  type-subtractive-ideal-Semiring =
+    type-ideal-Semiring R ideal-subtractive-ideal-Semiring
+
+  inclusion-subtractive-ideal-Semiring :
+    type-subtractive-ideal-Semiring → type-Semiring R
+  inclusion-subtractive-ideal-Semiring =
+    inclusion-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  ap-inclusion-subtractive-ideal-Semiring :
+    (x y : type-subtractive-ideal-Semiring) → x ＝ y →
+    inclusion-subtractive-ideal-Semiring x ＝
+    inclusion-subtractive-ideal-Semiring y
+  ap-inclusion-subtractive-ideal-Semiring =
+    ap-inclusion-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-in-subset-inclusion-subtractive-ideal-Semiring :
+    (x : type-subtractive-ideal-Semiring) →
+    is-in-subtractive-ideal-Semiring (inclusion-subtractive-ideal-Semiring x)
+  is-in-subset-inclusion-subtractive-ideal-Semiring =
+    is-in-subset-inclusion-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-eq-subtractive-ideal-Semiring :
+    {x y : type-Semiring R} → is-in-subtractive-ideal-Semiring x →
+    (x ＝ y) → is-in-subtractive-ideal-Semiring y
+  is-closed-under-eq-subtractive-ideal-Semiring =
+    is-closed-under-eq-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+    
+  is-closed-under-eq-subtractive-ideal-Semiring' :
+    {x y : type-Semiring R} → is-in-subtractive-ideal-Semiring y →
+    (x ＝ y) → is-in-subtractive-ideal-Semiring x
+  is-closed-under-eq-subtractive-ideal-Semiring' =
+    is-closed-under-eq-ideal-Semiring' R
+      ideal-subtractive-ideal-Semiring
+
+  is-additive-submonoid-subtractive-ideal-Semiring :
+    is-additive-submonoid-subset-Semiring R
+      subset-subtractive-ideal-Semiring
+  is-additive-submonoid-subtractive-ideal-Semiring =
+    is-additive-submonoid-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  additive-submonoid-subtractive-ideal-Semiring :
+    Submonoid l2 (additive-monoid-Semiring R)
+  additive-submonoid-subtractive-ideal-Semiring =
+    additive-submonoid-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  contains-zero-subtractive-ideal-Semiring :
+    is-in-subtractive-ideal-Semiring (zero-Semiring R)
+  contains-zero-subtractive-ideal-Semiring =
+    contains-zero-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-addition-subtractive-ideal-Semiring :
+    is-closed-under-addition-subset-Semiring R
+      subset-subtractive-ideal-Semiring
+  is-closed-under-addition-subtractive-ideal-Semiring =
+    is-closed-under-addition-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-left-multiplication-subtractive-ideal-Semiring :
+    is-closed-under-left-multiplication-subset-Semiring R
+      ( subset-subtractive-ideal-Semiring)
+  is-closed-under-left-multiplication-subtractive-ideal-Semiring =
+    is-closed-under-left-multiplication-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-right-multiplication-subtractive-ideal-Semiring :
+    is-closed-under-right-multiplication-subset-Semiring R
+      ( subset-subtractive-ideal-Semiring)
+  is-closed-under-right-multiplication-subtractive-ideal-Semiring =
+    is-closed-under-right-multiplication-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-two-sided-multiplication-subtractive-ideal-Semiring :
+    is-closed-under-two-sided-multiplication-subset-Semiring R
+      ( subset-subtractive-ideal-Semiring)
+  is-closed-under-two-sided-multiplication-subtractive-ideal-Semiring =
+    is-closed-under-two-sided-multiplication-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-closed-under-multiplication-subtractive-ideal-Semiring :
+    is-closed-under-multiplication-subset-Semiring R
+      ( subset-subtractive-ideal-Semiring)
+  is-closed-under-multiplication-subtractive-ideal-Semiring =
+    is-closed-under-multiplication-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  is-nonunital-subsemiring-subtractive-ideal-Semiring :
+    is-nonunital-subsemiring-subset-Semiring R subset-subtractive-ideal-Semiring
+  is-nonunital-subsemiring-subtractive-ideal-Semiring =
+    is-nonunital-subsemiring-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+
+  nonunital-subsemiring-subtractive-ideal-Semiring :
+    Nonunital-Subsemiring l2 R
+  nonunital-subsemiring-subtractive-ideal-Semiring =
+    nonunital-subsemiring-ideal-Semiring R
+      ideal-subtractive-ideal-Semiring
+```
+
+## Properties
+
+### Characterizing equality of subtractive ideals in semirings
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Semiring l1) (I : left-ideal-Semiring l2 R)
+  {l1 l2 l3 : Level} (R : Semiring l1) (I : subtractive-ideal-Semiring l2 R)
   where
 
-  is-subtractive-left-ideal-Semiring :
-    UU (l1 ⊔ l2)
-  is-subtractive-left-ideal-Semiring =
-    is-subtractive-subset-Semiring R (subset-left-ideal-Semiring R I)
-```
+  has-same-elements-subtractive-ideal-Semiring :
+    (J : subtractive-ideal-Semiring l3 R) → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-subtractive-ideal-Semiring J =
+    has-same-elements-subtype
+      ( subset-subtractive-ideal-Semiring R I)
+      ( subset-subtractive-ideal-Semiring R J)
 
-### Subtractive right ideals of a semiring
-
-```agda
 module _
-  {l1 l2 : Level} (R : Semiring l1) (I : right-ideal-Semiring l2 R)
+  {l1 l2 : Level} (R : Semiring l1) (I : subtractive-ideal-Semiring l2 R)
   where
 
-  is-subtractive-right-ideal-Semiring :
-    UU (l1 ⊔ l2)
-  is-subtractive-right-ideal-Semiring =
-    is-subtractive-subset-Semiring R (subset-right-ideal-Semiring R I)
+  refl-has-same-elements-subtractive-ideal-Semiring :
+    has-same-elements-subtractive-ideal-Semiring R I I
+  refl-has-same-elements-subtractive-ideal-Semiring =
+    refl-has-same-elements-ideal-Semiring R
+      ( ideal-subtractive-ideal-Semiring R I)
+
+  is-torsorial-has-same-elements-subtractive-ideal-Semiring :
+    is-torsorial (has-same-elements-subtractive-ideal-Semiring R I)
+  is-torsorial-has-same-elements-subtractive-ideal-Semiring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-ideal-Semiring R
+        ( ideal-subtractive-ideal-Semiring R I))
+      ( is-prop-is-subtractive-ideal-Semiring R)
+      ( ideal-subtractive-ideal-Semiring R I)
+      ( refl-has-same-elements-subtractive-ideal-Semiring)
+      ( is-subtractive-subtractive-ideal-Semiring R I)
+
+  has-same-elements-eq-subtractive-ideal-Semiring :
+    (J : subtractive-ideal-Semiring l2 R) →
+    (I ＝ J) → has-same-elements-subtractive-ideal-Semiring R I J
+  has-same-elements-eq-subtractive-ideal-Semiring .I refl =
+    refl-has-same-elements-subtractive-ideal-Semiring
+
+  is-equiv-has-same-elements-eq-subtractive-ideal-Semiring :
+    (J : subtractive-ideal-Semiring l2 R) →
+    is-equiv (has-same-elements-eq-subtractive-ideal-Semiring J)
+  is-equiv-has-same-elements-eq-subtractive-ideal-Semiring =
+    fundamental-theorem-id
+      is-torsorial-has-same-elements-subtractive-ideal-Semiring
+      has-same-elements-eq-subtractive-ideal-Semiring
+
+  extensionality-subtractive-ideal-Semiring :
+    (J : subtractive-ideal-Semiring l2 R) →
+    (I ＝ J) ≃ has-same-elements-subtractive-ideal-Semiring R I J
+  pr1 (extensionality-subtractive-ideal-Semiring J) =
+    has-same-elements-eq-subtractive-ideal-Semiring J
+  pr2 (extensionality-subtractive-ideal-Semiring J) =
+    is-equiv-has-same-elements-eq-subtractive-ideal-Semiring J
+
+  eq-has-same-elements-subtractive-ideal-Semiring :
+    (J : subtractive-ideal-Semiring l2 R) →
+    has-same-elements-subtractive-ideal-Semiring R I J → I ＝ J
+  eq-has-same-elements-subtractive-ideal-Semiring J =
+    map-inv-equiv (extensionality-subtractive-ideal-Semiring J)
 ```
+
