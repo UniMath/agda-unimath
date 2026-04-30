@@ -21,6 +21,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.similarity-of-elements-large-posets
 
+open import ring-theory.poset-of-right-ideals-semirings
 open import ring-theory.subtractive-right-ideals-semirings
 open import ring-theory.semirings
 ```
@@ -200,14 +201,45 @@ module _
     subset-subtractive-right-ideal-Semiring R J
   preserves-order-subset-subtractive-right-ideal-Semiring I J H = H
 
-  subset-ideal-hom-large-poset-Semiring :
+  subset-subtractive-right-ideal-hom-large-poset-Semiring :
     hom-Large-Poset
       ( λ l → l)
       ( subtractive-right-ideal-Semiring-Large-Poset R)
       ( powerset-Large-Poset (type-Semiring R))
-  map-hom-Large-Preorder subset-ideal-hom-large-poset-Semiring =
+  map-hom-Large-Preorder
+    subset-subtractive-right-ideal-hom-large-poset-Semiring =
     subset-subtractive-right-ideal-Semiring R
   preserves-order-hom-Large-Preorder
-    subset-ideal-hom-large-poset-Semiring =
+    subset-subtractive-right-ideal-hom-large-poset-Semiring =
     preserves-order-subset-subtractive-right-ideal-Semiring
+```
+
+### The forgetful function from subtractive right ideals to right ideals preserves inclusion
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  preserves-order-right-ideal-subtractive-right-ideal-Semiring :
+    {l1 l2 : Level}
+    (I : subtractive-right-ideal-Semiring l1 R)
+    (J : subtractive-right-ideal-Semiring l2 R) →
+    leq-subtractive-right-ideal-Semiring R I J →
+    leq-right-ideal-Semiring R
+      ( right-ideal-subtractive-right-ideal-Semiring R I)
+      ( right-ideal-subtractive-right-ideal-Semiring R J)
+  preserves-order-right-ideal-subtractive-right-ideal-Semiring I J H = H
+
+  right-ideal-subtractive-right-ideal-hom-large-poset-Semiring :
+    hom-Large-Poset
+      ( λ l → l)
+      ( subtractive-right-ideal-Semiring-Large-Poset R)
+      ( right-ideal-Semiring-Large-Poset R)
+  map-hom-Large-Preorder
+    right-ideal-subtractive-right-ideal-hom-large-poset-Semiring =
+    right-ideal-subtractive-right-ideal-Semiring R
+  preserves-order-hom-Large-Preorder
+    right-ideal-subtractive-right-ideal-hom-large-poset-Semiring =
+    preserves-order-right-ideal-subtractive-right-ideal-Semiring      
 ```

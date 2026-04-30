@@ -21,6 +21,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.similarity-of-elements-large-posets
 
+open import ring-theory.poset-of-ideals-semirings
 open import ring-theory.subtractive-ideals-semirings
 open import ring-theory.semirings
 ```
@@ -197,14 +198,44 @@ module _
     subset-subtractive-ideal-Semiring R J
   preserves-order-subset-subtractive-ideal-Semiring I J H = H
 
-  subset-ideal-hom-large-poset-Semiring :
+  subset-subtractive-ideal-hom-large-poset-Semiring :
     hom-Large-Poset
       ( λ l → l)
       ( subtractive-ideal-Semiring-Large-Poset R)
       ( powerset-Large-Poset (type-Semiring R))
-  map-hom-Large-Preorder subset-ideal-hom-large-poset-Semiring =
+  map-hom-Large-Preorder subset-subtractive-ideal-hom-large-poset-Semiring =
     subset-subtractive-ideal-Semiring R
   preserves-order-hom-Large-Preorder
-    subset-ideal-hom-large-poset-Semiring =
+    subset-subtractive-ideal-hom-large-poset-Semiring =
     preserves-order-subset-subtractive-ideal-Semiring
+```
+
+### The forgetful function from subtractive ideals to ideals preserves inclusion
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  preserves-order-ideal-subtractive-ideal-Semiring :
+    {l1 l2 : Level}
+    (I : subtractive-ideal-Semiring l1 R)
+    (J : subtractive-ideal-Semiring l2 R) →
+    leq-subtractive-ideal-Semiring R I J →
+    leq-ideal-Semiring R
+      ( ideal-subtractive-ideal-Semiring R I)
+      ( ideal-subtractive-ideal-Semiring R J)
+  preserves-order-ideal-subtractive-ideal-Semiring I J H = H
+
+  ideal-subtractive-ideal-hom-large-poset-Semiring :
+    hom-Large-Poset
+      ( λ l → l)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+      ( ideal-Semiring-Large-Poset R)
+  map-hom-Large-Preorder
+    ideal-subtractive-ideal-hom-large-poset-Semiring =
+    ideal-subtractive-ideal-Semiring R
+  preserves-order-hom-Large-Preorder
+    ideal-subtractive-ideal-hom-large-poset-Semiring =
+    preserves-order-ideal-subtractive-ideal-Semiring      
 ```

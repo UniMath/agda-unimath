@@ -129,7 +129,7 @@ module _
           add-Semiring R
             ( multiple-Semiring R (succ-ℕ n) x)
             ( multiple-Semiring R (succ-ℕ n) y)
-          by interchange-add-add-Semiring R _ _ _ _
+          by interchange-add-add-Semiring R
 
     right-distributive-multiple-add-Semiring :
       (m n : ℕ) (x : type-Semiring R) →

@@ -231,3 +231,4 @@ module _
 - [Large locale of subtypes](foundation.large-locale-of-subtypes.md)
 - [Powersets](foundation.powersets.md)
 - [Pullbacks of subtypes](foundation.pullbacks-subtypes.md)
+- [Similarity of subtypes](foundation.similarity-subtypes.md)

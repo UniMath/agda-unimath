@@ -88,11 +88,11 @@ module _
     left-ideal-family-of-subsets-Semiring R
       ( λ α → subset-left-ideal-Semiring R (I α))
 
-  forward-inclusion-is-join-join-family-of-left-ideals-Semiring :
+  leq-join-family-of-left-ideals-Semiring :
     {l4 : Level} (K : left-ideal-Semiring l4 R) →
     ((α : U) → leq-left-ideal-Semiring R (I α) K) →
     leq-left-ideal-Semiring R join-family-of-left-ideals-Semiring K
-  forward-inclusion-is-join-join-family-of-left-ideals-Semiring K H =
+  leq-join-family-of-left-ideals-Semiring K H =
     is-left-ideal-generated-by-family-of-subsets-left-ideal-family-of-subsets-Semiring
       ( R)
       ( λ α → subset-left-ideal-Semiring R (I α))
@@ -114,7 +114,7 @@ module _
     is-join-family-of-left-ideals-Semiring R I
       join-family-of-left-ideals-Semiring
   pr1 (is-join-join-family-of-left-ideals-Semiring K) =
-    forward-inclusion-is-join-join-family-of-left-ideals-Semiring K
+    leq-join-family-of-left-ideals-Semiring K
   pr2 (is-join-join-family-of-left-ideals-Semiring K) =
     backward-inclusion-is-join-join-family-of-left-ideals-Semiring K
 

@@ -84,11 +84,11 @@ module _
   join-family-of-ideals-Semiring =
     ideal-family-of-subsets-Semiring R (λ α → subset-ideal-Semiring R (I α))
 
-  forward-inclusion-is-join-join-family-of-ideals-Semiring :
+  leq-join-family-of-ideals-Semiring :
     {l4 : Level} (K : ideal-Semiring l4 R) →
     ((α : U) → leq-ideal-Semiring R (I α) K) →
     leq-ideal-Semiring R join-family-of-ideals-Semiring K
-  forward-inclusion-is-join-join-family-of-ideals-Semiring K H =
+  leq-join-family-of-ideals-Semiring K H =
     is-ideal-generated-by-family-of-subsets-ideal-family-of-subsets-Semiring R
       ( λ α → subset-ideal-Semiring R (I α))
       ( K)
@@ -108,7 +108,7 @@ module _
   is-join-join-family-of-ideals-Semiring :
     is-join-family-of-ideals-Semiring R I join-family-of-ideals-Semiring
   pr1 (is-join-join-family-of-ideals-Semiring K) =
-    forward-inclusion-is-join-join-family-of-ideals-Semiring K
+    leq-join-family-of-ideals-Semiring K
   pr2 (is-join-join-family-of-ideals-Semiring K) =
     backward-inclusion-is-join-join-family-of-ideals-Semiring K
 

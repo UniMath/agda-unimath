@@ -15,12 +15,20 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.submonoids
 
+open import order-theory.galois-connections-large-posets
+open import order-theory.least-upper-bounds-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.reflective-galois-connections-large-posets
+
 open import ring-theory.ideals-semirings
+open import ring-theory.joins-ideals-semirings
 open import ring-theory.poset-of-ideals-semirings
 open import ring-theory.poset-of-subtractive-ideals-semirings
 open import ring-theory.semirings
@@ -81,7 +89,29 @@ module _
     backward-implication (U J)
 ```
 
-## The subtractive closure of an ideal
+### The universal property of the subtractive closure of a family of ideals of a semiring
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (R : Semiring l1) {U : UU l2}
+  (I : U → ideal-Semiring l3 R)
+  (J : subtractive-ideal-Semiring l4 R)
+  (H :
+    (α : U) → leq-ideal-Semiring R (I α) (ideal-subtractive-ideal-Semiring R J))
+  where
+
+  is-subtractive-ideal-generated-by-family-of-ideals-Semiring : UUω
+  is-subtractive-ideal-generated-by-family-of-ideals-Semiring =
+    {l : Level} (K : subtractive-ideal-Semiring l R) →
+    ( (α : U) →
+      leq-ideal-Semiring R (I α) (ideal-subtractive-ideal-Semiring R K)) →
+    leq-subtractive-ideal-Semiring R J K
+```
+
+
+### Construction of the subtractive closure Galois connection
+
+#### The subtractive closure of an ideal
 
 ```agda
 module _
@@ -287,11 +317,11 @@ module _
       ( H)
       ( contains-ideal-subtractive-closure-ideal-Semiring)
 
-  backward-implication-is-subtractive-closure-subtractive-closure-ideal-Semiring :
+  leq-subtractive-closure-ideal-Semiring :
     {l3 : Level} (J : subtractive-ideal-Semiring l3 R) →
     leq-ideal-Semiring R I (ideal-subtractive-ideal-Semiring R J) →
     leq-subtractive-ideal-Semiring R subtractive-closure-ideal-Semiring J
-  backward-implication-is-subtractive-closure-subtractive-closure-ideal-Semiring
+  leq-subtractive-closure-ideal-Semiring
     J H x K =
     apply-universal-property-trunc-Prop K
       ( subset-subtractive-ideal-Semiring R J x)
@@ -308,6 +338,231 @@ module _
     forward-implication-is-subtractive-closure-subtractive-closure-ideal-Semiring
       J
   pr2 (is-subtractive-closure-subtractive-closure-ideal-Semiring J) =
-    backward-implication-is-subtractive-closure-subtractive-closure-ideal-Semiring
+    leq-subtractive-closure-ideal-Semiring
       J
+```
+
+#### Subtractive closure is order preserving
+
+```agda
+module _
+  {l1 : Level} (R : Semiring l1)
+  where
+
+  preserves-order-subtractive-closure-ideal-Semiring :
+    {l2 l3 : Level} (I : ideal-Semiring l2 R) (J : ideal-Semiring l3 R) →
+    leq-ideal-Semiring R I J →
+    leq-subtractive-ideal-Semiring R
+      ( subtractive-closure-ideal-Semiring R I)
+      ( subtractive-closure-ideal-Semiring R J)
+  preserves-order-subtractive-closure-ideal-Semiring I J H =
+    leq-subtractive-closure-ideal-Semiring R I
+      ( subtractive-closure-ideal-Semiring R J)
+      ( transitive-leq-ideal-Semiring R I J
+        ( ideal-subtractive-closure-ideal-Semiring R J)
+        ( contains-ideal-subtractive-closure-ideal-Semiring R J)
+        ( H))
+
+  subtractive-closure-ideal-hom-large-poset-Semiring :
+    hom-Large-Poset
+      ( λ l2 → l1 ⊔ l2)
+      ( ideal-Semiring-Large-Poset R)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+  map-hom-Large-Preorder
+    subtractive-closure-ideal-hom-large-poset-Semiring =
+    subtractive-closure-ideal-Semiring R
+  preserves-order-hom-Large-Preorder
+    subtractive-closure-ideal-hom-large-poset-Semiring =
+    preserves-order-subtractive-closure-ideal-Semiring
+```
+
+#### The subtractive closure Galois connection
+
+```agda
+module _
+  {l1 : Level} (R : Semiring l1)
+  where
+
+  adjoint-relation-subtractive-closure-ideal-Semiring :
+    {l2 l3 : Level}
+    (I : ideal-Semiring l2 R) (J : subtractive-ideal-Semiring l3 R) →
+    leq-subtractive-ideal-Semiring R
+      ( subtractive-closure-ideal-Semiring R I)
+      ( J) ↔
+    leq-ideal-Semiring R I (ideal-subtractive-ideal-Semiring R J)
+  adjoint-relation-subtractive-closure-ideal-Semiring I J =
+    is-subtractive-closure-subtractive-closure-ideal-Semiring R I J
+
+  subtractive-closure-ideal-galois-connection-Semiring :
+    galois-connection-Large-Poset
+      ( λ l2 → l1 ⊔ l2)
+      ( λ l → l)
+      ( ideal-Semiring-Large-Poset R)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+  lower-adjoint-galois-connection-Large-Poset
+    subtractive-closure-ideal-galois-connection-Semiring =
+    subtractive-closure-ideal-hom-large-poset-Semiring R
+  upper-adjoint-galois-connection-Large-Poset
+    subtractive-closure-ideal-galois-connection-Semiring =
+    ideal-subtractive-ideal-hom-large-poset-Semiring R
+  adjoint-relation-galois-connection-Large-Poset
+    subtractive-closure-ideal-galois-connection-Semiring =
+    adjoint-relation-subtractive-closure-ideal-Semiring
+```
+
+#### The subtractive closure reflective Galois connection
+
+```agda
+module _
+  {l1 : Level} (R : Semiring l1)
+  where
+
+  forward-inclusion-is-reflective-subtractive-closure-ideal-Semiring :
+    {l2 : Level} (I : subtractive-ideal-Semiring l2 R) →
+    leq-subtractive-ideal-Semiring R
+      ( subtractive-closure-ideal-Semiring R
+        ( ideal-subtractive-ideal-Semiring R I))
+      ( I)
+  forward-inclusion-is-reflective-subtractive-closure-ideal-Semiring I =
+    leq-subtractive-closure-ideal-Semiring R
+      ( ideal-subtractive-ideal-Semiring R I)
+      ( I)
+      ( refl-leq-subtractive-ideal-Semiring R I)
+
+  backward-inclusion-is-reflective-subtractive-closure-ideal-Semiring :
+    {l2 : Level} (I : subtractive-ideal-Semiring l2 R) →
+    leq-subtractive-ideal-Semiring R I
+      ( subtractive-closure-ideal-Semiring R
+        ( ideal-subtractive-ideal-Semiring R I))
+  backward-inclusion-is-reflective-subtractive-closure-ideal-Semiring I =
+    contains-ideal-subtractive-closure-ideal-Semiring R
+      ( ideal-subtractive-ideal-Semiring R I)
+
+  is-reflective-subtractive-closure-ideal-Semiring :
+    is-reflective-galois-connection-Large-Poset
+      ( ideal-Semiring-Large-Poset R)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+      ( subtractive-closure-ideal-galois-connection-Semiring R)
+  pr1 (is-reflective-subtractive-closure-ideal-Semiring I) =
+    forward-inclusion-is-reflective-subtractive-closure-ideal-Semiring I
+  pr2 (is-reflective-subtractive-closure-ideal-Semiring I) =
+    backward-inclusion-is-reflective-subtractive-closure-ideal-Semiring I
+
+  subtractive-closure-ideal-reflective-galois-connection-Semiring :
+    reflective-galois-connection-Large-Poset
+      ( ideal-Semiring-Large-Poset R)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+  galois-connection-reflective-galois-connection-Large-Poset
+    subtractive-closure-ideal-reflective-galois-connection-Semiring =
+    subtractive-closure-ideal-galois-connection-Semiring R
+  is-reflective-reflective-galois-connection-Large-Poset
+    subtractive-closure-ideal-reflective-galois-connection-Semiring =
+    is-reflective-subtractive-closure-ideal-Semiring
+```
+
+### The subtractive ideal generated by a family of ideals of a semiring
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1) {U : UU l2} (I : U → ideal-Semiring l3 R)
+  where
+
+  generating-ideal-subtractive-ideal-family-of-ideals-Semiring :
+    ideal-Semiring (l1 ⊔ l2 ⊔ l3) R
+  generating-ideal-subtractive-ideal-family-of-ideals-Semiring =
+    join-family-of-ideals-Semiring R I
+
+  subtractive-ideal-family-of-ideals-Semiring :
+    subtractive-ideal-Semiring (l1 ⊔ l2 ⊔ l3) R
+  subtractive-ideal-family-of-ideals-Semiring =
+    subtractive-closure-ideal-Semiring R
+      generating-ideal-subtractive-ideal-family-of-ideals-Semiring
+
+  ideal-subtractive-ideal-family-of-ideals-Semiring :
+    ideal-Semiring (l1 ⊔ l2 ⊔ l3) R
+  ideal-subtractive-ideal-family-of-ideals-Semiring =
+    ideal-subtractive-closure-ideal-Semiring R
+      generating-ideal-subtractive-ideal-family-of-ideals-Semiring
+
+  is-in-subtractive-ideal-family-of-ideals-Semiring :
+    type-Semiring R → UU (l1 ⊔ l2 ⊔ l3)
+  is-in-subtractive-ideal-family-of-ideals-Semiring =
+    is-in-subtractive-closure-ideal-Semiring R
+      generating-ideal-subtractive-ideal-family-of-ideals-Semiring
+
+  contains-ideal-subtractive-ideal-family-of-ideals-Semiring :
+    {α : U} →
+    leq-ideal-Semiring R (I α) ideal-subtractive-ideal-family-of-ideals-Semiring
+  contains-ideal-subtractive-ideal-family-of-ideals-Semiring {α} =
+    transitive-leq-ideal-Semiring R
+      ( I α)
+      ( generating-ideal-subtractive-ideal-family-of-ideals-Semiring)
+      ( ideal-subtractive-ideal-family-of-ideals-Semiring)
+      ( contains-ideal-subtractive-closure-ideal-Semiring R
+        generating-ideal-subtractive-ideal-family-of-ideals-Semiring)
+      ( contains-ideal-join-family-of-ideals-Semiring R I)
+
+  is-subtractive-ideal-generated-by-family-of-ideals-subtractive-ideal-family-of-ideals-Semiring :
+    is-subtractive-ideal-generated-by-family-of-ideals-Semiring R I
+      ( subtractive-ideal-family-of-ideals-Semiring)
+      ( λ α → contains-ideal-subtractive-ideal-family-of-ideals-Semiring)
+  is-subtractive-ideal-generated-by-family-of-ideals-subtractive-ideal-family-of-ideals-Semiring
+    J H =
+    leq-subtractive-closure-ideal-Semiring R
+      ( generating-ideal-subtractive-ideal-family-of-ideals-Semiring)
+      ( J)
+      ( leq-join-family-of-ideals-Semiring R I
+        ( ideal-subtractive-ideal-Semiring R J)
+        ( H))
+```
+
+## Properties
+
+### The subtractive ideal generated by the underlying ideal of a subtractive ideal `I` is `I` itself
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : subtractive-ideal-Semiring l2 R)
+  where
+
+  idempotent-subtractive-closure-ideal-Semiring :
+    has-same-elements-subtractive-ideal-Semiring R
+      ( subtractive-closure-ideal-Semiring R
+        ( ideal-subtractive-ideal-Semiring R I))
+      ( I)
+  idempotent-subtractive-closure-ideal-Semiring =
+    has-same-elements-sim-subtype
+      ( subset-subtractive-closure-ideal-Semiring R
+        ( ideal-subtractive-ideal-Semiring R I))
+      ( subset-subtractive-ideal-Semiring R I)
+      ( is-reflective-subtractive-closure-ideal-Semiring R I)
+```
+
+### Subtractive closure preserves least upper bounds
+
+In
+[`ring-theory.joins-subtractive-ideals-semirings`](ring-theory.joins-subtractive-ideals-semirings.md)
+we will convert this fact to the fact that subtractive closure preserves joins.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  {U : UU l2} (I : U → ideal-Semiring l3 R)
+  where
+
+  preserves-least-upper-bounds-subtractive-closure-ideal-Semiring :
+    {l4 : Level} (J : ideal-Semiring l4 R) →
+    is-join-family-of-ideals-Semiring R
+      ( I)
+      ( J) →
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( subtractive-ideal-Semiring-Large-Poset R)
+      ( λ α → subtractive-closure-ideal-Semiring R (I α))
+      ( subtractive-closure-ideal-Semiring R J)
+  preserves-least-upper-bounds-subtractive-closure-ideal-Semiring =
+    preserves-join-lower-adjoint-galois-connection-Large-Poset
+      ( ideal-Semiring-Large-Poset R)
+      ( subtractive-ideal-Semiring-Large-Poset R)
+      ( subtractive-closure-ideal-galois-connection-Semiring R)
+      ( I)
 ```

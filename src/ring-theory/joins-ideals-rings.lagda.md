@@ -84,11 +84,11 @@ module _
   join-family-of-ideals-Ring =
     ideal-family-of-subsets-Ring R (λ α → subset-ideal-Ring R (I α))
 
-  forward-inclusion-is-join-join-family-of-ideals-Ring :
+  leq-join-family-of-ideals-Ring :
     {l4 : Level} (K : ideal-Ring l4 R) →
     ((α : U) → leq-ideal-Ring R (I α) K) →
     leq-ideal-Ring R join-family-of-ideals-Ring K
-  forward-inclusion-is-join-join-family-of-ideals-Ring K H =
+  leq-join-family-of-ideals-Ring K H =
     is-ideal-generated-by-family-of-subsets-ideal-family-of-subsets-Ring R
       ( λ α → subset-ideal-Ring R (I α))
       ( K)
@@ -108,7 +108,7 @@ module _
   is-join-join-family-of-ideals-Ring :
     is-join-family-of-ideals-Ring R I join-family-of-ideals-Ring
   pr1 (is-join-join-family-of-ideals-Ring K) =
-    forward-inclusion-is-join-join-family-of-ideals-Ring K
+    leq-join-family-of-ideals-Ring K
   pr2 (is-join-join-family-of-ideals-Ring K) =
     backward-inclusion-is-join-join-family-of-ideals-Ring K
 
