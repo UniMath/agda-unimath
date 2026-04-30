@@ -132,7 +132,7 @@ abstract
   exp-succ-ℕ :
     (m n : ℕ) → m ^ℕ succ-ℕ n ＝ m ^ℕ n *ℕ m
   exp-succ-ℕ m n =
-    power-succ-Commutative-Semiring ℕ-Commutative-Semiring n m
+    successor-law-power-Commutative-Semiring ℕ-Commutative-Semiring n m
 ```
 
 ### `mⁿ⁺¹ ＝ mmⁿ`
@@ -142,7 +142,7 @@ abstract
   exp-succ-ℕ' :
     (m n : ℕ) → m ^ℕ succ-ℕ n ＝ m *ℕ m ^ℕ n
   exp-succ-ℕ' m n =
-    power-succ-Commutative-Semiring' ℕ-Commutative-Semiring n m
+    successor-law-power-Commutative-Semiring' ℕ-Commutative-Semiring n m
 ```
 
 ### Powers by sums of natural numbers are products of powers

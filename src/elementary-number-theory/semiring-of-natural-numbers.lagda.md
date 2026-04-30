@@ -157,7 +157,7 @@ module _
           ( multiple-Semiring R n (one-Semiring R))
           ( one-Semiring R)
         by
-          multiple-succ-Semiring R n (one-Semiring R)
+          successor-law-multiple-Semiring R n (one-Semiring R)
       ＝
         add-Semiring R
           ( map-hom-Semiring ℕ-Semiring R f n)

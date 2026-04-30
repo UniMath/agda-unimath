@@ -60,12 +60,12 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  power-succ-Commutative-Semiring :
+  successor-law-power-Commutative-Semiring :
     (n : ℕ) (x : type-Commutative-Semiring A) →
     power-Commutative-Semiring A (succ-ℕ n) x ＝
     mul-Commutative-Semiring A (power-Commutative-Semiring A n x) x
-  power-succ-Commutative-Semiring =
-    power-succ-Semiring (semiring-Commutative-Semiring A)
+  successor-law-power-Commutative-Semiring =
+    successor-law-power-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ### `xⁿ⁺¹ = xxⁿ`
@@ -75,12 +75,12 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  power-succ-Commutative-Semiring' :
+  successor-law-power-Commutative-Semiring' :
     (n : ℕ) (x : type-Commutative-Semiring A) →
     power-Commutative-Semiring A (succ-ℕ n) x ＝
     mul-Commutative-Semiring A x (power-Commutative-Semiring A n x)
-  power-succ-Commutative-Semiring' =
-    power-succ-Semiring' (semiring-Commutative-Semiring A)
+  successor-law-power-Commutative-Semiring' =
+    successor-law-power-Semiring' (semiring-Commutative-Semiring A)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -144,12 +144,12 @@ module _
   (f : hom-Commutative-Semiring A B)
   where
 
-  preserves-powers-hom-Commutative-Semiring :
-    (n : ℕ) (x : type-Commutative-Semiring A) →
+  preserves-power-hom-Commutative-Semiring :
+    (n : ℕ) {x : type-Commutative-Semiring A} →
     map-hom-Commutative-Semiring A B f (power-Commutative-Semiring A n x) ＝
     power-Commutative-Semiring B n (map-hom-Commutative-Semiring A B f x)
-  preserves-powers-hom-Commutative-Semiring =
-    preserves-powers-hom-Semiring
+  preserves-power-hom-Commutative-Semiring =
+    preserves-power-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
       ( f)

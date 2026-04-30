@@ -157,7 +157,7 @@ module _
     integer-power-int-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
     integer-power-int-Group (succ-ℕ (succ-ℕ n)) g =
       ( ap (mul-Group G g) (integer-power-int-Group (succ-ℕ n) g)) ∙
-      ( inv (power-succ-Group' G (succ-ℕ n) g))
+      ( inv (successor-law-power-Group' G (succ-ℕ n) g))
 
     integer-power-in-pos-Group :
       (n : ℕ) (g : type-Group G) →
@@ -174,7 +174,7 @@ module _
     integer-power-in-neg-Group (succ-ℕ n) g =
       ( ap (mul-Group G (inv-Group G g)) (integer-power-in-neg-Group n g)) ∙
       ( inv (distributive-inv-mul-Group G)) ∙
-      ( ap (inv-Group G) (power-succ-Group G (succ-ℕ n) g))
+      ( ap (inv-Group G) (successor-law-power-Group G (succ-ℕ n) g))
 ```
 
 ### The integer power `x⁰` is the unit of the group
