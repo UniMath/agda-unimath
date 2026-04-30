@@ -141,9 +141,9 @@ the following:
 
 ```toml
 [[contributors]]
-displayName = "Vojtěch Štěpančík"
-usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
-github = "VojtechStep"
+displayName = "Firstname Lastname"
+usernames = [ "Firstname Lastname", "GithubUsername" ]
+github = "GithubUsername"
 ```
 
 The `displayName` field tells our tooling how to display your name - be it on
