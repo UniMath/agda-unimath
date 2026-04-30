@@ -150,7 +150,7 @@ module _
       ( additive-commutative-monoid-Semiring R)
 
   interchange-add-add-Semiring :
-    (x y x' y' : type-Semiring R) →
+    {x y x' y' : type-Semiring R} →
     ( add-Semiring (add-Semiring x y) (add-Semiring x' y')) ＝
     ( add-Semiring (add-Semiring x x') (add-Semiring y y'))
   interchange-add-add-Semiring =
@@ -158,14 +158,14 @@ module _
       ( additive-commutative-monoid-Semiring R)
 
   right-swap-add-Semiring :
-    (x y z : type-Semiring R) →
+    {x y z : type-Semiring R} →
     add-Semiring (add-Semiring x y) z ＝ add-Semiring (add-Semiring x z) y
   right-swap-add-Semiring =
     right-swap-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   left-swap-add-Semiring :
-    (x y z : type-Semiring R) →
+    {x y z : type-Semiring R} →
     add-Semiring x (add-Semiring y z) ＝ add-Semiring y (add-Semiring x z)
   left-swap-add-Semiring =
     left-swap-mul-Commutative-Monoid

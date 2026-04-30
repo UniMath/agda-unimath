@@ -127,7 +127,7 @@ module _
   commutative-mul-Commutative-Monoid = pr2 M
 
   interchange-mul-mul-Commutative-Monoid :
-    (x y x' y' : type-Commutative-Monoid) →
+    {x y x' y' : type-Commutative-Monoid} →
     ( mul-Commutative-Monoid
       ( mul-Commutative-Monoid x y)
       ( mul-Commutative-Monoid x' y')) ＝
@@ -139,7 +139,7 @@ module _
       commutative-semigroup-Commutative-Monoid
 
   right-swap-mul-Commutative-Monoid :
-    (x y z : type-Commutative-Monoid) →
+    {x y z : type-Commutative-Monoid} →
     mul-Commutative-Monoid (mul-Commutative-Monoid x y) z ＝
     mul-Commutative-Monoid (mul-Commutative-Monoid x z) y
   right-swap-mul-Commutative-Monoid =
@@ -147,7 +147,7 @@ module _
       commutative-semigroup-Commutative-Monoid
 
   left-swap-mul-Commutative-Monoid :
-    (x y z : type-Commutative-Monoid) →
+    {x y z : type-Commutative-Monoid} →
     mul-Commutative-Monoid x (mul-Commutative-Monoid y z) ＝
     mul-Commutative-Monoid y (mul-Commutative-Monoid x z)
   left-swap-mul-Commutative-Monoid =

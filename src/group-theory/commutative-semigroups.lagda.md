@@ -96,7 +96,7 @@ module _
     associative-mul-Semigroup semigroup-Commutative-Semigroup
 
   interchange-mul-mul-Commutative-Semigroup :
-    (a b c d : type-Commutative-Semigroup) →
+    {a b c d : type-Commutative-Semigroup} →
     mul-Commutative-Semigroup
       ( mul-Commutative-Semigroup a b)
       ( mul-Commutative-Semigroup c d) ＝
@@ -108,34 +108,35 @@ module _
       mul-Commutative-Semigroup
       commutative-mul-Commutative-Semigroup
       associative-mul-Commutative-Semigroup
+      _ _ _ _
 
   right-swap-mul-Commutative-Semigroup :
-    (x y z : type-Commutative-Semigroup) →
+    {x y z : type-Commutative-Semigroup} →
     mul-Commutative-Semigroup
       ( mul-Commutative-Semigroup x y)
       ( z) ＝
     mul-Commutative-Semigroup
       ( mul-Commutative-Semigroup x z)
       ( y)
-  right-swap-mul-Commutative-Semigroup x y z =
-    ( associative-mul-Commutative-Semigroup x y z) ∙
+  right-swap-mul-Commutative-Semigroup =
+    ( associative-mul-Commutative-Semigroup _ _ _) ∙
     ( ap
-      ( mul-Commutative-Semigroup x)
-      ( commutative-mul-Commutative-Semigroup y z)) ∙
-    ( inv (associative-mul-Commutative-Semigroup x z y))
+      ( mul-Commutative-Semigroup _)
+      ( commutative-mul-Commutative-Semigroup _ _)) ∙
+    ( inv (associative-mul-Commutative-Semigroup _ _ _))
 
   left-swap-mul-Commutative-Semigroup :
-    (x y z : type-Commutative-Semigroup) →
+    {x y z : type-Commutative-Semigroup} →
     mul-Commutative-Semigroup
       ( x)
       ( mul-Commutative-Semigroup y z) ＝
     mul-Commutative-Semigroup
       ( y)
       ( mul-Commutative-Semigroup x z)
-  left-swap-mul-Commutative-Semigroup x y z =
-    inv (associative-mul-Commutative-Semigroup x y z) ∙
+  left-swap-mul-Commutative-Semigroup =
+    inv (associative-mul-Commutative-Semigroup _ _ _) ∙
     ap
-      ( mul-Commutative-Semigroup' z)
-      ( commutative-mul-Commutative-Semigroup x y) ∙
-    associative-mul-Commutative-Semigroup y x z
+      ( mul-Commutative-Semigroup' _)
+      ( commutative-mul-Commutative-Semigroup _ _) ∙
+    associative-mul-Commutative-Semigroup _ _ _
 ```
