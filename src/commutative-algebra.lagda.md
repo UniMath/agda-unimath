@@ -7,6 +7,7 @@ module commutative-algebra where
 
 open import commutative-algebra.algebras-commutative-rings public
 open import commutative-algebra.associative-algebras-commutative-rings public
+open import commutative-algebra.associative-subalgebras-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
@@ -77,8 +78,10 @@ open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
 open import commutative-algebra.subalgebras-commutative-rings public
 open import commutative-algebra.subsets-algebras-commutative-rings public
+open import commutative-algebra.subsets-associative-algebras-commutative-rings public
 open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
+open import commutative-algebra.subsets-unital-associative-algebras-commutative-rings public
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-rings public
 open import commutative-algebra.sums-of-finite-families-of-elements-commutative-semirings public
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-rings public
@@ -87,6 +90,7 @@ open import commutative-algebra.transporting-commutative-ring-structure-isomorph
 open import commutative-algebra.trivial-commutative-rings public
 open import commutative-algebra.unital-algebras-commutative-rings public
 open import commutative-algebra.unital-associative-algebras-commutative-rings public
+open import commutative-algebra.unital-associative-subalgebras-commutative-rings public
 open import commutative-algebra.zariski-locale public
 open import commutative-algebra.zariski-topology public
 ```
