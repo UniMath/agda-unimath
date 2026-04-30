@@ -346,4 +346,4 @@ module _
 
 ## See also
 
-- [Sums of finite families of elements in abelian groups](group-theory.products-of-finite-families-of-elements-commutative-monoids.md)
+- [Products of finite families of elements in commutative monoids](group-theory.products-of-finite-families-of-elements-commutative-monoids.md)
