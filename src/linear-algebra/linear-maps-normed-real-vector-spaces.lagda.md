@@ -22,7 +22,7 @@ open import linear-algebra.normed-real-vector-spaces
 ## Idea
 
 A
-{{#concept "linear map" Disambiguation="between two normed real vector spaces" Agda=linear-map-ℝ-Vector-Space}}
+{{#concept "linear map" Disambiguation="between two normed real vector spaces" Agda=linear-map-Normed-ℝ-Vector-Space}}
 between [normed real vector spaces](linear-algebra.normed-real-vector-spaces.md)
 `V` and `W` is a map `f : V → W` such that `f (v₁ + v₂) = f v₁ + f v₂` and
 `f (c * v) ＝ c * f v`.
