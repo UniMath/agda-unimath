@@ -27,7 +27,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import group-theory.sums-of-finite-sequences-of-elements-monoids
+open import group-theory.products-of-finite-sequences-of-elements-monoids
 
 open import lists.finite-sequences
 open import lists.lists
@@ -84,15 +84,15 @@ sum-list-ℕ = fold-list 0 add-ℕ
 ### Sums of natural numbers indexed by a standard finite type
 
 ```agda
-sum-Fin-ℕ : (k : ℕ) → fin-sequence ℕ k → ℕ
-sum-Fin-ℕ = sum-fin-sequence-type-Monoid ℕ-Monoid
+sum-fin-sequence-ℕ : (k : ℕ) → fin-sequence ℕ k → ℕ
+sum-fin-sequence-ℕ = product-fin-sequence-type-Monoid ℕ-Monoid
 ```
 
 ### Sums of natural numbers indexed by a type equipped with a counting
 
 ```agda
 sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
-sum-count-ℕ (k , Fin-k≃A) f = sum-Fin-ℕ k (f ∘ map-equiv Fin-k≃A)
+sum-count-ℕ (k , Fin-k≃A) f = sum-fin-sequence-ℕ k (f ∘ map-equiv Fin-k≃A)
 ```
 
 ### Bounded sums of natural numbers
@@ -134,48 +134,48 @@ strictly-bounded-sum-ℕ (succ-ℕ u) f =
 
 ```agda
 abstract
-  htpy-sum-Fin-ℕ :
+  htpy-sum-fin-sequence-ℕ :
     (k : ℕ) {f g : Fin k → ℕ} (H : f ~ g) →
-    sum-Fin-ℕ k f ＝ sum-Fin-ℕ k g
-  htpy-sum-Fin-ℕ = htpy-sum-fin-sequence-type-Monoid ℕ-Monoid
+    sum-fin-sequence-ℕ k f ＝ sum-fin-sequence-ℕ k g
+  htpy-sum-fin-sequence-ℕ = htpy-product-fin-sequence-type-Monoid ℕ-Monoid
 
   htpy-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) {f g : A → ℕ} (H : f ~ g) →
     sum-count-ℕ e f ＝ sum-count-ℕ e g
-  htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ k (H ·r map-equiv e)
+  htpy-sum-count-ℕ (pair k e) H = htpy-sum-fin-sequence-ℕ k (H ·r map-equiv e)
 ```
 
 ### Summing up the same value `m` times is multiplication by `m`
 
 ```agda
 abstract
-  constant-sum-Fin-ℕ :
-    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) n) ＝ m *ℕ n
-  constant-sum-Fin-ℕ zero-ℕ n = refl
-  constant-sum-Fin-ℕ (succ-ℕ m) n =
-    ap (_+ℕ n) (constant-sum-Fin-ℕ m n)
+  constant-sum-fin-sequence-ℕ :
+    (m n : ℕ) → sum-fin-sequence-ℕ m (const (Fin m) n) ＝ m *ℕ n
+  constant-sum-fin-sequence-ℕ zero-ℕ n = refl
+  constant-sum-fin-sequence-ℕ (succ-ℕ m) n =
+    ap (_+ℕ n) (constant-sum-fin-sequence-ℕ m n)
 
   constant-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) (n : ℕ) →
     sum-count-ℕ e (const A n) ＝ (number-of-elements-count e) *ℕ n
-  constant-sum-count-ℕ (m , e) n = constant-sum-Fin-ℕ m n
+  constant-sum-count-ℕ (m , e) n = constant-sum-fin-sequence-ℕ m n
 ```
 
 ### Each of the summands is less than or equal to the total sum
 
 ```agda
 abstract
-  leq-sum-Fin-ℕ :
-    (k : ℕ) (f : Fin k → ℕ) (x : Fin k) → f x ≤-ℕ sum-Fin-ℕ k f
-  leq-sum-Fin-ℕ (succ-ℕ k) f (inl x) =
+  leq-sum-fin-sequence-ℕ :
+    (k : ℕ) (f : Fin k → ℕ) (x : Fin k) → f x ≤-ℕ sum-fin-sequence-ℕ k f
+  leq-sum-fin-sequence-ℕ (succ-ℕ k) f (inl x) =
     transitive-leq-ℕ
       ( f (inl x))
-      ( sum-Fin-ℕ k (f ∘ inl))
-      ( sum-Fin-ℕ (succ-ℕ k) f)
-      ( leq-add-ℕ (sum-Fin-ℕ k (f ∘ inl)) (f (inr _)))
-      ( leq-sum-Fin-ℕ k (f ∘ inl) x)
-  leq-sum-Fin-ℕ (succ-ℕ k) f (inr x) =
-    leq-add-ℕ' (f (inr x)) (sum-Fin-ℕ k (f ∘ inl))
+      ( sum-fin-sequence-ℕ k (f ∘ inl))
+      ( sum-fin-sequence-ℕ (succ-ℕ k) f)
+      ( leq-add-ℕ (sum-fin-sequence-ℕ k (f ∘ inl)) (f (inr _)))
+      ( leq-sum-fin-sequence-ℕ k (f ∘ inl) x)
+  leq-sum-fin-sequence-ℕ (succ-ℕ k) f (inr x) =
+    leq-add-ℕ' (f (inr x)) (sum-fin-sequence-ℕ k (f ∘ inl))
 ```
 
 ### The difference between a summand and the sum of natural numbers
@@ -184,31 +184,31 @@ abstract
 sum-skip-Fin-ℕ :
   (k : ℕ) (f : Fin k → ℕ) (i : Fin k) → ℕ
 sum-skip-Fin-ℕ (succ-ℕ k) f i =
-  sum-Fin-ℕ k (f ∘ skip-Fin k i)
+  sum-fin-sequence-ℕ k (f ∘ skip-Fin k i)
 
 abstract
   eq-sum-skip-Fin-ℕ :
     (k : ℕ) (f : Fin k → ℕ) (i : Fin k) →
-    sum-skip-Fin-ℕ k f i +ℕ f i ＝ sum-Fin-ℕ k f
+    sum-skip-Fin-ℕ k f i +ℕ f i ＝ sum-fin-sequence-ℕ k f
   eq-sum-skip-Fin-ℕ (succ-ℕ zero-ℕ) f (inr star) =
     refl
   eq-sum-skip-Fin-ℕ (succ-ℕ (succ-ℕ k)) f (inl i) =
     ( right-swap-add-ℕ
-      ( sum-Fin-ℕ k (f ∘ inl ∘ skip-Fin k i))
+      ( sum-fin-sequence-ℕ k (f ∘ inl ∘ skip-Fin k i))
       ( f (inr star))
       ( f (inl i))) ∙
     ( ap (_+ℕ f (inr star)) (eq-sum-skip-Fin-ℕ (succ-ℕ k) (f ∘ inl) i))
   eq-sum-skip-Fin-ℕ (succ-ℕ (succ-ℕ k)) f (inr star) =
     refl
 
-  compute-dist-summand-sum-Fin-ℕ :
+  compute-dist-summand-sum-fin-sequence-ℕ :
     (k : ℕ) (f : Fin k → ℕ) (i : Fin k) →
-    dist-ℕ (f i) (sum-Fin-ℕ k f) ＝ sum-skip-Fin-ℕ k f i
-  compute-dist-summand-sum-Fin-ℕ k f i =
+    dist-ℕ (f i) (sum-fin-sequence-ℕ k f) ＝ sum-skip-Fin-ℕ k f i
+  compute-dist-summand-sum-fin-sequence-ℕ k f i =
     inv
       ( rewrite-left-add-dist-ℕ
         ( sum-skip-Fin-ℕ k f i)
         ( f i)
-        ( sum-Fin-ℕ k f)
+        ( sum-fin-sequence-ℕ k f)
         ( eq-sum-skip-Fin-ℕ k f i))
 ```
