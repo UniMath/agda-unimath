@@ -112,10 +112,10 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  multiple-succ-Ring :
+  successor-law-multiple-Ring :
     (n : ℕ) (x : type-Ring R) →
     multiple-Ring R (succ-ℕ n) x ＝ add-Ring R (multiple-Ring R n x) x
-  multiple-succ-Ring = multiple-succ-Ab (ab-Ring R)
+  successor-law-multiple-Ring = successor-law-multiple-Ab (ab-Ring R)
 ```
 
 ### `(n + 1) · x ＝ x + n · x`
@@ -125,10 +125,10 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  multiple-succ-Ring' :
+  successor-law-multiple-Ring' :
     (n : ℕ) (x : type-Ring R) →
     multiple-Ring R (succ-ℕ n) x ＝ add-Ring R x (multiple-Ring R n x)
-  multiple-succ-Ring' = multiple-succ-Ab' (ab-Ring R)
+  successor-law-multiple-Ring' = successor-law-multiple-Ab' (ab-Ring R)
 ```
 
 ### Multiples by sums of natural numbers are products of multiples
