@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-constant-real-maps-on-proper-closed-intervals-real-numbers where
+module real-analysis.differentiability-constant-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.constant-maps
@@ -18,6 +16,8 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -41,7 +41,7 @@ Given a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` on the [real numbers](real-numbers.dedekind-real-numbers.md), any
 [constant function](foundation.constant-maps.md) on `[a, b]`, `x ↦ c`, is
-[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
+[differentiable](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
 with derivative the constant [zero](real-numbers.zero-real-numbers.md) function.
 
 ## Proof

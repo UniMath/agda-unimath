@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers where
+module real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>

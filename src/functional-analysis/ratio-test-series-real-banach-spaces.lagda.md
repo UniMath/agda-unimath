@@ -7,8 +7,6 @@ module functional-analysis.ratio-test-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.ratio-test-series-real-numbers
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-transport
@@ -26,6 +24,8 @@ open import functional-analysis.series-real-banach-spaces
 
 open import logic.functoriality-existential-quantification
 
+open import real-analysis.ratio-test-series-real-numbers
+
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.multiplication-real-numbers
@@ -39,7 +39,7 @@ open import real-numbers.strict-inequality-nonnegative-real-numbers
 
 To prove that a [series](functional-analysis.series-real-banach-spaces.md)
 `∑ aₙ` in a [real Banach space](functional-analysis.real-banach-spaces.md)
-[converges](analysis.series-real-numbers.md), it is sufficient to show that
+[converges](real-analysis.series-real-numbers.md), it is sufficient to show that
 [there exists](foundation.existential-quantification.md) a
 [nonnegative](real-numbers.nonnegative-real-numbers.md) real number `r`
 [less than](real-numbers.strict-inequality-real-numbers.md) 1 such that for all
@@ -113,4 +113,4 @@ module _
 
 ## See also
 
-- [The ratio test for series of real numbers](analysis.ratio-test-series-real-numbers.md)
+- [The ratio test for series of real numbers](real-analysis.ratio-test-series-real-numbers.md)

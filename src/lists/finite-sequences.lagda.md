@@ -116,6 +116,17 @@ module _
 
 ## Properties
 
+### The coordinates maps
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ)
+  where
+
+  elem-at-fin-sequence : (i : Fin n) → fin-sequence A n → A
+  elem-at-fin-sequence i v = v i
+```
+
 ### The type of finite sequences of elements in a truncated type is truncated
 
 ```agda

@@ -1,17 +1,12 @@
 # The ratio test for series in the real numbers
 
 ```agda
-module analysis.ratio-test-series-real-numbers where
+module real-analysis.ratio-test-series-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.absolute-convergence-series-real-numbers
-open import analysis.comparison-test-series-real-numbers
-open import analysis.convergent-series-real-numbers
-open import analysis.series-real-numbers
-
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -26,6 +21,11 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.absolute-convergence-series-real-numbers
+open import real-analysis.comparison-test-series-real-numbers
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.series-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.geometric-sequences-real-numbers
@@ -43,10 +43,10 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-To prove that a [series](analysis.series-real-numbers.md) `∑ aₙ` of
+To prove that a [series](real-analysis.series-real-numbers.md) `∑ aₙ` of
 [real numbers](real-numbers.dedekind-real-numbers.md)
-[converges](analysis.convergent-series-real-numbers.md), it is sufficient to
-show that [there exists](foundation.existential-quantification.md) a
+[converges](real-analysis.convergent-series-real-numbers.md), it is sufficient
+to show that [there exists](foundation.existential-quantification.md) a
 [nonnegative](real-numbers.nonnegative-real-numbers.md) real number `r`
 [less than](real-numbers.strict-inequality-real-numbers.md) 1 such that for all
 `n`, `|aₙ₊₁| ≤ r|aₙ|`. This condition is known as the

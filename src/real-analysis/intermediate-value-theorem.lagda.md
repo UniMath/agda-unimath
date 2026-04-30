@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.intermediate-value-theorem where
+module real-analysis.intermediate-value-theorem where
 ```
 
 <details><summary>Imports</summary>
@@ -73,7 +73,7 @@ states that for a
 $n$Lab states that this theorem is known to be invalid in constructive contexts.
 
 This contrasts with the
-[constructive intermediate value theorem](analysis.constructive-intermediate-value-theorem.md),
+[constructive intermediate value theorem](real-analysis.constructive-intermediate-value-theorem.md),
 which states merely that for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `ε`,
 there exists a `c` with `a ≤ c ≤ b` with `|f c| ≤ ε`.
@@ -621,7 +621,7 @@ module _
 
 ## See also
 
-- [The constructive intermediate value theorem](analysis.constructive-intermediate-value-theorem.md)
+- [The constructive intermediate value theorem](real-analysis.constructive-intermediate-value-theorem.md)
 
 ## External links
 
