@@ -12,11 +12,14 @@ open import lists.dependent-sequences public
 open import lists.equivalence-relations-tuples public
 open import lists.equivalence-tuples-finite-sequences public
 open import lists.finite-sequences public
+open import lists.finite-sequences-of-types public
 open import lists.flattening-lists public
+open import lists.focus-at-index-finite-sequences public
 open import lists.functoriality-finite-sequences public
 open import lists.functoriality-lists public
 open import lists.functoriality-tuples public
 open import lists.functoriality-tuples-finite-sequences public
+open import lists.insert-at-index-finite-sequences public
 open import lists.lists public
 open import lists.lists-discrete-types public
 open import lists.pairs-of-successive-elements-finite-sequences public
@@ -25,6 +28,7 @@ open import lists.permutation-lists public
 open import lists.permutation-tuples public
 open import lists.predicates-on-lists public
 open import lists.quicksort-lists public
+open import lists.remove-at-index-finite-sequences public
 open import lists.repetitions-sequences public
 open import lists.reversing-lists public
 open import lists.sequences public
