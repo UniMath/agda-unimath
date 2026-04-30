@@ -193,20 +193,21 @@ module _
 ### Splitting sums of `n + m` elements into a sum of `n` elements and a sum of `m` elements
 
 ```agda
-split-sum-fin-sequence-type-Monoid :
-  {l : Level} (M : Monoid l)
-  (n m : ℕ) (f : fin-sequence-type-Monoid M (n +ℕ m)) →
-  sum-fin-sequence-type-Monoid M (n +ℕ m) f ＝
-  mul-Monoid M
-    ( sum-fin-sequence-type-Monoid M n (f ∘ inl-coproduct-Fin n m))
-    ( sum-fin-sequence-type-Monoid M m (f ∘ inr-coproduct-Fin n m))
-split-sum-fin-sequence-type-Monoid M n zero-ℕ f =
-  inv (right-unit-law-mul-Monoid M (sum-fin-sequence-type-Monoid M n f))
-split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
-  ( ap
-    ( mul-Monoid' M (f (inr star)))
-    ( split-sum-fin-sequence-type-Monoid M n m (f ∘ inl))) ∙
-  ( associative-mul-Monoid M _ _ _)
+abstract
+  split-sum-fin-sequence-type-Monoid :
+    {l : Level} (M : Monoid l)
+    (n m : ℕ) (f : fin-sequence-type-Monoid M (n +ℕ m)) →
+    sum-fin-sequence-type-Monoid M (n +ℕ m) f ＝
+    mul-Monoid M
+      ( sum-fin-sequence-type-Monoid M n (f ∘ inl-coproduct-Fin n m))
+      ( sum-fin-sequence-type-Monoid M m (f ∘ inr-coproduct-Fin n m))
+  split-sum-fin-sequence-type-Monoid M n zero-ℕ f =
+    inv (right-unit-law-mul-Monoid M (sum-fin-sequence-type-Monoid M n f))
+  split-sum-fin-sequence-type-Monoid M n (succ-ℕ m) f =
+    ( ap
+      ( mul-Monoid' M (f (inr star)))
+      ( split-sum-fin-sequence-type-Monoid M n m (f ∘ inl))) ∙
+    ( associative-mul-Monoid M _ _ _)
 ```
 
 ### Constant sums are powers

@@ -206,6 +206,29 @@ module _
         ( hom-ab-linear-map-left-module-Ring R M N f)
 ```
 
+### A linear map `f` maps `x - y` to `f x - f y`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1)
+  (M : left-module-Ring l2 R) (N : left-module-Ring l3 R)
+  where
+
+  abstract
+    map-diff-linear-map-left-module-Ring :
+      (f : linear-map-left-module-Ring R M N) →
+      {x y : type-left-module-Ring R M} →
+      map-linear-map-left-module-Ring R M N f (diff-left-module-Ring R M x y) ＝
+      diff-left-module-Ring R N
+        ( map-linear-map-left-module-Ring R M N f x)
+        ( map-linear-map-left-module-Ring R M N f y)
+    map-diff-linear-map-left-module-Ring f =
+      preserves-right-subtraction-hom-Ab
+        ( ab-left-module-Ring R M)
+        ( ab-left-module-Ring R N)
+        ( hom-ab-linear-map-left-module-Ring R M N f)
+```
+
 ### The composition of linear maps is linear
 
 ```agda

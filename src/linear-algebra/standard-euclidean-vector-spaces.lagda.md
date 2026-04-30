@@ -14,8 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.sets
 open import foundation.universe-levels
 
-open import linear-algebra.dependent-products-left-modules-commutative-rings
-open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.function-real-vector-spaces
 open import linear-algebra.real-vector-spaces
 
 open import real-numbers.dedekind-real-numbers
@@ -38,12 +37,7 @@ The
 
 ```agda
 vector-space-ℝ-Fin : ℕ → (l : Level) → ℝ-Vector-Space l (lsuc l)
-vector-space-ℝ-Fin n l =
-  Π-left-module-Commutative-Ring
-    ( commutative-ring-ℝ l)
-    ( Fin n)
-    ( λ _ →
-      left-module-commutative-ring-Commutative-Ring (commutative-ring-ℝ l))
+vector-space-ℝ-Fin n l = vector-space-function-ℝ l (Fin n)
 
 set-ℝ-Fin : ℕ → (l : Level) → Set (lsuc l)
 set-ℝ-Fin n l = set-ℝ-Vector-Space (vector-space-ℝ-Fin n l)

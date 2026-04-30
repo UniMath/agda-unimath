@@ -9,7 +9,9 @@ module linear-algebra.left-modules-rings where
 ```agda
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -27,6 +29,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-semigroups
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.opposite-rings
 open import ring-theory.rings
 ```
@@ -90,6 +93,11 @@ module _
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
 
+  ap-add-left-module-Ring :
+    {x y x' y' : type-left-module-Ring} →
+    x ＝ x' → y ＝ y' → add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring = ap-add-Ab ab-left-module-Ring
+
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
 
@@ -101,6 +109,10 @@ module _
 
   neg-left-module-Ring : type-left-module-Ring → type-left-module-Ring
   neg-left-module-Ring = neg-Ab ab-left-module-Ring
+
+  diff-left-module-Ring :
+    type-left-module-Ring → type-left-module-Ring → type-left-module-Ring
+  diff-left-module-Ring = right-subtraction-Ab ab-left-module-Ring
 
   endomorphism-ring-ab-left-module-Ring : Ring l2
   endomorphism-ring-ab-left-module-Ring =
@@ -556,6 +568,49 @@ module _
   left-module-hom-Ring : left-module-Ring l2 R
   left-module-hom-Ring =
     left-module-hom-left-module-Ring R S h (left-module-ring-Ring S)
+```
+
+### Scalar multiplication in a module over `R` by an invertible element of `R` is an equivalence
+
+```agda
+abstract
+  is-section-div-invertible-element-left-module-Ring :
+    {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R) →
+    {r : type-Ring R} (inv-r : is-invertible-element-Ring R r) →
+    (x : type-left-module-Ring R M) →
+    mul-left-module-Ring R M
+      ( r)
+      (mul-left-module-Ring R M (inv-is-invertible-element-Ring R inv-r) x) ＝
+    x
+  is-section-div-invertible-element-left-module-Ring R M {r} (s , rs=1 , _) x =
+    ( inv (associative-mul-left-module-Ring R M r s x)) ∙
+    ( ap-binary (mul-left-module-Ring R M) rs=1 refl) ∙
+    ( left-unit-law-mul-left-module-Ring R M x)
+
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  {r : type-Ring R}
+  (is-invertible-r@(s , rs=1 , sr=1) : is-invertible-element-Ring R r)
+  where
+
+  is-equiv-mul-invertible-element-left-module-Ring :
+    is-equiv (mul-left-module-Ring R M r)
+  is-equiv-mul-invertible-element-left-module-Ring =
+    is-equiv-is-invertible
+      ( mul-left-module-Ring R M s)
+      ( is-section-div-invertible-element-left-module-Ring R M is-invertible-r)
+      ( is-section-div-invertible-element-left-module-Ring R M
+        ( is-invertible-element-inv-is-invertible-element-Ring
+          ( R)
+          ( is-invertible-r)))
+
+  equiv-mul-invertible-element-left-module-Ring :
+    Aut (type-left-module-Ring R M)
+  equiv-mul-invertible-element-left-module-Ring =
+    ( mul-left-module-Ring R M r ,
+      is-equiv-mul-invertible-element-left-module-Ring)
 ```
 
 ## See also
