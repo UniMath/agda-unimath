@@ -7,6 +7,7 @@ module order-theory.closure-operators-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions

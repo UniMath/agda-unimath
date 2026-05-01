@@ -12,6 +12,7 @@ module foundation.set-truncations where
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-coproduct-types
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.mere-equality

@@ -15,6 +15,7 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types

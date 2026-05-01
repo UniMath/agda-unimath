@@ -8,6 +8,7 @@ module order-theory.similarity-of-elements-large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions

@@ -12,6 +12,7 @@ open import foundation.binary-relations
 open import foundation.conjunction
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
