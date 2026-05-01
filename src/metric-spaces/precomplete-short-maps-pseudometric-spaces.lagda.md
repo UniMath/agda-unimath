@@ -565,7 +565,7 @@ module _
         ( u)))
 ```
 
-#### The precomplete restriction of a short map from a Cauchy pseudocompletion in a metric space
+#### The precomplete restriction of a short map from a Cauchy pseudocompletion into a metric space
 
 ```agda
 module _
