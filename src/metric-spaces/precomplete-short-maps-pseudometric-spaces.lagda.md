@@ -41,7 +41,7 @@ open import orthogonal-factorization-systems.extensions-maps
 ## Idea
 
 A [short map](metric-spaces.short-maps-pseudometric-spaces.md) `f : P → M` from
-a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` in a
+a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` into a
 [metric space](metric-spaces.metric-spaces.md) `M` is called
 {{#concept "precomplete" Disambiguation="from a pseudometric space to a metric space" Agda=is-precomplete-short-map-Pseudometric-Space}}
 if all
