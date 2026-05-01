@@ -12,6 +12,7 @@ open import foundation-core.raising-universe-levels public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels

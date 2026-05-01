@@ -9,6 +9,7 @@ module foundation-core.functoriality-dependent-pair-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

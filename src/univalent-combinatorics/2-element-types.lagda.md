@@ -23,6 +23,7 @@ open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types

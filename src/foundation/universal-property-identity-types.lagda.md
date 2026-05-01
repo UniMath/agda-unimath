@@ -13,6 +13,7 @@ open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types

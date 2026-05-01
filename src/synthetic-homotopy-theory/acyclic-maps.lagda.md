@@ -22,6 +22,7 @@ open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.epimorphisms
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom

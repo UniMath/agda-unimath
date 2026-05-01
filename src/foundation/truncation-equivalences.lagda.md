@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-truncated-types
 open import foundation.equivalences-arrows
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-truncation
 open import foundation.identity-types

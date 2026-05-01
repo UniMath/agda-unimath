@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom

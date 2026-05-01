@@ -14,6 +14,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
+open import foundation.subuniverse-of-contractible-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

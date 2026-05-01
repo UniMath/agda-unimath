@@ -9,6 +9,7 @@ module foundation.universal-property-family-of-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom

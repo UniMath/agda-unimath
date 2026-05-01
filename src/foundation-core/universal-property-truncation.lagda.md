@@ -9,6 +9,7 @@ module foundation-core.universal-property-truncation where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-truncated-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels

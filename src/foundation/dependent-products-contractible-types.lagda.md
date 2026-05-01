@@ -7,6 +7,7 @@ module foundation.dependent-products-contractible-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.implicit-function-types
@@ -41,8 +42,9 @@ abstract
   is-contr-implicit-Π :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-contr (B x)) → is-contr ({x : A} → B x)
-  is-contr-implicit-Π H =
-    is-contr-equiv _ equiv-explicit-implicit-Π (is-contr-Π H)
+  pr1 (is-contr-implicit-Π H) = center (H _)
+  pr2 (is-contr-implicit-Π H) f =
+    ap implicit-explicit-Π (eq-htpy (λ x → contraction (H x) f))
 ```
 
 ### The type of functions into a contractible type is contractible
@@ -52,48 +54,4 @@ is-contr-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-contr B → is-contr (A → B)
 is-contr-function-type is-contr-B = is-contr-Π (λ _ → is-contr-B)
-```
-
-### The type of equivalences between contractible types is contractible
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-contr-equiv-is-contr :
-    is-contr A → is-contr B → is-contr (A ≃ B)
-  is-contr-equiv-is-contr (pair a α) (pair b β) =
-    is-contr-Σ
-      ( is-contr-function-type (pair b β))
-      ( λ x → b)
-      ( is-contr-product
-        ( is-contr-Σ
-          ( is-contr-function-type (pair a α))
-          ( λ y → a)
-          ( is-contr-Π (is-prop-is-contr (pair b β) b)))
-        ( is-contr-Σ
-          ( is-contr-function-type (pair a α))
-          ( λ y → a)
-          ( is-contr-Π (is-prop-is-contr (pair a α) a))))
-```
-
-### Being contractible is a proposition
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  abstract
-    is-contr-is-contr : is-contr A → is-contr (is-contr A)
-    is-contr-is-contr (pair a α) =
-      is-contr-Σ
-        ( pair a α)
-        ( a)
-        ( is-contr-Π (is-prop-is-contr (pair a α) a))
-
-  abstract
-    is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)
-    is-property-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
 ```

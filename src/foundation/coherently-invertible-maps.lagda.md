@@ -12,6 +12,7 @@ open import foundation-core.coherently-invertible-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.type-arithmetic-dependent-pair-types

@@ -22,6 +22,7 @@ open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
 open import foundation.equivalences-arrows
+open import foundation.equivalences-contractible-types
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality

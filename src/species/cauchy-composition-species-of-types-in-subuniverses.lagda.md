@@ -14,6 +14,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
@@ -25,6 +26,7 @@ open import foundation.raising-universe-levels-unit-type
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
+open import foundation.subuniverse-of-contractible-types
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types

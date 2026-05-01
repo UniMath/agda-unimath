@@ -26,6 +26,7 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-maybe
 open import foundation.function-types
 open import foundation.homotopies

@@ -12,6 +12,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalences-contractible-types
 open import foundation.exclusive-sum
 open import foundation.functoriality-coproduct-types
 open import foundation.propositional-truncations

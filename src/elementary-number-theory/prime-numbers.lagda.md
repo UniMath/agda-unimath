@@ -30,6 +30,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type

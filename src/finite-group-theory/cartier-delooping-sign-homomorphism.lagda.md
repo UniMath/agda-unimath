@@ -24,6 +24,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.negation

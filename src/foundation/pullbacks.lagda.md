@@ -18,6 +18,7 @@ open import foundation.dependent-sums-pullbacks
 open import foundation.descent-equivalences
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.standard-pullbacks

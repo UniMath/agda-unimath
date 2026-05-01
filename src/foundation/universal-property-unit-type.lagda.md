@@ -8,6 +8,7 @@ module foundation.universal-property-unit-type where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.unit-type
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-equivalences

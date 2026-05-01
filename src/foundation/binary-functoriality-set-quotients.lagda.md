@@ -12,6 +12,7 @@ module foundation.binary-functoriality-set-quotients where
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.equivalences-contractible-types
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom

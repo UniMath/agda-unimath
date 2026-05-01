@@ -15,6 +15,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types

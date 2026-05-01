@@ -9,6 +9,7 @@ module foundation.dependent-products-propositions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
+open import foundation.subuniverse-of-contractible-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.subtypes
 open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types

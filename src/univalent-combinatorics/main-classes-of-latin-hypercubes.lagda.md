@@ -18,6 +18,7 @@ open import foundation.inhabited-types
 open import foundation.mere-equivalences
 open import foundation.products-unordered-tuples-of-types
 open import foundation.set-truncations
+open import foundation.subuniverse-of-contractible-types
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 

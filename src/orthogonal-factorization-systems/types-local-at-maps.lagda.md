@@ -19,6 +19,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.families-of-equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality

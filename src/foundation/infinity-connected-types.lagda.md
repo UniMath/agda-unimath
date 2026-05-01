@@ -10,6 +10,7 @@ module foundation.infinity-connected-types where
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-truncation
 open import foundation.truncation-levels
 open import foundation.truncations

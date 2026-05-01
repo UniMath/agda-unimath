@@ -8,6 +8,7 @@ module foundation-core.propositions where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality-axiom
 open import foundation.universe-levels
 

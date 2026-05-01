@@ -76,59 +76,6 @@ module _
       ap r (contraction H (i x)) ∙ (is-retraction-r x)
 ```
 
-### Contractible types are closed under equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : UU l2)
-  where
-
-  abstract
-    is-contr-is-equiv :
-      (f : A → B) → is-equiv f → is-contr B → is-contr A
-    is-contr-is-equiv f is-equiv-f =
-      is-contr-retract-of B (f , retraction-is-equiv is-equiv-f)
-
-  abstract
-    is-contr-equiv : A ≃ B → is-contr B → is-contr A
-    is-contr-equiv (e , is-equiv-e) = is-contr-is-equiv e is-equiv-e
-
-module _
-  {l1 l2 : Level} (A : UU l1) {B : UU l2}
-  where
-
-  abstract
-    is-contr-is-equiv' :
-      (f : A → B) → is-equiv f → is-contr A → is-contr B
-    is-contr-is-equiv' f is-equiv-f =
-      is-contr-is-equiv A
-        ( map-inv-is-equiv is-equiv-f)
-        ( is-equiv-map-inv-is-equiv is-equiv-f)
-
-  abstract
-    is-contr-equiv' : (e : A ≃ B) → is-contr A → is-contr B
-    is-contr-equiv' (e , is-equiv-e) = is-contr-is-equiv' e is-equiv-e
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    is-equiv-is-contr :
-      (f : A → B) → is-contr A → is-contr B → is-equiv f
-    is-equiv-is-contr f is-contr-A is-contr-B =
-      is-equiv-is-invertible
-        ( λ y → center is-contr-A)
-        ( λ y → eq-is-contr is-contr-B)
-        ( contraction is-contr-A)
-
-  equiv-is-contr : is-contr A → is-contr B → A ≃ B
-  pr1 (equiv-is-contr is-contr-A is-contr-B) a =
-    center is-contr-B
-  pr2 (equiv-is-contr is-contr-A is-contr-B) =
-    is-equiv-is-contr _ is-contr-A is-contr-B
-```
-
 ### Contractibility of cartesian product types
 
 Given two types `A` and `B`, the following are equivalent:
@@ -252,3 +199,9 @@ is-prop-is-contr :
 pr1 (is-prop-is-contr H x y) = eq-is-contr H
 pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
 ```
+
+## See also
+
+- [Dependent products of contractible types](foundation.dependent-products-contractible-types.md)
+- [Equivalences of contractible types](foundation.equivalences-contractible-types.md)
+- [The subuniverse of contractible types](foundation.subuniverse-of-contractible-types.md)

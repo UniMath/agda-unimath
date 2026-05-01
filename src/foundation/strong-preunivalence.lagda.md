@@ -14,6 +14,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.preunivalence

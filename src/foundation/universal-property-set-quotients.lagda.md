@@ -16,6 +16,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.effective-maps-equivalence-relations
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
+open import foundation.equivalences-contractible-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom

@@ -17,6 +17,7 @@ open import foundation.dependent-products-propositions
 open import foundation.dependent-products-truncated-types
 open import foundation.double-negation-dense-equality
 open import foundation.equality-coproduct-types
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-coproduct-types
 open import foundation.inhabited-types
 open import foundation.irrefutable-equality

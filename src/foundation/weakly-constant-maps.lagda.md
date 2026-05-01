@@ -9,6 +9,7 @@ module foundation.weakly-constant-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.fixed-points-endofunctions
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types

@@ -20,6 +20,7 @@ open import foundation.discrete-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality

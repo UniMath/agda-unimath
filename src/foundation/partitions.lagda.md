@@ -15,6 +15,7 @@ open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
 open import foundation.functoriality-propositional-truncation

@@ -24,6 +24,7 @@ open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-maybe
 open import foundation.fibers-of-maps
 open import foundation.function-types

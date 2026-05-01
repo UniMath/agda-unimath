@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalences-contractible-types
 open import foundation.evaluation-functions
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
