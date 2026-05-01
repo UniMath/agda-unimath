@@ -431,7 +431,7 @@ module _
         ( u))
 ```
 
-### Short maps from the Cauchy pseudocompletions restrict to precomplete short maps
+### Short maps from Cauchy pseudocompletions restrict to precomplete short maps
 
 #### Values of short maps from cauchy pseudocompletions into metric spaces are limits
 
