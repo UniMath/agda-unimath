@@ -1,4 +1,4 @@
-# Universal property of Cauchy pseudocompletions of pseudometric spaces and short maps into metric spaces
+# The universal property of Cauchy pseudocompletions of pseudometric spaces and short maps into metric spaces
 
 ```agda
 module metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces where
