@@ -21,7 +21,7 @@ The theorems are ordered alphabetically, omitting leading definite articles
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import analysis.absolute-convergence-series-real-numbers using
+open import real-analysis.absolute-convergence-series-real-numbers using
   ( is-convergent-is-absolutely-convergent-series-ℝ)
 open import functional-analysis.absolute-convergence-series-real-banach-spaces using
   ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
@@ -152,9 +152,9 @@ open import group-theory.quotient-groups using
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import analysis.intermediate-value-theorem using
+open import real-analysis.intermediate-value-theorem using
   ( intermediate-value-theorem-ℝ)
-open import analysis.constructive-intermediate-value-theorem using
+open import real-analysis.constructive-intermediate-value-theorem using
   ( constructive-intermediate-value-theorem-ℝ)
 ```
 
@@ -195,7 +195,7 @@ open import foundation.lawveres-fixed-point-theorem using
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+open import real-analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
   ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
     is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
 ```
