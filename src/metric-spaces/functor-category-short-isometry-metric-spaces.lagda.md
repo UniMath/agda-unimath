@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-isometries
 open import metric-spaces.precategory-of-metric-spaces-and-short-maps
 open import metric-spaces.short-maps-metric-spaces

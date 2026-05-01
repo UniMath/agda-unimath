@@ -302,15 +302,15 @@ open import foundation.booleans using
   ; ind-bool)
 
 -- (a)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( neg-bool)
 
 -- (b)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( and-bool)
 
 -- (c)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( or-bool)
 ```
 
@@ -556,8 +556,7 @@ open import foundation.action-on-identifications-dependent-functions using
 ```agda
 open import foundation.torsorial-type-families using
   ( is-torsorial-Id)
-open import foundation.contractible-types
-open import foundation.dependent-products-contractible-types using
+open import foundation.contractible-types using
   ( eq-is-contr')
 
 _ : {l : Level} {A : UU l} (a : A) (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y
@@ -936,7 +935,7 @@ _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 
 -- (c)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
 _ : ¬ (false ＝ true)

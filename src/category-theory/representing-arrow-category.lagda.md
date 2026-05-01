@@ -11,13 +11,13 @@ open import category-theory.categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
+open import foundation.boolean-operations
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.inequality-booleans
 open import foundation.logical-equivalences
-open import foundation.logical-operations-booleans
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes

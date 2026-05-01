@@ -9,6 +9,7 @@ module foundation.infinity-connected-types where
 ```agda
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.functoriality-truncation
 open import foundation.truncation-levels
 open import foundation.truncations

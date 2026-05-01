@@ -11,9 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
