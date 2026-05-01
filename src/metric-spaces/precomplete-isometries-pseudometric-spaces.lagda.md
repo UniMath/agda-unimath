@@ -56,7 +56,7 @@ open import orthogonal-factorization-systems.extensions-maps
 ## Idea
 
 An [isometry](metric-spaces.isometries-pseudometric-spaces.md) `f : P → M` from
-a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` in a
+a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` into a
 [metric space](metric-spaces.metric-spaces.md) `M` is called
 {{#concept "precomplete" Disambiguation="from a pseudometric space to a metric space" Agda=is-precomplete-isometry-Pseudometric-Space}}
 if all
@@ -225,7 +225,7 @@ module _
     eq-htpy-map-precomplete-isometry-Pseudometric-Space ∘ inv-htpy
 ```
 
-### The precomplete short map induced by a precompelete isometry
+### The precomplete short map induced by a precomplete isometry
 
 ```agda
 module _
@@ -566,7 +566,7 @@ module _
         ( g))
 ```
 
-#### The precomplete restriction of a short map from a Cauchy pseudocompletion in a metric space
+#### The precomplete restriction of an isometry from a Cauchy pseudocompletion in a metric space
 
 ```agda
 module _
