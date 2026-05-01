@@ -7,9 +7,6 @@ module functional-analysis.absolute-convergence-series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-numbers
-open import analysis.series-real-numbers
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -34,6 +31,9 @@ open import metric-spaces.cauchy-sequences-metric-spaces
 
 open import order-theory.large-posets
 
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.series-real-numbers
+
 open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
@@ -50,7 +50,7 @@ A [series](functional-analysis.series-real-banach-spaces.md) `Σ aₙ` in a
 [real Banach space](functional-analysis.real-banach-spaces.md) is said to
 {{#concept "absolutely converge" WDID=Q332465 WD="absolute convergence" Agda=is-absolutely-convergent-prop-series-ℝ-Banach-Space Disambiguation="series in a real Banach space"}}
 if the series of norms `Σ ∥aₙ∥` is a
-[convergent series](analysis.convergent-series-real-numbers.md) of
+[convergent series](real-analysis.convergent-series-real-numbers.md) of
 [real numbers](real-numbers.dedekind-real-numbers.md).
 
 ## Definition
@@ -195,7 +195,7 @@ module _
 
 ## See also
 
-- [Absolute convergence of series of real numbers](analysis.absolute-convergence-series-real-numbers.md)
+- [Absolute convergence of series of real numbers](real-analysis.absolute-convergence-series-real-numbers.md)
 
 ## External links
 

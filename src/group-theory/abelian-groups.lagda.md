@@ -364,6 +364,9 @@ module _
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
 
+  right-subtraction-Ab' : type-Ab A → type-Ab A → type-Ab A
+  right-subtraction-Ab' y x = right-subtraction-Ab x y
+
   ap-right-subtraction-Ab :
     {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →
     right-subtraction-Ab x y ＝ right-subtraction-Ab x' y'
