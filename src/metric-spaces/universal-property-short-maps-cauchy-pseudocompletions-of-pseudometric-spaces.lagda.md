@@ -138,7 +138,7 @@ module _
       is-prop-is-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### Extensions of short maps along the unit map of Cauchy pseudocompletions
+### Extensions of short maps along the unit map of a Cauchy pseudocompletion
 
 ```agda
 module _
