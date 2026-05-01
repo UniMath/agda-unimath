@@ -12,10 +12,12 @@ open import foundation-core.truncated-types public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equivalences
 open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
@@ -39,7 +41,7 @@ is-torsorial-equiv-Truncated-Type :
 is-torsorial-equiv-Truncated-Type A =
   is-torsorial-Eq-subtype
     ( is-torsorial-equiv (type-Truncated-Type A))
-    ( is-prop-is-trunc _)
+    ( is-property-is-trunc _)
     ( type-Truncated-Type A)
     ( id-equiv)
     ( is-trunc-type-Truncated-Type A)
@@ -106,8 +108,8 @@ module _
   equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
   equiv-is-trunc-equiv e =
     equiv-iff-is-prop
-      ( is-prop-is-trunc k A)
-      ( is-prop-is-trunc k B)
+      ( is-property-is-trunc k A)
+      ( is-property-is-trunc k B)
       ( is-trunc-equiv' k A e)
       ( is-trunc-equiv k B e)
 ```

@@ -10,6 +10,7 @@ module foundation.images-subtypes where
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.full-subtypes
 open import foundation.functoriality-propositional-truncation

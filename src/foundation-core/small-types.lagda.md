@@ -9,13 +9,14 @@ module foundation-core.small-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -31,6 +32,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.retractions
 open import foundation-core.sections
 ```

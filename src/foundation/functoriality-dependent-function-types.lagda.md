@@ -11,6 +11,7 @@ open import foundation-core.functoriality-dependent-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality

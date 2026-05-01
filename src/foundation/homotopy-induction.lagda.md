@@ -8,9 +8,10 @@ module foundation.homotopy-induction where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-systems
-open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 

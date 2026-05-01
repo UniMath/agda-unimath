@@ -11,8 +11,10 @@ module foundation.relaxed-sigma-decompositions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
 open import foundation.transposition-identifications-along-equivalences

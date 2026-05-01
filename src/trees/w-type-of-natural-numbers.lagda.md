@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types

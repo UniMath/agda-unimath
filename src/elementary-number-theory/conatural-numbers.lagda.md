@@ -14,7 +14,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.injective-maps
-open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.retractions
 open import foundation.sections
@@ -22,6 +21,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
+open import foundation-core.maybe
 ```
 
 </details>

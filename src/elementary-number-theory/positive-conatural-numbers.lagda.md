@@ -15,12 +15,12 @@ open import elementary-number-theory.zero-conatural-numbers
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.maybe
 open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.identity-types
+open import foundation-core.maybe
 ```
 
 </details>

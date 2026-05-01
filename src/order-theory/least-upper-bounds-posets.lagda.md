@@ -10,11 +10,10 @@ module order-theory.least-upper-bounds-posets where
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.dependent-pair-types
-open import foundation.function-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
 
