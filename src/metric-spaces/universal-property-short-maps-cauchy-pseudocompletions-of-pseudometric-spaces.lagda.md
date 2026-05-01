@@ -85,7 +85,7 @@ along `κ`.
 
 ## Definitions
 
-### The property of being the extension of a short map along the unit of Cauchy pseudocompletions
+### The property of being an extension of a short map along the unit of Cauchy pseudocompletions
 
 ```agda
 module _
