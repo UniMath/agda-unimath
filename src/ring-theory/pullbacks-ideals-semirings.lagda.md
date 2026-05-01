@@ -41,7 +41,7 @@ words, it is the ideal `f＊K` of `R` consisting of the elements
 
 ## Definitions
 
-### The pullback of a ideal along a semiring homomorphism
+### The pullback of an ideal along a semiring homomorphism
 
 ```agda
 module _
