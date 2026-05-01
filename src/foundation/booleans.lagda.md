@@ -164,6 +164,15 @@ decidable-prop-bool true = unit-Decidable-Prop
 decidable-prop-bool false = empty-Decidable-Prop
 ```
 
+### Decidable types define booleans
+
+```agda
+map-bool-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → bool
+map-bool-is-decidable (inl _) = true
+map-bool-is-decidable (inr _) = false
+```
+
 ## Properties
 
 ### The booleans are a set
