@@ -9,9 +9,6 @@ module real-numbers.geometric-sequences-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-numbers
-open import analysis.series-real-numbers
-
 open import commutative-algebra.geometric-sequences-commutative-rings
 
 open import elementary-number-theory.natural-numbers
@@ -28,6 +25,9 @@ open import lists.sequences
 
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
+
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.series-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.apartness-real-numbers
