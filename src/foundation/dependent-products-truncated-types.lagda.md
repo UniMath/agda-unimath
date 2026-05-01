@@ -14,7 +14,6 @@ open import foundation.dependent-products-contractible-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
-open import foundation.subuniverse-of-contractible-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -127,22 +126,6 @@ hom-Truncated-Type :
   (B : Truncated-Type l2 k) → Truncated-Type (l1 ⊔ l2) k
 pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
 pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
-```
-
-### Being truncated is a property
-
-```agda
-abstract
-  is-prop-is-trunc :
-    {l : Level} (k : 𝕋) (A : UU l) → is-prop (is-trunc k A)
-  is-prop-is-trunc neg-two-𝕋 A = is-property-is-contr
-  is-prop-is-trunc (succ-𝕋 k) A =
-    is-trunc-Π neg-one-𝕋
-      ( λ x → is-trunc-Π neg-one-𝕋 (λ y → is-prop-is-trunc k (x ＝ y)))
-
-is-trunc-Prop : {l : Level} (k : 𝕋) (A : UU l) → Σ (UU l) (is-trunc neg-one-𝕋)
-pr1 (is-trunc-Prop k A) = is-trunc k A
-pr2 (is-trunc-Prop k A) = is-prop-is-trunc k A
 ```
 
 ### The type of equivalences between truncated types is truncated

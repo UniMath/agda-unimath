@@ -23,6 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.subuniverse-of-contractible-types
 ```
 
 </details>

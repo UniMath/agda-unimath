@@ -28,6 +28,7 @@ open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverse-of-contractible-types
 open import foundation.subuniverses
+open import foundation.subuniverses-containing-contractible-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types

@@ -25,6 +25,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.subuniverse-of-propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```

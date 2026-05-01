@@ -16,6 +16,7 @@ open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels

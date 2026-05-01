@@ -20,6 +20,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
+open import foundation-core.subuniverse-of-contractible-types
 
 open import group-theory.abelian-groups
 open import group-theory.full-subgroups

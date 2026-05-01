@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.maximum-truncation-levels
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

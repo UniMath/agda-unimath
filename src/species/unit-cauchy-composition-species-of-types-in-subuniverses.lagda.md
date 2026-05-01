@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.global-subuniverses
 open import foundation.subuniverses
+open import foundation.subuniverses-containing-contractible-types
 open import foundation.universe-levels
 
 open import species.species-of-types-in-subuniverses

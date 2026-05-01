@@ -41,6 +41,7 @@ open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
@@ -343,7 +344,7 @@ module _
               (type-t-coproduct-id x)
               (coproduct-id-type-t x)))
           ( eq-pair-Σ
-            ( eq-is-prop (is-prop-is-prop (pr1 (pr1 Y x))))
+            ( eq-is-prop (is-property-is-prop (pr1 (pr1 Y x))))
             ( eq-is-prop (is-prop-is-decidable (pr1 (pr2 (pr1 Y x))))))))
       ( eq-is-prop
         ( pr2
@@ -1002,7 +1003,7 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype
               ( g z)))
           ( eq-pair-Σ
             ( eq-is-prop
-              ( is-prop-is-prop
+              ( is-property-is-prop
                 ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))
             ( eq-is-prop
               ( is-prop-is-decidable
@@ -1075,7 +1076,7 @@ eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
               ( g u)))
           ( eq-pair-Σ
             ( eq-is-prop
-              ( is-prop-is-prop
+              ( is-property-is-prop
                 ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))
             ( eq-is-prop
               ( is-prop-is-decidable

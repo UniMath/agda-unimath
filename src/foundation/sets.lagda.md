@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-truncated-types
 open import foundation.logical-equivalences
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalent-type-families
@@ -92,7 +93,7 @@ product-Set A B = Σ-Set A (λ x → B)
 abstract
   is-prop-is-set :
     {l : Level} (A : UU l) → is-prop (is-set A)
-  is-prop-is-set = is-prop-is-trunc zero-𝕋
+  is-prop-is-set = is-property-is-trunc zero-𝕋
 
 is-set-Prop : {l : Level} → UU l → Prop l
 pr1 (is-set-Prop A) = is-set A

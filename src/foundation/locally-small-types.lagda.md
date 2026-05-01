@@ -13,6 +13,7 @@ open import foundation.dependent-products-truncated-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.inhabited-subtypes
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels

@@ -65,6 +65,8 @@ open import foundation-core.sections public
 open import foundation-core.sets public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.subuniverse-of-contractible-types public
+open import foundation-core.subuniverses public
 open import foundation-core.torsorial-type-families public
 open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public

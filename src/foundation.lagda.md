@@ -200,6 +200,7 @@ open import foundation.equivalences-double-arrows public
 open import foundation.equivalences-forks-over-equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-propositions public
 open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
@@ -477,8 +478,11 @@ open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
 open import foundation.subuniverse-of-contractible-types public
+open import foundation.subuniverse-of-propositions public
+open import foundation.subuniverse-of-truncated-types public
 open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
+open import foundation.subuniverses-containing-contractible-types public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public
 open import foundation.symmetric-cores-binary-relations public

@@ -12,6 +12,7 @@ open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.negation
 open import foundation.propositions
+open import foundation.subuniverse-of-propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 

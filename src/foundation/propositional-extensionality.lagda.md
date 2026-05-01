@@ -22,6 +22,7 @@ open import foundation.raising-universe-levels-unit-type
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.subtype-identity-principle
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
@@ -72,7 +73,7 @@ module _
         ( equiv-tot (equiv-equiv-iff P))
         ( is-torsorial-Eq-subtype
           ( is-torsorial-equiv (type-Prop P))
-          ( is-prop-is-prop)
+          ( is-property-is-prop)
           ( type-Prop P)
           ( id-equiv)
           ( is-prop-type-Prop P))

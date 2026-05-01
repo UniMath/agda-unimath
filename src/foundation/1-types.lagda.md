@@ -11,6 +11,7 @@ open import foundation-core.1-types public
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-truncated-types
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.universe-levels
@@ -32,7 +33,7 @@ open import foundation-core.truncation-levels
 abstract
   is-prop-is-1-type :
     {l : Level} (A : UU l) → is-prop (is-1-type A)
-  is-prop-is-1-type A = is-prop-is-trunc one-𝕋 A
+  is-prop-is-1-type A = is-property-is-trunc one-𝕋 A
 
 is-1-type-Prop :
   {l : Level} → UU l → Prop l

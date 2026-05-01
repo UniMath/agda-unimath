@@ -18,6 +18,7 @@ open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
+open import foundation.subuniverse-of-contractible-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types

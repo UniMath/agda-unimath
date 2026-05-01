@@ -14,6 +14,7 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.functoriality-fibers-of-maps
+open import foundation.subuniverse-of-truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
@@ -35,7 +36,8 @@ module _
   where
 
   is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
-  is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fiber f x))
+  is-prop-is-trunc-map k f =
+    is-prop-Π (λ x → is-property-is-trunc k (fiber f x))
 
   is-trunc-map-Prop : (k : 𝕋) → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-trunc-map-Prop k f) = is-trunc-map k f

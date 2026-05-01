@@ -18,6 +18,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
+open import foundation-core.subuniverse-of-contractible-types
 ```
 
 </details>

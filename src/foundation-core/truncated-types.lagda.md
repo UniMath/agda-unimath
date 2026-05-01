@@ -134,13 +134,13 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-trunc k B → is-trunc k A
   is-trunc-is-equiv k B f is-equiv-f =
-    is-trunc-retract-of (pair f (pr2 is-equiv-f))
+    is-trunc-retract-of (f , (pr2 is-equiv-f))
 
 abstract
   is-trunc-equiv :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (e : A ≃ B) →
     is-trunc k B → is-trunc k A
-  is-trunc-equiv k B (pair f is-equiv-f) =
+  is-trunc-equiv k B (f , is-equiv-f) =
     is-trunc-is-equiv k B f is-equiv-f
 
 abstract
@@ -157,7 +157,7 @@ abstract
   is-trunc-equiv' :
     {l1 l2 : Level} (k : 𝕋) (A : UU l1) {B : UU l2} (e : A ≃ B) →
     is-trunc k A → is-trunc k B
-  is-trunc-equiv' k A (pair f is-equiv-f) =
+  is-trunc-equiv' k A (f , is-equiv-f) =
     is-trunc-is-equiv' k A f is-equiv-f
 ```
 
@@ -257,10 +257,10 @@ is-trunc-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
   is-trunc (succ-𝕋 k) (A × B)
-is-trunc-product' k f g (pair a b) (pair a' b') =
+is-trunc-product' k f g (a , b) (a' , b') =
   is-trunc-equiv k
-    ( Eq-product (pair a b) (pair a' b'))
-    ( equiv-pair-eq (pair a b) (pair a' b'))
+    ( Eq-product (a , b) (a' , b'))
+    ( equiv-pair-eq (a , b) (a' , b'))
     ( is-trunc-product k (f b a a') (g a b b'))
 
 is-trunc-left-factor-product :
@@ -271,9 +271,9 @@ is-trunc-left-factor-product neg-two-𝕋 {A} {B} H b =
 is-trunc-left-factor-product (succ-𝕋 k) H b a a' =
   is-trunc-left-factor-product k {A = (a ＝ a')} {B = (b ＝ b)}
     ( is-trunc-equiv' k
-      ( pair a b ＝ pair a' b)
-      ( equiv-pair-eq (pair a b) (pair a' b))
-      ( H (pair a b) (pair a' b)))
+      ( (a , b) ＝ (a' , b))
+      ( equiv-pair-eq (a , b) (a' , b))
+      ( H (a , b) (a' , b)))
     ( refl)
 
 is-trunc-right-factor-product :
@@ -284,8 +284,8 @@ is-trunc-right-factor-product neg-two-𝕋 {A} {B} H a =
 is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
   is-trunc-right-factor-product k {A = (a ＝ a)} {B = (b ＝ b')}
     ( is-trunc-equiv' k
-      ( pair a b ＝ pair a b')
-      ( equiv-pair-eq (pair a b) (pair a b'))
-      ( H (pair a b) (pair a b')))
+      ( (a , b) ＝ (a , b'))
+      ( equiv-pair-eq (a , b) (a , b'))
+      ( H (a , b) (a , b')))
     ( refl)
 ```

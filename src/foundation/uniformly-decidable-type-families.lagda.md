@@ -26,6 +26,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -34,6 +35,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.function-types
+open import foundation-core.subuniverse-of-contractible-types
 
 open import logic.propositionally-decidable-types
 ```

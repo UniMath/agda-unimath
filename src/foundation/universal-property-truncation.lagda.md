@@ -17,6 +17,7 @@ open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.subuniverse-of-contractible-types
 open import foundation.surjective-maps
 open import foundation.truncations
 open import foundation.type-arithmetic-dependent-function-types

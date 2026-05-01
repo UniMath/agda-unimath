@@ -13,6 +13,7 @@ open import foundation.dependent-products-truncated-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations
+open import foundation.subuniverse-of-truncated-types
 open import foundation.univalence
 open import foundation.universe-levels
 

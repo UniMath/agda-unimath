@@ -35,6 +35,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
@@ -222,7 +223,7 @@ module _
             ( eq-equiv commutative-coproduct)
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d
@@ -256,7 +257,7 @@ module _
                 ( equiv-concat (inv s) v)))
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d nq)

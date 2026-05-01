@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.equivalences-contractible-types
+open import foundation.equivalences-propositions
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.logical-equivalences

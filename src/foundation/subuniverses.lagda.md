@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.subuniverses where
+
+open import foundation-core.subuniverses public
 ```
 
 <details><summary>Imports</summary>
@@ -34,49 +36,6 @@ open import foundation-core.transport-along-identifications
 **Subuniverses** are [subtypes](foundation-core.subtypes.md) of the universe.
 
 ## Definitions
-
-### Subuniverses
-
-```agda
-is-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → UU l2) → UU (lsuc l1 ⊔ l2)
-is-subuniverse P = is-subtype P
-
-subuniverse :
-  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-subuniverse l1 l2 = subtype l2 (UU l1)
-
-is-subtype-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
-  is-prop (is-in-subtype P X)
-is-subtype-subuniverse P X = is-prop-is-in-subtype P X
-
-module _
-  {l1 l2 : Level} (P : subuniverse l1 l2)
-  where
-
-  type-subuniverse : UU (lsuc l1 ⊔ l2)
-  type-subuniverse = type-subtype P
-
-  is-in-subuniverse : UU l1 → UU l2
-  is-in-subuniverse = is-in-subtype P
-
-  is-prop-is-in-subuniverse : (X : UU l1) → is-prop (is-in-subuniverse X)
-  is-prop-is-in-subuniverse = is-prop-is-in-subtype P
-
-  inclusion-subuniverse : type-subuniverse → UU l1
-  inclusion-subuniverse = inclusion-subtype P
-
-  is-in-subuniverse-inclusion-subuniverse :
-    (X : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse X)
-  is-in-subuniverse-inclusion-subuniverse = pr2
-
-  is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
-  is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
-
-  emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
-  emb-inclusion-subuniverse = emb-subtype P
-```
 
 ### The predicate of essentially being in a subuniverse
 
@@ -118,9 +77,21 @@ module _
     is-prop-is-essentially-in-subuniverse X
 ```
 
-- See also [univalent type families](foundation.univalent-type-families.md).
-
 ## Properties
+
+### The inclusion of a subuniverse into its ambient universe is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+
+  is-emb-inclusion-subuniverse : is-emb (inclusion-subuniverse P)
+  is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
+
+  emb-inclusion-subuniverse : type-subuniverse P ↪ UU l1
+  emb-inclusion-subuniverse = emb-subtype P
+```
 
 ### Subuniverses are closed under equivalences
 
@@ -252,3 +223,4 @@ module _
 ## See also
 
 - [Σ-closed subuniverses](foundation.sigma-closed-subuniverses.md)
+- [univalent type families](foundation.univalent-type-families.md).

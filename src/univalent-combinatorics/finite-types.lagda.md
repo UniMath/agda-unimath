@@ -44,6 +44,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
+open import foundation-core.subuniverse-of-contractible-types
 open import foundation-core.torsorial-type-families
 
 open import logic.propositionally-decidable-types

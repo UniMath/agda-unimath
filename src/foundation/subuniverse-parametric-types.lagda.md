@@ -17,6 +17,8 @@ open import foundation.propositional-extensionality
 open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subuniverse-of-propositions
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.truncations
 open import foundation.unit-type

@@ -25,6 +25,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.subsingleton-induction
+open import foundation.subuniverse-of-propositions
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -254,7 +255,8 @@ The observational equality on the suspension of a proposition is propositional.
             ( is-prop-type-Prop P)) ,
           ( λ _ →
             eq-is-prop
-              ( is-prop-is-prop (Eq-north-suspension-Prop south-suspension))))
+              ( is-property-is-prop
+                ( Eq-north-suspension-Prop south-suspension))))
 
   abstract
     is-prop-Eq-south-suspension-Prop :
@@ -274,7 +276,8 @@ The observational equality on the suspension of a proposition is propositional.
             ( is-prop-raise-unit)) ,
           ( λ _ →
             eq-is-prop
-              ( is-prop-is-prop (Eq-south-suspension-Prop south-suspension))))
+              ( is-property-is-prop
+                ( Eq-south-suspension-Prop south-suspension))))
 
   abstract
     is-prop-Eq-suspension-Prop :
@@ -298,7 +301,7 @@ The observational equality on the suspension of a proposition is propositional.
             ( is-prop-Eq-south-suspension-Prop y)) ,
           ( λ _ →
             eq-is-prop
-              ( is-prop-is-prop (Eq-suspension-Prop south-suspension y))))
+              ( is-property-is-prop (Eq-suspension-Prop south-suspension y))))
         ( x)
 ```
 

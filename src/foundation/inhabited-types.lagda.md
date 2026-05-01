@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.subuniverse-of-contractible-types
 open import foundation-core.torsorial-type-families
 ```
 

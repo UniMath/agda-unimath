@@ -37,6 +37,7 @@ open import foundation.iterating-involutions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type

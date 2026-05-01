@@ -30,6 +30,7 @@ open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.separated-types-subuniverses
 open import foundation.structured-equality-duality
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps

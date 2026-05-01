@@ -24,6 +24,7 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -80,7 +81,7 @@ is-prop-is-double-negation-stable-prop :
   {l : Level} (X : UU l) → is-prop (is-double-negation-stable-prop X)
 is-prop-is-double-negation-stable-prop X =
   is-prop-Σ
-    ( is-prop-is-prop X)
+    ( is-property-is-prop X)
     ( λ is-prop-X → is-prop-is-double-negation-stable (X , is-prop-X))
 
 is-double-negation-stable-prop-Prop : {l : Level} → UU l → Prop l

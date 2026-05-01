@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.equivalences-contractible-types
 open import foundation.propositions
 open import foundation.retracts-of-types
+open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

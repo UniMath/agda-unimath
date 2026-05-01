@@ -33,6 +33,7 @@ open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -92,7 +93,7 @@ module _
 
   is-prop-is-de-morgan-prop : is-prop is-de-morgan-prop
   is-prop-is-de-morgan-prop =
-    is-prop-product (is-prop-is-prop P) (is-prop-is-de-morgan P)
+    is-prop-product (is-property-is-prop P) (is-prop-is-de-morgan P)
 
   is-de-morgan-prop-Prop : Prop l
   is-de-morgan-prop-Prop = is-de-morgan-prop , is-prop-is-de-morgan-prop

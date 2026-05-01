@@ -33,6 +33,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
