@@ -20,6 +20,7 @@ open import group-theory.semigroups
 
 open import linear-algebra.constant-tuples
 
+open import lists.equality-tuples
 open import lists.functoriality-tuples
 open import lists.tuples
 ```

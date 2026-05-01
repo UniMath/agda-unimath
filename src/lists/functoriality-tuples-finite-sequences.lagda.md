@@ -19,6 +19,7 @@ open import foundation.postcomposition-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import lists.equality-tuples
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences

@@ -22,6 +22,7 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.equality-tuples
 open import lists.permutation-tuples
 open import lists.sorted-tuples
 open import lists.sorting-algorithms-tuples

@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.elements-of-tuples
 open import lists.finite-sequences
 open import lists.tuples
 ```
@@ -100,10 +101,11 @@ module _
   is-in-fin-sequence-is-in-tuple :
     (n : ℕ) (v : tuple A n) (x : A) →
     (x ∈-tuple v) → (in-fin-sequence n x (fin-sequence-tuple n v))
-  is-in-fin-sequence-is-in-tuple (succ-ℕ n) (y ∷ l) x (is-head .x l) =
+  is-in-fin-sequence-is-in-tuple
+    (succ-ℕ n) (y ∷ l) x (is-head-element-tuple .x l) =
     (inr star) , refl
   is-in-fin-sequence-is-in-tuple
-    (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
+    (succ-ℕ n) (y ∷ l) x (is-in-tail-element-tuple .x x₁ l I) =
     inl (pr1 (is-in-fin-sequence-is-in-tuple n l x I)) ,
     pr2 (is-in-fin-sequence-is-in-tuple n l x I)
 
@@ -111,7 +113,8 @@ module _
     (n : ℕ) (v : tuple A n) (x : A) →
     (in-fin-sequence n x (fin-sequence-tuple n v)) → (x ∈-tuple v)
   is-in-tuple-is-in-fin-sequence (succ-ℕ n) (y ∷ v) x (inl k , p) =
-    is-in-tail x y v (is-in-tuple-is-in-fin-sequence n v x (k , p))
+    is-in-tail-element-tuple x y v
+      ( is-in-tuple-is-in-fin-sequence n v x (k , p))
   is-in-tuple-is-in-fin-sequence (succ-ℕ n) (y ∷ v) _ (inr k , refl) =
-    is-head (fin-sequence-tuple (succ-ℕ n) (y ∷ v) (inr k)) v
+    is-head-element-tuple (fin-sequence-tuple (succ-ℕ n) (y ∷ v) (inr k)) v
 ```

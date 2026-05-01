@@ -22,6 +22,7 @@ open import foundation.universe-levels
 
 open import lists.arrays
 open import lists.concatenation-lists
+open import lists.equality-tuples
 open import lists.functoriality-tuples
 open import lists.lists
 open import lists.tuples
