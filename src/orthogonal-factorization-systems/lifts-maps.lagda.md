@@ -54,25 +54,26 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-lift : {X : UU l3} → (X → B) → (X → A) → UU (l2 ⊔ l3)
-  is-lift f g = f ~ (i ∘ g)
+  is-lift-of-map : {X : UU l3} → (X → B) → (X → A) → UU (l2 ⊔ l3)
+  is-lift-of-map f g = (f ~ i ∘ g)
 
-  lift : {X : UU l3} → (X → B) → UU (l1 ⊔ l2 ⊔ l3)
-  lift {X} f = Σ (X → A) (is-lift f)
+  lift-map : {X : UU l3} → (X → B) → UU (l1 ⊔ l2 ⊔ l3)
+  lift-map {X} f = Σ (X → A) (is-lift-of-map f)
 
-  total-lift : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  total-lift X = Σ (X → B) lift
+  total-lift-map : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-lift-map X = Σ (X → B) lift-map
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   {X : UU l3} {f : X → B}
   where
 
-  map-lift : lift i f → X → A
-  map-lift = pr1
+  map-lift-map : lift-map i f → X → A
+  map-lift-map = pr1
 
-  is-lift-map-lift : (l : lift i f) → is-lift i f (map-lift l)
-  is-lift-map-lift = pr2
+  is-lift-map-lift-map :
+    (l : lift-map i f) → is-lift-of-map i f (map-lift-map l)
+  is-lift-map-lift-map = pr2
 ```
 
 ## Operations
@@ -99,8 +100,9 @@ module _
   {i : A → B} {j : B → C} {f : X → B} {h : X → C} {g : X → A}
   where
 
-  is-lift-comp-vertical : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
-  is-lift-comp-vertical F H x = H x ∙ ap j (F x)
+  is-lift-of-map-comp-vertical :
+    is-lift-of-map i f g → is-lift-of-map j h f → is-lift-of-map (j ∘ i) h g
+  is-lift-of-map-comp-vertical F H x = H x ∙ ap j (F x)
 ```
 
 ### Horizontal composition of lifts of maps
@@ -120,9 +122,9 @@ module _
   {f : A → B} {g : B → C} {h : A → X} {i : B → X} {j : C → X}
   where
 
-  is-lift-comp-horizontal :
-    is-lift j i g → is-lift i h f → is-lift j h (g ∘ f)
-  is-lift-comp-horizontal J I x = I x ∙ J (f x)
+  is-lift-of-map-comp-horizontal :
+    is-lift-of-map j i g → is-lift-of-map i h f → is-lift-of-map j h (g ∘ f)
+  is-lift-of-map-comp-horizontal J I x = I x ∙ J (f x)
 ```
 
 ## Left whiskering of lifts of maps
@@ -142,8 +144,9 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-left-whisker : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
-  is-lift-left-whisker h H x = ap h (H x)
+  is-lift-of-map-left-whisker :
+    (h : B → S) → is-lift-of-map i f g → is-lift-of-map (h ∘ i) (h ∘ f) g
+  is-lift-of-map-left-whisker h H x = ap h (H x)
 ```
 
 ## Right whiskering of lifts of maps
@@ -163,9 +166,9 @@ module _
   {i : A → B} {f : X → B} {g : X → A}
   where
 
-  is-lift-right-whisker :
-    is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
-  is-lift-right-whisker H h s = H (h s)
+  is-lift-of-map-right-whisker :
+    is-lift-of-map i f g → (h : S → X) → is-lift-of-map i (f ∘ h) (g ∘ h)
+  is-lift-of-map-right-whisker H h s = H (h s)
 ```
 
 ## Properties
@@ -178,43 +181,43 @@ module _
   {X : UU l3} (f : X → B)
   where
 
-  coherence-htpy-lift :
-    (l l' : lift i f) → map-lift i l ~ map-lift i l' → UU (l2 ⊔ l3)
-  coherence-htpy-lift l l' K =
-    (is-lift-map-lift i l ∙h (i ·l K)) ~ is-lift-map-lift i l'
+  coherence-htpy-lift-map :
+    (l l' : lift-map i f) → map-lift-map i l ~ map-lift-map i l' → UU (l2 ⊔ l3)
+  coherence-htpy-lift-map l l' K =
+    is-lift-map-lift-map i l ∙h (i ·l K) ~ is-lift-map-lift-map i l'
 
-  htpy-lift : (l l' : lift i f) → UU (l1 ⊔ l2 ⊔ l3)
-  htpy-lift l l' =
-    Σ ( map-lift i l ~ map-lift i l')
-      ( coherence-htpy-lift l l')
+  htpy-lift-map : (l l' : lift-map i f) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-lift-map l l' =
+    Σ ( map-lift-map i l ~ map-lift-map i l')
+      ( coherence-htpy-lift-map l l')
 
-  refl-htpy-lift : (l : lift i f) → htpy-lift l l
-  pr1 (refl-htpy-lift l) = refl-htpy
-  pr2 (refl-htpy-lift l) = right-unit-htpy
+  refl-htpy-lift-map : (l : lift-map i f) → htpy-lift-map l l
+  pr1 (refl-htpy-lift-map l) = refl-htpy
+  pr2 (refl-htpy-lift-map l) = right-unit-htpy
 
-  htpy-eq-lift : (l l' : lift i f) → l ＝ l' → htpy-lift l l'
-  htpy-eq-lift l .l refl = refl-htpy-lift l
+  htpy-eq-lift-map : (l l' : lift-map i f) → l ＝ l' → htpy-lift-map l l'
+  htpy-eq-lift-map l .l refl = refl-htpy-lift-map l
 
-  is-torsorial-htpy-lift :
-    (l : lift i f) → is-torsorial (htpy-lift l)
-  is-torsorial-htpy-lift l =
+  is-torsorial-htpy-lift-map :
+    (l : lift-map i f) → is-torsorial (htpy-lift-map l)
+  is-torsorial-htpy-lift-map l =
     is-torsorial-Eq-structure
-      (is-torsorial-htpy (map-lift i l))
-      (map-lift i l , refl-htpy)
-      (is-torsorial-htpy (is-lift-map-lift i l ∙h refl-htpy))
+      (is-torsorial-htpy (map-lift-map i l))
+      (map-lift-map i l , refl-htpy)
+      (is-torsorial-htpy (is-lift-map-lift-map i l ∙h refl-htpy))
 
-  is-equiv-htpy-eq-lift :
-    (l l' : lift i f) → is-equiv (htpy-eq-lift l l')
-  is-equiv-htpy-eq-lift l =
-    fundamental-theorem-id (is-torsorial-htpy-lift l) (htpy-eq-lift l)
+  is-equiv-htpy-eq-lift-map :
+    (l l' : lift-map i f) → is-equiv (htpy-eq-lift-map l l')
+  is-equiv-htpy-eq-lift-map l =
+    fundamental-theorem-id (is-torsorial-htpy-lift-map l) (htpy-eq-lift-map l)
 
-  extensionality-lift :
-    (l l' : lift i f) → (l ＝ l') ≃ (htpy-lift l l')
-  pr1 (extensionality-lift l l') = htpy-eq-lift l l'
-  pr2 (extensionality-lift l l') = is-equiv-htpy-eq-lift l l'
+  extensionality-lift-map :
+    (l l' : lift-map i f) → (l ＝ l') ≃ (htpy-lift-map l l')
+  pr1 (extensionality-lift-map l l') = htpy-eq-lift-map l l'
+  pr2 (extensionality-lift-map l l') = is-equiv-htpy-eq-lift-map l l'
 
-  eq-htpy-lift : (l l' : lift i f) → htpy-lift l l' → l ＝ l'
-  eq-htpy-lift l l' = map-inv-equiv (extensionality-lift l l')
+  eq-htpy-lift-map : (l l' : lift-map i f) → htpy-lift-map l l' → l ＝ l'
+  eq-htpy-lift-map l l' = map-inv-equiv (extensionality-lift-map l l')
 ```
 
 ### The total type of lifts of maps is equivalent to `X → A`
@@ -224,17 +227,17 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B) (X : UU l3)
   where
 
-  inv-compute-total-lift : total-lift i X ≃ (X → A)
-  inv-compute-total-lift =
-    ( right-unit-law-Σ-is-contr ( λ f → is-torsorial-htpy' (i ∘ f))) ∘e
+  inv-compute-total-lift-map : total-lift-map i X ≃ (X → A)
+  inv-compute-total-lift-map =
+    ( right-unit-law-Σ-is-contr (λ f → is-torsorial-htpy' (i ∘ f))) ∘e
     ( equiv-left-swap-Σ)
 
-  compute-total-lift : (X → A) ≃ total-lift i X
-  compute-total-lift = inv-equiv inv-compute-total-lift
+  compute-total-lift-map : (X → A) ≃ total-lift-map i X
+  compute-total-lift-map = inv-equiv inv-compute-total-lift-map
 
-  is-small-total-lift : is-small (l1 ⊔ l3) (total-lift i X)
-  pr1 (is-small-total-lift) = X → A
-  pr2 (is-small-total-lift) = inv-compute-total-lift
+  is-small-total-lift-map : is-small (l1 ⊔ l3) (total-lift-map i X)
+  pr1 (is-small-total-lift-map) = X → A
+  pr2 (is-small-total-lift-map) = inv-compute-total-lift-map
 ```
 
 ### The truncation level of the type of lifts is bounded by the truncation level of the codomains
@@ -244,41 +247,43 @@ module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-trunc-is-lift :
+  is-trunc-is-lift-of-map :
     {X : UU l3} (f : X → B) →
-    is-trunc (succ-𝕋 k) B → (g : X → A) → is-trunc k (is-lift i f g)
-  is-trunc-is-lift f is-trunc-B g =
+    is-trunc (succ-𝕋 k) B → (g : X → A) → is-trunc k (is-lift-of-map i f g)
+  is-trunc-is-lift-of-map f is-trunc-B g =
     is-trunc-Π k (λ x → is-trunc-B (f x) (i (g x)))
 
-  is-trunc-lift :
+  is-trunc-lift-map :
     {X : UU l3} (f : X → B) →
-    is-trunc k A → is-trunc (succ-𝕋 k) B → is-trunc k (lift i f)
-  is-trunc-lift f is-trunc-A is-trunc-B =
+    is-trunc k A → is-trunc (succ-𝕋 k) B → is-trunc k (lift-map i f)
+  is-trunc-lift-map f is-trunc-A is-trunc-B =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-A)
-      ( is-trunc-is-lift f is-trunc-B)
+      ( is-trunc-is-lift-of-map f is-trunc-B)
 
-  is-trunc-total-lift :
-    (X : UU l3) → is-trunc k A → is-trunc k (total-lift i X)
-  is-trunc-total-lift X is-trunc-A =
+  is-trunc-total-lift-map :
+    (X : UU l3) → is-trunc k A → is-trunc k (total-lift-map i X)
+  is-trunc-total-lift-map X is-trunc-A =
     is-trunc-equiv' k
       ( X → A)
-      ( compute-total-lift i X)
+      ( compute-total-lift-map i X)
       ( is-trunc-function-type k is-trunc-A)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
-  is-contr-is-lift :
+  is-contr-is-lift-of-map :
     {X : UU l3} (f : X → B) →
-    is-prop B → (g : X → A) → is-contr (is-lift i f g)
-  is-contr-is-lift f is-prop-B g = is-contr-Π λ x → is-prop-B (f x) (i (g x))
+    is-prop B → (g : X → A) → is-contr (is-lift-of-map i f g)
+  is-contr-is-lift-of-map f is-prop-B g =
+    is-contr-Π (λ x → is-prop-B (f x) (i (g x)))
 
-  is-prop-is-lift :
+  is-prop-is-lift-of-map :
     {X : UU l3} (f : X → B) →
-    is-set B → (g : X → A) → is-prop (is-lift i f g)
-  is-prop-is-lift f is-set-B g = is-prop-Π λ x → is-set-B (f x) (i (g x))
+    is-set B → (g : X → A) → is-prop (is-lift-of-map i f g)
+  is-prop-is-lift-of-map f is-set-B g =
+    is-prop-Π (λ x → is-set-B (f x) (i (g x)))
 ```
 
 ## See also

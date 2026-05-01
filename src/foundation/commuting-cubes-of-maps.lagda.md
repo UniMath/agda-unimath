@@ -321,7 +321,10 @@ expect to be able to construct a coherence
 
 ### Vertical pasting of commuting cubes
 
-```agda
+> The following Agda code is not checked due to bad performance.
+> [#1525](https://github.com/UniMath/agda-unimath/issues/1525)
+
+```text
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}

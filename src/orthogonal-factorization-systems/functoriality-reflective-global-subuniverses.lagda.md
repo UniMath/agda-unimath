@@ -12,6 +12,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 

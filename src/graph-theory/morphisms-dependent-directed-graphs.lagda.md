@@ -22,8 +22,8 @@ open import graph-theory.directed-graphs
 Consider two
 [dependent directed graphs](graph-theory.dependent-directed-graphs.md) `H` and
 `K` over a [directed graph](graph-theory.directed-graphs.md) `G`. A
-{{#concept "morphism of dependent directed graphs" Agda=hom-Dependent-Directed-Graph}}
-from `H` to `K` consists of a family of maps
+{{#concept "morphism" Agda=hom-Dependent-Directed-Graph}} of dependent directed
+graphs from `H` to `K` consists of a family of maps
 
 ```text
   f₀ : {x : G₀} → H₀ x → K₀ x

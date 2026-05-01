@@ -17,14 +17,20 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
+open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -65,8 +71,9 @@ is [less than or equal](elementary-number-theory.inequality-integers.md) to
 ### Inequality on the rational numbers
 
 ```agda
-leq-ℚ-Prop : ℚ → ℚ → Prop lzero
-leq-ℚ-Prop (x , px) (y , py) = leq-fraction-ℤ-Prop x y
+opaque
+  leq-ℚ-Prop : ℚ → ℚ → Prop lzero
+  leq-ℚ-Prop (x , px) (y , py) = leq-fraction-ℤ-Prop x y
 
 leq-ℚ : ℚ → ℚ → UU lzero
 leq-ℚ x y = type-Prop (leq-ℚ-Prop x y)
@@ -80,12 +87,25 @@ _≤-ℚ_ = leq-ℚ
 
 ## Properties
 
+### Zero is less than one
+
+```agda
+opaque
+  unfolding leq-ℚ-Prop
+
+  leq-zero-one-ℚ : leq-ℚ zero-ℚ one-ℚ
+  leq-zero-one-ℚ = leq-zero-one-ℤ
+```
+
 ### Inequality on the rational numbers is decidable
 
 ```agda
-is-decidable-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + ¬ (leq-ℚ x y)
-is-decidable-leq-ℚ x y =
-  is-decidable-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+opaque
+  unfolding leq-ℚ-Prop
+
+  is-decidable-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + ¬ (leq-ℚ x y)
+  is-decidable-leq-ℚ x y =
+    is-decidable-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 
 leq-ℚ-Decidable-Prop : (x y : ℚ) → Decidable-Prop lzero
 leq-ℚ-Decidable-Prop x y =
@@ -97,15 +117,24 @@ leq-ℚ-Decidable-Prop x y =
 ### Inequality on the rational numbers is reflexive
 
 ```agda
-refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
-refl-leq-ℚ x =
-  refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+opaque
+  unfolding leq-ℚ-Prop
+
+  refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
+  refl-leq-ℚ x =
+    refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
+
+abstract
+  leq-eq-ℚ : {x y : ℚ} → x ＝ y → leq-ℚ x y
+  leq-eq-ℚ {x} refl = refl-leq-ℚ x
 ```
 
 ### Inequality on the rational numbers is antisymmetric
 
 ```agda
-abstract
+abstract opaque
+  unfolding leq-ℚ-Prop
+
   antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
   antisymmetric-leq-ℚ x y H H' =
     ( inv (is-retraction-rational-fraction-ℚ x)) ∙
@@ -123,7 +152,9 @@ abstract
 ### Inequality on the rational numbers is linear
 
 ```agda
-abstract
+opaque
+  unfolding leq-ℚ-Prop
+
   linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
   linear-leq-ℚ x y =
     map-coproduct
@@ -143,7 +174,9 @@ module _
   (x y z : ℚ)
   where
 
-  abstract
+  abstract opaque
+    unfolding leq-ℚ-Prop
+
     transitive-leq-ℚ : leq-ℚ y z → leq-ℚ x y → leq-ℚ x z
     transitive-leq-ℚ =
       transitive-leq-fraction-ℤ
@@ -170,7 +203,10 @@ module _
   (p q : fraction-ℤ)
   where
 
-  abstract
+  abstract opaque
+    unfolding leq-ℚ-Prop
+    unfolding rational-fraction-ℤ
+
     preserves-leq-rational-fraction-ℤ :
       leq-fraction-ℤ p q → leq-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
     preserves-leq-rational-fraction-ℤ =
@@ -186,7 +222,9 @@ module _
   (x : ℚ) (p : fraction-ℤ)
   where
 
-  abstract
+  abstract opaque
+    unfolding leq-ℚ-Prop rational-fraction-ℤ
+
     preserves-leq-right-rational-fraction-ℤ :
       leq-fraction-ℤ (fraction-ℚ x) p → leq-ℚ x (rational-fraction-ℤ p)
     preserves-leq-right-rational-fraction-ℤ H =
@@ -216,7 +254,9 @@ module _
     preserves-leq-right-rational-fraction-ℤ
   pr2 iff-leq-right-rational-fraction-ℤ = reflects-leq-right-rational-fraction-ℤ
 
-  abstract
+  abstract opaque
+    unfolding leq-ℚ-Prop rational-fraction-ℤ
+
     preserves-leq-left-rational-fraction-ℤ :
       leq-fraction-ℤ p (fraction-ℚ x) → leq-ℚ (rational-fraction-ℤ p) x
     preserves-leq-left-rational-fraction-ℤ =
@@ -244,6 +284,52 @@ module _
   pr2 iff-leq-left-rational-fraction-ℤ = reflects-leq-left-rational-fraction-ℤ
 ```
 
+### The canonical map from integers to the rational numbers preserves and reflects inequality
+
+```agda
+abstract opaque
+  unfolding leq-ℚ-Prop
+
+  preserves-leq-rational-ℤ :
+    {x y : ℤ} → leq-ℤ x y → leq-ℚ (rational-ℤ x) (rational-ℤ y)
+  preserves-leq-rational-ℤ {x} {y} =
+    binary-tr leq-ℤ
+      ( inv (right-unit-law-mul-ℤ x))
+      ( inv (right-unit-law-mul-ℤ y))
+
+  reflects-leq-rational-ℤ :
+    (x y : ℤ) → leq-ℚ (rational-ℤ x) (rational-ℤ y) → leq-ℤ x y
+  reflects-leq-rational-ℤ x y =
+    binary-tr leq-ℤ
+      ( right-unit-law-mul-ℤ x)
+      ( right-unit-law-mul-ℤ y)
+
+  iff-leq-rational-ℤ :
+    (x y : ℤ) → leq-ℤ x y ↔ leq-ℚ (rational-ℤ x) (rational-ℤ y)
+  pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ
+  pr2 (iff-leq-rational-ℤ x y) = reflects-leq-rational-ℤ x y
+```
+
+### The canonical map from natural numbers to the rational numbers preserves and reflects inequality
+
+```agda
+abstract
+  iff-leq-rational-ℕ :
+    (x y : ℕ) → leq-ℕ x y ↔ leq-ℚ (rational-ℕ x) (rational-ℕ y)
+  iff-leq-rational-ℕ x y =
+    iff-leq-rational-ℤ (int-ℕ x) (int-ℕ y) ∘iff
+    iff-leq-int-ℕ x y
+
+  preserves-leq-rational-ℕ :
+    {x y : ℕ} → leq-ℕ x y → leq-ℚ (rational-ℕ x) (rational-ℕ y)
+  preserves-leq-rational-ℕ {x} {y} =
+    forward-implication (iff-leq-rational-ℕ x y)
+
+  reflects-leq-rational-ℕ :
+    (x y : ℕ) → leq-ℚ (rational-ℕ x) (rational-ℕ y) → leq-ℕ x y
+  reflects-leq-rational-ℕ x y = backward-implication (iff-leq-rational-ℕ x y)
+```
+
 ### `x ≤ y` if and only if `0 ≤ y - x`
 
 ```agda
@@ -251,7 +337,9 @@ module _
   (x y : ℚ)
   where
 
-  abstract
+  abstract opaque
+    unfolding add-ℚ leq-ℚ-Prop neg-ℚ
+
     iff-translate-diff-leq-zero-ℚ : leq-ℚ zero-ℚ (y -ℚ x) ↔ leq-ℚ x y
     iff-translate-diff-leq-zero-ℚ =
       logical-equivalence-reasoning
@@ -337,67 +425,88 @@ pr2 (left-add-hom-leq-ℚ z) = preserves-leq-right-add-ℚ z
 ### Addition on the rational numbers preserves inequality
 
 ```agda
-preserves-leq-add-ℚ :
-  {a b c d : ℚ} → leq-ℚ a b → leq-ℚ c d → leq-ℚ (a +ℚ c) (b +ℚ d)
-preserves-leq-add-ℚ {a} {b} {c} {d} H K =
-  transitive-leq-ℚ
-    ( a +ℚ c)
-    ( b +ℚ c)
-    ( b +ℚ d)
-    ( preserves-leq-right-add-ℚ b c d K)
-    ( preserves-leq-left-add-ℚ c a b H)
+abstract
+  preserves-leq-add-ℚ :
+    {a b c d : ℚ} → leq-ℚ a b → leq-ℚ c d → leq-ℚ (a +ℚ c) (b +ℚ d)
+  preserves-leq-add-ℚ {a} {b} {c} {d} H K =
+    transitive-leq-ℚ
+      ( a +ℚ c)
+      ( b +ℚ c)
+      ( b +ℚ d)
+      ( preserves-leq-right-add-ℚ b c d K)
+      ( preserves-leq-left-add-ℚ c a b H)
+```
+
+### Negation of rational numbers reverses inequality
+
+```agda
+abstract opaque
+  unfolding leq-ℚ-Prop neg-ℚ
+
+  neg-leq-ℚ : {x y : ℚ} → leq-ℚ x y → leq-ℚ (neg-ℚ y) (neg-ℚ x)
+  neg-leq-ℚ {x} {y} = neg-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ### Transposing additions on inequalities of rational numbers
 
 ```agda
-leq-transpose-right-diff-ℚ : (x y z : ℚ) → x ≤-ℚ (y -ℚ z) → x +ℚ z ≤-ℚ y
-leq-transpose-right-diff-ℚ x y z x≤y-z =
-  leq-transpose-is-section-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( right-add-hom-leq-ℚ z)
-    ( _-ℚ z)
-    ( is-section-diff-ℚ z)
-    ( x)
-    ( y)
-    ( x≤y-z)
+abstract
+  leq-transpose-right-diff-ℚ : (x y z : ℚ) → x ≤-ℚ (y -ℚ z) → x +ℚ z ≤-ℚ y
+  leq-transpose-right-diff-ℚ x y z x≤y-z =
+    leq-transpose-is-section-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( right-add-hom-leq-ℚ z)
+      ( _-ℚ z)
+      ( is-section-diff-ℚ z)
+      ( x)
+      ( y)
+      ( x≤y-z)
 
-leq-transpose-right-add-ℚ : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ z ≤-ℚ y
-leq-transpose-right-add-ℚ x y z x≤y+z =
-  leq-transpose-is-section-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( right-add-hom-leq-ℚ (neg-ℚ z))
-    ( _+ℚ z)
-    ( is-retraction-diff-ℚ z)
-    ( x)
-    ( y)
-    ( x≤y+z)
+  leq-transpose-right-add-ℚ : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ z ≤-ℚ y
+  leq-transpose-right-add-ℚ x y z x≤y+z =
+    leq-transpose-is-section-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( right-add-hom-leq-ℚ (neg-ℚ z))
+      ( _+ℚ z)
+      ( is-retraction-diff-ℚ z)
+      ( x)
+      ( y)
+      ( x≤y+z)
 
-leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
-leq-transpose-left-add-ℚ x y z x+y≤z =
-  leq-transpose-is-retraction-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( _+ℚ y)
-    ( right-add-hom-leq-ℚ (neg-ℚ y))
-    ( is-retraction-diff-ℚ y)
-    ( x)
-    ( z)
-    ( x+y≤z)
+  leq-transpose-right-add-ℚ' : (x y z : ℚ) → x ≤-ℚ y +ℚ z → x -ℚ y ≤-ℚ z
+  leq-transpose-right-add-ℚ' x y z x≤y+z =
+    leq-transpose-right-add-ℚ x z y (tr (leq-ℚ x) (commutative-add-ℚ _ _) x≤y+z)
 
-leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
-leq-transpose-left-diff-ℚ x y z x-y≤z =
-  leq-transpose-is-retraction-hom-Poset
-    ( ℚ-Poset)
-    ( ℚ-Poset)
-    ( _-ℚ y)
-    ( right-add-hom-leq-ℚ y)
-    ( is-section-diff-ℚ y)
-    ( x)
-    ( z)
-    ( x-y≤z)
+  leq-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z → x ≤-ℚ z -ℚ y
+  leq-transpose-left-add-ℚ x y z x+y≤z =
+    leq-transpose-is-retraction-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( _+ℚ y)
+      ( right-add-hom-leq-ℚ (neg-ℚ y))
+      ( is-retraction-diff-ℚ y)
+      ( x)
+      ( z)
+      ( x+y≤z)
+
+  leq-transpose-left-add-ℚ' : (x y z : ℚ) → x +ℚ y ≤-ℚ z → y ≤-ℚ z -ℚ x
+  leq-transpose-left-add-ℚ' x y z x+y≤z =
+    leq-transpose-left-add-ℚ y x z
+      ( tr (λ w → leq-ℚ w z) (commutative-add-ℚ _ _) x+y≤z)
+
+  leq-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z → x ≤-ℚ z +ℚ y
+  leq-transpose-left-diff-ℚ x y z x-y≤z =
+    leq-transpose-is-retraction-hom-Poset
+      ( ℚ-Poset)
+      ( ℚ-Poset)
+      ( _-ℚ y)
+      ( right-add-hom-leq-ℚ y)
+      ( is-section-diff-ℚ y)
+      ( x)
+      ( z)
+      ( x-y≤z)
 
 leq-iff-transpose-left-add-ℚ : (x y z : ℚ) → x +ℚ y ≤-ℚ z ↔ x ≤-ℚ z -ℚ y
 pr1 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-left-add-ℚ x y z
@@ -406,6 +515,34 @@ pr2 (leq-iff-transpose-left-add-ℚ x y z) = leq-transpose-right-diff-ℚ x z y
 leq-iff-transpose-left-diff-ℚ : (x y z : ℚ) → x -ℚ y ≤-ℚ z ↔ x ≤-ℚ z +ℚ y
 pr1 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-left-diff-ℚ x y z
 pr2 (leq-iff-transpose-left-diff-ℚ x y z) = leq-transpose-right-add-ℚ x z y
+```
+
+### Swapping laws
+
+```agda
+abstract
+  swap-right-diff-leq-ℚ : (p q r : ℚ) → leq-ℚ (p -ℚ q) r → leq-ℚ (p -ℚ r) q
+  swap-right-diff-leq-ℚ p q r p-q≤r =
+    leq-transpose-right-add-ℚ
+      ( p)
+      ( q)
+      ( r)
+      ( tr
+        ( leq-ℚ p)
+        ( commutative-add-ℚ r q)
+        ( leq-transpose-left-diff-ℚ p q r p-q≤r))
+```
+
+### A rational number is lesser than its successor
+
+```agda
+abstract
+  succ-leq-ℚ : (p : ℚ) → leq-ℚ p (succ-ℚ p)
+  succ-leq-ℚ p =
+    tr
+      ( λ x → leq-ℚ x (one-ℚ +ℚ p))
+      ( left-unit-law-add-ℚ p)
+      ( preserves-leq-left-add-ℚ p zero-ℚ one-ℚ leq-zero-one-ℚ)
 ```
 
 ## See also

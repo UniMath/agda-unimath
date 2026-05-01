@@ -25,9 +25,9 @@ open import foundation-core.negation
 ## Idea
 
 An [apartness relation](foundation.apartness-relations.md) `#` is said to be
-**standard** if the
-[law of excluded middle](foundation.law-of-excluded-middle.md) implies that `#`
-is [equivalent](foundation.logical-equivalences.md) to
+{{#concept "standard" Disambiguation="apartness relation" Agda=is-standard-Apartness-Relation}}
+if the [law of excluded middle](foundation.law-of-excluded-middle.md) implies
+that `#` is [equivalent](foundation.logical-equivalences.md) to
 [negated equality](foundation.negated-equality.md).
 
 ## Definition
@@ -37,7 +37,7 @@ is-standard-Apartness-Relation :
   {l1 l2 : Level} (l3 : Level) {A : UU l1} (R : Apartness-Relation l2 A) →
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 is-standard-Apartness-Relation {l1} {l2} l3 {A} R =
-  LEM l3 → (x y : A) → (x ≠ y) ↔ apart-Apartness-Relation R x y
+  level-LEM l3 → (x y : A) → (x ≠ y) ↔ apart-Apartness-Relation R x y
 ```
 
 ## Properties

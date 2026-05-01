@@ -7,6 +7,10 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
@@ -16,6 +20,8 @@ open import foundation.projective-types
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
+open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -25,6 +31,10 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.sets
+
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -87,11 +97,11 @@ AC0 = {l1 l2 : Level} → level-AC0 l1 l2
 ```agda
 is-set-projective-AC0 :
   {l1 l2 l3 : Level} → level-AC0 l2 (l1 ⊔ l2) →
-  (X : UU l3) → is-set-projective l1 l2 X
+  (X : UU l3) → is-set-projective-Level l1 l2 X
 is-set-projective-AC0 ac X A B f h =
   map-trunc-Prop
     ( ( map-Σ
-        ( λ g → ((map-surjection f) ∘ g) ＝ h)
+        ( λ g → map-surjection f ∘ g ＝ h)
         ( precomp h A)
         ( λ s H → htpy-postcomp X H h)) ∘
       ( section-is-split-surjective (map-surjection f)))
@@ -99,7 +109,7 @@ is-set-projective-AC0 ac X A B f h =
 
 AC0-is-set-projective :
   {l1 l2 : Level} →
-  ({l : Level} (X : UU l) → is-set-projective (l1 ⊔ l2) l1 X) →
+  ({l : Level} (X : UU l) → is-set-projective-Level (l1 ⊔ l2) l1 X) →
   level-AC0 l1 l2
 AC0-is-set-projective H A B K =
   map-trunc-Prop
@@ -111,10 +121,26 @@ AC0-is-set-projective H A B K =
         ( id))
 ```
 
+## Comments
+
+The axiom of choice fails to hold for arbitrary types. Indeed, it already fails
+to hold for the 0-connected 1-type $\operatorname{B}ℤ₂$ as demonstrated in
+Corollary 17.5.3 of {{#cite Rij22}}. This counterexample is formalized in
+[`foundation.global-choice`](foundation.global-choice.md). Hence it is both
+incompatible with univalence and with the existence of higher inductive types to
+assume the axiom of choice for all types.
+
 ## See also
 
 - [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
   the axiom of choice implies the law of excluded middle.
+- [The axiom of countable choice](foundation.axiom-of-countable-choice.md), the
+  axiom of choice restricted to [countable sets](set-theory.countable-sets.md).
+- [The axiom of dependent choice](foundation.axiom-of-dependent-choice.md),
+  another weaker form of the axiom of choice.
+- [Finite choice](univalent-combinatorics.finite-choice.md), is the
+  constructively true principle of the axiom of choice restricted to
+  [finite types](univalent-combinatorics.finite-types.md).
 
 ## References
 

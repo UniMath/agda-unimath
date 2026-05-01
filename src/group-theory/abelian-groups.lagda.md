@@ -169,7 +169,7 @@ module _
     (x : type-Ab) → add-Ab x (neg-Ab x) ＝ zero-Ab
   right-inverse-law-add-Ab = right-inverse-law-mul-Group group-Ab
 
-  commutative-add-Ab : (x y : type-Ab) → Id (add-Ab x y) (add-Ab y x)
+  commutative-add-Ab : (x y : type-Ab) → add-Ab x y ＝ add-Ab y x
   commutative-add-Ab = pr2 A
 
   interchange-add-add-Ab :
@@ -196,8 +196,7 @@ module _
     ( associative-add-Ab b a c)
 
   distributive-neg-add-Ab :
-    (x y : type-Ab) →
-    neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
+    (x y : type-Ab) → neg-Ab (add-Ab x y) ＝ add-Ab (neg-Ab x) (neg-Ab y)
   distributive-neg-add-Ab x y =
     ( distributive-inv-mul-Group group-Ab) ∙
     ( commutative-add-Ab (neg-Ab y) (neg-Ab x))
@@ -366,6 +365,9 @@ module _
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
 
+  right-subtraction-Ab' : type-Ab A → type-Ab A → type-Ab A
+  right-subtraction-Ab' y x = right-subtraction-Ab x y
+
   ap-right-subtraction-Ab :
     {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →
     right-subtraction-Ab x y ＝ right-subtraction-Ab x' y'
@@ -440,22 +442,22 @@ module _
 
   transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+    add-Ab A x y ＝ z → x ＝ add-Ab A z (neg-Ab A y)
   transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
 
   inv-transpose-eq-add-Ab :
     {x y z : type-Ab A} →
-    Id x (add-Ab A z (neg-Ab A y)) → add-Ab A x y ＝ z
+    x ＝ add-Ab A z (neg-Ab A y) → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab = inv-transpose-eq-mul-Group (group-Ab A)
 
   transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+    add-Ab A x y ＝ z → y ＝ add-Ab A (neg-Ab A x) z
   transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
 
   inv-transpose-eq-add-Ab' :
     {x y z : type-Ab A} →
-    Id y (add-Ab A (neg-Ab A x) z) → Id (add-Ab A x y) z
+    y ＝ add-Ab A (neg-Ab A x) z → add-Ab A x y ＝ z
   inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
 
   double-transpose-eq-add-Ab :
@@ -541,6 +543,18 @@ module _
     is-unit-right-div-eq-Group (group-Ab A)
 ```
 
+### If `x + y = 0`, then `y = -x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  unique-right-inv-Ab :
+    {x y : type-Ab A} → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+  unique-right-inv-Ab {x} {y} = unique-right-inv-Group (group-Ab A) x y
+```
+
 ### The negative of `-x + y` is `-y + x`
 
 ```agda
@@ -565,6 +579,23 @@ module _
     (x y : type-Ab A) →
     neg-Ab A (right-subtraction-Ab A x y) ＝ right-subtraction-Ab A y x
   neg-right-subtraction-Ab = inv-right-div-Group (group-Ab A)
+```
+
+### If `x + y = 0`, then `y ＝ -x` and `x ＝ -y`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    unique-right-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → y ＝ neg-Ab A x
+    unique-right-neg-Ab = unique-right-inv-Group (group-Ab A)
+
+    unique-left-neg-Ab :
+      (x y : type-Ab A) → is-zero-Ab A (add-Ab A x y) → x ＝ neg-Ab A y
+    unique-left-neg-Ab = unique-left-inv-Group (group-Ab A)
 ```
 
 ### The sum of `-x + y` and `-y + z` is `-x + z`
@@ -595,6 +626,98 @@ module _
   add-right-subtraction-Ab = mul-right-div-Group (group-Ab A)
 ```
 
+### `(-x) - (-y) = y - x`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-neg-Ab :
+      (x y : type-Ab A) →
+      right-subtraction-Ab A (neg-Ab A x) (neg-Ab A y) ＝
+      right-subtraction-Ab A y x
+    right-subtraction-neg-Ab x y =
+      equational-reasoning
+        right-subtraction-Ab A (neg-Ab A x) (neg-Ab A y)
+        ＝ add-Ab A (neg-Ab A x) y
+          by ap-add-Ab A refl (neg-neg-Ab A y)
+        ＝ right-subtraction-Ab A y x
+          by commutative-add-Ab A _ _
+```
+
+### `(x + y) - (x + z) = y - z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-left-add-Ab :
+      (x y z : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A x y) (add-Ab A x z) ＝
+      right-subtraction-Ab A y z
+    right-subtraction-left-add-Ab x y z =
+      equational-reasoning
+        right-subtraction-Ab A (add-Ab A x y) (add-Ab A x z)
+        ＝ add-Ab A (add-Ab A x y) (add-Ab A (neg-Ab A x) (neg-Ab A z))
+          by ap-add-Ab A refl (distributive-neg-add-Ab A x z)
+        ＝ add-Ab A (right-subtraction-Ab A x x) (right-subtraction-Ab A y z)
+          by interchange-add-add-Ab A _ _ _ _
+        ＝ add-Ab A (zero-Ab A) (right-subtraction-Ab A y z)
+          by ap-add-Ab A (right-inverse-law-add-Ab A x) refl
+        ＝ right-subtraction-Ab A y z
+          by left-unit-law-add-Ab A _
+```
+
+### `(y + x) - (z + x) = y - z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-right-add-Ab :
+      (x y z : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A y x) (add-Ab A z x) ＝
+      right-subtraction-Ab A y z
+    right-subtraction-right-add-Ab x y z =
+      ( ap-binary
+        ( right-subtraction-Ab A)
+        ( commutative-add-Ab A y x)
+        ( commutative-add-Ab A z x)) ∙
+      ( right-subtraction-left-add-Ab A x y z)
+```
+
+### Interchanging addition and right subtraction
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    interchange-add-right-subtraction-Ab :
+      (x y z w : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A x y) (add-Ab A z w) ＝
+      add-Ab A (right-subtraction-Ab A x z) (right-subtraction-Ab A y w)
+    interchange-add-right-subtraction-Ab x y z w =
+      let
+        _+A_ = add-Ab A
+        _-A_ = right-subtraction-Ab A
+        neg-A = neg-Ab A
+      in
+        equational-reasoning
+          (x +A y) -A (z +A w)
+          ＝ (x +A y) +A (neg-A z +A neg-A w)
+            by ap-add-Ab A refl (distributive-neg-add-Ab A z w)
+          ＝ (x -A z) +A (y -A w)
+            by interchange-add-add-Ab A _ _ _ _
+```
+
 ### Conjugation is the identity function
 
 **Proof:** Consider two elements `x` and `y` of an abelian group. Then
@@ -613,17 +736,18 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  is-identity-left-conjugation-Ab :
-    (x : type-Ab A) → left-conjugation-Ab A x ~ id
-  is-identity-left-conjugation-Ab x y =
-    ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
-    ( is-retraction-right-subtraction-Ab A x y)
+  abstract
+    is-identity-left-conjugation-Ab :
+      (x : type-Ab A) → left-conjugation-Ab A x ~ id
+    is-identity-left-conjugation-Ab x y =
+      ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
+      ( is-retraction-right-subtraction-Ab A x y)
 
-  is-identity-right-conjugation-Ab :
-    (x : type-Ab A) → right-conjugation-Ab A x ~ id
-  is-identity-right-conjugation-Ab x =
-    inv-htpy (left-right-conjugation-Ab A x) ∙h
-    is-identity-left-conjugation-Ab x
+    is-identity-right-conjugation-Ab :
+      (x : type-Ab A) → right-conjugation-Ab A x ~ id
+    is-identity-right-conjugation-Ab x =
+      inv-htpy (left-right-conjugation-Ab A x) ∙h
+      is-identity-left-conjugation-Ab x
 
   is-identity-conjugation-Ab :
     (x : type-Ab A) → conjugation-Ab A x ~ id
@@ -736,9 +860,8 @@ module _
 
   preserves-concat-add-list-Ab :
     (l1 l2 : list (type-Ab A)) →
-    Id
-      ( add-list-Ab (concat-list l1 l2))
-      ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+    add-list-Ab (concat-list l1 l2) ＝
+    add-Ab A (add-list-Ab l1) (add-list-Ab l2)
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
 ```
@@ -918,3 +1041,8 @@ module _
           ( commutator-normal-subgroup-Group G))
       ( nullifies-commutator-normal-subgroup-hom-group-Ab)
 ```
+
+## See also
+
+- [Large abelian groups](group-theory.large-abelian-groups.md), which span
+  universe levels

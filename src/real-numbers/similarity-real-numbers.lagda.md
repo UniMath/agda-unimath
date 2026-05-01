@@ -10,11 +10,16 @@ module real-numbers.similarity-real-numbers where
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
+open import foundation.large-equivalence-relations
+open import foundation.large-similarity-relations
+open import foundation.locally-small-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositions
+open import foundation.similarity-subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import order-theory.large-preorders
 
 open import real-numbers.dedekind-real-numbers
 ```
@@ -34,11 +39,15 @@ differing universe levels.
 
 ```agda
 opaque
-  sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
-  sim-prop-ℝ x y = sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
-
   sim-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
-  sim-ℝ x y = type-Prop (sim-prop-ℝ x y)
+  sim-ℝ x y = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+
+  is-prop-sim-ℝ : {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) → is-prop (sim-ℝ x y)
+  is-prop-sim-ℝ x y =
+    is-prop-type-Prop (sim-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y))
+
+sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
+sim-prop-ℝ x y = (sim-ℝ x y , is-prop-sim-ℝ x y)
 
 infix 6 _~ℝ_
 _~ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → UU (l1 ⊔ l2)
@@ -54,7 +63,7 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding sim-ℝ
 
     sim-lower-cut-iff-sim-ℝ :
@@ -69,19 +78,24 @@ module _
   {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
-  opaque
+  abstract opaque
     unfolding sim-ℝ
 
-    sim-upper-cut-iff-sim-ℝ :
-      sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ~ℝ y)
-    pr1 sim-upper-cut-iff-sim-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
-    pr2 sim-upper-cut-iff-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
+    sim-sim-upper-cut-ℝ : sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) → (x ~ℝ y)
+    sim-sim-upper-cut-ℝ = sim-lower-cut-sim-upper-cut-ℝ x y
+
+    sim-upper-cut-sim-ℝ : (x ~ℝ y) → sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y)
+    sim-upper-cut-sim-ℝ = sim-upper-cut-sim-lower-cut-ℝ x y
+
+  sim-upper-cut-iff-sim-ℝ :
+    sim-subtype (upper-cut-ℝ x) (upper-cut-ℝ y) ↔ (x ~ℝ y)
+  sim-upper-cut-iff-sim-ℝ = (sim-sim-upper-cut-ℝ , sim-upper-cut-sim-ℝ)
 ```
 
 ### Reflexivity
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   refl-sim-ℝ : {l : Level} → (x : ℝ l) → x ~ℝ x
@@ -94,7 +108,7 @@ opaque
 ### Symmetry
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   symmetric-sim-ℝ :
@@ -106,7 +120,7 @@ opaque
 ### Transitivity
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   transitive-sim-ℝ :
@@ -117,14 +131,61 @@ opaque
     transitive-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
+### Concatenation of similarity with equality
+
+```agda
+abstract
+  concat-sim-eq-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} {y' : ℝ l2} →
+    sim-ℝ x y → y ＝ y' → sim-ℝ x y'
+  concat-sim-eq-ℝ x~y refl = x~y
+
+  concat-eq-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l1} {y : ℝ l2} →
+    x ＝ x' → sim-ℝ x' y → sim-ℝ x y
+  concat-eq-sim-ℝ refl x'~y = x'~y
+```
+
 ### Similar real numbers in the same universe are equal
 
 ```agda
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   eq-sim-ℝ : {l : Level} → {x y : ℝ l} → x ~ℝ y → x ＝ y
   eq-sim-ℝ {x = x} {y = y} H = eq-eq-lower-cut-ℝ x y (eq-sim-subtype _ _ H)
+```
+
+### Similarity is a large similarity relation
+
+```agda
+large-preorder-sim-ℝ : Large-Preorder lsuc _⊔_
+large-preorder-sim-ℝ =
+  make-Large-Preorder ℝ sim-prop-ℝ refl-sim-ℝ transitive-sim-ℝ
+
+large-equivalence-relation-sim-ℝ : Large-Equivalence-Relation _⊔_ ℝ
+large-equivalence-relation-sim-ℝ =
+  make-Large-Equivalence-Relation
+    ( sim-prop-ℝ)
+    ( refl-sim-ℝ)
+    ( λ _ _ → symmetric-sim-ℝ)
+    ( transitive-sim-ℝ)
+
+large-similarity-relation-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-ℝ =
+  make-Large-Similarity-Relation
+    ( large-equivalence-relation-sim-ℝ)
+    ( λ _ _ → eq-sim-ℝ)
+```
+
+### The real numbers at universe `l` are locally small with respect to `UU l`
+
+```agda
+abstract
+  is-locally-small-ℝ : (l : Level) → is-locally-small l (ℝ l)
+  is-locally-small-ℝ =
+    is-locally-small-type-Large-Similarity-Relation
+      ( large-similarity-relation-ℝ)
 ```
 
 ### Similarity reasoning
@@ -142,7 +203,7 @@ similarity-reasoning-ℝ
 infixl 1 similarity-reasoning-ℝ_
 infixl 0 step-similarity-reasoning-ℝ
 
-opaque
+abstract opaque
   unfolding sim-ℝ
 
   similarity-reasoning-ℝ_ :
@@ -156,3 +217,9 @@ opaque
 
   syntax step-similarity-reasoning-ℝ p u q = p ~ℝ u by q
 ```
+
+## See also
+
+- In
+  [`real-numbers.equality-real-numbers`](real-numbers.equality-real-numbers.md)
+  it is demonstrated that similarity is double negation stable.

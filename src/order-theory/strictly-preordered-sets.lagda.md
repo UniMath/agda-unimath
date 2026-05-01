@@ -32,8 +32,8 @@ preordered set consists of a set $A$, a
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
 irreflexive and transitive:
 
-- For any $x:A$ we have $x \nle x$.
-- For any $x,y,z:A$ we have $y<z \to x<y \to x<z$.
+- For any $x:A$ we have $x \nless x$.
+- For any $x,y,z:A$ we have $(y<z) → (x<y) → (x<z)$.
 
 Strictly preordered sets satisfy antisymmetry by irreflexivity and transitivity.
 
@@ -48,6 +48,14 @@ Strictly-Preordered-Set l1 l2 =
     ( λ A →
       Σ ( Relation-Prop l2 (type-Set A))
         ( λ R → is-irreflexive-Relation-Prop R × is-transitive-Relation-Prop R))
+
+make-Strictly-Preordered-Set :
+  {l1 l2 : Level}
+  (P : Strict-Preorder l1 l2) →
+  is-set (type-Strict-Preorder P) →
+  Strictly-Preordered-Set l1 l2
+make-Strictly-Preordered-Set P is-set-P =
+  ( ( type-Strict-Preorder P , is-set-P) , pr2 P)
 
 module _
   {l1 l2 : Level} (A : Strictly-Preordered-Set l1 l2)
@@ -121,3 +129,9 @@ module _
     is-antisymmetric-le-Strict-Preorder
       ( strict-preorder-Strictly-Preordered-Set A)
 ```
+
+## See also
+
+- [Strict orders](order-theory.strict-orders.md) are strictly preordered sets
+  that are _extensional_ with respect to the structure of the underlying strict
+  preorder.

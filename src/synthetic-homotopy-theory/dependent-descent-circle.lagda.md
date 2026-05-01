@@ -30,14 +30,16 @@ open import synthetic-homotopy-theory.free-loops
 
 ## Idea
 
-The **dependent descent property of the circle** asserts that a family over a
-family `P` over the [circle](synthetic-homotopy-theory.circle.md) is
-[equivalently](foundation-core.equivalences.md) described by **dependent descent
-data** over the [descent data](synthetic-homotopy-theory.descent-circle.md) of
-`P`, which is defined as a
+The {{#concept "dependent descent property" Disambiguation="of the circle"}} of
+the [circle](synthetic-homotopy-theory.circle.md) asserts that a family `P` over
+descent data on the circle is [equivalently](foundation-core.equivalences.md)
+described by
+{{#concept "dependent descent data" Disambiguation="for the circle" Agda=dependent-descent-data-circle}}
+over the [descent data](synthetic-homotopy-theory.descent-circle.md) of `P`,
+which is defined as a
 [dependent type with an automorphism](structured-types.dependent-types-equipped-with-automorphisms.md).
 More precisely, dependent descent data over descent data `(X,e)` for the circle
-consists of a type family `R : X → U` equipped with a family of equivalences
+consists of a type family `R : X → 𝒰` equipped with a family of equivalences
 `k : (x : X) → R(x) ≃ R(e(x))` _over_ `e`.
 
 ## Definitions
@@ -340,9 +342,9 @@ module _
 
 ### Uniqueness of dependent descent data characterizing a type family over a family over the circle
 
-Given a type family `A : 𝕊¹ → U` with corresponding descent data `(X, e)`, and a
-type family `R : X → U` over `X` invariant under `e` as witnessed by `k`, there
-is a unique family `B : (t : 𝕊¹) → A t → U` for which `(R, k)` is dependent
+Given a type family `A : 𝕊¹ → 𝒰` with corresponding descent data `(X, e)`, and a
+type family `R : X → 𝒰` over `X` invariant under `e` as witnessed by `k`, there
+is a unique family `B : (t : 𝕊¹) → A t → 𝒰` for which `(R, k)` is dependent
 descent data over `A`.
 
 This is so far a conjecture which remains to be shown.

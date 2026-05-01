@@ -16,6 +16,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
@@ -24,6 +25,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -65,10 +67,11 @@ is-positive-ℤ (inl x) = empty
 is-positive-ℤ (inr (inl x)) = empty
 is-positive-ℤ (inr (inr x)) = unit
 
-is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
-is-prop-is-positive-ℤ (inl x) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
+abstract
+  is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
+  is-prop-is-positive-ℤ (inl x) = is-prop-empty
+  is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
+  is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
 
 subtype-positive-ℤ : subtype lzero ℤ
 subtype-positive-ℤ x = (is-positive-ℤ x , is-prop-is-positive-ℤ x)
@@ -89,6 +92,9 @@ module _
   int-positive-ℤ : ℤ
   int-positive-ℤ = pr1 p
 
+  int-ℤ⁺ : ℤ
+  int-ℤ⁺ = int-positive-ℤ
+
   is-positive-int-positive-ℤ : is-positive-ℤ int-positive-ℤ
   is-positive-int-positive-ℤ = pr2 p
 ```
@@ -98,6 +104,9 @@ module _
 ```agda
 one-positive-ℤ : positive-ℤ
 one-positive-ℤ = (one-ℤ , star)
+
+one-ℤ⁺ : ℤ⁺
+one-ℤ⁺ = one-positive-ℤ
 ```
 
 ## Properties
@@ -105,7 +114,7 @@ one-positive-ℤ = (one-ℤ , star)
 ### Positivity is decidable
 
 ```agda
-is-decidable-is-positive-ℤ : is-decidable-fam is-positive-ℤ
+is-decidable-is-positive-ℤ : is-decidable-family is-positive-ℤ
 is-decidable-is-positive-ℤ (inl x) = inr id
 is-decidable-is-positive-ℤ (inr (inl x)) = inr id
 is-decidable-is-positive-ℤ (inr (inr x)) = inl star
@@ -138,9 +147,10 @@ positive-ℤ-Set = positive-ℤ , is-set-positive-ℤ
 ### The successor of a positive integer is positive
 
 ```agda
-is-positive-succ-is-positive-ℤ :
-  {x : ℤ} → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
-is-positive-succ-is-positive-ℤ {inr (inr x)} H = H
+abstract
+  is-positive-succ-is-positive-ℤ :
+    {x : ℤ} → is-positive-ℤ x → is-positive-ℤ (succ-ℤ x)
+  is-positive-succ-is-positive-ℤ {inr (inr x)} H = H
 
 succ-positive-ℤ : positive-ℤ → positive-ℤ
 succ-positive-ℤ (x , H) = (succ-ℤ x , is-positive-succ-is-positive-ℤ H)
@@ -149,13 +159,38 @@ succ-positive-ℤ (x , H) = (succ-ℤ x , is-positive-succ-is-positive-ℤ H)
 ### The integer image of a nonzero natural number is positive
 
 ```agda
-is-positive-int-is-nonzero-ℕ :
-  (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
-is-positive-int-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
-is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
+abstract
+  is-positive-int-is-nonzero-ℕ :
+    (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
+  is-positive-int-is-nonzero-ℕ zero-ℕ H = ex-falso (H refl)
+  is-positive-int-is-nonzero-ℕ (succ-ℕ x) H = star
 
 positive-int-ℕ⁺ : ℕ⁺ → positive-ℤ
 positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n≠0
+
+positive-nat-ℤ⁺ : positive-ℤ → ℕ⁺
+positive-nat-ℤ⁺ (inr (inr x) , k>0) = succ-nonzero-ℕ' x
+
+nat-ℤ⁺ : positive-ℤ → ℕ
+nat-ℤ⁺ x = nat-ℕ⁺ (positive-nat-ℤ⁺ x)
+
+abstract
+  is-section-positive-nat-ℤ⁺ :
+    (k : ℤ⁺) → positive-int-ℕ⁺ (positive-nat-ℤ⁺ k) ＝ k
+  is-section-positive-nat-ℤ⁺ (inr (inr k) , k>0) =
+    eq-type-subtype subtype-positive-ℤ refl
+
+  is-retraction-positive-nat-ℤ⁺ :
+    (n : ℕ⁺) → positive-nat-ℤ⁺ (positive-int-ℕ⁺ n) ＝ n
+  is-retraction-positive-nat-ℤ⁺ (zero-ℕ , n≠0) = ex-falso (n≠0 refl)
+  is-retraction-positive-nat-ℤ⁺ (succ-ℕ n , n≠0) = eq-nonzero-ℕ refl
+
+  is-equiv-positive-int-ℕ⁺ : is-equiv positive-int-ℕ⁺
+  is-equiv-positive-int-ℕ⁺ =
+    is-equiv-is-invertible
+      ( positive-nat-ℤ⁺)
+      ( is-section-positive-nat-ℤ⁺)
+      ( is-retraction-positive-nat-ℤ⁺)
 ```
 
 ### The canonical equivalence between natural numbers and positive integers
@@ -163,6 +198,11 @@ positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n
 ```agda
 positive-int-ℕ : ℕ → positive-ℤ
 positive-int-ℕ = rec-ℕ one-positive-ℤ (λ _ → succ-positive-ℤ)
+
+abstract
+  int-positive-int-ℕ : (n : ℕ) → int-positive-ℤ (positive-int-ℕ n) ＝ in-pos-ℤ n
+  int-positive-int-ℕ 0 = refl
+  int-positive-int-ℕ (succ-ℕ n) = ap succ-ℤ (int-positive-int-ℕ n)
 
 nat-positive-ℤ : positive-ℤ → ℕ
 nat-positive-ℤ (inr (inr x) , H) = x
@@ -172,24 +212,26 @@ eq-nat-positive-succ-positive-ℤ :
   nat-positive-ℤ (succ-positive-ℤ x) ＝ succ-ℕ (nat-positive-ℤ x)
 eq-nat-positive-succ-positive-ℤ (inr (inr x) , H) = refl
 
-is-section-nat-positive-ℤ :
-  (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
-is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
-is-section-nat-positive-ℤ (inr (inr (succ-ℕ x)) , H) =
-  ap succ-positive-ℤ (is-section-nat-positive-ℤ ( inr (inr x) , H))
+abstract
+  is-section-nat-positive-ℤ :
+    (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
+  is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
+  is-section-nat-positive-ℤ (inr (inr (succ-ℕ x)) , H) =
+    ap succ-positive-ℤ (is-section-nat-positive-ℤ ( inr (inr x) , H))
 
-is-retraction-nat-positive-ℤ :
-  (n : ℕ) → nat-positive-ℤ (positive-int-ℕ n) ＝ n
-is-retraction-nat-positive-ℤ zero-ℕ = refl
-is-retraction-nat-positive-ℤ (succ-ℕ n) =
-  eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
-  ap succ-ℕ (is-retraction-nat-positive-ℤ n)
+  is-retraction-nat-positive-ℤ :
+    (n : ℕ) → nat-positive-ℤ (positive-int-ℕ n) ＝ n
+  is-retraction-nat-positive-ℤ zero-ℕ = refl
+  is-retraction-nat-positive-ℤ (succ-ℕ n) =
+    eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
+    ap succ-ℕ (is-retraction-nat-positive-ℤ n)
 
-is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
-pr1 (pr1 is-equiv-positive-int-ℕ) = nat-positive-ℤ
-pr2 (pr1 is-equiv-positive-int-ℕ) = is-section-nat-positive-ℤ
-pr1 (pr2 is-equiv-positive-int-ℕ) = nat-positive-ℤ
-pr2 (pr2 is-equiv-positive-int-ℕ) = is-retraction-nat-positive-ℤ
+  is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
+  is-equiv-positive-int-ℕ =
+    is-equiv-is-invertible
+      ( nat-positive-ℤ)
+      ( is-section-nat-positive-ℤ)
+      ( is-retraction-nat-positive-ℤ)
 
 equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
 pr1 equiv-positive-int-ℕ = positive-int-ℕ
@@ -207,6 +249,13 @@ is-countable-positive-ℤ =
     ( intro-exists
       ( positive-int-ℕ)
       ( is-surjective-is-equiv is-equiv-positive-int-ℕ))
+```
+
+### Zero is not positive
+
+```agda
+not-is-positive-zero-ℤ : ¬ (is-positive-ℤ zero-ℤ)
+not-is-positive-zero-ℤ ()
 ```
 
 ## See also

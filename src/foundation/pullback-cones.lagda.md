@@ -74,7 +74,7 @@ module _
   cone-pullback-cone = pr2 (pr1 c)
 
   vertical-map-pullback-cone :
-    domain-pullback-cone → left-type-cospan-diagram 𝒮
+    domain-pullback-cone → domain-cospan-diagram 𝒮
   vertical-map-pullback-cone =
     vertical-map-cone
       ( left-map-cospan-diagram 𝒮)
@@ -82,7 +82,7 @@ module _
       ( cone-pullback-cone)
 
   horizontal-map-pullback-cone :
-    domain-pullback-cone → right-type-cospan-diagram 𝒮
+    domain-pullback-cone → codomain-cospan-diagram 𝒮
   horizontal-map-pullback-cone =
     horizontal-map-cone
       ( left-map-cospan-diagram 𝒮)

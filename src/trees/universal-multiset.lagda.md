@@ -30,7 +30,7 @@ open import trees.w-types
 The {{#concept "universal multiset" Agda=universal-multiset-𝕍}} of
 [universe level](foundation.universe-levels.md) `l` is the
 [multiset](trees.multisets.md) of level `lsuc l` built out of `𝕍 l` and
-resizings of the multisets it contains.
+[resizings](trees.small-multisets.md) of the multisets it contains.
 
 ## Definition
 

@@ -30,7 +30,9 @@ open import univalent-combinatorics.finite-types
 </details>
 ## Idea
 
-**Methane** is the simplest hydrocarbon, and the first alkane.
+{{#concept "Methane" WD="methane" WDID=Q37129 Agda=methane}} is the simplest
+[hydrocarbon](organic-chemistry.hydrocarbons.md), and the first
+[alkane](organic-chemistry.alkanes.md).
 
 ## Definition
 

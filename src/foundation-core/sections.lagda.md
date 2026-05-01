@@ -97,7 +97,7 @@ module _
   is-section-map-section-comp :
     is-section (g ∘ h) map-section-comp
   is-section-map-section-comp =
-    ( g ·l (is-section-map-section h t ·r map-section g s)) ∙h
+    ( g ·l is-section-map-section h t ·r map-section g s) ∙h
     ( is-section-map-section g s)
 
   section-comp : section (g ∘ h)
@@ -153,7 +153,7 @@ module _
     is-section-map-section-right-map-triangle'
 ```
 
-#### Second version, with the commutativity of the triangle accoring to our convention
+#### Second version, with the commutativity of the triangle according to our convention
 
 We state the same result as the previous result, only with the homotopy
 witnessing the commutativity of the triangle inverted.

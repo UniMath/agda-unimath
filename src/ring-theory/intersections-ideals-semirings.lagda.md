@@ -20,9 +20,11 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-The **intersection** of two [ideals](ring-theory.ideals-semirings.md) of a
-[semiring](ring-theory.semirings.md) consists of the elements contained in both
-of them.
+The
+{{#concept "intersection" Disambiguation="of two ideals in a semiring" Agda=intersection-ideal-Semiring}}
+of two [ideals](ring-theory.ideals-semirings.md) in a
+[semiring](ring-theory.semirings.md) `R` consists of the elements contained in
+both of them.
 
 ## Definition
 
@@ -68,4 +70,19 @@ module _
     is-closed-under-right-multiplication-ideal-Semiring R A x y (pr1 H)
   pr2 (is-closed-under-right-multiplication-intersection-ideal-Semiring x y H) =
     is-closed-under-right-multiplication-ideal-Semiring R B x y (pr2 H)
+
+  is-ideal-intersection-ideal-Semiring :
+    is-ideal-subset-Semiring R subset-intersection-ideal-Semiring
+  pr1 (pr1 is-ideal-intersection-ideal-Semiring) =
+    contains-zero-intersection-ideal-Semiring
+  pr2 (pr1 is-ideal-intersection-ideal-Semiring) =
+    is-closed-under-addition-intersection-ideal-Semiring
+  pr1 (pr2 is-ideal-intersection-ideal-Semiring) =
+    is-closed-under-left-multiplication-intersection-ideal-Semiring
+  pr2 (pr2 is-ideal-intersection-ideal-Semiring) =
+    is-closed-under-right-multiplication-intersection-ideal-Semiring
+
+  intersection-ideal-Semiring : ideal-Semiring (l2 ⊔ l3) R
+  pr1 intersection-ideal-Semiring = subset-intersection-ideal-Semiring
+  pr2 intersection-ideal-Semiring = is-ideal-intersection-ideal-Semiring
 ```

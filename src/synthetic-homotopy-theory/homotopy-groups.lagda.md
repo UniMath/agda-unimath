@@ -28,14 +28,13 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 The {{#concept "(abstract) homotopy groups" Disambiguation="of a pointed type"}}
 of a [pointed type](structured-types.pointed-types.md) `A` are a
-[sequence](foundation.sequences.md) `i ↦ πᵢ A` of [sets](foundation.sets.md)
-where
+[sequence](lists.sequences.md) `i ↦ πᵢ A` of [sets](foundation.sets.md) where
 
 - `π₀ A` is the set of
   [connected components](foundation.connected-components.md) of `A`, and
 - `πᵢ₊₁ A` is the set `πᵢ ΩA` equipped with the
-  [group structure](group-theory.groups.md) obtained from the [loop
-  space](synthetic-homotopy theory.loop-spaces.md).
+  [group structure](group-theory.groups.md) obtained from the
+  [loop space](synthetic-homotopy-theory.loop-spaces.md).
 
 For `i ≥ 2`, the `i`-th homotopy group `πᵢ A` of `A` is
 [abelian](group-theory.abelian-groups.md) by the

@@ -23,8 +23,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A ring R is said to satisfy the invariant basis property if `R^m ≅ R^n` implies
-`m = n` for any two natural numbers `m` and `n`.
+A [ring](ring-theory.rings.md) `R` is said to satisfy the
+{{#concept "invariant basis property" Disambiguation="of rings" Agda=invariant-basis-property-Ring}}
+if `R^m ≅ R^n` implies `m = n` for any two
+[natural numbers](elementary-number-theory.natural-numbers.md) `m` and `n`.
 
 ## Definition
 
@@ -34,5 +36,5 @@ invariant-basis-property-Ring :
 invariant-basis-property-Ring R =
   (m n : ℕ) →
   iso-Ring (Π-Ring (Fin m) (λ i → R)) (Π-Ring (Fin n) (λ i → R)) →
-  Id m n
+  m ＝ n
 ```

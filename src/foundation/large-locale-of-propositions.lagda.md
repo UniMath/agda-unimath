@@ -11,8 +11,10 @@ open import foundation.conjunction
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
+open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
@@ -28,6 +30,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 open import order-theory.top-elements-large-posets
 ```
 
@@ -67,6 +70,14 @@ large-preorder-Large-Poset Prop-Large-Poset = Prop-Large-Preorder
 antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```
 
+### Similarity in the large poset of propositions
+
+```agda
+large-similarity-relation-Prop : Large-Similarity-Relation (_⊔_) Prop
+large-similarity-relation-Prop =
+  large-similarity-relation-Large-Poset Prop-Large-Poset
+```
+
 ### Meets in the large poset of propositions
 
 ```agda
@@ -96,9 +107,9 @@ is-top-element-top-has-top-element-Large-Poset
 has-bottom-element-Prop-Large-Locale :
   has-bottom-element-Large-Poset Prop-Large-Poset
 bottom-has-bottom-element-Large-Poset
-  has-bottom-element-Prop-Large-Locale = empty-Prop
+  has-bottom-element-Prop-Large-Locale = raise-empty-Prop
 is-bottom-element-bottom-has-bottom-element-Large-Poset
-  has-bottom-element-Prop-Large-Locale P = ex-falso
+  has-bottom-element-Prop-Large-Locale l P = ex-falso ∘ map-inv-raise
 ```
 
 ### The large poset of propositions is a large meet-semilattice

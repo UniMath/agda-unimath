@@ -1,4 +1,4 @@
-# The descent property of the circle
+# Descent for the circle
 
 ```agda
 module synthetic-homotopy-theory.descent-circle where
@@ -36,8 +36,10 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-The **descent property** of the [circle](synthetic-homotopy-theory.circle.md)
-uniquely characterizes type families over the circle.
+The
+{{#concept "descent property" Disambiguation="of the circle" Agda=unique-family-property-universal-property-circle}}
+of the [circle](synthetic-homotopy-theory.circle.md) uniquely characterizes type
+families over the circle.
 
 ## Definitions
 
@@ -45,8 +47,8 @@ uniquely characterizes type families over the circle.
 
 By the
 [universal property of the circle](synthetic-homotopy-theory.universal-property-circle.md)
-and [univalence](foundation.univalence.md), a type family `A : 𝕊¹ → U` over the
-[circle](synthetic-homotopy-theory.circle.md) is equivalent to a type `X : U`
+and [univalence](foundation.univalence.md), a type family `A : 𝕊¹ → 𝒰` over the
+[circle](synthetic-homotopy-theory.circle.md) is equivalent to a type `X : 𝒰`
 equipped with an [automorphism](foundation.automorphisms.md) `e : X ≃ X`, in a
 way made precise in further sections of this file. The pair `(X, e)` is called
 **descent data** for the circle.
@@ -125,10 +127,10 @@ module _
 A **family for descent data** `(X, e)` is a family over the circle, along with a
 proof that `(X, e)` is equivalent to the canonical descent data of the family.
 
-**Descent data for a family** `A : 𝕊¹ → U` is descent data with a proof that
+**Descent data for a family** `A : 𝕊¹ → 𝒰` is descent data with a proof that
 it's equivalent to the canonical descent data of `A`.
 
-A **family with descent data** is a family `A : 𝕊¹ → U` over the circle,
+A **family with descent data** is a family `A : 𝕊¹ → 𝒰` over the circle,
 equipped with descent data `(X, e)`, and a proof of their equivalence. This can
 be described as a diagram
 
@@ -306,7 +308,7 @@ module _
 ### Uniqueness of descent data characterizing a type family over the circle
 
 Given a type `X` and an automorphism `e : X ≃ X`, there is a unique type family
-`𝓓(X, e) : 𝕊¹ → U` for which `(X, e)` is descent data.
+`𝓓(X, e) : 𝕊¹ → 𝒰` for which `(X, e)` is descent data.
 
 ```agda
 comparison-descent-data-circle :
@@ -393,3 +395,17 @@ module _
   pr2 (pr2 (family-with-descent-data-circle-descent-data P)) =
     pr2 (family-for-descent-data-circle-descent-data P)
 ```
+
+## See also
+
+- [Dependent descent for the circle](synthetic-homotopy-theory.dependent-descent-circle.md)
+- [Descent data for constant type families over the circle](synthetic-homotopy-theory.descent-circle-constant-families.md)
+- [Descent data for families of dependent pair types over the circle](synthetic-homotopy-theory.descent-circle-dependent-pair-types.md)
+- [Descent data for families of equivalence types over the circle](synthetic-homotopy-theory.descent-circle-equivalence-types.md)
+- [Descent data for families of function types over the circle](synthetic-homotopy-theory.descent-circle-function-types.md)
+- [Sections of families over the circle](synthetic-homotopy-theory.sections-descent-circle.md)
+- [Subtypes of descent data for the circle](synthetic-homotopy-theory.descent-circle-subtypes.md)
+
+## Table of descent properties
+
+{{#include tables/descent-properties.md}}

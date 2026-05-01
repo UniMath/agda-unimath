@@ -9,6 +9,7 @@ open import foundation-core.subtypes public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
@@ -21,6 +22,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -29,6 +31,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
+open import foundation-core.univalence
 ```
 
 </details>
@@ -115,6 +118,36 @@ module _
     map-inv-equiv (extensionality-subtype Q)
 ```
 
+### Subtypes with the same elements are equivalent
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X)
+  where
+
+  equiv-has-same-elements-type-subtype :
+    has-same-elements-subtype S T → type-subtype S ≃ type-subtype T
+  equiv-has-same-elements-type-subtype H =
+    equiv-tot (λ x → equiv-iff' (S x) (T x) (H x))
+```
+
+### A subtype `S` is equivalent to `S` precomposed with an equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (S : subtype l3 Y)
+  where
+
+  equiv-precomp-equiv-type-subtype :
+    type-subtype S ≃ type-subtype (S ∘ map-equiv e)
+  equiv-precomp-equiv-type-subtype =
+    equiv-Σ
+      ( λ x → type-Prop ((S ∘ map-equiv e) x))
+      ( inv-equiv e)
+      ( λ y →
+        equiv-eq (ap (type-Prop ∘ S) (inv (is-section-map-inv-equiv e y))))
+```
+
 ### The containment relation is antisymmetric
 
 ```agda
@@ -153,7 +186,7 @@ pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
 
-### Characterisation of embeddings into subtypes
+### Characterization of embeddings into subtypes
 
 ```agda
 module _

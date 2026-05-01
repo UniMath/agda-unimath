@@ -9,6 +9,7 @@ module foundation.functoriality-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.truncations
@@ -20,6 +21,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 open import foundation-core.sections
@@ -132,7 +134,7 @@ module _
         ( preserves-comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
         ( htpy-trunc (is-retraction-map-inv-equiv e) ∙h id-map-trunc k))
 
-  equiv-trunc : (type-trunc k A ≃ type-trunc k B)
+  equiv-trunc : type-trunc k A ≃ type-trunc k B
   pr1 equiv-trunc = map-equiv-trunc
   pr2 equiv-trunc = is-equiv-map-equiv-trunc
 ```
@@ -180,4 +182,54 @@ module _
     retraction-map-trunc-retraction
       ( inclusion-retract R)
       ( retraction-retract R)
+```
+
+### The truncation of the evaluation map
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋)
+  where
+
+  map-trunc-ev :
+    {X : UU l1} {Y : X → UU l2} →
+    (x : X) → type-trunc k ((x : X) → Y x) → type-trunc k (Y x)
+  map-trunc-ev x = map-trunc k (ev x)
+
+  compute-map-trunc-ev :
+    {X : UU l1} {Y : X → UU l2} →
+    (x : X) (f : (x : X) → Y x) →
+    map-trunc-ev x (unit-trunc f) ＝ unit-trunc (f x)
+  compute-map-trunc-ev x f = coherence-square-map-trunc k (ev x) f
+```
+
+### Distributivity of truncations over dependent products
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋)
+  where
+
+  map-distributive-trunc-Π :
+    {X : UU l1} (Y : X → UU l2) →
+    type-trunc k ((x : X) → Y x) → (x : X) → type-trunc k (Y x)
+  map-distributive-trunc-Π Y f x = map-trunc-ev k x f
+
+  compute-distributive-trunc-Π :
+    {X : UU l1} {Y : X → UU l2} →
+    (f : (x : X) → Y x) (x : X) →
+    map-distributive-trunc-Π Y (unit-trunc f) x ＝ unit-trunc (f x)
+  compute-distributive-trunc-Π f x = compute-map-trunc-ev k x f
+
+  map-distributive-trunc-function-type :
+    (X : UU l1) (Y : UU l2) → type-trunc k (X → Y) → X → type-trunc k Y
+  map-distributive-trunc-function-type X Y =
+    map-distributive-trunc-Π (λ _ → Y)
+
+  compute-distributive-trunc-function-type :
+    {X : UU l1} {Y : UU l2} →
+    (f : X → Y) (x : X) →
+    map-distributive-trunc-function-type X Y (unit-trunc f) x ＝
+    unit-trunc (f x)
+  compute-distributive-trunc-function-type = compute-distributive-trunc-Π
 ```

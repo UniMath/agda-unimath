@@ -323,7 +323,7 @@ only assume maps `g : B → X` and `h : A → B`. In this special case, we set
 
 [André Joyal](https://en.wikipedia.org/wiki/André_Joyal) proposed calling this
 property the 3-for-2 property, despite most mathematicians calling it the
-_2-out-of-3 property_. The story goes that on the produce market is is common to
+_2-out-of-3 property_. The story goes that on the produce market it is common to
 advertise a discount as "3-for-2". If you buy two apples, then you get the third
 for free. Similarly, if you prove that two maps in a commuting triangle are
 equivalences, then you get the third for free.
@@ -420,7 +420,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
-  abstract
+  opaque
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
     pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
@@ -500,6 +500,12 @@ module _
     htpy-map-inv-is-invertible H
       ( is-invertible-is-equiv F)
       ( is-invertible-is-equiv G)
+
+is-equiv-htpy-id : {l : Level} {A : UU l} {f : A → A} → f ~ id → is-equiv f
+is-equiv-htpy-id H = is-equiv-htpy id H is-equiv-id
+
+is-equiv-htpy-id' : {l : Level} {A : UU l} {f : A → A} → id ~ f → is-equiv f
+is-equiv-htpy-id' H = is-equiv-htpy' id H is-equiv-id
 ```
 
 ### Any retraction of an equivalence is an equivalence
@@ -718,7 +724,7 @@ underlying map.
 Even if a proof by equivalence reasoning is clear to the human reader,
 constructing equivalences by hand by constructing maps back and forth and two
 homotopies witnessing that they are mutual inverses is often the most
-straigtforward solution that gives the best expected computational behavior of
+straightforward solution that gives the best expected computational behavior of
 the constructed equivalence. In particular, if the underlying map or its inverse
 are noteworthy maps, it is good practice to define them directly rather than as
 underlying maps of equivalences constructed by equivalence reasoning.

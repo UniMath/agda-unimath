@@ -30,8 +30,9 @@ open import structured-types.types-equipped-with-automorphisms
 
 Consider a
 [type equipped with an automorphism](structured-types.types-equipped-with-automorphisms.md)
-`(X,e)`. A **dependent type equipped with an automorphism** over `(X,e)`
-consists of a dependent type `Y` over `X` and for each `x : X` an
+`(X, e)`. A
+{{#concept "dependent type equipped with an automorphism" Agda=Dependent-Type-With-Automorphism}}
+over `(X, e)` consists of a dependent type `Y` over `X` and for each `x : X` an
 [equivalence](foundation-core.equivalences.md) `Y x ≃ Y (e x)`.
 
 ## Definitions

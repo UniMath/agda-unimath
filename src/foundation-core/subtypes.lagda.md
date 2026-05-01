@@ -10,6 +10,7 @@ module foundation-core.subtypes where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
@@ -192,6 +193,9 @@ module _
   emb-subtype : type-subtype B ↪ A
   pr1 emb-subtype = inclusion-subtype B
   pr2 emb-subtype = is-emb-inclusion-subtype
+
+  injection-subtype : injection (type-subtype B) A
+  injection-subtype = injection-emb emb-subtype
 
   equiv-ap-inclusion-subtype :
     {s t : type-subtype B} →

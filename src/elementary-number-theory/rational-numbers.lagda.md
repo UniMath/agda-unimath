@@ -13,6 +13,8 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -22,12 +24,17 @@ open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import set-theory.countable-sets
@@ -90,9 +97,10 @@ module _
 ### Inclusion of fractions
 
 ```agda
-rational-fraction-ℤ : fraction-ℤ → ℚ
-pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
-pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
+opaque
+  rational-fraction-ℤ : fraction-ℤ → ℚ
+  pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
+  pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ```
 
 ### Inclusion of the integers
@@ -102,6 +110,13 @@ rational-ℤ : ℤ → ℚ
 pr1 (pr1 (rational-ℤ x)) = x
 pr2 (pr1 (rational-ℤ x)) = one-positive-ℤ
 pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
+```
+
+### Inclusion of the natural numbers
+
+```agda
+rational-ℕ : ℕ → ℚ
+rational-ℕ n = rational-ℤ (int-ℕ n)
 ```
 
 ### Negative one, zero and one
@@ -127,41 +142,87 @@ one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+
+neq-zero-one-ℚ : zero-ℚ ≠ one-ℚ
+neq-zero-one-ℚ ()
 ```
 
 ### The negative of a rational number
 
 ```agda
-neg-ℚ : ℚ → ℚ
-pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
-pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
+opaque
+  neg-ℚ : ℚ → ℚ
+  pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
+  pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
+```
+
+### The negation of zero is zero
+
+```agda
+abstract opaque
+  unfolding neg-ℚ
+
+  neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
+  neg-zero-ℚ = eq-type-subtype is-reduced-prop-fraction-ℤ refl
 ```
 
 ### The mediant of two rationals
 
 ```agda
-mediant-ℚ : ℚ → ℚ → ℚ
-mediant-ℚ x y =
-  rational-fraction-ℤ
-    ( mediant-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y))
+opaque
+  mediant-ℚ : ℚ → ℚ → ℚ
+  mediant-ℚ x y =
+    rational-fraction-ℤ
+      ( mediant-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y))
 ```
 
 ## Properties
 
-### The rational images of two similar integer fractions are equal
+### Two integer fractions are similar if and only if they are equal as rational numbers
 
 ```agda
-abstract
-  eq-ℚ-sim-fraction-ℤ :
-    (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-    rational-fraction-ℤ x ＝ rational-fraction-ℤ y
-  eq-ℚ-sim-fraction-ℤ x y H =
-    eq-pair-Σ'
-      ( pair
+module _
+  (x y : fraction-ℤ)
+  where
+
+  abstract opaque
+    unfolding rational-fraction-ℤ
+
+    eq-ℚ-sim-fraction-ℤ :
+      sim-fraction-ℤ x y → rational-fraction-ℤ x ＝ rational-fraction-ℤ y
+    eq-ℚ-sim-fraction-ℤ H =
+      eq-type-subtype
+        ( is-reduced-prop-fraction-ℤ)
         ( unique-reduce-fraction-ℤ x y H)
-        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+
+    sim-fraction-ℤ-eq-ℚ :
+      rational-fraction-ℤ x ＝ rational-fraction-ℤ y → sim-fraction-ℤ x y
+    sim-fraction-ℤ-eq-ℚ H =
+      transitive-sim-fraction-ℤ
+        ( x)
+        ( reduce-fraction-ℤ y)
+        ( y)
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y))
+        ( transitive-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( reduce-fraction-ℤ y)
+          ( tr
+            ( sim-fraction-ℤ (reduce-fraction-ℤ x))
+            ( ap fraction-ℚ H)
+            ( refl-sim-fraction-ℤ (reduce-fraction-ℤ x)))
+          ( sim-reduced-fraction-ℤ x))
+
+    eq-ℚ-iff-sim-fraction-ℤ :
+      (sim-fraction-ℤ x y) ↔ (rational-fraction-ℤ x ＝ rational-fraction-ℤ y)
+    eq-ℚ-iff-sim-fraction-ℤ =
+      ( eq-ℚ-sim-fraction-ℤ ,
+        sim-fraction-ℤ-eq-ℚ)
 ```
 
 ### The type of rationals is a set
@@ -182,7 +243,9 @@ pr2 ℚ-Set = is-set-ℚ
 ### The rationals are a retract of the integer fractions
 
 ```agda
-abstract
+opaque
+  unfolding rational-fraction-ℤ
+
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
   is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
@@ -267,21 +330,33 @@ module _
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-abstract
-  preserves-neg-rational-ℤ :
+opaque
+  unfolding neg-ℚ
+
+  neg-rational-ℤ :
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-  preserves-neg-rational-ℤ k =
+  neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
+```
+
+### The negation of one is negative one
+
+```agda
+abstract
+  eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
+  eq-neg-one-ℚ = inv (neg-rational-ℤ one-ℤ)
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
-abstract
-  preserves-neg-rational-fraction-ℤ :
+opaque
+  unfolding neg-ℚ rational-fraction-ℤ
+
+  neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-  preserves-neg-rational-fraction-ℤ x =
+  neg-rational-fraction-ℤ x =
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
@@ -295,7 +370,9 @@ abstract
 ### The negative function on the rational numbers is an involution
 
 ```agda
-abstract
+opaque
+  unfolding neg-ℚ
+
   neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
   neg-neg-ℚ x = eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
 ```

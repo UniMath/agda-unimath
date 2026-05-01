@@ -30,6 +30,6 @@ module _
 
     -- The following should be constructed as a set
     hom-action-Concrete-Group G X
-      ( subst-action-Concrete-Group G H f (λ y → Id (shape-Concrete-Group H) y))
+      ( subst-action-Concrete-Group G H f (λ y → shape-Concrete-Group H ＝ y))
       -}
 ```

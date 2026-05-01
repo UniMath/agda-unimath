@@ -7,6 +7,7 @@ module ring-theory.subsets-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-extensionality
@@ -24,7 +25,9 @@ open import ring-theory.rings
 
 ## Idea
 
-A subset of a ring is a subtype of the underlying type of a ring
+A {{#concept "subset" Disambiguation="of a ring" Agda=subset-Ring}} of a
+[ring](ring-theory.rings.md) `R` is a [subtype](foundation.subtypes.md) of the
+underlying type of `R`.
 
 ## Definition
 
@@ -84,6 +87,9 @@ module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
   where
 
+  contains-zero-prop-subset-Ring : Prop l2
+  contains-zero-prop-subset-Ring = S (zero-Ring R)
+
   contains-zero-subset-Ring : UU l2
   contains-zero-subset-Ring = is-in-subset-Ring R S (zero-Ring R)
 ```
@@ -91,6 +97,9 @@ module _
 ### The condition that a subset contains one
 
 ```agda
+  contains-one-prop-subset-Ring : Prop l2
+  contains-one-prop-subset-Ring = S (one-Ring R)
+
   contains-one-subset-Ring : UU l2
   contains-one-subset-Ring = is-in-subset-Ring R S (one-Ring R)
 ```
@@ -103,11 +112,32 @@ module _
     {x y : type-Ring R} →
     is-in-subset-Ring R S x → is-in-subset-Ring R S y →
     is-in-subset-Ring R S (add-Ring R x y)
+
+  abstract
+    is-prop-is-closed-under-addition-subset-Ring :
+      is-prop is-closed-under-addition-subset-Ring
+    is-prop-is-closed-under-addition-subset-Ring =
+      is-prop-implicit-Π
+        ( λ x →
+          is-prop-implicit-Π
+            ( λ y →
+              is-prop-function-Prop (hom-Prop (S y) (S (add-Ring R x y)))))
+
+  is-closed-under-addition-prop-subset-Ring : Prop (l1 ⊔ l2)
+  is-closed-under-addition-prop-subset-Ring =
+    ( is-closed-under-addition-subset-Ring ,
+      is-prop-is-closed-under-addition-subset-Ring)
 ```
 
 ### The condition that a subset is closed under negatives
 
 ```agda
+  is-closed-under-negatives-prop-subset-Ring : Prop (l1 ⊔ l2)
+  is-closed-under-negatives-prop-subset-Ring =
+    implicit-Π-Prop
+      ( type-Ring R)
+      ( λ x → hom-Prop (S x) (S (neg-Ring R x)))
+
   is-closed-under-negatives-subset-Ring : UU (l1 ⊔ l2)
   is-closed-under-negatives-subset-Ring =
     {x : type-Ring R} →
@@ -117,6 +147,15 @@ module _
 ### The condition that a subset is closed under multiplication
 
 ```agda
+  is-closed-under-multiplication-prop-subset-Ring : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-subset-Ring =
+    Π-Prop
+      ( type-Ring R)
+      ( λ x →
+        Π-Prop
+          ( type-Ring R)
+          ( λ y → hom-Prop (S x) (hom-Prop (S y) (S (mul-Ring R x y)))))
+
   is-closed-under-multiplication-subset-Ring : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Ring =
     (x y : type-Ring R) → is-in-subset-Ring R S x → is-in-subset-Ring R S y →

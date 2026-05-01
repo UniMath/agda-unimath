@@ -50,8 +50,8 @@ module _
 
   functor-set-functions-isometry-Metric-Space :
     functor-Precategory
-      (precategory-isometry-Metric-Space {l1} {l2})
-      (Set-Precategory l1)
+      ( precategory-isometry-Metric-Space {l1} {l2})
+      ( Set-Precategory l1)
   pr1 functor-set-functions-isometry-Metric-Space A =
       set-Metric-Space A
   pr2 functor-set-functions-isometry-Metric-Space =
@@ -70,9 +70,9 @@ module _
 
   is-faithful-functor-set-functions-isometry-Metric-Space :
     is-faithful-functor-Precategory
-      (precategory-isometry-Metric-Space)
-      (Set-Precategory l1)
-      (functor-set-functions-isometry-Metric-Space l1 l2)
+      ( precategory-isometry-Metric-Space)
+      ( Set-Precategory l1)
+      ( functor-set-functions-isometry-Metric-Space l1 l2)
   is-faithful-functor-set-functions-isometry-Metric-Space A B =
     is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)
 ```
@@ -86,9 +86,9 @@ module _
 
   is-conservative-functor-set-functions-isometry-Metric-Space :
     is-conservative-functor-Precategory
-      (precategory-isometry-Metric-Space)
-      (Set-Precategory l1)
-      (functor-set-functions-isometry-Metric-Space l1 l2)
+      ( precategory-isometry-Metric-Space)
+      ( Set-Precategory l1)
+      ( functor-set-functions-isometry-Metric-Space l1 l2)
   is-conservative-functor-set-functions-isometry-Metric-Space
     {A} {B} f =
     ( is-iso-is-equiv-isometry-Metric-Space A B f) ∘

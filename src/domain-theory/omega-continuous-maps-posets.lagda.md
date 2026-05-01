@@ -34,6 +34,7 @@ open import foundation.universe-levels
 
 open import foundation-core.raising-universe-levels
 
+open import order-theory.increasing-sequences-posets
 open import order-theory.join-preserving-maps-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets

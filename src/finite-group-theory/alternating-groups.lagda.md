@@ -23,8 +23,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The alternating group on a finite set `X` is the group of even permutations of
-`X`, i.e. it is the kernel of the sign homomorphism `Aut(X) → Aut(2)`.
+The
+{{#concept "alternating group" Disambiguation="on a finite set, abstract" WD="alternating group" WDID=Q438814 Agda=alternating-Group}}
+on a [finite set](univalent-combinatorics.finite-types.md) `X` is the
+[group](group-theory.groups.md) of even permutations of `X`, i.e., it is the
+[kernel](group-theory.kernels-homomorphisms-groups.md) of the
+[sign homomorphism](finite-group-theory.sign-homomorphism.md) `Aut(X) → Aut(2)`.
 
 ## Definition
 
@@ -32,6 +36,7 @@ The alternating group on a finite set `X` is the group of even permutations of
 module _
   {l} (n : ℕ) (X : Type-With-Cardinality-ℕ l n)
   where
+
   alternating-Group : Group l
   alternating-Group = group-kernel-hom-Group
     ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))

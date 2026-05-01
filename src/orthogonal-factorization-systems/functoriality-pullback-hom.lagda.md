@@ -11,6 +11,9 @@ open import foundation.functoriality-morphisms-arrows
 open import foundation.functoriality-pullbacks
 open import foundation.morphisms-arrows
 open import foundation.morphisms-cospan-diagrams
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
+open import foundation.retracts-of-arrows
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.pullback-hom

@@ -144,6 +144,52 @@ abstract
   number-of-elements-count-coproduct (pair k e) (pair l f) = refl
 ```
 
+### Mapping the `count-coproduct` equivalence on `inl-coproduct-Fin` is `inl` on the left count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inl-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inl-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inl ∘ map-equiv-count cA
+  map-equiv-count-coproduct-inl-coproduct-Fin a =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inl a))
+```
+
+### Mapping the `count-coproduct` equivalence on `inr-coproduct-Fin` is `inr` on the right count
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inr-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inr-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inr ∘ map-equiv-count cB
+  map-equiv-count-coproduct-inr-coproduct-Fin b =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inr b))
+```
+
 ### If both `Σ A P` and `Σ A Q` have a count, then `Σ A P + Q` have a count
 
 ```agda
@@ -152,7 +198,7 @@ count-Σ-coproduct :
   count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
 pr1 (count-Σ-coproduct count-P count-Q) = pr1 (count-coproduct count-P count-Q)
 pr2 (count-Σ-coproduct count-P count-Q) =
-  ( inv-equiv (left-distributive-Σ-coproduct _ _ _)) ∘e
+  ( inv-left-distributive-Σ-coproduct) ∘e
   ( pr2 (count-coproduct count-P count-Q))
 ```
 
@@ -183,9 +229,8 @@ abstract
   double-counting-coproduct :
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
     ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
-    Id
-      ( number-of-elements-count count-C)
-      ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
+    number-of-elements-count count-C ＝
+    number-of-elements-count count-A +ℕ number-of-elements-count count-B
   double-counting-coproduct count-A count-B count-C =
     ( double-counting count-C (count-coproduct count-A count-B)) ∙
     ( number-of-elements-count-coproduct count-A count-B)
@@ -193,10 +238,9 @@ abstract
 abstract
   sum-number-of-elements-coproduct :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
-    Id
-      ( ( number-of-elements-count (count-left-summand e)) +ℕ
-        ( number-of-elements-count (count-right-summand e)))
-      ( number-of-elements-count e)
+    number-of-elements-count (count-left-summand e) +ℕ
+    number-of-elements-count (count-right-summand e) ＝
+    number-of-elements-count e
   sum-number-of-elements-coproduct e =
     ( inv
       ( number-of-elements-count-coproduct
@@ -263,9 +307,8 @@ pr2 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
 
 coproduct-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
-    Id
-      ( (number-of-elements-is-finite P) +ℕ (number-of-elements-is-finite Q))
-      ( number-of-elements-is-finite (is-finite-coproduct P Q))
+    number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q ＝
+    number-of-elements-is-finite (is-finite-coproduct P Q)
 coproduct-eq-is-finite {X = X} {Y = Y} P Q =
   ap
     ( number-of-elements-has-finite-cardinality)

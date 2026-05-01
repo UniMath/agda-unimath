@@ -279,7 +279,7 @@ This is stated as Proposition 5.1.5 in {{#cite Rij19}} and as Proposition 2.8 in
 The bottom horizontal map is an equivalence by the universal property of the
 localization and the top vertical maps are fiber inclusions. Therefore, the
 middle horizontal map is an equivalence and the bottom square is a pullback if
-and only if the the top horizontal map is an equivalence.
+and only if the top horizontal map is an equivalence.
 
 ```agda
 module _
@@ -491,24 +491,24 @@ module _
 
   is-equiv-map-compute-cone-pullback-localization-global-subuniverse :
     is-in-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (domain-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (codomain-cospan-diagram 𝒮) →
     is-equiv map-compute-cone-pullback-localization-global-subuniverse
   is-equiv-map-compute-cone-pullback-localization-global-subuniverse x a b =
     is-equiv-map-Σ _
       ( up-localization-global-subuniverse LC
-        ( left-type-cospan-diagram 𝒮 , a))
+        ( domain-cospan-diagram 𝒮 , a))
       ( λ _ →
         is-equiv-map-Σ _
           ( up-localization-global-subuniverse LC
-            ( right-type-cospan-diagram 𝒮 , b))
+            ( codomain-cospan-diagram 𝒮 , b))
           ( λ _ →
             is-equiv-right-whisker-unit-localization-global-subuniverse 𝒫 LC x))
 
   is-in-global-subuniverse-pullback-localization-global-subuniverse :
     is-in-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
-    is-in-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (domain-cospan-diagram 𝒮) →
+    is-in-global-subuniverse 𝒫 (codomain-cospan-diagram 𝒮) →
     is-in-global-subuniverse 𝒫 (domain-pullback-cone 𝒮 c)
   is-in-global-subuniverse-pullback-localization-global-subuniverse x a b =
     is-in-global-subuniverse-is-local-type-universal-property-localization-global-subuniverse

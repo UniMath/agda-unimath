@@ -47,6 +47,10 @@ a:hover {
   text-decoration: none;
 }
 
+a[href^='http']::after {
+  display: none !important;
+}
+
 h1,
 h2,
 h3,

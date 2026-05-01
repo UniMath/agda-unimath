@@ -18,9 +18,9 @@ open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-disjunction
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.unions-subtypes
@@ -29,7 +29,6 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import order-theory.greatest-lower-bounds-large-posets
-open import order-theory.large-inflattices
 open import order-theory.lower-bounds-large-posets
 
 open import real-numbers.inequality-upper-dedekind-real-numbers
@@ -97,18 +96,15 @@ module _
       elim-exists
         ( cut-binary-min-upper-ℝ q)
         ( λ r (q<r , r<min) →
-          elim-disjunction
-            ( cut-binary-min-upper-ℝ q)
+          map-disjunction
             ( λ r<x →
-              inl-disjunction
-                ( backward-implication
-                  ( is-rounded-cut-upper-ℝ x q)
-                  ( intro-exists r (q<r , r<x))))
+              backward-implication
+                ( is-rounded-cut-upper-ℝ x q)
+                ( intro-exists r (q<r , r<x)))
             ( λ r<y →
-              inr-disjunction
-                ( backward-implication
-                  ( is-rounded-cut-upper-ℝ y q)
-                  ( intro-exists r (q<r , r<y))))
+              backward-implication
+                ( is-rounded-cut-upper-ℝ y q)
+                ( intro-exists r (q<r , r<y)))
             ( r<min))
 
     is-rounded-cut-binary-min-upper-ℝ :

@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-truncated-types
 open import foundation.equivalences
+open import foundation.iterated-successors-truncation-levels
 open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
@@ -22,7 +23,6 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 ```
@@ -83,7 +83,7 @@ emb-type-Truncated-Type l k = emb-subtype (is-trunc-Prop k)
 abstract
   is-trunc-iterated-succ-is-trunc :
     (k : 𝕋) (r : ℕ) {l : Level} {A : UU l} →
-    is-trunc k A → is-trunc (iterated-succ-𝕋' k r) A
+    is-trunc k A → is-trunc (iterate-succ-𝕋' k r) A
   is-trunc-iterated-succ-is-trunc k zero-ℕ is-trunc-A = is-trunc-A
   is-trunc-iterated-succ-is-trunc k (succ-ℕ r) is-trunc-A =
     is-trunc-iterated-succ-is-trunc (succ-𝕋 k) r
@@ -91,7 +91,7 @@ abstract
 
 truncated-type-iterated-succ-Truncated-Type :
   (k : 𝕋) (r : ℕ) {l : Level} →
-  Truncated-Type l k → Truncated-Type l (iterated-succ-𝕋' k r)
+  Truncated-Type l k → Truncated-Type l (iterate-succ-𝕋' k r)
 pr1 (truncated-type-iterated-succ-Truncated-Type k r A) = type-Truncated-Type A
 pr2 (truncated-type-iterated-succ-Truncated-Type k r A) =
   is-trunc-iterated-succ-is-trunc k r (is-trunc-type-Truncated-Type A)

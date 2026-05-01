@@ -17,6 +17,7 @@ open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types

@@ -23,9 +23,10 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-The **intersection** of two [ideals](ring-theory.ideals-rings.md) of a
-[ring](ring-theory.rings.md) `R` consists of the elements contained in both of
-them.
+The
+{{#concept "intersection" Disambiguation="of two ideals in a ring" Agda=intersection-ideal-Ring}}
+of two [ideals](ring-theory.ideals-rings.md) in a [ring](ring-theory.rings.md)
+`R` consists of the elements contained in both of them.
 
 ## Definitions
 

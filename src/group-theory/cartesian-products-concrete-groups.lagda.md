@@ -112,14 +112,14 @@ module _
         ( mere-eq-classifying-type-product-Concrete-Group
             shape-product-Concrete-Group
             X)
-        ( is-set-Prop (Id X Y))
+        ( is-set-Prop (X ＝ Y))
         ( λ where
           refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-product-Concrete-Group
                   shape-product-Concrete-Group
                   Y)
-              ( is-set-Prop (Id shape-product-Concrete-Group Y))
+              ( is-set-Prop (shape-product-Concrete-Group ＝ Y))
               ( λ where refl → is-set-type-product-Concrete-Group))
 
   classifying-1-type-product-Concrete-Group : Truncated-Type (l1 ⊔ l2) one-𝕋
@@ -145,28 +145,26 @@ module _
 
   associative-mul-product-Concrete-Group :
     (x y z : type-product-Concrete-Group) →
-    Id
-      (mul-product-Concrete-Group (mul-product-Concrete-Group x y) z)
-      (mul-product-Concrete-Group x (mul-product-Concrete-Group y z))
+    mul-product-Concrete-Group (mul-product-Concrete-Group x y) z ＝
+    mul-product-Concrete-Group x (mul-product-Concrete-Group y z)
   associative-mul-product-Concrete-Group =
     associative-mul-∞-Group ∞-group-product-Concrete-Group
 
   left-unit-law-mul-product-Concrete-Group :
     (x : type-product-Concrete-Group) →
-    Id (mul-product-Concrete-Group unit-product-Concrete-Group x) x
+    mul-product-Concrete-Group unit-product-Concrete-Group x ＝ x
   left-unit-law-mul-product-Concrete-Group =
     left-unit-law-mul-∞-Group ∞-group-product-Concrete-Group
 
   right-unit-law-mul-product-Concrete-Group :
     (y : type-product-Concrete-Group) →
-    Id (mul-product-Concrete-Group y unit-product-Concrete-Group) y
+    mul-product-Concrete-Group y unit-product-Concrete-Group ＝ y
   right-unit-law-mul-product-Concrete-Group =
     right-unit-law-mul-∞-Group ∞-group-product-Concrete-Group
 
   coherence-unit-laws-mul-product-Concrete-Group :
-    Id
-      ( left-unit-law-mul-product-Concrete-Group unit-product-Concrete-Group)
-      ( right-unit-law-mul-product-Concrete-Group unit-product-Concrete-Group)
+    left-unit-law-mul-product-Concrete-Group unit-product-Concrete-Group ＝
+    right-unit-law-mul-product-Concrete-Group unit-product-Concrete-Group
   coherence-unit-laws-mul-product-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-product-Concrete-Group
 
@@ -176,17 +174,15 @@ module _
 
   left-inverse-law-mul-product-Concrete-Group :
     (x : type-product-Concrete-Group) →
-    Id
-      ( mul-product-Concrete-Group (inv-product-Concrete-Group x) x)
-      ( unit-product-Concrete-Group)
+    mul-product-Concrete-Group (inv-product-Concrete-Group x) x ＝
+    unit-product-Concrete-Group
   left-inverse-law-mul-product-Concrete-Group =
     left-inverse-law-mul-∞-Group ∞-group-product-Concrete-Group
 
   right-inverse-law-mul-product-Concrete-Group :
     (x : type-product-Concrete-Group) →
-    Id
-      ( mul-product-Concrete-Group x (inv-product-Concrete-Group x))
-      ( unit-product-Concrete-Group)
+    mul-product-Concrete-Group x (inv-product-Concrete-Group x) ＝
+    unit-product-Concrete-Group
   right-inverse-law-mul-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-product-Concrete-Group
 

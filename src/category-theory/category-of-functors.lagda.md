@@ -34,7 +34,7 @@ between them assemble to a new category whose identity functor and composition
 structure are inherited pointwise from the codomain category. This is called the
 **category of functors**.
 
-## Definitons
+## Definitions
 
 ### Extensionality of functors of precategories when the codomain is a category
 

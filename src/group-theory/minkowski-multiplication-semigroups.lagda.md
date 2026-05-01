@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
 open import foundation.sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 

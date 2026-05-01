@@ -27,12 +27,12 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-Conjugation on a [pointed type](structured-types.pointed-types.md) `(B,b)` is
-defined as a family of [pointed maps](structured-types.pointed-maps.md)
-`conj u p : (B,b) →∗ (B,u)` indexed by `u : B` and `p : b ＝ u`, such that
-`conj b ω` acts on the [loop space](synthetic-homotopy-theory.loop-spaces.md)
-`Ω (B , b)` by conjugation, i.e., it maps a loop `α : b ＝ b` to the loop
-`ω⁻¹αω`.
+{{#concept "Conjugation" Agda=conjugation-Pointed-Type}} on a
+[pointed type](structured-types.pointed-types.md) `(B,b)` is defined as a family
+of [pointed maps](structured-types.pointed-maps.md) `conj u p : (B,b) →∗ (B,u)`
+indexed by `u : B` and `p : b ＝ u`, such that `conj b ω` acts on the
+[loop space](synthetic-homotopy-theory.loop-spaces.md) `Ω (B , b)` by
+conjugation, i.e., it maps a loop `α : b ＝ b` to the loop `ω⁻¹αω`.
 
 ## Definition
 
@@ -89,7 +89,7 @@ module _
 
   compute-action-on-loops-conjugation-Pointed-Type' :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
-    conjugation-Ω' p ~∗ action-on-loops-conjugation-Pointed-Type p
+    tr-Ω p ~∗ action-on-loops-conjugation-Pointed-Type p
   pr1 (compute-action-on-loops-conjugation-Pointed-Type' refl) ω = inv (ap-id ω)
   pr2 (compute-action-on-loops-conjugation-Pointed-Type' refl) = refl
 
@@ -103,7 +103,7 @@ module _
 
   htpy-compute-action-on-loops-conjugation-Pointed-Type :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
-    map-conjugation-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
+    conjugation-type-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
   htpy-compute-action-on-loops-conjugation-Pointed-Type p =
     pr1 (compute-action-on-loops-conjugation-Pointed-Type p)
 ```

@@ -115,7 +115,7 @@ equiv-iterated-product-Fin-recursive-lists :
   {l : Level} (l : list (UU l)) →
   iterated-product-Fin-recursive
     ( length-array (array-list l))
-    ( functional-vec-array (array-list l)) ≃
+    ( fin-sequence-array (array-list l)) ≃
   iterated-product-lists l
 equiv-iterated-product-Fin-recursive-lists nil = id-equiv
 equiv-iterated-product-Fin-recursive-lists (cons x l) =
@@ -132,13 +132,8 @@ equiv-product-iterated-product-lists :
 equiv-product-iterated-product-lists nil q =
   left-unit-law-product-is-contr (is-contr-raise-unit)
 equiv-product-iterated-product-lists (cons x p) q =
-  ( ( equiv-product
-      ( id-equiv)
-      ( equiv-product-iterated-product-lists p q)) ∘e
-    ( associative-product
-      ( x)
-      ( iterated-product-lists p)
-      ( iterated-product-lists q)))
+  ( equiv-product-right (equiv-product-iterated-product-lists p q)) ∘e
+  ( associative-product)
 ```
 
 ### Iterated cartesian product is closed under permutations
@@ -195,17 +190,17 @@ equiv-permutation-iterated-product-lists L t =
   ( equiv-iterated-product-Fin-recursive-lists L ∘e
     ( ( equiv-permutation-iterated-product-Fin-recursive
         ( length-list L)
-        ( functional-vec-array (array-list L))
+        ( fin-sequence-array (array-list L))
         ( t)) ∘e
       ( equiv-eq
         ( ap
           ( λ p →
             iterated-product-Fin-recursive
               ( length-array p)
-              ( functional-vec-array p))
+              ( fin-sequence-array p))
           ( is-retraction-array-list
             ( length-list L ,
-              ( functional-vec-array (array-list L) ∘ map-equiv t)))) ∘e
+              ( fin-sequence-array (array-list L) ∘ map-equiv t)))) ∘e
         ( inv-equiv
           ( equiv-iterated-product-Fin-recursive-lists (permute-list L t))))))
 

@@ -42,15 +42,20 @@ open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
 open import trees.enriched-directed-trees
 open import trees.equivalences-directed-trees
 open import trees.equivalences-enriched-directed-trees
+open import trees.polynomial-endofunctors
 ```
 
 </details>
 
 ## Idea
 
-For every element `x` of a coalgebra of a polynomial endofunctor we can
-inductively define an enriched directed tree. This tree is called the
-**underlying enriched directed tree** of `x`.
+For every element `x` of a
+[coalgebra](trees.coalgebras-polynomial-endofunctors.md) of a
+[polynomial endofunctor](trees.polynomial-endofunctors.md) we can inductively
+define an [enriched directed tree](trees.enriched-directed-trees.md). This tree
+is called the
+{{#concept "underlying enriched directed tree" Disambiguation="of an element of a coalgebra of a polynomial endofunctor" Agda=enriched-directed-tree-element-coalgebra}}
+of `x`.
 
 ## Definition
 
@@ -58,8 +63,9 @@ inductively define an enriched directed tree. This tree is called the
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level}
+  {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   data
@@ -142,8 +148,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   is-root-element-coalgebra :
@@ -177,8 +183,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   data
@@ -300,8 +306,8 @@ In other words, the fiber is `Ω (B , b)`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   inclusion-element-coalgebra :
@@ -336,8 +342,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   is-contr-edge-to-root-element-coalgebra :
@@ -360,8 +366,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   is-proof-irrelevant-edge-to-root-element-coalgebra :
@@ -390,8 +396,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   no-edge-from-root-element-coalgebra :
@@ -539,13 +545,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   where
 
   shape-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X) →
-    node-element-coalgebra X w → A
+    node-element-coalgebra X w → shape-polynomial-endofunctor P
   shape-element-coalgebra w
     ( root-coalgebra w) =
     shape-coalgebra-polynomial-endofunctor X w
@@ -556,7 +562,7 @@ module _
   map-enrichment-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (x : node-element-coalgebra X w) →
-    B (shape-element-coalgebra w x) →
+    position-polynomial-endofunctor P (shape-element-coalgebra w x) →
     Σ ( node-element-coalgebra X w)
       ( λ y → edge-element-coalgebra X w y x)
   pr1
@@ -588,7 +594,7 @@ module _
     (x : node-element-coalgebra X w) →
     Σ ( node-element-coalgebra X w)
       ( λ y → edge-element-coalgebra X w y x) →
-    B (shape-element-coalgebra w x)
+    position-polynomial-endofunctor P (shape-element-coalgebra w x)
   map-inv-enrichment-directed-tree-element-coalgebra w ._
     ( ._ , edge-to-root-element-coalgebra H) =
     pr1 H
@@ -648,7 +654,7 @@ module _
   enrichment-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (x : node-element-coalgebra X w) →
-    B (shape-element-coalgebra w x) ≃
+    position-polynomial-endofunctor P (shape-element-coalgebra w x) ≃
     Σ ( node-element-coalgebra X w)
       ( λ y → edge-element-coalgebra X w y x)
   pr1 (enrichment-directed-tree-element-coalgebra w x) =
@@ -658,7 +664,9 @@ module _
 
   enriched-directed-tree-element-coalgebra :
     type-coalgebra-polynomial-endofunctor X →
-    Enriched-Directed-Tree (l2 ⊔ l3) (l2 ⊔ l3) A B
+    Enriched-Directed-Tree (l2 ⊔ l3) (l2 ⊔ l3)
+      ( shape-polynomial-endofunctor P)
+      ( position-polynomial-endofunctor P)
   pr1 (enriched-directed-tree-element-coalgebra w) =
     directed-tree-element-coalgebra X w
   pr1
@@ -673,8 +681,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (X : coalgebra-polynomial-endofunctor l3 A B)
+  {l1 l2 l3 : Level} {P : polynomial-endofunctor l1 l2}
+  (X : coalgebra-polynomial-endofunctor l3 P)
   (w : type-coalgebra-polynomial-endofunctor X)
   where
 
@@ -901,7 +909,9 @@ module _
 
   shape-compute-enriched-directed-tree-element-coalgebra :
     shape-element-coalgebra X w ~
-    ( ( shape-combinator-Enriched-Directed-Tree A B
+    ( ( shape-combinator-Enriched-Directed-Tree
+        ( shape-polynomial-endofunctor P)
+        ( position-polynomial-endofunctor P)
         ( λ b →
           enriched-directed-tree-element-coalgebra X
             ( component-coalgebra-polynomial-endofunctor X w b))) ∘
@@ -924,12 +934,15 @@ module _
           ( compute-directed-tree-element-coalgebra)
           ( x)) ∘e
         ( enrichment-directed-tree-element-coalgebra X w x))
-      ( ( enrichment-combinator-Enriched-Directed-Tree A B
+      ( ( enrichment-combinator-Enriched-Directed-Tree
+          ( shape-polynomial-endofunctor P)
+          ( position-polynomial-endofunctor P)
           ( λ b →
             enriched-directed-tree-element-coalgebra X
               ( component-coalgebra-polynomial-endofunctor X w b))
           ( node-compute-directed-tree-element-coalgebra x)) ∘e
-        ( equiv-tr B
+        ( equiv-tr
+          ( position-polynomial-endofunctor P)
           ( shape-compute-enriched-directed-tree-element-coalgebra x)))
   enrichment-compute-enriched-directed-tree-element-coalgebra
     ( root-coalgebra _)
@@ -939,9 +952,13 @@ module _
     refl
 
   compute-enriched-directed-tree-element-coalgebra :
-    equiv-Enriched-Directed-Tree A B
+    equiv-Enriched-Directed-Tree
+      ( shape-polynomial-endofunctor P)
+      ( position-polynomial-endofunctor P)
       ( enriched-directed-tree-element-coalgebra X w)
-      ( combinator-Enriched-Directed-Tree A B
+      ( combinator-Enriched-Directed-Tree
+        ( shape-polynomial-endofunctor P)
+        ( position-polynomial-endofunctor P)
         ( λ b →
           enriched-directed-tree-element-coalgebra X
             ( component-coalgebra-polynomial-endofunctor X w b)))

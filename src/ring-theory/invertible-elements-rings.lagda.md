@@ -9,6 +9,7 @@ module ring-theory.invertible-elements-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
@@ -30,14 +31,14 @@ open import ring-theory.rings
 
 ## Idea
 
-**Invertible elements** in a [ring](ring-theory.rings.md) are elements that have
-a two-sided multiplicative inverse. Such elements are also called the
-**(multiplicative) units** of the ring.
+{{#concept "Invertible elements" Disambiguation="of a ring" Agda=is-invertible-element-Ring}}
+of a [ring](ring-theory.rings.md) are elements that have a two-sided
+multiplicative inverse. Such elements are also called the **(multiplicative)
+units** of the ring.
 
 The [set](foundation.sets.md) of units of any ring forms a
-[group](group-theory.groups.md), called the
-[group of units](ring-theory.groups-of-units-rings.md). The group of units of a
-ring is constructed in
+[group](group-theory.groups.md), called the _group of units_. The group of units
+of a ring is constructed in
 [`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
 
 ## Definitions
@@ -223,7 +224,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### Any invertible element of a monoid has a contractible type of right inverses
+### Any invertible element of a ring has a contractible type of right inverses
 
 ```agda
 module _
@@ -236,9 +237,17 @@ module _
   is-contr-is-right-invertible-element-Ring =
     is-contr-is-right-invertible-element-Monoid
       ( multiplicative-monoid-Ring R)
+
+  contraction-right-inverse-is-invertible-element-Ring :
+    (x : type-Ring R) (Ix : is-invertible-element-Ring R x) →
+    (y : type-Ring R) →
+    is-right-inverse-element-Ring R x y →
+    inv-is-invertible-element-Ring R Ix ＝ y
+  contraction-right-inverse-is-invertible-element-Ring x I y H =
+    ap pr1 (pr2 (is-contr-is-right-invertible-element-Ring x I) (y , H))
 ```
 
-### Any invertible element of a monoid has a contractible type of left inverses
+### Any invertible element of a ring has a contractible type of left inverses
 
 ```agda
 module _
@@ -253,7 +262,7 @@ module _
       ( multiplicative-monoid-Ring R)
 ```
 
-### The unit of a monoid is invertible
+### The unit of a ring is invertible
 
 ```agda
 module _
@@ -321,27 +330,28 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  is-invertible-element-neg-Ring :
-    (x : type-Ring R) →
-    is-invertible-element-Ring R x →
-    is-invertible-element-Ring R (neg-Ring R x)
-  is-invertible-element-neg-Ring x =
-    map-Σ _
-      ( neg-Ring R)
-      ( λ y →
-        map-product
-          ( mul-neg-Ring R x y ∙_)
-          ( mul-neg-Ring R y x ∙_))
+  abstract
+    is-invertible-element-neg-Ring :
+      (x : type-Ring R) →
+      is-invertible-element-Ring R x →
+      is-invertible-element-Ring R (neg-Ring R x)
+    is-invertible-element-neg-Ring x =
+      map-Σ _
+        ( neg-Ring R)
+        ( λ y →
+          map-product
+            ( mul-neg-Ring R x y ∙_)
+            ( mul-neg-Ring R y x ∙_))
 
-  is-invertible-element-neg-Ring' :
-    (x : type-Ring R) →
-    is-invertible-element-Ring R (neg-Ring R x) →
-    is-invertible-element-Ring R x
-  is-invertible-element-neg-Ring' x H =
-    tr
-      ( is-invertible-element-Ring R)
-      ( neg-neg-Ring R x)
-      ( is-invertible-element-neg-Ring (neg-Ring R x) H)
+    is-invertible-element-neg-Ring' :
+      (x : type-Ring R) →
+      is-invertible-element-Ring R (neg-Ring R x) →
+      is-invertible-element-Ring R x
+    is-invertible-element-neg-Ring' x H =
+      tr
+        ( is-invertible-element-Ring R)
+        ( neg-neg-Ring R x)
+        ( is-invertible-element-neg-Ring (neg-Ring R x) H)
 ```
 
 ### The inverse of an invertible element is invertible

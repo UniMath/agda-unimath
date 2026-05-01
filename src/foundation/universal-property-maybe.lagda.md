@@ -27,7 +27,7 @@ open import foundation-core.maybe
 We combine the
 [universal property of coproducts](foundation.universal-property-coproduct-types.md)
 and the [unit type](foundation.universal-property-unit-type.md) to obtain the
-{{#concept "universal property of the maybe monad"  Agda=dependent-universal-property-Maybe}}.
+{{#concept "universal property of the maybe monad" Agda=dependent-universal-property-Maybe}}.
 
 ## Definitions
 

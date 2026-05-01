@@ -20,8 +20,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A faithful pointed map from `A` to `B` is a pointed map from `A` to `B` of which
-the underlying map is faithful.
+A {{#concept "faithful pointed map" Agda=faithful-pointed-map}} from `A` to `B`
+is a [pointed map](structured-types.pointed-maps.md) from `A` to `B` of which
+the underlying map is [faithful](foundation.faithful-maps.md).
 
 ## Definition
 

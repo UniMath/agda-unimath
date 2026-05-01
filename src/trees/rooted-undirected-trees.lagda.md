@@ -25,8 +25,9 @@ open import trees.undirected-trees
 
 ## Idea
 
-A **rooted undirected tree** is a tree equipped with a marked node. The marked
-node is called the **root** of the undirected tree.
+A {{#concept "rooted undirected tree" Agda=Rooted-Undirected-Tree}} is a
+[tree](trees.undirected-trees.md) equipped with a marked node. The marked node
+is called the **root** of the undirected tree.
 
 ## Definition
 

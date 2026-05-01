@@ -17,6 +17,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.truncations
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-types
@@ -61,14 +62,14 @@ module _
           ( Σ (type-Truncated-Type C) (λ z → g x ＝ z))
           ( equiv-tot
             ( λ z →
-              ( ( equiv-ev-refl' x) ∘e
-                ( equiv-Π-equiv-family
-                  ( λ x' →
-                    equiv-is-truncation
-                      ( Id-Truncated-Type B (f x') (f x))
-                      ( ap f)
-                      ( K x' x)
-                      ( Id-Truncated-Type C (g x') z)))) ∘e
+              ( equiv-ev-refl' x) ∘e
+              ( equiv-Π-equiv-family
+                ( λ x' →
+                  equiv-is-truncation
+                    ( Id-Truncated-Type B (f x') (f x))
+                    ( ap f)
+                    ( K x' x)
+                    ( Id-Truncated-Type C (g x') z))) ∘e
               ( equiv-ev-pair)))
           ( is-torsorial-Id (g x)))
 
@@ -83,11 +84,10 @@ module _
               ( λ z → (t : fiber f y) → (g (pr1 t) ＝ z)))
           ( ( equiv-tot
               ( λ h →
-                ( ( ( inv-equiv (equiv-funext)) ∘e
-                    ( equiv-Π-equiv-family
-                      ( λ x →
-                        equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x)))) ∘e
-                  ( equiv-swap-Π)) ∘e
+                ( equiv-eq-htpy) ∘e
+                ( equiv-Π-equiv-family
+                  ( λ x → equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x))) ∘e
+                ( equiv-swap-Π) ∘e
                 ( equiv-Π-equiv-family (λ x → equiv-ev-pair)))) ∘e
             ( distributive-Π-Σ))
           ( is-contr-Π
@@ -104,5 +104,10 @@ module _
     map-inv-is-equiv
       ( dependent-universal-property-truncation-is-truncation B f H
         ( λ y → truncated-type-trunc-Prop k (fiber f y)))
-      ( λ x → unit-trunc-Prop (pair x refl))
+      ( λ x → unit-trunc-Prop (x , refl))
+
+is-surjective-unit-trunc-succ :
+  {l : Level} {k : 𝕋} {A : UU l} → is-surjective (unit-trunc {k = succ-𝕋 k} {A})
+is-surjective-unit-trunc-succ {k = k} {A} =
+  is-surjective-is-truncation (trunc (succ-𝕋 k) A) is-truncation-trunc
 ```

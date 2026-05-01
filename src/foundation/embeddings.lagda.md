@@ -128,6 +128,10 @@ module _
     is-emb-left-map-triangle f g h H is-emb-g is-emb-h =
       is-emb-htpy H (is-emb-comp g h is-emb-g is-emb-h)
 
+  is-emb-map-comp-emb :
+    (g : B ↪ C) (f : A ↪ B) → is-emb (map-emb g ∘ map-emb f)
+  is-emb-map-comp-emb (g , H) (f , K) = is-emb-comp g f H K
+
   comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
   pr1 (comp-emb (g , H) (f , K)) = g ∘ f
@@ -375,7 +379,7 @@ module _
           ( is-prop-map-is-emb is-emb-f))
 ```
 
-### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
+### In a commuting square of which the sides are equivalences, the top map is an embedding if and only if the bottom map is an embedding
 
 ```agda
 module _

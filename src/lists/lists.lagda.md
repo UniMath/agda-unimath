@@ -28,8 +28,9 @@ open import foundation-core.negation
 
 ## Idea
 
-The type of lists of elements of a type `A` is defined inductively, with an
-empty list and an operation that extends a list with one element from `A`.
+The type of {{#concept "lists" WD="list" WDID=Q27948 Agda=list}} of elements of
+a type `A` is defined inductively, with an empty list `nil`, and an operation
+`cons` that extends a list with one element from `A`.
 
 ## Definition
 
@@ -157,7 +158,7 @@ tail-is-nonnil-list l p =
 ```agda
 length-nil :
   {l1 : Level} {A : UU l1} →
-  Id (length-list {A = A} nil) zero-ℕ
+  length-list {A = A} nil ＝ zero-ℕ
 length-nil = refl
 
 is-nil-is-zero-length-list :
@@ -247,7 +248,7 @@ tail-snoc-snoc-list (cons c x) a b = refl
 
 last-element-snoc :
   {l1 : Level} {A : UU l1} (x : list A) (a : A) →
-  Id (last-element-list (snoc x a)) (unit-list a)
+  last-element-list (snoc x a) ＝ unit-list a
 last-element-snoc nil a = refl
 last-element-snoc (cons b nil) a = refl
 last-element-snoc (cons b (cons c x)) a =

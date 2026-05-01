@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.cofibers-of-maps public
 open import synthetic-homotopy-theory.cofibers-of-pointed-maps public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
+open import synthetic-homotopy-theory.composition-cospans public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.connective-prespectra public
@@ -54,15 +55,17 @@ open import synthetic-homotopy-theory.descent-data-function-types-over-pushouts 
 open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
-open import synthetic-homotopy-theory.descent-property-pushouts public
-open import synthetic-homotopy-theory.descent-property-sequential-colimits public
+open import synthetic-homotopy-theory.descent-pushouts public
+open import synthetic-homotopy-theory.descent-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
 open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
+open import synthetic-homotopy-theory.equifibered-span-diagrams public
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-descent-data-pushouts public
+open import synthetic-homotopy-theory.equivalences-equifibered-span-diagrams public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.families-descent-data-pushouts public
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
@@ -80,6 +83,7 @@ open import synthetic-homotopy-theory.identity-systems-descent-data-pushouts pub
 open import synthetic-homotopy-theory.induction-principle-pushouts public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
+open import synthetic-homotopy-theory.infinite-real-projective-space public
 open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.iterated-loop-spaces public
 open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types public
@@ -90,6 +94,7 @@ open import synthetic-homotopy-theory.left-half-smash-products public
 open import synthetic-homotopy-theory.loop-homotopy-circle public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
+open import synthetic-homotopy-theory.mathers-second-cube-theorem public
 open import synthetic-homotopy-theory.mere-spheres public
 open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
@@ -139,5 +144,7 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits pub
 open import synthetic-homotopy-theory.universal-property-suspensions public
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
+open import synthetic-homotopy-theory.whitehead-principle-maps public
+open import synthetic-homotopy-theory.whitehead-principle-types public
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams public
 ```

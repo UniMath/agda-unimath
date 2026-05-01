@@ -15,8 +15,8 @@ open import foundation.set-truncations
 open import foundation.universe-levels
 
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -66,10 +66,10 @@ is-untruncated-π-finite-Main-Class-Latin-Square-of-Order :
 is-untruncated-π-finite-Main-Class-Latin-Square-of-Order k =
   is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k 2
 
-is-π-finite-Main-Class-Latin-Square-of-Order :
-  (m : ℕ) → is-π-finite 1 (Main-Class-Latin-Square-of-Order m)
-is-π-finite-Main-Class-Latin-Square-of-Order =
-  is-π-finite-Main-Class-Latin-Hypercube-of-Order 2
+is-truncated-π-finite-Main-Class-Latin-Square-of-Order :
+  (m : ℕ) → is-truncated-π-finite 1 (Main-Class-Latin-Square-of-Order m)
+is-truncated-π-finite-Main-Class-Latin-Square-of-Order =
+  is-truncated-π-finite-Main-Class-Latin-Hypercube-of-Order 2
 ```
 
 ### The sequence of the number of main classes of latin squares of finite order

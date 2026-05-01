@@ -52,8 +52,8 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
-open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -61,8 +61,9 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 ## Idea
 
-An {{#concept "(abstract) finite group" Agda=Finite-Group}} is a finite group in
-the usual algebraic sense, i.e., it consists of a
+An
+{{#concept "(abstract) finite group" WD="finite group" WDID=Q1057968 Agda=Finite-Group}}
+is a finite group in the usual algebraic sense, i.e., it consists of a
 [finite type](univalent-combinatorics.finite-types.md)
 [equipped](foundation.structure.md) with a unit element `e`, a binary operation
 `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the
@@ -425,10 +426,10 @@ is-untruncated-π-finite-Group-of-Order {l} k n =
         is-untruncated-π-finite-is-finite k
           ( is-finite-is-group-Semigroup n X)))
 
-is-π-finite-Group-of-Order :
-  {l : Level} (n : ℕ) → is-π-finite 1 (Group-of-Order l n)
-is-π-finite-Group-of-Order n =
-  is-π-finite-is-untruncated-π-finite 1
+is-truncated-π-finite-Group-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Group-of-Order l n)
+is-truncated-π-finite-Group-of-Order n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Group-of-Order n)
     ( is-untruncated-π-finite-Group-of-Order 1 n)
 ```

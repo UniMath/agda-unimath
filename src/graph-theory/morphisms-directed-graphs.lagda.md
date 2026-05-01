@@ -29,9 +29,11 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-A **morphism of directed graphs** from `G` to `H` consists of a map `f` from the
-vertices of `G` to the vertices of `H`, and a family of maps from the edges
-`E_G x y` in `G` to the edges `E_H (f x) (f y)` in `H`.
+A
+{{#concept "morphism" Disambiguation="of directed graphs" WD="graph homomorphism" WDID=Q3385162 Agda=hom-Directed-Graph}}
+of [directed graphs](graph-theory.directed-graphs.md) from `G` to `H` consists
+of a map `f` from the vertices of `G` to the vertices of `H`, and a family of
+maps from the edges `E_G x y` in `G` to the edges `E_H (f x) (f y)` in `H`.
 
 ## Definitions
 

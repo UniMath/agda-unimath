@@ -107,6 +107,25 @@ module _
   eq-htpy-iff f g = map-inv-equiv (ext-iff f g)
 ```
 
+### The function from equivalences to logical equivalences is injective
+
+```agda
+is-injective-iff-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-injective (iff-equiv {A = A} {B})
+is-injective-iff-equiv p = eq-htpy-equiv (pr1 (htpy-eq-iff p))
+
+compute-fiber-iff-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
+  fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
+compute-fiber-iff-equiv {A = A} {B} (f , g) =
+  ( equiv-tot (λ _ → equiv-funext)) ∘e
+  ( left-unit-law-Σ-is-contr (is-torsorial-Id' f) (f , refl)) ∘e
+  ( inv-associative-Σ) ∘e
+  ( equiv-tot (λ _ → equiv-left-swap-Σ)) ∘e
+  ( associative-Σ) ∘e
+  ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
+```
+
 ### Logical equivalence of propositions is equivalent to equivalence of propositions
 
 ```agda
@@ -125,14 +144,4 @@ equiv-equiv-iff :
   (type-Prop P ↔ type-Prop Q) ≃ (type-Prop P ≃ type-Prop Q)
 pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
 pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
-```
-
-### Equivalences are logical equivalences
-
-```agda
-compute-fiber-iff-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
-  fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
-compute-fiber-iff-equiv {A = A} {B} e =
-  equiv-tot (λ _ → equiv-funext) ∘e compute-fiber-iff-equiv' e
 ```

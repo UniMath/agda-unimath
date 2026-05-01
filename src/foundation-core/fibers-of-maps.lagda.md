@@ -51,9 +51,34 @@ module _
 
   compute-value-inclusion-fiber : (y : fiber f b) → f (inclusion-fiber y) ＝ b
   compute-value-inclusion-fiber = pr2
+
+  inclusion-fiber' : fiber' f b → A
+  inclusion-fiber' = pr1
+
+  compute-value-inclusion-fiber' :
+    (y : fiber' f b) → b ＝ f (inclusion-fiber' y)
+  compute-value-inclusion-fiber' = pr2
 ```
 
 ## Properties
+
+### Fibers of compositions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (g : B → X) (h : A → B) {x : X}
+  where
+
+  inclusion-fiber-comp : (t : fiber g x) → fiber h (pr1 t) → fiber (g ∘ h) x
+  inclusion-fiber-comp (b , q) (a , p) = (a , ap g p ∙ q)
+
+  left-fiber-comp : fiber (g ∘ h) x → fiber g x
+  left-fiber-comp (a , r) = (h a , r)
+
+  right-fiber-comp : (q : fiber (g ∘ h) x) → fiber h (pr1 (left-fiber-comp q))
+  right-fiber-comp (a , r) = (a , refl)
+```
 
 ### Characterization of the identity types of the fibers of a map
 
@@ -279,9 +304,7 @@ module _
   triangle-map-equiv-total-fiber t = inv (pr2 (pr2 t))
 
   map-inv-equiv-total-fiber : A → Σ B (fiber f)
-  pr1 (map-inv-equiv-total-fiber x) = f x
-  pr1 (pr2 (map-inv-equiv-total-fiber x)) = x
-  pr2 (pr2 (map-inv-equiv-total-fiber x)) = refl
+  map-inv-equiv-total-fiber x = (f x , x , refl)
 
   is-retraction-map-inv-equiv-total-fiber :
     is-retraction map-equiv-total-fiber map-inv-equiv-total-fiber
@@ -315,6 +338,51 @@ module _
   pr2 inv-equiv-total-fiber = is-equiv-map-inv-equiv-total-fiber
 ```
 
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  map-equiv-total-fiber' : Σ B (fiber' f) → A
+  map-equiv-total-fiber' t = pr1 (pr2 t)
+
+  triangle-map-equiv-total-fiber' : pr1 ~ f ∘ map-equiv-total-fiber'
+  triangle-map-equiv-total-fiber' t = pr2 (pr2 t)
+
+  map-inv-equiv-total-fiber' : A → Σ B (fiber' f)
+  map-inv-equiv-total-fiber' x = (f x , x , refl)
+
+  is-retraction-map-inv-equiv-total-fiber' :
+    is-retraction map-equiv-total-fiber' map-inv-equiv-total-fiber'
+  is-retraction-map-inv-equiv-total-fiber' (.(f x) , x , refl) = refl
+
+  is-section-map-inv-equiv-total-fiber' :
+    is-section map-equiv-total-fiber' map-inv-equiv-total-fiber'
+  is-section-map-inv-equiv-total-fiber' x = refl
+
+  is-equiv-map-equiv-total-fiber' : is-equiv map-equiv-total-fiber'
+  is-equiv-map-equiv-total-fiber' =
+    is-equiv-is-invertible
+      ( map-inv-equiv-total-fiber')
+      ( is-section-map-inv-equiv-total-fiber')
+      ( is-retraction-map-inv-equiv-total-fiber')
+
+  is-equiv-map-inv-equiv-total-fiber' : is-equiv map-inv-equiv-total-fiber'
+  is-equiv-map-inv-equiv-total-fiber' =
+    is-equiv-is-invertible
+      map-equiv-total-fiber'
+      is-retraction-map-inv-equiv-total-fiber'
+      is-section-map-inv-equiv-total-fiber'
+
+  equiv-total-fiber' : Σ B (fiber' f) ≃ A
+  pr1 equiv-total-fiber' = map-equiv-total-fiber'
+  pr2 equiv-total-fiber' = is-equiv-map-equiv-total-fiber'
+
+  inv-equiv-total-fiber' : A ≃ Σ B (fiber' f)
+  pr1 inv-equiv-total-fiber' = map-inv-equiv-total-fiber'
+  pr2 inv-equiv-total-fiber' = is-equiv-map-inv-equiv-total-fiber'
+```
+
 ### Fibers of compositions
 
 ```agda
@@ -325,15 +393,11 @@ module _
 
   map-compute-fiber-comp :
     fiber (g ∘ h) x → Σ (fiber g x) (λ t → fiber h (pr1 t))
-  pr1 (pr1 (map-compute-fiber-comp (a , p))) = h a
-  pr2 (pr1 (map-compute-fiber-comp (a , p))) = p
-  pr1 (pr2 (map-compute-fiber-comp (a , p))) = a
-  pr2 (pr2 (map-compute-fiber-comp (a , p))) = refl
+  map-compute-fiber-comp t = (left-fiber-comp g h t , right-fiber-comp g h t)
 
   map-inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) → fiber (g ∘ h) x
-  pr1 (map-inv-compute-fiber-comp t) = pr1 (pr2 t)
-  pr2 (map-inv-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
+  map-inv-compute-fiber-comp (t , s) = inclusion-fiber-comp g h t s
 
   is-section-map-inv-compute-fiber-comp :
     is-section map-compute-fiber-comp map-inv-compute-fiber-comp
@@ -404,7 +468,19 @@ module _
       is-retraction-map-inv-equiv-fiber-htpy
 
   equiv-fiber-htpy : fiber f y ≃ fiber g y
-  equiv-fiber-htpy = map-equiv-fiber-htpy , is-equiv-map-equiv-fiber-htpy
+  equiv-fiber-htpy =
+    ( map-equiv-fiber-htpy , is-equiv-map-equiv-fiber-htpy)
+
+  is-equiv-map-inv-equiv-fiber-htpy : is-equiv map-inv-equiv-fiber-htpy
+  is-equiv-map-inv-equiv-fiber-htpy =
+    is-equiv-is-invertible
+      ( map-equiv-fiber-htpy)
+      ( is-retraction-map-inv-equiv-fiber-htpy)
+      ( is-section-map-inv-equiv-fiber-htpy)
+
+  inv-equiv-fiber-htpy : fiber g y ≃ fiber f y
+  inv-equiv-fiber-htpy =
+    ( map-inv-equiv-fiber-htpy , is-equiv-map-inv-equiv-fiber-htpy)
 ```
 
 We repeat the construction for `fiber'`.

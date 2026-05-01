@@ -21,8 +21,9 @@ open import structured-types.pointed-types
 ## Idea
 
 Given a [H-space](structured-types.h-spaces.md) `M` and a type `I`, the
-**function H-space** `M^I` consists of functions from `I` to the underlying type
-of `M`. Every component of the structure is given pointwise.
+{{#concept "function H-space" Agda=function-H-Space}} `M^I` consists of
+functions from `I` to the underlying type of `M`. Every component of the
+structure is given pointwise.
 
 ## Definition
 

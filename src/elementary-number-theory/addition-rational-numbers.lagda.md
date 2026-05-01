@@ -11,8 +11,10 @@ module elementary-number-theory.addition-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -21,7 +23,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.retractions
 open import foundation.sections
@@ -39,8 +40,9 @@ basic properties.
 ## Definition
 
 ```agda
-add-ℚ : ℚ → ℚ → ℚ
-add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
+opaque
+  add-ℚ : ℚ → ℚ → ℚ
+  add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
 
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
@@ -68,7 +70,9 @@ pred-ℚ = add-ℚ neg-one-ℚ
 ### Unit laws
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ
+
   left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
   left-unit-law-add-ℚ (x , p) =
     eq-ℚ-sim-fraction-ℤ
@@ -89,7 +93,9 @@ abstract
 ### Addition is associative
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ rational-fraction-ℤ
+
   associative-add-ℚ :
     (x y z : ℚ) →
     (x +ℚ y) +ℚ z ＝ x +ℚ (y +ℚ z)
@@ -116,7 +122,9 @@ abstract
 ### Addition is commutative
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ
+
   commutative-add-ℚ :
     (x y : ℚ) →
     x +ℚ y ＝ y +ℚ x
@@ -143,7 +151,9 @@ abstract
 ### The negative of a rational number is its additive inverse
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ neg-ℚ
+
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
     ( eq-ℚ-sim-fraction-ℤ
@@ -161,14 +171,38 @@ abstract
     commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
 
-### The negatives of rational numbers distribute over addition
+### If `p + q = 0`, then `p = -q`
 
 ```agda
 abstract
+  unique-left-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → p ＝ neg-ℚ q
+  unique-left-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      p
+      ＝ p +ℚ zero-ℚ by inv (right-unit-law-add-ℚ p)
+      ＝ p +ℚ (q +ℚ neg-ℚ q) by ap (p +ℚ_) (inv (right-inverse-law-add-ℚ q))
+      ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
+      ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
+      ＝ neg-ℚ q by left-unit-law-add-ℚ _
+
+  unique-right-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → q ＝ neg-ℚ p
+  unique-right-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      q
+      ＝ neg-ℚ (neg-ℚ q) by inv (neg-neg-ℚ q)
+      ＝ neg-ℚ p by ap neg-ℚ (inv (unique-left-neg-ℚ p q p+q=0))
+```
+
+### The negatives of rational numbers distribute over addition
+
+```agda
+abstract opaque
+  unfolding add-ℚ neg-ℚ
+
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
-    ( inv (preserves-neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
+    ( inv (neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ (x +fraction-ℤ y))
       ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))
@@ -178,7 +212,9 @@ abstract
 ### The successor and predecessor functions on ℚ are mutual inverses
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ neg-ℚ
+
   is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
   is-retraction-pred-ℚ x =
     equational-reasoning
@@ -198,17 +234,14 @@ abstract
       by ap (_+ℚ x) (right-inverse-law-add-ℚ one-ℚ)
     ＝ x by left-unit-law-add-ℚ x
 
+opaque
   is-equiv-succ-ℚ : is-equiv succ-ℚ
-  pr1 (pr1 is-equiv-succ-ℚ) = pred-ℚ
-  pr2 (pr1 is-equiv-succ-ℚ) = is-section-pred-ℚ
-  pr1 (pr2 is-equiv-succ-ℚ) = pred-ℚ
-  pr2 (pr2 is-equiv-succ-ℚ) = is-retraction-pred-ℚ
+  is-equiv-succ-ℚ =
+    is-equiv-is-invertible pred-ℚ is-section-pred-ℚ is-retraction-pred-ℚ
 
   is-equiv-pred-ℚ : is-equiv pred-ℚ
-  pr1 (pr1 is-equiv-pred-ℚ) = succ-ℚ
-  pr2 (pr1 is-equiv-pred-ℚ) = is-retraction-pred-ℚ
-  pr1 (pr2 is-equiv-pred-ℚ) = succ-ℚ
-  pr2 (pr2 is-equiv-pred-ℚ) = is-section-pred-ℚ
+  is-equiv-pred-ℚ =
+    is-equiv-is-invertible succ-ℚ is-retraction-pred-ℚ is-section-pred-ℚ
 
 equiv-succ-ℚ : ℚ ≃ ℚ
 pr1 equiv-succ-ℚ = succ-ℚ
@@ -222,7 +255,9 @@ pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
 ### The inclusion of integer fractions preserves addition
 
 ```agda
-abstract
+abstract opaque
+  unfolding add-ℚ rational-fraction-ℤ
+
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
     rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
@@ -268,12 +303,31 @@ abstract
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
 ```
 
+### The inclusion of natural numbers preserves addition
+
+```agda
+abstract
+  add-rational-ℕ :
+    (m n : ℕ) → rational-ℕ m +ℚ rational-ℕ n ＝ rational-ℕ (m +ℕ n)
+  add-rational-ℕ m n =
+    add-rational-ℤ _ _ ∙ ap rational-ℤ (add-int-ℕ m n)
+```
+
 ### The rational successor of an integer is the successor of the integer
 
 ```agda
 abstract
   succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
   succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
+### The embedding of the successor of a natural number is the successor of its embedding
+
+```agda
+abstract
+  succ-rational-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℕ n) ＝ rational-ℕ (succ-ℕ n)
+  succ-rational-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also

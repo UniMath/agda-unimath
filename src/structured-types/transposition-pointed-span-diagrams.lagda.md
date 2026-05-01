@@ -19,7 +19,7 @@ open import structured-types.pointed-span-diagrams
 ## Idea
 
 The
-{{#concept "trasposition" Disambiguation="pointed span diagram" Agda=transposition-pointed-span-diagram}}
+{{#concept "transposition" Disambiguation="pointed span diagram" Agda=transposition-pointed-span-diagram}}
 of a [pointed span diagram](structured-types.pointed-span-diagrams.md)
 
 ```text

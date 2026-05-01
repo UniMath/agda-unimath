@@ -6,6 +6,8 @@
 
 ## Examples of precategories and large precategories
 
+C.f. also the list above.
+
 {{#include tables/precategories.md}}
 
 ## Modules in the category theory namespace
@@ -15,6 +17,8 @@ module category-theory where
 
 open import category-theory.adjunctions-large-categories public
 open import category-theory.adjunctions-large-precategories public
+open import category-theory.adjunctions-precategories public
+open import category-theory.algebras-monads-on-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.augmented-simplex-category public
@@ -23,21 +27,29 @@ open import category-theory.category-of-functors public
 open import category-theory.category-of-functors-from-small-to-large-categories public
 open import category-theory.category-of-maps-categories public
 open import category-theory.category-of-maps-from-small-to-large-categories public
+open import category-theory.category-of-simplicial-sets public
+open import category-theory.coalgebras-comonads-on-precategories public
+open import category-theory.cocones-precategories public
+open import category-theory.codensity-monads-on-precategories public
+open import category-theory.colimits-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
 open import category-theory.commuting-triangles-of-morphisms-in-precategories public
 open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids public
+open import category-theory.comonads-on-precategories public
 open import category-theory.complete-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
 open import category-theory.cones-precategories public
 open import category-theory.conservative-functors-precategories public
 open import category-theory.constant-functors public
+open import category-theory.copointed-endofunctors-precategories public
 open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-categories public
 open import category-theory.cores-precategories public
 open import category-theory.coslice-precategories public
+open import category-theory.density-comonads-on-precategories public
 open import category-theory.dependent-composition-operations-over-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-large-categories public
@@ -99,6 +111,8 @@ open import category-theory.large-function-precategories public
 open import category-theory.large-precategories public
 open import category-theory.large-subcategories public
 open import category-theory.large-subprecategories public
+open import category-theory.left-extensions-precategories public
+open import category-theory.left-kan-extensions-precategories public
 open import category-theory.limits-precategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
@@ -108,6 +122,8 @@ open import category-theory.maps-set-magmoids public
 open import category-theory.monads-on-categories public
 open import category-theory.monads-on-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
+open import category-theory.morphisms-algebras-monads-on-precategories public
+open import category-theory.morphisms-coalgebras-comonads-on-precategories public
 open import category-theory.natural-isomorphisms-functors-categories public
 open import category-theory.natural-isomorphisms-functors-large-precategories public
 open import category-theory.natural-isomorphisms-functors-precategories public
@@ -133,7 +149,10 @@ open import category-theory.opposite-strongly-preunivalent-categories public
 open import category-theory.pointed-endofunctors-categories public
 open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
+open import category-theory.precategory-of-algebras-monads-on-precategories public
+open import category-theory.precategory-of-coalgebras-comonads-on-precategories public
 open import category-theory.precategory-of-elements-of-a-presheaf public
+open import category-theory.precategory-of-free-algebras-monads-on-precategories public
 open import category-theory.precategory-of-functors public
 open import category-theory.precategory-of-functors-from-small-to-large-precategories public
 open import category-theory.precategory-of-maps-from-small-to-large-precategories public

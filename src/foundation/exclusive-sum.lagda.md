@@ -249,8 +249,6 @@ module _
                                   ( pr1 (standard-unordered-pair P Q))
                                   ( inl (inr y))))))))))) ∘e
           ( ( right-distributive-Σ-coproduct
-              ( Fin 0)
-              ( unit)
               ( λ x →
                 ( type-Prop (pr2 (standard-unordered-pair P Q) (inl x))) ×
                 ( ¬ ( type-Prop
@@ -277,8 +275,6 @@ module _
                           ( pr1 (standard-unordered-pair P Q))
                           ( inr y)))))))))) ∘e
       ( right-distributive-Σ-coproduct
-        ( Fin 1)
-        ( unit)
         ( λ x →
           ( type-Prop (pr2 (standard-unordered-pair P Q) x)) ×
           ( ¬ ( type-Prop

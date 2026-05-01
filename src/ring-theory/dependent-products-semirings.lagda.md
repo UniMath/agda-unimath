@@ -26,7 +26,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-Given a family of semirings `R i` indexed by `i : I`, their dependent product
+Given a family of [semirings](ring-theory.semirings.md) `R i` indexed by
+`i : I`, their
+{{#concept "dependent product" Disambiguation="semiring" Agda=Π-Semiring}}
 `Π(i:I), R i` is again a semiring.
 
 ## Definition

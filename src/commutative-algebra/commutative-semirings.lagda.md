@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
@@ -100,6 +101,10 @@ module _
   is-zero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-zero-Commutative-Semiring = is-zero-Semiring semiring-Commutative-Semiring
 
+  is-zero-prop-Commutative-Semiring : type-Commutative-Semiring → Prop l
+  is-zero-prop-Commutative-Semiring =
+    is-zero-prop-Semiring semiring-Commutative-Semiring
+
   is-nonzero-Commutative-Semiring : type-Commutative-Semiring → UU l
   is-nonzero-Commutative-Semiring =
     is-nonzero-Semiring semiring-Commutative-Semiring
@@ -178,6 +183,12 @@ module _
     (x y : type-Commutative-Semiring) → type-Commutative-Semiring
   mul-Commutative-Semiring' = mul-Semiring' semiring-Commutative-Semiring
 
+  ap-mul-Commutative-Semiring :
+    {x x' y y' : type-Commutative-Semiring} →
+    (x ＝ x') → (y ＝ y') →
+    mul-Commutative-Semiring x y ＝ mul-Commutative-Semiring x' y'
+  ap-mul-Commutative-Semiring = ap-mul-Semiring semiring-Commutative-Semiring
+
   one-Commutative-Semiring : type-Commutative-Semiring
   one-Commutative-Semiring = one-Semiring semiring-Commutative-Semiring
 
@@ -202,19 +213,19 @@ module _
 
   left-distributive-mul-add-Commutative-Semiring :
     (x y z : type-Commutative-Semiring) →
-    ( mul-Commutative-Semiring x (add-Commutative-Semiring y z)) ＝
-    ( add-Commutative-Semiring
+    mul-Commutative-Semiring x (add-Commutative-Semiring y z) ＝
+    add-Commutative-Semiring
       ( mul-Commutative-Semiring x y)
-      ( mul-Commutative-Semiring x z))
+      ( mul-Commutative-Semiring x z)
   left-distributive-mul-add-Commutative-Semiring =
     left-distributive-mul-add-Semiring semiring-Commutative-Semiring
 
   right-distributive-mul-add-Commutative-Semiring :
     (x y z : type-Commutative-Semiring) →
-    ( mul-Commutative-Semiring (add-Commutative-Semiring x y) z) ＝
-    ( add-Commutative-Semiring
+    mul-Commutative-Semiring (add-Commutative-Semiring x y) z ＝
+    add-Commutative-Semiring
       ( mul-Commutative-Semiring x z)
-      ( mul-Commutative-Semiring y z))
+      ( mul-Commutative-Semiring y z)
   right-distributive-mul-add-Commutative-Semiring =
     right-distributive-mul-add-Semiring semiring-Commutative-Semiring
 
@@ -259,74 +270,18 @@ module _
   left-swap-mul-Commutative-Semiring =
     left-swap-mul-Commutative-Monoid
       multiplicative-commutative-monoid-Commutative-Semiring
-```
 
-## Operations
-
-### Scalar multiplication of elements of a commutative ring by natural numbers
-
-```agda
-  mul-nat-scalar-Commutative-Semiring :
-    ℕ → type-Commutative-Semiring → type-Commutative-Semiring
-  mul-nat-scalar-Commutative-Semiring =
-    mul-nat-scalar-Semiring semiring-Commutative-Semiring
-
-  ap-mul-nat-scalar-Commutative-Semiring :
-    {m n : ℕ} {x y : type-Commutative-Semiring} →
-    (m ＝ n) → (x ＝ y) →
-    mul-nat-scalar-Commutative-Semiring m x ＝
-    mul-nat-scalar-Commutative-Semiring n y
-  ap-mul-nat-scalar-Commutative-Semiring =
-    ap-mul-nat-scalar-Semiring semiring-Commutative-Semiring
-
-  left-zero-law-mul-nat-scalar-Commutative-Semiring :
-    (x : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring 0 x ＝ zero-Commutative-Semiring
-  left-zero-law-mul-nat-scalar-Commutative-Semiring =
-    left-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
-
-  right-zero-law-mul-nat-scalar-Commutative-Semiring :
-    (n : ℕ) →
-    mul-nat-scalar-Commutative-Semiring n zero-Commutative-Semiring ＝
-    zero-Commutative-Semiring
-  right-zero-law-mul-nat-scalar-Commutative-Semiring =
-    right-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
-
-  left-unit-law-mul-nat-scalar-Commutative-Semiring :
-    (x : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring 1 x ＝ x
-  left-unit-law-mul-nat-scalar-Commutative-Semiring =
-    left-unit-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
-
-  left-nat-scalar-law-mul-Commutative-Semiring :
-    (n : ℕ) (x y : type-Commutative-Semiring) →
-    mul-Commutative-Semiring (mul-nat-scalar-Commutative-Semiring n x) y ＝
-    mul-nat-scalar-Commutative-Semiring n (mul-Commutative-Semiring x y)
-  left-nat-scalar-law-mul-Commutative-Semiring =
-    left-nat-scalar-law-mul-Semiring semiring-Commutative-Semiring
-
-  right-nat-scalar-law-mul-Commutative-Semiring :
-    (n : ℕ) (x y : type-Commutative-Semiring) →
-    mul-Commutative-Semiring x (mul-nat-scalar-Commutative-Semiring n y) ＝
-    mul-nat-scalar-Commutative-Semiring n (mul-Commutative-Semiring x y)
-  right-nat-scalar-law-mul-Commutative-Semiring =
-    right-nat-scalar-law-mul-Semiring semiring-Commutative-Semiring
-
-  left-distributive-mul-nat-scalar-add-Commutative-Semiring :
-    (n : ℕ) (x y : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring n (add-Commutative-Semiring x y) ＝
-    add-Commutative-Semiring
-      ( mul-nat-scalar-Commutative-Semiring n x)
-      ( mul-nat-scalar-Commutative-Semiring n y)
-  left-distributive-mul-nat-scalar-add-Commutative-Semiring =
-    left-distributive-mul-nat-scalar-add-Semiring semiring-Commutative-Semiring
-
-  right-distributive-mul-nat-scalar-add-Commutative-Semiring :
-    (m n : ℕ) (x : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring (m +ℕ n) x ＝
-    add-Commutative-Semiring
-      ( mul-nat-scalar-Commutative-Semiring m x)
-      ( mul-nat-scalar-Commutative-Semiring n x)
-  right-distributive-mul-nat-scalar-add-Commutative-Semiring =
-    right-distributive-mul-nat-scalar-add-Semiring semiring-Commutative-Semiring
+  interchange-mul-mul-Commutative-Semiring :
+    (x y x' y' : type-Commutative-Semiring) →
+    ( mul-Commutative-Semiring
+      ( mul-Commutative-Semiring x y)
+      ( mul-Commutative-Semiring x' y')) ＝
+    ( mul-Commutative-Semiring
+      ( mul-Commutative-Semiring x x')
+      ( mul-Commutative-Semiring y y'))
+  interchange-mul-mul-Commutative-Semiring =
+    interchange-law-commutative-and-associative
+      ( mul-Commutative-Semiring)
+      ( commutative-mul-Commutative-Semiring)
+      ( associative-mul-Commutative-Semiring)
 ```

@@ -61,18 +61,19 @@ for [pushouts](synthetic-homotopy-theory.pushouts.md) `P ≈ (PA, PB, PS)` and
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   where
 
-  family-cocone-equivalence-type-pushout : X → UU (l5 ⊔ l6)
+  family-cocone-equivalence-type-pushout : X → UU (l7 ⊔ l10)
   family-cocone-equivalence-type-pushout x =
     family-cocone-family-with-descent-data-pushout P x ≃
     family-cocone-family-with-descent-data-pushout R x
 
-  descent-data-equivalence-type-pushout : descent-data-pushout 𝒮 (l5 ⊔ l6)
+  descent-data-equivalence-type-pushout :
+    descent-data-pushout 𝒮 (l5 ⊔ l8) (l6 ⊔ l9)
   pr1 descent-data-equivalence-type-pushout a =
     left-family-family-with-descent-data-pushout P a ≃
     left-family-family-with-descent-data-pushout R a
@@ -170,7 +171,7 @@ module _
     coherence-equiv-descent-data-equivalence-type-pushout
 
   family-with-descent-data-equivalence-type-pushout :
-    family-with-descent-data-pushout c (l5 ⊔ l6)
+    family-with-descent-data-pushout c (l5 ⊔ l8) (l6 ⊔ l9) (l7 ⊔ l10)
   pr1 family-with-descent-data-equivalence-type-pushout =
     family-cocone-equivalence-type-pushout
   pr1 (pr2 family-with-descent-data-equivalence-type-pushout) =
@@ -185,10 +186,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   where
 
   equiv-section-descent-data-equivalence-type-pushout :
@@ -289,11 +290,11 @@ by inverting the inverted equivalences.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level} {𝒮 : span-diagram l1 l2 l3}
   {X : UU l4} {c : cocone-span-diagram 𝒮 X}
   (up-c : universal-property-pushout _ _ c)
-  (P : family-with-descent-data-pushout c l5)
-  (R : family-with-descent-data-pushout c l6)
+  (P : family-with-descent-data-pushout c l5 l6 l7)
+  (R : family-with-descent-data-pushout c l8 l9 l10)
   (e :
     equiv-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout P)

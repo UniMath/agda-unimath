@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 Since suspensions are just [pushouts](synthetic-homotopy-theory.pushouts.md),
 they retain the expected
 [universal property](synthetic-homotopy-theory.universal-property-pushouts.md),
-which states that the map `cocone-map` is a equivalence. We denote this
+which states that the map `cocone-map` is an equivalence. We denote this
 universal property by `universal-property-pushout-suspension`. But, due to the
 special nature of the span being pushed out, the suspension of a type enjoys an
 equivalent universal property, here denoted by `universal-property-suspension`.

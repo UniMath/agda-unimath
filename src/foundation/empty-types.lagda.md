@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.subuniverses
 open import foundation.univalence
@@ -122,6 +123,12 @@ abstract
   is-empty-type-trunc-Prop' :
     {l1 : Level} {X : UU l1} → is-empty (type-trunc-Prop X) → is-empty X
   is-empty-type-trunc-Prop' f = f ∘ unit-trunc-Prop
+
+iff-is-empty-type-trunc-Prop :
+  {l1 : Level} {X : UU l1} →
+  is-empty X ↔ is-empty (type-trunc-Prop X)
+iff-is-empty-type-trunc-Prop =
+  ( is-empty-type-trunc-Prop , is-empty-type-trunc-Prop')
 ```
 
 ### Any inhabited type is nonempty

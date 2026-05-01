@@ -9,14 +9,19 @@ module real-numbers.negation-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.similarity-preserving-maps-cumulative-large-sets
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -24,8 +29,11 @@ open import foundation.universe-levels
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -67,15 +75,16 @@ module _
       ( disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r))
       ( inr-disjunction)
       ( inl-disjunction)
-      ( is-located-lower-upper-cut-ℝ x (neg-ℚ r) (neg-ℚ q) (neg-le-ℚ q r q<r))
+      ( is-located-lower-upper-cut-ℝ x (neg-le-ℚ q<r))
 
-  neg-ℝ : ℝ l
-  neg-ℝ =
-    real-lower-upper-ℝ
-      ( lower-real-neg-ℝ)
-      ( upper-real-neg-ℝ)
-      ( is-disjoint-cut-neg-ℝ)
-      ( is-located-lower-upper-cut-neg-ℝ)
+  opaque
+    neg-ℝ : ℝ l
+    neg-ℝ =
+      real-lower-upper-ℝ
+        ( lower-real-neg-ℝ)
+        ( upper-real-neg-ℝ)
+        ( is-disjoint-cut-neg-ℝ)
+        ( is-located-lower-upper-cut-neg-ℝ)
 ```
 
 ## Properties
@@ -83,26 +92,149 @@ module _
 ### The negation function on real numbers is an involution
 
 ```agda
-neg-neg-ℝ : {l : Level} → (x : ℝ l) → neg-ℝ (neg-ℝ x) ＝ x
-neg-neg-ℝ x =
-  eq-eq-lower-cut-ℝ
-    ( neg-ℝ (neg-ℝ x))
-    ( x)
-    ( eq-has-same-elements-subtype
-      ( lower-cut-ℝ (neg-ℝ (neg-ℝ x)))
-      ( lower-cut-ℝ x)
-      ( λ q →
-        tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q) ,
-        tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q))))
+abstract opaque
+  unfolding neg-ℝ
+
+  neg-neg-ℝ : {l : Level} → (x : ℝ l) → neg-ℝ (neg-ℝ x) ＝ x
+  neg-neg-ℝ x =
+    eq-eq-lower-cut-ℝ
+      ( neg-ℝ (neg-ℝ x))
+      ( x)
+      ( eq-has-same-elements-subtype
+        ( lower-cut-ℝ (neg-ℝ (neg-ℝ x)))
+        ( lower-cut-ℝ x)
+        ( λ q →
+          tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q) ,
+          tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q))))
 ```
 
 ### Negation preserves rationality
 
 ```agda
-neg-Rational-ℝ : {l : Level} → Rational-ℝ l → Rational-ℝ l
-neg-Rational-ℝ (x , q , q≮x , x≮q) =
-  neg-ℝ x ,
-  neg-ℚ q ,
-  x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
-  q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
+opaque
+  unfolding neg-ℝ
+
+  neg-Rational-ℝ : {l : Level} → Rational-ℝ l → Rational-ℝ l
+  neg-Rational-ℝ (x , q , q≮x , x≮q) =
+    neg-ℝ x ,
+    neg-ℚ q ,
+    x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
+    q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
+
+  neg-real-ℚ : (q : ℚ) → neg-ℝ (real-ℚ q) ＝ real-ℚ (neg-ℚ q)
+  neg-real-ℚ q = eq-sim-ℝ (sim-rational-ℝ (neg-Rational-ℝ (rational-real-ℚ q)))
+
+abstract
+  neg-zero-ℝ : neg-ℝ zero-ℝ ＝ zero-ℝ
+  neg-zero-ℝ = neg-real-ℚ zero-ℚ ∙ ap real-ℚ neg-zero-ℚ
+
+  eq-neg-one-ℝ : neg-ℝ one-ℝ ＝ neg-one-ℝ
+  eq-neg-one-ℝ = neg-real-ℚ one-ℚ ∙ ap real-ℚ eq-neg-one-ℚ
 ```
+
+### The negation of the inclusion of integers in the real numbers
+
+```agda
+abstract
+  neg-real-ℤ : (k : ℤ) → neg-ℝ (real-ℤ k) ＝ real-ℤ (neg-ℤ k)
+  neg-real-ℤ k =
+    neg-real-ℚ (rational-ℤ k) ∙ ap real-ℚ (inv (neg-rational-ℤ k))
+```
+
+### Negation preserves similarity
+
+```agda
+abstract opaque
+  unfolding neg-ℝ
+
+  preserves-sim-neg-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l2} →
+    sim-ℝ x x' → sim-ℝ (neg-ℝ x) (neg-ℝ x')
+  preserves-sim-neg-ℝ {x = x} {x' = x'} x~x' =
+    let
+      (lx⊆lx' , lx'⊆lx) =
+        backward-implication (sim-lower-cut-iff-sim-ℝ x x') x~x'
+    in
+      forward-implication
+        ( sim-upper-cut-iff-sim-ℝ _ _)
+        ( lx⊆lx' ∘ neg-ℚ , lx'⊆lx ∘ neg-ℚ)
+
+  neg-raise-ℝ :
+    {l0 : Level} (l : Level) (x : ℝ l0) →
+    neg-ℝ (raise-ℝ l x) ＝ raise-ℝ l (neg-ℝ x)
+  neg-raise-ℝ l x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ l (neg-ℝ x))
+        ( preserves-sim-neg-ℝ (sim-raise-ℝ' l x)))
+
+sim-preserving-endomap-neg-ℝ :
+  sim-preserving-endomap-Cumulative-Large-Set id cumulative-large-set-ℝ
+sim-preserving-endomap-neg-ℝ =
+  make-sim-preserving-endomap-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ)
+    ( neg-ℝ)
+    ( λ _ _ → preserves-sim-neg-ℝ)
+```
+
+### `x = -x` if and only if `x = 0`
+
+```agda
+abstract opaque
+  unfolding neg-ℝ
+
+  is-rational-zero-eq-neg-ℝ :
+    {l : Level} {x : ℝ l} → (neg-ℝ x ＝ x) → is-rational-ℝ x zero-ℚ
+  is-rational-zero-eq-neg-ℝ {l} {x} -x=x =
+    ( ( λ 0<x →
+        is-disjoint-cut-ℝ
+          ( x)
+          ( zero-ℚ)
+          ( 0<x ,
+            tr
+              ( is-in-upper-cut-ℝ x)
+              ( neg-zero-ℚ)
+              ( inv-tr
+                ( λ y → is-in-lower-cut-ℝ y zero-ℚ)
+                ( -x=x)
+                ( 0<x)))) ,
+      ( λ x<0 →
+        is-disjoint-cut-ℝ
+          ( x)
+          ( zero-ℚ)
+          ( tr
+              ( is-in-lower-cut-ℝ x)
+              ( neg-zero-ℚ)
+              ( inv-tr
+                ( λ y → is-in-upper-cut-ℝ y zero-ℚ)
+                ( -x=x)
+                ( x<0)) ,
+            x<0)))
+
+  is-zero-eq-neg-ℝ :
+    {l : Level} {x : ℝ l} → neg-ℝ x ＝ x → is-zero-ℝ x
+  is-zero-eq-neg-ℝ -x=x =
+    sim-rational-is-rational-ℝ (is-rational-zero-eq-neg-ℝ -x=x)
+
+  eq-neg-is-zero-ℝ :
+    {l : Level} {x : ℝ l} → is-zero-ℝ x → neg-ℝ x ＝ x
+  eq-neg-is-zero-ℝ {_} {x} x~0 =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        neg-ℝ x
+        ~ℝ neg-ℝ zero-ℝ
+          by preserves-sim-neg-ℝ x~0
+        ~ℝ zero-ℝ
+          by sim-eq-ℝ neg-zero-ℝ
+        ~ℝ x
+          by symmetric-sim-ℝ x~0)
+```
+
+## See also
+
+- In
+  [The negation isometry on real numbers](real-numbers.isometry-negation-real-numbers.md)
+  we show that negation is an
+  [isometry](metric-spaces.isometries-metric-spaces.md) on the
+  [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md)

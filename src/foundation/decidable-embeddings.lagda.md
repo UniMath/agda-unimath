@@ -24,7 +24,8 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
+open import foundation.small-maps
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -55,7 +56,7 @@ if it is an [embedding](foundation-core.embeddings.md) and its
 Equivalently, a decidable embedding is a map whose fibers are
 [decidable propositions](foundation-core.decidable-propositions.md). We refer to
 this condition as being a
-{{#concept "decidably propositional map" Disambiguation="of types" Agda=is-decidable-prop-map}}.
+{{#concept "decidable propositional map" Disambiguation="of types" Agda=is-decidable-prop-map}}.
 
 ## Definitions
 
@@ -82,7 +83,7 @@ is-injective-is-decidable-emb :
 is-injective-is-decidable-emb = is-injective-is-emb ∘ is-emb-is-decidable-emb
 ```
 
-### Decidably propositional maps
+### Decidable propositional maps
 
 ```agda
 module _
@@ -140,6 +141,11 @@ module _
     is-decidable-map map-decidable-emb
   is-decidable-map-map-decidable-emb =
     is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
+
+  is-injective-map-decidable-emb :
+    is-injective map-decidable-emb
+  is-injective-map-decidable-emb =
+    is-injective-is-decidable-emb is-decidable-emb-map-decidable-emb
 
   emb-decidable-emb : X ↪ Y
   emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
@@ -214,8 +220,8 @@ is-decidable-emb-id :
   {l : Level} {A : UU l} → is-decidable-emb (id {A = A})
 is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
 
-decidable-emb-id : {l : Level} {A : UU l} → A ↪ᵈ A
-decidable-emb-id = (id , is-decidable-emb-id)
+id-decidable-emb : {l : Level} {A : UU l} → A ↪ᵈ A
+id-decidable-emb = (id , is-decidable-emb-id)
 
 is-decidable-prop-map-id :
   {l : Level} {A : UU l} → is-decidable-prop-map (id {A = A})
@@ -578,7 +584,7 @@ module _
         ( is-decidable-prop-map-is-decidable-emb F))
 ```
 
-### Decidable embeddings are closed under retracts of maps
+### Decidable embeddings are closed under retracts of arrows
 
 ```agda
 module _
@@ -586,18 +592,18 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-decidable-prop-map-retract-map :
-    f retract-of-map g → is-decidable-prop-map g → is-decidable-prop-map f
-  is-decidable-prop-map-retract-map R G x =
+  is-decidable-prop-map-retract-arrow :
+    f retract-of-arrow g → is-decidable-prop-map g → is-decidable-prop-map f
+  is-decidable-prop-map-retract-arrow R G x =
     is-decidable-prop-retract-of
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 
-  is-decidable-emb-retract-map :
-    f retract-of-map g → is-decidable-emb g → is-decidable-emb f
-  is-decidable-emb-retract-map R G =
+  is-decidable-emb-retract-arrow :
+    f retract-of-arrow g → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-retract-arrow R G =
     is-decidable-emb-is-decidable-prop-map
-      ( is-decidable-prop-map-retract-map R
+      ( is-decidable-prop-map-retract-arrow R
         ( is-decidable-prop-map-is-decidable-emb G))
 ```
 
@@ -642,3 +648,32 @@ module _
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
 ```
+
+### Decidable embeddings are small
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-small-map-is-decidable-prop-map :
+    {f : A → B} → is-decidable-prop-map f → is-small-map lzero f
+  is-small-map-is-decidable-prop-map H x = is-small-is-decidable-prop (H x)
+
+  is-small-map-is-decidable-emb :
+    {f : A → B} → is-decidable-emb f → is-small-map lzero f
+  is-small-map-is-decidable-emb H =
+    is-small-map-is-decidable-prop-map
+      ( is-decidable-prop-map-is-decidable-emb H)
+
+  is-small-map-decidable-emb :
+    (f : A ↪ᵈ B) → is-small-map lzero (map-decidable-emb f)
+  is-small-map-decidable-emb (f , H) = is-small-map-is-decidable-emb H
+```
+
+## References
+
+Decidable embeddings are discussed in {{#cite Warn24}} under the name
+_complemented embeddings_.
+
+{{#bibliography}}

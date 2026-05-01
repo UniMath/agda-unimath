@@ -19,8 +19,9 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-A **type equipped with an automorphism** is a pair consisting of a type `A` and
-an [automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
+A {{#concept "type equipped with an automorphism" Agda=Type-With-Automorphism}}
+is a pair consisting of a type `A` and an
+[automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
 
 ## Definitions
 
@@ -62,7 +63,7 @@ pr2 (trivial-Type-With-Automorphism X) = id-equiv
 ## See also
 
 - Sets equipped with automorphisms are defined in
-  [`structured-types.sets-equipped-with-automorphisms.md`](structured-types.sets-equipped-with-automorphisms.md)
+  [`structured-types.sets-equipped-with-automorphisms`](structured-types.sets-equipped-with-automorphisms.md)
 - Cyclic types are
   [sets equipped with automorphisms](structured-types.sets-equipped-with-automorphisms.md)
   of which the automorphism acts transitively.

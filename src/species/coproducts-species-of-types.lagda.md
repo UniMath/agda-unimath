@@ -23,7 +23,10 @@ open import species.species-of-types
 
 ## Idea
 
-The coproduct of two species of types `F` and `G` is the pointwise coproduct.
+The
+{{#concept "coproduct" Disambiguation="of species of types" Agda=coproduct-species-types}}
+of two [species of types](species.species-of-types.md) `F` and `G` is the
+pointwise [coproduct](foundation.coproduct-types.md).
 
 ## Definition
 
@@ -33,13 +36,17 @@ The coproduct of two species of types `F` and `G` is the pointwise coproduct.
 coproduct-species-types :
   {l1 l2 l3 : Level} (F : species-types l1 l2) (G : species-types l1 l3) →
   species-types l1 (l2 ⊔ l3)
-coproduct-species-types F G X = F X + G X
+coproduct-species-types F G X = (F X + G X)
 ```
 
 ## Universal properties
 
-Proof of (hom-species-types (species-types-coproduct F G) H) ≃
-((hom-species-types F H) × (hom-species-types G H)).
+Proof of
+
+```text
+  (hom-species-types (species-types-coproduct F G) H) ≃
+  ((hom-species-types F H) × (hom-species-types G H)).
+```
 
 ```agda
 equiv-universal-property-coproduct-species-types :

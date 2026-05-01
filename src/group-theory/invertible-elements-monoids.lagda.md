@@ -18,6 +18,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -33,10 +34,10 @@ open import group-theory.monoids
 An element `x : M` in a [monoid](group-theory.monoids.md) `M` is said to be
 **left invertible** if there is an element `y : M` such that `yx ＝ e`, and it
 is said to be **right invertible** if there is an element `y : M` such that
-`xy ＝ e`. The element `x` is said to be **invertible** if it has a **two-sided
-inverse**, i.e., if if there is an element `y : M` such that `xy = e` and
-`yx = e`. Left inverses of elements are also called **retractions** and right
-inverses are also called **sections**.
+`xy ＝ e`. The element `x` is said to be
+{{#concept "invertible" WD="invertible element" WDID=Q67474638 Agda=is-invertible-element-Monoid}}
+if it has a two-sided inverse, i.e., if there is an element `y : M` such that
+`xy = e` and `yx = e`.
 
 ## Definitions
 
@@ -381,7 +382,7 @@ show that `x(yx) ＝ x1`. This follows from the following calculation:
 ```
 
 This completes the proof that if `z ↦ xz` is an equivalence, then `x` is
-invertible. The converse is straightfoward.
+invertible. The converse is straightforward.
 
 In the following code we give the above proof, as well as the analogous proof
 that `x` is invertible if `z ↦ zx` is an equivalence, and the converse of both
@@ -460,6 +461,12 @@ module _
       ( left-div-is-invertible-element-Monoid H)
       ( is-section-left-div-is-invertible-element-Monoid H)
       ( is-retraction-left-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid =
+    ( is-equiv-mul-is-invertible-element-Monoid ,
+      is-invertible-element-is-equiv-mul-Monoid)
 ```
 
 #### An element `x` is invertible if and only if `z ↦ zx` is an equivalence
@@ -535,9 +542,16 @@ module _
       ( right-div-is-invertible-element-Monoid H)
       ( is-section-right-div-is-invertible-element-Monoid H)
       ( is-retraction-right-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid' :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid' M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid' =
+    ( is-equiv-mul-is-invertible-element-Monoid' ,
+      is-invertible-element-is-equiv-mul-Monoid')
 ```
 
 ## See also
 
 - The core of a monoid is defined in
   [`group-theory.cores-monoids`](group-theory.cores-monoids.md).
+- [Invertible elements in large monoids](group-theory.invertible-elements-large-monoids.md)

@@ -19,7 +19,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 
@@ -349,7 +349,7 @@ module _
       ( 𝒫)
       ( reflection-localization-global-subuniverse LX)
       ( up-localization-global-subuniverse LX)
-      ( is-equiv-retract-map-is-equiv'
+      ( is-equiv-retract-arrow-is-equiv'
         ( unit-localization-global-subuniverse LX)
         ( unit-localization-global-subuniverse LY)
         ( R)

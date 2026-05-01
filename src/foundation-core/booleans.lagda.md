@@ -123,10 +123,6 @@ neq-true-false-bool ()
 ### The boolean operators
 
 ```agda
-neg-bool : bool → bool
-neg-bool true = false
-neg-bool false = true
-
 conjunction-bool : bool → bool → bool
 conjunction-bool true true = true
 conjunction-bool true false = false
@@ -207,17 +203,6 @@ not-is-false-is-true false () f
 not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
 not-is-true-is-false true () f
 not-is-true-is-false false t ()
-```
-
-### Boolean negation has no fixed points
-
-```agda
-neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
-neq-neg-bool true ()
-neq-neg-bool false ()
-
-neq-neg-bool' : (b : bool) → ¬ (neg-bool b ＝ b)
-neq-neg-bool' b = neq-neg-bool b ∘ inv
 ```
 
 ### The constant function `const bool b` is not an equivalence

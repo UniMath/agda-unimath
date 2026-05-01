@@ -10,7 +10,9 @@ module foundation.disjoint-subtypes where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.empty-subtypes
 open import foundation.empty-types
+open import foundation.intersections-subtypes
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -23,7 +25,7 @@ open import foundation.universe-levels
 Two [subtypes](foundation-core.subtypes.md) are
 {{#concept "disjoint" WDID=Q215382 WD="disjoint sets" Agda=disjoint-subtype}} if
 their [intersection](foundation.intersections-subtypes.md) is
-[empty](foundation.empty-types.md).
+[empty](foundation.empty-subtypes.md).
 
 ## Definition
 
@@ -33,8 +35,7 @@ module _
   where
 
   disjoint-subtype-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  disjoint-subtype-Prop =
-    Π-Prop A (λ a → is-empty-Prop (is-in-subtype B a × is-in-subtype C a))
+  disjoint-subtype-Prop = is-empty-prop-subtype (intersection-subtype B C)
 
   disjoint-subtype : UU (l1 ⊔ l2 ⊔ l3)
   disjoint-subtype = type-Prop disjoint-subtype-Prop
@@ -53,3 +54,7 @@ module _
     disjoint-subtype B B → is-empty (type-subtype B)
   is-empty-disjoint-subtype-self H (b , b∈B) = H b (b∈B , b∈B)
 ```
+
+## See also
+
+- [Exclusive sums](foundation.exclusive-sum.md)

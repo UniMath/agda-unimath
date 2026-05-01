@@ -27,7 +27,7 @@ Consider a map `f : A → B` and a map `g : B → A` in the converse direction. 
 there is an [equivalence](foundation-core.equivalences.md)
 
 ```text
-  is-retraction f g ≃ ((x : A) (y : B) → (f x ＝ y) ≃ (x ＝ g y))
+  is-retraction f g ≃ ((x : A) (y : B) → (f x ＝ y) → (x ＝ g y))
 ```
 
 In other words, any [retracting homotopy](foundation-core.retractions.md)
@@ -56,12 +56,12 @@ module _
 
   eq-transpose-is-retraction' :
     is-retraction f g → {x : A} {y : B} → f x ＝ y → x ＝ g y
-  eq-transpose-is-retraction' H {x} refl = inv (H x)
+  eq-transpose-is-retraction' H {x} p = inv (H x) ∙ ap g p
 ```
 
 ## Properties
 
-### The map that assings to each retracting homotopy a family of transposition functions of identifications is an equivalence
+### The map that assigns to each retracting homotopy a family of transposition functions of identifications is an equivalence
 
 ```agda
 module _

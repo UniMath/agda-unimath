@@ -20,7 +20,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given two [pointed types](structured-types.pointed-types.md) `A` and `B` the
+Given two [pointed types](structured-types.pointed-types.md) `A` and `B`, the
 {{#concept "constant pointed map" Agda=constant-pointed-map}} from `A` to `B` is
 the [pointed map](structured-types.pointed-maps.md)
 `constant-pointed-map : A →∗ B` mapping every element in `A` to the base point

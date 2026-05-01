@@ -69,31 +69,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : UU l2) (C : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-associative-product : (A × B) × C → A × (B × C)
-  map-associative-product = map-associative-Σ A (λ _ → B) (λ _ → C)
+  map-associative-product = map-associative-Σ
 
   map-inv-associative-product : A × (B × C) → (A × B) × C
-  map-inv-associative-product = map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+  map-inv-associative-product = map-inv-associative-Σ
 
   is-section-map-inv-associative-product :
     (map-associative-product ∘ map-inv-associative-product) ~ id
   is-section-map-inv-associative-product =
-    is-section-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+    is-section-map-inv-associative-Σ
 
   is-retraction-map-inv-associative-product :
     (map-inv-associative-product ∘ map-associative-product) ~ id
   is-retraction-map-inv-associative-product =
-    is-retraction-map-inv-associative-Σ A (λ _ → B) (λ _ → C)
+    is-retraction-map-inv-associative-Σ
 
   is-equiv-map-associative-product : is-equiv map-associative-product
   is-equiv-map-associative-product =
-    is-equiv-map-associative-Σ A (λ _ → B) (λ _ → C)
+    is-equiv-map-associative-Σ
 
   associative-product : ((A × B) × C) ≃ (A × (B × C))
-  associative-product = associative-Σ A (λ _ → B) (λ _ → C)
+  associative-product = associative-Σ
+
+  inv-associative-product : (A × (B × C)) ≃ ((A × B) × C)
+  inv-associative-product = inv-associative-Σ
 ```
 
 ### The unit laws of cartesian product types with respect to contractible types
@@ -119,7 +122,8 @@ module _
     left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
 
   inv-left-unit-law-product-is-contr : B ≃ A × B
-  inv-left-unit-law-product-is-contr = inv-equiv left-unit-law-product-is-contr
+  inv-left-unit-law-product-is-contr =
+    inv-left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
 
   is-equiv-pr2-product-is-contr : is-equiv (pr2 {B = λ _ → B})
   is-equiv-pr2-product-is-contr =
@@ -146,6 +150,16 @@ pr2 (equiv-add-redundant-prop is-prop-B f) =
     ( pr1)
     ( λ p → eq-pair refl (eq-is-prop is-prop-B))
     ( refl-htpy)
+
+equiv-remove-redundant-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop B → (f : A → B) → A × B ≃ A
+pr1 (equiv-remove-redundant-prop is-prop-B f) = pr1
+pr2 (equiv-remove-redundant-prop is-prop-B f) =
+  is-equiv-is-invertible
+    ( λ a → (a , f a))
+    ( refl-htpy)
+    ( λ p → eq-pair refl (eq-is-prop is-prop-B))
 ```
 
 ## See also

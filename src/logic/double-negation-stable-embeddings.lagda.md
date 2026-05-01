@@ -10,9 +10,6 @@ module logic.double-negation-stable-embeddings where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.decidable-embeddings
-open import foundation.decidable-maps
-open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.double-negation-stable-propositions
@@ -24,18 +21,15 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.subtype-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -62,6 +56,12 @@ Equivalently, a double negation stable embedding is a map whose fibers are
 [double negation stable propositions](foundation.double-negation-stable-propositions.md).
 We refer to this condition as being a
 {{#concept "double negation stable propositional map" Disambiguation="of types" Agda=is-double-negation-stable-prop-map}}.
+
+Double negation stable embeddings form the right class of an orthogonal
+factorization system on types whose left class is
+[double negation dense maps](logic.double-negation-dense-maps.md). This
+orthogonal factorization system is determined by the
+[double negation modality](foundation.double-negation-modality.md).
 
 ## Definitions
 
@@ -277,6 +277,11 @@ abstract
           ( is-property-is-emb f)
           ( is-prop-Π
             ( is-prop-has-double-negation-elim ∘ is-prop-map-is-emb (pr1 H))))
+
+is-double-negation-stable-emb-Prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
+is-double-negation-stable-emb-Prop f =
+  ( is-double-negation-stable-emb f , is-prop-is-double-negation-stable-emb f)
 ```
 
 ### Double negation stable embeddings are closed under homotopies
@@ -659,7 +664,7 @@ module _
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb F))
 ```
 
-### Double negation stable embeddings are closed under retracts of maps
+### Double negation stable embeddings are closed under retracts of arrows
 
 ```agda
 module _
@@ -667,22 +672,22 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-double-negation-stable-prop-map-retract-map :
-    f retract-of-map g →
+  is-double-negation-stable-prop-map-retract-arrow :
+    f retract-of-arrow g →
     is-double-negation-stable-prop-map g →
     is-double-negation-stable-prop-map f
-  is-double-negation-stable-prop-map-retract-map R G x =
+  is-double-negation-stable-prop-map-retract-arrow R G x =
     is-double-negation-stable-prop-retract
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 
-  is-double-negation-stable-emb-retract-map :
-    f retract-of-map g →
+  is-double-negation-stable-emb-retract-arrow :
+    f retract-of-arrow g →
     is-double-negation-stable-emb g →
     is-double-negation-stable-emb f
-  is-double-negation-stable-emb-retract-map R G =
+  is-double-negation-stable-emb-retract-arrow R G =
     is-double-negation-stable-emb-is-double-negation-stable-prop-map
-      ( is-double-negation-stable-prop-map-retract-map R
+      ( is-double-negation-stable-prop-map-retract-arrow R
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb G))
 ```
 
@@ -730,3 +735,7 @@ module _
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
 ```
+
+## See also
+
+- [Double negation images](foundation.double-negation-images.md)

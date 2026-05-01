@@ -149,8 +149,8 @@ module _
       ( ap-comp g f q)
       ( (ap² g ∘ ap² f) α)
   compute-comp-ap² =
-    (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
-      (nat-htpy (ap-comp g f) α))
+    ( horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α))) ∙
+    ( nat-htpy (ap-comp g f) α)
 ```
 
 ### The action of a constant function on higher identifications is constant

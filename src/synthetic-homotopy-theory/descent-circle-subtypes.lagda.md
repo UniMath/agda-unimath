@@ -31,9 +31,9 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-Given a family `A : 𝕊¹ → U` over the
+Given a family `A : 𝕊¹ → 𝒰` over the
 [circle](synthetic-homotopy-theory.circle.md) and a family
-`B : (t : 𝕊¹) → (A t) → U` over `A` with corresponding
+`B : (t : 𝕊¹) → (A t) → 𝒰` over `A` with corresponding
 [descent data](synthetic-homotopy-theory.descent-circle.md) `(X, e)` and
 dependent descent data `(R, k)`, where `R` is a
 [subtype](foundation-core.subtypes.md) of `X`, we get that dependent functions
@@ -92,20 +92,7 @@ module _
                     ( B))
                 ( x , r) ＝
               ( x , r)))
-      by
-        associative-Σ
-          ( type-family-with-descent-data-circle A)
-          ( type-double-family-with-dependent-descent-data-circle A B)
-          ( λ u →
-            map-Σ
-              ( type-double-family-with-dependent-descent-data-circle A B)
-              ( map-aut-family-with-descent-data-circle A)
-              ( λ x →
-                map-dependent-automorphism-double-family-with-dependent-descent-data-circle
-                  ( A)
-                  ( B))
-              ( u) ＝
-            u)
+      by associative-Σ
     ≃ Σ ( type-family-with-descent-data-circle A)
         ( λ x →
           ( is-in-subtype subtype-descent-data-circle-subtype x) ×
@@ -127,11 +114,7 @@ module _
     ≃ Σ ( fixpoint-descent-data-circle
           ( descent-data-family-with-descent-data-circle A))
         ( λ x → is-in-subtype subtype-descent-data-circle-subtype (pr1 x))
-      by
-        inv-associative-Σ
-          ( type-family-with-descent-data-circle A)
-          ( λ x → map-aut-family-with-descent-data-circle A x ＝ x)
-          ( λ x → is-in-subtype subtype-descent-data-circle-subtype (pr1 x))
+      by inv-associative-Σ
 
   equiv-section-descent-data-circle-subtype-fixpoint-in-subtype :
     dependent-universal-property-circle l →

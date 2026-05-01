@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.descent-data-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -38,9 +39,8 @@ is a triple `(PA, PB, PS)`, where `PA : A → 𝒰` is a type family over `A`,
   PS : (s : S) → PA (f a) ≃ PB (g a).
 ```
 
-In
-[`descent-property-pushouts`](synthetic-homotopy-theory.descent-property-pushouts.md),
-we show that this is exactly the data one needs to "glue together" a type family
+In [`descent-pushouts`](synthetic-homotopy-theory.descent-pushouts.md), we show
+that this is exactly the data one needs to "glue together" a type family
 `P : X → 𝒰` over the pushout `X` of `𝒮`.
 
 The [identity type](foundation-core.identity-types.md) of descent data is
@@ -69,11 +69,11 @@ module _
   {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
 
-  descent-data-pushout : (l4 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
-  descent-data-pushout l =
-    Σ ( domain-span-diagram 𝒮 → UU l)
+  descent-data-pushout : (l4 l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
+  descent-data-pushout l4 l5 =
+    Σ ( domain-span-diagram 𝒮 → UU l4)
       ( λ PA →
-        Σ ( codomain-span-diagram 𝒮 → UU l)
+        Σ ( codomain-span-diagram 𝒮 → UU l5)
           ( λ PB →
             (s : spanning-type-span-diagram 𝒮) →
             PA (left-map-span-diagram 𝒮 s) ≃ PB (right-map-span-diagram 𝒮 s)))
@@ -83,14 +83,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
-  (P : descent-data-pushout 𝒮 l4)
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4 l5)
   where
 
   left-family-descent-data-pushout : domain-span-diagram 𝒮 → UU l4
   left-family-descent-data-pushout = pr1 P
 
-  right-family-descent-data-pushout : codomain-span-diagram 𝒮 → UU l4
+  right-family-descent-data-pushout : codomain-span-diagram 𝒮 → UU l5
   right-family-descent-data-pushout = pr1 (pr2 P)
 
   equiv-family-descent-data-pushout :
@@ -105,6 +105,13 @@ module _
     right-family-descent-data-pushout (right-map-span-diagram 𝒮 s)
   map-family-descent-data-pushout s =
     map-equiv (equiv-family-descent-data-pushout s)
+
+  map-inv-family-descent-data-pushout :
+    (s : spanning-type-span-diagram 𝒮) →
+    right-family-descent-data-pushout (right-map-span-diagram 𝒮 s) →
+    left-family-descent-data-pushout (left-map-span-diagram 𝒮 s)
+  map-inv-family-descent-data-pushout s =
+    map-inv-equiv (equiv-family-descent-data-pushout s)
 
   is-equiv-map-family-descent-data-pushout :
     (s : spanning-type-span-diagram 𝒮) →
@@ -140,11 +147,15 @@ module _
   where
 
   descent-data-family-cocone-span-diagram :
-    {l5 : Level} → (X → UU l5) → descent-data-pushout 𝒮 l5
-  pr1 (descent-data-family-cocone-span-diagram P) =
-    P ∘ horizontal-map-cocone _ _ c
-  pr1 (pr2 (descent-data-family-cocone-span-diagram P)) =
-    P ∘ vertical-map-cocone _ _ c
-  pr2 (pr2 (descent-data-family-cocone-span-diagram P)) s =
-    equiv-tr P (coherence-square-cocone _ _ c s)
+    {l5 : Level} → (X → UU l5) → descent-data-pushout 𝒮 l5 l5
+  descent-data-family-cocone-span-diagram P =
+    ( ( P ∘ horizontal-map-cocone _ _ c) ,
+      ( P ∘ vertical-map-cocone _ _ c) ,
+      ( equiv-tr P ∘ coherence-square-cocone _ _ c))
 ```
+
+## See also
+
+- [Equifibered span diagrams](synthetic-homotopy-theory.equifibered-span-diagrams.md)
+  is a variant of descent data for pushouts where an additional type family over
+  the middle vertex is specified.

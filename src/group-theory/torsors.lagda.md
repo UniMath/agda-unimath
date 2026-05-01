@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -440,25 +441,20 @@ module _
   mere-eq-Torsor-Group :
     (Y : Torsor-Group G l2) → mere-eq X Y
   mere-eq-Torsor-Group Y =
-    apply-universal-property-trunc-Prop
+    map-binary-trunc-Prop
+      ( λ e f →
+        eq-equiv-Torsor-Group G X Y
+          ( comp-equiv-Torsor-Group G
+            ( X)
+            ( principal-Torsor-Group G)
+            ( Y)
+            ( f)
+            ( inv-equiv-Torsor-Group G
+              ( principal-Torsor-Group G)
+              ( X)
+              ( e))))
       ( pr2 X)
-      ( mere-eq-Prop X Y)
-      ( λ e →
-        apply-universal-property-trunc-Prop
-          ( pr2 Y)
-          ( mere-eq-Prop X Y)
-          ( λ f →
-            unit-trunc-Prop
-              ( eq-equiv-Torsor-Group G X Y
-                ( comp-equiv-Torsor-Group G
-                  ( X)
-                  ( principal-Torsor-Group G)
-                  ( Y)
-                  ( f)
-                  ( inv-equiv-Torsor-Group G
-                    ( principal-Torsor-Group G)
-                    ( X)
-                    ( e))))))
+      ( pr2 Y)
 
 module _
   {l1 : Level} (G : Group l1)
@@ -574,17 +570,10 @@ module _
 
   preserves-mul-equiv-Eq-equiv-Torsor-Group :
     { p q : principal-Torsor-Group G ＝ principal-Torsor-Group G} →
-    Id
-      ( map-equiv
-        ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-        ( p ∙ q))
-      ( mul-Group G
-        ( map-equiv
-          ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-          ( p))
-        ( map-equiv
-          ( equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G))
-          ( q)))
+    map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) (p ∙ q) ＝
+    mul-Group G
+      ( map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) p)
+      ( map-equiv (equiv-Eq-equiv-Torsor-Group (principal-Torsor-Group G)) q)
   preserves-mul-equiv-Eq-equiv-Torsor-Group {p} {q} =
     ( ap
       ( Eq-equiv-Torsor-Group (principal-Torsor-Group G))

@@ -20,14 +20,15 @@ open import foundation-core.identity-types
 
 ## Idea
 
-An **embedding** from one type into another is a map that induces
+An {{#concept "embedding" Agda=_↪_ WD="embedding" WDID=Q980509}} from one type
+into another is a map that induces
 [equivalences](foundation-core.equivalences.md) on
 [identity types](foundation-core.identity-types.md). In other words, the
-identitifications `(f x) ＝ (f y)` for an embedding `f : A → B` are in
-one-to-one correspondence with the identitifications `x ＝ y`. Embeddings are
-better behaved homotopically than
-[injective maps](foundation-core.injective-maps.md), because the condition of
-being an equivalence is a [property](foundation-core.propositions.md) under
+identifications `(f x) ＝ (f y)` for an embedding `f : A → B` are in one-to-one
+correspondence with the identifications `x ＝ y`. Embeddings are better behaved
+homotopically than [injective maps](foundation-core.injective-maps.md), because
+the condition of being an equivalence is a
+[property](foundation-core.propositions.md) under
 [function extensionality](foundation.function-extensionality.md).
 
 ## Definitions
@@ -112,7 +113,7 @@ module _
   where
 
   is-emb-id : is-emb (id {A = A})
-  is-emb-id x y = is-equiv-htpy id ap-id is-equiv-id
+  is-emb-id x y = is-equiv-htpy-id ap-id
 
   id-emb : A ↪ A
   pr1 id-emb = id
