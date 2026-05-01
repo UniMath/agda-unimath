@@ -55,7 +55,7 @@ to short maps `g ∘ κ : P → M`. For any
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 `u : C P`, its
 [image](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
-`C(g ∘ κ) u : C M`
+`C (g ∘ κ) u : C M`
 [converges](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) to
 `g u` so `g` is determined by its restriction to `P` and `g ∘ κ` is
 [precomplete](metric-spaces.precomplete-short-maps-pseudometric-spaces.md).
