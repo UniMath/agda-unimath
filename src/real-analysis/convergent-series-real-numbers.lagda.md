@@ -1,7 +1,7 @@
 # Convergent series in the real numbers
 
 ```agda
-module analysis.convergent-series-real-numbers where
+module real-analysis.convergent-series-real-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,6 @@ module analysis.convergent-series-real-numbers where
 ```agda
 open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
-open import analysis.series-real-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.propositions
@@ -17,6 +16,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import lists.sequences
+
+open import real-analysis.series-real-numbers
 
 open import real-numbers.cauchy-sequences-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -27,7 +28,7 @@ open import real-numbers.metric-additive-group-of-real-numbers
 
 ## Idea
 
-A [series of real numbers](analysis.series-real-numbers.md) is
+A [series of real numbers](real-analysis.series-real-numbers.md) is
 {{#concept "convergent" Disambiguation="series in ℝ" Agda=is-convergent-series-ℝ Agda=convergent-series-ℝ WDID=Q1211057 WD="convergent series"}}
 if its sequence of partial sums converges in the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).

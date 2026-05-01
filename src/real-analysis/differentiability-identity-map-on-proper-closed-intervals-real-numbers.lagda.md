@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-identity-map-on-proper-closed-intervals-real-numbers where
+module real-analysis.differentiability-identity-map-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.constant-maps
@@ -19,6 +17,8 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -41,7 +41,7 @@ Given a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` on the [real numbers](real-numbers.dedekind-real-numbers.md), the
 [identity function](foundation.function-types.md) on `[a, b]` is
-[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
+[differentiable](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md),
 and its derivative is the [constant](foundation.constant-maps.md)
 [one](real-numbers.rational-real-numbers.md) function.
 

@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.addition-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
+module real-analysis.addition-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 
@@ -21,6 +19,8 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -40,7 +40,7 @@ open import real-numbers.rational-real-numbers
 ## Idea
 
 Given two
-[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
+[differentiable](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 functions `f` and `g` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real

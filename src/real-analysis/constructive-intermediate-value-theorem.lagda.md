@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.constructive-intermediate-value-theorem where
+module real-analysis.constructive-intermediate-value-theorem where
 ```
 
 <details><summary>Imports</summary>
@@ -93,7 +93,7 @@ there exists a `c` with `a ≤ c ≤ b` such that the
 most `ε`.
 
 The classical
-[intermediate value theorem](analysis.intermediate-value-theorem.md) is the
+[intermediate value theorem](real-analysis.intermediate-value-theorem.md) is the
 [79th](literature.100-theorems.md#79) theorem on
 [Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.

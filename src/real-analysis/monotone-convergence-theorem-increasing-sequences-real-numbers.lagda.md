@@ -1,7 +1,7 @@
 # Monotone convergence theorem for increasing sequences of real numbers
 
 ```agda
-module analysis.monotone-convergence-theorem-increasing-sequences-real-numbers where
+module real-analysis.monotone-convergence-theorem-increasing-sequences-real-numbers where
 ```
 
 <details><summary>Imports</summary>
