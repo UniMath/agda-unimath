@@ -31,7 +31,7 @@ open import universal-algebra.submodels-generated-by-subsets-models-of-signature
 
 ## Idea
 
-Given an arbitrary [subset](universal-algebra.subsets-algebras.md) `S` of an
+Given an arbitrary [subset](foundation.subtypes.md) `S` of an
 [algebra](universal-algebra.algebras.md) `A`, there is a minimal
 [subalgebra](universal-algebra.subalgebras.md) `A` containing `S`.
 
