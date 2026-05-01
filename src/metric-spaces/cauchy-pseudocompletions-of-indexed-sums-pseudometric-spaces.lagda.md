@@ -162,26 +162,27 @@ module _
   (u : cauchy-approximation-indexed-sum-Pseudometric-Space A P)
   where
 
-  all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space :
-    (ε δ : ℚ⁺) →
-    map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u ε ＝
-    map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u δ
-  all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space ε δ =
-    eq-base-neighbourhood-indexed-sum-Pseudometric-Space A P
-      ( ε +ℚ⁺ δ)
-      ( map-cauchy-approximation-Pseudometric-Space
-        ( indexed-sum-Pseudometric-Space A P)
-        ( u)
-        ( ε))
-      ( map-cauchy-approximation-Pseudometric-Space
-        ( indexed-sum-Pseudometric-Space A P)
-        ( u)
-        ( δ))
-      ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
-        ( indexed-sum-Pseudometric-Space A P)
-        ( u)
-        ( ε)
-        ( δ))
+  abstract
+    all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space :
+      (ε δ : ℚ⁺) →
+      map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u ε ＝
+      map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u δ
+    all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space ε δ =
+      eq-base-neighbourhood-indexed-sum-Pseudometric-Space A P
+        ( ε +ℚ⁺ δ)
+        ( map-cauchy-approximation-Pseudometric-Space
+          ( indexed-sum-Pseudometric-Space A P)
+          ( u)
+          ( ε))
+        ( map-cauchy-approximation-Pseudometric-Space
+          ( indexed-sum-Pseudometric-Space A P)
+          ( u)
+          ( δ))
+        ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+          ( indexed-sum-Pseudometric-Space A P)
+          ( u)
+          ( ε)
+          ( δ))
 
   base-cauchy-approximation-indexed-sum-Pseudometric-Space : type-Set A
   base-cauchy-approximation-indexed-sum-Pseudometric-Space =
@@ -191,12 +192,15 @@ module _
       ( u)
       ( one-ℚ⁺)
 
-  contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space :
-    (d : ℚ⁺) →
-    map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u d ＝
-    base-cauchy-approximation-indexed-sum-Pseudometric-Space
-  contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space d =
-    all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space d one-ℚ⁺
+  abstract
+    contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space :
+      (d : ℚ⁺) →
+      map-base-cauchy-approximation-indexed-sum-Pseudometric-Space A P u d ＝
+      base-cauchy-approximation-indexed-sum-Pseudometric-Space
+    contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space d =
+      all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+        ( d)
+        ( one-ℚ⁺)
 
   map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
     ℚ⁺ →
@@ -209,128 +213,111 @@ module _
       ( contraction-base-cauchy-approximation-indexed-sum-Pseudometric-Space d)
       ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space A P u d)
 
-  is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
-    is-cauchy-approximation-Pseudometric-Space
-      ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-      ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
-  is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-    ε δ =
-    tr
-      ( λ z →
-        neighborhood-Pseudometric-Space
-          ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-          ( ε +ℚ⁺ δ)
-          ( z)
-          ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( δ)))
-      ( lemma)
-      ( preserves-neighborhoods-map-isometry-Pseudometric-Space
-        ( P
-          ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( A)
-            ( P)
-            ( u)
-            ( δ)))
+  abstract
+    is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
+      is-cauchy-approximation-Pseudometric-Space
         ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-        ( isometry-fiber-eq-base-indexed-sum-Pseudometric-Space A P
-          ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( A)
-            ( P)
-            ( u)
-            ( δ))
-          ( base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-          ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( δ)
-            ( one-ℚ⁺)))
-        ( ε +ℚ⁺ δ)
-        ( tr
-          ( type-Pseudometric-Space ∘ P)
-          ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( ε)
-            ( δ))
-          ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( A)
-            ( P)
-            ( u)
-            ( ε)))
-        ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space A P u δ)
-        ( neighborhood-fiber-neighborhood-indexed-sum-Pseudometric-Space
-          ( A)
-          ( P)
-          ( ε +ℚ⁺ δ)
-          ( map-cauchy-approximation-Pseudometric-Space
-            ( indexed-sum-Pseudometric-Space A P)
-            ( u)
-            ( ε))
-          ( map-cauchy-approximation-Pseudometric-Space
-            ( indexed-sum-Pseudometric-Space A P)
-            ( u)
-            ( δ))
-          ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
-            ( indexed-sum-Pseudometric-Space A P)
-            ( u)
-            ( ε)
-            ( δ))))
-    where
-
-    lemma :
+        ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space)
+    is-cauchy-map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+      ε δ =
       tr
-        ( type-Pseudometric-Space ∘ P)
-        ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-          ( δ)
-          ( one-ℚ⁺))
-        ( tr
-          ( type-Pseudometric-Space ∘ P)
-          ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( ε)
-            ( δ))
-          ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-            ( A)
-            ( P)
-            ( u)
-            ( ε))) ＝
-      map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-        ε
-    lemma =
-      ( comp-tr
-        ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-          ( ε)
-          ( δ))
-        ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-          ( δ)
-          ( one-ℚ⁺))
-        ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
-          ( A)
-          ( P)
-          ( u)
-          ( ε))) ∙
-      ( ap
-        ( λ e →
-          tr
+        ( λ z →
+          neighborhood-Pseudometric-Space
+            ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
+            ( ε +ℚ⁺ δ)
+            ( z)
+            ( map-cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( δ)))
+        ( ( comp-tr
+            ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( ε)
+              ( δ))
+            ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( δ)
+              ( one-ℚ⁺))
+            ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( A)
+              ( P)
+              ( u)
+              ( ε))) ∙
+          ( ap
+            ( λ e →
+              tr
+                ( type-Pseudometric-Space ∘ P)
+                ( e)
+                ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+                  ( A)
+                  ( P)
+                  ( u)
+                  ( ε)))
+              ( is-set-has-uip
+                ( is-set-type-Set A)
+                ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+                  ( A)
+                  ( P)
+                  ( u)
+                  ( ε))
+                ( base-cauchy-approximation-indexed-sum-Pseudometric-Space)
+                ( ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+                  ( ε)
+                  ( δ)) ∙
+                  ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+                    ( δ)
+                    ( one-ℚ⁺)))
+                ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+                  ( ε)
+                  ( one-ℚ⁺)))))
+        ( preserves-neighborhoods-map-isometry-Pseudometric-Space
+          ( P
+            ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( A)
+              ( P)
+              ( u)
+              ( δ)))
+          ( P base-cauchy-approximation-indexed-sum-Pseudometric-Space)
+          ( isometry-fiber-eq-base-indexed-sum-Pseudometric-Space A P
+            ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( A)
+              ( P)
+              ( u)
+              ( δ))
+            ( base-cauchy-approximation-indexed-sum-Pseudometric-Space)
+            ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( δ)
+              ( one-ℚ⁺)))
+          ( ε +ℚ⁺ δ)
+          ( tr
             ( type-Pseudometric-Space ∘ P)
-            ( e)
+            ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+              ( ε)
+              ( δ))
             ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
               ( A)
               ( P)
               ( u)
               ( ε)))
-          ( is-set-has-uip
-            ( is-set-type-Set A)
-            ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-              ( A)
-              ( P)
+          ( map-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space
+            ( A)
+            ( P)
+            ( u)
+            ( δ))
+          ( neighborhood-fiber-neighborhood-indexed-sum-Pseudometric-Space
+            ( A)
+            ( P)
+            ( ε +ℚ⁺ δ)
+            ( map-cauchy-approximation-Pseudometric-Space
+              ( indexed-sum-Pseudometric-Space A P)
               ( u)
               ( ε))
-            ( base-cauchy-approximation-indexed-sum-Pseudometric-Space)
-            ( ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
+            ( map-cauchy-approximation-Pseudometric-Space
+              ( indexed-sum-Pseudometric-Space A P)
+              ( u)
+              ( δ))
+            ( is-cauchy-approximation-map-cauchy-approximation-Pseudometric-Space
+              ( indexed-sum-Pseudometric-Space A P)
+              ( u)
               ( ε)
-              ( δ)) ∙
-              ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-                ( δ)
-                ( one-ℚ⁺)))
-            ( all-eq-map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
-              ( ε)
-              ( one-ℚ⁺))))
+              ( δ))))
 
   cauchy-approximation-fiber-cauchy-approximation-indexed-sum-Pseudometric-Space :
     cauchy-approximation-Pseudometric-Space
