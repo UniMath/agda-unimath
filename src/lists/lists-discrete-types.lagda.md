@@ -20,6 +20,7 @@ open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.equality-lists
 open import lists.lists
 ```
 
@@ -36,35 +37,39 @@ On this page we study [lists](lists.lists.md) of elements in
 ### The type of lists of a discrete type is discrete
 
 ```agda
-has-decidable-equality-list :
-  {l1 : Level} {A : UU l1} →
-  has-decidable-equality A → has-decidable-equality (list A)
-has-decidable-equality-list d nil nil = inl refl
-has-decidable-equality-list d nil (cons x l) =
-  inr (map-inv-raise ∘ Eq-eq-list nil (cons x l))
-has-decidable-equality-list d (cons x l) nil =
-  inr (map-inv-raise ∘ Eq-eq-list (cons x l) nil)
-has-decidable-equality-list d (cons x l) (cons x' l') =
-  is-decidable-iff
-    ( eq-Eq-list (cons x l) (cons x' l'))
-    ( Eq-eq-list (cons x l) (cons x' l'))
-    ( is-decidable-product
-      ( d x x')
-      ( is-decidable-iff
-        ( Eq-eq-list l l')
-        ( eq-Eq-list l l')
-        ( has-decidable-equality-list d l l')))
+module _
+  {l1 : Level}
+  {A : UU l1}
+  where
 
-has-decidable-equality-has-decidable-equality-list :
-  {l1 : Level} {A : UU l1} →
-  has-decidable-equality (list A) → has-decidable-equality A
-has-decidable-equality-has-decidable-equality-list d x y =
-  is-decidable-left-factor
-    ( is-decidable-iff
-      ( Eq-eq-list (cons x nil) (cons y nil))
-      ( eq-Eq-list (cons x nil) (cons y nil))
-      ( d (cons x nil) (cons y nil)))
-    ( raise-star)
+  decide-Eq-has-decidable-equality-list :
+    has-decidable-equality A →
+    (xs ys : list A) → is-decidable (Eq-list xs ys)
+  decide-Eq-has-decidable-equality-list d nil nil =
+    inl raise-star
+  decide-Eq-has-decidable-equality-list d nil (cons y ys) =
+    inr map-inv-raise
+  decide-Eq-has-decidable-equality-list d (cons x xs) nil =
+    inr map-inv-raise
+  decide-Eq-has-decidable-equality-list d (cons x xs) (cons y ys) =
+    is-decidable-product (d x y) (decide-Eq-has-decidable-equality-list d xs ys)
+
+  has-decidable-equality-list :
+    has-decidable-equality A → has-decidable-equality (list A)
+  has-decidable-equality-list d xs ys =
+    is-decidable-equiv
+      ( equiv-Eq-list xs ys)
+      ( decide-Eq-has-decidable-equality-list d xs ys)
+
+  has-decidable-equality-has-decidable-equality-list :
+    has-decidable-equality (list A) → has-decidable-equality A
+  has-decidable-equality-has-decidable-equality-list d x y =
+    is-decidable-left-factor
+      ( is-decidable-iff
+        ( Eq-eq-list (cons x nil) (cons y nil))
+        ( eq-Eq-list (cons x nil) (cons y nil))
+        ( d (cons x nil) (cons y nil)))
+      ( raise-star)
 ```
 
 ### Testing whether an element of a discrete type is in a list
