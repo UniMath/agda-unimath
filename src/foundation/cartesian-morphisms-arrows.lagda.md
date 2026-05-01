@@ -42,6 +42,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.universal-property-pullbacks
 ```
 
