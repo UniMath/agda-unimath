@@ -66,6 +66,11 @@ map of
    C P ------> M
 ```
 
+NB: by the
+[universal property of Cauchy pseudocompletions of pseudometric spaces and short maps](metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
+this extension is uniquely determined by `f` and exists if and only if `f` is
+**precomplete**.
+
 Composition of short maps preserves precomplete short maps: if `f : P → M` is
 **precomplete**,
 
@@ -680,3 +685,8 @@ module _
       ( P)
       ( M)
 ```
+
+## See also
+
+- The
+  [universal property of Cauchy pseudocompletions of pseudometric spaces and short maps](metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md).
