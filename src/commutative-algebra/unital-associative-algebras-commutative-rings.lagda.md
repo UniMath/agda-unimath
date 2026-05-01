@@ -200,6 +200,16 @@ module _
     left-unit-law-mul-Monoid
       ( monoid-mul-unital-associative-algebra-Commutative-Ring)
 
+  right-unit-law-mul-unital-associative-algebra-Commutative-Ring :
+    (x : type-unital-associative-algebra-Commutative-Ring) →
+    mul-unital-associative-algebra-Commutative-Ring
+      ( x)
+      ( one-unital-associative-algebra-Commutative-Ring) ＝
+    x
+  right-unit-law-mul-unital-associative-algebra-Commutative-Ring =
+    right-unit-law-mul-Monoid
+      ( monoid-mul-unital-associative-algebra-Commutative-Ring)
+
   left-unit-law-scalar-mul-unital-associative-algebra-Commutative-Ring :
     (x : type-unital-associative-algebra-Commutative-Ring) →
     scalar-mul-unital-associative-algebra-Commutative-Ring
@@ -452,4 +462,19 @@ module _
               ( r)
               ( x)
               ( one-unital-associative-algebra-Commutative-Ring R A)
+```
+
+### Every commutative ring is a unital associative algebra over itself
+
+```agda
+module _
+  {l : Level}
+  (R : Commutative-Ring l)
+  where
+
+  unital-associative-algebra-commutative-ring-Commutative-Ring :
+    unital-associative-algebra-Commutative-Ring l R
+  unital-associative-algebra-commutative-ring-Commutative-Ring =
+    ( associative-algebra-commutative-ring-Commutative-Ring R ,
+      is-unital-Commutative-Ring R)
 ```
