@@ -12,6 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions
@@ -44,7 +45,7 @@ of type
   (P : decidable-subtype X) → is-decidable (∀ x. x ∈ P).
 ```
 
-Note that having decidable universal quantifications is
+Having decidable universal quantifications is
 [logically equivalent](foundation.logical-equivalences.md) to having
 [decidable Π-types](foundation.types-with-decidable-dependent-product-types.md),
 but the latter is not a [proposition](foundation-core.propositions.md).
@@ -75,6 +76,11 @@ is-prop-has-decidable-∀-Level =
     ( λ P →
       is-prop-is-decidable
         ( is-prop-is-full-subtype (subtype-decidable-subtype P)))
+
+has-decidable-∀-prop-Level :
+  {l1 : Level} (l2 : Level) → UU l1 → Prop (l1 ⊔ lsuc l2)
+has-decidable-∀-prop-Level l2 X =
+  (has-decidable-∀-Level l2 X , is-prop-has-decidable-∀-Level)
 ```
 
 ## Properties
@@ -82,11 +88,11 @@ is-prop-has-decidable-∀-Level =
 ### Types with decidable universal quantifications have decidable Π-types
 
 ```agda
-has-decidable-Π-has-decidable-∀ :
-  {l1 : Level} {X : UU l1} →
-  has-decidable-∀ X →
-  has-decidable-Π X
-has-decidable-Π-has-decidable-∀
+has-decidable-Π-Level-has-decidable-∀-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  has-decidable-∀-Level l2 X →
+  has-decidable-Π-Level l2 X
+has-decidable-Π-Level-has-decidable-∀-Level
   f P =
   map-coproduct
     ( λ nnp x →
@@ -96,6 +102,31 @@ has-decidable-Π-has-decidable-∀
           neg-type-Decidable-Prop
             ( ¬ (family-decidable-family P x))
             ( is-decidable-neg (is-decidable-decidable-family P x))))
+
+has-decidable-Π-has-decidable-∀ :
+  {l1 : Level} {X : UU l1} →
+  has-decidable-∀ X →
+  has-decidable-Π X
+has-decidable-Π-has-decidable-∀ f {l2} =
+  has-decidable-Π-Level-has-decidable-∀-Level (f {l2})
+```
+
+### Types with decidable Π-types have decidable universal quantifications
+
+```agda
+has-decidable-∀-Level-has-decidable-Π-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  has-decidable-Π-Level l2 X →
+  has-decidable-∀-Level l2 X
+has-decidable-∀-Level-has-decidable-Π-Level f P =
+  f (decidable-family-decidable-subtype P)
+
+has-decidable-∀-has-decidable-Π :
+  {l1 : Level} {X : UU l1} →
+  has-decidable-Π X →
+  has-decidable-∀ X
+has-decidable-∀-has-decidable-Π f {l2} =
+  has-decidable-∀-Level-has-decidable-Π-Level (f {l2})
 ```
 
 ### Merely decidable types with merely equal elements have decidable universal quantifications
@@ -155,5 +186,6 @@ abstract
 
 ## See also
 
+- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 - [Types with decidable Σ-types](foundation.types-with-decidable-dependent-pair-types.md)
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
