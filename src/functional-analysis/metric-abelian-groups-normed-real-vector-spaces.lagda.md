@@ -1,7 +1,7 @@
 # Metric abelian groups of normed real vector spaces
 
 ```agda
-module analysis.metric-abelian-groups-normed-real-vector-spaces where
+module functional-analysis.metric-abelian-groups-normed-real-vector-spaces where
 ```
 
 <details><summary>Imports</summary>

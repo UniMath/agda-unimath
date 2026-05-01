@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.scalar-multiplication-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
+module real-analysis.scalar-multiplication-differentiable-real-maps-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 
@@ -23,6 +21,8 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -42,7 +42,7 @@ open import real-numbers.strict-inequality-real-numbers
 ## Idea
 
 Given a
-[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
+[differentiable](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 function `f` from a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md) to the real numbers

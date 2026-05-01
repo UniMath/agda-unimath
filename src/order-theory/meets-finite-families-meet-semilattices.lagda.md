@@ -26,8 +26,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.commutative-semigroups
-open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
+open import group-theory.products-of-finite-families-of-elements-commutative-semigroups
+open import group-theory.products-of-finite-sequences-of-elements-commutative-semigroups
 
 open import lists.finite-sequences
 
@@ -63,7 +63,7 @@ module _
     fin-sequence (type-Order-Theoretic-Meet-Semilattice X) (succ-ℕ n) →
     type-Order-Theoretic-Meet-Semilattice X
   meet-fin-sequence-type-Order-Theoretic-Meet-Semilattice =
-    sum-fin-sequence-type-Commutative-Semigroup
+    product-fin-sequence-type-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
 ```
 
@@ -79,7 +79,7 @@ module _
     (f : I → type-Order-Theoretic-Meet-Semilattice X) →
     type-Order-Theoretic-Meet-Semilattice X
   meet-counted-family-type-Order-Theoretic-Meet-Semilattice =
-    sum-count-Commutative-Semigroup
+    product-count-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
       ( I)
       ( |I|)
@@ -99,7 +99,7 @@ module _
       type-Inhabited-Finite-Type I → type-Order-Theoretic-Meet-Semilattice X) →
     type-Order-Theoretic-Meet-Semilattice X
   meet-inhabited-finite-family-Order-Theoretic-Meet-Semilattice =
-    sum-finite-Commutative-Semigroup
+    product-finite-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
       ( I)
 ```
@@ -211,7 +211,7 @@ module _
         ( cI)
         ( f)
     eq-meet-inhabited-finite-family-meet-counted-family-Order-Theoretic-Meet-Semilattice =
-      eq-sum-finite-sum-count-Commutative-Semigroup
+      eq-product-finite-product-count-Commutative-Semigroup
         ( commutative-semigroup-Order-Theoretic-Meet-Semilattice X)
         ( I)
         ( cI)

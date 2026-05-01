@@ -21,7 +21,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
+open import group-theory.products-of-finite-sequences-of-elements-commutative-monoids
 
 open import linear-algebra.finite-sequences-in-semirings
 
@@ -50,7 +50,7 @@ sum-fin-sequence-type-Semiring :
   {l : Level} (R : Semiring l) (n : ℕ) →
   (fin-sequence-type-Semiring R n) → type-Semiring R
 sum-fin-sequence-type-Semiring R =
-  sum-fin-sequence-type-Commutative-Monoid
+  product-fin-sequence-type-Commutative-Monoid
     ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -67,7 +67,7 @@ module _
     (f : fin-sequence-type-Semiring R 1) →
     sum-fin-sequence-type-Semiring R 1 f ＝ head-fin-sequence 0 f
   compute-sum-one-element-Semiring =
-    compute-sum-one-element-Commutative-Monoid
+    compute-product-one-element-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   compute-sum-two-elements-Semiring :
@@ -75,7 +75,7 @@ module _
     sum-fin-sequence-type-Semiring R 2 f ＝
     add-Semiring R (f (zero-Fin 1)) (f (one-Fin 1))
   compute-sum-two-elements-Semiring =
-    compute-sum-two-elements-Commutative-Monoid
+    compute-product-two-elements-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -91,7 +91,7 @@ module _
     (f ~ g) →
     sum-fin-sequence-type-Semiring R n f ＝ sum-fin-sequence-type-Semiring R n g
   htpy-sum-fin-sequence-type-Semiring =
-    htpy-sum-fin-sequence-type-Commutative-Monoid
+    htpy-product-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -117,7 +117,7 @@ module _
       ( x)
       ( sum-fin-sequence-type-Semiring R n (f ∘ inr-Fin n))
   snoc-sum-fin-sequence-type-Semiring =
-    snoc-sum-fin-sequence-type-Commutative-Monoid
+    snoc-product-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -211,7 +211,7 @@ module _
       ( cons-fin-sequence-type-Semiring R n (zero-Semiring R) f) ＝
     sum-fin-sequence-type-Semiring R n f
   extend-sum-fin-sequence-type-Semiring =
-    extend-sum-fin-sequence-type-Commutative-Monoid
+    extend-product-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -230,7 +230,7 @@ module _
         ( zero-Semiring R)) ＝
     sum-fin-sequence-type-Semiring R n f
   shift-sum-fin-sequence-type-Semiring =
-    shift-sum-fin-sequence-type-Commutative-Monoid
+    shift-product-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -246,7 +246,7 @@ module _
     sum-fin-sequence-type-Semiring R n (zero-fin-sequence-type-Semiring R n) ＝
     zero-Semiring R
   sum-zero-fin-sequence-type-Semiring =
-    sum-zero-fin-sequence-type-Commutative-Monoid
+    product-unit-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -261,7 +261,7 @@ split-sum-fin-sequence-type-Semiring :
     ( sum-fin-sequence-type-Semiring R n (f ∘ inl-coproduct-Fin n m))
     ( sum-fin-sequence-type-Semiring R m (f ∘ inr-coproduct-Fin n m))
 split-sum-fin-sequence-type-Semiring R =
-  split-sum-fin-sequence-type-Commutative-Monoid
+  split-product-fin-sequence-type-Commutative-Monoid
     ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -278,7 +278,7 @@ module _
     sum-fin-sequence-type-Semiring R n f ＝
     sum-fin-sequence-type-Semiring R n (f ∘ map-equiv σ)
   preserves-sum-permutation-fin-sequence-type-Semiring =
-    preserves-sum-permutation-fin-sequence-type-Commutative-Monoid
+    preserves-product-permutation-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
@@ -291,7 +291,7 @@ abstract
     sum-fin-sequence-type-Semiring R n (λ _ → x) ＝
     multiple-Semiring R n x
   sum-constant-fin-sequence-type-Semiring R =
-    sum-constant-fin-sequence-type-Commutative-Monoid
+    product-constant-fin-sequence-type-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 ```
 
