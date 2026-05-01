@@ -197,7 +197,7 @@ module _
     = pr2 g
 ```
 
-### Homotopies between of extensions of a short map
+### Homotopies between extensions of a short map
 
 ```agda
 module _
