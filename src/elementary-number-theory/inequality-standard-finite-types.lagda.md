@@ -23,6 +23,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
 
@@ -145,6 +146,18 @@ abstract
   reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 ```
 
+### The reverse embedding of the standard finite types in the natural numbers reverses inequality
+
+```agda
+abstract
+  reverses-leq-nat-Fin-reverse :
+    (k : ℕ) (x y : Fin k) → leq-Fin k x y →
+    leq-ℕ (nat-Fin-reverse k y) (nat-Fin-reverse k x)
+  reverses-leq-nat-Fin-reverse (succ-ℕ k) x (inr star) x≤y = star
+  reverses-leq-nat-Fin-reverse (succ-ℕ k) (inl x) (inl y) x≤y =
+    reverses-leq-nat-Fin-reverse k x y x≤y
+```
+
 ### Ordering on the standard finite types is decidable
 
 ```agda
@@ -167,4 +180,27 @@ linear-leq-Fin : (k : ℕ) (x y : Fin k) → leq-Fin k x y + leq-Fin k y x
 linear-leq-Fin (succ-ℕ k) (inl x) (inl y) = linear-leq-Fin k x y
 linear-leq-Fin (succ-ℕ k) (inl x) (inr y) = inl star
 linear-leq-Fin (succ-ℕ k) (inr x) y = inr star
+```
+
+### `skip-zero-Fin` preserves inequality
+
+```agda
+abstract
+  preserves-order-inr-Fin :
+    (n : ℕ) →
+    preserves-order-Poset (Fin-Poset n) (Fin-Poset (succ-ℕ n)) (skip-zero-Fin n)
+  preserves-order-inr-Fin (succ-ℕ n) (inl x) (inl y) x≤y =
+    preserves-order-inr-Fin n x y x≤y
+  preserves-order-inr-Fin (succ-ℕ n) (inl x) (inr star) _ = star
+  preserves-order-inr-Fin (succ-ℕ n) (inr x) (inr star) _ = star
+```
+
+### `zero-Fin n` is the least element of `Fin (succ-ℕ n)`
+
+```agda
+abstract
+  leq-zero-Fin :
+    (n : ℕ) (i : Fin (succ-ℕ n)) → leq-Fin (succ-ℕ n) (zero-Fin n) i
+  leq-zero-Fin n (inr star) = star
+  leq-zero-Fin (succ-ℕ n) (inl i) = leq-zero-Fin n i
 ```
