@@ -19,13 +19,17 @@ open import foundation-core.equivalences
 
 ## Idea
 
-[Equivalences](foundation-core.equivalences.md) between [contractible types](foundation-core.contractible-types.md) enjoy some properties, which we will study here. For instance, for any map `f : A → B`, if two out of three of the following properties hold, then so does the third:
+[Equivalences](foundation-core.equivalences.md) between
+[contractible types](foundation-core.contractible-types.md) enjoy some
+properties, which we will study here. For instance, for any map `f : A → B`, if
+two out of three of the following properties hold, then so does the third:
 
 1. The type `A` is contractible.
 2. The type `B` is contractible.
 3. The map `f` is an equivalence.
 
-Moreover, if `A` and `B` are contractible, then the type of equivalences between them is contractible.
+Moreover, if `A` and `B` are contractible, then the type of equivalences between
+them is contractible.
 
 ## Properties
 
@@ -109,4 +113,3 @@ module _
           ( λ y → a)
           ( is-contr-Π (is-prop-is-contr (a , α) a))))
 ```
-

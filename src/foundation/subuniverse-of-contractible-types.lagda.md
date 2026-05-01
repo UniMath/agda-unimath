@@ -19,7 +19,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-We show that being [contractible](foundation-core.contractible-types.md) is a [property](foundation-core.propositions.md), and thus we obtain a [subuniverse](foundation.subuniverses.md) of contractible types.
+We show that being [contractible](foundation-core.contractible-types.md) is a
+[property](foundation-core.propositions.md), and thus we obtain a
+[subuniverse](foundation.subuniverses.md) of contractible types.
 
 ## Definition
 
@@ -42,4 +44,3 @@ module _
     is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)
     is-property-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
 ```
-

@@ -193,6 +193,7 @@ open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
+open import foundation.equivalences-contractible-types public
 open import foundation.equivalences-cospan-diagrams public
 open import foundation.equivalences-cospans public
 open import foundation.equivalences-double-arrows public
@@ -475,6 +476,7 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subuniverse-of-contractible-types public
 open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
