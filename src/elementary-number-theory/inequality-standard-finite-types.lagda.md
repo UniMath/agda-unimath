@@ -186,13 +186,13 @@ linear-leq-Fin (succ-ℕ k) (inr x) y = inr star
 
 ```agda
 abstract
-  preserves-order-skip-zero-Fin :
+  preserves-order-inr-Fin :
     (n : ℕ) →
     preserves-order-Poset (Fin-Poset n) (Fin-Poset (succ-ℕ n)) (skip-zero-Fin n)
-  preserves-order-skip-zero-Fin (succ-ℕ n) (inl x) (inl y) x≤y =
-    preserves-order-skip-zero-Fin n x y x≤y
-  preserves-order-skip-zero-Fin (succ-ℕ n) (inl x) (inr star) _ = star
-  preserves-order-skip-zero-Fin (succ-ℕ n) (inr x) (inr star) _ = star
+  preserves-order-inr-Fin (succ-ℕ n) (inl x) (inl y) x≤y =
+    preserves-order-inr-Fin n x y x≤y
+  preserves-order-inr-Fin (succ-ℕ n) (inl x) (inr star) _ = star
+  preserves-order-inr-Fin (succ-ℕ n) (inr x) (inr star) _ = star
 ```
 
 ### `zero-Fin n` is the least element of `Fin (succ-ℕ n)`

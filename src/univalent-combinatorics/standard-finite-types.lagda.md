@@ -214,8 +214,7 @@ is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
 
 ```agda
 skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
-skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+skip-zero-Fin = inr-Fin
 
 succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x

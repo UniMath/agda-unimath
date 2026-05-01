@@ -123,11 +123,8 @@ module _
         ( P)
         ( array-tail-increasing-nonempty-array-type-Poset u)
     is-increasing-array-tail-increasing-nonempty-array-type-Poset
-      (((1 , _) , _) , _) =
-      raise-star
-    is-increasing-array-tail-increasing-nonempty-array-type-Poset
-      (((succ-ℕ (succ-ℕ n) , _) , _) , _ , is-increasing-u-tail) =
-      is-increasing-u-tail
+      (((succ-ℕ n , u) , _) , H) i j =
+      H (inl-Fin n i) (inl-Fin n j)
 
   tail-increasing-nonempty-array-type-Poset :
     increasing-nonempty-array-type-Poset P → increasing-array-type-Poset P
@@ -158,22 +155,12 @@ module _
         ( array-init-increasing-nonempty-array-type-Poset u)
     is-increasing-array-init-increasing-nonempty-array-type-Poset
       (((succ-ℕ n , u) , _) , H) =
-      is-increasing-reverses-order-fin-sequence-type-Poset
+      preserves-order-comp-Poset
+        ( Fin-Poset n)
+        ( Fin-Poset (succ-ℕ n))
         ( P)
-        ( n)
-        ( u ∘ skip-zero-Fin n)
-        ( preserves-order-comp-Poset
-          ( opposite-Poset (Fin-Poset n))
-          ( opposite-Poset (Fin-Poset (succ-ℕ n)))
-          ( P)
-          ( u ,
-            reverses-order-is-increasing-fin-sequence-type-Poset
-              ( P)
-              ( succ-ℕ n)
-              ( u)
-              ( H))
-          ( skip-zero-Fin n ,
-            λ i j → preserves-order-skip-zero-Fin n j i))
+        ( u , H)
+        ( inr-Fin n , preserves-order-inr-Fin n)
 
   init-increasing-nonempty-array-type-Poset :
     increasing-nonempty-array-type-Poset P → increasing-array-type-Poset P
@@ -182,7 +169,7 @@ module _
       is-increasing-array-init-increasing-nonempty-array-type-Poset u)
 ```
 
-### The head of a nonempty array is its least element
+### The head of a nonempty array is its greatest element
 
 ```agda
 module _
@@ -191,24 +178,18 @@ module _
   where
 
   abstract
-    is-least-element-head-increasing-nonempty-array-type-Poset :
+    is-greatest-element-head-increasing-nonempty-array-type-Poset :
       (u : increasing-nonempty-array-type-Poset P)
       (i : Fin (length-increasing-nonempty-array-type-Poset P u)) →
       leq-Poset P
-        ( head-increasing-nonempty-array-type-Poset P u)
         ( fin-sequence-increasing-nonempty-array-type-Poset P u i)
-    is-least-element-head-increasing-nonempty-array-type-Poset
+        ( head-increasing-nonempty-array-type-Poset P u)
+    is-greatest-element-head-increasing-nonempty-array-type-Poset
       (((succ-ℕ n , u) , _) , H) i =
-      reverses-order-increasing-fin-sequence-type-Poset
-        ( P)
-        ( succ-ℕ n)
-        ( u , H)
-        ( neg-one-Fin n)
-        ( i)
-        ( star)
+      H i (neg-one-Fin n) star
 ```
 
-### The last element of a nonempty array is its greatest element
+### The last element of a nonempty array is its least element
 
 ```agda
 module _
@@ -217,19 +198,13 @@ module _
   where
 
   abstract
-    is-greatest-element-last-increasing-nonempty-array-type-Poset :
+    is-least-element-last-increasing-nonempty-array-type-Poset :
       (u : increasing-nonempty-array-type-Poset P)
       (i : Fin (length-increasing-nonempty-array-type-Poset P u)) →
       leq-Poset P
-        ( fin-sequence-increasing-nonempty-array-type-Poset P u i)
         ( last-increasing-nonempty-array-type-Poset P u)
-    is-greatest-element-last-increasing-nonempty-array-type-Poset
+        ( fin-sequence-increasing-nonempty-array-type-Poset P u i)
+    is-least-element-last-increasing-nonempty-array-type-Poset
       (((succ-ℕ n , u) , _) , H) i =
-      reverses-order-increasing-fin-sequence-type-Poset
-        ( P)
-        ( succ-ℕ n)
-        ( u , H)
-        ( i)
-        ( zero-Fin n)
-        ( leq-zero-Fin n i)
+      H (zero-Fin n) i (leq-zero-Fin n i)
 ```

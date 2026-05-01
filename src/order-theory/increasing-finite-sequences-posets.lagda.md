@@ -48,16 +48,8 @@ module _
 
   is-increasing-prop-fin-sequence-type-Poset :
     (n : ℕ) → subtype l2 (fin-sequence (type-Poset P) n)
-  is-increasing-prop-fin-sequence-type-Poset 0 _ = raise-unit-Prop l2
-  is-increasing-prop-fin-sequence-type-Poset 1 _ = raise-unit-Prop l2
-  is-increasing-prop-fin-sequence-type-Poset (succ-ℕ (succ-ℕ n)) u =
-    ( leq-prop-Poset
-      ( P)
-      ( u (neg-one-Fin (succ-ℕ n)))
-      ( u (neg-two-Fin (succ-ℕ n)))) ∧
-    ( is-increasing-prop-fin-sequence-type-Poset
-      ( succ-ℕ n)
-      ( tail-fin-sequence (succ-ℕ n) u))
+  is-increasing-prop-fin-sequence-type-Poset n =
+    preserves-order-prop-Poset (Fin-Poset n) P
 
   is-increasing-fin-sequence-type-Poset :
     (n : ℕ) → fin-sequence (type-Poset P) n → UU l2
@@ -89,17 +81,7 @@ module _
 
 ## Properties
 
-### A finite sequence in a poset `P` is increasing if and only if it is an order-reversing map from `Fin n` to `P`
-
-The
-[standard ordering](elementary-number-theory.inequality-standard-finite-types.md)
-on the [standard finite types](univalent-combinatorics.standard-finite-types.md)
-defines `neg-one-Fin n` as the greatest element of `Fin (succ-ℕ n)`, but finite
-sequences use `neg-one-Fin n` as the head, which is conventionally the first
-element of the sequence.
-
-We choose to adopt the convention that the head of an increasing sequence is its
-least element, requiring us to reverse the order of `Fin n`.
+### A finite sequence `a₁, ..., aₙ` is increasing if and only if `a₁ ≤ a₂ ∧ a₂ ≤ a₃ ∧ ... ∧ aₙ₋₁ ≤ aₙ`
 
 ```agda
 module _
@@ -107,67 +89,67 @@ module _
   (P : Poset l1 l2)
   where
 
+  is-increasing-leq-next-prop-fin-sequence-type-Poset :
+    (n : ℕ) → subtype l2 (fin-sequence (type-Poset P) n)
+  is-increasing-leq-next-prop-fin-sequence-type-Poset 0 _ = raise-unit-Prop l2
+  is-increasing-leq-next-prop-fin-sequence-type-Poset 1 _ = raise-unit-Prop l2
+  is-increasing-leq-next-prop-fin-sequence-type-Poset (succ-ℕ n@(succ-ℕ _)) u =
+    ( is-increasing-leq-next-prop-fin-sequence-type-Poset
+      ( n)
+      ( tail-fin-sequence n u)) ∧
+    ( leq-prop-Poset P (u (inl (inr star))) (u (inr star)))
+
+  is-increasing-leq-next-fin-sequence-type-Poset :
+    (n : ℕ) → fin-sequence (type-Poset P) n → UU l2
+  is-increasing-leq-next-fin-sequence-type-Poset n =
+    is-in-subtype (is-increasing-leq-next-prop-fin-sequence-type-Poset n)
+
   abstract
-    reverses-order-is-increasing-fin-sequence-type-Poset :
+    is-increasing-is-increasing-leq-next-fin-sequence-type-Poset :
       (n : ℕ) (u : fin-sequence (type-Poset P) n) →
-      is-increasing-fin-sequence-type-Poset P n u →
-      preserves-order-Poset (opposite-Poset (Fin-Poset n)) P u
-    reverses-order-is-increasing-fin-sequence-type-Poset
-      (succ-ℕ n) u _ (inr star) (inr star) _ =
+      is-increasing-leq-next-fin-sequence-type-Poset n u →
+      is-increasing-fin-sequence-type-Poset P n u
+    is-increasing-is-increasing-leq-next-fin-sequence-type-Poset
+      (succ-ℕ _) u H (inr star) (inr star) _ =
       refl-leq-Poset P (u (inr star))
-    reverses-order-is-increasing-fin-sequence-type-Poset
-      (succ-ℕ (succ-ℕ n)) u (u₁≤u₂ , increasing-tail-u) (inr star) (inl j) _ =
+    is-increasing-is-increasing-leq-next-fin-sequence-type-Poset
+      (succ-ℕ n@(succ-ℕ _)) u (incr-tail-u , u₋₂≤u₋₁) (inl i) (inr star) _ =
       transitive-leq-Poset
         ( P)
-        ( u (inr star))
+        ( u (inl i))
         ( u (inl (inr star)))
-        ( u (inl j))
-        ( reverses-order-is-increasing-fin-sequence-type-Poset
-          ( succ-ℕ n)
-          ( tail-fin-sequence (succ-ℕ n) u)
-          ( increasing-tail-u)
+        ( u (inr star))
+        ( u₋₂≤u₋₁)
+        ( is-increasing-is-increasing-leq-next-fin-sequence-type-Poset
+          ( n)
+          ( tail-fin-sequence n u)
+          ( incr-tail-u)
+          ( i)
           ( inr star)
-          ( j)
           ( star))
-        ( u₁≤u₂)
-    reverses-order-is-increasing-fin-sequence-type-Poset
-      (succ-ℕ (succ-ℕ n)) u (u₁≤u₂ , increasing-tail-u) (inl i) (inl j) j≤i =
-      reverses-order-is-increasing-fin-sequence-type-Poset
-        ( succ-ℕ n)
-        ( tail-fin-sequence (succ-ℕ n) u)
-        ( increasing-tail-u)
+    is-increasing-is-increasing-leq-next-fin-sequence-type-Poset
+      ( succ-ℕ n@(succ-ℕ _)) u (incr-tail-u , _) (inl i) (inl j) i≤j =
+      is-increasing-is-increasing-leq-next-fin-sequence-type-Poset
+        ( n)
+        ( tail-fin-sequence n u)
+        ( incr-tail-u)
         ( i)
         ( j)
-        ( j≤i)
+        ( i≤j)
 
-    is-increasing-reverses-order-fin-sequence-type-Poset :
+    is-increasing-leq-next-is-increasing-fin-sequence-type-Poset :
       (n : ℕ) (u : fin-sequence (type-Poset P) n) →
-      preserves-order-Poset (opposite-Poset (Fin-Poset n)) P u →
-      is-increasing-fin-sequence-type-Poset P n u
-    is-increasing-reverses-order-fin-sequence-type-Poset 0 u H = raise-star
-    is-increasing-reverses-order-fin-sequence-type-Poset 1 u H = raise-star
-    is-increasing-reverses-order-fin-sequence-type-Poset
-      (succ-ℕ (succ-ℕ n)) u H =
-      ( H (inr star) (neg-two-Fin (succ-ℕ n)) star ,
-        is-increasing-reverses-order-fin-sequence-type-Poset
-          ( succ-ℕ n)
-          ( tail-fin-sequence (succ-ℕ n) u)
-          ( λ i j → H (inl i) (inl j)))
-
-  reverses-order-iff-is-increasing-fin-sequence-type-Poset :
-    (n : ℕ) (u : fin-sequence (type-Poset P) n) →
-    is-increasing-fin-sequence-type-Poset P n u ↔
-    preserves-order-Poset (opposite-Poset (Fin-Poset n)) P u
-  reverses-order-iff-is-increasing-fin-sequence-type-Poset n u =
-    ( reverses-order-is-increasing-fin-sequence-type-Poset n u ,
-      is-increasing-reverses-order-fin-sequence-type-Poset n u)
-
-  reverses-order-increasing-fin-sequence-type-Poset :
-    (n : ℕ) (u : increasing-fin-sequence-type-Poset P n) →
-    preserves-order-Poset
-      ( opposite-Poset (Fin-Poset n))
-      ( P)
-      ( fin-sequence-increasing-fin-sequence-type-Poset P n u)
-  reverses-order-increasing-fin-sequence-type-Poset n =
-    ind-Σ (reverses-order-is-increasing-fin-sequence-type-Poset n)
+      is-increasing-fin-sequence-type-Poset P n u →
+      is-increasing-leq-next-fin-sequence-type-Poset n u
+    is-increasing-leq-next-is-increasing-fin-sequence-type-Poset 0 u H =
+      raise-star
+    is-increasing-leq-next-is-increasing-fin-sequence-type-Poset 1 u H =
+      raise-star
+    is-increasing-leq-next-is-increasing-fin-sequence-type-Poset
+      (succ-ℕ n@(succ-ℕ _)) u H =
+      ( is-increasing-leq-next-is-increasing-fin-sequence-type-Poset
+          ( n)
+          ( tail-fin-sequence n u)
+          ( λ i j → H (inl i) (inl j)) ,
+        H (inl (inr star)) (inr star) star)
 ```
