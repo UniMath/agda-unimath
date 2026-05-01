@@ -1,16 +1,12 @@
 # Comparison test for series in the real numbers
 
 ```agda
-module analysis.comparison-test-series-real-numbers where
+module real-analysis.comparison-test-series-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-real-numbers
-open import analysis.nonnegative-series-real-numbers
-open import analysis.series-real-numbers
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -30,6 +26,10 @@ open import metric-spaces.modulated-cauchy-sequences-metric-spaces
 
 open import order-theory.large-posets
 
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.nonnegative-series-real-numbers
+open import real-analysis.series-real-numbers
+
 open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -46,10 +46,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A [series](analysis.series-real-numbers.md) `∑ aₙ` of
+A [series](real-analysis.series-real-numbers.md) `∑ aₙ` of
 [nonnegative](real-numbers.nonnegative-real-numbers.md)
 [real numbers](real-numbers.dedekind-real-numbers.md)
-[converges](analysis.convergent-series-real-numbers.md) if there
+[converges](real-analysis.convergent-series-real-numbers.md) if there
 [exists](foundation.existential-quantification.md) a convergent series `∑ bₙ`
 such that `aₙ ≤ bₙ` for all `n`. This is the
 {{#concept "comparison test" Disambiguation="for series in the real numbers" Agda=comparison-test-series-ℝ Agda=is-convergent-comparison-test-series-ℝ}}

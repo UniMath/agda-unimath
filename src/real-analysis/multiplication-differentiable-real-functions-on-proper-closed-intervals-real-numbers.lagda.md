@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.multiplication-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
+module real-analysis.multiplication-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
@@ -27,6 +25,8 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -56,7 +56,7 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 The
 {{#concept "product rule" Agda=is-derivative-mul-uniformly-continuous-real-map-proper-closed-interval-ℝ}}
 for
-[derivatives](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
+[derivatives](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 states that if `f` and `g` are
 [uniformly continuous](real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers.md)
 functions on a

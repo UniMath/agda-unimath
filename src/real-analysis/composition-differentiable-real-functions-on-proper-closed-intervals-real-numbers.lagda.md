@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.composition-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
+module real-analysis.composition-differentiable-real-functions-on-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
@@ -30,6 +28,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -56,7 +56,7 @@ open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-
 The
 {{#concept "chain rule" Disambiguation="on real functions on proper closed intervals in the real numbers"}}
 states that given two
-[differentiable real maps](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
+[differentiable real maps](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 `f` and `g` on
 [proper closed intervals](real-numbers.proper-closed-intervals-real-numbers.md)
 `[a, b]` and `[c, d]` in the
