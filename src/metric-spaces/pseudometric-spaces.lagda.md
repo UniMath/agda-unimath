@@ -16,7 +16,9 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality

@@ -1,14 +1,13 @@
-# Logical operations on the booleans
+# The boolean operations
 
 ```agda
-module foundation.logical-operations-booleans where
+module foundation.boolean-operations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.apartness-relations
-open import foundation.booleans
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -20,6 +19,7 @@ open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions

@@ -8,6 +8,7 @@ module group-theory.congruence-relations-abelian-groups where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types

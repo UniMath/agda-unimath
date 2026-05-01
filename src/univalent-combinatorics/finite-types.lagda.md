@@ -17,8 +17,11 @@ open import foundation.connected-components-universes
 open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -29,7 +32,7 @@ open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
@@ -40,12 +43,13 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.raising-universe-levels
+open import foundation-core.subuniverse-of-contractible-types
 open import foundation-core.torsorial-type-families
 
 open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

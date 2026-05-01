@@ -11,6 +11,7 @@ open import category-theory.categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-functors-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.homotopies

@@ -9,15 +9,11 @@ module foundation-core.retracts-of-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.postcomposition-functions
-open import foundation-core.precomposition-functions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -138,40 +134,6 @@ module _
     (x ＝ y) retract-of (inclusion-retract R x ＝ inclusion-retract R y)
   pr1 retract-eq = ap (inclusion-retract R)
   pr2 retract-eq = retraction-ap (inclusion-retract R) (retraction-retract R)
-```
-
-### If `A` is a retract of `B` then `A → S` is a retract of `B → S` via precomposition
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (S : UU l3)
-  where
-
-  retract-precomp :
-    (A → S) retract-of (B → S)
-  pr1 retract-precomp =
-    precomp (map-retraction-retract R) S
-  pr1 (pr2 retract-precomp) =
-    precomp (inclusion-retract R) S
-  pr2 (pr2 retract-precomp) h =
-    eq-htpy (h ·l is-retraction-map-retraction-retract R)
-```
-
-### If `A` is a retract of `B` then `S → A` is a retract of `S → B` via postcomposition
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
-  where
-
-  retract-postcomp :
-    (S → A) retract-of (S → B)
-  pr1 retract-postcomp =
-    postcomp S (inclusion-retract R)
-  pr1 (pr2 retract-postcomp) =
-    postcomp S (map-retraction-retract R)
-  pr2 (pr2 retract-postcomp) h =
-    eq-htpy (is-retraction-map-retraction-retract R ·r h)
 ```
 
 ### Every type is a retract of itself

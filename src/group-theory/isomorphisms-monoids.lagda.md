@@ -9,6 +9,7 @@ module group-theory.isomorphisms-monoids where
 ```agda
 open import category-theory.isomorphisms-in-large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types

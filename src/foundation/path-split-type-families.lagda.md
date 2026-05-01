@@ -9,6 +9,7 @@ module foundation.path-split-type-families where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.embeddings
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

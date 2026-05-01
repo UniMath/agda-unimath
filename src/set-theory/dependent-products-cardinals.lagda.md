@@ -9,6 +9,7 @@ module set-theory.dependent-products-cardinals where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.functoriality-set-truncation
 open import foundation.identity-types

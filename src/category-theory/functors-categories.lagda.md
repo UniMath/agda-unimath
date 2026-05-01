@@ -12,6 +12,7 @@ open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.maps-categories
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies

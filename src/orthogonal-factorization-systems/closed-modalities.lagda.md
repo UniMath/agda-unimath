@@ -10,11 +10,15 @@ module orthogonal-factorization-systems.closed-modalities where
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

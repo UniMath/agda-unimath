@@ -9,6 +9,7 @@ module order-theory.supremum-preserving-maps-posets where
 ```agda
 open import foundation.booleans
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.function-types
@@ -17,12 +18,13 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import order-theory.join-preserving-maps-posets
 open import order-theory.least-upper-bounds-posets

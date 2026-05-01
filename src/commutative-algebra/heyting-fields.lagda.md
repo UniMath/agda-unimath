@@ -18,6 +18,7 @@ open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.extensional-binary-functions-apartness-relations

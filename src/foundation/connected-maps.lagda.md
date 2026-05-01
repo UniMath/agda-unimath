@@ -10,7 +10,9 @@ module foundation.connected-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.connected-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
+open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.iterated-successors-truncation-levels

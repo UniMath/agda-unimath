@@ -8,6 +8,7 @@ module species.unit-cauchy-composition-species-of-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.universe-levels
 
 open import species.species-of-types

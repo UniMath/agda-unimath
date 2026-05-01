@@ -9,6 +9,7 @@ module foundation.type-arithmetic-dependent-function-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

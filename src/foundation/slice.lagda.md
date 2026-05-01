@@ -9,6 +9,7 @@ module foundation.slice where
 ```agda
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
