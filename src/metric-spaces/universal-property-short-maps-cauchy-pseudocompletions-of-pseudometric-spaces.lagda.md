@@ -1,4 +1,4 @@
-# Universal property of Cauchy pseudocompletions of pseudometric spaces and short maps into metric spaces
+# The universal property of Cauchy pseudocompletions of pseudometric spaces and short maps into metric spaces
 
 ```agda
 module metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces where
@@ -55,7 +55,7 @@ to short maps `g ∘ κ : P → M`. For any
 [Cauchy approximation](metric-spaces.cauchy-approximations-pseudometric-spaces.md)
 `u : C P`, its
 [image](metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
-`C(g ∘ κ) u : C M`
+`C (g ∘ κ) u : C M`
 [converges](metric-spaces.limits-of-cauchy-approximations-metric-spaces.md) to
 `g u` so `g` is determined by its restriction to `P` and `g ∘ κ` is
 [precomplete](metric-spaces.precomplete-short-maps-pseudometric-spaces.md).
@@ -85,7 +85,7 @@ along `κ`.
 
 ## Definitions
 
-### The property of being the extension of a short map along the unit of Cauchy pseudocompletions
+### The property of being an extension of a short map along the unit of Cauchy pseudocompletions
 
 ```agda
 module _
@@ -138,7 +138,7 @@ module _
       is-prop-is-extension-short-map-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### Extensions of short maps along the unit map of Cauchy pseudocompletions
+### Extensions of short maps along the unit map of a Cauchy pseudocompletion
 
 ```agda
 module _
@@ -197,7 +197,7 @@ module _
     = pr2 g
 ```
 
-### Homotopies between of extensions of a short map
+### Homotopies between extensions of a short map
 
 ```agda
 module _

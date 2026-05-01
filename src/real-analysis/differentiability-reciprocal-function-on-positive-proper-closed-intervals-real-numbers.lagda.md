@@ -3,14 +3,12 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module analysis.differentiability-reciprocal-function-on-positive-proper-closed-intervals-real-numbers where
+module real-analysis.differentiability-reciprocal-function-on-positive-proper-closed-intervals-real-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
-
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
@@ -28,6 +26,8 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+
+open import real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -61,7 +61,7 @@ On a [positive](real-numbers.positive-proper-closed-intervals-real-numbers.md)
 in the [real numbers](real-numbers.dedekind-real-numbers.md), the
 [multiplicative inverse function](real-numbers.multiplicative-inverses-positive-real-numbers.md)
 is
-[differentiable](analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
+[differentiable](real-analysis.differentiable-real-maps-on-proper-closed-intervals-real-numbers.md)
 with derivative $$x ↦ -\frac{1}{x^2}$$
 
 ## Proof

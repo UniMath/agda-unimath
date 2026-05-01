@@ -41,7 +41,7 @@ open import orthogonal-factorization-systems.extensions-maps
 ## Idea
 
 A [short map](metric-spaces.short-maps-pseudometric-spaces.md) `f : P → M` from
-a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` in a
+a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` into a
 [metric space](metric-spaces.metric-spaces.md) `M` is called
 {{#concept "precomplete" Disambiguation="from a pseudometric space to a metric space" Agda=is-precomplete-short-map-Pseudometric-Space}}
 if all
@@ -65,6 +65,11 @@ map of
     ∨    g   ∨
    C P ------> M
 ```
+
+NB: by the
+[universal property of Cauchy pseudocompletions of pseudometric spaces and short maps](metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md)
+this extension is uniquely determined by `f` and exists if and only if `f` is
+**precomplete**.
 
 Composition of short maps preserves precomplete short maps: if `f : P → M` is
 **precomplete**,
@@ -431,7 +436,7 @@ module _
         ( u))
 ```
 
-### Short maps from the Cauchy pseudocompletions restrict to precomplete short maps
+### Short maps from Cauchy pseudocompletions restrict to precomplete short maps
 
 #### Values of short maps from cauchy pseudocompletions into metric spaces are limits
 
@@ -565,7 +570,7 @@ module _
         ( u)))
 ```
 
-#### The precomplete restriction of a short map from a Cauchy pseudocompletion in a metric space
+#### The precomplete restriction of a short map from a Cauchy pseudocompletion into a metric space
 
 ```agda
 module _
@@ -680,3 +685,8 @@ module _
       ( P)
       ( M)
 ```
+
+## See also
+
+- The
+  [universal property of Cauchy pseudocompletions of pseudometric spaces and short maps](metric-spaces.universal-property-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces.md).
