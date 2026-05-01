@@ -9,13 +9,13 @@ module functional-analysis.additive-complete-metric-abelian-groups-real-banach-s
 ```agda
 open import analysis.complete-metric-abelian-groups
 open import analysis.metric-abelian-groups
-open import analysis.metric-abelian-groups-normed-real-vector-spaces
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import functional-analysis.metric-abelian-groups-normed-real-vector-spaces
 open import functional-analysis.real-banach-spaces
 
 open import real-numbers.metric-additive-group-of-real-numbers
