@@ -7,20 +7,26 @@ module foundation.parametric-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.evaluation-functions
-open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.path-cosplit-maps
 open import foundation.propositional-maps
-open import foundation.retracts-of-types
+open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 
 open import orthogonal-factorization-systems.null-types
 ```
@@ -159,6 +165,21 @@ module _
       ( is-null-Σ
         ( is-parametric-X)
         ( λ x → is-parametric-is-prop (is-prop-type-Prop (fiber-emb-Prop e x))))
+```
+
+### Parametric types are closed under path-cosplittings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where abstract
+
+  is-parametric-path-cosplitting :
+    is-parametric l3 A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-parametric l3 B
+  is-parametric-path-cosplitting =
+    is-null-path-cosplitting-has-element-exponent (raise-unit l3)
 ```
 
 ## See also

@@ -288,6 +288,7 @@ open import foundation.infinitely-coherent-equivalences public
 open import foundation.infinity-connected-maps public
 open import foundation.infinity-connected-types public
 open import foundation.inhabited-subtypes public
+open import foundation.inhabited-subuniverses public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
