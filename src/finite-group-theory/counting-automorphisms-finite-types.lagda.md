@@ -47,10 +47,7 @@ count-aut-count :
   {l : Level} {X : UU l} → count X → count (Aut X)
 count-aut-count {X = X} (n , Fin-n≃X) =
   ( factorial-ℕ n ,
-    tr
-      ( λ k → Fin k ≃ Aut X)
-      ( number-of-elements-count-Permutation n)
-      ( equiv-aut-equiv Fin-n≃X ∘e equiv-count (count-Permutation n)))
+    equiv-aut-equiv Fin-n≃X ∘e equiv-count (count-Permutation n))
 ```
 
 ### The automorphisms of a type `X` with cardinality `n` have cardinality `n!`

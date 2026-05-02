@@ -18,6 +18,7 @@ open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -26,7 +27,9 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -34,6 +37,7 @@ open import foundation.maybe
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -222,12 +226,22 @@ module _
 ### Counting the elements of `Permutation n`
 
 ```agda
+is-contr-Permutation-0 : is-contr (Permutation 0)
+is-contr-Permutation-0 = is-contr-equiv-is-empty id id
+
+equiv-count-Permutation :
+  (n : ℕ) → Fin (factorial-ℕ n) ≃ Permutation n
+equiv-count-Permutation zero-ℕ =
+  equiv-is-contr is-contr-Fin-1 is-contr-Permutation-0
+equiv-count-Permutation (succ-ℕ n) =
+  inv-equiv (equiv-succ-Permutation n) ∘e
+  equiv-product id-equiv (equiv-count-Permutation n) ∘e
+  commutative-product ∘e
+  inv-equiv (product-Fin (factorial-ℕ n) (succ-ℕ n))
+
 count-Permutation : (n : ℕ) → count (Permutation n)
-count-Permutation 0 = count-is-contr (is-contr-equiv-is-empty id id)
-count-Permutation (succ-ℕ n) =
-  count-equiv
-    ( inv-equiv (equiv-succ-Permutation n))
-    ( count-product (count-Fin (succ-ℕ n)) (count-Permutation n))
+pr1 (count-Permutation n) = factorial-ℕ n
+pr2 (count-Permutation n) = equiv-count-Permutation n
 ```
 
 ### `Permutation n` is finite
@@ -245,15 +259,11 @@ abstract
   number-of-elements-count-Permutation :
     (n : ℕ) →
     number-of-elements-count (count-Permutation n) ＝ factorial-ℕ n
-  number-of-elements-count-Permutation 0 = refl
-  number-of-elements-count-Permutation (succ-ℕ n) =
-    ( ap-mul-ℕ refl (number-of-elements-count-Permutation n)) ∙
-    ( commutative-mul-ℕ (succ-ℕ n) (factorial-ℕ n))
+  number-of-elements-count-Permutation n = refl
 
   number-of-elements-Permutation :
     (n : ℕ) →
     number-of-elements-Finite-Type (finite-type-Permutation n) ＝ factorial-ℕ n
   number-of-elements-Permutation n =
-    ( inv (compute-number-of-elements-is-finite (count-Permutation n) _)) ∙
-    ( number-of-elements-count-Permutation n)
+    inv (compute-number-of-elements-is-finite (count-Permutation n) _)
 ```
