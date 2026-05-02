@@ -9,8 +9,8 @@ module ring-theory.subsets-rings where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets

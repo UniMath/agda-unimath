@@ -8,16 +8,21 @@ module foundation.propositional-extensionality where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.subtype-identity-principle
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
@@ -68,7 +73,7 @@ module _
         ( equiv-tot (equiv-equiv-iff P))
         ( is-torsorial-Eq-subtype
           ( is-torsorial-equiv (type-Prop P))
-          ( is-prop-is-prop)
+          ( is-property-is-prop)
           ( type-Prop P)
           ( id-equiv)
           ( is-prop-type-Prop P))

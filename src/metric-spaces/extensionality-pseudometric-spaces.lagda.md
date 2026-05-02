@@ -10,6 +10,7 @@ module metric-spaces.extensionality-pseudometric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -17,6 +18,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

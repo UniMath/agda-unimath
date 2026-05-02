@@ -18,6 +18,7 @@ open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
 open import foundation.existential-quantification

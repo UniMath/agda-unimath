@@ -13,14 +13,14 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negated-equality
-open import foundation.sets
+
+open import foundation-core.coproduct-types
+open import foundation-core.embeddings
+open import foundation-core.identity-types
+open import foundation-core.negation
 ```
 
 </details>
@@ -341,6 +341,7 @@ abstract
   is-one-is-right-unit-mul-ℕ x y p =
     is-injective-left-mul-succ-ℕ x (p ∙ inv (right-unit-law-mul-ℕ (succ-ℕ x)))
 
+abstract
   is-one-is-left-unit-mul-ℕ :
     (x y : ℕ) → x *ℕ (succ-ℕ y) ＝ succ-ℕ y → is-one-ℕ x
   is-one-is-left-unit-mul-ℕ x y p =
@@ -378,7 +379,7 @@ abstract
 ```agda
 abstract
   neq-mul-ℕ :
-    (m n : ℕ) → succ-ℕ m ≠ (succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
+    (m n : ℕ) → ¬ (succ-ℕ m ＝ succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
   neq-mul-ℕ m n p =
     neq-add-ℕ
       ( succ-ℕ m)

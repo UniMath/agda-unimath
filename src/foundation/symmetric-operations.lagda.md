@@ -10,6 +10,7 @@ module foundation.symmetric-operations where
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types

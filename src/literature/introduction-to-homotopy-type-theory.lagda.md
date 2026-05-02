@@ -302,15 +302,15 @@ open import foundation.booleans using
   ; ind-bool)
 
 -- (a)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( neg-bool)
 
 -- (b)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( and-bool)
 
 -- (c)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( or-bool)
 ```
 
@@ -786,7 +786,7 @@ open import foundation.universe-levels using
 **Remark 6.2.4.** Inclusions into the successor universe.
 
 ```agda
-open import foundation.raising-universe-levels using
+open import foundation-core.raising-universe-levels using
   ( raise)
 
 _ : (l : Level) → UU l → UU (lsuc l)
@@ -935,7 +935,7 @@ _ : (x y : bool) → (x ＝ y) ↔ Eq-bool x y
 _ = λ x y → (Eq-eq-bool , eq-Eq-bool)
 
 -- (c)
-open import foundation.logical-operations-booleans using
+open import foundation.boolean-operations using
   ( neq-neg-bool -- b ≠ neg-bool b
   )
 _ : ¬ (false ＝ true)

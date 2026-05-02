@@ -7,7 +7,6 @@ module foundation-core.invertible-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

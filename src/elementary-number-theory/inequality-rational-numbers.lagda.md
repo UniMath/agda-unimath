@@ -23,9 +23,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
-open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -36,6 +34,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types

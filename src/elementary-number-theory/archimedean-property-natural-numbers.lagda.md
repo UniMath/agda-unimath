@@ -12,7 +12,6 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types

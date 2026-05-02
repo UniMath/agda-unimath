@@ -14,6 +14,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions

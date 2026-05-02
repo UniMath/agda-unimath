@@ -10,6 +10,7 @@ open import foundation.sigma-decompositions public
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
@@ -19,7 +20,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
-open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
 open import foundation.subtypes

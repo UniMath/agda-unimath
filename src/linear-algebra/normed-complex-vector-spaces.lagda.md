@@ -13,6 +13,7 @@ open import complex-numbers.complex-numbers
 open import complex-numbers.magnitude-complex-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions

@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations

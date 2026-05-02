@@ -10,9 +10,11 @@ module foundation.type-duality where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types

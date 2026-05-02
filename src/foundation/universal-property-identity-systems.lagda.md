@@ -13,7 +13,6 @@ open import foundation.universal-property-contractible-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families

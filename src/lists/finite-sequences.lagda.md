@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.function-types

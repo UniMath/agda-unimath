@@ -17,6 +17,7 @@ open import elementary-number-theory.prime-numbers
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.propositions

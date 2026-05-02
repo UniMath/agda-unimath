@@ -10,8 +10,8 @@ module ring-theory.subsets-semirings where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
@@ -139,8 +139,12 @@ module _
   is-prop-is-closed-under-addition-subset-Semiring :
     is-prop is-closed-under-addition-subset-Semiring
   is-prop-is-closed-under-addition-subset-Semiring =
-    is-prop-iterated-implicit-Π 2
-      ( λ x y → is-prop-iterated-Π 2 (λ _ _ → is-prop-is-in-subtype S _))
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y →
+            is-prop-function-type
+              ( is-prop-function-type (is-prop-is-in-subtype S _))))
 
   is-closed-under-addition-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-addition-prop-subset-Semiring =
@@ -164,8 +168,12 @@ module _
   is-prop-is-closed-under-multiplication-subset-Semiring :
     is-prop is-closed-under-multiplication-subset-Semiring
   is-prop-is-closed-under-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 2
-      ( λ x y → is-prop-iterated-Π 2 (λ _ _ → is-prop-is-in-subtype S _))
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y →
+            is-prop-function-type
+              ( is-prop-function-type (is-prop-is-in-subtype S _))))
 
   is-closed-under-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-multiplication-prop-subset-Semiring =
@@ -189,8 +197,10 @@ module _
   is-prop-is-closed-under-left-multiplication-subset-Semiring :
     is-prop is-closed-under-left-multiplication-subset-Semiring
   is-prop-is-closed-under-left-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 2
-      ( λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
 
   is-closed-under-left-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-left-multiplication-prop-subset-Semiring =
@@ -214,8 +224,10 @@ module _
   is-prop-is-closed-under-right-multiplication-subset-Semiring :
     is-prop is-closed-under-right-multiplication-subset-Semiring
   is-prop-is-closed-under-right-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 2
-      ( λ x y → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
 
   is-closed-under-right-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-right-multiplication-prop-subset-Semiring =
@@ -239,8 +251,12 @@ module _
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-prop is-closed-under-two-sided-multiplication-subset-Semiring
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring =
-    is-prop-iterated-implicit-Π 3
-      ( λ r x u → is-prop-function-type (is-prop-is-in-subtype S _))
+    is-prop-implicit-Π
+      ( λ r →
+        is-prop-implicit-Π
+          ( λ x →
+            is-prop-implicit-Π
+              ( λ u → is-prop-function-type (is-prop-is-in-subtype S _))))
 
   is-closed-under-two-sided-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-two-sided-multiplication-prop-subset-Semiring =
