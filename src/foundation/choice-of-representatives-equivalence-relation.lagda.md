@@ -10,6 +10,7 @@ module foundation.choice-of-representatives-equivalence-relation where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations

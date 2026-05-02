@@ -10,6 +10,7 @@ module category-theory.rigid-objects-categories where
 open import category-theory.categories
 open import category-theory.rigid-objects-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 ```

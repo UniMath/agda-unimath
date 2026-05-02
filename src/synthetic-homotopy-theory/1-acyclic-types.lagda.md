@@ -9,12 +9,14 @@ module synthetic-homotopy-theory.1-acyclic-types where
 ```agda
 open import foundation.0-connected-types
 open import foundation.binary-transport
-open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.injective-maps

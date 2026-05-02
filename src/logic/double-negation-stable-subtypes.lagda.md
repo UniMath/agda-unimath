@@ -10,6 +10,7 @@ module logic.double-negation-stable-subtypes where
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation-stable-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types

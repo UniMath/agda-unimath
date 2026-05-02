@@ -9,9 +9,11 @@ module trees.w-type-of-propositions where
 ```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -15,9 +15,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -26,6 +29,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.subuniverse-of-contractible-types
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types

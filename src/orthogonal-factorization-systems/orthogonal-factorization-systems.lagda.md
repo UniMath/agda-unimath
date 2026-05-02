@@ -11,6 +11,8 @@ open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies

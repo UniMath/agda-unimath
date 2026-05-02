@@ -21,7 +21,6 @@ open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
@@ -30,6 +29,8 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
+open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.retractions
 open import foundation-core.sections
 ```

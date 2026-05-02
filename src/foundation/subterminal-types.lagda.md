@@ -8,6 +8,7 @@ module foundation.subterminal-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.equivalences-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

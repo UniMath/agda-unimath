@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.apartness-relations
 open import foundation.coproduct-types
 open import foundation.decidable-relations
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.propositions

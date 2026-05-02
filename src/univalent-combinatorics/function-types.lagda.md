@@ -9,7 +9,6 @@ module univalent-combinatorics.function-types where
 ```agda
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.equivalences

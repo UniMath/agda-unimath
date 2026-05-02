@@ -48,6 +48,7 @@ open import foundation.binary-relations-with-extensions public
 open import foundation.binary-relations-with-lifts public
 open import foundation.binary-transport public
 open import foundation.binary-type-duality public
+open import foundation.boolean-operations public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-decidable-embeddings public
 open import foundation.cantor-schroder-bernstein-escardo public
@@ -130,12 +131,15 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-contractible-types public
 open import foundation.dependent-products-cumulative-large-sets public
 open import foundation.dependent-products-large-binary-relations public
 open import foundation.dependent-products-large-equivalence-relations public
 open import foundation.dependent-products-large-similarity-relations public
+open import foundation.dependent-products-propositions public
 open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-products-subtypes public
+open import foundation.dependent-products-truncated-types public
 open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-universal-property-equivalences public
@@ -189,12 +193,14 @@ open import foundation.equivalence-injective-type-families public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
+open import foundation.equivalences-contractible-types public
 open import foundation.equivalences-cospan-diagrams public
 open import foundation.equivalences-cospans public
 open import foundation.equivalences-double-arrows public
 open import foundation.equivalences-forks-over-equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-propositions public
 open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
@@ -228,6 +234,7 @@ open import foundation.full-subtypes public
 open import foundation.full-subuniverses public
 open import foundation.function-cumulative-large-sets public
 open import foundation.function-extensionality public
+open import foundation.function-extensionality-axiom public
 open import foundation.function-large-binary-relations public
 open import foundation.function-large-equivalence-relations public
 open import foundation.function-large-similarity-relations public
@@ -319,7 +326,6 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
-open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
 open import foundation.maximum-truncation-levels public
@@ -411,6 +417,8 @@ open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.quasicoherently-idempotent-maps public
 open import foundation.raising-universe-levels public
+open import foundation.raising-universe-levels-booleans public
+open import foundation.raising-universe-levels-unit-type public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public
@@ -469,8 +477,12 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subuniverse-of-contractible-types public
+open import foundation.subuniverse-of-propositions public
+open import foundation.subuniverse-of-truncated-types public
 open import foundation.subuniverse-parametric-types public
 open import foundation.subuniverses public
+open import foundation.subuniverses-containing-contractible-types public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public
 open import foundation.symmetric-cores-binary-relations public

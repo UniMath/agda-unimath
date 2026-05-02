@@ -8,8 +8,9 @@ module orthogonal-factorization-systems.raise-modalities where
 
 ```agda
 open import foundation.function-types
-open import foundation.raising-universe-levels
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.types-local-at-maps

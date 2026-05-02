@@ -8,10 +8,10 @@ module higher-group-theory.automorphism-groups where
 
 ```agda
 open import foundation.0-connected-types
-open import foundation.1-types
 open import foundation.connected-components
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -19,9 +19,6 @@ open import foundation.propositional-truncations
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-
-open import group-theory.concrete-groups
-open import group-theory.equivalences-concrete-groups
 
 open import higher-group-theory.equivalences-higher-groups
 open import higher-group-theory.higher-groups

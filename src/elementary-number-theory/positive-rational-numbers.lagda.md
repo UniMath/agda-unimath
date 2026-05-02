@@ -21,12 +21,17 @@ open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences

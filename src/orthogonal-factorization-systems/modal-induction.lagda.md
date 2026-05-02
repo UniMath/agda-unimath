@@ -21,6 +21,7 @@ open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.telescopes
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
