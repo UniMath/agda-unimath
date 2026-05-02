@@ -127,7 +127,7 @@ abstract
         ( z)
         ( y +ℚ (rational-ℚ⁺ d₂))
         ( x +ℚ (rational-ℚ⁺ d₁) +ℚ (rational-ℚ⁺ d₂))
-        ( preserves-leq-left-add-ℚ
+        ( preserves-order-left-add-ℚ
           ( rational-ℚ⁺ d₂)
           ( y)
           ( x +ℚ (rational-ℚ⁺ d₁))
@@ -144,7 +144,7 @@ abstract
           ( x)
           ( y +ℚ (rational-ℚ⁺ d₁))
           ( z +ℚ (rational-ℚ⁺ d₂) +ℚ (rational-ℚ⁺ d₁))
-          ( ( preserves-leq-left-add-ℚ
+          ( ( preserves-order-left-add-ℚ
             ( rational-ℚ⁺ d₁)
             ( y)
             ( z +ℚ (rational-ℚ⁺ d₂))
@@ -286,7 +286,7 @@ module _
       inv-tr
         ( leq-ℚ (x +ℚ v))
         ( associative-add-ℚ x u (rational-ℚ⁺ d))
-        ( preserves-leq-right-add-ℚ
+        ( preserves-order-right-add-ℚ
           ( x)
           ( v)
           ( u +ℚ rational-ℚ⁺ d)
@@ -296,7 +296,7 @@ module _
       lower-neighborhood-ℚ d (x +ℚ u) (x +ℚ v) →
       lower-neighborhood-ℚ d u v
     reflects-lower-neighborhood-add-ℚ =
-      ( reflects-leq-right-add-ℚ x v (u +ℚ rational-ℚ⁺ d)) ∘
+      ( reflects-order-right-add-ℚ x v (u +ℚ rational-ℚ⁺ d)) ∘
       ( tr (leq-ℚ (x +ℚ v)) (associative-add-ℚ x u (rational-ℚ⁺ d)))
 ```
 
@@ -461,12 +461,12 @@ module _
             ( rational-ℚ⁰⁺ (abs-ℚ x *ℚ⁰⁺ dist-ℚ y z))
             ( (succ-ℚ (rational-abs-ℚ x)) *ℚ (rational-dist-ℚ y z))
             ( rational-ℚ⁺ (positive-succ-ℚ⁰⁺ (abs-ℚ x) *ℚ⁺ d))
-            ( preserves-leq-left-mul-ℚ⁺
+            ( preserves-order-left-mul-ℚ⁺
               ( positive-succ-ℚ⁰⁺ (abs-ℚ x))
               ( rational-dist-ℚ y z)
               ( rational-ℚ⁺ d)
               ( leq-dist-neighborhood-ℚ d y z H))
-            ( preserves-leq-right-mul-ℚ⁰⁺
+            ( preserves-order-right-mul-ℚ⁰⁺
               ( dist-ℚ y z)
               ( rational-abs-ℚ x)
               ( succ-ℚ (rational-abs-ℚ x))

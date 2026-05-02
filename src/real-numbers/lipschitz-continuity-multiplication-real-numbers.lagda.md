@@ -106,7 +106,7 @@ module _
                   by leq-eq-ℝ (inv (left-distributive-abs-mul-dist-ℝ _ _ _))
                 ≤ real-ℚ⁺ q *ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-mul-ℝ⁰⁺
+                    preserves-order-mul-ℝ⁰⁺
                       ( nonnegative-abs-ℝ c)
                       ( nonnegative-real-ℚ⁺ q)
                       ( nonnegative-dist-ℝ x y)
@@ -247,15 +247,15 @@ module _
                           ( left-distributive-abs-mul-dist-ℝ x₂ y₁ y₂)))
                 ≤ real-ℚ⁺ ε *ℝ my +ℝ mx *ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-add-ℝ
-                      ( preserves-leq-mul-ℝ⁰⁺
+                    preserves-order-add-ℝ
+                      ( preserves-order-mul-ℝ⁰⁺
                         ( nonnegative-dist-ℝ x₁ x₂)
                         ( nonnegative-real-ℚ⁺ ε)
                         ( nonnegative-abs-ℝ y₁)
                         ( my⁰⁺)
                         ( leq-dist-neighborhood-ℝ ε x₁ x₂ Nεx₁x₂)
                         ( is-max-my (y₁ , y₁∈Y)))
-                      ( preserves-leq-mul-ℝ⁰⁺
+                      ( preserves-order-mul-ℝ⁰⁺
                         ( nonnegative-abs-ℝ x₂)
                         ( mx⁰⁺)
                         ( nonnegative-dist-ℝ y₁ y₂)
@@ -270,7 +270,7 @@ module _
                       ( inv (right-distributive-mul-add-ℝ my mx (real-ℚ⁺ ε)))
                 ≤ real-ℚ q *ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-right-mul-ℝ⁰⁺
+                    preserves-order-right-mul-ℝ⁰⁺
                       ( nonnegative-real-ℚ⁺ ε)
                       ( leq-le-ℝ (le-real-is-in-upper-cut-ℝ (my +ℝ mx) my+mx<q))
                 ≤ real-ℚ⁺ (q⁺ *ℚ⁺ ε)
@@ -425,42 +425,42 @@ module _
                         ≤ ( abs-ℝ x *ℝ abs-ℝ dy) +ℝ
                           ( abs-ℝ (dx *ℝ y) +ℝ abs-ℝ (dx *ℝ dy))
                           by
-                            preserves-leq-add-ℝ
+                            preserves-order-add-ℝ
                               ( leq-eq-ℝ (abs-mul-ℝ _ _))
                               ( triangle-inequality-abs-ℝ _ _)
                         ≤ ( abs-ℝ x *ℝ real-ℚ⁺ δ₁) +ℝ
                           ( abs-ℝ dx *ℝ abs-ℝ y +ℝ abs-ℝ dx *ℝ abs-ℝ dy)
                           by
-                            preserves-leq-add-ℝ
-                              ( preserves-leq-left-mul-ℝ⁰⁺
+                            preserves-order-add-ℝ
+                              ( preserves-order-left-mul-ℝ⁰⁺
                                 ( nonnegative-abs-ℝ x)
                                 ( transitive-leq-ℝ _ _ _
-                                  ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _))
+                                  ( preserves-order-real-ℚ (leq-left-min-ℚ _ _))
                                   ( |dy|≤δ)))
                               ( leq-eq-ℝ
                                 ( ap-add-ℝ (abs-mul-ℝ _ _) (abs-mul-ℝ _ _)))
                         ≤ ( real-ℚ⁺ δ₁ *ℝ abs-ℝ x) +ℝ
                           ( real-ℚ⁺ δ₁ *ℝ abs-ℝ y +ℝ real-ℚ⁺ δ₂ *ℝ real-ℚ⁺ δ₂)
                           by
-                            preserves-leq-add-ℝ
+                            preserves-order-add-ℝ
                               ( leq-eq-ℝ (commutative-mul-ℝ _ _))
-                              ( preserves-leq-add-ℝ
-                                ( preserves-leq-right-mul-ℝ⁰⁺
+                              ( preserves-order-add-ℝ
+                                ( preserves-order-right-mul-ℝ⁰⁺
                                   ( nonnegative-abs-ℝ y)
                                   ( transitive-leq-ℝ _ _ _
-                                    ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _))
+                                    ( preserves-order-real-ℚ (leq-left-min-ℚ _ _))
                                     ( |dx|≤δ)))
-                                ( preserves-leq-mul-ℝ⁰⁺
+                                ( preserves-order-mul-ℝ⁰⁺
                                   ( nonnegative-abs-ℝ dx)
                                   ( nonnegative-real-ℚ⁺ δ₂)
                                   ( nonnegative-abs-ℝ dy)
                                   ( nonnegative-real-ℚ⁺ δ₂)
                                   ( transitive-leq-ℝ _ _ _
-                                    ( preserves-leq-real-ℚ
+                                    ( preserves-order-real-ℚ
                                       ( leq-right-min-ℚ _ _))
                                     ( |dx|≤δ))
                                   ( transitive-leq-ℝ _ _ _
-                                    ( preserves-leq-real-ℚ
+                                    ( preserves-order-real-ℚ
                                       ( leq-right-min-ℚ _ _))
                                     ( |dy|≤δ))))
                         ≤ ( real-ℚ⁺ δ₁ *ℝ abs-ℝ x +ℝ real-ℚ⁺ δ₁ *ℝ abs-ℝ y) +ℝ
@@ -476,11 +476,11 @@ module _
                         ≤ ( real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε₁) *ℝ real-ℚ⁺ q⁺) +ℝ
                           ( real-ℚ⁺ ε₂)
                           by
-                            preserves-leq-add-ℝ
-                              ( preserves-leq-left-mul-ℝ⁰⁺
+                            preserves-order-add-ℝ
+                              ( preserves-order-left-mul-ℝ⁰⁺
                                 ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε₁))
                                 ( leq-real-is-in-upper-cut-ℝ _ |x|+|y|<q))
-                              ( preserves-leq-real-ℚ (leq-le-ℚ δ₂²<ε₂))
+                              ( preserves-order-real-ℚ (leq-le-ℚ δ₂²<ε₂))
                         ≤ ( real-ℚ⁺ ((inv-ℚ⁺ q⁺ *ℚ⁺ ε₁) *ℚ⁺ q⁺)) +ℝ
                           ( real-ℚ⁺ ε₂)
                           by leq-eq-ℝ (ap-add-ℝ (mul-real-ℚ _ _) refl)
@@ -551,7 +551,7 @@ abstract
               by leq-eq-ℝ (ap-add-ℝ (abs-real-ℝ⁰⁺ (y⁰⁺ *ℝ⁰⁺ z⁰⁺)) refl)
             ≤ y *ℝ z +ℝ real-ℚ⁺ η
               by
-                preserves-leq-left-add-ℝ _ _ _
+                preserves-order-left-add-ℝ _ _ _
                   ( leq-dist-neighborhood-ℝ
                     ( η)
                     ( _)

@@ -201,8 +201,8 @@ abstract
     apart-ℝ y z → apart-ℝ (x +ℝ y) (x +ℝ z)
   preserves-apart-left-add-ℝ x y z =
     map-disjunction
-      ( preserves-le-left-add-ℝ x y z)
-      ( preserves-le-left-add-ℝ x z y)
+      ( preserves-strict-order-left-add-ℝ x y z)
+      ( preserves-strict-order-left-add-ℝ x z y)
 
   preserves-apart-right-add-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
@@ -238,16 +238,16 @@ abstract
     sim-ℝ x y → apart-ℝ z x → apart-ℝ z y
   apart-right-sim-ℝ z x y x~y =
     map-disjunction
-      ( preserves-le-right-sim-ℝ z x y x~y)
-      ( preserves-le-left-sim-ℝ z x y x~y)
+      ( preserves-strict-order-right-sim-ℝ z x y x~y)
+      ( preserves-strict-order-left-sim-ℝ z x y x~y)
 
   apart-left-sim-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     sim-ℝ x y → apart-ℝ x z → apart-ℝ y z
   apart-left-sim-ℝ z x y x~y =
     map-disjunction
-      ( preserves-le-left-sim-ℝ z x y x~y)
-      ( preserves-le-right-sim-ℝ z x y x~y)
+      ( preserves-strict-order-left-sim-ℝ z x y x~y)
+      ( preserves-strict-order-right-sim-ℝ z x y x~y)
 
   apart-sim-ℝ :
     {l1 l2 l3 l4 : Level} {x : ℝ l1} {x' : ℝ l2} {y : ℝ l3} {y' : ℝ l4} →

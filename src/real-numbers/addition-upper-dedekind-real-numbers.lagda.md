@@ -94,7 +94,7 @@ module _
           ( inv-tr
             ( le-ℚ (ux' +ℚ uy'))
             ( q=ux+uy)
-            ( preserves-le-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
+            ( preserves-strict-order-add-ℚ {ux'} {ux} {uy'} {uy} ux'<ux uy'<uy) ,
             intro-exists (ux' , uy') (x<ux' , y<uy' , refl))
       where
         open
@@ -134,7 +134,7 @@ module _
                     by associative-add-ℚ q (neg-ℚ px) (neg-ℚ ε)
                   ＝ q -ℚ (px +ℚ ε)
                     by ap (q +ℚ_) (inv (distributive-neg-add-ℚ px ε)))
-                ( preserves-le-right-add-ℚ
+                ( preserves-strict-order-right-add-ℚ
                   ( q -ℚ px)
                   ( neg-ℚ (q -ℚ p))
                   ( neg-ℚ ε)

@@ -115,11 +115,11 @@ module _
         rational-ℕ k *ℚ reciprocal-rational-succ-ℕ n
         ≤ rational-ℕ (succ-ℕ n) *ℚ reciprocal-rational-succ-ℕ n
           by
-            preserves-leq-right-mul-ℚ⁺
+            preserves-order-right-mul-ℚ⁺
               ( positive-reciprocal-rational-succ-ℕ n)
               ( rational-ℕ k)
               ( rational-ℕ (succ-ℕ n))
-              ( preserves-leq-rational-ℕ (leq-le-succ-ℕ k (succ-ℕ n) k<n+2))
+              ( preserves-order-rational-ℕ (leq-le-succ-ℕ k (succ-ℕ n) k<n+2))
         ≤ one-ℚ
           by
             leq-eq-ℚ
@@ -178,7 +178,7 @@ module _
         open inequality-reasoning-Poset ℚ-Poset
         1/⟨n+1⟩⁺@(1/⟨n+1⟩ , _) = positive-reciprocal-rational-succ-ℕ n
         k≤n+1 =
-          reflects-leq-rational-ℕ
+          reflects-order-rational-ℕ
             ( k)
             ( succ-ℕ n)
             ( chain-of-inequalities
@@ -202,7 +202,7 @@ module _
                 by leq-eq-ℚ (inv (is-retraction-right-div-ℚ⁺ _ _))
               ≤ succ-ℚ (rational-ℕ k) *ℚ 1/⟨n+1⟩
                 by
-                  preserves-leq-right-mul-ℚ⁺
+                  preserves-order-right-mul-ℚ⁺
                     ( 1/⟨n+1⟩⁺)
                     ( q *ℚ rational-ℕ (succ-ℕ n))
                     ( succ-ℚ (rational-ℕ k))
@@ -215,7 +215,7 @@ module _
               rational-ℕ k *ℚ 1/⟨n+1⟩
               ≤ (q *ℚ rational-ℕ (succ-ℕ n)) *ℚ 1/⟨n+1⟩
                 by
-                  preserves-leq-right-mul-ℚ⁺
+                  preserves-order-right-mul-ℚ⁺
                     ( positive-reciprocal-rational-succ-ℕ n)
                     ( rational-ℕ k)
                     ( q *ℚ rational-ℕ (succ-ℕ n))

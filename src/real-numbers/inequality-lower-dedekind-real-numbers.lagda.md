@@ -128,20 +128,20 @@ module _
 ### The canonical map from the rational numbers to the lower reals preserves inequality
 
 ```agda
-preserves-leq-lower-real-ℚ :
+preserves-order-lower-real-ℚ :
   (p q : ℚ) → leq-ℚ p q → leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q)
-preserves-leq-lower-real-ℚ p q p≤q r r<p = concatenate-le-leq-ℚ r p q r<p p≤q
+preserves-order-lower-real-ℚ p q p≤q r r<p = concatenate-le-leq-ℚ r p q r<p p≤q
 
-reflects-leq-lower-real-ℚ :
+reflects-order-lower-real-ℚ :
   (p q : ℚ) → leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q) → leq-ℚ p q
-reflects-leq-lower-real-ℚ p q r<p→r<q with decide-le-leq-ℚ q p
+reflects-order-lower-real-ℚ p q r<p→r<q with decide-le-leq-ℚ q p
 ... | inr p≤q = p≤q
 ... | inl q<p = ex-falso (irreflexive-le-ℚ q (r<p→r<q q q<p))
 
 iff-leq-lower-real-ℚ :
   (p q : ℚ) → leq-ℚ p q ↔ leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q)
-pr1 (iff-leq-lower-real-ℚ p q) = preserves-leq-lower-real-ℚ p q
-pr2 (iff-leq-lower-real-ℚ p q) = reflects-leq-lower-real-ℚ p q
+pr1 (iff-leq-lower-real-ℚ p q) = preserves-order-lower-real-ℚ p q
+pr2 (iff-leq-lower-real-ℚ p q) = reflects-order-lower-real-ℚ p q
 ```
 
 ### Infinity is the top element of the large poset of lower reals

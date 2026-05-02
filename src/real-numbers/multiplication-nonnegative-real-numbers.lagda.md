@@ -94,10 +94,10 @@ ap-mul-ℝ⁰⁺ = ap-binary mul-ℝ⁰⁺
 
 ```agda
 abstract
-  preserves-leq-left-mul-ℝ⁰⁺ :
+  preserves-order-left-mul-ℝ⁰⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (real-ℝ⁰⁺ x *ℝ y) (real-ℝ⁰⁺ x *ℝ z)
-  preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺@(x , 0≤x) {y} {z} y≤z =
+  preserves-order-left-mul-ℝ⁰⁺ x⁰⁺@(x , 0≤x) {y} {z} y≤z =
     leq-is-nonnegative-diff-ℝ
       ( x *ℝ y)
       ( x *ℝ z)
@@ -108,24 +108,24 @@ abstract
           ( 0≤x)
           ( is-nonnegative-diff-leq-ℝ y≤z)))
 
-  preserves-leq-right-mul-ℝ⁰⁺ :
+  preserves-order-right-mul-ℝ⁰⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (y *ℝ real-ℝ⁰⁺ x) (z *ℝ real-ℝ⁰⁺ x)
-  preserves-leq-right-mul-ℝ⁰⁺ x y≤z =
+  preserves-order-right-mul-ℝ⁰⁺ x y≤z =
     binary-tr
       ( leq-ℝ)
       ( commutative-mul-ℝ _ _)
       ( commutative-mul-ℝ _ _)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x y≤z)
+      ( preserves-order-left-mul-ℝ⁰⁺ x y≤z)
 
-  preserves-leq-mul-ℝ⁰⁺ :
+  preserves-order-mul-ℝ⁰⁺ :
     {l1 l2 l3 l4 : Level} →
     (x : ℝ⁰⁺ l1) (x' : ℝ⁰⁺ l2) (y : ℝ⁰⁺ l3) (y' : ℝ⁰⁺ l4) →
     leq-ℝ⁰⁺ x x' → leq-ℝ⁰⁺ y y' → leq-ℝ⁰⁺ (x *ℝ⁰⁺ y) (x' *ℝ⁰⁺ y')
-  preserves-leq-mul-ℝ⁰⁺ x x' y y' x≤x' y≤y' =
+  preserves-order-mul-ℝ⁰⁺ x x' y y' x≤x' y≤y' =
     transitive-leq-ℝ _ _ _
-      ( preserves-leq-right-mul-ℝ⁰⁺ y' x≤x')
-      ( preserves-leq-left-mul-ℝ⁰⁺ x y≤y')
+      ( preserves-order-right-mul-ℝ⁰⁺ y' x≤x')
+      ( preserves-order-left-mul-ℝ⁰⁺ x y≤y')
 ```
 
 ### Unit laws
@@ -147,5 +147,5 @@ abstract
     tr
       ( leq-ℝ⁰⁺ (x *ℝ⁰⁺ y))
       ( left-unit-law-mul-ℝ⁰⁺ y)
-      ( preserves-leq-right-mul-ℝ⁰⁺ y x≤1)
+      ( preserves-order-right-mul-ℝ⁰⁺ y x≤1)
 ```

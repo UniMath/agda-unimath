@@ -58,7 +58,7 @@ abstract
       ( tr
         ( λ z → le-ℝ z (x +ℝ y))
         ( right-unit-law-add-ℝ x)
-        ( preserves-le-left-add-ℝ x zero-ℝ y 0<y))
+        ( preserves-strict-order-left-add-ℝ x zero-ℝ y 0<y))
       ( 0<x)
 
 add-ℝ⁺ : {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁺ l2 → ℝ⁺ (l1 ⊔ l2)
@@ -83,7 +83,7 @@ abstract opaque
     tr
       ( λ y → le-ℝ y (x +ℝ d))
       ( right-unit-law-add-ℝ x)
-      ( preserves-le-left-add-ℝ x zero-ℝ d pos-d)
+      ( preserves-strict-order-left-add-ℝ x zero-ℝ d pos-d)
 
   le-left-add-real-ℚ⁺ :
     {l : Level} (x : ℝ l) (d : ℚ⁺) → le-ℝ x (x +ℝ real-ℚ⁺ d)
@@ -116,7 +116,7 @@ abstract
   le-diff-real-ℝ⁺ :
     {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁺ l2) → le-ℝ (x -ℝ real-ℝ⁺ d) x
   le-diff-real-ℝ⁺ x d⁺@(d , _) =
-    preserves-le-right-sim-ℝ
+    preserves-strict-order-right-sim-ℝ
       ( x -ℝ d)
       ( (x -ℝ d) +ℝ d)
       ( x)

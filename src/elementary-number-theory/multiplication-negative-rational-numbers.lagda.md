@@ -77,7 +77,7 @@ module _
         ( leq-ℚ)
         ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
         ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
-        ( preserves-leq-right-mul-ℚ⁺
+        ( preserves-order-right-mul-ℚ⁺
           ( neg-ℚ⁻ p)
           ( neg-ℚ r)
           ( neg-ℚ q)
@@ -100,7 +100,7 @@ module _
         ( le-ℚ)
         ( negative-law-mul-ℚ r (rational-ℚ⁻ p))
         ( negative-law-mul-ℚ q (rational-ℚ⁻ p))
-        ( preserves-le-right-mul-ℚ⁺
+        ( preserves-strict-order-right-mul-ℚ⁺
           ( neg-ℚ⁻ p)
           ( neg-ℚ r)
           ( neg-ℚ q)

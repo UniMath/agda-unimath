@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A strictly ordered pair of natural numbers consists of `x y : ℕ` such that
+A {{#concept "strictly ordered pair of natural numbers" Agda=strictly-ordered-pair-ℕ}} consists of `x y : ℕ` satisfying the [strict inequality](elementary-number-theory.strict-inequality-natural-numbers.md)
 `x < y`.
 
 ## Definition

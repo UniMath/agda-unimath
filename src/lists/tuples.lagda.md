@@ -11,11 +11,13 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
@@ -29,6 +31,9 @@ open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 
 open import univalent-combinatorics.standard-finite-types
+
+open import lists.elementhood-relation-lists
+open import lists.lists
 ```
 
 </details>
@@ -98,6 +103,16 @@ module _
   eq-component-tuple-index-in-tuple
     (succ-ℕ n) a (x ∷ v) (is-in-tail .a .x .v I) =
     eq-component-tuple-index-in-tuple n a v I
+```
+
+### The the operation `fold-tuple`
+
+```agda
+fold-tuple :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
+  {n : ℕ} → tuple A n → B
+fold-tuple b μ {0} _ = b
+fold-tuple b μ (a ∷ l) = μ a (fold-tuple b μ l)
 ```
 
 ## Properties
@@ -252,4 +267,73 @@ compute-tr-tuple :
   tr (tuple A) p (x ∷ v) ＝
   (x ∷ tr (tuple A) (is-injective-succ-ℕ p) v)
 compute-tr-tuple refl v x = refl
+```
+
+### Comparison of the type of $n$-tuples and the type of lists
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  list-tuple : (n : ℕ) → (tuple A n) → list A
+  list-tuple zero-ℕ _ = nil
+  list-tuple (succ-ℕ n) (x ∷ l) = cons x (list-tuple n l)
+
+  tuple-list : (l : list A) → tuple A (length-list l)
+  tuple-list nil = empty-tuple
+  tuple-list (cons x l) = x ∷ tuple-list l
+  
+  is-section-tuple-list : (λ l → list-tuple (length-list l) (tuple-list l)) ~ id
+  is-section-tuple-list nil = refl
+  is-section-tuple-list (cons x l) = ap (cons x) (is-section-tuple-list l)
+
+  is-retraction-tuple-list :
+    ( λ (x : Σ ℕ (λ n → tuple A n)) →
+      ( length-list (list-tuple (pr1 x) (pr2 x)) ,
+        tuple-list (list-tuple (pr1 x) (pr2 x)))) ~
+    id
+  is-retraction-tuple-list (zero-ℕ , empty-tuple) = refl
+  is-retraction-tuple-list (succ-ℕ n , (x ∷ v)) =
+    ap
+      ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
+      ( is-retraction-tuple-list (n , v))
+```
+
+### An element `x` is in a tuple `v` iff it is in `list-tuple n v`
+
+```agda
+  is-in-list-is-in-tuple-list :
+    (l : list A) (x : A) →
+    x ∈-tuple (tuple-list l) → x ∈-list l
+  is-in-list-is-in-tuple-list (cons y l) .y (is-head .y .(tuple-list l)) =
+    is-head y l
+  is-in-list-is-in-tuple-list
+    (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
+    is-in-tail x y l (is-in-list-is-in-tuple-list l x I)
+
+  is-in-tuple-list-is-in-list :
+    (l : list A) (x : A) →
+    x ∈-list l → x ∈-tuple (tuple-list l)
+  is-in-tuple-list-is-in-list (cons x l) x (is-head .x l) =
+    is-head x (tuple-list l)
+  is-in-tuple-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
+    is-in-tail x y (tuple-list l) (is-in-tuple-list-is-in-list l x I)
+```
+
+### A dependent commuting triangle relating `fold-list` and `fold-tuple`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (b : B)
+  (μ : A → (B → B))
+  where
+  
+  htpy-fold-list-fold-tuple :
+    (l : list A) →
+    fold-tuple b μ (tuple-list l) ＝ fold-list b μ l
+  htpy-fold-list-fold-tuple nil = refl
+  htpy-fold-list-fold-tuple (cons x l) =
+    ap (μ x) (htpy-fold-list-fold-tuple l)
 ```

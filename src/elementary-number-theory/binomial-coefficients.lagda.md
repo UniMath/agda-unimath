@@ -69,7 +69,7 @@ is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) _ = refl
 is-zero-binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) H =
   ap-add-ℕ
     ( is-zero-binomial-coefficient-ℕ n k H)
-    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-le-succ-ℕ n k H))
+    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-strict-order-succ-ℕ n k H))
 ```
 
 ### `binomial-coefficient-ℕ n n ＝ 1`

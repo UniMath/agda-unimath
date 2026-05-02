@@ -206,7 +206,7 @@ abstract
 mul-ℚ⁺-closed-interval-ℚ :
   closed-interval-ℚ → ℚ⁺ → closed-interval-ℚ
 mul-ℚ⁺-closed-interval-ℚ ((p , q) , p≤q) s⁺@(s , _) =
-  ((p *ℚ s , q *ℚ s) , preserves-leq-right-mul-ℚ⁺ s⁺ _ _ p≤q)
+  ((p *ℚ s , q *ℚ s) , preserves-order-right-mul-ℚ⁺ s⁺ _ _ p≤q)
 
 abstract
   mul-is-in-closed-interval-ℚ-ℚ⁺ :
@@ -217,8 +217,8 @@ abstract
       ( s *ℚ rational-ℚ⁺ r)
   mul-is-in-closed-interval-ℚ-ℚ⁺
     ((p , q) , p≤q) r s (p≤s , s≤q) =
-      ( preserves-leq-right-mul-ℚ⁺ r _ _ p≤s ,
-        preserves-leq-right-mul-ℚ⁺ r _ _ s≤q)
+      ( preserves-order-right-mul-ℚ⁺ r _ _ p≤s ,
+        preserves-order-right-mul-ℚ⁺ r _ _ s≤q)
 
   is-in-im-is-in-mul-ℚ⁺-closed-interval-ℚ :
     ([p,q] : closed-interval-ℚ) → (r : ℚ⁺) → (s : ℚ) →
@@ -240,13 +240,13 @@ abstract
                 ( associative-mul-ℚ _ _ _ ∙
                   ap-mul-ℚ refl (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ r⁺)) ∙
                   right-unit-law-mul-ℚ p)
-                ( preserves-leq-right-mul-ℚ⁺ r⁻¹ (p *ℚ r) s pr≤s) ,
+                ( preserves-order-right-mul-ℚ⁺ r⁻¹ (p *ℚ r) s pr≤s) ,
               tr
                 ( leq-ℚ (s *ℚ rational-ℚ⁺ r⁻¹))
                 ( associative-mul-ℚ _ _ _ ∙
                   ap-mul-ℚ refl (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ r⁺)) ∙
                   right-unit-law-mul-ℚ q)
-                ( preserves-leq-right-mul-ℚ⁺ r⁻¹ s (q *ℚ r) s≤qr)))
+                ( preserves-order-right-mul-ℚ⁺ r⁻¹ s (q *ℚ r) s≤qr)))
           ( associative-mul-ℚ _ _ _ ∙
             ap-mul-ℚ refl (ap rational-ℚ⁺ (left-inverse-law-mul-ℚ⁺ r⁺)) ∙
             right-unit-law-mul-ℚ s)
@@ -315,7 +315,7 @@ abstract
     mul-ℚ⁺-closed-interval-ℚ [p,q] (r , pos-r)
   mul-is-positive-ℚ-closed-interval-ℚ [p,q]@((p , q) , p≤q) r pos-r =
     unordered-closed-interval-leq-ℚ _ _
-      ( preserves-leq-right-mul-ℚ⁺ (r , pos-r) _ _ p≤q)
+      ( preserves-order-right-mul-ℚ⁺ (r , pos-r) _ _ p≤q)
 
   mul-is-zero-ℚ-closed-interval-ℚ :
     ([p,q] : closed-interval-ℚ) (r : ℚ) (is-zero-r : is-zero-ℚ r) →
@@ -937,7 +937,7 @@ abstract
                   ( rational-abs-mul-ℚ _ _))
           ≤ rational-dist-ℚ a b *ℚ rational-max-abs-closed-interval-ℚ [c,d]
             by
-              preserves-leq-left-mul-ℚ⁰⁺
+              preserves-order-left-mul-ℚ⁰⁺
                 ( dist-ℚ a b)
                 ( _)
                 ( _)
@@ -965,7 +965,7 @@ abstract
                   ( commutative-mul-ℚ _ _))
           ≤ rational-dist-ℚ c d *ℚ rational-max-abs-closed-interval-ℚ [a,b]
             by
-              preserves-leq-left-mul-ℚ⁰⁺
+              preserves-order-left-mul-ℚ⁰⁺
                 ( dist-ℚ c d)
                 ( _)
                 ( _)
@@ -996,7 +996,7 @@ abstract
           ≤ _ +ℚ _
             by triangle-inequality-abs-ℚ _ _
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
-            by preserves-leq-add-ℚ |ac-bc|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
+            by preserves-order-add-ℚ |ac-bc|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
       under-bound-|ad-bc| =
         chain-of-inequalities
           rational-dist-ℚ (a *ℚ d) (b *ℚ c)
@@ -1015,7 +1015,7 @@ abstract
               leq-eq-ℚ
                 ( ap-add-ℚ refl (ap rational-ℚ⁰⁺ (commutative-dist-ℚ _ _)))
           ≤ <b-a><max|c||d|> +ℚ <d-c><max|a||b|>
-            by preserves-leq-add-ℚ |ad-bd|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
+            by preserves-order-add-ℚ |ad-bd|≤<b-a>max|c||d| |bc-bd|≤<d-c>max|a||b|
       under-bound-|ac-bc| =
         chain-of-inequalities
           rational-dist-ℚ (a *ℚ c) (b *ℚ c)
@@ -1194,13 +1194,13 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-left-mul-closed-interval-ℚ :
+  preserves-order-left-mul-closed-interval-ℚ :
     ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [a,b] [a',b'] →
     leq-closed-interval-ℚ
       ( mul-closed-interval-ℚ [a,b] [c,d])
       ( mul-closed-interval-ℚ [a',b'] [c,d])
-  preserves-leq-left-mul-closed-interval-ℚ [c,d] [a,b] [a',b'] [a,b]⊆[a',b'] =
+  preserves-order-left-mul-closed-interval-ℚ [c,d] [a,b] [a',b'] [a,b]⊆[a',b'] =
     leq-closed-interval-leq-subtype-ℚ
       ( mul-closed-interval-ℚ [a,b] [c,d])
       ( mul-closed-interval-ℚ [a',b'] [c,d])
@@ -1208,48 +1208,48 @@ abstract
         ( _⊆_)
         ( eq-minkowski-mul-closed-interval-ℚ [a,b] [c,d])
         ( eq-minkowski-mul-closed-interval-ℚ [a',b'] [c,d])
-        ( preserves-leq-left-minkowski-mul-Commutative-Monoid
+        ( preserves-order-left-minkowski-mul-Commutative-Monoid
           ( commutative-monoid-mul-ℚ)
           ( subtype-closed-interval-ℚ [c,d])
           ( subtype-closed-interval-ℚ [a,b])
           ( subtype-closed-interval-ℚ [a',b'])
           ( leq-subtype-leq-closed-interval-ℚ [a,b] [a',b'] [a,b]⊆[a',b'])))
 
-  preserves-leq-right-mul-closed-interval-ℚ :
+  preserves-order-right-mul-closed-interval-ℚ :
     ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [c,d] [c',d'] →
     leq-closed-interval-ℚ
       ( mul-closed-interval-ℚ [a,b] [c,d])
       ( mul-closed-interval-ℚ [a,b] [c',d'])
-  preserves-leq-right-mul-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
+  preserves-order-right-mul-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
     binary-tr
       ( leq-closed-interval-ℚ)
       ( commutative-mul-closed-interval-ℚ [c,d] [a,b])
       ( commutative-mul-closed-interval-ℚ [c',d'] [a,b])
-      ( preserves-leq-left-mul-closed-interval-ℚ
+      ( preserves-order-left-mul-closed-interval-ℚ
         ( [a,b])
         ( [c,d])
         ( [c',d'])
         ( [c,d]⊆[c',d']))
 
-  preserves-leq-mul-closed-interval-ℚ :
+  preserves-order-mul-closed-interval-ℚ :
     ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
     leq-closed-interval-ℚ
       ( mul-closed-interval-ℚ [a,b] [c,d])
       ( mul-closed-interval-ℚ [a',b'] [c',d'])
-  preserves-leq-mul-closed-interval-ℚ
+  preserves-order-mul-closed-interval-ℚ
     [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
     transitive-leq-closed-interval-ℚ
       ( mul-closed-interval-ℚ [a,b] [c,d])
       ( mul-closed-interval-ℚ [a,b] [c',d'])
       ( mul-closed-interval-ℚ [a',b'] [c',d'])
-      ( preserves-leq-left-mul-closed-interval-ℚ
+      ( preserves-order-left-mul-closed-interval-ℚ
         ( [c',d'])
         ( [a,b])
         ( [a',b'])
         ( [a,b]⊆[a',b']))
-      ( preserves-leq-right-mul-closed-interval-ℚ
+      ( preserves-order-right-mul-closed-interval-ℚ
         ( [a,b])
         ( [c,d])
         ( [c',d'])

@@ -125,7 +125,7 @@ abstract
               ≤ real-ℚ (b n)
                 by H n
               ≤ real-ℚ (rational-abs-ℚ (b n))
-                by preserves-leq-real-ℚ (leq-abs-ℚ (b n))
+                by preserves-order-real-ℚ (leq-abs-ℚ (b n))
               ≤ real-ℚ (rational-dist-ℚ (b n) zero-ℚ)
                 by
                   leq-eq-ℝ
@@ -134,7 +134,7 @@ abstract
                       ( inv (right-zero-law-dist-ℚ (b n))))
               ≤ real-ℚ⁺ ε
                 by
-                  preserves-leq-real-ℚ
+                  preserves-order-real-ℚ
                     ( leq-dist-neighborhood-ℚ ε _ _ (is-mod-μ ε n με≤n))))
         ( lim-b=0)
 ```

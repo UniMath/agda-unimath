@@ -101,7 +101,7 @@ module _
               ( le-ℚ)
               ( inv q=1)
               ( inv (mul-rational-ℕ 2 2))
-              ( preserves-le-rational-ℕ {1} {4} _)))
+              ( preserves-strict-order-rational-ℕ {1} {4} _)))
         ( λ 1<q →
           ( q , le-left-mul-greater-than-one-ℚ⁺ q 1<q q))
 
@@ -146,10 +146,10 @@ abstract
                 ( ap-add-ℚ refl (right-distributive-mul-add-ℚ _ _ _))
             ≤ (p +ℚ δ₃) *ℚ p +ℚ ((δ₃ *ℚ p) +ℚ (δ₃ *ℚ p))
               by
-                preserves-leq-right-add-ℚ _ _ _
-                  ( preserves-leq-add-ℚ
+                preserves-order-right-add-ℚ _ _ _
+                  ( preserves-order-add-ℚ
                     ( leq-eq-ℚ (commutative-mul-ℚ _ _))
-                    ( preserves-leq-left-mul-ℚ⁺
+                    ( preserves-order-left-mul-ℚ⁺
                       ( δ₃⁺)
                       ( δ₃)
                       ( p)
@@ -171,16 +171,16 @@ abstract
                         ( refl))
             ≤ (p +ℚ (δ₂ +ℚ δ₂ +ℚ δ₂)) *ℚ p
               by
-                preserves-leq-right-mul-ℚ⁺ p⁺ _ _
-                  ( preserves-leq-right-add-ℚ p _ _
-                    ( preserves-leq-add-ℚ
-                      ( preserves-leq-add-ℚ δ₃≤δ₂ δ₃≤δ₂)
+                preserves-order-right-mul-ℚ⁺ p⁺ _ _
+                  ( preserves-order-right-add-ℚ p _ _
+                    ( preserves-order-add-ℚ
+                      ( preserves-order-add-ℚ δ₃≤δ₂ δ₃≤δ₂)
                       ( δ₃≤δ₂)))
             ≤ (p +ℚ (δ₁ +ℚ δ₁)) *ℚ p
               by
-                preserves-leq-right-mul-ℚ⁺ p⁺ _ _
-                  ( preserves-leq-right-add-ℚ p _ _
-                    ( preserves-leq-add-ℚ
+                preserves-order-right-mul-ℚ⁺ p⁺ _ _
+                  ( preserves-order-right-add-ℚ p _ _
+                    ( preserves-order-add-ℚ
                       ( leq-le-ℚ δ₂+δ₂<δ₁)
                       ( leq-le-ℚ δ₂<δ₁)))
             ≤ p *ℚ p +ℚ (δ₁ +ℚ δ₁) *ℚ p
@@ -202,8 +202,8 @@ abstract
                         ( positive-diff-le-ℚ p²<q)))
               ＝ q
                 by is-identity-right-conjugation-add-ℚ (p *ℚ p) q)
-            ( preserves-le-right-add-ℚ (p *ℚ p) _ _
-              ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ₁+δ₁<⟨q-p²⟩/p))))
+            ( preserves-strict-order-right-add-ℚ (p *ℚ p) _ _
+              ( preserves-strict-order-right-mul-ℚ⁺ p⁺ _ _ δ₁+δ₁<⟨q-p²⟩/p))))
 
   rounded-below-square-le-ℚ⁺ :
     (p q : ℚ⁺) → le-ℚ⁺ (p *ℚ⁺ p) q →
@@ -232,7 +232,7 @@ abstract
             ( tr
               ( le-ℚ _)
               ( is-retraction-right-div-ℚ⁺ p⁺ p)
-              ( preserves-le-right-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _
+              ( preserves-strict-order-right-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _
                 ( le-diff-rational-ℚ⁺ (p *ℚ p) q⁺)))
             ( δ+δ<⟨p²-q⟩/p))
           ( le-right-add-rational-ℚ⁺ δ δ⁺)
@@ -261,7 +261,7 @@ abstract
             ( ( ap-add-ℚ refl (distributive-neg-diff-ℚ _ _)) ∙
               ( is-identity-right-conjugation-add-ℚ (p *ℚ p) q))
             ( refl)
-            ( preserves-le-right-add-ℚ (p *ℚ p) _ _
+            ( preserves-strict-order-right-add-ℚ (p *ℚ p) _ _
               ( neg-le-ℚ
                 ( tr
                   ( le-ℚ _)
@@ -271,7 +271,7 @@ abstract
                       ( group-mul-ℚ⁺)
                       ( p⁺)
                       ( positive-diff-le-ℚ q<p²)))
-                  ( preserves-le-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
+                  ( preserves-strict-order-right-mul-ℚ⁺ p⁺ _ _ δ+δ<⟨p²-q⟩/p))))))
 
   rounded-above-square-le-ℚ⁺ :
     (p q : ℚ⁺) → le-ℚ⁺ q (p *ℚ⁺ p) →

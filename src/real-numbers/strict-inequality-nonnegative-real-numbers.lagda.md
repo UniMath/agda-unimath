@@ -61,10 +61,10 @@ is-prop-le-ℝ⁰⁺ x y = is-prop-type-Prop (le-prop-ℝ⁰⁺ x y)
 
 ```agda
 abstract
-  preserves-le-nonnegative-real-ℚ⁰⁺ :
+  preserves-strict-order-nonnegative-real-ℚ⁰⁺ :
     (p q : ℚ⁰⁺) →
     le-ℚ⁰⁺ p q → le-ℝ⁰⁺ (nonnegative-real-ℚ⁰⁺ p) (nonnegative-real-ℚ⁰⁺ q)
-  preserves-le-nonnegative-real-ℚ⁰⁺ p q = preserves-le-real-ℚ
+  preserves-strict-order-nonnegative-real-ℚ⁰⁺ p q = preserves-strict-order-real-ℚ
 ```
 
 ### Similarity preserves strict inequality
@@ -75,9 +75,9 @@ module _
   where
 
   abstract
-    preserves-le-left-sim-ℝ⁰⁺ : le-ℝ⁰⁺ x z → le-ℝ⁰⁺ y z
-    preserves-le-left-sim-ℝ⁰⁺ =
-      preserves-le-left-sim-ℝ (real-ℝ⁰⁺ z) _ _ x~y
+    preserves-strict-order-left-sim-ℝ⁰⁺ : le-ℝ⁰⁺ x z → le-ℝ⁰⁺ y z
+    preserves-strict-order-left-sim-ℝ⁰⁺ =
+      preserves-strict-order-left-sim-ℝ (real-ℝ⁰⁺ z) _ _ x~y
 ```
 
 ### Concatenation of inequality and strict inequality

@@ -249,6 +249,36 @@ module _
   equiv-im-emb = (map-unit-im-emb , is-equiv-unit-im-emb)
 ```
 
+### The image of `g ∘ f` is contained in the image of `f`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (g : B → C) (f : A → B)
+  where
+
+  abstract
+    inclusion-precomp-im :
+      subtype-im (g ∘ f) ⊆ subtype-im g
+    inclusion-precomp-im z H =
+      apply-universal-property-trunc-Prop H
+        ( subtype-im g z)
+        ( λ { (y , refl) → unit-trunc-Prop (f y , refl)})
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → C) (g : B → C) (h : A → B) (H : coherence-triangle-maps f g h)
+  where
+
+  abstract
+    inclusion-coherence-triangle-im :
+      subtype-im f ⊆ subtype-im g
+    inclusion-coherence-triangle-im z K =
+      apply-universal-property-trunc-Prop K
+        ( subtype-im g z)
+        ( λ { (y , refl) → unit-trunc-Prop (h y , inv (H y))})
+```
+
 ## External links
 
 - [Image (mathematics)](<https://en.wikipedia.org/wiki/Image_(mathematics)>) at

@@ -212,50 +212,50 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-square-ℚ⁰⁺ :
+  preserves-order-square-ℚ⁰⁺ :
     (p q : ℚ⁰⁺) → leq-ℚ⁰⁺ p q →
     leq-ℚ (square-ℚ (rational-ℚ⁰⁺ p)) (square-ℚ (rational-ℚ⁰⁺ q))
-  preserves-leq-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p≤q =
+  preserves-order-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p≤q =
     transitive-leq-ℚ
       ( square-ℚ p)
       ( p *ℚ q)
       ( square-ℚ q)
-      ( preserves-leq-right-mul-ℚ⁰⁺ q⁰⁺ p q p≤q)
-      ( preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ p q p≤q)
+      ( preserves-order-right-mul-ℚ⁰⁺ q⁰⁺ p q p≤q)
+      ( preserves-order-left-mul-ℚ⁰⁺ p⁰⁺ p q p≤q)
 ```
 
 ### Squaring nonnegative rational numbers preserves strict inequality
 
 ```agda
 abstract
-  preserves-le-square-ℚ⁰⁺ :
+  preserves-strict-order-square-ℚ⁰⁺ :
     (p q : ℚ⁰⁺) → le-ℚ⁰⁺ p q →
     le-ℚ (square-ℚ (rational-ℚ⁰⁺ p)) (square-ℚ (rational-ℚ⁰⁺ q))
-  preserves-le-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p<q =
+  preserves-strict-order-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p<q =
     concatenate-leq-le-ℚ
       ( square-ℚ p)
       ( p *ℚ q)
       ( square-ℚ q)
-      ( preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ p q (leq-le-ℚ p<q))
-      ( preserves-le-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ p<q) p q p<q)
+      ( preserves-order-left-mul-ℚ⁰⁺ p⁰⁺ p q (leq-le-ℚ p<q))
+      ( preserves-strict-order-right-mul-ℚ⁺ (q , is-positive-le-ℚ⁰⁺ p⁰⁺ p<q) p q p<q)
 ```
 
 ### Squaring nonnegative rational numbers reflects inequality
 
 ```agda
 abstract
-  reflects-leq-square-ℚ⁰⁺ :
+  reflects-order-square-ℚ⁰⁺ :
     (p q : ℚ⁰⁺) →
     leq-ℚ (square-ℚ (rational-ℚ⁰⁺ p)) (square-ℚ (rational-ℚ⁰⁺ q)) →
     leq-ℚ⁰⁺ p q
-  reflects-leq-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p²≤q² =
+  reflects-order-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p²≤q² =
     rec-coproduct
       ( λ q<p →
         ex-falso
           ( not-leq-le-ℚ
             ( square-ℚ q)
             ( square-ℚ p)
-            ( preserves-le-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q<p)
+            ( preserves-strict-order-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q<p)
             ( p²≤q²)))
       ( id)
       ( decide-le-leq-ℚ q p)
@@ -278,7 +278,7 @@ abstract
             ( square-ℚ p)
             ( square-ℚ q)
             ( p²<q²)
-            ( preserves-leq-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q≤p)))
+            ( preserves-order-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q≤p)))
       ( decide-le-leq-ℚ p q)
 ```
 

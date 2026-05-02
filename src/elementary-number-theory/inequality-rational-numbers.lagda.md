@@ -207,10 +207,10 @@ module _
     unfolding leq-ℚ-Prop
     unfolding rational-fraction-ℤ
 
-    preserves-leq-rational-fraction-ℤ :
+    preserves-order-rational-fraction-ℤ :
       leq-fraction-ℤ p q → leq-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
-    preserves-leq-rational-fraction-ℤ =
-      preserves-leq-sim-fraction-ℤ
+    preserves-order-rational-fraction-ℤ =
+      leq-sim-fraction-ℤ
         ( p)
         ( q)
         ( reduce-fraction-ℤ p)
@@ -225,9 +225,9 @@ module _
   abstract opaque
     unfolding leq-ℚ-Prop rational-fraction-ℤ
 
-    preserves-leq-right-rational-fraction-ℤ :
+    preserves-order-right-rational-fraction-ℤ :
       leq-fraction-ℤ (fraction-ℚ x) p → leq-ℚ x (rational-fraction-ℤ p)
-    preserves-leq-right-rational-fraction-ℤ H =
+    preserves-order-right-rational-fraction-ℤ H =
       concatenate-leq-sim-fraction-ℤ
         ( fraction-ℚ x)
         ( p)
@@ -235,9 +235,9 @@ module _
         ( H)
         ( sim-reduced-fraction-ℤ p)
 
-    reflects-leq-right-rational-fraction-ℤ :
+    reflects-order-right-rational-fraction-ℤ :
       leq-ℚ x (rational-fraction-ℤ p) → leq-fraction-ℤ (fraction-ℚ x) p
-    reflects-leq-right-rational-fraction-ℤ H =
+    reflects-order-right-rational-fraction-ℤ H =
       concatenate-leq-sim-fraction-ℤ
         ( fraction-ℚ x)
         ( reduce-fraction-ℤ p)
@@ -251,15 +251,15 @@ module _
   iff-leq-right-rational-fraction-ℤ :
     leq-fraction-ℤ (fraction-ℚ x) p ↔ leq-ℚ x (rational-fraction-ℤ p)
   pr1 iff-leq-right-rational-fraction-ℤ =
-    preserves-leq-right-rational-fraction-ℤ
-  pr2 iff-leq-right-rational-fraction-ℤ = reflects-leq-right-rational-fraction-ℤ
+    preserves-order-right-rational-fraction-ℤ
+  pr2 iff-leq-right-rational-fraction-ℤ = reflects-order-right-rational-fraction-ℤ
 
   abstract opaque
     unfolding leq-ℚ-Prop rational-fraction-ℤ
 
-    preserves-leq-left-rational-fraction-ℤ :
+    preserves-order-left-rational-fraction-ℤ :
       leq-fraction-ℤ p (fraction-ℚ x) → leq-ℚ (rational-fraction-ℤ p) x
-    preserves-leq-left-rational-fraction-ℤ =
+    preserves-order-left-rational-fraction-ℤ =
       concatenate-sim-leq-fraction-ℤ
         ( fraction-ℚ ( rational-fraction-ℤ p))
         ( p)
@@ -269,9 +269,9 @@ module _
           ( fraction-ℚ ( rational-fraction-ℤ p))
           ( sim-reduced-fraction-ℤ p))
 
-    reflects-leq-left-rational-fraction-ℤ :
+    reflects-order-left-rational-fraction-ℤ :
       leq-ℚ (rational-fraction-ℤ p) x → leq-fraction-ℤ p (fraction-ℚ x)
-    reflects-leq-left-rational-fraction-ℤ =
+    reflects-order-left-rational-fraction-ℤ =
       concatenate-sim-leq-fraction-ℤ
         ( p)
         ( reduce-fraction-ℤ p)
@@ -280,8 +280,8 @@ module _
 
   iff-leq-left-rational-fraction-ℤ :
     leq-fraction-ℤ p (fraction-ℚ x) ↔ leq-ℚ (rational-fraction-ℤ p) x
-  pr1 iff-leq-left-rational-fraction-ℤ = preserves-leq-left-rational-fraction-ℤ
-  pr2 iff-leq-left-rational-fraction-ℤ = reflects-leq-left-rational-fraction-ℤ
+  pr1 iff-leq-left-rational-fraction-ℤ = preserves-order-left-rational-fraction-ℤ
+  pr2 iff-leq-left-rational-fraction-ℤ = reflects-order-left-rational-fraction-ℤ
 ```
 
 ### The canonical map from integers to the rational numbers preserves and reflects inequality
@@ -290,24 +290,24 @@ module _
 abstract opaque
   unfolding leq-ℚ-Prop
 
-  preserves-leq-rational-ℤ :
+  preserves-order-rational-ℤ :
     {x y : ℤ} → leq-ℤ x y → leq-ℚ (rational-ℤ x) (rational-ℤ y)
-  preserves-leq-rational-ℤ {x} {y} =
+  preserves-order-rational-ℤ {x} {y} =
     binary-tr leq-ℤ
       ( inv (right-unit-law-mul-ℤ x))
       ( inv (right-unit-law-mul-ℤ y))
 
-  reflects-leq-rational-ℤ :
+  reflects-order-rational-ℤ :
     (x y : ℤ) → leq-ℚ (rational-ℤ x) (rational-ℤ y) → leq-ℤ x y
-  reflects-leq-rational-ℤ x y =
+  reflects-order-rational-ℤ x y =
     binary-tr leq-ℤ
       ( right-unit-law-mul-ℤ x)
       ( right-unit-law-mul-ℤ y)
 
   iff-leq-rational-ℤ :
     (x y : ℤ) → leq-ℤ x y ↔ leq-ℚ (rational-ℤ x) (rational-ℤ y)
-  pr1 (iff-leq-rational-ℤ x y) = preserves-leq-rational-ℤ
-  pr2 (iff-leq-rational-ℤ x y) = reflects-leq-rational-ℤ x y
+  pr1 (iff-leq-rational-ℤ x y) = preserves-order-rational-ℤ
+  pr2 (iff-leq-rational-ℤ x y) = reflects-order-rational-ℤ x y
 ```
 
 ### The canonical map from natural numbers to the rational numbers preserves and reflects inequality
@@ -320,14 +320,14 @@ abstract
     iff-leq-rational-ℤ (int-ℕ x) (int-ℕ y) ∘iff
     iff-leq-int-ℕ x y
 
-  preserves-leq-rational-ℕ :
+  preserves-order-rational-ℕ :
     {x y : ℕ} → leq-ℕ x y → leq-ℚ (rational-ℕ x) (rational-ℕ y)
-  preserves-leq-rational-ℕ {x} {y} =
+  preserves-order-rational-ℕ {x} {y} =
     forward-implication (iff-leq-rational-ℕ x y)
 
-  reflects-leq-rational-ℕ :
+  reflects-order-rational-ℕ :
     (x y : ℕ) → leq-ℚ (rational-ℕ x) (rational-ℕ y) → leq-ℕ x y
-  reflects-leq-rational-ℕ x y = backward-implication (iff-leq-rational-ℕ x y)
+  reflects-order-rational-ℕ x y = backward-implication (iff-leq-rational-ℕ x y)
 ```
 
 ### `x ≤ y` if and only if `0 ≤ y - x`
@@ -401,40 +401,40 @@ module _
               ( id-iff))
         ↔ leq-ℚ x y by (iff-translate-diff-leq-zero-ℚ x y)
 
-  preserves-leq-left-add-ℚ : leq-ℚ x y → leq-ℚ (x +ℚ z) (y +ℚ z)
-  preserves-leq-left-add-ℚ = backward-implication iff-translate-right-leq-ℚ
+  preserves-order-left-add-ℚ : leq-ℚ x y → leq-ℚ (x +ℚ z) (y +ℚ z)
+  preserves-order-left-add-ℚ = backward-implication iff-translate-right-leq-ℚ
 
-  preserves-leq-right-add-ℚ : leq-ℚ x y → leq-ℚ (z +ℚ x) (z +ℚ y)
-  preserves-leq-right-add-ℚ = backward-implication iff-translate-left-leq-ℚ
+  preserves-order-right-add-ℚ : leq-ℚ x y → leq-ℚ (z +ℚ x) (z +ℚ y)
+  preserves-order-right-add-ℚ = backward-implication iff-translate-left-leq-ℚ
 
-  reflects-leq-left-add-ℚ : leq-ℚ (x +ℚ z) (y +ℚ z) → leq-ℚ x y
-  reflects-leq-left-add-ℚ = forward-implication iff-translate-right-leq-ℚ
+  reflects-order-left-add-ℚ : leq-ℚ (x +ℚ z) (y +ℚ z) → leq-ℚ x y
+  reflects-order-left-add-ℚ = forward-implication iff-translate-right-leq-ℚ
 
-  reflects-leq-right-add-ℚ : leq-ℚ (z +ℚ x) (z +ℚ y) → leq-ℚ x y
-  reflects-leq-right-add-ℚ = forward-implication iff-translate-left-leq-ℚ
+  reflects-order-right-add-ℚ : leq-ℚ (z +ℚ x) (z +ℚ y) → leq-ℚ x y
+  reflects-order-right-add-ℚ = forward-implication iff-translate-left-leq-ℚ
 
 right-add-hom-leq-ℚ : (z : ℚ) → hom-Poset ℚ-Poset ℚ-Poset
 pr1 (right-add-hom-leq-ℚ z) x = x +ℚ z
-pr2 (right-add-hom-leq-ℚ z) = preserves-leq-left-add-ℚ z
+pr2 (right-add-hom-leq-ℚ z) = preserves-order-left-add-ℚ z
 
 left-add-hom-leq-ℚ : (z : ℚ) → hom-Poset ℚ-Poset ℚ-Poset
 pr1 (left-add-hom-leq-ℚ z) x = z +ℚ x
-pr2 (left-add-hom-leq-ℚ z) = preserves-leq-right-add-ℚ z
+pr2 (left-add-hom-leq-ℚ z) = preserves-order-right-add-ℚ z
 ```
 
 ### Addition on the rational numbers preserves inequality
 
 ```agda
 abstract
-  preserves-leq-add-ℚ :
+  preserves-order-add-ℚ :
     {a b c d : ℚ} → leq-ℚ a b → leq-ℚ c d → leq-ℚ (a +ℚ c) (b +ℚ d)
-  preserves-leq-add-ℚ {a} {b} {c} {d} H K =
+  preserves-order-add-ℚ {a} {b} {c} {d} H K =
     transitive-leq-ℚ
       ( a +ℚ c)
       ( b +ℚ c)
       ( b +ℚ d)
-      ( preserves-leq-right-add-ℚ b c d K)
-      ( preserves-leq-left-add-ℚ c a b H)
+      ( preserves-order-right-add-ℚ b c d K)
+      ( preserves-order-left-add-ℚ c a b H)
 ```
 
 ### Negation of rational numbers reverses inequality
@@ -542,7 +542,7 @@ abstract
     tr
       ( λ x → leq-ℚ x (one-ℚ +ℚ p))
       ( left-unit-law-add-ℚ p)
-      ( preserves-leq-left-add-ℚ p zero-ℚ one-ℚ leq-zero-one-ℚ)
+      ( preserves-order-left-add-ℚ p zero-ℚ one-ℚ leq-zero-one-ℚ)
 ```
 
 ## See also

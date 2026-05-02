@@ -193,25 +193,25 @@ module _
 
 ```agda
 abstract
-  preserves-le-left-add-ℤ :
+  preserves-strict-order-left-add-ℤ :
     (z x y : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
-  preserves-le-left-add-ℤ z x y =
+  preserves-strict-order-left-add-ℤ z x y =
     is-positive-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-  preserves-le-right-add-ℤ :
+  preserves-strict-order-right-add-ℤ :
     (z x y : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
-  preserves-le-right-add-ℤ z x y =
+  preserves-strict-order-right-add-ℤ z x y =
     is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-  preserves-le-add-ℤ :
+  preserves-strict-order-add-ℤ :
     {a b c d : ℤ} → le-ℤ a b → le-ℤ c d → le-ℤ (a +ℤ c) (b +ℤ d)
-  preserves-le-add-ℤ {a} {b} {c} {d} H K =
+  preserves-strict-order-add-ℤ {a} {b} {c} {d} H K =
     transitive-le-ℤ
       ( a +ℤ c)
       ( b +ℤ c)
       ( b +ℤ d)
-      ( preserves-le-right-add-ℤ b c d K)
-      ( preserves-le-left-add-ℤ c a b H)
+      ( preserves-strict-order-right-add-ℤ b c d K)
+      ( preserves-strict-order-left-add-ℤ c a b H)
 ```
 
 ### Addition on the integers reflects strict inequality
@@ -306,21 +306,21 @@ module _
 
 ```agda
 abstract
-  preserves-le-int-ℕ : (m n : ℕ) → le-ℕ m n → le-ℤ (int-ℕ m) (int-ℕ n)
-  preserves-le-int-ℕ zero-ℕ (succ-ℕ n) star =
+  preserves-strict-order-int-ℕ : (m n : ℕ) → le-ℕ m n → le-ℤ (int-ℕ m) (int-ℕ n)
+  preserves-strict-order-int-ℕ zero-ℕ (succ-ℕ n) star =
     le-zero-is-positive-ℤ
       (int-ℕ (succ-ℕ n))
       (is-positive-int-is-nonzero-ℕ (succ-ℕ n) λ ())
-  preserves-le-int-ℕ (succ-ℕ m) (succ-ℕ n) m<n =
+  preserves-strict-order-int-ℕ (succ-ℕ m) (succ-ℕ n) m<n =
     binary-tr
       ( le-ℤ)
       ( succ-int-ℕ m)
       ( succ-int-ℕ n)
-      ( preserves-le-right-add-ℤ
+      ( preserves-strict-order-right-add-ℤ
         ( one-ℤ)
         ( int-ℕ m)
         ( int-ℕ n)
-        ( preserves-le-int-ℕ m n m<n))
+        ( preserves-strict-order-int-ℕ m n m<n))
 
   reflects-le-int-ℕ : (m n : ℕ) → le-ℤ (int-ℕ m) (int-ℕ n) → le-ℕ m n
   reflects-le-int-ℕ zero-ℕ (succ-ℕ _) _ = star
@@ -339,7 +339,7 @@ abstract
           ( H)))
 
   iff-le-int-ℕ : (m n : ℕ) → le-ℕ m n ↔ le-ℤ (int-ℕ m) (int-ℕ n)
-  iff-le-int-ℕ m n = (preserves-le-int-ℕ m n , reflects-le-int-ℕ m n)
+  iff-le-int-ℕ m n = (preserves-strict-order-int-ℕ m n , reflects-le-int-ℕ m n)
 ```
 
 ### Negation reverses the order of strict inequality of integers

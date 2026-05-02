@@ -112,7 +112,7 @@ subtraction-iff-leq-ℕ n m =
 abstract
   diff-right-add-leq-ℕ :
     (k m n : ℕ) (n≤m : leq-ℕ n m) →
-    diff-leq-ℕ (m +ℕ k) (n +ℕ k) (preserves-leq-left-add-ℕ k n m n≤m) ＝
+    diff-leq-ℕ (m +ℕ k) (n +ℕ k) (preserves-order-left-add-ℕ k n m n≤m) ＝
     diff-leq-ℕ m n n≤m
   diff-right-add-leq-ℕ 0 m n n≤m =
     ap (diff-leq-ℕ m n) (eq-is-prop (is-prop-leq-ℕ n m))
@@ -124,20 +124,20 @@ abstract
 
   diff-left-add-leq-ℕ :
     (k m n : ℕ) (n≤m : leq-ℕ n m) →
-    diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-leq-right-add-ℕ k n m n≤m) ＝
+    diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-order-right-add-ℕ k n m n≤m) ＝
     diff-leq-ℕ m n n≤m
   diff-left-add-leq-ℕ k m n n≤m =
     is-injective-right-add-ℕ
       ( k +ℕ n)
       ( equational-reasoning
-        ( diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-leq-right-add-ℕ k n m n≤m)) +ℕ
+        ( diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-order-right-add-ℕ k n m n≤m)) +ℕ
         ( k +ℕ n)
         ＝ k +ℕ m
           by
             left-add-diff-leq-ℕ
               ( k +ℕ m)
               ( k +ℕ n)
-              ( preserves-leq-right-add-ℕ k n m n≤m)
+              ( preserves-order-right-add-ℕ k n m n≤m)
         ＝ k +ℕ (diff-leq-ℕ m n n≤m +ℕ n)
           by ap-add-ℕ refl (inv (left-add-diff-leq-ℕ m n n≤m))
         ＝ diff-leq-ℕ m n n≤m +ℕ (k +ℕ n)

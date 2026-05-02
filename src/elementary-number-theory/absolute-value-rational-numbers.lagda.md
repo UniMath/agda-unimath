@@ -207,7 +207,7 @@ abstract
       ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
       ( _)
       ( _)
-      ( preserves-leq-add-ℚ
+      ( preserves-order-add-ℚ
         { p}
         { rational-abs-ℚ p}
         { q}
@@ -217,7 +217,7 @@ abstract
       ( inv-tr
         ( λ r → leq-ℚ r (rational-abs-ℚ p +ℚ rational-abs-ℚ q))
         ( distributive-neg-add-ℚ p q)
-        ( preserves-leq-add-ℚ
+        ( preserves-order-add-ℚ
           { neg-ℚ p}
           { rational-abs-ℚ p}
           { neg-ℚ q}

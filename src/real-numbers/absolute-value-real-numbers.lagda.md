@@ -329,11 +329,11 @@ module _
     triangle-inequality-abs-ℝ : leq-ℝ (abs-ℝ (x +ℝ y)) (abs-ℝ x +ℝ abs-ℝ y)
     triangle-inequality-abs-ℝ =
       leq-abs-leq-leq-neg-ℝ
-        ( preserves-leq-add-ℝ (leq-abs-ℝ x) (leq-abs-ℝ y))
+        ( preserves-order-add-ℝ (leq-abs-ℝ x) (leq-abs-ℝ y))
         ( inv-tr
           ( λ z → leq-ℝ z (abs-ℝ x +ℝ abs-ℝ y))
           ( distributive-neg-add-ℝ x y)
-          ( preserves-leq-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
+          ( preserves-order-add-ℝ (neg-leq-abs-ℝ x) (neg-leq-abs-ℝ y)))
 ```
 
 ### The absolute value is a short map
@@ -359,7 +359,7 @@ module _
             ( x)
             ( y +ℝ real-ℚ⁺ d)
             ( abs-ℝ y +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
+            ( preserves-order-right-add-ℝ
               ( real-ℚ⁺ d)
               ( y)
               ( abs-ℝ y)
@@ -369,7 +369,7 @@ module _
             ( neg-ℝ x)
             ( neg-ℝ y +ℝ real-ℚ⁺ d)
             ( abs-ℝ y +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
+            ( preserves-order-right-add-ℝ
               ( real-ℚ⁺ d)
               ( neg-ℝ y)
               ( abs-ℝ y)
@@ -384,7 +384,7 @@ module _
             ( y)
             ( x +ℝ real-ℚ⁺ d)
             ( abs-ℝ x +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
+            ( preserves-order-right-add-ℝ
               ( real-ℚ⁺ d)
               ( x)
               ( abs-ℝ x)
@@ -394,7 +394,7 @@ module _
             ( neg-ℝ y)
             ( neg-ℝ x +ℝ real-ℚ⁺ d)
             ( abs-ℝ x +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
+            ( preserves-order-right-add-ℝ
               ( real-ℚ⁺ d)
               ( neg-ℝ x)
               ( abs-ℝ x)

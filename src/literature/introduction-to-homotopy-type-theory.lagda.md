@@ -961,22 +961,22 @@ open import elementary-number-theory.inequality-natural-numbers using
 
 -- (c)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( preserves-leq-left-add-ℕ
-  ; reflects-leq-left-add-ℕ)
+  ( preserves-order-left-add-ℕ
+  ; reflects-order-left-add-ℕ)
 
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m +ℕ k ≤-ℕ n +ℕ k)
 _ =
-  λ m n k → (preserves-leq-left-add-ℕ k m n , reflects-leq-left-add-ℕ k m n)
+  λ m n k → (preserves-order-left-add-ℕ k m n , reflects-order-left-add-ℕ k m n)
 
 -- (d)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( preserves-leq-left-mul-ℕ
-  ; reflects-leq-mul-ℕ)
+  ( preserves-order-left-mul-ℕ
+  ; reflects-order-mul-ℕ)
 
 _ : (m n k : ℕ) → (m ≤-ℕ n) ↔ (m *ℕ (succ-ℕ k) ≤-ℕ n *ℕ (succ-ℕ k))
 _ =
   λ m n k →
-    (preserves-leq-left-mul-ℕ (succ-ℕ k) m n , reflects-leq-mul-ℕ k m n)
+    (preserves-order-left-mul-ℕ (succ-ℕ k) m n , reflects-order-mul-ℕ k m n)
 
 -- (e)
 open import elementary-number-theory.minimum-natural-numbers using
@@ -1002,7 +1002,7 @@ open import elementary-number-theory.strict-inequality-natural-numbers using
 -- (b)
 open import elementary-number-theory.strict-inequality-natural-numbers using
   ( succ-le-ℕ -- n < n + 1
-  ; preserves-le-succ-ℕ -- m < n → m < n + 1
+  ; preserves-strict-order-succ-ℕ -- m < n → m < n + 1
   )
 
 -- (c)
@@ -1058,7 +1058,7 @@ open import elementary-number-theory.absolute-value-integers using
   ; eq-abs-ℤ
   ; abs-eq-ℤ
   ; subadditive-abs-ℤ -- |x + y| ≤ |x| + |y|
-  ; multiplicative-abs-ℤ -- |x * y| = |x| * |y|
+  ; distributive-mul-abs-ℤ -- |x * y| = |x| * |y|
   )
 
 _ : (x : ℤ) → (x ＝ zero-ℤ) ↔ (abs-ℤ x ＝ 0)
@@ -1290,10 +1290,10 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 **Proposition 7.5.4.** A 3-for-2 property of congruences.
 
 ```agda
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.congruence-natural-numbers using
   ( congruence-add-ℕ -- x ≡ x' → y ≡ y' → (x + y ≡ x' + y')
-  ; cong-right-summand-ℕ -- x ≡ x' → (x + y ≡ x' + y') → y ≡ y'
-  ; cong-left-summand-ℕ -- y ≡ y' → (x + y ≡ x' + y') → x ≡ x'
+  ; congruence-right-summand-ℕ -- x ≡ x' → (x + y ≡ x' + y') → y ≡ y'
+  ; congruence-left-summand-ℕ -- y ≡ y' → (x + y ≡ x' + y') → x ≡ x'
   )
 ```
 

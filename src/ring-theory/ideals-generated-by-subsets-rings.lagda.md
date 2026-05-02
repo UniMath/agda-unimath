@@ -227,34 +227,34 @@ module _
 
   is-closed-under-left-multiplication-ideal-subset-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-ideal-subset-Ring
-  is-closed-under-left-multiplication-ideal-subset-Ring x r H =
+  is-closed-under-left-multiplication-ideal-subset-Ring H =
     apply-universal-property-trunc-Prop H
-      ( subset-ideal-subset-Ring (mul-Ring R x r))
+      ( subset-ideal-subset-Ring (mul-Ring R _ _))
       ( λ H' →
         unit-trunc-Prop
           ( tr
             ( subset-ideal-subset-Ring')
-            ( right-unit-law-mul-Ring R (mul-Ring R x r))
-            ( is-closed-under-multiplication-ideal-subset-Ring' x r
+            ( right-unit-law-mul-Ring R (mul-Ring R _ _))
+            ( is-closed-under-multiplication-ideal-subset-Ring' _ _
               ( one-Ring R)
               ( H'))))
 
   is-closed-under-right-multiplication-ideal-subset-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-ideal-subset-Ring
-  is-closed-under-right-multiplication-ideal-subset-Ring x r H =
+  is-closed-under-right-multiplication-ideal-subset-Ring H =
     apply-universal-property-trunc-Prop H
-      ( subset-ideal-subset-Ring (mul-Ring R x r))
+      ( subset-ideal-subset-Ring (mul-Ring R _ _))
       ( λ H' →
         unit-trunc-Prop
           ( tr
             ( subset-ideal-subset-Ring')
             ( ap
-              ( mul-Ring' R r)
-              ( left-unit-law-mul-Ring R x))
+              ( mul-Ring' R _)
+              ( left-unit-law-mul-Ring R _))
             ( is-closed-under-multiplication-ideal-subset-Ring'
               ( one-Ring R)
-              ( x)
-              ( r)
+              ( _)
+              ( _)
               ( H'))))
 
   is-closed-under-negatives-ideal-subset-Ring :
@@ -263,10 +263,7 @@ module _
     tr
       ( is-in-ideal-subset-Ring)
       ( mul-neg-one-Ring R x)
-      ( is-closed-under-left-multiplication-ideal-subset-Ring
-        ( neg-one-Ring R)
-        ( x)
-        ( H))
+      ( is-closed-under-left-multiplication-ideal-subset-Ring H)
 
   ideal-subset-Ring : ideal-Ring (l1 ⊔ l2) R
   pr1 ideal-subset-Ring =
@@ -300,9 +297,7 @@ module _
     ( cons (r , (s , K) , t) c) =
     is-closed-under-addition-ideal-Ring R I
       ( is-closed-under-right-multiplication-ideal-Ring R I
-        ( mul-Ring R r s)
-        ( t)
-        ( is-closed-under-left-multiplication-ideal-Ring R I r s (H s K)))
+        ( is-closed-under-left-multiplication-ideal-Ring R I (H s K)))
       ( contains-formal-combinations-ideal-subset-Ring I H c)
 
   is-ideal-generated-by-subset-ideal-subset-Ring :
@@ -551,8 +546,8 @@ module _
     contains-zero-ideal-Ring R I
   cases-forward-inclusion-idempotent-ideal-subset-Ring (cons (x , u , y) l) =
     is-closed-under-addition-ideal-Ring R I
-      ( is-closed-under-right-multiplication-ideal-Ring R I _ _
-        ( is-closed-under-left-multiplication-ideal-Ring R I _ _ (pr2 u)))
+      ( is-closed-under-right-multiplication-ideal-Ring R I
+        ( is-closed-under-left-multiplication-ideal-Ring R I (pr2 u)))
       ( cases-forward-inclusion-idempotent-ideal-subset-Ring l)
 
   abstract

@@ -127,36 +127,36 @@ power-mul-ℚ⁺ m n q = power-mul-Group group-mul-ℚ⁺ m n
 
 ```agda
 abstract
-  preserves-le-power-ℚ⁺ :
+  preserves-strict-order-power-ℚ⁺ :
     (n : ℕ) → (p q : ℚ⁺) → le-ℚ⁺ p q → is-nonzero-ℕ n →
     le-ℚ⁺ (power-ℚ⁺ n p) (power-ℚ⁺ n q)
-  preserves-le-power-ℚ⁺ 0 p q p<q H = ex-falso (H refl)
-  preserves-le-power-ℚ⁺ 1 p q p<q _ = p<q
-  preserves-le-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
+  preserves-strict-order-power-ℚ⁺ 0 p q p<q H = ex-falso (H refl)
+  preserves-strict-order-power-ℚ⁺ 1 p q p<q _ = p<q
+  preserves-strict-order-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
     transitive-le-ℚ⁺
       ( power-ℚ⁺ (succ-ℕ n) p)
       ( power-ℚ⁺ n p *ℚ⁺ q)
       ( power-ℚ⁺ (succ-ℕ n) q)
-      ( preserves-le-right-mul-ℚ⁺ q _ _
-        ( preserves-le-power-ℚ⁺ n p q p<q (is-nonzero-succ-ℕ _)))
-      ( preserves-le-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p<q)
+      ( preserves-strict-order-right-mul-ℚ⁺ q _ _
+        ( preserves-strict-order-power-ℚ⁺ n p q p<q (is-nonzero-succ-ℕ _)))
+      ( preserves-strict-order-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p<q)
 ```
 
 ### If `p` and `q` are positive rational numbers with `p ≤ q`, then `pⁿ ≤ qⁿ`
 
 ```agda
 abstract
-  preserves-leq-power-ℚ⁺ :
+  preserves-order-power-ℚ⁺ :
     (n : ℕ) (p q : ℚ⁺) → leq-ℚ⁺ p q → leq-ℚ⁺ (power-ℚ⁺ n p) (power-ℚ⁺ n q)
-  preserves-leq-power-ℚ⁺ 0 _ _ _ = refl-leq-ℚ one-ℚ
-  preserves-leq-power-ℚ⁺ 1 p q p≤q = p≤q
-  preserves-leq-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p≤q =
+  preserves-order-power-ℚ⁺ 0 _ _ _ = refl-leq-ℚ one-ℚ
+  preserves-order-power-ℚ⁺ 1 p q p≤q = p≤q
+  preserves-order-power-ℚ⁺ (succ-ℕ n@(succ-ℕ _)) p q p≤q =
     transitive-leq-ℚ⁺
       ( power-ℚ⁺ (succ-ℕ n) p)
       ( power-ℚ⁺ n p *ℚ⁺ q)
       ( power-ℚ⁺ (succ-ℕ n) q)
-      ( preserves-leq-right-mul-ℚ⁺ q _ _ (preserves-leq-power-ℚ⁺ n p q p≤q))
-      ( preserves-leq-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p≤q)
+      ( preserves-order-right-mul-ℚ⁺ q _ _ (preserves-order-power-ℚ⁺ n p q p≤q))
+      ( preserves-order-left-mul-ℚ⁺ (power-ℚ⁺ n p) _ _ p≤q)
 ```
 
 ### For any positive rational `ε`, `(1 + ε)ⁿ` grows without bound
@@ -288,11 +288,11 @@ abstract
           by leq-eq-ℚ⁺ (distributive-power-add-ℚ⁺ k m ε)
         ≤ rational-power-ℚ⁺ k one-ℚ⁺ *ℚ rational-power-ℚ⁺ m ε
           by
-          preserves-leq-right-mul-ℚ⁺
+          preserves-order-right-mul-ℚ⁺
             ( power-ℚ⁺ m ε)
             ( _)
             ( _)
-            ( preserves-leq-power-ℚ⁺ k ε one-ℚ⁺ ε≤1)
+            ( preserves-order-power-ℚ⁺ k ε one-ℚ⁺ ε≤1)
         ≤ one-ℚ *ℚ rational-power-ℚ⁺ m ε
           by leq-eq-ℚ (ap-mul-ℚ (ap rational-ℚ⁺ (power-one-ℚ⁺ k)) refl)
         ≤ rational-power-ℚ⁺ m ε

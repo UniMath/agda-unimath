@@ -50,14 +50,14 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A
-{{#concept "permutation" Disambiguation="of a standard finite type" Agda=Permutation}}
-of `Fin n` is an [automorphism](foundation.automorphisms.md) on `Fin n`.
+{{#concept "permutation" Disambiguation="standard finite type" Agda=permuation}}
+on a [standard finite type](univalent-combinatorics.standard-finite-types.md) `Fin n` is an [automorphism](foundation.automorphisms.md) of `Fin n`.
 
 ## Definitions
 
 ```agda
-Permutation : (n : ℕ) → UU lzero
-Permutation n = Aut (Fin n)
+permutation : (n : ℕ) → UU lzero
+permutation n = Aut (Fin n)
 ```
 
 ## Properties
@@ -66,14 +66,13 @@ Permutation n = Aut (Fin n)
 
 ```agda
 list-transpositions-permutation-Fin' :
-  (n : ℕ) (f : Permutation (succ-ℕ n)) →
+  (n : ℕ) (f : permutation (succ-ℕ n)) →
   (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
-  ( list
-    ( Σ
-      ( Fin (succ-ℕ n) → Decidable-Prop lzero)
-      ( λ P →
-        has-cardinality-ℕ 2
-          ( Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P)))))
+  list
+    ( Σ ( Fin (succ-ℕ n) → Decidable-Prop lzero)
+        ( λ P →
+          has-cardinality-ℕ 2 (Σ (Fin (succ-ℕ n)) (type-Decidable-Prop ∘ P))))
+
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   cons
@@ -96,7 +95,7 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
       { inr star}
       { inl x}
       ( neq-inr-inl)
-  f' : (Permutation (succ-ℕ n))
+  f' : permutation (succ-ℕ n)
   f' =
     map-inv-equiv
       ( extend-equiv-Maybe (Fin-Set (succ-ℕ n)))
@@ -113,11 +112,11 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inr star) p =
     ( Fin-succ-Fin-transposition (succ-ℕ n))
     ( list-transpositions-permutation-Fin' n f' (map-equiv f' (inr star)) refl)
   where
-  f' : (Permutation (succ-ℕ n))
+  f' : permutation (succ-ℕ n)
   f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
 
 list-transpositions-permutation-Fin :
-  (n : ℕ) (f : Permutation n) →
+  (n : ℕ) (f : permutation n) →
   ( list
     ( Σ
       ( Fin n → Decidable-Prop lzero)
@@ -128,15 +127,14 @@ list-transpositions-permutation-Fin (succ-ℕ n) f =
 
 abstract
   retraction-permutation-list-transpositions-Fin' :
-    (n : ℕ) (f : Permutation (succ-ℕ n)) →
+    (n : ℕ) (f : permutation (succ-ℕ n)) →
     (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
     (y z : Fin (succ-ℕ n)) → map-equiv f y ＝ z →
-    Id
-      ( map-equiv
-        ( permutation-list-transpositions
-          ( list-transpositions-permutation-Fin (succ-ℕ n) f))
-        ( y))
-      ( map-equiv f y)
+    map-equiv
+      ( permutation-list-transpositions
+        ( list-transpositions-permutation-Fin (succ-ℕ n) f))
+      ( y) ＝
+    map-equiv f y
   retraction-permutation-list-transpositions-Fin'
     zero-ℕ f (inr star) p (inr star) z q =
     inv p
@@ -192,7 +190,7 @@ abstract
         { inl x}
         ( neq-inr-inl)
     P :
-      Σ ( Permutation (succ-ℕ (succ-ℕ n)))
+      Σ ( permutation (succ-ℕ (succ-ℕ n)))
         ( λ g → map-equiv g (inr star) ＝ inr star)
     P =
       pair
@@ -203,9 +201,9 @@ abstract
             { inr star}
             { inl x}
             ( neq-inr-inl)))
-    F' : (Permutation (succ-ℕ n))
+    F' : permutation (succ-ℕ n)
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
-    lemma2 : (map-equiv (transposition t) (inl z)) ＝ (inl z)
+    lemma2 : map-equiv (transposition t) (inl z) ＝ inl z
     lemma2 =
       is-fixed-point-standard-transposition
         ( has-decidable-equality-Fin (succ-ℕ (succ-ℕ n)))
@@ -286,7 +284,7 @@ abstract
         { inl x}
         ( neq-inr-inl)
     P :
-      Σ ( Permutation (succ-ℕ (succ-ℕ n)))
+      Σ ( permutation (succ-ℕ (succ-ℕ n)))
         ( λ g → map-equiv g (inr star) ＝ inr star)
     P = pair
       ( transposition t ∘e f)
@@ -296,7 +294,7 @@ abstract
           { inr star}
           { inl x}
           ( neq-inr-inl))
-    F' : (Permutation (succ-ℕ n))
+    F' : permutation (succ-ℕ n)
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
     lemma :
       Id
@@ -361,7 +359,7 @@ abstract
         { inr star}
         { inl x}
         ( neq-inr-inl)
-    F' : (Permutation (succ-ℕ n))
+    F' : permutation (succ-ℕ n)
     F' =
       map-inv-equiv
         ( extend-equiv-Maybe (Fin-Set (succ-ℕ n)))
@@ -401,7 +399,7 @@ abstract
               n f' (map-equiv f' (inr star)) refl y (map-equiv f' y) refl)) ∙
           ( computation-inv-extend-equiv-Maybe (Fin-Set (succ-ℕ n)) f p y)))
     where
-    f' : (Permutation (succ-ℕ n))
+    f' : permutation (succ-ℕ n)
     f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
   retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inl y) (inr star) q =
@@ -431,11 +429,11 @@ abstract
           ( inr star)) ∙
         ( inv p))
     where
-    f' : (Permutation (succ-ℕ n))
+    f' : permutation (succ-ℕ n)
     f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
 
   retraction-permutation-list-transpositions-Fin :
-    (n : ℕ) (f : Permutation n) →
+    (n : ℕ) (f : permutation n) →
     htpy-equiv
       ( permutation-list-transpositions
         ( list-transpositions-permutation-Fin n f))
@@ -450,7 +448,7 @@ abstract
 permutation-list-standard-transpositions-Fin :
   (n : ℕ) →
   list (Σ (Fin n × Fin n) (λ (i , j) → i ≠ j)) →
-  Permutation n
+  permutation n
 permutation-list-standard-transpositions-Fin n =
   fold-list
     ( id-equiv)
@@ -458,7 +456,7 @@ permutation-list-standard-transpositions-Fin n =
       standard-transposition (has-decidable-equality-Fin n) neq ∘e p)
 
 list-standard-transpositions-permutation-Fin :
-  (n : ℕ) (f : Permutation n) →
+  (n : ℕ) (f : permutation n) →
   list (Σ (Fin n × Fin n) (λ (i , j) → i ≠ j))
 list-standard-transpositions-permutation-Fin n f =
   map-list
@@ -499,7 +497,7 @@ private
       htpy-permutation-list n l)
 
 retraction-permutation-list-standard-transpositions-Fin :
-  (n : ℕ) (f : Permutation n) →
+  (n : ℕ) (f : permutation n) →
   htpy-equiv
     ( permutation-list-standard-transpositions-Fin
       ( n)
@@ -511,7 +509,7 @@ retraction-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
   retraction-permutation-list-transpositions-Fin (succ-ℕ n) f
 
 eq-permutation-list-standard-transpositions-Fin :
-  (n : ℕ) (f : Permutation n) →
+  (n : ℕ) (f : permutation n) →
   permutation-list-standard-transpositions-Fin
     ( n)
     ( list-standard-transpositions-permutation-Fin n f) ＝

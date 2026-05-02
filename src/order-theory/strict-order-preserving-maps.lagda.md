@@ -164,11 +164,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Strictly-Preordered-Set l1 l2)
+  {l1 l2 : Level} (P : Strict-Preorder l1 l2)
   where
 
-  id-hom-Strictly-Preordered-Set : hom-Strictly-Preordered-Set P P
-  id-hom-Strictly-Preordered-Set = (λ x → x) , (λ x y H → H)
+  id-hom-Strict-Preorder : hom-Strict-Preorder P P
+  id-hom-Strict-Preorder = (λ x → x) , (λ x y H → H)
 ```
 
 ### The composition of strict order preserving maps preserves the strict ordering

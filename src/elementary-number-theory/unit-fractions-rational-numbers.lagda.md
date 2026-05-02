@@ -102,7 +102,7 @@ abstract
       ( inv-le-ℚ⁺
         ( one-ℚ⁺)
         ( positive-rational-ℕ⁺ two-ℕ⁺)
-        ( preserves-le-rational-ℕ {1} {2} _))
+        ( preserves-strict-order-rational-ℕ {1} {2} _))
 
   twice-one-half-ℚ : one-half-ℚ +ℚ one-half-ℚ ＝ one-ℚ
   twice-one-half-ℚ =
@@ -202,7 +202,7 @@ abstract opaque
       ( le-ℤ)
       ( left-unit-law-mul-ℤ (int-ℕ m))
       ( left-unit-law-mul-ℤ (int-ℕ n))
-      ( preserves-le-int-ℕ m n m<n)
+      ( preserves-strict-order-int-ℕ m n m<n)
 ```
 
 ### For every positive rational number, there is a smaller unit fraction
@@ -223,7 +223,7 @@ opaque
               ( group-mul-ℚ⁺)
               ( positive-rational-ℕ⁺ n⁺)
               ( q⁺)))
-          ( preserves-le-left-mul-ℚ⁺
+          ( preserves-strict-order-left-mul-ℚ⁺
             ( positive-reciprocal-rational-ℕ⁺ n⁺)
             ( one-ℚ)
             ( rational-ℚ⁺ (positive-rational-ℕ⁺ n⁺ *ℚ⁺ q⁺))

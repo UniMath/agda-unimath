@@ -22,6 +22,8 @@ open import foundation.universe-levels
 open import group-theory.commutative-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
+
+open import structured-types.magmas
 ```
 
 </details>
@@ -68,6 +70,10 @@ module _
 
   monoid-Commutative-Monoid : Monoid l
   monoid-Commutative-Monoid = pr1 M
+
+  unital-magma-Commutative-Monoid : Unital-Magma l
+  unital-magma-Commutative-Monoid =
+    unital-magma-Monoid monoid-Commutative-Monoid
 
   semigroup-Commutative-Monoid : Semigroup l
   semigroup-Commutative-Monoid = semigroup-Monoid monoid-Commutative-Monoid
@@ -123,7 +129,7 @@ module _
   commutative-mul-Commutative-Monoid = pr2 M
 
   interchange-mul-mul-Commutative-Monoid :
-    (x y x' y' : type-Commutative-Monoid) →
+    {x y x' y' : type-Commutative-Monoid} →
     ( mul-Commutative-Monoid
       ( mul-Commutative-Monoid x y)
       ( mul-Commutative-Monoid x' y')) ＝
@@ -135,7 +141,7 @@ module _
       commutative-semigroup-Commutative-Monoid
 
   right-swap-mul-Commutative-Monoid :
-    (x y z : type-Commutative-Monoid) →
+    {x y z : type-Commutative-Monoid} →
     mul-Commutative-Monoid (mul-Commutative-Monoid x y) z ＝
     mul-Commutative-Monoid (mul-Commutative-Monoid x z) y
   right-swap-mul-Commutative-Monoid =
@@ -143,7 +149,7 @@ module _
       commutative-semigroup-Commutative-Monoid
 
   left-swap-mul-Commutative-Monoid :
-    (x y z : type-Commutative-Monoid) →
+    {x y z : type-Commutative-Monoid} →
     mul-Commutative-Monoid x (mul-Commutative-Monoid y z) ＝
     mul-Commutative-Monoid y (mul-Commutative-Monoid x z)
   left-swap-mul-Commutative-Monoid =

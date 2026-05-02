@@ -273,7 +273,7 @@ module _
   where
 
   preserves-sum-permutation-fin-sequence-type-Semiring :
-    (n : ℕ) → (σ : Permutation n) →
+    (n : ℕ) → (σ : permutation n) →
     (f : fin-sequence-type-Semiring R n) →
     sum-fin-sequence-type-Semiring R n f ＝
     sum-fin-sequence-type-Semiring R n (f ∘ map-equiv σ)

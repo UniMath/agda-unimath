@@ -712,7 +712,7 @@ module _
                               ( λ m → le-ℕ m n)
                               ( j+i=n)
                               ( concatenate-le-leq-ℕ
-                                ( preserves-le-add-ℕ j<Nq i<Np)
+                                ( preserves-strict-order-add-ℕ j<Nq i<Np)
                                 ( Nq+Np≤n)))))
                       ( λ Nq≤j →
                         ap-mul-Commutative-Semiring R refl (Hq j Nq≤j) ∙
@@ -926,7 +926,7 @@ module _
                     ( (i , i<Np) , (j , j<Nq))) ,
                   is-equiv-is-invertible
                     ( λ ((i , i<Np) , (j , j<Nq)) →
-                      ( ( j +ℕ i , preserves-le-add-ℕ j<Nq i<Np) ,
+                      ( ( j +ℕ i , preserves-strict-order-add-ℕ j<Nq i<Np) ,
                         ( i , j , refl) ,
                         j<Nq ,
                         i<Np))

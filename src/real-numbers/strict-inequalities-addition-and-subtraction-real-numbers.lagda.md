@@ -60,8 +60,8 @@ module _
   abstract opaque
     unfolding add-ℝ le-ℝ
 
-    preserves-le-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
-    preserves-le-right-add-ℝ x<y =
+    preserves-strict-order-right-add-ℝ : le-ℝ x y → le-ℝ (x +ℝ z) (y +ℝ z)
+    preserves-strict-order-right-add-ℝ x<y =
       let
         open
           do-syntax-trunc-Prop
@@ -86,7 +86,7 @@ module _
                         ( λ t → (p -ℚ q) +ℚ (r +ℚ t))
                         ( inv (distributive-neg-diff-ℚ p q))
                   ＝ r by is-identity-right-conjugation-add-ℚ (p -ℚ q) r)
-              ( preserves-le-right-add-ℚ (p -ℚ q) s (r +ℚ (q -ℚ p)) s<r+q-p)
+              ( preserves-strict-order-right-add-ℚ (p -ℚ q) s (r +ℚ (q -ℚ p)) s<r+q-p)
         intro-exists
           ( p +ℚ s)
           ( intro-exists (p , s) (x<p , z<s , refl) ,
@@ -103,25 +103,25 @@ module _
                           ( inv (is-identity-right-conjugation-add-ℚ q p))
                     ＝ q +ℚ ((p -ℚ q) +ℚ s) by associative-add-ℚ _ _ _)))
 
-    preserves-le-left-add-ℝ : le-ℝ x y → le-ℝ (z +ℝ x) (z +ℝ y)
-    preserves-le-left-add-ℝ x<y =
+    preserves-strict-order-left-add-ℝ : le-ℝ x y → le-ℝ (z +ℝ x) (z +ℝ y)
+    preserves-strict-order-left-add-ℝ x<y =
       binary-tr
         ( le-ℝ)
         ( commutative-add-ℝ x z)
         ( commutative-add-ℝ y z)
-        ( preserves-le-right-add-ℝ x<y)
+        ( preserves-strict-order-right-add-ℝ x<y)
 
 abstract
-  preserves-le-diff-ℝ :
+  preserves-strict-order-diff-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     le-ℝ x y → le-ℝ (x -ℝ z) (y -ℝ z)
-  preserves-le-diff-ℝ z = preserves-le-right-add-ℝ (neg-ℝ z)
+  preserves-strict-order-diff-ℝ z = preserves-strict-order-right-add-ℝ (neg-ℝ z)
 
   reverses-le-diff-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     le-ℝ x y → le-ℝ (z -ℝ y) (z -ℝ x)
   reverses-le-diff-ℝ z x y x<y =
-    preserves-le-left-add-ℝ z _ _ (neg-le-ℝ x<y)
+    preserves-strict-order-left-add-ℝ z _ _ (neg-le-ℝ x<y)
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
@@ -130,10 +130,10 @@ module _
   abstract
     reflects-le-right-add-ℝ : le-ℝ (x +ℝ z) (y +ℝ z) → le-ℝ x y
     reflects-le-right-add-ℝ x+z<y+z =
-      preserves-le-sim-ℝ
+      preserves-strict-order-sim-ℝ
         ( cancel-right-add-diff-ℝ x z)
         ( cancel-right-add-diff-ℝ y z)
-        ( preserves-le-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
+        ( preserves-strict-order-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z<y+z)
 
     reflects-le-left-add-ℝ : le-ℝ (z +ℝ x) (z +ℝ y) → le-ℝ x y
     reflects-le-left-add-ℝ z+x<z+y =
@@ -149,24 +149,24 @@ module _
   where
 
   iff-translate-right-le-ℝ : le-ℝ x y ↔ le-ℝ (x +ℝ z) (y +ℝ z)
-  pr1 iff-translate-right-le-ℝ = preserves-le-right-add-ℝ z x y
+  pr1 iff-translate-right-le-ℝ = preserves-strict-order-right-add-ℝ z x y
   pr2 iff-translate-right-le-ℝ = reflects-le-right-add-ℝ z x y
 
   iff-translate-left-le-ℝ : le-ℝ x y ↔ le-ℝ (z +ℝ x) (z +ℝ y)
-  pr1 iff-translate-left-le-ℝ = preserves-le-left-add-ℝ z x y
+  pr1 iff-translate-left-le-ℝ = preserves-strict-order-left-add-ℝ z x y
   pr2 iff-translate-left-le-ℝ = reflects-le-left-add-ℝ z x y
 
 abstract
-  preserves-le-add-ℝ :
+  preserves-strict-order-add-ℝ :
     {l1 l2 l3 l4 : Level} {a : ℝ l1} {b : ℝ l2} {c : ℝ l3} {d : ℝ l4} →
     le-ℝ a b → le-ℝ c d → le-ℝ (a +ℝ c) (b +ℝ d)
-  preserves-le-add-ℝ {a = a} {b = b} {c = c} {d = d} a≤b c≤d =
+  preserves-strict-order-add-ℝ {a = a} {b = b} {c = c} {d = d} a≤b c≤d =
     transitive-le-ℝ
       ( a +ℝ c)
       ( a +ℝ d)
       ( b +ℝ d)
-      ( preserves-le-right-add-ℝ d a b a≤b)
-      ( preserves-le-left-add-ℝ a c d c≤d)
+      ( preserves-strict-order-right-add-ℝ d a b a≤b)
+      ( preserves-strict-order-left-add-ℝ a c d c≤d)
 ```
 
 ### `x + y < z` if and only if `x < z - y`
@@ -179,12 +179,12 @@ module _
   abstract
     le-transpose-left-add-ℝ : le-ℝ (x +ℝ y) z → le-ℝ x (z -ℝ y)
     le-transpose-left-add-ℝ x+y<z =
-      preserves-le-left-sim-ℝ
+      preserves-strict-order-left-sim-ℝ
         ( z -ℝ y)
         ( (x +ℝ y) -ℝ y)
         ( x)
         ( cancel-right-add-diff-ℝ x y)
-        ( preserves-le-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
+        ( preserves-strict-order-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y<z)
 
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
@@ -203,12 +203,12 @@ module _
   abstract
     le-transpose-right-diff-ℝ : le-ℝ x (y -ℝ z) → le-ℝ (x +ℝ z) y
     le-transpose-right-diff-ℝ x<y-z =
-      preserves-le-right-sim-ℝ
+      preserves-strict-order-right-sim-ℝ
         ( x +ℝ z)
         ( (y -ℝ z) +ℝ z)
         ( y)
         ( cancel-right-diff-add-ℝ y z)
-        ( preserves-le-right-add-ℝ z x (y -ℝ z) x<y-z)
+        ( preserves-strict-order-right-add-ℝ z x (y -ℝ z) x<y-z)
 
     le-transpose-right-diff-ℝ' : le-ℝ x (y -ℝ z) → le-ℝ (z +ℝ x) y
     le-transpose-right-diff-ℝ' x<y-z =
@@ -277,12 +277,12 @@ module _
       in do
         (q , 0<q , q<y-x) ←
           dense-rational-le-ℝ zero-ℝ (y -ℝ x)
-            ( preserves-le-left-sim-ℝ
+            ( preserves-strict-order-left-sim-ℝ
               ( y -ℝ x)
               ( x -ℝ x)
               ( zero-ℝ)
               ( right-inverse-law-add-ℝ x)
-              ( preserves-le-right-add-ℝ (neg-ℝ x) x y x<y))
+              ( preserves-strict-order-right-add-ℝ (neg-ℝ x) x y x<y))
         intro-exists
           ( q , is-positive-le-zero-ℚ (reflects-le-real-ℚ 0<q))
           ( le-transpose-right-diff-ℝ' _ _ _ q<y-x)

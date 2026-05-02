@@ -10,9 +10,11 @@ module lists.finite-sequences where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-truncated-types
+open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -23,6 +25,8 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.elementhood-relation-lists
+open import lists.lists
 open import lists.sequences
 
 open import univalent-combinatorics.involution-standard-finite-types
@@ -96,6 +100,19 @@ module _
     (n : ℕ) (x : A) (v : fin-sequence A n) (I : in-fin-sequence n x v) →
     x ＝ v (index-in-fin-sequence n x v I)
   eq-component-fin-sequence-index-in-fin-sequence n x v I = pr2 I
+```
+
+### The finite sequence associated to a list
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  fin-sequence-list : (l : list A) → fin-sequence A (length-list l)
+  fin-sequence-list nil = ex-falso
+  fin-sequence-list (cons x l) (inl y) = fin-sequence-list l y
+  fin-sequence-list (cons x l) (inr star) = x
 ```
 
 ## Properties
@@ -197,6 +214,40 @@ module _
     (n : ℕ) → fin-sequence-sequence u n ~ fin-sequence-sequence v n
   htpy-fin-sequence-sequence n i = H (nat-Fin n i)
 ```
+
+### The finite sequence associated to a list fits in a commuting triangle with the type of elements
+
+There is a commuting triangle
+
+```text
+                           ≃
+          Fin (length l) ----> element l
+                        \     /
+     fin-sequence-list l \   / pr1
+                          ∨ ∨
+                           X,
+```
+
+where the top equivalence is the counting of the type of elements of `l`
+
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  triangle-compute-element-list :
+    (l : list A) →
+    coherence-triangle-maps
+      ( fin-sequence-list l)
+      ( element-element-list l)
+      ( map-compute-element-list l)
+  triangle-compute-element-list (cons x l) (inl i) =
+    triangle-compute-element-list l i
+  triangle-compute-element-list (cons x l) (inr star) =
+    refl
+```
+
 
 ## See also
 

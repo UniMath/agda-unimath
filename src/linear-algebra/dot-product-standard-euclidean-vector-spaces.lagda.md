@@ -192,9 +192,9 @@ abstract
             ( htpy-sum-fin-sequence-ℝ n (λ i → (inv (square-abs-ℝ (v i)))))
       ≤ real-sum-fin-sequence-ℝ⁰⁺ n (λ i → nonnegative-square-ℝ (real-ℝ⁰⁺ ε))
         by
-          preserves-leq-sum-fin-sequence-ℝ⁰⁺ n _ _
+          preserves-order-sum-fin-sequence-ℝ⁰⁺ n _ _
             ( λ i →
-              preserves-leq-square-ℝ⁰⁺
+              preserves-order-square-ℝ⁰⁺
                 ( nonnegative-abs-ℝ (v i))
                 ( ε)
                 ( |vᵢ|≤ε i))
@@ -227,7 +227,7 @@ abstract
       ( leq-ℝ)
       ( inv (eq-abs-sqrt-square-ℝ (v i)))
       ( refl)
-      ( preserves-leq-sqrt-ℝ⁰⁺
+      ( preserves-order-sqrt-ℝ⁰⁺
         ( nonnegative-square-ℝ (v i))
         ( nonnegative-diagonal-dot-product-ℝ-Fin v)
         ( leq-square-diagonal-dot-product-ℝ-Fin v i))

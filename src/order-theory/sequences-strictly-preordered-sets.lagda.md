@@ -19,7 +19,7 @@ open import order-theory.strictly-preordered-sets
 ## Idea
 
 A
-{{#concept "sequence" Disambiguation="in a strictly preordered set" Agda=type-sequence-Strictly-Preordered-Set}}
+{{#concept "sequence" Disambiguation="in a strictly preordered set" Agda=type-sequence-Strict-Preorder}}
 in a [strictly preordered set](order-theory.strictly-preordered-sets.md) is a
 [sequence](lists.sequences.md) in its underlying type.
 
@@ -29,10 +29,10 @@ in a [strictly preordered set](order-theory.strictly-preordered-sets.md) is a
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Strictly-Preordered-Set l1 l2)
+  {l1 l2 : Level} (A : Strict-Preorder l1 l2)
   where
 
-  type-sequence-Strictly-Preordered-Set : UU l1
-  type-sequence-Strictly-Preordered-Set =
-    sequence (type-Strictly-Preordered-Set A)
+  type-sequence-Strict-Preorder : UU l1
+  type-sequence-Strict-Preorder =
+    sequence (type-Strict-Preorder A)
 ```

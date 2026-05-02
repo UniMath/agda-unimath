@@ -207,14 +207,14 @@ abstract
 ### Addition does not reflect inequality of truncation levels
 
 ```agda
-example-not-reflects-leq-left-truncadd-𝕋 :
+example-not-reflects-order-left-truncadd-𝕋 :
   (truncadd-𝕋 neg-one-𝕋 neg-two-𝕋) ≤-𝕋 (truncadd-𝕋 neg-two-𝕋 neg-two-𝕋) ×
   ¬ (neg-one-𝕋 ≤-𝕋 neg-two-𝕋)
-example-not-reflects-leq-left-truncadd-𝕋 = (star , id)
+example-not-reflects-order-left-truncadd-𝕋 = (star , id)
 
-not-reflects-leq-left-truncadd-𝕋 :
+not-reflects-order-left-truncadd-𝕋 :
   ¬ ((k m n : 𝕋) → (truncadd-𝕋 m k) ≤-𝕋 (truncadd-𝕋 n k) → m ≤-𝕋 n)
-not-reflects-leq-left-truncadd-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
+not-reflects-order-left-truncadd-𝕋 α = α neg-two-𝕋 neg-one-𝕋 neg-two-𝕋 star
 ```
 
 ## See also

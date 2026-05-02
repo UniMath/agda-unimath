@@ -342,6 +342,25 @@ abstract
       associative-add-ℤ
 ```
 
+### Swapping the order of iterated addition
+
+```agda
+abstract
+  right-swap-add-ℤ :
+    (x y z : ℤ) → (x +ℤ y) +ℤ z ＝ (x +ℤ z) +ℤ y
+  right-swap-add-ℤ x y z =
+    associative-add-ℤ x y z ∙
+    ap (x +ℤ_) (commutative-add-ℤ y z) ∙
+    inv (associative-add-ℤ x z y)
+
+  left-swap-add-ℤ :
+    (x y z : ℤ) → x +ℤ (y +ℤ z) ＝ y +ℤ (x +ℤ z)
+  left-swap-add-ℤ x y z =
+    inv (associative-add-ℤ x y z) ∙
+    ap (_+ℤ z) (commutative-add-ℤ x y) ∙
+    associative-add-ℤ y x z
+```
+
 ### Addition by `x` is a binary equivalence
 
 ```agda
@@ -569,19 +588,6 @@ abstract
     (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
   is-zero-right-add-ℤ x y H =
     is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
-```
-
-### Swapping laws
-
-```agda
-abstract
-  right-swap-add-ℤ : (x y z : ℤ) → (x +ℤ y) +ℤ z ＝ (x +ℤ z) +ℤ y
-  right-swap-add-ℤ x y z =
-    equational-reasoning
-      (x +ℤ y) +ℤ z
-      ＝ x +ℤ (y +ℤ z) by associative-add-ℤ x y z
-      ＝ x +ℤ (z +ℤ y) by ap (x +ℤ_) (commutative-add-ℤ y z)
-      ＝ (x +ℤ z) +ℤ y by inv (associative-add-ℤ x z y)
 ```
 
 ## See also

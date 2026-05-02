@@ -215,11 +215,11 @@ module _
           ( common-difference-arithmetic-sequence-ℚ⁺ u))
 
     is-strictly-increasing-seq-arithmetic-sequence-ℚ⁺ :
-      is-strictly-increasing-sequence-Strictly-Preordered-Set
+      is-strictly-increasing-sequence-Strict-Preorder
         ( strictly-preordered-set-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
     is-strictly-increasing-seq-arithmetic-sequence-ℚ⁺ =
-      is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+      is-strictly-increasing-le-succ-sequence-Strict-Preorder
         ( strictly-preordered-set-ℚ⁺)
         ( seq-arithmetic-sequence-ℚ⁺ u)
         ( le-succ-seq-arithmetic-sequence-ℚ⁺)

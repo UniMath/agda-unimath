@@ -70,5 +70,5 @@ opaque
       ( ap neg-ℚ (right-negative-law-mul-ℚ r p) ∙ neg-neg-ℚ _)
       ( ap neg-ℚ (right-negative-law-mul-ℚ q p) ∙ neg-neg-ℚ _)
       ( neg-leq-ℚ
-        ( preserves-leq-right-mul-ℚ⁰⁺ (neg-ℚ p , nonpos-p) q r q≤r))
+        ( preserves-order-right-mul-ℚ⁰⁺ (neg-ℚ p , nonpos-p) q r q≤r))
 ```

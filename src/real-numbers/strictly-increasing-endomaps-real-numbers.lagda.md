@@ -95,11 +95,11 @@ module _
   where
 
   abstract
-    reflects-leq-is-strictly-increasing-endomap-ℝ :
+    reflects-order-is-strictly-increasing-endomap-ℝ :
       (x y : ℝ l1) →
       leq-ℝ (f x) (f y) →
       leq-ℝ x y
-    reflects-leq-is-strictly-increasing-endomap-ℝ x y fx≤fy =
+    reflects-order-is-strictly-increasing-endomap-ℝ x y fx≤fy =
       leq-not-le-ℝ y x
         ( λ x<y → not-le-leq-ℝ _ _ fx≤fy (H y x x<y))
 ```
@@ -117,13 +117,13 @@ module _
     is-injective-is-strictly-increasing-endomap-ℝ : is-injective f
     is-injective-is-strictly-increasing-endomap-ℝ {a} {b} fa=fb =
       antisymmetric-leq-ℝ a b
-        ( reflects-leq-is-strictly-increasing-endomap-ℝ
+        ( reflects-order-is-strictly-increasing-endomap-ℝ
           ( f)
           ( H)
           ( a)
           ( b)
           ( leq-eq-ℝ fa=fb))
-        ( reflects-leq-is-strictly-increasing-endomap-ℝ
+        ( reflects-order-is-strictly-increasing-endomap-ℝ
           ( f)
           ( H)
           ( b)

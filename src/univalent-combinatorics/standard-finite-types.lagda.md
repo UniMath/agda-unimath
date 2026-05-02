@@ -252,8 +252,8 @@ strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
     ( nat-Fin k x)
     ( k)
     ( succ-ℕ k)
-    ( strict-upper-bound-nat-Fin k x)
     ( succ-le-ℕ k)
+    ( strict-upper-bound-nat-Fin k x)
 strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
   succ-le-ℕ k
 
@@ -261,7 +261,7 @@ upper-bound-nat-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin (succ-ℕ k) x) k
 upper-bound-nat-Fin zero-ℕ (inr star) = star
 upper-bound-nat-Fin (succ-ℕ k) (inl x) =
-  preserves-leq-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
+  preserves-order-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
 upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 
 upper-bound-nat-Fin' :
@@ -273,7 +273,7 @@ is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-nat-Fin k p)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inr star} p =
-  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k x) p)
+  ex-falso (neq-le-ℕ  (strict-upper-bound-nat-Fin k x) p)
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
   ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k y) (inv p))
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
@@ -540,3 +540,6 @@ is-inhabited-or-empty-Fin n =
 
 - [Classical finite types](univalent-combinatorics.classical-finite-types.md),
   the set of natural numbers less than `n`
+- [The bounded natural numbers](elementary-number-theory.bounded-natural-numbers.md)
+- [The strictly bounded natural numbers](elementary-number-theory.strictly-bounded-natural-numbers.md)
+- [Modular arithmetic on the standard finite types](elementary-number-theory.modular-arithmetic-standard-finite-types.md)

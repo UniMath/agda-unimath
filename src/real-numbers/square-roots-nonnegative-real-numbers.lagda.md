@@ -211,7 +211,7 @@ module _
               ( is-positive-le-ℚ⁰⁺ (q , is-nonneg-q) q<r)
         le-lower-cut-ℝ
           ( real-ℝ⁰⁺ x)
-          ( preserves-le-square-ℚ⁰⁺ (q , is-nonneg-q) (r , is-nonneg-r) q<r)
+          ( preserves-strict-order-square-ℚ⁰⁺ (q , is-nonneg-q) (r , is-nonneg-r) q<r)
           ( r<√x is-nonneg-r)
 
     backward-implication-is-rounded-upper-cut-sqrt-ℝ⁰⁺ :
@@ -225,7 +225,7 @@ module _
         ( is-pos-r ,
           le-upper-cut-ℝ
             ( real-ℝ⁰⁺ x)
-            ( preserves-le-square-ℚ⁰⁺
+            ( preserves-strict-order-square-ℚ⁰⁺
               ( q , is-nonnegative-is-positive-ℚ is-pos-q)
               ( r , is-nonnegative-is-positive-ℚ is-pos-r)
               q<r)
@@ -272,7 +272,7 @@ module _
             ( λ x<q² → (is-positive-le-ℚ⁰⁺ (p , is-nonneg-p) p<q , x<q²))
             ( is-located-lower-upper-cut-ℝ
               ( real-ℝ⁰⁺ x)
-              ( preserves-le-square-ℚ⁰⁺
+              ( preserves-strict-order-square-ℚ⁰⁺
                 ( p , is-nonneg-p)
                 ( q , is-nonnegative-le-ℚ⁰⁺ (p , is-nonneg-p) q p<q)
                 ( p<q))))
@@ -513,10 +513,10 @@ abstract opaque
             ( leq-min-leq-both-ℚ (q *ℚ q) _ _
             ( leq-min-leq-both-ℚ _ _ _
                 ( refl-leq-ℚ _)
-                ( preserves-leq-left-mul-ℚ⁰⁺ q⁰⁺ q r q≤r))
+                ( preserves-order-left-mul-ℚ⁰⁺ q⁰⁺ q r q≤r))
               ( leq-min-leq-both-ℚ _ _ _
-                ( preserves-leq-right-mul-ℚ⁰⁺ q⁰⁺ q r q≤r)
-                ( preserves-leq-mul-ℚ⁰⁺ q⁰⁺ r⁰⁺ q⁰⁺ r⁰⁺ q≤r q≤r)))))
+                ( preserves-order-right-mul-ℚ⁰⁺ q⁰⁺ q r q≤r)
+                ( preserves-order-mul-ℚ⁰⁺ q⁰⁺ r⁰⁺ q⁰⁺ r⁰⁺ q≤r q≤r)))))
 
   leq-unique-sqrt-ℝ⁰⁺' :
     {l1 l2 : Level} → (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
@@ -707,11 +707,11 @@ is-positive-sqrt-iff-is-positive-ℝ⁰⁺ x =
 
 ```agda
 abstract
-  preserves-leq-sqrt-ℝ⁰⁺ :
+  preserves-order-sqrt-ℝ⁰⁺ :
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) (sqrt-ℝ⁰⁺ y)
-  preserves-leq-sqrt-ℝ⁰⁺ x y x≤y =
-    reflects-leq-square-ℝ⁰⁺
+  preserves-order-sqrt-ℝ⁰⁺ x y x≤y =
+    reflects-order-square-ℝ⁰⁺
       ( sqrt-ℝ⁰⁺ x)
       ( sqrt-ℝ⁰⁺ y)
       ( binary-tr
@@ -741,7 +741,7 @@ abstract
       ( leq-ℝ)
       ( eq-real-square-sqrt-ℝ⁰⁺ x⁰⁺)
       ( left-unit-law-mul-ℝ one-ℝ)
-      ( preserves-leq-square-ℝ⁰⁺
+      ( preserves-order-square-ℝ⁰⁺
         ( sqrt-ℝ⁰⁺ x⁰⁺)
         ( one-ℝ⁰⁺)
         ( √x≤1))
@@ -757,14 +757,14 @@ abstract
     tr
       ( leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x⁰⁺))
       ( is-retraction-square-ℝ⁰⁺ x⁰⁺)
-      ( preserves-leq-sqrt-ℝ⁰⁺
+      ( preserves-order-sqrt-ℝ⁰⁺
         ( x⁰⁺)
         ( nonnegative-square-ℝ x)
         ( binary-tr
           ( leq-ℝ)
           ( right-unit-law-mul-ℝ x)
           ( refl)
-          ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ 1≤x)))
+          ( preserves-order-left-mul-ℝ⁰⁺ x⁰⁺ 1≤x)))
 ```
 
 ## See also

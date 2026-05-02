@@ -224,38 +224,38 @@ module _
 opaque
   unfolding is-positive-ℚ le-ℚ-Prop mul-ℚ
 
-  preserves-le-left-mul-ℚ⁺ :
+  preserves-strict-order-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
     le-ℚ q r →
     le-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-  preserves-le-left-mul-ℚ⁺
+  preserves-strict-order-left-mul-ℚ⁺
     p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
     q@((q-num , q-denom , _) , _)
     r@((r-num , r-denom , _) , _)
     q<r =
-      preserves-le-rational-fraction-ℤ
+      preserves-strict-order-rational-fraction-ℤ
         ( mul-fraction-ℤ p (fraction-ℚ q))
         ( mul-fraction-ℤ p (fraction-ℚ r))
         ( binary-tr
           ( le-ℤ)
           ( interchange-law-mul-mul-ℤ _ _ _ _)
           ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( preserves-le-right-mul-positive-ℤ
+          ( preserves-strict-order-right-mul-positive-ℤ
             ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos))
             ( q-num *ℤ r-denom)
             ( r-num *ℤ q-denom)
             ( q<r)))
 
-  preserves-le-right-mul-ℚ⁺ :
+  preserves-strict-order-right-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) →
     le-ℚ q r →
     le-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-  preserves-le-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
+  preserves-strict-order-right-mul-ℚ⁺ p⁺@(p , _) q r q<r =
     binary-tr
       ( le-ℚ)
       ( commutative-mul-ℚ p q)
       ( commutative-mul-ℚ p r)
-      ( preserves-le-left-mul-ℚ⁺ p⁺ q r q<r)
+      ( preserves-strict-order-left-mul-ℚ⁺ p⁺ q r q<r)
 ```
 
 ### Multiplication by a positive rational number preserves inequality
@@ -264,22 +264,22 @@ opaque
 opaque
   unfolding is-positive-ℚ leq-ℚ-Prop mul-ℚ
 
-  preserves-leq-left-mul-ℚ⁺ :
+  preserves-order-left-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (rational-ℚ⁺ p *ℚ q) (rational-ℚ⁺ p *ℚ r)
-  preserves-leq-left-mul-ℚ⁺
+  preserves-order-left-mul-ℚ⁺
     p⁺@((p@(p-num , p-denom , p-denom-pos) , _) , p-num-pos)
     q@((q-num , q-denom , _) , _)
     r@((r-num , r-denom , _) , _)
     q≤r =
-      preserves-leq-rational-fraction-ℤ
+      preserves-order-rational-fraction-ℤ
         ( mul-fraction-ℤ p (fraction-ℚ q))
         ( mul-fraction-ℤ p (fraction-ℚ r))
         ( binary-tr
           ( leq-ℤ)
           ( interchange-law-mul-mul-ℤ _ _ _ _)
           ( interchange-law-mul-mul-ℤ _ _ _ _)
-          ( preserves-leq-right-mul-nonnegative-ℤ
+          ( preserves-order-right-mul-nonnegative-ℤ
             ( nonnegative-positive-ℤ
               ( mul-positive-ℤ (p-num , p-num-pos) (p-denom , p-denom-pos)))
             ( q-num *ℤ r-denom)
@@ -287,15 +287,15 @@ opaque
             ( q≤r)))
 
 abstract
-  preserves-leq-right-mul-ℚ⁺ :
+  preserves-order-right-mul-ℚ⁺ :
     (p : ℚ⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (q *ℚ rational-ℚ⁺ p) (r *ℚ rational-ℚ⁺ p)
-  preserves-leq-right-mul-ℚ⁺ p q r q≤r =
+  preserves-order-right-mul-ℚ⁺ p q r q≤r =
     binary-tr
       ( leq-ℚ)
       ( commutative-mul-ℚ (rational-ℚ⁺ p) q)
       ( commutative-mul-ℚ (rational-ℚ⁺ p) r)
-      ( preserves-leq-left-mul-ℚ⁺ p q r q≤r)
+      ( preserves-order-left-mul-ℚ⁺ p q r q≤r)
 ```
 
 ### `2q = q + q`
@@ -316,7 +316,7 @@ abstract
     tr
       ( le-ℚ⁺ ( p *ℚ⁺ q))
       ( left-unit-law-mul-ℚ⁺ q)
-      ( preserves-le-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
+      ( preserves-strict-order-right-mul-ℚ⁺ q (rational-ℚ⁺ p) one-ℚ p<1)
 
   le-right-mul-less-than-one-ℚ⁺ :
     (p : ℚ⁺) → le-ℚ⁺ p one-ℚ⁺ → (q : ℚ⁺) → le-ℚ⁺ (q *ℚ⁺ p) q
@@ -337,7 +337,7 @@ abstract
     tr
       ( λ r → le-ℚ⁺ r (p *ℚ⁺ q))
       ( left-unit-law-mul-ℚ⁺ q)
-      ( preserves-le-right-mul-ℚ⁺ q one-ℚ (rational-ℚ⁺ p) 1<p)
+      ( preserves-strict-order-right-mul-ℚ⁺ q one-ℚ (rational-ℚ⁺ p) 1<p)
 
   le-right-mul-greater-than-one-ℚ⁺ :
     (p : ℚ⁺) → le-ℚ⁺ one-ℚ⁺ p → (q : ℚ⁺) → le-ℚ⁺ q (q *ℚ⁺ p)

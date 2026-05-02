@@ -176,14 +176,14 @@ module _
   (A' : subset-Semigroup l4 G)
   where
 
-  preserves-leq-left-minkowski-mul-Semigroup :
+  preserves-order-left-minkowski-mul-Semigroup :
     A ⊆ A' → minkowski-mul-Semigroup G A B ⊆ minkowski-mul-Semigroup G A' B
-  preserves-leq-left-minkowski-mul-Semigroup A⊆A' x =
+  preserves-order-left-minkowski-mul-Semigroup A⊆A' x =
     map-tot-exists (λ (a , b) → map-product (A⊆A' a) id)
 
-  preserves-leq-right-minkowski-mul-Semigroup :
+  preserves-order-right-minkowski-mul-Semigroup :
     A ⊆ A' → minkowski-mul-Semigroup G B A ⊆ minkowski-mul-Semigroup G B A'
-  preserves-leq-right-minkowski-mul-Semigroup A⊆A' x =
+  preserves-order-right-minkowski-mul-Semigroup A⊆A' x =
     map-tot-exists (λ (b , a) → map-product id (map-product (A⊆A' a) id))
 ```
 
@@ -202,17 +202,17 @@ module _
     sim-subtype A A' →
     sim-subtype (minkowski-mul-Semigroup G A B) (minkowski-mul-Semigroup G A' B)
   pr1 (preserves-sim-left-minkowski-mul-Semigroup (A⊆A' , _)) =
-    preserves-leq-left-minkowski-mul-Semigroup G B A A' A⊆A'
+    preserves-order-left-minkowski-mul-Semigroup G B A A' A⊆A'
   pr2 (preserves-sim-left-minkowski-mul-Semigroup (_ , A'⊆A)) =
-    preserves-leq-left-minkowski-mul-Semigroup G B A' A A'⊆A
+    preserves-order-left-minkowski-mul-Semigroup G B A' A A'⊆A
 
   preserves-sim-right-minkowski-mul-Semigroup :
     sim-subtype A A' →
     sim-subtype (minkowski-mul-Semigroup G B A) (minkowski-mul-Semigroup G B A')
   pr1 (preserves-sim-right-minkowski-mul-Semigroup (A⊆A' , _)) =
-    preserves-leq-right-minkowski-mul-Semigroup G B A A' A⊆A'
+    preserves-order-right-minkowski-mul-Semigroup G B A A' A⊆A'
   pr2 (preserves-sim-right-minkowski-mul-Semigroup (_ , A'⊆A)) =
-    preserves-leq-right-minkowski-mul-Semigroup G B A' A A'⊆A
+    preserves-order-right-minkowski-mul-Semigroup G B A' A A'⊆A
 
 module _
   {l1 l2 l3 l4 l5 : Level}

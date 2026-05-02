@@ -133,7 +133,7 @@ abstract
           ( not-leq-le-ℚ
             ( a *ℚ c)
             ( a *ℚ d)
-            ( preserves-le-left-mul-ℚ⁺ (a , is-pos-a) c d c<d)
+            ( preserves-strict-order-left-mul-ℚ⁺ (a , is-pos-a) c d c<d)
             ( tr
               ( λ q → leq-ℚ q (a *ℚ c))
               ( min=ad)
@@ -211,7 +211,7 @@ abstract
           ( not-leq-le-ℚ
             ( a *ℚ c)
             ( b *ℚ c)
-            ( preserves-le-right-mul-ℚ⁺ (c , is-pos-c) a b a<b)
+            ( preserves-strict-order-right-mul-ℚ⁺ (c , is-pos-c) a b a<b)
             ( tr
               ( λ q → leq-ℚ q (a *ℚ c))
               ( min=bc)
@@ -237,7 +237,7 @@ abstract
           ( not-leq-le-ℚ
             ( b *ℚ c)
             ( b *ℚ d)
-            ( preserves-le-left-mul-ℚ⁺ (b , is-pos-b) c d c<d)
+            ( preserves-strict-order-left-mul-ℚ⁺ (b , is-pos-b) c d c<d)
             ( tr
               ( λ q → leq-ℚ q (b *ℚ c))
               ( min=bd)
@@ -263,7 +263,7 @@ abstract
           ( not-leq-le-ℚ
             ( a *ℚ d)
             ( b *ℚ d)
-            ( preserves-le-right-mul-ℚ⁺ (d , is-pos-d) a b a<b)
+            ( preserves-strict-order-right-mul-ℚ⁺ (d , is-pos-d) a b a<b)
             ( tr
               ( λ q → leq-ℚ q (a *ℚ d))
               ( min=bd)
@@ -367,7 +367,7 @@ abstract
                         ( min)
                         ( a *ℚ c)
                         ( a *ℚ c')
-                        ( preserves-leq-left-mul-ℚ⁰⁺
+                        ( preserves-order-left-mul-ℚ⁰⁺
                           ( a , is-nonneg-a)
                           ( c)
                           ( c')
@@ -376,7 +376,7 @@ abstract
                       ( inv-tr
                         ( le-ℚ (a *ℚ c'))
                         ( min'=a'c')
-                        ( preserves-le-right-mul-ℚ⁺
+                        ( preserves-strict-order-right-mul-ℚ⁺
                           ( c' , is-positive-le-ℚ⁰⁺ (c , is-nonneg-c) c<c')
                           ( a)
                           ( a')
@@ -417,7 +417,7 @@ abstract
                 ( inv-tr
                   ( leq-ℚ (a *ℚ d'))
                   ( min'=a'd')
-                  ( preserves-leq-right-mul-ℚ⁰⁺
+                  ( preserves-order-right-mul-ℚ⁰⁺
                     ( d' , is-nonneg-d')
                     ( a)
                     ( a')
@@ -454,7 +454,7 @@ abstract
               ( inv-tr
                 ( leq-ℚ (b' *ℚ c))
                 ( min'=b'c')
-                ( preserves-leq-left-mul-ℚ⁰⁺
+                ( preserves-order-left-mul-ℚ⁰⁺
                   ( b' , is-nonneg-b')
                   ( c)
                   ( c')

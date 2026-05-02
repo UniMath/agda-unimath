@@ -25,6 +25,8 @@ open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
 
 open import ring-theory.semirings
+
+open import structured-types.morphisms-unital-magmas
 ```
 
 </details>
@@ -132,21 +134,32 @@ module _
         ( additive-commutative-monoid-Semiring S)
         ( hom-additive-commutative-monoid-hom-Semiring)
 
+    hom-additive-unital-magma-hom-Semiring :
+      hom-Unital-Magma
+        ( additive-unital-magma-Semiring R)
+        ( additive-unital-magma-Semiring S)
+    pr1 hom-additive-unital-magma-hom-Semiring =
+      map-hom-Semiring
+    pr1 (pr2 hom-additive-unital-magma-hom-Semiring) =
+      preserves-addition-hom-Semiring
+    pr2 (pr2 hom-additive-unital-magma-hom-Semiring) =
+      preserves-zero-hom-Semiring
+
     preserves-mul-hom-Semiring :
       {x y : type-Semiring R} →
       map-hom-Semiring (mul-Semiring R x y) ＝
       mul-Semiring S (map-hom-Semiring x) (map-hom-Semiring y)
     preserves-mul-hom-Semiring = pr1 (pr2 f)
 
-    preserves-unit-hom-Semiring :
+    preserves-one-hom-Semiring :
       map-hom-Semiring (one-Semiring R) ＝ one-Semiring S
-    preserves-unit-hom-Semiring = pr2 (pr2 f)
+    preserves-one-hom-Semiring = pr2 (pr2 f)
 
     is-homomorphism-semiring-hom-Semiring :
       is-homomorphism-semiring-hom-Commutative-Monoid
         ( hom-additive-commutative-monoid-hom-Semiring)
     pr1 is-homomorphism-semiring-hom-Semiring = preserves-mul-hom-Semiring
-    pr2 is-homomorphism-semiring-hom-Semiring = preserves-unit-hom-Semiring
+    pr2 is-homomorphism-semiring-hom-Semiring = preserves-one-hom-Semiring
 
     hom-multiplicative-monoid-hom-Semiring :
       hom-Monoid
@@ -157,7 +170,7 @@ module _
     pr2 (pr1 hom-multiplicative-monoid-hom-Semiring) =
       preserves-mul-hom-Semiring
     pr2 hom-multiplicative-monoid-hom-Semiring =
-      preserves-unit-hom-Semiring
+      preserves-one-hom-Semiring
 ```
 
 ### The identity homomorphism of semirings

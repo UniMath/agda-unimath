@@ -94,10 +94,10 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-succ-Ab :
+  successor-law-multiple-Ab :
     (n : ℕ) (x : type-Ab A) →
     multiple-Ab A (succ-ℕ n) x ＝ add-Ab A (multiple-Ab A n x) x
-  multiple-succ-Ab = power-succ-Group (group-Ab A)
+  successor-law-multiple-Ab = successor-law-power-Group (group-Ab A)
 ```
 
 ### `(n + 1) · x ＝ x + n · x`
@@ -107,10 +107,10 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-succ-Ab' :
+  successor-law-multiple-Ab' :
     (n : ℕ) (x : type-Ab A) →
     multiple-Ab A (succ-ℕ n) x ＝ add-Ab A x (multiple-Ab A n x)
-  multiple-succ-Ab' = power-succ-Group' (group-Ab A)
+  successor-law-multiple-Ab' = successor-law-power-Group' (group-Ab A)
 ```
 
 ### Multiples by sums of natural numbers are sums of multiples

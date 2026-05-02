@@ -24,7 +24,21 @@ open import foundation-core.negation
 
 </details>
 
-## Definition
+## Idea
+
+The {{#concept "addition" Disambiguation="natural numbers" Agda=_+ℕ_}} operation
+on the [natural numbers](elementary-number-theory.natural-numbers.md) is a
+binary operation $m,n\mapsto m+n$ on the natural numbers given by $n$ times
+iteratively taking the successor of the number $m$.
+
+The notation $+$ for addition and $-$ for subtraction appeared first in print in
+1489 in _Behende und hüpsche Rechenung auff allen Kauffmanschafft_ by
+[Johannes Widmann](https://en.wikipedia.org/wiki/Johannes_Widmann), for example
+on page 327 of {{#cite Widmann1489}}.
+
+## Definitions
+
+### Addition on the natural numbers
 
 ```agda
 add-ℕ : ℕ → ℕ → ℕ
@@ -136,31 +150,23 @@ abstract
       associative-add-ℕ
 ```
 
-### Swap laws of addition
+### Swapping iterated addition
 
 ```agda
 abstract
-  left-swap-add-ℕ : (a b c : ℕ) → a +ℕ (b +ℕ c) ＝ b +ℕ (a +ℕ c)
-  left-swap-add-ℕ a b c =
-    equational-reasoning
-      a +ℕ (b +ℕ c)
-      ＝ (a +ℕ b) +ℕ c
-        by inv (associative-add-ℕ a b c)
-      ＝ (b +ℕ a) +ℕ c
-        by ap-add-ℕ (commutative-add-ℕ a b) (refl {x = c})
-      ＝ b +ℕ (a +ℕ c)
-        by associative-add-ℕ b a c
+  right-swap-add-ℕ :
+    (x y z : ℕ) → (x +ℕ y) +ℕ z ＝ (x +ℕ z) +ℕ y
+  right-swap-add-ℕ x y z =
+    associative-add-ℕ x y z ∙
+    ap (add-ℕ x) (commutative-add-ℕ y z) ∙
+    inv (associative-add-ℕ x z y)
 
-  right-swap-add-ℕ : (a b c : ℕ) → (a +ℕ b) +ℕ c ＝ (a +ℕ c) +ℕ b
-  right-swap-add-ℕ a b c =
-    equational-reasoning
-      (a +ℕ b) +ℕ c
-      ＝ a +ℕ (b +ℕ c)
-        by associative-add-ℕ a b c
-      ＝ a +ℕ (c +ℕ b)
-        by ap-add-ℕ (refl {x = a}) (commutative-add-ℕ b c)
-      ＝ (a +ℕ c) +ℕ b
-        by inv (associative-add-ℕ a c b)
+  left-swap-add-ℕ :
+    (x y z : ℕ) → x +ℕ (y +ℕ z) ＝ y +ℕ (x +ℕ z)
+  left-swap-add-ℕ x y z =
+    inv (associative-add-ℕ x y z) ∙
+    ap (add-ℕ' z) (commutative-add-ℕ x y) ∙
+    associative-add-ℕ y x z
 ```
 
 ### Addition by a fixed element on either side is injective
@@ -220,3 +226,7 @@ abstract
 
 - The commutative monoid of the natural numbers with addition is defined in
   [`monoid-of-natural-numbers-with-addition`](elementary-number-theory.monoid-of-natural-numbers-with-addition.md).
+
+## References
+
+{{#bibliography}}

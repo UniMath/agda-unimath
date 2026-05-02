@@ -267,6 +267,25 @@ abstract
   right-predecessor-law-mul-ℤ' k l =
     right-predecessor-law-mul-ℤ k l ∙
     commutative-add-ℤ (neg-ℤ k) (k *ℤ l)
+
+  double-successor-law-mul-ℤ :
+    (k l : ℤ) → succ-ℤ k *ℤ succ-ℤ l ＝ k *ℤ l +ℤ k +ℤ l +ℤ int-ℕ 1
+  double-successor-law-mul-ℤ k l =
+    left-successor-law-mul-ℤ' k (succ-ℤ l) ∙
+    ap-add-ℤ
+      ( right-successor-law-mul-ℤ' k l)
+      ( inv (right-add-one-ℤ l)) ∙
+    inv (associative-add-ℤ (k *ℤ l +ℤ k) l (int-ℕ 1))
+
+  double-predecessor-law-mul-ℤ :
+    (k l : ℤ) → pred-ℤ k *ℤ pred-ℤ l ＝ ((k *ℤ l -ℤ k) -ℤ l) +ℤ int-ℕ 1
+  double-predecessor-law-mul-ℤ k l =
+    left-predecessor-law-mul-ℤ' k (pred-ℤ l) ∙
+    ap-add-ℤ
+      ( right-predecessor-law-mul-ℤ' k l)
+      ( ap neg-ℤ (inv (right-add-neg-one-ℤ l)) ∙
+        distributive-neg-add-ℤ l neg-one-ℤ) ∙
+    inv (associative-add-ℤ (k *ℤ l -ℤ k) (neg-ℤ l) (int-ℕ 1))
 ```
 
 ### Multiplication on the integers distributes on the right over addition
@@ -367,6 +386,25 @@ abstract
     ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m))
 ```
 
+### Distributivity of multiplication over addition on both sides
+
+For any four integers `a`, `b`, `c`, and `d` we have
+
+```text
+  (a + b)(c + d) ＝ (ac + ad) + (bc + bd).
+```
+
+```agda
+double-distributive-mul-add-ℤ :
+  (a b c d : ℤ) →
+  (a +ℤ b) *ℤ (c +ℤ d) ＝ (a *ℤ c +ℤ a *ℤ d) +ℤ (b *ℤ c +ℤ b *ℤ d)
+double-distributive-mul-add-ℤ a b c d =
+  right-distributive-mul-add-ℤ a b (c +ℤ d) ∙
+  ap-add-ℤ
+    ( left-distributive-mul-add-ℤ a c d)
+    ( left-distributive-mul-add-ℤ b c d)
+```
+
 ### Right multiplication by the negative of an integer is the negative of the multiplication
 
 ```agda
@@ -408,7 +446,25 @@ abstract
       associative-mul-ℤ
 ```
 
-### The canonical embedding of natural numbers in the integers preserves multiplication
+### Swapping the order of multiplication from one side
+
+```agda
+right-swap-mul-ℤ :
+  (x y z : ℤ) → (x *ℤ y) *ℤ z ＝ (x *ℤ z) *ℤ y
+right-swap-mul-ℤ x y z =
+  associative-mul-ℤ x y z ∙
+  ap (x *ℤ_) (commutative-mul-ℤ y z) ∙
+  inv (associative-mul-ℤ x z y)
+
+left-swap-mul-ℤ :
+  (x y z : ℤ) → x *ℤ (y *ℤ z) ＝ y *ℤ (x *ℤ z)
+left-swap-mul-ℤ x y z =
+  inv (associative-mul-ℤ x y z) ∙
+  ap (_*ℤ z) (commutative-mul-ℤ x y) ∙
+  associative-mul-ℤ y x z
+```
+
+### Computing multiplication of integers that come from natural numbers
 
 ```agda
 abstract

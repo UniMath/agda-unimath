@@ -230,7 +230,7 @@ module _
             ≤ x +ℝ real-ℚ⁺ d
               by left-leq-real-bound-neighborhood-ℝ d z x Ndzx
             ≤ w +ℝ real-ℚ⁺ d
-              by preserves-leq-right-add-ℝ (real-ℚ⁺ d) x w x≤w)
+              by preserves-order-right-add-ℝ (real-ℚ⁺ d) x w x≤w)
           ( chain-of-inequalities
             w
             ≤ y
@@ -284,7 +284,7 @@ abstract
 ```agda
 real-closed-interval-ℚ : closed-interval-ℚ → closed-interval-ℝ lzero lzero
 real-closed-interval-ℚ ((a , b) , a≤b) =
-  ((real-ℚ a , real-ℚ b) , preserves-leq-real-ℚ a≤b)
+  ((real-ℚ a , real-ℚ b) , preserves-order-real-ℚ a≤b)
 
 raise-real-type-closed-interval-ℚ :
   (l : Level) ([a,b] : closed-interval-ℚ) →
@@ -292,6 +292,6 @@ raise-real-type-closed-interval-ℚ :
   type-closed-interval-ℝ l (real-closed-interval-ℚ [a,b])
 raise-real-type-closed-interval-ℚ l ((a , b) , a≤b) (x , a≤x , x≤b) =
   ( raise-real-ℚ l x ,
-    preserves-leq-right-raise-ℝ l (preserves-leq-real-ℚ a≤x) ,
-    preserves-leq-left-raise-ℝ l (preserves-leq-real-ℚ x≤b))
+    preserves-order-right-raise-ℝ l (preserves-order-real-ℚ a≤x) ,
+    preserves-order-left-raise-ℝ l (preserves-order-real-ℚ x≤b))
 ```

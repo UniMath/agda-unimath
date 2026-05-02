@@ -251,7 +251,7 @@ module _
         let
           x≤y : leq-ℝ x y
           x≤y =
-            reflects-leq-right-add-ℝ
+            reflects-order-right-add-ℝ
               ( real-ℚ⁺ ε')
               ( x)
               ( y)
@@ -280,8 +280,8 @@ module _
                   by leq-eq-ℝ (ap-add-ℝ refl (add-real-ℚ _ _))
                 ≤ x +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-left-add-ℝ x _ _
-                      ( preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε))))
+                    preserves-order-left-add-ℝ x _ _
+                      ( preserves-order-real-ℚ (leq-le-ℚ 2ε'<ε))))
 ```
 
 ### Given a dense subset `S ⊆ ℝ`, for any `x : ℝ` and `ε : ℚ⁺` there is an element of `S` in an `ε`-neighborhood of `x` that is less than or equal to `x`
@@ -340,7 +340,7 @@ module _
                         ( cancel-right-diff-add-ℝ x (real-ℚ⁺ ε')))
                 ≤ (y +ℝ real-ℚ⁺ ε') +ℝ real-ℚ⁺ ε'
                   by
-                    preserves-leq-right-add-ℝ
+                    preserves-order-right-add-ℝ
                       ( real-ℚ⁺ ε')
                       ( x -ℝ real-ℚ⁺ ε')
                       ( y +ℝ real-ℚ⁺ ε')
@@ -351,11 +351,11 @@ module _
                   by leq-eq-ℝ (ap-add-ℝ refl (add-real-ℚ _ _))
                 ≤ y +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-left-add-ℝ
+                    preserves-order-left-add-ℝ
                       ( y)
                       ( _)
                       ( _)
-                      ( preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε)))
+                      ( preserves-order-real-ℚ (leq-le-ℚ 2ε'<ε)))
               ( chain-of-inequalities
                 y
                 ≤ x
@@ -402,7 +402,7 @@ module _
               ( a)
               ( c)
               ( x<a)
-              ( preserves-leq-left-sim-ℝ (sim-raise-ℝ' l2 a) a≤c) ,
+              ( preserves-order-left-sim-ℝ (sim-raise-ℝ' l2 a) a≤c) ,
             concatenate-leq-le-ℝ
               ( c)
               ( b)
@@ -413,7 +413,7 @@ module _
                   by right-leq-real-bound-neighborhood-ℝ ε _ _ Nεac
                 ≤ a +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-right-add-ℝ _ _ _
+                    preserves-order-right-add-ℝ _ _ _
                       ( leq-sim-ℝ (sim-raise-ℝ' l2 a))
                 ≤ b
                   by leq-le-ℝ a+ε<b)
@@ -460,7 +460,7 @@ module _
                     ≤ x -ℝ real-ℚ⁺ (min-ℚ⁺ δ ε)
                       by
                         reverses-leq-left-diff-ℝ _
-                          ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δ ε))
+                          ( preserves-order-real-ℚ (leq-left-min-ℚ⁺ δ ε))
                     ≤ y
                       by
                         leq-transpose-right-add-ℝ _ _ _
@@ -484,8 +484,8 @@ module _
                       by right-leq-real-bound-neighborhood-ℝ _ _ _ Nε'xy
                     ≤ x +ℝ real-ℚ⁺ δ
                       by
-                        preserves-leq-left-add-ℝ _ _ _
-                          ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δ ε))
+                        preserves-order-left-add-ℝ _ _ _
+                          ( preserves-order-real-ℚ (leq-left-min-ℚ⁺ δ ε))
                     ≤ b
                       by leq-le-ℝ x+δ<b))
                 ( weakly-monotonic-neighborhood-ℝ _ _ _ _

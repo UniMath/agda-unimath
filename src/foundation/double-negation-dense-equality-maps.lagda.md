@@ -14,11 +14,11 @@ open import foundation.double-negation-dense-equality
 open import foundation.embeddings
 open import foundation.function-types
 open import foundation.irrefutable-equality
-open import foundation.iterating-functions
 open import foundation.propositional-maps
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
+open import foundation-core.iterating-functions
 open import foundation-core.propositions
 ```
 

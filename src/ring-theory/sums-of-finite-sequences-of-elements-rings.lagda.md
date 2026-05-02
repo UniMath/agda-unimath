@@ -229,7 +229,7 @@ module _
   where
 
   preserves-sum-permutation-fin-sequence-type-Ring :
-    (n : ℕ) → (σ : Permutation n) →
+    (n : ℕ) → (σ : permutation n) →
     (f : fin-sequence-type-Ring R n) →
     sum-fin-sequence-type-Ring R n f ＝
     sum-fin-sequence-type-Ring R n (f ∘ map-equiv σ)

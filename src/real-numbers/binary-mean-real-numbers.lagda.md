@@ -92,7 +92,7 @@ module _
       tr
         ( λ w → leq-ℝ w (binary-mean-ℝ x y))
         ( is-idempotent-binary-mean-ℝ z)
-        ( preserves-leq-left-mul-ℝ⁺ one-half-ℝ⁺ (preserves-leq-add-ℝ z≤x z≤y))
+        ( preserves-order-left-mul-ℝ⁺ one-half-ℝ⁺ (preserves-order-add-ℝ z≤x z≤y))
 ```
 
 ### If `x ≤ z` and `y ≤ z`, then `binary-mean-ℝ x y ≤ z`
@@ -112,7 +112,7 @@ module _
       tr
         ( leq-ℝ (binary-mean-ℝ x y))
         ( is-idempotent-binary-mean-ℝ z)
-        ( preserves-leq-left-mul-ℝ⁺ one-half-ℝ⁺ (preserves-leq-add-ℝ x≤z y≤z))
+        ( preserves-order-left-mul-ℝ⁺ one-half-ℝ⁺ (preserves-order-add-ℝ x≤z y≤z))
 ```
 
 ### `y - binary-mean-ℝ x y = binary-mean-ℝ y (neg-ℝ x)`

@@ -103,7 +103,7 @@ abstract opaque
             [a',b'][a',b']<q =
               concatenate-leq-le-ℚ _ _ _
                 ( pr2
-                  ( preserves-leq-mul-closed-interval-ℚ
+                  ( preserves-order-mul-closed-interval-ℚ
                     ( [a',b'])
                     ( [a,b])
                     ( [a',b'])
@@ -215,42 +215,42 @@ square-ℝ⁻ x⁻@(x , _) = (square-ℝ x , is-positive-square-ℝ⁻ x⁻)
 
 ```agda
 abstract
-  preserves-leq-square-ℝ⁰⁺ :
+  preserves-order-square-ℝ⁰⁺ :
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
-  preserves-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
+  preserves-order-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
     transitive-leq-ℝ
       ( square-ℝ x)
       ( x *ℝ y)
       ( square-ℝ y)
-      ( preserves-leq-right-mul-ℝ⁰⁺ y⁰⁺ x≤y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x≤y)
+      ( preserves-order-right-mul-ℝ⁰⁺ y⁰⁺ x≤y)
+      ( preserves-order-left-mul-ℝ⁰⁺ x⁰⁺ x≤y)
 ```
 
 ### For nonnegative real numbers, squaring preserves strict inequality
 
 ```agda
 abstract
-  preserves-le-square-ℝ⁰⁺ :
+  preserves-strict-order-square-ℝ⁰⁺ :
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → le-ℝ⁰⁺ x y →
     le-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
-  preserves-le-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x<y =
+  preserves-strict-order-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x<y =
     concatenate-leq-le-ℝ
       ( square-ℝ x)
       ( x *ℝ y)
       ( square-ℝ y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ (leq-le-ℝ x<y))
-      ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x<y)
+      ( preserves-order-left-mul-ℝ⁰⁺ x⁰⁺ (leq-le-ℝ x<y))
+      ( preserves-strict-order-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x<y)
 ```
 
 ### For nonnegative real numbers, squaring reflects inequality
 
 ```agda
 abstract
-  reflects-leq-square-ℝ⁰⁺ :
+  reflects-order-square-ℝ⁰⁺ :
     {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
     leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y) → leq-ℝ⁰⁺ x y
-  reflects-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x²≤y² =
+  reflects-order-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x²≤y² =
     leq-not-le-ℝ
       ( y)
       ( x)
@@ -258,7 +258,7 @@ abstract
         not-leq-le-ℝ
           ( square-ℝ y)
           ( square-ℝ x)
-          ( preserves-le-square-ℝ⁰⁺ y⁰⁺ x⁰⁺ y<x)
+          ( preserves-strict-order-square-ℝ⁰⁺ y⁰⁺ x⁰⁺ y<x)
           ( x²≤y²))
 ```
 
@@ -279,7 +279,7 @@ abstract
         ( tr
           ( λ y → le-ℝ y (square-ℝ x))
           ( square-real-ℚ q)
-          ( preserves-le-square-ℝ⁰⁺
+          ( preserves-strict-order-square-ℝ⁰⁺
             ( qℝ)
             ( x , is-nonnegative-le-ℝ⁰⁺ qℝ x q<x)
             ( q<x)))
@@ -298,7 +298,7 @@ abstract
       ( tr
         ( le-ℝ (square-ℝ x))
         ( square-real-ℚ q)
-        ( preserves-le-square-ℝ⁰⁺
+        ( preserves-strict-order-square-ℝ⁰⁺
           ( x⁰⁺)
           ( nonnegative-real-ℚ⁺
             ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))

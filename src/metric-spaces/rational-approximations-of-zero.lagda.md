@@ -153,7 +153,7 @@ module _
           ( rational-dist-ℚ (f ε) (f δ))
           ( (rational-abs-ℚ (f ε)) +ℚ (rational-abs-ℚ (f δ)))
           ( rational-ℚ⁺ (ε +ℚ⁺ δ))
-          ( preserves-leq-add-ℚ
+          ( preserves-order-add-ℚ
             { rational-abs-ℚ (f ε)}
             { rational-ℚ⁺ ε}
             { rational-abs-ℚ (f δ)}

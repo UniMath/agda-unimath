@@ -195,7 +195,7 @@ module _
         ( f ∘ map-transposition-Fin (succ-ℕ (succ-ℕ n)) i j i≠j))
 
     preserves-product-permutation-fin-sequence-type-Commutative-Semigroup :
-      (n : ℕ) → (σ : Permutation (succ-ℕ n)) →
+      (n : ℕ) → (σ : permutation (succ-ℕ n)) →
       (f : fin-sequence-type-Commutative-Semigroup G (succ-ℕ n)) →
       product-fin-sequence-type-Commutative-Semigroup G n f ＝
       product-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv σ)

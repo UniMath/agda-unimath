@@ -168,16 +168,16 @@ module _
   abstract opaque
     unfolding le-ℝ sim-ℝ
 
-    preserves-le-left-sim-ℝ : le-ℝ x z → le-ℝ y z
-    preserves-le-left-sim-ℝ =
+    preserves-strict-order-left-sim-ℝ : le-ℝ x z → le-ℝ y z
+    preserves-strict-order-left-sim-ℝ =
       map-tot-exists
         ( λ q →
           map-product
             ( pr1 (sim-upper-cut-sim-ℝ x y x~y) q)
             ( id))
 
-    preserves-le-right-sim-ℝ : le-ℝ z x → le-ℝ z y
-    preserves-le-right-sim-ℝ =
+    preserves-strict-order-right-sim-ℝ : le-ℝ z x → le-ℝ z y
+    preserves-strict-order-right-sim-ℝ =
       map-tot-exists ( λ q → map-product id (pr1 x~y q))
 
 module _
@@ -186,49 +186,49 @@ module _
   (x1~x2 : sim-ℝ x1 x2) (y1~y2 : sim-ℝ y1 y2)
   where
 
-  preserves-le-sim-ℝ : le-ℝ x1 y1 → le-ℝ x2 y2
-  preserves-le-sim-ℝ x1<y1 =
-    preserves-le-left-sim-ℝ
+  preserves-strict-order-sim-ℝ : le-ℝ x1 y1 → le-ℝ x2 y2
+  preserves-strict-order-sim-ℝ x1<y1 =
+    preserves-strict-order-left-sim-ℝ
       ( y2)
       ( x1)
       ( x2)
       ( x1~x2)
-      ( preserves-le-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
+      ( preserves-strict-order-right-sim-ℝ x1 y1 y2 y1~y2 x1<y1)
 ```
 
 ### Raising the universe level of either side of a strict inequality
 
 ```agda
 abstract
-  preserves-le-left-raise-ℝ :
+  preserves-strict-order-left-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x y → le-ℝ (raise-ℝ l x) y
-  preserves-le-left-raise-ℝ l {x} {y} =
-    preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ l x)
+  preserves-strict-order-left-raise-ℝ l {x} {y} =
+    preserves-strict-order-left-sim-ℝ _ _ _ (sim-raise-ℝ l x)
 
   reflects-le-left-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ (raise-ℝ l x) y → le-ℝ x y
   reflects-le-left-raise-ℝ l {x} {y} =
-    preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ' l x)
+    preserves-strict-order-left-sim-ℝ _ _ _ (sim-raise-ℝ' l x)
 
-  preserves-le-right-raise-ℝ :
+  preserves-strict-order-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x y → le-ℝ x (raise-ℝ l y)
-  preserves-le-right-raise-ℝ l {x} {y} =
-    preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ l y)
+  preserves-strict-order-right-raise-ℝ l {x} {y} =
+    preserves-strict-order-right-sim-ℝ _ _ _ (sim-raise-ℝ l y)
 
   reflects-le-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x (raise-ℝ l y) → le-ℝ x y
   reflects-le-right-raise-ℝ l {x} {y} =
-    preserves-le-right-sim-ℝ _ _ _ (sim-raise-ℝ' l y)
+    preserves-strict-order-right-sim-ℝ _ _ _ (sim-raise-ℝ' l y)
 
   le-iff-le-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
     le-ℝ x y ↔ le-ℝ x (raise-ℝ l y)
   le-iff-le-right-raise-ℝ l x y =
-    ( preserves-le-right-raise-ℝ l ,
+    ( preserves-strict-order-right-raise-ℝ l ,
       reflects-le-right-raise-ℝ l)
 ```
 
@@ -242,8 +242,8 @@ module _
   abstract opaque
     unfolding le-ℝ real-ℚ
 
-    preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
-    preserves-le-real-ℚ = dense-le-ℚ
+    preserves-strict-order-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
+    preserves-strict-order-real-ℚ = dense-le-ℚ
 
     reflects-le-real-ℚ : le-ℝ (real-ℚ x) (real-ℚ y) → le-ℚ x y
     reflects-le-real-ℚ =
@@ -252,7 +252,7 @@ module _
         ( λ q (x<q , q<y) → transitive-le-ℚ x q y q<y x<q)
 
   iff-le-real-ℚ : le-ℚ x y ↔ le-ℝ (real-ℚ x) (real-ℚ y)
-  pr1 iff-le-real-ℚ = preserves-le-real-ℚ
+  pr1 iff-le-real-ℚ = preserves-strict-order-real-ℚ
   pr2 iff-le-real-ℚ = reflects-le-real-ℚ
 ```
 
@@ -309,7 +309,7 @@ module _
     le-raise-real-is-in-lower-cut-ℝ :
       is-in-lower-cut-ℝ x q → le-ℝ (raise-real-ℚ l1 q) x
     le-raise-real-is-in-lower-cut-ℝ q<x =
-      preserves-le-left-sim-ℝ _ _ _
+      preserves-strict-order-left-sim-ℝ _ _ _
         ( sim-raise-ℝ l1 (real-ℚ q))
         ( le-real-is-in-lower-cut-ℝ x q<x)
 
@@ -318,7 +318,7 @@ module _
     is-in-lower-cut-le-raise-real-ℚ l1q<x =
       is-in-lower-cut-le-real-ℚ
         ( x)
-        ( preserves-le-left-sim-ℝ _ _ _ (sim-raise-ℝ' l1 _) l1q<x)
+        ( preserves-strict-order-left-sim-ℝ _ _ _ (sim-raise-ℝ' l1 _) l1q<x)
 ```
 
 ### A rational is in the upper cut of `x` iff its real projection is greater than `x`
@@ -356,7 +356,7 @@ module _
     le-raise-real-is-in-upper-cut-ℝ :
       is-in-upper-cut-ℝ x q → le-ℝ x (raise-real-ℚ l1 q)
     le-raise-real-is-in-upper-cut-ℝ x<q =
-      preserves-le-right-sim-ℝ _ _ _
+      preserves-strict-order-right-sim-ℝ _ _ _
         ( sim-raise-ℝ l1 (real-ℚ q))
         ( le-real-is-in-upper-cut-ℝ x x<q)
 ```
@@ -592,13 +592,13 @@ abstract
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ (raise-ℝ l x) (raise-ℝ l y) → le-ℝ x y
   le-le-raise-ℝ l {x} {y} =
-    preserves-le-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
+    preserves-strict-order-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
 
   le-raise-le-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     le-ℝ x y → le-ℝ (raise-ℝ l x) (raise-ℝ l y)
   le-raise-le-ℝ l {x} {y} =
-    preserves-le-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
+    preserves-strict-order-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
 ```
 
 ### If `x` is less than each rational number `y` is less than, then `x ≤ y`
@@ -731,7 +731,7 @@ module _
 
 ```agda
 le-zero-one-ℝ : le-ℝ zero-ℝ one-ℝ
-le-zero-one-ℝ = preserves-le-real-ℚ le-zero-one-ℚ
+le-zero-one-ℝ = preserves-strict-order-real-ℚ le-zero-one-ℚ
 ```
 
 ### For any real number, there exists a greater positive rational number
@@ -782,7 +782,7 @@ module _
             ( real-ℚ q)
             ( real-ℚ r)
             ( y)
-            ( preserves-le-real-ℚ q<r)
+            ( preserves-strict-order-real-ℚ q<r)
             ( H r (leq-real-is-in-lower-cut-ℝ x r<x)))
 ```
 

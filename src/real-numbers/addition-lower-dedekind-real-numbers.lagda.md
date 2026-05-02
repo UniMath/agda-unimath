@@ -95,7 +95,7 @@ module _
           ( inv-tr
               ( λ p → le-ℚ p (lx' +ℚ ly'))
               ( q=lx+ly)
-              ( preserves-le-add-ℚ {lx} {lx'} {ly} {ly'} lx<lx' ly<ly') ,
+              ( preserves-strict-order-add-ℚ {lx} {lx'} {ly} {ly'} lx<lx' ly<ly') ,
             intro-exists (lx' , ly') (lx'<x , ly'<y , refl))
       where
         open
@@ -138,7 +138,7 @@ module _
                     by ap (neg-ℚ rx +ℚ_) (neg-neg-ℚ r ∙ r=rx+ry)
                   ＝ ry
                     by is-retraction-left-div-Group group-add-ℚ rx ry)
-                ( preserves-le-right-add-ℚ
+                ( preserves-strict-order-right-add-ℚ
                   ( q -ℚ rx)
                   ( ε)
                   ( r -ℚ q)

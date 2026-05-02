@@ -39,10 +39,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The elements of a type `X` can be counted by establishing an equivalence
+A {{#concept "count" Agda=count WDID=Q247154 WD=counting}} of the elements of a type `X` consists of a [natural number](elementary-number-theory.natural-numbers.md) `n` and an [equivalence](foundation-core.equivalences.md)
 `Fin n ≃ X`.
 
-## Definition
+## Definitions
+
+### Counts of a type
 
 ```agda
 count : {l : Level} → UU l → UU l
@@ -225,3 +227,7 @@ count-type-trunc-Prop (succ-ℕ k , e) =
       ( is-prop-type-trunc-Prop)
       ( unit-trunc-Prop (map-equiv e (zero-Fin k))))
 ```
+
+## See also
+
+- [Finite types](univalent-combinatorics.finite-types.md)

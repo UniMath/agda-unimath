@@ -89,7 +89,7 @@ module _
             ( le-ℚ)
             ( inv p=px+py)
             ( inv p=qx+qy)
-            ( preserves-le-add-ℚ
+            ( preserves-strict-order-add-ℚ
               { px}
               { qx}
               { py}
@@ -489,7 +489,7 @@ abstract opaque
                 ( inv-tr
                   ( λ r → le-ℚ r (p +ℚ q))
                   ( p+q=pl+ql)
-                  ( preserves-le-add-ℚ {pl} {p} {ql} {q} pl<p ql<q))) ,
+                  ( preserves-strict-order-add-ℚ {pl} {p} {ql} {q} pl<p ql<q))) ,
           elim-exists
             ( empty-Prop)
             ( λ (pu , qu) (p<pu , q<qu , p+q=pu+qu) →
@@ -498,7 +498,7 @@ abstract opaque
                 ( inv-tr
                   ( le-ℚ (p +ℚ q))
                   ( p+q=pu+qu)
-                  ( preserves-le-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
+                  ( preserves-strict-order-add-ℚ {p} {pu} {q} {qu} p<pu q<qu)))))
 
 abstract
   combine-right-add-two-real-ℚ :

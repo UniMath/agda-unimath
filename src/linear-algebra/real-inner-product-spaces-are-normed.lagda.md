@@ -88,9 +88,9 @@ module _
                   norm-ℝ-Inner-Product-Space V v)) +ℝ
             ( squared-norm-ℝ-Inner-Product-Space V v)
             by
-              preserves-leq-right-add-ℝ _ _ _
-                ( preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-left-mul-ℝ⁺
+              preserves-order-right-add-ℝ _ _ _
+                ( preserves-order-left-add-ℝ _ _ _
+                  ( preserves-order-left-mul-ℝ⁺
                     ( positive-real-ℕ⁺ two-ℕ⁺)
                     ( transitive-leq-ℝ _ _ _
                       ( cauchy-schwarz-inequality-ℝ-Inner-Product-Space V u v)
@@ -128,7 +128,7 @@ module _
           ( abs-real-ℝ⁰⁺
             ( ( nonnegative-norm-ℝ-Inner-Product-Space V u) +ℝ⁰⁺
               ( nonnegative-norm-ℝ-Inner-Product-Space V v))))
-        ( preserves-leq-sqrt-ℝ⁰⁺
+        ( preserves-order-sqrt-ℝ⁰⁺
           ( nonnegative-squared-norm-ℝ-Inner-Product-Space V
             ( add-ℝ-Inner-Product-Space V u v))
           ( nonnegative-square-ℝ

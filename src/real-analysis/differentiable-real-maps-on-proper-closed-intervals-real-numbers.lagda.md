@@ -328,7 +328,7 @@ module _
                 ≤ ( real-ℚ⁺ ε *ℝ dist-ℝ (pr1 x) (pr1 (pr1 y n))) *ℝ
                   ( abs-ℝ (real-inv-nonzero-ℝ (nonzero-diff n)))
                   by
-                    preserves-leq-right-mul-ℝ⁰⁺
+                    preserves-order-right-mul-ℝ⁰⁺
                       ( nonnegative-abs-ℝ _)
                       ( is-mod-ν
                         ( ε)
@@ -504,7 +504,7 @@ module _
                 ( ε)
                 ( f' x)
                 ( f' y)
-                ( reflects-leq-right-mul-ℝ⁺
+                ( reflects-order-right-mul-ℝ⁺
                   ( dist-ℝ xℝ yℝ , is-positive-dist-apart-ℝ _ _ x#y)
                   ( _)
                   ( _)
@@ -557,7 +557,7 @@ module _
                     ≤ ( real-ℚ⁺ ε' *ℝ dist-ℝ xℝ yℝ) +ℝ
                       ( real-ℚ⁺ ε' *ℝ dist-ℝ yℝ xℝ)
                       by
-                        preserves-leq-add-ℝ
+                        preserves-order-add-ℝ
                           ( is-mod-δf ε' x y Nxy)
                           ( is-mod-δf ε' y x
                             ( is-symmetric-neighborhood-ℝ (δf ε') xℝ yℝ Nxy))
@@ -574,9 +574,10 @@ module _
                       by leq-eq-ℝ (ap-mul-ℝ (add-real-ℚ _ _) refl)
                     ≤ real-ℚ⁺ ε *ℝ dist-ℝ xℝ yℝ
                       by
-                        preserves-leq-right-mul-ℝ⁰⁺
+                        preserves-order-right-mul-ℝ⁰⁺
                           ( nonnegative-dist-ℝ xℝ yℝ)
-                          ( preserves-leq-real-ℚ (leq-le-ℚ ε'+ε'<ε)))))
+                          ( preserves-order-real-ℚ
+                            ( leq-le-ℚ ε'+ε'<ε)))))
 
 abstract
   is-uniformly-continuous-map-derivative-differentiable-real-map-proper-closed-interval-ℝ :
@@ -663,8 +664,8 @@ module _
                     leq-eq-ℝ (ap-add-ℝ (abs-mul-ℝ _ _) (commutative-dist-ℝ _ _))
                 ≤ (max-|f'| *ℝ dist-ℝ yℝ xℝ) +ℝ (one-ℝ *ℝ dist-ℝ xℝ yℝ)
                   by
-                    preserves-leq-add-ℝ
-                      ( preserves-leq-right-mul-ℝ⁰⁺
+                    preserves-order-add-ℝ
+                      ( preserves-order-right-mul-ℝ⁰⁺
                         ( nonnegative-dist-ℝ _ _)
                         ( is-max-|f'| x))
                       ( is-mod-δf'
@@ -687,18 +688,18 @@ module _
                   by leq-eq-ℝ (inv (right-distributive-mul-add-ℝ _ _ _))
                 ≤ (max-|f'| +ℝ one-ℝ) *ℝ real-ℚ⁺ (ωf ε)
                   by
-                    preserves-leq-left-mul-ℝ⁰⁺
+                    preserves-order-left-mul-ℝ⁰⁺
                       ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
                       ( leq-dist-neighborhood-ℝ _ _ _ Nxy)
                 ≤ real-ℚ q *ℝ real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε)
                   by
-                    preserves-leq-mul-ℝ⁰⁺
+                    preserves-order-mul-ℝ⁰⁺
                       ( max-|f'|⁰⁺ +ℝ⁰⁺ one-ℝ⁰⁺)
                       ( nonnegative-real-ℚ⁺ q⁺)
                       ( nonnegative-real-ℚ⁺ (ωf ε))
                       ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
                       ( leq-le-ℝ |f'|+1<q)
-                      ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _))
+                      ( preserves-order-real-ℚ (leq-left-min-ℚ _ _))
                 ≤ real-ℚ⁺ (q⁺ *ℚ⁺ (inv-ℚ⁺ q⁺ *ℚ⁺ ε))
                   by leq-eq-ℝ (mul-real-ℚ _ _)
                 ≤ real-ℚ⁺ ε

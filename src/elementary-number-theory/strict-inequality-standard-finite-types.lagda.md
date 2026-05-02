@@ -55,17 +55,17 @@ abstract
 ### The predicate on maps between standard finite types of preserving strict inequality
 
 ```agda
-preserves-le-Fin : (n m : ℕ) → (Fin n → Fin m) → UU lzero
-preserves-le-Fin n m f =
+preserves-strict-order-Fin : (n m : ℕ) → (Fin n → Fin m) → UU lzero
+preserves-strict-order-Fin n m f =
   (a b : Fin n) →
   le-Fin n a b →
   le-Fin m (f a) (f b)
 
 abstract
-  is-prop-preserves-le-Fin :
+  is-prop-preserves-strict-order-Fin :
     (n m : ℕ) (f : Fin n → Fin m) →
-    is-prop (preserves-le-Fin n m f)
-  is-prop-preserves-le-Fin n m f =
+    is-prop (preserves-strict-order-Fin n m f)
+  is-prop-preserves-strict-order-Fin n m f =
     is-prop-Π λ a →
     is-prop-Π λ b →
     is-prop-Π λ p →
@@ -77,59 +77,59 @@ abstract
 #### The induced map obtained by restricting
 
 ```agda
-restriction-preserves-le-Fin' :
+restriction-preserves-strict-order-Fin' :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-  (preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
+  (preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
   (x : Fin m) → (y : Fin (succ-ℕ n)) →
   (f (inl x) ＝ y) → Fin n
-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inl y) p = y
-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inr y) p =
+restriction-preserves-strict-order-Fin' (succ-ℕ m) n f pf x (inl y) p = y
+restriction-preserves-strict-order-Fin' (succ-ℕ m) n f pf x (inr y) p =
   ex-falso
     ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) p
       ( pf (inl x) (inr star) star))
 
-restriction-preserves-le-Fin :
+restriction-preserves-strict-order-Fin :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-  (preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
+  (preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
   Fin m → Fin n
-restriction-preserves-le-Fin m n f pf x =
-  restriction-preserves-le-Fin' m n f pf x (f (inl x)) refl
+restriction-preserves-strict-order-Fin m n f pf x =
+  restriction-preserves-strict-order-Fin' m n f pf x (f (inl x)) refl
 ```
 
 #### The induced map is indeed a restriction
 
 ```agda
 abstract
-  inl-restriction-preserves-le-Fin' :
+  inl-restriction-preserves-strict-order-Fin' :
     (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-    (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
+    (pf : preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
     (x : Fin m) →
     (rx : Fin (succ-ℕ n)) →
     (px : f (inl x) ＝ rx) →
-    inl-Fin n (restriction-preserves-le-Fin' m n f pf x rx px) ＝
+    inl-Fin n (restriction-preserves-strict-order-Fin' m n f pf x rx px) ＝
     f (inl-Fin m x)
-  inl-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inl a) px = inv px
-  inl-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inr a) px =
+  inl-restriction-preserves-strict-order-Fin' (succ-ℕ m) n f pf x (inl a) px = inv px
+  inl-restriction-preserves-strict-order-Fin' (succ-ℕ m) n f pf x (inr a) px =
     ex-falso
       ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) px
         ( pf (inl x) (inr star) star))
 
-  inl-restriction-preserves-le-Fin :
+  inl-restriction-preserves-strict-order-Fin :
     (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-    (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
+    (pf : preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
     (x : Fin m) →
-    inl-Fin n (restriction-preserves-le-Fin m n f pf x) ＝ f (inl-Fin m x)
-  inl-restriction-preserves-le-Fin m n f pf x =
-    inl-restriction-preserves-le-Fin' m n f pf x (f (inl x)) refl
+    inl-Fin n (restriction-preserves-strict-order-Fin m n f pf x) ＝ f (inl-Fin m x)
+  inl-restriction-preserves-strict-order-Fin m n f pf x =
+    inl-restriction-preserves-strict-order-Fin' m n f pf x (f (inl x)) refl
 ```
 
 #### The induced map preserves strict inequality
 
 ```agda
 abstract
-  preserves-le-restriction-preserves-le-Fin' :
+  preserves-strict-order-restriction-preserves-strict-order-Fin' :
     (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-    (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
+    (pf : preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
     ( a : Fin m)
     ( b : Fin m) →
     ( ra : Fin (succ-ℕ n)) →
@@ -138,30 +138,30 @@ abstract
     ( pb : f (inl b) ＝ rb) →
     le-Fin m a b →
     le-Fin n
-      (restriction-preserves-le-Fin' m n f pf a ra pa)
-      (restriction-preserves-le-Fin' m n f pf b rb pb)
-  preserves-le-restriction-preserves-le-Fin'
+      (restriction-preserves-strict-order-Fin' m n f pf a ra pa)
+      (restriction-preserves-strict-order-Fin' m n f pf b rb pb)
+  preserves-strict-order-restriction-preserves-strict-order-Fin'
     (succ-ℕ m) n f pf a b (inl x) pa (inl y) pb H =
     tr (le-Fin (succ-ℕ n) (inl x)) pb
       ( tr (λ - → le-Fin (succ-ℕ n) - (f (inl b))) pa
       ( pf (inl a) (inl b) H))
-  preserves-le-restriction-preserves-le-Fin'
+  preserves-strict-order-restriction-preserves-strict-order-Fin'
     (succ-ℕ m) n f pf a b (inl x) pa (inr y) pb H =
     ex-falso
       ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pb
         ( pf (inl b) (inr star) star))
-  preserves-le-restriction-preserves-le-Fin'
+  preserves-strict-order-restriction-preserves-strict-order-Fin'
     (succ-ℕ m) n f pf a b (inr x) pa y pb H =
     ex-falso
       ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pa
         ( pf (inl a) (inr star) star))
 
-  preserves-le-restriction-preserves-le-Fin :
+  preserves-strict-order-restriction-preserves-strict-order-Fin :
     (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
-    (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
-    preserves-le-Fin m n (restriction-preserves-le-Fin m n f pf)
-  preserves-le-restriction-preserves-le-Fin m n f pf a b H =
-    preserves-le-restriction-preserves-le-Fin' m n f pf a b
+    (pf : preserves-strict-order-Fin (succ-ℕ m) (succ-ℕ n) f) →
+    preserves-strict-order-Fin m n (restriction-preserves-strict-order-Fin m n f pf)
+  preserves-strict-order-restriction-preserves-strict-order-Fin m n f pf a b H =
+    preserves-strict-order-restriction-preserves-strict-order-Fin' m n f pf a b
       ( f (inl a)) refl (f (inl b)) refl H
 ```
 
@@ -169,30 +169,30 @@ abstract
 
 ```agda
 abstract
-  leq-preserves-le-Fin :
+  leq-preserves-strict-order-Fin :
     (m n : ℕ) → (f : Fin m → Fin n) →
-    preserves-le-Fin m n f → leq-ℕ m n
-  leq-preserves-le-Fin 0 0 f pf = star
-  leq-preserves-le-Fin 0 (succ-ℕ n) f pf = star
-  leq-preserves-le-Fin (succ-ℕ m) 0 f pf = f (inr star)
-  leq-preserves-le-Fin (succ-ℕ 0) (succ-ℕ n) f pf = star
-  leq-preserves-le-Fin (succ-ℕ (succ-ℕ m)) (succ-ℕ n) f pf =
-    leq-preserves-le-Fin (succ-ℕ m) n
-      ( restriction-preserves-le-Fin (succ-ℕ m) n f pf)
-      ( preserves-le-restriction-preserves-le-Fin (succ-ℕ m) n f pf)
+    preserves-strict-order-Fin m n f → leq-ℕ m n
+  leq-preserves-strict-order-Fin 0 0 f pf = star
+  leq-preserves-strict-order-Fin 0 (succ-ℕ n) f pf = star
+  leq-preserves-strict-order-Fin (succ-ℕ m) 0 f pf = f (inr star)
+  leq-preserves-strict-order-Fin (succ-ℕ 0) (succ-ℕ n) f pf = star
+  leq-preserves-strict-order-Fin (succ-ℕ (succ-ℕ m)) (succ-ℕ n) f pf =
+    leq-preserves-strict-order-Fin (succ-ℕ m) n
+      ( restriction-preserves-strict-order-Fin (succ-ℕ m) n f pf)
+      ( preserves-strict-order-restriction-preserves-strict-order-Fin (succ-ℕ m) n f pf)
 ```
 
 ### Composition of strict inequality preserving maps
 
 ```agda
 abstract
-  comp-preserves-le-Fin :
+  comp-preserves-strict-order-Fin :
     (m n o : ℕ)
     (g : Fin n → Fin o)
     (f : Fin m → Fin n) →
-    preserves-le-Fin m n f →
-    preserves-le-Fin n o g →
-    preserves-le-Fin m o (g ∘ f)
-  comp-preserves-le-Fin m n o g f pf pg a b H =
+    preserves-strict-order-Fin m n f →
+    preserves-strict-order-Fin n o g →
+    preserves-strict-order-Fin m o (g ∘ f)
+  comp-preserves-strict-order-Fin m n o g f pf pg a b H =
     pg (f a) (f b) (pf a b H)
 ```

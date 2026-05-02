@@ -219,7 +219,7 @@ abstract
     intro-exists
       ( raise-ℝ l3 a)
       ( leq-sim-ℝ (sim-raise-ℝ l3 a) ,
-        preserves-leq-left-raise-ℝ l3 (leq-le-ℝ a<b))
+        preserves-order-left-raise-ℝ l3 (leq-le-ℝ a<b))
 ```
 
 ### Every real number in a proper closed interval is an accumulation point in that proper closed interval
@@ -460,8 +460,8 @@ module _
         (z , x<z , z<y) ← dense-le-ℝ xℝ yℝ x<y
         let
           z' = raise-ℝ l123 z
-          x<z' = preserves-le-right-raise-ℝ l123 x<z
-          z'<y = preserves-le-left-raise-ℝ l123 z<y
+          x<z' = preserves-strict-order-right-raise-ℝ l123 x<z
+          z'<y = preserves-strict-order-left-raise-ℝ l123 z<y
           z'∈[x,y] = (leq-le-ℝ x<z' , leq-le-ℝ z'<y)
         intro-exists
           ( z' ,
@@ -548,7 +548,7 @@ module _
                       ( yℝ)
                       ( reverses-leq-left-diff-ℝ
                         ( xℝ)
-                        ( preserves-leq-real-ℚ
+                        ( preserves-order-real-ℚ
                           ( leq-right-min-ℚ _ _)))
                       ( x-ε''<y))
                     ( le-transpose-left-add-ℝ _ _ _ a+δ<x)))
@@ -559,7 +559,7 @@ module _
                     ( yℝ)
                     ( reverses-leq-left-diff-ℝ
                       ( xℝ)
-                      ( preserves-leq-real-ℚ
+                      ( preserves-order-real-ℚ
                         ( leq-left-min-ℚ _ _)))
                     ( x-ε''<y)))) ,
             neighborhood-real-bound-each-leq-ℝ
@@ -579,7 +579,7 @@ module _
                     by
                       reverses-leq-left-diff-ℝ
                         ( xℝ)
-                        ( leq-le-ℝ (preserves-le-real-ℚ ε'<ε))
+                        ( leq-le-ℝ (preserves-strict-order-real-ℚ ε'<ε))
                   ≤ z
                     by leq-right-max-ℝ _ _)) ,
             neighborhood-real-bound-each-leq-ℝ
@@ -596,7 +596,7 @@ module _
                     by
                       reverses-leq-left-diff-ℝ
                         ( xℝ)
-                        ( preserves-leq-real-ℚ
+                        ( preserves-order-real-ℚ
                           ( leq-left-min-ℚ _ _))
                   ≤ yℝ
                     by leq-le-ℝ x-ε''<y
@@ -610,7 +610,7 @@ module _
                       reverses-leq-left-diff-ℝ
                         ( yℝ)
                         ( leq-le-ℝ
-                          ( preserves-le-real-ℚ ε'+ε'<ε))
+                          ( preserves-strict-order-real-ℚ ε'+ε'<ε))
                   ≤ yℝ -ℝ (real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε')
                     by
                       leq-eq-ℝ
@@ -621,14 +621,14 @@ module _
                         ( inv (associative-diff-ℝ _ _ _))
                   ≤ (yℝ -ℝ real-ℚ⁺ ε'') -ℝ real-ℚ⁺ ε'
                     by
-                      preserves-leq-right-add-ℝ _ _ _
+                      preserves-order-right-add-ℝ _ _ _
                         ( reverses-leq-left-diff-ℝ
                           ( yℝ)
-                          ( preserves-leq-real-ℚ
+                          ( preserves-order-real-ℚ
                             ( leq-left-min-ℚ _ _)))
                   ≤ xℝ -ℝ real-ℚ⁺ ε'
                     by
-                      preserves-leq-right-add-ℝ _ _ _
+                      preserves-order-right-add-ℝ _ _ _
                         ( leq-le-ℝ y-ε''<x)
                   ≤ z
                     by leq-right-max-ℝ _ _)))
@@ -676,13 +676,13 @@ module _
                     ( x+δ<b)
                     ( concatenate-le-leq-ℝ _ _ _
                       ( y<x+ε'')
-                      ( preserves-leq-left-add-ℝ _ _ _
-                        ( preserves-leq-real-ℚ (leq-right-min-ℚ _ _))))))
+                      ( preserves-order-left-add-ℝ _ _ _
+                        ( preserves-order-real-ℚ (leq-right-min-ℚ _ _))))))
                 ( apart-le-ℝ
                   ( concatenate-le-leq-ℝ _ _ _
                     ( y<x+ε'')
-                    ( preserves-leq-left-add-ℝ _ _ _
-                      ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _)))))) ,
+                    ( preserves-order-left-add-ℝ _ _ _
+                      ( preserves-order-real-ℚ (leq-left-min-ℚ _ _)))))) ,
             neighborhood-real-bound-each-leq-ℝ
               ( ε)
               ( z)
@@ -693,8 +693,8 @@ module _
                   by leq-right-min-ℝ _ _
                 ≤ xℝ +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-left-add-ℝ _ _ _
-                      ( leq-le-ℝ (preserves-le-real-ℚ ε'<ε)))
+                    preserves-order-left-add-ℝ _ _ _
+                      ( leq-le-ℝ (preserves-strict-order-real-ℚ ε'<ε)))
               ( transitive-leq-ℝ _ _ _
                 ( leq-left-add-real-ℚ⁺ z ε)
                 ( leq-le-ℝ x<z)) ,
@@ -707,29 +707,29 @@ module _
                 ≤ xℝ +ℝ real-ℚ⁺ ε'
                   by leq-right-min-ℝ _ _
                 ≤ (yℝ +ℝ real-ℚ⁺ ε'') +ℝ real-ℚ⁺ ε'
-                  by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ x<y+ε'')
+                  by preserves-order-right-add-ℝ _ _ _ (leq-le-ℝ x<y+ε'')
                 ≤ (yℝ +ℝ real-ℚ⁺ ε') +ℝ real-ℚ⁺ ε'
                   by
-                    preserves-leq-right-add-ℝ _ _ _
-                      ( preserves-leq-left-add-ℝ _ _ _
-                        ( preserves-leq-real-ℚ (leq-left-min-ℚ _ _)))
+                    preserves-order-right-add-ℝ _ _ _
+                      ( preserves-order-left-add-ℝ _ _ _
+                        ( preserves-order-real-ℚ (leq-left-min-ℚ _ _)))
                 ≤ yℝ +ℝ (real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε')
                   by leq-eq-ℝ (associative-add-ℝ _ _ _)
                 ≤ yℝ +ℝ real-ℚ⁺ (ε' +ℚ⁺ ε')
                   by leq-eq-ℝ (ap-add-ℝ refl (add-real-ℚ _ _))
                 ≤ yℝ +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-left-add-ℝ _ _ _
-                      ( leq-le-ℝ (preserves-le-real-ℚ ε'+ε'<ε)))
+                    preserves-order-left-add-ℝ _ _ _
+                      ( leq-le-ℝ (preserves-strict-order-real-ℚ ε'+ε'<ε)))
               ( chain-of-inequalities
                 yℝ
                 ≤ xℝ +ℝ real-ℚ⁺ ε''
                   by leq-le-ℝ y<x+ε''
                 ≤ z +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-add-ℝ
+                    preserves-order-add-ℝ
                       ( leq-le-ℝ x<z)
-                      ( preserves-leq-real-ℚ
+                      ( preserves-order-real-ℚ
                         ( transitive-leq-ℚ _ _ _
                           ( leq-le-ℚ ε'<ε)
                           ( leq-left-min-ℚ _ _)))))

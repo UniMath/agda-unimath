@@ -101,7 +101,7 @@ abstract
   is-negative-sim-ℝ :
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
     sim-ℝ x y → is-negative-ℝ x → is-negative-ℝ y
-  is-negative-sim-ℝ = preserves-le-left-sim-ℝ _ _ _
+  is-negative-sim-ℝ = preserves-strict-order-left-sim-ℝ _ _ _
 ```
 
 ### If `x < y` and `y` is negative, then `x` is negative

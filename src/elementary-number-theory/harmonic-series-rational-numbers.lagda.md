@@ -108,7 +108,7 @@ abstract
         ≤ ( reciprocal-rational-succ-ℕ 1) +ℚ
           ( partial-sum-series-ℚ harmonic-series-ℚ (exp-ℕ 2 n))
           by
-            preserves-leq-right-add-ℚ _ _ _
+            preserves-order-right-add-ℚ _ _ _
               ( lower-bound-sum-harmonic-series-power-of-two-ℚ n)
         ≤ ( ( rational-ℕ (exp-ℕ 2 n)) *ℚ
             ( reciprocal-rational-succ-ℕ 1) *ℚ
@@ -170,14 +170,14 @@ abstract
             ( exp-ℕ 2 n)
             ( λ k → reciprocal-rational-succ-ℕ (nat-Fin (exp-ℕ 2 n) k)))
           by
-            preserves-leq-left-add-ℚ _ _ _
-              ( preserves-leq-sum-fin-sequence-ℚ
+            preserves-order-left-add-ℚ _ _ _
+              ( preserves-order-sum-fin-sequence-ℚ
                 ( exp-ℕ 2 n)
                 ( _)
                 ( _)
                 ( λ k →
                   inv-leq-ℚ⁺ _ _
-                    ( preserves-leq-rational-ℕ
+                    ( preserves-order-rational-ℕ
                       ( leq-succ-le-ℕ
                         ( nat-Fin (exp-ℕ 2 n +ℕ exp-ℕ 2 n) _)
                         ( exp-ℕ 2 (succ-ℕ n))
@@ -274,7 +274,7 @@ abstract
                       ( q)))
             ≤ reciprocal-rational-succ-ℕ 1 *ℚ rational-ℕ n
               by
-                preserves-leq-left-mul-ℚ⁺
+                preserves-order-left-mul-ℚ⁺
                   ( positive-reciprocal-rational-succ-ℕ 1)
                   ( _)
                   ( _)

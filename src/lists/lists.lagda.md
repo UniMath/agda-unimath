@@ -9,6 +9,8 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -40,7 +42,15 @@ a type `A` is defined inductively, with an empty list `nil`, and an operation
 data list {l : Level} (A : UU l) : UU l where
   nil : list A
   cons : A → list A → list A
+  
 {-# BUILTIN LIST list #-}
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  ap-cons : {x y : A} → x ＝ y → {l k : list A} → l ＝ k → cons x l ＝ cons y k
+  ap-cons = ap-binary cons
 ```
 
 ### Predicates on the type of lists
@@ -102,16 +112,6 @@ unit-list a = cons a nil
 ```agda
 length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list 0 (λ a → succ-ℕ)
-```
-
-### The elementhood predicate on lists
-
-```agda
-infix 6 _∈-list_
-
-data _∈-list_ {l : Level} {A : UU l} : A → list A → UU l where
-  is-head : (a : A) (l : list A) → a ∈-list (cons a l)
-  is-in-tail : (a x : A) (l : list A) → a ∈-list l → a ∈-list (cons x l)
 ```
 
 ## Properties
@@ -290,3 +290,7 @@ is-equiv-map-algebra-list A =
     ( is-section-map-inv-algebra-list A)
     ( is-retraction-map-inv-algebra-list A)
 ```
+
+## See also
+
+- [The elementhood relation on lists](lists.elementhood-relation-lists.md)

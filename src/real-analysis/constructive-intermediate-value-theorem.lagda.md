@@ -202,7 +202,7 @@ module _
 
     leq-lower-upper-bound-sequence-intermediate-theorem-ℝ 0 = a≤b
     leq-lower-upper-bound-sequence-intermediate-theorem-ℝ (succ-ℕ n) =
-      preserves-leq-right-add-ℝ _ _ _
+      preserves-order-right-add-ℝ _ _ _
         ( is-upper-bound-seq-intermediate-value-theorem-ℝ n)
 ```
 
@@ -295,7 +295,7 @@ module _
             ≤ ( seq-intermediate-value-theorem-ℝ n) -ℝ
               ( real-ℝ⁰⁺ (shift-seq-intermediate-value-theorem-ℝ n))
               by
-                preserves-leq-left-add-ℝ _ _ _
+                preserves-order-left-add-ℝ _ _ _
                   ( neg-leq-ℝ
                     ( leq-left-mul-leq-one-ℝ⁰⁺
                       ( d , 0≤d)
@@ -461,8 +461,8 @@ module _
               by leq-eq-ℝ (ap-add-ℝ refl (inv (mul-real-ℚ _ _)))
             ≤ one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε)
               by
-                preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-right-mul-ℝ⁰⁺
+                preserves-order-left-add-ℝ _ _ _
+                  ( preserves-order-right-mul-ℝ⁰⁺
                     ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ ε))
                     ( ε/2≤fcₙ)))
 
@@ -585,8 +585,8 @@ module _
             one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε)
             ≤ one-half-ℝ +ℝ (neg-ℝ (real-ℚ⁺ ε') *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
               by
-                preserves-leq-left-add-ℝ _ _ _
-                  ( preserves-leq-right-mul-ℝ⁰⁺
+                preserves-order-left-add-ℝ _ _ _
+                  ( preserves-order-right-mul-ℝ⁰⁺
                     ( nonnegative-real-ℚ⁺ (inv-ℚ⁺ ε))
                     ( fcₙ≤-ε/2))
             ≤ one-half-ℝ -ℝ (real-ℚ⁺ ε' *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
@@ -763,7 +763,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                     ( real-ℚ⁺ ε')
                     ( fcₘ)
                     ( real-ℚ⁺ ε)
-                    ( preserves-le-real-ℚ ε'<ε)))
+                    ( preserves-strict-order-real-ℚ ε'<ε)))
               ( λ fcₘ<-ε' →
                 inr-disjunction
                   ( inv-tr
@@ -787,7 +787,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                 ( neg-ℝ (real-ℚ⁺ ε))
                 ( fcₘ)
                 ( neg-ℝ (real-ℚ⁺ ε'))
-                ( neg-le-ℝ (preserves-le-real-ℚ ε'<ε))))
+                ( neg-le-ℝ (preserves-strict-order-real-ℚ ε'<ε))))
           ( lemma-intermediate-value-theorem-ℝ m)
 ```
 
@@ -1002,7 +1002,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                           ( lower-bound-seq-intermediate-value-theorem-ℝ m)
                           ( Nδcaₘ))
                   ≤ zero-ℝ +ℝ real-ℚ⁺ ε
-                    by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ faₘ<0)
+                    by preserves-order-right-add-ℝ _ _ _ (leq-le-ℝ faₘ<0)
                   ≤ real-ℚ⁺ ε
                     by leq-eq-ℝ (left-unit-law-add-ℝ _))
                 ( chain-of-inequalities
@@ -1013,7 +1013,7 @@ For all `m`, there [exists](foundation.existential-quantification.md) `n`
                       ( f)
                       ( upper-bound-seq-intermediate-value-theorem-ℝ m)) -ℝ
                     ( real-ℚ⁺ ε)
-                    by preserves-leq-right-add-ℝ _ _ _ (leq-le-ℝ 0<fbₘ)
+                    by preserves-order-right-add-ℝ _ _ _ (leq-le-ℝ 0<fbₘ)
                   ≤ map-pointwise-ε-δ-continuous-endomap-ℝ
                       ( f)
                       ( lim-seq-intermediate-value-theorem-ℝ)

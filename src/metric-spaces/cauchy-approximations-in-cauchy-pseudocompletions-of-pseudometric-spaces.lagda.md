@@ -431,7 +431,7 @@ module _
         ( map-cauchy-approximation-Pseudometric-Space M u ε)
         ( β +ℚ⁺ ε)
         ( (α +ℚ⁺ β) +ℚ⁺ (ε +ℚ⁺ δ))
-        ( preserves-le-add-ℚ
+        ( preserves-strict-order-add-ℚ
           { rational-ℚ⁺ β}
           { rational-ℚ⁺ (α +ℚ⁺ β)}
           { rational-ℚ⁺ ε}

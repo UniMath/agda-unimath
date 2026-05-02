@@ -55,23 +55,23 @@ module _
   {l : Level} {A : UU l}
   where
 
-  permute-tuple : (n : ℕ) → tuple A n → Permutation n → tuple A n
+  permute-tuple : (n : ℕ) → tuple A n → permutation n → tuple A n
   permute-tuple n v s =
     tuple-fin-sequence n (fin-sequence-tuple n v ∘ map-equiv s)
 ```
 
-### The predicate that a function from `tuple` to `tuple` is just permuting tuples
+### The predicate that a function from `tuple` to `tuple` is a permutation
 
 ```agda
   is-permutation-tuple : (n : ℕ) → (tuple A n → tuple A n) → UU l
   is-permutation-tuple n f =
     (v : tuple A n) →
-    Σ ( Permutation n)
+    Σ ( permutation n)
       ( λ t → f v ＝ permute-tuple n v t)
 
   permutation-is-permutation-tuple :
     (n : ℕ) (f : tuple A n → tuple A n) → is-permutation-tuple n f →
-    (v : tuple A n) → Permutation n
+    (v : tuple A n) → permutation n
   permutation-is-permutation-tuple n f P v = pr1 (P v)
 
   eq-permute-tuple-permutation-is-permutation-tuple :
@@ -83,7 +83,7 @@ module _
 
 ## Properties
 
-### Computational rules
+### Computation rules
 
 ```agda
   compute-permute-tuple-id-equiv :
@@ -96,7 +96,7 @@ module _
   compute-composition-permute-tuple :
     (n : ℕ)
     (v : tuple A n) →
-    (a b : Permutation n) →
+    (a b : permutation n) →
     permute-tuple n v (a ∘e b) ＝ permute-tuple n (permute-tuple n v a) b
   compute-composition-permute-tuple n v a b =
     ap
@@ -134,7 +134,7 @@ module _
     (n : ℕ)
     (v : tuple A n)
     (x : A)
-    (t : Permutation n) →
+    (t : permutation n) →
     permute-tuple (succ-ℕ n) (x ∷ v) (equiv-coproduct t id-equiv) ＝
     (x ∷ permute-tuple n v t)
   compute-equiv-coproduct-permutation-id-equiv-permute-tuple n v x t =
@@ -151,7 +151,7 @@ module _
 
   ap-permute-tuple :
     {n : ℕ}
-    (a : Permutation n)
+    (a : permutation n)
     {v w : tuple A n} →
     v ＝ w →
     permute-tuple n v a ＝ permute-tuple n w a
@@ -162,13 +162,13 @@ module _
 
 ```agda
   is-in-fin-sequence-is-in-permute-fin-sequence :
-    (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
+    (n : ℕ) (v : Fin n → A) (t : permutation n) (x : A) →
     in-fin-sequence n x (v ∘ map-equiv t) → in-fin-sequence n x v
   is-in-fin-sequence-is-in-permute-fin-sequence n v t x (k , refl) =
     map-equiv t k , refl
 
   is-in-tuple-is-in-permute-tuple :
-    (n : ℕ) (v : tuple A n) (t : Permutation n) (x : A) →
+    (n : ℕ) (v : tuple A n) (t : permutation n) (x : A) →
     x ∈-tuple (permute-tuple n v t) → x ∈-tuple v
   is-in-tuple-is-in-permute-tuple n v t x I =
     is-in-tuple-is-in-fin-sequence
@@ -187,13 +187,13 @@ module _
           ( is-in-fin-sequence-is-in-tuple n (permute-tuple n v t) x I)))
 
   is-in-permute-fin-sequence-is-in-fin-sequence :
-    (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
+    (n : ℕ) (v : Fin n → A) (t : permutation n) (x : A) →
     in-fin-sequence n x v → in-fin-sequence n x (v ∘ map-equiv t)
   is-in-permute-fin-sequence-is-in-fin-sequence n v t x (k , refl) =
     map-inv-equiv t k , ap v (inv (is-section-map-inv-equiv t k))
 
   is-in-permute-tuple-is-in-tuple :
-    (n : ℕ) (v : tuple A n) (t : Permutation n) (x : A) →
+    (n : ℕ) (v : tuple A n) (t : permutation n) (x : A) →
     x ∈-tuple v → x ∈-tuple (permute-tuple n v t)
   is-in-permute-tuple-is-in-tuple n v t x I =
     is-in-tuple-is-in-fin-sequence
@@ -353,7 +353,7 @@ module _
               ( permutation-list-standard-transpositions-Fin (succ-ℕ n) l))))))
 
   invariant-permutation-fold-tuple :
-    {n : ℕ} → (v : tuple A n) → (f : Permutation n) →
+    {n : ℕ} → (v : tuple A n) → (f : permutation n) →
     fold-tuple b μ v ＝ fold-tuple b μ (permute-tuple n v f)
   invariant-permutation-fold-tuple {n} v f =
     ( ( invariant-list-transpositions-fold-tuple
@@ -375,7 +375,7 @@ module _
 ```agda
 eq-map-tuple-permute-tuple :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) {n : ℕ} (v : tuple A n) (t : Permutation n) →
+  (f : A → B) {n : ℕ} (v : tuple A n) (t : permutation n) →
   permute-tuple n (map-tuple f v) t ＝
   map-tuple f (permute-tuple n v t)
 eq-map-tuple-permute-tuple f {n} v t =

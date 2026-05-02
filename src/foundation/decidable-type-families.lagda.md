@@ -8,7 +8,7 @@ module foundation.decidable-type-families where
 
 ```agda
 open import foundation.coproduct-types
-open import foundation.decidable-subtypes
+-- open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -58,15 +58,6 @@ module _
 
   is-decidable-decidable-family : is-decidable-family family-decidable-family
   is-decidable-decidable-family = pr2 P
-```
-
-### The underlying decidable type family of a decidable subtype
-
-```agda
-decidable-family-decidable-subtype :
-  {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → decidable-family l2 A
-decidable-family-decidable-subtype P =
-  ( is-in-decidable-subtype P , is-decidable-decidable-subtype P)
 ```
 
 ## Properties
@@ -155,18 +146,6 @@ module _
       ( P)
       ( Q)
       ( H))
-
-  comp-decidable-family-decidable-subtype :
-    (P : decidable-subtype l2 A) →
-    ((x : A) → decidable-family l3 (is-in-decidable-subtype P x)) →
-    decidable-family (l2 ⊔ l3) A
-  comp-decidable-family-decidable-subtype P Q =
-    comp-decidable-family-has-double-negation-dense-equality
-      ( decidable-family-decidable-subtype P)
-      ( Q)
-      ( λ x p q →
-        intro-double-negation
-          ( eq-is-prop (is-prop-is-in-decidable-subtype P x)))
 ```
 
 ## See also

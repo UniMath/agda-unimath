@@ -157,7 +157,7 @@ module _
           ( multiple-Semiring R n (one-Semiring R))
           ( one-Semiring R)
         by
-          multiple-succ-Semiring R n (one-Semiring R)
+          successor-law-multiple-Semiring R n (one-Semiring R)
       ＝
         add-Semiring R
           ( map-hom-Semiring ℕ-Semiring R f n)
@@ -165,7 +165,7 @@ module _
         by
           ap-add-Semiring R
             ( htpy-map-nat-hom-Semiring n)
-            ( inv (preserves-unit-hom-Semiring ℕ-Semiring R f))
+            ( inv (preserves-one-hom-Semiring ℕ-Semiring R f))
       ＝ map-hom-Semiring ℕ-Semiring R f (succ-ℕ n)
         by inv (preserves-addition-hom-Semiring ℕ-Semiring R f)
 ```

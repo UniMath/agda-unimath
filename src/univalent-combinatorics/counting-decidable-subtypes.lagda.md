@@ -93,6 +93,11 @@ count-decidable-subtype P e =
   count-decidable-subtype' P
     ( number-of-elements-count e)
     ( equiv-count e)
+
+number-of-elements-decidable-subtype :
+  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) (e : count X) → ℕ
+number-of-elements-decidable-subtype P e =
+  number-of-elements-count (count-decidable-subtype P e)
 ```
 
 ### The elements in the domain of a decidable embedding can be counted if the elements of the codomain can be counted

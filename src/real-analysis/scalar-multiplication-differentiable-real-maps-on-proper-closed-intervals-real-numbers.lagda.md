@@ -99,7 +99,7 @@ module _
                 ≤ ( real-ℚ⁺ q) *ℝ
                   ( real-ℚ⁺ (ε *ℚ⁺ inv-ℚ⁺ q) *ℝ dist-ℝ (pr1 x) (pr1 y))
                   by
-                    preserves-leq-mul-ℝ⁰⁺
+                    preserves-order-mul-ℝ⁰⁺
                       ( nonnegative-abs-ℝ c)
                       ( nonnegative-real-ℚ⁺ q)
                       ( nonnegative-dist-ℝ _ _)

@@ -329,7 +329,7 @@ module _
                 ( rational-ℚ⁺ (1/m' +ℚ⁺ 1/k'))
                 ( rational-ℚ⁺ (1/n' +ℚ⁺ 1/n'))
                 ( ε)
-                ( preserves-leq-add-ℚ
+                ( preserves-order-add-ℚ
                   { rational-ℚ⁺ 1/m'}
                   { rational-ℚ⁺ 1/n'}
                   { rational-ℚ⁺ 1/k'}
@@ -353,7 +353,7 @@ module _
                   ( ε' +ℚ ε')
                   ( ε)
                   ( 2ε'<ε)
-                  ( preserves-le-add-ℚ
+                  ( preserves-strict-order-add-ℚ
                     { rational-ℚ⁺ 1/n'}
                     { ε'}
                     { rational-ℚ⁺ 1/n'}

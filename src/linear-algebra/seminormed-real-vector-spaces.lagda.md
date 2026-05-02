@@ -454,7 +454,7 @@ module _
       let
         open inequality-reasoning-Large-Poset ℝ-Large-Poset
       in
-        reflects-leq-left-mul-ℝ⁺
+        reflects-order-left-mul-ℝ⁺
           ( positive-real-ℕ⁺ (2 , λ ()))
           ( zero-ℝ)
           ( map-seminorm-Seminormed-ℝ-Vector-Space V v)
@@ -520,7 +520,7 @@ module _
       neighborhood-Seminormed-ℝ-Vector-Space ε v v
     refl-neighborhood-Seminormed-ℝ-Vector-Space ε v =
       leq-le-ℝ
-        ( preserves-le-left-sim-ℝ
+        ( preserves-strict-order-left-sim-ℝ
           ( real-ℚ⁺ ε)
           ( zero-ℝ)
           ( dist-Seminormed-ℝ-Vector-Space V v v)
@@ -553,7 +553,7 @@ module _
           ( dist-Seminormed-ℝ-Vector-Space V w x)
           by triangular-dist-Seminormed-ℝ-Vector-Space V v w x
         ≤ real-ℚ⁺ d1 +ℝ real-ℚ⁺ d2
-          by preserves-leq-add-ℝ Nd1vw Nd2wx
+          by preserves-order-add-ℝ Nd1vw Nd2wx
         ≤ real-ℚ⁺ (d1 +ℚ⁺ d2)
           by leq-eq-ℝ (add-real-ℚ _ _)
 

@@ -144,55 +144,55 @@ abstract
 
 ```agda
 abstract
-  preserves-le-left-mul-ℝ⁺ :
+  preserves-strict-order-left-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → le-ℝ y z →
     le-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
-  preserves-le-left-mul-ℝ⁺ x⁺@(x , 0<x) {y} {z} y<z =
+  preserves-strict-order-left-mul-ℝ⁺ x⁺@(x , 0<x) {y} {z} y<z =
     le-is-positive-diff-ℝ
       ( tr
         ( is-positive-ℝ)
         ( left-distributive-mul-diff-ℝ x z y)
         ( is-positive-mul-ℝ 0<x (is-positive-diff-le-ℝ y<z)))
 
-  preserves-le-right-mul-ℝ⁺ :
+  preserves-strict-order-right-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → le-ℝ y z →
     le-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
-  preserves-le-right-mul-ℝ⁺ x y<z =
+  preserves-strict-order-right-mul-ℝ⁺ x y<z =
     binary-tr
       ( le-ℝ)
       ( commutative-mul-ℝ _ _)
       ( commutative-mul-ℝ _ _)
-      ( preserves-le-left-mul-ℝ⁺ x y<z)
+      ( preserves-strict-order-left-mul-ℝ⁺ x y<z)
 ```
 
 ### Multiplication by a positive real number preserves and reflects inequality
 
 ```agda
 abstract
-  preserves-leq-left-mul-ℝ⁺ :
+  preserves-order-left-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z)
-  preserves-leq-left-mul-ℝ⁺ x⁺ = preserves-leq-left-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
+  preserves-order-left-mul-ℝ⁺ x⁺ = preserves-order-left-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
 
-  preserves-leq-right-mul-ℝ⁺ :
+  preserves-order-right-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) {y : ℝ l2} {z : ℝ l3} → leq-ℝ y z →
     leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x)
-  preserves-leq-right-mul-ℝ⁺ x⁺ =
-    preserves-leq-right-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
+  preserves-order-right-mul-ℝ⁺ x⁺ =
+    preserves-order-right-mul-ℝ⁰⁺ (nonnegative-ℝ⁺ x⁺)
 
-  reflects-leq-left-mul-ℝ⁺ :
+  reflects-order-left-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     leq-ℝ (real-ℝ⁺ x *ℝ y) (real-ℝ⁺ x *ℝ z) → leq-ℝ y z
-  reflects-leq-left-mul-ℝ⁺ x y z xy≤xz =
+  reflects-order-left-mul-ℝ⁺ x y z xy≤xz =
     leq-not-le-ℝ _ _
-      ( λ z<y → not-leq-le-ℝ _ _ (preserves-le-left-mul-ℝ⁺ x z<y) xy≤xz)
+      ( λ z<y → not-leq-le-ℝ _ _ (preserves-strict-order-left-mul-ℝ⁺ x z<y) xy≤xz)
 
-  reflects-leq-right-mul-ℝ⁺ :
+  reflects-order-right-mul-ℝ⁺ :
     {l1 l2 l3 : Level} (x : ℝ⁺ l1) (y : ℝ l2) (z : ℝ l3) →
     leq-ℝ (y *ℝ real-ℝ⁺ x) (z *ℝ real-ℝ⁺ x) → leq-ℝ y z
-  reflects-leq-right-mul-ℝ⁺ x y z yx≤zx =
+  reflects-order-right-mul-ℝ⁺ x y z yx≤zx =
     leq-not-le-ℝ _ _
-      ( λ z<y → not-leq-le-ℝ _ _ (preserves-le-right-mul-ℝ⁺ x z<y) yx≤zx)
+      ( λ z<y → not-leq-le-ℝ _ _ (preserves-strict-order-right-mul-ℝ⁺ x z<y) yx≤zx)
 ```
 
 ### Multiplication preserves similarity
@@ -258,18 +258,18 @@ abstract
         ( chain-of-inequalities
           real-ℚ q
           ≤ real-ℚ (p *ℚ r)
-            by preserves-leq-real-ℚ q≤pr
+            by preserves-order-real-ℚ q≤pr
           ≤ real-ℚ p *ℝ real-ℚ r
             by leq-eq-ℝ (inv (mul-real-ℚ p r))
           ≤ real-ℚ p *ℝ real-ℚ r'
             by
-              preserves-leq-left-mul-ℝ⁺
+              preserves-order-left-mul-ℝ⁺
                 ( positive-real-ℚ⁺ p⁺)
-                ( preserves-leq-real-ℚ (leq-left-max-ℚ r zero-ℚ))
+                ( preserves-order-real-ℚ (leq-left-max-ℚ r zero-ℚ))
           ≤ real-ℝ⁺ x *ℝ real-ℚ r'
             by
-              preserves-leq-right-mul-ℝ⁰⁺
-                ( real-ℚ r' , preserves-leq-real-ℚ (leq-right-max-ℚ r zero-ℚ))
+              preserves-order-right-mul-ℝ⁰⁺
+                ( real-ℚ r' , preserves-order-real-ℚ (leq-right-max-ℚ r zero-ℚ))
                 ( leq-real-is-in-lower-cut-ℝ (real-ℝ⁺ x) p<x)
           ≤ real-ℝ⁺ x *ℝ raise-real-ℚ l2 r'
             by leq-sim-ℝ (preserves-sim-left-mul-ℝ _ _ _ (sim-raise-ℝ l2 _)))

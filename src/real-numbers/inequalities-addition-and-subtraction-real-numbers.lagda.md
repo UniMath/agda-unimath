@@ -51,35 +51,35 @@ module _
   abstract opaque
     unfolding add-ℝ leq-ℝ
 
-    preserves-leq-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
-    preserves-leq-right-add-ℝ x≤y _ =
+    preserves-order-right-add-ℝ : leq-ℝ x y → leq-ℝ (x +ℝ z) (y +ℝ z)
+    preserves-order-right-add-ℝ x≤y _ =
       map-tot-exists (λ (qx , _) → map-product (x≤y qx) id)
 
-    preserves-leq-left-add-ℝ : leq-ℝ x y → leq-ℝ (z +ℝ x) (z +ℝ y)
-    preserves-leq-left-add-ℝ x≤y _ =
+    preserves-order-left-add-ℝ : leq-ℝ x y → leq-ℝ (z +ℝ x) (z +ℝ y)
+    preserves-order-left-add-ℝ x≤y _ =
       map-tot-exists (λ (_ , qx) → map-product id (map-product (x≤y qx) id))
 
 abstract
-  preserves-leq-diff-ℝ :
+  preserves-order-diff-ℝ :
     {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
     leq-ℝ x y → leq-ℝ (x -ℝ z) (y -ℝ z)
-  preserves-leq-diff-ℝ z = preserves-leq-right-add-ℝ (neg-ℝ z)
+  preserves-order-diff-ℝ z = preserves-order-right-add-ℝ (neg-ℝ z)
 
 module _
   {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3)
   where
 
   abstract
-    reflects-leq-right-add-ℝ : leq-ℝ (x +ℝ z) (y +ℝ z) → leq-ℝ x y
-    reflects-leq-right-add-ℝ x+z≤y+z =
-      preserves-leq-sim-ℝ
+    reflects-order-right-add-ℝ : leq-ℝ (x +ℝ z) (y +ℝ z) → leq-ℝ x y
+    reflects-order-right-add-ℝ x+z≤y+z =
+      preserves-order-sim-ℝ
         ( cancel-right-add-diff-ℝ x z)
         ( cancel-right-add-diff-ℝ y z)
-        ( preserves-leq-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)
+        ( preserves-order-right-add-ℝ (neg-ℝ z) (x +ℝ z) (y +ℝ z) x+z≤y+z)
 
-    reflects-leq-left-add-ℝ : leq-ℝ (z +ℝ x) (z +ℝ y) → leq-ℝ x y
-    reflects-leq-left-add-ℝ z+x≤z+y =
-      reflects-leq-right-add-ℝ
+    reflects-order-left-add-ℝ : leq-ℝ (z +ℝ x) (z +ℝ y) → leq-ℝ x y
+    reflects-order-left-add-ℝ z+x≤z+y =
+      reflects-order-right-add-ℝ
         ( binary-tr
           ( leq-ℝ)
           ( commutative-add-ℝ z x)
@@ -91,24 +91,24 @@ module _
   where
 
   iff-translate-right-leq-ℝ : leq-ℝ x y ↔ leq-ℝ (x +ℝ z) (y +ℝ z)
-  pr1 iff-translate-right-leq-ℝ = preserves-leq-right-add-ℝ z x y
-  pr2 iff-translate-right-leq-ℝ = reflects-leq-right-add-ℝ z x y
+  pr1 iff-translate-right-leq-ℝ = preserves-order-right-add-ℝ z x y
+  pr2 iff-translate-right-leq-ℝ = reflects-order-right-add-ℝ z x y
 
   iff-translate-left-leq-ℝ : leq-ℝ x y ↔ leq-ℝ (z +ℝ x) (z +ℝ y)
-  pr1 iff-translate-left-leq-ℝ = preserves-leq-left-add-ℝ z x y
-  pr2 iff-translate-left-leq-ℝ = reflects-leq-left-add-ℝ z x y
+  pr1 iff-translate-left-leq-ℝ = preserves-order-left-add-ℝ z x y
+  pr2 iff-translate-left-leq-ℝ = reflects-order-left-add-ℝ z x y
 
 abstract
-  preserves-leq-add-ℝ :
+  preserves-order-add-ℝ :
     {l1 l2 l3 l4 : Level} {a : ℝ l1} {b : ℝ l2} {c : ℝ l3} {d : ℝ l4} →
     leq-ℝ a b → leq-ℝ c d → leq-ℝ (a +ℝ c) (b +ℝ d)
-  preserves-leq-add-ℝ {a = a} {b = b} {c = c} {d = d} a≤b c≤d =
+  preserves-order-add-ℝ {a = a} {b = b} {c = c} {d = d} a≤b c≤d =
     transitive-leq-ℝ
       ( a +ℝ c)
       ( a +ℝ d)
       ( b +ℝ d)
-      ( preserves-leq-right-add-ℝ d a b a≤b)
-      ( preserves-leq-left-add-ℝ a c d c≤d)
+      ( preserves-order-right-add-ℝ d a b a≤b)
+      ( preserves-order-left-add-ℝ a c d c≤d)
 ```
 
 ### Transposition laws
@@ -121,27 +121,27 @@ module _
   abstract
     leq-transpose-left-diff-ℝ : leq-ℝ (x -ℝ y) z → leq-ℝ x (z +ℝ y)
     leq-transpose-left-diff-ℝ x-y≤z =
-      preserves-leq-left-sim-ℝ
+      preserves-order-left-sim-ℝ
         ( cancel-right-diff-add-ℝ x y)
-        ( preserves-leq-right-add-ℝ y (x -ℝ y) z x-y≤z)
+        ( preserves-order-right-add-ℝ y (x -ℝ y) z x-y≤z)
 
     leq-transpose-left-add-ℝ : leq-ℝ (x +ℝ y) z → leq-ℝ x (z -ℝ y)
     leq-transpose-left-add-ℝ x+y≤z =
-      preserves-leq-left-sim-ℝ
+      preserves-order-left-sim-ℝ
         ( cancel-right-add-diff-ℝ x y)
-        ( preserves-leq-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y≤z)
+        ( preserves-order-right-add-ℝ (neg-ℝ y) (x +ℝ y) z x+y≤z)
 
     leq-transpose-right-add-ℝ : leq-ℝ x (y +ℝ z) → leq-ℝ (x -ℝ z) y
     leq-transpose-right-add-ℝ x≤y+z =
-      preserves-leq-right-sim-ℝ
+      preserves-order-right-sim-ℝ
         ( cancel-right-add-diff-ℝ y z)
-        ( preserves-leq-right-add-ℝ (neg-ℝ z) x (y +ℝ z) x≤y+z)
+        ( preserves-order-right-add-ℝ (neg-ℝ z) x (y +ℝ z) x≤y+z)
 
     leq-transpose-right-diff-ℝ : leq-ℝ x (y -ℝ z) → leq-ℝ (x +ℝ z) y
     leq-transpose-right-diff-ℝ x≤y-z =
-      preserves-leq-right-sim-ℝ
+      preserves-order-right-sim-ℝ
         ( cancel-right-diff-add-ℝ y z)
-        ( preserves-leq-right-add-ℝ z x (y -ℝ z) x≤y-z)
+        ( preserves-order-right-add-ℝ z x (y -ℝ z) x≤y-z)
 ```
 
 ### Swapping laws
@@ -178,7 +178,7 @@ module _
       inv-tr
         ( leq-ℝ (x +ℝ y))
         ( associative-add-ℝ x z (real-ℚ⁺ d))
-        ( preserves-leq-left-add-ℝ
+        ( preserves-order-left-add-ℝ
           ( x)
           ( y)
           ( z +ℝ real-ℚ⁺ d)
@@ -208,7 +208,7 @@ module _
       leq-ℝ (x +ℝ y) ((x +ℝ z) +ℝ real-ℚ⁺ d) →
       leq-ℝ y (z +ℝ real-ℚ⁺ d)
     reflects-lower-neighborhood-leq-left-add-ℝ x+y≤x+z+d =
-      reflects-leq-left-add-ℝ
+      reflects-order-left-add-ℝ
         ( x)
         ( y)
         ( z +ℝ real-ℚ⁺ d)
@@ -237,5 +237,5 @@ abstract
     {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} (z : ℝ l3) →
     leq-ℝ x y → leq-ℝ (z -ℝ y) (z -ℝ x)
   reverses-leq-left-diff-ℝ z x≤y =
-    preserves-leq-left-add-ℝ z _ _ (neg-leq-ℝ x≤y)
+    preserves-order-left-add-ℝ z _ _ (neg-leq-ℝ x≤y)
 ```

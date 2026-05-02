@@ -82,7 +82,7 @@ module _
     ( ( ( mul-ℝ (real-ℝ⁺ x) ,
           is-pointwise-ε-δ-continuous-map-uniformly-continuous-endomap-ℝ
             ( uniformly-continuous-map-right-mul-ℝ l (real-ℝ⁺ x))) ,
-        λ _ _ → preserves-le-left-mul-ℝ⁺ x) ,
+        λ _ _ → preserves-strict-order-left-mul-ℝ⁺ x) ,
       is-cofinal-left-mul-real-ℝ⁺ l x ,
       is-coinitial-left-mul-real-ℝ⁺ l x)
 
@@ -262,12 +262,12 @@ abstract
             ( one-ℝ)
             ( x *ℝ real-inv-ℝ⁺ y⁺)
             ( one-ℝ)
-            ( preserves-le-left-sim-ℝ _ _ _
+            ( preserves-strict-order-left-sim-ℝ _ _ _
               ( right-inverse-law-mul-ℝ⁺ x⁺)
-              ( preserves-le-left-mul-ℝ⁺ x⁺ 1/x<1/y))
-            ( preserves-leq-right-sim-ℝ
+              ( preserves-strict-order-left-mul-ℝ⁺ x⁺ 1/x<1/y))
+            ( preserves-order-right-sim-ℝ
               ( right-inverse-law-mul-ℝ⁺ y⁺)
-              ( preserves-leq-right-mul-ℝ⁺ (inv-ℝ⁺ y⁺) x≤y))))
+              ( preserves-order-right-mul-ℝ⁺ (inv-ℝ⁺ y⁺) x≤y))))
 ```
 
 ### The multiplicative inverse operation reverses strict inequality
@@ -302,7 +302,7 @@ abstract
             ( le-ℝ)
             ( ap real-ℝ⁺ (inv (inv-positive-real-ℚ⁺ q⁺)))
             ( ap real-ℝ⁺ (inv (inv-positive-real-ℚ⁺ p⁺)))
-            ( preserves-le-real-ℚ (inv-le-ℚ⁺ p⁺ q⁺ (reflects-le-real-ℚ p<q))))
+            ( preserves-strict-order-real-ℚ (inv-le-ℚ⁺ p⁺ q⁺ (reflects-le-real-ℚ p<q))))
           ( inv-leq-ℝ⁺ _ _ (leq-le-ℝ x<p)))
 ```
 
@@ -386,7 +386,7 @@ abstract
       real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ x
       ≤ real-inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺) *ℝ (x +ℝ y)
         by
-          preserves-leq-left-mul-ℝ⁺
+          preserves-order-left-mul-ℝ⁺
             ( inv-ℝ⁺ (add-nonnegative-positive-ℝ x⁰⁺ y⁺))
             ( leq-left-add-real-ℝ⁺ x y⁺)
       ≤ one-ℝ

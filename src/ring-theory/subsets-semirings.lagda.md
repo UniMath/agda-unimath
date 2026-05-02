@@ -7,6 +7,9 @@ module ring-theory.subsets-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-extensionality
@@ -88,50 +91,260 @@ module _
   {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
   where
 
+  contains-zero-prop-subset-Semiring : Prop l2
+  contains-zero-prop-subset-Semiring =
+    S (zero-Semiring R)
+
   contains-zero-subset-Semiring : UU l2
   contains-zero-subset-Semiring = is-in-subtype S (zero-Semiring R)
+
+  is-prop-contains-zero-subset-Semiring :
+    is-prop contains-zero-subset-Semiring
+  is-prop-contains-zero-subset-Semiring =
+    is-prop-is-in-subtype S (zero-Semiring R)
 ```
 
 ### The condition that a subset contains one
 
 ```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  contains-one-prop-subset-Semiring : Prop l2
+  contains-one-prop-subset-Semiring = S (one-Semiring R)
+
   contains-one-subset-Semiring : UU l2
   contains-one-subset-Semiring = is-in-subtype S (one-Semiring R)
+
+  is-prop-contains-one-subset-Semiring :
+    is-prop contains-one-subset-Semiring
+  is-prop-contains-one-subset-Semiring =
+    is-prop-is-in-subtype S (one-Semiring R)
 ```
 
 ### The condition that a subset is closed under addition
 
 ```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
   is-closed-under-addition-subset-Semiring : UU (l1 ⊔ l2)
   is-closed-under-addition-subset-Semiring =
-    (x y : type-Semiring R) →
+    {x y : type-Semiring R} →
     is-in-subtype S x → is-in-subtype S y →
     is-in-subtype S (add-Semiring R x y)
+
+  is-prop-is-closed-under-addition-subset-Semiring :
+    is-prop is-closed-under-addition-subset-Semiring
+  is-prop-is-closed-under-addition-subset-Semiring =
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y →
+            is-prop-function-type
+              ( is-prop-function-type (is-prop-is-in-subtype S _))))
+
+  is-closed-under-addition-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-closed-under-addition-prop-subset-Semiring =
+    is-closed-under-addition-subset-Semiring
+  pr2 is-closed-under-addition-prop-subset-Semiring =
+    is-prop-is-closed-under-addition-subset-Semiring
 ```
 
 ### The condition that a subset is closed under multiplication
 
 ```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
   is-closed-under-multiplication-subset-Semiring : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Semiring =
-    (x y : type-Semiring R) → is-in-subtype S x → is-in-subtype S y →
+    {x y : type-Semiring R} → is-in-subtype S x → is-in-subtype S y →
     is-in-subtype S (mul-Semiring R x y)
+
+  is-prop-is-closed-under-multiplication-subset-Semiring :
+    is-prop is-closed-under-multiplication-subset-Semiring
+  is-prop-is-closed-under-multiplication-subset-Semiring =
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y →
+            is-prop-function-type
+              ( is-prop-function-type (is-prop-is-in-subtype S _))))
+
+  is-closed-under-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-closed-under-multiplication-prop-subset-Semiring =
+    is-closed-under-multiplication-subset-Semiring
+  pr2 is-closed-under-multiplication-prop-subset-Semiring =
+    is-prop-is-closed-under-multiplication-subset-Semiring
 ```
 
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
 
 ```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
   is-closed-under-left-multiplication-subset-Semiring : UU (l1 ⊔ l2)
   is-closed-under-left-multiplication-subset-Semiring =
-    (x y : type-Semiring R) → is-in-subtype S y →
+    {x y : type-Semiring R} → is-in-subtype S y →
     is-in-subtype S (mul-Semiring R x y)
+
+  is-prop-is-closed-under-left-multiplication-subset-Semiring :
+    is-prop is-closed-under-left-multiplication-subset-Semiring
+  is-prop-is-closed-under-left-multiplication-subset-Semiring =
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
+
+  is-closed-under-left-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-closed-under-left-multiplication-prop-subset-Semiring =
+    is-closed-under-left-multiplication-subset-Semiring
+  pr2 is-closed-under-left-multiplication-prop-subset-Semiring =
+    is-prop-is-closed-under-left-multiplication-subset-Semiring
 ```
 
-### The condition that a subset is closed-under-multiplication from the right by an arbitrary element
+### The condition that a subset is closed under multiplication from the right by an arbitrary element
 
 ```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
   is-closed-under-right-multiplication-subset-Semiring : UU (l1 ⊔ l2)
   is-closed-under-right-multiplication-subset-Semiring =
-    (x y : type-Semiring R) → is-in-subtype S x →
+    {x y : type-Semiring R} → is-in-subtype S x →
     is-in-subtype S (mul-Semiring R x y)
+
+  is-prop-is-closed-under-right-multiplication-subset-Semiring :
+    is-prop is-closed-under-right-multiplication-subset-Semiring
+  is-prop-is-closed-under-right-multiplication-subset-Semiring =
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
+
+  is-closed-under-right-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-closed-under-right-multiplication-prop-subset-Semiring =
+    is-closed-under-right-multiplication-subset-Semiring
+  pr2 is-closed-under-right-multiplication-prop-subset-Semiring =
+    is-prop-is-closed-under-right-multiplication-subset-Semiring
+```
+
+### The condition that a subset is closed under two-sided multiplication arbitrary elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  is-closed-under-two-sided-multiplication-subset-Semiring : UU (l1 ⊔ l2)
+  is-closed-under-two-sided-multiplication-subset-Semiring =
+    {r x u : type-Semiring R} → is-in-subtype S x →
+    is-in-subtype S (mul-Semiring R (mul-Semiring R r x) u)
+
+  is-prop-is-closed-under-two-sided-multiplication-subset-Semiring :
+    is-prop is-closed-under-two-sided-multiplication-subset-Semiring
+  is-prop-is-closed-under-two-sided-multiplication-subset-Semiring =
+    is-prop-implicit-Π
+      ( λ r →
+        is-prop-implicit-Π
+          ( λ x →
+            is-prop-implicit-Π
+              ( λ u → is-prop-function-type (is-prop-is-in-subtype S _))))
+
+  is-closed-under-two-sided-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-closed-under-two-sided-multiplication-prop-subset-Semiring =
+    is-closed-under-two-sided-multiplication-subset-Semiring
+  pr2 is-closed-under-two-sided-multiplication-prop-subset-Semiring =
+    is-prop-is-closed-under-two-sided-multiplication-subset-Semiring
+```
+
+### The condition that a subset of a semiring is an additive submonoid
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  is-additive-submonoid-subset-Semiring : UU (l1 ⊔ l2)
+  is-additive-submonoid-subset-Semiring =
+    contains-zero-subset-Semiring R S ×
+    is-closed-under-addition-subset-Semiring R S
+
+  is-prop-is-additive-submonoid-subset-Semiring :
+    is-prop is-additive-submonoid-subset-Semiring
+  is-prop-is-additive-submonoid-subset-Semiring =
+    is-prop-product
+      ( is-prop-contains-zero-subset-Semiring R S)
+      ( is-prop-is-closed-under-addition-subset-Semiring R S)
+
+  is-additive-submonoid-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-additive-submonoid-prop-subset-Semiring =
+    is-additive-submonoid-subset-Semiring
+  pr2 is-additive-submonoid-prop-subset-Semiring =
+    is-prop-is-additive-submonoid-subset-Semiring
+```
+
+## Properties
+
+### Any subset that is closed under two-sided multiplication is closed under left and right multiplication
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
+    is-closed-under-two-sided-multiplication-subset-Semiring R S →
+    is-closed-under-left-multiplication-subset-Semiring R S
+  is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U =
+    is-closed-under-eq-subset-Semiring R S
+      ( H U)
+      ( right-unit-law-mul-Semiring R _)
+
+  is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
+    is-closed-under-two-sided-multiplication-subset-Semiring R S →
+    is-closed-under-right-multiplication-subset-Semiring R S
+  is-closed-under-right-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U =
+    is-closed-under-eq-subset-Semiring R S
+      ( H U)
+      ( ap (mul-Semiring' R _) (left-unit-law-mul-Semiring R _))
+```
+
+### Any subset that is closed under left, right, or two-sided multiplication is closed under multiplication
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring :
+    is-closed-under-left-multiplication-subset-Semiring R S →
+    is-closed-under-multiplication-subset-Semiring R S
+  is-closed-under-multiplication-is-closed-under-left-multiplication-subset-Semiring
+    H U V =
+    H V
+
+  is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring :
+    is-closed-under-right-multiplication-subset-Semiring R S →
+    is-closed-under-multiplication-subset-Semiring R S
+  is-closed-under-multiplication-is-closed-under-right-multiplication-subset-Semiring
+    H U V =
+    H U
+
+  is-closed-under-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring :
+    is-closed-under-two-sided-multiplication-subset-Semiring R S →
+    is-closed-under-multiplication-subset-Semiring R S
+  is-closed-under-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+    H U V =
+    is-closed-under-left-multiplication-is-closed-under-two-sided-multiplication-subset-Semiring
+     R S H V
 ```

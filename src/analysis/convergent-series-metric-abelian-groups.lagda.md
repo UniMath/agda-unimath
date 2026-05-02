@@ -191,7 +191,7 @@ module _
                       ( is-mod-μ
                         ( ε)
                         ( l)
-                        ( reflects-leq-left-add-ℕ
+                        ( reflects-order-left-add-ℕ
                           ( k)
                           ( μ ε)
                           ( l)

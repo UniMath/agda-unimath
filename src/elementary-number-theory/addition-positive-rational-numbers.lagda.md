@@ -144,7 +144,7 @@ abstract
       ( zero-ℚ +ℚ x)
       ( (rational-ℚ⁺ d) +ℚ x)
       ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
-      ( preserves-le-left-add-ℚ
+      ( preserves-strict-order-left-add-ℚ
         ( x)
         ( zero-ℚ)
         ( rational-ℚ⁺ d)
@@ -177,7 +177,7 @@ module _
       tr
         ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
         ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
-        ( preserves-le-right-add-ℚ
+        ( preserves-strict-order-right-add-ℚ
           ( rational-ℚ⁺ x)
           ( zero-ℚ)
           ( rational-ℚ⁺ y)
@@ -188,7 +188,7 @@ module _
       tr
         ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
         ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
-        ( preserves-le-left-add-ℚ
+        ( preserves-strict-order-left-add-ℚ
           ( rational-ℚ⁺ y)
           ( zero-ℚ)
           ( rational-ℚ⁺ x)
@@ -291,7 +291,7 @@ module _
           ( s)
           ( rational-ℚ⁺ right-summand-split-ℚ⁺) ∙
           ap ((q +ℚ s) +ℚ_) (ap rational-ℚ⁺ eq-add-split-ℚ⁺))
-        ( preserves-le-add-ℚ
+        ( preserves-strict-order-add-ℚ
           { p}
           { q +ℚ rational-ℚ⁺ left-summand-split-ℚ⁺}
           { r}
@@ -484,7 +484,7 @@ module _
       tr
         ( le-ℚ⁺ (modulus-le-double-le-ℚ⁺ +ℚ⁺ modulus-le-double-le-ℚ⁺))
         ( eq-add-split-ℚ⁺ p)
-        ( preserves-le-add-ℚ
+        ( preserves-strict-order-add-ℚ
           { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}
           { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
           { rational-ℚ⁺ (modulus-le-double-le-ℚ⁺)}

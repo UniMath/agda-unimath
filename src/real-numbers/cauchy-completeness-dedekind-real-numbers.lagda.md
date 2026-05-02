@@ -204,7 +204,7 @@ module _
             ( ε⁺ , θ⁺)
             ( le-lower-cut-ℝ
               ( xε)
-              ( preserves-le-left-add-ℚ (ε +ℚ θ) q r q<r)
+              ( preserves-strict-order-left-add-ℚ (ε +ℚ θ) q r q<r)
               ( r+ε+θ<xε))
 
     is-rounded-lower-cut-lim-cauchy-approximation-ℝ :
@@ -269,7 +269,7 @@ module _
             ( ε⁺ , θ⁺)
             ( le-upper-cut-ℝ
               ( xε)
-              ( preserves-le-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
+              ( preserves-strict-order-left-add-ℚ (neg-ℚ (ε +ℚ θ)) p q p<q)
               ( xε<p-ε-θ))
 
     is-rounded-upper-cut-lim-cauchy-approximation-ℝ :
@@ -387,7 +387,7 @@ module _
                     ( 2ε')
                     ( q -ℚ p)
                     ( 2ε'⁺<q-p)
-                    ( preserves-le-add-ℚ {2ε} {ε'} {2ε} {ε'}
+                    ( preserves-strict-order-add-ℚ {2ε} {ε'} {2ε} {ε'}
                       ( 2ε⁺<ε'⁺)
                       ( 2ε⁺<ε'⁺)))))))
 

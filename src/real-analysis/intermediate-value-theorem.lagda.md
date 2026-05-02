@@ -476,7 +476,7 @@ module _
                             ( refl))
                     ≤ (raise-zero-ℝ l1 +ℝ real-ℚ⁺ δ') +ℝ aN
                       by
-                        preserves-leq-right-add-ℝ _ _ _
+                        preserves-order-right-add-ℝ _ _ _
                           ( left-leq-real-bound-neighborhood-ℝ _ _ _
                             ( is-mod-μba δ' N (left-leq-max-ℕ Nba Nc)))
                     ≤ (raise-zero-ℝ l1 +ℝ aN) +ℝ real-ℚ⁺ δ'
@@ -508,7 +508,7 @@ module _
                       ( Hδ aN (is-symmetric-neighborhood-ℝ _ _ _ NδaNc))
                 ≤ zero-ℝ +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-right-add-ℝ _ _ _
+                    preserves-order-right-add-ℝ _ _ _
                       ( is-nonpositive-map-lower-bound-sequence-intermediate-value-theorem-ℝ
                         ( N))
                 ≤ real-ℚ⁺ ε
@@ -566,7 +566,7 @@ module _
                             ( refl))
                     ≤ (raise-zero-ℝ l1 +ℝ real-ℚ⁺ δ') +ℝ cN
                       by
-                        preserves-leq-right-add-ℝ _ _ _
+                        preserves-order-right-add-ℝ _ _ _
                           ( left-leq-real-bound-neighborhood-ℝ _ _ _
                             ( is-mod-μba δ' N (left-leq-max-ℕ Nba Nc)))
                     ≤ (raise-zero-ℝ l1 +ℝ cN) +ℝ real-ℚ⁺ δ'

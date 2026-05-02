@@ -61,13 +61,13 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-sum-fin-sequence-ℚ :
+  preserves-order-sum-fin-sequence-ℚ :
     (n : ℕ) (a b : fin-sequence ℚ n) → ((k : Fin n) → leq-ℚ (a k) (b k)) →
     leq-ℚ (sum-fin-sequence-ℚ n a) (sum-fin-sequence-ℚ n b)
-  preserves-leq-sum-fin-sequence-ℚ 0 _ _ _ = refl-leq-ℚ zero-ℚ
-  preserves-leq-sum-fin-sequence-ℚ (succ-ℕ n) a b H =
-    preserves-leq-add-ℚ
-      ( preserves-leq-sum-fin-sequence-ℚ
+  preserves-order-sum-fin-sequence-ℚ 0 _ _ _ = refl-leq-ℚ zero-ℚ
+  preserves-order-sum-fin-sequence-ℚ (succ-ℕ n) a b H =
+    preserves-order-add-ℚ
+      ( preserves-order-sum-fin-sequence-ℚ
         ( n)
         ( a ∘ inl-Fin n)
         ( b ∘ inl-Fin n)

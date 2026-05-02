@@ -14,6 +14,7 @@ open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
@@ -23,6 +24,7 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -93,7 +95,7 @@ is-distance-between-multiples-sym-ℕ :
   (x y z : ℕ) → is-distance-between-multiples-ℕ x y z →
   is-distance-between-multiples-ℕ y x z
 is-distance-between-multiples-sym-ℕ x y z (pair k (pair l eqn)) =
-  pair l (pair k (commutative-dist-ℕ (l *ℕ y) (k *ℕ x) ∙ eqn))
+  pair l (pair k (symmetric-dist-ℕ (l *ℕ y) (k *ℕ x) ∙ eqn))
 ```
 
 ## Lemmas
@@ -354,7 +356,7 @@ abstract
       { ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ (neg-ℤ (int-ℕ z))})
     where
     a : ℤ
-    a = pr1 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))
+    a = quotient-div-ℤ _ _ (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))
 
     a-eqn-pos :
       add-ℤ
@@ -411,7 +413,7 @@ abstract
         by
         ap
           ( λ p → (((neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))) +ℤ p) +ℤ (int-ℕ z))
-          ( inv (pr2 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))
+          ( inv (eq-quotient-div-ℤ _ _ (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))
       ＝ add-ℤ
           ( add-ℤ
             ( neg-ℤ (a *ℤ (int-ℕ (succ-ℕ x))))
@@ -605,7 +607,7 @@ abstract
           dist-ℕ ((abs-ℤ a) *ℕ (succ-ℕ x)) ((nat-Fin (succ-ℕ x) u) *ℕ y)
           ＝ dist-ℕ ((nat-Fin (succ-ℕ x) u) *ℕ y) ((abs-ℤ a) *ℕ (succ-ℕ x))
             by
-            commutative-dist-ℕ
+            symmetric-dist-ℕ
               ( (abs-ℤ a) *ℕ (succ-ℕ x))
               ( (nat-Fin (succ-ℕ x) u) *ℕ y)
           ＝ dist-ℤ
@@ -651,7 +653,7 @@ abstract
           ( tr
             ( is-nonnegative-ℤ)
             ( inv
-              ( pr2 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))
+              ( eq-quotient-div-ℤ _ _ (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))
             ( uy-z))
           ( is-nonnegative-int-ℕ (succ-ℕ x))
 
@@ -753,10 +755,18 @@ abstract
                     ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
                     ( int-ℕ z)
               ＝ (neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))
-                by inv (pr2
+                by
+                
+                  {!inv
+                    ( eq-quotient-div-ℤ ? ?
+                      ( symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
+                        ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
+                        ( cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))!}
+                {-
+                inv (pr2
                   ( symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
                   ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
-                  ( cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
+                  ( cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))) -} )
             ( z-uy))
             ( is-nonnegative-int-ℕ (succ-ℕ x))
 ```
@@ -805,13 +815,14 @@ is-inhabited-pos-distance-between-multiples (succ-ℕ x) y = pair (succ-ℕ x)
 
 minimal-pos-distance-between-multiples :
   (x y : ℕ) → minimal-element-ℕ (pos-distance-between-multiples x y)
-minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ
-  (pos-distance-between-multiples x y)
-  (λ z → is-decidable-function-type
-    (is-decidable-neg (is-decidable-is-zero-ℕ (x +ℕ y)))
-    (is-decidable-product (is-decidable-neg (is-decidable-is-zero-ℕ z))
-      (is-decidable-is-distance-between-multiples-ℕ x y z)))
-  (is-inhabited-pos-distance-between-multiples x y)
+minimal-pos-distance-between-multiples x y =
+  well-ordering-principle-ℕ
+    ( pos-distance-between-multiples x y)
+    ( λ z → is-decidable-function-type
+      ( is-decidable-neg (is-decidable-is-zero-ℕ (x +ℕ y)))
+      ( is-decidable-product (is-decidable-neg (is-decidable-is-zero-ℕ z))
+        ( is-decidable-is-distance-between-multiples-ℕ x y z)))
+    ( pr2 (is-inhabited-pos-distance-between-multiples x y))
 
 minimal-positive-distance : (x y : ℕ) → ℕ
 minimal-positive-distance x y = pr1 (minimal-pos-distance-between-multiples x y)
@@ -1064,6 +1075,40 @@ abstract
         ((int-ℕ t) *ℤ (int-ℕ y)) +ℤ ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))
       add-dist-eqn =
         equational-reasoning
+{-
+          (t *ℕ y) +ℕ d
+          ＝ (s *ℕ (succ-ℕ x))
+            by rewrite-dist
+          ＝ (zero-ℕ *ℕ (succ-ℕ x))
+            by (ap (_*ℕ (succ-ℕ x)) iszero)
+          ＝ zero-ℕ
+            by (left-zero-law-mul-ℕ (succ-ℕ x))
+
+      d-is-zero : is-zero-ℕ d
+      d-is-zero = is-zero-right-is-zero-add-ℕ (t *ℕ y) d (zero-addition)
+
+    coeff-nonnegative : leq-ℤ one-ℤ ((int-ℕ q) *ℤ (int-ℕ s))
+    coeff-nonnegative = tr (leq-ℤ one-ℤ)
+      (inv (mul-int-ℕ q s)) (leq-int-ℕ 1 (q *ℕ s)
+        (leq-succ-le-ℕ 0 (q *ℕ s) (le-zero-is-nonzero-ℕ (q *ℕ s)
+          (is-nonzero-mul-ℕ q s quotient-min-dist-succ-x-nonzero
+            min-dist-succ-x-coeff-nonzero))))
+
+    add-dist-eqn :
+      int-ℕ d ＝
+      ((neg-ℤ (int-ℕ t)) *ℤ (int-ℕ y)) +ℤ ((int-ℕ s) *ℤ (int-ℕ (succ-ℕ x)))
+    add-dist-eqn =
+      equational-reasoning
+        int-ℕ d
+        ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ ((int-ℕ (t *ℕ y)) +ℤ (int-ℕ d))
+          by inv (is-retraction-left-add-neg-ℤ (int-ℕ (t *ℕ y)) (int-ℕ d))
+        ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ ((t *ℕ y) +ℕ d))
+          by ap ((neg-ℤ (int-ℕ (t *ℕ y))) +ℤ_) (add-int-ℕ (t *ℕ y) d)
+        ＝ (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))
+          by ap (λ H → (neg-ℤ (int-ℕ (t *ℕ y))) +ℤ (int-ℕ H)) rewrite-dist
+        ＝ (neg-ℤ ((int-ℕ t) *ℤ (int-ℕ y))) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))
+          by
+-}
           int-ℕ d
           ＝ ((int-ℕ d) +ℤ (int-ℕ (s *ℕ (succ-ℕ x)))) +ℤ
             (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
@@ -1075,6 +1120,7 @@ abstract
           ＝ (int-ℕ (d +ℕ (s *ℕ (succ-ℕ x)))) +ℤ
             (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x))))
             by
+--
             ap
               ( _+ℤ (neg-ℤ (int-ℕ (s *ℕ (succ-ℕ x)))))
               ( add-int-ℕ d (s *ℕ (succ-ℕ x)))
@@ -1315,7 +1361,7 @@ abstract
           ( s *ℕ (succ-ℕ x))
           ( tysx)
           ( inv (dist-sx-ty-eq-d) ∙
-            commutative-dist-ℕ (s *ℕ (succ-ℕ x)) (t *ℕ y))
+            symmetric-dist-ℕ (s *ℕ (succ-ℕ x)) (t *ℕ y))
 
       quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ q
       quotient-min-dist-succ-x-nonzero iszero =
@@ -1725,7 +1771,7 @@ abstract
             ((abs-ℤ (((int-ℕ q) *ℤ (int-ℕ s)) +ℤ (neg-ℤ one-ℤ))) *ℕ
               (succ-ℕ x))
               ((q *ℕ t) *ℕ y)
-            by commutative-dist-ℕ
+            by symmetric-dist-ℕ
               ((q *ℕ t) *ℕ y)
               (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q)
                 (int-ℕ s)) (neg-ℤ one-ℤ)))
@@ -1933,7 +1979,7 @@ gcd-ℕ-div-dist-between-mult x y z dist =
     rewrite-dist =
       rewrite-right-dist-add-ℕ (t *ℕ y) z (s *ℕ x) tysx
         ( inv (is-distance-between-multiples-eqn-ℕ dist) ∙
-          commutative-dist-ℕ (s *ℕ x) (t *ℕ y))
+          symmetric-dist-ℕ (s *ℕ x) (t *ℕ y))
 
     div-gcd-x : div-ℕ (gcd-ℕ x y) (s *ℕ x)
     div-gcd-x = div-mul-ℕ s (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))

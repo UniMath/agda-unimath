@@ -108,37 +108,37 @@ power-mul-ℚ⁰⁺ m n q =
 
 ```agda
 abstract
-  preserves-le-power-ℚ⁰⁺ :
+  preserves-strict-order-power-ℚ⁰⁺ :
     (n : ℕ) → (p q : ℚ⁰⁺) → le-ℚ⁰⁺ p q → (is-nonzero-ℕ n) →
     le-ℚ⁰⁺ (power-ℚ⁰⁺ n p) (power-ℚ⁰⁺ n q)
-  preserves-le-power-ℚ⁰⁺ 0 p q p<q H = ex-falso (H refl)
-  preserves-le-power-ℚ⁰⁺ 1 p q p<q _ = p<q
-  preserves-le-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
+  preserves-strict-order-power-ℚ⁰⁺ 0 p q p<q H = ex-falso (H refl)
+  preserves-strict-order-power-ℚ⁰⁺ 1 p q p<q _ = p<q
+  preserves-strict-order-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) p q p<q _ =
     concatenate-leq-le-ℚ⁰⁺
       ( power-ℚ⁰⁺ (succ-ℕ n) p)
       ( power-ℚ⁰⁺ n p *ℚ⁰⁺ q)
       ( power-ℚ⁰⁺ (succ-ℕ n) q)
-      ( preserves-leq-left-mul-ℚ⁰⁺ (power-ℚ⁰⁺ n p) _ _ (leq-le-ℚ p<q))
-      ( preserves-le-right-mul-ℚ⁺
+      ( preserves-order-left-mul-ℚ⁰⁺ (power-ℚ⁰⁺ n p) _ _ (leq-le-ℚ p<q))
+      ( preserves-strict-order-right-mul-ℚ⁺
         ( rational-ℚ⁰⁺ q , is-positive-le-ℚ⁰⁺ p p<q)
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n p))
         ( rational-ℚ⁰⁺ (power-ℚ⁰⁺ n q))
-        ( preserves-le-power-ℚ⁰⁺ n p q p<q (is-nonzero-succ-ℕ _)))
+        ( preserves-strict-order-power-ℚ⁰⁺ n p q p<q (is-nonzero-succ-ℕ _)))
 ```
 
 ### If `p` and `q` are nonnegative rational numbers with `p ≤ q`, then `pⁿ ≤ qⁿ`
 
 ```agda
 abstract
-  preserves-leq-power-ℚ⁰⁺ :
+  preserves-order-power-ℚ⁰⁺ :
     (n : ℕ) (p q : ℚ⁰⁺) → leq-ℚ⁰⁺ p q → leq-ℚ⁰⁺ (power-ℚ⁰⁺ n p) (power-ℚ⁰⁺ n q)
-  preserves-leq-power-ℚ⁰⁺ 0 _ _ _ = refl-leq-ℚ one-ℚ
-  preserves-leq-power-ℚ⁰⁺ 1 p q p≤q = p≤q
-  preserves-leq-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) p q p≤q =
+  preserves-order-power-ℚ⁰⁺ 0 _ _ _ = refl-leq-ℚ one-ℚ
+  preserves-order-power-ℚ⁰⁺ 1 p q p≤q = p≤q
+  preserves-order-power-ℚ⁰⁺ (succ-ℕ n@(succ-ℕ _)) p q p≤q =
     transitive-leq-ℚ⁰⁺
       ( power-ℚ⁰⁺ (succ-ℕ n) p)
       ( power-ℚ⁰⁺ n p *ℚ⁰⁺ q)
       ( power-ℚ⁰⁺ (succ-ℕ n) q)
-      ( preserves-leq-right-mul-ℚ⁰⁺ q _ _ (preserves-leq-power-ℚ⁰⁺ n p q p≤q))
-      ( preserves-leq-left-mul-ℚ⁰⁺ (power-ℚ⁰⁺ n p) _ _ p≤q)
+      ( preserves-order-right-mul-ℚ⁰⁺ q _ _ (preserves-order-power-ℚ⁰⁺ n p q p≤q))
+      ( preserves-order-left-mul-ℚ⁰⁺ (power-ℚ⁰⁺ n p) _ _ p≤q)
 ```

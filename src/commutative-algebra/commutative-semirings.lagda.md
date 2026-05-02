@@ -151,7 +151,7 @@ module _
     commutative-add-Semiring semiring-Commutative-Semiring
 
   interchange-add-add-Commutative-Semiring :
-    (x y x' y' : type-Commutative-Semiring) →
+    {x y x' y' : type-Commutative-Semiring} →
     ( add-Commutative-Semiring
       ( add-Commutative-Semiring x y)
       ( add-Commutative-Semiring x' y')) ＝
@@ -162,14 +162,14 @@ module _
     interchange-add-add-Semiring semiring-Commutative-Semiring
 
   right-swap-add-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     ( add-Commutative-Semiring (add-Commutative-Semiring x y) z) ＝
     ( add-Commutative-Semiring (add-Commutative-Semiring x z) y)
   right-swap-add-Commutative-Semiring =
     right-swap-add-Semiring semiring-Commutative-Semiring
 
   left-swap-add-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     ( add-Commutative-Semiring x (add-Commutative-Semiring y z)) ＝
     ( add-Commutative-Semiring y (add-Commutative-Semiring x z))
   left-swap-add-Commutative-Semiring =
@@ -256,7 +256,7 @@ module _
     right-zero-law-mul-Semiring semiring-Commutative-Semiring
 
   right-swap-mul-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     mul-Commutative-Semiring (mul-Commutative-Semiring x y) z ＝
     mul-Commutative-Semiring (mul-Commutative-Semiring x z) y
   right-swap-mul-Commutative-Semiring =
@@ -264,7 +264,7 @@ module _
       multiplicative-commutative-monoid-Commutative-Semiring
 
   left-swap-mul-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     mul-Commutative-Semiring x (mul-Commutative-Semiring y z) ＝
     mul-Commutative-Semiring y (mul-Commutative-Semiring x z)
   left-swap-mul-Commutative-Semiring =

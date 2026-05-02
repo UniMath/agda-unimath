@@ -150,7 +150,7 @@ module _
             ( ε' +ℚ ε')
             ( ε)
             ( 2ε'<ε)
-            ( preserves-le-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
+            ( preserves-strict-order-left-add-ℚ ε' ε'' ε' (le-mediant-zero-ℚ⁺ ε'⁺)))
           ( triangular-neighborhood-Metric-Space
             ( M)
             ( xm)
@@ -225,7 +225,7 @@ module _
                   ( inv-le-ℚ⁺
                     ( positive-rational-ℕ⁺ n⁺)
                     ( positive-rational-ℕ⁺ (succ-nonzero-ℕ' m))
-                    ( preserves-le-rational-ℕ
+                    ( preserves-strict-order-rational-ℕ
                       ( le-succ-leq-ℕ _ _ n≤m))))
                 ( saturated-is-limit-cauchy-approximation-Metric-Space M
                   ( x)
@@ -296,7 +296,7 @@ module _
           ( inv-tr
             ( λ y → le-ℚ⁺ y (ε⁺ +ℚ⁺ δ⁺))
             ( associative-add-ℚ⁺ ε⁺ δ'⁺ δ'⁺)
-            ( preserves-le-right-add-ℚ ε (δ' +ℚ δ') δ 2δ'<δ))
+            ( preserves-strict-order-right-add-ℚ ε (δ' +ℚ δ') δ 2δ'<δ))
           ( triangular-neighborhood-Metric-Space
             ( M)
             ( xε)
@@ -311,7 +311,7 @@ module _
               ( x1/n')
               ( ε⁺ +ℚ⁺ 1/n')
               ( ε⁺ +ℚ⁺ δ'⁺)
-              ( preserves-le-right-add-ℚ
+              ( preserves-strict-order-right-add-ℚ
                 ( ε)
                 ( rational-ℚ⁺ 1/n')
                 ( δ')
@@ -322,7 +322,7 @@ module _
                   ( leq-reciprocal-rational-ℕ⁺
                     ( n₁')
                     ( n')
-                    ( reflects-leq-pred-nonzero-ℕ
+                    ( reflects-order-pred-nonzero-ℕ
                       ( n₁')
                       ( n')
                       ( inv-tr
