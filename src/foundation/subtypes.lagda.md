@@ -11,6 +11,7 @@ open import foundation-core.subtypes public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types

@@ -11,6 +11,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.nonzero-integers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions

@@ -15,6 +15,7 @@ open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.sections
 open import foundation.transport-along-homotopies
 open import foundation.transport-along-identifications

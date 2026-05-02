@@ -21,6 +21,7 @@ open import foundation.propositions
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.subuniverse-of-contractible-types
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 

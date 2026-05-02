@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions

@@ -13,6 +13,7 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -363,6 +364,9 @@ module _
 
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
+
+  right-subtraction-Ab' : type-Ab A → type-Ab A → type-Ab A
+  right-subtraction-Ab' y x = right-subtraction-Ab x y
 
   ap-right-subtraction-Ab :
     {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →

@@ -14,6 +14,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -25,7 +26,12 @@ open import foundation.transport-along-identifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+open import foundation-core.sets
+
 open import logic.propositionally-decidable-types
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

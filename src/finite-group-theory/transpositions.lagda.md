@@ -22,6 +22,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -29,6 +30,7 @@ open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
@@ -40,14 +42,16 @@ open import foundation.negated-equality
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+
+open import foundation-core.raising-universe-levels
 
 open import lists.concatenation-lists
 open import lists.functoriality-lists
@@ -353,7 +357,7 @@ module _
                 (type-t-coproduct-id x)
                 (coproduct-id-type-t x)))
             ( eq-pair-Σ
-              ( eq-is-prop (is-prop-is-prop (pr1 (pr1 Y x))))
+              ( eq-is-prop (is-property-is-prop (pr1 (pr1 Y x))))
               ( eq-is-prop (is-prop-is-decidable (pr1 (pr2 (pr1 Y x))))))))
         ( eq-is-prop
           ( pr2
@@ -1016,7 +1020,7 @@ abstract
                 ( g z)))
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))
               ( eq-is-prop
                 ( is-prop-is-decidable
@@ -1090,7 +1094,7 @@ abstract
                 ( g u)))
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))
               ( eq-is-prop
                 ( is-prop-is-decidable

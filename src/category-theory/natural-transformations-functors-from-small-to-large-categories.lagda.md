@@ -13,6 +13,7 @@ open import category-theory.large-categories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.homotopies

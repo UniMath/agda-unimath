@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -220,7 +221,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-set-tuple : (n : ℕ) → is-set A -> is-set (tuple A n)
+  is-set-tuple : (n : ℕ) → is-set A → is-set (tuple A n)
   is-set-tuple = is-trunc-tuple zero-𝕋
 
 tuple-Set : {l : Level} → Set l → ℕ → Set l

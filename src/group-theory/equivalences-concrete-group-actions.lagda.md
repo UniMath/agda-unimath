@@ -9,6 +9,7 @@ module group-theory.equivalences-concrete-group-actions where
 ```agda
 open import foundation.1-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
