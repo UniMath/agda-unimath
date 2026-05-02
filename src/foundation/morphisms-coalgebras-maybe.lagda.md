@@ -10,8 +10,9 @@ module foundation.morphisms-coalgebras-maybe where
 open import foundation.coalgebras-maybe
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.maybe
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import trees.polynomial-endofunctors
 ```
@@ -21,8 +22,8 @@ open import trees.polynomial-endofunctors
 ## Idea
 
 Given two [coalgebras](foundation.coalgebras-maybe.md) of the
-[maybe monad](foundation.maybe.md) `η : X → Maybe X`, `η' : Y → Maybe Y`, then a
-map `f : X → Y` is a
+[maybe monad](foundation-core.maybe.md) `η : X → Maybe X`, `η' : Y → Maybe Y`,
+then a map `f : X → Y` is a
 {{#concept "morphism of coalgebras" Disambiguation="of the maybe monad" Agda=hom-coalgebra-Maybe}}
 if the square
 

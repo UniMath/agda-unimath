@@ -10,6 +10,7 @@ module commutative-algebra.local-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels

@@ -15,6 +15,7 @@ open import elementary-number-theory.parity-natural-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications

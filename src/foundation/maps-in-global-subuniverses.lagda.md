@@ -9,6 +9,7 @@ module foundation.maps-in-global-subuniverses where
 ```agda
 open import foundation.cartesian-morphisms-arrows
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.functoriality-fibers-of-maps
 open import foundation.global-subuniverses

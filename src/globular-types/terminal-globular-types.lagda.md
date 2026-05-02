@@ -10,6 +10,7 @@ module globular-types.terminal-globular-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.universe-levels
 
 open import globular-types.globular-maps

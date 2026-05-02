@@ -8,23 +8,21 @@ module orthogonal-factorization-systems.universal-property-localizations-at-glob
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.extensions-types
 open import foundation.extensions-types-global-subuniverses
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.global-subuniverses
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
-open import foundation.subuniverses
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 

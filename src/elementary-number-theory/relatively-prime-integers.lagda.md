@@ -9,12 +9,14 @@ module elementary-number-theory.relatively-prime-integers where
 ```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.transport-along-identifications

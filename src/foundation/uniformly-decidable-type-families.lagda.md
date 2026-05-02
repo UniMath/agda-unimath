@@ -12,8 +12,12 @@ open import foundation.coproduct-types
 open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.double-negation-dense-equality
 open import foundation.equality-coproduct-types
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-coproduct-types
 open import foundation.inhabited-types
 open import foundation.irrefutable-equality
@@ -22,6 +26,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -30,6 +35,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.function-types
+open import foundation-core.subuniverse-of-contractible-types
 
 open import logic.propositionally-decidable-types
 ```

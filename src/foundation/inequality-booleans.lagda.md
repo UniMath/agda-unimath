@@ -7,12 +7,12 @@ module foundation.inequality-booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.logical-operations-booleans
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universe-levels

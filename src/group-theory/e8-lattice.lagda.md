@@ -7,6 +7,7 @@ module group-theory.e8-lattice where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 
 open import foundation.equality-coproduct-types

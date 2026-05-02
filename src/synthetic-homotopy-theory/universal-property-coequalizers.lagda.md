@@ -13,8 +13,10 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.double-arrows
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-double-arrows
 open import foundation.fibers-of-maps
 open import foundation.functoriality-coproduct-types

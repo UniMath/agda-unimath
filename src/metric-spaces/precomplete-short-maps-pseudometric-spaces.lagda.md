@@ -8,6 +8,7 @@ module metric-spaces.precomplete-short-maps-pseudometric-spaces where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies

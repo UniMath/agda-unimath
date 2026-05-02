@@ -9,6 +9,7 @@ module foundation.type-arithmetic-dependent-pair-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.singleton-induction
 open import foundation.universe-levels
 
@@ -106,10 +107,11 @@ module _
     is-equiv-pr1-is-contr : ((a : A) → is-contr (B a)) → is-equiv (pr1 {B = B})
     is-equiv-pr1-is-contr is-contr-B =
       is-equiv-is-contr-map
-        ( λ x → is-contr-equiv
-          ( B x)
-          ( equiv-fiber-pr1 B x)
-          ( is-contr-B x))
+        ( λ x →
+          is-contr-equiv
+            ( B x)
+            ( equiv-fiber-pr1 B x)
+            ( is-contr-B x))
 
   equiv-pr1 : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
   pr1 (equiv-pr1 is-contr-B) = pr1

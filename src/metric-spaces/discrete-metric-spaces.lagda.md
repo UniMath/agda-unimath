@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
