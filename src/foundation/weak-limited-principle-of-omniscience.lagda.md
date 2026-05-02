@@ -76,6 +76,9 @@ abstract
               ( a)
               ( λ a∉P → ¬¬P (a , a∉P))))
       ( lpo (complement-decidable-subtype P))
+
+WLPO-LPO : LPO → WLPO
+WLPO-LPO lpo = level-WLPO-level-LPO lpo
 ```
 
 ### Equivalent boolean formulation
