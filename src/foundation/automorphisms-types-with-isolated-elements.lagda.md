@@ -12,12 +12,14 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-types-with-isolated-elements
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.transpositions-isolated-elements
 open import foundation.universe-levels
 
 open import structured-types.pointed-equivalences
@@ -52,44 +54,38 @@ of `a`.
 
 ## Definitions
 
+### The value of an automorphism at an isolated element, and the transposition associated to it
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} ((a , d) : isolated-element A)
+  (e : A ≃ A)
+  where
+
+  value-isolated-element-equiv : isolated-element A
+  value-isolated-element-equiv = map-equiv-isolated-element e (a , d)
+
+  transposition-value-isolated-element-equiv :
+    A ≃ A
+  transposition-value-isolated-element-equiv =
+    transposition-isolated-elements (a , d) value-isolated-element-equiv
+```
+
 ### Any equivalence that fixes an isolated point is uniquely determined by its restriction to the complement
 
 ```agda
 module _
   {l1 : Level} {A : UU l1} ((a , d) : isolated-element A)
-  (e : (A , a) ≃∗ (A , a))
-  where
-
-  equiv-complement-isolated-element :
-    complement-isolated-element (a , d) ≃ complement-isolated-element (a , d)
-  equiv-complement-isolated-element =
-    equiv-Σ
-      ( λ x → a ≠ x)
-      ( equiv-pointed-equiv e)
-      ( λ x →
-        equiv-neg
-          ( equiv-concat (inv (preserves-point-pointed-equiv e)) _ ∘e
-            equiv-ap (equiv-pointed-equiv e) a x))
-
-  map-equiv-complement-isolated-element :
-    complement-isolated-element (a , d) → complement-isolated-element (a , d)
-  map-equiv-complement-isolated-element =
-    map-equiv equiv-complement-isolated-element
-
-module _
-  {l1 : Level} {A : UU l1} ((a , d) : isolated-element A)
-  (e f : (A , a) ≃∗ (A , a))
+  ((e , p) (f , q) : (A , a) ≃∗ (A , a))
   where
 
   htpy-equiv-complement-isolated-element :
-    map-equiv-complement-isolated-element (a , d) e ~
-    map-equiv-complement-isolated-element (a , d) f →
-    htpy-equiv (equiv-pointed-equiv e) (equiv-pointed-equiv f)
+    map-equiv-complement-isolated-element e (a , d) (a , d) p ~
+    map-equiv-complement-isolated-element f (a , d) (a , d) q →
+    htpy-equiv e f
   htpy-equiv-complement-isolated-element H x =
     rec-coproduct
-      ( λ { refl →
-            preserves-point-pointed-equiv e ∙
-            inv (preserves-point-pointed-equiv f)})
+      ( λ { refl → p ∙ inv q})
       ( λ n → ap pr1 (H (x , n)))
       ( d x)
 ```

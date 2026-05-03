@@ -81,6 +81,11 @@ module _
       ( is-isolated-Prop)
       ( is-isolated-Prop)
       ( preserves-and-reflects-isolated-elements-equiv)
+
+  map-equiv-isolated-element :
+    isolated-element A → isolated-element B
+  map-equiv-isolated-element =
+    map-equiv equiv-isolated-element
 ```
 
 ### Functoriality of the complement of an isolated element
@@ -102,6 +107,11 @@ module _
         equiv-neg
           ( equiv-concat (inv p) (map-equiv e x) ∘e
             equiv-ap e (element-isolated-element a) x))
+
+  map-equiv-complement-isolated-element :
+    complement-isolated-element a → complement-isolated-element b
+  map-equiv-complement-isolated-element =
+    map-equiv equiv-complement-isolated-element
 
   natural-inclusion-equiv-complement-isolated-element :
     coherence-square-maps
