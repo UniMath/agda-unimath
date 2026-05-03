@@ -17,12 +17,15 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences-contractible-types
+open import foundation.full-subtypes
+open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.sets
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -37,6 +40,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.maybe
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -56,51 +61,69 @@ if `a ＝ x` is [decidable](foundation.decidable-types.md) for any `x`.
 
 ```agda
 is-isolated :
-  {l1 : Level} {X : UU l1} (a : X) → UU l1
-is-isolated {l1} {X} a = (x : X) → is-decidable (a ＝ x)
+  {l1 : Level} {A : UU l1} (a : A) → UU l1
+is-isolated {l1} {A} a = (x : A) → is-decidable (a ＝ x)
 
 isolated-element :
-  {l1 : Level} (X : UU l1) → UU l1
-isolated-element X = Σ X is-isolated
+  {l1 : Level} (A : UU l1) → UU l1
+isolated-element A = Σ A is-isolated
 
 module _
-  {l : Level} {X : UU l} (x : isolated-element X)
+  {l : Level} {A : UU l} (a : isolated-element A)
   where
 
-  element-isolated-element : X
-  element-isolated-element = pr1 x
+  element-isolated-element : A
+  element-isolated-element = pr1 a
+
+  inclusion-isolated-element : A
+  inclusion-isolated-element = element-isolated-element
 
   is-isolated-isolated-element : is-isolated element-isolated-element
-  is-isolated-isolated-element = pr2 x
+  is-isolated-isolated-element = pr2 a
 ```
 
 ### Complements of isolated elements
 
 ```agda
-complement-isolated-element :
-  {l1 : Level} (X : UU l1) → isolated-element X → UU l1
-complement-isolated-element X x =
-  Σ X (λ y → element-isolated-element x ≠ y)
+module _
+  {l1 : Level} {A : UU l1} (a : isolated-element A)
+  where
+  
+  is-in-complement-isolated-element :
+    A → UU l1
+  is-in-complement-isolated-element x =
+    element-isolated-element a ≠ x
+
+  is-prop-is-in-complement-isolated-element :
+    (x : A) → is-prop (is-in-complement-isolated-element x)
+  is-prop-is-in-complement-isolated-element x =
+    is-prop-neg
+
+  is-in-complement-prop-isolated-element :
+    subtype l1 A
+  pr1 (is-in-complement-prop-isolated-element x) =
+    is-in-complement-isolated-element x
+  pr2 (is-in-complement-prop-isolated-element x) =
+    is-prop-is-in-complement-isolated-element x
+    
+  complement-isolated-element :
+    UU l1
+  complement-isolated-element =
+    type-subtype is-in-complement-prop-isolated-element
+
+  inclusion-complement-isolated-element :
+    complement-isolated-element → A
+  inclusion-complement-isolated-element = pr1
 ```
 
 ## Properties
 
-### An element is isolated if and only if the constant map pointing at it is decidable
+### Characterization of equality of the type of isolated elements
 
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
   where
-
-  is-decidable-point-is-isolated :
-    is-isolated a → is-decidable-map (point a)
-  is-decidable-point-is-isolated d x =
-    is-decidable-equiv (compute-fiber-point a x) (d x)
-
-  is-isolated-is-decidable-point :
-    is-decidable-map (point a) → is-isolated a
-  is-isolated-is-decidable-point d x =
-    is-decidable-equiv' (compute-fiber-point a x) (d x)
 
   cases-Eq-isolated-element :
     is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero
@@ -192,11 +215,45 @@ module _
       is-prop-equiv
         ( equiv-Eq-eq-isolated-element d x)
         ( is-prop-Eq-isolated-element d x)
+```
+
+### The loop space at an isolated element is contractible
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} (a : A)
+  where
 
   is-contr-loop-space-isolated-element :
     (d : is-isolated a) → is-contr (a ＝ a)
   is-contr-loop-space-isolated-element d =
-    is-proof-irrelevant-is-prop (is-prop-eq-isolated-element d a) refl
+    is-proof-irrelevant-is-prop (is-prop-eq-isolated-element a d a) refl
+```
+
+### An element is isolated if and only if its point inclusion is decidable
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} {a : A}
+  where
+
+  is-decidable-point-is-isolated :
+    is-isolated a → is-decidable-map (point a)
+  is-decidable-point-is-isolated d x =
+    is-decidable-equiv (compute-fiber-point a x) (d x)
+
+  is-isolated-is-decidable-point :
+    is-decidable-map (point a) → is-isolated a
+  is-isolated-is-decidable-point d x =
+    is-decidable-equiv' (compute-fiber-point a x) (d x)
+```
+
+### The point inclusion of an isolated element is a decidable embedding
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} {a : A}
+  where
 
   abstract
     is-emb-point-is-isolated : is-isolated a → is-emb (point a)
@@ -206,9 +263,17 @@ module _
           ( a ＝ a)
           ( left-unit-law-product)
           ( is-proof-irrelevant-is-prop
-            ( is-prop-eq-isolated-element d a)
+            ( is-prop-eq-isolated-element a d a)
             ( refl)))
         ( λ x → ap (λ y → a))
+
+  abstract
+    is-decidable-emb-point-is-isolated :
+      is-isolated a → is-decidable-emb (point a)
+    pr1 (is-decidable-emb-point-is-isolated d) =
+      is-emb-point-is-isolated d
+    pr2 (is-decidable-emb-point-is-isolated d) =
+      is-decidable-point-is-isolated d
 ```
 
 ### Being an isolated element is a property
@@ -224,27 +289,39 @@ is-isolated-Prop :
   {l1 : Level} {A : UU l1} (a : A) → Prop l1
 pr1 (is-isolated-Prop a) = is-isolated a
 pr2 (is-isolated-Prop a) = is-prop-is-isolated a
+```
 
-inclusion-isolated-element :
-  {l1 : Level} (A : UU l1) → isolated-element A → A
-inclusion-isolated-element A = pr1
+### The inclusion of the isolated elements into the ambient type is an embedding
 
+```agda
 is-emb-inclusion-isolated-element :
-  {l1 : Level} (A : UU l1) → is-emb (inclusion-isolated-element A)
+  {l1 : Level} (A : UU l1) → is-emb (inclusion-isolated-element {A = A})
 is-emb-inclusion-isolated-element A = is-emb-inclusion-subtype is-isolated-Prop
+```
 
+### The type of isolated elements has decidable equality
+
+```agda
 has-decidable-equality-isolated-element :
   {l1 : Level} (A : UU l1) → has-decidable-equality (isolated-element A)
 has-decidable-equality-isolated-element A (x , dx) (y , dy) =
   is-decidable-equiv
     ( equiv-ap-inclusion-subtype is-isolated-Prop)
     ( dx y)
+```
 
+### The type of isolated elements is a set
+
+```agda
 is-set-isolated-element :
   {l1 : Level} (A : UU l1) → is-set (isolated-element A)
 is-set-isolated-element A =
   is-set-has-decidable-equality (has-decidable-equality-isolated-element A)
+```
 
+### The point inclusion of an isolated element
+
+```agda
 module _
   {l1 : Level} {A : UU l1} (a : isolated-element A)
   where
@@ -255,7 +332,7 @@ module _
   is-emb-point-isolated-element : is-emb point-isolated-element
   is-emb-point-isolated-element =
     is-emb-comp
-      ( inclusion-isolated-element A)
+      ( inclusion-isolated-element)
       ( point a)
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
@@ -285,114 +362,70 @@ module _
     is-decidable-emb-point-isolated-element
 ```
 
+### If `a` is an isolated element, then the type `Σ (x : A) ((a ＝ x) + (a ≠ x))` is equivalent to `A`
+
+We define the {{#concept "split full subtype" Disambiguation="isolated element" Agda=split-full-subtype-isolated-element}} associated to an isolated element as the [subtype](foundation-core.subtypes.md) consisting of all elements `x` satisfying the proposition `(a ＝ x) + (a ≠ x)`. This subtype is [full](foundation.full-subtypes.md) since `a` is assumed to be an isolated element.
+
+```agda
+module _
+  {l1 : Level} {A : UU  l1} ((a , d) : isolated-element A)
+  where
+
+  is-in-split-full-subtype-isolated-element :
+    A → UU l1
+  is-in-split-full-subtype-isolated-element x =
+    (a ＝ x) + (a ≠ x)
+
+  is-prop-is-in-split-full-subtype-isolated-element :
+    (x : A) → is-prop (is-in-split-full-subtype-isolated-element x)
+  is-prop-is-in-split-full-subtype-isolated-element x =
+    is-prop-is-decidable (is-prop-eq-isolated-element a d x)
+
+  split-full-subtype-isolated-element :
+    subtype l1 A
+  pr1 (split-full-subtype-isolated-element x) =
+    is-in-split-full-subtype-isolated-element x
+  pr2 (split-full-subtype-isolated-element x) =
+    is-prop-is-in-split-full-subtype-isolated-element x
+
+  type-split-full-subtype-isolated-element :
+    UU l1
+  type-split-full-subtype-isolated-element =
+    type-subtype split-full-subtype-isolated-element
+
+  compute-type-split-full-subtype-isolated-element :
+    type-split-full-subtype-isolated-element ≃ A
+  compute-type-split-full-subtype-isolated-element =
+    equiv-inclusion-is-full-subtype split-full-subtype-isolated-element d
+```
+
 ### Types with isolated elements can be equipped with a Maybe-structure
 
 ```agda
-map-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  Maybe (complement-isolated-element X x) → X
-map-maybe-structure-isolated-element X (x , d) (inl (y , f)) = y
-map-maybe-structure-isolated-element X (x , d) (inr star) = x
+module _
+  {l1 : Level} {A : UU  l1} (a : isolated-element A)
+  where
 
-cases-map-inv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  (y : X) → is-decidable (pr1 x ＝ y) → Maybe (complement-isolated-element X x)
-cases-map-inv-maybe-structure-isolated-element X (x , dx) y (inl p) =
-  inr star
-cases-map-inv-maybe-structure-isolated-element X (x , dx) y (inr f) =
-  inl (y , f)
+  equiv-maybe-structure-isolated-element :
+    Maybe (complement-isolated-element a) ≃ A
+  equiv-maybe-structure-isolated-element =
+    compute-type-split-full-subtype-isolated-element a ∘e
+    inv-left-distributive-Σ-coproduct ∘e
+    commutative-coproduct ∘e
+    equiv-coproduct
+      ( id-equiv)
+      ( equiv-is-contr
+        ( is-contr-unit)
+        ( is-torsorial-Id (element-isolated-element a)))
 
-map-inv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  X → Maybe (complement-isolated-element X x)
-map-inv-maybe-structure-isolated-element X (x , d) y =
-  cases-map-inv-maybe-structure-isolated-element X (x , d) y (d y)
-
-cases-is-section-map-inv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  (y : X) (d : is-decidable (pr1 x ＝ y)) →
-  ( map-maybe-structure-isolated-element X x
-    ( cases-map-inv-maybe-structure-isolated-element X x y d)) ＝
-  ( y)
-cases-is-section-map-inv-maybe-structure-isolated-element X
-  (x , dx) .x (inl refl) =
-  refl
-cases-is-section-map-inv-maybe-structure-isolated-element X (x , dx) y (inr f) =
-  refl
-
-is-section-map-inv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  ( map-maybe-structure-isolated-element X x ∘
-    map-inv-maybe-structure-isolated-element X x) ~ id
-is-section-map-inv-maybe-structure-isolated-element X (x , d) y =
-  cases-is-section-map-inv-maybe-structure-isolated-element X (x , d) y (d y)
-
-is-retraction-map-inv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  ( map-inv-maybe-structure-isolated-element X x ∘
-    map-maybe-structure-isolated-element X x) ~ id
-is-retraction-map-inv-maybe-structure-isolated-element
-  X (x , dx) (inl (y , f)) =
-  ap
-    ( cases-map-inv-maybe-structure-isolated-element X (x , dx) y)
-    ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-element x dx y)))
-is-retraction-map-inv-maybe-structure-isolated-element X (x , dx) (inr star) =
-  ap
-    ( cases-map-inv-maybe-structure-isolated-element X (x , dx) x)
-    { x = dx (map-maybe-structure-isolated-element X (x , dx) (inr star))}
-    { y = inl refl}
-    ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-element x dx x)))
-
-is-equiv-map-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  is-equiv (map-maybe-structure-isolated-element X x)
-is-equiv-map-maybe-structure-isolated-element X x =
-  is-equiv-is-invertible
-    ( map-inv-maybe-structure-isolated-element X x)
-    ( is-section-map-inv-maybe-structure-isolated-element X x)
-    ( is-retraction-map-inv-maybe-structure-isolated-element X x)
-
-equiv-maybe-structure-isolated-element :
-  {l1 : Level} (X : UU l1) (x : isolated-element X) →
-  Maybe (complement-isolated-element X x) ≃ X
-pr1 (equiv-maybe-structure-isolated-element X x) =
-  map-maybe-structure-isolated-element X x
-pr2 (equiv-maybe-structure-isolated-element X x) =
-  is-equiv-map-maybe-structure-isolated-element X x
-
-maybe-structure-isolated-element :
-  {l1 : Level} {X : UU l1} → isolated-element X → maybe-structure X
-pr1 (maybe-structure-isolated-element {l1} {X} x) =
-  complement-isolated-element X x
-pr2 (maybe-structure-isolated-element {l1} {X} x) =
-  equiv-maybe-structure-isolated-element X x
+  maybe-structure-isolated-element :
+    maybe-structure A
+  pr1 maybe-structure-isolated-element =
+    complement-isolated-element a
+  pr2 maybe-structure-isolated-element =
+    equiv-maybe-structure-isolated-element
 ```
 
-```agda
-equiv-complement-isolated-element :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-element X)
-  (y : isolated-element Y) (p : map-equiv e (pr1 x) ＝ pr1 y) →
-  complement-isolated-element X x ≃ complement-isolated-element Y y
-equiv-complement-isolated-element e x y p =
-  equiv-Σ
-    ( λ z → pr1 y ≠ z)
-    ( e)
-    ( λ z →
-      equiv-neg
-        ( equiv-concat (inv p) (map-equiv e z) ∘e (equiv-ap e (pr1 x) z)))
-```
+## See also
 
-```agda
-inclusion-complement-isolated-element :
-  {l1 : Level} {X : UU l1} (x : isolated-element X) →
-  complement-isolated-element X x → X
-inclusion-complement-isolated-element x = pr1
-
-natural-inclusion-equiv-complement-isolated-element :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-element X)
-  (y : isolated-element Y) (p : map-equiv e (pr1 x) ＝ pr1 y) →
-  ( inclusion-complement-isolated-element y ∘
-    map-equiv (equiv-complement-isolated-element e x y p)) ~
-  ( map-equiv e ∘ inclusion-complement-isolated-element x)
-natural-inclusion-equiv-complement-isolated-element e x y p (x' , f) = refl
-```
+- [Equivalences between types with isolated elements](foundation.equivalences-types-with-isolated-elements.lagda.md)
