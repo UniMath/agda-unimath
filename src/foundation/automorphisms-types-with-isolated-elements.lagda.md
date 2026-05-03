@@ -27,19 +27,28 @@ open import structured-types.pointed-equivalences
 
 ## Idea
 
-Consider a type `A` equipped with an [isolated element](foundation.isolated-elements.md) `a`, and write `C` for the complement of `a` in `A`. Then there is an [equivalence](foundation-core.equivalences.md)
+Consider a type `A` equipped with an
+[isolated element](foundation.isolated-elements.md) `a`, and write `C` for the
+complement of `a` in `A`. Then there is an
+[equivalence](foundation-core.equivalences.md)
 
 ```text
   Aut A ≃ Aut C × isolated-element A.
 ```
 
-The idea behind the proof is that every automorphism `e` on A can be factored as an equivalence that fixes the point `a` and the [transposition](foundation.transpositions-types-with-isolated-elements.md) with the isolated element `b := e a`. By this unique factorization result, we obtain an equivalence
+The idea behind the proof is that every automorphism `e` on A can be factored as
+an equivalence that fixes the point `a` and the
+[transposition](foundation.transpositions-types-with-isolated-elements.md) with
+the isolated element `b := e a`. By this unique factorization result, we obtain
+an equivalence
 
 ```text
   Aut A ≃ ((A , a) ≃∗ (A , a)) × isolated-element A.
 ```
 
-The proof is then finished by showing that any equivalence that fixes the isolated element `a` is uniquely determined by an automorphism on the complement of `a`.
+The proof is then finished by showing that any equivalence that fixes the
+isolated element `a` is uniquely determined by an automorphism on the complement
+of `a`.
 
 ## Definitions
 

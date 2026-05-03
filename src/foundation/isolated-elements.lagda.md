@@ -88,7 +88,7 @@ module _
 module _
   {l1 : Level} {A : UU l1} (a : isolated-element A)
   where
-  
+
   is-in-complement-isolated-element :
     A → UU l1
   is-in-complement-isolated-element x =
@@ -105,7 +105,7 @@ module _
     is-in-complement-isolated-element x
   pr2 (is-in-complement-prop-isolated-element x) =
     is-prop-is-in-complement-isolated-element x
-    
+
   complement-isolated-element :
     UU l1
   complement-isolated-element =
@@ -364,11 +364,16 @@ module _
 
 ### If `a` is an isolated element, then the type `Σ (x : A) ((a ＝ x) + (a ≠ x))` is equivalent to `A`
 
-We define the {{#concept "split full subtype" Disambiguation="isolated element" Agda=split-full-subtype-isolated-element}} associated to an isolated element as the [subtype](foundation-core.subtypes.md) consisting of all elements `x` satisfying the proposition `(a ＝ x) + (a ≠ x)`. This subtype is [full](foundation.full-subtypes.md) since `a` is assumed to be an isolated element.
+We define the
+{{#concept "split full subtype" Disambiguation="isolated element" Agda=split-full-subtype-isolated-element}}
+associated to an isolated element as the [subtype](foundation-core.subtypes.md)
+consisting of all elements `x` satisfying the proposition `(a ＝ x) + (a ≠ x)`.
+This subtype is [full](foundation.full-subtypes.md) since `a` is assumed to be
+an isolated element.
 
 ```agda
 module _
-  {l1 : Level} {A : UU  l1} ((a , d) : isolated-element A)
+  {l1 : Level} {A : UU l1} ((a , d) : isolated-element A)
   where
 
   is-in-split-full-subtype-isolated-element :
@@ -403,7 +408,7 @@ module _
 
 ```agda
 module _
-  {l1 : Level} {A : UU  l1} (a : isolated-element A)
+  {l1 : Level} {A : UU l1} (a : isolated-element A)
   where
 
   equiv-maybe-structure-isolated-element :

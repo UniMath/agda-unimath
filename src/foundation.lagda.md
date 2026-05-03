@@ -29,6 +29,7 @@ open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
+open import foundation.automorphisms-types-with-isolated-elements public
 open import foundation.axiom-of-choice public
 open import foundation.axiom-of-countable-choice public
 open import foundation.axiom-of-dependent-choice public
@@ -205,6 +206,7 @@ open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
 open import foundation.equivalences-spans-families-of-types public
+open import foundation.equivalences-types-with-isolated-elements public
 open import foundation.evaluation-functions public
 open import foundation.exclusive-disjunction public
 open import foundation.exclusive-sum public
@@ -504,9 +506,11 @@ open import foundation.transport-along-identifications public
 open import foundation.transport-split-type-families public
 open import foundation.transposition-cospan-diagrams public
 open import foundation.transposition-identifications-along-equivalences public
+open import foundation.transposition-identifications-along-involutions public
 open import foundation.transposition-identifications-along-retractions public
 open import foundation.transposition-identifications-along-sections public
 open import foundation.transposition-span-diagrams public
+open import foundation.transpositions-isolated-elements public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-addition-truncation-levels public

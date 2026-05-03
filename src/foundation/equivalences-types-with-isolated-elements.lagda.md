@@ -32,7 +32,9 @@ open import foundation-core.subtypes
 
 ## Idea
 
-Consider an [equivalence](foundation-core.equivalences.md) `e : A ≃ B`. Then `e` maps [isolated elements](foundation.isolated-elements.md) in `A` to isolated elements in `B`. This way, the equivalence `e` induces an equivalence
+Consider an [equivalence](foundation-core.equivalences.md) `e : A ≃ B`. Then `e`
+maps [isolated elements](foundation.isolated-elements.md) in `A` to isolated
+elements in `B`. This way, the equivalence `e` induces an equivalence
 
 ```text
   isolated-element A ≃ isolated-element B.
@@ -89,7 +91,7 @@ module _
   (a : isolated-element A) (b : isolated-element B)
   (p : map-equiv e (element-isolated-element a) ＝ (element-isolated-element b))
   where
-  
+
   equiv-complement-isolated-element :
     complement-isolated-element a ≃ complement-isolated-element b
   equiv-complement-isolated-element =

@@ -33,7 +33,14 @@ open import foundation-core.subtypes
 
 ## Idea
 
-Consider a type `A` equipped with two [isolated elements](foundation.isolated-elements.md) `a` and `b`. Then we define an [equivalence](foundation-core.equivalences.md) `A ≃ A` which swaps `a` and `b` and leaves all the other elements fixed. This equivalence is called the {{#concept "transposition" Disambiguation="isolated elements" Agda=transposition-isolated-elements}} at `a` and `b`. Since the transposition at `a` and `b` swaps `a` and `b` and leaves all the other elements fixed, it is an [involution](foundation.involutions.md).
+Consider a type `A` equipped with two
+[isolated elements](foundation.isolated-elements.md) `a` and `b`. Then we define
+an [equivalence](foundation-core.equivalences.md) `A ≃ A` which swaps `a` and
+`b` and leaves all the other elements fixed. This equivalence is called the
+{{#concept "transposition" Disambiguation="isolated elements" Agda=transposition-isolated-elements}}
+at `a` and `b`. Since the transposition at `a` and `b` swaps `a` and `b` and
+leaves all the other elements fixed, it is an
+[involution](foundation.involutions.md).
 
 ## Definitions
 
