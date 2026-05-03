@@ -17,6 +17,7 @@ open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
@@ -112,6 +113,28 @@ module _
   neq-inr-inl ()
 ```
 
+### Elements are either left or right
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-not-right-is-left : (x : A + B) → is-left x → ¬ is-right x
+  is-not-right-is-left (inl x) star ()
+
+  is-left-is-not-right : (x : A + B) → ¬ is-right x → is-left x
+  is-left-is-not-right (inl a) _ = star
+  is-left-is-not-right (inr b) H = ex-falso (H star)
+
+  is-not-left-is-right : (x : A + B) → is-right x → ¬ is-left x
+  is-not-left-is-right (inr x) star ()
+
+  is-right-is-not-left : (x : A + B) → ¬ is-left x → is-right x
+  is-right-is-not-left (inr b) _ = star
+  is-right-is-not-left (inl a) H = ex-falso (H star)
+```
+
 ### The type of left elements is equivalent to the left summand
 
 ```agda
@@ -120,8 +143,7 @@ module _
   where
 
   map-equiv-left-summand : Σ (X + Y) is-left → X
-  map-equiv-left-summand (inl x , star) = x
-  map-equiv-left-summand (inr x , ())
+  map-equiv-left-summand = ind-Σ left-is-left
 
   map-inv-equiv-left-summand : X → Σ (X + Y) is-left
   pr1 (map-inv-equiv-left-summand x) = inl x
@@ -153,8 +175,7 @@ module _
   where
 
   map-equiv-right-summand : Σ (X + Y) is-right → Y
-  map-equiv-right-summand (inl x , ())
-  map-equiv-right-summand (inr x , star) = x
+  map-equiv-right-summand = ind-Σ right-is-right
 
   map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
   pr1 (map-inv-equiv-right-summand y) = inr y
