@@ -13,6 +13,7 @@ open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences

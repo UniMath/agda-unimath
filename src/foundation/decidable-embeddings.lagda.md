@@ -13,6 +13,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
@@ -23,7 +24,7 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.small-maps
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
@@ -219,8 +220,8 @@ is-decidable-emb-id :
   {l : Level} {A : UU l} → is-decidable-emb (id {A = A})
 is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
 
-decidable-emb-id : {l : Level} {A : UU l} → A ↪ᵈ A
-decidable-emb-id = (id , is-decidable-emb-id)
+id-decidable-emb : {l : Level} {A : UU l} → A ↪ᵈ A
+id-decidable-emb = (id , is-decidable-emb-id)
 
 is-decidable-prop-map-id :
   {l : Level} {A : UU l} → is-decidable-prop-map (id {A = A})
@@ -583,7 +584,7 @@ module _
         ( is-decidable-prop-map-is-decidable-emb F))
 ```
 
-### Decidable embeddings are closed under retracts of maps
+### Decidable embeddings are closed under retracts of arrows
 
 ```agda
 module _
@@ -591,18 +592,18 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-decidable-prop-map-retract-map :
-    f retract-of-map g → is-decidable-prop-map g → is-decidable-prop-map f
-  is-decidable-prop-map-retract-map R G x =
+  is-decidable-prop-map-retract-arrow :
+    f retract-of-arrow g → is-decidable-prop-map g → is-decidable-prop-map f
+  is-decidable-prop-map-retract-arrow R G x =
     is-decidable-prop-retract-of
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 
-  is-decidable-emb-retract-map :
-    f retract-of-map g → is-decidable-emb g → is-decidable-emb f
-  is-decidable-emb-retract-map R G =
+  is-decidable-emb-retract-arrow :
+    f retract-of-arrow g → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-retract-arrow R G =
     is-decidable-emb-is-decidable-prop-map
-      ( is-decidable-prop-map-retract-map R
+      ( is-decidable-prop-map-retract-arrow R
         ( is-decidable-prop-map-is-decidable-emb G))
 ```
 

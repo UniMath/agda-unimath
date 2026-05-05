@@ -14,6 +14,7 @@ open import foundation.decidable-relations
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations

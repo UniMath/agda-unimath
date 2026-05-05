@@ -11,7 +11,9 @@ open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type

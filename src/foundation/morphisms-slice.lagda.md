@@ -1,4 +1,4 @@
-# Morphisms in the slice above a type
+# Morphisms in the slice over a type
 
 ```agda
 module foundation.morphisms-slice where
@@ -9,6 +9,7 @@ module foundation.morphisms-slice where
 ```agda
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
@@ -39,7 +40,7 @@ The slice of a category over an object X is the category of morphisms into X. A
 
 ## Definitions
 
-### Morphisms in the slice above a type
+### Morphisms in the slice over a type
 
 ```agda
 module _
@@ -62,7 +63,7 @@ module _
 
 ## Properties
 
-### Chharacterizing the identity type of morphisms in the slice above a type
+### Chharacterizing the identity type of morphisms in the slice over a type
 
 ```agda
 module _

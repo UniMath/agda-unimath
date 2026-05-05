@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -91,7 +92,7 @@ module _
   is-modulus-limit-modulus-sequence-Metric-Space :
     (m : limit-modulus-sequence-Metric-Space) →
     is-limit-modulus-sequence-Metric-Space
-      (modulus-limit-modulus-sequence-Metric-Space m)
+      ( modulus-limit-modulus-sequence-Metric-Space m)
   is-modulus-limit-modulus-sequence-Metric-Space m = pr2 m
 
   is-limit-prop-sequence-Metric-Space : Prop l2
@@ -275,7 +276,7 @@ module _
   where
 
   abstract
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space :
+    limit-modulus-map-sequence-modulated-ucont-map-Metric-Space :
       limit-modulus-sequence-Metric-Space A u lim →
       limit-modulus-sequence-Metric-Space
         ( B)
@@ -283,7 +284,8 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    modulated-ucont-map-limit-modulus-sequence-Metric-Space (m , is-mod-m) =
+    limit-modulus-map-sequence-modulated-ucont-map-Metric-Space
+      (m , is-mod-m) =
       ( m ∘ modulus-modulated-ucont-map-Metric-Space A B f ,
         λ ε n N≤n →
         is-modulus-of-uniform-continuity-map-modulus-modulated-ucont-map-Metric-Space
@@ -298,7 +300,7 @@ module _
             ( n)
             ( N≤n)))
 
-    preserves-limits-sequence-modulated-ucont-map-Metric-Space :
+    is-limit-map-sequence-modulated-ucont-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -306,8 +308,9 @@ module _
           ( map-modulated-ucont-map-Metric-Space A B f)
           ( u))
         ( map-modulated-ucont-map-Metric-Space A B f lim)
-    preserves-limits-sequence-modulated-ucont-map-Metric-Space =
-      map-is-inhabited modulated-ucont-map-limit-modulus-sequence-Metric-Space
+    is-limit-map-sequence-modulated-ucont-map-Metric-Space =
+      map-is-inhabited
+        ( limit-modulus-map-sequence-modulated-ucont-map-Metric-Space)
 ```
 
 ### Uniformly continuous maps between metric spaces preserve limits
@@ -323,7 +326,7 @@ module _
   where
 
   abstract
-    preserves-limits-sequence-uniformly-continuous-map-Metric-Space :
+    is-limit-map-sequence-uniformly-continuous-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -331,12 +334,12 @@ module _
           ( map-uniformly-continuous-map-Metric-Space A B f)
           ( u))
         ( map-uniformly-continuous-map-Metric-Space A B f lim)
-    preserves-limits-sequence-uniformly-continuous-map-Metric-Space
+    is-limit-map-sequence-uniformly-continuous-map-Metric-Space
       is-limit-lim =
       rec-trunc-Prop
         ( is-limit-prop-sequence-Metric-Space B _ _)
         ( λ m →
-          preserves-limits-sequence-modulated-ucont-map-Metric-Space
+          is-limit-map-sequence-modulated-ucont-map-Metric-Space
             ( A)
             ( B)
             ( map-uniformly-continuous-map-Metric-Space A B f , m)
@@ -362,7 +365,7 @@ module _
   where
 
   abstract
-    short-map-limit-modulus-sequence-Metric-Space :
+    limit-modulus-map-sequence-short-map-Metric-Space :
       limit-modulus-sequence-Metric-Space A u lim →
       limit-modulus-sequence-Metric-Space
         ( B)
@@ -370,15 +373,15 @@ module _
           ( map-short-map-Metric-Space A B f)
           ( u))
         ( map-short-map-Metric-Space A B f lim)
-    short-map-limit-modulus-sequence-Metric-Space =
-      modulated-ucont-map-limit-modulus-sequence-Metric-Space
+    limit-modulus-map-sequence-short-map-Metric-Space =
+      limit-modulus-map-sequence-modulated-ucont-map-Metric-Space
         ( A)
         ( B)
         ( modulated-ucont-map-short-map-Metric-Space A B f)
         ( u)
         ( lim)
 
-    preserves-limits-sequence-short-map-Metric-Space :
+    is-limit-map-sequence-short-map-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -386,8 +389,8 @@ module _
           ( map-short-map-Metric-Space A B f)
           ( u))
         ( map-short-map-Metric-Space A B f lim)
-    preserves-limits-sequence-short-map-Metric-Space =
-      map-is-inhabited short-map-limit-modulus-sequence-Metric-Space
+    is-limit-map-sequence-short-map-Metric-Space =
+      map-is-inhabited limit-modulus-map-sequence-short-map-Metric-Space
 ```
 
 ### Isometries between metric spaces preserve limits
@@ -403,7 +406,7 @@ module _
   where
 
   abstract
-    isometry-limit-modulus-sequence-Metric-Space :
+    limit-modulus-map-sequence-isometry-Metric-Space :
       limit-modulus-sequence-Metric-Space A u lim →
       limit-modulus-sequence-Metric-Space
         ( B)
@@ -411,15 +414,15 @@ module _
           ( map-isometry-Metric-Space A B f)
           ( u))
         ( map-isometry-Metric-Space A B f lim)
-    isometry-limit-modulus-sequence-Metric-Space =
-      short-map-limit-modulus-sequence-Metric-Space
+    limit-modulus-map-sequence-isometry-Metric-Space =
+      limit-modulus-map-sequence-short-map-Metric-Space
         ( A)
         ( B)
         ( short-map-isometry-Metric-Space A B f)
         ( u)
         ( lim)
 
-    preserves-limits-sequence-isometry-Metric-Space :
+    is-limit-map-sequence-isometry-Metric-Space :
       is-limit-sequence-Metric-Space A u lim →
       is-limit-sequence-Metric-Space
         ( B)
@@ -427,8 +430,8 @@ module _
           ( map-isometry-Metric-Space A B f)
           ( u))
         ( map-isometry-Metric-Space A B f lim)
-    preserves-limits-sequence-isometry-Metric-Space =
-      map-is-inhabited isometry-limit-modulus-sequence-Metric-Space
+    is-limit-map-sequence-isometry-Metric-Space =
+      map-is-inhabited limit-modulus-map-sequence-isometry-Metric-Space
 ```
 
 ### If two sequences have limits in metric spaces, their pairing has a limit in the product space
@@ -484,16 +487,17 @@ module _
   (is-lim-v : is-limit-sequence-Metric-Space B v lim-v)
   where
 
-  is-limit-pair-sequence-Metric-Space :
-    is-limit-sequence-Metric-Space
-      ( product-Metric-Space A B)
-      ( pair-sequence u v)
-      ( lim-u , lim-v)
-  is-limit-pair-sequence-Metric-Space =
-    map-binary-trunc-Prop
-      ( limit-modulus-pair-sequence-Metric-Space A B u v lim-u lim-v)
-      ( is-lim-u)
-      ( is-lim-v)
+  abstract
+    is-limit-pair-sequence-Metric-Space :
+      is-limit-sequence-Metric-Space
+        ( product-Metric-Space A B)
+        ( pair-sequence u v)
+        ( lim-u , lim-v)
+    is-limit-pair-sequence-Metric-Space =
+      map-binary-trunc-Prop
+        ( limit-modulus-pair-sequence-Metric-Space A B u v lim-u lim-v)
+        ( is-lim-u)
+        ( is-lim-v)
 ```
 
 ### Taking subsequences preserves limits
@@ -508,11 +512,11 @@ module _
   where
 
   abstract
-    preserves-is-limit-modulus-subsequence-Metric-Space :
+    limit-modulus-subsequence-Metric-Space :
       (μ : ℚ⁺ → ℕ) →
       is-limit-modulus-sequence-Metric-Space X u lim-u μ →
       is-limit-modulus-sequence-Metric-Space X (seq-subsequence u v) lim-u μ
-    preserves-is-limit-modulus-subsequence-Metric-Space μ is-mod-μ ε n με≤n =
+    limit-modulus-subsequence-Metric-Space μ is-mod-μ ε n με≤n =
       is-mod-μ
         ( ε)
         ( extract-subsequence u v n)
@@ -523,11 +527,12 @@ module _
           ( is-inflationary-extract-subsequence u v n)
           ( με≤n))
 
-    preserves-is-limit-subsequence-Metric-Space :
+    is-limit-subsequence-Metric-Space :
       is-limit-sequence-Metric-Space X u lim-u →
       is-limit-sequence-Metric-Space X (seq-subsequence u v) lim-u
-    preserves-is-limit-subsequence-Metric-Space =
-      map-tot-exists preserves-is-limit-modulus-subsequence-Metric-Space
+    is-limit-subsequence-Metric-Space =
+      map-tot-exists
+        ( limit-modulus-subsequence-Metric-Space)
 ```
 
 ## See also

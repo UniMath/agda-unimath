@@ -17,6 +17,7 @@ open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -161,6 +162,9 @@ zero-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ zero-ℚ⁰⁺
 
 one-ℝ⁰⁺ : ℝ⁰⁺ lzero
 one-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ one-ℚ⁰⁺
+
+one-half-ℝ⁰⁺ : ℝ⁰⁺ lzero
+one-half-ℝ⁰⁺ = nonnegative-real-ℚ⁺ one-half-ℚ⁺
 ```
 
 ### A real number is nonnegative if and only if every element of its upper cut is positive
@@ -217,19 +221,6 @@ abstract
     map-trunc-Prop
       ( λ (q , x<q) → ((q , is-positive-is-in-upper-cut-ℝ⁰⁺ x x<q) , x<q))
       ( is-inhabited-upper-cut-ℝ⁰⁺ x)
-```
-
-### Every nonnegative real number is less than some positive rational number
-
-```agda
-abstract
-  exists-ℚ⁺-le-ℝ⁰⁺ :
-    {l : Level} → (x : ℝ⁰⁺ l) →
-    exists ℚ⁺ (λ q → le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ⁺ q))
-  exists-ℚ⁺-le-ℝ⁰⁺ x =
-    map-tot-exists
-      ( λ _ → le-real-is-in-upper-cut-ℝ (real-ℝ⁰⁺ x))
-      ( exists-ℚ⁺-in-upper-cut-ℝ⁰⁺ x)
 ```
 
 ### Nonpositive rational numbers are not less than or equal to nonnegative real numbers
@@ -331,7 +322,17 @@ abstract
 ### Raising the universe levels of nonnegative real numbers
 
 ```agda
+abstract
+  is-nonnegative-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) →
+    is-nonnegative-ℝ x → is-nonnegative-ℝ (raise-ℝ l x)
+  is-nonnegative-raise-ℝ l x is-nonneg-x =
+    is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x)
+
 raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
 raise-ℝ⁰⁺ l (x , is-nonneg-x) =
-  (raise-ℝ l x , is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x))
+  (raise-ℝ l x , is-nonnegative-raise-ℝ l x is-nonneg-x)
+
+raise-zero-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
+raise-zero-ℝ⁰⁺ l = raise-ℝ⁰⁺ l zero-ℝ⁰⁺
 ```

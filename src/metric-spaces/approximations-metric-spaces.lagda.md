@@ -7,6 +7,7 @@ module metric-spaces.approximations-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-products-subtypes
@@ -27,6 +28,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
@@ -322,6 +325,27 @@ module _
         ( subset-approximation-Metric-Space X ε A)
         ( subset-approximation-Metric-Space Y ε B) ,
       is-approximation-product-approximation-Metric-Space)
+```
+
+### If `S` is an `δ`-approximation for `X` and `δ ≤ ε`, `S` is an `ε`-approximation
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (X : Metric-Space l1 l2)
+  (δ ε : ℚ⁺)
+  (δ≤ε : leq-ℚ⁺ δ ε)
+  (S : subset-Metric-Space l3 X)
+  where
+
+  abstract
+    is-approximation-is-approximation-leq-Metric-Space :
+      is-approximation-Metric-Space X δ S → is-approximation-Metric-Space X ε S
+    is-approximation-is-approximation-leq-Metric-Space H x =
+      map-tot-exists
+        ( λ (s , s∈S) Nδxs →
+          weakly-monotonic-neighborhood-Metric-Space X s x δ ε δ≤ε Nδxs)
+        ( H x)
 ```
 
 ## References

@@ -13,6 +13,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -22,11 +23,15 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import lists.sequences
+
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.continuous-maps-metric-spaces
+open import metric-spaces.continuity-of-maps-at-points-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.pointwise-continuous-maps-metric-spaces
+open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-metric-spaces
 ```
 
@@ -81,9 +86,7 @@ module _
   modulated-ucont-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   modulated-ucont-map-Metric-Space =
     Σ ( map-Metric-Space X Y)
-      ( λ f →
-        Σ ( ℚ⁺ → ℚ⁺)
-          ( is-modulus-of-uniform-continuity-map-Metric-Space X Y f))
+      ( modulus-of-uniform-continuity-map-Metric-Space X Y)
 
   map-modulated-ucont-map-Metric-Space :
     modulated-ucont-map-Metric-Space → map-Metric-Space X Y
@@ -456,6 +459,22 @@ module _
         is-short-map-is-isometry-Metric-Space B C (f a) (is-iso-fa a))
       ( λ b →
         is-short-map-is-isometry-Metric-Space A C (λ a → f a b) (is-iso-fb b))
+```
+
+### The action on sequences of modulated uniformly continuous maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : modulated-ucont-map-Metric-Space X Y)
+  where
+
+  map-sequence-modulated-ucont-map-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-sequence-modulated-ucont-map-Metric-Space =
+    map-sequence (map-modulated-ucont-map-Metric-Space X Y f)
 ```
 
 ## See also

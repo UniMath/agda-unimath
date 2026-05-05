@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -26,12 +27,15 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
+open import metric-spaces.expansive-maps-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.preimages-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.sequences-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
@@ -138,9 +142,31 @@ module _
   (f g : isometry-Metric-Space A B)
   where
 
+  htpy-map-isometry-Metric-Space : UU (l1 ⊔ l1')
+  htpy-map-isometry-Metric-Space =
+    map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g
+
+  is-prop-htpy-map-isometry-Metric-Space :
+    is-prop htpy-map-isometry-Metric-Space
+  is-prop-htpy-map-isometry-Metric-Space =
+    is-prop-Π
+      ( λ x →
+        is-set-type-Metric-Space B
+          ( map-isometry-Metric-Space A B f x)
+          ( map-isometry-Metric-Space A B g x))
+
+  htpy-map-prop-isometry-Metric-Space : Prop (l1 ⊔ l1')
+  htpy-map-prop-isometry-Metric-Space =
+    ( htpy-map-isometry-Metric-Space , is-prop-htpy-map-isometry-Metric-Space)
+
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  {f g : isometry-Metric-Space A B}
+  where
+
   equiv-eq-htpy-map-isometry-Metric-Space :
-    (f ＝ g) ≃
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) ≃ htpy-map-isometry-Metric-Space A B f g
   equiv-eq-htpy-map-isometry-Metric-Space =
     equiv-eq-htpy-map-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space A)
@@ -149,14 +175,12 @@ module _
       ( g)
 
   htpy-eq-map-isometry-Metric-Space :
-    (f ＝ g) →
-    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+    (f ＝ g) → htpy-map-isometry-Metric-Space A B f g
   htpy-eq-map-isometry-Metric-Space =
     map-equiv equiv-eq-htpy-map-isometry-Metric-Space
 
   eq-htpy-map-isometry-Metric-Space :
-    ( map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g) →
-    (f ＝ g)
+    htpy-map-isometry-Metric-Space A B f g → (f ＝ g)
   eq-htpy-map-isometry-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
@@ -391,4 +415,135 @@ module _
   emb-map-isometry-Metric-Space =
     ( map-isometry-Metric-Space A B f ,
       is-emb-map-isometry-Metric-Space)
+```
+
+### The action on sequences of isometries
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : isometry-Metric-Space X Y)
+  where
+
+  map-sequence-isometry-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-sequence-isometry-Metric-Space =
+    map-sequence (map-isometry-Metric-Space X Y f)
+```
+
+### Any isometry between metric spaces is expansive
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-Metric-Space A B)
+  where
+
+  is-expansive-map-is-isometry-Metric-Space :
+    is-isometry-Metric-Space A B f →
+    is-expansive-map-Metric-Space A B f
+  is-expansive-map-is-isometry-Metric-Space =
+    is-expansive-map-is-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
+      ( f)
+```
+
+### The embedding of isometries of metric spaces into expansive maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  expansive-map-isometry-Metric-Space :
+    isometry-Metric-Space A B → expansive-map-Metric-Space A B
+  expansive-map-isometry-Metric-Space =
+    expansive-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
+
+  is-emb-expansive-map-isometry-Metric-Space :
+    is-emb expansive-map-isometry-Metric-Space
+  is-emb-expansive-map-isometry-Metric-Space =
+    is-emb-expansive-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
+
+  emb-expansive-map-isometry-Metric-Space :
+    isometry-Metric-Space A B ↪ expansive-map-Metric-Space A B
+  emb-expansive-map-isometry-Metric-Space =
+    emb-expansive-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( pseudometric-Metric-Space B)
+```
+
+### Any isometry between pseudometric spaces is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-Metric-Space A B)
+  where
+
+  is-short-map-is-isometry-Metric-Space :
+    is-isometry-Metric-Space A B f →
+    is-short-map-Metric-Space A B f
+  is-short-map-is-isometry-Metric-Space I =
+    preserves-neighborhoods-map-isometry-Metric-Space A B (f , I)
+```
+
+### The embedding of isometries of pseudometric spaces into short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  short-map-isometry-Metric-Space :
+    isometry-Metric-Space A B → short-map-Metric-Space A B
+  short-map-isometry-Metric-Space f =
+    map-isometry-Metric-Space A B f ,
+    is-short-map-is-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Metric-Space A B f)
+      ( is-isometry-map-isometry-Metric-Space A B f)
+
+  is-emb-short-map-isometry-Metric-Space :
+    is-emb short-map-isometry-Metric-Space
+  is-emb-short-map-isometry-Metric-Space =
+    is-emb-right-factor
+      ( map-short-map-Metric-Space A B)
+      ( short-map-isometry-Metric-Space)
+      ( is-emb-inclusion-subtype (is-short-map-prop-Metric-Space A B))
+      ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B))
+
+  emb-short-map-isometry-Metric-Space :
+    isometry-Metric-Space A B ↪ short-map-Metric-Space A B
+  emb-short-map-isometry-Metric-Space =
+    ( short-map-isometry-Metric-Space , is-emb-short-map-isometry-Metric-Space)
+```
+
+### Short and expansive maps are isometries
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-Metric-Space A B)
+  where abstract
+
+  is-isometry-is-expansive-map-is-short-map-Metric-Space :
+    is-short-map-Metric-Space A B f →
+    is-expansive-map-Metric-Space A B f →
+    is-isometry-Metric-Space A B f
+  is-isometry-is-expansive-map-is-short-map-Metric-Space H K d x y =
+    (H d x y , K d x y)
 ```

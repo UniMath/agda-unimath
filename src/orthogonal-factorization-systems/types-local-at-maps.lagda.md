@@ -13,13 +13,17 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.families-of-equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -32,10 +36,10 @@ open import foundation.precomposition-functions
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.sections
-open import foundation.transport-along-identifications
+open import foundation.subuniverse-of-contractible-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -223,7 +227,7 @@ module _
 
   is-local-retract : A retract-of B → is-local f B → is-local f A
   is-local-retract R =
-    is-equiv-retract-map-is-equiv'
+    is-equiv-retract-arrow-is-equiv'
       ( precomp f A)
       ( precomp f B)
       ( retract-postcomp Y R)
@@ -251,15 +255,15 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  (f : A → B) (g : X → Y) (R : f retract-of-arrow g) (S : UU l5)
   where
 
-  is-local-retract-map-is-local : is-local g S → is-local f S
-  is-local-retract-map-is-local =
-    is-equiv-retract-map-is-equiv
+  is-local-retract-arrow-is-local : is-local g S → is-local f S
+  is-local-retract-arrow-is-local =
+    is-equiv-retract-arrow-is-equiv
       ( precomp f S)
       ( precomp g S)
-      ( retract-map-precomp-retract-map f g R S)
+      ( retract-arrow-precomp-retract-arrow f g R S)
 ```
 
 In fact, the higher coherence of the retract is not needed:
@@ -278,9 +282,9 @@ module _
   (S : UU l5)
   where
 
-  is-local-retract-map-is-local' : is-local g S → is-local f S
-  is-local-retract-map-is-local' =
-    is-equiv-retract-map-is-equiv'
+  is-local-retract-arrow-is-local' : is-local g S → is-local f S
+  is-local-retract-arrow-is-local' =
+    is-equiv-retract-arrow-is-equiv'
       ( precomp f S)
       ( precomp g S)
       ( retract-precomp R₁ S)

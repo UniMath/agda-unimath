@@ -7,6 +7,7 @@ module foundation.dubuc-penon-compact-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.universal-quantification
 open import foundation.universe-levels

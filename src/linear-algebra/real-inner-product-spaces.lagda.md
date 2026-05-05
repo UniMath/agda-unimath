@@ -12,6 +12,7 @@ module linear-algebra.real-inner-product-spaces where
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -600,7 +601,7 @@ is-inner-product-bilinear-form-mul-ℝ :
 is-inner-product-bilinear-form-mul-ℝ l =
   ( commutative-mul-ℝ ,
     is-nonnegative-square-ℝ ,
-    λ x x²=0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-square-ℝ x x²=0))
+    λ x x²=0 → eq-raise-zero-is-zero-ℝ (is-zero-is-zero-square-ℝ x²=0))
 
 real-inner-product-space-ℝ : (l : Level) → ℝ-Inner-Product-Space l (lsuc l)
 real-inner-product-space-ℝ l =

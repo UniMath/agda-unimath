@@ -20,7 +20,7 @@ open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
-open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>

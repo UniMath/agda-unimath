@@ -10,6 +10,7 @@ module foundation.cones-over-cospan-diagrams where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -17,6 +18,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
 open import foundation.structure-identity-principle
+open import foundation.telescopes
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

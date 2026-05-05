@@ -1,4 +1,4 @@
-# The slice above a type
+# The slice over a type
 
 ```agda
 module foundation.slice where

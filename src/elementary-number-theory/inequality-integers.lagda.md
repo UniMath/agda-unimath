@@ -23,6 +23,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -86,6 +87,9 @@ leq-zero-one-ℤ = star
 abstract
   refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
   refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
+
+  leq-eq-ℤ : {k l : ℤ} → k ＝ l → leq-ℤ k l
+  leq-eq-ℤ {k} {.k} refl = refl-leq-ℤ k
 
   antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
   antisymmetric-leq-ℤ {x} {y} H K =

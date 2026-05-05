@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.cofibers-of-maps public
 open import synthetic-homotopy-theory.cofibers-of-pointed-maps public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
+open import synthetic-homotopy-theory.composition-cospans public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.connective-prespectra public
@@ -54,8 +55,8 @@ open import synthetic-homotopy-theory.descent-data-function-types-over-pushouts 
 open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
-open import synthetic-homotopy-theory.descent-property-pushouts public
-open import synthetic-homotopy-theory.descent-property-sequential-colimits public
+open import synthetic-homotopy-theory.descent-pushouts public
+open import synthetic-homotopy-theory.descent-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
 open import synthetic-homotopy-theory.equifibered-sequential-diagrams public

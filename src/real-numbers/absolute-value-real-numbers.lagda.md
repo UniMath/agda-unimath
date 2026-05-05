@@ -296,6 +296,12 @@ module _
 
     leq-abs-leq-leq-neg-ℝ : leq-ℝ x y → leq-ℝ (neg-ℝ x) y → leq-ℝ (abs-ℝ x) y
     leq-abs-leq-leq-neg-ℝ = leq-max-leq-leq-ℝ x (neg-ℝ x) y
+
+    leq-abs-leq-leq-neg-ℝ' : leq-ℝ x y → leq-ℝ (neg-ℝ y) x → leq-ℝ (abs-ℝ x) y
+    leq-abs-leq-leq-neg-ℝ' x≤y -y≤x =
+      leq-abs-leq-leq-neg-ℝ
+        ( x≤y)
+        ( tr (leq-ℝ (neg-ℝ x)) (neg-neg-ℝ y) (neg-leq-ℝ -y≤x))
 ```
 
 ### If `x < y` and `-x < y`, then `|x| < y`
@@ -496,4 +502,14 @@ abstract opaque
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) x)
       ( le-ℝ (abs-ℝ x -ℝ real-ℚ⁺ ε) (neg-ℝ x))
   approximate-below-abs-ℝ x = approximate-below-max-ℝ x (neg-ℝ x)
+```
+
+### `|x|² = x²`
+
+```agda
+abstract
+  square-abs-ℝ : {l : Level} (x : ℝ l) → square-ℝ (abs-ℝ x) ＝ square-ℝ x
+  square-abs-ℝ x =
+    ( ap square-ℝ (eq-abs-sqrt-square-ℝ x)) ∙
+    ( eq-real-square-sqrt-ℝ⁰⁺ (nonnegative-square-ℝ x))
 ```

@@ -10,7 +10,6 @@ module metric-spaces.short-maps-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -25,11 +24,11 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.poset-of-rational-neighborhood-relations
 open import metric-spaces.preimages-rational-neighborhood-relations
+open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 ```
 
@@ -40,15 +39,10 @@ open import metric-spaces.short-maps-pseudometric-spaces
 A [map](metric-spaces.maps-metric-spaces.md) `f` between two
 [metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="maps between metric spaces" Agda=is-short-map-Metric-Space WD="metric map" WDID=Q2713824}}
-if it's [short](metric-spaces.short-maps-pseudometric-spaces.md) between their
-underlying [pseudometric spaces](metric-spaces.pseudometric-spaces.md). That is,
-if the
-[rational neighborhood relation](metric-spaces.rational-neighborhood-relations.md)
-on `A` is [finer](metric-spaces.poset-of-rational-neighborhood-relations.md)
-than the [preimage](metric-spaces.preimages-rational-neighborhood-relations.md)
-by `f` of the rational neighborhood relation on `B`. I.e., upper bounds on the
-distance between two points in `A` are upper bounds of the distance between
-their images in `B`.
+if it preserves
+[neighborhoods](metric-spaces.rational-neighborhood-relations.md): for any two
+points `x` and `y` in `A`, if `x` and `y` share an `ε`-neighborhood in `A` then
+`f x` and `f y` share an `ε`-neighborhood in `B`.
 
 ## Definitions
 
@@ -146,7 +140,7 @@ module _
     id-short-map-Pseudometric-Space (pseudometric-Metric-Space A)
 ```
 
-### Equality of short maps between metric spaces is characterized by homotopy of their carrier maps
+### Equality of short maps between metric spaces is characterized by homotopy of their underlying maps
 
 ```agda
 module _
@@ -155,19 +149,18 @@ module _
   (f g : short-map-Metric-Space A B)
   where
 
+  htpy-map-short-map-Metric-Space : UU (l1 ⊔ l1')
+  htpy-map-short-map-Metric-Space =
+    map-short-map-Metric-Space A B f ~ map-short-map-Metric-Space A B g
+
   equiv-eq-htpy-map-short-map-Metric-Space :
-    ( f ＝ g) ≃
-    ( map-short-map-Metric-Space A B f ~
-      map-short-map-Metric-Space A B g)
+    (f ＝ g) ≃ htpy-map-short-map-Metric-Space
   equiv-eq-htpy-map-short-map-Metric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
       ( is-short-map-prop-Metric-Space A B) f g
 
-  eq-htpy-map-short-map-Metric-Space :
-    ( map-short-map-Metric-Space A B f ~
-      map-short-map-Metric-Space A B g) →
-    ( f ＝ g)
+  eq-htpy-map-short-map-Metric-Space : htpy-map-short-map-Metric-Space → f ＝ g
   eq-htpy-map-short-map-Metric-Space =
     map-inv-equiv equiv-eq-htpy-map-short-map-Metric-Space
 ```
@@ -295,53 +288,20 @@ module _
       ( b)
 ```
 
-### Any isometry between metric spaces is short
+### The action on sequences of short maps
 
 ```agda
 module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-Metric-Space A B)
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : short-map-Metric-Space X Y)
   where
 
-  is-short-map-is-isometry-Metric-Space :
-    is-isometry-Metric-Space A B f →
-    is-short-map-Metric-Space A B f
-  is-short-map-is-isometry-Metric-Space =
-    is-short-map-is-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
-```
-
-### The embedding of isometries of metric spaces into short maps
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  where
-
-  short-map-isometry-Metric-Space :
-    isometry-Metric-Space A B → short-map-Metric-Space A B
-  short-map-isometry-Metric-Space =
-    short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  is-emb-short-map-isometry-Metric-Space :
-    is-emb short-map-isometry-Metric-Space
-  is-emb-short-map-isometry-Metric-Space =
-    is-emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  emb-short-map-isometry-Metric-Space :
-    isometry-Metric-Space A B ↪ short-map-Metric-Space A B
-  emb-short-map-isometry-Metric-Space =
-    emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
+  map-sequence-short-map-Metric-Space :
+    sequence-type-Metric-Space X → sequence-type-Metric-Space Y
+  map-sequence-short-map-Metric-Space =
+    map-sequence (map-short-map-Metric-Space X Y f)
 ```
 
 ## See also

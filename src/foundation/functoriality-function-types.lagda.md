@@ -73,14 +73,20 @@ module _
   is-trunc-map-postcomp-is-trunc-map is-trunc-f A =
     is-trunc-map-map-Π' k (terminal-map A) (point f) (point is-trunc-f)
 
+  is-trunc-map-is-trunc-map-postcomp-lzero :
+    ((A : UU lzero) → is-trunc-map k (postcomp A f)) →
+    is-trunc-map k f
+  is-trunc-map-is-trunc-map-postcomp-lzero is-trunc-postcomp-f =
+    is-trunc-map-is-trunc-map-map-Π'-lzero k
+      ( point f)
+      ( λ {J} α → is-trunc-postcomp-f J)
+      ( star)
+
   is-trunc-map-is-trunc-map-postcomp :
     ({l3 : Level} (A : UU l3) → is-trunc-map k (postcomp A f)) →
     is-trunc-map k f
   is-trunc-map-is-trunc-map-postcomp is-trunc-postcomp-f =
-    is-trunc-map-is-trunc-map-map-Π' k
-      ( point f)
-      ( λ {l} {J} α → is-trunc-postcomp-f {l} J)
-      ( star)
+    is-trunc-map-is-trunc-map-postcomp-lzero is-trunc-postcomp-f
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
@@ -95,13 +101,19 @@ module _
         ( is-prop-map-is-emb is-emb-f)
         ( A))
 
+  is-emb-is-emb-postcomp-lzero :
+    ((A : UU lzero) → is-emb (postcomp A f)) →
+    is-emb f
+  is-emb-is-emb-postcomp-lzero is-emb-postcomp-f =
+    is-emb-is-prop-map
+      ( is-trunc-map-is-trunc-map-postcomp-lzero neg-one-𝕋 f
+        ( is-prop-map-is-emb ∘ is-emb-postcomp-f))
+
   is-emb-is-emb-postcomp :
     ({l3 : Level} (A : UU l3) → is-emb (postcomp A f)) →
     is-emb f
   is-emb-is-emb-postcomp is-emb-postcomp-f =
-    is-emb-is-prop-map
-      ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
-        ( is-prop-map-is-emb ∘ is-emb-postcomp-f))
+    is-emb-is-emb-postcomp-lzero is-emb-postcomp-f
 
 emb-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ Y) (A : UU l3) →

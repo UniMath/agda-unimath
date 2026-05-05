@@ -11,12 +11,14 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```

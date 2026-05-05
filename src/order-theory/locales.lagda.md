@@ -8,6 +8,7 @@ module order-theory.locales where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

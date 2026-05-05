@@ -15,10 +15,12 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
@@ -115,6 +117,13 @@ one-ℝ = real-ℚ one-ℚ
 ```agda
 neg-one-ℝ : ℝ lzero
 neg-one-ℝ = real-ℚ neg-one-ℚ
+```
+
+### ½ as a real number
+
+```agda
+one-half-ℝ : ℝ lzero
+one-half-ℝ = real-ℚ one-half-ℚ
 ```
 
 ### The canonical map from `ℚ` to `ℝ l`
@@ -388,11 +397,11 @@ abstract
       ( is-injective-real-ℚ
         ( eq-sim-ℝ
           ( similarity-reasoning-ℝ
-            zero-ℝ
-            ~ℝ raise-zero-ℝ l
-              by sim-raise-ℝ l zero-ℝ
-            ~ℝ raise-ℝ l one-ℝ
-              by sim-eq-ℝ 0=1ℝ
-            ~ℝ one-ℝ
-              by sim-raise-ℝ' l one-ℝ)))
+              zero-ℝ
+              ~ℝ raise-zero-ℝ l
+                by sim-raise-ℝ l zero-ℝ
+              ~ℝ raise-ℝ l one-ℝ
+                by sim-eq-ℝ 0=1ℝ
+              ~ℝ one-ℝ
+                by sim-raise-ℝ' l one-ℝ)))
 ```

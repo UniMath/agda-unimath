@@ -12,6 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions

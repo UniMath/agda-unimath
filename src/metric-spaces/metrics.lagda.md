@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.functoriality-disjunction
 open import foundation.identity-types
@@ -48,6 +49,7 @@ open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>

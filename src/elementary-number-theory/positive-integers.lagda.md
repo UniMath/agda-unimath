@@ -7,6 +7,7 @@ module elementary-number-theory.positive-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
@@ -18,6 +19,7 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -25,8 +27,6 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
@@ -170,6 +170,9 @@ positive-int-ℕ⁺ (n , n≠0) = int-ℕ n , is-positive-int-is-nonzero-ℕ n n
 
 positive-nat-ℤ⁺ : positive-ℤ → ℕ⁺
 positive-nat-ℤ⁺ (inr (inr x) , k>0) = succ-nonzero-ℕ' x
+
+nat-ℤ⁺ : positive-ℤ → ℕ
+nat-ℤ⁺ x = nat-ℕ⁺ (positive-nat-ℤ⁺ x)
 
 abstract
   is-section-positive-nat-ℤ⁺ :

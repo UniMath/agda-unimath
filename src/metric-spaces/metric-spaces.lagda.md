@@ -15,6 +15,7 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
@@ -317,6 +318,10 @@ module _
   set-Metric-Space : Set l1
   set-Metric-Space =
     (type-Metric-Space A , is-set-type-Metric-Space)
+
+  eq-prop-Metric-Space :
+    (x y : type-Metric-Space A) → Prop l1
+  eq-prop-Metric-Space = Id-Prop set-Metric-Space
 ```
 
 ### Similarity of elements in a metric space is equivalent to equality

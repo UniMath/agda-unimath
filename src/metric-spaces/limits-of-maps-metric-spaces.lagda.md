@@ -10,6 +10,7 @@ module metric-spaces.limits-of-maps-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
@@ -73,3 +74,12 @@ module _
   is-point-limit-map-Metric-Space =
     type-Prop is-point-limit-prop-map-Metric-Space
 ```
+
+## See also
+
+- [ε-δ limits of functions in metric spaces](metric-spaces.epsilon-delta-limits-of-maps-metric-spaces.md)
+
+## External links
+
+- [Limit of a function](https://en.wikipedia.org/wiki/Limit_of_a_function#Functions_on_metric_spaces)
+  at Wikipedia
