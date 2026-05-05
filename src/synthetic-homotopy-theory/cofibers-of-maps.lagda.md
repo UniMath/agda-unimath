@@ -69,6 +69,12 @@ module _
     universal-property-pushout f (terminal-map A) cocone-cofiber
   universal-property-cofiber = up-pushout f (terminal-map A)
 
+  equiv-up-cofiber :
+    {l : Level} (X : UU l) → (cofiber → X) ≃ cocone f (terminal-map A) X
+  equiv-up-cofiber X =
+    ( cocone-map f (terminal-map A) cocone-cofiber ,
+      universal-property-cofiber X)
+
   dependent-universal-property-cofiber :
     dependent-universal-property-pushout f (terminal-map A) cocone-cofiber
   dependent-universal-property-cofiber = dup-pushout f (terminal-map A)
@@ -76,6 +82,11 @@ module _
   cogap-cofiber :
     {l : Level} {X : UU l} → cocone f (terminal-map A) X → cofiber → X
   cogap-cofiber = cogap f (terminal-map A)
+
+  equiv-cogap-cofiber :
+    {l : Level} (X : UU l) → cocone f (terminal-map A) X ≃ (cofiber → X)
+  equiv-cogap-cofiber X =
+    ( cogap-cofiber , is-equiv-map-inv-is-equiv (universal-property-cofiber X))
 
   dependent-cogap-cofiber :
     {l : Level} {P : cofiber → UU l}
