@@ -10,6 +10,7 @@ module metric-spaces.limits-of-maps-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations

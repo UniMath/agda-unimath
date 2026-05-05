@@ -18,6 +18,7 @@ open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.embeddings
@@ -29,6 +30,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.similarity-subtypes

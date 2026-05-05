@@ -4,6 +4,7 @@ Kratowsky->Kuratowski
 Kuratowsky->Kuratowski
 Lavwere->Lawvere
 ahda->agda
+aight->right,sight
 anamorhpism->anamorphism
 anamorhpisms->anamorphisms
 anamorhpsim->anamorphism

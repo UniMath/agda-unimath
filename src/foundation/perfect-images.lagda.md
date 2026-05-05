@@ -16,12 +16,14 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality-maps
 open import foundation.functoriality-dependent-function-types
 open import foundation.iterating-functions
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels

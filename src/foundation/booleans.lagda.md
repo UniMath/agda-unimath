@@ -2,12 +2,15 @@
 
 ```agda
 module foundation.booleans where
+
+open import foundation-core.booleans public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.apartness-relations
+open import foundation.boolean-operations
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -28,7 +31,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -49,106 +51,9 @@ is a [2-element type](univalent-combinatorics.2-element-types.md) with elements
 
 ## Definition
 
-### The booleans
+### Equality on the booleans is decidable
 
 ```agda
-data bool : UU lzero where
-  true false : bool
-
-{-# BUILTIN BOOL bool #-}
-{-# BUILTIN TRUE true #-}
-{-# BUILTIN FALSE false #-}
-```
-
-### The induction principle of the booleans
-
-```agda
-module _
-  {l : Level} (P : bool → UU l)
-  where
-
-  ind-bool : P true → P false → (b : bool) → P b
-  ind-bool pt pf true = pt
-  ind-bool pt pf false = pf
-```
-
-### The recursion principle of the booleans
-
-```agda
-module _
-  {l : Level} {P : UU l}
-  where
-
-  rec-bool : P → P → bool → P
-  rec-bool = ind-bool (λ _ → P)
-```
-
-### The `if_then_else` function
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  if_then_else_ : bool → A → A → A
-  if b then x else y = rec-bool x y b
-```
-
-### Raising universe levels of the booleans
-
-```agda
-raise-bool : (l : Level) → UU l
-raise-bool l = raise l bool
-
-raise-true : (l : Level) → raise-bool l
-raise-true l = map-raise true
-
-raise-false : (l : Level) → raise-bool l
-raise-false l = map-raise false
-
-compute-raise-bool : (l : Level) → bool ≃ raise-bool l
-compute-raise-bool l = compute-raise l bool
-```
-
-### The standard propositions associated to the constructors of bool
-
-```agda
-prop-bool : bool → Prop lzero
-prop-bool true = unit-Prop
-prop-bool false = empty-Prop
-
-type-prop-bool : bool → UU lzero
-type-prop-bool = type-Prop ∘ prop-bool
-```
-
-### Equality on the booleans
-
-```agda
-Eq-bool : bool → bool → UU lzero
-Eq-bool true true = unit
-Eq-bool true false = empty
-Eq-bool false true = empty
-Eq-bool false false = unit
-
-refl-Eq-bool : (x : bool) → Eq-bool x x
-refl-Eq-bool true = star
-refl-Eq-bool false = star
-
-Eq-eq-bool :
-  {x y : bool} → x ＝ y → Eq-bool x y
-Eq-eq-bool {x = x} refl = refl-Eq-bool x
-
-eq-Eq-bool :
-  {x y : bool} → Eq-bool x y → x ＝ y
-eq-Eq-bool {true} {true} star = refl
-eq-Eq-bool {false} {false} star = refl
-
-neq-false-true-bool : false ≠ true
-neq-false-true-bool ()
-
-neq-true-false-bool : true ≠ false
-neq-true-false-bool ()
-
 is-decidable-Eq-bool : {x y : bool} → is-decidable (Eq-bool x y)
 is-decidable-Eq-bool {true} {true} = inl star
 is-decidable-Eq-bool {true} {false} = inr id
@@ -165,29 +70,6 @@ decidable-prop-bool false = empty-Decidable-Prop
 ```
 
 ## Properties
-
-### The booleans are a set
-
-```agda
-abstract
-  is-prop-Eq-bool : (x y : bool) → is-prop (Eq-bool x y)
-  is-prop-Eq-bool true true = is-prop-unit
-  is-prop-Eq-bool true false = is-prop-empty
-  is-prop-Eq-bool false true = is-prop-empty
-  is-prop-Eq-bool false false = is-prop-unit
-
-abstract
-  is-set-bool : is-set bool
-  is-set-bool =
-    is-set-prop-in-id
-      ( Eq-bool)
-      ( is-prop-Eq-bool)
-      ( refl-Eq-bool)
-      ( λ x y → eq-Eq-bool)
-
-bool-Set : Set lzero
-bool-Set = bool , is-set-bool
-```
 
 ### The booleans have decidable equality
 
@@ -215,18 +97,9 @@ bool-Type-With-Tight-Apartness =
   type-with-tight-apartness-Discrete-Type bool-Discrete-Type
 ```
 
-### The "is true" predicate on booleans
+### The "is true" predicate on booleans is decidable
 
 ```agda
-is-true : bool → UU lzero
-is-true = _＝ true
-
-is-prop-is-true : (b : bool) → is-prop (is-true b)
-is-prop-is-true b = is-set-bool b true
-
-is-true-Prop : bool → Prop lzero
-is-true-Prop b = (is-true b , is-prop-is-true b)
-
 is-decidable-prop-is-true : (b : bool) → is-decidable-prop (is-true b)
 is-decidable-prop-is-true b =
   ( is-prop-is-true b , has-decidable-equality-bool b true)
@@ -235,18 +108,9 @@ is-true-Decidable-Prop : bool → Decidable-Prop lzero
 is-true-Decidable-Prop b = (is-true b , is-decidable-prop-is-true b)
 ```
 
-### The "is false" predicate on booleans
+### The "is false" predicate on booleans is decidable
 
 ```agda
-is-false : bool → UU lzero
-is-false = _＝ false
-
-is-prop-is-false : (b : bool) → is-prop (is-false b)
-is-prop-is-false b = is-set-bool b false
-
-is-false-Prop : bool → Prop lzero
-is-false-Prop b = is-false b , is-prop-is-false b
-
 is-decidable-prop-is-false : (b : bool) → is-decidable-prop (is-false b)
 is-decidable-prop-is-false b =
   ( is-prop-is-false b , has-decidable-equality-bool b false)
@@ -331,18 +195,4 @@ number-of-elements-bool =
 bool-Finite-Type : Finite-Type lzero
 pr1 bool-Finite-Type = bool
 pr2 bool-Finite-Type = is-finite-bool
-```
-
-### The constant function `const bool b` is not an equivalence
-
-```agda
-abstract
-  no-section-const-bool : (b : bool) → ¬ (section (const bool b))
-  no-section-const-bool true (g , G) = neq-true-false-bool (G false)
-  no-section-const-bool false (g , G) = neq-false-true-bool (G true)
-
-abstract
-  is-not-equiv-const-bool :
-    (b : bool) → ¬ (is-equiv (const bool b))
-  is-not-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
 ```

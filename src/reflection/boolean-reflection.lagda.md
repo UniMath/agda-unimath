@@ -7,10 +7,10 @@ module reflection.boolean-reflection where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
 open import foundation.decidable-types
 open import foundation.universe-levels
 
+open import foundation-core.booleans
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.identity-types
