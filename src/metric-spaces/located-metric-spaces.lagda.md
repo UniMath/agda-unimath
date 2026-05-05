@@ -13,6 +13,7 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.negation
 open import foundation.propositions

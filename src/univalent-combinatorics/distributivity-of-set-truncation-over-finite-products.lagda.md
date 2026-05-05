@@ -13,9 +13,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -31,6 +33,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type

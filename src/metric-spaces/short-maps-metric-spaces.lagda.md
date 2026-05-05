@@ -10,7 +10,6 @@ module metric-spaces.short-maps-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -25,7 +24,6 @@ open import foundation.universe-levels
 
 open import lists.sequences
 
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.poset-of-rational-neighborhood-relations
@@ -288,55 +286,6 @@ module _
       ( pseudometric-Metric-Space A)
       ( pseudometric-Metric-Space B)
       ( b)
-```
-
-### Any isometry between metric spaces is short
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : map-Metric-Space A B)
-  where
-
-  is-short-map-is-isometry-Metric-Space :
-    is-isometry-Metric-Space A B f →
-    is-short-map-Metric-Space A B f
-  is-short-map-is-isometry-Metric-Space =
-    is-short-map-is-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
-```
-
-### The embedding of isometries of metric spaces into short maps
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  where
-
-  short-map-isometry-Metric-Space :
-    isometry-Metric-Space A B → short-map-Metric-Space A B
-  short-map-isometry-Metric-Space =
-    short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  is-emb-short-map-isometry-Metric-Space :
-    is-emb short-map-isometry-Metric-Space
-  is-emb-short-map-isometry-Metric-Space =
-    is-emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-
-  emb-short-map-isometry-Metric-Space :
-    isometry-Metric-Space A B ↪ short-map-Metric-Space A B
-  emb-short-map-isometry-Metric-Space =
-    emb-short-map-isometry-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
 ```
 
 ### The action on sequences of short maps

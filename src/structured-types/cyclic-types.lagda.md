@@ -9,6 +9,7 @@ module structured-types.cyclic-types where
 ```agda
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.iterating-automorphisms
 open import foundation.propositional-truncations
 open import foundation.propositions

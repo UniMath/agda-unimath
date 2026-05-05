@@ -9,10 +9,11 @@ module foundation.universal-property-image where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalences-contractible-types
 open import foundation.images
 open import foundation.logical-equivalences
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universal-property-family-of-fibers-of-maps

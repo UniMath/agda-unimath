@@ -11,7 +11,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.functoriality-truncation
 open import foundation.precomposition-functions

@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.universal-cover-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.universal-property-integers
@@ -18,6 +19,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -32,13 +34,14 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.precomposition-dependent-functions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops

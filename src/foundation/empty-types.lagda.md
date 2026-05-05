@@ -9,20 +9,22 @@ open import foundation-core.empty-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -186,4 +188,15 @@ pr2 (is-contr-type-is-empty l) x =
         ( is-empty-raise-empty)
         ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
     ( eq-is-prop is-property-is-empty)
+```
+
+### The type of equivalences between two empty types is contractible
+
+```agda
+is-contr-equiv-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → is-empty B →
+  is-contr (A ≃ B)
+is-contr-equiv-is-empty ¬A ¬B =
+  ( equiv-is-empty ¬A ¬B ,
+    λ _ → eq-htpy-equiv (ex-falso ∘ ¬A))
 ```

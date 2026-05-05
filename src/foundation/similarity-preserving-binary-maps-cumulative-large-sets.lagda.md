@@ -348,12 +348,10 @@ module _
     {l : Level} (x : type-Cumulative-Large-Set SX l) →
     sim-preserving-map-Cumulative-Large-Set (l ⊔_) SY SZ
   sim-preserving-map-ev-right-sim-preserving-binary-map-Cumulative-Large-Set x =
-    λ where
-      .map-sim-preserving-map-Large-Similarity-Relation →
-        map-sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ f x
-      .preserves-sim-map-sim-preserving-map-Large-Similarity-Relation →
-        preserves-sim-map-ev-right-sim-preserving-binary-map-Cumulative-Large-Set
-          ( x)
+    make-sim-preserving-map-Large-Similarity-Relation
+      ( map-sim-preserving-binary-map-Cumulative-Large-Set SX SY SZ f x)
+      ( preserves-sim-map-ev-right-sim-preserving-binary-map-Cumulative-Large-Set
+        ( x))
 
   preserves-sim-map-ev-left-sim-preserving-binary-map-Cumulative-Large-Set :
     {l : Level} (y : type-Cumulative-Large-Set SY l) →
@@ -380,12 +378,10 @@ module _
     {l : Level} (y : type-Cumulative-Large-Set SY l) →
     sim-preserving-map-Cumulative-Large-Set (l ⊔_) SX SZ
   sim-preserving-map-ev-left-sim-preserving-binary-map-Cumulative-Large-Set y =
-    λ where
-      .map-sim-preserving-map-Large-Similarity-Relation x →
-        map-sim-preserving-binary-map-Large-Similarity-Relation f x y
-      .preserves-sim-map-sim-preserving-map-Large-Similarity-Relation →
-        preserves-sim-map-ev-left-sim-preserving-binary-map-Cumulative-Large-Set
-          ( y)
+    make-sim-preserving-map-Large-Similarity-Relation
+      ( λ x → map-sim-preserving-binary-map-Large-Similarity-Relation f x y)
+      ( preserves-sim-map-ev-left-sim-preserving-binary-map-Cumulative-Large-Set
+        ( y))
 
 module _
   {α : Level → Level}

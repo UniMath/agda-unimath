@@ -9,6 +9,7 @@ module foundation.large-apartness-relations where
 ```agda
 open import foundation.apartness-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.function-types

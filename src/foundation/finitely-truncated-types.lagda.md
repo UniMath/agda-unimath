@@ -12,12 +12,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.maximum-truncation-levels
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

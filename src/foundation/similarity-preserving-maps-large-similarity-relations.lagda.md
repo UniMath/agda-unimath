@@ -56,6 +56,9 @@ record
     UUω
   where
 
+  constructor
+    make-sim-preserving-map-Large-Similarity-Relation
+
   field
     map-sim-preserving-map-Large-Similarity-Relation :
       {l : Level} → X l → Y (γ l)

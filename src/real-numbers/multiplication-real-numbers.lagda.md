@@ -1089,6 +1089,13 @@ abstract opaque
                         ( leq-le-ℚ a<p , leq-le-ℚ p<b)
                         ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
                     ( [a,b][c,d]<pq)))))
+
+abstract
+  combine-left-mul-real-ℚ :
+    {l : Level} (p q : ℚ) (x : ℝ l) →
+    real-ℚ p *ℝ (real-ℚ q *ℝ x) ＝ real-ℚ (p *ℚ q) *ℝ x
+  combine-left-mul-real-ℚ p q x =
+    inv (associative-mul-ℝ _ _ _) ∙ ap-mul-ℝ (mul-real-ℚ p q) refl
 ```
 
 ### Multiplication on the real numbers preserves similarity
