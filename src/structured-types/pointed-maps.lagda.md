@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
