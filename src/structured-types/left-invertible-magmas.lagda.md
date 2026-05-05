@@ -8,6 +8,7 @@ module structured-types.left-invertible-magmas where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
@@ -28,7 +29,9 @@ words, if multiplying by a fixed element on the left is always an equivalence.
 Left-invertibility appears as Definition 2.1(4) of {{#cite BCFR23}} in the
 context of [H-spaces](structured-types.h-spaces.md).
 
-## Definition
+## Definitions
+
+### The predicate of being a left invertible magma
 
 ```agda
 module _
