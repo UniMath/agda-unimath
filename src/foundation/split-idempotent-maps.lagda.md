@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fixed-points-endofunctions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -344,13 +345,7 @@ module _
             Σ ( B retract-of A)
               ( λ (i , r , R) → i ∘ r ~ f)))
     ≃ Σ (A → A) (λ f → (Σ (retracts l2 A) (λ (B , i , r , R) → i ∘ r ~ f)))
-    by
-      equiv-tot
-        ( λ f →
-          inv-associative-Σ
-            ( UU l2)
-            ( _retract-of A)
-            ( λ (B , i , r , R) → i ∘ r ~ f))
+    by equiv-tot (λ f → inv-associative-Σ)
     ≃ Σ (retracts l2 A) (λ (B , i , r , R) → Σ (A → A) (λ f → i ∘ r ~ f))
     by equiv-left-swap-Σ
     ≃ retracts l2 A

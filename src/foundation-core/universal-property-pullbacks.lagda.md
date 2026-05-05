@@ -10,6 +10,7 @@ module foundation-core.universal-property-pullbacks where
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.postcomposition-functions
 open import foundation.universe-levels
 
@@ -219,6 +220,18 @@ module _
         ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
         ( equiv-tot (λ h → extensionality-cone f g (cone-map f g c h) c'))
         ( is-contr-map-is-equiv (up C') c')
+
+  abstract
+    universal-property-pullback-uniqueness :
+      ( {l5 : Level} (C' : UU l5) (c' : cone f g C') →
+        is-contr (Σ (C' → C) (λ h → htpy-cone f g (cone-map f g c h) c'))) →
+      universal-property-pullback f g c
+    universal-property-pullback-uniqueness H C' =
+      is-equiv-is-contr-map
+        ( λ c' →
+          is-contr-equiv _
+            ( equiv-tot (λ h → extensionality-cone f g (cone-map f g c h) c'))
+            ( H C' c'))
 ```
 
 ## Table of files about pullbacks

@@ -111,7 +111,7 @@ module _
   where
 
   extensionality-necklace :
-    (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
+    (N1 N2 : necklace l m n) → (N1 ＝ N2) ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =
     extensionality-Σ
       ( λ {X} f e →
@@ -124,7 +124,7 @@ module _
 
   refl-extensionality-necklace :
     (N : necklace l m n) →
-    Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m n N)
+    map-equiv (extensionality-necklace N N) refl ＝ id-equiv-necklace m n N
   refl-extensionality-necklace N = refl
 ```
 

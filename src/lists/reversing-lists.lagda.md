@@ -24,7 +24,9 @@ open import lists.lists
 
 ## Idea
 
-The reverse of a list of elements in `A` lists the elements of `A` in the
+The
+{{#concept "reverse" Disambiguation="of a list" WD="reversal" WDID=Q62102795 Agda=reverse-list}}
+of a [list](lists.lists.md) of elements in `A` lists the elements of `A` in the
 reversed order.
 
 ## Definition
@@ -40,7 +42,7 @@ reverse-list (cons a l) = snoc (reverse-list l) a
 ```agda
 reverse-unit-list :
   {l1 : Level} {A : UU l1} (a : A) →
-  Id (reverse-list (unit-list a)) (unit-list a)
+  reverse-list (unit-list a) ＝ unit-list a
 reverse-unit-list a = refl
 
 length-snoc-list :
@@ -51,7 +53,7 @@ length-snoc-list (cons b x) a = ap succ-ℕ (length-snoc-list x a)
 
 length-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (length-list (reverse-list x)) (length-list x)
+  length-list (reverse-list x) ＝ length-list x
 length-reverse-list nil = refl
 length-reverse-list (cons a x) =
   ( length-snoc-list (reverse-list x) a) ∙
@@ -59,9 +61,7 @@ length-reverse-list (cons a x) =
 
 reverse-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id
-    ( reverse-list (concat-list x y))
-    ( concat-list (reverse-list y) (reverse-list x))
+  reverse-list (concat-list x y) ＝ concat-list (reverse-list y) (reverse-list x)
 reverse-concat-list nil y =
   inv (right-unit-law-concat-list (reverse-list y))
 reverse-concat-list (cons a x) y =
@@ -76,9 +76,8 @@ reverse-snoc-list (cons b x) a = ap (λ t → snoc t b) (reverse-snoc-list x a)
 
 reverse-flatten-list :
   {l1 : Level} {A : UU l1} (x : list (list A)) →
-  Id
-    ( reverse-list (flatten-list x))
-    ( flatten-list (reverse-list (map-list reverse-list x)))
+  reverse-list (flatten-list x) ＝
+  flatten-list (reverse-list (map-list reverse-list x))
 reverse-flatten-list nil = refl
 reverse-flatten-list (cons a x) =
   ( reverse-concat-list a (flatten-list x)) ∙
@@ -90,7 +89,7 @@ reverse-flatten-list (cons a x) =
 
 reverse-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (reverse-list (reverse-list x)) x
+  reverse-list (reverse-list x) ＝ x
 reverse-reverse-list nil = refl
 reverse-reverse-list (cons a x) =
   ( reverse-snoc-list (reverse-list x) a) ∙
@@ -109,14 +108,14 @@ head-reverse-list (cons a (cons b x)) =
 
 last-element-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (last-element-list (reverse-list x)) (head-list x)
+  last-element-list (reverse-list x) ＝ head-list x
 last-element-reverse-list x =
   ( inv (head-reverse-list (reverse-list x))) ∙
   ( ap head-list (reverse-reverse-list x))
 
 tail-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (tail-list (reverse-list x)) (reverse-list (remove-last-element-list x))
+  tail-list (reverse-list x) ＝ reverse-list (remove-last-element-list x)
 tail-reverse-list nil = refl
 tail-reverse-list (cons a nil) = refl
 tail-reverse-list (cons a (cons b x)) =
@@ -125,7 +124,7 @@ tail-reverse-list (cons a (cons b x)) =
 
 remove-last-element-reverse-list :
   {l1 : Level} {A : UU l1} (x : list A) →
-  Id (remove-last-element-list (reverse-list x)) (reverse-list (tail-list x))
+  remove-last-element-list (reverse-list x) ＝ reverse-list (tail-list x)
 remove-last-element-reverse-list x =
   ( inv (reverse-reverse-list (remove-last-element-list (reverse-list x)))) ∙
   ( ( inv (ap reverse-list (tail-reverse-list (reverse-list x)))) ∙

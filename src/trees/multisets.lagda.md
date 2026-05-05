@@ -20,7 +20,7 @@ open import trees.w-types
 
 ## Idea
 
-The type of {{#concept "multisets" Agda=𝕍}} of
+The type of {{#concept "multisets" WD="multiset" WDID=Q864377 Agda=𝕍}} of
 [universe level](foundation.universe-levels.md) `l` is the
 [W-type](trees.w-types.md) of the universal family over the universe `UU l`.
 

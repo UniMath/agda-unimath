@@ -10,8 +10,11 @@ module species.cauchy-composition-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
@@ -19,10 +22,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
+open import foundation.subuniverse-of-contractible-types
 open import foundation.subuniverses
+open import foundation.subuniverses-containing-contractible-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -144,10 +150,10 @@ module _
     ( equiv-tot
       ( λ D →
         ( equiv-product-right inv-distributive-Π-Σ) ∘e
-        ( inv-equiv right-distributive-product-Σ) ∘e
-        ( equiv-tot (λ _ → inv-equiv left-distributive-product-Σ)) ∘e
-        ( associative-Σ _ _ _))) ∘e
-    ( associative-Σ _ _ _) ∘e
+        ( inv-right-distributive-product-Σ) ∘e
+        ( equiv-tot (λ _ → inv-left-distributive-product-Σ)) ∘e
+        ( associative-Σ))) ∘e
+    ( associative-Σ) ∘e
     ( equiv-Σ-equiv-base
       ( _)
       ( ( equiv-remove-redundant-prop
@@ -166,7 +172,7 @@ module _
         ( commutative-product) ∘e
         ( equiv-tot
           ( λ p → equiv-total-is-in-subuniverse-Σ-Decomposition P (X , p))))) ∘e
-    ( inv-associative-Σ _ _ _)
+    ( inv-associative-Σ)
 ```
 
 ### Unit laws for Cauchy composition of species-subuniverse

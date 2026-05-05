@@ -26,10 +26,12 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-Quicksort is a sorting algorithm on lists that works by selecting a pivoting
-element, dividing the list into elements smaller than the pivoting element and
-elements greater than the pivoting element, and sorting those two lists by again
-applying the quicksort algorithm.
+{{#concept "Quicksort" Disambiguation="on lists" WD="quicksort" WDID=Q486598 Agda=quicksort-list}}
+is a [sorting algorithm](lists.sorting-algorithms-lists.md) on
+[lists](lists.lists.md) that works by selecting a pivoting element, dividing the
+list into elements smaller than the pivoting element and elements greater than
+the pivoting element, and sorting those two lists recursively by again applying
+the quicksort algorithm. If the list is empty, the algorithm is done.
 
 ## Definition
 

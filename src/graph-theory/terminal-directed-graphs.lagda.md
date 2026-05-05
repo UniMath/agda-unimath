@@ -9,7 +9,10 @@ module graph-theory.terminal-directed-graphs where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -21,8 +24,9 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-The {{#concept "terminal directed graph"}} is a
-[directed graph](graph-theory.directed-graphs.md) `1` such that the type of
+The
+{{#concept "terminal directed graph" Agda=is-terminal-Directed-Graph Agda=terminal-Directed-Graph}}
+is a [directed graph](graph-theory.directed-graphs.md) `1` such that the type of
 [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A 1` is
 [contractible](foundation-core.contractible-types.md) for any directed graph
 `A`.

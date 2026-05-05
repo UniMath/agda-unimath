@@ -41,10 +41,10 @@ module _
       rec-coproduct
         ( λ p≤q →
           ( ap neg-ℚ (left-leq-right-min-ℚ p q p≤q)) ∙
-          ( inv (right-leq-left-max-ℚ _ _ (neg-leq-ℚ _ _ p≤q))))
+          ( inv (right-leq-left-max-ℚ _ _ (neg-leq-ℚ p≤q))))
         ( λ q≤p →
           ( ap neg-ℚ (right-leq-left-min-ℚ p q q≤p)) ∙
-          ( inv (left-leq-right-max-ℚ _ _ (neg-leq-ℚ _ _ q≤p))))
+          ( inv (left-leq-right-max-ℚ _ _ (neg-leq-ℚ q≤p))))
         ( linear-leq-ℚ p q)
 ```
 
@@ -61,9 +61,9 @@ module _
       rec-coproduct
         ( λ p≤q →
           ( ap neg-ℚ (left-leq-right-max-ℚ _ _ p≤q)) ∙
-          ( inv (right-leq-left-min-ℚ _ _ (neg-leq-ℚ _ _ p≤q))))
+          ( inv (right-leq-left-min-ℚ _ _ (neg-leq-ℚ p≤q))))
         ( λ q≤p →
           ( ap neg-ℚ (right-leq-left-max-ℚ _ _ q≤p)) ∙
-          ( inv (left-leq-right-min-ℚ _ _ (neg-leq-ℚ _ _ q≤p))))
+          ( inv (left-leq-right-min-ℚ _ _ (neg-leq-ℚ q≤p))))
         ( linear-leq-ℚ p q)
 ```

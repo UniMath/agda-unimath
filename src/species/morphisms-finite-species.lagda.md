@@ -8,6 +8,7 @@ module species.morphisms-finite-species where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -105,13 +106,13 @@ module _
 left-unit-law-comp-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f : hom-finite-species F G) →
-  Id (comp-hom-finite-species F G G (id-hom-finite-species G) f) f
+  comp-hom-finite-species F G G (id-hom-finite-species G) f ＝ f
 left-unit-law-comp-hom-finite-species F G f = refl
 
 right-unit-law-comp-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f : hom-finite-species F G) →
-  Id (comp-hom-finite-species F F G f (id-hom-finite-species F)) f
+  comp-hom-finite-species F F G f (id-hom-finite-species F) ＝ f
 right-unit-law-comp-hom-finite-species F G f = refl
 ```
 
@@ -121,7 +122,7 @@ right-unit-law-comp-hom-finite-species F G f = refl
 htpy-eq-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f g : hom-finite-species F G) →
-  Id f g → htpy-hom-finite-species F G f g
+  f ＝ g → htpy-hom-finite-species F G f g
 htpy-eq-hom-finite-species F G f g refl X y = refl
 
 is-torsorial-htpy-hom-finite-species :
@@ -142,7 +143,7 @@ is-equiv-htpy-eq-hom-finite-species F G f =
 extensionality-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3)
   (f g : hom-finite-species F G) →
-  Id f g ≃ htpy-hom-finite-species F G f g
+  (f ＝ g) ≃ htpy-hom-finite-species F G f g
 pr1 (extensionality-hom-finite-species F G f g) =
   htpy-eq-hom-finite-species F G f g
 pr2 (extensionality-hom-finite-species F G f g) =

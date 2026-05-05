@@ -21,9 +21,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **wild monoid** is a first–order approximation to an ∞-monoid, i.e. a
-∞-monoid-like structure whose laws hold at least up to the first homotopy level,
-but may fail at higher levels.
+A {{#concept "wild monoid" Agda=Wild-Monoid}} is a first–order approximation to
+an ∞-monoid, i.e. a ∞-monoid-like structure whose laws hold at least up to the
+first homotopy level, but may fail at higher levels.
 
 A wild monoid consists of
 
@@ -39,7 +39,7 @@ We call such an associator **unital**. It may be described as a coherence of the
 following diagram
 
 ```text
-          map-associative-product
+        map-associative-product
      (A × A) × A ----> A × (A × A)
              |           |
   (_*_ , id) |           | (id, _*_)
@@ -99,39 +99,25 @@ module _
   associator-H-Space : UU l
   associator-H-Space =
     (x y z : type-H-Space M) →
-    Id
-      ( mul-H-Space M (mul-H-Space M x y) z)
-      ( mul-H-Space M x (mul-H-Space M y z))
+    mul-H-Space M (mul-H-Space M x y) z ＝
+    mul-H-Space M x (mul-H-Space M y z)
 
   is-unital-associator : (α : associator-H-Space) → UU l
   is-unital-associator α111 =
     Σ ( (y z : type-H-Space M) →
-        Id
-          ( ( α111 (unit-H-Space M) y z) ∙
-            ( left-unit-law-mul-H-Space M
-              ( mul-H-Space M y z)))
-            ( ap
-              ( mul-H-Space' M z)
-              ( left-unit-law-mul-H-Space M y)))
+        ( α111 (unit-H-Space M) y z) ∙
+        ( left-unit-law-mul-H-Space M (mul-H-Space M y z)) ＝
+        ( ap (mul-H-Space' M z) (left-unit-law-mul-H-Space M y)))
       ( λ α011 →
         Σ ( (x z : type-H-Space M) →
-            Id
-              ( ( α111 x (unit-H-Space M) z) ∙
-                ( ap
-                  ( mul-H-Space M x)
-                  ( left-unit-law-mul-H-Space M z)))
-              ( ap
-                ( mul-H-Space' M z)
-                ( right-unit-law-mul-H-Space M x)))
+            ( α111 x (unit-H-Space M) z) ∙
+            ( ap (mul-H-Space M x) (left-unit-law-mul-H-Space M z)) ＝
+            ( ap (mul-H-Space' M z) (right-unit-law-mul-H-Space M x)))
           ( λ α101 →
             Σ ( (x y : type-H-Space M) →
-                Id
-                  ( ( α111 x y (unit-H-Space M)) ∙
-                    ( ap
-                      ( mul-H-Space M x)
-                      ( right-unit-law-mul-H-Space M y)))
-                  ( right-unit-law-mul-H-Space M
-                    ( mul-H-Space M x y)))
+                ( α111 x y (unit-H-Space M)) ∙
+                ( ap (mul-H-Space M x) (right-unit-law-mul-H-Space M y)) ＝
+                ( right-unit-law-mul-H-Space M (mul-H-Space M x y)))
               ( λ α110 → unit)))
 
   unital-associator : UU l
@@ -210,9 +196,8 @@ module _
 
   unit-law-110-associative-Wild-Monoid :
     (x y : type-Wild-Monoid) →
-    Id
-      ( ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
-        ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
-      ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
+    ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
+    ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)) ＝
+    ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
   unit-law-110-associative-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
 ```

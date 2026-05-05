@@ -20,9 +20,11 @@ open import ring-theory.semirings
 
 ## Idea
 
-The {{#concet "precategory of semirings" Agda=Semiring-Large-Precategory}}
-consists of [semirings](ring-theory.semirings.md) and
-[homomorphisms of semirings](ring-theory.homomorphisms-semirings.md).
+The
+{{#concept "precategory" Disambiguation="of semirings" Agda=Semiring-Large-Precategory Agda=Semiring-Precategory}}
+of [semirings](ring-theory.semirings.md) consists of
+[semirings](ring-theory.semirings.md) and
+[semiring homomorphisms](ring-theory.homomorphisms-semirings.md).
 
 ## Definitions
 

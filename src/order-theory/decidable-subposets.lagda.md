@@ -10,6 +10,7 @@ module order-theory.decidable-subposets where
 open import foundation.binary-relations
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -41,7 +42,7 @@ module _
     type-Subposet P (subtype-decidable-subtype S)
 
   eq-type-Decidable-Subposet :
-    (x y : type-Decidable-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Decidable-Subposet) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Decidable-Subposet =
     eq-type-Subposet P (subtype-decidable-subtype S)
 

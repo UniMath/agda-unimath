@@ -8,6 +8,8 @@ module foundation.full-subtypes where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -87,6 +89,11 @@ module _
     is-full-subtype P → type-subtype P ≃ A
   pr1 (equiv-inclusion-is-full-subtype H) = inclusion-subtype P
   pr2 (equiv-inclusion-is-full-subtype H) = is-equiv-inclusion-is-full-subtype H
+
+  inv-equiv-inclusion-is-full-subtype :
+    is-full-subtype P → A ≃ type-subtype P
+  inv-equiv-inclusion-is-full-subtype H =
+    inv-equiv (equiv-inclusion-is-full-subtype H)
 
   is-full-is-equiv-inclusion-subtype :
     is-equiv (inclusion-subtype P) → is-full-subtype P

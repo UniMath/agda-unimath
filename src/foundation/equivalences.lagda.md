@@ -12,7 +12,9 @@ open import foundation-core.equivalences public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.logical-equivalences
@@ -49,8 +51,8 @@ open import foundation-core.type-theoretic-principle-of-choice
 ### Any equivalence is an embedding
 
 We already proved in `foundation-core.equivalences` that equivalences are
-embeddings. Here we have `_↪_` available, so we record the map from
-equivalences to embeddings.
+embeddings. Here we have `_↪_` available, so we record the map from equivalences
+to embeddings.
 
 ```agda
 module _

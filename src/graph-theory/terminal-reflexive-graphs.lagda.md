@@ -8,8 +8,11 @@ module graph-theory.terminal-reflexive-graphs where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.dependent-products-propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -23,10 +26,11 @@ open import graph-theory.terminal-directed-graphs
 
 ## Idea
 
-The {{#concept "terminal reflexive graph"}} is a
-[reflexive graph](graph-theory.reflexive-graphs.md) `1` such that the type of
-[graph homomorphisms](graph-theory.morphisms-reflexive-graphs.md) `hom A 1` is
-[contractible](foundation-core.contractible-types.md) for any reflexive graph
+The
+{{#concept "terminal reflexive graph" Agda=is-terminal-Reflexive-Graph Agda=terminal-Reflexive-Graph}}
+is a [reflexive graph](graph-theory.reflexive-graphs.md) `1` such that the type
+of [graph homomorphisms](graph-theory.morphisms-reflexive-graphs.md) `hom A 1`
+is [contractible](foundation-core.contractible-types.md) for any reflexive graph
 `A`.
 
 Concretely, the terminal reflexive graph `1` is defined by

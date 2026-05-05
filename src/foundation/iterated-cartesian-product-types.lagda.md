@@ -13,8 +13,10 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
@@ -131,13 +133,8 @@ equiv-product-iterated-product-lists :
 equiv-product-iterated-product-lists nil q =
   left-unit-law-product-is-contr (is-contr-raise-unit)
 equiv-product-iterated-product-lists (cons x p) q =
-  ( ( equiv-product
-      ( id-equiv)
-      ( equiv-product-iterated-product-lists p q)) ∘e
-    ( associative-product
-      ( x)
-      ( iterated-product-lists p)
-      ( iterated-product-lists q)))
+  ( equiv-product-right (equiv-product-iterated-product-lists p q)) ∘e
+  ( associative-product)
 ```
 
 ### Iterated cartesian product is closed under permutations

@@ -22,17 +22,22 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
@@ -56,7 +61,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A permutation of X is an automorphism of X.
+A {{#concept "permutation" Disambiguation="of a finite type"}} of a
+[finite type](univalent-combinatorics.finite-types.md) `X` is an
+[automorphism](foundation.automorphisms.md) on `X`.
 
 ## Properties
 
@@ -121,36 +128,31 @@ module _
       ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =
-    apply-universal-property-trunc-Prop
-      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
-      ( subset-subgroup-subset-Group
-        ( symmetric-Group (set-Type-With-Cardinality-ℕ n X))
-        ( is-transposition-permutation-Prop)
-        ( f))
+    map-trunc-Prop
       ( λ h →
-        unit-trunc-Prop
-          ( pair
-            ( map-list
-              ( λ x →
-                pair
-                  ( inr star)
-                  ( pair
-                    ( transposition x)
-                    ( unit-trunc-Prop (pair x refl))))
+        pair
+          ( map-list
+            ( λ x →
+              pair
+                ( inr star)
+                ( pair
+                  ( transposition x)
+                  ( unit-trunc-Prop (pair x refl))))
+            ( list-transpositions-permutation-count
+              ( type-Type-With-Cardinality-ℕ n X)
+              ( pair n h)
+              ( f)))
+          ( ( lemma
               ( list-transpositions-permutation-count
                 ( type-Type-With-Cardinality-ℕ n X)
                 ( pair n h)
-                ( f)))
-            ( ( lemma
-                ( list-transpositions-permutation-count
-                  ( type-Type-With-Cardinality-ℕ n X)
-                  ( pair n h)
-                  ( f))) ∙
-              ( eq-htpy-equiv
-                ( retraction-permutation-list-transpositions-count
-                  ( type-Type-With-Cardinality-ℕ n X)
-                  ( pair n h)
-                  ( f))))))
+                ( f))) ∙
+            ( eq-htpy-equiv
+              ( retraction-permutation-list-transpositions-count
+                ( type-Type-With-Cardinality-ℕ n X)
+                ( pair n h)
+                ( f)))))
+      ( has-cardinality-type-Type-With-Cardinality-ℕ n X)
     where
     lemma :
       (l :
@@ -192,8 +194,8 @@ module _
                     ( Σ ( type-Type-With-Cardinality-ℕ n X)
                         ( type-Decidable-Prop ∘ P)))))
             ( λ li →
-              Id k (mod-two-ℕ (length-list li)) ×
-              Id f (permutation-list-transpositions li))))
+              ( k ＝ mod-two-ℕ (length-list li)) ×
+              ( f ＝ permutation-list-transpositions li))))
 
   abstract
     is-contr-parity-transposition-permutation :
@@ -311,10 +313,9 @@ module _
           ( f)
       is-injective-iterate-involution :
         (k k' x : Fin 2) →
-        Id
-          ( iterate (nat-Fin 2 k) (succ-Fin 2) x)
-          ( iterate (nat-Fin 2 k') (succ-Fin 2) x) →
-        Id k k'
+        ( iterate (nat-Fin 2 k) (succ-Fin 2) x ＝
+          iterate (nat-Fin 2 k') (succ-Fin 2) x) →
+        k ＝ k'
       is-injective-iterate-involution
         (inl (inr star)) (inl (inr star)) x p =
         refl

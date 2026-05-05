@@ -16,9 +16,12 @@ open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -55,10 +58,7 @@ abstract
     with is-decidable-decidable-subtype P (inr star)
   ... | inl p =
     count-equiv'
-      ( right-distributive-Σ-coproduct
-        ( Fin k)
-        ( unit)
-        ( is-in-decidable-subtype P))
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
       ( pair
         ( succ-ℕ
           ( number-of-elements-count (count-decidable-subtype-Fin k (P ∘ inl))))
@@ -70,10 +70,7 @@ abstract
               ( is-proof-irrelevant-is-in-decidable-subtype P (inr star) p)))))
   ... | inr f =
     count-equiv'
-      ( right-distributive-Σ-coproduct
-        ( Fin k)
-        ( unit)
-        ( is-in-decidable-subtype P))
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
       ( count-equiv'
         ( right-unit-law-coproduct-is-empty
           ( Σ (Fin k) (is-in-decidable-subtype P ∘ inl))
@@ -122,9 +119,9 @@ is-decidable-count-subtype P e f x =
       ( count-decidable-subtype
         ( λ y →
           pair
-            ( Id (pr1 y) x)
+            ( pr1 y ＝ x)
             ( pair
-              ( is-set-count e (pr1 y) x)
+              ( is-set-type-count e (pr1 y) x)
               ( has-decidable-equality-count e (pr1 y) x)))
         ( f)))
 ```

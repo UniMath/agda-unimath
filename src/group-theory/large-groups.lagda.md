@@ -9,12 +9,14 @@ module group-theory.large-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.large-binary-relations
+open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -48,6 +50,10 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   field
     large-monoid-Large-Group : Large-Monoid α β
 
+  cumulative-large-set-Large-Group : Cumulative-Large-Set α β
+  cumulative-large-set-Large-Group =
+    cumulative-large-set-Large-Monoid large-monoid-Large-Group
+
   type-Large-Group : (l : Level) → UU (α l)
   type-Large-Group = type-Large-Monoid large-monoid-Large-Group
 
@@ -74,6 +80,11 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   unit-Large-Group : type-Large-Group lzero
   unit-Large-Group = unit-Large-Monoid large-monoid-Large-Group
 
+  large-similarity-relation-Large-Group :
+    Large-Similarity-Relation β type-Large-Group
+  large-similarity-relation-Large-Group =
+    large-similarity-relation-Large-Monoid large-monoid-Large-Group
+
   sim-prop-Large-Group : Large-Relation-Prop β type-Large-Group
   sim-prop-Large-Group = sim-prop-Large-Monoid large-monoid-Large-Group
 
@@ -98,21 +109,30 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
   symmetric-sim-Large-Group =
     symmetric-sim-Large-Monoid large-monoid-Large-Group
 
+  transitive-sim-Large-Group :
+    {l1 l2 l3 : Level}
+    (x : type-Large-Group l1)
+    (y : type-Large-Group l2)
+    (z : type-Large-Group l3) →
+    sim-Large-Group y z → sim-Large-Group x y → sim-Large-Group x z
+  transitive-sim-Large-Group =
+    transitive-sim-Large-Monoid large-monoid-Large-Group
+
   preserves-sim-left-mul-Large-Group :
     {l1 l2 l3 : Level} (y : type-Large-Group l1)
     (x : type-Large-Group l2) (x' : type-Large-Group l3) →
     sim-Large-Group x x' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x' y)
-  preserves-sim-left-mul-Large-Group =
-    preserves-sim-left-mul-Large-Monoid large-monoid-Large-Group
+  preserves-sim-left-mul-Large-Group y =
+    preserves-sim-right-mul-Large-Monoid (large-monoid-Large-Group) y
 
   preserves-sim-right-mul-Large-Group :
     {l1 l2 l3 : Level} (x : type-Large-Group l1)
     (y : type-Large-Group l2) (y' : type-Large-Group l3) →
     sim-Large-Group y y' →
     sim-Large-Group (mul-Large-Group x y) (mul-Large-Group x y')
-  preserves-sim-right-mul-Large-Group =
-    preserves-sim-right-mul-Large-Monoid large-monoid-Large-Group
+  preserves-sim-right-mul-Large-Group x =
+    preserves-sim-left-mul-Large-Monoid large-monoid-Large-Group x
 
   raise-unit-Large-Group : (l : Level) → type-Large-Group l
   raise-unit-Large-Group = raise-unit-Large-Monoid large-monoid-Large-Group
@@ -189,6 +209,12 @@ module _
     sim-Large-Group G (raise-Large-Group G l2 x) x
   sim-raise-Large-Group' = sim-raise-Large-Monoid' (large-monoid-Large-Group G)
 
+  eq-raise-Large-Group :
+    (l1 : Level) {l2 : Level} (x : type-Large-Group G (l1 ⊔ l2)) →
+    raise-Large-Group G l2 x ＝ x
+  eq-raise-Large-Group =
+    eq-raise-leq-level-Large-Monoid (large-monoid-Large-Group G)
+
   raise-raise-Large-Group :
     {l1 l2 l3 : Level} (x : type-Large-Group G l1) →
     raise-Large-Group G l2 (raise-Large-Group G l3 x) ＝
@@ -202,7 +228,7 @@ module _
     mul-Large-Group G (raise-Large-Group G l3 x) y ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
   raise-left-mul-Large-Group =
-    raise-left-mul-Large-Monoid (large-monoid-Large-Group G)
+    mul-raise-left-Large-Monoid (large-monoid-Large-Group G) _
 
   raise-right-mul-Large-Group :
     {l1 l2 l3 : Level}
@@ -210,7 +236,7 @@ module _
     mul-Large-Group G x (raise-Large-Group G l3 y) ＝
     raise-Large-Group G l3 (mul-Large-Group G x y)
   raise-right-mul-Large-Group =
-    raise-right-mul-Large-Monoid (large-monoid-Large-Group G)
+    mul-raise-right-Large-Monoid (large-monoid-Large-Group G) _
 
   raise-mul-Large-Group :
     {l1 l2 l3 l4 : Level}
@@ -220,21 +246,21 @@ module _
       ( raise-Large-Group G l4 y) ＝
     raise-Large-Group G (l3 ⊔ l4) (mul-Large-Group G x y)
   raise-mul-Large-Group =
-    raise-mul-Large-Monoid (large-monoid-Large-Group G)
+    mul-raise-raise-Large-Monoid (large-monoid-Large-Group G) _ _
 
   raise-left-unit-law-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
     mul-Large-Group G (raise-unit-Large-Group G l2) x ＝
     raise-Large-Group G l2 x
   raise-left-unit-law-Large-Group =
-    raise-left-unit-law-Large-Monoid (large-monoid-Large-Group G)
+    left-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-right-unit-law-Large-Group :
     {l1 l2 : Level} (x : type-Large-Group G l1) →
     mul-Large-Group G x (raise-unit-Large-Group G l2) ＝
     raise-Large-Group G l2 x
   raise-right-unit-law-Large-Group =
-    raise-right-unit-law-Large-Monoid (large-monoid-Large-Group G)
+    right-raise-unit-law-mul-Large-Monoid (large-monoid-Large-Group G)
 
   raise-unit-lzero-Large-Group :
     raise-unit-Large-Group G lzero ＝ unit-Large-Group G
@@ -483,7 +509,7 @@ module _
     ( sim-Large-Group G x y) ↔
     ( raise-Large-Group G l2 x ＝ raise-Large-Group G l1 y)
   sim-iff-eq-raise-Large-Group =
-    sim-iff-eq-raise-Large-Monoid (large-monoid-Large-Group G)
+    eq-raise-iff-sim-Large-Monoid (large-monoid-Large-Group G)
 
   sim-eq-raise-Large-Group :
     {l1 l2 : Level}

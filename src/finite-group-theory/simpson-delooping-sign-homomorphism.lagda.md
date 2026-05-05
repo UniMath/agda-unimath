@@ -28,11 +28,13 @@ open import foundation.coproduct-types
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.empty-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.involutions
@@ -40,14 +42,14 @@ open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
+open import foundation-core.raising-universe-levels
+
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-groups
@@ -69,7 +71,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Ideas
 
-We give a definition of the delooping of the sign homomorphism based on a
+We give a definition of the
+{{#concept "delooping" Disambiguation="of the sign homomorphism, Simpson" Agda=simpson-delooping-sign}}
+of the [sign homomorphism](finite-group-theory.sign-homomorphism.md) based on a
 suggestion by Alex Simpson.
 
 ## Definitions
@@ -202,12 +206,11 @@ module _
 
   private abstract
     lemma :
-      Id
-        ( inr star)
-        ( sign-homomorphism-Fin-2
-          ( number-of-elements-count eX)
-          ( Fin-Type-With-Cardinality-ℕ (number-of-elements-count eX))
-          ( inv-equiv (equiv-count eX) ∘e (equiv-count eX ∘e transposition-eX)))
+      inr star ＝
+      sign-homomorphism-Fin-2
+        ( number-of-elements-count eX)
+        ( Fin-Type-With-Cardinality-ℕ (number-of-elements-count eX))
+        ( inv-equiv (equiv-count eX) ∘e (equiv-count eX ∘e transposition-eX))
     lemma =
       ( inv
         ( eq-sign-homomorphism-Fin-2-transposition
@@ -463,10 +466,9 @@ module _
             ( X , unit-trunc-Prop (equiv-count eX)))
           ( T)
           ( equiv-count eX))) →
-      Id
-        ( pr1 equiv-Fin-2-quotient-sign-comp-count
-          ( inv-Fin-2-quotient-sign-comp-count T H))
-        ( T)
+      ( pr1 equiv-Fin-2-quotient-sign-comp-count
+        ( inv-Fin-2-quotient-sign-comp-count T H)) ＝
+      ( T)
     retraction-Fin-2-quotient-sign-comp-count T (inl P) =
       eq-effective-quotient'
         ( sign-comp-equivalence-relation
@@ -484,19 +486,12 @@ module _
         ( T)
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
-          ( pair
-            ( is-in-equivalence-class
-              ( sign-comp-equivalence-relation
-                ( number-of-elements-count eX)
-                ( X , unit-trunc-Prop (equiv-count eX)))
-              ( T)
-              ( equiv-count eX ∘e transposition-eX))
-            ( is-prop-is-in-equivalence-class
-              ( sign-comp-equivalence-relation
-                ( number-of-elements-count eX)
-                ( X , unit-trunc-Prop (equiv-count eX)))
-              ( T)
-              ( equiv-count eX ∘e transposition-eX)))
+          ( is-in-equivalence-class-Prop
+            ( sign-comp-equivalence-relation
+              ( number-of-elements-count eX)
+              ( X , unit-trunc-Prop (equiv-count eX)))
+            ( T)
+            ( equiv-count eX ∘e transposition-eX))
           ( λ (t , p) →
             cases-retraction-Fin-2-quotient-sign-comp-count T NP t
               ( inv
@@ -526,10 +521,9 @@ module _
             ( X , unit-trunc-Prop (equiv-count eX)))
           ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
           ( equiv-count eX))) →
-      Id
-        ( inv-Fin-2-quotient-sign-comp-count
-          (pr1 equiv-Fin-2-quotient-sign-comp-count k) (D))
-        ( k)
+      ( inv-Fin-2-quotient-sign-comp-count
+        (pr1 equiv-Fin-2-quotient-sign-comp-count k) D) ＝
+      ( k)
     section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inl D) = refl
     section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inr ND) =
       ex-falso
@@ -633,7 +627,7 @@ module _
   abstract
     preserves-id-equiv-simpson-comp-equiv :
       (X : Type-With-Cardinality-ℕ l n) →
-      Id (simpson-comp-equiv X X id-equiv) id-equiv
+      simpson-comp-equiv X X id-equiv ＝ id-equiv
     preserves-id-equiv-simpson-comp-equiv X =
       eq-htpy-equiv left-unit-law-equiv
 
@@ -643,9 +637,8 @@ module _
         type-Type-With-Cardinality-ℕ n X ≃ type-Type-With-Cardinality-ℕ n Y) →
       ( f :
         type-Type-With-Cardinality-ℕ n Y ≃ type-Type-With-Cardinality-ℕ n Z) →
-      Id
-        ( simpson-comp-equiv X Z (f ∘e e))
-        ( simpson-comp-equiv Y Z f ∘e simpson-comp-equiv X Y e)
+      simpson-comp-equiv X Z (f ∘e e) ＝
+      simpson-comp-equiv Y Z f ∘e simpson-comp-equiv X Y e
     preserves-comp-simpson-comp-equiv X Y Z e f =
       eq-htpy-equiv
         ( λ h → associative-comp-equiv h e f)

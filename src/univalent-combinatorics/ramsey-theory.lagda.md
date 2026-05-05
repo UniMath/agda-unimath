@@ -10,6 +10,7 @@ module univalent-combinatorics.ramsey-theory where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -47,7 +48,7 @@ is-ramsey-set {l} {k} q r A =
           ( (x : type-Finite-Type A) →
             type-Prop ((pr1 Q) x) →
             type-Prop ((pr1 P) x)) →
-          Id (c Q) i))
+          c Q ＝ i))
 {-
 is-ramsey-set-empty-coloring : (r : ℕ) → is-ramsey-set ex-falso r empty-Finite-Type
 is-ramsey-set-empty-coloring zero-ℕ c = {!!}

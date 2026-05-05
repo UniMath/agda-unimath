@@ -12,8 +12,11 @@ open import category-theory.isomorphisms-in-large-precategories
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -28,6 +31,7 @@ open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -45,6 +49,12 @@ open import ring-theory.rings
 ```
 
 </details>
+
+## Idea
+
+{{#concept "Ring isomorphisms" WD="ring isomorphism" WDID=Q135670074 Agda=iso-Ring}}
+are [ring homomorphisms](ring-theory.homomorphisms-rings.md) with a two-sided
+inverse homomorphism.
 
 ## Definition
 
@@ -446,16 +456,9 @@ module _
 
   equiv-iso-ab-iso-Ring : iso-Ring R S ≃ iso-ab-Ring
   equiv-iso-ab-iso-Ring =
-    ( inv-equiv
-      ( associative-Σ
-        ( hom-Ab (ab-Ring R) (ab-Ring S))
-        ( is-iso-Ab (ab-Ring R) (ab-Ring S))
-        ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ f → commutative-product)) ∘e
-    ( associative-Σ
-      ( hom-Ab (ab-Ring R) (ab-Ring S))
-      ( is-ring-homomorphism-hom-Ab R S)
-      ( λ f → is-iso-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
+    ( associative-Σ) ∘e
     ( equiv-type-subtype
       ( is-prop-is-iso-Ring R S)
       ( λ f → is-prop-is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f))

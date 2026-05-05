@@ -97,7 +97,7 @@ module _
   is-section-map-section-comp :
     is-section (g ∘ h) map-section-comp
   is-section-map-section-comp =
-    ( g ·l (is-section-map-section h t ·r map-section g s)) ∙h
+    ( g ·l is-section-map-section h t ·r map-section g s) ∙h
     ( is-section-map-section g s)
 
   section-comp : section (g ∘ h)

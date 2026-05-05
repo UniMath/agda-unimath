@@ -10,6 +10,7 @@ module trees.bounded-multisets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.propositions

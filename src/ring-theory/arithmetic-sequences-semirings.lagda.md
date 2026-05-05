@@ -23,6 +23,7 @@ open import group-theory.arithmetic-sequences-semigroups
 
 open import lists.sequences
 
+open import ring-theory.multiples-of-elements-semirings
 open import ring-theory.semirings
 ```
 
@@ -140,20 +141,21 @@ module _
 
   add-mul-nat-Semiring : ℕ → type-Semiring R
   add-mul-nat-Semiring n =
-    add-Semiring R a (mul-nat-scalar-Semiring R n d)
+    add-Semiring R a (multiple-Semiring R n d)
 
   is-common-difference-add-mul-nat-Semiring :
     is-common-difference-sequence-Semigroup
       ( additive-semigroup-Semiring R)
       ( add-mul-nat-Semiring)
       ( d)
+
   is-common-difference-add-mul-nat-Semiring n =
-    inv
-      ( associative-add-Semiring
-        ( R)
-        ( a)
-        ( mul-nat-scalar-Semiring R n d)
-        ( d))
+    equational-reasoning
+      add-Semiring R a (multiple-Semiring R (succ-ℕ n) d)
+      ＝ add-Semiring R a (add-Semiring R (multiple-Semiring R n d) d)
+        by ap-add-Semiring R refl (multiple-succ-Semiring R n d)
+      ＝ add-Semiring R (add-mul-nat-Semiring n) d
+        by inv (associative-add-Semiring R _ _ _)
 
   is-arithmetic-add-mul-nat-Semiring :
     is-arithmetic-sequence-Semigroup
@@ -177,7 +179,7 @@ module _
   eq-initial-term-add-mul-nat-Semiring =
     ( ( ap
         ( add-Semiring R a)
-        ( inv (left-zero-law-mul-nat-scalar-Semiring R d))) ∙
+        ( inv (left-zero-law-multiple-Semiring R d))) ∙
     ( right-unit-law-add-Semiring R a))
 ```
 

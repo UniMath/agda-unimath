@@ -13,7 +13,10 @@ open import foundation.constant-type-families
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -123,7 +126,7 @@ module _
     ( Eq-free-dependent-loop α P
       ( ev-free-loop-Π α P f)
       ( ev-free-loop-Π α P g)) →
-    ( free-dependent-loop α (λ x → Id (f x) (g x)))
+    ( free-dependent-loop α (λ x → f x ＝ g x))
   pr1 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) = p
   pr2 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) =
     map-compute-dependent-identification-eq-value f g (loop-free-loop α) p p q

@@ -12,7 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
@@ -121,8 +121,7 @@ module _
     theorem-double-negation-dense-decidable-Cantor H =
       H map-theorem-decidable-Cantor not-in-image-map-theorem-decidable-Cantor
 
-    theorem-decidable-Cantor :
-      ¬ (is-surjective f)
+    theorem-decidable-Cantor : ¬ (is-surjective f)
     theorem-decidable-Cantor =
       map-neg
         ( is-double-negation-dense-map-is-surjective)
@@ -158,12 +157,11 @@ module _
       H map-theorem-double-negation-stable-Cantor
         not-in-image-map-theorem-double-negation-stable-Cantor
 
-    theorem-double-negation-stable-Cantor :
-      ¬ (is-surjective f)
+    theorem-double-negation-stable-Cantor : ¬ (is-surjective f)
     theorem-double-negation-stable-Cantor =
       map-neg
-        is-double-negation-dense-map-is-surjective
-        theorem-double-negation-dense-double-negation-stable-Cantor
+        ( is-double-negation-dense-map-is-surjective)
+        ( theorem-double-negation-dense-double-negation-stable-Cantor)
 ```
 
 ### Cantor's theorem for the set of De Morgan subtypes
@@ -192,12 +190,11 @@ module _
     theorem-double-negation-dense-de-morgan-Cantor H =
       H map-theorem-de-morgan-Cantor not-in-image-map-theorem-de-morgan-Cantor
 
-    theorem-de-morgan-Cantor :
-      ¬ (is-surjective f)
+    theorem-de-morgan-Cantor : ¬ (is-surjective f)
     theorem-de-morgan-Cantor =
       map-neg
-        is-double-negation-dense-map-is-surjective
-        theorem-double-negation-dense-de-morgan-Cantor
+        ( is-double-negation-dense-map-is-surjective)
+        ( theorem-double-negation-dense-de-morgan-Cantor)
 ```
 
 ## References

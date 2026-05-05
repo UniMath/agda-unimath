@@ -9,6 +9,7 @@ module ring-theory.right-ideals-rings where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -26,8 +27,8 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A **right ideal** in a [ring](ring-theory.rings.md) `R` is a right submodule of
-`R`.
+A {{#concept "right ideal" Disambiguation="in a ring" Agda=right-ideal-Ring}} in
+a [ring](ring-theory.rings.md) `R` is a right submodule of `R`.
 
 ## Definitions
 

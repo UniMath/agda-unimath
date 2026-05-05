@@ -105,14 +105,13 @@ module _
     ( eq-equiv-eq-map-equiv refl)
 
   is-section-hom-inv-symmetric-group-equiv-Set :
-    Id
-      ( comp-hom-Group
-        ( symmetric-Group Y)
-        ( symmetric-Group X)
-        ( symmetric-Group Y)
-        ( hom-symmetric-group-equiv-Set)
-        ( hom-inv-symmetric-group-equiv-Set))
-      ( id-hom-Group (symmetric-Group Y))
+    comp-hom-Group
+      ( symmetric-Group Y)
+      ( symmetric-Group X)
+      ( symmetric-Group Y)
+      ( hom-symmetric-group-equiv-Set)
+      ( hom-inv-symmetric-group-equiv-Set) ＝
+    id-hom-Group (symmetric-Group Y)
   is-section-hom-inv-symmetric-group-equiv-Set =
     eq-type-subtype
       ( preserves-mul-prop-Semigroup
@@ -125,14 +124,13 @@ module _
           ( eq-equiv-eq-map-equiv refl)))
 
   is-retraction-hom-inv-symmetric-group-equiv-Set :
-    Id
-      ( comp-hom-Group
-        ( symmetric-Group X)
-        ( symmetric-Group Y)
-        ( symmetric-Group X)
-        ( hom-inv-symmetric-group-equiv-Set)
-        ( hom-symmetric-group-equiv-Set))
-      ( id-hom-Group (symmetric-Group X))
+    comp-hom-Group
+      ( symmetric-Group X)
+      ( symmetric-Group Y)
+      ( symmetric-Group X)
+      ( hom-inv-symmetric-group-equiv-Set)
+      ( hom-symmetric-group-equiv-Set) ＝
+    id-hom-Group (symmetric-Group X)
   is-retraction-hom-inv-symmetric-group-equiv-Set =
     eq-type-subtype
       ( preserves-mul-prop-Semigroup

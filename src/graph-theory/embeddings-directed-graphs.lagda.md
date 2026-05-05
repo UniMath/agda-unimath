@@ -8,6 +8,7 @@ module graph-theory.embeddings-directed-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.propositions
 open import foundation.universe-levels
@@ -20,11 +21,12 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An **embedding of directed graphs** is a
-[morphism](graph-theory.morphisms-directed-graphs.md) `f : G → H` of
-[directed graphs](graph-theory.directed-graphs.md) which is an
-[embedding](foundation.embeddings.md) on vertices such that for each pair
-`(x , y)` of vertices in `G` the map
+An
+{{#concept "embedding" Disambiguation="of directed graphs" Agda=is-emb-hom-Directed-Graph Agda=emb-Directed-Graph}}
+of [directed graphs](graph-theory.directed-graphs.md) is a
+[morphism](graph-theory.morphisms-directed-graphs.md) of directed graphs
+`f : G → H` which is an [embedding](foundation.embeddings.md) on vertices such
+that for each pair `(x , y)` of vertices in `G` the map
 
 ```text
   edge-hom-Graph G H : edge-Graph G p → edge-Graph H x y

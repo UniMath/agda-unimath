@@ -13,7 +13,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -35,7 +35,7 @@ several combinatorics problems. The sequence starts
 
 The Catalan numbers may be defined by any of the formulas
 
-1. $C_{n + 1} = \sum_{k = 0}^n C_k C_{n-k}$, with $C_0 = 1$,
+1. $C_{n + 1} = ∑_{k = 0}^n C_k C_{n-k}$, with $C_0 = 1$,
 2. $C_n = {2n \choose n} - {2n \choose n + 1}$,
 3. $C_{n+1} = \frac{2(2n+1)}{n+2}C_n$, with $C_0 = 1$,
 4. $C_{n} = \frac{1}{n+1}{2n \choose n}$,
@@ -53,7 +53,7 @@ The Catalan numbers may be defined to be the sequence satisfying $C_0 = 1$ and
 the recurrence relation
 
 $$
-C_{n + 1} = \sum_{k = 0}^n C_k C_{n-k}.
+C_{n + 1} = ∑_{k = 0}^n C_k C_{n-k}.
 $$
 
 ```agda
@@ -63,7 +63,7 @@ catalan-numbers =
     ( λ _ → ℕ)
     ( 1)
     ( λ k C →
-      sum-Fin-ℕ k
+      sum-fin-sequence-ℕ k
         ( λ i →
           mul-ℕ
             ( C ( nat-Fin k i)

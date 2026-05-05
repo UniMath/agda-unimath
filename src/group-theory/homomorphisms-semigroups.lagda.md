@@ -9,6 +9,7 @@ module group-theory.homomorphisms-semigroups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -122,7 +123,7 @@ module _
   refl-htpy-hom-Semigroup f = refl-htpy
 
   htpy-eq-hom-Semigroup :
-    (f g : hom-Semigroup) → Id f g → htpy-hom-Semigroup f g
+    (f g : hom-Semigroup) → f ＝ g → htpy-hom-Semigroup f g
   htpy-eq-hom-Semigroup f .f refl = refl-htpy-hom-Semigroup f
 
   abstract
@@ -145,7 +146,7 @@ module _
         ( htpy-eq-hom-Semigroup f)
 
   eq-htpy-hom-Semigroup :
-    {f g : hom-Semigroup} → htpy-hom-Semigroup f g → Id f g
+    {f g : hom-Semigroup} → htpy-hom-Semigroup f g → f ＝ g
   eq-htpy-hom-Semigroup {f} {g} =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Semigroup f g)
 
@@ -224,7 +225,7 @@ module _
 left-unit-law-comp-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H H (id-hom-Semigroup H) f) f
+  comp-hom-Semigroup G H H (id-hom-Semigroup H) f ＝ f
 left-unit-law-comp-hom-Semigroup G
   (pair (pair H is-set-H) (pair μ-H associative-H)) (pair f μ-f) =
   eq-htpy-hom-Semigroup G
@@ -234,7 +235,7 @@ left-unit-law-comp-hom-Semigroup G
 right-unit-law-comp-hom-Semigroup :
   { l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( f : hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G G H f (id-hom-Semigroup G)) f
+  comp-hom-Semigroup G G H f (id-hom-Semigroup G) ＝ f
 right-unit-law-comp-hom-Semigroup
   (pair (pair G is-set-G) (pair μ-G associative-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup

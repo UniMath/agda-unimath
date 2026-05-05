@@ -8,6 +8,7 @@ module ring-theory.commuting-elements-rings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -22,7 +23,8 @@ open import ring-theory.rings
 ## Idea
 
 Two elements `x` and `y` of a [ring](ring-theory.rings.md) `R` are said to
-**commute** if `xy ＝ yx`.
+{{#concept "commute" Disambiguation="pair of elements of a ring" Agda=commute-Ring}}
+if `xy ＝ yx`.
 
 ## Definitions
 

@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality
 open import foundation.empty-types
@@ -253,14 +254,10 @@ has-prop-double-negation-elim-product :
   has-prop-double-negation-elim B →
   has-prop-double-negation-elim (A × B)
 has-prop-double-negation-elim-product {A = A} {B} f g nnab =
-  rec-trunc-Prop
-    ( trunc-Prop (A × B))
-    ( λ a →
-      rec-trunc-Prop
-        ( trunc-Prop (A × B))
-        ( λ b → unit-trunc-Prop (a , b))
-        ( g (map-double-negation pr2 nnab)))
+  map-binary-trunc-Prop
+    ( pair)
     ( f (map-double-negation pr1 nnab))
+    ( g (map-double-negation pr2 nnab))
 ```
 
 ## References

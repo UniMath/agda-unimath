@@ -9,6 +9,7 @@ module ring-theory.left-ideals-rings where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -26,8 +27,8 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A **left ideal** in a [ring](ring-theory.rings.md) `R` is a left submodule of
-`R`.
+A {{#concept "left ideal" Disambiguation="in a ring" Agda=left-ideal-Ring}} in a
+[ring](ring-theory.rings.md) `R` is a left submodule of `R`.
 
 ## Definitions
 

@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -34,10 +35,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define {{#concept "tuples" WD="n-tuple" WDID=Q600590}} of length `n`. These
-are [equivalent](lists.equivalence-tuples-finite-sequences.md) to the related
-concept of [finite sequences](lists.finite-sequences.md), but are structured
-like [lists](lists.lists.md) instead of [arrays](lists.arrays.md).
+For every [natural number](elementary-number-theory.natural-numbers.md) `n` we
+define {{#concept "tuples" WD="n-tuple" WDID=Q600590 Agda=tuple}} of length `n`.
+These are [equivalent](lists.equivalence-tuples-finite-sequences.md) to the
+related concept of [finite sequences](lists.finite-sequences.md), but are
+structured like [lists](lists.lists.md) instead of [arrays](lists.arrays.md).
 
 ## Definitions
 
@@ -109,17 +111,17 @@ module _
 
   Eq-tuple : (n : ℕ) → tuple A n → tuple A n → UU l
   Eq-tuple zero-ℕ empty-tuple empty-tuple = raise-unit l
-  Eq-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (Id x y) × (Eq-tuple n xs ys)
+  Eq-tuple (succ-ℕ n) (x ∷ xs) (y ∷ ys) = (x ＝ y) × (Eq-tuple n xs ys)
 
   refl-Eq-tuple : (n : ℕ) → (u : tuple A n) → Eq-tuple n u u
   refl-Eq-tuple zero-ℕ empty-tuple = map-raise star
   pr1 (refl-Eq-tuple (succ-ℕ n) (x ∷ xs)) = refl
   pr2 (refl-Eq-tuple (succ-ℕ n) (x ∷ xs)) = refl-Eq-tuple n xs
 
-  Eq-eq-tuple : (n : ℕ) → (u v : tuple A n) → Id u v → Eq-tuple n u v
+  Eq-eq-tuple : (n : ℕ) → (u v : tuple A n) → u ＝ v → Eq-tuple n u v
   Eq-eq-tuple n u .u refl = refl-Eq-tuple n u
 
-  eq-Eq-tuple : (n : ℕ) → (u v : tuple A n) → Eq-tuple n u v → Id u v
+  eq-Eq-tuple : (n : ℕ) → (u v : tuple A n) → Eq-tuple n u v → u ＝ v
   eq-Eq-tuple zero-ℕ empty-tuple empty-tuple eq-tuple = refl
   eq-Eq-tuple (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , eqs) =
     ap (x ∷_) (eq-Eq-tuple n xs ys eqs)
@@ -132,7 +134,7 @@ module _
     left-whisker-comp² (x ∷_) (is-retraction-eq-Eq-tuple n xs xs) refl
 
   square-Eq-eq-tuple :
-    (n : ℕ) (x : A) (u v : tuple A n) (p : Id u v) →
+    (n : ℕ) (x : A) (u v : tuple A n) (p : u ＝ v) →
     (Eq-eq-tuple _ (x ∷ u) (x ∷ v) (ap (x ∷_) p)) ＝
     (refl , (Eq-eq-tuple n u v p))
   square-Eq-eq-tuple zero-ℕ x empty-tuple empty-tuple refl = refl
@@ -154,7 +156,7 @@ module _
       ( is-section-eq-Eq-tuple n u v)
       ( is-retraction-eq-Eq-tuple n u v)
 
-  extensionality-tuple : (n : ℕ) → (u v : tuple A n) → Id u v ≃ Eq-tuple n u v
+  extensionality-tuple : (n : ℕ) → (u v : tuple A n) → (u ＝ v) ≃ Eq-tuple n u v
   extensionality-tuple n u v = (Eq-eq-tuple n u v , is-equiv-Eq-eq-tuple n u v)
 ```
 
@@ -219,7 +221,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-set-tuple : (n : ℕ) → is-set A -> is-set (tuple A n)
+  is-set-tuple : (n : ℕ) → is-set A → is-set (tuple A n)
   is-set-tuple = is-trunc-tuple zero-𝕋
 
 tuple-Set : {l : Level} → Set l → ℕ → Set l

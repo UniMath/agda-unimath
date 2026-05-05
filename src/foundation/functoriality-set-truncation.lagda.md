@@ -9,14 +9,17 @@ module foundation.functoriality-set-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences-slice
+open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-truncation
 open import foundation.images
 open import foundation.injective-maps
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-truncations
@@ -239,20 +242,16 @@ module _
     is-surjective-is-surjective-map-trunc-Set :
       is-surjective (map-trunc-Set f) → is-surjective f
     is-surjective-is-surjective-map-trunc-Set H b =
-      apply-universal-property-trunc-Prop
+      apply-twice-universal-property-trunc-Prop'
         ( H (unit-trunc-Set b))
+        ( λ (x , p) → is-surjective-unit-trunc-Set A x)
         ( trunc-Prop (fiber f b))
-        ( λ (x , p) →
-          apply-universal-property-trunc-Prop
-            ( is-surjective-unit-trunc-Set A x)
-            ( trunc-Prop (fiber f b))
-            ( λ where
-              ( a , refl) →
-                apply-universal-property-trunc-Prop
-                  ( apply-effectiveness-unit-trunc-Set
-                    ( inv (naturality-unit-trunc-Set f a) ∙ p))
-                  ( trunc-Prop (fiber f b))
-                  ( λ q → unit-trunc-Prop (a , q))))
+        ( λ where
+          (x , p) ( a , refl) →
+            map-trunc-Prop
+              ( a ,_)
+              ( apply-effectiveness-unit-trunc-Set
+                ( inv (naturality-unit-trunc-Set f a) ∙ p)))
 ```
 
 ### Set truncation preserves the image of a map

@@ -1,4 +1,4 @@
-# The poset of radical ideals of a commutative ring
+# The poset of radical ideals in a commutative ring
 
 ```agda
 module commutative-algebra.poset-of-radical-ideals-commutative-rings where
@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -161,7 +162,7 @@ module _
     is-prop-sim-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A) I J
 ```
 
-### The inclusion of radical ideals into ideals of a commutative ring
+### The inclusion of radical ideals into ideals in a commutative ring
 
 ```agda
 module _

@@ -13,9 +13,11 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -33,8 +35,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We define a sorted tuple to be a tuple such that for every pair of consecutive
-elements `x` and `y`, the inequality `x ≤ y` holds.
+We define a {{#concept "sorted tuple" Agda=is-sorted-tuple}} to be a
+[tuple](lists.tuples.md) such that for every pair of consecutive elements `x`
+and `y`, the [inequality](order-theory.decidable-total-orders.md) `x ≤ y` holds.
 
 ## Definitions
 

@@ -346,3 +346,30 @@ module _
   is-least-upper-bound-family-of-elements-poset-Large-Poset y is-lub-y z =
     is-lub-y z
 ```
+
+### If `x ≤ y`, `y` is a least upper bound of `x` and `y`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  where
+
+  abstract
+    left-leq-right-least-upper-bound-Large-Poset :
+      {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+      leq-Large-Poset P x y →
+      is-least-binary-upper-bound-Large-Poset P x y y
+    pr1 (left-leq-right-least-upper-bound-Large-Poset x y x≤y z) (x≤z , y≤z) =
+      y≤z
+    pr2 (left-leq-right-least-upper-bound-Large-Poset x y x≤y z) y≤z =
+      ( transitive-leq-Large-Poset P x y z y≤z x≤y , y≤z)
+
+    right-leq-left-least-upper-bound-Large-Poset :
+      {l1 l2 : Level} (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+      leq-Large-Poset P y x →
+      is-least-binary-upper-bound-Large-Poset P x y x
+    right-leq-left-least-upper-bound-Large-Poset x y y≤x =
+      is-binary-least-upper-bound-swap-Large-Poset P y x x
+        ( left-leq-right-least-upper-bound-Large-Poset y x y≤x)
+```

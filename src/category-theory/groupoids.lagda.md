@@ -17,7 +17,10 @@ open import category-theory.pregroupoids
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -26,6 +29,7 @@ open import foundation.iterated-dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.telescopes
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -151,20 +155,7 @@ module _
             ( λ (y , p) →
               Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
                 ( λ (q , l) → p ∙ q ＝ refl)))
-        ( ( equiv-tot
-            ( λ y →
-              equiv-tot
-                ( λ p →
-                  associative-Σ
-                    ( y ＝ x)
-                    ( λ q → q ∙ p ＝ refl)
-                    ( λ (q , r) → p ∙ q ＝ refl)))) ∘e
-          ( associative-Σ
-            ( type-1-Type X)
-            ( λ y → x ＝ y)
-            ( λ (y , p) →
-              Σ ( Σ (y ＝ x) (λ q → q ∙ p ＝ refl))
-                ( λ (q , l) → p ∙ q ＝ refl))))
+        ( equiv-tot (λ y → equiv-tot (λ p → associative-Σ)) ∘e associative-Σ)
         ( is-contr-iterated-Σ 2
           ( is-torsorial-Id x ,
             ( x , refl) ,

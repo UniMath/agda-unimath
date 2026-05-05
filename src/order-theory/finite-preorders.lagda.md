@@ -15,6 +15,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositions
@@ -190,7 +191,7 @@ module _
     is-finite-type-decidable-subtype S (is-finite-type-Finite-Preorder P)
 
   eq-type-finite-Subpreorder :
-    (x y : type-finite-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-finite-Subpreorder) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-finite-Subpreorder =
     eq-type-Decidable-Subpreorder (preorder-Finite-Preorder P) S
 

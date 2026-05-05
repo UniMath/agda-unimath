@@ -19,6 +19,7 @@ open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binary-sum-decompositions-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
@@ -30,6 +31,7 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -874,7 +876,7 @@ module _
                           sum-equiv-finite-Commutative-Semiring R
                             ( _)
                             ( _)
-                            ( associative-Σ _ _ _)
+                            ( associative-Σ)
                             ( _))
                     ( refl))
           ＝

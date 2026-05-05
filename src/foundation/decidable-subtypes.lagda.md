@@ -16,6 +16,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
 open import foundation.existential-quantification
@@ -500,10 +501,9 @@ module _
   equiv-Σ-decide-is-in-decidable-subtype :
     X ≃ Σ X (is-decidable ∘ is-in-decidable-subtype S)
   equiv-Σ-decide-is-in-decidable-subtype =
-    inv-equiv
-      ( equiv-inclusion-is-full-subtype
-        ( λ x → is-decidable-Prop (subtype-decidable-subtype S x))
-        ( is-decidable-decidable-subtype S))
+    inv-equiv-inclusion-is-full-subtype
+      ( λ x → is-decidable-Prop (subtype-decidable-subtype S x))
+      ( is-decidable-decidable-subtype S)
 ```
 
 ### Given a decidable subtype `S ⊆ X`, there is a surjective map from `Maybe X` to `Maybe S`

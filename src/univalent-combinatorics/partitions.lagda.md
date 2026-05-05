@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
@@ -194,7 +195,7 @@ pr2 (pr2 (id-equiv-partition-Finite-Type X P)) = refl-htpy
 extensionality-partition-Finite-Type :
   {l1 l2 l3 : Level} (X : Finite-Type l1)
   (P Q : partition-Finite-Type l2 l3 X) →
-  Id P Q ≃ equiv-partition-Finite-Type X P Q
+  (P ＝ Q) ≃ equiv-partition-Finite-Type X P Q
 extensionality-partition-Finite-Type X P =
   extensionality-Σ
     ( λ {Y} Zf e →

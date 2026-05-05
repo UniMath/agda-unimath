@@ -19,6 +19,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -48,7 +49,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A permutation of `Fin n` is an automorphism of `Fin n`.
+A
+{{#concept "permutation" Disambiguation="of a standard finite type" Agda=Permutation}}
+of `Fin n` is an [automorphism](foundation.automorphisms.md) on `Fin n`.
 
 ## Definitions
 
@@ -64,7 +67,7 @@ Permutation n = Aut (Fin n)
 ```agda
 list-transpositions-permutation-Fin' :
   (n : ℕ) (f : Permutation (succ-ℕ n)) →
-  (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
+  (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
   ( list
     ( Σ
       ( Fin (succ-ℕ n) → Decidable-Prop lzero)
@@ -126,8 +129,8 @@ list-transpositions-permutation-Fin (succ-ℕ n) f =
 abstract
   retraction-permutation-list-transpositions-Fin' :
     (n : ℕ) (f : Permutation (succ-ℕ n)) →
-    (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
-    (y z : Fin (succ-ℕ n)) → Id (map-equiv f y) z →
+    (x : Fin (succ-ℕ n)) → map-equiv f (inr star) ＝ x →
+    (y z : Fin (succ-ℕ n)) → map-equiv f y ＝ z →
     Id
       ( map-equiv
         ( permutation-list-transpositions
@@ -190,7 +193,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( Permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P =
       pair
         ( transposition t ∘e f)
@@ -284,7 +287,7 @@ abstract
         ( neq-inr-inl)
     P :
       Σ ( Permutation (succ-ℕ (succ-ℕ n)))
-        ( λ g → Id (map-equiv g (inr star)) (inr star))
+        ( λ g → map-equiv g (inr star) ＝ inr star)
     P = pair
       ( transposition t ∘e f)
       ( ( ap (map-transposition t) p) ∙

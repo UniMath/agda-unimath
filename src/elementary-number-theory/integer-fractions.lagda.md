@@ -11,8 +11,8 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
-open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
@@ -20,6 +20,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.negation
@@ -74,6 +75,13 @@ is-positive-denominator-fraction-ℤ x = pr2 (positive-denominator-fraction-ℤ 
 in-fraction-ℤ : ℤ → fraction-ℤ
 pr1 (in-fraction-ℤ x) = x
 pr2 (in-fraction-ℤ x) = one-positive-ℤ
+```
+
+### Inclusion of the natural numbers
+
+```agda
+int-fraction-ℕ : ℕ → fraction-ℤ
+int-fraction-ℕ n = in-fraction-ℤ (int-ℕ n)
 ```
 
 ### Negative one, zero and one

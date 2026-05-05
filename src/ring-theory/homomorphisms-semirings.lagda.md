@@ -8,6 +8,7 @@ module ring-theory.homomorphisms-semirings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -30,8 +31,11 @@ open import ring-theory.semirings
 
 ## Idea
 
-**Homomorphisms of semirings** are homomorphisms of their underlying additive
-commutative monoids that preserve multiplication and the multiplicative unit.
+{{#concept "Homomorphisms" Disambiguation="of semirings" Agda=hom-Semiring}} of
+[semirings](ring-theory.semirings.md) are
+[homomorphisms](group-theory.homomorphisms-commutative-monoids.md) of their
+underlying additive [commutative monoids](group-theory.commutative-monoids.md)
+that preserve multiplication and the multiplicative unit.
 
 ## Definitions
 

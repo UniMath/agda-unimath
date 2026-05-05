@@ -11,7 +11,9 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
 open import foundation.univalence
@@ -41,8 +43,12 @@ has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. On this page, we consider the
 {{#concept "computational identity types" Agda=computational-Id}} `x ＝ʲ y`,
 whose elements we call
-{{#concept "computational identifications" Agda=computational-Id}}. These are
-defined by taking the
+{{#concept "computational identifications" Agda=computational-Id}}. The
+computational identity types are equivalent to the standard identity types, but
+have strictly associative and one-sided unital concatenation and a strictly
+involutive inverse operator.
+
+The computational identity types are defined by taking the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md):
 
 ```text
@@ -92,8 +98,8 @@ computational identity types that computes strictly.
 - `p ∙ʲ invʲ p ≐ reflʲ`,
 
 and they do not have a strict computation property for their induction
-principle. This boils down to the fact that the Yoneda identity types do not
-have a strict computation property for their induction principle, which is
+principle. This is a consequence of the fact that the Yoneda identity types do
+not have a strict computation property for their induction principle, which is
 explained further there.
 
 ## Definition

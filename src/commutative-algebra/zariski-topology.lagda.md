@@ -1,4 +1,4 @@
-# The Zariski topology on the set of prime ideals of a commutative ring
+# The Zariski topology on the set of prime ideals in a commutative ring
 
 ```agda
 module commutative-algebra.zariski-topology where
@@ -10,6 +10,7 @@ module commutative-algebra.zariski-topology where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositions

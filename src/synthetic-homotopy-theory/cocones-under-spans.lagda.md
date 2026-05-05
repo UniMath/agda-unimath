@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.cocones-under-spans where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -214,7 +215,7 @@ cocone-map-span-diagram {𝒮 = 𝒮} c =
 cocone-map-id :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  Id (cocone-map f g c id) c
+  cocone-map f g c id ＝ c
 cocone-map-id f g c =
   eq-pair-eq-fiber
     ( eq-pair-eq-fiber (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))

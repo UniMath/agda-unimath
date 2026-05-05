@@ -8,8 +8,10 @@ module ring-theory.full-ideals-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.full-subtypes
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -28,8 +30,10 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A **full ideal** in a [ring](ring-theory.rings.md) `R` is an
-[ideal](ring-theory.ideals-rings.md) that contains every element of `R`.
+A
+{{#concept "full ideal" Disambiguation="of a ring" Agda=is-full-ideal-Ring Agda=full-ideal-Ring}}
+of a [ring](ring-theory.rings.md) `R` is an [ideal](ring-theory.ideals-rings.md)
+that contains every element of `R`.
 
 ## Definitions
 

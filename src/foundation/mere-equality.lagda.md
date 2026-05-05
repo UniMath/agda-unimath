@@ -92,10 +92,8 @@ abstract
 abstract
   transitive-mere-eq :
     {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
-  transitive-mere-eq x y z p q =
-    apply-universal-property-trunc-Prop q
-      ( mere-eq-Prop x z)
-      ( λ p' → map-trunc-Prop (p' ∙_) p)
+  transitive-mere-eq x y z =
+    map-binary-trunc-Prop (λ p q → q ∙ p)
 ```
 
 ### Mere equality is an equivalence relation
@@ -151,10 +149,7 @@ module _
   all-elements-merely-equal-retract-of :
     B retract-of A → all-elements-merely-equal A → all-elements-merely-equal B
   all-elements-merely-equal-retract-of (i , r , R) H x y =
-    rec-trunc-Prop
-      ( mere-eq-Prop x y)
-      ( λ p → unit-trunc-Prop (inv (R x) ∙ ap r p ∙ R y))
-      ( H (i x) (i y))
+    map-trunc-Prop (λ p → inv (R x) ∙ ap r p ∙ R y) (H (i x) (i y))
 
   all-elements-merely-equal-equiv :
     B ≃ A → all-elements-merely-equal A → all-elements-merely-equal B

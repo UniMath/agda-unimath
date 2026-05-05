@@ -10,7 +10,6 @@ module real-numbers.negative-real-numbers where
 
 ```agda
 open import elementary-number-theory.negative-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 ```
 
@@ -77,7 +77,7 @@ module _
     exists-ℚ⁻-in-upper-cut-is-negative-ℝ =
       elim-exists
         ( ∃ ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)))
-        ( λ p (x<p , p<0) → intro-exists (p , is-negative-le-zero-ℚ p p<0) x<p)
+        ( λ p (x<p , p<0) → intro-exists (p , is-negative-le-zero-ℚ p<0) x<p)
 
     is-negative-exists-ℚ⁻-in-upper-cut-ℝ :
       exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p)) → is-negative-ℝ x
@@ -85,11 +85,32 @@ module _
       elim-exists
         ( is-negative-prop-ℝ x)
         ( λ (p , is-neg-p) x<p →
-          intro-exists p (x<p , le-zero-is-negative-ℚ p is-neg-p))
+          intro-exists p (x<p , le-zero-is-negative-ℚ is-neg-p))
 
     is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ :
       is-negative-ℝ x ↔ exists ℚ⁻ (λ p → upper-cut-ℝ x (rational-ℚ⁻ p))
     is-negative-iff-exists-ℚ⁻-in-upper-cut-ℝ =
       ( exists-ℚ⁻-in-upper-cut-is-negative-ℝ ,
         is-negative-exists-ℚ⁻-in-upper-cut-ℝ)
+```
+
+### Being nonnegative is preserved by similarity
+
+```agda
+abstract
+  is-negative-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
+    sim-ℝ x y → is-negative-ℝ x → is-negative-ℝ y
+  is-negative-sim-ℝ = preserves-le-left-sim-ℝ _ _ _
+```
+
+### If `x < y` and `y` is negative, then `x` is negative
+
+```agda
+abstract
+  is-negative-le-real-ℝ⁻ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ⁻ l2) →
+    le-ℝ x (real-ℝ⁻ y) → is-negative-ℝ x
+  is-negative-le-real-ℝ⁻ x (y , y<0) x<y =
+    transitive-le-ℝ x y zero-ℝ y<0 x<y
 ```

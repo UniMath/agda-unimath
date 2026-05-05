@@ -32,8 +32,12 @@ open import lists.sequences
 
 ## Idea
 
-A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natural
-numbers `m` and `n` such that `a m = a n`.
+A
+{{#concept "repetition" Disambiguation="in a sequence" Agda=is-repetition-of-values-sequence Agda=repetition-of-values-sequence}}
+in a [sequence](lists.sequences.md) `a : ℕ → A` consists of a
+[pair of distinct](foundation.pairs-of-distinct-elements.md)
+[natural numbers](elementary-number-theory.natural-numbers.md) `m` and `n` such
+that `a m = a n`.
 
 ## Definition
 

@@ -8,9 +8,11 @@ module graph-theory.simple-undirected-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.negation
 open import foundation.propositions
+open import foundation.subuniverse-of-propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -24,7 +26,8 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 An [undirected graph](graph-theory.undirected-graphs.md) is said to be
-**simple** if it only contains edges between
+{{#concept "simple" Disambiguation="undirected graph" WD="simple graph" WDID=Q15838309 Agda=Simple-Undirected-Graph}}
+if it only contains edges between
 [distinct points](foundation.pairs-of-distinct-elements.md), and there is at
 most one edge between any two vertices.
 

@@ -9,7 +9,8 @@ module foundation.functoriality-propositional-truncation where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-propositions
+open import foundation.function-extensionality-axiom
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -54,6 +55,16 @@ abstract
     (A → B → C) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁
   map-binary-trunc-Prop {C = C} f |a| |b| =
     rec-trunc-Prop (trunc-Prop C) (λ a → map-trunc-Prop (f a) |b|) |a|
+
+abstract
+  map-ternary-trunc-Prop :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l3} →
+    (A → B → C → D) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁ → ║ D ║₋₁
+  map-ternary-trunc-Prop {D = D} f |a| |b| |c| =
+    rec-trunc-Prop
+      ( trunc-Prop D)
+      ( λ a → map-binary-trunc-Prop (f a) |b| |c|)
+      ( |a|)
 ```
 
 ## Properties

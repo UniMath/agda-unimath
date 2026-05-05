@@ -15,7 +15,9 @@ open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
@@ -23,10 +25,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
-open import foundation.raising-universe-levels
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs
@@ -37,11 +40,13 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-A **walk** in a [directed graph](graph-theory.directed-graphs.md) from a vertex
-`x` to a vertex `y` is a [list](lists.lists.md) of edges that connect `x` to
-`y`. Since every journey begins with a single step, we define the `cons`
-operation on walks in directed graphs with an edge from the source in the first
-argument, and a walk to the target in the second argument.
+A
+{{#concept "walk" Disambiguation="in a directed graph" WD="walk" WDID=Q12776184 Agda=walk-Directed-Graph}}
+in a [directed graph](graph-theory.directed-graphs.md) from a vertex `x` to a
+vertex `y` is a [list](lists.lists.md) of edges that connect `x` to `y`. Since
+every journey begins with a single step, we define the `cons` operation on walks
+in directed graphs with an edge from the source in the first argument, and a
+walk to the target in the second argument.
 
 ## Definitions
 

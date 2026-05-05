@@ -16,13 +16,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a sequence `f : ℕ → A` and an element `a : A` we define
+Given a [sequence](lists.sequences.md) `f : ℕ → A` and an element `a : A` we
+define a
+{{#concept "right shift operation" Disambiguation="on sequences" Agda=shift-ℕ}}
 `shift-ℕ a f : ℕ → A` by
 
 ```text
   shift-ℕ a f zero-ℕ := a
-  shift-ℕ a f (succ-ℕ n) := f n
+  shift-ℕ a f (succ-ℕ n) := f n.
 ```
+
+We think of this operation as moving every element to the right, and padding
+with the value `a`.
 
 ## Definition
 

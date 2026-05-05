@@ -9,8 +9,12 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-of-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
@@ -20,13 +24,14 @@ open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
 open import foundation-core.retracts-of-types
+open import foundation-core.subuniverse-of-contractible-types
+open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -35,7 +40,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be **`k`-connected** if its `k`-truncation is contractible.
+A type is said to be
+{{#concept "`k`-connected" Disambiguation="type" Agda=is-connected Agda=Connected-Type}}
+if its `k`-[truncation](foundation.truncations.md) is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definition
 
@@ -152,9 +160,7 @@ module _
   where
 
   is-connected-retract-of :
-    A retract-of B →
-    is-connected k B →
-    is-connected k A
+    A retract-of B → is-connected k B → is-connected k A
   is-connected-retract-of R =
     is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```
@@ -172,6 +178,18 @@ module _
       ( λ B → is-equiv-diagonal-exponential-is-contr H (type-Truncated-Type B))
 ```
 
+### A type that is `k`-connected and `k`-truncated is contractible
+
+```agda
+module _
+  {l1 : Level} {k : 𝕋} {A : UU l1}
+  where
+
+  is-contr-is-connected-is-trunc : is-trunc k A → is-connected k A → is-contr A
+  is-contr-is-connected-is-trunc H =
+    is-contr-equiv (type-trunc k A) (equiv-unit-trunc (A , H))
+```
+
 ### A type that is `(k+1)`-connected is `k`-connected
 
 ```agda
@@ -184,42 +202,6 @@ is-connected-is-connected-succ-𝕋 k H =
       is-equiv-diagonal-exponential-is-connected
         ( truncated-type-succ-Truncated-Type k B)
         ( H))
-```
-
-### The total space of a family of `k`-connected types over a `k`-connected type is `k`-connected
-
-```agda
-is-connected-Σ :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
-  is-connected k A → ((x : A) → is-connected k (B x)) →
-  is-connected k (Σ A B)
-is-connected-Σ k H K =
-  is-contr-equiv _ (equiv-trunc k (equiv-pr1 K) ∘e equiv-trunc-Σ k) H
-```
-
-### If the total space of a family of `k`-connected types is `k`-connected so is the base
-
-**Proof.** We compute
-
-```text
-  ║Σ (x : A), B x║ₖ ≃ ║Σ (x : A), ║B x║ₖ║ₖ by equiv-trunc-Σ
-                    ≃ ║Σ (x : A), 1 ║ₖ      by k-connectedness of B
-                    ≃ ║A║ₖ                  by the right unit law of Σ
-```
-
-and so, in particular, if the total space is `k`-connected so is the base. □
-
-```agda
-is-connected-base :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
-  ((x : A) → is-connected k (B x)) → is-connected k (Σ A B) → is-connected k A
-is-connected-base k {A} {B} K =
-  is-contr-equiv'
-    ( type-trunc k (Σ A B))
-    ( equivalence-reasoning
-      type-trunc k (Σ A B)
-      ≃ type-trunc k (Σ A (type-trunc k ∘ B)) by equiv-trunc-Σ k
-      ≃ type-trunc k A by equiv-trunc k (right-unit-law-Σ-is-contr K))
 ```
 
 ### An inhabited type `A` is `k + 1`-connected if and only if its identity types are `k`-connected
@@ -270,4 +252,54 @@ module _
                   ( unit-trunc x))
                 ( λ where refl → refl)
                 ( center (K a x)))))
+```
+
+### The total space of a family of `k`-connected types over a `k`-connected type is `k`-connected
+
+```agda
+is-connected-Σ :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+  is-connected k A → ((x : A) → is-connected k (B x)) →
+  is-connected k (Σ A B)
+is-connected-Σ k H K =
+  is-contr-equiv _ (equiv-trunc k (equiv-pr1 K) ∘e equiv-trunc-Σ k) H
+```
+
+### If the total space of a family of `k`-connected types is `k`-connected so is the base
+
+**Proof.** We compute
+
+```text
+  ║Σ (x : A), B x║ₖ ≃ ║Σ (x : A), ║B x║ₖ║ₖ by equiv-trunc-Σ
+                    ≃ ║Σ (x : A), 1 ║ₖ      by k-connectedness of B
+                    ≃ ║A║ₖ                  by the right unit law of Σ
+```
+
+and so, in particular, if the total space is `k`-connected then so is the base.
+∎
+
+```agda
+is-connected-base :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+  ((x : A) → is-connected k (B x)) → is-connected k (Σ A B) → is-connected k A
+is-connected-base k {A} {B} K =
+  is-contr-equiv'
+    ( type-trunc k (Σ A B))
+    ( equivalence-reasoning
+      type-trunc k (Σ A B)
+      ≃ type-trunc k (Σ A (type-trunc k ∘ B)) by equiv-trunc-Σ k
+      ≃ type-trunc k A by equiv-trunc k (right-unit-law-Σ-is-contr K))
+```
+
+### If the domain of `f` is `k+1`-connected, then the `k+1`-truncation of `f` is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-trunc-map-trunc-succ-is-succ-connected-domain :
+    is-connected (succ-𝕋 k) A → is-trunc-map k (map-trunc (succ-𝕋 k) f)
+  is-trunc-map-trunc-succ-is-succ-connected-domain c =
+    is-trunc-map-is-trunc-succ-codomain-is-contr-domain c is-trunc-type-trunc
 ```

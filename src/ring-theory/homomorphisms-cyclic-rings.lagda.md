@@ -9,6 +9,7 @@ module ring-theory.homomorphisms-cyclic-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -25,7 +26,9 @@ open import ring-theory.rings
 
 ## Idea
 
-A **homomorphism** of [cyclic rings](ring-theory.cyclic-rings.md) is a
+A
+{{#concept "homomorphism" Disambiguation="of cyclic rings" Agda=hom-Cyclic-Ring}}
+of [cyclic rings](ring-theory.cyclic-rings.md) is a
 [ring homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
 [rings](ring-theory.rings.md).
 

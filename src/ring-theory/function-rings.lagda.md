@@ -29,8 +29,9 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a ring `R` and a type `X`, the exponent ring `R^X` consists of functions
-from `X` into the underlying type of `R`. The operations on `R^X` are defined
+Given a [ring](ring-theory.rings.md) `R` and a type `X`, the
+{{#concept "exponent ring" Agda=function-Ring}} `R^X` consists of functions from
+`X` into the underlying type of `R`. The operations on `R^X` are defined
 pointwise.
 
 ## Definition

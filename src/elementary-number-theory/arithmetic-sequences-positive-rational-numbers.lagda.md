@@ -153,7 +153,7 @@ module _
     compute-standard-arithmetic-sequence-ℚ⁺ (succ-ℕ n) =
       ( ap
         ( add-ℚ (rational-ℚ⁺ a))
-        ( ( ap (mul-ℚ' (rational-ℚ⁺ d)) (inv (succ-rational-int-ℕ n))) ∙
+        ( ( ap (mul-ℚ' (rational-ℚ⁺ d)) (inv (succ-rational-ℕ n))) ∙
           ( mul-left-succ-ℚ (rational-ℕ n) (rational-ℚ⁺ d)) ∙
           ( commutative-add-ℚ
             ( rational-ℚ⁺ d)
@@ -174,13 +174,12 @@ module _
   abstract
     compute-arithmetic-sequence-ℚ⁺ :
       ( n : ℕ) →
-      Id
-        ( add-ℚ
-          ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
-          ( mul-ℚ
-            ( rational-ℕ n)
-            ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u))))
-        ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
+      ( add-ℚ
+        ( rational-ℚ⁺ (initial-term-arithmetic-sequence-ℚ⁺ u))
+        ( mul-ℚ
+          ( rational-ℕ n)
+          ( rational-ℚ⁺ (common-difference-arithmetic-sequence-ℚ⁺ u)))) ＝
+      ( rational-ℚ⁺ (seq-arithmetic-sequence-ℚ⁺ u n))
     compute-arithmetic-sequence-ℚ⁺ n =
       ( compute-standard-arithmetic-sequence-ℚ⁺
         ( initial-term-arithmetic-sequence-ℚ⁺ u)

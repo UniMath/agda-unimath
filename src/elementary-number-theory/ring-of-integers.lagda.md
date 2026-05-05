@@ -28,8 +28,8 @@ open import group-theory.homomorphisms-groups
 open import ring-theory.homomorphisms-rings
 open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.nontrivial-rings
 open import ring-theory.rings
-open import ring-theory.trivial-rings
 ```
 
 </details>
@@ -101,7 +101,7 @@ abstract
     ( commutative-add-ℤ (mul-ℤ (inl k) l) (neg-ℤ l)) ∙
     ( inv (left-predecessor-law-mul-ℤ (inl k) l))
   compute-integer-multiple-ℤ-Ring (inr (inl _)) l =
-    ( integer-multiple-zero-Ring ℤ-Ring l) ∙
+    ( left-zero-law-integer-multiple-Ring ℤ-Ring l) ∙
     ( inv (left-zero-law-mul-ℤ l))
   compute-integer-multiple-ℤ-Ring (inr (inr zero-ℕ)) l =
     ( integer-multiple-one-Ring ℤ-Ring l) ∙

@@ -8,6 +8,7 @@ module group-theory.equivalences-semigroups where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -87,7 +88,7 @@ module _
     ( t : Σ ( has-associative-mul (type-Semigroup G))
             ( λ μ →
               preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)) →
-    Id center-total-preserves-mul-id-Semigroup t
+    center-total-preserves-mul-id-Semigroup ＝ t
   contraction-total-preserves-mul-id-Semigroup
     ( (μ-G' , associative-G') , μ-id) =
     eq-type-subtype

@@ -12,12 +12,14 @@ open import category-theory.set-magmoids
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -122,15 +124,15 @@ module _
   compute-structure-equiv-Set-Magmoid :
     componentwise-structure-equiv-Set-Magmoid ≃ structure-equiv-Set-Magmoid A B
   compute-structure-equiv-Set-Magmoid =
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot
       ( λ F₀ →
-        ( inv-associative-Σ _ _ _) ∘e
+        ( inv-associative-Σ) ∘e
         equiv-tot (λ _ → equiv-left-swap-Σ) ∘e
         ( equiv-left-swap-Σ) ∘e
         ( equiv-tot
           ( λ is-equiv-F₀ →
-            ( associative-Σ _ _ _) ∘e
+            ( associative-Σ) ∘e
             ( equiv-right-swap-Σ) ∘e
             ( equiv-Σ-equiv-base
               ( λ E₁' →
@@ -138,7 +140,7 @@ module _
               ( ( distributive-implicit-Π-Σ) ∘e
                 ( equiv-implicit-Π-equiv-family
                   ( λ _ → distributive-implicit-Π-Σ)))))))) ∘e
-    ( associative-Σ _ _ _)
+    ( associative-Σ)
 ```
 
 ### Structure equivalences of set-magmoids characterize their equality

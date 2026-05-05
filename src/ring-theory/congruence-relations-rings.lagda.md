@@ -9,6 +9,7 @@ module ring-theory.congruence-relations-rings where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
@@ -27,8 +28,11 @@ open import ring-theory.rings
 
 ## Idea
 
-A congruence relation on a ring `R` is a congruence relation on the underlying
-semiring of `R`.
+A
+{{#concept "congruence relation" Disambiguation="on a ring" WD="congruence relation" WDID=Q8349849 Agda=congruence-Ring}}
+on a [ring](ring-theory.rings.md) `R` is a
+[congruence relation](ring-theory.congruence-relations-semirings.md) on the
+underlying [semiring](ring-theory.semirings.md) of `R`.
 
 ## Definition
 

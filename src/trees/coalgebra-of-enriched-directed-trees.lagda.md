@@ -22,31 +22,33 @@ open import trees.polynomial-endofunctors
 
 ## Idea
 
-Using the fibers of base elements, the type of enriched directed trees has the
-structure of a coalgebra for the polynomial endofunctor
+Using the [fibers](trees.fibers-enriched-directed-trees.md) of
+[base elements](trees.bases-enriched-directed-trees.md), the type of
+[enriched directed trees](trees.enriched-directed-trees.md) has the structure of
+a [coalgebra](trees.coalgebras-polynomial-endofunctors.md) for the
+[polynomial endofunctor](trees.polynomial-endofunctors.md)
 
 ```text
-  X ↦ Σ (a : A), B a → X.
+  X ↦ Σ (a : A), (B a → X).
 ```
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 : Level) (A : UU l1) (B : A → UU l2)
+  {l1 l2 : Level} (l3 : Level) (P@(A , B) : polynomial-endofunctor l1 l2)
   where
 
   structure-coalgebra-Enriched-Directed-Tree :
     Enriched-Directed-Tree l3 l3 A B →
-    type-polynomial-endofunctor A B (Enriched-Directed-Tree l3 l3 A B)
-  pr1 (structure-coalgebra-Enriched-Directed-Tree T) =
-    shape-root-Enriched-Directed-Tree A B T
-  pr2 (structure-coalgebra-Enriched-Directed-Tree T) =
-    fiber-base-Enriched-Directed-Tree A B T
+    type-polynomial-endofunctor P (Enriched-Directed-Tree l3 l3 A B)
+  structure-coalgebra-Enriched-Directed-Tree T =
+    ( shape-root-Enriched-Directed-Tree A B T ,
+      fiber-base-Enriched-Directed-Tree A B T)
 
   coalgebra-Enriched-Directed-Tree :
-    coalgebra-polynomial-endofunctor (l1 ⊔ l2 ⊔ lsuc l3) A B
-  pr1 coalgebra-Enriched-Directed-Tree = Enriched-Directed-Tree l3 l3 A B
-  pr2 coalgebra-Enriched-Directed-Tree =
-    structure-coalgebra-Enriched-Directed-Tree
+    coalgebra-polynomial-endofunctor (l1 ⊔ l2 ⊔ lsuc l3) P
+  coalgebra-Enriched-Directed-Tree =
+    ( Enriched-Directed-Tree l3 l3 A B ,
+      structure-coalgebra-Enriched-Directed-Tree)
 ```

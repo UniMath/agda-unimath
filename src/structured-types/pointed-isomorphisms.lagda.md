@@ -11,6 +11,8 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -33,8 +35,8 @@ open import structured-types.pointed-types
 ## Idea
 
 A {{#concept "pointed isomorphism" Agda=pointed-iso}} is an isomorphism in the
-wild category of pointed types, i.e., it is a
-[pointed map](structured-types.pointed-types.md) equipped with a
+[wild category of pointed types](structured-types.wild-category-of-pointed-types.md),
+i.e., it is a [pointed map](structured-types.pointed-types.md) equipped with a
 [pointed section](structured-types.pointed-sections.md) and a
 [pointed retraction](structured-types.pointed-retractions.md).
 

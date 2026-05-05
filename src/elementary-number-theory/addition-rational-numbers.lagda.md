@@ -23,7 +23,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.retractions
 open import foundation.sections
@@ -71,7 +70,7 @@ pred-ℚ = add-ℚ neg-one-ℚ
 ### Unit laws
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℚ
 
   left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
@@ -94,9 +93,8 @@ opaque
 ### Addition is associative
 
 ```agda
-opaque
-  unfolding add-ℚ
-  unfolding rational-fraction-ℤ
+abstract opaque
+  unfolding add-ℚ rational-fraction-ℤ
 
   associative-add-ℚ :
     (x y z : ℚ) →
@@ -124,7 +122,7 @@ opaque
 ### Addition is commutative
 
 ```agda
-opaque
+abstract opaque
   unfolding add-ℚ
 
   commutative-add-ℚ :
@@ -153,9 +151,8 @@ abstract
 ### The negative of a rational number is its additive inverse
 
 ```agda
-opaque
-  unfolding add-ℚ
-  unfolding neg-ℚ
+abstract opaque
+  unfolding add-ℚ neg-ℚ
 
   left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
   left-inverse-law-add-ℚ x =
@@ -187,19 +184,25 @@ abstract
       ＝ (p +ℚ q) +ℚ neg-ℚ q by inv (associative-add-ℚ _ _ _)
       ＝ zero-ℚ +ℚ neg-ℚ q by ap (_+ℚ neg-ℚ q) p+q=0
       ＝ neg-ℚ q by left-unit-law-add-ℚ _
+
+  unique-right-neg-ℚ : (p q : ℚ) → p +ℚ q ＝ zero-ℚ → q ＝ neg-ℚ p
+  unique-right-neg-ℚ p q p+q=0 =
+    equational-reasoning
+      q
+      ＝ neg-ℚ (neg-ℚ q) by inv (neg-neg-ℚ q)
+      ＝ neg-ℚ p by ap neg-ℚ (inv (unique-left-neg-ℚ p q p+q=0))
 ```
 
 ### The negatives of rational numbers distribute over addition
 
 ```agda
-opaque
-  unfolding add-ℚ
-  unfolding neg-ℚ
+abstract opaque
+  unfolding add-ℚ neg-ℚ
 
   distributive-neg-add-ℚ :
     (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
   distributive-neg-add-ℚ (x , dxp) (y , dyp) =
-    ( inv (preserves-neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
+    ( inv (neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ (x +fraction-ℤ y))
       ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))
@@ -209,9 +212,8 @@ opaque
 ### The successor and predecessor functions on ℚ are mutual inverses
 
 ```agda
-opaque
-  unfolding add-ℚ
-  unfolding neg-ℚ
+abstract opaque
+  unfolding add-ℚ neg-ℚ
 
   is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
   is-retraction-pred-ℚ x =
@@ -232,17 +234,14 @@ opaque
       by ap (_+ℚ x) (right-inverse-law-add-ℚ one-ℚ)
     ＝ x by left-unit-law-add-ℚ x
 
+opaque
   is-equiv-succ-ℚ : is-equiv succ-ℚ
-  pr1 (pr1 is-equiv-succ-ℚ) = pred-ℚ
-  pr2 (pr1 is-equiv-succ-ℚ) = is-section-pred-ℚ
-  pr1 (pr2 is-equiv-succ-ℚ) = pred-ℚ
-  pr2 (pr2 is-equiv-succ-ℚ) = is-retraction-pred-ℚ
+  is-equiv-succ-ℚ =
+    is-equiv-is-invertible pred-ℚ is-section-pred-ℚ is-retraction-pred-ℚ
 
   is-equiv-pred-ℚ : is-equiv pred-ℚ
-  pr1 (pr1 is-equiv-pred-ℚ) = succ-ℚ
-  pr2 (pr1 is-equiv-pred-ℚ) = is-retraction-pred-ℚ
-  pr1 (pr2 is-equiv-pred-ℚ) = succ-ℚ
-  pr2 (pr2 is-equiv-pred-ℚ) = is-section-pred-ℚ
+  is-equiv-pred-ℚ =
+    is-equiv-is-invertible succ-ℚ is-retraction-pred-ℚ is-section-pred-ℚ
 
 equiv-succ-ℚ : ℚ ≃ ℚ
 pr1 equiv-succ-ℚ = succ-ℚ
@@ -256,9 +255,8 @@ pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
 ### The inclusion of integer fractions preserves addition
 
 ```agda
-opaque
-  unfolding add-ℚ
-  unfolding rational-fraction-ℤ
+abstract opaque
+  unfolding add-ℚ rational-fraction-ℤ
 
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
@@ -308,10 +306,11 @@ abstract
 ### The inclusion of natural numbers preserves addition
 
 ```agda
-add-rational-ℕ :
-  (m n : ℕ) → rational-ℕ m +ℚ rational-ℕ n ＝ rational-ℕ (m +ℕ n)
-add-rational-ℕ m n =
-  add-rational-ℤ _ _ ∙ ap rational-ℤ (add-int-ℕ m n)
+abstract
+  add-rational-ℕ :
+    (m n : ℕ) → rational-ℕ m +ℚ rational-ℕ n ＝ rational-ℕ (m +ℕ n)
+  add-rational-ℕ m n =
+    add-rational-ℤ _ _ ∙ ap rational-ℤ (add-int-ℕ m n)
 ```
 
 ### The rational successor of an integer is the successor of the integer
@@ -326,9 +325,9 @@ abstract
 
 ```agda
 abstract
-  succ-rational-int-ℕ :
-    (n : ℕ) → succ-ℚ (rational-ℤ (int-ℕ n)) ＝ rational-ℤ (int-ℕ (succ-ℕ n))
-  succ-rational-int-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
+  succ-rational-ℕ :
+    (n : ℕ) → succ-ℚ (rational-ℕ n) ＝ rational-ℕ (succ-ℕ n)
+  succ-rational-ℕ n = succ-rational-ℤ _ ∙ ap rational-ℤ (succ-int-ℕ n)
 ```
 
 ## See also

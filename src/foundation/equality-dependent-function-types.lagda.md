@@ -8,6 +8,8 @@ module foundation.equality-dependent-function-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.implicit-function-types
 open import foundation.universe-levels
@@ -53,6 +55,15 @@ module _
         ( λ g → (x : A) → C x (g x))
         ( equiv-explicit-implicit-Π)
         ( λ _ → equiv-explicit-implicit-Π))
+      ( is-torsorial-Eq-Π)
+
+  is-torsorial-Eq-implicit-Π' : is-torsorial (λ g → (x : A) → C x (g {x}))
+  is-torsorial-Eq-implicit-Π' =
+    is-contr-equiv
+      ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+      ( equiv-Σ-equiv-base
+        ( λ g → (x : A) → C x (g x))
+        ( equiv-explicit-implicit-Π))
       ( is-torsorial-Eq-Π)
 ```
 

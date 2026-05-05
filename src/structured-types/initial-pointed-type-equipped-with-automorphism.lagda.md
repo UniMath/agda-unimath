@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
@@ -29,7 +30,9 @@ open import structured-types.pointed-types-equipped-with-automorphisms
 
 ## Idea
 
-We show that ℤ is the initial pointed type equipped with an automorphism
+We show that the type of [integers](elementary-number-theory.integers.md) ℤ is
+the initial
+[pointed type equipped with an automorphism](structured-types.pointed-types-equipped-with-automorphisms.md).
 
 ## Definition
 

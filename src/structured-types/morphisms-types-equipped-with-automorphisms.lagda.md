@@ -23,9 +23,10 @@ open import structured-types.types-equipped-with-automorphisms
 
 Consider two
 [types equipped with an automorphism](structured-types.types-equipped-with-automorphisms.md)
-`(X,e)` and `(Y,f)`. A **morphism** from `(X,e)` to `(Y,f)` consists of a map
-`h : X → Y` equipped with a [homotopy](foundation-core.homotopies.md) witnessing
-that the square
+`(X, e)` and `(Y, f)`. A
+{{#concept "morphism" Disambiguation="of types equipped with an automorphism" Agda=hom-Type-With-Automorphism}}
+from `(X, e)` to `(Y, f)` consists of a map `h : X → Y` equipped with a
+[homotopy](foundation-core.homotopies.md) witnessing that the square
 
 ```text
       h

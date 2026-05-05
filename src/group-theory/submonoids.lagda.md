@@ -8,6 +8,7 @@ module group-theory.submonoids where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
@@ -27,8 +28,10 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-A submonoid of a monoid `M` is a subset of `M` that contains the unit of `M` and
-is closed under multiplication.
+A {{#concept "submonoid" WDID=Q121499459 WD="submonoid" Agda=Submonoid}} of a
+[monoid](group-theory.monoids.md) `M` is a
+[subset](group-theory.subsets-monoids.md) of `M` that contains the unit of `M`
+and is closed under multiplication.
 
 ## Definitions
 

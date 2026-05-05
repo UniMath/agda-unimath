@@ -12,6 +12,7 @@ module group-theory.quotients-abelian-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
 open import foundation.functoriality-set-quotients
@@ -265,8 +266,8 @@ module _
 
   associative-add-quotient-Ab :
     (x y z : type-quotient-Ab) →
-    ( add-quotient-Ab (add-quotient-Ab x y) z) ＝
-    ( add-quotient-Ab x (add-quotient-Ab y z))
+    add-quotient-Ab (add-quotient-Ab x y) z ＝
+    add-quotient-Ab x (add-quotient-Ab y z)
   associative-add-quotient-Ab =
     associative-mul-quotient-Group
       ( group-Ab A)

@@ -19,8 +19,9 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-A **type equipped with an automorphism** is a pair consisting of a type `A` and
-an [automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
+A {{#concept "type equipped with an automorphism" Agda=Type-With-Automorphism}}
+is a pair consisting of a type `A` and an
+[automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
 
 ## Definitions
 

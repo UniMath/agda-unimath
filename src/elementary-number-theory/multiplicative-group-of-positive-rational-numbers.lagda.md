@@ -26,6 +26,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -193,8 +194,29 @@ module _
 
 ```agda
 abstract
-  is-section-right-mul-ℚ⁺ : (p q : ℚ⁺) → (q *ℚ⁺ inv-ℚ⁺ p) *ℚ⁺ p ＝ q
-  is-section-right-mul-ℚ⁺ = is-section-right-div-Group group-mul-ℚ⁺
+  is-section-left-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ p *ℚ (rational-inv-ℚ⁺ p *ℚ q) ＝ q
+  is-section-left-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      p *ℚ (rational-inv-ℚ⁺ p⁺ *ℚ q)
+      ＝ (p *ℚ rational-inv-ℚ⁺ p⁺) *ℚ q
+        by inv (associative-mul-ℚ p _ q)
+      ＝ one-ℚ *ℚ q
+        by ap-mul-ℚ (ap rational-ℚ⁺ (right-inverse-law-mul-ℚ⁺ p⁺)) refl
+      ＝ q
+        by left-unit-law-mul-ℚ q
+
+  is-section-right-div-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) → (q *ℚ rational-inv-ℚ⁺ p) *ℚ rational-ℚ⁺ p ＝ q
+  is-section-right-div-ℚ⁺ p⁺@(p , _) q =
+    equational-reasoning
+      (q *ℚ rational-inv-ℚ⁺ p⁺) *ℚ p
+      ＝ q *ℚ rational-ℚ⁺ (inv-ℚ⁺ p⁺ *ℚ⁺ p⁺)
+        by associative-mul-ℚ _ _ _
+      ＝ q *ℚ one-ℚ
+        by ap-mul-ℚ refl (ap rational-ℚ⁺ (left-inverse-law-mul-ℚ⁺ p⁺))
+      ＝ q
+        by right-unit-law-mul-ℚ q
 
   is-retraction-left-div-ℚ⁺ :
     (p : ℚ⁺) (q : ℚ) → rational-ℚ⁺ (inv-ℚ⁺ p) *ℚ (rational-ℚ⁺ p *ℚ q) ＝ q
@@ -235,4 +257,33 @@ abstract
       ( is-retraction-left-div-ℚ⁺ p⁺ q)
       ( is-retraction-left-div-ℚ⁺ p⁺ r)
       ( preserves-le-left-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _ pq<pr)
+```
+
+### The inverse of 1 is 1
+
+```agda
+abstract
+  inv-one-ℚ⁺ : inv-ℚ⁺ one-ℚ⁺ ＝ one-ℚ⁺
+  inv-one-ℚ⁺ = inv-unit-Group group-mul-ℚ⁺
+```
+
+### Multiplication by a positive rational number is cofinal and coinitial
+
+```agda
+abstract
+  is-cofinal-left-mul-rational-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) →
+    exists ℚ (λ r → leq-ℚ-Prop q (rational-ℚ⁺ p *ℚ r))
+  is-cofinal-left-mul-rational-ℚ⁺ p q =
+    intro-exists
+      ( rational-inv-ℚ⁺ p *ℚ q)
+      ( leq-eq-ℚ (inv (is-section-left-div-ℚ⁺ p q)))
+
+  is-coinitial-left-mul-rational-ℚ⁺ :
+    (p : ℚ⁺) (q : ℚ) →
+    exists ℚ (λ r → leq-ℚ-Prop (rational-ℚ⁺ p *ℚ r) q)
+  is-coinitial-left-mul-rational-ℚ⁺ p q =
+    intro-exists
+      ( rational-inv-ℚ⁺ p *ℚ q)
+      ( leq-eq-ℚ (is-section-left-div-ℚ⁺ p q))
 ```

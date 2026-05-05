@@ -96,6 +96,15 @@ abstract
           ( left-distributive-mul-add-ℕ 2 n 2))
 ```
 
+### Squaring distributes over multiplication
+
+```agda
+abstract
+  distributive-square-mul-ℕ :
+    (m n : ℕ) → square-ℕ (m *ℕ n) ＝ square-ℕ m *ℕ square-ℕ n
+  distributive-square-mul-ℕ m n = interchange-law-mul-mul-ℕ m n m n
+```
+
 ### `n > √n` for `n > 1`
 
 The idea is to assume `n = m + 2 ≤ sqrt(m + 2)` for some `m : ℕ` and derive a

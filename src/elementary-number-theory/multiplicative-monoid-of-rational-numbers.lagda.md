@@ -27,8 +27,8 @@ open import group-theory.semigroups
 
 The type of [rational numbers](elementary-number-theory.rational-numbers.md)
 equipped with
-[multiplication](elementary-number-theory.addition-rational-numbers.md) is a
-[commutative monoid](group-theory.commutative-monoids.md) with unit `one-ℚ`.
+[multiplication](elementary-number-theory.multiplication-rational-numbers.md) is
+a [commutative monoid](group-theory.commutative-monoids.md) with unit `one-ℚ`.
 
 ## Definitions
 

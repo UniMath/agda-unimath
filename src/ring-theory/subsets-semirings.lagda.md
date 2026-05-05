@@ -7,6 +7,7 @@ module ring-theory.subsets-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
@@ -21,7 +22,9 @@ open import ring-theory.semirings
 
 ## Idea
 
-A subset of a semiring is a subtype of the underlying type of a semiring
+A {{#concept "subset" Disambiguation="of a semiring" Agda=subset-Semiring}} of a
+[semiring](ring-theory.semirings.md) `R` is a [subtype](foundation.subtypes.md)
+of the underlying type of `R`.
 
 ## Definition
 

@@ -7,6 +7,7 @@ module ring-theory.radical-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -19,8 +20,10 @@ open import ring-theory.rings
 
 ## Idea
 
-A radical ideal in a ring R is an ideal I such that `1 + x` is a multiplicative
-unit for every `x ∈ I`.
+A
+{{#concept "radical ideal" Disambiguation="in a ring" Agda=is-radical-ideal-Ring}}
+in a [ring](ring-theory.rings.md) `R` is an [ideal](ring-theory.ideals-rings.md)
+`I` such that `1 + x` is a multiplicative unit for every `x ∈ I`.
 
 ## Definition
 

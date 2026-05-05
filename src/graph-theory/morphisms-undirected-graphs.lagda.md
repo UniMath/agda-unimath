@@ -10,8 +10,10 @@ module graph-theory.morphisms-undirected-graphs where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -29,6 +31,15 @@ open import graph-theory.undirected-graphs
 ```
 
 </details>
+
+## Idea
+
+A
+{{#concept "morphism" Disambiguation="of undirected graphs" WD="graph homomorphism" WDID=Q3385162 Agda=hom-Undirected-Graph}}
+of [undirected graphs](graph-theory.undirected-graphs.md) from `G` to `H`
+consists of a map `f` from the vertices of `G` to the vertices of `H`, and a
+family of maps from the edges `E_G x y` in `G` to the edges `E_H (f x) (f y)` in
+`H`.
 
 ## Definitions
 
@@ -132,7 +143,7 @@ module _
         ( vertex-hom-Undirected-Graph G H f) p)
 
   htpy-eq-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → Id f g → htpy-hom-Undirected-Graph f g
+    (f g : hom-Undirected-Graph G H) → f ＝ g → htpy-hom-Undirected-Graph f g
   htpy-eq-hom-Undirected-Graph f .f refl = refl-htpy-hom-Undirected-Graph f
 
   abstract
@@ -151,7 +162,7 @@ module _
               ( λ gE →
                 (p : unordered-pair-vertices-Undirected-Graph G) →
                 (e : edge-Undirected-Graph G p) →
-                Id (edge-hom-Undirected-Graph G H f p e) (gE p e)))
+                edge-hom-Undirected-Graph G H f p e ＝ gE p e))
           ( equiv-tot
             ( λ gE →
               equiv-Π-equiv-family
@@ -173,14 +184,14 @@ module _
       ( htpy-eq-hom-Undirected-Graph f)
 
   extensionality-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → Id f g ≃ htpy-hom-Undirected-Graph f g
+    (f g : hom-Undirected-Graph G H) → (f ＝ g) ≃ htpy-hom-Undirected-Graph f g
   pr1 (extensionality-hom-Undirected-Graph f g) =
     htpy-eq-hom-Undirected-Graph f g
   pr2 (extensionality-hom-Undirected-Graph f g) =
     is-equiv-htpy-eq-hom-Undirected-Graph f g
 
   eq-htpy-hom-Undirected-Graph :
-    (f g : hom-Undirected-Graph G H) → htpy-hom-Undirected-Graph f g → Id f g
+    (f g : hom-Undirected-Graph G H) → htpy-hom-Undirected-Graph f g → f ＝ g
   eq-htpy-hom-Undirected-Graph f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Undirected-Graph f g)
 ```

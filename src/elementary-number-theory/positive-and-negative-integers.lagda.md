@@ -175,10 +175,11 @@ is-negative-pred-is-nonpositive-ℤ {inr (inl x)} H = H
 #### The negative of a nonnegative integer is nonpositive
 
 ```agda
-is-nonpositive-neg-is-nonnegative-ℤ :
-  {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
-is-nonpositive-neg-is-nonnegative-ℤ {inr (inl x)} H = H
-is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
+abstract
+  is-nonpositive-neg-is-nonnegative-ℤ :
+    {x : ℤ} → is-nonnegative-ℤ x → is-nonpositive-ℤ (neg-ℤ x)
+  is-nonpositive-neg-is-nonnegative-ℤ {inr (inl x)} H = H
+  is-nonpositive-neg-is-nonnegative-ℤ {inr (inr x)} H = H
 
 neg-nonnegative-ℤ : nonnegative-ℤ → nonpositive-ℤ
 neg-nonnegative-ℤ (x , H) = neg-ℤ x , is-nonpositive-neg-is-nonnegative-ℤ H

@@ -25,8 +25,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed map from a pointed type `A` to a pointed type `B` is a base point
-preserving function from `A` to `B`.
+A {{#concept "pointed map" Agda=pointed-map}} from a
+[pointed type](structured-types.pointed-types.md) `A` to a pointed type `B` is a
+base point preserving function from `A` to `B`.
 
 The type `A →∗ B` of pointed maps from `A` to `B` is itself pointed by the
 [constant pointed map](structured-types.constant-pointed-maps.md).

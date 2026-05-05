@@ -10,6 +10,7 @@ module foundation.choice-of-representatives-equivalence-relation where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -83,10 +84,8 @@ module _
       fundamental-theorem-id
         ( is-contr-equiv
           ( Σ A (λ x → P x × sim-equivalence-relation R a x))
-          ( ( associative-Σ A P (λ z → sim-equivalence-relation R a (pr1 z))) ∘e
-            ( equiv-tot
-              ( λ t →
-                is-effective-class R a (pr1 t))))
+          ( ( associative-Σ) ∘e
+            ( equiv-tot (λ t → is-effective-class R a (pr1 t))))
           ( H a))
         ( λ y →
           ap (class-representatives H) {pair a p} {y})

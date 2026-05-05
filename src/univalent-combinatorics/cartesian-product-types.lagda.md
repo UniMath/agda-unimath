@@ -14,7 +14,9 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -56,7 +58,7 @@ product-Fin zero-ℕ l = left-absorption-product (Fin l)
 product-Fin (succ-ℕ k) l =
   ( ( compute-coproduct-Fin (k *ℕ l) l) ∘e
     ( equiv-coproduct (product-Fin k l) left-unit-law-product)) ∘e
-  ( right-distributive-product-coproduct (Fin k) unit (Fin l))
+  ( right-distributive-product-coproduct)
 
 Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
 Fin-mul-ℕ k l = inv-equiv (product-Fin k l)
@@ -79,12 +81,12 @@ abstract
 
 equiv-left-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (y : Y) →
-  (Σ (X × Y) (λ t → Id (pr2 t) y)) ≃ X
+  (Σ (X × Y) (λ t → pr2 t ＝ y)) ≃ X
 equiv-left-factor {l1} {l2} {X} {Y} y =
   ( ( right-unit-law-product) ∘e
     ( equiv-tot
       ( λ x → equiv-is-contr (is-torsorial-Id' y) is-contr-unit))) ∘e
-  ( associative-Σ X (λ x → Y) (λ t → Id (pr2 t) y))
+  ( associative-Σ)
 
 count-left-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → Y → count X
@@ -111,10 +113,9 @@ abstract
   product-number-of-elements-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
     (a : A) (b : B) →
-    Id
-      ( ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
-        ( number-of-elements-count (count-right-factor count-AB a)))
-      ( number-of-elements-count count-AB)
+    ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
+    ( number-of-elements-count (count-right-factor count-AB a)) ＝
+    ( number-of-elements-count count-AB)
   product-number-of-elements-product count-AB a b =
     ( inv
       ( number-of-elements-count-product

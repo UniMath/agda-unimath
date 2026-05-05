@@ -9,9 +9,11 @@ module trees.w-type-of-propositions where
 ```agda
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -24,8 +26,9 @@ open import trees.w-types
 
 ## Idea
 
-The W-type of the type of propositions is defined using the type of propositions
-and the canonical type family over it.
+The {{#concept "W-type of the type of propositions" Agda=𝕎-Prop}} is defined
+using the type of [propositions](foundation-core.propositions.md) and the
+canonical type family over it.
 
 ## Definition
 

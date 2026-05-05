@@ -167,8 +167,6 @@ module _
             ( horizontal-map-span-cocone-cofork a)
             ( cocone-codiagonal-cofork a e))
           ( right-distributive-Σ-coproduct
-            ( domain-double-arrow a)
-            ( domain-double-arrow a)
             ( ( P) ∘
               ( horizontal-map-cocone-cofork a e) ∘
               ( vertical-map-span-cocone-cofork a)))

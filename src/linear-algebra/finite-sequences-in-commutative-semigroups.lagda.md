@@ -86,10 +86,12 @@ module _
 
   associative-add-fin-sequence-type-Commutative-Semigroup :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Commutative-Semigroup M n) →
-    ( add-fin-sequence-type-Commutative-Semigroup n
-      ( add-fin-sequence-type-Commutative-Semigroup n v1 v2) v3) ＝
-    ( add-fin-sequence-type-Commutative-Semigroup n v1
-      ( add-fin-sequence-type-Commutative-Semigroup n v2 v3))
+    add-fin-sequence-type-Commutative-Semigroup n
+      ( add-fin-sequence-type-Commutative-Semigroup n v1 v2)
+      ( v3) ＝
+    add-fin-sequence-type-Commutative-Semigroup n
+      ( v1)
+      ( add-fin-sequence-type-Commutative-Semigroup n v2 v3)
   associative-add-fin-sequence-type-Commutative-Semigroup =
     associative-add-fin-sequence-type-Semigroup
       ( semigroup-Commutative-Semigroup M)

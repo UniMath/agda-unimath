@@ -9,6 +9,7 @@ module group-theory.isomorphisms-monoids where
 ```agda
 open import category-theory.isomorphisms-in-large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -191,7 +192,7 @@ module _
 
 An equality between objects `x y : A` gives rise to an isomorphism between them.
 This is because by the J-rule, it is enough to construct an isomorphism given
-`refl : Id x x`, from `x` to itself. We take the identity morphism as such an
+`refl : x ＝ x`, from `x` to itself. We take the identity morphism as such an
 isomorphism.
 
 ```agda

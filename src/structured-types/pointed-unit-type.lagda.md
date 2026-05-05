@@ -21,14 +21,14 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The pointed unit type is the initial pointed type.
+The {{#concept "pointed unit type" Agda=unit-Pointed-Type}} is the initial
+pointed type.
 
 ## Definition
 
 ```agda
 unit-Pointed-Type : Pointed-Type lzero
-pr1 unit-Pointed-Type = unit
-pr2 unit-Pointed-Type = star
+unit-Pointed-Type = (unit , star)
 ```
 
 ## Properties
@@ -47,8 +47,7 @@ module _
     map-pointed-map {A = X} {B = unit-Pointed-Type}
       terminal-pointed-map
 
-  inclusion-point-Pointed-Type :
-    unit-Pointed-Type →∗ X
+  inclusion-point-Pointed-Type : unit-Pointed-Type →∗ X
   pr1 inclusion-point-Pointed-Type = point (point-Pointed-Type X)
   pr2 inclusion-point-Pointed-Type = refl
 

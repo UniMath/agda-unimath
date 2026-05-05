@@ -10,6 +10,7 @@ module order-theory.decidable-subpreorders where
 open import foundation.binary-relations
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -41,7 +42,7 @@ module _
     type-Subpreorder P (subtype-decidable-subtype S)
 
   eq-type-Decidable-Subpreorder :
-    (x y : type-Decidable-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+    (x y : type-Decidable-Subpreorder) → pr1 x ＝ pr1 y → x ＝ y
   eq-type-Decidable-Subpreorder =
     eq-type-Subpreorder P (subtype-decidable-subtype S)
 

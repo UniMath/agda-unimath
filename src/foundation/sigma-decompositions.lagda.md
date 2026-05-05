@@ -11,8 +11,10 @@ module foundation.sigma-decompositions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
@@ -785,7 +787,7 @@ module _
       ≃ Σ ( Σ U V) (λ uv → Y ((map-inv-equiv f) uv))
         by inv-equiv ( equiv-Σ-equiv-base Y (inv-equiv f))
       ≃ Σ U ( λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
-        by associative-Σ U V (λ uv → Y (map-inv-equiv f uv))
+        by associative-Σ
 
   map-displayed-fibered-Σ-Decomposition :
     displayed-Σ-Decomposition l4 (l3 ⊔ l5) l5 l3 A
@@ -822,12 +824,10 @@ module _
   matching-correspondence-inv-displayed-fibered-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ M N by s
-      ≃ Σ M (λ m → Σ (P m) (Q m)) by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
+      ≃ Σ M (λ m → Σ (P m) (Q m))
+      by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
       ≃ Σ (Σ M P) (λ (m , p) → Q m p)
       by inv-associative-Σ
-        ( M)
-        ( λ z → P z)
-        ( λ z → Q (pr1 z) (pr2 z))
 
   map-inv-displayed-fibered-Σ-Decomposition :
     fibered-Σ-Decomposition (l2 ⊔ l4) l5 l2 l4 A
@@ -929,14 +929,14 @@ module _
       ( ap
         ( λ f → map-equiv (equiv-tot (inv-equiv ∘ t)) f)
         ( map-inv-eq-transpose-equiv
-          ( associative-Σ M P Y)
+          ( associative-Σ)
           ( inv
             ( map-eq-transpose-equiv
               ( equiv-Σ-equiv-base Y (inv-equiv id-equiv))
               ( inv
                 ( map-eq-transpose-equiv
-                  ( associative-Σ M P Y)
-                  ( is-section-map-inv-associative-Σ M P Y
+                  ( associative-Σ)
+                  ( is-section-map-inv-associative-Σ
                     ( map-equiv (equiv-tot t ∘e s) x)))))))) ∙
       ( inv
         ( preserves-comp-tot

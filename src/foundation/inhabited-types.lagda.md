@@ -7,11 +7,10 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
-open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
@@ -20,9 +19,9 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.subuniverse-of-contractible-types
 open import foundation-core.torsorial-type-families
 ```
 
@@ -174,13 +173,9 @@ is-inhabited-Σ :
   {l1 l2 : Level} {X : UU l1} {Y : X → UU l2} →
   is-inhabited X → ((x : X) → is-inhabited (Y x)) → is-inhabited (Σ X Y)
 is-inhabited-Σ {l1} {l2} {X} {Y} H K =
-  apply-universal-property-trunc-Prop H
+  apply-twice-universal-property-trunc-Prop' H K
     ( is-inhabited-Prop (Σ X Y))
-    ( λ x →
-      apply-universal-property-trunc-Prop
-        ( K x)
-        ( is-inhabited-Prop (Σ X Y))
-        ( λ y → unit-trunc-Prop (x , y)))
+    ( λ x y → unit-trunc-Prop (x , y))
 
 Σ-Inhabited-Type :
   {l1 l2 : Level} (X : Inhabited-Type l1)

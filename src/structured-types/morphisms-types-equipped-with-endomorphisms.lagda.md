@@ -10,7 +10,9 @@ module structured-types.morphisms-types-equipped-with-endomorphisms where
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -30,9 +32,10 @@ open import structured-types.types-equipped-with-endomorphisms
 
 Consider two
 [types equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
-`(X,f)` and `(Y,g)`. A **morphism** from `(X,f)` to `(Y,g)` consists of a map
-`h : X → Y` equipped with a [homotopy](foundation-core.homotopies.md) witnessing
-that the square
+`(X, f)` and `(Y, g)`. A
+{{#concept "morphism" Disambiguation="types equipped with an endomorphism" Agda=hom-Type-With-Endomorphism}}
+from `(X, f)` to `(Y, g)` consists of a map `h : X → Y` equipped with a
+[homotopy](foundation-core.homotopies.md) witnessing that the square
 
 ```text
       h

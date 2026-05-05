@@ -24,6 +24,7 @@ open import structured-types.dependent-products-wild-monoids public
 open import structured-types.dependent-types-equipped-with-automorphisms public
 open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
+open import structured-types.equivalences-retractive-types public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.faithful-pointed-maps public
@@ -44,6 +45,7 @@ open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
 open import structured-types.morphisms-pointed-arrows public
+open import structured-types.morphisms-retractive-types public
 open import structured-types.morphisms-twisted-pointed-arrows public
 open import structured-types.morphisms-types-equipped-with-automorphisms public
 open import structured-types.morphisms-types-equipped-with-endomorphisms public
@@ -63,6 +65,7 @@ open import structured-types.pointed-retractions public
 open import structured-types.pointed-sections public
 open import structured-types.pointed-span-diagrams public
 open import structured-types.pointed-spans public
+open import structured-types.pointed-type-duality public
 open import structured-types.pointed-types public
 open import structured-types.pointed-types-equipped-with-automorphisms public
 open import structured-types.pointed-unit-type public
@@ -70,6 +73,7 @@ open import structured-types.pointed-universal-property-contractible-types publi
 open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
 open import structured-types.product-magmas public
+open import structured-types.retractive-types public
 open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.small-pointed-types public
 open import structured-types.symmetric-elements-involutive-types public

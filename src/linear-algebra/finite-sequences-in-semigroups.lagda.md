@@ -78,12 +78,12 @@ module _
 
   associative-add-fin-sequence-type-Semigroup :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Semigroup G n) →
-    ( add-fin-sequence-type-Semigroup n
+    add-fin-sequence-type-Semigroup n
       ( add-fin-sequence-type-Semigroup n v1 v2)
-      ( v3)) ＝
-    ( add-fin-sequence-type-Semigroup n
+      ( v3) ＝
+    add-fin-sequence-type-Semigroup n
       ( v1)
-      ( add-fin-sequence-type-Semigroup n v2 v3))
+      ( add-fin-sequence-type-Semigroup n v2 v3)
   associative-add-fin-sequence-type-Semigroup n v1 v2 v3 =
     eq-htpy (λ i → associative-mul-Semigroup G (v1 i) (v2 i) (v3 i))
 

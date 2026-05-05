@@ -138,7 +138,7 @@ module _
                       ( ( equiv-tot
                             ( λ Y →
                               equiv-postcomp-equiv
-                                ( right-distributive-Σ-coproduct A B Y)
+                                ( right-distributive-Σ-coproduct Y)
                                 ( X))) ∘e
                           ( left-unit-law-Σ-is-contr
                               ( is-torsorial-equiv' (A + B))

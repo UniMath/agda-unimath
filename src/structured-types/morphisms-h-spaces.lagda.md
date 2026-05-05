@@ -150,7 +150,7 @@ module _
 
   preserves-left-unit-law-mul :
     ((x : type-Pointed-Type A) → μ (point-Pointed-Type A) x ＝ x) →
-    ((y : type-Pointed-Type B) → Id (ν (point-Pointed-Type B) y) y) →
+    ((y : type-Pointed-Type B) → ν (point-Pointed-Type B) y ＝ y) →
     UU (l1 ⊔ l2)
   preserves-left-unit-law-mul lA lB =
     (x : type-Pointed-Type A) →
@@ -317,5 +317,5 @@ preserves-mul-htpy :
   {f g : A → B} (μf : preserves-mul μA μB f) (μg : preserves-mul μA μB g) →
   (f ~ g) → UU (l1 ⊔ l2)
 preserves-mul-htpy {A = A} μA μB μf μg H =
-  (a b : A) → Id (μf ∙ ap-binary μB (H a) (H b)) (H (μA a b) ∙ μg)
+  (a b : A) → μf ∙ ap-binary μB (H a) (H b) ＝ H (μA a b) ∙ μg
 ```

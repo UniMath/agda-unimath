@@ -11,8 +11,11 @@ module foundation.binary-functoriality-set-quotients where
 ```agda
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences-contractible-types
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-set-quotients
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -364,7 +367,7 @@ module _
               ( map-hom-binary-hom-equivalence-relation R S T f))
             ( h ∘ map-reflecting-map-equivalence-relation R qR))) ∘e
         ( ( inv-equiv
-            ( equiv-postcomp-extension-surjection
+            ( equiv-postcomp-extension-map-surjection
               ( map-reflecting-map-equivalence-relation R qR ,
                 is-surjective-is-set-quotient R QR qR UqR)
               ( ( quotient-map-hom-equivalence-relation S T) ∘

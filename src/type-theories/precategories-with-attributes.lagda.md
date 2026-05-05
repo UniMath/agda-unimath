@@ -10,7 +10,6 @@ module type-theories.precategories-with-attributes where
 open import category-theory.commuting-squares-of-morphisms-in-precategories
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
-open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
 open import category-theory.presheaf-categories
@@ -18,15 +17,10 @@ open import category-theory.pullbacks-in-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.category-of-sets
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -34,7 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **precategory with attributes** consists of:
+A {{#concept "precategory with attributes" Agda=Precategory-With-Attributes}}
+consists of:
 
 - a [precategory](category-theory.precategories.md) `C`, which we think of as a
   category of contexts and context morphisms
@@ -49,7 +44,7 @@ A **precategory with attributes** consists of:
   [pullback](category-theory.pullbacks-in-precategories.md) squares
 
 This is a reformulation of Definition 1, slide 24 of
-<https://staff.math.su.se/palmgren/ErikP_Variants_CWF.pdf>
+{{#cite Palmgren14VariantsCwF}}.
 
 ```agda
 record
@@ -218,3 +213,7 @@ The terms are defined as sections to `ext`.
           ( comp-hom-Precategory ctx-category s σ)
           ( sq))
 ```
+
+## References
+
+{{#bibliography}}

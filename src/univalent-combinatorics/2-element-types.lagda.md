@@ -18,9 +18,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -36,7 +39,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
 open import foundation.torsorial-type-families
@@ -48,6 +50,8 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
@@ -784,7 +788,7 @@ is-coproduct-Σ-Fin-2 P =
   ( equiv-coproduct
     ( left-unit-law-Σ-is-contr is-contr-Fin-1 (zero-Fin 0))
     ( left-unit-law-Σ (P ∘ inr))) ∘e
-  ( right-distributive-Σ-coproduct (Fin 1) unit P)
+  ( right-distributive-Σ-coproduct P)
 ```
 
 ### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`

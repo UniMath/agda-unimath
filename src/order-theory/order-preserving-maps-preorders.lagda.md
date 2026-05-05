@@ -8,6 +8,7 @@ module order-theory.order-preserving-maps-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -104,7 +105,7 @@ module _
   refl-htpy-hom-Preorder f = refl-htpy
 
   htpy-eq-hom-Preorder :
-    (f g : hom-Preorder P Q) → Id f g → htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → f ＝ g → htpy-hom-Preorder f g
   htpy-eq-hom-Preorder f .f refl = refl-htpy-hom-Preorder f
 
   is-torsorial-htpy-hom-Preorder :
@@ -125,12 +126,12 @@ module _
       ( htpy-eq-hom-Preorder f)
 
   extensionality-hom-Preorder :
-    (f g : hom-Preorder P Q) → Id f g ≃ htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → (f ＝ g) ≃ htpy-hom-Preorder f g
   pr1 (extensionality-hom-Preorder f g) = htpy-eq-hom-Preorder f g
   pr2 (extensionality-hom-Preorder f g) = is-equiv-htpy-eq-hom-Preorder f g
 
   eq-htpy-hom-Preorder :
-    (f g : hom-Preorder P Q) → htpy-hom-Preorder f g → Id f g
+    (f g : hom-Preorder P Q) → htpy-hom-Preorder f g → f ＝ g
   eq-htpy-hom-Preorder f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Preorder f g)
 ```
@@ -187,7 +188,7 @@ module _
 
   left-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
+    comp-hom-Preorder P Q Q (id-hom-Preorder Q) f ＝ f
   left-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f)
@@ -196,7 +197,7 @@ module _
 
   right-unit-law-comp-hom-Preorder :
     (f : hom-Preorder P Q) →
-    Id (comp-hom-Preorder P P Q f (id-hom-Preorder P)) f
+    comp-hom-Preorder P P Q f (id-hom-Preorder P) ＝ f
   right-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
       ( comp-hom-Preorder P P Q f (id-hom-Preorder P))

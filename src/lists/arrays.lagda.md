@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -35,9 +36,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An array is a pair of a natural number `n`, and a
-[finite sequence](lists.finite-sequences.md) of elements of the type `A`. We
-show that arrays and lists are equivalent.
+An
+{{#concept "array" WD="array data type" WDID=Q121079 WD="list" WDID=Q27948 Agda=array}}
+is a [pair](foundation.dependent-pair-types.md) of a
+[natural number](elementary-number-theory.natural-numbers.md) `n`, and a length
+`n` [finite sequence](lists.finite-sequences.md) of elements of a type. We show
+that arrays and [lists](lists.lists.md) are
+[equivalent](foundation-core.equivalences.md).
+
+## Definitions
 
 ```agda
 array : {l : Level} → UU l → UU l

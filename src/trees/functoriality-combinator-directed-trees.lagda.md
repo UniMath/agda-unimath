@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -28,15 +29,17 @@ open import trees.rooted-morphisms-directed-trees
 
 ## Idea
 
-Given a family of rooted morphisms `fᵢ : Sᵢ → Tᵢ` of directed trees, we obtain a
-morphism
+Given a family of [rooted morphisms](trees.rooted-morphisms-directed-trees.md)
+`fᵢ : Sᵢ → Tᵢ` of [directed trees](trees.directed-trees.md), we obtain a
+[morphism](trees.morphisms-directed-trees.md)
 
 ```text
   combinator f : combinator S → combinator T
 ```
 
-of directed trees. Furthermore, `f` is a family of equivalences of directed
-trees if and only if `combinator f` is an equivalence.
+of directed trees. Furthermore, `f` is a family of
+[equivalences](trees.equivalences-directed-trees.md) of directed trees if and
+only if `combinator f` is an equivalence.
 
 ## Definitions
 

@@ -9,6 +9,8 @@ module group-theory.loop-groups-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -44,7 +46,7 @@ module _
   where
 
   type-loop-Set : UU (lsuc l)
-  type-loop-Set = Id (type-Set X) (type-Set X)
+  type-loop-Set = type-Set X ＝ type-Set X
 
   is-set-type-loop-Set : is-set type-loop-Set
   is-set-type-loop-Set =
@@ -93,16 +95,16 @@ module _
 
   map-hom-symmetric-group-loop-group-Set :
     (X Y : Set l) →
-    Id (type-Set X) (type-Set Y) → (type-Set Y) ≃ (type-Set X)
+    type-Set X ＝ type-Set Y → (type-Set Y) ≃ (type-Set X)
   map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
 
   map-hom-inv-symmetric-group-loop-group-Set :
     (X Y : Set l) →
-    (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
+    (type-Set X) ≃ (type-Set Y) → type-Set Y ＝ type-Set X
   map-hom-inv-symmetric-group-loop-group-Set X Y f = inv (eq-equiv f)
 
   commutative-inv-map-hom-symmetric-group-loop-group-Set :
-    (X Y : UU l) (p : Id X Y) (sX : is-set X) (sY : is-set Y) →
+    (X Y : UU l) (p : X ＝ Y) (sX : is-set X) (sY : is-set Y) →
     Id
       ( map-hom-symmetric-group-loop-group-Set (Y , sY) (X , sX) (inv p))
       ( inv-equiv

@@ -20,10 +20,7 @@ open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import logic.functoriality-existential-quantification
 
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.images-isometries-metric-spaces

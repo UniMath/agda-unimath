@@ -9,12 +9,14 @@ module foundation-core.propositional-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
@@ -128,4 +130,11 @@ module _
   fiber-emb-Prop' : A ↪ B → B → Prop (l1 ⊔ l2)
   pr1 (fiber-emb-Prop' f y) = fiber' (map-emb f) y
   pr2 (fiber-emb-Prop' f y) = is-prop-map-emb' f y
+```
+
+### The identity function is propositional
+
+```agda
+is-prop-map-id : {l : Level} {X : UU l} → is-prop-map (id' X)
+is-prop-map-id = is-prop-map-is-emb is-emb-id
 ```

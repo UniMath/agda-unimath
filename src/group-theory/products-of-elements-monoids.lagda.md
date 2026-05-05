@@ -47,9 +47,8 @@ module _
 
   distributive-mul-concat-list-Monoid :
     (l1 l2 : list (type-Monoid M)) →
-    Id
-      ( mul-list-Monoid M (concat-list l1 l2))
-      ( mul-Monoid M (mul-list-Monoid M l1) (mul-list-Monoid M l2))
+    mul-list-Monoid M (concat-list l1 l2) ＝
+    mul-Monoid M (mul-list-Monoid M l1) (mul-list-Monoid M l2)
   distributive-mul-concat-list-Monoid nil l2 =
     inv (left-unit-law-mul-Monoid M (mul-list-Monoid M l2))
   distributive-mul-concat-list-Monoid (cons x l1) l2 =

@@ -122,8 +122,8 @@ commutative-mul-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
 left-distributive-mul-add-fraction-ℤ :
   (x y z : fraction-ℤ) →
   sim-fraction-ℤ
-    (mul-fraction-ℤ x (add-fraction-ℤ y z))
-    (add-fraction-ℤ (mul-fraction-ℤ x y) (mul-fraction-ℤ x z))
+    ( mul-fraction-ℤ x (add-fraction-ℤ y z))
+    ( add-fraction-ℤ (mul-fraction-ℤ x y) (mul-fraction-ℤ x z))
 left-distributive-mul-add-fraction-ℤ
   (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
     ( ap

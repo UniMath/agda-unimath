@@ -9,6 +9,7 @@ module species.cauchy-series-species-of-types-in-subuniverses where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
@@ -63,7 +64,7 @@ module _
     cauchy-series-species-subuniverse ≃
     cauchy-series-species-types (Σ-extension-species-subuniverse P Q S) X
   equiv-cauchy-series-Σ-extension-species-subuniverse =
-    (equiv-tot (λ U → inv-associative-Σ _ _ _)) ∘e (associative-Σ _ _ _)
+    (equiv-tot (λ U → inv-associative-Σ)) ∘e (associative-Σ)
 ```
 
 ### Equivalences

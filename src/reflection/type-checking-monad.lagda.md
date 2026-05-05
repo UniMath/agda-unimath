@@ -12,12 +12,13 @@ module reflection.type-checking-monad where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.booleans
+open import foundation-core.cartesian-product-types
+open import foundation-core.identity-types
 
 open import lists.lists
 
@@ -36,7 +37,7 @@ open import reflection.terms
 
 The type-checking monad `type-Type-Checker` allows us to interact directly with
 Agda's type checking mechanism. Additionally to primitives (see below), Agda
-includes the the keyword `unquote` to manually unquote an element from
+includes the keyword `unquote` to manually unquote an element from
 `type-Type-Checker unit`.
 
 ## Definitions
@@ -331,10 +332,10 @@ example was adapted from
               nil)))
 
   module _ (a b : ℕ) (p : a ＝ b) where
-    ex3 : Id a b
+    ex3 : a ＝ b
     ex3 = try-path! p
 
-    ex4 : Id b a
+    ex4 : b ＝ a
     ex4 = try-path! p
 ```
 

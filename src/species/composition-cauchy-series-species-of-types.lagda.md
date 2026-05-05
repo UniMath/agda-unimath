@@ -66,7 +66,7 @@ module _
     ( equiv-tot
       ( λ U →
         ( equiv-product-right inv-distributive-Π-Σ) ∘e
-        ( inv-equiv left-distributive-product-Σ) ∘e
+        ( inv-left-distributive-product-Σ) ∘e
           ( equiv-tot
             ( λ V →
               ( equiv-product-right

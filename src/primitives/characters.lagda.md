@@ -9,16 +9,19 @@ module primitives.characters where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.universe-levels
+
+open import foundation-core.booleans
 ```
 
 </details>
 
 ## Idea
 
-The `Char` type represents a character. Agda provides primitive functions to
-manipulate them. Characters are written between single quotes, e.g. `'a'`.
+The `Char` type represents a
+{{#concept "character" WD="character" WDID=Q3241972 Agda=Char}}. Agda provides
+primitive functions to manipulate them. Characters are written between single
+quotes, e.g. `'a'`.
 
 ## Definitions
 

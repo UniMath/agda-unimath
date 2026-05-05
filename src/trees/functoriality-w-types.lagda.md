@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -34,8 +35,8 @@ open import trees.w-types
 
 ## Idea
 
-The W-type constructor acts functorially on `A` and `B`. It is covariant in `A`,
-and contravariant in `B`.
+The [W-type](trees.w-types.md) constructor acts functorially on `A` and `B`. It
+is covariant in `A`, and contravariant in `B`.
 
 ## Definition
 
@@ -71,10 +72,7 @@ abstract
     (D : C → UU l4) (f : A → C) (e : (x : A) → B x ≃ D (f x)) →
     (y : 𝕎 C D) → fiber (map-𝕎 D f e) y ≃ fiber-map-𝕎 D f e y
   equiv-fiber-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
-    ( ( ( inv-equiv
-          ( associative-Σ A
-            ( λ a → f a ＝ c)
-            ( λ t → (d : D c) → fiber (map-𝕎 D f e) (γ d)))) ∘e
+    ( ( ( inv-associative-Σ) ∘e
         ( equiv-tot
           ( λ a →
             ( ( equiv-tot
@@ -110,9 +108,7 @@ abstract
                     ( f a)
                     ( ( map-𝕎 D f e) ∘
                       ( α ∘ map-inv-equiv (e a)))) (tree-𝕎 c γ)))))) ∘e
-      ( associative-Σ A
-        ( λ a → B a → 𝕎 A B)
-        ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ))) ∘e
+      ( associative-Σ)) ∘e
     ( equiv-Σ
       ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ)
       ( inv-equiv-structure-𝕎-Alg)

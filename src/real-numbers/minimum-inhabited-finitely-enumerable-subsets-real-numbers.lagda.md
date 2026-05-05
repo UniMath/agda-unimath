@@ -21,9 +21,6 @@ open import real-numbers.infima-families-real-numbers
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.maximum-inhabited-finitely-enumerable-subsets-real-numbers
 open import real-numbers.negation-real-numbers
-open import real-numbers.subsets-real-numbers
-
-open import univalent-combinatorics.finitely-enumerable-subtypes
 ```
 
 </details>

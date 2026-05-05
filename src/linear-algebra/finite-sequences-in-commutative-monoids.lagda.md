@@ -97,10 +97,12 @@ module _
 
   associative-add-fin-sequence-type-Commutative-Monoid :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Commutative-Monoid M n) →
-    ( add-fin-sequence-type-Commutative-Monoid n
-      ( add-fin-sequence-type-Commutative-Monoid n v1 v2) v3) ＝
-    ( add-fin-sequence-type-Commutative-Monoid n v1
-      ( add-fin-sequence-type-Commutative-Monoid n v2 v3))
+    add-fin-sequence-type-Commutative-Monoid n
+      ( add-fin-sequence-type-Commutative-Monoid n v1 v2)
+      ( v3) ＝
+    add-fin-sequence-type-Commutative-Monoid n
+      ( v1)
+      ( add-fin-sequence-type-Commutative-Monoid n v2 v3)
   associative-add-fin-sequence-type-Commutative-Monoid =
     associative-add-fin-sequence-type-Monoid (monoid-Commutative-Monoid M)
 

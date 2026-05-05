@@ -9,9 +9,12 @@ module trees.raising-universe-levels-directed-trees where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
-open import foundation.raising-universe-levels
+open import foundation.equivalences-contractible-types
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.raising-universe-levels-directed-graphs
@@ -25,7 +28,10 @@ open import trees.equivalences-directed-trees
 
 ## Idea
 
-We define the operation that raises the universe level of a directed tree.
+We define the operation that
+{{#concept "raises" Disambiguation="universe levels of directed trees" Agda=raise-Directed-Tree}}
+the [universe level](foundation.universe-levels.md) of a
+[directed tree](trees.directed-trees.md).
 
 ## Definitions
 

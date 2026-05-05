@@ -18,6 +18,7 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -25,23 +26,31 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-injective-type-families
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-maybe
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.injective-maps
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.preunivalent-type-families
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 
 open import structured-types.types-equipped-with-endomorphisms
 ```
@@ -210,8 +219,7 @@ is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
 
 ```agda
 skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
-skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+skip-zero-Fin = inr-Fin
 
 succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
@@ -500,6 +508,82 @@ pr2 (retraction-equiv-tr-Fin n m) = is-retraction-is-equivalence-injective-Fin
 is-preunivalent-Fin : is-preunivalent Fin
 is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
+```
+
+### The standard finite type `Fin n` is inhabited if and only if `n` is nonzero
+
+```agda
+abstract
+  is-inhabited-is-nonzero-Fin :
+    (n : ℕ) → is-nonzero-ℕ n → is-inhabited (Fin n)
+  is-inhabited-is-nonzero-Fin zero-ℕ n≠0 = ex-falso (n≠0 refl)
+  is-inhabited-is-nonzero-Fin (succ-ℕ n) _ = unit-trunc-Prop (neg-one-Fin n)
+
+  is-nonzero-is-inhabited-Fin :
+    (n : ℕ) → is-inhabited (Fin n) → is-nonzero-ℕ n
+  is-nonzero-is-inhabited-Fin _ H refl = rec-trunc-Prop empty-Prop (λ ()) H
+
+is-empty-is-zero-Fin : (n : ℕ) → is-zero-ℕ n → is-empty (Fin n)
+is-empty-is-zero-Fin _ refl ()
+```
+
+### The standard finite types are decidable
+
+```agda
+is-decidable-Fin : (n : ℕ) → is-decidable (Fin n)
+is-decidable-Fin zero-ℕ = inr (λ ())
+is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
+
+is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
+is-inhabited-or-empty-Fin n =
+  is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
+```
+
+### The complement of `-1` in `Fin (n + 1)` is equivalent to `Fin n`
+
+```agda
+module _
+  (n : ℕ)
+  where
+
+  map-compute-complement-neg-one-Fin :
+    Σ (Fin (succ-ℕ n)) (λ x → neg-one-Fin n ≠ x) → Fin n
+  map-compute-complement-neg-one-Fin (inl x , f) = x
+  map-compute-complement-neg-one-Fin (inr star , f) = ex-falso (f refl)
+
+  map-inv-compute-complement-neg-one-Fin :
+    Fin n → Σ (Fin (succ-ℕ n)) (λ x → neg-one-Fin n ≠ x)
+  map-inv-compute-complement-neg-one-Fin x =
+    ( inl x , is-empty-eq-coproduct-inr-inl star x)
+
+  is-section-map-compute-complement-neg-one-Fin :
+    is-section
+      map-compute-complement-neg-one-Fin
+      map-inv-compute-complement-neg-one-Fin
+  is-section-map-compute-complement-neg-one-Fin x = refl
+
+  is-retraction-map-compute-complement-neg-one-Fin :
+    is-retraction
+      map-compute-complement-neg-one-Fin
+      map-inv-compute-complement-neg-one-Fin
+  is-retraction-map-compute-complement-neg-one-Fin (inl x , f) =
+    eq-type-subtype (λ x → neg-type-Prop (_ ＝ x)) refl
+  is-retraction-map-compute-complement-neg-one-Fin (inr star , f) =
+    ex-falso (f refl)
+
+  is-equiv-compute-complement-neg-one-Fin :
+    is-equiv
+      map-compute-complement-neg-one-Fin
+  is-equiv-compute-complement-neg-one-Fin =
+    is-equiv-is-invertible
+      map-inv-compute-complement-neg-one-Fin
+      is-section-map-compute-complement-neg-one-Fin
+      is-retraction-map-compute-complement-neg-one-Fin
+
+  compute-complement-neg-one-Fin :
+    Σ (Fin (succ-ℕ n)) (λ x → neg-one-Fin n ≠ x) ≃ Fin n
+  pr1 compute-complement-neg-one-Fin = map-compute-complement-neg-one-Fin
+  pr2 compute-complement-neg-one-Fin = is-equiv-compute-complement-neg-one-Fin
 ```
 
 ## See also

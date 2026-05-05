@@ -12,6 +12,8 @@ module real-numbers.addition-lower-dedekind-real-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.negative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
@@ -19,26 +21,21 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.minkowski-multiplication-commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
-
-open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
@@ -112,7 +109,7 @@ module _
         (r , q<r , r<x+y) ← ∃r
         ((rx , ry) , (rx<x , ry<y , r=rx+ry)) ← r<x+y
         let
-          r-q⁺ = positive-diff-le-ℚ q r q<r
+          r-q⁺ = positive-diff-le-ℚ q<r
           ε⁺@(ε , _) = mediant-zero-ℚ⁺ r-q⁺
         intro-exists
           ( rx -ℚ ε , q -ℚ (rx -ℚ ε))
@@ -213,9 +210,7 @@ module _
   {l : Level} (x : lower-ℝ l)
   where
 
-  opaque
-    unfolding neg-ℚ
-
+  abstract
     right-unit-law-add-lower-ℝ : add-lower-ℝ x (lower-real-ℚ zero-ℚ) ＝ x
     right-unit-law-add-lower-ℝ =
       eq-sim-cut-lower-ℝ
@@ -231,8 +226,7 @@ module _
                   ( is-in-cut-diff-rational-ℚ⁺-lower-ℝ
                     ( x)
                     ( p)
-                    ( neg-ℚ q ,
-                      is-positive-le-zero-ℚ (neg-ℚ q) (neg-le-ℚ q zero-ℚ q<0))
+                    ( neg-ℚ⁻ (q , is-negative-le-zero-ℚ q<0))
                     ( p<x)))) ,
           (λ p p<x →
             elim-exists
@@ -241,12 +235,11 @@ module _
                 intro-exists
                   ( q , p -ℚ q)
                   ( q<x ,
-                    tr
-                      ( λ r → le-ℚ r zero-ℚ)
+                    binary-tr
+                      ( le-ℚ)
                       ( distributive-neg-diff-ℚ q p)
+                      ( neg-zero-ℚ)
                       ( neg-le-ℚ
-                        ( zero-ℚ)
-                        ( q -ℚ p)
                         ( backward-implication
                           ( iff-translate-diff-le-zero-ℚ p q)
                           ( p<q))) ,

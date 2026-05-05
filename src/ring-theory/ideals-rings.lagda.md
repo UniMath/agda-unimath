@@ -12,6 +12,7 @@ open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
@@ -38,7 +39,9 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-An **ideal** in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
+An
+{{#concept "ideal" Disambiguation="in a ring" WD="ideal" WDID=Q44649 Agda=ideal-Ring}}
+in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
 
 ## Definitions
 

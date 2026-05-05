@@ -12,6 +12,7 @@ open import foundation.coproduct-decompositions
 open import foundation.coproduct-decompositions-subuniverse
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
@@ -165,15 +166,15 @@ module _
                     P X d))))
         ( ( equiv-Σ
             ( _)
-            ( associative-product _ _ _ ∘e commutative-product)
+            ( associative-product ∘e commutative-product)
             ( λ x →
               equiv-postcomp-equiv
-                ( associative-coproduct ∘e commutative-coproduct _ _)
+                ( associative-coproduct ∘e commutative-coproduct)
                 ( inclusion-subuniverse P X))) ∘e
             ( equiv-ternary-left-iterated-coproduct-Decomposition-subuniverse
                 P X C2))
-        ( λ d → associative-product _ _ _)) ∘e
-      ( inv-associative-Σ _ _ _) ∘e
+        ( λ d → associative-product)) ∘e
+      ( inv-associative-Σ) ∘e
       ( equiv-tot (λ d → right-distributive-product-Σ))
 
     equiv-right-iterated-cauchy-product-species-subuniverse :
@@ -200,7 +201,7 @@ module _
         ( _)
         ( equiv-ternary-right-iterated-coproduct-Decomposition-subuniverse
             P X C2)) ∘e
-      ( inv-associative-Σ _ _ _) ∘e
+      ( inv-associative-Σ) ∘e
       ( equiv-tot (λ d → left-distributive-product-Σ))
 
     equiv-associative-cauchy-product-species-subuniverse :
@@ -324,7 +325,7 @@ module _
         P
         X
         C2)) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot (λ _ → commutative-product))
 
   equiv-left-unit-law-cauchy-product-species-subuniverse :

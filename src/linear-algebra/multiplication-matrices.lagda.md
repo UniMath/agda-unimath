@@ -43,11 +43,10 @@ mul-Mat mulK addK zero (v ∷ vs) m =
 mul-transpose :
   {l : Level} → {K : UU l} → {m n p : ℕ} →
   {addK : K → K → K} {mulK : K → K → K} {zero : K} →
-  ((x y : K) → Id (mulK x y) (mulK y x)) →
+  ((x y : K) → mulK x y ＝ mulK y x) →
   (a : Mat K m n) → (b : Mat K n p) →
-  Id
-    (transpose (mul-Mat mulK addK zero a b))
-    (mul-Mat mulK addK zero (transpose b) (transpose a))
+  transpose (mul-Mat mulK addK zero a b) ＝
+  mul-Mat mulK addK zero (transpose b) (transpose a)
 mul-transpose mulK-comm empty-tuple b = {!!}
 mul-transpose mulK-comm (a ∷ as) b = {!!}
 -}
@@ -71,15 +70,18 @@ module _
 
   left-distributive-tuple-matrix :
     {n m : ℕ} →
-    ({l : ℕ} →  Id (diagonal-product {n = l} zero)
-    (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
-    ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
-    ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
+    ( {l : ℕ} →
+      diagonal-product {n = l} zero ＝
+      add-tuple addK (diagonal-product zero) (diagonal-product zero)) →
+    ((x y z : K) → (mulK x (addK y z) ＝ addK (mulK x y) (mulK x z))) →
+    ((x y : K) → addK x y ＝ addK y x) →
+    ((x y z : K) → addK x (addK y z) ＝ addK (addK x y) z) →
     (a : tuple K n) (b : Mat K n m) (c : Mat K n m) →
-    Id (mul-tuple-matrix mulK addK zero a (add-Mat addK b c))
-      (add-tuple addK (mul-tuple-matrix mulK addK zero a b)
-                    (mul-tuple-matrix mulK addK zero a c))
+    ( mul-tuple-matrix mulK addK zero a (add-Mat addK b c)) ＝
+    ( add-tuple
+        ( addK)
+        ( mul-tuple-matrix mulK addK zero a b)
+        ( mul-tuple-matrix mulK addK zero a c))
   left-distributive-tuple-matrix id-tuple _ _ _ empty-tuple empty-tuple empty-tuple =
     id-tuple
   left-distributive-tuple-matrix
@@ -97,8 +99,8 @@ module _
     where
     lemma-shuffle : {n : ℕ} →
                     {x y z w : tuple K n} →
-                    Id (add-tuple addK (add-tuple addK x y) (add-tuple addK z w))
-                       (add-tuple addK (add-tuple addK x z) (add-tuple addK y w))
+                    add-tuple addK (add-tuple addK x y) (add-tuple addK z w) ＝
+                    add-tuple addK (add-tuple addK x z) (add-tuple addK y w)
     lemma-shuffle {x = x} {y = y} {z = z} {w = w} =
       associative-add-tuples {zero = zero} addK-associative (add-tuple addK x y) z w
         ∙ (commutative-add-tuples
@@ -119,16 +121,14 @@ module _
   left-distributive-matrices :
     {n m p : ℕ} →
     ({l : ℕ} →
-      Id
-        (diagonal-product {n = l} zero)
-        (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
-    ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
-    ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
+      diagonal-product {n = l} zero ＝
+      add-tuple addK (diagonal-product zero) (diagonal-product zero)) →
+    ((x y z : K) → mulK x (addK y z) ＝ addK (mulK x y) (mulK x z)) →
+    ((x y : K) → addK x y ＝ addK y x) →
+    ((x y z : K) → addK x (addK y z) = addK (addK x y) z) →
     (a : Mat K m n) (b : Mat K n p) (c : Mat K n p) →
-    Id (mul-Mat mulK addK zero a (add-Mat addK b c))
-       (add-Mat addK (mul-Mat mulK addK zero a b)
-                     (mul-Mat mulK addK zero a c))
+    ( mul-Mat mulK addK zero a (add-Mat addK b c)) ＝
+    ( add-Mat addK (mul-Mat mulK addK zero a b) (mul-Mat mulK addK zero a c))
   left-distributive-matrices _ _ _ _ empty-tuple _ _ = refl
   left-distributive-matrices id-tuple k-distr addK-comm addK-associative (a ∷ as) b c =
     (ap (λ r → r ∷ mul-Mat mulK addK zero as (add-Mat addK b c))
@@ -144,16 +144,14 @@ module _
   right-distributive-matrices :
     {n m p : ℕ} →
     ({l : ℕ} →
-      Id
-        (diagonal-product {n = l} zero)
-        (add-tuple addK (diagonal-product zero) (diagonal-product zero))) →
-    ((x y z : K) → (Id (mulK (addK x y) z) (addK (mulK x z) (mulK y z)))) →
-    ((x y : K) → Id (addK x y) (addK y x)) →
-    ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
+      diagonal-product {n = l} zero ＝
+      add-tuple addK (diagonal-product zero) (diagonal-product zero)) →
+    ((x y z : K) → mulK (addK x y) z ＝ addK (mulK x z) (mulK y z)) →
+    ((x y : K) → addK x y ＝ addK y x) →
+    ((x y z : K) → addK x (addK y z) ＝ addK (addK x y) z) →
     (b : Mat K n p) (c : Mat K n p) (d : Mat K p m) →
-    Id (mul-Mat mulK addK zero (add-Mat addK b c) d)
-       (add-Mat addK (mul-Mat mulK addK zero b d)
-                     (mul-Mat mulK addK zero c d))
+    mul-Mat mulK addK zero (add-Mat addK b c) d ＝
+    add-Mat addK (mul-Mat mulK addK zero b d) (mul-Mat mulK addK zero c d)
   right-distributive-matrices _ _ _ _ empty-tuple empty-tuple _ = refl
   right-distributive-matrices
     {p = .zero-ℕ}
@@ -166,11 +164,11 @@ module _
 
   TODO: associativity
   associative-mul-matrices :
-  {l : Level} {K : UU l} {n m p q : ℕ} →
-  {addK : K → K → K} {mulK : K → K → K} {zero : K} →
-  (x : Mat K m n) → (y : Mat K n p) → (z : Mat K p q) →
-  Id (mul-Mat mulK addK zero x (mul-Mat mulK addK zero y z))
-  (mul-Mat mulK addK zero (mul-Mat mulK addK zero x y) z)
+    {l : Level} {K : UU l} {n m p q : ℕ} →
+    {addK : K → K → K} {mulK : K → K → K} {zero : K} →
+    (x : Mat K m n) → (y : Mat K n p) → (z : Mat K p q) →
+    mul-Mat mulK addK zero x (mul-Mat mulK addK zero y z) ＝
+    mul-Mat mulK addK zero (mul-Mat mulK addK zero x y) z
   associative-mul-matrices x y z = {!!}
 -}
 ```

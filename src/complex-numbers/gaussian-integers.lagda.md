@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.difference-integers
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
@@ -33,9 +34,11 @@ open import ring-theory.rings
 
 ## Idea
 
-The {{#concept "Gaussian integers" WDID=Q724975 WD="Gaussian integer"}} are the
-[complex numbers](complex-numbers.complex-numbers.md) of the form `a + bi`,
-where `a` and `b` are [integers](elementary-number-theory.integers.md).
+The
+{{#concept "Gaussian integers" WDID=Q724975 WD="Gaussian integer" Agda=ℤ[i]}}
+are the [complex numbers](complex-numbers.complex-numbers.md) of the form
+`a + bi`, where `a` and `b` are
+[integers](elementary-number-theory.integers.md).
 
 ## Definition
 

@@ -73,10 +73,9 @@ abstract
     (d : is-decidable (is-inl-Fin l (map-emb f (inr star))))
     (x : Fin k) (e : is-decidable (is-inl-Fin l (map-emb f (inl x))))
     (x' : Fin k) (e' : is-decidable (is-inl-Fin l (map-emb f (inl x')))) →
-    Id
-      ( cases-map-reduce-emb-Fin k l f d x e)
-      ( cases-map-reduce-emb-Fin k l f d x' e') →
-    Id x x'
+    ( cases-map-reduce-emb-Fin k l f d x e ＝
+      cases-map-reduce-emb-Fin k l f d x' e') →
+    x ＝ x'
   is-injective-cases-map-reduce-emb-Fin k l f (inl (pair t q)) x e x' e' p =
     is-injective-inl
       ( is-injective-is-emb

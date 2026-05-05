@@ -7,6 +7,7 @@ module ring-theory.generating-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -19,10 +20,12 @@ open import ring-theory.rings
 
 ## Idea
 
-A **generating element** of a [ring](ring-theory.rings.md) `R` is an element `g`
-which is a [generating element](group-theory.generating-elements-groups.md) of
-the underlying additive [group](group-theory.groups.md) of `R`. That is, `g` is
-a generating element of a ring `R` if for every element `x : R` there exists an
+A
+{{#concept "generating element" Disambiguation="of a ring" Agda=is-generating-element-prop-Ring}}
+of a [ring](ring-theory.rings.md) `R` is an element `g` which is a
+[generating element](group-theory.generating-elements-groups.md) of the
+underlying additive [group](group-theory.groups.md) of `R`. That is, `g` is a
+generating element of a ring `R` if for every element `x : R` there exists an
 integer `k` such that `kg ＝ x`.
 
 ## Definitions

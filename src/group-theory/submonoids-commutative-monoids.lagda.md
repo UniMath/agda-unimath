@@ -8,6 +8,7 @@ module group-theory.submonoids-commutative-monoids where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
@@ -27,7 +28,10 @@ open import group-theory.subsets-commutative-monoids
 
 ## Idea
 
-A submonoid of a commutative monoid `M` is a subset of `M` that contains the
+A
+{{#concept "submonoid" Disambiguation="of a commutative monoid" Agda=Commutative-Submonoid}}
+of a [commutative monoid](group-theory.commutative-monoids.md) `M` is a
+[subset](group-theory.subsets-commutative-monoids.md) of `M` that contains the
 unit of `M` and is closed under multiplication.
 
 ## Definitions

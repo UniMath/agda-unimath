@@ -10,6 +10,8 @@ module foundation.propositional-truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.constant-type-families
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences-propositions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -68,8 +70,7 @@ trunc-Prop = trunc neg-one-𝕋
 
 **Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
 symbol `║` in the propositional truncation notation `║_║₋₁` can be inserted with
-`agda-input` using the escape sequence `\--=` and selecting the second item in
-the list.
+`agda-input` using the escape sequence `\--=2`.
 
 ## Properties
 
@@ -211,13 +212,21 @@ abstract
     map-universal-property-trunc-Prop P f t
 
 abstract
+  apply-twice-universal-property-trunc-Prop' :
+    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (u : ║ A ║₋₁)
+    (v : (a : A) → ║ B a ║₋₁) (P : Prop l3) →
+    ((a : A) → B a → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop' u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop (v x) P (f x))
+
+abstract
   apply-twice-universal-property-trunc-Prop :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : ║ A ║₋₁)
     (v : ║ B ║₋₁) (P : Prop l3) →
     (A → B → type-Prop P) → type-Prop P
-  apply-twice-universal-property-trunc-Prop u v P f =
-    apply-universal-property-trunc-Prop u P
-      ( λ x → apply-universal-property-trunc-Prop v P (f x))
+  apply-twice-universal-property-trunc-Prop u v =
+    apply-twice-universal-property-trunc-Prop' u (λ _ → v)
 
 abstract
   apply-three-times-universal-property-trunc-Prop :
@@ -467,14 +476,14 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
 
-## `do` syntax for propositional truncation { #do-syntax }
+## The `do` syntax for propositional truncation { #do-syntax }
 
-To prove a [proposition](foundation.propositions.md) `P` from a witness of a
+To prove a [proposition](foundation.propositions.md) `P` from a witness of the
 propositional truncation `trunc-Prop X`, we may assume an element of `X`, as
 demonstrated in `rec-trunc-Prop`.
 
 On occasion, it is convenient to use
-[Agda's `do` syntax](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
+[Agda's `do` notation](https://agda.readthedocs.io/en/latest/language/syntactic-sugar.html#do-notation)
 to express this operation, with the module
 
 ```agda
@@ -506,6 +515,12 @@ This syntax is particularly useful when we must assume elements from multiple
 propositional truncations, especially dependent ones, e.g.
 `witness-truncated-prop-Q p` above where the assumed element `p` was itself used
 to get a witness of `trunc-Prop Q`.
+
+## See also
+
+- In
+  [`foundation.propositional-truncation`](foundation.propositional-extensionality.md)
+  we show that `trunc-Prop` is a retraction.
 
 ## Table of files about propositional logic
 

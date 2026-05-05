@@ -9,6 +9,7 @@ module ring-theory.nilpotent-elements-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -25,8 +26,11 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A nilpotent element in a ring is an element `x` for which there is a natural
-number `n` such that `x^n = 0`.
+A
+{{#concept "nilpotent element" Disambiguation="in a ring" WD="nilpotent element" WDID=Q840023 Agda=is-nilpotent-element-Ring}}
+in a [ring](ring-theory.rings.md) is an element `x` for which there is a
+[natural number](elementary-number-theory.natural-numbers.md) `n` such that
+`xⁿ = 0`.
 
 ## Definition
 

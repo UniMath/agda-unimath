@@ -18,9 +18,14 @@ open import universal-algebra.signatures
 
 ## Idea
 
-An algebraic theory is a collection of abstract equations over a signature `σ`
-that we consider to 'hold' in the theory. It is algebraic in the sense that we
-only require equations involving function symbols from the signature, in
+An
+{{#concept "algebraic theory" Disambiguation="single-sorted, finitary" WD="algebraic theory" WDID=Q4724020 Agda=Algebraic-Theory}}
+is a [collection](foundation.dependent-pair-types.md) of
+[abstract equations](universal-algebra.abstract-equations-over-signatures.md)
+over a
+[single-sorted finitary algebraic signature](universal-algebra.signatures.md)
+`σ` that we consider to 'hold' in the theory. It is algebraic in the sense that
+we only require equations involving function symbols from the signature, in
 contrast to, say, requiring additional types of relations.
 
 ## Definitions
@@ -28,17 +33,17 @@ contrast to, say, requiring additional types of relations.
 ### Theories
 
 ```agda
+Algebraic-Theory : {l1 : Level} (l2 : Level) → signature l1 → UU (l1 ⊔ lsuc l2)
+Algebraic-Theory l2 σ = Σ (UU l2) (λ B → (B → abstract-equation σ))
+
 module _
-  {l1 : Level} (σ : signature l1)
+  {l1 l2 : Level} (σ : signature l1) (T : Algebraic-Theory l2 σ)
   where
 
-  Theory : (l2 : Level) → UU (l1 ⊔ lsuc l2)
-  Theory l2 = Σ (UU l2) (λ B → (B → Abstract-Equation σ))
+  index-Algebraic-Theory : UU l2
+  index-Algebraic-Theory = pr1 T
 
-  index-Theory : {l2 : Level} → Theory l2 → UU l2
-  index-Theory = pr1
-
-  index-Abstract-Equation-Theory :
-    {l2 : Level} (Th : Theory l2) → (index-Theory Th) → Abstract-Equation σ
-  index-Abstract-Equation-Theory Th e = pr2 Th e
+  index-abstract-equation-Algebraic-Theory :
+    index-Algebraic-Theory → abstract-equation σ
+  index-abstract-equation-Algebraic-Theory = pr2 T
 ```

@@ -187,10 +187,10 @@ module _
 
   associative-add-fin-sequence-type-Ring :
     (n : ℕ) (v1 v2 v3 : fin-sequence-type-Ring R n) →
-    ( add-fin-sequence-type-Ring R n
+    add-fin-sequence-type-Ring R n
       ( add-fin-sequence-type-Ring R n v1 v2)
-      ( v3)) ＝
-    ( add-fin-sequence-type-Ring R n v1 (add-fin-sequence-type-Ring R n v2 v3))
+      ( v3) ＝
+    add-fin-sequence-type-Ring R n v1 (add-fin-sequence-type-Ring R n v2 v3)
   associative-add-fin-sequence-type-Ring =
     associative-add-Ring ∘ function-Ring R ∘ Fin
 ```

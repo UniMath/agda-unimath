@@ -9,9 +9,11 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
@@ -161,7 +163,7 @@ In this composite, the injectivity of `equiv-eq` is used in the third step.
 ```agda
 module _
   {l : Level} (A : UU l)
-  (L : (a x y : A) → is-injective (equiv-eq {A = Id x y} {B = Id a y}))
+  (L : (a x y : A) → is-injective (equiv-eq {A = x ＝ y} {B = a ＝ y}))
   where
 
   injection-Id-is-injective-equiv-eq-Id :
@@ -206,7 +208,7 @@ is a proper embedding.
 ```agda
 module _
   {l : Level} (A : UU l)
-  (L : (a x y : A) → instance-preunivalence (Id x y) (Id a y))
+  (L : (a x y : A) → instance-preunivalence (x ＝ y) (a ＝ y))
   where
 
   emb-Id-is-injective-equiv-eq-Id : (a x : A) → (Id a ＝ Id x) ↪ (a ＝ x)
@@ -235,7 +237,7 @@ module _
   is-emb-Id-preunivalence-axiom : is-emb (Id {A = A})
   is-emb-Id-preunivalence-axiom =
     is-emb-Id-is-injective-equiv-eq-Id A
-      ( λ a x y → is-injective-is-emb (L (Id x y) (Id a y)))
+      ( λ a x y → is-injective-is-emb (L (x ＝ y) (a ＝ y)))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding
@@ -245,7 +247,7 @@ is-emb-Id : {l : Level} (A : UU l) → is-emb (Id {A = A})
 is-emb-Id = is-emb-Id-preunivalence-axiom preunivalence
 ```
 
-### Characteriation of equality of `Id`
+### Characterization of equality of `Id`
 
 ```agda
 equiv-Id :

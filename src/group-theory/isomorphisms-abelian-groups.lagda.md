@@ -10,7 +10,10 @@ module group-theory.isomorphisms-abelian-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -179,12 +182,12 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 
 ```agda
 iso-eq-Ab :
-  {l : Level} (A B : Ab l) → Id A B → iso-Ab A B
+  {l : Level} (A B : Ab l) → A ＝ B → iso-Ab A B
 iso-eq-Ab A B p = iso-eq-Group (group-Ab A) (group-Ab B) (ap pr1 p)
 
 abstract
   equiv-iso-eq-Ab' :
-    {l : Level} (A B : Ab l) → Id A B ≃ iso-Ab A B
+    {l : Level} (A B : Ab l) → (A ＝ B) ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
     ( equiv-ap-inclusion-subtype is-abelian-prop-Group {A} {B})
@@ -206,7 +209,7 @@ is-equiv-iso-eq-Ab A =
     ( iso-eq-Ab A)
 
 eq-iso-Ab :
-  {l : Level} (A B : Ab l) → iso-Ab A B → Id A B
+  {l : Level} (A B : Ab l) → iso-Ab A B → A ＝ B
 eq-iso-Ab A B = map-inv-is-equiv (is-equiv-iso-eq-Ab A B)
 ```
 

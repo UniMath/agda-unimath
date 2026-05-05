@@ -10,11 +10,12 @@ module reflection.group-solver where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.identity-types
 
 open import group-theory.groups
 
@@ -37,7 +38,7 @@ data Inductive-Fin : ℕ → UU lzero where
   zero-Inductive-Fin : {n : ℕ} → Inductive-Fin (succ-ℕ n)
   succ-Inductive-Fin : {n : ℕ} → Inductive-Fin n → Inductive-Fin (succ-ℕ n)
 
-finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (Id a b)
+finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (a ＝ b)
 finEq zero-Inductive-Fin zero-Inductive-Fin = inl refl
 finEq zero-Inductive-Fin (succ-Inductive-Fin b) = inr (λ ())
 finEq (succ-Inductive-Fin a) zero-Inductive-Fin = inr (λ ())

@@ -14,10 +14,13 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -39,6 +42,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 open import real-numbers.suprema-families-real-numbers
@@ -141,13 +145,13 @@ module _
           let open do-syntax-trunc-Prop empty-Prop
           in do
             (ε⁺@(ε , _) , ε<z-x) ←
-              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
             (i , yᵢ<x+ε) ←
               is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
             not-leq-le-ℝ (y i) z
               ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
                 ( le-transpose-right-diff-ℝ' _ z _
-                  ( le-real-is-in-lower-cut-ℚ ε (z -ℝ x) ε<z-x))
+                  ( le-real-is-in-lower-cut-ℝ (z -ℝ x) ε<z-x))
                 ( yᵢ<x+ε))
               ( z≤yᵢ i))
     pr2 (is-greatest-lower-bound-is-infimum-family-ℝ z) z≤x i =
@@ -211,6 +215,23 @@ module _
   has-infimum-subset-ℝ = type-Prop has-infimum-prop-subset-ℝ
 ```
 
+### A subset of real numbers with a supremum is inhabited
+
+```agda
+abstract
+  is-inhabited-has-infimum-subset-ℝ :
+    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-infimum-subset-ℝ S l3 →
+    is-inhabited-subtype S
+  is-inhabited-has-infimum-subset-ℝ S (s , is-inf-s) =
+    map-trunc-Prop
+      ( pr1)
+      ( is-approximated-above-is-infimum-family-ℝ
+        ( inclusion-subset-ℝ S)
+        ( s)
+        ( is-inf-s)
+        ( one-ℚ⁺))
+```
+
 ### A real number `r` is greater than the infimum of the `yᵢ` if and only if it is greater than some `yᵢ`
 
 ```agda
@@ -231,14 +252,14 @@ module _
     let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ (y i) z))
     in do
       (ε⁺@(ε , _) , ε<z-x) ←
-        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x z x<z)
+        exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ x<z)
       (i , yᵢ<x+ε) ←
         is-approximated-above-is-infimum-family-ℝ y x is-infimum-x-yᵢ ε⁺
       intro-exists
         ( i)
         ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
           ( le-transpose-right-diff-ℝ' _ z _
-            ( le-real-is-in-lower-cut-ℚ ε (z -ℝ x) ε<z-x))
+            ( le-real-is-in-lower-cut-ℝ (z -ℝ x) ε<z-x))
           ( yᵢ<x+ε))
 
   le-infimum-iff-le-element-family-ℝ :
@@ -265,7 +286,7 @@ module _
       tr
         ( leq-ℝ (neg-ℝ x))
         ( neg-neg-ℝ (y i))
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-upper-bound-is-supremum-family-ℝ
             ( neg-ℝ ∘ y)
             ( x)
@@ -280,7 +301,7 @@ module _
           binary-tr le-ℝ
             ( neg-neg-ℝ _)
             ( distributive-neg-diff-ℝ _ _ ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ (x -ℝ real-ℚ⁺ ε) (neg-ℝ (y i)) x-ε<-yᵢ))
+            ( neg-le-ℝ x-ε<-yᵢ))
         ( is-approximated-below-is-supremum-family-ℝ
           ( neg-ℝ ∘ y)
           ( x)
@@ -308,7 +329,7 @@ module _
       tr
         ( λ w → leq-ℝ w (neg-ℝ x))
         ( neg-neg-ℝ (y i))
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-lower-bound-is-infimum-family-ℝ
             ( neg-ℝ ∘ y)
             ( x)
@@ -323,7 +344,7 @@ module _
           binary-tr le-ℝ
             ( distributive-neg-add-ℝ _ _)
             ( neg-neg-ℝ (y i))
-            ( neg-le-ℝ (neg-ℝ (y i)) (x +ℝ real-ℚ⁺ ε) -yᵢ<x+ε))
+            ( neg-le-ℝ -yᵢ<x+ε))
         ( is-approximated-above-is-infimum-family-ℝ
           ( neg-ℝ ∘ y)
           ( x)
@@ -354,7 +375,7 @@ module _
       tr
         ( leq-ℝ (neg-ℝ x))
         ( neg-neg-ℝ s)
-        ( neg-leq-ℝ _ _
+        ( neg-leq-ℝ
           ( is-upper-bound-is-supremum-family-ℝ
             ( inclusion-subset-ℝ (neg-subset-ℝ S))
             ( x)
@@ -378,7 +399,7 @@ module _
             ( le-ℝ)
             ( refl)
             ( distributive-neg-diff-ℝ x (real-ℚ⁺ ε) ∙ commutative-add-ℝ _ _)
-            ( neg-le-ℝ _ _ x-ε<s))
+            ( neg-le-ℝ x-ε<s))
 
     is-infimum-neg-supremum-neg-subset-ℝ : is-infimum-subset-ℝ S (neg-ℝ x)
     is-infimum-neg-supremum-neg-subset-ℝ =

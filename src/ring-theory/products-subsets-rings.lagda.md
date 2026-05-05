@@ -22,7 +22,9 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-The **product** of two [subsets](ring-theory.subsets-rings.md) `S` and `T` of a
+The
+{{#concept "product" Disambiguation="of two subsets of a ring" Agda=product-subset-Ring}}
+of two [subsets](ring-theory.subsets-rings.md) `S` and `T` of a
 [ring](ring-theory.rings.md) `R` consists of elements of the form `st` where
 `s ∈ S` and `t ∈ T`.
 
@@ -181,3 +183,7 @@ module _
         forward-inclusion-associative-product-subset-Ring x ,
         backward-inclusion-associative-product-subset-Ring x)
 ```
+
+## See also
+
+- [Minkowski multiplication in monoids](group-theory.minkowski-multiplication-monoids.md).

@@ -54,9 +54,8 @@ module _
 
   associative-mul-product-Monoid :
     (x y z : type-product-Monoid) →
-    Id
-      ( mul-product-Monoid (mul-product-Monoid x y) z)
-      ( mul-product-Monoid x (mul-product-Monoid y z))
+    mul-product-Monoid (mul-product-Monoid x y) z ＝
+    mul-product-Monoid x (mul-product-Monoid y z)
   associative-mul-product-Monoid =
     associative-mul-Semigroup semigroup-product-Monoid
 
@@ -65,12 +64,12 @@ module _
   pr2 unit-product-Monoid = unit-Monoid N
 
   left-unit-law-mul-product-Monoid :
-    (x : type-product-Monoid) → Id (mul-product-Monoid unit-product-Monoid x) x
+    (x : type-product-Monoid) → mul-product-Monoid unit-product-Monoid x ＝ x
   left-unit-law-mul-product-Monoid (pair x y) =
     eq-pair (left-unit-law-mul-Monoid M x) (left-unit-law-mul-Monoid N y)
 
   right-unit-law-mul-product-Monoid :
-    (x : type-product-Monoid) → Id (mul-product-Monoid x unit-product-Monoid) x
+    (x : type-product-Monoid) → mul-product-Monoid x unit-product-Monoid ＝ x
   right-unit-law-mul-product-Monoid (pair x y) =
     eq-pair (right-unit-law-mul-Monoid M x) (right-unit-law-mul-Monoid N y)
 

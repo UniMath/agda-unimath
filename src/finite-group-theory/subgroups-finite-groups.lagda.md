@@ -12,6 +12,7 @@ open import finite-group-theory.finite-semigroups
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -35,7 +36,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite subgroup of a finite group `G` is a decidable subgroup of `G`.
+A
+{{#concept "finite subgroup" Disambiguation="of a finite group" Agda=Subgroup-Finite-Group}}
+of a [finite group](finite-group-theory.finite-groups.md) `G` is a
+[decidable subgroup](group-theory.decidable-subgroups.md) of `G`.
 
 ## Definitions
 

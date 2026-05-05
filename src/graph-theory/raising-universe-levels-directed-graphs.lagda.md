@@ -9,8 +9,9 @@ module graph-theory.raising-universe-levels-directed-graphs where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.raising-universe-levels
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-directed-graphs
@@ -21,7 +22,9 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-We **raise the universe levels** of
+We
+{{#concept "raise" Disambiguation="the universe levels of directed graphs" Agda=raise-Directed-Graph}}
+the [universe levels](foundation.universe-levels.md) of
 [directed graphs](graph-theory.directed-graphs.md) by
 [raising the universe levels](foundation.raising-universe-levels.md) of the
 vertices and the edges.

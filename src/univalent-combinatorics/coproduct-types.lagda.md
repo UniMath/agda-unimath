@@ -15,13 +15,12 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
@@ -199,7 +198,7 @@ count-Σ-coproduct :
   count (Σ A P) → count (Σ A Q) → count (Σ A (λ x → (P x) + (Q x)))
 pr1 (count-Σ-coproduct count-P count-Q) = pr1 (count-coproduct count-P count-Q)
 pr2 (count-Σ-coproduct count-P count-Q) =
-  ( inv-equiv (left-distributive-Σ-coproduct _ _ _)) ∘e
+  ( inv-left-distributive-Σ-coproduct) ∘e
   ( pr2 (count-coproduct count-P count-Q))
 ```
 
@@ -230,9 +229,8 @@ abstract
   double-counting-coproduct :
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
     ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
-    Id
-      ( number-of-elements-count count-C)
-      ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
+    number-of-elements-count count-C ＝
+    number-of-elements-count count-A +ℕ number-of-elements-count count-B
   double-counting-coproduct count-A count-B count-C =
     ( double-counting count-C (count-coproduct count-A count-B)) ∙
     ( number-of-elements-count-coproduct count-A count-B)
@@ -240,10 +238,9 @@ abstract
 abstract
   sum-number-of-elements-coproduct :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
-    Id
-      ( ( number-of-elements-count (count-left-summand e)) +ℕ
-        ( number-of-elements-count (count-right-summand e)))
-      ( number-of-elements-count e)
+    number-of-elements-count (count-left-summand e) +ℕ
+    number-of-elements-count (count-right-summand e) ＝
+    number-of-elements-count e
   sum-number-of-elements-coproduct e =
     ( inv
       ( number-of-elements-count-coproduct
@@ -310,9 +307,8 @@ pr2 (coproduct-Type-With-Cardinality-ℕ k l (pair X H) (pair Y K)) =
 
 coproduct-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
-    Id
-      ( (number-of-elements-is-finite P) +ℕ (number-of-elements-is-finite Q))
-      ( number-of-elements-is-finite (is-finite-coproduct P Q))
+    number-of-elements-is-finite P +ℕ number-of-elements-is-finite Q ＝
+    number-of-elements-is-finite (is-finite-coproduct P Q)
 coproduct-eq-is-finite {X = X} {Y = Y} P Q =
   ap
     ( number-of-elements-has-finite-cardinality)

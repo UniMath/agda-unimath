@@ -11,7 +11,10 @@ open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -227,11 +230,11 @@ module _
   {l : Level} (G : Group l)
   where
 
-  iso-eq-Group : (H : Group l) → Id G H → iso-Group G H
+  iso-eq-Group : (H : Group l) → G ＝ H → iso-Group G H
   iso-eq-Group = iso-eq-Large-Precategory Group-Large-Precategory G
 
   abstract
-    extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
+    extensionality-Group' : (H : Group l) → (G ＝ H) ≃ iso-Group G H
     extensionality-Group' H =
       ( extensionality-Semigroup (semigroup-Group G) (semigroup-Group H)) ∘e
       ( equiv-ap-inclusion-subtype is-group-prop-Semigroup {s = G} {t = H})

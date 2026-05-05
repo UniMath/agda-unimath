@@ -12,6 +12,8 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -40,8 +42,10 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-The **combinator operation** on directed trees combines a family of directed
-trees into a single directed tree with a new root.
+The
+{{#concept "combinator operation" Disambiguation="on directed trees" Agda=combinator-Directed-Tree}}
+on [directed trees](trees.directed-trees.md) combines a family of directed trees
+into a single directed tree with a new root.
 
 ## Definitions
 

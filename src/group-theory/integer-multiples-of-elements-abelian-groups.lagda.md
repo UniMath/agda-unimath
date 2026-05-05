@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -28,10 +29,11 @@ open import group-theory.multiples-of-elements-abelian-groups
 
 ## Idea
 
-The **integer multiple operation** on an
-[abelian group](group-theory.abelian-groups.md) is the map `k x ↦ kx`, which is
-defined by [iteratively](foundation.iterating-automorphisms.md) adding `x` with
-itself an [integer](elementary-number-theory.integers.md) `k` times.
+The integer
+{{#concept "multiplication" Disambiguation="integer multiplication of elements of abelian groups" Agda=integer-multiple-Ab}}
+on an [abelian group](group-theory.abelian-groups.md) is the map `k x ↦ kx`,
+which is defined by [iteratively](foundation.iterating-automorphisms.md) adding
+`x` with itself an [integer](elementary-number-theory.integers.md) `k` times.
 
 ## Definitions
 

@@ -35,12 +35,12 @@ nonnegative.
 
 ```agda
 opaque
-  unfolding add-ℚ
+  unfolding add-ℚ is-nonnegative-ℚ
 
   is-nonnegative-add-ℚ :
-    (p q : ℚ) → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
+    {p q : ℚ} → is-nonnegative-ℚ p → is-nonnegative-ℚ q →
     is-nonnegative-ℚ (p +ℚ q)
-  is-nonnegative-add-ℚ p q nonneg-p nonneg-q =
+  is-nonnegative-add-ℚ {p} {q} nonneg-p nonneg-q =
     is-nonnegative-rational-fraction-ℤ
       ( is-nonnegative-add-fraction-ℤ
         { fraction-ℚ p}
@@ -50,7 +50,7 @@ opaque
 
 add-ℚ⁰⁺ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
 add-ℚ⁰⁺ (p , nonneg-p) (q , nonneg-q) =
-  ( p +ℚ q , is-nonnegative-add-ℚ p q nonneg-p nonneg-q)
+  ( p +ℚ q , is-nonnegative-add-ℚ nonneg-p nonneg-q)
 
 infixl 35 _+ℚ⁰⁺_
 _+ℚ⁰⁺_ : ℚ⁰⁺ → ℚ⁰⁺ → ℚ⁰⁺
@@ -73,7 +73,7 @@ abstract
         ( q)
         ( zero-ℚ)
         ( p)
-        ( leq-zero-is-nonnegative-ℚ p nonneg-p))
+        ( leq-zero-is-nonnegative-ℚ nonneg-p))
 
   is-inflationary-map-right-add-rational-ℚ⁰⁺ :
     (p : ℚ⁰⁺) → is-inflationary-map-Poset ℚ-Poset (_+ℚ rational-ℚ⁰⁺ p)

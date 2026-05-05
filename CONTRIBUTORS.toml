@@ -57,7 +57,6 @@ His PhD research is on graph theory from a univalent point of view.
 
 [[contributors]]
 displayName = "Vojtěch Štěpančík"
-maintainer = true
 usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
 homepage = "https://vojtechstep.eu/"
 github = "VojtechStep"
@@ -298,8 +297,13 @@ usernames = ["Lîm Tsú-thuàn"]
 github = "dannypsnl"
 homepage = "https://dannypsnl.srht.site/"
 
-
 [[contributors]]
 displayName = "Bjarki"
 usernames = ["Bjarki"]
 github = "bjarki781"
+
+[[contributors]]
+displayName = "Tim Johns"
+usernames = ["Tim Johns"]
+github = "SlimTim10"
+homepage = "https://timjohns.ca/"

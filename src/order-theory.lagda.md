@@ -13,11 +13,14 @@ open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closed-interval-preserving-maps-posets public
 open import order-theory.closed-interval-preserving-maps-total-orders public
+open import order-theory.closed-intervals-large-posets public
 open import order-theory.closed-intervals-lattices public
 open import order-theory.closed-intervals-posets public
 open import order-theory.closed-intervals-total-orders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
+open import order-theory.cofinal-maps-posets public
+open import order-theory.coinitial-maps-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
 open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
 open import order-theory.coverings-locales public
@@ -27,6 +30,7 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.decreasing-sequences-posets public
 open import order-theory.deflationary-maps-posets public
 open import order-theory.deflationary-maps-preorders public
 open import order-theory.dependent-products-large-frames public
@@ -71,6 +75,7 @@ open import order-theory.interval-subposets public
 open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
 open import order-theory.joins-finite-families-join-semilattices public
+open import order-theory.joins-finite-families-large-join-semilattices public
 open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-inflattices public
@@ -111,6 +116,7 @@ open import order-theory.order-preserving-maps-large-posets public
 open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
+open import order-theory.order-preserving-maps-total-orders public
 open import order-theory.ordinals public
 open import order-theory.poset-closed-intervals-lattices public
 open import order-theory.poset-closed-intervals-posets public
@@ -137,6 +143,8 @@ open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-elements-large-strict-orders public
 open import order-theory.similarity-of-elements-large-strict-preorders public
+open import order-theory.similarity-of-elements-posets public
+open import order-theory.similarity-of-elements-preorders public
 open import order-theory.similarity-of-elements-strict-orders public
 open import order-theory.similarity-of-elements-strict-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
@@ -145,6 +153,7 @@ open import order-theory.spans-closed-intervals-total-orders public
 open import order-theory.strict-order-preserving-maps public
 open import order-theory.strict-orders public
 open import order-theory.strict-preorders public
+open import order-theory.strict-subpreorders public
 open import order-theory.strictly-increasing-sequences-strictly-preordered-sets public
 open import order-theory.strictly-inflationary-maps-strict-preorders public
 open import order-theory.strictly-preordered-sets public

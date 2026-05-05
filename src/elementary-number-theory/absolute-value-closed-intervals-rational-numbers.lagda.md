@@ -69,7 +69,7 @@ abstract
               ( r≤0))
             ( transitive-leq-ℚ (neg-ℚ r) (neg-ℚ p) (rational-abs-ℚ p)
               ( neg-leq-abs-ℚ p)
-              ( neg-leq-ℚ _ _ p≤r))))
+              ( neg-leq-ℚ p≤r))))
       ( λ 0≤r →
         transitive-leq-ℚ
           ( rational-abs-ℚ r)

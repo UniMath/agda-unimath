@@ -9,11 +9,13 @@ module group-theory.commutative-monoids where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.telescopes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
@@ -176,7 +178,7 @@ module _
     right-unit-law-mul-Monoid (monoid-Commutative-Monoid M)
 
   is-unit-Commutative-Monoid : type-Commutative-Monoid M → UU l
-  is-unit-Commutative-Monoid x = Id x unit-Commutative-Monoid
+  is-unit-Commutative-Monoid x = (x ＝ unit-Commutative-Monoid)
 
   is-unit-prop-Commutative-Monoid : type-Commutative-Monoid M → Prop l
   is-unit-prop-Commutative-Monoid x =

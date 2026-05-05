@@ -10,7 +10,9 @@ module trees.bases-enriched-directed-trees where
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -27,8 +29,10 @@ open import trees.enriched-directed-trees
 
 ## Idea
 
-The **base** of an enriched directed tree consists of its nodes equipped with an
-edge to the root.
+The
+{{#concept "base" Disambiguation="of an enriched directed tree" Agda=base-Enriched-Directed-Tree}}
+of an [enriched directed tree](trees.enriched-directed-trees.md) consists of its
+nodes equipped with an edge to the root.
 
 ## Definition
 

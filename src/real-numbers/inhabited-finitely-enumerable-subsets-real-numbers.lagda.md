@@ -20,7 +20,6 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.subsets-real-numbers
 
 open import univalent-combinatorics.finitely-enumerable-subtypes
-open import univalent-combinatorics.finitely-enumerable-types
 open import univalent-combinatorics.inhabited-finitely-enumerable-subtypes
 ```
 

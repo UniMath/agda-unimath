@@ -7,6 +7,7 @@ module foundation.unions-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -20,6 +21,8 @@ open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.similarity-subtypes
 open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
 open import logic.de-morgan-propositions
@@ -33,8 +36,9 @@ open import order-theory.least-upper-bounds-large-posets
 
 ## Idea
 
-The **union** of two [subtypes](foundation-core.subtypes.md) `A` and `B` is the
-subtype that contains the elements that are in `A` or in `B`.
+The {{#concept "union" WDID=Q185359 WD="union" Agda=union-subtype}} of two
+[subtypes](foundation-core.subtypes.md) `A` and `B` is the subtype that contains
+the elements that are in `A` [or](foundation.disjunction.md) in `B`.
 
 ## Definition
 
@@ -179,4 +183,24 @@ abstract
   preserves-sim-union-subtype _ _ (S⊆T , T⊆S) _ _ (U⊆V , V⊆U) =
     ( ( λ x → map-disjunction (S⊆T x) (U⊆V x)) ,
       ( λ x → map-disjunction (T⊆S x) (V⊆U x)))
+```
+
+### The surjection from `S + T` to `S ∪ T`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1}
+  (S : subtype l2 A)
+  (T : subtype l3 A)
+  where
+
+  surjection-coproduct-union-subtype :
+    (type-subtype S + type-subtype T) ↠ type-subtype (union-subtype S T)
+  surjection-coproduct-union-subtype =
+    comp-surjection
+      ( surjection-tot
+        ( λ a →
+          surjection-unit-trunc-Prop (is-in-subtype S a + is-in-subtype T a)))
+      ( surjection-equiv inv-left-distributive-Σ-coproduct)
 ```

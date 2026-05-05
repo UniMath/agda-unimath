@@ -11,9 +11,11 @@ open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -35,9 +37,12 @@ open import trees.rooted-morphisms-enriched-directed-trees
 
 ## Idea
 
-An **equivalence of `(A,B)`-enriched directed trees** from `S` to `T` is a
-shape-preserving equivalence between their underlying trees, which also
-preserves the enrichment equivalences.
+An
+{{#concept "equivalence" Disambiguation="of enriched directed tree" Agda=equiv-Enriched-Directed-Tree}}
+of `(A,B)`-[enriched directed trees](trees.enriched-directed-trees.md) from `S`
+to `T` is a shape-preserving [equivalence](trees.equivalences-directed-trees.md)
+between their underlying trees, which also preserves the enrichment
+equivalences.
 
 ## Definition
 

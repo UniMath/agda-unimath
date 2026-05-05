@@ -12,8 +12,10 @@ open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -35,10 +37,13 @@ open import trees.rooted-morphisms-directed-trees
 
 ## Idea
 
-**Equivalences of directed trees** are morphisms of directed trees of which the
-actions on nodes and on edges are both equivalences. In other words,
-equivalences of directed trees are just equivalences between their underlying
-directed graphs.
+{{#concept "Equivalences" Disambiguation="of directed trees" Agda=equiv-Directed-Tree}}
+of [directed trees](trees.directed-trees.md) are
+[morphisms](trees.morphisms-directed-trees.md) of directed trees of which the
+actions on nodes and on edges are both
+[equivalences](foundation-core.equivalences.md). In other words, equivalences of
+directed trees are just equivalences between their underlying
+[directed graphs](graph-theory.directed-graphs.md).
 
 ## Definitions
 

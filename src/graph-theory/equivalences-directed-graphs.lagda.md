@@ -13,9 +13,11 @@ open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -38,11 +40,12 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An {{#concept "equivalence of directed graphs" Agda=equiv-Directed-Graph}} from
-a [directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
-`(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
-`e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
-of edges indexed by `x y : V`.
+An
+{{#concept "equivalence" Disambiguation="of directed graps" WD="graph isomorphism" WDID=Q303100 Agda=equiv-Directed-Graph}}
+of [directed graphs](graph-theory.directed-graphs.md) from a directed graph
+`(V,E)` to a directed graph `(V',E')` consists of an
+[equivalence](foundation-core.equivalences.md) `e : V ≃ V'` of vertices, and a
+family of equivalences `E x y ≃ E' (e x) (e y)` of edges indexed by `x y : V`.
 
 ## Definitions
 
@@ -341,7 +344,7 @@ module _
       ( is-torsorial-Id G)
 ```
 
-### The inverse of an equivalence of directed trees
+### The inverse of an equivalence of directed graphs
 
 ```agda
 module _

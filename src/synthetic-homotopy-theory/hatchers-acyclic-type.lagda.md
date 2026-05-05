@@ -13,7 +13,9 @@ open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -219,11 +221,7 @@ module _
           ( ( ( left-unit-law-Σ-is-contr
                 ( is-torsorial-Id' (a ∙ a))
                 ( a ∙ a , refl)) ∘e
-              ( inv-associative-Σ
-                ( type-Ω (Ω A))
-                ( λ b → b ＝ (a ∙ a))
-                ( λ bq →
-                  power-nat-Ω 5 (Ω A) a ＝ power-nat-Ω 3 (Ω A) (pr1 bq)))) ∘e
+              ( inv-associative-Σ)) ∘e
             ( equiv-tot
               ( λ b →
                 ( commutative-product) ∘e

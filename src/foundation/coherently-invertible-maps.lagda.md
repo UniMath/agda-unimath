@@ -10,7 +10,9 @@ open import foundation-core.coherently-invertible-maps public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
@@ -78,7 +80,7 @@ module _
     is-proof-irrelevant-is-coherently-invertible H =
       is-contr-equiv'
         ( _)
-        ( associative-Σ _ _ _)
+        ( associative-Σ)
         ( is-contr-Σ
           ( is-contr-section-is-coherently-invertible H)
           ( section-is-coherently-invertible H)

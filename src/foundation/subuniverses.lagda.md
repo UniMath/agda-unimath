@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.subuniverses where
+
+open import foundation-core.subuniverses public
 ```
 
 <details><summary>Imports</summary>
@@ -10,6 +12,7 @@ module foundation.subuniverses where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.univalence
@@ -34,49 +37,6 @@ open import foundation-core.transport-along-identifications
 
 ## Definitions
 
-### Subuniverses
-
-```agda
-is-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → UU l2) → UU (lsuc l1 ⊔ l2)
-is-subuniverse P = is-subtype P
-
-subuniverse :
-  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-subuniverse l1 l2 = subtype l2 (UU l1)
-
-is-subtype-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
-  is-prop (is-in-subtype P X)
-is-subtype-subuniverse P X = is-prop-is-in-subtype P X
-
-module _
-  {l1 l2 : Level} (P : subuniverse l1 l2)
-  where
-
-  type-subuniverse : UU (lsuc l1 ⊔ l2)
-  type-subuniverse = type-subtype P
-
-  is-in-subuniverse : UU l1 → UU l2
-  is-in-subuniverse = is-in-subtype P
-
-  is-prop-is-in-subuniverse : (X : UU l1) → is-prop (is-in-subuniverse X)
-  is-prop-is-in-subuniverse = is-prop-is-in-subtype P
-
-  inclusion-subuniverse : type-subuniverse → UU l1
-  inclusion-subuniverse = inclusion-subtype P
-
-  is-in-subuniverse-inclusion-subuniverse :
-    (X : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse X)
-  is-in-subuniverse-inclusion-subuniverse = pr2
-
-  is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
-  is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
-
-  emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
-  emb-inclusion-subuniverse = emb-subtype P
-```
-
 ### The predicate of essentially being in a subuniverse
 
 ```agda
@@ -89,20 +49,25 @@ module _
   is-essentially-in-subuniverse X =
     Σ (type-subuniverse P) (λ Y → inclusion-subuniverse P Y ≃ X)
 
+  is-proof-irrelevant-is-essentially-in-subuniverse :
+    {l3 : Level} (X : UU l3) →
+    is-proof-irrelevant (is-essentially-in-subuniverse X)
+  is-proof-irrelevant-is-essentially-in-subuniverse X ((X' , p) , e) =
+    is-torsorial-Eq-subtype
+      ( is-contr-equiv'
+        ( Σ (UU _) (λ T → T ≃ X'))
+        ( equiv-tot (equiv-postcomp-equiv e))
+        ( is-torsorial-equiv' X'))
+      ( is-prop-is-in-subuniverse P)
+      ( X')
+      ( e)
+      ( p)
+
   is-prop-is-essentially-in-subuniverse :
     {l3 : Level} (X : UU l3) → is-prop (is-essentially-in-subuniverse X)
   is-prop-is-essentially-in-subuniverse X =
     is-prop-is-proof-irrelevant
-      ( λ ((X' , p) , e) →
-        is-torsorial-Eq-subtype
-          ( is-contr-equiv'
-            ( Σ (UU _) (λ T → T ≃ X'))
-            ( equiv-tot (equiv-postcomp-equiv e))
-            ( is-torsorial-equiv' X'))
-          ( is-prop-is-in-subuniverse P)
-          ( X')
-          ( e)
-          ( p))
+      ( is-proof-irrelevant-is-essentially-in-subuniverse X)
 
   is-essentially-in-subuniverse-Prop :
     {l3 : Level} (X : UU l3) → Prop (lsuc l1 ⊔ l2 ⊔ l3)
@@ -113,6 +78,20 @@ module _
 ```
 
 ## Properties
+
+### The inclusion of a subuniverse into its ambient universe is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+
+  is-emb-inclusion-subuniverse : is-emb (inclusion-subuniverse P)
+  is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
+
+  emb-inclusion-subuniverse : type-subuniverse P ↪ UU l1
+  emb-inclusion-subuniverse = emb-subtype P
+```
 
 ### Subuniverses are closed under equivalences
 
@@ -244,3 +223,4 @@ module _
 ## See also
 
 - [Σ-closed subuniverses](foundation.sigma-closed-subuniverses.md)
+- [univalent type families](foundation.univalent-type-families.md).

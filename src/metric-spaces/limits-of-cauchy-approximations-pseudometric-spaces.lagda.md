@@ -12,6 +12,7 @@ open import elementary-number-theory.minimum-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -143,6 +144,43 @@ module _
         ( is-upper-bound-dist-Pseudometric-Space A x y)
         ( ε+δ=d)
         ( Nxy)
+```
+
+### The value of a constant Cauchy approximation is its limit
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (x : type-Pseudometric-Space A)
+  where
+
+  is-limit-const-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space
+      ( A)
+      ( const-cauchy-approximation-Pseudometric-Space A x)
+      ( x)
+  is-limit-const-cauchy-approximation-Pseudometric-Space ε δ =
+    refl-neighborhood-Pseudometric-Space A _ x
+```
+
+### Homotopic Cauchy approximations have the same limits
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (f g : cauchy-approximation-Pseudometric-Space A)
+  (x : type-Pseudometric-Space A)
+  (f~g : htpy-map-cauchy-approximation-Pseudometric-Space A f g)
+  where
+
+  is-limit-htpy-map-cauchy-approximation-Pseudometric-Space :
+    is-limit-cauchy-approximation-Pseudometric-Space A f x →
+    is-limit-cauchy-approximation-Pseudometric-Space A g x
+  is-limit-htpy-map-cauchy-approximation-Pseudometric-Space H ε δ =
+    tr
+      ( λ z → neighborhood-Pseudometric-Space A (ε +ℚ⁺ δ) z x)
+      ( f~g ε)
+      ( H ε δ)
 ```
 
 ## References

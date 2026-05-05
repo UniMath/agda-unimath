@@ -7,6 +7,7 @@ module graph-theory.mere-equivalences-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -20,8 +21,8 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 Two [undirected graphs](graph-theory.undirected-graphs.md) are said to be
-**merely equivalent** if there merely
-[exists](foundation.existential-quantification.md) an
+{{#concept "merely equivalent" Disambiguation="undirected graphs" Agda=mere-equiv-Undirected-Graph}}
+if there merely [exists](foundation.existential-quantification.md) an
 [equivalence of undirected graphs](graph-theory.equivalences-undirected-graphs.md)
 between them.
 

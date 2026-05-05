@@ -7,25 +7,19 @@ module structured-types.pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-higher-identifications-functions
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.commuting-triangles-of-identifications
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.torsorial-type-families
@@ -173,14 +167,23 @@ commutes.
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
-  (f g : pointed-Π A B) (G : unpointed-htpy-pointed-Π f g)
+  (f g : pointed-Π A B)
   where
 
-  coherence-point-unpointed-htpy-pointed-Π : UU l2
-  coherence-point-unpointed-htpy-pointed-Π =
+  coherence-point-unpointed-htpy-pointed-Π' :
+    function-pointed-Π f (point-Pointed-Type A) ＝
+    function-pointed-Π g (point-Pointed-Type A) →
+    UU l2
+  coherence-point-unpointed-htpy-pointed-Π' G =
     coherence-triangle-identifications
       ( preserves-point-function-pointed-Π f)
       ( preserves-point-function-pointed-Π g)
+      ( G)
+
+  coherence-point-unpointed-htpy-pointed-Π :
+    unpointed-htpy-pointed-Π f g → UU l2
+  coherence-point-unpointed-htpy-pointed-Π G =
+    coherence-point-unpointed-htpy-pointed-Π'
       ( G (point-Pointed-Type A))
 ```
 

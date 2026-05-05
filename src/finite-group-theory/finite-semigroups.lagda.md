@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.1-types
 open import foundation.decidable-propositions
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -19,7 +20,6 @@ open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -41,7 +41,9 @@ open import univalent-combinatorics.untruncated-pi-finite-types
 
 ## Idea
 
-Finite semigroups are semigroups of which the underlying type is finite.
+{{#concept "Finite semigroups" Agda=Finite-Semigroup}} are
+[semigroups](group-theory.semigroups.md) whose underlying type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definitions
 

@@ -9,16 +9,17 @@ module primitives.machine-integers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 ```
 
 </details>
 
 ## Idea
 
-The `Word64` type represents 64-bit machine words. Agda provides primitive
-functions to manipulate them.
+The `Word64` type represents {{#concept "64-bit machine words" Agda=Word64}}.
+Agda provides primitive functions to manipulate them.
 
 ## Definitions
 

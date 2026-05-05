@@ -19,15 +19,17 @@ open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-maybe
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.maybe
@@ -37,7 +39,7 @@ open import foundation.postcomposition-functions
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -48,6 +50,8 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types
@@ -172,12 +176,9 @@ compute-binomial-type-Level l {l1} {l2} A B =
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
               ( inv-equiv (equiv-total-fiber (pr1 (pr2 e)))) B))) ∘e
-      ( inv-associative-Σ
-        ( UU (l1 ⊔ l))
-        ( λ X → X ↪ᵈ A)
-        ( λ X → mere-equiv B (pr1 X)))) ∘e
+      ( inv-associative-Σ)) ∘e
     ( equiv-tot (λ X → commutative-product))) ∘e
-  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
+  ( associative-Σ)
 
 compute-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
@@ -250,10 +251,7 @@ abstract
     binomial-type' (Maybe A) (Maybe B) ≃
     (binomial-type' A B + binomial-type' A (Maybe B))
   recursion-binomial-type' A B =
-    ( ( ( left-distributive-Σ-coproduct
-          ( A → Decidable-Prop _)
-          ( λ P → mere-equiv B (Σ A _))
-          ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
+    ( ( ( left-distributive-Σ-coproduct) ∘e
         ( equiv-tot
           ( λ P →
             ( ( equiv-coproduct
@@ -283,15 +281,11 @@ abstract
                     ( is-torsorial-false-Prop)
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
               ( right-distributive-Σ-coproduct
-                ( Σ (Prop _) type-Prop)
-                ( Σ (Prop _) (¬_ ∘ type-Prop))
                 ( ind-coproduct _
                   ( λ Q →
                     mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))
                   ( λ Q →
-                    mere-equiv
-                      ( Maybe B)
-                      ( (Σ A _) + (type-Prop (pr1 Q))))))) ∘e
+                    mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))))) ∘e
             ( equiv-Σ
               ( ind-coproduct _
                 ( λ Q →
@@ -313,14 +307,7 @@ abstract
                         ( _)
                         ( λ q → id-equiv)
                         ( λ q → id-equiv)))))))) ∘e
-      ( associative-Σ
-        ( A → Decidable-Prop _)
-        ( λ a → Decidable-Prop _)
-        ( λ t →
-          mere-equiv
-            ( Maybe B)
-            ( ( Σ A (λ a → type-Decidable-Prop (pr1 t a))) +
-              ( type-Decidable-Prop (pr2 t)))))) ∘e
+      ( associative-Σ)) ∘e
     ( equiv-Σ
       ( λ p →
         mere-equiv
@@ -334,7 +321,7 @@ abstract
             ( ( equiv-coproduct
                 ( id-equiv)
                 ( left-unit-law-Σ (λ y → type-Decidable-Prop (u (inr y))))) ∘e
-              ( right-distributive-Σ-coproduct A unit
+              ( right-distributive-Σ-coproduct
                 ( λ x → type-Decidable-Prop (u x))))
             ( Maybe B))))
 

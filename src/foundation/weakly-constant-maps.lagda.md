@@ -9,9 +9,11 @@ module foundation.weakly-constant-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.fixed-points-endofunctions
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -125,7 +127,7 @@ module _
     ( fixed-point f , is-prop-fixed-point-is-weakly-constant-map)
 ```
 
-### The action on identifications of a weakly constant map is weakly constant
+### The action on identifications of weakly constant maps is weakly constant
 
 This is Auxiliary Lemma 4.3 of {{#cite KECA17}}.
 

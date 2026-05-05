@@ -11,12 +11,15 @@ module foundation.universal-property-set-quotients where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.effective-maps-equivalence-relations
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
+open import foundation.equivalences-contractible-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
@@ -213,14 +216,11 @@ module _
   is-locally-small-is-surjective-and-effective :
     is-surjective-and-effective R q → is-locally-small l2 (type-Set B)
   is-locally-small-is-surjective-and-effective e x y =
-    apply-universal-property-trunc-Prop
+    apply-twice-universal-property-trunc-Prop
       ( pr1 e x)
+      ( pr1 e y)
       ( is-small-Prop l2 (x ＝ y))
-      ( λ u →
-        apply-universal-property-trunc-Prop
-          ( pr1 e y)
-          ( is-small-Prop l2 (x ＝ y))
-          ( α u))
+      ( α)
     where
     α : fiber q x → fiber q y → is-small l2 (x ＝ y)
     pr1 (α (pair a refl) (pair b refl)) = sim-equivalence-relation R a b
@@ -541,20 +541,17 @@ module _
       all-elements-equal-total-P b x y =
         eq-type-subtype
           ( P-Prop b)
-          ( apply-universal-property-trunc-Prop
+          ( apply-twice-universal-property-trunc-Prop
             ( pr2 x)
+            ( pr2 y)
             ( Id-Prop X (pr1 x) (pr1 y))
-            ( λ u →
-              apply-universal-property-trunc-Prop
-                ( pr2 y)
-                ( Id-Prop X (pr1 x) (pr1 y))
-                ( λ v →
-                  ( inv (pr1 (pr2 u))) ∙
-                  ( ( pr2 f
-                      ( map-equiv
-                        ( pr2 E (pr1 u) (pr1 v))
-                        ( (pr2 (pr2 u)) ∙ (inv (pr2 (pr2 v)))))) ∙
-                    ( pr1 (pr2 v))))))
+            ( λ u v →
+              ( inv (pr1 (pr2 u))) ∙
+              ( ( pr2 f
+                  ( map-equiv
+                    ( pr2 E (pr1 u) (pr1 v))
+                    ( (pr2 (pr2 u)) ∙ (inv (pr2 (pr2 v)))))) ∙
+                ( pr1 (pr2 v)))))
 
       is-prop-total-P : (b : type-Set B) → is-prop (Σ (type-Set X) (P b))
       is-prop-total-P b =

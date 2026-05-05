@@ -16,10 +16,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -31,6 +34,7 @@ open import foundation.universe-levels
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
+open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -40,6 +44,7 @@ open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
 open import real-numbers.subsets-real-numbers
 ```
@@ -141,7 +146,7 @@ module _
           let open do-syntax-trunc-Prop empty-Prop
           in do
             (ε⁺@(ε , _) , ε<x-z) ←
-              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ z x z<x)
+              exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ z<x)
             (i , x-ε<yᵢ) ←
               is-approximated-below-is-supremum-family-ℝ y x is-supremum-x-yᵢ ε⁺
             not-leq-le-ℝ z (y i)
@@ -149,7 +154,7 @@ module _
                 ( x-ε<yᵢ)
                 ( le-transpose-left-add-ℝ' _ _ _
                   ( le-transpose-right-diff-ℝ _ _ _
-                    ( le-real-is-in-lower-cut-ℚ ε (x -ℝ z) ε<x-z))))
+                    ( le-real-is-in-lower-cut-ℝ (x -ℝ z) ε<x-z))))
               ( yᵢ≤z i))
     pr2 (is-least-upper-bound-is-supremum-family-ℝ z) x≤z i =
       transitive-leq-ℝ (y i) x z x≤z
@@ -210,6 +215,23 @@ module _
   has-supremum-subset-ℝ = type-Prop has-supremum-prop-subset-ℝ
 ```
 
+### A subset of real numbers with a supremum is inhabited
+
+```agda
+abstract
+  is-inhabited-has-supremum-subset-ℝ :
+    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-supremum-subset-ℝ S l3 →
+    is-inhabited-subtype S
+  is-inhabited-has-supremum-subset-ℝ S (s , is-sup-s) =
+    map-trunc-Prop
+      ( pr1)
+      ( is-approximated-below-is-supremum-family-ℝ
+        ( inclusion-subset-ℝ S)
+        ( s)
+        ( is-sup-s)
+        ( one-ℚ⁺))
+```
+
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`
 
 ```agda
@@ -230,7 +252,7 @@ module _
       let open do-syntax-trunc-Prop (∃ I (λ i → le-prop-ℝ z (y i)))
       in do
         (ε⁺@(ε , _) , ε<x-z) ←
-          exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ z x z<x)
+          exists-ℚ⁺-in-lower-cut-ℝ⁺ (positive-diff-le-ℝ z<x)
         (i , x-ε<yᵢ) ←
           is-approximated-below-is-supremum-family-ℝ y x is-supremum-x-yᵢ ε⁺
         intro-exists
@@ -239,7 +261,7 @@ module _
             ( x-ε<yᵢ)
             ( le-transpose-left-add-ℝ' _ _ _
               ( le-transpose-right-diff-ℝ _ _ _
-                ( le-real-is-in-lower-cut-ℚ ε (x -ℝ z) ε<x-z))))
+                ( le-real-is-in-lower-cut-ℝ (x -ℝ z) ε<x-z))))
 
     le-supremum-iff-le-element-family-ℝ :
       {l4 : Level} → (z : ℝ l4) →

@@ -10,7 +10,9 @@ module lists.sorted-lists where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -26,8 +28,9 @@ open import order-theory.decidable-total-orders
 
 ## Idea
 
-We define a sorted list to be a list such that for every pair of consecutive
-entries `x` and `y`, the inequality `x ≤ y` holds.
+We define a {{#concept "sorted list" Agda=is-sorted-list}} to be a
+[list](lists.lists.md) such that for every pair of consecutive entries `x` and
+`y`, the [inequality](order-theory.decidable-total-orders.md) `x ≤ y` holds.
 
 ## Definitions
 

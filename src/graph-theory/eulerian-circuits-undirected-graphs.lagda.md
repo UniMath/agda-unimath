@@ -23,8 +23,9 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An **Eulerian circuit** in an
-[undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
+An
+{{#concept "Eulerian circuit" Disambiguation="in an undirected graph" WD="Eulerian cycle" WDID=Q11691793 Agda=eulerian-circuit-Undirected-Graph}}
+in an [undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
 [circuit](graph-theory.circuits-undirected-graphs.md) `T` in `G` such that every
 edge in `G` is in the image of `T`. In other words, an Eulerian circuit `T`
 consists of [`k`-gon](graph-theory.polygons.md) `H` equipped with a

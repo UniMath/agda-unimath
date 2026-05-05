@@ -9,6 +9,7 @@ module ring-theory.groups-of-units-rings where
 ```agda
 open import category-theory.functors-large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -32,8 +33,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **group of units** of a [ring](ring-theory.rings.md) `R` is the
-[group](group-theory.groups.md) consisting of all the
+The
+{{#concept "group of units" Disambiguation="of a ring" Agda=group-of-units-Ring}}
+of a [ring](ring-theory.rings.md) `R` is the [group](group-theory.groups.md)
+consisting of all the
 [invertible elements](ring-theory.invertible-elements-rings.md) in `R`.
 Equivalently, the group of units of `R` is the
 [core](group-theory.cores-monoids.md) of the multiplicative

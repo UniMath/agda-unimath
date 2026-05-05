@@ -13,9 +13,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -36,8 +39,10 @@ open import trees.directed-trees
 
 ## Idea
 
-The **base** of a directed tree consists of the nodes equipped with an edge to
-the root.
+The
+{{#concept "base" Disambiguation="of a directed tree" Agda=base-Directed-Tree}}
+of a [directed tree](trees.directed-trees.md) consists of the nodes equipped
+with an edge to the root.
 
 ## Definition
 

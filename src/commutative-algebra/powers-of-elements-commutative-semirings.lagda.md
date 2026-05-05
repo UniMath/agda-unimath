@@ -51,6 +51,21 @@ module _
     power-succ-Semiring (semiring-Commutative-Semiring A)
 ```
 
+### `xⁿ⁺¹ = xxⁿ`
+
+```agda
+module _
+  {l : Level} (A : Commutative-Semiring l)
+  where
+
+  power-succ-Commutative-Semiring' :
+    (n : ℕ) (x : type-Commutative-Semiring A) →
+    power-Commutative-Semiring A (succ-ℕ n) x ＝
+    mul-Commutative-Semiring A x (power-Commutative-Semiring A n x)
+  power-succ-Commutative-Semiring' =
+    power-succ-Semiring' (semiring-Commutative-Semiring A)
+```
+
 ### Powers by sums of natural numbers are products of powers
 
 ```agda

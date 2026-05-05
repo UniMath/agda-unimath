@@ -26,9 +26,12 @@ open import trees.morphisms-directed-trees
 
 ## Idea
 
-The **fiber** of a directed tree `T` at a node `x` consists of all nodes `y`
-equipped with a walk `w : walk T y x`. An edge from `(y, w)` to `(z , v)`
-consists of an edge `e : edge T x y` such that `w ＝ cons-walk e v`.
+The
+{{#concept "fiber" Disambiguation="of a directed tree" Agda=fiber-Directed-Tree}}
+of a [directed tree](trees.directed-trees.md) `T` at a node `x` consists of all
+nodes `y` equipped with a [walk](graph-theory.walks-directed-graphs.md)
+`w : walk T y x`. An edge from `(y, w)` to `(z , v)` consists of an edge
+`e : edge T x y` such that `w ＝ cons-walk e v`.
 
 ## Definitions
 

@@ -21,8 +21,9 @@ open import structured-types.wild-monoids
 ## Idea
 
 Given a [wild monoid](structured-types.wild-monoids.md) `M` and a type `I`, the
-**function wild monoid** `M^I` consists of functions from `I` to the underlying
-type of `M`. Every component of the structure is given pointwise.
+{{#concept "function wild monoid" Agda=function-Wild-Monoid}} `M^I` consists of
+functions from `I` to the underlying type of `M`. Every component of the
+structure is given pointwise.
 
 ## Definition
 

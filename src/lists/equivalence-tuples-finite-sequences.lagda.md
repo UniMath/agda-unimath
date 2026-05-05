@@ -14,6 +14,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -25,6 +26,13 @@ open import lists.tuples
 ```
 
 </details>
+
+## Idea
+
+On this page we demonstrate that for every
+[natural number](elementary-number-theory.natural-numbers.md) `n`, the type of
+[tuples](lists.tuples.md) of length `n` and the type of
+[finite sequences](lists.finite-sequences.md) of length `n` are equivalent.
 
 ### Tuples on a type are equivalent to finite sequences in it
 

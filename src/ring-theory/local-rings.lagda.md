@@ -8,6 +8,7 @@ module ring-theory.local-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.sets
@@ -21,10 +22,13 @@ open import ring-theory.rings
 
 ## Idea
 
-A local ring is a ring such that whenever a sum of elements is invertible, then
-one of its summands is invertible. This implies that the noninvertible elements
-form an ideal. However, the law of excluded middle is needed to show that any
-ring of which the noninvertible elements form an ideal is a local ring.
+A {{#concept "local ring" WD="local ring" WDID=Q1142704 Agda=Local-Ring}} is a
+[ring](ring-theory.rings.md) such that whenever a sum of elements is
+[invertible](ring-theory.invertible-elements-rings.md), then one of its summands
+is invertible. This implies that the noninvertible elements form an
+[ideal](ring-theory.ideals-rings.md). However, the
+[law of excluded middle](foundation.law-of-excluded-middle.md) is needed to show
+that any ring of which the noninvertible elements form an ideal is a local ring.
 
 ## Definition
 
@@ -68,3 +72,7 @@ module _
   is-local-ring-Local-Ring : is-local-Ring ring-Local-Ring
   is-local-ring-Local-Ring = pr2 R
 ```
+
+## External links
+
+- [Local ring](https://ncatlab.org/nlab/show/local+ring) at $n$Lab

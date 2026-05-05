@@ -7,6 +7,7 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-truncated-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -74,7 +75,7 @@ module _
       K = universal-property-set-quotient-is-set-quotient R C g Ug B f
       k : type-Set C → type-Set B
       k = pr1 (center K)
-      α : Id (precomp-Set-Quotient R C g B k) f
+      α : precomp-Set-Quotient R C g B k ＝ f
       α = eq-htpy-reflecting-map-equivalence-relation R B
             ( precomp-Set-Quotient R C g B k)
             ( f)

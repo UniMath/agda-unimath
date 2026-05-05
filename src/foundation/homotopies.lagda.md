@@ -225,7 +225,7 @@ module _
     is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
+  equiv-left-transpose-htpy-concat : (H ∙h K ~ L) ≃ (K ~ inv-htpy H ∙h L)
   pr1 equiv-left-transpose-htpy-concat = left-transpose-htpy-concat H K L
   pr2 equiv-left-transpose-htpy-concat = is-equiv-left-transpose-htpy-concat
 
@@ -235,7 +235,7 @@ module _
     is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-right-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
+  equiv-right-transpose-htpy-concat : (H ∙h K ~ L) ≃ (H ~ L ∙h inv-htpy K)
   pr1 equiv-right-transpose-htpy-concat = right-transpose-htpy-concat H K L
   pr2 equiv-right-transpose-htpy-concat = is-equiv-right-transpose-htpy-concat
 

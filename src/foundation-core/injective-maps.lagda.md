@@ -53,8 +53,8 @@ module _
   map-injection : A → B
   map-injection = pr1 f
 
-  is-injective-injection : is-injective map-injection
-  is-injective-injection = pr2 f
+  is-injective-map-injection : is-injective map-injection
+  is-injective-map-injection = pr2 f
 ```
 
 ## Examples
@@ -179,7 +179,7 @@ module _
   where
 
   is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
-  is-equiv-is-injective {f} (pair g G) H =
+  is-equiv-is-injective {f} (g , G) H =
     is-equiv-is-invertible g G (λ x → H (G (f x)))
 ```
 

@@ -8,6 +8,7 @@ module order-theory.similarity-of-elements-large-posets where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -28,9 +29,11 @@ open import order-theory.similarity-of-elements-large-preorders
 ## Idea
 
 Two elements `x` and `y` of a [large poset](order-theory.large-posets.md) `P`
-are said to be **similar** if both `x ≤ y` and `y ≤ x` hold. Note that the
-similarity relation is defined across universe levels, and that only similar
-elements of the same universe level are equal.
+are said to be
+{{#concept "similar" Disambiguation="elements of a large poset" Agda=sim-Large-Poset}}
+if both `x ≤ y` and `y ≤ x` hold. Note that the similarity relation is defined
+across universe levels, and that only similar elements of the same universe
+level are equal.
 
 In informal writing we will use the notation `x ≈ y` to assert that `x` and `y`
 are similar elements in a poset `P`.
@@ -188,11 +191,11 @@ module _
       ( symmetric-sim-Large-Poset P)
       ( transitive-sim-Large-Poset P)
 
-  large-similarity-relation-sim-Large-Poset :
+  large-similarity-relation-Large-Poset :
     Large-Similarity-Relation
       ( λ l1 l2 → β l1 l2 ⊔ β l2 l1)
       ( type-Large-Poset P)
-  large-similarity-relation-sim-Large-Poset =
+  large-similarity-relation-Large-Poset =
     make-Large-Similarity-Relation
       ( large-equivalence-relation-sim-Large-Poset)
       ( eq-sim-Large-Poset P)

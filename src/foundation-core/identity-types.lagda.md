@@ -26,7 +26,7 @@ equipped with a
 {{#concept "reflexivity element" Disambiguation="identity type" Agda=refl}}
 
 ```text
-  refl : (x : A) → Id x x.
+  refl : (x : A) → x ＝ x.
 ```
 
 In other words, the identity type is a reflexive
@@ -79,7 +79,7 @@ introducing types equipped with induction principles. The only constructor of
 the identity type `Id x : A → 𝒰` is the reflexivity identification
 
 ```text
-  refl : Id x x.
+  refl : x ＝ x.
 ```
 
 ```agda
@@ -251,6 +251,11 @@ module _
     {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
     (p ∙ q) ∙ r ＝ p ∙ (q ∙ r)
   assoc refl q r = refl
+
+  inv-assoc :
+    {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
+    p ∙ (q ∙ r) ＝ (p ∙ q) ∙ r
+  inv-assoc p q r = inv (assoc p q r)
 ```
 
 ### The unit laws for concatenation
@@ -378,6 +383,11 @@ module _
   is-section-inv-concat' :
     {x y z : A} (q : y ＝ z) (r : x ＝ z) → (r ∙ inv q) ∙ q ＝ r
   is-section-inv-concat' refl refl = refl
+
+  cancellation-inv-inv-concat :
+    {x y z : A} (p : x ＝ y) (q : x ＝ z) →
+    p ∙ inv (inv q ∙ p) ＝ q
+  cancellation-inv-inv-concat refl refl = refl
 ```
 
 ### Transposing inverses
@@ -504,7 +514,7 @@ module _
 
   is-injective-concat' :
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q
-  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
+  is-injective-concat' refl s = inv right-unit ∙ s ∙ right-unit
 ```
 
 ## Equational reasoning

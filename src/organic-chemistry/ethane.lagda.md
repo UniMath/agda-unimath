@@ -15,6 +15,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -22,7 +23,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -46,7 +46,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-**Ethane** is the unique alkane with two carbons.
+{{#concept "Ethane" WD="ethane" WDID=Q52858 Agda=ethane}} is the
+[unique](foundation-core.contractible-types.md)
+[alkane](organic-chemistry.alkanes.md) with two carbons.
 
 ## Definition
 
@@ -214,14 +216,11 @@ module _
       (c c' : vertex-ethane) →
       number-of-elements-count (count-standard-edge-ethane c c') ≤-ℕ 3
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr _)) (inl (inr _)) =
-      star
+      (inl (inr _)) (inl (inr _)) = star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr _)) (inr _) =
-      star
+      (inl (inr _)) (inr _) = star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inr _) (inl (inr _)) =
-      star
+      (inr _) (inl (inr _)) = star
     number-of-elements-count-standard-edge-ethane-leq-3
       (inr _) (inr _) = star
 

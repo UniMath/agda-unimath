@@ -13,8 +13,10 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.double-arrows
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-double-arrows
 open import foundation.equivalences-span-diagrams
 open import foundation.function-types
@@ -47,7 +49,8 @@ map `e : B → X` together with a [homotopy](foundation.homotopies.md)
 ```text
      g
    ----->     e
- A -----> B -----> X
+ A        B -----> X
+   ----->
      f
 ```
 
@@ -120,7 +123,8 @@ a new cofork `h ∘ e`.
 ```text
      g
    ----->     e        h
- A -----> B -----> X -----> Y
+ A        B -----> X -----> Y
+   ----->
      f
 ```
 
@@ -198,7 +202,8 @@ module _
 ```text
      g
    ----->     e        h        k
- A -----> B -----> X -----> Y -----> Z
+ A        B -----> X -----> Y -----> Z
+   ----->
      f
 ```
 
@@ -443,15 +448,15 @@ module _
     hom-span-diagram
       ( span-diagram-cofork a)
       ( span-diagram-cofork a')
-  pr1 (hom-span-diagram-cofork-hom-double-arrow) =
+  pr1 hom-span-diagram-cofork-hom-double-arrow =
     domain-map-hom-double-arrow a a' h
-  pr1 (pr2 (hom-span-diagram-cofork-hom-double-arrow)) =
+  pr1 (pr2 hom-span-diagram-cofork-hom-double-arrow) =
     codomain-map-hom-double-arrow a a' h
-  pr1 (pr2 (pr2 (hom-span-diagram-cofork-hom-double-arrow))) =
+  pr1 (pr2 (pr2 hom-span-diagram-cofork-hom-double-arrow)) =
     spanning-map-hom-span-diagram-cofork-hom-double-arrow
-  pr1 (pr2 (pr2 (pr2 (hom-span-diagram-cofork-hom-double-arrow)))) =
+  pr1 (pr2 (pr2 (pr2 hom-span-diagram-cofork-hom-double-arrow))) =
     left-square-hom-span-diagram-cofork-hom-double-arrow
-  pr2 (pr2 (pr2 (pr2 (hom-span-diagram-cofork-hom-double-arrow)))) =
+  pr2 (pr2 (pr2 (pr2 hom-span-diagram-cofork-hom-double-arrow))) =
     right-square-hom-span-diagram-cofork-hom-double-arrow
 ```
 
@@ -504,7 +509,8 @@ module _
       ( domain-map-equiv-double-arrow a a' e)
       ( vertical-map-span-cocone-cofork a')
   left-square-equiv-span-diagram-cofork-equiv-double-arrow =
-    ind-coproduct _ refl-htpy refl-htpy
+    left-square-hom-span-diagram-cofork-hom-double-arrow a a'
+      ( hom-equiv-double-arrow a a' e)
 
   right-square-equiv-span-diagram-cofork-equiv-double-arrow :
     coherence-square-maps'
@@ -513,22 +519,21 @@ module _
       ( codomain-map-equiv-double-arrow a a' e)
       ( horizontal-map-span-cocone-cofork a')
   right-square-equiv-span-diagram-cofork-equiv-double-arrow =
-    ind-coproduct _
-      ( left-square-equiv-double-arrow a a' e)
-      ( right-square-equiv-double-arrow a a' e)
+    right-square-hom-span-diagram-cofork-hom-double-arrow a a'
+      ( hom-equiv-double-arrow a a' e)
 
   equiv-span-diagram-cofork-equiv-double-arrow :
     equiv-span-diagram
       ( span-diagram-cofork a)
       ( span-diagram-cofork a')
-  pr1 (equiv-span-diagram-cofork-equiv-double-arrow) =
+  pr1 equiv-span-diagram-cofork-equiv-double-arrow =
     domain-equiv-equiv-double-arrow a a' e
-  pr1 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow)) =
+  pr1 (pr2 equiv-span-diagram-cofork-equiv-double-arrow) =
     codomain-equiv-equiv-double-arrow a a' e
-  pr1 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow))) =
+  pr1 (pr2 (pr2 equiv-span-diagram-cofork-equiv-double-arrow)) =
     spanning-equiv-equiv-span-diagram-cofork-equiv-double-arrow
-  pr1 (pr2 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow)))) =
+  pr1 (pr2 (pr2 (pr2 equiv-span-diagram-cofork-equiv-double-arrow))) =
     left-square-equiv-span-diagram-cofork-equiv-double-arrow
-  pr2 (pr2 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow)))) =
+  pr2 (pr2 (pr2 (pr2 equiv-span-diagram-cofork-equiv-double-arrow))) =
     right-square-equiv-span-diagram-cofork-equiv-double-arrow
 ```

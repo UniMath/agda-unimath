@@ -123,14 +123,8 @@ module _
         ( cofork-cocone-sequential-diagram c))
   pr1 equiv-double-arrow-flattening-lemma-sequential-colimit =
     inv-associative-Σ
-      ( ℕ)
-      ( family-sequential-diagram A)
-      ( P ∘ ind-Σ (map-cocone-sequential-diagram c))
   pr1 (pr2 equiv-double-arrow-flattening-lemma-sequential-colimit) =
     inv-associative-Σ
-      ( ℕ)
-      ( family-sequential-diagram A)
-      ( P ∘ ind-Σ (map-cocone-sequential-diagram c))
   pr1 (pr2 (pr2 equiv-double-arrow-flattening-lemma-sequential-colimit)) =
     refl-htpy
   pr2 (pr2 (pr2 equiv-double-arrow-flattening-lemma-sequential-colimit)) =

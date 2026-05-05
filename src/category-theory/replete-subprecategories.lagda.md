@@ -15,6 +15,7 @@ open import category-theory.precategories
 open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.iterated-dependent-product-types
@@ -22,6 +23,7 @@ open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -247,7 +249,7 @@ module _
     ( equiv-tot
       ( equiv-is-iso-is-iso-base-is-replete-Subprecategory
           C P is-replete-P {x} {y})) ∘e
-    ( inv-associative-Σ _ _ _) ∘e
+    ( inv-associative-Σ) ∘e
     ( equiv-tot
       ( λ f →
         ( commutative-product) ∘e

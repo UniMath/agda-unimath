@@ -74,7 +74,7 @@ refl-htpy-hom-species-types f X = refl-htpy
 htpy-eq-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   {f g : hom-species-types F G} →
-  Id f g → htpy-hom-species-types f g
+  f ＝ g → htpy-hom-species-types f g
 htpy-eq-hom-species-types refl X y = refl
 
 is-torsorial-htpy-hom-species-types :
@@ -95,7 +95,7 @@ is-equiv-htpy-eq-hom-species-types f =
 
 eq-htpy-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
-  {f g : hom-species-types F G} → htpy-hom-species-types f g → Id f g
+  {f g : hom-species-types F G} → htpy-hom-species-types f g → f ＝ g
 eq-htpy-hom-species-types {f = f} {g = g} =
   map-inv-is-equiv (is-equiv-htpy-eq-hom-species-types f g)
 ```
@@ -124,12 +124,12 @@ module _
 left-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (comp-hom-species-types (id-hom-species-types G) f) f
+  comp-hom-species-types (id-hom-species-types G) f ＝ f
 left-unit-law-comp-hom-species-types f = refl
 
 right-unit-law-comp-hom-species-types :
   {l1 l2 l3 : Level} {F : species-types l1 l2} {G : species-types l1 l3}
   (f : hom-species-types F G) →
-  Id (comp-hom-species-types f (id-hom-species-types F)) f
+  comp-hom-species-types f (id-hom-species-types F) ＝ f
 right-unit-law-comp-hom-species-types f = refl
 ```

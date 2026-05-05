@@ -16,6 +16,8 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-identifications
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
@@ -497,7 +499,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( Prop-Set _)
                 ( λ ω → trunc-Prop (dependent-identification B ω y y'))
 
-            P : type-trunc-Set (Id a a) → Prop _
+            P : type-trunc-Set (a ＝ a) → Prop _
             P = pr1 (center ℙ)
 
             compute-P :
@@ -521,7 +523,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                         ( unit-trunc-Set y'))))
 
             f : type-hom-Prop
-                ( trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P)))
+                ( trunc-Prop (Σ (type-trunc-Set (a ＝ a)) (type-Prop ∘ P)))
                 ( mere-eq-Prop {A = Σ A B} (a , y) (a , y'))
             f t =
               apply-universal-property-trunc-Prop t
@@ -531,8 +533,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     ( λ u' →
                       hom-set-Set
                         ( set-Prop (P u'))
-                        ( set-Prop
-                          ( mere-eq-Prop (a , y) (a , y'))))
+                        ( set-Prop (mere-eq-Prop (a , y) (a , y'))))
                     ( λ ω v' →
                       apply-universal-property-trunc-Prop
                         ( map-equiv (compute-P ω) v')
@@ -542,7 +543,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     ( v)
             e :
               mere-eq {A = Σ A B} (a , y) (a , y') ≃
-              type-trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P))
+              type-trunc-Prop (Σ (type-trunc-Set (a ＝ a)) (type-Prop ∘ P))
             e =
               equiv-iff
                 ( mere-eq-Prop (a , y) (a , y'))
@@ -619,11 +620,8 @@ abstract
             ( unit-trunc-Set ∘ f , Eηf)
             ( refl-htpy))
           ( λ { (inl x) → id-equiv ; (inr x) → id-equiv})) ∘e
-        ( inv-equiv
-          ( right-distributive-Σ-coproduct
-            ( im (f ∘ inl))
-            ( im (f ∘ inr))
-            ( rec-coproduct (B ∘ pr1) (B ∘ pr1))))
+        ( inv-right-distributive-Σ-coproduct
+          ( rec-coproduct (B ∘ pr1) (B ∘ pr1)))
 
       i : Fin k → type-trunc-Set (im (f ∘ inl))
       i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)

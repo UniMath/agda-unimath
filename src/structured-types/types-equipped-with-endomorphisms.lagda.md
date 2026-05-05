@@ -8,18 +8,20 @@ module structured-types.types-equipped-with-endomorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.endomorphisms
-open import foundation.function-types
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.endomorphisms
+open import foundation-core.function-types
 ```
 
 </details>
 
 ## Idea
 
-A type equipped with an endomorphism consists of a type `A` equipped with a map
-`A → A`.
+A {{#concept "type equipped with an endomorphism" Agda=Type-With-Endomorphism}}
+consists of a type `A` [equipped](foundation.structure.md) with a map `A → A`.
 
 ## Definitions
 

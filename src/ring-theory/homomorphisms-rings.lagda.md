@@ -8,6 +8,7 @@ module ring-theory.homomorphisms-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -33,7 +34,8 @@ open import ring-theory.rings
 
 ## Idea
 
-Ring homomorphisms are maps between rings that preserve the ring structure
+{{#concept "Ring homomorphisms" WD="ring homomorphism" WDID=Q1194212 Agda=hom-Ring}}
+are maps between [rings](ring-theory.rings.md) that preserve the ring structure.
 
 ## Definitions
 

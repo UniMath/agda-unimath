@@ -12,8 +12,10 @@ open import foundation.binary-transport
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -34,7 +36,9 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-We construct the **involutive type of H-space structures** on a pointed type.
+We construct the
+{{#concept "involutive type of H-space structures" Agda=h-space-Involutive-Type}}
+on a pointed type.
 
 ## Definition
 
@@ -160,35 +164,20 @@ module _
       ( right-unit)) ∙
     ( inv (ap-id (pr2 coh-μ x)))
 
-  is-torsorial-htpy-h-space-Involutive-Type :
-    ( μ : h-space-Involutive-Type A X) →
-    is-torsorial (htpy-h-space-Involutive-Type μ)
-  is-torsorial-htpy-h-space-Involutive-Type (μ , ν , ρ) =
-    is-torsorial-Eq-structure
-      ( is-torsorial-htpy μ)
-      ( μ , refl-htpy)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-Eq-Π
-          ( λ f → is-torsorial-Eq-Π (λ x → is-torsorial-htpy (ν f x))))
-        ( ν , (λ f x p → refl))
-        ( is-contr-equiv
-          ( Σ ( symmetric-Id
-                ( ( X) ,
-                  ( λ x →
-                    ν ( map-constant-pointed-map (type-2-Element-Type X , x) A)
-                      ( x)
-                      ( refl))))
-              ( Eq-symmetric-Id
-                ( ( X) ,
-                  ( λ x →
-                    ν ( map-constant-pointed-map (type-2-Element-Type X , x) A)
-                      ( x)
-                      ( refl)))
-                ( ρ)))
-          ( equiv-tot
-            ( λ α →
-              equiv-binary-tr
-                ( Eq-symmetric-Id
+  abstract
+    is-torsorial-htpy-h-space-Involutive-Type :
+      ( μ : h-space-Involutive-Type A X) →
+      is-torsorial (htpy-h-space-Involutive-Type μ)
+    is-torsorial-htpy-h-space-Involutive-Type (μ , ν , ρ) =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy μ)
+        ( μ , refl-htpy)
+        ( is-torsorial-Eq-structure
+          ( is-torsorial-Eq-Π
+            ( λ f → is-torsorial-Eq-Π (λ x → is-torsorial-htpy (ν f x))))
+          ( ν , (λ f x p → refl))
+          ( is-contr-equiv
+            ( Σ ( symmetric-Id
                   ( ( X) ,
                     ( λ x →
                       ν ( map-constant-pointed-map
@@ -196,7 +185,7 @@ module _
                           ( A))
                         ( x)
                         ( refl))))
-                ( refl-Eq-unordered-pair-tr-symmetric-Id
+                ( Eq-symmetric-Id
                   ( ( X) ,
                     ( λ x →
                       ν ( map-constant-pointed-map
@@ -204,23 +193,43 @@ module _
                           ( A))
                         ( x)
                         ( refl)))
-                  ( ρ))
-                ( id-equiv-symmetric-Id
-                  ( ( X) ,
-                    ( λ x →
-                      ν ( map-constant-pointed-map
-                          ( type-2-Element-Type X , x)
-                          ( A))
-                        ( x)
-                        ( refl)))
-                  ( α))))
-          ( is-torsorial-Eq-symmetric-Id
-            ( ( X) ,
-              ( λ x →
-                ν ( map-constant-pointed-map (type-2-Element-Type X , x) A)
-                  ( x)
-                  ( refl)))
-            ( ρ))))
+                  ( ρ)))
+            ( equiv-tot
+              ( λ α →
+                equiv-binary-tr
+                  ( Eq-symmetric-Id
+                    ( ( X) ,
+                      ( λ x →
+                        ν ( map-constant-pointed-map
+                            ( type-2-Element-Type X , x)
+                            ( A))
+                          ( x)
+                          ( refl))))
+                  ( refl-Eq-unordered-pair-tr-symmetric-Id
+                    ( ( X) ,
+                      ( λ x →
+                        ν ( map-constant-pointed-map
+                            ( type-2-Element-Type X , x)
+                            ( A))
+                          ( x)
+                          ( refl)))
+                    ( ρ))
+                  ( id-equiv-symmetric-Id
+                    ( ( X) ,
+                      ( λ x →
+                        ν ( map-constant-pointed-map
+                            ( type-2-Element-Type X , x)
+                            ( A))
+                          ( x)
+                          ( refl)))
+                    ( α))))
+            ( is-torsorial-Eq-symmetric-Id
+              ( ( X) ,
+                ( λ x →
+                  ν ( map-constant-pointed-map (type-2-Element-Type X , x) A)
+                    ( x)
+                    ( refl)))
+              ( ρ))))
 
   htpy-eq-h-space-Involutive-Type :
     (μ μ' : h-space-Involutive-Type A X) →
@@ -228,13 +237,14 @@ module _
   htpy-eq-h-space-Involutive-Type μ .μ refl =
     refl-htpy-h-space-Involutive-Type μ
 
-  is-equiv-htpy-eq-h-space-Involutive-Type :
-    (μ μ' : h-space-Involutive-Type A X) →
-    is-equiv (htpy-eq-h-space-Involutive-Type μ μ')
-  is-equiv-htpy-eq-h-space-Involutive-Type μ =
-    fundamental-theorem-id
-      ( is-torsorial-htpy-h-space-Involutive-Type μ)
-      ( htpy-eq-h-space-Involutive-Type μ)
+  abstract
+    is-equiv-htpy-eq-h-space-Involutive-Type :
+      (μ μ' : h-space-Involutive-Type A X) →
+      is-equiv (htpy-eq-h-space-Involutive-Type μ μ')
+    is-equiv-htpy-eq-h-space-Involutive-Type μ =
+      fundamental-theorem-id
+        ( is-torsorial-htpy-h-space-Involutive-Type μ)
+        ( htpy-eq-h-space-Involutive-Type μ)
 
   extensionality-h-space-Involutive-Type :
     (μ μ' : h-space-Involutive-Type A X) →

@@ -12,6 +12,7 @@ open import category-theory.set-magmoids
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
@@ -20,6 +21,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
@@ -231,16 +233,8 @@ module _
   equiv-eq-map-eq-functor-Set-Magmoid =
     equiv-ap-emb
       ( comp-emb
-        ( emb-subtype
-          ( preserves-comp-hom-prop-map-Set-Magmoid A B))
-        ( emb-equiv
-          ( inv-associative-Σ
-            ( obj-Set-Magmoid A → obj-Set-Magmoid B)
-            ( λ F₀ →
-              { x y : obj-Set-Magmoid A} →
-              hom-Set-Magmoid A x y →
-              hom-Set-Magmoid B (F₀ x) (F₀ y))
-            ( preserves-comp-hom-map-Set-Magmoid A B))))
+        ( emb-subtype (preserves-comp-hom-prop-map-Set-Magmoid A B))
+        ( emb-equiv inv-associative-Σ))
 
   eq-map-eq-functor-Set-Magmoid :
     F ＝ G → map-functor-Set-Magmoid A B F ＝ map-functor-Set-Magmoid A B G

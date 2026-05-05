@@ -20,9 +20,12 @@ open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
@@ -31,6 +34,7 @@ open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import set-theory.countable-sets
@@ -138,6 +142,9 @@ one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
+
+neq-zero-one-ℚ : zero-ℚ ≠ one-ℚ
+neq-zero-one-ℚ ()
 ```
 
 ### The negative of a rational number
@@ -152,11 +159,11 @@ opaque
 ### The negation of zero is zero
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℚ
 
   neg-zero-ℚ : neg-ℚ zero-ℚ ＝ zero-ℚ
-  neg-zero-ℚ = refl
+  neg-zero-ℚ = eq-type-subtype is-reduced-prop-fraction-ℤ refl
 ```
 
 ### The mediant of two rationals
@@ -173,20 +180,49 @@ opaque
 
 ## Properties
 
-### The rational images of two similar integer fractions are equal
+### Two integer fractions are similar if and only if they are equal as rational numbers
 
 ```agda
-opaque
-  unfolding rational-fraction-ℤ
+module _
+  (x y : fraction-ℤ)
+  where
 
-  eq-ℚ-sim-fraction-ℤ :
-    (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-    rational-fraction-ℤ x ＝ rational-fraction-ℤ y
-  eq-ℚ-sim-fraction-ℤ x y H =
-    eq-pair-Σ'
-      ( pair
+  abstract opaque
+    unfolding rational-fraction-ℤ
+
+    eq-ℚ-sim-fraction-ℤ :
+      sim-fraction-ℤ x y → rational-fraction-ℤ x ＝ rational-fraction-ℤ y
+    eq-ℚ-sim-fraction-ℤ H =
+      eq-type-subtype
+        ( is-reduced-prop-fraction-ℤ)
         ( unique-reduce-fraction-ℤ x y H)
-        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+
+    sim-fraction-ℤ-eq-ℚ :
+      rational-fraction-ℤ x ＝ rational-fraction-ℤ y → sim-fraction-ℤ x y
+    sim-fraction-ℤ-eq-ℚ H =
+      transitive-sim-fraction-ℤ
+        ( x)
+        ( reduce-fraction-ℤ y)
+        ( y)
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y))
+        ( transitive-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( reduce-fraction-ℤ y)
+          ( tr
+            ( sim-fraction-ℤ (reduce-fraction-ℤ x))
+            ( ap fraction-ℚ H)
+            ( refl-sim-fraction-ℤ (reduce-fraction-ℤ x)))
+          ( sim-reduced-fraction-ℤ x))
+
+    eq-ℚ-iff-sim-fraction-ℤ :
+      (sim-fraction-ℤ x y) ↔ (rational-fraction-ℤ x ＝ rational-fraction-ℤ y)
+    eq-ℚ-iff-sim-fraction-ℤ =
+      ( eq-ℚ-sim-fraction-ℤ ,
+        sim-fraction-ℤ-eq-ℚ)
 ```
 
 ### The type of rationals is a set
@@ -297,9 +333,9 @@ module _
 opaque
   unfolding neg-ℚ
 
-  preserves-neg-rational-ℤ :
+  neg-rational-ℤ :
     (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-  preserves-neg-rational-ℤ k =
+  neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
@@ -308,21 +344,19 @@ opaque
 ```agda
 abstract
   eq-neg-one-ℚ : neg-ℚ one-ℚ ＝ neg-one-ℚ
-  eq-neg-one-ℚ =
-    inv (preserves-neg-rational-ℤ one-ℤ)
+  eq-neg-one-ℚ = inv (neg-rational-ℤ one-ℤ)
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
 opaque
-  unfolding neg-ℚ
-  unfolding rational-fraction-ℤ
+  unfolding neg-ℚ rational-fraction-ℤ
 
-  preserves-neg-rational-fraction-ℤ :
+  neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-  preserves-neg-rational-fraction-ℤ x =
+  neg-rational-fraction-ℤ x =
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
