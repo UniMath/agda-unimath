@@ -52,12 +52,12 @@ exception-Maybe = inr star
 extend-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Maybe Y) → Maybe X → Maybe Y
 extend-Maybe f (inl x) = f x
-extend-Maybe f (inr *) = inr *
+extend-Maybe f (inr star) = inr star
 
 map-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → Maybe X → Maybe Y
 map-Maybe f (inl x) = inl (f x)
-map-Maybe f (inr *) = inr *
+map-Maybe f (inr star) = inr star
 ```
 
 ### The inductive definition of the maybe monad

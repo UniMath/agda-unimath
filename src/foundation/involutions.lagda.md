@@ -7,6 +7,7 @@ module foundation.involutions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-truncated-types
@@ -215,8 +216,6 @@ module _
   coherence-is-involution = f ·l H ~ H ·r f
 ```
 
-## Examples
-
 ### The identity function is an involution
 
 ```agda
@@ -233,4 +232,36 @@ involution-Pointed-Type :
   {l : Level} (A : UU l) → Pointed-Type l
 pr1 (involution-Pointed-Type A) = involution A
 pr2 (involution-Pointed-Type A) = id-involution
+```
+
+### If `f : A → A` is an involution and `e : A ≃ B` is an equivalence, then `e ∘ f ∘ e⁻¹` is an involution
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  (f : A → A) (H : is-involution f)
+  where
+
+  is-involution-conjugation :
+    is-involution (map-equiv e ∘ f ∘ map-inv-equiv e)
+  is-involution-conjugation x =
+    ap
+      ( map-equiv e)
+      ( ap f (is-retraction-map-inv-equiv e (f (map-inv-equiv e x))) ∙
+        H (map-inv-equiv e x)) ∙
+    is-section-map-inv-equiv e x
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  (f : B → B) (H : is-involution f)
+  where
+
+  is-involution-conjugation' :
+    is-involution (map-inv-equiv e ∘ f ∘ map-equiv e)
+  is-involution-conjugation' x =
+    ap
+      ( map-inv-equiv e)
+      ( ap f (is-section-map-inv-equiv e (f (map-equiv e x))) ∙
+        H (map-equiv e x)) ∙
+    is-retraction-map-inv-equiv e x
 ```
