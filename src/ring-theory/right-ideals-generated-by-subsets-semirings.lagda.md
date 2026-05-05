@@ -69,10 +69,10 @@ module _
     {l : Level} (J : right-ideal-Semiring l R) →
     leq-right-ideal-Semiring R I J ↔ (S ⊆ subset-right-ideal-Semiring R J)
 
-  contains-subset-is-right-ideal-generated-subset-Semiring :
+  contains-subset-is-right-ideal-generated-by-subset-Semiring :
     is-right-ideal-generated-by-subset-Semiring →
     S ⊆ subset-right-ideal-Semiring R I
-  contains-subset-is-right-ideal-generated-subset-Semiring U =
+  contains-subset-is-right-ideal-generated-by-subset-Semiring U =
     forward-implication (U I) (refl-leq-right-ideal-Semiring R I)
 
   leq-is-right-ideal-generated-by-subset-Semiring :

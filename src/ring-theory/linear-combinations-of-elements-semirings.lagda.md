@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.singleton-subtypes
 open import foundation.unit-type

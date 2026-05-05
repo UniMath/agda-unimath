@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import ring-theory.semirings

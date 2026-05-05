@@ -286,13 +286,12 @@ module _
   pr2 subtractive-closure-left-ideal-Semiring =
     is-subtractive-subtractive-closure-left-ideal-Semiring
 
-  forward-implication-is-subtractive-closure-subtractive-closure-left-ideal-Semiring :
+  contains-left-ideal-leq-subtractive-closure-left-ideal-Semiring :
     {l3 : Level} (J : subtractive-left-ideal-Semiring l3 R) →
     leq-subtractive-left-ideal-Semiring R
       subtractive-closure-left-ideal-Semiring J →
     leq-left-ideal-Semiring R I (left-ideal-subtractive-left-ideal-Semiring R J)
-  forward-implication-is-subtractive-closure-subtractive-closure-left-ideal-Semiring
-    J H =
+  contains-left-ideal-leq-subtractive-closure-left-ideal-Semiring J H =
     transitive-leq-subtype
       ( subset-left-ideal-Semiring R I)
       ( subset-subtractive-closure-left-ideal-Semiring)
@@ -321,11 +320,9 @@ module _
     is-subtractive-closure-left-ideal-Semiring R I
       subtractive-closure-left-ideal-Semiring
   pr1 (is-subtractive-closure-subtractive-closure-left-ideal-Semiring J) =
-    forward-implication-is-subtractive-closure-subtractive-closure-left-ideal-Semiring
-      J
+    contains-left-ideal-leq-subtractive-closure-left-ideal-Semiring J
   pr2 (is-subtractive-closure-subtractive-closure-left-ideal-Semiring J) =
-    leq-subtractive-closure-left-ideal-Semiring
-      J
+    leq-subtractive-closure-left-ideal-Semiring J
 ```
 
 #### Subtractive closure is order preserving
