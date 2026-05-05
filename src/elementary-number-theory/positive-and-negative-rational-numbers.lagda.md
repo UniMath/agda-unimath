@@ -11,13 +11,11 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.nonpositive-rational-numbers
-open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -125,11 +123,15 @@ decide-is-negative-is-positive-is-nonzero-ℚ {q} q≠0 =
 #### Any positive rational number is nonnegative
 
 ```agda
-opaque
+abstract opaque
   unfolding is-nonnegative-ℚ is-positive-ℚ
 
   is-nonnegative-is-positive-ℚ : {q : ℚ} → is-positive-ℚ q → is-nonnegative-ℚ q
   is-nonnegative-is-positive-ℚ = is-nonnegative-is-positive-ℤ
+
+  is-nonnegative-rational-ℚ⁺ : (q : ℚ⁺) → is-nonnegative-ℚ (rational-ℚ⁺ q)
+  is-nonnegative-rational-ℚ⁺ (q , 0<q) =
+    is-nonnegative-is-positive-ℚ {q} 0<q
 
 nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
 nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ H)
@@ -138,7 +140,7 @@ nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ H)
 ### Any negative rational number is nonpositive
 
 ```agda
-opaque
+abstract opaque
   unfolding is-negative-ℚ is-nonpositive-ℚ
 
   is-nonpositive-is-negative-ℚ : {q : ℚ} → is-negative-ℚ q → is-nonpositive-ℚ q
@@ -153,7 +155,7 @@ nonpositive-ℚ⁻ (q , H) = (q , is-nonpositive-is-negative-ℚ H)
 #### The negation of a positive rational number is negative
 
 ```agda
-opaque
+abstract opaque
   unfolding is-negative-ℚ
 
   is-negative-neg-is-positive-ℚ :
@@ -168,7 +170,7 @@ neg-ℚ⁺ (q , is-pos-q) =
 #### The negation of a negative rational number is positive
 
 ```agda
-opaque
+abstract opaque
   unfolding is-negative-ℚ
 
   is-positive-neg-is-negative-ℚ :
@@ -182,7 +184,7 @@ neg-ℚ⁻ (q , is-neg-q) = (neg-ℚ q , is-positive-neg-is-negative-ℚ is-neg-
 #### The negation of a nonnegative rational number is nonpositive
 
 ```agda
-opaque
+abstract opaque
   unfolding is-nonpositive-ℚ
 
   is-nonpositive-neg-is-nonnegative-ℚ :
@@ -197,7 +199,7 @@ neg-ℚ⁰⁺ (q , is-nonneg-q) =
 #### The negation of a nonpositive rational number is nonnegative
 
 ```agda
-opaque
+abstract opaque
   unfolding is-nonpositive-ℚ
 
   is-nonnegative-neg-is-nonpositive-ℚ :

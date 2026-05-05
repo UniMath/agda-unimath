@@ -16,11 +16,13 @@ open import trees.binary-w-types public
 open import trees.bounded-multisets public
 open import trees.cartesian-morphisms-polynomial-endofunctors public
 open import trees.cartesian-natural-transformations-polynomial-endofunctors public
+open import trees.cartesian-product-polynomial-endofunctors public
 open import trees.coalgebra-of-directed-trees public
 open import trees.coalgebra-of-enriched-directed-trees public
 open import trees.coalgebras-polynomial-endofunctors public
 open import trees.combinator-directed-trees public
 open import trees.combinator-enriched-directed-trees public
+open import trees.coproduct-polynomial-endofunctors public
 open import trees.directed-trees public
 open import trees.elementhood-relation-coalgebras-polynomial-endofunctors public
 open import trees.elementhood-relation-w-types public
@@ -32,6 +34,7 @@ open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
 open import trees.full-binary-trees public
+open import trees.function-polynomial-endofunctors public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public
 open import trees.functoriality-w-types public

@@ -46,11 +46,11 @@ module _
 
   coherence-triangle-identifications :
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
-  coherence-triangle-identifications left right top = left ＝ top ∙ right
+  coherence-triangle-identifications left right top = (left ＝ top ∙ right)
 
   coherence-triangle-identifications' :
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
-  coherence-triangle-identifications' left right top = top ∙ right ＝ left
+  coherence-triangle-identifications' left right top = (top ∙ right ＝ left)
 ```
 
 ### The horizontally constant triangle of identifications

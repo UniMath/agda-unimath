@@ -21,13 +21,11 @@ open import elementary-number-theory.minimum-rational-numbers
 open import elementary-number-theory.multiplication-nonnegative-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -64,6 +62,22 @@ abstract
     inv (abs-neg-ℚ _) ∙ ap abs-ℚ (distributive-neg-diff-ℚ _ _)
 ```
 
+### Negation preserves distance
+
+```agda
+abstract
+  dist-neg-ℚ : (p q : ℚ) → dist-ℚ (neg-ℚ p) (neg-ℚ q) ＝ dist-ℚ p q
+  dist-neg-ℚ p q =
+    equational-reasoning
+      abs-ℚ (neg-ℚ p -ℚ neg-ℚ q)
+      ＝ abs-ℚ (neg-ℚ p +ℚ q)
+        by ap abs-ℚ (ap-add-ℚ refl (neg-neg-ℚ q))
+      ＝ abs-ℚ (q -ℚ p)
+        by ap abs-ℚ (commutative-add-ℚ _ _)
+      ＝ dist-ℚ p q
+        by commutative-dist-ℚ q p
+```
+
 ### A rational number's distance from itself is zero
 
 ```agda
@@ -95,11 +109,11 @@ abstract
 ### Zero laws
 
 ```agda
-opaque
+abstract opaque
   unfolding neg-ℚ
 
   right-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ q zero-ℚ ＝ abs-ℚ q
-  right-zero-law-dist-ℚ q = ap abs-ℚ (right-unit-law-add-ℚ _)
+  right-zero-law-dist-ℚ q = ap abs-ℚ (right-zero-law-diff-ℚ _)
 
   left-zero-law-dist-ℚ : (q : ℚ) → dist-ℚ zero-ℚ q ＝ abs-ℚ q
   left-zero-law-dist-ℚ q = commutative-dist-ℚ _ _ ∙ right-zero-law-dist-ℚ q
@@ -175,10 +189,7 @@ abstract
       ( rational-dist-ℚ p q)
       ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
       ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-      ( leq-eq-ℚ
-        ( (rational-abs-ℚ p) +ℚ (rational-abs-ℚ (neg-ℚ q)))
-        ( rational-abs-ℚ p +ℚ rational-abs-ℚ q)
-        ( ap (add-ℚ (rational-abs-ℚ p) ∘ rational-ℚ⁰⁺) (abs-neg-ℚ q)))
+      ( leq-eq-ℚ (ap (add-ℚ (rational-abs-ℚ p) ∘ rational-ℚ⁰⁺) (abs-neg-ℚ q)))
       ( triangle-inequality-abs-ℚ p (neg-ℚ q))
 ```
 

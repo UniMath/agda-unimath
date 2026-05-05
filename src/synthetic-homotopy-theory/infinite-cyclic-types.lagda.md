@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.infinite-cyclic-types where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
@@ -15,8 +16,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.equivalences-contractible-types
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -24,10 +28,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism
@@ -145,7 +150,7 @@ module _
                 ( λ f →
                   is-proof-irrelevant-is-prop
                     ( is-property-is-equiv (pr1 f))
-                    ( is-equiv-htpy id
+                    ( is-equiv-htpy-id
                       ( htpy-eq
                         ( ap
                           ( pr1)
@@ -153,8 +158,7 @@ module _
                           { y = pair id (pair refl refl-htpy)}
                           ( eq-is-contr
                             ( is-initial-ℤ-Pointed-Type-With-Aut
-                              ℤ-Pointed-Type-With-Aut))))
-                      ( is-equiv-id)))) ∘e
+                              ℤ-Pointed-Type-With-Aut))))))) ∘e
               ( ( equiv-right-swap-Σ) ∘e
                 ( ( associative-Σ) ∘e
                   ( ( equiv-right-swap-Σ) ∘e

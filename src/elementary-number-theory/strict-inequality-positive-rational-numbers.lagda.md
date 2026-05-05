@@ -82,20 +82,16 @@ strict-preorder-ℚ⁺ =
 ### There is no least positive rational number
 
 ```agda
-opaque
+abstract opaque
   mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
   mediant-zero-ℚ⁺ x =
     ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
       is-positive-le-zero-ℚ
         ( le-left-mediant-ℚ
-          ( zero-ℚ)
-          ( rational-ℚ⁺ x)
           ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ x))))
 
   le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
   le-mediant-zero-ℚ⁺ x =
     le-right-mediant-ℚ
-      ( zero-ℚ)
-      ( rational-ℚ⁺ x)
       ( le-zero-is-positive-ℚ (is-positive-rational-ℚ⁺ x))
 ```

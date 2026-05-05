@@ -8,6 +8,7 @@ module order-theory.zorns-lemma where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types
@@ -105,7 +106,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (lem : LEM (l1 ⊔ l3))
+  {l1 l2 l3 : Level} (lem : level-LEM (l1 ⊔ l3))
   where
 
   inhabited-zorns-lemma-zorns-lemma :

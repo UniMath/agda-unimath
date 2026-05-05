@@ -8,6 +8,7 @@ module commutative-algebra.large-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -58,6 +59,11 @@ record Large-Commutative-Ring
   zero-Large-Commutative-Ring : type-Large-Commutative-Ring lzero
   zero-Large-Commutative-Ring =
     zero-Large-Ring large-ring-Large-Commutative-Ring
+
+  raise-zero-Large-Commutative-Ring :
+    (l : Level) → type-Large-Commutative-Ring l
+  raise-zero-Large-Commutative-Ring =
+    raise-zero-Large-Ring large-ring-Large-Commutative-Ring
 
   sim-prop-Large-Commutative-Ring :
     Large-Relation-Prop β type-Large-Commutative-Ring
@@ -121,4 +127,29 @@ module _
       ( multiplicative-large-monoid-Large-Ring
         ( large-ring-Large-Commutative-Ring R))
       ( commutative-mul-Large-Commutative-Ring R)
+
+  raise-one-Large-Commutative-Ring :
+    (l : Level) → type-Large-Commutative-Ring R l
+  raise-one-Large-Commutative-Ring =
+    raise-one-Large-Ring (large-ring-Large-Commutative-Ring R)
+
+  one-Large-Commutative-Ring : type-Large-Commutative-Ring R lzero
+  one-Large-Commutative-Ring =
+    one-Large-Ring (large-ring-Large-Commutative-Ring R)
+```
+
+### The raise operation is a commutative ring homomorphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β) (l1 l2 : Level)
+  where
+
+  hom-raise-Large-Commutative-Ring :
+    hom-Commutative-Ring
+      ( commutative-ring-Large-Commutative-Ring R l1)
+      ( commutative-ring-Large-Commutative-Ring R (l1 ⊔ l2))
+  hom-raise-Large-Commutative-Ring =
+    hom-raise-Large-Ring (large-ring-Large-Commutative-Ring R) l1 l2
 ```

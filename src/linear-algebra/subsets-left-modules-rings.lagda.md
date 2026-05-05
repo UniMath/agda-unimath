@@ -9,6 +9,7 @@ module linear-algebra.subsets-left-modules-rings where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -88,9 +89,9 @@ module _
   (R : Ring l1) (M : left-module-Ring l2 R) (S : subset-left-module-Ring l3 R M)
   where
 
-  is-closed-under-multiplication-by-scalar-prop-subset-left-module-Ring :
+  is-closed-under-scalar-multiplication-prop-subset-left-module-Ring :
     Prop (l1 ⊔ l2 ⊔ l3)
-  is-closed-under-multiplication-by-scalar-prop-subset-left-module-Ring =
+  is-closed-under-scalar-multiplication-prop-subset-left-module-Ring =
     Π-Prop
       ( type-Ring R)
       ( λ r →
@@ -101,11 +102,11 @@ module _
               ( S x)
               ( S (mul-left-module-Ring R M r x))))
 
-  is-closed-under-multiplication-by-scalar-subset-left-module-Ring :
+  is-closed-under-scalar-multiplication-subset-left-module-Ring :
     UU (l1 ⊔ l2 ⊔ l3)
-  is-closed-under-multiplication-by-scalar-subset-left-module-Ring =
+  is-closed-under-scalar-multiplication-subset-left-module-Ring =
     type-Prop
-      is-closed-under-multiplication-by-scalar-prop-subset-left-module-Ring
+      is-closed-under-scalar-multiplication-prop-subset-left-module-Ring
 ```
 
 ### The condition that a subset contains zero

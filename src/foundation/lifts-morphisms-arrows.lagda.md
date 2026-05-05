@@ -108,7 +108,7 @@ module _
     pr2 (pr2 coherence-triangle-lift-hom-arrow)
 
   lift-codomain-lift-hom-arrow :
-    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)
+    lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)
   lift-codomain-lift-hom-arrow =
     ( map-codomain-lift-hom-arrow , coh-codomain-lift-hom-arrow)
 ```
@@ -125,7 +125,7 @@ module _
   where
 
   is-lift-hom-arrow-of-lift-codomain-hom-arrow :
-    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
+    lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
     (A → B) → UU (l1 ⊔ l4 ⊔ l5 ⊔ l6)
   is-lift-hom-arrow-of-lift-codomain-hom-arrow (i , I) j =
     Σ ( coherence-hom-arrow f g j i)
@@ -141,7 +141,7 @@ module _
               ( I)))
 
   lift-hom-arrow-of-lift-codomain-hom-arrow :
-    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
+    lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α) →
     UU (l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   lift-hom-arrow-of-lift-codomain-hom-arrow i =
     Σ (A → B) (is-lift-hom-arrow-of-lift-codomain-hom-arrow i)
@@ -161,7 +161,8 @@ module _
   where
 
   compute-fiber-lift-codomain-lift-hom-arrow :
-    (δ : lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
+    (δ :
+      lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α)) →
     fiber (lift-codomain-lift-hom-arrow f g h β α) δ ≃
     lift-hom-arrow-of-lift-codomain-hom-arrow f g h β α δ
   compute-fiber-lift-codomain-lift-hom-arrow (δ , Hδ) =
@@ -175,7 +176,7 @@ module _
       by
       equiv-tot
         ( λ γ →
-          extensionality-lift
+          extensionality-lift-map
             ( map-codomain-hom-arrow g h β)
             ( map-codomain-hom-arrow f h α)
             ( lift-codomain-lift-hom-arrow f g h β α γ)
@@ -250,7 +251,7 @@ module _
   (let Hβ = coh-hom-arrow g h β)
   (let Hα = coh-hom-arrow f h α)
   (iI@(i , I) :
-    lift (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
+    lift-map (map-codomain-hom-arrow g h β) (map-codomain-hom-arrow f h α))
   where
 
   equiv-htpy-cone-is-lift-hom-arrow-of-lift-codomain-hom-arrow :

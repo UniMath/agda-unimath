@@ -15,6 +15,7 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -350,9 +351,8 @@ module _
         by
         equiv-tot
           ( λ (a , p) →
-            compute-coherence-triangle-fiber-precomp'
+            compute-extension-fiber-precomp'
               ( α₁ a)
-              ( X)
               ( inv-tr (λ c' → Q₁ c' → X) p x))
       ≃ Σ ( fiber α₀ c)
           ( λ (a , p) →

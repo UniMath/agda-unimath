@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.zero-modality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 

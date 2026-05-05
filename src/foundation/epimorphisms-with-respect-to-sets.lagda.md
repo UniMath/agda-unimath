@@ -11,10 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
@@ -80,27 +82,21 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
     is-epimorphism-Set f → is-surjective f
   is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
-    map-equiv
-      ( equiv-eq
-        ( ap
-          ( pr1)
-          ( htpy-eq
-            ( is-injective-is-emb
-              ( H (Prop-Set (l1 ⊔ l2)))
-              { g}
-              { h}
-              ( eq-htpy
-                ( λ a →
-                  eq-iff
-                    ( λ _ → unit-trunc-Prop (pair a refl))
-                    ( λ _ → raise-star))))
-            ( b))))
+    map-eq
+      ( ap
+        ( pr1)
+        ( htpy-eq
+          ( is-injective-is-emb
+            ( H (Prop-Set (l1 ⊔ l2)))
+            { λ _ → raise-unit-Prop (l1 ⊔ l2)}
+            { λ y → exists-structure-Prop A (λ x → f x ＝ y)}
+            ( eq-htpy
+              ( λ a →
+                eq-iff
+                  ( λ _ → unit-trunc-Prop (a , refl))
+                  ( λ _ → raise-star))))
+          ( b)))
       ( raise-star)
-    where
-    g : B → Prop (l1 ⊔ l2)
-    g y = raise-unit-Prop (l1 ⊔ l2)
-    h : B → Prop (l1 ⊔ l2)
-    h y = exists-structure-Prop A (λ x → f x ＝ y)
 ```
 
 ### There is at most one extension of a map into a set along a surjection

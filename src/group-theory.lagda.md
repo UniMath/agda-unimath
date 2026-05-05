@@ -56,6 +56,8 @@ open import group-theory.decidable-subgroups public
 open import group-theory.dependent-products-abelian-groups public
 open import group-theory.dependent-products-commutative-monoids public
 open import group-theory.dependent-products-groups public
+open import group-theory.dependent-products-large-monoids public
+open import group-theory.dependent-products-large-semigroups public
 open import group-theory.dependent-products-monoids public
 open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
@@ -108,6 +110,7 @@ open import group-theory.integer-powers-of-elements-large-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
 open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
+open import group-theory.invertible-elements-large-monoids public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-concrete-groups public
@@ -121,6 +124,11 @@ open import group-theory.kernels-homomorphisms-concrete-groups public
 open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-abelian-groups public
 open import group-theory.large-commutative-monoids public
+open import group-theory.large-function-abelian-groups public
+open import group-theory.large-function-commutative-monoids public
+open import group-theory.large-function-groups public
+open import group-theory.large-function-monoids public
+open import group-theory.large-function-semigroups public
 open import group-theory.large-groups public
 open import group-theory.large-monoids public
 open import group-theory.large-semigroups public
@@ -170,6 +178,13 @@ open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
 open import group-theory.products-of-elements-monoids public
+open import group-theory.products-of-finite-families-of-elements-commutative-monoids public
+open import group-theory.products-of-finite-families-of-elements-commutative-semigroups public
+open import group-theory.products-of-finite-sequences-of-elements-commutative-monoids public
+open import group-theory.products-of-finite-sequences-of-elements-commutative-semigroups public
+open import group-theory.products-of-finite-sequences-of-elements-groups public
+open import group-theory.products-of-finite-sequences-of-elements-monoids public
+open import group-theory.products-of-finite-sequences-of-elements-semigroups public
 open import group-theory.pullbacks-subgroups public
 open import group-theory.pullbacks-subsemigroups public
 open import group-theory.quotient-groups public
@@ -201,14 +216,7 @@ open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.sums-of-finite-families-of-elements-abelian-groups public
-open import group-theory.sums-of-finite-families-of-elements-commutative-monoids public
-open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups public
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups public
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids public
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups public
-open import group-theory.sums-of-finite-sequences-of-elements-groups public
-open import group-theory.sums-of-finite-sequences-of-elements-monoids public
-open import group-theory.sums-of-finite-sequences-of-elements-semigroups public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.surjective-semigroup-homomorphisms public
 open import group-theory.symmetric-concrete-groups public

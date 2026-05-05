@@ -17,6 +17,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -41,25 +43,31 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where
 
-  inv-tr : x ＝ y → B y → B x
-  inv-tr p = tr B (inv p)
-
-  is-retraction-inv-tr : (p : x ＝ y) → inv-tr p ∘ tr B p ~ id
+  is-retraction-inv-tr : (p : x ＝ y) → is-retraction (tr B p) (inv-tr B p)
   is-retraction-inv-tr refl b = refl
 
-  is-section-inv-tr : (p : x ＝ y) → tr B p ∘ inv-tr p ~ id
+  is-section-inv-tr : (p : x ＝ y) → is-section (tr B p) (inv-tr B p)
   is-section-inv-tr refl b = refl
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
   is-equiv-tr p =
     is-equiv-is-invertible
-      ( inv-tr p)
+      ( inv-tr B p)
       ( is-section-inv-tr p)
       ( is-retraction-inv-tr p)
 
+  is-equiv-inv-tr : (p : x ＝ y) → is-equiv (inv-tr B p)
+  is-equiv-inv-tr p =
+    is-equiv-is-invertible
+      ( tr B p)
+      ( is-retraction-inv-tr p)
+      ( is-section-inv-tr p)
+
   equiv-tr : x ＝ y → B x ≃ B y
-  pr1 (equiv-tr p) = tr B p
-  pr2 (equiv-tr p) = is-equiv-tr p
+  equiv-tr p = (tr B p , is-equiv-tr p)
+
+  equiv-inv-tr : x ＝ y → B y ≃ B x
+  equiv-inv-tr p = (inv-tr B p , is-equiv-inv-tr p)
 ```
 
 ### Transporting along `refl` is the identity equivalence

@@ -18,7 +18,10 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import group-theory.powers-of-elements-monoids
+
 open import ring-theory.central-elements-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.powers-of-elements-semirings
 open import ring-theory.rings
 ```
@@ -188,4 +191,23 @@ module _
                 ( ( left-negative-law-mul-Ring R (power-Ring R n x) x) ∙
                   ( ap (neg-Ring R) (inv (power-succ-Ring R n x)))))) ∙
             ( neg-neg-Ring R (power-Ring R (succ-ℕ n) x))))))
+```
+
+### Ring homomorphisms preserve powers of elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
+  where
+
+  abstract
+    preserves-powers-hom-Ring :
+      (n : ℕ) (x : type-Ring R) →
+      map-hom-Ring R S f (power-Ring R n x) ＝
+      power-Ring S n (map-hom-Ring R S f x)
+    preserves-powers-hom-Ring =
+      preserves-powers-hom-Monoid
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( hom-multiplicative-monoid-hom-Ring R S f)
 ```

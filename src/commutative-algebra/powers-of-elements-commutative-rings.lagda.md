@@ -8,6 +8,7 @@ module commutative-algebra.powers-of-elements-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -143,4 +144,24 @@ module _
     neg-Commutative-Ring A (power-Commutative-Ring A n x)
   odd-power-neg-Commutative-Ring =
     odd-power-neg-Ring (ring-Commutative-Ring A)
+```
+
+### Commutative ring homomorphisms preserve powers of elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Commutative-Ring l1) (S : Commutative-Ring l2)
+  (f : hom-Commutative-Ring R S)
+  where
+
+  abstract
+    preserves-powers-hom-Commutative-Ring :
+      (n : ℕ) (x : type-Commutative-Ring R) →
+      map-hom-Commutative-Ring R S f (power-Commutative-Ring R n x) ＝
+      power-Commutative-Ring S n (map-hom-Commutative-Ring R S f x)
+    preserves-powers-hom-Commutative-Ring =
+      preserves-powers-hom-Ring
+        ( ring-Commutative-Ring R)
+        ( ring-Commutative-Ring S)
+        ( f)
 ```

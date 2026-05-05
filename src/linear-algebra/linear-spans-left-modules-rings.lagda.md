@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -284,10 +285,10 @@ module _
               ( concat-tuple x-scalars y-scalars)
               ( concat-tuple x-vectors y-vectors))
 
-  is-closed-under-multiplication-by-scalarscalar-linear-span-left-module-Ring :
-    is-closed-under-multiplication-by-scalar-subset-left-module-Ring R M
+  is-closed-under-scalar-multiplication-linear-span-left-module-Ring :
+    is-closed-under-scalar-multiplication-subset-left-module-Ring R M
       ( subset-linear-span-left-module-Ring R M S)
-  is-closed-under-multiplication-by-scalarscalar-linear-span-left-module-Ring
+  is-closed-under-scalar-multiplication-linear-span-left-module-Ring
     r x x-in-span =
       let
         open
@@ -341,5 +342,5 @@ module _
   pr1 (pr2 (pr2 left-submodule-linear-span-left-module-Ring)) =
     is-closed-under-addition-linear-span-left-module-Ring
   pr2 (pr2 (pr2 left-submodule-linear-span-left-module-Ring)) =
-    is-closed-under-multiplication-by-scalarscalar-linear-span-left-module-Ring
+    is-closed-under-scalar-multiplication-linear-span-left-module-Ring
 ```

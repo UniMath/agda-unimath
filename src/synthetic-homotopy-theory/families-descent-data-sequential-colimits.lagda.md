@@ -26,7 +26,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 ## Idea
 
 As shown in
-[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-property-sequential-colimits.md),
+[`descent-property-sequential-colimits`](synthetic-homotopy-theory.descent-sequential-colimits.md),
 the type of type families over
 [sequential colimits](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 is [equivalent](foundation-core.equivalences.md) to

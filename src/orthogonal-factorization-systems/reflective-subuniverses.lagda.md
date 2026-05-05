@@ -7,15 +7,9 @@ module orthogonal-factorization-systems.reflective-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.universe-levels
 
@@ -167,7 +161,7 @@ module _
   pr1 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A))) =
     unit-is-reflective-subuniverse 𝒫 is-reflective-𝒫
   pr2 (pr2 (pr2 (has-all-localizations-is-reflective-subuniverse A)))
-    X is-in-subuniverse-X =
+    ( X , is-in-subuniverse-X) =
       is-local-is-in-subuniverse-is-reflective-subuniverse
         𝒫 is-reflective-𝒫 X A is-in-subuniverse-X
 
@@ -186,8 +180,9 @@ module _
     is-in-subuniverse-subuniverse-localization 𝒫 (L A)
   pr2 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse))
     A B is-in-subuniverse-A =
-    is-local-at-unit-is-in-subuniverse-subuniverse-localization
-      𝒫 (L B) A is-in-subuniverse-A
+    is-subuniverse-equiv-unit-subuniverse-localization 𝒫
+      ( L B)
+      ( A , is-in-subuniverse-A)
 ```
 
 ## Recursion for reflective subuniverses

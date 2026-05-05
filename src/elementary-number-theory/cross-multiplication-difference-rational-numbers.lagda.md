@@ -122,7 +122,7 @@ module _
   (p q : ℚ)
   where
 
-  opaque
+  abstract opaque
     unfolding leq-ℚ-Prop
 
     is-nonnegative-cross-mul-diff-leq-ℚ :
@@ -141,7 +141,7 @@ module _
   (p q : ℚ)
   where
 
-  opaque
+  abstract opaque
     unfolding le-ℚ-Prop
 
     is-positive-cross-mul-diff-le-ℚ :

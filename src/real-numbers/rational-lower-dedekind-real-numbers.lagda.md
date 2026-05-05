@@ -50,7 +50,7 @@ module _
   pr1 (is-rounded-cut-lower-real-ℚ p) p<q =
     intro-exists
       ( mediant-ℚ p q)
-      ( le-left-mediant-ℚ p q p<q , le-right-mediant-ℚ p q p<q)
+      ( le-left-mediant-ℚ p<q , le-right-mediant-ℚ p<q)
   pr2 (is-rounded-cut-lower-real-ℚ p) =
     elim-exists
       ( le-ℚ-Prop p q)

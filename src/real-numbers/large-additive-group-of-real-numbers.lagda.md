@@ -9,9 +9,14 @@ module real-numbers.large-additive-group-of-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.additive-group-of-rational-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-groups
@@ -37,21 +42,17 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ## Definition
 
 ```agda
-large-semigroup-add-ℝ : Large-Semigroup lsuc
+large-semigroup-add-ℝ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℝ =
   make-Large-Semigroup
-    ( ℝ-Set)
-    ( add-ℝ)
+    ( cumulative-large-set-ℝ)
+    ( sim-preserving-binary-operator-add-ℝ)
     ( associative-add-ℝ)
 
 large-monoid-add-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℝ =
   make-Large-Monoid
     ( large-semigroup-add-ℝ)
-    ( large-similarity-relation-sim-ℝ)
-    ( raise-ℝ)
-    ( sim-raise-ℝ)
-    ( λ a b a~b c d c~d → preserves-sim-add-ℝ a~b c~d)
     ( zero-ℝ)
     ( left-unit-law-add-ℝ)
     ( right-unit-law-add-ℝ)
@@ -85,4 +86,18 @@ large-ab-add-ℝ =
 ```agda
 ab-add-ℝ : (l : Level) → Ab (lsuc l)
 ab-add-ℝ = ab-Large-Ab large-ab-add-ℝ
+```
+
+### The canonical embedding of rational numbers in the real numbers is an abelian group homomorphism
+
+```agda
+hom-ab-add-real-ℚ : hom-Ab abelian-group-add-ℚ (ab-add-ℝ lzero)
+hom-ab-add-real-ℚ = (real-ℚ , inv (add-real-ℚ _ _))
+```
+
+### Raising the universe levels of real numbers is an abelian group homomorphism
+
+```agda
+hom-ab-add-raise-ℝ : (l1 l2 : Level) → hom-Ab (ab-add-ℝ l1) (ab-add-ℝ (l1 ⊔ l2))
+hom-ab-add-raise-ℝ = hom-raise-Large-Ab large-ab-add-ℝ
 ```
