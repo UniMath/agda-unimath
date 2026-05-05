@@ -10,12 +10,14 @@ module real-numbers.nonnegative-real-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
+open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
@@ -30,6 +32,10 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
+
+open import metric-spaces.metric-spaces
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -141,6 +147,13 @@ nonnegative-real-ℚ⁺ : ℚ⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁺ q = nonnegative-real-ℚ⁰⁺ (nonnegative-ℚ⁺ q)
 ```
 
+### The canonical embedding of natural numbers in the nonnegative real numbers
+
+```agda
+nonnegative-real-ℕ : ℕ → ℝ⁰⁺ lzero
+nonnegative-real-ℕ n = nonnegative-real-ℚ⁰⁺ (nonnegative-rational-ℕ n)
+```
+
 ### Important nonnegative real numbers
 
 ```agda
@@ -149,6 +162,9 @@ zero-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ zero-ℚ⁰⁺
 
 one-ℝ⁰⁺ : ℝ⁰⁺ lzero
 one-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ one-ℚ⁰⁺
+
+one-half-ℝ⁰⁺ : ℝ⁰⁺ lzero
+one-half-ℝ⁰⁺ = nonnegative-real-ℚ⁺ one-half-ℚ⁺
 ```
 
 ### A real number is nonnegative if and only if every element of its upper cut is positive
@@ -163,7 +179,7 @@ abstract
       ( reflects-le-real-ℚ
         ( concatenate-leq-le-ℝ zero-ℝ x _
           ( 0≤x)
-          ( le-real-is-in-upper-cut-ℚ x x<q)))
+          ( le-real-is-in-upper-cut-ℝ x x<q)))
 
 abstract opaque
   unfolding leq-ℝ' real-ℚ
@@ -306,7 +322,17 @@ abstract
 ### Raising the universe levels of nonnegative real numbers
 
 ```agda
+abstract
+  is-nonnegative-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) →
+    is-nonnegative-ℝ x → is-nonnegative-ℝ (raise-ℝ l x)
+  is-nonnegative-raise-ℝ l x is-nonneg-x =
+    is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x)
+
 raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
 raise-ℝ⁰⁺ l (x , is-nonneg-x) =
-  (raise-ℝ l x , is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x))
+  (raise-ℝ l x , is-nonnegative-raise-ℝ l x is-nonneg-x)
+
+raise-zero-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
+raise-zero-ℝ⁰⁺ l = raise-ℝ⁰⁺ l zero-ℝ⁰⁺
 ```

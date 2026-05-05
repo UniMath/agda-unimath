@@ -7,6 +7,7 @@ module set-theory.countable-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-integers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
@@ -20,6 +21,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
@@ -35,7 +37,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtypes
@@ -46,6 +47,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
+open import foundation-core.raising-universe-levels
 
 open import lists.shifting-sequences
 

@@ -11,10 +11,13 @@ open import complex-numbers.complex-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
+open import foundation.locally-small-types
 open import foundation.propositions
+open import foundation.similarity-preserving-maps-large-similarity-relations
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -51,6 +54,9 @@ sim-ℂ a+bi c+di = type-Prop (sim-prop-ℂ a+bi c+di)
 abstract
   refl-sim-ℂ : {l : Level} (z : ℂ l) → sim-ℂ z z
   refl-sim-ℂ (a , b) = (refl-sim-ℝ a , refl-sim-ℝ b)
+
+  sim-eq-ℂ : {l : Level} {z w : ℂ l} → z ＝ w → sim-ℂ z w
+  sim-eq-ℂ {z = z} refl = refl-sim-ℂ z
 ```
 
 ### Similarity is symmetric
@@ -103,6 +109,16 @@ large-similarity-relation-ℂ =
     ( λ _ _ → eq-sim-ℂ)
 ```
 
+### The complex numbers at universe `l` are locally small with respect to `UU l`
+
+```agda
+abstract
+  is-locally-small-ℂ : (l : Level) → is-locally-small l (ℂ l)
+  is-locally-small-ℂ =
+    is-locally-small-type-Large-Similarity-Relation
+      ( large-similarity-relation-ℂ)
+```
+
 ### The canonical embedding of real numbers in the complex numbers preserves similarity
 
 ```agda
@@ -129,6 +145,16 @@ abstract
     sim-ℂ x y → sim-ℂ (neg-ℂ x) (neg-ℂ y)
   preserves-sim-neg-ℂ (a~c , b~d) =
     ( preserves-sim-neg-ℝ a~c , preserves-sim-neg-ℝ b~d)
+
+sim-preserving-endomap-neg-ℂ :
+  sim-preserving-map-Large-Similarity-Relation
+    ( id)
+    ( large-similarity-relation-ℂ)
+    ( large-similarity-relation-ℂ)
+sim-preserving-endomap-neg-ℂ =
+  make-sim-preserving-map-Large-Similarity-Relation
+    ( neg-ℂ)
+    ( λ _ _ → preserves-sim-neg-ℂ)
 ```
 
 ### Similarity reasoning

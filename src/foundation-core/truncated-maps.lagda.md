@@ -329,13 +329,14 @@ module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  is-trunc-map-is-trunc-succ-codomain-is-contr-domain :
-    is-contr A →
-    is-trunc (succ-𝕋 k) B →
-    is-trunc-map k f
-  is-trunc-map-is-trunc-succ-codomain-is-contr-domain c tB u =
-    is-trunc-equiv k
-      ( f (center c) ＝ u)
-      ( left-unit-law-Σ-is-contr c (center c))
-      ( tB (f (center c)) u)
+  abstract
+    is-trunc-map-is-trunc-succ-codomain-is-contr-domain :
+      is-contr A →
+      is-trunc (succ-𝕋 k) B →
+      is-trunc-map k f
+    is-trunc-map-is-trunc-succ-codomain-is-contr-domain c tB u =
+      is-trunc-equiv k
+        ( f (center c) ＝ u)
+        ( left-unit-law-Σ-is-contr c (center c))
+        ( tB (f (center c)) u)
 ```

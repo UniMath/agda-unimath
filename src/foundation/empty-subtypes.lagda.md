@@ -10,6 +10,7 @@ module foundation.empty-subtypes where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
@@ -63,13 +64,21 @@ module _
   {l1 l2 : Level} {X : UU l1} (S : subtype l2 X)
   where
 
-  is-empty-type-empty-subtype : is-empty-subtype S → is-empty (type-subtype S)
-  is-empty-type-empty-subtype is-empty-S (x , x∈S) = is-empty-S x x∈S
+  abstract
+    is-empty-type-is-empty-subtype :
+      is-empty-subtype S → is-empty (type-subtype S)
+    is-empty-type-is-empty-subtype is-empty-S (x , x∈S) = is-empty-S x x∈S
 
-  is-empty-subtype-is-empty-type-subtype :
-    is-empty (type-subtype S) → is-empty-subtype S
-  is-empty-subtype-is-empty-type-subtype is-empty-type-S x x∈S =
-    is-empty-type-S (x , x∈S)
+    is-empty-subtype-is-empty-type-subtype :
+      is-empty (type-subtype S) → is-empty-subtype S
+    is-empty-subtype-is-empty-type-subtype is-empty-type-S x x∈S =
+      is-empty-type-S (x , x∈S)
+
+abstract
+  is-empty-type-empty-subtype :
+    {l1 : Level} (l2 : Level) (X : UU l1) →
+    is-empty-subtype (empty-subtype l2 X)
+  is-empty-type-empty-subtype l2 X x = map-inv-raise
 ```
 
 ### Empty subtypes at a given level are torsorial

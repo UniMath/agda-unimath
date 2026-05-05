@@ -8,6 +8,7 @@ module commutative-algebra.binomial-theorem-commutative-semirings where
 
 ```agda
 open import commutative-algebra.commutative-semirings
+open import commutative-algebra.multiples-of-elements-commutative-semirings
 open import commutative-algebra.powers-of-elements-commutative-semirings
 open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative-semirings
 
@@ -167,7 +168,7 @@ is-linear-combination-power-add-Commutative-Semiring :
       ( power-Commutative-Semiring A m y)
       ( sum-fin-sequence-type-Commutative-Semiring A n
         ( λ i →
-          mul-nat-scalar-Commutative-Semiring A
+          multiple-Commutative-Semiring A
             ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Commutative-Semiring A
               ( power-Commutative-Semiring A (nat-Fin n i) x)
@@ -177,7 +178,7 @@ is-linear-combination-power-add-Commutative-Semiring :
       ( sum-fin-sequence-type-Commutative-Semiring A
         ( succ-ℕ m)
         ( λ i →
-          mul-nat-scalar-Commutative-Semiring A
+          multiple-Commutative-Semiring A
             ( binomial-coefficient-ℕ
               ( n +ℕ m)
               ( n +ℕ (nat-Fin (succ-ℕ m) i)))

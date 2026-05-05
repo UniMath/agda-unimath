@@ -11,12 +11,15 @@ module real-numbers.multiplication-real-numbers where
 ```agda
 open import elementary-number-theory.absolute-value-rational-numbers
 open import elementary-number-theory.addition-closed-intervals-rational-numbers
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.closed-intervals-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.intersections-closed-intervals-rational-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.maximum-nonnegative-rational-numbers
@@ -51,6 +54,7 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -58,6 +62,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.groups
+open import group-theory.multiples-of-elements-abelian-groups
 
 open import logic.functoriality-existential-quantification
 
@@ -76,6 +81,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -593,6 +599,9 @@ module _
 mul-ℝ' : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 mul-ℝ' y x = mul-ℝ x y
 
+mul-pair-ℝ : {l1 l2 : Level} → ℝ l1 × ℝ l2 → ℝ (l1 ⊔ l2)
+mul-pair-ℝ = rec-product mul-ℝ
+
 infixl 40 _*ℝ_
 _*ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _*ℝ_ = mul-ℝ
@@ -1034,33 +1043,6 @@ abstract
         by ap-add-ℝ (commutative-mul-ℝ z x) (commutative-mul-ℝ z y)
 ```
 
-### Zero laws
-
-```agda
-module _
-  {l : Level} (x : ℝ l)
-  where
-
-  abstract
-    left-zero-law-mul-ℝ : sim-ℝ (zero-ℝ *ℝ x) zero-ℝ
-    left-zero-law-mul-ℝ =
-      inv-tr
-        ( λ y → sim-ℝ y zero-ℝ)
-        ( is-zero-is-idempotent-Ab
-          ( ab-add-ℝ l)
-          ( equational-reasoning
-            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
-            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
-              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
-            ＝ zero-ℝ *ℝ x
-              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
-        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
-
-    right-zero-law-mul-ℝ : sim-ℝ (x *ℝ zero-ℝ) zero-ℝ
-    right-zero-law-mul-ℝ =
-      tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
-```
-
 ### The inclusion of rational numbers preserves multiplication
 
 ```agda
@@ -1107,6 +1089,13 @@ abstract opaque
                         ( leq-le-ℚ a<p , leq-le-ℚ p<b)
                         ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
                     ( [a,b][c,d]<pq)))))
+
+abstract
+  combine-left-mul-real-ℚ :
+    {l : Level} (p q : ℚ) (x : ℝ l) →
+    real-ℚ p *ℝ (real-ℚ q *ℝ x) ＝ real-ℚ (p *ℚ q) *ℝ x
+  combine-left-mul-real-ℚ p q x =
+    inv (associative-mul-ℝ _ _ _) ∙ ap-mul-ℝ (mul-real-ℚ p q) refl
 ```
 
 ### Multiplication on the real numbers preserves similarity
@@ -1160,6 +1149,86 @@ abstract
       ( a' *ℝ b')
       ( preserves-sim-right-mul-ℝ b' a a' a~a')
       ( preserves-sim-left-mul-ℝ a b b' b~b')
+
+sim-preserving-binary-operator-mul-ℝ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℝ
+sim-preserving-binary-operator-mul-ℝ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℝ)
+    ( mul-ℝ)
+    ( λ _ _ _ _ a~a' b~b' → preserves-sim-mul-ℝ a~a' b~b')
+```
+
+### Raised unit laws
+
+```agda
+abstract
+  left-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → raise-one-ℝ l *ℝ x ＝ x
+  left-raise-one-law-mul-ℝ {l} x =
+    eq-sim-ℝ
+      ( tr
+        ( sim-ℝ (raise-one-ℝ l *ℝ x))
+        ( left-unit-law-mul-ℝ x)
+        ( preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l one-ℝ)))
+
+  right-raise-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ raise-one-ℝ l ＝ x
+  right-raise-one-law-mul-ℝ x =
+    commutative-mul-ℝ _ _ ∙ left-raise-one-law-mul-ℝ x
+```
+
+### Zero laws
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  abstract
+    left-zero-law-mul-ℝ : is-zero-ℝ (zero-ℝ *ℝ x)
+    left-zero-law-mul-ℝ =
+      inv-tr
+        ( λ y → sim-ℝ y zero-ℝ)
+        ( is-zero-is-idempotent-Ab
+          ( ab-add-ℝ l)
+          ( equational-reasoning
+            zero-ℝ *ℝ x +ℝ zero-ℝ *ℝ x
+            ＝ (zero-ℝ +ℝ zero-ℝ) *ℝ x
+              by inv (right-distributive-mul-add-ℝ zero-ℝ zero-ℝ x)
+            ＝ zero-ℝ *ℝ x
+              by ap-mul-ℝ (left-unit-law-add-ℝ zero-ℝ) refl))
+        ( symmetric-sim-ℝ (sim-raise-ℝ l zero-ℝ))
+
+    right-zero-law-mul-ℝ : is-zero-ℝ (x *ℝ zero-ℝ)
+    right-zero-law-mul-ℝ =
+      tr (λ y → sim-ℝ y zero-ℝ) (commutative-mul-ℝ _ _) left-zero-law-mul-ℝ
+
+module _
+  {l1 l2 : Level} (x : ℝ l1)
+  where
+
+  abstract
+    left-raise-zero-law-mul-ℝ : raise-zero-ℝ l2 *ℝ x ＝ raise-zero-ℝ (l1 ⊔ l2)
+    left-raise-zero-law-mul-ℝ =
+      eq-sim-ℝ
+        ( similarity-reasoning-ℝ
+          raise-zero-ℝ l2 *ℝ x
+          ~ℝ zero-ℝ *ℝ x
+            by
+              preserves-sim-right-mul-ℝ
+                ( x)
+                ( raise-zero-ℝ l2)
+                ( zero-ℝ)
+                ( sim-raise-ℝ' l2 zero-ℝ)
+          ~ℝ zero-ℝ
+            by left-zero-law-mul-ℝ x
+          ~ℝ raise-zero-ℝ (l1 ⊔ l2)
+            by sim-raise-ℝ (l1 ⊔ l2) zero-ℝ)
+
+    right-raise-zero-law-mul-ℝ : x *ℝ raise-zero-ℝ l2 ＝ raise-zero-ℝ (l1 ⊔ l2)
+    right-raise-zero-law-mul-ℝ =
+      commutative-mul-ℝ x (raise-zero-ℝ l2) ∙ left-raise-zero-law-mul-ℝ
 ```
 
 ### Swapping laws for multiplication on real numbers
@@ -1261,4 +1330,108 @@ abstract
       (x -ℝ y) *ℝ z
       ＝ x *ℝ z +ℝ neg-ℝ y *ℝ z by right-distributive-mul-add-ℝ _ _ _
       ＝ x *ℝ z -ℝ y *ℝ z by ap (x *ℝ z +ℝ_) (left-negative-law-mul-ℝ y z)
+```
+
+### Multiplication by a natural number is repeated addition
+
+```agda
+abstract
+  left-mul-real-ℕ :
+    {l : Level} (n : ℕ) (x : ℝ l) →
+    real-ℕ n *ℝ x ＝ multiple-Ab (ab-add-ℝ l) n x
+  left-mul-real-ℕ 0 x =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _ (sim-raise-ℝ _ zero-ℝ) (left-zero-law-mul-ℝ x))
+  left-mul-real-ℕ 1 x = left-unit-law-mul-ℝ x
+  left-mul-real-ℕ (succ-ℕ n@(succ-ℕ _)) x =
+    equational-reasoning
+      real-ℕ (n +ℕ 1) *ℝ x
+      ＝ real-ℤ (int-ℕ n +ℤ one-ℤ) *ℝ x
+        by ap-mul-ℝ (ap real-ℤ (inv (add-int-ℕ n 1))) refl
+      ＝ real-ℚ (rational-ℕ n +ℚ one-ℚ) *ℝ x
+        by ap-mul-ℝ (ap real-ℚ (inv (add-rational-ℤ _ _))) refl
+      ＝ (real-ℕ n +ℝ one-ℝ) *ℝ x
+        by ap-mul-ℝ (inv (add-real-ℚ _ _)) refl
+      ＝ real-ℕ n *ℝ x +ℝ one-ℝ *ℝ x
+        by right-distributive-mul-add-ℝ _ _ _
+      ＝ multiple-Ab (ab-add-ℝ _) n x +ℝ x
+        by ap-add-ℝ (left-mul-real-ℕ n x) (left-unit-law-mul-ℝ x)
+```
+
+### Multiplication by a raised real number
+
+```agda
+abstract
+  mul-left-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l x *ℝ y ＝ raise-ℝ l (x *ℝ y)
+  mul-left-raise-ℝ l x y =
+    eq-sim-ℝ
+      ( similarity-reasoning-ℝ
+        raise-ℝ l x *ℝ y
+        ~ℝ x *ℝ y
+          by preserves-sim-right-mul-ℝ _ _ _ (sim-raise-ℝ' l x)
+        ~ℝ raise-ℝ l (x *ℝ y)
+          by sim-raise-ℝ l (x *ℝ y))
+
+  mul-right-raise-ℝ :
+    {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
+    x *ℝ raise-ℝ l y ＝ raise-ℝ l (x *ℝ y)
+  mul-right-raise-ℝ l x y =
+    equational-reasoning
+      x *ℝ raise-ℝ l y
+      ＝ raise-ℝ l y *ℝ x
+        by commutative-mul-ℝ _ _
+      ＝ raise-ℝ l (y *ℝ x)
+        by mul-left-raise-ℝ l y x
+      ＝ raise-ℝ l (x *ℝ y)
+        by ap (raise-ℝ l) (commutative-mul-ℝ y x)
+
+  mul-raise-ℝ :
+    {l1 l2 l3 l4 : Level} (x : ℝ l1) (y : ℝ l2) →
+    raise-ℝ l3 x *ℝ raise-ℝ l4 y ＝ raise-ℝ (l3 ⊔ l4) (x *ℝ y)
+  mul-raise-ℝ {l3 = l3} {l4 = l4} x y =
+    eq-sim-ℝ
+      ( transitive-sim-ℝ _ _ _
+        ( sim-raise-ℝ (l3 ⊔ l4) (x *ℝ y))
+        ( preserves-sim-mul-ℝ (sim-raise-ℝ' l3 x) (sim-raise-ℝ' l4 y)))
+```
+
+### Multiplication by negative one
+
+```agda
+abstract
+  left-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → neg-one-ℝ *ℝ x ＝ neg-ℝ x
+  left-neg-one-law-mul-ℝ x =
+    ( ap-mul-ℝ (inv (neg-real-ℤ one-ℤ)) refl) ∙
+    ( left-negative-law-mul-ℝ one-ℝ x) ∙
+    ( ap neg-ℝ (left-unit-law-mul-ℝ x))
+
+  right-neg-one-law-mul-ℝ :
+    {l : Level} (x : ℝ l) → x *ℝ neg-one-ℝ ＝ neg-ℝ x
+  right-neg-one-law-mul-ℝ x =
+    commutative-mul-ℝ x neg-one-ℝ ∙ left-neg-one-law-mul-ℝ x
+```
+
+### Adding `½ x` to itself produces `x`
+
+```agda
+abstract
+  twice-left-mul-one-half-ℝ :
+    {l : Level} (x : ℝ l) →
+    (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x) ＝ x
+  twice-left-mul-one-half-ℝ x =
+    equational-reasoning
+      (one-half-ℝ *ℝ x) +ℝ (one-half-ℝ *ℝ x)
+      ＝ real-ℕ 2 *ℝ (one-half-ℝ *ℝ x)
+        by inv (left-mul-real-ℕ 2 (one-half-ℝ *ℝ x))
+      ＝ (real-ℕ 2 *ℝ one-half-ℝ) *ℝ x
+        by inv (associative-mul-ℝ (real-ℕ 2) one-half-ℝ x)
+      ＝ real-ℚ (rational-ℕ 2 *ℚ one-half-ℚ) *ℝ x
+        by ap-mul-ℝ (mul-real-ℚ _ _) refl
+      ＝ one-ℝ *ℝ x
+        by ap-mul-ℝ (ap real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ two-ℚ⁺)) refl
+      ＝ x
+        by left-unit-law-mul-ℝ x
 ```

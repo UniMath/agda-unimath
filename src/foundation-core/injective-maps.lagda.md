@@ -53,8 +53,8 @@ module _
   map-injection : A → B
   map-injection = pr1 f
 
-  is-injective-injection : is-injective map-injection
-  is-injective-injection = pr2 f
+  is-injective-map-injection : is-injective map-injection
+  is-injective-map-injection = pr2 f
 ```
 
 ## Examples

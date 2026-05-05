@@ -11,6 +11,8 @@ open import commutative-algebra.commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -70,7 +72,7 @@ module _
       ( ring-Commutative-Ring A)
 ```
 
-### Aight invertible elements of commutative rings
+### Right invertible elements of commutative rings
 
 ```agda
 module _
@@ -339,6 +341,22 @@ module _
   is-invertible-element-inv-is-invertible-element-Commutative-Ring =
     is-invertible-element-inv-is-invertible-element-Ring
       ( ring-Commutative-Ring A)
+```
+
+### The negation of an invertible element is invertible
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  abstract
+    is-invertible-element-neg-is-invertible-element-Commutative-Ring :
+      (x : type-Commutative-Ring A)
+      (H : is-invertible-element-Commutative-Ring A x) →
+      is-invertible-element-Commutative-Ring A (neg-Commutative-Ring A x)
+    is-invertible-element-neg-is-invertible-element-Commutative-Ring =
+      is-invertible-element-neg-Ring (ring-Commutative-Ring A)
 ```
 
 ## See also

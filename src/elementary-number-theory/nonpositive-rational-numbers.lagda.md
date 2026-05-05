@@ -9,11 +9,13 @@ module elementary-number-theory.nonpositive-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -132,4 +134,19 @@ abstract
       ( transitive-leq-ℚ p q zero-ℚ
         ( leq-zero-is-nonpositive-ℚ nonpos-q)
         ( p≤q))
+```
+
+### If `x ≤ y`, then `x - y` is nonpositive
+
+```agda
+abstract opaque
+  unfolding is-nonpositive-ℚ
+
+  is-nonpositive-diff-leq-ℚ :
+    {x y : ℚ} → leq-ℚ x y → is-nonpositive-ℚ (x -ℚ y)
+  is-nonpositive-diff-leq-ℚ {x} {y} x≤y =
+    inv-tr
+      ( is-nonnegative-ℚ)
+      ( distributive-neg-diff-ℚ x y)
+      ( is-nonnegative-diff-leq-ℚ x y x≤y)
 ```

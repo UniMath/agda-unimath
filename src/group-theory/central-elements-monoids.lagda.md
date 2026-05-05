@@ -7,6 +7,7 @@ module group-theory.central-elements-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -52,9 +53,10 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-central-element-unit-Monoid : is-central-element-Monoid M (unit-Monoid M)
-  is-central-element-unit-Monoid y =
-    left-unit-law-mul-Monoid M y ∙ inv (right-unit-law-mul-Monoid M y)
+  abstract
+    is-central-element-unit-Monoid : is-central-element-Monoid M (unit-Monoid M)
+    is-central-element-unit-Monoid y =
+      left-unit-law-mul-Monoid M y ∙ inv (right-unit-law-mul-Monoid M y)
 ```
 
 ### The product of two central elements is central

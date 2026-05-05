@@ -13,11 +13,11 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 
 open import foundation.automorphisms
 open import foundation.booleans
-open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -34,8 +34,8 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets
 open import foundation.subtypes
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
@@ -223,7 +223,7 @@ module _
             ( eq-equiv commutative-coproduct)
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d
@@ -257,7 +257,7 @@ module _
                 ( equiv-concat (inv s) v)))
             ( eq-pair-Σ
               ( eq-is-prop
-                ( is-prop-is-prop
+                ( is-property-is-prop
                   ( type-Decidable-Prop
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d nq)

@@ -83,7 +83,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Metric-Ab l1 l2)
+  {l1 l2 : Level} {G : Metric-Ab l1 l2}
   where
 
   partial-sum-series-Metric-Ab : series-Metric-Ab G → ℕ → type-Metric-Ab G
@@ -95,14 +95,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Metric-Ab l1 l2)
+  {l1 l2 : Level} {G : Metric-Ab l1 l2}
   where
 
   eq-term-diff-partial-sum-series-Metric-Ab :
     (f : series-Metric-Ab G) (n : ℕ) →
     add-Metric-Ab G
-      ( partial-sum-series-Metric-Ab G f (succ-ℕ n))
-      ( neg-Metric-Ab G (partial-sum-series-Metric-Ab G f n)) ＝
+      ( partial-sum-series-Metric-Ab f (succ-ℕ n))
+      ( neg-Metric-Ab G (partial-sum-series-Metric-Ab f n)) ＝
     term-series-Metric-Ab f n
   eq-term-diff-partial-sum-series-Metric-Ab (series-terms-Metric-Ab f) n =
     ap-add-Metric-Ab G
@@ -118,21 +118,21 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Metric-Ab l1 l2)
+  {l1 l2 : Level} {G : Metric-Ab l1 l2}
   where
 
   htpy-htpy-partial-sum-series-Metric-Ab :
     {σ τ : series-Metric-Ab G} →
-    (partial-sum-series-Metric-Ab G σ ~ partial-sum-series-Metric-Ab G τ) →
+    (partial-sum-series-Metric-Ab σ ~ partial-sum-series-Metric-Ab τ) →
     term-series-Metric-Ab σ ~ term-series-Metric-Ab τ
   htpy-htpy-partial-sum-series-Metric-Ab {σ} {τ} psσ~psτ n =
-    inv (eq-term-diff-partial-sum-series-Metric-Ab G σ n) ∙
+    inv (eq-term-diff-partial-sum-series-Metric-Ab σ n) ∙
     ap-right-subtraction-Ab (ab-Metric-Ab G) (psσ~psτ (succ-ℕ n)) (psσ~psτ n) ∙
-    eq-term-diff-partial-sum-series-Metric-Ab G τ n
+    eq-term-diff-partial-sum-series-Metric-Ab τ n
 
   eq-htpy-partial-sum-series-Metric-Ab :
     {σ τ : series-Metric-Ab G} →
-    (partial-sum-series-Metric-Ab G σ ~ partial-sum-series-Metric-Ab G τ) →
+    (partial-sum-series-Metric-Ab σ ~ partial-sum-series-Metric-Ab τ) →
     σ ＝ τ
   eq-htpy-partial-sum-series-Metric-Ab psσ~psτ =
     eq-htpy-term-series-Metric-Ab G
@@ -155,23 +155,22 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Metric-Ab l1 l2)
+  {l1 l2 : Level} {G : Metric-Ab l1 l2}
   where
 
   abstract
     partial-sum-drop-series-Metric-Ab :
-      (n : ℕ) → (σ : series-Metric-Ab G) → (i : ℕ) →
-      partial-sum-series-Metric-Ab G (drop-series-Metric-Ab n σ) i ＝
+      (n : ℕ) (σ : series-Metric-Ab G) (i : ℕ) →
+      partial-sum-series-Metric-Ab (drop-series-Metric-Ab n σ) i ＝
       diff-Metric-Ab G
-        ( partial-sum-series-Metric-Ab G σ (n +ℕ i))
-        ( partial-sum-series-Metric-Ab G σ n)
-    partial-sum-drop-series-Metric-Ab n (series-terms-Metric-Ab σ) i =
+        ( partial-sum-series-Metric-Ab σ (n +ℕ i))
+        ( partial-sum-series-Metric-Ab σ n)
+    partial-sum-drop-series-Metric-Ab n s@(series-terms-Metric-Ab σ) i =
       inv
         ( equational-reasoning
           diff-Metric-Ab G
-            ( partial-sum-series-Metric-Ab G (series-terms-Metric-Ab σ)
-              ( n +ℕ i))
-            ( partial-sum-series-Metric-Ab G (series-terms-Metric-Ab σ) n)
+            ( partial-sum-series-Metric-Ab s (n +ℕ i))
+            ( partial-sum-series-Metric-Ab s n)
           ＝
             diff-Metric-Ab G
               ( add-Metric-Ab G
@@ -179,7 +178,7 @@ module _
                   ( σ ∘ nat-Fin (n +ℕ i) ∘ inl-coproduct-Fin n i))
                 ( sum-fin-sequence-type-Ab (ab-Metric-Ab G) i
                   ( σ ∘ nat-Fin (n +ℕ i) ∘ inr-coproduct-Fin n i)))
-              ( partial-sum-series-Metric-Ab G (series-terms-Metric-Ab σ) n)
+              ( partial-sum-series-Metric-Ab s n)
             by
               ap-diff-Metric-Ab G
                 ( split-sum-fin-sequence-type-Ab
@@ -191,10 +190,11 @@ module _
           ＝
             diff-Metric-Ab G
               ( add-Metric-Ab G
-                ( partial-sum-series-Metric-Ab G (series-terms-Metric-Ab σ) n)
-                ( partial-sum-series-Metric-Ab G
-                  ( series-terms-Metric-Ab (σ ∘ add-ℕ n)) i))
-              ( partial-sum-series-Metric-Ab G (series-terms-Metric-Ab σ) n)
+                ( partial-sum-series-Metric-Ab s n)
+                ( partial-sum-series-Metric-Ab
+                  ( series-terms-Metric-Ab {G = G} (σ ∘ add-ℕ n))
+                  ( i)))
+              ( partial-sum-series-Metric-Ab s n)
             by
               ap-diff-Metric-Ab G
                 ( ap-add-Metric-Ab G
@@ -204,8 +204,8 @@ module _
                     ( λ j → ap σ (nat-inr-coproduct-Fin n i j))))
                 ( refl)
           ＝
-            partial-sum-series-Metric-Ab G
-              ( series-terms-Metric-Ab (σ ∘ add-ℕ n))
+            partial-sum-series-Metric-Ab
+              ( series-terms-Metric-Ab {G = G} (σ ∘ add-ℕ n))
               ( i)
             by is-identity-left-conjugation-Ab (ab-Metric-Ab G) _ _)
 ```

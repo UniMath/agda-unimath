@@ -10,6 +10,7 @@ module commutative-algebra.poset-of-ideals-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

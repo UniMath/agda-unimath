@@ -17,6 +17,7 @@ open import elementary-number-theory.prime-numbers
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.propositions
@@ -119,7 +120,9 @@ abstract
 ### For any two natural numbers `a` and `b` such that `a + b ≠ 0`, the numbers `a/gcd(a,b)` and `b/gcd(a,b)` are relatively prime
 
 ```agda
-abstract
+abstract opaque
+  unfolding is-common-divisor-gcd-ℕ
+
   is-relatively-prime-quotient-div-gcd-ℕ :
     (a b : ℕ) → is-nonzero-ℕ (a +ℕ b) →
     is-relatively-prime-ℕ

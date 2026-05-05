@@ -15,9 +15,11 @@ open import foundation.composition-algebra
 open import foundation.cones-over-cospan-diagrams
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-pullbacks
 open import foundation.homotopies
@@ -31,7 +33,6 @@ open import foundation.precomposition-functions
 open import foundation.pullback-cones
 open import foundation.pullbacks
 open import foundation.retractions
-open import foundation.retracts-of-maps
 open import foundation.sections
 open import foundation.standard-pullbacks
 open import foundation.universe-levels

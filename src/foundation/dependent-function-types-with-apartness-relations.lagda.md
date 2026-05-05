@@ -89,13 +89,13 @@ module _
     is-cotransitive-apart-Π-Type-With-Apartness f g h H =
       apply-universal-property-trunc-Prop H
         ( disjunction-Prop
-          ( rel-apart-Π-Type-With-Apartness X Y f h)
+          ( rel-apart-Π-Type-With-Apartness X Y f g)
           ( rel-apart-Π-Type-With-Apartness X Y g h))
         ( λ (x , a) →
           apply-universal-property-trunc-Prop
             ( cotransitive-apart-Type-With-Apartness (Y x) (f x) (g x) (h x) a)
             ( disjunction-Prop
-              ( rel-apart-Π-Type-With-Apartness X Y f h)
+              ( rel-apart-Π-Type-With-Apartness X Y f g)
               ( rel-apart-Π-Type-With-Apartness X Y g h))
             ( λ where
               ( inl b) → inl-disjunction (intro-exists x b)

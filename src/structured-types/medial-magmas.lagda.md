@@ -47,11 +47,11 @@ module _
   {l : Level} (M : Magma l)
   where
 
-  mul-uncurry-Magma : type-Magma M × type-Magma M → type-Magma M
-  mul-uncurry-Magma (x , y) = mul-Magma M x y
+  mul-pair-Magma : type-Magma M × type-Magma M → type-Magma M
+  mul-pair-Magma (x , y) = mul-Magma M x y
 
   is-medial-Magma : UU l
-  is-medial-Magma = preserves-mul-Magma (product-Magma M M) M mul-uncurry-Magma
+  is-medial-Magma = preserves-mul-Magma (product-Magma M M) M mul-pair-Magma
 
 medial-Magma : (l : Level) → UU (lsuc l)
 medial-Magma l = Σ (Magma l) is-medial-Magma
@@ -91,16 +91,16 @@ module _
   commutator-medial-H-Space x y = equational-reasoning
     mul-H-Space M x y
     ＝ ( mul-H-Space M
-        ( mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , x))
-        ( mul-uncurry-Magma (magma-H-Space M) (y , unit-H-Space M)))
+        ( mul-pair-Magma (magma-H-Space M) (unit-H-Space M , x))
+        ( mul-pair-Magma (magma-H-Space M) (y , unit-H-Space M)))
       by
         ap-binary
           ( mul-H-Space M)
           ( inv (left-unit-law-mul-H-Space M x))
           ( inv (right-unit-law-mul-H-Space M y))
     ＝ ( mul-H-Space M
-        ( mul-uncurry-Magma (magma-H-Space M) (unit-H-Space M , y))
-        ( mul-uncurry-Magma (magma-H-Space M) (x , unit-H-Space M)))
+        ( mul-pair-Magma (magma-H-Space M) (unit-H-Space M , y))
+        ( mul-pair-Magma (magma-H-Space M) (x , unit-H-Space M)))
       by med-M (unit-H-Space M , y) (x , unit-H-Space M)
     ＝ mul-H-Space M y x
       by

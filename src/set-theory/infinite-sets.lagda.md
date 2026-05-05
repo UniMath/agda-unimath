@@ -10,6 +10,7 @@ module set-theory.infinite-sets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.mere-embeddings
 open import foundation.propositions
 open import foundation.sets
@@ -24,7 +25,7 @@ open import univalent-combinatorics.standard-finite-types
 
 A [set](foundation-core.sets.md) `A` is said to be
 {{#concept "infinite" Disambiguation="set" WD="infinite set" WDID=Q205140}} if
-it contains arbitrarily [large](set-theory.cardinalities.md)
+it contains arbitrarily [large](set-theory.cardinals.md)
 [finite](univalent-combinatorics.finite-types.md)
 [subsets](foundation-core.subtypes.md).
 

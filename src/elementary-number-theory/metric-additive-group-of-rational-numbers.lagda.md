@@ -35,5 +35,5 @@ metric-ab-add-ℚ =
     pseudometric-structure-Metric-Space metric-space-ℚ ,
     is-extensional-pseudometric-space-ℚ ,
     is-isometry-neg-ℚ ,
-    is-isometry-add-ℚ)
+    is-isometry-left-add-ℚ)
 ```

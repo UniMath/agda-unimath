@@ -7,10 +7,11 @@ module synthetic-homotopy-theory.cofibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

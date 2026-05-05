@@ -12,15 +12,19 @@ module real-numbers.addition-nonnegative-real-numbers where
 open import elementary-number-theory.addition-nonnegative-rational-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -132,4 +136,35 @@ module _
     preserves-le-add-ℝ⁰⁺ :
       le-ℝ⁰⁺ x y → le-ℝ⁰⁺ z w → le-ℝ⁰⁺ (x +ℝ⁰⁺ z) (y +ℝ⁰⁺ w)
     preserves-le-add-ℝ⁰⁺ = preserves-le-add-ℝ
+```
+
+### Addition with a nonnegative real number is an inflationary map
+
+```agda
+abstract
+  leq-left-add-real-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁰⁺ d)
+  leq-left-add-real-ℝ⁰⁺ x d⁺@(d , pos-d) =
+    tr
+      ( λ y → leq-ℝ y (x +ℝ d))
+      ( right-unit-law-add-ℝ x)
+      ( preserves-leq-left-add-ℝ x zero-ℝ d pos-d)
+
+  leq-right-add-real-ℝ⁰⁺ :
+    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (real-ℝ⁰⁺ d +ℝ x)
+  leq-right-add-real-ℝ⁰⁺ x d =
+    tr (leq-ℝ x) (commutative-add-ℝ x (real-ℝ⁰⁺ d)) (leq-left-add-real-ℝ⁰⁺ x d)
+```
+
+### Subtraction with a nonnegative real number is a deflationary map
+
+```agda
+abstract
+  leq-diff-real-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ (x -ℝ real-ℝ⁰⁺ d) x
+  leq-diff-real-ℝ⁰⁺ x (d , 0≤d) =
+    tr
+      ( leq-ℝ _)
+      ( right-unit-law-diff-ℝ x)
+      ( preserves-leq-left-add-ℝ _ _ _ (neg-leq-ℝ 0≤d))
 ```

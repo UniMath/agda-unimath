@@ -8,6 +8,7 @@ module ring-theory.local-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.propositions
 open import foundation.sets
@@ -71,3 +72,7 @@ module _
   is-local-ring-Local-Ring : is-local-Ring ring-Local-Ring
   is-local-ring-Local-Ring = pr2 R
 ```
+
+## External links
+
+- [Local ring](https://ncatlab.org/nlab/show/local+ring) at $n$Lab

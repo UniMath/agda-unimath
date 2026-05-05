@@ -11,9 +11,12 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.subuniverse-of-propositions
 open import foundation.subuniverses
 open import foundation.universe-levels
 
@@ -65,7 +68,7 @@ module _
 
   is-prop-is-irrefutable-prop : is-prop is-irrefutable-prop
   is-prop-is-irrefutable-prop =
-    is-prop-product (is-prop-is-prop P) is-prop-double-negation
+    is-prop-product (is-property-is-prop P) is-prop-double-negation
 
   is-irrefutable-prop-Prop : Prop l
   is-irrefutable-prop-Prop = is-irrefutable-prop , is-prop-is-irrefutable-prop
