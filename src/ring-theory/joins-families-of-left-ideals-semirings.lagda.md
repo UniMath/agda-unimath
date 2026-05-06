@@ -1,7 +1,7 @@
-# Joins of left ideals of semirings
+# Joins of families of left ideals of semirings
 
 ```agda
-module ring-theory.joins-left-ideals-semirings where
+module ring-theory.joins-families-of-left-ideals-semirings where
 ```
 
 <details><summary>Imports</summary>

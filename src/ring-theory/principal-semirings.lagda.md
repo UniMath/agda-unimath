@@ -20,6 +20,10 @@ open import ring-theory.semirings
 
 A [semiring](ring-theory.semirings.md) `R` is said to be {{#concept "principal" Disambiguation="semiring" Agda=is-principal-Semiring}} if every [ideal](ring-theory.ideals-semirings.md) is [principal](ring-theory.principal-ideals-semirings.md).
 
+**Note.** This notion is too strong, constructively. A better approach could be as follows. Consider an ideal `I`, and consider the poset `P` of principal ideals contained in `I`. We could ask:
+- A Bézout condition: For any two principal ideals `J, J' ⊆ I`, there is a principal ideal `K ⊆ I` such that `J, J' ⊆ K`.
+- A stronger condition: For any subset `S ⊆ I` there is a principal ideal K ⊆ I such that `S ⊆ K ⊆ I`.
+
 ## Definitions
 
 ### The predicate of being a principal semiring

@@ -1,7 +1,7 @@
-# Joins of ideals of semirings
+# Joins of families of ideals of semirings
 
 ```agda
-module ring-theory.joins-ideals-semirings where
+module ring-theory.joins-families-of-ideals-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -184,7 +184,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Semiring l1) {U : UU l2} (S : U → subset-Semiring l3 R)
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  {U : UU l2} (S : U → subset-Semiring l3 R)
   where
 
   is-least-upper-bound-join-ideal-subset-Semiring :
@@ -206,7 +207,8 @@ module _
       ( ideal-Semiring-Large-Poset R)
       { x = λ α → ideal-subset-Semiring R (S α)}
       { y = ideal-subset-Semiring R (union-family-of-subtypes S)}
-      { z = join-family-of-ideals-Semiring R (λ α → ideal-subset-Semiring R (S α))}
+      { z =
+        join-family-of-ideals-Semiring R (λ α → ideal-subset-Semiring R (S α))}
       ( is-least-upper-bound-join-ideal-subset-Semiring)
       ( is-join-join-family-of-ideals-Semiring R
         ( λ α → ideal-subset-Semiring R (S α)))

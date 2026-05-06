@@ -1,7 +1,7 @@
-# Joins of ideals of rings
+# Joins of families of ideals of rings
 
 ```agda
-module ring-theory.joins-ideals-rings where
+module ring-theory.joins-families-of-ideals-rings where
 ```
 
 <details><summary>Imports</summary>
