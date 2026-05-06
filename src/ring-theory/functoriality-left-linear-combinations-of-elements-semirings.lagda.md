@@ -364,3 +364,58 @@ module _
       ( map-hom-Semiring R S f ∘ a)
       ( inclusion-im-pullback-im-comp (map-hom-Semiring R S f) a)
 ```
+
+### Functoriality preserves left linear combinations of a single element in a semiring
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Semiring l1) (S : Semiring l2) (f : hom-Semiring R S)
+  (a : type-Semiring R)
+  where
+
+  map-left-linear-combination-element-Semiring :
+    left-linear-combination-element-Semiring R a →
+    left-linear-combination-element-Semiring S (map-hom-Semiring R S f a)
+  map-left-linear-combination-element-Semiring =
+    map-left-linear-combination-subset-Semiring R S f
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring R)
+        ( a))
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring S)
+        ( map-hom-Semiring R S f a))
+      ( λ y → ap (map-hom-Semiring R S f))
+
+  preserves-ev-map-left-linear-combination-element-Semiring :
+    (l : left-linear-combination-element-Semiring R a) →
+    map-hom-Semiring R S f
+      ( ev-left-linear-combination-element-Semiring R a l) ＝
+    ev-left-linear-combination-element-Semiring S (map-hom-Semiring R S f a)
+      ( map-left-linear-combination-element-Semiring l)
+  preserves-ev-map-left-linear-combination-element-Semiring =
+    preserves-ev-map-left-linear-combination-subset-Semiring R S f
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring R)
+        ( a))
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring S)
+        ( map-hom-Semiring R S f a))
+      ( λ y → ap (map-hom-Semiring R S f))
+
+  map-is-left-linear-combination-element-Semiring :
+    (x : type-Semiring R) →
+    is-left-linear-combination-element-Semiring R a x →
+    is-left-linear-combination-element-Semiring S
+      ( map-hom-Semiring R S f a)
+      ( map-hom-Semiring R S f x)
+  map-is-left-linear-combination-element-Semiring =
+    map-is-left-linear-combination-subset-Semiring R S f
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring R)
+        ( a))
+      ( subtype-standard-singleton-subtype
+        ( set-Semiring S)
+        ( map-hom-Semiring R S f a))
+      ( λ y → ap (map-hom-Semiring R S f))
+```

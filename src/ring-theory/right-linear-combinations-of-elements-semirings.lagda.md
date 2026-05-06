@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.singleton-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -213,6 +214,31 @@ module _
     type-Semiring R → UU (l1 ⊔ l2)
   is-right-linear-combination-family-of-elements-Semiring =
     is-right-linear-combination-subset-Semiring R (trunc-Prop ∘ fiber a)
+```
+
+### Right linear combinations of a single element in a semiring
+
+```agda
+module _
+  {l1 : Level} (R : Semiring l1) (a : type-Semiring R)
+  where
+
+  right-linear-combination-element-Semiring : UU l1
+  right-linear-combination-element-Semiring =
+    right-linear-combination-subset-Semiring R
+      ( subtype-standard-singleton-subtype (set-Semiring R) a)
+
+  ev-right-linear-combination-element-Semiring :
+    right-linear-combination-element-Semiring → type-Semiring R
+  ev-right-linear-combination-element-Semiring =
+    ev-right-linear-combination-subset-Semiring R
+      ( subtype-standard-singleton-subtype (set-Semiring R) a)
+
+  is-right-linear-combination-element-Semiring :
+    type-Semiring R → UU l1
+  is-right-linear-combination-element-Semiring =
+    is-right-linear-combination-subset-Semiring R
+      ( subtype-standard-singleton-subtype (set-Semiring R) a)
 ```
 
 ## Properties
