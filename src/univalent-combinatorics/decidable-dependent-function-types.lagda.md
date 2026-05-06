@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types

@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.invertible-elements-commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions

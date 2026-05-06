@@ -103,7 +103,8 @@ check: ./$(SOURCE_DIR)/everything.lagda.md
 check-profile: $(SOURCE_DIR)/everything.lagda.md
 	@# Remove cached build data
 	@rm -Rf ./$(AGDA_BUILD)/
-	${AGDA} ${AGDAPROFILEFLAGS} $<
+	@# Call agda directly to circumvent pre-allocation of heap
+	@agda +RTS -M8G -RTS ${AGDAPROFILEFLAGS} $<
 
 # Convert module path to directory path (replace dots with slashes)
 MODULE_DIR = $(subst .,/,$(MODULE))

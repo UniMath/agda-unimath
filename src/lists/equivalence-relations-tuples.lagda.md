@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 

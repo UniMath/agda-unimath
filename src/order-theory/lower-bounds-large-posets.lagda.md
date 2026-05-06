@@ -7,9 +7,9 @@ module order-theory.lower-bounds-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.universe-levels

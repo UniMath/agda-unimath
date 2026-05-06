@@ -7,6 +7,7 @@ module group-theory.mere-equivalences-concrete-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations

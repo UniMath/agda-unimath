@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.surjective-maps

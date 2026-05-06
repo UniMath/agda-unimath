@@ -32,6 +32,7 @@ conisistsed->consisted
 conisistsing->consisting
 consistsed->consisted
 consistsing->consisting
+diamgram->diagram
 eacy->each,easy
 embeddding->embedding
 embedddings->embeddings
@@ -59,6 +60,7 @@ homomorphsim->homomorphism
 homomorphsims->homomorphisms
 identitification->identification
 identitifications->identifications
+inhanited->inhabited
 isomorhpism->isomorphism
 isomorhpisms->isomorphisms
 isomorhpsim->isomorphism
