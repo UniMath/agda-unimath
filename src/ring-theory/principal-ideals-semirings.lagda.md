@@ -9,6 +9,7 @@ module ring-theory.principal-ideals-semirings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -35,6 +36,18 @@ $$
 $$
 
 holds.
+
+We note that principal ideals need not be [subtractive](ring-theory.subtractive-ideals-semirings.md). For instance, consider the ring `R := {0,1,∞}` with addition and multiplication tables given by
+
+```text
+  + | 0 1 ∞    × | 0 1 ∞
+  ---------    ---------
+  0 | 0 1 ∞    0 | 0 0 0
+  1 | 1 ∞ ∞    1 | 0 1 ∞
+  ∞ | ∞ ∞ ∞    ∞ | 0 ∞ ∞
+```
+
+Then the ideal `⟨∞⟩ = {0,∞}` is principal, but it is not subtractive, since two out of three of `∞ + 1 = ∞` are in the ideal `⟨∞⟩`, but `1 ∉ ⟨∈⟩`.
 
 ## Definitions
 
@@ -160,13 +173,13 @@ module _
   is-closed-under-left-multiplication-principal-left-ideal-Semiring :
     is-closed-under-left-multiplication-subset-Semiring R
       subset-principal-left-ideal-Semiring
-  is-closed-under-left-multiplication-principal-left-ideal-Semiring x y H =
+  is-closed-under-left-multiplication-principal-left-ideal-Semiring H =
     apply-universal-property-trunc-Prop H
-      ( subset-principal-left-ideal-Semiring (mul-Semiring R x y))
+      ( subset-principal-left-ideal-Semiring (mul-Semiring R _ _))
       ( λ (u , p) →
         intro-exists
-          ( mul-Semiring R x u)
-          ( associative-mul-Semiring R x u a ∙ ap (mul-Semiring R x) p))
+          ( mul-Semiring R _ u)
+          ( associative-mul-Semiring R _ u a ∙ ap (mul-Semiring R _) p))
 
   is-left-ideal-principal-left-ideal-Semiring :
     is-left-ideal-subset-Semiring R subset-principal-left-ideal-Semiring
@@ -231,13 +244,13 @@ module _
   is-closed-under-right-multiplication-principal-right-ideal-Semiring :
     is-closed-under-right-multiplication-subset-Semiring R
       subset-principal-right-ideal-Semiring
-  is-closed-under-right-multiplication-principal-right-ideal-Semiring x y H =
+  is-closed-under-right-multiplication-principal-right-ideal-Semiring H =
     apply-universal-property-trunc-Prop H
-      ( subset-principal-right-ideal-Semiring (mul-Semiring R x y))
+      ( subset-principal-right-ideal-Semiring (mul-Semiring R _ _))
       ( λ (u , p) →
         intro-exists
-          ( mul-Semiring R u y)
-          ( inv (associative-mul-Semiring R a u y) ∙ ap (mul-Semiring' R y) p))
+          ( mul-Semiring R u _)
+          ( inv (associative-mul-Semiring R a u _) ∙ ap (mul-Semiring' R _) p))
 
   is-right-ideal-principal-right-ideal-Semiring :
     is-right-ideal-subset-Semiring R subset-principal-right-ideal-Semiring
