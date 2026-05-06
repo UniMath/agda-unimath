@@ -280,3 +280,8 @@ module _
     map-inv-equiv (extensionality-subtractive-ideal-Semiring J)
 ```
 
+## See also
+
+- [Subtractive semirings](ring-theory.subtractive-semirings.md)
+- [Subtractively principal semirings](ring-theory.subtractively-principal-semirings.md)
+- [Principally subtractive semirings](ring-theory.principally-subtractive-semirings.md)

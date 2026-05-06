@@ -57,6 +57,12 @@ module _
       ( λ a → has-same-elements-ideal-Semiring R (ideal-element-Semiring R a) I)
 ```
 
+## See also
+
+- [Principal semirings](ring-theory.principal-semirings.md)
+- [Subtractively principal semirings](ring-theory.subtractively-principal-semirings.md)
+- [Principally subtractive semirings](ring-theory.principally-subtractive-semirings.md)
+
 ## References
 
 {{#bibliography}}
