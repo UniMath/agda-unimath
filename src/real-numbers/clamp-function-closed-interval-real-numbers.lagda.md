@@ -45,7 +45,7 @@ on a [closed interval](real-numbers.closed-intervals-real-numbers.md) of
 For any `x ∈ ℝ`,
 
 - if `x ≤ a` then `clamp-[a,b] x ＝ a`;
-- if `b ≤ x` then `clamp-[a,b] x ＝ a`;
+- if `b ≤ x` then `clamp-[a,b] x ＝ b`;
 - if `a ≤ x ≤ b` then `clamp-[a,b] x ＝ x`.
 
 In particular, the **clamp function** is
