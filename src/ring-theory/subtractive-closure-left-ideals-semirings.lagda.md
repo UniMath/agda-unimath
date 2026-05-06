@@ -34,6 +34,7 @@ open import ring-theory.poset-of-subtractive-left-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 open import ring-theory.subtractive-left-ideals-semirings
+open import ring-theory.trivial-ideals-semirings
 ```
 
 </details>
@@ -553,4 +554,25 @@ module _
       ( subtractive-left-ideal-Semiring-Large-Poset R)
       ( subtractive-closure-left-ideal-galois-connection-Semiring R)
       ( I)
+```
+
+### The subtractive closure of a trivial left ideal is trivial
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : left-ideal-Semiring l2 R)
+  where
+
+  is-trivial-subtractive-closure-left-ideal-Semiring :
+    is-trivial-left-ideal-Semiring R I →
+    is-trivial-left-ideal-Semiring R
+      ( left-ideal-subtractive-closure-left-ideal-Semiring R I)
+  is-trivial-subtractive-closure-left-ideal-Semiring H =
+    is-trivial-leq-left-ideal-Semiring R
+      ( left-ideal-subtractive-closure-left-ideal-Semiring R I)
+      ( I)
+      ( H)
+      ( leq-subtractive-closure-left-ideal-Semiring R I
+        ( I , is-subtractive-is-trivial-left-ideal-Semiring R I H)
+        ( refl-leq-left-ideal-Semiring R I))
 ```
