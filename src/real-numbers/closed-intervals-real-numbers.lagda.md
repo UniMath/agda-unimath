@@ -14,6 +14,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -160,47 +161,6 @@ complete-metric-space-closed-interval-ℝ l [a,b] =
     ( closed-subset-closed-interval-ℝ l [a,b])
 ```
 
-### The clamping function
-
-```agda
-clamp-closed-interval-ℝ :
-  {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) → ℝ l3 →
-  type-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]
-clamp-closed-interval-ℝ ((a , b) , a≤b) x =
-  ( max-ℝ a (min-ℝ b x) ,
-    leq-left-max-ℝ _ _ ,
-    leq-max-leq-leq-ℝ _ _ _ a≤b (leq-left-min-ℝ b x))
-```
-
-### The clamping function is a short map
-
-```agda
-abstract
-  is-short-map-clamp-closed-interval-ℝ :
-    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
-    is-short-map-Metric-Space
-      ( metric-space-ℝ l3)
-      ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
-      ( clamp-closed-interval-ℝ [a,b])
-  is-short-map-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
-    is-short-map-comp-Metric-Space
-      ( metric-space-ℝ _)
-      ( metric-space-ℝ _)
-      ( metric-space-ℝ _)
-      ( max-ℝ a)
-      ( min-ℝ b)
-      ( is-short-map-left-max-ℝ a)
-      ( is-short-map-left-min-ℝ b)
-
-short-map-clamp-closed-interval-ℝ :
-  {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
-  short-map-Metric-Space
-    ( metric-space-ℝ l3)
-    ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
-short-map-clamp-closed-interval-ℝ [a,b] =
-  ( clamp-closed-interval-ℝ [a,b] , is-short-map-clamp-closed-interval-ℝ [a,b])
-```
-
 ### If both endpoints of a closed interval `[x, y]` are in a `d`-neighborhood of `z`, then `[x, y] ⊆ neighborhood d z`
 
 ```agda
@@ -239,6 +199,70 @@ module _
               by right-leq-real-bound-neighborhood-ℝ d z y Ndzy)
 ```
 
+### The clamping function
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  ([a,b]@((a , b) , a≤b) : closed-interval-ℝ l1 l2)
+  (x : ℝ l3)
+  where
+
+  map-clamp-closed-interval-ℝ : ℝ (l1 ⊔ l2 ⊔ l3)
+  map-clamp-closed-interval-ℝ = max-ℝ a (min-ℝ b x)
+
+  abstract
+    leq-lower-bound-map-clamp-closed-interval-ℝ :
+      leq-ℝ a map-clamp-closed-interval-ℝ
+    leq-lower-bound-map-clamp-closed-interval-ℝ =
+      leq-left-max-ℝ _ _
+
+    leq-upper-bound-map-clamp-closed-interval-ℝ :
+      leq-ℝ map-clamp-closed-interval-ℝ b
+    leq-upper-bound-map-clamp-closed-interval-ℝ =
+      leq-max-leq-leq-ℝ _ _ _ a≤b (leq-left-min-ℝ b x)
+
+    is-in-closed-interval-map-clamp-closed-interval-ℝ :
+      is-in-closed-interval-ℝ [a,b] map-clamp-closed-interval-ℝ
+    is-in-closed-interval-map-clamp-closed-interval-ℝ =
+      ( leq-lower-bound-map-clamp-closed-interval-ℝ ,
+        leq-upper-bound-map-clamp-closed-interval-ℝ)
+
+  clamp-closed-interval-ℝ : type-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]
+  clamp-closed-interval-ℝ =
+    ( map-clamp-closed-interval-ℝ ,
+      is-in-closed-interval-map-clamp-closed-interval-ℝ)
+```
+
+### The clamping function is a short map
+
+```agda
+abstract
+  is-short-map-clamp-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
+    is-short-map-Metric-Space
+      ( metric-space-ℝ l3)
+      ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
+      ( clamp-closed-interval-ℝ [a,b])
+  is-short-map-clamp-closed-interval-ℝ [a,b]@((a , b) , a≤b) =
+    is-short-map-comp-Metric-Space
+      ( metric-space-ℝ _)
+      ( metric-space-ℝ _)
+      ( metric-space-ℝ _)
+      ( max-ℝ a)
+      ( min-ℝ b)
+      ( is-short-map-left-max-ℝ a)
+      ( is-short-map-left-min-ℝ b)
+
+short-map-clamp-closed-interval-ℝ :
+  {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
+  short-map-Metric-Space
+    ( metric-space-ℝ l3)
+    ( metric-space-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b])
+short-map-clamp-closed-interval-ℝ [a,b] =
+  ( clamp-closed-interval-ℝ [a,b] , is-short-map-clamp-closed-interval-ℝ [a,b])
+```
+
 ### If `x ≤ a`, clamping `x` into `[a, b]` gives `a`
 
 ```agda
@@ -247,7 +271,7 @@ abstract
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
     leq-ℝ x (lower-bound-closed-interval-ℝ [a,b]) →
     sim-ℝ
-      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( map-clamp-closed-interval-ℝ [a,b] x)
       ( lower-bound-closed-interval-ℝ [a,b])
   clamp-leq-lower-bound-closed-interval-ℝ ((a , b) , a≤b) x x≤a =
     similarity-reasoning-ℝ
@@ -268,7 +292,7 @@ abstract
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
     leq-ℝ (upper-bound-closed-interval-ℝ [a,b]) x →
     sim-ℝ
-      ( pr1 (clamp-closed-interval-ℝ [a,b] x))
+      ( map-clamp-closed-interval-ℝ [a,b] x)
       ( upper-bound-closed-interval-ℝ [a,b])
   clamp-leq-upper-bound-closed-interval-ℝ ((a , b) , a≤b) x b≤x =
     similarity-reasoning-ℝ
@@ -277,6 +301,41 @@ abstract
         by preserves-sim-right-max-ℝ _ _ _ (left-leq-right-min-ℝ b≤x)
       ~ℝ b
         by left-leq-right-max-ℝ a≤b
+```
+
+### If `x ∈ [a, b]` then clamping `x` into `[a, b]` gives `x`
+
+```agda
+abstract
+  clamp-is-in-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    is-in-closed-interval-ℝ [a,b] x →
+    sim-ℝ
+      ( map-clamp-closed-interval-ℝ [a,b] x)
+      ( x)
+  clamp-is-in-closed-interval-ℝ ((a , b) , a≤b) x (a≤x , x≤b) =
+    similarity-reasoning-ℝ
+      max-ℝ a (min-ℝ b x)
+      ~ℝ max-ℝ a x
+        by preserves-sim-right-max-ℝ _ _ _ (right-leq-left-min-ℝ x≤b)
+      ~ℝ x
+        by left-leq-right-max-ℝ a≤x
+```
+
+### The clamping function is idempotent
+
+```agda
+abstract
+  is-idempotent-map-clamp-closed-interval-ℝ :
+    {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
+    map-clamp-closed-interval-ℝ [a,b] (map-clamp-closed-interval-ℝ [a,b] x) ＝
+    map-clamp-closed-interval-ℝ [a,b] x
+  is-idempotent-map-clamp-closed-interval-ℝ [a,b] x =
+    eq-sim-ℝ
+      ( clamp-is-in-closed-interval-ℝ
+        ( [a,b])
+        ( map-clamp-closed-interval-ℝ [a,b] x)
+        ( is-in-closed-interval-map-clamp-closed-interval-ℝ [a,b] x))
 ```
 
 ### Raising elements of closed intervals of rational numbers
