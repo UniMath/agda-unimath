@@ -26,6 +26,7 @@ open import real-numbers.binary-minimum-nonnegative-real-numbers public
 open import real-numbers.binary-minimum-real-numbers public
 open import real-numbers.cauchy-completeness-dedekind-real-numbers public
 open import real-numbers.cauchy-sequences-real-numbers public
+open import real-numbers.clamp-function-closed-interval-real-numbers public
 open import real-numbers.closed-intervals-real-numbers public
 open import real-numbers.cofinal-and-coinitial-endomaps-real-numbers public
 open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
