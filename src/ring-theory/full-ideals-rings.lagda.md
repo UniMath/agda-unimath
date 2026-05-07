@@ -102,6 +102,12 @@ module _
   is-closed-under-right-multiplication-full-ideal-Ring H =
     raise-star
 
+  is-closed-under-two-sided-multiplication-full-ideal-Ring :
+    is-closed-under-two-sided-multiplication-subset-Ring R
+      subset-full-ideal-Ring
+  is-closed-under-two-sided-multiplication-full-ideal-Ring H =
+    raise-star
+
   is-left-ideal-full-ideal-Ring :
     is-left-ideal-subset-Ring R subset-full-ideal-Ring
   pr1 is-left-ideal-full-ideal-Ring =
@@ -125,12 +131,9 @@ module _
   pr2 full-right-ideal-Ring = is-right-ideal-full-ideal-Ring
 
   is-ideal-full-ideal-Ring : is-ideal-subset-Ring R subset-full-ideal-Ring
-  pr1 is-ideal-full-ideal-Ring =
-    {!is-additive-submonoid-full-ideal-Ring!} -- is-additive-submonoid-full-ideal-Ring
-  pr1 (pr2 is-ideal-full-ideal-Ring) =
-    is-closed-under-left-multiplication-full-ideal-Ring
-  pr2 (pr2 is-ideal-full-ideal-Ring) =
-    is-closed-under-right-multiplication-full-ideal-Ring
+  pr1 is-ideal-full-ideal-Ring = is-additive-submonoid-full-ideal-Ring
+  pr2 is-ideal-full-ideal-Ring {r} {x} {u} =
+    is-closed-under-two-sided-multiplication-full-ideal-Ring {r} {x} {u}
 
   full-ideal-Ring : ideal-Ring lzero R
   pr1 full-ideal-Ring = subset-full-ideal-Ring
