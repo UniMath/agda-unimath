@@ -49,6 +49,11 @@ module _
   is-prop-is-left-ideal-subset-Ring =
     is-prop-is-left-ideal-subset-Semiring (semiring-Ring R)
 
+  is-left-ideal-prop-subset-Ring :
+    {l2 : Level} → subtype (l1 ⊔ l2) (subset-Ring l2 R)
+  is-left-ideal-prop-subset-Ring =
+    is-left-ideal-prop-subset-Semiring (semiring-Ring R)
+
 left-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 left-ideal-Ring l R =

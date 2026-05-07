@@ -38,22 +38,28 @@ A {{#concept "right ideal" Disambiguation="semiring" Agda=right-ideal-Semiring}}
 
 ```agda
 module _
-  {l1 : Level} (R : Semiring l1)
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
   where
 
   is-right-ideal-subset-Semiring :
-    {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
-  is-right-ideal-subset-Semiring P =
-    is-additive-submonoid-subset-Semiring R P ×
-    is-closed-under-right-multiplication-subset-Semiring R P
+    UU (l1 ⊔ l2)
+  is-right-ideal-subset-Semiring =
+    is-additive-submonoid-subset-Semiring R S ×
+    is-closed-under-right-multiplication-subset-Semiring R S
 
   is-prop-is-right-ideal-subset-Semiring :
-    {l2 : Level} (S : subset-Semiring l2 R) →
-    is-prop (is-right-ideal-subset-Semiring S)
-  is-prop-is-right-ideal-subset-Semiring S =
+    is-prop is-right-ideal-subset-Semiring
+  is-prop-is-right-ideal-subset-Semiring =
     is-prop-product
       ( is-prop-is-additive-submonoid-subset-Semiring R S)
       ( is-prop-is-closed-under-right-multiplication-subset-Semiring R S)
+
+  is-right-ideal-prop-subset-Semiring :
+    Prop (l1 ⊔ l2)
+  pr1 is-right-ideal-prop-subset-Semiring =
+    is-right-ideal-subset-Semiring
+  pr2 is-right-ideal-prop-subset-Semiring =
+    is-prop-is-right-ideal-subset-Semiring
 
 right-ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)

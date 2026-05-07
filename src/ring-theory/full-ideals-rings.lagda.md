@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.full-subtypes
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.unit-type
@@ -71,39 +72,42 @@ module _
 
   contains-zero-full-ideal-Ring :
     contains-zero-subset-Ring R subset-full-ideal-Ring
-  contains-zero-full-ideal-Ring = raise-star
+  contains-zero-full-ideal-Ring =
+    raise-star {lzero}
 
   is-closed-under-addition-full-ideal-Ring :
     is-closed-under-addition-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-addition-full-ideal-Ring H K = raise-star
+  is-closed-under-addition-full-ideal-Ring H K =
+    raise-star {lzero}
 
   is-closed-under-negatives-full-ideal-Ring :
     is-closed-under-negatives-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-negatives-full-ideal-Ring H = raise-star
+  is-closed-under-negatives-full-ideal-Ring H =
+    raise-star {lzero}
 
-  is-additive-subgroup-full-ideal-Ring :
-    is-additive-subgroup-subset-Ring R subset-full-ideal-Ring
-  pr1 is-additive-subgroup-full-ideal-Ring =
+  is-additive-submonoid-full-ideal-Ring :
+    is-additive-submonoid-subset-Ring R subset-full-ideal-Ring
+  pr1 is-additive-submonoid-full-ideal-Ring =
     contains-zero-full-ideal-Ring
-  pr1 (pr2 is-additive-subgroup-full-ideal-Ring) {x} {y} =
+  pr2 is-additive-submonoid-full-ideal-Ring {x} {y} =
     is-closed-under-addition-full-ideal-Ring {x} {y}
-  pr2 (pr2 is-additive-subgroup-full-ideal-Ring) {x} =
-    is-closed-under-negatives-full-ideal-Ring {x}
 
   is-closed-under-left-multiplication-full-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-left-multiplication-full-ideal-Ring x y H = raise-star
+  is-closed-under-left-multiplication-full-ideal-Ring H =
+    raise-star
 
   is-closed-under-right-multiplication-full-ideal-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-full-ideal-Ring
-  is-closed-under-right-multiplication-full-ideal-Ring x y H = raise-star
+  is-closed-under-right-multiplication-full-ideal-Ring H =
+    raise-star
 
   is-left-ideal-full-ideal-Ring :
     is-left-ideal-subset-Ring R subset-full-ideal-Ring
   pr1 is-left-ideal-full-ideal-Ring =
-    is-additive-subgroup-full-ideal-Ring
-  pr2 is-left-ideal-full-ideal-Ring =
-    is-closed-under-left-multiplication-full-ideal-Ring
+    is-additive-submonoid-full-ideal-Ring
+  pr2 is-left-ideal-full-ideal-Ring {x} {y} =
+    is-closed-under-left-multiplication-full-ideal-Ring {x} {y}
 
   full-left-ideal-Ring : left-ideal-Ring lzero R
   pr1 full-left-ideal-Ring = subset-full-ideal-Ring
@@ -112,9 +116,9 @@ module _
   is-right-ideal-full-ideal-Ring :
     is-right-ideal-subset-Ring R subset-full-ideal-Ring
   pr1 is-right-ideal-full-ideal-Ring =
-    is-additive-subgroup-full-ideal-Ring
-  pr2 is-right-ideal-full-ideal-Ring =
-    is-closed-under-right-multiplication-full-ideal-Ring
+    is-additive-submonoid-full-ideal-Ring
+  pr2 is-right-ideal-full-ideal-Ring {x} {y} =
+    is-closed-under-right-multiplication-full-ideal-Ring {x} {y}
 
   full-right-ideal-Ring : right-ideal-Ring lzero R
   pr1 full-right-ideal-Ring = subset-full-ideal-Ring
@@ -122,7 +126,7 @@ module _
 
   is-ideal-full-ideal-Ring : is-ideal-subset-Ring R subset-full-ideal-Ring
   pr1 is-ideal-full-ideal-Ring =
-    is-additive-subgroup-full-ideal-Ring
+    {!is-additive-submonoid-full-ideal-Ring!} -- is-additive-submonoid-full-ideal-Ring
   pr1 (pr2 is-ideal-full-ideal-Ring) =
     is-closed-under-left-multiplication-full-ideal-Ring
   pr2 (pr2 is-ideal-full-ideal-Ring) =
@@ -149,7 +153,7 @@ module _
     is-in-ideal-Ring R I (one-Ring R) → is-full-ideal-Ring R I
   is-full-contains-one-ideal-Ring H x =
     is-closed-under-eq-ideal-Ring R I
-      ( is-closed-under-left-multiplication-ideal-Ring R I x (one-Ring R) H)
+      ( is-closed-under-left-multiplication-ideal-Ring R I H)
       ( right-unit-law-mul-Ring R x)
 
   contains-one-is-full-ideal-Ring :

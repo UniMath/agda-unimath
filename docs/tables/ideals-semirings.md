@@ -8,7 +8,7 @@
 | Identity kernels of semiring homomorphisms | [`ring-theory.kernels-of-semiring-homomorphisms`](ring-theory.kernels-of-semiring-homomorphisms.md) |
 | Image ideals | [`ring-theory.image-ideals-semirings`](ring-theory.image-ideals-semirings.md) |
 | Intersections of ideals | [`ring-theory.intersections-ideals-semirings`](ring-theory.intersections-ideals-semirings.md) |
-| Joins of ideals | [`ring-theory.joins-ideals-semirings`](ring-theory.joins-ideals-semirings.md) |
+| Joins of families of ideals | [`ring-theory.joins-families-of-ideals-semirings`](ring-theory.joins-families-of-ideals-semirings.md) |
 | Maximal ideals | [`ring-theory.maximal-ideals-semirings`](ring-theory.maximal-ideals-semirings.md) |
 | Nil ideals | [`ring-theory.nil-ideals-semirings`](ring-theory.nil-ideals-semirings.md) |
 | Poset of ideals | [`ring-theory.poset-of-ideals-semirings`](ring-theory.poset-of-ideals-semirings.md) |

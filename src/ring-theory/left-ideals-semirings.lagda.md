@@ -38,22 +38,28 @@ A {{#concept "left ideal" Disambiguation="semiring" Agda=left-ideal-Semiring}} i
 
 ```agda
 module _
-  {l1 : Level} (R : Semiring l1)
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
   where
 
   is-left-ideal-subset-Semiring :
-    {l2 : Level} → subset-Semiring l2 R → UU (l1 ⊔ l2)
-  is-left-ideal-subset-Semiring S =
+    UU (l1 ⊔ l2)
+  is-left-ideal-subset-Semiring =
     is-additive-submonoid-subset-Semiring R S ×
     is-closed-under-left-multiplication-subset-Semiring R S
 
   is-prop-is-left-ideal-subset-Semiring :
-    {l2 : Level} (S : subset-Semiring l2 R) →
-    is-prop (is-left-ideal-subset-Semiring S)
-  is-prop-is-left-ideal-subset-Semiring S =
+    is-prop is-left-ideal-subset-Semiring
+  is-prop-is-left-ideal-subset-Semiring =
     is-prop-product
       ( is-prop-is-additive-submonoid-subset-Semiring R S)
       ( is-prop-is-closed-under-left-multiplication-subset-Semiring R S)
+
+  is-left-ideal-prop-subset-Semiring :
+    Prop (l1 ⊔ l2)
+  pr1 is-left-ideal-prop-subset-Semiring =
+    is-left-ideal-subset-Semiring
+  pr2 is-left-ideal-prop-subset-Semiring =
+    is-prop-is-left-ideal-subset-Semiring
 
 left-ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)

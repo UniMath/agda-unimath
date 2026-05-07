@@ -61,8 +61,8 @@ module _
     equivalence-relation l2 (type-Monoid M)
   equivalence-relation-congruence-Monoid = pr1 R
 
-  prop-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
-  prop-congruence-Monoid =
+  sim-prop-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
+  sim-prop-congruence-Monoid =
     prop-equivalence-relation equivalence-relation-congruence-Monoid
 
   sim-congruence-Monoid : (x y : type-Monoid M) → UU l2

@@ -52,19 +52,29 @@ correspondence to congruences. We will call such ideals _normal_.
 ### Ideals of semirings
 
 ```agda
-is-ideal-subset-Semiring :
-  {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R) → UU (l1 ⊔ l2)
-is-ideal-subset-Semiring R P =
-  is-additive-submonoid-subset-Semiring R P ×
-  is-closed-under-two-sided-multiplication-subset-Semiring R P
+module _
+  {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R)
+  where
+  
+  is-ideal-subset-Semiring :
+    UU (l1 ⊔ l2)
+  is-ideal-subset-Semiring =
+    is-additive-submonoid-subset-Semiring R P ×
+    is-closed-under-two-sided-multiplication-subset-Semiring R P
 
-is-prop-is-ideal-subset-Semiring :
-  {l1 l2 : Level} (R : Semiring l1) (P : subset-Semiring l2 R) →
-  is-prop (is-ideal-subset-Semiring R P)
-is-prop-is-ideal-subset-Semiring R P =
-  is-prop-product
-    ( is-prop-is-additive-submonoid-subset-Semiring R P)
-    ( is-prop-is-closed-under-two-sided-multiplication-subset-Semiring R P)
+  is-prop-is-ideal-subset-Semiring :
+    is-prop is-ideal-subset-Semiring
+  is-prop-is-ideal-subset-Semiring =
+    is-prop-product
+      ( is-prop-is-additive-submonoid-subset-Semiring R P)
+      ( is-prop-is-closed-under-two-sided-multiplication-subset-Semiring R P)
+
+  is-ideal-prop-subset-Semiring :
+    Prop (l1 ⊔ l2)
+  pr1 is-ideal-prop-subset-Semiring =
+    is-ideal-subset-Semiring
+  pr2 is-ideal-prop-subset-Semiring =
+    is-prop-is-ideal-subset-Semiring
 
 ideal-Semiring :
   (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
