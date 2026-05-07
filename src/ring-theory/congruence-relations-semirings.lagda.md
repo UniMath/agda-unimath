@@ -211,6 +211,31 @@ module _
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
+  concatenate-eq-sim-congruence-Semiring :
+    {x1 x2 y : type-Semiring R} →
+    x1 ＝ x2 → sim-congruence-Semiring x2 y → sim-congruence-Semiring x1 y
+  concatenate-eq-sim-congruence-Semiring =
+    concatenate-eq-sim-congruence-Monoid
+      ( additive-monoid-Semiring R)
+      ( congruence-additive-monoid-congruence-Semiring)
+
+  concatenate-sim-eq-congruence-Semiring :
+    {x y1 y2 : type-Semiring R} →
+    sim-congruence-Semiring x y1 → y1 ＝ y2 → sim-congruence-Semiring x y2
+  concatenate-sim-eq-congruence-Semiring =
+    concatenate-sim-eq-congruence-Monoid
+      ( additive-monoid-Semiring R)
+      ( congruence-additive-monoid-congruence-Semiring)
+
+  concatenate-eq-sim-eq-congruence-Semiring :
+    {x1 x2 y1 y2 : type-Semiring R} →
+    x1 ＝ x2 → sim-congruence-Semiring x2 y1 →
+    y1 ＝ y2 → sim-congruence-Semiring x1 y2
+  concatenate-eq-sim-eq-congruence-Semiring =
+    concatenate-eq-sim-eq-congruence-Monoid
+      ( additive-monoid-Semiring R)
+      ( congruence-additive-monoid-congruence-Semiring)
+
   is-additive-congruence-congruence-Semiring :
     is-congruence-Monoid
       ( additive-monoid-Semiring R)
