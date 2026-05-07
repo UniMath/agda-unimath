@@ -7,6 +7,7 @@ module ring-theory.principal-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-semirings
@@ -42,4 +43,24 @@ module _
     UUω
   is-principal-Semiring =
     {l : Level} → is-principal-Semiring-Level l
+```
+
+### The predicate of being a decidably principal semiring
+
+```agda
+module _
+  {l1 : Level} (R : Semiring l1)
+  where
+
+  is-decidably-principal-Semiring-Level :
+    (l : Level) → UU (l1 ⊔ lsuc l)
+  is-decidably-principal-Semiring-Level l =
+    (I : ideal-Semiring l R) →
+    is-decidable-subtype (subset-ideal-Semiring R I) →
+    is-principal-ideal-Semiring R I
+
+  is-decidably-principal-Semiring :
+    UUω
+  is-decidably-principal-Semiring =
+    {l : Level} → is-decidably-principal-Semiring-Level l
 ```
