@@ -33,7 +33,7 @@ A
 {{#concept "right congruence relation" Disambiguation="on a ring" WD="congruence relation" WDID=Q8349849 Agda=right-congruence-Ring}}
 on a [ring](ring-theory.rings.md) `R` is a
 [right congruence relation](ring-theory.right-congruence-relations-semirings.md) on the
-underlying [semiring](ring-theory.semirings.md) of `R`.
+underlying [semiring](ring-theory.semirings.md) of `R`. Right congruence relations on a ring `R` correspond to kernels of morphisms `R → M` into a right `R`-module.
 
 ## Definitions
 

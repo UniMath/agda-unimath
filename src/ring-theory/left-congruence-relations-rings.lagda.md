@@ -33,7 +33,7 @@ A
 {{#concept "left congruence relation" Disambiguation="on a ring" WD="congruence relation" WDID=Q8349849 Agda=left-congruence-Ring}}
 on a [ring](ring-theory.rings.md) `R` is a
 [left congruence relation](ring-theory.left-congruence-relations-semirings.md) on the
-underlying [semiring](ring-theory.semirings.md) of `R`.
+underlying [semiring](ring-theory.semirings.md) of `R`. Left congruence relations on a ring `R` correspond to kernels of morphisms `R → M` into a left `R`-module.
 
 ## Definitions
 

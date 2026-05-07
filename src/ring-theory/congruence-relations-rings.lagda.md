@@ -216,20 +216,20 @@ module _
   add-congruence-Ring =
     is-additive-congruence-congruence-Ring
 
-  left-is-additive-congruence-congruence-Ring :
+  left-add-congruence-Ring :
     (x : type-Ring R) {y z : type-Ring R} →
     sim-congruence-Ring y z →
     sim-congruence-Ring (add-Ring R x y) (add-Ring R x z)
-  left-is-additive-congruence-congruence-Ring =
+  left-add-congruence-Ring =
     left-add-congruence-Ab
       ( ab-Ring R)
       ( congruence-ab-congruence-Ring)
 
-  right-is-additive-congruence-congruence-Ring :
+  right-add-congruence-Ring :
     {x y : type-Ring R} → sim-congruence-Ring x y →
     (z : type-Ring R) →
     sim-congruence-Ring (add-Ring R x z) (add-Ring R y z)
-  right-is-additive-congruence-congruence-Ring =
+  right-add-congruence-Ring =
     right-add-congruence-Ab
       ( ab-Ring R)
       ( congruence-ab-congruence-Ring)
