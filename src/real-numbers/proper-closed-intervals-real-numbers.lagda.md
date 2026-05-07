@@ -53,6 +53,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.binary-minimum-real-numbers
+open import real-numbers.clamp-function-closed-interval-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
