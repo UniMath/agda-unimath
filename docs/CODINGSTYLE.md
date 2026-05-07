@@ -15,7 +15,7 @@ clarity and readability. We hope that with this style guide, we are able to help
 new contributors write code that is both functional and understandable, as well
 as easily maintainable.
 
-Please reach out to us if you have any questions or remarks about the
+Please reach out to us on [Discord](https://discord.gg/Zp2e8hYsuX) if you have any questions or remarks about the
 agda-unimath style, or need any help getting started with your formalization
 project.
 
@@ -39,21 +39,21 @@ become elements of the recorded knowledge base of agda-unimath.
 Other obvious benefits of refactoring your code into small parts is that these
 parts thereby become reusable across the library. Work that is properly
 refactored is more easily understood and used by others, which is ultimately
-what it's all about.
+what it's all about!
 
 ### Representation independence
 
 Most of our concepts are introduced along with a "user interface", which
-consists of entries that specify and determine the basic use cases of a concept.
+consists of entries that specify and determine the basic use cases of the concept.
 This way, our code itself serves as a practical guide on how it can be used
 later in new definitions. Furthermore, later code that correctly uses the
-interface functions for a concept don't depend on the specific implementations
-of its dependants, which makes them conceptually a lot cleaner, and more robust
+interface of a concept don't depend on the specific implementations
+of its dependencies, which makes them conceptually a lot cleaner, and more robust
 to change. John C. Reynolds explained the benefits of representation
 independence more fully in {{#cite Reynolds1974}}.
 
 In essence, our code structuring conventions are designed and practiced with the
-goal of making the library as conceptually clear and as understandable as
+goal of making the library as conceptually clear and understandable as
 possible. Finally, we hope that with the coding practices outlined here, you'll
 find our codebase welcoming and pleasant to work with.
 
