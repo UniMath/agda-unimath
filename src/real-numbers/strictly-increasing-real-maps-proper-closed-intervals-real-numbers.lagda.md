@@ -28,6 +28,7 @@ open import order-theory.subpreorders
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.maps-between-proper-closed-intervals-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
 open import real-numbers.real-maps-proper-closed-intervals-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -271,4 +272,29 @@ module _
             ( [a,b])
             ( l1))
           ( u≤b)))
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 I)
+  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
+  where
+
+  map-proper-closed-interval-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
+    map-proper-closed-interval-ℝ _ _
+      ( I)
+      ( proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+        ( I)
+        ( f)
+        ( H))
+  map-proper-closed-interval-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+    x =
+    ( f x ,
+      is-in-proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+        ( I)
+        ( f)
+        ( H)
+        ( x))
 ```
