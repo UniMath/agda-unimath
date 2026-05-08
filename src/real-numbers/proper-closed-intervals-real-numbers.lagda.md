@@ -174,16 +174,6 @@ module _
     ( lower-bound-proper-closed-interval-ℝ I ,
       is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ)
 
-  in-proper-closed-interval-sim-lower-bound-proper-closed-interval-ℝ :
-    {l3 : Level} (x : ℝ l3) →
-    sim-ℝ (lower-bound-proper-closed-interval-ℝ I) x →
-    type-proper-closed-interval-ℝ l3 I
-  in-proper-closed-interval-sim-lower-bound-proper-closed-interval-ℝ x a~x =
-    ( x ,
-      is-in-proper-closed-interval-sim-ℝ I
-        ( a~x)
-        ( is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ))
-
   abstract
     is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
       is-in-proper-closed-interval-ℝ I (upper-bound-proper-closed-interval-ℝ I)
@@ -196,16 +186,6 @@ module _
   in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
     ( upper-bound-proper-closed-interval-ℝ I ,
       is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ)
-
-  in-proper-closed-interval-sim-upper-bound-proper-closed-interval-ℝ :
-    {l3 : Level} (x : ℝ l3) →
-    sim-ℝ (upper-bound-proper-closed-interval-ℝ I) x →
-    type-proper-closed-interval-ℝ l3 I
-  in-proper-closed-interval-sim-upper-bound-proper-closed-interval-ℝ x b~x =
-    ( x ,
-      is-in-proper-closed-interval-sim-ℝ I
-        ( b~x)
-        ( is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ))
 ```
 
 ### The bounds of a proper closed interval bound its elements
