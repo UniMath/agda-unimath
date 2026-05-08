@@ -24,7 +24,7 @@ by the stated purpose of this library.
    example, we have developed univalent theories of
    [combinatorics](univalent-combinatorics.md), [trees](trees.md),
    [species](species.md), ... TO DO: DESCRIBE A FULLER LIST
-4. To develop a theory of library management that meets these stated goalds. For
+4. To develop a theory of library management that meets these stated goals. For
    example, through our work we demonstrate the feasibility of a concept-central
    approach to library management and theorem-proving.
 
