@@ -6,23 +6,27 @@ it. This document aims to provide a clear and concise introduction.
 
 ## Statement of purpose
 
-Before stating the design principles of the agda-unimath library, it is necessary to specify its purpose. This statement of the purpose provides the boundary conditions by which we determine the design philosophy and structure of the library. In other words, the remainder of the design philosophy is informed by the stated purpose of this library.
+Before stating the design principles of the agda-unimath library, it is
+necessary to specify its purpose. This statement of the purpose provides the
+boundary conditions by which we determine the design philosophy and structure of
+the library. In other words, the remainder of the design philosophy is informed
+by the stated purpose of this library.
 
 1. To formalize an extensive curriculum of mathematical topics from a univalent
    point of view, in a human-enjoyable format. We hope to bring together a large
    community of enthusiasts of formalization and univalent mathematics.
-2. To build a platform that facilitates research projects
-   and student projects regarding formalization of univalent mathematics in
-   Martin-Löf's dependent type theory extended with the univalence axiom and
-   higher inductive types. A full description of the postulates in this library
-   can be found [here](POSTULATES.md).
+2. To build a platform that facilitates research projects and student projects
+   regarding formalization of univalent mathematics in Martin-Löf's dependent
+   type theory extended with the univalence axiom and higher inductive types. A
+   full description of the postulates in this library can be found
+   [here](POSTULATES.md).
 3. To break open new domains of application for the univalence axiom. For
-   example, we have
-   developed univalent theories of [combinatorics](univalent-combinatorics.md),
-   [trees](trees.md), [species](species.md), ... TO DO: DESCRIBE A FULLER LIST
-4. To develop a theory of library management that meets these stated goalds.
-   For example, through our work we demonstrate the feasibility of a
-   concept-central approach to library management and theorem-proving.
+   example, we have developed univalent theories of
+   [combinatorics](univalent-combinatorics.md), [trees](trees.md),
+   [species](species.md), ... TO DO: DESCRIBE A FULLER LIST
+4. To develop a theory of library management that meets these stated goalds. For
+   example, through our work we demonstrate the feasibility of a concept-central
+   approach to library management and theorem-proving.
 
 ## Library structure
 
