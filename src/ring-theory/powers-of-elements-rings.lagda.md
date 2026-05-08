@@ -62,15 +62,15 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  power-succ-Ring :
+  successor-law-power-Ring :
     (n : ℕ) (x : type-Ring R) →
     power-Ring R (succ-ℕ n) x ＝ mul-Ring R (power-Ring R n x) x
-  power-succ-Ring = power-succ-Semiring (semiring-Ring R)
+  successor-law-power-Ring = successor-law-power-Semiring (semiring-Ring R)
 
-  power-succ-Ring' :
+  successor-law-power-Ring' :
     (n : ℕ) (x : type-Ring R) →
     power-Ring R (succ-ℕ n) x ＝ mul-Ring R x (power-Ring R n x)
-  power-succ-Ring' = power-succ-Semiring' (semiring-Ring R)
+  successor-law-power-Ring' = successor-law-power-Semiring' (semiring-Ring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -165,7 +165,7 @@ module _
         ( neg-Ring R)
         ( ( ap
             ( mul-Ring' R x)
-            ( ( power-succ-Ring R n (neg-Ring R x)) ∙
+            ( ( successor-law-power-Ring R n (neg-Ring R x)) ∙
               ( ( right-negative-law-mul-Ring R
                   ( power-Ring R n (neg-Ring R x))
                   ( x)) ∙
@@ -175,7 +175,7 @@ module _
                       ( mul-Ring' R x)
                       ( even-power-neg-Ring n x
                         ( is-even-is-even-succ-succ-ℕ n H))) ∙
-                    ( inv (power-succ-Ring R n x))))))) ∙
+                    ( inv (successor-law-power-Ring R n x))))))) ∙
           ( left-negative-law-mul-Ring R (power-Ring R (succ-ℕ n) x) x))) ∙
       ( neg-neg-Ring R (power-Ring R (succ-ℕ (succ-ℕ n)) x)))
 
@@ -190,7 +190,7 @@ module _
       ( x)) ∙
     ( ap
       ( neg-Ring R ∘ mul-Ring' R x)
-      ( ( power-succ-Ring R n (neg-Ring R x)) ∙
+      ( ( successor-law-power-Ring R n (neg-Ring R x)) ∙
         ( ( right-negative-law-mul-Ring R
             ( power-Ring R n (neg-Ring R x))
             ( x)) ∙
@@ -201,7 +201,7 @@ module _
                   ( odd-power-neg-Ring n x
                     ( is-odd-is-odd-succ-succ-ℕ n H))) ∙
                 ( ( left-negative-law-mul-Ring R (power-Ring R n x) x) ∙
-                  ( ap (neg-Ring R) (inv (power-succ-Ring R n x)))))) ∙
+                  ( ap (neg-Ring R) (inv (successor-law-power-Ring R n x)))))) ∙
             ( neg-neg-Ring R (power-Ring R (succ-ℕ n) x))))))
 ```
 
@@ -213,12 +213,12 @@ module _
   where
 
   abstract
-    preserves-powers-hom-Ring :
-      (n : ℕ) (x : type-Ring R) →
+    preserves-power-hom-Ring :
+      (n : ℕ) {x : type-Ring R} →
       map-hom-Ring R S f (power-Ring R n x) ＝
       power-Ring S n (map-hom-Ring R S f x)
-    preserves-powers-hom-Ring =
-      preserves-powers-hom-Monoid
+    preserves-power-hom-Ring =
+      preserves-power-hom-Monoid
         ( multiplicative-monoid-Ring R)
         ( multiplicative-monoid-Ring S)
         ( hom-multiplicative-monoid-hom-Ring R S f)

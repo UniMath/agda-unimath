@@ -46,19 +46,19 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  power-succ-Commutative-Ring :
+  successor-law-power-Commutative-Ring :
     (n : ℕ) (x : type-Commutative-Ring A) →
     power-Commutative-Ring A (succ-ℕ n) x ＝
     mul-Commutative-Ring A (power-Commutative-Ring A n x) x
-  power-succ-Commutative-Ring =
-    power-succ-Ring (ring-Commutative-Ring A)
+  successor-law-power-Commutative-Ring =
+    successor-law-power-Ring (ring-Commutative-Ring A)
 
-  power-succ-Commutative-Ring' :
+  successor-law-power-Commutative-Ring' :
     (n : ℕ) (x : type-Commutative-Ring A) →
     power-Commutative-Ring A (succ-ℕ n) x ＝
     mul-Commutative-Ring A x (power-Commutative-Ring A n x)
-  power-succ-Commutative-Ring' =
-    power-succ-Ring' (ring-Commutative-Ring A)
+  successor-law-power-Commutative-Ring' =
+    successor-law-power-Ring' (ring-Commutative-Ring A)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -155,12 +155,12 @@ module _
   where
 
   abstract
-    preserves-powers-hom-Commutative-Ring :
-      (n : ℕ) (x : type-Commutative-Ring R) →
+    preserves-power-hom-Commutative-Ring :
+      (n : ℕ) {x : type-Commutative-Ring R} →
       map-hom-Commutative-Ring R S f (power-Commutative-Ring R n x) ＝
       power-Commutative-Ring S n (map-hom-Commutative-Ring R S f x)
-    preserves-powers-hom-Commutative-Ring =
-      preserves-powers-hom-Ring
+    preserves-power-hom-Commutative-Ring =
+      preserves-power-hom-Ring
         ( ring-Commutative-Ring R)
         ( ring-Commutative-Ring S)
         ( f)

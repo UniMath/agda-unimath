@@ -165,8 +165,6 @@ module _
   is-closed-under-powers-ideal-Commutative-Ring zero-ℕ x H = H
   is-closed-under-powers-ideal-Commutative-Ring (succ-ℕ n) x H =
     is-closed-under-left-multiplication-ideal-Commutative-Ring
-      ( power-Commutative-Ring R (succ-ℕ n) x)
-      ( x)
       ( H)
 
   left-ideal-ideal-Commutative-Ring : left-ideal-Commutative-Ring l2 R
@@ -176,42 +174,6 @@ module _
   right-ideal-ideal-Commutative-Ring : right-ideal-Commutative-Ring l2 R
   right-ideal-ideal-Commutative-Ring =
     right-ideal-ideal-Ring (ring-Commutative-Ring R) I
-
-ideal-left-ideal-Commutative-Ring :
-  {l1 l2 : Level}
-  (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
-  contains-zero-subset-Commutative-Ring R S →
-  is-closed-under-addition-subset-Commutative-Ring R S →
-  is-closed-under-negatives-subset-Commutative-Ring R S →
-  is-closed-under-left-multiplication-subset-Commutative-Ring R S →
-  ideal-Commutative-Ring l2 R
-pr1 (ideal-left-ideal-Commutative-Ring R S z a n m) = S
-pr1 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) = z
-pr1 (pr2 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m)))) = a
-pr2 (pr2 (pr1 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m)))) = n
-pr1 (pr2 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) = m
-pr2 (pr2 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) x y H =
-  is-closed-under-eq-subset-Commutative-Ring R S
-    ( m y x H)
-    ( commutative-mul-Commutative-Ring R y x)
-
-ideal-right-ideal-Commutative-Ring :
-  {l1 l2 : Level}
-  (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
-  contains-zero-subset-Commutative-Ring R S →
-  is-closed-under-addition-subset-Commutative-Ring R S →
-  is-closed-under-negatives-subset-Commutative-Ring R S →
-  is-closed-under-right-multiplication-subset-Commutative-Ring R S →
-  ideal-Commutative-Ring l2 R
-pr1 (ideal-right-ideal-Commutative-Ring R S z a n m) = S
-pr1 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = z
-pr1 (pr2 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m)))) = a
-pr2 (pr2 (pr1 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m)))) = n
-pr1 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) x y H =
-  is-closed-under-eq-subset-Commutative-Ring R S
-    ( m y x H)
-    ( commutative-mul-Commutative-Ring R y x)
-pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 ```
 
 ## Properties

@@ -45,16 +45,16 @@ module _
   {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
   where
 
-  is-full-ideal-Ring-Prop : Prop (l1 ⊔ l2)
-  is-full-ideal-Ring-Prop =
+  is-full-prop-ideal-Ring : Prop (l1 ⊔ l2)
+  is-full-prop-ideal-Ring =
     Π-Prop (type-Ring R) (λ x → subset-ideal-Ring R I x)
 
   is-full-ideal-Ring : UU (l1 ⊔ l2)
-  is-full-ideal-Ring = type-Prop is-full-ideal-Ring-Prop
+  is-full-ideal-Ring = type-Prop is-full-prop-ideal-Ring
 
   is-prop-is-full-ideal-Ring : is-prop is-full-ideal-Ring
   is-prop-is-full-ideal-Ring =
-    is-prop-type-Prop is-full-ideal-Ring-Prop
+    is-prop-type-Prop is-full-prop-ideal-Ring
 ```
 
 ### The (standard) full ideal
@@ -91,6 +91,15 @@ module _
     contains-zero-full-ideal-Ring
   pr2 is-additive-submonoid-full-ideal-Ring {x} {y} =
     is-closed-under-addition-full-ideal-Ring {x} {y}
+
+  is-additive-subgroup-full-ideal-Ring :
+    is-additive-subgroup-subset-Ring R subset-full-ideal-Ring
+  pr1 is-additive-subgroup-full-ideal-Ring =
+    contains-zero-full-ideal-Ring
+  pr1 (pr2 is-additive-subgroup-full-ideal-Ring) {x} {y} =
+    is-closed-under-addition-full-ideal-Ring {x} {y}
+  pr2 (pr2 is-additive-subgroup-full-ideal-Ring) {x} =
+    is-closed-under-negatives-full-ideal-Ring {x}
 
   is-closed-under-left-multiplication-full-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R subset-full-ideal-Ring

@@ -99,16 +99,20 @@ module _
   is-closed-under-left-multiplication-full-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring A
       subset-full-ideal-Commutative-Ring
-  is-closed-under-left-multiplication-full-ideal-Commutative-Ring =
+  is-closed-under-left-multiplication-full-ideal-Commutative-Ring {x} {y} =
     is-closed-under-left-multiplication-full-ideal-Ring
       ( ring-Commutative-Ring A)
+      { x}
+      { y}
 
   is-closed-under-right-multiplication-full-ideal-Commutative-Ring :
     is-closed-under-right-multiplication-subset-Commutative-Ring A
       subset-full-ideal-Commutative-Ring
-  is-closed-under-right-multiplication-full-ideal-Commutative-Ring =
+  is-closed-under-right-multiplication-full-ideal-Commutative-Ring {x} {y} =
     is-closed-under-right-multiplication-full-ideal-Ring
       ( ring-Commutative-Ring A)
+      { x}
+      { y}
 
   is-left-ideal-full-ideal-Commutative-Ring :
     is-left-ideal-subset-Commutative-Ring A subset-full-ideal-Commutative-Ring

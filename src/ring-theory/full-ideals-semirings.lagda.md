@@ -38,6 +38,44 @@ that contains every element of `R`.
 
 ## Definitions
 
+### The predicate of being a full left ideal
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : left-ideal-Semiring l2 R)
+  where
+
+  is-full-prop-left-ideal-Semiring : Prop (l1 ⊔ l2)
+  is-full-prop-left-ideal-Semiring =
+    Π-Prop (type-Semiring R) (λ x → subset-left-ideal-Semiring R I x)
+
+  is-full-left-ideal-Semiring : UU (l1 ⊔ l2)
+  is-full-left-ideal-Semiring = type-Prop is-full-prop-left-ideal-Semiring
+
+  is-prop-is-full-left-ideal-Semiring : is-prop is-full-left-ideal-Semiring
+  is-prop-is-full-left-ideal-Semiring =
+    is-prop-type-Prop is-full-prop-left-ideal-Semiring
+```
+
+### The predicate of being a full right ideal
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (I : right-ideal-Semiring l2 R)
+  where
+
+  is-full-prop-right-ideal-Semiring : Prop (l1 ⊔ l2)
+  is-full-prop-right-ideal-Semiring =
+    Π-Prop (type-Semiring R) (λ x → subset-right-ideal-Semiring R I x)
+
+  is-full-right-ideal-Semiring : UU (l1 ⊔ l2)
+  is-full-right-ideal-Semiring = type-Prop is-full-prop-right-ideal-Semiring
+
+  is-prop-is-full-right-ideal-Semiring : is-prop is-full-right-ideal-Semiring
+  is-prop-is-full-right-ideal-Semiring =
+    is-prop-type-Prop is-full-prop-right-ideal-Semiring
+```
+
 ### The predicate of being a full ideal
 
 ```agda
@@ -45,16 +83,16 @@ module _
   {l1 l2 : Level} (R : Semiring l1) (I : ideal-Semiring l2 R)
   where
 
-  is-full-ideal-Semiring-Prop : Prop (l1 ⊔ l2)
-  is-full-ideal-Semiring-Prop =
+  is-full-prop-ideal-Semiring : Prop (l1 ⊔ l2)
+  is-full-prop-ideal-Semiring =
     Π-Prop (type-Semiring R) (λ x → subset-ideal-Semiring R I x)
 
   is-full-ideal-Semiring : UU (l1 ⊔ l2)
-  is-full-ideal-Semiring = type-Prop is-full-ideal-Semiring-Prop
+  is-full-ideal-Semiring = type-Prop is-full-prop-ideal-Semiring
 
   is-prop-is-full-ideal-Semiring : is-prop is-full-ideal-Semiring
   is-prop-is-full-ideal-Semiring =
-    is-prop-type-Prop is-full-ideal-Semiring-Prop
+    is-prop-type-Prop is-full-prop-ideal-Semiring
 ```
 
 ### The (standard) full ideal
