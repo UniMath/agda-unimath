@@ -184,11 +184,7 @@ module _
   interchange-add-sum-fin-sequence-type-Semiring zero-ℕ f g =
     left-unit-law-add-Semiring R (zero-Semiring R)
   interchange-add-sum-fin-sequence-type-Semiring (succ-ℕ n) f g =
-    ( interchange-add-add-Semiring R
-      ( sum-fin-sequence-type-Semiring R n (f ∘ inl-Fin n))
-      ( f (inr star))
-      ( sum-fin-sequence-type-Semiring R n (g ∘ inl-Fin n))
-      ( g (inr star))) ∙
+    ( interchange-add-add-Semiring R) ∙
     ( ap
       ( add-Semiring' R
         ( add-Semiring R (f (inr star)) (g (inr star))))

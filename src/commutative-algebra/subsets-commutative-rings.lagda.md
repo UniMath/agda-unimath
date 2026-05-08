@@ -149,6 +149,22 @@ module _
       ( S)
 ```
 
+### The condition that a subset is an additive submonoid
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1)
+  (S : subset-Commutative-Ring l2 A)
+  where
+
+  is-additive-submonoid-subset-Commutative-Ring :
+    UU (l1 ⊔ l2)
+  is-additive-submonoid-subset-Commutative-Ring =
+    is-additive-submonoid-subset-Ring
+      ( ring-Commutative-Ring A)
+      ( S)
+```
+
 ### The condition that a subset is an additive subgroup
 
 ```agda

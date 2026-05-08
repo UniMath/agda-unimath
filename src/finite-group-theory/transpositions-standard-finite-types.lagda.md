@@ -786,7 +786,7 @@ module _
   where
 
   opaque
-    swap-permutation-Fin : Permutation n
+    swap-permutation-Fin : permutation n
     swap-permutation-Fin =
       rec-coproduct
         ( λ _ → id-equiv)
