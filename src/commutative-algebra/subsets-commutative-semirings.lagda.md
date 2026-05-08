@@ -9,6 +9,7 @@ module commutative-algebra.subsets-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
@@ -102,6 +103,11 @@ module _
 ### The condition that a subset contains one
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
   contains-one-subset-Commutative-Semiring : UU l2
   contains-one-subset-Commutative-Semiring =
     contains-one-subset-Semiring (semiring-Commutative-Semiring A) S
@@ -110,14 +116,37 @@ module _
 ### The condition that a subset is closed under addition
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
   is-closed-under-addition-subset-Commutative-Semiring : UU (l1 ⊔ l2)
   is-closed-under-addition-subset-Commutative-Semiring =
     is-closed-under-addition-subset-Semiring (semiring-Commutative-Semiring A) S
 ```
 
+### The condition that a subset is an additive submonoid
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
+  is-additive-submonoid-subset-Commutative-Semiring : UU (l1 ⊔ l2)
+  is-additive-submonoid-subset-Commutative-Semiring =
+    is-additive-submonoid-subset-Semiring (semiring-Commutative-Semiring A) S
+```
+
 ### The condition that a subset is closed under multiplication
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
   is-closed-under-multiplication-subset-Commutative-Semiring : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Commutative-Semiring =
     is-closed-under-multiplication-subset-Semiring
@@ -128,6 +157,11 @@ module _
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
   is-closed-under-left-multiplication-subset-Commutative-Semiring : UU (l1 ⊔ l2)
   is-closed-under-left-multiplication-subset-Commutative-Semiring =
     is-closed-under-left-multiplication-subset-Semiring
@@ -135,13 +169,34 @@ module _
       ( S)
 ```
 
-### The condition that a subset is closed-under-multiplication from the right by an arbitrary element
+### The condition that a subset is closed under multiplication from the right by an arbitrary element
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
   is-closed-under-right-multiplication-subset-Commutative-Semiring :
     UU (l1 ⊔ l2)
   is-closed-under-right-multiplication-subset-Commutative-Semiring =
     is-closed-under-right-multiplication-subset-Semiring
+      ( semiring-Commutative-Semiring A)
+      ( S)
+```
+
+### The condition that a subset is closed under two-sided multiplication by arbitrary elements
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Semiring l1)
+  (S : subset-Commutative-Semiring l2 A)
+  where
+
+  is-closed-under-two-sided-multiplication-subset-Commutative-Semiring :
+    UU (l1 ⊔ l2)
+  is-closed-under-two-sided-multiplication-subset-Commutative-Semiring =
+    is-closed-under-two-sided-multiplication-subset-Semiring
       ( semiring-Commutative-Semiring A)
       ( S)
 ```
