@@ -246,20 +246,20 @@ module _
       ( f x)
   is-in-proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
     x@(u , a≤u , u≤b) =
-    ( is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-      ( [a,b])
-      ( f)
-      ( H)
-      ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
+    ( ( is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
         ( [a,b])
-        ( l1))
-      ( x)
-      ( preserves-leq-left-sim-ℝ
-        ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
+        ( f)
+        ( H)
+        ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
           ( [a,b])
           ( l1))
-        ( a≤u)) ,
-      is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+        ( x)
+        ( preserves-leq-left-sim-ℝ
+          ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
+            ( [a,b])
+            ( l1))
+          ( a≤u))) ,
+      ( is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
         ( [a,b])
         ( f)
         ( H)
@@ -271,7 +271,7 @@ module _
           ( sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
             ( [a,b])
             ( l1))
-          ( u≤b)))
+          ( u≤b))))
 ```
 
 ```agda
