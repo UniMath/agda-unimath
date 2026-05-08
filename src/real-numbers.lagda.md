@@ -121,6 +121,7 @@ open import real-numbers.rational-approximates-of-real-numbers public
 open import real-numbers.rational-lower-dedekind-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.rational-upper-dedekind-real-numbers public
+open import real-numbers.real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
@@ -140,6 +141,7 @@ open import real-numbers.strict-inequality-positive-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
 open import real-numbers.strictly-increasing-endomaps-real-numbers public
 open import real-numbers.strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers public
+open import real-numbers.strictly-increasing-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
