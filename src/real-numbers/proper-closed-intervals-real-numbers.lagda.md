@@ -193,7 +193,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
-  where
+  where abstract
 
   leq-lower-bound-proper-closed-interval-ℝ :
     {l3 : Level} (x : type-proper-closed-interval-ℝ l3 I) →
