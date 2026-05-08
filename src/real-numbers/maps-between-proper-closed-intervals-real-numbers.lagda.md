@@ -9,7 +9,6 @@ module real-numbers.maps-between-proper-closed-intervals-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.universe-levels
 
