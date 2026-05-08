@@ -257,6 +257,13 @@ module _
               ( _)
               ( H'))))
 
+  is-closed-under-two-sided-multiplication-ideal-subset-Ring :
+    is-closed-under-two-sided-multiplication-subset-Ring R
+      subset-ideal-subset-Ring
+  is-closed-under-two-sided-multiplication-ideal-subset-Ring H =
+    is-closed-under-right-multiplication-ideal-subset-Ring
+      ( is-closed-under-left-multiplication-ideal-subset-Ring H)
+
   is-closed-under-negatives-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-ideal-subset-Ring
   is-closed-under-negatives-ideal-subset-Ring {x} H =
@@ -265,19 +272,26 @@ module _
       ( mul-neg-one-Ring R x)
       ( is-closed-under-left-multiplication-ideal-subset-Ring H)
 
-  ideal-subset-Ring : ideal-Ring (l1 ⊔ l2) R
+  is-additive-submonoid-ideal-subset-Ring :
+    is-additive-submonoid-subset-Ring R subset-ideal-subset-Ring
+  pr1 is-additive-submonoid-ideal-subset-Ring =
+    contains-zero-ideal-subset-Ring
+  pr2 is-additive-submonoid-ideal-subset-Ring =
+    is-closed-under-addition-ideal-subset-Ring
+
+  is-ideal-ideal-subset-Ring :
+    is-ideal-subset-Ring R subset-ideal-subset-Ring
+  pr1 is-ideal-ideal-subset-Ring =
+    is-additive-submonoid-ideal-subset-Ring
+  pr2 is-ideal-ideal-subset-Ring =
+    is-closed-under-two-sided-multiplication-ideal-subset-Ring
+
+  ideal-subset-Ring :
+    ideal-Ring (l1 ⊔ l2) R
   pr1 ideal-subset-Ring =
     subset-ideal-subset-Ring
-  pr1 (pr1 (pr2 ideal-subset-Ring)) =
-    contains-zero-ideal-subset-Ring
-  pr1 (pr2 (pr1 (pr2 ideal-subset-Ring))) =
-    is-closed-under-addition-ideal-subset-Ring
-  pr2 (pr2 (pr1 (pr2 ideal-subset-Ring))) =
-    is-closed-under-negatives-ideal-subset-Ring
-  pr1 (pr2 (pr2 ideal-subset-Ring)) =
-    is-closed-under-left-multiplication-ideal-subset-Ring
-  pr2 (pr2 (pr2 ideal-subset-Ring)) =
-    is-closed-under-right-multiplication-ideal-subset-Ring
+  pr2 ideal-subset-Ring =
+    is-ideal-ideal-subset-Ring
 
   contains-subset-ideal-subset-Ring :
     S ⊆ subset-ideal-subset-Ring

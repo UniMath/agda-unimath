@@ -79,7 +79,14 @@ module _
   associative-mul-Monoid :
     (x y z : type-Monoid) →
     mul-Monoid (mul-Monoid x y) z ＝ mul-Monoid x (mul-Monoid y z)
-  associative-mul-Monoid = associative-mul-Semigroup semigroup-Monoid
+  associative-mul-Monoid =
+    associative-mul-Semigroup semigroup-Monoid
+
+  inv-associative-mul-Monoid :
+    (x y z : type-Monoid) →
+    mul-Monoid x (mul-Monoid y z) ＝ mul-Monoid (mul-Monoid x y) z
+  inv-associative-mul-Monoid =
+    inv-associative-mul-Semigroup semigroup-Monoid
 
   has-unit-Monoid : is-unital mul-Monoid
   has-unit-Monoid = pr2 M

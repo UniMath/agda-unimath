@@ -24,7 +24,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.similarity-of-elements-large-posets
 
-open import ring-theory.poset-of-left-ideals-semirings
+open import ring-theory.poset-of-ideals-semirings
 ```
 
 </details>
@@ -50,7 +50,7 @@ module _
     ideal-Commutative-Semiring l3 A →
     Prop (l1 ⊔ l2 ⊔ l3)
   leq-prop-ideal-Commutative-Semiring =
-    leq-prop-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    leq-prop-ideal-Semiring (semiring-Commutative-Semiring A)
 
   leq-ideal-Commutative-Semiring :
     {l2 l3 : Level} →
@@ -58,7 +58,7 @@ module _
     ideal-Commutative-Semiring l3 A →
     UU (l1 ⊔ l2 ⊔ l3)
   leq-ideal-Commutative-Semiring =
-    leq-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    leq-ideal-Semiring (semiring-Commutative-Semiring A)
 
   is-prop-leq-ideal-Commutative-Semiring :
     {l2 l3 : Level}
@@ -66,12 +66,12 @@ module _
     (J : ideal-Commutative-Semiring l3 A) →
     is-prop (leq-ideal-Commutative-Semiring I J)
   is-prop-leq-ideal-Commutative-Semiring =
-    is-prop-leq-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    is-prop-leq-ideal-Semiring (semiring-Commutative-Semiring A)
 
   refl-leq-ideal-Commutative-Semiring :
     {l2 : Level} → is-reflexive (leq-ideal-Commutative-Semiring {l2})
   refl-leq-ideal-Commutative-Semiring =
-    refl-leq-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    refl-leq-ideal-Semiring (semiring-Commutative-Semiring A)
 
   transitive-leq-ideal-Commutative-Semiring :
     {l2 l3 l4 : Level}
@@ -82,12 +82,12 @@ module _
     leq-ideal-Commutative-Semiring I J →
     leq-ideal-Commutative-Semiring I K
   transitive-leq-ideal-Commutative-Semiring =
-    transitive-leq-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    transitive-leq-ideal-Semiring (semiring-Commutative-Semiring A)
 
   antisymmetric-leq-ideal-Commutative-Semiring :
     {l2 : Level} → is-antisymmetric (leq-ideal-Commutative-Semiring {l2})
   antisymmetric-leq-ideal-Commutative-Semiring =
-    antisymmetric-leq-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    antisymmetric-leq-ideal-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ### The large poset of ideals
@@ -100,12 +100,12 @@ module _
   ideal-Commutative-Semiring-Large-Preorder :
     Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   ideal-Commutative-Semiring-Large-Preorder =
-    left-ideal-Semiring-Large-Preorder (semiring-Commutative-Semiring A)
+    ideal-Semiring-Large-Preorder (semiring-Commutative-Semiring A)
 
   ideal-Commutative-Semiring-Large-Poset :
     Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   ideal-Commutative-Semiring-Large-Poset =
-    left-ideal-Semiring-Large-Poset (semiring-Commutative-Semiring A)
+    ideal-Semiring-Large-Poset (semiring-Commutative-Semiring A)
 ```
 
 ### The similarity relation on ideals in a commutative semiring
@@ -121,7 +121,7 @@ module _
     (J : ideal-Commutative-Semiring l3 A) →
     Prop (l1 ⊔ l2 ⊔ l3)
   sim-prop-ideal-Commutative-Semiring =
-    sim-prop-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    sim-prop-ideal-Semiring (semiring-Commutative-Semiring A)
 
   sim-ideal-Commutative-Semiring :
     {l2 l3 : Level}
@@ -129,7 +129,7 @@ module _
     (J : ideal-Commutative-Semiring l3 A) →
     UU (l1 ⊔ l2 ⊔ l3)
   sim-ideal-Commutative-Semiring =
-    sim-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    sim-ideal-Semiring (semiring-Commutative-Semiring A)
 
   is-prop-sim-ideal-Commutative-Semiring :
     {l2 l3 : Level}
@@ -137,14 +137,14 @@ module _
     (J : ideal-Commutative-Semiring l3 A) →
     is-prop (sim-ideal-Commutative-Semiring I J)
   is-prop-sim-ideal-Commutative-Semiring =
-    is-prop-sim-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    is-prop-sim-ideal-Semiring (semiring-Commutative-Semiring A)
 
   eq-sim-ideal-Commutative-Semiring :
     {l2 : Level}
     (I J : ideal-Commutative-Semiring l2 A) →
     sim-ideal-Commutative-Semiring I J → I ＝ J
   eq-sim-ideal-Commutative-Semiring =
-    eq-sim-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    eq-sim-ideal-Semiring (semiring-Commutative-Semiring A)
     
   has-same-elements-sim-ideal-Commutative-Semiring :
     {l2 l3 : Level}
@@ -153,7 +153,7 @@ module _
     sim-ideal-Commutative-Semiring I J →
     has-same-elements-ideal-Commutative-Semiring A I J
   has-same-elements-sim-ideal-Commutative-Semiring =
-    has-same-elements-sim-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    has-same-elements-sim-ideal-Semiring (semiring-Commutative-Semiring A)
 
   sim-has-same-elements-ideal-Commutative-Semiring :
     {l2 l3 : Level}
@@ -162,7 +162,7 @@ module _
     has-same-elements-ideal-Commutative-Semiring A I J →
     sim-ideal-Commutative-Semiring I J
   sim-has-same-elements-ideal-Commutative-Semiring =
-    sim-has-same-elements-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    sim-has-same-elements-ideal-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ## Properties
@@ -182,7 +182,7 @@ module _
     subset-ideal-Commutative-Semiring A I ⊆
     subset-ideal-Commutative-Semiring A J
   preserves-order-subset-ideal-Commutative-Semiring =
-    preserves-order-subset-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    preserves-order-subset-ideal-Semiring (semiring-Commutative-Semiring A)
 
   subset-ideal-hom-large-poset-Commutative-Semiring :
     hom-Large-Poset
@@ -190,5 +190,5 @@ module _
       ( ideal-Commutative-Semiring-Large-Poset A)
       ( powerset-Large-Poset (type-Commutative-Semiring A))
   subset-ideal-hom-large-poset-Commutative-Semiring =
-    subset-left-ideal-hom-large-poset-Semiring (semiring-Commutative-Semiring A)
+    subset-ideal-hom-large-poset-Semiring (semiring-Commutative-Semiring A)
 ```

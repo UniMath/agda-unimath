@@ -70,9 +70,16 @@ module _
 
   associative-mul-Semigroup :
     (x y z : type-Semigroup) →
-    mul-Semigroup (mul-Semigroup x y) z ＝
-    mul-Semigroup x (mul-Semigroup y z)
-  associative-mul-Semigroup = pr2 has-associative-mul-Semigroup
+    mul-Semigroup (mul-Semigroup x y) z ＝ mul-Semigroup x (mul-Semigroup y z)
+  associative-mul-Semigroup =
+    pr2 has-associative-mul-Semigroup
+
+  inv-associative-mul-Semigroup :
+    (x y z : type-Semigroup) →
+    mul-Semigroup x (mul-Semigroup y z) ＝
+    mul-Semigroup (mul-Semigroup x y) z
+  inv-associative-mul-Semigroup x y z =
+    inv (associative-mul-Semigroup x y z)
 
   left-swap-mul-Semigroup :
     {x y z : type-Semigroup} → mul-Semigroup x y ＝ mul-Semigroup y x →

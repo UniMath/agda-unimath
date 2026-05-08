@@ -144,6 +144,13 @@ module _
     associative-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
+  inv-associative-add-Semiring :
+    (x y z : type-Semiring R) →
+    add-Semiring x (add-Semiring y z) ＝ add-Semiring (add-Semiring x y) z
+  inv-associative-add-Semiring =
+    inv-associative-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+
   commutative-add-Semiring :
     (x y : type-Semiring R) → add-Semiring x y ＝ add-Semiring y x
   commutative-add-Semiring =

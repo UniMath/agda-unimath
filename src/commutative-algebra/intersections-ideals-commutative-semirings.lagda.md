@@ -7,13 +7,14 @@ module commutative-algebra.intersections-ideals-commutative-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.ideals-commutative-semirings
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.poset-of-ideals-commutative-semirings
+open import commutative-algebra.subsets-commutative-semirings
+
 open import foundation.dependent-pair-types
 open import foundation.intersections-subtypes
 open import foundation.universe-levels
-
-open import commutative-algebra.ideals-commutative-semirings
-open import commutative-algebra.commutative-semirings
-open import commutative-algebra.subsets-commutative-semirings
 
 open import ring-theory.intersections-left-ideals-semirings
 ```
@@ -28,7 +29,24 @@ of two [ideals](ring-theory.ideals-semirings.md) in a
 [semiring](ring-theory.semirings.md) `R` consists of the elements contained in
 both of them.
 
-## Definition
+## Definitions
+
+### The universal property of the intersection of two ideals in a commutative semiring
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Semiring l1)
+  (I : ideal-Commutative-Semiring l2 A)
+  (J : ideal-Commutative-Semiring l3 A)
+  where
+
+  is-intersection-ideal-Commutative-Semiring :
+    {l4 : Level} (K : ideal-Commutative-Semiring l4 A) → UUω
+  is-intersection-ideal-Commutative-Semiring =
+    is-intersection-left-ideal-Semiring (semiring-Commutative-Semiring A) I J
+```
+
+### The intersection of two ideals in a commutative semiring
 
 ```agda
 module _
@@ -84,6 +102,15 @@ module _
     ideal-Commutative-Semiring (l2 ⊔ l3) R
   intersection-ideal-Commutative-Semiring =
     intersection-left-ideal-Semiring
+      ( semiring-Commutative-Semiring R)
+      ( A)
+      ( B)
+
+  is-intersection-intersection-ideal-Commutative-Semiring :
+    is-intersection-ideal-Commutative-Semiring R A B
+      intersection-ideal-Commutative-Semiring
+  is-intersection-intersection-ideal-Commutative-Semiring =
+    is-intersection-intersection-left-ideal-Semiring
       ( semiring-Commutative-Semiring R)
       ( A)
       ( B)

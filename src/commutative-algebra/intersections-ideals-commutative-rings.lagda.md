@@ -30,7 +30,7 @@ ideal consisting of the elements contained in both of the ideals `I` and `J`.
 
 ## Definitions
 
-### The universal property of intersections of radical ideals
+### The universal property of intersections of ideals
 
 ```agda
 module _
@@ -151,8 +151,8 @@ module _
     is-intersection-ideal-Commutative-Ring R I J
       ( intersection-ideal-Commutative-Ring)
   is-intersection-intersection-ideal-Commutative-Ring =
-    {!is-intersection-intersection-ideal-Commutative-Semiring!}
-
-
-{-    is-intersection-intersection-ideal-Ring (ring-Commutative-Ring R) I J -}
+    is-intersection-intersection-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
+      ( J)
 ```

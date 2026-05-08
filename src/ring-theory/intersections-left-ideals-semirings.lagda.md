@@ -11,7 +11,10 @@ open import foundation.dependent-pair-types
 open import foundation.intersections-subtypes
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-large-posets
+
 open import ring-theory.left-ideals-semirings
+open import ring-theory.poset-of-left-ideals-semirings
 open import ring-theory.semirings
 open import ring-theory.subsets-semirings
 ```
@@ -26,7 +29,28 @@ of two [left ideals](ring-theory.left-ideals-semirings.md) in a
 [semiring](ring-theory.semirings.md) `R` consists of the elements contained in
 both of them.
 
-## Definition
+## Definitions
+
+### The universal property of the intersection of two left ideals in a semiring
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Semiring l1)
+  (I : left-ideal-Semiring l2 A)
+  (J : left-ideal-Semiring l3 A)
+  where
+
+  is-intersection-left-ideal-Semiring :
+    {l4 : Level} (K : left-ideal-Semiring l4 A) → UUω
+  is-intersection-left-ideal-Semiring K =
+    is-greatest-binary-lower-bound-Large-Poset
+      ( left-ideal-Semiring-Large-Poset A)
+      ( I)
+      ( J)
+      ( K)
+```
+
+### The intersection of two left ideals in a semiring
 
 ```agda
 module _
@@ -78,4 +102,12 @@ module _
     subset-intersection-left-ideal-Semiring
   pr2 intersection-left-ideal-Semiring =
     is-left-ideal-intersection-left-ideal-Semiring
+
+  is-intersection-intersection-left-ideal-Semiring :
+    is-intersection-left-ideal-Semiring R A B intersection-left-ideal-Semiring
+  is-intersection-intersection-left-ideal-Semiring C =
+    is-intersection-intersection-subtype
+      ( subset-left-ideal-Semiring R A)
+      ( subset-left-ideal-Semiring R B)
+      ( subset-left-ideal-Semiring R C)
 ```

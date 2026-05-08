@@ -64,7 +64,6 @@ module _
       ( commutative-semiring-Commutative-Ring A)
       ( S)
 
-
   is-right-ideal-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-right-ideal-subset-Commutative-Ring =
     is-right-ideal-subset-Commutative-Semiring
@@ -108,21 +107,69 @@ module _
   is-ideal-subset-Commutative-Ring :
     UU (l1 ⊔ l2)
   is-ideal-subset-Commutative-Ring =
-    is-left-ideal-subset-Commutative-Semiring
+    is-ideal-subset-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring A)
       ( S)
 
   is-prop-is-ideal-subset-Commutative-Ring :
     is-prop is-ideal-subset-Commutative-Ring
   is-prop-is-ideal-subset-Commutative-Ring =
-    is-prop-is-left-ideal-subset-Commutative-Semiring
+    is-prop-is-ideal-subset-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring A)
       ( S)
 
   is-ideal-prop-subset-Commutative-Ring :
     Prop (l1 ⊔ l2)
   is-ideal-prop-subset-Commutative-Ring =
-    is-left-ideal-prop-subset-Commutative-Semiring
+    is-ideal-prop-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-left-ideal-is-right-ideal-subset-Commutative-Ring :
+    is-right-ideal-subset-Commutative-Ring →
+    is-left-ideal-subset-Commutative-Ring
+  is-left-ideal-is-right-ideal-subset-Commutative-Ring =
+    is-left-ideal-is-right-ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-right-ideal-is-left-ideal-subset-Commutative-Ring :
+    is-left-ideal-subset-Commutative-Ring →
+    is-right-ideal-subset-Commutative-Ring
+  is-right-ideal-is-left-ideal-subset-Commutative-Ring =
+    is-right-ideal-is-left-ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-left-ideal-is-two-sided-ideal-subset-Commutative-Ring :
+    is-two-sided-ideal-subset-Commutative-Ring →
+    is-left-ideal-subset-Commutative-Ring
+  is-left-ideal-is-two-sided-ideal-subset-Commutative-Ring =
+    is-left-ideal-is-two-sided-ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-two-sided-ideal-is-left-ideal-subset-Commutative-Ring :
+    is-left-ideal-subset-Commutative-Ring →
+    is-two-sided-ideal-subset-Commutative-Ring
+  is-two-sided-ideal-is-left-ideal-subset-Commutative-Ring =
+    is-two-sided-ideal-is-left-ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-two-sided-ideal-is-right-ideal-subset-Commutative-Ring :
+    is-right-ideal-subset-Commutative-Ring →
+    is-two-sided-ideal-subset-Commutative-Ring
+  is-two-sided-ideal-is-right-ideal-subset-Commutative-Ring =
+    is-two-sided-ideal-is-right-ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring A)
+      ( S)
+
+  is-right-ideal-is-two-sided-ideal-subset-Commutative-Ring :
+    is-two-sided-ideal-subset-Commutative-Ring →
+    is-right-ideal-subset-Commutative-Ring
+  is-right-ideal-is-two-sided-ideal-subset-Commutative-Ring =
+    is-right-ideal-is-two-sided-ideal-subset-Commutative-Semiring
       ( commutative-semiring-Commutative-Ring A)
       ( S)
 
@@ -185,22 +232,26 @@ module _
 two-sided-ideal-Commutative-Ring :
   {l1 : Level} (l2 : Level) → Commutative-Ring l1 → UU (l1 ⊔ lsuc l2)
 two-sided-ideal-Commutative-Ring l2 R =
-  ideal-Ring l2 (ring-Commutative-Ring R)
+  two-sided-ideal-Commutative-Semiring l2
+    ( commutative-semiring-Commutative-Ring R)
   
 left-ideal-Commutative-Ring :
   {l1 : Level} (l2 : Level) → Commutative-Ring l1 → UU (l1 ⊔ lsuc l2)
 left-ideal-Commutative-Ring l2 R =
-  left-ideal-Ring l2 (ring-Commutative-Ring R)
+  left-ideal-Commutative-Semiring l2
+    ( commutative-semiring-Commutative-Ring R)
 
 right-ideal-Commutative-Ring :
   {l1 : Level} (l2 : Level) → Commutative-Ring l1 → UU (l1 ⊔ lsuc l2)
 right-ideal-Commutative-Ring l2 R =
-  right-ideal-Ring l2 (ring-Commutative-Ring R)
+  right-ideal-Commutative-Semiring l2
+    ( commutative-semiring-Commutative-Ring R)
 
 ideal-Commutative-Ring :
   {l1 : Level} (l2 : Level) → Commutative-Ring l1 → UU (l1 ⊔ lsuc l2)
 ideal-Commutative-Ring l2 R =
-  left-ideal-Ring l2 (ring-Commutative-Ring R)
+  ideal-Commutative-Semiring l2
+    ( commutative-semiring-Commutative-Ring R)
 
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
@@ -268,48 +319,64 @@ module _
   is-in-ideal-Commutative-Ring :
     type-Commutative-Ring R → UU l2
   is-in-ideal-Commutative-Ring =
-    is-in-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-in-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   type-ideal-Commutative-Ring :
     UU (l1 ⊔ l2)
   type-ideal-Commutative-Ring =
-    type-left-ideal-Ring (ring-Commutative-Ring R) I
+    type-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   inclusion-ideal-Commutative-Ring :
     type-ideal-Commutative-Ring → type-Commutative-Ring R
   inclusion-ideal-Commutative-Ring =
-    inclusion-left-ideal-Ring (ring-Commutative-Ring R) I
+    inclusion-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   ap-inclusion-ideal-Commutative-Ring :
     (x y : type-ideal-Commutative-Ring) → x ＝ y →
     inclusion-ideal-Commutative-Ring x ＝ inclusion-ideal-Commutative-Ring y
   ap-inclusion-ideal-Commutative-Ring =
-    ap-inclusion-left-ideal-Ring (ring-Commutative-Ring R) I
+    ap-inclusion-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-in-subset-inclusion-ideal-Commutative-Ring :
     (x : type-ideal-Commutative-Ring) →
     is-in-ideal-Commutative-Ring (inclusion-ideal-Commutative-Ring x)
   is-in-subset-inclusion-ideal-Commutative-Ring =
-    is-in-subset-inclusion-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-in-subset-inclusion-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-closed-under-eq-ideal-Commutative-Ring :
     {x y : type-Commutative-Ring R} → is-in-ideal-Commutative-Ring x →
     (x ＝ y) → is-in-ideal-Commutative-Ring y
   is-closed-under-eq-ideal-Commutative-Ring =
-    is-closed-under-eq-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-closed-under-eq-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-closed-under-eq-ideal-Commutative-Ring' :
     {x y : type-Commutative-Ring R} → is-in-ideal-Commutative-Ring y →
     (x ＝ y) → is-in-ideal-Commutative-Ring x
   is-closed-under-eq-ideal-Commutative-Ring' =
-    is-closed-under-eq-left-ideal-Ring' (ring-Commutative-Ring R) I
+    is-closed-under-eq-ideal-Commutative-Semiring'
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-additive-subgroup-ideal-Commutative-Ring :
     is-additive-subgroup-subset-Ring
       ( ring-Commutative-Ring R)
       ( subset-ideal-Commutative-Ring)
   is-additive-subgroup-ideal-Commutative-Ring =
-    is-additive-subgroup-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-additive-subgroup-ideal-Ring
+      ( ring-Commutative-Ring R)
+      ( I)
 
   contains-zero-ideal-Commutative-Ring :
     contains-zero-subset-Commutative-Ring R subset-ideal-Commutative-Ring
@@ -331,14 +398,16 @@ module _
     is-in-ideal-Commutative-Ring x →
     is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
   is-closed-under-negatives-ideal-Commutative-Ring =
-    is-closed-under-negatives-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-closed-under-negatives-ideal-Ring
+      ( ring-Commutative-Ring R)
+      ( I)
 
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R
       subset-ideal-Commutative-Ring
   is-closed-under-left-multiplication-ideal-Commutative-Ring =
-    is-closed-under-left-multiplication-left-ideal-Ring
-      ( ring-Commutative-Ring R)
+    is-closed-under-left-multiplication-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
       ( I)
 
   is-closed-under-right-multiplication-ideal-Commutative-Ring :
@@ -372,7 +441,9 @@ module _
   has-same-elements-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l3 R) → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-ideal-Commutative-Ring =
-    has-same-elements-left-ideal-Ring (ring-Commutative-Ring R) I
+    has-same-elements-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
 module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
@@ -381,34 +452,46 @@ module _
   refl-has-same-elements-ideal-Commutative-Ring :
     has-same-elements-ideal-Commutative-Ring R I I
   refl-has-same-elements-ideal-Commutative-Ring =
-    refl-has-same-elements-left-ideal-Ring (ring-Commutative-Ring R) I
+    refl-has-same-elements-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-torsorial-has-same-elements-ideal-Commutative-Ring :
     is-torsorial (has-same-elements-ideal-Commutative-Ring R I)
   is-torsorial-has-same-elements-ideal-Commutative-Ring =
-    is-torsorial-has-same-elements-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-torsorial-has-same-elements-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   has-same-elements-eq-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l2 R) →
     (I ＝ J) → has-same-elements-ideal-Commutative-Ring R I J
   has-same-elements-eq-ideal-Commutative-Ring =
-    has-same-elements-eq-left-ideal-Ring (ring-Commutative-Ring R) I
+    has-same-elements-eq-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   is-equiv-has-same-elements-eq-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l2 R) →
     is-equiv (has-same-elements-eq-ideal-Commutative-Ring J)
   is-equiv-has-same-elements-eq-ideal-Commutative-Ring =
-    is-equiv-has-same-elements-eq-left-ideal-Ring (ring-Commutative-Ring R) I
+    is-equiv-has-same-elements-eq-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   extensionality-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l2 R) →
     (I ＝ J) ≃ has-same-elements-ideal-Commutative-Ring R I J
   extensionality-ideal-Commutative-Ring =
-    extensionality-left-ideal-Ring (ring-Commutative-Ring R) I
+    extensionality-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 
   eq-has-same-elements-ideal-Commutative-Ring :
     (J : ideal-Commutative-Ring l2 R) →
     has-same-elements-ideal-Commutative-Ring R I J → I ＝ J
   eq-has-same-elements-ideal-Commutative-Ring =
-    eq-has-same-elements-left-ideal-Ring (ring-Commutative-Ring R) I
+    eq-has-same-elements-ideal-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( I)
 ```

@@ -118,10 +118,17 @@ module _
 
   associative-mul-Commutative-Monoid :
     (x y z : type-Commutative-Monoid) →
-    ( mul-Commutative-Monoid (mul-Commutative-Monoid x y) z) ＝
-    ( mul-Commutative-Monoid x (mul-Commutative-Monoid y z))
+    mul-Commutative-Monoid (mul-Commutative-Monoid x y) z ＝
+    mul-Commutative-Monoid x (mul-Commutative-Monoid y z)
   associative-mul-Commutative-Monoid =
     associative-mul-Monoid monoid-Commutative-Monoid
+
+  inv-associative-mul-Commutative-Monoid :
+    (x y z : type-Commutative-Monoid) →
+    mul-Commutative-Monoid x (mul-Commutative-Monoid y z) ＝
+    mul-Commutative-Monoid (mul-Commutative-Monoid x y) z
+  inv-associative-mul-Commutative-Monoid =
+    inv-associative-mul-Monoid monoid-Commutative-Monoid
 
   commutative-mul-Commutative-Monoid :
     (x y : type-Commutative-Monoid) →

@@ -49,17 +49,17 @@ module _
   is-full-prop-ideal-Commutative-Semiring :
     Prop (l1 ⊔ l2)
   is-full-prop-ideal-Commutative-Semiring =
-    is-full-prop-left-ideal-Semiring (semiring-Commutative-Semiring A) I
+    is-full-prop-ideal-Semiring (semiring-Commutative-Semiring A) I
 
   is-full-ideal-Commutative-Semiring :
     UU (l1 ⊔ l2)
   is-full-ideal-Commutative-Semiring =
-    is-full-left-ideal-Semiring (semiring-Commutative-Semiring A) I
+    is-full-ideal-Semiring (semiring-Commutative-Semiring A) I
 
   is-prop-is-full-ideal-Commutative-Semiring :
     is-prop is-full-ideal-Commutative-Semiring
   is-prop-is-full-ideal-Commutative-Semiring =
-    is-prop-is-full-left-ideal-Semiring (semiring-Commutative-Semiring A) I
+    is-prop-is-full-ideal-Semiring (semiring-Commutative-Semiring A) I
 ```
 
 ### The (standard) full ideal
@@ -133,12 +133,12 @@ module _
     is-ideal-subset-Commutative-Semiring A
       subset-full-ideal-Commutative-Semiring
   is-ideal-full-ideal-Commutative-Semiring =
-    is-left-ideal-full-ideal-Semiring (semiring-Commutative-Semiring A)
+    is-ideal-full-ideal-Semiring (semiring-Commutative-Semiring A)
 
   full-ideal-Commutative-Semiring :
     ideal-Commutative-Semiring lzero A
   full-ideal-Commutative-Semiring =
-    full-left-ideal-Semiring (semiring-Commutative-Semiring A)
+    full-ideal-Semiring (semiring-Commutative-Semiring A)
 
   is-full-full-ideal-Commutative-Semiring :
     is-full-ideal-Commutative-Semiring A full-ideal-Commutative-Semiring
