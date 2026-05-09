@@ -137,7 +137,7 @@ width-proper-closed-interval-ℝ (a , b , _) = b -ℝ a
 
 ## Properties
 
-### Similarity of real numbers preserves proper closed intervals
+### Proper closed intervals are closed under similarity of real numbers
 
 ```agda
 module _
