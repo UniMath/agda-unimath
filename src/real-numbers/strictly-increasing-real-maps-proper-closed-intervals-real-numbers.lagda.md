@@ -231,47 +231,47 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
-  (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 [a,b])
-  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ [a,b] f)
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 I)
+  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
   where abstract
 
   is-in-proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    (x : type-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) [a,b]) →
+    (x : type-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) I) →
     is-in-proper-closed-interval-ℝ
       ( proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-        ( [a,b])
+        ( I)
         ( f)
         ( H))
       ( f x)
   is-in-proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-    x@(u , a≤u , u≤b) =
+    x@(u , lo-bound , hi-bound) =
     ( ( is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-        ( [a,b])
+        ( I)
         ( f)
         ( H)
         ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))
         ( x)
         ( preserves-leq-left-sim-ℝ
           ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-            ( [a,b])
+            ( I)
             ( l1))
-          ( a≤u))) ,
+          ( lo-bound))) ,
       ( is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-        ( [a,b])
+        ( I)
         ( f)
         ( H)
         ( x)
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))
         ( preserves-leq-right-sim-ℝ
           ( sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-            ( [a,b])
+            ( I)
             ( l1))
-          ( u≤b))))
+          ( hi-bound))))
 ```
 
 ```agda
