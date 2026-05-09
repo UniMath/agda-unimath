@@ -31,7 +31,7 @@ of [functions](foundation.function-types.md) `I → J`, i.e., the type of
 
 ## Definition
 
-### The type of real maps on a proper closed interval of real numbers
+### Maps between proper closed intervals of real numbers
 
 ```agda
 module _
