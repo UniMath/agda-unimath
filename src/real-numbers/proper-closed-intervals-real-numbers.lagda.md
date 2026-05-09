@@ -102,6 +102,14 @@ upper-bound-proper-closed-interval-ℝ :
   {l1 l2 : Level} → proper-closed-interval-ℝ l1 l2 → ℝ l2
 upper-bound-proper-closed-interval-ℝ (a , b , a<b) = b
 
+abstract
+  le-bounds-proper-closed-interval-ℝ :
+    {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2) →
+    le-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( upper-bound-proper-closed-interval-ℝ I)
+  le-bounds-proper-closed-interval-ℝ (a , b , a<b) = a<b
+
 subtype-proper-closed-interval-ℝ :
   {l1 l2 : Level} (l : Level) → proper-closed-interval-ℝ l1 l2 →
   subset-ℝ (l1 ⊔ l2 ⊔ l) l
@@ -128,6 +136,79 @@ width-proper-closed-interval-ℝ (a , b , _) = b -ℝ a
 ```
 
 ## Properties
+
+### Proper closed intervals are closed under similarity of real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  is-in-proper-closed-interval-sim-ℝ :
+    {l3 l4 : Level} {x : ℝ l3} {y : ℝ l4} →
+    sim-ℝ x y →
+    is-in-proper-closed-interval-ℝ I x →
+    is-in-proper-closed-interval-ℝ I y
+  is-in-proper-closed-interval-sim-ℝ x~y (a≤x , x≤b) =
+    ( preserves-leq-right-sim-ℝ x~y a≤x ,
+      preserves-leq-left-sim-ℝ x~y x≤b)
+```
+
+### A proper closed interval contains its bounds
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  abstract
+    is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+      is-in-proper-closed-interval-ℝ I (lower-bound-proper-closed-interval-ℝ I)
+    is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+      ( refl-leq-ℝ (lower-bound-proper-closed-interval-ℝ I) ,
+        leq-le-ℝ (le-bounds-proper-closed-interval-ℝ I))
+
+  in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 I
+  in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    ( lower-bound-proper-closed-interval-ℝ I ,
+      is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ)
+
+  abstract
+    is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+      is-in-proper-closed-interval-ℝ I (upper-bound-proper-closed-interval-ℝ I)
+    is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+      ( leq-le-ℝ (le-bounds-proper-closed-interval-ℝ I) ,
+        refl-leq-ℝ (upper-bound-proper-closed-interval-ℝ I))
+
+  in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l2 I
+  in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    ( upper-bound-proper-closed-interval-ℝ I ,
+      is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ)
+```
+
+### The bounds of a proper closed interval bound its elements
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where abstract
+
+  leq-lower-bound-proper-closed-interval-ℝ :
+    {l3 : Level} (x : type-proper-closed-interval-ℝ l3 I) →
+    leq-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1 x)
+  leq-lower-bound-proper-closed-interval-ℝ (x , a≤x , x≤b) = a≤x
+
+  leq-upper-bound-proper-closed-interval-ℝ :
+    {l3 : Level} (x : type-proper-closed-interval-ℝ l3 I) →
+    leq-ℝ
+      ( pr1 x)
+      ( upper-bound-proper-closed-interval-ℝ I)
+  leq-upper-bound-proper-closed-interval-ℝ (x , a≤x , x≤b) = x≤b
+```
 
 ### The metric space associated with a proper closed interval
 
@@ -861,4 +942,78 @@ module _
                   ( real-ℚ⁺ ε'')
                   ( is-positive-real-ℚ⁺ ε'')))
           ( cotransitive-le-ℝ a xℝ b a<b)
+```
+
+### Raising universe levels of elements of proper closed interval
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  raise-type-proper-closed-interval-ℝ :
+    {l0 : Level} (l : Level) →
+    type-proper-closed-interval-ℝ l0 I →
+    type-proper-closed-interval-ℝ (l0 ⊔ l) I
+  raise-type-proper-closed-interval-ℝ l (x , x∈I) =
+    ( raise-ℝ l x ,
+      is-in-proper-closed-interval-sim-ℝ
+        ( I)
+        ( sim-raise-ℝ l x)
+        ( x∈I))
+```
+
+### Raising the universe levels of the bounds of a proper closed interval
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  (l : Level)
+  where
+
+  raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ (l ⊔ l1 ⊔ l2) I
+  raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    raise-type-proper-closed-interval-ℝ I l2
+      ( raise-type-proper-closed-interval-ℝ I l
+        ( in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ I))
+
+  sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    sim-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ)
+  sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    transitive-sim-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        ( raise-type-proper-closed-interval-ℝ I l
+          ( in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ I)))
+      ( pr1
+        ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ))
+      ( sim-raise-ℝ l2 _)
+      ( sim-raise-ℝ l _)
+
+  raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ (l ⊔ l1 ⊔ l2) I
+  raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    raise-type-proper-closed-interval-ℝ I l1
+      ( raise-type-proper-closed-interval-ℝ I l
+        ( in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ I))
+
+  sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    sim-ℝ
+      ( upper-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ)
+  sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    transitive-sim-ℝ
+      ( upper-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        ( raise-type-proper-closed-interval-ℝ I l
+          ( in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ I)))
+      ( pr1
+        ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ))
+      ( sim-raise-ℝ l1 _)
+      ( sim-raise-ℝ l _)
 ```
