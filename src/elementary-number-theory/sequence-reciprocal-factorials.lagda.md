@@ -33,7 +33,7 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-The {{#concept "sequence of reciprocal of factorials" Agda=inv-factorial-ℕ}} is
+The sequence of {{#concept "reciprocal of factorials" Agda=inv-factorial-ℕ}} is
 the sequence `ℕ → ℚ` defined by `n ↦ 1/n!`.
 
 For any `k l n : ℕ` such that `n ＝ k + l`,
