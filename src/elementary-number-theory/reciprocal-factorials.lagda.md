@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.sequence-reciprocal-factorials where
+module elementary-number-theory.reciprocal-factorials where
 ```
 
 <details><summary>Imports</summary>

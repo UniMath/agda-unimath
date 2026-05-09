@@ -198,6 +198,7 @@ open import elementary-number-theory.proper-closed-intervals-rational-numbers pu
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
+open import elementary-number-theory.reciprocal-factorials public
 open import elementary-number-theory.reduced-integer-fractions public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
@@ -207,7 +208,6 @@ open import elementary-number-theory.ring-extension-rational-numbers-of-rational
 open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.semiring-of-natural-numbers public
-open import elementary-number-theory.sequence-reciprocal-factorials public
 open import elementary-number-theory.series-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
