@@ -14,6 +14,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.coproduct-types
@@ -80,6 +81,9 @@ abstract
       ( succ-ℕ x)
       ( is-nonzero-factorial-ℕ x)
       ( is-nonzero-succ-ℕ x)
+
+nonzero-factorial-ℕ : ℕ → ℕ⁺
+nonzero-factorial-ℕ x = (factorial-ℕ x , is-nonzero-factorial-ℕ x)
 ```
 
 ### `n ≤ n!`
