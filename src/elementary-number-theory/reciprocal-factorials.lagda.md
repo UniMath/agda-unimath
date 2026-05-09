@@ -62,6 +62,15 @@ inv-factorial-ℕ = rational-ℚ⁺ ∘ positive-inv-factorial-ℕ
 
 ### Computation rule with the binomial coefficients
 
+For any `n k l : ℕ` such that `n = k + l`,
+
+```text
+   1/n! * (choose n k) ＝ 1/k! * 1/l!
+```
+
+where `choose n k` is the
+[binomial coefficient](elementary-number-theory.binomial-coefficients.md).
+
 ```agda
 abstract
   rational-binomal-coeffictient-factorial-formula-ℕ :
