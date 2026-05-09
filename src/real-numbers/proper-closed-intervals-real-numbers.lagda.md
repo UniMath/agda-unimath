@@ -944,7 +944,7 @@ module _
           ( cotransitive-le-ℝ a xℝ b a<b)
 ```
 
-### Raising elements of proper closed interval
+### Raising universe levels of elements of proper closed interval
 
 ```agda
 module _
