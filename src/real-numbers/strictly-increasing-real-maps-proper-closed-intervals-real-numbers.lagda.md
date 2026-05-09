@@ -53,27 +53,27 @@ if, for any `x , y ∈ [a, b]`, if `x < y`, then `f x < f y`.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
+  (I : proper-closed-interval-ℝ l3 l4)
   where
 
   is-strictly-increasing-prop-real-map-proper-closed-interval-ℝ :
-    real-map-proper-closed-interval-ℝ l1 l2 [a,b] →
+    real-map-proper-closed-interval-ℝ l1 l2 I →
     Prop (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-strictly-increasing-prop-real-map-proper-closed-interval-ℝ =
     preserves-strict-order-prop-map-Strict-Preorder
       ( strict-preorder-Strict-Subpreorder
         ( strict-preorder-ℝ l1)
-        ( subtype-proper-closed-interval-ℝ l1 [a,b]))
+        ( subtype-proper-closed-interval-ℝ l1 I))
       ( strict-preorder-ℝ l2)
 
   is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    real-map-proper-closed-interval-ℝ l1 l2 [a,b] →
+    real-map-proper-closed-interval-ℝ l1 l2 I →
     UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-strictly-increasing-real-map-proper-closed-interval-ℝ =
     type-Prop ∘ is-strictly-increasing-prop-real-map-proper-closed-interval-ℝ
 
   is-prop-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    (f : real-map-proper-closed-interval-ℝ l1 l2 [a,b]) →
+    (f : real-map-proper-closed-interval-ℝ l1 l2 I) →
     is-prop (is-strictly-increasing-real-map-proper-closed-interval-ℝ f)
   is-prop-is-strictly-increasing-real-map-proper-closed-interval-ℝ =
     is-prop-type-Prop ∘
@@ -87,16 +87,16 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
-  (f : real-map-proper-closed-interval-ℝ l1 l2 [a,b])
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ l1 l2 I)
   where abstract
 
   is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    is-strictly-increasing-real-map-proper-closed-interval-ℝ [a,b] f →
+    is-strictly-increasing-real-map-proper-closed-interval-ℝ I f →
     preserves-order-Preorder
       ( preorder-Subpreorder
         ( ℝ-Preorder l1)
-        ( subtype-proper-closed-interval-ℝ l1 [a,b]))
+        ( subtype-proper-closed-interval-ℝ l1 I))
       ( ℝ-Preorder l2)
       ( f)
   is-increasing-is-strictly-increasing-real-map-proper-closed-interval-ℝ
@@ -110,7 +110,7 @@ module _
             leq-eq-ℝ
               ( ap f
                 ( eq-type-subtype
-                  ( subtype-proper-closed-interval-ℝ l1 [a,b])
+                  ( subtype-proper-closed-interval-ℝ l1 I)
                   ( eq-sim-ℝ u~v))))
           ( λ u<v → leq-le-ℝ (H x y u<v)))
         ( irrefutable-sim-or-le-leq-ℝ u v u≤v))
@@ -121,13 +121,13 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
-  (f : real-map-proper-closed-interval-ℝ l1 l2 [a,b])
-  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ [a,b] f)
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ l1 l2 I)
+  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
   where abstract
 
   reflects-leq-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    ( x@(u , _) y@(v , _) : type-proper-closed-interval-ℝ l1 [a,b]) →
+    ( x@(u , _) y@(v , _) : type-proper-closed-interval-ℝ l1 I) →
     leq-ℝ (f x) (f y) →
     leq-ℝ u v
   reflects-leq-is-strictly-increasing-real-map-proper-closed-interval-ℝ
@@ -140,9 +140,9 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
-  (f : real-map-proper-closed-interval-ℝ l1 l2 [a,b])
-  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ [a,b] f)
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ l1 l2 I)
+  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
   where abstract
 
   is-injective-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
@@ -150,17 +150,17 @@ module _
   is-injective-is-strictly-increasing-real-map-proper-closed-interval-ℝ
     {x@(u , _)} {y@(v , _)} fx=fy =
     eq-type-subtype
-      ( subtype-proper-closed-interval-ℝ l1 [a,b])
+      ( subtype-proper-closed-interval-ℝ l1 I)
       ( antisymmetric-leq-ℝ u v
         ( reflects-leq-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( f)
           ( H)
           ( x)
           ( y)
           ( leq-eq-ℝ fx=fy))
         ( reflects-leq-is-strictly-increasing-real-map-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( f)
           ( H)
           ( y)
@@ -179,37 +179,37 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  ([a,b] : proper-closed-interval-ℝ l3 l4)
-  (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 [a,b])
-  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ [a,b] f)
+  (I : proper-closed-interval-ℝ l3 l4)
+  (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 I)
+  (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
   where abstract
 
   le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
     le-ℝ
       ( f
         ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1)))
       ( f
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1)))
   le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ =
     H
       ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-        ( [a,b])
+        ( I)
         ( l1))
       ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-        ( [a,b])
+        ( I)
         ( l1))
       ( preserves-le-sim-ℝ
         ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))
         ( sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))
-        ( le-bounds-proper-closed-interval-ℝ [a,b]))
+        ( le-bounds-proper-closed-interval-ℝ I))
 
   proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
     proper-closed-interval-ℝ l2 l2
@@ -217,11 +217,11 @@ module _
     =
     ( ( f
         ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))) ,
       ( f
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-          ( [a,b])
+          ( I)
           ( l1))) ,
       ( le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ))
 ```
