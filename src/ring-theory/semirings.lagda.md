@@ -325,3 +325,7 @@ module _
   right-unit-law-mul-Semiring =
     right-unit-law-mul-Monoid multiplicative-monoid-Semiring
 ```
+
+## See also
+
+- The operation `r x u ↦ (rx)u` is the standard form of two-sided multiplication in `R`. This operation gives the semiring `R` the structure of an (additive) [monoid with `R`-action](ring-theory.monoids-with-semiring-action.md), and is studied in [`ring-theory.monoids-with-semiring-action`](ring-theory.monoids-with-semiring-action.md).

@@ -1,12 +1,15 @@
-# Subsemirings
+# Commutative subsemirings
 
 ```agda
-module ring-theory.subsemirings where
+module commutative-algebra.commutative-subsemirings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-semirings
+open import commutative-algebra.subsets-commutative-semirings
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,16 +23,15 @@ open import foundation.universe-levels
 
 open import group-theory.submonoids
 
-open import ring-theory.semirings
-open import ring-theory.subsets-semirings
+open import ring-theory.subsemirings
 ```
 
 </details>
 
 ## Idea
 
-An {{#concept "subsemiring" Disambiguation="in a semiring" Agda=Subsemiring}}
-in a [semiring](ring-theory.semirings.md) `R` is a [subset](ring-theory.subsets-semirings.md) which is at the same time an additive [submonoid](group-theory.submonoids.md) and a multiplicative submonoid of `R`.
+An {{#concept "subsemiring" Disambiguation="commutative semiring" Agda=Commutative-Subsemiring}}
+of a [commutative semiring](commutative-algebra.semirings.md) `R`, or {{#concept "commutative subsemiring" Agda=Commutative-Subsemiring}} for short, is an additive [submonoid](group-theory.submonoids.md) which contains `1` and is closed under multiplication.
 
 ## Definitions
 

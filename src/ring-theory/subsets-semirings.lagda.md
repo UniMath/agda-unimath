@@ -12,10 +12,12 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import ring-theory.semirings
@@ -29,7 +31,7 @@ A {{#concept "subset" Disambiguation="of a semiring" Agda=subset-Semiring}} of a
 [semiring](ring-theory.semirings.md) `R` is a [subtype](foundation.subtypes.md)
 of the underlying type of `R`.
 
-## Definition
+## Definitions
 
 ### Subsets of semirings
 
@@ -86,6 +88,8 @@ module _
 
 ### The condition that a subset contains zero
 
+This condition asserts that `0 ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
@@ -106,6 +110,8 @@ module _
 
 ### The condition that a subset contains one
 
+This condition asserts that `1 ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
@@ -125,6 +131,8 @@ module _
 
 ### The condition that a subset is closed under addition
 
+This condition asserts that for any `x y ∈ S` we have `x + y ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
@@ -139,12 +147,8 @@ module _
   is-prop-is-closed-under-addition-subset-Semiring :
     is-prop is-closed-under-addition-subset-Semiring
   is-prop-is-closed-under-addition-subset-Semiring =
-    is-prop-implicit-Π
-      ( λ x →
-        is-prop-implicit-Π
-          ( λ y →
-            is-prop-function-type
-              ( is-prop-function-type (is-prop-is-in-subtype S _))))
+    is-prop-iterated-implicit-Π 2
+      ( λ _ _ → is-prop-iterated-Π 2 (λ _ _ → is-prop-is-in-subtype S _))
 
   is-closed-under-addition-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-addition-prop-subset-Semiring =
@@ -154,6 +158,8 @@ module _
 ```
 
 ### The condition that a subset is closed under multiplication
+
+This condition asserts that for any `x y ∈ S` we have `xy ∈ S`.
 
 ```agda
 module _
@@ -168,12 +174,8 @@ module _
   is-prop-is-closed-under-multiplication-subset-Semiring :
     is-prop is-closed-under-multiplication-subset-Semiring
   is-prop-is-closed-under-multiplication-subset-Semiring =
-    is-prop-implicit-Π
-      ( λ x →
-        is-prop-implicit-Π
-          ( λ y →
-            is-prop-function-type
-              ( is-prop-function-type (is-prop-is-in-subtype S _))))
+    is-prop-iterated-implicit-Π 2
+      ( λ _ _ → is-prop-iterated-Π 2 (λ _ _ → is-prop-is-in-subtype S _))
 
   is-closed-under-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-multiplication-prop-subset-Semiring =
@@ -183,6 +185,8 @@ module _
 ```
 
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
+
+This condition asserts that for any `r x : R`, if `x ∈ S` then `rx ∈ S`.
 
 ```agda
 module _
@@ -197,10 +201,8 @@ module _
   is-prop-is-closed-under-left-multiplication-subset-Semiring :
     is-prop is-closed-under-left-multiplication-subset-Semiring
   is-prop-is-closed-under-left-multiplication-subset-Semiring =
-    is-prop-implicit-Π
-      ( λ x →
-        is-prop-implicit-Π
-          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
+    is-prop-iterated-implicit-Π 2
+      ( λ _ _ → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-left-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-left-multiplication-prop-subset-Semiring =
@@ -210,6 +212,8 @@ module _
 ```
 
 ### The condition that a subset is closed under multiplication from the right by an arbitrary element
+
+This condition asserts that for any `x r : R`, if `x ∈ S` then `xr ∈ S`.
 
 ```agda
 module _
@@ -224,10 +228,8 @@ module _
   is-prop-is-closed-under-right-multiplication-subset-Semiring :
     is-prop is-closed-under-right-multiplication-subset-Semiring
   is-prop-is-closed-under-right-multiplication-subset-Semiring =
-    is-prop-implicit-Π
-      ( λ x →
-        is-prop-implicit-Π
-          ( λ y → is-prop-function-type (is-prop-is-in-subtype S _)))
+    is-prop-iterated-implicit-Π 2
+      ( λ _ _ → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-right-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-right-multiplication-prop-subset-Semiring =
@@ -237,6 +239,10 @@ module _
 ```
 
 ### The condition that a subset is closed under two-sided multiplication arbitrary elements
+
+This condition asserts that for any `r x u : R`, if `x ∈ S` then `(rx)u ∈ S`.
+
+The operation `r x u ↦ (rx)u` is the standard form of two-sided multiplication in `R`, which gives the semiring `R` the structure of an (additive) [monoid with `R`-action](ring-theory.monoids-with-semiring-action.md).
 
 ```agda
 module _
@@ -251,12 +257,8 @@ module _
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring :
     is-prop is-closed-under-two-sided-multiplication-subset-Semiring
   is-prop-is-closed-under-two-sided-multiplication-subset-Semiring =
-    is-prop-implicit-Π
-      ( λ r →
-        is-prop-implicit-Π
-          ( λ x →
-            is-prop-implicit-Π
-              ( λ u → is-prop-function-type (is-prop-is-in-subtype S _))))
+    is-prop-iterated-implicit-Π 3
+      ( λ _ _ _ → is-prop-function-type (is-prop-is-in-subtype S _))
 
   is-closed-under-two-sided-multiplication-prop-subset-Semiring : Prop (l1 ⊔ l2)
   pr1 is-closed-under-two-sided-multiplication-prop-subset-Semiring =
@@ -266,6 +268,8 @@ module _
 ```
 
 ### The condition that a subset of a semiring is an additive submonoid
+
+This condition asserts that the subset contains `0` and is closed under addition.
 
 ```agda
 module _
@@ -289,6 +293,34 @@ module _
     is-additive-submonoid-subset-Semiring
   pr2 is-additive-submonoid-prop-subset-Semiring =
     is-prop-is-additive-submonoid-subset-Semiring
+```
+
+### The condition that a subset of a semiring is an multiplicative submonoid
+
+This condition asserts that the subset contains `1` and is closed under multiplication.
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : subset-Semiring l2 R)
+  where
+
+  is-multiplicative-submonoid-subset-Semiring : UU (l1 ⊔ l2)
+  is-multiplicative-submonoid-subset-Semiring =
+    contains-one-subset-Semiring R S ×
+    is-closed-under-multiplication-subset-Semiring R S
+
+  is-prop-is-multiplicative-submonoid-subset-Semiring :
+    is-prop is-multiplicative-submonoid-subset-Semiring
+  is-prop-is-multiplicative-submonoid-subset-Semiring =
+    is-prop-product
+      ( is-prop-contains-one-subset-Semiring R S)
+      ( is-prop-is-closed-under-multiplication-subset-Semiring R S)
+
+  is-multiplicative-submonoid-prop-subset-Semiring : Prop (l1 ⊔ l2)
+  pr1 is-multiplicative-submonoid-prop-subset-Semiring =
+    is-multiplicative-submonoid-subset-Semiring
+  pr2 is-multiplicative-submonoid-prop-subset-Semiring =
+    is-prop-is-multiplicative-submonoid-subset-Semiring
 ```
 
 ## Properties

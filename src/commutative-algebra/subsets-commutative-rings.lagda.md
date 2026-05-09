@@ -26,9 +26,9 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A **subset** of a commutative ring is a subtype of its underlying type.
+A {{#concept "subset" Disambiguation="commutative ring" Agda=subset-Commutative-Ring}} of a [commutative ring](commutative-algebra.commutative-rings.md) is a [subtype](foundation-core.subtypes.md) of its underlying type.
 
-## Definition
+## Definitions
 
 ### Subsets of rings
 
@@ -87,6 +87,8 @@ module _
 
 ### The condition that a subset contains zero
 
+This condition asserts that `0 ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (S : subset-Commutative-Ring l2 A)
@@ -98,6 +100,8 @@ module _
 ```
 
 ### The condition that a subset contains one
+
+This condition asserts that `1 ∈ S`.
 
 ```agda
   contains-one-subset-Commutative-Ring : UU l2

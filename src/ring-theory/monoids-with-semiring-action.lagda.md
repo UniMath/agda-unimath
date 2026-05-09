@@ -235,37 +235,37 @@ module _
   {l1 : Level} (R : Semiring l1)
   where
 
-  action-additive-monoid-with-semiring-action-Semiring :
+  two-sided-mul-Semiring :
     (r x u : type-Semiring R) → type-Semiring R
-  action-additive-monoid-with-semiring-action-Semiring r x u =
+  two-sided-mul-Semiring r x u =
     mul-Semiring R (mul-Semiring R r x) u
 
-  distributive-action-additive-monoid-with-semiring-action-Semiring :
+  distributive-two-sided-mul-Semiring :
     (r x y u : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( r)
       ( add-Semiring R x y)
       ( u) ＝
     add-Semiring R
-      ( action-additive-monoid-with-semiring-action-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Semiring r y u)
-  distributive-action-additive-monoid-with-semiring-action-Semiring r x y u =
+      ( two-sided-mul-Semiring r x u)
+      ( two-sided-mul-Semiring r y u)
+  distributive-two-sided-mul-Semiring r x y u =
     ap (mul-Semiring' R u) (left-distributive-mul-add-Semiring R r x y) ∙
     right-distributive-mul-add-Semiring R
       ( mul-Semiring R r x)
       ( mul-Semiring R r y)
       ( u)
 
-  right-distributive-action-additive-monoid-with-semiring-action-Semiring :
+  right-distributive-two-sided-mul-Semiring :
     (r s x u : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( add-Semiring R r s)
       ( x)
       ( u) ＝
     add-Semiring R
-      ( action-additive-monoid-with-semiring-action-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Semiring s x u)
-  right-distributive-action-additive-monoid-with-semiring-action-Semiring
+      ( two-sided-mul-Semiring r x u)
+      ( two-sided-mul-Semiring s x u)
+  right-distributive-two-sided-mul-Semiring
     r s x u =
     ap (mul-Semiring' R u) (right-distributive-mul-add-Semiring R r s x) ∙
     right-distributive-mul-add-Semiring R
@@ -273,52 +273,52 @@ module _
       ( mul-Semiring R s x)
       ( u)
 
-  left-distributive-action-additive-monoid-with-semiring-action-Semiring :
+  left-distributive-two-sided-mul-Semiring :
     (r x u v : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring r x
+    two-sided-mul-Semiring r x
       ( add-Semiring R u v) ＝
     add-Semiring R
-      ( action-additive-monoid-with-semiring-action-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Semiring r x v)
-  left-distributive-action-additive-monoid-with-semiring-action-Semiring
+      ( two-sided-mul-Semiring r x u)
+      ( two-sided-mul-Semiring r x v)
+  left-distributive-two-sided-mul-Semiring
     r x u v =
     left-distributive-mul-add-Semiring R (mul-Semiring R r x) u v
 
-  associative-action-additive-monoid-with-semiring-action-Semiring :
+  associative-two-sided-mul-Semiring :
     (s r x u v : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( mul-Semiring R s r)
       ( x)
       ( mul-Semiring R u v) ＝
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( s)
-      ( action-additive-monoid-with-semiring-action-Semiring r x u)
+      ( two-sided-mul-Semiring r x u)
       ( v)
-  associative-action-additive-monoid-with-semiring-action-Semiring s r x u v =
+  associative-two-sided-mul-Semiring s r x u v =
     ( inv-associative-mul-Semiring R _ _ _) ∙
     ( ap
       ( mul-Semiring' R v)
       ( ( ap (mul-Semiring' R u) (associative-mul-Semiring R s r x)) ∙
         ( associative-mul-Semiring R s (mul-Semiring R r x) u)))
 
-  unit-law-action-additive-monoid-with-semiring-action-Semiring :
+  unit-law-two-sided-mul-Semiring :
     (x : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( one-Semiring R)
       ( x)
       ( one-Semiring R) ＝
     x
-  unit-law-action-additive-monoid-with-semiring-action-Semiring x =
+  unit-law-two-sided-mul-Semiring x =
     right-unit-law-mul-Semiring R _ ∙ left-unit-law-mul-Semiring R _
 
-  absorption-law-action-additive-monoid-with-semiring-action-Semiring :
+  absorption-law-two-sided-mul-Semiring :
     (r u : type-Semiring R) →
-    action-additive-monoid-with-semiring-action-Semiring
+    two-sided-mul-Semiring
       ( r)
       ( zero-Semiring R)
       ( u) ＝
     zero-Semiring R
-  absorption-law-action-additive-monoid-with-semiring-action-Semiring r u =
+  absorption-law-two-sided-mul-Semiring r u =
     ap (mul-Semiring' R u) (right-zero-law-mul-Semiring R r) ∙
     left-zero-law-mul-Semiring R u
 
@@ -326,11 +326,11 @@ module _
     Monoid-With-Semiring-Action l1 R
   additive-monoid-with-semiring-action-Semiring =
     ( additive-monoid-Semiring R ,
-      action-additive-monoid-with-semiring-action-Semiring ,
-      distributive-action-additive-monoid-with-semiring-action-Semiring ,
-      right-distributive-action-additive-monoid-with-semiring-action-Semiring ,
-      left-distributive-action-additive-monoid-with-semiring-action-Semiring ,
-      associative-action-additive-monoid-with-semiring-action-Semiring ,
-      unit-law-action-additive-monoid-with-semiring-action-Semiring ,
-      absorption-law-action-additive-monoid-with-semiring-action-Semiring)
+      two-sided-mul-Semiring ,
+      distributive-two-sided-mul-Semiring ,
+      right-distributive-two-sided-mul-Semiring ,
+      left-distributive-two-sided-mul-Semiring ,
+      associative-two-sided-mul-Semiring ,
+      unit-law-two-sided-mul-Semiring ,
+      absorption-law-two-sided-mul-Semiring)
 ```

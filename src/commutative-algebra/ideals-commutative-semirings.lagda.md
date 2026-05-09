@@ -34,9 +34,15 @@ open import ring-theory.subsets-semirings
 
 An {{#concept "ideal" Disambiguation="commutative semiring" Agda=ideal-Commutative-Semiring}} in a [commutative semiring](commutative-algebra.commutative-semirings.md) is a [left ideal](ring-theory.left-ideals-semirings.md) in the underlying [semiring](ring-theory.semirings.md). By virtue of commutativity, any ideal in a commutative semiring is also a [right idea](ring-theory.right-ideals-semirings.md) and a [two-sided ideal](ring-theory.ideals-semirings.md) in the underlying semiring.
 
+## Implementation notes
+
+Since left ideals, right ideals, and two-sided ideals logically coincide for commutative semirings, one might wonder if it wouldn't be easier to define the notion of ideal in a commutative semiring be a left ideal (or a right ideal). Indeed, this would take away one step in the construction of examples of ideals. Doing so, however, leads to a diamond problem {{#cite Avigad2024Design}} once we consider ideals in commutative rings: Ideals of the underlying commutative semirings wouldn't be definitionally the same anymore as ideals of the underlying ring.
+
+In order to define ideals of commutative rings and commutative semirings in such a way that these concepts are definitionally the same as the concepts of iddeals in their underlying rings and semirings, we define ideals in the commutative case to be two-sided ideals and provide functions that let us obtain two-sided ideals from their one-sided counterparts.
+
 ## Definitions
 
-### Left, right, and two-sided ideals
+### Left, right, two-sided ideals, and ideals
 
 ```agda
 module _
@@ -460,3 +466,6 @@ module _
       ( I)
 ```
 
+## References
+
+{{#bibliography}}

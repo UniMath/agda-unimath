@@ -31,7 +31,7 @@ A {{#concept "subset" Disambiguation="of a ring" Agda=subset-Ring}} of a
 [ring](ring-theory.rings.md) `R` is a [subtype](foundation.subtypes.md) of the
 underlying type of `R`.
 
-## Definition
+## Definitions
 
 ### Subsets of rings
 
@@ -94,6 +94,8 @@ module _
 
 ### The condition that a subset contains zero
 
+This condition asserts that `0 ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -114,6 +116,8 @@ module _
 ```
 
 ### The condition that a subset contains one
+
+This condition asserts that `1 ∈ S`.
 
 ```agda
 module _
@@ -136,6 +140,8 @@ module _
 
 ### The condition that a subset is closed under addition
 
+This condition asserts that for any `x y ∈ S` we have `x + y ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -157,6 +163,8 @@ module _
 ```
 
 ### The condition that a subset is closed under negatives
+
+This condition asserts that for any `x ∈ S` we have `-x ∈ S`.
 
 ```agda
 module _
@@ -183,6 +191,8 @@ module _
 
 ### The condition that a subset is closed under multiplication
 
+This condition asserts that for any `x y ∈ S` we have `xy ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -203,6 +213,8 @@ module _
 ```
 
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
+
+This condition asserts that for any `r x : R`, if `x ∈ S` then `rx ∈ S`.
 
 ```agda
 module _
@@ -229,6 +241,8 @@ module _
 
 ### The condition that a subset is closed under multiplication from the right by an arbitrary element
 
+This condition asserts that for any `x r : R`, if `x ∈ S` then `xr ∈ S`.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -253,6 +267,10 @@ module _
 ```
 
 ### The condition that a subset is closed under two-sided multiplication by arbitrary elements
+
+This condition asserts that for any `r x u : R`, if `x ∈ S` then `(rx)u ∈ S`.
+
+The operation `r x u ↦ (rx)u` is the standard form of two-sided multiplication in `R`, which gives the semiring `R` the structure of an (additive) [monoid with `R`-action](ring-theory.monoids-with-semiring-action.md).
 
 ```agda
 module _
@@ -281,6 +299,8 @@ module _
 
 ### The condition that a subset is an additive submonoid
 
+This condition asserts that the subset contains `0` and is closed under addition.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -302,6 +322,8 @@ module _
 
 ### The condition that a subset is an additive subgroup
 
+This condition asserts that the subset contains `0`, is closed under addition, and is closed under negatives.
+
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
@@ -321,6 +343,35 @@ module _
     is-additive-subgroup-subset-Ring
   pr2 is-additive-subgroup-prop-subset-Ring =
     is-prop-is-additive-subgroup-subset-Ring
+```
+
+### The condition that a subset of a ring is an multiplicative submonoid
+
+This condition asserts that the subset contains `1` and is closed under multiplication.
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)
+  where
+
+  is-multiplicative-submonoid-subset-Ring : UU (l1 ⊔ l2)
+  is-multiplicative-submonoid-subset-Ring =
+    is-multiplicative-submonoid-subset-Semiring
+      ( semiring-Ring R)
+      ( S)
+
+  is-prop-is-multiplicative-submonoid-subset-Ring :
+    is-prop is-multiplicative-submonoid-subset-Ring
+  is-prop-is-multiplicative-submonoid-subset-Ring =
+    is-prop-is-multiplicative-submonoid-subset-Semiring
+      ( semiring-Ring R)
+      ( S)
+
+  is-multiplicative-submonoid-prop-subset-Ring : Prop (l1 ⊔ l2)
+  is-multiplicative-submonoid-prop-subset-Ring =
+    is-multiplicative-submonoid-prop-subset-Semiring
+      ( semiring-Ring R)
+      ( S)
 ```
 
 ## Properties
