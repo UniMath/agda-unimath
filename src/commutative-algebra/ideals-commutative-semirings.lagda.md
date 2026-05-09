@@ -20,6 +20,8 @@ open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import group-theory.submonoids
+
 open import ring-theory.ideals-semirings
 open import ring-theory.left-ideals-semirings
 open import ring-theory.right-ideals-semirings
@@ -342,6 +344,13 @@ module _
     is-additive-submonoid-ideal-Semiring
       ( semiring-Commutative-Semiring A)
       ( I)
+
+  additive-submonoid-ideal-Commutative-Semiring :
+    Submonoid l2 (additive-monoid-Commutative-Semiring A)
+  pr1 additive-submonoid-ideal-Commutative-Semiring =
+    subset-ideal-Commutative-Semiring
+  pr2 additive-submonoid-ideal-Commutative-Semiring =
+    is-additive-submonoid-ideal-Commutative-Semiring
 
   contains-zero-ideal-Commutative-Semiring :
     contains-zero-subset-Commutative-Semiring A
