@@ -273,86 +273,86 @@ module _
   {l1 : Level} (R : Commutative-Semiring l1)
   where
 
-  action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  two-sided-mul-Commutative-Semiring :
     (r x u : type-Commutative-Semiring R) → type-Commutative-Semiring R
-  action-additive-monoid-with-semiring-action-Commutative-Semiring =
-    action-additive-monoid-with-semiring-action-Semiring
+  two-sided-mul-Commutative-Semiring =
+    two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  distributive-two-sided-mul-Commutative-Semiring :
     (r x y u : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( r)
       ( add-Commutative-Semiring R x y)
       ( u) ＝
     add-Commutative-Semiring R
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r y u)
-  distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring
+      ( two-sided-mul-Commutative-Semiring r x u)
+      ( two-sided-mul-Commutative-Semiring r y u)
+  distributive-two-sided-mul-Commutative-Semiring
     =
-    distributive-action-additive-monoid-with-semiring-action-Semiring
+    distributive-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  right-distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  right-distributive-two-sided-mul-Commutative-Semiring :
     (r s x u : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( add-Commutative-Semiring R r s)
       ( x)
       ( u) ＝
     add-Commutative-Semiring R
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring s x u)
-  right-distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring
+      ( two-sided-mul-Commutative-Semiring r x u)
+      ( two-sided-mul-Commutative-Semiring s x u)
+  right-distributive-two-sided-mul-Commutative-Semiring
     =
-    right-distributive-action-additive-monoid-with-semiring-action-Semiring
+    right-distributive-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  left-distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  left-distributive-two-sided-mul-Commutative-Semiring :
     (r x u v : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring r x
+    two-sided-mul-Commutative-Semiring r x
       ( add-Commutative-Semiring R u v) ＝
     add-Commutative-Semiring R
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r x u)
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r x v)
-  left-distributive-action-additive-monoid-with-semiring-action-Commutative-Semiring
+      ( two-sided-mul-Commutative-Semiring r x u)
+      ( two-sided-mul-Commutative-Semiring r x v)
+  left-distributive-two-sided-mul-Commutative-Semiring
     =
-    left-distributive-action-additive-monoid-with-semiring-action-Semiring
+    left-distributive-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  associative-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  associative-two-sided-mul-Commutative-Semiring :
     (s r x u v : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( mul-Commutative-Semiring R s r)
       ( x)
       ( mul-Commutative-Semiring R u v) ＝
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( s)
-      ( action-additive-monoid-with-semiring-action-Commutative-Semiring r x u)
+      ( two-sided-mul-Commutative-Semiring r x u)
       ( v)
-  associative-action-additive-monoid-with-semiring-action-Commutative-Semiring =
-    associative-action-additive-monoid-with-semiring-action-Semiring
+  associative-two-sided-mul-Commutative-Semiring =
+    associative-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  unit-law-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  unit-law-two-sided-mul-Commutative-Semiring :
     (x : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( one-Commutative-Semiring R)
       ( x)
       ( one-Commutative-Semiring R) ＝
     x
-  unit-law-action-additive-monoid-with-semiring-action-Commutative-Semiring =
-    unit-law-action-additive-monoid-with-semiring-action-Semiring
+  unit-law-two-sided-mul-Commutative-Semiring =
+    unit-law-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
-  absorption-law-action-additive-monoid-with-semiring-action-Commutative-Semiring :
+  absorption-law-two-sided-mul-Commutative-Semiring :
     (r u : type-Commutative-Semiring R) →
-    action-additive-monoid-with-semiring-action-Commutative-Semiring
+    two-sided-mul-Commutative-Semiring
       ( r)
       ( zero-Commutative-Semiring R)
       ( u) ＝
     zero-Commutative-Semiring R
-  absorption-law-action-additive-monoid-with-semiring-action-Commutative-Semiring =
-    absorption-law-action-additive-monoid-with-semiring-action-Semiring
+  absorption-law-two-sided-mul-Commutative-Semiring =
+    absorption-law-two-sided-mul-Semiring
       ( semiring-Commutative-Semiring R)
 
   additive-monoid-with-semiring-action-Commutative-Semiring :

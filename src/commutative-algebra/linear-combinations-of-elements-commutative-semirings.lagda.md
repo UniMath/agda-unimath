@@ -464,7 +464,7 @@ module _
     is-zero-Commutative-Semiring R
       ( ev-monoid-linear-combination-Commutative-Semiring R
         ( additive-monoid-Commutative-Semiring R)
-        ( action-additive-monoid-with-semiring-action-Commutative-Semiring R)
+        ( two-sided-mul-Commutative-Semiring R)
         ( x))
   is-zero-ev-is-linear-combination-of-zeroes-Commutative-Semiring =
     is-zero-ev-is-linear-combination-of-zeroes-Semiring
