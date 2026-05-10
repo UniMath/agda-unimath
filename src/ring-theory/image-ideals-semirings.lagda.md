@@ -366,23 +366,6 @@ module _
         ( contains-elements-ideal-family-of-elements-Semiring S
           ( map-hom-Semiring R S f ∘ x)))
 
-{-
-    leq-im-ideal-Semiring R S f
-      ( ideal-family-of-elements-Semiring R x)
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-      ( λ r H →
-        apply-universal-property-trunc-Prop H
-          ( subset-ideal-family-of-elements-Semiring S
-            ( map-hom-Semiring R S f ∘ x)
-            ( map-hom-Semiring R S f r))
-          ( λ { (l , refl) →
-                unit-trunc-Prop
-                  ( map-linear-combination-family-of-elements-Semiring'
-                    R S f x l ,
-                    inv
-                      ( preserves-ev-map-linear-combination-family-of-elements-Semiring'
-                        R S f x l))})) -}
-
   backward-inclusion-image-ideal-family-of-elements-Semiring :
     leq-ideal-Semiring S
       ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
