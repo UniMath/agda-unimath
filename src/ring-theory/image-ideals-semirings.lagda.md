@@ -360,6 +360,16 @@ module _
     leq-im-ideal-Semiring R S f
       ( ideal-family-of-elements-Semiring R x)
       ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
+      ( leq-ideal-family-of-elements-Semiring R x
+        ( pullback-ideal-Semiring R S f
+          ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x)))
+        ( contains-elements-ideal-family-of-elements-Semiring S
+          ( map-hom-Semiring R S f ∘ x)))
+
+{-
+    leq-im-ideal-Semiring R S f
+      ( ideal-family-of-elements-Semiring R x)
+      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
       ( λ r H →
         apply-universal-property-trunc-Prop H
           ( subset-ideal-family-of-elements-Semiring S
@@ -371,7 +381,7 @@ module _
                     R S f x l ,
                     inv
                       ( preserves-ev-map-linear-combination-family-of-elements-Semiring'
-                        R S f x l))}))
+                        R S f x l))})) -}
 
   backward-inclusion-image-ideal-family-of-elements-Semiring :
     leq-ideal-Semiring S
@@ -442,18 +452,11 @@ module _
     leq-im-ideal-Semiring R S f
       ( ideal-element-Semiring R x)
       ( ideal-element-Semiring S (map-hom-Semiring R S f x))
-      ( λ r H →
-        apply-universal-property-trunc-Prop H
-          ( subset-ideal-element-Semiring S
-            ( map-hom-Semiring R S f x)
-            ( map-hom-Semiring R S f r))
-          ( λ { (l , refl) →
-                unit-trunc-Prop
-                  ( map-linear-combination-element-Semiring
-                    R S f x l ,
-                    inv
-                      ( preserves-ev-map-linear-combination-element-Semiring
-                        R S f x l))}))
+      ( leq-ideal-element-Semiring R x
+        ( pullback-ideal-Semiring R S f
+          ( ideal-element-Semiring S (map-hom-Semiring R S f x)))
+        ( contains-element-ideal-element-Semiring S
+          ( map-hom-Semiring R S f x)))
 
   backward-inclusion-image-ideal-element-Semiring :
     leq-ideal-Semiring S

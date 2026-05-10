@@ -353,18 +353,12 @@ module _
     leq-im-left-ideal-Semiring R S f
       ( left-ideal-family-of-elements-Semiring R x)
       ( left-ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-      ( λ r H →
-        apply-universal-property-trunc-Prop H
-          ( subset-left-ideal-family-of-elements-Semiring S
-            ( map-hom-Semiring R S f ∘ x)
-            ( map-hom-Semiring R S f r))
-          ( λ { (l , refl) →
-                unit-trunc-Prop
-                  ( map-left-linear-combination-family-of-elements-Semiring'
-                    R S f x l ,
-                    inv
-                      ( preserves-ev-map-left-linear-combination-family-of-elements-Semiring'
-                        R S f x l))}))
+      ( leq-left-ideal-family-of-elements-Semiring R x
+        ( pullback-left-ideal-Semiring R S f
+          ( left-ideal-family-of-elements-Semiring S
+            ( map-hom-Semiring R S f ∘ x)))
+        ( contains-elements-left-ideal-family-of-elements-Semiring S
+          ( map-hom-Semiring R S f ∘ x)))
 
   backward-inclusion-image-left-ideal-family-of-elements-Semiring :
     leq-left-ideal-Semiring S
@@ -440,18 +434,13 @@ module _
     leq-im-left-ideal-Semiring R S f
       ( left-ideal-element-Semiring R x)
       ( left-ideal-element-Semiring S (map-hom-Semiring R S f x))
-      ( λ r H →
-        apply-universal-property-trunc-Prop H
-          ( subset-left-ideal-element-Semiring S
-            ( map-hom-Semiring R S f x)
-            ( map-hom-Semiring R S f r))
-          ( λ { (l , refl) →
-                unit-trunc-Prop
-                  ( map-left-linear-combination-element-Semiring
-                    R S f x l ,
-                    inv
-                      ( preserves-ev-map-left-linear-combination-element-Semiring
-                        R S f x l))}))
+      ( leq-left-ideal-element-Semiring R x
+        ( pullback-left-ideal-Semiring R S f
+          ( left-ideal-element-Semiring S
+            ( map-hom-Semiring R S f x)))
+        ( contains-element-left-ideal-element-Semiring S
+          ( map-hom-Semiring R S f x)))
+
 
   backward-inclusion-image-left-ideal-element-Semiring :
     leq-left-ideal-Semiring S
