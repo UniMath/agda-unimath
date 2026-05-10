@@ -7,15 +7,35 @@ module ring-theory.image-subtractive-ideals-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
+open import foundation.universal-property-dependent-pair-types
 
+open import group-theory.submonoids
+
+open import order-theory.galois-connections-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+
+open import ring-theory.functoriality-linear-combinations-of-elements-semirings
 open import ring-theory.homomorphisms-semirings
+open import ring-theory.ideals-generated-by-families-of-elements-semirings
+open import ring-theory.ideals-semirings
+open import ring-theory.linear-combinations-of-elements-semirings
+open import ring-theory.nonunital-subsemirings
 open import ring-theory.poset-of-subtractive-ideals-semirings
 open import ring-theory.pullbacks-subtractive-ideals-semirings
 open import ring-theory.semirings
+open import ring-theory.subsets-semirings
+open import ring-theory.subtractive-closure-ideals-semirings
 open import ring-theory.subtractive-ideals-semirings
+open import ring-theory.subtractive-ideals-generated-by-families-of-elements-semirings
 ```
 
 </details>
@@ -49,7 +69,8 @@ module _
   is-image-subtractive-ideal-Semiring =
     {l : Level} (J : subtractive-ideal-Semiring l S) →
     leq-subtractive-ideal-Semiring S K J ↔
-    leq-subtractive-ideal-Semiring R I (pullback-subtractive-ideal-Semiring R S f J)
+    leq-subtractive-ideal-Semiring R I
+      ( pullback-subtractive-ideal-Semiring R S f J)
 ```
 
 ### The image of an ideal under a semiring homomorphism
@@ -68,7 +89,8 @@ module _
   im-subtractive-ideal-Semiring :
     subtractive-ideal-Semiring (l1 ⊔ l2 ⊔ l3) S
   im-subtractive-ideal-Semiring =
-    subtractive-ideal-family-of-elements-Semiring S family-of-elements-im-subtractive-ideal-Semiring
+    subtractive-ideal-family-of-elements-Semiring S
+      family-of-elements-im-subtractive-ideal-Semiring
 
   nonunital-subsemiring-im-subtractive-ideal-Semiring :
     Nonunital-Subsemiring (l1 ⊔ l2 ⊔ l3) S
@@ -76,12 +98,14 @@ module _
     nonunital-subsemiring-ideal-family-of-elements-Semiring S
       family-of-elements-im-subtractive-ideal-Semiring
 
-  subset-im-subtractive-ideal-Semiring : subset-Semiring (l1 ⊔ l2 ⊔ l3) S
+  subset-im-subtractive-ideal-Semiring :
+    subset-Semiring (l1 ⊔ l2 ⊔ l3) S
   subset-im-subtractive-ideal-Semiring =
     subset-ideal-family-of-elements-Semiring S
       family-of-elements-im-subtractive-ideal-Semiring
 
-  is-in-im-subtractive-ideal-Semiring : type-Semiring S → UU (l1 ⊔ l2 ⊔ l3)
+  is-in-im-subtractive-ideal-Semiring :
+    type-Semiring S → UU (l1 ⊔ l2 ⊔ l3)
   is-in-im-subtractive-ideal-Semiring =
     is-in-ideal-family-of-elements-Semiring S
       family-of-elements-im-subtractive-ideal-Semiring
@@ -92,7 +116,8 @@ module _
     is-prop-is-in-ideal-family-of-elements-Semiring S
       family-of-elements-im-subtractive-ideal-Semiring
 
-  type-im-subtractive-ideal-Semiring : UU (l1 ⊔ l2 ⊔ l3)
+  type-im-subtractive-ideal-Semiring :
+    UU (l1 ⊔ l2 ⊔ l3)
   type-im-subtractive-ideal-Semiring =
     type-ideal-family-of-elements-Semiring S
       family-of-elements-im-subtractive-ideal-Semiring
@@ -143,7 +168,8 @@ module _
 
   abstract
     is-additive-submonoid-im-subtractive-ideal-Semiring :
-      is-additive-submonoid-subset-Semiring S subset-im-subtractive-ideal-Semiring
+      is-additive-submonoid-subset-Semiring S
+        subset-im-subtractive-ideal-Semiring
     is-additive-submonoid-im-subtractive-ideal-Semiring =
       is-additive-submonoid-ideal-family-of-elements-Semiring S
         family-of-elements-im-subtractive-ideal-Semiring
@@ -157,7 +183,8 @@ module _
 
   abstract
     is-closed-under-addition-im-subtractive-ideal-Semiring :
-      is-closed-under-addition-subset-Semiring S subset-im-subtractive-ideal-Semiring
+      is-closed-under-addition-subset-Semiring S
+        subset-im-subtractive-ideal-Semiring
     is-closed-under-addition-im-subtractive-ideal-Semiring =
       is-closed-under-addition-ideal-family-of-elements-Semiring S
         family-of-elements-im-subtractive-ideal-Semiring
@@ -170,7 +197,8 @@ module _
 
   abstract
     is-closed-under-multiplication-im-subtractive-ideal-Semiring :
-      is-closed-under-multiplication-subset-Semiring S subset-im-subtractive-ideal-Semiring
+      is-closed-under-multiplication-subset-Semiring S
+        subset-im-subtractive-ideal-Semiring
     is-closed-under-multiplication-im-subtractive-ideal-Semiring =
       is-closed-under-multiplication-ideal-family-of-elements-Semiring S
         family-of-elements-im-subtractive-ideal-Semiring
@@ -198,22 +226,27 @@ module _
 
   contains-elements-im-subtractive-ideal-Semiring :
     {x : type-Semiring R} (H : is-in-subtractive-ideal-Semiring R I x) →
-    is-in-subtractive-ideal-Semiring S im-subtractive-ideal-Semiring (map-hom-Semiring R S f x)
+    is-in-subtractive-ideal-Semiring S
+      ( im-subtractive-ideal-Semiring)
+      ( map-hom-Semiring R S f x)
   contains-elements-im-subtractive-ideal-Semiring H =
-    contains-elements-ideal-family-of-elements-Semiring S
-      family-of-elements-im-subtractive-ideal-Semiring (_ , H)
+    contains-elements-subtractive-ideal-family-of-elements-Semiring S
+      ( family-of-elements-im-subtractive-ideal-Semiring)
+      ( _ , H)
 
   is-image-im-subtractive-ideal-Semiring :
     is-image-subtractive-ideal-Semiring R S f I im-subtractive-ideal-Semiring
   is-image-im-subtractive-ideal-Semiring J =
     iff-equiv equiv-ev-pair ∘iff
-    is-ideal-generated-by-family-of-elements-ideal-family-of-elements-Semiring S
+    is-subtractive-ideal-generated-by-family-of-elements-subtractive-ideal-family-of-elements-Semiring
+      ( S)
       ( family-of-elements-im-subtractive-ideal-Semiring)
       ( J)
 
   leq-im-subtractive-ideal-Semiring :
     {l4 : Level} (J : subtractive-ideal-Semiring l4 S) →
-    leq-subtractive-ideal-Semiring R I (pullback-subtractive-ideal-Semiring R S f J) →
+    leq-subtractive-ideal-Semiring R I
+      ( pullback-subtractive-ideal-Semiring R S f J) →
     leq-subtractive-ideal-Semiring S im-subtractive-ideal-Semiring J
   leq-im-subtractive-ideal-Semiring J =
     backward-implication (is-image-im-subtractive-ideal-Semiring J)
@@ -227,11 +260,14 @@ module _
   where
 
   preserves-order-im-subtractive-ideal-Semiring :
-    {l3 l4 : Level} (I : subtractive-ideal-Semiring l3 R) (J : subtractive-ideal-Semiring l4 R) →
+    {l3 l4 : Level} (I : subtractive-ideal-Semiring l3 R)
+    (J : subtractive-ideal-Semiring l4 R) →
     leq-subtractive-ideal-Semiring R I J →
-    leq-subtractive-ideal-Semiring S (im-subtractive-ideal-Semiring R S f I) (im-subtractive-ideal-Semiring R S f J)
+    leq-subtractive-ideal-Semiring S
+      ( im-subtractive-ideal-Semiring R S f I)
+      ( im-subtractive-ideal-Semiring R S f J)
   preserves-order-im-subtractive-ideal-Semiring I J H =
-    inclusion-precomp-ideal-family-of-elements-Semiring S
+    inclusion-precomp-subtractive-ideal-family-of-elements-Semiring S
       ( family-of-elements-im-subtractive-ideal-Semiring R S f J)
       ( map-inclusion-type-subtype
         ( subset-subtractive-ideal-Semiring R I)
@@ -329,68 +365,80 @@ module _
   {I : UU l3} (x : I → type-Semiring R)
   where
 
-  forward-inclusion-image-ideal-family-of-elements-Semiring :
+  forward-inclusion-image-subtractive-ideal-family-of-elements-Semiring :
     leq-subtractive-ideal-Semiring S
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-  forward-inclusion-image-ideal-family-of-elements-Semiring =
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+  forward-inclusion-image-subtractive-ideal-family-of-elements-Semiring =
     leq-im-subtractive-ideal-Semiring R S f
-      ( ideal-family-of-elements-Semiring R x)
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-      ( λ r H →
-        apply-universal-property-trunc-Prop H
-          ( subset-ideal-family-of-elements-Semiring S
-            ( map-hom-Semiring R S f ∘ x)
-            ( map-hom-Semiring R S f r))
-          ( λ { (l , refl) →
-                unit-trunc-Prop
-                  ( map-linear-combination-family-of-elements-Semiring'
-                    R S f x l ,
-                    inv
-                      ( preserves-ev-map-linear-combination-family-of-elements-Semiring'
-                        R S f x l))}))
+      ( subtractive-ideal-family-of-elements-Semiring R x)
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+      ( leq-subtractive-closure-ideal-Semiring R
+        ( ideal-family-of-elements-Semiring R x)
+        ( pullback-subtractive-ideal-Semiring R S f
+          ( subtractive-ideal-family-of-elements-Semiring S
+            ( map-hom-Semiring R S f ∘ x)))
+        ( leq-ideal-family-of-elements-Semiring R x
+          ( ideal-pullback-subtractive-ideal-Semiring R S f
+            ( subtractive-ideal-family-of-elements-Semiring S
+              ( map-hom-Semiring R S f ∘ x)))
+          ( contains-elements-subtractive-ideal-family-of-elements-Semiring S
+              ( map-hom-Semiring R S f ∘ x))))
 
-  backward-inclusion-image-ideal-family-of-elements-Semiring :
+  backward-inclusion-image-subtractive-ideal-family-of-elements-Semiring :
     leq-subtractive-ideal-Semiring S
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-  backward-inclusion-image-ideal-family-of-elements-Semiring =
-    leq-ideal-family-of-elements-Semiring S
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+  backward-inclusion-image-subtractive-ideal-family-of-elements-Semiring =
+    leq-subtractive-ideal-family-of-elements-Semiring S
       ( map-hom-Semiring R S f ∘ x)
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-      ( λ i →
-        contains-elements-im-subtractive-ideal-Semiring R S f
-          ( ideal-family-of-elements-Semiring R x)
-          ( contains-elements-ideal-family-of-elements-Semiring R x i))
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+      ( contains-elements-im-subtractive-ideal-Semiring R S f
+          ( subtractive-ideal-family-of-elements-Semiring R x) ∘ 
+        contains-elements-subtractive-ideal-family-of-elements-Semiring R x)
 
-  compute-image-ideal-family-of-elements-Semiring :
+  compute-image-subtractive-ideal-family-of-elements-Semiring :
     has-same-elements-subtractive-ideal-Semiring S
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-  pr1 (compute-image-ideal-family-of-elements-Semiring s) =
-    forward-inclusion-image-ideal-family-of-elements-Semiring s
-  pr2 (compute-image-ideal-family-of-elements-Semiring s) =
-    backward-inclusion-image-ideal-family-of-elements-Semiring s
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+  pr1 (compute-image-subtractive-ideal-family-of-elements-Semiring s) =
+    forward-inclusion-image-subtractive-ideal-family-of-elements-Semiring s
+  pr2 (compute-image-subtractive-ideal-family-of-elements-Semiring s) =
+    backward-inclusion-image-subtractive-ideal-family-of-elements-Semiring s
 
-  is-image-ideal-family-of-elements-Semiring :
+  is-image-subtractive-ideal-family-of-elements-Semiring :
     is-image-subtractive-ideal-Semiring R S f
-      ( ideal-family-of-elements-Semiring R x)
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-  is-image-ideal-family-of-elements-Semiring =
+      ( subtractive-ideal-family-of-elements-Semiring R x)
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+  is-image-subtractive-ideal-family-of-elements-Semiring =
     is-image-has-same-elements-subtractive-ideal-Semiring R S f
-      ( ideal-family-of-elements-Semiring R x)
-      ( ideal-family-of-elements-Semiring S (map-hom-Semiring R S f ∘ x))
-      ( compute-image-ideal-family-of-elements-Semiring)
+      ( subtractive-ideal-family-of-elements-Semiring R x)
+      ( subtractive-ideal-family-of-elements-Semiring S
+        ( map-hom-Semiring R S f ∘ x))
+      ( compute-image-subtractive-ideal-family-of-elements-Semiring)
 
-  is-ideal-generated-by-family-of-elements-image-ideal-family-of-elements-Semiring :
-    is-ideal-generated-by-family-of-elements-Semiring S
+  is-subtractive-ideal-generated-by-family-of-elements-image-subtractive-ideal-family-of-elements-Semiring :
+    is-subtractive-ideal-generated-by-family-of-elements-Semiring S
       ( map-hom-Semiring R S f ∘ x)
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-  is-ideal-generated-by-family-of-elements-image-ideal-family-of-elements-Semiring =
-    is-ideal-generated-by-family-of-elements-has-same-elements-Semiring S
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+  is-subtractive-ideal-generated-by-family-of-elements-image-subtractive-ideal-family-of-elements-Semiring
+    =
+    is-subtractive-ideal-generated-by-family-of-elements-has-same-elements-Semiring
+      ( S)
       ( map-hom-Semiring R S f ∘ x)
-      ( im-subtractive-ideal-Semiring R S f (ideal-family-of-elements-Semiring R x))
-      ( inv-iff ∘ compute-image-ideal-family-of-elements-Semiring)
+      ( im-subtractive-ideal-Semiring R S f
+        ( subtractive-ideal-family-of-elements-Semiring R x))
+      ( inv-iff ∘ compute-image-subtractive-ideal-family-of-elements-Semiring)
 ```
 
 ## References

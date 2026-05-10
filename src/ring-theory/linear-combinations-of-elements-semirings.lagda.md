@@ -440,7 +440,7 @@ module _
     is-zero-Semiring R
       ( ev-monoid-linear-combination-Semiring R
         ( additive-monoid-Semiring R)
-        ( action-additive-monoid-with-semiring-action-Semiring R)
+        ( two-sided-mul-Semiring R)
         ( x))
   is-zero-ev-is-linear-combination-of-zeroes-Semiring =
     is-unit-ev-is-linear-combination-of-units-Monoid-With-Semiring-Action R

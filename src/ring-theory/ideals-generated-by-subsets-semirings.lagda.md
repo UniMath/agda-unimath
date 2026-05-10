@@ -163,8 +163,7 @@ module _
         unit-trunc-Prop
           ( is-linear-combination-mul-monoid-Semiring R
             ( additive-monoid-Semiring R)
-            ( λ r (x , p) u →
-              action-additive-monoid-with-semiring-action-Semiring R r x u)
+            ( λ r (x , p) u → two-sided-mul-Semiring R r x u)
             ( x)
             ( y)
             ( H')
@@ -180,11 +179,8 @@ module _
         unit-trunc-Prop
           ( is-linear-combination-action-Semiring R
             ( additive-monoid-with-semiring-action-Semiring R)
-            ( λ r (x , H) u →
-              action-additive-monoid-with-semiring-action-Semiring R r x u)
-            ( λ s r (x , H) →
-              associative-action-additive-monoid-with-semiring-action-Semiring
-                R s r x)
+            ( λ r (x , H) u → two-sided-mul-Semiring R r x u)
+            ( λ s r (x , H) → associative-two-sided-mul-Semiring R s r x)
             ( _)
             ( _)
             ( _)
