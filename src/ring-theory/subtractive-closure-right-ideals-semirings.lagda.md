@@ -28,7 +28,7 @@ open import order-theory.order-preserving-maps-large-posets
 open import order-theory.reflective-galois-connections-large-posets
 
 open import ring-theory.right-ideals-semirings
-open import ring-theory.joins-right-ideals-semirings
+open import ring-theory.joins-families-of-right-ideals-semirings
 open import ring-theory.poset-of-right-ideals-semirings
 open import ring-theory.poset-of-subtractive-right-ideals-semirings
 open import ring-theory.semirings
