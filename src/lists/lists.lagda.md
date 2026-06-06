@@ -56,7 +56,7 @@ is-cons-list : {l : Level} {A : UU l} → list A → UU l
 is-cons-list {l1} {A} l = Σ (A × list A) (λ (a , l') → l ＝ cons a l')
 ```
 
-## The induction principle of the type of lists
+### The induction principle of the type of lists
 
 ```agda
 module _
@@ -104,92 +104,87 @@ length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list 0 (λ a → succ-ℕ)
 ```
 
-### The elementhood predicate on lists
-
-```agda
-infix 6 _∈-list_
-
-data _∈-list_ {l : Level} {A : UU l} : A → list A → UU l where
-  is-head : (a : A) (l : list A) → a ∈-list (cons a l)
-  is-in-tail : (a x : A) (l : list A) → a ∈-list l → a ∈-list (cons x l)
-```
-
 ## Properties
 
 ### A list that uses cons is not nil
 
 ```agda
-is-nonnil-cons-list :
-  {l : Level} {A : UU l} →
-  (a : A) → (l : list A) → is-nonnil-list (cons a l)
-is-nonnil-cons-list a l ()
+module _
+  {l : Level}
+  {A : UU l}
+  where
 
-is-nonnil-is-cons-list :
-  {l : Level} {A : UU l} →
-  (l : list A) → is-cons-list l → is-nonnil-list l
-is-nonnil-is-cons-list l ((a , l') , refl) q =
-  is-nonnil-cons-list a l' q
+  is-nonnil-cons-list :
+    (a : A) → (l : list A) → is-nonnil-list (cons a l)
+  is-nonnil-cons-list a l ()
+
+  is-nonnil-is-cons-list :
+    (l : list A) → is-cons-list l → is-nonnil-list l
+  is-nonnil-is-cons-list l ((a , l') , refl) q =
+    is-nonnil-cons-list a l' q
 ```
 
-### A list that uses cons is not nil
+### A list that is nonnil uses cons
 
 ```agda
-is-cons-is-nonnil-list :
-  {l : Level} {A : UU l} →
-  (l : list A) → is-nonnil-list l → is-cons-list l
-is-cons-is-nonnil-list nil p = ex-falso (p refl)
-is-cons-is-nonnil-list (cons x l) p = ((x , l) , refl)
+module _
+  {l : Level}
+  {A : UU l}
+  where
 
-head-is-nonnil-list :
-  {l : Level} {A : UU l} →
-  (l : list A) → is-nonnil-list l → A
-head-is-nonnil-list l p =
-  pr1 (pr1 (is-cons-is-nonnil-list l p))
+  is-cons-is-nonnil-list :
+    (l : list A) → is-nonnil-list l → is-cons-list l
+  is-cons-is-nonnil-list nil p = ex-falso (p refl)
+  is-cons-is-nonnil-list (cons x l) p = ((x , l) , refl)
 
-tail-is-nonnil-list :
-  {l : Level} {A : UU l} →
-  (l : list A) → is-nonnil-list l → list A
-tail-is-nonnil-list l p =
-  pr2 (pr1 (is-cons-is-nonnil-list l p))
+  head-is-nonnil-list :
+    (l : list A) → is-nonnil-list l → A
+  head-is-nonnil-list l p =
+    pr1 (pr1 (is-cons-is-nonnil-list l p))
+
+  tail-is-nonnil-list :
+    (l : list A) → is-nonnil-list l → list A
+  tail-is-nonnil-list l p =
+    pr2 (pr1 (is-cons-is-nonnil-list l p))
 ```
 
 ### The length operation behaves well with respect to the other list operations
 
 ```agda
-length-nil :
-  {l1 : Level} {A : UU l1} →
-  length-list {A = A} nil ＝ zero-ℕ
-length-nil = refl
+module _
+  {l1 : Level}
+  {A : UU l1}
+  where
 
-is-nil-is-zero-length-list :
-  {l1 : Level} {A : UU l1}
-  (l : list A) →
-  is-zero-ℕ (length-list l) →
-  is-nil-list l
-is-nil-is-zero-length-list nil p = refl
+  length-nil :
+    length-list {A = A} nil ＝ zero-ℕ
+  length-nil = refl
 
-is-nonnil-is-nonzero-length-list :
-  {l1 : Level} {A : UU l1}
-  (l : list A) →
-  is-nonzero-ℕ (length-list l) →
-  is-nonnil-list l
-is-nonnil-is-nonzero-length-list nil p q = p refl
-is-nonnil-is-nonzero-length-list (cons x l) p ()
+  is-nil-is-zero-length-list :
+    (l : list A) →
+    is-zero-ℕ (length-list l) →
+    is-nil-list l
+  is-nil-is-zero-length-list nil p = refl
 
-is-nonzero-length-is-nonnil-list :
-  {l1 : Level} {A : UU l1}
-  (l : list A) →
-  is-nonnil-list l →
-  is-nonzero-ℕ (length-list l)
-is-nonzero-length-is-nonnil-list nil p q = p refl
+  is-nonnil-is-nonzero-length-list :
+    (l : list A) →
+    is-nonzero-ℕ (length-list l) →
+    is-nonnil-list l
+  is-nonnil-is-nonzero-length-list nil p q = p refl
+  is-nonnil-is-nonzero-length-list (cons x l) p ()
 
-lenght-tail-is-nonnil-list :
-  {l1 : Level} {A : UU l1}
-  (l : list A) → (p : is-nonnil-list l) →
-  succ-ℕ (length-list (tail-is-nonnil-list l p)) ＝
-    length-list l
-lenght-tail-is-nonnil-list nil p = ex-falso (p refl)
-lenght-tail-is-nonnil-list (cons x l) p = refl
+  is-nonzero-length-is-nonnil-list :
+    (l : list A) →
+    is-nonnil-list l →
+    is-nonzero-ℕ (length-list l)
+  is-nonzero-length-is-nonnil-list nil p q = p refl
+
+  length-tail-is-nonnil-list :
+    (l : list A) → (p : is-nonnil-list l) →
+    succ-ℕ (length-list (tail-is-nonnil-list l p)) ＝
+      length-list l
+  length-tail-is-nonnil-list nil p = ex-falso (p refl)
+  length-tail-is-nonnil-list (cons x l) p = refl
 ```
 
 ### Head and tail operations
@@ -198,26 +193,27 @@ We define the head and tail operations, and we define the operations of picking
 and removing the last element from a list.
 
 ```agda
-head-snoc-list :
-  {l : Level} {A : UU l} (l : list A) → A → A
-head-snoc-list nil a = a
-head-snoc-list (cons h l) a = h
+module _
+  {l : Level}
+  {A : UU l}
+  where
 
-head-list :
-  {l1 : Level} {A : UU l1} → list A → list A
-head-list nil = nil
-head-list (cons a x) = unit-list a
+  head-snoc-list : (l : list A) → A → A
+  head-snoc-list nil a = a
+  head-snoc-list (cons h l) a = h
 
-tail-list :
-  {l1 : Level} {A : UU l1} → list A → list A
-tail-list nil = nil
-tail-list (cons a x) = x
+  head-list : list A → list A
+  head-list nil = nil
+  head-list (cons a x) = unit-list a
 
-last-element-list :
-  {l1 : Level} {A : UU l1} → list A → list A
-last-element-list nil = nil
-last-element-list (cons a nil) = unit-list a
-last-element-list (cons a (cons b x)) = last-element-list (cons b x)
+  tail-list : list A → list A
+  tail-list nil = nil
+  tail-list (cons a x) = x
+
+  last-element-list : list A → list A
+  last-element-list nil = nil
+  last-element-list (cons a nil) = unit-list a
+  last-element-list (cons a (cons b x)) = last-element-list (cons b x)
 ```
 
 ### Removing the last element of a list
@@ -234,25 +230,26 @@ remove-last-element-list (cons a (cons b x)) =
 ### Properties of heads and tails and their duals
 
 ```agda
-head-snoc-snoc-list :
-  {l1 : Level} {A : UU l1} (x : list A) (a : A) (b : A) →
-  head-list (snoc (snoc x a) b) ＝ head-list (snoc x a)
-head-snoc-snoc-list nil a b = refl
-head-snoc-snoc-list (cons c x) a b = refl
+abstract
+  head-snoc-snoc-list :
+    {l1 : Level} {A : UU l1} (x : list A) (a : A) (b : A) →
+    head-list (snoc (snoc x a) b) ＝ head-list (snoc x a)
+  head-snoc-snoc-list nil a b = refl
+  head-snoc-snoc-list (cons c x) a b = refl
 
-tail-snoc-snoc-list :
-  {l1 : Level} {A : UU l1} (x : list A) (a : A) (b : A) →
-  tail-list (snoc (snoc x a) b) ＝ snoc (tail-list (snoc x a)) b
-tail-snoc-snoc-list nil a b = refl
-tail-snoc-snoc-list (cons c x) a b = refl
+  tail-snoc-snoc-list :
+    {l1 : Level} {A : UU l1} (x : list A) (a : A) (b : A) →
+    tail-list (snoc (snoc x a) b) ＝ snoc (tail-list (snoc x a)) b
+  tail-snoc-snoc-list nil a b = refl
+  tail-snoc-snoc-list (cons c x) a b = refl
 
-last-element-snoc :
-  {l1 : Level} {A : UU l1} (x : list A) (a : A) →
-  last-element-list (snoc x a) ＝ unit-list a
-last-element-snoc nil a = refl
-last-element-snoc (cons b nil) a = refl
-last-element-snoc (cons b (cons c x)) a =
-  last-element-snoc (cons c x) a
+  last-element-snoc :
+    {l1 : Level} {A : UU l1} (x : list A) (a : A) →
+    last-element-list (snoc x a) ＝ unit-list a
+  last-element-snoc nil a = refl
+  last-element-snoc (cons b nil) a = refl
+  last-element-snoc (cons b (cons c x)) a =
+    last-element-snoc (cons c x) a
 ```
 
 ### Algebra structure on the type of lists of elements of `A`
@@ -270,17 +267,18 @@ map-inv-algebra-list :
 map-inv-algebra-list A nil = inr star
 map-inv-algebra-list A (cons a x) = inl (pair a x)
 
-is-section-map-inv-algebra-list :
-  {l1 : Level} (A : UU l1) →
-  (map-algebra-list A ∘ map-inv-algebra-list A) ~ id
-is-section-map-inv-algebra-list A nil = refl
-is-section-map-inv-algebra-list A (cons a x) = refl
+abstract
+  is-section-map-inv-algebra-list :
+    {l1 : Level} (A : UU l1) →
+    (map-algebra-list A ∘ map-inv-algebra-list A) ~ id
+  is-section-map-inv-algebra-list A nil = refl
+  is-section-map-inv-algebra-list A (cons a x) = refl
 
-is-retraction-map-inv-algebra-list :
-  {l1 : Level} (A : UU l1) →
-  (map-inv-algebra-list A ∘ map-algebra-list A) ~ id
-is-retraction-map-inv-algebra-list A (inl (a , x)) = refl
-is-retraction-map-inv-algebra-list A (inr star) = refl
+  is-retraction-map-inv-algebra-list :
+    {l1 : Level} (A : UU l1) →
+    (map-inv-algebra-list A ∘ map-algebra-list A) ~ id
+  is-retraction-map-inv-algebra-list A (inl (a , x)) = refl
+  is-retraction-map-inv-algebra-list A (inr star) = refl
 
 is-equiv-map-algebra-list :
   {l1 : Level} (A : UU l1) → is-equiv (map-algebra-list A)
@@ -290,3 +288,7 @@ is-equiv-map-algebra-list A =
     ( is-section-map-inv-algebra-list A)
     ( is-retraction-map-inv-algebra-list A)
 ```
+
+## See also
+
+- [Equality of lists](lists.equality-lists.md)
