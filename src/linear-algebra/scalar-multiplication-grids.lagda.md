@@ -1,7 +1,7 @@
-# Scalar multiplication on matrices
+# Scalar multiplication on grids
 
 ```agda
-module linear-algebra.scalar-multiplication-matrices where
+module linear-algebra.scalar-multiplication-grids where
 ```
 
 <details><summary>Imports</summary>
@@ -11,15 +11,15 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.matrices
+open import linear-algebra.grids
 open import linear-algebra.scalar-multiplication-tuples
 ```
 
 </details>
 
 ```agda
-scalar-mul-matrix :
+scalar-mul-grid :
   {l1 l2 : Level} {B : UU l1} {A : UU l2} {m n : ℕ} →
-  (B → A → A) → B → matrix A m n → matrix A m n
-scalar-mul-matrix μ = scalar-mul-tuple (scalar-mul-tuple μ)
+  (B → A → A) → B → grid A m n → grid A m n
+scalar-mul-grid μ = scalar-mul-tuple (scalar-mul-tuple μ)
 ```
