@@ -84,8 +84,7 @@ module _
 
   diff-ℝ-Vector-Space :
     type-ℝ-Vector-Space → type-ℝ-Vector-Space → type-ℝ-Vector-Space
-  diff-ℝ-Vector-Space v w =
-    add-ℝ-Vector-Space v (neg-ℝ-Vector-Space w)
+  diff-ℝ-Vector-Space = diff-Vector-Space (heyting-field-ℝ l1) V
 
   associative-add-ℝ-Vector-Space :
     (v w x : type-ℝ-Vector-Space) →
@@ -128,6 +127,13 @@ module _
     (v : type-ℝ-Vector-Space) → neg-ℝ-Vector-Space (neg-ℝ-Vector-Space v) ＝ v
   neg-neg-ℝ-Vector-Space = neg-neg-Ab ab-ℝ-Vector-Space
 
+  interchange-add-diff-ℝ-Vector-Space :
+    (x y z w : type-ℝ-Vector-Space) →
+    diff-ℝ-Vector-Space (add-ℝ-Vector-Space x y) (add-ℝ-Vector-Space z w) ＝
+    add-ℝ-Vector-Space (diff-ℝ-Vector-Space x z) (diff-ℝ-Vector-Space y w)
+  interchange-add-diff-ℝ-Vector-Space =
+    interchange-add-diff-Vector-Space (heyting-field-ℝ l1) V
+
   left-unit-law-mul-ℝ-Vector-Space :
     (v : type-ℝ-Vector-Space) →
     mul-ℝ-Vector-Space (raise-ℝ l1 one-ℝ) v ＝ v
@@ -140,6 +146,13 @@ module _
     add-ℝ-Vector-Space (mul-ℝ-Vector-Space r v) (mul-ℝ-Vector-Space r w)
   left-distributive-mul-add-ℝ-Vector-Space =
     left-distributive-mul-add-Vector-Space (heyting-field-ℝ l1) V
+
+  left-distributive-mul-diff-ℝ-Vector-Space :
+    (r : ℝ l1) (v w : type-ℝ-Vector-Space) →
+    mul-ℝ-Vector-Space r (diff-ℝ-Vector-Space v w) ＝
+    diff-ℝ-Vector-Space (mul-ℝ-Vector-Space r v) (mul-ℝ-Vector-Space r w)
+  left-distributive-mul-diff-ℝ-Vector-Space =
+    left-distributive-mul-diff-Vector-Space (heyting-field-ℝ l1) V
 
   right-distributive-mul-add-ℝ-Vector-Space :
     (r s : ℝ l1) (v : type-ℝ-Vector-Space) →
@@ -154,6 +167,13 @@ module _
     mul-ℝ-Vector-Space r (mul-ℝ-Vector-Space s v)
   associative-mul-ℝ-Vector-Space =
     associative-mul-Vector-Space (heyting-field-ℝ l1) V
+
+  left-swap-mul-ℝ-Vector-Space :
+    (r s : ℝ l1) (v : type-ℝ-Vector-Space) →
+    mul-ℝ-Vector-Space r (mul-ℝ-Vector-Space s v) ＝
+    mul-ℝ-Vector-Space s (mul-ℝ-Vector-Space r v)
+  left-swap-mul-ℝ-Vector-Space =
+    left-swap-mul-Vector-Space (heyting-field-ℝ l1) V
 
   left-zero-law-mul-ℝ-Vector-Space :
     (v : type-ℝ-Vector-Space) →
