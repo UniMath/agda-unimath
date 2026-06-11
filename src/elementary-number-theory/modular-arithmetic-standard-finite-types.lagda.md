@@ -72,7 +72,7 @@ cong-nat-succ-Fin (succ-ℕ k) (inr _) =
     { nat-Fin (succ-ℕ k) (zero-Fin k)}
     { zero-ℕ}
     { succ-ℕ k}
-    ( is-zero-nat-zero-Fin {k})
+    ( nat-zero-Fin k)
     ( cong-zero-ℕ' (succ-ℕ k))
 
 cong-nat-mod-succ-ℕ :
@@ -181,7 +181,7 @@ is-surjective-mod-succ-ℕ k =
 leq-nat-mod-succ-ℕ :
   (k x : ℕ) → leq-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
 leq-nat-mod-succ-ℕ k zero-ℕ =
-  concatenate-eq-leq-ℕ zero-ℕ (is-zero-nat-zero-Fin {k}) (refl-leq-ℕ zero-ℕ)
+  concatenate-eq-leq-ℕ zero-ℕ (nat-zero-Fin k) (refl-leq-ℕ zero-ℕ)
 leq-nat-mod-succ-ℕ k (succ-ℕ x) =
   transitive-leq-ℕ
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
@@ -611,8 +611,8 @@ left-zero-law-mul-Fin k x =
       ( succ-ℕ k)
       { (nat-Fin (succ-ℕ k) (zero-Fin k)) *ℕ (nat-Fin (succ-ℕ k) x)}
       { nat-Fin (succ-ℕ k) (zero-Fin k)}
-      ( ( ap (_*ℕ (nat-Fin (succ-ℕ k) x)) (is-zero-nat-zero-Fin {k})) ∙
-        ( inv (is-zero-nat-zero-Fin {k}))))) ∙
+      ( ( ap (_*ℕ (nat-Fin (succ-ℕ k) x)) (nat-zero-Fin k)) ∙
+        ( inv (nat-zero-Fin k))))) ∙
   ( is-section-nat-Fin k (zero-Fin k))
 
 right-zero-law-mul-Fin :

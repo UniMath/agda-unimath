@@ -150,7 +150,7 @@ abstract
 
   is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
   is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
-  is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
+  is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (nat-zero-Fin k)
 
   int-ℤ-Mod-bounded :
     (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
