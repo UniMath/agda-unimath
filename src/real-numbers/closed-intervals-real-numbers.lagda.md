@@ -14,6 +14,7 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -38,6 +39,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.nonnegative-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.short-map-binary-maximum-real-numbers
 open import real-numbers.short-map-binary-minimum-real-numbers
@@ -84,12 +86,36 @@ lower-bound-closed-interval-ℝ : {l1 l2 : Level} → closed-interval-ℝ l1 l2 
 lower-bound-closed-interval-ℝ =
   lower-bound-closed-interval-Large-Poset ℝ-Large-Poset
 
+lower-bound-type-closed-interval-ℝ :
+  {l1 l2 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
+  type-closed-interval-ℝ l1 [a,b]
+lower-bound-type-closed-interval-ℝ =
+  lower-bound-type-closed-interval-Large-Poset ℝ-Large-Poset
+
+upper-bound-type-closed-interval-ℝ :
+  {l1 l2 : Level} ([a,b] : closed-interval-ℝ l1 l2) →
+  type-closed-interval-ℝ l2 [a,b]
+upper-bound-type-closed-interval-ℝ =
+  upper-bound-type-closed-interval-Large-Poset ℝ-Large-Poset
+
 upper-bound-closed-interval-ℝ : {l1 l2 : Level} → closed-interval-ℝ l1 l2 → ℝ l2
 upper-bound-closed-interval-ℝ =
   upper-bound-closed-interval-Large-Poset ℝ-Large-Poset
 ```
 
 ## Properties
+
+### The width of a closed interval
+
+```agda
+nonnegative-width-closed-interval-ℝ :
+  {l1 l2 : Level} → closed-interval-ℝ l1 l2 → ℝ⁰⁺ (l1 ⊔ l2)
+nonnegative-width-closed-interval-ℝ (_ , a≤b) = nonnegative-diff-leq-ℝ a≤b
+
+width-closed-interval-ℝ :
+  {l1 l2 : Level} → closed-interval-ℝ l1 l2 → ℝ (l1 ⊔ l2)
+width-closed-interval-ℝ = real-ℝ⁰⁺ ∘ nonnegative-width-closed-interval-ℝ
+```
 
 ### Closed intervals in the real numbers are closed in the metric space of real numbers
 
