@@ -543,6 +543,24 @@ module _
     is-unit-right-div-eq-Group (group-Ab A)
 ```
 
+### Unit laws of right subtraction
+
+```agda
+module _
+  {l : Level} (G : Ab l) (x : type-Ab G)
+  where abstract
+
+  right-zero-law-right-subtraction-Ab :
+    right-subtraction-Ab G x (zero-Ab G) ＝ x
+  right-zero-law-right-subtraction-Ab =
+    right-unit-law-right-div-Group (group-Ab G) x
+
+  left-unit-law-right-subtraction-Ab :
+    right-subtraction-Ab G (zero-Ab G) x ＝ neg-Ab G x
+  left-unit-law-right-subtraction-Ab =
+    left-unit-law-right-div-Group (group-Ab G) x
+```
+
 ### If `x + y = 0`, then `y = -x`
 
 ```agda

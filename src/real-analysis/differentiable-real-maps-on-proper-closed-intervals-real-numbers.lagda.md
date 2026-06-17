@@ -505,7 +505,7 @@ module _
                 ( f' x)
                 ( f' y)
                 ( reflects-leq-right-mul-ℝ⁺
-                  ( dist-ℝ xℝ yℝ , is-positive-dist-apart-ℝ _ _ x#y)
+                  ( dist-ℝ xℝ yℝ , is-positive-dist-apart-ℝ x#y)
                   ( _)
                   ( _)
                   ( chain-of-inequalities

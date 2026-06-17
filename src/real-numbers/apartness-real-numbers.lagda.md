@@ -303,8 +303,8 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {x : ℝ l1}
+  {y : ℝ l2}
   where
 
   abstract
@@ -372,8 +372,6 @@ module _
       apart-located-metric-space-ℝ x y → apart-ℝ x y
     apart-apart-located-metric-space-ℝ x#y =
       apart-is-positive-dist-ℝ
-        ( x)
-        ( y)
         ( is-positive-exists-not-le-positive-rational-ℝ
           ( dist-ℝ x y)
           ( map-tot-exists

@@ -119,6 +119,9 @@ module _
   add-Ring' : type-Ring R → type-Ring R → type-Ring R
   add-Ring' = add-Ab' (ab-Ring R)
 
+  diff-Ring : type-Ring R → type-Ring R → type-Ring R
+  diff-Ring = right-subtraction-Ab (ab-Ring R)
+
   ap-add-Ring :
     {x y x' y' : type-Ring R} →
     x ＝ x' → y ＝ y' → add-Ring x y ＝ add-Ring x' y'

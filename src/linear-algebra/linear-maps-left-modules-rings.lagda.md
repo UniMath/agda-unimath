@@ -403,6 +403,30 @@ module _
       eq-htpy-linear-map-left-module-Ring R M N _ _ refl-htpy
 ```
 
+### Linear maps preserve differences
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  (f : linear-map-left-module-Ring R M N)
+  where abstract
+
+  preserves-diff-linear-map-left-module-Ring :
+    {x y : type-left-module-Ring R M} →
+    map-linear-map-left-module-Ring R M N f (diff-left-module-Ring R M x y) ＝
+    diff-left-module-Ring R N
+      ( map-linear-map-left-module-Ring R M N f x)
+      ( map-linear-map-left-module-Ring R M N f y)
+  preserves-diff-linear-map-left-module-Ring =
+    preserves-right-subtraction-hom-Ab
+      ( ab-left-module-Ring R M)
+      ( ab-left-module-Ring R N)
+      ( hom-ab-linear-map-left-module-Ring R M N f)
+```
+
 ## See also
 
 - [Linear maps between left modules over commutative rings](linear-algebra.linear-maps-left-modules-commutative-rings.md)
