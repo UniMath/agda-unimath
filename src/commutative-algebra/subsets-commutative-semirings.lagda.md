@@ -85,6 +85,13 @@ module _
     is-in-subset-Commutative-Semiring (inclusion-subset-Commutative-Semiring x)
   is-in-subset-inclusion-subset-Commutative-Semiring =
     is-in-subtype-inclusion-subtype S
+
+  is-closed-under-eq-subset-Commutative-Semiring' :
+    {x y : type-Commutative-Semiring A} →
+    is-in-subset-Commutative-Semiring y → (x ＝ y) →
+    is-in-subset-Commutative-Semiring x
+  is-closed-under-eq-subset-Commutative-Semiring' =
+    is-closed-under-eq-subtype' S
 ```
 
 ### The condition that a subset contains zero
