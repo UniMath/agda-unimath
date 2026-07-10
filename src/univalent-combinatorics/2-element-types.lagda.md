@@ -694,71 +694,14 @@ module _
   where
 
   has-no-fixed-points-swap-2-Element-Type :
-    {x : type-2-Element-Type X} → map-equiv (swap-2-Element-Type X) x ≠ x
-  has-no-fixed-points-swap-2-Element-Type {x} P =
-    apply-universal-property-trunc-Prop
-      ( has-two-elements-type-2-Element-Type X)
-      ( empty-Prop)
-      ( λ h →
-        is-not-identity-swap-2-Element-Type X
-          (eq-htpy-equiv
-            (λ y →
-              f
-                ( inv-equiv h)
-                ( y)
-                ( map-inv-equiv h x)
-                ( map-inv-equiv h y)
-                ( map-inv-equiv h (map-equiv (swap-2-Element-Type X) y))
-                ( refl)
-                ( refl)
-                ( refl))))
+    {x : type-2-Element-Type X} → map-swap-2-Element-Type X x ≠ x
+  has-no-fixed-points-swap-2-Element-Type {x} eq = neq-inl-inr p
     where
-    f :
-      ( h : type-2-Element-Type X ≃ Fin 2)
-      ( y : type-2-Element-Type X) →
-      ( k1 k2 k3 : Fin 2) →
-        map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
-        map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
-        map-equiv (swap-2-Element-Type X) y ＝ y
-    f h y (inl (inr star)) (inl (inr star)) k3 p q r =
-      tr
-        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-equiv h (p ∙ inv q))
-        ( P)
-    f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
-      ex-falso
-        ( neq-inl-inr
-          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
-            ( ap
-              ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-equiv h (p ∙ inv r)) ∙
-              ( ( ap
-                  ( map-equiv h)
-                  ( is-involution-aut-2-element-type X
-                    ( swap-2-Element-Type X) y)) ∙
-                ( q))))))
-    f h y (inl (inr star)) (inr star) (inr star) p q r =
-      ( is-injective-equiv h (r ∙ inv q))
-    f h y (inr star) (inl (inr star)) (inl (inr star)) p q r =
-      ( is-injective-equiv h (r ∙ inv q))
-    f h y (inr star) (inl (inr star)) (inr star) p q r =
-      ex-falso
-        ( neq-inr-inl
-          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
-            ( ap
-              ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-equiv h (p ∙ inv r)) ∙
-              ( ( ap
-                  ( map-equiv h)
-                  ( is-involution-aut-2-element-type X
-                    ( swap-2-Element-Type X)
-                    ( y))) ∙
-                ( q))))))
-    f h y (inr star) (inr star) k3 p q r =
-      tr
-        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-equiv h (p ∙ inv q))
-        ( P)
+    p : zero-Fin 1 ＝ one-Fin 1
+    p =
+      is-injective-equiv
+        ( equiv-point-2-Element-Type X x)
+        ( compute-map-equiv-point-2-Element-Type X x ∙ inv eq)
 ```
 
 ### Evaluating an automorphism at `0 : Fin 2` is a group homomorphism
