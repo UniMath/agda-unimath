@@ -7,22 +7,22 @@ module synthetic-homotopy-theory.acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.identity-types
-open import foundation-core.function-types
-
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
-open import foundation.evaluation-functions
 open import foundation.equivalences
 open import foundation.equivalences-contractible-types
+open import foundation.evaluation-functions
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.function-types
+open import foundation-core.identity-types
 
 open import structured-types.constant-pointed-maps
 open import structured-types.pointed-maps
@@ -31,8 +31,8 @@ open import structured-types.pointed-universal-property-contractible-types
 
 open import synthetic-homotopy-theory.functoriality-suspensions
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
