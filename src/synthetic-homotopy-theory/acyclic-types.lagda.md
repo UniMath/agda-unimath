@@ -104,8 +104,9 @@ module _
   (ac : is-acyclic (type-Pointed-Type (Ω A)))
   where
 
-  is-contr-pointed-endomaps-acyclic-loop-space : is-contr (Ω A →∗ Ω A)
-  is-contr-pointed-endomaps-acyclic-loop-space =
+  is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space :
+    is-contr (Ω A →∗ Ω A)
+  is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space =
     is-contr-equiv
       ( suspension-Pointed-Type (Ω A) →∗ A)
       ( inv-equiv (equiv-transpose-suspension-loop-adjunction (Ω A) A))
@@ -114,21 +115,25 @@ module _
         ( ac)
         ( A))
 
-  is-null-homotopic-endomap-acyclic-loop-space :
+  is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space :
     (f : Ω A →∗ Ω A) → (p : type-Pointed-Type (Ω A)) →
     map-pointed-map f p ＝ refl
-  is-null-homotopic-endomap-acyclic-loop-space f p =
+  is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space f p =
     ap
       ( ev p ∘ map-pointed-map)
       ( eq-is-contr
-        ( is-contr-pointed-endomaps-acyclic-loop-space)
+        ( is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space)
         { f}
         { constant-pointed-map (Ω A) (Ω A)})
 
   is-contr-is-acyclic-loop-space : is-contr (type-Pointed-Type (Ω A))
   is-contr-is-acyclic-loop-space =
     point-Pointed-Type (Ω A) ,
-    (λ p → inv (is-null-homotopic-endomap-acyclic-loop-space id-pointed-map p))
+    (λ p →
+      inv
+        ( is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space
+            ( id-pointed-map)
+            ( p)))
 ```
 
 ### Acyclic types are inhabited
