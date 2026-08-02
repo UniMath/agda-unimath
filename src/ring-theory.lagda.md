@@ -83,6 +83,8 @@ open import ring-theory.precategory-of-rings public
 open import ring-theory.precategory-of-semirings public
 open import ring-theory.products-ideals-rings public
 open import ring-theory.products-left-ideals-rings public
+open import ring-theory.products-of-finite-sequences-of-elements-rings public
+open import ring-theory.products-of-finite-sequences-of-elements-semirings public
 open import ring-theory.products-right-ideals-rings public
 open import ring-theory.products-rings public
 open import ring-theory.products-subsets-rings public
