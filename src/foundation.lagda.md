@@ -285,6 +285,9 @@ open import foundation.images-subtypes public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
+open import foundation.induced-large-binary-relations-large-subtypes public
+open import foundation.induced-large-equivalence-relations-large-subtypes public
+open import foundation.induced-large-similarity-relations-large-subtypes public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.inequality-booleans public
 open import foundation.inequality-truncation-levels public
@@ -321,6 +324,7 @@ open import foundation.large-identity-types public
 open import foundation.large-locale-of-propositions public
 open import foundation.large-locale-of-subtypes public
 open import foundation.large-similarity-relations public
+open import foundation.large-subtypes public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
@@ -478,6 +482,7 @@ open import foundation.structure public
 open import foundation.structure-identity-principle public
 open import foundation.structured-equality-duality public
 open import foundation.structured-type-duality public
+open import foundation.subsets-cumulative-large-sets public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
 open import foundation.subtype-duality public
