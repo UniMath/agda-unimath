@@ -10,6 +10,7 @@ module order-theory.strict-orders where
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-stable-equality
 open import foundation.empty-types
 open import foundation.equivalence-relations
 open import foundation.function-extensionality
@@ -104,6 +105,36 @@ module _
 
 ## Properties
 
+### Extensional incomparability implies extensionality
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Strict-Preorder l1 l2)
+  (eq-inc-A :
+    (x y : type-Strict-Preorder A) →
+    ¬ le-Strict-Preorder A x y →
+    ¬ le-Strict-Preorder A y x →
+    x ＝ y)
+  where
+
+  extensionality-eq-incomparable-Strict-Preorder :
+    extensionality-principle-Strict-Preorder A
+  extensionality-eq-incomparable-Strict-Preorder x y s =
+    eq-inc-A x y
+      ( λ x<y → is-irreflexive-le-Strict-Preorder A y (pr1 (pr2 s y) x<y))
+      ( λ y<x → is-irreflexive-le-Strict-Preorder A x (pr2 (pr2 s x) y<x))
+
+  has-double-negation-stable-equality-eq-incomparable-Strict-Preorder :
+    has-double-negation-stable-equality (type-Strict-Preorder A)
+  has-double-negation-stable-equality-eq-incomparable-Strict-Preorder x y nneq =
+    eq-inc-A x y
+      ( λ x<y →
+        nneq (λ where refl → is-irreflexive-le-Strict-Preorder A x x<y))
+      ( λ y<x →
+        nneq (λ where refl → is-irreflexive-le-Strict-Preorder A x y<x))
+```
+
 ### The ordering of a strict order is antisymmetric
 
 ```agda
@@ -162,11 +193,11 @@ module _
                     ( λ _ →
                       eq-is-prop (is-set-type-Strict-Order (A , H) x y))))))
 
-  is-prop-extensionality-principle-Strict-Preorder :
-      is-prop (extensionality-principle-Strict-Preorder A)
-  is-prop-extensionality-principle-Strict-Preorder =
-    is-prop-is-proof-irrelevant
-      ( is-proof-irrelevant-extensionality-principle-Strict-Preorder)
+    is-prop-extensionality-principle-Strict-Preorder :
+        is-prop (extensionality-principle-Strict-Preorder A)
+    is-prop-extensionality-principle-Strict-Preorder =
+      is-prop-is-proof-irrelevant
+        ( is-proof-irrelevant-extensionality-principle-Strict-Preorder)
 
   extensionality-principle-prop-Strict-Preorder : Prop (l1 ⊔ l2)
   extensionality-principle-prop-Strict-Preorder =
