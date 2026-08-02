@@ -56,9 +56,8 @@ large-group-mul-ℝ⁺ =
   make-Large-Group
     ( large-monoid-mul-ℝ⁺)
     ( inv-ℝ⁺)
-    ( preserves-sim-inv-ℝ⁺)
-    ( eq-left-inverse-law-mul-ℝ⁺)
-    ( eq-right-inverse-law-mul-ℝ⁺)
+    ( left-inverse-law-mul-ℝ⁺)
+    ( right-inverse-law-mul-ℝ⁺)
 
 large-ab-mul-ℝ⁺ : Large-Ab lsuc (_⊔_)
 large-ab-mul-ℝ⁺ =
