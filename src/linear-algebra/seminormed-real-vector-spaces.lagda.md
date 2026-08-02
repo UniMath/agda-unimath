@@ -281,12 +281,12 @@ module _
   where
 
   abstract
-    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space :
+    seminorm-zero-Seminormed-ℝ-Vector-Space :
       map-seminorm-Seminormed-ℝ-Vector-Space
         ( V)
         ( zero-Seminormed-ℝ-Vector-Space V) ＝
       raise-ℝ l1 zero-ℝ
-    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
+    seminorm-zero-Seminormed-ℝ-Vector-Space =
       equational-reasoning
         map-seminorm-Seminormed-ℝ-Vector-Space
           ( V)
@@ -330,7 +330,7 @@ module _
       ( ap
         ( map-seminorm-Seminormed-ℝ-Vector-Space V)
         ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v)) ∙
-      ( eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
+      ( seminorm-zero-Seminormed-ℝ-Vector-Space)
 
     is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
