@@ -98,6 +98,11 @@ open import group-theory.homomorphisms-generated-subgroups public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
+open import group-theory.homomorphisms-large-abelian-groups public
+open import group-theory.homomorphisms-large-commutative-monoids public
+open import group-theory.homomorphisms-large-groups public
+open import group-theory.homomorphisms-large-monoids public
+open import group-theory.homomorphisms-large-semigroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.homotopy-automorphism-groups public
