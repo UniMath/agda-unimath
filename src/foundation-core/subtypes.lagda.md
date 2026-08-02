@@ -116,6 +116,11 @@ module _
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
   is-prop-leq-subtype P Q =
     is-prop-type-Prop (leq-prop-subtype P Q)
+
+  inclusion-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q →
+    type-subtype P → type-subtype Q
+  inclusion-leq-subtype P Q P⊆Q (x , x∈P) = (x , P⊆Q x x∈P)
 ```
 
 ## Properties
