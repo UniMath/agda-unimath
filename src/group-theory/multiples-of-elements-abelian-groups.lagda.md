@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.powers-of-elements-groups
 ```
 
@@ -153,6 +154,23 @@ module _
     (m n : ℕ) {x : type-Ab A} →
     multiple-Ab A (m *ℕ n) x ＝ multiple-Ab A n (multiple-Ab A m x)
   multiple-mul-Ab = power-mul-Group (group-Ab A)
+```
+
+### Abelian group homomorphisms preserve multiples
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Ab l1)
+  (B : Ab l2)
+  (φ : hom-Ab A B)
+  where abstract
+
+  preserves-multiples-hom-Ab :
+    (n : ℕ) (x : type-Ab A) →
+    map-hom-Ab A B φ (multiple-Ab A n x) ＝ multiple-Ab B n (map-hom-Ab A B φ x)
+  preserves-multiples-hom-Ab =
+    preserves-powers-hom-Group (group-Ab A) (group-Ab B) φ
 ```
 
 ## See also

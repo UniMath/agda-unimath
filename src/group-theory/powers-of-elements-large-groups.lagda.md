@@ -15,7 +15,9 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-large-groups
 open import group-theory.large-groups
+open import group-theory.large-subgroups
 open import group-theory.powers-of-elements-groups
 open import group-theory.powers-of-elements-large-monoids
 ```
@@ -181,6 +183,47 @@ module _
       power-Large-Group G (m *ℕ n) x ＝
       power-Large-Group G n (power-Large-Group G m x)
     power-mul-Large-Group = power-mul-Large-Monoid (large-monoid-Large-Group G)
+```
+
+### Homomorphisms preserve powers in large groups
+
+```agda
+module _
+  {α β : Level → Level}
+  {γ δ : Level → Level → Level}
+  {G : Large-Group α γ}
+  {H : Large-Group β δ}
+  (φ : hom-Large-Group G H)
+  where abstract
+
+  preserves-powers-hom-Large-Group :
+    {l : Level} (n : ℕ) (x : type-Large-Group G l) →
+    map-hom-Large-Group φ (power-Large-Group G n x) ＝
+    power-Large-Group H n (map-hom-Large-Group φ x)
+  preserves-powers-hom-Large-Group =
+    preserves-powers-hom-Large-Monoid (hom-large-monoid-hom-Large-Group φ)
+```
+
+### Powers in large subgroups
+
+```agda
+module _
+  {α γ : Level → Level}
+  {β : Level → Level → Level}
+  {G : Large-Group α β}
+  (S : Large-Subgroup γ G)
+  where abstract
+
+  inclusion-power-Large-Subgroup :
+    {l : Level} (n : ℕ) (x : type-Large-Subgroup S l) →
+    inclusion-Large-Subgroup S
+      ( power-Large-Group
+        ( large-group-Large-Subgroup S)
+        ( n)
+        ( x)) ＝
+    power-Large-Group G n (inclusion-Large-Subgroup S x)
+  inclusion-power-Large-Subgroup =
+    preserves-powers-hom-Large-Group (inclusion-hom-Large-Subgroup S)
 ```
 
 ## See also
