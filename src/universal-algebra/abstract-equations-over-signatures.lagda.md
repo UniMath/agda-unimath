@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import universal-algebra.signatures
