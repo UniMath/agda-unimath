@@ -256,7 +256,7 @@ abstract
             ( nonnegative-real-ℚ⁺ ε)
             ( √n≤α)
             ( leq-eq-ℝ
-              ( ap real-ℝ⁰⁺ (is-retraction-square-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))))
+              ( ap real-ℝ⁰⁺ (is-retraction-sqrt-ℝ⁰⁺ (nonnegative-real-ℚ⁺ ε))))
       ≤ real-ℚ⁺ (α *ℚ⁺ ε)
         by leq-eq-ℝ (mul-real-ℚ _ _)
 

@@ -595,7 +595,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
-  where
+  where abstract
 
   preserves-integer-powers-hom-Group :
     (k : ℤ) (x : type-Group G) →
@@ -624,7 +624,7 @@ module _
 
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
-  where
+  where abstract
 
   eq-integer-power-hom-Group :
     (g : hom-Group G H) (k : ℤ) (x : type-Group G) →

@@ -20,7 +20,6 @@ open import elementary-number-theory.negative-rational-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.square-roots-positive-rational-numbers
 open import elementary-number-theory.squares-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
@@ -28,8 +27,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -39,14 +40,13 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.enclosing-closed-rational-intervals-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-negative-real-numbers
 open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplication-real-numbers
 open import real-numbers.negation-real-numbers
-open import real-numbers.negative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.positive-and-negative-real-numbers
-open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -152,9 +152,6 @@ abstract opaque
 
 nonnegative-square-ℝ : {l : Level} → ℝ l → ℝ⁰⁺ l
 nonnegative-square-ℝ x = (square-ℝ x , is-nonnegative-square-ℝ x)
-
-square-ℝ⁰⁺ : {l : Level} → ℝ⁰⁺ l → ℝ⁰⁺ l
-square-ℝ⁰⁺ x = nonnegative-square-ℝ (real-ℝ⁰⁺ x)
 ```
 
 ## Properties
@@ -183,126 +180,6 @@ abstract
     {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2) →
     square-ℝ (x *ℝ y) ＝ square-ℝ x *ℝ square-ℝ y
   distributive-square-mul-ℝ x y = interchange-law-mul-mul-ℝ x y x y
-```
-
-### The square of a positive real number is positive
-
-```agda
-abstract
-  is-positive-square-ℝ⁺ :
-    {l : Level} (x : ℝ⁺ l) → is-positive-ℝ (square-ℝ (real-ℝ⁺ x))
-  is-positive-square-ℝ⁺ (x , is-pos-x) =
-    is-positive-mul-ℝ is-pos-x is-pos-x
-```
-
-### The square of a negative real number is positive
-
-```agda
-abstract
-  is-positive-square-ℝ⁻ :
-    {l : Level} (x : ℝ⁻ l) → is-positive-ℝ (square-ℝ (real-ℝ⁻ x))
-  is-positive-square-ℝ⁻ x⁻@(x , _) =
-    tr
-      ( is-positive-ℝ)
-      ( square-neg-ℝ x)
-      ( is-positive-square-ℝ⁺ (neg-ℝ⁻ x⁻))
-
-square-ℝ⁻ : {l : Level} → ℝ⁻ l → ℝ⁺ l
-square-ℝ⁻ x⁻@(x , _) = (square-ℝ x , is-positive-square-ℝ⁻ x⁻)
-```
-
-### For nonnegative real numbers, squaring preserves inequality
-
-```agda
-abstract
-  preserves-leq-square-ℝ⁰⁺ :
-    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
-    leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
-  preserves-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
-    transitive-leq-ℝ
-      ( square-ℝ x)
-      ( x *ℝ y)
-      ( square-ℝ y)
-      ( preserves-leq-right-mul-ℝ⁰⁺ y⁰⁺ x≤y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ x≤y)
-```
-
-### For nonnegative real numbers, squaring preserves strict inequality
-
-```agda
-abstract
-  preserves-le-square-ℝ⁰⁺ :
-    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → le-ℝ⁰⁺ x y →
-    le-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y)
-  preserves-le-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x<y =
-    concatenate-leq-le-ℝ
-      ( square-ℝ x)
-      ( x *ℝ y)
-      ( square-ℝ y)
-      ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ (leq-le-ℝ x<y))
-      ( preserves-le-right-mul-ℝ⁺ (y , is-positive-le-ℝ⁰⁺ x⁰⁺ y x<y) x<y)
-```
-
-### For nonnegative real numbers, squaring reflects inequality
-
-```agda
-abstract
-  reflects-leq-square-ℝ⁰⁺ :
-    {l1 l2 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
-    leq-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℝ⁰⁺ y) → leq-ℝ⁰⁺ x y
-  reflects-leq-square-ℝ⁰⁺ x⁰⁺@(x , _) y⁰⁺@(y , _) x²≤y² =
-    leq-not-le-ℝ
-      ( y)
-      ( x)
-      ( λ y<x →
-        not-leq-le-ℝ
-          ( square-ℝ y)
-          ( square-ℝ x)
-          ( preserves-le-square-ℝ⁰⁺ y⁰⁺ x⁰⁺ y<x)
-          ( x²≤y²))
-```
-
-### If a nonnegative rational `q` is in the lower cut of `x`, `q²` is in the lower cut of `x²`
-
-```agda
-abstract
-  is-in-lower-cut-square-ℝ :
-    {l : Level} (x : ℝ l) (q : ℚ⁰⁺) → is-in-lower-cut-ℝ x (rational-ℚ⁰⁺ q) →
-    is-in-lower-cut-ℝ (square-ℝ x) (square-ℚ (rational-ℚ⁰⁺ q))
-  is-in-lower-cut-square-ℝ x q⁰⁺@(q , _) q∈Lx =
-    let
-      qℝ = nonnegative-real-ℚ⁰⁺ q⁰⁺
-      q<x = le-real-is-in-lower-cut-ℝ x q∈Lx
-    in
-      is-in-lower-cut-le-real-ℚ
-        ( square-ℝ x)
-        ( tr
-          ( λ y → le-ℝ y (square-ℝ x))
-          ( square-real-ℚ q)
-          ( preserves-le-square-ℝ⁰⁺
-            ( qℝ)
-            ( x , is-nonnegative-le-ℝ⁰⁺ qℝ x q<x)
-            ( q<x)))
-```
-
-### If a rational `q` is in the upper cut of a nonnegative real number `x`, `q²` is in the upper cut of `x²`
-
-```agda
-abstract
-  is-in-upper-cut-square-ℝ :
-    {l : Level} (x : ℝ⁰⁺ l) (q : ℚ) → is-in-upper-cut-ℝ⁰⁺ x q →
-    is-in-upper-cut-ℝ⁰⁺ (square-ℝ⁰⁺ x) (square-ℚ q)
-  is-in-upper-cut-square-ℝ x⁰⁺@(x , _) q q∈Ux =
-    is-in-upper-cut-le-real-ℚ
-      ( square-ℝ x)
-      ( tr
-        ( le-ℝ (square-ℝ x))
-        ( square-real-ℚ q)
-        ( preserves-le-square-ℝ⁰⁺
-          ( x⁰⁺)
-          ( nonnegative-real-ℚ⁺
-            ( q , is-positive-is-in-upper-cut-ℝ⁰⁺ x⁰⁺ q∈Ux))
-          ( le-real-is-in-upper-cut-ℝ x q∈Ux)))
 ```
 
 ### If a rational `q` is in the upper cut of both `x` and `-x`, `q²` is in the upper cut of `x²`
@@ -384,6 +261,17 @@ abstract
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → sim-ℝ x y →
     sim-ℝ (square-ℝ x) (square-ℝ y)
   preserves-sim-square-ℝ x~y = preserves-sim-mul-ℝ x~y x~y
+
+sim-preserving-endomap-square-ℝ :
+  sim-preserving-endomap-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ)
+sim-preserving-endomap-square-ℝ =
+  make-sim-preserving-endomap-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ)
+    ( square-ℝ)
+    ( λ _ _ → preserves-sim-square-ℝ)
 ```
 
 ### Squaring commutes with raising the universe level of a real number
@@ -393,14 +281,10 @@ abstract
   square-raise-ℝ :
     {l0 : Level} (l : Level) (x : ℝ l0) →
     square-ℝ (raise-ℝ l x) ＝ raise-ℝ l (square-ℝ x)
-  square-raise-ℝ l x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        square-ℝ (raise-ℝ l x)
-        ~ℝ square-ℝ x
-          by preserves-sim-square-ℝ (sim-raise-ℝ' l x)
-        ~ℝ raise-ℝ l (square-ℝ x)
-          by sim-raise-ℝ l _)
+  square-raise-ℝ =
+    commute-map-raise-sim-preserving-endomap-Cumulative-Large-Set
+      ( cumulative-large-set-ℝ)
+      ( sim-preserving-endomap-square-ℝ)
 ```
 
 ### `0² = 0`
@@ -432,12 +316,12 @@ abstract
               ( square-ℝ x)
               ( zero-ℝ)
               ( leq-sim-ℝ x²~0)
-              ( is-positive-square-ℝ⁺ (x , 0<x))) ,
+              ( is-positive-mul-ℝ 0<x 0<x)) ,
         leq-not-le-ℝ _ _
           ( λ x<0 →
             not-le-leq-ℝ
               ( square-ℝ x)
               ( zero-ℝ)
               ( leq-sim-ℝ x²~0)
-              ( is-positive-square-ℝ⁻ (x , x<0))))
+              ( is-positive-mul-is-negative-ℝ x<0 x<0)))
 ```

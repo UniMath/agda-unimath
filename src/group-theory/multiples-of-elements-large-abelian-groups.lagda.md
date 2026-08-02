@@ -15,7 +15,10 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-large-abelian-groups
 open import group-theory.large-abelian-groups
+open import group-theory.large-abelian-subgroups
+open import group-theory.multiples-of-elements-abelian-groups
 open import group-theory.powers-of-elements-large-groups
 ```
 
@@ -138,6 +141,51 @@ module _
       multiple-Large-Ab G (m *ℕ n) x ＝
       multiple-Large-Ab G n (multiple-Large-Ab G m x)
     multiple-mul-Large-Ab = power-mul-Large-Group (large-group-Large-Ab G)
+```
+
+### Homomorphisms of large abelian groups preserve multiples
+
+```agda
+module _
+  {α β : Level → Level}
+  {γ δ : Level → Level → Level}
+  {G : Large-Ab α γ}
+  {H : Large-Ab β δ}
+  (φ : hom-Large-Ab G H)
+  where abstract
+
+  preserves-multiple-hom-Large-Ab :
+    {l : Level} (n : ℕ) (x : type-Large-Ab G l) →
+    map-hom-Large-Ab φ (multiple-Large-Ab G n x) ＝
+    multiple-Large-Ab H n (map-hom-Large-Ab φ x)
+  preserves-multiple-hom-Large-Ab {l} =
+    preserves-multiples-hom-Ab
+      ( ab-Large-Ab G l)
+      ( ab-Large-Ab H l)
+      ( hom-ab-hom-Large-Ab φ l)
+```
+
+### Multiples in large abelian subgroups
+
+```agda
+module _
+  {α γ : Level → Level}
+  {β : Level → Level → Level}
+  {G : Large-Ab α β}
+  (S : Large-Subgroup-Ab γ G)
+  where abstract
+
+  inclusion-multiple-Large-Subgroup-Ab :
+    {l : Level} (k : ℕ) (x : type-Large-Subgroup-Ab S l) →
+    inclusion-Large-Subgroup-Ab
+      ( S)
+      ( multiple-Large-Ab
+        ( large-ab-Large-Subgroup-Ab S)
+        ( k)
+        ( x)) ＝
+    multiple-Large-Ab G k (inclusion-Large-Subgroup-Ab S x)
+  inclusion-multiple-Large-Subgroup-Ab =
+    preserves-multiple-hom-Large-Ab (inclusion-hom-Large-Subgroup-Ab S)
 ```
 
 ## See also

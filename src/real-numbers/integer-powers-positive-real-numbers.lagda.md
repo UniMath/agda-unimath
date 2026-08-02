@@ -28,6 +28,7 @@ open import real-numbers.large-multiplicative-group-of-positive-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
 open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.positive-real-numbers
+open import real-numbers.powers-positive-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -99,8 +100,6 @@ abstract
         by int-multiple-succ-Large-Ab large-ab-mul-ℝ⁺ (int-ℕ n) x⁺
       ＝ power-ℝ⁺ n x⁺ *ℝ⁺ x⁺
         by ap-mul-ℝ⁺ (int-power-int-ℝ⁺ n x⁺) (eq-ℝ⁺ _ _ refl)
-      ＝ power-ℝ⁺ (succ-ℕ n) x⁺
-        by eq-ℝ⁺ _ _ (refl {x = power-ℝ (succ-ℕ n) x})
 ```
 
 ### `1ⁿ = 1`

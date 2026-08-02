@@ -15,10 +15,12 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -367,6 +369,24 @@ int-mul-nonpositive-ℤ' x y = y *ℤ int-nonpositive-ℤ x
 ```agda
 mul-positive-ℤ : positive-ℤ → positive-ℤ → positive-ℤ
 mul-positive-ℤ (x , H) (y , K) = (mul-ℤ x y , is-positive-mul-ℤ H K)
+
+infixl 40 _*ℤ⁺_
+_*ℤ⁺_ : ℤ⁺ → ℤ⁺ → ℤ⁺
+_*ℤ⁺_ = mul-positive-ℤ
+```
+
+#### Multiplication of positive integers agrees with multiplication of nonzero natural numbers
+
+```agda
+abstract
+  positive-nat-mul-ℤ⁺ :
+    (k l : ℤ⁺) →
+    positive-nat-ℤ⁺ (k *ℤ⁺ l) ＝ positive-nat-ℤ⁺ k *ℕ⁺ positive-nat-ℤ⁺ l
+  positive-nat-mul-ℤ⁺ k⁺@(inr (inr k) , _) l⁺@(inr (inr l) , _) =
+    eq-nonzero-ℕ
+      ( is-injective-int-ℕ
+        ( ( ap int-ℤ⁺ (is-section-positive-nat-ℤ⁺ (k⁺ *ℤ⁺ l⁺))) ∙
+          ( compute-mul-ℤ (inr (inr k)) (inr (inr l)))))
 ```
 
 ### Multiplication of nonnegative integers

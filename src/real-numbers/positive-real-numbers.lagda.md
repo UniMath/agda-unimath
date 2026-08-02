@@ -20,10 +20,12 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
@@ -31,6 +33,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subsets-cumulative-large-sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -350,15 +353,31 @@ abstract
       ( le-lower-upper-cut-ℝ x (zero-in-lower-cut-ℝ⁺ x⁺) x<q)
 ```
 
+### The positive real numbers are a subset of the cumulative large set of real numbers
+
+```agda
+positive-subset-cumulative-large-set-ℝ :
+  Subset-Cumulative-Large-Set id cumulative-large-set-ℝ
+positive-subset-cumulative-large-set-ℝ =
+  make-Subset-Cumulative-Large-Set
+    ( λ _ → is-positive-prop-ℝ)
+    ( preserves-le-right-sim-ℝ zero-ℝ)
+
+cumulative-large-set-ℝ⁺ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℝ⁺ =
+  cumulative-large-set-Subset-Cumulative-Large-Set
+    ( positive-subset-cumulative-large-set-ℝ)
+```
+
 ### Raising the universe level of positive real numbers
 
 ```agda
-abstract
-  preserves-is-positive-raise-ℝ :
-    {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
-    is-positive-ℝ (raise-ℝ l x)
-  preserves-is-positive-raise-ℝ l x 0<x =
-    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
+preserves-is-positive-raise-ℝ :
+  {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
+  is-positive-ℝ (raise-ℝ l x)
+preserves-is-positive-raise-ℝ =
+  is-closed-under-raise-Subset-Cumulative-Large-Set
+    ( positive-subset-cumulative-large-set-ℝ)
 
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =

@@ -320,6 +320,28 @@ module _
           ( commute-powers-Monoid' M (succ-ℕ m) refl)))
 ```
 
+### `(xᵐ)ⁿ = (xⁿ)ᵐ`
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where abstract
+
+  swap-power-Monoid :
+    (m n : ℕ) (x : type-Monoid M) →
+    power-Monoid M m (power-Monoid M n x) ＝
+    power-Monoid M n (power-Monoid M m x)
+  swap-power-Monoid m n x =
+    equational-reasoning
+      power-Monoid M m (power-Monoid M n x)
+      ＝ power-Monoid M (n *ℕ m) x
+        by inv (power-mul-Monoid M n m)
+      ＝ power-Monoid M (m *ℕ n) x
+        by ap (λ k → power-Monoid M k x) (commutative-mul-ℕ n m)
+      ＝ power-Monoid M n (power-Monoid M m x)
+        by power-mul-Monoid M m n
+```
+
 ### Monoid homomorphisms preserve powers
 
 ```agda

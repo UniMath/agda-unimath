@@ -11,8 +11,10 @@ module real-numbers.positive-and-negative-real-numbers where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -49,6 +51,19 @@ abstract
 
 nonnegative-ℝ⁺ : {l : Level} → ℝ⁺ l → ℝ⁰⁺ l
 nonnegative-ℝ⁺ (x , is-pos-x) = (x , is-nonnegative-is-positive-ℝ is-pos-x)
+
+sim-preserving-map-nonnegative-ℝ⁺ :
+  sim-preserving-map-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ⁺)
+    ( cumulative-large-set-ℝ⁰⁺)
+sim-preserving-map-nonnegative-ℝ⁺ =
+  make-sim-preserving-map-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ⁺)
+    ( cumulative-large-set-ℝ⁰⁺)
+    ( nonnegative-ℝ⁺)
+    ( λ _ _ → id)
 ```
 
 ### The negation of a positive real number is negative
