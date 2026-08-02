@@ -35,6 +35,8 @@ be done with Σ-types, we must use a record type.)
 record
   Large-Precategory (α : Level → Level) (β : Level → Level → Level) : UUω where
 
+  eta-equality
+
   field
     obj-Large-Precategory :
       (l : Level) → UU (α l)
