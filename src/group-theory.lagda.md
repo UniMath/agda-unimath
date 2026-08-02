@@ -98,6 +98,11 @@ open import group-theory.homomorphisms-generated-subgroups public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
+open import group-theory.homomorphisms-large-abelian-groups public
+open import group-theory.homomorphisms-large-commutative-monoids public
+open import group-theory.homomorphisms-large-groups public
+open import group-theory.homomorphisms-large-monoids public
+open import group-theory.homomorphisms-large-semigroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.homotopy-automorphism-groups public
@@ -123,7 +128,9 @@ open import group-theory.kernels-homomorphisms-abelian-groups public
 open import group-theory.kernels-homomorphisms-concrete-groups public
 open import group-theory.kernels-homomorphisms-groups public
 open import group-theory.large-abelian-groups public
+open import group-theory.large-abelian-subgroups public
 open import group-theory.large-commutative-monoids public
+open import group-theory.large-commutative-submonoids public
 open import group-theory.large-function-abelian-groups public
 open import group-theory.large-function-commutative-monoids public
 open import group-theory.large-function-groups public
@@ -132,6 +139,9 @@ open import group-theory.large-function-semigroups public
 open import group-theory.large-groups public
 open import group-theory.large-monoids public
 open import group-theory.large-semigroups public
+open import group-theory.large-subgroups public
+open import group-theory.large-submonoids public
+open import group-theory.large-subsemigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
@@ -211,6 +221,11 @@ open import group-theory.subsemigroups public
 open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
 open import group-theory.subsets-groups public
+open import group-theory.subsets-large-abelian-groups public
+open import group-theory.subsets-large-commutative-monoids public
+open import group-theory.subsets-large-groups public
+open import group-theory.subsets-large-monoids public
+open import group-theory.subsets-large-semigroups public
 open import group-theory.subsets-monoids public
 open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
