@@ -189,8 +189,8 @@ displayName = "Håkon Gylterud"
 usernames = [ "Håkon Gylterud" ]
 
 [[contributors]]
-displayName = "Matthias Hutzler"
-usernames = [ "Matthias Hutzler" ]
+displayName = "Matthias Ritter"
+usernames = [ "Matthias Hutzler", "Matthias Ritter" , "MatthiasHu" ]
 github = "MatthiasHu"
 
 [[contributors]]
