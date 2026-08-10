@@ -41,7 +41,8 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-Set quotients act functorially on types equipped with equivalence relations.
+[Set quotients](foundation.set-quotients.md) act functorially on types equipped
+with [equivalence relations](foundation.equivalence-relations.md).
 
 ## Definition
 

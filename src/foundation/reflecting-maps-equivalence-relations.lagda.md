@@ -77,6 +77,25 @@ module _
 
 ## Properties
 
+### Any effective map reflects the equivalence relation
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A) {B : UU l3}
+  (q : A → B)
+  where
+
+  reflects-equivalence-relation-is-effective :
+    is-effective R q → reflects-equivalence-relation R q
+  reflects-equivalence-relation-is-effective E {x} {y} =
+    map-inv-equiv (E x y)
+
+  reflecting-map-equivalence-relation-is-effective :
+    is-effective R q → reflecting-map-equivalence-relation R B
+  reflecting-map-equivalence-relation-is-effective E =
+    (q , reflects-equivalence-relation-is-effective E)
+```
+
 ### Any surjective and effective map reflects the equivalence relation
 
 ```agda
@@ -87,8 +106,8 @@ module _
 
   reflects-equivalence-relation-is-surjective-and-effective :
     is-surjective-and-effective R q → reflects-equivalence-relation R q
-  reflects-equivalence-relation-is-surjective-and-effective E {x} {y} =
-    map-inv-equiv (pr2 E x y)
+  reflects-equivalence-relation-is-surjective-and-effective E =
+    reflects-equivalence-relation-is-effective R q (pr2 E)
 
   reflecting-map-equivalence-relation-is-surjective-and-effective :
     is-surjective-and-effective R q →
