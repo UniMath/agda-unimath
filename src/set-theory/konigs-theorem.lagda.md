@@ -398,21 +398,19 @@ module _
           ( inv (compute-Σ-Cardinal I' A))
           ( inv (compute-Π-Cardinal I' B))
           ( le-cardinality-Σ-Π A B
-            ( tr is-discrete-Cardinal
-              ( compute-Σ-Cardinal I' A)
-              ( is-discrete-Σ))
+            ( tr is-discrete-Cardinal (compute-Σ-Cardinal I' A) is-discrete-Σ)
             ( decidable-∃-A)
-            ( tr (has-decidable-∃-Cardinal (l1 ⊔ l2))
+            ( tr
+              ( has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Σ-Cardinal I' A)
               ( decidable-∃-Σ))
             ( λ i →
               inv-unit-is-projective-cardinality (B i) (is-projective-B i))
             ( is-discrete-B)
-            ( tr is-discrete-Cardinal
-              ( compute-Π-Cardinal I' B)
-              ( is-discrete-Π))
+            ( tr is-discrete-Cardinal (compute-Π-Cardinal I' B) is-discrete-Π)
             ( decidable-∃-B)
-            ( tr (has-decidable-∃-Cardinal (l1 ⊔ l2))
+            ( tr
+              ( has-decidable-∃-Cardinal (l1 ⊔ l2))
               ( compute-Π-Cardinal I' B)
               ( decidable-∃-Π))
             ( H)))
@@ -431,13 +429,6 @@ module _
   (let set-I = set-Projective-Set I)
   where
 
-  private
-    lem-l2 : level-LEM (l2 ⊔ l2)
-    lem-l2 P =
-      is-decidable-equiv
-        ( compute-raise l1 (type-Prop P))
-        ( lem (raise-Prop l1 P))
-
   leq-cardinality-Σ-Π-le-family-LEM :
     (A B : type-I → Set l2) →
     ((i : type-I) → is-projective-Level l2 (type-Set (B i))) →
@@ -454,7 +445,10 @@ module _
             ( A i)
             ( B i)
             ( le-indexed-le-cardinality-LEM
-              ( lem-l2)
+              ( λ P →
+                is-decidable-equiv
+                  ( compute-raise l1 (type-Prop P))
+                  ( lem (raise-Prop l1 P)))
               ( A i)
               ( B i)
               ( is-projective-B i)
@@ -463,15 +457,14 @@ module _
 
       build-emb :
         ((i : type-I) → type-Set (A i) ↪ type-Set (B i)) →
-        type-trunc-Prop
-          ( type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
+        type-trunc-Prop (type-Set (Σ-Set set-I A) ↪ type-Set (Π-Set set-I B))
       build-emb e =
         map-trunc-Prop
           ( emb-Σ-Π-nonim-Set (type-I , dI) A B e)
           ( is-projective-is-projective-lsuc-Level l2
             ( is-projective-Projective-Set I)
             ( λ i → nonim (pr1 (e i)))
-            ( λ i → nonsurjective-emb e i))
+            ( nonsurjective-emb e))
     in
     unit-leq-cardinality
       ( Σ-Set set-I A)
@@ -504,7 +497,10 @@ module _
         ( B)
         ( λ i →
           le-indexed-le-cardinality-LEM
-            ( lem-l2)
+            ( λ P →
+              is-decidable-equiv
+                ( compute-raise l1 (type-Prop P))
+                ( lem (raise-Prop l1 P)))
             ( A i)
             ( B i)
             ( is-projective-B i)
@@ -523,9 +519,7 @@ module _
             ( (i : type-I) → is-projective-Cardinal l2 (B i))
             ( function-Prop
               ( (i : type-I) → le-Cardinal (A i) (B i))
-              ( le-prop-Cardinal
-                ( Σ-Cardinal I' A)
-                ( Π-Cardinal I' B)))))
+              ( le-prop-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)))))
       ( λ A B is-projective-B H →
         binary-tr
           ( le-Cardinal)
@@ -645,8 +639,9 @@ module _
     ((i : type-I) → le-complemented-cardinality (A i) (B i)) →
     le-complemented-cardinality (Σ-Set set-I A) (Π-Set set-I B)
   le-complemented-cardinality-Σ-Π
-    A
-      B is-discrete-A decidable-∃-A is-projective-B is-discrete-B decidable-∃-B H =
+    A B is-discrete-A decidable-∃-A
+    is-projective-B is-discrete-B decidable-∃-B
+    H =
     le-complemented-le-indexed-leq-complemented-cardinality
       ( wlpo)
       ( Σ-Set set-I A)
@@ -700,7 +695,7 @@ module _
                         ( Σ-Cardinal I' A)
                         ( Π-Cardinal I' B)))))))))
       ( λ A B is-discrete-A decidable-∃-A
-      is-projective-B is-discrete-B decidable-∃-B H →
+          is-projective-B is-discrete-B decidable-∃-B H →
         binary-tr
           ( le-complemented-Cardinal)
           ( inv (compute-Σ-Cardinal I' A))
@@ -778,9 +773,7 @@ module _
             ( dI)
             ( A)
             ( B)
-            ( tr is-discrete-Cardinal
-              ( compute-Σ-Cardinal I' A)
-              ( is-discrete-Σ))
+            ( tr is-discrete-Cardinal (compute-Σ-Cardinal I' A) is-discrete-Σ)
             ( decidable-∃-A)
             ( tr
               ( has-decidable-∃-Cardinal (l1 ⊔ l2))
