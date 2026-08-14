@@ -31,6 +31,17 @@ of a [vector space](linear-algebra.vector-spaces.md) `V` over a
 ## Definition
 
 ```agda
+is-subspace-prop-Vector-Space :
+  {l1 l2 l3 : Level} (K : Heyting-Field l1) (V : Vector-Space l2 K) →
+  subtype (l1 ⊔ l2 ⊔ l3) (subtype l3 (type-Vector-Space K V))
+is-subspace-prop-Vector-Space K =
+  is-left-submodule-prop-Ring (ring-Heyting-Field K)
+
+is-subspace-Vector-Space :
+  {l1 l2 l3 : Level} (K : Heyting-Field l1) (V : Vector-Space l2 K) →
+  subtype l3 (type-Vector-Space K V) → UU (l1 ⊔ l2 ⊔ l3)
+is-subspace-Vector-Space K V = is-in-subtype (is-subspace-prop-Vector-Space K V)
+
 subspace-Vector-Space :
   (l1 : Level) {l2 l3 : Level} (F : Heyting-Field l2) → Vector-Space l3 F →
   UU (lsuc l1 ⊔ l2 ⊔ l3)

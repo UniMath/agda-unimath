@@ -353,3 +353,10 @@ module _
 ## See also
 
 - [Modulated uniformly continuous maps on metric spaces](metric-spaces.modulated-uniformly-continuous-maps-metric-spaces.md)
+
+## External links
+
+- [Uniform continuity](https://en.wikipedia.org/wiki/Uniform_continuity) on
+  Wikipedia
+- [Uniformly continuous map](https://ncatlab.org/nlab/show/uniformly+continuous+map)
+  on $n$Lab
