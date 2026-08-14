@@ -100,7 +100,7 @@ abstract
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
     sim-ℝ x y → is-positive-ℝ x → is-positive-ℝ y
   is-positive-sim-ℝ {x = x} {y = y} =
-    preserves-le-right-sim-ℝ zero-ℝ x y
+    preserves-strict-order-right-sim-ℝ zero-ℝ x y
 ```
 
 ### Dedekind cuts of positive real numbers
@@ -226,12 +226,12 @@ module _
   abstract
     is-positive-diff-le-ℝ : is-positive-ℝ (y -ℝ x)
     is-positive-diff-le-ℝ =
-      preserves-le-left-sim-ℝ
+      preserves-strict-order-left-sim-ℝ
         ( y -ℝ x)
         ( x -ℝ x)
         ( zero-ℝ)
         ( right-inverse-law-add-ℝ x)
-        ( preserves-le-right-add-ℝ (neg-ℝ x) x y H)
+        ( preserves-strict-order-right-add-ℝ (neg-ℝ x) x y H)
 
   positive-diff-le-ℝ : ℝ⁺ (l1 ⊔ l2)
   positive-diff-le-ℝ = (y -ℝ x , is-positive-diff-le-ℝ)
@@ -253,7 +253,7 @@ abstract
   preserves-is-positive-real-ℚ :
     {q : ℚ} → is-positive-ℚ q → is-positive-ℝ (real-ℚ q)
   preserves-is-positive-real-ℚ pos-q =
-    preserves-le-real-ℚ (le-zero-is-positive-ℚ pos-q)
+    preserves-strict-order-real-ℚ (le-zero-is-positive-ℚ pos-q)
 
   is-positive-real-ℚ⁺ : (q : ℚ⁺) → is-positive-ℝ (real-ℚ⁺ q)
   is-positive-real-ℚ⁺ (q , pos-q) = preserves-is-positive-real-ℚ pos-q
@@ -358,7 +358,7 @@ abstract
     {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
     is-positive-ℝ (raise-ℝ l x)
   preserves-is-positive-raise-ℝ l x 0<x =
-    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
+    preserves-strict-order-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
 
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =

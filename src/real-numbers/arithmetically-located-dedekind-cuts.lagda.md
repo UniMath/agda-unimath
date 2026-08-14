@@ -145,7 +145,7 @@ module _
               ( p +ℚ rational-ℚ⁺ ε')
               ( p +ℚ rational-ℚ⁺ ε)
               ( q≤p+ε')
-              ( preserves-le-right-add-ℚ p _ _ (le-mediant-zero-ℚ⁺ ε)) ,
+              ( preserves-strict-order-right-add-ℚ p _ _ (le-mediant-zero-ℚ⁺ ε)) ,
               p<x ,
               y<q))
           ( W ε')
@@ -200,7 +200,7 @@ module _
                         ( abelian-group-add-ℚ)
                         ( p)
                         ( q))
-                      ( preserves-leq-left-add-ℚ (q -ℚ p) p' p p'≤p)))
+                      ( preserves-order-left-add-ℚ (q -ℚ p) p' p p'≤p)))
                   ( q'∈U)))
             ( decide-le-leq-ℚ p p'))
         ( arithmetically-located (positive-diff-le-ℚ p<q))
@@ -304,7 +304,7 @@ module _
               ( x<q))
         intro-exists
           ( r , r +ℚ (ε' +ℚ ε'))
-          ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
+          ( preserves-strict-order-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε ,
             r<x ,
             x<r+2ε')
 ```
@@ -363,11 +363,11 @@ abstract
                     ≤ rational-ℕ m +ℚ
                       max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
                       by
-                        preserves-leq-add-ℚ
+                        preserves-order-add-ℚ
                           ( leq-le-ℚ ε<m)
                           ( leq-right-max-ℚ _ _)
                     ≤ rational-ℕ m +ℚ rational-ℕ n
-                      by preserves-leq-right-add-ℚ _ _ _ (leq-le-ℚ max|p||q|<n)
+                      by preserves-order-right-add-ℚ _ _ _ (leq-le-ℚ max|p||q|<n)
                     ≤ rational-ℕ (m +ℕ n)
                       by leq-eq-ℚ (add-rational-ℕ _ _))
                 ( chain-of-inequalities
@@ -380,7 +380,7 @@ abstract
                       by leq-eq-ℚ (distributive-neg-diff-ℚ _ _)
                     ≤ ε -ℚ p
                       by
-                        preserves-leq-right-add-ℚ ε
+                        preserves-order-right-add-ℚ ε
                           ( neg-ℚ b)
                           ( neg-ℚ p)
                           ( neg-leq-ℚ
@@ -391,12 +391,12 @@ abstract
                       by triangle-inequality-abs-diff-ℚ ε p
                     ≤ ε +ℚ max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
                       by
-                        preserves-leq-add-ℚ
+                        preserves-order-add-ℚ
                           ( leq-eq-ℚ (rational-abs-rational-ℚ⁺ ε⁺))
                           ( leq-left-max-ℚ _ _)
                     ≤ rational-ℕ m +ℚ rational-ℕ n
                       by
-                        preserves-leq-add-ℚ
+                        preserves-order-add-ℚ
                           ( leq-le-ℚ ε<m)
                           ( leq-le-ℚ max|p||q|<n)
                     ≤ rational-ℕ (m +ℕ n)
@@ -431,12 +431,12 @@ abstract
                   ( leq-right-add-rational-ℚ⁺ _ ε⁺)
                   ( |a|≤m+n))
                 ( transitive-leq-ℚ _ (rational-abs-ℚ a +ℚ ε) _
-                  ( preserves-leq-left-add-ℚ _ _ _ |a|≤m+n)
+                  ( preserves-order-left-add-ℚ _ _ _ |a|≤m+n)
                   ( |b|≤|a|+ε)))
               ( tr
                 ( le-ℚ (rational-ℕ (m +ℕ n) +ℚ ε))
                 ( add-rational-ℕ _ _)
-                ( preserves-le-right-add-ℚ _ _ _ ε<m)))
+                ( preserves-strict-order-right-add-ℚ _ _ _ ε<m)))
 ```
 
 ## References

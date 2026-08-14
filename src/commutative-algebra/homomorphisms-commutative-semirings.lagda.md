@@ -112,7 +112,7 @@ module _
       map-hom-Commutative-Semiring (one-Commutative-Semiring A) ＝
       one-Commutative-Semiring B
     preserves-unit-hom-Commutative-Semiring =
-      preserves-unit-hom-Semiring
+      preserves-one-hom-Semiring
         ( semiring-Commutative-Semiring A)
         ( semiring-Commutative-Semiring B)
         ( f)

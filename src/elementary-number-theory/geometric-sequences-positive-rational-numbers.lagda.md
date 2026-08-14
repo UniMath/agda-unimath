@@ -260,18 +260,18 @@ module _
       ( le-ℚ⁺)
       ( right-unit-law-mul-ℚ⁺ (seq-geometric-sequence-ℚ⁺ u n))
       ( inv (is-common-ratio-geometric-sequence-ℚ⁺ u n))
-      ( preserves-le-left-mul-ℚ⁺
+      ( preserves-strict-order-left-mul-ℚ⁺
         ( seq-geometric-sequence-ℚ⁺ u n)
         ( one-ℚ)
         ( rational-ℚ⁺ (common-ratio-geometric-sequence-ℚ⁺ u))
         ( 1<r))
 
   is-strictly-increasing-seq-geometric-sequence-ℚ⁺ :
-    is-strictly-increasing-sequence-Strictly-Preordered-Set
+    is-strictly-increasing-sequence-Strict-Preorder
       ( strictly-preordered-set-ℚ⁺)
       ( seq-geometric-sequence-ℚ⁺ u)
   is-strictly-increasing-seq-geometric-sequence-ℚ⁺ =
-    is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+    is-strictly-increasing-le-succ-sequence-Strict-Preorder
       ( strictly-preordered-set-ℚ⁺)
       ( seq-geometric-sequence-ℚ⁺ u)
       ( le-succ-seq-geometric-sequence-ℚ⁺)

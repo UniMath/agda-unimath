@@ -206,7 +206,7 @@ module _
                   ( z)
                   ( y +ℝ real-ℚ⁺ η)
                   ( max-net η +ℝ real-ℚ⁺ η)
-                  ( preserves-leq-right-add-ℝ
+                  ( preserves-order-right-add-ℝ
                     ( real-ℚ⁺ η)
                     ( y)
                     ( max-net η)
@@ -222,15 +222,15 @@ module _
                 ( max-net ε)
                 ( max-net η +ℝ real-ℚ⁺ η)
                 ( max-net η +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
-                ( preserves-leq-left-add-ℝ (max-net η) _ _
-                  ( preserves-leq-real-ℚ (leq-left-add-rational-ℚ⁺ _ ε)))
+                ( preserves-order-left-add-ℝ (max-net η) _ _
+                  ( preserves-order-real-ℚ (leq-left-add-rational-ℚ⁺ _ ε)))
                 ( bound ε η))
               ( transitive-leq-ℝ
                 ( max-net η)
                 ( max-net ε +ℝ real-ℚ⁺ ε)
                 ( max-net ε +ℝ real-ℚ⁺ (ε +ℚ⁺ η))
-                ( preserves-leq-left-add-ℝ (max-net ε) _ _
-                  ( preserves-leq-real-ℚ (leq-right-add-rational-ℚ⁺ _ η)))
+                ( preserves-order-left-add-ℝ (max-net ε) _ _
+                  ( preserves-order-real-ℚ (leq-right-add-rational-ℚ⁺ _ η)))
                 ( bound η ε)))
 
     sup-modulated-totally-bounded-subset-ℝ : ℝ l2
@@ -272,7 +272,7 @@ module _
                       ( leq-ℝ (y +ℝ real-ℚ⁺ ε'))
                       ( associative-add-ℝ _ _ _ ∙
                         ap-add-ℝ refl (add-real-ℚ _ _))
-                      ( preserves-leq-right-add-ℝ (real-ℚ⁺ ε') _ _
+                      ( preserves-order-right-add-ℝ (real-ℚ⁺ ε') _ _
                         ( transitive-leq-ℝ _ _ _
                           ( left-leq-real-bound-neighborhood-ℝ ε' _ _
                             ( saturated-is-limit-lim-cauchy-approximation-ℝ
@@ -283,8 +283,8 @@ module _
                             ( map-unit-im
                               ( pr1 ∘ pr1)
                               ( (y , y∈S) , y∈net-ε'))))))
-                    ( preserves-le-left-add-ℝ sup _ _
-                      ( preserves-le-real-ℚ ε'+ε'<ε))))))
+                    ( preserves-strict-order-left-add-ℝ sup _ _
+                      ( preserves-strict-order-real-ℚ ε'+ε'<ε))))))
 
     is-approximated-below-sup-modulated-totally-bounded-subset-ℝ :
       is-approximated-below-family-ℝ
@@ -318,13 +318,13 @@ module _
               ( sup -ℝ real-ℚ⁺ ε)
               ( sup -ℝ real-ℚ⁺ (ε' +ℚ⁺ ε'))
               ( max-net ε' -ℝ real-ℚ⁺ ε')
-              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ ε'+ε'<ε))
+              ( reverses-le-diff-ℝ sup _ _ (preserves-strict-order-real-ℚ ε'+ε'<ε))
               ( tr
                 ( λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
                 ( associative-add-ℝ _ _ _ ∙
                   ap-add-ℝ refl (inv (distributive-neg-add-ℝ _ _)) ∙
                   ap-diff-ℝ refl (add-real-ℚ _ _))
-                ( preserves-leq-diff-ℝ (real-ℚ⁺ ε') _ _
+                ( preserves-order-diff-ℝ (real-ℚ⁺ ε') _ _
                   ( leq-transpose-right-add-ℝ _ _ _
                     ( right-leq-real-bound-neighborhood-ℝ ε' _ _
                       ( saturated-is-limit-lim-cauchy-approximation-ℝ

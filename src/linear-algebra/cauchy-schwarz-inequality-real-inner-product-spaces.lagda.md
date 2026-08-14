@@ -106,8 +106,8 @@ module _
               ≤ ( one-ℝ +ℝ one-ℝ) -ℝ
                 ( real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V u v)
                 by
-                  preserves-leq-right-add-ℝ _ _ _
-                    ( preserves-leq-add-ℝ ∥u∥²≤1 ∥v∥²≤1)
+                  preserves-order-right-add-ℝ _ _ _
+                    ( preserves-order-add-ℝ ∥u∥²≤1 ∥v∥²≤1)
               ≤ ( real-ℕ 2 *ℝ one-ℝ) -ℝ
                 ( real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V u v)
                 by leq-eq-ℝ (ap-diff-ℝ (inv (left-mul-real-ℕ 2 _)) refl)
@@ -146,8 +146,8 @@ module _
               ≤ ( one-ℝ +ℝ one-ℝ) +ℝ
                 ( real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V u v)
                 by
-                  preserves-leq-right-add-ℝ _ _ _
-                    ( preserves-leq-add-ℝ ∥u∥²≤1 ∥v∥²≤1)
+                  preserves-order-right-add-ℝ _ _ _
+                    ( preserves-order-add-ℝ ∥u∥²≤1 ∥v∥²≤1)
               ≤ ( real-ℕ 2 *ℝ one-ℝ) +ℝ
                 ( real-ℕ 2 *ℝ inner-product-ℝ-Inner-Product-Space V u v)
                 by leq-eq-ℝ (ap-add-ℝ (inv (left-mul-real-ℕ 2 one-ℝ)) refl)
@@ -330,7 +330,7 @@ module _
             ＝ abs-ℝ (inner-product-ℝ-Inner-Product-Space V u v)
               by eq-sim-ℝ (cancel-left-mul-div-ℝ⁺ (∥u∥+δ *ℝ⁺ ∥v∥+ε) _))
           ( right-unit-law-mul-ℝ _)
-          ( preserves-leq-left-mul-ℝ⁺
+          ( preserves-order-left-mul-ℝ⁺
             ( ∥u∥+δ *ℝ⁺ ∥v∥+ε)
             ( leq-one-abs-inner-product-leq-one-norm-ℝ-Inner-Product-Space
               ( V)

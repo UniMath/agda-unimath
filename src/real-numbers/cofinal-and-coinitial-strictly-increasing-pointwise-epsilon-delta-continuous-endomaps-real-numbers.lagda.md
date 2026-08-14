@@ -177,7 +177,7 @@ module _
     reflects-le-map-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( strictly-increasing-pointwise-ε-δ-continuous-endomap-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ)
 
-  reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
+  reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
     (x x' : ℝ l1) →
     leq-ℝ
       ( map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
@@ -185,8 +185,8 @@ module _
       ( map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
         ( x')) →
     leq-ℝ x x'
-  reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ =
-    reflects-leq-is-strictly-increasing-endomap-ℝ
+  reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ =
+    reflects-order-is-strictly-increasing-endomap-ℝ
       ( map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ)
       ( is-strictly-increasing-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ)
 ```
@@ -268,7 +268,7 @@ module _
               ( f)
               ( raise-real-ℚ l p)
               ( x)
-              ( preserves-le-left-raise-ℝ l p<x)))
+              ( preserves-strict-order-left-raise-ℝ l p<x)))
 
     is-inhabited-upper-cut-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
       is-inhabited-subtype
@@ -299,7 +299,7 @@ module _
               ( f)
               ( x)
               ( raise-real-ℚ l p)
-              ( preserves-le-right-raise-ℝ l x<p))
+              ( preserves-strict-order-right-raise-ℝ l x<p))
             ( concatenate-le-leq-ℝ y (real-ℚ q) (map-f x) y<q q≤fx))
 
     forward-implication-is-rounded-lower-cut-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
@@ -421,7 +421,7 @@ module _
               ( f)
               ( raise-real-ℚ l q)
               ( raise-real-ℚ l r)
-              ( le-raise-le-ℝ l (preserves-le-real-ℚ q<r))))
+              ( le-raise-le-ℝ l (preserves-strict-order-real-ℚ q<r))))
 
     backward-implication-is-rounded-upper-cut-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
       (q : ℚ) →
@@ -444,7 +444,7 @@ module _
               ( f)
               ( raise-real-ℚ l r)
               ( raise-real-ℚ l q)
-              ( le-raise-le-ℝ l (preserves-le-real-ℚ r<q)))
+              ( le-raise-le-ℝ l (preserves-strict-order-real-ℚ r<q)))
             ( y<fr))
 
     is-rounded-lower-cut-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
@@ -511,7 +511,7 @@ module _
             ( f)
             ( raise-real-ℚ l p)
             ( raise-real-ℚ l q)
-            ( le-raise-le-ℝ l (preserves-le-real-ℚ p<q)))
+            ( le-raise-le-ℝ l (preserves-strict-order-real-ℚ p<q)))
 
   opaque
     map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
@@ -568,7 +568,7 @@ module _
                     ( f)
                     ( x)
                     ( raise-real-ℚ l q)
-                    ( preserves-leq-right-raise-ℝ l x≤q))
+                    ( preserves-order-right-raise-ℝ l x≤q))
                   ( is-in-lower-cut-le-real-ℚ _ fq<fx)))
 
     geq-is-retraction-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
@@ -597,7 +597,7 @@ module _
                       ( f)
                       ( raise-real-ℚ l q)
                       ( x)
-                      ( preserves-le-left-raise-ℝ l q<x)))
+                      ( preserves-strict-order-left-raise-ℝ l q<x)))
                   ( f⁻¹fx≤q)))
 
     is-retraction-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ :
@@ -675,20 +675,20 @@ module _
                       ( Hδ (raise-real-ℚ l q) Nδxq)
                 ≤ map-f (raise-real-ℚ l p) +ℝ real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε'
                   by
-                    preserves-leq-right-add-ℝ _ _ _
+                    preserves-order-right-add-ℝ _ _ _
                       ( left-leq-real-bound-neighborhood-ℝ _ _ _
                         ( Hδ (raise-real-ℚ l p) Nδxp))
                 ≤ map-f (raise-real-ℚ l p) +ℝ (real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε')
                   by leq-eq-ℝ (associative-add-ℝ _ _ _)
                 ≤ y +ℝ real-ℚ⁺ (ε' +ℚ⁺ ε')
                   by
-                    preserves-leq-add-ℝ
+                    preserves-order-add-ℝ
                       ( leq-le-ℝ fp<y)
                       ( leq-eq-ℝ (add-real-ℚ _ _))
                 ≤ y +ℝ real-ℚ⁺ ε
                   by
-                    preserves-leq-left-add-ℝ _ _ _
-                      ( preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε)))
+                    preserves-order-left-add-ℝ _ _ _
+                      ( preserves-order-real-ℚ (leq-le-ℚ 2ε'<ε)))
               ( y+ε<y'))
 ```
 
@@ -818,9 +818,9 @@ module _
             ( r)
         intro-exists
           ( map-f x)
-          ( reflects-leq-left-raise-ℝ
+          ( reflects-order-left-raise-ℝ
             ( l)
-            ( reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+            ( reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
               ( f)
               ( raise-real-ℚ l q)
               ( _)
@@ -872,9 +872,9 @@ module _
             ( r)
         intro-exists
           ( map-f x)
-          ( reflects-leq-right-raise-ℝ
+          ( reflects-order-right-raise-ℝ
             ( l)
-            ( reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+            ( reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
               ( f)
               ( _)
               ( raise-real-ℚ l q)
@@ -955,7 +955,7 @@ module _
           ( λ y' Nδyy' →
             neighborhood-real-bound-each-leq-ℝ _ _ _
               ( leq-transpose-left-diff-ℝ _ _ _
-                ( reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+                ( reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
                   ( f)
                   ( x -ℝ real-ℚ⁺ ε)
                   ( map-inv-f y')
@@ -967,7 +967,7 @@ module _
                       by
                         reverses-leq-left-diff-ℝ
                           ( y)
-                          ( preserves-leq-real-ℚ (leq-left-min-ℚ⁺ δlo δhi))
+                          ( preserves-order-real-ℚ (leq-left-min-ℚ⁺ δlo δhi))
                     ≤ y'
                       by
                         leq-transpose-right-add-ℝ _ _ _
@@ -979,7 +979,7 @@ module _
                             ( is-section-map-inv-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
                               ( f)
                               ( y'))))))
-              ( reflects-leq-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+              ( reflects-order-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
                 ( f)
                 ( map-inv-f y')
                 ( x +ℝ real-ℚ⁺ ε)
@@ -995,8 +995,8 @@ module _
                     by right-leq-real-bound-neighborhood-ℝ _ _ _ Nδyy'
                   ≤ y +ℝ real-ℚ⁺ δhi
                     by
-                      preserves-leq-left-add-ℝ _ _ _
-                        ( preserves-leq-real-ℚ (leq-right-min-ℚ⁺ δlo δhi))
+                      preserves-order-left-add-ℝ _ _ _
+                        ( preserves-order-real-ℚ (leq-right-min-ℚ⁺ δlo δhi))
                   ≤ yhi
                     by leq-le-ℝ y+δhi<yhi)))
 ```

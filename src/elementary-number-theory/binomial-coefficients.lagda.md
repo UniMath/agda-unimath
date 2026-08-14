@@ -69,7 +69,7 @@ is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) _ = refl
 is-zero-binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) H =
   ap-add-ℕ
     ( is-zero-binomial-coefficient-ℕ n k H)
-    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-le-succ-ℕ n k H))
+    ( is-zero-binomial-coefficient-ℕ n (succ-ℕ k) (preserves-strict-order-succ-ℕ n k H))
 ```
 
 ### `binomial-coefficient-ℕ n n ＝ 1`
@@ -125,9 +125,9 @@ abstract
               ( binomial-coefficient-ℕ (succ-ℕ k +ℕ l) k *ℕ_)
               ( right-swap-mul-Commutative-Semiring
                 ( ℕ-Commutative-Semiring)
-                ( factorial-ℕ k)
-                ( succ-ℕ k)
-                ( factorial-ℕ (succ-ℕ l))))
+                { factorial-ℕ k}
+                { succ-ℕ k}
+                { factorial-ℕ (succ-ℕ l)}))
             ( ap
               ( binomial-coefficient-ℕ (succ-ℕ k +ℕ l) (succ-ℕ k) *ℕ_)
               ( inv

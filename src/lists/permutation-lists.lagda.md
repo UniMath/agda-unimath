@@ -22,6 +22,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import lists.arrays
+open import lists.elementhood-relation-lists
 open import lists.functoriality-lists
 open import lists.functoriality-tuples
 open import lists.lists
@@ -47,7 +48,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  permute-list : (l : list A) → Permutation (length-list l) → list A
+  permute-list : (l : list A) → permutation (length-list l) → list A
   permute-list l s =
     list-tuple
       ( length-list l)
@@ -60,12 +61,12 @@ module _
   is-permutation-list : (list A → list A) → UU l
   is-permutation-list f =
     (l : list A) →
-    Σ ( Permutation (length-list l))
+    Σ ( permutation (length-list l))
       ( λ t → f l ＝ permute-list l t)
 
   permutation-is-permutation-list :
     (f : list A → list A) → is-permutation-list f →
-    ((l : list A) → Permutation (length-list l))
+    ((l : list A) → permutation (length-list l))
   permutation-is-permutation-list f P l = pr1 (P l)
 
   eq-permute-list-permutation-is-permutation-list :
@@ -81,7 +82,7 @@ module _
 
 ```agda
   length-permute-list :
-    (l : list A) (t : Permutation (length-list l)) →
+    (l : list A) (t : permutation (length-list l)) →
     length-list (permute-list l t) ＝ (length-list l)
   length-permute-list l t =
     compute-length-list-list-tuple
@@ -93,7 +94,7 @@ module _
 
 ```agda
   eq-tuple-list-permute-list :
-    (l : list A) (f : Permutation (length-list l)) →
+    (l : list A) (f : permutation (length-list l)) →
     permute-tuple (length-list l) (tuple-list l) f ＝
     tr
       ( tuple A)
@@ -128,7 +129,7 @@ module _
 
 ```agda
   is-in-list-is-in-permute-list :
-    (l : list A) (t : Permutation (length-list l)) (x : A) →
+    (l : list A) (t : permutation (length-list l)) (x : A) →
     x ∈-list (permute-list l t) → x ∈-list l
   is-in-list-is-in-permute-list l t x I =
     is-in-list-is-in-tuple-list
@@ -152,7 +153,7 @@ module _
             ( I))))
 
   is-in-permute-list-is-in-list :
-    (l : list A) (t : Permutation (length-list l)) (x : A) →
+    (l : list A) (t : permutation (length-list l)) (x : A) →
     x ∈-list l → x ∈-list (permute-list l t)
   is-in-permute-list-is-in-list l t x I =
     is-in-list-is-in-tuple-list
@@ -186,10 +187,10 @@ module _
     fold-tuple b μ (tr (tuple A) eq v) ＝ fold-tuple b μ v
   invariant-fold-tuple-tr v refl = refl
 
-  invariant-permutation-fold-list :
-    (l : list A) → (f : Permutation (length-list l)) →
+  permutation-invariant-fold-list :
+    (l : list A) → (f : permutation (length-list l)) →
     fold-list b μ l ＝ fold-list b μ (permute-list l f)
-  invariant-permutation-fold-list l f =
+  permutation-invariant-fold-list l f =
     ( inv (htpy-fold-list-fold-tuple b μ l) ∙
       ( invariant-permutation-fold-tuple b μ C (tuple-list l) f ∙
         ( ap (fold-tuple b μ) (eq-tuple-list-permute-list l f) ∙
@@ -205,14 +206,14 @@ module _
 ```agda
 compute-tr-permute-tuple :
   {l : Level} {A : UU l} {n m : ℕ}
-  (e : n ＝ m) (v : tuple A n) (t : Permutation m) →
+  (e : n ＝ m) (v : tuple A n) (t : permutation m) →
   tr
     ( tuple A)
     ( e)
     ( permute-tuple
       ( n)
       ( v)
-      ( tr Permutation (inv e) t)) ＝
+      ( tr permutation (inv e) t)) ＝
   permute-tuple
     ( m)
     ( tr (tuple A) e v)
@@ -227,7 +228,7 @@ compute-tr-map-tuple f refl v = refl
 
 helper-compute-list-tuple-map-tuple-permute-tuple-tuple-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
+  (f : A → B) (p : list A) (t : permutation (length-list p)) →
   tr
     ( tuple B)
     ( inv (length-permute-list p t))
@@ -255,7 +256,7 @@ helper-compute-list-tuple-map-tuple-permute-tuple-tuple-list f p t =
 
 compute-list-tuple-map-tuple-permute-tuple-tuple-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
+  (f : A → B) (p : list A) (t : permutation (length-list p)) →
   list-tuple
     ( length-list p)
     ( map-tuple f (permute-tuple (length-list p) (tuple-list p) t)) ＝
@@ -271,8 +272,8 @@ compute-list-tuple-map-tuple-permute-tuple-tuple-list f p t =
 
 eq-map-list-permute-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) (p : list A) (t : Permutation (length-list p)) →
-  permute-list (map-list f p) (tr Permutation (inv (length-map-list f p)) t) ＝
+  (f : A → B) (p : list A) (t : permutation (length-list p)) →
+  permute-list (map-list f p) (tr permutation (inv (length-map-list f p)) t) ＝
   map-list f (permute-list p t)
 eq-map-list-permute-list {B = B} f p t =
   ( ( ap
@@ -287,7 +288,7 @@ eq-map-list-permute-list {B = B} f p t =
                 ( permute-tuple
                   ( length-list (map-list f p))
                   ( x)
-                  ( tr Permutation (inv (length-map-list f p)) t)))
+                  ( tr permutation (inv (length-map-list f p)) t)))
             ( tuple-list-map-list-map-tuple-list' f p)) ∙
           ( ( compute-tr-permute-tuple
               ( length-map-list f p)

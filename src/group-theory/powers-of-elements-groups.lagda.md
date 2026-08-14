@@ -96,10 +96,10 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-succ-Group :
+  successor-law-power-Group :
     (n : ℕ) (x : type-Group G) →
     power-Group G (succ-ℕ n) x ＝ mul-Group G (power-Group G n x) x
-  power-succ-Group = power-succ-Monoid (monoid-Group G)
+  successor-law-power-Group = successor-law-power-Monoid (monoid-Group G)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -109,10 +109,10 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-succ-Group' :
+  successor-law-power-Group' :
     (n : ℕ) (x : type-Group G) →
     power-Group G (succ-ℕ n) x ＝ mul-Group G x (power-Group G n x)
-  power-succ-Group' = power-succ-Monoid' (monoid-Group G)
+  successor-law-power-Group' = successor-law-power-Monoid' (monoid-Group G)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -198,7 +198,7 @@ module _
         ＝ inv-Group G (mul-Group G x (power-Group G n x))
           by inv (distributive-inv-mul-Group G)
         ＝ inv-Group G (power-Group G (succ-ℕ n) x)
-          by ap (inv-Group G) (inv (power-succ-Group' G n x))
+          by ap (inv-Group G) (inv (successor-law-power-Group' G n x))
 ```
 
 ### Group homomorphisms preserve powers
@@ -208,12 +208,12 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
-  preserves-powers-hom-Group :
-    (n : ℕ) (x : type-Group G) →
+  preserves-power-hom-Group :
+    (n : ℕ) {x : type-Group G} →
     map-hom-Group G H f (power-Group G n x) ＝
     power-Group H n (map-hom-Group G H f x)
-  preserves-powers-hom-Group =
-    preserves-powers-hom-Monoid
+  preserves-power-hom-Group =
+    preserves-power-hom-Monoid
       ( monoid-Group G)
       ( monoid-Group H)
       ( hom-monoid-hom-Group G H f)

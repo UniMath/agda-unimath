@@ -155,18 +155,18 @@ module _
           ( n)
           ( odd-n))
 
-    preserves-le-root-is-odd-exponent-ℝ :
+    preserves-strict-order-root-is-odd-exponent-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
       le-ℝ x y →
       le-ℝ (root-is-odd-exponent-ℝ n odd-n x) (root-is-odd-exponent-ℝ n odd-n y)
-    preserves-le-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x<y =
-      preserves-le-sim-ℝ
+    preserves-strict-order-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x<y =
+      preserves-strict-order-sim-ℝ
         ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l2 x))
         ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l1 y))
         ( is-strictly-increasing-root-is-odd-exponent-ℝ
           ( raise-ℝ l2 x)
           ( raise-ℝ l1 y)
-          ( preserves-le-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x<y))
+          ( preserves-strict-order-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x<y))
 ```
 
 ### For odd `n`, the `n`th root operation preserves inequality
@@ -185,20 +185,20 @@ module _
         ( root-is-odd-exponent-ℝ n odd-n)
         ( is-strictly-increasing-root-is-odd-exponent-ℝ n odd-n)
 
-    preserves-leq-root-is-odd-exponent-ℝ :
+    preserves-order-root-is-odd-exponent-ℝ :
       {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} →
       leq-ℝ x y →
       leq-ℝ
         ( root-is-odd-exponent-ℝ n odd-n x)
         ( root-is-odd-exponent-ℝ n odd-n y)
-    preserves-leq-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x≤y =
-      preserves-leq-sim-ℝ
+    preserves-order-root-is-odd-exponent-ℝ {l1} {l2} {x} {y} x≤y =
+      preserves-order-sim-ℝ
         ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l2 x))
         ( preserves-sim-root-is-odd-exponent-ℝ n odd-n (sim-raise-ℝ' l1 y))
         ( is-increasing-root-is-odd-exponent-ℝ
           ( raise-ℝ l2 x)
           ( raise-ℝ l1 y)
-          ( preserves-leq-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x≤y))
+          ( preserves-order-sim-ℝ (sim-raise-ℝ l2 x) (sim-raise-ℝ l1 y) x≤y))
 ```
 
 ### For odd `n`, the `n`th root of 0 is 0
@@ -257,7 +257,7 @@ module _
       tr
         ( λ y → leq-ℝ y (root-is-odd-exponent-ℝ n odd-n x))
         ( root-zero-is-odd-exponent-ℝ n odd-n)
-        ( preserves-leq-root-is-odd-exponent-ℝ n odd-n 0≤x)
+        ( preserves-order-root-is-odd-exponent-ℝ n odd-n 0≤x)
 
   root-is-odd-exponent-ℝ⁰⁺ : ℝ⁰⁺ l
   root-is-odd-exponent-ℝ⁰⁺ =

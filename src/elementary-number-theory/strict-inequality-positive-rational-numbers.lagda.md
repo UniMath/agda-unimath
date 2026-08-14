@@ -67,7 +67,7 @@ leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
 ### The strictly preordered set of positive rational numbers
 
 ```agda
-strictly-preordered-set-ℚ⁺ : Strictly-Preordered-Set lzero lzero
+strictly-preordered-set-ℚ⁺ : Strict-Preorder lzero lzero
 pr1 strictly-preordered-set-ℚ⁺ = set-ℚ⁺
 pr2 strictly-preordered-set-ℚ⁺ =
   ( le-prop-ℚ⁺) ,
@@ -76,7 +76,7 @@ pr2 strictly-preordered-set-ℚ⁺ =
 
 strict-preorder-ℚ⁺ : Strict-Preorder lzero lzero
 strict-preorder-ℚ⁺ =
-  strict-preorder-Strictly-Preordered-Set strictly-preordered-set-ℚ⁺
+  strict-preorder-Strict-Preorder strictly-preordered-set-ℚ⁺
 ```
 
 ### There is no least positive rational number

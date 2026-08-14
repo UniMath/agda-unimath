@@ -9,8 +9,9 @@ module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.iterating-functions
 open import foundation.universe-levels
+
+open import foundation-core.iterating-functions
 
 open import structured-types.pointed-types
 

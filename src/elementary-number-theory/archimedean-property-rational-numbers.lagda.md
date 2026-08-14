@@ -69,7 +69,7 @@ opaque
             ( mul-ℚ)
             ( is-retraction-rational-fraction-ℚ (rational-ℤ (int-ℕ n)))
             ( is-retraction-rational-fraction-ℚ x))
-        ( preserves-le-rational-fraction-ℤ
+        ( preserves-strict-order-rational-fraction-ℤ
           ( fraction-ℚ y)
           ( in-fraction-ℤ (int-ℕ n) *fraction-ℤ fraction-ℚ x) nx<y)
 

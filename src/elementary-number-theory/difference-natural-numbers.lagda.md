@@ -46,21 +46,21 @@ use the distance function over the difference function on natural numbers.
 ### The difference of natural numbers
 
 ```agda
-diff-leq-ℕ : (a b : ℕ) → leq-ℕ b a → ℕ
+diff-leq-ℕ : (a b : ℕ) → b ≤-ℕ a → ℕ
 diff-leq-ℕ a 0 star = a
-diff-leq-ℕ (succ-ℕ a) (succ-ℕ b) b≤a = diff-leq-ℕ a b b≤a
+diff-leq-ℕ (succ-ℕ a) (succ-ℕ b) H = diff-leq-ℕ a b H
 
 abstract
   left-add-diff-leq-ℕ :
-    (a b : ℕ) (b≤a : leq-ℕ b a) → diff-leq-ℕ a b b≤a +ℕ b ＝ a
+    (a b : ℕ) (H : b ≤-ℕ a) → diff-leq-ℕ a b H +ℕ b ＝ a
   left-add-diff-leq-ℕ a 0 star = refl
-  left-add-diff-leq-ℕ (succ-ℕ a) (succ-ℕ b) b≤a =
-    ap succ-ℕ (left-add-diff-leq-ℕ a b b≤a)
+  left-add-diff-leq-ℕ (succ-ℕ a) (succ-ℕ b) H =
+    ap succ-ℕ (left-add-diff-leq-ℕ a b H)
 
   right-add-diff-leq-ℕ :
-    (a b : ℕ) (b≤a : leq-ℕ b a) → b +ℕ diff-leq-ℕ a b b≤a ＝ a
-  right-add-diff-leq-ℕ a b b≤a =
-    commutative-add-ℕ b (diff-leq-ℕ a b b≤a) ∙ left-add-diff-leq-ℕ a b b≤a
+    (a b : ℕ) (H : b ≤-ℕ a) → b +ℕ diff-leq-ℕ a b H ＝ a
+  right-add-diff-leq-ℕ a b H =
+    commutative-add-ℕ b (diff-leq-ℕ a b H) ∙ left-add-diff-leq-ℕ a b H
 ```
 
 ### The type of differences of two natural numbers
@@ -72,10 +72,10 @@ type-subtraction-ℕ n m = Σ ℕ (λ l → l +ℕ n ＝ m)
 abstract
   all-elements-equal-type-subtraction-ℕ :
     (n m : ℕ) → all-elements-equal (type-subtraction-ℕ n m)
-  all-elements-equal-type-subtraction-ℕ n m (k , k+n=m) (l , l+n=m) =
+  all-elements-equal-type-subtraction-ℕ n m (k , refl) (l , q) =
     eq-type-subtype
       ( λ x → Id-Prop ℕ-Set (x +ℕ n) m)
-      ( is-injective-right-add-ℕ n (k+n=m ∙ inv l+n=m))
+      ( is-injective-right-add-ℕ n (inv q))
 
   is-prop-type-subtraction-ℕ :
     (n m : ℕ) → is-prop (type-subtraction-ℕ n m)
@@ -92,8 +92,10 @@ subtraction-prop-ℕ n m =
 ### We have `n ≤ m` if and only if there is a number `l` such that `l + n = m`
 
 ```agda
-subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → type-subtraction-ℕ n m
-subtraction-leq-ℕ n m n≤m = (diff-leq-ℕ m n n≤m , left-add-diff-leq-ℕ m n n≤m)
+subtraction-leq-ℕ :
+  (n m : ℕ) → n ≤-ℕ m → type-subtraction-ℕ n m
+subtraction-leq-ℕ n m H =
+  ( diff-leq-ℕ m n H , left-add-diff-leq-ℕ m n H)
 
 abstract
   leq-subtraction-ℕ : (n m l : ℕ) → l +ℕ n ＝ m → n ≤-ℕ m
@@ -111,37 +113,37 @@ subtraction-iff-leq-ℕ n m =
 ```agda
 abstract
   diff-right-add-leq-ℕ :
-    (k m n : ℕ) (n≤m : leq-ℕ n m) →
-    diff-leq-ℕ (m +ℕ k) (n +ℕ k) (preserves-leq-left-add-ℕ k n m n≤m) ＝
-    diff-leq-ℕ m n n≤m
-  diff-right-add-leq-ℕ 0 m n n≤m =
+    (k m n : ℕ) (H : n ≤-ℕ m) →
+    diff-leq-ℕ (m +ℕ k) (n +ℕ k) (preserves-order-left-add-ℕ k n m H) ＝
+    diff-leq-ℕ m n H
+  diff-right-add-leq-ℕ 0 m n H =
     ap (diff-leq-ℕ m n) (eq-is-prop (is-prop-leq-ℕ n m))
-  diff-right-add-leq-ℕ (succ-ℕ k) m n n≤m =
+  diff-right-add-leq-ℕ (succ-ℕ k) m n H =
     ( ap
       ( diff-leq-ℕ (m +ℕ k) (n +ℕ k))
       ( eq-is-prop (is-prop-leq-ℕ (n +ℕ k) (m +ℕ k)))) ∙
-    ( diff-right-add-leq-ℕ k m n n≤m)
+    ( diff-right-add-leq-ℕ k m n H)
 
   diff-left-add-leq-ℕ :
-    (k m n : ℕ) (n≤m : leq-ℕ n m) →
-    diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-leq-right-add-ℕ k n m n≤m) ＝
-    diff-leq-ℕ m n n≤m
-  diff-left-add-leq-ℕ k m n n≤m =
+    (k m n : ℕ) (H : n ≤-ℕ m) →
+    diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-order-right-add-ℕ k n m H) ＝
+    diff-leq-ℕ m n H
+  diff-left-add-leq-ℕ k m n H =
     is-injective-right-add-ℕ
       ( k +ℕ n)
       ( equational-reasoning
-        ( diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-leq-right-add-ℕ k n m n≤m)) +ℕ
+        ( diff-leq-ℕ (k +ℕ m) (k +ℕ n) (preserves-order-right-add-ℕ k n m H)) +ℕ
         ( k +ℕ n)
         ＝ k +ℕ m
           by
             left-add-diff-leq-ℕ
               ( k +ℕ m)
               ( k +ℕ n)
-              ( preserves-leq-right-add-ℕ k n m n≤m)
-        ＝ k +ℕ (diff-leq-ℕ m n n≤m +ℕ n)
-          by ap-add-ℕ refl (inv (left-add-diff-leq-ℕ m n n≤m))
-        ＝ diff-leq-ℕ m n n≤m +ℕ (k +ℕ n)
-          by left-swap-add-ℕ k (diff-leq-ℕ m n n≤m) n)
+              ( preserves-order-right-add-ℕ k n m H)
+        ＝ k +ℕ (diff-leq-ℕ m n H +ℕ n)
+          by ap-add-ℕ refl (inv (left-add-diff-leq-ℕ m n H))
+        ＝ diff-leq-ℕ m n H +ℕ (k +ℕ n)
+          by left-swap-add-ℕ k (diff-leq-ℕ m n H) n)
 ```
 
 ### Where defined, the distance and difference of natural numbers agree
@@ -149,10 +151,10 @@ abstract
 ```agda
 abstract
   eq-diff-dist-leq-ℕ :
-    (m n : ℕ) (n≤m : leq-ℕ n m) → diff-leq-ℕ m n n≤m ＝ dist-ℕ m n
+    (m n : ℕ) (H : n ≤-ℕ m) → diff-leq-ℕ m n H ＝ dist-ℕ m n
   eq-diff-dist-leq-ℕ 0 0 star = refl
   eq-diff-dist-leq-ℕ (succ-ℕ m) 0 star = refl
-  eq-diff-dist-leq-ℕ (succ-ℕ m) (succ-ℕ n) m≤n = eq-diff-dist-leq-ℕ m n m≤n
+  eq-diff-dist-leq-ℕ (succ-ℕ m) (succ-ℕ n) = eq-diff-dist-leq-ℕ m n
 ```
 
 ## See also

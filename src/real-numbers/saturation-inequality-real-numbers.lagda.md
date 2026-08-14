@@ -80,9 +80,9 @@ module _
             ( y +ℝ real-ℚ⁺ (mediant-zero-ℚ⁺ ε))
             ( y +ℝ real-ℚ⁺ ε)
             ( H (mediant-zero-ℚ⁺ ε))
-            ( preserves-le-left-add-ℝ
+            ( preserves-strict-order-left-add-ℝ
               ( y)
               ( real-ℚ⁺ (mediant-zero-ℚ⁺ ε))
               ( real-ℚ⁺ ε)
-              ( preserves-le-real-ℚ (le-mediant-zero-ℚ⁺ ε))))
+              ( preserves-strict-order-real-ℚ (le-mediant-zero-ℚ⁺ ε))))
 ```

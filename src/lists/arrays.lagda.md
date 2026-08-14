@@ -23,6 +23,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.elementhood-relation-lists
 open import lists.equivalence-tuples-finite-sequences
 open import lists.finite-sequences
 open import lists.lists
@@ -38,13 +39,11 @@ open import univalent-combinatorics.standard-finite-types
 
 An
 {{#concept "array" WD="array data type" WDID=Q121079 WD="list" WDID=Q27948 Agda=array}}
-is a [pair](foundation.dependent-pair-types.md) of a
-[natural number](elementary-number-theory.natural-numbers.md) `n`, and a length
-`n` [finite sequence](lists.finite-sequences.md) of elements of a type. We show
-that arrays and [lists](lists.lists.md) are
-[equivalent](foundation-core.equivalences.md).
+is a [pair](foundation.dependent-pair-types.md) consisting of a [natural number](elementary-number-theory.natural-numbers.md) `n`, and a [finite sequence](lists.finite-sequences.md) of `n` elements of `A`. The concept of array is [equivalent](foundation-core.equivalences.md) to the concept of [list](lists.lists.md).
 
 ## Definitions
+
+### Arrays
 
 ```agda
 array : {l : Level} → UU l → UU l
@@ -93,47 +92,14 @@ module _
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
 ```
 
-### The definition of `fold-tuple`
-
-```agda
-fold-tuple :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
-  {n : ℕ} → tuple A n → B
-fold-tuple b μ {0} _ = b
-fold-tuple b μ (a ∷ l) = μ a (fold-tuple b μ l)
-```
-
 ## Properties
 
-### The types of lists and arrays are equivalent
+### The type of lists of elements of A is equivalent to the type of arrays
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
-
-  list-tuple : (n : ℕ) → (tuple A n) → list A
-  list-tuple zero-ℕ _ = nil
-  list-tuple (succ-ℕ n) (x ∷ l) = cons x (list-tuple n l)
-
-  tuple-list : (l : list A) → tuple A (length-list l)
-  tuple-list nil = empty-tuple
-  tuple-list (cons x l) = x ∷ tuple-list l
-
-  is-section-tuple-list : (λ l → list-tuple (length-list l) (tuple-list l)) ~ id
-  is-section-tuple-list nil = refl
-  is-section-tuple-list (cons x l) = ap (cons x) (is-section-tuple-list l)
-
-  is-retraction-tuple-list :
-    ( λ (x : Σ ℕ (λ n → tuple A n)) →
-      ( length-list (list-tuple (pr1 x) (pr2 x)) ,
-        tuple-list (list-tuple (pr1 x) (pr2 x)))) ~
-    id
-  is-retraction-tuple-list (zero-ℕ , empty-tuple) = refl
-  is-retraction-tuple-list (succ-ℕ n , (x ∷ v)) =
-    ap
-      ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
-      ( is-retraction-tuple-list (n , v))
 
   list-array : array A → list A
   list-array (n , t) = list-tuple n (tuple-fin-sequence n t)
@@ -188,41 +154,4 @@ module _
       ( tuple-fin-sequence
         ( length-array t)
         ( fin-sequence-array t))
-```
-
-### An element `x` is in a tuple `v` iff it is in `list-tuple n v`
-
-```agda
-  is-in-list-is-in-tuple-list :
-    (l : list A) (x : A) →
-    x ∈-tuple (tuple-list l) → x ∈-list l
-  is-in-list-is-in-tuple-list (cons y l) .y (is-head .y .(tuple-list l)) =
-    is-head y l
-  is-in-list-is-in-tuple-list
-    (cons y l) x (is-in-tail .x .y .(tuple-list l) I) =
-    is-in-tail x y l (is-in-list-is-in-tuple-list l x I)
-
-  is-in-tuple-list-is-in-list :
-    (l : list A) (x : A) →
-    x ∈-list l → x ∈-tuple (tuple-list l)
-  is-in-tuple-list-is-in-list (cons x l) x (is-head .x l) =
-    is-head x (tuple-list l)
-  is-in-tuple-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
-    is-in-tail x y (tuple-list l) (is-in-tuple-list-is-in-list l x I)
-```
-
-### Link between `fold-list` and `fold-tuple`
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (b : B)
-  (μ : A → (B → B))
-  where
-  htpy-fold-list-fold-tuple :
-    (l : list A) →
-    fold-tuple b μ (tuple-list l) ＝ fold-list b μ l
-  htpy-fold-list-fold-tuple nil = refl
-  htpy-fold-list-fold-tuple (cons x l) =
-    ap (μ x) (htpy-fold-list-fold-tuple l)
 ```

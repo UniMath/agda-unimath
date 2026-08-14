@@ -230,7 +230,7 @@ abstract
       ≤ real-sqrt-ℝ⁰⁺
           ( nonnegative-real-ℕ n *ℝ⁰⁺ nonnegative-square-ℝ (real-ℚ⁺ ε))
         by
-          preserves-leq-sqrt-ℝ⁰⁺
+          preserves-order-sqrt-ℝ⁰⁺
             ( nonnegative-diagonal-dot-product-ℝ-Fin
               ( diff-ℝ-Fin u v))
             ( nonnegative-real-ℕ n *ℝ⁰⁺ nonnegative-square-ℝ (real-ℚ⁺ ε))
@@ -249,7 +249,7 @@ abstract
         by leq-eq-ℝ (ap real-ℝ⁰⁺ (distributive-sqrt-mul-ℝ⁰⁺ _ _))
       ≤ real-ℚ⁺ α *ℝ real-ℚ⁺ ε
         by
-          preserves-leq-mul-ℝ⁰⁺
+          preserves-order-mul-ℝ⁰⁺
             ( sqrt-ℝ⁰⁺ (nonnegative-real-ℕ n))
             ( nonnegative-real-ℚ⁺ α)
             ( sqrt-ℝ⁰⁺ (nonnegative-square-ℝ (real-ℚ⁺ ε)))

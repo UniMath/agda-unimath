@@ -193,7 +193,7 @@ module _
     is-reflexive-neighborhood-prop-Metric :
       is-reflexive-Rational-Neighborhood-Relation (neighborhood-prop-Metric X μ)
     is-reflexive-neighborhood-prop-Metric ε x =
-      preserves-leq-left-sim-ℝ⁰⁺
+      preserves-order-left-sim-ℝ⁰⁺
         ( nonnegative-real-ℚ⁺ ε)
         ( zero-ℝ⁰⁺)
         ( dist-Metric X μ x x)
@@ -236,7 +236,7 @@ module _
         ( tr
           ( leq-ℝ⁰⁺ (dist-Metric X μ x y +ℝ⁰⁺ dist-Metric X μ y z))
           ( add-nonnegative-real-ℚ⁺ εxy εyz)
-          ( preserves-leq-add-ℝ⁰⁺
+          ( preserves-order-add-ℝ⁰⁺
             ( dist-Metric X μ x y)
             ( nonnegative-real-ℚ⁺ εxy)
             ( dist-Metric X μ y z)

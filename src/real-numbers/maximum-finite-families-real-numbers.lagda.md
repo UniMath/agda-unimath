@@ -170,7 +170,7 @@ abstract
                 ( tr
                   ( λ y → le-ℝ y (max-fin-sequence-ℝ n (x ∘ inl) -ℝ real-ℚ⁺ ε₂))
                   ( max-ε₁-ε₂=max-ε)
-                  ( preserves-le-diff-ℝ
+                  ( preserves-strict-order-diff-ℝ
                     ( real-ℚ⁺ ε₂)
                     ( max-fin-sequence-ℝ (succ-ℕ n) x -ℝ real-ℚ⁺ ε₁)
                     ( max-fin-sequence-ℝ n (x ∘ inl)) max-ε₁<max-x-inl)))

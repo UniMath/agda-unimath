@@ -113,7 +113,7 @@ module _
                   ≤ ( real-ℚ⁺ ε₁ *ℝ dist-ℝ (pr1 x) (pr1 y)) +ℝ
                     ( real-ℚ⁺ ε₂ *ℝ dist-ℝ (pr1 x) (pr1 y))
                     by
-                      preserves-leq-add-ℝ
+                      preserves-order-add-ℝ
                         ( is-mod-μ
                           ( ε₁)
                           ( x)

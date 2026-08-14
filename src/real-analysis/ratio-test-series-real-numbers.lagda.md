@@ -115,7 +115,7 @@ module _
                   ≤ r *ℝ abs-ℝ (term-series-ℝ σ n)
                     by K n
                   ≤ r *ℝ seq-standard-geometric-sequence-ℝ |σ₀| r n
-                    by preserves-leq-left-mul-ℝ⁰⁺ r⁰⁺ |σₙ|≤arⁿ
+                    by preserves-order-left-mul-ℝ⁰⁺ r⁰⁺ |σₙ|≤arⁿ
                   ≤ r *ℝ (|σ₀| *ℝ power-ℝ n r)
                     by
                       leq-eq-ℝ

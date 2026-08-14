@@ -134,9 +134,9 @@ module _
   set-Strict-Order : Set l1
   set-Strict-Order = (type-Strict-Order A , is-set-type-Strict-Order)
 
-  strictly-preordered-set-Strict-Order : Strictly-Preordered-Set l1 l2
+  strictly-preordered-set-Strict-Order : Strict-Preorder l1 l2
   strictly-preordered-set-Strict-Order =
-    make-Strictly-Preordered-Set
+    make-Strict-Preorder
       ( strict-preorder-Strict-Order A)
       ( is-set-type-Strict-Order)
 ```

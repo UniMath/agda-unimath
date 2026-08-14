@@ -127,12 +127,12 @@ module _
               (((q , 0≤q , q≤1) , q∈S) , Nε₁qp) ←
                 is-net-S
                   ( p ,
-                    reflects-leq-real-ℚ
-                      ( preserves-leq-right-sim-ℝ
+                    reflects-order-real-ℚ
+                      ( preserves-order-right-sim-ℝ
                         ( sim-rational-ℝ (pℝ , p , p=pℝ))
                         ( 0≤pℝ)) ,
-                    reflects-leq-real-ℚ
-                      ( preserves-leq-left-sim-ℝ
+                    reflects-order-real-ℚ
+                      ( preserves-order-left-sim-ℝ
                         ( sim-rational-ℝ (pℝ , p , p=pℝ))
                         ( pℝ≤1)))
               intro-exists

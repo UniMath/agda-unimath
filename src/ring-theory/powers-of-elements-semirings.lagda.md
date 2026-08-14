@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import group-theory.powers-of-elements-monoids
 
+open import ring-theory.homomorphisms-semirings
 open import ring-theory.semirings
 ```
 
@@ -50,6 +51,21 @@ module _
   power-one-Semiring = power-unit-Monoid (multiplicative-monoid-Semiring R)
 ```
 
+### `0ⁿ⁺¹ ＝ 0`
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-zero-succ-Semiring :
+    (n : ℕ) → power-Semiring R (succ-ℕ n) (zero-Semiring R) ＝ zero-Semiring R
+  power-zero-succ-Semiring zero-ℕ = refl
+  power-zero-succ-Semiring (succ-ℕ n) =
+    right-zero-law-mul-Semiring R
+      ( power-Semiring R (succ-ℕ n) (zero-Semiring R))
+```
+
 ### `xⁿ⁺¹ = xⁿx`
 
 ```agda
@@ -57,10 +73,10 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  power-succ-Semiring :
+  successor-law-power-Semiring :
     (n : ℕ) (x : type-Semiring R) →
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R (power-Semiring R n x) x
-  power-succ-Semiring = power-succ-Monoid (multiplicative-monoid-Semiring R)
+  successor-law-power-Semiring = successor-law-power-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -70,10 +86,10 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  power-succ-Semiring' :
+  successor-law-power-Semiring' :
     (n : ℕ) (x : type-Semiring R) →
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R x (power-Semiring R n x)
-  power-succ-Semiring' = power-succ-Monoid' (multiplicative-monoid-Semiring R)
+  successor-law-power-Semiring' = successor-law-power-Monoid' (multiplicative-monoid-Semiring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -146,4 +162,22 @@ module _
     (m n : ℕ) {x : type-Semiring R} →
     power-Semiring R (m *ℕ n) x ＝ power-Semiring R n (power-Semiring R m x)
   power-mul-Semiring = power-mul-Monoid (multiplicative-monoid-Semiring R)
+```
+
+### Homomorphisms of semirings preserve powers
+
+```agda
+module _
+  {l1 l2 : Level} (R : Semiring l1) (S : Semiring l2) (f : hom-Semiring R S)
+  where
+
+  preserves-power-hom-Semiring :
+    (n : ℕ) {x : type-Semiring R} →
+    map-hom-Semiring R S f (power-Semiring R n x) ＝
+    power-Semiring S n (map-hom-Semiring R S f x)
+  preserves-power-hom-Semiring =
+    preserves-power-hom-Monoid
+      ( multiplicative-monoid-Semiring R)
+      ( multiplicative-monoid-Semiring S)
+      ( hom-multiplicative-monoid-hom-Semiring R S f)
 ```

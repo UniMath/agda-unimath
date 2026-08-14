@@ -218,7 +218,7 @@ abstract
     {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
     dist-ℝ x z ≤-ℝ dist-ℝ x y +ℝ dist-ℝ y z
   triangle-inequality-dist-ℝ x y z =
-    preserves-leq-left-sim-ℝ
+    preserves-order-left-sim-ℝ
       ( preserves-sim-abs-ℝ
         ( similarity-reasoning-ℝ
           x -ℝ y +ℝ y -ℝ z

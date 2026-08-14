@@ -83,16 +83,16 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-sum-fin-sequence-ℝ :
+  preserves-order-sum-fin-sequence-ℝ :
     {l1 l2 : Level}
     (n : ℕ) (a : fin-sequence (ℝ l1) n) (b : fin-sequence (ℝ l2) n) →
     ((i : Fin n) → leq-ℝ (a i) (b i)) →
     leq-ℝ (sum-fin-sequence-ℝ n a) (sum-fin-sequence-ℝ n b)
-  preserves-leq-sum-fin-sequence-ℝ {l1} {l2} 0 _ _ _ =
+  preserves-order-sum-fin-sequence-ℝ {l1} {l2} 0 _ _ _ =
     leq-sim-ℝ (sim-raise-raise-ℝ l1 l2 zero-ℝ)
-  preserves-leq-sum-fin-sequence-ℝ (succ-ℕ n) a b aᵢ≤bᵢ =
-    preserves-leq-add-ℝ
-      ( preserves-leq-sum-fin-sequence-ℝ
+  preserves-order-sum-fin-sequence-ℝ (succ-ℕ n) a b aᵢ≤bᵢ =
+    preserves-order-add-ℝ
+      ( preserves-order-sum-fin-sequence-ℝ
         ( n)
         ( a ∘ inl-Fin n)
         ( b ∘ inl-Fin n)
@@ -167,7 +167,7 @@ abstract
     leq-sim-ℝ
       ( transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 zero-ℝ) (sim-raise-ℝ' l1 zero-ℝ))
   leq-sum-fin-sequence-ℝ (succ-ℕ n) a b H =
-    preserves-leq-add-ℝ
+    preserves-order-add-ℝ
       ( leq-sum-fin-sequence-ℝ
         ( n)
         ( a ∘ inl-Fin n)

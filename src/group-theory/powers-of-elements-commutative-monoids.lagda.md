@@ -96,12 +96,12 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  power-succ-Commutative-Monoid :
+  successor-law-power-Commutative-Monoid :
     (n : ℕ) (x : type-Commutative-Monoid M) →
     power-Commutative-Monoid M (succ-ℕ n) x ＝
     mul-Commutative-Monoid M (power-Commutative-Monoid M n x) x
-  power-succ-Commutative-Monoid =
-    power-succ-Monoid (monoid-Commutative-Monoid M)
+  successor-law-power-Commutative-Monoid =
+    successor-law-power-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -111,12 +111,12 @@ module _
   {l : Level} (M : Commutative-Monoid l)
   where
 
-  power-succ-Commutative-Monoid' :
+  successor-law-power-Commutative-Monoid' :
     (n : ℕ) (x : type-Commutative-Monoid M) →
     power-Commutative-Monoid M (succ-ℕ n) x ＝
     mul-Commutative-Monoid M x (power-Commutative-Monoid M n x)
-  power-succ-Commutative-Monoid' =
-    power-succ-Monoid' (monoid-Commutative-Monoid M)
+  successor-law-power-Commutative-Monoid' =
+    successor-law-power-Monoid' (monoid-Commutative-Monoid M)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -180,11 +180,11 @@ module _
   where
 
   preserves-powers-hom-Commutative-Monoid :
-    (n : ℕ) (x : type-Commutative-Monoid M) →
+    (n : ℕ) {x : type-Commutative-Monoid M} →
     map-hom-Commutative-Monoid M N f (power-Commutative-Monoid M n x) ＝
     power-Commutative-Monoid N n (map-hom-Commutative-Monoid M N f x)
   preserves-powers-hom-Commutative-Monoid =
-    preserves-powers-hom-Monoid
+    preserves-power-hom-Monoid
       ( monoid-Commutative-Monoid M)
       ( monoid-Commutative-Monoid N)
       ( f)

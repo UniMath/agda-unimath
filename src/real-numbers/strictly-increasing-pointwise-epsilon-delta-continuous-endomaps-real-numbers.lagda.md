@@ -230,7 +230,7 @@ module _
           ( x +ℝ real-ℚ⁺ δ)
           ( y)
           ( le-left-add-real-ℝ⁺ x (positive-real-ℚ⁺ δ))
-          ( reflects-leq-is-strictly-increasing-endomap-ℝ
+          ( reflects-order-is-strictly-increasing-endomap-ℝ
             ( map-f)
             ( is-strictly-increasing-map-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
               ( f))

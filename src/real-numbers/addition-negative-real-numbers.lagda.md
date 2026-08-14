@@ -51,7 +51,7 @@ abstract
       ( tr
         ( le-ℝ (x +ℝ y))
         ( right-unit-law-add-ℝ x)
-        ( preserves-le-left-add-ℝ x y zero-ℝ y<0))
+        ( preserves-strict-order-left-add-ℝ x y zero-ℝ y<0))
 
 add-ℝ⁻ : {l1 l2 : Level} → ℝ⁻ l1 → ℝ⁻ l2 → ℝ⁻ (l1 ⊔ l2)
 add-ℝ⁻ (x , x<0) (y , y<0) = (add-ℝ x y , is-negative-add-ℝ x<0 y<0)

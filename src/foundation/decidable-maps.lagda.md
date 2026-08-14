@@ -21,7 +21,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
-open import foundation.iterating-functions
+open import foundation-core.iterating-functions
 open import foundation.propositional-truncations
 open import foundation.retracts-of-arrows
 open import foundation.transport-along-identifications

@@ -234,7 +234,7 @@ module _
 
   abstract
     preserves-product-permutation-fin-sequence-type-Commutative-Monoid :
-      (n : ℕ) → (σ : Permutation n) →
+      (n : ℕ) → (σ : permutation n) →
       (f : fin-sequence-type-Commutative-Monoid M n) →
       product-fin-sequence-type-Commutative-Monoid M n f ＝
       product-fin-sequence-type-Commutative-Monoid M n (f ∘ map-equiv σ)
@@ -298,7 +298,7 @@ module _
           ( f ∘ inl-Fin n)
           ( g ∘ inl-Fin n))
         ( refl)) ∙
-      ( interchange-mul-mul-Commutative-Monoid M _ _ _ _)
+      ( interchange-mul-mul-Commutative-Monoid M)
 ```
 
 ### The product operation is a commutative monoid homomorphism

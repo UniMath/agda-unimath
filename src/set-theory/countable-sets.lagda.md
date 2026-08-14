@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -468,12 +469,12 @@ module _
         ( unit-trunc-Prop
           ( pair
             ( map-maybe-product ∘
-              ( map-product (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
+              ( map-product (pr1 h) (pr1 h') ∘ map-inv-pairing-equiv-ℕ))
             ( is-surjective-comp
               ( is-surjective-map-maybe-product)
               ( is-surjective-comp
                 ( is-surjective-map-product (pr2 h) (pr2 h'))
-                ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ×ℕ)))))))
+                ( is-surjective-is-equiv (is-equiv-map-inv-pairing-equiv-ℕ)))))))
 ```
 
 In particular, the sets ℕ + ℕ, ℕ × ℕ, and ℤ are countable.
@@ -559,7 +560,7 @@ module _
               ( has-decidable-equality-unit)
               ( map-enumeration X e n)
               ( unit-Maybe x))
-          ( m)
+          ( pr2 m)
 
   map-emb-ℕ-enumeration-discrete-Set : type-Set X → ℕ
   map-emb-ℕ-enumeration-discrete-Set x =

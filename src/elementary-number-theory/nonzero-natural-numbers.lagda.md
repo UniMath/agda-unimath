@@ -102,6 +102,9 @@ pr2 (succ-nonzero-ℕ (x , _)) = is-nonzero-succ-ℕ x
 
 succ-ℕ⁺ : ℕ⁺ → ℕ⁺
 succ-ℕ⁺ = succ-nonzero-ℕ
+
+nonzero-succ-ℕ : ℕ → ℕ⁺
+nonzero-succ-ℕ n = (succ-ℕ n , is-nonzero-succ-ℕ n)
 ```
 
 ### The successor function from the natural numbers to the nonzero natural numbers
@@ -190,20 +193,20 @@ _≤-ℕ⁺_ = leq-ℕ⁺
 ### Addition of nonzero natural numbers is a strictly inflationary map
 
 ```agda
-le-left-add-nat-ℕ⁺ : (m : ℕ) (n : ℕ⁺) → le-ℕ m (m +ℕ nat-ℕ⁺ n)
+le-left-add-nat-ℕ⁺ : (m : ℕ) (n : ℕ⁺) → m <-ℕ m +ℕ nat-ℕ⁺ n
 le-left-add-nat-ℕ⁺ m (n , n≠0) =
   tr
     ( λ p → le-ℕ p (m +ℕ n))
     ( right-unit-law-add-ℕ m)
-    ( preserves-le-left-add-ℕ m 0 n (le-is-nonzero-ℕ n n≠0))
+    ( preserves-strict-order-right-add-ℕ m 0 n (le-is-nonzero-ℕ n n≠0))
 ```
 
 ### The predecessor function from the nonzero natural numbers reflects inequality
 
 ```agda
-reflects-leq-pred-nonzero-ℕ :
+reflects-order-pred-nonzero-ℕ :
   (m n : ℕ⁺) → leq-ℕ (pred-ℕ⁺ m) (pred-ℕ⁺ n) → leq-ℕ⁺ m n
-reflects-leq-pred-nonzero-ℕ (succ-ℕ m , _) (succ-ℕ n , _) m≤n = m≤n
-reflects-leq-pred-nonzero-ℕ (zero-ℕ , H) _ = ex-falso (H refl)
-reflects-leq-pred-nonzero-ℕ (succ-ℕ _ , _) (zero-ℕ , H) = ex-falso (H refl)
+reflects-order-pred-nonzero-ℕ (succ-ℕ m , _) (succ-ℕ n , _) m≤n = m≤n
+reflects-order-pred-nonzero-ℕ (zero-ℕ , H) _ = ex-falso (H refl)
+reflects-order-pred-nonzero-ℕ (succ-ℕ _ , _) (zero-ℕ , H) = ex-falso (H refl)
 ```

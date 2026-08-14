@@ -89,7 +89,7 @@ module _
         ( v)
         ( u m +ℝ real-ℚ⁺ ε)
         ( u n +ℝ real-ℚ⁺ ε)
-        ( preserves-leq-right-add-ℝ (real-ℚ⁺ ε) (u m) (u n) (inc-u m n m≤n))
+        ( preserves-order-right-add-ℝ (real-ℚ⁺ ε) (u m) (u n) (inc-u m n m≤n))
         ( leq-le-ℝ
           ( le-transpose-left-diff-ℝ
             ( v)

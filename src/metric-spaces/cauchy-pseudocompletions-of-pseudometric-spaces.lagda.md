@@ -208,7 +208,7 @@ module _
                       ( ap-add-ℚ⁺ (commutative-add-ℚ⁺ _ _) refl)
                 ＝ (δ +ℚ⁺ θa +ℚ⁺ dxy +ℚ⁺ θb) +ℚ⁺ (θa +ℚ⁺ ε +ℚ⁺ dyz +ℚ⁺ θb)
                   by ap-add-ℚ⁺ refl (inv (associative-add-ℚ⁺ _ _ _)))
-              ( preserves-le-right-add-ℚ
+              ( preserves-strict-order-right-add-ℚ
                 ( rational-ℚ⁺ (δ +ℚ⁺ ε +ℚ⁺ (dxy +ℚ⁺ dyz)))
                 ( rational-ℚ⁺ (θ₂ +ℚ⁺ θ₂))
                 ( rational-ℚ⁺ θ)

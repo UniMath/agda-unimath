@@ -122,7 +122,7 @@ module _
     {x y : type-Monoid M} →
     is-in-Submonoid x → is-in-Submonoid y →
     is-in-Submonoid (mul-Monoid M x y)
-  is-closed-under-multiplication-Submonoid {x} {y} = pr2 (pr2 P) x y
+  is-closed-under-multiplication-Submonoid = pr2 (pr2 P)
 
   mul-Submonoid : (x y : type-Submonoid) → type-Submonoid
   pr1 (mul-Submonoid x y) =

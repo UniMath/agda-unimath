@@ -58,7 +58,7 @@ module _
       tr
         ( λ z → leq-ℝ z (real-ℝ⁰⁺ x +ℝ real-ℝ⁰⁺ y))
         ( left-unit-law-add-ℝ zero-ℝ)
-        ( preserves-leq-add-ℝ
+        ( preserves-order-add-ℝ
           ( is-nonnegative-real-ℝ⁰⁺ x)
           ( is-nonnegative-real-ℝ⁰⁺ y))
 
@@ -96,9 +96,9 @@ module _
   where
 
   abstract
-    preserves-leq-add-ℝ⁰⁺ :
+    preserves-order-add-ℝ⁰⁺ :
       leq-ℝ⁰⁺ x y → leq-ℝ⁰⁺ z w → leq-ℝ⁰⁺ (x +ℝ⁰⁺ z) (y +ℝ⁰⁺ w)
-    preserves-leq-add-ℝ⁰⁺ = preserves-leq-add-ℝ
+    preserves-order-add-ℝ⁰⁺ = preserves-order-add-ℝ
 ```
 
 ### The canonical embedding of nonnegative rational numbers to nonnegative real numbers preserves addition
@@ -133,9 +133,9 @@ module _
   where
 
   abstract
-    preserves-le-add-ℝ⁰⁺ :
+    preserves-strict-order-add-ℝ⁰⁺ :
       le-ℝ⁰⁺ x y → le-ℝ⁰⁺ z w → le-ℝ⁰⁺ (x +ℝ⁰⁺ z) (y +ℝ⁰⁺ w)
-    preserves-le-add-ℝ⁰⁺ = preserves-le-add-ℝ
+    preserves-strict-order-add-ℝ⁰⁺ = preserves-strict-order-add-ℝ
 ```
 
 ### Addition with a nonnegative real number is an inflationary map
@@ -148,7 +148,7 @@ abstract
     tr
       ( λ y → leq-ℝ y (x +ℝ d))
       ( right-unit-law-add-ℝ x)
-      ( preserves-leq-left-add-ℝ x zero-ℝ d pos-d)
+      ( preserves-order-left-add-ℝ x zero-ℝ d pos-d)
 
   leq-right-add-real-ℝ⁰⁺ :
     {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (real-ℝ⁰⁺ d +ℝ x)
@@ -166,5 +166,5 @@ abstract
     tr
       ( leq-ℝ _)
       ( right-unit-law-diff-ℝ x)
-      ( preserves-leq-left-add-ℝ _ _ _ (neg-leq-ℝ 0≤d))
+      ( preserves-order-left-add-ℝ _ _ _ (neg-leq-ℝ 0≤d))
 ```

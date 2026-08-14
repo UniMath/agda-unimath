@@ -10,124 +10,64 @@ module elementary-number-theory.triangular-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.additive-group-of-rational-numbers
-open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.multiplication-positive-rational-numbers
-open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.semiring-of-natural-numbers
-open import elementary-number-theory.series-rational-numbers
-open import elementary-number-theory.unit-fractions-rational-numbers
+open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.pronic-numbers
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
-
-open import group-theory.abelian-groups
-open import group-theory.groups
-
-open import metric-spaces.limits-of-sequences-metric-spaces
-open import metric-spaces.metric-space-of-rational-numbers
-open import metric-spaces.rational-sequences-approximating-zero
-open import metric-spaces.uniformly-continuous-maps-metric-spaces
-
-open import ring-theory.partial-sums-sequences-semirings
 ```
 
 </details>
 
 ## Idea
 
-{{#concept "Triangular numbers" WD="triangular number" WDID=Q245102 OEIS=A000217 Agda=triangular-number-ℕ}}
-are the sequence of
-[natural numbers](elementary-number-theory.natural-numbers.md) `Tₙ` defined by:
+The $n$th
+{{#concept "triangular number" WD="triangular number" WDID=Q245102 OEIS=A000217 Agda=triangular-number-ℕ}}
+is the
+[sum](elementary-number-theory.sums-of-finite-sequences-natural-numbers.md) of
+the [natural numbers](elementary-number-theory.natural-numbers.md) up to $n$.
+Alternatively, the triangular numbers can be defined inductively by
 
-- `T₀ = 0`;
-- `Tₙ₊₁ = Tₙ + n + 1`.
+```text
+  T 0 := 0
+  T (n + 1) := T n + (n + 1).
+```
 
-I.e., `Tₙ = Σ (k ≤ n) k`. The nth triangular number is equal to `n(n+1)/2`.
+A classic inductive proof, which is often used as the first example when
+introducing students to mathematical induction, establishes the famous fact that
+
+```text
+  T n = n(n + 1)/2.
+```
+
+In other words, the $n$th triangular number is half the $n$th
+[pronic number](elementary-number-theory.pronic-numbers.md).
 
 ## Definition
 
-### Triangular numbers
+### The sum definition of the triangular numbers
 
 ```agda
 triangular-number-ℕ : ℕ → ℕ
-triangular-number-ℕ 0 = 0
-triangular-number-ℕ (succ-ℕ n) = (triangular-number-ℕ n) +ℕ (succ-ℕ n)
+triangular-number-ℕ n = bounded-sum-ℕ n (λ x H → x)
 ```
 
-### The sums `Σ (k ≤ n) k`
+### The inductive definition of the triangular numbers
 
 ```agda
-sum-leq-ℕ : ℕ → ℕ
-sum-leq-ℕ = seq-sum-sequence-Semiring ℕ-Semiring (λ k → k)
+inductive-triangular-number-ℕ : ℕ → ℕ
+inductive-triangular-number-ℕ 0 = 0
+inductive-triangular-number-ℕ (succ-ℕ n) =
+  inductive-triangular-number-ℕ n +ℕ succ-ℕ n
 ```
 
-## Properties
-
-### The nth triangular number is the sum `Σ (k ≤ n) k`
-
-```agda
-htpy-sum-leq-triangular-ℕ : triangular-number-ℕ ~ sum-leq-ℕ
-htpy-sum-leq-triangular-ℕ zero-ℕ = refl
-htpy-sum-leq-triangular-ℕ (succ-ℕ n) =
-  ap (add-ℕ' (succ-ℕ n)) (htpy-sum-leq-triangular-ℕ n)
-```
-
-### Twice the nth triangular number is `n(n+1)`
-
-```agda
-abstract
-  compute-twice-triangular-number-ℕ :
-    (n : ℕ) → (triangular-number-ℕ n) +ℕ (triangular-number-ℕ n) ＝ n *ℕ succ-ℕ n
-  compute-twice-triangular-number-ℕ zero-ℕ = refl
-  compute-twice-triangular-number-ℕ (succ-ℕ n) =
-    ( interchange-law-add-add-ℕ
-      ( triangular-number-ℕ n)
-      ( succ-ℕ n)
-      ( triangular-number-ℕ n)
-      ( succ-ℕ n)) ∙
-    ( ap-add-ℕ
-      ( compute-twice-triangular-number-ℕ n)
-      ( inv (left-two-law-mul-ℕ (succ-ℕ n)))) ∙
-    ( inv (right-distributive-mul-add-ℕ n 2 (succ-ℕ n))) ∙
-    ( commutative-mul-ℕ (n +ℕ 2) (succ-ℕ n))
-
-  compute-double-triangular-number-ℕ :
-    (n : ℕ) → 2 *ℕ triangular-number-ℕ n ＝ n *ℕ succ-ℕ n
-  compute-double-triangular-number-ℕ n =
-    left-two-law-mul-ℕ _ ∙ compute-twice-triangular-number-ℕ n
-```
-
-### The nth triangular number is `n(n+1)/2`
-
-```agda
-module _
-  (n : ℕ)
-  where
-
-  compute-triangular-number-ℕ :
-    Σ ( div-ℕ 2 (n *ℕ succ-ℕ n))
-      ( λ H → quotient-div-ℕ 2 (n *ℕ succ-ℕ n) H ＝ triangular-number-ℕ n)
-  pr1 (pr1 compute-triangular-number-ℕ) = triangular-number-ℕ n
-  pr2 (pr1 compute-triangular-number-ℕ) =
-    ( right-two-law-mul-ℕ (triangular-number-ℕ n)) ∙
-    ( compute-twice-triangular-number-ℕ n)
-  pr2 compute-triangular-number-ℕ = refl
-```
-
-### The `n+1`th triangular number is nonzero
+### The nonzero triangular numbers
 
 ```agda
 abstract
@@ -136,169 +76,84 @@ abstract
   is-nonzero-triangular-number-succ-ℕ 0 ()
   is-nonzero-triangular-number-succ-ℕ (succ-ℕ n) ()
 
-nonzero-triangular-number-succ-ℕ : ℕ → ℕ⁺
-nonzero-triangular-number-succ-ℕ n =
-  ( triangular-number-ℕ (succ-ℕ n) ,
-    is-nonzero-triangular-number-succ-ℕ n)
+  is-nonzero-triangular-number-ℕ :
+    {n : ℕ} → is-nonzero-ℕ n → is-nonzero-ℕ (triangular-number-ℕ n)
+  is-nonzero-triangular-number-ℕ H
+    with
+    is-successor-is-nonzero-ℕ H
+  ... | (m , refl) = is-nonzero-triangular-number-succ-ℕ m
+
+triangular-number-ℕ⁺ : ℕ⁺ → ℕ⁺
+pr1 (triangular-number-ℕ⁺ (n , H)) = triangular-number-ℕ n
+pr2 (triangular-number-ℕ⁺ (n , H)) = is-nonzero-triangular-number-ℕ H
 ```
 
-### The sum of the reciprocals of the first `n` nonzero triangular numbers is `2(1-1/(n+1))`
+## Properties
+
+### The two definitions of triangular numbers are the same
 
 ```agda
-reciprocal-triangular-number-succ-ℕ : ℕ → ℚ
-reciprocal-triangular-number-succ-ℕ n =
-  reciprocal-rational-ℕ⁺ (nonzero-triangular-number-succ-ℕ n)
-
-abstract
-  compute-reciprocal-triangular-number-succ-ℕ :
-    (n : ℕ) →
-    reciprocal-triangular-number-succ-ℕ n ＝
-    rational-ℕ 2 *ℚ
-    reciprocal-rational-ℕ⁺ (succ-nonzero-ℕ' n *ℕ⁺ succ-nonzero-ℕ' (succ-ℕ n))
-  compute-reciprocal-triangular-number-succ-ℕ n =
-    ap
-      ( rational-ℚ⁺)
-      ( equational-reasoning
-        inv-ℚ⁺ (positive-rational-ℕ⁺ (nonzero-triangular-number-succ-ℕ n))
-        ＝
-          two-ℚ⁺ *ℚ⁺
-          ( inv-ℚ⁺ two-ℚ⁺ *ℚ⁺
-            inv-ℚ⁺ (positive-rational-ℕ⁺ (nonzero-triangular-number-succ-ℕ n)))
-          by
-            inv
-              ( is-section-left-div-Group
-                ( group-mul-ℚ⁺)
-                ( positive-rational-ℕ⁺ (2 , λ ()))
-                ( inv-ℚ⁺
-                  ( positive-rational-ℕ⁺ (nonzero-triangular-number-succ-ℕ n))))
-        ＝
-          two-ℚ⁺ *ℚ⁺
-          ( inv-ℚ⁺
-            ( two-ℚ⁺ *ℚ⁺
-              positive-rational-ℕ⁺ (nonzero-triangular-number-succ-ℕ n)))
-          by ap-mul-ℚ⁺ refl (inv (distributive-inv-mul-ℚ⁺ _ _))
-        ＝
-          two-ℚ⁺ *ℚ⁺
-          ( inv-ℚ⁺
-            ( positive-rational-ℕ⁺
-              ( 2 *ℕ triangular-number-ℕ (succ-ℕ n) , λ ())))
-          by
-            ap-mul-ℚ⁺
-              ( refl)
-              ( ap
-                ( inv-ℚ⁺)
-                ( eq-ℚ⁺ (mul-rational-ℕ 2 (triangular-number-ℕ (succ-ℕ n)))))
-        ＝
-          two-ℚ⁺ *ℚ⁺
-          positive-reciprocal-rational-ℕ⁺
-            ( succ-nonzero-ℕ' n *ℕ⁺ succ-nonzero-ℕ' (succ-ℕ n))
-          by
-            ap-mul-ℚ⁺
-              ( refl)
-              ( ap
-                ( positive-reciprocal-rational-ℕ⁺)
-                ( eq-nonzero-ℕ
-                  ( compute-double-triangular-number-ℕ (succ-ℕ n)))))
-
-series-reciprocal-triangular-number-ℕ : series-ℚ
-series-reciprocal-triangular-number-ℕ =
-  series-terms-ℚ reciprocal-triangular-number-succ-ℕ
-
-abstract
-  compute-partial-sum-series-reciprocal-triangular-number-ℕ :
-    (n : ℕ) →
-    partial-sum-series-ℚ
-      ( series-reciprocal-triangular-number-ℕ)
-      ( n) ＝
-    rational-ℕ 2 *ℚ (one-ℚ -ℚ reciprocal-rational-succ-ℕ n)
-  compute-partial-sum-series-reciprocal-triangular-number-ℕ 0 =
-    inv
-      ( equational-reasoning
-        rational-ℕ 2 *ℚ (one-ℚ -ℚ reciprocal-rational-succ-ℕ zero-ℕ)
-        ＝ rational-ℕ 2 *ℚ (one-ℚ -ℚ one-ℚ)
-          by ap-mul-ℚ refl (ap-diff-ℚ refl (ap rational-ℚ⁺ inv-one-ℚ⁺))
-        ＝ rational-ℕ 2 *ℚ zero-ℚ
-          by ap-mul-ℚ refl (right-inverse-law-add-ℚ one-ℚ)
-        ＝ zero-ℚ
-          by right-zero-law-mul-ℚ _)
-  compute-partial-sum-series-reciprocal-triangular-number-ℕ (succ-ℕ n) =
-    equational-reasoning
-      partial-sum-series-ℚ
-        ( series-reciprocal-triangular-number-ℕ)
-        ( n) +ℚ
-      reciprocal-triangular-number-succ-ℕ n
-      ＝
-        rational-ℕ 2 *ℚ (one-ℚ -ℚ reciprocal-rational-succ-ℕ n) +ℚ
-        rational-ℕ 2 *ℚ
-          reciprocal-rational-ℕ⁺
-            ( succ-nonzero-ℕ' n *ℕ⁺ succ-nonzero-ℕ' (succ-ℕ n))
-        by
-          ap-add-ℚ
-            ( compute-partial-sum-series-reciprocal-triangular-number-ℕ n)
-            ( compute-reciprocal-triangular-number-succ-ℕ n)
-      ＝
-        rational-ℕ 2 *ℚ
-        ( ( one-ℚ -ℚ reciprocal-rational-succ-ℕ n) +ℚ
-          reciprocal-rational-ℕ⁺
-            ( succ-nonzero-ℕ' n *ℕ⁺ succ-nonzero-ℕ' (succ-ℕ n)))
-        by inv (left-distributive-mul-add-ℚ _ _ _)
-      ＝
-        rational-ℕ 2 *ℚ
-        ( ( one-ℚ -ℚ reciprocal-rational-succ-ℕ n) +ℚ
-          ( reciprocal-rational-succ-ℕ n -ℚ
-            reciprocal-rational-succ-ℕ (succ-ℕ n)))
-        by
-          ap-mul-ℚ
-            ( refl)
-            ( ap-add-ℚ refl (inv (diff-succ-reciprocal-ℕ⁺ (succ-nonzero-ℕ' n))))
-      ＝
-        rational-ℕ 2 *ℚ
-        ( one-ℚ -ℚ reciprocal-rational-succ-ℕ (succ-ℕ n))
-        by ap-mul-ℚ refl (add-right-subtraction-Ab abelian-group-add-ℚ _ _ _)
+compute-inductive-triangular-number-ℕ :
+  (n : ℕ) → inductive-triangular-number-ℕ n ＝ triangular-number-ℕ n
+compute-inductive-triangular-number-ℕ zero-ℕ = refl
+compute-inductive-triangular-number-ℕ (succ-ℕ n) =
+  ap (add-ℕ' (succ-ℕ n)) (compute-inductive-triangular-number-ℕ n)
 ```
 
-### The sum of reciprocals of triangular numbers converges to 2
+### The $n$th triangular number is $\frac{1}{2}n(n+1)$
 
-This theorem is the [42nd](literature.100-theorems.md#42) theorem on
-[Freek Wiedijk](http://www.cs.ru.nl/F.Wiedijk/)'s list of
-[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+**Proof.** The claim is equivalent to the claim that
+
+$$
+  2 \cdot \left(\sum_{i\leq n} i\right) = n(n+1).
+$$
+
+We prove this claim to avoid an early division by two, and the proof is by
+induction on $n$. In the base case both sides of the equality are $0$. For the
+inductive step, assume that $2 \cdot \sum_{i\leq n} i ＝ n(n+1)$. Then we can
+compute
+
+$$
+2 \cdot \sum_{i\leq n+1} i = 2 \cdot \left(\sum_{i\leq n} i\right)+ 2(n+1) = n(n+1) + ((n+1) + (n+1)) = (n+1)(n+2).
+$$
 
 ```agda
-abstract
-  sum-reciprocal-triangular-number-ℕ :
-    is-sum-series-ℚ
-      ( series-reciprocal-triangular-number-ℕ)
-      ( rational-ℕ 2)
-  sum-reciprocal-triangular-number-ℕ =
-    binary-tr
-      ( is-limit-sequence-Metric-Space metric-space-ℚ)
-      ( inv (eq-htpy compute-partial-sum-series-reciprocal-triangular-number-ℕ))
-      ( equational-reasoning
-        rational-ℕ 2 *ℚ (one-ℚ -ℚ zero-ℚ)
-        ＝ rational-ℕ 2 *ℚ one-ℚ
-          by ap-mul-ℚ refl (right-zero-law-diff-ℚ one-ℚ)
-        ＝ rational-ℕ 2
-          by right-unit-law-mul-ℚ _)
-      ( is-limit-map-sequence-uniformly-continuous-map-Metric-Space
-        ( metric-space-ℚ)
-        ( metric-space-ℚ)
-        ( comp-uniformly-continuous-map-Metric-Space
-          ( metric-space-ℚ)
-          ( metric-space-ℚ)
-          ( metric-space-ℚ)
-          ( uniformly-continuous-map-left-mul-ℚ (rational-ℕ 2))
-          ( uniformly-continuous-map-left-diff-ℚ one-ℚ))
-        ( reciprocal-rational-succ-ℕ)
-        ( zero-ℚ)
-        ( is-zero-limit-reciprocal-rational-succ-ℕ))
+value-triangular-number-ℕ : ℕ → ℕ
+value-triangular-number-ℕ n =
+  quotient-div-ℕ 2 (pronic-number-ℕ n) (is-even-pronic-number-ℕ n)
+
+compute-triangular-number-ℕ' :
+  (n : ℕ) → 2 *ℕ triangular-number-ℕ n ＝ pronic-number-ℕ n
+compute-triangular-number-ℕ' zero-ℕ = refl
+compute-triangular-number-ℕ' (succ-ℕ n) =
+  left-distributive-mul-add-ℕ 2 (triangular-number-ℕ n) (succ-ℕ n) ∙
+  ap-add-ℕ (compute-triangular-number-ℕ' n) (left-two-law-mul-ℕ (succ-ℕ n)) ∙
+  inv (associative-add-ℕ (n *ℕ succ-ℕ n) (succ-ℕ n) (succ-ℕ n)) ∙
+  inv (right-successor-law-mul-ℕ (succ-ℕ n) (succ-ℕ n))
+
+compute-triangular-number-ℕ :
+  (n : ℕ) →
+  triangular-number-ℕ n ＝
+  quotient-div-ℕ 2 (pronic-number-ℕ n) (is-even-pronic-number-ℕ n)
+compute-triangular-number-ℕ n =
+  is-injective-left-mul-ℕ 2
+    ( is-nonzero-two-ℕ)
+    ( compute-triangular-number-ℕ' n ∙
+      inv (eq-quotient-div-ℕ 2 (n *ℕ succ-ℕ n) (is-even-pronic-number-ℕ n)) ∙
+      commutative-mul-ℕ (value-triangular-number-ℕ n) 2)
 ```
 
-## References
+## See also
 
-{{#bibliography}}
+- [Nicomachus's Theorem](elementary-number-theory.nicomachuss-theorem.md)
+- [Reciprocal triangular numbers](elementary-number-theory.reciprocal-triangular-numbers.md)
 
 ## External references
 
 - [Triangular number](https://en.wikipedia.org/wiki/Triangular_number) at
   Wikipedia.
 - [A000217](https://oeis.org/A000217) in the OEIS
+
+## References
+
+{{#bibliography}}

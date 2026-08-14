@@ -14,8 +14,10 @@ open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
+open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-function-types
@@ -111,6 +113,15 @@ module _
     (a : A) → is-proof-irrelevant (is-in-decidable-subtype a)
   is-proof-irrelevant-is-in-decidable-subtype a =
     is-proof-irrelevant-is-prop (is-prop-is-in-decidable-subtype a)
+```
+
+### The underlying decidable type family of a decidable subtype
+
+```agda
+decidable-family-decidable-subtype :
+  {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → decidable-family l2 A
+decidable-family-decidable-subtype P =
+  ( is-in-decidable-subtype P , is-decidable-decidable-subtype P)
 ```
 
 ### The underlying type of a decidable subtype
@@ -535,4 +546,34 @@ module _
         is-surjective-extend-map-maybe-decidable-subtype)
       ( surjection-map-surjection-Maybe
         ( surjection-equiv (equiv-Σ-decide-is-in-decidable-subtype S)))
+```
+
+### Composition of decidable families
+
+Given a decidable family of types with double negation dense equality
+`P : A → 𝒰` and a decidable type family `Q : (x : A) → P x → 𝒰` then, via
+[type duality](foundation.type-duality.md) we may _compose_ `Q` after `P` and
+obtain a decidable type family `Q ∘ P : A → 𝒰`, defined on elements as
+[dependent pair types](foundation.dependent-pair-types.md).
+
+```text
+  (Q ∘ P) x := Σ (y : P x), (Q x y).
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  comp-decidable-family-decidable-subtype :
+    (P : decidable-subtype l2 A) →
+    ((x : A) → decidable-family l3 (is-in-decidable-subtype P x)) →
+    decidable-family (l2 ⊔ l3) A
+  comp-decidable-family-decidable-subtype P Q =
+    comp-decidable-family-has-double-negation-dense-equality
+      ( decidable-family-decidable-subtype P)
+      ( Q)
+      ( λ x p q →
+        intro-double-negation
+          ( eq-is-prop (is-prop-is-in-decidable-subtype P x)))
 ```

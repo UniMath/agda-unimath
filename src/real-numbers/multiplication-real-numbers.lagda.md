@@ -480,9 +480,9 @@ module _
                         r<y ,
                         y<s))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ (right-leq-max-ℕ _ _)
+                by preserves-order-rational-ℕ (right-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
+                by preserves-order-rational-ℕ (succ-leq-ℕ N)
           max|p||q|≤sN =
             chain-of-inequalities
               max-ℚ (rational-abs-ℚ p) (rational-abs-ℚ q)
@@ -498,9 +498,9 @@ module _
                         p<x ,
                         x<q))
               ≤ rational-ℕ N
-                by preserves-leq-rational-ℕ (left-leq-max-ℕ _ _)
+                by preserves-order-rational-ℕ (left-leq-max-ℕ _ _)
               ≤ rational-ℕ (succ-ℕ N)
-                by preserves-leq-rational-ℕ (succ-leq-ℕ N)
+                by preserves-order-rational-ℕ (succ-leq-ℕ N)
           [p,q] = ((p , q) , p≤q)
           [r,s] = ((r , s) , r≤s)
           a = lower-bound-mul-closed-interval-ℚ [p,q] [r,s]
@@ -516,15 +516,15 @@ module _
               ≤ ( rational-ℚ⁺ εx *ℚ rational-ℕ (succ-ℕ N)) +ℚ
                 ( rational-ℚ⁺ εy *ℚ rational-ℕ (succ-ℕ N))
                 by
-                  preserves-leq-add-ℚ
-                    ( preserves-leq-mul-ℚ⁰⁺
+                  preserves-order-add-ℚ
+                    ( preserves-order-mul-ℚ⁰⁺
                       ( nonnegative-diff-leq-ℚ _ _ p≤q)
                       ( nonnegative-ℚ⁺ εx)
                       ( max-ℚ⁰⁺ (abs-ℚ r) (abs-ℚ s))
                       ( nonnegative-rational-ℕ (succ-ℕ N))
                       ( leq-le-ℚ q-p<εx)
                       ( max|r||s|≤sN))
-                    ( preserves-leq-mul-ℚ⁰⁺
+                    ( preserves-order-mul-ℚ⁰⁺
                       ( nonnegative-diff-leq-ℚ _ _ r≤s)
                       ( nonnegative-ℚ⁺ εy)
                       ( max-ℚ⁰⁺ (abs-ℚ p) (abs-ℚ q))
@@ -541,11 +541,11 @@ module _
                     ( εy₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N)) *ℚ
                   ( rational-ℕ (succ-ℕ N))
                 by
-                  preserves-leq-right-mul-ℚ⁰⁺
+                  preserves-order-right-mul-ℚ⁰⁺
                     ( nonnegative-rational-ℕ (succ-ℕ N))
                     ( _)
                     ( _)
-                    ( preserves-leq-add-ℚ
+                    ( preserves-order-add-ℚ
                       ( leq-right-min-ℚ⁺
                         ( one-ℚ⁺)
                         ( εx₀ *ℚ⁺ positive-reciprocal-rational-succ-ℕ N))
@@ -683,7 +683,7 @@ module _
               ( y∈⟨ay,by⟩)
               ( y∈⟨ay',by'⟩)
           [ax'',bx''][ay'',by'']⊆[ax,bx][ay,by] =
-            preserves-leq-mul-closed-interval-ℚ
+            preserves-order-mul-closed-interval-ℚ
               ( [ax'',bx''])
               ( [ax,bx])
               ( [ay'',by''])
@@ -697,7 +697,7 @@ module _
                 ( [ay',by'])
                 ( [ay,by]∩[ay',by']))
           [ax'',bx''][ay'',by'']⊆[ax',bx'][ay',by'] =
-            preserves-leq-mul-closed-interval-ℚ
+            preserves-order-mul-closed-interval-ℚ
               ( [ax'',bx''])
               ( [ax',bx'])
               ( [ay'',by''])
@@ -785,7 +785,7 @@ module _
                     ( z)
                     ( mul-closed-interval-ℚ [axy,bxy] [az,bz]))
                 ( associative-mul-closed-interval-ℚ [ax,bx] [ay,by] [az,bz])
-                ( preserves-leq-left-mul-closed-interval-ℚ
+                ( preserves-order-left-mul-closed-interval-ℚ
                   ( [az,bz])
                   ( mul-closed-interval-ℚ [ax,bx] [ay,by])
                   ( [axy,bxy])
@@ -926,10 +926,10 @@ abstract opaque
               ( inv-tr
                 ( le-ℚ _)
                 ( q=qxy+qxz)
-                ( preserves-le-add-ℚ
+                ( preserves-strict-order-add-ℚ
                   ( concatenate-leq-le-ℚ _ _ _
                     ( pr2
-                      ( preserves-leq-left-mul-closed-interval-ℚ
+                      ( preserves-order-left-mul-closed-interval-ℚ
                         ( [ay,by])
                         ( [ax'',bx''])
                         ( [ax,bx])
@@ -940,7 +940,7 @@ abstract opaque
                     ( [ax,bx][ay,by]<qxy))
                   ( concatenate-leq-le-ℚ _ _ _
                     ( pr2
-                      ( preserves-leq-left-mul-closed-interval-ℚ
+                      ( preserves-order-left-mul-closed-interval-ℚ
                         ( [az,bz])
                         ( [ax'',bx''])
                         ( [ax',bx'])
@@ -991,11 +991,11 @@ abstract opaque
           ( inv-tr
               ( λ p → le-ℚ p _)
               ( q=qxy+qxz)
-              ( preserves-le-add-ℚ
+              ( preserves-strict-order-add-ℚ
                 ( concatenate-le-leq-ℚ _ _ _
                   ( qxy<[ax,bx][ay,by])
                   ( pr1
-                    ( preserves-leq-left-mul-closed-interval-ℚ
+                    ( preserves-order-left-mul-closed-interval-ℚ
                       ( [ay,by])
                       ( [ax'',bx''])
                       ( [ax,bx])
@@ -1006,7 +1006,7 @@ abstract opaque
                 ( concatenate-le-leq-ℚ _ _ _
                   ( qxz<[ax',bx'][az,bz])
                   ( pr1
-                    ( preserves-leq-left-mul-closed-interval-ℚ
+                    ( preserves-order-left-mul-closed-interval-ℚ
                       ( [az,bz])
                       ( [ax'',bx''])
                       ( [ax',bx'])

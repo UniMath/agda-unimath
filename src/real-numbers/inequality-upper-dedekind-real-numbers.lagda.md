@@ -135,20 +135,20 @@ module _
 ### The canonical map from the rational numbers to the upper reals preserves inequality
 
 ```agda
-preserves-leq-upper-real-ℚ :
+preserves-order-upper-real-ℚ :
   (p q : ℚ) → leq-ℚ p q → leq-upper-ℝ (upper-real-ℚ p) (upper-real-ℚ q)
-preserves-leq-upper-real-ℚ p q p≤q r = concatenate-leq-le-ℚ p q r p≤q
+preserves-order-upper-real-ℚ p q p≤q r = concatenate-leq-le-ℚ p q r p≤q
 
-reflects-leq-upper-real-ℚ :
+reflects-order-upper-real-ℚ :
   (p q : ℚ) → leq-upper-ℝ (upper-real-ℚ p) (upper-real-ℚ q) → leq-ℚ p q
-reflects-leq-upper-real-ℚ p q q<r→p<r with decide-le-leq-ℚ q p
+reflects-order-upper-real-ℚ p q q<r→p<r with decide-le-leq-ℚ q p
 ... | inr p≤q = p≤q
 ... | inl q<p = ex-falso (irreflexive-le-ℚ p (q<r→p<r p q<p))
 
 iff-leq-upper-real-ℚ :
   (p q : ℚ) → leq-ℚ p q ↔ leq-upper-ℝ (upper-real-ℚ p) (upper-real-ℚ q)
-pr1 (iff-leq-upper-real-ℚ p q) = preserves-leq-upper-real-ℚ p q
-pr2 (iff-leq-upper-real-ℚ p q) = reflects-leq-upper-real-ℚ p q
+pr1 (iff-leq-upper-real-ℚ p q) = preserves-order-upper-real-ℚ p q
+pr2 (iff-leq-upper-real-ℚ p q) = reflects-order-upper-real-ℚ p q
 ```
 
 ### Negative infinity is the bottom element of the large poset of upper reals

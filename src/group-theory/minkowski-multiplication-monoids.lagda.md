@@ -178,15 +178,15 @@ module _
   (A' : subset-Monoid l4 M)
   where
 
-  preserves-leq-left-minkowski-mul-Monoid :
+  preserves-order-left-minkowski-mul-Monoid :
     A ⊆ A' → minkowski-mul-Monoid M A B ⊆ minkowski-mul-Monoid M A' B
-  preserves-leq-left-minkowski-mul-Monoid =
-    preserves-leq-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+  preserves-order-left-minkowski-mul-Monoid =
+    preserves-order-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 
-  preserves-leq-right-minkowski-mul-Monoid :
+  preserves-order-right-minkowski-mul-Monoid :
     A ⊆ A' → minkowski-mul-Monoid M B A ⊆ minkowski-mul-Monoid M B A'
-  preserves-leq-right-minkowski-mul-Monoid =
-    preserves-leq-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+  preserves-order-right-minkowski-mul-Monoid =
+    preserves-order-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 ```
 
 ### Similarity of subsets is preserved by Minkowski multiplication

@@ -20,6 +20,7 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.unit-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -774,7 +775,7 @@ abstract
     (k : ℕ) (x : ℤ-Mod k) → succ-ℤ-Mod k x ＝ x → is-one-ℕ k
   is-one-is-fixed-point-succ-ℤ-Mod k x p =
     is-one-is-unit-int-ℕ k
-      ( is-unit-cong-succ-ℤ
+      ( is-unit-modulus-cong-succ-ℤ
         ( int-ℕ k)
         ( int-ℤ-Mod k x)
         ( cong-eq-mod-ℤ k
@@ -795,20 +796,6 @@ abstract
     {k : ℕ} (x : Fin k) → is-not-one-ℕ k → succ-Fin k x ≠ x
   has-no-fixed-points-succ-Fin {succ-ℕ k} x =
     has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
-```
-
-### Divisibility is decidable
-
-```agda
-is-decidable-div-ℤ : (d x : ℤ) → is-decidable (div-ℤ d x)
-is-decidable-div-ℤ d x =
-  is-decidable-iff
-    ( div-div-int-abs-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
-    ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-div-ℤ)
-    ( has-decidable-equality-ℤ-Mod
-      ( abs-ℤ d)
-      ( mod-ℤ (abs-ℤ d) x)
-      ( zero-ℤ-Mod (abs-ℤ d)))
 ```
 
 ### `mod-ℤ` is surjective

@@ -132,12 +132,12 @@ abstract
   preserves-is-nonnegative-real-ℚ :
     {q : ℚ} → is-nonnegative-ℚ q → is-nonnegative-ℝ (real-ℚ q)
   preserves-is-nonnegative-real-ℚ is-nonneg-q =
-    preserves-leq-real-ℚ (leq-zero-is-nonnegative-ℚ is-nonneg-q)
+    preserves-order-real-ℚ (leq-zero-is-nonnegative-ℚ is-nonneg-q)
 
   reflects-is-nonnegative-real-ℚ :
     {q : ℚ} → is-nonnegative-ℝ (real-ℚ q) → is-nonnegative-ℚ q
   reflects-is-nonnegative-real-ℚ 0≤qℝ =
-    is-nonnegative-leq-zero-ℚ (reflects-leq-real-ℚ 0≤qℝ)
+    is-nonnegative-leq-zero-ℚ (reflects-order-real-ℚ 0≤qℝ)
 
 nonnegative-real-ℚ⁰⁺ : ℚ⁰⁺ → ℝ⁰⁺ lzero
 nonnegative-real-ℚ⁰⁺ (q , is-nonneg-q) =
@@ -240,7 +240,7 @@ module _
           ( x<q)
           ( transitive-leq-ℝ _ _ _
             ( is-nonnegative-real-ℝ⁰⁺ x)
-            ( preserves-leq-real-ℚ q≤0)))
+            ( preserves-order-real-ℚ q≤0)))
 ```
 
 ### If a nonnegative real number is less than a rational number, the rational number is positive
@@ -316,7 +316,7 @@ abstract
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-nonnegative-ℝ x → sim-ℝ x y →
     is-nonnegative-ℝ y
   is-nonnegative-sim-ℝ {x = x} {y = y} 0≤x x~y =
-    preserves-leq-right-sim-ℝ x~y 0≤x
+    preserves-order-right-sim-ℝ x~y 0≤x
 ```
 
 ### Raising the universe levels of nonnegative real numbers

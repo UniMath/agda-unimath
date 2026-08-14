@@ -89,6 +89,9 @@ one-ℤ = in-pos-ℤ zero-ℕ
 
 is-one-ℤ : ℤ → UU lzero
 is-one-ℤ x = (x ＝ one-ℤ)
+
+two-ℤ : ℤ
+two-ℤ = in-pos-ℤ 1
 ```
 
 ### Inclusion of the natural numbers
@@ -144,6 +147,9 @@ neg-ℤ : ℤ → ℤ
 neg-ℤ (inl x) = inr (inr x)
 neg-ℤ (inr (inl star)) = inr (inl star)
 neg-ℤ (inr (inr x)) = inl x
+
+neg-two-ℤ : ℤ
+neg-two-ℤ = neg-ℤ two-ℤ
 ```
 
 ## Properties

@@ -123,9 +123,9 @@ module _
               ( real-ℕ 2 *ℝ squared-magnitude-ℂ (u ·V v)) +ℝ
               ( squared-magnitude-ℂ (u ·V v) *ℝ one-ℝ)
               by
-                preserves-leq-add-ℝ
-                  ( preserves-leq-right-add-ℝ _ _ _ ∥u∥²≤1)
-                  ( preserves-leq-left-mul-ℝ⁰⁺
+                preserves-order-add-ℝ
+                  ( preserves-order-right-add-ℝ _ _ _ ∥u∥²≤1)
+                  ( preserves-order-left-mul-ℝ⁰⁺
                     ( nonnegative-squared-magnitude-ℂ (u ·V v))
                     ( ∥v∥²≤1))
             ≤ ( one-ℝ) +ℝ
@@ -193,7 +193,7 @@ module _
       tr
         ( leq-ℝ _)
         ( real-sqrt-one-ℝ⁰⁺)
-        ( preserves-leq-sqrt-ℝ⁰⁺
+        ( preserves-order-sqrt-ℝ⁰⁺
           ( nonnegative-squared-magnitude-ℂ
             ( inner-product-ℂ-Inner-Product-Space V u v))
           ( one-ℝ⁰⁺)
@@ -358,9 +358,9 @@ module _
                                 ( v))))))
           ≤ real-ℝ⁺ ∥u∥+δ *ℝ (real-ℝ⁺ ∥v∥+ε *ℝ one-ℝ)
             by
-              preserves-leq-left-mul-ℝ⁺
+              preserves-order-left-mul-ℝ⁺
                 ( ∥u∥+δ)
-                ( preserves-leq-left-mul-ℝ⁺
+                ( preserves-order-left-mul-ℝ⁺
                   ( ∥v∥+ε)
                   ( leq-one-magnitude-inner-product-leq-one-norm-ℂ-Inner-Product-Space
                     ( V)

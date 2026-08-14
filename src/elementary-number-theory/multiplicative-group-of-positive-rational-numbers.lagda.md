@@ -256,7 +256,7 @@ abstract
       ( le-ℚ)
       ( is-retraction-left-div-ℚ⁺ p⁺ q)
       ( is-retraction-left-div-ℚ⁺ p⁺ r)
-      ( preserves-le-left-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _ pq<pr)
+      ( preserves-strict-order-left-mul-ℚ⁺ (inv-ℚ⁺ p⁺) _ _ pq<pr)
 ```
 
 ### The inverse of 1 is 1

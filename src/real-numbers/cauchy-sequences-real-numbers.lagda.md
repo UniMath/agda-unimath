@@ -159,13 +159,13 @@ module _
                 by leq-sim-ℝ' (add-right-diff-ℝ (a k) (c (μ ε)))
               ≤ a k +ℝ (c (μ ε) -ℝ a (μ ε))
                 by
-                  preserves-leq-left-add-ℝ _ _ _
-                    ( preserves-leq-left-add-ℝ _ _ _
+                  preserves-order-left-add-ℝ _ _ _
+                    ( preserves-order-left-add-ℝ _ _ _
                       ( neg-leq-ℝ
                         ( is-increasing-a (μ ε) k με≤k)))
               ≤ b k +ℝ (raise-zero-ℝ (l1 ⊔ l3) +ℝ real-ℚ⁺ ε)
                 by
-                  preserves-leq-add-ℝ
+                  preserves-order-add-ℝ
                     ( a≤b k)
                     ( left-leq-real-bound-neighborhood-ℝ
                       ( ε)

@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
+open import structured-types.magmas
 ```
 
 </details>
@@ -68,9 +70,16 @@ module _
 
   associative-mul-Semigroup :
     (x y z : type-Semigroup) →
-    mul-Semigroup (mul-Semigroup x y) z ＝
-    mul-Semigroup x (mul-Semigroup y z)
-  associative-mul-Semigroup = pr2 has-associative-mul-Semigroup
+    mul-Semigroup (mul-Semigroup x y) z ＝ mul-Semigroup x (mul-Semigroup y z)
+  associative-mul-Semigroup =
+    pr2 has-associative-mul-Semigroup
+
+  inv-associative-mul-Semigroup :
+    (x y z : type-Semigroup) →
+    mul-Semigroup x (mul-Semigroup y z) ＝
+    mul-Semigroup (mul-Semigroup x y) z
+  inv-associative-mul-Semigroup x y z =
+    inv (associative-mul-Semigroup x y z)
 
   left-swap-mul-Semigroup :
     {x y z : type-Semigroup} → mul-Semigroup x y ＝ mul-Semigroup y x →
@@ -98,6 +107,10 @@ module _
     ( associative-mul-Semigroup _ _ _) ∙
     ( ap (mul-Semigroup _) (left-swap-mul-Semigroup H)) ∙
     ( inv (associative-mul-Semigroup _ _ _))
+
+  magma-Semigroup : Magma l
+  pr1 magma-Semigroup = type-Semigroup
+  pr2 magma-Semigroup = mul-Semigroup
 ```
 
 ### The structure of a semigroup

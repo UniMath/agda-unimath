@@ -52,7 +52,7 @@ add-closed-interval-ℚ :
   closed-interval-ℚ → closed-interval-ℚ →
   closed-interval-ℚ
 add-closed-interval-ℚ ((a , b) , a≤b) ((c , d) , c≤d) =
-  ((a +ℚ c , b +ℚ d) , preserves-leq-add-ℚ a≤b c≤d)
+  ((a +ℚ c , b +ℚ d) , preserves-order-add-ℚ a≤b c≤d)
 ```
 
 ## Properties
@@ -98,8 +98,8 @@ abstract
     is-in-closed-interval-ℚ (add-closed-interval-ℚ [a,b] [c,d]) (s +ℚ t)
   is-in-add-interval-add-is-in-closed-interval-ℚ
     ((a , b) , _) ((c , d) , _) s t (a≤s , s≤b) (c≤t , t≤d) =
-    ( preserves-leq-add-ℚ a≤s c≤t ,
-      preserves-leq-add-ℚ s≤b t≤d)
+    ( preserves-order-add-ℚ a≤s c≤t ,
+      preserves-order-add-ℚ s≤b t≤d)
 
   is-in-add-interval-is-in-minkowski-sum-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →
@@ -239,52 +239,52 @@ commutative-monoid-add-closed-interval-ℚ =
 
 ```agda
 abstract
-  preserves-leq-left-add-closed-interval-ℚ :
+  preserves-order-left-add-closed-interval-ℚ :
     ([c,d] [a,b] [a',b'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [a,b] [a',b'] →
     leq-closed-interval-ℚ
       ( add-closed-interval-ℚ [a,b] [c,d])
       ( add-closed-interval-ℚ [a',b'] [c,d])
-  preserves-leq-left-add-closed-interval-ℚ
+  preserves-order-left-add-closed-interval-ℚ
     ((c , d) , _) ((a , b) , _) ((a' , b') , _) (a'≤a , b≤b') =
-    ( preserves-leq-left-add-ℚ c a' a a'≤a ,
-      preserves-leq-left-add-ℚ d b b' b≤b')
+    ( preserves-order-left-add-ℚ c a' a a'≤a ,
+      preserves-order-left-add-ℚ d b b' b≤b')
 
-  preserves-leq-right-add-closed-interval-ℚ :
+  preserves-order-right-add-closed-interval-ℚ :
     ([a,b] [c,d] [c',d'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [c,d] [c',d'] →
     leq-closed-interval-ℚ
       ( add-closed-interval-ℚ [a,b] [c,d])
       ( add-closed-interval-ℚ [a,b] [c',d'])
-  preserves-leq-right-add-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
+  preserves-order-right-add-closed-interval-ℚ [a,b] [c,d] [c',d'] [c,d]⊆[c',d'] =
     binary-tr
       ( leq-closed-interval-ℚ)
       ( commutative-add-closed-interval-ℚ [c,d] [a,b])
       ( commutative-add-closed-interval-ℚ [c',d'] [a,b])
-      ( preserves-leq-left-add-closed-interval-ℚ
+      ( preserves-order-left-add-closed-interval-ℚ
         ( [a,b])
         ( [c,d])
         ( [c',d'])
         ( [c,d]⊆[c',d']))
 
-  preserves-leq-add-closed-interval-ℚ :
+  preserves-order-add-closed-interval-ℚ :
     ([a,b] [a',b'] [c,d] [c',d'] : closed-interval-ℚ) →
     leq-closed-interval-ℚ [a,b] [a',b'] → leq-closed-interval-ℚ [c,d] [c',d'] →
     leq-closed-interval-ℚ
       ( add-closed-interval-ℚ [a,b] [c,d])
       ( add-closed-interval-ℚ [a',b'] [c',d'])
-  preserves-leq-add-closed-interval-ℚ
+  preserves-order-add-closed-interval-ℚ
     [a,b] [a',b'] [c,d] [c',d'] [a,b]⊆[a',b'] [c,d]⊆[c',d'] =
     transitive-leq-closed-interval-ℚ
       ( add-closed-interval-ℚ [a,b] [c,d])
       ( add-closed-interval-ℚ [a,b] [c',d'])
       ( add-closed-interval-ℚ [a',b'] [c',d'])
-      ( preserves-leq-left-add-closed-interval-ℚ
+      ( preserves-order-left-add-closed-interval-ℚ
         ( [c',d'])
         ( [a,b])
         ( [a',b'])
         ( [a,b]⊆[a',b']))
-      ( preserves-leq-right-add-closed-interval-ℚ
+      ( preserves-order-right-add-closed-interval-ℚ
         ( [a,b])
         ( [c,d])
         ( [c',d'])

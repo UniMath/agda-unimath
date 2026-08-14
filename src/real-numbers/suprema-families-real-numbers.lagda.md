@@ -338,7 +338,7 @@ module _
                 ( w -ℝ real-ℚ⁺ ε₂)
                 ( rec-coproduct f g k)
                 ( w-ε₂<fgk)
-                ( preserves-le-right-add-ℝ _ _ _ max-ε₁<w))
+                ( preserves-strict-order-right-add-ℝ _ _ _ max-ε₁<w))
         in
           elim-disjunction
             ( ∃ _ _)

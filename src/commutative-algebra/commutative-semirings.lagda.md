@@ -22,8 +22,11 @@ open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.monoids
+open import group-theory.semigroups
 
 open import ring-theory.semirings
+
+open import structured-types.magmas
 ```
 
 </details>
@@ -81,6 +84,18 @@ module _
   additive-commutative-monoid-Commutative-Semiring =
     additive-commutative-monoid-Semiring semiring-Commutative-Semiring
 
+  additive-monoid-Commutative-Semiring : Monoid l
+  additive-monoid-Commutative-Semiring =
+    additive-monoid-Semiring semiring-Commutative-Semiring
+
+  additive-unital-magma-Commutative-Semiring : Unital-Magma l
+  additive-unital-magma-Commutative-Semiring =
+    additive-unital-magma-Semiring semiring-Commutative-Semiring
+
+  additive-semigroup-Commutative-Semiring : Semigroup l
+  additive-semigroup-Commutative-Semiring =
+    additive-semigroup-Semiring semiring-Commutative-Semiring
+
   multiplicative-monoid-Commutative-Semiring : Monoid l
   multiplicative-monoid-Commutative-Semiring =
     multiplicative-monoid-Semiring semiring-Commutative-Semiring
@@ -132,6 +147,13 @@ module _
   associative-add-Commutative-Semiring =
     associative-add-Semiring semiring-Commutative-Semiring
 
+  inv-associative-add-Commutative-Semiring :
+    (x y z : type-Commutative-Semiring) →
+    add-Commutative-Semiring x (add-Commutative-Semiring y z) ＝
+    add-Commutative-Semiring (add-Commutative-Semiring x y) z
+  inv-associative-add-Commutative-Semiring =
+    inv-associative-add-Semiring semiring-Commutative-Semiring
+
   left-unit-law-add-Commutative-Semiring :
     (x : type-Commutative-Semiring) →
     add-Commutative-Semiring zero-Commutative-Semiring x ＝ x
@@ -151,7 +173,7 @@ module _
     commutative-add-Semiring semiring-Commutative-Semiring
 
   interchange-add-add-Commutative-Semiring :
-    (x y x' y' : type-Commutative-Semiring) →
+    {x y x' y' : type-Commutative-Semiring} →
     ( add-Commutative-Semiring
       ( add-Commutative-Semiring x y)
       ( add-Commutative-Semiring x' y')) ＝
@@ -162,14 +184,14 @@ module _
     interchange-add-add-Semiring semiring-Commutative-Semiring
 
   right-swap-add-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     ( add-Commutative-Semiring (add-Commutative-Semiring x y) z) ＝
     ( add-Commutative-Semiring (add-Commutative-Semiring x z) y)
   right-swap-add-Commutative-Semiring =
     right-swap-add-Semiring semiring-Commutative-Semiring
 
   left-swap-add-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     ( add-Commutative-Semiring x (add-Commutative-Semiring y z)) ＝
     ( add-Commutative-Semiring y (add-Commutative-Semiring x z))
   left-swap-add-Commutative-Semiring =
@@ -210,6 +232,13 @@ module _
     mul-Commutative-Semiring x (mul-Commutative-Semiring y z)
   associative-mul-Commutative-Semiring =
     associative-mul-Semiring semiring-Commutative-Semiring
+
+  inv-associative-mul-Commutative-Semiring :
+    (x y z : type-Commutative-Semiring) →
+    mul-Commutative-Semiring x (mul-Commutative-Semiring y z) ＝
+    mul-Commutative-Semiring (mul-Commutative-Semiring x y) z
+  inv-associative-mul-Commutative-Semiring =
+    inv-associative-mul-Semiring semiring-Commutative-Semiring
 
   left-distributive-mul-add-Commutative-Semiring :
     (x y z : type-Commutative-Semiring) →
@@ -256,7 +285,7 @@ module _
     right-zero-law-mul-Semiring semiring-Commutative-Semiring
 
   right-swap-mul-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     mul-Commutative-Semiring (mul-Commutative-Semiring x y) z ＝
     mul-Commutative-Semiring (mul-Commutative-Semiring x z) y
   right-swap-mul-Commutative-Semiring =
@@ -264,7 +293,7 @@ module _
       multiplicative-commutative-monoid-Commutative-Semiring
 
   left-swap-mul-Commutative-Semiring :
-    (x y z : type-Commutative-Semiring) →
+    {x y z : type-Commutative-Semiring} →
     mul-Commutative-Semiring x (mul-Commutative-Semiring y z) ＝
     mul-Commutative-Semiring y (mul-Commutative-Semiring x z)
   left-swap-mul-Commutative-Semiring =

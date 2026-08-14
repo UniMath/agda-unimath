@@ -86,48 +86,48 @@ abstract
 abstract opaque
   unfolding is-nonnegative-ℚ leq-ℚ-Prop mul-ℚ
 
-  preserves-leq-right-mul-ℚ⁰⁺ :
+  preserves-order-right-mul-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (q *ℚ rational-ℚ⁰⁺ p) (r *ℚ rational-ℚ⁰⁺ p)
-  preserves-leq-right-mul-ℚ⁰⁺
+  preserves-order-right-mul-ℚ⁰⁺
     p⁺@((p@(np , dp , pos-dp) , _) , nonneg-np)
     (q@(nq , dq , _) , _)
     (r@(nr , dr , _) , _)
     q≤r =
-    preserves-leq-rational-fraction-ℤ
+    preserves-order-rational-fraction-ℤ
       ( mul-fraction-ℤ q p)
       ( mul-fraction-ℤ r p)
       ( binary-tr
         ( leq-ℤ)
         ( interchange-law-mul-mul-ℤ _ _ _ _)
         ( interchange-law-mul-mul-ℤ _ _ _ _)
-        ( preserves-leq-left-mul-nonnegative-ℤ
+        ( preserves-order-left-mul-nonnegative-ℤ
           ( np *ℤ dp ,
             is-nonnegative-mul-nonnegative-positive-ℤ nonneg-np pos-dp)
           ( nq *ℤ dr)
           ( nr *ℤ dq)
           ( q≤r)))
 
-  preserves-leq-left-mul-ℚ⁰⁺ :
+  preserves-order-left-mul-ℚ⁰⁺ :
     (p : ℚ⁰⁺) (q r : ℚ) → leq-ℚ q r →
     leq-ℚ (rational-ℚ⁰⁺ p *ℚ q) (rational-ℚ⁰⁺ p *ℚ r)
-  preserves-leq-left-mul-ℚ⁰⁺ p q r q≤r =
+  preserves-order-left-mul-ℚ⁰⁺ p q r q≤r =
     binary-tr
       ( leq-ℚ)
       ( commutative-mul-ℚ q (rational-ℚ⁰⁺ p))
       ( commutative-mul-ℚ r (rational-ℚ⁰⁺ p))
-      ( preserves-leq-right-mul-ℚ⁰⁺ p q r q≤r)
+      ( preserves-order-right-mul-ℚ⁰⁺ p q r q≤r)
 
 abstract
-  preserves-leq-mul-ℚ⁰⁺ :
+  preserves-order-mul-ℚ⁰⁺ :
     (p q r s : ℚ⁰⁺) → leq-ℚ⁰⁺ p q → leq-ℚ⁰⁺ r s → leq-ℚ⁰⁺ (p *ℚ⁰⁺ r) (q *ℚ⁰⁺ s)
-  preserves-leq-mul-ℚ⁰⁺ p q r s p≤q r≤s =
+  preserves-order-mul-ℚ⁰⁺ p q r s p≤q r≤s =
     transitive-leq-ℚ
       ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ r))
       ( rational-ℚ⁰⁺ (p *ℚ⁰⁺ s))
       ( rational-ℚ⁰⁺ (q *ℚ⁰⁺ s))
-      ( preserves-leq-right-mul-ℚ⁰⁺ s _ _ p≤q)
-      ( preserves-leq-left-mul-ℚ⁰⁺ p _ _ r≤s)
+      ( preserves-order-right-mul-ℚ⁰⁺ s _ _ p≤q)
+      ( preserves-order-left-mul-ℚ⁰⁺ p _ _ r≤s)
 ```
 
 ### Multiplication by a nonnegative rational number distributes over the minimum operation
@@ -142,7 +142,7 @@ abstract
     distributive-map-hom-min-Total-Order
       ( ℚ-Total-Order)
       ( ℚ-Total-Order)
-      ( p *ℚ_ , preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺)
+      ( p *ℚ_ , preserves-order-left-mul-ℚ⁰⁺ p⁰⁺)
 ```
 
 ### Multiplication by a nonnegative rational number distributes over the maximum operation
@@ -157,7 +157,7 @@ abstract
     distributive-map-hom-max-Total-Order
       ( ℚ-Total-Order)
       ( ℚ-Total-Order)
-      ( p *ℚ_ , preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺)
+      ( p *ℚ_ , preserves-order-left-mul-ℚ⁰⁺ p⁰⁺)
 ```
 
 ### Multiplication by a rational number greater than or equal to one is an inflationary map
@@ -175,7 +175,7 @@ abstract
         ≤ p *ℚ one-ℚ
           by leq-eq-ℚ (inv (right-unit-law-mul-ℚ p))
         ≤ p *ℚ q
-          by preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ _ _ 1≤q
+          by preserves-order-left-mul-ℚ⁰⁺ p⁰⁺ _ _ 1≤q
 ```
 
 ### Multiplication by a nonnegative rational number less than or equal to one is a deflationary map
@@ -189,5 +189,5 @@ abstract
     tr
       ( leq-ℚ _)
       ( left-unit-law-mul-ℚ (rational-ℚ⁰⁺ q))
-      ( preserves-leq-right-mul-ℚ⁰⁺ q p one-ℚ p≤1)
+      ( preserves-order-right-mul-ℚ⁰⁺ q p one-ℚ p≤1)
 ```

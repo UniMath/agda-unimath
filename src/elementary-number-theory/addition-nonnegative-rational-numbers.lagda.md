@@ -69,7 +69,7 @@ abstract
     tr
       ( λ r → leq-ℚ r (p +ℚ q))
       ( left-unit-law-add-ℚ q)
-      ( preserves-leq-left-add-ℚ
+      ( preserves-order-left-add-ℚ
         ( q)
         ( zero-ℚ)
         ( p)

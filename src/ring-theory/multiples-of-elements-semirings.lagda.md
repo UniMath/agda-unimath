@@ -71,12 +71,13 @@ module _
     right-zero-law-multiple-Semiring =
       power-unit-Commutative-Monoid (additive-commutative-monoid-Semiring R)
 
-    multiple-succ-Semiring :
+    successor-law-multiple-Semiring :
       (n : ℕ) (x : type-Semiring R) →
       multiple-Semiring R (succ-ℕ n) x ＝
       add-Semiring R (multiple-Semiring R n x) x
-    multiple-succ-Semiring =
-      power-succ-Commutative-Monoid (additive-commutative-monoid-Semiring R)
+    successor-law-multiple-Semiring =
+      successor-law-power-Commutative-Monoid
+        ( additive-commutative-monoid-Semiring R)
 
     left-unit-law-multiple-Semiring :
       (x : type-Semiring R) → multiple-Semiring R 1 x ＝ x
@@ -128,7 +129,7 @@ module _
           add-Semiring R
             ( multiple-Semiring R (succ-ℕ n) x)
             ( multiple-Semiring R (succ-ℕ n) y)
-          by interchange-add-add-Semiring R _ _ _ _
+          by interchange-add-add-Semiring R
 
     right-distributive-multiple-add-Semiring :
       (m n : ℕ) (x : type-Semiring R) →

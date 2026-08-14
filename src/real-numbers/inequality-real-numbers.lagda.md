@@ -294,11 +294,11 @@ module _
   abstract opaque
     unfolding leq-ℝ real-ℚ
 
-    preserves-leq-real-ℚ : leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
-    preserves-leq-real-ℚ = preserves-leq-lower-real-ℚ x y
+    preserves-order-real-ℚ : leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
+    preserves-order-real-ℚ = preserves-order-lower-real-ℚ x y
 
-    reflects-leq-real-ℚ : leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
-    reflects-leq-real-ℚ = reflects-leq-lower-real-ℚ x y
+    reflects-order-real-ℚ : leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
+    reflects-order-real-ℚ = reflects-order-lower-real-ℚ x y
 
     iff-leq-real-ℚ : leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
     iff-leq-real-ℚ = iff-leq-lower-real-ℚ x y
@@ -312,13 +312,13 @@ module _
   where
 
   abstract
-    preserves-leq-real-ℤ : leq-ℤ x y → leq-ℝ (real-ℤ x) (real-ℤ y)
-    preserves-leq-real-ℤ x≤y =
-      preserves-leq-real-ℚ (preserves-leq-rational-ℤ x≤y)
+    preserves-order-real-ℤ : leq-ℤ x y → leq-ℝ (real-ℤ x) (real-ℤ y)
+    preserves-order-real-ℤ x≤y =
+      preserves-order-real-ℚ (preserves-order-rational-ℤ x≤y)
 
-    reflects-leq-real-ℤ : leq-ℝ (real-ℤ x) (real-ℤ y) → leq-ℤ x y
-    reflects-leq-real-ℤ x≤y =
-      reflects-leq-rational-ℤ x y (reflects-leq-real-ℚ x≤y)
+    reflects-order-real-ℤ : leq-ℝ (real-ℤ x) (real-ℤ y) → leq-ℤ x y
+    reflects-order-real-ℤ x≤y =
+      reflects-order-rational-ℤ x y (reflects-order-real-ℚ x≤y)
 ```
 
 ### The inclusion of the natural numbers into the reals preserves and reflects inequality
@@ -329,11 +329,11 @@ module _
   where
 
   abstract
-    preserves-leq-real-ℕ : leq-ℕ x y → leq-ℝ (real-ℕ x) (real-ℕ y)
-    preserves-leq-real-ℕ x≤y = preserves-leq-real-ℤ (leq-int-ℕ x y x≤y)
+    preserves-order-real-ℕ : leq-ℕ x y → leq-ℝ (real-ℕ x) (real-ℕ y)
+    preserves-order-real-ℕ x≤y = preserves-order-real-ℤ (leq-int-ℕ x y x≤y)
 
-    reflects-leq-real-ℕ : leq-ℝ (real-ℕ x) (real-ℕ y) → leq-ℕ x y
-    reflects-leq-real-ℕ x≤y = reflects-leq-int-ℕ x y (reflects-leq-real-ℤ x≤y)
+    reflects-order-real-ℕ : leq-ℝ (real-ℕ x) (real-ℕ y) → leq-ℕ x y
+    reflects-order-real-ℕ x≤y = reflects-order-int-ℕ x y (reflects-order-real-ℤ x≤y)
 ```
 
 ### Negation reverses inequality on the real numbers
@@ -360,11 +360,11 @@ module _
   abstract opaque
     unfolding leq-ℝ sim-ℝ
 
-    preserves-leq-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
-    preserves-leq-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
+    preserves-order-left-sim-ℝ : leq-ℝ x z → leq-ℝ y z
+    preserves-order-left-sim-ℝ x≤z q q<y = x≤z q (pr2 x~y q q<y)
 
-    preserves-leq-right-sim-ℝ : leq-ℝ z x → leq-ℝ z y
-    preserves-leq-right-sim-ℝ z≤x q q<z = pr1 x~y q (z≤x q q<z)
+    preserves-order-right-sim-ℝ : leq-ℝ z x → leq-ℝ z y
+    preserves-order-right-sim-ℝ z≤x q q<z = pr1 x~y q (z≤x q q<z)
 
 module _
   {l1 l2 l3 : Level} {z : ℝ l1} {x : ℝ l2} {y : ℝ l3} (x~y : sim-ℝ x y)
@@ -373,13 +373,13 @@ module _
   abstract
     leq-iff-left-sim-ℝ : leq-ℝ x z ↔ leq-ℝ y z
     leq-iff-left-sim-ℝ =
-      ( preserves-leq-left-sim-ℝ x~y ,
-        preserves-leq-left-sim-ℝ (symmetric-sim-ℝ x~y))
+      ( preserves-order-left-sim-ℝ x~y ,
+        preserves-order-left-sim-ℝ (symmetric-sim-ℝ x~y))
 
     leq-iff-right-sim-ℝ : leq-ℝ z x ↔ leq-ℝ z y
     leq-iff-right-sim-ℝ =
-      ( preserves-leq-right-sim-ℝ x~y ,
-        preserves-leq-right-sim-ℝ (symmetric-sim-ℝ x~y))
+      ( preserves-order-right-sim-ℝ x~y ,
+        preserves-order-right-sim-ℝ (symmetric-sim-ℝ x~y))
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -387,40 +387,40 @@ module _
   (x1~x2 : sim-ℝ x1 x2) (y1~y2 : sim-ℝ y1 y2)
   where
 
-  preserves-leq-sim-ℝ : leq-ℝ x1 y1 → leq-ℝ x2 y2
-  preserves-leq-sim-ℝ x1≤y1 =
-    preserves-leq-left-sim-ℝ
+  preserves-order-sim-ℝ : leq-ℝ x1 y1 → leq-ℝ x2 y2
+  preserves-order-sim-ℝ x1≤y1 =
+    preserves-order-left-sim-ℝ
       ( x1~x2)
-      ( preserves-leq-right-sim-ℝ y1~y2 x1≤y1)
+      ( preserves-order-right-sim-ℝ y1~y2 x1≤y1)
 ```
 
 ### Raising either side of an inequality to another universe level
 
 ```agda
 abstract
-  preserves-leq-left-raise-ℝ :
+  preserves-order-left-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ (raise-ℝ l x) y
-  preserves-leq-left-raise-ℝ l {x} =
-    preserves-leq-left-sim-ℝ (sim-raise-ℝ l x)
+  preserves-order-left-raise-ℝ l {x} =
+    preserves-order-left-sim-ℝ (sim-raise-ℝ l x)
 
-  reflects-leq-left-raise-ℝ :
+  reflects-order-left-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ (raise-ℝ l x) y → leq-ℝ x y
-  reflects-leq-left-raise-ℝ l {x} =
-    preserves-leq-left-sim-ℝ (sim-raise-ℝ' l x)
+  reflects-order-left-raise-ℝ l {x} =
+    preserves-order-left-sim-ℝ (sim-raise-ℝ' l x)
 
-  preserves-leq-right-raise-ℝ :
+  preserves-order-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ x (raise-ℝ l y)
-  preserves-leq-right-raise-ℝ l {x} {y} =
-    preserves-leq-right-sim-ℝ (sim-raise-ℝ l y)
+  preserves-order-right-raise-ℝ l {x} {y} =
+    preserves-order-right-sim-ℝ (sim-raise-ℝ l y)
 
-  reflects-leq-right-raise-ℝ :
+  reflects-order-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x (raise-ℝ l y) → leq-ℝ x y
-  reflects-leq-right-raise-ℝ l {x} {y} =
-    preserves-leq-right-sim-ℝ (sim-raise-ℝ' l y)
+  reflects-order-right-raise-ℝ l {x} {y} =
+    preserves-order-right-sim-ℝ (sim-raise-ℝ' l y)
 ```
 
 ### `x ≤ y` iff `raise-ℝ l x ≤ raise-ℝ l y`
@@ -431,13 +431,13 @@ abstract
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ (raise-ℝ l x) (raise-ℝ l y) → leq-ℝ x y
   leq-leq-raise-ℝ l {x} {y} =
-    preserves-leq-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
+    preserves-order-sim-ℝ (sim-raise-ℝ' l x) (sim-raise-ℝ' l y)
 
   leq-raise-leq-ℝ :
     {l1 l2 : Level} (l : Level) {x : ℝ l1} {y : ℝ l2} →
     leq-ℝ x y → leq-ℝ (raise-ℝ l x) (raise-ℝ l y)
   leq-raise-leq-ℝ l {x} {y} =
-    preserves-leq-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
+    preserves-order-sim-ℝ (sim-raise-ℝ l x) (sim-raise-ℝ l y)
 ```
 
 ### `x ≤ q` for a rational `q` if and only if `q ∉ lower-cut-ℝ x`
@@ -493,7 +493,7 @@ abstract
     {l0 : Level} (l : Level) (x : ℝ l0) {q : ℚ} →
     is-in-lower-cut-ℝ x q → leq-ℝ (raise-real-ℚ l q) x
   leq-raise-real-is-in-lower-cut-ℝ l x q<x =
-    preserves-leq-left-raise-ℝ l (leq-real-is-in-lower-cut-ℝ x q<x)
+    preserves-order-left-raise-ℝ l (leq-real-is-in-lower-cut-ℝ x q<x)
 ```
 
 ### If `y ≤ q ⇒ x ≤ q` for every rational `q`, then `x ≤ y`
@@ -579,7 +579,7 @@ module _
 
 ```agda
 leq-zero-one-ℝ : leq-ℝ zero-ℝ one-ℝ
-leq-zero-one-ℝ = preserves-leq-real-ℚ leq-zero-one-ℚ
+leq-zero-one-ℝ = preserves-order-real-ℚ leq-zero-one-ℚ
 ```
 
 ## References

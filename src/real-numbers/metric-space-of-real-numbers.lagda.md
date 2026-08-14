@@ -371,7 +371,7 @@ module _
       ( d)
       ( x')
       ( y')
-      ( preserves-leq-sim-ℝ
+      ( preserves-order-sim-ℝ
         ( x~x')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)
@@ -379,7 +379,7 @@ module _
           ( y')
           ( y~y'))
         ( left-leq-real-bound-neighborhood-ℝ d x y H))
-      ( preserves-leq-sim-ℝ
+      ( preserves-order-sim-ℝ
         ( y~y')
         ( preserves-sim-right-add-ℝ
           ( real-ℚ⁺ d)

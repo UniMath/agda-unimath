@@ -40,7 +40,7 @@ module _
   map-hom-Magma : hom-Magma → type-Magma M → type-Magma N
   map-hom-Magma = pr1
 
-  preserves-mul-map-hom-Magma :
+  preserves-mul-hom-Magma :
     (f : hom-Magma) → preserves-mul-Magma (map-hom-Magma f)
-  preserves-mul-map-hom-Magma = pr2
+  preserves-mul-hom-Magma = pr2
 ```

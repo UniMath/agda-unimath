@@ -161,11 +161,11 @@ module _
                 ap-mul-ℤ
                   ( succ-int-ℕ n)
                   ( ap int-ℤ⁺ (is-section-positive-nat-ℤ⁺ q⁺)))
-          ( preserves-le-right-add-ℤ
+          ( preserves-strict-order-right-add-ℤ
             ( int-ℕ (n *ℕ qℕ))
             ( int-ℕ k)
             ( int-ℕ qℕ)
-            ( preserves-le-int-ℕ _ _
+            ( preserves-strict-order-int-ℕ _ _
               ( strict-upper-bound-remainder-euclidean-division-ℕ
                 ( qℕ)
                 ( pℕ)

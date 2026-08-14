@@ -288,8 +288,8 @@ module _
   equiv-iso-equiv-Semigroup : equiv-Semigroup G H ≃ iso-Semigroup G H
   equiv-iso-equiv-Semigroup =
     ( equiv-type-subtype
-      ( λ f → is-property-is-equiv (map-hom-Semigroup G H f))
-      ( is-prop-is-iso-Semigroup G H)
+      ( is-equiv-Prop ∘ map-hom-Semigroup G H)
+      ( is-iso-prop-Semigroup G H)
       ( is-iso-is-equiv-hom-Semigroup)
       ( is-equiv-is-iso-Semigroup)) ∘e
     ( equiv-right-swap-Σ)

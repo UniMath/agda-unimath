@@ -116,7 +116,7 @@ module _
   pr1 inhabited-subtype-standard-singleton-subtype =
     subtype-standard-singleton-subtype
   pr2 inhabited-subtype-standard-singleton-subtype =
-    unit-trunc-Prop (pair x refl)
+    unit-trunc-Prop (x , refl)
 ```
 
 ## Properties
@@ -210,11 +210,17 @@ module _
   {l1 : Level} (X : Set l1) (x : type-Set X)
   where
 
-  is-least-subtype-containing-element-Set :
+  is-least-subtype-containing-element-standard-singleton-subtype-Set :
     is-least-subtype-containing-element x
       ( subtype-standard-singleton-subtype X x)
-  pr1 (is-least-subtype-containing-element-Set A) H = H x refl
-  pr2 (is-least-subtype-containing-element-Set A) H .x refl = H
+  pr1
+    ( is-least-subtype-containing-element-standard-singleton-subtype-Set A)
+    H =
+    H x refl
+  pr2
+    ( is-least-subtype-containing-element-standard-singleton-subtype-Set A)
+    H .x refl =
+    H
 ```
 
 ### The image of the standard singleton subtype `{x}` under a map `f : X → Y` is the standard singleton subtype `{f(x)}`

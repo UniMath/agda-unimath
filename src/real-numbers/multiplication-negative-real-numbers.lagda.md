@@ -76,7 +76,7 @@ abstract
       ( le-ℝ)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
-      ( neg-le-ℝ (preserves-le-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
+      ( neg-le-ℝ (preserves-strict-order-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
 ```
 
 ### Multiplication by a negative real number reverses inequality
@@ -91,5 +91,5 @@ abstract
       ( leq-ℝ)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
       ( ap neg-ℝ (left-negative-law-mul-ℝ _ _) ∙ neg-neg-ℝ _)
-      ( neg-leq-ℝ (preserves-leq-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
+      ( neg-leq-ℝ (preserves-order-left-mul-ℝ⁺ (neg-ℝ⁻ x) y<z))
 ```

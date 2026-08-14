@@ -57,7 +57,7 @@ module _
 
   permutation-tuple-is-sort-tuple :
     is-sort-tuple → (n : ℕ) → tuple (type-Decidable-Total-Order X) n →
-    Permutation n
+    permutation n
   permutation-tuple-is-sort-tuple S n v =
     permutation-is-permutation-tuple
       ( n)

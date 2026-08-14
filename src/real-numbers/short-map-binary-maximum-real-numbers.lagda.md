@@ -82,7 +82,7 @@ module _
             ( y)
             ( z +ℝ real-ℚ⁺ d)
             ( max-ℝ x z +ℝ real-ℚ⁺ d)
-            ( preserves-leq-right-add-ℝ
+            ( preserves-order-right-add-ℝ
               ( real-ℚ⁺ d)
               ( z)
               ( max-ℝ x z)

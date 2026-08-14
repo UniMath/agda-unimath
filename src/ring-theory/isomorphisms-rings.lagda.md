@@ -460,8 +460,8 @@ module _
     ( equiv-tot (λ f → commutative-product)) ∘e
     ( associative-Σ) ∘e
     ( equiv-type-subtype
-      ( is-prop-is-iso-Ring R S)
-      ( λ f → is-prop-is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f))
+      ( is-iso-prop-Ring R S)
+      ( λ f → is-iso-prop-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f))
       ( is-iso-ab-is-iso-Ring)
       ( is-iso-ring-is-iso-Ab))
 ```

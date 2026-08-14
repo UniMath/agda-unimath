@@ -182,7 +182,7 @@ module _
         ( λ ε →
           backward-implication
             ( is-metric-M-ρ ε x y)
-            ( preserves-leq-left-sim-ℝ⁰⁺
+            ( preserves-order-left-sim-ℝ⁰⁺
               ( nonnegative-real-ℚ⁺ ε)
               ( zero-ℝ⁰⁺)
               ( ρ x y)

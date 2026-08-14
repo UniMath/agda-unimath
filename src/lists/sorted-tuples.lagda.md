@@ -205,7 +205,7 @@ module _
     (n : ℕ)
     (x : type-Decidable-Total-Order X)
     (fv : fin-sequence (type-Decidable-Total-Order X) n)
-    (a : Permutation n) →
+    (a : permutation n) →
     is-least-element-fin-sequence n x fv →
     is-least-element-fin-sequence n x (fv ∘ map-equiv a)
   is-least-element-permute-fin-sequence n x fv a p k =
@@ -251,7 +251,7 @@ module _
     {n : ℕ}
     (x : type-Decidable-Total-Order X)
     (v : tuple (type-Decidable-Total-Order X) n)
-    (a : Permutation n) →
+    (a : permutation n) →
     is-least-element-tuple x v →
     is-least-element-tuple x (permute-tuple n v a)
   is-least-element-permute-tuple {n} x v a p =

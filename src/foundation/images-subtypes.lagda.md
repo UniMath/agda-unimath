@@ -296,6 +296,8 @@ module _
 
 ### The image `im (g ∘ f)` has the same elements as the image subtype `im g (im f)`
 
+We also record the consequence that `im f ⊆ pullback-subtype g (im (g ∘ f))`.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C) (f : A → B)
@@ -319,6 +321,24 @@ module _
           ( subtype-im f)
           ( compute-im-full-subtype f)
           ( x)
+
+  forward-inclusion-compute-subtype-im-comp :
+    subtype-im (g ∘ f) ⊆ im-subtype g (subtype-im f)
+  forward-inclusion-compute-subtype-im-comp x =
+    forward-implication (compute-subtype-im-comp x)
+
+  backward-inclusion-compute-subtype-im-comp :
+    im-subtype g (subtype-im f) ⊆ subtype-im (g ∘ f)
+  backward-inclusion-compute-subtype-im-comp x =
+    backward-implication (compute-subtype-im-comp x)
+
+  inclusion-im-pullback-im-comp :
+    subtype-im f ⊆ pullback-subtype g (subtype-im (g ∘ f))
+  inclusion-im-pullback-im-comp =
+    forward-implication-adjoint-relation-image-pullback-subtype g
+      ( subtype-im f)
+      ( subtype-im (g ∘ f))
+      ( backward-inclusion-compute-subtype-im-comp)
 ```
 
 ### The image of a subtype under an equivalence has the same elements as the subtype precomposed with the inverse equivalence

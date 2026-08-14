@@ -44,4 +44,5 @@ open import lists.sorting-algorithms-tuples public
 open import lists.subsequences public
 open import lists.tuples public
 open import lists.universal-property-lists-wild-monoids public
+open import lists.universal-quantification-lists public
 ```

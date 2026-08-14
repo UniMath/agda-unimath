@@ -312,25 +312,25 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-abs-power-ℚ :
+  preserves-order-abs-power-ℚ :
     (n : ℕ) (p q : ℚ) → leq-ℚ⁰⁺ (abs-ℚ p) (abs-ℚ q) →
     leq-ℚ⁰⁺ (abs-ℚ (power-ℚ n p)) (abs-ℚ (power-ℚ n q))
-  preserves-leq-abs-power-ℚ n p q |p|≤|q| =
+  preserves-order-abs-power-ℚ n p q |p|≤|q| =
     binary-tr
       ( leq-ℚ)
       ( inv (power-rational-ℚ⁰⁺ n (abs-ℚ p)) ∙ power-rational-abs-ℚ n p)
       ( inv (power-rational-ℚ⁰⁺ n (abs-ℚ q)) ∙ power-rational-abs-ℚ n q)
-      ( preserves-leq-power-ℚ⁰⁺ n (abs-ℚ p) (abs-ℚ q) |p|≤|q|)
+      ( preserves-order-power-ℚ⁰⁺ n (abs-ℚ p) (abs-ℚ q) |p|≤|q|)
 ```
 
 ### Odd powers of rational numbers preserve strict inequality
 
 ```agda
 abstract
-  preserves-le-power-is-odd-exponent-ℚ :
+  preserves-strict-order-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → le-ℚ p q →
     le-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q =
+  preserves-strict-order-power-is-odd-exponent-ℚ n p q odd-n p<q =
     rec-coproduct
       ( λ is-neg-p →
         rec-coproduct
@@ -344,7 +344,7 @@ abstract
                 ( neg-power-neg-is-odd-exponent-ℚ⁻ n p⁻ odd-n)
                 ( neg-power-neg-is-odd-exponent-ℚ⁻ n q⁻ odd-n)
                 ( neg-le-ℚ
-                  ( preserves-le-power-ℚ⁺
+                  ( preserves-strict-order-power-ℚ⁺
                     ( n)
                     ( neg-ℚ⁻ q⁻)
                     ( neg-ℚ⁻ p⁻)
@@ -368,7 +368,7 @@ abstract
             ( le-ℚ)
             ( inv (power-rational-ℚ⁰⁺ n p⁰⁺))
             ( inv (power-rational-ℚ⁰⁺ n q⁰⁺))
-            ( preserves-le-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
+            ( preserves-strict-order-power-ℚ⁰⁺ n p⁰⁺ q⁰⁺ p<q (is-nonzero-is-odd-ℕ odd-n)))
       ( decide-is-negative-is-nonnegative-ℚ p)
 ```
 
@@ -376,12 +376,12 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-power-is-odd-exponent-ℚ :
+  preserves-order-power-is-odd-exponent-ℚ :
     (n : ℕ) (p q : ℚ) → is-odd-ℕ n → leq-ℚ p q →
     leq-ℚ (power-ℚ n p) (power-ℚ n q)
-  preserves-leq-power-is-odd-exponent-ℚ n p q odd-n p≤q =
+  preserves-order-power-is-odd-exponent-ℚ n p q odd-n p≤q =
     trichotomy-le-ℚ p q
-      ( leq-le-ℚ ∘ preserves-le-power-is-odd-exponent-ℚ n p q odd-n)
+      ( leq-le-ℚ ∘ preserves-strict-order-power-is-odd-exponent-ℚ n p q odd-n)
       ( leq-eq-ℚ ∘ ap (power-ℚ n))
       ( λ q<p → ex-falso (not-leq-le-ℚ q p q<p p≤q))
 ```

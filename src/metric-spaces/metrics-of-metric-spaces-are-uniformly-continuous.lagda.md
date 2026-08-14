@@ -124,18 +124,18 @@ module _
                       ( commutative-ρ' x' y')))
             ≤ ρ' y y' +ℝ ρ' x x'
               by
-                preserves-leq-add-ℝ
+                preserves-order-add-ℝ
                   ( dist-metric-leq-metric-of-Metric-Space x y y')
                   ( dist-metric-leq-metric-of-Metric-Space y' x x')
             ≤ real-ℚ⁺ ε' +ℝ real-ℚ⁺ ε'
               by
-                preserves-leq-add-ℝ
+                preserves-order-add-ℝ
                   ( forward-implication (H ε' y y') Nε'yy')
                   ( forward-implication (H ε' x x') Nε'xx')
             ≤ real-ℚ⁺ (ε' +ℚ⁺ ε')
               by leq-eq-ℝ (add-real-ℚ _ _)
             ≤ real-ℚ⁺ ε
-              by preserves-leq-real-ℚ (leq-le-ℚ 2ε'<ε))
+              by preserves-order-real-ℚ (leq-le-ℚ 2ε'<ε))
 
     is-uniformly-continuous-map-metric-of-Metric-Space :
       is-uniformly-continuous-map-Metric-Space

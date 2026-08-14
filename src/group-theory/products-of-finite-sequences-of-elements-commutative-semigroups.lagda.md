@@ -123,7 +123,7 @@ module _
         ( refl)
     preserves-product-adjacent-transposition-fin-sequence-type-Commutative-Semigroup
       (succ-ℕ (succ-ℕ n)) (inr star) f =
-      right-swap-mul-Commutative-Semigroup G _ _ _
+      right-swap-mul-Commutative-Semigroup G
     preserves-product-adjacent-transposition-fin-sequence-type-Commutative-Semigroup
       (succ-ℕ zero-ℕ) (inr star) f =
       commutative-mul-Commutative-Semigroup G _ _
@@ -195,7 +195,7 @@ module _
         ( f ∘ map-transposition-Fin (succ-ℕ (succ-ℕ n)) i j i≠j))
 
     preserves-product-permutation-fin-sequence-type-Commutative-Semigroup :
-      (n : ℕ) → (σ : Permutation (succ-ℕ n)) →
+      (n : ℕ) → (σ : permutation (succ-ℕ n)) →
       (f : fin-sequence-type-Commutative-Semigroup G (succ-ℕ n)) →
       product-fin-sequence-type-Commutative-Semigroup G n f ＝
       product-fin-sequence-type-Commutative-Semigroup G n (f ∘ map-equiv σ)

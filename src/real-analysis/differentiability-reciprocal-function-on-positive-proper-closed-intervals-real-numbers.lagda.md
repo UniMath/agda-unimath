@@ -166,14 +166,14 @@ module _
                     ( ( square-ℝ (real-reciprocal-[a,b] x)) *ℝ
                       ( pr1 x -ℝ pr1 y))))
                 by
-                  preserves-leq-mul-ℝ⁰⁺
+                  preserves-order-mul-ℝ⁰⁺
                     ( nonnegative-ℝ⁺
                       ( ( inv-ℝ⁺ (pos-type-[a,b] x)) *ℝ⁺
                         ( inv-ℝ⁺ (pos-type-[a,b] y))))
                     ( nonnegative-square-ℝ _)
                     ( nonnegative-dist-ℝ _ _)
                     ( nonnegative-dist-ℝ _ _)
-                    ( preserves-leq-mul-ℝ⁰⁺
+                    ( preserves-order-mul-ℝ⁰⁺
                       ( nonnegative-ℝ⁺ (inv-ℝ⁺ (pos-type-[a,b] x)))
                       ( nonnegative-real-ℚ⁺ M⁺)
                       ( nonnegative-ℝ⁺ (inv-ℝ⁺ (pos-type-[a,b] y)))
@@ -273,11 +273,11 @@ module _
                   ( real-ℚ⁺ (M⁻³ *ℚ⁺ ε)) *ℝ
                   ( dist-ℝ (pr1 x) (pr1 y)))
                 by
-                  preserves-leq-left-mul-ℝ⁰⁺
+                  preserves-order-left-mul-ℝ⁰⁺
                     ( nonnegative-real-ℚ⁰⁺ (nonnegative-square-ℚ M))
-                    ( preserves-leq-right-mul-ℝ⁰⁺
+                    ( preserves-order-right-mul-ℝ⁰⁺
                       ( nonnegative-dist-ℝ _ _)
-                        ( preserves-leq-mul-ℝ⁰⁺
+                        ( preserves-order-mul-ℝ⁰⁺
                           ( nonnegative-ℝ⁺ (inv-ℝ⁺ (pos-type-[a,b] x)))
                           ( nonnegative-real-ℚ⁺ M⁺)
                           ( nonnegative-dist-ℝ _ _)

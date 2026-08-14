@@ -29,6 +29,8 @@ open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.powers-of-elements-commutative-monoids
 open import group-theory.semigroups
+
+open import structured-types.magmas
 ```
 
 </details>
@@ -87,6 +89,10 @@ module _
   additive-monoid-Semiring =
     monoid-Commutative-Monoid additive-commutative-monoid-Semiring
 
+  additive-unital-magma-Semiring : Unital-Magma l
+  additive-unital-magma-Semiring =
+    unital-magma-Monoid additive-monoid-Semiring
+
   additive-semigroup-Semiring : Semigroup l
   additive-semigroup-Semiring =
     semigroup-Commutative-Monoid additive-commutative-monoid-Semiring
@@ -138,6 +144,13 @@ module _
     associative-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
+  inv-associative-add-Semiring :
+    (x y z : type-Semiring R) →
+    add-Semiring x (add-Semiring y z) ＝ add-Semiring (add-Semiring x y) z
+  inv-associative-add-Semiring =
+    inv-associative-mul-Commutative-Monoid
+      ( additive-commutative-monoid-Semiring R)
+
   commutative-add-Semiring :
     (x y : type-Semiring R) → add-Semiring x y ＝ add-Semiring y x
   commutative-add-Semiring =
@@ -145,7 +158,7 @@ module _
       ( additive-commutative-monoid-Semiring R)
 
   interchange-add-add-Semiring :
-    (x y x' y' : type-Semiring R) →
+    {x y x' y' : type-Semiring R} →
     ( add-Semiring (add-Semiring x y) (add-Semiring x' y')) ＝
     ( add-Semiring (add-Semiring x x') (add-Semiring y y'))
   interchange-add-add-Semiring =
@@ -153,14 +166,14 @@ module _
       ( additive-commutative-monoid-Semiring R)
 
   right-swap-add-Semiring :
-    (x y z : type-Semiring R) →
+    {x y z : type-Semiring R} →
     add-Semiring (add-Semiring x y) z ＝ add-Semiring (add-Semiring x z) y
   right-swap-add-Semiring =
     right-swap-mul-Commutative-Monoid
       ( additive-commutative-monoid-Semiring R)
 
   left-swap-add-Semiring :
-    (x y z : type-Semiring R) →
+    {x y z : type-Semiring R} →
     add-Semiring x (add-Semiring y z) ＝ add-Semiring y (add-Semiring x z)
   left-swap-add-Semiring =
     left-swap-mul-Commutative-Monoid
@@ -185,6 +198,9 @@ module _
 
   is-zero-Semiring : type-Semiring R → UU l
   is-zero-Semiring x = x ＝ zero-Semiring
+
+  is-zero-Semiring' : type-Semiring R → UU l
+  is-zero-Semiring' x = zero-Semiring ＝ x
 
   is-nonzero-Semiring : type-Semiring R → UU l
   is-nonzero-Semiring x = ¬ (is-zero-Semiring x)
@@ -230,6 +246,12 @@ module _
     (x y z : type-Semiring R) →
     mul-Semiring (mul-Semiring x y) z ＝ mul-Semiring x (mul-Semiring y z)
   associative-mul-Semiring = pr2 has-associative-mul-Semiring
+
+  inv-associative-mul-Semiring :
+    (x y z : type-Semiring R) →
+    mul-Semiring x (mul-Semiring y z) ＝ mul-Semiring (mul-Semiring x y) z
+  inv-associative-mul-Semiring x y z =
+    inv (associative-mul-Semiring x y z)
 
   multiplicative-semigroup-Semiring : Semigroup l
   pr1 multiplicative-semigroup-Semiring = set-Semiring R
@@ -287,6 +309,12 @@ module _
   one-Semiring : type-Semiring R
   one-Semiring = unit-Monoid multiplicative-monoid-Semiring
 
+  is-one-Semiring : type-Semiring R → UU l
+  is-one-Semiring x = x ＝ one-Semiring
+
+  is-one-Semiring' : type-Semiring R → UU l
+  is-one-Semiring' x = one-Semiring ＝ x
+
   left-unit-law-mul-Semiring :
     (x : type-Semiring R) → mul-Semiring R one-Semiring x ＝ x
   left-unit-law-mul-Semiring =
@@ -297,3 +325,7 @@ module _
   right-unit-law-mul-Semiring =
     right-unit-law-mul-Monoid multiplicative-monoid-Semiring
 ```
+
+## See also
+
+- The operation `r x u ↦ (rx)u` is the standard form of two-sided multiplication in `R`. This operation gives the semiring `R` the structure of an (additive) [monoid with `R`-action](ring-theory.monoids-with-semiring-action.md), and is studied in [`ring-theory.monoids-with-semiring-action`](ring-theory.monoids-with-semiring-action.md).

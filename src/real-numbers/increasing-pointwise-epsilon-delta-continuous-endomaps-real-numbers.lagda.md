@@ -154,14 +154,14 @@ module _
                             ( Hδx x' Nxx')
                       ≤ f' y' +ℝ real-ℚ⁺ εx
                         by
-                          preserves-leq-right-add-ℝ
+                          preserves-order-right-add-ℝ
                             ( real-ℚ⁺ εx)
                             ( f' x')
                             ( f' y')
                             ( H (x' , x'∈S) (y' , y'∈S) (leq-le-ℝ x'<y'))
                       ≤ (f' y +ℝ real-ℚ⁺ εy) +ℝ real-ℚ⁺ εx
                         by
-                          preserves-leq-right-add-ℝ
+                          preserves-order-right-add-ℝ
                             ( real-ℚ⁺ εx)
                             ( f' y')
                             ( f' y +ℝ real-ℚ⁺ εy)
@@ -219,7 +219,7 @@ module _
             ( H
               ( p)
               ( q)
-              ( reflects-leq-real-ℚ
+              ( reflects-order-real-ℚ
                 ( leq-leq-raise-ℝ l1
                   ( binary-tr
                     ( leq-ℝ)

@@ -215,8 +215,8 @@ decide-leq-succ-𝕋 (succ-𝕋 m) (succ-𝕋 n) l =
 ### If `m` is less than `n`, then it is less than `n+1`
 
 ```agda
-preserves-leq-succ-𝕋 : (m n : 𝕋) → m ≤-𝕋 n → m ≤-𝕋 (succ-𝕋 n)
-preserves-leq-succ-𝕋 m n = transitive-leq-𝕋 m n (succ-𝕋 n) (succ-leq-𝕋 n)
+preserves-order-succ-𝕋 : (m n : 𝕋) → m ≤-𝕋 n → m ≤-𝕋 (succ-𝕋 n)
+preserves-order-succ-𝕋 m n = transitive-leq-𝕋 m n (succ-𝕋 n) (succ-leq-𝕋 n)
 ```
 
 ### The successor of `n` is not less than or equal to `n`

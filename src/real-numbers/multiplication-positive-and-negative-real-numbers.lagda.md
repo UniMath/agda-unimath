@@ -70,12 +70,12 @@ abstract
     {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} → is-positive-ℝ x → is-negative-ℝ y →
     is-negative-ℝ (x *ℝ y)
   is-negative-mul-positive-negative-ℝ {x = x} {y = y} is-pos-x is-neg-y =
-    preserves-le-right-sim-ℝ
+    preserves-strict-order-right-sim-ℝ
       ( x *ℝ y)
       ( x *ℝ zero-ℝ)
       ( zero-ℝ)
       ( right-zero-law-mul-ℝ x)
-      ( preserves-le-left-mul-ℝ⁺ (x , is-pos-x) is-neg-y)
+      ( preserves-strict-order-left-mul-ℝ⁺ (x , is-pos-x) is-neg-y)
 
 mul-positive-negative-ℝ :
   {l1 l2 : Level} → ℝ⁺ l1 → ℝ⁻ l2 → ℝ⁻ (l1 ⊔ l2)
@@ -110,11 +110,11 @@ abstract
     {l1 l2 : Level} (x : ℝ⁺ l1) {y : ℝ l2} → is-nonnegative-ℝ (real-ℝ⁺ x *ℝ y) →
     is-nonnegative-ℝ y
   is-nonnegative-is-nonnegative-left-mul-ℝ⁺ x⁺@(x , 0<x) {y = y} 0≤xy =
-    reflects-leq-left-mul-ℝ⁺
+    reflects-order-left-mul-ℝ⁺
       ( x⁺)
       ( zero-ℝ)
       ( y)
-      ( preserves-leq-left-sim-ℝ
+      ( preserves-order-left-sim-ℝ
         ( symmetric-sim-ℝ (right-zero-law-mul-ℝ _))
         ( 0≤xy))
 ```

@@ -239,8 +239,8 @@ module _
   (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
   where
 
-  preserves-le-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
-  preserves-le-sim-fraction-ℤ I =
+  preserves-strict-order-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
+  preserves-strict-order-sim-fraction-ℤ I =
     concatenate-sim-le-fraction-ℤ p' p q'
       ( symmetric-sim-fraction-ℤ p p' H)
       ( concatenate-le-sim-fraction-ℤ p q q' I K)
@@ -255,7 +255,7 @@ module _
 
   reflects-le-sim-fraction-ℤ : le-fraction-ℤ p' q' → le-fraction-ℤ p q
   reflects-le-sim-fraction-ℤ =
-    preserves-le-sim-fraction-ℤ p' q' p q
+    preserves-strict-order-sim-fraction-ℤ p' q' p q
       ( symmetric-sim-fraction-ℤ p p' H)
       ( symmetric-sim-fraction-ℤ q q' K)
 ```
@@ -277,7 +277,7 @@ module _
           ( numerator-fraction-ℤ x *ℤ k)
           ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
       ( H)
-      ( preserves-le-left-mul-positive-ℤ
+      ( preserves-strict-order-left-mul-positive-ℤ
         ( positive-denominator-fraction-ℤ x)
         ( numerator-fraction-ℤ x)
         ( numerator-fraction-ℤ y)
@@ -376,9 +376,9 @@ neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
 
 ```agda
 abstract
-  preserves-le-in-fraction-ℤ :
+  preserves-strict-order-in-fraction-ℤ :
     (x y : ℤ) → le-ℤ x y → le-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
-  preserves-le-in-fraction-ℤ x y =
+  preserves-strict-order-in-fraction-ℤ x y =
     binary-tr le-ℤ (inv (right-unit-law-mul-ℤ x)) (inv (right-unit-law-mul-ℤ y))
 
   reflects-le-in-fraction-ℤ :
@@ -389,5 +389,5 @@ abstract
   iff-le-in-fraction-ℤ :
     (x y : ℤ) → le-ℤ x y ↔ le-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
   iff-le-in-fraction-ℤ x y =
-    ( preserves-le-in-fraction-ℤ x y , reflects-le-in-fraction-ℤ x y)
+    ( preserves-strict-order-in-fraction-ℤ x y , reflects-le-in-fraction-ℤ x y)
 ```

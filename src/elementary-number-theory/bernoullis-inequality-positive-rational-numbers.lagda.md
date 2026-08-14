@@ -87,7 +87,7 @@ module _
                 ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n *ℚ⁺ h))
             ( right-unit-law-mul-ℚ⁺
               ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n))))
-        ( preserves-leq-right-add-ℚ
+        ( preserves-order-right-add-ℚ
           ( rational-ℚ⁺
             ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n))
           ( rational-ℚ⁺ h)
@@ -104,7 +104,7 @@ module _
                     ( seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n))
                   ( rational-ℚ⁺ h)))
             ( left-unit-law-mul-ℚ (rational-ℚ⁺ h))
-            ( preserves-leq-right-mul-ℚ⁺
+            ( preserves-order-right-mul-ℚ⁺
               ( h)
               ( one-ℚ)
               ( rational-ℚ⁺
@@ -145,7 +145,7 @@ module _
             ( one-ℚ⁺)
             ( one-ℚ⁺ +ℚ⁺ h)
             ( succ-ℕ n)))
-        ( preserves-leq-right-mul-ℚ⁺
+        ( preserves-order-right-mul-ℚ⁺
           ( one-ℚ⁺ +ℚ⁺ h)
           ( rational-ℚ⁺
             (seq-standard-arithmetic-sequence-ℚ⁺ one-ℚ⁺ h n))

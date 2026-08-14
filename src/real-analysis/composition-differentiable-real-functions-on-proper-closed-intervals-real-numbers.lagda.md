@@ -248,7 +248,7 @@ module _
                 ≤ ( real-ℚ⁺ α *ℝ dist-ℝ (map-f x) (map-f y)) +ℝ
                   ( real-ℚ q *ℝ (real-ℚ⁺ β *ℝ dist-ℝ (pr1 x) (pr1 y)))
                   by
-                    preserves-leq-add-ℝ
+                    preserves-order-add-ℝ
                       ( is-mod-δg
                         ( α)
                         ( tot-f x)
@@ -262,7 +262,7 @@ module _
                             ( ωf (δg α))
                             ( leq-left-min-ℚ⁺ (ωf (δg α)) (δf β))
                             ( Nδxy))))
-                      ( preserves-leq-mul-ℝ⁰⁺
+                      ( preserves-order-mul-ℝ⁰⁺
                         ( nonnegative-abs-ℝ (g'∘f x))
                         ( nonnegative-real-ℚ⁺ q⁺)
                         ( nonnegative-dist-ℝ _ _)
@@ -278,8 +278,8 @@ module _
                         ( map-f x -ℝ map-f y)))) +ℝ
                   ( (real-ℚ q *ℝ real-ℚ⁺ β) *ℝ dist-ℝ (pr1 x) (pr1 y))
                   by
-                    preserves-leq-add-ℝ
-                      ( preserves-leq-left-mul-ℝ⁰⁺
+                    preserves-order-add-ℝ
+                      ( preserves-order-left-mul-ℝ⁰⁺
                         ( nonnegative-real-ℚ⁺ α)
                         ( leq-abs-add-abs-dist-ℝ _ (f' x *ℝ (pr1 x -ℝ pr1 y))))
                       ( leq-eq-ℝ (inv (associative-mul-ℝ _ _ _)))
@@ -305,11 +305,11 @@ module _
                         ( map-f y -ℝ map-f x)))) +ℝ
                   ( real-ℚ⁺ (q⁺ *ℚ⁺ β) *ℝ dist-ℝ (pr1 x) (pr1 y))
                   by
-                    preserves-leq-right-add-ℝ _ _ _
-                      ( preserves-leq-left-mul-ℝ⁰⁺
+                    preserves-order-right-add-ℝ _ _ _
+                      ( preserves-order-left-mul-ℝ⁰⁺
                         ( nonnegative-real-ℚ⁺ α)
-                        ( preserves-leq-add-ℝ
-                          ( preserves-leq-right-mul-ℝ⁰⁺
+                        ( preserves-order-add-ℝ
+                          ( preserves-order-right-mul-ℝ⁰⁺
                             ( nonnegative-dist-ℝ (pr1 x) (pr1 y))
                             ( transitive-leq-ℝ _ _ _
                               ( leq-le-ℝ max-|f'|<p)
@@ -357,10 +357,10 @@ module _
                       ( real-ℚ⁺ β *ℝ dist-ℝ (pr1 x) (pr1 y)))) +ℝ
                   ( real-ℚ⁺ (q⁺ *ℚ⁺ β) *ℝ dist-ℝ (pr1 x) (pr1 y))
                   by
-                    preserves-leq-right-add-ℝ _ _ _
-                      ( preserves-leq-left-mul-ℝ⁰⁺
+                    preserves-order-right-add-ℝ _ _ _
+                      ( preserves-order-left-mul-ℝ⁰⁺
                         ( nonnegative-real-ℚ⁺ α)
-                        ( preserves-leq-left-add-ℝ _ _ _
+                        ( preserves-order-left-add-ℝ _ _ _
                           ( |fy-fx-f'⟨y-x⟩|≤β|x-y|)))
                 ≤ ( ( real-ℚ⁺ α) *ℝ
                     ( ( real-ℚ p +ℝ real-ℚ⁺ β) *ℝ dist-ℝ (pr1 x) (pr1 y))) +ℝ

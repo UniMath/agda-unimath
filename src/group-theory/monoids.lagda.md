@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 
+open import structured-types.magmas
 open import structured-types.h-spaces
 open import structured-types.wild-monoids
 ```
@@ -49,6 +50,9 @@ module _
   semigroup-Monoid : Semigroup l
   semigroup-Monoid = pr1 M
 
+  magma-Monoid : Magma l
+  magma-Monoid = magma-Semigroup semigroup-Monoid
+
   is-unital-Monoid : is-unital-Semigroup semigroup-Monoid
   is-unital-Monoid = pr2 M
 
@@ -75,7 +79,14 @@ module _
   associative-mul-Monoid :
     (x y z : type-Monoid) →
     mul-Monoid (mul-Monoid x y) z ＝ mul-Monoid x (mul-Monoid y z)
-  associative-mul-Monoid = associative-mul-Semigroup semigroup-Monoid
+  associative-mul-Monoid =
+    associative-mul-Semigroup semigroup-Monoid
+
+  inv-associative-mul-Monoid :
+    (x y z : type-Monoid) →
+    mul-Monoid x (mul-Monoid y z) ＝ mul-Monoid (mul-Monoid x y) z
+  inv-associative-mul-Monoid =
+    inv-associative-mul-Semigroup semigroup-Monoid
 
   has-unit-Monoid : is-unital mul-Monoid
   has-unit-Monoid = pr2 M
@@ -94,6 +105,10 @@ module _
 
   right-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid x unit-Monoid ＝ x
   right-unit-law-mul-Monoid = pr2 (pr2 has-unit-Monoid)
+
+  unital-magma-Monoid : Unital-Magma l
+  pr1 unital-magma-Monoid = magma-Monoid
+  pr2 unital-magma-Monoid = has-unit-Monoid
 
   left-swap-mul-Monoid :
     {x y z : type-Monoid} → mul-Monoid x y ＝ mul-Monoid y x →

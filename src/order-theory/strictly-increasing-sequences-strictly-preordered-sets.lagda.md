@@ -42,28 +42,28 @@ if it [preserves](order-theory.strict-order-preserving-maps.md) the
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Strictly-Preordered-Set l1 l2)
-  (u : type-sequence-Strictly-Preordered-Set A)
+  {l1 l2 : Level} (A : Strict-Preorder l1 l2)
+  (u : type-sequence-Strict-Preorder A)
   where
 
-  is-strictly-increasing-prop-sequence-Strictly-Preordered-Set : Prop l2
-  is-strictly-increasing-prop-sequence-Strictly-Preordered-Set =
-    preserves-strict-order-prop-map-Strictly-Preordered-Set
+  is-strictly-increasing-prop-sequence-Strict-Preorder : Prop l2
+  is-strictly-increasing-prop-sequence-Strict-Preorder =
+    preserves-strict-order-prop-map-Strict-Preorder
       strictly-preordered-set-ℕ
       A
       u
 
-  is-strictly-increasing-sequence-Strictly-Preordered-Set : UU l2
-  is-strictly-increasing-sequence-Strictly-Preordered-Set =
-    preserves-strict-order-map-Strictly-Preordered-Set
+  is-strictly-increasing-sequence-Strict-Preorder : UU l2
+  is-strictly-increasing-sequence-Strict-Preorder =
+    preserves-strict-order-map-Strict-Preorder
       strictly-preordered-set-ℕ
       A
       u
 
-  is-prop-is-strictly-increasing-sequence-Strictly-Preordered-Set :
-    is-prop is-strictly-increasing-sequence-Strictly-Preordered-Set
-  is-prop-is-strictly-increasing-sequence-Strictly-Preordered-Set =
-    is-prop-preserves-strict-order-map-Strictly-Preordered-Set
+  is-prop-is-strictly-increasing-sequence-Strict-Preorder :
+    is-prop is-strictly-increasing-sequence-Strict-Preorder
+  is-prop-is-strictly-increasing-sequence-Strict-Preorder =
+    is-prop-preserves-strict-order-map-Strict-Preorder
       strictly-preordered-set-ℕ
       A
       u
@@ -75,41 +75,41 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Strictly-Preordered-Set l1 l2)
+  {l1 l2 : Level} (A : Strict-Preorder l1 l2)
   where
 
-  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set :
-    (u : type-sequence-Strictly-Preordered-Set A) →
-    ((n : ℕ) → le-Strictly-Preordered-Set A (u n) (u (succ-ℕ n))) →
-    is-strictly-increasing-sequence-Strictly-Preordered-Set A u
-  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strict-Preorder :
+    (u : type-sequence-Strict-Preorder A) →
+    ((n : ℕ) → le-Strict-Preorder A (u n) (u (succ-ℕ n))) →
+    is-strictly-increasing-sequence-Strict-Preorder A u
+  is-strictly-increasing-le-succ-sequence-Strict-Preorder
     u H zero-ℕ (succ-ℕ zero-ℕ) I = H zero-ℕ
-  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strict-Preorder
     u H zero-ℕ (succ-ℕ (succ-ℕ n)) I =
-      is-transitive-le-Strictly-Preordered-Set A
+      is-transitive-le-Strict-Preorder A
         ( u zero-ℕ)
         ( u (succ-ℕ n))
         ( u (succ-ℕ (succ-ℕ n)))
         ( H (succ-ℕ n))
-        ( is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+        ( is-strictly-increasing-le-succ-sequence-Strict-Preorder
           ( u)
           ( H)
           ( zero-ℕ)
           ( succ-ℕ n)
           ( I))
-  is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+  is-strictly-increasing-le-succ-sequence-Strict-Preorder
     u H (succ-ℕ m) (succ-ℕ n) I =
-      is-strictly-increasing-le-succ-sequence-Strictly-Preordered-Set
+      is-strictly-increasing-le-succ-sequence-Strict-Preorder
         ( u ∘ succ-ℕ)
         ( H ∘ succ-ℕ)
         ( m)
         ( n)
         ( I)
 
-  le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set :
-    (u : type-sequence-Strictly-Preordered-Set A) →
-    is-strictly-increasing-sequence-Strictly-Preordered-Set A u →
-    ((n : ℕ) → le-Strictly-Preordered-Set A (u n) (u (succ-ℕ n)))
-  le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
+  le-succ-is-strictly-increasing-sequence-Strict-Preorder :
+    (u : type-sequence-Strict-Preorder A) →
+    is-strictly-increasing-sequence-Strict-Preorder A u →
+    ((n : ℕ) → le-Strict-Preorder A (u n) (u (succ-ℕ n)))
+  le-succ-is-strictly-increasing-sequence-Strict-Preorder
     u H n = H n (succ-ℕ n) (succ-le-ℕ n)
 ```

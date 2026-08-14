@@ -150,7 +150,9 @@ module _
 
   ideal-subset-Commutative-Ring : ideal-Commutative-Ring (l1 ⊔ l2) R
   ideal-subset-Commutative-Ring =
-    ideal-subset-Ring (ring-Commutative-Ring R) S
+    ideal-subset-Commutative-Semiring
+      ( commutative-semiring-Commutative-Ring R)
+      ( S)
 
   contains-subset-ideal-subset-Commutative-Ring :
     S ⊆ subset-ideal-subset-Commutative-Ring

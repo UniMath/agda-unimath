@@ -126,24 +126,24 @@ leq-succ-Fin (succ-ℕ k) (inr star) = star
 
 ```agda
 abstract
-  preserves-leq-nat-Fin :
+  preserves-order-nat-Fin :
     (k : ℕ) {x y : Fin k} → leq-Fin k x y → leq-ℕ (nat-Fin k x) (nat-Fin k y)
-  preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
-    preserves-leq-nat-Fin k H
-  preserves-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
+  preserves-order-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
+    preserves-order-nat-Fin k H
+  preserves-order-nat-Fin (succ-ℕ k) {inl x} {inr star} H =
     leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
-  preserves-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
+  preserves-order-nat-Fin (succ-ℕ k) {inr star} {inr star} H =
     refl-leq-ℕ k
 
-  reflects-leq-nat-Fin :
+  reflects-order-nat-Fin :
     (k : ℕ) {x y : Fin k} → leq-ℕ (nat-Fin k x) (nat-Fin k y) → leq-Fin k x y
-  reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
-    reflects-leq-nat-Fin k H
-  reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inl y} H =
+  reflects-order-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
+    reflects-order-nat-Fin k H
+  reflects-order-nat-Fin (succ-ℕ k) {inr star} {inl y} H =
     ex-falso
       ( contradiction-le-ℕ (nat-Fin k y) k (strict-upper-bound-nat-Fin k y) H)
-  reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H = star
-  reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
+  reflects-order-nat-Fin (succ-ℕ k) {inl x} {inr star} H = star
+  reflects-order-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 ```
 
 ### Ordering on the standard finite types is decidable

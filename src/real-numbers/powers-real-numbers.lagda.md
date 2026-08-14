@@ -342,11 +342,11 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-abs-power-ℝ :
+  preserves-order-abs-power-ℝ :
     {l1 l2 : Level} (n : ℕ) (x : ℝ l1) (y : ℝ l2) → leq-ℝ (abs-ℝ x) (abs-ℝ y) →
     leq-ℝ (abs-ℝ (power-ℝ n x)) (abs-ℝ (power-ℝ n y))
-  preserves-leq-abs-power-ℝ 0 _ _ _ =
-    preserves-leq-sim-ℝ
+  preserves-order-abs-power-ℝ 0 _ _ _ =
+    preserves-order-sim-ℝ
       ( inv-tr
         ( sim-ℝ one-ℝ)
         ( abs-real-ℝ⁺ (raise-ℝ⁺ _ one-ℝ⁺))
@@ -356,7 +356,7 @@ abstract
         ( abs-real-ℝ⁺ (raise-ℝ⁺ _ one-ℝ⁺))
         ( sim-raise-ℝ _ one-ℝ))
       ( refl-leq-ℝ one-ℝ)
-  preserves-leq-abs-power-ℝ (succ-ℕ n) x y |x|≤|y| =
+  preserves-order-abs-power-ℝ (succ-ℕ n) x y |x|≤|y| =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in
@@ -368,12 +368,12 @@ abstract
         by leq-eq-ℝ (abs-mul-ℝ _ _)
       ≤ abs-ℝ (power-ℝ n y) *ℝ abs-ℝ y
         by
-          preserves-leq-mul-ℝ⁰⁺
+          preserves-order-mul-ℝ⁰⁺
             ( nonnegative-abs-ℝ (power-ℝ n x))
             ( nonnegative-abs-ℝ (power-ℝ n y))
             ( nonnegative-abs-ℝ x)
             ( nonnegative-abs-ℝ y)
-            ( preserves-leq-abs-power-ℝ n x y |x|≤|y|)
+            ( preserves-order-abs-power-ℝ n x y |x|≤|y|)
             ( |x|≤|y|)
       ≤ abs-ℝ (power-ℝ n y *ℝ y)
         by leq-eq-ℝ (inv (abs-mul-ℝ _ _))
@@ -385,12 +385,12 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-power-real-ℝ⁰⁺ :
+  preserves-order-power-real-ℝ⁰⁺ :
     {l1 l2 : Level} (n : ℕ) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) → leq-ℝ⁰⁺ x y →
     leq-ℝ (power-ℝ n (real-ℝ⁰⁺ x)) (power-ℝ n (real-ℝ⁰⁺ y))
-  preserves-leq-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
+  preserves-order-power-real-ℝ⁰⁺ {l1} {l2} 0 _ _ _ =
     leq-sim-ℝ (sim-raise-raise-ℝ l1 l2 one-ℝ)
-  preserves-leq-power-real-ℝ⁰⁺ (succ-ℕ n) x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
+  preserves-order-power-real-ℝ⁰⁺ (succ-ℕ n) x⁰⁺@(x , _) y⁰⁺@(y , _) x≤y =
     let
       open inequality-reasoning-Large-Poset ℝ-Large-Poset
     in
@@ -400,12 +400,12 @@ abstract
         by leq-eq-ℝ (power-succ-ℝ n x)
       ≤ power-ℝ n y *ℝ y
         by
-          preserves-leq-mul-ℝ⁰⁺
+          preserves-order-mul-ℝ⁰⁺
             ( power-ℝ⁰⁺ n x⁰⁺)
             ( power-ℝ⁰⁺ n y⁰⁺)
             ( x⁰⁺)
             ( y⁰⁺)
-            ( preserves-leq-power-real-ℝ⁰⁺ n x⁰⁺ y⁰⁺ x≤y)
+            ( preserves-order-power-real-ℝ⁰⁺ n x⁰⁺ y⁰⁺ x≤y)
             ( x≤y)
       ≤ power-ℝ (succ-ℕ n) y
         by leq-eq-ℝ (inv (power-succ-ℝ n y))
@@ -439,7 +439,7 @@ abstract
             abs-ℝ (power-ℝ n r)
             ≤ abs-ℝ (power-ℝ n (real-ℚ ε))
               by
-                preserves-leq-abs-power-ℝ
+                preserves-order-abs-power-ℝ
                   ( n)
                   ( r)
                   ( real-ℚ ε)
@@ -548,11 +548,11 @@ abstract
     is-strictly-increasing-is-strictly-increasing-rational-pointwise-ε-δ-continuous-endomap-ℝ
       ( pointwise-ε-δ-continuous-power-ℝ l n)
       ( λ p q p<q →
-        preserves-le-sim-ℝ
+        preserves-strict-order-sim-ℝ
           ( sim-power-raise-real-ℚ l n p)
           ( sim-power-raise-real-ℚ l n q)
-          ( preserves-le-real-ℚ
-            ( preserves-le-power-is-odd-exponent-ℚ n p q odd-n p<q)))
+          ( preserves-strict-order-real-ℚ
+            ( preserves-strict-order-power-is-odd-exponent-ℚ n p q odd-n p<q)))
 ```
 
 ### For odd `n`, `x ↦ xⁿ` is injective
@@ -579,9 +579,9 @@ abstract
     map-exists _
       ( raise-real-ℚ l)
       ( λ p q≤pⁿ →
-        preserves-leq-right-sim-ℝ
+        preserves-order-right-sim-ℝ
           ( sim-power-raise-real-ℚ l n p)
-          ( preserves-leq-real-ℚ q≤pⁿ))
+          ( preserves-order-real-ℚ q≤pⁿ))
       ( is-cofinal-power-is-odd-ℚ n odd-n q)
 
   is-coinitial-power-is-odd-exponent-ℝ :
@@ -591,8 +591,8 @@ abstract
     map-exists _
       ( raise-real-ℚ l)
       ( λ p pⁿ≤q →
-        preserves-leq-left-sim-ℝ
+        preserves-order-left-sim-ℝ
           ( sim-power-raise-real-ℚ l n p)
-          ( preserves-leq-real-ℚ pⁿ≤q))
+          ( preserves-order-real-ℚ pⁿ≤q))
       ( is-coinitial-power-is-odd-ℚ n odd-n q)
 ```

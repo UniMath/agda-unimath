@@ -93,13 +93,13 @@ abstract
 
 ```agda
 abstract
-  preserves-leq-sum-fin-sequence-ℝ⁰⁺ :
+  preserves-order-sum-fin-sequence-ℝ⁰⁺ :
     {l1 l2 : Level} →
     (n : ℕ) (a : fin-sequence (ℝ⁰⁺ l1) n) (b : fin-sequence (ℝ⁰⁺ l2) n) →
     ((i : Fin n) → leq-ℝ⁰⁺ (a i) (b i)) →
     leq-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n a) (sum-fin-sequence-ℝ⁰⁺ n b)
-  preserves-leq-sum-fin-sequence-ℝ⁰⁺ n a b aᵢ≤bᵢ =
-    preserves-leq-sum-fin-sequence-ℝ n (real-ℝ⁰⁺ ∘ a) (real-ℝ⁰⁺ ∘ b) aᵢ≤bᵢ
+  preserves-order-sum-fin-sequence-ℝ⁰⁺ n a b aᵢ≤bᵢ =
+    preserves-order-sum-fin-sequence-ℝ n (real-ℝ⁰⁺ ∘ a) (real-ℝ⁰⁺ ∘ b) aᵢ≤bᵢ
 ```
 
 ### If `aᵢ` is nonnegative for all `i`, `aᵢ ≤ ∑ aᵢ`

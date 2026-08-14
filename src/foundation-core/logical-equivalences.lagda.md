@@ -83,6 +83,26 @@ pr1 ((g1 , g2) ∘iff (f1 , f2)) = g1 ∘ f1
 pr2 ((g1 , g2) ∘iff (f1 , f2)) = f2 ∘ g2
 ```
 
+### Pre- and postcomposition of logical equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+  
+  precomp-iff :
+    (A ↔ B) → (B ↔ C) ↔ (A ↔ C)
+  pr1 (precomp-iff (f1 , f2)) (g1 , g2) = (g1 , g2) ∘iff (f1 , f2)
+  pr1 (pr2 (precomp-iff (f1 , f2)) (g1 , g2)) = g1 ∘ f2
+  pr2 (pr2 (precomp-iff (f1 , f2)) (g1 , g2)) = f1 ∘ g2
+
+  postcomp-iff :
+    (B ↔ C) → (A ↔ B) ↔ (A ↔ C)
+  pr1 (postcomp-iff (g1 , g2)) (f1 , f2) = (g1 , g2) ∘iff (f1 , f2)
+  pr1 (pr2 (postcomp-iff (g1 , g2)) (f1 , f2)) = g2 ∘ f1
+  pr2 (pr2 (postcomp-iff (g1 , g2)) (f1 , f2)) = f2 ∘ g1
+```
+
 ### Inverting a logical equivalence
 
 ```agda

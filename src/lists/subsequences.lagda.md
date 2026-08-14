@@ -44,24 +44,24 @@ module _
 
   subsequence : UU lzero
   subsequence =
-    hom-Strictly-Preordered-Set
+    hom-Strict-Preorder
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
 
   extract-subsequence : subsequence → ℕ → ℕ
   extract-subsequence =
-    map-hom-Strictly-Preordered-Set
+    map-hom-Strict-Preorder
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
 
   is-strictly-increasing-extract-subsequence :
     (f : subsequence) →
-    preserves-strict-order-map-Strictly-Preordered-Set
+    preserves-strict-order-map-Strict-Preorder
       ( strictly-preordered-set-ℕ)
       ( strictly-preordered-set-ℕ)
       ( extract-subsequence f)
   is-strictly-increasing-extract-subsequence =
-    preserves-strict-order-hom-Strictly-Preordered-Set
+    preserves-strict-order-hom-Strict-Preorder
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
 
@@ -79,7 +79,7 @@ module _
   where
 
   refl-subsequence : subsequence u
-  refl-subsequence = id-hom-Strictly-Preordered-Set strictly-preordered-set-ℕ
+  refl-subsequence = id-hom-Strict-Preorder strictly-preordered-set-ℕ
 ```
 
 ### A subsequence of a subsequence is a subsequence of the original sequence
@@ -94,7 +94,7 @@ module _
     (w : subsequence (seq-subsequence u v)) →
     subsequence u
   sub-subsequence =
-    comp-hom-Strictly-Preordered-Set
+    comp-hom-Strict-Preorder
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
       strictly-preordered-set-ℕ
@@ -121,7 +121,7 @@ module _
           { extract-subsequence u v n}
           { extract-subsequence u v (succ-ℕ n)}
           ( is-inflationary-extract-subsequence n)
-          ( le-succ-is-strictly-increasing-sequence-Strictly-Preordered-Set
+          ( le-succ-is-strictly-increasing-sequence-Strict-Preorder
             ( strictly-preordered-set-ℕ)
             ( extract-subsequence u v)
             ( is-strictly-increasing-extract-subsequence u v)

@@ -242,7 +242,7 @@ module _
                 ( dist-ℕ (nat-Fin (succ-ℕ (succ-ℕ n)) i) (succ-ℕ n))
                 ( y)))
             ( inv
-              ( power-succ-Semiring R
+              ( successor-law-power-Semiring R
                 ( nat-Fin (succ-ℕ (succ-ℕ n)) i)
                 ( x)))))) ∙
       ( ( ap
@@ -345,7 +345,7 @@ module _
                   ( nat-Fin (succ-ℕ (succ-ℕ n)) i)
                   ( succ-ℕ n)
                   ( upper-bound-nat-Fin (succ-ℕ n) i)) ∙
-                ( power-succ-Semiring R
+                ( successor-law-power-Semiring R
                   ( dist-ℕ (nat-Fin (succ-ℕ (succ-ℕ n)) i) (succ-ℕ n))
                   ( y))))))) ∙
       ( ( snoc-sum-fin-sequence-type-Semiring R
@@ -449,35 +449,7 @@ binomial-theorem-Semiring R (succ-ℕ (succ-ℕ n)) x y H =
     ( ( ap-add-Semiring R
         ( left-summand-binomial-theorem-Semiring R n x y H)
         ( right-summand-binomial-theorem-Semiring R n x y)) ∙
-      ( ( interchange-add-add-Semiring R
-          ( power-Semiring R (succ-ℕ (succ-ℕ n)) x)
-          ( sum-fin-sequence-type-Semiring R
-            ( succ-ℕ n)
-            ( λ i →
-              multiple-Semiring R
-              ( binomial-coefficient-Fin (succ-ℕ n) (inl-Fin (succ-ℕ n) i))
-              ( mul-Semiring R
-                ( power-Semiring R
-                  ( succ-ℕ (nat-Fin (succ-ℕ n) i))
-                  ( x))
-                ( power-Semiring R
-                  ( dist-ℕ (nat-Fin (succ-ℕ n) i) (succ-ℕ n))
-                  ( y)))))
-          ( power-Semiring R (succ-ℕ (succ-ℕ n)) y)
-          ( sum-fin-sequence-type-Semiring R
-            ( succ-ℕ n)
-            ( λ i →
-              multiple-Semiring R
-              ( binomial-coefficient-ℕ
-                ( succ-ℕ n)
-                ( succ-ℕ (nat-Fin (succ-ℕ (succ-ℕ n)) (inl-Fin (succ-ℕ n) i))))
-              ( mul-Semiring R
-                ( power-Semiring R
-                  ( succ-ℕ (nat-Fin (succ-ℕ n) i))
-                  ( x))
-                ( power-Semiring R
-                  ( dist-ℕ (nat-Fin (succ-ℕ n) i) (succ-ℕ n))
-                  ( y)))))) ∙
+      ( ( interchange-add-add-Semiring R) ∙
         ( ( ap-add-Semiring R
             ( commutative-add-Semiring R
               ( power-Semiring R (succ-ℕ (succ-ℕ n)) x)
@@ -535,10 +507,7 @@ binomial-theorem-Semiring R (succ-ℕ (succ-ℕ n)) x y H =
                             ( dist-ℕ m (succ-ℕ (succ-ℕ n)))
                             ( y))))
                     ( inv (nat-inr-Fin (succ-ℕ n) i))))))) ∙
-          ( ( right-swap-add-Semiring R
-              ( power-Semiring R (succ-ℕ (succ-ℕ n)) y)
-              ( power-Semiring R (succ-ℕ (succ-ℕ n)) x)
-              ( _)) ∙
+          ( ( right-swap-add-Semiring R) ∙
             ( ( ap
                 ( add-Semiring' R
                   ( power-Semiring R (succ-ℕ (succ-ℕ n)) x))

@@ -145,7 +145,7 @@ module _
           ( le-ℚ _)
           ( ( ap-diff-ℚ (inv (succ-rational-ℤ _)) refl) ∙
             ( is-retraction-diff-ℚ (rational-floor-ℚ⁰⁺ q) one-ℚ))
-          ( preserves-le-left-add-ℚ
+          ( preserves-strict-order-left-add-ℚ
             ( neg-ℚ (rational-floor-ℚ⁰⁺ q))
             ( rational-ℚ⁰⁺ q)
             ( rational-ℤ (succ-ℤ (floor-ℚ⁰⁺ q)))

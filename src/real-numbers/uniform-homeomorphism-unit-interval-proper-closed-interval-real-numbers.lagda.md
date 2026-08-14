@@ -103,8 +103,8 @@ module _
                   ( right-zero-law-mul-ℝ (b -ℝ a)))
           ≤ (b -ℝ a) *ℝ x +ℝ a
             by
-              preserves-leq-right-add-ℝ a _ _
-                ( preserves-leq-left-mul-ℝ⁺
+              preserves-order-right-add-ℝ a _ _
+                ( preserves-order-left-mul-ℝ⁺
                   ( positive-diff-le-ℝ a<b)
                   ( 0≤x))
 
@@ -122,8 +122,8 @@ module _
           (b -ℝ a) *ℝ x +ℝ a
           ≤ (b -ℝ a) *ℝ one-ℝ +ℝ a
             by
-              preserves-leq-right-add-ℝ a _ _
-                ( preserves-leq-left-mul-ℝ⁺
+              preserves-order-right-add-ℝ a _ _
+                ( preserves-order-left-mul-ℝ⁺
                   ( positive-diff-le-ℝ a<b)
                   ( x≤1))
           ≤ (b -ℝ a) +ℝ a
@@ -179,9 +179,9 @@ module _
                 ( preserves-sim-left-mul-ℝ _ _ _ (right-inverse-law-add-ℝ a))
           ≤ real-inv-ℝ⁺ (positive-diff-le-ℝ a<b) *ℝ (x -ℝ a)
             by
-              preserves-leq-left-mul-ℝ⁺
+              preserves-order-left-mul-ℝ⁺
                 ( inv-ℝ⁺ (positive-diff-le-ℝ a<b))
-                ( preserves-leq-right-add-ℝ _ _ _ a≤x)
+                ( preserves-order-right-add-ℝ _ _ _ a≤x)
 
     upper-bound-real-map-inv-uniform-homeo-unit-proper-closed-interval-ℝ :
       (x : type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]) →
@@ -197,9 +197,9 @@ module _
           real-inv-ℝ⁺ (positive-diff-le-ℝ a<b) *ℝ (x -ℝ a)
           ≤ real-inv-ℝ⁺ (positive-diff-le-ℝ a<b) *ℝ (b -ℝ a)
             by
-              preserves-leq-left-mul-ℝ⁺
+              preserves-order-left-mul-ℝ⁺
                 ( inv-ℝ⁺ (positive-diff-le-ℝ a<b))
-                ( preserves-leq-right-add-ℝ _ _ _ x≤b)
+                ( preserves-order-right-add-ℝ _ _ _ x≤b)
           ≤ one-ℝ
             by leq-sim-ℝ (left-inverse-law-mul-ℝ⁺ (positive-diff-le-ℝ a<b))
 

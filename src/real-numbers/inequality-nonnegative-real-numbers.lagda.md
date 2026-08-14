@@ -78,8 +78,8 @@ module _
   where
 
   abstract
-    preserves-leq-left-sim-ℝ⁰⁺ : leq-ℝ⁰⁺ x z → leq-ℝ⁰⁺ y z
-    preserves-leq-left-sim-ℝ⁰⁺ = preserves-leq-left-sim-ℝ x~y
+    preserves-order-left-sim-ℝ⁰⁺ : leq-ℝ⁰⁺ x z → leq-ℝ⁰⁺ y z
+    preserves-order-left-sim-ℝ⁰⁺ = preserves-order-left-sim-ℝ x~y
 ```
 
 ### Inequality is reflexive

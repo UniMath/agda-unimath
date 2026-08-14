@@ -141,7 +141,7 @@ module _
   compute-sum-map-nat-Semiring :
     ( n : ℕ) →
     ( seq-sum-sequence-Semiring R (map-nat-Semiring R) n) ＝
-    ( map-nat-Semiring R (sum-leq-ℕ n))
+    ( map-nat-Semiring R (triangular-number-ℕ n))
   compute-sum-map-nat-Semiring zero-ℕ =
     compute-sum-one-element-Semiring
       ( R)
@@ -155,7 +155,7 @@ module _
     inv
       ( right-distributive-multiple-add-Semiring
         ( R)
-        ( sum-leq-ℕ n)
+        ( triangular-number-ℕ n)
         ( succ-ℕ n)
         ( one-Semiring R))
 ```
@@ -181,11 +181,54 @@ module _
     ap-binary
       ( add-Semiring R)
       ( inv (sum-constant-fin-sequence-type-Semiring R (succ-ℕ n) a))
+      ( ( inv (htpy-mul-map-multiple-Semiring R (triangular-number-ℕ n) d)) ∙
+        ( ap
+          ( mul-Semiring' R d)
+          ( inv (compute-sum-map-nat-Semiring R n))) ∙
+        ( inv lemma-seq-sum-mul-nat)) ∙
+    interchange-add-sum-fin-sequence-type-Semiring R
+      ( succ-ℕ n)
+      ( fin-sequence-sequence (λ _ → a) (succ-ℕ n))
+      ( fin-sequence-sequence
+        ( λ k → multiple-Semiring R k d)
+        ( succ-ℕ n))
+
+    where
+
+    lemma-seq-sum-mul-nat :
+      ( seq-sum-sequence-Semiring
+        ( R)
+        ( λ i → multiple-Semiring R i d)
+        ( n)) ＝
+      ( mul-Semiring
+        ( R)
+        ( seq-sum-sequence-Semiring
+          ( R)
+          ( map-nat-Semiring R)
+          ( n))
+        ( d))
+    lemma-seq-sum-mul-nat =
+      inv
+        ( ( right-distributive-mul-sum-fin-sequence-type-Semiring
+            ( R)
+            ( succ-ℕ n)
+            ( fin-sequence-sequence
+              ( map-nat-Semiring R)
+              ( succ-ℕ n))
+              ( d)) ∙
+          ( htpy-seq-sum-sequence-Semiring
+            ( R)
+            ( λ i → htpy-mul-map-multiple-Semiring R i d)
+            ( n)))
+{-
+    ap-binary
+      ( add-Semiring R)
+      ( inv (sum-constant-fin-sequence-type-Semiring R (succ-ℕ n) a))
       ( ( ap
           ( λ i → multiple-Semiring R i d)
-          ( htpy-sum-leq-triangular-ℕ n)) ∙
+          ( compute-triangular-number-ℕ n)) ∙
         ( inv
-          ( htpy-mul-map-multiple-Semiring R (sum-leq-ℕ n) d)) ∙
+          ( htpy-mul-map-multiple-Semiring R (triangular-number-ℕ n) d)) ∙
         ( ap
           ( mul-Semiring' R d)
           ( inv (compute-sum-map-nat-Semiring R n))) ∙
@@ -223,7 +266,7 @@ module _
           ( htpy-seq-sum-sequence-Semiring
             ( R)
             ( λ i → htpy-mul-map-multiple-Semiring R i d)
-            ( n)))
+            ( n))) -}
 ```
 
 ### The nth term of an arithmetic sequence with initial term `a` and common difference `d` is equal to `(n + 1) * a + Tₙ * d` where `Tₙ` is the nth triangular number

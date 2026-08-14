@@ -86,18 +86,32 @@ module _
   is-closed-under-left-multiplication-intersection-ideal-Ring :
     is-closed-under-left-multiplication-subset-Ring R
       subset-intersection-ideal-Ring
-  pr1 (is-closed-under-left-multiplication-intersection-ideal-Ring x y H) =
-    is-closed-under-left-multiplication-ideal-Ring R I x y (pr1 H)
-  pr2 (is-closed-under-left-multiplication-intersection-ideal-Ring x y H) =
-    is-closed-under-left-multiplication-ideal-Ring R J x y (pr2 H)
+  pr1 (is-closed-under-left-multiplication-intersection-ideal-Ring H) =
+    is-closed-under-left-multiplication-ideal-Ring R I (pr1 H)
+  pr2 (is-closed-under-left-multiplication-intersection-ideal-Ring H) =
+    is-closed-under-left-multiplication-ideal-Ring R J (pr2 H)
 
   is-closed-under-right-multiplication-intersection-ideal-Ring :
     is-closed-under-right-multiplication-subset-Ring R
       subset-intersection-ideal-Ring
-  pr1 (is-closed-under-right-multiplication-intersection-ideal-Ring x y H) =
-    is-closed-under-right-multiplication-ideal-Ring R I x y (pr1 H)
-  pr2 (is-closed-under-right-multiplication-intersection-ideal-Ring x y H) =
-    is-closed-under-right-multiplication-ideal-Ring R J x y (pr2 H)
+  pr1 (is-closed-under-right-multiplication-intersection-ideal-Ring H) =
+    is-closed-under-right-multiplication-ideal-Ring R I (pr1 H)
+  pr2 (is-closed-under-right-multiplication-intersection-ideal-Ring H) =
+    is-closed-under-right-multiplication-ideal-Ring R J (pr2 H)
+
+  is-closed-under-two-sided-multiplication-intersection-ideal-Ring :
+    is-closed-under-two-sided-multiplication-subset-Ring R
+      subset-intersection-ideal-Ring
+  is-closed-under-two-sided-multiplication-intersection-ideal-Ring H =
+    is-closed-under-right-multiplication-intersection-ideal-Ring
+      ( is-closed-under-left-multiplication-intersection-ideal-Ring H)
+
+  is-additive-submonoid-intersection-ideal-Ring :
+    is-additive-submonoid-subset-Ring R subset-intersection-ideal-Ring
+  pr1 is-additive-submonoid-intersection-ideal-Ring =
+    contains-zero-intersection-ideal-Ring
+  pr2 is-additive-submonoid-intersection-ideal-Ring =
+    is-closed-under-addition-intersection-ideal-Ring
 
   is-additive-subgroup-intersection-ideal-Ring :
     is-additive-subgroup-subset-Ring R subset-intersection-ideal-Ring
@@ -111,11 +125,9 @@ module _
   is-ideal-intersection-ideal-Ring :
     is-ideal-subset-Ring R subset-intersection-ideal-Ring
   pr1 is-ideal-intersection-ideal-Ring =
-    is-additive-subgroup-intersection-ideal-Ring
-  pr1 (pr2 is-ideal-intersection-ideal-Ring) =
-    is-closed-under-left-multiplication-intersection-ideal-Ring
-  pr2 (pr2 is-ideal-intersection-ideal-Ring) =
-    is-closed-under-right-multiplication-intersection-ideal-Ring
+    is-additive-submonoid-intersection-ideal-Ring
+  pr2 is-ideal-intersection-ideal-Ring =
+    is-closed-under-two-sided-multiplication-intersection-ideal-Ring
 
   intersection-ideal-Ring : ideal-Ring (l2 ⊔ l3) R
   pr1 intersection-ideal-Ring = subset-intersection-ideal-Ring

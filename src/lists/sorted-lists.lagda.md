@@ -17,6 +17,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.arrays
+open import lists.elementhood-relation-lists
 open import lists.lists
 open import lists.sorted-tuples
 open import lists.tuples
@@ -60,6 +61,10 @@ module _
 ### The proposition that an element is less or equal than every element in a list
 
 ```agda
+module _
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  where
+
   is-least-element-list-Prop :
     type-Decidable-Total-Order X →
     list (type-Decidable-Total-Order X) → Prop l2
@@ -80,9 +85,13 @@ module _
 ### If a list is sorted, then its tail is also sorted
 
 ```agda
+module _
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  where
+
   is-sorted-tail-is-sorted-list :
     (l : list (type-Decidable-Total-Order X)) →
-    is-sorted-list l → is-sorted-list (tail-list l)
+    is-sorted-list X l → is-sorted-list X (tail-list l)
   is-sorted-tail-is-sorted-list nil _ = raise-star
   is-sorted-tail-is-sorted-list (cons x nil) s = raise-star
   is-sorted-tail-is-sorted-list (cons x (cons y l)) s = pr2 s
@@ -91,10 +100,14 @@ module _
 ### If a list is sorted then its head is less or equal than every element in the list
 
 ```agda
+module _
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  where
+
   leq-element-in-list-leq-head-is-sorted-list :
     (x y z : type-Decidable-Total-Order X)
     (l : list (type-Decidable-Total-Order X)) →
-    is-sorted-list (cons y l) →
+    is-sorted-list X (cons y l) →
     z ∈-list (cons y l) →
     leq-Decidable-Total-Order X x y →
     leq-Decidable-Total-Order X x z
@@ -121,12 +134,16 @@ module _
 ### An equivalent definition of being sorted
 
 ```agda
+module _
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  where
+
   is-sorted-least-element-list-Prop :
     list (type-Decidable-Total-Order X) → Prop l2
   is-sorted-least-element-list-Prop nil = raise-unit-Prop l2
   is-sorted-least-element-list-Prop (cons x l) =
     product-Prop
-      ( is-least-element-list-Prop x l)
+      ( is-least-element-list-Prop X x l)
       ( is-sorted-least-element-list-Prop l)
 
   is-sorted-least-element-list :
@@ -136,7 +153,7 @@ module _
 
   is-sorted-list-is-sorted-least-element-list :
     (l : list (type-Decidable-Total-Order X)) →
-    is-sorted-least-element-list l → is-sorted-list l
+    is-sorted-least-element-list l → is-sorted-list X l
   is-sorted-list-is-sorted-least-element-list nil _ =
     raise-star
   is-sorted-list-is-sorted-least-element-list (cons x nil) _ =
@@ -151,12 +168,16 @@ module _
 ### If a tuple `v` of length `n` is sorted, then the list `list-tuple n v` is also sorted
 
 ```agda
+module _
+  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  where
+
   is-sorted-list-is-sorted-tuple :
     (n : ℕ) (v : tuple (type-Decidable-Total-Order X) n) →
     is-sorted-tuple X v →
-    is-sorted-list (list-tuple n v)
+    is-sorted-list X (list-tuple n v)
   is-sorted-list-is-sorted-tuple 0 v S = raise-star
   is-sorted-list-is-sorted-tuple 1 (x ∷ v) S = raise-star
   is-sorted-list-is-sorted-tuple (succ-ℕ (succ-ℕ n)) (x ∷ y ∷ v) S =
-    pr1 S , is-sorted-list-is-sorted-tuple (succ-ℕ n) (y ∷ v) (pr2 S)
+    ( pr1 S , is-sorted-list-is-sorted-tuple (succ-ℕ n) (y ∷ v) (pr2 S))
 ```
