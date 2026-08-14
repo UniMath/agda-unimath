@@ -9,7 +9,10 @@ module linear-algebra.normed-real-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.positive-rational-numbers
+
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
@@ -31,6 +34,7 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
+open import metric-spaces.rational-neighborhood-relations
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -38,7 +42,10 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.positive-and-negative-real-numbers
+open import real-numbers.positive-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.saturation-inequality-nonnegative-real-numbers
@@ -180,6 +187,12 @@ module _
   zero-Normed-ℝ-Vector-Space =
     zero-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
 
+  right-zero-law-diff-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    diff-Normed-ℝ-Vector-Space v zero-Normed-ℝ-Vector-Space ＝ v
+  right-zero-law-diff-Normed-ℝ-Vector-Space =
+    right-unit-law-right-subtraction-Ab ab-Normed-ℝ-Vector-Space
+
   left-unit-law-add-Normed-ℝ-Vector-Space :
     (v : type-Normed-ℝ-Vector-Space) →
     add-Normed-ℝ-Vector-Space zero-Normed-ℝ-Vector-Space v ＝ v
@@ -192,6 +205,21 @@ module _
   right-inverse-law-add-Normed-ℝ-Vector-Space =
     right-inverse-law-add-Ab ab-Normed-ℝ-Vector-Space
 
+  is-zero-prop-Normed-ℝ-Vector-Space : subtype l2 type-Normed-ℝ-Vector-Space
+  is-zero-prop-Normed-ℝ-Vector-Space =
+    is-zero-prop-ℝ-Vector-Space
+      ( vector-space-Normed-ℝ-Vector-Space)
+
+  is-zero-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space → UU l2
+  is-zero-Normed-ℝ-Vector-Space =
+    is-zero-ℝ-Vector-Space
+      ( vector-space-Normed-ℝ-Vector-Space)
+
+  mul-Normed-ℝ-Vector-Space :
+    ℝ l1 → type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space
+  mul-Normed-ℝ-Vector-Space =
+    mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
   map-norm-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space → ℝ l1
   map-norm-Normed-ℝ-Vector-Space = pr1 (pr1 norm-Normed-ℝ-Vector-Space)
 
@@ -199,6 +227,33 @@ module _
   nonnegative-norm-Normed-ℝ-Vector-Space =
     nonnegative-seminorm-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+  is-nonnegative-map-norm-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    is-nonnegative-ℝ (map-norm-Normed-ℝ-Vector-Space v)
+  is-nonnegative-map-norm-Normed-ℝ-Vector-Space v =
+    is-nonnegative-real-ℝ⁰⁺ (nonnegative-norm-Normed-ℝ-Vector-Space v)
+
+  is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space :
+    (c : ℝ l1) (v : type-Normed-ℝ-Vector-Space) →
+    map-norm-Normed-ℝ-Vector-Space (mul-Normed-ℝ-Vector-Space c v) ＝
+    abs-ℝ c *ℝ map-norm-Normed-ℝ-Vector-Space v
+  is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space =
+    is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+  has-norm-prop-Normed-ℝ-Vector-Space :
+    ℝ⁰⁺ l1 → subtype (lsuc l1) type-Normed-ℝ-Vector-Space
+  has-norm-prop-Normed-ℝ-Vector-Space d v =
+    Id-Prop
+      ( ℝ-Set l1)
+      ( map-norm-Normed-ℝ-Vector-Space v)
+      ( real-ℝ⁰⁺ d)
+
+  has-norm-Normed-ℝ-Vector-Space :
+    ℝ⁰⁺ l1 → type-Normed-ℝ-Vector-Space → UU (lsuc l1)
+  has-norm-Normed-ℝ-Vector-Space d =
+    is-in-subtype (has-norm-prop-Normed-ℝ-Vector-Space d)
 
   dist-Normed-ℝ-Vector-Space :
     type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space → ℝ l1
@@ -210,6 +265,12 @@ module _
   nonnegative-dist-Normed-ℝ-Vector-Space =
     nonnegative-dist-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+  is-nonnegative-dist-Normed-ℝ-Vector-Space :
+    (v w : type-Normed-ℝ-Vector-Space) →
+    is-nonnegative-ℝ (dist-Normed-ℝ-Vector-Space v w)
+  is-nonnegative-dist-Normed-ℝ-Vector-Space v w =
+    is-nonnegative-real-ℝ⁰⁺ (nonnegative-dist-Normed-ℝ-Vector-Space v w)
 
   abstract
     is-extensional-norm-Normed-ℝ-Vector-Space :
@@ -296,6 +357,16 @@ module _
     located-metric-space-Metric
       ( set-Normed-ℝ-Vector-Space V)
       ( metric-Normed-ℝ-Vector-Space)
+
+  neighborhood-prop-Normed-ℝ-Vector-Space :
+    Rational-Neighborhood-Relation l1 (type-Normed-ℝ-Vector-Space V)
+  neighborhood-prop-Normed-ℝ-Vector-Space =
+    neighborhood-prop-Metric-Space metric-space-Normed-ℝ-Vector-Space
+
+  neighborhood-Normed-ℝ-Metric-Space :
+    ℚ⁺ → Relation l1 (type-Normed-ℝ-Vector-Space V)
+  neighborhood-Normed-ℝ-Metric-Space =
+    neighborhood-Metric-Space metric-space-Normed-ℝ-Vector-Space
 ```
 
 ## Properties
@@ -411,15 +482,91 @@ module _
 module _
   {l1 l2 : Level}
   (V : Normed-ℝ-Vector-Space l1 l2)
-  where
+  where abstract
 
-  abstract
-    eq-zero-norm-zero-Normed-ℝ-Vector-Space :
-      map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
-      raise-ℝ l1 zero-ℝ
-    eq-zero-norm-zero-Normed-ℝ-Vector-Space =
-      eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
-        ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+  eq-zero-norm-zero-Normed-ℝ-Vector-Space :
+    map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V) ＝
+    raise-ℝ l1 zero-ℝ
+  eq-zero-norm-zero-Normed-ℝ-Vector-Space =
+    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+
+  is-zero-map-norm-zero-Normed-ℝ-Vector-Space :
+    is-zero-ℝ (map-norm-Normed-ℝ-Vector-Space V (zero-Normed-ℝ-Vector-Space V))
+  is-zero-map-norm-zero-Normed-ℝ-Vector-Space =
+    is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+```
+
+### If `c` is nonnegative, `|cv| = c|v|`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where abstract
+
+  map-norm-mul-nonnegative-Normed-ℝ-Vector-Space :
+    (c : ℝ⁰⁺ l1) (v : type-Normed-ℝ-Vector-Space V) →
+    map-norm-Normed-ℝ-Vector-Space V
+      ( mul-Normed-ℝ-Vector-Space V (real-ℝ⁰⁺ c) v) ＝
+    real-ℝ⁰⁺ c *ℝ map-norm-Normed-ℝ-Vector-Space V v
+  map-norm-mul-nonnegative-Normed-ℝ-Vector-Space c v =
+    ( is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space V (real-ℝ⁰⁺ c) v) ∙
+    ( ap-mul-ℝ (abs-real-ℝ⁰⁺ c) refl)
+
+  map-norm-mul-positive-Normed-ℝ-Vector-Space :
+    (c : ℝ⁺ l1) (v : type-Normed-ℝ-Vector-Space V) →
+    map-norm-Normed-ℝ-Vector-Space V
+      ( mul-Normed-ℝ-Vector-Space V (real-ℝ⁺ c) v) ＝
+    real-ℝ⁺ c *ℝ map-norm-Normed-ℝ-Vector-Space V v
+  map-norm-mul-positive-Normed-ℝ-Vector-Space c =
+    map-norm-mul-nonnegative-Normed-ℝ-Vector-Space
+      ( nonnegative-ℝ⁺ c)
+```
+
+### The distance between `v + w` and `v` is `|w|`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where abstract
+
+  dist-add-Normed-ℝ-Vector-Space :
+    (v w : type-Normed-ℝ-Vector-Space V) →
+    dist-Normed-ℝ-Vector-Space V (add-Normed-ℝ-Vector-Space V v w) v ＝
+    map-norm-Normed-ℝ-Vector-Space V w
+  dist-add-Normed-ℝ-Vector-Space v w =
+    ap
+      ( map-norm-Normed-ℝ-Vector-Space V)
+      ( is-identity-left-conjugation-Ab (ab-Normed-ℝ-Vector-Space V) v w)
+
+  dist-add-Normed-ℝ-Vector-Space' :
+    (v w : type-Normed-ℝ-Vector-Space V) →
+    dist-Normed-ℝ-Vector-Space V v (add-Normed-ℝ-Vector-Space V v w) ＝
+    map-norm-Normed-ℝ-Vector-Space V w
+  dist-add-Normed-ℝ-Vector-Space' v w =
+    ( symmetric-dist-Normed-ℝ-Vector-Space V _ _) ∙
+    ( dist-add-Normed-ℝ-Vector-Space v w)
+```
+
+### Zero laws of distance
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  (v : type-Normed-ℝ-Vector-Space V)
+  where abstract
+
+  right-zero-law-dist-Normed-ℝ-Vector-Space :
+    dist-Normed-ℝ-Vector-Space V v (zero-Normed-ℝ-Vector-Space V) ＝
+    map-norm-Normed-ℝ-Vector-Space V v
+  right-zero-law-dist-Normed-ℝ-Vector-Space =
+    ap
+      ( map-norm-Normed-ℝ-Vector-Space V)
+      ( right-zero-law-diff-Normed-ℝ-Vector-Space V v)
 ```
 
 ## See also

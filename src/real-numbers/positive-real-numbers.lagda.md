@@ -35,6 +35,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -45,6 +47,7 @@ open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -216,6 +219,31 @@ exists-ℚ⁺-in-lower-cut-ℝ⁺ :
 exists-ℚ⁺-in-lower-cut-ℝ⁺ = ind-Σ exists-ℚ⁺-in-lower-cut-is-positive-ℝ
 ```
 
+### A real number is positive if and only if there exists a lesser positive rational number
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ l)
+  where abstract
+
+  exists-lesser-positive-rational-is-positive-ℝ :
+    is-positive-ℝ x → exists ℚ⁺ (λ q → le-prop-ℝ (real-ℚ⁺ q) x)
+  exists-lesser-positive-rational-is-positive-ℝ 0<x =
+    map-tot-exists
+      ( λ q → le-real-is-in-lower-cut-ℝ x)
+      ( exists-ℚ⁺-in-lower-cut-is-positive-ℝ x 0<x)
+
+  is-positive-exists-lesser-positive-rational-ℝ :
+    exists ℚ⁺ (λ q → le-prop-ℝ (real-ℚ⁺ q) x) → is-positive-ℝ x
+  is-positive-exists-lesser-positive-rational-ℝ ∃q =
+    is-positive-exists-ℚ⁺-in-lower-cut-ℝ
+      ( x)
+      ( map-tot-exists
+        ( λ q → is-in-lower-cut-le-real-ℚ x)
+        ( ∃q))
+```
+
 ### `x < y` if and only if `y - x` is positive
 
 ```agda
@@ -355,14 +383,23 @@ abstract
 ```agda
 abstract
   preserves-is-positive-raise-ℝ :
-    {l1 : Level} (l : Level) (x : ℝ l1) → is-positive-ℝ x →
-    is-positive-ℝ (raise-ℝ l x)
-  preserves-is-positive-raise-ℝ l x 0<x =
-    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ _ _) 0<x
+    {l1 : Level} (l : Level) (x : ℝ l1) →
+    is-positive-ℝ x → is-positive-ℝ (raise-ℝ l x)
+  preserves-is-positive-raise-ℝ l x =
+    preserves-le-right-sim-ℝ zero-ℝ x _ (sim-raise-ℝ l x)
+
+  reflects-is-positive-raise-ℝ :
+    {l1 : Level} (l : Level) (x : ℝ l1) →
+    is-positive-ℝ (raise-ℝ l x) → is-positive-ℝ x
+  reflects-is-positive-raise-ℝ l x =
+    preserves-le-right-sim-ℝ zero-ℝ _ x (sim-raise-ℝ' l x)
 
 raise-ℝ⁺ : {l1 : Level} (l : Level) → ℝ⁺ l1 → ℝ⁺ (l ⊔ l1)
 raise-ℝ⁺ l (x , 0<x) =
   ( raise-ℝ l x , preserves-is-positive-raise-ℝ l x 0<x)
+
+positive-raise-real-ℚ⁺ : (l : Level) → ℚ⁺ → ℝ⁺ l
+positive-raise-real-ℚ⁺ l q = raise-ℝ⁺ l (positive-real-ℚ⁺ q)
 
 raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
 raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
@@ -374,4 +411,21 @@ raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
 abstract
   eq-raise-ℝ⁺ : {l : Level} → (x : ℝ⁺ l) → x ＝ raise-ℝ⁺ l x
   eq-raise-ℝ⁺ (x , _) = eq-ℝ⁺ _ _ (eq-raise-ℝ x)
+```
+
+### Zero real numbers are not positive
+
+```agda
+abstract
+  is-not-positive-is-zero-ℝ :
+    {l : Level} (x : ℝ l) → is-zero-ℝ x → ¬ is-positive-ℝ x
+  is-not-positive-is-zero-ℝ {l} x x~0 =
+    map-neg
+      ( λ 0<x →
+        reflects-is-positive-real-ℚ
+          ( reflects-is-positive-raise-ℝ
+            ( l)
+            ( zero-ℝ)
+            ( tr is-positive-ℝ (eq-raise-zero-is-zero-ℝ x~0) 0<x)))
+      ( is-not-positive-zero-ℚ)
 ```
