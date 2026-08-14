@@ -23,6 +23,7 @@ open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -215,23 +216,6 @@ module _
   has-supremum-subset-ℝ = type-Prop has-supremum-prop-subset-ℝ
 ```
 
-### A subset of real numbers with a supremum is inhabited
-
-```agda
-abstract
-  is-inhabited-has-supremum-subset-ℝ :
-    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-supremum-subset-ℝ S l3 →
-    is-inhabited-subtype S
-  is-inhabited-has-supremum-subset-ℝ S (s , is-sup-s) =
-    map-trunc-Prop
-      ( pr1)
-      ( is-approximated-below-is-supremum-family-ℝ
-        ( inclusion-subset-ℝ S)
-        ( s)
-        ( is-sup-s)
-        ( one-ℚ⁺))
-```
-
 ### A real number `r` is less than the supremum of the `yᵢ` if and only if it is less than some `yᵢ`
 
 ```agda
@@ -373,6 +357,57 @@ module _
     is-supremum-unit-family-ℝ =
       ( ( λ _ → refl-leq-ℝ x) ,
         ( λ ε → intro-exists star (le-diff-real-ℝ⁺ x (positive-real-ℚ⁺ ε))))
+```
+
+### If a family of real numbers has a supremum, the family is inhabited
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {I : UU l1}
+  (f : I → ℝ l2)
+  ((supf , _ , approx-below-supf) : has-supremum-family-ℝ f l3)
+  where abstract
+
+  is-inhabited-has-supremum-family-ℝ : is-inhabited I
+  is-inhabited-has-supremum-family-ℝ =
+    map-trunc-Prop pr1 (approx-below-supf one-ℚ⁺)
+```
+
+### A subset of real numbers with a supremum is inhabited
+
+```agda
+abstract
+  is-inhabited-has-supremum-subset-ℝ :
+    {l1 l2 l3 : Level} (S : subset-ℝ l1 l2) → has-supremum-subset-ℝ S l3 →
+    is-inhabited-subtype S
+  is-inhabited-has-supremum-subset-ℝ S =
+    is-inhabited-has-supremum-family-ℝ (inclusion-subtype S)
+```
+
+### If families `f` and `g` of real numbers have suprema `sup f` and `sup g`, and `f` is everywhere less than or equal to `g`, then `sup f ≤ sup g`
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l1}
+  (f : I → ℝ l2)
+  (g : I → ℝ l3)
+  ((supf , is-supremum-supf) : has-supremum-family-ℝ f l4)
+  ((supg , is-ub-supg , _) : has-supremum-family-ℝ g l5)
+  where abstract
+
+  leq-supremum-leq-family-ℝ :
+    ((i : I) → leq-ℝ (f i) (g i)) →
+    leq-ℝ supf supg
+  leq-supremum-leq-family-ℝ f≤g =
+    leq-is-least-upper-bound-family-of-elements-Large-Poset
+      ( ℝ-Large-Poset)
+      ( f)
+      ( supf)
+      ( is-least-upper-bound-is-supremum-family-ℝ f supf is-supremum-supf)
+      ( supg)
+      ( λ i → transitive-leq-ℝ (f i) (g i) supg (is-ub-supg i) (f≤g i))
 ```
 
 ## See also

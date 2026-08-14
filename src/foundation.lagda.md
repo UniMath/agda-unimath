@@ -483,6 +483,7 @@ open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.subtypes-of-subtypes public
 open import foundation.subuniverse-of-contractible-types public
 open import foundation.subuniverse-of-propositions public
 open import foundation.subuniverse-of-truncated-types public
