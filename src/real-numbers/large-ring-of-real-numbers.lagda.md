@@ -25,6 +25,7 @@ open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 
 open import ring-theory.large-rings
+open import ring-theory.rings
 ```
 
 </details>
@@ -64,6 +65,9 @@ large-commutative-ring-ℝ =
 ### The small commutative ring of real numbers at a universe level
 
 ```agda
+ring-ℝ : (l : Level) → Ring (lsuc l)
+ring-ℝ = ring-Large-Ring large-ring-ℝ
+
 commutative-ring-ℝ : (l : Level) → Commutative-Ring (lsuc l)
 commutative-ring-ℝ =
   commutative-ring-Large-Commutative-Ring large-commutative-ring-ℝ
