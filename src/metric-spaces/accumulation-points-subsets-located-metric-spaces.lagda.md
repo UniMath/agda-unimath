@@ -208,6 +208,11 @@ module _
     UU (l1 ⊔ l2 ⊔ l3)
   is-sequential-accumulation-point-subset-Located-Metric-Space =
     type-Prop is-sequential-accumulation-point-prop-subset-Located-Metric-Space
+
+  sequence-accumulating-to-point-subset-Located-Metric-Space : UU (l1 ⊔ l2 ⊔ l3)
+  sequence-accumulating-to-point-subset-Located-Metric-Space =
+    type-subtype
+      ( is-sequence-accumulating-to-point-prop-subset-Located-Metric-Space)
 ```
 
 ### If `x` is an accumulation point of `S`, it is a sequential accumulation point of `S`
