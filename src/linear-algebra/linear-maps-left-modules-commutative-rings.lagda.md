@@ -9,6 +9,8 @@ module linear-algebra.linear-maps-left-modules-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -21,6 +23,9 @@ open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
 open import linear-algebra.linear-maps-left-modules-rings
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-commutative-rings
+
+open import lists.finite-sequences
 ```
 
 </details>
@@ -348,6 +353,31 @@ module _
         ( ring-Commutative-Ring R)
         ( M)
         ( N)
+```
+
+### Linear maps distribute over sums
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  (N : left-module-Commutative-Ring l3 R)
+  (f : linear-map-left-module-Commutative-Ring R M N)
+  where abstract
+
+  distributive-map-linear-map-sum-fin-sequence-type-left-module-Commutative-Ring :
+    (n : ℕ) (v : fin-sequence (type-left-module-Commutative-Ring R M) n) →
+    map-linear-map-left-module-Commutative-Ring R M N f
+      ( sum-fin-sequence-type-left-module-Commutative-Ring R M n v) ＝
+    sum-fin-sequence-type-left-module-Commutative-Ring R N n
+      ( map-linear-map-left-module-Commutative-Ring R M N f ∘ v)
+  distributive-map-linear-map-sum-fin-sequence-type-left-module-Commutative-Ring =
+    distributive-map-linear-map-sum-fin-sequence-type-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( M)
+      ( N)
+      ( f)
 ```
 
 ## See also

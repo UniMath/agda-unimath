@@ -691,6 +691,33 @@ module _
           ( is-equiv-q))
 ```
 
+### For an equivalence `e`, `map-equiv e x = y` if and only if `map-inv-equiv e y = x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1}
+  {B : UU l2}
+  (e : A ≃ B)
+  where abstract
+
+  eq-map-inv-equiv-eq-map-equiv :
+    (x : A) (y : B) → map-equiv e x ＝ y → map-inv-equiv e y ＝ x
+  eq-map-inv-equiv-eq-map-equiv x _ refl =
+    is-retraction-map-inv-equiv e x
+
+  eq-map-equiv-eq-map-inv-equiv :
+    (x : A) (y : B) → map-inv-equiv e y ＝ x → map-equiv e x ＝ y
+  eq-map-equiv-eq-map-inv-equiv _ y refl =
+    is-section-map-inv-equiv e y
+
+  eq-map-inv-equiv-iff-eq-map-equiv :
+    (x : A) (y : B) → (map-equiv e x ＝ y) ↔ (map-inv-equiv e y ＝ x)
+  eq-map-inv-equiv-iff-eq-map-equiv x y =
+    ( eq-map-inv-equiv-eq-map-equiv x y ,
+      eq-map-equiv-eq-map-inv-equiv x y)
+```
+
 ## See also
 
 - For the notion of coherently invertible maps, also known as half-adjoint
