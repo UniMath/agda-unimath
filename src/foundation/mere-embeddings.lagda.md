@@ -143,7 +143,7 @@ module _
       ( H (fiber f) F)
 ```
 
-### A type with propositional double negation elimination that does not merely embed is inhabited
+### A type `X` with propositional double negation elimination such that there is some type `Y` it does not merely embed into, then `X` is inhabited
 
 ```agda
 module _
@@ -151,7 +151,7 @@ module _
   where
 
   is-inhabited-not-mere-emb :
-    has-prop-double-negation-elim Y → ¬ mere-emb Y X → is-inhabited Y
-  is-inhabited-not-mere-emb dY H =
-    dY (H ∘ mere-emb-is-empty)
+    has-prop-double-negation-elim X → ¬ mere-emb X Y → is-inhabited X
+  is-inhabited-not-mere-emb dX H =
+    dX (H ∘ mere-emb-is-empty)
 ```
