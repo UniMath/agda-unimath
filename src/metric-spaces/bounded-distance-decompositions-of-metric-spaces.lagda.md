@@ -14,6 +14,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
@@ -33,10 +34,10 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.elements-at-bounded-distance-metric-spaces
 open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
@@ -343,7 +344,7 @@ module _
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space :
     cauchy-approximation-Metric-Space A
   map-cauchy-approximation-subspace-bounded-distance-component-Metric-Space =
-    map-cauchy-approximation-short-map-Metric-Space
+    map-short-map-cauchy-pseudocompletion-Metric-Space
       ( subspace-bounded-distance-component-Metric-Space A X)
       ( A)
       ( short-inclusion-subspace-Metric-Space

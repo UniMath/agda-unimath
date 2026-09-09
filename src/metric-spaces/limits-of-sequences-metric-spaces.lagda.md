@@ -15,6 +15,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -91,7 +92,7 @@ module _
   is-modulus-limit-modulus-sequence-Metric-Space :
     (m : limit-modulus-sequence-Metric-Space) →
     is-limit-modulus-sequence-Metric-Space
-      (modulus-limit-modulus-sequence-Metric-Space m)
+      ( modulus-limit-modulus-sequence-Metric-Space m)
   is-modulus-limit-modulus-sequence-Metric-Space m = pr2 m
 
   is-limit-prop-sequence-Metric-Space : Prop l2

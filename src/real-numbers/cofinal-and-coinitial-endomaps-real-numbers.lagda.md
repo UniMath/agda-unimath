@@ -10,6 +10,7 @@ module real-numbers.cofinal-and-coinitial-endomaps-real-numbers where
 open import elementary-number-theory.rational-numbers
 
 open import foundation.conjunction
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels

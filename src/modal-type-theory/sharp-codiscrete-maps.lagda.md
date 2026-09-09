@@ -9,6 +9,7 @@ module modal-type-theory.sharp-codiscrete-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.universe-levels

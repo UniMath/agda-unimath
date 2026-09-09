@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.universe-levels

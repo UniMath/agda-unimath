@@ -8,6 +8,7 @@ module foundation.families-of-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-dependent-pair-types

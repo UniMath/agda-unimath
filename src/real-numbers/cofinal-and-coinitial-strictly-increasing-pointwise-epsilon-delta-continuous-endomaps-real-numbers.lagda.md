@@ -20,6 +20,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.automorphisms
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.equivalences
@@ -504,8 +505,8 @@ module _
       in
         cotransitive-le-ℝ
           ( map-f (raise-real-ℚ l p))
-          ( map-f (raise-real-ℚ l q))
           ( y)
+          ( map-f (raise-real-ℚ l q))
           ( is-strictly-increasing-map-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
             ( f)
             ( raise-real-ℚ l p)

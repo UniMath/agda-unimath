@@ -9,6 +9,8 @@ module foundation-core.1-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-truncated-types
 open import foundation.truncated-types
 open import foundation.universe-levels
 

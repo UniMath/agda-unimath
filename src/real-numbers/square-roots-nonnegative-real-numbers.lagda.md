@@ -33,6 +33,7 @@ open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjoint-subtypes
 open import foundation.disjunction
 open import foundation.empty-types
@@ -765,3 +766,12 @@ abstract
           ( refl)
           ( preserves-leq-left-mul-ℝ⁰⁺ x⁰⁺ 1≤x)))
 ```
+
+## See also
+
+- [Odd roots of real numbers](real-numbers.odd-roots-real-numbers.md)
+- [Nonzero roots of nonnegative real numbers](real-numbers.nonzero-roots-nonnegative-real-numbers.md)
+
+## External links
+
+- [Square root](https://en.wikipedia.org/wiki/Square_root) on Wikipedia
