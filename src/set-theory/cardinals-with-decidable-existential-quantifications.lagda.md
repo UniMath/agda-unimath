@@ -93,6 +93,11 @@ module _
     has-decidable-∃-cardinality ≃ has-decidable-∃-bool (type-Set X)
   compute-has-decidable-∃-cardinality =
     equiv-eq eq-compute-has-decidable-∃-cardinality
+
+  inv-unit-has-decidable-∃-cardinality :
+    has-decidable-∃-cardinality → has-decidable-∃-bool (type-Set X)
+  inv-unit-has-decidable-∃-cardinality =
+    map-equiv compute-has-decidable-∃-cardinality
 ```
 
 ### Representatives have decidable existential quantifications at every level
@@ -106,7 +111,7 @@ module _
     has-decidable-∃-cardinality X → has-decidable-∃ (type-Set X)
   has-decidable-∃-has-decidable-∃-cardinality h =
     has-decidable-∃-has-decidable-∃-bool
-      ( map-equiv (compute-has-decidable-∃-cardinality X) h)
+      ( inv-unit-has-decidable-∃-cardinality X h)
 ```
 
 ### The universe of cardinals with decidable existential quantifications
