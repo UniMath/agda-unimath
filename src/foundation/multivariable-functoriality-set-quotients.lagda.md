@@ -9,8 +9,8 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.finite-sequences-set-quotients
 open import foundation.functoriality-set-quotients
+open import foundation.multivariable-inputs-set-quotients
 open import foundation.set-quotients
 open import foundation.universe-levels
 
@@ -58,7 +58,10 @@ module _
       ( S)
       ( quotient-Set S)
       ( reflecting-map-quotient-map S)
-      ( is-set-quotient-fin-sequence-set-quotient n A R)
+      ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+        ( n)
+        ( A)
+        ( R))
       ( is-set-quotient-set-quotient S)
 
   compute-multivariable-map-set-quotient :
@@ -75,6 +78,9 @@ module _
       ( S)
       ( quotient-Set S)
       ( reflecting-map-quotient-map S)
-      ( is-set-quotient-fin-sequence-set-quotient n A R)
+      ( is-set-quotient-fin-sequence-set-quotient-all-sim-equivalence-relation
+        ( n)
+        ( A)
+        ( R))
       ( is-set-quotient-set-quotient S)
 ```
