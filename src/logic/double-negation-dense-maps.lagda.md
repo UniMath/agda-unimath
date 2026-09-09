@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.connected-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types

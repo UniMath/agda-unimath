@@ -13,6 +13,7 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -364,6 +365,9 @@ module _
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
 
+  right-subtraction-Ab' : type-Ab A → type-Ab A → type-Ab A
+  right-subtraction-Ab' y x = right-subtraction-Ab x y
+
   ap-right-subtraction-Ab :
     {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →
     right-subtraction-Ab x y ＝ right-subtraction-Ab x' y'
@@ -666,6 +670,52 @@ module _
           by ap-add-Ab A (right-inverse-law-add-Ab A x) refl
         ＝ right-subtraction-Ab A y z
           by left-unit-law-add-Ab A _
+```
+
+### `(y + x) - (z + x) = y - z`
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    right-subtraction-right-add-Ab :
+      (x y z : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A y x) (add-Ab A z x) ＝
+      right-subtraction-Ab A y z
+    right-subtraction-right-add-Ab x y z =
+      ( ap-binary
+        ( right-subtraction-Ab A)
+        ( commutative-add-Ab A y x)
+        ( commutative-add-Ab A z x)) ∙
+      ( right-subtraction-left-add-Ab A x y z)
+```
+
+### Interchanging addition and right subtraction
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  abstract
+    interchange-add-right-subtraction-Ab :
+      (x y z w : type-Ab A) →
+      right-subtraction-Ab A (add-Ab A x y) (add-Ab A z w) ＝
+      add-Ab A (right-subtraction-Ab A x z) (right-subtraction-Ab A y w)
+    interchange-add-right-subtraction-Ab x y z w =
+      let
+        _+A_ = add-Ab A
+        _-A_ = right-subtraction-Ab A
+        neg-A = neg-Ab A
+      in
+        equational-reasoning
+          (x +A y) -A (z +A w)
+          ＝ (x +A y) +A (neg-A z +A neg-A w)
+            by ap-add-Ab A refl (distributive-neg-add-Ab A z w)
+          ＝ (x -A z) +A (y -A w)
+            by interchange-add-add-Ab A _ _ _ _
 ```
 
 ### Conjugation is the identity function

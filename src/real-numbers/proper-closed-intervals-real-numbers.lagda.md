@@ -34,10 +34,11 @@ open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.action-on-cauchy-approximations-short-maps-metric-spaces
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.closed-subsets-metric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
@@ -52,6 +53,7 @@ open import real-numbers.addition-real-numbers
 open import real-numbers.apartness-real-numbers
 open import real-numbers.binary-maximum-real-numbers
 open import real-numbers.binary-minimum-real-numbers
+open import real-numbers.clamp-function-closed-interval-real-numbers
 open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
@@ -100,6 +102,14 @@ upper-bound-proper-closed-interval-ℝ :
   {l1 l2 : Level} → proper-closed-interval-ℝ l1 l2 → ℝ l2
 upper-bound-proper-closed-interval-ℝ (a , b , a<b) = b
 
+abstract
+  le-bounds-proper-closed-interval-ℝ :
+    {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2) →
+    le-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( upper-bound-proper-closed-interval-ℝ I)
+  le-bounds-proper-closed-interval-ℝ (a , b , a<b) = a<b
+
 subtype-proper-closed-interval-ℝ :
   {l1 l2 : Level} (l : Level) → proper-closed-interval-ℝ l1 l2 →
   subset-ℝ (l1 ⊔ l2 ⊔ l) l
@@ -126,6 +136,79 @@ width-proper-closed-interval-ℝ (a , b , _) = b -ℝ a
 ```
 
 ## Properties
+
+### Proper closed intervals are closed under similarity of real numbers
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  is-in-proper-closed-interval-sim-ℝ :
+    {l3 l4 : Level} {x : ℝ l3} {y : ℝ l4} →
+    sim-ℝ x y →
+    is-in-proper-closed-interval-ℝ I x →
+    is-in-proper-closed-interval-ℝ I y
+  is-in-proper-closed-interval-sim-ℝ x~y (a≤x , x≤b) =
+    ( preserves-leq-right-sim-ℝ x~y a≤x ,
+      preserves-leq-left-sim-ℝ x~y x≤b)
+```
+
+### A proper closed interval contains its bounds
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  abstract
+    is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+      is-in-proper-closed-interval-ℝ I (lower-bound-proper-closed-interval-ℝ I)
+    is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+      ( refl-leq-ℝ (lower-bound-proper-closed-interval-ℝ I) ,
+        leq-le-ℝ (le-bounds-proper-closed-interval-ℝ I))
+
+  in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l1 I
+  in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    ( lower-bound-proper-closed-interval-ℝ I ,
+      is-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ)
+
+  abstract
+    is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+      is-in-proper-closed-interval-ℝ I (upper-bound-proper-closed-interval-ℝ I)
+    is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+      ( leq-le-ℝ (le-bounds-proper-closed-interval-ℝ I) ,
+        refl-leq-ℝ (upper-bound-proper-closed-interval-ℝ I))
+
+  in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ l2 I
+  in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    ( upper-bound-proper-closed-interval-ℝ I ,
+      is-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ)
+```
+
+### The bounds of a proper closed interval bound its elements
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where abstract
+
+  leq-lower-bound-proper-closed-interval-ℝ :
+    {l3 : Level} (x : type-proper-closed-interval-ℝ l3 I) →
+    leq-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1 x)
+  leq-lower-bound-proper-closed-interval-ℝ (x , a≤x , x≤b) = a≤x
+
+  leq-upper-bound-proper-closed-interval-ℝ :
+    {l3 : Level} (x : type-proper-closed-interval-ℝ l3 I) →
+    leq-ℝ
+      ( pr1 x)
+      ( upper-bound-proper-closed-interval-ℝ I)
+  leq-upper-bound-proper-closed-interval-ℝ (x , a≤x , x≤b) = x≤b
+```
 
 ### The metric space associated with a proper closed interval
 
@@ -262,7 +345,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-add =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-add)
@@ -284,7 +367,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -297,7 +380,7 @@ abstract
                 by ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space
@@ -345,7 +428,7 @@ abstract
           ( metric-space-ℝ l)
           ( subtype-proper-closed-interval-ℝ l [a,b])
       approx-clamp-diff =
-        map-cauchy-approximation-short-map-Metric-Space
+        map-short-map-cauchy-pseudocompletion-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-proper-closed-interval-ℝ l [a,b])
           ( short-map-clamp-diff)
@@ -367,7 +450,7 @@ abstract
           tr
             ( is-limit-cauchy-approximation-Metric-Space
               ( metric-space-ℝ l)
-              ( map-cauchy-approximation-short-map-Metric-Space
+              ( map-short-map-cauchy-pseudocompletion-Metric-Space
                 ( metric-space-proper-closed-interval-ℝ l [a,b])
                 ( metric-space-ℝ l)
                 ( short-inclusion)
@@ -381,7 +464,7 @@ abstract
                   ap-max-ℝ refl (eq-sim-ℝ (right-leq-left-min-ℝ x≤b))
               ＝ x
                 by eq-sim-ℝ (left-leq-right-max-ℝ a≤x))
-            ( preserves-limit-map-cauchy-approximation-short-map-Metric-Space
+            ( preserves-limit-map-short-map-cauchy-pseudocompletion-Metric-Space
               ( metric-space-ℚ)
               ( metric-space-ℝ l)
               ( comp-short-map-Metric-Space
@@ -859,4 +942,78 @@ module _
                   ( real-ℚ⁺ ε'')
                   ( is-positive-real-ℚ⁺ ε'')))
           ( cotransitive-le-ℝ a xℝ b a<b)
+```
+
+### Raising universe levels of elements of proper closed interval
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  raise-type-proper-closed-interval-ℝ :
+    {l0 : Level} (l : Level) →
+    type-proper-closed-interval-ℝ l0 I →
+    type-proper-closed-interval-ℝ (l0 ⊔ l) I
+  raise-type-proper-closed-interval-ℝ l (x , x∈I) =
+    ( raise-ℝ l x ,
+      is-in-proper-closed-interval-sim-ℝ
+        ( I)
+        ( sim-raise-ℝ l x)
+        ( x∈I))
+```
+
+### Raising the universe levels of the bounds of a proper closed interval
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  (l : Level)
+  where
+
+  raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ (l ⊔ l1 ⊔ l2) I
+  raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    raise-type-proper-closed-interval-ℝ I l2
+      ( raise-type-proper-closed-interval-ℝ I l
+        ( in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ I))
+
+  sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ :
+    sim-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ)
+  sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ =
+    transitive-sim-ℝ
+      ( lower-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        ( raise-type-proper-closed-interval-ℝ I l
+          ( in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ I)))
+      ( pr1
+        ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ))
+      ( sim-raise-ℝ l2 _)
+      ( sim-raise-ℝ l _)
+
+  raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    type-proper-closed-interval-ℝ (l ⊔ l1 ⊔ l2) I
+  raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    raise-type-proper-closed-interval-ℝ I l1
+      ( raise-type-proper-closed-interval-ℝ I l
+        ( in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ I))
+
+  sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ :
+    sim-ℝ
+      ( upper-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ)
+  sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ =
+    transitive-sim-ℝ
+      ( upper-bound-proper-closed-interval-ℝ I)
+      ( pr1
+        ( raise-type-proper-closed-interval-ℝ I l
+          ( in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ I)))
+      ( pr1
+        ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ))
+      ( sim-raise-ℝ l1 _)
+      ( sim-raise-ℝ l _)
 ```

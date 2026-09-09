@@ -7,6 +7,7 @@ module order-theory.cofinal-maps-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels

@@ -197,6 +197,27 @@ module _
       (isometry-unit-metric-quotient-Pseudometric-Space P)
 ```
 
+### The unit map identifies similar elements
+
+```agda
+module _
+  {l1 l2 : Level} (P : Pseudometric-Space l1 l2)
+  where abstract
+
+  eq-map-unit-metric-quotient-sim-Pseudometric-Space :
+    (x y : type-Pseudometric-Space P) →
+    sim-Pseudometric-Space P x y →
+    map-unit-metric-quotient-Pseudometric-Space P x ＝
+    map-unit-metric-quotient-Pseudometric-Space P y
+  eq-map-unit-metric-quotient-sim-Pseudometric-Space x y =
+    eq-set-quotient-sim-element-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space P)
+      ( map-unit-metric-quotient-Pseudometric-Space P x)
+      ( map-unit-metric-quotient-Pseudometric-Space P y)
+      ( is-in-class-map-unit-metric-quotient-Pseudometric-Space P x)
+      ( is-in-class-map-unit-metric-quotient-Pseudometric-Space P y)
+```
+
 ## See also
 
 - The

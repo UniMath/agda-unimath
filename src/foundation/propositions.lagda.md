@@ -11,8 +11,10 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
-open import foundation.logical-equivalences
+open import foundation.function-types
 open import foundation.retracts-of-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -27,6 +29,16 @@ open import foundation-core.truncation-levels
 </details>
 
 ## Properties
+
+### A type is a proposition if and only if the type of its endomaps is contractible
+
+```agda
+abstract
+  is-contr-endomaps-is-prop :
+    {l : Level} (P : UU l) → is-prop P → is-contr (P → P)
+  is-contr-endomaps-is-prop P is-prop-P =
+    is-proof-irrelevant-is-prop (is-prop-function-type is-prop-P) id
+```
 
 ### Propositions are `k+1`-truncated for any `k`
 
@@ -83,19 +95,6 @@ module _
     is-emb-terminal-map-is-prop : is-prop A → is-emb (terminal-map A)
     is-emb-terminal-map-is-prop H =
       is-emb-is-prop-map (λ y → is-prop-equiv (equiv-fiber-terminal-map y) H)
-```
-
-### Two equivalent types are equivalently propositions
-
-```agda
-equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  A ≃ B → is-prop A ≃ is-prop B
-equiv-is-prop-equiv {A = A} {B = B} e =
-  equiv-iff-is-prop
-    ( is-prop-is-prop A)
-    ( is-prop-is-prop B)
-    ( is-prop-equiv' e)
-    ( is-prop-equiv e)
 ```
 
 ## See also

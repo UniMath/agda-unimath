@@ -56,8 +56,19 @@ His PhD research is on graph theory from a univalent point of view.
 '''
 
 [[contributors]]
-displayName = "Vojtěch Štěpančík"
+displayName = "Elif Uskuplu"
 maintainer = true
+usernames = [ "ElifUskuplu" ]
+homepage = "https://elifuskuplu.github.io"
+github = "ElifUskuplu"
+bio = '''
+[Elif](https://math.indiana.edu/about/faculty/uskuplu-elif.html) is a postdoctoral
+researcher at Indiana University Bloomington. Her research is on type theory,
+categorical semantics, proof assistants, and natural logic.
+'''
+
+[[contributors]]
+displayName = "Vojtěch Štěpančík"
 usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
 homepage = "https://vojtechstep.eu/"
 github = "VojtechStep"
@@ -84,12 +95,6 @@ displayName = "Raymond Baker"
 usernames = [ "Raymond Baker" ]
 github = "morphismz"
 homepage = "https://morphismz.github.io"
-
-[[contributors]]
-displayName = "Elif Uskuplu"
-usernames = [ "ElifUskuplu" ]
-github = "ElifUskuplu"
-homepage = "https://elifuskuplu.github.io"
 
 [[contributors]]
 displayName = "Victor Blanchi"
@@ -190,8 +195,8 @@ displayName = "Håkon Gylterud"
 usernames = [ "Håkon Gylterud" ]
 
 [[contributors]]
-displayName = "Matthias Hutzler"
-usernames = [ "Matthias Hutzler" ]
+displayName = "Matthias Ritter"
+usernames = [ "Matthias Hutzler", "Matthias Ritter" , "Matthias Ritter (formerly Hutzler)", "MatthiasHu" ]
 github = "MatthiasHu"
 
 [[contributors]]
@@ -298,8 +303,13 @@ usernames = ["Lîm Tsú-thuàn"]
 github = "dannypsnl"
 homepage = "https://dannypsnl.srht.site/"
 
-
 [[contributors]]
 displayName = "Bjarki"
 usernames = ["Bjarki"]
 github = "bjarki781"
+
+[[contributors]]
+displayName = "Tim Johns"
+usernames = ["Tim Johns"]
+github = "SlimTim10"
+homepage = "https://timjohns.ca/"

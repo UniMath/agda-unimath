@@ -9,6 +9,7 @@ module foundation.types-with-decidable-dependent-pair-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -27,7 +28,6 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.logical-operations-booleans
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
