@@ -41,6 +41,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 ```
@@ -683,6 +685,42 @@ reverse-decidable-emb-has-section {f = f} d (s , S) =
   ( s ,
     ( is-emb-has-retraction (is-set-has-decidable-equality d) (f , S) ,
       is-decidable-map-retraction d s (f , S)))
+```
+
+### Decidable embeddings with pointed domains have retractions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (x₀ : X) (e : X ↪ᵈ Y)
+  where
+
+  map-retraction-map-decidable-emb : Y → X
+  map-retraction-map-decidable-emb y =
+    rec-coproduct
+      ( pr1)
+      ( λ _ → x₀)
+      ( is-decidable-map-map-decidable-emb e y)
+
+  is-retraction-map-retraction-map-decidable-emb :
+    is-retraction (map-decidable-emb e) map-retraction-map-decidable-emb
+  is-retraction-map-retraction-map-decidable-emb x =
+    ap
+      ( rec-coproduct pr1 (λ _ → x₀))
+      ( eq-is-prop'
+        ( is-prop-is-decidable
+          ( is-prop-map-is-decidable-emb
+            ( is-decidable-emb-map-decidable-emb e)
+            ( map-decidable-emb e x)))
+        ( is-decidable-map-map-decidable-emb e (map-decidable-emb e x))
+        ( inl (x , refl)))
+
+  retraction-map-decidable-emb : retraction (map-decidable-emb e)
+  retraction-map-decidable-emb =
+    ( map-retraction-map-decidable-emb ,
+      is-retraction-map-retraction-map-decidable-emb)
+
+  retract-decidable-emb : X retract-of Y
+  retract-decidable-emb = (map-decidable-emb e , retraction-map-decidable-emb)
 ```
 
 ## References
