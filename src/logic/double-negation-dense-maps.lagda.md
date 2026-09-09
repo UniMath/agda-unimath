@@ -30,7 +30,6 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 

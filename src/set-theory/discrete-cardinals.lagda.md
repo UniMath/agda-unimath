@@ -10,7 +10,6 @@ module set-theory.discrete-cardinals where
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
-open import foundation.discrete-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types

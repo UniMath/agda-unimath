@@ -1,7 +1,7 @@
-# Types with decidable existential quantification
+# Types with decidable existential quantifications
 
 ```agda
-module foundation.types-with-decidable-existential-quantification where
+module foundation.types-with-decidable-existential-quantifications where
 ```
 
 <details><summary>Imports</summary>
@@ -25,24 +25,26 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-unit-type
 open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -60,7 +62,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type `X`
-{{#concept "has decidable existential quantification" Disambiguation="on type" Agda=has-decidable-∃}}
+{{#concept "has decidable existential quantifications" Disambiguation="on type" Agda=has-decidable-∃}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
 there either [exists](foundation.existential-quantification.md) an element in
 some fiber of `P`, or `P` is the empty family. In other words, we have a witness
@@ -72,7 +74,7 @@ of type
 
 ## Definitions
 
-### The predicate of having decidable existential quantification
+### The predicate of having decidable existential quantifications
 
 ```agda
 has-decidable-∃-Level : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
@@ -99,29 +101,25 @@ module _
   pr2 has-decidable-∃-level-Prop = is-prop-has-decidable-∃-Level
 ```
 
-### The predicate of having small decidable existential quantification
+### The predicate of having small decidable existential quantifications
 
 ```agda
-has-decidable-∃-bool : {l1 : Level} → UU l1 → UU l1
+has-decidable-∃-bool : {l : Level} → UU l → UU l
 has-decidable-∃-bool X =
   (b : X → bool) → is-decidable (exists-structure X (is-true ∘ b))
+
+is-prop-has-decidable-∃-bool :
+  {l : Level} {X : UU l} → is-prop (has-decidable-∃-bool X)
+is-prop-has-decidable-∃-bool {X = X} =
+  is-prop-Π
+    ( λ b → is-prop-is-decidable (is-prop-exists-structure X (is-true ∘ b)))
+
+has-decidable-∃-bool-Prop : {l : Level} → UU l → Prop l
+has-decidable-∃-bool-Prop X =
+  (has-decidable-∃-bool X , is-prop-has-decidable-∃-bool)
 ```
 
-### The type of types with decidable existential quantification
-
-```agda
-record Type-With-Decidable-∃ (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-∃ : UU l
-
-    has-decidable-∃-type-Type-With-Decidable-∃ :
-      has-decidable-∃ type-Type-With-Decidable-∃
-
-open Type-With-Decidable-∃ public
-```
-
-### The predicate of having decidable existential quantification on subtypes
+### The predicate of having decidable existential quantifications on subtypes
 
 ```agda
 has-decidable-exists-Level :
@@ -135,7 +133,7 @@ has-decidable-exists X =
   {l2 : Level} → has-decidable-exists-Level l2 X
 ```
 
-### The predicate of pointedly having decidable existential quantification
+### The predicate of pointedly having decidable existential quantifications
 
 ```agda
 has-decidable-∃-pointed-Level :
@@ -150,7 +148,7 @@ has-decidable-∃-pointed : {l1 : Level} → UU l1 → UUω
 has-decidable-∃-pointed X = {l2 : Level} → has-decidable-∃-pointed-Level l2 X
 ```
 
-### The predicate of pointedly having decidable existential quantification on subtypes
+### The predicate of pointedly having decidable existential quantifications on subtypes
 
 ```agda
 has-decidable-exists-pointed-Level :
@@ -166,7 +164,7 @@ has-decidable-exists-pointed X =
   {l2 : Level} → has-decidable-exists-pointed-Level l2 X
 ```
 
-### The small predicate of pointedly having decidable existential quantification
+### The small predicate of pointedly having decidable existential quantifications
 
 ```agda
 has-decidable-∃-pointed-bool : {l : Level} → UU l → UU l
@@ -182,7 +180,7 @@ has-decidable-∃-pointed-bool' X =
 
 ## Properties
 
-### Types with decidable existential quantification are propositionally decidable
+### Types with decidable existential quantifications are propositionally decidable
 
 ```agda
 abstract
@@ -203,18 +201,9 @@ abstract
       ( is-decidable-equiv'
         ( equiv-trunc-Prop (right-unit-law-Σ-is-contr (λ _ → is-contr-unit)))
         ( f ((λ _ → unit) , (λ _ → inl star))))
-
-  is-inhabited-or-empty-merely-has-decidable-∃-Level :
-    {l1 l2 : Level} {X : UU l1} →
-    type-trunc-Prop (has-decidable-∃-Level l2 X) →
-    is-inhabited-or-empty X
-  is-inhabited-or-empty-merely-has-decidable-∃-Level {X = X} =
-    rec-trunc-Prop
-      ( is-inhabited-or-empty-Prop X)
-      ( is-inhabited-or-empty-has-decidable-∃-Level)
 ```
 
-### Decidable Σ-types imply decidable existential quantification
+### Decidable Σ-types imply decidable existential quantifications
 
 ```agda
 abstract
@@ -231,9 +220,9 @@ abstract
     is-decidable-trunc-Prop-is-decidable (h P)
 ```
 
-### Equivalence of the different notions of having decidable existential quantification
+### Equivalence of the different notions of having decidable existential quantifications
 
-#### Types with decidable existential quantification on subtypes have decidable existential quantification
+#### Types with decidable existential quantifications on subtypes have decidable existential quantifications
 
 ```agda
 abstract
@@ -256,7 +245,7 @@ abstract
               ( is-decidable-neg (is-decidable-decidable-family P x))))
 ```
 
-#### A type has decidable existential quantification if and only if it satisfies the small predicate of having decidable existential quantification
+#### A type has decidable existential quantifications if and only if it satisfies the small predicate of having decidable existential quantifications
 
 ```agda
 module _
@@ -285,9 +274,26 @@ module _
     has-decidable-∃ X → has-decidable-∃-bool X
   has-decidable-∃-bool-has-decidable-∃ f P =
     f (is-true ∘ P , λ x → has-decidable-equality-bool (P x) true)
+
+  has-decidable-∃-bool-has-decidable-∃-Level :
+    {l' : Level} → has-decidable-∃-Level l' X → has-decidable-∃-bool X
+  has-decidable-∃-bool-has-decidable-∃-Level {l'} h b =
+    is-decidable-equiv
+      ( equiv-trunc-Prop
+        ( equiv-tot (λ x → compute-raise l' (is-true (b x)))))
+      ( h ( (λ x → raise l' (is-true (b x))) ,
+            ( λ x →
+              is-decidable-raise l' (is-true (b x))
+                ( has-decidable-equality-bool (b x) true))))
+
+  has-decidable-∃-has-decidable-∃-Level :
+    {l' : Level} → has-decidable-∃-Level l' X → has-decidable-∃ X
+  has-decidable-∃-has-decidable-∃-Level h =
+    has-decidable-∃-has-decidable-∃-bool
+      ( has-decidable-∃-bool-has-decidable-∃-Level h)
 ```
 
-#### A pointed type with decidable existential quantification has pointedly decidable existential quantification
+#### A pointed type with decidable existential quantifications has pointedly decidable existential quantifications
 
 ```agda
 abstract
@@ -308,7 +314,7 @@ abstract
       ( f (neg-decidable-family P))
 ```
 
-#### The two small predicates of pointedly having decidable existential quantification are equivalent
+#### The two small predicates of pointedly having decidable existential quantifications are equivalent
 
 ```agda
 abstract
@@ -346,7 +352,7 @@ abstract
       ( H (neg-bool ∘ b))
 ```
 
-#### A type has pointedly decidable existential quantification if and only if it pointedly has small decidable existential quantification
+#### A type has pointedly decidable existential quantifications if and only if it pointedly has small decidable existential quantifications
 
 ```agda
 abstract
@@ -377,7 +383,7 @@ abstract
     f (is-true-Decidable-Prop ∘ b)
 ```
 
-#### Types that pointedly have decidable existential quantification on subtypes has pointedly decidable existential quantification
+#### Types that pointedly have decidable existential quantifications on subtypes has pointedly decidable existential quantifications
 
 ```agda
 abstract
@@ -400,7 +406,7 @@ abstract
               ( is-decidable-neg (is-decidable-decidable-family P x))))
 ```
 
-#### Types that pointedly have decidable existential quantification have decidable existential quantification
+#### Types that pointedly have decidable existential quantifications have decidable existential quantifications
 
 ```agda
 abstract
@@ -420,7 +426,7 @@ abstract
       ( f (neg-decidable-family P))
 ```
 
-### Having decidable existential quantification transfers along double negation dense maps
+### Having decidable existential quantifications transfers along double negation dense maps
 
 ```agda
 module _
@@ -446,7 +452,7 @@ module _
       ( f (base-change-decidable-family P (map-double-negation-dense-map h)))
 ```
 
-### Having decidable existential quantification transfers along surjections
+### Having decidable existential quantifications transfers along surjections
 
 ```agda
 abstract
@@ -459,7 +465,7 @@ abstract
       ( double-negation-dense-map-surjection h)
 ```
 
-### Types with decidable existential quantification are closed under retracts
+### Types with decidable existential quantifications are closed under retracts
 
 ```agda
 abstract
@@ -471,7 +477,7 @@ abstract
       ( double-negation-dense-map-retract R)
 ```
 
-### Types with decidable existential quantification are closed under equivalences
+### Types with decidable existential quantifications are closed under equivalences
 
 ```agda
 abstract
@@ -488,7 +494,7 @@ abstract
     has-decidable-∃-retract (retract-inv-equiv e)
 ```
 
-### Decidable types with double negation dense equality have decidable existential quantification
+### Decidable types with double negation dense equality have decidable existential quantifications
 
 ```agda
 abstract
@@ -514,7 +520,7 @@ abstract
             ( is-decidable-decidable-family P x)))
 ```
 
-### Decidable subtypes of types with decidable existential quantification have decidable existential quantification
+### Decidable subtypes of types with decidable existential quantifications have decidable existential quantifications
 
 ```agda
 abstract
@@ -539,7 +545,7 @@ abstract
         ( decidable-subtype-decidable-emb h))
 ```
 
-### The empty type has decidable existential quantification
+### The empty type has decidable existential quantifications
 
 ```agda
 abstract
@@ -548,7 +554,7 @@ abstract
     has-decidable-∃-has-decidable-Σ has-decidable-Σ-empty
 ```
 
-### The unit type has decidable existential quantification
+### The unit type has decidable existential quantifications
 
 ```agda
 abstract
@@ -557,12 +563,12 @@ abstract
     has-decidable-∃-has-decidable-Σ has-decidable-Σ-unit
 ```
 
-### Coproducts of types with decidable existential quantification
+### Coproducts of types with decidable existential quantifications
 
-Coproducts of types with decidable existential quantification have decidable
+Coproducts of types with decidable existential quantifications have decidable
 existential quantification. Conversely, if the coproduct has decidable
 existential quantification and a summand has an element, then that summand also
-has decidable existential quantification.
+has decidable existential quantifications.
 
 ```agda
 module _
@@ -602,7 +608,7 @@ module _
     has-decidable-∃-retract (retract-right-summand-coproduct y) f
 ```
 
-### Dependent sums of types with decidable existential quantification
+### Dependent sums of types with decidable existential quantifications
 
 ```agda
 module _
@@ -627,7 +633,7 @@ module _
           ( λ x → g x (base-change-decidable-family P (x ,_)))))
 ```
 
-### The total space of decidable families of types with double negation dense equality over types with decidable existential quantification have decidable existential quantification
+### The total space of decidable families of types with double negation dense equality over types with decidable existential quantifications have decidable existential quantifications
 
 ```agda
 abstract
@@ -647,7 +653,7 @@ abstract
           ( is-decidable-decidable-family P x))
 ```
 
-### Dependent sums of types with decidable existential quantification
+### Dependent sums of types with decidable existential quantifications
 
 ```agda
 module _
@@ -662,7 +668,7 @@ module _
     has-decidable-∃-retract (retract-base-Σ-section-family s) f
 ```
 
-### Products of types with decidable existential quantification
+### Products of types with decidable existential quantifications
 
 ```agda
 abstract
@@ -672,7 +678,7 @@ abstract
   has-decidable-∃-product f g = has-decidable-∃-Σ f (λ _ → g)
 ```
 
-### Factors of products with decidable existential quantification
+### Factors of products with decidable existential quantifications
 
 ```agda
 module _
@@ -690,7 +696,7 @@ module _
     has-decidable-∃-retract (retract-right-factor-product x) f
 ```
 
-### Standard finite types have decidable existential quantification
+### Standard finite types have decidable existential quantifications
 
 ```agda
 abstract
@@ -699,7 +705,7 @@ abstract
     has-decidable-∃-has-decidable-Σ (has-decidable-Σ-Fin n)
 ```
 
-### Types equipped with a counting have decidable existential quantification
+### Types equipped with a counting have decidable existential quantifications
 
 ```agda
 abstract
@@ -709,7 +715,7 @@ abstract
     has-decidable-∃-has-decidable-Σ (has-decidable-Σ-count f)
 ```
 
-### The booleans have decidable existential quantification
+### The booleans have decidable existential quantifications
 
 ```agda
 abstract
@@ -718,7 +724,7 @@ abstract
     has-decidable-∃-has-decidable-Σ has-decidable-Σ-bool'
 ```
 
-### The subuniverse of propositions has decidable existential quantification
+### The subuniverse of propositions has decidable existential quantifications
 
 ```agda
 abstract
@@ -740,6 +746,22 @@ abstract
   is-inhabited-or-empty-map-has-decidable-∃-Level h d f y =
     is-inhabited-or-empty-is-decidable-trunc-Prop
       ( h ( (λ x → f x ＝ y) , (λ x → d (f x) y)))
+```
+
+### Embeddings from types with decidable existential quantifications into discrete types are decidable
+
+```agda
+abstract
+  is-decidable-map-emb-has-decidable-∃ :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+    has-decidable-∃-bool X → has-decidable-equality Y →
+    (e : X ↪ Y) → is-decidable-map (map-emb e)
+  is-decidable-map-emb-has-decidable-∃ h d e y =
+    rec-coproduct
+      ( inl ∘ rec-trunc-Prop (fiber (map-emb e) y , is-prop-map-emb e y) id)
+      ( inr)
+      ( is-inhabited-or-empty-map-has-decidable-∃-Level
+        ( has-decidable-∃-has-decidable-∃-bool h) d (map-emb e) y)
 ```
 
 ## See also

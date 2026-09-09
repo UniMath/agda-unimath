@@ -11,12 +11,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.mere-decidable-embeddings
+open import foundation.negation
 open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
@@ -24,11 +26,18 @@ open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
 
+open import logic.propositional-double-negation-elimination
+
 open import order-theory.large-posets
 open import order-theory.large-preorders
 
 open import set-theory.cardinals
+open import set-theory.decidable-cardinals
+open import set-theory.discrete-cardinals
 open import set-theory.equality-cardinals
+open import set-theory.indexed-inequality-cardinals
+open import set-theory.inhabited-cardinals
+open import set-theory.projective-cardinals
 ```
 
 </details>
@@ -272,6 +281,59 @@ large-poset-complemented-Cardinal wlpo =
   λ where
   .large-preorder-Large-Poset → large-preorder-complemented-Cardinal
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-complemented-Cardinal wlpo
+```
+
+### Given a decidable cardinal `X` such that there is some cardinal `Y` with `X ≰ᵈ Y`, then `X` is inhabited
+
+```agda
+is-inhabited-is-not-leq-complemented-Cardinal :
+  {l1 l2 : Level} (X : Cardinal l1) (Y : Cardinal l2) →
+  is-decidable-Cardinal X →
+  ¬ leq-complemented-Cardinal X Y → is-inhabited-Cardinal X
+is-inhabited-is-not-leq-complemented-Cardinal =
+  apply-twice-dependent-universal-property-trunc-Set'
+    ( λ X Y →
+      set-Prop
+        ( function-Prop
+          ( is-decidable-Cardinal X)
+          ( function-Prop
+            ( ¬ leq-complemented-Cardinal X Y)
+            ( is-inhabited-prop-Cardinal X))))
+    ( λ X Y dX H →
+      unit-is-inhabited-cardinality X
+        ( prop-double-negation-elim-is-inhabited-or-empty
+          ( inv-unit-is-decidable-cardinality X dX)
+          ( H ∘
+            unit-leq-complemented-cardinality X Y ∘
+            mere-decidable-emb-is-empty)))
+```
+
+### If `X ≤ⁱ Y` where `X` is projective and `Y` is discrete, then `X ≤ᵈ Y`
+
+```agda
+leq-complemented-is-projective-leq-indexed-Cardinal :
+  {l1 l2 : Level} (X : Cardinal l1) (Y : Cardinal l2) →
+  is-projective-Cardinal (l1 ⊔ l2) X →
+  is-discrete-Cardinal Y →
+  leq-indexed-Cardinal X Y → leq-complemented-Cardinal X Y
+leq-complemented-is-projective-leq-indexed-Cardinal {l1} {l2} =
+  apply-twice-dependent-universal-property-trunc-Set'
+    ( λ X Y →
+      set-Prop
+        ( function-Prop (is-projective-Cardinal (l1 ⊔ l2) X)
+          ( function-Prop (is-discrete-Cardinal Y)
+            ( function-Prop (leq-indexed-Cardinal X Y)
+              ( leq-complemented-prop-Cardinal X Y)))))
+    ( λ X Y pX dY H →
+      rec-trunc-Prop
+        ( leq-complemented-prop-cardinality X Y)
+        ( λ f →
+          unit-leq-complemented-cardinality X Y
+            ( reverse-mere-decidable-emb-surjection-is-projective
+              ( inv-unit-is-discrete-cardinality Y dY)
+              ( inv-unit-is-projective-cardinality X pX)
+              f))
+        ( inv-unit-leq-indexed-cardinality X Y H))
 ```
 
 ## See also
