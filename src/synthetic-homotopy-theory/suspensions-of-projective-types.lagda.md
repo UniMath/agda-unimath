@@ -22,11 +22,11 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
-open import foundation.truncation-projective-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.truncation-projective-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.dependent-suspension-structures
