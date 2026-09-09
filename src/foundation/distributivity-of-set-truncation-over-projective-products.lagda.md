@@ -14,6 +14,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.homotopies
