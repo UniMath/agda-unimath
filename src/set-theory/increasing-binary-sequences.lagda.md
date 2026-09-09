@@ -7,6 +7,7 @@ module set-theory.increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -143,7 +144,7 @@ cons-ℕ∞↗ (inl x) = succ-ℕ∞↗ x
 cons-ℕ∞↗ (inr x) = zero-ℕ∞↗
 ```
 
-### Some other constants
+### Some constants
 
 ```agda
 one-ℕ∞↗ : ℕ∞↗
@@ -154,6 +155,13 @@ two-ℕ∞↗ = succ-ℕ∞↗ one-ℕ∞↗
 
 three-ℕ∞↗ : ℕ∞↗
 three-ℕ∞↗ = succ-ℕ∞↗ two-ℕ∞↗
+```
+
+### Evaluation of increasing binary sequences
+
+```agda
+ev-ℕ∞↗ : ℕ → ℕ∞↗ → bool
+ev-ℕ∞↗ n x = sequence-ℕ∞↗ x n
 ```
 
 ## Properties
@@ -333,6 +341,18 @@ abstract
 abstract
   eq-zero-is-zero-ℕ∞↗ : (x : ℕ∞↗) → is-true (sequence-ℕ∞↗ x 0) → x ＝ zero-ℕ∞↗
   eq-zero-is-zero-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-zero-is-zero-ℕ∞↗ x p)
+```
+
+### Infinity is a fixed point for the successor function
+
+```agda
+Eq-succ-infinity-ℕ∞↗ : Eq-ℕ∞↗ (succ-ℕ∞↗ infinity-ℕ∞↗) infinity-ℕ∞↗
+Eq-succ-infinity-ℕ∞↗ zero-ℕ = refl
+Eq-succ-infinity-ℕ∞↗ (succ-ℕ n) = refl
+
+abstract
+  succ-infinity-ℕ∞↗ : succ-ℕ∞↗ infinity-ℕ∞↗ ＝ infinity-ℕ∞↗
+  succ-infinity-ℕ∞↗ = eq-Eq-ℕ∞↗ Eq-succ-infinity-ℕ∞↗
 ```
 
 ## See also
