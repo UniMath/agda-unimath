@@ -311,3 +311,7 @@ module _
       ( ex-falso ∘ H ∘ is-surjective-is-not-nonsurjective-LEM lem)
       ( lem (is-nonsurjective-Prop f))
 ```
+
+## References
+
+{{#bibliography}}
