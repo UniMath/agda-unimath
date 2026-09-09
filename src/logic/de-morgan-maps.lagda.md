@@ -7,35 +7,25 @@ module logic.de-morgan-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
-open import foundation.double-negation
-open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.existential-quantification
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
-open import foundation.retractions
 open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
-open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types

@@ -7,44 +7,27 @@ module set-theory.strict-inequality-cardinals where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
-open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.injective-maps
-open import foundation.large-binary-relations
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.mere-embeddings
 open import foundation.negation
 open import foundation.nonsurjective-maps
 open import foundation.projective-types
-open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.retractions
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.surjective-maps
 open import foundation.types-with-decidable-existential-quantifications
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import logic.propositional-double-negation-elimination
@@ -55,7 +38,6 @@ open import set-theory.cardinals-with-decidable-existential-quantifications
 open import set-theory.complemented-inequality-cardinals
 open import set-theory.discrete-cardinals
 open import set-theory.inequality-cardinals
-open import set-theory.inhabited-cardinals
 open import set-theory.projective-cardinals
 open import set-theory.strict-complemented-inequality-cardinals
 open import set-theory.strict-indexed-inequality-cardinals
