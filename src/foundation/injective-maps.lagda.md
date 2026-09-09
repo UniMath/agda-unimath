@@ -27,6 +27,8 @@ open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.sets
 ```
 
@@ -59,28 +61,42 @@ is-injective-is-empty f is-empty-A {x} = ex-falso (is-empty-A x)
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   abstract
     is-emb-is-injective' :
-      (is-set-A : is-set A) (is-set-B : is-set B) (f : A → B) →
+      (is-set-A : is-set A) (is-set-B : is-set B) →
       is-injective f → is-emb f
-    is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =
+    is-emb-is-injective' is-set-A is-set-B is-injective-f x y =
       is-equiv-has-converse-is-prop
         ( is-set-A x y)
         ( is-set-B (f x) (f y))
         ( is-injective-f)
 
     is-emb-is-injective :
-      {f : A → B} → is-set B → is-injective f → is-emb f
-    is-emb-is-injective {f} H I =
-      is-emb-is-injective' (is-set-is-injective H I) H f I
+      is-set B → is-injective f → is-emb f
+    is-emb-is-injective H I =
+      is-emb-is-injective' (is-set-is-injective H I) H I
 
     is-prop-map-is-injective :
-      {f : A → B} → is-set B → is-injective f → is-prop-map f
-    is-prop-map-is-injective {f} H I =
+      is-set B → is-injective f → is-prop-map f
+    is-prop-map-is-injective H I =
       is-prop-map-is-emb (is-emb-is-injective H I)
+
+  is-emb-has-retraction :
+    is-set B → retraction f → is-emb f
+  is-emb-has-retraction H (r , R) =
+    is-emb-is-injective H (is-injective-has-retraction f r R)
+
+  emb-has-retraction :
+    is-set B → retraction f → A ↪ B
+  emb-has-retraction H R = (f , is-emb-has-retraction H R)
+
+reverse-emb-has-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f : A → B} → is-set A → section f → B ↪ A
+reverse-emb-has-section {f = f} H (s , S) = emb-has-retraction H (f , S)
 
 emb-injection :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →
