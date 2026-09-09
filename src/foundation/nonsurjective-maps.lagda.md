@@ -261,7 +261,8 @@ For decidability of nonsurjectivity, it suffices that `f` is
     has-decidable-∃-Level l2 A →
     has-decidable-equality B →
     is-decidable (is-nonsurjective f)
-  is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃ h hA d =
+  is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃
+    h hA d =
     is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃
       h
       ( is-de-morgan-map-is-inhabited-or-empty-map
