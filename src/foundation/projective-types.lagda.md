@@ -11,9 +11,9 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
-open import foundation.equivalences
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
@@ -24,8 +24,6 @@ open import foundation.raising-universe-levels
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation-core.propositions
 open import foundation-core.sets
 ```
