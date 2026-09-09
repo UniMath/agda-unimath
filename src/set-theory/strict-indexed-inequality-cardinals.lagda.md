@@ -45,7 +45,7 @@ open import set-theory.inhabited-cardinals
 
 We may say a [cardinal](set-theory.cardinals.md) `X` is
 {{#concept "indexed less than" Disambiguation="cardinal" Agda=le-indexed-Cardinal}}
-a cardinal `Y` if `Y` is inhabited and any map `f` of
+a cardinal `Y`, written `X <ⁱ Y`, if `Y` is inhabited and any map `f` of
 [sets](foundation-core.sets.md) from the isomorphism class of `X` into sets in
 the isomorphism class of `Y` is
 [nonsurjective](foundation.nonsurjective-maps.md), in the sense that there
