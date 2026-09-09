@@ -10,6 +10,7 @@ module elementary-number-theory.natural-numbers where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
@@ -123,6 +124,10 @@ is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-�
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
 pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
 pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
+
+is-zero-or-is-successor-ℕ : {x : ℕ} → is-zero-ℕ x + is-successor-ℕ x
+is-zero-or-is-successor-ℕ {0} = inl refl
+is-zero-or-is-successor-ℕ {succ-ℕ x} = inr (x , refl)
 
 has-no-fixed-points-succ-ℕ : (x : ℕ) → ¬ (succ-ℕ x ＝ x)
 has-no-fixed-points-succ-ℕ x ()

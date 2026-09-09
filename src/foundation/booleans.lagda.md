@@ -9,12 +9,14 @@ open import foundation-core.booleans public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.apartness-relations
 open import foundation.boolean-operations
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-types
+open import foundation.function-extensionality
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
@@ -22,6 +24,7 @@ open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
@@ -35,6 +38,7 @@ open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.univalence
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -195,4 +199,18 @@ number-of-elements-bool =
 bool-Finite-Type : Finite-Type lzero
 pr1 bool-Finite-Type = bool
 pr2 bool-Finite-Type = is-finite-bool
+```
+
+### The constant map from `bool`
+
+```agda
+module _
+  {l : Level} {A : UU l} {a : A}
+  where
+
+  htpy-const-map-bool : (λ _ → a) ~ rec-bool a a
+  htpy-const-map-bool = ind-bool (λ b → a ＝ rec-bool a a b) refl refl
+
+  eq-const-map-bool : (λ _ → a) ＝ rec-bool a a
+  eq-const-map-bool = eq-htpy htpy-const-map-bool
 ```

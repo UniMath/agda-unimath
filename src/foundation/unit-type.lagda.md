@@ -7,7 +7,9 @@ module foundation.unit-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -19,6 +21,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

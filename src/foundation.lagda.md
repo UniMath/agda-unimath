@@ -14,6 +14,7 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-dependent-identifications-functions public
 open import foundation.action-on-equivalences-functions public
 open import foundation.action-on-equivalences-functions-out-of-subuniverses public
 open import foundation.action-on-equivalences-type-families public
