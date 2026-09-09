@@ -24,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle

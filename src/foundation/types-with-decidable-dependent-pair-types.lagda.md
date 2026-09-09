@@ -352,7 +352,7 @@ abstract
       ( is-decidable-decidable-family P x₀)
 ```
 
-#### Pointed small boolean criteria imply decidable Σ-types
+#### The pointed small boolean criteria imply decidable Σ-types
 
 ```agda
 abstract
