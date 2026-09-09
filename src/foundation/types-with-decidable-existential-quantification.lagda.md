@@ -201,14 +201,6 @@ abstract
         ( equiv-trunc-Prop (right-unit-law-Σ-is-contr (λ _ → is-contr-unit)))
         ( f ((λ _ → unit) , (λ _ → inl star))))
 
-  is-inhabited-or-empty-merely-has-decidable-∃-Level :
-    {l1 l2 : Level} {X : UU l1} →
-    type-trunc-Prop (has-decidable-∃-Level l2 X) →
-    is-inhabited-or-empty X
-  is-inhabited-or-empty-merely-has-decidable-∃-Level {X = X} =
-    rec-trunc-Prop
-      ( is-inhabited-or-empty-Prop X)
-      ( is-inhabited-or-empty-has-decidable-∃-Level)
 ```
 
 ### Decidable Σ-types imply decidable existential quantification

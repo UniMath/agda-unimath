@@ -18,6 +18,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.injective-maps
+open import foundation.mere-embeddings
 open import foundation.mere-equivalences
 open import foundation.projective-types
 open import foundation.propositional-truncations
@@ -56,6 +57,15 @@ is-prop-mere-decidable-emb X Y = is-prop-type-Prop (mere-decidable-emb-Prop X Y)
 ```
 
 ## Properties
+
+### Mere decidable embeddings give mere embeddings
+
+```agda
+mere-emb-mere-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  mere-decidable-emb X Y → mere-emb X Y
+mere-emb-mere-decidable-emb = map-trunc-Prop emb-decidable-emb
+```
 
 ### Types equipped with mere decidable embeddings form a preordering
 
@@ -106,9 +116,9 @@ module _
     has-decidable-equality X →
     is-projective-Level (l1 ⊔ l2) Y →
     (X ↠ Y) → mere-decidable-emb Y X
-  reverse-mere-decidable-emb-surjection-is-projective dX H (f , F) =
+  reverse-mere-decidable-emb-surjection-is-projective dX pY (f , F) =
     map-trunc-Prop
       ( reverse-decidable-emb-has-section {f = f} dX ∘
         section-is-split-surjective f)
-      ( H (fiber f) F)
+      ( pY (fiber f) F)
 ```

@@ -15,9 +15,11 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
+open import foundation.negation
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.retractions
@@ -27,6 +29,8 @@ open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.propositions
+
+open import logic.propositional-double-negation-elimination
 
 open import order-theory.large-preorders
 ```
@@ -137,4 +141,17 @@ module _
       ( reverse-emb-has-section {f = f} is-set-X ∘
         section-is-split-surjective f)
       ( H (fiber f) F)
+```
+
+### A type with propositional double negation elimination that does not merely embed is inhabited
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  is-inhabited-not-mere-emb :
+    has-prop-double-negation-elim Y → ¬ mere-emb Y X → is-inhabited Y
+  is-inhabited-not-mere-emb dY H =
+    dY (H ∘ mere-emb-is-empty)
 ```
