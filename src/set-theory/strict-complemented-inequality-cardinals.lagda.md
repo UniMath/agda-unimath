@@ -67,13 +67,11 @@ open import set-theory.strict-indexed-inequality-cardinals
 
 We may say a [cardinal](set-theory.cardinals.md) `X` is (strictly)
 {{#concept "complemented less than" Disambiguation="set-cardinal" Agda=le-complemented-Cardinal}}
-a cardinal `Y`, written `X <ᵈ Y`, if `X ≤ᵈ Y` and `Y ≰ᵈ X`, in the sense that
-every set in the equivalence class of `X` merely decidably embeds into every set
-in the equivalence class of `Y` via a decidable embedding, and no set in the
-equivalence class of `Y` merely embeds into any set in the equivalence class of
-`X` via a decidable embedding.
+a cardinal `Y`, written `X <ᵈ Y`, if `X ≤ᵈ Y` and `Y ≰ᵈ X`, in the sense that a
+representative of `X` merely decidably embeds into a representative of `Y`, and
+a representative of `Y` merely decidably embeds into a representative of `X`.
 
-## Definition
+## Definitions
 
 ### Strict inequality of cardinals
 
