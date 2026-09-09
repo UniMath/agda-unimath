@@ -41,7 +41,7 @@ products on [projective](foundation.projective-types.md) types $X$. The
 distributive map
 
 $$
-  ║ (x : X) → A x ║₀ → ((x : X) → ║ A x ║₀)
+  ║ (x : X) → A(x) ║₀ → ((x : X) → ║ A(x) ║₀)
 $$
 
 is an [equivalence](foundation-core.equivalences.md)
