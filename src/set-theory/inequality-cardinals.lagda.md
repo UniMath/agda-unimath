@@ -35,7 +35,7 @@ open import set-theory.equality-cardinals
 ## Idea
 
 We say a [cardinal](set-theory.cardinals.md) `X` is
-{{#concept "less than or equal to" Disambiguation="set-cardinals" Agda=leq-Cardinal}}
+{{#concept "less than or equal to" Disambiguation="cardinals" Agda=leq-Cardinal}}
 a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
 `X` embeds into any set in the isomorphism class of `Y`. This defines the
 {{#concept "standard ordering" Disambiguation="on cardinalities of sets" Agda=large-preorder-Cardinal}}
