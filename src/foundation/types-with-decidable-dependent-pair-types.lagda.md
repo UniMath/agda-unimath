@@ -91,20 +91,6 @@ has-decidable-Σ-bool : {l1 : Level} → UU l1 → UU l1
 has-decidable-Σ-bool X = (b : X → bool) → is-decidable (Σ X (is-true ∘ b))
 ```
 
-### The type of types with decidable Σ-types
-
-```agda
-record Type-With-Decidable-Σ (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-Σ : UU l
-
-    has-decidable-Σ-type-Type-With-Decidable-Σ :
-      has-decidable-Σ type-Type-With-Decidable-Σ
-
-open Type-With-Decidable-Σ public
-```
-
 ### The predicate of having decidable Σ-types on subtypes
 
 ```agda

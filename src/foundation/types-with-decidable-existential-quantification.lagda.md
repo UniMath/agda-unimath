@@ -103,23 +103,19 @@ module _
 ### The predicate of having small decidable existential quantification
 
 ```agda
-has-decidable-∃-bool : {l1 : Level} → UU l1 → UU l1
+has-decidable-∃-bool : {l : Level} → UU l → UU l
 has-decidable-∃-bool X =
   (b : X → bool) → is-decidable (exists-structure X (is-true ∘ b))
-```
 
-### The type of types with decidable existential quantification
+is-prop-has-decidable-∃-bool :
+  {l : Level} {X : UU l} → is-prop (has-decidable-∃-bool X)
+is-prop-has-decidable-∃-bool {X = X} =
+  is-prop-Π
+    ( λ b → is-prop-is-decidable (is-prop-exists-structure X (is-true ∘ b)))
 
-```agda
-record Type-With-Decidable-∃ (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-∃ : UU l
-
-    has-decidable-∃-type-Type-With-Decidable-∃ :
-      has-decidable-∃ type-Type-With-Decidable-∃
-
-open Type-With-Decidable-∃ public
+has-decidable-∃-bool-Prop : {l : Level} → UU l → Prop l
+has-decidable-∃-bool-Prop X =
+  (has-decidable-∃-bool X , is-prop-has-decidable-∃-bool)
 ```
 
 ### The predicate of having decidable existential quantification on subtypes
