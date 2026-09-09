@@ -25,15 +25,18 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
@@ -745,6 +748,22 @@ abstract
   is-inhabited-or-empty-map-has-decidable-∃-Level h d f y =
     is-inhabited-or-empty-is-decidable-trunc-Prop
       ( h ( (λ x → f x ＝ y) , (λ x → d (f x) y)))
+```
+
+### Embeddings from types with decidable existential quantifications into discrete types are decidable
+
+```agda
+abstract
+  is-decidable-map-emb-has-decidable-∃ :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+    has-decidable-∃-bool X → has-decidable-equality Y →
+    (e : X ↪ Y) → is-decidable-map (map-emb e)
+  is-decidable-map-emb-has-decidable-∃ h d e y =
+    rec-coproduct
+      ( inl ∘ rec-trunc-Prop (fiber (map-emb e) y , is-prop-map-emb e y) id)
+      ( inr)
+      ( is-inhabited-or-empty-map-has-decidable-∃-Level
+        ( has-decidable-∃-has-decidable-∃-bool h) d (map-emb e) y)
 ```
 
 ## See also
