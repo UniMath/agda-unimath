@@ -8,6 +8,7 @@ module foundation.universal-property-dependent-function-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.spans-families-of-types

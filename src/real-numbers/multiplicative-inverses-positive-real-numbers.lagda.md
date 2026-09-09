@@ -31,10 +31,14 @@ open import group-theory.semigroups
 
 open import order-theory.large-posets
 
+open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-positive-and-negative-real-numbers
 open import real-numbers.addition-positive-real-numbers
 open import real-numbers.addition-real-numbers
+open import real-numbers.cofinal-and-coinitial-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
+open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
@@ -51,7 +55,6 @@ open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
-open import real-numbers.unbounded-above-and-below-strictly-increasing-pointwise-epsilon-delta-continuous-endomaps-real-numbers
 ```
 
 </details>
@@ -71,22 +74,22 @@ module _
   {l : Level} (x : ℝ⁺ l)
   where
 
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ :
-    unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ :
+    cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
       ( l)
       ( l)
-  unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ =
+  cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺ =
     ( ( ( mul-ℝ (real-ℝ⁺ x) ,
           is-pointwise-ε-δ-continuous-map-uniformly-continuous-endomap-ℝ
             ( uniformly-continuous-map-right-mul-ℝ l (real-ℝ⁺ x))) ,
         λ _ _ → preserves-le-left-mul-ℝ⁺ x) ,
-      is-unbounded-above-left-mul-real-ℝ⁺ l x ,
-      is-unbounded-below-left-mul-real-ℝ⁺ l x)
+      is-cofinal-left-mul-real-ℝ⁺ l x ,
+      is-coinitial-left-mul-real-ℝ⁺ l x)
 
   aut-left-mul-real-ℝ⁺ : Aut (ℝ l)
   aut-left-mul-real-ℝ⁺ =
-    aut-unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
-      ( unbounded-above-and-below-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺)
+    aut-cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-ℝ
+      ( cofinal-and-coinitial-strictly-increasing-pointwise-ε-δ-continuous-endomap-left-mul-real-ℝ⁺)
 
   opaque
     real-inv-ℝ⁺ : ℝ l
@@ -236,6 +239,11 @@ abstract
             by ap positive-real-ℚ⁺ (right-inverse-law-mul-ℚ⁺ q)
           ＝ raise-one-ℝ⁺ lzero
             by eq-raise-ℝ⁺ one-ℝ⁺))
+
+  real-inv-positive-real-ℚ⁺ :
+    (q : ℚ⁺) → real-inv-ℝ⁺ (positive-real-ℚ⁺ q) ＝ real-ℚ⁺ (inv-ℚ⁺ q)
+  real-inv-positive-real-ℚ⁺ q =
+    ap real-ℝ⁺ (inv-positive-real-ℚ⁺ q)
 ```
 
 ### The multiplicative inverse operation reverses inequality
@@ -432,4 +440,28 @@ module _
         ( λ z → sim-ℝ z y)
         ( right-swap-mul-ℝ _ _ _)
         ( cancel-right-mul-div-ℝ⁺)
+```
+
+### For any positive `c`, we have `c⁻¹ * dist-ℝ (c * x) (c * y) = dist-ℝ x y`
+
+```agda
+abstract
+  cancel-left-div-mul-dist-ℝ⁺ :
+    {l1 l2 l3 : Level} (c : ℝ⁺ l1) (x : ℝ l2) (y : ℝ l3) →
+    sim-ℝ
+      ( real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y))
+      ( dist-ℝ x y)
+  cancel-left-div-mul-dist-ℝ⁺ c x y =
+    similarity-reasoning-ℝ
+      real-inv-ℝ⁺ c *ℝ dist-ℝ (real-ℝ⁺ c *ℝ x) (real-ℝ⁺ c *ℝ y)
+      ~ℝ abs-ℝ (real-inv-ℝ⁺ c) *ℝ abs-ℝ (real-ℝ⁺ c *ℝ (x -ℝ y))
+        by
+          sim-eq-ℝ
+            ( ap-mul-ℝ
+              ( inv (abs-real-ℝ⁺ (inv-ℝ⁺ c)))
+              ( ap abs-ℝ (inv (left-distributive-mul-diff-ℝ _ x y))))
+      ~ℝ abs-ℝ (real-inv-ℝ⁺ c *ℝ (real-ℝ⁺ c *ℝ (x -ℝ y)))
+        by sim-eq-ℝ (inv (abs-mul-ℝ _ _))
+      ~ℝ dist-ℝ x y
+        by preserves-sim-abs-ℝ (cancel-left-div-mul-ℝ⁺ c (x -ℝ y))
 ```

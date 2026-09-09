@@ -15,11 +15,13 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -387,10 +389,16 @@ module _
         ( right-leq-real-bound-neighborhood-ℝ d x y H))
 ```
 
-### The neighborhood relation on the real numbers is weakly monotonic
+### The neighborhood relation on the real numbers is monotonic
 
 ```agda
 abstract
+  monotonic-neighborhood-ℝ :
+    {l : Level} (x y : ℝ l) (d₁ d₂ : ℚ⁺) → le-ℚ⁺ d₁ d₂ →
+    neighborhood-ℝ l d₁ x y → neighborhood-ℝ l d₂ x y
+  monotonic-neighborhood-ℝ {l} =
+    monotonic-neighborhood-Metric-Space (metric-space-ℝ l)
+
   weakly-monotonic-neighborhood-ℝ :
     {l : Level} (x y : ℝ l) (d₁ d₂ : ℚ⁺) → leq-ℚ⁺ d₁ d₂ →
     neighborhood-ℝ l d₁ x y → neighborhood-ℝ l d₂ x y

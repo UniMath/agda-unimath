@@ -16,6 +16,17 @@ module literature.wikipedia-list-of-theorems where
 The theorems are ordered alphabetically, omitting leading definite articles
 ("the").
 
+### Absolute convergence theorem
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-analysis.absolute-convergence-series-real-numbers using
+  ( is-convergent-is-absolutely-convergent-series-ℝ)
+open import functional-analysis.absolute-convergence-series-real-banach-spaces using
+  ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
+```
+
 ### Bézout's lemma {#Q513028}
 
 **Author:** [Bryan Lu](https://blu-bird.github.io)
@@ -136,6 +147,17 @@ open import group-theory.quotient-groups using
   ( is-quotient-group-quotient-Group)
 ```
 
+### Intermediate Value Theorem {#Q245098}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-analysis.intermediate-value-theorem using
+  ( intermediate-value-theorem-ℝ)
+open import real-analysis.constructive-intermediate-value-theorem using
+  ( constructive-intermediate-value-theorem-ℝ)
+```
+
 ### Kleene's fixed point theorem {#Q3527263}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
@@ -159,6 +181,15 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
     greatest-fixed-point-knaster-tarski-Suplattice)
 ```
 
+### Kőnig's theorem (set theory) {#Q1077462}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import set-theory.konigs-theorem using
+  ( le-indexed-Σ-Π-Cardinal)
+```
+
 ### Lawvere's fixed point theorem {#Q15809744}
 
 **Author:** [Egbert Rijke](https://egbertrijke.github.io)
@@ -166,6 +197,43 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 ```agda
 open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
+```
+
+### Linear congruence theorem {#Q524257}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import elementary-number-theory.linear-congruence-theorem-integers using
+  ( linear-congruence-theorem-ℤ)
+```
+
+### Monotone convergence theorem {#Q4454933}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import real-analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+  ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
+    is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
 ```
 
 ### Triangle inequality theorem {#Q208216}
@@ -186,13 +254,18 @@ open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
 ```
 
-### Pythagorean theorem {#Q11518}
+### Uniform limit theorem {#Q7885107}
 
-**Author:** [Louis Wasserman](https://github.com/lowasser)
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import linear-algebra.orthogonality-real-inner-product-spaces using
-  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
+  ( is-pointwise-ε-δ-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-pointwise-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
+open import metric-spaces.uniform-limit-theorem-uniformly-continuous-maps-metric-spaces using
+  ( modulus-of-uniform-continuity-map-limit-modulus-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-Metric-Space ;
+    is-uniformly-continuous-map-is-uniform-limit-sequence-map-ACℕ-Metric-Space)
 ```
 
 ### Yoneda lemma {#Q320577}

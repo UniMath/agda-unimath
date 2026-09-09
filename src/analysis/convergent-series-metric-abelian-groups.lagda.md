@@ -11,6 +11,7 @@ open import analysis.metric-abelian-groups
 open import analysis.series-metric-abelian-groups
 
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 

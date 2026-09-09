@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.cartesian-products-subtypes
 open import foundation.dependent-pair-types
+open import foundation.empty-subtypes
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
@@ -23,6 +24,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finitely-enumerable-types
@@ -87,22 +89,6 @@ module _
 
 ## Properties
 
-### The property of being an inhabited finitely enumerable subtype
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} (S : finitely-enumerable-subtype l2 X)
-  where
-
-  is-inhabited-prop-finitely-enumerable-subtype : Prop (l1 ⊔ l2)
-  is-inhabited-prop-finitely-enumerable-subtype =
-    is-inhabited-subtype-Prop (subtype-finitely-enumerable-subtype S)
-
-  is-inhabited-finitely-enumerable-subtype : UU (l1 ⊔ l2)
-  is-inhabited-finitely-enumerable-subtype =
-    is-inhabited-subtype (subtype-finitely-enumerable-subtype S)
-```
-
 ### The image of a finitely enumerable subtype under a map is finitely enumerable
 
 ```agda
@@ -139,21 +125,71 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2}
-  (S : finitely-enumerable-subtype l3 X)
-  (T : finitely-enumerable-subtype l4 Y)
+  (S@(subS , eS) : finitely-enumerable-subtype l3 X)
+  (T@(subT , eT) : finitely-enumerable-subtype l4 Y)
   where
 
   product-finitely-enumerable-subtype :
     finitely-enumerable-subtype (l3 ⊔ l4) (X × Y)
   product-finitely-enumerable-subtype =
-    let
-      subS = subtype-finitely-enumerable-subtype S
-      subT = subtype-finitely-enumerable-subtype T
-    in
-      ( product-subtype subS subT ,
-        is-finitely-enumerable-equiv
-          ( inv-equiv ( equiv-product-subtype subS subT))
-          ( is-finitely-enumerable-product
-            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype S)
-            ( is-finitely-enumerable-subtype-finitely-enumerable-subtype T)))
+    ( product-subtype subS subT ,
+      is-finitely-enumerable-equiv
+        ( inv-equiv (equiv-product-subtype subS subT))
+        ( is-finitely-enumerable-product eS eT))
 ```
+
+### Finitely enumerable subtypes are closed under unions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1}
+  (S@(subS , fin-enum-S) : finitely-enumerable-subtype l2 X)
+  (T@(subT , fin-enum-T) : finitely-enumerable-subtype l3 X)
+  where
+
+  subtype-union-finitely-enumerable-subtype : subtype (l2 ⊔ l3) X
+  subtype-union-finitely-enumerable-subtype =
+    union-subtype subS subT
+
+  abstract
+    is-finitely-enumerable-subtype-union-finitely-enumerable-subtype :
+      is-finitely-enumerable-subtype subtype-union-finitely-enumerable-subtype
+    is-finitely-enumerable-subtype-union-finitely-enumerable-subtype =
+      is-finitely-enumerable-surjection
+        ( surjection-coproduct-union-subtype subS subT)
+        ( is-finitely-enumerable-coproduct fin-enum-S fin-enum-T)
+
+  union-finitely-enumerable-subtype : finitely-enumerable-subtype (l2 ⊔ l3) X
+  union-finitely-enumerable-subtype =
+    ( subtype-union-finitely-enumerable-subtype ,
+      is-finitely-enumerable-subtype-union-finitely-enumerable-subtype)
+```
+
+### Empty subtypes are finitely enumerable
+
+```agda
+abstract
+  is-finitely-enumerable-subtype-is-empty-subtype :
+    {l1 l2 : Level} {X : UU l1} (S : subtype l2 X) →
+    is-empty-subtype S → is-finitely-enumerable-subtype S
+  is-finitely-enumerable-subtype-is-empty-subtype S ¬S =
+    is-finitely-enumerable-is-empty (is-empty-type-is-empty-subtype S ¬S)
+
+  is-finitely-enumerable-empty-subtype :
+    {l1 : Level} (l2 : Level) (X : UU l1) →
+    is-finitely-enumerable-subtype (empty-subtype l2 X)
+  is-finitely-enumerable-empty-subtype l2 X =
+    is-finitely-enumerable-subtype-is-empty-subtype
+      ( empty-subtype l2 X)
+      ( is-empty-subtype-empty-subtype X)
+
+empty-finitely-enumerable-subtype :
+  {l1 : Level} (l2 : Level) (X : UU l1) → finitely-enumerable-subtype l2 X
+empty-finitely-enumerable-subtype l2 X =
+  ( empty-subtype l2 X ,
+    is-finitely-enumerable-empty-subtype l2 X)
+```
+
+## See also
+
+- [Inhabited finitely enumerable subtypes](univalent-combinatorics.inhabited-finitely-enumerable-subtypes.md)

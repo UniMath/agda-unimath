@@ -9,10 +9,14 @@ module orthogonal-factorization-systems.connected-types-at-subuniverses where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
-open import foundation.retracts-of-maps
+open import foundation.equivalences-contractible-types
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
+open import foundation.subuniverse-of-contractible-types
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -223,10 +227,10 @@ module _
     is-subuniverse-connected K B →
     is-subuniverse-connected K A
   is-subuniverse-connected-retract R H U =
-    is-equiv-retract-map-is-equiv
+    is-equiv-retract-arrow-is-equiv
       ( diagonal-exponential (pr1 U) A)
       ( diagonal-exponential (pr1 U) B)
-      ( retract-map-diagonal-exponential-retract id-retract R)
+      ( retract-arrow-diagonal-exponential-retract id-retract R)
       ( H U)
 ```
 

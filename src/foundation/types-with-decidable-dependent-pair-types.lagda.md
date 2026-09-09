@@ -9,9 +9,11 @@ module foundation.types-with-decidable-dependent-pair-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
@@ -26,8 +28,9 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.logical-operations-booleans
 open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -49,8 +52,8 @@ open import univalent-combinatorics.standard-finite-types
 A type `X`
 {{#concept "has decidable Σ-types" Disambiguation="on type" Agda=has-decidable-Σ}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
-we can construct an element in some fiber of `P` or determine that `P` is the
-empty family. In other words, we have a witness of type
+we can either construct an element in some fiber of `P`, or determine that `P`
+is the empty family. In other words, we have a witness of type
 
 ```text
   (P : decidable-family X) → is-decidable (Σ x. P x).
@@ -174,20 +177,22 @@ abstract
     has-decidable-type-subtype X → has-decidable-Σ X
   has-decidable-Σ-has-decidable-type-subtype f P =
     map-coproduct
-      ( λ xp →
-        pr1 xp ,
+      ( λ (x , p) →
+        x ,
         rec-coproduct
           ( id)
-          ( ex-falso ∘ pr2 xp)
-          ( is-decidable-decidable-family P (pr1 xp)))
-      ( λ nxp xp → nxp (pr1 xp , intro-double-negation (pr2 xp)))
+          ( ex-falso ∘ p)
+          ( is-decidable-decidable-family P x))
+      ( λ nxp (x , p) → nxp (x , intro-double-negation p))
       ( f ( λ x →
             neg-type-Decidable-Prop
               ( ¬ (family-decidable-family P x))
               ( is-decidable-neg (is-decidable-decidable-family P x))))
 ```
 
-### A type has decidable Σ-types if and only if it satisfies the small predicate of having decidable Σ-types
+### Equivalence of the different notions of having decidable Σ-types
+
+###### A type has decidable Σ-types if and only if it satisfies the small predicate of having decidable Σ-types
 
 ```agda
 module _
@@ -220,7 +225,7 @@ module _
     f (is-true ∘ P , λ x → has-decidable-equality-bool (P x) true)
 ```
 
-### A pointed type with decidable Σ-types has pointedly decidable Σ-types
+#### A pointed type with decidable Σ-types has pointedly decidable Σ-types
 
 ```agda
 has-decidable-Σ-pointed-has-decidable-Σ-has-element :
@@ -228,7 +233,7 @@ has-decidable-Σ-pointed-has-decidable-Σ-has-element :
   X → has-decidable-Σ X → has-decidable-Σ-pointed X
 has-decidable-Σ-pointed-has-decidable-Σ-has-element x₀ f P =
   rec-coproduct
-    ( λ xr → (pr1 xr , ex-falso ∘ pr2 xr))
+    ( λ (x , r) → (x , ex-falso ∘ r))
     ( λ nx →
       ( x₀ ,
         λ _ x →
@@ -239,18 +244,7 @@ has-decidable-Σ-pointed-has-decidable-Σ-has-element x₀ f P =
     ( f (neg-decidable-family P))
 ```
 
-### A type with pointedly decidable Σ-types has decidable Σ-types
-
-```agda
-has-decidable-Σ-has-decidable-Σ-pointed :
-  {l : Level} {X : UU l} →
-  has-decidable-Σ-pointed X → has-decidable-Σ X
-has-decidable-Σ-has-decidable-Σ-pointed f P =
-  let (x , H) = f (neg-decidable-family P) in
-  map-coproduct (λ p → (x , p)) (λ np (y , q) → H np y q) (pr2 P x)
-```
-
-### The two small predicates of pointedly having decidable Σ-types are equivalent
+#### The two small predicates of pointedly having decidable Σ-types are equivalent
 
 ```agda
 flip-has-decidable-Σ-pointed-bool :
@@ -266,11 +260,23 @@ pr2 (flip-has-decidable-Σ-pointed-bool H b) p x =
       ( is-false-is-true-neg-bool
         ( is-involution-neg-bool (b (pr1 (H (neg-bool ∘ b)))) ∙ p))
       ( x))
+
+flip-has-decidable-Σ-pointed-bool' :
+  {l : Level} {X : UU l} →
+  has-decidable-Σ-pointed-bool X →
+  has-decidable-Σ-pointed-bool' X
+pr1 (flip-has-decidable-Σ-pointed-bool' H b) =
+  pr1 (H (neg-bool ∘ b))
+pr2 (flip-has-decidable-Σ-pointed-bool' H b) p x =
+  is-false-is-true-neg-bool
+    ( pr2
+      ( H (neg-bool ∘ b))
+      ( is-true-is-false-neg-bool
+        ( is-involution-neg-bool (b (pr1 (H (neg-bool ∘ b)))) ∙ p))
+      ( x))
 ```
 
-> The converse remains to be formalized.
-
-### A type has pointedly decidable Σ-types if and only if it pointedly has small decidable Σ-types
+#### A type has pointedly decidable Σ-types if and only if it pointedly has small decidable Σ-types
 
 ```agda
 abstract
@@ -301,7 +307,7 @@ has-decidable-Σ-pointed-bool-has-decidable-type-subtype-pointed
   f (is-true-Decidable-Prop ∘ b)
 ```
 
-### Types that pointedly have decidable Σ-types on subtypes has pointedly decidable Σ-types
+#### Types that pointedly have decidable Σ-types on subtypes has pointedly decidable Σ-types
 
 ```agda
 abstract
@@ -330,9 +336,53 @@ abstract
               ( is-decidable-neg (is-decidable-decidable-family P x)))
 ```
 
-### Types that pointedly have decidable Σ-types have decidable Σ-types
+### A type with pointedly decidable Σ-types has decidable Σ-types
 
-> This remains to be formalized.
+```agda
+has-decidable-Σ-has-decidable-Σ-pointed :
+  {l : Level} {X : UU l} →
+  has-decidable-Σ-pointed X → has-decidable-Σ X
+has-decidable-Σ-has-decidable-Σ-pointed f P =
+  let (x , H) = f (neg-decidable-family P) in
+  map-coproduct (λ p → (x , p)) (λ np (y , q) → H np y q) (pr2 P x)
+```
+
+#### The pointed small boolean criteria imply decidable Σ-types
+
+```agda
+abstract
+  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool :
+    {l : Level} {X : UU l} →
+    has-decidable-Σ-pointed-bool X →
+    has-decidable-Σ-pointed X
+  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool f =
+    has-decidable-Σ-pointed-has-decidable-type-subtype-pointed
+      ( has-decidable-type-subtype-pointed-has-decidable-Σ-pointed-bool f)
+
+  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' :
+    {l : Level} {X : UU l} →
+    has-decidable-Σ-pointed-bool' X →
+    has-decidable-Σ-pointed X
+  has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' f =
+    has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool
+      ( flip-has-decidable-Σ-pointed-bool f)
+
+  has-decidable-Σ-has-decidable-Σ-pointed-bool :
+    {l : Level} {X : UU l} →
+    has-decidable-Σ-pointed-bool X →
+    has-decidable-Σ X
+  has-decidable-Σ-has-decidable-Σ-pointed-bool f =
+    has-decidable-Σ-has-decidable-Σ-pointed
+      ( has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool f)
+
+  has-decidable-Σ-has-decidable-Σ-pointed-bool' :
+    {l : Level} {X : UU l} →
+    has-decidable-Σ-pointed-bool' X →
+    has-decidable-Σ X
+  has-decidable-Σ-has-decidable-Σ-pointed-bool' f =
+    has-decidable-Σ-has-decidable-Σ-pointed
+      ( has-decidable-Σ-pointed-has-decidable-Σ-pointed-bool' f)
+```
 
 ### Having decidable Σ-types transfers along double negation dense maps
 
@@ -408,9 +458,6 @@ has-decidable-Σ-is-decidable-has-double-negation-dense-equality
     ( is-decidable-decidable-family P)
 ```
 
-**Comment.** It might suffice for the above result that `X` is inhabited or
-empty.
-
 ### Decidable subtypes of types with decidable Σ-types have decidable Σ-types
 
 ```agda
@@ -447,9 +494,9 @@ has-decidable-Σ-empty P = inr pr1
 ```agda
 has-decidable-Σ-unit : has-decidable-Σ unit
 has-decidable-Σ-unit P =
-  rec-coproduct
-    ( inl ∘ pair star)
-    ( inr ∘ map-neg pr2)
+  map-coproduct
+    ( star ,_)
+    ( map-neg (λ (star , p) → p))
     ( is-decidable-decidable-family P star)
 ```
 
@@ -470,15 +517,13 @@ module _
     has-decidable-Σ (X + Y)
   has-decidable-Σ-coproduct f g P =
     rec-coproduct
-      ( λ xp → inl (inl (pr1 xp) , pr2 xp))
+      ( λ (x , p) → inl (inl x , p))
       ( λ nx →
-        rec-coproduct
-          ( λ yp → inl (inr (pr1 yp) , pr2 yp))
-          ( λ ny →
-            inr
-              ( λ where
-                (inl x , p) → nx (x , p)
-                (inr y , p) → ny (y , p)))
+        map-coproduct
+          ( λ (y , p) → inr y , p)
+          ( λ where
+            ny (inl x , p) → nx (x , p)
+            ny (inr y , p) → ny (y , p))
           ( g (base-change-decidable-family P inr)))
       ( f (base-change-decidable-family P inl))
 
@@ -607,8 +652,13 @@ has-decidable-Σ-bool' =
 
 ### The subuniverse of propositions has decidable Σ-types
 
-> This result depends on certain properties of the subuniverse of propositions
-> that are not formalized at the time of writing.
+```agda
+has-decidable-Σ-Prop : {l : Level} → has-decidable-Σ (Prop l)
+has-decidable-Σ-Prop {l} =
+  has-decidable-Σ-double-negation-dense-map
+    ( double-negation-dense-map-raise-prop-bool l)
+    ( has-decidable-Σ-bool')
+```
 
 ## References
 
@@ -616,5 +666,6 @@ has-decidable-Σ-bool' =
 
 ## See also
 
+- [Types with decidable existential quantification](foundation.types-with-decidable-existential-quantification.md)
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
 - [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantifications.md)

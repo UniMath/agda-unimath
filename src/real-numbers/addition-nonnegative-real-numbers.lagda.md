@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -142,15 +143,28 @@ module _
 ```agda
 abstract
   leq-left-add-real-ℝ⁰⁺ :
-    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁰⁺ d)
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (x +ℝ real-ℝ⁰⁺ d)
   leq-left-add-real-ℝ⁰⁺ x d⁺@(d , pos-d) =
     tr
       ( λ y → leq-ℝ y (x +ℝ d))
       ( right-unit-law-add-ℝ x)
       ( preserves-leq-left-add-ℝ x zero-ℝ d pos-d)
 
-leq-right-add-real-ℝ⁰⁺ :
-  {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (real-ℝ⁰⁺ d +ℝ x)
-leq-right-add-real-ℝ⁰⁺ x d =
-  tr (leq-ℝ x) (commutative-add-ℝ x (real-ℝ⁰⁺ d)) (leq-left-add-real-ℝ⁰⁺ x d)
+  leq-right-add-real-ℝ⁰⁺ :
+    {l1 l2 : Level} → (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ x (real-ℝ⁰⁺ d +ℝ x)
+  leq-right-add-real-ℝ⁰⁺ x d =
+    tr (leq-ℝ x) (commutative-add-ℝ x (real-ℝ⁰⁺ d)) (leq-left-add-real-ℝ⁰⁺ x d)
+```
+
+### Subtraction with a nonnegative real number is a deflationary map
+
+```agda
+abstract
+  leq-diff-real-ℝ⁰⁺ :
+    {l1 l2 : Level} (x : ℝ l1) (d : ℝ⁰⁺ l2) → leq-ℝ (x -ℝ real-ℝ⁰⁺ d) x
+  leq-diff-real-ℝ⁰⁺ x (d , 0≤d) =
+    tr
+      ( leq-ℝ _)
+      ( right-unit-law-diff-ℝ x)
+      ( preserves-leq-left-add-ℝ _ _ _ (neg-leq-ℝ 0≤d))
 ```

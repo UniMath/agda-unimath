@@ -16,7 +16,9 @@ open import foundation.binary-transport
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -39,6 +41,7 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 ```
 
 </details>
@@ -95,7 +98,7 @@ module _
       ( pseudometric-metric-quotient-Pseudometric-Space P)
       ( pseudometric-Metric-Space M)
       ( f)
-      ( short-map-metric-quotient-Pseudometric-Space P)
+      ( short-map-unit-metric-quotient-Pseudometric-Space P)
 ```
 
 ### The induced map from the quotient metric space by a short map in a metric space
@@ -120,7 +123,7 @@ module _
 
   is-extension-exten-short-map-metric-quotient-Pseudometric-Space :
     map-exten-short-map-metric-quotient-Pseudometric-space ∘
-    map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-exten-short-map-metric-quotient-Pseudometric-Space =
     is-section-inv-precomp-set-quotient
@@ -233,7 +236,7 @@ module _
 
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space :
     map-extension-short-map-metric-quotient-Pseudometric-Space ∘
-    map-metric-quotient-Pseudometric-Space P ~
+    map-unit-metric-quotient-Pseudometric-Space P ~
     map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space
     = pr2 g
@@ -410,7 +413,7 @@ module _
               ( M)
               ( f)
               ( g))
-            ( eq-map-is-in-class-metric-quotient-Pseudometric-Space P X x∈X)
+            ( compute-map-unit-metric-quotient-Pseudometric-Space P X x∈X)
 
       lemma-lhs ∙ (inv lemma-mhs) ∙ lemma-rhs
 ```

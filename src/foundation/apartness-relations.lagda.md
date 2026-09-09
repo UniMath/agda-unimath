@@ -9,7 +9,9 @@ module foundation.apartness-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
+open import foundation.negated-equality
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
@@ -29,7 +31,7 @@ on a type `A` is a [relation](foundation.binary-relations.md) `R` which is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
-- **Cotransitive:** For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- **Cotransitive:** For any `a b c : A` we have `R a c → R a b ∨ R b c`.
 
 The idea of an apartness relation `R` is that `R a b` holds if you can
 positively establish a difference between `a` and `b`. For example, two subsets
@@ -53,7 +55,7 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c) ∨ (R b c))))
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a c ⇒ (R a b) ∨ (R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop
@@ -206,6 +208,20 @@ apartness-relation-restriction-Type-With-Apartness :
   (X → type-Type-With-Apartness Y) → Apartness-Relation l3 X
 apartness-relation-restriction-Type-With-Apartness Y f =
   restriction-Apartness-Relation f (apartness-relation-Type-With-Apartness Y)
+```
+
+### Apart elements are nonequal
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A)
+  where
+
+  abstract
+    nonequal-apart-Apartness-Relation :
+      (x y : A) → apart-Apartness-Relation R x y → x ≠ y
+    nonequal-apart-Apartness-Relation x .x x#x refl =
+      antirefl-Apartness-Relation R x x#x
 ```
 
 ## References

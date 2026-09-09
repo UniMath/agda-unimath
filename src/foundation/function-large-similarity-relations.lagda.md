@@ -7,8 +7,7 @@ module foundation.function-large-similarity-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality
-open import foundation.function-large-equivalence-relations
+open import foundation.dependent-products-large-similarity-relations
 open import foundation.large-similarity-relations
 open import foundation.universe-levels
 ```
@@ -36,11 +35,6 @@ module _
     Large-Similarity-Relation
       ( λ l2 l3 → l1 ⊔ β l2 l3)
       ( λ l → A → X l)
-  large-equivalence-relation-Large-Similarity-Relation
-    function-Large-Similarity-Relation =
-    function-Large-Equivalence-Relation
-      ( A)
-      ( large-equivalence-relation-Large-Similarity-Relation R)
-  eq-sim-Large-Similarity-Relation function-Large-Similarity-Relation f g f~g =
-    eq-htpy (λ a → eq-sim-Large-Similarity-Relation R (f a) (g a) (f~g a))
+  function-Large-Similarity-Relation =
+    Π-Large-Similarity-Relation A (λ _ → X) (λ _ → R)
 ```

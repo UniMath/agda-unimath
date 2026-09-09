@@ -16,6 +16,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
@@ -27,7 +28,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -319,7 +320,7 @@ module _
       ( F (map-codomain-cartesian-hom-arrow g f α d))
 ```
 
-### De Morgan maps are closed under retracts of maps
+### De Morgan maps are closed under retracts of arrows
 
 ```agda
 module _
@@ -327,13 +328,13 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-de-morgan-retract-map :
-    f retract-of-map g →
+  is-de-morgan-retract-arrow :
+    f retract-of-arrow g →
     is-de-morgan-map g →
     is-de-morgan-map f
-  is-de-morgan-retract-map R G x =
+  is-de-morgan-retract-arrow R G x =
     is-decidable-iff
-      ( map-neg (inclusion-retract (retract-fiber-retract-map f g R x)))
-      ( map-neg (map-retraction-retract (retract-fiber-retract-map f g R x)))
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( map-neg (inclusion-retract (retract-fiber-retract-arrow f g R x)))
+      ( map-neg (map-retraction-retract (retract-fiber-retract-arrow f g R x)))
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 ```
