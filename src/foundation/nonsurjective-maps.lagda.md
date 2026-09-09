@@ -218,24 +218,6 @@ module _
   is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K =
     is-surjective-not-nonim-is-inhabited-or-empty-map H (K ∘ unit-trunc-Prop)
 
-  is-surjective-is-not-nonsurjective-LEM :
-    level-LEM (l1 ⊔ l2) →
-    ¬ is-nonsurjective f → is-surjective f
-  is-surjective-is-not-nonsurjective-LEM lem =
-    is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map
-      ( λ y →
-        is-inhabited-or-empty-is-decidable-trunc-Prop
-          ( lem (trunc-Prop (fiber f y))))
-```
-
-### If the codomain is searchable and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
-
-```agda
-module _
-  {l1 l2 : Level}
-  {A : UU l1} {B : UU l2} {f : A → B}
-  where abstract
-
   is-surjective-not-nonim-has-decidable-∃ :
     has-decidable-∃-Level l2 A →
     has-decidable-equality B →
@@ -245,8 +227,11 @@ module _
       ( is-inhabited-or-empty-map-has-decidable-∃-Level h d f)
 ```
 
-For decidability of nonsurjectivity, it suffices that `f` is
-[De Morgan](logic.de-morgan-maps.md): the negation of each fiber is decidable.
+### If the codomain has decidable sums and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
+
+For decidability of nonsurjectivity it suffices that `f` is
+[De Morgan](logic.de-morgan-maps.md): that the negation of each fiber is
+decidable.
 
 ```agda
   is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ :
@@ -303,12 +288,20 @@ module _
   {A : UU l1} {B : UU l2} {f : A → B}
   where abstract
 
+  is-surjective-is-not-nonsurjective-LEM :
+    ¬ is-nonsurjective f → is-surjective f
+  is-surjective-is-not-nonsurjective-LEM =
+    is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map
+      ( λ y →
+        is-inhabited-or-empty-is-decidable-trunc-Prop
+          ( lem (trunc-Prop (fiber f y))))
+
   is-nonsurjective-is-not-surjective-LEM :
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-LEM H =
     rec-coproduct
       ( id)
-      ( ex-falso ∘ H ∘ is-surjective-is-not-nonsurjective-LEM lem)
+      ( ex-falso ∘ H ∘ is-surjective-is-not-nonsurjective-LEM)
       ( lem (is-nonsurjective-Prop f))
 ```
 
