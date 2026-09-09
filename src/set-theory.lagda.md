@@ -55,11 +55,14 @@ open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinality-projective-sets public
 open import set-theory.cardinality-recursive-sets public
 open import set-theory.cardinals public
+open import set-theory.cardinals-with-decidable-existential-quantification public
 open import set-theory.complemented-inequality-cardinals public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
+open import set-theory.decidable-cardinals public
 open import set-theory.dependent-products-cardinals public
 open import set-theory.dependent-sums-cardinals public
+open import set-theory.discrete-cardinals public
 open import set-theory.equality-cardinals public
 open import set-theory.finite-elements-increasing-binary-sequences public
 open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
@@ -70,6 +73,7 @@ open import set-theory.infinite-sets public
 open import set-theory.inhabited-cardinals public
 open import set-theory.konigs-theorem public
 open import set-theory.positive-elements-increasing-binary-sequences public
+open import set-theory.projective-cardinals public
 open import set-theory.russells-paradox public
 open import set-theory.strict-indexed-inequality-cardinals public
 open import set-theory.strict-lower-bounds-increasing-binary-sequences public
