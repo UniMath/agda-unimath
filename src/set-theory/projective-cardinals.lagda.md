@@ -29,7 +29,7 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ` is
-{{#concept "projective" Disambiguation="set-cardinal" Agda=is-projective-Cardinal}},
+{{#concept "projective" Disambiguation="cardinal" Agda=is-projective-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class is
 [projective](foundation.projective-types.md).
 

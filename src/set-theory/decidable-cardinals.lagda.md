@@ -32,7 +32,7 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ` is
-{{#concept "decidable" Disambiguation="set-cardinal" Agda=is-decidable-Cardinal}},
+{{#concept "decidable" Disambiguation="cardinal" Agda=is-decidable-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class is
 [propositionally decidable](logic.propositionally-decidable-types.md).
 

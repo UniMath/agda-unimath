@@ -32,7 +32,7 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ`
-{{#concept "has decidable existential quantification" Disambiguation="set-cardinal" Agda=has-decidable-∃-Cardinal}},
+{{#concept "has decidable existential quantification" Disambiguation="cardinal" Agda=has-decidable-∃-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class
 [has decidable existential quantification](foundation.types-with-decidable-existential-quantification.md).
 

@@ -30,9 +30,10 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ` is
-{{#concept "discrete" Disambiguation="set-cardinal" Agda=is-discrete-Cardinal}},
-if any [set](foundation-core.sets.md) in its isomorphism class is
-[discrete](foundation.discrete-types.md), i.e., has decidable equality.
+{{#concept "discrete" Disambiguation="cardinal" Agda=is-discrete-Cardinal}}, if
+any [set](foundation-core.sets.md) in its isomorphism class is
+[discrete](foundation.discrete-types.md), i.e.,
+[has decidable equality](foundation.decidable-equality.md).
 
 ## Definitions
 
