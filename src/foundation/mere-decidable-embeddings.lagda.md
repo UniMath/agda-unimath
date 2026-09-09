@@ -9,10 +9,22 @@ module foundation.mere-decidable-embeddings where
 ```agda
 open import foundation.cantor-schroder-bernstein-decidable-embeddings
 open import foundation.decidable-embeddings
+open import foundation.decidable-equality
+open import foundation.decidable-maps
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.injective-maps
 open import foundation.mere-equivalences
+open import foundation.projective-types
 open import foundation.propositional-truncations
+open import foundation.retractions
+open import foundation.sets
+open import foundation.split-surjective-maps
+open import foundation.surjective-maps
 open import foundation.universe-levels
 open import foundation.weak-limited-principle-of-omniscience
 
@@ -81,4 +93,22 @@ antisymmetric-mere-decidable-emb wlpo =
 mere-decidable-emb-is-empty :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-empty X → mere-decidable-emb X Y
 mere-decidable-emb-is-empty H = unit-trunc-Prop (decidable-emb-is-empty H)
+```
+
+### Surjections onto projective types from discrete types give reverse mere decidable embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  reverse-mere-decidable-emb-surjection-is-projective :
+    has-decidable-equality X →
+    is-projective-Level (l1 ⊔ l2) Y →
+    (X ↠ Y) → mere-decidable-emb Y X
+  reverse-mere-decidable-emb-surjection-is-projective dX H (f , F) =
+    map-trunc-Prop
+      ( reverse-decidable-emb-has-section {f = f} dX ∘
+        section-is-split-surjective f)
+      ( H (fiber f) F)
 ```
