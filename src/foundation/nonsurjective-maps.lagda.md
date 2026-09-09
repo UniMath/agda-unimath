@@ -217,6 +217,15 @@ module _
     is-inhabited-or-empty-map f → ¬ is-nonsurjective f → is-surjective f
   is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K =
     is-surjective-not-nonim-is-inhabited-or-empty-map H (K ∘ unit-trunc-Prop)
+```
+
+### If the domain has decidable existential quantification and the codomain is discrete, then the map is surjective if it is not nonsurjective
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where abstract
 
   is-surjective-not-nonim-has-decidable-∃ :
     has-decidable-∃-Level l2 A →
