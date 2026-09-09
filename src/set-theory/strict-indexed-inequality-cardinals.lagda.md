@@ -44,14 +44,14 @@ open import set-theory.inhabited-cardinals
 ## Idea
 
 We may say a [cardinal](set-theory.cardinals.md) `X` is
-{{#concept "indexed less than" Disambiguation="set-cardinal" Agda=le-indexed-Cardinal}}
+{{#concept "indexed less than" Disambiguation="cardinal" Agda=le-indexed-Cardinal}}
 a cardinal `Y` if `Y` is inhabited and any map `f` of
 [sets](foundation-core.sets.md) from the isomorphism class of `X` into sets in
 the isomorphism class of `Y` is
 [nonsurjective](foundation.nonsurjective-maps.md) in the sense that there exists
 an element in `Y` that `f` does not hit. This is a positive way of saying that
 `X` is less than `Y`. This defines the
-{{#concept "strict indexing ordering" Disambiguation="on set-cardinals"}}.
+{{#concept "strict indexing ordering" Disambiguation="on cardinals"}}.
 
 ## Definition
 

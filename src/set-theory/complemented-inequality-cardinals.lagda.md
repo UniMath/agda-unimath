@@ -43,7 +43,7 @@ a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
 isomorphism class of `Y`. In other words, if there is a
 [decidable embedding](foundation.decidable-embeddings.md) from the first to the
 second. This defines the
-{{#concept "complemented ordering" Disambiguation="on set-cardinals" Agda=large-preorder-complemented-Cardinal}}
+{{#concept "complemented ordering" Disambiguation="on cardinals" Agda=large-preorder-complemented-Cardinal}}
 on cardinals.
 
 Under the assumption of the
