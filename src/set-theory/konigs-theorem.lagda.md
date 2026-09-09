@@ -10,7 +10,9 @@ module set-theory.konigs-theorem where
 open import foundation.binary-transport
 open import foundation.complements-images
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
