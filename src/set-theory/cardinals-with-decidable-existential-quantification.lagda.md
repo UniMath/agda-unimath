@@ -95,7 +95,7 @@ module _
     equiv-eq eq-compute-has-decidable-∃-cardinality
 ```
 
-### Representatives have decidable existential quantification in every universe
+### Representatives have decidable existential quantification at every level
 
 ```agda
 module _

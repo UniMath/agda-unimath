@@ -396,7 +396,7 @@ is-inhabited-or-empty-is-decidable-trunc-Prop =
   is-merely-decidable-is-decidable-trunc-Prop
 ```
 
-### Excluded middle implies propositional decidability
+### Excluded middle implies that every type is inhabited or empty
 
 ```agda
 is-inhabited-or-empty-LEM :

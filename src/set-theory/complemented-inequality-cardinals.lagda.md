@@ -309,7 +309,7 @@ is-inhabited-is-not-leq-complemented-Cardinal =
             mere-decidable-emb-is-empty)))
 ```
 
-### Indexed inequality with a projective codomain implies complemented inequality
+### If `X ≤ⁱ Y` where `X` is projective and `Y` is discrete, then `X ≤ᵈ Y`
 
 ```agda
 leq-complemented-is-projective-leq-indexed-Cardinal :
