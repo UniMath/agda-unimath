@@ -286,11 +286,6 @@ module _
 
 ### The active coordinate of a fiber is unique
 
-A preimage determines a unique coordinate: at this coordinate its value lies in
-an image of `f`, while at every other coordinate it equals the specified point
-outside that image. The coordinate, its mere fiber, and the off-diagonal
-condition therefore form a proposition.
-
 ```agda
 module _
   {l1 l2 l3 : Level}
@@ -357,10 +352,6 @@ module _
 ```
 
 ### Decidability of the induced map
-
-Decidable existential quantifications on `I` suffice. The unique active
-coordinate can be recovered from mere existence, and the decision of the
-corresponding fiber of `f` supplies a preimage.
 
 ```agda
 module _
