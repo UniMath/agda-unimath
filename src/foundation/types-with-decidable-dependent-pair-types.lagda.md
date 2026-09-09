@@ -33,6 +33,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -684,7 +685,7 @@ has-decidable-Σ-Prop {l} =
     ( has-decidable-Σ-bool')
 ```
 
-### Decidable Σ on the domain yields decidable fibers
+### Functions from types with decidable sums to discrete types have decidable fibers
 
 ```agda
 is-decidable-map-has-decidable-Σ-Level :

@@ -321,11 +321,10 @@ module _
     has-decidable-equality B →
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-has-decidable-∃-has-decidable-∃-Level
-    h hA d H =
+    h hA d =
     is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
       h
       ( is-inhabited-or-empty-map-has-decidable-∃-Level hA d f)
-      ( H)
 ```
 
 ### Assuming excluded middle, not surjective maps are nonsurjective

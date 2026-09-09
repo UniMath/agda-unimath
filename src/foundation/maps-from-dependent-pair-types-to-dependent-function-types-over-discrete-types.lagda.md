@@ -140,10 +140,10 @@ module _
       is-injective-map-Σ-Π-nonim
         ( map-injection ∘ f)
         ( b)
-        ( is-injective-injection ∘ f))
+        ( is-injective-map-injection ∘ f))
 ```
 
-### If `f` has retractions then `A i` is a retract of `(i : I') → B i` for every `i`
+### If `f i` has a retraction then `A i` is a retract of `(i : I') → B i`
 
 ```agda
 module _
