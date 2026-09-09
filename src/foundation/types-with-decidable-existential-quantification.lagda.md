@@ -9,6 +9,7 @@ module foundation.types-with-decidable-existential-quantification where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -31,7 +32,6 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
-open import foundation.boolean-operations
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -61,9 +61,9 @@ open import univalent-combinatorics.standard-finite-types
 A type `X`
 {{#concept "has decidable existential quantification" Disambiguation="on type" Agda=has-decidable-∃}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
-there [exists](foundation.existential-quantification.md) an element in some
-fiber of `P`, or `P` is the empty family. In other words, we have a witness of
-type
+there either [exists](foundation.existential-quantification.md) an element in
+some fiber of `P`, or `P` is the empty family. In other words, we have a witness
+of type
 
 ```text
   (P : decidable-family X) → is-decidable (∃ x. P x).
