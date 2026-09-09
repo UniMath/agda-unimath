@@ -69,7 +69,8 @@ We may say a [cardinal](set-theory.cardinals.md) `X` is (strictly)
 {{#concept "complemented less than" Disambiguation="set-cardinal" Agda=le-complemented-Cardinal}}
 a cardinal `Y`, written `X <ᵈ Y`, if `X ≤ᵈ Y` and `Y ≰ᵈ X`, in the sense that a
 representative of `X` merely decidably embeds into a representative of `Y`, and
-a representative of `Y` merely decidably embeds into a representative of `X`.
+a representative of `Y` does not merely decidably embed into a representative of
+`X`.
 
 ## Definitions
 
