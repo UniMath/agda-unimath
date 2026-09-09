@@ -15,6 +15,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.intersections-subtypes

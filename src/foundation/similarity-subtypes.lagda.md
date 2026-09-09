@@ -101,11 +101,11 @@ eq-sim-subtype {A = A} =
 ### Similarity is a large similarity relation
 
 ```agda
-large-similarity-relation-sim-subtype :
+large-similarity-relation-subtype :
   {l : Level} (X : UU l) →
   Large-Similarity-Relation (λ l1 l2 → l ⊔ l1 ⊔ l2) (λ l → subtype l X)
-large-similarity-relation-sim-subtype X =
-  large-similarity-relation-sim-Large-Poset (powerset-Large-Poset X)
+large-similarity-relation-subtype X =
+  large-similarity-relation-Large-Poset (powerset-Large-Poset X)
 ```
 
 ### A subtype is similar to itself raised to a universe level

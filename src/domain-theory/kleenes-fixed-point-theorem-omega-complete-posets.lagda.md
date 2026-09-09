@@ -60,8 +60,6 @@ this construction applied to `⊥` gives a least fixed point of `f`.
 
 ## Construction
 
-### Kleene's fixed point construction for order preserving endomaps on ω-complete posets
-
 ```agda
 module _
   {l1 l2 : Level}
@@ -95,7 +93,13 @@ module _
     hom-Poset ℕ-Poset (poset-ω-Complete-Poset 𝒜)
   hom-construction-kleene-hom-ω-Complete-Poset =
     hom-construction-kleene-hom-Poset (poset-ω-Complete-Poset 𝒜) H x p
+```
 
+## Theorems
+
+### Fixed point theorem for order preserving maps
+
+```agda
 module _
   {l1 l2 : Level}
   (𝒜 : ω-Complete-Poset l1 l2)
@@ -107,6 +111,9 @@ module _
       ( f))
   (x : type-ω-Complete-Poset 𝒜)
   (p : leq-ω-Complete-Poset 𝒜 x (f x))
+  (F :
+    preserves-ω-supremum-ω-Complete-Poset 𝒜 𝒜 f
+      ( hom-construction-kleene-hom-ω-Complete-Poset 𝒜 H x p))
   where
 
   point-construction-kleene-hom-ω-Complete-Poset : type-ω-Complete-Poset 𝒜
@@ -118,11 +125,9 @@ module _
       ( p)
       ( is-ω-complete-ω-Complete-Poset 𝒜
         ( hom-construction-kleene-hom-ω-Complete-Poset 𝒜 H x p))
+      ( F)
 
   is-fixed-point-construction-kleene-hom-ω-Complete-Poset :
-    (F :
-      preserves-ω-supremum-ω-Complete-Poset 𝒜 𝒜 f
-        ( hom-construction-kleene-hom-ω-Complete-Poset 𝒜 H x p)) →
     f (point-construction-kleene-hom-ω-Complete-Poset) ＝
     point-construction-kleene-hom-ω-Complete-Poset
   is-fixed-point-construction-kleene-hom-ω-Complete-Poset =
@@ -133,18 +138,16 @@ module _
       ( p)
       ( is-ω-complete-ω-Complete-Poset 𝒜
         ( hom-construction-kleene-hom-ω-Complete-Poset 𝒜 H x p))
+      ( F)
 
   fixed-point-construction-kleene-hom-ω-Complete-Poset :
-    (F :
-      preserves-ω-supremum-ω-Complete-Poset 𝒜 𝒜 f
-        ( hom-construction-kleene-hom-ω-Complete-Poset 𝒜 H x p)) →
     fixed-point f
-  fixed-point-construction-kleene-hom-ω-Complete-Poset F =
-    point-construction-kleene-hom-ω-Complete-Poset ,
-    is-fixed-point-construction-kleene-hom-ω-Complete-Poset F
+  fixed-point-construction-kleene-hom-ω-Complete-Poset =
+    ( point-construction-kleene-hom-ω-Complete-Poset ,
+      is-fixed-point-construction-kleene-hom-ω-Complete-Poset)
 ```
 
-### Kleene's fixed point construction for ω-continuous endomaps on ω-complete posets
+### Fixed point theorem for ω-continuous maps
 
 ```agda
 module _
@@ -187,6 +190,7 @@ module _
       ( preserves-order-is-ω-continuous-ω-Complete-Poset 𝒜 𝒜 F)
       ( x)
       ( p)
+      ( F (hom-construction-kleene-ω-Complete-Poset 𝒜 F x p))
 
   is-fixed-point-construction-kleene-ω-Complete-Poset :
     f ( point-construction-kleene-ω-Complete-Poset) ＝
@@ -204,12 +208,10 @@ module _
     is-fixed-point-construction-kleene-ω-Complete-Poset
 ```
 
-## Theorem
-
-### Kleene's least fixed point theorem for order preserving endomaps on ω-complete posets with a bottom element
+### Least fixed point theorem for order preserving maps
 
 If `𝒜` has a bottom element, then Kleene's fixed point construction gives a
-least fixed point of `f`.
+least fixed point of any order preserving endomap `f`.
 
 ```agda
 module _
@@ -229,7 +231,7 @@ module _
 
   point-theorem-kleene-hom-ω-Complete-Poset : type-ω-Complete-Poset 𝒜
   point-theorem-kleene-hom-ω-Complete-Poset =
-    point-construction-kleene-hom-ω-Complete-Poset 𝒜 H ⊥ (b' (f ⊥))
+    point-construction-kleene-hom-ω-Complete-Poset 𝒜 H ⊥ (b' (f ⊥)) F
 
   fixed-point-theorem-kleene-hom-ω-Complete-Poset : fixed-point f
   fixed-point-theorem-kleene-hom-ω-Complete-Poset =
@@ -264,10 +266,10 @@ module _
       ( F)
 ```
 
-### Kleene's least fixed point theorem for order preserving endomaps on ω-complete posets with a bottom element
+### Least fixed point theorem for ω-continuous maps
 
-If `𝒜` has a bottom element, then Kleene's fixed point construction on this
-element gives a least fixed point of `f`.
+If `𝒜` has a bottom element, then Kleene's fixed point construction gives a
+least fixed point of any ω-continuous endomap `f`.
 
 ```agda
 module _

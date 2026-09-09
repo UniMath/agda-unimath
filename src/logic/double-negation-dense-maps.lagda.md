@@ -9,6 +9,7 @@ module logic.double-negation-dense-maps where
 ```agda
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types

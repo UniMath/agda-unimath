@@ -1,76 +1,61 @@
-# The agda-unimath library style guide
+# The agda-unimath library coding style guide
 
-The agda-unimath library is an ever-expanding encyclopedia of formalized
-mathematics from a univalent point of view. The library's corresponding website
-serves as an extensive platform, presenting our work in a structured,
-encyclopedia-like format.
+The agda-unimath library is an ever-expanding library of formalized mathematics
+from a univalent point of view. Agda-unimath stands as the largest library of
+formalized mathematics in the Agda proof assistant, covering a broad range of
+mathematical subjects. The library's corresponding website displays the
+formalization pages in a markdown book, with over 3000 separate pages as of
+May 2026.
 
-The coding and style conventions we've established aren't simply rules; they're
-tools for us to shape and nurture this resource. They ensure that the formalized
-definitions are clean and focused, and ready for reuse across the library,
-thereby weaving each contribution into a bigger tapestry.
+In this coding style guide we will outline some of the design principles of
+these pages. The purpose of these principles is to create a clean framework
+through which we present our work, and to ensure good maintainability and
+reusability of the code. A core value of our formalization project is conceptual
+clarity and readability. We hope that with this style guide, we are able to help
+new contributors write code that is both functional and understandable, as well
+as easily maintainable.
 
-Conceptual clarity and readability are the core values of our formalization
-project. This style guide aims to help contributors write code that is both
-functional and understandable, as well as easily maintainable. Please reach out
-to us if you have any questions or remarks about the agda-unimath style, or need
-any help getting started with your formalization project. Our code, and also
-this guide, are open to refinement to best support our community and the
-project's goals.
+Please reach out to us on [Discord](https://discord.gg/Zp2e8hYsuX) if you have
+any questions or remarks about the agda-unimath style, or need any help getting
+started with your formalization project.
 
 ## Code structuring conventions
-
-The agda-unimath library is a comprehensive collection of formalized mathematics
-spanning a broad range of subjects. All fields of mathematics are inherently
-interlinked, which we leverage in our formalization process.
 
 One critical aspect of maintaining such a large codebase lies in efficient and
 strategic code structuring, and continued refactoring, into small, reusable
 entries. In line with this approach, we aim to factor out and encapsulate even
 the tiniest bits of reusable logic or computation in their own definitions.
 
-Here are the benefits of this approach:
+### Small entries with simple structure
 
-- **Simplicity**: Breaking down complex structures into smaller ones simplifies
-  the overall codebase, making it more accessible to new contributors.
+In the agda-unimath library, we have some, but very few long entries. Indeed, it
+has been remarked upon that most of our code looks like boiler-plate code. This
+is by design. By breaking down entries into small and simple entries, we make
+the library easier to maintain in several ways: Faster compilation; cleaner
+appearance; the code will break less, or less severely, if definitions are
+changed. Moreover, by factoring parts out of a proof or construction, they
+become elements of the recorded knowledge base of agda-unimath.
 
-- **Reusability**: Once a particular logic or computation is formalized, it can
-  be reused in multiple places, thereby avoiding redundancy and promoting
-  efficiency.
+Other obvious benefits of refactoring your code into small parts is that these
+parts thereby become reusable across the library. Work that is properly
+refactored is more easily understood and used by others, which is ultimately
+what it's all about!
 
-- **Cleanliness**: By separating reusable logic from proof constructions, we
-  keep our proofs clean and focus only on the essential parts of the argument.
+### Representation independence
 
-- **Demonstrability**: Well-structured code serves as a practical guide on how
-  to use prior parts of the library in the current setting or in new
-  definitions.
+Most of our concepts are introduced along with a "user interface", which
+consists of entries that specify and determine the basic use cases of the
+concept. This way, our code itself serves as a practical guide on how it can be
+used later in new definitions. Furthermore, later code that correctly uses the
+interface of a concept don't depend on the specific implementations of its
+dependencies, which makes them conceptually a lot cleaner, and more robust to
+change. John C. Reynolds explained the benefits of representation independence
+more fully in {{#cite Reynolds1974}}.
 
-- **Maintainability**: When logic is broken down into separate, reusable pieces,
-  it becomes easier to manage and maintain the codebase. Constructions that are
-  broken down into small definitions are much easier to understand. This also
-  makes the project more scalable.
-
-- **Reliability**: While formally verified code is guaranteed to be "correct" in
-  terms of its internal logic, it doesn't necessarily ensure that a mathematical
-  concept is accurately modeled within Agda. By proving properties, reusing
-  existing implementations in manners that mirror the expectations of
-  mathematicians, and by tightly integrating them with the rest of the library,
-  we create more opportunities to use and confirm the fidelity of these
-  implementations. This process bolsters confidence in their correctness and the
-  overall reliability of the library.
-
-In essence, our code structuring conventions are guided by the goal of ensuring
-that our code remains as conceptually clear and as understandable as possible.
-Finally, a maintainable codebase is a welcoming codebase. By ensuring that the
-agda-unimath code is easy to understand and navigate, new contributors can more
-readily participate in the project. This is crucial for the growth and dynamism
-of the agda-unimath community. It allows a diverse group of developers, each
-with their unique skills and perspectives, to contribute to the project's
-ongoing success.
-
-So, in particular, refactoring isn't just about "cleaning up" the code; it's a
-strategic endeavor to ensure the longevity, vitality, and success of the
-agda-unimath project.
+In essence, our code structuring conventions are designed and practiced with the
+goal of making the library as conceptually clear and understandable as possible.
+Finally, we hope that with the coding practices outlined here, you'll find our
+codebase welcoming and pleasant to work with.
 
 ## Guidelines for definitions in the agda-unimath library
 
@@ -502,3 +487,7 @@ These guidelines are here to make everyone's coding experience more enjoyable
 and productive. As always, your contributions to the agda-unimath library are
 valued, and these suggestions are here to help ensure that your code is clear,
 beautiful, reusable, and maintainable. Happy coding!
+
+## References
+
+{{#bibliography}}

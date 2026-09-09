@@ -16,9 +16,10 @@ open import foundation.cartesian-products-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
@@ -35,6 +36,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.raising-universe-levels
 open import foundation-core.retractions
 open import foundation-core.sections
 
