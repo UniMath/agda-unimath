@@ -39,8 +39,8 @@ open import synthetic-homotopy-theory.suspensions-of-types
 ## Idea
 
 The [suspension](synthetic-homotopy-theory.suspensions-of-types.md) of a
-`k`-[projective](foundation.projective-types.md)
-`k`-[type](foundation.truncated-types.md) is `k+1`-projective.
+𝑘-[projective](foundation.projective-types.md)
+𝑘-[type](foundation.truncated-types.md) is (𝑘+1)-projective.
 
 ## Definitions
 
@@ -114,7 +114,7 @@ module _
 
 ## Properties
 
-### Suspensions of `k`-projective `k`-types are `(k+1)`-projective
+### Suspensions of 𝑘-projective 𝑘-types are (𝑘+1)-projective
 
 ```agda
 module _
