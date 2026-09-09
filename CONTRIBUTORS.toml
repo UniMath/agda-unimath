@@ -56,6 +56,18 @@ His PhD research is on graph theory from a univalent point of view.
 '''
 
 [[contributors]]
+displayName = "Elif Uskuplu"
+maintainer = true
+usernames = [ "ElifUskuplu" ]
+homepage = "https://elifuskuplu.github.io"
+github = "ElifUskuplu"
+bio = '''
+[Elif](https://math.indiana.edu/about/faculty/uskuplu-elif.html) is a postdoctoral
+researcher at Indiana University Bloomington. Her research is on type theory,
+categorical semantics, proof assistants, and natural logic.
+'''
+
+[[contributors]]
 displayName = "Vojtěch Štěpančík"
 usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
 homepage = "https://vojtechstep.eu/"
@@ -83,12 +95,6 @@ displayName = "Raymond Baker"
 usernames = [ "Raymond Baker" ]
 github = "morphismz"
 homepage = "https://morphismz.github.io"
-
-[[contributors]]
-displayName = "Elif Uskuplu"
-usernames = [ "ElifUskuplu" ]
-github = "ElifUskuplu"
-homepage = "https://elifuskuplu.github.io"
 
 [[contributors]]
 displayName = "Victor Blanchi"
