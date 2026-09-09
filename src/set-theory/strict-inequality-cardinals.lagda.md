@@ -65,9 +65,7 @@ module _
   le-prop-Cardinal :
     Cardinal l1 → Cardinal l2 → Prop (l1 ⊔ l2)
   le-prop-Cardinal X Y =
-    product-Prop
-      ( leq-prop-Cardinal X Y)
-      ( neg-Prop (leq-prop-Cardinal Y X))
+    product-Prop (leq-prop-Cardinal X Y) (neg-Prop (leq-prop-Cardinal Y X))
 
   le-Cardinal : Cardinal l1 → Cardinal l2 → UU (l1 ⊔ l2)
   le-Cardinal X Y = type-Prop (le-prop-Cardinal X Y)
