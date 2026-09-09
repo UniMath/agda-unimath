@@ -28,7 +28,7 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
-open import foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-types
+open import foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-type
 open import foundation.negation
 open import foundation.nonsurjective-maps
 open import foundation.projective-types

@@ -1,7 +1,7 @@
-# Maps from dependent sums to dependent products over discrete types
+# Maps from dependent sums to dependent products over a discrete type
 
 ```agda
-module foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-types where
+module foundation.maps-from-dependent-pair-types-to-dependent-function-types-over-discrete-type where
 ```
 
 <details><summary>Imports</summary>
