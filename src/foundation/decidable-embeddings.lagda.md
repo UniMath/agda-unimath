@@ -29,7 +29,6 @@ open import foundation.propositions
 open import foundation.retracts-of-arrows
 open import foundation.small-maps
 open import foundation.subtype-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels

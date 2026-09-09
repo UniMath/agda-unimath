@@ -9,20 +9,14 @@ module set-theory.strict-indexed-inequality-cardinals where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.function-types
-open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.large-binary-relations
-open import foundation.law-of-excluded-middle
-open import foundation.mere-embeddings
 open import foundation.negation
 open import foundation.nonsurjective-maps
 open import foundation.propositional-extensionality
@@ -34,9 +28,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import set-theory.cardinals
-open import set-theory.complemented-inequality-cardinals
-open import set-theory.inequality-cardinals
-open import set-theory.inhabited-cardinals
 ```
 
 </details>

@@ -22,7 +22,6 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.projective-types
 open import foundation.propositional-truncations
-open import foundation.retractions
 open import foundation.sets
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps

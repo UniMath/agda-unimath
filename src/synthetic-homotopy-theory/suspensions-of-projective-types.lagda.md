@@ -18,7 +18,6 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
@@ -30,7 +29,6 @@ open import foundation.truncation-projective-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.dependent-suspension-structures
-open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
 ```
 

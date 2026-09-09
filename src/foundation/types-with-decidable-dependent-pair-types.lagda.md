@@ -13,7 +13,6 @@ open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
@@ -44,7 +43,6 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import logic.double-negation-dense-maps
-open import logic.propositionally-decidable-maps
 open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
