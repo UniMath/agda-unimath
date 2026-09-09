@@ -80,14 +80,22 @@ abstract
 abstract
   cotransitive-apart-ℂ :
     {l1 l2 l3 : Level} (x : ℂ l1) (y : ℂ l2) (z : ℂ l3) →
-    apart-ℂ x y → disjunction-type (apart-ℂ x z) (apart-ℂ z y)
+    apart-ℂ x z → disjunction-type (apart-ℂ x y) (apart-ℂ y z)
   cotransitive-apart-ℂ x@(a , b) y@(c , d) z@(e , f) =
     elim-disjunction
-      ( (apart-prop-ℂ x z) ∨ (apart-prop-ℂ z y))
-      ( map-disjunction inl-disjunction inl-disjunction ∘
-        cotransitive-apart-ℝ a c e)
-      ( map-disjunction inr-disjunction inr-disjunction ∘
-        cotransitive-apart-ℝ b d f)
+      ( (apart-prop-ℂ x y) ∨ (apart-prop-ℂ y z))
+      ( λ a#e →
+        elim-disjunction
+          ( (apart-prop-ℂ x y) ∨ (apart-prop-ℂ y z))
+          ( inl-disjunction ∘ inl-disjunction)
+          ( inr-disjunction ∘ inl-disjunction)
+          ( cotransitive-apart-ℝ a c e a#e))
+      ( λ b#f →
+        elim-disjunction
+          ( (apart-prop-ℂ x y) ∨ (apart-prop-ℂ y z))
+          ( inl-disjunction ∘ inr-disjunction)
+          ( inr-disjunction ∘ inr-disjunction)
+          ( cotransitive-apart-ℝ b d f b#f))
 ```
 
 ### Apartness on the complex numbers is a large apartness relation

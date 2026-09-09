@@ -13,6 +13,7 @@ open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
@@ -47,13 +48,18 @@ pair-expansion n =
       ( (exp-ℕ 2 (pr1 p)) *ℕ (succ-ℕ ((pr2 p) *ℕ 2))) ＝
         succ-ℕ n)
 
-is-nonzero-pair-expansion :
-  (u v : ℕ) →
-  is-nonzero-ℕ ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
-is-nonzero-pair-expansion u v =
-  is-nonzero-mul-ℕ _ _
-    ( is-nonzero-exp-ℕ 2 u is-nonzero-two-ℕ)
-    ( is-nonzero-succ-ℕ _)
+abstract
+  is-nonzero-pair-expansion :
+    (u v : ℕ) →
+    is-nonzero-ℕ ((exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
+  is-nonzero-pair-expansion u v =
+    is-nonzero-mul-ℕ _ _
+      ( is-nonzero-exp-ℕ 2 u is-nonzero-two-ℕ)
+      ( is-nonzero-succ-ℕ _)
+
+nonzero-pair-expansion : ℕ → ℕ → ℕ⁺
+nonzero-pair-expansion u v =
+  ( exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2) , is-nonzero-pair-expansion u v)
 
 abstract
   has-pair-expansion-is-even-or-odd :
