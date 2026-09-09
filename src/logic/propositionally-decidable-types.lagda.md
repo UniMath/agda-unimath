@@ -18,6 +18,7 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
@@ -25,6 +26,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.function-types
+open import foundation-core.law-of-excluded-middle
 open import foundation-core.propositions
 ```
 
@@ -392,6 +394,19 @@ is-inhabited-or-empty-is-decidable-trunc-Prop :
 is-inhabited-or-empty-is-decidable-trunc-Prop =
   is-inhabited-or-empty-is-merely-decidable ∘
   is-merely-decidable-is-decidable-trunc-Prop
+```
+
+### Excluded middle implies propositional decidability
+
+```agda
+is-inhabited-or-empty-LEM :
+  {l1 l2 : Level} {A : UU l1} →
+  level-LEM (l1 ⊔ l2) → is-inhabited-or-empty A
+is-inhabited-or-empty-LEM {l2 = l2} {A} lem =
+  is-inhabited-or-empty-is-decidable-trunc-Prop
+    ( is-decidable-equiv
+      ( compute-raise l2 (type-trunc-Prop A))
+      ( lem (raise-Prop l2 (trunc-Prop A))))
 ```
 
 ## See also

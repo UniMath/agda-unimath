@@ -200,7 +200,6 @@ abstract
       ( is-decidable-equiv'
         ( equiv-trunc-Prop (right-unit-law-Σ-is-contr (λ _ → is-contr-unit)))
         ( f ((λ _ → unit) , (λ _ → inl star))))
-
 ```
 
 ### Decidable Σ-types imply decidable existential quantification
