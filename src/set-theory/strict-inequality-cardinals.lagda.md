@@ -150,7 +150,7 @@ module _
     ( X≤Y , not-geq-le-indexed-cardinality-LEM X<Y)
 ```
 
-### Decidable existential quantification makes embeddings decidable
+### Decidable existential quantifications make strict inequalities complemented
 
 ```agda
 module _
