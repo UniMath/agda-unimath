@@ -313,3 +313,9 @@ displayName = "Tim Johns"
 usernames = ["Tim Johns"]
 github = "SlimTim10"
 homepage = "https://timjohns.ca/"
+
+[[contributors]]
+displayName = "Mark Williams"
+usernames = ["Mark Williams"]
+github = "markrd-williams"
+homepage = "https://markrd-williams.github.io/"
