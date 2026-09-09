@@ -36,6 +36,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.raising-universe-levels-unit-type
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
@@ -285,6 +286,23 @@ module _
     has-decidable-∃ X → has-decidable-∃-bool X
   has-decidable-∃-bool-has-decidable-∃ f P =
     f (is-true ∘ P , λ x → has-decidable-equality-bool (P x) true)
+
+  has-decidable-∃-bool-has-decidable-∃-Level :
+    {l' : Level} → has-decidable-∃-Level l' X → has-decidable-∃-bool X
+  has-decidable-∃-bool-has-decidable-∃-Level {l'} h b =
+    is-decidable-equiv
+      ( equiv-trunc-Prop
+        ( equiv-tot (λ x → compute-raise l' (is-true (b x)))))
+      ( h ( (λ x → raise l' (is-true (b x))) ,
+            ( λ x →
+              is-decidable-raise l' (is-true (b x))
+                ( has-decidable-equality-bool (b x) true))))
+
+  has-decidable-∃-has-decidable-∃-Level :
+    {l' : Level} → has-decidable-∃-Level l' X → has-decidable-∃ X
+  has-decidable-∃-has-decidable-∃-Level h =
+    has-decidable-∃-has-decidable-∃-bool
+      ( has-decidable-∃-bool-has-decidable-∃-Level h)
 ```
 
 #### A pointed type with decidable existential quantification has pointedly decidable existential quantification
