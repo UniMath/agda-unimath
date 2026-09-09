@@ -24,6 +24,7 @@ open import foundation.universe-levels
 open import foundation-core.propositions
 
 open import set-theory.cardinality-projective-sets
+open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
 open import set-theory.inequality-cardinals
 open import set-theory.inhabited-cardinals
@@ -34,8 +35,8 @@ open import set-theory.inhabited-cardinals
 ## Idea
 
 Given a family of cardinals $κ : I → \Cardinal$ over a
-[cardinality-projective set](set-theory.cardinality-projective-sets.md) $I$,
-then we may define the {{#concept "dependent sum cardinal" Agda=Σ-Cardinal}}
+[cardinality-recursive set](set-theory.cardinality-recursive-sets.md) $I$, then
+we may define the {{#concept "dependent sum cardinal" Agda=Σ-Cardinal'}}
 $Σ_{i∈I}κᵢ$, as the cardinality of the
 [dependent sum](foundation.dependent-pair-types.md) of any family of
 representing sets $Kᵢ$.
@@ -53,33 +54,53 @@ module _
   cardinality-Σ Y = cardinality (Σ-Set X Y)
 ```
 
+### Dependent sums of cardinals over cardinality-recursive sets
+
+```agda
+module _
+  {l1 l2 : Level} (X : Cardinality-Recursive-Set l1 l2)
+  (let set-X = set-Cardinality-Recursive-Set X)
+  (let type-X = type-Cardinality-Recursive-Set X)
+  where
+
+  Σ-Cardinal' :
+    (type-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+  Σ-Cardinal' K =
+    map-trunc-Set (Σ-Set set-X) (unit-Cardinality-Recursive-Set X K)
+
+  compute-Σ-Cardinal' :
+    (Y : type-X → Set l2) →
+    Σ-Cardinal' (cardinality ∘ Y) ＝ cardinality (Σ-Set set-X Y)
+  compute-Σ-Cardinal' Y =
+    equational-reasoning
+      Σ-Cardinal' (cardinality ∘ Y)
+      ＝ map-trunc-Set (Σ-Set set-X) (unit-trunc-Set Y)
+        by
+          ap
+            ( map-trunc-Set (Σ-Set set-X))
+            ( compute-unit-Cardinality-Recursive-Set X Y)
+      ＝ cardinality (Σ-Set set-X Y)
+        by naturality-unit-trunc-Set (Σ-Set set-X) Y
+```
+
 ### Dependent sums of cardinals over cardinality-projective sets
 
 ```agda
 module _
   {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
-  (let set-X = set-Cardinality-Projective-Set X)
-  (let type-X = type-Cardinality-Projective-Set X)
   where
 
   Σ-Cardinal :
-    (type-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
-  Σ-Cardinal K =
-    map-trunc-Set (Σ-Set set-X) (unit-Cardinality-Projective-Set X K)
+    (type-Cardinality-Projective-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+  Σ-Cardinal =
+    Σ-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
 
   compute-Σ-Cardinal :
-    (Y : type-X → Set l2) →
-    Σ-Cardinal (cardinality ∘ Y) ＝ cardinality (Σ-Set set-X Y)
-  compute-Σ-Cardinal Y =
-    equational-reasoning
-      Σ-Cardinal (cardinality ∘ Y)
-      ＝ map-trunc-Set (Σ-Set set-X) (unit-trunc-Set Y)
-        by
-          ap
-            ( map-trunc-Set (Σ-Set set-X))
-            ( compute-unit-Cardinality-Projective-Set X Y)
-      ＝ cardinality (Σ-Set set-X Y)
-        by naturality-unit-trunc-Set (Σ-Set set-X) Y
+    (Y : type-Cardinality-Projective-Set X → Set l2) →
+    Σ-Cardinal (cardinality ∘ Y) ＝
+    cardinality (Σ-Set (set-Cardinality-Projective-Set X) Y)
+  compute-Σ-Cardinal =
+    compute-Σ-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
 ```
 
 ## Properties
