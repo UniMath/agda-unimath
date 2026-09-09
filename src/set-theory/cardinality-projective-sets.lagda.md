@@ -40,7 +40,6 @@ open import foundation.truncations
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
 open import set-theory.equality-cardinals
 
@@ -258,7 +257,7 @@ module _
       ( is-connected-map-is-equiv H)
 ```
 
-### Cardinality-projective sets are cardinality-recursive
+### The unit map of a cardinality-projective set
 
 We call the inverse map to the distributive law the "unit map" of the
 cardinality-projective set, and this map gives an induction principle for
@@ -270,40 +269,32 @@ module _
   (let I' = type-Cardinality-Projective-Set I)
   where
 
-  is-cardinality-recursive-Cardinality-Projective-Set :
-    is-cardinality-recursive-set-Level l2 (set-Cardinality-Projective-Set I)
-  is-cardinality-recursive-Cardinality-Projective-Set =
-    retraction-is-equiv
-      ( is-equiv-map-distributive-trunc-set-is-cardinality-projective-set
-        ( set-Cardinality-Projective-Set I)
-        ( is-cardinality-projective-Cardinality-Projective-Set I))
-
-  cardinality-recursive-set-Cardinality-Projective-Set :
-    Cardinality-Recursive-Set l1 l2
-  cardinality-recursive-set-Cardinality-Projective-Set =
-    ( set-Cardinality-Projective-Set I ,
-      is-cardinality-recursive-Cardinality-Projective-Set)
-
   unit-Cardinality-Projective-Set :
     (I' → Cardinal l2) → ║ (I' → Set l2) ║₀
   unit-Cardinality-Projective-Set =
-    unit-Cardinality-Recursive-Set
-      ( cardinality-recursive-set-Cardinality-Projective-Set)
+    map-inv-is-equiv
+      ( is-equiv-map-distributive-trunc-set-is-cardinality-projective-set
+        ( set-Cardinality-Projective-Set I)
+        ( is-cardinality-projective-Cardinality-Projective-Set I))
 
   is-retraction-unit-Cardinality-Projective-Set :
     is-retraction
       ( map-distributive-trunc-function-type zero-𝕋 I' (Set l2))
       ( unit-Cardinality-Projective-Set)
   is-retraction-unit-Cardinality-Projective-Set =
-    is-retraction-unit-Cardinality-Recursive-Set
-      ( cardinality-recursive-set-Cardinality-Projective-Set)
+    is-retraction-map-inv-is-equiv
+      ( is-equiv-map-distributive-trunc-set-is-cardinality-projective-set
+        ( set-Cardinality-Projective-Set I)
+        ( is-cardinality-projective-Cardinality-Projective-Set I))
 
   compute-unit-Cardinality-Projective-Set :
     (K : I' → Set l2) →
     unit-Cardinality-Projective-Set (cardinality ∘ K) ＝ unit-trunc-Set K
-  compute-unit-Cardinality-Projective-Set =
-    compute-unit-Cardinality-Recursive-Set
-      ( cardinality-recursive-set-Cardinality-Projective-Set)
+  compute-unit-Cardinality-Projective-Set K =
+    ( ap
+      ( unit-Cardinality-Projective-Set)
+      ( inv (eq-htpy (compute-distributive-trunc-function-type zero-𝕋 K)))) ∙
+    ( is-retraction-unit-Cardinality-Projective-Set (unit-trunc-Set K))
 ```
 
 ### A set is cardinality-projective if the postcomposition map is a set-equivalence

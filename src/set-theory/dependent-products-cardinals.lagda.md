@@ -22,7 +22,6 @@ open import foundation.universe-levels
 open import foundation-core.propositions
 
 open import set-theory.cardinality-projective-sets
-open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
 open import set-theory.inhabited-cardinals
 ```
@@ -32,11 +31,11 @@ open import set-theory.inhabited-cardinals
 ## Idea
 
 Given a family of cardinals $κ : I → \Cardinal$ over a
-[cardinality-recursive set](set-theory.cardinality-recursive-sets.md) $I$, then
-we may define the {{#concept "dependent product cardinal" Agda=Π-Cardinal'}}
-$Π_{i∈I}κᵢ$, as the cardinality of the
-[dependent product](foundation.dependent-function-types.md) of any family of
-representing sets $Kᵢ$.
+[cardinality-projective set](set-theory.cardinality-projective-sets.md) $I$,
+then we may define the
+{{#concept "dependent product cardinal" Agda=Π-Cardinal}} $Π_{i∈I}κᵢ$, as the
+cardinality of the [dependent product](foundation.dependent-function-types.md)
+of any family of representing sets $Kᵢ$.
 
 ## Definitions
 
@@ -49,54 +48,34 @@ module _
   cardinality-Π Y = cardinality (Π-Set X Y)
 ```
 
-### Dependent products of cardinals over cardinality-recursive sets
-
-```agda
-module _
-  {l1 l2 : Level} (X : Cardinality-Recursive-Set l1 l2)
-  (let set-X = set-Cardinality-Recursive-Set X)
-  where
-
-  Π-Cardinal' :
-    (type-Set set-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
-  Π-Cardinal' Y =
-    map-trunc-Set (Π-Set set-X) (unit-Cardinality-Recursive-Set X Y)
-
-  compute-Π-Cardinal' :
-    (K : type-Cardinality-Recursive-Set X → Set l2) →
-    Π-Cardinal' (cardinality ∘ K) ＝ cardinality (Π-Set set-X K)
-  compute-Π-Cardinal' K =
-    equational-reasoning
-      map-trunc-Set
-        ( Π-Set set-X)
-        ( unit-Cardinality-Recursive-Set X (cardinality ∘ K))
-      ＝ map-trunc-Set (Π-Set set-X) (unit-trunc-Set K)
-        by
-          ap
-            ( map-trunc-Set (Π-Set set-X))
-            ( compute-unit-Cardinality-Recursive-Set X K)
-      ＝ cardinality (Π-Set set-X K)
-        by naturality-unit-trunc-Set (Π-Set set-X) K
-```
-
 ### Dependent products of cardinals over cardinality-projective sets
 
 ```agda
 module _
   {l1 l2 : Level} (X : Cardinality-Projective-Set l1 l2)
+  (let set-X = set-Cardinality-Projective-Set X)
   where
 
   Π-Cardinal :
-    (type-Cardinality-Projective-Set X → Cardinal l2) → Cardinal (l1 ⊔ l2)
-  Π-Cardinal =
-    Π-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
+    (type-Set set-X → Cardinal l2) → Cardinal (l1 ⊔ l2)
+  Π-Cardinal Y =
+    map-trunc-Set (Π-Set set-X) (unit-Cardinality-Projective-Set X Y)
 
   compute-Π-Cardinal :
-    (Y : type-Cardinality-Projective-Set X → Set l2) →
-    Π-Cardinal (cardinality ∘ Y) ＝
-    cardinality (Π-Set (set-Cardinality-Projective-Set X) Y)
-  compute-Π-Cardinal =
-    compute-Π-Cardinal' (cardinality-recursive-set-Cardinality-Projective-Set X)
+    (K : type-Cardinality-Projective-Set X → Set l2) →
+    Π-Cardinal (cardinality ∘ K) ＝ cardinality (Π-Set set-X K)
+  compute-Π-Cardinal K =
+    equational-reasoning
+      map-trunc-Set
+        ( Π-Set set-X)
+        ( unit-Cardinality-Projective-Set X (cardinality ∘ K))
+      ＝ map-trunc-Set (Π-Set set-X) (unit-trunc-Set K)
+        by
+          ap
+            ( map-trunc-Set (Π-Set set-X))
+            ( compute-unit-Cardinality-Projective-Set X K)
+      ＝ cardinality (Π-Set set-X K)
+        by naturality-unit-trunc-Set (Π-Set set-X) K
 ```
 
 ## Properties
