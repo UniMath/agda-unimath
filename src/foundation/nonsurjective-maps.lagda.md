@@ -233,7 +233,7 @@ module _
   where abstract
 
   is-surjective-not-nonim-has-decidable-∃ :
-    has-decidable-∃-Level l2 A →
+    has-decidable-∃ A →
     has-decidable-equality B →
     ¬ nonim f → is-surjective f
   is-surjective-not-nonim-has-decidable-∃ h d =
@@ -242,7 +242,7 @@ module _
         ( is-inhabited-or-empty-map-has-decidable-∃-Level h d f))
 ```
 
-### If the codomain has decidable sums and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
+### If the codomain has decidable existential quantifications and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
 
 For decidability of nonsurjectivity it suffices that `f` is
 [De Morgan](logic.de-morgan-maps.md): that the negation of each fiber is
@@ -250,15 +250,15 @@ decidable.
 
 ```agda
   is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
+    has-decidable-∃ B →
     is-de-morgan-map f →
     is-decidable (is-nonsurjective f)
   is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ h Hf =
     h ( (λ b → ¬ fiber f b) , Hf)
 
   is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃ :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
-    has-decidable-∃-Level l2 A →
+    has-decidable-∃ B →
+    has-decidable-∃ A →
     has-decidable-equality B →
     is-decidable (is-nonsurjective f)
   is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃
@@ -277,7 +277,7 @@ decidable.
     h (H ∘ is-surjective-not-nonim-is-prop-double-negation-eliminating-map Hf)
 
   is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃ :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
+    has-decidable-∃ B →
     is-inhabited-or-empty-map f →
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
@@ -290,8 +290,8 @@ decidable.
       ( is-prop-double-negation-eliminating-map-is-inhabited-or-empty-map Hf)
 
   is-nonsurjective-is-not-surjective-has-decidable-∃-Level :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
-    has-decidable-∃-Level l2 A →
+    has-decidable-∃ B →
+    has-decidable-∃ A →
     has-decidable-equality B →
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-has-decidable-∃-Level
