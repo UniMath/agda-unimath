@@ -11,7 +11,6 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
-open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
