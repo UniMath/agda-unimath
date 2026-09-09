@@ -48,10 +48,11 @@ We may say a [cardinal](set-theory.cardinals.md) `X` is
 a cardinal `Y` if `Y` is inhabited and any map `f` of
 [sets](foundation-core.sets.md) from the isomorphism class of `X` into sets in
 the isomorphism class of `Y` is
-[nonsurjective](foundation.nonsurjective-maps.md) in the sense that there exists
-an element in `Y` that `f` does not hit. This is a positive way of saying that
-`X` is less than `Y`. This defines the
-{{#concept "strict indexing ordering" Disambiguation="on cardinals"}}.
+[nonsurjective](foundation.nonsurjective-maps.md), in the sense that there
+exists an element in `Y` that `f` does not hit. This is a positive way of saying
+that `X` is less than `Y`. This defines the
+{{#concept "strict indexing ordering" Disambiguation="on cardinals"}} on
+cardinals.
 
 ## Definition
 
