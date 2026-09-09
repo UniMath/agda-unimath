@@ -25,7 +25,6 @@ open import foundation.raising-universe-levels
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 ```

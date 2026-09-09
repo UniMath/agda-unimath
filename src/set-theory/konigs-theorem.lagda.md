@@ -16,11 +16,13 @@ open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
@@ -56,26 +58,6 @@ open import set-theory.projective-cardinals
 open import set-theory.strict-complemented-inequality-cardinals
 open import set-theory.strict-indexed-inequality-cardinals
 open import set-theory.strict-inequality-cardinals
-open import foundation.binary-transport
-open import foundation.complements-images
-open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.function-extensionality
-open import foundation.function-extensionality-axiom
-open import foundation.function-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.identity-types
-open import foundation.nonsurjective-maps
-open import foundation.projective-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.universe-levels
-
-open import set-theory.cardinality-projective-sets
-open import set-theory.cardinals
-open import set-theory.dependent-products-cardinals
-open import set-theory.dependent-sums-cardinals
-open import set-theory.strict-indexed-inequality-cardinals
 ```
 
 </details>
@@ -236,8 +218,9 @@ module _
     ((i : type-I) → le-complemented-Cardinal (A i) (B i)) →
     le-indexed-Cardinal (Σ-Cardinal I' A) (Π-Cardinal I' B)
   le-indexed-Σ-Π-le-complemented-family-Cardinal
-    A
-      B is-discrete-A decidable-∃-A is-projective-B is-discrete-B decidable-∃-B H =
+    A B
+    is-discrete-A decidable-∃-A
+    is-projective-B is-discrete-B decidable-∃-B H =
     le-indexed-Σ-Π-Cardinal I A B
       ( λ i →
         le-indexed-le-complemented-Cardinal
@@ -411,8 +394,10 @@ module _
                             ( le-prop-Cardinal
                               ( Σ-Cardinal I' A)
                               ( Π-Cardinal I' B))))))))))))
-      ( λ A B is-discrete-Σ decidable-∃-A decidable-∃-Σ is-projective-B is-discrete-B
-      is-discrete-Π decidable-∃-B decidable-∃-Π H →
+      ( λ A B
+          is-discrete-Σ decidable-∃-A decidable-∃-Σ
+          is-projective-B is-discrete-B
+          is-discrete-Π decidable-∃-B decidable-∃-Π H →
         binary-tr
           ( le-Cardinal)
           ( inv (compute-Σ-Cardinal I' A))
