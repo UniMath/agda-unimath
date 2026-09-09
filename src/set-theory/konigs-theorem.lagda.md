@@ -375,7 +375,7 @@ module _
 
 **Remark.** The assumption that `Π B` has decidable existential quantifications
 could be replaced with the assumption that each `Bᵢ` is an _injective_ cardinal,
-in the sense of Escardó {{#cite Esc21}}. Partial maps from `Aᵢ` to `Bᵢ` would
+in the sense of Escardó {{#cite Esc21b}}. Partial maps from `Aᵢ` to `Bᵢ` would
 then extend to total maps, allowing the diagonal argument to refute the
 existence of an embedding from `Π B` into `Σ A`.
 
