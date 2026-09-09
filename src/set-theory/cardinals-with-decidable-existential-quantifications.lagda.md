@@ -1,7 +1,7 @@
-# Cardinals with decidable existential quantification
+# Cardinals with decidable existential quantifications
 
 ```agda
-module set-theory.cardinals-with-decidable-existential-quantification where
+module set-theory.cardinals-with-decidable-existential-quantifications where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.types-with-decidable-existential-quantification
+open import foundation.types-with-decidable-existential-quantifications
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -31,13 +31,13 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ`
-{{#concept "has decidable existential quantification" Disambiguation="cardinal" Agda=has-decidable-∃-Cardinal}},
+{{#concept "has decidable existential quantifications" Disambiguation="cardinal" Agda=has-decidable-∃-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class
-[has decidable existential quantification](foundation.types-with-decidable-existential-quantification.md).
+[has decidable existential quantifications](foundation.types-with-decidable-existential-quantifications.md).
 
 ## Definitions
 
-### The predicate on cardinals of having decidable existential quantification
+### The predicate on cardinals of having decidable existential quantifications
 
 ```agda
 module _
@@ -58,7 +58,7 @@ module _
     is-prop-type-Prop has-decidable-∃-prop-Cardinal
 ```
 
-### Cardinalities with decidable existential quantification
+### Cardinalities with decidable existential quantifications
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
     equiv-eq eq-compute-has-decidable-∃-cardinality
 ```
 
-### Representatives have decidable existential quantification at every level
+### Representatives have decidable existential quantifications at every level
 
 ```agda
 module _
@@ -109,7 +109,7 @@ module _
       ( map-equiv (compute-has-decidable-∃-cardinality X) h)
 ```
 
-### The universe of cardinals with decidable existential quantification
+### The universe of cardinals with decidable existential quantifications
 
 ```agda
 Cardinal-With-Decidable-∃ : (l : Level) → UU (lsuc l)

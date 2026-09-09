@@ -28,7 +28,7 @@ open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
-open import foundation.types-with-decidable-existential-quantification
+open import foundation.types-with-decidable-existential-quantifications
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -224,7 +224,7 @@ module _
       H (K ∘ unit-trunc-Prop)
 ```
 
-### If the domain has decidable existential quantification and the codomain is discrete, then the map is surjective if it is not nonsurjective
+### If the domain has decidable existential quantifications and the codomain is discrete, then the map is surjective if it is not nonsurjective
 
 ```agda
 module _
