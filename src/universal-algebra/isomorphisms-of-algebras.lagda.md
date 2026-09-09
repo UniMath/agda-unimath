@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.injective-maps
@@ -193,7 +194,7 @@ module _
       is-equiv (equiv-eq-Algebra A B)
     is-equiv-equiv-eq-Algebra (A , p) =
       subtype-identity-principle
-        ( is-prop-is-algebra σ T)
+        ( is-prop-is-algebra-Model-of-Signature σ T)
         ( p)
         ( id-equiv-Model-Of-Signature σ A)
         ( equiv-eq-Algebra (A , p))
@@ -315,7 +316,7 @@ module _
         ( is-torsorial-equiv-Algebra σ T A)
 
   iso-eq-Algebra :
-      (A B : Algebra l3 σ T) → A ＝ B → iso-Algebra σ T A B
+    (A B : Algebra l3 σ T) → A ＝ B → iso-Algebra σ T A B
   iso-eq-Algebra = iso-eq-Large-Precategory (Algebra-Large-Precategory σ T)
 
   abstract

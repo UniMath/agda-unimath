@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.axiom-of-countable-choice
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
@@ -99,7 +100,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (acω : ACω)
+  (acω : level-ACℕ (l1 ⊔ l2 ⊔ l4))
   (X : Metric-Space l1 l2)
   (Y : Metric-Space l3 l4)
   (f : map-Metric-Space X Y)
@@ -108,17 +109,17 @@ module _
   where
 
   abstract
-    is-limit-is-ε-δ-limit-map-ACω-Metric-Space :
+    is-limit-is-ε-δ-limit-map-ACℕ-Metric-Space :
       is-ε-δ-limit-map-Metric-Space X Y f x y →
       is-point-limit-map-Metric-Space X Y f x y
-    is-limit-is-ε-δ-limit-map-ACω-Metric-Space H =
+    is-limit-is-ε-δ-limit-map-ACℕ-Metric-Space H =
       let
         open
           do-syntax-trunc-Prop
             ( is-point-limit-prop-map-Metric-Space X Y f x y)
       in do
         μ ←
-          choice-countable-discrete-set-ACω
+          choice-countable-discrete-set-ACℕ
             ( set-ℚ⁺)
             ( is-countable-set-ℚ⁺)
             ( has-decidable-equality-ℚ⁺)

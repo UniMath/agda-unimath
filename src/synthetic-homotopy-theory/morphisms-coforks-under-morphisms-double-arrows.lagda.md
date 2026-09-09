@@ -1,4 +1,4 @@
-# Morphisms of coforks
+# Morphisms of coforks under morphisms of double arrows
 
 ```agda
 module synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows where
@@ -27,9 +27,7 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [coforks](synthetic-homotopy-theory.coforks.md)
 `c : B → X` and `c' : V → Y`, respectively, and a
 [morphism of double arrows](foundation.morphisms-double-arrows.md)
-`e : (f, g) → (h, k)`.
-
-Then a
+`e : (f, g) → (h, k)`. Then a
 {{#concept "morphism of coforks" Disambiguation="under a morphism of double arrows" Agda=hom-cofork-hom-double-arrow}}
 under `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
 coforks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the
@@ -74,36 +72,36 @@ which share the top map `i` and the bottom square, and the coherences of `c` and
 `c'` filling the sides; that gives the homotopies
 
 ```text
-                                                i                 i
-     A                  A                 A --------> U     A --------> U
-     |                  |                             |                 |
-   f |                f |                             | h               | k
-     |                  |                             |                 |
-     ∨                  ∨     j                       ∨                 ∨
-     B         ~        B --------> V       ~         V        ~        V
-     |                              |                 |                 |
-   c |                              | c'              | c'              | c'
-     |                              |                 |                 |
-     ∨                              ∨                 ∨                 ∨
-     X --------> Y                  Y                 Y                 Y
+                                               i                 i
+     A                 A                 A --------> U     A --------> U
+     |                 |                             |                 |
+   f |               f |                             | h               | k
+     |                 |                             |                 |
+     ∨                 ∨     j                       ∨                 ∨
+     B        ~        B --------> V        ~        V        ~        V
+     |                             |                 |                 |
+   c |                             | c'              | c'              | c'
+     |                             |                 |                 |
+     ∨                             ∨                 ∨                 ∨
+     X --------> Y                 Y                 Y                 Y
            m
 ```
 
 and
 
 ```text
-                                                                  i
-     A                 A               A                    A --------> U
-     |                 |               |                                |
-   f |               g |             g |                                | k
-     |                 |               |                                |
-     ∨                 ∨               ∨     j                          ∨
-     B         ~       B       ~       B --------> V           ~        V
-     |                 |                           |                    |
-   c |               c |                           | c'                 | c'
-     |                 |                           |                    |
-     ∨                 ∨                           ∨                    ∨
-     X --------> Y     X --------> Y               Y                    Y ,
+                                                                 i
+     A                 A                 A                 A --------> U
+     |                 |                 |                             |
+   f |               g |               g |                             | k
+     |                 |                 |                             |
+     ∨                 ∨                 ∨     j                       ∨
+     B        ~        B        ~        B --------> V        ~        V
+     |                 |                             |                 |
+   c |               c |                             | c'              | c'
+     |                 |                             |                 |
+     ∨                 ∨                             ∨                 ∨
+     X --------> Y     X --------> Y                 Y                 Y ,
            m                 m
 ```
 

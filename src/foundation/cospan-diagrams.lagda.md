@@ -29,29 +29,34 @@ cospan-diagram :
 cospan-diagram l1 l2 l3 =
   Σ (UU l1) (λ A → Σ (UU l2) (cospan l3 A))
 
+make-cospan-diagram :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} →
+  (A → X) → (B → X) → cospan-diagram l1 l2 l3
+make-cospan-diagram {A = A} {B} {X} f g = (A , B , X , f , g)
+
 module _
   {l1 l2 l3 : Level} (c : cospan-diagram l1 l2 l3)
   where
 
-  left-type-cospan-diagram : UU l1
-  left-type-cospan-diagram = pr1 c
+  domain-cospan-diagram : UU l1
+  domain-cospan-diagram = pr1 c
 
-  right-type-cospan-diagram : UU l2
-  right-type-cospan-diagram = pr1 (pr2 c)
+  codomain-cospan-diagram : UU l2
+  codomain-cospan-diagram = pr1 (pr2 c)
 
   cospan-cospan-diagram :
-    cospan l3 left-type-cospan-diagram right-type-cospan-diagram
+    cospan l3 domain-cospan-diagram codomain-cospan-diagram
   cospan-cospan-diagram = pr2 (pr2 c)
 
   cospanning-type-cospan-diagram : UU l3
-  cospanning-type-cospan-diagram = codomain-cospan cospan-cospan-diagram
+  cospanning-type-cospan-diagram = cospanning-type-cospan cospan-cospan-diagram
 
   left-map-cospan-diagram :
-    left-type-cospan-diagram → cospanning-type-cospan-diagram
+    domain-cospan-diagram → cospanning-type-cospan-diagram
   left-map-cospan-diagram = left-map-cospan cospan-cospan-diagram
 
   right-map-cospan-diagram :
-    right-type-cospan-diagram → cospanning-type-cospan-diagram
+    codomain-cospan-diagram → cospanning-type-cospan-diagram
   right-map-cospan-diagram = right-map-cospan cospan-cospan-diagram
 ```
 
