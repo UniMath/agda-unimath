@@ -586,7 +586,7 @@ module _
         rec-trunc-Prop
           ( is-nonsurjective-Prop (map-decidable-emb (e i)))
           ( λ hΣB →
-            is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
+            is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
               ( hΣB)
               ( is-inhabited-or-empty-map-is-decidable-map
                 ( is-decidable-map-map-decidable-emb (e i)))

@@ -230,7 +230,7 @@ module _
             decidable-∃-X
             ( is-nonsurjective-Prop f)
             ( λ hΣY hΣX →
-              is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
+              is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
                 hΣY
                 ( is-inhabited-or-empty-map-has-decidable-∃-Level
                   hΣX decidable-equality-Y f)
