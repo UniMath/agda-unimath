@@ -696,16 +696,6 @@ is-decidable-map-has-decidable-Σ-Level :
   is-decidable-map f
 is-decidable-map-has-decidable-Σ-Level h d f y =
   h ( (λ x → f x ＝ y) , (λ x → d (f x) y))
-
-is-inhabited-or-empty-map-has-decidable-Σ-Level :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-Σ-Level l2 A →
-  has-decidable-equality B →
-  (f : A → B) →
-  is-inhabited-or-empty-map f
-is-inhabited-or-empty-map-has-decidable-Σ-Level h d f =
-  is-inhabited-or-empty-map-is-decidable-map
-    ( is-decidable-map-has-decidable-Σ-Level h d f)
 ```
 
 ## References

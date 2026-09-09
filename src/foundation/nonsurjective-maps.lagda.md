@@ -53,6 +53,9 @@ if there [exists](foundation.existential-quantification.md) a
 [fiber](foundation-core.fibers-of-maps.md) that is [not](foundation.negation.md)
 inhabited.
 
+**Terminology.** A map that is not nonsurjective is called _extremely dense_ in
+the terminology of Escardó {{#cite Esc26}}.
+
 ## Definitions
 
 ### Nonsurjectivity of a map
@@ -145,26 +148,7 @@ module _
       ( λ (y , q) → y , map-neg (inclusion-fiber-comp g f (y , q)) np)
       ( c ,_)
       ( H c)
-
-  decide-is-nonsurjective-nonim-comp' :
-    is-decidable-map g →
-    nonim (g ∘ f) → is-nonsurjective f + is-nonsurjective g
-  decide-is-nonsurjective-nonim-comp' H (c , np) =
-    map-coproduct
-      ( λ (y , q) →
-        unit-trunc-Prop (y , map-neg (inclusion-fiber-comp g f (y , q)) np))
-        (λ p → unit-trunc-Prop (c , p))
-      ( H c)
-
-  is-nonsurjective-is-nonsurjective-comp' :
-    is-decidable-map g →
-    is-nonsurjective (g ∘ f) →
-    disjunction-type (is-nonsurjective f) (is-nonsurjective g)
-  is-nonsurjective-is-nonsurjective-comp' =
-    map-trunc-Prop ∘ decide-is-nonsurjective-nonim-comp'
 ```
-
-In fact, it suffices that `g` is propositionally decidable.
 
 ```agda
   decide-is-nonsurjective-nonim-comp :
@@ -216,7 +200,7 @@ module _
     map-trunc-Prop ∘ nonim-comp-is-injective-left
 ```
 
-### Decibable and not nonsurjective maps are surjective
+### Propositionally decidable and not nonsurjective maps are surjective
 
 ```agda
 module _
@@ -224,10 +208,15 @@ module _
   {A : UU l1} {B : UU l2} {f : A → B}
   where abstract
 
+  is-surjective-not-nonim-is-inhabited-or-empty-map :
+    is-inhabited-or-empty-map f → ¬ nonim f → is-surjective f
+  is-surjective-not-nonim-is-inhabited-or-empty-map H nn b =
+    rec-coproduct id (λ nf → ex-falso (nn (b , nf))) (H b)
+
   is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map :
     is-inhabited-or-empty-map f → ¬ is-nonsurjective f → is-surjective f
-  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K b =
-    rec-coproduct id (λ np → ex-falso (K (unit-trunc-Prop (b , np)))) (H b)
+  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K =
+    is-surjective-not-nonim-is-inhabited-or-empty-map H (K ∘ unit-trunc-Prop)
 
   is-surjective-is-not-nonsurjective-LEM :
     level-LEM (l1 ⊔ l2) →
@@ -239,7 +228,7 @@ module _
           ( lem (trunc-Prop (fiber f y))))
 ```
 
-### If the codomain is searchable and `f` is decidable, then if `f` is not surjective it is nonsurjective
+### If the codomain is searchable and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
 
 ```agda
 module _
@@ -247,82 +236,59 @@ module _
   {A : UU l1} {B : UU l2} {f : A → B}
   where abstract
 
-  is-surjective-is-not-nonim-is-decidable-map :
-    is-decidable-map f → ¬ nonim f → is-surjective f
-  is-surjective-is-not-nonim-is-decidable-map d nn b =
-    unit-trunc-Prop
-      ( double-negation-elim-is-decidable (d b) (λ nf → nn (b , nf)))
-
-  is-decidable-nonsurjective-has-decidable-∃ :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
-    is-decidable-map f → is-decidable (is-nonsurjective f)
-  is-decidable-nonsurjective-has-decidable-∃ h d =
-    h ( (λ b → ¬ fiber f b) , (λ b → is-decidable-neg (d b)))
-
-  is-nonsurjective-is-not-surjective-has-decidable-∃ :
-    has-decidable-∃-Level (l1 ⊔ l2) B →
-    is-decidable-map f →
-    ¬ is-surjective f → is-nonsurjective f
-  is-nonsurjective-is-not-surjective-has-decidable-∃ h d H =
-    rec-coproduct
-      ( id)
-      ( ex-falso ∘ H ∘
-        is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map
-          ( is-inhabited-or-empty-map-is-decidable-map d))
-      ( is-decidable-nonsurjective-has-decidable-∃ h d)
-
-  is-surjective-not-nonim-is-inhabited-or-empty-map :
-    is-inhabited-or-empty-map f → ¬ nonim f → is-surjective f
-  is-surjective-not-nonim-is-inhabited-or-empty-map H nn b =
-    rec-coproduct id (λ nf → ex-falso (nn (b , nf))) (H b)
-
-  is-surjective-not-nonim-has-decidable-∃-Level :
+  is-surjective-not-nonim-has-decidable-∃ :
     has-decidable-∃-Level l2 A →
     has-decidable-equality B →
     ¬ nonim f → is-surjective f
-  is-surjective-not-nonim-has-decidable-∃-Level h d =
+  is-surjective-not-nonim-has-decidable-∃ h d =
     is-surjective-not-nonim-is-inhabited-or-empty-map
       ( is-inhabited-or-empty-map-has-decidable-∃-Level h d f)
+```
 
-  is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map :
+For decidability of nonsurjectivity, it suffices that `f` is
+[De Morgan](logic.de-morgan-maps.md): the negation of each fiber is decidable.
+
+```agda
+  is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ :
     has-decidable-∃-Level (l1 ⊔ l2) B →
-    is-inhabited-or-empty-map f →
+    is-de-morgan-map f →
     is-decidable (is-nonsurjective f)
-  is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map h Hf =
-    h ( (λ b → ¬ fiber f b) , is-de-morgan-map-is-inhabited-or-empty-map Hf)
+  is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ h Hf =
+    h ( (λ b → ¬ fiber f b) , Hf)
 
-  is-decidable-nonsurjective-has-decidable-∃-has-decidable-∃-Level :
+  is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃ :
     has-decidable-∃-Level (l1 ⊔ l2) B →
     has-decidable-∃-Level l2 A →
     has-decidable-equality B →
     is-decidable (is-nonsurjective f)
-  is-decidable-nonsurjective-has-decidable-∃-has-decidable-∃-Level h hA d =
-    is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map
+  is-decidable-is-nonsurjective-has-decidable-equality-codomain-has-decidable-∃ h hA d =
+    is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃
       h
-      ( is-inhabited-or-empty-map-has-decidable-∃-Level hA d f)
+      ( is-de-morgan-map-is-inhabited-or-empty-map
+        ( is-inhabited-or-empty-map-has-decidable-∃-Level hA d f))
 
-  is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map :
+  is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃ :
     has-decidable-∃-Level (l1 ⊔ l2) B →
     is-inhabited-or-empty-map f →
     ¬ is-surjective f → is-nonsurjective f
-  is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
+  is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
     h Hf H =
     rec-coproduct
       ( id)
       ( ex-falso ∘
         H ∘
         is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map Hf)
-      ( is-decidable-nonsurjective-has-decidable-∃-is-inhabited-or-empty-map h
-        ( Hf))
+      ( is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ h
+        ( is-de-morgan-map-is-inhabited-or-empty-map Hf))
 
-  is-nonsurjective-is-not-surjective-has-decidable-∃-has-decidable-∃-Level :
+  is-nonsurjective-is-not-surjective-has-decidable-∃-Level :
     has-decidable-∃-Level (l1 ⊔ l2) B →
     has-decidable-∃-Level l2 A →
     has-decidable-equality B →
     ¬ is-surjective f → is-nonsurjective f
-  is-nonsurjective-is-not-surjective-has-decidable-∃-has-decidable-∃-Level
+  is-nonsurjective-is-not-surjective-has-decidable-∃-Level
     h hA d =
-    is-nonsurjective-is-not-surjective-has-decidable-∃-is-inhabited-or-empty-map
+    is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
       h
       ( is-inhabited-or-empty-map-has-decidable-∃-Level hA d f)
 ```
