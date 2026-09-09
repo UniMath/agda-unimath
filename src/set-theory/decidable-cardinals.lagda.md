@@ -8,8 +8,6 @@ module set-theory.decidable-cardinals where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-propositions
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

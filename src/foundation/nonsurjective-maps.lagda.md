@@ -20,22 +20,16 @@ open import foundation.existential-quantification
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.propositional-truncations
-open import foundation.split-surjective-maps
-open import foundation.structure-identity-principle
 open import foundation.surjective-maps
 open import foundation.types-with-decidable-existential-quantifications
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 
 open import logic.de-morgan-maps
