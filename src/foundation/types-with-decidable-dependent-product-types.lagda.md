@@ -46,8 +46,8 @@ open import univalent-combinatorics.standard-finite-types
 
 A type `X` {{#concept "has decidable Π-types" Agda=has-decidable-Π}} if for
 every [decidable type family](foundation.decidable-type-families.md) `P` on `X`,
-we can compute a section of `P`, `(x : X) → P x`, or determine that no such
-section exists. In other words, we have a witness of type
+we can either compute a section of `P`, `(x : X) → P x`, or determine that no
+such section exists. In other words, we have a witness of type
 
 ```text
   (P : decidable-family X) → is-decidable (Π x. P x).
