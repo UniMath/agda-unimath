@@ -375,9 +375,9 @@ module _
 
 **Remark.** The assumption that `Π B` has decidable existential quantifications
 could be replaced with the assumption that each `Bᵢ` is an _injective_ cardinal,
-in the sense of de Jong–Escardó. Partial maps from `Aᵢ` to `Bᵢ` would then
-extend to total maps, allowing the diagonal argument to refute the existence of
-an embedding from `Π B` into `Σ A`.
+in the sense of Escardó {{#cite Esc21}}. Partial maps from `Aᵢ` to `Bᵢ` would
+then extend to total maps, allowing the diagonal argument to refute the
+existence of an embedding from `Π B` into `Σ A`.
 
 ### Kőnig's theorem for strict inequality, assuming LEM
 
@@ -600,6 +600,10 @@ module _
             ( decidable-∃-B)
             ( H)))
 ```
+
+## References
+
+{{#bibliography}}
 
 ## External links
 
