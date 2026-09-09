@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
+open import foundation.truncation-projective-types
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -165,19 +166,19 @@ module _
   is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-trunc-projective
     f g F =
     let
-        open
-          do-syntax-trunc-Prop
-            ( trunc-Prop
-              ( dependent-suspension-structure-fam-fiber-postcomp-suspension
-                ( f)
-                ( g)))
-      in do
-        N ← is-inhabited-is-connected (F (g north-suspension))
-        S ← is-inhabited-is-connected (F (g south-suspension))
-        merid ←
-          is-inhabited-Π-dependent-identification-merid-fam-fiber-postcomp-suspension-is-trunc-projective
-            f g F N S
-        unit-trunc-Prop (N , S , merid)
+      open
+        do-syntax-trunc-Prop
+          ( trunc-Prop
+            ( dependent-suspension-structure-fam-fiber-postcomp-suspension
+              ( f)
+              ( g)))
+    in do
+      N ← is-inhabited-is-connected (F (g north-suspension))
+      S ← is-inhabited-is-connected (F (g south-suspension))
+      merid ←
+        is-inhabited-Π-dependent-identification-merid-fam-fiber-postcomp-suspension-is-trunc-projective
+          f g F N S
+      unit-trunc-Prop (N , S , merid)
 
   is-trunc-projective-level-suspension :
     is-trunc-projective-Level l2 l3 (succ-ℕ k) (suspension X)
@@ -187,26 +188,25 @@ module _
           f g F)
 ```
 
-### Suspensions of projective types in the alternative sense are 1-projective
+### Suspensions of projective types are 1-projective
 
-For the alternative phrasing of set-projectivity using distributivity of
-propositional truncation, the argument goes through without assuming `X` is
-set-truncated.
+For types that are projective in the sense of distributivity of propositional
+truncation, the argument goes through without assuming `X` is set-truncated.
 
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1}
   where
 
-  is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective' :
-    is-projective-Level' (l2 ⊔ l3) X →
+  is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective :
+    is-projective-Level (l2 ⊔ l3) X →
     {A : UU l2} {B : UU l3}
     (f : connected-map zero-𝕋 A B) (g : suspension X → B) →
     is-inhabited
       ( dependent-suspension-structure-fam-fiber-postcomp-suspension
         ( map-connected-map f)
         ( g))
-  is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective'
+  is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective
     is-projective-X (f , F) g =
     let
       open
@@ -236,12 +236,12 @@ module _
               ( S))
       unit-trunc-Prop (N , S , merid)
 
-  is-0-projective-suspension' :
-    is-projective-Level' (l2 ⊔ l3) X →
+  is-1-projective-suspension :
+    is-projective-Level (l2 ⊔ l3) X →
     is-trunc-projective-Level l2 l3 1 (suspension X)
-  is-0-projective-suspension' is-projective-X A B (f , F) g =
+  is-1-projective-suspension is-projective-X A B (f , F) g =
     is-inhabited-fiber-postcomp-suspension f g
-      ( is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective'
+      ( is-inhabited-dependent-suspension-structure-fam-fiber-postcomp-suspension-is-projective
         ( is-projective-X)
         ( f , F)
         ( g))
