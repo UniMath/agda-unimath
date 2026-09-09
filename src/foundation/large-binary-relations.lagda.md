@@ -8,7 +8,6 @@ module foundation.large-binary-relations where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.universe-levels

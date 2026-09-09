@@ -9,6 +9,7 @@ module linear-algebra.bilinear-maps-left-modules-rings where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes

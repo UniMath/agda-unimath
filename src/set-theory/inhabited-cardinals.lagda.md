@@ -29,7 +29,7 @@ open import set-theory.cardinals
 ## Idea
 
 A [cardinal](set-theory.cardinals.md) `κ` is
-{{#concept "inhabited" Disambiguation="set-cardinal" Agda=is-inhabited-Cardinal}},
+{{#concept "inhabited" Disambiguation="cardinal" Agda=is-inhabited-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class is
 [inhabited](foundation.inhabited-types.md).
 

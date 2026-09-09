@@ -12,6 +12,7 @@ open import foundation.binary-equivalences
 open import foundation.commuting-triangles-of-identifications
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types

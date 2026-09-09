@@ -10,6 +10,8 @@ module foundation.propositional-truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.constant-type-families
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences-propositions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -513,6 +515,12 @@ This syntax is particularly useful when we must assume elements from multiple
 propositional truncations, especially dependent ones, e.g.
 `witness-truncated-prop-Q p` above where the assumed element `p` was itself used
 to get a witness of `trunc-Prop Q`.
+
+## See also
+
+- In
+  [`foundation.propositional-truncation`](foundation.propositional-extensionality.md)
+  we show that `trunc-Prop` is a retraction.
 
 ## Table of files about propositional logic
 

@@ -9,8 +9,9 @@ module reflection.fixity where
 ```agda
 open import elementary-number-theory.addition-integers
 
-open import foundation.identity-types
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 
 open import primitives.floats
 

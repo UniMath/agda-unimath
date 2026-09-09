@@ -7,6 +7,7 @@ module foundation.function-large-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-large-equivalence-relations
 open import foundation.large-equivalence-relations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -36,20 +37,6 @@ module _
     Large-Equivalence-Relation
       ( λ l2 l3 → l1 ⊔ β l2 l3)
       ( λ l → A → X l)
-  sim-prop-Large-Equivalence-Relation function-Large-Equivalence-Relation f g =
-    Π-Prop A (λ a → sim-prop-Large-Equivalence-Relation R (f a) (g a))
-  refl-sim-Large-Equivalence-Relation function-Large-Equivalence-Relation f a =
-    refl-sim-Large-Equivalence-Relation R (f a)
-  symmetric-sim-Large-Equivalence-Relation function-Large-Equivalence-Relation
-    f g f~g a =
-    symmetric-sim-Large-Equivalence-Relation R (f a) (g a) (f~g a)
-  transitive-sim-Large-Equivalence-Relation function-Large-Equivalence-Relation
-    f g h g~h f~g a =
-    transitive-sim-Large-Equivalence-Relation
-      ( R)
-      ( f a)
-      ( g a)
-      ( h a)
-      ( g~h a)
-      ( f~g a)
+  function-Large-Equivalence-Relation =
+    Π-Large-Equivalence-Relation A (λ _ → X) (λ _ → R)
 ```

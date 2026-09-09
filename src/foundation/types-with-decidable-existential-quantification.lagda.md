@@ -9,6 +9,7 @@ module foundation.types-with-decidable-existential-quantification where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -31,10 +32,10 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
-open import foundation.logical-operations-booleans
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
@@ -60,9 +61,9 @@ open import univalent-combinatorics.standard-finite-types
 A type `X`
 {{#concept "has decidable existential quantification" Disambiguation="on type" Agda=has-decidable-∃}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
-there [exists](foundation.existential-quantification.md) an element in some
-fiber of `P`, or `P` is the empty family. In other words, we have a witness of
-type
+there either [exists](foundation.existential-quantification.md) an element in
+some fiber of `P`, or `P` is the empty family. In other words, we have a witness
+of type
 
 ```text
   (P : decidable-family X) → is-decidable (∃ x. P x).
@@ -216,10 +217,10 @@ abstract
 
 ```agda
 abstract
-  has-decidable-∃-Level-has-decidable-Σ-Level :
+  has-decidable-∃-has-decidable-Σ-Level :
     {l1 l2 : Level} {X : UU l1} →
     has-decidable-Σ-Level l2 X → has-decidable-∃-Level l2 X
-  has-decidable-∃-Level-has-decidable-Σ-Level h P =
+  has-decidable-∃-has-decidable-Σ-Level h P =
     is-decidable-trunc-Prop-is-decidable (h P)
 
   has-decidable-∃-has-decidable-Σ :
@@ -241,19 +242,13 @@ abstract
   has-decidable-∃-has-decidable-exists f P =
     map-coproduct
       ( map-trunc-Prop
-        ( λ xp →
-          pr1 xp ,
+        ( λ (x , p) →
+          x ,
           rec-coproduct
             ( id)
-            ( ex-falso ∘ pr2 xp)
-            ( is-decidable-decidable-family P (pr1 xp))))
-      ( λ nxp xp →
-        nxp
-          ( map-trunc-Prop
-            ( λ xp →
-              pr1 xp ,
-              intro-double-negation (pr2 xp))
-            ( xp)))
+            ( ex-falso ∘ p)
+            ( is-decidable-decidable-family P x)))
+      ( _∘ map-trunc-Prop (λ (x , p) → (x , intro-double-negation p)))
       ( f ( λ x →
             neg-type-Decidable-Prop
               ( ¬ (family-decidable-family P x))
@@ -271,16 +266,14 @@ module _
     has-decidable-∃-bool X → has-decidable-exists X
   has-decidable-exists-has-decidable-∃-bool f P =
     is-decidable-equiv
-      ( equiv-trunc-Prop
-        ( equiv-tot (compute-equiv-bool-Decidable-Prop ∘ P)))
+      ( equiv-trunc-Prop (equiv-tot (compute-equiv-bool-Decidable-Prop ∘ P)))
       ( f (bool-Decidable-Prop ∘ P))
 
   has-decidable-∃-has-decidable-∃-bool :
     has-decidable-∃-bool X → has-decidable-∃ X
   has-decidable-∃-has-decidable-∃-bool f =
     has-decidable-∃-has-decidable-exists
-      ( has-decidable-exists-has-decidable-∃-bool
-        ( f))
+      ( has-decidable-exists-has-decidable-∃-bool f)
 
   has-decidable-∃-bool-has-decidable-exists :
     has-decidable-exists X → has-decidable-∃-bool X
@@ -302,7 +295,7 @@ abstract
     X → has-decidable-∃ X → has-decidable-∃-pointed X
   has-decidable-∃-pointed-has-decidable-∃-has-element x₀ f P =
     rec-coproduct
-      ( map-trunc-Prop (λ xr → (pr1 xr , ex-falso ∘ pr2 xr)))
+      ( map-trunc-Prop (λ (x , r) → (x , ex-falso ∘ r)))
       ( λ nx →
         intro-exists
           ( x₀)
@@ -324,13 +317,12 @@ abstract
     has-decidable-∃-pointed-bool X
   flip-has-decidable-∃-pointed-bool H b =
     map-trunc-Prop
-      ( λ xb →
-        pr1 xb ,
+      ( λ (x₀ , is-false-nb₀) →
+        x₀ ,
         ( λ p x →
           is-true-is-false-neg-bool
-            ( pr2 xb
-              ( is-false-is-true-neg-bool
-                ( is-involution-neg-bool (b (pr1 xb)) ∙ p))
+            ( is-false-nb₀
+              ( is-false-is-true-neg-bool (is-involution-neg-bool (b x₀) ∙ p))
               ( x))))
       ( H (neg-bool ∘ b))
 ```
@@ -343,13 +335,12 @@ abstract
     has-decidable-∃-pointed-bool' X
   flip-has-decidable-∃-pointed-bool' H b =
     map-trunc-Prop
-      ( λ xb →
-        pr1 xb ,
+      ( λ (x₀ , is-true-nb₀) →
+        x₀ ,
         ( λ p x →
           is-false-is-true-neg-bool
-            ( pr2 xb
-              ( is-true-is-false-neg-bool
-                ( is-involution-neg-bool (b (pr1 xb)) ∙ p))
+            ( is-true-nb₀
+              ( is-true-is-false-neg-bool (is-involution-neg-bool (b x₀) ∙ p))
               ( x))))
       ( H (neg-bool ∘ b))
 ```
@@ -362,17 +353,16 @@ abstract
     {l : Level} {X : UU l} →
     has-decidable-∃-pointed-bool X →
     has-decidable-exists-pointed X
-  has-decidable-exists-pointed-has-decidable-∃-pointed-bool
-    f P =
+  has-decidable-exists-pointed-has-decidable-∃-pointed-bool f P =
     map-trunc-Prop
-      ( λ xb →
-        pr1 xb ,
+      ( λ (x₀ , is-false-nb₀) →
+        x₀ ,
         ( λ Px₀ x →
           map-inv-equiv
             ( compute-equiv-bool-Decidable-Prop (P x))
-              ( pr2 xb
+              ( is-false-nb₀
                 ( map-equiv
-                  ( compute-equiv-bool-Decidable-Prop (P (pr1 xb)))
+                  ( compute-equiv-bool-Decidable-Prop (P x₀))
                   ( Px₀))
                 ( x))))
       ( f (bool-Decidable-Prop ∘ P))
@@ -382,8 +372,7 @@ abstract
     {l : Level} {X : UU l} →
     has-decidable-exists-pointed X →
     has-decidable-∃-pointed-bool X
-  has-decidable-∃-pointed-bool-has-decidable-exists-pointed
-    f b =
+  has-decidable-∃-pointed-bool-has-decidable-exists-pointed f b =
     f (is-true-Decidable-Prop ∘ b)
 ```
 
@@ -395,18 +384,16 @@ abstract
     {l1 : Level} {X : UU l1} →
     has-decidable-exists-pointed X →
     has-decidable-∃-pointed X
-  has-decidable-∃-pointed-has-decidable-exists-pointed
-    {X = X} f P =
-      map-trunc-Prop
-        ( λ g →
-          ( pr1 g) ,
-          ( λ p x →
-            rec-coproduct
-              ( id)
-              ( ex-falso ∘ pr2 g (intro-double-negation p) x)
-              ( is-decidable-decidable-family P x)))
-        ( f
-          ( λ x →
+  has-decidable-∃-pointed-has-decidable-exists-pointed {X = X} f P =
+    map-trunc-Prop
+      ( λ g →
+        ( pr1 g) ,
+        ( λ p x →
+          rec-coproduct
+            ( id)
+            ( ex-falso ∘ pr2 g (intro-double-negation p) x)
+            ( is-decidable-decidable-family P x)))
+      ( f ( λ x →
             neg-type-Decidable-Prop
               ( ¬ (family-decidable-family P x))
               ( is-decidable-neg (is-decidable-decidable-family P x))))
@@ -425,16 +412,9 @@ abstract
       ( is-decidable-Prop
         ( exists-structure-Prop X (family-decidable-family P)))
       ( λ g →
-        rec-coproduct
-          ( λ px₀ → inl (intro-exists (pr1 g) px₀))
-          ( λ npx₀ →
-            inr
-              ( λ ex →
-                rec-trunc-Prop
-                  ( empty-Prop)
-                  ( λ xp →
-                    pr2 g npx₀ (pr1 xp) (pr2 xp))
-                  ( ex)))
+        map-coproduct
+          ( λ px₀ → intro-exists (pr1 g) px₀)
+          ( λ npx₀ → rec-trunc-Prop empty-Prop (λ (x , p) → pr2 g npx₀ x p))
           ( is-decidable-decidable-family P (pr1 g)))
       ( f (neg-decidable-family P))
 ```
@@ -450,24 +430,18 @@ module _
     has-decidable-∃ X → has-decidable-∃ Y
   has-decidable-∃-double-negation-dense-map f P =
     map-coproduct
-      ( map-trunc-Prop
-        ( λ xp → map-double-negation-dense-map h (pr1 xp) , pr2 xp))
-      ( λ nxpf yp →
+      ( map-trunc-Prop (λ (x , p) → map-double-negation-dense-map h x , p))
+      ( λ nxpf →
         rec-trunc-Prop
           ( empty-Prop)
-          ( λ yp' →
+          ( λ (y' , p') →
             is-double-negation-dense-map-double-negation-dense-map
               ( h)
-              ( pr1 yp')
-              ( λ xr →
+              ( y')
+              ( λ (x , r) →
                 nxpf
                   ( unit-trunc-Prop
-                    ( pr1 xr ,
-                      tr
-                        ( family-decidable-family P)
-                        ( inv (pr2 xr))
-                        ( pr2 yp')))))
-          ( yp))
+                    ( x , tr (family-decidable-family P) (inv r) p')))))
       ( f (base-change-decidable-family P (map-double-negation-dense-map h)))
 ```
 
@@ -600,27 +574,17 @@ module _
     has-decidable-∃ (X + Y)
   has-decidable-∃-coproduct f g P =
     rec-coproduct
-      ( λ xp →
-        inl
-          ( map-trunc-Prop
-            ( λ xp' → inl (pr1 xp') , pr2 xp')
-            ( xp)))
+      ( inl ∘ map-trunc-Prop (λ (x' , p') → inl x' , p'))
       ( λ nx →
-        rec-coproduct
-          ( λ yp →
-            inl
-              ( map-trunc-Prop
-                ( λ yp' → inr (pr1 yp') , pr2 yp')
-                ( yp)))
-          ( λ ny →
-            inr
-              ( λ e →
-                rec-trunc-Prop
-                  empty-Prop
-                  ( λ where
-                    (inl x , p) → nx (unit-trunc-Prop (x , p))
-                    (inr y , p) → ny (unit-trunc-Prop (y , p)))
-                  ( e)))
+        map-coproduct
+          ( map-trunc-Prop (λ (y' , p') → inr y' , p'))
+          ( λ ny e →
+            rec-trunc-Prop
+              empty-Prop
+              ( λ where
+                (inl x , p) → nx (unit-trunc-Prop (x , p))
+                (inr y , p) → ny (unit-trunc-Prop (y , p)))
+              ( e))
           ( g (base-change-decidable-family P inr)))
       ( f (base-change-decidable-family P inl))
 
@@ -655,8 +619,7 @@ module _
           ( e)
           ( trunc-Prop (Σ (Σ A B) (family-decidable-family P)))
           ( λ (x , t) → map-trunc-Prop (λ (y , p) → (x , y) , p) t))
-      ( map-trunc-Prop
-        ( λ ((x , y) , p) → (x , unit-trunc-Prop (y , p))))
+      ( map-trunc-Prop (λ ((x , y) , p) → (x , unit-trunc-Prop (y , p))))
       ( f
         ( ( λ x →
             exists-structure (B x) (λ y → family-decidable-family P (x , y))) ,

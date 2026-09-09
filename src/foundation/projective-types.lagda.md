@@ -13,6 +13,8 @@ open import elementary-number-theory.natural-numbers
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
@@ -60,8 +62,8 @@ choice function
 
 $$ ((x : X) → ║P(x)║₋₁) → ║(x : X) → P(x)║₋₁$$
 
-for every type family $P$. This condition is stronger than set-projectivity,
-unless $X$ is a set.
+for every type family $P$. This condition might be stronger than
+set-projectivity when $X$ is not a set.
 
 ## Definitions
 
@@ -107,7 +109,7 @@ is-projective : {l1 : Level} → UU l1 → UUω
 is-projective X = {l2 : Level} → is-projective-Level l2 X
 ```
 
-### The universe of set-projective sets
+### The universe of projective sets
 
 ```agda
 Projective-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

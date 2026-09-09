@@ -10,16 +10,17 @@ module foundation.unital-binary-operations where
 open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
-open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

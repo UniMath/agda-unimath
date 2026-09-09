@@ -56,6 +56,26 @@ open import set-theory.projective-cardinals
 open import set-theory.strict-complemented-inequality-cardinals
 open import set-theory.strict-indexed-inequality-cardinals
 open import set-theory.strict-inequality-cardinals
+open import foundation.binary-transport
+open import foundation.complements-images
+open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
+open import foundation.function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.nonsurjective-maps
+open import foundation.projective-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
+
+open import set-theory.cardinality-projective-sets
+open import set-theory.cardinals
+open import set-theory.dependent-products-cardinals
+open import set-theory.dependent-sums-cardinals
+open import set-theory.strict-indexed-inequality-cardinals
 ```
 
 </details>
@@ -64,14 +84,14 @@ open import set-theory.strict-inequality-cardinals
 
 {{#concept "Kőnig's theorem" Disambiguation="for cardinals/set theory" WD="König's theorem" WDID=Q1077462 Agda=le-indexed-Σ-Π-Cardinal}}
 states that for any pair of families of [cardinals](set-theory.cardinals.md) $A$
-and $B$ over $I$, $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
+and $B$ over $I$, if $Aᵢ < Bᵢ$ for all $i$ then we have that $ΣᵢAᵢ < ΠᵢBᵢ$.
 
 In constructive mathematics we have to be more mindful of our statements than
-usual. Here $I$ is any [projective set](foundation.projective-types.md), and by
-$Aᵢ < Bᵢ$ we mean that $Bᵢ$ is [inhabited](foundation.inhabited-types.md) and
-that for every map $f : Aᵢ → Bᵢ$ there
-[exists](foundation.existential-quantification.md) an element of $Bᵢ$ that $f$
-does not hit.
+classically. Here $I$ is any [projective set](foundation.projective-types.md),
+and by $Aᵢ < Bᵢ$ we mean that $Bᵢ$ is
+[inhabited](set-theory.inhabited-cardinals.md) and that for every map
+$f : Aᵢ → Bᵢ$ there [exists](foundation.existential-quantification.md) an
+element of $Bᵢ$ that $f$ does not hit.
 
 ## Lemma
 

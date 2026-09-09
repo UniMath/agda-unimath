@@ -9,8 +9,10 @@ module set-theory.complemented-inequality-cardinals where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.mere-decidable-embeddings
@@ -41,7 +43,7 @@ a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
 isomorphism class of `Y`. In other words, if there is a
 [decidable embedding](foundation.decidable-embeddings.md) from the first to the
 second. This defines the
-{{#concept "complemented ordering" Disambiguation="on set-cardinals" Agda=large-preorder-complemented-Cardinal}}
+{{#concept "complemented ordering" Disambiguation="on cardinals" Agda=large-preorder-complemented-Cardinal}}
 on cardinals.
 
 Under the assumption of the

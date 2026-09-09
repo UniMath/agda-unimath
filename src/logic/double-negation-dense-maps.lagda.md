@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.connected-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
@@ -23,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -532,8 +534,10 @@ raise-prop-bool l false = raise-empty-Prop l
 
 is-injective-raise-prop-bool :
   {l : Level} → is-injective (raise-prop-bool l)
-is-injective-raise-prop-bool {l} {true} {true} p = refl
-is-injective-raise-prop-bool {l} {false} {false} p = refl
+is-injective-raise-prop-bool {l} {true} {true} p =
+  refl
+is-injective-raise-prop-bool {l} {false} {false} p =
+  refl
 is-injective-raise-prop-bool {l} {true} {false} p =
   raise-ex-falso l (tr type-Prop p raise-star)
 is-injective-raise-prop-bool {l} {false} {true} p =

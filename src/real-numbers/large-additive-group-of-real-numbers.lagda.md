@@ -42,21 +42,17 @@ The [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) form a
 ## Definition
 
 ```agda
-large-semigroup-add-ℝ : Large-Semigroup lsuc
+large-semigroup-add-ℝ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℝ =
   make-Large-Semigroup
-    ( ℝ-Set)
-    ( add-ℝ)
+    ( cumulative-large-set-ℝ)
+    ( sim-preserving-binary-operator-add-ℝ)
     ( associative-add-ℝ)
 
 large-monoid-add-ℝ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℝ =
   make-Large-Monoid
     ( large-semigroup-add-ℝ)
-    ( large-similarity-relation-sim-ℝ)
-    ( raise-ℝ)
-    ( sim-raise-ℝ)
-    ( λ a b a~b c d c~d → preserves-sim-add-ℝ a~b c~d)
     ( zero-ℝ)
     ( left-unit-law-add-ℝ)
     ( right-unit-law-add-ℝ)

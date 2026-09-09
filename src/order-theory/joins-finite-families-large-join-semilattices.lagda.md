@@ -24,8 +24,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.large-commutative-monoids
-open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-monoids
+open import group-theory.products-of-finite-families-of-elements-commutative-monoids
+open import group-theory.products-of-finite-sequences-of-elements-commutative-monoids
 
 open import lists.finite-sequences
 
@@ -60,14 +60,14 @@ module _
     {l : Level} (n : ℕ) → fin-sequence (type-Large-Join-Semilattice L l) n →
     type-Large-Join-Semilattice L l
   join-fin-sequence-type-Large-Join-Semilattice {l} =
-    sum-fin-sequence-type-Commutative-Monoid
+    product-fin-sequence-type-Commutative-Monoid
       ( commutative-monoid-Large-Join-Semilattice L l)
 
   join-counted-family-type-Large-Join-Semilattice :
     {l1 l2 : Level} (I : UU l1) → count I →
     (I → type-Large-Join-Semilattice L l2) → type-Large-Join-Semilattice L l2
   join-counted-family-type-Large-Join-Semilattice {l1} {l2} =
-    sum-count-Commutative-Monoid
+    product-count-Commutative-Monoid
       ( commutative-monoid-Large-Join-Semilattice L l2)
 
   join-finite-family-type-Large-Join-Semilattice :
@@ -75,7 +75,7 @@ module _
     (type-Finite-Type I → type-Large-Join-Semilattice L l2) →
     type-Large-Join-Semilattice L l2
   join-finite-family-type-Large-Join-Semilattice {l1} {l2} =
-    sum-finite-Commutative-Monoid
+    product-finite-Commutative-Monoid
       ( commutative-monoid-Large-Join-Semilattice L l2)
 ```
 
@@ -193,7 +193,7 @@ module _
       join-finite-family-type-Large-Join-Semilattice L I f ＝
       join-counted-family-type-Large-Join-Semilattice L _ cI f
     eq-join-finite-family-join-counted-family-type-Large-Join-Semilattice =
-      eq-sum-finite-sum-count-Commutative-Monoid
+      eq-product-finite-product-count-Commutative-Monoid
         ( commutative-monoid-Large-Join-Semilattice L l2)
         ( I)
         ( cI)

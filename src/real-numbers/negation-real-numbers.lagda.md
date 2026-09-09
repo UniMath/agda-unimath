@@ -20,6 +20,7 @@ open import foundation.disjunction
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.similarity-preserving-maps-cumulative-large-sets
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -166,6 +167,15 @@ abstract opaque
       ( transitive-sim-ℝ _ _ _
         ( sim-raise-ℝ l (neg-ℝ x))
         ( preserves-sim-neg-ℝ (sim-raise-ℝ' l x)))
+
+sim-preserving-endomap-neg-ℝ :
+  sim-preserving-endomap-Cumulative-Large-Set id cumulative-large-set-ℝ
+sim-preserving-endomap-neg-ℝ =
+  make-sim-preserving-endomap-Cumulative-Large-Set
+    ( id)
+    ( cumulative-large-set-ℝ)
+    ( neg-ℝ)
+    ( λ _ _ → preserves-sim-neg-ℝ)
 ```
 
 ### `x = -x` if and only if `x = 0`

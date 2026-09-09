@@ -10,6 +10,7 @@ module foundation.functoriality-cartesian-product-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalences-contractible-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 

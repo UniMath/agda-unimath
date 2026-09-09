@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-binary-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
