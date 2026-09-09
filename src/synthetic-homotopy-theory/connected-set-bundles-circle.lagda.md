@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.connected-set-bundles-circle where
 open import foundation.0-connected-types
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types

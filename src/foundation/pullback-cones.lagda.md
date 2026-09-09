@@ -7,37 +7,23 @@ module foundation.pullback-cones where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.cones-over-cospan-diagrams
 open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
-open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.multivariable-homotopies
 open import foundation.pullbacks
 open import foundation.standard-pullbacks
-open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.torsorial-type-families
-open import foundation-core.transport-along-identifications
 open import foundation-core.universal-property-pullbacks
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

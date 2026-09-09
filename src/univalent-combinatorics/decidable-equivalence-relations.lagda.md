@@ -15,6 +15,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-equivalence-relations
 open import foundation.decidable-relations
 open import foundation.decidable-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types

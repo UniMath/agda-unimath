@@ -9,6 +9,7 @@ module finite-algebra.homomorphisms-finite-rings where
 ```agda
 open import finite-algebra.finite-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions

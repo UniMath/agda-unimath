@@ -18,9 +18,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -36,7 +39,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
 open import foundation.torsorial-type-families
@@ -48,6 +50,8 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
@@ -641,47 +645,6 @@ compute-swap-Fin-2 (inr star) =
     ( neq-inr-inl)
 ```
 
-### The swapping equivalence is not the identity equivalence
-
-```agda
-module _
-  {l : Level} (X : 2-Element-Type l)
-  where
-
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
-    equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ≠ id-equiv
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
-    apply-universal-property-trunc-Prop
-      ( has-two-elements-type-2-Element-Type X)
-      ( empty-Prop)
-      ( λ f →
-        neq-inr-inl
-          ( is-injective-equiv f
-            ( htpy-eq-equiv (htpy-eq-equiv p' f) (zero-Fin 1))))
-
-  is-not-identity-swap-2-Element-Type : swap-2-Element-Type X ≠ id-equiv
-  is-not-identity-swap-2-Element-Type p =
-    is-not-identity-equiv-precomp-equiv-equiv-succ-Fin
-      ( ( ( inv (left-unit-law-equiv equiv1)) ∙
-          ( ap (λ x → x ∘e equiv1) (inv (left-inverse-law-equiv equiv2)))) ∙
-        ( ( inv
-            ( right-unit-law-equiv ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1))) ∙
-          ( ( ap
-              ( λ x → ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1) ∘e x)
-              ( inv (left-inverse-law-equiv equiv2))) ∙
-          ( ( ( eq-equiv-eq-map-equiv refl) ∙
-              ( ap (λ x → inv-equiv equiv2 ∘e (x ∘e equiv2)) p)) ∙
-            ( ( ap
-                ( λ x → inv-equiv equiv2 ∘e x)
-                ( left-unit-law-equiv equiv2)) ∙
-              ( left-inverse-law-equiv equiv2))))))
-    where
-    equiv1 : (Fin 2 ≃ type-2-Element-Type X) ≃ (Fin 2 ≃ type-2-Element-Type X)
-    equiv1 = equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X)
-    equiv2 : (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
-    equiv2 = equiv-ev-zero-equiv-Fin-2 X
-```
-
 ### The swapping equivalence has no fixpoints
 
 ```agda
@@ -690,71 +653,31 @@ module _
   where
 
   has-no-fixed-points-swap-2-Element-Type :
-    {x : type-2-Element-Type X} → map-equiv (swap-2-Element-Type X) x ≠ x
-  has-no-fixed-points-swap-2-Element-Type {x} P =
-    apply-universal-property-trunc-Prop
-      ( has-two-elements-type-2-Element-Type X)
-      ( empty-Prop)
-      ( λ h →
-        is-not-identity-swap-2-Element-Type X
-          (eq-htpy-equiv
-            (λ y →
-              f
-                ( inv-equiv h)
-                ( y)
-                ( map-inv-equiv h x)
-                ( map-inv-equiv h y)
-                ( map-inv-equiv h (map-equiv (swap-2-Element-Type X) y))
-                ( refl)
-                ( refl)
-                ( refl))))
+    {x : type-2-Element-Type X} → map-swap-2-Element-Type X x ≠ x
+  has-no-fixed-points-swap-2-Element-Type {x} eq = neq-inl-inr p
     where
-    f :
-      ( h : type-2-Element-Type X ≃ Fin 2)
-      ( y : type-2-Element-Type X) →
-      ( k1 k2 k3 : Fin 2) →
-        map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
-        map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
-        map-equiv (swap-2-Element-Type X) y ＝ y
-    f h y (inl (inr star)) (inl (inr star)) k3 p q r =
-      tr
-        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-equiv h (p ∙ inv q))
-        ( P)
-    f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
-      ex-falso
-        ( neq-inl-inr
-          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
-            ( ap
-              ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-equiv h (p ∙ inv r)) ∙
-              ( ( ap
-                  ( map-equiv h)
-                  ( is-involution-aut-2-element-type X
-                    ( swap-2-Element-Type X) y)) ∙
-                ( q))))))
-    f h y (inl (inr star)) (inr star) (inr star) p q r =
-      ( is-injective-equiv h (r ∙ inv q))
-    f h y (inr star) (inl (inr star)) (inl (inr star)) p q r =
-      ( is-injective-equiv h (r ∙ inv q))
-    f h y (inr star) (inl (inr star)) (inr star) p q r =
-      ex-falso
-        ( neq-inr-inl
-          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
-            ( ap
-              ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( is-injective-equiv h (p ∙ inv r)) ∙
-              ( ( ap
-                  ( map-equiv h)
-                  ( is-involution-aut-2-element-type X
-                    ( swap-2-Element-Type X)
-                    ( y))) ∙
-                ( q))))))
-    f h y (inr star) (inr star) k3 p q r =
-      tr
-        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
-        ( is-injective-equiv h (p ∙ inv q))
-        ( P)
+    p : zero-Fin 1 ＝ one-Fin 1
+    p =
+      is-injective-equiv
+        ( equiv-point-2-Element-Type X x)
+        ( compute-map-equiv-point-2-Element-Type X x ∙ inv eq)
+```
+
+### The swapping equivalence is not the identity equivalence
+
+```agda
+module _
+  {l : Level} (X : 2-Element-Type l)
+  where
+
+  is-not-identity-swap-2-Element-Type : swap-2-Element-Type X ≠ id-equiv
+  is-not-identity-swap-2-Element-Type p =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-2-Element-Type X)
+      ( empty-Prop)
+      ( λ x →
+        has-no-fixed-points-swap-2-Element-Type X
+          ( ap (λ f → map-equiv f x) p))
 ```
 
 ### Evaluating an automorphism at `0 : Fin 2` is a group homomorphism

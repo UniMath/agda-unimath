@@ -150,38 +150,59 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   (u : cauchy-approximation-Metric-Space M)
   (x : type-Metric-Space M)
-  where
+  where abstract
 
-  abstract
-    sim-const-is-limit-cauchy-approximation-Metric-Space :
-      is-limit-cauchy-approximation-Metric-Space M u x →
-      sim-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        ( u)
-        ( const-cauchy-approximation-Metric-Space M x)
-    sim-const-is-limit-cauchy-approximation-Metric-Space H d α β =
-      monotonic-neighborhood-Metric-Space
-        ( M)
-        ( map-cauchy-approximation-Metric-Space M u α)
-        ( x)
-        ( α +ℚ⁺ β)
-        ( α +ℚ⁺ β +ℚ⁺ d)
-        ( le-left-add-ℚ⁺ (α +ℚ⁺ β) d)
-        ( H α β)
+  sim-const-is-limit-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space M u x →
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( u)
+      ( const-cauchy-approximation-Metric-Space M x)
+  sim-const-is-limit-cauchy-approximation-Metric-Space H d α β =
+    monotonic-neighborhood-Metric-Space
+      ( M)
+      ( map-cauchy-approximation-Metric-Space M u α)
+      ( x)
+      ( α +ℚ⁺ β)
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( le-left-add-ℚ⁺ (α +ℚ⁺ β) d)
+      ( H α β)
 
-    is-limit-sim-const-cauchy-approximation-Metric-Space :
-      sim-Pseudometric-Space
-        ( cauchy-pseudocompletion-Metric-Space M)
-        ( u)
-        ( const-cauchy-approximation-Metric-Space M x) →
-      is-limit-cauchy-approximation-Metric-Space M u x
-    is-limit-sim-const-cauchy-approximation-Metric-Space H α β =
-      saturated-neighborhood-Metric-Space
-        ( M)
-        ( α +ℚ⁺ β)
-        ( map-cauchy-approximation-Metric-Space M u α)
-        ( x)
-        ( λ d → H d α β)
+  is-limit-sim-const-cauchy-approximation-Metric-Space :
+    sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( u)
+      ( const-cauchy-approximation-Metric-Space M x) →
+    is-limit-cauchy-approximation-Metric-Space M u x
+  is-limit-sim-const-cauchy-approximation-Metric-Space H α β =
+    saturated-neighborhood-Metric-Space
+      ( M)
+      ( α +ℚ⁺ β)
+      ( map-cauchy-approximation-Metric-Space M u α)
+      ( x)
+      ( λ d → H d α β)
+```
+
+### Homotopic Cauchy approximations have the same limits
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f g : cauchy-approximation-Metric-Space A)
+  (x : type-Metric-Space A)
+  (f~g : htpy-map-cauchy-approximation-Metric-Space A f g)
+  where abstract
+
+  is-limit-htpy-map-cauchy-approximation-Metric-Space :
+    is-limit-cauchy-approximation-Metric-Space A f x →
+    is-limit-cauchy-approximation-Metric-Space A g x
+  is-limit-htpy-map-cauchy-approximation-Metric-Space =
+    is-limit-htpy-map-cauchy-approximation-Pseudometric-Space
+      ( pseudometric-Metric-Space A)
+      ( f)
+      ( g)
+      ( x)
+      ( f~g)
 ```
 
 ## See also

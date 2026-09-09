@@ -15,6 +15,8 @@ open import foundation.cartesian-product-types
 open import foundation.constant-type-families
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -25,12 +27,15 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-booleans
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 ```
 
 </details>

@@ -21,7 +21,7 @@ The theorems are ordered alphabetically, omitting leading definite articles
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import analysis.absolute-convergence-series-real-numbers using
+open import real-analysis.absolute-convergence-series-real-numbers using
   ( is-convergent-is-absolutely-convergent-series-ℝ)
 open import functional-analysis.absolute-convergence-series-real-banach-spaces using
   ( is-convergent-is-absolutely-convergent-series-ℝ-Banach-Space)
@@ -152,9 +152,9 @@ open import group-theory.quotient-groups using
 **Author:** [Louis Wasserman](https://github.com/lowasser)
 
 ```agda
-open import analysis.intermediate-value-theorem using
+open import real-analysis.intermediate-value-theorem using
   ( intermediate-value-theorem-ℝ)
-open import analysis.constructive-intermediate-value-theorem using
+open import real-analysis.constructive-intermediate-value-theorem using
   ( constructive-intermediate-value-theorem-ℝ)
 ```
 
@@ -190,14 +190,41 @@ open import foundation.lawveres-fixed-point-theorem using
   ( fixed-point-theorem-Lawvere)
 ```
 
+### Linear congruence theorem {#Q524257}
+
+**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+
+```agda
+open import elementary-number-theory.linear-congruence-theorem-integers using
+  ( linear-congruence-theorem-ℤ)
+```
+
 ### Monotone convergence theorem {#Q4454933}
 
 **Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
 
 ```agda
-open import analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
+open import real-analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
   ( is-limit-is-modulated-supremum-is-increasing-sequence-ℝ ;
     is-limit-is-supremum-is-increasing-sequence-ACℕ-ℝ)
+```
+
+### Pythagorean theorem {#Q11518}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import linear-algebra.orthogonality-real-inner-product-spaces using
+  ( pythagorean-theorem-ℝ-Inner-Product-Space)
+```
+
+### Squeeze theorem {#Q1065257}
+
+**Author:** [Louis Wasserman](https://github.com/lowasser)
+
+```agda
+open import real-numbers.cauchy-sequences-real-numbers using
+  ( is-cauchy-squeeze-theorem-sequence-ℝ)
 ```
 
 ### Triangle inequality theorem {#Q208216}
@@ -216,15 +243,6 @@ open import real-numbers.absolute-value-real-numbers using
   ( triangle-inequality-abs-ℝ)
 open import real-numbers.distance-real-numbers using
   ( triangle-inequality-dist-ℝ)
-```
-
-### Pythagorean theorem {#Q11518}
-
-**Author:** [Louis Wasserman](https://github.com/lowasser)
-
-```agda
-open import linear-algebra.orthogonality-real-inner-product-spaces using
-  ( pythagorean-theorem-ℝ-Inner-Product-Space)
 ```
 
 ### Uniform limit theorem {#Q7885107}

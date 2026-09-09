@@ -9,6 +9,7 @@ module graph-theory.discrete-directed-graphs where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.discrete-binary-relations
 open import foundation.empty-types
 open import foundation.equivalences
