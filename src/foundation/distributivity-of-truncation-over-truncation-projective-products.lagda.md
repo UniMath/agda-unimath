@@ -31,12 +31,12 @@ open import foundation.universe-levels
 
 For a $k$-[projective](foundation.truncation-projective-types.md) type $X$,
 [postcomposition](foundation.postcomposition-functions.md) by the unit map into
-$(k-1)$-[truncation](foundation.truncations.md) is
+the $(k-1)$-[truncation](foundation.truncations.md) is
 [surjective](foundation.surjective-maps.md), and therefore the induced
 distributivity map
 
 $$
-  ║ (x : X) → A x ║_{k-1} → ((x : X) → ║ A x ║_{k-1})
+  ║ (x : X) → A(x) ║_{k-1} → ((x : X) → ║ A(x) ║_{k-1})
 $$
 
 is surjective.

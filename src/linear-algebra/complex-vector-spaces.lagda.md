@@ -15,6 +15,7 @@ open import complex-numbers.raising-universe-levels-complex-numbers
 
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -22,6 +23,7 @@ open import group-theory.abelian-groups
 open import linear-algebra.real-vector-spaces
 open import linear-algebra.vector-spaces
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.field-of-real-numbers
 ```
 
@@ -64,11 +66,18 @@ module _
   zero-ℂ-Vector-Space : type-ℂ-Vector-Space
   zero-ℂ-Vector-Space = zero-Ab ab-ℂ-Vector-Space
 
+  is-zero-prop-ℂ-Vector-Space : subtype l2 type-ℂ-Vector-Space
+  is-zero-prop-ℂ-Vector-Space = is-zero-prop-Ab ab-ℂ-Vector-Space
+
   neg-ℂ-Vector-Space : type-ℂ-Vector-Space → type-ℂ-Vector-Space
   neg-ℂ-Vector-Space = neg-Ab ab-ℂ-Vector-Space
 
   mul-ℂ-Vector-Space : ℂ l1 → type-ℂ-Vector-Space → type-ℂ-Vector-Space
   mul-ℂ-Vector-Space = mul-Vector-Space (heyting-field-ℂ l1) V
+
+  mul-real-ℂ-Vector-Space : ℝ l1 → type-ℂ-Vector-Space → type-ℂ-Vector-Space
+  mul-real-ℂ-Vector-Space x =
+    mul-ℂ-Vector-Space (complex-ℝ x)
 
   associative-add-ℂ-Vector-Space :
     (v w x : type-ℂ-Vector-Space) →

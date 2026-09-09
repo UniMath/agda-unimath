@@ -14,6 +14,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.homotopies
@@ -41,7 +42,7 @@ products on [projective](foundation.projective-types.md) types $X$. The
 distributive map
 
 $$
-  ║ (x : X) → A x ║₀ → ((x : X) → ║ A x ║₀)
+  ║ (x : X) → A(x) ║₀ → ((x : X) → ║ A(x) ║₀)
 $$
 
 is an [equivalence](foundation-core.equivalences.md)

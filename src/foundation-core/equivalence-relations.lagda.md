@@ -13,6 +13,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels

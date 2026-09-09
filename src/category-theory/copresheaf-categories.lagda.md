@@ -24,18 +24,22 @@ open import category-theory.terminal-objects-precategories
 open import foundation.category-of-sets
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 ```
 
 </details>

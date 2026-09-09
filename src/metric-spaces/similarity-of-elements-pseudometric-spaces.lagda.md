@@ -14,6 +14,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.function-types
 open import foundation.identity-types
@@ -63,6 +64,10 @@ module _
     Relation l2 (type-Pseudometric-Space A)
   sim-Pseudometric-Space =
     type-Relation-Prop sim-prop-Pseudometric-Space
+
+  sim-Pseudometric-Space' :
+    Relation l2 (type-Pseudometric-Space A)
+  sim-Pseudometric-Space' x y = sim-Pseudometric-Space y x
 
   is-prop-sim-Pseudometric-Space :
     (x y : type-Pseudometric-Space A) →
