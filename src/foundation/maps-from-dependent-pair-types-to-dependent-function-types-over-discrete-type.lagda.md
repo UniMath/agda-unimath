@@ -12,10 +12,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.complements-images
 open import foundation.coproduct-types
+open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -25,18 +27,26 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.mere-decidable-embeddings
+open import foundation.mere-embeddings
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.nonsurjective-maps
+open import foundation.projective-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
-open import foundation.types-with-decidable-dependent-pair-types
+open import foundation.types-with-decidable-existential-quantifications
 open import foundation.universe-levels
+
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -143,7 +153,7 @@ module _
         ( is-injective-map-injection ∘ f))
 ```
 
-### If `f i` has a retraction then `A i` is a retract of `(i : I') → B i`
+### If `fᵢ` has a retraction then `Aᵢ` is a retract of `(i : I) → Bᵢ`
 
 ```agda
 module _
@@ -159,32 +169,29 @@ module _
   map-at-Π-nonim i a = map-Σ-Π-nonim I f b (i , a)
 
   map-retraction-map-at-Π-nonim :
-    (r : (i : I') → retraction (f i)) →
-    (i : I') → ((i : I') → B i) → A i
-  map-retraction-map-at-Π-nonim r i =
-    map-retraction (f i) (r i) ∘ ev-point i
+    (i : I') (r : retraction (f i)) → ((i : I') → B i) → A i
+  map-retraction-map-at-Π-nonim i r =
+    map-retraction (f i) r ∘ ev-point i
 
   is-retraction-map-retraction-map-at-Π-nonim :
-    (r : (i : I') → retraction (f i)) (i : I') →
-    is-retraction (map-at-Π-nonim i) (map-retraction-map-at-Π-nonim r i)
-  is-retraction-map-retraction-map-at-Π-nonim r i a =
+    (i : I') (r : retraction (f i)) →
+    is-retraction (map-at-Π-nonim i) (map-retraction-map-at-Π-nonim i r)
+  is-retraction-map-retraction-map-at-Π-nonim i r a =
     ( ap
-      ( map-retraction (f i) (r i))
+      ( map-retraction (f i) r)
       ( compute-diagonal-map-Σ-Π-nonim I f b i a)) ∙
-    ( is-retraction-map-retraction (f i) (r i) a)
+    ( is-retraction-map-retraction (f i) r a)
 
   retraction-map-at-Π-nonim :
-    (r : (i : I') → retraction (f i)) →
-    (i : I') → retraction (map-at-Π-nonim i)
-  retraction-map-at-Π-nonim r i =
-    ( map-retraction-map-at-Π-nonim r i ,
-      is-retraction-map-retraction-map-at-Π-nonim r i)
+    (i : I') (r : retraction (f i)) → retraction (map-at-Π-nonim i)
+  retraction-map-at-Π-nonim i r =
+    ( map-retraction-map-at-Π-nonim i r ,
+      is-retraction-map-retraction-map-at-Π-nonim i r)
 
   retract-at-Π-nonim :
-    (r : (i : I') → retraction (f i)) →
-    (i : I') → A i retract-of ((i : I') → B i)
-  retract-at-Π-nonim r i =
-    ( map-at-Π-nonim i , retraction-map-at-Π-nonim r i)
+    (i : I') (r : retraction (f i)) → A i retract-of ((i : I') → B i)
+  retract-at-Π-nonim i r =
+    ( map-at-Π-nonim i , retraction-map-at-Π-nonim i r)
 ```
 
 ### If `Bᵢ` is a set and `fᵢ` is an injection then the induced map from `Σ I A` to `Π I B` is an embedding
@@ -196,26 +203,164 @@ module _
   (let I' = type-Discrete-Type I)
   where
 
-  emb-Σ-Π-nonim-Set' :
+  emb-Σ-Π-nonim-Set :
     {A : I' → UU l2} (B : I' → Set l3) →
     (f : (i : I') → injection (A i) (type-Set (B i))) →
     (b : (i : I') → nonim (map-injection (f i))) →
     Σ I' A ↪ ((i : I') → type-Set (B i))
-  emb-Σ-Π-nonim-Set' B f b =
+  emb-Σ-Π-nonim-Set B f b =
     emb-injection (Π-Set (set-Discrete-Type I) B) (injection-Σ-Π-nonim I f b)
-
-  emb-Σ-Π-nonim-Set :
-    (A : I' → Set l2) (B : I' → Set l3) →
-    (f : (i : I') → type-Set (A i) ↪ type-Set (B i)) →
-    (b : (i : I') → nonim (pr1 (f i))) →
-    Σ I' (type-Set ∘ A) ↪ ((i : I') → type-Set (B i))
-  emb-Σ-Π-nonim-Set A B f = emb-Σ-Π-nonim-Set' B (injection-emb ∘ f)
 ```
 
-### Decidability of the induced map from `Σ I A` to `Π I B`
+### A description of the fibers of the induced map
 
-When `I` has decidable sums, each `Bᵢ` is discrete, and `f` is a decidable map,
-then the induced map from `Σ I A` to `Π I B` is also decidable.
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  {A : I' → UU l2} {B : I' → UU l3}
+  (f : (i : I') → A i → B i)
+  (b : (i : I') → nonim (f i))
+  (g : (i : I') → B i)
+  (let b' = pr1 ∘ b)
+  where
+
+  off-diagonal-Σ-Π-nonim : I' → UU (l1 ⊔ l3)
+  off-diagonal-Σ-Π-nonim i = (j : I') → j ≠ i → g j ＝ b' j
+
+  fiber-at-Σ-Π-nonim : I' → UU (l1 ⊔ l2 ⊔ l3)
+  fiber-at-Σ-Π-nonim i = fiber (f i) (g i) × off-diagonal-Σ-Π-nonim i
+
+  fiber-description-Σ-Π-nonim :
+    (i : I') → fiber-at-Σ-Π-nonim i → fiber (map-Σ-Π-nonim I f b) g
+  fiber-description-Σ-Π-nonim i ((a , p) , q) =
+    ( (i , a) ,
+      eq-htpy
+        ( λ j →
+          ind-coproduct
+            ( λ s → rec-coproduct (λ r → tr B r (f i a)) (λ _ → b' j) s ＝ g j)
+            ( λ r → ap (tr B r) p ∙ apd g r)
+            ( λ neq → inv (q j (λ r → neq (inv r))))
+            ( has-decidable-equality-type-Discrete-Type I i j)))
+```
+
+### Decidability of the off-diagonal condition
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  {A : I' → UU l2} {B : I' → UU l3}
+  (f : (i : I') → A i → B i)
+  (b : (i : I') → nonim (f i))
+  (g : (i : I') → B i)
+  (let b' = pr1 ∘ b)
+  where
+
+  is-decidable-off-diagonal-Σ-Π-nonim :
+    has-decidable-∃-bool I' →
+    ((i : I') → has-decidable-equality (B i)) →
+    (i : I') → is-decidable (off-diagonal-Σ-Π-nonim I f b g i)
+  is-decidable-off-diagonal-Σ-Π-nonim hI dB i =
+    rec-coproduct
+      ( inr ∘ rec-trunc-Prop
+        ( neg-type-Prop (off-diagonal-Σ-Π-nonim I f b g i))
+        ( λ (j , (neq , neqb)) q → neqb (q j neq)))
+      ( λ nc →
+        inl
+          ( λ j neq →
+            rec-coproduct
+              ( λ p → p)
+              ( λ np → ex-falso (nc (unit-trunc-Prop (j , (neq , np)))))
+              ( dB j (g j) (b' j))))
+      ( has-decidable-∃-has-decidable-∃-bool hI
+        ( (λ j → (j ≠ i) × (g j ≠ b' j)) ,
+          ( λ j →
+            is-decidable-product
+              ( is-decidable-neg
+                ( has-decidable-equality-type-Discrete-Type I j i))
+              ( is-decidable-neg (dB j (g j) (b' j))))))
+```
+
+### The active coordinate of a fiber is unique
+
+A preimage determines a unique coordinate: at this coordinate its value lies in
+an image of `f`, while at every other coordinate it equals the specified point
+outside that image. The coordinate, its mere fiber, and the off-diagonal
+condition therefore form a proposition.
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  {A : I' → UU l2} {B : I' → UU l3}
+  (f : (i : I') → A i → B i)
+  (b : (i : I') → nonim (f i))
+  (g : (i : I') → B i)
+  (dB : (i : I') → has-decidable-equality (B i))
+  where
+
+  candidate-fiber-at-Σ-Π-nonim-Prop : I' → Prop (l1 ⊔ l2 ⊔ l3)
+  candidate-fiber-at-Σ-Π-nonim-Prop i =
+    product-Prop
+      ( trunc-Prop (fiber (f i) (g i)))
+      ( Π-Prop I'
+        ( λ j →
+          function-Prop
+            ( j ≠ i)
+            ( g j ＝ pr1 (b j) ,
+              is-set-has-decidable-equality (dB j) (g j) (pr1 (b j)))))
+
+  candidate-fiber-Σ-Π-nonim : UU (l1 ⊔ l2 ⊔ l3)
+  candidate-fiber-Σ-Π-nonim =
+    type-subtype candidate-fiber-at-Σ-Π-nonim-Prop
+
+  is-prop-candidate-fiber-Σ-Π-nonim : is-prop candidate-fiber-Σ-Π-nonim
+  is-prop-candidate-fiber-Σ-Π-nonim =
+    is-prop-all-elements-equal
+      ( λ (i , (p , q)) (j , (p' , q')) →
+        eq-type-subtype candidate-fiber-at-Σ-Π-nonim-Prop
+          ( rec-coproduct
+            ( id)
+            ( λ neq →
+              ex-falso
+                ( rec-trunc-Prop empty-Prop
+                  ( λ (a , r) → pr2 (b i) (a , r ∙ q' i neq))
+                  ( p)))
+            ( has-decidable-equality-type-Discrete-Type I i j)))
+
+  candidate-fiber-Σ-Π-nonim-Prop : Prop (l1 ⊔ l2 ⊔ l3)
+  candidate-fiber-Σ-Π-nonim-Prop =
+    ( candidate-fiber-Σ-Π-nonim , is-prop-candidate-fiber-Σ-Π-nonim)
+
+  candidate-of-fiber-Σ-Π-nonim :
+    fiber (map-Σ-Π-nonim I f b) g → candidate-fiber-Σ-Π-nonim
+  candidate-of-fiber-Σ-Π-nonim ((i , a) , p) =
+    ( i ,
+      unit-trunc-Prop
+        ( a , inv (compute-diagonal-map-Σ-Π-nonim I f b i a) ∙ ap (ev i) p) ,
+      ( λ j neq →
+        inv (ap (ev j) p) ∙
+        compute-distinct-map-Σ-Π-nonim I f b (λ q → neq (inv q)) a))
+
+  fiber-candidate-Σ-Π-nonim :
+    ((i : I') → is-decidable-map (f i)) →
+    candidate-fiber-Σ-Π-nonim → fiber (map-Σ-Π-nonim I f b) g
+  fiber-candidate-Σ-Π-nonim dF (i , (p , q)) =
+    rec-coproduct
+      ( λ t → fiber-description-Σ-Π-nonim I f b g i (t , q))
+      ( λ nf → ex-falso (rec-trunc-Prop empty-Prop nf p))
+      ( dF i (g i))
+```
+
+### Decidability of the induced map
+
+Decidable existential quantifications on `I` suffice. The unique active
+coordinate can be recovered from mere existence, and the decision of the
+corresponding fiber of `f` supplies a preimage.
 
 ```agda
 module _
@@ -226,7 +371,7 @@ module _
   where
 
   is-decidable-map-Σ-Π-nonim :
-    has-decidable-Σ I' →
+    has-decidable-∃-bool I' →
     ((i : I') → has-decidable-equality (B i)) →
     (f : (i : I') → A i → B i)
     (b : (i : I') → nonim (f i)) →
@@ -234,64 +379,100 @@ module _
     is-decidable-map (map-Σ-Π-nonim I f b)
   is-decidable-map-Σ-Π-nonim hI dB f b dF g =
     map-coproduct
-      ( λ (i , p) → fromP i p)
-      ( λ noP t → noP (toP t))
-      ( hI (P , decP))
-    where
-      b' : (i : I') → B i
-      b' = pr1 ∘ b
+      ( fiber-candidate-Σ-Π-nonim I f b g dB dF ∘
+        rec-trunc-Prop (candidate-fiber-Σ-Π-nonim-Prop I f b g dB) id)
+      ( λ nc → nc ∘ unit-trunc-Prop ∘ candidate-of-fiber-Σ-Π-nonim I f b g dB)
+      ( has-decidable-∃-has-decidable-∃-bool hI
+        ( ( λ i → type-Prop (candidate-fiber-at-Σ-Π-nonim-Prop I f b g dB i)) ,
+          ( λ i →
+            is-decidable-product
+              ( is-decidable-trunc-Prop-is-decidable (dF i (g i)))
+              ( is-decidable-off-diagonal-Σ-Π-nonim I f b g hI dB i))))
+```
 
-      Q : I' → UU (l1 ⊔ l3)
-      Q i = (j : I') → j ≠ i → g j ＝ b' j
+### Families of nonsurjective mere embeddings over projective types
 
-      is-decidable-Q : (i : I') → is-decidable (Q i)
-      is-decidable-Q i =
-        rec-coproduct
-          ( λ (j , (neq , neqb)) → inr (λ q → neqb (q j neq)))
-          ( λ no-counter →
-              inl
-                ( λ j neq →
-                  rec-coproduct
-                    ( λ p → p)
-                    ( λ np →
-                      ex-falso (no-counter (j , (neq , np))))
-                    ( dB j (g j) (b' j))))
-          ( hI
-            ( (λ j → (j ≠ i) × (g j ≠ b' j)) ,
-              ( λ j →
-                is-decidable-product
-                  ( is-decidable-neg
-                    ( has-decidable-equality-type-Discrete-Type I j i))
-                  ( is-decidable-neg (dB j (g j) (b' j))))))
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  (is-projective-I : is-projective-Level (l2 ⊔ l3) I')
+  (A : I' → UU l2) (B : I' → Set l3)
+  where
 
-      P : I' → UU (l1 ⊔ l2 ⊔ l3)
-      P i = fiber (f i) (g i) × Q i
+  mere-emb-Σ-Π-is-projective :
+    ((i : I') → mere-emb (A i) (type-Set (B i))) →
+    ((i : I') (e : A i ↪ type-Set (B i)) → is-nonsurjective (map-emb e)) →
+    mere-emb (Σ I' A) ((i : I') → type-Set (B i))
+  mere-emb-Σ-Π-is-projective E H =
+    map-trunc-Prop
+      ( λ h → emb-Σ-Π-nonim-Set I B (λ i → injection-emb (pr1 (h i))) (pr2 ∘ h))
+      ( is-projective-I
+        ( λ i → Σ (A i ↪ type-Set (B i)) (λ e → nonim (map-emb e)))
+        ( λ i →
+          rec-trunc-Prop
+            ( trunc-Prop (Σ (A i ↪ type-Set (B i)) (λ e → nonim (map-emb e))))
+            ( λ e → map-trunc-Prop (pair e) (H i e))
+            ( E i)))
+```
 
-      decP : (i : I') → is-decidable (P i)
-      decP i = is-decidable-product (dF i (g i)) (is-decidable-Q i)
+### The induced decidable embedding
 
-      toP : fiber (map-Σ-Π-nonim I f b) g → Σ I' P
-      toP ((i , a) , p) =
-        ( i ,
-          ( ( a ,
-              ( inv
-                ( compute-diagonal-map-Σ-Π-nonim I f b i a) ∙
-                ( ap (ev i) p))) ,
-            ( λ j neq →
-              ( inv (ap (ev j) p)) ∙
-              ( compute-distinct-map-Σ-Π-nonim I f b (λ q → neq (inv q)) a))))
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  (decidable-∃-I : has-decidable-∃-bool I')
+  {A : I' → UU l2} {B : I' → UU l3}
+  (dB : (i : I') → has-decidable-equality (B i))
+  where
 
-      fromP : (i : I') → P i → fiber (map-Σ-Π-nonim I f b) g
-      fromP i ((a , p) , q) =
-        ( (i , a) ,
-          eq-htpy
-            ( λ j →
-              ind-coproduct
-                ( λ s →
-                  rec-coproduct (λ r → tr B r (f i a)) (λ _ → b' j) s ＝ g j)
-                ( λ r → ap (tr B r) p ∙ apd g r)
-                ( λ neq → inv (q j (λ r → neq (inv r))))
-                ( has-decidable-equality-type-Discrete-Type I i j)))
+  decidable-emb-Σ-Π-nonim :
+    (e : (i : I') → A i ↪ᵈ B i) →
+    ((i : I') → nonim (map-decidable-emb (e i))) →
+    Σ I' A ↪ᵈ ((i : I') → B i)
+  decidable-emb-Σ-Π-nonim e b =
+    ( map-Σ-Π-nonim I (map-decidable-emb ∘ e) b ,
+      ( is-emb-map-emb
+          ( emb-Σ-Π-nonim-Set I
+            ( λ i → (B i , is-set-has-decidable-equality (dB i)))
+            ( injection-emb ∘ emb-decidable-emb ∘ e)
+            ( b)) ,
+        is-decidable-map-Σ-Π-nonim I decidable-∃-I dB
+          ( map-decidable-emb ∘ e) b
+          ( is-decidable-map-map-decidable-emb ∘ e)))
+```
+
+### Families of nonsurjective mere decidable embeddings over projective types
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (I : Discrete-Type l1)
+  (let I' = type-Discrete-Type I)
+  (is-projective-I : is-projective-Level (l2 ⊔ l3) I')
+  (decidable-∃-I : has-decidable-∃-bool I')
+  (A : I' → UU l2) (B : I' → UU l3)
+  (dB : (i : I') → has-decidable-equality (B i))
+  where
+
+  mere-decidable-emb-Σ-Π-is-projective :
+    ((i : I') → mere-decidable-emb (A i) (B i)) →
+    ( (i : I') (e : A i ↪ᵈ B i) →
+      is-nonsurjective (map-decidable-emb e)) →
+    mere-decidable-emb (Σ I' A) ((i : I') → B i)
+  mere-decidable-emb-Σ-Π-is-projective E H =
+    map-trunc-Prop
+      ( λ h → decidable-emb-Σ-Π-nonim I decidable-∃-I dB (pr1 ∘ h) (pr2 ∘ h))
+      ( is-projective-I
+        ( λ i → Σ (A i ↪ᵈ B i) (λ e → nonim (map-decidable-emb e)))
+        ( λ i →
+          rec-trunc-Prop
+            ( trunc-Prop (Σ (A i ↪ᵈ B i) (λ e → nonim (map-decidable-emb e))))
+            ( λ e → map-trunc-Prop (pair e) (H i e))
+            ( E i)))
 ```
 
 ## See also
