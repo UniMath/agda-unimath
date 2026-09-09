@@ -52,8 +52,8 @@ open import univalent-combinatorics.standard-finite-types
 A type `X`
 {{#concept "has decidable Σ-types" Disambiguation="on type" Agda=has-decidable-Σ}}
 if for every [decidable type family](foundation.decidable-type-families.md) `P`,
-we can construct an element in some fiber of `P` or determine that `P` is the
-empty family. In other words, we have a witness of type
+we can either construct an element in some fiber of `P`, or determine that `P`
+is the empty family. In other words, we have a witness of type
 
 ```text
   (P : decidable-family X) → is-decidable (Σ x. P x).
