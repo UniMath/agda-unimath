@@ -39,8 +39,10 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 
 open import logic.de-morgan-maps
+open import logic.propositional-double-negation-elimination
 open import logic.propositionally-decidable-maps
 open import logic.propositionally-decidable-types
+open import logic.propositionally-double-negation-eliminating-maps
 ```
 
 </details>
@@ -200,7 +202,7 @@ module _
     map-trunc-Prop ∘ nonim-comp-is-injective-left
 ```
 
-### Propositionally decidable and not nonsurjective maps are surjective
+### Propositionally double negation eliminating and not nonsurjective maps are surjective
 
 ```agda
 module _
@@ -208,15 +210,18 @@ module _
   {A : UU l1} {B : UU l2} {f : A → B}
   where abstract
 
-  is-surjective-not-nonim-is-inhabited-or-empty-map :
-    is-inhabited-or-empty-map f → ¬ nonim f → is-surjective f
-  is-surjective-not-nonim-is-inhabited-or-empty-map H nn b =
-    rec-coproduct id (λ nf → ex-falso (nn (b , nf))) (H b)
+  is-surjective-not-nonim-is-prop-double-negation-eliminating-map :
+    is-prop-double-negation-eliminating-map f → ¬ nonim f → is-surjective f
+  is-surjective-not-nonim-is-prop-double-negation-eliminating-map H nn b =
+    H b (λ nf → nn (b , nf))
 
-  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map :
-    is-inhabited-or-empty-map f → ¬ is-nonsurjective f → is-surjective f
-  is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map H K =
-    is-surjective-not-nonim-is-inhabited-or-empty-map H (K ∘ unit-trunc-Prop)
+  is-surjective-is-not-nonsurjective-is-prop-double-negation-eliminating-map :
+    is-prop-double-negation-eliminating-map f →
+    ¬ is-nonsurjective f → is-surjective f
+  is-surjective-is-not-nonsurjective-is-prop-double-negation-eliminating-map
+    H K =
+    is-surjective-not-nonim-is-prop-double-negation-eliminating-map
+      H (K ∘ unit-trunc-Prop)
 ```
 
 ### If the domain has decidable existential quantification and the codomain is discrete, then the map is surjective if it is not nonsurjective
@@ -232,8 +237,9 @@ module _
     has-decidable-equality B →
     ¬ nonim f → is-surjective f
   is-surjective-not-nonim-has-decidable-∃ h d =
-    is-surjective-not-nonim-is-inhabited-or-empty-map
-      ( is-inhabited-or-empty-map-has-decidable-∃-Level h d f)
+    is-surjective-not-nonim-is-prop-double-negation-eliminating-map
+      ( is-prop-double-negation-eliminating-map-is-inhabited-or-empty-map
+        ( is-inhabited-or-empty-map-has-decidable-∃-Level h d f))
 ```
 
 ### If the codomain has decidable sums and `f` is propositionally decidable, then if `f` is not surjective it is nonsurjective
@@ -262,19 +268,26 @@ decidable.
       ( is-de-morgan-map-is-inhabited-or-empty-map
         ( is-inhabited-or-empty-map-has-decidable-∃-Level hA d f))
 
+  is-nonsurjective-is-not-surjective-is-prop-double-negation-eliminating-map :
+    has-prop-double-negation-elim (nonim f) →
+    is-prop-double-negation-eliminating-map f →
+    ¬ is-surjective f → is-nonsurjective f
+  is-nonsurjective-is-not-surjective-is-prop-double-negation-eliminating-map
+    h Hf H =
+    h (H ∘ is-surjective-not-nonim-is-prop-double-negation-eliminating-map Hf)
+
   is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃ :
     has-decidable-∃-Level (l1 ⊔ l2) B →
     is-inhabited-or-empty-map f →
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-is-inhabited-or-empty-map-has-decidable-∃
-    h Hf H =
-    rec-coproduct
-      ( id)
-      ( ex-falso ∘
-        H ∘
-        is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map Hf)
-      ( is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ h
-        ( is-de-morgan-map-is-inhabited-or-empty-map Hf))
+    h Hf =
+    is-nonsurjective-is-not-surjective-is-prop-double-negation-eliminating-map
+      ( prop-double-negation-elim-is-inhabited-or-empty
+        ( is-inhabited-or-empty-is-decidable-trunc-Prop
+          ( is-decidable-is-nonsurjective-is-de-morgan-map-has-decidable-∃ h
+            ( is-de-morgan-map-is-inhabited-or-empty-map Hf))))
+      ( is-prop-double-negation-eliminating-map-is-inhabited-or-empty-map Hf)
 
   is-nonsurjective-is-not-surjective-has-decidable-∃-Level :
     has-decidable-∃-Level (l1 ⊔ l2) B →
@@ -300,10 +313,11 @@ module _
   is-surjective-is-not-nonsurjective-LEM :
     ¬ is-nonsurjective f → is-surjective f
   is-surjective-is-not-nonsurjective-LEM =
-    is-surjective-is-not-nonsurjective-is-inhabited-or-empty-map
+    is-surjective-is-not-nonsurjective-is-prop-double-negation-eliminating-map
       ( λ y →
-        is-inhabited-or-empty-is-decidable-trunc-Prop
-          ( lem (trunc-Prop (fiber f y))))
+        prop-double-negation-elim-is-inhabited-or-empty
+          ( is-inhabited-or-empty-is-decidable-trunc-Prop
+            ( lem (trunc-Prop (fiber f y)))))
 
   is-nonsurjective-is-not-surjective-LEM :
     ¬ is-surjective f → is-nonsurjective f
