@@ -1,7 +1,7 @@
-# Multiplication of matrices
+# Multiplication of grids
 
 ```agda
-module linear-algebra.multiplication-matrices where
+module linear-algebra.multiplication-grids where
 ```
 
 <details><summary>Imports</summary>
@@ -14,24 +14,24 @@ module linear-algebra.multiplication-matrices where
 
 ## Definition
 
-### Multiplication of matrices
+### Multiplication of grids
 
 ```agda
 {-
-mul-tuple-matrix : {l : Level} → {K : UU l} → {m n : ℕ} →
+mul-tuple-grid : {l : Level} → {K : UU l} → {m n : ℕ} →
                      (K → K → K) → (K → K → K) → K →
                      tuple K m → Mat K m n → tuple K n
-mul-tuple-matrix _ _ zero empty-tuple empty-tuple = diagonal-product zero
-mul-tuple-matrix mulK addK zero (x ∷ xs) (v ∷ vs) =
+mul-tuple-grid _ _ zero empty-tuple empty-tuple = diagonal-product zero
+mul-tuple-grid mulK addK zero (x ∷ xs) (v ∷ vs) =
   add-tuple addK (mul-scalar-tuple mulK x v)
-               (mul-tuple-matrix mulK addK zero xs vs)
+               (mul-tuple-grid mulK addK zero xs vs)
 
 mul-Mat : {l' : Level} → {K : UU l'} → {l m n : ℕ} →
           (K → K → K) → (K → K → K) → K →
           Mat K l m → Mat K m n → Mat K l n
 mul-Mat _ _ zero empty-tuple _ = empty-tuple
 mul-Mat mulK addK zero (v ∷ vs) m =
-  mul-tuple-matrix mulK addK zero v m
+  mul-tuple-grid mulK addK zero v m
     ∷ mul-Mat mulK addK zero vs m
 -}
 ```
@@ -52,7 +52,7 @@ mul-transpose mulK-comm (a ∷ as) b = {!!}
 -}
 ```
 
-## Properties of Matrix Multiplication
+## Properties of Grid Multiplication
 
 - distributive laws (incomplete)
 - associativity (TODO)
@@ -68,7 +68,7 @@ module _
   {zero : K}
   where
 
-  left-distributive-tuple-matrix :
+  left-distributive-tuple-grid :
     {n m : ℕ} →
     ( {l : ℕ} →
       diagonal-product {n = l} zero ＝
@@ -77,23 +77,23 @@ module _
     ((x y : K) → addK x y ＝ addK y x) →
     ((x y z : K) → addK x (addK y z) ＝ addK (addK x y) z) →
     (a : tuple K n) (b : Mat K n m) (c : Mat K n m) →
-    ( mul-tuple-matrix mulK addK zero a (add-Mat addK b c)) ＝
+    ( mul-tuple-grid mulK addK zero a (add-Mat addK b c)) ＝
     ( add-tuple
         ( addK)
-        ( mul-tuple-matrix mulK addK zero a b)
-        ( mul-tuple-matrix mulK addK zero a c))
-  left-distributive-tuple-matrix id-tuple _ _ _ empty-tuple empty-tuple empty-tuple =
+        ( mul-tuple-grid mulK addK zero a b)
+        ( mul-tuple-grid mulK addK zero a c))
+  left-distributive-tuple-grid id-tuple _ _ _ empty-tuple empty-tuple empty-tuple =
     id-tuple
-  left-distributive-tuple-matrix
+  left-distributive-tuple-grid
     id-tuple k-distr addK-comm addK-associative (a ∷ as) (r1 ∷ r1s) (r2 ∷ r2s) =
       ap
         ( λ r →
           add-tuple addK r
-            (mul-tuple-matrix mulK addK zero as (add-Mat addK r1s r2s)))
+            (mul-tuple-grid mulK addK zero as (add-Mat addK r1s r2s)))
         (left-distributive-scalar-tuple {zero = zero} k-distr a r1 r2)
         ∙ (ap (λ r → add-tuple addK (add-tuple addK (map-tuple (mulK a) r1)
                                   (mul-scalar-tuple mulK a r2)) r)
-              (left-distributive-tuple-matrix
+              (left-distributive-tuple-grid
                 id-tuple k-distr addK-comm addK-associative as r1s r2s)
           ∙ lemma-shuffle)
     where
@@ -118,7 +118,7 @@ module _
         ∙ commutative-add-tuples
             {zero = zero} addK-comm (add-tuple addK y w) (add-tuple addK x z)))))))
 
-  left-distributive-matrices :
+  left-distributive-grids :
     {n m p : ℕ} →
     ({l : ℕ} →
       diagonal-product {n = l} zero ＝
@@ -129,19 +129,19 @@ module _
     (a : Mat K m n) (b : Mat K n p) (c : Mat K n p) →
     ( mul-Mat mulK addK zero a (add-Mat addK b c)) ＝
     ( add-Mat addK (mul-Mat mulK addK zero a b) (mul-Mat mulK addK zero a c))
-  left-distributive-matrices _ _ _ _ empty-tuple _ _ = refl
-  left-distributive-matrices id-tuple k-distr addK-comm addK-associative (a ∷ as) b c =
+  left-distributive-grids _ _ _ _ empty-tuple _ _ = refl
+  left-distributive-grids id-tuple k-distr addK-comm addK-associative (a ∷ as) b c =
     (ap (λ r → r ∷ mul-Mat mulK addK zero as (add-Mat addK b c))
-        (left-distributive-tuple-matrix
+        (left-distributive-tuple-grid
           id-tuple k-distr addK-comm addK-associative a b c))
-      ∙ ap (_∷_ (add-tuple addK (mul-tuple-matrix mulK addK zero a b)
-                              (mul-tuple-matrix mulK addK zero a c)))
-          (left-distributive-matrices
+      ∙ ap (_∷_ (add-tuple addK (mul-tuple-grid mulK addK zero a b)
+                              (mul-tuple-grid mulK addK zero a c)))
+          (left-distributive-grids
             id-tuple k-distr addK-comm addK-associative as b c)
 -}
 
 {- TODO: right distributivity
-  right-distributive-matrices :
+  right-distributive-grids :
     {n m p : ℕ} →
     ({l : ℕ} →
       diagonal-product {n = l} zero ＝
@@ -152,23 +152,23 @@ module _
     (b : Mat K n p) (c : Mat K n p) (d : Mat K p m) →
     mul-Mat mulK addK zero (add-Mat addK b c) d ＝
     add-Mat addK (mul-Mat mulK addK zero b d) (mul-Mat mulK addK zero c d)
-  right-distributive-matrices _ _ _ _ empty-tuple empty-tuple _ = refl
-  right-distributive-matrices
+  right-distributive-grids _ _ _ _ empty-tuple empty-tuple _ = refl
+  right-distributive-grids
     {p = .zero-ℕ}
     id-tuple k-distr addK-comm addK-associative (b ∷ bs) (c ∷ cs) empty-tuple =
     {!!}
-  right-distributive-matrices
+  right-distributive-grids
     id-tuple k-distr addK-comm addK-associative (b ∷ bs) (c ∷ cs) (d ∷ ds) =
     {!!}
   -- this might also need a proof that zero is the additive identity
 
   TODO: associativity
-  associative-mul-matrices :
+  associative-mul-grids :
     {l : Level} {K : UU l} {n m p q : ℕ} →
     {addK : K → K → K} {mulK : K → K → K} {zero : K} →
     (x : Mat K m n) → (y : Mat K n p) → (z : Mat K p q) →
     mul-Mat mulK addK zero x (mul-Mat mulK addK zero y z) ＝
     mul-Mat mulK addK zero (mul-Mat mulK addK zero x y) z
-  associative-mul-matrices x y z = {!!}
+  associative-mul-grids x y z = {!!}
 -}
 ```

@@ -54,6 +54,9 @@ module _
   empty-fin-sequence : fin-sequence A 0
   empty-fin-sequence ()
 
+  single-fin-sequence : A → fin-sequence A 1
+  single-fin-sequence x (inr star) = x
+
   head-fin-sequence : (n : ℕ) → fin-sequence A (succ-ℕ n) → A
   head-fin-sequence n v = v (neg-one-Fin n)
 
@@ -143,7 +146,8 @@ pr2 (fin-sequence-Set A n) = is-set-fin-sequence n (is-set-type-Set A)
 ```agda
 module _
   {l : Level} {A : UU l}
-  where
+  where abstract
+
   htpy-cons-head-tail-fin-sequence :
     ( n : ℕ) →
     ( v : fin-sequence A (succ-ℕ n)) →
