@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import logic.propositionally-decidable-types
 
 open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.inhabited-totally-bounded-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.nets-metric-spaces
 open import metric-spaces.subspaces-metric-spaces
@@ -89,6 +90,13 @@ module _
   is-inhabited-inhabited-totally-bounded-subspace-Metric-Space :
     is-inhabited-subtype subset-inhabited-totally-bounded-subspace-Metric-Space
   is-inhabited-inhabited-totally-bounded-subspace-Metric-Space = pr2 S
+
+  inhabited-totally-bounded-space-inhabited-totally-bounded-subspace-Metric-Space :
+    inhabited-totally-bounded-Metric-Space (l1 ⊔ l3) l2 l4
+  inhabited-totally-bounded-space-inhabited-totally-bounded-subspace-Metric-Space =
+    ( subspace-inhabited-totally-bounded-subspace-Metric-Space ,
+      is-totally-bounded-subspace-inhabited-totally-bounded-subspace-Metric-Space ,
+      is-inhabited-inhabited-totally-bounded-subspace-Metric-Space)
 ```
 
 ## Properties
@@ -96,51 +104,77 @@ module _
 ### The image of an inhabited totally bounded metric space under a uniformly continuous function is an inhabited totally bounded subspace
 
 ```agda
-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
-  {l1 l2 l3 l4 l5 : Level} →
-  (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
-  (f : uniformly-continuous-map-Metric-Space X Y) →
-  is-totally-bounded-Metric-Space l5 X →
-  is-inhabited (type-Metric-Space X) →
-  inhabited-totally-bounded-subspace-Metric-Space (l1 ⊔ l3) (l1 ⊔ l3 ⊔ l5) Y
-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
-  X Y f tbX |X| =
-  ( ( subtype-im (map-uniformly-continuous-map-Metric-Space X Y f) ,
-      is-totally-bounded-im-uniformly-continuous-map-is-totally-bounded-Metric-Space
-        ( X)
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  ((X , tbX , |X|) : inhabited-totally-bounded-Metric-Space l1 l2 l3)
+  (Y : Metric-Space l4 l5)
+  (f@(map-f , uc-f) : uniformly-continuous-map-Metric-Space X Y)
+  where
+
+  subset-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
+    subset-Metric-Space (l1 ⊔ l4) Y
+  subset-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space =
+    subtype-im map-f
+
+  abstract
+    is-totally-bounded-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
+      is-totally-bounded-subset-Metric-Space
+        ( l1 ⊔ l3 ⊔ l4)
         ( Y)
-        ( tbX)
-        ( f)) ,
-    map-is-inhabited
-      ( map-unit-im (map-uniformly-continuous-map-Metric-Space X Y f))
-      ( |X|))
+        ( subset-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space)
+    is-totally-bounded-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space =
+      is-totally-bounded-subset-im-uniformly-continuous-map-Totally-Bounded-Metric-Space
+        ( X , tbX)
+        ( Y)
+        ( f)
+
+    is-inhabited-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
+      is-inhabited-subtype
+        ( subset-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space)
+    is-inhabited-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space =
+      map-is-inhabited (map-unit-im map-f) |X|
+
+  im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space :
+    inhabited-totally-bounded-subspace-Metric-Space
+      ( l1 ⊔ l4)
+      ( l1 ⊔ l3 ⊔ l4)
+      ( Y)
+  im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space =
+    ( ( subset-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space ,
+        is-totally-bounded-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space) ,
+      is-inhabited-im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space)
 ```
 
 ### The image of an inhabited totally bounded subspace of a metric space under a uniformly continuous map is an inhabited totally bounded subspace
 
 ```agda
-im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space :
-  {l1 l2 l3 l4 l5 l6 : Level} →
-  (X : Metric-Space l1 l2) (Y : Metric-Space l3 l4) →
-  (f : uniformly-continuous-map-Metric-Space X Y) →
-  inhabited-totally-bounded-subspace-Metric-Space l5 l6 X →
-  inhabited-totally-bounded-subspace-Metric-Space
-    ( l1 ⊔ l3 ⊔ l5)
-    ( l1 ⊔ l3 ⊔ l5 ⊔ l6)
-    ( Y)
-im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space
-  X Y f ((S , tbS) , |S|) =
-  im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
-    ( subspace-Metric-Space X S)
-    ( Y)
-    ( comp-uniformly-continuous-map-Metric-Space
-      ( subspace-Metric-Space X S)
-      ( X)
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (f : uniformly-continuous-map-Metric-Space X Y)
+  (S : inhabited-totally-bounded-subspace-Metric-Space l5 l6 X)
+  where
+
+  im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space :
+    inhabited-totally-bounded-subspace-Metric-Space
+      ( l1 ⊔ l3 ⊔ l5)
+      ( l1 ⊔ l3 ⊔ l5 ⊔ l6)
       ( Y)
-      ( f)
-      ( uniformly-continuous-inclusion-subspace-Metric-Space X S))
-    ( tbS)
-    ( |S|)
+  im-uniformly-continuous-map-inhabited-totally-bounded-subspace-Metric-Space =
+    im-uniformly-continuous-map-inhabited-totally-bounded-Metric-Space
+      ( inhabited-totally-bounded-space-inhabited-totally-bounded-subspace-Metric-Space
+        ( X)
+        ( S))
+      ( Y)
+      ( comp-uniformly-continuous-map-Metric-Space
+        ( subspace-inhabited-totally-bounded-subspace-Metric-Space X S)
+        ( X)
+        ( Y)
+        ( f)
+        ( uniformly-continuous-inclusion-subspace-Metric-Space
+          ( X)
+          ( subset-inhabited-totally-bounded-subspace-Metric-Space X S)))
 ```
 
 ### Inhabited, totally bounded subspaces of metric spaces are closed under cartesian products
@@ -163,7 +197,7 @@ product-inhabited-totally-bounded-subspace-Metric-Space
         ( equiv-product-subtype
           ( subset-totally-bounded-subspace-Metric-Space X S)
           ( subset-totally-bounded-subspace-Metric-Space Y T)))
-      ( is-inhabited-Σ |S| (λ _ → |T|)))
+      ( is-inhabited-product |S| |T|))
 ```
 
 ### It is decidable whether or not a totally bounded subspace of a metric space is inhabited

@@ -7,6 +7,7 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
@@ -186,6 +187,22 @@ pr2 (Σ-Inhabited-Type X Y) =
   is-inhabited-Σ
     ( is-inhabited-type-Inhabited-Type X)
     ( λ x → is-inhabited-type-Inhabited-Type (Y x))
+```
+
+### Inhabited types are closed under Cartesian products
+
+```agda
+abstract
+  is-inhabited-product :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+    is-inhabited X → is-inhabited Y → is-inhabited (X × Y)
+  is-inhabited-product = map-binary-trunc-Prop pair
+
+product-Inhabited-Type :
+  {l1 l2 : Level} →
+  Inhabited-Type l1 → Inhabited-Type l2 → Inhabited-Type (l1 ⊔ l2)
+product-Inhabited-Type (X , |X|) (Y , |Y|) =
+  ( X × Y , is-inhabited-product |X| |Y|)
 ```
 
 ### The base of an inhabited Σ-type is inhabited

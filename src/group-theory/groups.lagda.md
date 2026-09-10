@@ -652,6 +652,23 @@ module _
     is-injective-mul-Group G x (p ∙ inv (right-unit-law-mul-Group G x))
 ```
 
+### Unit laws of division
+
+```agda
+module _
+  {l : Level} (G : Group l) (x : type-Group G)
+  where abstract
+
+  right-unit-law-right-div-Group :
+    right-div-Group G x (unit-Group G) ＝ x
+  right-unit-law-right-div-Group =
+    ap-mul-Group G refl (inv-unit-Group G) ∙ right-unit-law-mul-Group G x
+
+  left-unit-law-right-div-Group :
+    right-div-Group G (unit-Group G) x ＝ inv-Group G x
+  left-unit-law-right-div-Group = left-unit-law-mul-Group G _
+```
+
 ### Multiplication of a list of elements in a group
 
 ```agda
