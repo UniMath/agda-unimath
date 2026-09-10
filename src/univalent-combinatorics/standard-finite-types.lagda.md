@@ -291,25 +291,26 @@ pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
 ```
 
 ```agda
-is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k))
-is-zero-nat-zero-Fin {zero-ℕ} = refl
-is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
+abstract
+  nat-zero-Fin : (k : ℕ) → is-zero-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k))
+  nat-zero-Fin zero-ℕ = refl
+  nat-zero-Fin (succ-ℕ k) = nat-zero-Fin k
+
+  nat-inr-Fin :
+    (k : ℕ) (x : Fin k) →
+    nat-Fin (succ-ℕ k) (inr-Fin k x) ＝ succ-ℕ (nat-Fin k x)
+  nat-inr-Fin (succ-ℕ k) (inl x) = nat-inr-Fin k x
+  nat-inr-Fin (succ-ℕ k) (inr star) = refl
 
 nat-skip-zero-Fin :
   (k : ℕ) (x : Fin k) →
   nat-Fin (succ-ℕ k) (skip-zero-Fin k x) ＝ succ-ℕ (nat-Fin k x)
-nat-skip-zero-Fin (succ-ℕ k) (inl x) = nat-skip-zero-Fin k x
-nat-skip-zero-Fin (succ-ℕ k) (inr star) = refl
+nat-skip-zero-Fin = nat-inr-Fin
 
 nat-succ-Fin :
   (k : ℕ) (x : Fin k) →
   nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) ＝ succ-ℕ (nat-Fin k x)
 nat-succ-Fin k x = nat-skip-zero-Fin k x
-
-nat-inr-Fin :
-  (k : ℕ) (x : Fin k) → nat-Fin (succ-ℕ k) (inr-Fin k x) ＝ succ-ℕ (nat-Fin k x)
-nat-inr-Fin (succ-ℕ k) (inl x) = nat-inr-Fin k x
-nat-inr-Fin (succ-ℕ k) (inr star) = refl
 ```
 
 ```agda
@@ -453,7 +454,7 @@ leq-nat-succ-Fin (succ-ℕ k) (inl x) =
 leq-nat-succ-Fin (succ-ℕ k) (inr star) =
   concatenate-eq-leq-ℕ
     ( succ-ℕ (nat-Fin (succ-ℕ k) (inr star)))
-    ( is-zero-nat-zero-Fin {succ-ℕ k})
+    ( nat-zero-Fin (succ-ℕ k))
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
@@ -537,6 +538,16 @@ is-decidable-Fin (succ-ℕ n) = inl (neg-one-Fin n)
 is-inhabited-or-empty-Fin : (n : ℕ) → is-inhabited-or-empty (Fin n)
 is-inhabited-or-empty-Fin n =
   is-inhabited-or-empty-is-decidable (is-decidable-Fin n)
+```
+
+### `nat-Fin-reverse (succ-ℕ n)` maps `zero-Fin n` to `n`
+
+```agda
+abstract
+  nat-reverse-zero-Fin :
+    (n : ℕ) → nat-Fin-reverse (succ-ℕ n) (zero-Fin n) ＝ n
+  nat-reverse-zero-Fin zero-ℕ = refl
+  nat-reverse-zero-Fin (succ-ℕ n) = ap succ-ℕ (nat-reverse-zero-Fin n)
 ```
 
 ### The complement of `-1` in `Fin (n + 1)` is equivalent to `Fin n`

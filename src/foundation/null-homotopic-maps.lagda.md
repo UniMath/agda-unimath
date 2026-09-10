@@ -7,6 +7,7 @@ module foundation.null-homotopic-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coherently-constant-maps
 open import foundation.commuting-triangles-of-identifications
 open import foundation.constant-maps
@@ -14,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences-contractible-types
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -364,6 +366,21 @@ module _
   is-weakly-constant-null-homotopic-map f =
     is-weakly-constant-map-is-null-homotopic-map
       ( is-null-homotopic-null-homotopic-map f)
+```
+
+### Null-homotopic maps are preserved by left composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : B → C) {g : A → B}
+  (K@(b , fa=b) : is-null-homotopic-map g)
+  where
+
+  left-comp-is-null-homotopic-map : is-null-homotopic-map (f ∘ g)
+  left-comp-is-null-homotopic-map =
+    ( f b ,
+      λ a → ap f (fa=b a))
 ```
 
 ## See also

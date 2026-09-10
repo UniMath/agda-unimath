@@ -11,19 +11,23 @@ module real-numbers.maximum-finite-families-nonnegative-real-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.weakly-constant-maps
 
 open import lists.finite-sequences
 
 open import order-theory.join-semilattices
 open import order-theory.joins-finite-families-large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.binary-maximum-nonnegative-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -108,4 +112,57 @@ module _
         ( large-join-semilattice-ℝ⁰⁺)
         ( I)
         ( f)
+```
+
+### If a finite family of nonnegative real numbers is weakly constant, any of its elements are equal to the maximum
+
+```agda
+module _
+  {l1 l2 : Level} (I : Finite-Type l1)
+  (f : type-Finite-Type I → ℝ⁰⁺ l2)
+  (wc-f : is-weakly-constant-map f)
+  (i : type-Finite-Type I)
+  where abstract
+
+  max-weakly-constant-finite-family-ℝ⁰⁺ : max-finite-family-ℝ⁰⁺ I f ＝ f i
+  max-weakly-constant-finite-family-ℝ⁰⁺ =
+    eq-sim-Large-Poset
+      ( large-poset-ℝ⁰⁺)
+      ( max-finite-family-ℝ⁰⁺ I f)
+      ( f i)
+      ( sim-is-least-upper-bound-family-of-elements-Large-Poset
+        ( large-poset-ℝ⁰⁺)
+        ( is-least-upper-bound-max-finite-family-ℝ⁰⁺ I f)
+        ( is-least-upper-bound-element-weakly-constant-family-of-elements-Large-Poset
+          ( large-poset-ℝ⁰⁺)
+          ( f)
+          ( wc-f)
+          ( i)))
+```
+
+### If a finite sequence of nonnegative real numbers is weakly constant, any of its elements are equal to the maximum
+
+```agda
+module _
+  {l : Level}
+  (n : ℕ)
+  (f : fin-sequence (ℝ⁰⁺ l) n)
+  (wc-f : is-weakly-constant-map f)
+  (i : Fin n)
+  where abstract
+
+  max-weakly-constant-fin-sequence-ℝ⁰⁺ : max-fin-sequence-ℝ⁰⁺ n f ＝ f i
+  max-weakly-constant-fin-sequence-ℝ⁰⁺ =
+    eq-sim-Large-Poset
+      ( large-poset-ℝ⁰⁺)
+      ( max-fin-sequence-ℝ⁰⁺ n f)
+      ( f i)
+      ( sim-is-least-upper-bound-family-of-elements-Large-Poset
+        ( large-poset-ℝ⁰⁺)
+        ( is-least-upper-bound-max-fin-sequence-ℝ⁰⁺ n f)
+        ( is-least-upper-bound-element-weakly-constant-family-of-elements-Large-Poset
+          ( large-poset-ℝ⁰⁺)
+          ( f)
+          ( wc-f)
+          ( i)))
 ```

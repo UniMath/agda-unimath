@@ -84,8 +84,7 @@ module _
 
   diff-ℝ-Vector-Space :
     type-ℝ-Vector-Space → type-ℝ-Vector-Space → type-ℝ-Vector-Space
-  diff-ℝ-Vector-Space v w =
-    add-ℝ-Vector-Space v (neg-ℝ-Vector-Space w)
+  diff-ℝ-Vector-Space = diff-Vector-Space (heyting-field-ℝ l1) V
 
   associative-add-ℝ-Vector-Space :
     (v w x : type-ℝ-Vector-Space) →
