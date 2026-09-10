@@ -57,6 +57,7 @@ open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.integer-powers-positive-real-numbers public
+open import real-numbers.inverses-epsilon-delta-continuous-strictly-increasing-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.irrational-real-numbers public
 open import real-numbers.irrationality-square-root-of-two public
 open import real-numbers.isometry-addition-real-numbers public
@@ -73,6 +74,7 @@ open import real-numbers.lipschitz-continuity-multiplication-real-numbers public
 open import real-numbers.local-ring-of-real-numbers public
 open import real-numbers.located-metric-space-of-real-numbers public
 open import real-numbers.lower-dedekind-real-numbers public
+open import real-numbers.lower-retracts-strictly-increasing-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.macneille-real-numbers public
 open import real-numbers.maps-between-proper-closed-intervals-real-numbers public
 open import real-numbers.maximum-finite-families-nonnegative-real-numbers public
@@ -126,6 +128,7 @@ open import real-numbers.real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.real-numbers-from-lower-dedekind-real-numbers public
 open import real-numbers.real-numbers-from-upper-dedekind-real-numbers public
 open import real-numbers.real-sequences-approximating-zero public
+open import real-numbers.retracts-strictly-increasing-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.saturation-inequality-nonnegative-real-numbers public
 open import real-numbers.saturation-inequality-real-numbers public
 open import real-numbers.sequences-with-alternating-signs-real-numbers public
@@ -154,6 +157,7 @@ open import real-numbers.uniformly-continuous-endomaps-real-numbers public
 open import real-numbers.uniformly-continuous-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.unit-closed-interval-real-numbers public
 open import real-numbers.upper-dedekind-real-numbers public
+open import real-numbers.upper-retracts-strictly-increasing-real-maps-proper-closed-intervals-real-numbers public
 open import real-numbers.zero-nonnegative-real-numbers public
 open import real-numbers.zero-real-numbers public
 ```

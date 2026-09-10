@@ -39,12 +39,22 @@ module _
   (f : map-Metric-Space X Y)
   where
 
+  is-ε-δ-continuous-at-point-prop-map-Metric-Space :
+    (x : type-Metric-Space X) → Prop (l1 ⊔ l2 ⊔ l4)
+  is-ε-δ-continuous-at-point-prop-map-Metric-Space x =
+    is-ε-δ-limit-prop-map-Metric-Space X Y f x (f x)
+
+  is-ε-δ-continuous-at-point-map-Metric-Space :
+    (x : type-Metric-Space X) → UU (l1 ⊔ l2 ⊔ l4)
+  is-ε-δ-continuous-at-point-map-Metric-Space x =
+    type-Prop (is-ε-δ-continuous-at-point-prop-map-Metric-Space x)
+
   is-pointwise-ε-δ-continuous-prop-map-Metric-Space :
     Prop (l1 ⊔ l2 ⊔ l4)
   is-pointwise-ε-δ-continuous-prop-map-Metric-Space =
     Π-Prop
       ( type-Metric-Space X)
-      ( λ x → is-ε-δ-limit-prop-map-Metric-Space X Y f x (f x))
+      ( is-ε-δ-continuous-at-point-prop-map-Metric-Space)
 
   is-pointwise-ε-δ-continuous-map-Metric-Space : UU (l1 ⊔ l2 ⊔ l4)
   is-pointwise-ε-δ-continuous-map-Metric-Space =
