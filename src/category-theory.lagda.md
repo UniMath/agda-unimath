@@ -62,6 +62,7 @@ open import category-theory.embeddings-precategories public
 open import category-theory.endomorphisms-in-categories public
 open import category-theory.endomorphisms-in-precategories public
 open import category-theory.epimorphisms-in-large-precategories public
+open import category-theory.equivalence-from-fully-faithful-and-split-essentially-surjective-functor public
 open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
@@ -82,6 +83,7 @@ open import category-theory.fully-faithful-functors-precategories public
 open import category-theory.fully-faithful-maps-precategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
+open import category-theory.functor-curry public
 open import category-theory.functors-categories public
 open import category-theory.functors-from-small-to-large-categories public
 open import category-theory.functors-from-small-to-large-precategories public
