@@ -8,7 +8,7 @@ module foundation.universal-property-unit-type where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
+open import foundation.equivalences-contractible-types
 open import foundation.unit-type
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-equivalences
@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -158,4 +159,16 @@ is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map :
   is-equiv (diagonal-exponential U X)
 is-equiv-diagonal-exponential-is-equiv-precomp-terminal-map H =
   is-equiv-comp _ _ (is-equiv-const-unit _) H
+```
+
+### The unit type is terminal
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  is-equiv-terminal-map-Π-unit : is-equiv (terminal-map (X → unit))
+  is-equiv-terminal-map-Π-unit =
+    is-equiv-is-invertible (const X) refl-htpy refl-htpy
 ```

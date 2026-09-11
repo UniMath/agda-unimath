@@ -10,6 +10,7 @@ module metric-spaces.metric-space-of-convergent-sequences-metric-spaces where
 open import foundation.universe-levels
 
 open import metric-spaces.convergent-sequences-metric-spaces
+open import metric-spaces.metric-space-of-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.subspaces-metric-spaces

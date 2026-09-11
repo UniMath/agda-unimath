@@ -7,14 +7,17 @@ module elementary-number-theory.parity-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -22,6 +25,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -58,6 +62,23 @@ is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
 
 is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
 is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
+```
+
+### Being even or odd is a proposition
+
+```agda
+abstract
+  is-prop-is-even-ℕ : (n : ℕ) → is-prop (is-even-ℕ n)
+  is-prop-is-even-ℕ n = is-prop-div-ℕ 2 n (is-nonzero-nat-nonzero-ℕ two-ℕ⁺)
+
+  is-prop-is-odd-ℕ : (n : ℕ) → is-prop (is-odd-ℕ n)
+  is-prop-is-odd-ℕ n = is-prop-neg
+
+is-even-prop-ℕ : ℕ → Prop lzero
+is-even-prop-ℕ n = (is-even-ℕ n , is-prop-is-even-ℕ n)
+
+is-odd-prop-ℕ : ℕ → Prop lzero
+is-odd-prop-ℕ n = (is-odd-ℕ n , is-prop-is-odd-ℕ n)
 ```
 
 ### `0` is an even natural number
@@ -187,4 +208,67 @@ abstract
   noneq-odd-even :
     (x y : ℕ) → is-odd-ℕ x → is-even-ℕ y → x ≠ y
   noneq-odd-even x y odd-x even-y x=y = odd-x (inv-tr is-even-ℕ x=y even-y)
+```
+
+### If `x` and `y` are odd, `xy` is odd
+
+```agda
+abstract
+  is-odd-mul-is-odd-ℕ :
+    (x y : ℕ) → is-odd-ℕ x → is-odd-ℕ y → is-odd-ℕ (x *ℕ y)
+  is-odd-mul-is-odd-ℕ _ _ odd-x odd-y
+    with has-odd-expansion-is-odd _ odd-x | has-odd-expansion-is-odd _ odd-y
+  ... | (m , refl) | (n , refl) =
+    is-odd-has-odd-expansion _
+      ( m *ℕ (2 *ℕ n) +ℕ m +ℕ n ,
+        ( equational-reasoning
+          succ-ℕ ((m *ℕ (2 *ℕ n) +ℕ m +ℕ n) *ℕ 2)
+          ＝ succ-ℕ ((m *ℕ (2 *ℕ n) +ℕ m) *ℕ 2 +ℕ n *ℕ 2)
+            by ap succ-ℕ (right-distributive-mul-add-ℕ (m *ℕ (2 *ℕ n) +ℕ m) n 2)
+          ＝ (m *ℕ (2 *ℕ n) +ℕ (m *ℕ 1)) *ℕ 2 +ℕ succ-ℕ (n *ℕ 2)
+            by
+              ap
+                ( λ k → succ-ℕ ((m *ℕ (2 *ℕ n) +ℕ k) *ℕ 2 +ℕ n *ℕ 2))
+                ( inv (right-unit-law-mul-ℕ m))
+          ＝ m *ℕ (2 *ℕ n +ℕ 1) *ℕ 2 +ℕ succ-ℕ (n *ℕ 2)
+            by
+              ap
+                ( λ k → k *ℕ 2 +ℕ succ-ℕ (n *ℕ 2))
+                ( inv (left-distributive-mul-add-ℕ m (2 *ℕ n) 1))
+          ＝ m *ℕ 2 *ℕ succ-ℕ (2 *ℕ n) +ℕ succ-ℕ (n *ℕ 2)
+            by ap (_+ℕ succ-ℕ (n *ℕ 2)) (right-swap-mul-ℕ m (succ-ℕ (2 *ℕ n)) 2)
+          ＝ m *ℕ 2 *ℕ succ-ℕ (n *ℕ 2) +ℕ 1 *ℕ succ-ℕ (n *ℕ 2)
+            by
+              ap-add-ℕ
+                ( ap (λ k → m *ℕ 2 *ℕ succ-ℕ k) (commutative-mul-ℕ 2 n))
+                ( inv (left-unit-law-mul-ℕ (succ-ℕ (n *ℕ 2))))
+          ＝ succ-ℕ (m *ℕ 2) *ℕ succ-ℕ (n *ℕ 2)
+            by inv (right-distributive-mul-add-ℕ (m *ℕ 2) 1 (succ-ℕ (n *ℕ 2)))))
+```
+
+### If `xy` is even, `x` or `y` is even
+
+```agda
+abstract
+  is-even-either-factor-is-even-mul-ℕ :
+    (x y : ℕ) → is-even-ℕ (x *ℕ y) → (is-even-ℕ x) + (is-even-ℕ y)
+  is-even-either-factor-is-even-mul-ℕ x y is-even-xy =
+    rec-coproduct
+      ( inl)
+      ( λ is-odd-x →
+        rec-coproduct
+          ( inr)
+          ( λ is-odd-y →
+            ex-falso (is-odd-mul-is-odd-ℕ x y is-odd-x is-odd-y is-even-xy))
+          ( is-decidable-is-even-ℕ y))
+      ( is-decidable-is-even-ℕ x)
+```
+
+### If `x²` is even, `x` is even
+
+```agda
+abstract
+  is-even-is-even-square-ℕ : (x : ℕ) → is-even-ℕ (square-ℕ x) → is-even-ℕ x
+  is-even-is-even-square-ℕ x is-even-x² =
+    rec-coproduct id id (is-even-either-factor-is-even-mul-ℕ x x is-even-x²)
 ```

@@ -20,6 +20,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.propositional-maps
 open import foundation.subtypes
@@ -142,11 +143,13 @@ module _
 ```agda
 module _
   {l : Level} {X : UU l} {f : X → X}
-  where abstract
+  where
 
-  is-equiv-iterate : (n : ℕ) → is-equiv f → is-equiv (iterate n f)
-  is-equiv-iterate =
-    is-in-function-class-iterate is-equiv-id (λ h g H G → is-equiv-comp h g G H)
+  abstract
+    is-equiv-iterate : (n : ℕ) → is-equiv f → is-equiv (iterate n f)
+    is-equiv-iterate =
+      is-in-function-class-iterate is-equiv-id
+        ( λ h g H G → is-equiv-comp h g G H)
 ```
 
 ### Iterates of embeddings are embeddings
@@ -154,10 +157,11 @@ module _
 ```agda
 module _
   {l : Level} {X : UU l} {f : X → X}
-  where abstract
+  where
 
-  is-emb-iterate : (n : ℕ) → is-emb f → is-emb (iterate n f)
-  is-emb-iterate = is-in-function-class-iterate is-emb-id is-emb-comp
+  abstract
+    is-emb-iterate : (n : ℕ) → is-emb f → is-emb (iterate n f)
+    is-emb-iterate = is-in-function-class-iterate is-emb-id is-emb-comp
 ```
 
 ### Iterates of truncated maps are truncated
@@ -165,12 +169,13 @@ module _
 ```agda
 module _
   {l : Level} (k : 𝕋) {X : UU l} {f : X → X}
-  where abstract
+  where
 
-  is-trunc-map-iterate :
-    (n : ℕ) → is-trunc-map k f → is-trunc-map k (iterate n f)
-  is-trunc-map-iterate =
-    is-in-function-class-iterate (is-trunc-map-id k) (is-trunc-map-comp k)
+  abstract
+    is-trunc-map-iterate :
+      (n : ℕ) → is-trunc-map k f → is-trunc-map k (iterate n f)
+    is-trunc-map-iterate =
+      is-in-function-class-iterate (is-trunc-map-id k) (is-trunc-map-comp k)
 ```
 
 ### Iterates of propositional maps are propositional
@@ -178,12 +183,13 @@ module _
 ```agda
 module _
   {l : Level} (k : 𝕋) {X : UU l} {f : X → X}
-  where abstract
+  where
 
-  is-prop-map-iterate :
-    (n : ℕ) → is-prop-map f → is-prop-map (iterate n f)
-  is-prop-map-iterate =
-    is-in-function-class-iterate is-prop-map-id is-prop-map-comp
+  abstract
+    is-prop-map-iterate :
+      (n : ℕ) → is-prop-map f → is-prop-map (iterate n f)
+    is-prop-map-iterate =
+      is-in-function-class-iterate is-prop-map-id is-prop-map-comp
 ```
 
 ## External links

@@ -10,8 +10,10 @@ module foundation-core.decidable-propositions where
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.negation
+open import foundation.subuniverse-of-propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
@@ -68,7 +70,7 @@ is-prop-is-decidable-prop X =
   is-prop-has-element
     ( λ H →
       is-prop-product
-        ( is-prop-is-prop X)
+        ( is-property-is-prop X)
         ( is-prop-is-decidable (pr1 H)))
 
 is-decidable-prop-Prop :

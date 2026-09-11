@@ -80,7 +80,7 @@ module _
     is-orthogonal-left-equiv-arrow α g (J g H)
 ```
 
-### Anodyne maps are closed under retracts of maps
+### Anodyne maps are closed under retracts of arrows
 
 > This remains to be formalized.
 

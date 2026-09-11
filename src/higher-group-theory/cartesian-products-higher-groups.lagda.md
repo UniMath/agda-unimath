@@ -10,6 +10,7 @@ module higher-group-theory.cartesian-products-higher-groups where
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.identity-types

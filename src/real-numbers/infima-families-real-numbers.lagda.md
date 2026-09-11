@@ -14,6 +14,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-transport
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -150,7 +151,7 @@ module _
             not-leq-le-ℝ (y i) z
               ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
                 ( le-transpose-right-diff-ℝ' _ z _
-                  ( le-real-is-in-lower-cut-ℚ (z -ℝ x) ε<z-x))
+                  ( le-real-is-in-lower-cut-ℝ (z -ℝ x) ε<z-x))
                 ( yᵢ<x+ε))
               ( z≤yᵢ i))
     pr2 (is-greatest-lower-bound-is-infimum-family-ℝ z) z≤x i =
@@ -258,7 +259,7 @@ module _
         ( i)
         ( transitive-le-ℝ (y i) (x +ℝ real-ℚ ε) z
           ( le-transpose-right-diff-ℝ' _ z _
-            ( le-real-is-in-lower-cut-ℚ (z -ℝ x) ε<z-x))
+            ( le-real-is-in-lower-cut-ℝ (z -ℝ x) ε<z-x))
           ( yᵢ<x+ε))
 
   le-infimum-iff-le-element-family-ℝ :

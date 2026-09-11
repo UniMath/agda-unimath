@@ -10,9 +10,9 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.constant-maps
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -20,10 +20,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import metric-spaces.cartesian-products-metric-spaces
 open import metric-spaces.cauchy-approximations-pseudometric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 ```
 
 </details>
@@ -110,63 +109,23 @@ module _
       ( x)
 ```
 
-### The action of short maps on Cauchy approximations
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : short-function-Metric-Space A B)
-  where
-
-  map-short-function-cauchy-approximation-Metric-Space :
-    cauchy-approximation-Metric-Space A →
-    cauchy-approximation-Metric-Space B
-  map-short-function-cauchy-approximation-Metric-Space =
-    map-short-function-cauchy-approximation-Pseudometric-Space
-      ( pseudometric-Metric-Space A)
-      ( pseudometric-Metric-Space B)
-      ( f)
-
-module _
-  {l1 l2 : Level}
-  (A : Metric-Space l1 l2)
-  where
-
-  eq-id-map-short-function-cauchy-approximation-Metric-Space :
-    map-short-function-cauchy-approximation-Metric-Space
-      ( A)
-      ( A)
-      ( short-id-Metric-Space A) ＝
-    id
-  eq-id-map-short-function-cauchy-approximation-Metric-Space = refl
-
-module _
-  {l1a l2a l1b l2b l1c l2c : Level}
-  (A : Metric-Space l1a l2a)
-  (B : Metric-Space l1b l2b)
-  (C : Metric-Space l1c l2c)
-  (g : short-function-Metric-Space B C)
-  (f : short-function-Metric-Space A B)
-  where
-
-  eq-comp-map-short-function-cauchy-approximation-Metric-Space :
-    ( map-short-function-cauchy-approximation-Metric-Space B C g ∘
-      map-short-function-cauchy-approximation-Metric-Space A B f) ＝
-    ( map-short-function-cauchy-approximation-Metric-Space A C
-      (comp-short-function-Metric-Space A B C g f))
-  eq-comp-map-short-function-cauchy-approximation-Metric-Space = refl
-```
-
 ### Homotopic Cauchy approximations are equal
 
 ```agda
 module _
-  { l1 l2 : Level} (A : Metric-Space l1 l2)
-  { f g : cauchy-approximation-Metric-Space A}
-  ( f~g :
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f g : cauchy-approximation-Metric-Space A)
+  where
+
+  htpy-map-cauchy-approximation-Metric-Space : UU l1
+  htpy-map-cauchy-approximation-Metric-Space =
     map-cauchy-approximation-Metric-Space A f ~
-    map-cauchy-approximation-Metric-Space A g)
+    map-cauchy-approximation-Metric-Space A g
+
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {f g : cauchy-approximation-Metric-Space A}
+  (f~g : htpy-map-cauchy-approximation-Metric-Space A f g)
   where
 
   eq-htpy-cauchy-approximation-Metric-Space : f ＝ g

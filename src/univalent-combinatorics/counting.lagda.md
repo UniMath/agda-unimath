@@ -14,8 +14,11 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -71,12 +74,15 @@ module _
   inv-equiv-count : X ≃ Fin number-of-elements-count
   inv-equiv-count = inv-equiv equiv-count
 
-  is-set-count : is-set X
-  is-set-count =
+  is-set-type-count : is-set X
+  is-set-type-count =
     is-set-equiv'
       ( Fin number-of-elements-count)
       ( equiv-count)
       ( is-set-Fin number-of-elements-count)
+
+  set-type-count : Set l
+  set-type-count = (X , is-set-type-count)
 ```
 
 ## Properties

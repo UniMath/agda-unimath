@@ -7,31 +7,22 @@ module domain-theory.kleenes-fixed-point-theorem-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import domain-theory.directed-families-posets
 open import domain-theory.omega-continuous-maps-posets
+open import domain-theory.omega-iteration-fixed-point-construction-posets
 
-open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.fixed-points-endofunctions
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.iterating-functions
-open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.bottom-elements-posets
-open import order-theory.chains-posets
-open import order-theory.inflattices
-open import order-theory.inhabited-chains-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
-open import order-theory.suplattices
 open import order-theory.upper-bounds-posets
 ```
 
@@ -53,21 +44,10 @@ exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 If `𝒜` has a [bottom element](order-theory.bottom-elements-posets.md) `⊥`, then
 this construction applied to `⊥` gives a least fixed point of `f`.
 
-**Duality.** Since the structure of posets is self-dual, there is a dual
-Kleene's fixed point theorem that, for every ω-cocontinuous endomap `f` and
-point `y ∈ 𝒜`, if `f(y) ≤ y`, then the ω-transfinite application of `f` to `y`,
-`f^ω(y)`, given that it exists, gives a fixed point of `f`:
-
-```text
-  … = f(f^ω(y)) = f^ω(y) ≤ … ≤ fⁿ(y) ≤ … ≤ f²(y) ≤ f(y) ≤ y.
-```
-
-If `𝒜` has a [top element](order-theory.top-elements-posets.md) `⊤`, then this
-construction applied to `⊤` gives a greatest fixed point of `f`.
+We prove this theorem as a corollary of
+[the ω-iteration fixed point construction for posets](domain-theory.omega-iteration-fixed-point-construction-posets.md).
 
 ## Construction
-
-### Kleene's fixed point construction for order preserving endomaps on posets
 
 ```agda
 module _
@@ -79,26 +59,35 @@ module _
   (p : leq-Poset 𝒜 x (f x))
   where
 
-  family-of-elements-construction-kleene-hom-Poset : ℕ → type-Poset 𝒜
-  family-of-elements-construction-kleene-hom-Poset n = iterate n f x
-
   leq-succ-family-of-elements-construction-kleene-hom-Poset :
     (n : ℕ) →
     leq-Poset 𝒜
-      ( family-of-elements-construction-kleene-hom-Poset n)
-      ( family-of-elements-construction-kleene-hom-Poset (succ-ℕ n))
-  leq-succ-family-of-elements-construction-kleene-hom-Poset zero-ℕ = p
+      ( iterate n f x)
+      ( iterate (succ-ℕ n) f x)
+  leq-succ-family-of-elements-construction-kleene-hom-Poset zero-ℕ =
+    p
   leq-succ-family-of-elements-construction-kleene-hom-Poset (succ-ℕ n) =
-    H ( family-of-elements-construction-kleene-hom-Poset n)
-      ( family-of-elements-construction-kleene-hom-Poset (succ-ℕ n))
+    H ( iterate n f x)
+      ( iterate (succ-ℕ n) f x)
       ( leq-succ-family-of-elements-construction-kleene-hom-Poset n)
 
-  hom-construction-kleene-hom-Poset : hom-Poset ℕ-Poset 𝒜
-  hom-construction-kleene-hom-Poset =
-    hom-ind-ℕ-Poset 𝒜
-      ( family-of-elements-construction-kleene-hom-Poset)
-      ( leq-succ-family-of-elements-construction-kleene-hom-Poset)
+  family-of-elements-construction-kleene-hom-Poset : ℕ → type-Poset 𝒜
+  family-of-elements-construction-kleene-hom-Poset =
+    family-of-elements-construction-ω-iteration-Poset 𝒜 x
+      leq-succ-family-of-elements-construction-kleene-hom-Poset
 
+  hom-construction-kleene-hom-Poset :
+    hom-Poset ℕ-Poset 𝒜
+  hom-construction-kleene-hom-Poset =
+    hom-construction-ω-iteration-Poset 𝒜 x
+      leq-succ-family-of-elements-construction-kleene-hom-Poset
+```
+
+## Theorems
+
+### Fixed point theorem for order preserving maps
+
+```agda
 module _
   {l1 l2 : Level}
   (𝒜 : Poset l1 l2)
@@ -109,79 +98,35 @@ module _
   (s :
     has-least-upper-bound-family-of-elements-Poset 𝒜
       ( family-of-elements-construction-kleene-hom-Poset 𝒜 H x p))
+  (F :
+    preserves-ω-supremum-Poset 𝒜 𝒜 f
+      ( hom-construction-kleene-hom-Poset 𝒜 H x p))
   where
 
   point-construction-kleene-hom-Poset : type-Poset 𝒜
-  point-construction-kleene-hom-Poset = pr1 s
-
-  is-upper-bound-map-point-construction-kleene-hom-Poset :
-    is-upper-bound-family-of-elements-Poset 𝒜
-      ( family-of-elements-construction-kleene-hom-Poset 𝒜 H x p)
-      ( f point-construction-kleene-hom-Poset)
-  is-upper-bound-map-point-construction-kleene-hom-Poset zero-ℕ =
-    transitive-leq-Poset 𝒜 x (f x)
-      ( f point-construction-kleene-hom-Poset)
-      ( H x
-        ( point-construction-kleene-hom-Poset)
-        ( is-upper-bound-is-least-upper-bound-family-of-elements-Poset 𝒜
-          ( pr2 s)
-          ( 0)))
-      ( p)
-  is-upper-bound-map-point-construction-kleene-hom-Poset (succ-ℕ n) =
-    H ( family-of-elements-construction-kleene-hom-Poset 𝒜 H x p n)
-      ( point-construction-kleene-hom-Poset)
-      ( is-upper-bound-is-least-upper-bound-family-of-elements-Poset 𝒜
-        ( pr2 s)
-        ( n))
-
-  leq-point-construction-kleene-hom-Poset :
-    leq-Poset 𝒜
-      ( point-construction-kleene-hom-Poset)
-      ( f point-construction-kleene-hom-Poset)
-  leq-point-construction-kleene-hom-Poset =
-    pr1
-      ( pr2 s (f point-construction-kleene-hom-Poset))
-      ( is-upper-bound-map-point-construction-kleene-hom-Poset)
-
-  geq-point-construction-kleene-hom-Poset :
-    (F :
-      preserves-ω-supremum-Poset 𝒜 𝒜 f
-        ( hom-construction-kleene-hom-Poset 𝒜 H x p)) →
-    leq-Poset 𝒜
-      ( f point-construction-kleene-hom-Poset)
-      ( point-construction-kleene-hom-Poset)
-  geq-point-construction-kleene-hom-Poset F =
-    pr1
-      ( F s point-construction-kleene-hom-Poset)
-      ( is-upper-bound-is-least-upper-bound-family-of-elements-Poset 𝒜 (pr2 s) ∘
-        succ-ℕ)
+  point-construction-kleene-hom-Poset =
+    point-construction-ω-iteration-Poset 𝒜 x
+      ( leq-succ-family-of-elements-construction-kleene-hom-Poset 𝒜 H x p)
+      ( s)
+      ( F)
 
   is-fixed-point-construction-kleene-hom-Poset :
-    (F :
-      preserves-ω-supremum-Poset 𝒜 𝒜 f
-        ( hom-construction-kleene-hom-Poset 𝒜 H x p)) →
     f (point-construction-kleene-hom-Poset) ＝
     point-construction-kleene-hom-Poset
-  is-fixed-point-construction-kleene-hom-Poset F =
-    antisymmetric-leq-Poset 𝒜
-      ( f point-construction-kleene-hom-Poset)
-      ( point-construction-kleene-hom-Poset)
-      ( geq-point-construction-kleene-hom-Poset F)
-      ( leq-point-construction-kleene-hom-Poset)
+  is-fixed-point-construction-kleene-hom-Poset =
+    is-fixed-point-construction-ω-iteration-Poset 𝒜 x
+      ( leq-succ-family-of-elements-construction-kleene-hom-Poset 𝒜 H x p)
+      ( s)
+      ( F)
 
   fixed-point-construction-kleene-hom-Poset :
-    (F :
-      preserves-ω-supremum-Poset 𝒜 𝒜 f
-        ( hom-construction-kleene-hom-Poset 𝒜 H x p)) →
     fixed-point f
-  fixed-point-construction-kleene-hom-Poset F =
-    point-construction-kleene-hom-Poset ,
-    is-fixed-point-construction-kleene-hom-Poset F
-```
+  fixed-point-construction-kleene-hom-Poset =
+    fixed-point-construction-ω-iteration-Poset 𝒜 x
+      ( leq-succ-family-of-elements-construction-kleene-hom-Poset 𝒜 H x p)
+      ( s)
+      ( F)
 
-### Kleene's fixed point construction for ω-continuous endomaps on posets
-
-```agda
 module _
   {l1 l2 : Level}
   (𝒜 : Poset l1 l2)
@@ -204,7 +149,11 @@ module _
       ( preserves-order-is-ω-continuous-Poset 𝒜 𝒜 F)
       ( x)
       ( p)
+```
 
+### Fixed point theorem for ω-continuous maps
+
+```agda
 module _
   {l1 l2 : Level}
   (𝒜 : Poset l1 l2)
@@ -218,36 +167,8 @@ module _
   where
 
   point-construction-kleene-Poset : type-Poset 𝒜
-  point-construction-kleene-Poset = pr1 s
-
-  is-upper-bound-map-point-construction-kleene-Poset :
-    is-upper-bound-family-of-elements-Poset 𝒜
-      ( family-of-elements-construction-kleene-Poset 𝒜 F x p)
-      ( f point-construction-kleene-Poset)
-  is-upper-bound-map-point-construction-kleene-Poset =
-    is-upper-bound-map-point-construction-kleene-hom-Poset 𝒜
-      ( preserves-order-is-ω-continuous-Poset 𝒜 𝒜 F)
-      ( x)
-      ( p)
-      ( s)
-
-  leq-point-construction-kleene-Poset :
-    leq-Poset 𝒜
-      ( point-construction-kleene-Poset)
-      ( f point-construction-kleene-Poset)
-  leq-point-construction-kleene-Poset =
-    leq-point-construction-kleene-hom-Poset 𝒜
-      ( preserves-order-is-ω-continuous-Poset 𝒜 𝒜 F)
-      ( x)
-      ( p)
-      ( s)
-
-  geq-point-construction-kleene-Poset :
-    leq-Poset 𝒜
-      ( f point-construction-kleene-Poset)
-      ( point-construction-kleene-Poset)
-  geq-point-construction-kleene-Poset =
-    geq-point-construction-kleene-hom-Poset 𝒜
+  point-construction-kleene-Poset =
+    point-construction-kleene-hom-Poset 𝒜
       ( preserves-order-is-ω-continuous-Poset 𝒜 𝒜 F)
       ( x)
       ( p)
@@ -269,9 +190,7 @@ module _
     point-construction-kleene-Poset , is-fixed-point-construction-kleene-Poset
 ```
 
-## Theorem
-
-### Kleene's least fixed point theorem for order preserving endomaps on posets with a bottom element
+### Least fixed point theorem for order preserving maps
 
 If `𝒜` has a bottom element, then Kleene's fixed point construction applied to
 this element gives a least fixed point of `f`.
@@ -293,7 +212,7 @@ module _
 
   point-theorem-kleene-hom-Poset : type-Poset 𝒜
   point-theorem-kleene-hom-Poset =
-    point-construction-kleene-hom-Poset 𝒜 H ⊥ (b' (f ⊥)) s
+    point-construction-kleene-hom-Poset 𝒜 H ⊥ (b' (f ⊥)) s F
 
   fixed-point-theorem-kleene-hom-Poset : fixed-point f
   fixed-point-theorem-kleene-hom-Poset =
@@ -326,7 +245,7 @@ module _
         ( q))
 ```
 
-### Kleene's least fixed point theorem for order preserving endomaps on posets with a bottom element
+### Least fixed point theorem for ω-continuous maps
 
 If `𝒜` has a bottom element, then Kleene's fixed point construction applied to
 this element gives a least fixed point of `f`.

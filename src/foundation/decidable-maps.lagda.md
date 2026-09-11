@@ -23,7 +23,7 @@ open import foundation.hilbert-epsilon-operators-maps
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.propositional-truncations
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -312,7 +312,7 @@ module _
       ( F (map-codomain-cartesian-hom-arrow g f α d))
 ```
 
-### Decidable maps are closed under retracts of maps
+### Decidable maps are closed under retracts of arrows
 
 ```agda
 module _
@@ -320,12 +320,12 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-decidable-retract-map :
-    f retract-of-map g → is-decidable-map g → is-decidable-map f
-  is-decidable-retract-map R G x =
+  is-decidable-retract-arrow :
+    f retract-of-arrow g → is-decidable-map g → is-decidable-map f
+  is-decidable-retract-arrow R G x =
     is-decidable-retract-of
-      ( retract-fiber-retract-map f g R x)
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( retract-fiber-retract-arrow f g R x)
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
 ```
 
 ### Decidable maps have Hilbert ε-operators

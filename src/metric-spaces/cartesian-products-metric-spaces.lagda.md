@@ -10,6 +10,7 @@ module metric-spaces.cartesian-products-metric-spaces where
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
 open import foundation.function-extensionality
@@ -20,13 +21,14 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import metric-spaces.extensionality-pseudometric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.monotonic-rational-neighborhood-relations
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 ```
@@ -130,17 +132,32 @@ module _
 ### The projection maps are short
 
 ```agda
-  is-short-pr1-product-Metric-Space :
-    is-short-function-Metric-Space
+  is-short-map-pr1-product-Metric-Space :
+    is-short-map-Metric-Space
       ( product-Metric-Space)
       ( X)
       ( pr1)
-  is-short-pr1-product-Metric-Space _ _ _ = pr1
+  is-short-map-pr1-product-Metric-Space _ _ _ = pr1
 
-  is-short-pr2-product-Metric-Space :
-    is-short-function-Metric-Space
+  is-short-map-pr2-product-Metric-Space :
+    is-short-map-Metric-Space
       ( product-Metric-Space)
       ( Y)
       ( pr2)
-  is-short-pr2-product-Metric-Space _ _ _ = pr2
+  is-short-map-pr2-product-Metric-Space _ _ _ = pr2
+```
+
+### The diagonal isometry from `X` to `X × X`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Metric-Space l1 l2)
+  where
+
+  diagonal-product-isometry-Metric-Space :
+    isometry-Metric-Space X (product-Metric-Space X X)
+  diagonal-product-isometry-Metric-Space =
+    ( diagonal-product (type-Metric-Space X) ,
+      ( λ _ _ _ → ((λ N → (N , N)) , pr1)))
 ```

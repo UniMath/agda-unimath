@@ -8,18 +8,39 @@ module foundation.mere-embeddings where
 
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
+open import foundation.negation
+open import foundation.projective-types
 open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.split-surjective-maps
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.propositions
+
+open import logic.propositional-double-negation-elimination
 
 open import order-theory.large-preorders
 ```
 
 </details>
+
+## Idea
+
+A type `A` {{#concept "merely embeds" Agda=mere-emb}} into a type `B` if there
+[merely exists](foundation.propositional-truncations.md) an
+[embedding](foundation-core.embeddings.md) of `A` into `B`.
 
 ## Definition
 
@@ -46,20 +67,15 @@ refl-mere-emb X = unit-trunc-Prop id-emb
 transitive-mere-emb :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} →
   mere-emb Y Z → mere-emb X Y → mere-emb X Z
-transitive-mere-emb g f =
-  apply-universal-property-trunc-Prop g
-    ( mere-emb-Prop _ _)
-    ( λ g' →
-      apply-universal-property-trunc-Prop f
-        ( mere-emb-Prop _ _)
-        ( λ f' → unit-trunc-Prop (comp-emb g' f')))
+transitive-mere-emb = map-binary-trunc-Prop comp-emb
 
 mere-emb-Large-Preorder : Large-Preorder lsuc (_⊔_)
-type-Large-Preorder mere-emb-Large-Preorder l = UU l
-leq-prop-Large-Preorder mere-emb-Large-Preorder = mere-emb-Prop
-refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
-transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
-  transitive-mere-emb
+mere-emb-Large-Preorder =
+  λ where
+  .type-Large-Preorder l → UU l
+  .leq-prop-Large-Preorder → mere-emb-Prop
+  .refl-leq-Large-Preorder → refl-mere-emb
+  .transitive-leq-Large-Preorder X Y Z → transitive-mere-emb
 ```
 
 ### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them
@@ -67,12 +83,74 @@ transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
 ```agda
 antisymmetric-mere-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
-antisymmetric-mere-emb lem f g =
-  apply-universal-property-trunc-Prop f
-    ( mere-equiv-Prop _ _)
-    ( λ f' →
-      apply-universal-property-trunc-Prop g
-        ( mere-equiv-Prop _ _)
-        ( λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')))
+  level-LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
+antisymmetric-mere-emb lem =
+  map-binary-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem)
+```
+
+### Dependent sums over projective types preserve mere embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : X → UU l2} {Z : X → UU l3}
+  where
+
+  mere-emb-tot :
+    is-projective-Level (l2 ⊔ l3) X →
+    ((x : X) → mere-emb (Y x) (Z x)) →
+    mere-emb (Σ X Y) (Σ X Z)
+  mere-emb-tot H e = map-trunc-Prop emb-tot (H _ e)
+```
+
+### Dependent products over projective types preserve mere embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : X → UU l2} {Z : X → UU l3}
+  where
+
+  mere-emb-Π :
+    is-projective-Level (l2 ⊔ l3) X →
+    ((x : X) → mere-emb (Y x) (Z x)) →
+    mere-emb ((x : X) → Y x) ((x : X) → Z x)
+  mere-emb-Π H e = map-trunc-Prop emb-Π (H _ e)
+```
+
+### Empty types merely embed into any type
+
+```agda
+mere-emb-is-empty :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-empty X → mere-emb X Y
+mere-emb-is-empty H = unit-trunc-Prop (emb-is-empty H)
+```
+
+### Surjections onto projective sets give reverse mere embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  reverse-mere-emb-surjection-is-projective :
+    is-projective-Level (l1 ⊔ l2) Y →
+    is-set X →
+    (X ↠ Y) → mere-emb Y X
+  reverse-mere-emb-surjection-is-projective H is-set-X (f , F) =
+    map-trunc-Prop
+      ( reverse-emb-has-section {f = f} is-set-X ∘
+        section-is-split-surjective f)
+      ( H (fiber f) F)
+```
+
+### A type `X` with propositional double negation elimination such that there is some type `Y` it does not merely embed into, then `X` is inhabited
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  is-inhabited-not-mere-emb :
+    has-prop-double-negation-elim X → ¬ mere-emb X Y → is-inhabited X
+  is-inhabited-not-mere-emb dX H =
+    dX (H ∘ mere-emb-is-empty)
 ```

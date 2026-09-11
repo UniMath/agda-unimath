@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -694,7 +695,7 @@ module _
 
     is-chain-Finitely-Graded-Subposet-Prop : Prop (l1 ⊔ l2 ⊔ l3)
     is-chain-Finitely-Graded-Subposet-Prop =
-      is-total-Poset-Prop (poset-Finitely-Graded-Subposet X S)
+      is-total-prop-Poset (poset-Finitely-Graded-Subposet X S)
 
     is-chain-Finitely-Graded-Subposet : UU (l1 ⊔ l2 ⊔ l3)
     is-chain-Finitely-Graded-Subposet =

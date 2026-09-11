@@ -9,15 +9,11 @@ module elementary-number-theory.triangular-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.convergent-series-metric-abelian-groups
-open import analysis.series-metric-abelian-groups
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.metric-additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
@@ -27,6 +23,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.semiring-of-natural-numbers
+open import elementary-number-theory.series-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
@@ -42,7 +39,7 @@ open import group-theory.groups
 open import metric-spaces.limits-of-sequences-metric-spaces
 open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.rational-sequences-approximating-zero
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import ring-theory.partial-sums-sequences-semirings
 ```
@@ -203,15 +200,14 @@ abstract
                 ( eq-nonzero-ℕ
                   ( compute-double-triangular-number-ℕ (succ-ℕ n)))))
 
-series-reciprocal-triangular-number-ℕ : series-Metric-Ab metric-ab-add-ℚ
+series-reciprocal-triangular-number-ℕ : series-ℚ
 series-reciprocal-triangular-number-ℕ =
-  series-terms-Metric-Ab reciprocal-triangular-number-succ-ℕ
+  series-terms-ℚ reciprocal-triangular-number-succ-ℕ
 
 abstract
   compute-partial-sum-series-reciprocal-triangular-number-ℕ :
     (n : ℕ) →
-    partial-sum-series-Metric-Ab
-      ( metric-ab-add-ℚ)
+    partial-sum-series-ℚ
       ( series-reciprocal-triangular-number-ℕ)
       ( n) ＝
     rational-ℕ 2 *ℚ (one-ℚ -ℚ reciprocal-rational-succ-ℕ n)
@@ -227,8 +223,7 @@ abstract
           by right-zero-law-mul-ℚ _)
   compute-partial-sum-series-reciprocal-triangular-number-ℕ (succ-ℕ n) =
     equational-reasoning
-      partial-sum-series-Metric-Ab
-        ( metric-ab-add-ℚ)
+      partial-sum-series-ℚ
         ( series-reciprocal-triangular-number-ℕ)
         ( n) +ℚ
       reciprocal-triangular-number-succ-ℕ n
@@ -271,7 +266,7 @@ This theorem is the [42nd](literature.100-theorems.md#42) theorem on
 ```agda
 abstract
   sum-reciprocal-triangular-number-ℕ :
-    is-sum-series-Metric-Ab
+    is-sum-series-ℚ
       ( series-reciprocal-triangular-number-ℕ)
       ( rational-ℕ 2)
   sum-reciprocal-triangular-number-ℕ =
@@ -284,18 +279,18 @@ abstract
           by ap-mul-ℚ refl (right-zero-law-diff-ℚ one-ℚ)
         ＝ rational-ℕ 2
           by right-unit-law-mul-ℚ _)
-      ( preserves-limits-sequence-uniformly-continuous-function-Metric-Space
+      ( is-limit-map-sequence-uniformly-continuous-map-Metric-Space
         ( metric-space-ℚ)
         ( metric-space-ℚ)
-        ( comp-uniformly-continuous-function-Metric-Space
+        ( comp-uniformly-continuous-map-Metric-Space
           ( metric-space-ℚ)
           ( metric-space-ℚ)
           ( metric-space-ℚ)
-          ( uniformly-continuous-left-mul-ℚ (rational-ℕ 2))
-          ( uniformly-continuous-diff-ℚ one-ℚ))
-          ( reciprocal-rational-succ-ℕ)
-          ( zero-ℚ)
-          ( is-zero-limit-reciprocal-rational-succ-ℕ))
+          ( uniformly-continuous-map-left-mul-ℚ (rational-ℕ 2))
+          ( uniformly-continuous-map-left-diff-ℚ one-ℚ))
+        ( reciprocal-rational-succ-ℕ)
+        ( zero-ℚ)
+        ( is-zero-limit-reciprocal-rational-succ-ℕ))
 ```
 
 ## References

@@ -7,34 +7,25 @@ module logic.de-morgan-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
-open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.embeddings
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
-open import foundation.existential-quantification
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.retracts-of-types
-open import foundation.transport-along-identifications
-open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -45,6 +36,8 @@ open import logic.de-morgan-types
 open import logic.de-morgans-law
 open import logic.double-negation-eliminating-maps
 open import logic.double-negation-elimination
+open import logic.propositionally-decidable-maps
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -319,7 +312,7 @@ module _
       ( F (map-codomain-cartesian-hom-arrow g f α d))
 ```
 
-### De Morgan maps are closed under retracts of maps
+### De Morgan maps are closed under retracts of arrows
 
 ```agda
 module _
@@ -327,13 +320,30 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  is-de-morgan-retract-map :
-    f retract-of-map g →
+  is-de-morgan-retract-arrow :
+    f retract-of-arrow g →
     is-de-morgan-map g →
     is-de-morgan-map f
-  is-de-morgan-retract-map R G x =
+  is-de-morgan-retract-arrow R G x =
     is-decidable-iff
-      ( map-neg (inclusion-retract (retract-fiber-retract-map f g R x)))
-      ( map-neg (map-retraction-retract (retract-fiber-retract-map f g R x)))
-      ( G (map-codomain-inclusion-retract-map f g R x))
+      ( map-neg (inclusion-retract (retract-fiber-retract-arrow f g R x)))
+      ( map-neg (map-retraction-retract (retract-fiber-retract-arrow f g R x)))
+      ( G (map-codomain-inclusion-retract-arrow f g R x))
+```
+
+### Propositionally decidable maps are De Morgan
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-de-morgan-map-is-inhabited-or-empty-map :
+    is-inhabited-or-empty-map f → is-de-morgan-map f
+  is-de-morgan-map-is-inhabited-or-empty-map H b =
+    is-decidable-iff
+      ( is-empty-type-trunc-Prop')
+      ( is-empty-type-trunc-Prop)
+      ( is-decidable-neg (is-decidable-trunc-Prop-is-inhabited-or-empty (H b)))
 ```

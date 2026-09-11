@@ -9,8 +9,12 @@ module real-numbers.binary-maximum-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
+open import elementary-number-theory.rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -25,6 +29,8 @@ open import order-theory.join-semilattices
 open import order-theory.large-join-semilattices
 open import order-theory.least-upper-bounds-large-posets
 
+open import real-numbers.addition-positive-real-numbers
+open import real-numbers.addition-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -50,10 +56,10 @@ of two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
 cuts.
 
 For any `x : ℝ`, `max-ℝ x` is a
-[short function](metric-spaces.short-functions-metric-spaces.md) `ℝ → ℝ` for the
+[short map](metric-spaces.short-maps-metric-spaces.md) `ℝ → ℝ` for the
 [standard real metric structure](real-numbers.metric-space-of-real-numbers.md).
-Moreover, the map `x ↦ max-ℝ x` is a short function from `ℝ` into the
-[metric space of short functions](metric-spaces.metric-space-of-short-functions-metric-spaces.md)
+Moreover, the map `x ↦ max-ℝ x` is a short map from `ℝ` into the
+[metric space of short maps](metric-spaces.metric-space-of-short-maps-metric-spaces.md)
 of `ℝ`.
 
 ## Definition
@@ -106,6 +112,11 @@ module _
         ( upper-real-max-ℝ)
         ( is-disjoint-lower-upper-max-ℝ)
         ( is-located-lower-upper-max-ℝ)
+
+ap-max-ℝ :
+  {l1 l2 : Level} → {x x' : ℝ l1} → x ＝ x' →
+  {y y' : ℝ l2} → y ＝ y' → max-ℝ x y ＝ max-ℝ x' y'
+ap-max-ℝ = ap-binary max-ℝ
 ```
 
 ## Properties
@@ -351,7 +362,7 @@ module _
               ( max-ℝ x y -ℝ real-ℚ ε)
               ( real-ℚ q)
               ( x)
-              ( le-real-is-in-lower-cut-ℚ x q<x)
+              ( le-real-is-in-lower-cut-ℝ x q<x)
               ( max-ε<q))
           ( λ x<r →
             elim-disjunction
@@ -361,7 +372,7 @@ module _
                   ( max-ℝ x y -ℝ real-ℚ ε)
                   ( real-ℚ q)
                   ( y)
-                  ( le-real-is-in-lower-cut-ℚ y q<y)
+                  ( le-real-is-in-lower-cut-ℝ y q<y)
                   ( max-ε<q))
               ( λ y<r →
                 ex-falso
@@ -369,9 +380,59 @@ module _
                     ( max-ℝ x y)
                     ( concatenate-leq-le-ℝ (max-ℝ x y) (real-ℚ r) (max-ℝ x y)
                       ( leq-max-leq-leq-ℝ x y (real-ℚ r)
-                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ x x<r))
-                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℚ y y<r)))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℝ x x<r))
+                        ( leq-le-ℝ (le-real-is-in-upper-cut-ℝ y y<r)))
                       ( r<max))))
               ( is-located-lower-upper-cut-ℝ y q<r))
           ( is-located-lower-upper-cut-ℝ x q<r)
+```
+
+### If `x < z` and `y < z`, then `max-ℝ x y < z`
+
+```agda
+abstract
+  le-max-le-le-ℝ :
+    {l1 l2 l3 : Level} {x : ℝ l1} {y : ℝ l2} {z : ℝ l3} → le-ℝ x z → le-ℝ y z →
+    le-ℝ (max-ℝ x y) z
+  le-max-le-le-ℝ {x = x} {y = y} {z = z} x<z y<z =
+    let open do-syntax-trunc-Prop (le-prop-ℝ (max-ℝ x y) z)
+    in do
+      (p , x<p , p<z) ← dense-rational-le-ℝ x z x<z
+      (q , y<q , q<z) ← dense-rational-le-ℝ y z y<z
+      rec-coproduct
+        ( λ p≤q →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ q)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ q)
+              ( transitive-leq-ℝ
+                ( x)
+                ( real-ℚ p)
+                ( real-ℚ q)
+                ( preserves-leq-real-ℚ p≤q)
+                ( leq-le-ℝ x<p))
+              ( leq-le-ℝ y<q))
+            ( q<z))
+        ( λ q≤p →
+          concatenate-leq-le-ℝ
+            ( max-ℝ x y)
+            ( real-ℚ p)
+            ( z)
+            ( leq-max-leq-leq-ℝ
+              ( x)
+              ( y)
+              ( real-ℚ p)
+              ( leq-le-ℝ x<p)
+              ( transitive-leq-ℝ
+                ( y)
+                ( real-ℚ q)
+                ( real-ℚ p)
+                ( preserves-leq-real-ℚ q≤p)
+                ( leq-le-ℝ y<q)))
+            ( p<z))
+        ( linear-leq-ℚ p q)
 ```
