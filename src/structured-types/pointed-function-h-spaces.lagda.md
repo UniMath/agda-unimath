@@ -21,7 +21,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Given a [H-space](structured-types.h-spaces.md) `M` and a
+Given an [H-space](structured-types.h-spaces.md) `M` and a
 [pointed type](structured-types.pointed-types.md) `I`, the
 {{#concept "pointed function H-space" Agda=pointed-function-H-Space}} `I →∗ M`
 consists of [pointed functions](structured-types.pointed-maps.md) from `I` to
