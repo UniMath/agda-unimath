@@ -30,7 +30,7 @@ open import structured-types.pointed-types
 
 Given a family of [H-spaces](structured-types.h-spaces.md) `M i` indexed by a
 [pointed type](structured-types.pointed-types.md) `i∗ : I`, the
-{{#concept "pointed dependent functions" Disambiguation="H-space" Agda=pointed-Π-H-Space}}
+{{#concept "pointed dependent function H-space" Agda=pointed-Π-H-Space}}
 `Π∗(i : I), M i` is an H-space consisting of
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
 taking `i : I` to an element of the underlying type of `M i`, and taking `i∗` to
