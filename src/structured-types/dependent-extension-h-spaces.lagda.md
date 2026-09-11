@@ -173,3 +173,9 @@ module _
   magma-extension-Π-H-Space : Magma (l1 ⊔ l2 ⊔ l3)
   magma-extension-Π-H-Space = magma-H-Space extension-Π-H-Space
 ```
+
+## See also
+
+- [Pointed dependent function H-spaces](structured-types.pointed-dependent-function-h-spaces.md)
+  are, up to equivalence, the special case where `h : unit → I` is the
+  inclusion of the base point
