@@ -104,3 +104,9 @@ module _
   magma-extension-H-Space : Magma (l1 ⊔ l2 ⊔ l3)
   magma-extension-H-Space = magma-H-Space extension-H-Space
 ```
+
+## See also
+
+- [Pointed function H-spaces](structured-types.pointed-function-h-spaces.md)
+  are, up to equivalence, the special case where `h : unit → I` is the
+  inclusion of the base point
