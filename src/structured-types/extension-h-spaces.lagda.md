@@ -108,5 +108,5 @@ module _
 ## See also
 
 - [Pointed function H-spaces](structured-types.pointed-function-h-spaces.md)
-  are, up to equivalence, the special case where `h : unit → I` is the
-  inclusion of the base point
+  are, up to equivalence, the special case where `h : unit → I` is the inclusion
+  of the base point

@@ -177,5 +177,5 @@ module _
 ## See also
 
 - [Pointed dependent function H-spaces](structured-types.pointed-dependent-function-h-spaces.md)
-  are, up to equivalence, the special case where `h : unit → I` is the
-  inclusion of the base point
+  are, up to equivalence, the special case where `h : unit → I` is the inclusion
+  of the base point
