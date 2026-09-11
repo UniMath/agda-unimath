@@ -57,7 +57,7 @@ module _
   is-orthogonal-ℝ-Inner-Product-Space :
     Relation l1 (type-ℝ-Inner-Product-Space V)
   is-orthogonal-ℝ-Inner-Product-Space =
-    type-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
+    rel-Relation-Prop is-orthogonal-prop-ℝ-Inner-Product-Space
 ```
 
 ## Properties

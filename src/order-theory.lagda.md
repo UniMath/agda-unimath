@@ -69,6 +69,7 @@ open import order-theory.inflattices public
 open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public
 open import order-theory.inhabited-finite-total-orders public
+open import order-theory.initial-segments-ordinals public
 open import order-theory.intersections-closed-intervals-lattices public
 open import order-theory.intersections-closed-intervals-total-orders public
 open import order-theory.interval-subposets public
@@ -173,6 +174,7 @@ open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
+open import order-theory.well-founded-propositional-relations public
 open import order-theory.well-founded-relations public
 open import order-theory.zorns-lemma public
 ```

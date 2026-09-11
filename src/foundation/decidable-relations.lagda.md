@@ -33,7 +33,7 @@ that each `R x y` is a decidable proposition.
 is-decidable-Relation-Prop :
   {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
 is-decidable-Relation-Prop {A = A} R =
-  (x y : A) → is-decidable ( type-Relation-Prop R x y)
+  (x y : A) → is-decidable ( rel-Relation-Prop R x y)
 
 Decidable-Relation : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 Decidable-Relation l2 X = X → X → Decidable-Prop l2
@@ -62,8 +62,8 @@ map-inv-equiv-relation-is-decidable-Decidable-Relation :
   Σ ( Relation-Prop l2 X) (λ R → is-decidable-Relation-Prop R) →
   Decidable-Relation l2 X
 map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d) x y =
-  ( ( type-Relation-Prop R x y) ,
-    ( is-prop-type-Relation-Prop R x y) ,
+  ( ( rel-Relation-Prop R x y) ,
+    ( is-prop-rel-Relation-Prop R x y) ,
     ( d x y))
 
 equiv-relation-is-decidable-Decidable-Relation :
