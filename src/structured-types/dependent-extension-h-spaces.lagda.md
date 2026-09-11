@@ -22,8 +22,6 @@ open import orthogonal-factorization-systems.extensions-dependent-maps
 open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.noncoherent-h-spaces
-open import structured-types.pointed-dependent-functions
-open import structured-types.pointed-homotopies
 open import structured-types.pointed-types
 ```
 
