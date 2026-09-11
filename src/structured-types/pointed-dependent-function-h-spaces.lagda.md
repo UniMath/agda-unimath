@@ -158,5 +158,5 @@ module _
 
 ## See also
 
-- Pointed dependent function H-spaces are a special case of
+- Pointed dependent function H-spaces are, up to equivalence, a special case of
   [dependent extension H-spaces](structured-types.dependent-extension-h-spaces.md)
