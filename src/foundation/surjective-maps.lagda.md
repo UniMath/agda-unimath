@@ -675,6 +675,14 @@ is-surjective-is-neg-one-connected-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
   is-connected-map neg-one-𝕋 f → is-surjective f
 is-surjective-is-neg-one-connected-map H b = center (H b)
+
+neg-one-connected-map-surjective-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  connected-map neg-one-𝕋 A B → A ↠ B
+neg-one-connected-map-surjective-map f =
+  ( map-connected-map f ,
+    is-surjective-is-neg-one-connected-map
+      ( is-connected-map-connected-map f))
 ```
 
 ### A (k+1)-connected map is surjective
