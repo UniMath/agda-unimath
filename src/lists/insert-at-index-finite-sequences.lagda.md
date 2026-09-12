@@ -1,24 +1,35 @@
 # Inserting elements in finite sequences
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module lists.insert-at-index-finite-sequences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negated-equality
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
+open import lists.insert-at-index-finite-sequences-of-types
 open import lists.remove-at-index-finite-sequences
 
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.skipping-element-standard-finite-types
+open import univalent-combinatorics.skipping-two-elements-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -47,19 +58,22 @@ module _
   where
 
   insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
-    fin-sequence A n →
-    fin-sequence A (succ-ℕ n)
-  insert-at-fin-sequence zero-ℕ a _ _ _ = a
-  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
-    insert-at-fin-sequence n a x (tail-fin-sequence n u) y
-  insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) =
-    head-fin-sequence n u
-  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inl y) =
-    elem-at-fin-sequence (succ-ℕ n) y u
-  insert-at-fin-sequence (succ-ℕ n) a (inr x) u (inr y) = a
+    (n : ℕ) → Fin (succ-ℕ n) → A → fin-sequence A n → fin-sequence A (succ-ℕ n)
+  insert-at-fin-sequence n = insert-at-Π-fin-sequence n (λ _ → A)
+```
+
+### Insertion at two indices
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  insert-at-two-indices-fin-sequence :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) → i ≠ j → A → A →
+    fin-sequence A n → fin-sequence A (n +ℕ 2)
+  insert-at-two-indices-fin-sequence n =
+    insert-at-two-indices-Π-fin-sequence n (λ _ → A)
 ```
 
 ## Properties
@@ -69,19 +83,47 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l}
-  where
+  where abstract
 
   compute-elem-at-insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
+    (n : ℕ)
+    (i : Fin (succ-ℕ n))
+    (a : A)
     (u : fin-sequence A n) →
-    elem-at-fin-sequence (succ-ℕ n) i (insert-at-fin-sequence n a i u) ＝
+    elem-at-fin-sequence (succ-ℕ n) i (insert-at-fin-sequence n i a u) ＝
     a
-  compute-elem-at-insert-at-fin-sequence zero-ℕ a _ _ = refl
-  compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u =
-    compute-elem-at-insert-at-fin-sequence n a x (tail-fin-sequence n u)
-  compute-elem-at-insert-at-fin-sequence (succ-ℕ n) a (inr x) u = refl
+  compute-elem-at-insert-at-fin-sequence n =
+    compute-elem-at-insert-at-Π-fin-sequence n (λ _ → A)
+```
+
+### The coordinate at the first index of two inserted elements is the inserted element
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where abstract
+
+  compute-first-elem-at-insert-at-two-indices-fin-sequence :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) (i≠j : i ≠ j) (aᵢ aⱼ : A)
+    (u : fin-sequence A n) →
+    insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u i ＝ aᵢ
+  compute-first-elem-at-insert-at-two-indices-fin-sequence n =
+    compute-first-elem-at-insert-at-two-indices-Π-fin-sequence n (λ _ → A)
+```
+
+### The coordinate at the second index of two inserted elements is the inserted element
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where abstract
+
+  compute-second-elem-at-insert-at-two-indices-fin-sequence :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) (i≠j : i ≠ j) (aᵢ aⱼ : A)
+    (u : fin-sequence A n) →
+    insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u j ＝ aⱼ
+  compute-second-elem-at-insert-at-two-indices-fin-sequence n =
+    compute-second-elem-at-insert-at-two-indices-Π-fin-sequence n (λ _ → A)
 ```
 
 ### Insertion is functorial
@@ -89,7 +131,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
+  where abstract
 
   htpy-map-insert-at-fin-sequence :
     (n : ℕ) →
@@ -97,11 +139,11 @@ module _
     (i : Fin (succ-ℕ n)) →
     (u : fin-sequence A n) →
     insert-at-fin-sequence n
-      ( f x)
       ( i)
+      ( f x)
       ( map-fin-sequence n f u) ~
-    map-fin-sequence (succ-ℕ n) f (insert-at-fin-sequence n x i u)
-  htpy-map-insert-at-fin-sequence zero-ℕ x _ u _ = refl
+    map-fin-sequence (succ-ℕ n) f (insert-at-fin-sequence n i x u)
+  htpy-map-insert-at-fin-sequence zero-ℕ x (inr star) u (inr star) = refl
   htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inl j) =
     htpy-map-insert-at-fin-sequence n x i (tail-fin-sequence n u) j
   htpy-map-insert-at-fin-sequence (succ-ℕ n) x (inl i) u (inr j) = refl
@@ -114,7 +156,7 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l}
-  where
+  where abstract
 
   compute-insert-at-remove-at-fin-sequence :
     (n : ℕ) →
@@ -122,20 +164,12 @@ module _
     (u : fin-sequence A (succ-ℕ n)) →
     insert-at-fin-sequence
       ( n)
-      ( elem-at-fin-sequence (succ-ℕ n) i u)
       ( i)
+      ( elem-at-fin-sequence (succ-ℕ n) i u)
       ( remove-at-fin-sequence n i u) ~
     u
-  compute-insert-at-remove-at-fin-sequence zero-ℕ (inr _) u (inr _) = refl
-  compute-insert-at-remove-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    compute-insert-at-remove-at-fin-sequence
-      ( n)
-      ( x)
-      ( tail-fin-sequence (succ-ℕ n) u)
-      ( y)
-  compute-insert-at-remove-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
-  compute-insert-at-remove-at-fin-sequence (succ-ℕ n) (inr x) u (inl y) = refl
-  compute-insert-at-remove-at-fin-sequence (succ-ℕ n) (inr x) u (inr y) = refl
+  compute-insert-at-remove-at-fin-sequence n =
+    compute-insert-at-remove-at-Π-fin-sequence n (λ _ → A)
 ```
 
 ### Removing an inserted element is the identity
@@ -143,25 +177,289 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l}
-  where
+  where abstract
 
   compute-remove-at-insert-at-fin-sequence :
-    (n : ℕ) →
-    (a : A) →
-    (i : Fin (succ-ℕ n)) →
+    (n : ℕ)
+    (i : Fin (succ-ℕ n))
+    (a : A)
     (u : fin-sequence A n) →
     remove-at-fin-sequence
       ( n)
       ( i)
-      ( insert-at-fin-sequence n a i u) ~
+      ( insert-at-fin-sequence n i a u) ~
     u
-  compute-remove-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inl y) =
-    compute-remove-at-insert-at-fin-sequence
+  compute-remove-at-insert-at-fin-sequence n =
+    compute-remove-at-insert-at-Π-fin-sequence n (λ _ → A)
+```
+
+### Removing two inserted elements is the identity
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where abstract
+
+  compute-remove-at-insert-at-two-indices-fin-sequence :
+    (n : ℕ)
+    (i j : Fin (n +ℕ 2))
+    (i≠j : i ≠ j)
+    (aᵢ aⱼ : A)
+    (u : fin-sequence A n) →
+    remove-at-two-indices-fin-sequence
       ( n)
-      ( a)
-      ( x)
-      ( tail-fin-sequence n u)
-      ( y)
-  compute-remove-at-insert-at-fin-sequence (succ-ℕ n) a (inl x) u (inr y) = refl
-  compute-remove-at-insert-at-fin-sequence (succ-ℕ n) a (inr x) u j = refl
+      ( i)
+      ( j)
+      ( i≠j)
+      ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u) ~
+    u
+  compute-remove-at-insert-at-two-indices-fin-sequence n =
+    compute-remove-at-insert-at-two-indices-Π-fin-sequence n (λ _ → A)
+```
+
+### Inserting two elements in terms of inserting one element
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  insert-at-two-indices-fin-sequence' :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) → i ≠ j → A → A →
+    fin-sequence A n → fin-sequence A (n +ℕ 2)
+  insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u =
+    let
+      (j' , _) = fiber-skip-Fin (succ-ℕ n) i j i≠j
+    in
+      insert-at-fin-sequence
+        ( succ-ℕ n)
+        ( i)
+        ( aᵢ)
+        ( insert-at-fin-sequence n j' aⱼ u)
+
+  abstract
+    htpy-insert-at-two-indices-fin-sequence' :
+      (n : ℕ) (i j : Fin (n +ℕ 2)) (i≠j : i ≠ j) (aᵢ aⱼ : A)
+      (u : fin-sequence A n) →
+      insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u ~
+      insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u
+    htpy-insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u k =
+      let
+        (j' , snij'=j) = fiber-skip-Fin (succ-ℕ n) i j i≠j
+        case-i=k i=k =
+          equational-reasoning
+            insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u k
+            ＝ insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u i
+              by
+                ap
+                  ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u)
+                  ( inv i=k)
+            ＝ aᵢ
+              by
+                compute-first-elem-at-insert-at-two-indices-fin-sequence
+                  ( n)
+                  ( i)
+                  ( j)
+                  ( i≠j)
+                  ( aᵢ)
+                  ( aⱼ)
+                  ( u)
+            ＝ insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u i
+              by
+                inv
+                  ( compute-elem-at-insert-at-fin-sequence
+                    ( succ-ℕ n)
+                    ( i)
+                    ( aᵢ)
+                    ( insert-at-fin-sequence n j' aⱼ u))
+            ＝ insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u k
+              by ap (insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u) i=k
+        case-j=k j=k =
+          equational-reasoning
+            insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u k
+            ＝ insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u j
+              by
+                ap
+                  ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u)
+                  ( inv j=k)
+            ＝ aⱼ
+              by
+                compute-second-elem-at-insert-at-two-indices-fin-sequence
+                  ( n)
+                  ( i)
+                  ( j)
+                  ( i≠j)
+                  ( aᵢ)
+                  ( aⱼ)
+                  ( u)
+            ＝ insert-at-fin-sequence n j' aⱼ u j'
+              by inv (compute-elem-at-insert-at-fin-sequence n j' aⱼ u)
+            ＝
+              insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u
+                ( skip-Fin (succ-ℕ n) i j')
+              by
+                inv
+                  ( compute-remove-at-insert-at-fin-sequence
+                    ( succ-ℕ n)
+                    ( i)
+                    ( aᵢ)
+                    ( insert-at-fin-sequence n j' aⱼ u)
+                    ( j'))
+            ＝ insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u k
+              by
+                ap
+                  ( insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u)
+                  ( snij'=j ∙ j=k)
+        case-else i≠k j≠k =
+          let (k' , snijk'=k) = fiber-skip-two-Fin n i j i≠j k i≠k j≠k
+          in
+            equational-reasoning
+              insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u k
+              ＝
+                remove-at-two-indices-fin-sequence n i j i≠j
+                  ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u)
+                  ( k')
+                by
+                  ap
+                    ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u)
+                    ( inv snijk'=k)
+              ＝ u k'
+                by
+                  compute-remove-at-insert-at-two-indices-fin-sequence
+                    ( n)
+                    ( i)
+                    ( j)
+                    ( i≠j)
+                    ( aᵢ)
+                    ( aⱼ)
+                    ( u)
+                    ( k')
+              ＝ insert-at-fin-sequence n j' aⱼ u (skip-Fin n j' k')
+                by inv (compute-remove-at-insert-at-fin-sequence n j' aⱼ u k')
+              ＝
+                insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u
+                  ( skip-two-Fin' n i j i≠j k')
+                by
+                  inv
+                    ( compute-remove-at-insert-at-fin-sequence
+                      ( succ-ℕ n)
+                      ( i)
+                      ( aᵢ)
+                      ( insert-at-fin-sequence n j' aⱼ u)
+                      ( skip-Fin n j' k'))
+              ＝ insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u k
+                by
+                  ap
+                    ( insert-at-two-indices-fin-sequence' n i j i≠j aᵢ aⱼ u)
+                    ( inv (htpy-skip-two-Fin' n i j i≠j k') ∙ snijk'=k)
+      in
+        rec-coproduct
+          ( case-i=k)
+          ( λ i≠k →
+            rec-coproduct
+              ( case-j=k)
+              ( case-else i≠k)
+              ( has-decidable-equality-Fin (n +ℕ 2) j k))
+          ( has-decidable-equality-Fin (n +ℕ 2) i k)
+```
+
+### Inserting `aᵢ` at position `i` and `aⱼ` at position `j` is equivalent to inserting `aⱼ` at `j` and `aᵢ` at `i`
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where abstract
+
+  swap-insert-at-two-indices-fin-sequence :
+    (n : ℕ)
+    (i j : Fin (n +ℕ 2))
+    (i≠j : i ≠ j)
+    (aᵢ aⱼ : A)
+    (u : fin-sequence A n) →
+    insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u ~
+    insert-at-two-indices-fin-sequence n j i
+      ( is-symmetric-nonequal i j i≠j)
+      ( aⱼ)
+      ( aᵢ)
+      ( u)
+  swap-insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u k =
+    let
+      j≠i = is-symmetric-nonequal i j i≠j
+      case-i=k i=k =
+        ( ap (insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u) (inv i=k)) ∙
+        ( compute-first-elem-at-insert-at-two-indices-fin-sequence
+          ( n)
+          ( i)
+          ( j)
+          ( i≠j)
+          ( aᵢ)
+          ( aⱼ)
+          ( u)) ∙
+        ( inv
+          ( compute-second-elem-at-insert-at-two-indices-fin-sequence
+            ( n)
+            ( j)
+            ( i)
+            ( j≠i)
+            ( aⱼ)
+            ( aᵢ)
+            ( u))) ∙
+        ( ap (insert-at-two-indices-fin-sequence n j i j≠i aⱼ aᵢ u) i=k)
+      case-j=k j=k =
+        ( ap (insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u) (inv j=k)) ∙
+        ( compute-second-elem-at-insert-at-two-indices-fin-sequence
+          ( n)
+          ( i)
+          ( j)
+          ( i≠j)
+          ( aᵢ)
+          ( aⱼ)
+          ( u)) ∙
+        ( inv
+          ( compute-first-elem-at-insert-at-two-indices-fin-sequence
+            ( n)
+            ( j)
+            ( i)
+            ( j≠i)
+            ( aⱼ)
+            ( aᵢ)
+            ( u))) ∙
+        ( ap (insert-at-two-indices-fin-sequence n j i j≠i aⱼ aᵢ u) j=k)
+      case-else i≠k j≠k =
+        let
+          (k' , snijk'=k) = fiber-skip-two-Fin n i j i≠j k i≠k j≠k
+          snjik'=k = swap-skip-two-Fin n j i j≠i i≠j k' ∙ snijk'=k
+        in
+          ( ap
+            ( insert-at-two-indices-fin-sequence n i j i≠j aᵢ aⱼ u)
+            ( inv snijk'=k)) ∙
+          ( compute-remove-at-insert-at-two-indices-fin-sequence
+            ( n)
+            ( i)
+            ( j)
+            ( i≠j)
+            ( aᵢ)
+            ( aⱼ)
+            ( u)
+            ( k')) ∙
+          ( inv
+            ( compute-remove-at-insert-at-two-indices-fin-sequence
+              ( n)
+              ( j)
+              ( i)
+              ( j≠i)
+              ( aⱼ)
+              ( aᵢ)
+              ( u)
+              ( k'))) ∙
+          ( ap (insert-at-two-indices-fin-sequence n j i j≠i aⱼ aᵢ u) snjik'=k)
+    in
+      rec-coproduct
+        ( case-i=k)
+        ( λ i≠k →
+          rec-coproduct
+            ( case-j=k)
+            ( case-else i≠k)
+            ( has-decidable-equality-Fin (n +ℕ 2) j k))
+        ( has-decidable-equality-Fin (n +ℕ 2) i k)
 ```
