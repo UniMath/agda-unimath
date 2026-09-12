@@ -20,6 +20,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.ring-of-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.action-on-identifications-functions
@@ -27,6 +28,8 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+
+open import ring-theory.multiples-of-elements-rings
 ```
 
 </details>
@@ -59,6 +62,18 @@ inv-factorial-ℕ = rational-ℚ⁺ ∘ positive-inv-factorial-ℕ
 ```
 
 ## Properties
+
+### The inverse of 0! is 1
+
+```agda
+compute-zero-inv-factorial-ℕ : inv-factorial-ℕ zero-ℕ ＝ one-ℚ
+compute-zero-inv-factorial-ℕ =
+  eq-ℚ
+    ( inv-factorial-ℕ zero-ℕ)
+    ( one-ℚ)
+    ( eq-numerator-reciprocal-rational-ℤ⁺ _)
+    ( eq-denominator-reciprocal-rational-ℤ⁺ _)
+```
 
 ### Computation rule with the binomial coefficients
 
@@ -155,4 +170,22 @@ abstract
         inv-factorial-ℕ k *ℚ inv-factorial-ℕ l)
       ( n=k+l)
       ( binomial-coefficient-inv-factorial-formula-ℕ k l)
+
+  binomial-coefficient-multiple-split-inv-factorial-formula-ℕ :
+    (n k l : ℕ) →
+    (n ＝ k +ℕ l) →
+    multiple-Ring
+      ( ring-ℚ)
+      ( binomial-coefficient-ℕ n k)
+      ( inv-factorial-ℕ n) ＝
+    mul-ℚ
+      ( inv-factorial-ℕ k)
+      ( inv-factorial-ℕ l)
+  binomial-coefficient-multiple-split-inv-factorial-formula-ℕ n k l n=k+l =
+    inv
+      ( compute-multiple-ring-ℚ
+        ( binomial-coefficient-ℕ n k)
+        ( inv-factorial-ℕ n)) ∙
+    commutative-mul-ℚ _ _ ∙
+    binomial-coefficient-split-inv-factorial-formula-ℕ n k l n=k+l
 ```

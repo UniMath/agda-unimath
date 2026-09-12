@@ -7,13 +7,24 @@ module ring-theory.central-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.central-elements-monoids
+
 open import ring-theory.central-elements-semirings
+open import ring-theory.commuting-elements-rings
+open import ring-theory.homomorphisms-rings
+open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -127,4 +138,21 @@ module _
     is-central-element-Ring R y → is-central-element-Ring R (mul-Ring R x y)
   is-central-element-mul-Ring =
     is-central-element-mul-Semiring (semiring-Ring R)
+```
+
+### The inverse of a central invertible element is central
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where abstract
+
+  is-central-element-inv-is-invertible-element-Ring :
+    (x : type-Ring R) →
+    (H : is-invertible-element-Ring R x) →
+    is-central-element-Ring R x →
+    is-central-element-Ring R (inv-is-invertible-element-Ring R H)
+  is-central-element-inv-is-invertible-element-Ring =
+    is-central-element-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
 ```

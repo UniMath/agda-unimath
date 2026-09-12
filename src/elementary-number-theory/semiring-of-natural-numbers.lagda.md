@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-commutative-monoids
 
+open import ring-theory.central-elements-semirings
 open import ring-theory.homomorphisms-semirings
 open import ring-theory.multiples-of-elements-semirings
 open import ring-theory.semirings
@@ -186,4 +187,25 @@ module _
       ( initial-hom-Semiring R)
       ( f)
       ( htpy-map-nat-hom-Semiring R f)
+```
+
+### The image of `ℕ` by the initial semiring homomorphism is central
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  is-central-map-nat-Semiring :
+    (n : ℕ) → is-central-element-Semiring R (map-nat-Semiring R n)
+  is-central-map-nat-Semiring zero-ℕ y = is-central-element-zero-Semiring R y
+  is-central-map-nat-Semiring (succ-ℕ zero-ℕ) =
+    is-central-element-one-Semiring R
+  is-central-map-nat-Semiring (succ-ℕ (succ-ℕ n)) =
+    is-central-element-add-Semiring
+      ( R)
+      ( map-nat-Semiring R (succ-ℕ n))
+      ( one-Semiring R)
+      ( is-central-map-nat-Semiring (succ-ℕ n))
+      ( is-central-element-one-Semiring R)
 ```

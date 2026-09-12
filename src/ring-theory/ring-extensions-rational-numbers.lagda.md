@@ -38,6 +38,9 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-abelian-groups
+
+open import ring-theory.central-elements-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.localizations-rings
@@ -1320,4 +1323,38 @@ module _
   iff-is-rational-extension-is-contr-rational-hom-Ring =
     ( is-rational-extension-has-rational-hom-Ring R ∘ center) ,
     ( is-contr-rational-hom-Rational-Extension-Ring ∘ pair R)
+```
+
+### The image of the rationals in a ring extension of the rational numbers is central
+
+```agda
+module _
+  {l : Level} (R : Rational-Extension-Ring l)
+  where abstract
+
+  is-central-map-initial-hom-Rational-Extension-Ring :
+    (q : ℚ) →
+    is-central-element-Ring
+      ( ring-Rational-Extension-Ring R)
+      ( map-initial-hom-Rational-Extension-Ring R q)
+  is-central-map-initial-hom-Rational-Extension-Ring q =
+    is-central-element-mul-Ring
+      ( ring-Rational-Extension-Ring R)
+      ( _)
+      ( _)
+      ( is-central-map-initial-hom-Ring
+        ( ring-Rational-Extension-Ring R)
+        ( numerator-ℚ q))
+      ( is-central-element-inv-is-invertible-element-Ring
+        ( ring-Rational-Extension-Ring R)
+        ( map-initial-hom-Ring
+          ( ring-Rational-Extension-Ring R)
+          ( denominator-ℚ q))
+        ( is-rational-extension-ring-Rational-Extension-Ring
+          ( R)
+          ( denominator-ℚ q)
+          ( is-positive-denominator-ℚ q))
+        ( is-central-map-initial-hom-Ring
+          ( ring-Rational-Extension-Ring R)
+          ( denominator-ℚ q)))
 ```

@@ -20,11 +20,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.free-groups-with-one-generator
 open import group-theory.homomorphisms-groups
 
+open import ring-theory.central-elements-rings
+open import ring-theory.commuting-elements-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
@@ -204,21 +207,42 @@ pr2 (is-initial-ℤ-Ring S) f = contraction-initial-hom-Ring S f
 ```agda
 module _
   {l : Level} (R : Ring l)
-  where
+  where abstract
 
-  abstract
-    is-commutative-map-initial-hom-Ring :
-      (p q : ℤ) →
-      mul-Ring
-        ( R)
-        ( map-initial-hom-Ring R p)
-        ( map-initial-hom-Ring R q) ＝
-      mul-Ring
-        ( R)
-        ( map-initial-hom-Ring R q)
-        ( map-initial-hom-Ring R p)
-    is-commutative-map-initial-hom-Ring p q =
-      ( inv (preserves-mul-initial-hom-Ring R p q)) ∙
-      ( ap (map-initial-hom-Ring R) (commutative-mul-ℤ p q)) ∙
-      ( preserves-mul-initial-hom-Ring R q p)
+  is-commutative-map-initial-hom-Ring :
+    (p q : ℤ) →
+    mul-Ring
+      ( R)
+      ( map-initial-hom-Ring R p)
+      ( map-initial-hom-Ring R q) ＝
+    mul-Ring
+      ( R)
+      ( map-initial-hom-Ring R q)
+      ( map-initial-hom-Ring R p)
+  is-commutative-map-initial-hom-Ring p q =
+    ( inv (preserves-mul-initial-hom-Ring R p q)) ∙
+    ( ap (map-initial-hom-Ring R) (commutative-mul-ℤ p q)) ∙
+    ( preserves-mul-initial-hom-Ring R q p)
+```
+
+### The image of `ℤ` in a ring is central
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where abstract
+
+  is-central-map-initial-hom-Ring :
+    ( p : ℤ) →
+    ( x : type-Ring R) →
+    mul-Ring R (map-initial-hom-Ring R p) x ＝
+    mul-Ring R x (map-initial-hom-Ring R p)
+  is-central-map-initial-hom-Ring p x =
+    tr
+      ( commute-Ring R (map-initial-hom-Ring R p))
+      ( integer-multiple-one-Ring R x)
+      ( commute-integer-multiples-Ring R
+        ( p)
+        ( one-ℤ)
+        ( is-central-element-one-Ring R x))
 ```

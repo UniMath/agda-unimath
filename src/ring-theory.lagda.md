@@ -22,11 +22,15 @@ open import ring-theory.characteristics-rings public
 open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
+open import ring-theory.convolution-sequences-rings public
+open import ring-theory.convolution-sequences-semirings public
 open import ring-theory.cyclic-rings public
 open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
+open import ring-theory.dirac-sequences-semirings public
 open import ring-theory.division-rings public
+open import ring-theory.exponential-series-ring-extensions-rational-numbers public
 open import ring-theory.free-rings-with-one-generator public
 open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
@@ -93,6 +97,8 @@ open import ring-theory.right-ideals-rings public
 open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.sequences-rings public
+open import ring-theory.sequences-semirings public
 open import ring-theory.subrings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
