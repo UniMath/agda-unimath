@@ -24,8 +24,6 @@ open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-metric-spaces
 open import metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces
-open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-metric-spaces
-open import metric-spaces.functoriality-short-maps-cauchy-pseudocompletions-of-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
