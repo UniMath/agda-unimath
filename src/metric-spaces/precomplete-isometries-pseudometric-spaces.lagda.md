@@ -103,7 +103,7 @@ module _
       ( isometry-unit-cauchy-pseudocompletion-Pseudometric-Space P)
 ```
 
-### The property of being a precomplete short map from a pseudometric space to a metric space
+### The property of being a precomplete isometry from a pseudometric space to a metric space
 
 ```agda
 module _
