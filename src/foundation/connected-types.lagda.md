@@ -9,11 +9,8 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-products-contractible-types
-open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences-contractible-types
-open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-truncation
@@ -28,6 +25,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.iterated-successors-truncation-levels
 open import foundation-core.precomposition-functions
 open import foundation-core.retracts-of-types
 open import foundation-core.subuniverse-of-contractible-types
@@ -202,6 +200,14 @@ is-connected-is-connected-succ-𝕋 k H =
       is-equiv-diagonal-exponential-is-connected
         ( truncated-type-succ-Truncated-Type k B)
         ( H))
+
+is-connected-is-connected-add+2-𝕋 :
+  {l : Level} (k r : 𝕋) {A : UU l} →
+  is-connected (add+2-𝕋 k r) A → is-connected k A
+is-connected-is-connected-add+2-𝕋 k neg-two-𝕋 H = H
+is-connected-is-connected-add+2-𝕋 k (succ-𝕋 r) H =
+  is-connected-is-connected-add+2-𝕋 k r
+    ( is-connected-is-connected-succ-𝕋 (add+2-𝕋 k r) H)
 ```
 
 ### An inhabited type `A` is `k + 1`-connected if and only if its identity types are `k`-connected
