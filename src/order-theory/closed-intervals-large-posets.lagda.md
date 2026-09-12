@@ -59,6 +59,12 @@ module _
   subtype-closed-interval-Large-Poset _ [a,b] =
     is-in-closed-interval-prop-Large-Poset [a,b]
 
+  type-closed-interval-Large-Poset :
+    {l1 l2 : Level} (l3 : Level) →
+    closed-interval-Large-Poset l1 l2 → UU (α l3 ⊔ β l1 l3 ⊔ β l3 l2)
+  type-closed-interval-Large-Poset l3 [a,b] =
+    type-subtype (subtype-closed-interval-Large-Poset l3 [a,b])
+
   lower-bound-closed-interval-Large-Poset :
     {l1 l2 : Level} → closed-interval-Large-Poset l1 l2 → type-Large-Poset P l1
   lower-bound-closed-interval-Large-Poset ((a , b) , _) = a
@@ -66,4 +72,9 @@ module _
   upper-bound-closed-interval-Large-Poset :
     {l1 l2 : Level} → closed-interval-Large-Poset l1 l2 → type-Large-Poset P l2
   upper-bound-closed-interval-Large-Poset ((a , b) , _) = b
+
+  singleton-closed-interval-Large-Poset :
+    {l : Level} → type-Large-Poset P l → closed-interval-Large-Poset l l
+  singleton-closed-interval-Large-Poset x =
+    ( (x , x) , refl-leq-Large-Poset P x)
 ```
