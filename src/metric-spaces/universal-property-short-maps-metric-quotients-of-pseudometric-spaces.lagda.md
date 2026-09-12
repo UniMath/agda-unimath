@@ -42,6 +42,8 @@ open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
+
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -71,91 +73,17 @@ Equivalently, the metric quotient satisfies the
 {{#concept "universal property" Disambiguation="of metric quotients and short maps" Agda=is-contr-extension-short-map-metric-quotient-Pseudometric-Space}}
 of metric quotients and short maps: for any short map `f : P → M` from a
 pseudometric space in a metric space, there
-[uniquely exists](foundation.uniqueness-quantification.md) an extension of `f`
-along `q`, i.e., a short map `g : [P] → M` such that
+[uniquely exists](foundation.uniqueness-quantification.md) an
+[extension](orthogonal-factorization-systems.extensions-maps.md) of `f` along
+`q`, i.e., a short map `g : [P] → M` such that
 
 ```text
-  g ∘ q ~ f.
+  f ~ g ∘ q.
 ```
 
 ## Definitions
 
-### Precomposition of short maps by the metric quotient isometry
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  where
-
-  precomp-short-map-metric-quotient-Pseudometric-Space :
-    short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M →
-    short-map-Pseudometric-Space P (pseudometric-Metric-Space M)
-  precomp-short-map-metric-quotient-Pseudometric-Space f =
-    comp-short-map-Pseudometric-Space
-      ( P)
-      ( pseudometric-metric-quotient-Pseudometric-Space P)
-      ( pseudometric-Metric-Space M)
-      ( f)
-      ( short-map-unit-metric-quotient-Pseudometric-Space P)
-```
-
-### The induced map from the quotient metric space by a short map in a metric space
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  (P : Pseudometric-Space l1 l2)
-  (M : Metric-Space l1' l2')
-  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
-  where
-
-  map-exten-short-map-metric-quotient-Pseudometric-space :
-    map-Metric-Space
-      ( metric-quotient-Pseudometric-Space P)
-      ( M)
-  map-exten-short-map-metric-quotient-Pseudometric-space =
-    inv-precomp-set-quotient
-      ( equivalence-relation-sim-Pseudometric-Space P)
-      ( set-Metric-Space M)
-      ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
-
-  is-extension-exten-short-map-metric-quotient-Pseudometric-Space :
-    map-exten-short-map-metric-quotient-Pseudometric-space ∘
-    map-unit-metric-quotient-Pseudometric-Space P ~
-    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
-  is-extension-exten-short-map-metric-quotient-Pseudometric-Space =
-    is-section-inv-precomp-set-quotient
-      ( equivalence-relation-sim-Pseudometric-Space P)
-      ( set-Metric-Space M)
-      ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
-
-  compute-map-exten-short-map-metric-quotient-Pseudometric-Space :
-    (X : type-metric-quotient-Pseudometric-Space P) →
-    {x : type-Pseudometric-Space P} →
-    is-in-class-metric-quotient-Pseudometric-Space P X x →
-    map-exten-short-map-metric-quotient-Pseudometric-space X ＝
-    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f x
-  compute-map-exten-short-map-metric-quotient-Pseudometric-Space X {x} x∈X =
-    tr
-      ( λ Y →
-        map-exten-short-map-metric-quotient-Pseudometric-space Y ＝
-        map-short-map-Pseudometric-Space
-          ( P)
-          ( pseudometric-Metric-Space M)
-          ( f)
-          ( x))
-      ( eq-set-quotient-equivalence-class-set-quotient
-        ( equivalence-relation-sim-Pseudometric-Space P)
-        ( X)
-        ( x∈X))
-      ( is-extension-exten-short-map-metric-quotient-Pseudometric-Space x)
-```
-
-### Extensions of short maps along the natural inclusion into the metric quotient
-
-#### The property of being the extension of a short map
+### The property of being the extension of a short map along the unit map of metric quotients
 
 ```agda
 module _
@@ -166,39 +94,45 @@ module _
   (g : short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M)
   where
 
-  is-extension-prop-short-map-metric-quotient-Pseudometric-Space :
-    Prop (l1 ⊔ l1')
-  is-extension-prop-short-map-metric-quotient-Pseudometric-Space =
-    Π-Prop
-      ( type-Pseudometric-Space P)
-      ( λ x →
-        eq-prop-Metric-Space
-          ( M)
-          ( map-short-map-Pseudometric-Space
-            ( P)
-            ( pseudometric-Metric-Space M)
-            ( precomp-short-map-metric-quotient-Pseudometric-Space P M g)
-            ( x))
-          ( map-short-map-Pseudometric-Space
-            ( P)
-            ( pseudometric-Metric-Space M)
-            ( f)
-            ( x)))
-
   is-extension-short-map-metric-quotient-Pseudometric-Space : UU (l1 ⊔ l1')
   is-extension-short-map-metric-quotient-Pseudometric-Space =
-    type-Prop
-      is-extension-prop-short-map-metric-quotient-Pseudometric-Space
+    is-extension-of-map
+      ( map-unit-metric-quotient-Pseudometric-Space P)
+      ( map-short-map-Pseudometric-Space
+        ( P)
+        ( pseudometric-Metric-Space M)
+        ( f))
+      ( map-short-map-Metric-Space
+        ( metric-quotient-Pseudometric-Space P)
+        ( M)
+        ( g))
 
   is-prop-is-extension-short-map-metric-quotient-Pseudometric-Space :
     is-prop
       is-extension-short-map-metric-quotient-Pseudometric-Space
   is-prop-is-extension-short-map-metric-quotient-Pseudometric-Space =
-    is-prop-type-Prop
-      is-extension-prop-short-map-metric-quotient-Pseudometric-Space
+    is-prop-Π
+      ( λ x →
+        is-set-type-Metric-Space M
+          ( map-short-map-Pseudometric-Space
+            ( P)
+            ( pseudometric-Metric-Space M)
+            ( f)
+            ( x))
+          ( map-short-map-Metric-Space
+            ( metric-quotient-Pseudometric-Space P)
+            ( M)
+            ( g)
+            ( map-unit-metric-quotient-Pseudometric-Space P x)))
+
+  is-extension-prop-short-map-metric-quotient-Pseudometric-Space :
+    Prop (l1 ⊔ l1')
+  is-extension-prop-short-map-metric-quotient-Pseudometric-Space =
+    ( is-extension-short-map-metric-quotient-Pseudometric-Space ,
+      is-prop-is-extension-short-map-metric-quotient-Pseudometric-Space)
 ```
 
-#### The type of extensions of short maps
+### The type of extensions of short maps along the unit map of metric quotients
 
 ```agda
 module _
@@ -235,11 +169,85 @@ module _
       ( short-map-extension-short-map-metric-quotient-Pseudometric-Space)
 
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space :
+    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f ~
     map-extension-short-map-metric-quotient-Pseudometric-Space ∘
-    map-unit-metric-quotient-Pseudometric-Space P ~
-    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f
+    map-unit-metric-quotient-Pseudometric-Space P
   is-extension-short-map-extension-short-map-metric-quotient-Pseudometric-Space
     = pr2 g
+```
+
+### Precomposition of short maps by the unit map of metric quotients
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  where
+
+  precomp-short-map-unit-metric-quotient-Pseudometric-Space :
+    short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M →
+    short-map-Pseudometric-Space P (pseudometric-Metric-Space M)
+  precomp-short-map-unit-metric-quotient-Pseudometric-Space f =
+    comp-short-map-Pseudometric-Space
+      ( P)
+      ( pseudometric-metric-quotient-Pseudometric-Space P)
+      ( pseudometric-Metric-Space M)
+      ( f)
+      ( short-map-unit-metric-quotient-Pseudometric-Space P)
+```
+
+### The induced map from the quotient metric space by a short map in a metric space
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (P : Pseudometric-Space l1 l2)
+  (M : Metric-Space l1' l2')
+  (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
+  where
+
+  map-exten-short-map-metric-quotient-Pseudometric-space :
+    map-Metric-Space
+      ( metric-quotient-Pseudometric-Space P)
+      ( M)
+  map-exten-short-map-metric-quotient-Pseudometric-space =
+    inv-precomp-set-quotient
+      ( equivalence-relation-sim-Pseudometric-Space P)
+      ( set-Metric-Space M)
+      ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f)
+
+  is-extension-exten-short-map-metric-quotient-Pseudometric-Space :
+    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f ~
+    map-exten-short-map-metric-quotient-Pseudometric-space ∘
+    map-unit-metric-quotient-Pseudometric-Space P
+  is-extension-exten-short-map-metric-quotient-Pseudometric-Space =
+    inv-htpy
+      ( is-section-inv-precomp-set-quotient
+        ( equivalence-relation-sim-Pseudometric-Space P)
+        ( set-Metric-Space M)
+        ( reflecting-map-short-map-metric-space-Pseudometric-Space P M f))
+
+  compute-map-exten-short-map-metric-quotient-Pseudometric-Space :
+    (X : type-metric-quotient-Pseudometric-Space P) →
+    {x : type-Pseudometric-Space P} →
+    is-in-class-metric-quotient-Pseudometric-Space P X x →
+    map-exten-short-map-metric-quotient-Pseudometric-space X ＝
+    map-short-map-Pseudometric-Space P (pseudometric-Metric-Space M) f x
+  compute-map-exten-short-map-metric-quotient-Pseudometric-Space X {x} x∈X =
+    tr
+      ( λ Y →
+        map-exten-short-map-metric-quotient-Pseudometric-space Y ＝
+        map-short-map-Pseudometric-Space
+          ( P)
+          ( pseudometric-Metric-Space M)
+          ( f)
+          ( x))
+      ( eq-set-quotient-equivalence-class-set-quotient
+        ( equivalence-relation-sim-Pseudometric-Space P)
+        ( X)
+        ( x∈X))
+      ( inv (is-extension-exten-short-map-metric-quotient-Pseudometric-Space x))
 ```
 
 ## Properties
@@ -252,22 +260,32 @@ module _
   (P : Pseudometric-Space l1 l2)
   (M : Metric-Space l1' l2')
   (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M))
-  where
+  where abstract
 
-  compute-extension-fiber-precomp-short-map-metric-quotient-Pseudometric-Space :
-    fiber (precomp-short-map-metric-quotient-Pseudometric-Space P M) f ≃
+  compute-extension-fiber'-precomp-short-map-metric-quotient-Pseudometric-Space :
+    fiber' (precomp-short-map-unit-metric-quotient-Pseudometric-Space P M) f ≃
     extension-short-map-metric-quotient-Pseudometric-Space P M f
-  compute-extension-fiber-precomp-short-map-metric-quotient-Pseudometric-Space =
+  compute-extension-fiber'-precomp-short-map-metric-quotient-Pseudometric-Space =
     equiv-tot
       ( λ g →
-        equiv-eq-htpy-map-short-map-Pseudometric-Space
+        ( equiv-eq-htpy-map-short-map-Pseudometric-Space
           ( P)
           ( pseudometric-Metric-Space M)
-          ( precomp-short-map-metric-quotient-Pseudometric-Space P M g)
-          ( f))
+          ( f)
+          ( precomp-short-map-unit-metric-quotient-Pseudometric-Space P M g)))
+
+  compute-extension-fiber-precomp-short-map-metric-quotient-Pseudometric-Space :
+    fiber (precomp-short-map-unit-metric-quotient-Pseudometric-Space P M) f ≃
+    extension-short-map-metric-quotient-Pseudometric-Space P M f
+  compute-extension-fiber-precomp-short-map-metric-quotient-Pseudometric-Space =
+    comp-equiv
+      ( compute-extension-fiber'-precomp-short-map-metric-quotient-Pseudometric-Space)
+      ( equiv-fiber
+        ( precomp-short-map-unit-metric-quotient-Pseudometric-Space P M)
+        ( f))
 ```
 
-### The unique extension from the quotient metric space is short
+### The induced map on the metric quotient by a short map is short
 
 ```agda
 module _
@@ -415,7 +433,7 @@ module _
               ( g))
             ( compute-map-unit-metric-quotient-Pseudometric-Space P X x∈X)
 
-      lemma-lhs ∙ (inv lemma-mhs) ∙ lemma-rhs
+      lemma-lhs ∙ lemma-mhs ∙ lemma-rhs
 ```
 
 ### All extensions are equal to the induced extension
@@ -477,11 +495,11 @@ module _
   (M : Metric-Space l1' l2')
   where abstract
 
-  is-contr-map-precomp-short-map-metric-quotient-Pseudometric-Space :
+  is-contr-map-precomp-short-map-unit-metric-quotient-Pseudometric-Space :
     (f : short-map-Pseudometric-Space P (pseudometric-Metric-Space M)) →
     is-contr
-      (fiber (precomp-short-map-metric-quotient-Pseudometric-Space P M) f)
-  is-contr-map-precomp-short-map-metric-quotient-Pseudometric-Space f =
+      (fiber (precomp-short-map-unit-metric-quotient-Pseudometric-Space P M) f)
+  is-contr-map-precomp-short-map-unit-metric-quotient-Pseudometric-Space f =
     is-contr-equiv
       ( extension-short-map-metric-quotient-Pseudometric-Space P M f)
       ( compute-extension-fiber-precomp-short-map-metric-quotient-Pseudometric-Space
@@ -490,12 +508,12 @@ module _
         ( f))
       ( is-contr-extension-short-map-metric-quotient-Pseudometric-Space P M f)
 
-  is-equiv-precomp-short-map-metric-quotient-Pseudometric-Space :
+  is-equiv-precomp-short-map-unit-metric-quotient-Pseudometric-Space :
     is-equiv
-      (precomp-short-map-metric-quotient-Pseudometric-Space P M)
-  is-equiv-precomp-short-map-metric-quotient-Pseudometric-Space =
+      (precomp-short-map-unit-metric-quotient-Pseudometric-Space P M)
+  is-equiv-precomp-short-map-unit-metric-quotient-Pseudometric-Space =
     is-equiv-is-contr-map
-      is-contr-map-precomp-short-map-metric-quotient-Pseudometric-Space
+      is-contr-map-precomp-short-map-unit-metric-quotient-Pseudometric-Space
 ```
 
 ### The equivalence between short maps from a pseudometric space in a metric space and short maps from the metric quotient
@@ -511,6 +529,6 @@ module _
     short-map-Metric-Space (metric-quotient-Pseudometric-Space P) M ≃
     short-map-Pseudometric-Space P (pseudometric-Metric-Space M)
   equiv-short-map-metric-quotient-Pseudometric-Space =
-    ( precomp-short-map-metric-quotient-Pseudometric-Space P M ,
-      is-equiv-precomp-short-map-metric-quotient-Pseudometric-Space P M)
+    ( precomp-short-map-unit-metric-quotient-Pseudometric-Space P M ,
+      is-equiv-precomp-short-map-unit-metric-quotient-Pseudometric-Space P M)
 ```
