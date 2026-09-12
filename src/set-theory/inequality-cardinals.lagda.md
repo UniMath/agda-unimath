@@ -12,11 +12,15 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-extensionality-axiom
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.law-of-excluded-middle
+open import foundation.mere-decidable-embeddings
 open import foundation.mere-embeddings
+open import foundation.negation
 open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
@@ -27,7 +31,12 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 
 open import set-theory.cardinals
+open import set-theory.complemented-inequality-cardinals
+open import set-theory.decidable-cardinals
 open import set-theory.equality-cardinals
+open import set-theory.indexed-inequality-cardinals
+open import set-theory.inhabited-cardinals
+open import set-theory.projective-cardinals
 ```
 
 </details>
@@ -35,7 +44,7 @@ open import set-theory.equality-cardinals
 ## Idea
 
 We say a [cardinal](set-theory.cardinals.md) `X` is
-{{#concept "less than or equal to" Disambiguation="set-cardinals" Agda=leq-Cardinal}}
+{{#concept "less than or equal to" Disambiguation="cardinals" Agda=leq-Cardinal}}
 a cardinal `Y` if any [set](foundation-core.sets.md) in the isomorphism class of
 `X` embeds into any set in the isomorphism class of `Y`. This defines the
 {{#concept "standard ordering" Disambiguation="on cardinalities of sets" Agda=large-preorder-Cardinal}}
@@ -232,6 +241,62 @@ large-poset-Cardinal lem =
   λ where
   .large-preorder-Large-Poset → large-preorder-Cardinal
   .antisymmetric-leq-Large-Poset → antisymmetric-leq-Cardinal lem
+```
+
+### Complemented inequality implies inequality
+
+```agda
+leq-leq-complemented-Cardinal :
+  {l1 l2 : Level} (X : Cardinal l1) (Y : Cardinal l2) →
+  leq-complemented-Cardinal X Y → leq-Cardinal X Y
+leq-leq-complemented-Cardinal =
+  apply-twice-dependent-universal-property-trunc-Set'
+    ( λ X Y →
+      set-Prop
+        ( function-Prop
+          ( leq-complemented-Cardinal X Y)
+          ( leq-prop-Cardinal X Y)))
+    ( λ X Y →
+      unit-leq-cardinality X Y ∘
+      mere-emb-mere-decidable-emb ∘
+      inv-unit-leq-complemented-cardinality X Y)
+```
+
+### Given a decidable cardinal `X` such that there is some cardinal `Y` with `X ≰ Y`, then `X` is inhabited
+
+```agda
+is-inhabited-is-not-leq-Cardinal :
+  {l1 l2 : Level} (X : Cardinal l1) (Y : Cardinal l2) →
+  is-decidable-Cardinal X →
+  ¬ leq-Cardinal X Y → is-inhabited-Cardinal X
+is-inhabited-is-not-leq-Cardinal X Y dX H =
+  is-inhabited-is-not-leq-complemented-Cardinal X Y dX
+    ( H ∘ leq-leq-complemented-Cardinal X Y)
+```
+
+### If `X` is projective and `X ≤ⁱ Y` then `X ≤ Y`
+
+```agda
+leq-is-projective-leq-indexed-Cardinal :
+  {l1 l2 : Level} (X : Cardinal l1) (Y : Cardinal l2) →
+  is-projective-Cardinal (l1 ⊔ l2) X →
+  leq-indexed-Cardinal X Y → leq-Cardinal X Y
+leq-is-projective-leq-indexed-Cardinal {l1} {l2} =
+  apply-twice-dependent-universal-property-trunc-Set'
+    ( λ X Y →
+      set-Prop
+        ( function-Prop (is-projective-Cardinal (l1 ⊔ l2) X)
+          ( function-Prop (leq-indexed-Cardinal X Y)
+            ( leq-prop-Cardinal X Y))))
+    ( λ X Y pX H →
+      rec-trunc-Prop
+        ( leq-prop-cardinality X Y)
+        ( λ f →
+          unit-leq-cardinality X Y
+            ( reverse-mere-emb-surjection-is-projective
+              ( inv-unit-is-projective-cardinality X pX)
+              ( is-set-type-Set Y) f))
+        ( inv-unit-leq-indexed-cardinality X Y H))
 ```
 
 ## See also
