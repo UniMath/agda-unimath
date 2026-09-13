@@ -9,6 +9,7 @@ module order-theory.finite-total-orders where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -59,7 +60,7 @@ is-finite-total-order-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-finite-total-order-Poset-Prop P =
   product-Prop
-    ( is-total-Poset-Prop P)
+    ( is-total-prop-Poset P)
     ( is-finite-Poset-Prop P)
 
 Finite-Total-Order : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

@@ -183,6 +183,7 @@ abstract
 ### The predecessor of an integer is that integer minus one
 
 ```agda
+abstract
   is-left-add-neg-one-pred-ℤ : (x : ℤ) → pred-ℤ x ＝ neg-one-ℤ +ℤ x
   is-left-add-neg-one-pred-ℤ x =
     inv (left-predecessor-law-add-ℤ zero-ℤ x)

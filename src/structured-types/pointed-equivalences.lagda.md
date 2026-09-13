@@ -9,18 +9,14 @@ module structured-types.pointed-equivalences where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.cartesian-product-types
-open import foundation.commuting-squares-of-identifications
-open import foundation.contractible-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.path-algebra
@@ -28,8 +24,8 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
-open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -793,4 +789,64 @@ module _
       is-binary-equiv (λ (f : B ≃∗ C) (e : A ≃∗ B) → comp-pointed-equiv f e)
     pr1 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv'
     pr2 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv
+```
+
+### Homotopies of pointed equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : pointed-equiv A B)
+  where
+
+  pointed-htpy-pointed-equiv :
+    (f : pointed-equiv A B) → UU (l1 ⊔ l2)
+  pointed-htpy-pointed-equiv f =
+    pointed-map-pointed-equiv e ~∗ pointed-map-pointed-equiv f
+
+  htpy-pointed-equiv :
+    (f : pointed-equiv A B) → UU (l1 ⊔ l2)
+  htpy-pointed-equiv f =
+    map-pointed-equiv e ~ map-pointed-equiv f
+
+  refl-htpy-pointed-equiv :
+    pointed-htpy-pointed-equiv e
+  refl-htpy-pointed-equiv =
+    refl-pointed-htpy (pointed-map-pointed-equiv e)
+
+  pointed-htpy-eq-pointed-equiv :
+    (f : pointed-equiv A B) → e ＝ f → pointed-htpy-pointed-equiv f
+  pointed-htpy-eq-pointed-equiv f refl = refl-htpy-pointed-equiv
+
+  is-torsorial-pointed-htpy-pointed-equiv :
+    is-torsorial pointed-htpy-pointed-equiv
+  is-torsorial-pointed-htpy-pointed-equiv =
+    is-torsorial-Eq-structure
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-htpy _)
+        ( is-property-is-equiv)
+        ( map-pointed-equiv e)
+        ( refl-htpy)
+        ( is-equiv-map-pointed-equiv e))
+      ( equiv-pointed-equiv e , refl-htpy)
+      ( is-torsorial-Id _)
+
+  is-equiv-pointed-htpy-eq-pointed-equiv :
+    (f : pointed-equiv A B) → is-equiv (pointed-htpy-eq-pointed-equiv f)
+  is-equiv-pointed-htpy-eq-pointed-equiv =
+    fundamental-theorem-id
+      is-torsorial-pointed-htpy-pointed-equiv
+      pointed-htpy-eq-pointed-equiv
+
+  extensionality-pointed-equiv :
+    (f : pointed-equiv A B) → (e ＝ f) ≃ pointed-htpy-pointed-equiv f
+  pr1 (extensionality-pointed-equiv f) =
+    pointed-htpy-eq-pointed-equiv f
+  pr2 (extensionality-pointed-equiv f) =
+    is-equiv-pointed-htpy-eq-pointed-equiv f
+
+  eq-pointed-htpy-pointed-equiv :
+    (f : pointed-equiv A B) → pointed-htpy-pointed-equiv f → e ＝ f
+  eq-pointed-htpy-pointed-equiv f =
+    map-inv-equiv (extensionality-pointed-equiv f)
 ```

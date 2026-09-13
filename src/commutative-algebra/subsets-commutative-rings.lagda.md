@@ -9,6 +9,7 @@ module commutative-algebra.subsets-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositional-extensionality
 open import foundation.propositions

@@ -16,10 +16,13 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.raising-universe-levels
+
+open import lists.equality-lists
 open import lists.lists
 ```
 

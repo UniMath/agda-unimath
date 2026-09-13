@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.sequentially-compact-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

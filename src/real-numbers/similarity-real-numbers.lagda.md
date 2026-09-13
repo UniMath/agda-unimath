@@ -8,9 +8,11 @@ module real-numbers.similarity-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
+open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.similarity-subtypes
@@ -129,6 +131,21 @@ abstract opaque
     transitive-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
+### Concatenation of similarity with equality
+
+```agda
+abstract
+  concat-sim-eq-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {y : ℝ l2} {y' : ℝ l2} →
+    sim-ℝ x y → y ＝ y' → sim-ℝ x y'
+  concat-sim-eq-ℝ x~y refl = x~y
+
+  concat-eq-sim-ℝ :
+    {l1 l2 : Level} {x : ℝ l1} {x' : ℝ l1} {y : ℝ l2} →
+    x ＝ x' → sim-ℝ x' y → sim-ℝ x y
+  concat-eq-sim-ℝ refl x'~y = x'~y
+```
+
 ### Similar real numbers in the same universe are equal
 
 ```agda
@@ -154,11 +171,21 @@ large-equivalence-relation-sim-ℝ =
     ( λ _ _ → symmetric-sim-ℝ)
     ( transitive-sim-ℝ)
 
-large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
-large-similarity-relation-sim-ℝ =
+large-similarity-relation-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
     ( λ _ _ → eq-sim-ℝ)
+```
+
+### The real numbers at universe `l` are locally small with respect to `UU l`
+
+```agda
+abstract
+  is-locally-small-ℝ : (l : Level) → is-locally-small l (ℝ l)
+  is-locally-small-ℝ =
+    is-locally-small-type-Large-Similarity-Relation
+      ( large-similarity-relation-ℝ)
 ```
 
 ### Similarity reasoning

@@ -10,6 +10,7 @@ module order-theory.large-preorders where
 open import category-theory.large-precategories
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions

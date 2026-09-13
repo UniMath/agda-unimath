@@ -12,21 +12,18 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.commuting-squares-of-identifications
 open import foundation.connected-types
-open import foundation.constant-maps
 open import foundation.contractible-types
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
@@ -42,7 +39,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.dependent-universal-property-suspensions
 open import synthetic-homotopy-theory.pushouts
@@ -644,3 +640,9 @@ module _
               ( Y))
           ( is-equiv-id))
 ```
+
+## See also
+
+- [Suspensions of pointed types](synthetic-homotopy-theory.suspensions-of-pointed-types.md)
+- [Suspensions of propositions](synthetic-homotopy-theory.suspensions-of-propositions.md)
+- [Suspensions of projective types](synthetic-homotopy-theory.suspensions-of-projective-types.md)

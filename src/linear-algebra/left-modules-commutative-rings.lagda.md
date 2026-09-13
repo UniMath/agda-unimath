@@ -8,7 +8,9 @@ module linear-algebra.left-modules-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -200,6 +202,40 @@ module _
 
 ## Properties
 
+### `r(sx) = s(rx)`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  where
+
+  abstract
+    left-swap-mul-left-module-Commutative-Ring :
+      (r s : type-Commutative-Ring R) →
+      (x : type-left-module-Commutative-Ring R M) →
+      mul-left-module-Commutative-Ring R M
+        ( r)
+        ( mul-left-module-Commutative-Ring R M s x) ＝
+      mul-left-module-Commutative-Ring R M
+        ( s)
+        ( mul-left-module-Commutative-Ring R M r x)
+    left-swap-mul-left-module-Commutative-Ring r s x =
+      let
+        _*M_ = mul-left-module-Commutative-Ring R M
+        _*R_ = mul-Commutative-Ring R
+      in
+        equational-reasoning
+          r *M (s *M x)
+          ＝ (r *R s) *M x
+            by inv (associative-mul-left-module-Commutative-Ring R M r s x)
+          ＝ (s *R r) *M x
+            by ap-binary _*M_ (commutative-mul-Commutative-Ring R r s) refl
+          ＝ s *M (r *M x)
+            by associative-mul-left-module-Commutative-Ring R M s r x
+```
+
 ### Any commutative ring is a left module over itself
 
 ```agda
@@ -235,4 +271,43 @@ make-left-module-Commutative-Ring :
   left-module-Commutative-Ring l2 R
 make-left-module-Commutative-Ring R =
   make-left-module-Ring (ring-Commutative-Ring R)
+```
+
+### Given a left module over `S`, a commutative ring homomorphism `R → S` induces a left module over `R`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (S : Commutative-Ring l2)
+  (h : hom-Commutative-Ring R S)
+  (M : left-module-Commutative-Ring l3 S)
+  where
+
+  left-module-hom-left-module-Commutative-Ring :
+    left-module-Commutative-Ring l3 R
+  left-module-hom-left-module-Commutative-Ring =
+    left-module-hom-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( ring-Commutative-Ring S)
+      ( h)
+      ( M)
+```
+
+### A commutative ring homomorphism `R → S` induces the structure of an `R`-left module on `S`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (S : Commutative-Ring l2)
+  (h : hom-Commutative-Ring R S)
+  where
+
+  left-module-hom-Commutative-Ring : left-module-Commutative-Ring l2 R
+  left-module-hom-Commutative-Ring =
+    left-module-hom-Ring
+      ( ring-Commutative-Ring R)
+      ( ring-Commutative-Ring S)
+      ( h)
 ```

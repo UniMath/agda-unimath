@@ -11,9 +11,12 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.pointed-dependent-functions
@@ -138,6 +141,21 @@ module _
   id-pointed-map : A →∗ A
   pr1 id-pointed-map = id
   pr2 id-pointed-map = refl
+```
+
+### Truncatedness of the type of pointed maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  where abstract
+
+  is-trunc-pointed-function-type :
+    (k : 𝕋) → is-trunc k (type-Pointed-Type B) → is-trunc k (pointed-map A B)
+  is-trunc-pointed-function-type k H =
+    is-trunc-Σ
+      ( is-trunc-function-type k H)
+      ( λ f → is-trunc-Id H (f (point-Pointed-Type A)) (point-Pointed-Type B))
 ```
 
 ## See also

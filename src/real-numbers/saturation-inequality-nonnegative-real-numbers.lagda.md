@@ -20,7 +20,7 @@ open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.saturation-inequality-real-numbers
-open import real-numbers.similarity-nonnegative-real-numbers
+open import real-numbers.zero-nonnegative-real-numbers
 ```
 
 </details>
@@ -57,15 +57,16 @@ module _
 ### If a nonnegative real number is less than or equal to all positive rational numbers, it is similar to zero
 
 ```agda
-sim-zero-le-positive-rational-ℝ⁰⁺ :
-  {l : Level} (x : ℝ⁰⁺ l) →
-  ((ε : ℚ⁺) → leq-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ ε)) →
-  sim-zero-ℝ⁰⁺ x
-sim-zero-le-positive-rational-ℝ⁰⁺ x H =
-  sim-sim-leq-ℝ
-    ( leq-zero-ℝ⁰⁺ x ,
-      saturated-leq-ℝ⁰⁺
-        ( x)
-        ( zero-ℝ⁰⁺)
-        ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)))
+abstract
+  is-zero-leq-positive-rational-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) →
+    ((ε : ℚ⁺) → leq-ℝ⁰⁺ x (nonnegative-real-ℚ⁺ ε)) →
+    is-zero-ℝ⁰⁺ x
+  is-zero-leq-positive-rational-ℝ⁰⁺ x H =
+    sim-sim-leq-ℝ
+      ( saturated-leq-ℝ⁰⁺
+          ( x)
+          ( zero-ℝ⁰⁺)
+          ( λ ε → inv-tr (leq-ℝ⁰⁺ x) (left-unit-law-add-ℝ⁰⁺ _) (H ε)) ,
+        leq-zero-ℝ⁰⁺ x)
 ```

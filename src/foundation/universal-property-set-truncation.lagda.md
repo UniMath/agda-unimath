@@ -8,6 +8,7 @@ module foundation.universal-property-set-truncation where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.mere-equality
 open import foundation.reflecting-maps-equivalence-relations
@@ -83,10 +84,11 @@ abstract
     is-set-truncation B f
   is-set-truncation-universal-property B f up-f C =
     is-equiv-is-contr-map
-      ( λ g → is-contr-equiv
-        ( Σ (hom-Set B C) (λ h → h ∘ f ~ g))
-        ( equiv-tot (λ h → equiv-funext))
-        ( up-f C g))
+      ( λ g →
+        is-contr-equiv
+          ( Σ (hom-Set B C) (λ h → h ∘ f ~ g))
+          ( equiv-tot (λ h → equiv-funext))
+          ( up-f C g))
 ```
 
 ### A map into a set satisfies the universal property if it is a set truncation

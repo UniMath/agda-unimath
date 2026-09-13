@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-types-with-isolated-elements
 open import foundation.identity-types
 open import foundation.isolated-elements
 open import foundation.transport-along-identifications
@@ -49,7 +50,6 @@ equiv-face-cube k X Y e d a =
         ( axis-cube (succ-ℕ k) Y)
         ( inv
           ( natural-inclusion-equiv-complement-isolated-element
-            ( dim-equiv-cube (succ-ℕ k) X Y e)
             ( pair d
               ( λ z →
                 has-decidable-equality-has-cardinality-ℕ
@@ -65,7 +65,7 @@ equiv-face-cube k X Y e d a =
                   ( has-cardinality-dim-cube (succ-ℕ k) Y)
                   ( map-dim-equiv-cube (succ-ℕ k) X Y e d)
                   ( z)))
-            ( refl)
+            ( dim-equiv-cube (succ-ℕ k) X Y e , refl)
             ( d')))) ∘e
       ( axis-equiv-cube (succ-ℕ k) X Y e
         ( inclusion-complement-element-Type-With-Cardinality-ℕ k

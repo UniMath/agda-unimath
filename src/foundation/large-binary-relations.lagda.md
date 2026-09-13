@@ -8,7 +8,6 @@ module foundation.large-binary-relations where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.universe-levels
@@ -162,8 +161,8 @@ module _
   is-cotransitive-Large-Relation-Prop =
     {l1 l2 l3 : Level} →
     (a : A l1) (b : A l2) (c : A l3) →
-    type-Prop (R a b) →
-    type-Prop ((R a c) ∨ (R c b))
+    type-Prop (R a c) →
+    type-Prop ((R a b) ∨ (R b c))
 ```
 
 ## See also

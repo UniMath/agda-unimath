@@ -7,13 +7,13 @@ module order-theory.decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -52,7 +52,7 @@ which the inequality [relation](foundation.binary-relations.md) is
 ```agda
 is-decidable-total-prop-Poset : {l1 l2 : Level} → Poset l1 l2 → Prop (l1 ⊔ l2)
 is-decidable-total-prop-Poset P =
-  product-Prop (is-total-Poset-Prop P) (is-decidable-leq-prop-Poset P)
+  product-Prop (is-total-prop-Poset P) (is-decidable-leq-prop-Poset P)
 
 is-decidable-total-Poset : {l1 l2 : Level} → Poset l1 l2 → UU (l1 ⊔ l2)
 is-decidable-total-Poset P = type-Prop (is-decidable-total-prop-Poset P)

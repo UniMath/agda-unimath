@@ -9,9 +9,10 @@ module foundation.universal-property-family-of-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
+open import foundation.equivalences-contractible-types
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.subtype-identity-principle
@@ -19,10 +20,10 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-identifications
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types

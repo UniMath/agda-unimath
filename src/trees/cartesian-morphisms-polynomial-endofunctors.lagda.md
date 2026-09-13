@@ -15,9 +15,10 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -47,6 +48,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences-arrows
 open import foundation-core.retractions
 open import foundation-core.torsorial-type-families
 

@@ -22,9 +22,9 @@ open import synthetic-homotopy-theory.free-loops
 
 ## Idea
 
-Given a family `A : 𝕊¹ → U` over the
+Given a family `A : 𝕊¹ → 𝒰` over the
 [circle](synthetic-homotopy-theory.circle.md) and a family
-`B : (t : 𝕊¹) → (A t) → U` over `A`, the
+`B : (t : 𝕊¹) → (A t) → 𝒰` over `A`, the
 [descent data](synthetic-homotopy-theory.descent-circle.md) for the family of
 [dependent pair types](foundation.dependent-pair-types.md) `λ t → Σ (A t) (B t)`
 is `(Σ X R, map-Σ e k)`, where `(X, e)` is descent data for `A` and `(R, k)` is

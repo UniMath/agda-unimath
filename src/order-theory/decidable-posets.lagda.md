@@ -12,6 +12,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-types
 open import foundation.identity-types
 open import foundation.propositions

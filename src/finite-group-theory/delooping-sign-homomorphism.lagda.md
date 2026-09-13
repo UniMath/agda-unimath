@@ -27,6 +27,9 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -48,7 +51,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.transport-along-identifications
@@ -60,7 +62,8 @@ open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
-open import group-theory.concrete-groups
+open import foundation-core.raising-universe-levels
+
 open import group-theory.generating-sets-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups

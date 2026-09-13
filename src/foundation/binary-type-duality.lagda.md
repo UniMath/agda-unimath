@@ -10,12 +10,12 @@ module foundation.binary-type-duality where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-spans
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.multivariable-homotopies
 open import foundation.retractions
 open import foundation.sections
 open import foundation.spans
+open import foundation.telescopes
 open import foundation.univalence
 open import foundation.universe-levels
 

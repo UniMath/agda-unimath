@@ -9,6 +9,7 @@ module group-theory.kernels-homomorphisms-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -27,9 +28,11 @@ open import group-theory.subsets-groups
 
 ## Idea
 
-The **kernel** of a [group homomorphism](group-theory.homomorphisms-groups.md)
-`f : G → H` is the [normal subgroup](group-theory.normal-subgroups.md) of `G`
-consisting of those elements `x : G` such that `f x ＝ unit-Group H`.
+The
+{{#concept "kernel" Disambiguation="of a homomorphism of groups" Agda=kernel-hom-Group}}
+of a [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` is
+the [normal subgroup](group-theory.normal-subgroups.md) of `G` consisting of
+those elements `x : G` such that `f x ＝ unit-Group H`.
 
 ## Definition
 

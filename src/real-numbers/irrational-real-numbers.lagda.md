@@ -33,7 +33,7 @@ is a [real number](real-numbers.dedekind-real-numbers.md) that is not
 
 ```agda
 is-irrational-prop-ℝ : {l : Level} → ℝ l → Prop l
-is-irrational-prop-ℝ x = ¬' (subtype-rational-real x)
+is-irrational-prop-ℝ x = ¬' (subtype-rational-ℝ x)
 
 is-irrational-ℝ : {l : Level} → ℝ l → UU l
 is-irrational-ℝ x = type-Prop (is-irrational-prop-ℝ x)

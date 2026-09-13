@@ -7,33 +7,17 @@ module orthogonal-factorization-systems.maps-local-at-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
-open import foundation.cones-over-cospan-diagrams
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.equivalences-arrows
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-fibers-of-maps
-open import foundation.global-subuniverses
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.unit-type
-open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.families-of-types-local-at-maps
 open import orthogonal-factorization-systems.orthogonal-maps
-open import orthogonal-factorization-systems.pullback-hom
 open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
@@ -139,12 +123,12 @@ module _
   {f : A → B} {g : C → D} {g' : E → F}
   where
 
-  is-local-retract-map :
-    is-local-map f g → g' retract-of-map g → is-local-map f g'
-  is-local-retract-map G R d =
+  is-local-retract-arrow :
+    is-local-map f g → g' retract-of-arrow g → is-local-map f g'
+  is-local-retract-arrow G R d =
     is-local-retract
-      ( retract-fiber-retract-map g' g R d)
-      ( G (map-codomain-inclusion-retract-map g' g R d))
+      ( retract-fiber-retract-arrow g' g R d)
+      ( G (map-codomain-inclusion-retract-arrow g' g R d))
 ```
 
 ```agda
@@ -154,10 +138,10 @@ module _
   {f : A → B} {g : C → D} {f' : E → F}
   where
 
-  is-local-retract-map' :
-    is-local-map f g → f' retract-of-map f → is-local-map f' g
-  is-local-retract-map' F R d =
-    is-local-retract-map-is-local f' f R (fiber g d) (F d)
+  is-local-retract-arrow' :
+    is-local-map f g → f' retract-of-arrow f → is-local-map f' g
+  is-local-retract-arrow' F R d =
+    is-local-retract-arrow-is-local f' f R (fiber g d) (F d)
 ```
 
 ## See also

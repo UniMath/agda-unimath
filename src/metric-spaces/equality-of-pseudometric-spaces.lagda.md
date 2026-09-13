@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -26,8 +27,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.functions-pseudometric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.pseudometric-spaces
 ```
 
@@ -61,8 +62,8 @@ module _
 
   isometric-eq-Pseudometric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
   isometric-eq-Pseudometric-Space =
-    Σ (type-Pseudometric-Space A ＝ type-Pseudometric-Space B)
-      (λ e → is-isometry-Pseudometric-Space A B (map-eq e))
+    Σ ( type-Pseudometric-Space A ＝ type-Pseudometric-Space B)
+      ( λ e → is-isometry-Pseudometric-Space A B (map-eq e))
 ```
 
 ### Isometric equivalence of pseudometric spaces
@@ -75,8 +76,8 @@ module _
 
   isometric-equiv-Pseudometric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Pseudometric-Space =
-    Σ (type-Pseudometric-Space A ≃ type-Pseudometric-Space B)
-      (λ e → is-isometry-Pseudometric-Space A B (map-equiv e))
+    Σ ( type-Pseudometric-Space A ≃ type-Pseudometric-Space B)
+      ( λ e → is-isometry-Pseudometric-Space A B (map-equiv e))
 ```
 
 ### Isometric equivalences between pseudometric spaces
@@ -89,8 +90,8 @@ module _
 
   isometric-equiv-Pseudometric-Space' : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   isometric-equiv-Pseudometric-Space' =
-    Σ (type-function-Pseudometric-Space A B)
-      (λ f → (is-equiv f) × (is-isometry-Pseudometric-Space A B f))
+    Σ ( map-Pseudometric-Space A B)
+      ( λ f → (is-equiv f) × (is-isometry-Pseudometric-Space A B f))
 ```
 
 ## Properties

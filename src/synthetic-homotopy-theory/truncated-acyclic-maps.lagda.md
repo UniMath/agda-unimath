@@ -13,9 +13,10 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
-open import foundation.contractible-types
 open import foundation.dependent-epimorphisms-with-respect-to-truncated-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
@@ -23,6 +24,7 @@ open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -35,7 +37,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
@@ -51,7 +53,6 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
-open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.truncated-acyclic-types
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -407,9 +408,7 @@ module _
     is-truncation-equivalence k f → is-truncated-acyclic-map k f
   is-truncated-acyclic-map-is-truncation-equivalence e =
     is-truncated-acyclic-map-is-epimorphism-Truncated-Type f
-      ( λ C →
-        is-emb-is-equiv
-          ( is-equiv-precomp-is-truncation-equivalence k f e C))
+      ( λ C → is-emb-is-equiv (is-equiv-precomp-is-truncation-equivalence e C))
 ```
 
 ### `k`-acyclic maps are closed under pullbacks
@@ -529,13 +528,13 @@ module _
   where
 
   is-truncated-acyclic-map-retract-of :
-    f retract-of-map g →
+    f retract-of-arrow g →
     is-truncated-acyclic-map k g →
     is-truncated-acyclic-map k f
   is-truncated-acyclic-map-retract-of R ac b =
     is-truncated-acyclic-retract-of
-      ( retract-fiber-retract-map f g R b)
-      ( ac (map-codomain-inclusion-retract-map f g R b))
+      ( retract-fiber-retract-arrow f g R b)
+      ( ac (map-codomain-inclusion-retract-arrow f g R b))
 ```
 
 ### `k`-acyclic maps are closed under pushouts

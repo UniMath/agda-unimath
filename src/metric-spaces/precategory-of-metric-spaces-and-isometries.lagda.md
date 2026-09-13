@@ -11,25 +11,19 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.propositions
-open import foundation.subtypes
-open import foundation.torsorial-type-families
-open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
-open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -53,9 +47,9 @@ module _
   precategory-isometry-Metric-Space =
     make-Precategory
       ( Metric-Space l1 l2)
-      ( set-isometry-Metric-Space)
+      ( isometry-set-Metric-Space)
       ( λ {A B C} → comp-isometry-Metric-Space A B C)
-      ( isometry-id-Metric-Space)
+      ( id-isometry-Metric-Space)
       ( λ {A B C D} → associative-comp-isometry-Metric-Space A B C D)
       ( λ {A B} → left-unit-law-comp-isometry-Metric-Space A B)
       ( λ {A B} → right-unit-law-comp-isometry-Metric-Space A B)

@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.null-families-of-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
@@ -25,7 +26,7 @@ open import orthogonal-factorization-systems.orthogonal-maps
 A family of types `B : A → UU l` is said to be
 {{#concept "null" Disambiguation="family of types" Agda=is-null-family}} at `Y`,
 or **`Y`-null**, if every fiber is. I.e., if the
-[diagonal map](foundation.diagonal-maps-of-types.md)
+[diagonal map](foundation-core.diagonal-maps-of-types.md)
 
 ```text
   Δ : B x → (Y → B x)

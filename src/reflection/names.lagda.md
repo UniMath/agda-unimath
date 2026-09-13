@@ -7,11 +7,12 @@ module reflection.names where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.booleans
-open import foundation.cartesian-product-types
-open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.booleans
+open import foundation-core.cartesian-product-types
+open import foundation-core.identity-types
 
 open import primitives.machine-integers
 open import primitives.strings
@@ -45,10 +46,10 @@ primitive
 
 ## Examples
 
-```agda
+```text
 _ : primQNameLess (quote bool) (quote unit) ＝ true
 _ = refl
 
-_ : primShowQName (quote bool) ＝ "foundation.booleans.bool"
+_ : primShowQName (quote bool) ＝ "foundation-core.booleans.bool"
 _ = refl
 ```

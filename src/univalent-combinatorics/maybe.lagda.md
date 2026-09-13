@@ -3,7 +3,7 @@
 ```agda
 module univalent-combinatorics.maybe where
 
-open import foundation.maybe public
+open import foundation-core.maybe public
 ```
 
 <details><summary>Imports</summary>

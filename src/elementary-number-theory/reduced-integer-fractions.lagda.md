@@ -23,6 +23,7 @@ open import elementary-number-theory.relatively-prime-integers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
@@ -56,28 +57,34 @@ is-reduced-fraction-ℤ x =
 ### Being a reduced fraction is a proposition
 
 ```agda
-is-prop-is-reduced-fraction-ℤ :
-  (x : fraction-ℤ) → is-prop (is-reduced-fraction-ℤ x)
-is-prop-is-reduced-fraction-ℤ x =
-  is-prop-is-relatively-prime-ℤ
-    ( numerator-fraction-ℤ x)
-    ( denominator-fraction-ℤ x)
+abstract
+  is-prop-is-reduced-fraction-ℤ :
+    (x : fraction-ℤ) → is-prop (is-reduced-fraction-ℤ x)
+  is-prop-is-reduced-fraction-ℤ x =
+    is-prop-is-relatively-prime-ℤ
+      ( numerator-fraction-ℤ x)
+      ( denominator-fraction-ℤ x)
+
+is-reduced-prop-fraction-ℤ : fraction-ℤ → Prop lzero
+is-reduced-prop-fraction-ℤ x =
+  ( is-reduced-fraction-ℤ x , is-prop-is-reduced-fraction-ℤ x)
 ```
 
 ### The negative of a reduced integer fraction is reduced
 
 ```agda
-is-reduced-neg-fraction-ℤ :
-  (x : fraction-ℤ) →
-  is-reduced-fraction-ℤ x →
-  is-reduced-fraction-ℤ (neg-fraction-ℤ x)
-is-reduced-neg-fraction-ℤ x =
-  tr
-    ( is-one-ℤ)
-    ( inv
-      ( preserves-gcd-left-neg-ℤ
-        ( numerator-fraction-ℤ x)
-        ( denominator-fraction-ℤ x)))
+abstract
+  is-reduced-neg-fraction-ℤ :
+    (x : fraction-ℤ) →
+    is-reduced-fraction-ℤ x →
+    is-reduced-fraction-ℤ (neg-fraction-ℤ x)
+  is-reduced-neg-fraction-ℤ x =
+    tr
+      ( is-one-ℤ)
+      ( inv
+        ( preserves-gcd-left-neg-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ x)))
 ```
 
 ### Any fraction can be reduced

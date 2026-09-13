@@ -10,6 +10,8 @@ module species.dirichlet-products-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.global-subuniverses
@@ -18,6 +20,7 @@ open import foundation.identity-types
 open import foundation.product-decompositions
 open import foundation.product-decompositions-subuniverse
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types

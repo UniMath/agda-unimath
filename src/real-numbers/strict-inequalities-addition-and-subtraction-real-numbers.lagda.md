@@ -240,6 +240,10 @@ module _
     le-transpose-left-diff-ℝ : le-ℝ (x -ℝ y) z → le-ℝ x (z +ℝ y)
     le-transpose-left-diff-ℝ = forward-implication iff-add-right-le-ℝ
 
+    le-transpose-left-diff-ℝ' : le-ℝ (x -ℝ y) z → le-ℝ x (y +ℝ z)
+    le-transpose-left-diff-ℝ' x-y<z =
+      tr (le-ℝ x) (commutative-add-ℝ z y) (le-transpose-left-diff-ℝ x-y<z)
+
 module _
   {l1 l2 l3 : Level} (x : ℝ l1) (y : ℝ l2) (z : ℝ l3)
   where
@@ -309,6 +313,6 @@ module _
         intro-exists
           ( q , r)
           ( p=q+r ,
-            le-real-is-in-upper-cut-ℚ x x<q ,
-            le-real-is-in-upper-cut-ℚ y y<r)
+            le-real-is-in-upper-cut-ℝ x x<q ,
+            le-real-is-in-upper-cut-ℝ y y<r)
 ```

@@ -15,6 +15,7 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
@@ -35,7 +36,7 @@ open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
-open import metric-spaces.short-functions-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
@@ -317,6 +318,10 @@ module _
   set-Metric-Space : Set l1
   set-Metric-Space =
     (type-Metric-Space A , is-set-type-Metric-Space)
+
+  eq-prop-Metric-Space :
+    (x y : type-Metric-Space A) → Prop l1
+  eq-prop-Metric-Space = Id-Prop set-Metric-Space
 ```
 
 ### Similarity of elements in a metric space is equivalent to equality
@@ -349,37 +354,37 @@ module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2)
   (B : Metric-Space l1' l2')
-  (f : short-function-Pseudometric-Space A (pseudometric-Metric-Space B))
+  (f : short-map-Pseudometric-Space A (pseudometric-Metric-Space B))
   where
 
   abstract
-    reflects-sim-map-short-function-metric-space-Pseudometric-Space :
+    reflects-sim-map-short-map-metric-space-Pseudometric-Space :
       {x y : type-Pseudometric-Space A} →
       sim-Pseudometric-Space A x y →
-      map-short-function-Pseudometric-Space
+      map-short-map-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)
         ( x) ＝
-      map-short-function-Pseudometric-Space
+      map-short-map-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)
         ( y)
-    reflects-sim-map-short-function-metric-space-Pseudometric-Space
+    reflects-sim-map-short-map-metric-space-Pseudometric-Space
       {x} {y} x~y =
       eq-sim-Metric-Space B
-        ( map-short-function-Pseudometric-Space
+        ( map-short-map-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f)
           ( x))
-        ( map-short-function-Pseudometric-Space
+        ( map-short-map-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f)
           ( y))
-        ( preserves-sim-map-short-function-Pseudometric-Space
+        ( preserves-sim-map-short-map-Pseudometric-Space
           ( A)
           ( pseudometric-Metric-Space B)
           ( f)
@@ -387,16 +392,16 @@ module _
           ( y)
           ( x~y))
 
-  reflecting-map-short-function-metric-space-Pseudometric-Space :
+  reflecting-map-short-map-metric-space-Pseudometric-Space :
     reflecting-map-equivalence-relation
       ( equivalence-relation-sim-Pseudometric-Space A)
       ( type-Metric-Space B)
-  reflecting-map-short-function-metric-space-Pseudometric-Space =
-    ( ( map-short-function-Pseudometric-Space
+  reflecting-map-short-map-metric-space-Pseudometric-Space =
+    ( ( map-short-map-Pseudometric-Space
         ( A)
         ( pseudometric-Metric-Space B)
         ( f)) ,
-      ( reflects-sim-map-short-function-metric-space-Pseudometric-Space))
+      ( reflects-sim-map-short-map-metric-space-Pseudometric-Space))
 ```
 
 ## See also

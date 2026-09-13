@@ -9,6 +9,7 @@ module univalent-combinatorics.inhabited-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types

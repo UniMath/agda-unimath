@@ -6,6 +6,7 @@
 module foundation-core where
 
 open import foundation-core.1-types public
+open import foundation-core.booleans public
 open import foundation-core.cartesian-product-types public
 open import foundation-core.coherently-invertible-maps public
 open import foundation-core.commuting-prisms-of-maps public
@@ -20,6 +21,7 @@ open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
 open import foundation-core.dependent-identifications public
 open import foundation-core.diagonal-maps-cartesian-products-of-types public
+open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.double-negation-stable-equality public
 open import foundation-core.embeddings public
@@ -28,6 +30,7 @@ open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
+open import foundation-core.equivalences-arrows public
 open import foundation-core.families-of-equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-types public
@@ -37,8 +40,15 @@ open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
 open import foundation-core.invertible-maps public
+open import foundation-core.iterated-successors-truncation-levels public
 open import foundation-core.iterating-functions public
+open import foundation-core.law-of-excluded-middle public
+open import foundation-core.logical-equivalences public
+open import foundation-core.maybe public
+open import foundation-core.monomorphisms public
 open import foundation-core.negation public
+open import foundation-core.operations-cospan-diagrams public
+open import foundation-core.operations-cospans public
 open import foundation-core.operations-span-diagrams public
 open import foundation-core.operations-spans public
 open import foundation-core.path-split-maps public
@@ -49,12 +59,15 @@ open import foundation-core.precomposition-functions public
 open import foundation-core.propositional-maps public
 open import foundation-core.propositions public
 open import foundation-core.pullbacks public
+open import foundation-core.raising-universe-levels public
 open import foundation-core.retractions public
 open import foundation-core.retracts-of-types public
 open import foundation-core.sections public
 open import foundation-core.sets public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.subuniverse-of-contractible-types public
+open import foundation-core.subuniverses public
 open import foundation-core.torsorial-type-families public
 open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public

@@ -7,6 +7,7 @@ module group-theory.subsets-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets

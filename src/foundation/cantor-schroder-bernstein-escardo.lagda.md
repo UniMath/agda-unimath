@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.cantor-schroder-bernstein-decidable-embeddings
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
@@ -43,7 +44,7 @@ Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
 
 ```agda
 module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
+  {l1 l2 : Level} (lem : level-LEM (l1 ⊔ l2))
   {A : UU l1} {B : UU l2}
   where abstract
 
@@ -68,7 +69,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
+  {l1 l2 : Level} (lem : level-LEM (l1 ⊔ l2))
   (A : Set l1) (B : Set l2)
   where abstract
 

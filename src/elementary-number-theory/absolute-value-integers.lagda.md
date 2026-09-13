@@ -182,33 +182,34 @@ is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
 ### The absolute value function is multiplicative
 
 ```agda
-multiplicative-abs-ℤ' :
-  (x y : ℤ) → abs-ℤ (explicit-mul-ℤ x y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
-multiplicative-abs-ℤ' (inl x) (inl y) =
-  abs-int-ℕ _
-multiplicative-abs-ℤ' (inl x) (inr (inl star)) =
-  inv (right-zero-law-mul-ℕ x)
-multiplicative-abs-ℤ' (inl x) (inr (inr y)) =
-  ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
-  ( abs-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
-multiplicative-abs-ℤ' (inr (inl star)) (inl y) =
-  refl
-multiplicative-abs-ℤ' (inr (inr x)) (inl y) =
-  ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
-  ( abs-int-ℕ (succ-ℕ ((x *ℕ (succ-ℕ y)) +ℕ y)))
-multiplicative-abs-ℤ' (inr (inl star)) (inr (inl star)) =
-  refl
-multiplicative-abs-ℤ' (inr (inl star)) (inr (inr x)) =
-  refl
-multiplicative-abs-ℤ' (inr (inr x)) (inr (inl star)) =
-  inv (right-zero-law-mul-ℕ (succ-ℕ x))
-multiplicative-abs-ℤ' (inr (inr x)) (inr (inr y)) =
-  abs-int-ℕ _
+abstract
+  multiplicative-abs-ℤ' :
+    (x y : ℤ) → abs-ℤ (explicit-mul-ℤ x y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
+  multiplicative-abs-ℤ' (inl x) (inl y) =
+    abs-int-ℕ _
+  multiplicative-abs-ℤ' (inl x) (inr (inl star)) =
+    inv (right-zero-law-mul-ℕ x)
+  multiplicative-abs-ℤ' (inl x) (inr (inr y)) =
+    ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
+    ( abs-int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y)))
+  multiplicative-abs-ℤ' (inr (inl star)) (inl y) =
+    refl
+  multiplicative-abs-ℤ' (inr (inr x)) (inl y) =
+    ( abs-neg-ℤ (inl ((x *ℕ (succ-ℕ y)) +ℕ y))) ∙
+    ( abs-int-ℕ (succ-ℕ ((x *ℕ (succ-ℕ y)) +ℕ y)))
+  multiplicative-abs-ℤ' (inr (inl star)) (inr (inl star)) =
+    refl
+  multiplicative-abs-ℤ' (inr (inl star)) (inr (inr x)) =
+    refl
+  multiplicative-abs-ℤ' (inr (inr x)) (inr (inl star)) =
+    inv (right-zero-law-mul-ℕ (succ-ℕ x))
+  multiplicative-abs-ℤ' (inr (inr x)) (inr (inr y)) =
+    abs-int-ℕ _
 
-multiplicative-abs-ℤ :
-  (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
-multiplicative-abs-ℤ x y =
-  ap abs-ℤ (compute-mul-ℤ x y) ∙ multiplicative-abs-ℤ' x y
+  multiplicative-abs-ℤ :
+    (x y : ℤ) → abs-ℤ (x *ℤ y) ＝ (abs-ℤ x) *ℕ (abs-ℤ y)
+  multiplicative-abs-ℤ x y =
+    ap abs-ℤ (compute-mul-ℤ x y) ∙ multiplicative-abs-ℤ' x y
 ```
 
 ### `|(-x)y| ＝ |xy|`

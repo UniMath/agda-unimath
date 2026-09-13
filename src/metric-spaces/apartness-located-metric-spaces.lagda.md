@@ -98,42 +98,38 @@ module _
   abstract
     is-cotransitive-apart-Located-Metric-Space :
       is-cotransitive (apart-prop-Located-Metric-Space M)
-    is-cotransitive-apart-Located-Metric-Space x y z x#y =
+    is-cotransitive-apart-Located-Metric-Space x y z x#z =
       let
         motive =
-          ( apart-prop-Located-Metric-Space M x z) ∨
+          ( apart-prop-Located-Metric-Space M x y) ∨
           ( apart-prop-Located-Metric-Space M y z)
         open do-syntax-trunc-Prop motive
       in do
-        (dxy , ¬Ndxy) ← x#y
-        let (δ , ε , δ+ε=dxy) = split-ℚ⁺ dxy
+        (dxz , ¬Ndxz) ← x#z
+        let (δ , ε , δ+ε=dxz) = split-ℚ⁺ dxz
         elim-disjunction
           ( motive)
-          ( λ ¬Nδ'xz →
-            inl-disjunction (intro-exists (mediant-zero-ℚ⁺ δ) ¬Nδ'xz))
-          ( λ Nδxz →
+          ( λ ¬Nδ'xy →
+            inl-disjunction (intro-exists (mediant-zero-ℚ⁺ δ) ¬Nδ'xy))
+          ( λ Nδxy →
             elim-disjunction
               ( motive)
               ( λ ¬Nε'yz →
                 inr-disjunction (intro-exists (mediant-zero-ℚ⁺ ε) ¬Nε'yz))
               ( λ Nεyz →
                 ex-falso
-                  ( ¬Ndxy
+                  ( ¬Ndxz
                     ( tr
-                      ( λ d → neighborhood-Located-Metric-Space M d x y)
-                      ( δ+ε=dxy)
+                      ( λ d → neighborhood-Located-Metric-Space M d x z)
+                      ( δ+ε=dxz)
                       ( triangular-neighborhood-Located-Metric-Space M
                         ( x)
-                        ( z)
                         ( y)
+                        ( z)
                         ( δ)
                         ( ε)
-                        ( symmetric-neighborhood-Located-Metric-Space M
-                          ( ε)
-                          ( y)
-                          ( z)
-                          ( Nεyz))
-                        ( Nδxz)))))
+                        ( Nεyz)
+                        ( Nδxy)))))
               ( is-located-Located-Metric-Space M
                 ( y)
                 ( z)
@@ -142,7 +138,7 @@ module _
                 ( le-mediant-zero-ℚ⁺ ε)))
           ( is-located-Located-Metric-Space M
             ( x)
-            ( z)
+            ( y)
             ( mediant-zero-ℚ⁺ δ)
             ( δ)
             ( le-mediant-zero-ℚ⁺ δ))

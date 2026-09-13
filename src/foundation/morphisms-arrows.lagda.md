@@ -430,7 +430,7 @@ module _
 
 ## See also
 
-- [Equivalences of arrows](foundation.equivalences-arrows.md)
+- [Equivalences of arrows](foundation-core.equivalences-arrows.md)
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
 - [Fibered maps](foundation.fibered-maps.md) for the same concept under a
   different name.

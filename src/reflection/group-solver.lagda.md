@@ -10,11 +10,12 @@ module reflection.group-solver where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import foundation-core.coproduct-types
+open import foundation-core.identity-types
 
 open import group-theory.groups
 

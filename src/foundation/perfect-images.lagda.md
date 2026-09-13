@@ -16,12 +16,14 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.double-negation-dense-equality-maps
 open import foundation.functoriality-dependent-function-types
 open import foundation.iterating-functions
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.telescopes
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -64,8 +66,8 @@ of `g`.
 
 This concept is used in the
 [Cantor–Schröder–Bernstein construction](foundation.cantor-schroder-bernstein-decidable-embeddings.md)
-to construct an equivalence of types `A ≃ B` given mutual embeddings
-`f : A ↪ B` and `g : B ↪ A`.
+to construct an equivalence of types `A ≃ B` given mutual embeddings `f : A ↪ B`
+and `g : B ↪ A`.
 
 ## Definitions
 
@@ -478,9 +480,9 @@ module _
 
 It follows from the
 [weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
-that, for every pair of mutual decidable embeddings `f : A ↪ B` and
-`g : B ↪ A`, it is decidable for every element `x : A` whether `x` is a perfect
-image of `g` relative to `f`.
+that, for every pair of mutual decidable embeddings `f : A ↪ B` and `g : B ↪ A`,
+it is decidable for every element `x : A` whether `x` is a perfect image of `g`
+relative to `f`.
 
 ```agda
 module _

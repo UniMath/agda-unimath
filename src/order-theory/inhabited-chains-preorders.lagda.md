@@ -8,6 +8,7 @@ module order-theory.inhabited-chains-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.inhabited-subtypes
 open import foundation.propositions
 open import foundation.subtypes

@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.families-of-types-local-at-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions

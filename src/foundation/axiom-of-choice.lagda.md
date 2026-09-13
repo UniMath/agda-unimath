@@ -12,12 +12,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
-open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
@@ -102,7 +101,7 @@ is-set-projective-AC0 :
 is-set-projective-AC0 ac X A B f h =
   map-trunc-Prop
     ( ( map-Σ
-        ( λ g → ((map-surjection f) ∘ g) ＝ h)
+        ( λ g → map-surjection f ∘ g ＝ h)
         ( precomp h A)
         ( λ s H → htpy-postcomp X H h)) ∘
       ( section-is-split-surjective (map-surjection f)))

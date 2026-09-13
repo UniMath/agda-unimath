@@ -11,6 +11,7 @@ open import foundation-core.functoriality-dependent-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
@@ -180,11 +181,11 @@ module _
       ( compute-fiber-map-Π' α f h)
       ( is-trunc-Π k (λ j → H (α j) (h j)))
 
-  is-trunc-map-is-trunc-map-map-Π' :
+  is-trunc-map-is-trunc-map-map-Π'-lzero :
     (k : 𝕋) (f : (i : I) → A i → B i) →
-    ({l : Level} {J : UU l} (α : J → I) → is-trunc-map k (map-Π' α f)) →
+    ({J : UU lzero} (α : J → I) → is-trunc-map k (map-Π' α f)) →
     (i : I) → is-trunc-map k (f i)
-  is-trunc-map-is-trunc-map-map-Π' k f H i b =
+  is-trunc-map-is-trunc-map-map-Π'-lzero k f H i b =
     is-trunc-equiv' k
       ( fiber (map-Π (λ _ → f i)) (point b))
       ( equiv-Σ
@@ -196,6 +197,13 @@ module _
             ( map-Π (λ _ → f i) h)
             ( point b)))
       ( H (λ _ → i) (point b))
+
+  is-trunc-map-is-trunc-map-map-Π' :
+    (k : 𝕋) (f : (i : I) → A i → B i) →
+    ({l : Level} {J : UU l} (α : J → I) → is-trunc-map k (map-Π' α f)) →
+    (i : I) → is-trunc-map k (f i)
+  is-trunc-map-is-trunc-map-map-Π' k f H i b =
+    is-trunc-map-is-trunc-map-map-Π'-lzero k f H i b
 
   is-emb-map-Π' :
     {l4 : Level} {J : UU l4} (α : J → I) (f : (i : I) → A i → B i) →

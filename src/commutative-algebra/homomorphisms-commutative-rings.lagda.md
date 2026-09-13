@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
 open import commutative-algebra.invertible-elements-commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
@@ -28,8 +29,11 @@ open import ring-theory.homomorphisms-rings
 
 ## Idea
 
-A **homomorphism of commutative rings** is a homomorphism between their
-underlying rings.
+A
+{{#concept "homomorphism" Disambiguation="of commutative rings" Agda=hom-Commutative-Ring}}
+of [commutative rings](commutative-algebra.commutative-rings.md) is a
+[homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
+[rings](ring-theory.rings.md).
 
 ## Definition
 

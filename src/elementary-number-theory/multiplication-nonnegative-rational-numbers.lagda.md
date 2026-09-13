@@ -26,8 +26,10 @@ open import elementary-number-theory.rational-numbers
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 
 open import order-theory.order-preserving-maps-total-orders
+open import order-theory.posets
 ```
 
 </details>
@@ -81,7 +83,7 @@ abstract
 ### Multiplication by a nonnegative rational number preserves inequality
 
 ```agda
-opaque
+abstract opaque
   unfolding is-nonnegative-ℚ leq-ℚ-Prop mul-ℚ
 
   preserves-leq-right-mul-ℚ⁰⁺ :
@@ -156,4 +158,36 @@ abstract
       ( ℚ-Total-Order)
       ( ℚ-Total-Order)
       ( p *ℚ_ , preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺)
+```
+
+### Multiplication by a rational number greater than or equal to one is an inflationary map
+
+```agda
+abstract
+  is-inflationary-right-mul-geq-one-ℚ⁰⁺ :
+    (p q : ℚ⁰⁺) → leq-ℚ⁰⁺ one-ℚ⁰⁺ q → leq-ℚ⁰⁺ p (p *ℚ⁰⁺ q)
+  is-inflationary-right-mul-geq-one-ℚ⁰⁺ p⁰⁺@(p , _) (q , _) 1≤q =
+    let
+      open inequality-reasoning-Poset ℚ-Poset
+    in
+      chain-of-inequalities
+        p
+        ≤ p *ℚ one-ℚ
+          by leq-eq-ℚ (inv (right-unit-law-mul-ℚ p))
+        ≤ p *ℚ q
+          by preserves-leq-left-mul-ℚ⁰⁺ p⁰⁺ _ _ 1≤q
+```
+
+### Multiplication by a nonnegative rational number less than or equal to one is a deflationary map
+
+```agda
+abstract
+  is-deflationary-left-mul-leq-one-ℚ⁰⁺ :
+    (p : ℚ) (q : ℚ⁰⁺) → leq-ℚ p one-ℚ →
+    leq-ℚ (p *ℚ rational-ℚ⁰⁺ q) (rational-ℚ⁰⁺ q)
+  is-deflationary-left-mul-leq-one-ℚ⁰⁺ p q p≤1 =
+    tr
+      ( leq-ℚ _)
+      ( left-unit-law-mul-ℚ (rational-ℚ⁰⁺ q))
+      ( preserves-leq-right-mul-ℚ⁰⁺ q p one-ℚ p≤1)
 ```

@@ -35,7 +35,7 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-Given two families `A, B : 𝕊¹ → U` over the
+Given two families `A, B : 𝕊¹ → 𝒰` over the
 [circle](synthetic-homotopy-theory.circle.md), the
 [descent data](synthetic-homotopy-theory.descent-circle.md) for the family of
 function types `λ t → (A t → B t)` is `(X → Y, λ h → f ∘ h ∘ e⁻¹)`, where

@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.descent-circle-subtypes where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -30,9 +31,9 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-Given a family `A : 𝕊¹ → U` over the
+Given a family `A : 𝕊¹ → 𝒰` over the
 [circle](synthetic-homotopy-theory.circle.md) and a family
-`B : (t : 𝕊¹) → (A t) → U` over `A` with corresponding
+`B : (t : 𝕊¹) → (A t) → 𝒰` over `A` with corresponding
 [descent data](synthetic-homotopy-theory.descent-circle.md) `(X, e)` and
 dependent descent data `(R, k)`, where `R` is a
 [subtype](foundation-core.subtypes.md) of `X`, we get that dependent functions

@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.cocartesian-morphisms-arrows where
 open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.propositions

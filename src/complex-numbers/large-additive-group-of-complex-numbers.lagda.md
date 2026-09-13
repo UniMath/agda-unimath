@@ -14,14 +14,18 @@ open import complex-numbers.similarity-complex-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.large-abelian-groups
 open import group-theory.large-commutative-monoids
 open import group-theory.large-groups
 open import group-theory.large-monoids
 open import group-theory.large-semigroups
+
+open import real-numbers.large-additive-group-of-real-numbers
 ```
 
 </details>
@@ -35,21 +39,17 @@ The type of [complex numbers](complex-numbers.complex-numbers.md) equipped with
 ## Definition
 
 ```agda
-large-semigroup-add-ℂ : Large-Semigroup lsuc
+large-semigroup-add-ℂ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℂ =
   make-Large-Semigroup
-    ( ℂ-Set)
-    ( add-ℂ)
+    ( cumulative-large-set-ℂ)
+    ( sim-preserving-binary-operator-add-ℂ)
     ( associative-add-ℂ)
 
 large-monoid-add-ℂ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℂ =
   make-Large-Monoid
     ( large-semigroup-add-ℂ)
-    ( large-similarity-relation-ℂ)
-    ( raise-ℂ)
-    ( sim-raise-ℂ)
-    ( λ _ _ z~z' _ _ → preserves-sim-add-ℂ z~z')
     ( zero-ℂ)
     ( left-unit-law-add-ℂ)
     ( right-unit-law-add-ℂ)
@@ -97,4 +97,11 @@ large-ab-add-ℂ =
 ```agda
 ab-add-ℂ : (l : Level) → Ab (lsuc l)
 ab-add-ℂ = ab-Large-Ab large-ab-add-ℂ
+```
+
+### The canonical abelian group homomorphism from the additive group of `ℝ` to the additive group of `ℂ`
+
+```agda
+hom-add-ab-complex-ℝ : (l : Level) → hom-Ab (ab-add-ℝ l) (ab-add-ℂ l)
+hom-add-ab-complex-ℝ l = (complex-ℝ , inv (add-complex-ℝ _ _))
 ```

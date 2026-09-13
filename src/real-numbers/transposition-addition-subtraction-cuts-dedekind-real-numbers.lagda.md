@@ -64,7 +64,7 @@ module _
           ( inv-tr
             ( λ y → le-ℝ y x)
             ( add-real-ℚ p q)
-            ( le-real-is-in-lower-cut-ℚ x p+q<x)))
+            ( le-real-is-in-lower-cut-ℝ x p+q<x)))
 
     transpose-is-in-lower-cut-diff-ℝ :
       is-in-lower-cut-ℝ (x -ℝ real-ℚ p) q → is-in-lower-cut-ℝ x (q +ℚ p)
@@ -78,7 +78,7 @@ module _
             ( real-ℚ q)
             ( x)
             ( real-ℚ p)
-            ( le-real-is-in-lower-cut-ℚ (x -ℝ real-ℚ p) x-p<q)))
+            ( le-real-is-in-lower-cut-ℝ (x -ℝ real-ℚ p) x-p<q)))
 
 module _
   {l : Level} (x : ℝ l) (p q : ℚ)
@@ -133,7 +133,7 @@ module _
           ( inv-tr
             ( le-ℝ x)
             ( add-real-ℚ p q)
-            ( le-real-is-in-upper-cut-ℚ x x<p+q)))
+            ( le-real-is-in-upper-cut-ℝ x x<p+q)))
 
     transpose-is-in-upper-cut-diff-ℝ :
       is-in-upper-cut-ℝ (x -ℝ real-ℚ p) q → is-in-upper-cut-ℝ x (q +ℚ p)
@@ -147,7 +147,7 @@ module _
             ( x)
             ( real-ℚ p)
             ( real-ℚ q)
-            ( le-real-is-in-upper-cut-ℚ (x -ℝ real-ℚ p) x-p<q)))
+            ( le-real-is-in-upper-cut-ℝ (x -ℝ real-ℚ p) x-p<q)))
 
 module _
   {l : Level} (x : ℝ l) (p q : ℚ)

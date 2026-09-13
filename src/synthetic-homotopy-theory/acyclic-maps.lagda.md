@@ -15,13 +15,17 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.epimorphisms
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -34,7 +38,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
-open import foundation.retracts-of-maps
+open import foundation.retracts-of-arrows
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -563,11 +567,11 @@ module _
   where
 
   is-acyclic-map-retract-of :
-    f retract-of-map g → is-acyclic-map g → is-acyclic-map f
+    f retract-of-arrow g → is-acyclic-map g → is-acyclic-map f
   is-acyclic-map-retract-of R ac b =
     is-acyclic-retract-of
-      ( retract-fiber-retract-map f g R b)
-      ( ac (map-codomain-inclusion-retract-map f g R b))
+      ( retract-fiber-retract-arrow f g R b)
+      ( ac (map-codomain-inclusion-retract-arrow f g R b))
 ```
 
 ## See also

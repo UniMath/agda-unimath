@@ -129,6 +129,10 @@ abstract opaque
   is-nonnegative-is-positive-ℚ : {q : ℚ} → is-positive-ℚ q → is-nonnegative-ℚ q
   is-nonnegative-is-positive-ℚ = is-nonnegative-is-positive-ℤ
 
+  is-nonnegative-rational-ℚ⁺ : (q : ℚ⁺) → is-nonnegative-ℚ (rational-ℚ⁺ q)
+  is-nonnegative-rational-ℚ⁺ (q , 0<q) =
+    is-nonnegative-is-positive-ℚ {q} 0<q
+
 nonnegative-ℚ⁺ : ℚ⁺ → ℚ⁰⁺
 nonnegative-ℚ⁺ (q , H) = (q , is-nonnegative-is-positive-ℚ H)
 ```

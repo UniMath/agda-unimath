@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.descent-circle-equivalence-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
@@ -28,7 +29,7 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-Given two families `A, B : 𝕊¹ → U` over the
+Given two families `A, B : 𝕊¹ → 𝒰` over the
 [circle](synthetic-homotopy-theory.circle.md), to show that they are
 [equivalent](foundation.equivalences.md) is the same as showing that their
 [descent data](synthetic-homotopy-theory.descent-circle.md) is equivalent.

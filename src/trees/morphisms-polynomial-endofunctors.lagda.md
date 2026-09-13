@@ -15,6 +15,7 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -412,7 +413,7 @@ module _
 transformations to satisfy the following equality:
 
 $$
-  α₁ (f ∘ x) (a , id) = ap (Q f) (α₁ x (a , id)) ∙ α₁ f (a , x),
+  α₁ (f ∘ x) (a , \id) = \ap (Q(f)) (α₁(x)(a , \id)) ∙ α₁(f)(a , x),
 $$
 
 which is an instance of the unfolded condition that the naturality square of a

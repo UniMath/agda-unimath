@@ -9,6 +9,7 @@ module trees.rooted-quasitrees where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.universe-levels
 
 open import graph-theory.trails-undirected-graphs

@@ -21,6 +21,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels

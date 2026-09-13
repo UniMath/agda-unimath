@@ -12,10 +12,11 @@ open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
 open import foundation.equivalences
-open import foundation.equivalences-arrows
 open import foundation.homotopies
 open import foundation.morphisms-double-arrows
 open import foundation.universe-levels
+
+open import foundation-core.equivalences-arrows
 ```
 
 </details>
@@ -45,8 +46,8 @@ referred to as the _domain equivalence_, and the `j` as the _codomain
 equivalence_.
 
 Alternatively, an equivalence of double arrows is a pair of
-[equivalences of arrows](foundation.equivalences-arrows.md) `f ≃ h` and `g ≃ k`
-that share the underlying maps.
+[equivalences of arrows](foundation-core.equivalences-arrows.md) `f ≃ h` and
+`g ≃ k` that share the underlying maps.
 
 ## Definitions
 

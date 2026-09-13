@@ -9,6 +9,7 @@ module univalent-combinatorics.ferrers-diagrams where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -40,7 +41,7 @@ ferrers diagram of a [finite type](univalent-combinatorics.finite-types.md) `A`
 consists of a finite type `X` and a family `Y` of inhabited finite types over
 `X` such that `Σ X Y` is merely equivalent to `A`. The number of finite Ferrers
 diagrams of `A` is the [partition number](univalent-combinatorics.partitions.md)
-of the [cardinality](set-theory.cardinalities.md) of `A`.
+of the [cardinality](set-theory.cardinals.md) of `A`.
 
 ## Definition
 

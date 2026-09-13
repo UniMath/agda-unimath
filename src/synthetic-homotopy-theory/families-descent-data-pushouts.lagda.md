@@ -23,10 +23,8 @@ open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
 
 ## Idea
 
-In
-[`descent-property-pushouts`](synthetic-homotopy-theory.descent-property-pushouts.md)
-we show that given
-[descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
+In [`descent-pushouts`](synthetic-homotopy-theory.descent-pushouts.md) we show
+that given [descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
 `(PA, PB, PS)` over a [span diagram](foundation.span-diagrams.md) `𝒮`, there is
 a unique type family `P` over its
 [pushout](synthetic-homotopy-theory.pushouts.md) such that its induced descent

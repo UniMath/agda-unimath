@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids
 
+open import lists.equality-lists
 open import lists.lists
 ```
 

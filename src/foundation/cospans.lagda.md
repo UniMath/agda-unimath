@@ -8,10 +8,7 @@ module foundation.cospans where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -61,13 +58,13 @@ module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : cospan l A B)
   where
 
-  codomain-cospan : UU l
-  codomain-cospan = pr1 c
+  cospanning-type-cospan : UU l
+  cospanning-type-cospan = pr1 c
 
-  left-map-cospan : A → codomain-cospan
+  left-map-cospan : A → cospanning-type-cospan
   left-map-cospan = pr1 (pr2 c)
 
-  right-map-cospan : B → codomain-cospan
+  right-map-cospan : B → cospanning-type-cospan
   right-map-cospan = pr2 (pr2 c)
 ```
 

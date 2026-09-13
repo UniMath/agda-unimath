@@ -20,9 +20,9 @@ open import foundation.homotopies
 open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.slice
 open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes

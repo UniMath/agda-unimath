@@ -11,6 +11,7 @@ module finite-group-theory.orbits-permutations where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -31,6 +32,7 @@ open import foundation.decidable-equivalence-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
