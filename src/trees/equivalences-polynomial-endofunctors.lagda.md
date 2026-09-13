@@ -45,7 +45,7 @@ $Q$, a [morphism](trees.morphisms-polynomial-endofunctors.md) $α : P → Q$ is 
 if the map on shapes $α₀ : P₀ → Q₀$ is an equivalence and the family of maps on
 positions
 
-$$α₁ : (a : A) → Q₁(α₀(a)) → P₁(a)$$
+$$α₁ : (a : P₀) → Q₁(α₀(a)) → P₁(a)$$
 
 is a family of [equivalences](foundation-core.equivalences.md).
 
