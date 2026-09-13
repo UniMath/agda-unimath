@@ -98,16 +98,16 @@ module _
 Let
 
 $$
-  A ≔ \{\,p : ℚ \mid ∀(i : I),\; p ∈ U_{y_i}\,\},
+  A ≔ \{p : ℚ \mid ∀(i : I). p ∈ U_{y_i}\},
 $$
 
-where $U_{y_i}$ is the upper cut of $y_i$. In Agda this is
+where $U_{y_i}$ is the upper cut of $y_i$. In the formalization this is
 `all-upper-sections-family-macneille-ℝ`.
 
 The candidate upper cut of the least upper bound is then
 
 $$
-  (q ∈ U_{\sup y}) ≔ (∃(p : ℚ),\; (p ≤ q) ∧ (p ∈ A)).
+  (q ∈ U_{\sup y}) ≔ (∃(p : ℚ). (p ≤ q) ∧ (p ∈ A)).
 $$
 
 ```agda
@@ -161,12 +161,12 @@ $i$.
 ```
 
 To show that $U_{\sup y}$ is inhabited, we use the given upper bound $u$: choose
-$q ∈ U_u$, then choose $r > q$. Since each $y_i ≤ u$, we get $q ∈ U_{y_i}$ for
-all $i$, hence $r ∈ U_{\sup y}$.
+$q ∈ U_u$, and then choose $r > q$. Since each $y_i ≤ u$, we get $q ∈ U_{y_i}$
+for all $i$, hence $r ∈ U_{\sup y}$.
 
-For roundedness of $U_{\sup y}$, the forward direction refines a witness $p < q$
-to the mediant $\operatorname{med}(p,q)$, and the backward direction composes
-two existential witnesses using transitivity of $≤$ on $ℚ$.
+For roundedness of $U_{\sup y}$, the forward direction produces a witness
+$p < q$ to the mediant $\operatorname{med}(p,q)$, and the backward direction
+follows by transitivity of inequality.
 
 ```agda
   abstract
@@ -250,7 +250,7 @@ two existential witnesses using transitivity of $≤$ on $ℚ$.
 For the lower cut we take the open lower complement:
 
 $$
-  (p ∈ L_{\sup y}) ≔ (∃(q : ℚ),\; (p ≤ q) ∧ ¬ (q ∈ U_{\sup y})).
+  (p ∈ L_{\sup y}) ≔ (∃(q : ℚ). (p ≤ q) ∧ ¬ (q ∈ U_{\sup y})).
 $$
 
 ```agda
@@ -377,16 +377,16 @@ with $q ∉ U*{\sup y}$, choose $r$ with $p < r < q$, and keep the same $q$.
 Next we verify that the two cuts are open complements, i.e.,
 
 $$
- (q ∈ U_{\sup y}) ⇔ (∃(p ≤ q),\; p ∉ L_{\sup y})
+ (q ∈ U_{\sup y}) ⇔ (∃(p ≤ q). p ∉ L_{\sup y})
 $$
 
 and
 
 $$
-  (p ∈ L_{\sup y}) ⇔ (∃(q ≥ p),\; q ∉ U_{\sup y}).
+  (p ∈ L_{\sup y}) ⇔ (∃(q ≥ p). q ∉ U_{\sup y}).
 $$
 
-This is exactly the openness condition needed for a MacNeille real.
+This is exactly the openness condition of a MacNeille real.
 
 ```agda
   abstract
@@ -513,7 +513,7 @@ We now assemble the MacNeille real $\sup y$ from its lower and upper cuts.
 To prove the upper-bound property, we use:
 
 $$
-(q ∈ U_{\sup y}) \;\Longrightarrow\; (∀(i : I),\; q ∈ U_{y_i}),
+(q ∈ U_{\sup y}) ⇒ (∀(i : I). q ∈ U_{y_i}),
 $$
 
 which immediately yields $y_i ≤ \sup y$ for each $i$.
@@ -533,10 +533,10 @@ which immediately yields $y_i ≤ \sup y$ for each $i$.
 ```
 
 To prove it is a _least_ upper-bound, let $z$ be any upper bound of the family.
-The key step is:
+Observe that
 
 $$
-  (q ∈ U_z) \;\Longrightarrow\; (q ∈ U_{\sup y}).
+  (q ∈ U_z) ⇒ (q ∈ U_{\sup y}).
 $$
 
 Equivalently, $U_z ⊆ U_{\sup y}$, so $\sup y ≤ z$.
@@ -584,14 +584,14 @@ Equivalently, $U_z ⊆ U_{\sup y}$, so $\sup y ≤ z$.
           ( y≤z))
 ```
 
-The final theorem packages both directions:
+Finally we conclude the theorem.
 
 $$
-\left(∀ z,\; \bigl(∀ i,\; y_i ≤ z\bigr) ⇒ \sup y ≤ z\right)
-\quad\text{and}\quad \left(∀ i,\; y_i ≤ \sup y\right).
+\left(∀ z. \bigl(∀ i. y_i ≤ z\bigr) ⇒ \sup y ≤ z\right)
+\quad\text{and}\quad \left(∀ i. y_i ≤ \sup y\right).
 $$
 
-So the constructed real is a least upper bound of the inhabited bounded family.
+So the constructed real is a least upper bound of the given family.
 
 ```agda
   abstract
