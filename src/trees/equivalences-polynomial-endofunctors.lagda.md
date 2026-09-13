@@ -142,15 +142,10 @@ module _
     pr1 is-equiv-hom-equiv-polynomial-endofunctor
 
   equiv-shape-equiv-polynomial-endofunctor :
-    (a : shape-polynomial-endofunctor P) →
-    position-polynomial-endofunctor Q
-      ( shape-hom-polynomial-endofunctor P Q
-        ( hom-equiv-polynomial-endofunctor)
-        ( a)) ≃
-    position-polynomial-endofunctor P a
-  equiv-shape-equiv-polynomial-endofunctor a =
-    ( position-equiv-polynomial-endofunctor a ,
-      is-cartesian-hom-equiv-polynomial-endofunctor a)
+    shape-polynomial-endofunctor P ≃ shape-polynomial-endofunctor Q
+  equiv-shape-equiv-polynomial-endofunctor =
+    ( shape-equiv-polynomial-endofunctor ,
+      is-equiv-shape-equiv-polynomial-endofunctor)
 
   equiv-position-equiv-polynomial-endofunctor :
     (a : shape-polynomial-endofunctor P) →
