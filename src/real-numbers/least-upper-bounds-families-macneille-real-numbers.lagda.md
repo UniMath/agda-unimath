@@ -12,35 +12,28 @@ module real-numbers.least-upper-bounds-families-macneille-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.complements-subtypes
 open import foundation.conjunction
 open import foundation.dependent-pair-types
-open import foundation.double-negation
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
-open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import logic.double-negation-elimination
 open import logic.functoriality-existential-quantification
 
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 
-open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-macneille-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.macneille-real-numbers
-open import real-numbers.maximum-lower-dedekind-real-numbers
 open import real-numbers.upper-bounds-families-macneille-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
