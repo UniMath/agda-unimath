@@ -10,6 +10,7 @@ module foundation.dependent-products-pullbacks where
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.standard-pullbacks

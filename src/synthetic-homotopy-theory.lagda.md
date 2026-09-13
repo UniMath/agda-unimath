@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.cofibers-of-maps public
 open import synthetic-homotopy-theory.cofibers-of-pointed-maps public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
+open import synthetic-homotopy-theory.composition-cospans public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.connective-prespectra public
@@ -102,6 +103,7 @@ open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-descent-data-pushouts public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
+open import synthetic-homotopy-theory.multivariable-loop-spaces public
 open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
@@ -127,6 +129,7 @@ open import synthetic-homotopy-theory.spheres public
 open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
+open import synthetic-homotopy-theory.suspensions-of-projective-types public
 open import synthetic-homotopy-theory.suspensions-of-propositions public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public

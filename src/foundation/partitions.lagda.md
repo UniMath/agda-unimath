@@ -11,8 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
+open import foundation.equivalences-propositions
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
 open import foundation.functoriality-propositional-truncation
@@ -26,6 +30,8 @@ open import foundation.sigma-decompositions
 open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.subuniverse-of-contractible-types
+open import foundation.subuniverse-of-propositions
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types

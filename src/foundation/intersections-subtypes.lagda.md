@@ -10,6 +10,7 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.full-subtypes
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
@@ -17,7 +18,7 @@ open import foundation.inhabited-subtypes
 open import foundation.large-locale-of-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
-open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types

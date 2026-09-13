@@ -10,6 +10,9 @@ module metric-spaces.cauchy-approximations-metric-spaces where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -110,11 +113,19 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} (A : Metric-Space l1 l2)
-  { f g : cauchy-approximation-Metric-Space A}
-  ( f~g :
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  (f g : cauchy-approximation-Metric-Space A)
+  where
+
+  htpy-map-cauchy-approximation-Metric-Space : UU l1
+  htpy-map-cauchy-approximation-Metric-Space =
     map-cauchy-approximation-Metric-Space A f ~
-    map-cauchy-approximation-Metric-Space A g)
+    map-cauchy-approximation-Metric-Space A g
+
+module _
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
+  {f g : cauchy-approximation-Metric-Space A}
+  (f~g : htpy-map-cauchy-approximation-Metric-Space A f g)
   where
 
   eq-htpy-cauchy-approximation-Metric-Space : f ＝ g

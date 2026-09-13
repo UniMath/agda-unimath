@@ -10,6 +10,7 @@ module species.cauchy-composition-species-of-types where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.discrete-relaxed-sigma-decompositions
 open import foundation.equivalences

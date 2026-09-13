@@ -12,6 +12,7 @@ open import commutative-algebra.large-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -95,6 +96,34 @@ module _
       one-Large-Commutative-Ring R
     power-one-Large-Commutative-Ring =
       power-one-Large-Ring (large-ring-Large-Commutative-Ring R)
+```
+
+### For nonzero `n`, `0ⁿ = 0`
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (R : Large-Commutative-Ring α β)
+  where
+
+  abstract
+    power-nonzero-raise-zero-Large-Commutative-Ring :
+      (l : Level) (n : ℕ⁺) →
+      power-Large-Commutative-Ring R
+        ( nat-ℕ⁺ n)
+        ( raise-zero-Large-Commutative-Ring R l) ＝
+      raise-zero-Large-Commutative-Ring R l
+    power-nonzero-raise-zero-Large-Commutative-Ring =
+      power-nonzero-raise-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
+
+    power-nonzero-zero-Large-Commutative-Ring :
+      (n : ℕ⁺) →
+      power-Large-Commutative-Ring R
+        ( nat-ℕ⁺ n)
+        ( zero-Large-Commutative-Ring R) ＝
+      zero-Large-Commutative-Ring R
+    power-nonzero-zero-Large-Commutative-Ring =
+      power-nonzero-zero-Large-Ring (large-ring-Large-Commutative-Ring R)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`

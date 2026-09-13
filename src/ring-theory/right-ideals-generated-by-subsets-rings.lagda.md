@@ -10,6 +10,7 @@ module ring-theory.right-ideals-generated-by-subsets-rings where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types

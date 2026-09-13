@@ -9,6 +9,7 @@ module foundation.connected-components where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.propositional-truncations

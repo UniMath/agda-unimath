@@ -12,6 +12,7 @@ open import foundation-core.invertible-maps public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences

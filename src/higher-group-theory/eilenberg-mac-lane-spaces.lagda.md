@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.connected-types
+open import foundation.dependent-products-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

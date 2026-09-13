@@ -10,6 +10,7 @@ module foundation.infinity-connected-maps where
 open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.fibers-of-maps
 open import foundation.infinity-connected-types
 open import foundation.truncation-levels

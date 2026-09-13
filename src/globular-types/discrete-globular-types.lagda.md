@@ -10,6 +10,7 @@ module globular-types.discrete-globular-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels

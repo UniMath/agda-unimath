@@ -11,9 +11,13 @@ open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
@@ -27,6 +31,7 @@ open import foundation.retracts-of-arrows
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.subtype-identity-principle
+open import foundation.subuniverse-of-contractible-types
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.unit-type

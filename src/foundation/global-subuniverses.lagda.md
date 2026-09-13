@@ -10,6 +10,7 @@ module foundation.global-subuniverses where
 open import foundation.dependent-pair-types
 open import foundation.iterated-dependent-product-types
 open import foundation.subuniverses
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -231,3 +232,4 @@ module _
 ## See also
 
 - [Large categories](category-theory.large-categories.md)
+- [Cumulative large sets](foundation.cumulative-large-sets.md)

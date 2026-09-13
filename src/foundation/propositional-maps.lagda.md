@@ -10,6 +10,7 @@ open import foundation-core.propositional-maps public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.logical-equivalences
 open import foundation.truncated-maps

@@ -10,6 +10,7 @@ open import foundation-core.double-negation-stable-equality public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.identity-types
 open import foundation.universe-levels

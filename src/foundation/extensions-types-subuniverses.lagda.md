@@ -11,6 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.extensions-types
@@ -39,8 +41,8 @@ open import foundation.universe-levels
 Consider a type `X`. An
 {{#concept "extension" Disambiguation="type in subuniverse" Agda=extension-type-subuniverse}}
 of `X` in a [subuniverse](foundation.subuniverses.md) `𝒫` is an object in the
-[coslice](foundation.coslice.md) under `X` in `𝒫`, i.e., it consists of a type
-`Y` in `𝒫` and a map `f : X → Y`.
+coslice under `X` in `𝒫`, i.e., it consists of a type `Y` in `𝒫` and a map
+`f : X → Y`.
 
 In the above definition of extensions of types in a subuniverse our aim is to
 capture the most general concept of what it means to be an extension of a type

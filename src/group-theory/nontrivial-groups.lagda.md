@@ -10,6 +10,8 @@ module group-theory.nontrivial-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.empty-types

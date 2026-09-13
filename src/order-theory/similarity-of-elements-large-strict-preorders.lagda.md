@@ -11,6 +11,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types

@@ -11,6 +11,7 @@ open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
 open import complex-numbers.real-complex-numbers
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

@@ -17,6 +17,7 @@ open import category-theory.strongly-preunivalent-categories
 open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types

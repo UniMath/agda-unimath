@@ -8,6 +8,7 @@ module logic.propositionally-double-negation-eliminating-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels

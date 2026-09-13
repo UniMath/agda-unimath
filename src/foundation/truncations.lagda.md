@@ -10,7 +10,11 @@ module foundation.truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-truncated-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -28,6 +32,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
@@ -358,6 +363,28 @@ module _
   inv-equiv-unit-trunc :
     type-trunc k (type-Truncated-Type A) ≃ type-Truncated-Type A
   inv-equiv-unit-trunc = (map-inv-unit-trunc , is-equiv-map-inv-unit-trunc)
+```
+
+### The subuniverse of `k`-truncated types is a retract of the universe
+
+```agda
+is-retraction-trunc :
+  {l : Level} (k : 𝕋) →
+  is-retraction
+    ( type-Truncated-Type {l = l})
+    ( trunc {l = l} k)
+is-retraction-trunc {l} k A =
+  map-inv-equiv
+    ( extensionality-Truncated-Type
+      ( trunc {l = l} k (type-Truncated-Type A))
+      ( A))
+    ( inv-equiv (equiv-unit-trunc A))
+
+retract-Truncated-Type-UU :
+  {l : Level} (k : 𝕋) → Truncated-Type l k retract-of UU l
+pr1 (retract-Truncated-Type-UU k) = type-Truncated-Type
+pr1 (pr2 (retract-Truncated-Type-UU k)) = trunc k
+pr2 (pr2 (retract-Truncated-Type-UU k)) = is-retraction-trunc k
 ```
 
 ### A contractible type is equivalent to its `k`-truncation

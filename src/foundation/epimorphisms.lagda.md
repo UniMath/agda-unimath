@@ -9,6 +9,7 @@ module foundation.epimorphisms where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalences-contractible-types
 open import foundation.precomposition-functions
 open import foundation.sections
 open import foundation.universe-levels

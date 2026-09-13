@@ -7,6 +7,7 @@ module linear-algebra.symmetric-bilinear-forms-real-vector-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels

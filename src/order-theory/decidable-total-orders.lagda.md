@@ -7,13 +7,13 @@ module order-theory.decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.identity-types

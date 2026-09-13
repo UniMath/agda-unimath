@@ -8,6 +8,7 @@ module foundation.double-negation-modality where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.logical-equivalences

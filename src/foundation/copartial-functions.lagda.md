@@ -8,6 +8,7 @@ module foundation.copartial-functions where
 
 ```agda
 open import foundation.copartial-elements
+open import foundation.dependent-products-propositions
 open import foundation.partial-functions
 open import foundation.propositions
 open import foundation.universe-levels

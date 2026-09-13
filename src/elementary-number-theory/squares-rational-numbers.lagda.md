@@ -161,6 +161,9 @@ abstract
     (x : ℚ) → is-positive-ℚ x → is-positive-ℚ (square-ℚ x)
   is-positive-square-positive-ℚ x pos-x =
     is-positive-mul-ℚ {x} {x} pos-x pos-x
+
+square-ℚ⁺ : ℚ⁺ → ℚ⁺
+square-ℚ⁺ (x , pos-x) = (square-ℚ x , is-positive-square-positive-ℚ x pos-x)
 ```
 
 ### If a rational number is negative, its square is positive

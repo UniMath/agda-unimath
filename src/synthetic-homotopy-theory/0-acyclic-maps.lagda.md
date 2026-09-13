@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.0-acyclic-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.propositions
 open import foundation.surjective-maps

@@ -10,6 +10,7 @@ module foundation.coherently-constant-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
+open import foundation.equivalences-contractible-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types

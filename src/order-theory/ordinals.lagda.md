@@ -10,6 +10,7 @@ module order-theory.ordinals where
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions

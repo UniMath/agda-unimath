@@ -10,7 +10,7 @@ module set-theory.equality-cardinals where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
@@ -31,7 +31,7 @@ open import set-theory.cardinals
 ## Idea
 
 Two [cardinals](set-theory.cardinals.md) `X` and `Y` are
-{{#concept "similar" Disambiguation="set-cardinals" Agda=sim-Cardinal}} if there
+{{#concept "similar" Disambiguation="cardinals" Agda=sim-Cardinal}} if there
 [merely exists](foundation.inhabited-types.md) an
 [equivalence](foundation-core.equivalences.md) between any two representing
 [sets](foundation-core.sets.md). This characterizes

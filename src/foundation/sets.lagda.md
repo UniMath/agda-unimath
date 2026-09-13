@@ -11,7 +11,10 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-truncated-types
 open import foundation.logical-equivalences
+open import foundation.subuniverse-of-truncated-types
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalent-type-families
@@ -90,7 +93,7 @@ product-Set A B = Σ-Set A (λ x → B)
 abstract
   is-prop-is-set :
     {l : Level} (A : UU l) → is-prop (is-set A)
-  is-prop-is-set = is-prop-is-trunc zero-𝕋
+  is-prop-is-set = is-property-is-trunc zero-𝕋
 
 is-set-Prop : {l : Level} → UU l → Prop l
 pr1 (is-set-Prop A) = is-set A
@@ -175,6 +178,28 @@ precomp-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
   (B → type-Set C) → (A → type-Set C)
 precomp-Set f C = precomp f (type-Set C)
+```
+
+### The type of equivalences between sets is a set
+
+```agda
+abstract
+  is-set-equiv-is-set :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-set A → is-set B → is-set (A ≃ B)
+  is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
+
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
+  where
+
+  equiv-Set : UU (l1 ⊔ l2)
+  equiv-Set = type-Set A ≃ type-Set B
+
+  equiv-set-Set : Set (l1 ⊔ l2)
+  pr1 equiv-set-Set = equiv-Set
+  pr2 equiv-set-Set =
+    is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 ```
 
 ### Extensionality of sets

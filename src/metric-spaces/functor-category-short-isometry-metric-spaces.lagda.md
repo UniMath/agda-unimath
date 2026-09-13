@@ -10,16 +10,9 @@ module metric-spaces.functor-category-short-isometry-metric-spaces where
 open import category-theory.conservative-functors-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.maps-precategories
-open import category-theory.precategories
-open import category-theory.split-essentially-surjective-functors-precategories
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 

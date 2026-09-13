@@ -12,6 +12,7 @@ open import commutative-algebra.homomorphisms-commutative-semirings
 
 open import finite-algebra.commutative-finite-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions

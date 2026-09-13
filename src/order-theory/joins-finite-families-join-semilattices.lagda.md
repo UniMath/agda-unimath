@@ -26,8 +26,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.commutative-semigroups
-open import group-theory.sums-of-finite-families-of-elements-commutative-semigroups
-open import group-theory.sums-of-finite-sequences-of-elements-commutative-semigroups
+open import group-theory.products-of-finite-families-of-elements-commutative-semigroups
+open import group-theory.products-of-finite-sequences-of-elements-commutative-semigroups
 
 open import lists.finite-sequences
 
@@ -63,7 +63,7 @@ module _
     fin-sequence (type-Order-Theoretic-Join-Semilattice X) (succ-ℕ n) →
     type-Order-Theoretic-Join-Semilattice X
   join-fin-sequence-type-Order-Theoretic-Join-Semilattice =
-    sum-fin-sequence-type-Commutative-Semigroup
+    product-fin-sequence-type-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
 ```
 
@@ -79,7 +79,7 @@ module _
     (f : I → type-Order-Theoretic-Join-Semilattice X) →
     type-Order-Theoretic-Join-Semilattice X
   join-counted-family-type-Order-Theoretic-Join-Semilattice =
-    sum-count-Commutative-Semigroup
+    product-count-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
       ( I)
       ( |I|)
@@ -99,7 +99,7 @@ module _
       type-Inhabited-Finite-Type I → type-Order-Theoretic-Join-Semilattice X) →
     type-Order-Theoretic-Join-Semilattice X
   join-inhabited-finite-family-Order-Theoretic-Join-Semilattice =
-    sum-finite-Commutative-Semigroup
+    product-finite-Commutative-Semigroup
       ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
       ( I)
 ```
@@ -201,10 +201,9 @@ abstract
         ( equiv-Π _
           ( inv-equiv Fin-sn≃I)
           ( λ i →
-            equiv-eq
-              ( ap
-                ( λ j → leq-Order-Theoretic-Join-Semilattice X (f j) y)
-                ( inv (is-section-map-inv-equiv Fin-sn≃I i)))))
+            equiv-inv-tr
+              ( λ j → leq-Order-Theoretic-Join-Semilattice X (f j) y)
+              ( is-section-map-inv-equiv Fin-sn≃I i)))
 ```
 
 ### The join of an inhabited finite family of elements is its join over any count for that family
@@ -225,7 +224,7 @@ module _
         ( cI)
         ( f)
     eq-join-inhabited-finite-family-join-counted-family-Order-Theoretic-Join-Semilattice =
-      eq-sum-finite-sum-count-Commutative-Semigroup
+      eq-product-finite-product-count-Commutative-Semigroup
         ( commutative-semigroup-Order-Theoretic-Join-Semilattice X)
         ( I)
         ( cI)

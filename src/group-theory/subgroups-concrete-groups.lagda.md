@@ -10,6 +10,7 @@ module group-theory.subgroups-concrete-groups where
 open import foundation.0-connected-types
 open import foundation.0-maps
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.faithful-maps

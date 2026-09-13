@@ -14,6 +14,7 @@ open import foundation.decidable-relations
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
@@ -23,10 +24,10 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.images
 open import foundation.logical-equivalences
+open import foundation.morphisms-slice
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types

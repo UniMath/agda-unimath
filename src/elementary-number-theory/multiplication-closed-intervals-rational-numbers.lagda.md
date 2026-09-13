@@ -886,7 +886,8 @@ abstract
 
 ### Bounds on the width of the product of intervals
 
-We can bound the width of the interval $[a,b] ∙ [c,d]$:
+We can bound the width of the interval
+$\lbrack a,b\rbrack ∙ \lbrack c,d\rbrack$:
 
 $$
 \max(a · c, a · d, b · c, b · d) - \min(a · c, a · d, b · c, b · d) ≤

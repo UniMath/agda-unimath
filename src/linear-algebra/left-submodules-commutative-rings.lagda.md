@@ -10,6 +10,7 @@ module linear-algebra.left-submodules-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import linear-algebra.left-modules-commutative-rings
@@ -63,4 +64,20 @@ module _
     left-module-Commutative-Ring (l2 ⊔ l3) R
   left-module-left-submodule-Commutative-Ring =
     left-module-left-submodule-Ring (ring-Commutative-Ring R) M S
+
+  subset-left-submodule-Commutative-Ring :
+    subset-left-module-Commutative-Ring l3 R M
+  subset-left-submodule-Commutative-Ring =
+    subset-left-submodule-Ring (ring-Commutative-Ring R) M S
+
+  is-in-left-submodule-Commutative-Ring :
+    type-left-module-Commutative-Ring R M → UU l3
+  is-in-left-submodule-Commutative-Ring =
+    is-in-subtype subset-left-submodule-Commutative-Ring
+
+  contains-zero-left-submodule-Commutative-Ring :
+    is-in-left-submodule-Commutative-Ring
+      ( zero-left-module-Commutative-Ring R M)
+  contains-zero-left-submodule-Commutative-Ring =
+    contains-zero-left-submodule-Ring (ring-Commutative-Ring R) M S
 ```

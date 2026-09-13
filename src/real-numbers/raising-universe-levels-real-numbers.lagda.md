@@ -12,6 +12,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -23,6 +24,7 @@ open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.raising-universe-levels
+open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -30,6 +32,8 @@ open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-lower-dedekind-real-numbers
+open import real-numbers.raising-universe-levels-upper-dedekind-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -47,78 +51,6 @@ number `x` from the universe `𝒰` to a
 `𝒱`.
 
 ## Definition
-
-### Raising lower Dedekind real numbers
-
-```agda
-module _
-  {l0 : Level} (l : Level) (x : lower-ℝ l0)
-  where
-
-  cut-raise-lower-ℝ : subtype (l0 ⊔ l) ℚ
-  cut-raise-lower-ℝ = raise-subtype l (cut-lower-ℝ x)
-
-  abstract
-    is-inhabited-cut-raise-lower-ℝ : is-inhabited-subtype cut-raise-lower-ℝ
-    is-inhabited-cut-raise-lower-ℝ =
-      map-tot-exists (λ _ → map-raise) (is-inhabited-cut-lower-ℝ x)
-
-    is-rounded-cut-raise-lower-ℝ :
-      (q : ℚ) →
-      is-in-subtype cut-raise-lower-ℝ q ↔
-      exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-raise-lower-ℝ r)
-    pr1 (is-rounded-cut-raise-lower-ℝ q) (map-raise q<x) =
-      map-tot-exists
-        ( λ _ → map-product id map-raise)
-        ( forward-implication (is-rounded-cut-lower-ℝ x q) q<x)
-    pr2 (is-rounded-cut-raise-lower-ℝ q) ∃r =
-      map-raise
-        ( backward-implication
-          ( is-rounded-cut-lower-ℝ x q)
-          ( map-tot-exists (λ _ → map-product id map-inv-raise) ∃r))
-
-  raise-lower-ℝ : lower-ℝ (l0 ⊔ l)
-  raise-lower-ℝ =
-    cut-raise-lower-ℝ ,
-    is-inhabited-cut-raise-lower-ℝ ,
-    is-rounded-cut-raise-lower-ℝ
-```
-
-### Raising upper Dedekind real numbers
-
-```agda
-module _
-  {l0 : Level} (l : Level) (x : upper-ℝ l0)
-  where
-
-  cut-raise-upper-ℝ : subtype (l0 ⊔ l) ℚ
-  cut-raise-upper-ℝ = raise-subtype l (cut-upper-ℝ x)
-
-  abstract
-    is-inhabited-cut-raise-upper-ℝ : is-inhabited-subtype cut-raise-upper-ℝ
-    is-inhabited-cut-raise-upper-ℝ =
-      map-tot-exists (λ _ → map-raise) (is-inhabited-cut-upper-ℝ x)
-
-    is-rounded-cut-raise-upper-ℝ :
-      (q : ℚ) →
-      is-in-subtype cut-raise-upper-ℝ q ↔
-      exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-raise-upper-ℝ p)
-    pr1 (is-rounded-cut-raise-upper-ℝ q) (map-raise x<q) =
-      map-tot-exists
-        ( λ _ → map-product id map-raise)
-        ( forward-implication (is-rounded-cut-upper-ℝ x q) x<q)
-    pr2 (is-rounded-cut-raise-upper-ℝ q) ∃p =
-      map-raise
-        ( backward-implication
-          ( is-rounded-cut-upper-ℝ x q)
-          ( map-tot-exists (λ _ → map-product id map-inv-raise) ∃p))
-
-  raise-upper-ℝ : upper-ℝ (l0 ⊔ l)
-  raise-upper-ℝ =
-    cut-raise-upper-ℝ ,
-    is-inhabited-cut-raise-upper-ℝ ,
-    is-rounded-cut-raise-upper-ℝ
-```
 
 ### Raising Dedekind real numbers
 
@@ -171,8 +103,7 @@ abstract opaque
   unfolding sim-ℝ
 
   sim-raise-ℝ : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ x (raise-ℝ l x)
-  pr1 (sim-raise-ℝ l x) _ = map-raise
-  pr2 (sim-raise-ℝ l x) _ = map-inv-raise
+  sim-raise-ℝ l x = sim-raise-subtype l (lower-cut-ℝ x)
 
 abstract
   sim-raise-ℝ' : {l0 : Level} (l : Level) (x : ℝ l0) → sim-ℝ (raise-ℝ l x) x
@@ -183,6 +114,18 @@ abstract
     sim-ℝ (raise-ℝ l1 x) (raise-ℝ l2 x)
   sim-raise-raise-ℝ l1 l2 x =
     transitive-sim-ℝ _ _ _ (sim-raise-ℝ l2 x) (sim-raise-ℝ' l1 x)
+```
+
+### The cumulative large set of real numbers
+
+```agda
+cumulative-large-set-ℝ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℝ =
+  make-Cumulative-Large-Set
+    ( ℝ)
+    ( large-similarity-relation-ℝ)
+    ( raise-ℝ)
+    ( sim-raise-ℝ)
 ```
 
 ### Raising a real to its own level is the identity
@@ -203,27 +146,12 @@ module _
 
   abstract
     eq-raise-sim-ℝ : sim-ℝ x y → raise-ℝ l2 x ＝ raise-ℝ l1 y
-    eq-raise-sim-ℝ x~y =
-      eq-sim-ℝ
-        ( similarity-reasoning-ℝ
-          raise-ℝ l2 x
-          ~ℝ x
-            by sim-raise-ℝ' l2 x
-          ~ℝ y
-            by x~y
-          ~ℝ raise-ℝ l1 y
-            by sim-raise-ℝ l1 y)
+    eq-raise-sim-ℝ =
+      eq-raise-sim-Cumulative-Large-Set cumulative-large-set-ℝ x y
 
     sim-eq-raise-ℝ : raise-ℝ l2 x ＝ raise-ℝ l1 y → sim-ℝ x y
-    sim-eq-raise-ℝ l2x=l1y =
-      similarity-reasoning-ℝ
-        x
-        ~ℝ raise-ℝ l2 x
-          by sim-raise-ℝ l2 x
-        ~ℝ raise-ℝ l1 y
-          by sim-eq-ℝ l2x=l1y
-        ~ℝ y
-          by sim-raise-ℝ' l1 y
+    sim-eq-raise-ℝ =
+      sim-eq-raise-Cumulative-Large-Set cumulative-large-set-ℝ x y
 ```
 
 ### Raising a real by two universe levels is equivalent to raising by the least upper bound of the universe levels
@@ -233,12 +161,5 @@ abstract
   raise-raise-ℝ :
     {l1 l2 l3 : Level} (x : ℝ l1) →
     raise-ℝ l2 (raise-ℝ l3 x) ＝ raise-ℝ (l2 ⊔ l3) x
-  raise-raise-ℝ {l1} {l2} {l3} x =
-    eq-sim-ℝ
-      ( similarity-reasoning-ℝ
-        raise-ℝ l2 (raise-ℝ l3 x)
-        ~ℝ raise-ℝ l3 x
-          by sim-raise-ℝ' l2 _
-        ~ℝ raise-ℝ (l2 ⊔ l3) x
-          by sim-raise-raise-ℝ l3 (l2 ⊔ l3) x)
+  raise-raise-ℝ = raise-raise-Cumulative-Large-Set cumulative-large-set-ℝ
 ```

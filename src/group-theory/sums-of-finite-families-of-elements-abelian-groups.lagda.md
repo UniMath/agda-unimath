@@ -21,7 +21,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.sums-of-finite-families-of-elements-commutative-monoids
+open import group-theory.products-of-finite-families-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
 
 open import univalent-combinatorics.coproduct-types
@@ -48,13 +48,13 @@ sum-count-Ab :
   {l1 l2 : Level} (G : Ab l1) (A : UU l2) (cA : count A) →
   (A → type-Ab G) → type-Ab G
 sum-count-Ab G =
-  sum-count-Commutative-Monoid (commutative-monoid-Ab G)
+  product-count-Commutative-Monoid (commutative-monoid-Ab G)
 
 sum-finite-Ab :
   {l1 l2 : Level} (G : Ab l1) (A : Finite-Type l2) →
   (type-Finite-Type A → type-Ab G) → type-Ab G
 sum-finite-Ab G =
-  sum-finite-Commutative-Monoid (commutative-monoid-Ab G)
+  product-finite-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
 ## Properties
@@ -70,7 +70,7 @@ module _
     (f : unit → type-Ab G) →
     sum-finite-Ab G unit-Finite-Type f ＝ f star
   sum-unit-finite-Ab =
-    sum-finite-unit-type-Commutative-Monoid
+    product-finite-unit-type-Commutative-Monoid
       ( commutative-monoid-Ab G)
 ```
 
@@ -86,7 +86,7 @@ module _
     {f g : type-Finite-Type A → type-Ab G} → (f ~ g) →
     sum-finite-Ab G A f ＝ sum-finite-Ab G A g
   htpy-sum-finite-Ab =
-    htpy-sum-finite-Commutative-Monoid (commutative-monoid-Ab G)
+    htpy-product-finite-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
 ### A sum of zeroes is zero
@@ -100,7 +100,7 @@ module _
     {l2 : Level} (A : Finite-Type l2) →
     sum-finite-Ab G A (λ _ → zero-Ab G) ＝ zero-Ab G
   sum-zero-finite-Ab =
-    sum-zero-finite-Commutative-Monoid (commutative-monoid-Ab G)
+    product-unit-finite-Commutative-Monoid (commutative-monoid-Ab G)
 ```
 
 ### Sums over finite types are preserved by equivalences
@@ -115,7 +115,7 @@ module _
     (f : type-Finite-Type A → type-Ab G) →
     sum-finite-Ab G A f ＝ sum-finite-Ab G B (f ∘ map-inv-equiv H)
   sum-equiv-finite-Ab =
-    sum-equiv-finite-Commutative-Monoid
+    product-equiv-finite-Commutative-Monoid
       ( commutative-monoid-Ab G)
       ( A)
       ( B)
@@ -138,7 +138,7 @@ module _
       ( sum-finite-Ab G A (f ∘ inl))
       ( sum-finite-Ab G B (f ∘ inr))
   distributive-sum-coproduct-finite-Ab =
-    distributive-distributive-sum-coproduct-finite-Commutative-Monoid
+    distributive-product-coproduct-finite-Commutative-Monoid
       ( commutative-monoid-Ab G)
       ( A)
       ( B)
@@ -157,7 +157,7 @@ module _
     sum-finite-Ab G (Σ-Finite-Type A B) (ind-Σ f) ＝
     sum-finite-Ab G A (λ a → sum-finite-Ab G (B a) (f a))
   sum-Σ-finite-Ab =
-    sum-Σ-finite-Commutative-Monoid (commutative-monoid-Ab G) A B
+    product-Σ-finite-Commutative-Monoid (commutative-monoid-Ab G) A B
 ```
 
 ### The sum over an empty type is zero
@@ -172,7 +172,7 @@ module _
     (f : type-Finite-Type A → type-Ab G) →
     is-zero-Ab G (sum-finite-Ab G A f)
   eq-zero-sum-finite-is-empty-Ab =
-    eq-zero-sum-finite-is-empty-Commutative-Monoid
+    eq-unit-product-finite-is-empty-Commutative-Monoid
       ( commutative-monoid-Ab G)
       ( A)
       ( H)
@@ -188,7 +188,7 @@ eq-sum-finite-sum-count-Ab :
   sum-finite-Ab G A f ＝
   sum-count-Ab G (type-Finite-Type A) cA f
 eq-sum-finite-sum-count-Ab G =
-  eq-sum-finite-sum-count-Commutative-Monoid
+  eq-product-finite-product-count-Commutative-Monoid
     ( commutative-monoid-Ab G)
 ```
 
@@ -204,7 +204,9 @@ module _
     sum-finite-Ab G A (λ a → add-Ab G (f a) (g a)) ＝
     add-Ab G (sum-finite-Ab G A f) (sum-finite-Ab G A g)
   interchange-sum-add-finite-Ab =
-    interchange-sum-mul-finite-Commutative-Monoid (commutative-monoid-Ab G) A
+    interchange-product-mul-finite-Commutative-Monoid
+      ( commutative-monoid-Ab G)
+      ( A)
 ```
 
 ### Interchange law of sums and negation

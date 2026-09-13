@@ -54,6 +54,7 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -1088,6 +1089,13 @@ abstract opaque
                         ( leq-le-ℚ a<p , leq-le-ℚ p<b)
                         ( leq-le-ℚ c<q , leq-le-ℚ q<d)))
                     ( [a,b][c,d]<pq)))))
+
+abstract
+  combine-left-mul-real-ℚ :
+    {l : Level} (p q : ℚ) (x : ℝ l) →
+    real-ℚ p *ℝ (real-ℚ q *ℝ x) ＝ real-ℚ (p *ℚ q) *ℝ x
+  combine-left-mul-real-ℚ p q x =
+    inv (associative-mul-ℝ _ _ _) ∙ ap-mul-ℝ (mul-real-ℚ p q) refl
 ```
 
 ### Multiplication on the real numbers preserves similarity
@@ -1141,6 +1149,14 @@ abstract
       ( a' *ℝ b')
       ( preserves-sim-right-mul-ℝ b' a a' a~a')
       ( preserves-sim-left-mul-ℝ a b b' b~b')
+
+sim-preserving-binary-operator-mul-ℝ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℝ
+sim-preserving-binary-operator-mul-ℝ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℝ)
+    ( mul-ℝ)
+    ( λ _ _ _ _ a~a' b~b' → preserves-sim-mul-ℝ a~a' b~b')
 ```
 
 ### Raised unit laws

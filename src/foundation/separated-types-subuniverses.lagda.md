@@ -7,6 +7,7 @@ module foundation.separated-types-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.subuniverses
 open import foundation.universe-levels
 

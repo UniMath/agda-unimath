@@ -16,6 +16,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -26,12 +27,14 @@ open import foundation.homotopies-morphisms-arrows
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.implicit-function-types
+open import foundation.iterated-dependent-product-types
 open import foundation.lifts-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
+open import foundation.raising-universe-levels-unit-type
 open import foundation.sections
 open import foundation.sets
 open import foundation.structure-identity-principle

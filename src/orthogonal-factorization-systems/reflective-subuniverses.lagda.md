@@ -7,15 +7,9 @@ module orthogonal-factorization-systems.reflective-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.universe-levels
 

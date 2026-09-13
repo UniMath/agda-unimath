@@ -9,6 +9,7 @@ module commutative-algebra.subsets-commutative-semirings where
 ```agda
 open import commutative-algebra.commutative-semirings
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

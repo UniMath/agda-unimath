@@ -10,9 +10,11 @@ module foundation.univalent-type-families where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -23,6 +25,7 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.subtype-identity-principle
 open import foundation.subuniverses
+open import foundation.telescopes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universal-property-identity-systems
