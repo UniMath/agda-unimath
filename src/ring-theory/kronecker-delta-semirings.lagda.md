@@ -1,7 +1,7 @@
-# Dirac sequences in semirings
+# Kronecker delta sequences in semirings
 
 ```agda
-module ring-theory.dirac-sequences-semirings where
+module ring-theory.kronecker-delta-semirings where
 ```
 
 <details><summary>Imports</summary>
@@ -26,7 +26,7 @@ open import ring-theory.sequences-semirings
 ## Idea
 
 The
-{{#concept "Dirac sequence" Disambiguation="in a semiring" Agda=dirac-sequence-Semiring}}
+{{#concept "Kronecker delta sequence" Disambiguation="in a semiring" Agda=kronecker-delta-Semiring}}
 at `i : ℕ` in a [semiring](ring-theory.semirings.md) `R` is the
 [sequence](ring-theory.sequences-semirings.md) `δᵢ : ℕ → R` such that
 
@@ -39,37 +39,37 @@ and `δᵢ j ＝ 0` whenever `i ≠ j`. In other words, `δᵢ` is the sequence 
 
 ## Definition
 
-### The Dirac sequences in a semiring
+### The Kronecker delta sequence in a semiring
 
 ```agda
 module _
   {l : Level} (R : Semiring l)
   where
 
-  dirac-sequence-Semiring : ℕ → ℕ → type-Semiring R
-  dirac-sequence-Semiring zero-ℕ zero-ℕ = one-Semiring R
-  dirac-sequence-Semiring zero-ℕ (succ-ℕ j) = zero-Semiring R
-  dirac-sequence-Semiring (succ-ℕ i) zero-ℕ = zero-Semiring R
-  dirac-sequence-Semiring (succ-ℕ i) (succ-ℕ j) = dirac-sequence-Semiring i j
+  kronecker-delta-Semiring : ℕ → ℕ → type-Semiring R
+  kronecker-delta-Semiring zero-ℕ zero-ℕ = one-Semiring R
+  kronecker-delta-Semiring zero-ℕ (succ-ℕ j) = zero-Semiring R
+  kronecker-delta-Semiring (succ-ℕ i) zero-ℕ = zero-Semiring R
+  kronecker-delta-Semiring (succ-ℕ i) (succ-ℕ j) = kronecker-delta-Semiring i j
 ```
 
 ## Properties
 
-### Dirac sequences are totally central
+### Kronecker delta sequences are totally central
 
 ```agda
 module _
   {l : Level} (R : Semiring l) (a : type-sequence-Semiring R)
   where abstract
 
-  is-central-dirac-sequence-Semiring :
-    (n : ℕ) → all-commute-sequence-Semiring R a (dirac-sequence-Semiring R n)
-  is-central-dirac-sequence-Semiring zero-ℕ i zero-ℕ =
+  is-central-kronecker-delta-Semiring :
+    (n : ℕ) → all-commute-sequence-Semiring R a (kronecker-delta-Semiring R n)
+  is-central-kronecker-delta-Semiring zero-ℕ i zero-ℕ =
     right-unit-law-mul-Semiring R _ ∙ inv (left-unit-law-mul-Semiring R _)
-  is-central-dirac-sequence-Semiring zero-ℕ i (succ-ℕ j) =
+  is-central-kronecker-delta-Semiring zero-ℕ i (succ-ℕ j) =
     right-zero-law-mul-Semiring R _ ∙ inv (left-zero-law-mul-Semiring R _)
-  is-central-dirac-sequence-Semiring (succ-ℕ n) i zero-ℕ =
+  is-central-kronecker-delta-Semiring (succ-ℕ n) i zero-ℕ =
     right-zero-law-mul-Semiring R _ ∙ inv (left-zero-law-mul-Semiring R _)
-  is-central-dirac-sequence-Semiring (succ-ℕ n) i (succ-ℕ j) =
-    is-central-dirac-sequence-Semiring n i j
+  is-central-kronecker-delta-Semiring (succ-ℕ n) i (succ-ℕ j) =
+    is-central-kronecker-delta-Semiring n i j
 ```

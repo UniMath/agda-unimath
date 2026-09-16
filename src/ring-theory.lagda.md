@@ -28,7 +28,6 @@ open import ring-theory.cyclic-rings public
 open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
-open import ring-theory.dirac-sequences-semirings public
 open import ring-theory.division-rings public
 open import ring-theory.free-rings-with-one-generator public
 open import ring-theory.full-ideals-rings public
@@ -57,6 +56,7 @@ open import ring-theory.joins-ideals-rings public
 open import ring-theory.joins-left-ideals-rings public
 open import ring-theory.joins-right-ideals-rings public
 open import ring-theory.kernels-of-ring-homomorphisms public
+open import ring-theory.kronecker-delta-semirings public
 open import ring-theory.large-function-rings public
 open import ring-theory.large-rings public
 open import ring-theory.left-ideals-generated-by-subsets-rings public

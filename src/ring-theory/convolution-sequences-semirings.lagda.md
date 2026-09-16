@@ -24,7 +24,7 @@ open import group-theory.semigroups
 
 open import lists.sequences
 
-open import ring-theory.dirac-sequences-semirings
+open import ring-theory.kronecker-delta-semirings
 open import ring-theory.semirings
 open import ring-theory.sequences-semirings
 open import ring-theory.sums-of-finite-families-of-elements-semirings
@@ -51,7 +51,7 @@ With pointwise addition, this operation forms the
 of sequences in a semiring.
 
 Unlike the pointwise semiring structure, the unit of the **convolution
-semiring** is the [Dirac sequence](ring-theory.dirac-sequences-semirings.md) at
+semiring** is the [Kronecker delta](ring-theory.kronecker-delta-semirings.md) at
 `0`, `δ₀ : ℕ → R`, given by `(1, 0, 0, 0, ...)`.
 
 ## Definitions
@@ -82,7 +82,7 @@ module _
   where
 
   unit-convolution-sequence-Semiring : type-sequence-Semiring R
-  unit-convolution-sequence-Semiring = dirac-sequence-Semiring R 0
+  unit-convolution-sequence-Semiring = kronecker-delta-Semiring R 0
 ```
 
 ## Properties
@@ -205,7 +205,7 @@ module _
       ( R)
       ( a)
       ( unit-convolution-sequence-Semiring R)
-      ( is-central-dirac-sequence-Semiring R a 0) ∙
+      ( is-central-kronecker-delta-Semiring R a 0) ∙
     left-unit-law-convolution-sequence-Semiring
 ```
 

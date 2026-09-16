@@ -32,7 +32,7 @@ open import group-theory.semigroups
 
 open import lists.sequences
 
-open import ring-theory.dirac-sequences-semirings
+open import ring-theory.kronecker-delta-semirings
 open import ring-theory.semirings
 ```
 
@@ -163,7 +163,7 @@ module _
     formal-power-series-Commutative-Semiring R
   id-formal-power-series-Commutative-Semiring =
     formal-power-series-coefficients-Commutative-Semiring
-      ( dirac-sequence-Semiring (semiring-Commutative-Semiring R) 1)
+      ( kronecker-delta-Semiring (semiring-Commutative-Semiring R) 1)
 ```
 
 ### Constant formal power series
