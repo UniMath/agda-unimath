@@ -28,7 +28,7 @@ of two [sequences](lists.sequences.md) `aₙ` and `bₙ` of elements in a
 sequence
 
 ```text
-  cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
+  cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
 With pointwise addition, this operation forms a new commutative semiring.
