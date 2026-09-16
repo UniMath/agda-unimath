@@ -35,7 +35,7 @@ at `i : ℕ` in a [semiring](ring-theory.semirings.md) `R` is the
 ```
 
 and `δᵢ j ＝ 0` whenever `i ≠ j`. In other words, `δᵢ` is the sequence whose
-`i`-th entry is `1` and whose other entries are `0`. 
+`i`-th entry is `1` and whose other entries are `0`.
 
 ## Definition
 
