@@ -51,8 +51,8 @@ With pointwise addition, this operation forms the
 of sequences in a semiring.
 
 Unlike the pointwise semiring structure, the unit of the **convolution
-semiring** is the [dirac sequence](ring-theory.dirac-sequences-semirings.md) at
-`0`, `δ₀ : ℕ → R` given by `(1, 0, 0, 0, ...)`.
+semiring** is the [Dirac sequence](ring-theory.dirac-sequences-semirings.md) at
+`0`, `δ₀ : ℕ → R`, given by `(1, 0, 0, 0, ...)`.
 
 ## Definitions
 
