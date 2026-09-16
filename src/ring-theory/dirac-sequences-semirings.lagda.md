@@ -26,19 +26,16 @@ open import ring-theory.sequences-semirings
 ## Idea
 
 The
-{{#concept "Dirac sequences" Disambiguation="in a semiring" Agda=dirac-sequence-Semiring}}
-in a [semiring](ring-theory.semirings.md) `R` is the family of
-[sequences](ring-theory.sequences-semirings.md) `δ : ℕ → ℕ → R` such that
+{{#concept "Dirac sequence" Disambiguation="in a semiring" Agda=dirac-sequence-Semiring}}
+at `i : ℕ` in a [semiring](ring-theory.semirings.md) `R` is the
+[sequence](ring-theory.sequences-semirings.md) `δᵢ : ℕ → R` such that
 
 ```text
-  δ i i ＝ one-R
+  δᵢ i ＝ 1
 ```
 
-and, if `i ≠ j`,
-
-```text
-  δ i j = zero-ℝ
-```
+and `δᵢ j ＝ 0` whenever `i ≠ j`. In other words, `δᵢ` is the sequence whose
+`i`-th entry is `1` and whose other entries are `0`. 
 
 ## Definition
 
