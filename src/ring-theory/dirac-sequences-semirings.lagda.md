@@ -42,7 +42,7 @@ and, if `i ≠ j`,
 
 ## Definition
 
-### The dirac sequences in a semiring
+### The Dirac sequences in a semiring
 
 ```agda
 module _
