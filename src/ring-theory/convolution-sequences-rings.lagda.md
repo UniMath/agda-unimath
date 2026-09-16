@@ -30,7 +30,7 @@ of two [sequences](ring-theory.sequences-rings.md) `aₙ` and `bₙ` in a
 [ring](ring-theory.rings.md) is the sequence `c = a ⋆ b` defined by:
 
 ```text
-  cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
+  cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
 With pointwise addition, this forms the
