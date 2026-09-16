@@ -46,7 +46,7 @@ of two [sequences](ring-theory.sequences-semirings.md) `aₙ` and `bₙ` in a
   cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
-With pairwise addition, this operation forms the
+With pointwise addition, this operation forms the
 {{#concept "convolution semiring" Disambiguation="of sequences in a semiring" Agda=convolution-sequence-Semiring}}
 of sequences in a semiring.
 
