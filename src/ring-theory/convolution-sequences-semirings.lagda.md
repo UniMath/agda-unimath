@@ -43,7 +43,7 @@ of two [sequences](ring-theory.sequences-semirings.md) `aₙ` and `bₙ` in a
 [semiring](ring-theory.semirings.md) is the sequence `c = a ⋆ b` defined by:
 
 ```text
-  cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
+  cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
 With pairwise addition, this operation forms the
