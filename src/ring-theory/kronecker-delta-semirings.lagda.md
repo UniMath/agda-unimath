@@ -26,7 +26,7 @@ open import ring-theory.sequences-semirings
 ## Idea
 
 The
-{{#concept "Kronecker delta sequence" Disambiguation="in a semiring" Agda=kronecker-delta-Semiring}}
+{{#concept "Kronecker delta sequence" Disambiguation="in a semiring" Agda=kronecker-delta-Semiring WD="Kronecker delta" WDID=Q192826}}
 at `i : ℕ` in a [semiring](ring-theory.semirings.md) `R` is the
 [sequence](ring-theory.sequences-semirings.md) `δᵢ : ℕ → R` such that
 
@@ -73,3 +73,7 @@ module _
   is-central-kronecker-delta-Semiring (succ-ℕ n) i (succ-ℕ j) =
     is-central-kronecker-delta-Semiring n i j
 ```
+
+## External links
+
+- [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta) at Wikipedia
