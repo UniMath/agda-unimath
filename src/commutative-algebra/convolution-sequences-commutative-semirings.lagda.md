@@ -31,7 +31,7 @@ sequence
   cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
 ```
 
-With pairwise addition, this operation forms a new commutative semiring.
+With pointwise addition, this operation forms a new commutative semiring.
 
 ## Definitions
 
