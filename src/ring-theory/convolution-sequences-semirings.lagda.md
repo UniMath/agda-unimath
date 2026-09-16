@@ -441,7 +441,7 @@ module _
     eq-htpy htpy-right-distributive-convolution-add-sequence-Semiring
 ```
 
-### The semiring of sequences in a semirings under convolution
+### The semiring of sequences in a semiring under convolution
 
 ```agda
 module _
