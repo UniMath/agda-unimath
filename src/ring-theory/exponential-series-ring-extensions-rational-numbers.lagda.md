@@ -318,7 +318,7 @@ module _
     htpy-expand-term-binomial-exponential i =
       ap
         ( λ z → mul-Rational-Extension-Ring R z (term-xy i))
-        ( lemma-binomial-coefficent-exponential-series-Rational-Extension-Ring
+        ( compute-binomial-coefficient-exponential-series-Rational-Extension-Ring
           ( R)
           ( n)
           ( i)) ∙
