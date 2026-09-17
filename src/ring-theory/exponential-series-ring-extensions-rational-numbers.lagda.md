@@ -206,7 +206,7 @@ module _
 
 ### Interchange rule for the product of terms of exponential series
 
-If `x` and `y` commute in `R` then for any `i j : ℕ`,
+For any `i j : ℕ`,
 
 ```text
   (1/i!)(1/j!) (xⁱyʲ) ＝ (xⁱ/i!) (yʲ/j!)
