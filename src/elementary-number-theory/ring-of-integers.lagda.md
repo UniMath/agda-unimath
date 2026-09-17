@@ -233,10 +233,7 @@ module _
   where abstract
 
   is-central-map-initial-hom-Ring :
-    ( p : ℤ) →
-    ( x : type-Ring R) →
-    mul-Ring R (map-initial-hom-Ring R p) x ＝
-    mul-Ring R x (map-initial-hom-Ring R p)
+    ( p : ℤ) → is-central-element-Ring R (map-initial-hom-Ring R p)
   is-central-map-initial-hom-Ring p x =
     tr
       ( commute-Ring R (map-initial-hom-Ring R p))
