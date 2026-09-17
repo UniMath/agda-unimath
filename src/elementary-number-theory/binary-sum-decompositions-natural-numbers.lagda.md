@@ -212,9 +212,9 @@ module _
         eq-pair-eq-fiber (eq-is-prop (is-prop-type-subtraction-ℕ k n)))
       ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
 
-  equiv-count-binary-sum-deccomposition-ℕ :
+  equiv-count-binary-sum-decomposition-ℕ :
     Fin (succ-ℕ n) ≃ binary-sum-decomposition-ℕ n
-  equiv-count-binary-sum-deccomposition-ℕ =
+  equiv-count-binary-sum-decomposition-ℕ =
     equiv-binary-sum-decomposition-leq-ℕ ∘e
     equiv-le-succ-ℕ-leq-ℕ n ∘e
     equiv-classical-standard-Fin (succ-ℕ n)
@@ -222,7 +222,7 @@ module _
   count-binary-sum-decomposition-ℕ : count (binary-sum-decomposition-ℕ n)
   pr1 count-binary-sum-decomposition-ℕ = succ-ℕ n
   pr2 count-binary-sum-decomposition-ℕ =
-    equiv-count-binary-sum-deccomposition-ℕ
+    equiv-count-binary-sum-decomposition-ℕ
 
   count-reverse-binary-sum-decomposition-ℕ :
     count (binary-sum-decomposition-ℕ n)
