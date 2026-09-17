@@ -204,6 +204,54 @@ module _
       ( coefficient-exponential-series-Rational-Extension-Ring R n))
 ```
 
+### Interchange rule for the product of terms of exponential series
+
+If `x` and `y` commute in `R` then for any `i j : ℕ`,
+
+```text
+  (1/i!)(1/j!) (xⁱyʲ) ＝ (xⁱ/i!) (yʲ/j!)
+```
+
+```agda
+module _
+  {l : Level} (R : Rational-Extension-Ring l)
+  (x y : type-Rational-Extension-Ring R)
+  (H : commute-Ring (ring-Rational-Extension-Ring R) x y)
+  (i j : ℕ)
+  where abstract
+
+  interchange-mul-term-exponential-series-Rational-Extension-Ring :
+    mul-Rational-Extension-Ring R
+      ( mul-Rational-Extension-Ring R
+        ( coefficient-exponential-series-Rational-Extension-Ring R i)
+        ( coefficient-exponential-series-Rational-Extension-Ring R j))
+      ( mul-Rational-Extension-Ring R
+        ( power-Ring (ring-Rational-Extension-Ring R) i x)
+        ( power-Ring (ring-Rational-Extension-Ring R) j y)) ＝
+    mul-Rational-Extension-Ring R
+      ( term-ev-exponential-series-Rational-Extension-Ring R x i)
+      ( term-ev-exponential-series-Rational-Extension-Ring R y j)
+  interchange-mul-term-exponential-series-Rational-Extension-Ring =
+    associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _ ∙
+    ap
+      ( mul-Rational-Extension-Ring R _)
+      ( inv (associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _)) ∙
+    ap
+      ( λ z →
+        mul-Rational-Extension-Ring R
+          ( coefficient-exponential-series-Rational-Extension-Ring R i)
+          ( mul-Rational-Extension-Ring R z
+            ( power-Ring (ring-Rational-Extension-Ring R) j y)))
+      ( is-central-map-initial-hom-Rational-Extension-Ring
+        ( R)
+        ( inv-factorial-ℕ j)
+        ( power-Ring (ring-Rational-Extension-Ring R) i x)) ∙
+    ap
+      ( mul-Rational-Extension-Ring R _)
+      ( associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _) ∙
+    inv (associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _)
+```
+
 ### Additive properties of the exponential series
 
 The sequence of terms of the exponential series of the sum of commuting elements
@@ -223,11 +271,11 @@ so
 ```agda
 module _
   {l : Level} (R : Rational-Extension-Ring l)
+  (x y : type-Rational-Extension-Ring R)
+  (H : commute-Ring (ring-Rational-Extension-Ring R) x y)
   where abstract
 
   htpy-term-ev-add-mul-convolution-exponential-series-Rational-Extension-Ring :
-    (x y : type-Rational-Extension-Ring R) →
-    commute-Ring (ring-Rational-Extension-Ring R) x y →
     term-ev-exponential-series-Rational-Extension-Ring R
       ( add-Rational-Extension-Ring R x y) ~
     mul-convolution-sequence-Ring
@@ -235,7 +283,7 @@ module _
       ( term-ev-exponential-series-Rational-Extension-Ring R x)
       ( term-ev-exponential-series-Rational-Extension-Ring R y)
   htpy-term-ev-add-mul-convolution-exponential-series-Rational-Extension-Ring
-    x y H n =
+    n =
     ap
       ( mul-Rational-Extension-Ring R
         ( coefficient-exponential-series-Rational-Extension-Ring R n))
@@ -259,7 +307,7 @@ module _
       ( ring-Rational-Extension-Ring R)
       ( Fin-Finite-Type (succ-ℕ n))
       ( finite-type-binary-sum-decomposition-ℕ n)
-      ( equiv-index-binomial-sum)
+      ( equiv-count-binary-sum-deccomposition-ℕ n)
       ( expand-term-binomial-exponential) ∙
     htpy-sum-finite-Ring
       ( ring-Rational-Extension-Ring R)
@@ -282,15 +330,6 @@ module _
           ( dist-ℕ (nat-Fin (succ-ℕ n) i) n)
           ( y))
 
-    term-exponential-xy :
-      fin-sequence-type-Ring
-        ( ring-Rational-Extension-Ring R)
-        ( succ-ℕ n)
-    term-exponential-xy i =
-      mul-Rational-Extension-Ring R
-        ( coefficient-exponential-series-Rational-Extension-Ring R n)
-        ( term-xy i)
-
     term-binomial-exponential :
       fin-sequence-type-Ring
         ( ring-Rational-Extension-Ring R)
@@ -299,7 +338,9 @@ module _
       multiple-Ring
         ( ring-Rational-Extension-Ring R)
         ( binomial-coefficient-Fin n i)
-        ( term-exponential-xy i)
+        ( mul-Rational-Extension-Ring R
+          ( coefficient-exponential-series-Rational-Extension-Ring R n)
+          ( term-xy i))
 
     expand-term-binomial-exponential :
       fin-sequence-type-Ring
@@ -329,51 +370,10 @@ module _
         ( coefficient-exponential-series-Rational-Extension-Ring R n)
         ( term-xy i)
 
-    equiv-index-binomial-sum :
-      equiv-Finite-Type
-        ( Fin-Finite-Type (succ-ℕ n))
-        ( finite-type-binary-sum-decomposition-ℕ n)
-    equiv-index-binomial-sum =
-      equiv-binary-sum-decomposition-leq-ℕ n ∘e
-      equiv-le-succ-ℕ-leq-ℕ n ∘e
-      equiv-classical-standard-Fin (succ-ℕ n)
-
-    lemma-interchange-expand-term-binomial-exponential :
-      (i j : ℕ) →
-      mul-Rational-Extension-Ring R
-        ( mul-Rational-Extension-Ring R
-          ( coefficient-exponential-series-Rational-Extension-Ring R i)
-          ( coefficient-exponential-series-Rational-Extension-Ring R j))
-        ( mul-Rational-Extension-Ring R
-          ( power-Ring (ring-Rational-Extension-Ring R) i x)
-          ( power-Ring (ring-Rational-Extension-Ring R) j y)) ＝
-      mul-Rational-Extension-Ring R
-        ( term-ev-exponential-series-Rational-Extension-Ring R x i)
-        ( term-ev-exponential-series-Rational-Extension-Ring R y j)
-    lemma-interchange-expand-term-binomial-exponential i j =
-      associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _ ∙
-      ap
-        ( mul-Rational-Extension-Ring R _)
-        ( inv (associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _)) ∙
-      ap
-        ( λ z →
-          mul-Rational-Extension-Ring R
-            ( coefficient-exponential-series-Rational-Extension-Ring R i)
-            ( mul-Rational-Extension-Ring R z
-              ( power-Ring (ring-Rational-Extension-Ring R) j y)))
-        ( is-central-map-initial-hom-Rational-Extension-Ring
-          ( R)
-          ( inv-factorial-ℕ j)
-          ( power-Ring (ring-Rational-Extension-Ring R) i x)) ∙
-      ap
-        ( mul-Rational-Extension-Ring R _)
-        ( associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _) ∙
-      inv (associative-mul-Ring (ring-Rational-Extension-Ring R) _ _ _)
-
     htpy-interchange-expand-term-binomial-exponential :
       (ij@(i , j , K) : binary-sum-decomposition-ℕ n) →
       expand-term-binomial-exponential
-        ( map-inv-equiv equiv-index-binomial-sum ij) ＝
+        ( map-inv-equiv (equiv-count-binary-sum-deccomposition-ℕ n) ij) ＝
       mul-Rational-Extension-Ring R
         ( term-ev-exponential-series-Rational-Extension-Ring R x i)
         ( term-ev-exponential-series-Rational-Extension-Ring R y j)
@@ -387,15 +387,22 @@ module _
         ( lemma-i)
         ( ap (λ k → dist-ℕ k n) lemma-i ∙
           inv (rewrite-left-add-dist-ℕ j i n K))
-        ( lemma-interchange-expand-term-binomial-exponential
+        ( interchange-mul-term-exponential-series-Rational-Extension-Ring
+          ( R)
+          ( x)
+          ( y)
+          ( H)
           ( nat-Fin (succ-ℕ n) idx)
           ( dist-ℕ (nat-Fin (succ-ℕ n) idx) n))
       where
       idx : Fin (succ-ℕ n)
-      idx = map-inv-equiv equiv-index-binomial-sum ij
+      idx = map-inv-equiv (equiv-count-binary-sum-deccomposition-ℕ n) ij
 
       lemma-i : nat-Fin (succ-ℕ n) idx ＝ i
-      lemma-i = ap pr1 (is-section-map-inv-equiv equiv-index-binomial-sum ij)
+      lemma-i =
+        ap pr1
+          ( is-section-map-inv-equiv
+            ( equiv-count-binary-sum-deccomposition-ℕ n) ij)
 ```
 
 ### Exponential series are invertible elements of the convolution ring
