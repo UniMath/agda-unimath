@@ -307,7 +307,7 @@ module _
       ( ring-Rational-Extension-Ring R)
       ( Fin-Finite-Type (succ-ℕ n))
       ( finite-type-binary-sum-decomposition-ℕ n)
-      ( equiv-count-binary-sum-deccomposition-ℕ n)
+      ( equiv-count-binary-sum-decomposition-ℕ n)
       ( expand-term-binomial-exponential) ∙
     htpy-sum-finite-Ring
       ( ring-Rational-Extension-Ring R)
@@ -373,7 +373,7 @@ module _
     htpy-interchange-expand-term-binomial-exponential :
       (ij@(i , j , K) : binary-sum-decomposition-ℕ n) →
       expand-term-binomial-exponential
-        ( map-inv-equiv (equiv-count-binary-sum-deccomposition-ℕ n) ij) ＝
+        ( map-inv-equiv (equiv-count-binary-sum-decomposition-ℕ n) ij) ＝
       mul-Rational-Extension-Ring R
         ( term-ev-exponential-series-Rational-Extension-Ring R x i)
         ( term-ev-exponential-series-Rational-Extension-Ring R y j)
@@ -396,13 +396,13 @@ module _
           ( dist-ℕ (nat-Fin (succ-ℕ n) idx) n))
       where
       idx : Fin (succ-ℕ n)
-      idx = map-inv-equiv (equiv-count-binary-sum-deccomposition-ℕ n) ij
+      idx = map-inv-equiv (equiv-count-binary-sum-decomposition-ℕ n) ij
 
       lemma-i : nat-Fin (succ-ℕ n) idx ＝ i
       lemma-i =
         ap pr1
           ( is-section-map-inv-equiv
-            ( equiv-count-binary-sum-deccomposition-ℕ n) ij)
+            ( equiv-count-binary-sum-decomposition-ℕ n) ij)
 ```
 
 ### Exponential series are invertible elements of the convolution ring
