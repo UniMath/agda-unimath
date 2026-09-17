@@ -25,6 +25,7 @@ open import group-theory.semigroups
 open import lists.sequences
 
 open import ring-theory.kronecker-delta-semirings
+open import ring-theory.mutually-centralizing-sequences-semirings
 open import ring-theory.semirings
 open import ring-theory.sequences-semirings
 open import ring-theory.sums-of-finite-families-of-elements-semirings
@@ -95,7 +96,7 @@ If `a` and `b` _totally commute_ (i.e. if `aᵢbⱼ = bⱼaᵢ` for all `i j : �
 ```agda
 module _
   {l : Level} (R : Semiring l) (a b : type-sequence-Semiring R)
-  (H : all-commute-sequence-Semiring R a b)
+  (H : is-mutually-centralizing-sequence-Semiring R a b)
   where abstract
 
   htpy-commute-mul-convolution-sequence-Semiring :
@@ -205,7 +206,7 @@ module _
       ( R)
       ( a)
       ( unit-convolution-sequence-Semiring R)
-      ( is-central-kronecker-delta-Semiring R a 0) ∙
+      ( is-mutually-centralizing-kronecker-delta-Semiring R a 0) ∙
     left-unit-law-convolution-sequence-Semiring
 ```
 
@@ -385,7 +386,7 @@ module _
       ( R)
       ( _)
       ( _)
-      ( is-central-zero-sequence-Semiring R a) ∙
+      ( is-mutually-centralizing-zero-sequence-Semiring R a) ∙
     left-zero-law-convolution-sequence-Semiring
 ```
 

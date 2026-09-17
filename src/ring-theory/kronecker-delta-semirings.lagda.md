@@ -17,6 +17,7 @@ open import group-theory.commuting-elements-monoids
 open import group-theory.semigroups
 
 open import ring-theory.function-semirings
+open import ring-theory.mutually-centralizing-sequences-semirings
 open import ring-theory.semirings
 open import ring-theory.sequences-semirings
 ```
@@ -55,23 +56,27 @@ module _
 
 ## Properties
 
-### Kronecker delta sequences are totally central
+### Kronecker delta sequences mutually centralize all other sequences
 
 ```agda
 module _
   {l : Level} (R : Semiring l) (a : type-sequence-Semiring R)
   where abstract
 
-  is-central-kronecker-delta-Semiring :
-    (n : ℕ) → all-commute-sequence-Semiring R a (kronecker-delta-Semiring R n)
-  is-central-kronecker-delta-Semiring zero-ℕ i zero-ℕ =
+  is-mutually-centralizing-kronecker-delta-Semiring :
+    (n : ℕ) →
+    is-mutually-centralizing-sequence-Semiring
+      ( R)
+      ( a)
+      (kronecker-delta-Semiring R n)
+  is-mutually-centralizing-kronecker-delta-Semiring zero-ℕ i zero-ℕ =
     right-unit-law-mul-Semiring R _ ∙ inv (left-unit-law-mul-Semiring R _)
-  is-central-kronecker-delta-Semiring zero-ℕ i (succ-ℕ j) =
+  is-mutually-centralizing-kronecker-delta-Semiring zero-ℕ i (succ-ℕ j) =
     right-zero-law-mul-Semiring R _ ∙ inv (left-zero-law-mul-Semiring R _)
-  is-central-kronecker-delta-Semiring (succ-ℕ n) i zero-ℕ =
+  is-mutually-centralizing-kronecker-delta-Semiring (succ-ℕ n) i zero-ℕ =
     right-zero-law-mul-Semiring R _ ∙ inv (left-zero-law-mul-Semiring R _)
-  is-central-kronecker-delta-Semiring (succ-ℕ n) i (succ-ℕ j) =
-    is-central-kronecker-delta-Semiring n i j
+  is-mutually-centralizing-kronecker-delta-Semiring (succ-ℕ n) i (succ-ℕ j) =
+    is-mutually-centralizing-kronecker-delta-Semiring n i j
 ```
 
 ## External links

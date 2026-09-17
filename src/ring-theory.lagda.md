@@ -67,6 +67,8 @@ open import ring-theory.maximal-ideals-rings public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiples-of-elements-semirings public
 open import ring-theory.multiplicative-orders-of-units-rings public
+open import ring-theory.mutually-centralizing-sequences-rings public
+open import ring-theory.mutually-centralizing-sequences-semirings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
