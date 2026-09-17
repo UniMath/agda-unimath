@@ -63,9 +63,9 @@ in a [ring extension of ℚ](ring-theory.ring-extensions-rational-numbers.md) `R
 is the series with coefficients `n ↦ 1/n!`.
 
 For any `x ∈ R`, the sequence of terms of the exponential series at `x` is the
-sequence `exp(x) : n ↦ xⁿ/n!`. Note that `exp(x)` is not an element of `R` but
-a sequence in `R`, namely the sequence of coefficients of the formal power
-series `exp(xT) = ∑ₙ (xⁿ/n!) Tⁿ`; no convergence is involved.
+sequence `exp(x) : n ↦ xⁿ/n!`. Note that `exp(x)` is not an element of `R` but a
+sequence in `R`, namely the sequence of coefficients of the formal power series
+`exp(xT) = ∑ₙ (xⁿ/n!) Tⁿ`; no convergence is involved.
 
 The sequence of terms of the exponential series satisfies the two following
 conditions:
