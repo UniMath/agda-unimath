@@ -14,7 +14,6 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-integers
@@ -31,7 +30,6 @@ open import group-theory.semigroups
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.localizations-rings
-open import ring-theory.multiples-of-elements-rings
 open import ring-theory.rings
 ```
 
@@ -131,15 +129,6 @@ module _
         ( R)
         ( f)
         ( inverts-positive-integers-rational-ℤ k k>0)
-```
-
-### Multiples of rational numbers is multiplication
-
-```agda
-abstract
-  compute-multiple-ring-ℚ :
-    (n : ℕ) (x : ℚ) → rational-ℕ n *ℚ x ＝ multiple-Ring ring-ℚ n x
-  compute-multiple-ring-ℚ n x = left-mul-rational-nat-ℚ n x
 ```
 
 ## See also

@@ -183,7 +183,7 @@ abstract
       ( inv-factorial-ℕ l)
   binomial-coefficient-multiple-split-inv-factorial-formula-ℕ n k l n=k+l =
     inv
-      ( compute-multiple-ring-ℚ
+      ( left-mul-rational-nat-ℚ
         ( binomial-coefficient-ℕ n k)
         ( inv-factorial-ℕ n)) ∙
     commutative-mul-ℚ _ _ ∙
