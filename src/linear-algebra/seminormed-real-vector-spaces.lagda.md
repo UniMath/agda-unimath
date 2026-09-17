@@ -151,13 +151,15 @@ module _
   vector-space-Seminormed-ℝ-Vector-Space : ℝ-Vector-Space l1 l2
   vector-space-Seminormed-ℝ-Vector-Space = pr1 V
 
+  ab-Seminormed-ℝ-Vector-Space : Ab l2
+  ab-Seminormed-ℝ-Vector-Space =
+    ab-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+
   set-Seminormed-ℝ-Vector-Space : Set l2
-  set-Seminormed-ℝ-Vector-Space =
-    set-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  set-Seminormed-ℝ-Vector-Space = set-Ab ab-Seminormed-ℝ-Vector-Space
 
   type-Seminormed-ℝ-Vector-Space : UU l2
-  type-Seminormed-ℝ-Vector-Space =
-    type-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  type-Seminormed-ℝ-Vector-Space = type-Ab ab-Seminormed-ℝ-Vector-Space
 
   seminorm-Seminormed-ℝ-Vector-Space :
     seminorm-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
@@ -169,23 +171,20 @@ module _
     pr1 seminorm-Seminormed-ℝ-Vector-Space
 
   zero-Seminormed-ℝ-Vector-Space : type-Seminormed-ℝ-Vector-Space
-  zero-Seminormed-ℝ-Vector-Space =
-    zero-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  zero-Seminormed-ℝ-Vector-Space = zero-Ab ab-Seminormed-ℝ-Vector-Space
 
   is-zero-prop-Seminormed-ℝ-Vector-Space :
     subtype l2 type-Seminormed-ℝ-Vector-Space
   is-zero-prop-Seminormed-ℝ-Vector-Space =
-    is-zero-prop-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+    is-zero-prop-Ab ab-Seminormed-ℝ-Vector-Space
 
   is-zero-Seminormed-ℝ-Vector-Space : type-Seminormed-ℝ-Vector-Space → UU l2
-  is-zero-Seminormed-ℝ-Vector-Space =
-    is-zero-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  is-zero-Seminormed-ℝ-Vector-Space = is-zero-Ab ab-Seminormed-ℝ-Vector-Space
 
   add-Seminormed-ℝ-Vector-Space :
     type-Seminormed-ℝ-Vector-Space → type-Seminormed-ℝ-Vector-Space →
     type-Seminormed-ℝ-Vector-Space
-  add-Seminormed-ℝ-Vector-Space =
-    add-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  add-Seminormed-ℝ-Vector-Space = add-Ab ab-Seminormed-ℝ-Vector-Space
 
   mul-Seminormed-ℝ-Vector-Space :
     ℝ l1 → type-Seminormed-ℝ-Vector-Space → type-Seminormed-ℝ-Vector-Space
@@ -194,21 +193,20 @@ module _
 
   neg-Seminormed-ℝ-Vector-Space :
     type-Seminormed-ℝ-Vector-Space → type-Seminormed-ℝ-Vector-Space
-  neg-Seminormed-ℝ-Vector-Space =
-    neg-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+  neg-Seminormed-ℝ-Vector-Space = neg-Ab ab-Seminormed-ℝ-Vector-Space
 
   diff-Seminormed-ℝ-Vector-Space :
     type-Seminormed-ℝ-Vector-Space → type-Seminormed-ℝ-Vector-Space →
     type-Seminormed-ℝ-Vector-Space
-  diff-Seminormed-ℝ-Vector-Space v w =
-    add-Seminormed-ℝ-Vector-Space v (neg-Seminormed-ℝ-Vector-Space w)
+  diff-Seminormed-ℝ-Vector-Space =
+    right-subtraction-Ab ab-Seminormed-ℝ-Vector-Space
 
   right-inverse-law-add-Seminormed-ℝ-Vector-Space :
     (v : type-Seminormed-ℝ-Vector-Space) →
     add-Seminormed-ℝ-Vector-Space v (neg-Seminormed-ℝ-Vector-Space v) ＝
     zero-Seminormed-ℝ-Vector-Space
   right-inverse-law-add-Seminormed-ℝ-Vector-Space =
-    right-inverse-law-add-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+    right-inverse-law-add-Ab ab-Seminormed-ℝ-Vector-Space
 
   add-diff-Seminormed-ℝ-Vector-Space :
     (v w x : type-Seminormed-ℝ-Vector-Space) →
@@ -223,7 +221,7 @@ module _
     (v : type-Seminormed-ℝ-Vector-Space) →
     neg-Seminormed-ℝ-Vector-Space (neg-Seminormed-ℝ-Vector-Space v) ＝ v
   neg-neg-Seminormed-ℝ-Vector-Space =
-    neg-neg-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space
+    neg-neg-Ab ab-Seminormed-ℝ-Vector-Space
 
   left-zero-law-mul-Seminormed-ℝ-Vector-Space :
     (v : type-Seminormed-ℝ-Vector-Space) →
@@ -244,8 +242,7 @@ module _
     neg-Seminormed-ℝ-Vector-Space (diff-Seminormed-ℝ-Vector-Space v w) ＝
     diff-Seminormed-ℝ-Vector-Space w v
   distributive-neg-diff-Seminormed-ℝ-Vector-Space =
-    neg-right-subtraction-Ab
-      ( ab-ℝ-Vector-Space vector-space-Seminormed-ℝ-Vector-Space)
+    neg-right-subtraction-Ab ab-Seminormed-ℝ-Vector-Space
 
   triangular-seminorm-Seminormed-ℝ-Vector-Space :
     (v w : type-Seminormed-ℝ-Vector-Space) →
@@ -281,12 +278,12 @@ module _
   where
 
   abstract
-    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space :
+    seminorm-zero-Seminormed-ℝ-Vector-Space :
       map-seminorm-Seminormed-ℝ-Vector-Space
         ( V)
         ( zero-Seminormed-ℝ-Vector-Space V) ＝
       raise-ℝ l1 zero-ℝ
-    eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
+    seminorm-zero-Seminormed-ℝ-Vector-Space =
       equational-reasoning
         map-seminorm-Seminormed-ℝ-Vector-Space
           ( V)
@@ -330,7 +327,7 @@ module _
       ( ap
         ( map-seminorm-Seminormed-ℝ-Vector-Space V)
         ( right-inverse-law-add-Seminormed-ℝ-Vector-Space V v)) ∙
-      ( eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
+      ( seminorm-zero-Seminormed-ℝ-Vector-Space)
 
     is-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
@@ -584,6 +581,23 @@ module _
   pseudometric-space-Seminormed-ℝ-Vector-Space =
     ( type-Seminormed-ℝ-Vector-Space V ,
       pseudometric-structure-Seminormed-ℝ-Vector-Space)
+```
+
+### Zero laws of distance in a seminormed vector space
+
+```agda
+module _
+  {l1 l2 : Level} (V : Seminormed-ℝ-Vector-Space l1 l2)
+  where abstract
+
+  right-zero-law-dist-Seminormed-ℝ-Vector-Space :
+    (x : type-Seminormed-ℝ-Vector-Space V) →
+    dist-Seminormed-ℝ-Vector-Space V x (zero-Seminormed-ℝ-Vector-Space V) ＝
+    map-seminorm-Seminormed-ℝ-Vector-Space V x
+  right-zero-law-dist-Seminormed-ℝ-Vector-Space x =
+    ap
+      ( map-seminorm-Seminormed-ℝ-Vector-Space V)
+      ( right-zero-law-right-subtraction-Ab (ab-Seminormed-ℝ-Vector-Space V) x)
 ```
 
 ### The real numbers are a seminormed vector space over themselves with seminorm `x ↦ |x|`

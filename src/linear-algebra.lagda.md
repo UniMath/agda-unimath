@@ -60,6 +60,8 @@ open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
+open import linear-algebra.lipschitz-continuity-scalar-multiplication-normed-real-vector-spaces public
+open import linear-algebra.lipschitz-maps-normed-real-vector-spaces public
 open import linear-algebra.matrices public
 open import linear-algebra.matrices-on-rings public
 open import linear-algebra.multiplication-matrices public
@@ -76,6 +78,7 @@ open import linear-algebra.rational-modules public
 open import linear-algebra.real-inner-product-spaces public
 open import linear-algebra.real-inner-product-spaces-are-normed public
 open import linear-algebra.real-vector-spaces public
+open import linear-algebra.real-vector-spaces-uniformly-continuous-maps-normed-real-vector-spaces public
 open import linear-algebra.right-modules-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-left-modules-commutative-rings public
 open import linear-algebra.scalar-multiplication-linear-maps-vector-spaces public

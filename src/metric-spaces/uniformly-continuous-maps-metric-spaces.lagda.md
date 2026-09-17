@@ -84,6 +84,19 @@ module _
   uniformly-continuous-map-Metric-Space =
     type-subtype (is-uniformly-continuous-prop-map-Metric-Space X Y)
 
+  abstract
+    is-set-uniformly-continuous-map-Metric-Space :
+      is-set uniformly-continuous-map-Metric-Space
+    is-set-uniformly-continuous-map-Metric-Space =
+      is-set-type-subtype
+        ( is-uniformly-continuous-prop-map-Metric-Space X Y)
+        ( is-set-function-type (is-set-type-Metric-Space Y))
+
+  set-uniformly-continuous-map-Metric-Space : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  set-uniformly-continuous-map-Metric-Space =
+    ( uniformly-continuous-map-Metric-Space ,
+      is-set-uniformly-continuous-map-Metric-Space)
+
   map-uniformly-continuous-map-Metric-Space :
     uniformly-continuous-map-Metric-Space →
     map-Metric-Space X Y

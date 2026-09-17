@@ -144,7 +144,7 @@ module _
             ( Y)
             ( μX)
             ( map-uniformly-continuous-map-Metric-Space X Y f)
-            ( μf))
+          ( μf))
 ```
 
 ### The image of a totally bounded metric space under a short map is totally bounded

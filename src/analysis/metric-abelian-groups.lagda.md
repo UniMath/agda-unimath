@@ -119,19 +119,31 @@ module _
   diff-Metric-Ab : type-Metric-Ab MG → type-Metric-Ab MG → type-Metric-Ab MG
   diff-Metric-Ab x y = add-Metric-Ab x (neg-Metric-Ab y)
 
-  ap-diff-Metric-Ab :
-    {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
-    diff-Metric-Ab x y ＝ diff-Metric-Ab x' y'
-  ap-diff-Metric-Ab = ap-right-subtraction-Ab (ab-Metric-Ab MG)
+  abstract
+    ap-diff-Metric-Ab :
+      {x x' y y' : type-Metric-Ab MG} → x ＝ x' → y ＝ y' →
+      diff-Metric-Ab x y ＝ diff-Metric-Ab x' y'
+    ap-diff-Metric-Ab = ap-right-subtraction-Ab (ab-Metric-Ab MG)
 
-  commutative-add-Metric-Ab :
-    (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
-  commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
+    commutative-add-Metric-Ab :
+      (x y : type-Metric-Ab MG) → add-Metric-Ab x y ＝ add-Metric-Ab y x
+    commutative-add-Metric-Ab = commutative-add-Ab (ab-Metric-Ab MG)
 
-  is-identity-right-conjugation-Metric-Ab :
-    (x y : type-Metric-Ab MG) → add-Metric-Ab x (diff-Metric-Ab y x) ＝ y
-  is-identity-right-conjugation-Metric-Ab =
-    is-identity-right-conjugation-Ab (ab-Metric-Ab MG)
+    is-identity-right-conjugation-Metric-Ab :
+      (x y : type-Metric-Ab MG) → add-Metric-Ab x (diff-Metric-Ab y x) ＝ y
+    is-identity-right-conjugation-Metric-Ab =
+      is-identity-right-conjugation-Ab (ab-Metric-Ab MG)
+
+    left-zero-law-diff-Metric-Ab :
+      (x : type-Metric-Ab MG) →
+      diff-Metric-Ab zero-Metric-Ab x ＝ neg-Metric-Ab x
+    left-zero-law-diff-Metric-Ab x =
+      left-unit-law-add-Ab (ab-Metric-Ab MG) _
+
+    right-zero-law-diff-Metric-Ab :
+      (x : type-Metric-Ab MG) → diff-Metric-Ab x zero-Metric-Ab ＝ x
+    right-zero-law-diff-Metric-Ab =
+      right-zero-law-right-subtraction-Ab (ab-Metric-Ab MG)
 ```
 
 ### Metric properties of metric abelian groups
