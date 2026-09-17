@@ -7,9 +7,6 @@ module ring-theory.central-elements-semirings where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions

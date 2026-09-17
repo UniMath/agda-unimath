@@ -7,23 +7,15 @@ module ring-theory.central-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
-
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.central-elements-monoids
 
 open import ring-theory.central-elements-semirings
-open import ring-theory.commuting-elements-rings
-open import ring-theory.homomorphisms-rings
-open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```

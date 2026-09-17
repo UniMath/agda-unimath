@@ -38,8 +38,6 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups
-
 open import ring-theory.central-elements-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.invertible-elements-rings
