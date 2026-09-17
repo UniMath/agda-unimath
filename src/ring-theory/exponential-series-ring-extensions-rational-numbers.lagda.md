@@ -378,27 +378,24 @@ module _
         ( term-ev-exponential-series-Rational-Extension-Ring R x i)
         ( term-ev-exponential-series-Rational-Extension-Ring R y j)
     htpy-interchange-expand-term-binomial-exponential ij@(i , j , K) =
-      let
-        idx = map-inv-equiv equiv-index-binomial-sum ij
+      binary-tr
+        ( λ u v →
+          expand-term-binomial-exponential idx ＝
+          mul-Rational-Extension-Ring R
+            ( term-ev-exponential-series-Rational-Extension-Ring R x u)
+            ( term-ev-exponential-series-Rational-Extension-Ring R y v))
+        ( lemma-i)
+        ( ap (λ k → dist-ℕ k n) lemma-i ∙
+          inv (rewrite-left-add-dist-ℕ j i n K))
+        ( lemma-interchange-expand-term-binomial-exponential
+          ( nat-Fin (succ-ℕ n) idx)
+          ( dist-ℕ (nat-Fin (succ-ℕ n) idx) n))
+      where
+      idx : Fin (succ-ℕ n)
+      idx = map-inv-equiv equiv-index-binomial-sum ij
 
-        lemma-i : nat-Fin (succ-ℕ n) idx ＝ i
-        lemma-i =
-          ap
-            ( pr1)
-            ( is-section-map-inv-equiv equiv-index-binomial-sum ij)
-      in
-        binary-tr
-          ( λ u v →
-            expand-term-binomial-exponential idx ＝
-            mul-Rational-Extension-Ring R
-              ( term-ev-exponential-series-Rational-Extension-Ring R x u)
-              ( term-ev-exponential-series-Rational-Extension-Ring R y v))
-          ( lemma-i)
-          ( ap (λ k → dist-ℕ k n) lemma-i ∙
-            inv (rewrite-left-add-dist-ℕ j i n K))
-          ( lemma-interchange-expand-term-binomial-exponential
-            ( nat-Fin (succ-ℕ n) idx)
-            ( dist-ℕ (nat-Fin (succ-ℕ n) idx) n))
+      lemma-i : nat-Fin (succ-ℕ n) idx ＝ i
+      lemma-i = ap pr1 (is-section-map-inv-equiv equiv-index-binomial-sum ij)
 ```
 
 ### Exponential series are invertible elements of the convolution ring
