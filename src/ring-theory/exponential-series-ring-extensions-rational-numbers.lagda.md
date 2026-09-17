@@ -216,7 +216,6 @@ If `x` and `y` commute in `R` then for any `i j : ℕ`,
 module _
   {l : Level} (R : Rational-Extension-Ring l)
   (x y : type-Rational-Extension-Ring R)
-  (H : commute-Ring (ring-Rational-Extension-Ring R) x y)
   (i j : ℕ)
   where abstract
 
@@ -391,7 +390,6 @@ module _
           ( R)
           ( x)
           ( y)
-          ( H)
           ( nat-Fin (succ-ℕ n) idx)
           ( dist-ℕ (nat-Fin (succ-ℕ n) idx) n))
       where
