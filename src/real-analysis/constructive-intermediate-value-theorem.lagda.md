@@ -439,7 +439,7 @@ module _
             ( f)
             ( seq-intermediate-value-theorem-ℝ n)
       in
-        clamp-leq-upper-bound-closed-interval-ℝ
+        sim-clamp-leq-upper-bound-closed-interval-ℝ
           ( unit-closed-interval-ℝ)
           ( one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
           ( chain-of-inequalities
@@ -579,7 +579,7 @@ module _
             ( f)
             ( seq-intermediate-value-theorem-ℝ n)
       in
-        clamp-leq-lower-bound-closed-interval-ℝ
+        sim-clamp-leq-lower-bound-closed-interval-ℝ
           ( unit-closed-interval-ℝ)
           ( one-half-ℝ +ℝ fcₙ *ℝ real-ℚ⁺ (inv-ℚ⁺ ε))
           ( chain-of-inequalities

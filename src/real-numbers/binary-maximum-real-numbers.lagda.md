@@ -436,3 +436,22 @@ abstract
             ( p<z))
         ( linear-leq-ℚ p q)
 ```
+
+### The maximum with a constant real is an increasing map
+
+```agda
+is-increasing-max-ℝ :
+  {l1 l2 l3 : Level} →
+  (x : ℝ l1) →
+  (y : ℝ l2) →
+  (z : ℝ l3) →
+  leq-ℝ y z →
+  leq-ℝ (max-ℝ x y) (max-ℝ x z)
+is-increasing-max-ℝ x y z H =
+  leq-max-leq-leq-ℝ
+    ( x)
+    ( y)
+    ( max-ℝ x z)
+    ( leq-left-max-ℝ x z)
+    ( transitive-leq-ℝ _ _ _ (leq-right-max-ℝ x z) H)
+```

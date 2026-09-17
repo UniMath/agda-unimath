@@ -21,9 +21,12 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
@@ -264,6 +267,12 @@ clamp-proper-closed-interval-ℝ :
   type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]
 clamp-proper-closed-interval-ℝ [a,b] =
   clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
+
+map-clamp-proper-closed-interval-ℝ :
+  {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l2) → ℝ l3 →
+  ℝ (l1 ⊔ l2 ⊔ l3)
+map-clamp-proper-closed-interval-ℝ [a,b] =
+  map-clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
 ### The clamp function is a short map
@@ -1016,4 +1025,84 @@ module _
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ))
       ( sim-raise-ℝ l1 _)
       ( sim-raise-ℝ l _)
+```
+
+### Location of strictly ordered pairs of rational numbers w.r.t. a proper closed interval
+
+For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`
+then one of the following propositions holds:
+
+- `p < a`;
+- `b < q`;
+- `∃ (r s : ℚ) | (a < r < s < b) ∧ (p < r) ∧ (s < q)`, i.e. `[r, s]` is a proper
+  sub-interval of both `[a, b] ∩ [p, q]`.
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  (p q : ℚ) (H : le-ℚ p q)
+  where
+
+  trichotomy-prop-le-rational-proper-closed-interval-ℝ : Prop (l1 ⊔ l2)
+  trichotomy-prop-le-rational-proper-closed-interval-ℝ =
+    ( lower-cut-ℝ (lower-bound-proper-closed-interval-ℝ I) p) ∨
+    ( upper-cut-ℝ (upper-bound-proper-closed-interval-ℝ I) q) ∨
+    ( ∃ ( ℚ)
+        ( λ r →
+          ∃ ( ℚ)
+            ( λ s →
+              ( upper-cut-ℝ
+                ( lower-bound-proper-closed-interval-ℝ I)
+                ( r)) ∧
+              ( lower-cut-ℝ
+                ( upper-bound-proper-closed-interval-ℝ I)
+                ( s)) ∧
+              ( le-ℚ-Prop r s) ∧
+              ( le-ℚ-Prop p r) ∧
+              ( le-ℚ-Prop s q))))
+
+  trichotomy-le-rational-proper-closed-interval-ℝ : UU (l1 ⊔ l2)
+  trichotomy-le-rational-proper-closed-interval-ℝ =
+    type-Prop trichotomy-prop-le-rational-proper-closed-interval-ℝ
+
+  is-prop-trichotomy-le-rational-proper-closed-interval-ℝ :
+    is-prop trichotomy-le-rational-proper-closed-interval-ℝ
+  is-prop-trichotomy-le-rational-proper-closed-interval-ℝ =
+    is-prop-type-Prop trichotomy-prop-le-rational-proper-closed-interval-ℝ
+
+  lemma-trichotomy-le-rational-proper-closed-interval-ℝ :
+    trichotomy-le-rational-proper-closed-interval-ℝ
+  lemma-trichotomy-le-rational-proper-closed-interval-ℝ =
+    let
+      open
+        do-syntax-trunc-Prop
+          trichotomy-prop-le-rational-proper-closed-interval-ℝ
+    in do
+      (r , p<r , r<q) ← dense-le-ℚ H
+      (s , r<s , s<q) ← dense-le-ℚ r<q
+      locate-a ←
+        is-located-lower-upper-cut-ℝ
+          ( lower-bound-proper-closed-interval-ℝ I)
+          ( p<r)
+
+      locate-b ←
+        is-located-lower-upper-cut-ℝ
+          ( upper-bound-proper-closed-interval-ℝ I)
+          ( s<q)
+
+      rec-coproduct
+        ( unit-trunc-Prop ∘ inl)
+        ( λ lo →
+          rec-coproduct
+            ( λ hi →
+              unit-trunc-Prop
+                ( inr
+                  ( unit-trunc-Prop
+                    ( inr
+                      ( intro-exists r
+                        ( intro-exists s
+                          ( lo , hi , r<s , p<r , s<q)))))))
+            ( unit-trunc-Prop ∘ inr ∘ unit-trunc-Prop ∘ inl)
+            ( locate-b))
+        ( locate-a)
 ```

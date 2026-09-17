@@ -8,8 +8,10 @@ module real-numbers.clamp-function-closed-interval-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.closed-subsets-metric-spaces
@@ -26,6 +28,7 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.short-map-binary-maximum-real-numbers
 open import real-numbers.short-map-binary-minimum-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.strict-inequality-real-numbers
 ```
 
 </details>
@@ -121,13 +124,13 @@ short-map-clamp-closed-interval-ℝ [a,b] =
 
 ```agda
 abstract
-  clamp-leq-lower-bound-closed-interval-ℝ :
+  sim-clamp-leq-lower-bound-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
     leq-ℝ x (lower-bound-closed-interval-ℝ [a,b]) →
     sim-ℝ
       ( map-clamp-closed-interval-ℝ [a,b] x)
       ( lower-bound-closed-interval-ℝ [a,b])
-  clamp-leq-lower-bound-closed-interval-ℝ ((a , b) , a≤b) x x≤a =
+  sim-clamp-leq-lower-bound-closed-interval-ℝ ((a , b) , a≤b) x x≤a =
     similarity-reasoning-ℝ
       max-ℝ a (min-ℝ b x)
       ~ℝ max-ℝ a x
@@ -142,13 +145,13 @@ abstract
 
 ```agda
 abstract
-  clamp-leq-upper-bound-closed-interval-ℝ :
+  sim-clamp-leq-upper-bound-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
     leq-ℝ (upper-bound-closed-interval-ℝ [a,b]) x →
     sim-ℝ
       ( map-clamp-closed-interval-ℝ [a,b] x)
       ( upper-bound-closed-interval-ℝ [a,b])
-  clamp-leq-upper-bound-closed-interval-ℝ ((a , b) , a≤b) x b≤x =
+  sim-clamp-leq-upper-bound-closed-interval-ℝ ((a , b) , a≤b) x b≤x =
     similarity-reasoning-ℝ
       max-ℝ a (min-ℝ b x)
       ~ℝ max-ℝ a b
@@ -161,19 +164,29 @@ abstract
 
 ```agda
 abstract
-  clamp-is-in-closed-interval-ℝ :
+  sim-clamp-is-in-closed-interval-ℝ :
     {l1 l2 l3 : Level} ([a,b] : closed-interval-ℝ l1 l2) (x : ℝ l3) →
     is-in-closed-interval-ℝ [a,b] x →
     sim-ℝ
       ( map-clamp-closed-interval-ℝ [a,b] x)
       ( x)
-  clamp-is-in-closed-interval-ℝ ((a , b) , a≤b) x (a≤x , x≤b) =
+  sim-clamp-is-in-closed-interval-ℝ ((a , b) , a≤b) x (a≤x , x≤b) =
     similarity-reasoning-ℝ
       max-ℝ a (min-ℝ b x)
       ~ℝ max-ℝ a x
         by preserves-sim-right-max-ℝ _ _ _ (right-leq-left-min-ℝ x≤b)
       ~ℝ x
         by left-leq-right-max-ℝ a≤x
+
+  compute-clamp-in-closed-interval-ℝ :
+    {l l1 l2 : Level} (I : closed-interval-ℝ l1 l2)
+    (x : type-closed-interval-ℝ (l ⊔ l1 ⊔ l2) I) →
+    clamp-closed-interval-ℝ I (pr1 x) ＝ x
+  compute-clamp-in-closed-interval-ℝ I (x , x∈I) =
+    eq-type-subtype
+      ( subtype-closed-interval-ℝ _ I)
+      ( eq-sim-ℝ
+        ( sim-clamp-is-in-closed-interval-ℝ I x x∈I))
 ```
 
 ### The clamping function is idempotent
@@ -186,8 +199,72 @@ abstract
     map-clamp-closed-interval-ℝ [a,b] x
   is-idempotent-map-clamp-closed-interval-ℝ [a,b] x =
     eq-sim-ℝ
-      ( clamp-is-in-closed-interval-ℝ
+      ( sim-clamp-is-in-closed-interval-ℝ
         ( [a,b])
         ( map-clamp-closed-interval-ℝ [a,b] x)
         ( is-in-closed-interval-map-clamp-closed-interval-ℝ [a,b] x))
+```
+
+### The clamping function is increasing
+
+```agda
+abstract
+  is-increasing-map-clamp-closed-interval-ℝ :
+      {l1 l2 l3 l4 : Level} (I : closed-interval-ℝ l1 l2)
+      (x : ℝ l3)
+      (y : ℝ l4) →
+      leq-ℝ x y →
+      leq-ℝ
+        ( map-clamp-closed-interval-ℝ I x)
+        ( map-clamp-closed-interval-ℝ I y)
+  is-increasing-map-clamp-closed-interval-ℝ I x y =
+    is-increasing-max-ℝ
+      ( lower-bound-closed-interval-ℝ I)
+      ( min-ℝ (upper-bound-closed-interval-ℝ I) x)
+      ( min-ℝ (upper-bound-closed-interval-ℝ I) y) ∘
+    is-increasing-min-ℝ
+      ( upper-bound-closed-interval-ℝ I)
+      ( x)
+      ( y)
+```
+
+### For any `x y ∈ I`, if `x < y` then `clamp-I x < clamp-I y `
+
+```agda
+abstract
+  le-map-clamp-le-is-in-closed-interval-ℝ :
+    {l1 l2 l3 l4 : Level} (I : closed-interval-ℝ l1 l2) →
+    (x : ℝ l3) (Hx : is-in-closed-interval-ℝ I x) →
+    (y : ℝ l4) (Hy : is-in-closed-interval-ℝ I y) →
+    le-ℝ x y →
+    le-ℝ
+      ( map-clamp-closed-interval-ℝ I x)
+      ( map-clamp-closed-interval-ℝ I y)
+  le-map-clamp-le-is-in-closed-interval-ℝ I x Hx y Hy =
+    preserves-le-sim-ℝ
+      ( symmetric-sim-ℝ
+        ( sim-clamp-is-in-closed-interval-ℝ I x Hx))
+      ( symmetric-sim-ℝ
+        ( sim-clamp-is-in-closed-interval-ℝ I y Hy))
+```
+
+### The clamp function preserves similarity
+
+```agda
+sim-clamp-closed-interval-ℝ :
+    {l1 l2 l3 l4 : Level} (I : closed-interval-ℝ l1 l2) →
+    (x : ℝ l3) →
+    (y : ℝ l4) →
+    sim-ℝ x y →
+    sim-ℝ
+      ( map-clamp-closed-interval-ℝ I x)
+      ( map-clamp-closed-interval-ℝ I y)
+sim-clamp-closed-interval-ℝ I x y x~y =
+  sim-antisymmetric-leq-ℝ
+    ( map-clamp-closed-interval-ℝ I x)
+    ( map-clamp-closed-interval-ℝ I y)
+    ( is-increasing-map-clamp-closed-interval-ℝ I x y
+      ( leq-sim-ℝ x~y))
+    ( is-increasing-map-clamp-closed-interval-ℝ I y x
+      ( leq-sim-ℝ' x~y))
 ```
