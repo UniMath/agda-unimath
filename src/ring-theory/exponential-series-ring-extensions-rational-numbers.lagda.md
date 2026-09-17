@@ -145,7 +145,7 @@ module _
 
 ### Relation with binomial coefficients
 
-For any `n ∈ N` and `i ≤ n`,
+For any `n ∈ ℕ` and `i ≤ n`,
 
 ```text
   1/i! * 1/(n - i)! ＝ (binomial-coefficient n i) · 1/n!
