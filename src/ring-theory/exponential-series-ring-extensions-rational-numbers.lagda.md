@@ -158,7 +158,7 @@ module _
   {l : Level} (R : Rational-Extension-Ring l)
   where abstract
 
-  lemma-binomial-coefficent-exponential-series-Rational-Extension-Ring :
+  compute-mul-coefficient-exponential-series-Rational-Extension-Ring :
     (n : ℕ) →
     (i : Fin (succ-ℕ n)) →
     mul-Rational-Extension-Ring R
@@ -170,7 +170,7 @@ module _
       ( ring-Rational-Extension-Ring R)
       ( binomial-coefficient-Fin n i)
       ( coefficient-exponential-series-Rational-Extension-Ring R n)
-  lemma-binomial-coefficent-exponential-series-Rational-Extension-Ring n i =
+  compute-mul-coefficient-exponential-series-Rational-Extension-Ring n i =
     inv (preserves-mul-initial-hom-Rational-Extension-Ring R) ∙
     ap
       ( map-initial-hom-Rational-Extension-Ring R)
