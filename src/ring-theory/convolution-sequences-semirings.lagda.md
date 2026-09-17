@@ -90,8 +90,9 @@ module _
 
 ### Commutativity
 
-If `a` and `b` _totally commute_ (i.e. if `aᵢbⱼ = bⱼaᵢ` for all `i j : ℕ`) then
-`a ⋆ b = b ⋆ a`
+If `a` and `b` are
+[mutually centralizing](ring-theory.mutually-centralizing-sequences-semirings.md),
+then `a ⋆ b = b ⋆ a`.
 
 ```agda
 module _
