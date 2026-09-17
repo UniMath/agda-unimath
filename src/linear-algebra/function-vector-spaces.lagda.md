@@ -13,6 +13,8 @@ open import foundation.universe-levels
 
 open import linear-algebra.function-left-modules-rings
 open import linear-algebra.vector-spaces
+
+open import ring-theory.function-rings
 ```
 
 </details>
@@ -45,5 +47,5 @@ module _
 function-vector-space-Heyting-Field :
   {l1 l2 : Level} (K : Heyting-Field l1) → UU l2 → Vector-Space (l1 ⊔ l2) K
 function-vector-space-Heyting-Field K =
-  function-left-module-ring-Ring (ring-Heyting-Field K)
+  left-module-function-Ring (ring-Heyting-Field K)
 ```

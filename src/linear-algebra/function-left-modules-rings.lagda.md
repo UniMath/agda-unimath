@@ -7,12 +7,16 @@ module linear-algebra.function-left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.universe-levels
 
 open import linear-algebra.dependent-products-left-modules-rings
 open import linear-algebra.left-modules-rings
 
 open import ring-theory.rings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -35,15 +39,4 @@ module _
 
   function-left-module-Ring : left-module-Ring (l2 ⊔ l3) R
   function-left-module-Ring = Π-left-module-Ring R X (λ _ → M)
-```
-
-## Properties
-
-### The functions `X → R` form a left module over `R`
-
-```agda
-function-left-module-ring-Ring :
-  {l1 l2 : Level} (R : Ring l1) → UU l2 → left-module-Ring (l1 ⊔ l2) R
-function-left-module-ring-Ring R =
-  function-left-module-Ring R (left-module-ring-Ring R)
 ```
