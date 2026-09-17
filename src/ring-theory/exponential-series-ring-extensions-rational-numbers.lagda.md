@@ -14,7 +14,6 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reciprocal-factorials
 open import elementary-number-theory.ring-of-rational-numbers
@@ -29,13 +28,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.subtypes
-open import foundation.transport-along-identifications
-open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
-open import group-theory.abelian-groups
-open import group-theory.semigroups
 
 open import linear-algebra.finite-sequences-in-rings
 
@@ -55,9 +48,7 @@ open import ring-theory.sums-of-finite-families-of-elements-rings
 open import ring-theory.sums-of-finite-sequences-of-elements-rings
 
 open import univalent-combinatorics.classical-finite-types
-open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -78,7 +69,11 @@ The sequence of coefficients of the exponential series satisfy the two following
 conditions:
 
 - `exp(0) = 1`, where `1` is the unit of the
-  [convolution product](ring-theory.convolution-sequences-rings.md);
+  [convolution product](ring-theory.convolution-sequences-rings.md), i.e., the
+  [Kronecker delta](ring-theory.kronecker-delta-semirings.md) at `0`:
+  ```text
+    δ₀ = (1, 0, 0, ...)
+  ```
 - if `x , y ∈ R` [commute](ring-theory.commuting-elements-rings.md), then
   `exp(x + y) = exp(x) ⋆ exp(y)` where `⋆` denotes the convolution product.
 
