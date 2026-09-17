@@ -240,6 +240,53 @@ module _
         ( f)
 ```
 
+### Negative laws of bilinear maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (R : Commutative-Ring l1)
+  (X : left-module-Commutative-Ring l2 R)
+  (Y : left-module-Commutative-Ring l3 R)
+  (Z : left-module-Commutative-Ring l4 R)
+  (f : bilinear-map-left-module-Commutative-Ring R X Y Z)
+  (x : type-left-module-Commutative-Ring R X)
+  (y : type-left-module-Commutative-Ring R Y)
+  where abstract
+
+  left-negative-law-bilinear-map-left-module-Commutative-Ring :
+    map-bilinear-map-left-module-Commutative-Ring R X Y Z f
+      ( neg-left-module-Commutative-Ring R X x)
+      ( y) ＝
+    neg-left-module-Commutative-Ring R Z
+      ( map-bilinear-map-left-module-Commutative-Ring R X Y Z f x y)
+  left-negative-law-bilinear-map-left-module-Commutative-Ring =
+    left-negative-law-bilinear-map-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( X)
+      ( Y)
+      ( Z)
+      ( f)
+      ( x)
+      ( y)
+
+  right-negative-law-bilinear-map-left-module-Commutative-Ring :
+    map-bilinear-map-left-module-Commutative-Ring R X Y Z f
+      ( x)
+      ( neg-left-module-Commutative-Ring R Y y) ＝
+    neg-left-module-Commutative-Ring R Z
+      ( map-bilinear-map-left-module-Commutative-Ring R X Y Z f x y)
+  right-negative-law-bilinear-map-left-module-Commutative-Ring =
+    right-negative-law-bilinear-map-left-module-Ring
+      ( ring-Commutative-Ring R)
+      ( X)
+      ( Y)
+      ( Z)
+      ( f)
+      ( x)
+      ( y)
+```
+
 ## See also
 
 - [Bilinear maps on left modules over rings](linear-algebra.bilinear-maps-left-modules-rings.md)

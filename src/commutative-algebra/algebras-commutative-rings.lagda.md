@@ -71,6 +71,12 @@ module _
     type-algebra-Commutative-Ring
   add-algebra-Commutative-Ring = add-Ab ab-add-algebra-Commutative-Ring
 
+  diff-algebra-Commutative-Ring :
+    type-algebra-Commutative-Ring → type-algebra-Commutative-Ring →
+    type-algebra-Commutative-Ring
+  diff-algebra-Commutative-Ring =
+    right-subtraction-Ab ab-add-algebra-Commutative-Ring
+
   zero-algebra-Commutative-Ring : type-algebra-Commutative-Ring
   zero-algebra-Commutative-Ring = zero-Ab ab-add-algebra-Commutative-Ring
 
@@ -273,6 +279,58 @@ module _
         ( y)
 ```
 
+### Distributivity of multiplication over differences
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  where abstract
+
+  left-distributive-mul-diff-algebra-Commutative-Ring :
+    (x y z : type-algebra-Commutative-Ring R A) →
+    mul-algebra-Commutative-Ring R A
+      ( x)
+      ( diff-algebra-Commutative-Ring R A y z) ＝
+    diff-algebra-Commutative-Ring R A
+      ( mul-algebra-Commutative-Ring R A x y)
+      ( mul-algebra-Commutative-Ring R A x z)
+  left-distributive-mul-diff-algebra-Commutative-Ring x y z =
+    preserves-diff-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( linear-map-ev-left-bilinear-map-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( bilinear-mul-algebra-Commutative-Ring R A)
+        ( x))
+
+  right-distributive-mul-diff-algebra-Commutative-Ring :
+    (x y z : type-algebra-Commutative-Ring R A) →
+    mul-algebra-Commutative-Ring R A
+      ( diff-algebra-Commutative-Ring R A x y)
+      ( z) ＝
+    diff-algebra-Commutative-Ring R A
+      ( mul-algebra-Commutative-Ring R A x z)
+      ( mul-algebra-Commutative-Ring R A y z)
+  right-distributive-mul-diff-algebra-Commutative-Ring x y z =
+    preserves-diff-linear-map-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( linear-map-ev-right-bilinear-map-left-module-Commutative-Ring
+        ( R)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( left-module-algebra-Commutative-Ring R A)
+        ( bilinear-mul-algebra-Commutative-Ring R A)
+        ( z))
+```
+
 ### Zero laws of multiplication
 
 ```agda
@@ -306,6 +364,47 @@ module _
         ( left-module-algebra-Commutative-Ring R A)
         ( left-module-algebra-Commutative-Ring R A)
         ( bilinear-mul-algebra-Commutative-Ring R A)
+```
+
+### Negative laws of multiplication
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1)
+  (A : algebra-Commutative-Ring l2 R)
+  (x y : type-algebra-Commutative-Ring R A)
+  where abstract
+
+  left-negative-law-mul-algebra-Commutative-Ring :
+    mul-algebra-Commutative-Ring R A
+      ( neg-algebra-Commutative-Ring R A x)
+      ( y) ＝
+    neg-algebra-Commutative-Ring R A (mul-algebra-Commutative-Ring R A x y)
+  left-negative-law-mul-algebra-Commutative-Ring =
+    left-negative-law-bilinear-map-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( bilinear-mul-algebra-Commutative-Ring R A)
+      ( x)
+      ( y)
+
+  right-negative-law-mul-algebra-Commutative-Ring :
+    mul-algebra-Commutative-Ring R A
+      ( x)
+      ( neg-algebra-Commutative-Ring R A y) ＝
+    neg-algebra-Commutative-Ring R A (mul-algebra-Commutative-Ring R A x y)
+  right-negative-law-mul-algebra-Commutative-Ring =
+    right-negative-law-bilinear-map-left-module-Commutative-Ring
+      ( R)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( left-module-algebra-Commutative-Ring R A)
+      ( bilinear-mul-algebra-Commutative-Ring R A)
+      ( x)
+      ( y)
 ```
 
 ### Every commutative ring is an algebra over itself

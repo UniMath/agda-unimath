@@ -350,6 +350,28 @@ module _
         ( N)
 ```
 
+### Linear maps preserve differences
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1)
+  (M : left-module-Commutative-Ring l2 R)
+  (N : left-module-Commutative-Ring l3 R)
+  (f : linear-map-left-module-Commutative-Ring R M N)
+  where abstract
+
+  preserves-diff-linear-map-left-module-Commutative-Ring :
+    {x y : type-left-module-Commutative-Ring R M} →
+    map-linear-map-left-module-Commutative-Ring R M N f
+      ( diff-left-module-Commutative-Ring R M x y) ＝
+    diff-left-module-Commutative-Ring R N
+      ( map-linear-map-left-module-Commutative-Ring R M N f x)
+      ( map-linear-map-left-module-Commutative-Ring R M N f y)
+  preserves-diff-linear-map-left-module-Commutative-Ring =
+    preserves-diff-linear-map-left-module-Ring (ring-Commutative-Ring R) M N f
+```
+
 ## See also
 
 - [Linear maps between left modules over rings](linear-algebra.linear-maps-left-modules-rings.md)

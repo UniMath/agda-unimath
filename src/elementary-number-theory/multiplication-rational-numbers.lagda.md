@@ -251,14 +251,25 @@ abstract
 ### Swapping laws for multiplication
 
 ```agda
-abstract
-  left-swap-mul-ℚ : (x y z : ℚ) → x *ℚ (y *ℚ z) ＝ y *ℚ (x *ℚ z)
-  left-swap-mul-ℚ x y z =
+module _
+  (x y z : ℚ)
+  where abstract
+
+  left-swap-mul-ℚ : x *ℚ (y *ℚ z) ＝ y *ℚ (x *ℚ z)
+  left-swap-mul-ℚ =
     equational-reasoning
       x *ℚ (y *ℚ z)
       ＝ (x *ℚ y) *ℚ z by inv (associative-mul-ℚ x y z)
       ＝ (y *ℚ x) *ℚ z by ap-mul-ℚ (commutative-mul-ℚ x y) refl
       ＝ y *ℚ (x *ℚ z) by associative-mul-ℚ y x z
+
+  right-swap-mul-ℚ : (x *ℚ y) *ℚ z ＝ (x *ℚ z) *ℚ y
+  right-swap-mul-ℚ =
+    equational-reasoning
+      (x *ℚ y) *ℚ z
+      ＝ x *ℚ (y *ℚ z) by associative-mul-ℚ x y z
+      ＝ x *ℚ (z *ℚ y) by ap-mul-ℚ refl (commutative-mul-ℚ y z)
+      ＝ (x *ℚ z) *ℚ y by inv (associative-mul-ℚ x z y)
 ```
 
 ### Negative laws for multiplication on rational numbers
