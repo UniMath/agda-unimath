@@ -194,7 +194,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Semiring l)
-  where
+  where abstract
 
   is-central-map-nat-Semiring :
     (n : ℕ) → is-central-element-Semiring R (map-nat-Semiring R n)
