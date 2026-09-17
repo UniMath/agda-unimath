@@ -10,6 +10,8 @@ open import functional-analysis.metric-abelian-groups-normed-real-vector-spaces 
 open import functional-analysis.ratio-test-series-real-banach-spaces public
 open import functional-analysis.real-banach-spaces public
 open import functional-analysis.real-hilbert-spaces public
+open import functional-analysis.riemann-integrable-maps-closed-intervals-real-numbers-normed-real-vector-spaces public
+open import functional-analysis.riemann-sums-tagged-partitions-closed-intervals-real-numbers-normed-real-vector-spaces public
 open import functional-analysis.series-real-banach-spaces public
 open import functional-analysis.standard-euclidean-hilbert-spaces public
 open import functional-analysis.sums-of-finite-sequences-of-elements-real-banach-spaces public

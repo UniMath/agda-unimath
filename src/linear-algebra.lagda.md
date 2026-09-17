@@ -58,6 +58,7 @@ open import linear-algebra.linear-forms-left-modules-commutative-rings public
 open import linear-algebra.linear-forms-vector-spaces public
 open import linear-algebra.linear-maps-left-modules-commutative-rings public
 open import linear-algebra.linear-maps-left-modules-rings public
+open import linear-algebra.linear-maps-real-vector-spaces public
 open import linear-algebra.linear-maps-vector-spaces public
 open import linear-algebra.linear-spans-left-modules-rings public
 open import linear-algebra.matrices public
@@ -90,7 +91,10 @@ open import linear-algebra.standard-euclidean-vector-spaces public
 open import linear-algebra.subsets-left-modules-commutative-rings public
 open import linear-algebra.subsets-left-modules-rings public
 open import linear-algebra.subspaces-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-rings public
 open import linear-algebra.sums-of-finite-sequences-of-elements-normed-real-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-real-vector-spaces public
+open import linear-algebra.sums-of-finite-sequences-of-elements-vector-spaces public
 open import linear-algebra.symmetric-bilinear-forms-real-vector-spaces public
 open import linear-algebra.transposition-matrices public
 open import linear-algebra.tuples-on-commutative-monoids public

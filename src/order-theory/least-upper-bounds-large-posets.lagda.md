@@ -10,8 +10,10 @@ module order-theory.least-upper-bounds-large-posets where
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
+open import foundation.weakly-constant-maps
 
 open import order-theory.dependent-products-large-posets
 open import order-theory.large-posets
@@ -372,4 +374,35 @@ module _
     right-leq-left-least-upper-bound-Large-Poset x y y≤x =
       is-binary-least-upper-bound-swap-Large-Poset P y x x
         ( left-leq-right-least-upper-bound-Large-Poset y x y≤x)
+```
+
+### If a family of elements is weakly constant, any of its elements is a least upper bound
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
+  (wc-x : is-weakly-constant-map x)
+  (i : I)
+  where abstract
+
+  is-least-upper-bound-element-weakly-constant-family-of-elements-Large-Poset :
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( P)
+      ( x)
+      ( x i)
+  pr1
+    ( is-least-upper-bound-element-weakly-constant-family-of-elements-Large-Poset
+      y)
+    x≤y =
+    x≤y i
+  pr2
+    ( is-least-upper-bound-element-weakly-constant-family-of-elements-Large-Poset
+      y)
+    xi≤y j =
+    tr
+      ( λ z → leq-Large-Poset P z y)
+      ( wc-x i j)
+      ( xi≤y)
 ```

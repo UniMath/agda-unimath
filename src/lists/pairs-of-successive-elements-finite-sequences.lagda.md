@@ -39,6 +39,6 @@ pair-succ-fin-sequence :
   {l : Level} {A : UU l} (n : ℕ) →
   fin-sequence A (succ-ℕ n) → fin-sequence (A × A) n
 pair-succ-fin-sequence n a i =
-  ( a (skip-zero-Fin n i) ,
-    a (inl-Fin n i))
+  ( a (inl-Fin n i) ,
+    a (inr-Fin n i))
 ```

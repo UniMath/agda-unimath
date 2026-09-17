@@ -369,7 +369,7 @@ module _
                     ( power-Semiring R
                       ( dist-ℕ m (succ-ℕ (succ-ℕ n)))
                       ( y))))
-              ( is-zero-nat-zero-Fin {n})) ∙
+              ( nat-zero-Fin n)) ∙
             ( ( left-unit-law-multiple-Semiring R
                 ( mul-Semiring R
                   ( one-Semiring R)
@@ -568,7 +568,7 @@ binomial-theorem-Semiring R (succ-ℕ (succ-ℕ n)) x y H =
                               ( power-Semiring R
                                 ( dist-ℕ m (succ-ℕ (succ-ℕ n)))
                                 ( y))))
-                        ( is-zero-nat-zero-Fin {n})) ∙
+                        ( nat-zero-Fin n)) ∙
                       ( ( left-unit-law-multiple-Semiring R
                           ( mul-Semiring R
                             ( one-Semiring R)

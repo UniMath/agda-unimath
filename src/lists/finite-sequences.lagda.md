@@ -181,7 +181,7 @@ module _
 
   eq-zero-fin-sequence-sequence :
     (n : ℕ) → fin-sequence-sequence (succ-ℕ n) (zero-Fin n) ＝ u 0
-  eq-zero-fin-sequence-sequence n = ap u (is-zero-nat-zero-Fin {n})
+  eq-zero-fin-sequence-sequence n = ap u (nat-zero-Fin n)
 
   eq-skip-zero-fin-sequence-sequence :
     (n : ℕ) (i : Fin n) →

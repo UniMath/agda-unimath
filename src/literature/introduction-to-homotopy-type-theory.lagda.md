@@ -1202,7 +1202,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types us
 
 ```agda
 open import univalent-combinatorics.standard-finite-types using
-  ( is-zero-nat-zero-Fin -- ι(zero) = 0
+  ( nat-zero-Fin -- ι(zero) = 0
   ; nat-skip-zero-Fin -- ι(skip-zero x) = ι(x) + 1
   )
 open import elementary-number-theory.modular-arithmetic-standard-finite-types using

@@ -21,6 +21,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -321,20 +322,21 @@ module _
     sum-telescope-fin-sequence-type-Ab :
       (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
       sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab n u) ＝
-      right-subtraction-Ab G (head-fin-sequence n u) (last-fin-sequence n u)
+      right-subtraction-Ab G (last-fin-sequence n u) (head-fin-sequence n u)
     sum-telescope-fin-sequence-type-Ab 0 u =
-      inv (right-inverse-law-add-Ab G (head-fin-sequence 0 u))
+      inv (right-inverse-law-add-Ab G (u (inr star)))
     sum-telescope-fin-sequence-type-Ab (succ-ℕ n) u =
       ( ap-add-Ab G
-        ( sum-telescope-fin-sequence-type-Ab n (tail-fin-sequence (succ-ℕ n) u))
+        ( sum-telescope-fin-sequence-type-Ab
+          ( n)
+          ( tail-fin-sequence (succ-ℕ n) u))
         ( refl)) ∙
-      ( commutative-add-Ab G _ _) ∙
       ( add-right-subtraction-Ab G _ _ _)
 
     sum-telescope-fin-sequence-type-Ab' :
       (n : ℕ) (u : fin-sequence-type-Ab G (succ-ℕ n)) →
       sum-fin-sequence-type-Ab G n (telescope-fin-sequence-type-Ab' n u) ＝
-      right-subtraction-Ab G (last-fin-sequence n u) (head-fin-sequence n u)
+      right-subtraction-Ab G (head-fin-sequence n u) (last-fin-sequence n u)
     sum-telescope-fin-sequence-type-Ab' n u =
       ( htpy-sum-fin-sequence-type-Ab G
         ( n)
