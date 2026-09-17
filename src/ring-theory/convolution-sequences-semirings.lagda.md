@@ -24,7 +24,8 @@ open import group-theory.semigroups
 
 open import lists.sequences
 
-open import ring-theory.dirac-sequences-semirings
+open import ring-theory.kronecker-delta-semirings
+open import ring-theory.mutually-centralizing-sequences-semirings
 open import ring-theory.semirings
 open import ring-theory.sequences-semirings
 open import ring-theory.sums-of-finite-families-of-elements-semirings
@@ -43,16 +44,16 @@ of two [sequences](ring-theory.sequences-semirings.md) `aₙ` and `bₙ` in a
 [semiring](ring-theory.semirings.md) is the sequence `c = a ⋆ b` defined by:
 
 ```text
-  cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
+  cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
-With pairwise addition, this operation forms the
+With pointwise addition, this operation forms the
 {{#concept "convolution semiring" Disambiguation="of sequences in a semiring" Agda=convolution-sequence-Semiring}}
 of sequences in a semiring.
 
 Unlike the pointwise semiring structure, the unit of the **convolution
-semiring** is the [dirac sequence](ring-theory.dirac-sequences-semirings.md) at
-`0`, `δ₀ : ℕ → R` given by `(1, 0, 0, 0, ...)`.
+semiring** is the [Kronecker delta](ring-theory.kronecker-delta-semirings.md) at
+`0`, `δ₀ : ℕ → R`, given by `(1, 0, 0, 0, ...)`.
 
 ## Definitions
 
@@ -82,20 +83,21 @@ module _
   where
 
   unit-convolution-sequence-Semiring : type-sequence-Semiring R
-  unit-convolution-sequence-Semiring = dirac-sequence-Semiring R 0
+  unit-convolution-sequence-Semiring = kronecker-delta-Semiring R 0
 ```
 
 ## Properties
 
 ### Commutativity
 
-If `a` and `b` _totally commute_ (i.e. if `aᵢbⱼ = bⱼaᵢ` for all `i j : ℕ`) then
-`a ⋆ b = b ⋆ a`
+If `a` and `b` are
+[mutually centralizing](ring-theory.mutually-centralizing-sequences-semirings.md),
+then `a ⋆ b = b ⋆ a`.
 
 ```agda
 module _
   {l : Level} (R : Semiring l) (a b : type-sequence-Semiring R)
-  (H : all-commute-sequence-Semiring R a b)
+  (H : is-mutually-centralizing-sequence-Semiring R a b)
   where abstract
 
   htpy-commute-mul-convolution-sequence-Semiring :
@@ -205,7 +207,7 @@ module _
       ( R)
       ( a)
       ( unit-convolution-sequence-Semiring R)
-      ( is-central-dirac-sequence-Semiring R a 0) ∙
+      ( is-mutually-centralizing-kronecker-delta-Semiring R a 0) ∙
     left-unit-law-convolution-sequence-Semiring
 ```
 
@@ -385,7 +387,7 @@ module _
       ( R)
       ( _)
       ( _)
-      ( is-central-zero-sequence-Semiring R a) ∙
+      ( is-mutually-centralizing-zero-sequence-Semiring R a) ∙
     left-zero-law-convolution-sequence-Semiring
 ```
 
@@ -441,7 +443,7 @@ module _
     eq-htpy htpy-right-distributive-convolution-add-sequence-Semiring
 ```
 
-### The semiring of sequences in a semirings under convolution
+### The semiring of sequences in a semiring under convolution
 
 ```agda
 module _

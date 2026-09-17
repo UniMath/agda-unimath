@@ -30,7 +30,7 @@ of two [sequences](ring-theory.sequences-rings.md) `aₙ` and `bₙ` in a
 [ring](ring-theory.rings.md) is the sequence `c = a ⋆ b` defined by:
 
 ```text
-  cₙ = ∑_{0 ≤ i ≤ n} aₙ bₙ₋ᵢ
+  cₙ = ∑_{0 ≤ i ≤ n} aᵢ bₙ₋ᵢ
 ```
 
 With pointwise addition, this forms the
@@ -56,15 +56,12 @@ module _
   has-associative-mul-convolution-sequence-Ring :
     has-associative-mul (type-sequence-Ring R)
   has-associative-mul-convolution-sequence-Ring =
-    ( mul-convolution-sequence-Semiring (semiring-Ring R) ,
-      associative-mul-convolution-sequence-Semiring (semiring-Ring R))
+    has-associative-mul-convolution-sequence-Semiring (semiring-Ring R)
 
   is-unital-mul-convolution-sequence-Ring :
     is-unital mul-convolution-sequence-Ring
   is-unital-mul-convolution-sequence-Ring =
-    ( unit-convolution-sequence-Semiring (semiring-Ring R) ,
-      left-unit-law-convolution-sequence-Semiring (semiring-Ring R) ,
-      right-unit-law-convolution-sequence-Semiring (semiring-Ring R))
+    is-unital-mul-convolution-sequence-Semiring (semiring-Ring R)
 
   convolution-sequence-Ring : Ring l
   convolution-sequence-Ring =
