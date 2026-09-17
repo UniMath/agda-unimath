@@ -56,7 +56,7 @@ module _
 
 ## Properties
 
-### Kronecker delta sequences mutually centralize all other sequences
+### Kronecker delta sequences are mutually centralizing with all sequences
 
 ```agda
 module _
