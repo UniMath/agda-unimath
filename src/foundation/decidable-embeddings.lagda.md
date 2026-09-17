@@ -9,6 +9,7 @@ module foundation.decidable-embeddings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
+open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -21,13 +22,13 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retracts-of-arrows
 open import foundation.small-maps
 open import foundation.subtype-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
@@ -39,7 +40,9 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
+open import foundation-core.retractions
+open import foundation-core.retracts-of-types
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 ```
 
@@ -669,6 +672,54 @@ module _
   is-small-map-decidable-emb :
     (f : A ↪ᵈ B) → is-small-map lzero (map-decidable-emb f)
   is-small-map-decidable-emb (f , H) = is-small-map-is-decidable-emb H
+```
+
+### Sections of maps from discrete types give reverse decidable embeddings
+
+```agda
+reverse-decidable-emb-has-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  has-decidable-equality A → section f → B ↪ᵈ A
+reverse-decidable-emb-has-section {f = f} d (s , S) =
+  ( s ,
+    ( is-emb-has-retraction (is-set-has-decidable-equality d) (f , S) ,
+      is-decidable-map-retraction d s (f , S)))
+```
+
+### Decidable embeddings with pointed domains have retractions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (x₀ : X) (e : X ↪ᵈ Y)
+  where
+
+  map-retraction-map-decidable-emb : Y → X
+  map-retraction-map-decidable-emb y =
+    rec-coproduct
+      ( pr1)
+      ( λ _ → x₀)
+      ( is-decidable-map-map-decidable-emb e y)
+
+  is-retraction-map-retraction-map-decidable-emb :
+    is-retraction (map-decidable-emb e) map-retraction-map-decidable-emb
+  is-retraction-map-retraction-map-decidable-emb x =
+    ap
+      ( rec-coproduct pr1 (λ _ → x₀))
+      ( eq-is-prop'
+        ( is-prop-is-decidable
+          ( is-prop-map-is-decidable-emb
+            ( is-decidable-emb-map-decidable-emb e)
+            ( map-decidable-emb e x)))
+        ( is-decidable-map-map-decidable-emb e (map-decidable-emb e x))
+        ( inl (x , refl)))
+
+  retraction-map-decidable-emb : retraction (map-decidable-emb e)
+  retraction-map-decidable-emb =
+    ( map-retraction-map-decidable-emb ,
+      is-retraction-map-retraction-map-decidable-emb)
+
+  retract-decidable-emb : X retract-of Y
+  retract-decidable-emb = (map-decidable-emb e , retraction-map-decidable-emb)
 ```
 
 ## References

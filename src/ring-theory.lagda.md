@@ -22,6 +22,8 @@ open import ring-theory.characteristics-rings public
 open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
+open import ring-theory.convolution-sequences-rings public
+open import ring-theory.convolution-sequences-semirings public
 open import ring-theory.cyclic-rings public
 open import ring-theory.dependent-products-ring-extensions-rational-numbers public
 open import ring-theory.dependent-products-rings public
@@ -54,6 +56,7 @@ open import ring-theory.joins-ideals-rings public
 open import ring-theory.joins-left-ideals-rings public
 open import ring-theory.joins-right-ideals-rings public
 open import ring-theory.kernels-of-ring-homomorphisms public
+open import ring-theory.kronecker-delta-semirings public
 open import ring-theory.large-function-rings public
 open import ring-theory.large-rings public
 open import ring-theory.left-ideals-generated-by-subsets-rings public
@@ -64,6 +67,8 @@ open import ring-theory.maximal-ideals-rings public
 open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.multiples-of-elements-semirings public
 open import ring-theory.multiplicative-orders-of-units-rings public
+open import ring-theory.mutually-centralizing-sequences-rings public
+open import ring-theory.mutually-centralizing-sequences-semirings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
@@ -93,6 +98,8 @@ open import ring-theory.right-ideals-rings public
 open import ring-theory.ring-extensions-rational-numbers public
 open import ring-theory.rings public
 open import ring-theory.semirings public
+open import ring-theory.sequences-rings public
+open import ring-theory.sequences-semirings public
 open import ring-theory.subrings public
 open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
