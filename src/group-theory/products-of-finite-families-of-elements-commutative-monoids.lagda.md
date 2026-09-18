@@ -37,6 +37,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.products-of-finite-families-of-elements-commutative-semigroups
 open import group-theory.products-of-finite-sequences-of-elements-commutative-monoids
 
@@ -780,4 +781,53 @@ module _
         ( ( htpy-product-finite-Commutative-Monoid M _ (ind-Σ H)) ∙
           ( product-unit-finite-Commutative-Monoid M _))) ∙
       ( right-unit-law-mul-Commutative-Monoid M _)
+```
+
+### Commutative monoid homomorphisms distribute over finite sums
+
+```agda
+abstract
+  distributive-hom-product-finite-Commutative-Monoid :
+    {l1 l2 l3 : Level} (M : Commutative-Monoid l1) (N : Commutative-Monoid l2)
+    (φ : hom-Commutative-Monoid M N) (A : Finite-Type l3)
+    (u : type-Finite-Type A → type-Commutative-Monoid M) →
+    map-hom-Commutative-Monoid M N φ
+      ( product-finite-Commutative-Monoid M A u) ＝
+    product-finite-Commutative-Monoid N A (map-hom-Commutative-Monoid M N φ ∘ u)
+  distributive-hom-product-finite-Commutative-Monoid M N φ FA@(A , is-fin-A) u =
+    rec-trunc-Prop
+      ( Id-Prop
+        ( set-Commutative-Monoid N)
+        ( map-hom-Commutative-Monoid M N φ
+          ( product-finite-Commutative-Monoid M FA u))
+        ( product-finite-Commutative-Monoid N FA
+          ( map-hom-Commutative-Monoid M N φ ∘ u)))
+      ( λ cA →
+        equational-reasoning
+          map-hom-Commutative-Monoid M N φ
+            ( product-finite-Commutative-Monoid M FA u)
+          ＝
+            map-hom-Commutative-Monoid M N φ
+              ( product-count-Commutative-Monoid M A cA u)
+            by
+              ap
+                ( map-hom-Commutative-Monoid M N φ)
+                ( eq-product-finite-product-count-Commutative-Monoid M FA cA u)
+          ＝
+            product-count-Commutative-Monoid N A cA
+              ( map-hom-Commutative-Monoid M N φ ∘ u)
+            by
+              distributive-hom-product-fin-sequence-type-Commutative-Monoid
+                ( M)
+                ( N)
+                ( φ)
+                ( _)
+                ( _)
+          ＝
+            product-finite-Commutative-Monoid N FA
+              ( map-hom-Commutative-Monoid M N φ ∘ u)
+            by
+              inv
+                ( eq-product-finite-product-count-Commutative-Monoid N FA cA _))
+      ( is-fin-A)
 ```

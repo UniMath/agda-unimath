@@ -21,6 +21,7 @@ open import group-theory.monoids
 open import group-theory.semigroups
 
 open import linear-algebra.finite-sequences-in-commutative-rings
+open import linear-algebra.left-modules-commutative-rings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
@@ -207,32 +208,17 @@ module _
       ( commutative-ring-Euclidean-Domain R)
 ```
 
-### The abelian group of pointwise addition
+### The left module of finite sequences on a Euclidean domain
 
 ```agda
 module _
   {l : Level} (R : Euclidean-Domain l)
   where
 
-  semigroup-fin-sequence-type-Euclidean-Domain : ℕ → Semigroup l
-  semigroup-fin-sequence-type-Euclidean-Domain =
-    semigroup-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  monoid-fin-sequence-type-Euclidean-Domain : ℕ → Monoid l
-  monoid-fin-sequence-type-Euclidean-Domain =
-    monoid-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  commutative-monoid-fin-sequence-type-Euclidean-Domain :
-    ℕ → Commutative-Monoid l
-  commutative-monoid-fin-sequence-type-Euclidean-Domain =
-    commutative-monoid-fin-sequence-type-Commutative-Ring
-      ( commutative-ring-Euclidean-Domain R)
-
-  group-fin-sequence-type-Euclidean-Domain : ℕ → Group l
-  group-fin-sequence-type-Euclidean-Domain =
-    group-fin-sequence-type-Commutative-Ring
+  left-module-fin-sequence-type-Euclidean-Domain :
+    ℕ → left-module-Commutative-Ring l (commutative-ring-Euclidean-Domain R)
+  left-module-fin-sequence-type-Euclidean-Domain =
+    left-module-fin-sequence-Commutative-Ring
       ( commutative-ring-Euclidean-Domain R)
 
   ab-fin-sequence-type-Euclidean-Domain : ℕ → Ab l

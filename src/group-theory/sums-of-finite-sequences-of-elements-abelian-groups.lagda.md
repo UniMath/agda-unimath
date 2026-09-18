@@ -344,6 +344,21 @@ module _
       ( neg-right-subtraction-Ab G _ _)
 ```
 
+### Abelian group homomorphisms distribute over sums
+
+```agda
+abstract
+  distributive-hom-sum-fin-sequence-type-Ab :
+    {l1 l2 : Level} (G : Ab l1) (H : Ab l2) (φ : hom-Ab G H) →
+    (n : ℕ) (u : fin-sequence-type-Ab G n) →
+    map-hom-Ab G H φ (sum-fin-sequence-type-Ab G n u) ＝
+    sum-fin-sequence-type-Ab H n (map-hom-Ab G H φ ∘ u)
+  distributive-hom-sum-fin-sequence-type-Ab G H =
+    distributive-hom-product-fin-sequence-type-Group
+      ( group-Ab G)
+      ( group-Ab H)
+```
+
 ## See also
 
 - [Products of finite families of elements in commutative monoids](group-theory.products-of-finite-families-of-elements-commutative-monoids.md)

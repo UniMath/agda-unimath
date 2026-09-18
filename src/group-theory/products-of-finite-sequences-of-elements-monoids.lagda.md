@@ -19,6 +19,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 open import group-theory.powers-of-elements-monoids
 
@@ -221,4 +222,22 @@ abstract
     ap-mul-Monoid M
       ( product-constant-fin-sequence-type-Monoid M n x)
       ( refl)
+```
+
+### Monoid homomorphisms distribute over products
+
+```agda
+abstract
+  distributive-hom-product-fin-sequence-type-Monoid :
+    {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (φ : hom-Monoid M N) →
+    (n : ℕ) (u : fin-sequence-type-Monoid M n) →
+    map-hom-Monoid M N φ (product-fin-sequence-type-Monoid M n u) ＝
+    product-fin-sequence-type-Monoid N n (map-hom-Monoid M N φ ∘ u)
+  distributive-hom-product-fin-sequence-type-Monoid M N φ 0 u =
+    preserves-unit-hom-Monoid M N φ
+  distributive-hom-product-fin-sequence-type-Monoid M N φ (succ-ℕ n) u =
+    ( preserves-mul-hom-Monoid M N φ) ∙
+    ( ap-mul-Monoid N
+      ( distributive-hom-product-fin-sequence-type-Monoid M N φ n (u ∘ inl))
+      ( refl))
 ```
