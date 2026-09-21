@@ -127,6 +127,7 @@ open import metric-spaces.limits-of-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-maps-metric-spaces public
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
+open import metric-spaces.limits-of-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.lipschitz-maps-metric-spaces public
 open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
@@ -173,6 +174,7 @@ open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-rational-neighborhood-relations public
 open import metric-spaces.saturated-rational-neighborhood-relations public
 open import metric-spaces.sequences-metric-spaces public
+open import metric-spaces.sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.short-maps-metric-spaces public
 open import metric-spaces.short-maps-pseudometric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public
