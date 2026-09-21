@@ -26,14 +26,21 @@ open import synthetic-homotopy-theory.shifts-sequential-diagrams
 ## Idea
 
 Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-`(A , a)`, there's a family
+`(A , a)`, the family of
 {{#concept "interval maps" Disambiguation="of sequential diagram" Agda=map-leq-sequential-diagram}}
 
 ```text
   ϕᵢʲ : Aᵢ → Aⱼ
 ```
 
-indexed by pairs `i j : ℕ` with `i ≤ j`, such that:
+indexed by pairs `i j : ℕ` with `i ≤ j`, is the family
+
+```text
+            aᵢ          aᵢ₊₁                 aⱼ₋₁
+  ϕᵢʲ : Aᵢ ----> Aᵢ₊₁ -------> Aᵢ₊₂ --> ... ------> Aⱼ.
+```
+
+It satisfies:
 
 - for any `i : ℕ`, `ϕᵢⁱ ~ id`;
 - for any `i j k : ℕ` with `i ≤ j` and `j ≤ k`, `ϕᵢᵏ ~ ϕⱼᵏ ∘ ϕᵢʲ`.
