@@ -28,7 +28,7 @@ open import set-theory.cardinals
 
 ## Idea
 
-A [cardinal of sets](set-theory.cardinals.md) `κ` is
+A [cardinal](set-theory.cardinals.md) `κ` is
 {{#concept "inhabited" Disambiguation="cardinal" Agda=is-inhabited-Cardinal}},
 if any [set](foundation-core.sets.md) in its isomorphism class is
 [inhabited](foundation.inhabited-types.md).
