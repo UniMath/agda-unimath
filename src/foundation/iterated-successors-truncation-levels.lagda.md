@@ -12,13 +12,10 @@ open import foundation-core.iterated-successors-truncation-levels public
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.truncation-levels
 
-open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.iterating-functions
 ```
 
 </details>

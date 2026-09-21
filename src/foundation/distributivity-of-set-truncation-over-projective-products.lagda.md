@@ -23,7 +23,6 @@ open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.projective-types
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-truncations
 open import foundation.sets

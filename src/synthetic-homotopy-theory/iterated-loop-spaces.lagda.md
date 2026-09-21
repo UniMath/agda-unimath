@@ -9,7 +9,6 @@ module synthetic-homotopy-theory.iterated-loop-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.function-types
 open import foundation.iterating-functions
 open import foundation.truncated-types
 open import foundation.truncation-levels
