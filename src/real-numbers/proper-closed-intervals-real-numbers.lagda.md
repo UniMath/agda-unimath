@@ -139,6 +139,12 @@ width-proper-closed-interval-ℝ (a , b , _) = b -ℝ a
 
 ### The interior of a proper closed interval
 
+The
+{{#concept "interior" Disambiguation="of a proper closed interval in ℝ" Agda=subtype-interior-proper-closed-interval-ℝ}}
+of a proper closed interval `[a, b]` is the
+[subset](real-numbers.subsets-real-numbers.md) of real numbers `x` such that
+`a < x < b`.
+
 ```agda
 subtype-interior-proper-closed-interval-ℝ :
   {l1 l2 : Level} (l : Level) (I : proper-closed-interval-ℝ l1 l2) →
@@ -147,21 +153,21 @@ subtype-interior-proper-closed-interval-ℝ l I x =
   le-prop-ℝ (lower-bound-proper-closed-interval-ℝ I) x ∧
   le-prop-ℝ x (upper-bound-proper-closed-interval-ℝ I)
 
-is-interior-proper-closed-interval-ℝ :
+is-in-interior-proper-closed-interval-ℝ :
   {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2) →
   ℝ l → UU (l1 ⊔ l2 ⊔ l)
-is-interior-proper-closed-interval-ℝ I x =
+is-in-interior-proper-closed-interval-ℝ I x =
   type-Prop (subtype-interior-proper-closed-interval-ℝ _ I x)
 
-is-prop-is-interior-proper-closed-interval-ℝ :
+is-prop-is-in-interior-proper-closed-interval-ℝ :
   {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2) →
-  (x : ℝ l) → is-prop (is-interior-proper-closed-interval-ℝ I x)
-is-prop-is-interior-proper-closed-interval-ℝ I x =
+  (x : ℝ l) → is-prop (is-in-interior-proper-closed-interval-ℝ I x)
+is-prop-is-in-interior-proper-closed-interval-ℝ I x =
   is-prop-type-Prop (subtype-interior-proper-closed-interval-ℝ _ I x)
 
 type-interior-proper-closed-interval-ℝ :
   {l1 l2 : Level} (l : Level) (I : proper-closed-interval-ℝ l1 l2) →
-  UU (lsuc l ⊔ l1 ⊔ l2 ⊔ lsuc l)
+  UU (l1 ⊔ l2 ⊔ lsuc l)
 type-interior-proper-closed-interval-ℝ l I =
   type-subtype (subtype-interior-proper-closed-interval-ℝ l I)
 ```
