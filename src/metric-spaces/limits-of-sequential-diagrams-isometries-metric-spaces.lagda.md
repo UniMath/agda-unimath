@@ -67,7 +67,7 @@ is the
 [metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md) of
 the [pseudometric space](metric-spaces.pseudometric-spaces.md) induced by the
 action of the
-[interval isometries](interval-isometries-sequential-diagrams-isometries-metric-spaces.md)
+[interval isometries](metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces.md)
 
 ```text
   ϕ : (i j : ℕ) (i ≤ j) → Mᵢ → Mⱼ
