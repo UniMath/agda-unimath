@@ -18,13 +18,18 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.isometries-metric-spaces
+open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
@@ -32,8 +37,10 @@ open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
+open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
 
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
@@ -271,10 +278,140 @@ module _
 
   pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     Pseudometric-Space l1 l2
-  pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
-    ( type-Metric-Space
+  pr1 pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
+    type-Metric-Space
       ( tot-metric-space-sequential-diagram-isometry-Metric-Space M)
-    , pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space)
+  pr2 pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
+    pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space
+
+  metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)
+  metric-space-limit-sequential-diagram-isometry-Metric-Space =
+    metric-quotient-Pseudometric-Space
+      pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (n : ℕ)
+  where
+
+  map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    family-sequential-diagram-isometry-Metric-Space M n →
+    type-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+  map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space x =
+    (n , x)
+
+  is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space
+         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    d x y Nxy k H H' =
+    tr
+      ( neighborhood-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M k)
+        ( d)
+        ( map-isometry-leq-sequential-diagram-isometry-Metric-Space M n k H x))
+      ( ap
+        ( λ K →
+          map-isometry-leq-sequential-diagram-isometry-Metric-Space M n k K y)
+        ( eq-is-prop (is-prop-leq-ℕ n k)))
+      ( preserves-neighborhoods-map-isometry-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M k)
+        ( isometry-leq-sequential-diagram-isometry-Metric-Space M n k H)
+        ( d)
+        ( x)
+        ( y)
+        ( Nxy))
+
+  is-expansive-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-expansive-map-Pseudometric-Space
+      ( pseudometric-Metric-Space
+         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-expansive-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    d x y Nxy =
+    Vxy
+    where
+      Vxy :
+        neighborhood-Metric-Space
+          ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+          ( d)
+          ( x)
+          ( y)
+      Vxy =
+        reflects-neighborhoods-map-isometry-Metric-Space
+          ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+          ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+          ( isometry-leq-sequential-diagram-isometry-Metric-Space
+            ( M)
+            ( n)
+            ( n)
+            ( refl-leq-ℕ n))
+          ( d)
+          ( x)
+          ( y)
+          ( Nxy n (refl-leq-ℕ n) (refl-leq-ℕ n))
+
+  is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space
+         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space
+         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+      ( is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+      ( is-expansive-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+
+  seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space
+         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+  seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    ,
+      is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+
+  seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+  seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space =
+    comp-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-metric-quotient-Pseudometric-Space
+        ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M))
+      ( isometry-unit-metric-quotient-Pseudometric-Space
+        ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M))
+      ( seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+
+  seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    family-sequential-diagram-isometry-Metric-Space M n →
+    type-Metric-Space
+      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+  seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space =
+    map-isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space)
 ```
 
 ## Properties
@@ -285,7 +422,7 @@ module _
   (M : sequential-diagram-isometry-Metric-Space l1 l2)
   where
 
-  sim-map-isometry-leq-sequential-diagram-isometry-Metric-Space :
+  sim-map-isometry-leq-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     (i j : ℕ) →
     (H : leq-ℕ i j) →
     (x : family-sequential-diagram-isometry-Metric-Space M i) →
@@ -293,7 +430,7 @@ module _
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
       ( i , x)
       ( j , map-isometry-leq-sequential-diagram-isometry-Metric-Space M i j H x)
-  sim-map-isometry-leq-sequential-diagram-isometry-Metric-Space
+  sim-map-isometry-leq-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
     i j H x d n Hi Hj =
     sim-eq-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
@@ -309,4 +446,85 @@ module _
         ( Hi)
         ( x))
       ( d)
+
+  sim-map-succ-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    (n : ℕ) →
+    (x : family-sequential-diagram-isometry-Metric-Space M n) →
+    sim-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( n , x)
+      ( succ-ℕ n ,
+        seq-map-isometry-sequential-diagram-isometry-Metric-Space M n x)
+  sim-map-succ-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    n x =
+    inv-tr
+      ( λ y →
+        sim-Pseudometric-Space
+        ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+        ( n , x)
+        ( succ-ℕ n , y))
+      ( compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( n)
+        ( succ-leq-ℕ n)
+        ( x))
+      ( sim-map-isometry-leq-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( n)
+        ( succ-ℕ n)
+        ( succ-leq-ℕ n)
+        ( x))
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  compute-map-isometry-leq-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    (i j : ℕ) →
+    (H : leq-ℕ i j) →
+    (x : family-sequential-diagram-isometry-Metric-Space M i) →
+    seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space M i x ＝
+    seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space M j
+      ( map-isometry-leq-sequential-diagram-isometry-Metric-Space M i j H x)
+  compute-map-isometry-leq-metric-space-limit-sequential-diagram-isometry-Metric-Space
+    i j H x =
+    eq-map-unit-metric-quotient-sim-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( _)
+      ( _)
+      ( sim-map-isometry-leq-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( i)
+        ( j)
+        ( H)
+        ( x))
+
+  is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    (n : ℕ) →
+    seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space M n ~
+    seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( M)
+      ( succ-ℕ n) ∘
+    seq-map-isometry-sequential-diagram-isometry-Metric-Space M n
+  is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+    n x =
+    eq-map-unit-metric-quotient-sim-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( _)
+      ( _)
+      ( sim-map-succ-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( n)
+        ( x))
+
+  cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    cocone-sequential-diagram-isometry-Metric-Space
+      ( M)
+      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+  pr1 cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space =
+    seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space M
+  pr2 cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space =
+    is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
 ```

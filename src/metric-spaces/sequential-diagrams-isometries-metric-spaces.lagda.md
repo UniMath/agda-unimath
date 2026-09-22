@@ -13,9 +13,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -145,13 +148,94 @@ module _
     seq-isometry-sequential-diagram-isometry-Metric-Space M (succ-ℕ n)
 ```
 
+### Cocones under sequential diagrams of isometries
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  ( M : sequential-diagram-isometry-Metric-Space l1 l2)
+  ( X : Metric-Space l3 l4)
+  ( f :
+    (n : ℕ) →
+    isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( X))
+  where
+
+  is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space :
+    Prop (l1 ⊔ l3)
+  is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space =
+    Π-Prop
+      ( ℕ)
+      ( λ n →
+        htpy-map-prop-isometry-Metric-Space
+          ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+          ( X)
+          ( f n)
+          ( comp-isometry-Metric-Space
+            ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+            ( seq-metric-space-sequential-diagram-isometry-Metric-Space
+              ( M)
+              ( succ-ℕ n))
+            ( X)
+            ( f (succ-ℕ n))
+            ( seq-isometry-sequential-diagram-isometry-Metric-Space M n)))
+
+  is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space :
+    UU (l1 ⊔ l3)
+  is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space =
+    type-Prop
+      is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space
+
+  is-prop-is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space :
+    is-prop
+      is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space
+  is-prop-is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space =
+    is-prop-type-Prop
+      is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space
+
+module _
+  { l1 l2 l3 l4 : Level}
+  ( M : sequential-diagram-isometry-Metric-Space l1 l2)
+  ( X : Metric-Space l3 l4)
+  where
+
+  cocone-sequential-diagram-isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  cocone-sequential-diagram-isometry-Metric-Space =
+    type-subtype
+      ( is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( X))
+
+module _
+  { l1 l2 l3 l4 : Level}
+  { M : sequential-diagram-isometry-Metric-Space l1 l2}
+  { X : Metric-Space l3 l4}
+  ( C : cocone-sequential-diagram-isometry-Metric-Space M X)
+  where
+
+  seq-isometry-cocone-sequential-diagram-isometry-Metric-Space :
+    (n : ℕ) →
+    isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( X)
+  seq-isometry-cocone-sequential-diagram-isometry-Metric-Space = pr1 C
+
+  coh-triangle-cocone-sequential-diagram-isometry-Metric-Space :
+    is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space
+      ( M)
+      ( X)
+      ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space)
+  coh-triangle-cocone-sequential-diagram-isometry-Metric-Space = pr2 C
+```
+
 ## Properties
 
 ### Induced isometries by intervals of natural numbers
 
-If `(M ,f) : M₀ → M₁ → M₂ → ...` is a sequential diagram of isometries, then for
-any `i j : ℕ` with `i ≤ j`, there's an isometry `Mᵢ → Mⱼ` obtained by
-composition of the `fᵢ`s.
+If `(M , f) : M₀ → M₁ → M₂ → ...` is a sequential diagram of isometries, then
+for any `i j : ℕ` with `i ≤ j`, there's an isometry `Mᵢ → Mⱼ` obtained by
+composition of the `fₙ`s.
 
 ```agda
 module _
@@ -213,6 +297,28 @@ module _
   compute-map-isometry-diag-leq-sequential-diagram-isometry-Metric-Space
     M (succ-ℕ n) H =
     compute-map-isometry-diag-leq-sequential-diagram-isometry-Metric-Space
+      ( shift-sequential-diagram-isometry-Metric-Space M)
+      ( n)
+      ( H)
+
+  compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space :
+    (M : sequential-diagram-isometry-Metric-Space l1 l2) →
+    (n : ℕ) →
+    (H : leq-ℕ n (succ-ℕ n)) →
+    htpy-map-isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M (succ-ℕ n))
+      ( seq-isometry-sequential-diagram-isometry-Metric-Space M n)
+      ( isometry-leq-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( n)
+        ( succ-ℕ n)
+        ( H))
+  compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
+    M zero-ℕ H = refl-htpy
+  compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
+    M (succ-ℕ n) H =
+    compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
       ( shift-sequential-diagram-isometry-Metric-Space M)
       ( n)
       ( H)
