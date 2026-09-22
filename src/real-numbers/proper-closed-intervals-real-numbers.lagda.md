@@ -1062,24 +1062,25 @@ module _
   {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2)
   where
 
-  is-in-proper-closed-interval-is-interior-proper-closed-interval-ℝ :
+  is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ :
     (x : ℝ l) →
-    is-interior-proper-closed-interval-ℝ I x →
+    is-in-interior-proper-closed-interval-ℝ I x →
     is-in-proper-closed-interval-ℝ I x
-  is-in-proper-closed-interval-is-interior-proper-closed-interval-ℝ
+  is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
     x (lo-bound , hi-bound) =
     ( leq-le-ℝ lo-bound , leq-le-ℝ hi-bound)
 
-  in-proper-closed-interval-is-interior-proper-closed-interval-ℝ :
+  in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ :
     (x : ℝ l) →
-    is-interior-proper-closed-interval-ℝ I x →
+    is-in-interior-proper-closed-interval-ℝ I x →
     type-proper-closed-interval-ℝ l I
-  in-proper-closed-interval-is-interior-proper-closed-interval-ℝ x H =
-    ( x , is-in-proper-closed-interval-is-interior-proper-closed-interval-ℝ x H)
+  in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H =
+    ( x ,
+      is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H)
 
-  in-proper-interval-interior-proper-closed-interval-ℝ :
+  inclusion-interior-proper-closed-interval-ℝ :
     type-interior-proper-closed-interval-ℝ l I →
     type-proper-closed-interval-ℝ l I
-  in-proper-interval-interior-proper-closed-interval-ℝ (x , H) =
-    in-proper-closed-interval-is-interior-proper-closed-interval-ℝ x H
+  inclusion-interior-proper-closed-interval-ℝ (x , H) =
+    in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H
 ```
