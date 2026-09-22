@@ -22,6 +22,7 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
@@ -118,6 +119,22 @@ module _
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M i)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M j)
       ( isometry-leq-sequential-diagram-isometry-Metric-Space M i j H)
+```
+
+## Properties
+
+### Identity law
+
+The interval isometry of a singleton interval is the identity:
+
+```text
+  ∀ (i : ℕ) → ϕᵢⁱ ~ id
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
 
   compute-map-isometry-diag-leq-sequential-diagram-isometry-Metric-Space :
     (M : sequential-diagram-isometry-Metric-Space l1 l2) →
@@ -134,14 +151,10 @@ module _
       ( H)
 ```
 
-## Properties
-
-### Identity law
-
-The interval isometry of a singleton interval is the identity:
+### Successor law
 
 ```text
-  ϕᵢⁱ ~ id
+  ∀ (i : ℕ) → ϕᵢⁱ⁺¹ ~ fᵢ
 ```
 
 ```agda
@@ -156,12 +169,12 @@ module _
     htpy-map-isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M (succ-ℕ n))
-      ( seq-isometry-sequential-diagram-isometry-Metric-Space M n)
       ( isometry-leq-sequential-diagram-isometry-Metric-Space
         ( M)
         ( n)
         ( succ-ℕ n)
         ( H))
+      ( seq-isometry-sequential-diagram-isometry-Metric-Space M n)
   compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
     M zero-ℕ H = refl-htpy
   compute-map-isometry-succ-leq-sequential-diagram-isometry-Metric-Space
@@ -350,4 +363,72 @@ module _
       ( Hij)
       ( Hjk)
       ( Hik)
+```
+
+### Cocone laws
+
+For any cocone
+
+```text
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> X
+```
+
+under a sequential diagram `(M , f)`, the interval isometries `ϕᵢʲ : Mᵢ → Mⱼ`
+induce commutative triangles of isometries:
+
+```text
+      ϕᵢʲ
+ Mᵢ ------> Mⱼ
+   \       /
+    \     /
+  iᵢ \   / iⱼ
+      ∨ ∨
+       X
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  where
+
+  coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space :
+    (M : sequential-diagram-isometry-Metric-Space l1 l2) →
+    (X : Metric-Space l3 l4) →
+    (C : cocone-sequential-diagram-isometry-Metric-Space M X) →
+    (i j : ℕ) →
+    (H : leq-ℕ i j) →
+    htpy-map-isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M i)
+      ( X)
+      ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C i)
+      ( comp-isometry-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M i)
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M j)
+        ( X)
+        ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C j)
+        ( isometry-leq-sequential-diagram-isometry-Metric-Space M i j H))
+  coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+    M X C zero-ℕ zero-ℕ H x = refl
+  coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+    M X C zero-ℕ (succ-ℕ j) H x =
+    coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+      ( M)
+      ( X)
+      ( C)
+      ( zero-ℕ)
+      ( j)
+      ( H)
+      ( x) ∙
+    coh-triangle-cocone-sequential-diagram-isometry-Metric-Space M X C j _
+  coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+    M X C (succ-ℕ i) (succ-ℕ j) H x =
+    coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+      ( shift-sequential-diagram-isometry-Metric-Space M)
+      ( X)
+      ( cocone-shift-sequential-diagram-isometry-Metric-Space M X C)
+      ( i)
+      ( j)
+      ( H)
+      ( x)
 ```

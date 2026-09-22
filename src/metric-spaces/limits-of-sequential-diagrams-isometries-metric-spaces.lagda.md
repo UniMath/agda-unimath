@@ -554,7 +554,7 @@ module _
         seq-map-isometry-sequential-diagram-isometry-Metric-Space M n x)
   sim-map-succ-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
     n x =
-    inv-tr
+    tr
       ( λ y →
         sim-Pseudometric-Space
         ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)

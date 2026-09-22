@@ -102,9 +102,9 @@ module _
       is-coherent-seq-map-prop-cocone-sequential-diagram-isometry-Metric-Space
 
 module _
-  { l1 l2 l3 l4 : Level}
-  ( M : sequential-diagram-isometry-Metric-Space l1 l2)
-  ( X : Metric-Space l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (X : Metric-Space l3 l4)
   where
 
   cocone-sequential-diagram-isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -115,10 +115,10 @@ module _
         ( X))
 
 module _
-  { l1 l2 l3 l4 : Level}
-  { M : sequential-diagram-isometry-Metric-Space l1 l2}
-  { X : Metric-Space l3 l4}
-  ( C : cocone-sequential-diagram-isometry-Metric-Space M X)
+  {l1 l2 l3 l4 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (X : Metric-Space l3 l4)
+  (C : cocone-sequential-diagram-isometry-Metric-Space M X)
   where
 
   seq-isometry-cocone-sequential-diagram-isometry-Metric-Space :
