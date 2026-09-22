@@ -11,10 +11,12 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -242,4 +244,48 @@ module _
       ( Hij)
       ( Hjk)
       ( Hik)
+```
+
+### Coherent squares induced by quadruples of natural numbers
+
+For any `m i j n : ℕ` with `m ≤ i`, `m ≤ j`, `i ≤ n` and `j ≤ n`, there's a
+commutative square of interval maps:
+
+```text
+     Aₘ ---------> Aᵢ
+     |             |
+     |             |
+     |             |
+     v             v
+     Aⱼ ---------> Aₙ
+```
+
+where the diagonal map is `ϕₘⁿ`.
+
+```agda
+module _
+  {l : Level} (A : sequential-diagram l)
+  (m i j n : ℕ)
+  (Hmi : leq-ℕ m i)
+  (Hmj : leq-ℕ m j)
+  (Hin : leq-ℕ i n)
+  (Hjn : leq-ℕ j n)
+  where
+
+  coh-square-map-leq-sequential-diagram :
+    coherence-square-maps
+      ( map-leq-sequential-diagram A m i Hmi)
+      ( map-leq-sequential-diagram A m j Hmj)
+      ( map-leq-sequential-diagram A i n Hin)
+      ( map-leq-sequential-diagram A j n Hjn)
+  coh-square-map-leq-sequential-diagram x =
+    inv (compute-comp-map-leq-sequential-diagram A m j n Hmj Hjn Hmn x) ∙
+    ap
+      ( λ K → map-leq-sequential-diagram A m n K x)
+      ( eq-is-prop (is-prop-leq-ℕ m n)) ∙
+    compute-comp-map-leq-sequential-diagram A m i n Hmi Hin Hmn x
+    where
+
+    Hmn : leq-ℕ m n
+    Hmn = transitive-leq-ℕ m i n Hin Hmi
 ```
