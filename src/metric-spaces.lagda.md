@@ -87,6 +87,7 @@ open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
+open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces public
@@ -119,6 +120,7 @@ open import metric-spaces.images-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.indexed-sums-metric-spaces public
 open import metric-spaces.inhabited-totally-bounded-subspaces-metric-spaces public
 open import metric-spaces.interior-subsets-metric-spaces public
+open import metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
@@ -175,6 +177,7 @@ open import metric-spaces.reflexive-rational-neighborhood-relations public
 open import metric-spaces.saturated-rational-neighborhood-relations public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.sequential-diagrams-isometries-metric-spaces public
+open import metric-spaces.shifts-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.short-maps-metric-spaces public
 open import metric-spaces.short-maps-pseudometric-spaces public
 open import metric-spaces.similarity-of-elements-pseudometric-spaces public

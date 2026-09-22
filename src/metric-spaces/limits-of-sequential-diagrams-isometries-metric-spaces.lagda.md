@@ -25,8 +25,10 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
+open import metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
@@ -49,16 +51,49 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 ## Idea
 
-Limits of diagrams of isometries
+The
+{{#concept "limit" Disambiguation="of a sequential diagram of isometries" Agda=metric-space-limit-sequential-diagram-isometry-Metric-Space}}
+of a
+[sequential diagram](metric-spaces.sequential-diagrams-isometries-metric-spaces.md)
+of [isometries](metric-spaces.isometries-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md):
 
 ```text
-     f₀      f₁      f₂
- M₀ ---> M₁ ---> M₂ ---> ⋯
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯
 ```
+
+is the
+[metric quotient](metric-spaces.metric-quotients-of-pseudometric-spaces.md) of
+the [pseudometric space](metric-spaces.pseudometric-spaces.md) induced by the
+action of the
+[interval isometries](interval-isometries-sequential-diagrams-isometries-metric-spaces.md)
+
+```text
+  ϕ : (i j : ℕ) (i ≤ j) → Mᵢ → Mⱼ
+```
+
+on the total space `M∙ = Σ (n : ℕ) Mₙ`.
+
+In other words, we consider the pseudometric structure on `M∙` such that any
+`(i , xⱼ)` and `(j , xⱼ)` are `d`-neighbors in `M∙` if and only if for any
+common upper bound `n` of `i` and `j`, `ϕᵢⁿ xᵢ` and `ϕⱼⁿ xⱼ` are `d`-neighbors
+in `Mₙ`.
+
+The metric quotient `M∞ = [M∙]` of `M∙` is equipped with a
+[cocone](metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces.md)
+under `M`:
+
+```text
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ---> M∞
+```
+
+TODO: prove the universal property of limits.
 
 ## Definitions
 
-### Limits of sequential diagrams of isometries
+### The limit neighborhood on the total space of a sequential diagram
 
 ```agda
 module _
@@ -99,10 +134,19 @@ module _
                     ( k)
                     ( Hn)
                     ( xₙ)))))
+```
+
+### Pseudometric limit structure
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
 
   is-reflexive-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space :
     is-reflexive-Rational-Neighborhood-Relation
-      neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
+      ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space M)
   is-reflexive-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     d (n , x) k Hn Hn' =
     sim-eq-Metric-Space
@@ -117,7 +161,7 @@ module _
 
   is-symmetric-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space :
     is-symmetric-Rational-Neighborhood-Relation
-      neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
+      ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space M)
   is-symmetric-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     d (m , x) (n , y) Nxy k Hm Hn =
     symmetric-neighborhood-Metric-Space
@@ -129,7 +173,7 @@ module _
 
   is-triangular-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space :
     is-triangular-Rational-Neighborhood-Relation
-      neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
+      ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space M)
   is-triangular-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     (i , xᵢ) (j , xⱼ) (k , xₖ) dij djk Njk Nij n Hi Hk =
     reflects-neighborhoods-map-isometry-Metric-Space
@@ -250,7 +294,7 @@ module _
 
   is-saturated-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space :
     is-saturated-Rational-Neighborhood-Relation
-      neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
+      ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space M)
   is-saturated-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     d (m , x) (n , y) sat-Nxy k Hm Hn =
     saturated-neighborhood-Metric-Space
@@ -266,7 +310,7 @@ module _
       ( type-Metric-Space
         ( tot-metric-space-sequential-diagram-isometry-Metric-Space M))
   pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space =
-    ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
+    ( neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space M
     ,
       is-reflexive-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     ,
@@ -275,6 +319,15 @@ module _
       is-triangular-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space
     ,
       is-saturated-neighborhood-prop-limit-sequential-diagram-isometry-Metric-Space)
+```
+
+### The limit pseudometric space of a sequential diagram of isometries
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
 
   pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     Pseudometric-Space l1 l2
@@ -282,14 +335,28 @@ module _
     type-Metric-Space
       ( tot-metric-space-sequential-diagram-isometry-Metric-Space M)
   pr2 pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
-    pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space
+    pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space M
+```
+
+### The limit metric space of a sequential diagram of isometries
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
 
   metric-space-limit-sequential-diagram-isometry-Metric-Space :
     Metric-Space (l1 ⊔ l2) (l1 ⊔ l2)
   metric-space-limit-sequential-diagram-isometry-Metric-Space =
     metric-quotient-Pseudometric-Space
-      pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
 ```
+
+### The unit isometry into the limit pseudometric space
+
+For any `n : ℕ`, the **unit isometry** `ιₙ : Mₙ → M∙` is the map
+`xₙ ↦ (n , xₙ)`.
 
 ```agda
 module _
@@ -387,6 +454,26 @@ module _
     ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
     ,
       is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+```
+
+### The unit isometry into the limit metric space
+
+For any `n : ℕ`, the **unit isometry** `Mₙ → M∞` is obtained by composition with
+the
+[unit map](metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces.md) of
+metric quotients:
+
+```text
+      ιₙ       q
+  Mₙ ----> M∙ ----> M∞
+```
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (n : ℕ)
+  where
 
   seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space :
     isometry-Metric-Space
@@ -401,7 +488,9 @@ module _
         ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M))
       ( isometry-unit-metric-quotient-Pseudometric-Space
         ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M))
-      ( seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+      ( seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( n))
 
   seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space :
     family-sequential-diagram-isometry-Metric-Space M n →
@@ -415,6 +504,14 @@ module _
 ```
 
 ## Properties
+
+### Similarity laws in the limit pseudometric space
+
+For any `i j : ℕ` with `i ≤ j`, and for any `xᵢ : Mᵢ`, `ιᵢ xᵢ` and `ιⱼ (ϕᵢʲ xᵢ)`
+are [similar](metric-spaces.similarity-of-elements-pseudometric-spaces.md) in
+`M∙`.
+
+In particular, for any `n : ℕ` and `xₙ : Mₙ`, `ιₙ xₙ ≍ ιₙ₊₁ (fₙ xₙ)` in `M∙`.
 
 ```agda
 module _
@@ -475,6 +572,24 @@ module _
         ( x))
 ```
 
+### Coherence laws in the limit metric space
+
+For any `i j : ℕ` with `i ≤ j`,
+
+```text
+  q ∘ ιᵢ ~ q ∘ ιⱼ ∘ ϕᵢʲ
+```
+
+in the space isometries `Mᵢ → M∞`.
+
+In particular, for any `n : ℕ`
+
+```text
+  q ∘ ιₙ ~ q ∘ ιₙ₊₁ ∘ fₙ
+```
+
+in the space of isometries `Mₙ → M∞`.
+
 ```agda
 module _
   {l1 l2 : Level}
@@ -518,6 +633,24 @@ module _
         ( M)
         ( n)
         ( x))
+```
+
+### Limit cocone under a sequential diagram of isometries
+
+The sequence of unit maps into the metric limit induce a cocone
+
+```text
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ---> M∞
+```
+
+under `(M , f)`.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
 
   cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space :
     cocone-sequential-diagram-isometry-Metric-Space
@@ -527,4 +660,5 @@ module _
     seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space M
   pr2 cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space =
     is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      M
 ```
