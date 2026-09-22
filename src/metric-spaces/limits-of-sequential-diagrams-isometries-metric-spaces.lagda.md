@@ -36,8 +36,8 @@ open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
 open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.sequential-diagrams-isometries-metric-spaces
-open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.short-maps-pseudometric-spaces
+open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
@@ -308,7 +308,7 @@ module _
   is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     is-short-map-Pseudometric-Space
       ( pseudometric-Metric-Space
-         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
       ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
   is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
@@ -334,7 +334,7 @@ module _
   is-expansive-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     is-expansive-map-Pseudometric-Space
       ( pseudometric-Metric-Space
-         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
       ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
   is-expansive-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
@@ -364,14 +364,14 @@ module _
   is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     is-isometry-Pseudometric-Space
       ( pseudometric-Metric-Space
-         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
       ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
   is-isometry-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
     =
     is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
       ( pseudometric-Metric-Space
-         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
       ( map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
       ( is-short-map-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
@@ -380,7 +380,7 @@ module _
   seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     isometry-Pseudometric-Space
       ( pseudometric-Metric-Space
-         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n))
       ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
   seq-isometry-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
     =
