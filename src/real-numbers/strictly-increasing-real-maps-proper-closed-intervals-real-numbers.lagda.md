@@ -299,7 +299,7 @@ module _
         ( x))
 ```
 
-### Strictly increasing maps on proper closed intervals maps interiors to interiors
+### Strictly increasing maps on proper closed intervals map interiors to interiors
 
 ```agda
 module _
