@@ -309,30 +309,39 @@ module _
   (SI : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
   where abstract
 
-  is-interior-map-is-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
+  is-in-interior-map-is-in-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
     (x : ℝ (l1 ⊔ l3 ⊔ l4)) →
-    (H : is-interior-proper-closed-interval-ℝ I x) →
-    is-interior-proper-closed-interval-ℝ
+    (H : is-in-interior-proper-closed-interval-ℝ I x) →
+    is-in-interior-proper-closed-interval-ℝ
       ( proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ
         ( I)
         ( f)
         ( SI))
       ( f
-        ( in-proper-closed-interval-is-interior-proper-closed-interval-ℝ I x H))
-  is-interior-map-is-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+        ( in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
+          ( I)
+          ( x)
+          ( H)))
+  is-in-interior-map-is-in-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ
     x H@(lo-bound , hi-bound) =
     ( ( SI
         ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
           ( I)
           ( l1))
-        ( in-proper-closed-interval-is-interior-proper-closed-interval-ℝ I x H)
+        ( in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
+          ( I)
+          ( x)
+          ( H))
         ( preserves-le-left-sim-ℝ _ _ _
           ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
             ( I)
             ( l1))
           ( lo-bound))) ,
       ( SI
-        ( in-proper-closed-interval-is-interior-proper-closed-interval-ℝ I x H)
+        ( in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
+          ( I)
+          ( x)
+          ( H))
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
           ( I)
           ( l1))
