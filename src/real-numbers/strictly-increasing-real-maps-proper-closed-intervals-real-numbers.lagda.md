@@ -369,8 +369,12 @@ module _
         ( SI))
   map-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ
     (x , H) =
-    ( f (in-proper-closed-interval-is-interior-proper-closed-interval-ℝ I x H) ,
-      is-interior-map-is-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ
+    ( f
+      ( in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
+        ( I)
+        ( x)
+        ( H)) ,
+      is-in-interior-map-is-in-interior-is-strictly-increasing-real-map-proper-closed-interval-ℝ
         ( I)
         ( f)
         ( SI)
