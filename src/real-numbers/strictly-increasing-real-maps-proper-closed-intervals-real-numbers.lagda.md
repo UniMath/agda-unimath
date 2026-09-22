@@ -43,7 +43,7 @@ A [real map](real-numbers.real-maps-proper-closed-intervals-real-numbers.md) `f`
 on a
 [proper closed interval](real-numbers.proper-closed-intervals-real-numbers.md)
 of [real numbers](real-numbers.dedekind-real-numbers.md) `[a, b]` is
-{{#concept "strictly increasing" Disambiguation="real map on proper closerd interval of real numbers" Agda=is-strictly-increasing-real-map-proper-closed-interval-ℝ}}
+{{#concept "strictly increasing" Disambiguation="real map on proper closed interval of real numbers" Agda=is-strictly-increasing-real-map-proper-closed-interval-ℝ}}
 if, for any `x , y ∈ [a, b]`, if `x < y`, then `f x < f y`.
 
 ## Definitions
