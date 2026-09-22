@@ -46,8 +46,8 @@ open import univalent-combinatorics.standard-finite-types
 
 A type `X` {{#concept "has decidable Π-types" Agda=has-decidable-Π}} if for
 every [decidable type family](foundation.decidable-type-families.md) `P` on `X`,
-we can compute a section of `P`, `(x : X) → P x`, or determine that no such
-section exists. In other words, we have a witness of type
+we can either compute a section of `P`, `(x : X) → P x`, or determine that no
+such section exists. In other words, we have a witness of type
 
 ```text
   (P : decidable-family X) → is-decidable (Π x. P x).
@@ -71,20 +71,6 @@ has-decidable-Π-Level l2 X =
 has-decidable-Π : {l1 : Level} → UU l1 → UUω
 has-decidable-Π X =
   {l2 : Level} → has-decidable-Π-Level l2 X
-```
-
-### The type of types with decidable Π-types
-
-```agda
-record Type-With-Decidable-Π (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-Π : UU l
-
-    has-decidable-Π-type-Type-With-Decidable-Π :
-      has-decidable-Π type-Type-With-Decidable-Π
-
-open Type-With-Decidable-Π public
 ```
 
 ## Properties
