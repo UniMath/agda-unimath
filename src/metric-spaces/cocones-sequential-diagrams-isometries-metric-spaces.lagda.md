@@ -128,6 +128,16 @@ module _
       ( X)
   seq-isometry-cocone-sequential-diagram-isometry-Metric-Space = pr1 C
 
+  seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space :
+    (n : ℕ) →
+    family-sequential-diagram-isometry-Metric-Space M n →
+    type-Metric-Space X
+  seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space n =
+    map-isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( X)
+      ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space n)
+
   coh-triangle-cocone-sequential-diagram-isometry-Metric-Space :
     is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space
       ( M)

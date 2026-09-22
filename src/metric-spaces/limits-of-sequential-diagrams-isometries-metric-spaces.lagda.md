@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -31,6 +32,7 @@ open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
+open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -43,6 +45,7 @@ open import metric-spaces.similarity-of-elements-pseudometric-spaces
 open import metric-spaces.symmetric-rational-neighborhood-relations
 open import metric-spaces.triangular-rational-neighborhood-relations
 open import metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces
+open import metric-spaces.universal-property-isometries-metric-quotients-of-pseudometric-spaces
 
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
@@ -329,11 +332,15 @@ module _
   (M : sequential-diagram-isometry-Metric-Space l1 l2)
   where
 
+  type-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space : UU l1
+  type-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
+    type-Metric-Space
+      ( tot-metric-space-sequential-diagram-isometry-Metric-Space M)
+
   pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
     Pseudometric-Space l1 l2
   pr1 pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
-    type-Metric-Space
-      ( tot-metric-space-sequential-diagram-isometry-Metric-Space M)
+    type-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
   pr2 pseudometric-space-limit-sequential-diagram-isometry-Metric-Space =
     pseudometric-structure-limit-sequential-diagram-isometry-Metric-Space M
 ```
@@ -580,7 +587,7 @@ For any `i j : ℕ` with `i ≤ j`,
   q ∘ ιᵢ ~ q ∘ ιⱼ ∘ ϕᵢʲ
 ```
 
-in the space isometries `Mᵢ → M∞`.
+in the space of isometries `Mᵢ → M∞`.
 
 In particular, for any `n : ℕ`
 
@@ -588,7 +595,18 @@ In particular, for any `n : ℕ`
   q ∘ ιₙ ~ q ∘ ιₙ₊₁ ∘ fₙ
 ```
 
-in the space of isometries `Mₙ → M∞`.
+in the space of isometries `Mₙ → M∞` so we have a commutative triangle of
+isometries
+
+```text
+       fₙ
+ Mₙ ------> Mₙ₊₁
+   \       /
+    \     /
+ qιₙ \   / qιₙ₊₁
+      ∨ ∨
+       M∞
+```
 
 ```agda
 module _
@@ -640,8 +658,8 @@ module _
 The sequence of unit maps into the metric limit induce a cocone
 
 ```text
-     f₀       f₁       f₂
- M₀ ----> M₁ ----> M₂ ----> ⋯ ---> M∞
+     f₀       f₁       f₂      f∞
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> M∞
 ```
 
 under `(M , f)`.
@@ -661,4 +679,199 @@ module _
   pr2 cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space =
     is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
       M
+```
+
+### Any cocone is an isometric extension of the pseudometric limit
+
+Any cocone
+
+```text
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> X
+```
+
+under a sequential diagram of isometries `(M , f)`, is an extension of the
+pseudometric limit space:
+
+```text
+     f₀       f₁       f₂      f∙
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> M∙ ----> X
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (X : Metric-Space l3 l4)
+  (C : cocone-sequential-diagram-isometry-Metric-Space M X)
+  where
+
+  map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    type-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M →
+    type-Metric-Space X
+  map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    (n , x) =
+    seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C n x
+
+  is-short-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-short-map-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-Metric-Space X)
+      ( map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-short-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    d (i , x) (j , y) Nxy =
+    binary-tr
+      ( neighborhood-Metric-Space X d)
+      ( inv
+        ( coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+          ( M)
+          ( X)
+          ( C)
+          ( i)
+          ( n)
+          ( Hin)
+          ( x)))
+      ( inv
+        ( coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+          ( M)
+          ( X)
+          ( C)
+          ( j)
+          ( n)
+          ( Hjn)
+          ( y)))
+      ( Uxy)
+    where
+
+    n : ℕ
+    n = max-ℕ i j
+
+    Hin : leq-ℕ i n
+    Hin = left-leq-max-ℕ i j
+
+    Hjn : leq-ℕ j n
+    Hjn = right-leq-max-ℕ i j
+
+    xₙ yₙ : family-sequential-diagram-isometry-Metric-Space M n
+    xₙ = map-isometry-leq-sequential-diagram-isometry-Metric-Space M i n Hin x
+    yₙ = map-isometry-leq-sequential-diagram-isometry-Metric-Space M j n Hjn y
+
+    iₙ :
+      map-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+        ( X)
+    iₙ =
+      seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C n
+
+    Uxy : neighborhood-Metric-Space X d (iₙ xₙ) (iₙ yₙ)
+    Uxy =
+      preserves-neighborhoods-map-isometry-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+        ( X)
+        ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C n)
+        ( d)
+        ( xₙ)
+        ( yₙ)
+        ( Nxy n Hin Hjn)
+
+  is-expansive-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-expansive-map-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-Metric-Space X)
+      ( map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-expansive-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    d (i , x) (j , y) Nxy n Hin Hjn =
+    reflects-neighborhoods-map-isometry-Metric-Space
+      ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
+      ( X)
+      ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C n)
+      ( d)
+      ( _)
+      ( _)
+      ( binary-tr
+        ( neighborhood-Metric-Space X d)
+        ( coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+          ( M)
+          ( X)
+          ( C)
+          ( i)
+          ( n)
+          ( Hin)
+          ( x))
+        ( coh-triangle-isometry-leq-cocone-shift-sequential-diagram-isometry-Metric-Space
+          ( M)
+          ( X)
+          ( C)
+          ( j)
+          ( n)
+          ( Hjn)
+          ( y))
+        ( Nxy))
+
+  is-isometry-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    is-isometry-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-Metric-Space X)
+      ( map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+  is-isometry-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-Metric-Space X)
+      ( map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+      ( is-short-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+      ( is-expansive-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space)
+
+  isometry-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space :
+    isometry-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-Metric-Space X)
+  pr1
+    isometry-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+  pr2
+    isometry-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    is-isometry-map-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+```
+
+### Any cocone is an isometric extension of the metric limit
+
+Any cocone
+
+```text
+     f₀       f₁       f₂
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> X
+```
+
+under a sequential diagram of isometries `(M , f)`, is an extension of the
+metric limit space:
+
+```text
+     f₀       f₁       f₂      f∞
+ M₀ ----> M₁ ----> M₂ ----> ⋯ ----> M∞ ----> X
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  (X : Metric-Space l3 l4)
+  (C : cocone-sequential-diagram-isometry-Metric-Space M X)
+  where
+
+  isometry-exten-cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space :
+    isometry-Metric-Space
+      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( X)
+  isometry-exten-cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space
+    =
+    isometry-exten-isometry-metric-quotient-Pseudometric-Space
+      ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+      ( X)
+      ( isometry-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( X)
+        ( C))
 ```
