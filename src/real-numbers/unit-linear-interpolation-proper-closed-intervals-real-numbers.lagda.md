@@ -9,30 +9,24 @@ module real-numbers.unit-linear-interpolation-proper-closed-intervals-real-numbe
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import logic.functoriality-existential-quantification
 
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.lipschitz-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-maps-metric-spaces
-open import metric-spaces.subspaces-metric-spaces
 open import metric-spaces.uniform-homeomorphisms-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
 
 open import real-numbers.addition-real-numbers
-open import real-numbers.closed-intervals-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.difference-real-numbers
 open import real-numbers.inequalities-addition-and-subtraction-real-numbers
@@ -47,7 +41,6 @@ open import real-numbers.multiplicative-inverses-positive-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
-open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
