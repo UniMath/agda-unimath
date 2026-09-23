@@ -487,8 +487,7 @@ module _
   where
 
   map-unit-linear-interpolation-proper-closed-interval-ℝ :
-    type-unit-interval-ℝ l →
-    type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l) I
+    type-unit-interval-ℝ l → type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l) I
   map-unit-linear-interpolation-proper-closed-interval-ℝ (x , lo , hi) =
     ( real-map-unit-linear-interpolation-proper-closed-interval-ℝ l I x ,
       preserves-lower-bound-real-map-unit-linear-interpolation-proper-closed-interval-ℝ
@@ -503,8 +502,7 @@ module _
         ( hi))
 
   map-inv-unit-linear-interpolation-proper-closed-interval-ℝ :
-    type-proper-closed-interval-ℝ l I →
-    type-unit-interval-ℝ (l1 ⊔ l2 ⊔ l)
+    type-proper-closed-interval-ℝ l I → type-unit-interval-ℝ (l1 ⊔ l2 ⊔ l)
   map-inv-unit-linear-interpolation-proper-closed-interval-ℝ (x , lo , hi) =
     ( real-map-inv-unit-linear-interpolation-proper-closed-interval-ℝ l I x ,
       preserves-lower-bound-real-map-inv-unit-linear-interpolation-proper-closed-interval-ℝ
