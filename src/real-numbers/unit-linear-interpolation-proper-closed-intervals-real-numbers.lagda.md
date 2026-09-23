@@ -553,7 +553,7 @@ module _
       is-equiv-map-unit-linear-interpolation-proper-closed-interval-ℝ)
 ```
 
-### The unit linear interpolation on `[a,b]` induces a uniform homemoorphism `[0,1] ≃ [a,b]`
+### The unit linear interpolation on `[a,b]` induces a uniform homeomorphism `[0,1] ≃ [a,b]`
 
 ```agda
 module _
