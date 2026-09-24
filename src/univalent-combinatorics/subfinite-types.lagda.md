@@ -117,18 +117,17 @@ We reproduce a proof given by
 [Gro-Tsen](https://mathoverflow.net/users/17064/gro-tsen) in this MathOverflow
 answer: <https://mathoverflow.net/a/433318>.
 
-**Proof.** Let $X$ be a subfinite type witnessed by
-$ι : X ↪ \operatorname{Fin}n$, and let $f : X ↪ X$ be an arbitrary
-self-embedding. It suffices to prove $f$ is surjective, so assume given an
-$x : X$ where we want to show there exists $z : X$ such that $f(z) ＝ x$. The
-mapping $i ↦ fⁱ(x)$ defines an $ℕ$-indexed sequence of elements of $X$. Since
-the
+**Proof.** Let $X$ be a subfinite type witnessed by $ι : X ↪ \Fin n$, and let
+$f : X ↪ X$ be an arbitrary self-embedding. It suffices to prove $f$ is
+surjective, so assume given an $x : X$ where we want to show there exists
+$z : X$ such that $f(z) ＝ x$. The mapping $i ↦ fⁱ(x)$ defines an $ℕ$-indexed
+sequence of elements of $X$. Since the
 [standard pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
-applies to $\operatorname{Fin}n$ there has to be $i < j$ in
-$\operatorname{Fin}n$ such that $ι(fⁱ(x)) = ι(fʲ(x))$. Since $ι$ is an embedding
-we in particular have $fⁱ(x) = fʲ(x)$ . By injectivity of $f$ we can cancel $i$
-applications on both sides of the equation to obtain $x = f(f^{j-i-1}(x))$, and
-so $f^{j-i-1}(x)$ is our desired preimage of $x$. ∎
+applies to $\Fin n$ there has to be $i < j$ in $\Fin n$ such that
+$ι(fⁱ(x)) = ι(fʲ(x))$. Since $ι$ is an embedding we in particular have
+$fⁱ(x) = fʲ(x)$ . By injectivity of $f$ we can cancel $i$ applications on both
+sides of the equation to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$ is
+our desired preimage of $x$. ∎
 
 ```agda
 module _
