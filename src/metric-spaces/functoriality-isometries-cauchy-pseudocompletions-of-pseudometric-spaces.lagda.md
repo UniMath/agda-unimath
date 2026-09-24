@@ -133,7 +133,7 @@ module _
       is-isometry-map-isometry-cauchy-pseudocompletion-Pseudometric-Space A B f)
 ```
 
-### The action on short maps of Cauchy pseudocompletions preserves homotopies
+### The action of Cauchy pseudocompletions on isometries preserves homotopies
 
 ```agda
 module _
@@ -172,7 +172,7 @@ module _
     eq-htpy-cauchy-approximation-Pseudometric-Space B refl-htpy
 ```
 
-### The action on short maps of Cauchy pseudocompletions preserves limits
+### The action of Cauchy pseudocompletions on isometries preserves limits
 
 ```agda
 module _
