@@ -465,8 +465,8 @@ module _
 
 ### The unit isometry into the limit metric space
 
-For any `n : ℕ`, the **unit isometry** `ϕₙ∞ : Mₙ → M∞` is obtained by composition
-with the
+For any `n : ℕ`, the **unit isometry** `ϕₙ∞ : Mₙ → M∞` is obtained by
+composition with the
 [unit map](metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces.md) of
 metric quotients:
 
