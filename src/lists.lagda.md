@@ -6,10 +6,12 @@
 module lists where
 
 open import lists.arrays public
+open import lists.binary-relations-tuples public
 open import lists.concatenation-lists public
 open import lists.concatenation-tuples public
 open import lists.dependent-sequences public
 open import lists.equality-lists public
+open import lists.equivalence-relations-finite-sequences public
 open import lists.equivalence-relations-tuples public
 open import lists.equivalence-tuples-finite-sequences public
 open import lists.finite-sequences public
@@ -33,6 +35,7 @@ open import lists.remove-at-index-finite-sequences public
 open import lists.repetitions-sequences public
 open import lists.reversing-lists public
 open import lists.sequences public
+open import lists.set-quotients-finite-sequences public
 open import lists.set-quotients-tuples public
 open import lists.shifting-sequences public
 open import lists.sort-by-insertion-lists public

@@ -133,8 +133,10 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-binary-relations public
 open import foundation.dependent-products-contractible-types public
 open import foundation.dependent-products-cumulative-large-sets public
+open import foundation.dependent-products-equivalence-relations public
 open import foundation.dependent-products-large-binary-relations public
 open import foundation.dependent-products-large-equivalence-relations public
 open import foundation.dependent-products-large-similarity-relations public
@@ -229,7 +231,6 @@ open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
-open import foundation.finite-sequences-set-quotients public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
 open import foundation.finitely-truncated-types public
@@ -363,6 +364,7 @@ open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
 open import foundation.multivariable-homotopies public
+open import foundation.multivariable-inputs-set-quotients public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.multivariable-sections public
@@ -418,6 +420,7 @@ open import foundation.proper-subtypes public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
+open import foundation.propositional-truncation-binary-relations public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullback-cones public
