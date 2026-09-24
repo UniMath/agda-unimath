@@ -69,8 +69,8 @@ module _
       pseudometric-structure-metric-ab-Normed-ℝ-Vector-Space ,
       is-extensional-pseudometric-Metric-Space
         ( metric-space-Normed-ℝ-Vector-Space V) ,
-      is-isometry-neg-Normed-ℝ-Vector-Space V ,
-      is-isometry-left-add-Normed-ℝ-Vector-Space V)
+      is-short-map-neg-Normed-ℝ-Vector-Space V ,
+      is-short-map-left-add-Normed-ℝ-Vector-Space V)
 ```
 
 ## Properties

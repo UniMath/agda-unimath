@@ -31,6 +31,7 @@ open import metric-spaces.located-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metrics
 open import metric-spaces.metrics-of-metric-spaces
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.addition-real-numbers
@@ -363,6 +364,18 @@ module _
                         ( _))
                 ＝ dist-Normed-ℝ-Vector-Space V x y
                   by symmetric-dist-Normed-ℝ-Vector-Space V y x)))
+
+    is-short-map-neg-Normed-ℝ-Vector-Space :
+      is-short-map-Metric-Space
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( neg-Normed-ℝ-Vector-Space V)
+    is-short-map-neg-Normed-ℝ-Vector-Space =
+      is-short-map-is-isometry-Metric-Space
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( neg-Normed-ℝ-Vector-Space V)
+        ( is-isometry-neg-Normed-ℝ-Vector-Space)
 ```
 
 ### Left addition is an isometry in the metric space of a normed vector space
@@ -403,6 +416,18 @@ module _
                   ( u)
                   ( v)
                   ( w)))))
+
+    is-short-map-left-add-Normed-ℝ-Vector-Space :
+      is-short-map-Metric-Space
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( add-Normed-ℝ-Vector-Space V u)
+    is-short-map-left-add-Normed-ℝ-Vector-Space =
+      is-short-map-is-isometry-Metric-Space
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( metric-space-Normed-ℝ-Vector-Space V)
+        ( add-Normed-ℝ-Vector-Space V u)
+        ( is-isometry-left-add-Normed-ℝ-Vector-Space)
 ```
 
 ### The norm of the zero vector is zero

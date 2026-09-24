@@ -41,8 +41,8 @@ metric-ab-add-ℝ l =
   ( ab-add-ℝ l ,
     structure-Pseudometric-Space (pseudometric-space-ℝ l) ,
     is-extensional-pseudometric-space-ℝ ,
-    is-isometry-neg-ℝ ,
-    is-isometry-left-add-ℝ)
+    is-short-map-neg-ℝ ,
+    is-short-map-left-add-ℝ)
 
 complete-metric-ab-add-ℝ : (l : Level) → Complete-Metric-Ab (lsuc l) l
 complete-metric-ab-add-ℝ l =
