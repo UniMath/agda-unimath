@@ -13,15 +13,15 @@ makes use of several postulates.
 4. The **univalence axiom** is postulated in
    [`foundation.univalence`](foundation.univalence.md).
 5. The type theoretic **replacement axiom** is postulated in
-   [`foundation.replacement`](foundation.replacement.md)
+   [`foundation.replacement`](foundation.replacement.md).
 6. The **truncation operations** are postulated in
-   [`foundation.truncations`](foundation.truncations.md)
+   [`foundation.truncations`](foundation.truncations.md).
 7. The **interval** is postulated in
-   [`synthetic-homotopy-theory.interval-type`](synthetic-homotopy-theory.interval-type.md)
+   [`synthetic-homotopy-theory.interval-type`](synthetic-homotopy-theory.interval-type.md).
 8. The **circle** is postulated in
-   [`synthetic-homotopy-theory.circle`](synthetic-homotopy-theory.circle.md)
+   [`synthetic-homotopy-theory.circle`](synthetic-homotopy-theory.circle.md).
 9. **Pushouts** are postulated in
-   [`synthetic-homotopy-theory.pushouts`](synthetic-homotopy-theory.pushouts.md)
+   [`synthetic-homotopy-theory.pushouts`](synthetic-homotopy-theory.pushouts.md).
 10. **Extensionality of globular types** is postulated in
     [`globular-types.equality-globular-types`](globular-types.equality-globular-types.md).
 11. Various **Agda built-in types** are postulated in

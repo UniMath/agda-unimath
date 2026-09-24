@@ -6,11 +6,9 @@ it. This document aims to provide a clear and concise introduction.
 
 ## Statement of purpose
 
-Before stating the design principles of the agda-unimath library, it is
-necessary to specify its purpose. This statement of the purpose provides the
-boundary conditions by which we determine the design philosophy and structure of
-the library. In other words, the remainder of the design philosophy is informed
-by the stated purpose of this library.
+Before stating the design principles of the agda-unimath library, we specify its
+purpose. This statement of purpose sets the boundary conditions that inform the
+design philosophy and structure of the library.
 
 1. To formalize an extensive curriculum of mathematical topics from a univalent
    point of view, in a human-enjoyable format. We hope to bring together a large
@@ -18,14 +16,20 @@ by the stated purpose of this library.
 2. To build a platform that facilitates research projects and student projects
    regarding formalization of univalent mathematics in Martin-Löf's dependent
    type theory extended with the univalence axiom and higher inductive types. A
-   full description of the postulates in this library can be found
-   [here](POSTULATES.md).
+   full list of the postulates in this library can be found in
+   [Postulates and assumptions](POSTULATES.md).
 3. To break open new domains of application for the univalence axiom. For
    example, we have developed univalent theories of
-   [combinatorics](univalent-combinatorics.md), [trees](trees.md),
-   [species](species.md), ... TO DO: DESCRIBE A FULLER LIST
+   [combinatorics](univalent-combinatorics.md), [species](species.md),
+   [trees](trees.md), [graphs](graph-theory.md),
+   [higher groups](higher-group-theory.md),
+   [orthogonal factorization systems](orthogonal-factorization-systems.md),
+   [wild categories](wild-category-theory.md), and
+   [homotopy theory](synthetic-homotopy-theory.md). An overview of all subjects
+   in the library can be found in the
+   [list of subjects](SUMMARY.md#the-agda-unimath-library).
 4. To develop a theory of library management that meets these stated goals. For
-   example, through our work we demonstrate the feasibility of a concept-central
+   example, through our work we demonstrate the feasibility of a concept-centric
    approach to library management and theorem-proving.
 
 ## Library structure
