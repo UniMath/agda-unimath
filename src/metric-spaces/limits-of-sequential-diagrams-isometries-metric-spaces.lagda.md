@@ -465,8 +465,8 @@ module _
 
 ### The unit isometry into the limit metric space
 
-For any `n : ℕ`, the **unit isometry** `Mₙ → M∞` is obtained by composition with
-the
+For any `n : ℕ`, the **unit isometry** `ϕₙ∞ : Mₙ → M∞` is obtained by composition
+with the
 [unit map](metric-spaces.unit-map-metric-quotients-of-pseudometric-spaces.md) of
 metric quotients:
 
@@ -584,7 +584,7 @@ module _
 For any `i j : ℕ` with `i ≤ j`,
 
 ```text
-  q ∘ ιᵢ ~ q ∘ ιⱼ ∘ ϕᵢʲ
+  ϕᵢ∞ ~ ϕⱼ∞ ∘ ϕᵢʲ
 ```
 
 in the space of isometries `Mᵢ → M∞`.
@@ -592,7 +592,7 @@ in the space of isometries `Mᵢ → M∞`.
 In particular, for any `n : ℕ`
 
 ```text
-  q ∘ ιₙ ~ q ∘ ιₙ₊₁ ∘ fₙ
+  ϕₙ∞ ~ ϕₙ₊₁∞ ∘ fₙ
 ```
 
 in the space of isometries `Mₙ → M∞` so we have a commutative triangle of
@@ -603,7 +603,7 @@ isometries
  Mₙ ------> Mₙ₊₁
    \       /
     \     /
- qιₙ \   / qιₙ₊₁
+     \   /
       ∨ ∨
        M∞
 ```
