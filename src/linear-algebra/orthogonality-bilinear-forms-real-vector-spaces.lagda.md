@@ -48,5 +48,5 @@ module _
   is-orthogonal-bilinear-form-ℝ-Vector-Space :
     Relation l1 (type-ℝ-Vector-Space V)
   is-orthogonal-bilinear-form-ℝ-Vector-Space =
-    type-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
+    rel-Relation-Prop is-orthogonal-prop-bilinear-form-ℝ-Vector-Space
 ```
