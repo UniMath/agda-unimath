@@ -13,6 +13,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -252,4 +253,58 @@ module _
   isometry-lim-cauchy-approximation-cauchy-pseudocompletion-Metric-Space =
     isometry-lim-cauchy-approximation-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
+```
+
+### The similarity relation in a Cauchy pseudocompletion
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  equivalence-relation-sim-cauchy-pseudocompletion-Metric-Space :
+    equivalence-relation l2 (cauchy-approximation-Metric-Space M)
+  equivalence-relation-sim-cauchy-pseudocompletion-Metric-Space =
+    equivalence-relation-sim-Pseudometric-Space
+      ( cauchy-pseudocompletion-Metric-Space M)
+
+  sim-prop-cauchy-pseudocompletion-Metric-Space :
+    Relation-Prop l2 (cauchy-approximation-Metric-Space M)
+  sim-prop-cauchy-pseudocompletion-Metric-Space =
+    sim-prop-Pseudometric-Space (cauchy-pseudocompletion-Metric-Space M)
+
+  sim-cauchy-pseudocompletion-Metric-Space :
+    Relation l2 (cauchy-approximation-Metric-Space M)
+  sim-cauchy-pseudocompletion-Metric-Space =
+    type-Relation-Prop sim-prop-cauchy-pseudocompletion-Metric-Space
+```
+
+### If two constant Cauchy approximations are similar, they have the same constant
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where abstract
+
+  eq-sim-const-cauchy-approximation-cauchy-pseudocompletion-Metric-Space :
+    (x y : type-Metric-Space M) →
+    sim-cauchy-pseudocompletion-Metric-Space M
+      ( const-cauchy-approximation-Metric-Space M x)
+      ( const-cauchy-approximation-Metric-Space M y) →
+    x ＝ y
+  eq-sim-const-cauchy-approximation-cauchy-pseudocompletion-Metric-Space
+    x y cx~cy =
+    eq-sim-Metric-Space
+      ( M)
+      ( x)
+      ( y)
+      ( λ ε →
+        let
+          (ε12 , ε3 , ε12+ε3=ε) = split-ℚ⁺ ε
+          (ε1 , ε2 , ε1+ε2=ε12) = split-ℚ⁺ ε12
+        in
+          tr
+            ( λ d → neighborhood-Metric-Space M d x y)
+            ( ap-add-ℚ⁺ ε1+ε2=ε12 refl ∙ ε12+ε3=ε)
+            ( cx~cy ε3 ε1 ε2))
 ```
