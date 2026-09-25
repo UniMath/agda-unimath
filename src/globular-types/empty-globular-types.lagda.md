@@ -54,3 +54,13 @@ module _
 empty-Globular-Type : Globular-Type lzero lzero
 empty-Globular-Type = constant-Globular-Type empty
 ```
+
+### The empty globular type of an arbitrary universe level
+
+```agda
+raise-empty-Globular-Type : (l1 l2 : Level) → Globular-Type l1 l2
+0-cell-Globular-Type (raise-empty-Globular-Type l1 l2) =
+  raise-empty l1
+1-cell-globular-type-Globular-Type (raise-empty-Globular-Type l1 l2) x y =
+  raise-empty-Globular-Type l2 l2
+```
