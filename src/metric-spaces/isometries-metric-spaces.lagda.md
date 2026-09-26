@@ -551,26 +551,13 @@ module _
     (H d x y , K d x y)
 ```
 
-### Any isometry with a left inverse is an equivalence
+### Any isometry with a left or right inverse is an equivalence
 
 ```agda
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where abstract
-
-  is-equiv-is-section-isometry-Metric-Space :
-    (f : isometry-Metric-Space A B) →
-    (g : isometry-Metric-Space B A) →
-    is-section
-      ( map-isometry-Metric-Space A B f)
-      ( map-isometry-Metric-Space B A g) →
-    is-equiv (map-isometry-Metric-Space A B f)
-  is-equiv-is-section-isometry-Metric-Space f g H =
-    is-equiv-is-emb-is-surjective
-      ( is-surjective-has-section
-        ( map-isometry-Metric-Space B A g , H))
-      ( is-emb-map-isometry-Metric-Space A B f)
 
   is-equiv-is-retraction-isometry-Metric-Space :
     (f : isometry-Metric-Space A B) →
@@ -590,4 +577,17 @@ module _
           ( map-isometry-Metric-Space A B f , H))
         ( is-emb-map-isometry-Metric-Space B A g))
       ( is-equiv-id)
+
+  is-equiv-is-section-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    (g : isometry-Metric-Space B A) →
+    is-section
+      ( map-isometry-Metric-Space A B f)
+      ( map-isometry-Metric-Space B A g) →
+    is-equiv (map-isometry-Metric-Space A B f)
+  is-equiv-is-section-isometry-Metric-Space f g H =
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-has-section
+        ( map-isometry-Metric-Space B A g , H))
+      ( is-emb-map-isometry-Metric-Space A B f)
 ```
