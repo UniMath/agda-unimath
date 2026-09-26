@@ -21,8 +21,11 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import lists.sequences
@@ -546,4 +549,45 @@ module _
     is-isometry-Metric-Space A B f
   is-isometry-is-expansive-map-is-short-map-Metric-Space H K d x y =
     (H d x y , K d x y)
+```
+
+### Any isometry with a left or right inverse is an equivalence
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where abstract
+
+  is-equiv-is-retraction-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    (g : isometry-Metric-Space B A) →
+    is-retraction
+      ( map-isometry-Metric-Space A B f)
+      ( map-isometry-Metric-Space B A g) →
+    is-equiv (map-isometry-Metric-Space A B f)
+  is-equiv-is-retraction-isometry-Metric-Space f g H =
+    is-equiv-top-map-triangle
+      ( id)
+      ( map-isometry-Metric-Space B A g)
+      ( map-isometry-Metric-Space A B f)
+      ( inv-htpy H)
+      ( is-equiv-is-emb-is-surjective
+        ( is-surjective-has-section
+          ( map-isometry-Metric-Space A B f , H))
+        ( is-emb-map-isometry-Metric-Space B A g))
+      ( is-equiv-id)
+
+  is-equiv-is-section-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    (g : isometry-Metric-Space B A) →
+    is-section
+      ( map-isometry-Metric-Space A B f)
+      ( map-isometry-Metric-Space B A g) →
+    is-equiv (map-isometry-Metric-Space A B f)
+  is-equiv-is-section-isometry-Metric-Space f g H =
+    is-equiv-is-emb-is-surjective
+      ( is-surjective-has-section
+        ( map-isometry-Metric-Space B A g , H))
+      ( is-emb-map-isometry-Metric-Space A B f)
 ```
