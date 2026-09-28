@@ -609,7 +609,7 @@ module _
       ( x)
 ```
 
-### The shifting map of pseudometric is an isometry
+### The shifting map of pseudometric colimit is an isometry
 
 ```agda
 module _
@@ -697,7 +697,7 @@ module _
       is-isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space)
 ```
 
-### The shifting isometry in the limit metric space
+### The shifting isometry in the colimit metric space
 
 ```agda
 module _
