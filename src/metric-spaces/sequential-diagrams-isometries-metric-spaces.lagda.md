@@ -110,6 +110,11 @@ module _
       ( ℕ-Set)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M)
 
+  tot-sequential-diagram-isometry-Metric-Space : UU l1
+  tot-sequential-diagram-isometry-Metric-Space =
+    type-Metric-Space
+      ( tot-metric-space-sequential-diagram-isometry-Metric-Space)
+
   seq-isometry-tot-metric-space-sequential-diagram-isometry-Metric-Space :
     (n : ℕ) →
     isometry-Metric-Space
@@ -123,7 +128,7 @@ module _
   seq-map-tot-metric-space-sequential-diagram-isometry-Metric-Space :
     (n : ℕ) →
     family-sequential-diagram-isometry-Metric-Space M n →
-    Σ ℕ (family-sequential-diagram-isometry-Metric-Space M)
+    tot-sequential-diagram-isometry-Metric-Space
   seq-map-tot-metric-space-sequential-diagram-isometry-Metric-Space n =
     map-isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)

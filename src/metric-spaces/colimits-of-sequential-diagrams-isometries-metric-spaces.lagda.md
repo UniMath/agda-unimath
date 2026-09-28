@@ -28,11 +28,13 @@ open import foundation.universe-levels
 
 open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.expansive-maps-pseudometric-spaces
+open import metric-spaces.functoriality-isometries-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
 open import metric-spaces.maps-metric-spaces
+open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
@@ -107,8 +109,7 @@ module _
   neighborhood-prop-colimit-sequential-diagram-isometry-Metric-Space :
     Rational-Neighborhood-Relation
       ( l2)
-      ( type-Metric-Space
-        ( tot-metric-space-sequential-diagram-isometry-Metric-Space M))
+      ( tot-sequential-diagram-isometry-Metric-Space M)
   neighborhood-prop-colimit-sequential-diagram-isometry-Metric-Space
     d (m , xₘ) (n , xₙ) =
     Π-Prop
@@ -332,16 +333,10 @@ module _
   (M : sequential-diagram-isometry-Metric-Space l1 l2)
   where
 
-  type-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
-    UU l1
-  type-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space =
-    type-Metric-Space
-      ( tot-metric-space-sequential-diagram-isometry-Metric-Space M)
-
   pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
     Pseudometric-Space l1 l2
   pr1 pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space =
-    type-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    tot-sequential-diagram-isometry-Metric-Space M
   pr2 pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space =
     pseudometric-structure-colimit-sequential-diagram-isometry-Metric-Space M
 ```
@@ -464,6 +459,24 @@ module _
       is-isometry-map-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space)
 ```
 
+### The shifting map in the pseudometric colimit
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    map-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+  map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    ( n , x) =
+    ( succ-ℕ n ,
+      seq-map-isometry-sequential-diagram-isometry-Metric-Space M n x)
+```
+
 ### The unit isometry into the colimit metric space
 
 For any `n : ℕ`, the **unit isometry** `ϕₙ∞ : Mₙ → M∞` is obtained by
@@ -527,7 +540,7 @@ In particular, for any `n : ℕ` and `xₙ : Mₙ`, `ιₙ xₙ ≍ ιₙ₊₁ 
 module _
   {l1 l2 : Level}
   (M : sequential-diagram-isometry-Metric-Space l1 l2)
-  where
+  where abstract
 
   sim-map-isometry-leq-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
     (i j : ℕ) →
@@ -580,6 +593,159 @@ module _
         ( succ-ℕ n)
         ( succ-leq-ℕ n)
         ( x))
+
+  sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    ( x : tot-sequential-diagram-isometry-Metric-Space M) →
+    sim-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( x)
+      ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( x))
+  sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    ( n , x) =
+    sim-map-succ-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+      ( n)
+      ( x)
+```
+
+### The shifting map of pseudometric is an isometry
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  is-short-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    is-short-map-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+  is-short-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    d x y =
+    preserves-neighborhoods-sim-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      { x}
+      { map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( x)}
+      { y}
+      { map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( y)}
+      ( sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( x))
+      ( sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( y))
+      ( d)
+
+  is-expansive-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    is-expansive-map-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+  is-expansive-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    d x y =
+    reflects-neighborhoods-sim-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      { x}
+      { map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( x)}
+      { y}
+      { map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( y)}
+      ( sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( x))
+      ( sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( y))
+      ( d)
+
+  is-isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    is-isometry-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+  is-isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+      ( is-short-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space)
+      ( is-expansive-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space)
+
+  isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    isometry-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+  isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+    =
+    ( map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+      ( M)
+    ,
+      is-isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space)
+```
+
+### The shifting isometry in the limit metric space
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  isometry-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    isometry-Metric-Space
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+  isometry-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space =
+    isometry-metric-quotient-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+
+  map-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    map-Metric-Space
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+  map-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space =
+    map-isometry-Metric-Space
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( isometry-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space)
+
+  htpy-map-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space :
+    id ~ map-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space
+  htpy-map-shift-metric-space-colimit-sequential-diagram-isometry-Metric-Space
+    x =
+    inv
+      ( htpy-id-isometry-metric-quotient-Pseudometric-Space
+        ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+          ( M))
+        ( x)) ∙
+    htpy-sim-isometry-metric-quotient-Pseudometric-Space
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( id-isometry-Pseudometric-Space
+        ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+          ( M)))
+      ( isometry-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+      ( sim-map-shift-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M))
+      ( x)
 ```
 
 ### Coherence laws in the colimit metric space
@@ -711,8 +877,7 @@ module _
   where
 
   map-exten-cocone-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space :
-    type-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space M →
-    type-Metric-Space X
+    tot-sequential-diagram-isometry-Metric-Space M → type-Metric-Space X
   map-exten-cocone-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
     (n , x) =
     seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C n x
