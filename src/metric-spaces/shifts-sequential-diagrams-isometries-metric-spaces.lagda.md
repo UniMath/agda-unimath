@@ -7,10 +7,13 @@ module metric-spaces.shifts-sequential-diagrams-isometries-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces
@@ -59,6 +62,22 @@ module _
     seq-isometry-sequential-diagram-isometry-Metric-Space M (succ-ℕ n)
 ```
 
+### Iterated shifts of sequential diagrams of isometries
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  iter-shift-sequential-diagram-isometry-Metric-Space :
+    ℕ → sequential-diagram-isometry-Metric-Space l1 l2
+  iter-shift-sequential-diagram-isometry-Metric-Space zero-ℕ = M
+  iter-shift-sequential-diagram-isometry-Metric-Space (succ-ℕ n) =
+    shift-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space n)
+```
+
 ## Properties
 
 ### Shifting sequential diagrams over a cocone
@@ -66,17 +85,71 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (M : sequential-diagram-isometry-Metric-Space l1 l2)
-  (X : Metric-Space l3 l4)
-  (C : cocone-sequential-diagram-isometry-Metric-Space M X)
   where
 
   cocone-shift-sequential-diagram-isometry-Metric-Space :
+    ( M : sequential-diagram-isometry-Metric-Space l1 l2) →
+    ( X : Metric-Space l3 l4) →
+    ( C : cocone-sequential-diagram-isometry-Metric-Space M X) →
     cocone-sequential-diagram-isometry-Metric-Space
       ( shift-sequential-diagram-isometry-Metric-Space M)
       ( X)
-  pr1 cocone-shift-sequential-diagram-isometry-Metric-Space =
+  pr1 (cocone-shift-sequential-diagram-isometry-Metric-Space M X C) =
     seq-isometry-cocone-sequential-diagram-isometry-Metric-Space M X C ∘ succ-ℕ
-  pr2 cocone-shift-sequential-diagram-isometry-Metric-Space =
+  pr2 (cocone-shift-sequential-diagram-isometry-Metric-Space M X C) =
     coh-triangle-cocone-sequential-diagram-isometry-Metric-Space M X C ∘ succ-ℕ
+
+  cocone-iter-shift-sequential-diagram-isometry-Metric-Space :
+    ( M : sequential-diagram-isometry-Metric-Space l1 l2) →
+    ( X : Metric-Space l3 l4) →
+    ( C : cocone-sequential-diagram-isometry-Metric-Space M X) →
+    ( n : ℕ) →
+    cocone-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M n)
+      ( X)
+  cocone-iter-shift-sequential-diagram-isometry-Metric-Space M X C zero-ℕ = C
+  cocone-iter-shift-sequential-diagram-isometry-Metric-Space M X C (succ-ℕ n) =
+    cocone-shift-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M n)
+      ( X)
+      ( cocone-iter-shift-sequential-diagram-isometry-Metric-Space M X C n)
+```
+
+### Composing laws of iterated shifts
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : sequential-diagram-isometry-Metric-Space l1 l2)
+  where
+
+  compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space :
+    (i j : ℕ) →
+    iter-shift-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M i)
+      ( j) ＝
+    iter-shift-sequential-diagram-isometry-Metric-Space M (i +ℕ j)
+  compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space i zero-ℕ
+    = refl
+  compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space
+    i (succ-ℕ j)
+    =
+    ap
+      ( shift-sequential-diagram-isometry-Metric-Space)
+      ( compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space i j)
+
+  swap-comp-iter-shift-sequential-diagram-isometry-Metric-Space :
+    (i j : ℕ) →
+    iter-shift-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M i)
+      ( j) ＝
+    iter-shift-sequential-diagram-isometry-Metric-Space
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M j)
+      ( i)
+  swap-comp-iter-shift-sequential-diagram-isometry-Metric-Space i j =
+    compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space i j ∙
+    ap
+      ( iter-shift-sequential-diagram-isometry-Metric-Space M)
+      ( commutative-add-ℕ i j) ∙
+    inv (compute-comp-iter-shift-sequential-diagram-isometry-Metric-Space j i)
 ```
