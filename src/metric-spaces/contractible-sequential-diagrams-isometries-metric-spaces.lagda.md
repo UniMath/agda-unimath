@@ -28,13 +28,13 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces
+open import metric-spaces.colimits-of-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.expansive-maps-pseudometric-spaces
 open import metric-spaces.functoriality-isometries-metric-quotients-of-pseudometric-spaces
 open import metric-spaces.indexed-sums-metric-spaces
 open import metric-spaces.interval-isometries-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.isometries-pseudometric-spaces
-open import metric-spaces.limits-of-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
@@ -72,7 +72,7 @@ is called
 all the `fₙ`s are [equivalences](foundation.equivalences.md).
 
 Considering
-[limit](metric-spaces.limits-of-sequential-diagrams-isometries-metric-spaces.md)
+[colimit](metric-spaces.colimits-of-sequential-diagrams-isometries-metric-spaces.md)
 diagram:
 
 ```text
@@ -82,8 +82,8 @@ diagram:
 
 this is equivalent to the following conditions:
 
-- the limit isometry `ϕ₀∞ : M₀ → M∞` is an equivalence;
-- for all `n : ℕ`, the limit isometry `ϕₙ∞ : Mₙ → M∞` is an equivalence.
+- the colimit isometry `ϕ₀∞ : M₀ → M∞` is an equivalence;
+- for all `n : ℕ`, the colimit isometry `ϕₙ∞ : Mₙ → M∞` is an equivalence.
 
 ## Definitions
 
@@ -110,11 +110,13 @@ module _
   ( M : sequential-diagram-isometry-Metric-Space l1 l2)
   where
 
-  is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space :
+  is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space :
     UU (l1 ⊔ l2)
-  is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space =
+  is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space =
     is-equiv
-      ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space M 0)
+      ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
+        ( M)
+        ( 0))
 ```
 
 ## Properties
@@ -125,23 +127,23 @@ module _
 module _
   { l1 l2 : Level}
   ( M : sequential-diagram-isometry-Metric-Space l1 l2)
-  ( H : is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space M)
+  ( H : is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space M)
   where abstract
 
-  seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space :
+  seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space :
     (n : ℕ) →
     is-equiv
-      ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( n))
-  seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+  seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
     zero-ℕ = H
-  seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+  seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
     (succ-ℕ n) =
     is-equiv-is-section-isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M (succ-ℕ n))
-      ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
-      ( seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+      ( seq-isometry-metric-space-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( succ-ℕ n))
       ( ϕ∞ⁿ⁺¹)
@@ -150,35 +152,35 @@ module _
 
       is-equiv-ϕ∞ⁿ :
         is-equiv
-          ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+          ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
             ( M)
             ( n))
       is-equiv-ϕ∞ⁿ =
-        seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+        seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
           ( n)
 
       ϕ∞ⁿ :
         isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
       ϕ∞ⁿ =
         isometry-inv-is-equiv-isometry-Metric-Space
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
-          ( seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+          ( seq-isometry-metric-space-colimit-sequential-diagram-isometry-Metric-Space
             ( M)
             ( n))
           ( is-equiv-ϕ∞ⁿ)
 
       ϕ∞ⁿ⁺¹ :
         isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space
             ( M)
             ( succ-ℕ n))
       ϕ∞ⁿ⁺¹ =
         comp-isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space
             ( M)
@@ -187,11 +189,11 @@ module _
           ( ϕ∞ⁿ)
 
       lemma-htpy-ϕ∞ⁿ⁺¹ :
-        ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
           ( M)
           ( succ-ℕ n)) ∘
         ( map-isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space
             ( M)
             ( succ-ℕ n))
@@ -199,7 +201,7 @@ module _
         ( id)
       lemma-htpy-ϕ∞ⁿ⁺¹ x =
         inv
-          ( is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+          ( is-coherent-seq-isometry-metric-space-colimit-sequential-diagram-isometry-Metric-Space
             ( M)
             ( n)
             ( _)) ∙
@@ -214,29 +216,29 @@ module _
 module _
   { l1 l2 : Level}
   ( M : sequential-diagram-isometry-Metric-Space l1 l2)
-  ( H : is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space M)
+  ( H : is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space M)
   where abstract
 
-  is-contr-sequential-diagram-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space :
+  is-contr-sequential-diagram-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space :
     is-contr-sequential-diagram-isometry-Metric-Space M
-  is-contr-sequential-diagram-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+  is-contr-sequential-diagram-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
     n =
     is-equiv-top-map-triangle
-      ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( n))
-      ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( succ-ℕ n))
       ( seq-map-isometry-sequential-diagram-isometry-Metric-Space M n)
-      ( is-coherent-seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+      ( is-coherent-seq-isometry-metric-space-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( n))
-      ( seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+      ( seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( H)
         ( succ-ℕ n))
-      ( seq-is-equiv-is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space
+      ( seq-is-equiv-is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space
         ( M)
         ( H)
         ( n))
@@ -268,15 +270,16 @@ module _
   ( H : is-contr-sequential-diagram-isometry-Metric-Space M)
   where
 
-  seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space :
+  seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space :
     (n : ℕ) →
     isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-  seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space zero-ℕ =
+  seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space zero-ℕ
+    =
     id-isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M zero-ℕ)
-  seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
+  seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
     (succ-ℕ n) =
     comp-isometry-Metric-Space
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space
@@ -284,7 +287,8 @@ module _
           ( succ-ℕ n))
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M zero-ℕ)
-      ( seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space n)
+      ( seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
+        ( n))
       ( isometry-inv-is-equiv-isometry-Metric-Space
         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M n)
         ( seq-metric-space-sequential-diagram-isometry-Metric-Space
@@ -294,42 +298,43 @@ module _
         ( H n))
 
   abstract
-    coh-seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space :
+    coh-seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space :
       is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space
         ( M)
         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M zero-ℕ)
-        ( seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space)
-    coh-seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
+        ( seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space)
+    coh-seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
       zero-ℕ x =
       inv (is-retraction-map-inv-is-equiv (H zero-ℕ) x)
-    coh-seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
+    coh-seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
       (succ-ℕ n) x =
       ap
         ( map-isometry-Metric-Space
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M
             ( succ-ℕ n))
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-          ( seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
+          ( seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
             ( succ-ℕ n)))
           ( inv (is-retraction-map-inv-is-equiv (H (succ-ℕ n)) x))
 
-  cocone-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space :
+  cocone-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space :
     cocone-sequential-diagram-isometry-Metric-Space
       ( M)
       ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-  cocone-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space =
-    ( seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
-    , coh-seq-inv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space)
+  cocone-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space =
+    ( seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
+    , coh-seq-inv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
+    )
 
   abstract
-    is-equiv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space :
-      is-equiv-zero-limit-sequential-diagram-isometry-Metric-Space M
-    is-equiv-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space
+    is-equiv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space :
+      is-equiv-zero-colimit-sequential-diagram-isometry-Metric-Space M
+    is-equiv-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space
       =
       is-equiv-is-retraction-isometry-Metric-Space
         ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-        ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
-        ( seq-isometry-metric-space-limit-sequential-diagram-isometry-Metric-Space
+        ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
+        ( seq-isometry-metric-space-colimit-sequential-diagram-isometry-Metric-Space
           ( M)
           ( 0))
         ( inv-isometry)
@@ -338,37 +343,38 @@ module _
 
       inv-isometry :
         isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
       inv-isometry =
-        isometry-exten-cocone-metric-space-limit-sequential-diagram-isometry-Metric-Space
+        isometry-exten-cocone-metric-space-colimit-sequential-diagram-isometry-Metric-Space
           ( M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-          ( cocone-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space)
+          ( cocone-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space)
 
       map-inv-isometry :
         map-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
       map-inv-isometry =
         map-isometry-Metric-Space
-          ( metric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( metric-space-colimit-sequential-diagram-isometry-Metric-Space M)
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
           ( inv-isometry)
 
       is-section-map-inv-isometry :
         is-section
           ( map-inv-isometry)
-          ( seq-map-metric-space-limit-sequential-diagram-isometry-Metric-Space
+          ( seq-map-metric-space-colimit-sequential-diagram-isometry-Metric-Space
             ( M)
             ( 0))
       is-section-map-inv-isometry x =
         is-extension-exten-isometry-metric-quotient-Pseudometric-Space
-          ( pseudometric-space-limit-sequential-diagram-isometry-Metric-Space M)
+          ( pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
+            ( M))
           ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-          ( isometry-exten-cocone-pseudometric-space-limit-sequential-diagram-isometry-Metric-Space
+          ( isometry-exten-cocone-pseudometric-space-colimit-sequential-diagram-isometry-Metric-Space
             ( M)
             ( seq-metric-space-sequential-diagram-isometry-Metric-Space M 0)
-            ( cocone-zero-limit-is-contr-sequential-diagram-isometry-Metric-Space))
+            ( cocone-zero-colimit-is-contr-sequential-diagram-isometry-Metric-Space))
           ( 0 , x)
 ```

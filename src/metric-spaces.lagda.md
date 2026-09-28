@@ -88,6 +88,7 @@ open import metric-spaces.closed-subsets-located-metric-spaces public
 open import metric-spaces.closed-subsets-metric-spaces public
 open import metric-spaces.closure-subsets-metric-spaces public
 open import metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces public
+open import metric-spaces.colimits-of-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.compact-metric-spaces public
 open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.continuity-of-maps-at-points-metric-spaces public
@@ -130,7 +131,6 @@ open import metric-spaces.limits-of-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-maps-metric-spaces public
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
-open import metric-spaces.limits-of-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.lipschitz-maps-metric-spaces public
 open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
