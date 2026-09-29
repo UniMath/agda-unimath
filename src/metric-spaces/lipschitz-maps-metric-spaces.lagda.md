@@ -202,6 +202,13 @@ module _
         ( left-unit-law-mul-ℚ⁺ d)
         ( H d x y Nxy)
 
+    is-lipschitz-is-short-map-Metric-Space :
+      is-short-map-Metric-Space A B f →
+      is-lipschitz-map-Metric-Space A B f
+    is-lipschitz-is-short-map-Metric-Space =
+      intro-exists one-ℚ⁺ ∘
+      is-lipschitz-constant-one-map-is-short-map-Metric-Space
+
     is-short-map-is-lipshitz-constant-one-map-Metric-Space :
       is-lipschitz-constant-map-Metric-Space A B f one-ℚ⁺ →
       is-short-map-Metric-Space A B f
@@ -210,6 +217,24 @@ module _
         ( is-upper-bound-dist-Metric-Space B (f x) (f y))
         ( left-unit-law-mul-ℚ⁺ d)
         ( L d x y Nxy)
+```
+
+### Isometries are Lipschitz maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : map-Metric-Space A B)
+  where
+
+  abstract
+    is-lipschitz-is-isometry-Metric-Space :
+      is-isometry-Metric-Space A B f →
+      is-lipschitz-map-Metric-Space A B f
+    is-lipschitz-is-isometry-Metric-Space =
+      is-lipschitz-is-short-map-Metric-Space A B f ∘
+      is-short-map-is-isometry-Metric-Space A B f
 ```
 
 ### Lipschitz maps are uniformly continuous
