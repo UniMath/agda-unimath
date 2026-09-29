@@ -157,6 +157,7 @@ open import metric-spaces.modulated-cauchy-sequences-complete-metric-spaces publ
 open import metric-spaces.modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces public
 open import metric-spaces.monotonic-rational-neighborhood-relations public
+open import metric-spaces.morphisms-sequential-diagrams-isometries-metric-spaces public
 open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
