@@ -8,12 +8,14 @@ module group-theory.sums-of-finite-families-of-elements-abelian-groups where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.type-arithmetic-cartesian-product-types
@@ -21,11 +23,14 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.products-of-finite-families-of-elements-commutative-monoids
 open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
 
+open import univalent-combinatorics.complements-decidable-subtypes
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -79,7 +84,7 @@ module _
 ```agda
 module _
   {l : Level} (G : Ab l)
-  where
+  where abstract
 
   htpy-sum-finite-Ab :
     {l2 : Level} (A : Finite-Type l2) →
@@ -94,7 +99,7 @@ module _
 ```agda
 module _
   {l : Level} (G : Ab l)
-  where
+  where abstract
 
   sum-zero-finite-Ab :
     {l2 : Level} (A : Finite-Type l2) →
@@ -109,7 +114,7 @@ module _
 module _
   {l1 l2 l3 : Level} (G : Ab l1) (A : Finite-Type l2) (B : Finite-Type l3)
   (H : equiv-Finite-Type A B)
-  where
+  where abstract
 
   sum-equiv-finite-Ab :
     (f : type-Finite-Type A → type-Ab G) →
@@ -127,7 +132,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (G : Ab l1) (A : Finite-Type l2) (B : Finite-Type l3)
-  where
+  where abstract
 
   distributive-sum-coproduct-finite-Ab :
     (f :
@@ -150,7 +155,7 @@ module _
 module _
   {l1 l2 l3 : Level} (G : Ab l1)
   (A : Finite-Type l2) (B : type-Finite-Type A → Finite-Type l3)
-  where
+  where abstract
 
   sum-Σ-finite-Ab :
     (f : (a : type-Finite-Type A) → type-Finite-Type (B a) → type-Ab G) →
@@ -166,7 +171,7 @@ module _
 module _
   {l1 l2 : Level} (G : Ab l1) (A : Finite-Type l2)
   (H : is-empty (type-Finite-Type A))
-  where
+  where abstract
 
   eq-zero-sum-finite-is-empty-Ab :
     (f : type-Finite-Type A → type-Ab G) →
@@ -197,7 +202,7 @@ eq-sum-finite-sum-count-Ab G =
 ```agda
 module _
   {l1 l2 : Level} (G : Ab l1) (A : Finite-Type l2)
-  where
+  where abstract
 
   interchange-sum-add-finite-Ab :
     (f g : type-Finite-Type A → type-Ab G) →
@@ -231,4 +236,79 @@ module _
           ＝ sum-finite-Ab G A (λ _ → zero-Ab G)
             by htpy-sum-finite-Ab G A (λ a → right-inverse-law-add-Ab G _)
           ＝ zero-Ab G by sum-zero-finite-Ab G A)
+```
+
+### Sums that vanish on a decidable subtype
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Ab l1) (A : Finite-Type l2)
+  (P : subset-Finite-Type l3 A)
+  where
+
+  abstract
+    vanish-sum-decidable-subset-finite-Ab :
+      (f : type-Finite-Type A → type-Ab G) →
+      ( (a : type-Finite-Type A) → is-in-decidable-subtype P a →
+        is-zero-Ab G (f a)) →
+      sum-finite-Ab G A f ＝
+      sum-finite-Ab G
+        ( finite-type-complement-subset-Finite-Type A P)
+        ( f ∘ inclusion-complement-subset-Finite-Type A P)
+    vanish-sum-decidable-subset-finite-Ab =
+      vanish-product-decidable-subset-finite-Commutative-Monoid
+        ( commutative-monoid-Ab G)
+        ( A)
+        ( P)
+
+    vanish-sum-complement-decidable-subset-finite-Ab :
+      (f : type-Finite-Type A → type-Ab G) →
+      ( (a : type-Finite-Type A) → ¬ (is-in-decidable-subtype P a) →
+        is-zero-Ab G (f a)) →
+      sum-finite-Ab G A f ＝
+      sum-finite-Ab G
+        ( finite-type-subset-Finite-Type A P)
+        ( f ∘ inclusion-subset-Finite-Type A P)
+    vanish-sum-complement-decidable-subset-finite-Ab =
+      vanish-product-complement-decidable-subset-finite-Commutative-Monoid
+        ( commutative-monoid-Ab G)
+        ( A)
+        ( P)
+```
+
+### Sums over contractible types
+
+```agda
+module _
+  {l1 l2 : Level} (G : Ab l1) (I : Finite-Type l2)
+  (is-contr-I : is-contr (type-Finite-Type I))
+  (i : type-Finite-Type I)
+  where
+
+  abstract
+    sum-finite-is-contr-Ab :
+      (f : type-Finite-Type I → type-Ab G) →
+      sum-finite-Ab G I f ＝ f i
+    sum-finite-is-contr-Ab =
+      product-finite-is-contr-Commutative-Monoid
+        ( commutative-monoid-Ab G)
+        ( I)
+        ( is-contr-I)
+        ( i)
+```
+
+### Abelian group homomorphisms distribute over finite sums
+
+```agda
+abstract
+  distributive-hom-sum-finite-Ab :
+    {l1 l2 l3 : Level} (G : Ab l1) (H : Ab l2) (φ : hom-Ab G H)
+    (I : Finite-Type l3) (u : type-Finite-Type I → type-Ab G) →
+    map-hom-Ab G H φ (sum-finite-Ab G I u) ＝
+    sum-finite-Ab H I (map-hom-Ab G H φ ∘ u)
+  distributive-hom-sum-finite-Ab G H φ =
+    distributive-hom-product-finite-Commutative-Monoid
+      ( commutative-monoid-Ab G)
+      ( commutative-monoid-Ab H)
+      ( hom-commutative-monoid-hom-Ab G H φ)
 ```

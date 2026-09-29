@@ -1,7 +1,7 @@
-# Transposition of matrices
+# Transposition of grids
 
 ```agda
-module linear-algebra.transposition-matrices where
+module linear-algebra.transposition-grids where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.matrices
+open import linear-algebra.grids
 
 open import lists.functoriality-tuples
 open import lists.tuples
@@ -25,44 +25,44 @@ open import lists.tuples
 ## Idea
 
 The
-{{#concept "transposition of a matrix" WD="matrix transposition" WDID=Q77961711 Agda=transpose-matrix}}
-is the operation on [matrices](linear-algebra.matrices.md) that turns rows into
+{{#concept "transposition of a grid" WD="grid transposition" WDID=Q77961711 Agda=transpose-grid}}
+is the operation on [grids](linear-algebra.grids.md) that turns rows into
 columns and columns into rows.
 
 ## Definition
 
 ```agda
-transpose-matrix :
-  {l : Level} → {A : UU l} → {m n : ℕ} → matrix A m n → matrix A n m
-transpose-matrix {n = zero-ℕ} x = empty-tuple
-transpose-matrix {n = succ-ℕ n} x =
-  map-tuple head-tuple x ∷ transpose-matrix (map-tuple tail-tuple x)
+transpose-grid :
+  {l : Level} → {A : UU l} → {m n : ℕ} → grid A m n → grid A n m
+transpose-grid {n = zero-ℕ} x = empty-tuple
+transpose-grid {n = succ-ℕ n} x =
+  map-tuple head-tuple x ∷ transpose-grid (map-tuple tail-tuple x)
 ```
 
 ## Properties
 
 ```agda
-is-involution-transpose-matrix :
+is-involution-transpose-grid :
   {l : Level} → {A : UU l} → {m n : ℕ} →
-  (x : matrix A m n) → x ＝ transpose-matrix (transpose-matrix x)
-is-involution-transpose-matrix {m = zero-ℕ} empty-tuple = refl
-is-involution-transpose-matrix {m = succ-ℕ m} (r ∷ rs) =
-  ( ap (_∷_ r) (is-involution-transpose-matrix rs)) ∙
+  (x : grid A m n) → x ＝ transpose-grid (transpose-grid x)
+is-involution-transpose-grid {m = zero-ℕ} empty-tuple = refl
+is-involution-transpose-grid {m = succ-ℕ m} (r ∷ rs) =
+  ( ap (_∷_ r) (is-involution-transpose-grid rs)) ∙
   ( ap-binary _∷_
-    ( lemma-first-row r rs) (ap transpose-matrix (lemma-rest r rs)))
+    ( lemma-first-row r rs) (ap transpose-grid (lemma-rest r rs)))
   where
   lemma-first-row :
     {l : Level} → {A : UU l} → {m n : ℕ} → (x : tuple A n) →
-    (xs : matrix A m n) →
-    x ＝ map-tuple head-tuple (transpose-matrix (x ∷ xs))
+    (xs : grid A m n) →
+    x ＝ map-tuple head-tuple (transpose-grid (x ∷ xs))
   lemma-first-row {n = zero-ℕ} empty-tuple _ = refl
   lemma-first-row {n = succ-ℕ m} (k ∷ ks) xs =
     ap (_∷_ k) (lemma-first-row ks (map-tuple tail-tuple xs))
 
   lemma-rest :
     {l : Level} → {A : UU l} → {m n : ℕ} → (x : tuple A n) →
-    (xs : matrix A m n) →
-    transpose-matrix xs ＝ map-tuple tail-tuple (transpose-matrix (x ∷ xs))
+    (xs : grid A m n) →
+    transpose-grid xs ＝ map-tuple tail-tuple (transpose-grid (x ∷ xs))
   lemma-rest {n = zero-ℕ} empty-tuple xs = refl
   lemma-rest {n = succ-ℕ n} (k ∷ ks) xs =
     ap

@@ -9,11 +9,11 @@ module linear-algebra.finite-sequences-in-rings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
@@ -22,10 +22,12 @@ open import group-theory.commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
+open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
 
 open import linear-algebra.finite-sequences-in-semirings
 open import linear-algebra.left-modules-rings
 open import linear-algebra.linear-maps-left-modules-rings
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-rings
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
@@ -34,6 +36,10 @@ open import ring-theory.function-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -75,6 +81,11 @@ module _
 
   fin-sequence-type-Ring : UU l
   fin-sequence-type-Ring = fin-sequence (type-Ring R) n
+
+  scalar-mul-fin-sequence-type-Ring :
+    type-Ring R → fin-sequence-type-Ring → fin-sequence-type-Ring
+  scalar-mul-fin-sequence-type-Ring =
+    mul-left-module-Ring R left-module-fin-sequence-Ring
 ```
 
 ### Inherited algebraic structures on the type of finite sequences in a ring
@@ -311,4 +322,29 @@ module _
   coordinate-linear-map-fin-sequence-Ring =
     coordinate-map-fin-sequence-Ring ,
     is-linear-coordinate-map-fin-sequence-Ring
+```
+
+### Coordinates of sequence sums
+
+```agda
+abstract
+  coordinate-sum-fin-sequence-fin-sequence-type-Ring :
+    {l : Level} (R : Ring l) (m n : ℕ) (i : Fin n)
+    (v : fin-sequence (fin-sequence-type-Ring R n) m) →
+    sum-fin-sequence-type-left-module-Ring
+      ( R)
+      ( left-module-fin-sequence-Ring R n)
+      ( m)
+      ( v)
+      ( i) ＝
+    sum-fin-sequence-type-Ab (ab-Ring R) m (λ j → v j i)
+  coordinate-sum-fin-sequence-fin-sequence-type-Ring R m n i =
+    distributive-hom-sum-fin-sequence-type-Ab
+      ( ab-left-module-Ring R (left-module-fin-sequence-Ring R n))
+      ( ab-Ring R)
+      ( hom-ab-linear-map-left-module-Ring R
+        ( left-module-fin-sequence-Ring R n)
+        ( left-module-ring-Ring R)
+        ( coordinate-linear-map-fin-sequence-Ring R n i))
+      ( m)
 ```
