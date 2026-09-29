@@ -12,6 +12,7 @@ module real-numbers.rational-real-numbers where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-rational-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
@@ -96,6 +97,9 @@ real-ℤ x = real-ℚ (rational-ℤ x)
 ```agda
 real-ℕ : ℕ → ℝ lzero
 real-ℕ n = real-ℤ (int-ℕ n)
+
+real-ℕ⁺ : ℕ⁺ → ℝ lzero
+real-ℕ⁺ n = real-ℕ (nat-ℕ⁺ n)
 ```
 
 ### Zero as a real number

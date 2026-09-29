@@ -341,7 +341,7 @@ module _
             ap-add-Commutative-Semiring R
               ( ap
                 ( seq-standard-geometric-sequence-Commutative-Semiring R a r)
-                ( is-zero-nat-zero-Fin {n}))
+                ( nat-zero-Fin n))
               ( htpy-sum-fin-sequence-type-Commutative-Semiring R n
                 ( λ i →
                   ap

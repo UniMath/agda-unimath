@@ -135,7 +135,7 @@ module _
                 ( sign-homomorphism-Fin-2 n
                   ( Fin-Type-With-Cardinality-ℕ n)
                   ( inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
-            ( is-zero-nat-zero-Fin {k = 1}) ∙
+            ( nat-zero-Fin 1) ∙
             ( is-section-nat-Fin 1
               ( sign-homomorphism-Fin-2 n
                 ( Fin-Type-With-Cardinality-ℕ n)

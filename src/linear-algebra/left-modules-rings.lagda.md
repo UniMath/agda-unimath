@@ -90,6 +90,11 @@ module _
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
 
+  ap-add-left-module-Ring :
+    {x y x' y' : type-left-module-Ring} →
+    x ＝ x' → y ＝ y' → add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring = ap-add-Ab ab-left-module-Ring
+
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
 
@@ -101,6 +106,10 @@ module _
 
   neg-left-module-Ring : type-left-module-Ring → type-left-module-Ring
   neg-left-module-Ring = neg-Ab ab-left-module-Ring
+
+  diff-left-module-Ring :
+    type-left-module-Ring → type-left-module-Ring → type-left-module-Ring
+  diff-left-module-Ring = right-subtraction-Ab ab-left-module-Ring
 
   endomorphism-ring-ab-left-module-Ring : Ring l2
   endomorphism-ring-ab-left-module-Ring =

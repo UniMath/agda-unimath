@@ -193,7 +193,7 @@ convert-based-succ-based-ℕ
   ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr _)) =
   ( ap
     ( λ t → ((succ-ℕ k) *ℕ (succ-ℕ t)) +ℕ t)
-    ( is-zero-nat-zero-Fin {k})) ∙
+    ( nat-zero-Fin k)) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
   ap
@@ -205,7 +205,7 @@ convert-based-succ-based-ℕ
     ( ( ( succ-ℕ k) *ℕ
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
           +ℕ_)
-    ( is-zero-nat-zero-Fin {k})) ∙
+    ( nat-zero-Fin k)) ∙
   ( ( ap
       ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
       ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
@@ -218,7 +218,7 @@ convert-based-succ-based-ℕ
 
 is-section-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n
-is-section-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
+is-section-inv-convert-based-ℕ k zero-ℕ = nat-zero-Fin k
 is-section-inv-convert-based-ℕ k (succ-ℕ n) =
   ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) ∙
   ( ap succ-ℕ (is-section-inv-convert-based-ℕ k n))

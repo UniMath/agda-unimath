@@ -25,10 +25,13 @@ open import foundation.universe-levels
 
 open import lists.finite-sequences
 
+open import order-theory.upper-bounds-large-posets
+
 open import real-numbers.addition-nonnegative-real-numbers
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-nonnegative-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -89,6 +92,20 @@ abstract
     eq-ℝ⁰⁺ _ _ (preserves-sum-permutation-fin-sequence-ℝ n σ (real-ℝ⁰⁺ ∘ a))
 ```
 
+### Sums of constant sequences
+
+```agda
+abstract
+  sum-constant-fin-sequence-ℝ⁰⁺ :
+    {l : Level} (n : ℕ) (c : ℝ⁰⁺ l) →
+    sum-fin-sequence-ℝ⁰⁺ n (λ _ → c) ＝ nonnegative-real-ℕ n *ℝ⁰⁺ c
+  sum-constant-fin-sequence-ℝ⁰⁺ n c =
+    eq-ℝ⁰⁺
+      ( sum-fin-sequence-ℝ⁰⁺ n (λ _ → c))
+      ( nonnegative-real-ℕ n *ℝ⁰⁺ c)
+      ( sum-constant-fin-sequence-ℝ n (real-ℝ⁰⁺ c))
+```
+
 ### If `aᵢ ≤ bᵢ` for all `i`, then the sum of the `aᵢ` is less than or equal to the sum of the `bᵢ`
 
 ```agda
@@ -100,6 +117,21 @@ abstract
     leq-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n a) (sum-fin-sequence-ℝ⁰⁺ n b)
   preserves-leq-sum-fin-sequence-ℝ⁰⁺ n a b aᵢ≤bᵢ =
     preserves-leq-sum-fin-sequence-ℝ n (real-ℝ⁰⁺ ∘ a) (real-ℝ⁰⁺ ∘ b) aᵢ≤bᵢ
+```
+
+### If `aᵢ ≤ b` for all `i`, then the sum of the `aᵢ` is less than or equal to `n * b`
+
+```agda
+abstract
+  leq-mul-bound-sum-fin-sequence-ℝ⁰⁺ :
+    {l1 l2 : Level} (n : ℕ) (u : fin-sequence (ℝ⁰⁺ l1) n) (b : ℝ⁰⁺ l2) →
+    is-upper-bound-family-of-elements-Large-Poset large-poset-ℝ⁰⁺ u b →
+    leq-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n u) (nonnegative-real-ℕ n *ℝ⁰⁺ b)
+  leq-mul-bound-sum-fin-sequence-ℝ⁰⁺ n u b uᵢ≤b =
+    tr
+      ( leq-ℝ⁰⁺ (sum-fin-sequence-ℝ⁰⁺ n u))
+      ( sum-constant-fin-sequence-ℝ⁰⁺ n b)
+      ( preserves-leq-sum-fin-sequence-ℝ⁰⁺ n u (λ _ → b) uᵢ≤b)
 ```
 
 ### If `aᵢ` is nonnegative for all `i`, `aᵢ ≤ ∑ aᵢ`

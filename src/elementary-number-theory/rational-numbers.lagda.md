@@ -14,6 +14,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
@@ -117,6 +118,9 @@ pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
 ```agda
 rational-ℕ : ℕ → ℚ
 rational-ℕ n = rational-ℤ (int-ℕ n)
+
+rational-ℕ⁺ : ℕ⁺ → ℚ
+rational-ℕ⁺ n = rational-ℕ (nat-ℕ⁺ n)
 ```
 
 ### Negative one, zero and one
