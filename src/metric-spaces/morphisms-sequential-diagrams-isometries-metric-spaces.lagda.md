@@ -69,7 +69,7 @@ is a sequence `f : (n : ℕ) → isometry Xₙ Yₙ` such that all squares
 [commute](foundation.commuting-squares-of-maps.md), i.e., a sequence of
 isometries whose underlying maps forms a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) between
-then underlying
+the underlying
 [sequential diagrams](synthetic-homotopy-theory.sequential-diagrams.md).
 
 ## Definitions
