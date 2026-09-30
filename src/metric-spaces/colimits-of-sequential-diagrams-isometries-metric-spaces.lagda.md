@@ -37,6 +37,7 @@ open import metric-spaces.maps-metric-spaces
 open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-quotients-of-pseudometric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.morphisms-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
 open import metric-spaces.reflexive-rational-neighborhood-relations
@@ -1043,4 +1044,41 @@ module _
         ( M)
         ( X)
         ( C))
+```
+
+### Morphisms of sequential diagrams induce isometries between colimits
+
+Morphisms between sequential diagrams extend to the colimit:
+
+```text
+  X₀ ---> X₁ ---> ... ---> Xₙ ... ---> X∞
+  |       |                |           |
+  |       |                |           |
+  ∨       ∨                ∨           v
+  Y₀ ---> Y₁ ---> ... ---> Yₙ ... ---> Y∞
+```
+
+```agda
+module _
+  {lx lx' ly ly' : Level}
+  (X : sequential-diagram-isometry-Metric-Space lx lx')
+  (Y : sequential-diagram-isometry-Metric-Space ly ly')
+  (h : hom-sequential-diagram-isometry-Metric-Space X Y)
+  where
+
+  isometry-colimit-hom-sequential-diagram-isometry-Metric-Space :
+    isometry-Metric-Space
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space X)
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space Y)
+  isometry-colimit-hom-sequential-diagram-isometry-Metric-Space =
+    isometry-exten-cocone-metric-space-colimit-sequential-diagram-isometry-Metric-Space
+      ( X)
+      ( metric-space-colimit-sequential-diagram-isometry-Metric-Space Y)
+      ( postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space
+        ( X)
+        ( Y)
+        ( metric-space-colimit-sequential-diagram-isometry-Metric-Space Y)
+        ( h)
+        ( cocone-metric-space-colimit-sequential-diagram-isometry-Metric-Space
+          ( Y)))
 ```

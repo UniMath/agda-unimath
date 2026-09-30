@@ -9,16 +9,19 @@ module metric-spaces.cocones-sequential-diagrams-isometries-metric-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.morphisms-sequential-diagrams-isometries-metric-spaces
 open import metric-spaces.sequential-diagrams-isometries-metric-spaces
 ```
 
@@ -144,4 +147,64 @@ module _
       ( X)
       ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space)
   coh-triangle-cocone-sequential-diagram-isometry-Metric-Space = pr2 C
+```
+
+## Properties
+
+### Action of morphisms on cocones
+
+```agda
+module _
+  {lx lx' ly ly' lm lm' : Level}
+  (X : sequential-diagram-isometry-Metric-Space lx lx')
+  (Y : sequential-diagram-isometry-Metric-Space ly ly')
+  (M : Metric-Space lm lm')
+  (h : hom-sequential-diagram-isometry-Metric-Space X Y)
+  where
+
+  postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space :
+    cocone-sequential-diagram-isometry-Metric-Space Y M →
+    cocone-sequential-diagram-isometry-Metric-Space X M
+  postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space Cy =
+    ( seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space ,
+      coh-seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space)
+    where
+
+    seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space :
+      (n : ℕ) →
+      isometry-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space X n)
+        ( M)
+    seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space n =
+      comp-isometry-Metric-Space
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space X n)
+        ( seq-metric-space-sequential-diagram-isometry-Metric-Space Y n)
+        ( M)
+        ( seq-isometry-cocone-sequential-diagram-isometry-Metric-Space Y M Cy n)
+        ( seq-isometry-hom-sequential-diagram-isometry-Metric-Space X Y h n)
+
+    coh-seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space :
+      is-coherent-seq-map-cocone-sequential-diagram-isometry-Metric-Space
+        ( X)
+        ( M)
+        ( seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space)
+    coh-seq-postcomp-cocone-hom-sequential-diagram-isometry-Metric-Space n x =
+      coh-triangle-cocone-sequential-diagram-isometry-Metric-Space
+        ( Y)
+        ( M)
+        ( Cy)
+        ( n)
+        ( _) ∙
+      ap
+        ( seq-map-isometry-cocone-sequential-diagram-isometry-Metric-Space
+          ( Y)
+          ( M)
+          ( Cy)
+          ( succ-ℕ n))
+        ( naturality-seq-isometry-hom-sequential-diagram-isometry-Metric-Space
+          ( X)
+          ( Y)
+          ( h)
+          ( n)
+          ( x))
 ```
