@@ -16,6 +16,7 @@ if (link) {
     'HOME.md',
     'HOWTO-INSTALL.md',
     'MIXFIX-OPERATORS.md',
+    'POSTULATES.md',
     'PROJECTS.md',
     'STATEMENT-OF-INCLUSIVITY.md',
     'TEMPLATE.lagda.md',
