@@ -9,6 +9,7 @@ module linear-algebra.left-modules-rings where
 ```agda
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -89,6 +90,16 @@ module _
   add-left-module-Ring :
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
+
+  ap-add-left-module-Ring :
+    {x x' : type-left-module-Ring} → x ＝ x' →
+    {y y' : type-left-module-Ring} → y ＝ y' →
+    add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring = ap-binary add-left-module-Ring
+
+  diff-left-module-Ring :
+    (x y : type-left-module-Ring) → type-left-module-Ring
+  diff-left-module-Ring = right-subtraction-Ab ab-left-module-Ring
 
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
@@ -556,6 +567,31 @@ module _
   left-module-hom-Ring : left-module-Ring l2 R
   left-module-hom-Ring =
     left-module-hom-left-module-Ring R S h (left-module-ring-Ring S)
+```
+
+### Scalar multiplication is distributive over subtraction
+
+```agda
+module _
+  {l1 l2 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  where abstract
+
+  left-distributive-mul-diff-left-module-Ring :
+    (r : type-Ring R) (x y : type-left-module-Ring R M) →
+    mul-left-module-Ring R M r (diff-left-module-Ring R M x y) ＝
+    diff-left-module-Ring R M
+      ( mul-left-module-Ring R M r x)
+      ( mul-left-module-Ring R M r y)
+  left-distributive-mul-diff-left-module-Ring r x y =
+    ( left-distributive-mul-add-left-module-Ring R M
+      ( r)
+      ( x)
+      ( neg-left-module-Ring R M y)) ∙
+    ( ap-add-left-module-Ring R M
+      ( refl)
+      ( right-negative-law-mul-left-module-Ring R M r y))
 ```
 
 ## See also
