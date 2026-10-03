@@ -55,6 +55,7 @@ open import real-numbers.inequality-upper-dedekind-real-numbers public
 open import real-numbers.infima-and-suprema-families-real-numbers public
 open import real-numbers.infima-families-real-numbers public
 open import real-numbers.inhabited-finitely-enumerable-subsets-real-numbers public
+open import real-numbers.inhabited-totally-bounded-subsets-nonnegative-real-numbers public
 open import real-numbers.inhabited-totally-bounded-subsets-real-numbers public
 open import real-numbers.integer-powers-positive-real-numbers public
 open import real-numbers.irrational-real-numbers public
@@ -146,6 +147,7 @@ open import real-numbers.strictly-increasing-real-maps-proper-closed-intervals-r
 open import real-numbers.subsets-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-nonnegative-real-numbers public
 open import real-numbers.sums-of-finite-sequences-of-real-numbers public
+open import real-numbers.suprema-families-nonnegative-real-numbers public
 open import real-numbers.suprema-families-real-numbers public
 open import real-numbers.totally-bounded-subsets-real-numbers public
 open import real-numbers.transposition-addition-subtraction-cuts-dedekind-real-numbers public

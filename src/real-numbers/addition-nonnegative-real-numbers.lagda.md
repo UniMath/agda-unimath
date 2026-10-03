@@ -15,6 +15,7 @@ open import elementary-number-theory.nonnegative-rational-numbers
 open import elementary-number-theory.positive-and-negative-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -69,6 +70,13 @@ infixl 35 _+ℝ⁰⁺_
 
 _+ℝ⁰⁺_ : {l1 l2 : Level} → ℝ⁰⁺ l1 → ℝ⁰⁺ l2 → ℝ⁰⁺ (l1 ⊔ l2)
 _+ℝ⁰⁺_ = add-ℝ⁰⁺
+
+ap-add-ℝ⁰⁺ :
+  {l1 l2 : Level}
+  {x x' : ℝ⁰⁺ l1} → x ＝ x' →
+  {y y' : ℝ⁰⁺ l2} → y ＝ y' →
+  x +ℝ⁰⁺ y ＝ x' +ℝ⁰⁺ y'
+ap-add-ℝ⁰⁺ = ap-binary add-ℝ⁰⁺
 ```
 
 ## Properties

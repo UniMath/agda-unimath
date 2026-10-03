@@ -161,3 +161,51 @@ module _
     ( diagonal-product (type-Metric-Space X) ,
       ( λ _ _ _ → ((λ N → (N , N)) , pr1)))
 ```
+
+### Given a constant element `x : X`, the map `y ↦ (x , y)` is an isometry
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (x : type-Metric-Space X)
+  where
+
+  abstract
+    is-isometry-left-pair-Metric-Space :
+      is-isometry-Metric-Space Y (product-Metric-Space X Y) (x ,_)
+    pr1 (is-isometry-left-pair-Metric-Space d y y') Ndyy' =
+      ( refl-neighborhood-Metric-Space X d x , Ndyy')
+    pr2 (is-isometry-left-pair-Metric-Space d x x') = pr2
+
+  isometry-left-pair-Metric-Space :
+    isometry-Metric-Space Y (product-Metric-Space X Y)
+  isometry-left-pair-Metric-Space =
+    ( (x ,_) ,
+      is-isometry-left-pair-Metric-Space)
+```
+
+### Given a constant element `y : Y`, the map `x ↦ (x , y)` is an isometry
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : Metric-Space l3 l4)
+  (y : type-Metric-Space Y)
+  where
+
+  abstract
+    is-isometry-right-pair-Metric-Space :
+      is-isometry-Metric-Space X (product-Metric-Space X Y) (_, y)
+    pr1 (is-isometry-right-pair-Metric-Space d x x') Ndxx' =
+      ( Ndxx' , refl-neighborhood-Metric-Space Y d y)
+    pr2 (is-isometry-right-pair-Metric-Space d x x') = pr1
+
+  isometry-right-pair-Metric-Space :
+    isometry-Metric-Space X (product-Metric-Space X Y)
+  isometry-right-pair-Metric-Space =
+    ( ( _, y) ,
+      is-isometry-right-pair-Metric-Space)
+```

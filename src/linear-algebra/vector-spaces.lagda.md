@@ -18,6 +18,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 
 open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.left-modules-rings
 ```
 
 </details>
@@ -58,6 +59,9 @@ module _
 
   add-Vector-Space : type-Vector-Space → type-Vector-Space → type-Vector-Space
   add-Vector-Space = add-Ab ab-Vector-Space
+
+  diff-Vector-Space : type-Vector-Space → type-Vector-Space → type-Vector-Space
+  diff-Vector-Space = right-subtraction-Ab ab-Vector-Space
 
   zero-Vector-Space : type-Vector-Space
   zero-Vector-Space = zero-Ab ab-Vector-Space
@@ -123,6 +127,15 @@ module _
       ( commutative-ring-Heyting-Field R)
       ( V)
 
+  left-distributive-mul-diff-Vector-Space :
+    (r : type-Heyting-Field R) (v w : type-Vector-Space) →
+    mul-Vector-Space r (diff-Vector-Space v w) ＝
+    diff-Vector-Space (mul-Vector-Space r v) (mul-Vector-Space r w)
+  left-distributive-mul-diff-Vector-Space =
+    left-distributive-mul-diff-left-module-Ring
+      ( ring-Heyting-Field R)
+      ( V)
+
   right-distributive-mul-add-Vector-Space :
     (r s : type-Heyting-Field R) (v : type-Vector-Space) →
     mul-Vector-Space (add-Heyting-Field R r s) v ＝
@@ -130,6 +143,15 @@ module _
   right-distributive-mul-add-Vector-Space =
     right-distributive-mul-add-left-module-Commutative-Ring
       ( commutative-ring-Heyting-Field R)
+      ( V)
+
+  right-distributive-mul-diff-Vector-Space :
+    (r s : type-Heyting-Field R) (v : type-Vector-Space) →
+    mul-Vector-Space (diff-Heyting-Field R r s) v ＝
+    diff-Vector-Space (mul-Vector-Space r v) (mul-Vector-Space s v)
+  right-distributive-mul-diff-Vector-Space =
+    right-distributive-mul-diff-left-module-Ring
+      ( ring-Heyting-Field R)
       ( V)
 
   associative-mul-Vector-Space :
