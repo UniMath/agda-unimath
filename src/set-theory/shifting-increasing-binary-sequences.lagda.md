@@ -31,6 +31,11 @@ define a
 {{#concept "shift operation" Disambiguation="on increasing binary sequences by a natural number" Agda=shift-ℕ∞↗}}
 on [increasing binary sequences](set-theory.increasing-binary-sequences.md) by
 the `n` times [iterated](foundation.iterating-functions.md) successor function.
+This shifts a sequence `n` steps to the right, padding it with `false`. In the
+other direction,
+[`shift-left-ℕ∞↗`](set-theory.increasing-binary-sequences.md#shift-left) drops
+the first entry of a sequence, so shifting right by `n` and then left `n` times
+gives back the original sequence.
 
 ## Definition
 
