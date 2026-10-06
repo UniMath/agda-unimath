@@ -21,12 +21,17 @@ open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-integer-fractions
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-integers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -190,7 +195,10 @@ positive-rational-ℕ⁺ : ℕ⁺ → ℚ⁺
 positive-rational-ℕ⁺ n = positive-rational-positive-ℤ (positive-int-ℕ⁺ n)
 
 two-ℚ⁺ : ℚ⁺
-two-ℚ⁺ = positive-rational-ℕ⁺ (2 , λ ())
+two-ℚ⁺ = positive-rational-ℕ⁺ two-ℕ⁺
+
+three-ℚ⁺ : ℚ⁺
+three-ℚ⁺ = positive-rational-ℕ⁺ three-ℕ⁺
 ```
 
 ### The rational image of a positive integer fraction is positive

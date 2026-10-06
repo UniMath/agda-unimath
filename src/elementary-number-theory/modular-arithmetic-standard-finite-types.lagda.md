@@ -26,7 +26,6 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.sets
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.universe-levels

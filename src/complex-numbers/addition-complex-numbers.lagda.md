@@ -9,12 +9,14 @@ module complex-numbers.addition-complex-numbers where
 ```agda
 open import complex-numbers.complex-numbers
 open import complex-numbers.conjugation-complex-numbers
+open import complex-numbers.raising-universe-levels-complex-numbers
 open import complex-numbers.similarity-complex-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.universe-levels
 
 open import real-numbers.addition-real-numbers
@@ -105,6 +107,14 @@ abstract
     sim-ℂ x x' → sim-ℂ y y' → sim-ℂ (x +ℂ y) (x' +ℂ y')
   preserves-sim-add-ℂ (a~a' , b~b') (c~c' , d~d') =
     ( preserves-sim-add-ℝ a~a' c~c' , preserves-sim-add-ℝ b~b' d~d')
+
+sim-preserving-binary-operator-add-ℂ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℂ
+sim-preserving-binary-operator-add-ℂ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℂ)
+    ( add-ℂ)
+    ( λ _ _ _ _ → preserves-sim-add-ℂ)
 ```
 
 ### The sum of `z` and `conjugate-ℂ z` is double `re-ℂ z`

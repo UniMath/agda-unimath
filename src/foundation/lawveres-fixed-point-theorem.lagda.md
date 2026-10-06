@@ -9,7 +9,7 @@ module foundation.lawveres-fixed-point-theorem where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.universe-levels

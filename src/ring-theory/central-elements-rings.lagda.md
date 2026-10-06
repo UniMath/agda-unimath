@@ -8,11 +8,15 @@ module ring-theory.central-elements-rings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.central-elements-monoids
+
 open import ring-theory.central-elements-semirings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -33,15 +37,16 @@ module _
 
   is-central-element-prop-Ring : type-Ring R → Prop l
   is-central-element-prop-Ring =
-    is-central-element-semiring-Prop (semiring-Ring R)
+    is-central-element-prop-Semiring (semiring-Ring R)
 
   is-central-element-Ring : type-Ring R → UU l
   is-central-element-Ring = is-central-element-Semiring (semiring-Ring R)
 
-  is-prop-is-central-element-Ring :
-    (x : type-Ring R) → is-prop (is-central-element-Ring x)
-  is-prop-is-central-element-Ring =
-    is-prop-is-central-element-Semiring (semiring-Ring R)
+  abstract
+    is-prop-is-central-element-Ring :
+      (x : type-Ring R) → is-prop (is-central-element-Ring x)
+    is-prop-is-central-element-Ring =
+      is-prop-is-central-element-Semiring (semiring-Ring R)
 ```
 
 ## Properties
@@ -125,4 +130,21 @@ module _
     is-central-element-Ring R y → is-central-element-Ring R (mul-Ring R x y)
   is-central-element-mul-Ring =
     is-central-element-mul-Semiring (semiring-Ring R)
+```
+
+### The inverse of a central invertible element is central
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where abstract
+
+  is-central-element-inv-is-invertible-element-Ring :
+    (x : type-Ring R) →
+    (H : is-invertible-element-Ring R x) →
+    is-central-element-Ring R x →
+    is-central-element-Ring R (inv-is-invertible-element-Ring R H)
+  is-central-element-inv-is-invertible-element-Ring =
+    is-central-element-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
 ```

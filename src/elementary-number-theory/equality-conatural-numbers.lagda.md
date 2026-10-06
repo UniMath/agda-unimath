@@ -25,7 +25,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.maybe
 open import foundation.negation
 open import foundation.retractions
 open import foundation.retracts-of-types
@@ -35,6 +34,8 @@ open import foundation.tight-apartness-relations
 open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import logic.double-negation-elimination
 ```

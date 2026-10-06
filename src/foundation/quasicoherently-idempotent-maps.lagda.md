@@ -11,6 +11,7 @@ open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra

@@ -22,12 +22,15 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.propositions
+open import foundation.subuniverse-of-contractible-types
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type

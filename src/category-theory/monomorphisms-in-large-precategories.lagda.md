@@ -10,6 +10,7 @@ module category-theory.monomorphisms-in-large-precategories where
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositions

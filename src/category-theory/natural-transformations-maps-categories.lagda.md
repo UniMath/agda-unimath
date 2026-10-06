@@ -11,6 +11,7 @@ open import category-theory.categories
 open import category-theory.maps-categories
 open import category-theory.natural-transformations-maps-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.homotopies

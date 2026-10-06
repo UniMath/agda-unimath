@@ -11,7 +11,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-dense-equality
 open import foundation.irrefutable-equality
-open import foundation.maybe
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
@@ -23,6 +22,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.maybe
 open import foundation-core.negation
 
 open import logic.propositionally-decidable-types

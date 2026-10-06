@@ -14,6 +14,7 @@ open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes

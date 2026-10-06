@@ -9,6 +9,7 @@ module order-theory.galois-connections where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.logical-equivalences

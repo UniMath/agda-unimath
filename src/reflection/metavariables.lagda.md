@@ -9,9 +9,10 @@ module reflection.metavariables where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
-open import foundation.identity-types
 open import foundation.universe-levels
+
+open import foundation-core.booleans
+open import foundation-core.identity-types
 
 open import lists.lists
 

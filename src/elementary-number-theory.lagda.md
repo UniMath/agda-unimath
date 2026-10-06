@@ -59,6 +59,7 @@ open import elementary-number-theory.decidable-total-order-rational-numbers publ
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
+open import elementary-number-theory.difference-natural-numbers public
 open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
@@ -118,6 +119,7 @@ open import elementary-number-theory.intersections-closed-intervals-rational-num
 open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
+open import elementary-number-theory.linear-congruence-theorem-integers public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-nonnegative-rational-numbers public
@@ -196,6 +198,7 @@ open import elementary-number-theory.proper-closed-intervals-rational-numbers pu
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
+open import elementary-number-theory.reciprocal-factorials public
 open import elementary-number-theory.reduced-integer-fractions public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
@@ -225,8 +228,8 @@ open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strict-inequality-standard-finite-types public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
+open import elementary-number-theory.sums-of-finite-sequences-of-natural-numbers public
 open import elementary-number-theory.sums-of-finite-sequences-of-rational-numbers public
-open import elementary-number-theory.sums-of-natural-numbers public
 open import elementary-number-theory.sylvesters-sequence public
 open import elementary-number-theory.taxicab-numbers public
 open import elementary-number-theory.telephone-numbers public

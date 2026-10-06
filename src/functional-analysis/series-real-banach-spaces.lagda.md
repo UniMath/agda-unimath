@@ -7,9 +7,7 @@ module functional-analysis.series-real-banach-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import analysis.metric-abelian-groups-normed-real-vector-spaces
 open import analysis.series-metric-abelian-groups
-open import analysis.series-real-numbers
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -18,9 +16,12 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import functional-analysis.metric-abelian-groups-normed-real-vector-spaces
 open import functional-analysis.real-banach-spaces
 
 open import lists.sequences
+
+open import real-analysis.series-real-numbers
 ```
 
 </details>
@@ -31,8 +32,8 @@ A
 {{#concept "series" Disambiguation="in a real Banach space" Agda=series-ℝ-Banach-Space}}
 is a [series](analysis.series-metric-abelian-groups.md) in the
 [metric abelian group](analysis.metric-abelian-groups.md)
-[associated](analysis.metric-abelian-groups-normed-real-vector-spaces.md) with
-the underlying
+[associated](functional-analysis.metric-abelian-groups-normed-real-vector-spaces.md)
+with the underlying
 [normed real vector space](linear-algebra.normed-real-vector-spaces.md).
 
 ## Definition

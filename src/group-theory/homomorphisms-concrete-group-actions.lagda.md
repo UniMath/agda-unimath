@@ -8,6 +8,7 @@ module group-theory.homomorphisms-concrete-group-actions where
 
 ```agda
 open import foundation.0-connected-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality

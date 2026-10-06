@@ -8,6 +8,7 @@ module elementary-number-theory.binary-sum-decompositions-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -91,10 +92,7 @@ module _
     (x y : binary-sum-decomposition-ℕ n) → Eq-binary-sum-decomposition-ℕ x y →
     x ＝ y
   eq-Eq-binary-sum-decomposition-ℕ (a , b , b+a=n) (.a , b' , b'+a=n) refl =
-    eq-pair-eq-fiber
-      ( eq-pair-Σ
-        ( is-injective-right-add-ℕ a (b+a=n ∙ inv b'+a=n))
-        ( eq-type-Prop (Id-Prop ℕ-Set _ _)))
+    eq-pair-eq-fiber (eq-is-prop (is-prop-type-subtraction-ℕ a n))
 
   abstract
     is-set-binary-sum-decomposition-ℕ : is-set (binary-sum-decomposition-ℕ n)
@@ -211,22 +209,20 @@ module _
     is-equiv-is-invertible
       ( λ (k , l , l+k=n) → k , leq-subtraction-ℕ k n l l+k=n)
       ( λ (k , l , l+k=n) →
-        let
-          (l' , l'+k=n) =
-            subtraction-leq-ℕ k n (leq-subtraction-ℕ k n l l+k=n)
-        in
-          eq-pair-eq-fiber
-            ( eq-pair-Σ
-              ( is-injective-right-add-ℕ k (l'+k=n ∙ inv l+k=n))
-              ( eq-type-Prop (Id-Prop ℕ-Set (l +ℕ k) n))))
-    ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
+        eq-pair-eq-fiber (eq-is-prop (is-prop-type-subtraction-ℕ k n)))
+      ( λ (k , k≤n) → eq-pair-eq-fiber (eq-type-Prop (leq-ℕ-Prop k n)))
+
+  equiv-count-binary-sum-decomposition-ℕ :
+    Fin (succ-ℕ n) ≃ binary-sum-decomposition-ℕ n
+  equiv-count-binary-sum-decomposition-ℕ =
+    equiv-binary-sum-decomposition-leq-ℕ ∘e
+    equiv-le-succ-ℕ-leq-ℕ n ∘e
+    equiv-classical-standard-Fin (succ-ℕ n)
 
   count-binary-sum-decomposition-ℕ : count (binary-sum-decomposition-ℕ n)
   pr1 count-binary-sum-decomposition-ℕ = succ-ℕ n
   pr2 count-binary-sum-decomposition-ℕ =
-    equiv-binary-sum-decomposition-leq-ℕ ∘e
-    equiv-le-succ-ℕ-leq-ℕ n ∘e
-    equiv-classical-standard-Fin (succ-ℕ n)
+    equiv-count-binary-sum-decomposition-ℕ
 
   count-reverse-binary-sum-decomposition-ℕ :
     count (binary-sum-decomposition-ℕ n)

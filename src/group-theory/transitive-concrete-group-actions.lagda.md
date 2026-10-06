@@ -10,6 +10,7 @@ module group-theory.transitive-concrete-group-actions where
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types

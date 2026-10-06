@@ -19,6 +19,7 @@ open import commutative-algebra.sums-of-finite-sequences-of-elements-commutative
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binary-sum-decompositions-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.difference-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
@@ -30,6 +31,7 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -253,12 +255,12 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  constant-zero-polynomial-Commutative-Semiring :
+  compute-constant-zero-polynomial-Commutative-Semiring :
     constant-polynomial-Commutative-Semiring R (zero-Commutative-Semiring R) ＝
     zero-polynomial-Commutative-Semiring R
-  constant-zero-polynomial-Commutative-Semiring =
+  compute-constant-zero-polynomial-Commutative-Semiring =
     eq-polynomial-Commutative-Semiring R
-      ( constant-zero-formal-power-series-Commutative-Semiring R)
+      ( compute-constant-zero-formal-power-series-Commutative-Semiring R)
 ```
 
 ### The constant one polynomial is the constant polynomial with value one
@@ -268,12 +270,12 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  constant-one-polynomial-Commutative-Semiring :
+  compute-constant-one-polynomial-Commutative-Semiring :
     constant-polynomial-Commutative-Semiring R (one-Commutative-Semiring R) ＝
     one-polynomial-Commutative-Semiring R
-  constant-one-polynomial-Commutative-Semiring =
+  compute-constant-one-polynomial-Commutative-Semiring =
     eq-polynomial-Commutative-Semiring R
-      ( constant-one-formal-power-series-Commutative-Semiring R)
+      ( compute-constant-one-formal-power-series-Commutative-Semiring R)
 ```
 
 ### Evaluation of polynomials
@@ -1167,7 +1169,7 @@ module _
   constant-polynomial-hom-Commutative-Semiring =
     ( ( ( constant-polynomial-Commutative-Semiring R ,
           preserves-add-constant-polynomial-Commutative-Semiring) ,
-        constant-zero-polynomial-Commutative-Semiring R) ,
+        compute-constant-zero-polynomial-Commutative-Semiring R) ,
       preserves-mul-constant-polynomial-Commutative-Semiring ,
-      constant-one-polynomial-Commutative-Semiring R)
+      compute-constant-one-polynomial-Commutative-Semiring R)
 ```

@@ -8,6 +8,7 @@ module foundation-core.endomorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-truncated-types
 open import foundation.sets
 open import foundation.universe-levels
 

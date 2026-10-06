@@ -12,6 +12,7 @@ open import category-theory.functors-large-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

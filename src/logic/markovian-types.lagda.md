@@ -7,14 +7,20 @@ module logic.markovian-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.booleans
 open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
+open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.negation
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 
@@ -32,8 +38,8 @@ then there is an element of `A` that is
 
 ### The predicate of being Markovian
 
-We phrase the condition using the [type of booleans](foundation.booleans.md) so
-that the predicate is small.
+We phrase the condition using the
+[type of booleans](foundation-core.booleans.md) so that the predicate is small.
 
 ```agda
 is-markovian : {l : Level} → UU l → UU l

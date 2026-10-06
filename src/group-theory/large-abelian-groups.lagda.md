@@ -10,6 +10,7 @@ module group-theory.large-abelian-groups where
 
 ```agda
 open import foundation.automorphisms
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
@@ -45,6 +46,10 @@ record Large-Ab (α : Level → Level) (β : Level → Level → Level) : UUω w
 
   field
     large-group-Large-Ab : Large-Group α β
+
+  cumulative-large-set-Large-Ab : Cumulative-Large-Set α β
+  cumulative-large-set-Large-Ab =
+    cumulative-large-set-Large-Group large-group-Large-Ab
 
   type-Large-Ab : (l : Level) → UU (α l)
   type-Large-Ab = type-Large-Group large-group-Large-Ab

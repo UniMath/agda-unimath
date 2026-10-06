@@ -14,9 +14,10 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.higher-directed-graphs

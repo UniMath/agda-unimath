@@ -31,6 +31,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.similarity-preserving-binary-maps-cumulative-large-sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -296,6 +297,14 @@ abstract
     transitive-sim-ℝ _ _ _
       ( preserves-sim-right-add-ℝ _ _ _ x~x')
       ( preserves-sim-left-add-ℝ _ _ _ y~y')
+
+sim-preserving-binary-operator-add-ℝ :
+  sim-preserving-binary-operator-Cumulative-Large-Set cumulative-large-set-ℝ
+sim-preserving-binary-operator-add-ℝ =
+  make-sim-preserving-binary-operator-Cumulative-Large-Set
+    ( cumulative-large-set-ℝ)
+    ( add-ℝ)
+    ( λ _ _ _ _ → preserves-sim-add-ℝ)
 ```
 
 ### Raised unit laws for addition

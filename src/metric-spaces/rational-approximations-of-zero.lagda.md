@@ -22,6 +22,7 @@ open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -47,7 +48,7 @@ open import metric-spaces.rational-cauchy-approximations
 A map from the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 to the [rationals](elementary-number-theory.rational-numbers.md) `f : ℚ⁺ → ℚ` is
-a {{#concept "rational approximation of zero"  Agda=approximation-of-zero-ℚ}} if
+a {{#concept "rational approximation of zero" Agda=approximation-of-zero-ℚ}} if
 `|f ε| ≤ ε` for all `ε : ℚ⁺`. The type of rational approximations of zero is
 [equivalent](foundation.equivalences.md) to the type of
 [rational Cauchy approximations](metric-spaces.rational-cauchy-approximations.md)

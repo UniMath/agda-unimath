@@ -7,25 +7,16 @@ module orthogonal-factorization-systems.continuation-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.continuations
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
-open import foundation.evaluation-functions
-open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.transport-along-identifications
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
-open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.large-lawvere-tierney-topologies

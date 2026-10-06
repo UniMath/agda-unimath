@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -108,14 +109,23 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} (A : Pseudometric-Space l1 l2)
-  { f g : cauchy-approximation-Pseudometric-Space A}
-  ( f~g :
-    map-cauchy-approximation-Pseudometric-Space A f ~
-    map-cauchy-approximation-Pseudometric-Space A g)
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  (f g : cauchy-approximation-Pseudometric-Space A)
   where
 
-  eq-htpy-cauchy-approximation-Pseudometric-Space : f ＝ g
+  htpy-map-cauchy-approximation-Pseudometric-Space : UU l1
+  htpy-map-cauchy-approximation-Pseudometric-Space =
+    map-cauchy-approximation-Pseudometric-Space A f ~
+    map-cauchy-approximation-Pseudometric-Space A g
+
+module _
+  {l1 l2 : Level} (A : Pseudometric-Space l1 l2)
+  {f g : cauchy-approximation-Pseudometric-Space A}
+  (f~g : htpy-map-cauchy-approximation-Pseudometric-Space A f g)
+  where
+
+  eq-htpy-cauchy-approximation-Pseudometric-Space :
+    f ＝ g
   eq-htpy-cauchy-approximation-Pseudometric-Space =
     eq-type-subtype
       ( is-cauchy-approximation-prop-Pseudometric-Space A)

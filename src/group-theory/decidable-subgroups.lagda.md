@@ -10,6 +10,7 @@ module group-theory.decidable-subgroups where
 open import foundation.binary-relations
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences

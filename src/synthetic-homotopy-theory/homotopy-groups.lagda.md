@@ -9,12 +9,9 @@ module synthetic-homotopy-theory.homotopy-groups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.truncation-levels
-open import foundation.truncations
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups

@@ -14,9 +14,10 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
-open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 
 open import lists.concatenation-lists
 open import lists.lists

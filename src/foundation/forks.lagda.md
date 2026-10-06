@@ -21,6 +21,7 @@ open import foundation.double-arrows
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-of-equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.equivalences-cospan-diagrams
 open import foundation.equivalences-double-arrows
 open import foundation.function-types

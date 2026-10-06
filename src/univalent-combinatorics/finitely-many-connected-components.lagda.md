@@ -13,6 +13,8 @@ open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -214,7 +216,7 @@ has-finitely-many-connected-components-finite-Π :
   has-finitely-many-connected-components ((a : A) → B a)
 has-finitely-many-connected-components-finite-Π {B = B} H K =
   is-finite-equiv'
-    ( equiv-distributive-trunc-Π-is-finite-Set B H)
+    ( equiv-distributive-trunc-Π-is-finite-Set H B)
     ( is-finite-Π H K)
 ```
 

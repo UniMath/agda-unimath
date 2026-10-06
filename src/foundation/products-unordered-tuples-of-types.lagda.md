@@ -9,8 +9,12 @@ module foundation.products-unordered-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.maybe
+open import foundation.transport-along-identifications
 open import foundation.universal-property-maybe
 open import foundation.universe-levels
 open import foundation.unordered-tuples
@@ -54,7 +58,8 @@ equiv-pr-product-unordered-tuple-types n A i =
   ( equiv-Π
     ( element-unordered-tuple (succ-ℕ n) A)
     ( equiv-maybe-structure-element-Type-With-Cardinality-ℕ n
-      ( type-unordered-tuple-Type-With-Cardinality-ℕ (succ-ℕ n) A) i)
+      ( type-unordered-tuple-Type-With-Cardinality-ℕ (succ-ℕ n) A)
+      ( i))
     ( λ x → id-equiv)) ∘e
   ( inv-equiv
     ( equiv-dependent-universal-property-Maybe

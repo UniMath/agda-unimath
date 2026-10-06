@@ -15,6 +15,7 @@ open import elementary-number-theory.multiplication-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions

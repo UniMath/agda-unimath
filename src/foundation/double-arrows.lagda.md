@@ -7,9 +7,10 @@ module foundation.double-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
 ```
 
 </details>

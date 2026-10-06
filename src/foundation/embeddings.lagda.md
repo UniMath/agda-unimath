@@ -12,7 +12,9 @@ open import foundation-core.embeddings public
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types

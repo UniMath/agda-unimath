@@ -13,7 +13,7 @@ The library project was created by
 [Jonathan Prieto-Cubides](https://jonaprieto.github.io), and
 [Egbert Rijke](https://egbertrijke.github.io), and is currently being maintained
 by Egbert Rijke, [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke),
-and [Vojtěch Štěpančík](https://vojtechstep.eu/). Our goal is to create an
+and [Elif Uskuplu](https://elifuskuplu.github.io). Our goal is to create an
 online encyclopedia of formalized mathematics containing an extensive curriculum
 of topics from a univalent point of view. We think libraries of formalized
 mathematics have the potential to be useful, and informative resources for both

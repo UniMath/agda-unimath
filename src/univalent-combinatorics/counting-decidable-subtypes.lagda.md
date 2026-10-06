@@ -16,9 +16,12 @@ open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -118,7 +121,7 @@ is-decidable-count-subtype P e f x =
           pair
             ( pr1 y ＝ x)
             ( pair
-              ( is-set-count e (pr1 y) x)
+              ( is-set-type-count e (pr1 y) x)
               ( has-decidable-equality-count e (pr1 y) x)))
         ( f)))
 ```

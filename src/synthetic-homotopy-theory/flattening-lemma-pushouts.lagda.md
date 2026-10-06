@@ -258,7 +258,7 @@ module _
       ( cocone-flattening-descent-data-pushout)
 ```
 
-### The statement of the flattening lemma for pushouts, using equifibered span diagrams
+### The statement of the flattening lemma for pushouts, using equifibered diagrams
 
 ```agda
 module _
@@ -326,11 +326,47 @@ module _
         ( P)
         ( equifibered-span-diagram-family-cocone-span-diagram c Q)
         ( e))
-```
 
-> The rest remains to be formalized.
+  map-left-family-flattening-equifibered-span-diagram :
+    (s : S) →
+    spanning-type-family-equifibered-span-diagram P s →
+    Q (horizontal-map-cocone f g c (f s))
+  map-left-family-flattening-equifibered-span-diagram s =
+    left-map-equiv-equifibered-span-diagram
+      ( P)
+      ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+      ( e)
+      ( f s) ∘
+    map-left-family-equifibered-span-diagram P s
 
-```text
+  coherence-map-flattening-equifibered-span-diagram :
+    (s : S) (t : spanning-type-family-equifibered-span-diagram P s) →
+    tr Q
+      ( coherence-square-cocone f g c s)
+      ( map-left-family-flattening-equifibered-span-diagram s t) ＝
+    right-map-equiv-equifibered-span-diagram
+      ( P)
+      ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+      ( e)
+      ( g s)
+      ( map-right-family-equifibered-span-diagram P s t)
+  coherence-map-flattening-equifibered-span-diagram s t =
+    ap
+      ( tr Q (coherence-square-cocone f g c s))
+      ( coherence-left-equiv-equifibered-span-diagram
+        ( P)
+        ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+        ( e)
+        ( s)
+        ( t)) ∙
+    inv
+      ( coherence-right-equiv-equifibered-span-diagram
+        ( P)
+        ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+        ( e)
+        ( s)
+        ( t))
+
   coherence-square-cocone-flattening-equifibered-span-diagram :
     coherence-square-maps
       ( horizontal-map-span-flattening-equifibered-span-diagram P)
@@ -340,26 +376,18 @@ module _
   coherence-square-cocone-flattening-equifibered-span-diagram =
     htpy-map-Σ Q
       ( coherence-square-cocone f g c)
-      ( λ s t →
-        left-map-equiv-equifibered-span-diagram
-          ( P)
-          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
-          ( e)
-          ( f s)
-          ( map-left-family-equifibered-span-diagram P s t))
-      ( λ s t → {!   !})
+      ( map-left-family-flattening-equifibered-span-diagram)
+      ( coherence-map-flattening-equifibered-span-diagram)
 
   cocone-flattening-equifibered-span-diagram :
     cocone
       ( vertical-map-span-flattening-equifibered-span-diagram P)
       ( horizontal-map-span-flattening-equifibered-span-diagram P)
       ( Σ X Q)
-  pr1 cocone-flattening-equifibered-span-diagram =
-    horizontal-map-cocone-flattening-equifibered-span-diagram
-  pr1 (pr2 cocone-flattening-equifibered-span-diagram) =
-    vertical-map-cocone-flattening-equifibered-span-diagram
-  pr2 (pr2 cocone-flattening-equifibered-span-diagram) =
-    coherence-square-cocone-flattening-equifibered-span-diagram
+  cocone-flattening-equifibered-span-diagram =
+    ( horizontal-map-cocone-flattening-equifibered-span-diagram ,
+      vertical-map-cocone-flattening-equifibered-span-diagram ,
+      coherence-square-cocone-flattening-equifibered-span-diagram)
 
   flattening-lemma-equifibered-span-diagram-statement : UUω
   flattening-lemma-equifibered-span-diagram-statement =
@@ -372,7 +400,7 @@ module _
 
 ## Properties
 
-### Proof of the flattening lemma for pushouts
+### Proof of the flattening lemma for pushouts, using descent data
 
 The proof uses the theorem that maps from sigma types are equivalent to
 dependent maps over the index type, for which we can invoke the dependent
@@ -620,6 +648,146 @@ module _
         ( refl-htpy)
         ( coherence-square-cocone-flattening-pushout Q f g c)
         ( coherence-cube-flattening-lemma-descent-data-pushout)
+        ( flattening-lemma-pushout Q f g c up-c)
+```
+
+### Proof of the flattening lemma for pushouts, using equifibered diagrams
+
+The proof is carried out by constructing a commuting cube with the standard
+flattening square for `Q` as bottom face and the equifibered flattening square
+for `P` as top face. The vertical faces are induced by the equivalence `e`.
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  ( f : S → A) (g : S → B) (c : cocone f g X)
+  ( P : equifibered-span-diagram (make-span-diagram f g) l5 l6 l7)
+  ( Q : X → UU l8)
+  ( e :
+    equiv-equifibered-span-diagram
+      ( P)
+      ( equifibered-span-diagram-family-cocone-span-diagram c Q))
+  where
+
+  equiv-source-cube-flattening-equifibered-span-diagram :
+    Σ S (spanning-type-family-equifibered-span-diagram P) ≃
+    Σ S (Q ∘ horizontal-map-cocone f g c ∘ f)
+  equiv-source-cube-flattening-equifibered-span-diagram =
+    equiv-tot
+      ( λ x →
+        left-equiv-equiv-equifibered-span-diagram
+          ( P)
+          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+          ( e)
+          ( f x) ∘e
+        ( equiv-left-family-equifibered-span-diagram P x))
+
+  map-source-cube-flattening-equifibered-span-diagram :
+    Σ S (spanning-type-family-equifibered-span-diagram P) →
+    Σ S (Q ∘ horizontal-map-cocone f g c ∘ f)
+  map-source-cube-flattening-equifibered-span-diagram =
+    map-equiv equiv-source-cube-flattening-equifibered-span-diagram
+
+  back-right-coherence-cube-flattening-lemma-equifibered-span-diagram :
+    coherence-square-maps
+      ( horizontal-map-span-flattening-equifibered-span-diagram P)
+      ( map-source-cube-flattening-equifibered-span-diagram)
+      ( tot
+        ( right-map-equiv-equifibered-span-diagram
+          ( P)
+          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+          ( e)))
+      ( horizontal-map-span-flattening-pushout Q f g c)
+  back-right-coherence-cube-flattening-lemma-equifibered-span-diagram =
+    htpy-map-Σ
+      ( Q ∘ vertical-map-cocone f g c)
+      ( refl-htpy)
+      ( λ s →
+        ( tr Q (coherence-square-cocone f g c s)) ∘
+        ( map-left-family-flattening-equifibered-span-diagram f g c P Q e s))
+      ( coherence-map-flattening-equifibered-span-diagram f g c P Q e)
+
+  coherence-cube-flattening-lemma-equifibered-span-diagram :
+    coherence-cube-maps
+      ( vertical-map-span-flattening-pushout Q f g c)
+      ( horizontal-map-span-flattening-pushout Q f g c)
+      ( horizontal-map-cocone-flattening-pushout Q f g c)
+      ( vertical-map-cocone-flattening-pushout Q f g c)
+      ( vertical-map-span-flattening-equifibered-span-diagram P)
+      ( horizontal-map-span-flattening-equifibered-span-diagram P)
+      ( horizontal-map-cocone-flattening-equifibered-span-diagram f g c P Q e)
+      ( vertical-map-cocone-flattening-equifibered-span-diagram f g c P Q e)
+      ( map-source-cube-flattening-equifibered-span-diagram)
+      ( tot
+        ( left-map-equiv-equifibered-span-diagram
+          ( P)
+          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+          ( e)))
+      ( tot
+        ( right-map-equiv-equifibered-span-diagram
+          ( P)
+          ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+          ( e)))
+      ( id)
+      ( coherence-square-cocone-flattening-equifibered-span-diagram
+        f g c P Q e)
+      ( refl-htpy)
+      ( back-right-coherence-cube-flattening-lemma-equifibered-span-diagram)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( coherence-square-cocone-flattening-pushout Q f g c)
+  coherence-cube-flattening-lemma-equifibered-span-diagram (s , t) =
+    ( ap-id
+      ( coherence-square-cocone-flattening-equifibered-span-diagram f g c P Q e
+        ( s , t))) ∙
+    ( triangle-eq-pair-Σ Q
+      ( coherence-square-cocone f g c s)
+      ( coherence-map-flattening-equifibered-span-diagram f g c P Q e s t)) ∙
+    ( ap
+      ( eq-pair-Σ (coherence-square-cocone f g c s) refl ∙_)
+      ( inv
+        ( ( right-unit) ∙
+          ( compute-ap-map-Σ-map-base-eq-pair-Σ
+            ( vertical-map-cocone f g c)
+            ( Q)
+            ( refl)
+            ( coherence-map-flattening-equifibered-span-diagram
+              f g c P Q e s t)))))
+
+  abstract
+    flattening-lemma-equifibered-span-diagram :
+      flattening-lemma-equifibered-span-diagram-statement f g c P Q e
+    flattening-lemma-equifibered-span-diagram up-c =
+      universal-property-pushout-top-universal-property-pushout-bottom-cube-equiv
+        ( vertical-map-span-flattening-pushout Q f g c)
+        ( horizontal-map-span-flattening-pushout Q f g c)
+        ( horizontal-map-cocone-flattening-pushout Q f g c)
+        ( vertical-map-cocone-flattening-pushout Q f g c)
+        ( vertical-map-span-flattening-equifibered-span-diagram P)
+        ( horizontal-map-span-flattening-equifibered-span-diagram P)
+        ( horizontal-map-cocone-flattening-equifibered-span-diagram f g c P Q e)
+        ( vertical-map-cocone-flattening-equifibered-span-diagram f g c P Q e)
+        ( equiv-source-cube-flattening-equifibered-span-diagram)
+        ( equiv-tot
+          ( left-equiv-equiv-equifibered-span-diagram
+            ( P)
+            ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+            ( e)))
+        ( equiv-tot
+          ( right-equiv-equiv-equifibered-span-diagram
+            ( P)
+            ( equifibered-span-diagram-family-cocone-span-diagram c Q)
+            ( e)))
+        ( id-equiv)
+        ( coherence-square-cocone-flattening-equifibered-span-diagram
+          f g c P Q e)
+        ( refl-htpy)
+        ( back-right-coherence-cube-flattening-lemma-equifibered-span-diagram)
+        ( refl-htpy)
+        ( refl-htpy)
+        ( coherence-square-cocone-flattening-pushout Q f g c)
+        ( coherence-cube-flattening-lemma-equifibered-span-diagram)
         ( flattening-lemma-pushout Q f g c up-c)
 ```
 

@@ -19,6 +19,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
@@ -32,6 +33,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
+open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 ```
 

@@ -7,6 +7,7 @@ module higher-group-theory.cyclic-higher-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.existential-quantification
 open import foundation.propositions

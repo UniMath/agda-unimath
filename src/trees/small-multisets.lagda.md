@@ -9,6 +9,7 @@ module trees.small-multisets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -16,12 +17,13 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.raising-universe-levels
 
 open import trees.multisets
 open import trees.w-types

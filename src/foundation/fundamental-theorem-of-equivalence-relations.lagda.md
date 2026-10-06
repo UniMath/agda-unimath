@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalences-contractible-types
 open import foundation.full-subtypes
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences

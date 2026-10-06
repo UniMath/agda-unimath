@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.mere-lifting-properties where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels

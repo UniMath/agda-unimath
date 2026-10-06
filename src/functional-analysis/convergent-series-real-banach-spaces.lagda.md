@@ -9,8 +9,6 @@ module functional-analysis.convergent-series-real-banach-spaces where
 ```agda
 open import analysis.convergent-series-complete-metric-abelian-groups
 open import analysis.convergent-series-metric-abelian-groups
-open import analysis.convergent-series-real-numbers
-open import analysis.series-real-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -30,6 +28,9 @@ open import lists.sequences
 
 open import metric-spaces.cauchy-sequences-metric-spaces
 open import metric-spaces.limits-of-sequences-metric-spaces
+
+open import real-analysis.convergent-series-real-numbers
+open import real-analysis.series-real-numbers
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers

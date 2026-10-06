@@ -7,6 +7,7 @@ module graph-theory.regular-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-products-propositions
 open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.universe-levels

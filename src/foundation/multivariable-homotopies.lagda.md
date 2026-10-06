@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.multivariable-homotopies where
-
-open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -13,9 +11,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.equivalences-contractible-types
 open import foundation.function-extensionality
+open import foundation.function-extensionality-axiom
 open import foundation.implicit-function-types
 open import foundation.iterated-dependent-product-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types

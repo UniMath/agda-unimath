@@ -10,8 +10,10 @@ module group-theory.equivalences-group-actions where
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types

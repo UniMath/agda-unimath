@@ -8,22 +8,13 @@ module type-theories.precategories-with-families where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.natural-transformations-functors-precategories
-open import category-theory.opposite-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-elements-of-a-presheaf
 open import category-theory.presheaf-categories
-open import category-theory.pullbacks-in-precategories
 
-open import foundation.cartesian-product-types
-open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.sections
-open import foundation.sets
-open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
