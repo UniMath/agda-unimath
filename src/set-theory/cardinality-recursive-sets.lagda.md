@@ -9,14 +9,10 @@ module set-theory.cardinality-recursive-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.mere-equivalences
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.set-truncations
@@ -32,8 +28,8 @@ open import set-theory.cardinals
 
 ## Idea
 
-For every type $X$ there is a map $║X → Set║₀ → (X → \mathrm{Cardinal})$. We
-call [sets](foundation-core.sets.md) $X$ for which this map has a
+For every type $X$ there is a map $║ X → \Set ║₀ → (X → \Cardinal)$. We call
+[sets](foundation-core.sets.md) $X$ for which this map has a
 [retraction](foundation-core.retractions.md)
 {{#concept "cardinality-recursive" Disamibguation="sets" Agda=Cardinality-Recursive-Set}}.
 Over such sets we may form
@@ -42,10 +38,10 @@ Over such sets we may form
 [cardinals](set-theory.cardinals.md).
 
 Note that classically, the universe of sets is itself a set, and so trivially
-$║X → \mathrm{Set}║₀ ≃ (X → ║\mathrm{Set}║₀)$. However, with
-[univalence](foundation.univalence.md), the universe of sets $\mathrm{Set}$ is
-more richly structured, making its
-[set truncation](foundation.set-truncations.md) $║Set║₀$ presents cardinals.
+$║ X → \Set ║₀ ≃ (X → ║ \Set ║₀)$. However, with
+[univalence](foundation.univalence.md), the universe of sets $\Set$ is more
+richly structured, making its [set truncation](foundation.set-truncations.md)
+$║ \Set ║₀$ present cardinals.
 
 ```text
             (X → Set)
