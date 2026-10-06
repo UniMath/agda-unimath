@@ -21,8 +21,6 @@ open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import foundation-core.propositions
-
 open import set-theory.cardinality-projective-sets
 open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals

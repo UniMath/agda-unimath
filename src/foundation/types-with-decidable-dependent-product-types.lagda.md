@@ -73,20 +73,6 @@ has-decidable-Π X =
   {l2 : Level} → has-decidable-Π-Level l2 X
 ```
 
-### The type of types with decidable Π-types
-
-```agda
-record Type-With-Decidable-Π (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-Π : UU l
-
-    has-decidable-Π-type-Type-With-Decidable-Π :
-      has-decidable-Π type-Type-With-Decidable-Π
-
-open Type-With-Decidable-Π public
-```
-
 ## Properties
 
 ### Types with decidable Π-types are De Morgan

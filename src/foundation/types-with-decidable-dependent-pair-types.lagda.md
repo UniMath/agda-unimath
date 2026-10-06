@@ -13,8 +13,9 @@ open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
+open import foundation.decidable-equality
+open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
@@ -31,15 +32,18 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import logic.double-negation-dense-maps
+open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
@@ -83,20 +87,6 @@ has-decidable-Σ X = {l2 : Level} → has-decidable-Σ-Level l2 X
 ```agda
 has-decidable-Σ-bool : {l1 : Level} → UU l1 → UU l1
 has-decidable-Σ-bool X = (b : X → bool) → is-decidable (Σ X (is-true ∘ b))
-```
-
-### The type of types with decidable Σ-types
-
-```agda
-record Type-With-Decidable-Σ (l : Level) : UUω
-  where
-  field
-    type-Type-With-Decidable-Σ : UU l
-
-    has-decidable-Σ-type-Type-With-Decidable-Σ :
-      has-decidable-Σ type-Type-With-Decidable-Σ
-
-open Type-With-Decidable-Σ public
 ```
 
 ### The predicate of having decidable Σ-types on subtypes
@@ -160,12 +150,31 @@ has-decidable-Σ-pointed-bool' X =
 ### Types with decidable Σ-types are decidable
 
 ```agda
+is-decidable-type-has-decidable-Σ-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  has-decidable-Σ-Level l2 X → is-decidable X
+is-decidable-type-has-decidable-Σ-Level {l2 = l2} h =
+  is-decidable-equiv'
+    ( right-unit-law-product-is-contr is-contr-raise-unit)
+    ( h ((λ _ → raise-unit l2) , (λ _ → inl raise-star)))
+
 is-decidable-type-has-decidable-Σ :
   {l1 : Level} {X : UU l1} → has-decidable-Σ X → is-decidable X
 is-decidable-type-has-decidable-Σ f =
   is-decidable-equiv'
     ( right-unit-law-product)
     ( f ((λ _ → unit) , (λ _ → inl star)))
+
+is-inhabited-or-empty-merely-has-decidable-Σ-Level :
+  {l1 l2 : Level} {X : UU l1} →
+  type-trunc-Prop (has-decidable-Σ-Level l2 X) →
+  is-inhabited-or-empty X
+is-inhabited-or-empty-merely-has-decidable-Σ-Level {X = X} =
+  rec-trunc-Prop
+    ( is-inhabited-or-empty-Prop X)
+    ( λ h →
+      is-inhabited-or-empty-is-decidable
+        ( is-decidable-type-has-decidable-Σ-Level h))
 ```
 
 ### Types with decidable Σ-types on subtypes have decidable Σ-types
@@ -660,12 +669,25 @@ has-decidable-Σ-Prop {l} =
     ( has-decidable-Σ-bool')
 ```
 
+### Functions from types with decidable sums to discrete types have decidable fibers
+
+```agda
+is-decidable-map-has-decidable-Σ-Level :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  has-decidable-Σ-Level l2 A →
+  has-decidable-equality B →
+  (f : A → B) →
+  is-decidable-map f
+is-decidable-map-has-decidable-Σ-Level h d f y =
+  h ( (λ x → f x ＝ y) , (λ x → d (f x) y))
+```
+
 ## References
 
 {{#bibliography}}
 
 ## See also
 
-- [Types with decidable existential quantification](foundation.types-with-decidable-existential-quantification.md)
+- [Types with decidable existential quantifications](foundation.types-with-decidable-existential-quantifications.md)
 - [Types with decidable Π-types](foundation.types-with-decidable-dependent-product-types.md)
 - [Types with decidable universal quantifications](foundation.types-with-decidable-universal-quantifications.md)

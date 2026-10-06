@@ -312,8 +312,8 @@ Now, the [pigeonhole principle](univalent-combinatorics.pigeonhole-principle.md)
 applies to $\Fin n$, so there has to be $i < j$ in $\Fin n$ such that $yᵢ = yⱼ$,
 and in particular $h(yᵢ) = h(yⱼ)$, i.e., $fⁱ(x) = fʲ(x)$. By
 [injectivity](foundation-core.injective-maps.md) of $f$ we can cancel $i$
-applications to obtain $x = f(fʲ⁻ⁱ⁻¹(x))$, and so $f^{j-i-1}(x)$ is the desired
-preimage. ∎
+applications to obtain $x = f(f^{j-i-1}(x))$, and so $f^{j-i-1}(x)$ is the
+desired preimage. ∎
 
 ```agda
 module _

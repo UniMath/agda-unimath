@@ -9,40 +9,28 @@ module set-theory.cardinality-projective-sets where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.distributivity-of-set-truncation-over-projective-products
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-truncation
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.mere-equality
-open import foundation.mere-equivalences
 open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retractions
-open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.surjective-maps
-open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
-open import foundation.truncations
-open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import set-theory.cardinality-recursive-sets
 open import set-theory.cardinals
-open import set-theory.equality-cardinals
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products

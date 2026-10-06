@@ -7,10 +7,6 @@ module foundation.projective-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.natural-numbers
-
-open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
@@ -18,7 +14,6 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
-open import foundation.iterated-successors-truncation-levels
 open import foundation.postcomposition-functions
 open import foundation.raising-universe-levels
 open import foundation.surjective-maps
