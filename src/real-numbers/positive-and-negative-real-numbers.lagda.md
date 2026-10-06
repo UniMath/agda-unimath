@@ -25,6 +25,7 @@ open import real-numbers.nonpositive-real-numbers
 open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+open import real-numbers.zero-real-numbers
 ```
 
 </details>
@@ -184,4 +185,24 @@ abstract
   is-not-negative-and-positive-ℝ :
     {l : Level} {x : ℝ l} → ¬ (is-negative-ℝ x × is-positive-ℝ x)
   is-not-negative-and-positive-ℝ (x<0 , 0<x) = asymmetric-le-ℝ x<0 0<x
+```
+
+### If a real number is not positive, it is nonpositive
+
+```agda
+abstract
+  is-nonpositive-is-not-positive-ℝ :
+    {l : Level} {x : ℝ l} → ¬ is-positive-ℝ x → is-nonpositive-ℝ x
+  is-nonpositive-is-not-positive-ℝ {x = x} = leq-not-le-ℝ zero-ℝ x
+```
+
+### If a real number is nonnegative and nonpositive, it is zero
+
+```agda
+abstract
+  is-zero-is-nonnegative-is-nonpositive-ℝ :
+    {l : Level} {x : ℝ l} →
+    is-nonpositive-ℝ x → is-nonnegative-ℝ x → is-zero-ℝ x
+  is-zero-is-nonnegative-is-nonpositive-ℝ {x = x} x≤0 0≤x =
+    sim-sim-leq-ℝ (x≤0 , 0≤x)
 ```

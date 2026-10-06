@@ -323,6 +323,17 @@ module _
         ＝ raise-zero-ℝ l1
           by left-raise-zero-law-mul-ℝ _
 
+    is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space :
+      is-zero-ℝ
+        ( map-seminorm-Seminormed-ℝ-Vector-Space
+          ( V)
+          ( zero-Seminormed-ℝ-Vector-Space V))
+    is-zero-seminorm-zero-Seminormed-ℝ-Vector-Space =
+      inv-tr
+        ( is-zero-ℝ)
+        ( eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space)
+        ( is-zero-raise-zero-ℝ l1)
+
     eq-zero-diagonal-dist-Seminormed-ℝ-Vector-Space :
       (v : type-Seminormed-ℝ-Vector-Space V) →
       dist-Seminormed-ℝ-Vector-Space V v v ＝ raise-ℝ l1 zero-ℝ
