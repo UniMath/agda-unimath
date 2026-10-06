@@ -125,7 +125,7 @@ succ-ℕ∞↗ (x , H) =
   ( rec-ℕ false (λ n _ → x n) , ind-ℕ (leq-false-bool {x 0}) (λ n _ → H n))
 ```
 
-### The predecessor function
+### The predecessor function {#shift-left}
 
 ```agda
 shift-left-ℕ∞↗ : ℕ∞↗ → ℕ∞↗
