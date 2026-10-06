@@ -1,4 +1,4 @@
-# The inclusion of natural numbers into increasing binary sequences
+# The canonical inclusion of natural numbers into increasing binary sequences
 
 ```agda
 module set-theory.inclusion-natural-numbers-increasing-binary-sequences where
