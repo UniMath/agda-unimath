@@ -41,6 +41,15 @@ shift-ℕ∞↗ n = iterate n succ-ℕ∞↗
 
 ## Properties
 
+### Shifting by a sum is the composite of shifts
+
+```agda
+abstract
+  compute-shift-add-ℕ∞↗ :
+    (n m : ℕ) → shift-ℕ∞↗ (add-ℕ n m) ~ shift-ℕ∞↗ n ∘ shift-ℕ∞↗ m
+  compute-shift-add-ℕ∞↗ n m = iterate-add-ℕ n m succ-ℕ∞↗
+```
+
 ### Computing the shift operation at a successor
 
 ```agda
