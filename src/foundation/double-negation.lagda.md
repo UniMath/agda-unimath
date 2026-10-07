@@ -101,6 +101,11 @@ double-negation-linearity-implication {P = P} {Q = Q} f =
   ( λ (np : ¬ P) →
     map-neg (inl {A = P → Q} {B = Q → P}) f (λ p → ex-falso (np p)))
   ( λ (p : P) → map-neg (inr {A = P → Q} {B = Q → P}) f (λ _ → p))
+
+double-negation-excluded-middle :
+  {l : Level} {P : UU l} → ¬¬ (P + ¬ P)
+double-negation-excluded-middle h =
+  h (inr (λ p → h (inl p)))
 ```
 
 ### Maps into double negations extend along `intro-double-negation`

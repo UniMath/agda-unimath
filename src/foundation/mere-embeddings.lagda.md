@@ -10,15 +10,26 @@ module foundation.mere-embeddings where
 open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
+open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
+open import foundation.negation
 open import foundation.projective-types
 open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.split-surjective-maps
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.propositions
+
+open import logic.propositional-double-negation-elimination
 
 open import order-theory.large-preorders
 ```
@@ -85,7 +96,7 @@ module _
   where
 
   mere-emb-tot :
-    is-projective-Level' (l2 ⊔ l3) X →
+    is-projective-Level (l2 ⊔ l3) X →
     ((x : X) → mere-emb (Y x) (Z x)) →
     mere-emb (Σ X Y) (Σ X Z)
   mere-emb-tot H e = map-trunc-Prop emb-tot (H _ e)
@@ -99,8 +110,47 @@ module _
   where
 
   mere-emb-Π :
-    is-projective-Level' (l2 ⊔ l3) X →
+    is-projective-Level (l2 ⊔ l3) X →
     ((x : X) → mere-emb (Y x) (Z x)) →
     mere-emb ((x : X) → Y x) ((x : X) → Z x)
   mere-emb-Π H e = map-trunc-Prop emb-Π (H _ e)
+```
+
+### Empty types merely embed into any type
+
+```agda
+mere-emb-is-empty :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-empty X → mere-emb X Y
+mere-emb-is-empty H = unit-trunc-Prop (emb-is-empty H)
+```
+
+### Surjections onto projective sets give reverse mere embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  reverse-mere-emb-surjection-is-projective :
+    is-projective-Level (l1 ⊔ l2) Y →
+    is-set X →
+    (X ↠ Y) → mere-emb Y X
+  reverse-mere-emb-surjection-is-projective H is-set-X (f , F) =
+    map-trunc-Prop
+      ( reverse-emb-has-section {f = f} is-set-X ∘
+        section-is-split-surjective f)
+      ( H (fiber f) F)
+```
+
+### A type `X` with propositional double negation elimination such that there is some type `Y` it does not merely embed into, then `X` is inhabited
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  is-inhabited-not-mere-emb :
+    has-prop-double-negation-elim X → ¬ mere-emb X Y → is-inhabited X
+  is-inhabited-not-mere-emb dX H =
+    dX (H ∘ mere-emb-is-empty)
 ```
