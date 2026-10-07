@@ -98,10 +98,10 @@ compute-base-mul-𝕊¹ = ap pr1 compute-base-map-mul-Π-𝕊¹
 
 ```agda
 left-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ base-𝕊¹ x ＝ x
-left-unit-law-mul-𝕊¹ = htpy-eq (ap pr1 (pr1 (pr2 mul-Π-𝕊¹)))
+left-unit-law-mul-𝕊¹ = htpy-eq compute-base-mul-𝕊¹
 
 right-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ x base-𝕊¹ ＝ x
-right-unit-law-mul-𝕊¹ x = pr2 (pr1 mul-Π-𝕊¹ x)
+right-unit-law-mul-𝕊¹ x = pr2 (map-mul-Π-𝕊¹ x)
 ```
 
 ### The coherence between the unit laws
