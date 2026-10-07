@@ -20,6 +20,8 @@ open import universal-algebra.models-of-signatures public
 open import universal-algebra.morphisms-of-models-of-signatures public
 open import universal-algebra.precategory-of-algebras-algebraic-theories public
 open import universal-algebra.quotient-algebras public
+open import universal-algebra.reflecting-homomorphisms-congruences public
 open import universal-algebra.signatures public
 open import universal-algebra.terms-over-signatures public
+open import universal-algebra.universal-property-quotient-algebras public
 ```
