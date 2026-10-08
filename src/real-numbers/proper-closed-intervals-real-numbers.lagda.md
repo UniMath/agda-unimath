@@ -21,9 +21,12 @@ open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
@@ -83,7 +86,9 @@ lower bound is
 [strictly less than](real-numbers.strict-inequality-real-numbers.md) the upper
 bound.
 
-## Definition
+## Definitions
+
+### The type of proper closed intervals of real numbers
 
 ```agda
 proper-closed-interval-ℝ : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -133,6 +138,41 @@ positive-width-proper-closed-interval-ℝ (a , b , a<b) = positive-diff-le-ℝ a
 width-proper-closed-interval-ℝ :
   {l1 l2 : Level} → proper-closed-interval-ℝ l1 l2 → ℝ (l1 ⊔ l2)
 width-proper-closed-interval-ℝ (a , b , _) = b -ℝ a
+```
+
+### The interior of a proper closed interval
+
+The
+{{#concept "interior" Disambiguation="of a proper closed interval in ℝ" Agda=subtype-interior-proper-closed-interval-ℝ}}
+of a proper closed interval `[a, b]` is the
+[subset](real-numbers.subsets-real-numbers.md) of real numbers `x` such that
+`a < x < b`.
+
+```agda
+subtype-interior-proper-closed-interval-ℝ :
+  {l1 l2 : Level} (l : Level) (I : proper-closed-interval-ℝ l1 l2) →
+  subset-ℝ (l1 ⊔ l2 ⊔ l) l
+subtype-interior-proper-closed-interval-ℝ l I x =
+  le-prop-ℝ (lower-bound-proper-closed-interval-ℝ I) x ∧
+  le-prop-ℝ x (upper-bound-proper-closed-interval-ℝ I)
+
+is-in-interior-proper-closed-interval-ℝ :
+  {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2) →
+  ℝ l → UU (l1 ⊔ l2 ⊔ l)
+is-in-interior-proper-closed-interval-ℝ I x =
+  type-Prop (subtype-interior-proper-closed-interval-ℝ _ I x)
+
+is-prop-is-in-interior-proper-closed-interval-ℝ :
+  {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2) →
+  (x : ℝ l) → is-prop (is-in-interior-proper-closed-interval-ℝ I x)
+is-prop-is-in-interior-proper-closed-interval-ℝ I x =
+  is-prop-type-Prop (subtype-interior-proper-closed-interval-ℝ _ I x)
+
+type-interior-proper-closed-interval-ℝ :
+  {l1 l2 : Level} (l : Level) (I : proper-closed-interval-ℝ l1 l2) →
+  UU (l1 ⊔ l2 ⊔ lsuc l)
+type-interior-proper-closed-interval-ℝ l I =
+  type-subtype (subtype-interior-proper-closed-interval-ℝ l I)
 ```
 
 ## Properties
@@ -264,6 +304,12 @@ clamp-proper-closed-interval-ℝ :
   type-proper-closed-interval-ℝ (l1 ⊔ l2 ⊔ l3) [a,b]
 clamp-proper-closed-interval-ℝ [a,b] =
   clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
+
+map-clamp-proper-closed-interval-ℝ :
+  {l1 l2 l3 : Level} ([a,b] : proper-closed-interval-ℝ l1 l2) → ℝ l3 →
+  ℝ (l1 ⊔ l2 ⊔ l3)
+map-clamp-proper-closed-interval-ℝ [a,b] =
+  map-clamp-closed-interval-ℝ (closed-interval-proper-closed-interval-ℝ [a,b])
 ```
 
 ### The clamp function is a short map
@@ -1016,4 +1062,114 @@ module _
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ))
       ( sim-raise-ℝ l1 _)
       ( sim-raise-ℝ l _)
+```
+
+### Location of strictly ordered pairs of rational numbers with respect to a proper closed interval
+
+For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`, at
+least one of the following propositions holds:
+
+- `p < a`;
+- `b < q`;
+- `∃ (r s : ℚ) | (a < r < s < b) ∧ (p < r) ∧ (s < q)`, i.e. `[r, s]` is a proper
+  sub-interval of both `[a, b]` and `[p, q]`.
+
+```agda
+module _
+  {l1 l2 : Level} (I : proper-closed-interval-ℝ l1 l2)
+  (p q : ℚ) (H : le-ℚ p q)
+  where
+
+  location-prop-le-rational-proper-closed-interval-ℝ : Prop (l1 ⊔ l2)
+  location-prop-le-rational-proper-closed-interval-ℝ =
+    ( lower-cut-ℝ (lower-bound-proper-closed-interval-ℝ I) p) ∨
+    ( upper-cut-ℝ (upper-bound-proper-closed-interval-ℝ I) q) ∨
+    ( ∃ ( ℚ)
+        ( λ r →
+          ∃ ( ℚ)
+            ( λ s →
+              ( upper-cut-ℝ
+                ( lower-bound-proper-closed-interval-ℝ I)
+                ( r)) ∧
+              ( lower-cut-ℝ
+                ( upper-bound-proper-closed-interval-ℝ I)
+                ( s)) ∧
+              ( le-ℚ-Prop r s) ∧
+              ( le-ℚ-Prop p r) ∧
+              ( le-ℚ-Prop s q))))
+
+  type-location-le-rational-proper-closed-interval-ℝ : UU (l1 ⊔ l2)
+  type-location-le-rational-proper-closed-interval-ℝ =
+    type-Prop location-prop-le-rational-proper-closed-interval-ℝ
+
+  is-prop-type-location-le-rational-proper-closed-interval-ℝ :
+    is-prop type-location-le-rational-proper-closed-interval-ℝ
+  is-prop-type-location-le-rational-proper-closed-interval-ℝ =
+    is-prop-type-Prop location-prop-le-rational-proper-closed-interval-ℝ
+
+  location-le-rational-proper-closed-interval-ℝ :
+    type-location-le-rational-proper-closed-interval-ℝ
+  location-le-rational-proper-closed-interval-ℝ =
+    let
+      open
+        do-syntax-trunc-Prop
+          location-prop-le-rational-proper-closed-interval-ℝ
+    in do
+      (r , p<r , r<q) ← dense-le-ℚ H
+      (s , r<s , s<q) ← dense-le-ℚ r<q
+      locate-a ←
+        is-located-lower-upper-cut-ℝ
+          ( lower-bound-proper-closed-interval-ℝ I)
+          ( p<r)
+
+      locate-b ←
+        is-located-lower-upper-cut-ℝ
+          ( upper-bound-proper-closed-interval-ℝ I)
+          ( s<q)
+
+      rec-coproduct
+        ( unit-trunc-Prop ∘ inl)
+        ( λ lo →
+          rec-coproduct
+            ( λ hi →
+              unit-trunc-Prop
+                ( inr
+                  ( unit-trunc-Prop
+                    ( inr
+                      ( intro-exists r
+                        ( intro-exists s
+                          ( lo , hi , r<s , p<r , s<q)))))))
+            ( unit-trunc-Prop ∘ inr ∘ unit-trunc-Prop ∘ inl)
+            ( locate-b))
+        ( locate-a)
+```
+
+### A proper closed interval contains its interior
+
+```agda
+module _
+  {l1 l2 l : Level} (I : proper-closed-interval-ℝ l1 l2)
+  where
+
+  is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ :
+    (x : ℝ l) →
+    is-in-interior-proper-closed-interval-ℝ I x →
+    is-in-proper-closed-interval-ℝ I x
+  is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ
+    x (lo-bound , hi-bound) =
+    ( leq-le-ℝ lo-bound , leq-le-ℝ hi-bound)
+
+  in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ :
+    (x : ℝ l) →
+    is-in-interior-proper-closed-interval-ℝ I x →
+    type-proper-closed-interval-ℝ l I
+  in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H =
+    ( x ,
+      is-in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H)
+
+  inclusion-interior-proper-closed-interval-ℝ :
+    type-interior-proper-closed-interval-ℝ l I →
+    type-proper-closed-interval-ℝ l I
+  inclusion-interior-proper-closed-interval-ℝ (x , H) =
+    in-proper-closed-interval-is-in-interior-proper-closed-interval-ℝ x H
 ```
