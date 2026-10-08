@@ -9,6 +9,7 @@ module order-theory.filters-posets where
 ```agda
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.inhabited-subtypes
 open import foundation.propositions

@@ -31,9 +31,12 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.raising-universe-levels-unit-type
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
@@ -41,6 +44,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.concatenation-lists
+open import lists.equality-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-lists

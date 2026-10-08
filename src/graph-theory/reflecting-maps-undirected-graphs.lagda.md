@@ -9,6 +9,7 @@ module graph-theory.reflecting-maps-undirected-graphs where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.symmetric-identity-types
 open import foundation.unit-type
 open import foundation.universe-levels

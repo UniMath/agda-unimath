@@ -8,8 +8,8 @@ module ring-theory.subsets-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
@@ -117,8 +117,11 @@ module _
     is-prop-is-closed-under-addition-subset-Ring :
       is-prop is-closed-under-addition-subset-Ring
     is-prop-is-closed-under-addition-subset-Ring =
-      is-prop-iterated-implicit-Π 2
-        ( λ x y → is-prop-function-Prop (hom-Prop (S y) (S (add-Ring R x y))))
+      is-prop-implicit-Π
+        ( λ x →
+          is-prop-implicit-Π
+            ( λ y →
+              is-prop-function-Prop (hom-Prop (S y) (S (add-Ring R x y)))))
 
   is-closed-under-addition-prop-subset-Ring : Prop (l1 ⊔ l2)
   is-closed-under-addition-prop-subset-Ring =

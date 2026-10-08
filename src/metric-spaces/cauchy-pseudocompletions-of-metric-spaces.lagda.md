@@ -29,8 +29,12 @@ open import metric-spaces.maps-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-relations
+open import metric-spaces.reflexive-rational-neighborhood-relations
+open import metric-spaces.saturated-rational-neighborhood-relations
 open import metric-spaces.short-maps-pseudometric-spaces
 open import metric-spaces.similarity-of-elements-pseudometric-spaces
+open import metric-spaces.symmetric-rational-neighborhood-relations
+open import metric-spaces.triangular-rational-neighborhood-relations
 ```
 
 </details>
@@ -98,15 +102,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  where
+  where abstract
 
-  abstract
-    is-reflexive-neighborhood-cauchy-pseudocompletion-Metric-Space :
-      (d : ℚ⁺) (x : cauchy-approximation-Metric-Space M) →
-      neighborhood-cauchy-pseudocompletion-Metric-Space M d x x
-    is-reflexive-neighborhood-cauchy-pseudocompletion-Metric-Space =
-      is-reflexive-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
-        ( pseudometric-Metric-Space M)
+  is-reflexive-neighborhood-cauchy-pseudocompletion-Metric-Space :
+    is-reflexive-Rational-Neighborhood-Relation
+      ( neighborhood-prop-cauchy-pseudocompletion-Metric-Space M)
+  is-reflexive-neighborhood-cauchy-pseudocompletion-Metric-Space =
+    is-reflexive-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
 ### The neighborhood relation is symmetric
@@ -114,16 +117,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  where
+  where abstract
 
-    abstract
-      is-symmetric-neighborhood-cauchy-pseudocompletion-Metric-Space :
-        (d : ℚ⁺) (x y : cauchy-approximation-Metric-Space M) →
-        neighborhood-cauchy-pseudocompletion-Metric-Space M d x y →
-        neighborhood-cauchy-pseudocompletion-Metric-Space M d y x
-      is-symmetric-neighborhood-cauchy-pseudocompletion-Metric-Space =
-        is-symmetric-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
-          ( pseudometric-Metric-Space M)
+  is-symmetric-neighborhood-cauchy-pseudocompletion-Metric-Space :
+    is-symmetric-Rational-Neighborhood-Relation
+      ( neighborhood-prop-cauchy-pseudocompletion-Metric-Space M)
+  is-symmetric-neighborhood-cauchy-pseudocompletion-Metric-Space =
+    is-symmetric-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
 ### The neighborhood relation is triangular
@@ -131,22 +132,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  where
+  where abstract
 
-  abstract
-    is-triangular-neighborhood-cauchy-pseudocompletion-Metric-Space :
-      (x y z : cauchy-approximation-Metric-Space M) →
-      (dxy dyz : ℚ⁺) →
-      neighborhood-cauchy-pseudocompletion-Metric-Space M dyz y z →
-      neighborhood-cauchy-pseudocompletion-Metric-Space M dxy x y →
-      neighborhood-cauchy-pseudocompletion-Metric-Space
-        ( M)
-        ( dxy +ℚ⁺ dyz)
-        ( x)
-        ( z)
-    is-triangular-neighborhood-cauchy-pseudocompletion-Metric-Space =
-      is-triangular-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
-        ( pseudometric-Metric-Space M)
+  is-triangular-neighborhood-cauchy-pseudocompletion-Metric-Space :
+    is-triangular-Rational-Neighborhood-Relation
+      ( neighborhood-prop-cauchy-pseudocompletion-Metric-Space M)
+  is-triangular-neighborhood-cauchy-pseudocompletion-Metric-Space =
+    is-triangular-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
 ### The neighborhood relation is saturated
@@ -154,24 +147,17 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
-  where
+  where abstract
 
-  abstract
-    is-saturated-neighborhood-cauchy-pseudocompletion-Metric-Space :
-      ( ε : ℚ⁺) (x y : cauchy-approximation-Metric-Space M) →
-      ( (δ : ℚ⁺) →
-        neighborhood-cauchy-pseudocompletion-Metric-Space
-          ( M)
-          ( ε +ℚ⁺ δ)
-          ( x)
-          ( y)) →
-      neighborhood-cauchy-pseudocompletion-Metric-Space M ε x y
-    is-saturated-neighborhood-cauchy-pseudocompletion-Metric-Space =
-      is-saturated-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
-        ( pseudometric-Metric-Space M)
+  is-saturated-neighborhood-cauchy-pseudocompletion-Metric-Space :
+    is-saturated-Rational-Neighborhood-Relation
+      ( neighborhood-prop-cauchy-pseudocompletion-Metric-Space M)
+  is-saturated-neighborhood-cauchy-pseudocompletion-Metric-Space =
+    is-saturated-neighborhood-cauchy-pseudocompletion-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
 ```
 
-### The isometry from a metric space to its Cauchy pseudocompletion
+### The unit isometry from a metric space to its Cauchy pseudocompletion
 
 ```agda
 module _
@@ -185,6 +171,16 @@ module _
   isometry-unit-cauchy-pseudocompletion-Metric-Space =
     isometry-unit-cauchy-pseudocompletion-Pseudometric-Space
       ( pseudometric-Metric-Space M)
+
+  short-map-unit-cauchy-pseudocompletion-Metric-Space :
+    short-map-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+  short-map-unit-cauchy-pseudocompletion-Metric-Space =
+    short-map-isometry-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( cauchy-pseudocompletion-Metric-Space M)
+      ( isometry-unit-cauchy-pseudocompletion-Metric-Space)
 
   map-unit-cauchy-pseudocompletion-Metric-Space :
     type-Metric-Space M → cauchy-approximation-Metric-Space M

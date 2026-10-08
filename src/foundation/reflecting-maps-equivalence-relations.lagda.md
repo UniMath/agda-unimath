@@ -8,6 +8,7 @@ module foundation.reflecting-maps-equivalence-relations where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.effective-maps-equivalence-relations
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction

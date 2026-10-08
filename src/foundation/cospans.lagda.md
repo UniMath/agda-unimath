@@ -8,10 +8,7 @@ module foundation.cospans where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

@@ -62,6 +62,9 @@ record
     UUω
   where
 
+  constructor
+    make-sim-preserving-binary-map-Large-Similarity-Relation
+
   field
     map-sim-preserving-binary-map-Large-Similarity-Relation :
       {l1 l2 : Level} → X l1 → Y l2 → Z (l1 ⊔ l2)

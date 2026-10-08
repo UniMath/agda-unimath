@@ -7,7 +7,6 @@ module graph-theory.large-reflexive-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.universe-levels
 ```
 

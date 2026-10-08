@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equality-dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import lists.arrays
 open import lists.concatenation-lists
+open import lists.equality-lists
 open import lists.functoriality-tuples
 open import lists.lists
 open import lists.tuples

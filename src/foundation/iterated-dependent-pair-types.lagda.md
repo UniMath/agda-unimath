@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.iterated-dependent-pair-types where
-
-open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -12,6 +10,7 @@ open import foundation.telescopes public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

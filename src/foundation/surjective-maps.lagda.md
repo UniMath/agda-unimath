@@ -13,7 +13,9 @@ open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -40,6 +42,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
+open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -672,6 +675,14 @@ is-surjective-is-neg-one-connected-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
   is-connected-map neg-one-𝕋 f → is-surjective f
 is-surjective-is-neg-one-connected-map H b = center (H b)
+
+neg-one-connected-map-surjective-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  connected-map neg-one-𝕋 A B → A ↠ B
+neg-one-connected-map-surjective-map f =
+  ( map-connected-map f ,
+    is-surjective-is-neg-one-connected-map
+      ( is-connected-map-connected-map f))
 ```
 
 ### A (k+1)-connected map is surjective

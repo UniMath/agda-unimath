@@ -10,6 +10,7 @@ module commutative-algebra.subsets-algebras-commutative-rings where
 open import commutative-algebra.algebras-commutative-rings
 open import commutative-algebra.commutative-rings
 
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

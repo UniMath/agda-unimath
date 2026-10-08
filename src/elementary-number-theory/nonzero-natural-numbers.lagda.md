@@ -85,6 +85,14 @@ pr1 two-ℕ⁺ = 2
 pr2 two-ℕ⁺ ()
 ```
 
+### The nonzero natural number `3`
+
+```agda
+three-ℕ⁺ : ℕ⁺
+pr1 three-ℕ⁺ = 3
+pr2 three-ℕ⁺ ()
+```
+
 ### The successor function on the nonzero natural numbers
 
 ```agda

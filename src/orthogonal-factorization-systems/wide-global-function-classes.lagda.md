@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.wide-global-function-classes where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.embeddings
 open import foundation.function-types
 open import foundation.propositions

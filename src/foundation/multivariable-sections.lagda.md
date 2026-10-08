@@ -2,8 +2,6 @@
 
 ```agda
 module foundation.multivariable-sections where
-
-open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -14,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.iterated-dependent-product-types
 open import foundation.multivariable-homotopies
+open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.function-types

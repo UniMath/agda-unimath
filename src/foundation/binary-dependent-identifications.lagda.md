@@ -8,8 +8,9 @@ module foundation.binary-dependent-identifications where
 
 ```agda
 open import foundation.binary-transport
-open import foundation.identity-types
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 ```
 
 </details>

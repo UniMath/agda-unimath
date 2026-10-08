@@ -8,6 +8,7 @@ module real-numbers.similarity-real-numbers where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.identity-types
 open import foundation.large-equivalence-relations
 open import foundation.large-similarity-relations
@@ -170,8 +171,8 @@ large-equivalence-relation-sim-ℝ =
     ( λ _ _ → symmetric-sim-ℝ)
     ( transitive-sim-ℝ)
 
-large-similarity-relation-sim-ℝ : Large-Similarity-Relation _⊔_ ℝ
-large-similarity-relation-sim-ℝ =
+large-similarity-relation-ℝ : Large-Similarity-Relation _⊔_ ℝ
+large-similarity-relation-ℝ =
   make-Large-Similarity-Relation
     ( large-equivalence-relation-sim-ℝ)
     ( λ _ _ → eq-sim-ℝ)
@@ -184,7 +185,7 @@ abstract
   is-locally-small-ℝ : (l : Level) → is-locally-small l (ℝ l)
   is-locally-small-ℝ =
     is-locally-small-type-Large-Similarity-Relation
-      ( large-similarity-relation-sim-ℝ)
+      ( large-similarity-relation-ℝ)
 ```
 
 ### Similarity reasoning

@@ -26,7 +26,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import group-theory.sums-of-finite-sequences-of-elements-monoids
+open import group-theory.products-of-finite-sequences-of-elements-monoids
 
 open import lists.finite-sequences
 open import lists.lists
@@ -39,7 +39,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The [sums](group-theory.sums-of-finite-sequences-of-elements-monoids.md) of
+The [sums](group-theory.products-of-finite-sequences-of-elements-monoids.md) of
 [finite sequences](lists.finite-sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md) enjoy useful
 properties.
@@ -57,7 +57,7 @@ sum-list-ℕ = fold-list 0 add-ℕ
 
 ```agda
 sum-fin-sequence-ℕ : (k : ℕ) → fin-sequence ℕ k → ℕ
-sum-fin-sequence-ℕ = sum-fin-sequence-type-Monoid ℕ-Monoid
+sum-fin-sequence-ℕ = product-fin-sequence-type-Monoid ℕ-Monoid
 ```
 
 ### Sums of natural numbers indexed by a type equipped with a counting
@@ -87,7 +87,7 @@ abstract
   htpy-sum-fin-sequence-ℕ :
     (k : ℕ) {f g : Fin k → ℕ} (H : f ~ g) →
     sum-fin-sequence-ℕ k f ＝ sum-fin-sequence-ℕ k g
-  htpy-sum-fin-sequence-ℕ = htpy-sum-fin-sequence-type-Monoid ℕ-Monoid
+  htpy-sum-fin-sequence-ℕ = htpy-product-fin-sequence-type-Monoid ℕ-Monoid
 
   htpy-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) {f g : A → ℕ} (H : f ~ g) →

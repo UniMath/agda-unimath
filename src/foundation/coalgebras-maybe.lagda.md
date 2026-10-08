@@ -8,8 +8,9 @@ module foundation.coalgebras-maybe where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.maybe
 open import foundation.universe-levels
+
+open import foundation-core.maybe
 
 open import trees.polynomial-endofunctors
 ```

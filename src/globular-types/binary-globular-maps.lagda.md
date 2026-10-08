@@ -11,7 +11,6 @@ module globular-types.binary-globular-maps where
 ```agda
 open import foundation.universe-levels
 
-open import globular-types.globular-maps
 open import globular-types.globular-types
 ```
 

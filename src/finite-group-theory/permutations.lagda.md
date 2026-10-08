@@ -22,6 +22,9 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
+open import foundation.dependent-products-truncated-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -34,6 +37,7 @@ open import foundation.iterating-involutions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subuniverse-of-truncated-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type

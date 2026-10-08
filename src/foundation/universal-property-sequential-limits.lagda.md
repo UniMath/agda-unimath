@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cones-over-inverse-sequential-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-contractible-types
 open import foundation.inverse-sequential-diagrams
 open import foundation.postcomposition-functions
 open import foundation.subtype-identity-principle

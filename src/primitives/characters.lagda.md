@@ -9,8 +9,9 @@ module primitives.characters where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans
 open import foundation.universe-levels
+
+open import foundation-core.booleans
 ```
 
 </details>

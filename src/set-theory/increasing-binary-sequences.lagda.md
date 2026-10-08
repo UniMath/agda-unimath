@@ -7,15 +7,18 @@ module set-theory.increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.boolean-operations
 open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.double-negation-stable-equality
 open import foundation.embeddings
 open import foundation.equivalences
@@ -24,7 +27,6 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.inequality-booleans
 open import foundation.injective-maps
-open import foundation.logical-operations-booleans
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.propositions
@@ -123,7 +125,7 @@ succ-ℕ∞↗ (x , H) =
   ( rec-ℕ false (λ n _ → x n) , ind-ℕ (leq-false-bool {x 0}) (λ n _ → H n))
 ```
 
-### The predecessor function
+### The predecessor function {#shift-left}
 
 ```agda
 shift-left-ℕ∞↗ : ℕ∞↗ → ℕ∞↗
@@ -142,7 +144,7 @@ cons-ℕ∞↗ (inl x) = succ-ℕ∞↗ x
 cons-ℕ∞↗ (inr x) = zero-ℕ∞↗
 ```
 
-### Some other constants
+### Some constants
 
 ```agda
 one-ℕ∞↗ : ℕ∞↗
@@ -153,6 +155,13 @@ two-ℕ∞↗ = succ-ℕ∞↗ one-ℕ∞↗
 
 three-ℕ∞↗ : ℕ∞↗
 three-ℕ∞↗ = succ-ℕ∞↗ two-ℕ∞↗
+```
+
+### Evaluation of increasing binary sequences
+
+```agda
+ev-ℕ∞↗ : ℕ → ℕ∞↗ → bool
+ev-ℕ∞↗ n x = sequence-ℕ∞↗ x n
 ```
 
 ## Properties
@@ -373,6 +382,18 @@ abstract
     is-false (sequence-ℕ∞↗ x 0) →
     x ＝ succ-ℕ∞↗ (shift-left-ℕ∞↗ x)
   eq-succ-shift-left-ℕ∞↗ x p = eq-Eq-ℕ∞↗ (Eq-succ-shift-left-ℕ∞↗ x p)
+```
+
+### Infinity is a fixed point for the successor function
+
+```agda
+Eq-succ-infinity-ℕ∞↗ : Eq-ℕ∞↗ (succ-ℕ∞↗ infinity-ℕ∞↗) infinity-ℕ∞↗
+Eq-succ-infinity-ℕ∞↗ zero-ℕ = refl
+Eq-succ-infinity-ℕ∞↗ (succ-ℕ n) = refl
+
+abstract
+  succ-infinity-ℕ∞↗ : succ-ℕ∞↗ infinity-ℕ∞↗ ＝ infinity-ℕ∞↗
+  succ-infinity-ℕ∞↗ = eq-Eq-ℕ∞↗ Eq-succ-infinity-ℕ∞↗
 ```
 
 ## See also

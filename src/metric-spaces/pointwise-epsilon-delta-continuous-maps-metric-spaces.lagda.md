@@ -8,6 +8,7 @@ module metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces where
 
 ```agda
 open import foundation.axiom-of-countable-choice
+open import foundation.dependent-products-propositions
 open import foundation.propositions
 open import foundation.universe-levels
 

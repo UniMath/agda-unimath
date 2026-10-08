@@ -39,21 +39,17 @@ The type of [complex numbers](complex-numbers.complex-numbers.md) equipped with
 ## Definition
 
 ```agda
-large-semigroup-add-ℂ : Large-Semigroup lsuc
+large-semigroup-add-ℂ : Large-Semigroup lsuc (_⊔_)
 large-semigroup-add-ℂ =
   make-Large-Semigroup
-    ( ℂ-Set)
-    ( add-ℂ)
+    ( cumulative-large-set-ℂ)
+    ( sim-preserving-binary-operator-add-ℂ)
     ( associative-add-ℂ)
 
 large-monoid-add-ℂ : Large-Monoid lsuc (_⊔_)
 large-monoid-add-ℂ =
   make-Large-Monoid
     ( large-semigroup-add-ℂ)
-    ( large-similarity-relation-ℂ)
-    ( raise-ℂ)
-    ( sim-raise-ℂ)
-    ( λ _ _ z~z' _ _ → preserves-sim-add-ℂ z~z')
     ( zero-ℂ)
     ( left-unit-law-add-ℂ)
     ( right-unit-law-add-ℂ)

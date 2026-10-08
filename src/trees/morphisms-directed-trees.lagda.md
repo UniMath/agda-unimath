@@ -10,6 +10,7 @@ module trees.morphisms-directed-trees where
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types

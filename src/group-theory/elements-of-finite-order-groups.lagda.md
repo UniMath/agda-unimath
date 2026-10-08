@@ -10,6 +10,7 @@ module group-theory.elements-of-finite-order-groups where
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.nonzero-integers
 
+open import foundation.dependent-products-propositions
 open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels

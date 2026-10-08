@@ -9,10 +9,12 @@ module linear-algebra.linear-maps-vector-spaces where
 ```agda
 open import commutative-algebra.heyting-fields
 
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -79,11 +81,21 @@ module _
   is-linear-map-Vector-Space : UU (l1 ⊔ l2 ⊔ l3)
   is-linear-map-Vector-Space = type-Prop is-linear-map-prop-Vector-Space
 
-linear-map-Vector-Space :
-  {l1 l2 l3 : Level} (F : Heyting-Field l1) →
-  Vector-Space l2 F → Vector-Space l3 F → UU (l1 ⊔ l2 ⊔ l3)
-linear-map-Vector-Space F V W =
-  type-subtype (is-linear-map-prop-Vector-Space F V W)
+module _
+  {l1 l2 l3 : Level}
+  (F : Heyting-Field l1)
+  (V : Vector-Space l2 F)
+  (W : Vector-Space l3 F)
+  where
+
+  hom-set-Vector-Space : Set (l1 ⊔ l2 ⊔ l3)
+  hom-set-Vector-Space =
+    set-subset
+      ( hom-set-Set (set-Vector-Space F V) (set-Vector-Space F W))
+      ( is-linear-map-prop-Vector-Space F V W)
+
+  linear-map-Vector-Space : UU (l1 ⊔ l2 ⊔ l3)
+  linear-map-Vector-Space = type-Set hom-set-Vector-Space
 
 module _
   {l1 l2 l3 : Level}
@@ -210,6 +222,105 @@ module _
       ( X)
       ( g)
       ( f)
+```
+
+### The identity linear map from a vector space to itself
+
+```agda
+module _
+  {l1 l2 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  where
+
+  id-linear-map-Vector-Space : linear-map-Vector-Space K V V
+  id-linear-map-Vector-Space =
+    id-linear-map-left-module-Ring (ring-Heyting-Field K) V
+```
+
+### Homotopy characterizes equality of linear maps
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  (W : Vector-Space l3 K)
+  where
+
+  htpy-linear-map-Vector-Space :
+    Relation (l2 ⊔ l3) (linear-map-Vector-Space K V W)
+  htpy-linear-map-Vector-Space =
+    htpy-linear-map-left-module-Ring (ring-Heyting-Field K) V W
+
+  abstract
+    eq-htpy-linear-map-Vector-Space :
+      (f g : linear-map-Vector-Space K V W) →
+      htpy-linear-map-Vector-Space f g → f ＝ g
+    eq-htpy-linear-map-Vector-Space =
+      eq-htpy-linear-map-left-module-Ring (ring-Heyting-Field K) V W
+```
+
+### Associativity of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (K : Heyting-Field l1)
+  (M : Vector-Space l2 K)
+  (N : Vector-Space l3 K)
+  (P : Vector-Space l4 K)
+  (Q : Vector-Space l5 K)
+  where
+
+  abstract
+    associative-comp-linear-map-Vector-Space :
+      (f : linear-map-Vector-Space K P Q)
+      (g : linear-map-Vector-Space K N P)
+      (h : linear-map-Vector-Space K M N) →
+      comp-linear-map-Vector-Space K M N Q
+        ( comp-linear-map-Vector-Space K N P Q f g)
+        ( h) ＝
+      comp-linear-map-Vector-Space K M P Q
+        ( f)
+        ( comp-linear-map-Vector-Space K M N P g h)
+    associative-comp-linear-map-Vector-Space =
+      associative-comp-linear-map-left-module-Ring
+        ( ring-Heyting-Field K)
+        ( M)
+        ( N)
+        ( P)
+        ( Q)
+```
+
+### Unit laws of composition of linear maps
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (K : Heyting-Field l1)
+  (M : Vector-Space l2 K)
+  (N : Vector-Space l3 K)
+  where
+
+  abstract
+    left-unit-law-comp-linear-map-Vector-Space :
+      (f : linear-map-Vector-Space K M N) →
+      comp-linear-map-Vector-Space K M N N
+        ( id-linear-map-Vector-Space K N)
+        ( f) ＝
+      f
+    left-unit-law-comp-linear-map-Vector-Space =
+      left-unit-law-comp-linear-map-left-module-Ring (ring-Heyting-Field K) M N
+
+    right-unit-law-comp-linear-map-Vector-Space :
+      (f : linear-map-Vector-Space K M N) →
+      comp-linear-map-Vector-Space K M M N
+        ( f)
+        ( id-linear-map-Vector-Space K M) ＝
+      f
+    right-unit-law-comp-linear-map-Vector-Space =
+      right-unit-law-comp-linear-map-left-module-Ring (ring-Heyting-Field K) M N
 ```
 
 ## External links

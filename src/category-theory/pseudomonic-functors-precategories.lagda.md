@@ -15,6 +15,7 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -22,6 +23,7 @@ open import foundation.iterated-dependent-product-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.surjective-maps
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 

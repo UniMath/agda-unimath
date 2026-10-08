@@ -9,6 +9,7 @@ module foundation.disjoint-subtypes where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.empty-subtypes
 open import foundation.empty-types
 open import foundation.intersections-subtypes

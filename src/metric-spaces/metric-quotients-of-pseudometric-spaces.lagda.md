@@ -14,6 +14,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-propositions
 open import foundation.equivalence-classes
 open import foundation.existential-quantification
 open import foundation.identity-types

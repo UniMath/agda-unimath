@@ -100,8 +100,7 @@ module _
       leq-ℝ (f x) (f y) →
       leq-ℝ x y
     reflects-leq-is-strictly-increasing-endomap-ℝ x y fx≤fy =
-      leq-not-le-ℝ y x
-        ( λ x<y → not-le-leq-ℝ _ _ fx≤fy (H y x x<y))
+      leq-not-le-ℝ y x (not-le-leq-ℝ _ _ fx≤fy ∘ (H y x))
 ```
 
 ### Strictly increasing maps are embeddings

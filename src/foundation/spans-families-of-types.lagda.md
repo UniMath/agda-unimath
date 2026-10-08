@@ -9,9 +9,6 @@ module foundation.spans-families-of-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-
-open import foundation-core.equivalences
-open import foundation-core.function-types
 ```
 
 </details>

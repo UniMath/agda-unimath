@@ -11,6 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-products-contractible-types
+open import foundation.dependent-products-propositions
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
@@ -53,7 +55,7 @@ open import orthogonal-factorization-systems.types-local-at-maps
 A type `A` is said to be
 {{#concept "null at" Disambiguation="type" Agda=is-null}} `Y`, or
 {{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the
-[diagonal map](foundation.diagonal-maps-of-types.md)
+[diagonal map](foundation-core.diagonal-maps-of-types.md)
 
 ```text
   Δ : A → (Y → A)
@@ -248,6 +250,17 @@ is-null-is-contr :
 is-null-is-contr {A = A} B is-contr-A =
   is-null-is-local-terminal-map B A
     ( is-local-is-contr (terminal-map B) A is-contr-A)
+```
+
+### Propositions are null if the diagonal has a converse map
+
+```agda
+is-null-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-prop A → ((B → A) → A) → is-null B A
+is-null-is-prop {A = A} {B} is-prop-A f =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-prop (terminal-map B) A is-prop-A (λ g _ → f g))
 ```
 
 ### Null types are closed under dependent sums
