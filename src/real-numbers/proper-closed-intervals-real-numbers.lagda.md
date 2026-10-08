@@ -1064,15 +1064,15 @@ module _
       ( sim-raise-ℝ l _)
 ```
 
-### Location of strictly ordered pairs of rational numbers w.r.t. a proper closed interval
+### Location of strictly ordered pairs of rational numbers with respect to a proper closed interval
 
-For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`
-then one of the following propositions holds:
+For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`,
+at least one of the following propositions holds:
 
 - `p < a`;
 - `b < q`;
 - `∃ (r s : ℚ) | (a < r < s < b) ∧ (p < r) ∧ (s < q)`, i.e. `[r, s]` is a proper
-  sub-interval of both `[a, b] ∩ [p, q]`.
+  sub-interval of both `[a, b]` and `[p, q]`.
 
 ```agda
 module _
