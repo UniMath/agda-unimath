@@ -1066,8 +1066,8 @@ module _
 
 ### Location of strictly ordered pairs of rational numbers with respect to a proper closed interval
 
-For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`,
-at least one of the following propositions holds:
+For any proper closed interval `[a,b]` and any pair `(p q : ℚ)` with `p < q`, at
+least one of the following propositions holds:
 
 - `p < a`;
 - `b < q`;
