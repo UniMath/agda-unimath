@@ -1142,6 +1142,8 @@ module _
             ( unit-trunc-Prop ∘ inr ∘ unit-trunc-Prop ∘ inl)
             ( locate-b))
         ( locate-a)
+```
+
 ### A proper closed interval contains its interior
 
 ```agda
