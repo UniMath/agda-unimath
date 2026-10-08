@@ -11,15 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-propositions
-open import foundation.dependent-products-truncated-types
 open import foundation.function-extensionality-axiom
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.iterated-successors-truncation-levels
 open import foundation.precomposition-dependent-functions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
-open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.truncations
@@ -35,6 +32,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.iterated-successors-truncation-levels
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families

@@ -8,6 +8,7 @@ module ring-theory.sums-of-finite-families-of-elements-semirings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
@@ -197,6 +198,18 @@ module _
       ( A)
       ( B)
       ( H)
+
+module _
+  {l1 l2 : Level} (R : Semiring l1)
+  (A : Finite-Type l2) (σ : Aut (type-Finite-Type A))
+  where
+
+  sum-aut-finite-Semiring :
+    (f : type-Finite-Type A → type-Semiring R) →
+    sum-finite-Semiring R A f ＝
+    sum-finite-Semiring R A (f ∘ map-equiv σ)
+  sum-aut-finite-Semiring =
+    sum-equiv-finite-Semiring R A A (inv-equiv σ)
 ```
 
 ### Sums over finite types distribute over coproducts
