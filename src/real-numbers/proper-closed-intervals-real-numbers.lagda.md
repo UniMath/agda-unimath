@@ -1080,8 +1080,8 @@ module _
   (p q : ℚ) (H : le-ℚ p q)
   where
 
-  trichotomy-prop-le-rational-proper-closed-interval-ℝ : Prop (l1 ⊔ l2)
-  trichotomy-prop-le-rational-proper-closed-interval-ℝ =
+  location-prop-le-rational-proper-closed-interval-ℝ : Prop (l1 ⊔ l2)
+  location-prop-le-rational-proper-closed-interval-ℝ =
     ( lower-cut-ℝ (lower-bound-proper-closed-interval-ℝ I) p) ∨
     ( upper-cut-ℝ (upper-bound-proper-closed-interval-ℝ I) q) ∨
     ( ∃ ( ℚ)
@@ -1098,14 +1098,14 @@ module _
               ( le-ℚ-Prop p r) ∧
               ( le-ℚ-Prop s q))))
 
-  trichotomy-le-rational-proper-closed-interval-ℝ : UU (l1 ⊔ l2)
-  trichotomy-le-rational-proper-closed-interval-ℝ =
-    type-Prop trichotomy-prop-le-rational-proper-closed-interval-ℝ
+  type-location-le-rational-proper-closed-interval-ℝ : UU (l1 ⊔ l2)
+  type-location-le-rational-proper-closed-interval-ℝ =
+    type-Prop location-prop-le-rational-proper-closed-interval-ℝ
 
-  is-prop-trichotomy-le-rational-proper-closed-interval-ℝ :
-    is-prop trichotomy-le-rational-proper-closed-interval-ℝ
-  is-prop-trichotomy-le-rational-proper-closed-interval-ℝ =
-    is-prop-type-Prop trichotomy-prop-le-rational-proper-closed-interval-ℝ
+  is-prop-type-location-le-rational-proper-closed-interval-ℝ :
+    is-prop type-location-le-rational-proper-closed-interval-ℝ
+  is-prop-type-location-le-rational-proper-closed-interval-ℝ =
+    is-prop-type-Prop location-prop-le-rational-proper-closed-interval-ℝ
 
   lemma-trichotomy-le-rational-proper-closed-interval-ℝ :
     trichotomy-le-rational-proper-closed-interval-ℝ
