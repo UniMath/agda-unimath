@@ -1107,13 +1107,13 @@ module _
   is-prop-type-location-le-rational-proper-closed-interval-ℝ =
     is-prop-type-Prop location-prop-le-rational-proper-closed-interval-ℝ
 
-  lemma-trichotomy-le-rational-proper-closed-interval-ℝ :
-    trichotomy-le-rational-proper-closed-interval-ℝ
-  lemma-trichotomy-le-rational-proper-closed-interval-ℝ =
+  location-le-rational-proper-closed-interval-ℝ :
+    type-location-le-rational-proper-closed-interval-ℝ
+  location-le-rational-proper-closed-interval-ℝ =
     let
       open
         do-syntax-trunc-Prop
-          trichotomy-prop-le-rational-proper-closed-interval-ℝ
+          location-prop-le-rational-proper-closed-interval-ℝ
     in do
       (r , p<r , r<q) ← dense-le-ℚ H
       (s , r<s , s<q) ← dense-le-ℚ r<q
