@@ -207,6 +207,8 @@ open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.ring-extension-rational-numbers-of-rational-numbers public
 open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.ring-of-rational-numbers public
+open import elementary-number-theory.rounded-lower-subsets-rational-numbers public
+open import elementary-number-theory.rounded-upper-subsets-rational-numbers public
 open import elementary-number-theory.semiring-of-natural-numbers public
 open import elementary-number-theory.series-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public

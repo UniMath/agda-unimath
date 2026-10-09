@@ -15,6 +15,7 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.rounded-lower-subsets-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
@@ -25,6 +26,7 @@ open import foundation.dependent-products-truncated-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -185,6 +187,30 @@ module _
   eq-sim-cut-lower-ℝ : sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) → x ＝ y
   eq-sim-cut-lower-ℝ =
     eq-eq-cut-lower-ℝ ∘ eq-sim-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
+```
+
+### Any inhabited rounded lower subset of rational numbers defines a lower real
+
+```agda
+module _
+  {l : Level}
+  (L : rounded-lower-type-ℚ l)
+  (H : is-inhabited-subtype (subtype-rounded-lower-type-ℚ L))
+  where
+
+  lower-real-is-inhabited-rounded-lower-type-ℚ : lower-ℝ l
+  pr1 lower-real-is-inhabited-rounded-lower-type-ℚ =
+    subtype-rounded-lower-type-ℚ L
+  pr2 lower-real-is-inhabited-rounded-lower-type-ℚ =
+    ( H ,
+      λ q →
+        ( is-rounded-lower-type-rounded-lower-type-ℚ L q ,
+          elim-exists
+            ( subtype-rounded-lower-type-ℚ L q)
+            ( λ r (q<r , Lr) →
+              is-downwards-rounded-lower-type-ℚ L r q
+                ( leq-le-ℚ q<r)
+                ( Lr))))
 ```
 
 ## See also
