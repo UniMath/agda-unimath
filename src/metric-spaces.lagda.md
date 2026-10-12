@@ -137,6 +137,7 @@ open import metric-spaces.metric-quotients-of-metric-spaces public
 open import metric-spaces.metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-complete-metric-spaces public
 open import metric-spaces.metric-space-of-cauchy-approximations-metric-spaces public
+open import metric-spaces.metric-space-of-cauchy-filters-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.metric-space-of-convergent-sequences-metric-spaces public
 open import metric-spaces.metric-space-of-isometries-metric-spaces public
