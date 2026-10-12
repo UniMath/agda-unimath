@@ -315,3 +315,46 @@ module _
         ( Rx)
         ( refl-neighborhood-Metric-Space M _ x))
 ```
+
+### The unit map of Cauchy filters
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  map-unit-Cauchy-Filter-Metric-Space :
+    type-Metric-Space M → Cauchy-Filter-Metric-Space l2 M
+  map-unit-Cauchy-Filter-Metric-Space x =
+    ( ( λ d y → neighborhood-prop-Metric-Space M d x y) ,
+      ( λ d → intro-exists x (refl-neighborhood-Metric-Space M d x)) ,
+      ( λ ε → saturated-neighborhood-Metric-Space M ε x) ,
+      ( λ (ε , δ , y , z) →
+        ( λ (Nxy , Nxz) →
+          triangular-neighborhood-Metric-Space M y x z ε δ
+            ( Nxz)
+            ( symmetric-neighborhood-Metric-Space M ε x y Nxy)) ,
+        ( λ (Nxy , Nyz) →
+          triangular-neighborhood-Metric-Space M x y z ε δ Nyz Nxy)))
+```
+
+## Properties
+
+### Any point is in the filter of its image by the unit point
+
+```agda
+module _
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
+  where
+
+  is-in-filter-map-unit-Cauchy-Filter-Metric-Space :
+    ( ε : ℚ⁺) →
+    ( x : type-Metric-Space M) →
+    is-in-filter-Cauchy-Filter-Metric-Space
+      ( M)
+      ( map-unit-Cauchy-Filter-Metric-Space M x)
+      ( ε)
+      ( x)
+  is-in-filter-map-unit-Cauchy-Filter-Metric-Space ε x =
+    refl-neighborhood-Metric-Space M ε x
+```
