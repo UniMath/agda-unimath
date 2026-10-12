@@ -145,9 +145,6 @@ set-ℚ⁺ = set-subset ℚ-Set is-positive-prop-ℚ
 
 is-set-ℚ⁺ : is-set ℚ⁺
 is-set-ℚ⁺ = is-set-type-Set set-ℚ⁺
-
-eq-prop-ℚ⁺ : (x y : ℚ⁺) → Prop lzero
-eq-prop-ℚ⁺ x y = (x ＝ y , is-set-ℚ⁺ x y)
 ```
 
 ### The set of positive rational numbers is countable
