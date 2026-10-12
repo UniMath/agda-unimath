@@ -50,8 +50,8 @@ with the following properties:
   ```
 
 - _locality_: for any `(ε δ : ℚ⁺)` and `(x y : M)`,
-  - (R ε x) ∧ (R δ y) ⇒ N (ε + δ) x y
-  - (R ε x) ∧ (N δ x y) ⇒ R (ε + δ) y
+  - `(R ε x) ∧ (R δ y) ⇒ N (ε + δ) x y`
+  - `(R ε x) ∧ (N δ x y) ⇒ R (ε + δ) y`
 
 where `N` denotes the
 [neighborhood relation](metric-space.rational-neighborhood-relations.md) on `M`.
