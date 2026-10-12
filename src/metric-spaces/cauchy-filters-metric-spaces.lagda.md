@@ -54,7 +54,8 @@ with the following properties:
   - `(R ε x) ∧ (N δ x y) ⇒ R (ε + δ) y`
 
 where `N` denotes the
-[neighborhood relation](metric-space.rational-neighborhood-relations.md) on `M`.
+[neighborhood relation](metric-spaces.rational-neighborhood-relations.md) on
+`M`.
 
 ## Definitions
 
