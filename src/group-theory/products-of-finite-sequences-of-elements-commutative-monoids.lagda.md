@@ -315,6 +315,24 @@ hom-product-fin-sequence-type-Commutative-Monoid M n =
     product-unit-fin-sequence-type-Commutative-Monoid M n)
 ```
 
+### Commutative monoid homomorphisms distribute over the product operation
+
+```agda
+abstract
+  distributive-hom-product-fin-sequence-type-Commutative-Monoid :
+    {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Commutative-Monoid l2)
+    (φ : hom-Commutative-Monoid M N)
+    (n : ℕ) (u : fin-sequence-type-Commutative-Monoid M n) →
+    map-hom-Commutative-Monoid M N φ
+      ( product-fin-sequence-type-Commutative-Monoid M n u) ＝
+    product-fin-sequence-type-Commutative-Monoid N n
+      ( map-hom-Commutative-Monoid M N φ ∘ u)
+  distributive-hom-product-fin-sequence-type-Commutative-Monoid M N =
+    distributive-hom-product-fin-sequence-type-Monoid
+      ( monoid-Commutative-Monoid M)
+      ( monoid-Commutative-Monoid N)
+```
+
 ## See also
 
 - [Products of finite families of elements in commutative monoids](group-theory.products-of-finite-families-of-elements-commutative-monoids.md)

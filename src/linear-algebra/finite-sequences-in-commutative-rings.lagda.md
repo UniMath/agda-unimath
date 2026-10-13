@@ -1,6 +1,8 @@
 # Finite sequences in commutative rings
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module linear-algebra.finite-sequences-in-commutative-rings where
 ```
 
@@ -8,19 +10,24 @@ module linear-algebra.finite-sequences-in-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.function-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.groups
-open import group-theory.monoids
-open import group-theory.semigroups
+open import group-theory.sums-of-finite-sequences-of-elements-abelian-groups
 
 open import linear-algebra.finite-sequences-in-rings
+open import linear-algebra.left-modules-commutative-rings
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-commutative-rings
+
+open import lists.finite-sequences
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -66,6 +73,27 @@ module _
     type-Commutative-Ring R → fin-sequence-type-Commutative-Ring (succ-ℕ n)
   snoc-fin-sequence-type-Commutative-Ring =
     snoc-fin-sequence-type-Ring (ring-Commutative-Ring R)
+```
+
+### The left module of finite sequences in a commutative ring
+
+```agda
+module _
+  {l : Level} (R : Commutative-Ring l)
+  where
+
+  left-module-fin-sequence-Commutative-Ring :
+    (n : ℕ) → left-module-Commutative-Ring l R
+  left-module-fin-sequence-Commutative-Ring n =
+    left-module-function-Commutative-Ring R (Fin n)
+
+  scalar-mul-fin-sequence-type-Commutative-Ring :
+    (n : ℕ) →
+    type-Commutative-Ring R → fin-sequence-type-Commutative-Ring R n →
+    fin-sequence-type-Commutative-Ring R n
+  scalar-mul-fin-sequence-type-Commutative-Ring =
+    scalar-mul-fin-sequence-type-Ring
+      ( ring-Commutative-Ring R)
 ```
 
 ### The zero finite sequence in a commutative ring
@@ -203,24 +231,28 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
-  semigroup-fin-sequence-type-Commutative-Ring : ℕ → Semigroup l
-  semigroup-fin-sequence-type-Commutative-Ring =
-    semigroup-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  monoid-fin-sequence-type-Commutative-Ring : ℕ → Monoid l
-  monoid-fin-sequence-type-Commutative-Ring =
-    monoid-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  commutative-monoid-fin-sequence-type-Commutative-Ring :
-    ℕ → Commutative-Monoid l
-  commutative-monoid-fin-sequence-type-Commutative-Ring =
-    commutative-monoid-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
-  group-fin-sequence-type-Commutative-Ring : ℕ → Group l
-  group-fin-sequence-type-Commutative-Ring =
-    group-fin-sequence-type-Ring (ring-Commutative-Ring R)
-
   ab-fin-sequence-type-Commutative-Ring : ℕ → Ab l
-  ab-fin-sequence-type-Commutative-Ring =
-    ab-fin-sequence-type-Ring (ring-Commutative-Ring R)
+  ab-fin-sequence-type-Commutative-Ring n =
+    ab-left-module-Commutative-Ring
+      ( R)
+      ( left-module-fin-sequence-Commutative-Ring R n)
+```
+
+### Coordinates of sequence sums
+
+```agda
+abstract
+  coordinate-sum-fin-sequence-fin-sequence-type-Commutative-Ring :
+    {l : Level} (R : Commutative-Ring l) (m n : ℕ) (i : Fin n)
+    (v : fin-sequence (fin-sequence-type-Commutative-Ring R n) m) →
+    sum-fin-sequence-type-left-module-Commutative-Ring
+      ( R)
+      ( left-module-fin-sequence-Commutative-Ring R n)
+      ( m)
+      ( v)
+      ( i) ＝
+    sum-fin-sequence-type-Ab (ab-Commutative-Ring R) m (λ j → v j i)
+  coordinate-sum-fin-sequence-fin-sequence-type-Commutative-Ring R =
+    coordinate-sum-fin-sequence-fin-sequence-type-Ring
+      ( ring-Commutative-Ring R)
 ```
