@@ -75,6 +75,8 @@ if it is an
 of the
 [metric space of real numbers](real-numbers.metric-space-of-real-numbers.md).
 
+## Definition
+
 ```agda
 inhabited-totally-bounded-subset-ℝ :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -318,7 +320,7 @@ module _
               ( sup -ℝ real-ℚ⁺ ε)
               ( sup -ℝ real-ℚ⁺ (ε' +ℚ⁺ ε'))
               ( max-net ε' -ℝ real-ℚ⁺ ε')
-              ( reverses-le-diff-ℝ sup _ _ (preserves-le-real-ℚ ε'+ε'<ε))
+              ( reverses-le-diff-ℝ sup (preserves-le-real-ℚ ε'+ε'<ε))
               ( tr
                 ( λ y → leq-ℝ y (max-net ε' -ℝ real-ℚ⁺ ε'))
                 ( associative-add-ℝ _ _ _ ∙
