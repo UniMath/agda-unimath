@@ -8,6 +8,8 @@ module foundation.similarity-subtypes where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-similarity-relations
 open import foundation.logical-equivalences
@@ -117,4 +119,21 @@ abstract
     (l3 : Level) (S : subtype l2 X) →
     sim-subtype S (raise-subtype l3 S)
   sim-raise-subtype _ _ = ( (λ _ → map-raise) , (λ _ → map-inv-raise))
+```
+
+### The equivalence between the types of similar subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {X : UU l1}
+  (S : subtype l2 X)
+  (T : subtype l3 X)
+  where
+
+  equiv-type-sim-subtype :
+    sim-subtype S T → type-subtype S ≃ type-subtype T
+  equiv-type-sim-subtype S~T =
+    equiv-tot
+      ( λ x → equiv-iff' (S x) (T x) (has-same-elements-sim-subtype S T S~T x))
 ```

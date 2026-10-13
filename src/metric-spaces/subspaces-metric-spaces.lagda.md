@@ -12,9 +12,12 @@ open import foundation.empty-subtypes
 open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.logical-equivalences
+open import foundation.similarity-subtypes
 open import foundation.subtypes
+open import foundation.subtypes-of-subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.extensionality-pseudometric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
@@ -235,4 +238,62 @@ module _
     uniformly-continuous-map-Metric-Space X (subspace-Metric-Space Y P)
   uniformly-continuous-map-into-subspace-Metric-Space (f , is-ucont-f) Pf =
     ( ( λ x → (f x , Pf x)) , is-ucont-f)
+```
+
+### The inclusion map of a subspace of a subspace
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : subset-Metric-Space l3 X)
+  (Z : subset-Metric-Space l4 (subspace-Metric-Space X Y))
+  where
+
+  isometry-inclusion-subspace-of-subspace-Metric-Space :
+    isometry-Metric-Space
+      ( subspace-Metric-Space (subspace-Metric-Space X Y) Z)
+      ( X)
+  isometry-inclusion-subspace-of-subspace-Metric-Space =
+    ( pr1 ∘ pr1 ,
+      λ d x y → id-iff)
+```
+
+### If `T` is a subspace of `S` is a subspace of `X`, then `T` as a subspace of `S` is isometrically equivalent to `T` as a subspace of `X`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (Y : subset-Metric-Space l3 X)
+  (Z : subset-Metric-Space l4 (subspace-Metric-Space X Y))
+  where
+
+  isometric-equiv-subspace-of-subspace-Metric-Space :
+    isometric-equiv-Metric-Space
+      ( subspace-Metric-Space (subspace-Metric-Space X Y) Z)
+      ( subspace-Metric-Space X (subtype-subtype-of-subtype Y Z))
+  isometric-equiv-subspace-of-subspace-Metric-Space =
+    ( equiv-subtype-of-subtype Y Z ,
+      λ d x y → id-iff)
+```
+
+### Two similar subspaces are isometrically equivalent
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (X : Metric-Space l1 l2)
+  (S : subset-Metric-Space l3 X)
+  (T : subset-Metric-Space l4 X)
+  where
+
+  isometric-equiv-sim-subspace-Metric-Space :
+    sim-subtype S T →
+    isometric-equiv-Metric-Space
+      ( subspace-Metric-Space X S)
+      ( subspace-Metric-Space X T)
+  isometric-equiv-sim-subspace-Metric-Space S~T =
+    ( equiv-type-sim-subtype S T S~T ,
+      λ d x y → id-iff)
 ```
