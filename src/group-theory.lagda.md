@@ -211,6 +211,11 @@ open import group-theory.subsemigroups public
 open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
 open import group-theory.subsets-groups public
+open import group-theory.subsets-large-abelian-groups public
+open import group-theory.subsets-large-commutative-monoids public
+open import group-theory.subsets-large-groups public
+open import group-theory.subsets-large-monoids public
+open import group-theory.subsets-large-semigroups public
 open import group-theory.subsets-monoids public
 open import group-theory.subsets-semigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
