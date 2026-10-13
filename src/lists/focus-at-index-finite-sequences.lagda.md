@@ -60,7 +60,7 @@ module _
 
   unfocus-at-fin-sequence :
     A × fin-sequence A n → fin-sequence A (succ-ℕ n)
-  unfocus-at-fin-sequence (a , u) = insert-at-fin-sequence n a i u
+  unfocus-at-fin-sequence (a , u) = insert-at-fin-sequence n i a u
 ```
 
 ## Properties
@@ -77,8 +77,8 @@ module _
     focus-at-fin-sequence n i (unfocus-at-fin-sequence n i x) ＝ x
   is-section-focus-at-fin-sequence (a , u) =
     eq-pair
-      ( compute-elem-at-insert-at-fin-sequence n a i u)
-      ( eq-htpy (compute-remove-at-insert-at-fin-sequence n a i u))
+      ( compute-elem-at-insert-at-fin-sequence n i a u)
+      ( eq-htpy (compute-remove-at-insert-at-fin-sequence n i a u))
 
   is-retraction-focus-at-fin-sequence :
     (v : fin-sequence A (succ-ℕ n)) →
