@@ -62,6 +62,9 @@ open import order-theory.homomorphisms-meet-suplattices public
 open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
+open import order-theory.increasing-arrays-posets public
+open import order-theory.increasing-finite-sequences-posets public
+open import order-theory.increasing-nonempty-arrays-posets public
 open import order-theory.increasing-sequences-posets public
 open import order-theory.inflationary-maps-posets public
 open import order-theory.inflationary-maps-preorders public
@@ -83,6 +86,7 @@ open import order-theory.large-join-semilattices public
 open import order-theory.large-locales public
 open import order-theory.large-meet-semilattices public
 open import order-theory.large-meet-subsemilattices public
+open import order-theory.large-poset-closed-intervals-large-posets public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
 open import order-theory.large-quotient-locales public
