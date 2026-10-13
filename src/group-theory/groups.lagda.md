@@ -681,3 +681,23 @@ module _
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
 ```
+
+### Unit laws of right division
+
+```agda
+module _
+  {l : Level}
+  (G : Group l)
+  (g : type-Group G)
+  where abstract
+
+  right-unit-law-right-div-Group :
+    right-div-Group G g (unit-Group G) ＝ g
+  right-unit-law-right-div-Group =
+    ap-mul-Group G refl (inv-unit-Group G) ∙ right-unit-law-mul-Group G g
+
+  left-unit-law-right-div-Group :
+    right-div-Group G (unit-Group G) g ＝ inv-Group G g
+  left-unit-law-right-div-Group =
+    left-unit-law-mul-Group G (inv-Group G g)
+```

@@ -157,6 +157,7 @@ open import metric-spaces.nets-located-metric-spaces public
 open import metric-spaces.nets-metric-spaces public
 open import metric-spaces.open-subsets-located-metric-spaces public
 open import metric-spaces.open-subsets-metric-spaces public
+open import metric-spaces.perfect-metric-spaces public
 open import metric-spaces.pointwise-continuous-maps-metric-spaces public
 open import metric-spaces.pointwise-epsilon-delta-continuous-maps-metric-spaces public
 open import metric-spaces.poset-of-rational-neighborhood-relations public
