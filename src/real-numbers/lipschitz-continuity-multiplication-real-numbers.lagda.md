@@ -561,4 +561,17 @@ abstract
                       ( y +ℝ real-ℚ⁺ δ , z +ℝ real-ℚ⁺ δ)
                       ( neighborhood-right-add-real-ℚ⁺ y δ ,
                         neighborhood-right-add-real-ℚ⁺ z δ))))
+
+  saturated-leq-left-mul-ℝ⁰⁺ :
+    {l1 l2 l3 : Level} (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) (z : ℝ⁰⁺ l3) →
+    ((ε : ℚ⁺) → leq-ℝ⁰⁺ x (y *ℝ⁰⁺ (z +ℝ⁰⁺ nonnegative-real-ℚ⁺ ε))) →
+    leq-ℝ⁰⁺ x (y *ℝ⁰⁺ z)
+  saturated-leq-left-mul-ℝ⁰⁺ x y z H =
+    saturated-leq-mul-ℝ⁰⁺ x y z
+      ( λ δ ε →
+        transitive-leq-ℝ _ _ _
+          ( preserves-leq-right-mul-ℝ⁰⁺
+            ( z +ℝ⁰⁺ nonnegative-real-ℚ⁺ ε)
+            ( leq-left-add-real-ℝ⁰⁺ (real-ℝ⁰⁺ y) (nonnegative-real-ℚ⁺ δ)))
+          ( H ε))
 ```

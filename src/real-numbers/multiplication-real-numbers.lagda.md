@@ -1374,6 +1374,12 @@ abstract
         ~ℝ raise-ℝ l (x *ℝ y)
           by sim-raise-ℝ l (x *ℝ y))
 
+  eq-mul-left-raise-ℝ :
+    {l1 l2 : Level} (x : ℝ l1) (y : ℝ (l1 ⊔ l2)) →
+    raise-ℝ l2 x *ℝ y ＝ x *ℝ y
+  eq-mul-left-raise-ℝ {l1} {l2} x y =
+    mul-left-raise-ℝ l2 x y ∙ eq-sim-ℝ (sim-raise-ℝ' l2 (x *ℝ y))
+
   mul-right-raise-ℝ :
     {l1 l2 : Level} (l : Level) (x : ℝ l1) (y : ℝ l2) →
     x *ℝ raise-ℝ l y ＝ raise-ℝ l (x *ℝ y)
