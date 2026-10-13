@@ -112,10 +112,9 @@ has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-�
 ### The integers modulo `k` form a set
 
 ```agda
-abstract
-  is-set-ℤ-Mod : (k : ℕ) → is-set (ℤ-Mod k)
-  is-set-ℤ-Mod zero-ℕ = is-set-ℤ
-  is-set-ℤ-Mod (succ-ℕ k) = is-set-Fin (succ-ℕ k)
+is-set-ℤ-Mod : (k : ℕ) → is-set (ℤ-Mod k)
+is-set-ℤ-Mod zero-ℕ = is-set-ℤ
+is-set-ℤ-Mod (succ-ℕ k) = is-set-Fin (succ-ℕ k)
 
 ℤ-Mod-Set : (k : ℕ) → Set lzero
 pr1 (ℤ-Mod-Set k) = ℤ-Mod k
