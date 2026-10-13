@@ -34,6 +34,6 @@ metric-ab-add-ℚ =
   ( abelian-group-add-ℚ ,
     pseudometric-structure-Metric-Space metric-space-ℚ ,
     is-extensional-pseudometric-space-ℚ ,
-    is-isometry-neg-ℚ ,
-    is-isometry-left-add-ℚ)
+    is-short-map-neg-ℚ ,
+    is-short-map-left-add-ℚ)
 ```

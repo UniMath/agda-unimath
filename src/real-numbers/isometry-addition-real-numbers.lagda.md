@@ -15,6 +15,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cartesian-products-metric-spaces
+open import metric-spaces.expansive-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-space-of-isometries-metric-spaces
 open import metric-spaces.modulated-uniformly-continuous-maps-metric-spaces
@@ -51,27 +52,41 @@ module _
   where
 
   abstract
+    is-short-map-left-add-ℝ :
+      is-short-map-Metric-Space
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2))
+        ( add-ℝ x)
+    is-short-map-left-add-ℝ d y z Nyz =
+      neighborhood-real-bound-each-leq-ℝ
+        ( d)
+        ( add-ℝ x y)
+        ( add-ℝ x z)
+        ( preserves-lower-neighborhood-leq-left-add-ℝ d x y z
+          ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
+        ( preserves-lower-neighborhood-leq-left-add-ℝ d x z y
+          ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))
+
+    is-expansive-map-left-add-ℝ :
+      is-expansive-map-Metric-Space
+        ( metric-space-ℝ l2)
+        ( metric-space-ℝ (l1 ⊔ l2))
+        ( add-ℝ x)
+    is-expansive-map-left-add-ℝ d y z Nxyz =
+      neighborhood-real-bound-each-leq-ℝ d y z
+        ( reflects-lower-neighborhood-leq-left-add-ℝ d x y z
+          ( left-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
+        ( reflects-lower-neighborhood-leq-left-add-ℝ d x z y
+          ( right-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
+
     is-isometry-left-add-ℝ :
       is-isometry-Metric-Space
         ( metric-space-ℝ l2)
         ( metric-space-ℝ (l1 ⊔ l2))
         ( add-ℝ x)
     is-isometry-left-add-ℝ d y z =
-      ( λ Nyz →
-        neighborhood-real-bound-each-leq-ℝ
-          ( d)
-          ( add-ℝ x y)
-          ( add-ℝ x z)
-          ( preserves-lower-neighborhood-leq-left-add-ℝ d x y z
-            ( left-leq-real-bound-neighborhood-ℝ d y z Nyz))
-          ( preserves-lower-neighborhood-leq-left-add-ℝ d x z y
-            ( right-leq-real-bound-neighborhood-ℝ d y z Nyz))) ,
-      ( λ Nxyz →
-        neighborhood-real-bound-each-leq-ℝ d y z
-          ( reflects-lower-neighborhood-leq-left-add-ℝ d x y z
-            ( left-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz))
-          ( reflects-lower-neighborhood-leq-left-add-ℝ d x z y
-            ( right-leq-real-bound-neighborhood-ℝ d (x +ℝ y) (x +ℝ z) Nxyz)))
+      ( is-short-map-left-add-ℝ d y z ,
+        is-expansive-map-left-add-ℝ d y z)
 
     is-isometry-right-add-ℝ :
       is-isometry-Metric-Space
