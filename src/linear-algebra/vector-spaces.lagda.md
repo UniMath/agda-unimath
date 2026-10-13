@@ -71,6 +71,9 @@ module _
   neg-Vector-Space : type-Vector-Space → type-Vector-Space
   neg-Vector-Space = neg-Ab ab-Vector-Space
 
+  diff-Vector-Space : type-Vector-Space → type-Vector-Space → type-Vector-Space
+  diff-Vector-Space = right-subtraction-Ab ab-Vector-Space
+
   mul-Vector-Space :
     type-Heyting-Field R → type-Vector-Space → type-Vector-Space
   mul-Vector-Space =
