@@ -121,6 +121,8 @@ module _
 record
   Reflexive-Globular-Type (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
+
+  eta-equality
 ```
 
 The underlying globular type of a reflexive globular type:
