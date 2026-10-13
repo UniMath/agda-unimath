@@ -38,6 +38,7 @@ open import real-numbers.dedekind-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.multiplication-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
@@ -145,6 +146,17 @@ module _
   diff-Normed-ℝ-Vector-Space =
     diff-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
 
+  interchange-add-diff-Normed-ℝ-Vector-Space :
+    (x y z w : type-Normed-ℝ-Vector-Space) →
+    diff-Normed-ℝ-Vector-Space
+      ( add-Normed-ℝ-Vector-Space x y)
+      ( add-Normed-ℝ-Vector-Space z w) ＝
+    add-Normed-ℝ-Vector-Space
+      ( diff-Normed-ℝ-Vector-Space x z)
+      ( diff-Normed-ℝ-Vector-Space y w)
+  interchange-add-diff-Normed-ℝ-Vector-Space =
+    interchange-add-diff-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
   neg-Normed-ℝ-Vector-Space :
     type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space
   neg-Normed-ℝ-Vector-Space =
@@ -192,6 +204,57 @@ module _
   right-inverse-law-add-Normed-ℝ-Vector-Space =
     right-inverse-law-add-Ab ab-Normed-ℝ-Vector-Space
 
+  mul-Normed-ℝ-Vector-Space :
+    ℝ l1 → type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space
+  mul-Normed-ℝ-Vector-Space =
+    mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  left-unit-law-mul-Normed-ℝ-Vector-Space :
+    (v : type-Normed-ℝ-Vector-Space) →
+    mul-Normed-ℝ-Vector-Space (raise-one-ℝ l1) v ＝ v
+  left-unit-law-mul-Normed-ℝ-Vector-Space =
+    left-unit-law-mul-ℝ-Vector-Space
+      ( vector-space-Normed-ℝ-Vector-Space)
+
+  associative-mul-Normed-ℝ-Vector-Space :
+    (r s : ℝ l1) (v : type-Normed-ℝ-Vector-Space) →
+    mul-Normed-ℝ-Vector-Space (r *ℝ s) v ＝
+    mul-Normed-ℝ-Vector-Space r (mul-Normed-ℝ-Vector-Space s v)
+  associative-mul-Normed-ℝ-Vector-Space =
+    associative-mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  right-zero-law-mul-Normed-ℝ-Vector-Space :
+    (r : ℝ l1) →
+    mul-Normed-ℝ-Vector-Space r zero-Normed-ℝ-Vector-Space ＝
+    zero-Normed-ℝ-Vector-Space
+  right-zero-law-mul-Normed-ℝ-Vector-Space =
+    right-zero-law-mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  left-distributive-mul-add-Normed-ℝ-Vector-Space :
+    (r : ℝ l1) (v w : type-Normed-ℝ-Vector-Space) →
+    mul-Normed-ℝ-Vector-Space r (add-Normed-ℝ-Vector-Space v w) ＝
+    add-Normed-ℝ-Vector-Space
+      ( mul-Normed-ℝ-Vector-Space r v)
+      ( mul-Normed-ℝ-Vector-Space r w)
+  left-distributive-mul-add-Normed-ℝ-Vector-Space =
+    left-distributive-mul-add-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  left-distributive-mul-diff-Normed-ℝ-Vector-Space :
+    (r : ℝ l1) (v w : type-Normed-ℝ-Vector-Space) →
+    mul-Normed-ℝ-Vector-Space r (diff-Normed-ℝ-Vector-Space v w) ＝
+    diff-Normed-ℝ-Vector-Space
+      ( mul-Normed-ℝ-Vector-Space r v)
+      ( mul-Normed-ℝ-Vector-Space r w)
+  left-distributive-mul-diff-Normed-ℝ-Vector-Space =
+    left-distributive-mul-diff-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
+  left-swap-mul-Normed-ℝ-Vector-Space :
+    (r s : ℝ l1) (v : type-Normed-ℝ-Vector-Space) →
+    mul-Normed-ℝ-Vector-Space r (mul-Normed-ℝ-Vector-Space s v) ＝
+    mul-Normed-ℝ-Vector-Space s (mul-Normed-ℝ-Vector-Space r v)
+  left-swap-mul-Normed-ℝ-Vector-Space =
+    left-swap-mul-ℝ-Vector-Space vector-space-Normed-ℝ-Vector-Space
+
   map-norm-Normed-ℝ-Vector-Space : type-Normed-ℝ-Vector-Space → ℝ l1
   map-norm-Normed-ℝ-Vector-Space = pr1 (pr1 norm-Normed-ℝ-Vector-Space)
 
@@ -209,6 +272,14 @@ module _
     type-Normed-ℝ-Vector-Space → type-Normed-ℝ-Vector-Space → ℝ⁰⁺ l1
   nonnegative-dist-Normed-ℝ-Vector-Space =
     nonnegative-dist-Seminormed-ℝ-Vector-Space
+      ( seminormed-vector-space-Normed-ℝ-Vector-Space)
+
+  is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space :
+    (c : ℝ l1) (v : type-Normed-ℝ-Vector-Space) →
+    map-norm-Normed-ℝ-Vector-Space (mul-Normed-ℝ-Vector-Space c v) ＝
+    abs-ℝ c *ℝ map-norm-Normed-ℝ-Vector-Space v
+  is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space =
+    is-absolutely-homogeneous-seminorm-Seminormed-ℝ-Vector-Space
       ( seminormed-vector-space-Normed-ℝ-Vector-Space)
 
   abstract
@@ -420,6 +491,27 @@ module _
     eq-zero-norm-zero-Normed-ℝ-Vector-Space =
       eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
         ( seminormed-vector-space-Normed-ℝ-Vector-Space V)
+```
+
+### The distance between `cx` and `cy` is `abs-ℝ c` times the distance between `x` and `y`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (V : Normed-ℝ-Vector-Space l1 l2)
+  where abstract
+
+  left-distributive-abs-mul-dist-Normed-ℝ-Vector-Space :
+    (c : ℝ l1) (x y : type-Normed-ℝ-Vector-Space V) →
+    abs-ℝ c *ℝ dist-Normed-ℝ-Vector-Space V x y ＝
+    dist-Normed-ℝ-Vector-Space V
+      ( mul-Normed-ℝ-Vector-Space V c x)
+      ( mul-Normed-ℝ-Vector-Space V c y)
+  left-distributive-abs-mul-dist-Normed-ℝ-Vector-Space c x y =
+    ( inv (is-absolutely-homogeneous-norm-Normed-ℝ-Vector-Space V c _)) ∙
+    ( ap
+      ( map-norm-Normed-ℝ-Vector-Space V)
+      ( left-distributive-mul-diff-Normed-ℝ-Vector-Space V c x y))
 ```
 
 ## See also
