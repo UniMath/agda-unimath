@@ -269,6 +269,18 @@ module _
         backward-implication
           ( same-neighbors d _)
           ( refl-sim-Pseudometric-Space A _ d))
+
+    preserves-and-reflects-neighborhoods-sim-Pseudometric-Space :
+      {x x' y y' : type-Pseudometric-Space A} →
+      sim-Pseudometric-Space A x x' →
+      sim-Pseudometric-Space A y y' →
+      (d : ℚ⁺) →
+      neighborhood-Pseudometric-Space A d x y ↔
+      neighborhood-Pseudometric-Space A d x' y'
+    preserves-and-reflects-neighborhoods-sim-Pseudometric-Space
+      {x} {x'} {y} {y'} x~x' y~y' d =
+      ( preserves-neighborhoods-sim-Pseudometric-Space x~x' y~y' d ,
+        reflects-neighborhoods-sim-Pseudometric-Space x~x' y~y' d)
 ```
 
 ### Similar elements are elements similar w.r.t the underlying rational neighborhood relation
@@ -362,4 +374,14 @@ module _
     ( sim-Pseudometric-Space A x y)
   reflects-sim-map-isometry-Pseudometric-Space x y fx~fy d =
     reflects-neighborhoods-map-isometry-Pseudometric-Space A B f d x y (fx~fy d)
+
+  iff-sim-map-isometry-Pseudometric-Space :
+    ( x y : type-Pseudometric-Space A) →
+    ( sim-Pseudometric-Space A x y) ↔
+    ( sim-Pseudometric-Space B
+      ( map-isometry-Pseudometric-Space A B f x)
+      ( map-isometry-Pseudometric-Space A B f y))
+  iff-sim-map-isometry-Pseudometric-Space x y =
+    ( preserves-sim-map-isometry-Pseudometric-Space x y ,
+      reflects-sim-map-isometry-Pseudometric-Space x y)
 ```
