@@ -265,7 +265,7 @@ module _
 ```agda
 module _
   {l : Level} (A : Ab l)
-  where
+  where abstract
 
   left-distributive-integer-multiple-add-Ab :
     (k : ℤ) (x y : type-Ab A) →
@@ -299,7 +299,7 @@ module _
 ```agda
 module _
   {l : Level} (A : Ab l)
-  where
+  where abstract
 
   integer-multiple-mul-Ab :
     (k l : ℤ) (x : type-Ab A) →
@@ -324,7 +324,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
-  where
+  where abstract
 
   preserves-integer-multiples-hom-Ab :
     (k : ℤ) (x : type-Ab A) →
@@ -335,7 +335,7 @@ module _
 
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
-  where
+  where abstract
 
   eq-integer-multiple-hom-Ab :
     (g : hom-Ab A B) (k : ℤ) (x : type-Ab A) →

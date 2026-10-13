@@ -1,6 +1,8 @@
 # Integer multiples of elements in large abelian groups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module group-theory.integer-multiples-of-elements-large-abelian-groups where
 ```
 
@@ -16,8 +18,11 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-large-abelian-groups
+open import group-theory.integer-multiples-of-elements-abelian-groups
 open import group-theory.integer-powers-of-elements-large-groups
 open import group-theory.large-abelian-groups
+open import group-theory.large-abelian-subgroups
 open import group-theory.multiples-of-elements-large-abelian-groups
 ```
 
@@ -237,6 +242,51 @@ module _
       int-multiple-Large-Ab G l (int-multiple-Large-Ab G k x)
     int-multiple-mul-Large-Ab =
       int-power-mul-Large-Group (large-group-Large-Ab G)
+```
+
+### Large abelian group homomorphisms preserve integer multiples
+
+```agda
+module _
+  {α β : Level → Level}
+  {γ δ : Level → Level → Level}
+  {G : Large-Ab α γ}
+  {H : Large-Ab β δ}
+  (φ : hom-Large-Ab G H)
+  where abstract
+
+  preserves-int-multiple-hom-Large-Ab :
+    {l : Level} (k : ℤ) (x : type-Large-Ab G l) →
+    map-hom-Large-Ab φ (int-multiple-Large-Ab G k x) ＝
+    int-multiple-Large-Ab H k (map-hom-Large-Ab φ x)
+  preserves-int-multiple-hom-Large-Ab {l} =
+    preserves-integer-multiples-hom-Ab
+      ( ab-Large-Ab G l)
+      ( ab-Large-Ab H l)
+      ( hom-ab-hom-Large-Ab φ l)
+```
+
+### Integer multiples in large abelian subgroups
+
+```agda
+module _
+  {α γ : Level → Level}
+  {β : Level → Level → Level}
+  {G : Large-Ab α β}
+  (S : Large-Subgroup-Ab γ G)
+  where abstract
+
+  inclusion-int-multiple-Large-Subgroup-Ab :
+    {l : Level} (k : ℤ) (x : type-Large-Subgroup-Ab S l) →
+    inclusion-Large-Subgroup-Ab
+      ( S)
+      ( int-multiple-Large-Ab
+        ( large-ab-Large-Subgroup-Ab S)
+        ( k)
+        ( x)) ＝
+    int-multiple-Large-Ab G k (inclusion-Large-Subgroup-Ab S x)
+  inclusion-int-multiple-Large-Subgroup-Ab =
+    preserves-int-multiple-hom-Large-Ab (inclusion-hom-Large-Subgroup-Ab S)
 ```
 
 ## See also
