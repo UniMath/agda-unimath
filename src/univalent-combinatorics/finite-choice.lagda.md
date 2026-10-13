@@ -83,9 +83,10 @@ module _
       is-finite X →
       ((x : X) → is-inhabited (Y x)) → is-inhabited ((x : X) → Y x)
     finite-choice is-finite-X H =
-      apply-universal-property-trunc-Prop is-finite-X
-        ( trunc-Prop ((x : X) → Y x))
+      rec-trunc-Prop
+        ( is-inhabited-Prop _)
         ( λ e → finite-choice-count e H)
+        ( is-finite-X)
 ```
 
 ```agda
