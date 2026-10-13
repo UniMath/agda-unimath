@@ -7,6 +7,8 @@ module linear-algebra.linear-maps-left-modules-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.conjunction
@@ -26,6 +28,9 @@ open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 
 open import linear-algebra.left-modules-rings
+open import linear-algebra.sums-of-finite-sequences-of-elements-left-modules-rings
+
+open import lists.finite-sequences
 
 open import ring-theory.rings
 ```
@@ -401,6 +406,35 @@ module _
       f
     right-unit-law-comp-linear-map-left-module-Ring f =
       eq-htpy-linear-map-left-module-Ring R M N _ _ refl-htpy
+```
+
+### Linear maps distribute over sums of finite sequences
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (R : Ring l1)
+  (M : left-module-Ring l2 R)
+  (N : left-module-Ring l3 R)
+  (f : linear-map-left-module-Ring R M N)
+  where abstract
+
+  distributive-map-linear-map-sum-fin-sequence-type-left-module-Ring :
+    (n : ℕ) (v : fin-sequence (type-left-module-Ring R M) n) →
+    map-linear-map-left-module-Ring R M N f
+      ( sum-fin-sequence-type-left-module-Ring R M n v) ＝
+    sum-fin-sequence-type-left-module-Ring R N n
+      ( map-linear-map-left-module-Ring R M N f ∘ v)
+  distributive-map-linear-map-sum-fin-sequence-type-left-module-Ring 0 _ =
+    is-zero-map-zero-linear-map-left-module-Ring R M N f
+  distributive-map-linear-map-sum-fin-sequence-type-left-module-Ring
+    ( succ-ℕ n) v =
+    ( is-additive-map-linear-map-left-module-Ring R M N f _ _) ∙
+    ( ap-add-left-module-Ring R N
+      ( distributive-map-linear-map-sum-fin-sequence-type-left-module-Ring
+        ( n)
+        ( tail-fin-sequence n v))
+      ( refl))
 ```
 
 ## See also
