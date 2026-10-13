@@ -141,7 +141,7 @@ eq-cong-nat-Fin (succ-ℕ k) x y H =
 cong-is-zero-nat-zero-Fin :
   {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (zero-Fin k)) zero-ℕ
 cong-is-zero-nat-zero-Fin {k} =
-  cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})
+  cong-identification-ℕ (succ-ℕ k) (nat-zero-Fin k)
 ```
 
 ```agda
