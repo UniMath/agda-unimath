@@ -169,14 +169,16 @@ abstract
           ( associative-add-ℚ y (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
           ( pr2 (H δ)))
 
-pseudometric-space-ℚ : Pseudometric-Space lzero lzero
-pr1 pseudometric-space-ℚ = ℚ
-pr2 pseudometric-space-ℚ =
+pseudometric-structure-ℚ : Pseudometric-Structure lzero ℚ
+pseudometric-structure-ℚ =
   ( neighborhood-prop-ℚ ,
     is-reflexive-neighborhood-ℚ ,
     is-symmetric-neighborhood-ℚ ,
     is-triangular-neighborhood-ℚ ,
     is-saturated-neighborhood-ℚ)
+
+pseudometric-space-ℚ : Pseudometric-Space lzero lzero
+pseudometric-space-ℚ = (ℚ , pseudometric-structure-ℚ)
 
 abstract
   is-tight-pseudometric-space-ℚ :
@@ -306,6 +308,16 @@ module _
   where
 
   abstract
+    is-short-map-left-add-ℚ :
+      is-short-map-Metric-Space
+        ( metric-space-ℚ)
+        ( metric-space-ℚ)
+        ( add-ℚ x)
+    is-short-map-left-add-ℚ d y z =
+      map-product
+        ( preserves-lower-neighborhood-add-ℚ x y z d)
+        ( preserves-lower-neighborhood-add-ℚ x z y d)
+
     is-isometry-left-add-ℚ :
       is-isometry-Metric-Space
         ( metric-space-ℚ)
@@ -313,9 +325,7 @@ module _
         ( add-ℚ x)
     is-isometry-left-add-ℚ d y z =
       pair
-        ( map-product
-          ( preserves-lower-neighborhood-add-ℚ x y z d)
-          ( preserves-lower-neighborhood-add-ℚ x z y d))
+        ( is-short-map-left-add-ℚ d y z)
         ( map-product
           ( reflects-lower-neighborhood-add-ℚ x y z d)
           ( reflects-lower-neighborhood-add-ℚ x z y d))
@@ -371,6 +381,15 @@ abstract
               ( inv (ap rational-ℚ⁰⁺ (dist-neg-ℚ x y))))
       ↔ neighborhood-ℚ d (neg-ℚ x) (neg-ℚ y)
         by leq-dist-iff-neighborhood-ℚ _ _ _
+
+  is-short-map-neg-ℚ :
+    is-short-map-Metric-Space metric-space-ℚ metric-space-ℚ neg-ℚ
+  is-short-map-neg-ℚ =
+    is-short-map-is-isometry-Metric-Space
+      ( metric-space-ℚ)
+      ( metric-space-ℚ)
+      ( neg-ℚ)
+      ( is-isometry-neg-ℚ)
 
   is-uniformly-continuous-map-neg-ℚ :
     is-uniformly-continuous-map-Metric-Space
