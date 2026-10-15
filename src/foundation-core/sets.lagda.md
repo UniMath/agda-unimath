@@ -102,11 +102,11 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-set-has-uip : is-set A → has-uip A
-  is-set-has-uip is-set-A x y = eq-is-prop' (is-set-A x y)
+  has-uip-is-set : is-set A → has-uip A
+  has-uip-is-set is-set-A x y = eq-is-prop' (is-set-A x y)
 
-  has-uip-is-set : has-uip A → is-set A
-  has-uip-is-set uip-A x y = is-prop-all-elements-equal (uip-A x y)
+  is-set-has-uip : has-uip A → is-set A
+  is-set-has-uip uip-A x y = is-prop-all-elements-equal (uip-A x y)
 ```
 
 ### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
