@@ -59,11 +59,11 @@ where `N` denotes the
 
 The _locality_ condition can be interpreted as follows:
 
-- `(Uε ∩ Uδ) ⊆ B (ε + δ)`: the
-  [intersection](foundation.intersections-subtypes.md) of `Uε` and `Uδ` is
-  contained in a ball of radius `ε + δ`;
-- `Uε ∩ Bδ ⊆ U(ε + δ)`: the intersection of `Uε` and a ball of radius `δ` is
-  contained in `U(ε+δ)`;
+- for any `x` in `Uε`, the subset `Uδ` is contained in the
+  `(ε + δ)`-neighborhood of `x`;
+- for any `x` in `Uε`, the `δ`-neighborhood of `x` is contained in
+  `U(ε + δ)`; in other words, the `δ`-neighborhood of `Uε` is contained in
+  `U(ε + δ)`.
 
 NB: this definition is a bit unconventional and doesn't really fit into any
 description given in
