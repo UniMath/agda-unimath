@@ -113,7 +113,7 @@ module _
   is-prop-is-in-ℚ⁺-subset-Metric-Space d x = is-prop-type-Prop (R d x)
 ```
 
-### The type of Cauchy filters on metric a space
+### The type of Cauchy filters on a metric space
 
 #### Proper rational families of subsets of metric spaces
 
