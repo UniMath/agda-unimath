@@ -26,8 +26,7 @@ An
 {{#concept "extension" Disambiguation="of a single-sorted finitary algebraic signature" Agda=is-extension-of-signature}}
 of a
 [single-sorted finitary algebraic signature](universal-algebra.signatures.md)
-`σ` is a signature `τ` such that `σ` [embeds](foundation-core.embeddings.md)
-into `τ` via an arity-preserving map.
+`σ` is a signature `τ` such that `σ` maps into `τ` via an arity-preserving map.
 
 ## Definitions
 
@@ -38,11 +37,11 @@ is-extension-of-signature :
   {l1 l2 : Level} →
   signature l1 → signature l2 → UU (l1 ⊔ l2)
 is-extension-of-signature σ τ =
-  Σ ( operation-signature σ ↪ operation-signature τ)
+  Σ ( operation-signature σ → operation-signature τ)
     ( λ f →
       ( (op : operation-signature σ) →
         arity-operation-signature σ op ＝
-        arity-operation-signature τ (map-emb f op)))
+        arity-operation-signature τ (f op)))
 
 module _
   {l1 l2 : Level}
@@ -50,19 +49,10 @@ module _
   (E : is-extension-of-signature σ τ)
   where
 
-  emb-inclusion-is-extension-of-signature :
-    operation-signature σ ↪ operation-signature τ
-  emb-inclusion-is-extension-of-signature = pr1 E
-
   inclusion-is-extension-of-signature :
     operation-signature σ → operation-signature τ
   inclusion-is-extension-of-signature =
-    map-emb emb-inclusion-is-extension-of-signature
-
-  is-emb-inclusion-is-extension-of-signature :
-    is-emb inclusion-is-extension-of-signature
-  is-emb-inclusion-is-extension-of-signature =
-    is-emb-map-emb emb-inclusion-is-extension-of-signature
+    pr1 E
 
   preserves-arity-inclusion-is-extension-of-signature :
     (op : operation-signature σ) →
