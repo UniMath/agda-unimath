@@ -75,7 +75,7 @@ by `ℚ⁺` where the index `ε` controls the radius of `Uε` via the _locality_
 condition.
 
 NB: The _saturation_ property ensures that the subsets `Uε` are "as big as they
-could be": `Uε` is contained in the intersection of all `Uδ` for `ε < δ`:
+could be": `Uε` contains the intersection of all `Uδ` for `ε < δ`:
 
 ```text
   ∀ (ε : ℚ⁺) → ∩ (ε < δ) Uδ ⊆ Uε
