@@ -42,7 +42,7 @@ on a [metric space](metric-spaces.metric-spaces.md) `M` is a
 
 with the following properties:
 
-- _totality_: `∀ (ε : ℚ⁺) → ∃ (x : M) | R ε x`
+- _properness_: `∀ (ε : ℚ⁺) → ∃ (x : M) | R ε x`
 - _saturation_: for any `(ε : ℚ⁺)` and `(x : M)`,
 
   ```text
@@ -83,11 +83,11 @@ module _
   is-prop-is-in-ℚ⁺-subset-Metric-Space d x = is-prop-type-Prop (R d x)
 ```
 
-### Cauchy filters on metric spaces
+### The type of Cauchy filters on metric a space
 
-#### Total rational families of subsets of metric spaces
+#### Proper rational families of subsets of metric spaces
 
-A rational family of subsets `R` is **total** if it is inhabited for all radius
+A rational family of subsets `R` is **proper** if it is inhabited for all radius
 `ε`:
 
 ```text
@@ -100,22 +100,22 @@ module _
   (R : ℚ⁺-subset-Metric-Space l M)
   where
 
-  is-total-prop-ℚ⁺-subset-Metric-Space : Prop (l1 ⊔ l)
-  is-total-prop-ℚ⁺-subset-Metric-Space =
+  is-proper-prop-ℚ⁺-subset-Metric-Space : Prop (l1 ⊔ l)
+  is-proper-prop-ℚ⁺-subset-Metric-Space =
     Π-Prop
       ( ℚ⁺)
       ( λ d →
         ∃ (type-Metric-Space M)
           ( λ x → R d x))
 
-  is-total-ℚ⁺-subset-Metric-Space : UU (l1 ⊔ l)
-  is-total-ℚ⁺-subset-Metric-Space =
-    type-Prop is-total-prop-ℚ⁺-subset-Metric-Space
+  is-proper-ℚ⁺-subset-Metric-Space : UU (l1 ⊔ l)
+  is-proper-ℚ⁺-subset-Metric-Space =
+    type-Prop is-proper-prop-ℚ⁺-subset-Metric-Space
 
-  is-prop-is-total-ℚ⁺-subset-Metric-Space :
-    is-prop is-total-ℚ⁺-subset-Metric-Space
-  is-prop-is-total-ℚ⁺-subset-Metric-Space =
-    is-prop-type-Prop is-total-prop-ℚ⁺-subset-Metric-Space
+  is-prop-is-proper-ℚ⁺-subset-Metric-Space :
+    is-prop is-proper-ℚ⁺-subset-Metric-Space
+  is-prop-is-proper-ℚ⁺-subset-Metric-Space =
+    is-prop-type-Prop is-proper-prop-ℚ⁺-subset-Metric-Space
 ```
 
 #### Saturated rational families of subsets of metric spaces
@@ -219,7 +219,7 @@ module _
     is-prop-type-Prop is-local-prop-ℚ⁺-subset-Metric-Space
 ```
 
-#### Cauchy filters on metric spaces
+#### Proper saturated local families of subsets
 
 ```agda
 module _
@@ -229,7 +229,7 @@ module _
 
   is-cauchy-prop-ℚ⁺-subset-Metric-Space : Prop (l1 ⊔ l2 ⊔ l)
   is-cauchy-prop-ℚ⁺-subset-Metric-Space =
-    is-total-prop-ℚ⁺-subset-Metric-Space M R ∧
+    is-proper-prop-ℚ⁺-subset-Metric-Space M R ∧
     is-saturated-prop-ℚ⁺-subset-Metric-Space M R ∧
     is-local-prop-ℚ⁺-subset-Metric-Space M R
 
@@ -266,9 +266,9 @@ module _
     is-cauchy-ℚ⁺-subset-Metric-Space l M ℚ⁺-subset-Cauchy-Filter-Metric-Space
   is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space = pr2 C
 
-  is-total-Cauchy-Filter-Metric-Space :
-    is-total-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
-  is-total-Cauchy-Filter-Metric-Space =
+  is-proper-Cauchy-Filter-Metric-Space :
+    is-proper-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
+  is-proper-Cauchy-Filter-Metric-Space =
     pr1 is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space
 
   is-saturated-Cauchy-Filter-Metric-Space :
