@@ -176,6 +176,14 @@ module _
     forward-implication
       ( is-isometry-map-isometry-Pseudometric-Space A B f d x y)
 
+  is-short-map-isometry-Pseudometric-Space :
+    is-short-map-Pseudometric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Pseudometric-Space A B f)
+  is-short-map-isometry-Pseudometric-Space =
+    preserves-neighborhoods-map-isometry-Pseudometric-Space
+
   reflects-neighborhoods-map-isometry-Pseudometric-Space :
     (d : ℚ⁺) (x y : type-Pseudometric-Space A) →
     neighborhood-Pseudometric-Space
@@ -187,6 +195,14 @@ module _
   reflects-neighborhoods-map-isometry-Pseudometric-Space d x y =
     backward-implication
       ( is-isometry-map-isometry-Pseudometric-Space A B f d x y)
+
+  is-expansive-map-isometry-Pseudometric-Space :
+    is-expansive-map-Pseudometric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Pseudometric-Space A B f)
+  is-expansive-map-isometry-Pseudometric-Space =
+    reflects-neighborhoods-map-isometry-Pseudometric-Space
 ```
 
 ### Composition of isometries
