@@ -31,7 +31,7 @@ open import metric-spaces.subspaces-metric-spaces
 ## Idea
 
 A
-{{#concept "Cauchy filter" Disambiguation="on a metric space" Agda=Cauchy-Filter-Metric-Space}}
+{{#concept "Cauchy filter" Disambiguation="on a metric space" Agda=cauchy-filter-Metric-Space}}
 on a [metric space](metric-spaces.metric-spaces.md) `M` is a
 [ℚ⁺](elementary-number-theory.positive-rational-numbers.md)-indexed family of
 [subspaces](metric-spaces.subspaces-metric-spaces.md)
@@ -246,68 +246,68 @@ module _
   {l1 l2 : Level} (l : Level) (M : Metric-Space l1 l2)
   where
 
-  Cauchy-Filter-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l)
-  Cauchy-Filter-Metric-Space =
+  cauchy-filter-Metric-Space : UU (l1 ⊔ l2 ⊔ lsuc l)
+  cauchy-filter-Metric-Space =
     type-subtype (is-cauchy-prop-ℚ⁺-subset-Metric-Space l M)
 
 module _
   {l1 l2 l : Level} (M : Metric-Space l1 l2)
-  (C : Cauchy-Filter-Metric-Space l M)
+  (C : cauchy-filter-Metric-Space l M)
   where
 
-  ℚ⁺-subset-Cauchy-Filter-Metric-Space : ℚ⁺-subset-Metric-Space l M
-  ℚ⁺-subset-Cauchy-Filter-Metric-Space = pr1 C
+  ℚ⁺-subset-cauchy-filter-Metric-Space : ℚ⁺-subset-Metric-Space l M
+  ℚ⁺-subset-cauchy-filter-Metric-Space = pr1 C
 
-  is-in-filter-Cauchy-Filter-Metric-Space : ℚ⁺ → type-Metric-Space M → UU l
-  is-in-filter-Cauchy-Filter-Metric-Space =
-    is-in-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
+  is-in-filter-cauchy-filter-Metric-Space : ℚ⁺ → type-Metric-Space M → UU l
+  is-in-filter-cauchy-filter-Metric-Space =
+    is-in-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-cauchy-filter-Metric-Space
 
-  is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space :
-    is-cauchy-ℚ⁺-subset-Metric-Space l M ℚ⁺-subset-Cauchy-Filter-Metric-Space
-  is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space = pr2 C
+  is-cauchy-ℚ⁺-subset-cauchy-filter-Metric-Space :
+    is-cauchy-ℚ⁺-subset-Metric-Space l M ℚ⁺-subset-cauchy-filter-Metric-Space
+  is-cauchy-ℚ⁺-subset-cauchy-filter-Metric-Space = pr2 C
 
-  is-proper-Cauchy-Filter-Metric-Space :
-    is-proper-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
-  is-proper-Cauchy-Filter-Metric-Space =
-    pr1 is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space
+  is-proper-cauchy-filter-Metric-Space :
+    is-proper-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-cauchy-filter-Metric-Space
+  is-proper-cauchy-filter-Metric-Space =
+    pr1 is-cauchy-ℚ⁺-subset-cauchy-filter-Metric-Space
 
-  is-saturated-Cauchy-Filter-Metric-Space :
-    is-saturated-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
-  is-saturated-Cauchy-Filter-Metric-Space =
-    pr1 (pr2 is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space)
+  is-saturated-cauchy-filter-Metric-Space :
+    is-saturated-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-cauchy-filter-Metric-Space
+  is-saturated-cauchy-filter-Metric-Space =
+    pr1 (pr2 is-cauchy-ℚ⁺-subset-cauchy-filter-Metric-Space)
 
-  is-local-Cauchy-Filter-Metric-Space :
-    is-local-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-Cauchy-Filter-Metric-Space
-  is-local-Cauchy-Filter-Metric-Space =
-    pr2 (pr2 is-cauchy-ℚ⁺-subset-Cauchy-Filter-Metric-Space)
+  is-local-cauchy-filter-Metric-Space :
+    is-local-ℚ⁺-subset-Metric-Space M ℚ⁺-subset-cauchy-filter-Metric-Space
+  is-local-cauchy-filter-Metric-Space =
+    pr2 (pr2 is-cauchy-ℚ⁺-subset-cauchy-filter-Metric-Space)
 
-  neighborhood-is-in-filter-Cauchy-Filter-Metric-Space :
+  neighborhood-is-in-filter-cauchy-filter-Metric-Space :
     (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
-    is-in-filter-Cauchy-Filter-Metric-Space ε x →
-    is-in-filter-Cauchy-Filter-Metric-Space δ y →
+    is-in-filter-cauchy-filter-Metric-Space ε x →
+    is-in-filter-cauchy-filter-Metric-Space δ y →
     neighborhood-Metric-Space M (ε +ℚ⁺ δ) x y
-  neighborhood-is-in-filter-Cauchy-Filter-Metric-Space ε δ x y Rx Ry =
-    pr1 (is-local-Cauchy-Filter-Metric-Space (ε , δ , x , y)) (Rx , Ry)
+  neighborhood-is-in-filter-cauchy-filter-Metric-Space ε δ x y Rx Ry =
+    pr1 (is-local-cauchy-filter-Metric-Space (ε , δ , x , y)) (Rx , Ry)
 
-  is-in-filter-neighborhood-Cauchy-Filter-Metric-Space :
+  is-in-filter-neighborhood-cauchy-filter-Metric-Space :
     (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
-    is-in-filter-Cauchy-Filter-Metric-Space ε x →
+    is-in-filter-cauchy-filter-Metric-Space ε x →
     neighborhood-Metric-Space M δ x y →
-    is-in-filter-Cauchy-Filter-Metric-Space (ε +ℚ⁺ δ) y
-  is-in-filter-neighborhood-Cauchy-Filter-Metric-Space ε δ x y Rx Nxy =
-    pr2 (is-local-Cauchy-Filter-Metric-Space (ε , δ , x , y)) (Rx , Nxy)
+    is-in-filter-cauchy-filter-Metric-Space (ε +ℚ⁺ δ) y
+  is-in-filter-neighborhood-cauchy-filter-Metric-Space ε δ x y Rx Nxy =
+    pr2 (is-local-cauchy-filter-Metric-Space (ε , δ , x , y)) (Rx , Nxy)
 
-  is-monotonic-filter-Cauchy-Filter-Metric-Space :
+  is-monotonic-filter-cauchy-filter-Metric-Space :
     ( x : type-Metric-Space M) →
     ( ε δ : ℚ⁺) →
     le-ℚ⁺ ε δ →
-    is-in-filter-Cauchy-Filter-Metric-Space ε x →
-    is-in-filter-Cauchy-Filter-Metric-Space δ x
-  is-monotonic-filter-Cauchy-Filter-Metric-Space x ε δ H Rx =
+    is-in-filter-cauchy-filter-Metric-Space ε x →
+    is-in-filter-cauchy-filter-Metric-Space δ x
+  is-monotonic-filter-cauchy-filter-Metric-Space x ε δ H Rx =
     tr
-      ( λ d → is-in-filter-Cauchy-Filter-Metric-Space d x)
+      ( λ d → is-in-filter-cauchy-filter-Metric-Space d x)
       ( right-diff-law-add-ℚ⁺ ε δ H)
-      ( is-in-filter-neighborhood-Cauchy-Filter-Metric-Space
+      ( is-in-filter-neighborhood-cauchy-filter-Metric-Space
         ( ε)
         ( le-diff-ℚ⁺ ε δ H)
         ( x)
@@ -323,9 +323,9 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  map-unit-Cauchy-Filter-Metric-Space :
-    type-Metric-Space M → Cauchy-Filter-Metric-Space l2 M
-  map-unit-Cauchy-Filter-Metric-Space x =
+  map-unit-cauchy-filter-Metric-Space :
+    type-Metric-Space M → cauchy-filter-Metric-Space l2 M
+  map-unit-cauchy-filter-Metric-Space x =
     ( ( λ d y → neighborhood-prop-Metric-Space M d x y) ,
       ( λ d → intro-exists x (refl-neighborhood-Metric-Space M d x)) ,
       ( λ ε → saturated-neighborhood-Metric-Space M ε x) ,
@@ -347,14 +347,14 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  is-in-filter-map-unit-Cauchy-Filter-Metric-Space :
+  is-in-filter-map-unit-cauchy-filter-Metric-Space :
     ( ε : ℚ⁺) →
     ( x : type-Metric-Space M) →
-    is-in-filter-Cauchy-Filter-Metric-Space
+    is-in-filter-cauchy-filter-Metric-Space
       ( M)
-      ( map-unit-Cauchy-Filter-Metric-Space M x)
+      ( map-unit-cauchy-filter-Metric-Space M x)
       ( ε)
       ( x)
-  is-in-filter-map-unit-Cauchy-Filter-Metric-Space ε x =
+  is-in-filter-map-unit-cauchy-filter-Metric-Space ε x =
     refl-neighborhood-Metric-Space M ε x
 ```
