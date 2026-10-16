@@ -150,10 +150,8 @@ module _
     ( map-unit-metric-quotient-Pseudometric-Space Q ∘
       map-isometry-Pseudometric-Space P Q f)
   coh-square-map-isometry-metric-quotient-Pseudometric-Space =
-    is-extension-exten-isometry-metric-quotient-Pseudometric-Space
-      ( P)
-      ( metric-quotient-Pseudometric-Space Q)
-      ( postcomp-isometry-unit-metric-quotient-Pseudometric-Space P Q f)
+    coh-square-map-short-map-metric-quotient-Pseudometric-Space P Q
+      ( short-map-isometry-Pseudometric-Space P Q f)
 
   coh-square-isometry-metric-quotient-Pseudometric-Space :
     comp-isometry-Pseudometric-Space
@@ -255,10 +253,11 @@ module _
       ( isometry-metric-quotient-Pseudometric-Space Q R g)
       ( isometry-metric-quotient-Pseudometric-Space P Q f)
   pr2 exten-comp-isometry-metric-quotient-Pseudometric-Space =
-    ( map-isometry-metric-quotient-Pseudometric-Space Q R g) ·l
-    ( coh-square-map-isometry-metric-quotient-Pseudometric-Space P Q f) ∙h
-    ( coh-square-map-isometry-metric-quotient-Pseudometric-Space Q R g) ·r
-    ( map-isometry-Pseudometric-Space P Q f)
+    inv-htpy
+      ( ( map-isometry-metric-quotient-Pseudometric-Space Q R g) ·l
+        ( coh-square-map-isometry-metric-quotient-Pseudometric-Space P Q f) ∙h
+        ( coh-square-map-isometry-metric-quotient-Pseudometric-Space Q R g) ·r
+        ( map-isometry-Pseudometric-Space P Q f))
 
   htpy-comp-map-metric-quotient-isometry-Pseudometric-Space :
     ( map-isometry-metric-quotient-Pseudometric-Space P R
