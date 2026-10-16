@@ -121,7 +121,7 @@ A rational family of subsets `R` is **proper** if it is inhabited for all radius
 `ε`:
 
 ```text
-  ∀ (ε : ℚ⁺) → ∃ (x : M) | R ε x`
+  ∀ (ε : ℚ⁺) → ∃ (x : M) | R ε x
 ```
 
 ```agda
