@@ -370,7 +370,7 @@ module _
 
 ## Properties
 
-### Any point is in the filter of its image by the unit point
+### Any point is in the filter of its image by the unit map
 
 ```agda
 module _
