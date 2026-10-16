@@ -20,6 +20,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.powers-of-elements-groups
 open import group-theory.products-of-finite-sequences-of-elements-monoids
 
@@ -186,4 +187,20 @@ abstract
     product-fin-sequence-type-Group G n (λ _ → x) ＝ power-Group G n x
   product-constant-fin-sequence-type-Group G =
     product-constant-fin-sequence-type-Monoid (monoid-Group G)
+```
+
+### Group homomorphisms distribute over products
+
+```agda
+abstract
+  distributive-hom-product-fin-sequence-type-Group :
+    {l1 l2 : Level} (G : Group l1) (H : Group l2) (φ : hom-Group G H) →
+    (n : ℕ) (u : fin-sequence-type-Group G n) →
+    map-hom-Group G H φ (product-fin-sequence-type-Group G n u) ＝
+    product-fin-sequence-type-Group H n (map-hom-Group G H φ ∘ u)
+  distributive-hom-product-fin-sequence-type-Group G H φ =
+    distributive-hom-product-fin-sequence-type-Monoid
+      ( monoid-Group G)
+      ( monoid-Group H)
+      ( hom-monoid-hom-Group G H φ)
 ```
