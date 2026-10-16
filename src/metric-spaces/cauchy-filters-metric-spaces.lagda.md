@@ -37,25 +37,55 @@ on a [metric space](metric-spaces.metric-spaces.md) `M` is a
 [subspaces](metric-spaces.subspaces-metric-spaces.md)
 
 ```text
-  R : ℚ⁺ → M → Prop l
+  U : ℚ⁺ → M → Prop l
 ```
 
 with the following properties:
 
-- _properness_: `∀ (ε : ℚ⁺) → ∃ (x : M) | R ε x`
+- _properness_: `∀ (ε : ℚ⁺) → ∃ (x : M) | U ε x`
 - _saturation_: for any `(ε : ℚ⁺)` and `(x : M)`,
 
   ```text
-    (∀ (δ : ℚ⁺) → R (ε + δ) x) ⇒ R ε x
+    (∀ (δ : ℚ⁺) → U (ε + δ) x) ⇒ U ε x
   ```
 
 - _locality_: for any `(ε δ : ℚ⁺)` and `(x y : M)`,
-  - `(R ε x) ∧ (R δ y) ⇒ N (ε + δ) x y`
-  - `(R ε x) ∧ (N δ x y) ⇒ R (ε + δ) y`
+  - `(U ε x) ∧ (U δ y) ⇒ N (ε + δ) x y`
+  - `(U ε x) ∧ (N δ x y) ⇒ U (ε + δ) y`
 
 where `N` denotes the
 [neighborhood relation](metric-spaces.rational-neighborhood-relations.md) on
 `M`.
+
+The _locality_ condition can be interpreted as follows:
+
+- `(Uε ∩ Uδ) ⊆ B (ε + δ)`: the
+  [intersection](foundation.intersections-subtypes.md) of `Uε` and `Uδ` is
+  contained in a ball of radius `ε + δ`;
+- `Uε ∩ Bδ ⊆ U(ε + δ)`: the intersection of `Uε` and a ball of radius `δ` is
+  contained in `U(ε+δ)`;
+
+NB: this definition is a bit unconventional and doesn't really fit into any
+description given in
+[Cauchy filters at $n$Lab](https://ncatlab.org/nlab/show/Cauchy+filter).
+
+Instead of defining a subset of the powerset of `M` satisfying the "proper
+Cauchy filter property", we construct a family of _proper_ subsets `U` indexed
+by `ℚ⁺` where the index `ε` controls the radius of `Uε` via the _locality_
+condition.
+
+NB: The _saturation_ property ensures that the subsets `Uε` are "as big as they
+could be": `Uε` is contained in the intersection of all `Uδ` for `ε < δ`:
+
+```text
+  ∀ (ε : ℚ⁺) → ∩ (ε < δ) Uδ ⊆ Uε
+```
+
+In the same way as neighborhoods in metric spaces are assumed
+[saturated](metric-spaces.saturated-rational-neighborhood-relations.md) to
+remove the ambiguity between _open_ or _closed_ neighborhoods (we consider
+**closed** neighborhoods), we restrict this construction to saturated families
+of subsets.
 
 ## Definitions
 
