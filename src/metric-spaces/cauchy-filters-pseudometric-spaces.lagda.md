@@ -260,16 +260,16 @@ module _
     is-in-cauchy-filter-Pseudometric-Space ε x →
     is-in-cauchy-filter-Pseudometric-Space δ y →
     neighborhood-Pseudometric-Space M (ε +ℚ⁺ δ) x y
-  is-bounded-cauchy-filter-Pseudometric-Space ε δ x y Rx Ry =
-    pr1 (is-local-cauchy-filter-Pseudometric-Space (ε , δ , x , y)) (Rx , Ry)
+  is-bounded-cauchy-filter-Pseudometric-Space ε δ x y Ux Uy =
+    pr1 (is-local-cauchy-filter-Pseudometric-Space (ε , δ , x , y)) (Ux , Uy)
 
   is-enclosing-cauchy-filter-Pseudometric-Space :
     (ε δ : ℚ⁺) (x y : type-Pseudometric-Space M) →
     is-in-cauchy-filter-Pseudometric-Space ε x →
     neighborhood-Pseudometric-Space M δ x y →
     is-in-cauchy-filter-Pseudometric-Space (ε +ℚ⁺ δ) y
-  is-enclosing-cauchy-filter-Pseudometric-Space ε δ x y Rx Nxy =
-    pr2 (is-local-cauchy-filter-Pseudometric-Space (ε , δ , x , y)) (Rx , Nxy)
+  is-enclosing-cauchy-filter-Pseudometric-Space ε δ x y Ux Nxy =
+    pr2 (is-local-cauchy-filter-Pseudometric-Space (ε , δ , x , y)) (Ux , Nxy)
 ```
 
 ### The unit map of Cauchy filters
@@ -312,7 +312,7 @@ module _
     le-ℚ⁺ ε δ →
     is-in-cauchy-filter-Pseudometric-Space M U ε x →
     is-in-cauchy-filter-Pseudometric-Space M U δ x
-  is-monotonic-filter-cauchy-filter-Pseudometric-Space x ε δ H Rx =
+  is-monotonic-filter-cauchy-filter-Pseudometric-Space x ε δ H Ux =
     tr
       ( λ d → is-in-cauchy-filter-Pseudometric-Space M U d x)
       ( right-diff-law-add-ℚ⁺ ε δ H)
@@ -323,7 +323,7 @@ module _
         ( le-diff-ℚ⁺ ε δ H)
         ( x)
         ( x)
-        ( Rx)
+        ( Ux)
         ( refl-neighborhood-Pseudometric-Space M _ x))
 ```
 
