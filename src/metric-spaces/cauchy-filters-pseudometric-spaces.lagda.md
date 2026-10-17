@@ -83,7 +83,10 @@ isometry.
 
 ## Definitions
 
-### Rational neighborhood families of subsets of pseudometric spaces
+### Filters in pseudometric spaces
+
+A _filter_ in a pseudometric space is a rational neighborhood families of
+subsets of its carrier type.
 
 ```agda
 module _
@@ -346,7 +349,7 @@ module _
 ## References
 
 This definition essentially corresponds to "Cauchy filters of formal balls" as
-described in \cite{vickers2005localic}, with **closed** (i.e. saturated) formal
-balls.
+described in {{#cite vickers2005localic}}, with **closed** (i.e. saturated)
+formal balls.
 
 {{#bibliography}}
