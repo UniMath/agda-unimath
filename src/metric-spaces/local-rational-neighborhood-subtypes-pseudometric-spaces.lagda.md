@@ -37,7 +37,7 @@ A
 [rational neighborhood family of subtype](metric-spaces.rational-neighborhood-subtypes.md)
 `U` in a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M` is
 called
-{{#concept "local" Disambiguation="rationall neighborhood subtype of pseudometric space" Agda=}}
+{{#concept "local" Disambiguation="rationall neighborhood subtype of pseudometric space" Agda=is-local-neighborhood-subtype-Pseudometric-Space}}
 if it satisfies the following coherence properties with respect to the
 [neighborhood relation](metric-spaces.rational-neighborhood-relations.md) `N` on
 `M`:
