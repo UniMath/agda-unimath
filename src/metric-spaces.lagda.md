@@ -130,6 +130,7 @@ open import metric-spaces.limits-of-maps-metric-spaces public
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-maps-metric-spaces public
+open import metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces public
 open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
 open import metric-spaces.maps-metric-spaces public

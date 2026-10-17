@@ -23,6 +23,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-filters-pseudometric-spaces
+open import metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.proper-rational-neighborhood-subtypes
 open import metric-spaces.rational-neighborhood-subtypes
@@ -67,57 +68,73 @@ module _
   (U : cauchy-filter-Metric-Space l M)
   where
 
-  filter-cauchy-filter-Metric-Space :
-    filter-Pseudometric-Space l (pseudometric-Metric-Space M)
-  filter-cauchy-filter-Metric-Space = pr1 U
+  subtype-cauchy-filter-Metric-Space :
+    Rational-Neighborhood-Subtype l (type-Metric-Space M)
+  subtype-cauchy-filter-Metric-Space =
+    subtype-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-in-cauchy-filter-Metric-Space : ℚ⁺ → type-Metric-Space M → UU l
   is-in-cauchy-filter-Metric-Space =
-    is-in-filter-Pseudometric-Space
+    is-in-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
-      ( filter-cauchy-filter-Metric-Space)
+      ( U)
 
-  is-cauchy-filter-cauchy-filter-Metric-Space :
+  is-cauchy-filter-subtype-cauchy-filter-Metric-Space :
     is-cauchy-filter-Pseudometric-Space
       ( l)
       ( pseudometric-Metric-Space M)
-      ( filter-cauchy-filter-Metric-Space)
-  is-cauchy-filter-cauchy-filter-Metric-Space = pr2 U
+      ( subtype-cauchy-filter-Metric-Space)
+  is-cauchy-filter-subtype-cauchy-filter-Metric-Space =
+    is-cauchy-filter-subtype-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-proper-cauchy-filter-Metric-Space :
     is-proper-Rational-Neighborhood-Subtype
-      filter-cauchy-filter-Metric-Space
+      subtype-cauchy-filter-Metric-Space
   is-proper-cauchy-filter-Metric-Space =
-    pr1 is-cauchy-filter-cauchy-filter-Metric-Space
+    is-proper-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-saturated-cauchy-filter-Metric-Space :
     is-saturated-Rational-Neighborhood-Subtype
-      filter-cauchy-filter-Metric-Space
+      subtype-cauchy-filter-Metric-Space
   is-saturated-cauchy-filter-Metric-Space =
-    pr1 (pr2 is-cauchy-filter-cauchy-filter-Metric-Space)
+    is-saturated-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-local-cauchy-filter-Metric-Space :
-    is-local-filter-Pseudometric-Space
+    is-local-neighborhood-subtype-Pseudometric-Space
       ( pseudometric-Metric-Space M)
-      ( filter-cauchy-filter-Metric-Space)
+      ( subtype-cauchy-filter-Metric-Space)
   is-local-cauchy-filter-Metric-Space =
-    pr2 (pr2 is-cauchy-filter-cauchy-filter-Metric-Space)
+    is-local-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-bounded-cauchy-filter-Metric-Space :
     (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
     is-in-cauchy-filter-Metric-Space ε x →
     is-in-cauchy-filter-Metric-Space δ y →
     neighborhood-Metric-Space M (ε +ℚ⁺ δ) x y
-  is-bounded-cauchy-filter-Metric-Space ε δ x y Ux Uy =
-    pr1 (is-local-cauchy-filter-Metric-Space (ε , δ , x , y)) (Ux , Uy)
+  is-bounded-cauchy-filter-Metric-Space =
+    is-bounded-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 
   is-enclosing-cauchy-filter-Metric-Space :
     (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
     is-in-cauchy-filter-Metric-Space ε x →
     neighborhood-Metric-Space M δ x y →
     is-in-cauchy-filter-Metric-Space (ε +ℚ⁺ δ) y
-  is-enclosing-cauchy-filter-Metric-Space ε δ x y Ux Nxy =
-    pr2 (is-local-cauchy-filter-Metric-Space (ε , δ , x , y)) (Ux , Nxy)
+  is-enclosing-cauchy-filter-Metric-Space =
+    is-enclosing-cauchy-filter-Pseudometric-Space
+      ( pseudometric-Metric-Space M)
+      ( U)
 ```
 
 ### The unit map of Cauchy filters
@@ -146,14 +163,14 @@ module _
   (U : cauchy-filter-Metric-Space l M)
   where
 
-  is-monotonic-filter-cauchy-filter-Metric-Space :
+  is-monotonic-cauchy-filter-Metric-Space :
     ( x : type-Metric-Space M) →
     ( ε δ : ℚ⁺) →
     le-ℚ⁺ ε δ →
     is-in-cauchy-filter-Metric-Space M U ε x →
     is-in-cauchy-filter-Metric-Space M U δ x
-  is-monotonic-filter-cauchy-filter-Metric-Space =
-    is-monotonic-filter-cauchy-filter-Pseudometric-Space
+  is-monotonic-cauchy-filter-Metric-Space =
+    is-monotonic-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( U)
 ```
