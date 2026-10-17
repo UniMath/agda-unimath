@@ -61,18 +61,8 @@ The _locality_ condition can be interpreted as follows:
 
 - for any `x` in `Uε`, the subset `Uδ` is contained in the
   `(ε + δ)`-neighborhood of `x`;
-- for any `x` in `Uε`, the `δ`-neighborhood of `x` is contained in
-  `U(ε + δ)`; in other words, the `δ`-neighborhood of `Uε` is contained in
-  `U(ε + δ)`.
-
-NB: this definition is a bit unconventional and doesn't really fit into any
-description given in
-[Cauchy filters at $n$Lab](https://ncatlab.org/nlab/show/Cauchy+filter).
-
-Instead of defining a subset of the powerset of `M` satisfying the "proper
-Cauchy filter property", we construct a family of _proper_ subsets `U` indexed
-by `ℚ⁺` where the index `ε` controls the radius of `Uε` via the _locality_
-condition.
+- for any `x` in `Uε`, the `δ`-neighborhood of `x` is contained in `U(ε + δ)`;
+  in other words, the `δ`-neighborhood of `Uε` is contained in `U(ε + δ)`.
 
 NB: The _saturation_ property ensures that the subsets `Uε` are "as big as they
 could be": `Uε` contains the intersection of all `Uδ` for `ε < δ`:
@@ -86,6 +76,11 @@ In the same way as neighborhoods in metric spaces are assumed
 remove the ambiguity between _open_ or _closed_ neighborhoods (we consider
 **closed** neighborhoods), we restrict this construction to saturated families
 of subsets.
+
+The type of Cauchy filters is equipped with a unit map `η : M → F(M)`; it can be
+equipped with a metric structure turning `F(M)` into a
+[complete metric space](metric-spaces.complete-metric-spaces.md) where `η` is an
+isometry.
 
 ## Definitions
 
@@ -388,3 +383,11 @@ module _
   is-in-filter-map-unit-cauchy-filter-Metric-Space ε x =
     refl-neighborhood-Metric-Space M ε x
 ```
+
+## References
+
+This definition essentially corresponds to "Cauchy filters of formal balls" as
+described in \cite{vickers2005localic}, with **closed** (i.e. saturated) formal
+balls.
+
+{{#bibliography}}
