@@ -80,6 +80,7 @@ open import metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudomet
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
 open import metric-spaces.cauchy-filters-metric-spaces public
+open import metric-spaces.cauchy-filters-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-pseudometric-spaces public
@@ -129,6 +130,7 @@ open import metric-spaces.limits-of-maps-metric-spaces public
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-sequences-metric-spaces public
 open import metric-spaces.lipschitz-maps-metric-spaces public
+open import metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces public
 open import metric-spaces.locally-constant-maps-metric-spaces public
 open import metric-spaces.located-metric-spaces public
 open import metric-spaces.maps-metric-spaces public
@@ -167,13 +169,16 @@ open import metric-spaces.precategory-of-metric-spaces-and-maps public
 open import metric-spaces.precategory-of-metric-spaces-and-short-maps public
 open import metric-spaces.precomplete-short-maps-pseudometric-spaces public
 open import metric-spaces.preimages-rational-neighborhood-relations public
+open import metric-spaces.proper-rational-neighborhood-subtypes public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.rational-approximations-of-zero public
 open import metric-spaces.rational-cauchy-approximations public
 open import metric-spaces.rational-neighborhood-relations public
+open import metric-spaces.rational-neighborhood-subtypes public
 open import metric-spaces.rational-sequences-approximating-zero public
 open import metric-spaces.reflexive-rational-neighborhood-relations public
 open import metric-spaces.saturated-rational-neighborhood-relations public
+open import metric-spaces.saturated-rational-neighborhood-subtypes public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-maps-metric-spaces public
 open import metric-spaces.short-maps-pseudometric-spaces public
