@@ -11,7 +11,6 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-filters-pseudometric-spaces
