@@ -116,7 +116,7 @@ module _
 ### Local filters on pseudometric spaces
 
 A filter in a pseudometric space `M` is _local_ if it is **bounded** and
-**enclosing** with respect to the nieghborhood relation: for any `ε δ : ℚ⁺` and
+**enclosing** with respect to the neighborhood relation: for any `ε δ : ℚ⁺` and
 `x y : M`,
 
 - `(U ε x) ∧ (U δ y) ⇒ N (ε + δ) x y`;
