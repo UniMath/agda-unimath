@@ -36,7 +36,7 @@ open import metric-spaces.subspaces-metric-spaces
 A
 {{#concept "Cauchy filter" Disambiguation="on a pseudometric space" Agda=cauchy-filter-Pseudometric-Space}}
 on a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M` is a
-[proper](metric-spacs.proper-rational-neighborhood-subtypes.md) and
+[proper](metric-spaces.proper-rational-neighborhood-subtypes.md) and
 [saturated](metric-spaces.saturated-rational-neighborhood-subtypes.md)
 [rational neighborhood subtype](metric-spaces.rational-neighborhood-subtypes.md)
 on `M`,
