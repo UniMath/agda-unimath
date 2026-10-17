@@ -240,49 +240,6 @@ abstract
           by inv (power-one-ℝ n))
 ```
 
-### For odd `n`, the `n`th root of a nonnegative real number is nonnegative
-
-```agda
-module _
-  {l : Level}
-  (n : ℕ)
-  (odd-n : is-odd-ℕ n)
-  (x⁰⁺@(x , 0≤x) : ℝ⁰⁺ l)
-  where
-
-  abstract
-    is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺ :
-      is-nonnegative-ℝ (root-is-odd-exponent-ℝ n odd-n x)
-    is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺ =
-      tr
-        ( λ y → leq-ℝ y (root-is-odd-exponent-ℝ n odd-n x))
-        ( root-zero-is-odd-exponent-ℝ n odd-n)
-        ( preserves-leq-root-is-odd-exponent-ℝ n odd-n 0≤x)
-
-  root-is-odd-exponent-ℝ⁰⁺ : ℝ⁰⁺ l
-  root-is-odd-exponent-ℝ⁰⁺ =
-    ( root-is-odd-exponent-ℝ n odd-n x ,
-      is-nonnegative-root-is-odd-exponent-real-ℝ⁰⁺)
-
-module _
-  {l : Level}
-  (n : ℕ)
-  (odd-n : is-odd-ℕ n)
-  (x⁰⁺@(x , 0≤x) : ℝ⁰⁺ l)
-  where
-
-  abstract
-    is-section-root-is-odd-exponent-ℝ⁰⁺ :
-      power-ℝ⁰⁺ n (root-is-odd-exponent-ℝ⁰⁺ n odd-n x⁰⁺) ＝ x⁰⁺
-    is-section-root-is-odd-exponent-ℝ⁰⁺ =
-      eq-ℝ⁰⁺ _ _ (is-section-root-is-odd-exponent-ℝ n odd-n x)
-
-    is-retraction-root-is-odd-exponent-ℝ⁰⁺ :
-      root-is-odd-exponent-ℝ⁰⁺ n odd-n (power-ℝ⁰⁺ n x⁰⁺) ＝ x⁰⁺
-    is-retraction-root-is-odd-exponent-ℝ⁰⁺ =
-      eq-ℝ⁰⁺ _ _ (is-retraction-root-is-odd-exponent-ℝ n odd-n x)
-```
-
 ## See also
 
 - [Nonzero roots of nonnegative real numbers](real-numbers.nonzero-roots-nonnegative-real-numbers.md)
