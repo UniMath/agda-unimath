@@ -349,7 +349,7 @@ module _
 ## References
 
 This definition essentially corresponds to "Cauchy filters of formal balls" as
-described in {{#cite vickers2005localic}}, with **closed** (i.e. saturated)
+described in {{#cite Vickers2005localic}}, with **closed** (i.e. saturated)
 formal balls.
 
 {{#bibliography}}
