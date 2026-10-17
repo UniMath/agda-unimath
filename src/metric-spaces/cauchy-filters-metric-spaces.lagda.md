@@ -11,15 +11,7 @@ open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.strict-inequality-positive-rational-numbers
 
-open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.dependent-pair-types
-open import foundation.dependent-products-propositions
-open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-filters-pseudometric-spaces
@@ -28,7 +20,6 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.proper-rational-neighborhood-subtypes
 open import metric-spaces.rational-neighborhood-subtypes
 open import metric-spaces.saturated-rational-neighborhood-subtypes
-open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>

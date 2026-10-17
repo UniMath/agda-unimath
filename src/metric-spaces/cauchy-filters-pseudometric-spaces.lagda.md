@@ -27,7 +27,6 @@ open import metric-spaces.proper-rational-neighborhood-subtypes
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.rational-neighborhood-subtypes
 open import metric-spaces.saturated-rational-neighborhood-subtypes
-open import metric-spaces.subspaces-metric-spaces
 ```
 
 </details>
