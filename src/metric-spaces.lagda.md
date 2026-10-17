@@ -79,7 +79,6 @@ open import metric-spaces.cauchy-approximations-in-cauchy-pseudocompletions-of-p
 open import metric-spaces.cauchy-approximations-in-metric-quotients-of-pseudometric-spaces public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-pseudometric-spaces public
-open import metric-spaces.cauchy-filters-metric-spaces public
 open import metric-spaces.cauchy-filters-pseudometric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-complete-metric-spaces public
 open import metric-spaces.cauchy-pseudocompletions-of-metric-spaces public
