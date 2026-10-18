@@ -67,7 +67,7 @@ This neighborhood relation is an
 [extensional](metric-spaces.extensionality-pseudometric-spaces.md)
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) on the type of
 Cauchy filters defining the
-{{#concept "metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=metric-space-Cauchy-Filter-Pseudometric-Space}}
+{{#concept "metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=metric-space-cauchy-filter-Pseudometric-Space}}
 on `M`.
 
 ## Definitions
