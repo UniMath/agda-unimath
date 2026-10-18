@@ -28,8 +28,10 @@ open import group-theory.homomorphisms-semigroups
 
 ## Idea
 
-Homomorphisms between abelian groups are just homomorphisms between their
-underlying groups.
+{{#concept "Homomorphisms" Disambiguation="between abelian groups" Agda=hom-Ab}}
+between [abelian groups](group-theory.abelian-groups.md) are just
+[homomorphisms](group-theory.homomorphisms-groups.md) between their underlying
+[groups](group-theory.groups.md).
 
 ## Definition
 
