@@ -133,6 +133,35 @@ interchange-law-add-add-ℚ⁺ x y u v =
       ( rational-ℚ⁺ v))
 ```
 
+### Addition preserves the strict ordering
+
+```agda
+module _
+  (z x y : ℚ⁺)
+  where abstract
+
+  preserves-le-left-add-ℚ⁺ : le-ℚ⁺ x y → le-ℚ⁺ (x +ℚ⁺ z) (y +ℚ⁺ z)
+  preserves-le-left-add-ℚ⁺ =
+    preserves-le-left-add-ℚ
+      ( rational-ℚ⁺ z)
+      ( rational-ℚ⁺ x)
+      ( rational-ℚ⁺ y)
+
+  preserves-le-right-add-ℚ⁺ : le-ℚ⁺ x y → le-ℚ⁺ (z +ℚ⁺ x) (z +ℚ⁺ y)
+  preserves-le-right-add-ℚ⁺ =
+    preserves-le-right-add-ℚ
+      ( rational-ℚ⁺ z)
+      ( rational-ℚ⁺ x)
+      ( rational-ℚ⁺ y)
+```
+
+```agda
+abstract
+  preserves-le-add-ℚ⁺ :
+    {a b c d : ℚ⁺} → le-ℚ⁺ a b → le-ℚ⁺ c d → le-ℚ⁺ (a +ℚ⁺ c) (b +ℚ⁺ d)
+  preserves-le-add-ℚ⁺ {a} {b} {c} {d} H K = preserves-le-add-ℚ H K
+```
+
 ### Addition with a positive rational number is a strictly increasing map
 
 ```agda

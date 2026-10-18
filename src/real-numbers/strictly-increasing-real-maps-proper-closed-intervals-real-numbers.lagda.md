@@ -182,34 +182,35 @@ module _
   (I : proper-closed-interval-ℝ l3 l4)
   (f : real-map-proper-closed-interval-ℝ (l1 ⊔ l3 ⊔ l4) l2 I)
   (H : is-strictly-increasing-real-map-proper-closed-interval-ℝ I f)
-  where abstract
+  where
 
-  le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
-    le-ℝ
-      ( f
+  abstract
+    le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
+      le-ℝ
+        ( f
+          ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
+            ( I)
+            ( l1)))
+        ( f
+          ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
+            ( I)
+            ( l1)))
+    le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ =
+      H
         ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
           ( I)
-          ( l1)))
-      ( f
+          ( l1))
         ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
           ( I)
-          ( l1)))
-  le-im-bounds-is-strictly-increasing-real-map-proper-closed-interval-ℝ =
-    H
-      ( raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-        ( I)
-        ( l1))
-      ( raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-        ( I)
-        ( l1))
-      ( preserves-le-sim-ℝ
-        ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
-          ( I)
           ( l1))
-        ( sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
-          ( I)
-          ( l1))
-        ( le-bounds-proper-closed-interval-ℝ I))
+        ( preserves-le-sim-ℝ
+          ( sim-raise-in-proper-closed-interval-lower-bound-proper-closed-interval-ℝ
+            ( I)
+            ( l1))
+          ( sim-raise-in-proper-closed-interval-upper-bound-proper-closed-interval-ℝ
+            ( I)
+            ( l1))
+          ( le-bounds-proper-closed-interval-ℝ I))
 
   proper-closed-interval-im-is-strictly-increasing-real-map-proper-closed-interval-ℝ :
     proper-closed-interval-ℝ l2 l2

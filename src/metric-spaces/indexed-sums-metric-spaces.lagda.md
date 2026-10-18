@@ -115,7 +115,7 @@ module _
     all-eq-x=y :
       (δ : ℚ⁺) → pr1 (H δ) ＝ x=y
     all-eq-x=y δ =
-      is-set-has-uip
+      has-uip-is-set
         ( is-set-type-Set A)
         ( x)
         ( y)
