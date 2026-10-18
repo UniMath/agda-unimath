@@ -87,8 +87,8 @@ module _
     Π-Prop
       ( ℚ⁺ × ℚ⁺ × type-Pseudometric-Space M × type-Pseudometric-Space M)
       ( λ (α , β , x , y) →
-        subtype-cauchy-filter-Pseudometric-Space M U α x ⇒
-        subtype-cauchy-filter-Pseudometric-Space M V β y ⇒
+        neighborhood-subtype-cauchy-filter-Pseudometric-Space M U α x ⇒
+        neighborhood-subtype-cauchy-filter-Pseudometric-Space M V β y ⇒
         neighborhood-prop-Pseudometric-Space M (α +ℚ⁺ β +ℚ⁺ d) x y)
 
   neighborhood-cauchy-filter-Pseudometric-Space :
@@ -298,7 +298,11 @@ module _
     let
       open
         do-syntax-trunc-Prop
-          ( subtype-cauchy-filter-Pseudometric-Space M V (α +ℚ⁺ β) x)
+          ( neighborhood-subtype-cauchy-filter-Pseudometric-Space
+            ( M)
+            ( V)
+            ( α +ℚ⁺ β)
+            ( x))
       in do
         (β/2 , H) ← double-le-ℚ⁺ β
         (y , Vy) ← is-proper-cauchy-filter-Pseudometric-Space M V β/2
@@ -358,8 +362,8 @@ module _
       ( U)
       ( V) →
     ( α : ℚ⁺) →
-    subtype-cauchy-filter-Pseudometric-Space M U α ~
-    subtype-cauchy-filter-Pseudometric-Space M V α
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space M U α ~
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space M V α
   htpy-filter-sim-cauchy-filter-Pseudometric-Space U V U~V α x =
     eq-iff
       ( λ Ux →
@@ -401,8 +405,8 @@ module _
       ( pseudometric-space-cauchy-filter-Pseudometric-Space l M)
       ( U)
       ( V) →
-    subtype-cauchy-filter-Pseudometric-Space M U ＝
-    subtype-cauchy-filter-Pseudometric-Space M V
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space M U ＝
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space M V
   eq-filter-sim-cauchy-filter-Pseudometric-Space U V U~V =
     eq-htpy
       ( λ α →
