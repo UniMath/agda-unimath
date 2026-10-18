@@ -19,17 +19,17 @@ open import foundation.universe-levels
 ## Idea
 
 A
-{{#concept "rational neighborhood family of subtypes" Agda=Rational-Neighborhood-Subtype}}
+{{#concept "rational neighborhood subtype" Agda=Rational-Neighborhood-Subtype}}
 is a type family of [subtypes](foundation.subtypes.md) indexed by the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
 They are the underlying type of
-[Cauchy filters](metric-spaces.cauchy-filters-metric-spaces.md) on
-[metric spaces](metric-spaces.metric-spaces.md).
+[Cauchy filters](metric-spaces.cauchy-filters-pseudometric-spaces.md) on
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md).
 
 ## Definitions
 
-### Rational neighborhood families of subsets
+### Rational neighborhood subtypes
 
 ```agda
 module _
@@ -43,11 +43,11 @@ module _
   {l1 l : Level} {A : UU l1} (U : Rational-Neighborhood-Subtype l A)
   where
 
-  is-in-filter-Rational-Neighborhood-Subtype : ℚ⁺ → A → UU l
-  is-in-filter-Rational-Neighborhood-Subtype d x = type-Prop (U d x)
+  is-in-Rational-Neighborhood-Subtype : ℚ⁺ → A → UU l
+  is-in-Rational-Neighborhood-Subtype d x = type-Prop (U d x)
 
-  is-prop-is-in-filter-Rational-Neighborhood-Subtype :
-    (d : ℚ⁺) (x : A) → is-prop (is-in-filter-Rational-Neighborhood-Subtype d x)
-  is-prop-is-in-filter-Rational-Neighborhood-Subtype d x =
+  is-prop-is-in-Rational-Neighborhood-Subtype :
+    (d : ℚ⁺) (x : A) → is-prop (is-in-Rational-Neighborhood-Subtype d x)
+  is-prop-is-in-Rational-Neighborhood-Subtype d x =
     is-prop-type-Prop (U d x)
 ```
