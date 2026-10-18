@@ -45,7 +45,7 @@ open import orthogonal-factorization-systems.extensions-maps
 An [isometry](metric-spaces.isometries-pseudometric-spaces.md) `f : P → M` from
 a [pseudometric space](metric-spaces.pseudometric-spaces.md) `P` into a
 [metric space](metric-spaces.metric-spaces.md) `M` is called
-{{#concept "precomplete" Disambiguation="from a pseudometric space to a metric space" Agda=is-precomplete-isometry-Pseudometric-Space}}
+{{#concept "precomplete" Disambiguation="isometry from a pseudometric space to a metric space" Agda=is-precomplete-isometry-Pseudometric-Space}}
 if all
 [images](metric-spaces.functoriality-isometries-cauchy-pseudocompletions-of-pseudometric-spaces.md)
 of
