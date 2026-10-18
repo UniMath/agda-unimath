@@ -142,7 +142,7 @@ module _
 
   is-in-cauchy-filter-Pseudometric-Space : ℚ⁺ → type-Pseudometric-Space M → UU l
   is-in-cauchy-filter-Pseudometric-Space =
-    is-in-filter-Rational-Neighborhood-Subtype
+    is-in-Rational-Neighborhood-Subtype
       ( subtype-cauchy-filter-Pseudometric-Space)
 
   is-cauchy-filter-subtype-cauchy-filter-Pseudometric-Space :
