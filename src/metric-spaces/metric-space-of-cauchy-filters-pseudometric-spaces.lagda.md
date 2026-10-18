@@ -105,7 +105,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (l : Level) (M : Pseudometric-Space l1 l2)
-  where
+  where abstract
 
   is-reflexive-neighborhood-cauchy-filter-Pseudometric-Space :
     (d : ℚ⁺) →
@@ -238,6 +238,12 @@ module _
           ( is-upper-bound-dist-Pseudometric-Space M x y)
           ( associative-add-ℚ⁺ (α +ℚ⁺ β) ε δ)
           ( sat-N δ (α , β , x , y) Ux Vy))
+```
+
+```agda
+module _
+  {l1 l2 : Level} (l : Level) (M : Pseudometric-Space l1 l2)
+  where
 
   pseudometric-structure-cauchy-filter-Pseudometric-Space :
     Pseudometric-Structure
@@ -246,10 +252,10 @@ module _
   pr1 pseudometric-structure-cauchy-filter-Pseudometric-Space =
     neighborhood-prop-cauchy-filter-Pseudometric-Space M
   pr2 pseudometric-structure-cauchy-filter-Pseudometric-Space =
-    ( is-reflexive-neighborhood-cauchy-filter-Pseudometric-Space ,
-      is-symmetric-neighborhood-cauchy-filter-Pseudometric-Space ,
-      is-triangular-neighborhood-cauchy-filter-Pseudometric-Space ,
-      is-saturated-neighborhood-cauchy-filter-Pseudometric-Space)
+    ( is-reflexive-neighborhood-cauchy-filter-Pseudometric-Space l M ,
+      is-symmetric-neighborhood-cauchy-filter-Pseudometric-Space l M ,
+      is-triangular-neighborhood-cauchy-filter-Pseudometric-Space l M ,
+      is-saturated-neighborhood-cauchy-filter-Pseudometric-Space l M)
 
   pseudometric-space-cauchy-filter-Pseudometric-Space :
     Pseudometric-Space (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
@@ -263,7 +269,7 @@ module _
 ```agda
 module _
   {l1 l2 l : Level} (M : Pseudometric-Space l1 l2)
-  where
+  where abstract
 
   neighborhood-is-in-filter-sim-cauchy-filter-Pseudometric-Space :
     (U V : cauchy-filter-Pseudometric-Space l M) →
@@ -434,7 +440,7 @@ module _
       ( eq-sim-cauchy-filter-Pseudometric-Space)
 ```
 
-### The metric space of Cauchy filters on a metric space
+### The metric space of Cauchy filters on a pseudometric space
 
 ```agda
 module _
