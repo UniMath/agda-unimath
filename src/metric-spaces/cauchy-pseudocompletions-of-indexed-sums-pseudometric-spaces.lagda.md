@@ -250,7 +250,7 @@ module _
                   ( P)
                   ( u)
                   ( ε)))
-              ( is-set-has-uip
+              ( has-uip-is-set
                 ( is-set-type-Set A)
                 ( map-base-cauchy-approximation-indexed-sum-Pseudometric-Space
                   ( A)
@@ -541,7 +541,7 @@ module _
                 ( P y)
                 ( v)
                 ( δ)))
-          ( is-set-has-uip
+          ( has-uip-is-set
             ( is-set-type-Set A)
             ( x)
             ( y)

@@ -127,7 +127,7 @@ module _
     all-eq-x=y :
       (δ : ℚ⁺) → pr1 (H δ) ＝ x=y
     all-eq-x=y δ =
-      is-set-has-uip
+      has-uip-is-set
         ( is-set-type-Set A)
         ( x)
         ( y)
@@ -507,7 +507,7 @@ module _
               ( e)
               ( fiber-point-indexed-sum-Pseudometric-Space A P x))
             ( fiber-point-indexed-sum-Pseudometric-Space A P y))
-        ( is-set-has-uip
+        ( has-uip-is-set
           ( is-set-type-Set A)
           ( base-point-indexed-sum-Pseudometric-Space A P x)
           ( base-point-indexed-sum-Pseudometric-Space A P y)
