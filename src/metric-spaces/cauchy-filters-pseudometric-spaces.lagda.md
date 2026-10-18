@@ -96,7 +96,8 @@ isometry.
 
 ### The type of Cauchy filters on a pseudometric space
 
-Cauchy filters are proper saturated local filters on a pseudometric space.
+Cauchy filters are proper saturated local rational neighborhood subtypes on a
+pseudometric space.
 
 ```agda
 module _

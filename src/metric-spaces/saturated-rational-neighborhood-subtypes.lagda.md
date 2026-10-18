@@ -25,7 +25,7 @@ open import metric-spaces.rational-neighborhood-subtypes
 ## Idea
 
 A
-[rational neighborhood family of subsets](metric-spaces.rational-neighborhood-subtypes.md)
+[rational neighborhood subtype](metric-spaces.rational-neighborhood-subtypes.md)
 `U : ℚ⁺ → subtype l A` is called
 {{#concept "saturated" Disambiguation="rational neighborhood subtype" Agda=is-saturated-Rational-Neighborhood-Subtype}}
 if for any radius `ε : ℚ⁺`, `U ε` contains the intersection of `U δ` for all
@@ -37,7 +37,7 @@ if for any radius `ε : ℚ⁺`, `U ε` contains the intersection of `U δ` for 
 
 ## Definitions
 
-### Saturated rational families of subsets
+### Saturated rational neighborhood subtypes
 
 ```agda
 module _

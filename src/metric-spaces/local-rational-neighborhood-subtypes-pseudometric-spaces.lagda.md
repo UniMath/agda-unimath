@@ -1,4 +1,4 @@
-# Local rational neighborhood families of subtypes of pseudometric spaces
+# Local rational neighborhood subtypes on pseudometric spaces
 
 ```agda
 module metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces where
@@ -26,10 +26,10 @@ open import metric-spaces.rational-neighborhood-subtypes
 ## Idea
 
 A
-[rational neighborhood family of subtype](metric-spaces.rational-neighborhood-subtypes.md)
-`U` in a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M` is
+[rational neighborhood subtype](metric-spaces.rational-neighborhood-subtypes.md)
+`U` on a [pseudometric space](metric-spaces.pseudometric-spaces.md) `M` is
 called
-{{#concept "local" Disambiguation="rationall neighborhood subtype of pseudometric space" Agda=is-local-neighborhood-subtype-Pseudometric-Space}}
+{{#concept "local" Disambiguation="rational neighborhood subtype of pseudometric space" Agda=is-local-neighborhood-subtype-Pseudometric-Space}}
 if it satisfies the following coherence properties with respect to the
 [neighborhood relation](metric-spaces.rational-neighborhood-relations.md) `N` on
 `M`:
@@ -50,7 +50,7 @@ if it satisfies the following coherence properties with respect to the
 
 ## Definitions
 
-### Bounded rational neighborhood families of subtypes on pseudometric spaces
+### Bounded rational neighborhood subtypes on pseudometric spaces
 
 ```agda
 module _
@@ -76,7 +76,7 @@ module _
       is-bounded-prop-neighborhood-subtype-Pseudometric-Space
 ```
 
-### Enclosing rational neighborhood families of subtypes on pseudometric spaces
+### Enclosing rational neighborhood subtypes on pseudometric spaces
 
 ```agda
 module _
@@ -102,7 +102,7 @@ module _
       is-enclosing-prop-neighborhood-subtype-Pseudometric-Space
 ```
 
-### Local rational neighborhood families of subtypes on pseudometric spaces
+### Local rational neighborhood subtypes on pseudometric spaces
 
 ```agda
 module _

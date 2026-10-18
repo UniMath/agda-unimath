@@ -24,7 +24,7 @@ open import metric-spaces.rational-neighborhood-subtypes
 ## Idea
 
 A
-[rational neighborhood family of subsets](metric-spaces.rational-neighborhood-subtypes.md)
+[rational neighborhood subtype](metric-spaces.rational-neighborhood-subtypes.md)
 `U : ℚ⁺ → subtype l A` is called
 {{#concept "proper" Disambiguation="rational neighborhood subtype" Agda=is-proper-Rational-Neighborhood-Subtype}}
 if it is [inhabited](foundation.inhabited-subtypes.md) for all radius `ε`:
@@ -35,7 +35,7 @@ if it is [inhabited](foundation.inhabited-subtypes.md) for all radius `ε`:
 
 ## Definitions
 
-### Proper rational families of subsets
+### Proper rational subtypes
 
 ```agda
 module _
