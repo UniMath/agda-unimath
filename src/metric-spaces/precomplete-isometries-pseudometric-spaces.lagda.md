@@ -159,12 +159,11 @@ module _
       ( pseudometric-Metric-Space M)
       ( isometry-precomplete-isometry-Pseudometric-Space f)
 
-  abstract
-    is-precomplete-isometry-precomplete-isometry-Pseudometric-Space :
-      (f : precomplete-isometry-Pseudometric-Space) →
-      is-precomplete-isometry-Pseudometric-Space P M
-        ( isometry-precomplete-isometry-Pseudometric-Space f)
-    is-precomplete-isometry-precomplete-isometry-Pseudometric-Space = pr2
+  is-precomplete-isometry-precomplete-isometry-Pseudometric-Space :
+    (f : precomplete-isometry-Pseudometric-Space) →
+    is-precomplete-isometry-Pseudometric-Space P M
+      ( isometry-precomplete-isometry-Pseudometric-Space f)
+  is-precomplete-isometry-precomplete-isometry-Pseudometric-Space = pr2
 ```
 
 ### Homotopies between precomplete isometries
