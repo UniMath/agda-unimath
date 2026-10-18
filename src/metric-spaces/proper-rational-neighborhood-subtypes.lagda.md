@@ -35,7 +35,7 @@ if it is [inhabited](foundation.inhabited-subtypes.md) for all radius `ε`:
 
 ## Definitions
 
-### Proper rational subtypes
+### Proper rational neighborhood subtypes
 
 ```agda
 module _
