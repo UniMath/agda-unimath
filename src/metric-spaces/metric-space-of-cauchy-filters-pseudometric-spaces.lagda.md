@@ -1,4 +1,4 @@
-# The metric space of Cauchy filters over pseudometric spaces
+# The metric space of Cauchy filters in a pseudometric space
 
 ```agda
 module metric-spaces.metric-space-of-cauchy-filters-pseudometric-spaces where
