@@ -58,10 +58,10 @@ module _
   (U : cauchy-filter-Metric-Space l M)
   where
 
-  subtype-cauchy-filter-Metric-Space :
+  neighborhood-subtype-cauchy-filter-Metric-Space :
     Rational-Neighborhood-Subtype l (type-Metric-Space M)
-  subtype-cauchy-filter-Metric-Space =
-    subtype-cauchy-filter-Pseudometric-Space
+  neighborhood-subtype-cauchy-filter-Metric-Space =
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( U)
 
@@ -71,19 +71,19 @@ module _
       ( pseudometric-Metric-Space M)
       ( U)
 
-  is-cauchy-filter-subtype-cauchy-filter-Metric-Space :
+  is-cauchy-filter-neighborhood-subtype-cauchy-filter-Metric-Space :
     is-cauchy-filter-Pseudometric-Space
       ( l)
       ( pseudometric-Metric-Space M)
-      ( subtype-cauchy-filter-Metric-Space)
-  is-cauchy-filter-subtype-cauchy-filter-Metric-Space =
-    is-cauchy-filter-subtype-cauchy-filter-Pseudometric-Space
+      ( neighborhood-subtype-cauchy-filter-Metric-Space)
+  is-cauchy-filter-neighborhood-subtype-cauchy-filter-Metric-Space =
+    is-cauchy-filter-neighborhood-subtype-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
       ( U)
 
   is-proper-cauchy-filter-Metric-Space :
     is-proper-Rational-Neighborhood-Subtype
-      subtype-cauchy-filter-Metric-Space
+      neighborhood-subtype-cauchy-filter-Metric-Space
   is-proper-cauchy-filter-Metric-Space =
     is-proper-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
@@ -91,7 +91,7 @@ module _
 
   is-saturated-cauchy-filter-Metric-Space :
     is-saturated-Rational-Neighborhood-Subtype
-      subtype-cauchy-filter-Metric-Space
+      neighborhood-subtype-cauchy-filter-Metric-Space
   is-saturated-cauchy-filter-Metric-Space =
     is-saturated-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
@@ -100,7 +100,7 @@ module _
   is-local-cauchy-filter-Metric-Space :
     is-local-neighborhood-subtype-Pseudometric-Space
       ( pseudometric-Metric-Space M)
-      ( subtype-cauchy-filter-Metric-Space)
+      ( neighborhood-subtype-cauchy-filter-Metric-Space)
   is-local-cauchy-filter-Metric-Space =
     is-local-cauchy-filter-Pseudometric-Space
       ( pseudometric-Metric-Space M)
