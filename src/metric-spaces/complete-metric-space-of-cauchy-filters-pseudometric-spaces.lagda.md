@@ -1,7 +1,7 @@
-# The complete metric space of Cauchy filters over metric spaces
+# The complete metric space of Cauchy filters over pseudometric spaces
 
 ```agda
-module metric-spaces.complete-metric-space-of-cauchy-filters-metric-spaces where
+module metric-spaces.complete-metric-space-of-cauchy-filters-pseudometric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -26,10 +26,16 @@ open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-filters-metric-spaces
+open import metric-spaces.cauchy-filters-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
-open import metric-spaces.metric-space-of-cauchy-filters-metric-spaces
+open import metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces
+open import metric-spaces.metric-space-of-cauchy-filters-pseudometric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.proper-rational-neighborhood-subtypes
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.rational-neighborhood-subtypes
+open import metric-spaces.saturated-rational-neighborhood-subtypes
 ```
 
 </details>
@@ -37,9 +43,9 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 In the
-[metric space](metric-spaces.metric-space-of-cauchy-filters-metric-spaces.md) of
-[Cauchy filters](metric-spaces.cauchy-filters-metric-spaces.md) on a
-[metric space](metric-spaces.metric-spaces.md) `M`, any
+[metric space](metric-spaces.metric-space-of-cauchy-filters-pseudometric-spaces.md)
+of [Cauchy filters](metric-spaces.cauchy-filters-pseudometric-spaces.md) on a
+[pseudometric space](metric-spaces.pseudometric-spaces.md) `M`, any
 [Cauchy approximation](metric-spaces.cauchy-approximations-metric-spaces.md)
 
 ```text
@@ -55,8 +61,8 @@ the Cauchy filter given by
 
 Therefore, the metric space of Cauchy filters is
 [complete](metric-spaces.complete-metric-spaces.md); this is the
-{{#concept "complete metric space of Cauchy filters" Disambiguation="on a metric space" Agda=complete-metric-space-Cauchy-Filter-Metric-Space}}
-on the metric space `M`.
+{{#concept "complete metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=complete-metric-space-Cauchy-Filter-Pseudometric-Space}}
+on the pseudometric space `M`.
 
 ## Definitions
 
@@ -64,45 +70,51 @@ on the metric space `M`.
 
 ```agda
 module _
-  { l1 l2 l : Level} (M : Metric-Space l1 l2)
+  { l1 l2 l : Level} (M : Pseudometric-Space l1 l2)
   ( u :
     cauchy-approximation-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M))
+      ( metric-space-cauchy-filter-Pseudometric-Space l M))
   where
 
-  map-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    ℚ⁺ → Cauchy-Filter-Metric-Space l M
-  map-cauchy-approximation-Cauchy-Filter-Metric-Space =
+  map-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    ℚ⁺ → cauchy-filter-Pseudometric-Space l M
+  map-cauchy-approximation-cauchy-filter-Pseudometric-Space =
     map-cauchy-approximation-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M)
+      ( metric-space-cauchy-filter-Pseudometric-Space l M)
       ( u)
 
-  filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    ℚ⁺ → ℚ⁺ → type-Metric-Space M → Prop l
-  filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space d =
-    ℚ⁺-subset-Cauchy-Filter-Metric-Space
+  filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    ℚ⁺ → ℚ⁺ → type-Pseudometric-Space M → Prop l
+  filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space d =
+    neighborhood-subtype-cauchy-filter-Pseudometric-Space
       ( M)
-      ( map-cauchy-approximation-Cauchy-Filter-Metric-Space d)
+      ( map-cauchy-approximation-cauchy-filter-Pseudometric-Space d)
 
-  is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    ℚ⁺ → ℚ⁺ → type-Metric-Space M → UU l
-  is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space d =
-    is-in-filter-Cauchy-Filter-Metric-Space
+  is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    ℚ⁺ → ℚ⁺ → type-Pseudometric-Space M → UU l
+  is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space d =
+    is-in-cauchy-filter-Pseudometric-Space
       ( M)
-      ( map-cauchy-approximation-Cauchy-Filter-Metric-Space d)
+      ( map-cauchy-approximation-cauchy-filter-Pseudometric-Space d)
 
-  neighborhood-is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    (ε δ α β : ℚ⁺) (x y : type-Metric-Space M) →
-    is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space ε α x →
-    is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space δ β y →
-    neighborhood-Metric-Space M
+  neighborhood-is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    (ε δ α β : ℚ⁺) (x y : type-Pseudometric-Space M) →
+    is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
+      ( ε)
+      ( α)
+      ( x) →
+    is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
+      ( δ)
+      ( β)
+      ( y) →
+    neighborhood-Pseudometric-Space M
       ( α +ℚ⁺ β +ℚ⁺ (ε +ℚ⁺ δ))
       ( x)
       ( y)
-  neighborhood-is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+  neighborhood-is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
     ε δ α β x y Ux Uy =
     is-cauchy-approximation-map-cauchy-approximation-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M)
+      ( metric-space-cauchy-filter-Pseudometric-Space l M)
       ( u)
       ( ε)
       ( δ)
@@ -115,44 +127,44 @@ module _
 
 ```agda
 module _
-  { l1 l2 l : Level} (M : Metric-Space l1 l2)
+  { l1 l2 l : Level} (M : Pseudometric-Space l1 l2)
   ( u :
     cauchy-approximation-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M))
+      ( metric-space-cauchy-filter-Pseudometric-Space l M))
   where
 
-  filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    ℚ⁺-subset-Metric-Space l M
-  filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ε x =
+  filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    Rational-Neighborhood-Subtype l (type-Pseudometric-Space M)
+  filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space ε x =
     Π-Prop
       ( ℚ⁺)
       ( λ μ →
         ∃ ( ℚ⁺ × ℚ⁺)
           ( λ ( α , β) →
             le-prop-ℚ⁺ (α +ℚ⁺ β) (ε +ℚ⁺ μ) ∧
-            filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+            filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
               ( M)
               ( u)
               ( α)
               ( β)
               ( x)))
 
-  is-total-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    is-total-ℚ⁺-subset-Metric-Space
-      ( M)
-      ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
-  is-total-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ε =
+  is-proper-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    is-proper-Rational-Neighborhood-Subtype
+      ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
+  is-proper-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space ε =
     let
       open
         do-syntax-trunc-Prop
-          ( ∃ ( type-Metric-Space M)
-              ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ε))
+          ( ∃ ( type-Pseudometric-Space M)
+              ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
+                ( ε)))
     in do
       ( η , η+η<ε) ← double-le-ℚ⁺ ε
       ( x , Rx) ←
-        is-total-Cauchy-Filter-Metric-Space
+        is-proper-cauchy-filter-Pseudometric-Space
           ( M)
-          ( map-cauchy-approximation-Cauchy-Filter-Metric-Space M u η)
+          ( map-cauchy-approximation-cauchy-filter-Pseudometric-Space M u η)
           ( η)
 
       intro-exists
@@ -168,19 +180,18 @@ module _
               ( η+η<ε) ,
               ( Rx)))
 
-  is-saturated-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    is-saturated-ℚ⁺-subset-Metric-Space
-      ( M)
-      ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
-  is-saturated-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
-    ε x H μ =
+  is-saturated-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    is-saturated-Rational-Neighborhood-Subtype
+      ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
+  is-saturated-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
+    (ε , x) H μ =
     let
       open
         do-syntax-trunc-Prop
           ( ∃ ( ℚ⁺ × ℚ⁺)
               ( λ ( α , β) →
                 le-prop-ℚ⁺ (α +ℚ⁺ β) (ε +ℚ⁺ μ) ∧
-                filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+                filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
                   ( M)
                   ( u)
                   ( α)
@@ -199,18 +210,18 @@ module _
             ( Hαβ)) ,
           ( Rx))
 
-  neighborhood-is-in-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
-    neighborhood-conjunction-ℚ⁺-subset-Metric-Space
+  neighborhood-is-in-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    (ε δ : ℚ⁺) (x y : type-Pseudometric-Space M) →
+    is-bounded-neighborhood-subtype-Pseudometric-Space
       ( M)
-      ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
+      ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
       ( ε)
       ( δ)
       ( x)
       ( y)
-  neighborhood-is-in-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+  neighborhood-is-in-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
     ε δ x y (Rx , Ry) =
-    saturated-neighborhood-Metric-Space M
+    saturated-neighborhood-Pseudometric-Space M
       ( ε +ℚ⁺ δ)
       ( x)
       ( y)
@@ -218,12 +229,12 @@ module _
     where
 
     lemma-saturate-neighborhood :
-      (μ : ℚ⁺) → neighborhood-Metric-Space M (ε +ℚ⁺ δ +ℚ⁺ μ) x y
+      (μ : ℚ⁺) → neighborhood-Pseudometric-Space M (ε +ℚ⁺ δ +ℚ⁺ μ) x y
     lemma-saturate-neighborhood μ =
       let
         open
           do-syntax-trunc-Prop
-            ( neighborhood-prop-Metric-Space M (ε +ℚ⁺ δ +ℚ⁺ μ) x y)
+            ( neighborhood-prop-Pseudometric-Space M (ε +ℚ⁺ δ +ℚ⁺ μ) x y)
       in do
         ( η , η+η<μ) ← double-le-ℚ⁺ μ
         ( (αx , βx) , (le-αβx , Rαβx)) ← Rx η
@@ -252,13 +263,13 @@ module _
                   ( le-αβx)
                   ( le-αβy)))
 
-        monotonic-neighborhood-Metric-Space M
+        monotonic-neighborhood-Pseudometric-Space M
           ( x)
           ( y)
           ( βx +ℚ⁺ βy +ℚ⁺ (αx +ℚ⁺ αy))
           ( ε +ℚ⁺ δ +ℚ⁺ μ)
           ( le-αβ-εδμ)
-          ( neighborhood-is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+          ( neighborhood-is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
             ( M)
             ( u)
             ( αx)
@@ -270,16 +281,16 @@ module _
             ( Rαβx)
             ( Rαβy))
 
-  is-in-filter-neighborhood-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    (ε δ : ℚ⁺) (x y : type-Metric-Space M) →
-    is-in-ℚ⁺-subset-neighborhood-ℚ⁺-subset-Metric-Space
+  is-in-filter-neighborhood-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    (ε δ : ℚ⁺) (x y : type-Pseudometric-Space M) →
+    is-enclosing-neighborhood-subtype-Pseudometric-Space
       ( M)
-      ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
+      ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
       ( ε)
       ( δ)
       ( x)
       ( y)
-  is-in-filter-neighborhood-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+  is-in-filter-neighborhood-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
     ε δ x y (Rx , Nxy) μ =
     let
       open
@@ -287,7 +298,7 @@ module _
           ( ∃ ( ℚ⁺ × ℚ⁺)
               ( λ (α , β) →
                 le-prop-ℚ⁺ (α +ℚ⁺ β) (ε +ℚ⁺ δ +ℚ⁺ μ) ∧
-                filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+                filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
                   ( M)
                   ( u)
                   ( α)
@@ -297,16 +308,16 @@ module _
       ( (α , β) , (α+β<ε+μ , Rαβx)) ← Rx μ
       let
         Ry :
-          is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+          is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
             ( M)
             ( u)
             ( α)
             ( β +ℚ⁺ δ)
             ( y)
         Ry =
-          is-in-filter-neighborhood-Cauchy-Filter-Metric-Space
+          is-enclosing-cauchy-filter-Pseudometric-Space
             ( M)
-            ( map-cauchy-approximation-Cauchy-Filter-Metric-Space M u α)
+            ( map-cauchy-approximation-cauchy-filter-Pseudometric-Space M u α)
             ( β)
             ( δ)
             ( x)
@@ -332,42 +343,42 @@ module _
         ( α , β +ℚ⁺ δ)
         ( le-αβδ-εδμ , Ry)
 
-  is-local-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    is-local-ℚ⁺-subset-Metric-Space
+  is-local-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    is-local-neighborhood-subtype-Pseudometric-Space
       ( M)
-      ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
-  is-local-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+      ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
+  is-local-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
     (ε , δ , x , y) =
-    ( ( neighborhood-is-in-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+    ( ( neighborhood-is-in-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
         ( ε)
         ( δ)
         ( x)
         ( y)) ,
-      ( is-in-filter-neighborhood-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+      ( is-in-filter-neighborhood-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
         ( ε)
         ( δ)
         ( x)
         ( y)))
 
-  lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
-    Cauchy-Filter-Metric-Space l M
-  lim-cauchy-approximation-Cauchy-Filter-Metric-Space =
-    ( filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ,
-      is-total-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ,
-      is-saturated-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space ,
-      is-local-filter-lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
+  lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
+    cauchy-filter-Pseudometric-Space l M
+  lim-cauchy-approximation-cauchy-filter-Pseudometric-Space =
+    ( filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space ,
+      is-proper-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space ,
+      is-saturated-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space ,
+      is-local-filter-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
 
-  is-limit-lim-cauchy-approximation-Cauchy-Filter-Metric-Space :
+  is-limit-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space :
     is-limit-cauchy-approximation-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M)
+      ( metric-space-cauchy-filter-Pseudometric-Space l M)
       ( u)
-      ( lim-cauchy-approximation-Cauchy-Filter-Metric-Space)
-  is-limit-lim-cauchy-approximation-Cauchy-Filter-Metric-Space
+      ( lim-cauchy-approximation-cauchy-filter-Pseudometric-Space)
+  is-limit-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space
     ε δ (α , β , x , y) Rx Ly =
     let
       open
         do-syntax-trunc-Prop
-          ( neighborhood-prop-Metric-Space M
+          ( neighborhood-prop-Pseudometric-Space M
             ( α +ℚ⁺ β +ℚ⁺ (ε +ℚ⁺ δ))
             ( x)
             ( y))
@@ -386,13 +397,13 @@ module _
               ( β +ℚ⁺ δ)
               ( tr (λ z → le-ℚ⁺ z (β +ℚ⁺ δ)) (commutative-add-ℚ⁺ η ν) η+ν<β+δ))
 
-      monotonic-neighborhood-Metric-Space M
+      monotonic-neighborhood-Pseudometric-Space M
         ( x)
         ( y)
         ( α +ℚ⁺ ν +ℚ⁺ (ε +ℚ⁺ η))
         ( α +ℚ⁺ β +ℚ⁺ (ε +ℚ⁺ δ))
         ( le-ανεη-αβεδ)
-        ( neighborhood-is-in-filter-map-cauchy-approximation-Cauchy-Filter-Metric-Space
+        ( neighborhood-is-in-filter-map-cauchy-approximation-cauchy-filter-Pseudometric-Space
           ( M)
           ( u)
           ( ε)
@@ -409,27 +420,27 @@ module _
 
 ```agda
 module _
-  { l1 l2 l : Level} (M : Metric-Space l1 l2)
+  { l1 l2 l : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  is-complete-metric-space-Cauchy-Filter-Metric-Space :
+  is-complete-metric-space-cauchy-filter-Pseudometric-Space :
     is-complete-Metric-Space
-      ( metric-space-Cauchy-Filter-Metric-Space l M)
-  is-complete-metric-space-Cauchy-Filter-Metric-Space u =
-    ( lim-cauchy-approximation-Cauchy-Filter-Metric-Space M u ,
-      is-limit-lim-cauchy-approximation-Cauchy-Filter-Metric-Space M u)
+      ( metric-space-cauchy-filter-Pseudometric-Space l M)
+  is-complete-metric-space-cauchy-filter-Pseudometric-Space u =
+    ( lim-cauchy-approximation-cauchy-filter-Pseudometric-Space M u ,
+      is-limit-lim-cauchy-approximation-cauchy-filter-Pseudometric-Space M u)
 ```
 
 ### The complete metric space of Cauchy filters
 
 ```agda
 module _
-  { l1 l2 : Level} (l : Level) (M : Metric-Space l1 l2)
+  { l1 l2 : Level} (l : Level) (M : Pseudometric-Space l1 l2)
   where
 
-  complete-metric-space-Cauchy-Filter-Metric-Space :
+  complete-metric-space-cauchy-filter-Pseudometric-Space :
     Complete-Metric-Space (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
-  complete-metric-space-Cauchy-Filter-Metric-Space =
-    ( metric-space-Cauchy-Filter-Metric-Space l M ,
-      is-complete-metric-space-Cauchy-Filter-Metric-Space M)
+  complete-metric-space-cauchy-filter-Pseudometric-Space =
+    ( metric-space-cauchy-filter-Pseudometric-Space l M ,
+      is-complete-metric-space-cauchy-filter-Pseudometric-Space M)
 ```
