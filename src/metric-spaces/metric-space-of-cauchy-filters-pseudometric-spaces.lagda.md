@@ -361,7 +361,7 @@ module _
           ( lemma-le-αβ)
           ( Vx)
 
-  htpy-filter-sim-cauchy-filter-Pseudometric-Space :
+  htpy-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space :
     (U V : cauchy-filter-Pseudometric-Space l M) →
     sim-Pseudometric-Space
       ( pseudometric-space-cauchy-filter-Pseudometric-Space l M)
@@ -370,7 +370,7 @@ module _
     ( α : ℚ⁺) →
     neighborhood-subtype-cauchy-filter-Pseudometric-Space M U α ~
     neighborhood-subtype-cauchy-filter-Pseudometric-Space M V α
-  htpy-filter-sim-cauchy-filter-Pseudometric-Space U V U~V α x =
+  htpy-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space U V U~V α x =
     eq-iff
       ( λ Ux →
         is-saturated-cauchy-filter-Pseudometric-Space
@@ -396,16 +396,16 @@ module _
               ( V)
               ( U)
               ( symmetric-sim-Pseudometric-Space
-              ( pseudometric-space-cauchy-filter-Pseudometric-Space l M)
-                ( U)
-                ( V)
-                ( U~V))
+                ( pseudometric-space-cauchy-filter-Pseudometric-Space l M)
+                  ( U)
+                  ( V)
+                  ( U~V))
               ( α)
               ( δ)
               ( x)
               ( Vx)))
 
-  eq-filter-sim-cauchy-filter-Pseudometric-Space :
+  eq-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space :
     (U V : cauchy-filter-Pseudometric-Space l M) →
     sim-Pseudometric-Space
       ( pseudometric-space-cauchy-filter-Pseudometric-Space l M)
@@ -413,11 +413,15 @@ module _
       ( V) →
     neighborhood-subtype-cauchy-filter-Pseudometric-Space M U ＝
     neighborhood-subtype-cauchy-filter-Pseudometric-Space M V
-  eq-filter-sim-cauchy-filter-Pseudometric-Space U V U~V =
+  eq-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space U V U~V =
     eq-htpy
       ( λ α →
         eq-htpy
-          ( htpy-filter-sim-cauchy-filter-Pseudometric-Space U V U~V α))
+          ( htpy-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space
+            ( U)
+            ( V)
+            ( U~V)
+            ( α)))
 
   eq-sim-cauchy-filter-Pseudometric-Space :
     (U V : cauchy-filter-Pseudometric-Space l M) →
@@ -429,7 +433,7 @@ module _
   eq-sim-cauchy-filter-Pseudometric-Space U V U~V =
     eq-type-subtype
       ( is-cauchy-filter-prop-Pseudometric-Space l M)
-      ( eq-filter-sim-cauchy-filter-Pseudometric-Space U V U~V)
+      ( eq-neighborhood-subtype-sim-cauchy-filter-Pseudometric-Space U V U~V)
 
   is-extensional-pseudometric-space-cauchy-filter-Pseudometric-Space :
     is-extensional-Pseudometric-Space
