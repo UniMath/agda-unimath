@@ -10,6 +10,7 @@ module metric-spaces.indexed-sums-pseudometric-spaces where
 open import elementary-number-theory.addition-positive-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -215,31 +216,55 @@ module _
   {la lp lp' : Level}
   (A : Set la)
   (P : type-Set A → Pseudometric-Space lp lp')
-  (x : type-Set A)
+  {x : type-Set A}
   where
 
   map-fiber-eq-base-indexed-sum-Pseudometric-Space :
-    (y : type-Set A) → x ＝ y → map-Pseudometric-Space (P x) (P y)
-  map-fiber-eq-base-indexed-sum-Pseudometric-Space y =
+    {y : type-Set A} → x ＝ y → map-Pseudometric-Space (P x) (P y)
+  map-fiber-eq-base-indexed-sum-Pseudometric-Space {y} =
     tr (type-Pseudometric-Space ∘ P)
 
   is-isometry-map-fiber-eq-base-indexed-sum-Pseudometric-Space :
-    (y : type-Set A) →
+    {y : type-Set A} →
     (x=y : x ＝ y) →
     is-isometry-Pseudometric-Space
       ( P x)
       ( P y)
-      ( map-fiber-eq-base-indexed-sum-Pseudometric-Space y x=y)
-  is-isometry-map-fiber-eq-base-indexed-sum-Pseudometric-Space .x refl =
+      ( map-fiber-eq-base-indexed-sum-Pseudometric-Space x=y)
+  is-isometry-map-fiber-eq-base-indexed-sum-Pseudometric-Space {.x} refl =
     is-isometry-id-Pseudometric-Space (P x)
 
   isometry-fiber-eq-base-indexed-sum-Pseudometric-Space :
-    (y : type-Set A) →
+    {y : type-Set A} →
     (x=y : x ＝ y) →
     isometry-Pseudometric-Space (P x) (P y)
-  isometry-fiber-eq-base-indexed-sum-Pseudometric-Space y x=y =
-    ( map-fiber-eq-base-indexed-sum-Pseudometric-Space y x=y ,
-      is-isometry-map-fiber-eq-base-indexed-sum-Pseudometric-Space y x=y)
+  isometry-fiber-eq-base-indexed-sum-Pseudometric-Space {y} x=y =
+    ( map-fiber-eq-base-indexed-sum-Pseudometric-Space x=y ,
+      is-isometry-map-fiber-eq-base-indexed-sum-Pseudometric-Space x=y)
+```
+
+### Composition of identiy-induced isometries between fibers
+
+```agda
+module _
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  where
+
+  htpy-comp-map-fiber-eq-base-indexed-sum-Pseudometric-Space :
+    {x y z : type-Set A} →
+    (Hxy : x ＝ y) →
+    (Hyz : y ＝ z) →
+    (Hxz : x ＝ z) →
+    map-fiber-eq-base-indexed-sum-Pseudometric-Space A P Hyz ∘
+    map-fiber-eq-base-indexed-sum-Pseudometric-Space A P Hxy ~
+    map-fiber-eq-base-indexed-sum-Pseudometric-Space A P Hxz
+  htpy-comp-map-fiber-eq-base-indexed-sum-Pseudometric-Space
+    {x} {.x} {.x} refl refl H Px =
+    ap
+      ( λ e → map-fiber-eq-base-indexed-sum-Pseudometric-Space A P e Px)
+      ( axiom-K-is-set (is-set-type-Set A) x H)
 ```
 
 ### Neighbors in the indexed sum are neighbors in fiber of the common base point
