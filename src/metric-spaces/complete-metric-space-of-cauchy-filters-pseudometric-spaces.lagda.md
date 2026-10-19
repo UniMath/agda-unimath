@@ -61,7 +61,7 @@ the Cauchy filter given by
 
 Therefore, the metric space of Cauchy filters is
 [complete](metric-spaces.complete-metric-spaces.md); this is the
-{{#concept "complete metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=complete-metric-space-Cauchy-Filter-Pseudometric-Space}}
+{{#concept "complete metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=complete-metric-space-cauchy-filter-Pseudometric-Space}}
 on the pseudometric space `M`.
 
 ## Definitions
