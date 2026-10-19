@@ -63,12 +63,17 @@ The type of
   ∀ (α β : ℚ⁺) (x y : M) → U α x → V β y → N (α + β + d) x y
 ```
 
+i.e., if `Uα`-points and `Vβ`-points are at distance at most `α + β + d` in `M`.
+
 This neighborhood relation is an
 [extensional](metric-spaces.extensionality-pseudometric-spaces.md)
 [pseudometric structure](metric-spaces.pseudometric-spaces.md) on the type of
 Cauchy filters defining the
 {{#concept "metric space of Cauchy filters" Disambiguation="on a pseudometric space" Agda=metric-space-cauchy-filter-Pseudometric-Space}}
 on `M`.
+
+With this metric structure, the unit map of Cauchy filters is an
+[isometry](metric-spaces.isometries-pseudometric-spaces.md).
 
 ## Definitions
 
