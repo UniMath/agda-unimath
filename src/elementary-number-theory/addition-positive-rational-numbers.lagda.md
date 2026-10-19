@@ -159,13 +159,7 @@ module _
 abstract
   preserves-le-add-ℚ⁺ :
     {a b c d : ℚ⁺} → le-ℚ⁺ a b → le-ℚ⁺ c d → le-ℚ⁺ (a +ℚ⁺ c) (b +ℚ⁺ d)
-  preserves-le-add-ℚ⁺ {a} {b} {c} {d} H K =
-    transitive-le-ℚ⁺
-      ( a +ℚ⁺ c)
-      ( b +ℚ⁺ c)
-      ( b +ℚ⁺ d)
-      ( preserves-le-right-add-ℚ⁺ b c d K)
-      ( preserves-le-left-add-ℚ⁺ c a b H)
+  preserves-le-add-ℚ⁺ {a} {b} {c} {d} H K = preserves-le-add-ℚ H K
 ```
 
 ### Addition with a positive rational number is a strictly increasing map

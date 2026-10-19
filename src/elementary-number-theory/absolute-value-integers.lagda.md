@@ -153,16 +153,6 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
     ( refl)
 ```
 
-### `|-x| ＝ |x|`
-
-```agda
-negative-law-abs-ℤ :
-  (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
-negative-law-abs-ℤ (inl x) = refl
-negative-law-abs-ℤ (inr (inl star)) = refl
-negative-law-abs-ℤ (inr (inr x)) = refl
-```
-
 ### If `x` is positive then `|x|` is positive
 
 ```agda
@@ -222,7 +212,7 @@ abstract
     equational-reasoning
       abs-ℤ (x *ℤ y)
       ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+        by (inv (abs-neg-ℤ (x *ℤ y)))
       ＝ abs-ℤ ((neg-ℤ x) *ℤ y)
         by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 ```
@@ -237,7 +227,7 @@ abstract
     equational-reasoning
       abs-ℤ (x *ℤ y)
       ＝ abs-ℤ (neg-ℤ (x *ℤ y))
-        by (inv (negative-law-abs-ℤ (x *ℤ y)))
+        by (inv (abs-neg-ℤ (x *ℤ y)))
       ＝ abs-ℤ (x *ℤ (neg-ℤ y))
         by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
 ```
