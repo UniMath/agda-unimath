@@ -441,7 +441,7 @@ module _
       is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
 ```
 
-### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is an isometry
+### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is expansive
 
 ```agda
 module _
@@ -548,6 +548,16 @@ module _
             ( pr1 (Nuv ε δ))
             ( x=y))
           ( pr2 (Nuv ε δ)))
+```
+
+### The mapping from Cauchy approximations in fibers to Cauchy approximations in the indexed sum is an isometry
+
+```agda
+module _
+  {la lp lp' : Level}
+  (A : Set la)
+  (P : type-Set A → Pseudometric-Space lp lp')
+  where
 
   is-isometry-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space :
     is-isometry-Pseudometric-Space
@@ -560,7 +570,9 @@ module _
       ( cauchy-pseudocompletion-indexed-sum-Pseudometric-Space A P)
       ( map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
       ( is-short-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space A P)
-      ( is-expansive-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space)
+      ( is-expansive-map-indexed-sum-cauchy-pseudocompletion-Pseudometric-Space
+        ( A)
+        ( P))
 ```
 
 ### The isometric equivalence between indexed sum of Cauchy pseudocompletions and pseudocompletions of indexed sums
