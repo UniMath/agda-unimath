@@ -186,61 +186,25 @@ module _
   (x : type-Set A)
   where
 
-  is-short-map-map-emb-fiber-indexed-sum-Metric-Space :
-    is-short-map-Metric-Space
-      ( P x)
-      ( indexed-sum-Metric-Space A P)
-      ( map-emb-fiber-indexed-sum-Metric-Space A P x)
-  is-short-map-map-emb-fiber-indexed-sum-Metric-Space d px px' Nxx' =
-    ( refl , Nxx')
-
-  short-map-emb-fiber-indexed-sum-Metric-Space :
-    short-map-Metric-Space (P x) (indexed-sum-Metric-Space A P)
-  short-map-emb-fiber-indexed-sum-Metric-Space =
-    ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
-      is-short-map-map-emb-fiber-indexed-sum-Metric-Space)
-
-  reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space :
-    (d : ℚ⁺) (px px' : type-Metric-Space (P x)) →
-    neighborhood-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( d)
-      ( map-emb-fiber-indexed-sum-Metric-Space A P x px)
-      ( map-emb-fiber-indexed-sum-Metric-Space A P x px') →
-    neighborhood-Metric-Space
-      ( P x)
-      ( d)
-      ( px)
-      ( px')
-  reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space
-    d px px' (e , Nxx') =
-    inv-tr
-      ( λ e' →
-        neighborhood-Metric-Space
-          ( P x)
-          ( d)
-          ( tr (type-Metric-Space ∘ P) e' px)
-          ( px'))
-      ( axiom-K-is-set
-        ( is-set-type-Set A)
+  abstract
+    is-isometry-map-emb-fiber-indexed-sum-Metric-Space :
+      is-isometry-Metric-Space
+        ( P x)
+        ( indexed-sum-Metric-Space A P)
+        ( map-emb-fiber-indexed-sum-Metric-Space A P x)
+    is-isometry-map-emb-fiber-indexed-sum-Metric-Space =
+      is-isometry-map-emb-fiber-indexed-sum-Pseudometric-Space
+        ( A)
+        ( pseudometric-Metric-Space ∘ P)
         ( x)
-        ( e))
-      ( Nxx')
-
-  is-isometry-map-emb-fiber-indexed-sum-Metric-Space :
-    is-isometry-Metric-Space
-      ( P x)
-      ( indexed-sum-Metric-Space A P)
-      ( map-emb-fiber-indexed-sum-Metric-Space A P x)
-  is-isometry-map-emb-fiber-indexed-sum-Metric-Space d px px' =
-    ( is-short-map-map-emb-fiber-indexed-sum-Metric-Space d px px' ,
-      reflects-neighborhoods-emb-fiber-indexed-sum-Metric-Space d px px')
 
   isometry-emb-fiber-indexed-sum-Metric-Space :
     isometry-Metric-Space (P x) (indexed-sum-Metric-Space A P)
   isometry-emb-fiber-indexed-sum-Metric-Space =
-    ( map-emb-fiber-indexed-sum-Metric-Space A P x ,
-      is-isometry-map-emb-fiber-indexed-sum-Metric-Space)
+    isometry-emb-fiber-indexed-sum-Pseudometric-Space
+      ( A)
+      ( pseudometric-Metric-Space ∘ P)
+      ( x)
 ```
 
 ### Short maps from indexed sums are products of short maps
@@ -253,94 +217,12 @@ module _
   (Q : Metric-Space lq lq')
   where
 
-  precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
-    short-map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q) →
-    (a : type-Set A) →
-    short-map-Metric-Space (P a) Q
-  precomp-emb-fiber-short-map-indexed-sum-Metric-Space f a =
-    comp-short-map-Metric-Space
-      ( P a)
-      ( indexed-sum-Metric-Space A P)
-      ( Q)
-      ( f)
-      ( short-map-emb-fiber-indexed-sum-Metric-Space A P a)
-
-module _
-  {la lp lp' lq lq' : Level}
-  (A : Set la)
-  (P : type-Set A → Metric-Space lp lp')
-  (Q : Metric-Space lq lq')
-  (f : (a : type-Set A) → short-map-Metric-Space (P a) Q)
-  where
-
-  map-Π-short-map-fiber-indexed-sum-Metric-Space :
-    map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q)
-  map-Π-short-map-fiber-indexed-sum-Metric-Space (a , x) =
-    map-short-map-Metric-Space (P a) Q (f a) x
-
-  is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space :
-    is-short-map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q)
-      ( map-Π-short-map-fiber-indexed-sum-Metric-Space)
-  is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space
-    d (a , x) (.a , y) (refl , Nxy) =
-    is-short-map-short-map-Metric-Space (P a) Q (f a) d x y Nxy
-
-  Π-short-map-fiber-indexed-sum-Metric-Space :
-    short-map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q)
-  Π-short-map-fiber-indexed-sum-Metric-Space =
-    ( map-Π-short-map-fiber-indexed-sum-Metric-Space ,
-      is-short-map-Π-short-map-fiber-indexed-sum-Metric-Space)
-
-module _
-  {la lp lp' lq lq' : Level}
-  (A : Set la)
-  (P : type-Set A → Metric-Space lp lp')
-  (Q : Metric-Space lq lq')
-  where abstract
-
-  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
-    Π-short-map-fiber-indexed-sum-Metric-Space A P Q ∘
-    precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q ~
-    id
-  is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space f =
-    eq-htpy-map-short-map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q)
-      ( Π-short-map-fiber-indexed-sum-Metric-Space A P Q
-        ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q f))
-      ( f)
-      ( refl-htpy)
-
-  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space :
-    is-equiv
-      ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q)
-  is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space =
-    is-equiv-is-invertible
-      ( Π-short-map-fiber-indexed-sum-Metric-Space A P Q)
-      ( refl-htpy)
-      ( is-retraction-precomp-emb-fiber-short-map-indexed-sum-Metric-Space)
-
-module _
-  {la lp lp' lq lq' : Level}
-  (A : Set la)
-  (P : type-Set A → Metric-Space lp lp')
-  (Q : Metric-Space lq lq')
-  where
-
   equiv-short-map-indexed-sum-Metric-Space :
-    short-map-Metric-Space
-      ( indexed-sum-Metric-Space A P)
-      ( Q) ≃
-    ((a : type-Set A) → short-map-Metric-Space (P a) Q)
+    ( short-map-Metric-Space (indexed-sum-Metric-Space A P) Q) ≃
+    ( (a : type-Set A) → short-map-Metric-Space (P a) Q)
   equiv-short-map-indexed-sum-Metric-Space =
-    ( precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q ,
-      is-equiv-precomp-emb-fiber-short-map-indexed-sum-Metric-Space A P Q)
+    equiv-short-map-indexed-sum-Pseudometric-Space
+      ( A)
+      ( pseudometric-Metric-Space ∘ P)
+      ( pseudometric-Metric-Space Q)
 ```

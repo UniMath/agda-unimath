@@ -276,21 +276,21 @@ module _
   (x : type-Set A)
   where
 
-  is-short-map-map-emb-fiber-indexed-sum-Pseudometric-Space :
+  is-short-map-emb-fiber-indexed-sum-Pseudometric-Space :
     is-short-map-Pseudometric-Space
       ( P x)
       ( indexed-sum-Pseudometric-Space A P)
       ( map-emb-fiber-indexed-sum-Pseudometric-Space A P x)
-  is-short-map-map-emb-fiber-indexed-sum-Pseudometric-Space d px px' Nxx' =
+  is-short-map-emb-fiber-indexed-sum-Pseudometric-Space d px px' Nxx' =
     ( refl , Nxx')
 
   short-map-emb-fiber-indexed-sum-Pseudometric-Space :
     short-map-Pseudometric-Space (P x) (indexed-sum-Pseudometric-Space A P)
   short-map-emb-fiber-indexed-sum-Pseudometric-Space =
     ( map-emb-fiber-indexed-sum-Pseudometric-Space A P x ,
-      is-short-map-map-emb-fiber-indexed-sum-Pseudometric-Space)
+      is-short-map-emb-fiber-indexed-sum-Pseudometric-Space)
 
-  reflects-neighborhoods-emb-fiber-indexed-sum-Pseudometric-Space :
+  is-expansive-map-emb-fiber-indexed-sum-Pseudometric-Space :
     (d : ℚ⁺) (px px' : type-Pseudometric-Space (P x)) →
     neighborhood-Pseudometric-Space
       ( indexed-sum-Pseudometric-Space A P)
@@ -302,7 +302,7 @@ module _
       ( d)
       ( px)
       ( px')
-  reflects-neighborhoods-emb-fiber-indexed-sum-Pseudometric-Space
+  is-expansive-map-emb-fiber-indexed-sum-Pseudometric-Space
     d px px' (e , Nxx') =
     inv-tr
       ( λ e' →
@@ -322,9 +322,13 @@ module _
       ( P x)
       ( indexed-sum-Pseudometric-Space A P)
       ( map-emb-fiber-indexed-sum-Pseudometric-Space A P x)
-  is-isometry-map-emb-fiber-indexed-sum-Pseudometric-Space d px px' =
-    ( is-short-map-map-emb-fiber-indexed-sum-Pseudometric-Space d px px' ,
-      reflects-neighborhoods-emb-fiber-indexed-sum-Pseudometric-Space d px px')
+  is-isometry-map-emb-fiber-indexed-sum-Pseudometric-Space =
+    is-isometry-is-expansive-map-is-short-map-Pseudometric-Space
+      ( P x)
+      ( indexed-sum-Pseudometric-Space A P)
+      ( map-emb-fiber-indexed-sum-Pseudometric-Space A P x)
+      ( is-short-map-emb-fiber-indexed-sum-Pseudometric-Space)
+      ( is-expansive-map-emb-fiber-indexed-sum-Pseudometric-Space)
 
   isometry-emb-fiber-indexed-sum-Pseudometric-Space :
     isometry-Pseudometric-Space (P x) (indexed-sum-Pseudometric-Space A P)
@@ -426,10 +430,8 @@ module _
   where
 
   equiv-short-map-indexed-sum-Pseudometric-Space :
-    short-map-Pseudometric-Space
-      ( indexed-sum-Pseudometric-Space A P)
-      ( Q) ≃
-    ((a : type-Set A) → short-map-Pseudometric-Space (P a) Q)
+    ( short-map-Pseudometric-Space ( indexed-sum-Pseudometric-Space A P) Q) ≃
+    ( (a : type-Set A) → short-map-Pseudometric-Space (P a) Q)
   equiv-short-map-indexed-sum-Pseudometric-Space =
     ( precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q ,
       is-equiv-precomp-emb-fiber-short-map-indexed-sum-Pseudometric-Space A P Q)
@@ -485,8 +487,7 @@ module _
     eq-base :
       base-point-indexed-sum-Pseudometric-Space A P x ＝
       base-point-indexed-sum-Pseudometric-Space A P y
-    eq-base =
-      pr1 (H one-ℚ⁺)
+    eq-base = pr1 (H one-ℚ⁺)
 
     sim-fiber :
       sim-Pseudometric-Space
