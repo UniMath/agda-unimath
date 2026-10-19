@@ -88,9 +88,10 @@ remove the ambiguity between _open_ or _closed_ neighborhoods (we consider
 of subsets.
 
 The type of Cauchy filters is equipped with a unit map `η : M → F(M)`; it can be
-equipped with a metric structure turning `F(M)` into a
+[equipped with a metric structure](metric-spaces.metric-space-of-cauchy-filters-pseudometric-spaces.md)
+turning `F(M)` into a
 [complete metric space](metric-spaces.complete-metric-spaces.md) where `η` is an
-isometry.
+[isometry](metric-spaces.isometries-pseudometric-spaces.md).
 
 ## Definitions
 
@@ -268,6 +269,11 @@ module _
   is-in-filter-map-unit-cauchy-filter-Pseudometric-Space ε x =
     refl-neighborhood-Pseudometric-Space M ε x
 ```
+
+## See also
+
+- The
+  [metric space of Cauchy filters on a pseudometric space](metric-spaces.metric-space-of-cauchy-filters-pseudometric-spaces.md)
 
 ## References
 
