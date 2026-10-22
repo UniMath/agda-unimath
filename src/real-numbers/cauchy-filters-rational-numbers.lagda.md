@@ -41,6 +41,7 @@ open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.cauchy-filters-metric-spaces
 open import metric-spaces.complete-metric-space-of-cauchy-filters-pseudometric-spaces
 open import metric-spaces.complete-metric-spaces
+open import metric-spaces.expansive-maps-metric-spaces
 open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces
 open import metric-spaces.local-rational-neighborhood-subtypes-pseudometric-spaces
@@ -49,6 +50,7 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.proper-rational-neighborhood-subtypes
 open import metric-spaces.rational-neighborhood-subtypes
 open import metric-spaces.saturated-rational-neighborhood-subtypes
+open import metric-spaces.short-maps-metric-spaces
 
 open import real-numbers.absolute-value-real-numbers
 open import real-numbers.dedekind-real-numbers
@@ -58,6 +60,7 @@ open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.metric-space-of-real-numbers
+open import real-numbers.rational-approximates-of-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
 ```
@@ -463,20 +466,6 @@ module _
   is-in-neighborhood-subtype-ℚ-ℝ =
     is-in-Rational-Neighborhood-Subtype neighborhood-subtype-ℚ-ℝ
 
-  is-proper-neighborhood-subtype-ℚ-ℝ :
-    is-proper-Rational-Neighborhood-Subtype neighborhood-subtype-ℚ-ℝ
-  is-proper-neighborhood-subtype-ℚ-ℝ ε =
-    elim-exists
-      ( ∃ ℚ (neighborhood-subtype-ℚ-ℝ ε))
-      ( λ y (Nxy , rat-y@(q , K)) →
-        intro-exists
-          ( rational-rational-ℝ (y , rat-y))
-          ( tr
-            ( neighborhood-ℝ l ε x)
-            ( eq-raise-real-rational-is-rational-ℝ K)
-            ( Nxy)))
-      ( is-dense-subset-rational-ℝ l x ε)
-
   is-saturated-neighborhood-subtype-ℚ-ℝ :
     is-saturated-Rational-Neighborhood-Subtype neighborhood-subtype-ℚ-ℝ
   is-saturated-neighborhood-subtype-ℚ-ℝ (ε , p) =
@@ -545,7 +534,7 @@ module _
   cauchy-filter-ℚ-ℝ : cauchy-filter-ℚ l
   cauchy-filter-ℚ-ℝ =
     ( neighborhood-subtype-ℚ-ℝ ,
-      is-proper-neighborhood-subtype-ℚ-ℝ ,
+      exists-rational-approximate-ℝ x ,
       is-saturated-neighborhood-subtype-ℚ-ℝ ,
       is-local-neighborhood-subtype-ℚ-ℝ)
 ```
@@ -556,3 +545,47 @@ TODO:
 
 - `real-cauchy-filter-ℚ`/`cauchy-filter-ℚ-ℝ` is aan isometry;
 - `real-cauchy-filter-ℚ`/`cauchy-filter-ℚ-ℝ` is an equivalence.
+
+```agda
+module _
+  {l : Level}
+  where abstract
+
+  is-short-map-cauchy-filter-ℚ-ℝ :
+    is-short-map-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-cauchy-filter-ℚ l)
+      ( cauchy-filter-ℚ-ℝ)
+  is-short-map-cauchy-filter-ℚ-ℝ d x y Nxy (α , β , u , v) Rxu Ryv =
+    reflects-neighborhoods-map-isometry-Metric-Space
+      ( metric-space-ℚ)
+      ( metric-space-ℝ l)
+      ( isometry-raise-real-ℚ l)
+      ( α +ℚ⁺ β +ℚ⁺ d)
+      ( u)
+      ( v)
+      ( inv-tr
+        ( λ ε → neighborhood-ℝ l ε (raise-real-ℚ l u) (raise-real-ℚ l v))
+        ( associative-add-ℚ⁺ α β d ∙ ap (add-ℚ⁺ α) (commutative-add-ℚ⁺ β d))
+        ( Nuv))
+    where
+
+    Nuv :
+      neighborhood-ℝ l (α +ℚ⁺ (d +ℚ⁺ β)) (raise-real-ℚ l u) (raise-real-ℚ l v)
+    Nuv =
+      is-triangular-neighborhood-ℝ
+        ( raise-real-ℚ l u)
+        ( x)
+        ( raise-real-ℚ l v)
+        ( α)
+        ( d +ℚ⁺ β)
+        ( is-triangular-neighborhood-ℝ
+          ( x)
+          ( y)
+          ( raise-real-ℚ l v)
+          ( d)
+          ( β)
+          ( Ryv)
+          ( Nxy))
+        ( is-symmetric-neighborhood-ℝ α x (raise-real-ℚ l u) Rxu)
+```
