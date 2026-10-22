@@ -49,6 +49,7 @@ open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-structures-on-squares public
 open import orthogonal-factorization-systems.lifts-families-of-elements public
 open import orthogonal-factorization-systems.lifts-maps public
+open import orthogonal-factorization-systems.localizations-at-families-of-maps public
 open import orthogonal-factorization-systems.localizations-at-global-subuniverses public
 open import orthogonal-factorization-systems.localizations-at-maps public
 open import orthogonal-factorization-systems.localizations-at-subuniverses public
