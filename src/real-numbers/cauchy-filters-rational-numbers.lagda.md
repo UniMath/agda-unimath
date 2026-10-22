@@ -543,8 +543,10 @@ module _
 
 TODO:
 
-- `real-cauchy-filter-ℚ`/`cauchy-filter-ℚ-ℝ` is aan isometry;
+- `real-cauchy-filter-ℚ`/~`cauchy-filter-ℚ-ℝ`~ is an isometry;
 - `real-cauchy-filter-ℚ`/`cauchy-filter-ℚ-ℝ` is an equivalence.
+
+### The map `cauchy-filter-ℚ-ℝ` is an isometry
 
 ```agda
 module _
@@ -588,4 +590,113 @@ module _
           ( Ryv)
           ( Nxy))
         ( is-symmetric-neighborhood-ℝ α x (raise-real-ℚ l u) Rxu)
+
+  is-expansive-map-cauchy-filter-ℚ-ℝ :
+    is-expansive-map-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-cauchy-filter-ℚ l)
+      ( cauchy-filter-ℚ-ℝ)
+  is-expansive-map-cauchy-filter-ℚ-ℝ d x y N-filter-xy =
+    is-saturated-neighborhood-ℝ d x y saturate-Nxy
+    where
+
+    saturate-Nxy :
+      (μ : ℚ⁺) → neighborhood-ℝ l (d +ℚ⁺ μ) x y
+    saturate-Nxy μ =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( neighborhood-prop-ℝ l (d +ℚ⁺ μ) x y)
+      in do
+        (ε , ε+ε<μ) ← double-le-ℚ⁺ μ
+        (δ , δ+δ<ε) ← double-le-ℚ⁺ ε
+        (p , Nxp) ← exists-rational-approximate-ℝ x δ
+        (q , Nyq) ← exists-rational-approximate-ℝ y δ
+
+        let
+          Nxy : neighborhood-ℝ l (δ +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ d) +ℚ⁺ δ) x y
+          Nxy =
+            is-triangular-neighborhood-ℝ
+              ( x)
+              ( raise-real-ℚ l q)
+              ( y)
+              ( δ +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ d))
+              ( δ)
+              ( is-symmetric-neighborhood-ℝ δ y (raise-real-ℚ l q) Nyq)
+              ( is-triangular-neighborhood-ℝ
+                ( x)
+                ( raise-real-ℚ l p)
+                ( raise-real-ℚ l q)
+                ( δ)
+                ( δ +ℚ⁺ δ +ℚ⁺ d)
+                ( preserves-neighborhoods-map-isometry-Metric-Space
+                  ( metric-space-ℚ)
+                  ( metric-space-ℝ l)
+                  ( isometry-raise-real-ℚ l)
+                  ( δ +ℚ⁺ δ +ℚ⁺ d)
+                  ( p)
+                  ( q)
+                  ( N-filter-xy (δ , δ , p , q) Nxp Nyq))
+                ( Nxp))
+
+          interchange-δd :
+            (δ +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ d) +ℚ⁺ δ) ＝ (d +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ (δ +ℚ⁺ δ)))
+          interchange-δd =
+            commutative-add-ℚ⁺ (δ +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ d)) δ ∙
+            inv (associative-add-ℚ⁺ δ δ (δ +ℚ⁺ δ +ℚ⁺ d)) ∙
+            commutative-add-ℚ⁺ (δ +ℚ⁺ δ) (δ +ℚ⁺ δ +ℚ⁺ d) ∙
+            ap (λ z → add-ℚ⁺ z (δ +ℚ⁺ δ)) (commutative-add-ℚ⁺ (δ +ℚ⁺ δ) d) ∙
+            associative-add-ℚ⁺ d (δ +ℚ⁺ δ) (δ +ℚ⁺ δ)
+
+          le-δμ : le-ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ (δ +ℚ⁺ δ)) μ
+          le-δμ =
+            transitive-le-ℚ⁺
+              ( δ +ℚ⁺ δ +ℚ⁺ (δ +ℚ⁺ δ))
+              ( ε +ℚ⁺ ε)
+              ( μ)
+              ( ε+ε<μ)
+              ( preserves-le-add-ℚ⁺
+                { δ +ℚ⁺ δ}
+                { ε}
+                { δ +ℚ⁺ δ}
+                { ε}
+                ( δ+δ<ε)
+                ( δ+δ<ε))
+
+        monotonic-neighborhood-ℝ
+          ( x)
+          ( y)
+          ( δ +ℚ⁺ (δ +ℚ⁺ δ +ℚ⁺ d) +ℚ⁺ δ)
+          ( d +ℚ⁺ μ)
+          ( inv-tr
+            ( λ z → le-ℚ⁺ z (d +ℚ⁺ μ))
+            ( interchange-δd)
+            ( preserves-le-right-add-ℚ⁺ d (δ +ℚ⁺ δ +ℚ⁺ (δ +ℚ⁺ δ)) μ le-δμ))
+          ( Nxy)
+
+  is-isometry-cauchy-filter-ℚ-ℝ :
+    is-isometry-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-cauchy-filter-ℚ l)
+      ( cauchy-filter-ℚ-ℝ)
+  is-isometry-cauchy-filter-ℚ-ℝ =
+    is-isometry-is-expansive-map-is-short-map-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-cauchy-filter-ℚ l)
+      ( cauchy-filter-ℚ-ℝ)
+      ( is-short-map-cauchy-filter-ℚ-ℝ)
+      ( is-expansive-map-cauchy-filter-ℚ-ℝ)
+```
+
+```agda
+module _
+  {l : Level}
+  where
+
+  isometry-cauchy-filter-ℚ-ℝ :
+    isometry-Metric-Space
+      ( metric-space-ℝ l)
+      ( metric-space-cauchy-filter-ℚ l)
+  isometry-cauchy-filter-ℚ-ℝ =
+    ( cauchy-filter-ℚ-ℝ , is-isometry-cauchy-filter-ℚ-ℝ)
 ```
