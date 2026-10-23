@@ -29,6 +29,7 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
@@ -543,10 +544,12 @@ module _
 
 TODO:
 
-- `real-cauchy-filter-ℚ`/~`cauchy-filter-ℚ-ℝ`~ is an isometry;
-- `real-cauchy-filter-ℚ`/`cauchy-filter-ℚ-ℝ` is an equivalence.
+- [x] `cauchy-filter-ℚ-ℝ` is an isometry;
+- [ ] `real-cauchy-filter-ℚ` is an isometry;
+- [x] `real-cauchy-filter-ℚ ∘ cauchy-filter-ℚ-ℝ ∼ id`;
+- [ ] `cauchy-filter-ℚ-ℝ ∘ real-cauchy-filter-ℚ ∼ id`;
 
-### The map `cauchy-filter-ℚ-ℝ` is an isometry
+### The map cauchy-filter-ℚ-ℝ is an isometry
 
 ```agda
 module _
@@ -699,4 +702,97 @@ module _
       ( metric-space-cauchy-filter-ℚ l)
   isometry-cauchy-filter-ℚ-ℝ =
     ( cauchy-filter-ℚ-ℝ , is-isometry-cauchy-filter-ℚ-ℝ)
+```
+
+### Inverse laws
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where abstract
+
+  opaque
+    unfolding leq-ℝ
+
+    is-upper-section-real-cauchy-filter-ℚ :
+      leq-ℝ x (real-cauchy-filter-ℚ (cauchy-filter-ℚ-ℝ x))
+    is-upper-section-real-cauchy-filter-ℚ p p<x =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ( ℚ⁺ × ℚ)
+                ( λ (ε , q) →
+                  ( le-ℚ-Prop (p +ℚ rational-ℚ⁺ ε) q) ∧
+                  ( neighborhood-prop-ℝ l ε x (raise-real-ℚ l q))))
+      in do
+        ( r , p<r , r<x) ←
+          forward-implication
+            ( is-rounded-lower-cut-ℝ x p)
+            ( p<x)
+
+        let
+          ε : ℚ⁺
+          ε = positive-diff-le-ℚ p<r
+
+        (q , x<q , Nxq) ← exists-rational-approximate-above-ℝ x ε
+
+        let
+          le-pε-q : le-ℚ (p +ℚ rational-ℚ⁺ ε) q
+          le-pε-q =
+            inv-tr
+              ( λ z → le-ℚ z q)
+              ( right-law-positive-diff-le-ℚ p<r)
+              ( le-lower-upper-cut-ℝ x r<x x<q)
+
+        intro-exists (ε , q) (le-pε-q , Nxq)
+
+  opaque
+    unfolding leq-ℝ'
+
+    is-lower-section-real-cauchy-filter-ℚ :
+      leq-ℝ' (real-cauchy-filter-ℚ (cauchy-filter-ℚ-ℝ x)) x
+    is-lower-section-real-cauchy-filter-ℚ q x<q =
+      let
+        open
+          do-syntax-trunc-Prop
+            ( ∃ ( ℚ⁺ × ℚ)
+                ( λ (ε , p) →
+                  ( le-ℚ-Prop (p +ℚ rational-ℚ⁺ ε) q) ∧
+                  ( neighborhood-prop-ℝ l ε x (raise-real-ℚ l p))))
+      in do
+        ( r , r<q , x<r) ←
+          forward-implication
+            ( is-rounded-upper-cut-ℝ x q)
+            ( x<q)
+        let
+          ε : ℚ⁺
+          ε = positive-diff-le-ℚ r<q
+
+        (p , p<x , Nxp) ← exists-rational-approximate-below-ℝ x ε
+
+        let
+          le-pε-q : le-ℚ (p +ℚ rational-ℚ⁺ ε) q
+          le-pε-q =
+            tr
+              ( λ z → le-ℚ (p +ℚ rational-ℚ⁺ ε) z)
+              ( right-law-positive-diff-le-ℚ r<q)
+              ( preserves-le-left-add-ℚ
+                ( rational-ℚ⁺ ε)
+                ( p)
+                ( r)
+                ( le-lower-upper-cut-ℝ x p<x x<r))
+
+        intro-exists (ε , p) (le-pε-q , Nxp)
+
+  is-section-real-cauchy-filter-ℚ :
+    real-cauchy-filter-ℚ (cauchy-filter-ℚ-ℝ x) ＝ x
+  is-section-real-cauchy-filter-ℚ =
+    antisymmetric-leq-ℝ
+      ( real-cauchy-filter-ℚ (cauchy-filter-ℚ-ℝ x))
+      ( x)
+      ( leq-leq'-ℝ
+        ( real-cauchy-filter-ℚ (cauchy-filter-ℚ-ℝ x))
+        ( x)
+        ( is-lower-section-real-cauchy-filter-ℚ))
+      ( is-upper-section-real-cauchy-filter-ℚ)
 ```
