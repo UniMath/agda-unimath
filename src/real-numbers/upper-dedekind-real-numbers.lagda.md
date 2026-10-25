@@ -15,6 +15,7 @@ open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.rounded-upper-subsets-rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.conjunction
@@ -25,6 +26,7 @@ open import foundation.dependent-products-truncated-types
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -195,6 +197,30 @@ module _
   eq-sim-cut-upper-ℝ : sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) → x ＝ y
   eq-sim-cut-upper-ℝ =
     eq-eq-cut-upper-ℝ ∘ eq-sim-subtype (cut-upper-ℝ x) (cut-upper-ℝ y)
+```
+
+### Any inhabited rounded upper subset of rational numbers defines an upper real
+
+```agda
+module _
+  {l : Level}
+  (U : rounded-upper-type-ℚ l)
+  (H : is-inhabited-subtype (subtype-rounded-upper-type-ℚ U))
+  where
+
+  upper-real-is-inhabited-rounded-upper-type-ℚ : upper-ℝ l
+  pr1 upper-real-is-inhabited-rounded-upper-type-ℚ =
+    subtype-rounded-upper-type-ℚ U
+  pr2 upper-real-is-inhabited-rounded-upper-type-ℚ =
+    ( H ,
+      λ q →
+        ( is-rounded-upper-type-rounded-upper-type-ℚ U q ,
+          elim-exists
+            ( subtype-rounded-upper-type-ℚ U q)
+            ( λ r (r<q , Ur) →
+              is-upwards-rounded-upper-type-ℚ U r q
+                ( leq-le-ℚ r<q)
+                ( Ur))))
 ```
 
 ## See also
