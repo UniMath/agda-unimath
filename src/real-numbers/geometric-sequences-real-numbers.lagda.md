@@ -42,6 +42,7 @@ open import real-numbers.multiplication-real-numbers
 open import real-numbers.multiplicative-inverses-nonzero-real-numbers
 open import real-numbers.nonzero-real-numbers
 open import real-numbers.powers-real-numbers
+open import real-numbers.powers-real-numbers-absolute-value-less-than-one
 open import real-numbers.raising-universe-levels-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers

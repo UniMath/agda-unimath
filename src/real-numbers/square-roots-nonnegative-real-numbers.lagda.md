@@ -62,6 +62,7 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-nonnegative-real-numbers
 open import real-numbers.similarity-real-numbers
+open import real-numbers.squares-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequality-nonnegative-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -73,9 +74,10 @@ open import real-numbers.strict-inequality-real-numbers
 
 The
 {{#concept "square root" WDID=Q134237 WD="square root" Agda=sqrt-ℝ⁰⁺ Disambiguation="of a nonnegative real number"}}
-of a [nonnegative](real-numbers.nonnegative-real-numbers.md)
-[real number](real-numbers.dedekind-real-numbers.md) `x` is the unique
-nonnegative real number `y` such that `y * y = x`.
+operation on the
+[nonnegative real numbers](real-numbers.nonnegative-real-numbers.md) is the
+inverse to the
+[squaring operation](real-numbers.squares-nonnegative-real-numbers.md).
 
 ## Definition
 
@@ -580,13 +582,13 @@ sqrt-one-ℝ⁰⁺ = eq-ℝ⁰⁺ _ _ real-sqrt-one-ℝ⁰⁺
 
 ```agda
 abstract
-  is-section-square-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) ＝ x
-  is-section-square-ℝ⁰⁺ x =
+  is-section-sqrt-ℝ⁰⁺ : {l : Level} (x : ℝ⁰⁺ l) → square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x) ＝ x
+  is-section-sqrt-ℝ⁰⁺ x =
     eq-ℝ⁰⁺ (square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x)) x (eq-real-square-sqrt-ℝ⁰⁺ x)
 
-  is-retraction-square-ℝ⁰⁺ :
+  is-retraction-sqrt-ℝ⁰⁺ :
     {l : Level} (x : ℝ⁰⁺ l) → sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ x) ＝ x
-  is-retraction-square-ℝ⁰⁺ x =
+  is-retraction-sqrt-ℝ⁰⁺ x =
     eq-ℝ⁰⁺
       ( sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ x))
       ( x)
@@ -596,8 +598,8 @@ is-equiv-square-ℝ⁰⁺ : (l : Level) → is-equiv (square-ℝ⁰⁺ {l})
 is-equiv-square-ℝ⁰⁺ l =
   is-equiv-is-invertible
     ( sqrt-ℝ⁰⁺)
-    ( is-section-square-ℝ⁰⁺)
-    ( is-retraction-square-ℝ⁰⁺)
+    ( is-section-sqrt-ℝ⁰⁺)
+    ( is-retraction-sqrt-ℝ⁰⁺)
 
 equiv-square-ℝ⁰⁺ : (l : Level) → Aut (ℝ⁰⁺ l)
 equiv-square-ℝ⁰⁺ l = (square-ℝ⁰⁺ , is-equiv-square-ℝ⁰⁺ l)
@@ -664,8 +666,8 @@ abstract
                     ap
                       ( real-ℝ⁰⁺)
                       ( ap-mul-ℝ⁰⁺
-                        ( is-section-square-ℝ⁰⁺ x)
-                        ( is-section-square-ℝ⁰⁺ y)))))))
+                        ( is-section-sqrt-ℝ⁰⁺ x)
+                        ( is-section-sqrt-ℝ⁰⁺ y)))))))
 ```
 
 ### The square root of a nonnegative real number is positive if and only if the real number is positive
@@ -756,10 +758,10 @@ abstract
   leq-sqrt-leq-one-ℝ⁰⁺ x⁰⁺@(x , _) 1≤x =
     tr
       ( leq-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x⁰⁺))
-      ( is-retraction-square-ℝ⁰⁺ x⁰⁺)
+      ( is-retraction-sqrt-ℝ⁰⁺ x⁰⁺)
       ( preserves-leq-sqrt-ℝ⁰⁺
         ( x⁰⁺)
-        ( nonnegative-square-ℝ x)
+        ( square-ℝ⁰⁺ x⁰⁺)
         ( binary-tr
           ( leq-ℝ)
           ( right-unit-law-mul-ℝ x)

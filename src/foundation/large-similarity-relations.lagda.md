@@ -62,7 +62,7 @@ record
 
   field
     eq-sim-Large-Similarity-Relation :
-      {l : Level} → (x y : X l) → sim-Large-Similarity-Relation x y → x ＝ y
+      {l : Level} (x y : X l) → sim-Large-Similarity-Relation x y → x ＝ y
 
   sim-eq-Large-Similarity-Relation :
     {l : Level} {x y : X l} → x ＝ y → sim-Large-Similarity-Relation x y
