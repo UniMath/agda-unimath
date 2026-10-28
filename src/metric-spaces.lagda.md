@@ -125,6 +125,8 @@ open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-metric-spaces public
 open import metric-spaces.limits-of-cauchy-approximations-pseudometric-spaces public
+open import metric-spaces.limits-of-cauchy-filters-metric-spaces public
+open import metric-spaces.limits-of-cauchy-filters-pseudometric-spaces public
 open import metric-spaces.limits-of-cauchy-sequences-metric-spaces public
 open import metric-spaces.limits-of-maps-metric-spaces public
 open import metric-spaces.limits-of-modulated-cauchy-sequences-metric-spaces public
