@@ -71,7 +71,7 @@ module _
 
   is-approximation-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l3)
   is-approximation-prop-Metric-Space =
-    is-full-subtype-Prop
+    is-full-prop-subtype
       ( union-family-of-subtypes
         { I = type-subtype S}
         ( λ (s , s∈S) → neighborhood-prop-Metric-Space X ε s))
