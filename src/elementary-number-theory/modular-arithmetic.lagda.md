@@ -11,9 +11,11 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers
@@ -154,14 +156,26 @@ abstract
 
   int-ℤ-Mod-bounded :
     (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
-    leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
+    leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ k)
   int-ℤ-Mod-bounded zero-ℕ (inr x) = star
-  int-ℤ-Mod-bounded (succ-ℕ k) (inl x) =
-    is-nonnegative-succ-is-nonnegative-ℤ
-      ( int-ℤ-Mod-bounded k x)
-  int-ℤ-Mod-bounded (succ-ℕ k) (inr x) =
-    is-nonnegative-succ-is-nonnegative-ℤ
-      ( is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+  int-ℤ-Mod-bounded (succ-ℕ k) (inl (inl x)) =
+    transitive-leq-ℤ
+      ( int-ℕ (nat-Fin k x))
+      ( int-ℕ k)
+      ( in-pos-ℤ k)
+      ( leq-int-ℕ k (succ-ℕ k) (succ-leq-ℕ k))
+      ( leq-int-ℕ (nat-Fin k x) k (upper-bound-nat-Fin' k x))
+  int-ℤ-Mod-bounded (succ-ℕ k) (inl (inr star)) =
+    is-nonnegative-eq-ℤ
+      ( ( inv
+          ( ( left-successor-law-diff-ℤ (int-ℕ k) (int-ℕ k)) ∙
+            ( ap succ-ℤ (is-zero-diff-ℤ' (int-ℕ k))))) ∙
+        ( ap (_-ℤ int-ℕ k) (succ-int-ℕ k)))
+      ( star)
+  int-ℤ-Mod-bounded (succ-ℕ k) (inr star) =
+    is-nonnegative-eq-ℤ
+      ( inv (right-inverse-law-add-ℤ (in-pos-ℤ k)))
+      ( star)
 ```
 
 ## The successor and predecessor functions on the integers modulo `k`
