@@ -164,7 +164,8 @@ $(WEBSITE_CSS)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(WEB
 
 $(WEBSITE_IMAGES)/agda_dependency_graph.svg $(WEBSITE_IMAGES)/agda_dependency_graph_legend.html &: ${AGDAFILES}
 	@echo Generating dependency graph art by Fredrik
-	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || true
+	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || \
+		echo "::warning::Dependency graph generation failed; continuing website build." >&2
 
 .PHONY: website-prepare
 website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
