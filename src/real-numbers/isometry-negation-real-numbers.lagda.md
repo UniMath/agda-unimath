@@ -74,10 +74,10 @@ module _
   where
 
   abstract
-    neg-neighborhood-ℝ : (d : ℚ⁺) (x y : ℝ l1) →
+    is-short-map-neg-ℝ : (d : ℚ⁺) (x y : ℝ l1) →
       neighborhood-ℝ l1 d x y →
       neighborhood-ℝ l1 d (neg-ℝ x) (neg-ℝ y)
-    neg-neighborhood-ℝ d x y H =
+    is-short-map-neg-ℝ d x y H =
       neighborhood-real-bound-each-leq-ℝ
         ( d)
         ( neg-ℝ x)
@@ -108,12 +108,12 @@ module _
         ( metric-space-ℝ l1)
         ( neg-ℝ)
     is-isometry-neg-ℝ d x y =
-      ( neg-neighborhood-ℝ d x y) ,
+      ( is-short-map-neg-ℝ d x y) ,
       ( ( binary-tr
           ( neighborhood-ℝ l1 d)
           ( neg-neg-ℝ x)
           ( neg-neg-ℝ y)) ∘
-        ( neg-neighborhood-ℝ
+        ( is-short-map-neg-ℝ
           ( d)
           ( neg-ℝ x)
           ( neg-ℝ y)))
@@ -128,20 +128,6 @@ module _
 ### Negation on the real numbers is short
 
 ```agda
-abstract
-  is-short-map-neg-ℝ :
-    {l : Level} →
-    is-short-map-Metric-Space
-      ( metric-space-ℝ l)
-      ( metric-space-ℝ l)
-      ( neg-ℝ)
-  is-short-map-neg-ℝ =
-    is-short-map-is-isometry-Metric-Space
-      ( metric-space-ℝ _)
-      ( metric-space-ℝ _)
-      ( neg-ℝ)
-      ( is-isometry-neg-ℝ)
-
 short-map-neg-ℝ :
   {l : Level} →
   short-map-Metric-Space

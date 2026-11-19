@@ -18,11 +18,11 @@ open import group-theory.function-abelian-groups
 open import group-theory.subgroups-abelian-groups
 
 open import metric-spaces.cartesian-products-metric-spaces
-open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.maps-metric-spaces
 open import metric-spaces.metric-space-of-uniformly-continuous-maps-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.pseudometric-spaces
+open import metric-spaces.short-maps-metric-spaces
 open import metric-spaces.uniformly-continuous-maps-metric-spaces
 ```
 
@@ -154,26 +154,24 @@ module _
     add-Ab ab-uniformly-continuous-map-Metric-Ab
 
   abstract
-    is-isometry-neg-uniformly-continuous-map-Metric-Ab :
-      is-isometry-Metric-Space
+    is-short-map-neg-uniformly-continuous-map-Metric-Ab :
+      is-short-map-Metric-Space
         ( metric-space-uniformly-continuous-map-Metric-Ab)
         ( metric-space-uniformly-continuous-map-Metric-Ab)
         ( neg-uniformly-continuous-map-Metric-Ab)
-    is-isometry-neg-uniformly-continuous-map-Metric-Ab
-      d f@(map-f , _) g@(map-g , _) =
-      iff-Π-iff-family
-        ( λ x → is-isometry-neg-Metric-Ab G d (map-f x) (map-g x))
+    is-short-map-neg-uniformly-continuous-map-Metric-Ab
+      d f@(map-f , _) g@(map-g , _) Ndfg x =
+      is-short-map-neg-Metric-Ab G d (map-f x) (map-g x) (Ndfg x)
 
-    is-isometry-add-uniformly-continuous-map-Metric-Ab :
+    is-short-map-add-uniformly-continuous-map-Metric-Ab :
       (f : type-uniformly-continuous-map-Metric-Ab) →
-      is-isometry-Metric-Space
+      is-short-map-Metric-Space
         ( metric-space-uniformly-continuous-map-Metric-Ab)
         ( metric-space-uniformly-continuous-map-Metric-Ab)
         ( add-uniformly-continuous-map-Metric-Ab f)
-    is-isometry-add-uniformly-continuous-map-Metric-Ab
-      (map-f , _) d (map-g , _) (map-h , _) =
-      iff-Π-iff-family
-        ( λ x → is-isometry-add-Metric-Ab G (map-f x) d (map-g x) (map-h x))
+    is-short-map-add-uniformly-continuous-map-Metric-Ab
+      (map-f , _) d (map-g , _) (map-h , _) Ndgh x =
+      is-short-map-add-Metric-Ab G (map-f x) d (map-g x) (map-h x) (Ndgh x)
 
   metric-ab-uniformly-continuous-map-Metric-Ab :
     Metric-Ab (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l4)
@@ -182,6 +180,6 @@ module _
       pseudometric-structure-uniformly-continuous-map-Metric-Ab ,
       is-extensional-pseudometric-Metric-Space
         ( metric-space-uniformly-continuous-map-Metric-Ab) ,
-      is-isometry-neg-uniformly-continuous-map-Metric-Ab ,
-      is-isometry-add-uniformly-continuous-map-Metric-Ab)
+      is-short-map-neg-uniformly-continuous-map-Metric-Ab ,
+      is-short-map-add-uniformly-continuous-map-Metric-Ab)
 ```
