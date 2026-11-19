@@ -24,10 +24,10 @@ mathematics from a univalent point of view.
 displayName = "Fredrik Bakke"
 maintainer = true
 usernames = [ "Fredrik Bakke" ]
-homepage = "https://www.ntnu.edu/employees/fredrik.bakke"
+homepage = "https://fredrik-bakke.github.io"
 github = "fredrik-bakke"
 bio = '''
-[Fredrik](https://www.ntnu.edu/employees/fredrik.bakke) is a PhD student at the
+[Fredrik](https://fredrik-bakke.github.io) is a PhD student at the
 Norwegian University of Science and Technology in Trondheim. His research is on
 homotopy type theory and higher category theory.
 '''
