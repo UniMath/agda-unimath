@@ -67,7 +67,7 @@ open import foundation.cantor-schroder-bernstein-escardo using
     Cantor-Schröder-Bernstein)
 ```
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import foundation.cantor-schroder-bernstein-decidable-embeddings using
@@ -104,7 +104,7 @@ open import linear-algebra.cauchy-schwarz-inequality-real-inner-product-spaces u
 
 ### Diaconescu's theorem {#Q3527059}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import foundation.diaconescus-theorem using
@@ -160,7 +160,7 @@ open import real-analysis.constructive-intermediate-value-theorem using
 
 ### Kleene's fixed point theorem {#Q3527263}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import domain-theory.kleenes-fixed-point-theorem-posets using
@@ -173,7 +173,7 @@ open import domain-theory.kleenes-fixed-point-theorem-omega-complete-posets usin
 
 ### Knaster–Tarski fixed point theorem {#Q609612}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import order-theory.knaster-tarski-fixed-point-theorem using
@@ -183,7 +183,7 @@ open import order-theory.knaster-tarski-fixed-point-theorem using
 
 ### Kőnig's theorem (set theory) {#Q1077462}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import set-theory.konigs-theorem using
@@ -201,7 +201,7 @@ open import foundation.lawveres-fixed-point-theorem using
 
 ### Linear congruence theorem {#Q524257}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import elementary-number-theory.linear-congruence-theorem-integers using
@@ -210,7 +210,7 @@ open import elementary-number-theory.linear-congruence-theorem-integers using
 
 ### Monotone convergence theorem {#Q4454933}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import real-analysis.monotone-convergence-theorem-increasing-sequences-real-numbers using
@@ -256,7 +256,7 @@ open import real-numbers.distance-real-numbers using
 
 ### Uniform limit theorem {#Q7885107}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import metric-spaces.uniform-limit-theorem-pointwise-continuous-maps-metric-spaces using
