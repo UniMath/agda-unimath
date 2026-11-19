@@ -457,7 +457,7 @@ module _
   {l1 l2 l1' l2' : Level}
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
   (f : map-Pseudometric-Space A B)
-  where abstract
+  where
 
   is-isometry-is-expansive-map-is-short-map-Pseudometric-Space :
     is-short-map-Pseudometric-Space A B f →
