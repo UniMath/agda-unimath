@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   website:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         agda: ['2.8.0']
@@ -85,7 +85,11 @@ jobs:
           version: '1.2.0'
 
       - name: Install Graphviz
-        run: sudo apt-get install -y graphviz
+        continue-on-error: true
+        run: |
+          # Ubuntu 26.04 packages the sfdp layout engine separately.
+          sudo apt-get update
+          sudo apt-get install -y graphviz libgvplugin-neato-layout8
 
       - uses: actions/setup-python@v5
         with:
