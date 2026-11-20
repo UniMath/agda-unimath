@@ -37,8 +37,8 @@ open import real-numbers.metric-space-of-real-numbers
 open import real-numbers.nonnegative-real-numbers
 open import real-numbers.proper-closed-intervals-real-numbers
 open import real-numbers.subsets-real-numbers
+open import real-numbers.totally-bounded-proper-closed-intervals-real-numbers
 open import real-numbers.totally-bounded-subsets-real-numbers
-open import real-numbers.uniform-homeomorphism-unit-interval-proper-closed-interval-real-numbers
 ```
 
 </details>
