@@ -70,7 +70,7 @@ record
     inclusion-large-subtype large-subtype-Subset-Cumulative-Large-Set
 
   field
-    sim-is-in-Subset-Cumulative-Large-Set :
+    is-closed-under-sim-Subset-Cumulative-Large-Set :
       {l1 l2 : Level}
       (x : type-Cumulative-Large-Set S l1)
       (y : type-Cumulative-Large-Set S l2) →
@@ -78,15 +78,15 @@ record
       is-in-Subset-Cumulative-Large-Set x →
       is-in-Subset-Cumulative-Large-Set y
 
-  sim-is-in-Subset-Cumulative-Large-Set' :
+  is-closed-under-sim-Subset-Cumulative-Large-Set' :
     {l1 l2 : Level}
     (x : type-Cumulative-Large-Set S l1)
     (y : type-Cumulative-Large-Set S l2) →
     sim-Cumulative-Large-Set S x y →
     is-in-Subset-Cumulative-Large-Set y →
     is-in-Subset-Cumulative-Large-Set x
-  sim-is-in-Subset-Cumulative-Large-Set' x y x~y y∈S =
-    sim-is-in-Subset-Cumulative-Large-Set
+  is-closed-under-sim-Subset-Cumulative-Large-Set' x y x~y y∈S =
+    is-closed-under-sim-Subset-Cumulative-Large-Set
       ( y)
       ( x)
       ( symmetric-sim-Cumulative-Large-Set S x y x~y)
@@ -106,19 +106,18 @@ module _
   {γ : Level → Level}
   {X : Cumulative-Large-Set α β}
   (S : Subset-Cumulative-Large-Set γ X)
-  where
+  where abstract
 
-  abstract
-    eq-type-Subset-Cumulative-Large-Set :
-      {l : Level} {x y : type-Subset-Cumulative-Large-Set S l} →
-      ( inclusion-Subset-Cumulative-Large-Set S x ＝
-        inclusion-Subset-Cumulative-Large-Set S y) →
-      x ＝ y
-    eq-type-Subset-Cumulative-Large-Set =
-      eq-type-large-subtype (large-subtype-Subset-Cumulative-Large-Set S)
+  eq-type-Subset-Cumulative-Large-Set :
+    {l : Level} {x y : type-Subset-Cumulative-Large-Set S l} →
+    ( inclusion-Subset-Cumulative-Large-Set S x ＝
+      inclusion-Subset-Cumulative-Large-Set S y) →
+    x ＝ y
+  eq-type-Subset-Cumulative-Large-Set =
+    eq-type-large-subtype (large-subtype-Subset-Cumulative-Large-Set S)
 ```
 
-### `x` is in a subset if and only if `raise l x` is
+### `x` is in a subset of a cumulative large set if and only if `raise l x` is
 
 ```agda
 module _
@@ -135,7 +134,7 @@ module _
       is-in-Subset-Cumulative-Large-Set S x →
       is-in-Subset-Cumulative-Large-Set S (raise-Cumulative-Large-Set X l2 x)
     is-closed-under-raise-Subset-Cumulative-Large-Set l2 x =
-      sim-is-in-Subset-Cumulative-Large-Set
+      is-closed-under-sim-Subset-Cumulative-Large-Set
         ( S)
         ( x)
         ( raise-Cumulative-Large-Set X l2 x)
@@ -146,7 +145,7 @@ module _
       is-in-Subset-Cumulative-Large-Set S (raise-Cumulative-Large-Set X l2 x) →
       is-in-Subset-Cumulative-Large-Set S x
     is-closed-under-raise-Subset-Cumulative-Large-Set' l2 x =
-      sim-is-in-Subset-Cumulative-Large-Set'
+      is-closed-under-sim-Subset-Cumulative-Large-Set'
         ( S)
         ( x)
         ( raise-Cumulative-Large-Set X l2 x)
@@ -161,7 +160,7 @@ module _
       is-closed-under-raise-Subset-Cumulative-Large-Set l2 x x∈S)
 ```
 
-### A subset induces a cumulative large set
+### A subset of a cumulative large set induces a cumulative large set
 
 ```agda
 module _
