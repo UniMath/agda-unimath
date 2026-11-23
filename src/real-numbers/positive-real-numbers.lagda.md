@@ -145,14 +145,20 @@ eq-ℝ⁺ : {l : Level} (x y : ℝ⁺ l) → (real-ℝ⁺ x ＝ real-ℝ⁺ y) �
 eq-ℝ⁺ _ _ = eq-type-subtype is-positive-prop-ℝ
 ```
 
-### A real number is positive if it is greater than a positive real number
+### A real number is positive if it is greater than or equal to a positive real number
 
 ```agda
-abstract
-  is-positive-le-ℝ⁺ :
-    {l1 l2 : Level} (x : ℝ⁺ l1) (y : ℝ l2) → le-ℝ (real-ℝ⁺ x) y →
-    is-positive-ℝ y
-  is-positive-le-ℝ⁺ (x , 0<x) y x<y = transitive-le-ℝ zero-ℝ x y x<y 0<x
+module _
+  {l1 l2 : Level}
+  (x⁺@(x , 0<x) : ℝ⁺ l1)
+  (y : ℝ l2)
+  where abstract
+
+  is-positive-leq-ℝ⁺ : leq-ℝ (real-ℝ⁺ x⁺) y → is-positive-ℝ y
+  is-positive-leq-ℝ⁺ = concatenate-le-leq-ℝ zero-ℝ x y 0<x
+
+  is-positive-le-ℝ⁺ : le-ℝ (real-ℝ⁺ x⁺) y → is-positive-ℝ y
+  is-positive-le-ℝ⁺ x<y = is-positive-leq-ℝ⁺ (leq-le-ℝ x<y)
 ```
 
 ### A real number is positive if and only if zero is in its lower cut

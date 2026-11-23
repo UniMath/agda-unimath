@@ -239,7 +239,7 @@ module _
         ( zero-Seminormed-ℂ-Vector-Space V) ＝
       raise-zero-ℝ l1
     eq-zero-seminorm-zero-Seminormed-ℂ-Vector-Space =
-      eq-zero-seminorm-zero-Seminormed-ℝ-Vector-Space
+      seminorm-zero-Seminormed-ℝ-Vector-Space
         ( seminormed-real-vector-space-Seminormed-ℂ-Vector-Space V)
 ```
 
