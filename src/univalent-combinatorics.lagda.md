@@ -108,6 +108,7 @@ open import univalent-combinatorics.sequences-finite-types public
 open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.sigma-decompositions public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
+open import univalent-combinatorics.skipping-two-elements-standard-finite-types public
 open import univalent-combinatorics.small-types public
 open import univalent-combinatorics.standard-finite-pruned-trees public
 open import univalent-combinatorics.standard-finite-trees public
