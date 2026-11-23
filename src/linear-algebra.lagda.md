@@ -41,6 +41,7 @@ open import linear-algebra.function-left-modules-rings public
 open import linear-algebra.function-real-vector-spaces public
 open import linear-algebra.function-vector-spaces public
 open import linear-algebra.functoriality-grids public
+open import linear-algebra.functoriality-matrices public
 open import linear-algebra.grids public
 open import linear-algebra.grids-on-rings public
 open import linear-algebra.kernels-linear-maps-left-modules-commutative-rings public
