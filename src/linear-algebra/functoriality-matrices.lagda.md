@@ -12,8 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 
 open import linear-algebra.matrices
-
-open import lists.functoriality-tuples
 ```
 
 </details>
@@ -30,18 +28,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  map-matrix : {m n : ℕ} → matrix A m n → matrix B m n
-  map-matrix = map-tuple (map-tuple f)
+  map-matrix : (m n : ℕ) → matrix A m n → matrix B m n
+  map-matrix m n M i j = f (M i j)
 ```
 
 ### Binary maps
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l2}
+  (f : A → B → C)
   where
 
-  binary-map-matrix :
-    {m n : ℕ} → matrix A m n → matrix B m n → matrix C m n
-  binary-map-matrix = binary-map-tuple (binary-map-tuple f)
+  binary-map-matrix : (m n : ℕ) → matrix A m n → matrix B m n → matrix C m n
+  binary-map-matrix m n M N i j = f (M i j) (N i j)
 ```
