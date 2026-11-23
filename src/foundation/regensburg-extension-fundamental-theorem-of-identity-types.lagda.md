@@ -142,7 +142,7 @@ asserts that the following are equivalent:
 
 This unbased extension of the fundamental theorem was not stated or proved at
 the Regensburg summer school, but was later contributed by
-[Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke) in January 2025.
+[Fredrik Bakke](https://fredrik-bakke.github.io) in January 2025.
 
 ```agda
 module _

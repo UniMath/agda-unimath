@@ -413,7 +413,7 @@ module _
 transformations to satisfy the following equality:
 
 $$
-  α₁ (f ∘ x) (a , id) = ap (Q f) (α₁ x (a , id)) ∙ α₁ f (a , x),
+  α₁ (f ∘ x) (a , \id) = \ap (Q(f)) (α₁(x)(a , \id)) ∙ α₁(f)(a , x),
 $$
 
 which is an instance of the unfolded condition that the naturality square of a

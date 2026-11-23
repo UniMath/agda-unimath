@@ -31,7 +31,7 @@ open import set-theory.cardinals
 ## Idea
 
 Two [cardinals](set-theory.cardinals.md) `X` and `Y` are
-{{#concept "similar" Disambiguation="set-cardinals" Agda=sim-Cardinal}} if there
+{{#concept "similar" Disambiguation="cardinals" Agda=sim-Cardinal}} if there
 [merely exists](foundation.inhabited-types.md) an
 [equivalence](foundation-core.equivalences.md) between any two representing
 [sets](foundation-core.sets.md). This characterizes
