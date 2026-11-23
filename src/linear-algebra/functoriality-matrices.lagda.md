@@ -1,4 +1,4 @@
-# Functoriality of the type of grids
+# Functoriality of the type of matrices
 
 ```agda
 module linear-algebra.functoriality-matrices where
