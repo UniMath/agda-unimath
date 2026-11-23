@@ -255,12 +255,12 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  constant-zero-polynomial-Commutative-Semiring :
+  compute-constant-zero-polynomial-Commutative-Semiring :
     constant-polynomial-Commutative-Semiring R (zero-Commutative-Semiring R) ＝
     zero-polynomial-Commutative-Semiring R
-  constant-zero-polynomial-Commutative-Semiring =
+  compute-constant-zero-polynomial-Commutative-Semiring =
     eq-polynomial-Commutative-Semiring R
-      ( constant-zero-formal-power-series-Commutative-Semiring R)
+      ( compute-constant-zero-formal-power-series-Commutative-Semiring R)
 ```
 
 ### The constant one polynomial is the constant polynomial with value one
@@ -270,12 +270,12 @@ module _
   {l : Level} (R : Commutative-Semiring l)
   where
 
-  constant-one-polynomial-Commutative-Semiring :
+  compute-constant-one-polynomial-Commutative-Semiring :
     constant-polynomial-Commutative-Semiring R (one-Commutative-Semiring R) ＝
     one-polynomial-Commutative-Semiring R
-  constant-one-polynomial-Commutative-Semiring =
+  compute-constant-one-polynomial-Commutative-Semiring =
     eq-polynomial-Commutative-Semiring R
-      ( constant-one-formal-power-series-Commutative-Semiring R)
+      ( compute-constant-one-formal-power-series-Commutative-Semiring R)
 ```
 
 ### Evaluation of polynomials
@@ -1169,7 +1169,7 @@ module _
   constant-polynomial-hom-Commutative-Semiring =
     ( ( ( constant-polynomial-Commutative-Semiring R ,
           preserves-add-constant-polynomial-Commutative-Semiring) ,
-        constant-zero-polynomial-Commutative-Semiring R) ,
+        compute-constant-zero-polynomial-Commutative-Semiring R) ,
       preserves-mul-constant-polynomial-Commutative-Semiring ,
-      constant-one-polynomial-Commutative-Semiring R)
+      compute-constant-one-polynomial-Commutative-Semiring R)
 ```
