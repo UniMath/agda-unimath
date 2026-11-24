@@ -311,6 +311,12 @@ module _
       ( ind-Maybe (h , h∞))
 ```
 
+## See also
+
+- For the inclusion of the natural numbers into
+  [the conatural numbers](elementary-number-theory.conatural-numbers.md) see
+  [the inclusion of natural numbers into the conatural numbers](elementary-number-theory.inclusion-natural-numbers-conatural-numbers.md)
+
 ## References
 
 - [`CoNaturals.GenericConvergentSequence`](https://martinescardo.github.io/TypeTopology/CoNaturals.GenericConvergentSequence.html)
