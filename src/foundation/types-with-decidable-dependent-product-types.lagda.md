@@ -28,6 +28,7 @@ open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
@@ -93,13 +94,11 @@ has-decidable-Π-double-negation-dense-map :
 has-decidable-Π-double-negation-dense-map h f P =
   map-coproduct
     ( λ p x →
-      rec-coproduct
-        ( id)
+      map-right-unit-law-coproduct-is-empty
         ( λ np →
-          ex-falso
-            ( is-double-negation-dense-map-double-negation-dense-map h x
-              ( λ yp →
-                np (tr (family-decidable-family P) (pr2 yp) (p (pr1 yp))))))
+          is-double-negation-dense-map-double-negation-dense-map h x
+            ( λ yp →
+              np (tr (family-decidable-family P) (pr2 yp) (p (pr1 yp)))))
         ( is-decidable-decidable-family P x))
     ( λ nph p → nph (p ∘ map-double-negation-dense-map h))
     ( f (base-change-decidable-family P (map-double-negation-dense-map h)))
@@ -311,9 +310,8 @@ has-decidable-Π-has-decidable-Σ f P =
     ( λ nxnp →
       inl
         ( λ x →
-          rec-coproduct
-            ( id)
-            ( λ np → ex-falso (nxnp (x , np)))
+          map-right-unit-law-coproduct-is-empty
+            ( λ np → nxnp (x , np))
             ( is-decidable-decidable-family P x)))
     ( f (neg-decidable-family P))
 ```

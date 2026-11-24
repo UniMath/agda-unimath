@@ -16,6 +16,7 @@ open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.propositions
 open import foundation.tight-apartness-relations
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -109,11 +110,10 @@ module _
       rec-coproduct
         ( inl-disjunction)
         ( λ ¬a#a' →
-          rec-coproduct
-            ( inr-disjunction)
-            ( λ ¬b#b' →
-              ex-falso
-                ( nonequal-apart-Apartness-Relation RC
+          inr-disjunction
+            ( map-right-unit-law-coproduct-is-empty
+              ( λ ¬b#b' →
+                nonequal-apart-Apartness-Relation RC
                   ( f a b)
                   ( f a' b')
                   ( fab#fa'b')
@@ -126,7 +126,7 @@ module _
                     ( is-tight-apartness-relation-Tight-Apartness-Relation RB
                       ( b)
                       ( b')
-                      ( ¬b#b')))))
-            ( DB b b'))
+                      ( ¬b#b'))))
+              ( DB b b')))
         ( DA a a')
 ```

@@ -192,12 +192,7 @@ module _
         Σ ( base-Enriched-Directed-Tree A B T)
           ( walk-Enriched-Directed-Tree A B T x ∘
             node-base-Enriched-Directed-Tree A B T))
-      ( left-unit-law-coproduct-is-empty
-        ( is-root-Enriched-Directed-Tree A B T x)
-        ( Σ ( base-Enriched-Directed-Tree A B T)
-            ( walk-Enriched-Directed-Tree A B T x ∘
-              node-base-Enriched-Directed-Tree A B T))
-        ( f))
+      ( left-unit-law-coproduct-is-empty f)
       ( unique-walk-to-base-Enriched-Directed-Tree x)
 
   unique-walk-to-base-direct-successor-Enriched-Directed-Tree :

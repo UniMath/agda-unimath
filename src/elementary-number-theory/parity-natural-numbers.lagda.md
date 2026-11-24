@@ -27,6 +27,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -256,11 +257,11 @@ abstract
     rec-coproduct
       ( inl)
       ( λ is-odd-x →
-        rec-coproduct
-          ( inr)
-          ( λ is-odd-y →
-            ex-falso (is-odd-mul-is-odd-ℕ x y is-odd-x is-odd-y is-even-xy))
-          ( is-decidable-is-even-ℕ y))
+        inr
+          ( map-right-unit-law-coproduct-is-empty
+            ( λ is-odd-y →
+              is-odd-mul-is-odd-ℕ x y is-odd-x is-odd-y is-even-xy)
+            ( is-decidable-is-even-ℕ y)))
       ( is-decidable-is-even-ℕ x)
 ```
 

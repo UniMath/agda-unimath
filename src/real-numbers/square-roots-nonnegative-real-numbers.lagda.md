@@ -48,6 +48,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -346,34 +347,30 @@ module _
                     ( q<[a,b][c,d])
                     ( transitive-leq-ℚ _ r _ lb1 lb2))
               is-nonneg-a =
-                rec-coproduct
+                map-left-unit-law-coproduct-is-empty
                   ( λ is-neg-a →
-                    ex-falso
-                      ( is-not-negative-and-positive-ℚ
-                        ( is-negative-mul-negative-positive-ℚ
-                            ( is-neg-a)
-                            ( is-pos-d) ,
-                          is-pos-xy
-                            ( a)
-                            ( d)
-                            ( leq-right-min-ℚ _ _)
-                            ( leq-left-min-ℚ _ _))))
-                  ( id)
+                    is-not-negative-and-positive-ℚ
+                      ( is-negative-mul-negative-positive-ℚ
+                          ( is-neg-a)
+                          ( is-pos-d) ,
+                        is-pos-xy
+                          ( a)
+                          ( d)
+                          ( leq-right-min-ℚ _ _)
+                          ( leq-left-min-ℚ _ _)))
                   ( decide-is-negative-is-nonnegative-ℚ a)
               is-nonneg-c =
-                rec-coproduct
+                map-left-unit-law-coproduct-is-empty
                   ( λ is-neg-c →
-                    ex-falso
-                      ( is-not-negative-and-positive-ℚ
-                        ( is-negative-mul-positive-negative-ℚ
-                            ( is-pos-b)
-                            ( is-neg-c) ,
-                          is-pos-xy
-                            ( b)
-                            ( c)
-                            ( leq-left-min-ℚ _ _)
-                            ( leq-right-min-ℚ _ _))))
-                  ( id)
+                    is-not-negative-and-positive-ℚ
+                      ( is-negative-mul-positive-negative-ℚ
+                          ( is-pos-b)
+                          ( is-neg-c) ,
+                        is-pos-xy
+                          ( b)
+                          ( c)
+                          ( leq-left-min-ℚ _ _)
+                          ( leq-right-min-ℚ _ _)))
                   ( decide-is-negative-is-nonnegative-ℚ c)
               a' = max-ℚ a c
               a'²<x : is-in-lower-cut-ℝ⁰⁺ x (a' *ℚ a')

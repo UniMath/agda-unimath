@@ -524,8 +524,6 @@ abstract
   is-injective-left-mul-ℤ x f {y} {z} p =
     eq-diff-ℤ
       ( map-left-unit-law-coproduct-is-empty
-        ( is-zero-ℤ x)
-        ( is-zero-ℤ (y -ℤ z))
         ( f)
         ( is-zero-is-zero-mul-ℤ x
           ( y -ℤ z)

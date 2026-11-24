@@ -478,11 +478,6 @@ module _
       ( root-coalgebra w ＝
         root-coalgebra w)
       ( right-unit-law-coproduct-is-empty
-        ( root-coalgebra w ＝
-          root-coalgebra w)
-        ( Σ ( node-element-coalgebra X w)
-            ( edge-element-coalgebra X w
-              ( root-coalgebra w)))
         ( no-edge-from-root-element-coalgebra w))
       ( is-contr-loop-space-root-element-coalgebra
         ( X)
@@ -494,11 +489,6 @@ module _
           ( edge-element-coalgebra X w
             ( node-inclusion-element-coalgebra H x)))
       ( left-unit-law-coproduct-is-empty
-        ( root-coalgebra w ＝
-          node-inclusion-element-coalgebra H x)
-        ( Σ ( node-element-coalgebra X w)
-            ( edge-element-coalgebra X w
-              ( node-inclusion-element-coalgebra H x)))
         ( is-empty-eq-root-node-inclusion-element-coalgebra H x))
       ( has-unique-predecessor-node-inclusion-element-coalgebra H x)
 

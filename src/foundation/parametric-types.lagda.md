@@ -256,19 +256,17 @@ abstract
     f X ＝ f Y
   separate-map-split-on-prop¬¬-not-has-decidable-∀-Level-Discrete-Type
     {A = A} ¬d∀A B f {X} {Y} χ eq-χ-true eq-χ-false =
-    rec-coproduct
-      ( id)
+    map-right-unit-law-coproduct-is-empty
       ( λ fX≠fY →
-        ex-falso
-          ( ¬d∀A
-            ( has-decidable-∀-has-separating-map-split-Discrete-Type
-              ( B)
-              ( f)
-              ( fX≠fY)
-              ( χ fX≠fY)
-              ( eq-χ-true fX≠fY)
-              ( eq-χ-false fX≠fY)
-              ( A))))
+        ¬d∀A
+          ( has-decidable-∀-has-separating-map-split-Discrete-Type
+            ( B)
+            ( f)
+            ( fX≠fY)
+            ( χ fX≠fY)
+            ( eq-χ-true fX≠fY)
+            ( eq-χ-false fX≠fY)
+            ( A)))
       ( has-decidable-equality-type-Discrete-Type B (f X) (f Y))
 
 module _
@@ -280,14 +278,14 @@ module _
   compute-split-on-prop¬¬-true-parametric-types p =
     ( left-unit-law-product-is-contr
       ( is-proof-irrelevant-is-prop is-prop-P p)) ∘e
-    ( right-unit-law-coproduct-is-empty (P × X) ((¬ P) × Y) (λ z → (pr1 z) p))
+    ( right-unit-law-coproduct-is-empty (λ z → (pr1 z) p))
 
   compute-split-on-prop¬¬-false-parametric-types :
     ¬ P → ((P × X) + ((¬ P) × Y)) ≃ Y
   compute-split-on-prop¬¬-false-parametric-types np =
     ( left-unit-law-product-is-contr
       ( is-proof-irrelevant-is-prop is-property-is-empty np)) ∘e
-    ( left-unit-law-coproduct-is-empty (P × X) ((¬ P) × Y) (np ∘ pr1))
+    ( left-unit-law-coproduct-is-empty (np ∘ pr1))
 
 split-on-double-negation-stable-prop-Discrete-Type :
   {l1 l2 : Level} (B : Discrete-Type l2) →

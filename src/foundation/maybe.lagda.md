@@ -135,8 +135,6 @@ is-value-is-not-exception-Maybe :
   is-not-exception-Maybe x → is-value-Maybe x
 is-value-is-not-exception-Maybe x H =
   map-right-unit-law-coproduct-is-empty
-    ( is-value-Maybe x)
-    ( is-exception-Maybe x)
     ( H)
     ( decide-Maybe x)
 

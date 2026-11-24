@@ -550,8 +550,6 @@ abstract
     le-ℕ (quotient-div-ℕ d x H) x
   le-quotient-div-ℕ d x f H g =
     map-left-unit-law-coproduct-is-empty
-      ( quotient-div-ℕ d x H ＝ x)
-      ( le-ℕ (quotient-div-ℕ d x H) x)
       ( map-neg (is-one-divisor-ℕ d x f H) g)
       ( eq-or-le-leq-ℕ
         ( quotient-div-ℕ d x H)

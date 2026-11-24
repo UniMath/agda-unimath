@@ -215,7 +215,7 @@ is-empty-left-factor-is-empty-product f b a = f (pair a b)
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : is-empty A)
   where
 
   map-left-unit-law-coproduct-is-empty : A + B → B
@@ -288,7 +288,7 @@ module _
   where
 
   map-left-unit-law-coproduct : empty + B → B
-  map-left-unit-law-coproduct = map-left-unit-law-coproduct-is-empty empty B id
+  map-left-unit-law-coproduct = map-left-unit-law-coproduct-is-empty id
 
   map-inv-left-unit-law-coproduct : B → empty + B
   map-inv-left-unit-law-coproduct = inr
@@ -296,29 +296,29 @@ module _
   is-section-map-inv-left-unit-law-coproduct :
     ( map-left-unit-law-coproduct ∘ map-inv-left-unit-law-coproduct) ~ id
   is-section-map-inv-left-unit-law-coproduct =
-    is-section-map-inv-left-unit-law-coproduct-is-empty empty B id
+    is-section-map-inv-left-unit-law-coproduct-is-empty id
 
   is-retraction-map-inv-left-unit-law-coproduct :
     ( map-inv-left-unit-law-coproduct ∘ map-left-unit-law-coproduct) ~ id
   is-retraction-map-inv-left-unit-law-coproduct =
-    is-retraction-map-inv-left-unit-law-coproduct-is-empty empty B id
+    is-retraction-map-inv-left-unit-law-coproduct-is-empty id
 
   is-equiv-map-left-unit-law-coproduct : is-equiv map-left-unit-law-coproduct
   is-equiv-map-left-unit-law-coproduct =
-    is-equiv-map-left-unit-law-coproduct-is-empty empty B id
+    is-equiv-map-left-unit-law-coproduct-is-empty id
 
   left-unit-law-coproduct : (empty + B) ≃ B
-  left-unit-law-coproduct = left-unit-law-coproduct-is-empty empty B id
+  left-unit-law-coproduct = left-unit-law-coproduct-is-empty id
 
   inv-left-unit-law-coproduct : B ≃ (empty + B)
-  inv-left-unit-law-coproduct = inv-left-unit-law-coproduct-is-empty empty B id
+  inv-left-unit-law-coproduct = inv-left-unit-law-coproduct-is-empty id
 ```
 
 ### Right unit law for coproducts
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : is-empty B)
   where
 
   map-right-unit-law-coproduct-is-empty : A + B → A
@@ -390,7 +390,7 @@ module _
 
   map-right-unit-law-coproduct : A + empty → A
   map-right-unit-law-coproduct =
-    map-right-unit-law-coproduct-is-empty A empty id
+    map-right-unit-law-coproduct-is-empty id
 
   map-inv-right-unit-law-coproduct : A → A + empty
   map-inv-right-unit-law-coproduct = inl
@@ -398,23 +398,22 @@ module _
   is-section-map-inv-right-unit-law-coproduct :
     ( map-right-unit-law-coproduct ∘ map-inv-right-unit-law-coproduct) ~ id
   is-section-map-inv-right-unit-law-coproduct =
-    is-section-map-inv-right-unit-law-coproduct-is-empty A empty id
+    is-section-map-inv-right-unit-law-coproduct-is-empty id
 
   is-retraction-map-inv-right-unit-law-coproduct :
     ( map-inv-right-unit-law-coproduct ∘ map-right-unit-law-coproduct) ~ id
   is-retraction-map-inv-right-unit-law-coproduct =
-    is-retraction-map-inv-right-unit-law-coproduct-is-empty A empty id
+    is-retraction-map-inv-right-unit-law-coproduct-is-empty id
 
   is-equiv-map-right-unit-law-coproduct : is-equiv map-right-unit-law-coproduct
   is-equiv-map-right-unit-law-coproduct =
-    is-equiv-map-right-unit-law-coproduct-is-empty A empty id
+    is-equiv-map-right-unit-law-coproduct-is-empty id
 
   right-unit-law-coproduct : (A + empty) ≃ A
-  right-unit-law-coproduct = right-unit-law-coproduct-is-empty A empty id
+  right-unit-law-coproduct = right-unit-law-coproduct-is-empty id
 
   inv-right-unit-law-coproduct : A ≃ (A + empty)
-  inv-right-unit-law-coproduct =
-    inv-right-unit-law-coproduct-is-empty A empty id
+  inv-right-unit-law-coproduct = inv-right-unit-law-coproduct-is-empty id
 ```
 
 ## See also

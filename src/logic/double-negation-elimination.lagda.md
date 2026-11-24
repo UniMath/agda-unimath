@@ -24,6 +24,7 @@ open import foundation.mere-equality
 open import foundation.negation
 open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -303,7 +304,7 @@ module _
 
   double-negation-elim-lem-Prop : has-double-negation-elim (type-Prop P)
   double-negation-elim-lem-Prop ¬¬P =
-    rec-coproduct id (ex-falso ∘ ¬¬P) (lem P)
+    map-right-unit-law-coproduct-is-empty ¬¬P (lem P)
 ```
 
 ## See also

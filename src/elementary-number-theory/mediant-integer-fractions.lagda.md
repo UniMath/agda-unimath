@@ -25,6 +25,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 ```
 
 </details>
@@ -33,8 +34,9 @@ open import foundation.transport-along-identifications
 
 The
 {{#concept "mediant" Disambiguation="integer fractions" Agda=mediant-fraction-ℤ}}
-of two fractions is the quotient of the sum of the numerators by the sum of the
-denominators.
+of two [integer fractions](elementary-number-theory.integer-fractions.md) is the
+quotient of the [sum](elementary-number-theory.addition-integers.md) of the
+numerators by the sum of the denominators.
 
 ## Definitions
 
@@ -146,17 +148,15 @@ abstract
             ( gcd-ℤ n d)
             ( is-common-divisor-gcd-ℤ n d))
     in
-      rec-coproduct
-        ( λ K → K)
+      map-right-unit-law-coproduct-is-empty
         ( λ K →
-          ex-falso
-            ( is-not-negative-and-nonnegative-ℤ
-              ( gcd-ℤ n d)
-              ( ( inv-tr
-                  ( is-negative-ℤ)
-                  ( K)
-                  ( _)) ,
-                ( is-nonnegative-gcd-ℤ n d))))
+          is-not-negative-and-nonnegative-ℤ
+            ( gcd-ℤ n d)
+            ( ( inv-tr
+                ( is-negative-ℤ)
+                ( K)
+                ( _)) ,
+              ( is-nonnegative-gcd-ℤ n d)))
         ( is-one-or-neg-one-is-unit-ℤ
           ( gcd-ℤ n d)
           ( is-unit-gcd-mediant))

@@ -288,11 +288,7 @@ module _
       ( is-root-Directed-Tree T x +
         Σ ( base-Directed-Tree T)
           ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-      ( left-unit-law-coproduct-is-empty
-        ( is-root-Directed-Tree T x)
-        ( Σ ( base-Directed-Tree T)
-          ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T))
-        ( f))
+      ( left-unit-law-coproduct-is-empty f)
       ( unique-walk-to-base-Directed-Tree x)
 
   walk-to-base-is-proper-node-Directed-Tree :

@@ -35,6 +35,7 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import group-theory.semigroups
@@ -425,18 +426,16 @@ module _
     leq-leq-add-positive-ℚ :
       ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
     leq-leq-add-positive-ℚ H =
-      rec-coproduct
+      map-left-unit-law-coproduct-is-empty
         ( λ y<x →
-          ex-falso
-            ( not-leq-le-ℚ
-              ( mediant-ℚ y x)
-              ( x)
-              ( le-right-mediant-ℚ y<x)
-              ( tr
-                ( leq-ℚ x)
-                ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
-                ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x))))))
-        ( id)
+          not-leq-le-ℚ
+            ( mediant-ℚ y x)
+            ( x)
+            ( le-right-mediant-ℚ y<x)
+            ( tr
+              ( leq-ℚ x)
+              ( right-law-positive-diff-le-ℚ (le-left-mediant-ℚ y<x))
+              ( H (positive-diff-le-ℚ (le-left-mediant-ℚ y<x)))))
         ( decide-le-leq-ℚ y x)
 
   equiv-leq-le-add-positive-ℚ :
@@ -485,9 +484,8 @@ module _
       ((r : ℚ) → le-ℚ (r +ℚ rational-ℚ⁺ d) y → le-ℚ r x) →
       leq-ℚ y (x +ℚ rational-ℚ⁺ d)
     leq-add-positive-le-le-add-positive-ℚ L =
-      rec-coproduct
-        ( ex-falso ∘ (irreflexive-le-ℚ x) ∘ L x)
-        ( id)
+      map-left-unit-law-coproduct-is-empty
+        ( irreflexive-le-ℚ x ∘ L x)
         ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
 ```
 

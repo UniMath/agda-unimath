@@ -187,7 +187,7 @@ compute-binomial-type {l1} {l2} A B =
   compute-binomial-type-Level (l1 ⊔ l2) A B
 ```
 
-### The bionmial type `(A B)` is equivalent to the small binomial type at `A` and `B`
+### The binomial type `(A B)` is equivalent to the small binomial type at `A` and `B`
 
 ```agda
 compute-small-binomial-type :
@@ -273,8 +273,6 @@ abstract
                 ( ( equiv-trunc-Prop
                     ( equiv-postcomp-equiv
                       ( right-unit-law-coproduct-is-empty
-                        ( Σ A _)
-                        ( raise-empty _)
                         ( is-empty-raise-empty))
                       ( Maybe B))) ∘e
                   ( left-unit-law-Σ-is-contr
