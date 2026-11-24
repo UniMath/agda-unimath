@@ -195,3 +195,21 @@ right-unit-law-comp-hom-Ab :
 right-unit-law-comp-hom-Ab A B =
   right-unit-law-comp-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 ```
+
+### Abelian group homomorphisms preserve subtraction
+
+```agda
+module _
+  {l1 l2 : Level}
+  (G : Ab l1)
+  (H : Ab l2)
+  (φ : hom-Ab G H)
+  where abstract
+
+  preserves-right-subtraction-hom-Ab :
+    {x y : type-Ab G} →
+    map-hom-Ab G H φ (right-subtraction-Ab G x y) ＝
+    right-subtraction-Ab H (map-hom-Ab G H φ x) (map-hom-Ab G H φ y)
+  preserves-right-subtraction-hom-Ab =
+    preserves-right-div-hom-Group (group-Ab G) (group-Ab H) φ
+```

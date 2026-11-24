@@ -66,6 +66,12 @@ module _
   add-left-module-Commutative-Ring =
     add-left-module-Ring (ring-Commutative-Ring R) M
 
+  diff-left-module-Commutative-Ring :
+    (x y : type-left-module-Commutative-Ring) →
+    type-left-module-Commutative-Ring
+  diff-left-module-Commutative-Ring =
+    diff-left-module-Ring (ring-Commutative-Ring R) M
+
   mul-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring →
     type-left-module-Commutative-Ring
