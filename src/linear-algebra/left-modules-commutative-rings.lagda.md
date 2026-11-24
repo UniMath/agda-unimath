@@ -66,6 +66,14 @@ module _
   add-left-module-Commutative-Ring =
     add-left-module-Ring (ring-Commutative-Ring R) M
 
+  ap-add-left-module-Commutative-Ring :
+    {x x' : type-left-module-Commutative-Ring} → x ＝ x' →
+    {y y' : type-left-module-Commutative-Ring} → y ＝ y' →
+    add-left-module-Commutative-Ring x y ＝
+    add-left-module-Commutative-Ring x' y'
+  ap-add-left-module-Commutative-Ring =
+    ap-binary add-left-module-Commutative-Ring
+
   mul-left-module-Commutative-Ring :
     type-Commutative-Ring R → type-left-module-Commutative-Ring →
     type-left-module-Commutative-Ring

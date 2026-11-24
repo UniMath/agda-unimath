@@ -7,17 +7,20 @@ module lists.remove-at-index-finite-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
+open import foundation.action-on-identifications-functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import lists.finite-sequences
 open import lists.functoriality-finite-sequences
 
+open import univalent-combinatorics.skipping-element-standard-finite-types
+open import univalent-combinatorics.skipping-two-elements-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -45,17 +48,25 @@ module _
   where
 
   remove-at-fin-sequence :
-    (n : ℕ) →
+    (n : ℕ)
     (i : Fin (succ-ℕ n)) →
     fin-sequence A (succ-ℕ n) →
     fin-sequence A n
-  remove-at-fin-sequence zero-ℕ _ u ()
-  remove-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    remove-at-fin-sequence n x (tail-fin-sequence (succ-ℕ n) u) y
-  remove-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) =
-    head-fin-sequence (succ-ℕ n) u
-  remove-at-fin-sequence (succ-ℕ n) (inr x) u =
-    tail-fin-sequence (succ-ℕ n) u
+  remove-at-fin-sequence n i u j = u (skip-Fin n i j)
+```
+
+### Removing two elements at distinct indices
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  remove-at-two-indices-fin-sequence :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) → i ≠ j →
+    fin-sequence A (n +ℕ 2) → fin-sequence A n
+  remove-at-two-indices-fin-sequence n i j i≠j u k =
+    u (skip-two-Fin n i j i≠j k)
 ```
 
 ## Properties
@@ -73,10 +84,31 @@ module _
     (u : fin-sequence A (succ-ℕ n)) →
     map-fin-sequence n f (remove-at-fin-sequence n i u) ~
     remove-at-fin-sequence n i (map-fin-sequence (succ-ℕ n) f u)
-  htpy-map-remove-at-fin-sequence (succ-ℕ n) (inl x) u (inl y) =
-    htpy-map-remove-at-fin-sequence n x
-      ( tail-fin-sequence (succ-ℕ n) u)
-      ( y)
-  htpy-map-remove-at-fin-sequence (succ-ℕ n) (inl x) u (inr y) = refl
-  htpy-map-remove-at-fin-sequence (succ-ℕ n) (inr x) u k = refl
+  htpy-map-remove-at-fin-sequence n i u x = refl
+```
+
+### Removing indices `i` and `j` is the same as removing indices `j` and `i`
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where abstract
+
+  htpy-swap-remove-at-two-indices-fin-sequence' :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) (i≠j : i ≠ j) (j≠i : j ≠ i)
+    (u : fin-sequence A (n +ℕ 2)) →
+    remove-at-two-indices-fin-sequence n i j i≠j u ~
+    remove-at-two-indices-fin-sequence n j i j≠i u
+  htpy-swap-remove-at-two-indices-fin-sequence' n i j i≠j j≠i u k =
+    ap u (swap-skip-two-Fin n i j i≠j j≠i k)
+
+  htpy-swap-remove-at-two-indices-fin-sequence :
+    (n : ℕ) (i j : Fin (n +ℕ 2)) (i≠j : i ≠ j)
+    (u : fin-sequence A (n +ℕ 2)) →
+    remove-at-two-indices-fin-sequence n i j i≠j u ~
+    remove-at-two-indices-fin-sequence n j i (is-symmetric-nonequal i j i≠j) u
+  htpy-swap-remove-at-two-indices-fin-sequence n i j i≠j =
+    htpy-swap-remove-at-two-indices-fin-sequence' n i j
+      ( i≠j)
+      ( is-symmetric-nonequal i j i≠j)
 ```
