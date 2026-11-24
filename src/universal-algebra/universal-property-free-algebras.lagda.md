@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-extensionality-axiom
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
@@ -28,10 +29,11 @@ open import universal-algebra.signatures
 
 ## Idea
 
-The universal property of a free [algebra](universal-algebra.algebras.md) `A`
-for an [algebraic theory](universal-algebra.algebraic-theories.md) `T` with
-generator type `G` and inclusion function `i : G → A` states that for any
-algebra `B` for `T`, the map `φ ↦ φ ∘ i` from
+The {{#concept "universal property of free algebras" Agda=is-free-Algebra}} for
+an [algebra](universal-algebra.algebras.md) `A` in an
+[algebraic theory](universal-algebra.algebraic-theories.md) `T` with generator
+type `G` and inclusion function `i : G → A` states that for any algebra `B` for
+`T`, the map `φ ↦ φ ∘ i` from
 [homomorphisms](universal-algebra.homomorphisms-of-algebras.md) `φ : A → B` to
 maps `G → B` is an [equivalence](foundation.equivalences.md).
 
@@ -53,23 +55,28 @@ is-free-Algebra σ T A in-g =
 
 ## Properties
 
-### The canonical homomorphism between free algebras on a generator type
+### The canonical homomorphism from a free algebra on a generator type
 
 ```agda
-hom-is-free-Algebra :
+module _
   {l1 l2 l3 l4 l5 : Level}
   (σ : signature l1)
   (T : Algebraic-Theory l2 σ)
   {G : UU l3}
   (A : Algebra l4 σ T)
-  (B : Algebra l5 σ T)
   (in-g-A : G → type-Algebra σ T A)
-  (in-g-B : G → type-Algebra σ T B) →
-  is-free-Algebra σ T A in-g-A →
-  is-free-Algebra σ T B in-g-B →
-  hom-Algebra σ T A B
-hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B =
-  map-inv-is-equiv (is-free-A B) in-g-B
+  (is-free-A : is-free-Algebra σ T A in-g-A)
+  (B : Algebra l5 σ T)
+  (in-g-B : G → type-Algebra σ T B)
+  where
+
+  hom-is-free-Algebra : hom-Algebra σ T A B
+  hom-is-free-Algebra = map-inv-is-equiv (is-free-A B) in-g-B
+
+  compute-hom-is-free-Algebra :
+    map-hom-Algebra σ T A B hom-is-free-Algebra ∘ in-g-A ~ in-g-B
+  compute-hom-is-free-Algebra =
+    htpy-eq (is-section-map-inv-is-equiv (is-free-A B) in-g-B)
 ```
 
 ### The canonical homomorphism between two free algebras is an isomorphism
@@ -88,8 +95,8 @@ abstract
     (is-free-A : is-free-Algebra σ T A in-g-A)
     (is-free-B : is-free-Algebra σ T B in-g-B) →
     comp-hom-Algebra σ T B A B
-      ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B)
-      ( hom-is-free-Algebra σ T B A in-g-B in-g-A is-free-B is-free-A) ＝
+      ( hom-is-free-Algebra σ T A in-g-A is-free-A B in-g-B)
+      ( hom-is-free-Algebra σ T B in-g-B is-free-B A in-g-A) ＝
     id-hom-Algebra σ T B
   is-section-hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B =
     is-injective-is-equiv
@@ -98,7 +105,7 @@ abstract
         ( λ g →
           ( ap
             ( map-hom-Algebra σ T A B
-              ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B))
+              ( hom-is-free-Algebra σ T A in-g-A is-free-A B in-g-B))
             ( htpy-eq
               ( is-section-map-inv-is-equiv (is-free-B A) in-g-A)
               ( g))) ∙
@@ -119,15 +126,15 @@ module _
 
   is-iso-hom-is-free-Algebra :
     is-iso-Algebra σ T A B
-      ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B)
+      ( hom-is-free-Algebra σ T A in-g-A is-free-A B in-g-B)
   is-iso-hom-is-free-Algebra =
-    ( hom-is-free-Algebra σ T B A in-g-B in-g-A is-free-B is-free-A ,
+    ( hom-is-free-Algebra σ T B in-g-B is-free-B A in-g-A ,
       is-section-hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B ,
       is-section-hom-is-free-Algebra σ T B A in-g-B in-g-A is-free-B is-free-A)
 
   iso-is-free-Algebra :
     iso-Algebra σ T A B
   iso-is-free-Algebra =
-    ( hom-is-free-Algebra σ T A B in-g-A in-g-B is-free-A is-free-B ,
+    ( hom-is-free-Algebra σ T A in-g-A is-free-A B in-g-B ,
       is-iso-hom-is-free-Algebra)
 ```
