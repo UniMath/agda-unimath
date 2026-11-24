@@ -28,6 +28,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.large-monoids
+open import group-theory.large-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 ```
@@ -49,6 +50,10 @@ record Large-Group (α : Level → Level) (β : Level → Level → Level) : UU�
 
   field
     large-monoid-Large-Group : Large-Monoid α β
+
+  large-semigroup-Large-Group : Large-Semigroup α β
+  large-semigroup-Large-Group =
+    large-semigroup-Large-Monoid large-monoid-Large-Group
 
   cumulative-large-set-Large-Group : Cumulative-Large-Set α β
   cumulative-large-set-Large-Group =
