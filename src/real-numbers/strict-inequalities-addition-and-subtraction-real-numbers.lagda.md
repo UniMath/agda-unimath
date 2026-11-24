@@ -118,9 +118,9 @@ abstract
   preserves-le-diff-ℝ z = preserves-le-right-add-ℝ (neg-ℝ z)
 
   reverses-le-diff-ℝ :
-    {l1 l2 l3 : Level} (z : ℝ l1) (x : ℝ l2) (y : ℝ l3) →
+    {l1 l2 l3 : Level} (z : ℝ l1) {x : ℝ l2} {y : ℝ l3} →
     le-ℝ x y → le-ℝ (z -ℝ y) (z -ℝ x)
-  reverses-le-diff-ℝ z x y x<y =
+  reverses-le-diff-ℝ z x<y =
     preserves-le-left-add-ℝ z _ _ (neg-le-ℝ x<y)
 
 module _
