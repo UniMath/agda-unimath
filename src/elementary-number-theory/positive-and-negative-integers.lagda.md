@@ -23,6 +23,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 ```
 
@@ -233,9 +234,8 @@ abstract
   is-nonpositive-is-not-positive-ℤ :
     {x : ℤ} → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
   is-nonpositive-is-not-positive-ℤ {x} H =
-    rec-coproduct
-      ( λ K → ex-falso (H K))
-      ( id)
+    map-left-unit-law-coproduct-is-empty
+      ( H)
       ( decide-is-positive-is-nonpositive-ℤ)
 ```
 
@@ -253,8 +253,7 @@ abstract
   is-nonnegative-is-not-negative-ℤ :
     {x : ℤ} → ¬ (is-negative-ℤ x) → is-nonnegative-ℤ x
   is-nonnegative-is-not-negative-ℤ {x} H =
-    rec-coproduct
-      ( λ K → ex-falso (H K))
-      ( id)
+    map-left-unit-law-coproduct-is-empty
+      ( H)
       ( decide-is-negative-is-nonnegative-ℤ)
 ```

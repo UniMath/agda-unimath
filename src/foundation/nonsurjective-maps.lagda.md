@@ -25,6 +25,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-empty-type
 open import foundation.types-with-decidable-existential-quantifications
 open import foundation.universe-levels
 
@@ -316,9 +317,8 @@ module _
   is-nonsurjective-is-not-surjective-LEM :
     ¬ is-surjective f → is-nonsurjective f
   is-nonsurjective-is-not-surjective-LEM H =
-    rec-coproduct
-      ( id)
-      ( ex-falso ∘ H ∘ is-surjective-is-not-nonsurjective-LEM)
+    map-right-unit-law-coproduct-is-empty
+      ( H ∘ is-surjective-is-not-nonsurjective-LEM)
       ( lem (is-nonsurjective-Prop f))
 ```
 

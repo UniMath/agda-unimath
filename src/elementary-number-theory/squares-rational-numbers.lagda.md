@@ -35,6 +35,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -249,15 +250,13 @@ abstract
     leq-ℚ (square-ℚ (rational-ℚ⁰⁺ p)) (square-ℚ (rational-ℚ⁰⁺ q)) →
     leq-ℚ⁰⁺ p q
   reflects-leq-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p²≤q² =
-    rec-coproduct
+    map-left-unit-law-coproduct-is-empty
       ( λ q<p →
-        ex-falso
-          ( not-leq-le-ℚ
-            ( square-ℚ q)
-            ( square-ℚ p)
-            ( preserves-le-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q<p)
-            ( p²≤q²)))
-      ( id)
+        not-leq-le-ℚ
+          ( square-ℚ q)
+          ( square-ℚ p)
+          ( preserves-le-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q<p)
+          ( p²≤q²))
       ( decide-le-leq-ℚ q p)
 ```
 
@@ -270,15 +269,13 @@ abstract
     le-ℚ (square-ℚ (rational-ℚ⁰⁺ p)) (square-ℚ (rational-ℚ⁰⁺ q)) →
     le-ℚ⁰⁺ p q
   reflects-le-square-ℚ⁰⁺ p⁰⁺@(p , _) q⁰⁺@(q , _) p²<q² =
-    rec-coproduct
-      ( id)
+    map-right-unit-law-coproduct-is-empty
       ( λ q≤p →
-        ex-falso
-          ( not-leq-le-ℚ
-            ( square-ℚ p)
-            ( square-ℚ q)
-            ( p²<q²)
-            ( preserves-leq-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q≤p)))
+        not-leq-le-ℚ
+          ( square-ℚ p)
+          ( square-ℚ q)
+          ( p²<q²)
+          ( preserves-leq-square-ℚ⁰⁺ q⁰⁺ p⁰⁺ q≤p))
       ( decide-le-leq-ℚ p q)
 ```
 

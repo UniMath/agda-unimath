@@ -38,6 +38,7 @@ open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -188,9 +189,8 @@ abstract
     map-coproduct
       ( λ (x , p) →
         x ,
-        rec-coproduct
-          ( id)
-          ( ex-falso ∘ p)
+        map-right-unit-law-coproduct-is-empty
+          ( p)
           ( is-decidable-decidable-family P x))
       ( λ nxp (x , p) → nxp (x , intro-double-negation p))
       ( f ( λ x →
@@ -246,9 +246,8 @@ has-decidable-Σ-pointed-has-decidable-Σ-has-element x₀ f P =
     ( λ nx →
       ( x₀ ,
         λ _ x →
-        rec-coproduct
-          ( id)
-          ( λ npx → ex-falso (nx (x , npx)))
+        map-right-unit-law-coproduct-is-empty
+          ( λ npx → nx (x , npx))
           ( is-decidable-decidable-family P x)))
     ( f (neg-decidable-family P))
 ```
@@ -328,9 +327,8 @@ abstract
     {X = X} f P =
       ( pr1 g) ,
       ( λ p x →
-        rec-coproduct
-          ( id)
-          ( ex-falso ∘ pr2 g (intro-double-negation p) x)
+        map-right-unit-law-coproduct-is-empty
+          ( pr2 g (intro-double-negation p) x)
           ( is-decidable-decidable-family P x))
       where
         g : Σ X

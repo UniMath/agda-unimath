@@ -878,10 +878,6 @@ pr2 (Fin-succ-Fin-transposition n (P , H)) =
       unit-trunc-Prop
         ( ( pair f (is-equiv-is-invertible inv-f retraction-f section-f)) ∘e
           ( ( inv-right-unit-law-coproduct-is-empty
-              ( Σ
-                ( Fin n)
-                ( type-Decidable-Prop ∘ P))
-              ( Σ unit (λ _ → empty))
               ( map-right-absorption-product)) ∘e
             ( h))))
   where

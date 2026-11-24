@@ -87,10 +87,7 @@ module _
   is-contr-is-uniformly-decidable-family-is-inhabited-base'' H a =
     is-contr-equiv
       ( (x : A) → B x)
-      ( right-unit-law-coproduct-is-empty
-        ( (x : A) → B x)
-        ( (x : A) → ¬ B x)
-        ( λ f → f a (center H a)))
+      ( right-unit-law-coproduct-is-empty (λ f → f a (center H a)))
       ( H)
 
   is-contr-is-uniformly-decidable-family-is-inhabited-base' :

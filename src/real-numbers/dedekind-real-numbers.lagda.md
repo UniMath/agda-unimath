@@ -36,6 +36,7 @@ open import foundation.sets
 open import foundation.similarity-subtypes
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
@@ -256,9 +257,8 @@ module _
       is-in-upper-cut-ℝ x q →
       le-ℚ p q
     le-lower-upper-cut-ℝ H H' =
-      rec-coproduct
-        ( id)
-        ( λ I → ex-falso (is-disjoint-cut-ℝ x p (H , leq-upper-cut-ℝ x I H')))
+      map-right-unit-law-coproduct-is-empty
+        ( λ I → is-disjoint-cut-ℝ x p (H , leq-upper-cut-ℝ x I H'))
         ( decide-le-leq-ℚ p q)
 
     leq-lower-upper-cut-ℝ :

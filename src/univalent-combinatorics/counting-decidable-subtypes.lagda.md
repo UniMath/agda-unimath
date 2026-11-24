@@ -72,10 +72,7 @@ abstract
     count-equiv'
       ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
       ( count-equiv'
-        ( right-unit-law-coproduct-is-empty
-          ( Σ (Fin k) (is-in-decidable-subtype P ∘ inl))
-          ( Σ unit (is-in-decidable-subtype P ∘ inr))
-          ( λ (* , p) → f p))
+        ( right-unit-law-coproduct-is-empty (f ∘ pr2))
         ( count-decidable-subtype-Fin k (P ∘ inl)))
 
 count-decidable-subtype' :

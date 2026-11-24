@@ -34,6 +34,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -392,7 +393,7 @@ abstract
 abstract
   le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
   le-leq-neq-ℕ {x} {y} x≤y x≠y =
-    rec-coproduct (ex-falso ∘ x≠y) id (eq-or-le-leq-ℕ x y x≤y)
+    map-left-unit-law-coproduct-is-empty x≠y (eq-or-le-leq-ℕ x y x≤y)
 ```
 
 ### For any two natural numbers `x` and `y`, either `x < y` or `y ≤ x`

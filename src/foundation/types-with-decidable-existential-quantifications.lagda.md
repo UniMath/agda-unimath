@@ -45,6 +45,7 @@ open import foundation.retracts-of-types
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.types-with-decidable-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -234,9 +235,8 @@ abstract
       ( map-trunc-Prop
         ( λ (x , p) →
           x ,
-          rec-coproduct
-            ( id)
-            ( ex-falso ∘ p)
+          map-right-unit-law-coproduct-is-empty
+            ( p)
             ( is-decidable-decidable-family P x)))
       ( _∘ map-trunc-Prop (λ (x , p) → (x , intro-double-negation p)))
       ( f ( λ x →
@@ -307,9 +307,8 @@ abstract
         intro-exists
           ( x₀)
           ( λ _ x →
-            rec-coproduct
-              ( id)
-              ( λ npx → ex-falso (nx (intro-exists x npx)))
+            map-right-unit-law-coproduct-is-empty
+              ( λ npx → nx (intro-exists x npx))
               ( is-decidable-decidable-family P x)))
       ( f (neg-decidable-family P))
 ```
@@ -396,9 +395,8 @@ abstract
       ( λ g →
         ( pr1 g) ,
         ( λ p x →
-          rec-coproduct
-            ( id)
-            ( ex-falso ∘ pr2 g (intro-double-negation p) x)
+          map-right-unit-law-coproduct-is-empty
+            ( pr2 g (intro-double-negation p) x)
             ( is-decidable-decidable-family P x)))
       ( f ( λ x →
             neg-type-Decidable-Prop

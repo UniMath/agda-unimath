@@ -35,6 +35,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import logic.double-negation-elimination
@@ -716,9 +717,8 @@ module _
       map-double-negation
         ( rec-coproduct
           ( inr)
-          ( rec-coproduct
-            ( inl)
-            ( ex-falso ∘ not-le-leq-ℝ a b a≤b)))
+          ( inl ∘
+            map-right-unit-law-coproduct-is-empty (not-le-leq-ℝ a b a≤b)))
         ( irrefutable-trichotomy-le-ℝ a b)
 
   leq-iff-irrefutable-sim-or-le-ℝ :

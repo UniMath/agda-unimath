@@ -25,6 +25,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.types-with-decidable-dependent-product-types
 open import foundation.universe-levels
 
@@ -97,7 +98,9 @@ has-decidable-Π-Level-has-decidable-∀-Level
   f P =
   map-coproduct
     ( λ nnp x →
-      rec-coproduct id (ex-falso ∘ nnp x) (is-decidable-decidable-family P x))
+      map-right-unit-law-coproduct-is-empty
+        ( nnp x)
+        ( is-decidable-decidable-family P x))
     ( λ nnnp p → nnnp (intro-double-negation ∘ p))
     ( f ( λ x →
           neg-type-Decidable-Prop

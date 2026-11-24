@@ -28,6 +28,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -324,11 +325,11 @@ abstract
 ```agda
 abstract
   is-one-is-gcd-one-ℤ : {b x : ℤ} → is-gcd-ℤ one-ℤ b x → is-one-ℤ x
-  is-one-is-gcd-one-ℤ {b} {x} H with
-    ( is-one-or-neg-one-is-unit-ℤ x
-      ( pr1 (is-common-divisor-is-gcd-ℤ one-ℤ b x H)))
-  ... | inl p = p
-  ... | inr p = ex-falso (tr is-nonnegative-ℤ p (pr1 H))
+  is-one-is-gcd-one-ℤ {b} {x} H =
+    map-right-unit-law-coproduct-is-empty
+      ( λ p → tr is-nonnegative-ℤ p (pr1 H))
+      ( is-one-or-neg-one-is-unit-ℤ x
+        ( pr1 (is-common-divisor-is-gcd-ℤ one-ℤ b x H)))
 
   is-one-gcd-one-ℤ : (b : ℤ) → is-one-ℤ (gcd-ℤ one-ℤ b)
   is-one-gcd-one-ℤ b = is-one-is-gcd-one-ℤ (is-gcd-gcd-ℤ one-ℤ b)

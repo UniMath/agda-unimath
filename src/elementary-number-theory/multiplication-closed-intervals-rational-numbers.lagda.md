@@ -64,6 +64,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -1351,15 +1352,15 @@ abstract
     is-negative-ℚ (upper-bound-closed-interval-ℚ [c,d])
   is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
-    rec-coproduct
-      ( pr2)
-      ( λ (is-pos-a , _) →
-        ex-falso
-          ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
-      ( same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
-        ( [a,b])
-        ( [c,d])
-        ( is-pos-lb))
+    pr2
+      ( map-right-unit-law-coproduct-is-empty
+        ( λ (is-pos-a , _) →
+          ex-falso
+            ( is-not-negative-and-positive-ℚ (is-neg-a , is-pos-a)))
+        ( same-sign-lower-upper-bound-is-positive-mul-closed-interval-ℚ
+          ( [a,b])
+          ( [c,d])
+          ( is-pos-lb)))
 
   is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →
@@ -1368,21 +1369,20 @@ abstract
     is-negative-ℚ (upper-bound-closed-interval-ℚ [a,b])
   is-negative-upper-bound-left-factor-is-positive-mul-closed-interval-ℚ
     [a,b]@((a , b) , _) [c,d]@((c , d) , _) is-pos-lb is-neg-a =
-    rec-coproduct
-      ( pr1)
-      ( λ (_ , is-pos-d) →
-        ex-falso
-          ( is-not-negative-and-positive-ℚ
+    pr1
+      ( map-right-unit-law-coproduct-is-empty
+        ( λ (_ , is-pos-d) →
+          is-not-negative-and-positive-ℚ
             ( is-negative-upper-bound-right-factor-is-positive-mul-closed-interval-ℚ
               ( [a,b])
               ( [c,d])
               ( is-pos-lb)
               ( is-neg-a) ,
-            is-pos-d)))
-      ( same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
-        ( [a,b])
-        ( [c,d])
-        ( is-pos-lb))
+            is-pos-d))
+        ( same-sign-upper-bounds-is-positive-mul-closed-interval-ℚ
+          ( [a,b])
+          ( [c,d])
+          ( is-pos-lb)))
 
   same-sign-is-positive-mul-closed-interval-ℚ :
     ([a,b] [c,d] : closed-interval-ℚ) →

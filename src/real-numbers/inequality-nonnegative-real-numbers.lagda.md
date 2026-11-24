@@ -128,18 +128,15 @@ module _
     leq-le-positive-rational-ℝ⁰⁺ H =
       leq-le-rational-ℝ (real-ℝ⁰⁺ x) (real-ℝ⁰⁺ y)
         ( λ q y<q →
-          rec-coproduct
-            ( λ 0<q →
-              let open do-syntax-trunc-Prop (le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ q))
-              in do
-                (p , y<p , p<q) ← dense-rational-le-ℝ _ _ y<q
-                transitive-le-ℝ _ (real-ℚ p) _
-                  ( p<q)
-                  ( H
-                    ( p , is-positive-le-nonnegative-real-ℚ y p y<p)
-                    ( y<p)))
-            ( λ q≤0 → ex-falso (not-le-leq-zero-rational-ℝ⁰⁺ y q q≤0 y<q))
-            ( decide-le-leq-ℚ zero-ℚ q))
+          rec-trunc-Prop
+            ( le-prop-ℝ (real-ℝ⁰⁺ x) (real-ℚ q))
+            ( λ (p , y<p , p<q) →
+              transitive-le-ℝ _ (real-ℚ p) _
+                ( p<q)
+                ( H
+                  ( p , is-positive-le-nonnegative-real-ℚ y p y<p)
+                  ( y<p)))
+            ( dense-rational-le-ℝ _ _ y<q))
 ```
 
 ### If `x` is less than or equal to all the positive rational numbers `y` is less than or equal to, then `x ≤ y`

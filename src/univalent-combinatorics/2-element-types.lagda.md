@@ -526,8 +526,6 @@ abstract
     no-section-type-2-Element-Type
       ( λ X →
         map-right-unit-law-coproduct-is-empty
-          ( pr1 X)
-          ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
             ( double-negation-type-Prop (pr1 X))

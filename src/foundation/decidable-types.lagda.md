@@ -293,7 +293,7 @@ module _
 is-fixed-point-is-decidable-is-inhabited :
   {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
-  right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
+  right-unit-law-coproduct-is-empty (is-nonempty-is-inhabited t)
 ```
 
 ### The dependent sum of a family of decidable propositions over a decidable base with double negation dense equality is decidable

@@ -242,9 +242,7 @@ abstract
       ( elim-trunc-decidable-fam-Fin {l1} {k} {B ∘ inl}
         ( λ x → d (inl x))
         ( map-equiv-trunc-Prop
-          ( ( ( right-unit-law-coproduct-is-empty
-                ( Σ (Fin k) (B ∘ inl))
-                ( B (inr star)) f) ∘e
+          ( ( ( right-unit-law-coproduct-is-empty f) ∘e
               ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr)))) ∘e
             ( right-distributive-Σ-coproduct B))
           ( y)))
