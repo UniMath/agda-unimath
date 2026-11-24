@@ -243,3 +243,22 @@ abstract opaque
       ( neg-neg-ℝ x)
       ( neg-le-ℝ (le-max-le-le-ℝ (neg-le-ℝ x<y) (neg-le-ℝ x<z)))
 ```
+
+### The minimum with a constant real is an increasing map
+
+```agda
+is-increasing-min-ℝ :
+  {l1 l2 l3 : Level} →
+  (x : ℝ l1) →
+  (y : ℝ l2) →
+  (z : ℝ l3) →
+  leq-ℝ y z →
+  leq-ℝ (min-ℝ x y) (min-ℝ x z)
+is-increasing-min-ℝ x y z H =
+  leq-min-leq-leq-ℝ
+    ( x)
+    ( z)
+    ( min-ℝ x y)
+    ( leq-left-min-ℝ x y)
+    ( transitive-leq-ℝ _ _ _ H (leq-right-min-ℝ x y))
+```
