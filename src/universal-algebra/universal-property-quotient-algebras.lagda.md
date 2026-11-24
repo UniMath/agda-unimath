@@ -22,7 +22,7 @@ open import universal-algebra.algebras
 open import universal-algebra.congruences
 open import universal-algebra.homomorphisms-of-algebras
 open import universal-algebra.isomorphisms-of-algebras
-open import universal-algebra.reflecting-homomorphisms-congruences
+open import universal-algebra.reflecting-homomorphisms-equivalence-relations
 open import universal-algebra.signatures
 ```
 

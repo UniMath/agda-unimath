@@ -1,7 +1,7 @@
-# Reflecting homomorphisms of congruences
+# Homomorphisms of algebras reflecting equivalence relations
 
 ```agda
-module universal-algebra.reflecting-homomorphisms-congruences where
+module universal-algebra.reflecting-homomorphisms-equivalence-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -26,9 +26,10 @@ open import universal-algebra.signatures
 
 A [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `φ` from an
 [algebra](universal-algebra.algebras.md) `A` to an algebra in the same
-[theory](universal-algebra.algebraic-theories.md) `B` is said to reflect an
-[equivalence relation](foundation.equivalence-relations.md) on `A` if whenever
-`a₁ a₂ : A` are similar relative to the equivalence relation, then
+[theory](universal-algebra.algebraic-theories.md) `B` is said to
+{{#concept "reflect" Disambiguation="an equivalence relation, for a homomorphism of algebras" Agda=reflects-equivalence-relation-hom-Algebra}}
+an [equivalence relation](foundation.equivalence-relations.md) on `A` if
+whenever `a₁ a₂ : A` are similar relative to the equivalence relation, then
 `φ a₁ = φ a₂`.
 
 ## Definition
