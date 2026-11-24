@@ -20,8 +20,10 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import elementary-number-theory.unit-fractions-rational-numbers
 
 open import foundation.conjunction
+open import foundation.cumulative-large-sets
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -29,6 +31,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subsets-cumulative-large-sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -165,6 +168,12 @@ one-ℝ⁰⁺ = nonnegative-real-ℚ⁰⁺ one-ℚ⁰⁺
 
 one-half-ℝ⁰⁺ : ℝ⁰⁺ lzero
 one-half-ℝ⁰⁺ = nonnegative-real-ℚ⁺ one-half-ℚ⁺
+
+is-nonnegative-zero-ℝ : is-nonnegative-ℝ zero-ℝ
+is-nonnegative-zero-ℝ = is-nonnegative-real-ℝ⁰⁺ zero-ℝ⁰⁺
+
+is-nonnegative-one-ℝ : is-nonnegative-ℝ one-ℝ
+is-nonnegative-one-ℝ = is-nonnegative-real-ℝ⁰⁺ one-ℝ⁰⁺
 ```
 
 ### A real number is nonnegative if and only if every element of its upper cut is positive
@@ -319,15 +328,31 @@ abstract
     preserves-leq-right-sim-ℝ x~y 0≤x
 ```
 
+### The nonnegative numbers are a subset of the cumulative large set of real numbers
+
+```agda
+nonnegative-subset-cumulative-large-set-ℝ :
+  Subset-Cumulative-Large-Set id cumulative-large-set-ℝ
+nonnegative-subset-cumulative-large-set-ℝ =
+  make-Subset-Cumulative-Large-Set
+    ( λ _ → is-nonnegative-prop-ℝ)
+    ( λ _ _ x~y 0≤x → is-nonnegative-sim-ℝ 0≤x x~y)
+
+cumulative-large-set-ℝ⁰⁺ : Cumulative-Large-Set lsuc (_⊔_)
+cumulative-large-set-ℝ⁰⁺ =
+  cumulative-large-set-Subset-Cumulative-Large-Set
+    ( nonnegative-subset-cumulative-large-set-ℝ)
+```
+
 ### Raising the universe levels of nonnegative real numbers
 
 ```agda
-abstract
-  is-nonnegative-raise-ℝ :
-    {l1 : Level} (l : Level) (x : ℝ l1) →
-    is-nonnegative-ℝ x → is-nonnegative-ℝ (raise-ℝ l x)
-  is-nonnegative-raise-ℝ l x is-nonneg-x =
-    is-nonnegative-sim-ℝ is-nonneg-x (sim-raise-ℝ l x)
+is-nonnegative-raise-ℝ :
+  {l1 : Level} (l : Level) (x : ℝ l1) →
+  is-nonnegative-ℝ x → is-nonnegative-ℝ (raise-ℝ l x)
+is-nonnegative-raise-ℝ =
+  is-closed-under-raise-Subset-Cumulative-Large-Set
+    ( nonnegative-subset-cumulative-large-set-ℝ)
 
 raise-ℝ⁰⁺ : {l1 : Level} (l : Level) → ℝ⁰⁺ l1 → ℝ⁰⁺ (l ⊔ l1)
 raise-ℝ⁰⁺ l (x , is-nonneg-x) =
@@ -335,4 +360,7 @@ raise-ℝ⁰⁺ l (x , is-nonneg-x) =
 
 raise-zero-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
 raise-zero-ℝ⁰⁺ l = raise-ℝ⁰⁺ l zero-ℝ⁰⁺
+
+raise-one-ℝ⁰⁺ : (l : Level) → ℝ⁰⁺ l
+raise-one-ℝ⁰⁺ l = raise-ℝ⁰⁺ l one-ℝ⁰⁺
 ```

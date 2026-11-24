@@ -33,6 +33,8 @@ open import real-numbers.positive-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-negative-real-numbers
+open import real-numbers.squares-positive-real-numbers
 open import real-numbers.squares-real-numbers
 open import real-numbers.strict-inequalities-addition-and-subtraction-real-numbers
 open import real-numbers.strict-inequality-real-numbers
@@ -181,8 +183,8 @@ module _
     is-positive-square-is-nonzero-ℝ =
       elim-disjunction
         ( is-positive-prop-ℝ (square-ℝ x))
-        ( λ is-neg-x → is-positive-square-ℝ⁻ (x , is-neg-x))
-        ( λ is-pos-x → is-positive-square-ℝ⁺ (x , is-pos-x))
+        ( λ is-neg-x → is-positive-square-real-ℝ⁻ (x , is-neg-x))
+        ( λ is-pos-x → is-positive-square-real-ℝ⁺ (x , is-pos-x))
 
     is-nonzero-square-is-positive-ℝ :
       is-positive-ℝ (square-ℝ x) → is-nonzero-ℝ x

@@ -36,8 +36,9 @@ open import order-theory.preorders
 
 ## Idea
 
-A subsemigroup of a semigroup `G` is a subtype of `G` closed under
-multiplication.
+A {{#concept "subsemigroup" Agda=Subsemigroup}} of a
+[semigroup](group-theory.semigroups.md) `G` is a
+[subset](group-theory.subsets-semigroups.md) of `G` closed under multiplication.
 
 ## Definitions
 

@@ -24,13 +24,21 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.universe-levels
 
+open import group-theory.powers-of-elements-large-monoids
+
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.large-multiplicative-monoid-of-nonnegative-real-numbers
+open import real-numbers.multiplication-nonnegative-real-numbers
 open import real-numbers.nonnegative-real-numbers
+open import real-numbers.odd-roots-nonnegative-real-numbers
 open import real-numbers.odd-roots-real-numbers
+open import real-numbers.powers-nonnegative-real-numbers
 open import real-numbers.powers-real-numbers
 open import real-numbers.square-roots-nonnegative-real-numbers
+open import real-numbers.squares-nonnegative-real-numbers
 open import real-numbers.squares-real-numbers
 ```
 
@@ -41,7 +49,7 @@ open import real-numbers.squares-real-numbers
 For [nonzero](elementary-number-theory.nonzero-natural-numbers.md) `n`, the
 {{#concept "nth root" WDID=Q601053 WD="nth root" Disambiguation="of a nonnegative real number" Agda=root-nonzero-nat-ℝ⁰⁺}}
 is the inverse operation to the `n`th
-[power](real-numbers.powers-real-numbers.md) operation on the
+[power](real-numbers.powers-nonnegative-real-numbers.md) operation on the
 [nonnegative real numbers](real-numbers.nonnegative-real-numbers.md).
 
 ## Definition
@@ -62,6 +70,9 @@ opaque
 
 real-root-pair-expansion-ℝ⁰⁺ : {l : Level} → ℕ → ℕ → ℝ⁰⁺ l → ℝ l
 real-root-pair-expansion-ℝ⁰⁺ u v x = real-ℝ⁰⁺ (root-pair-expansion-ℝ⁰⁺ u v x)
+
+real-root-nonzero-nat-ℝ⁰⁺ : {l : Level} → ℕ⁺ → ℝ⁰⁺ l → ℝ l
+real-root-nonzero-nat-ℝ⁰⁺ n x = real-ℝ⁰⁺ (root-nonzero-nat-ℝ⁰⁺ n x)
 ```
 
 ## Properties
@@ -82,33 +93,32 @@ abstract opaque
     ( ap-binary power-ℝ⁰⁺ (left-unit-law-mul-ℕ _) refl) ∙
     ( is-section-root-is-odd-exponent-ℝ⁰⁺ _ _ x)
   is-section-root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x =
-    eq-ℝ⁰⁺ _ _
-      ( equational-reasoning
-        power-ℝ
-          ( exp-ℕ 2 (succ-ℕ u) *ℕ succ-ℕ (v *ℕ 2))
-          ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x))
-        ＝
-          power-ℝ
-            ( exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2) *ℕ 2)
-            ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x))
-          by
-            ap-binary
-              ( power-ℝ)
-              ( right-swap-mul-ℕ (exp-ℕ 2 u) 2 _)
-              ( refl)
-        ＝
-          square-ℝ
-            ( power-ℝ
-              ( exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2))
-              ( real-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x)))
-          by power-mul-ℝ _ 2
-        ＝ square-ℝ (real-sqrt-ℝ⁰⁺ x)
-          by
-            ap
-              ( square-ℝ ∘ real-ℝ⁰⁺)
-              ( is-section-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x))
-        ＝ real-ℝ⁰⁺ x
-          by ap real-ℝ⁰⁺ (is-section-square-ℝ⁰⁺ x))
+    equational-reasoning
+      power-ℝ⁰⁺
+        ( exp-ℕ 2 (succ-ℕ u) *ℕ succ-ℕ (v *ℕ 2))
+        ( root-pair-expansion-ℝ⁰⁺ (succ-ℕ u) v x)
+      ＝
+        power-ℝ⁰⁺
+          ( exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2) *ℕ 2)
+          ( root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x))
+        by
+          ap-binary
+            ( power-ℝ⁰⁺)
+            ( right-swap-mul-ℕ (exp-ℕ 2 u) 2 (succ-ℕ (v *ℕ 2)))
+            ( refl)
+      ＝
+        square-ℝ⁰⁺
+          ( power-ℝ⁰⁺
+            ( exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2))
+            ( root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x)))
+        by power-mul-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2)) 2
+      ＝ square-ℝ⁰⁺ (sqrt-ℝ⁰⁺ x)
+        by
+          ap
+            ( square-ℝ⁰⁺)
+            ( is-section-root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ x))
+      ＝ x
+        by is-section-sqrt-ℝ⁰⁺ x
 
   is-section-root-nonzero-nat-ℝ⁰⁺ :
     {l : Level} (n : ℕ⁺) (x : ℝ⁰⁺ l) →
@@ -143,37 +153,31 @@ abstract opaque
       root-pair-expansion-ℝ⁰⁺
         ( u)
         ( v)
-        ( sqrt-ℝ⁰⁺
-          ( power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ 2 *ℕ succ-ℕ (v *ℕ 2)) x))
+        ( sqrt-ℝ⁰⁺ (power-ℝ⁰⁺ (exp-ℕ 2 (succ-ℕ u) *ℕ succ-ℕ (v *ℕ 2)) x))
       ＝
         root-pair-expansion-ℝ⁰⁺
           ( u)
           ( v)
-          ( sqrt-ℝ⁰⁺
-            ( power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2) *ℕ 2) x))
+          ( sqrt-ℝ⁰⁺ (power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2) *ℕ 2) x))
         by
           ap
-            ( root-pair-expansion-ℝ⁰⁺ u v ∘ sqrt-ℝ⁰⁺)
-            ( ap-binary power-ℝ⁰⁺ (right-swap-mul-ℕ (exp-ℕ 2 u) 2 _) refl)
+            ( λ n → root-pair-expansion-ℝ⁰⁺ u v (sqrt-ℝ⁰⁺ (power-ℝ⁰⁺ n x)))
+            ( right-swap-mul-ℕ (exp-ℕ 2 u) 2 (succ-ℕ (v *ℕ 2)))
       ＝
         root-pair-expansion-ℝ⁰⁺
           ( u)
           ( v)
-          ( sqrt-ℝ⁰⁺
-            ( square-ℝ⁰⁺ (power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2)) x)))
+          ( sqrt-ℝ⁰⁺ (square-ℝ⁰⁺ (power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2)) x)))
         by
           ap
             ( root-pair-expansion-ℝ⁰⁺ u v ∘ sqrt-ℝ⁰⁺)
-            ( eq-ℝ⁰⁺ _ _ (power-mul-ℝ _ 2))
+            ( power-mul-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2)) 2)
       ＝
         root-pair-expansion-ℝ⁰⁺
           ( u)
           ( v)
           ( power-ℝ⁰⁺ (exp-ℕ 2 u *ℕ succ-ℕ (v *ℕ 2)) x)
-        by
-          ap
-            ( root-pair-expansion-ℝ⁰⁺ u v)
-            ( is-retraction-square-ℝ⁰⁺ _)
+        by ap (root-pair-expansion-ℝ⁰⁺ u v) (is-retraction-sqrt-ℝ⁰⁺ _)
       ＝ x
         by is-retraction-root-pair-expansion-ℝ⁰⁺ u v x
 
@@ -206,6 +210,112 @@ aut-power-nonzero-nat-ℝ⁰⁺ : (l : Level) (n : ℕ⁺) → Aut (ℝ⁰⁺ l)
 aut-power-nonzero-nat-ℝ⁰⁺ l n =
   ( power-ℝ⁰⁺ (nat-ℕ⁺ n) ,
     is-equiv-power-nonzero-nat-ℝ⁰⁺ l n)
+```
+
+### Roots and integer powers commute
+
+```agda
+abstract
+  swap-root-nonzero-nat-power-ℝ⁰⁺ :
+    {l : Level} (n : ℕ⁺) (k : ℕ) (x : ℝ⁰⁺ l) →
+    root-nonzero-nat-ℝ⁰⁺ n (power-ℝ⁰⁺ k x) ＝
+    power-ℝ⁰⁺ k (root-nonzero-nat-ℝ⁰⁺ n x)
+  swap-root-nonzero-nat-power-ℝ⁰⁺ n⁺@(n , _) k x =
+    is-injective-equiv
+      ( aut-power-nonzero-nat-ℝ⁰⁺ _ n⁺)
+      ( equational-reasoning
+        power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ (power-ℝ⁰⁺ k x))
+        ＝ power-ℝ⁰⁺ k x
+          by is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ _
+        ＝ power-ℝ⁰⁺ k (power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ x))
+          by ap (power-ℝ⁰⁺ k) (inv (is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ x))
+        ＝ power-ℝ⁰⁺ n (power-ℝ⁰⁺ k (root-nonzero-nat-ℝ⁰⁺ n⁺ x))
+          by swap-power-Large-Monoid large-monoid-mul-ℝ⁰⁺ k n _)
+```
+
+### The `mn`th root of `x` is the `n`th root of the `m`th root of `x`
+
+```agda
+abstract
+  root-mul-nonzero-nat-ℝ⁰⁺ :
+    {l : Level} (m n : ℕ⁺) (x : ℝ⁰⁺ l) →
+    root-nonzero-nat-ℝ⁰⁺ (m *ℕ⁺ n) x ＝
+    root-nonzero-nat-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ m x)
+  root-mul-nonzero-nat-ℝ⁰⁺ m⁺@(m , _) n⁺@(n , _) x =
+    is-injective-equiv
+      ( aut-power-nonzero-nat-ℝ⁰⁺ _ (m⁺ *ℕ⁺ n⁺))
+      ( equational-reasoning
+        power-ℝ⁰⁺ (m *ℕ n) (root-nonzero-nat-ℝ⁰⁺ (m⁺ *ℕ⁺ n⁺) x)
+        ＝ x
+          by is-section-root-nonzero-nat-ℝ⁰⁺ (m⁺ *ℕ⁺ n⁺) x
+        ＝ power-ℝ⁰⁺ m (root-nonzero-nat-ℝ⁰⁺ m⁺ x)
+          by inv (is-section-root-nonzero-nat-ℝ⁰⁺ m⁺ x)
+        ＝
+          power-ℝ⁰⁺
+            ( n)
+            ( root-nonzero-nat-ℝ⁰⁺ n⁺ (power-ℝ⁰⁺ m (root-nonzero-nat-ℝ⁰⁺ m⁺ x)))
+          by inv (is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ _)
+        ＝
+          power-ℝ⁰⁺
+            ( n)
+            ( power-ℝ⁰⁺ m (root-nonzero-nat-ℝ⁰⁺ n⁺ (root-nonzero-nat-ℝ⁰⁺ m⁺ x)))
+          by ap (power-ℝ⁰⁺ n) (swap-root-nonzero-nat-power-ℝ⁰⁺ n⁺ m _)
+        ＝
+          power-ℝ⁰⁺
+            ( m *ℕ n)
+            ( root-nonzero-nat-ℝ⁰⁺ n⁺ (root-nonzero-nat-ℝ⁰⁺ m⁺ x))
+          by inv (power-mul-ℝ⁰⁺ m n))
+```
+
+### `n`th roots distribute over multiplication
+
+```agda
+abstract
+  distributive-mul-root-nonzero-nat-ℝ⁰⁺ :
+    {l1 l2 : Level}
+    (n : ℕ⁺) (x : ℝ⁰⁺ l1) (y : ℝ⁰⁺ l2) →
+    root-nonzero-nat-ℝ⁰⁺ n (x *ℝ⁰⁺ y) ＝
+    root-nonzero-nat-ℝ⁰⁺ n x *ℝ⁰⁺ root-nonzero-nat-ℝ⁰⁺ n y
+  distributive-mul-root-nonzero-nat-ℝ⁰⁺ n⁺@(n , _) x y =
+    is-injective-equiv
+      ( aut-power-nonzero-nat-ℝ⁰⁺ _ n⁺)
+      ( equational-reasoning
+        power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ (x *ℝ⁰⁺ y))
+        ＝ x *ℝ⁰⁺ y
+          by is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ _
+        ＝
+          power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ x) *ℝ⁰⁺
+          power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ y)
+          by
+            inv
+              ( ap-mul-ℝ⁰⁺
+                ( is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ x)
+                ( is-section-root-nonzero-nat-ℝ⁰⁺ n⁺ y))
+        ＝
+          power-ℝ⁰⁺ n (root-nonzero-nat-ℝ⁰⁺ n⁺ x *ℝ⁰⁺ root-nonzero-nat-ℝ⁰⁺ n⁺ y)
+          by inv (distributive-power-mul-ℝ⁰⁺ n))
+```
+
+### The 1st root is the identity
+
+```agda
+abstract
+  root-one-nonzero-nat-ℝ⁰⁺ :
+    {l : Level} (x : ℝ⁰⁺ l) →
+    root-nonzero-nat-ℝ⁰⁺ one-ℕ⁺ x ＝ x
+  root-one-nonzero-nat-ℝ⁰⁺ = is-retraction-root-nonzero-nat-ℝ⁰⁺ one-ℕ⁺
+```
+
+### Any root of 1 is 1
+
+```agda
+abstract
+  root-nonzero-nat-raise-one-ℝ⁰⁺ :
+    {l : Level} (n : ℕ⁺) →
+    root-nonzero-nat-ℝ⁰⁺ n (raise-one-ℝ⁰⁺ l) ＝ raise-one-ℝ⁰⁺ l
+  root-nonzero-nat-raise-one-ℝ⁰⁺ n =
+    ( ap (root-nonzero-nat-ℝ⁰⁺ n) (inv (power-raise-one-ℝ⁰⁺ (nat-ℕ⁺ n)))) ∙
+    ( is-retraction-root-nonzero-nat-ℝ⁰⁺ n _)
 ```
 
 ## See also

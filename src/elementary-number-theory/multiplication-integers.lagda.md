@@ -553,6 +553,26 @@ abstract
     is-emb-is-injective is-set-ℤ (is-injective-right-mul-ℤ x f)
 ```
 
+### Swapping laws of multiplication
+
+```agda
+module _
+  (a b c : ℤ)
+  where abstract
+
+  right-swap-mul-ℤ : (a *ℤ b) *ℤ c ＝ (a *ℤ c) *ℤ b
+  right-swap-mul-ℤ =
+    ( associative-mul-ℤ a b c) ∙
+    ( ap (a *ℤ_) (commutative-mul-ℤ b c)) ∙
+    ( inv (associative-mul-ℤ a c b))
+
+  left-swap-mul-ℤ : a *ℤ (b *ℤ c) ＝ b *ℤ (a *ℤ c)
+  left-swap-mul-ℤ =
+    ( inv (associative-mul-ℤ a b c)) ∙
+    ( ap (_*ℤ c) (commutative-mul-ℤ a b)) ∙
+    ( associative-mul-ℤ b a c)
+```
+
 ## See also
 
 - Properties of multiplication with respect to inequality and positivity,
