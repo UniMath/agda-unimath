@@ -24,7 +24,7 @@ open import real-numbers.irrationality-square-root-of-two using
 
 ### 3. The denumerability of the rational numbers {#3}
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import elementary-number-theory.rational-numbers using
@@ -59,7 +59,7 @@ open import foundation.cantor-schroder-bernstein-escardo using
     Cantor-Schröder-Bernstein)
 ```
 
-**Author:** [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke)
+**Author:** [Fredrik Bakke](https://fredrik-bakke.github.io)
 
 ```agda
 open import foundation.cantor-schroder-bernstein-decidable-embeddings using
