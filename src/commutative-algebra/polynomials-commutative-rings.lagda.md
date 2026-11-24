@@ -170,11 +170,11 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
-  constant-zero-polynomial-Commutative-Ring :
+  compute-constant-zero-polynomial-Commutative-Ring :
     constant-polynomial-Commutative-Ring R (zero-Commutative-Ring R) ＝
     zero-polynomial-Commutative-Ring R
-  constant-zero-polynomial-Commutative-Ring =
-    constant-zero-polynomial-Commutative-Semiring _
+  compute-constant-zero-polynomial-Commutative-Ring =
+    compute-constant-zero-polynomial-Commutative-Semiring _
 ```
 
 ### The constant zero polynomial is the constant polynomial with value one
@@ -184,11 +184,11 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
-  constant-one-polynomial-Commutative-Ring :
+  compute-constant-one-polynomial-Commutative-Ring :
     constant-polynomial-Commutative-Ring R (one-Commutative-Ring R) ＝
     one-polynomial-Commutative-Ring R
-  constant-one-polynomial-Commutative-Ring =
-    constant-one-polynomial-Commutative-Semiring _
+  compute-constant-one-polynomial-Commutative-Ring =
+    compute-constant-one-polynomial-Commutative-Semiring _
 ```
 
 ### Evaluation of polynomials
@@ -393,5 +393,5 @@ module _
     ( ( constant-polynomial-Commutative-Ring R ,
         preserves-add-constant-polynomial-Commutative-Ring) ,
       preserves-mul-constant-polynomial-Commutative-Ring ,
-      constant-one-polynomial-Commutative-Ring R)
+      compute-constant-one-polynomial-Commutative-Ring R)
 ```

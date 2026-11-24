@@ -466,8 +466,8 @@ module _
 ### Equivalences are closed under homotopies
 
 We show that if `f ~ g`, then `f` is an equivalence if and only if `g` is an
-equivalence. Furthermore, we show that if `f` and `g` are homotopic equivaleces,
-then their inverses are also homotopic.
+equivalence. Furthermore, we show that if `f` and `g` are homotopic
+equivalences, then their inverses are also homotopic.
 
 ```agda
 module _

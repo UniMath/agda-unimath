@@ -45,6 +45,7 @@ open import linear-algebra.function-real-vector-spaces public
 open import linear-algebra.function-vector-spaces public
 open import linear-algebra.functoriality-grids public
 open import linear-algebra.general-linear-groups-finite-degree-rings public
+open import linear-algebra.functoriality-matrices public
 open import linear-algebra.grids public
 open import linear-algebra.grids-on-rings public
 open import linear-algebra.identity-matrices-on-commutative-rings public

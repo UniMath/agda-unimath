@@ -56,7 +56,7 @@ else
 	AGDA_MIN_HEAP ?= 4G
 endif
 
-AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M8G -RTS
+AGDARTS := +RTS -H$(AGDA_MIN_HEAP) -M16G -RTS
 AGDAFILES := $(shell find $(SOURCE_DIR) -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 
 # All our code is in literate Agda, so we could set highlight=code and drop the
@@ -164,7 +164,8 @@ $(WEBSITE_CSS)/Agda-highlight.css: ./$(SCRIPTS_DIR)/generate_agda_css.py ./$(WEB
 
 $(WEBSITE_IMAGES)/agda_dependency_graph.svg $(WEBSITE_IMAGES)/agda_dependency_graph_legend.html &: ${AGDAFILES}
 	@echo Generating dependency graph art by Fredrik
-	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || true
+	@python3 ./$(SCRIPTS_DIR)/generate_dependency_graph_rendering.py $(WEBSITE_IMAGES)/agda_dependency_graph svg || \
+		echo "::warning::Dependency graph generation failed; continuing website build." >&2
 
 .PHONY: website-prepare
 website-prepare: agda-html ./$(MDBOOK_SRC)/SUMMARY.md ./$(MDBOOK_SRC)/CONTRIBUTORS.md ./$(MDBOOK_SRC)/MAINTAINERS.md \
