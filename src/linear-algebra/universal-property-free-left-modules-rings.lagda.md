@@ -54,7 +54,7 @@ module _
 
 ## Properties
 
-### The canonical linear map between free left modules
+### The canonical linear map between free left modules over the same generator type
 
 ```agda
 module _
@@ -74,7 +74,7 @@ module _
     map-inv-is-equiv (is-free-M N) in-N
 ```
 
-### The composition of the canonical linear maps in each direction between free left modules is the identity
+### The composition of the canonical linear maps in each direction between free left modules over the same generator type is the identity
 
 ```agda
 module _
@@ -87,30 +87,29 @@ module _
   (in-N : G → type-left-module-Ring R N)
   (is-free-M : is-free-left-module-Ring R G M in-M)
   (is-free-N : is-free-left-module-Ring R G N in-N)
-  where
+  where abstract
 
-  abstract
-    is-section-linear-map-is-free-left-module-Ring :
-      comp-linear-map-left-module-Ring R N M N
-        ( linear-map-is-free-left-module-Ring R G M N in-M in-N
-          ( is-free-M)
-          ( is-free-N))
-        ( linear-map-is-free-left-module-Ring R G N M in-N in-M
-          ( is-free-N)
-          ( is-free-M)) ＝
-      id-linear-map-left-module-Ring R N
-    is-section-linear-map-is-free-left-module-Ring =
-      is-injective-is-equiv
-        ( is-free-N N)
-        ( eq-htpy
-          ( ( ( ap
-                ( map-linear-map-left-module-Ring R M N
-                  ( map-inv-is-equiv (is-free-M N) in-N))) ∘
-              ( htpy-eq (is-section-map-inv-is-equiv (is-free-N M) in-M))) ∙h
-            ( htpy-eq (is-section-map-inv-is-equiv (is-free-M N) in-N))))
+  is-section-linear-map-is-free-left-module-Ring :
+    comp-linear-map-left-module-Ring R N M N
+      ( linear-map-is-free-left-module-Ring R G M N in-M in-N
+        ( is-free-M)
+        ( is-free-N))
+      ( linear-map-is-free-left-module-Ring R G N M in-N in-M
+        ( is-free-N)
+        ( is-free-M)) ＝
+    id-linear-map-left-module-Ring R N
+  is-section-linear-map-is-free-left-module-Ring =
+    is-injective-is-equiv
+      ( is-free-N N)
+      ( eq-htpy
+        ( ( ( ap
+              ( map-linear-map-left-module-Ring R M N
+                ( map-inv-is-equiv (is-free-M N) in-N))) ∘
+            ( htpy-eq (is-section-map-inv-is-equiv (is-free-N M) in-M))) ∙h
+          ( htpy-eq (is-section-map-inv-is-equiv (is-free-M N) in-N))))
 ```
 
-### The canonical isomorphism between any two free left modules
+### The canonical isomorphism between any two free left modules over the same generator type
 
 ```agda
 module _
