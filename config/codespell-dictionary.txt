@@ -67,6 +67,7 @@ isomorhpsim->isomorphism
 isomorhpsims->isomorphisms
 isomorphsim->isomorphism
 isomorphsims->isomorphisms
+lenght->length
 monomorhpism->monomorphism
 monomorhpisms->monomorphisms
 monomorhpsim->monomorphism

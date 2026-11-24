@@ -17,6 +17,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.arrays
+open import lists.elements-of-lists
 open import lists.lists
 open import lists.sorted-tuples
 open import lists.tuples
@@ -98,7 +99,8 @@ module _
     z ∈-list (cons y l) →
     leq-Decidable-Total-Order X x y →
     leq-Decidable-Total-Order X x z
-  leq-element-in-list-leq-head-is-sorted-list x .z z l s (is-head .z l) q =
+  leq-element-in-list-leq-head-is-sorted-list
+    x .z z l s (is-head-element-list .z l) q =
     q
   leq-element-in-list-leq-head-is-sorted-list
     ( x)
@@ -106,7 +108,7 @@ module _
     ( z)
     ( cons w l)
     ( s)
-    ( is-in-tail .z .y .(cons w l) i)
+    ( is-in-tail-element-list .z .y .(cons w l) i)
     ( q) =
     leq-element-in-list-leq-head-is-sorted-list
       ( x)
