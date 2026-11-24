@@ -134,6 +134,14 @@ module _
         ( commutative-mul-ℝ _ _)
         ( right-inverse-law-mul-nonzero-ℝ)
 
+    eq-left-inverse-law-mul-nonzero-ℝ :
+      real-inv-nonzero-ℝ *ℝ real-nonzero-ℝ x ＝ raise-one-ℝ l
+    eq-left-inverse-law-mul-nonzero-ℝ =
+      eq-sim-ℝ
+        ( transitive-sim-ℝ _ _ _
+          ( sim-raise-ℝ l one-ℝ)
+          ( left-inverse-law-mul-nonzero-ℝ))
+
 is-invertible-is-nonzero-ℝ :
   {l : Level} (x : ℝ l) → is-nonzero-ℝ x →
   is-invertible-element-Commutative-Ring (commutative-ring-ℝ l) x
