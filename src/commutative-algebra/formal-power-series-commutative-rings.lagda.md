@@ -149,13 +149,13 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
-  constant-zero-formal-power-series-Commutative-Ring :
+  compute-constant-zero-formal-power-series-Commutative-Ring :
     constant-formal-power-series-Commutative-Ring R (zero-Commutative-Ring R) ＝
     zero-formal-power-series-Commutative-Ring R
-  constant-zero-formal-power-series-Commutative-Ring =
-    constant-zero-formal-power-series-Commutative-Semiring _
+  compute-constant-zero-formal-power-series-Commutative-Ring =
+    compute-constant-zero-formal-power-series-Commutative-Semiring _
 ```
 
 ### The constant one formal power series is the constant formal power series with value one
@@ -163,13 +163,13 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
-  constant-one-formal-power-series-Commutative-Ring :
+  compute-constant-one-formal-power-series-Commutative-Ring :
     constant-formal-power-series-Commutative-Ring R (one-Commutative-Ring R) ＝
     one-formal-power-series-Commutative-Ring R
-  constant-one-formal-power-series-Commutative-Ring =
-    constant-one-formal-power-series-Commutative-Semiring _
+  compute-constant-one-formal-power-series-Commutative-Ring =
+    compute-constant-one-formal-power-series-Commutative-Semiring _
 ```
 
 ### Addition
@@ -192,7 +192,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   associative-add-formal-power-series-Commutative-Ring :
     (x y z : formal-power-series-Commutative-Ring R) →
@@ -211,7 +211,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   commutative-add-formal-power-series-Commutative-Ring :
     (x y : formal-power-series-Commutative-Ring R) →
@@ -226,7 +226,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   left-unit-law-add-formal-power-series-Commutative-Ring :
     (x : formal-power-series-Commutative-Ring R) →
@@ -269,30 +269,29 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
-  abstract
-    left-inverse-law-add-formal-power-series-Commutative-Ring :
-      (x : formal-power-series-Commutative-Ring R) →
-      add-formal-power-series-Commutative-Ring R
-        ( neg-formal-power-series-Commutative-Ring R x)
-        ( x) ＝
-      zero-formal-power-series-Commutative-Ring R
-    left-inverse-law-add-formal-power-series-Commutative-Ring x =
-      ap
-        ( formal-power-series-coefficients-Commutative-Ring R)
-        ( eq-htpy (λ n → left-inverse-law-add-Commutative-Ring R _))
+  left-inverse-law-add-formal-power-series-Commutative-Ring :
+    (x : formal-power-series-Commutative-Ring R) →
+    add-formal-power-series-Commutative-Ring R
+      ( neg-formal-power-series-Commutative-Ring R x)
+      ( x) ＝
+    zero-formal-power-series-Commutative-Ring R
+  left-inverse-law-add-formal-power-series-Commutative-Ring x =
+    ap
+      ( formal-power-series-coefficients-Commutative-Ring R)
+      ( eq-htpy (λ n → left-inverse-law-add-Commutative-Ring R _))
 
-    right-inverse-law-add-formal-power-series-Commutative-Ring :
-      (x : formal-power-series-Commutative-Ring R) →
-      add-formal-power-series-Commutative-Ring R
-        ( x)
-        ( neg-formal-power-series-Commutative-Ring R x) ＝
-      zero-formal-power-series-Commutative-Ring R
-    right-inverse-law-add-formal-power-series-Commutative-Ring x =
-      ap
-        ( formal-power-series-coefficients-Commutative-Ring R)
-        ( eq-htpy (λ n → right-inverse-law-add-Commutative-Ring R _))
+  right-inverse-law-add-formal-power-series-Commutative-Ring :
+    (x : formal-power-series-Commutative-Ring R) →
+    add-formal-power-series-Commutative-Ring R
+      ( x)
+      ( neg-formal-power-series-Commutative-Ring R x) ＝
+    zero-formal-power-series-Commutative-Ring R
+  right-inverse-law-add-formal-power-series-Commutative-Ring x =
+    ap
+      ( formal-power-series-coefficients-Commutative-Ring R)
+      ( eq-htpy (λ n → right-inverse-law-add-Commutative-Ring R _))
 ```
 
 ### Multiplication
@@ -315,7 +314,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   associative-mul-formal-power-series-Commutative-Ring :
     (x y z : formal-power-series-Commutative-Ring R) →
@@ -334,7 +333,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   commutative-mul-formal-power-series-Commutative-Ring :
     (x y : formal-power-series-Commutative-Ring R) →
@@ -349,7 +348,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   left-unit-law-mul-formal-power-series-Commutative-Ring :
     (x : formal-power-series-Commutative-Ring R) →
@@ -375,7 +374,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   left-zero-law-mul-formal-power-series-Commutative-Ring :
     (x : formal-power-series-Commutative-Ring R) →
@@ -401,7 +400,7 @@ module _
 ```agda
 module _
   {l : Level} (R : Commutative-Ring l)
-  where
+  where abstract
 
   left-distributive-mul-add-formal-power-series-Commutative-Ring :
     (x y z : formal-power-series-Commutative-Ring R) →
@@ -477,25 +476,26 @@ module _
   {l : Level} (R : Commutative-Ring l)
   where
 
-  preserves-mul-constant-formal-power-series-Commutative-Ring :
-    {x y : type-Commutative-Ring R} →
+  abstract
+    preserves-mul-constant-formal-power-series-Commutative-Ring :
+      {x y : type-Commutative-Ring R} →
       constant-formal-power-series-Commutative-Ring R
         ( mul-Commutative-Ring R x y) ＝
       mul-formal-power-series-Commutative-Ring R
         ( constant-formal-power-series-Commutative-Ring R x)
         ( constant-formal-power-series-Commutative-Ring R y)
-  preserves-mul-constant-formal-power-series-Commutative-Ring =
-    preserves-mul-constant-formal-power-series-Commutative-Semiring _
+    preserves-mul-constant-formal-power-series-Commutative-Ring =
+      preserves-mul-constant-formal-power-series-Commutative-Semiring _
 
-  preserves-add-constant-formal-power-series-Commutative-Ring :
-    {x y : type-Commutative-Ring R} →
+    preserves-add-constant-formal-power-series-Commutative-Ring :
+      {x y : type-Commutative-Ring R} →
       constant-formal-power-series-Commutative-Ring R
         ( add-Commutative-Ring R x y) ＝
       add-formal-power-series-Commutative-Ring R
         ( constant-formal-power-series-Commutative-Ring R x)
         ( constant-formal-power-series-Commutative-Ring R y)
-  preserves-add-constant-formal-power-series-Commutative-Ring =
-    preserves-add-constant-formal-power-series-Commutative-Semiring _
+    preserves-add-constant-formal-power-series-Commutative-Ring =
+      preserves-add-constant-formal-power-series-Commutative-Semiring _
 
   hom-constant-formal-power-series-Commutative-Ring :
     hom-Commutative-Ring
@@ -505,5 +505,5 @@ module _
     ( ( constant-formal-power-series-Commutative-Ring R ,
         preserves-add-constant-formal-power-series-Commutative-Ring) ,
       preserves-mul-constant-formal-power-series-Commutative-Ring ,
-      constant-one-formal-power-series-Commutative-Ring R)
+      compute-constant-one-formal-power-series-Commutative-Ring R)
 ```
