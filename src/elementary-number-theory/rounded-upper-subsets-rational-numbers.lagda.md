@@ -83,7 +83,7 @@ module _
   subtype-rounded-upper-type-ℚ = pr1 upper-type-rounded-upper-type-ℚ
 
   is-upwards-rounded-upper-type-ℚ :
-    is-upwards-closed-subtype-Preorder
+    is-upwards-closed-Subpreorder
       ( ℚ-Preorder)
       ( subtype-rounded-upper-type-ℚ)
   is-upwards-rounded-upper-type-ℚ = pr2 upper-type-rounded-upper-type-ℚ
@@ -112,7 +112,7 @@ module _
 
   abstract
     is-upper-subtype-round-upper-type-ℚ :
-      is-upwards-closed-subtype-Preorder ℚ-Preorder subtype-round-upper-type-ℚ
+      is-upwards-closed-Subpreorder ℚ-Preorder subtype-round-upper-type-ℚ
     is-upper-subtype-round-upper-type-ℚ q r H =
       elim-exists
         ( subtype-round-upper-type-ℚ r)
@@ -184,7 +184,7 @@ is-idempotent-round-upper-type-ℚ :
   is-idempotent (upper-subtype-round-upper-type-ℚ {l})
 is-idempotent-round-upper-type-ℚ L =
   eq-type-subtype
-    ( is-upwards-closed-prop-subtype-Preorder ℚ-Preorder)
+    ( is-upwards-closed-prop-Subpreorder ℚ-Preorder)
     ( compute-round-is-rounded-upper-type-ℚ
       ( upper-subtype-round-upper-type-ℚ L)
       ( is-rounded-upper-subtype-round-upper-type-ℚ L))

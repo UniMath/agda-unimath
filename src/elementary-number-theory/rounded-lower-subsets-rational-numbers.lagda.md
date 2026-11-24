@@ -83,7 +83,7 @@ module _
   subtype-rounded-lower-type-ℚ = pr1 lower-type-rounded-lower-type-ℚ
 
   is-downwards-rounded-lower-type-ℚ :
-    is-downwards-closed-subtype-Preorder
+    is-downwards-closed-Subpreorder
       ( ℚ-Preorder)
       ( subtype-rounded-lower-type-ℚ)
   is-downwards-rounded-lower-type-ℚ = pr2 lower-type-rounded-lower-type-ℚ
@@ -112,7 +112,7 @@ module _
 
   abstract
     is-lower-subtype-round-lower-type-ℚ :
-      is-downwards-closed-subtype-Preorder ℚ-Preorder subtype-round-lower-type-ℚ
+      is-downwards-closed-Subpreorder ℚ-Preorder subtype-round-lower-type-ℚ
     is-lower-subtype-round-lower-type-ℚ q r H =
       elim-exists
         ( subtype-round-lower-type-ℚ r)
@@ -184,7 +184,7 @@ is-idempotent-round-lower-type-ℚ :
   is-idempotent (lower-subtype-round-lower-type-ℚ {l})
 is-idempotent-round-lower-type-ℚ L =
   eq-type-subtype
-    ( is-downwards-closed-prop-subtype-Preorder ℚ-Preorder)
+    ( is-downwards-closed-prop-Subpreorder ℚ-Preorder)
     ( compute-round-is-rounded-lower-type-ℚ
       ( lower-subtype-round-lower-type-ℚ L)
       ( is-rounded-lower-subtype-round-lower-type-ℚ L))
