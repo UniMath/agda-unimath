@@ -18,8 +18,10 @@ open import foundation.injective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-large-groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.large-groups
+open import group-theory.large-subgroups
 open import group-theory.powers-of-elements-large-groups
 open import group-theory.powers-of-elements-large-monoids
 ```
@@ -552,6 +554,52 @@ module _
       int-power-Large-Group G l (int-power-Large-Group G k x)
     int-power-mul-Large-Group {l1} =
       integer-power-mul-Group (group-Large-Group G l1)
+```
+
+### Homomorphisms preserve integer powers on large groups
+
+```agda
+module _
+  {α β : Level → Level}
+  {γ δ : Level → Level → Level}
+  {G : Large-Group α γ}
+  {H : Large-Group β δ}
+  (φ : hom-Large-Group G H)
+  where abstract
+
+  preserves-int-powers-hom-Large-Group :
+    {l : Level} (k : ℤ) (x : type-Large-Group G l) →
+    map-hom-Large-Group φ (int-power-Large-Group G k x) ＝
+    int-power-Large-Group H k (map-hom-Large-Group φ x)
+  preserves-int-powers-hom-Large-Group {l} =
+    preserves-integer-powers-hom-Group
+      ( group-Large-Group G l)
+      ( group-Large-Group H l)
+      ( hom-group-hom-Large-Group φ l)
+```
+
+### Integer powers on large subgroups
+
+```agda
+module _
+  {α γ : Level → Level}
+  {β : Level → Level → Level}
+  {G : Large-Group α β}
+  (S : Large-Subgroup γ G)
+  where abstract
+
+  inclusion-int-power-Large-Subgroup :
+    {l : Level} (k : ℤ) (x : type-Large-Subgroup S l) →
+    inclusion-Large-Subgroup
+      ( S)
+      ( int-power-Large-Group
+        ( large-group-Large-Subgroup S)
+        ( k)
+        ( x)) ＝
+    int-power-Large-Group G k (inclusion-Large-Subgroup S x)
+  inclusion-int-power-Large-Subgroup =
+    preserves-int-powers-hom-Large-Group
+      ( inclusion-hom-Large-Subgroup S)
 ```
 
 ## See also

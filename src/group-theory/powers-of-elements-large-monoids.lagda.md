@@ -15,7 +15,9 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-large-monoids
 open import group-theory.large-monoids
+open import group-theory.large-submonoids
 open import group-theory.powers-of-elements-monoids
 ```
 
@@ -316,4 +318,49 @@ module _
       power-Large-Monoid M (m *ℕ n) x ＝
       power-Large-Monoid M n (power-Large-Monoid M m x)
     power-mul-Large-Monoid {l} = power-mul-Monoid (monoid-Large-Monoid M l)
+```
+
+### Homomorphisms preserve powers in large monoids
+
+```agda
+module _
+  {α β : Level → Level}
+  {γ δ : Level → Level → Level}
+  {M : Large-Monoid α γ}
+  {N : Large-Monoid β δ}
+  (φ : hom-Large-Monoid M N)
+  where abstract
+
+  preserves-powers-hom-Large-Monoid :
+    {l : Level} (n : ℕ) (x : type-Large-Monoid M l) →
+    map-hom-Large-Monoid φ (power-Large-Monoid M n x) ＝
+    power-Large-Monoid N n (map-hom-Large-Monoid φ x)
+  preserves-powers-hom-Large-Monoid {l} =
+    preserves-powers-hom-Monoid
+      ( monoid-Large-Monoid M l)
+      ( monoid-Large-Monoid N l)
+      ( hom-monoid-hom-Large-Monoid φ l)
+```
+
+### Powers of elements in large submonoids
+
+```agda
+module _
+  {α γ : Level → Level}
+  {β : Level → Level → Level}
+  {M : Large-Monoid α β}
+  (S : Large-Submonoid γ M)
+  where abstract
+
+  inclusion-power-Large-Submonoid :
+    {l : Level} (n : ℕ) (x : type-Large-Submonoid S l) →
+    inclusion-Large-Submonoid
+      ( S)
+      ( power-Large-Monoid
+        ( large-monoid-Large-Submonoid S)
+        ( n)
+        ( x)) ＝
+    power-Large-Monoid M n (inclusion-Large-Submonoid S x)
+  inclusion-power-Large-Submonoid =
+    preserves-powers-hom-Large-Monoid (inclusion-hom-Large-Submonoid S)
 ```
