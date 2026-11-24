@@ -366,6 +366,9 @@ raise-ℝ⁺ l (x , 0<x) =
 
 raise-one-ℝ⁺ : (l : Level) → ℝ⁺ l
 raise-one-ℝ⁺ l = raise-ℝ⁺ l one-ℝ⁺
+
+positive-raise-real-ℚ⁺ : (l : Level) → ℚ⁺ → ℝ⁺ l
+positive-raise-real-ℚ⁺ l q = raise-ℝ⁺ l (positive-real-ℚ⁺ q)
 ```
 
 ### Raising a positive real to its own level is the identity

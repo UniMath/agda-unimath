@@ -323,6 +323,28 @@ module _
       right-unit-law-comp-linear-map-left-module-Ring (ring-Heyting-Field K) M N
 ```
 
+### A linear map `f` maps `x - y` to `f x - f y`
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (K : Heyting-Field l1)
+  (V : Vector-Space l2 K)
+  (W : Vector-Space l3 K)
+  (f : linear-map-Vector-Space K V W)
+  where
+
+  abstract
+    map-diff-linear-map-Vector-Space :
+      {x y : type-Vector-Space K V} →
+      map-linear-map-Vector-Space K V W f (diff-Vector-Space K V x y) ＝
+      diff-Vector-Space K W
+        ( map-linear-map-Vector-Space K V W f x)
+        ( map-linear-map-Vector-Space K V W f y)
+    map-diff-linear-map-Vector-Space =
+      map-diff-linear-map-left-module-Ring (ring-Heyting-Field K) V W f
+```
+
 ## External links
 
 - [Linear maps](https://en.wikipedia.org/wiki/Linear_map) on Wikipedia

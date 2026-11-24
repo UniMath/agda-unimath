@@ -41,6 +41,7 @@ open import real-numbers.difference-real-numbers
 open import real-numbers.distance-real-numbers
 open import real-numbers.inequality-positive-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.large-ring-of-real-numbers
 open import real-numbers.lipschitz-continuity-multiplication-real-numbers
 open import real-numbers.multiplication-positive-and-negative-real-numbers
 open import real-numbers.multiplication-positive-real-numbers
@@ -55,6 +56,8 @@ open import real-numbers.similarity-positive-real-numbers
 open import real-numbers.similarity-real-numbers
 open import real-numbers.strict-inequality-positive-real-numbers
 open import real-numbers.strict-inequality-real-numbers
+
+open import ring-theory.invertible-elements-rings
 ```
 
 </details>
@@ -464,4 +467,16 @@ abstract
         by sim-eq-ℝ (inv (abs-mul-ℝ _ _))
       ~ℝ dist-ℝ x y
         by preserves-sim-abs-ℝ (cancel-left-div-mul-ℝ⁺ c (x -ℝ y))
+```
+
+### Positive real numbers are invertible elements of the ring of real numbers
+
+```agda
+is-invertible-is-positive-ℝ :
+  {l : Level} (x : ℝ l) →
+  is-positive-ℝ x → is-invertible-element-Ring (ring-ℝ l) x
+is-invertible-is-positive-ℝ x 0<x =
+  ( real-inv-ℝ⁺ (x , 0<x) ,
+    ap real-ℝ⁺ (eq-right-inverse-law-mul-ℝ⁺ (x , 0<x)) ,
+    ap real-ℝ⁺ (eq-left-inverse-law-mul-ℝ⁺ (x , 0<x)))
 ```
