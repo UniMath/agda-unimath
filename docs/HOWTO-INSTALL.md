@@ -33,7 +33,8 @@ In order to contribute to the agda-unimath library you will additionally need:
    ```shell
    make install-website-dev
    ```
-7. `graphviz`
+7. `graphviz` with the `sfdp` layout engine. On Ubuntu, install both `graphviz`
+   and `libgvplugin-neato-layout8`.
 
 All of these can also be installed in one go by using `nix`. In the section
 [Creating a setup for contributors](#contributor-setup) we will walk you through

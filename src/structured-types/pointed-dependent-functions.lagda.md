@@ -38,6 +38,7 @@ module _
       ( ev-point (point-Pointed-Type A) {fam-Pointed-Fam A B})
       ( point-Pointed-Fam A B)
 
+  Π∗ : UU (l1 ⊔ l2)
   Π∗ = pointed-Π
 ```
 

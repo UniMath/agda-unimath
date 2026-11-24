@@ -91,9 +91,9 @@ module _
       is-central-element-Semiring R y →
       is-central-element-Semiring R (add-Semiring R x y)
     is-central-element-add-Semiring x y H K z =
-      ( right-distributive-mul-add-Semiring R x y z) ∙
-      ( ( ap-add-Semiring R (H z) (K z)) ∙
-        ( inv (left-distributive-mul-add-Semiring R z x y)))
+      right-distributive-mul-add-Semiring R x y z ∙
+      ap-add-Semiring R (H z) (K z) ∙
+      inv (left-distributive-mul-add-Semiring R z x y)
 ```
 
 ### The product of two central elements is central
