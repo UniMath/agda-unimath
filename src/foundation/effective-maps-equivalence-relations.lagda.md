@@ -20,10 +20,15 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Consider a type `A` equipped with an equivalence relation `R`, and let
-`f : A → X` be a map. Then `f` is effective if `R x y ≃ (f x ＝ f y)` for all
-`x y : A`. If `f` is both effective and surjective, then it follows that `X`
-satisfies the universal property of the quotient `A/R`.
+Consider a type `A` equipped with an
+[equivalence relation](foundation.equivalence-relations.md) `R`, and let
+`f : A → X` be a map. Then `f` is
+{{#concept "effective" Disambiguation="map relative to an equivalence relation" Agda=is-effective}}
+if `R x y ≃ (f x ＝ f y)` for all `x y : A`. If `f` is both effective and
+[surjective](foundation.surjective-maps.md), then it follows that `X` satisfies
+the
+[universal property of the quotient](foundation.universal-property-set-quotients.md)
+`A/R`.
 
 ## Definition
 
