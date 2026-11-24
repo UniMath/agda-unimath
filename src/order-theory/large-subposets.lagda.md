@@ -63,6 +63,10 @@ module _
   record
     Large-Subposet : UUω
     where
+
+    constructor
+      make-Large-Subposet
+
     field
       large-subpreorder-Large-Subposet :
         Large-Subpreorder γ (large-preorder-Large-Poset P)
