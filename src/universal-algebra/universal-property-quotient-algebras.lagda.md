@@ -34,10 +34,10 @@ The
 {{#concept "universal property of quotients of algebras" Agda=is-quotient-Algebra}}
 states that given [algebras](universal-algebra.algebras.md) `A` and `B` and a
 [homomorphism](universal-algebra.homomorphisms-of-algebras.md) `φ : A → B`
-[reflecting](universal-algebra.reflecting-homomorphisms-congruences.md) a
-[congruence](universal-algebra.congruences.md) `R`, `B` is a quotient of `A` by
-`R` if for any algebra `C`, the map precomposing homomorphisms `ψ : B → C` with
-`φ` is an [equivalence](foundation-core.equivalences.md).
+[reflecting](universal-algebra.reflecting-homomorphisms-equivalence-relations.md)
+a [congruence](universal-algebra.congruences.md) `R`, `B` is a quotient of `A`
+by `R` if for any algebra `C`, the map precomposing homomorphisms `ψ : B → C`
+with `φ` is an [equivalence](foundation-core.equivalences.md).
 
 This universal property characterizes quotient algebras up to
 [isomorphism](universal-algebra.isomorphisms-of-algebras.md).
