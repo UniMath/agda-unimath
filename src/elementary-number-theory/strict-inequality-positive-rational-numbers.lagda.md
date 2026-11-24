@@ -15,7 +15,9 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import order-theory.strict-preorders
@@ -62,6 +64,17 @@ transitive-le-ℚ⁺ x y z =
 ```agda
 leq-le-ℚ⁺ : {x y : ℚ⁺} → le-ℚ⁺ x y → leq-ℚ⁺ x y
 leq-le-ℚ⁺ {x} {y} = leq-le-ℚ {rational-ℚ⁺ x} {rational-ℚ⁺ y}
+```
+
+### Concatenation of equality and strict inequality
+
+```agda
+module _
+  {x y z : ℚ⁺}
+  where abstract
+
+  concat-eq-le-ℚ⁺ : x ＝ y → le-ℚ⁺ y z → le-ℚ⁺ x z
+  concat-eq-le-ℚ⁺ = inv-tr (λ w → le-ℚ⁺ w z)
 ```
 
 ### The strictly preordered set of positive rational numbers
