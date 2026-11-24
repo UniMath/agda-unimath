@@ -1,4 +1,4 @@
-# Rounded upper subsets of raional numbers
+# Rounded upper subsets of rational numbers
 
 ```agda
 module elementary-number-theory.rounded-upper-subsets-rational-numbers where
