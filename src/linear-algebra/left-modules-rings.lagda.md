@@ -9,6 +9,7 @@ module linear-algebra.left-modules-rings where
 ```agda
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -89,6 +90,12 @@ module _
   add-left-module-Ring :
     (x y : type-left-module-Ring) → type-left-module-Ring
   add-left-module-Ring = add-Ab ab-left-module-Ring
+
+  ap-add-left-module-Ring :
+    {x x' : type-left-module-Ring} → x ＝ x' →
+    {y y' : type-left-module-Ring} → y ＝ y' →
+    add-left-module-Ring x y ＝ add-left-module-Ring x' y'
+  ap-add-left-module-Ring = ap-binary add-left-module-Ring
 
   zero-left-module-Ring : type-left-module-Ring
   zero-left-module-Ring = zero-Ab ab-left-module-Ring
