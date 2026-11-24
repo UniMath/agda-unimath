@@ -1042,6 +1042,26 @@ module _
       ( nullifies-commutator-normal-subgroup-hom-group-Ab)
 ```
 
+### Unit laws of right subtraction
+
+```agda
+module _
+  {l : Level}
+  (G : Ab l)
+  (g : type-Ab G)
+  where abstract
+
+  right-unit-law-right-subtraction-Ab :
+    right-subtraction-Ab G g (zero-Ab G) ＝ g
+  right-unit-law-right-subtraction-Ab =
+    right-unit-law-right-div-Group (group-Ab G) g
+
+  left-unit-law-right-subtraction-Ab :
+    right-subtraction-Ab G (zero-Ab G) g ＝ neg-Ab G g
+  left-unit-law-right-subtraction-Ab =
+    left-unit-law-right-div-Group (group-Ab G) g
+```
+
 ## See also
 
 - [Large abelian groups](group-theory.large-abelian-groups.md), which span
