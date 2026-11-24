@@ -287,8 +287,6 @@ module _
     is-root-Directed-Tree S x
   is-root-is-root-node-hom-Directed-Tree x H =
     map-right-unit-law-coproduct-is-empty
-      ( is-root-Directed-Tree S x)
-      ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →
         no-direct-successor-root-Directed-Tree T
           ( tr

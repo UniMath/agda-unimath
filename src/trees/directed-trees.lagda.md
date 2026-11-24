@@ -484,10 +484,6 @@ module _
             ( λ y → edge-Directed-Graph G x y × walk-Directed-Graph G y r)
           by
           left-unit-law-coproduct-is-empty
-            ( r ＝ x)
-            ( Σ ( vertex-Directed-Graph G)
-                ( λ y →
-                  edge-Directed-Graph G x y × walk-Directed-Graph G y r))
             ( is-not-root-has-unique-direct-successor-Directed-Graph x
               ( H x)
               ( y , e))
@@ -606,10 +602,7 @@ module _
     is-contr-equiv'
       ( ( is-root-Directed-Tree T x) +
         ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x)))
-      ( left-unit-law-coproduct-is-empty
-        ( is-root-Directed-Tree T x)
-        ( Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
-        ( f))
+      ( left-unit-law-coproduct-is-empty f)
       ( unique-direct-successor-Directed-Tree x)
 
   abstract

@@ -346,8 +346,6 @@ is-prime-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
   map-right-unit-law-coproduct-is-empty
-    ( is-one-ℕ x)
-    ( le-ℕ 1 x)
     ( λ p →
       contradiction-le-ℕ x l
         ( le-div-ℕ x l

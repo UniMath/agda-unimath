@@ -485,8 +485,6 @@ module _
       ( λ x →
         ( equiv-postcomp-equiv
           ( right-unit-law-coproduct-is-empty
-            ( inclusion-subuniverse P x)
-            ( raise-empty l1)
             ( is-empty-raise-empty))
           ( inclusion-subuniverse P X)) ∘e
         ( ( left-unit-law-Σ-is-contr
