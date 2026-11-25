@@ -20,12 +20,14 @@ open import orthogonal-factorization-systems.types-local-at-maps
 
 ## Idea
 
-Consider a family `F : (a : A) → (B a) → (C a)` of maps and let `X` be a type.
-The **localization** of `X` at `F`, or **`F`-localization**, is a `F`-local type
-`Y` (which means
-`F a`-[local](orthogonal-factorization-systems.types-local-at-maps.md) for each
-`a : A`) together with a map `η : X → Y` with the property that every type that
-is `F`-local is also `η`-local.
+Consider a family of maps `F : (a : A) → (B a) → (C a)` and let `X` be a type. A
+type `Y` is **`F`-local** if it is
+[`F a`-local](orthogonal-factorization-systems.types-local-at-maps.md) for every
+`a : A`.
+
+The **localization** of `X` at `F`, or **`F`-localization**, is an `F`-local type
+`Y` together with a map `η : X → Y` with the property that every type that is
+`F`-local is also `η`-local.
 
 ## Definition
 
@@ -40,7 +42,7 @@ is-localization-at-family :
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ lsuc l6)
 is-localization-at-family l6 A F X Y η =
   ((a : A) → (is-local (F a) Y)) ×
-  ( (Z : UU l6) → ((a : A) → ( is-local (F a) Z)) → is-local η Z)
+  ((Z : UU l6) → ((a : A) → ( is-local (F a) Z)) → is-local η Z)
 ```
 
 ```agda
@@ -77,22 +79,15 @@ module _
   {l1 l2 l3 l4 l5 : Level}
   (A : UU l1) {B : A → UU l2} {C : A → UU l3} (F : (a : A) → (B a) → (C a))
   (X : UU l4) (Y : UU l5) (η : X → Y)
+  (is-loc : is-localization-at-family l5 A F X Y η)
   where
 
   is-subuniverse-localization-is-localization-at-family :
-    is-localization-at-family l5 A F X Y η →
     is-subuniverse-localization
       (λ W → (Π-Prop A (λ a → (is-local-Prop (F a) W)))) X Y
-  pr1 (is-subuniverse-localization-is-localization-at-family
-    is-localization-Y) =
-    pr1 is-localization-Y
-  pr1 (pr2 (is-subuniverse-localization-is-localization-at-family
-    is-localization-Y)) =
-    η
-  pr2 (pr2 (is-subuniverse-localization-is-localization-at-family
-    is-localization-Y))
-    (Z , is-local-Z) =
-    pr2 is-localization-Y Z is-local-Z
+  pr1 is-subuniverse-localization-is-localization-at-family = pr1 is-loc
+  pr2 is-subuniverse-localization-is-localization-at-family =
+    ( η , λ (Z , loc-Z) → pr2 is-loc Z loc-Z)
 ```
 
 ## References
