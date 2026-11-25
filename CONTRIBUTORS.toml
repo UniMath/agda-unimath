@@ -24,10 +24,10 @@ mathematics from a univalent point of view.
 displayName = "Fredrik Bakke"
 maintainer = true
 usernames = [ "Fredrik Bakke" ]
-homepage = "https://www.ntnu.edu/employees/fredrik.bakke"
+homepage = "https://fredrik-bakke.github.io"
 github = "fredrik-bakke"
 bio = '''
-[Fredrik](https://www.ntnu.edu/employees/fredrik.bakke) is a PhD student at the
+[Fredrik](https://fredrik-bakke.github.io) is a PhD student at the
 Norwegian University of Science and Technology in Trondheim. His research is on
 homotopy type theory and higher category theory.
 '''
@@ -53,6 +53,18 @@ bio = '''
 [Jonathan](https://jonaprieto.github.io) is a researcher and a compiler engineer
 at Heliax designing and implementing the functional programming language Juvix.
 His PhD research is on graph theory from a univalent point of view.
+'''
+
+[[contributors]]
+displayName = "Elif Uskuplu"
+maintainer = true
+usernames = [ "ElifUskuplu" ]
+homepage = "https://elifuskuplu.github.io"
+github = "ElifUskuplu"
+bio = '''
+[Elif](https://math.indiana.edu/about/faculty/uskuplu-elif.html) is a postdoctoral
+researcher at Indiana University Bloomington. Her research is on type theory,
+categorical semantics, proof assistants, and natural logic.
 '''
 
 [[contributors]]
@@ -83,12 +95,6 @@ displayName = "Raymond Baker"
 usernames = [ "Raymond Baker" ]
 github = "morphismz"
 homepage = "https://morphismz.github.io"
-
-[[contributors]]
-displayName = "Elif Uskuplu"
-usernames = [ "ElifUskuplu" ]
-github = "ElifUskuplu"
-homepage = "https://elifuskuplu.github.io"
 
 [[contributors]]
 displayName = "Victor Blanchi"
@@ -189,8 +195,8 @@ displayName = "Håkon Gylterud"
 usernames = [ "Håkon Gylterud" ]
 
 [[contributors]]
-displayName = "Matthias Hutzler"
-usernames = [ "Matthias Hutzler" ]
+displayName = "Matthias Ritter"
+usernames = [ "Matthias Hutzler", "Matthias Ritter" , "Matthias Ritter (formerly Hutzler)", "MatthiasHu" ]
 github = "MatthiasHu"
 
 [[contributors]]
@@ -307,3 +313,9 @@ displayName = "Tim Johns"
 usernames = ["Tim Johns"]
 github = "SlimTim10"
 homepage = "https://timjohns.ca/"
+
+[[contributors]]
+displayName = "Mark Williams"
+usernames = ["Mark Williams"]
+github = "markrd-williams"
+homepage = "https://markrd-williams.github.io/"

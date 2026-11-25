@@ -698,8 +698,18 @@ abstract
               (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
             by ap (λ p → dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
                 (int-ℕ (succ-ℕ x))) (p *ℤ (int-ℕ y)))
-            (int-abs-is-nonnegative-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
-              (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u))
+            (int-abs-is-nonnegative-ℤ
+              ( int-ℕ (succ-ℕ x) +ℤ
+              ( neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+              ( transitive-leq-ℤ
+                ( int-ℤ-Mod (succ-ℕ x) u)
+                ( int-ℕ x)
+                ( int-ℕ (succ-ℕ x))
+                ( tr
+                  ( leq-ℤ (int-ℕ x))
+                  ( succ-int-ℕ x)
+                  ( succ-leq-ℤ (int-ℕ x)))
+                ( int-ℤ-Mod-bounded x u)))
           ＝ dist-ℤ
               ( ((int-ℕ (abs-ℤ (neg-ℤ a))) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
               ( mul-ℤ

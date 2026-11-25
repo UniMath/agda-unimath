@@ -7,19 +7,33 @@ module synthetic-homotopy-theory.acyclic-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.dependent-products-contractible-types
 open import foundation.dependent-products-propositions
 open import foundation.equivalences
 open import foundation.equivalences-contractible-types
+open import foundation.evaluation-functions
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.subuniverse-of-contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+open import foundation-core.identity-types
+
+open import structured-types.constant-pointed-maps
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
+open import structured-types.pointed-universal-property-contractible-types
+
 open import synthetic-homotopy-theory.functoriality-suspensions
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>
@@ -80,6 +94,46 @@ is-acyclic-is-contr A = is-contr-suspension-is-contr
 
 is-acyclic-unit : is-acyclic unit
 is-acyclic-unit = is-acyclic-is-contr unit is-contr-unit
+```
+
+### Acyclic loop spaces are contractible
+
+```agda
+module _
+  {l : Level} {A : Pointed-Type l}
+  (ac : is-acyclic (type-Pointed-Type (Ω A)))
+  where
+
+  is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space :
+    is-contr (Ω A →∗ Ω A)
+  is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space =
+    is-contr-equiv
+      ( suspension-Pointed-Type (Ω A) →∗ A)
+      ( inv-equiv (equiv-transpose-suspension-loop-adjunction (Ω A) A))
+      ( universal-property-contr-is-contr-Pointed-Type'
+        ( point-Pointed-Type (suspension-Pointed-Type (Ω A)))
+        ( ac)
+        ( A))
+
+  is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space :
+    (f : Ω A →∗ Ω A) → (p : type-Pointed-Type (Ω A)) →
+    map-pointed-map f p ＝ refl
+  is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space f p =
+    ap
+      ( ev p ∘ map-pointed-map)
+      ( eq-is-contr
+        ( is-contr-pointed-endomaps-loop-space-is-acyclic-loop-space)
+        { f}
+        { constant-pointed-map (Ω A) (Ω A)})
+
+  is-contr-is-acyclic-loop-space : is-contr (type-Pointed-Type (Ω A))
+  is-contr-is-acyclic-loop-space =
+    point-Pointed-Type (Ω A) ,
+    (λ p →
+      inv
+        ( is-null-homotopic-pointed-endomap-loop-space-is-acyclic-loop-space
+            ( id-pointed-map)
+            ( p)))
 ```
 
 ### Acyclic types are inhabited
