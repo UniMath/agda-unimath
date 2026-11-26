@@ -56,6 +56,7 @@ open import group-theory.decidable-subgroups public
 open import group-theory.dependent-products-abelian-groups public
 open import group-theory.dependent-products-commutative-monoids public
 open import group-theory.dependent-products-groups public
+open import group-theory.dependent-products-large-groups public
 open import group-theory.dependent-products-large-monoids public
 open import group-theory.dependent-products-large-semigroups public
 open import group-theory.dependent-products-monoids public

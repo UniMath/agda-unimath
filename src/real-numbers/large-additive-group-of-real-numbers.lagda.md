@@ -68,9 +68,8 @@ large-group-add-ℝ =
   make-Large-Group
     ( large-monoid-add-ℝ)
     ( neg-ℝ)
-    ( λ _ _ → preserves-sim-neg-ℝ)
-    ( eq-left-inverse-law-add-ℝ)
-    ( eq-right-inverse-law-add-ℝ)
+    ( left-inverse-law-add-ℝ)
+    ( right-inverse-law-add-ℝ)
 
 large-ab-add-ℝ : Large-Ab lsuc (_⊔_)
 large-ab-add-ℝ =
