@@ -100,7 +100,7 @@ record
     is-set-type-Large-Similarity-Relation l =
       is-set-prop-in-id
         ( sim-Large-Similarity-Relation)
-        ( is-prop-type-Relation-Prop sim-prop-Large-Similarity-Relation)
+        ( is-prop-rel-Relation-Prop sim-prop-Large-Similarity-Relation)
         ( refl-sim-Large-Similarity-Relation)
         ( eq-sim-Large-Similarity-Relation)
 

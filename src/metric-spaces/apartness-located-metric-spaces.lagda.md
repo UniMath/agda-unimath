@@ -51,7 +51,7 @@ module _
 
   apart-Located-Metric-Space : Relation l2 (type-Located-Metric-Space M)
   apart-Located-Metric-Space =
-    type-Relation-Prop apart-prop-Located-Metric-Space
+    rel-Relation-Prop apart-prop-Located-Metric-Space
 ```
 
 ## Properties
