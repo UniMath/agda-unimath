@@ -55,6 +55,8 @@ record
     {l : Level} (R : Commutative-Semiring l) : UU l
   where
 
+  eta-equality
+
   constructor formal-power-series-coefficients-Commutative-Semiring
 
   field

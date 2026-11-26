@@ -46,6 +46,7 @@ sequence of their terms.
 
 ```agda
 record series-Metric-Ab {l1 l2 : Level} (G : Metric-Ab l1 l2) : UU l1 where
+  eta-equality
   constructor series-terms-Metric-Ab
   field
     term-series-Metric-Ab : sequence (type-Metric-Ab G)

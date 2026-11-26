@@ -110,6 +110,8 @@ record
     (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
 
+  eta-equality
+
   constructor
     make-Transitive-Globular-Type
 ```
