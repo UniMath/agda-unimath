@@ -20,14 +20,16 @@ open import orthogonal-factorization-systems.types-local-at-maps
 
 ## Idea
 
-Consider a family of maps `F : (a : A) → (B a) → (C a)` and let `X` be a type. A
-type `Y` is **`F`-local** if it is
+Consider a family of maps `F : (a : A) → (B a) → (C a)`; a type `Y` is
+**`F`-local** if it is
 [`F a`-local](orthogonal-factorization-systems.types-local-at-maps.md) for every
 `a : A`.
 
-The **localization** of `X` at `F`, or **`F`-localization**, is an `F`-local type
-`Y` together with a map `η : X → Y` with the property that every type that is
-`F`-local is also `η`-local.
+The
+{{#concept "localization" Disambiguation="at a family of maps" Agda=localization-at-family}}
+of a type `X` at `F`, or **`F`-localization**, is an `F`-local type `Y` together
+with a map `η : X → Y` with the property that every type that is `F`-local is
+also `η`-local.
 
 ## Definition
 
@@ -42,7 +44,7 @@ is-localization-at-family :
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ lsuc l6)
 is-localization-at-family l6 A F X Y η =
   ((a : A) → (is-local (F a) Y)) ×
-  ((Z : UU l6) → ((a : A) → ( is-local (F a) Z)) → is-local η Z)
+  ((Z : UU l6) → ((a : A) → (is-local (F a) Z)) → is-local η Z)
 ```
 
 ```agda
