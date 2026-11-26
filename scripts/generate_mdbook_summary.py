@@ -116,6 +116,7 @@ you need to change the template in ./scripts/generate_mdbook_summary.py
 - [Guides](HOWTO-INSTALL.md)
   - [Installing the library](HOWTO-INSTALL.md)
   - [Design principles](DESIGN-PRINCIPLES.md)
+    - [Postulates and assumptions](POSTULATES.md)
   - [Contributing to the library](CONTRIBUTING.md)
   - [Structuring your file](FILE-CONVENTIONS.md)
       - [File template](TEMPLATE.lagda.md)
